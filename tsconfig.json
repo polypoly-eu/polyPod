@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "es2019"
+    ],
+    "target": "es6",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "module": "commonjs",
+    "declaration": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
+  }
+}
