@@ -14,7 +14,7 @@ export default {
     ],
     plugins: [
         sucrase({
-            exclude: [`${root}/node_modules/**`],
+            exclude: ["node_modules/**"],
             transforms: ["typescript"]
         })
     ],
