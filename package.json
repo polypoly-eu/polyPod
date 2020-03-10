@@ -38,5 +38,8 @@
     "jest": "^25.1.0",
     "rollup": "^1.31.1",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "fast-check": "^1.23.0"
   }
 }

@@ -1,3 +1,5 @@
+import fc from "fast-check";
+import {gens} from "./gen";
 import {DataFactory, Variable} from "rdf-js";
 import assert from "assert";
 
@@ -281,7 +283,6 @@ export class DataFactorySpec {
     }
 
     namedNode(): void {
-
         describe('.namedNode', () => {
             it('should be a static method', () => {
                 assert.equal(typeof this.dataFactory.namedNode, 'function');
@@ -344,7 +345,6 @@ export class DataFactorySpec {
     }
 
     quad(): void {
-
         describe('.quad', () => {
             it('should be a static method', () => {
                 assert.equal(typeof this.dataFactory.quad, 'function');
@@ -447,7 +447,6 @@ export class DataFactorySpec {
     }
 
     triple(): void {
-
         describe('.triple', () => {
             it('should be a static method', () => {
                 assert.equal(typeof this.dataFactory.triple, 'function');
@@ -611,6 +610,49 @@ export class DataFactorySpec {
         });
     }
 
+    gen(): void {
+        const gen = gens(this.dataFactory);
+        describe("Gens", () => {
+            describe("self-equals", () => {
+                for (const [key, g] of Object.entries(gen))
+                    if (g !== undefined)
+                        it(key, () => {
+                            fc.assert(fc.property(g, term => {
+                                assert((term as any).equals(term));
+                            }));
+                        });
+            });
+            describe("not equal (terms)", () => {
+                const keys = ["namedNode", "blankNode", "literal", "variable"];
+                const pairs = keys.flatMap(key1 =>
+                    keys.filter(key2 => key1 !== key2).map(key2 => [key1, key2])
+                );
+                it.each(pairs)("%s/%s", (key1, key2) => {
+                    const gen1 = (gen as any)[key1];
+                    const gen2 = (gen as any)[key2];
+                    if (gen1 === undefined || gen2 === undefined)
+                        return;
+                    fc.assert(fc.property(gen1, gen2, (term1, term2) => {
+                        assert.equal((term1 as any).equals(term2), false);
+                    }));
+                });
+            });
+            describe("not equal (quad/triple)", () => {
+                const keys = ["quad", "triple"];
+                const pairs = keys.flatMap(key1 =>
+                    keys.filter(key2 => key1 !== key2).map(key2 => [key1, key2])
+                );
+                it.each(pairs)("%s/%s", (key1, key2) => {
+                    const gen1 = (gen as any)[key1];
+                    const gen2 = (gen as any)[key2];
+                    fc.assert(fc.property(gen1, gen2, (term1, term2) => {
+                        assert.equal((term1 as any).equals(term2), false);
+                    }));
+                });
+            });
+        });
+    }
+
     run(): void {
         this.blankNode();
         this.defaultGraph();
@@ -619,5 +661,6 @@ export class DataFactorySpec {
         this.quad();
         this.triple();
         this.variable();
+        this.gen();
     }
 }

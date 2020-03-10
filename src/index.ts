@@ -1,1 +1,2 @@
-export {DataFactorySpec} from "./data-factory";
+export * from "./data-factory";
+export * from "./gen";
