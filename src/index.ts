@@ -49,7 +49,7 @@ export class BlankNode extends Model implements RDF.BlankNode {
 }
 
 export class Literal extends Model implements RDF.Literal {
-    static readonly langStringDatatype = new NamedNode( 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString');
+    static readonly langStringDatatype = new NamedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#langString');
     static readonly stringDatatype = new NamedNode('http://www.w3.org/2001/XMLSchema#string');
 
     language: string;
