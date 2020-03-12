@@ -34,9 +34,7 @@ class ViewController: UIViewController {
         webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
-        
+
         if let manifest = loadFeatureManifest() {
             let filePath = Bundle.main.path(forResource: "feature", ofType: "html")!
             var content = try! String(contentsOfFile: filePath)
@@ -44,22 +42,6 @@ class ViewController: UIViewController {
             content = content.replacingOccurrences(of: "featureSource", with: "\(manifest.source)")
             content = content.replacingOccurrences(of: "featureName", with: "\(manifest.name)")
             webView.loadHTMLString(content, baseURL: Bundle.main.resourceURL)
-        }
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "estimatedProgress" {
-            let progress = Float(webView.estimatedProgress)
-            if progress >= 1 {
-                if let filepath = Bundle.main.path(forResource: "feature", ofType: "js") {
-                    let content = try! String(contentsOfFile: filepath)
-                    webView.evaluateJavaScript(content) { (result, error) in
-                        print(result)
-                        print(error)
-                    }
-                }
-                
-            }
         }
     }
     
