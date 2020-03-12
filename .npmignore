@@ -1,0 +1,9 @@
+.idea
+tsconfig.*
+dist/specs
+dist/tests
+src
+*.config.js
+*.tgz
+.eslintrc.js
+.github

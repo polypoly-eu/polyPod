@@ -1,0 +1,47 @@
+{
+  "name": "@polypoly-eu/bubblewrap",
+  "version": "0.0.1",
+  "description": "Bubblewrap protects values from the structured clone algorithm",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "scripts": {
+    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "dev": "tsc --watch --incremental",
+    "eslint": "eslint src --ext .ts",
+    "test": "tsc --noEmit && jest"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/bubblewrap.git"
+  },
+  "author": "Lars Hupel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/polypoly-eu/bubblewrap/issues"
+  },
+  "homepage": "https://github.com/polypoly-eu/bubblewrap#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-typescript": "^7.8.3",
+    "@polypoly-eu/rdf": "0.0.1",
+    "@polypoly-eu/rdf-spec": "0.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-sucrase": "^3.0.0",
+    "@types/jest": "^25.1.2",
+    "@types/node": "^13.7.2",
+    "@types/rdf-js": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.8.0",
+    "fast-check": "^1.23.0",
+    "jest": "^25.1.0",
+    "rollup": "^1.31.1",
+    "typescript": "^3.7.5",
+    "typeson": "^5.18.2",
+    "typeson-registry": "^1.0.0-alpha.35"
+  }
+}
