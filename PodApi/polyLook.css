@@ -1,0 +1,111 @@
+@font-face {
+  font-family: Rubik;
+  src: url(8a048451329aead8889436f101616681.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: Rubik;
+  src: url(e3937801e3da55dbd625a0124741a8ce.woff2) format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: Rubik, sans-serif;
+  font-size: 140%;
+}
+
+#pod, #root {
+  width: 100%;
+  height: 100%;
+}
+
+.featureFrameWrapper {
+  position: absolute;
+  border: 5px solid #000000;
+  width: 1024px;
+  height: 768px;
+  overflow: auto;
+  resize: both;
+  min-width: 20px;
+  max-width: 100%;
+  min-height: 20px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #FAF6F4;
+}
+
+.featureFrameWrapper .title {
+  flex: 0 0 auto;
+}
+
+.featureFrameWrapper iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  flex: 1 1 auto;
+}
+
+.tabs {
+  border: 5px solid #000000;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabHeaders {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  justify-items: stretch;
+  cursor: default;
+}
+
+.tabHeader {
+  flex: auto;
+  text-align: center;
+  border-bottom: 5px solid #000000;
+  border-right: 5px solid #000000;
+}
+
+.tabHeader:last-child {
+  border-right: 0;
+}
+
+.tabHeaders .tabSelected {
+  background-color: #FEF230;
+}
+
+.tabContent {
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+.navButton {
+  display: inline-block;
+  font-weight: bold;
+  padding: 1ex;
+  margin: 0.5ex;
+  cursor: default;
+}
+
+.btnDisabled {
+  background-color: #8197A5;
+  color: #FAF6F4;
+}
+
+.btnEnabled {
+  background-color: #000000;
+  color: #FAF6F4;
+}
+
+.btnEnabled:hover {
+  background-color: #FEF230;
+  color: #000000;
+}
