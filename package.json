@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/bubblewrap",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Bubblewrap protects values from the structured clone algorithm",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
