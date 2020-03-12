@@ -38,6 +38,5 @@ export function bubblewrap<T>(
     const rec: Record<string, Constructor<any>> = {};
     for (const constructor of constructors)
         rec[fqdn + "." + constructor.prototype.constructor.name] = constructor;
-    console.dir(rec);
     return rec;
 }
