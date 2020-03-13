@@ -1,5 +1,5 @@
 // @ts-ignore
-import {default as UnTypeson} from "typeson";
+import {default as UnTypeson} from "@polypoly-eu/typeson";
 // @ts-ignore
 import {default as unbuiltin} from "typeson-registry/presets/builtin";
 

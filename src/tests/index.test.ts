@@ -55,5 +55,16 @@ describe("Bubblewrap", () => {
                     }));
                 });
         });
+
+        it("Bug", () => {
+            const s = RDF.dataFactory.namedNode("http://example.org");
+            const l1 = RDF.dataFactory.literal("hi1");
+            const l2 = RDF.dataFactory.literal("hi2");
+            const quads = [
+                RDF.dataFactory.triple(s, s, l1),
+                RDF.dataFactory.triple(s, s, l2)
+            ];
+            expect(typeson.revive(typeson.encapsulate(quads))).toEqual(quads);
+        });
     });
 });
