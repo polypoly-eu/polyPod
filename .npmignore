@@ -2,6 +2,8 @@
 tsconfig.*
 dist/tests
 dist/specs
+dist/node
+jasmine.json
 karma
 karma.conf.js
 src
