@@ -1,5 +1,4 @@
 import sucrase from "@rollup/plugin-sucrase";
-import commonjs from "@rollup/plugin-commonjs";
 
 export default {
     input: "src/index.ts",
@@ -14,11 +13,10 @@ export default {
         }
     ],
     plugins: [
-        commonjs(),
         sucrase({
-            exclude: [`./node_modules/**`],
+            exclude: ["./node_modules/**"],
             transforms: ["typescript"]
         })
     ],
-    external: ["@shopify/rpc"]
+    external: ["@polypoly-eu/bubblewrap"]
 };

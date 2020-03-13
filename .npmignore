@@ -1,6 +1,9 @@
 .idea
 tsconfig.*
 dist/tests
+dist/specs
+karma
+karma.conf.js
 src
 *.config.js
 *.tgz
