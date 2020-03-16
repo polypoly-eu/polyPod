@@ -26,6 +26,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-typescript": "^7.8.3",
+    "@graphy/core.data.factory": "^4.0.5",
     "@rdfjs/data-model": "^1.1.2",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.0.0",

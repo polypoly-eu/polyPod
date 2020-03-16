@@ -1,3 +1,4 @@
 module.exports = {
-    roots: ["<rootDir>/src"]
+    roots: ["<rootDir>/src"],
+    silent: true
 };

@@ -1,4 +1,12 @@
 import {DataFactorySpec} from "../data-factory";
-import DataFactory from "@rdfjs/data-model";
+import RDFJS from "@rdfjs/data-model";
+// @ts-ignore
+import Graphy from "@graphy/core.data.factory";
 
-new DataFactorySpec(DataFactory).run();
+describe("@rdfjs/data-model", () => {
+    new DataFactorySpec(RDFJS).run();
+});
+
+describe("@graphy/core.data.factory", () => {
+    new DataFactorySpec(Graphy).run();
+});
