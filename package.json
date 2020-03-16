@@ -64,6 +64,6 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "@polypoly-eu/bubblewrap": "0.0.2"
+    "@polypoly-eu/bubblewrap": "0.0.3"
   }
 }
