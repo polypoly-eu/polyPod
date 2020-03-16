@@ -13,12 +13,24 @@ class ViewController: UIViewController {
 
     var webView: WKWebView!
     
+    let preferencesFilename: String = "preferences"
+    
+    var preferences: [String: Any] = [:]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let storedPreferences = try? JSONSerialization.loadJSON(withFilename: preferencesFilename) as? [String : Any] {
+            preferences = storedPreferences
+        }
+        
+        preferences["directusCredentials"] = ["email": FILL_ME, "password": FILL_ME]
+        
         let contentController = WKUserContentController();
         contentController.add(self, name: MessageName.Log.rawValue)
-        contentController.add(self, name: MessageName.HttpGetRequest.rawValue)
+        contentController.add(self, name: MessageName.GetValue.rawValue)
+        contentController.add(self, name: MessageName.SetValue.rawValue)
+        contentController.add(self, name: MessageName.HttpRequest.rawValue)
         
         contentController.installUserScript("domConsole")
         contentController.installUserScript("postOffice")
@@ -46,7 +58,7 @@ class ViewController: UIViewController {
     }
     
     private func loadFeatureManifest() -> Manifest? {
-        guard let filePath = Bundle.main.path(forResource: "manifest", ofType: "json") else { return nil }
+        guard let filePath = Bundle.main.path(forResource: "polyExplorerManifest", ofType: "json") else { return nil }
         let fileUrl = URL(fileURLWithPath: filePath)
         guard let data = try? Data(contentsOf: fileUrl) else { return nil }
         let decoder = JSONDecoder()
@@ -58,59 +70,118 @@ class ViewController: UIViewController {
 extension ViewController: WKScriptMessageHandler {
     enum MessageName: String {
         case Log = "log"
-        case HttpGetRequest = "httpGetRequest"
+        case GetValue = "getValue"
+        case SetValue = "setValue"
+        case HttpRequest = "httpRequest"
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let body = message.body as? NSDictionary else { return }
         guard let messageName = MessageName(rawValue: message.name) else { return }
         
-        DispatchQueue.global(qos: .default).async { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else {
                 return
             }
         
             switch messageName {
                 case .Log:
-                    if let output = body["text"] as? String {
-                        print("WebView: " + output)
-                    }
-                case .HttpGetRequest:
-                    self.doHttpGetRequest(data: body)
+                    guard let text = message.body as? String else { return }
+                    print("WebView: " + text)
+                case .GetValue:
+                    guard let body = message.body as? [String: Any] else { return }
+                    self.doGetValue(data: body)
+                case .SetValue:
+                    guard let body = message.body as? [String: Any] else { return }
+                    self.doSetValue(data: body)
+                case .HttpRequest:
+                    guard let body = message.body as? [String: Any] else { return }
+                    self.doHttpRequest(data: body)
             }
         }
     }
     
-    func doHttpGetRequest(data: NSDictionary) {
+    private func doGetValue(data: [String: Any]) {
+        // todo: add checks here
+        
+        var jsonData = ["id": data["id"]]
+        
+        let key = data["key"] as! String
+       
+        jsonData["result"] = preferences[key]
+        
+        self.sendToPostOffice(jsonObject: jsonData)
+    }
+    
+    private func doSetValue(data: [String: Any]) {
+        // todo: add checks here
+        
+        let jsonData = ["id": data["id"]]
+        
+        let key = data["key"] as! String
+        
+        if let rawValue = data["value"] as? String, let value = try? JSONSerialization.jsonObject(with: rawValue.data(using: .utf8)!, options: []) as? NSDictionary {
+            
+            preferences[key] = value
+        
+            try? JSONSerialization.save(jsonObject: preferences, toFilename: preferencesFilename)
+        }
+        
+        self.sendToPostOffice(jsonObject: jsonData)
+    }
+    
+    private func doHttpRequest(data: [String: Any]) {
         // todo: add checks here
         
         var jsonData = ["id": data["id"]]
         
         let url = URL(string: data["url"] as! String)!
 
-        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+        let method = data["method"] as! String
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = method.uppercased()
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let rawHeaders = data["headers"] as? String, let headers = try? JSONSerialization.jsonObject(with: rawHeaders.data(using: .utf8)!, options: []) as? NSDictionary {
+            for (key, value) in headers {
+                request.setValue(value as? String, forHTTPHeaderField: key as! String)
+            }
+        }
+        
+        if let body = data["body"] as? String, body.count > 0 {
+            let postString = body
+            request.httpBody = postString.data(using: .utf8)
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             guard let data = data else { return }
             let result = String(data: data, encoding: .utf8)
             
             jsonData["result"] = result
 
-            let json = try! JSONSerialization.data(withJSONObject: jsonData, options:  [])
-
-            guard let jsonString = String(data: json, encoding: String.Encoding.utf8) else { return }
-            
-            let javascriptCommand = "postOffice.receiveMessage(\(jsonString));"
-            DispatchQueue.main.async { [weak self] in
-                self?.webView.evaluateJavaScript(javascriptCommand, completionHandler: { result, error in
-                    if error == nil {
-                        print("JavaScript execution successful")
-                    } else {
-                        print("Received an error from JavaScript: \(error!)")
-                    }
-                })
-            }
+            self.sendToPostOffice(jsonObject: jsonData)
         }
 
         task.resume()
+    }
+    
+    private func sendToPostOffice(jsonObject: Any) {
+        let json = try! JSONSerialization.data(withJSONObject: jsonObject, options: [])
+
+        guard let jsonString = String(data: json, encoding: .utf8) else { return }
+        
+        let javascriptCommand = "postOffice.receiveMessage(\(jsonString));"
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.webView.evaluateJavaScript(javascriptCommand, completionHandler: { result, error in
+                if error == nil {
+                    print("JavaScript execution successful")
+                } else {
+                    print("Received an error from JavaScript: \(error!)")
+                }
+            })
+        }
     }
 }
 

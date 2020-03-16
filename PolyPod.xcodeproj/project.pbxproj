@@ -16,7 +16,7 @@
 		1AA6DE4824192091008DB1B2 /* postOffice.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4724192091008DB1B2 /* postOffice.js */; };
 		1AA6DE522419212E008DB1B2 /* helloWorld.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4B2419212E008DB1B2 /* helloWorld.css */; };
 		1AA6DE532419212E008DB1B2 /* helloWorld.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4C2419212E008DB1B2 /* helloWorld.js */; };
-		1AA6DE542419212E008DB1B2 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4D2419212E008DB1B2 /* manifest.json */; };
+		1AA6DE542419212E008DB1B2 /* helloWorldManifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4D2419212E008DB1B2 /* helloWorldManifest.json */; };
 		1AA6DE552419212E008DB1B2 /* feature.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4E2419212E008DB1B2 /* feature.js */; };
 		1AA6DE562419212E008DB1B2 /* polyLook.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4F2419212E008DB1B2 /* polyLook.css */; };
 		1AA6DE572419212E008DB1B2 /* pod.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE502419212E008DB1B2 /* pod.js */; };
@@ -24,6 +24,17 @@
 		1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5924192463008DB1B2 /* domConsole.js */; };
 		1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */; };
 		1AA6DE60241A2AE0008DB1B2 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5F241A2AE0008DB1B2 /* Manifest.swift */; };
+		1AF46882241F580B00E51B6D /* polyExplorer.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46877241F580B00E51B6D /* polyExplorer.css */; };
+		1AF46883241F580B00E51B6D /* polyExplorerManifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46878241F580B00E51B6D /* polyExplorerManifest.json */; };
+		1AF46884241F580B00E51B6D /* polyExplorer.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46879241F580B00E51B6D /* polyExplorer.js */; };
+		1AF46885241F580B00E51B6D /* screen_paypal_story.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687B241F580B00E51B6D /* screen_paypal_story.png */; };
+		1AF46886241F580B00E51B6D /* pp_icon_paypal_blackcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687C241F580B00E51B6D /* pp_icon_paypal_blackcircle.png */; };
+		1AF46887241F580B00E51B6D /* screen_polypoly_tour.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687D241F580B00E51B6D /* screen_polypoly_tour.png */; };
+		1AF46888241F580B00E51B6D /* screen_uninstall.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687E241F580B00E51B6D /* screen_uninstall.png */; };
+		1AF46889241F580B00E51B6D /* screen_lexicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687F241F580B00E51B6D /* screen_lexicon.png */; };
+		1AF4688A241F580B00E51B6D /* screen_companies_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46880241F580B00E51B6D /* screen_companies_search.png */; };
+		1AF4688B241F580B00E51B6D /* screen_feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46881241F580B00E51B6D /* screen_feedback.png */; };
+		1AF46893241FBA7200E51B6D /* JSONSerialization+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerialization+Addition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +49,7 @@
 		1AA6DE4724192091008DB1B2 /* postOffice.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = postOffice.js; sourceTree = "<group>"; };
 		1AA6DE4B2419212E008DB1B2 /* helloWorld.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = helloWorld.css; sourceTree = "<group>"; };
 		1AA6DE4C2419212E008DB1B2 /* helloWorld.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = helloWorld.js; sourceTree = "<group>"; };
-		1AA6DE4D2419212E008DB1B2 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		1AA6DE4D2419212E008DB1B2 /* helloWorldManifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = helloWorldManifest.json; sourceTree = "<group>"; };
 		1AA6DE4E2419212E008DB1B2 /* feature.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = feature.js; sourceTree = "<group>"; };
 		1AA6DE4F2419212E008DB1B2 /* polyLook.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = polyLook.css; sourceTree = "<group>"; };
 		1AA6DE502419212E008DB1B2 /* pod.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = pod.js; sourceTree = "<group>"; };
@@ -46,6 +57,17 @@
 		1AA6DE5924192463008DB1B2 /* domConsole.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = domConsole.js; sourceTree = "<group>"; };
 		1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKUserContentController+Additions.swift"; sourceTree = "<group>"; };
 		1AA6DE5F241A2AE0008DB1B2 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
+		1AF46877241F580B00E51B6D /* polyExplorer.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = polyExplorer.css; sourceTree = "<group>"; };
+		1AF46878241F580B00E51B6D /* polyExplorerManifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = polyExplorerManifest.json; sourceTree = "<group>"; };
+		1AF46879241F580B00E51B6D /* polyExplorer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = polyExplorer.js; sourceTree = "<group>"; };
+		1AF4687B241F580B00E51B6D /* screen_paypal_story.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_paypal_story.png; sourceTree = "<group>"; };
+		1AF4687C241F580B00E51B6D /* pp_icon_paypal_blackcircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pp_icon_paypal_blackcircle.png; sourceTree = "<group>"; };
+		1AF4687D241F580B00E51B6D /* screen_polypoly_tour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_polypoly_tour.png; sourceTree = "<group>"; };
+		1AF4687E241F580B00E51B6D /* screen_uninstall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_uninstall.png; sourceTree = "<group>"; };
+		1AF4687F241F580B00E51B6D /* screen_lexicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_lexicon.png; sourceTree = "<group>"; };
+		1AF46880241F580B00E51B6D /* screen_companies_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_companies_search.png; sourceTree = "<group>"; };
+		1AF46881241F580B00E51B6D /* screen_feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_feedback.png; sourceTree = "<group>"; };
+		1AF46892241FBA7200E51B6D /* JSONSerialization+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Addition.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +108,7 @@
 				1AA6DE5F241A2AE0008DB1B2 /* Manifest.swift */,
 				1AA6DE3824191C94008DB1B2 /* Main.storyboard */,
 				1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */,
+				1AF46892241FBA7200E51B6D /* JSONSerialization+Addition.swift */,
 				1AA6DE3B24191C96008DB1B2 /* Assets.xcassets */,
 				1AA6DE3D24191C96008DB1B2 /* LaunchScreen.storyboard */,
 				1AA6DE4024191C96008DB1B2 /* Info.plist */,
@@ -107,6 +130,7 @@
 		1AA6DE492419212E008DB1B2 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				1AF46876241F57DB00E51B6D /* PolyExplorer */,
 				1AA6DE4A2419212E008DB1B2 /* HelloWorld */,
 				1AA6DE4E2419212E008DB1B2 /* feature.js */,
 				1AA6DE512419212E008DB1B2 /* feature.html */,
@@ -119,9 +143,34 @@
 			children = (
 				1AA6DE4B2419212E008DB1B2 /* helloWorld.css */,
 				1AA6DE4C2419212E008DB1B2 /* helloWorld.js */,
-				1AA6DE4D2419212E008DB1B2 /* manifest.json */,
+				1AA6DE4D2419212E008DB1B2 /* helloWorldManifest.json */,
 			);
 			path = HelloWorld;
+			sourceTree = "<group>";
+		};
+		1AF46876241F57DB00E51B6D /* PolyExplorer */ = {
+			isa = PBXGroup;
+			children = (
+				1AF4687A241F580B00E51B6D /* images */,
+				1AF46877241F580B00E51B6D /* polyExplorer.css */,
+				1AF46879241F580B00E51B6D /* polyExplorer.js */,
+				1AF46878241F580B00E51B6D /* polyExplorerManifest.json */,
+			);
+			path = PolyExplorer;
+			sourceTree = "<group>";
+		};
+		1AF4687A241F580B00E51B6D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				1AF4687B241F580B00E51B6D /* screen_paypal_story.png */,
+				1AF4687C241F580B00E51B6D /* pp_icon_paypal_blackcircle.png */,
+				1AF4687D241F580B00E51B6D /* screen_polypoly_tour.png */,
+				1AF4687E241F580B00E51B6D /* screen_uninstall.png */,
+				1AF4687F241F580B00E51B6D /* screen_lexicon.png */,
+				1AF46880241F580B00E51B6D /* screen_companies_search.png */,
+				1AF46881241F580B00E51B6D /* screen_feedback.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,18 +231,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AF46885241F580B00E51B6D /* screen_paypal_story.png in Resources */,
 				1AA6DE532419212E008DB1B2 /* helloWorld.js in Resources */,
 				1AA6DE552419212E008DB1B2 /* feature.js in Resources */,
 				1AA6DE562419212E008DB1B2 /* polyLook.css in Resources */,
-				1AA6DE542419212E008DB1B2 /* manifest.json in Resources */,
+				1AF46886241F580B00E51B6D /* pp_icon_paypal_blackcircle.png in Resources */,
+				1AF46884241F580B00E51B6D /* polyExplorer.js in Resources */,
+				1AA6DE542419212E008DB1B2 /* helloWorldManifest.json in Resources */,
+				1AF46887241F580B00E51B6D /* screen_polypoly_tour.png in Resources */,
+				1AF4688B241F580B00E51B6D /* screen_feedback.png in Resources */,
+				1AF4688A241F580B00E51B6D /* screen_companies_search.png in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
 				1AA6DE582419212E008DB1B2 /* feature.html in Resources */,
+				1AF46889241F580B00E51B6D /* screen_lexicon.png in Resources */,
+				1AF46888241F580B00E51B6D /* screen_uninstall.png in Resources */,
 				1AA6DE522419212E008DB1B2 /* helloWorld.css in Resources */,
 				1AA6DE572419212E008DB1B2 /* pod.js in Resources */,
+				1AF46883241F580B00E51B6D /* polyExplorerManifest.json in Resources */,
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
 				1AA6DE4824192091008DB1B2 /* postOffice.js in Resources */,
 				1AA6DE3A24191C94008DB1B2 /* Main.storyboard in Resources */,
+				1AF46882241F580B00E51B6D /* polyExplorer.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +267,7 @@
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
 				1AA6DE60241A2AE0008DB1B2 /* Manifest.swift in Sources */,
 				1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */,
+				1AF46893241FBA7200E51B6D /* JSONSerialization+Addition.swift in Sources */,
 				1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

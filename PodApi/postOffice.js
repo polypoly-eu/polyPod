@@ -4,19 +4,35 @@ class PostOffice {
         this.registry = new Map();
     }
 
-    postMessage(message, cb) {
+    log(message) {
+        webkit.messageHandlers.log.postMessage(message);
+    }
+    
+    getValue(key, cb) {
         let id = this.messageId++;
         this.registry.set(id, cb);
         
-        let data = { id, ...message }
+        let data = { id, key }
         
-        if (data.command === "log") {
-            webkit.messageHandlers.log.postMessage(data);
-        } else if (data.command === "httpGetRequest") {
-            webkit.messageHandlers.httpGetRequest.postMessage(data);
-        } else {
-            respond({ id: data.id, error: `Unknown command: ${data.command}` });
-        }
+        webkit.messageHandlers.getValue.postMessage(data);
+    }
+    
+    setValue(key, value, cb) {
+        let id = this.messageId++;
+        this.registry.set(id, cb);
+        
+         let data = { id, key, value }
+        
+        webkit.messageHandlers.setValue.postMessage(data);
+    }
+    
+    httpRequest(request, cb) {
+        let id = this.messageId++;
+        this.registry.set(id, cb);
+        
+        let data = { id, ...request }
+        
+        webkit.messageHandlers.httpRequest.postMessage(data);
     }
 
     receiveMessage(data) {

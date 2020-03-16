@@ -1,11 +1,11 @@
 const console = {
-    log(text) {
-        postOffice.postMessage({ command: "log", text: JSON.stringify(text) });
+    log(msg) {
+        postOffice.log(JSON.stringify(msg));
     },
-    error(text) {
-        postOffice.postMessage({ command: "log", text: text });
+    error(msg) {
+        postOffice.log(JSON.stringify(msg));
     },
-    dir(data) {
-        postOffice.postMessage({ command: "log", text: JSON.stringify(data) });
+    dir(object) {
+        postOffice.log(JSON.stringify(object));
     }
 };
