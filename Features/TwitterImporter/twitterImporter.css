@@ -1,0 +1,196 @@
+#polyExplorer {
+    width: 100%;
+    height: 100%;
+    background-color: #f9f6f4;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
+}
+
+#navigation {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+}
+
+#currentApp {
+    height: 100%;
+    overflow: hidden;
+}
+
+.app_list {
+    display: grid;
+    padding: 50px 100px;
+    row-gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+}
+
+.appButton {
+    width: 230px;
+    background-color: black;
+    padding: 5px;
+    color: white;
+    box-shadow: 5px 5px #afadab;
+    text-align: center;
+    cursor: default;
+}
+
+.appButton:hover {
+    background-color: #fef230;
+    color: #000000;
+}
+
+.appButton img {
+    width: 230px;
+    background-color: white;
+}
+
+.companyFinder {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+}
+
+.companyFinder .filter {
+    box-sizing: border-box;
+    margin: 10px;
+}
+
+.companyFinder .filter input {
+    padding: 10px;
+    border: 5px solid black;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 140%;
+}
+
+.companyFinder .companies {
+    height: 100%;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 5px 1fr;
+}
+
+.companyFinder .list {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    overflow-y: scroll;
+}
+
+.companyFinder .separator {
+    background-color: black;
+}
+
+.companyFinder .company {
+    display: inline-block;
+    font-weight: bold;
+    padding: 5px;
+    cursor: default;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.companyFinder .company.selected {
+    background-color: #fef230;
+    color: #000000;
+}
+
+.companyFinder .company:hover {
+    background-color: #fef230;
+    color: #000000;
+}
+
+.companyOverview {
+    margin: 20px;
+}
+
+.dataEcosystem {
+    margin: 20px;
+}
+
+.coreMessage {
+    margin: 150px;
+    font-size: 200%;
+    font-weight: 700;
+}
+
+.dataButton {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    box-shadow: 5px 5px #afadab;
+    cursor: default;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.dataButton:hover {
+    background-color: #fef230;
+    color: #000000;
+}
+
+.companyDetails {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    column-gap: 20px;
+    margin: 30px;
+    height: 500px;
+    padding: 30px;
+}
+
+.companyDetailsOverview {
+    border: 5px solid black;
+    padding: 30px;
+}
+
+.companyDetailsOverview .wrapper {
+    display: grid;
+    grid-template-areas:
+            "category offering"
+            "description description";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 3fr;
+}
+
+.companyDetailsOverview img {
+    position: absolute;
+    max-height: 60px;
+    margin-top: 15px;
+}
+
+.companyDetailsOverview h2 {
+    margin-left: 70px;
+}
+
+.companyDetailsOverview .wrapper .category {
+    grid-area: category;
+    font-size: 80%;
+}
+
+.companyDetailsOverview .wrapper .offering {
+    grid-area: offering;
+    font-size: 80%;
+}
+
+.companyDetailsOverview .wrapper .description {
+    grid-area: description;
+    font-size: 80%;
+}
+
+.companyLocation {
+    height: 100%;
+}
+
+.wordCloud {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.wordCloud svg {
+    width: 100%;
+    height: 100%;
+}

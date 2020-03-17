@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FeatureViewController.swift
 //  PolyPod
 //
 //  Created by Carmen Burmeister on 11.03.20.
@@ -9,13 +9,15 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController {
+class FeatureViewController: UIViewController {
 
     var webView: WKWebView!
     
     let preferencesFilename: String = "preferences"
     
     var preferences: [String: Any] = [:]
+    
+    var featureName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +26,7 @@ class ViewController: UIViewController {
             preferences = storedPreferences
         }
         
-        preferences["directusCredentials"] = ["email": FILL_ME, "password": FILL_ME]
+        preferences["directusCredentials"] = ["email": "api@polypoly.eu", "password": "v~[U[f<{A5s|(<O3'{(9%5{Bc"]
         
         let contentController = WKUserContentController();
         contentController.add(self, name: MessageName.Log.rawValue)
@@ -58,16 +60,17 @@ class ViewController: UIViewController {
     }
     
     private func loadFeatureManifest() -> Manifest? {
-        guard let filePath = Bundle.main.path(forResource: "polyExplorerManifest", ofType: "json") else { return nil }
+        guard let filePath = Bundle.main.path(forResource: featureName + "Manifest", ofType: "json") else { return nil }
         let fileUrl = URL(fileURLWithPath: filePath)
         guard let data = try? Data(contentsOf: fileUrl) else { return nil }
         let decoder = JSONDecoder()
         let manifest = try? decoder.decode(Manifest.self, from: data)
         return manifest
     }
+
 }
 
-extension ViewController: WKScriptMessageHandler {
+extension FeatureViewController: WKScriptMessageHandler {
     enum MessageName: String {
         case Log = "log"
         case GetValue = "getValue"
