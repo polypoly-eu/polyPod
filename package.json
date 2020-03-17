@@ -35,7 +35,7 @@
     "@types/rdf-js": "^2.0.11",
     "@types/rdfjs__dataset": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.23.0",
+    "@typescript-eslint/parser": "^2.24.0",
     "babel-jest": "^25.1.0",
     "eslint": "^6.8.0",
     "jest": "^25.1.0",
