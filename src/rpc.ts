@@ -7,7 +7,7 @@ export interface BaseEndpointSpec {
     endpointType: EndpointType;
 }
 
-export interface ValueEndpointSpec<T>  extends BaseEndpointSpec {
+export interface ValueEndpointSpec<T> extends BaseEndpointSpec {
     endpointType: "value";
 }
 
@@ -18,16 +18,23 @@ export interface ObjectEndpointSpec<T extends Record<string, (...args: any[]) =>
 
 export type EndpointSpec = ValueEndpointSpec<any> | ObjectEndpointSpec<any>;
 
+export type ForcePromise<T> =
+    T extends Promise<any> ?
+        T :
+        Promise<T>;
+
+export type MaybePromise<T> = T | ForcePromise<T>;
+
 export type ServerOf<Spec extends EndpointSpec> =
     Spec extends ValueEndpointSpec<infer T> ?
-        (T | Promise<T>) :
+        MaybePromise<T> :
         Spec extends ObjectEndpointSpec<infer T> ?
             {
                 [P in keyof T]:
                     T[P] extends (...args: infer Args) => infer Return ?
                         (
                             Return extends EndpointSpec ?
-                                (...args: Args) => (ServerOf<Return> | Promise<ServerOf<Return>>):
+                                (...args: Args) => MaybePromise<ServerOf<Return>>:
                                 never
                         ) :
                         never
@@ -36,7 +43,7 @@ export type ServerOf<Spec extends EndpointSpec> =
 
 export type ClientOf<Spec extends EndpointSpec> =
     Spec extends ValueEndpointSpec<infer T> ?
-        { get: Promise<T> } :
+        { get: ForcePromise<T> } :
         Spec extends ObjectEndpointSpec<infer T> ?
             {
                 call:
