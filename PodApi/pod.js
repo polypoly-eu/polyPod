@@ -26,7 +26,18 @@ const polyOut = {
     }
 };
 
+const polyIn = {
+    add: function(...quads){
+        return new Promise((resolve, reject) => {
+            postOffice.addQuads(quads, response => {
+                resolve(response);
+            });
+        });
+    }
+}
+
 const pod = {
     preferences: preferences,
-    polyOut: polyOut
+    polyOut: polyOut,
+    polyIn: polyIn
 };

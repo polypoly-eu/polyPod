@@ -4,8 +4,10 @@ class PostOffice {
         this.registry = new Map();
     }
 
-    log(message) {
-        webkit.messageHandlers.log.postMessage(message);
+    log(text) {
+        let data = { text }
+        
+        webkit.messageHandlers.log.postMessage(data);
     }
     
     getValue(key, cb) {
@@ -33,6 +35,15 @@ class PostOffice {
         let data = { id, ...request }
         
         webkit.messageHandlers.httpRequest.postMessage(data);
+    }
+    
+    addQuads(object, cb) {
+        let id = this.messageId++;
+        this.registry.set(id, cb);
+        
+        let data = { id, ...object }
+        
+        webkit.messageHandlers.addQuads.postMessage(data);
     }
 
     receiveMessage(data) {

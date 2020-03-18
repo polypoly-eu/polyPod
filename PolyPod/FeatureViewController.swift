@@ -33,6 +33,7 @@ class FeatureViewController: UIViewController {
         contentController.add(self, name: MessageName.GetValue.rawValue)
         contentController.add(self, name: MessageName.SetValue.rawValue)
         contentController.add(self, name: MessageName.HttpRequest.rawValue)
+        contentController.add(self, name: MessageName.AddQuads.rawValue)
         
         contentController.installUserScript("domConsole")
         contentController.installUserScript("postOffice")
@@ -76,31 +77,38 @@ extension FeatureViewController: WKScriptMessageHandler {
         case GetValue = "getValue"
         case SetValue = "setValue"
         case HttpRequest = "httpRequest"
+        case AddQuads = "addQuads"
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let messageName = MessageName(rawValue: message.name) else { return }
         
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else {
-                return
-            }
-        
+            guard let self = self else { return }
+            guard let body = message.body as? [String: Any] else { return }
+            
             switch messageName {
                 case .Log:
-                    guard let text = message.body as? String else { return }
-                    print("WebView: " + text)
+                    self.doLog(data: body)
                 case .GetValue:
-                    guard let body = message.body as? [String: Any] else { return }
                     self.doGetValue(data: body)
                 case .SetValue:
-                    guard let body = message.body as? [String: Any] else { return }
                     self.doSetValue(data: body)
                 case .HttpRequest:
-                    guard let body = message.body as? [String: Any] else { return }
                     self.doHttpRequest(data: body)
+                case .AddQuads:
+                    self.doAddQuads(data: body)
             }
         }
+    }
+    
+    private func doLog(data: [String: Any]) {
+        guard let text = data["text"] as? String else {
+            print("Error: WebView sent bad log message")
+            return
+        }
+        
+        print("WebView: " + text)
     }
     
     private func doGetValue(data: [String: Any]) {
@@ -167,6 +175,16 @@ extension FeatureViewController: WKScriptMessageHandler {
         }
 
         task.resume()
+    }
+    
+    private func doAddQuads(data: [String: Any]) {
+        // todo: add checks here
+        
+        print("functionality missing: doAddQuads")
+        
+        let jsonData = ["id": data["id"]]
+        
+        self.sendToPostOffice(jsonObject: jsonData)
     }
     
     private func sendToPostOffice(jsonObject: Any) {
