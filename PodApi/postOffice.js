@@ -32,18 +32,27 @@ class PostOffice {
         let id = this.messageId++;
         this.registry.set(id, cb);
         
-        let data = { id, ...request }
+        let data = { id, request }
         
         webkit.messageHandlers.httpRequest.postMessage(data);
     }
     
-    addQuads(object, cb) {
+    addQuads(quads, cb) {
         let id = this.messageId++;
         this.registry.set(id, cb);
         
-        let data = { id, ...object }
+        let data = { id, quads }
         
         webkit.messageHandlers.addQuads.postMessage(data);
+    }
+    
+    selectQuads(matcher, cb) {
+        let id = this.messageId++;
+        this.registry.set(id, cb);
+        
+        let data = { id, matcher }
+        
+        webkit.messageHandlers.selectQuads.postMessage(data);
     }
 
     receiveMessage(data) {

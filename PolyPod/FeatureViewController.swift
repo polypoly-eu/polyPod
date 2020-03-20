@@ -34,6 +34,7 @@ class FeatureViewController: UIViewController {
         contentController.add(self, name: MessageName.SetValue.rawValue)
         contentController.add(self, name: MessageName.HttpRequest.rawValue)
         contentController.add(self, name: MessageName.AddQuads.rawValue)
+        contentController.add(self, name: MessageName.SelectQuads.rawValue)
         
         contentController.installUserScript("domConsole")
         contentController.installUserScript("postOffice")
@@ -78,6 +79,7 @@ extension FeatureViewController: WKScriptMessageHandler {
         case SetValue = "setValue"
         case HttpRequest = "httpRequest"
         case AddQuads = "addQuads"
+        case SelectQuads = "selectQuads"
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -88,16 +90,18 @@ extension FeatureViewController: WKScriptMessageHandler {
             guard let body = message.body as? [String: Any] else { return }
             
             switch messageName {
-                case .Log:
-                    self.doLog(data: body)
-                case .GetValue:
-                    self.doGetValue(data: body)
-                case .SetValue:
-                    self.doSetValue(data: body)
-                case .HttpRequest:
-                    self.doHttpRequest(data: body)
-                case .AddQuads:
-                    self.doAddQuads(data: body)
+            case .Log:
+                self.doLog(data: body)
+            case .GetValue:
+                self.doGetValue(data: body)
+            case .SetValue:
+                self.doSetValue(data: body)
+            case .HttpRequest:
+                self.doHttpRequest(data: body)
+            case .AddQuads:
+                self.doAddQuads(data: body)
+            case .SelectQuads:
+                self.doSelectQuads(data: body)
             }
         }
     }
@@ -145,22 +149,24 @@ extension FeatureViewController: WKScriptMessageHandler {
         
         var jsonData = ["id": data["id"]]
         
-        let url = URL(string: data["url"] as! String)!
+        let requestData = data["request"] as! [String: Any]
+        
+        let url = URL(string: requestData["url"] as! String)!
 
-        let method = data["method"] as! String
+        let method = requestData["method"] as! String
         
         var request = URLRequest(url: url)
         request.httpMethod = method.uppercased()
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        if let rawHeaders = data["headers"] as? String, let headers = try? JSONSerialization.jsonObject(with: rawHeaders.data(using: .utf8)!, options: []) as? NSDictionary {
+        if let rawHeaders = requestData["headers"] as? String, let headers = try? JSONSerialization.jsonObject(with: rawHeaders.data(using: .utf8)!, options: []) as? NSDictionary {
             for (key, value) in headers {
                 request.setValue(value as? String, forHTTPHeaderField: key as! String)
             }
         }
         
-        if let body = data["body"] as? String, body.count > 0 {
+        if let body = requestData["body"] as? String, body.count > 0 {
             let postString = body
             request.httpBody = postString.data(using: .utf8)
         }
@@ -183,6 +189,26 @@ extension FeatureViewController: WKScriptMessageHandler {
         print("functionality missing: doAddQuads")
         
         let jsonData = ["id": data["id"]]
+        
+        let quads = data["quads"] as? [[String: Any]]
+
+        let success = try? JSONSerialization.save(jsonObject: quads, toFilename: "quads")
+        
+        self.sendToPostOffice(jsonObject: jsonData)
+    }
+    
+    private func doSelectQuads(data: [String: Any]) {
+        // todo: add checks here
+        
+        print("functionality missing: doSelectQuads")
+        
+        var jsonData = ["id": data["id"]]
+        
+        let matcher = data["matcher"] as? [[String: Any]]
+        
+        if let storedQuads = try? JSONSerialization.loadJSON(withFilename: "quads") as? [[String : Any]] {
+            jsonData["result"] = storedQuads
+        }
         
         self.sendToPostOffice(jsonObject: jsonData)
     }

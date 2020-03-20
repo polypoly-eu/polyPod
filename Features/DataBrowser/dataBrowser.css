@@ -1,0 +1,36 @@
+.nodes {
+    stroke: #F9F0D7;
+    stroke-width: 1.5;
+    fill: #000000;
+}
+
+.links {
+    stroke: #8197A5;
+    stroke-opacity: 0.6;
+    stroke-width: 2;
+}
+
+.tooltip {
+    visibility: hidden;
+}
+
+.tooltip rect {
+    fill: #000000;
+}
+
+.tooltip text {
+    dominant-baseline: middle;
+    font-size: medium;
+}
+
+.tooltip .id {
+    fill: #FFEBE2;
+}
+
+.tooltip .pred {
+    fill: #FEF230;
+}
+
+.tooltip .obj {
+    fill: #F9F0D7;
+}

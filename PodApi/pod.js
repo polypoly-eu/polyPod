@@ -27,9 +27,16 @@ const polyOut = {
 };
 
 const polyIn = {
-    add: function(...quads){
+    add: function(...quads) {
         return new Promise((resolve, reject) => {
             postOffice.addQuads(quads, response => {
+                resolve(response);
+            });
+        });
+    },
+    select: function(matcher) {
+        return new Promise((resolve, reject) => {
+            postOffice.selectQuads(matcher, response => {
                 resolve(response);
             });
         });

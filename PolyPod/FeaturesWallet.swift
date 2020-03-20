@@ -29,6 +29,14 @@ class FeaturesWallet {
         } catch {
             print(error.localizedDescription);
         }
+        
+        let quadsUrl = documentsUrl.appendingPathComponent("quads.json")
+        
+        do {
+            try FileManager.default.removeItem(at: quadsUrl)
+        } catch {
+            print(error.localizedDescription);
+        }
     }
     
     func featuresList() -> [String] {
@@ -51,6 +59,7 @@ class FeaturesWallet {
         importFeature("helloWorld")
         importFeature("twitterImporter")
         importFeature("polyExplorer")
+        importFeature("dataBrowser")
     }
     
     private func importFeature(_ featureName: String) {
