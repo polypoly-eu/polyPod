@@ -1,0 +1,17 @@
+{
+  "name": "feature-example",
+  "version": "0.0.1",
+  "description": "Example feature",
+  "main": "index.js",
+  "author": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "orodruin dev -l"
+  },
+  "devDependencies": {
+    "orodruin": "file:/.."
+  },
+  "polypoly": {
+    "styles": []
+  }
+}
