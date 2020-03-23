@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/polypoly-eu/rdf-spec#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.8.3",
     "@graphy/core.data.factory": "^4.1.0",
     "@rdfjs/data-model": "^1.1.2",
