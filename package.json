@@ -25,7 +25,7 @@
   "homepage": "https://github.com/polypoly-eu/bubblewrap#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.9.0",
-    "@babel/preset-typescript": "^7.8.3",
+    "@babel/preset-typescript": "^7.9.0",
     "@polypoly-eu/rdf": "0.0.1",
     "@polypoly-eu/rdf-spec": "0.0.2",
     "@polypoly-eu/typeson": "5.19.0-fork",
