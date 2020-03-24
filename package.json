@@ -44,7 +44,7 @@
     "express": "^4.17.1",
     "fast-check": "^1.23.0",
     "jasmine": "^3.5.0",
-    "jasmine-spec-reporter": "^5.0.0",
+    "jasmine-spec-reporter": "^5.0.1",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
