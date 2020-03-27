@@ -10,6 +10,7 @@ import {Server} from "http";
 import express from "express";
 import {once} from "events";
 import {raw} from "body-parser";
+import {AddressInfo} from "net";
 
 chai.use(chaiAsPromised);
 
@@ -91,11 +92,11 @@ export class PodSpec {
 
             describe("HTTP requests", () => {
 
-                const port = 4000;
                 const getResponse = `{ "hello": "world" }`;
                 const postResponse = `{ "ping": "pong" }`;
 
                 let server: Server;
+                let port: number;
 
                 beforeAll(async () => {
                     const app = express();
@@ -110,8 +111,9 @@ export class PodSpec {
                         response.contentType(request.header("Content-Type")!);
                         response.send(request.body);
                     });
-                    server = app.listen(port);
+                    server = app.listen(0);
                     await once(server, "listening");
+                    port = (server.address() as AddressInfo).port;
                 });
 
                 it("Successful GET", async () => {
