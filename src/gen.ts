@@ -1,16 +1,16 @@
 import fc, {Arbitrary} from "fast-check";
 import * as RDF from "rdf-js";
 
-export interface Gens {
+export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
     namedNode: Arbitrary<RDF.NamedNode>;
     blankNode: Arbitrary<RDF.BlankNode>;
     literal: Arbitrary<RDF.Literal>;
     variable?: Arbitrary<RDF.Variable>;
-    triple: Arbitrary<RDF.BaseQuad>;
-    quad: Arbitrary<RDF.BaseQuad>;
+    triple: Arbitrary<Q>;
+    quad: Arbitrary<Q>;
 }
 
-export function gens(factory: RDF.DataFactory): Gens {
+export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory<Q>): Gens<Q> {
     const namedNode = fc.webUrl().map(url => factory.namedNode(url));
 
     const blankNode = fc.hexaString().map(id => factory.blankNode(id));
