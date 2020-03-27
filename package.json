@@ -36,7 +36,7 @@
     "@types/rdfjs__dataset": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
-    "babel-jest": "^25.2.0",
+    "babel-jest": "^25.2.3",
     "eslint": "^6.8.0",
     "jest": "^25.2.3",
     "rollup": "^1.31.1",
