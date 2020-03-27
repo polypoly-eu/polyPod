@@ -23,3 +23,11 @@ export interface Pod {
     readonly polyIn: PolyIn;
     readonly polyOut: PolyOut;
 }
+
+export interface Feature {
+    init(pod: Pod): Promise<void>;
+}
+
+export interface FeatureConstructor {
+    new(): Feature;
+}
