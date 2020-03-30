@@ -6,7 +6,7 @@
   "author": "",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "orodruin dev -l"
+    "serve": "orodruin serve -l"
   },
   "devDependencies": {
     "orodruin": "file:/.."

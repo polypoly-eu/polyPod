@@ -1,5 +1,5 @@
 import yargs from "yargs";
-import {devCommand} from "./cli/dev";
+import {serveCommand} from "./cli/serve";
 
 yargs
     .options({
@@ -38,7 +38,7 @@ yargs
                         choices: ["lazy", "eager"]
                     }
                 }),
-        argv => devCommand({
+        argv => serveCommand({
             log: argv.l,
             dir: argv.d,
             port: argv.port,

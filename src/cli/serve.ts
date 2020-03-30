@@ -14,7 +14,7 @@ const allStrategies: Record<string, LoadingStrategy> = {
     "eager": eagerStrategy
 };
 
-export interface DevCommandOptions {
+export interface ServeCommandOps {
     port: number;
     inmemory: boolean;
     strategy: string;
@@ -22,7 +22,7 @@ export interface DevCommandOptions {
     dir?: string;
 }
 
-export async function devCommand(options: DevCommandOptions): Promise<void> {
+export async function serveCommand(options: ServeCommandOps): Promise<void> {
     const manifest = await detectFeature(options.dir);
     const fs: typeof _fs =
         options.inmemory ?
