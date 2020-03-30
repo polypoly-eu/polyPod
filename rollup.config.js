@@ -18,7 +18,7 @@ const externals = [
 
 export default [
     {
-        input: "src/feature/bootstrap.ts",
+        input: "src/harness/bootstrap.ts",
         output: {
             file: "dist/bootstrap/index.js.txt",
             format: "iife"
