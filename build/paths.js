@@ -1,0 +1,1 @@
+export const bootstrapPath = "dist/bootstrap/index.js.txt";

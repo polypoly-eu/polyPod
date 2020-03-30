@@ -1,51 +1,9 @@
 import sucrase from "@rollup/plugin-sucrase";
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
 
-const externals = [
-    "express",
-    "fs",
-    "path",
-    "events",
-    "memfs",
-    "node-fetch",
-    "@polypoly-eu/poly-api",
-    "@polypoly-eu/postoffice",
-    "@polypoly-eu/postoffice/dist/lib-node",
-    "@polypoly-eu/bubblewrap",
-    "@polypoly-eu/rdf",
-];
+import {configs, externals} from "./build/rollup-common";
 
 export default [
-    {
-        input: "src/harness/bootstrap.ts",
-        output: {
-            file: "dist/bootstrap/index.js.txt",
-            format: "iife"
-        },
-        plugins: [
-            resolve(),
-            commonjs(),
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"]
-            })
-        ]
-    },
-    {
-        input: "src/index.ts",
-        output: {
-            file: "dist/index.js",
-            format: "cjs"
-        },
-        plugins: [
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"]
-            })
-        ],
-        external: externals
-    },
+    configs.bootstrap,
     {
         input: "src/cli.ts",
         output: {

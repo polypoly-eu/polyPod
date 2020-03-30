@@ -1,9 +1,8 @@
 import {PodEndpoint} from "../pod/endpoints";
 import {Port, typesonPort, endpointClient, makeClient} from "@polypoly-eu/postoffice";
-import {Pod, PolyIn} from "@polypoly-eu/poly-api";
+import {Pod, PolyIn, PolyOut} from "@polypoly-eu/poly-api";
 import {typesonInstance} from "../pod/typeson";
 import {DataFactory} from "rdf-js";
-import {PolyOut} from "@polypoly-eu/poly-api/dist";
 
 export function remotePod(port: Port, dataFactory: DataFactory): Pod {
     const typedPort = typesonPort(port, typesonInstance());

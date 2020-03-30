@@ -1,20 +1,15 @@
 import express from "express";
-import {promises as fs} from "fs";
 import {Server} from "http";
 import {router} from "../pod/express";
 import {htmlSkeleton} from "./html";
-import {join} from "path";
-import {rootDir} from "../_dir";
 import {once} from "events";
 import {Pod} from "@polypoly-eu/poly-api";
 import {Feature} from "../feature/feature";
 
-export async function serve(port: number, pod: Pod, feature: Feature): Promise<Server> {
+export async function serve(port: number, pod: Pod, feature: Feature, bootstrapCallback?: () => void): Promise<Server> {
     const app = express();
 
     const html = htmlSkeleton;
-
-    const bootstrap = await fs.readFile(join(rootDir, "dist/bootstrap/index.js.txt"), { encoding: "utf-8" });
 
     app.get("/", (req, res) => {
         res.contentType("text/html");
@@ -31,12 +26,19 @@ export async function serve(port: number, pod: Pod, feature: Feature): Promise<S
         res.send((await feature.css()).join("\n"));
     });
 
-    app.get("/bootstrap.js", (req, res) => {
+    app.get("/bootstrap.js", async (req, res) => {
         res.contentType("text/javascript");
-        res.send(bootstrap);
+        res.send(await feature.bootstrap());
     });
 
     app.use("/rpc", router(pod));
+
+    app.post("/bootstrapped", (req, res) => {
+        res.status(204);
+        res.send();
+        if (bootstrapCallback)
+            bootstrapCallback();
+    });
 
     const server = app.listen(port);
     await once(server, "listening");
