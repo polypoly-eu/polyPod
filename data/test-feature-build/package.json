@@ -1,0 +1,16 @@
+{
+  "name": "test-feature-build",
+  "version": "0.0.1",
+  "description": "Test feature",
+  "main": "dist/feature.js",
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@polypoly-eu/poly-look": "^0.0.3"
+  },
+  "polypoly": {
+    "inputJS": "index.js",
+    "inputStyle": "style.scss",
+    "build": true
+  }
+}
