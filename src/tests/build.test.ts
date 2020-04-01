@@ -3,11 +3,9 @@ import {promises as fs} from "fs";
 import {join} from "path";
 import {rootDir} from "../_dir";
 import {spawnSync, SpawnSyncOptions} from "child_process";
-import {FeatureConstructor} from "@polypoly-eu/poly-api/dist";
-import {createContext, runInContext, runInNewContext} from "vm";
-import {rollup} from "rollup";
-// @ts-ignore
-import {configs} from "../../build/rollup-common";
+import {FeatureConstructor} from "@polypoly-eu/poly-api";
+import {createContext, runInContext} from "vm";
+import {tempBundle} from "./util";
 
 const globalFiles = [".npmrc"];
 
@@ -29,12 +27,7 @@ describe("Build", () => {
     let cliPath: string;
 
     beforeAll(async () => {
-        cliPath = tempy.file({ extension: "js" });
-        const { cli } = configs;
-        const rollupBuild = await rollup(cli);
-        const outputOptions = cli.output;
-        const { output } = await rollupBuild.generate(outputOptions);
-        await fs.writeFile(cliPath, output[0].code, { encoding: "utf-8" });
+        cliPath = await tempBundle("cli");
     });
 
     describe("Simple build", () => {

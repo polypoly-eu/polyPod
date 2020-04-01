@@ -1,1 +1,1 @@
-export const bootstrapPath = "dist/bootstrap/index.js.txt";
+export const browserScriptsPath = "dist/browser";

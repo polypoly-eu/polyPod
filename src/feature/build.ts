@@ -8,10 +8,6 @@ import {promises as fs} from "fs";
 import mkdirp from "mkdirp";
 import {join} from "path";
 // @ts-ignore
-import builtins from "rollup-plugin-node-builtins";
-// @ts-ignore
-import nodeGlobals from "rollup-plugin-node-globals";
-// @ts-ignore
 import sucrase from "@rollup/plugin-sucrase";
 // @ts-ignore
 import nodeSassTildeImporter from "node-sass-tilde-importer";
@@ -24,8 +20,6 @@ const plugins: Plugin[] = [
             "react-dom": ["render"],
         }
     }),
-    nodeGlobals(),
-    builtins(),
     sucrase({
         exclude: [`${rootDir}/node_modules/**`],
         transforms: ["typescript", "jsx"]
@@ -37,6 +31,10 @@ async function processJS(input: string, output: string): Promise<void> {
 
     const inputOptions: InputOptions = {
         input,
+        external: [
+            "react",
+            "react-dom"
+        ],
         plugins
     };
 
@@ -48,7 +46,11 @@ async function processJS(input: string, output: string): Promise<void> {
         file: output,
         format: "iife",
         sourcemap: "inline",
-        name: "Feature"
+        name: "Feature",
+        globals: {
+            "react": "React",
+            "react-dom": "ReactDOM"
+        }
     });
 }
 

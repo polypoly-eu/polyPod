@@ -11,9 +11,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/poly-look": "^0.0.3",
-    "@polypoly-eu/orodruin": "file:/..",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "@polypoly-eu/orodruin": "file:/.."
   },
   "polypoly": {
     "inputJS": "index.jsx",

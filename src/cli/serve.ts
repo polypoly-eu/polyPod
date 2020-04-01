@@ -1,24 +1,17 @@
-import {serve} from "../harness/server";
+import {defaultConfig, serve} from "../harness/server";
 import {block, detectFeature, Ops} from "./_common";
 import {MockPod} from "@polypoly-eu/poly-api";
 import {promises as _fs} from "fs";
 import {Volume} from "memfs";
 import open from "open";
-import {defaultConfig, eagerStrategy, lazyStrategy, LoadingStrategy} from "../feature/feature";
 import {LogPod, nullLogger, defaultLogger} from "../pods/log-pod";
 import {getManifest} from "../feature/manifest";
 // @ts-ignore
 import fetch from "node-fetch";
 
-const allStrategies: Record<string, LoadingStrategy> = {
-    "lazy": lazyStrategy,
-    "eager": eagerStrategy
-};
-
 export interface ServeCommandOps extends Ops {
     port: number;
     inmemory: boolean;
-    strategy: string;
     log: boolean;
 }
 
@@ -36,8 +29,7 @@ export async function serveCommand(options: ServeCommandOps): Promise<void> {
             ),
             options.log ? defaultLogger : nullLogger
         );
-    const feature = await allStrategies[options.strategy](manifest, defaultConfig);
-    await serve(options.port, pod, feature);
+    await serve(options.port, pod, manifest, defaultConfig);
     const uri = `http://localhost:${options.port}/`;
     console.log(`Server booted: ${uri}`);
     await open(uri);

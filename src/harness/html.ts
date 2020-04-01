@@ -5,6 +5,8 @@ export const htmlSkeleton =
             <head>
                 <title>Feature test harness</title>
                 <link rel="stylesheet" href="/feature.css">
+                <script src="/react.js"></script>
+                <script src="/react-dom.js"></script>
                 <script src="/feature.js"></script>
             </head>
             <body>

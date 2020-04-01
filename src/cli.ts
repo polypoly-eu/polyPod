@@ -31,20 +31,13 @@ yargs
                         default: false,
                         alias: "log",
                         describe: "log API actions"
-                    },
-                    s: {
-                        alias: "strategy",
-                        default: "lazy",
-                        describe: "asset loading strategy",
-                        choices: ["lazy", "eager"]
                     }
                 }),
         argv => serveCommand({
             log: argv.l,
             dir: argv.d,
             port: argv.port,
-            inmemory: argv.m,
-            strategy: argv.s
+            inmemory: argv.m
         })
     )
     .command(

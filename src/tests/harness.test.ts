@@ -5,16 +5,15 @@ import {Volume} from "memfs";
 import {promises as fs} from "fs";
 import {rootDir} from "../_dir";
 import {join} from "path";
-import {rollup} from "rollup";
-import {serve} from "../harness/server";
+import {defaultConfig, serve} from "../harness/server";
 import {fetchWithBaseURI, rawPromise} from "../util";
 import {once} from "events";
 import {AddressInfo} from "net";
 import {JSDOM} from "jsdom";
+import {tempBundle} from "./util";
+import tempy from "tempy";
 // @ts-ignore
 import fetch from "node-fetch";
-// @ts-ignore
-import {configs} from "../../build/rollup-common.js";
 
 interface JestMockLogger extends Logger {
     called: jest.Mock<void, [string, Record<string, any>]>;
@@ -30,18 +29,18 @@ function jestMockLogger(): JestMockLogger {
 
 describe("Harness", () => {
 
-    jest.setTimeout(15000);
+    jest.setTimeout(20000);
 
     let pod: Pod;
     let logger: JestMockLogger;
-    let bootstrapJS: string;
+    let bootstrapPath: string;
+    let reactPath: string;
+    let reactDomPath: string;
 
     beforeAll(async () => {
-        const { bootstrap } = configs;
-        const rollupBuild = await rollup(bootstrap);
-        const outputOptions = bootstrap.output;
-        const { output } = await rollupBuild.generate(outputOptions);
-        bootstrapJS = output[0].code;
+        bootstrapPath = await tempBundle("bootstrap");
+        reactPath = await tempBundle("reactGlobal");
+        reactDomPath = await tempBundle("reactDomGlobal");
     });
 
     beforeEach(() => {
@@ -50,16 +49,24 @@ describe("Harness", () => {
     });
 
     it("Feature can be bootstrapped", async () => {
-        const feature = {
+        const cssPath = tempy.file({ extension: "css" });
+        await fs.writeFile(cssPath, Buffer.of(), { flag: "w" });
+
+        const manifest = {
+            cssPath,
             name: "test",
-            bootstrap: async () => bootstrapJS,
-            css: async () => "",
-            js: () => fs.readFile(join(rootDir, "data", "test-feature.js"), { encoding: "utf-8" })
+            jsPath: join(rootDir, "data", "test-feature.js")
+        };
+
+        const config = {
+            bootstrapPath,
+            reactPath,
+            reactDomPath
         };
 
         const bootstrapped = rawPromise<void>();
 
-        const server = await serve(0, pod, feature, () => bootstrapped.resolve());
+        const server = await serve(0, pod, manifest, config, () => bootstrapped.resolve());
         const port = (server.address() as AddressInfo).port;
 
         const baseURI = `http://localhost:${port}`;
