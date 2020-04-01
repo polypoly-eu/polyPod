@@ -8,7 +8,7 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "test": "tsc --noEmit && jest"
+    "test": "jest"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -24,18 +24,16 @@
   },
   "homepage": "https://github.com/polypoly-eu/rdf#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-typescript": "^7.9.0",
     "@polypoly-eu/rdf-spec": "0.0.3",
     "@rollup/plugin-sucrase": "^3.0.0",
     "@types/jest": "^25.1.2",
     "@types/rdf-js": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
-    "babel-jest": "^25.2.4",
     "eslint": "^6.8.0",
     "jest": "^25.2.4",
     "rollup": "^2.3.2",
+    "ts-jest": "^25.3.0",
     "typescript": "^3.7.5"
   }
 }
