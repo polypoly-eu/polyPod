@@ -8,7 +8,7 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "test": "tsc --noEmit && jest"
+    "test": "jest"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -24,8 +24,6 @@
   },
   "homepage": "https://github.com/polypoly-eu/poly-api#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-typescript": "^7.9.0",
     "@rollup/plugin-sucrase": "^3.0.0",
     "@types/body-parser": "^1.19.0",
     "@types/chai": "^4.2.11",
@@ -37,12 +35,12 @@
     "@types/rdfjs__dataset": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
-    "babel-jest": "^25.2.4",
     "eslint": "^6.8.0",
     "node-fetch": "^2.6.0",
     "jest": "^25.2.4",
     "memfs": "^3.1.2",
     "rollup": "^1.31.1",
+    "ts-jest": "^25.3.0",
     "typescript": "^3.7.5"
   },
   "dependencies": {
