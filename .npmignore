@@ -6,3 +6,6 @@ src
 *.tgz
 .eslintrc.js
 .github
+example
+build
+data
