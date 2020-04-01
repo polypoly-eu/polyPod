@@ -3,20 +3,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import sucrase from "@rollup/plugin-sucrase";
 import {bootstrapPath} from "./paths";
 
-const externals = [
-    "express",
-    "fs",
-    "path",
-    "events",
-    "memfs",
-    "node-fetch",
-    "@polypoly-eu/poly-api",
-    "@polypoly-eu/postoffice",
-    "@polypoly-eu/postoffice/dist/lib-node",
-    "@polypoly-eu/bubblewrap",
-    "@polypoly-eu/rdf",
-];
-
 export const configs = {
     "bootstrap":
         {
@@ -49,7 +35,17 @@ export const configs = {
                 })
             ],
             external: [
-                ...externals,
+                "express",
+                "fs",
+                "path",
+                "events",
+                "memfs",
+                "node-fetch",
+                "@polypoly-eu/poly-api",
+                "@polypoly-eu/postoffice",
+                "@polypoly-eu/postoffice/dist/lib-node",
+                "@polypoly-eu/bubblewrap",
+                "@polypoly-eu/rdf",
                 "open",
                 "mkdirp",
                 "node-sass-tilde-importer",
