@@ -53,7 +53,7 @@ describe("Harness", () => {
         const feature = {
             name: "test",
             bootstrap: async () => bootstrapJS,
-            css: async () => [],
+            css: async () => "",
             js: () => fs.readFile(join(rootDir, "data", "test-feature.js"), { encoding: "utf-8" })
         };
 

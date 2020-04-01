@@ -1,17 +1,23 @@
 {
-  "name": "feature-example",
+  "name": "example",
   "version": "0.0.1",
   "description": "Example feature",
-  "main": "index.js",
+  "main": "dist/feature.js",
   "author": "",
   "license": "UNLICENSED",
   "scripts": {
-    "serve": "orodruin serve -l"
+    "serve": "orodruin serve -l",
+    "build": "orodruin build"
   },
   "devDependencies": {
-    "orodruin": "file:/.."
+    "@polypoly-eu/poly-look": "^0.0.3",
+    "@polypoly-eu/orodruin": "file:/..",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "polypoly": {
-    "styles": []
+    "inputJS": "index.jsx",
+    "inputStyle": "style.scss",
+    "build": true
   }
 }

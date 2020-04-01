@@ -1,11 +1,12 @@
 import {serve} from "../harness/server";
-import {block, detectFeature} from "./_common";
+import {block, detectFeature, Ops} from "./_common";
 import {MockPod} from "@polypoly-eu/poly-api";
 import {promises as _fs} from "fs";
 import {Volume} from "memfs";
 import open from "open";
 import {defaultConfig, eagerStrategy, lazyStrategy, LoadingStrategy} from "../feature/feature";
 import {LogPod, nullLogger, defaultLogger} from "../pods/log-pod";
+import {getManifest} from "../feature/manifest";
 // @ts-ignore
 import fetch from "node-fetch";
 
@@ -14,16 +15,15 @@ const allStrategies: Record<string, LoadingStrategy> = {
     "eager": eagerStrategy
 };
 
-export interface ServeCommandOps {
+export interface ServeCommandOps extends Ops {
     port: number;
     inmemory: boolean;
     strategy: string;
     log: boolean;
-    dir?: string;
 }
 
 export async function serveCommand(options: ServeCommandOps): Promise<void> {
-    const manifest = await detectFeature(options.dir);
+    const manifest = getManifest(await detectFeature(options));
     const fs: typeof _fs =
         options.inmemory ?
             (new Volume().promises as any) :

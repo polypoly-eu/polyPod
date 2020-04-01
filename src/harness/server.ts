@@ -23,7 +23,7 @@ export async function serve(port: number, pod: Pod, feature: Feature, bootstrapC
 
     app.get("/feature.css", async (req, res) => {
         res.contentType("text/css");
-        res.send((await feature.css()).join("\n"));
+        res.send(await feature.css());
     });
 
     app.get("/bootstrap.js", async (req, res) => {

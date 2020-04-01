@@ -1,5 +1,6 @@
 import yargs from "yargs";
 import {serveCommand} from "./cli/serve";
+import {buildCommand} from "./cli/build";
 
 yargs
     .options({
@@ -10,7 +11,7 @@ yargs
         }
     })
     .command(
-        "dev [port]",
+        "serve [port]",
         "start the development server",
         yargs =>
             yargs
@@ -46,4 +47,23 @@ yargs
             strategy: argv.s
         })
     )
-    .argv;
+    .command(
+        "build",
+        "build the feature",
+        yargs =>
+            yargs
+                .options({
+                    w: {
+                        type: "boolean",
+                        default: false,
+                        alias: "watch",
+                        describe: "watch sources and rebuild"
+                    }
+                }),
+        argv => buildCommand({
+            dir: argv.d,
+            watch: argv.w
+        })
+    )
+    .help()
+    .parse();

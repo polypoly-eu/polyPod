@@ -1,12 +1,14 @@
 import {Manifest} from "./manifest";
 import {promises as fs} from "fs";
+import {join} from "path";
+import {rootDir} from "../_dir";
 // @ts-ignore
 import {bootstrapPath} from "../../build/paths.js";
 
 export interface Feature {
     readonly name: string;
     bootstrap(): Promise<string>;
-    css(): Promise<string[]>;
+    css(): Promise<string>;
     js(): Promise<string>;
 }
 
@@ -15,7 +17,7 @@ export interface Config {
 }
 
 export const defaultConfig: Config = {
-    bootstrapPath
+    bootstrapPath: join(rootDir, bootstrapPath)
 };
 
 export type LoadingStrategy =
@@ -24,7 +26,7 @@ export type LoadingStrategy =
 export const lazyStrategy: LoadingStrategy = async (manifest, config) => ({
     name: manifest.name,
     bootstrap: () => fs.readFile(config.bootstrapPath, { encoding: "utf-8" }),
-    css: () => Promise.all(manifest.cssPaths.map(path => fs.readFile(path, { encoding: "utf-8" }))),
+    css: () => fs.readFile(manifest.cssPath, { encoding: "utf-8" }),
     js: () => fs.readFile(manifest.jsPath, { encoding: "utf-8" })
 });
 
