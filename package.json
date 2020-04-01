@@ -30,7 +30,7 @@
     "@types/body-parser": "^1.19.0",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",
-    "@types/express": "^4.17.3",
+    "@types/express": "^4.17.4",
     "@types/jest": "^25.1.2",
     "@types/node": "^13.9.8",
     "@types/rdf-js": "^2.0.11",
