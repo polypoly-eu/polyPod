@@ -1,4 +1,5 @@
 module.exports = {
     roots: ["<rootDir>/src"],
-    silent: true
+    silent: true,
+    preset: "ts-jest"
 };
