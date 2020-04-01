@@ -29,12 +29,9 @@ class FeatureViewController: UIViewController {
         preferences["directusCredentials"] = ["email": "api@polypoly.eu", "password": "v~[U[f<{A5s|(<O3'{(9%5{Bc"]
         
         let contentController = WKUserContentController();
-        contentController.add(self, name: MessageName.Log.rawValue)
-        contentController.add(self, name: MessageName.GetValue.rawValue)
-        contentController.add(self, name: MessageName.SetValue.rawValue)
-        contentController.add(self, name: MessageName.HttpRequest.rawValue)
-        contentController.add(self, name: MessageName.AddQuads.rawValue)
-        contentController.add(self, name: MessageName.SelectQuads.rawValue)
+        MessageName.allCases.forEach {
+            contentController.add(self, name: $0.rawValue)
+        }
         
         contentController.installUserScript("domConsole")
         contentController.installUserScript("postOffice")
@@ -73,14 +70,6 @@ class FeatureViewController: UIViewController {
 }
 
 extension FeatureViewController: WKScriptMessageHandler {
-    enum MessageName: String {
-        case Log = "log"
-        case GetValue = "getValue"
-        case SetValue = "setValue"
-        case HttpRequest = "httpRequest"
-        case AddQuads = "addQuads"
-        case SelectQuads = "selectQuads"
-    }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let messageName = MessageName(rawValue: message.name) else { return }
@@ -118,69 +107,39 @@ extension FeatureViewController: WKScriptMessageHandler {
     private func doGetValue(data: [String: Any]) {
         // todo: add checks here
         
-        var jsonData = ["id": data["id"]]
+        let requestId = data["id"] as! NSNumber
         
         let key = data["key"] as! String
        
-        jsonData["result"] = preferences[key]
+        let value = sharedPodApi.preferences.getValue(key: key)
         
-        self.sendToPostOffice(jsonObject: jsonData)
+        self.sendToPostOffice(requestId: requestId, result: value)
     }
     
     private func doSetValue(data: [String: Any]) {
         // todo: add checks here
         
-        let jsonData = ["id": data["id"]]
+        let requestId = data["id"] as! NSNumber
         
         let key = data["key"] as! String
         
-        if let rawValue = data["value"] as? String, let value = try? JSONSerialization.jsonObject(with: rawValue.data(using: .utf8)!, options: []) as? NSDictionary {
+        if let rawValue = data["value"] as? String, let value = try? JSONSerialization.jsonObject(with: rawValue.data(using: .utf8)!, options: []) {
             
-            preferences[key] = value
-        
-            try? JSONSerialization.save(jsonObject: preferences, toFilename: preferencesFilename)
+            let _ = sharedPodApi.preferences.setValue(key: key, value: value)
         }
         
-        self.sendToPostOffice(jsonObject: jsonData)
+        self.sendToPostOffice(requestId: requestId, result: nil)
     }
     
     private func doHttpRequest(data: [String: Any]) {
         // todo: add checks here
         
-        var jsonData = ["id": data["id"]]
-        
+        let requestId = data["id"] as! NSNumber
         let requestData = data["request"] as! [String: Any]
         
-        let url = URL(string: requestData["url"] as! String)!
-
-        let method = requestData["method"] as! String
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = method.uppercased()
-        
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        if let rawHeaders = requestData["headers"] as? String, let headers = try? JSONSerialization.jsonObject(with: rawHeaders.data(using: .utf8)!, options: []) as? NSDictionary {
-            for (key, value) in headers {
-                request.setValue(value as? String, forHTTPHeaderField: key as! String)
-            }
+        sharedPodApi.polyOut.makeHttpRequest(requestData: requestData) { (jsonData) in
+            self.sendToPostOffice(requestId: requestId, result: jsonData)
         }
-        
-        if let body = requestData["body"] as? String, body.count > 0 {
-            let postString = body
-            request.httpBody = postString.data(using: .utf8)
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            guard let data = data else { return }
-            let result = String(data: data, encoding: .utf8)
-            
-            jsonData["result"] = result
-
-            self.sendToPostOffice(jsonObject: jsonData)
-        }
-
-        task.resume()
     }
     
     private func doAddQuads(data: [String: Any]) {
@@ -188,13 +147,13 @@ extension FeatureViewController: WKScriptMessageHandler {
         
         print("functionality missing: doAddQuads")
         
-        let jsonData = ["id": data["id"]]
-        
+        let requestId = data["id"] as! NSNumber
+
         let quads = data["quads"] as? [[String: Any]]
 
         let success = try? JSONSerialization.save(jsonObject: quads, toFilename: "quads")
         
-        self.sendToPostOffice(jsonObject: jsonData)
+        self.sendToPostOffice(requestId: requestId, result: nil)
     }
     
     private func doSelectQuads(data: [String: Any]) {
@@ -202,18 +161,25 @@ extension FeatureViewController: WKScriptMessageHandler {
         
         print("functionality missing: doSelectQuads")
         
-        var jsonData = ["id": data["id"]]
+        let requestId = data["id"] as! NSNumber
         
         let matcher = data["matcher"] as? [[String: Any]]
         
+        var result: Any?
+        
         if let storedQuads = try? JSONSerialization.loadJSON(withFilename: "quads") as? [[String : Any]] {
-            jsonData["result"] = storedQuads
+            result = storedQuads
         }
         
-        self.sendToPostOffice(jsonObject: jsonData)
+        self.sendToPostOffice(requestId: requestId, result: result)
     }
     
-    private func sendToPostOffice(jsonObject: Any) {
+    private func sendToPostOffice(requestId: NSNumber, result: Any?) {
+        var jsonObject: [String: Any] = ["id": requestId]
+        if let result = result {
+            jsonObject["result"] = result
+        }
+        
         let json = try! JSONSerialization.data(withJSONObject: jsonObject, options: [])
 
         guard let jsonString = String(data: json, encoding: .utf8) else { return }

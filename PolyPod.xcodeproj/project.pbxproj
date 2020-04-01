@@ -43,6 +43,11 @@
 		1AF468A6242252E200E51B6D /* dataBrowserManifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF468A3242252E200E51B6D /* dataBrowserManifest.json */; };
 		1AF468A7242252E200E51B6D /* dataBrowser.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AF468A4242252E200E51B6D /* dataBrowser.js */; };
 		1AF468A9242263FC00E51B6D /* polyLook.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AF468A8242263FC00E51B6D /* polyLook.css */; };
+		1AF468AB242A338700E51B6D /* MessageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AA242A338700E51B6D /* MessageName.swift */; };
+		1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AF242A34CF00E51B6D /* PolyIn.swift */; };
+		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
+		1AF468B4242A350800E51B6D /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B3242A350800E51B6D /* Preferences.swift */; };
+		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +89,11 @@
 		1AF468A3242252E200E51B6D /* dataBrowserManifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dataBrowserManifest.json; sourceTree = "<group>"; };
 		1AF468A4242252E200E51B6D /* dataBrowser.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dataBrowser.js; sourceTree = "<group>"; };
 		1AF468A8242263FC00E51B6D /* polyLook.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = polyLook.css; sourceTree = "<group>"; };
+		1AF468AA242A338700E51B6D /* MessageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageName.swift; sourceTree = "<group>"; };
+		1AF468AF242A34CF00E51B6D /* PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyIn.swift; sourceTree = "<group>"; };
+		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
+		1AF468B3242A350800E51B6D /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +151,11 @@
 				1AF468A8242263FC00E51B6D /* polyLook.css */,
 				1AA6DE502419212E008DB1B2 /* pod.js */,
 				1AA6DE4724192091008DB1B2 /* postOffice.js */,
+				1AF468AA242A338700E51B6D /* MessageName.swift */,
+				1AF468AF242A34CF00E51B6D /* PolyIn.swift */,
+				1AF468B1242A34D700E51B6D /* PolyOut.swift */,
+				1AF468B3242A350800E51B6D /* Preferences.swift */,
+				1AF468DB24349E6B00E51B6D /* PodApi.swift */,
 			);
 			path = PodApi;
 			sourceTree = "<group>";
@@ -309,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */,
 				1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */,
 				1AA6DE3724191C94008DB1B2 /* FeatureViewController.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
@@ -316,7 +332,11 @@
 				1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */,
 				1AF46893241FBA7200E51B6D /* JSONSerialization+Addition.swift in Sources */,
 				1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */,
+				1AF468B4242A350800E51B6D /* Preferences.swift in Sources */,
+				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
+				1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */,
 				1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */,
+				1AF468AB242A338700E51B6D /* MessageName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
