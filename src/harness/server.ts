@@ -46,27 +46,27 @@ export async function serve(
 
     // TODO use express.static?
 
-    app.get("/feature.js", async (req, res) => {
+    app.get("/feature.js", (req, res) => {
         res.contentType("text/javascript");
         sendFile(manifest.jsPath, res);
     });
 
-    app.get("/feature.css", async (req, res) => {
+    app.get("/feature.css", (req, res) => {
         res.contentType("text/css");
         sendFile(manifest.cssPath, res);
     });
 
-    app.get("/react.js", async (req, res) => {
+    app.get("/react.js", (req, res) => {
         res.contentType("text/javascript");
         sendFile(config.reactPath, res);
     });
 
-    app.get("/react-dom.js", async (req, res) => {
+    app.get("/react-dom.js", (req, res) => {
         res.contentType("text/javascript");
         sendFile(config.reactDomPath, res);
     });
 
-    app.get("/bootstrap.js", async (req, res) => {
+    app.get("/bootstrap.js", (req, res) => {
         res.contentType("text/javascript");
         sendFile(config.bootstrapPath, res);
     });

@@ -5,7 +5,7 @@ import {Volume} from "memfs";
 import {promises as fs} from "fs";
 import {rootDir} from "../_dir";
 import {join} from "path";
-import {defaultConfig, serve} from "../harness/server";
+import {serve} from "../harness/server";
 import {fetchWithBaseURI, rawPromise} from "../util";
 import {once} from "events";
 import {AddressInfo} from "net";
