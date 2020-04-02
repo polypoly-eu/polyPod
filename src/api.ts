@@ -1,3 +1,8 @@
+/**
+ * API type description for the interaction between Feature and Pod.
+ * @packageDocumentation
+ */
+
 import * as RDF from "rdf-js";
 
 export interface Matcher {
