@@ -5,7 +5,9 @@ import {json} from "body-parser";
 
 export function rpcRouter(reqres: EndpointReqRes, typeson: Typeson): RequestHandler {
     const router = Router();
-    router.use(json());
+    router.use(json({
+        limit: "10mb"
+    }));
     router.post("/", async (request, response) => {
         const req = typeson.revive(request.body);
         let json: any;
