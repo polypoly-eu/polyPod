@@ -145,32 +145,24 @@ extension FeatureViewController: WKScriptMessageHandler {
     private func doAddQuads(data: [String: Any]) {
         // todo: add checks here
         
-        print("functionality missing: doAddQuads")
-        
         let requestId = data["id"] as! NSNumber
 
-        let quads = data["quads"] as? [[String: Any]]
+        if let quads = data["quads"] as? [[String: Any]] {
+            sharedPodApi.polyIn.addQuads(quads: quads)
+        }
 
-        let success = try? JSONSerialization.save(jsonObject: quads, toFilename: "quads")
-        
         self.sendToPostOffice(requestId: requestId, result: nil)
     }
     
     private func doSelectQuads(data: [String: Any]) {
         // todo: add checks here
-        
-        print("functionality missing: doSelectQuads")
-        
+
         let requestId = data["id"] as! NSNumber
         
         let matcher = data["matcher"] as? [[String: Any]]
         
-        var result: Any?
-        
-        if let storedQuads = try? JSONSerialization.loadJSON(withFilename: "quads") as? [[String : Any]] {
-            result = storedQuads
-        }
-        
+        let result: Any? = sharedPodApi.polyIn.selectQuads(matcher: matcher)
+
         self.sendToPostOffice(requestId: requestId, result: result)
     }
     

@@ -10,4 +10,13 @@ import Foundation
 
 class PolyIn {
     
+    func addQuads(quads: [[String: Any]]) {
+        let success = try? JSONSerialization.save(jsonObject: quads, toFilename: "quads")
+        print("added quads: ", success ?? "failed")
+    }
+    
+    func selectQuads(matcher: [[String: Any]]?) -> Any? {
+        let storedQuads = try? JSONSerialization.loadJSON(withFilename: "quads") as? [[String : Any]]
+        return storedQuads
+    }
 }
