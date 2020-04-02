@@ -40,7 +40,7 @@
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "eslint": "^6.8.0",
-    "fast-check": "^1.23.0",
+    "fast-check": "^1.24.1",
     "jasmine": "^3.5.0",
     "jasmine-spec-reporter": "^5.0.1",
     "karma": "^4.4.1",
