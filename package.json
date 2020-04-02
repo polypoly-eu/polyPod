@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
-    "dev": "rollup -c -w",
+    "dev": "tsc --watch --incremental",
+    "bundle": "rollup -c",
     "eslint": "eslint src --ext .ts",
     "test": "tsc --noEmit && jest"
   },
@@ -28,18 +29,26 @@
   "devDependencies": {
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-typescript": "^7.8.3",
-    "@polypoly-eu/poly-look": "0.0.3",
     "@types/express": "^4.17.4",
     "@types/jest": "^25.1.2",
+    "@types/jsdom": "^16.2.0",
+    "@types/mkdirp": "^1.0.0",
     "@types/node": "^13.9.8",
-    "@types/yargs": "^15.0.4",
     "@types/rdf-js": "^2.0.11",
     "@types/rdfjs__dataset": "^1.0.0",
+    "@types/sass": "^1.16.0",
+    "@types/yargs": "^15.0.4",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "babel-jest": "^25.2.4",
     "eslint": "^6.8.0",
     "jest": "^25.2.4",
+    "jsdom": "^16.2.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "tempy": "^0.5.0",
     "typescript": "^3.7.5"
   },
   "dependencies": {
@@ -53,9 +62,12 @@
     "@rollup/plugin-sucrase": "^3.0.0",
     "express": "^4.17.1",
     "memfs": "^3.1.2",
+    "mkdirp": "^1.0.3",
     "node-fetch": "^2.6.0",
+    "node-sass-tilde-importer": "^1.0.2",
     "open": "^7.0.3",
     "rollup": "^2.3.2",
+    "sass": "^1.26.3",
     "yargs": "^15.3.1"
   }
 }

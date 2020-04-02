@@ -1,12 +1,14 @@
-import {Manifest, readManifest} from "../feature/manifest";
-import {promises as fs} from "fs";
 import {join} from "path";
+import {Package, readPackage} from "../feature/package";
 
-export async function detectFeature(_dir?: string): Promise<Manifest> {
-    const dir = _dir || process.cwd();
+export interface Ops {
+    dir?: string;
+}
+
+export async function detectFeature(options: Ops): Promise<Package> {
+    const dir = options.dir || process.cwd();
     const packageJson = join(dir, "package.json");
-    await fs.stat(packageJson);
-    return readManifest(packageJson);
+    return readPackage(packageJson);
 }
 
 export async function block(): Promise<void> {

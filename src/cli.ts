@@ -1,5 +1,6 @@
 import yargs from "yargs";
-import {devCommand} from "./cli/dev";
+import {serveCommand} from "./cli/serve";
+import {buildCommand} from "./cli/build";
 
 yargs
     .options({
@@ -10,7 +11,7 @@ yargs
         }
     })
     .command(
-        "dev [port]",
+        "serve [port]",
         "start the development server",
         yargs =>
             yargs
@@ -30,20 +31,32 @@ yargs
                         default: false,
                         alias: "log",
                         describe: "log API actions"
-                    },
-                    s: {
-                        alias: "strategy",
-                        default: "lazy",
-                        describe: "asset loading strategy",
-                        choices: ["lazy", "eager"]
                     }
                 }),
-        argv => devCommand({
+        argv => serveCommand({
             log: argv.l,
             dir: argv.d,
             port: argv.port,
-            inmemory: argv.m,
-            strategy: argv.s
+            inmemory: argv.m
         })
     )
-    .argv;
+    .command(
+        "build",
+        "build the feature",
+        yargs =>
+            yargs
+                .options({
+                    w: {
+                        type: "boolean",
+                        default: false,
+                        alias: "watch",
+                        describe: "watch sources and rebuild"
+                    }
+                }),
+        argv => buildCommand({
+            dir: argv.d,
+            watch: argv.w
+        })
+    )
+    .help()
+    .parse();

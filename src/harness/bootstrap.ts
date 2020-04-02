@@ -10,5 +10,7 @@ const feature = new Feature();
 (async () => {
     const pod = remotePod(fromFetch("/rpc", window.fetch), dataFactory);
     await feature.init(pod);
-    console.log("Done initializing");
+    await window.fetch("/bootstrapped", {
+        method: "post"
+    });
 })();

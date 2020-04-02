@@ -13,6 +13,18 @@ export const nullLogger: Logger = {
     finished: () => {}
 };
 
+export const defaultLogger: Logger = {
+    called: (operation, args) =>
+        console.log(`Operation ${operation} called with arguments: ${JSON.stringify(args)}`),
+    finished: (operation, ret?) => {
+        console.log(`Operation ${operation} finished.`);
+        if (ret) {
+            console.log(`Return value:`);
+            console.dir(ret);
+        }
+    }
+};
+
 export class LogPod implements Pod {
 
     constructor(
