@@ -6,3 +6,4 @@ src
 *.tgz
 .eslintrc.js
 .github
+docs
