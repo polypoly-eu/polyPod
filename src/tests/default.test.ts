@@ -1,5 +1,6 @@
 import {podSpec} from "../specs/api";
-import {MockPod} from "../mock";
+import {DefaultPod} from "../default";
+import {dataset} from "@rdfjs/dataset";
 // @ts-ignore
 import fetch from "node-fetch";
 import {Volume} from "memfs";
@@ -7,7 +8,8 @@ import {Volume} from "memfs";
 describe("Mock pod", () => {
 
     podSpec(
-        () => new MockPod(
+        () => new DefaultPod(
+            dataset(),
             new Volume().promises as any,
             fetch
         )
