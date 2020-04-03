@@ -21,7 +21,6 @@ export default {
     external: [
         "@polypoly-eu/rdf",
         "@polypoly-eu/rdf-spec",
-        "@rdfjs/dataset",
         "body-parser",
         "chai",
         "chai-as-promised",

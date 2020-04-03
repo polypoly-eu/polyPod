@@ -1,20 +1,17 @@
 import * as RDF from "rdf-js";
-import {dataset, defaultGraph} from "@rdfjs/dataset";
 import {dataFactory} from "@polypoly-eu/rdf";
 import {Pod, PolyIn, PolyOut} from "./api";
 import {promises as _fs} from "fs";
 
 export type Fetch = typeof window.fetch;
 
-export class MockPod implements Pod {
-
-    public readonly store: RDF.DatasetCore;
+export class DefaultPod implements Pod {
 
     constructor(
+        public readonly store: RDF.DatasetCore,
         public readonly fs: typeof _fs,
         public readonly fetch: Fetch
     ) {
-        this.store = dataset();
     }
 
     get polyIn(): PolyIn {
@@ -22,11 +19,11 @@ export class MockPod implements Pod {
             factory: dataFactory,
             select: async matcher =>
                 Array.from(
-                    this.store.match(matcher.subject, matcher.predicate, matcher.object, defaultGraph())
+                    this.store.match(matcher.subject, matcher.predicate, matcher.object, dataFactory.defaultGraph())
                 ),
             add: async (...quads) =>
                 quads.forEach(quad => {
-                    if (!quad.graph.equals(defaultGraph()))
+                    if (!quad.graph.equals(dataFactory.defaultGraph()))
                         throw new Error("Only default graph allowed");
                     this.store.add(quad);
                 })
