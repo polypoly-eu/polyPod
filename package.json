@@ -9,7 +9,7 @@
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "test": "jest",
-    "docs": "typedoc --out docs src"
+    "docs": "typedoc"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
