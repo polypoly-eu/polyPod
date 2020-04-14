@@ -1,3 +1,18 @@
+/**
+ * Executable specification of the [[Pod]] API, comprising a set of tests. The main class is [[PodSpec]].
+ *
+ * All Pod implementations should be able to run these tests successfully.
+ *
+ * The tests use [Chai](https://www.chaijs.com/) for assertions that are independent from any one test framework. Tests
+ * are written using the standard functions `describe`, `it`, and `beforeEach`. This allows them to run under different
+ * frameworks, such as:
+ *
+ * - [Mocha](https://mochajs.org/)
+ * - [Jest](https://jestjs.io/)
+ *
+ * @packageDocumentation
+ */
+
 import {Pod} from "../api";
 import fc from "fast-check";
 import {gens} from "@polypoly-eu/rdf-spec";
@@ -14,10 +29,22 @@ import {AddressInfo} from "net";
 
 chai.use(chaiAsPromised);
 
+/**
+ * An extension of the [[Pod]] interface that provides access to the underlying filesystem.
+ */
 export type PodUnderTest = Pod & {
     readonly fs: typeof _fs;
 }
 
+/**
+ * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].
+ *
+ * It assumes that Pods can be cheaply created and expose access to the underlying filesystem (via [[PodUnderTest]]).
+ * The specification manipulates files only under a path that is provided in the constructor. Callers should ensure
+ * that the path exists, is empty, and not used for other purposes.
+ *
+ * Note that the tests create and tear down HTTP servers to exercise [[PolyOut]].
+ */
 export class PodSpec {
 
     constructor(
@@ -158,6 +185,9 @@ export class PodSpec {
 
 }
 
+/**
+ * Convenience function to instantiate the [[PodSpec]] and run it immediately afterwards.
+ */
 export function podSpec(podFactory: () => PodUnderTest, path = "/"): void {
     return new PodSpec(podFactory, path).run();
 }
