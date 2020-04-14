@@ -14,12 +14,7 @@ import nodeSassTildeImporter from "node-sass-tilde-importer";
 
 const plugins: Plugin[] = [
     resolve(),
-    commonjs({
-        namedExports: {
-            "react": ["createElement"],
-            "react-dom": ["render"],
-        }
-    }),
+    commonjs(),
     sucrase({
         exclude: [`${rootDir}/node_modules/**`],
         transforms: ["typescript", "jsx"]

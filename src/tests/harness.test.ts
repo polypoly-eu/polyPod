@@ -1,6 +1,6 @@
 import {Pod} from "@polypoly-eu/poly-api";
 import {Logger, LogPod} from "../pods/log-pod";
-import {MockPod} from "@polypoly-eu/poly-api";
+import {DefaultPod} from "@polypoly-eu/poly-api";
 import {Volume} from "memfs";
 import {promises as fs} from "fs";
 import {rootDir} from "../_dir";
@@ -12,6 +12,7 @@ import {AddressInfo} from "net";
 import {JSDOM} from "jsdom";
 import {tempBundle} from "./util";
 import tempy from "tempy";
+import {dataset} from "@rdfjs/dataset";
 // @ts-ignore
 import fetch from "node-fetch";
 
@@ -45,7 +46,7 @@ describe("Harness", () => {
 
     beforeEach(() => {
         logger = jestMockLogger();
-        pod = new LogPod(new MockPod(new Volume().promises as any, fetch), logger);
+        pod = new LogPod(new DefaultPod(dataset(), new Volume().promises as any, fetch), logger);
     });
 
     it("Feature can be bootstrapped", async () => {

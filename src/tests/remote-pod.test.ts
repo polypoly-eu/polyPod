@@ -1,4 +1,4 @@
-import {MockPod, podSpec} from "@polypoly-eu/poly-api";
+import {DefaultPod, podSpec} from "@polypoly-eu/poly-api";
 import {Volume} from "memfs";
 import {Server} from "http";
 import express from "express";
@@ -8,9 +8,10 @@ import {remotePod} from "../pods/remote-pod";
 import {fromFetch} from "@polypoly-eu/postoffice";
 import {dataFactory} from "@polypoly-eu/rdf";
 import {AddressInfo} from "net";
+import {VolatilePod} from "../pods/volatile-pod";
+import {dataset} from "@rdfjs/dataset";
 // @ts-ignore
 import fetch from "node-fetch";
-import {VolatilePod} from "../pods/volatile-pod";
 
 describe("Remote pod", () => {
 
@@ -30,7 +31,7 @@ describe("Remote pod", () => {
     describe("Spec", () => {
         podSpec(() => {
             const fs = new Volume().promises as any;
-            volatile.pod = new MockPod(fs, fetch);
+            volatile.pod = new DefaultPod(dataset(), fs, fetch);
             const pod = remotePod(fromFetch(`http://localhost:${port}/rpc`, fetch), dataFactory);
             return Object.assign(pod, { fs });
         });
