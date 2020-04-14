@@ -3,11 +3,12 @@ import {promises as fs} from "fs";
 import {join} from "path";
 import {rootDir} from "../_dir";
 import {spawnSync, SpawnSyncOptions} from "child_process";
-import {FeatureConstructor} from "@polypoly-eu/poly-api";
+import {DefaultPod, FeatureConstructor} from "@polypoly-eu/poly-api";
 import {createContext, runInContext} from "vm";
 import {tempBundle} from "./util";
-
-const globalFiles = [".npmrc"];
+import {dataset} from "@rdfjs/dataset";
+// @ts-ignore
+import fetch from "node-fetch";
 
 function installAndBuild(cli: string, path: string): void {
     const opts: SpawnSyncOptions = {
@@ -18,7 +19,6 @@ function installAndBuild(cli: string, path: string): void {
         }
     };
 
-    expect(spawnSync("npm", ["install"], opts)).toHaveProperty("status", 0);
     expect(spawnSync("node", [cli, "build"], opts)).toHaveProperty("status", 0);
 }
 
@@ -41,28 +41,25 @@ describe("Build", () => {
             path = tempy.directory();
             for (const file of testProjectFiles)
                 await fs.copyFile(join(projectPath, file), join(path, file));
-            for (const file of globalFiles)
-                await fs.copyFile(join(rootDir, file), join(path, file));
         });
 
         it("orodruin build", async () => {
             installAndBuild(cliPath, path);
 
             const distJS = await fs.readFile(join(path, "dist", "feature.js"), { encoding: "utf-8" });
-            const console = {
-                log: jest.fn()
-            };
 
-            const context = createContext({ console });
+            const context = createContext();
             runInContext(distJS, context);
 
             expect(context).toHaveProperty("Feature");
 
             const Feature: FeatureConstructor = context.Feature;
 
-            new Feature().init(null!);
+            const pod = new DefaultPod(dataset(), fs, fetch);
 
-            expect(console.log).toHaveBeenCalledWith("Test");
+            new Feature().init(pod);
+
+            expect(pod.store.size).toEqual(1);
 
             await fs.stat(join(path, "dist", "feature.css"));
         });
