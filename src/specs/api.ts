@@ -98,7 +98,7 @@ export class PodSpec {
                 let server: Server;
                 let port: number;
 
-                beforeAll(async () => {
+                beforeEach(async () => {
                     const app = express();
                     app.get("/test", (request, response) => {
                         response.contentType("application/json");
@@ -141,7 +141,7 @@ export class PodSpec {
                     await assert.isRejected(response, /404/);
                 });
 
-                afterAll(async () => {
+                afterEach(async () => {
                     server.close();
                     await once(server, "close");
                 });
