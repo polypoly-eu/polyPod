@@ -11,8 +11,7 @@ import * as RDF from "rdf-js";
 import {dataFactory} from "@polypoly-eu/rdf";
 import {Pod, PolyIn, PolyOut} from "./api";
 import {promises as _fs} from "fs";
-
-export type Fetch = typeof window.fetch;
+import {Fetch} from "./fetch";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -65,17 +64,8 @@ export class DefaultPod implements Pod {
         return {
             readFile: async (path, options) =>
                 this.fs.readFile(path, { encoding: options.encoding }),
-            httpRequest: async (url, method, body?, headers?) => {
-                const response = await this.fetch(url, {
-                    method,
-                    headers,
-                    body
-                });
-                if (response.ok)
-                    return await response.text();
-                else
-                    throw new Error(response.status.toString());
-            }
+            fetch:
+                this.fetch
         };
     }
 
