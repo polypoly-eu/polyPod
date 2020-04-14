@@ -80,6 +80,7 @@ export const configs = {
             "open",
             "mkdirp",
             "node-sass-tilde-importer",
+            "@rdfjs/dataset",
             "rollup",
             "rollup-plugin-node-builtins",
             "rollup-plugin-node-globals",
