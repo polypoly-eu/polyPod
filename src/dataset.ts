@@ -1,5 +1,5 @@
 import {DataFactory, DatasetCoreFactory} from "rdf-js";
-import assert from "assert";
+import {assert} from "chai";
 import {namespace} from "./namespace";
 
 export class DatasetSpec {

@@ -8,7 +8,7 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "test": "jest"
+    "test": "jest && ts-mocha src/tests/**.test.ts"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -28,6 +28,7 @@
     "@rdfjs/data-model": "^1.1.2",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.0.0",
+    "@types/chai": "^4.2.11",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.11.1",
     "@types/rdf-js": "^2.0.12",
@@ -36,11 +37,14 @@
     "@typescript-eslint/parser": "^2.28.0",
     "eslint": "^6.8.0",
     "jest": "^25.3.0",
+    "mocha": "^7.1.1",
     "rollup": "^1.31.1",
     "ts-jest": "^25.3.1",
+    "ts-mocha": "^7.0.0",
     "typescript": "^3.7.5"
   },
   "dependencies": {
+    "chai": "^4.2.0",
     "fast-check": "^1.24.1"
   }
 }
