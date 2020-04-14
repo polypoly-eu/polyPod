@@ -1,7 +1,7 @@
 import fc from "fast-check";
 import {gens} from "./gen";
 import {DataFactory, Variable} from "rdf-js";
-import assert from "assert";
+import {assert} from "chai";
 
 export class DataFactorySpec {
     constructor(
@@ -627,28 +627,30 @@ export class DataFactorySpec {
                 const pairs = keys.flatMap(key1 =>
                     keys.filter(key2 => key1 !== key2).map(key2 => [key1, key2])
                 );
-                it.each(pairs)("%s/%s", (key1, key2) => {
-                    const gen1 = (gen as any)[key1];
-                    const gen2 = (gen as any)[key2];
-                    if (gen1 === undefined || gen2 === undefined)
-                        return;
-                    fc.assert(fc.property(gen1, gen2, (term1, term2) => {
-                        assert.equal((term1 as any).equals(term2), false);
-                    }));
-                });
+                for (const [key1, key2] of pairs)
+                    it(`${key1}/${key2}`, () => {
+                        const gen1 = (gen as any)[key1];
+                        const gen2 = (gen as any)[key2];
+                        if (gen1 === undefined || gen2 === undefined)
+                            return;
+                        fc.assert(fc.property(gen1, gen2, (term1, term2) => {
+                            assert.equal((term1 as any).equals(term2), false);
+                        }));
+                    });
             });
             describe("not equal (quad/triple)", () => {
                 const keys = ["quad", "triple"];
                 const pairs = keys.flatMap(key1 =>
                     keys.filter(key2 => key1 !== key2).map(key2 => [key1, key2])
                 );
-                it.each(pairs)("%s/%s", (key1, key2) => {
-                    const gen1 = (gen as any)[key1];
-                    const gen2 = (gen as any)[key2];
-                    fc.assert(fc.property(gen1, gen2, (term1, term2) => {
-                        assert.equal((term1 as any).equals(term2), false);
-                    }));
-                });
+                for (const [key1, key2] of pairs)
+                    it(`${key1}/${key2}`, () => {
+                        const gen1 = (gen as any)[key1];
+                        const gen2 = (gen as any)[key2];
+                        fc.assert(fc.property(gen1, gen2, (term1, term2) => {
+                            assert.equal((term1 as any).equals(term2), false);
+                        }));
+                    });
             });
         });
     }
