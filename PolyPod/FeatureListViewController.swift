@@ -10,7 +10,7 @@ import UIKit
 
 class FeatureListViewController: UITableViewController {
 
-    let featuresList: [String] = sharedFeaturesWallet.featuresList()
+    let featuresList: [String] = FeaturesWallet.shared.featuresList()
 
     // MARK: - Table view data source
 

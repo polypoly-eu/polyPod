@@ -76423,7 +76423,7 @@ function featureDefinition() { 'use strict';
 
     const CompanyDetailsOverview = ({ company }) => {
         return react_1("div", { className: "companyDetailsOverview" },
-            react_1("img", { src: "pp_icon_paypal_blackcircle.png" }),
+            react_1("img", { src: "images/pp_icon_paypal_blackcircle.png" }),
             react_1("h2", null, company.name),
             react_1("div", { className: "wrapper" },
                 react_1("div", { className: "category" },
@@ -100579,12 +100579,12 @@ function featureDefinition() { 'use strict';
     }
 
     const AppList = ({ polyExplorer }) => react_1("div", { className: "app_list" },
-        react_1(AppButton, { label: "PayPal Data Ecosystem", img: "screen_paypal_story.png", onClick: () => polyExplorer.changeAppTo(react_1(CompanyDataEcosystemIntro, { polyExplorer: polyExplorer, companyId: 9 })) }),
-        react_1(AppButton, { label: "Company Finder", img: "screen_companies_search.png", onClick: () => polyExplorer.changeAppTo(react_1(CompanyFinder, { polyExplorer: polyExplorer })) }),
-        react_1(AppButton, { label: "Glossary of Terms", img: "screen_lexicon.png", onClick: () => { } }),
-        react_1(AppButton, { label: "The polypoly Tour", img: "screen_polypoly_tour.png", onClick: () => { } }),
-        react_1(AppButton, { label: "Your Feedback", img: "screen_feedback.png", onClick: () => { } }),
-        react_1(AppButton, { label: "Uninstall polypoly", img: "screen_uninstall.png", onClick: () => { } }));
+        react_1(AppButton, { label: "PayPal Data Ecosystem", img: "images/screen_paypal_story.png", onClick: () => polyExplorer.changeAppTo(react_1(CompanyDataEcosystemIntro, { polyExplorer: polyExplorer, companyId: 9 })) }),
+        react_1(AppButton, { label: "Company Finder", img: "images/screen_companies_search.png", onClick: () => polyExplorer.changeAppTo(react_1(CompanyFinder, { polyExplorer: polyExplorer })) }),
+        react_1(AppButton, { label: "Glossary of Terms", img: "images/screen_lexicon.png", onClick: () => { } }),
+        react_1(AppButton, { label: "The polypoly Tour", img: "images/screen_polypoly_tour.png", onClick: () => { } }),
+        react_1(AppButton, { label: "Your Feedback", img: "images/screen_feedback.png", onClick: () => { } }),
+        react_1(AppButton, { label: "Uninstall polypoly", img: "images/screen_uninstall.png", onClick: () => { } }));
 
     const Navigation = ({ polyExplorer }) => react_1("div", { id: "navigation" },
         react_1(dist_1, { label: "\u2190", disabled: true, onClick: () => { } }),

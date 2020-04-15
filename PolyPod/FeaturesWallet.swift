@@ -7,12 +7,14 @@
 //
 
 import Foundation
-
-let sharedFeaturesWallet = FeaturesWallet()
+import ZIPFoundation
+import Zip
 
 class FeaturesWallet {
 
-    lazy private var featuresFileUrl: URL = {
+    static let shared = FeaturesWallet()
+    
+    lazy var featuresFileUrl: URL = {
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let documentsUrl = URL(fileURLWithPath: documentsDirectory)
         let featuresUrl = documentsUrl.appendingPathComponent("Features")
@@ -63,11 +65,21 @@ class FeaturesWallet {
     }
     
     private func importFeature(_ featureName: String) {
-        let featureUrl = URL(string: featuresFileUrl.path)!.appendingPathComponent(featureName)
+        let featureDirUrl = URL(string: featuresFileUrl.path)!
+        let featureUrl = featureDirUrl.appendingPathComponent(featureName)
         if !FileManager.default.fileExists(atPath: featureUrl.absoluteString) {
             do {
-                try FileManager.default.createDirectory(atPath: featureUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
-                print("Imported feature: " + featureName)
+                try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
+                if let _ = Bundle.main.path(forResource: featureName, ofType: "zip") {
+                    let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip")!
+                    let unzipDirectory = try Zip.quickUnzipFile(filePath)
+                    try FileManager.default.moveItem(at: unzipDirectory, to: featuresFileUrl.appendingPathComponent(featureName))
+                    try FileManager.default.copyBundleFile(forResource: "feature", ofType: "js", toDestinationUrl: featureUrl)
+                    try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featureUrl)
+                    print("Imported feature: ", featureName)
+                } else {
+                    print("Feature for import not found: ", featureName)
+                }
             } catch {
                 print(error.localizedDescription);
             }

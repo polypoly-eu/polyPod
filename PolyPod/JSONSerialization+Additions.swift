@@ -1,5 +1,5 @@
 //
-//  JSONSerialization+Addition.swift
+//  JSONSerialization+Additions.swift
 //  PolyPod
 //
 //  Created by Carmen Burmeister on 16.03.20.

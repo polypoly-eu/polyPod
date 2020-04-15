@@ -48,20 +48,20 @@ class FeatureViewController: UIViewController {
         webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-        if let manifest = loadFeatureManifest() {
+        let featureUrl = FeaturesWallet.shared.featuresFileUrl.appendingPathComponent(featureName)
+        if let manifest = loadFeatureManifest(featureUrl) {
             let filePath = Bundle.main.path(forResource: "feature", ofType: "html")!
             var content = try! String(contentsOfFile: filePath)
             content = content.replacingOccurrences(of: "featureStyle", with: "\(manifest.style)")
             content = content.replacingOccurrences(of: "featureSource", with: "\(manifest.source)")
             content = content.replacingOccurrences(of: "featureName", with: "\(manifest.name)")
-            webView.loadHTMLString(content, baseURL: Bundle.main.resourceURL)
+            webView.loadHTMLString(content, baseURL: featureUrl)
         }
     }
     
-    private func loadFeatureManifest() -> Manifest? {
-        guard let filePath = Bundle.main.path(forResource: featureName + "Manifest", ofType: "json") else { return nil }
-        let fileUrl = URL(fileURLWithPath: filePath)
-        guard let data = try? Data(contentsOf: fileUrl) else { return nil }
+    private func loadFeatureManifest(_ url: URL) -> Manifest? {
+        let filePath = url.appendingPathComponent("Manifest.json")
+        guard let data = try? Data(contentsOf: filePath) else { return nil }
         let decoder = JSONDecoder()
         let manifest = try? decoder.decode(Manifest.self, from: data)
         return manifest

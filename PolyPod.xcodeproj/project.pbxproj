@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A00DFCC24460F320049F3F7 /* helloWorld.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFCB24460F320049F3F7 /* helloWorld.zip */; };
+		1A00DFEE2446FA6C0049F3F7 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 1A00DFED2446FA6C0049F3F7 /* Zip */; };
+		1A00DFF02446FFF50049F3F7 /* polyExplorer.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFEF2446FFF50049F3F7 /* polyExplorer.zip */; };
+		1A00DFF22446FFFB0049F3F7 /* twitterImporter.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF12446FFFB0049F3F7 /* twitterImporter.zip */; };
+		1A00DFF4244700070049F3F7 /* dataBrowser.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF3244700070049F3F7 /* dataBrowser.zip */; };
 		1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */; };
 		1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */; };
 		1AA6DE3724191C94008DB1B2 /* FeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3624191C94008DB1B2 /* FeatureViewController.swift */; };
@@ -14,43 +19,29 @@
 		1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3B24191C96008DB1B2 /* Assets.xcassets */; };
 		1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3D24191C96008DB1B2 /* LaunchScreen.storyboard */; };
 		1AA6DE4824192091008DB1B2 /* postOffice.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4724192091008DB1B2 /* postOffice.js */; };
-		1AA6DE522419212E008DB1B2 /* helloWorld.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4B2419212E008DB1B2 /* helloWorld.css */; };
-		1AA6DE532419212E008DB1B2 /* helloWorld.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4C2419212E008DB1B2 /* helloWorld.js */; };
-		1AA6DE542419212E008DB1B2 /* helloWorldManifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4D2419212E008DB1B2 /* helloWorldManifest.json */; };
 		1AA6DE552419212E008DB1B2 /* feature.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4E2419212E008DB1B2 /* feature.js */; };
 		1AA6DE572419212E008DB1B2 /* pod.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE502419212E008DB1B2 /* pod.js */; };
 		1AA6DE582419212E008DB1B2 /* feature.html in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE512419212E008DB1B2 /* feature.html */; };
 		1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5924192463008DB1B2 /* domConsole.js */; };
 		1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */; };
 		1AA6DE60241A2AE0008DB1B2 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5F241A2AE0008DB1B2 /* Manifest.swift */; };
-		1AF46882241F580B00E51B6D /* polyExplorer.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46877241F580B00E51B6D /* polyExplorer.css */; };
-		1AF46883241F580B00E51B6D /* polyExplorerManifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46878241F580B00E51B6D /* polyExplorerManifest.json */; };
-		1AF46884241F580B00E51B6D /* polyExplorer.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46879241F580B00E51B6D /* polyExplorer.js */; };
-		1AF46885241F580B00E51B6D /* screen_paypal_story.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687B241F580B00E51B6D /* screen_paypal_story.png */; };
-		1AF46886241F580B00E51B6D /* pp_icon_paypal_blackcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687C241F580B00E51B6D /* pp_icon_paypal_blackcircle.png */; };
-		1AF46887241F580B00E51B6D /* screen_polypoly_tour.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687D241F580B00E51B6D /* screen_polypoly_tour.png */; };
-		1AF46888241F580B00E51B6D /* screen_uninstall.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687E241F580B00E51B6D /* screen_uninstall.png */; };
-		1AF46889241F580B00E51B6D /* screen_lexicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4687F241F580B00E51B6D /* screen_lexicon.png */; };
-		1AF4688A241F580B00E51B6D /* screen_companies_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46880241F580B00E51B6D /* screen_companies_search.png */; };
-		1AF4688B241F580B00E51B6D /* screen_feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46881241F580B00E51B6D /* screen_feedback.png */; };
-		1AF46893241FBA7200E51B6D /* JSONSerialization+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerialization+Addition.swift */; };
-		1AF46898241FDFA800E51B6D /* twitterImporterManifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46895241FDFA800E51B6D /* twitterImporterManifest.json */; };
-		1AF46899241FDFA800E51B6D /* twitterImporter.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46896241FDFA800E51B6D /* twitterImporter.css */; };
-		1AF4689A241FDFA800E51B6D /* twitterImporter.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AF46897241FDFA800E51B6D /* twitterImporter.js */; };
+		1AF46893241FBA7200E51B6D /* JSONSerialization+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */; };
 		1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */; };
 		1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */; };
-		1AF468A5242252E200E51B6D /* dataBrowser.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AF468A2242252E200E51B6D /* dataBrowser.css */; };
-		1AF468A6242252E200E51B6D /* dataBrowserManifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF468A3242252E200E51B6D /* dataBrowserManifest.json */; };
-		1AF468A7242252E200E51B6D /* dataBrowser.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AF468A4242252E200E51B6D /* dataBrowser.js */; };
 		1AF468A9242263FC00E51B6D /* polyLook.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AF468A8242263FC00E51B6D /* polyLook.css */; };
 		1AF468AB242A338700E51B6D /* MessageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AA242A338700E51B6D /* MessageName.swift */; };
 		1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AF242A34CF00E51B6D /* PolyIn.swift */; };
 		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468B4242A350800E51B6D /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B3242A350800E51B6D /* Preferences.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
+		1AF468DE24361D9D00E51B6D /* FileManager+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManager+Additions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A00DFCB24460F320049F3F7 /* helloWorld.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = helloWorld.zip; sourceTree = "<group>"; };
+		1A00DFEF2446FFF50049F3F7 /* polyExplorer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = polyExplorer.zip; sourceTree = "<group>"; };
+		1A00DFF12446FFFB0049F3F7 /* twitterImporter.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = twitterImporter.zip; sourceTree = "<group>"; };
+		1A00DFF3244700070049F3F7 /* dataBrowser.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dataBrowser.zip; sourceTree = "<group>"; };
 		1AA6DE2F24191C94008DB1B2 /* PolyPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolyPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,40 +51,22 @@
 		1AA6DE3E24191C96008DB1B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AA6DE4024191C96008DB1B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AA6DE4724192091008DB1B2 /* postOffice.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = postOffice.js; sourceTree = "<group>"; };
-		1AA6DE4B2419212E008DB1B2 /* helloWorld.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = helloWorld.css; sourceTree = "<group>"; };
-		1AA6DE4C2419212E008DB1B2 /* helloWorld.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = helloWorld.js; sourceTree = "<group>"; };
-		1AA6DE4D2419212E008DB1B2 /* helloWorldManifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = helloWorldManifest.json; sourceTree = "<group>"; };
 		1AA6DE4E2419212E008DB1B2 /* feature.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = feature.js; sourceTree = "<group>"; };
 		1AA6DE502419212E008DB1B2 /* pod.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = pod.js; sourceTree = "<group>"; };
 		1AA6DE512419212E008DB1B2 /* feature.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = feature.html; sourceTree = "<group>"; };
 		1AA6DE5924192463008DB1B2 /* domConsole.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = domConsole.js; sourceTree = "<group>"; };
 		1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKUserContentController+Additions.swift"; sourceTree = "<group>"; };
 		1AA6DE5F241A2AE0008DB1B2 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
-		1AF46877241F580B00E51B6D /* polyExplorer.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = polyExplorer.css; sourceTree = "<group>"; };
-		1AF46878241F580B00E51B6D /* polyExplorerManifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = polyExplorerManifest.json; sourceTree = "<group>"; };
-		1AF46879241F580B00E51B6D /* polyExplorer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = polyExplorer.js; sourceTree = "<group>"; };
-		1AF4687B241F580B00E51B6D /* screen_paypal_story.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_paypal_story.png; sourceTree = "<group>"; };
-		1AF4687C241F580B00E51B6D /* pp_icon_paypal_blackcircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pp_icon_paypal_blackcircle.png; sourceTree = "<group>"; };
-		1AF4687D241F580B00E51B6D /* screen_polypoly_tour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_polypoly_tour.png; sourceTree = "<group>"; };
-		1AF4687E241F580B00E51B6D /* screen_uninstall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_uninstall.png; sourceTree = "<group>"; };
-		1AF4687F241F580B00E51B6D /* screen_lexicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_lexicon.png; sourceTree = "<group>"; };
-		1AF46880241F580B00E51B6D /* screen_companies_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_companies_search.png; sourceTree = "<group>"; };
-		1AF46881241F580B00E51B6D /* screen_feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_feedback.png; sourceTree = "<group>"; };
-		1AF46892241FBA7200E51B6D /* JSONSerialization+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Addition.swift"; sourceTree = "<group>"; };
-		1AF46895241FDFA800E51B6D /* twitterImporterManifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twitterImporterManifest.json; sourceTree = "<group>"; };
-		1AF46896241FDFA800E51B6D /* twitterImporter.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = twitterImporter.css; sourceTree = "<group>"; };
-		1AF46897241FDFA800E51B6D /* twitterImporter.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = twitterImporter.js; sourceTree = "<group>"; };
+		1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Additions.swift"; sourceTree = "<group>"; };
 		1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListViewController.swift; sourceTree = "<group>"; };
 		1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesWallet.swift; sourceTree = "<group>"; };
-		1AF468A2242252E200E51B6D /* dataBrowser.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = dataBrowser.css; sourceTree = "<group>"; };
-		1AF468A3242252E200E51B6D /* dataBrowserManifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dataBrowserManifest.json; sourceTree = "<group>"; };
-		1AF468A4242252E200E51B6D /* dataBrowser.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dataBrowser.js; sourceTree = "<group>"; };
 		1AF468A8242263FC00E51B6D /* polyLook.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = polyLook.css; sourceTree = "<group>"; };
 		1AF468AA242A338700E51B6D /* MessageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageName.swift; sourceTree = "<group>"; };
 		1AF468AF242A34CF00E51B6D /* PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyIn.swift; sourceTree = "<group>"; };
 		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468B3242A350800E51B6D /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
+		1AF468DD24361D9D00E51B6D /* FileManager+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A00DFEE2446FA6C0049F3F7 /* Zip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +110,8 @@
 				1AA6DE5F241A2AE0008DB1B2 /* Manifest.swift */,
 				1AA6DE3824191C94008DB1B2 /* Main.storyboard */,
 				1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */,
-				1AF46892241FBA7200E51B6D /* JSONSerialization+Addition.swift */,
+				1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */,
+				1AF468DD24361D9D00E51B6D /* FileManager+Additions.swift */,
 				1AA6DE3B24191C96008DB1B2 /* Assets.xcassets */,
 				1AA6DE3D24191C96008DB1B2 /* LaunchScreen.storyboard */,
 				1AA6DE4024191C96008DB1B2 /* Info.plist */,
@@ -176,9 +151,7 @@
 		1AA6DE4A2419212E008DB1B2 /* HelloWorld */ = {
 			isa = PBXGroup;
 			children = (
-				1AA6DE4B2419212E008DB1B2 /* helloWorld.css */,
-				1AA6DE4C2419212E008DB1B2 /* helloWorld.js */,
-				1AA6DE4D2419212E008DB1B2 /* helloWorldManifest.json */,
+				1A00DFCB24460F320049F3F7 /* helloWorld.zip */,
 			);
 			path = HelloWorld;
 			sourceTree = "<group>";
@@ -186,34 +159,15 @@
 		1AF46876241F57DB00E51B6D /* PolyExplorer */ = {
 			isa = PBXGroup;
 			children = (
-				1AF4687A241F580B00E51B6D /* images */,
-				1AF46877241F580B00E51B6D /* polyExplorer.css */,
-				1AF46879241F580B00E51B6D /* polyExplorer.js */,
-				1AF46878241F580B00E51B6D /* polyExplorerManifest.json */,
+				1A00DFEF2446FFF50049F3F7 /* polyExplorer.zip */,
 			);
 			path = PolyExplorer;
-			sourceTree = "<group>";
-		};
-		1AF4687A241F580B00E51B6D /* images */ = {
-			isa = PBXGroup;
-			children = (
-				1AF4687B241F580B00E51B6D /* screen_paypal_story.png */,
-				1AF4687C241F580B00E51B6D /* pp_icon_paypal_blackcircle.png */,
-				1AF4687D241F580B00E51B6D /* screen_polypoly_tour.png */,
-				1AF4687E241F580B00E51B6D /* screen_uninstall.png */,
-				1AF4687F241F580B00E51B6D /* screen_lexicon.png */,
-				1AF46880241F580B00E51B6D /* screen_companies_search.png */,
-				1AF46881241F580B00E51B6D /* screen_feedback.png */,
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 		1AF46894241FDF9100E51B6D /* TwitterImporter */ = {
 			isa = PBXGroup;
 			children = (
-				1AF46896241FDFA800E51B6D /* twitterImporter.css */,
-				1AF46897241FDFA800E51B6D /* twitterImporter.js */,
-				1AF46895241FDFA800E51B6D /* twitterImporterManifest.json */,
+				1A00DFF12446FFFB0049F3F7 /* twitterImporter.zip */,
 			);
 			path = TwitterImporter;
 			sourceTree = "<group>";
@@ -221,9 +175,7 @@
 		1AF468A1242252CC00E51B6D /* DataBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				1AF468A2242252E200E51B6D /* dataBrowser.css */,
-				1AF468A4242252E200E51B6D /* dataBrowser.js */,
-				1AF468A3242252E200E51B6D /* dataBrowserManifest.json */,
+				1A00DFF3244700070049F3F7 /* dataBrowser.zip */,
 			);
 			path = DataBrowser;
 			sourceTree = "<group>";
@@ -244,6 +196,9 @@
 			dependencies = (
 			);
 			name = PolyPod;
+			packageProductDependencies = (
+				1A00DFED2446FA6C0049F3F7 /* Zip */,
+			);
 			productName = PolyPod;
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
 			productType = "com.apple.product-type.application";
@@ -272,6 +227,9 @@
 				Base,
 			);
 			mainGroup = 1AA6DE2624191C94008DB1B2;
+			packageReferences = (
+				1A00DFEC2446FA6C0049F3F7 /* XCRemoteSwiftPackageReference "Zip" */,
+			);
 			productRefGroup = 1AA6DE3024191C94008DB1B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -286,34 +244,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AF46885241F580B00E51B6D /* screen_paypal_story.png in Resources */,
-				1AA6DE532419212E008DB1B2 /* helloWorld.js in Resources */,
+				1A00DFCC24460F320049F3F7 /* helloWorld.zip in Resources */,
 				1AA6DE552419212E008DB1B2 /* feature.js in Resources */,
-				1AF46886241F580B00E51B6D /* pp_icon_paypal_blackcircle.png in Resources */,
-				1AF46884241F580B00E51B6D /* polyExplorer.js in Resources */,
-				1AF468A5242252E200E51B6D /* dataBrowser.css in Resources */,
-				1AA6DE542419212E008DB1B2 /* helloWorldManifest.json in Resources */,
-				1AF46887241F580B00E51B6D /* screen_polypoly_tour.png in Resources */,
-				1AF4688B241F580B00E51B6D /* screen_feedback.png in Resources */,
-				1AF4688A241F580B00E51B6D /* screen_companies_search.png in Resources */,
-				1AF468A7242252E200E51B6D /* dataBrowser.js in Resources */,
+				1A00DFF02446FFF50049F3F7 /* polyExplorer.zip in Resources */,
+				1A00DFF22446FFFB0049F3F7 /* twitterImporter.zip in Resources */,
+				1A00DFF4244700070049F3F7 /* dataBrowser.zip in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
 				1AF468A9242263FC00E51B6D /* polyLook.css in Resources */,
 				1AA6DE582419212E008DB1B2 /* feature.html in Resources */,
-				1AF468A6242252E200E51B6D /* dataBrowserManifest.json in Resources */,
-				1AF46889241F580B00E51B6D /* screen_lexicon.png in Resources */,
-				1AF4689A241FDFA800E51B6D /* twitterImporter.js in Resources */,
-				1AF46888241F580B00E51B6D /* screen_uninstall.png in Resources */,
-				1AA6DE522419212E008DB1B2 /* helloWorld.css in Resources */,
 				1AA6DE572419212E008DB1B2 /* pod.js in Resources */,
-				1AF46883241F580B00E51B6D /* polyExplorerManifest.json in Resources */,
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
 				1AA6DE4824192091008DB1B2 /* postOffice.js in Resources */,
-				1AF46898241FDFA800E51B6D /* twitterImporterManifest.json in Resources */,
 				1AA6DE3A24191C94008DB1B2 /* Main.storyboard in Resources */,
-				1AF46882241F580B00E51B6D /* polyExplorer.css in Resources */,
-				1AF46899241FDFA800E51B6D /* twitterImporter.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,9 +273,10 @@
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
 				1AA6DE60241A2AE0008DB1B2 /* Manifest.swift in Sources */,
 				1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */,
-				1AF46893241FBA7200E51B6D /* JSONSerialization+Addition.swift in Sources */,
+				1AF46893241FBA7200E51B6D /* JSONSerialization+Additions.swift in Sources */,
 				1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */,
 				1AF468B4242A350800E51B6D /* Preferences.swift in Sources */,
+				1AF468DE24361D9D00E51B6D /* FileManager+Additions.swift in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */,
 				1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */,
@@ -481,6 +425,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PolyPod/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -498,6 +446,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PolyPod/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -532,6 +484,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1A00DFEC2446FA6C0049F3F7 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1A00DFED2446FA6C0049F3F7 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1A00DFEC2446FA6C0049F3F7 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1AA6DE2724191C94008DB1B2 /* Project object */;
 }
