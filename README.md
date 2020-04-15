@@ -26,6 +26,10 @@ Currently, the following libraries are covered:
 * the reference implementations according to the table above
 * [@graphy/core.data.factory](https://graphy.link/core.data.factory)
 
+The following implementations are known not to be spec-compliant:
+
+* [rdflib](https://github.com/linkeddata/rdflib.js)
+
 ## Example
 
 Assuming you want to test that the reference data factory implementation conforms to the specification, you can add this to your tests:
