@@ -7,3 +7,4 @@ src
 .eslintrc.js
 .github
 docs
+typedoc.json
