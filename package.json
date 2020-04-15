@@ -8,7 +8,9 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "test": "jest"
+    "test": "jest",
+    "docs": "typedoc",
+    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -30,10 +32,12 @@
     "@types/rdf-js": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",
+    "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
     "jest": "^25.3.0",
     "rollup": "^2.6.1",
     "ts-jest": "^25.3.1",
+    "typedoc": "^0.17.4",
     "typescript": "^3.7.5"
   }
 }

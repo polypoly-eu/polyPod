@@ -6,3 +6,5 @@ src
 *.tgz
 .eslintrc.js
 .github
+docs
+typedoc.json
