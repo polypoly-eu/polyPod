@@ -19,6 +19,13 @@ import {assert} from "chai";
  *
  * Equality of quads is tested against `null` which goes against the types but must be supported according to the
  * textual specification.
+ *
+ * The tests use [Chai](https://www.chaijs.com/) for assertions that are independent from any one test framework. Tests
+ * are written using the standard functions `describe` and `it`. This allows them to run under different frameworks,
+ * such as:
+ *
+ * - [Mocha](https://mochajs.org/)
+ * - [Jest](https://jestjs.io/)
  */
 export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
     constructor(
