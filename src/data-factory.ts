@@ -440,102 +440,7 @@ export class DataFactorySpec {
                     const graph = this.dataFactory.namedNode('http://example.org/graph');
                     const quad = this.dataFactory.quad(subject, predicate, object, graph);
 
-                    assert.equal(quad.equals(null), false);
-                });
-            });
-        });
-    }
-
-    triple(): void {
-        describe('.triple', () => {
-            it('should be a static method', () => {
-                assert.equal(typeof this.dataFactory.triple, 'function');
-            });
-
-            it('should create an object with .subject, .predicate and .object with the given values and .graph set to DefaultGraph', () => {
-                const subject = this.dataFactory.namedNode('http://example.org/subject');
-                const predicate = this.dataFactory.namedNode('http://example.org/predicate');
-                const object = this.dataFactory.namedNode('http://example.org/object');
-                const triple = this.dataFactory.triple(subject, predicate, object);
-
-                assert.equal(subject.equals(triple.subject), true);
-                assert.equal(predicate.equals(triple.predicate), true);
-                assert.equal(object.equals(triple.object), true);
-                assert.equal(this.dataFactory.defaultGraph().equals(triple.graph), true);
-            });
-
-            it('should ignore a 4th parameter and always use DefaultGraph', () => {
-                const subject = this.dataFactory.namedNode('http://example.org/subject');
-                const predicate = this.dataFactory.namedNode('http://example.org/predicate');
-                const object = this.dataFactory.namedNode('http://example.org/object');
-                const graph = this.dataFactory.namedNode('http://example.org/graph');
-                const triple = (this.dataFactory as any).triple(subject, predicate, object, graph);
-
-                assert.equal(this.dataFactory.defaultGraph().equals(triple.graph), true);
-            });
-
-            describe('.equals', () => {
-                it('should return true if the other triple contains the same subject, predicate and object', () => {
-                    const subject = this.dataFactory.namedNode('http://example.org/subject');
-                    const predicate = this.dataFactory.namedNode('http://example.org/predicate');
-                    const object = this.dataFactory.namedNode('http://example.org/object');
-                    const triple1 = this.dataFactory.triple(subject, predicate, object);
-                    const triple2 = this.dataFactory.triple(subject, predicate, object);
-
-                    assert.equal(triple1.equals(triple2), true);
-                });
-
-                it('should return false if the subject of the other triple is not the same', () => {
-                    const subject1 = this.dataFactory.namedNode('http://example.org/subject');
-                    const subject2 = this.dataFactory.namedNode('http://example.com/subject');
-                    const predicate = this.dataFactory.namedNode('http://example.org/predicate');
-                    const object = this.dataFactory.namedNode('http://example.org/object');
-                    const triple1 = this.dataFactory.triple(subject1, predicate, object);
-                    const triple2 = this.dataFactory.triple(subject2, predicate, object);
-
-                    assert.equal(triple1.equals(triple2), false);
-                });
-
-                it('should return false if the predicate of the other triple is not the same', () => {
-                    const subject = this.dataFactory.namedNode('http://example.org/subject');
-                    const predicate1 = this.dataFactory.namedNode('http://example.org/predicate');
-                    const predicate2 = this.dataFactory.namedNode('http://example.com/predicate');
-                    const object = this.dataFactory.namedNode('http://example.org/object');
-                    const triple1 = this.dataFactory.triple(subject, predicate1, object);
-                    const triple2 = this.dataFactory.triple(subject, predicate2, object);
-
-                    assert.equal(triple1.equals(triple2), false);
-                });
-
-                it('should return false if the object of the other triple is not the same', () => {
-                    const subject = this.dataFactory.namedNode('http://example.org/subject');
-                    const predicate = this.dataFactory.namedNode('http://example.org/predicate');
-                    const object1 = this.dataFactory.namedNode('http://example.org/object');
-                    const object2 = this.dataFactory.namedNode('http://example.com/object');
-                    const triple1 = this.dataFactory.triple(subject, predicate, object1);
-                    const triple2 = this.dataFactory.triple(subject, predicate, object2);
-
-                    assert.equal(triple1.equals(triple2), false);
-                });
-
-                it('should return false if the graph of the other quad is not the same', () => {
-                    const subject = this.dataFactory.namedNode('http://example.org/subject');
-                    const predicate = this.dataFactory.namedNode('http://example.org/predicate');
-                    const object = this.dataFactory.namedNode('http://example.org/object');
-                    const graph = this.dataFactory.namedNode('http://example.org/graph');
-                    const triple = this.dataFactory.triple(subject, predicate, object);
-                    const quad = this.dataFactory.quad(subject, predicate, object, graph);
-
-                    assert.equal(triple.equals(quad), false);
-                });
-
-                it('should return false if value is falsy', () => {
-                    const subject = this.dataFactory.namedNode('http://example.org/subject');
-                    const predicate = this.dataFactory.namedNode('http://example.org/predicate');
-                    const object = this.dataFactory.namedNode('http://example.org/object');
-                    const triple = this.dataFactory.triple(subject, predicate, object);
-
-                    assert.equal(triple.equals(null), false);
+                    assert.equal(quad.equals(null!), false);
                 });
             });
         });
@@ -661,7 +566,6 @@ export class DataFactorySpec {
         this.literal();
         this.namedNode();
         this.quad();
-        this.triple();
         this.variable();
         this.gen();
     }

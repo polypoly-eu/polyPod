@@ -7,18 +7,6 @@ describe("@rdfjs/data-model", () => {
     new DataFactorySpec(RDFJS).run();
 });
 
-const originalWarn = console.warn;
-
 describe("@graphy/core.data.factory", () => {
-    beforeEach(() => {
-        console.warn = () => {
-            // graphy prints too much noise
-        };
-    });
-
     new DataFactorySpec(Graphy).run();
-
-    afterEach(() => {
-        console.warn = originalWarn;
-    });
 });

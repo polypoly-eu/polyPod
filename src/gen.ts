@@ -32,7 +32,7 @@ export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory
     const object = fc.oneof(namedNode, literal, blankNode, ...variables);
     const graph = fc.oneof(fc.constant(factory.defaultGraph()), namedNode, blankNode, ...variables);
 
-    const triple = fc.tuple(subject, predicate, object).map(([s, p, o]) => factory.triple(s, p, o));
+    const triple = fc.tuple(subject, predicate, object).map(([s, p, o]) => factory.quad(s, p, o));
     const quad = fc.tuple(subject, predicate, object, graph).map(([s, p, o, g]) => factory.quad(s, p, o, g));
 
     return {
