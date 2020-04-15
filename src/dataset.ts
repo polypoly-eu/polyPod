@@ -1,11 +1,25 @@
-import {DataFactory, DatasetCoreFactory} from "rdf-js";
+/**
+ * Executable specification for datasets. See [[DatasetSpec]] for details.
+ *
+ * @packageDocumentation
+ */
+
+import {BaseQuad, DataFactory, DatasetCore, DatasetCoreFactory, Quad} from "rdf-js";
 import {assert} from "chai";
 import {namespace} from "./namespace";
 
-export class DatasetSpec {
+/**
+ * Class containing test cases data factories. Use [[DatasetSpec.run]] to execute all tests.
+ *
+ * This class requires both a dataset factory and a data factory.
+ *
+ * The tests are composed of simple unit tests originating from the
+ * [reference implementation](https://github.com/rdfjs-base/dataset).
+ */
+export class DatasetSpec<OutQuad extends BaseQuad = Quad, D extends DatasetCore<OutQuad> = DatasetCore<OutQuad>> {
     constructor(
-        private readonly datasetFactory: DatasetCoreFactory<any>,
-        private readonly dataFactory: DataFactory<any>
+        private readonly datasetFactory: DatasetCoreFactory<OutQuad, OutQuad, D>,
+        private readonly dataFactory: DataFactory<OutQuad>
     ) { }
 
     factory(): void {

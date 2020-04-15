@@ -1,11 +1,28 @@
+/**
+ * Executable specification for data factories. See [[DataFactorySpec]] for details.
+ *
+ * @packageDocumentation
+ */
+
 import fc from "fast-check";
 import {gens} from "./gen";
-import {DataFactory, Variable} from "rdf-js";
+import {BaseQuad, DataFactory, Quad, Variable} from "rdf-js";
 import {assert} from "chai";
 
-export class DataFactorySpec {
+/**
+ * Class containing test cases data factories. Use [[DataFactorySpec.run]] to execute all tests.
+ *
+ * The tests are composed of simple unit tests originating from the
+ * [reference implementation](https://github.com/rdfjs-base/data-model) and custom property tests.
+ *
+ * Tests dealing with variables are only executed if the data factory supports variables.
+ *
+ * Equality of quads is tested against `null` which goes against the types but must be supported according to the
+ * textual specification.
+ */
+export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
     constructor(
-        private readonly dataFactory: DataFactory<any>
+        private readonly dataFactory: DataFactory<OutQuad>
     ) {}
 
     blankNode(): void {

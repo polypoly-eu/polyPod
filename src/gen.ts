@@ -1,3 +1,9 @@
+/**
+ * [fast-check](https://github.com/dubzzz/fast-check/) generators for RDFJS entities. See [[gens]] for details.
+ *
+ * @packageDocumentation
+ */
+
 import fc, {Arbitrary} from "fast-check";
 import * as RDF from "rdf-js";
 
@@ -10,6 +16,17 @@ export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
     quad: Arbitrary<Q>;
 }
 
+/**
+ * Creates generators for RDFJS terms and quads based on a specified data factory.
+ *
+ * The generators adhere to the following rules:
+ *
+ * - named nodes contain web URLs
+ * - blank nodes contain strings with hexadecimal digits (no anonymous blanks are generated, because that would be
+ *   side-effecting)
+ * - literals are hexadecimal strings with the datatype being left undefined or a named node
+ * - variables are hexadecimal strings and are only generated if the data factory supports them
+ */
 export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory<Q>): Gens<Q> {
     const namedNode = fc.webUrl().map(url => factory.namedNode(url));
 
