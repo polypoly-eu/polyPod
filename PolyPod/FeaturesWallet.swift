@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ZIPFoundation
 import Zip
 
 class FeaturesWallet {
@@ -46,10 +45,8 @@ class FeaturesWallet {
         
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: featuresFileUrl, includingPropertiesForKeys: nil)
-
-            directoryContents.forEach { (url) in
-                featuresList.append(url.lastPathComponent)
-            }
+            let subDirs = directoryContents.filter{ $0.hasDirectoryPath }
+            featuresList = subDirs.map{ $0.lastPathComponent }
         } catch {
             print(error.localizedDescription)
         }
@@ -58,10 +55,23 @@ class FeaturesWallet {
     }
     
     func importFeatures() {
+        importEnvironmentFiles()
         importFeature("helloWorld")
         importFeature("twitterImporter")
         importFeature("polyExplorer")
         importFeature("dataBrowser")
+    }
+    
+    private func importEnvironmentFiles() {
+        let featureDirUrl = URL(string: featuresFileUrl.path)!
+        do {
+            try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.copyBundleFile(forResource: "feature", ofType: "js", toDestinationUrl: featureDirUrl)
+            try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featureDirUrl)
+            print("Imported environment files")
+        } catch {
+            print(error.localizedDescription);
+        }
     }
     
     private func importFeature(_ featureName: String) {
@@ -69,13 +79,10 @@ class FeaturesWallet {
         let featureUrl = featureDirUrl.appendingPathComponent(featureName)
         if !FileManager.default.fileExists(atPath: featureUrl.absoluteString) {
             do {
-                try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
                 if let _ = Bundle.main.path(forResource: featureName, ofType: "zip") {
                     let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip")!
                     let unzipDirectory = try Zip.quickUnzipFile(filePath)
                     try FileManager.default.moveItem(at: unzipDirectory, to: featuresFileUrl.appendingPathComponent(featureName))
-                    try FileManager.default.copyBundleFile(forResource: "feature", ofType: "js", toDestinationUrl: featureUrl)
-                    try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featureUrl)
                     print("Imported feature: ", featureName)
                 } else {
                     print("Feature for import not found: ", featureName)
