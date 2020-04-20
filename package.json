@@ -40,7 +40,7 @@
     "babel-jest": "^25.4.0",
     "eslint": "^6.8.0",
     "fast-check": "^1.24.1",
-    "jest": "^25.3.0",
+    "jest": "^25.4.0",
     "rollup": "^1.31.1",
     "typescript": "^3.7.5",
     "typeson-registry": "^1.0.0-alpha.35"
