@@ -36,7 +36,7 @@
     "@types/rdf-js": "^2.0.12",
     "@types/rdfjs__dataset": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
-    "@typescript-eslint/parser": "^2.28.0",
+    "@typescript-eslint/parser": "^2.29.0",
     "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
     "jest": "^25.4.0",
