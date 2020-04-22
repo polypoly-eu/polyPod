@@ -131,6 +131,10 @@ export class PodSpec {
                         response.contentType("application/json");
                         response.send(getResponse);
                     });
+                    app.get("/test-plain", (request, response) => {
+                        response.contentType("text/plain");
+                        response.send("plaintext");
+                    });
                     app.use(raw({
                         type: () => true
                     }));
@@ -143,29 +147,44 @@ export class PodSpec {
                     port = (server.address() as AddressInfo).port;
                 });
 
-                it("Successful GET", async () => {
+                it("Successful GET (text)", async () => {
                     const {polyOut} = this.podFactory();
-                    const response = await polyOut.httpRequest(`http://localhost:${port}/test`, "get");
-                    assert.equal(response, getResponse);
+                    const response = await polyOut.fetch(`http://localhost:${port}/test`);
+                    await assert.eventually.equal(response.text(), getResponse);
+                });
+
+                it("Successful GET (json)", async () => {
+                    const {polyOut} = this.podFactory();
+                    const response = await polyOut.fetch(`http://localhost:${port}/test`);
+                    await assert.eventually.deepEqual(response.json(), JSON.parse(getResponse));
+                });
+
+                it("Successful GET (plaintext)", async () => {
+                    const {polyOut} = this.podFactory();
+                    const response = await polyOut.fetch(`http://localhost:${port}/test-plain`);
+                    await assert.isRejected(response.json(), /json/i);
                 });
 
                 it("Successful POST", async () => {
                     const {polyOut} = this.podFactory();
-                    const response = await polyOut.httpRequest(
+                    const response = await polyOut.fetch(
                         `http://localhost:${port}/pong`,
-                        "post",
-                        postResponse,
                         {
-                            "Content-Type": "application/json"
+                            method: "post",
+                            body: postResponse,
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
                         }
                     );
-                    assert.equal(response, postResponse);
+
+                    await assert.eventually.equal(response.text(), postResponse);
                 });
 
                 it("404", async () => {
                     const {polyOut} = this.podFactory();
-                    const response = polyOut.httpRequest(`http://localhost:${port}/404`, "get");
-                    await assert.isRejected(response, /404/);
+                    const response = polyOut.fetch(`http://localhost:${port}/404`);
+                    await assert.eventually.propertyVal(response, "status", 404);
                 });
 
                 afterEach(async () => {
