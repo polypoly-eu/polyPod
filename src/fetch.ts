@@ -1,6 +1,6 @@
-type HeadersInit = string[][] | Record<string, string>;
+export type HeadersInit = string[][] | Record<string, string>;
 
-interface RequestInit {
+export interface RequestInit {
     body?: string;
     credentials?: RequestCredentials;
     headers?: HeadersInit;
@@ -12,7 +12,7 @@ interface RequestInit {
     referrerPolicy?: ReferrerPolicy;
 }
 
-interface Response {
+export interface Response {
     readonly ok: boolean;
     readonly redirected: boolean;
     readonly status: number;
