@@ -26,6 +26,7 @@ import {assert} from "chai";
  *
  * - [Mocha](https://mochajs.org/)
  * - [Jest](https://jestjs.io/)
+ * - [Jasmine](https://jasmine.github.io/)
  */
 export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
     constructor(

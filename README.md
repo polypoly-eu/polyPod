@@ -45,6 +45,10 @@ describe("@rdfjs/data-model", () => {
 
 This will execute a set of test cases using the provided factory.
 
+The tests are written in a style that allows them to be run under multiple test frameworks.
+We provides you a choice between (currently) Jest, Jasmine, or Mocha for your own tests.
+Please see the module documentation for more details.
+
 ## Limitations
 
 * The spec coverage could always be improved.
