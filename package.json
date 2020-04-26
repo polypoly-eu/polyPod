@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/polypoly-eu/podigree#readme",
   "dependencies": {
-    "@polypoly-eu/poly-api": "0.0.3"
+    "@polypoly-eu/poly-api": "0.0.4"
   },
   "devDependencies": {
     "@rollup/plugin-sucrase": "^3.0.0",
