@@ -34,7 +34,7 @@
     "@types/jsdom": "^16.2.1",
     "@types/mkdirp": "^1.0.0",
     "@types/node": "^13.13.2",
-    "@types/rdf-js": "^2.0.12",
+    "@types/rdf-js": "^3.0.0",
     "@types/rdfjs__dataset": "^1.0.1",
     "@types/sass": "^1.16.0",
     "@types/yargs": "^15.0.4",
