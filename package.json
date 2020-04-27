@@ -39,7 +39,7 @@
     "@typescript-eslint/parser": "^2.29.0",
     "babel-jest": "^25.4.0",
     "eslint": "^6.8.0",
-    "fast-check": "^1.24.1",
+    "fast-check": "^1.24.2",
     "jest": "^25.4.0",
     "rollup": "^1.31.1",
     "typescript": "^3.7.5",
