@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "es2019"
+    ],
+    "target": "es6",
+    "strict": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  }
+}
