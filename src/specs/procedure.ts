@@ -6,7 +6,7 @@ import chaiAsPromised from "chai-as-promised";
 
 chai.use(chaiAsPromised);
 
-export const procs: Record<string, Procedure<any, any>> = {
+const procs: Record<string, Procedure<any, any>> = {
     "number => number (success)":
         async (n: number) =>
             n + 1,

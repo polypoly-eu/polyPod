@@ -1,7 +1,7 @@
-import {Resource} from "../../specs/_util";
 import {Port} from "../../port";
 import {MessageChannel} from "worker_threads";
 import {fromNodeMessagePort} from "../../node";
+import {Resource} from "../../specs/_util";
 
 export async function nodeLoopbackLifecycle<T, U>(): Promise<Resource<[Port<T, U>, Port<U, T>]>> {
     const {port1, port2} = new MessageChannel();

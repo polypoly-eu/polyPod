@@ -12,7 +12,8 @@ module.exports = function (config) {
 
         files: [
             { pattern: "src/tests/universal/**/*.test.ts", type: "module" },
-            { pattern: "src/tests/browser/**/*.test.ts", type: "module" }
+            { pattern: "src/tests/browser/**/*.test.ts", type: "module" },
+            { pattern: "src/tests/data/**", included: false }
         ],
 
         preprocessors: {

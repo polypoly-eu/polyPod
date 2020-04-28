@@ -1,6 +1,6 @@
-import {Resource} from "../../specs/_util";
 import {mapPort, Port} from "../../port";
 import {fromBrowserMessagePort} from "../../browser";
+import {Resource} from "../../specs/_util";
 
 export async function browserLoopbackLifecycle<T, U>(): Promise<Resource<[Port<T, U>, Port<U, T>]>> {
     const {port1, port2} = new MessageChannel();

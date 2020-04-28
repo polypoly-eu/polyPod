@@ -61,3 +61,17 @@ export function join<In, Out>(send: SendPort<Out>, receive: ReceivePort<In>): Po
         addHandler: (handler: Consumer<In>) => receive.addHandler(handler)
     };
 }
+
+export function receiveSingle<In>(port: ReceivePort<In>): Promise<In> {
+    return new Promise(resolve => {
+        let done = false;
+        const handler: Consumer<In> = data => {
+            if (done)
+                return;
+
+            done = true;
+            resolve(data);
+        };
+        port.addHandler(handler);
+    });
+}
