@@ -129,9 +129,6 @@ export class Quad implements RDF.Quad {
  * The type of quads generated is [[Quad]], which restricts the term types of subject, predicate, object and graph
  * appropriately. For example, it is not permitted to use a [[Literal]] in subject position.
  *
- * The [[DataFactory.triple]] method is provided without guarantees since it is not covered by the spec, but mandated
- * by the types. Use [[DataFactory.quad]] instead with only three arguments.
- *
  * The values returned by this factory satisfy two additional assumptions:
  *
  * 1. They are direct instances of exported classes, such as [[BlankNode]].
@@ -167,10 +164,6 @@ export class DataFactory implements RDF.DataFactory<Quad> {
 
     quad(subject: RDF.Quad_Subject, predicate: RDF.Quad_Predicate, object: RDF.Quad_Object, graph?: RDF.Quad_Graph): Quad {
         return new Quad(subject, predicate, object, graph || this.defaultGraph());
-    }
-
-    triple(subject: RDF.Quad_Subject, predicate: RDF.Quad_Predicate, object: RDF.Quad_Object): Quad {
-        return this.quad(subject, predicate, object);
     }
 
     variable(value: string): Variable {
