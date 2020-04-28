@@ -8,3 +8,4 @@ src
 .github
 docs
 typedoc.json
+jasmine.json
