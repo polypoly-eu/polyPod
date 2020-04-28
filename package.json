@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@polypoly-eu/rdf": "0.0.1",
-    "@polypoly-eu/rdf-spec": "0.0.4",
+    "@polypoly-eu/rdf-spec": "0.0.5",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
