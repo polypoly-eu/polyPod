@@ -1,8 +1,8 @@
 import fc from "fast-check";
-import {bubblewrap, builtin, Handlers, Typeson} from "../index";
-import {typesonSpec} from "../specs/typeson";
 import {gens} from "@polypoly-eu/rdf-spec";
 import * as RDF from "@polypoly-eu/rdf";
+import {BubblewrapSpec, TypeInfos} from "../specs/bubblewrap";
+import {Bubblewrap, deserialize, serialize} from "../index";
 
 class TestA {
     constructor(
@@ -19,52 +19,78 @@ class TestB extends TestA {
     }
 }
 
-const handlers: Handlers = [
-    bubblewrap("test", TestA, TestB),
-    bubblewrap("eu.polypoly.rdf",
-        RDF.NamedNode,
-        RDF.BlankNode,
-        RDF.Literal,
-        RDF.Variable,
-        RDF.DefaultGraph,
-        RDF.Quad
-    )
-];
+class MyError extends Error {
+    constructor(
+        private readonly mymsg: string
+    ) {
+        super(`My message: ${mymsg}`);
+    }
 
-const typeson = new Typeson()
-    .register(builtin)
-    .register(handlers);
+    static [deserialize](mymsg: string): MyError {
+        return new MyError(mymsg);
+    }
+
+    [serialize](): any {
+        return this.mymsg;
+    }
+}
+
+type Types = {
+    A: TestA;
+    B: TestB;
+    MyError: MyError;
+    "@polypoly-eu/rdf.NamedNode": RDF.NamedNode;
+    "@polypoly-eu/rdf.BlankNode": RDF.BlankNode;
+    "@polypoly-eu/rdf.Literal": RDF.Literal;
+    "@polypoly-eu/rdf.Variable": RDF.Variable;
+    "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph;
+    "@polypoly-eu/rdf.Quad": RDF.Quad;
+};
+
+const gen = gens(RDF.dataFactory);
+
+const infos: TypeInfos<Types> = {
+    A: [TestA, fc.fullUnicodeString().map(a => new TestA(a))],
+    B: [TestB, fc.tuple(fc.fullUnicodeString(), fc.fullUnicodeString()).map(([a, b]) => new TestB(a, b))],
+    MyError: [MyError, fc.hexaString().map(m => new MyError(m))],
+    "@polypoly-eu/rdf.NamedNode": [RDF.NamedNode, gen.namedNode],
+    "@polypoly-eu/rdf.BlankNode": [RDF.BlankNode, gen.blankNode],
+    "@polypoly-eu/rdf.Literal": [RDF.Literal, gen.literal],
+    "@polypoly-eu/rdf.Variable": [RDF.Variable, gen.variable!],
+    "@polypoly-eu/rdf.DefaultGraph": [RDF.DefaultGraph, fc.constant(RDF.dataFactory.defaultGraph())],
+    "@polypoly-eu/rdf.Quad": [RDF.Quad, gen.quad]
+};
 
 describe("Bubblewrap", () => {
-    describe("Custom", () => {
-        typesonSpec("TestA", fc.fullUnicodeString().map(a => new TestA(a)), typeson, TestA);
-        typesonSpec("TestB", fc.tuple(fc.fullUnicodeString(), fc.fullUnicodeString()).map(([a, b]) => new TestB(a, b)), typeson, TestB);
+
+    describe("Spec", () => {
+        new BubblewrapSpec(infos).run();
     });
 
     describe("RDF", () => {
-        const gen = gens(RDF.dataFactory);
-        typesonSpec("Quad", gen.quad, typeson, RDF.Quad);
+        const {bubblewrap} = new BubblewrapSpec(infos);
 
-        describe("Post-revival equality", () => {
-            for (const [key, g] of Object.entries(gen))
-                it(key, () => {
-                    fc.assert(fc.property(g, term => {
-                        const revived = typeson.revive(typeson.encapsulate(term));
-                        expect((term as any).equals(revived)).toBe(true);
-                        expect(revived.equals(term)).toBe(true);
-                    }));
-                });
-        });
-
-        it("Bug", () => {
-            const s = RDF.dataFactory.namedNode("http://example.org");
-            const l1 = RDF.dataFactory.literal("hi1");
-            const l2 = RDF.dataFactory.literal("hi2");
-            const quads = [
-                RDF.dataFactory.triple(s, s, l1),
-                RDF.dataFactory.triple(s, s, l2)
-            ];
-            expect(typeson.revive(typeson.encapsulate(quads))).toEqual(quads);
-        });
+        for (const [key, g] of Object.entries(gen))
+            it(key, () => {
+                fc.assert(fc.property(g, term => {
+                    const decoded = bubblewrap.decode(bubblewrap.encode(term));
+                    expect((term as any).equals(decoded)).toBe(true);
+                    expect(decoded.equals(term)).toBe(true);
+                }));
+            });
     });
+
+    describe("Builtins", () => {
+        const bubblewrap = Bubblewrap.create();
+
+        it("Error", () => {
+            fc.assert(fc.property(fc.string(), msg => {
+                const err = new Error(msg);
+                const decoded = bubblewrap.decode(bubblewrap.encode(err));
+                expect(decoded).toEqual(err);
+                expect(decoded).toBeInstanceOf(Error);
+            }));
+        })
+    })
+
 });
