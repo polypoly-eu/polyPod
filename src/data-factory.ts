@@ -568,20 +568,6 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                         }));
                     });
             });
-            describe("not equal (quad/triple)", () => {
-                const keys = ["quad", "triple"];
-                const pairs = keys.flatMap(key1 =>
-                    keys.filter(key2 => key1 !== key2).map(key2 => [key1, key2])
-                );
-                for (const [key1, key2] of pairs)
-                    it(`${key1}/${key2}`, () => {
-                        const gen1 = (gen as any)[key1];
-                        const gen2 = (gen as any)[key2];
-                        fc.assert(fc.property(gen1, gen2, (term1, term2) => {
-                            assert.equal((term1 as any).equals(term2), false);
-                        }));
-                    });
-            });
         });
     }
 
