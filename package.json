@@ -8,7 +8,7 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "test": "tsc --noEmit && jest"
+    "test": "jest"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -24,8 +24,6 @@
   },
   "homepage": "https://github.com/polypoly-eu/bubblewrap#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.9.5",
-    "@babel/preset-typescript": "^7.9.0",
     "@polypoly-eu/rdf": "0.0.1",
     "@polypoly-eu/rdf-spec": "0.0.5",
     "@rollup/plugin-sucrase": "^3.0.0",
@@ -33,11 +31,11 @@
     "@types/rdf-js": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
-    "babel-jest": "^25.4.0",
     "eslint": "^6.8.0",
     "fast-check": "^1.24.2",
     "jest": "^25.4.0",
     "rollup": "^1.31.1",
+    "ts-jest": "^25.3.1",
     "typescript": "^3.7.5"
   },
   "dependencies": {
