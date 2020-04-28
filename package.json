@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/rdf-spec",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Standalone executable spec for RDFJS",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
