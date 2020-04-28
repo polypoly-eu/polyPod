@@ -1,5 +1,7 @@
 import {SendAndReplyPort} from "./procedure";
 import {mapSendPort} from "./port";
+import {Bubblewrap} from "@polypoly-eu/bubblewrap";
+import {Try} from "./util";
 
 export function fetchPort<T>(
     url: string,
@@ -50,6 +52,33 @@ export function jsonFetchPort(
         data => ({
             responder: data.responder,
             request: JSON.stringify(data.request)
+        })
+    );
+}
+
+export function bubblewrapFetchPort(
+    url: string,
+    bubblewrap: Bubblewrap,
+    fetch: typeof window.fetch
+): SendAndReplyPort<any, any> {
+    const rawPort = fetchPort<any>(
+        url,
+        "application/octet-stream",
+        async body => {
+            const decoded: Try<any> = bubblewrap.decode(new Uint8Array(await body.arrayBuffer()));
+            if (decoded.tag === "failure")
+                throw decoded.err;
+            else
+                return decoded.value;
+        },
+        fetch
+    );
+
+    return mapSendPort(
+        rawPort,
+        data => ({
+            responder: data.responder,
+            request: bubblewrap.encode(data.request)
         })
     );
 }

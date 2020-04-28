@@ -1,8 +1,9 @@
-import {forward, join, loopback, Port} from "../port";
+import {forward, join, loopback, mapReceivePort, mapSendPort, Port} from "../port";
 import {PortSpecLifecycle} from "../specs/port";
-import {Resource} from "../specs/_util";
+import {mapResource, Resource} from "../specs/_util";
 import {ClientRequest, liftClient, liftServer, ServerResponse} from "../procedure";
 import {ProcedureSpecLifecycle} from "../specs/procedure";
+import {Bubblewrap} from "@polypoly-eu/bubblewrap";
 
 export const loopbackLifecycle: PortSpecLifecycle = async () => ({
     value: loopback()
@@ -27,6 +28,21 @@ export function forwardLifecycle(l1: PortSpecLifecycle, l2: PortSpecLifecycle): 
                     await ports2.cleanup();
             }
         };
+    };
+}
+
+export function bubblewrapLifecycle(l: PortSpecLifecycle, bubblewrap: Bubblewrap): PortSpecLifecycle {
+    return async <T> () => {
+        const ports = await l<Uint8Array>();
+        return mapResource(
+            ports,
+            ([send, recv]) => {
+                return [
+                    mapSendPort(send, data => bubblewrap.encode(data)),
+                    mapReceivePort(recv, buf => bubblewrap.decode(buf))
+                ];
+            }
+        );
     };
 }
 

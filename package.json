@@ -25,7 +25,12 @@
     "url": "https://github.com/polypoly-eu/port-authority/issues"
   },
   "homepage": "https://github.com/polypoly-eu/port-authority#readme",
+  "peerDependencies": {
+    "@polypoly-eu/bubblewrap": "0.0.4",
+    "body-parser": "^1.19.0"
+  },
   "devDependencies": {
+    "@polypoly-eu/bubblewrap": "0.0.4",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-node-resolve": "^7.1.3",
     "@rollup/plugin-sucrase": "^3.0.0",

@@ -3,6 +3,8 @@ import {MessagePort} from "worker_threads";
 import {ReceiveAndReplyPort} from "./procedure";
 import {IRouter, ParamsDictionary} from "express-serve-static-core";
 import {recoverPromise, Try} from "./util";
+import {json, raw, OptionsJson, Options} from "body-parser";
+import {Bubblewrap} from "@polypoly-eu/bubblewrap";
 
 export function fromMessagePort(port: MessagePort): Port<unknown, unknown> {
     return {
@@ -42,11 +44,20 @@ export function routerPort<T, Body = any>(
 }
 
 export function jsonRouterPort(
-    router: IRouter
+    router: IRouter,
+    options?: OptionsJson
 ): ReceiveAndReplyPort<any, any> {
-    const rawPort = routerPort<any, string>(
+    const contentType = "application/json";
+
+    router.use(json({
+        ...options,
+        strict: false,
+        type: contentType
+    }));
+
+    return routerPort<any, any>(
         router,
-        "application/json",
+        contentType,
         value => {
             if (value.tag === "success")
                 return JSON.stringify({
@@ -58,12 +69,31 @@ export function jsonRouterPort(
                 });
         }
     );
+}
+
+export function bubblewrapRouterPort(
+    router: IRouter,
+    bubblewrap: Bubblewrap,
+    options?: Options
+): ReceiveAndReplyPort<any, any> {
+    const contentType = "application/octet-stream";
+
+    router.use(raw({
+        ...options,
+        type: contentType
+    }));
+
+    const rawPort = routerPort<any, Buffer>(
+        router,
+        contentType,
+        value => Buffer.from(bubblewrap.encode(value))
+    );
 
     return mapReceivePort(
         rawPort,
         data => ({
             responder: data.responder,
-            request: data.request
+            request: bubblewrap.decode(data.request)
         })
     );
 }

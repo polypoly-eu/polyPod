@@ -17,5 +17,8 @@ export default {
             exclude: ["node_modules/**"],
             transforms: ["typescript"]
         })
+    ],
+    external: [
+        "body-parser" // peer dependency, only used in conjunction with bubblewrap
     ]
 };
