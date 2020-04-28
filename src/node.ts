@@ -6,7 +6,7 @@ import {recoverPromise, Try} from "./util";
 import {json, raw, OptionsJson, Options} from "body-parser";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
 
-export function fromMessagePort(port: MessagePort): Port<unknown, unknown> {
+export function fromNodeMessagePort(port: MessagePort): Port<unknown, unknown> {
     return {
         send(value: unknown): void {
             port.postMessage(value);
