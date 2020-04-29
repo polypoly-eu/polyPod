@@ -7,7 +7,6 @@ import {DefaultPod, FeatureConstructor} from "@polypoly-eu/poly-api";
 import {createContext, runInContext} from "vm";
 import {tempBundle} from "./util";
 import {dataset} from "@rdfjs/dataset";
-// @ts-ignore
 import fetch from "node-fetch";
 
 function installAndBuild(cli: string, path: string): void {

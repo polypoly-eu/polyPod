@@ -1,6 +1,7 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import sucrase from "@rollup/plugin-sucrase";
+import virtual from "@rollup/plugin-virtual";
 import builtins from "rollup-plugin-node-builtins";
 import nodeGlobals from "rollup-plugin-node-globals";
 import {browserScriptsPath} from "./paths";
@@ -14,10 +15,12 @@ export const configs = {
             format: "iife"
         },
         plugins: [
+            virtual({
+                // prevent Rollup from traversing body-parser
+                "body-parser": ""
+            }),
             resolve(),
             commonjs(),
-            builtins(),
-            nodeGlobals(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"]
@@ -73,17 +76,12 @@ export const configs = {
             "memfs",
             "node-fetch",
             "@polypoly-eu/poly-api",
-            "@polypoly-eu/postoffice",
-            "@polypoly-eu/postoffice/dist/lib-node",
-            "@polypoly-eu/bubblewrap",
-            "@polypoly-eu/rdf",
+            "@polypoly-eu/podigree",
             "open",
             "mkdirp",
             "node-sass-tilde-importer",
             "@rdfjs/dataset",
             "rollup",
-            "rollup-plugin-node-builtins",
-            "rollup-plugin-node-globals",
             "@rollup/plugin-node-resolve",
             "@rollup/plugin-commonjs",
             "@rollup/plugin-sucrase",

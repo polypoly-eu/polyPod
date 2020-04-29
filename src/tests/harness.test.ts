@@ -1,5 +1,5 @@
 import {Pod} from "@polypoly-eu/poly-api";
-import {Logger, LogPod} from "../pods/log-pod";
+import {Logger, LogPod} from "@polypoly-eu/podigree";
 import {DefaultPod} from "@polypoly-eu/poly-api";
 import {Volume} from "memfs";
 import {promises as fs} from "fs";
@@ -13,7 +13,6 @@ import {JSDOM} from "jsdom";
 import {tempBundle} from "./util";
 import tempy from "tempy";
 import {dataset} from "@rdfjs/dataset";
-// @ts-ignore
 import fetch from "node-fetch";
 
 interface JestMockLogger extends Logger {
@@ -71,7 +70,7 @@ describe("Harness", () => {
         const port = (server.address() as AddressInfo).port;
 
         const baseURI = `http://localhost:${port}`;
-        const jsdomFetch = fetchWithBaseURI(baseURI, fetch);
+        const jsdomFetch = fetchWithBaseURI(baseURI, fetch as any);
 
         const dom = await JSDOM.fromURL(baseURI, {
             runScripts: "dangerously",

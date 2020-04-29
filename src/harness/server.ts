@@ -1,9 +1,9 @@
-import express, {Response} from "express";
+import express, {Response, Router} from "express";
 import {Server} from "http";
-import {router} from "../pod/express";
 import {htmlSkeleton} from "./html";
 import {once} from "events";
 import {Pod} from "@polypoly-eu/poly-api";
+import {RemoteServerPod} from "@polypoly-eu/podigree";
 import {Manifest} from "../feature/manifest";
 import {join} from "path";
 import {rootDir} from "../_dir";
@@ -71,7 +71,11 @@ export async function serve(
         sendFile(config.bootstrapPath, res);
     });
 
-    app.use("/rpc", router(pod));
+    const rpcRouter = Router();
+    const remotePod = new RemoteServerPod(pod);
+    remotePod.listenOnRouter(rpcRouter);
+
+    app.use("/rpc", rpcRouter);
 
     app.post("/bootstrapped", (req, res) => {
         res.status(204);
