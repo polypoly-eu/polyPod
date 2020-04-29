@@ -1,18 +1,9 @@
-import {
-    ClientOf,
-    endpointBubblewrapClasses,
-    endpointClient,
-    EndpointError,
-    EndpointRequest,
-    EndpointResponse,
-    endpointServer,
-    ObjectEndpointSpec,
-    ServerOf,
-    ValueEndpointSpec
-} from "../rpc";
+import {endpointClient, endpointServer} from "../rpc";
 import {MessageChannel} from "worker_threads";
 import {client, fromNodeMessagePort, liftClient, liftServer, mapPort, Port, server} from "@polypoly-eu/port-authority";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
+import {ClientOf, ObjectEndpointSpec, ServerOf, ValueEndpointSpec} from "../types";
+import {endpointBubblewrapClasses, EndpointRequest, EndpointResponse, EndpointError} from "../protocol";
 
 type SimpleEndpoint = ObjectEndpointSpec<{
     test1(param1: string): ValueEndpointSpec<number>;
@@ -89,75 +80,3 @@ describe("RPC", () => {
 
 });
 
-// compilation tests
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function check<T>(t: T): void { /* intentionally left blank */ }
-
-declare const client1: ClientOf<ValueEndpointSpec<number>>;
-declare const client2: ClientOf<ValueEndpointSpec<Promise<number>>>;
-declare const client3: ClientOf<ObjectEndpointSpec<{
-    test(): ValueEndpointSpec<number>;
-}>>;
-declare const client4: ClientOf<ObjectEndpointSpec<{
-    test(): ObjectEndpointSpec<{
-        test2(): ValueEndpointSpec<number>;
-    }>;
-}>>;
-declare const server1: number;
-declare const server2: Promise<number>;
-declare const server3: {
-    test(): Promise<number>;
-};
-declare const server4: {
-    test(): {
-        test2(): number;
-    };
-};
-declare const server5: {
-    test(): Promise<{
-        test2(): number;
-    }>;
-};
-declare const server6: {
-    test(): Promise<{
-        test2(): Promise<number>;
-    }>;
-};
-
-check(() => {
-    check<Promise<number>>(client1.get);
-
-    check<Promise<number>>(client2.get);
-
-    check<ClientOf<ValueEndpointSpec<number>>>(client3.call.test());
-    check<Promise<number>>(client3.call.test().get);
-
-    check<Promise<number>>(client4.call.test().call.test2().get);
-
-    check<ServerOf<ValueEndpointSpec<number>>>(server1);
-
-    check<ServerOf<ValueEndpointSpec<number>>>(server2);
-
-    check<ServerOf<ObjectEndpointSpec<{
-        test(): ValueEndpointSpec<number>;
-    }>>>(server3);
-
-    check<ServerOf<ObjectEndpointSpec<{
-        test(): ObjectEndpointSpec<{
-            test2(): ValueEndpointSpec<number>;
-        }>;
-    }>>>(server4);
-
-    check<ServerOf<ObjectEndpointSpec<{
-        test(): ObjectEndpointSpec<{
-            test2(): ValueEndpointSpec<number>;
-        }>;
-    }>>>(server5);
-
-    check<ServerOf<ObjectEndpointSpec<{
-        test(): ObjectEndpointSpec<{
-            test2(): ValueEndpointSpec<number>;
-        }>;
-    }>>>(server6);
-});
