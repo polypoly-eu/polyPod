@@ -17,5 +17,11 @@ export default {
             exclude: ["node_modules/**"],
             transforms: ["typescript"]
         })
+    ],
+    external: [
+        "@polypoly-eu/bubblewrap",
+        "@polypoly-eu/port-authority",
+        "@polypoly-eu/postoffice",
+        "@polypoly-eu/rdf"
     ]
 };
