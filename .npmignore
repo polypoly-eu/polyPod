@@ -1,10 +1,6 @@
 .idea
 tsconfig.*
 dist/tests
-dist/specs
-jasmine.json
-karma
-karma.conf.js
 src
 *.config.js
 *.tgz

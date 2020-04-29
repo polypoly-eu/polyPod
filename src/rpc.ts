@@ -1,5 +1,5 @@
-import {ReqRes} from "./ports";
-import {bubblewrap, builtin, Typeson} from "@polypoly-eu/bubblewrap";
+import {Classes, deserialize, serialize} from "@polypoly-eu/bubblewrap";
+import {Procedure} from "@polypoly-eu/port-authority";
 
 export type EndpointType = "value" | "object";
 
@@ -83,22 +83,25 @@ export class EndpointError extends Error {
     ) {
         super(`Method not found: ${method}`);
     }
+
+    static [deserialize](method: string): EndpointError {
+        return new EndpointError(method);
+    }
+
+    [serialize](): string {
+        return this.method;
+    }
 }
 
-export type EndpointReqRes = ReqRes<EndpointRequest, EndpointResponse>
+export type EndpointProcedure = Procedure<EndpointRequest, EndpointResponse>
 
-export const typesonHandlers = bubblewrap(
-    "eu.polypoly.postoffice.rpc",
-    EndpointError,
-    EndpointRequest,
-    EndpointResponse
-);
+export const endpointBubblewrapClasses: Classes = {
+    "@polypoly-eu/postoffice.rpc.EndpointError": EndpointError,
+    "@polypoly-eu/postoffice.rpc.EndpointRequest": EndpointRequest,
+    "@polypoly-eu/postoffice.rpc.EndpointResponse": EndpointResponse
+};
 
-export const endpointTypeson: Typeson = new Typeson()
-    .register(typesonHandlers)
-    .register(builtin);
-
-export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>): EndpointReqRes {
+export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>): EndpointProcedure {
     async function process(impl: any, parts: ReadonlyArray<EndpointRequestPart>): Promise<any> {
         if (parts.length === 0)
             return impl;
@@ -117,7 +120,7 @@ export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>):
 
 class RequestBuilder {
     constructor(
-        private readonly client: EndpointReqRes,
+        private readonly client: EndpointProcedure,
         private readonly state: ReadonlyArray<EndpointRequestPart>
     ) {}
 
@@ -138,6 +141,6 @@ class RequestBuilder {
     }
 }
 
-export function endpointClient<Spec extends EndpointSpec>(client: EndpointReqRes): ClientOf<Spec> {
+export function endpointClient<Spec extends EndpointSpec>(client: EndpointProcedure): ClientOf<Spec> {
     return new RequestBuilder(client, []) as any;
 }
