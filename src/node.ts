@@ -3,7 +3,7 @@ import {MessagePort} from "worker_threads";
 import {ReceiveAndReplyPort} from "./procedure";
 import {IRouter, ParamsDictionary} from "express-serve-static-core";
 import {recoverPromise, Try} from "./util";
-import {json, raw, OptionsJson, Options} from "body-parser";
+import {OptionsJson, Options} from "body-parser";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
 
 export function fromNodeMessagePort(port: MessagePort): Port<unknown, unknown> {
@@ -43,11 +43,13 @@ export function routerPort<T, Body = any>(
     };
 }
 
-export function jsonRouterPort(
+export async function jsonRouterPort(
     router: IRouter,
     options?: OptionsJson
-): ReceiveAndReplyPort<any, any> {
+): Promise<ReceiveAndReplyPort<any, any>> {
     const contentType = "application/json";
+
+    const {json} = await import("body-parser");
 
     router.use(json({
         ...options,
@@ -71,12 +73,14 @@ export function jsonRouterPort(
     );
 }
 
-export function bubblewrapRouterPort(
+export async function bubblewrapRouterPort(
     router: IRouter,
     bubblewrap: Bubblewrap,
     options?: Options
-): ReceiveAndReplyPort<any, any> {
+): Promise<ReceiveAndReplyPort<any, any>> {
     const contentType = "application/octet-stream";
+
+    const {raw} = await import("body-parser");
 
     router.use(raw({
         ...options,

@@ -6,7 +6,7 @@
     ],
     "target": "es6",
     "strict": true,
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true
   }
