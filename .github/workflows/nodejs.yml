@@ -13,9 +13,6 @@ jobs:
         node-version: 13.x
         registry-url: 'https://npm.pkg.github.com'
         scope: '@polypoly-eu'
-    - name: Puppeteer setup
-      run: |
-        sudo apt-get install libgbm-dev
     - name: npm install and test
       run: |
         npm ci
