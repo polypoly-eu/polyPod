@@ -212,7 +212,7 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
 
             it('should create an object with a datatype property that contains the given NamedNode', () => {
                 const string = 'example';
-                const datatype: any = {termType: 'NamedNode', value: 'http://example.org'};
+                const datatype = this.dataFactory.namedNode('http://example.org');
                 const term = this.dataFactory.literal(string, datatype);
 
                 assert.equal(term.datatype.termType, 'NamedNode');
