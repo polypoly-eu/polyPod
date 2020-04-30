@@ -26,7 +26,8 @@
   },
   "homepage": "https://github.com/polypoly-eu/rdf#readme",
   "devDependencies": {
-    "@polypoly-eu/rdf-spec": "0.0.5",
+    "@polypoly-eu/rdf-spec": "0.0.7",
+    "@rdfjs/data-model": "^1.1.2",
     "@rollup/plugin-sucrase": "^3.0.0",
     "@types/jest": "^25.2.1",
     "@types/rdf-js": "^3.0.0",
