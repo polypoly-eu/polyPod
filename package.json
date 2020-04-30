@@ -36,7 +36,6 @@
     "@types/chai": "^4.2.11",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.4",
-    "@types/rdf-js": "^3.0.0",
     "@types/rdfjs__dataset": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
@@ -52,6 +51,7 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
+    "@types/rdf-js": "^3.0.0",
     "chai": "^4.2.0",
     "fast-check": "^1.24.2"
   }
