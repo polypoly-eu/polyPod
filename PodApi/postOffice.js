@@ -2,12 +2,18 @@ class PostOffice {
     constructor() {
         this.messageId = 1;
         this.registry = new Map();
+        window.addEventListener("message", this.receiveMessage.bind(this), false);
     }
-
-    log(text) {
-        let data = { text }
-        
-        webkit.messageHandlers.log.postMessage(data);
+    
+    postMessage(messageData, callback) {
+        if (typeof callback !== 'undefined') {
+            let id = this.messageId++;
+            this.registry.set(id, callback);
+            
+            window.parent.postMessage({ id, ...messageData }, "*");
+        } else {
+            window.parent.postMessage(messageData, "*");
+        }
     }
     
     getValue(key, cb) {
@@ -16,25 +22,16 @@ class PostOffice {
         
         let data = { id, key }
         
-        webkit.messageHandlers.getValue.postMessage(data);
+        window.parent.postMessage({ command: "getValue", ...data }, "*");
     }
     
     setValue(key, value, cb) {
         let id = this.messageId++;
         this.registry.set(id, cb);
         
-         let data = { id, key, value }
+        let data = { id, key, value }
         
-        webkit.messageHandlers.setValue.postMessage(data);
-    }
-    
-    httpRequest(request, cb) {
-        let id = this.messageId++;
-        this.registry.set(id, cb);
-        
-        let data = { id, request }
-        
-        webkit.messageHandlers.httpRequest.postMessage(data);
+        window.parent.postMessage({ command: "setValue", ...data }, "*");
     }
     
     addQuads(quads, cb) {
@@ -43,7 +40,7 @@ class PostOffice {
         
         let data = { id, quads }
         
-        webkit.messageHandlers.addQuads.postMessage(data);
+        window.parent.postMessage({ command: "addQuads", ...data }, "*");
     }
     
     selectQuads(matcher, cb) {
@@ -52,10 +49,11 @@ class PostOffice {
         
         let data = { id, matcher }
         
-        webkit.messageHandlers.selectQuads.postMessage(data);
+        window.parent.postMessage({ command: "selectQuads", ...data }, "*");
     }
 
-    receiveMessage(data) {
+    receiveMessage(event) {
+        let data = event.data;
         if (data.id) {
             let cb = this.registry.get(data.id);
             this.registry.delete(data.id);

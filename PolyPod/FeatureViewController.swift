@@ -33,9 +33,7 @@ class FeatureViewController: UIViewController {
             contentController.add(self, name: $0.rawValue)
         }
         
-        contentController.installUserScript("domConsole")
-        contentController.installUserScript("postOffice")
-        contentController.installUserScript("pod")
+        contentController.installUserScript("messagePort", forMainFrameOnly: true)
         
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
@@ -54,8 +52,12 @@ class FeatureViewController: UIViewController {
             var content = try! String(contentsOfFile: filePath)
             content = content.replacingOccurrences(of: "featureStyle", with: "\(manifest.style)")
             content = content.replacingOccurrences(of: "featureSource", with: "\(manifest.source)")
-            content = content.replacingOccurrences(of: "featureName", with: "\(manifest.name)")
-            webView.loadHTMLString(content, baseURL: featureUrl)
+            content = content.replacingOccurrences(of: "\"", with: "&quot;")
+            let podPath = Bundle.main.path(forResource: "pod", ofType: "html")!
+            var podContent = try! String(contentsOfFile: podPath)
+            podContent = podContent.replacingOccurrences(of: "featureName", with: "\(manifest.name)")
+            podContent = podContent.replacingOccurrences(of: "innerHtml", with: content)
+            webView.loadHTMLString(podContent, baseURL: featureUrl)
         }
     }
     
@@ -74,6 +76,7 @@ extension FeatureViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let messageName = MessageName(rawValue: message.name) else { return }
         
+        let frame = message.frameInfo
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             guard let body = message.body as? [String: Any] else { return }
@@ -176,7 +179,7 @@ extension FeatureViewController: WKScriptMessageHandler {
 
         guard let jsonString = String(data: json, encoding: .utf8) else { return }
         
-        let javascriptCommand = "postOffice.receiveMessage(\(jsonString));"
+        let javascriptCommand = "respond(\(jsonString));"
         
         DispatchQueue.main.async { [weak self] in
             self?.webView.evaluateJavaScript(javascriptCommand, completionHandler: { result, error in

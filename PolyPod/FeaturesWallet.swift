@@ -68,6 +68,9 @@ class FeaturesWallet {
             try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
             try FileManager.default.copyBundleFile(forResource: "feature", ofType: "js", toDestinationUrl: featureDirUrl)
             try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featureDirUrl)
+            try FileManager.default.copyBundleFile(forResource: "postOffice", ofType: "js", toDestinationUrl: featureDirUrl)
+            try FileManager.default.copyBundleFile(forResource: "pod", ofType: "js", toDestinationUrl: featureDirUrl)
+            try FileManager.default.copyBundleFile(forResource: "domConsole", ofType: "js", toDestinationUrl: featureDirUrl)
             print("Imported environment files")
         } catch {
             print(error.localizedDescription);
