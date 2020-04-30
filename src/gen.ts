@@ -12,6 +12,7 @@ export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
     blankNode: Arbitrary<RDF.BlankNode>;
     literal: Arbitrary<RDF.Literal>;
     variable?: Arbitrary<RDF.Variable>;
+    term: Arbitrary<RDF.Term>;
     triple: Arbitrary<Q>;
     quad: Arbitrary<Q>;
 }
@@ -44,6 +45,14 @@ export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory
 
     const variables = variable ? [variable] : [];
 
+    const term = fc.oneof(
+        namedNode,
+        blankNode,
+        literal,
+        fc.constant(factory.defaultGraph()),
+        ...variables
+    );
+
     const subject = fc.oneof(namedNode, blankNode, ...variables);
     const predicate = fc.oneof(namedNode, ...variables);
     const object = fc.oneof(namedNode, literal, blankNode, ...variables);
@@ -57,6 +66,7 @@ export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory
         blankNode,
         literal,
         variable,
+        term,
         triple,
         quad
     };
