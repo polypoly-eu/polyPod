@@ -17,7 +17,7 @@ export function convert(input: RDF.BaseQuad | RDF.Term, dataFactory: RDF.DataFac
             case "DefaultGraph":
                 return dataFactory.defaultGraph();
             case "Literal":
-                return dataFactory.literal(term.value, term.language === "" ? term.datatype : term.language);
+                return dataFactory.literal(term.value, term.language === "" ? convert(term.datatype, dataFactory) : term.language);
             case "NamedNode":
                 return dataFactory.namedNode(term.value);
             case "Variable":
