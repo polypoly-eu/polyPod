@@ -9,6 +9,7 @@
 
 import * as RDF from "rdf-js";
 import {Fetch} from "./fetch";
+import {FS} from "./fs";
 
 /**
  * A _matcher_ specifies a filter for querying the Pod store.
@@ -120,9 +121,7 @@ export interface PolyIn {
  * `PolyOut` specifies the interaction of the Feature with the environment. It is concerned with file system operations
  * and HTTP requests.
  */
-export interface PolyOut {
-    readFile(path: string, options: { encoding: BufferEncoding }): Promise<string>;
-
+export interface PolyOut extends FS {
     readonly fetch: Fetch;
 }
 

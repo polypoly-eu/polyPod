@@ -19,13 +19,13 @@ import {gens} from "@polypoly-eu/rdf-spec";
 import chai, {assert} from "chai";
 import chaiAsPromised from "chai-as-promised";
 import {resolve} from "path";
-import {promises as _fs} from "fs";
 import {DataFactorySpec} from "@polypoly-eu/rdf-spec";
 import {Server} from "http";
 import express from "express";
 import {once} from "events";
 import {raw} from "body-parser";
 import {AddressInfo} from "net";
+import {FS} from "../fs";
 
 chai.use(chaiAsPromised);
 
@@ -33,7 +33,7 @@ chai.use(chaiAsPromised);
  * An extension of the [[Pod]] interface that provides access to the underlying filesystem.
  */
 export type PodUnderTest = Pod & {
-    readonly fs: typeof _fs;
+    readonly fs: FS;
 }
 
 /**

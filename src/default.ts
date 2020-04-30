@@ -10,8 +10,8 @@
 import * as RDF from "rdf-js";
 import {dataFactory} from "@polypoly-eu/rdf";
 import {Pod, PolyIn, PolyOut} from "./api";
-import {promises as _fs} from "fs";
 import {Fetch} from "./fetch";
+import {FS} from "./fs";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -33,7 +33,7 @@ export class DefaultPod implements Pod {
 
     constructor(
         public readonly store: RDF.DatasetCore,
-        public readonly fs: typeof _fs,
+        public readonly fs: FS,
         public readonly fetch: Fetch
     ) {
     }
@@ -62,10 +62,10 @@ export class DefaultPod implements Pod {
      */
     get polyOut(): PolyOut {
         return {
-            readFile: async (path, options) =>
-                this.fs.readFile(path, { encoding: options.encoding }),
-            fetch:
-                this.fetch
+            readFile: this.fs.readFile.bind(this.fs),
+            writeFile: this.fs.writeFile.bind(this.fs),
+            stat: this.fs.stat.bind(this.fs),
+            fetch: this.fetch.bind(this.fetch)
         };
     }
 
