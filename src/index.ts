@@ -119,8 +119,6 @@ export class DefaultGraph extends Model implements RDF.DefaultGraph {
 }
 
 export class Quad implements RDF.Quad {
-    termType = undefined;
-
     constructor(
         public subject: RDF.Quad_Subject,
         public predicate: RDF.Quad_Predicate,

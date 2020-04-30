@@ -7,9 +7,9 @@ describe("Spec", () => {
 });
 
 describe("Conversion this → @rdfjs/data-model", () => {
-    new ConvertSpec(dataFactory, RDFJS);
+    new ConvertSpec(dataFactory, RDFJS).run();
 });
 
 describe("Conversion @rdfjs/data-model → this", () => {
-    new ConvertSpec(RDFJS, dataFactory);
+    new ConvertSpec(RDFJS, dataFactory).run();
 });

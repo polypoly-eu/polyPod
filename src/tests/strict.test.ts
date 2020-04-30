@@ -1,4 +1,4 @@
-import {DataFactorySpec} from "@polypoly-eu/rdf-spec";
+import {ConvertSpec, DataFactorySpec} from "@polypoly-eu/rdf-spec";
 import {DataFactory} from "../index";
 import * as Foreign from "@rdfjs/data-model";
 
@@ -8,14 +8,28 @@ describe("Spec", () => {
     new DataFactorySpec(dataFactory).run();
 });
 
+describe("Conversion this → @rdfjs/data-model", () => {
+    new ConvertSpec(dataFactory, Foreign).run();
+});
+
+describe("Conversion @rdfjs/data-model → this", () => {
+    new ConvertSpec(Foreign, dataFactory).run();
+});
+
 describe("Strict", () => {
 
-    it("Rejects foreign terms", () => {
+    it("Rejects foreign terms (quad)", () => {
         const s = Foreign.namedNode("http://example.org/s");
         const p = Foreign.namedNode("http://example.org/p");
         const o = Foreign.namedNode("http://example.org/o");
 
         expect(() => dataFactory.quad(s, p, o)).toThrowError(/prototype/);
+    });
+
+    it("Rejects foreign terms (literal)", () => {
+        const dt = Foreign.namedNode("http://example.org/t");
+
+        expect(() => dataFactory.literal("hi", dt)).toThrowError(/prototype/);
     });
 
     it("Rejects ill-typed invocations", () => {
