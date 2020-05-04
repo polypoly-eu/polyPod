@@ -26,9 +26,11 @@ Currently, the following libraries are covered:
 * the reference implementations according to the table above
 * [@graphy/core.data.factory](https://graphy.link/core.data.factory)
 
-The following implementations are known not to be spec-compliant:
+The following implementations are not spec-compliant:
 
 * [rdflib](https://github.com/linkeddata/rdflib.js)
+
+As an additional tool, this library also provides a converter for RDF terms and quads into other representations.
 
 ## Example
 

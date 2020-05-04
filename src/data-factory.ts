@@ -10,7 +10,7 @@ import {BaseQuad, DataFactory, Quad, Variable} from "rdf-js";
 import {assert} from "chai";
 
 /**
- * Class containing test cases data factories. Use [[DataFactorySpec.run]] to execute all tests.
+ * Class containing test cases for data factories. Use [[DataFactorySpec.run]] to execute all tests.
  *
  * The tests are composed of simple unit tests originating from the
  * [reference implementation](https://github.com/rdfjs-base/data-model) and custom property tests.
@@ -27,6 +27,8 @@ import {assert} from "chai";
  * - [Mocha](https://mochajs.org/)
  * - [Jest](https://jestjs.io/)
  * - [Jasmine](https://jasmine.github.io/)
+ *
+ * Cross-factory interoperability can be tested using [[ConvertSpec]].
  */
 export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
     constructor(
