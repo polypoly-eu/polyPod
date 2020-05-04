@@ -15,7 +15,7 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
     return t[serialize] !== undefined;
 }
 
-export type Class<T extends MaybeSerializable> = (new (...args: any[]) => T) & {
+export type Class<T extends MaybeSerializable> = Function & {
     prototype: T;
     [deserialize]?: (any: any) => T;
 };
