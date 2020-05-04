@@ -120,8 +120,15 @@ export interface PolyIn {
 /**
  * `PolyOut` specifies the interaction of the Feature with the environment. It is concerned with file system operations
  * and HTTP requests.
+ *
+ * Both of these aspects are separated out into their own modules:
+ * - [[FS]] for Node.js-style file-system access
+ * - [[Fetch]] for DOM-style HTTP requests
  */
 export interface PolyOut extends FS {
+    /**
+     * A standard-compliant implementation of [[Fetch]].
+     */
     readonly fetch: Fetch;
 }
 
