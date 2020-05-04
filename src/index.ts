@@ -9,6 +9,11 @@
 
 import * as RDF from "rdf-js";
 
+/**
+ * Abstract superclass for all term types defined in this module. It should not be subclassed outside of this module.
+ *
+ * This class defines a generic [[equals]] function according to the RDFJS specification.
+ */
 export abstract class Model {
     abstract termType: string;
 
