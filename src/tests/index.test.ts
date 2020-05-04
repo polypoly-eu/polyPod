@@ -1,8 +1,51 @@
-import fc from "fast-check";
+import fc, {Arbitrary} from "fast-check";
 import {gens} from "@polypoly-eu/rdf-spec";
 import * as RDF from "@polypoly-eu/rdf";
-import {BubblewrapSpec, TypeInfos} from "../specs/bubblewrap";
-import {Bubblewrap, deserialize, serialize} from "../index";
+import {Bubblewrap, Class, Classes, deserialize, serialize} from "../index";
+
+// TODO export spec
+type TypeInfo<T> = [Class<T>, Arbitrary<T>];
+
+type TypeInfos<T extends Record<string, unknown>> = {
+    [P in keyof T]: TypeInfo<T[P]>
+}
+
+class BubblewrapSpec<T extends Record<string, unknown>> {
+
+    readonly bubblewrap: Bubblewrap;
+    private readonly gen: Arbitrary<[Class<any>, unknown]>;
+
+    constructor(
+        private readonly infos: TypeInfos<T>
+    ) {
+        const gens: Arbitrary<[Class<any>, unknown]>[] = [];
+        const constructors: Classes = {};
+
+        for (const [key, [constructor, gen]] of Object.entries(this.infos)) {
+            gens.push(gen.map((value: unknown) => [constructor, value]));
+            constructors[key] = constructor;
+        }
+
+        this.bubblewrap = Bubblewrap.create(constructors);
+
+        this.gen = fc.oneof(...gens);
+    }
+
+    run(): void {
+        const {gen, bubblewrap} = this;
+
+        it("decode/encode", () => {
+            fc.assert(fc.property(gen, ([constructor, t]) => {
+                const encoded = bubblewrap.encode(t);
+                expect(encoded).toBeInstanceOf(Uint8Array);
+                const decoded = bubblewrap.decode(encoded);
+                expect(decoded).toStrictEqual(t);
+                expect(decoded).toBeInstanceOf(constructor);
+            }));
+        });
+    }
+
+}
 
 class TestA {
     constructor(
