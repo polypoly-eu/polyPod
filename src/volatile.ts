@@ -1,4 +1,5 @@
 import {Pod, PolyIn, PolyOut} from "@polypoly-eu/poly-api";
+import {bindFS} from "./util";
 
 export class VolatilePod implements Pod {
 
@@ -17,7 +18,7 @@ export class VolatilePod implements Pod {
     get polyOut(): PolyOut {
         return {
             fetch: (input, init) => this.pod.polyOut.fetch(input, init),
-            readFile: (path, options) => this.pod.polyOut.readFile(path, options)
+            ...bindFS(this.pod.polyOut)
         };
     }
 

@@ -5,6 +5,7 @@ import {FetchResponse, PodEndpoint, PolyInEndpoint, PolyOutEndpoint} from "./end
 import {ReceiveAndReplyPort, liftServer, server, bubblewrapFetchPort, SendAndReplyPort, client, Port, liftClient, bubblewrapRouterPort} from "@polypoly-eu/port-authority";
 import {podBubblewrap, dataFactory, bubblewrapPort} from "./bubblewrap";
 import {IRouter} from "express-serve-static-core";
+import {bindFS} from "../util";
 
 export class RemoteClientPod implements Pod {
 
@@ -43,11 +44,13 @@ export class RemoteClientPod implements Pod {
         return {
             readFile: (path, options) =>
                 this.rpcClient.call.polyOut().call.readFile(path, options).get,
+            writeFile: (path, contents, options) =>
+                this.rpcClient.call.polyOut().call.writeFile(path, contents, options).get,
+            stat: path =>
+                this.rpcClient.call.polyOut().call.stat(path).get,
             fetch: (input, init) =>
                 // we need to `|| {}` here because the msgpack library (via bubblewrap) maps `undefined` to `null`,
                 // which confuses some fetch implementations
-
-                // TODO still dodgy: init may contain `undefined` props that will be mapped to `null`
                 this.rpcClient.call.polyOut().call.fetch(input, init || {}).get
         };
     }
@@ -61,8 +64,6 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
     ) {}
 
     listen(port: ReceiveAndReplyPort<EndpointRequest, EndpointResponse>): void {
-        // TODO this is potentially unsafe -- since method calls are not filtered, rogue clients may call through other
-        // methods directly (although they'll have a hard time conjuring up ports or routers)
         server(port, endpointServer<PodEndpoint>(this));
     }
 
@@ -79,9 +80,11 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
     }
 
     polyOut(): ServerOf<PolyOutEndpoint> {
+        const polyOut = this.pod.polyOut;
+
         return {
-            fetch: async (input, init) => FetchResponse.of(await this.pod.polyOut.fetch(input, init)),
-            readFile: this.pod.polyOut.readFile.bind(this.pod.polyOut)
+            fetch: async (input, init) => FetchResponse.of(await polyOut.fetch(input, init)),
+            ...bindFS(polyOut)
         };
     }
 

@@ -61,6 +61,16 @@ export class LogPod implements Pod {
                 const result = await this.pod.polyOut.readFile(path, options);
                 this.logger.finished("polyIn/readFile", result);
                 return result;
+            },
+            writeFile: async (path, contents, options) => {
+                this.logger.called("polyOut/writeFile", { path, contents, options });
+                await this.pod.polyOut.writeFile(path, contents, options);
+                this.logger.finished("polyIn/writeFile");
+            },
+            stat: async path => {
+                this.logger.called("polyOut/stat", { path });
+                await this.pod.polyOut.stat(path);
+                this.logger.finished("polyIn/stat");
             }
         };
     }

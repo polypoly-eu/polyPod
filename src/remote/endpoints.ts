@@ -1,5 +1,5 @@
 import {ObjectEndpointSpec, ValueEndpointSpec} from "@polypoly-eu/postoffice";
-import {Matcher, Response, RequestInit} from "@polypoly-eu/poly-api";
+import {Matcher, Response, RequestInit, EncodingOptions} from "@polypoly-eu/poly-api";
 import {Quad} from "rdf-js";
 import * as RDF from "@polypoly-eu/rdf";
 import {Classes} from "@polypoly-eu/bubblewrap";
@@ -10,7 +10,9 @@ export type PolyInEndpoint = ObjectEndpointSpec<{
 }>;
 
 export type PolyOutEndpoint = ObjectEndpointSpec<{
-    readFile(path: string, options: { encoding: BufferEncoding }): ValueEndpointSpec<string>;
+    readFile(path: string, options: EncodingOptions): ValueEndpointSpec<string>;
+    writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
+    stat(path: string): ValueEndpointSpec<void>;
     fetch(input: string, init?: RequestInit): ValueEndpointSpec<Response>;
 }>;
 

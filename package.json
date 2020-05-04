@@ -24,17 +24,21 @@
   },
   "homepage": "https://github.com/polypoly-eu/podigree#readme",
   "dependencies": {
-    "@polypoly-eu/bubblewrap": "0.0.4",
+    "@polypoly-eu/bubblewrap": "0.0.5",
+    "@polypoly-eu/poly-api": "0.0.5",
     "@polypoly-eu/port-authority": "0.0.2",
     "@polypoly-eu/postoffice": "0.0.6",
-    "@polypoly-eu/rdf": "0.0.1"
+    "@polypoly-eu/rdf": "0.0.3",
+    "@polypoly-eu/rdf-spec": "0.0.8",
+    "@types/rdf-js": "^3.0.0",
+    "fp-ts": "^2.5.4",
+    "io-ts": "^2.2.1"
   },
   "peerDependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "@polypoly-eu/poly-api": "0.0.4",
     "@rollup/plugin-sucrase": "^3.0.0",
     "@rdfjs/dataset": "^1.0.1",
     "@types/body-parser": "^1.19.0",
@@ -46,7 +50,10 @@
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^6.8.0",
+    "fast-check": "^1.24.2",
     "jest": "^25.5.4",
     "express": "^4.17.1",
     "memfs": "^3.1.2",
