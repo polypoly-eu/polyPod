@@ -1,8 +1,8 @@
-import {Resource} from "./_util";
 import {ReceivePort, SendPort} from "../port";
 import chai, {assert} from "chai";
 import chaiAsPromised from "chai-as-promised";
 import fc, {Arbitrary} from "fast-check";
+import {Resource} from "../util";
 
 chai.use(chaiAsPromised);
 

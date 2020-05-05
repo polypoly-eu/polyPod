@@ -1,8 +1,8 @@
-import {client, Procedure, ResponsePort, RequestPort, server} from "../procedure";
-import {mock, probeFunctionEquality, Resource} from "./_util";
-import fc, {Arbitrary} from "fast-check";
+import {client, Procedure, RequestPort, ResponsePort, server} from "../procedure";
+import fc, {Arbitrary, IAsyncProperty} from "fast-check";
 import chai, {assert} from "chai";
 import chaiAsPromised from "chai-as-promised";
+import {recoverPromise, Resource} from "../util";
 
 chai.use(chaiAsPromised);
 
@@ -18,6 +18,16 @@ const procs: Record<string, Procedure<any, any>> = {
                 throw "odd";
         }
 };
+
+function probeFunctionEquality<T, U>(
+    f1: (t: T) => Promise<U>,
+    f2: (t: T) => Promise<U>,
+    gen: Arbitrary<T>
+): IAsyncProperty<[T]> {
+    return fc.asyncProperty(gen, async t => {
+        assert.deepEqual(await recoverPromise(f1(t)), await recoverPromise(f2(t)));
+    });
+}
 
 export type ProcedureSpecLifecycle = <T, U> () => Promise<Resource<[RequestPort<T, U>, ResponsePort<T, U>]>>;
 
@@ -61,7 +71,11 @@ export class ProcedureSpec<T, U> {
         it("Ignores additional handlers", async () => {
             // TODO multiplexing behaviour?
 
-            const mockP = mock(() => Promise.reject());
+            let called = false;
+
+            const mockP: Procedure<any, any> = async () => {
+                called = true;
+            };
 
             server(receive, this.proc);
             server(receive, mockP);
@@ -72,7 +86,7 @@ export class ProcedureSpec<T, U> {
                 this.gen
             ));
 
-            assert.isEmpty(mockP.calls);
+            assert.isFalse(called);
         });
 
     }

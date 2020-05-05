@@ -24,3 +24,18 @@ export async function recoverPromise<T>(p: Promise<T>): Promise<Try<T>> {
         };
     }
 }
+
+export interface Resource<T> {
+    value: T;
+    cleanup?: () => Promise<void>;
+}
+
+export function mapResource<T, U>(resource: Resource<T>, f: (t: T) => U): Resource<U> {
+    return {
+        value: f(resource.value),
+        cleanup: async () => {
+            if (resource.cleanup)
+                await resource.cleanup();
+        }
+    };
+}

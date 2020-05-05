@@ -3,7 +3,7 @@ import {PortSpecLifecycle} from "../specs/port";
 import {ClientRequest, liftClient, liftServer, ServerResponse} from "../procedure";
 import {ProcedureSpecLifecycle} from "../specs/procedure";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
-import {mapResource, Resource} from "../specs/_util";
+import {mapResource, Resource} from "../util";
 
 export const loopbackLifecycle: PortSpecLifecycle = async () => ({
     value: loopback()
