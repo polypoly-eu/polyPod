@@ -32,7 +32,7 @@
     "@polypoly-eu/rdf-spec": "0.0.8",
     "@types/rdf-js": "^3.0.0",
     "fp-ts": "^2.5.4",
-    "io-ts": "^2.2.1"
+    "io-ts": "^2.2.2"
   },
   "peerDependencies": {
     "body-parser": "^1.19.0",
