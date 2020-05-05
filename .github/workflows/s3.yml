@@ -1,0 +1,31 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 13.x
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@polypoly-eu'
+    - name: npm install and docs
+      run: |
+        npm ci
+        npm run docs
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - uses: jakejarvis/s3-sync-action@master
+      env:
+        AWS_S3_BUCKET: dev-docs
+        AWS_ACCESS_KEY_ID: dev-docs
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET }}
+        AWS_S3_ENDPOINT: "https://files.polypoly.eu/"
+        SOURCE_DIR: "docs"
+        DEST_DIR: "port-authority"

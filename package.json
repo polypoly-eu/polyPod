@@ -11,7 +11,9 @@
     "coverage": "nyc ts-mocha src/tests/{node,universal}/**.test.ts",
     "test": "npm run test:browser && npm run test:node",
     "test:browser": "karma start",
-    "test:node": "ts-mocha src/tests/{node,universal}/**.test.ts"
+    "test:node": "ts-mocha src/tests/{node,universal}/**.test.ts",
+    "docs": "typedoc",
+    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -28,6 +30,7 @@
   "homepage": "https://github.com/polypoly-eu/port-authority#readme",
   "peerDependencies": {
     "@polypoly-eu/bubblewrap": "0.0.4",
+    "@types/express-serve-static-core": "^4.17.5",
     "body-parser": "^1.19.0"
   },
   "devDependencies": {
@@ -49,6 +52,7 @@
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
     "fast-check": "^1.24.2",
@@ -67,6 +71,7 @@
     "puppeteer-firefox": "^0.5.1",
     "rollup": "^2.7.6",
     "ts-mocha": "^7.0.0",
+    "typedoc": "^0.17.6",
     "typescript": "^3.7.5"
   }
 }

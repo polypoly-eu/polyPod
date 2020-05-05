@@ -1,18 +1,18 @@
-import {Consumer, mapPort, Port} from "./port";
+import {Handler, mapPort, Port} from "./port";
 
-export function fromBrowserMessagePort(port: MessagePort): Port<MessageEvent, unknown> {
+export function fromBrowserMessagePort(port: MessagePort): Port<MessageEvent, any> {
     return {
         send(value: unknown): void {
             port.postMessage(value);
         },
-        addHandler(handler: Consumer<MessageEvent>): void {
+        addHandler(handler: Handler<MessageEvent>): void {
             port.addEventListener("message", message => handler(message));
         }
     };
 }
 export async function iframeInnerPort(secret: string): Promise<Port<any, any>> {
     return new Promise((resolve, reject) => {
-        const handler: Consumer<MessageEvent> = event => {
+        const handler: Handler<MessageEvent> = event => {
             if (event.source !== window.parent || event.data !== secret)
                 return;
 
