@@ -60,16 +60,7 @@ export async function jsonRouterPort(
     return routerPort<any, any>(
         router,
         contentType,
-        value => {
-            if (value.tag === "success")
-                return JSON.stringify({
-                    response: value.value
-                });
-            else
-                return JSON.stringify({
-                    error: value.err
-                });
-        }
+        JSON.stringify
     );
 }
 

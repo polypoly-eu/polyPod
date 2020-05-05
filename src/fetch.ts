@@ -1,7 +1,7 @@
 import {RequestPort} from "./procedure";
 import {mapSendPort} from "./port";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
-import {Try} from "./util";
+import {rethrowPromise, Try} from "./util";
 
 export function fetchPort<T>(
     url: string,
@@ -37,13 +37,7 @@ export function jsonFetchPort(
     const rawPort = fetchPort<any>(
         url,
         "application/json",
-        async body => {
-            const raw = await body.json();
-            if (raw.error)
-                throw raw.error;
-            else
-                return raw.response;
-        },
+        async body => rethrowPromise(await body.json()),
         fetch
     );
 

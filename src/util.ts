@@ -10,6 +10,13 @@ export interface Failure {
 
 export type Try<T> = Success<T> | Failure;
 
+export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
+    if (t.tag === "success")
+        return t.value;
+    else
+        throw t.err;
+}
+
 export async function recoverPromise<T>(p: Promise<T>): Promise<Try<T>> {
     try {
         return {
