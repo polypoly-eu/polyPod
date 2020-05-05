@@ -1,4 +1,4 @@
-import {SendAndReplyPort} from "./procedure";
+import {RequestPort} from "./procedure";
 import {mapSendPort} from "./port";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
 import {Try} from "./util";
@@ -8,7 +8,7 @@ export function fetchPort<T>(
     contentType: string,
     parse: (body: Body) => Promise<T>,
     fetch: typeof window.fetch
-): SendAndReplyPort<BodyInit, T> {
+): RequestPort<BodyInit, T> {
     return {
         send: async request => {
             const response = await fetch(url, {
@@ -33,7 +33,7 @@ export function fetchPort<T>(
 export function jsonFetchPort(
     url: string,
     fetch: typeof window.fetch
-): SendAndReplyPort<any, any> {
+): RequestPort<any, any> {
     const rawPort = fetchPort<any>(
         url,
         "application/json",
@@ -60,7 +60,7 @@ export function bubblewrapFetchPort(
     url: string,
     bubblewrap: Bubblewrap,
     fetch: typeof window.fetch
-): SendAndReplyPort<any, any> {
+): RequestPort<any, any> {
     const rawPort = fetchPort<any>(
         url,
         "application/octet-stream",

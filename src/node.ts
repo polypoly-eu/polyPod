@@ -1,6 +1,6 @@
 import {Consumer, mapReceivePort, Port} from "./port";
 import {MessagePort} from "worker_threads";
-import {ReceiveAndReplyPort} from "./procedure";
+import {ResponsePort} from "./procedure";
 import {IRouter, ParamsDictionary} from "express-serve-static-core";
 import {recoverPromise, Try} from "./util";
 import {OptionsJson, Options} from "body-parser";
@@ -21,7 +21,7 @@ export function routerPort<T, Body = any>(
     router: IRouter,
     contentType: string,
     format: (result: Try<T>) => Body
-): ReceiveAndReplyPort<Body, T> {
+): ResponsePort<Body, T> {
     return {
         addHandler: handler => {
             router.post<ParamsDictionary, Body, Body>("/", async (request, response) => {
@@ -46,7 +46,7 @@ export function routerPort<T, Body = any>(
 export async function jsonRouterPort(
     router: IRouter,
     options?: OptionsJson
-): Promise<ReceiveAndReplyPort<any, any>> {
+): Promise<ResponsePort<any, any>> {
     const contentType = "application/json";
 
     const {json} = await import("body-parser");
@@ -77,7 +77,7 @@ export async function bubblewrapRouterPort(
     router: IRouter,
     bubblewrap: Bubblewrap,
     options?: Options
-): Promise<ReceiveAndReplyPort<any, any>> {
+): Promise<ResponsePort<any, any>> {
     const contentType = "application/octet-stream";
 
     const {raw} = await import("body-parser");

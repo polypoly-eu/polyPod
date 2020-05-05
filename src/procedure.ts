@@ -5,18 +5,18 @@ export interface PromiseResolvers<T> {
     reject(err?: any): void;
 }
 
-export interface WithResponder<Req, Res> {
+export interface WithResolvers<Req, Res> {
     request: Req;
     responder: PromiseResolvers<Res>;
 }
 
-export type ReceiveAndReplyPort<Req, Res> = ReceivePort<WithResponder<Req, Res>>;
-export type SendAndReplyPort<Req, Res> = SendPort<WithResponder<Req, Res>>;
+export type ResponsePort<Req, Res> = ReceivePort<WithResolvers<Req, Res>>;
+export type RequestPort<Req, Res> = SendPort<WithResolvers<Req, Res>>;
 
 export type Procedure<Req, Res> = (req: Req) => Promise<Res>;
 
 export function client<Req, Res>(
-    port: SendAndReplyPort<Req, Res>
+    port: RequestPort<Req, Res>
 ): Procedure<Req, Res> {
     return req => new Promise<Res>((resolve, reject) => {
         port.send({
@@ -27,7 +27,7 @@ export function client<Req, Res>(
 }
 
 export function server<Req, Res>(
-    port: ReceiveAndReplyPort<Req, Res>,
+    port: ResponsePort<Req, Res>,
     procedure: Procedure<Req, Res>
 ): void {
     port.addHandler(async request => {
@@ -52,7 +52,7 @@ export type ServerResponse<T> =
 
 export function liftClient<Req, Res>(
     port: Port<ServerResponse<Res>, ClientRequest<Req>>
-): SendAndReplyPort<Req, Res> {
+): RequestPort<Req, Res> {
     let id = 0;
     const pending = new Map<number, PromiseResolvers<Res>>();
     port.addHandler(response => {
@@ -77,8 +77,8 @@ export function liftClient<Req, Res>(
 
 export function liftServer<Req, Res>(
     port: Port<ClientRequest<Req>, ServerResponse<Res>>
-): ReceiveAndReplyPort<Req, Res> {
-    let handler: Consumer<WithResponder<Req, Res>> | undefined = undefined;
+): ResponsePort<Req, Res> {
+    let handler: Consumer<WithResolvers<Req, Res>> | undefined = undefined;
 
     port.addHandler(async request => {
         const h = handler;

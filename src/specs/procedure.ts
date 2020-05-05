@@ -1,4 +1,4 @@
-import {client, Procedure, ReceiveAndReplyPort, SendAndReplyPort, server} from "../procedure";
+import {client, Procedure, ResponsePort, RequestPort, server} from "../procedure";
 import {mock, probeFunctionEquality, Resource} from "./_util";
 import fc, {Arbitrary} from "fast-check";
 import chai, {assert} from "chai";
@@ -19,7 +19,7 @@ const procs: Record<string, Procedure<any, any>> = {
         }
 };
 
-export type ProcedureSpecLifecycle = <T, U> () => Promise<Resource<[SendAndReplyPort<T, U>, ReceiveAndReplyPort<T, U>]>>;
+export type ProcedureSpecLifecycle = <T, U> () => Promise<Resource<[RequestPort<T, U>, ResponsePort<T, U>]>>;
 
 export class ProcedureSpec<T, U> {
 
@@ -30,8 +30,8 @@ export class ProcedureSpec<T, U> {
     ) {}
 
     run(): void {
-        let send: SendAndReplyPort<T, U>;
-        let receive: ReceiveAndReplyPort<T, U>;
+        let send: RequestPort<T, U>;
+        let receive: ResponsePort<T, U>;
         let cleanup: () => Promise<void>;
 
         beforeEach(async () => {
