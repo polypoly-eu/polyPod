@@ -2,22 +2,22 @@
  * This module defines the [[Bubblewrap]] class and related utilities.
  *
  * The terminology in this module is as follows:
- * - encode/decode refers to conversion to/from byte arrays
- * - serialize/deserialize refers to high-level object manipulation
+ * - _encode_/_decode_ refers to conversion to/from byte arrays
+ * - _serialize_/_deserialize_ refers to high-level object manipulation
  *
  * Library users usually only need to care about encoding and decoding; these operations are provided by
  * [[Bubblewrap.encode]] and [[Bubblewrap.decode]], respectively.
  *
  * Customizing the encoding and decoding logic can be done by registering JavaScript classes. Details can be found in
- * the documentation of [[Class]] (for the custom logic) and [[Bubblewrap]] (for registration).
+ * the documentation of [[Class]] (explanation of the custom logic) and [[Bubblewrap]] (explanation of how to register).
  *
  * We leverage [MessagePack's](https://msgpack.org/) extension types for mapping JavaScript objects to byte arrays.
  * This library defines three extension types:
- * 1. [[msgPackEtypeUndef]] represents a sentinel value of class [[Undefined]]; used to distinguish `undefined` from
+ * 1. [[msgPackEtypeUndef]] tags a sentinel value of class [[Undefined]]; used to distinguish `undefined` from
  *    `null` (see [[Class]] for details)
- * 2. [[msgPackEtypeClass]] represents an arbitrary JavaScript class
- * 3. [[msgPackEtypeError]] represents an error of the built-in `Error` type; it is possible to specify custom logic
- *    for subclasses of `Error`, but changing the logic for `Error` itself is not recommended
+ * 2. [[msgPackEtypeClass]] tags an registered JavaScript class; there is one tag for all classes
+ * 3. [[msgPackEtypeError]] tags an error of the built-in `Error` type; it is possible to specify custom logic
+ *    for subclasses of `Error`
  *
  * @packageDocumentation
  */

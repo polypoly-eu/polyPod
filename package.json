@@ -1,7 +1,7 @@
 {
   "name": "@polypoly-eu/bubblewrap",
   "version": "0.0.5",
-  "description": "Bubblewrap protects values from the structured clone algorithm",
+  "description": "Lossless encoding and decoding of objects into byte arrays",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
