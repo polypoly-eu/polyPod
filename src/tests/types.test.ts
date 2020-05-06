@@ -37,14 +37,14 @@ declare const server6: {
 };
 
 check(() => {
-    check<Promise<number>>(client1.get);
+    check<Promise<number>>(client1());
 
-    check<Promise<number>>(client2.get);
+    check<Promise<number>>(client2());
 
-    check<ClientOf<ValueEndpointSpec<number>>>(client3.call.test());
-    check<Promise<number>>(client3.call.test().get);
+    check<ClientOf<ValueEndpointSpec<number>>>(client3.test());
+    check<Promise<number>>(client3.test()());
 
-    check<Promise<number>>(client4.call.test().call.test2().get);
+    check<Promise<number>>(client4.test().test2()());
 
     check<ServerOf<ValueEndpointSpec<number>>>(server1);
 

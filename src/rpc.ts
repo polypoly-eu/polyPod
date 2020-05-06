@@ -18,29 +18,26 @@ export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>):
     return req => process(impl, req.parts).then(res => new EndpointResponse(res));
 }
 
-class RequestBuilder {
-    constructor(
-        private readonly client: EndpointProcedure,
-        private readonly state: ReadonlyArray<EndpointRequestPart>
-    ) {}
+function requestBuilder(client: EndpointProcedure, state: ReadonlyArray<EndpointRequestPart>): any {
+    return new Proxy(new Function(), {
+        apply(target, thisArg, argArray): Promise<any> {
+            if (!Array.isArray(argArray) || argArray.length !== 0)
+                throw new Error("Argument list must be empty");
 
-    get get(): Promise<any> {
-        return this.client(new EndpointRequest(this.state)).then(res => res.value);
-    }
+            // end of line, make the call
+            return client(new EndpointRequest(state)).then(res => res.value);
+        },
+        get(target, property): (...args: any[]) => any {
+            if (typeof property !== "string")
+                throw new Error(`Property ${String(property)} is not a string`);
 
-    get call(): any {
-        const {client, state}  = this;
-        return new Proxy({}, {
-            get(target, property): (...args: any[]) => any {
-                if (typeof property !== "string")
-                    throw new Error(`Property ${String(property)} is not a string`);
-                return (...args: any[]) =>
-                    new RequestBuilder(client, [...state, { method: property, args: args }]);
-            }
-        })
-    }
+            // nested call: return a callable function
+            return (...args: any[]) =>
+                requestBuilder(client, [...state, { method: property, args: args }]);
+        }
+    });
 }
 
 export function endpointClient<Spec extends EndpointSpec>(client: EndpointProcedure): ClientOf<Spec> {
-    return new RequestBuilder(client, []) as any;
+    return requestBuilder(client, []);
 }

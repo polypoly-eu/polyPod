@@ -63,18 +63,18 @@ describe("RPC", () => {
     });
 
     it("Succeeds (simple call)", async () => {
-        await expect(rpcClient.call.simple().call.test1("hi").get).resolves.toEqual(4);
-        await expect(rpcClient.call.simple().call.test2("hi").get).resolves.toEqual(4);
+        await expect(rpcClient.simple().test1("hi")()).resolves.toEqual(4);
+        await expect(rpcClient.simple().test2("hi")()).resolves.toEqual(4);
     });
 
     it("Succeeds (nested call)", async () => {
-        await expect(rpcClient.call.simple().call.test3(true, 0, 1).get)
+        await expect(rpcClient.simple().test3(true, 0, 1)())
             .rejects.toThrowError("true, 0,1");
     });
 
     it("Fails (non-existent method)", async () => {
         // @ts-ignore
-        await expect(rpcClient.call.whodis("lol").get)
+        await expect(rpcClient.whodis("lol")())
             .rejects.toThrowError(EndpointError);
     });
 
