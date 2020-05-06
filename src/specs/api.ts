@@ -15,26 +15,17 @@
 
 import {Pod} from "../api";
 import fc from "fast-check";
-import {gens} from "@polypoly-eu/rdf-spec";
+import {DataFactorySpec, gens} from "@polypoly-eu/rdf-spec";
 import chai, {assert} from "chai";
 import chaiAsPromised from "chai-as-promised";
 import {resolve} from "path";
-import {DataFactorySpec} from "@polypoly-eu/rdf-spec";
 import {Server} from "http";
 import express from "express";
 import {once} from "events";
 import {raw} from "body-parser";
 import {AddressInfo} from "net";
-import {FS} from "../fs";
 
 chai.use(chaiAsPromised);
-
-/**
- * An extension of the [[Pod]] interface that provides access to the underlying filesystem.
- */
-export type PodUnderTest = Pod & {
-    readonly fs: FS;
-}
 
 /**
  * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].
@@ -48,7 +39,7 @@ export type PodUnderTest = Pod & {
 export class PodSpec {
 
     constructor(
-        private readonly podFactory: () => PodUnderTest,
+        private readonly podFactory: () => Pod,
         private readonly path: string
     ) {}
 
@@ -103,14 +94,14 @@ export class PodSpec {
         describe("polyOut", () => {
 
             it("Filesystem operation", async () => {
-                const {fs, polyOut} = this.podFactory();
+                const {polyOut} = this.podFactory();
                 const pathExisting = resolve(this.path, "existing");
                 const pathNotExisting = resolve(this.path, "not-existing");
-                await assert.isRejected(fs.stat(pathExisting));
-                await assert.isRejected(fs.stat(pathNotExisting));
+                await assert.isRejected(polyOut.stat(pathExisting));
+                await assert.isRejected(polyOut.stat(pathNotExisting));
                 const content = "abc";
 
-                await fs.writeFile(pathExisting, content, { encoding: "utf-8" });
+                await polyOut.writeFile(pathExisting, content, { encoding: "utf-8" });
 
                 await assert.equal(await polyOut.readFile(pathExisting, { encoding: "utf-8" }), content);
 
@@ -207,6 +198,6 @@ export class PodSpec {
 /**
  * Convenience function to instantiate the [[PodSpec]] and run it immediately afterwards.
  */
-export function podSpec(podFactory: () => PodUnderTest, path = "/"): void {
+export function podSpec(podFactory: () => Pod, path = "/"): void {
     return new PodSpec(podFactory, path).run();
 }
