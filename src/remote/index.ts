@@ -4,7 +4,7 @@ import {endpointClient, ClientOf, ServerOf, EndpointRequest, EndpointResponse, e
 import {FetchResponse, PodEndpoint, PolyInEndpoint, PolyOutEndpoint} from "./endpoints";
 import {ReceiveAndReplyPort, liftServer, server, bubblewrapFetchPort, SendAndReplyPort, client, Port, liftClient, bubblewrapRouterPort} from "@polypoly-eu/port-authority";
 import {podBubblewrap, dataFactory, bubblewrapPort} from "./bubblewrap";
-import {IRouter} from "express-serve-static-core";
+import {Router} from "express";
 import {bindFS} from "../util";
 
 export class RemoteClientPod implements Pod {
@@ -71,7 +71,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         this.listen(liftServer<EndpointRequest, EndpointResponse>(bubblewrapPort(rawPort)));
     }
 
-    async listenOnRouter(router: IRouter): Promise<void> {
+    async listenOnRouter(router: Router): Promise<void> {
         this.listen(await bubblewrapRouterPort(
             router,
             podBubblewrap,
