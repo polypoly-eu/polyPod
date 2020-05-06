@@ -9,8 +9,7 @@ describe("Volatile pod", () => {
     podSpec(() => {
         const fs = new Volume().promises as any;
         const underlying = new DefaultPod(dataset(), fs, fetch);
-        const pod = new VolatilePod(underlying);
-        return Object.assign(pod, { fs });
+        return new VolatilePod(underlying);
     });
 
 });

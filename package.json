@@ -25,7 +25,7 @@
   "homepage": "https://github.com/polypoly-eu/podigree#readme",
   "dependencies": {
     "@polypoly-eu/bubblewrap": "0.0.5",
-    "@polypoly-eu/poly-api": "0.0.5",
+    "@polypoly-eu/poly-api": "0.0.6",
     "@polypoly-eu/port-authority": "0.0.2",
     "@polypoly-eu/postoffice": "0.0.6",
     "@polypoly-eu/rdf": "0.0.3",

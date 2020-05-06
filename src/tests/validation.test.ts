@@ -9,8 +9,7 @@ describe("Validating pod", () => {
     podSpec(() => {
         const fs = new Volume().promises as any;
         const underlying = new DefaultPod(dataset(), fs, fetch);
-        const pod = new ValidatingPod(underlying);
-        return Object.assign(pod, { fs });
+        return new ValidatingPod(underlying);
     });
 
     describe("Rejects malformed calls", () => {

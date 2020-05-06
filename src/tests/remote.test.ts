@@ -24,8 +24,7 @@ describe("Remote pod", () => {
             const underlying = new DefaultPod(dataset(), fs, fetch);
             const server = new RemoteServerPod(underlying);
             server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
-            const pod = RemoteClientPod.fromRawPort(fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>);
-            return Object.assign(pod, { fs });
+            return RemoteClientPod.fromRawPort(fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>);
         });
 
         afterAll(() => {

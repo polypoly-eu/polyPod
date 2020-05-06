@@ -9,8 +9,7 @@ describe("Log pod", () => {
     podSpec(() => {
         const fs = new Volume().promises as any;
         const underlying = new DefaultPod(dataset(), fs, fetch);
-        const pod = new LogPod(underlying, nullLogger);
-        return Object.assign(pod, { fs });
+        return new LogPod(underlying, nullLogger);
     });
 
 });
