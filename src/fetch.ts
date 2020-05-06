@@ -1,3 +1,10 @@
+/**
+ * Universal implementation of [[RequestPort]]s based on the Fetch API. All functions take an arbitrary Fetch
+ * implementation; users may specify `window.fetch` in a browser context or a polyfill on Node.js.
+ *
+ * @packageDocumentation
+ */
+
 import {RequestPort} from "./procedure";
 import {mapSendPort} from "./port";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
@@ -17,6 +24,11 @@ import {rethrowPromise, Try} from "./util";
  * 2. send a POST request to the specified URL with the given content type and request body
  * 3. parse the HTTP response by calling the `parse` function
  * 4. invoke the [[PromiseResolvers]] callbacks with the result of parsing
+ *
+ * Note that it is assumed that the HTTP response has status code 200. Otherwise, an error will be signalled by
+ * calling the `reject` callback. Both server and client need to agree on a suitable application-level protocol how to
+ * map errors into a response body and back from it. The default server ([[routerPort]]) requires a format function that
+ * should be an inverse to `parse`.
  *
  * @param url the URL used for all requests
  * @param contentType the HTTP content type of the request
@@ -39,6 +51,11 @@ export function fetchPort<T>(
                 body: request.request
             });
 
+            if (!response.ok) {
+                request.resolvers.reject(new Error("Invalid response code"));
+                return;
+            }
+
             try {
                 const parsed = await parse(response);
                 request.resolvers.resolve(parsed);
@@ -50,6 +67,12 @@ export function fetchPort<T>(
     };
 }
 
+/**
+ * Wrapper around [[fetchPort]] set up for JSON communication. The content type is set to `application/json`.
+ *
+ * This wrapper follows the same error protocol as [[jsonRouterPort]]. Outgoing requests are transformed into strings
+ * using `JSON.stringify`. Conversely, incoming responses are parsed using `JSON.parse`.
+ */
 export function jsonFetchPort(
     url: string,
     fetch: typeof window.fetch
@@ -70,6 +93,13 @@ export function jsonFetchPort(
     );
 }
 
+/**
+ * Wrapper around [[fetchPort]] set up for raw byte stream communication. The content type is set to
+ * `application/octet-stream`.
+ *
+ * This wrapper follows the same error protocol as [[bubblewrapRouterPort]]. Outgoing requests are encoded into byte
+ * stream using Bubblewrap. Conversely, incoming responses are decoded using Bubblewrap.
+ */
 export function bubblewrapFetchPort(
     url: string,
     bubblewrap: Bubblewrap,

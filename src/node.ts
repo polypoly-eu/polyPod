@@ -18,15 +18,17 @@ import {Bubblewrap} from "@polypoly-eu/bubblewrap";
  * The [[SendPort.send]] and [[ReceivePort.addHandler]] methods delegate directly to the underlying Node implementation.
  * For typed operation, it is recommended to use [[mapPort]] with type coercions.
  *
+ * It is not possible to transfer objects with this [[Port]].
+ *
  * Note that Node `MessagePort`s constructed from `MessageChannel` use a variant of the structured clone algorithm; that
  * is, an object sent on the port will be received as a different object.
  */
 export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
     return {
-        send(value: unknown): void {
+        send(value: any): void {
             port.postMessage(value);
         },
-        addHandler(handler: Handler<unknown>): void {
+        addHandler(handler: Handler<any>): void {
             port.on("message", handler);
         }
     };
