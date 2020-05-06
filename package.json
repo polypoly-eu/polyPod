@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/polypoly-eu/rdf-spec#readme",
   "devDependencies": {
-    "@graphy/core.data.factory": "^4.2.0",
+    "@graphy/core.data.factory": "^4.2.1",
     "@rdfjs/data-model": "^1.1.2",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.0.0",
