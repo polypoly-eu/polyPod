@@ -12,11 +12,12 @@
  * the documentation of [[Class]] (explanation of the custom logic) and [[Bubblewrap]] (explanation of how to register).
  *
  * We leverage [MessagePack's](https://msgpack.org/) extension types for mapping JavaScript objects to byte arrays.
- * This library defines three extension types:
- * 1. [[msgPackEtypeUndef]] tags a sentinel value of class [[Undefined]]; used to distinguish `undefined` from
+ * This library defines four extension types:
+ * 1. [[msgPackEtypeStrict]] is reserved for implementation purposes and will never be emitted
+ * 2. [[msgPackEtypeUndef]] tags a sentinel value of class [[Undefined]]; used to distinguish `undefined` from
  *    `null` (see [[Class]] for details)
- * 2. [[msgPackEtypeClass]] tags an registered JavaScript class; there is one tag for all classes
- * 3. [[msgPackEtypeError]] tags an error of the built-in `Error` type; it is possible to specify custom logic
+ * 3. [[msgPackEtypeClass]] tags an registered JavaScript class; there is one tag for all classes
+ * 4. [[msgPackEtypeError]] tags an error of the built-in `Error` type; it is possible to specify custom logic
  *    for subclasses of `Error`
  *
  * @packageDocumentation
@@ -168,6 +169,7 @@ export type Class<T extends MaybeSerializable> = Function & {
  */
 export type Classes = Record<string, Class<any>>;
 
+export const msgPackEtypeStrict = 0x00;
 export const msgPackEtypeUndef = 0x01;
 export const msgPackEtypeClass = 0x02;
 export const msgPackEtypeError = 0x03;
@@ -200,16 +202,20 @@ export class Bubblewrap {
     codec?: ExtensionCodec;
 
     private constructor(
-        private readonly classes: Classes
+        private readonly classes: Classes,
+        private readonly strict: boolean
     ) { }
 
     /**
      * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes.
      *
      * If no dictionary is specified, no classes are registered.
+     *
+     * @param strict if `true`, then `encode` will throw an exception when encountering any object with an unknown
+     * prototype; this is only recommended for testing purposes
      */
-    static create(classes?: Classes): Bubblewrap {
-        return new Bubblewrap(classes || {});
+    static create(classes?: Classes, strict = false): Bubblewrap {
+        return new Bubblewrap(classes || {}, strict);
     }
 
     /**
@@ -223,11 +229,40 @@ export class Bubblewrap {
         for (const thisKey of thisKeys)
             if (thatKeys.includes(thisKey))
                 throw new Error(`Duplicate identifier ${thisKey}`);
-        return new Bubblewrap({ ...this.classes, ...more });
+        return new Bubblewrap({ ...this.classes, ...more }, this.strict);
+    }
+
+    private registerStrict(codec: ExtensionCodec): void {
+        if (!this.strict)
+            return;
+
+        const knownPrototypes = [
+            Object.prototype,
+            Error.prototype,
+            Undefined.prototype,
+            ...Object.values(this.classes).map(cls => cls.prototype)
+        ];
+
+        codec.register({
+            type: msgPackEtypeStrict,
+            encode: value => {
+                if (typeof value === "object" && !Array.isArray(value)) {
+                    if (knownPrototypes.includes(Object.getPrototypeOf(value)))
+                        // this value is probably fine, please go on
+                        return null;
+
+                    throw new Error("Attempted to encode an object with an unknown prototype");
+                }
+                return null;
+            },
+            decode: () => { throw new Error("Attempted to decode a dummy type"); }
+        });
     }
 
     private makeCodec(): ExtensionCodec {
         const codec = new ExtensionCodec();
+
+        this.registerStrict(codec);
 
         codec.register({
             type: msgPackEtypeUndef,

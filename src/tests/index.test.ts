@@ -26,7 +26,7 @@ class BubblewrapSpec<T extends Record<string, unknown>> {
             constructors[key] = constructor;
         }
 
-        this.bubblewrap = Bubblewrap.create(constructors);
+        this.bubblewrap = Bubblewrap.create(constructors, true);
 
         this.gen = fc.oneof(...gens);
     }
@@ -124,16 +124,31 @@ describe("Bubblewrap", () => {
     });
 
     describe("Builtins", () => {
-        const bubblewrap = Bubblewrap.create();
 
         it("Error", () => {
+            const bubblewrap = Bubblewrap.create();
+
             fc.assert(fc.property(fc.string(), msg => {
                 const err = new Error(msg);
                 const decoded = bubblewrap.decode(bubblewrap.encode(err));
                 expect(decoded).toEqual(err);
                 expect(decoded).toBeInstanceOf(Error);
             }));
-        })
-    })
+        });
+
+        it("Error (non-strict)", () => {
+            const bubblewrap = Bubblewrap.create();
+            const err = new MyError("test");
+            const decoded = bubblewrap.decode(bubblewrap.encode(err));
+            expect(Object.getPrototypeOf(decoded)).toBe(Error.prototype);
+        });
+
+        it("Error (strict)", () => {
+            const bubblewrap = Bubblewrap.create({}, true);
+            const err = new MyError("test");
+            expect(() => bubblewrap.encode(err)).toThrowError(/unknown prototype/);
+        });
+
+    });
 
 });
