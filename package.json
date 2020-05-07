@@ -1,14 +1,16 @@
 {
   "name": "@polypoly-eu/postoffice",
   "version": "0.0.6",
-  "description": "Post Office transmits function calls across iframes",
+  "description": "RPC library for TypeScript based on ports",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "test": "jest"
+    "test": "jest",
+    "docs": "typedoc",
+    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -30,10 +32,12 @@
     "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
+    "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
     "jest": "^25.5.4",
     "rollup": "^1.32.1",
     "ts-jest": "^25.4.0",
+    "typedoc": "^0.17.6",
     "typescript": "^3.7.5"
   },
   "dependencies": {
