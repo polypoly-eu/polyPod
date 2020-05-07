@@ -10,3 +10,4 @@ src
 docs
 typedoc.json
 karma.conf.js
+.nyc_output
