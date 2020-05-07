@@ -6,11 +6,11 @@ RPC library for TypeScript based on ports
 
 ## Overview
 
-The [port-authority](https://github.com/polypoly-eu/port-authority/) provides port abstractions for typed bi-directional communication.
+The [port-authority](https://github.com/polypoly-eu/port-authority/) library provides port abstractions for typed bi-directional communication.
 This library builds on top of these abstractions to provide transparent function calls on objects that may reside in a different process.
 This works by capturing these calls, translating them into a particular protocol, sending it across the port, and finally executing it on the other side.
 The response is sent back similarly.
-As opposed to port-authority, this library is opinionated in that it suggests to use [bubblewrap](https://github.com/polypoly-eu/bubblewrap) for transport encoding (although it is not required).
+Encoding and error handling is assumed to be dealt with by the transport layer.
 
 We leverage TypeScript's type system to enable type-safe remote calls.
 Client and server share a _specification_ of an API that can be called remotely.

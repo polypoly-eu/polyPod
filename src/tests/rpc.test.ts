@@ -3,7 +3,7 @@ import {MessageChannel} from "worker_threads";
 import {client, fromNodeMessagePort, liftClient, liftServer, mapPort, Port, server} from "@polypoly-eu/port-authority";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
 import {ClientOf, ObjectEndpointSpec, ServerOf, ValueEndpointSpec} from "../types";
-import {endpointBubblewrapClasses, EndpointRequest, EndpointResponse, EndpointError} from "../protocol";
+import {EndpointRequest, EndpointResponse} from "../protocol";
 
 type SimpleEndpoint = ObjectEndpointSpec<{
     test1(param1: string): ValueEndpointSpec<number>;
@@ -36,7 +36,7 @@ describe("RPC", () => {
     beforeEach(async () => {
         const {port1, port2} = new MessageChannel();
 
-        const bubblewrap = Bubblewrap.create(endpointBubblewrapClasses);
+        const bubblewrap = Bubblewrap.create();
 
         const rawClientPort = fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>;
         const rawServerPort = fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>;
@@ -75,7 +75,7 @@ describe("RPC", () => {
     it("Fails (non-existent method)", async () => {
         // @ts-ignore
         await expect(rpcClient.whodis("lol")())
-            .rejects.toThrowError(EndpointError);
+            .rejects.toThrowError(/not a function/);
     });
 
 });

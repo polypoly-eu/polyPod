@@ -1,5 +1,5 @@
 import {EndpointSpec, ServerOf, ClientOf, Callable} from "./types";
-import {EndpointProcedure, EndpointRequestPart, EndpointError, EndpointResponse, EndpointRequest} from "./protocol";
+import {EndpointProcedure, EndpointRequestPart, EndpointRequest} from "./protocol";
 
 export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>): EndpointProcedure {
     async function process(impl: any, parts: ReadonlyArray<EndpointRequestPart>): Promise<any> {
@@ -10,24 +10,24 @@ export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>):
 
         const f = impl[method];
         if (typeof f !== "function")
-            return Promise.reject(new EndpointError(method));
+            return Promise.reject(new Error(`${method} is not a function`));
 
         return process(await Promise.resolve(f.call(impl, ...args)), rest);
     }
 
-    return req => process(impl, req.parts).then(res => new EndpointResponse(res));
+    return req => process(impl, req);
 }
 
 type RequestBuilder = Callable<any> & Record<string, (...args: any[]) => RequestBuilder>;
 
-function requestBuilder(client: EndpointProcedure, state: ReadonlyArray<EndpointRequestPart>): RequestBuilder {
+function requestBuilder(client: EndpointProcedure, state: EndpointRequest): RequestBuilder {
     return new Proxy<RequestBuilder>(new Function() as RequestBuilder, {
         apply(target, thisArg, argArray): Promise<any> {
             if (!Array.isArray(argArray) || argArray.length !== 0)
                 throw new Error("Argument list must be empty");
 
             // end of line, make the call
-            return client(new EndpointRequest(state)).then(res => res.value);
+            return client(state);
         },
         get(target, property): (...args: any[]) => any {
             if (typeof property !== "string")
