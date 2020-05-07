@@ -2,7 +2,7 @@ import {Pod, PolyIn, PolyOut} from "@polypoly-eu/poly-api";
 import {DataFactory} from "rdf-js";
 import {endpointClient, ClientOf, ServerOf, EndpointRequest, EndpointResponse, endpointServer} from "@polypoly-eu/postoffice";
 import {FetchResponse, PodEndpoint, PolyInEndpoint, PolyOutEndpoint} from "./endpoints";
-import {ReceiveAndReplyPort, liftServer, server, bubblewrapFetchPort, SendAndReplyPort, client, Port, liftClient, bubblewrapRouterPort} from "@polypoly-eu/port-authority";
+import {ResponsePort, liftServer, server, bubblewrapFetchPort, RequestPort, client, Port, liftClient, bubblewrapRouterPort} from "@polypoly-eu/port-authority";
 import {podBubblewrap, dataFactory, bubblewrapPort} from "./bubblewrap";
 import {Router} from "express";
 import {bindFS} from "../util";
@@ -26,7 +26,7 @@ export class RemoteClientPod implements Pod {
     }
 
     constructor(
-        private clientPort: SendAndReplyPort<EndpointRequest, EndpointResponse>,
+        private clientPort: RequestPort<EndpointRequest, EndpointResponse>,
         private readonly dataFactory: DataFactory
     ) {
         this.rpcClient = endpointClient<PodEndpoint>(client(clientPort));
@@ -35,23 +35,23 @@ export class RemoteClientPod implements Pod {
     get polyIn(): PolyIn {
         return {
             factory: this.dataFactory,
-            add: (...quads) => this.rpcClient.call.polyIn().call.add(...quads).get,
-            select: matcher => this.rpcClient.call.polyIn().call.select(matcher).get
+            add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
+            select: matcher => this.rpcClient.polyIn().select(matcher)()
         };
     }
 
     get polyOut(): PolyOut {
         return {
             readFile: (path, options) =>
-                this.rpcClient.call.polyOut().call.readFile(path, options).get,
+                this.rpcClient.polyOut().readFile(path, options)(),
             writeFile: (path, contents, options) =>
-                this.rpcClient.call.polyOut().call.writeFile(path, contents, options).get,
+                this.rpcClient.polyOut().writeFile(path, contents, options)(),
             stat: path =>
-                this.rpcClient.call.polyOut().call.stat(path).get,
+                this.rpcClient.polyOut().stat(path)(),
             fetch: (input, init) =>
                 // we need to `|| {}` here because the msgpack library (via bubblewrap) maps `undefined` to `null`,
                 // which confuses some fetch implementations
-                this.rpcClient.call.polyOut().call.fetch(input, init || {}).get
+                this.rpcClient.polyOut().fetch(input, init || {})()
         };
     }
 
@@ -63,7 +63,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         private readonly pod: Pod
     ) {}
 
-    listen(port: ReceiveAndReplyPort<EndpointRequest, EndpointResponse>): void {
+    listen(port: ResponsePort<EndpointRequest, EndpointResponse>): void {
         server(port, endpointServer<PodEndpoint>(this));
     }
 
