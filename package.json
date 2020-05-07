@@ -1,7 +1,7 @@
 {
   "name": "@polypoly-eu/postoffice",
   "version": "0.0.6",
-  "description": "RPC library for TypeScript based on ports",
+  "description": "RPC library for TypeScript",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/polypoly-eu/postoffice#readme",
   "devDependencies": {
-    "@polypoly-eu/bubblewrap": "0.0.6",
     "@rollup/plugin-sucrase": "^3.0.0",
     "@types/body-parser": "^1.19.0",
     "@types/express-serve-static-core": "^4.17.6",
@@ -40,8 +39,5 @@
     "ts-jest": "^25.5.0",
     "typedoc": "^0.17.6",
     "typescript": "^3.7.5"
-  },
-  "dependencies": {
-    "@polypoly-eu/port-authority": "0.0.2"
   }
 }

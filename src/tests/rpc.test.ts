@@ -1,9 +1,5 @@
 import {endpointClient, endpointServer} from "../rpc";
-import {MessageChannel} from "worker_threads";
-import {client, fromNodeMessagePort, liftClient, liftServer, mapPort, Port, server} from "@polypoly-eu/port-authority";
-import {Bubblewrap} from "@polypoly-eu/bubblewrap";
 import {ClientOf, ObjectEndpointSpec, ServerOf, ValueEndpointSpec} from "../types";
-import {EndpointRequest, EndpointResponse} from "../protocol";
 
 type SimpleEndpoint = ObjectEndpointSpec<{
     test1(param1: string): ValueEndpointSpec<number>;
@@ -31,35 +27,9 @@ const complexEndpointImpl: ServerOf<ComplexEndpoint> = {
 describe("RPC", () => {
 
     let rpcClient: ClientOf<ComplexEndpoint>;
-    let cleanup: () => Promise<void>;
 
     beforeEach(async () => {
-        const {port1, port2} = new MessageChannel();
-
-        const bubblewrap = Bubblewrap.create();
-
-        const rawClientPort = fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>;
-        const rawServerPort = fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>;
-
-        const clientPort = liftClient<EndpointRequest, EndpointResponse>(
-            mapPort(rawClientPort, buffer => bubblewrap.decode(buffer), request => bubblewrap.encode(request))
-        );
-
-        const serverPort = liftServer<EndpointRequest, EndpointResponse>(
-            mapPort(rawServerPort, buffer => bubblewrap.decode(buffer), response => bubblewrap.encode(response))
-        );
-
-        rpcClient = endpointClient<ComplexEndpoint>(client(clientPort));
-        server(serverPort, endpointServer<ComplexEndpoint>(complexEndpointImpl));
-
-        cleanup = async () => {
-            port1.close();
-            port2.close();
-        }
-    });
-
-    afterEach(async () => {
-        await cleanup();
+        rpcClient = endpointClient<ComplexEndpoint>(endpointServer<ComplexEndpoint>(complexEndpointImpl));
     });
 
     it("Succeeds (simple call)", async () => {

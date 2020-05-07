@@ -2,15 +2,14 @@
 
 ![Node CI](https://github.com/polypoly-eu/postoffice/workflows/Node%20CI/badge.svg)
 
-RPC library for TypeScript based on ports
+RPC library for TypeScript
 
 ## Overview
 
-The [port-authority](https://github.com/polypoly-eu/port-authority/) library provides port abstractions for typed bi-directional communication.
-This library builds on top of these abstractions to provide transparent function calls on objects that may reside in a different process.
-This works by capturing these calls, translating them into a particular protocol, sending it across the port, and finally executing it on the other side.
+This library allows transparent function calls on objects that may reside in a different process.
+This works by capturing these calls, translating them into a particular protocol, sending it over a wire, and finally executing it on the other side.
 The response is sent back similarly.
-Encoding and error handling is assumed to be dealt with by the transport layer.
+Encoding and error handling is assumed to be dealt with by the transport layer, for example [port-authority](https://github.com/polypoly-eu/port-authority/).
 
 We leverage TypeScript's type system to enable type-safe remote calls.
 Client and server share a _specification_ of an API that can be called remotely.
@@ -33,7 +32,8 @@ type SimpleEndpoint = ObjectEndpointSpec<{
 
 By convention, these specifications are called “endpoints”.
 
-Servers can implement this endpoint specification and may choose to use `async` methods at any point:
+Servers can implement this endpoint specification and may choose to use `async` methods at any point.
+We assume port-authority as a transport layer.
 
 ```typescript
 import {endpointServer, ServerOf} from "@polypoly-eu/postoffice";
