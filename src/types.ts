@@ -143,6 +143,9 @@ export type Callable<T> = () => ForcePromise<T>;
  *
  * Note that the inner method `nested.foo` is assumed to always return a `Promise<string>`, whereas the outer method
  * `test` may return `number` or `Promise<number>`.
+ *
+ * Ultimately, when a user calls methods on this proxy object, these calls are transmitted through a protocol to a
+ * server implementation that closely mirrors the shape of the proxy.
  */
 export type ClientOf<Spec extends EndpointSpec> =
     Spec extends ValueEndpointSpec<infer T> ?
