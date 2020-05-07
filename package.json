@@ -57,7 +57,7 @@
     "express": "^4.17.1",
     "memfs": "^3.1.2",
     "node-fetch": "^2.6.0",
-    "rollup": "^2.8.0",
+    "rollup": "^2.8.2",
     "ts-jest": "^25.3.1",
     "typescript": "^3.7.5"
   }
