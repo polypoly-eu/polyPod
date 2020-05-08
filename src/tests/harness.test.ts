@@ -64,9 +64,9 @@ describe("Harness", () => {
             reactDomPath
         };
 
-        const bootstrapped = rawPromise<void>();
+        const completed = rawPromise<void>();
 
-        const server = await serve(0, pod, manifest, config, () => bootstrapped.resolve());
+        const server = await serve(0, pod, manifest, config);
         const port = (server.address() as AddressInfo).port;
 
         const baseURI = `http://localhost:${port}`;
@@ -76,9 +76,10 @@ describe("Harness", () => {
             runScripts: "dangerously",
             resources: "usable"
         });
+        dom.window.addEventListener("completed", () => completed.resolve());
         dom.window.fetch = jsdomFetch;
 
-        await bootstrapped.promise;
+        await completed.promise;
 
         server.close();
         await once(server, "close");

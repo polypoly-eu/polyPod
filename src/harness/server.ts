@@ -32,8 +32,7 @@ export async function serve(
     port: number,
     pod: Pod,
     manifest: Manifest,
-    config: Config,
-    bootstrapCallback?: () => void
+    config: Config
 ): Promise<Server> {
     const app = express();
 
@@ -76,13 +75,6 @@ export async function serve(
     remotePod.listenOnRouter(rpcRouter);
 
     app.use("/rpc", rpcRouter);
-
-    app.post("/bootstrapped", (req, res) => {
-        res.status(204);
-        res.send();
-        if (bootstrapCallback)
-            bootstrapCallback();
-    });
 
     const server = app.listen(port);
     await once(server, "listening");
