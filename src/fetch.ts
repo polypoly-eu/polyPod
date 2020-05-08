@@ -36,7 +36,7 @@ export interface Response {
  * A stripped-down version of `window.fetch` that provides most features needed in real-world use cases.
  *
  * The type definition here is a subset of what browsers offer (see
- * [MDN](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) for details).
+ * [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for details).
  *
  * Possible implementations include:
  * - `window.fetch` (when running in a DOM context)
