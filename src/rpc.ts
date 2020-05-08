@@ -29,8 +29,6 @@
  * const rpcClient: ClientOf<Spec> = endpointClient(client(clientPort));
  * ```
  *
- * Transport encoding of [[EndpointRequest]] and [[EndpointResponse]] is responsibility of the underlying ports.
- *
  * @packageDocumentation
  */
 

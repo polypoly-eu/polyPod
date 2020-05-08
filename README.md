@@ -75,7 +75,7 @@ the argument and result types are checked like in regular function calls.
 This repository is structured as a TypeScript library with the following modules:
 
 * `types` contains the meta-specification types for endpoints
-* `protocol` defines classes and Bubblewrap configuration for the remote protocol
+* `protocol` defines the underlying protocol that are used for representing function calls and arguments
 * `rpc` converts specifications into clients and servers
 
 ## Security
