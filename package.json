@@ -8,7 +8,9 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "test": "jest"
+    "test": "jest",
+    "docs": "typedoc",
+    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -51,6 +53,7 @@
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
     "fast-check": "^1.24.2",
     "jest": "^25.5.4",
@@ -59,6 +62,7 @@
     "node-fetch": "^2.6.0",
     "rollup": "^2.8.2",
     "ts-jest": "^25.3.1",
+    "typedoc": "^0.17.6",
     "typescript": "^3.7.5"
   }
 }
