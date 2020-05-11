@@ -2,8 +2,7 @@ import {portSpec} from "../../specs/port";
 import {iframeOuterPort} from "../../browser";
 import {Port, receiveSingle} from "../../port";
 import {flipLifecycle} from "../_lifecycles";
-import chai, {assert} from "chai";
-import chaiAsPromised from "chai-as-promised";
+import {assert} from "chai";
 import {timeout, TimeoutError} from "promise-timeout";
 import {Resource} from "../../util";
 
