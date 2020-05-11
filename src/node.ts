@@ -7,7 +7,7 @@
 import {Handler, mapReceivePort, Port} from "./port";
 import {MessagePort} from "worker_threads";
 import {ResponsePort} from "./procedure";
-import {IRouter, ParamsDictionary} from "express-serve-static-core";
+import {Router} from "express";
 import {recoverPromise, Try} from "./util";
 import {OptionsJson, Options} from "body-parser";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
@@ -64,13 +64,13 @@ export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
  * @param format a function that converts a successful response or an error into a body; it should never throw
  */
 export function routerPort<T, Body = any>(
-    router: IRouter,
+    router: Router,
     contentType: string,
     format: (result: Try<T>) => Body
 ): ResponsePort<Body, T> {
     return {
         addHandler: handler => {
-            router.post<ParamsDictionary, Body, Body>("/", async (request, response) => {
+            router.post<any, Body, Body>("/", async (request, response) => {
                 const result = await recoverPromise(new Promise<T>(((resolve, reject) => {
                     handler({
                         request: request.body,
@@ -100,7 +100,7 @@ export function routerPort<T, Body = any>(
  * `JSON.parse`.
  */
 export async function jsonRouterPort(
-    router: IRouter,
+    router: Router,
     options?: OptionsJson
 ): Promise<ResponsePort<any, any>> {
     const contentType = "application/json";
@@ -132,7 +132,7 @@ export async function jsonRouterPort(
  * are decoded using standard Bubblewrap decoding.
  */
 export async function bubblewrapRouterPort(
-    router: IRouter,
+    router: Router,
     bubblewrap: Bubblewrap,
     options?: Options
 ): Promise<ResponsePort<any, any>> {

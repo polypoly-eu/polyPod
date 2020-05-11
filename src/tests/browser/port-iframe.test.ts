@@ -7,8 +7,6 @@ import chaiAsPromised from "chai-as-promised";
 import {timeout, TimeoutError} from "promise-timeout";
 import {Resource} from "../../util";
 
-chai.use(chaiAsPromised);
-
 async function makeIframe(root: HTMLElement, src: string): Promise<HTMLIFrameElement> {
     const iframe = document.createElement("iframe");
     return new Promise(resolve => {
