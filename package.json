@@ -37,7 +37,7 @@
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.5",
     "@types/rdfjs__dataset": "^1.0.1",
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/eslint-plugin": "^2.32.0",
     "@typescript-eslint/parser": "^2.32.0",
     "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
