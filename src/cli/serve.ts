@@ -1,6 +1,6 @@
 import {defaultConfig, serve} from "../harness/server";
 import {block, detectFeature, Ops} from "./_common";
-import {DefaultPod} from "@polypoly-eu/poly-api";
+import {DefaultPod, FS} from "@polypoly-eu/poly-api";
 import {promises as _fs} from "fs";
 import {Volume} from "memfs";
 import open from "open";
@@ -17,7 +17,7 @@ export interface ServeCommandOps extends Ops {
 
 export async function serveCommand(options: ServeCommandOps): Promise<void> {
     const manifest = getManifest(await detectFeature(options));
-    const fs: typeof _fs =
+    const fs: FS =
         options.inmemory ?
             (new Volume().promises as any) :
             _fs;
