@@ -54,7 +54,7 @@ describe("Build", () => {
 
             const Feature: FeatureConstructor = context.Feature;
 
-            const pod = new DefaultPod(dataset(), fs, fetch);
+            const pod = new DefaultPod(dataset(), fs as any, fetch);
 
             new Feature().init(pod);
 

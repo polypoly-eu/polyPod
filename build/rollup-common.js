@@ -25,6 +25,13 @@ export const configs = {
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"]
             })
+        ],
+        external: [
+            // those will be "shaken out", but declaring them here to avoid warnings
+            "io-ts/lib/Tree",
+            "io-ts/lib/Decoder",
+            "fp-ts/lib/Either",
+            "fp-ts/lib/pipeable"
         ]
     },
     reactGlobal: {
