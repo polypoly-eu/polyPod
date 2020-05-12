@@ -6,6 +6,7 @@ import builtins from "rollup-plugin-node-builtins";
 import nodeGlobals from "rollup-plugin-node-globals";
 import {browserScriptsPath} from "./paths";
 import {join} from "path";
+import executable from "rollup-plugin-executable";
 
 export const configs = {
     bootstrap: {
@@ -73,7 +74,8 @@ export const configs = {
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"]
-            })
+            }),
+            executable()
         ],
         external: [
             "express",
