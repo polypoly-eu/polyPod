@@ -16,16 +16,13 @@
 import {Pod} from "../api";
 import fc from "fast-check";
 import {DataFactorySpec, gens} from "@polypoly-eu/rdf-spec";
-import chai, {assert} from "chai";
-import chaiAsPromised from "chai-as-promised";
+import {assert} from "chai";
 import {resolve} from "path";
 import {Server} from "http";
 import express from "express";
 import {once} from "events";
 import {raw} from "body-parser";
 import {AddressInfo} from "net";
-
-chai.use(chaiAsPromised);
 
 /**
  * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].

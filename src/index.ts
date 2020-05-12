@@ -9,5 +9,3 @@ export * from "./api";
 export * from "./fetch";
 export * from "./fs";
 export * from "./default";
-
-export * from "./specs/api";
