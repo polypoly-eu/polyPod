@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/polypoly-eu/orodruin#readme",
   "devDependencies": {
-    "@rollup/plugin-virtual": "^2.0.1",
+    "@rollup/plugin-virtual": "^2.0.2",
     "@types/express": "^4.17.6",
     "@types/jest": "^25.2.1",
     "@types/jsdom": "^16.2.1",
