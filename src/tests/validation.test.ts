@@ -1,8 +1,13 @@
-import {DefaultPod, podSpec} from "@polypoly-eu/poly-api";
+import {DefaultPod} from "@polypoly-eu/poly-api";
 import {Volume} from "memfs";
 import {ValidatingPod, ValidationError} from "../validation";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
+import {podSpec} from "@polypoly-eu/poly-api/dist/specs";
+import chai from "chai";
+import chaiAsPromised from "chai-as-promised";
+
+chai.use(chaiAsPromised);
 
 describe("Validating pod", () => {
 

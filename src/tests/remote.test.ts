@@ -1,4 +1,4 @@
-import {DefaultPod, podSpec} from "@polypoly-eu/poly-api";
+import {DefaultPod} from "@polypoly-eu/poly-api";
 import {Volume} from "memfs";
 import {dataset} from "@rdfjs/dataset";
 import {RemoteClientPod, RemoteServerPod} from "../remote";
@@ -10,6 +10,11 @@ import express, {Router} from "express";
 import {VolatilePod} from "../volatile";
 import fetch from "node-fetch";
 import {once} from "events";
+import {podSpec} from "@polypoly-eu/poly-api/dist/specs";
+import chai from "chai";
+import chaiAsPromised from "chai-as-promised";
+
+chai.use(chaiAsPromised);
 
 describe("Remote pod", () => {
 
