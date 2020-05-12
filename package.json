@@ -28,7 +28,7 @@
   "dependencies": {
     "@polypoly-eu/bubblewrap": "0.0.6",
     "@polypoly-eu/poly-api": "0.0.7",
-    "@polypoly-eu/port-authority": "0.0.3",
+    "@polypoly-eu/port-authority": "0.0.4",
     "@polypoly-eu/postoffice": "0.0.7",
     "@polypoly-eu/rdf": "0.0.3",
     "@types/rdf-js": "^3.0.0"
