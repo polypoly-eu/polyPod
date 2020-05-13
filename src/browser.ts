@@ -105,10 +105,17 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
  * port.addHandler(console.dir);
  * ```
  */
-export function iframeOuterPort(secret: string, iframe: HTMLIFrameElement): Port<any, any> {
+export function iframeOuterPort(
+    secret: string,
+    iframe: HTMLIFrameElement,
+    init?: (port: Port<any, any>) => void
+): Port<any, any> {
     const {port1, port2} = new MessageChannel();
+    const rawPort = fromBrowserMessagePort(port1);
+    const port = mapPort(rawPort, event => event.data, any => any);
+    if (init)
+        init(port);
     port1.start();
     iframe.contentWindow!.postMessage(secret, "*", [port2]);
-    const rawPort = fromBrowserMessagePort(port1);
-    return mapPort(rawPort, event => event.data, any => any);
+    return port;
 }
