@@ -139,7 +139,7 @@ export interface PolyOut extends FS {
  *
  * Pod implementors may use any technology they see fit to provide the API, including remote procedure calls or HTTP
  * requests, as long as that is transparent to the Features. To that extent, the API is designed to be asynchronous,
- * i.e. all methods return promises. The only exception is the RDF data factory; see [[PolyIn.dataFactory]] for details.
+ * i.e. all methods return promises. The only exception is the RDF data factory; see [[PolyIn.factory]] for details.
  */
 export interface Pod {
     /**

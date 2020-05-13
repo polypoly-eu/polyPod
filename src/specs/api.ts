@@ -27,7 +27,8 @@ import {AddressInfo} from "net";
 /**
  * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].
  *
- * It assumes that Pods can be cheaply created and expose access to the underlying filesystem (via [[PodUnderTest]]).
+ * It assumes that Pods can be cheaply created.
+
  * The specification manipulates files only under a path that is provided in the constructor. Callers should ensure
  * that the path exists, is empty, and not used for other purposes.
  *
