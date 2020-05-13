@@ -73,6 +73,6 @@
     "rollup": "^2.10.0",
     "ts-mocha": "^7.0.0",
     "typedoc": "^0.17.6",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.2"
   }
 }
