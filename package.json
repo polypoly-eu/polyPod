@@ -50,7 +50,7 @@
     "rollup-plugin-node-globals": "^1.4.0",
     "tempy": "^0.5.0",
     "ts-jest": "^25.5.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.2"
   },
   "dependencies": {
     "@polypoly-eu/poly-api": "0.0.7",
