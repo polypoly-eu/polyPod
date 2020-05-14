@@ -28,7 +28,7 @@ This library provides a total of three abstraction layers:
    Developers that want to implement a server can define such a function and use it to uniformly listen on any supported port.
    On the other hand, developers that need a client can turn any supported port into a function that transparently handles the communication.
  
-Interoperability with [Bubblewrap](https://github.com/polypoly-eu/bubblewrap) is provided as an option, so that arbitrary objects can be sent over the wire.
+Interoperability with [Bubblewrap](https://github.com/polypoly-eu/bubblewrap) is provided so that arbitrary objects can be sent over the wire.
 
 ## Example
 
@@ -56,7 +56,7 @@ This repository is structured as a TypeScript library with the following modules
 * `node` provides Node-specific code (contains asynchronous imports to the [body-parser](https://www.npmjs.com/package/body-parser) library)
 * `fetch` provides universal code based on the Fetch API (requires [a polyfill on Node.js](https://www.npmjs.com/package/node-fetch))
 
-Both body-parser and Bubblewrap are declared as peer dependencies.
+body-parser is declared as peer dependency.
 
 ## Limitations
 
