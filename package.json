@@ -28,9 +28,10 @@
   "dependencies": {
     "@polypoly-eu/bubblewrap": "0.0.6",
     "@polypoly-eu/poly-api": "0.0.7",
-    "@polypoly-eu/port-authority": "0.0.4",
+    "@polypoly-eu/port-authority": "0.0.5",
     "@polypoly-eu/postoffice": "0.0.7",
     "@polypoly-eu/rdf": "0.0.3",
+    "@types/express": "^4.17.6",
     "@types/rdf-js": "^3.0.0"
   },
   "peerDependencies": {
@@ -45,10 +46,8 @@
     "@rollup/plugin-sucrase": "^3.0.1",
     "@rollup/plugin-virtual": "^2.0.2",
     "@rdfjs/dataset": "^1.0.1",
-    "@types/body-parser": "^1.19.0",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",
-    "@types/express": "^4.17.6",
     "@types/jest": "^25.2.2",
     "@types/node-fetch": "^2.5.7",
     "@types/rdfjs__dataset": "^1.0.1",
