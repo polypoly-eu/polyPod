@@ -29,7 +29,7 @@
     "@polypoly-eu/rdf": "0.0.3",
     "@polypoly-eu/rdf-spec": "0.0.8",
     "@rollup/plugin-sucrase": "^3.0.1",
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^25.2.2",
     "@types/rdf-js": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
