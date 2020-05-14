@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import {Handler, mapPort, Port} from "./port";
+import {Handler, mapPort, Port, ReceivePort} from "./port";
 
 /**
  * Converts a browser `MessagePort` into a raw [[Port]].
@@ -93,6 +93,13 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
 /**
  * The “outer half” of an iframe portal. See [[iframeInnerPort]] for details about the protocol.
  *
+ * This function creates a `MessageChannel` and starts the outer port immediately. Consider a scenario where the script
+ * executing inside the iframe immediately sends messages to the port. Those messages may get lost, because this
+ * function may not have returned yet, so a caller may not have had the opportunity to register a handler. In any case,
+ * this is a race condition. To avoid this, callers may specify an `init` function that gets called with the port before
+ * it is sent to the iframe. Sending messages down that port may result in a race condition in the iframe, so it is
+ * prohibited by the type.
+ *
  * Usage example from an outer window:
  *
  * ```
@@ -108,7 +115,7 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
 export function iframeOuterPort(
     secret: string,
     iframe: HTMLIFrameElement,
-    init?: (port: Port<any, any>) => void
+    init?: (port: ReceivePort<any>) => void
 ): Port<any, any> {
     const {port1, port2} = new MessageChannel();
     const rawPort = fromBrowserMessagePort(port1);
