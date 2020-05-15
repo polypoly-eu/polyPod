@@ -65,7 +65,7 @@
     "express": "^4.17.1",
     "memfs": "^3.1.2",
     "node-fetch": "^2.6.0",
-    "rollup": "^2.10.0",
+    "rollup": "^2.10.2",
     "ts-jest": "^25.5.1",
     "typedoc": "^0.17.6",
     "typescript": "^3.9.2"
