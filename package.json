@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@polypoly-eu/poly-api": "0.0.7",
-    "@polypoly-eu/podigree": "0.0.3",
+    "@polypoly-eu/podigree": "0.0.4",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-node-resolve": "^7.1.3",
