@@ -38,7 +38,7 @@
     "@types/node-fetch": "^2.5.7",
     "@types/rdfjs__dataset": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
+    "@typescript-eslint/parser": "^2.34.0",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
