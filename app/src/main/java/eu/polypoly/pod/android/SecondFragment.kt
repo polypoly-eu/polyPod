@@ -31,7 +31,7 @@ class SecondFragment : Fragment() {
         myWebView.settings.javaScriptEnabled = true
         myWebView.addJavascriptInterface(PodApi(), "pod")
 
-        myWebView.loadUrl("file:///android_asset/index.html")
+        myWebView.loadUrl("file:///android_asset/feature/feature.html")
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
