@@ -1,5 +1,6 @@
 package eu.polypoly.pod.android
 
+import android.content.res.AssetManager.ACCESS_BUFFER
 import android.os.Bundle
 import android.util.Base64
 import android.view.LayoutInflater
@@ -10,6 +11,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.util.stream.Collectors
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -30,9 +34,10 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val myWebView: WebView = view.findViewById(R.id.web_view)
 
-        val unencodedHtml =
-            "<html><body>'%23' is the percent code for ‘#‘ </body></html>"
-        val encodedHtml = Base64.encodeToString(unencodedHtml.toByteArray(), Base64.NO_PADDING)
+        val am = resources.assets
+        val htmlReader = BufferedReader(InputStreamReader(am.open("index.html", ACCESS_BUFFER)))
+        val html = htmlReader.lines().collect(Collectors.joining())
+        val encodedHtml = Base64.encodeToString(html.toByteArray(), Base64.NO_PADDING)
         myWebView.loadData(encodedHtml, "text/html", "base64")
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
