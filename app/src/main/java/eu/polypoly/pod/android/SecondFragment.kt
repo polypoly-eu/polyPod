@@ -33,6 +33,7 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val myWebView: WebView = view.findViewById(R.id.web_view)
+        myWebView.settings.javaScriptEnabled = true
 
         val am = resources.assets
         val htmlReader = BufferedReader(InputStreamReader(am.open("index.html", ACCESS_BUFFER)))

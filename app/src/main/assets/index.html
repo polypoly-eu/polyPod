@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
+    <script>
+        function onButtonClick() {
+            let div = document.getElementById("target");
+            div.innerText = "You did click me!";
+        }
+    </script>
 </head>
 <body>
-<h3>Hi! This is polyPod!</h3>
+<h3>Hi! This is polyPod!</h3><br/>
+<button onclick="onButtonClick()">Click me!</button>
+<div id="target">Still waiting...</div>
 </body>
 </html>
