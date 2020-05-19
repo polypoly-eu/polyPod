@@ -1,12 +1,13 @@
 package eu.polypoly.pod.android
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.Button
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
@@ -27,9 +28,12 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val myWebView: WebView = view.findViewById(R.id.web_view)
 
-        view.findViewById<TextView>(R.id.textview_second).text =
-                getString(R.string.hello_second_fragment, args.myArg)
+        val unencodedHtml =
+            "<html><body>'%23' is the percent code for ‘#‘ </body></html>"
+        val encodedHtml = Base64.encodeToString(unencodedHtml.toByteArray(), Base64.NO_PADDING)
+        myWebView.loadData(encodedHtml, "text/html", "base64")
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
