@@ -1,13 +1,13 @@
 package eu.polypoly.pod.android
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
+import android.webkit.WebMessagePort.WebMessageCallback
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -22,10 +22,12 @@ import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
 class SecondFragment : Fragment() {
 
     private val args: SecondFragmentArgs by navArgs()
+    private var port: WebMessagePort? = null;
+    private var webView: WebView? = null;
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_second, container, false)
@@ -33,27 +35,46 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val myWebView: WebView = view.findViewById(R.id.web_view)
-        myWebView.settings.javaScriptEnabled = true
-        myWebView.addJavascriptInterface(PodApi(), "pod")
+        webView = view.findViewById(R.id.web_view)
+        webView!!.settings.javaScriptEnabled = true
 
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler("/assets/", AssetsPathHandler(context!!))
             .build()
 
-        myWebView.webViewClient = object : WebViewClient() {
+        webView!!.webViewClient = object : WebViewClient() {
             override fun shouldInterceptRequest(
                 view: WebView,
                 request: WebResourceRequest
             ): WebResourceResponse? {
                 return assetLoader.shouldInterceptRequest(request.url)
             }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                initPostOffice(url!!)
+            }
         }
 
-        myWebView.loadUrl("https://appassets.androidplatform.net/assets/feature/feature.html")
+        val url = "https://appassets.androidplatform.net/assets/feature/feature.html"
+        webView!!.loadUrl(url)
+
+        initPostOffice(url)
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+    }
+
+    private fun initPostOffice(url: String) {
+        val channel: Array<WebMessagePort> = webView!!.createWebMessageChannel()
+
+        port = channel[0]
+        port!!.setWebMessageCallback(object : WebMessageCallback() {
+            override fun onMessage(port: WebMessagePort, message: WebMessage) {
+                Log.d("postoffice", "Received message: '${message.data}'");
+            }
+        })
+
+        webView!!.postWebMessage(WebMessage("", arrayOf(channel[1])), Uri.parse(url))
     }
 }
