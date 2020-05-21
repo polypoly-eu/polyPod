@@ -43,7 +43,7 @@
   "devDependencies": {
     "@polypoly-eu/rdf-spec": "0.0.8",
     "@rollup/plugin-node-resolve": "^8.0.0",
-    "@rollup/plugin-sucrase": "^3.0.1",
+    "@rollup/plugin-sucrase": "^3.0.2",
     "@rollup/plugin-virtual": "^2.0.2",
     "@rdfjs/dataset": "^1.0.1",
     "@types/chai": "^4.2.11",
