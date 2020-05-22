@@ -1,5 +1,5 @@
 const typescript = require("@rollup/plugin-typescript");
-const resolve = require("@rollup/plugin-node-resolve");
+const {nodeResolve} = require("@rollup/plugin-node-resolve");
 const commonjs = require("@rollup/plugin-commonjs");
 
 process.env.CHROME_BIN = require("puppeteer").executablePath();
@@ -22,12 +22,8 @@ module.exports = function (config) {
 
         rollupPreprocessor: {
             plugins: [
-                resolve(),
-                commonjs({
-                    namedExports: {
-                        "chai": ["assert"]
-                    }
-                }),
+                nodeResolve(),
+                commonjs(),
                 typescript({
                     tsconfig: "./tsconfig.base.json"
                 })
