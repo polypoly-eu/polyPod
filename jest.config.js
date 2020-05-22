@@ -1,4 +1,4 @@
 module.exports = {
-    roots: ["<rootDir>/src"],
+    roots: ["<rootDir>/src/main/javascript"],
     preset: "ts-jest"
 };

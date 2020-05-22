@@ -1,0 +1,33 @@
+plugins {
+    id 'java-library'
+    id "com.moowork.node" version "1.3.1"
+}
+
+repositories {
+    jcenter()
+}
+
+import groovy.json.JsonSlurper
+def packageJson = new JsonSlurper().parse file('package.json')
+version = packageJson.version
+
+dependencies {
+    compile 'org.msgpack:msgpack-core:0.8.20'
+    testImplementation 'org.graalvm.js:js:20.1.0'
+    testImplementation 'net.jqwik:jqwik:1.2.7'
+    testImplementation 'org.assertj:assertj-core:3.16.1'
+}
+
+ext.rollupOutputDir = file("$buildDir/js")
+
+task npmRollup(type: NpmTask) {
+    args = ["run", "rollup"]
+}
+
+sourceSets.test.output.dir rollupOutputDir, builtBy: npmRollup
+
+test {
+    useJUnitPlatform {
+        includeEngines 'jqwik'
+    }
+}

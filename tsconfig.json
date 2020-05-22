@@ -6,7 +6,7 @@
     ],
     "target": "es6",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./src/main/javascript",
     "module": "commonjs",
     "declaration": true,
     "strict": true,

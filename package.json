@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
-    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && npm run rollup",
+    "rollup": "rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "test": "jest",
@@ -28,6 +29,8 @@
   "devDependencies": {
     "@polypoly-eu/rdf": "0.0.3",
     "@polypoly-eu/rdf-spec": "0.0.8",
+    "@rollup/plugin-commonjs": "^12.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-sucrase": "^3.0.2",
     "@types/jest": "^25.2.3",
     "@types/rdf-js": "^3.0.0",

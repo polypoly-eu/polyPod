@@ -1,6 +1,5 @@
 .idea
 tsconfig.*
-dist/specs
 dist/tests
 src
 *.config.js
@@ -9,3 +8,8 @@ src
 .github
 docs
 typedoc.json
+gradle
+gradlew
+build
+*.gradle
+.jqwik-database
