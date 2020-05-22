@@ -35,7 +35,7 @@
     "@rollup/plugin-sucrase": "^3.0.2",
     "@types/chai": "^4.2.11",
     "@types/jest": "^25.2.3",
-    "@types/node": "^14.0.4",
+    "@types/node": "^14.0.5",
     "@types/rdfjs__dataset": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
