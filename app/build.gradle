@@ -38,8 +38,19 @@ android {
 
 }
 
+repositories {
+    maven {
+        name = "bubblewrap"
+        url = uri("https://maven.pkg.github.com/polypoly-eu/bubblewrap")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+            password = project.findProperty("gpr.token") ?: System.getenv("TOKEN")
+        }
+    }
+}
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'eu.polypoly:bubblewrap:0.0.7'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.2.0'

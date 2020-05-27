@@ -2,6 +2,7 @@ package eu.polypoly.pod.android
 
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +16,16 @@ import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
 
+import eu.polypoly.bubblewrap.Codec
+import eu.polypoly.bubblewrap.Bubblewrap
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class SecondFragment : Fragment() {
 
-    private val args: SecondFragmentArgs by navArgs()
-    private var port: WebMessagePort? = null;
-    private var webView: WebView? = null;
+    private val api: PodApi = PodApi()
+    private var webView: WebView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +60,23 @@ class SecondFragment : Fragment() {
                 outerPort.setWebMessageCallback(object: WebMessageCallback() {
                     override fun onMessage(port: WebMessagePort?, message: WebMessage) {
                         Log.d("postoffice", "Received message: '${message.data}'");
+                        val data = message.data.split(',').map { Integer.parseUnsignedInt(it).toByte() }.toByteArray()
+                        val codec = Codec.id.map()
+                        val decoded = Bubblewrap.decode(data, codec)
+
+                        Log.d("postoffice", decoded.toString())
+
+                        val id = decoded.get("id")!!
+                        val request = decoded.get("request")!!.asArrayValue().list()
+
+                        val response = api.dispatch(request)
+
+                        val encoded = Bubblewrap.encode(mapOf(Pair("response", response), Pair("id", id)), codec)
+
+                        val raw = TextUtils.join(",", encoded.map { it.toString() })
+
+                        outerPort.postMessage(WebMessage(raw))
+
                     }
                 })
                 view.postWebMessage(WebMessage("", arrayOf(innerPort)), Uri.parse("*"))
