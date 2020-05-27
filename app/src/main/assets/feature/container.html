@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="https://appassets.androidplatform.net/assets/" />
+    <script>
+        const {port1, port2} = new MessageChannel();
+
+        let outerPort;
+
+        window.onmessage = event => {
+            console.log("incoming port");
+            outerPort = event.ports[0];
+            outerPort.onmessage = event => {
+                const bytes = event.data.split(",");
+                const buf = Uint8Array.of(...bytes.map(byte => parseInt(byte)));
+                port1.postMessage(buf);
+            }
+        }
+
+        function initIframe(el) {
+            console.log("initializing iframe")
+            port1.start();
+            port1.onmessage = event => {
+                console.dir(event.data);
+                outerPort.postMessage(event.data.toString());
+            };
+            el.contentWindow.postMessage("", "*", [port2]);
+          }
+    </script>
+</head>
+<body>
+    <div id="root">
+        <iframe id="harness" src="features/helloWorld/iframe.html" onload="initIframe(this);"></iframe>
+    </div>
+</body>
+</html>

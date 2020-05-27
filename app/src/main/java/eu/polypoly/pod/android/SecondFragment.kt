@@ -51,30 +51,25 @@ class SecondFragment : Fragment() {
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
-                initPostOffice(url!!)
+                Log.d("postoffice", "initializing postoffice");
+                val channel: Array<WebMessagePort> = view!!.createWebMessageChannel()
+                val outerPort = channel[0]
+                val innerPort = channel[1]
+                outerPort.setWebMessageCallback(object: WebMessageCallback() {
+                    override fun onMessage(port: WebMessagePort?, message: WebMessage) {
+                        Log.d("postoffice", "Received message: '${message.data}'");
+                    }
+                })
+                view.postWebMessage(WebMessage("", arrayOf(innerPort)), Uri.parse("*"))
             }
         }
 
-        val url = "https://appassets.androidplatform.net/assets/feature/feature.html"
+        val url = "https://appassets.androidplatform.net/assets/feature/container.html"
         webView!!.loadUrl(url)
-
-        initPostOffice(url)
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
     }
 
-    private fun initPostOffice(url: String) {
-        val channel: Array<WebMessagePort> = webView!!.createWebMessageChannel()
-
-        port = channel[0]
-        port!!.setWebMessageCallback(object : WebMessageCallback() {
-            override fun onMessage(port: WebMessagePort, message: WebMessage) {
-                Log.d("postoffice", "Received message: '${message.data}'");
-            }
-        })
-
-        webView!!.postWebMessage(WebMessage("", arrayOf(channel[1])), Uri.parse(url))
-    }
 }
