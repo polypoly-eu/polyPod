@@ -40,7 +40,7 @@
     "eslint": "^6.8.0",
     "fast-check": "^1.24.2",
     "jest": "^25.5.4",
-    "rollup": "^2.10.7",
+    "rollup": "^2.10.9",
     "ts-jest": "^25.5.1",
     "typedoc": "^0.17.7",
     "typescript": "^3.9.3"
