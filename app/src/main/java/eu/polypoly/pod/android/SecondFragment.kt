@@ -11,21 +11,21 @@ import android.webkit.*
 import android.webkit.WebMessagePort.WebMessageCallback
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
-
-import eu.polypoly.bubblewrap.Codec
 import eu.polypoly.bubblewrap.Bubblewrap
+import eu.polypoly.bubblewrap.Codec
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class SecondFragment : Fragment() {
 
-    private val api: PodApi = PodApi()
-    private var webView: WebView? = null
+    private val api: PodApi = PodApi
+    private lateinit var webView: WebView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,13 +38,14 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         webView = view.findViewById(R.id.web_view)
-        webView!!.settings.javaScriptEnabled = true
+
+        webView.settings.javaScriptEnabled = true
 
         val assetLoader = WebViewAssetLoader.Builder()
-            .addPathHandler("/assets/", AssetsPathHandler(context!!))
+            .addPathHandler("/assets/", AssetsPathHandler(requireContext()))
             .build()
 
-        webView!!.webViewClient = object : WebViewClient() {
+        webView.webViewClient = object : WebViewClient() {
             override fun shouldInterceptRequest(
                 view: WebView,
                 request: WebResourceRequest
@@ -53,30 +54,27 @@ class SecondFragment : Fragment() {
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
-                Log.d("postoffice", "initializing postoffice");
                 val channel: Array<WebMessagePort> = view!!.createWebMessageChannel()
                 val outerPort = channel[0]
                 val innerPort = channel[1]
                 outerPort.setWebMessageCallback(object: WebMessageCallback() {
                     override fun onMessage(port: WebMessagePort?, message: WebMessage) {
-                        Log.d("postoffice", "Received message: '${message.data}'");
-                        val data = message.data.split(',').map { Integer.parseUnsignedInt(it).toByte() }.toByteArray()
+                        val data = message.data.split(',').map { Integer.parseInt(it).toByte() }.toByteArray()
                         val codec = Codec.id.map()
                         val decoded = Bubblewrap.decode(data, codec)
 
-                        Log.d("postoffice", decoded.toString())
+                        Log.d("postoffice", "Decoded string: '${decoded}'")
 
-                        val id = decoded.get("id")!!
-                        val request = decoded.get("request")!!.asArrayValue().list()
+                        val id = decoded["id"]!!
+                        val request = decoded["request"]!!.asArrayValue().list()
 
-                        val response = api.dispatch(request)
-
-                        val encoded = Bubblewrap.encode(mapOf(Pair("response", response), Pair("id", id)), codec)
-
-                        val raw = TextUtils.join(",", encoded.map { it.toString() })
-
-                        outerPort.postMessage(WebMessage(raw))
-
+                        lifecycleScope.launch {
+                            val response = api.dispatch(request)
+                            Log.d("postoffice", "Got response from api.dispatch: '$response'")
+                            val encoded = Bubblewrap.encode(mapOf(Pair("response", response), Pair("id", id)), codec)
+                            val raw = TextUtils.join(",", encoded.map { it.toString() })
+                            outerPort.postMessage(WebMessage(raw))
+                        }
                     }
                 })
                 view.postWebMessage(WebMessage("", arrayOf(innerPort)), Uri.parse("*"))
@@ -84,11 +82,10 @@ class SecondFragment : Fragment() {
         }
 
         val url = "https://appassets.androidplatform.net/assets/feature/container.html"
-        webView!!.loadUrl(url)
+        webView.loadUrl(url)
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
     }
-
 }
