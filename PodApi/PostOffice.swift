@@ -12,7 +12,7 @@ class PostOffice: NSObject {
 
     static let shared = PostOffice()
     
-    func handleIncomingEvent(eventData: [String: Any], completionHandler: @escaping (Data) -> Void) {
+    func handleIncomingEvent(eventData: [String: Any], completionHandler: @escaping ([UInt8]) -> Void) {
         guard let bytes = eventData as? [String: NSNumber] else { return }
         
         let sortedBytes = bytes.sorted(by: { $0.0.compare($1.0, options: .numeric) == .orderedAscending })
@@ -28,7 +28,7 @@ class PostOffice: NSObject {
         let request = requestValue.arrayValue!
         
         guard let api = request[0][MessagePackValue("method")] else {
-            completionHandler(Data())
+            completionHandler([])
             return
         }
 
@@ -39,15 +39,17 @@ class PostOffice: NSObject {
         }
     }
     
-    private func completeEvent(messageId: MessagePackValue, response: MessagePackValue, completionHandler: @escaping (Data) -> Void) {
+    private func completeEvent(messageId: MessagePackValue, response: MessagePackValue, completionHandler: @escaping ([UInt8]) -> Void) {
         var dict: [MessagePackValue: MessagePackValue] = [:]
         
-        dict[MessagePackValue("id")] = messageId
-        dict[MessagePackValue("response")] = response
+        dict["id"] = messageId
+        dict["response"] = response
         
         let packedDict = pack(MessagePackValue.map(dict))
 
-        completionHandler(packedDict)
+        let byteArrayFromData: [UInt8] = [UInt8](packedDict)
+        
+        completionHandler(byteArrayFromData)
     }
     
     private func handlePolyOut(messageId: MessagePackValue, request: MessagePackValue, completionHandler: @escaping (MessagePackValue) -> Void) {
@@ -66,19 +68,19 @@ class PostOffice: NSObject {
 
         sharedPodApi.polyOut.makeHttpRequest(urlString: url, requestData: [:]) { (response) in
             if let response = response {
-                let bufferedText = MessagePackValue.array([.string("bufferedText"), .string(response)])
-                let ok = MessagePackValue.array([.string("ok"), .bool(true)])
-                let redirected = MessagePackValue.array([.string("redirected"), .bool(false)])
-                let status = MessagePackValue.array([.string("status"), .int(200)])
-                let statusText = MessagePackValue.array([.string("statusText"), .string("OK")])
-                let type = MessagePackValue.array([.string("type"), .string("basic")])
-                let url = MessagePackValue.array([.string("url"), .string("http://example.org/")])
+                let bufferedText: MessagePackValue = ["bufferedText", .string(response)]
+                let ok: MessagePackValue = ["ok", true]
+                let redirected: MessagePackValue = ["redirected", false]
+                let status: MessagePackValue = ["status", 200]
+                let statusText: MessagePackValue = ["statusText", "OK"]
+                let type: MessagePackValue = ["type", "basic"]
+                let url: MessagePackValue = ["url", "http://example.org/"]
+                                 
+                let data = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", [bufferedText, ok, redirected, status, statusText, type, url]])
                 
-                let a = MessagePackValue.array([.string("@polypoly-eu/podigree.FetchResponse"), [bufferedText, ok, redirected, status, statusText, type, url]])
+                let packedData = pack(data)
                 
-                let packedResponse = pack(a)
-                
-                completionHandler(MessagePackValue(type: 2, data: packedResponse))
+                completionHandler(MessagePackValue(type: 2, data: packedData))
             } else {
                 completionHandler(MessagePackValue())
             }

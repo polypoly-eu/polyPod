@@ -84,7 +84,7 @@ extension FeatureViewController: WKScriptMessageHandler {
     private func doHandleEvent(messageBody: [String: Any]) {
         PostOffice.shared.handleIncomingEvent(eventData: messageBody, completionHandler: { responseData in
             DispatchQueue.main.async { [weak self] in
-                let javascriptCommand = "port1.postMessage(\(responseData.sorted()));"
+                let javascriptCommand = "port1.postMessage(\(responseData));"
                 self?.webView.evaluateJavaScript(javascriptCommand, completionHandler: { result, error in
                     if error == nil {
                         print("JavaScript execution successful")
