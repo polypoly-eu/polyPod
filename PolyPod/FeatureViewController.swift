@@ -49,8 +49,6 @@ class FeatureViewController: UIViewController {
         let featureUrl = FeaturesWallet.shared.featuresFileUrl.appendingPathComponent(featureName)
         let filePath = Bundle.main.path(forResource: "feature", ofType: "html")!
         var content = try! String(contentsOfFile: filePath)
-        content = content.replacingOccurrences(of: "featureStyle", with: "feature.css")
-        content = content.replacingOccurrences(of: "featureSource", with: "feature.js")
         content = content.replacingOccurrences(of: "\"", with: "&quot;")
         let podPath = Bundle.main.path(forResource: "pod", ofType: "html")!
         var podContent = try! String(contentsOfFile: podPath)
