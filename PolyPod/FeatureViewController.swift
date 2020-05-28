@@ -47,13 +47,9 @@ class FeatureViewController: UIViewController {
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
         let featureUrl = FeaturesWallet.shared.featuresFileUrl.appendingPathComponent(featureName)
-        let filePath = Bundle.main.path(forResource: "feature", ofType: "html")!
-        var content = try! String(contentsOfFile: filePath)
-        content = content.replacingOccurrences(of: "\"", with: "&quot;")
         let podPath = Bundle.main.path(forResource: "pod", ofType: "html")!
         var podContent = try! String(contentsOfFile: podPath)
         podContent = podContent.replacingOccurrences(of: "featureName", with: featureName)
-        podContent = podContent.replacingOccurrences(of: "innerHtml", with: content)
         webView.loadHTMLString(podContent, baseURL: featureUrl)
     }
     
