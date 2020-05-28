@@ -57,19 +57,15 @@ class FeaturesWallet {
     func importFeatures() {
         importEnvironmentFiles()
         importFeature("helloWorld")
-        importFeature("twitterImporter")
-        importFeature("polyExplorer")
-        importFeature("dataBrowser")
     }
     
     private func importEnvironmentFiles() {
         let featureDirUrl = URL(string: featuresFileUrl.path)!
         do {
             try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
-            try FileManager.default.copyBundleFile(forResource: "feature", ofType: "js", toDestinationUrl: featureDirUrl)
+            try FileManager.default.copyBundleFile(forResource: "runfeature", ofType: "js", toDestinationUrl: featureDirUrl)
+            try FileManager.default.copyBundleFile(forResource: "iframe-inner", ofType: "js", toDestinationUrl: featureDirUrl)
             try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featureDirUrl)
-            try FileManager.default.copyBundleFile(forResource: "postOffice", ofType: "js", toDestinationUrl: featureDirUrl)
-            try FileManager.default.copyBundleFile(forResource: "pod", ofType: "js", toDestinationUrl: featureDirUrl)
             try FileManager.default.copyBundleFile(forResource: "domConsole", ofType: "js", toDestinationUrl: featureDirUrl)
             print("Imported environment files")
         } catch {
@@ -86,6 +82,7 @@ class FeaturesWallet {
                     let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip")!
                     let unzipDirectory = try Zip.quickUnzipFile(filePath)
                     try FileManager.default.moveItem(at: unzipDirectory, to: featuresFileUrl.appendingPathComponent(featureName))
+                    try FileManager.default.copyBundleFile(forResource: "feature", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     print("Imported feature: ", featureName)
                 } else {
                     print("Feature for import not found: ", featureName)

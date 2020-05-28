@@ -8,9 +8,5 @@
 
 enum MessageName: String, CaseIterable {
     case Log = "log"
-    case GetValue = "getValue"
-    case SetValue = "setValue"
-    case HttpRequest = "httpRequest"
-    case AddQuads = "addQuads"
-    case SelectQuads = "selectQuads"
+    case Event = "event"
 }

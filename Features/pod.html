@@ -1,14 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE HTML>
+<html>
+  <head>
     <meta charset="UTF-8">
     <title>polyPod</title>
     <link type="text/css" rel="stylesheet" href="../polyLook.css"/>
-</head>
-<body>
+    <script>
+      const {port1, port2} = new MessageChannel();
+      function initIframe(el) {
+        port1.start();
+        port1.onmessage = event => {
+          // incoming msgpack-encoded events:
+          webkit.messageHandlers.event.postMessage(event.data);
+        };
+        el.contentWindow.postMessage("", "*", [port2]);
+
+        // outgoing msgpack-encoded events:
+        //port1.postMessage(...)
+      }
+    </script>
+  </head>
+  <body>
     <div class="featureFrameWrapper">
-        <span class="title">Feature: featureName</span>
-        <iframe srcDoc="innerHtml" />
+      <span class="title">Feature: featureName</span>
+      <iframe id="harness" onload="initIframe(this);" src="feature.html">
     </div>
-</body>
+  </body>
 </html>

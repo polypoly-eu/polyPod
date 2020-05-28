@@ -46,19 +46,24 @@ class FeatureViewController: UIViewController {
         webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
+        if featureName == "test" {
+            let featureUrl = FeaturesWallet.shared.featuresFileUrl.appendingPathComponent(featureName)
+            var content = try! String(contentsOfFile: featureUrl.appendingPathComponent("container.html").path)
+            webView.loadHTMLString(content, baseURL: featureUrl)
+        } else {
         let featureUrl = FeaturesWallet.shared.featuresFileUrl.appendingPathComponent(featureName)
-        if let manifest = loadFeatureManifest(featureUrl) {
-            let filePath = Bundle.main.path(forResource: "feature", ofType: "html")!
-            var content = try! String(contentsOfFile: filePath)
-            content = content.replacingOccurrences(of: "featureStyle", with: "\(manifest.style)")
-            content = content.replacingOccurrences(of: "featureSource", with: "\(manifest.source)")
-            content = content.replacingOccurrences(of: "\"", with: "&quot;")
-            let podPath = Bundle.main.path(forResource: "pod", ofType: "html")!
-            var podContent = try! String(contentsOfFile: podPath)
-            podContent = podContent.replacingOccurrences(of: "featureName", with: "\(manifest.name)")
-            podContent = podContent.replacingOccurrences(of: "innerHtml", with: content)
-            webView.loadHTMLString(podContent, baseURL: featureUrl)
+        let filePath = Bundle.main.path(forResource: "feature", ofType: "html")!
+        var content = try! String(contentsOfFile: filePath)
+        content = content.replacingOccurrences(of: "featureStyle", with: "feature.css")
+        content = content.replacingOccurrences(of: "featureSource", with: "feature.js")
+        content = content.replacingOccurrences(of: "\"", with: "&quot;")
+        let podPath = Bundle.main.path(forResource: "pod", ofType: "html")!
+        var podContent = try! String(contentsOfFile: podPath)
+        podContent = podContent.replacingOccurrences(of: "featureName", with: featureName)
+        podContent = podContent.replacingOccurrences(of: "innerHtml", with: content)
+        webView.loadHTMLString(podContent, baseURL: featureUrl)
         }
+        
     }
     
     private func loadFeatureManifest(_ url: URL) -> Manifest? {
@@ -76,7 +81,6 @@ extension FeatureViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let messageName = MessageName(rawValue: message.name) else { return }
         
-        let frame = message.frameInfo
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             guard let body = message.body as? [String: Any] else { return }
@@ -84,18 +88,25 @@ extension FeatureViewController: WKScriptMessageHandler {
             switch messageName {
             case .Log:
                 self.doLog(data: body)
-            case .GetValue:
-                self.doGetValue(data: body)
-            case .SetValue:
-                self.doSetValue(data: body)
-            case .HttpRequest:
-                self.doHttpRequest(data: body)
-            case .AddQuads:
-                self.doAddQuads(data: body)
-            case .SelectQuads:
-                self.doSelectQuads(data: body)
+            case .Event:
+                self.doHandleEvent(messageBody: body)
             }
         }
+    }
+    
+    private func doHandleEvent(messageBody: [String: Any]) {
+        PostOffice.shared.handleIncomingEvent(eventData: messageBody, completionHandler: { responseData in
+            DispatchQueue.main.async { [weak self] in
+                let javascriptCommand = "port1.postMessage(\(responseData.sorted()));"
+                self?.webView.evaluateJavaScript(javascriptCommand, completionHandler: { result, error in
+                    if error == nil {
+                        print("JavaScript execution successful")
+                    } else {
+                        print("Received an error from JavaScript: \(error!)")
+                    }
+                })
+            }
+        })
     }
     
     private func doLog(data: [String: Any]) {
@@ -105,91 +116,6 @@ extension FeatureViewController: WKScriptMessageHandler {
         }
         
         print("WebView: " + text)
-    }
-    
-    private func doGetValue(data: [String: Any]) {
-        // todo: add checks here
-        
-        let requestId = data["id"] as! NSNumber
-        
-        let key = data["key"] as! String
-       
-        let value = sharedPodApi.preferences.getValue(key: key)
-        
-        self.sendToPostOffice(requestId: requestId, result: value)
-    }
-    
-    private func doSetValue(data: [String: Any]) {
-        // todo: add checks here
-        
-        let requestId = data["id"] as! NSNumber
-        
-        let key = data["key"] as! String
-        
-        if let rawValue = data["value"] as? String, let value = try? JSONSerialization.jsonObject(with: rawValue.data(using: .utf8)!, options: []) {
-            
-            let _ = sharedPodApi.preferences.setValue(key: key, value: value)
-        }
-        
-        self.sendToPostOffice(requestId: requestId, result: nil)
-    }
-    
-    private func doHttpRequest(data: [String: Any]) {
-        // todo: add checks here
-        
-        let requestId = data["id"] as! NSNumber
-        let requestData = data["request"] as! [String: Any]
-        
-        sharedPodApi.polyOut.makeHttpRequest(requestData: requestData) { (jsonData) in
-            self.sendToPostOffice(requestId: requestId, result: jsonData)
-        }
-    }
-    
-    private func doAddQuads(data: [String: Any]) {
-        // todo: add checks here
-        
-        let requestId = data["id"] as! NSNumber
-
-        if let quads = data["quads"] as? [[String: Any]] {
-            sharedPodApi.polyIn.addQuads(quads: quads)
-        }
-
-        self.sendToPostOffice(requestId: requestId, result: nil)
-    }
-    
-    private func doSelectQuads(data: [String: Any]) {
-        // todo: add checks here
-
-        let requestId = data["id"] as! NSNumber
-        
-        let matcher = data["matcher"] as? [[String: Any]]
-        
-        let result: Any? = sharedPodApi.polyIn.selectQuads(matcher: matcher)
-
-        self.sendToPostOffice(requestId: requestId, result: result)
-    }
-    
-    private func sendToPostOffice(requestId: NSNumber, result: Any?) {
-        var jsonObject: [String: Any] = ["id": requestId]
-        if let result = result {
-            jsonObject["result"] = result
-        }
-        
-        let json = try! JSONSerialization.data(withJSONObject: jsonObject, options: [])
-
-        guard let jsonString = String(data: json, encoding: .utf8) else { return }
-        
-        let javascriptCommand = "respond(\(jsonString));"
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.webView.evaluateJavaScript(javascriptCommand, completionHandler: { result, error in
-                if error == nil {
-                    print("JavaScript execution successful")
-                } else {
-                    print("Received an error from JavaScript: \(error!)")
-                }
-            })
-        }
     }
 }
 

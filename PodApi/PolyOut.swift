@@ -10,29 +10,28 @@ import Foundation
 
 class PolyOut {
     
-    func makeHttpRequest(requestData: [String: Any], completionHandler: @escaping (String?) -> ()) {
-        guard let urlString = requestData["url"] as? String, let url = URL(string: urlString) else {
+    func makeHttpRequest(urlString: String, requestData: [String: Any], completionHandler: @escaping (String?) -> ()) {
+        guard let url = URL(string: urlString) else {
             completionHandler(nil)
             return
         }
         
-        guard let method = requestData["method"] as? String else {
-            completionHandler(nil)
-            return
-        }
+        let initData = requestData["init"] as? [String: Any] ?? [:]
+        
+        let method = initData["method"] as? String ?? "GET"
         
         var request = URLRequest(url: url)
         request.httpMethod = method.uppercased()
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        if let rawHeaders = requestData["headers"] as? String, let headers = try? JSONSerialization.jsonObject(with: rawHeaders.data(using: .utf8)!, options: []) as? NSDictionary {
+        if let headers = initData["headers"] as? [String: String] {
             for (key, value) in headers {
                 request.setValue(value as? String, forHTTPHeaderField: key as! String)
             }
         }
         
-        if let body = requestData["body"] as? String, body.count > 0 {
+        if let body = initData["body"] as? String, body.count > 0 {
             let postString = body
             request.httpBody = postString.data(using: .utf8)
         }

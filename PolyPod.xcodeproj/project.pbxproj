@@ -7,22 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A00DFCC24460F320049F3F7 /* helloWorld.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFCB24460F320049F3F7 /* helloWorld.zip */; };
 		1A00DFEE2446FA6C0049F3F7 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 1A00DFED2446FA6C0049F3F7 /* Zip */; };
-		1A00DFF02446FFF50049F3F7 /* polyExplorer.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFEF2446FFF50049F3F7 /* polyExplorer.zip */; };
-		1A00DFF22446FFFB0049F3F7 /* twitterImporter.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF12446FFFB0049F3F7 /* twitterImporter.zip */; };
-		1A00DFF4244700070049F3F7 /* dataBrowser.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF3244700070049F3F7 /* dataBrowser.zip */; };
 		1A00DFF724569F3A0049F3F7 /* pod.html in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF624569F3A0049F3F7 /* pod.html */; };
 		1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF8245961FB0049F3F7 /* messagePort.js */; };
 		1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */; };
+		1A8F4873247E3F7000089217 /* helloWorld.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A8F4872247E3F7000089217 /* helloWorld.zip */; };
+		1A8F4875247E40C600089217 /* PostOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4874247E40C600089217 /* PostOffice.swift */; };
+		1A8F487B247E5C5700089217 /* iframe-inner.js in Resources */ = {isa = PBXBuildFile; fileRef = 1A8F487A247E5C5700089217 /* iframe-inner.js */; };
+		1A8F4886247E91E000089217 /* Unpack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F487F247E91E000089217 /* Unpack.swift */; };
+		1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4880247E91E000089217 /* ConvenienceProperties.swift */; };
+		1A8F4888247E91E000089217 /* Pack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4881247E91E000089217 /* Pack.swift */; };
+		1A8F4889247E91E000089217 /* ConvenienceInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4882247E91E000089217 /* ConvenienceInitializers.swift */; };
+		1A8F488A247E91E000089217 /* MessagePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4883247E91E000089217 /* MessagePack.swift */; };
+		1A8F488B247E91E000089217 /* LiteralConvertibles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4884247E91E000089217 /* LiteralConvertibles.swift */; };
+		1A8F488C247E91E000089217 /* Subdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4885247E91E000089217 /* Subdata.swift */; };
 		1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */; };
 		1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */; };
 		1AA6DE3724191C94008DB1B2 /* FeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3624191C94008DB1B2 /* FeatureViewController.swift */; };
 		1AA6DE3A24191C94008DB1B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3824191C94008DB1B2 /* Main.storyboard */; };
 		1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3B24191C96008DB1B2 /* Assets.xcassets */; };
 		1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3D24191C96008DB1B2 /* LaunchScreen.storyboard */; };
-		1AA6DE4824192091008DB1B2 /* postOffice.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4724192091008DB1B2 /* postOffice.js */; };
-		1AA6DE552419212E008DB1B2 /* feature.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE4E2419212E008DB1B2 /* feature.js */; };
 		1AA6DE572419212E008DB1B2 /* pod.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE502419212E008DB1B2 /* pod.js */; };
 		1AA6DE582419212E008DB1B2 /* feature.html in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE512419212E008DB1B2 /* feature.html */; };
 		1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5924192463008DB1B2 /* domConsole.js */; };
@@ -40,13 +44,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A00DFCB24460F320049F3F7 /* helloWorld.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = helloWorld.zip; sourceTree = "<group>"; };
-		1A00DFEF2446FFF50049F3F7 /* polyExplorer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = polyExplorer.zip; sourceTree = "<group>"; };
-		1A00DFF12446FFFB0049F3F7 /* twitterImporter.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = twitterImporter.zip; sourceTree = "<group>"; };
-		1A00DFF3244700070049F3F7 /* dataBrowser.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dataBrowser.zip; sourceTree = "<group>"; };
 		1A00DFF624569F3A0049F3F7 /* pod.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = pod.html; sourceTree = "<group>"; };
 		1A00DFF8245961FB0049F3F7 /* messagePort.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = messagePort.js; sourceTree = "<group>"; };
 		1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageName.swift; sourceTree = "<group>"; };
+		1A8F4872247E3F7000089217 /* helloWorld.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = helloWorld.zip; sourceTree = "<group>"; };
+		1A8F4874247E40C600089217 /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffice.swift; sourceTree = "<group>"; };
+		1A8F487A247E5C5700089217 /* iframe-inner.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "iframe-inner.js"; sourceTree = "<group>"; };
+		1A8F487F247E91E000089217 /* Unpack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unpack.swift; sourceTree = "<group>"; };
+		1A8F4880247E91E000089217 /* ConvenienceProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceProperties.swift; sourceTree = "<group>"; };
+		1A8F4881247E91E000089217 /* Pack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pack.swift; sourceTree = "<group>"; };
+		1A8F4882247E91E000089217 /* ConvenienceInitializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceInitializers.swift; sourceTree = "<group>"; };
+		1A8F4883247E91E000089217 /* MessagePack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePack.swift; sourceTree = "<group>"; };
+		1A8F4884247E91E000089217 /* LiteralConvertibles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiteralConvertibles.swift; sourceTree = "<group>"; };
+		1A8F4885247E91E000089217 /* Subdata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subdata.swift; sourceTree = "<group>"; };
 		1AA6DE2F24191C94008DB1B2 /* PolyPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolyPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,8 +65,6 @@
 		1AA6DE3B24191C96008DB1B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AA6DE3E24191C96008DB1B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AA6DE4024191C96008DB1B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AA6DE4724192091008DB1B2 /* postOffice.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = postOffice.js; sourceTree = "<group>"; };
-		1AA6DE4E2419212E008DB1B2 /* feature.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = feature.js; sourceTree = "<group>"; };
 		1AA6DE502419212E008DB1B2 /* pod.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = pod.js; sourceTree = "<group>"; };
 		1AA6DE512419212E008DB1B2 /* feature.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = feature.html; sourceTree = "<group>"; };
 		1AA6DE5924192463008DB1B2 /* domConsole.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = domConsole.js; sourceTree = "<group>"; };
@@ -85,12 +93,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A8F487E247E91E000089217 /* MessagePack */ = {
+			isa = PBXGroup;
+			children = (
+				1A8F487F247E91E000089217 /* Unpack.swift */,
+				1A8F4880247E91E000089217 /* ConvenienceProperties.swift */,
+				1A8F4881247E91E000089217 /* Pack.swift */,
+				1A8F4882247E91E000089217 /* ConvenienceInitializers.swift */,
+				1A8F4883247E91E000089217 /* MessagePack.swift */,
+				1A8F4884247E91E000089217 /* LiteralConvertibles.swift */,
+				1A8F4885247E91E000089217 /* Subdata.swift */,
+			);
+			path = MessagePack;
+			sourceTree = "<group>";
+		};
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
 				1AA6DE492419212E008DB1B2 /* Features */,
 				1AA6DE4624192079008DB1B2 /* PodApi */,
 				1AA6DE3124191C94008DB1B2 /* PolyPod */,
+				1A8F487E247E91E000089217 /* MessagePack */,
 				1AA6DE3024191C94008DB1B2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -129,13 +152,13 @@
 				1AA6DE5924192463008DB1B2 /* domConsole.js */,
 				1AF468A8242263FC00E51B6D /* polyLook.css */,
 				1AA6DE502419212E008DB1B2 /* pod.js */,
-				1AA6DE4724192091008DB1B2 /* postOffice.js */,
 				1A00DFF8245961FB0049F3F7 /* messagePort.js */,
 				1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */,
 				1AF468AF242A34CF00E51B6D /* PolyIn.swift */,
 				1AF468B1242A34D700E51B6D /* PolyOut.swift */,
 				1AF468B3242A350800E51B6D /* Preferences.swift */,
 				1AF468DB24349E6B00E51B6D /* PodApi.swift */,
+				1A8F4874247E40C600089217 /* PostOffice.swift */,
 			);
 			path = PodApi;
 			sourceTree = "<group>";
@@ -143,11 +166,8 @@
 		1AA6DE492419212E008DB1B2 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				1AF468A1242252CC00E51B6D /* DataBrowser */,
-				1AF46894241FDF9100E51B6D /* TwitterImporter */,
-				1AF46876241F57DB00E51B6D /* PolyExplorer */,
 				1AA6DE4A2419212E008DB1B2 /* HelloWorld */,
-				1AA6DE4E2419212E008DB1B2 /* feature.js */,
+				1A8F487A247E5C5700089217 /* iframe-inner.js */,
 				1AA6DE512419212E008DB1B2 /* feature.html */,
 				1A00DFF624569F3A0049F3F7 /* pod.html */,
 			);
@@ -157,33 +177,9 @@
 		1AA6DE4A2419212E008DB1B2 /* HelloWorld */ = {
 			isa = PBXGroup;
 			children = (
-				1A00DFCB24460F320049F3F7 /* helloWorld.zip */,
+				1A8F4872247E3F7000089217 /* helloWorld.zip */,
 			);
 			path = HelloWorld;
-			sourceTree = "<group>";
-		};
-		1AF46876241F57DB00E51B6D /* PolyExplorer */ = {
-			isa = PBXGroup;
-			children = (
-				1A00DFEF2446FFF50049F3F7 /* polyExplorer.zip */,
-			);
-			path = PolyExplorer;
-			sourceTree = "<group>";
-		};
-		1AF46894241FDF9100E51B6D /* TwitterImporter */ = {
-			isa = PBXGroup;
-			children = (
-				1A00DFF12446FFFB0049F3F7 /* twitterImporter.zip */,
-			);
-			path = TwitterImporter;
-			sourceTree = "<group>";
-		};
-		1AF468A1242252CC00E51B6D /* DataBrowser */ = {
-			isa = PBXGroup;
-			children = (
-				1A00DFF3244700070049F3F7 /* dataBrowser.zip */,
-			);
-			path = DataBrowser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,20 +246,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A00DFCC24460F320049F3F7 /* helloWorld.zip in Resources */,
-				1AA6DE552419212E008DB1B2 /* feature.js in Resources */,
-				1A00DFF02446FFF50049F3F7 /* polyExplorer.zip in Resources */,
-				1A00DFF22446FFFB0049F3F7 /* twitterImporter.zip in Resources */,
+				1A8F487B247E5C5700089217 /* iframe-inner.js in Resources */,
 				1A00DFF724569F3A0049F3F7 /* pod.html in Resources */,
-				1A00DFF4244700070049F3F7 /* dataBrowser.zip in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
 				1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */,
 				1AF468A9242263FC00E51B6D /* polyLook.css in Resources */,
 				1AA6DE582419212E008DB1B2 /* feature.html in Resources */,
 				1AA6DE572419212E008DB1B2 /* pod.js in Resources */,
+				1A8F4873247E3F7000089217 /* helloWorld.zip in Resources */,
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
-				1AA6DE4824192091008DB1B2 /* postOffice.js in Resources */,
 				1AA6DE3A24191C94008DB1B2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,12 +268,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */,
+				1A8F4886247E91E000089217 /* Unpack.swift in Sources */,
+				1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */,
 				1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */,
+				1A8F488A247E91E000089217 /* MessagePack.swift in Sources */,
+				1A8F488B247E91E000089217 /* LiteralConvertibles.swift in Sources */,
+				1A8F488C247E91E000089217 /* Subdata.swift in Sources */,
+				1A8F4875247E40C600089217 /* PostOffice.swift in Sources */,
 				1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */,
+				1A8F4888247E91E000089217 /* Pack.swift in Sources */,
 				1AA6DE3724191C94008DB1B2 /* FeatureViewController.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
 				1AA6DE60241A2AE0008DB1B2 /* Manifest.swift in Sources */,
 				1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */,
+				1A8F4889247E91E000089217 /* ConvenienceInitializers.swift in Sources */,
 				1AF46893241FBA7200E51B6D /* JSONSerialization+Additions.swift in Sources */,
 				1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */,
 				1AF468B4242A350800E51B6D /* Preferences.swift in Sources */,

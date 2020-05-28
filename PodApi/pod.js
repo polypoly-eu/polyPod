@@ -16,10 +16,9 @@ const preferences = {
 };
 
 const polyOut = {
-    httpRequest: function(url, method, body, headers) {
+    fetch: function(url, init) {
         return new Promise((resolve, reject) => {
-            const requestHeaders = headers ? JSON.stringify(headers) : "";
-            postOffice.postMessage({ command: "httpRequest", request: {url: url, method: method, body: body, headers: requestHeaders } }, response => {
+            postOffice.postMessage({ command: "httpRequest", request: {url: url, init: init } }, response => {
                 resolve(response);
             });
         });
