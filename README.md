@@ -24,7 +24,9 @@ Besides the mere test cases for the specification, this library also runs them a
 Currently, the following libraries are covered:
 
 * the reference implementations according to the table above
-* [@graphy/core.data.factory](https://graphy.link/core.data.factory) (only data factory)
+* [graphy.js](https://graphy.link/), with two caveats:
+  * `memory.dataset.fast` only works with quads from the `core.data.factory` factory, not with other quads
+  * `memory.dataset.fast` does not implement the `DatasetCoreFactory` interface (see test for details)
 * [N3.js](https://github.com/rdfjs/N3.js) (only data factory)
 
 The following implementations are not spec-compliant:
