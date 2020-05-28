@@ -30,13 +30,22 @@ async function loadDataset(): Promise<Quad[]> {
     return parser.parse(content);
 }
 
+function convertDataset(quads: Quad[]): RDF.Quad[] {
+    return quads.map(quad => convert(quad, RDF.dataFactory));
+}
+
 async function runBench(): Promise<void> {
-    const dataset = (await loadDataset()).map(quad => convert(quad, RDF.dataFactory));
+    const dataset = convertDataset(await loadDataset());
     const encoded = bubblewrap.encode(dataset);
     const encodedStrict = bubblewrapStrict.encode(dataset);
     assert.deepStrictEqual(encoded, encodedStrict);
     const encodedRaw = bubblewrapRaw.encode(dataset);
     assert.notDeepStrictEqual(encoded, encodedRaw);
+
+    assert.deepStrictEqual(
+        convertDataset(bubblewrapRaw.decode(encodedRaw)),
+        dataset
+    );
 
     console.log(`Measuring ${dataset.length} quads`);
 
@@ -58,6 +67,18 @@ async function runBench(): Promise<void> {
         })
         .add("decoding (raw)", () => {
             bubblewrapRaw.decode(encodedRaw);
+        })
+        .add("decoding (raw-then-convert)", () => {
+            convertDataset(bubblewrapRaw.decode(encodedRaw));
+        })
+        .add("roundtrip", () => {
+            bubblewrap.decode(bubblewrap.encode(dataset));
+        })
+        .add("roundtrip (strict)", () => {
+            bubblewrapStrict.decode(bubblewrapStrict.encode(dataset));
+        })
+        .add("roundtrip (raw-then-convert)", () => {
+            convertDataset(bubblewrapRaw.decode(bubblewrapRaw.encode(dataset)));
         })
         .on("cycle", (event: Event) => {
             console.log(event.target.toString())

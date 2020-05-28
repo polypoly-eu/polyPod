@@ -70,10 +70,14 @@ Dataset source: [British Geological Survey](http://data.bgs.ac.uk/downloads/data
 ```
 ./src/main/javascript/benchmarks/rdf.bench.ts
 Measuring 13910 quads
-encoding x 1.43 ops/sec ±5.02% (8 runs sampled)
-encoding (strict) x 1.38 ops/sec ±2.30% (8 runs sampled)
-encoding (raw) x 16.40 ops/sec ±1.59% (45 runs sampled)
-decoding x 4.95 ops/sec ±1.67% (17 runs sampled)
-decoding (strict) x 5.05 ops/sec ±3.40% (17 runs sampled)
-decoding (raw) x 13.82 ops/sec ±2.96% (39 runs sampled)
+encoding x 1.31 ops/sec ±2.66% (8 runs sampled)
+encoding (strict) x 1.29 ops/sec ±1.28% (8 runs sampled)
+encoding (raw) x 15.18 ops/sec ±1.94% (35 runs sampled)
+decoding x 4.36 ops/sec ±1.85% (15 runs sampled)
+decoding (strict) x 4.39 ops/sec ±4.41% (16 runs sampled)
+decoding (raw) x 12.50 ops/sec ±1.82% (35 runs sampled)
+decoding (raw-then-convert) x 11.30 ops/sec ±5.96% (33 runs sampled)
+roundtrip x 0.93 ops/sec ±3.15% (7 runs sampled)
+roundtrip (strict) x 0.91 ops/sec ±2.69% (7 runs sampled)
+roundtrip (raw-then-convert) x 6.53 ops/sec ±4.95% (21 runs sampled)
 ```
