@@ -8,10 +8,10 @@
 
 import Foundation
 
-let sharedPodApi = PodApi()
-
 class PodApi {
 
+    static let  shared = PodApi()
+    
     lazy var preferences: Preferences  = {
         return Preferences()
     }()

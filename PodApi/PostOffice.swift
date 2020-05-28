@@ -66,7 +66,7 @@ class PostOffice: NSObject {
         
         let url = args[0].stringValue!
 
-        sharedPodApi.polyOut.makeHttpRequest(urlString: url, requestData: [:]) { (response) in
+        PodApi.shared.polyOut.makeHttpRequest(urlString: url, requestData: [:]) { (response) in
             if let response = response {
                 let bufferedText: MessagePackValue = ["bufferedText", .string(response)]
                 let ok: MessagePackValue = ["ok", true]
