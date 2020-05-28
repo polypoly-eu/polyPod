@@ -62,3 +62,18 @@ The decoded object is not the _same_ as the original object, but behaves equival
   During encoding, `undefined` gets mapped to `null`, which – while rare – may be treated differently to `undefined` by library users.
   See the documentation for details.
 * `Error`s lose their stack trace and name by default.
+
+## Benchmarks
+
+Dataset source: [British Geological Survey](http://data.bgs.ac.uk/downloads/data_bgs_ac_uk_ALL.zip), file `EarthMaterialClass_RockComponent.nt`
+
+```
+./src/main/javascript/benchmarks/rdf.bench.ts
+Measuring 13910 quads
+encoding x 1.43 ops/sec ±5.02% (8 runs sampled)
+encoding (strict) x 1.38 ops/sec ±2.30% (8 runs sampled)
+encoding (raw) x 16.40 ops/sec ±1.59% (45 runs sampled)
+decoding x 4.95 ops/sec ±1.67% (17 runs sampled)
+decoding (strict) x 5.05 ops/sec ±3.40% (17 runs sampled)
+decoding (raw) x 13.82 ops/sec ±2.96% (39 runs sampled)
+```

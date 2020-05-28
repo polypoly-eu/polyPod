@@ -19,7 +19,7 @@ public interface Codec<T> {
     Value encode(T t);
     T decode(Value value);
 
-    static Codec<Value> id = new Codec<Value>() {
+    Codec<Value> id = new Codec<Value>() {
         @Override
         public Value encode(Value value) {
             return value;

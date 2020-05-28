@@ -13,3 +13,4 @@ gradlew
 build
 *.gradle
 .jqwik-database
+bin
