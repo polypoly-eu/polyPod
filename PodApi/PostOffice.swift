@@ -66,24 +66,37 @@ class PostOffice: NSObject {
         
         let url = args[0].stringValue!
 
-        PodApi.shared.polyOut.makeHttpRequest(urlString: url, requestData: [:]) { (response) in
-            if let response = response {
-                let bufferedText: MessagePackValue = ["bufferedText", .string(response)]
-                let ok: MessagePackValue = ["ok", true]
-                let redirected: MessagePackValue = ["redirected", false]
-                let status: MessagePackValue = ["status", 200]
-                let statusText: MessagePackValue = ["statusText", "OK"]
-                let type: MessagePackValue = ["type", "basic"]
-                let url: MessagePackValue = ["url", "http://example.org/"]
-                                 
-                let data = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", [bufferedText, ok, redirected, status, statusText, type, url]])
-                
-                let packedData = pack(data)
-                
-                completionHandler(MessagePackValue(type: 2, data: packedData))
-            } else {
+        PodApi.shared.polyOut.makeHttpRequest(urlString: url, requestData: [:]) { (data, response, error) in
+            if let error = error {
+                // todo: handle error
                 completionHandler(MessagePackValue())
+                return
             }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                // todo: handle this
+                completionHandler(MessagePackValue())
+                return
+            }
+            
+            var fetchResponse: [MessagePackValue] = []
+            
+            if let data = data {
+                let responseString = String(data: data, encoding: .utf8)!
+                fetchResponse.append(["bufferedText", .string(responseString)])
+            }
+            
+            fetchResponse.append(["ok", true])
+            fetchResponse.append(["redirected", false])
+            fetchResponse.append(["status", .int(Int64(httpResponse.statusCode))])
+            fetchResponse.append(["statusText", "OK"])
+            fetchResponse.append(["type", "basic"])
+            fetchResponse.append(["url", .string(httpResponse.url?.absoluteString ?? "")])
+                                 
+            let data = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", .array(fetchResponse)])
+                
+            let packedData = pack(data)
+                
+            completionHandler(MessagePackValue(type: 2, data: packedData))
         }
     }
 }

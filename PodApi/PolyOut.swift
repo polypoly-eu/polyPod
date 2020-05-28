@@ -10,9 +10,9 @@ import Foundation
 
 class PolyOut {
     
-    func makeHttpRequest(urlString: String, requestData: [String: Any], completionHandler: @escaping (String?) -> ()) {
+    func makeHttpRequest(urlString: String, requestData: [String: Any], completionHandler: @escaping (Data?, URLResponse?, Error?) -> ()) {
         guard let url = URL(string: urlString) else {
-            completionHandler(nil)
+            completionHandler(nil, nil, nil)
             return
         }
         
@@ -27,7 +27,7 @@ class PolyOut {
         
         if let headers = initData["headers"] as? [String: String] {
             for (key, value) in headers {
-                request.setValue(value as? String, forHTTPHeaderField: key as! String)
+                request.setValue(value, forHTTPHeaderField: key)
             }
         }
         
@@ -36,11 +36,7 @@ class PolyOut {
             request.httpBody = postString.data(using: .utf8)
         }
         
-        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            guard let data = data else { return }
-            let result = String(data: data, encoding: .utf8)
-            completionHandler(result)
-        }
+        let task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
 
         task.resume()
     }
