@@ -46,11 +46,6 @@ class FeatureViewController: UIViewController {
         webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-        if featureName == "test" {
-            let featureUrl = FeaturesWallet.shared.featuresFileUrl.appendingPathComponent(featureName)
-            var content = try! String(contentsOfFile: featureUrl.appendingPathComponent("container.html").path)
-            webView.loadHTMLString(content, baseURL: featureUrl)
-        } else {
         let featureUrl = FeaturesWallet.shared.featuresFileUrl.appendingPathComponent(featureName)
         let filePath = Bundle.main.path(forResource: "feature", ofType: "html")!
         var content = try! String(contentsOfFile: filePath)
@@ -62,8 +57,6 @@ class FeatureViewController: UIViewController {
         podContent = podContent.replacingOccurrences(of: "featureName", with: featureName)
         podContent = podContent.replacingOccurrences(of: "innerHtml", with: content)
         webView.loadHTMLString(podContent, baseURL: featureUrl)
-        }
-        
     }
     
     private func loadFeatureManifest(_ url: URL) -> Manifest? {
