@@ -24,7 +24,8 @@ Besides the mere test cases for the specification, this library also runs them a
 Currently, the following libraries are covered:
 
 * the reference implementations according to the table above
-* [@graphy/core.data.factory](https://graphy.link/core.data.factory)
+* [@graphy/core.data.factory](https://graphy.link/core.data.factory) (only data factory)
+* [N3.js](https://github.com/rdfjs/N3.js) (only data factory)
 
 The following implementations are not spec-compliant:
 

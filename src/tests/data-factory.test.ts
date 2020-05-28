@@ -1,12 +1,7 @@
 import {DataFactorySpec} from "../data-factory";
-import RDFJS from "@rdfjs/data-model";
-// @ts-ignore
-import Graphy from "@graphy/core.data.factory";
+import {factories} from "./_factories";
 
-describe("@rdfjs/data-model", () => {
-    new DataFactorySpec(RDFJS).run();
-});
-
-describe("@graphy/core.data.factory", () => {
-    new DataFactorySpec(Graphy).run();
-});
+for (const [name, factory] of Object.entries(factories))
+    describe(name, () => {
+        new DataFactorySpec(factory).run();
+    });
