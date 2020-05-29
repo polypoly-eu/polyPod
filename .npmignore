@@ -1,5 +1,6 @@
 .idea
 tsconfig.*
+dist/benchmarks
 dist/tests
 src
 *.config.js
