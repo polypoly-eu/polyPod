@@ -556,19 +556,18 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
             });
             describe("not equal (terms)", () => {
                 const keys = ["namedNode", "blankNode", "literal", "variable"];
-                const pairs = keys.flatMap(key1 =>
-                    keys.filter(key2 => key1 !== key2).map(key2 => [key1, key2])
-                );
-                for (const [key1, key2] of pairs)
-                    it(`${key1}/${key2}`, () => {
-                        const gen1 = (gen as any)[key1];
-                        const gen2 = (gen as any)[key2];
-                        if (gen1 === undefined || gen2 === undefined)
-                            return;
-                        fc.assert(fc.property(gen1, gen2, (term1, term2) => {
-                            assert.equal((term1 as any).equals(term2), false);
-                        }));
-                    });
+                for (const key1 of keys)
+                    for (const key2 of keys)
+                        if (key1 !== key2)
+                            it(`${key1}/${key2}`, () => {
+                                const gen1 = (gen as any)[key1];
+                                const gen2 = (gen as any)[key2];
+                                if (gen1 === undefined || gen2 === undefined)
+                                    return;
+                                fc.assert(fc.property(gen1, gen2, (term1, term2) => {
+                                    assert.equal((term1 as any).equals(term2), false);
+                                }));
+                            });
             });
         });
     }
