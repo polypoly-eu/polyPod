@@ -307,10 +307,10 @@ export class Bubblewrap {
                 if (deserializer !== undefined)
                     return deserializer(raw);
 
-                // @ts-ignore
-                const entries: [string, any][] = raw;
-
-                return Object.assign(Object.create(Class.prototype), Object.fromEntries(entries));
+                const object = Object.create(Class.prototype);
+                for (const [key, value] of raw as [string, any][])
+                    object[key] = value;
+                return object;
             }
         });
 
