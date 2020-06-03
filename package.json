@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/postoffice",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "RPC library for TypeScript",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
