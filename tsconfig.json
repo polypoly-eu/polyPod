@@ -2,7 +2,7 @@
   "compilerOptions": {
     "lib": [
       "dom",
-      "es2019"
+      "es6"
     ],
     "target": "es6",
     "outDir": "./dist",

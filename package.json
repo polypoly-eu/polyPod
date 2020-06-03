@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/polypoly-eu/poly-api#readme",
   "devDependencies": {
-    "@polypoly-eu/rdf-spec": "0.0.8",
+    "@polypoly-eu/rdf-spec": "^0.1.0",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.0.2",
     "@types/body-parser": "^1.19.0",
@@ -57,7 +57,7 @@
     "typescript": "^3.9.3"
   },
   "peerDependencies": {
-    "@polypoly-eu/rdf-spec": "0.0.8",
+    "@polypoly-eu/rdf-spec": "^0.1.0",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
@@ -66,6 +66,6 @@
   },
   "dependencies": {
     "@types/rdf-js": "^3.0.0",
-    "@polypoly-eu/rdf": "0.0.3"
+    "@polypoly-eu/rdf": "^0.1.0"
   }
 }
