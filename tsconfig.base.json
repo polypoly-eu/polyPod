@@ -2,11 +2,11 @@
   "compilerOptions": {
     "lib": [
       "dom",
-      "es2019"
+      "es6"
     ],
     "target": "es6",
     "strict": true,
-    "module": "esnext",
+    "module": "es2020",
     "moduleResolution": "node",
     "esModuleInterop": true
   }
