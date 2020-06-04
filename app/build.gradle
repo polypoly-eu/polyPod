@@ -1,7 +1,23 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'androidx.navigation.safeargs'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs'
+    id "com.moowork.node" version "1.3.1"
+}
+
+task npmCopy(type: Copy) {
+    dependsOn npm_install
+    from "node_modules/@polypoly-eu/feature-harness/data/bootstrap.js"
+    from "node_modules/react/umd/react.development.js"
+    from "node_modules/react-dom/umd/react-dom.development.js"
+    into "build/js"
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == "generateDebugAssets")
+        task.dependsOn(npmCopy)
+}
 
 android {
     compileSdkVersion 29
@@ -24,15 +40,18 @@ android {
         }
     }
 
-// To inline the bytecode built with JVM target 1.8 into
-// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs += file('build/js')
+        }
     }
 
 }
@@ -49,7 +68,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'eu.polypoly:bubblewrap:0.0.7'
+    implementation 'eu.polypoly:bubblewrap:0.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.3.0'
