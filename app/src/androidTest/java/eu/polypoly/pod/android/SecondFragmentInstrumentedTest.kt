@@ -1,5 +1,6 @@
 package eu.polypoly.pod.android
 
+import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
@@ -47,8 +48,7 @@ class SecondFragmentInstrumentedTest {
 
     @Test
     fun canFindTextInWebView() {
-        onView(withId(R.id.button_first))
-            .perform(click())   // go to second fragment
+        launchFragmentInContainer<SecondFragment>()
 
         onWebView()
             .inWindow(selectFrameByIdOrName("harness"))

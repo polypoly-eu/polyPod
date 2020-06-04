@@ -84,6 +84,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'androidx.fragment:fragment-testing:1.2.4'
+    debugImplementation 'androidx.fragment:fragment-testing:1.2.4'  // doesn't work with androidTestImplementation, no clue why
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
 }
