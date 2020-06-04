@@ -15,7 +15,7 @@ jobs:
         scope: '@polypoly-eu'
     - name: npm install and test
       run: |
-        npm ci
+        npm ci --ignore-scripts
         npm test
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
