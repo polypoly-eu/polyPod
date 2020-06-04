@@ -17,11 +17,18 @@ jobs:
       run: |
         npm ci
         npm test
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     - name: ESLint
       run: |
         npm run eslint
     - name: Build docs
       run: |
         npm run docs
+    - uses: jakejarvis/s3-sync-action@master
+      env:
+        AWS_S3_BUCKET: dev-docs
+        AWS_ACCESS_KEY_ID: dev-docs
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET }}
+        AWS_S3_ENDPOINT: "https://files.polypoly.eu/"
+        SOURCE_DIR: "docs"
+        DEST_DIR: "postoffice"
+      if: github.ref == 'refs/heads/master'
