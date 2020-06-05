@@ -1,0 +1,11 @@
+{
+  "name": "feature-ok-default-dir",
+  "version": "0.0.0",
+  "main": "feature.js",
+  "engines": {
+    "polypoly": "^0.1.0"
+  },
+  "polypoly": {
+    "style": "feature.css"
+  }
+}

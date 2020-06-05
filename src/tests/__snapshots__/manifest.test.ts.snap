@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Parsing Failed parse fail-absolute.json 1`] = `"Failed to parse Feature spec"`;
+
+exports[`Parsing Failed parse fail-empty.json 1`] = `"Failed to parse main manifest"`;
+
+exports[`Parsing Failed parse fail-traversal.json 1`] = `"Failed to parse Feature spec"`;
+
+exports[`Parsing Failed parse fail-version.json 1`] = `"Failed to parse engines"`;
+
+exports[`Parsing Successful parse ok.json 1`] = `
+Object {
+  "api": Range {
+    "includePrerelease": false,
+    "loose": false,
+    "options": Object {
+      "includePrerelease": false,
+      "loose": false,
+    },
+    "range": ">=0.1.0 <0.2.0-0",
+    "raw": "^0.1.0",
+    "set": Array [
+      Array [
+        Comparator {
+          "loose": false,
+          "operator": ">=",
+          "options": Object {
+            "includePrerelease": false,
+            "loose": false,
+          },
+          "semver": SemVer {
+            "build": Array [],
+            "includePrerelease": false,
+            "loose": false,
+            "major": 0,
+            "minor": 1,
+            "options": Object {
+              "includePrerelease": false,
+              "loose": false,
+            },
+            "patch": 0,
+            "prerelease": Array [],
+            "raw": "0.1.0",
+            "version": "0.1.0",
+          },
+          "value": ">=0.1.0",
+        },
+        Comparator {
+          "loose": false,
+          "operator": "<",
+          "options": Object {
+            "includePrerelease": false,
+            "loose": false,
+          },
+          "semver": SemVer {
+            "build": Array [],
+            "includePrerelease": false,
+            "loose": false,
+            "major": 0,
+            "minor": 2,
+            "options": Object {
+              "includePrerelease": false,
+              "loose": false,
+            },
+            "patch": 0,
+            "prerelease": Array [
+              0,
+            ],
+            "raw": "0.2.0-0",
+            "version": "0.2.0-0",
+          },
+          "value": "<0.2.0-0",
+        },
+      ],
+    ],
+  },
+  "assetBasePath": "assets",
+  "cssPath": "feature.css",
+  "jsPath": "feature.js",
+  "name": "feature-ok",
+  "version": SemVer {
+    "build": Array [],
+    "includePrerelease": false,
+    "loose": false,
+    "major": 0,
+    "minor": 0,
+    "options": Object {
+      "includePrerelease": false,
+      "loose": false,
+    },
+    "patch": 0,
+    "prerelease": Array [],
+    "raw": "0.0.0",
+    "version": "0.0.0",
+  },
+}
+`;
+
+exports[`Parsing Successful parse ok-default-dir.json 1`] = `
+Object {
+  "api": Range {
+    "includePrerelease": false,
+    "loose": false,
+    "options": Object {
+      "includePrerelease": false,
+      "loose": false,
+    },
+    "range": ">=0.1.0 <0.2.0-0",
+    "raw": "^0.1.0",
+    "set": Array [
+      Array [
+        Comparator {
+          "loose": false,
+          "operator": ">=",
+          "options": Object {
+            "includePrerelease": false,
+            "loose": false,
+          },
+          "semver": SemVer {
+            "build": Array [],
+            "includePrerelease": false,
+            "loose": false,
+            "major": 0,
+            "minor": 1,
+            "options": Object {
+              "includePrerelease": false,
+              "loose": false,
+            },
+            "patch": 0,
+            "prerelease": Array [],
+            "raw": "0.1.0",
+            "version": "0.1.0",
+          },
+          "value": ">=0.1.0",
+        },
+        Comparator {
+          "loose": false,
+          "operator": "<",
+          "options": Object {
+            "includePrerelease": false,
+            "loose": false,
+          },
+          "semver": SemVer {
+            "build": Array [],
+            "includePrerelease": false,
+            "loose": false,
+            "major": 0,
+            "minor": 2,
+            "options": Object {
+              "includePrerelease": false,
+              "loose": false,
+            },
+            "patch": 0,
+            "prerelease": Array [
+              0,
+            ],
+            "raw": "0.2.0-0",
+            "version": "0.2.0-0",
+          },
+          "value": "<0.2.0-0",
+        },
+      ],
+    ],
+  },
+  "assetBasePath": ".",
+  "cssPath": "feature.css",
+  "jsPath": "feature.js",
+  "name": "feature-ok-default-dir",
+  "version": SemVer {
+    "build": Array [],
+    "includePrerelease": false,
+    "loose": false,
+    "major": 0,
+    "minor": 0,
+    "options": Object {
+      "includePrerelease": false,
+      "loose": false,
+    },
+    "patch": 0,
+    "prerelease": Array [],
+    "raw": "0.0.0",
+    "version": "0.0.0",
+  },
+}
+`;
