@@ -2,8 +2,6 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import sucrase from "@rollup/plugin-sucrase";
 import virtual from "@rollup/plugin-virtual";
-import builtins from "rollup-plugin-node-builtins";
-import nodeGlobals from "rollup-plugin-node-globals";
 import {browserScriptsPath} from "./paths";
 import {join} from "path";
 import executable from "rollup-plugin-executable";
@@ -33,34 +31,6 @@ export const configs = {
             "io-ts/lib/Decoder",
             "fp-ts/lib/Either",
             "fp-ts/lib/pipeable"
-        ]
-    },
-    reactGlobal: {
-        input: "react",
-        output: {
-            file: join(browserScriptsPath, "react.js.txt"),
-            format: "umd",
-            name: "React"
-        },
-        plugins: [
-            resolve(),
-            commonjs(),
-            builtins(),
-            nodeGlobals()
-        ]
-    },
-    reactDomGlobal: {
-        input: "react-dom",
-        output: {
-            file: join(browserScriptsPath, "react-dom.js.txt"),
-            format: "umd",
-            name: "ReactDOM"
-        },
-        plugins: [
-            resolve(),
-            commonjs(),
-            builtins(),
-            nodeGlobals()
         ]
     },
     cli: {

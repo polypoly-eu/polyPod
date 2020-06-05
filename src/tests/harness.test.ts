@@ -5,7 +5,7 @@ import {Volume} from "memfs";
 import {promises as fs} from "fs";
 import {rootDir} from "../_dir";
 import {join} from "path";
-import {serve} from "../harness/server";
+import {defaultConfig, serve} from "../harness/server";
 import {fetchWithBaseURI, rawPromise} from "../util";
 import {once} from "events";
 import {AddressInfo} from "net";
@@ -34,13 +34,9 @@ describe("Harness", () => {
     let pod: Pod;
     let logger: JestMockLogger;
     let bootstrapPath: string;
-    let reactPath: string;
-    let reactDomPath: string;
 
     beforeAll(async () => {
         bootstrapPath = await tempBundle("bootstrap");
-        reactPath = await tempBundle("reactGlobal");
-        reactDomPath = await tempBundle("reactDomGlobal");
     });
 
     beforeEach(() => {
@@ -59,9 +55,8 @@ describe("Harness", () => {
         };
 
         const config = {
-            bootstrapPath,
-            reactPath,
-            reactDomPath
+            ...defaultConfig,
+            bootstrapPath
         };
 
         const completed = rawPromise<void>();

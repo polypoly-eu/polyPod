@@ -19,8 +19,8 @@ export interface Config {
 
 export const defaultConfig: Config = {
     bootstrapPath: join(rootDir, browserScriptsPath, "bootstrap.js.txt"),
-    reactPath: join(rootDir, browserScriptsPath, "react.js.txt"),
-    reactDomPath: join(rootDir, browserScriptsPath, "react-dom.js.txt")
+    reactPath: join(rootDir, "node_modules/react/umd/react.development.js"),
+    reactDomPath: join(rootDir, "node_modules/react-dom/umd/react-dom.development.js")
 };
 
 async function sendFile(path: string, res: Response): Promise<void> {
