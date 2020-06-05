@@ -48,7 +48,7 @@
     "rollup": "^2.13.1",
     "ts-jest": "^25.5.1",
     "typedoc": "^0.17.7",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.5"
   },
   "dependencies": {
     "@msgpack/msgpack": "^1.12.2"
