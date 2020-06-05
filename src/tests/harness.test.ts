@@ -14,6 +14,7 @@ import {tempBundle} from "./util";
 import tempy from "tempy";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
+import {parse, Range} from "semver";
 
 interface JestMockLogger extends Logger {
     called: jest.Mock<void, [string, Record<string, any>]>;
@@ -50,7 +51,10 @@ describe("Harness", () => {
 
         const manifest = {
             cssPath,
+            version: parse("0.0.0")!,
+            api: new Range("0.0.0"),
             name: "test",
+            assetBasePath: ".",
             jsPath: join(rootDir, "data", "test-feature.js")
         };
 
@@ -61,7 +65,7 @@ describe("Harness", () => {
 
         const completed = rawPromise<void>();
 
-        const server = await serve(0, pod, manifest, config);
+        const server = await serve(0, pod, "/", manifest, config);
         const port = (server.address() as AddressInfo).port;
 
         const baseURI = `http://localhost:${port}`;

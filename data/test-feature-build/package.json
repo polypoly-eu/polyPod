@@ -8,9 +8,11 @@
   "devDependencies": {
     "@polypoly-eu/poly-look": "^0.0.3"
   },
+  "engines": {
+    "polypoly": "^0.1.0"
+  },
   "polypoly": {
-    "inputJS": "index.js",
-    "inputStyle": "style.scss",
-    "build": true
+    "assets": "dist",
+    "style": "feature.css"
   }
 }

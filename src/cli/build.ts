@@ -6,6 +6,6 @@ export interface BuildCommandOps extends Ops {
 }
 
 export async function buildCommand(options: BuildCommandOps): Promise<void> {
-    const pkg = await detectFeature(options);
-    await build(pkg);
+    const [dir, manifest] = await detectFeature(options);
+    await build(dir, manifest);
 }

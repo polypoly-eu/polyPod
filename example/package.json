@@ -13,9 +13,11 @@
     "@polypoly-eu/poly-look": "^0.0.3",
     "@polypoly-eu/orodruin": "file:/.."
   },
+  "engines": {
+    "polypoly": "^0.1.0"
+  },
   "polypoly": {
-    "inputJS": "index.jsx",
-    "inputStyle": "style.scss",
-    "build": true
+    "assets": "dist",
+    "style": "feature.css"
   }
 }

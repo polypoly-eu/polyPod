@@ -54,6 +54,7 @@ export const configs = {
             "events",
             "memfs",
             "node-fetch",
+            "@polypoly-eu/customs",
             "@polypoly-eu/poly-api",
             "@polypoly-eu/podigree",
             "open",

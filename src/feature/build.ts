@@ -1,9 +1,9 @@
+import {Manifest} from "@polypoly-eu/customs";
 import {InputOptions, Plugin, rollup} from "rollup";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import {rootDir} from "../_dir";
 import * as sass from "sass";
-import {Package} from "./package";
 import {promises as fs} from "fs";
 import mkdirp from "mkdirp";
 import {join} from "path";
@@ -63,19 +63,20 @@ async function processStyle(input: string, output: string): Promise<void> {
     await fs.writeFile(output, result.css, { flag: "w" });
 }
 
-export async function build(pkg: Package): Promise<void> {
-    if (!pkg.polypoly.build)
-        throw new Error("Orodruin build flag is not set. Change package.json to add the key polypoly.build: true");
+export async function build(dir: string, manifest: Manifest): Promise<void> {
+    const config = JSON.parse(await fs.readFile(join(dir, "orodruin.config.json"), { encoding: "utf-8" }));
+    if (!config.build)
+        throw new Error("Orodruin build configuration not found");
 
-    const { inputJS, inputStyle } = pkg.polypoly;
+    const { inputJS, inputStyle } = config.build;
     if (!inputJS)
-        throw new Error("Orodruin input JS file is not set. Change package.json to add the key polypoly.inputJS");
+        throw new Error("Orodruin input JS file is not set");
     if (!inputStyle)
-        throw new Error("Orodruin input (S)CSS file is not set. Change package.json to add the key polypoly.inputStyle");
+        throw new Error("Orodruin input (S)CSS file is not set");
 
     await Promise.all([
-        processJS(inputJS, pkg.main),
-        processStyle(inputStyle, pkg.polypoly.outputStyle)
+        processJS(join(dir, inputJS), join(dir, manifest.jsPath)),
+        processStyle(join(dir, inputStyle), join(dir, manifest.assetBasePath, manifest.cssPath))
     ]);
 
     console.log("Done");

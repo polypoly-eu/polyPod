@@ -1,0 +1,6 @@
+{
+  "build": {
+    "inputJS": "index.js",
+    "inputStyle": "style.scss"
+  }
+}

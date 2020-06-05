@@ -4,10 +4,10 @@ import {htmlSkeleton} from "./html";
 import {once} from "events";
 import {Pod} from "@polypoly-eu/poly-api";
 import {RemoteServerPod} from "@polypoly-eu/podigree";
-import {Manifest} from "../feature/manifest";
 import {join} from "path";
 import {rootDir} from "../_dir";
 import {promises as fs} from "fs";
+import {Manifest} from "@polypoly-eu/customs";
 // @ts-ignore
 import {browserScriptsPath} from "../../build/paths";
 
@@ -31,6 +31,7 @@ async function sendFile(path: string, res: Response): Promise<void> {
 export async function serve(
     port: number,
     pod: Pod,
+    rootDir: string,
     manifest: Manifest,
     config: Config
 ): Promise<Server> {
@@ -47,12 +48,12 @@ export async function serve(
 
     app.get("/feature.js", (req, res) => {
         res.contentType("text/javascript");
-        sendFile(manifest.jsPath, res);
+        sendFile(join(rootDir, manifest.jsPath), res);
     });
 
     app.get("/feature.css", (req, res) => {
         res.contentType("text/css");
-        sendFile(manifest.cssPath, res);
+        sendFile(join(rootDir, manifest.assetBasePath, manifest.cssPath), res);
     });
 
     app.get("/react.js", (req, res) => {

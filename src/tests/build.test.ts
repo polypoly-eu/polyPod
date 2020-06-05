@@ -9,7 +9,7 @@ import {tempBundle} from "./util";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
 
-function installAndBuild(cli: string, path: string): void {
+function runBuild(cli: string, path: string): void {
     const opts: SpawnSyncOptions = {
         cwd: path,
         env: {
@@ -32,7 +32,7 @@ describe("Build", () => {
     describe("Simple build", () => {
 
         const projectPath = join(rootDir, "data", "test-feature-build");
-        const testProjectFiles = ["index.js", "package.json", "style.scss"];
+        const testProjectFiles = ["index.js", "package.json", "style.scss", "orodruin.config.json"];
 
         let path: string;
 
@@ -43,7 +43,7 @@ describe("Build", () => {
         });
 
         it("orodruin build", async () => {
-            installAndBuild(cliPath, path);
+            runBuild(cliPath, path);
 
             const distJS = await fs.readFile(join(path, "dist", "feature.js"), { encoding: "utf-8" });
 
