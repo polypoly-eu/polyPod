@@ -54,7 +54,7 @@
     "@polypoly-eu/poly-api": "^0.1.0",
     "@polypoly-eu/podigree": "^0.1.0",
     "@rdfjs/dataset": "^1.0.1",
-    "@rollup/plugin-commonjs": "^12.0.0",
+    "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-sucrase": "^3.0.2",
     "express": "^4.17.1",
