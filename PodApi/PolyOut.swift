@@ -10,9 +10,10 @@ import Foundation
 
 class PolyOut {
     
-    func makeHttpRequest(urlString: String, requestData: [String: Any], completionHandler: @escaping (Data?, URLResponse?, Error?) -> ()) {
+    func makeHttpRequest(urlString: String, requestData: [String: Any], completionHandler: @escaping ([String: Any]?) -> Void) {
         guard let url = URL(string: urlString) else {
-            completionHandler(nil, nil, nil)
+            // todo: handle this
+            completionHandler(nil)
             return
         }
         
@@ -36,7 +37,34 @@ class PolyOut {
             request.httpBody = postString.data(using: .utf8)
         }
         
-        let task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+            if let error = error {
+                // todo: handle error
+                completionHandler(nil)
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                // todo: handle this
+                completionHandler(nil)
+                return
+            }
+            
+            var responseData: [String: Any] = [:]
+            
+            if let data = data {
+                let responseString = String(data: data, encoding: .utf8)!
+                responseData["bufferedText"] = responseString
+            }
+            
+            responseData["ok"] = true
+            responseData["redirected"] = false
+            responseData["status"] = httpResponse.statusCode
+            responseData["statusText"] = "OK"
+            responseData["type"] = "basic"
+            responseData["url"] = httpResponse.url?.absoluteString ?? ""
+            
+            completionHandler(responseData)
+        })
 
         task.resume()
     }

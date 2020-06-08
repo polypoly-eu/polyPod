@@ -66,32 +66,25 @@ class PostOffice: NSObject {
         
         let url = args[0].stringValue!
 
-        PodApi.shared.polyOut.makeHttpRequest(urlString: url, requestData: [:]) { (data, response, error) in
-            if let error = error {
+        PodApi.shared.polyOut.makeHttpRequest(urlString: url, requestData: [:]) { responseData in
+            guard let responseData = responseData else {
                 // todo: handle error
-                completionHandler(MessagePackValue())
-                return
-            }
-            guard let httpResponse = response as? HTTPURLResponse else {
-                // todo: handle this
                 completionHandler(MessagePackValue())
                 return
             }
             
             var fetchResponse: [MessagePackValue] = []
             
-            if let data = data {
-                let responseString = String(data: data, encoding: .utf8)!
-                fetchResponse.append(["bufferedText", .string(responseString)])
+            for (key, value) in responseData {
+                if let asString = value as? String {
+                    fetchResponse.append([.string(key), .string(asString)])
+                } else if let asBool = value as? Bool {
+                    fetchResponse.append([.string(key), .bool(asBool)])
+                } else if let asInt = value as? Int {
+                    fetchResponse.append([.string(key), .int(Int64(asInt))])
+                }
             }
-            
-            fetchResponse.append(["ok", true])
-            fetchResponse.append(["redirected", false])
-            fetchResponse.append(["status", .int(Int64(httpResponse.statusCode))])
-            fetchResponse.append(["statusText", "OK"])
-            fetchResponse.append(["type", "basic"])
-            fetchResponse.append(["url", .string(httpResponse.url?.absoluteString ?? "")])
-                                 
+
             let data = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", .array(fetchResponse)])
                 
             let packedData = pack(data)
