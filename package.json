@@ -31,7 +31,7 @@
     "@types/express": "^4.17.6",
     "@types/jest": "^25.2.3",
     "@types/jsdom": "^16.2.3",
-    "@types/mkdirp": "^1.0.0",
+    "@types/mkdirp": "^1.0.1",
     "@types/node": "^14.0.11",
     "@types/node-fetch": "^2.5.6",
     "@types/rdfjs__dataset": "^1.0.2",
