@@ -55,7 +55,7 @@
     "@polypoly-eu/podigree": "^0.1.0",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-commonjs": "^13.0.0",
-    "@rollup/plugin-node-resolve": "^8.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.1",
     "@rollup/plugin-sucrase": "^3.0.2",
     "express": "^4.17.1",
     "memfs": "^3.2.0",
