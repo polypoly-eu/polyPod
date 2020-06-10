@@ -2,6 +2,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import sucrase from "@rollup/plugin-sucrase";
 import virtual from "@rollup/plugin-virtual";
+import copy from "rollup-plugin-copy";
 import {browserScriptsPath} from "./paths";
 import {join} from "path";
 import executable from "rollup-plugin-executable";
@@ -23,6 +24,18 @@ export const configs = {
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"]
+            }),
+            copy({
+                targets: [
+                    {
+                        src: "node_modules/react/umd/react.development.js",
+                        dest: browserScriptsPath
+                    },
+                    {
+                        src: "node_modules/react-dom/umd/react-dom.development.js",
+                        dest: browserScriptsPath
+                    }
+                ]
             })
         ],
         external: [
