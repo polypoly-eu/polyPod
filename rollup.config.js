@@ -43,10 +43,7 @@ export default [
         ],
         external: [
             "@polypoly-eu/rdf-spec",
-            "body-parser",
             "chai",
-            "events",
-            "express",
             "fast-check",
             "path"
         ]

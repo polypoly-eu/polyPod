@@ -18,11 +18,6 @@ import fc from "fast-check";
 import {DataFactorySpec, gens} from "@polypoly-eu/rdf-spec";
 import {assert} from "chai";
 import {resolve} from "path";
-import {Server} from "http";
-import express from "express";
-import {once} from "events";
-import {raw} from "body-parser";
-import {AddressInfo} from "net";
 
 /**
  * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].
@@ -38,7 +33,8 @@ export class PodSpec {
 
     constructor(
         private readonly podFactory: () => Pod,
-        private readonly path: string
+        private readonly path: string,
+        private readonly httpbinUrl: string
     ) {}
 
     polyIn(): void {
@@ -108,77 +104,48 @@ export class PodSpec {
 
             describe("HTTP requests", () => {
 
-                const getResponse = `{ "hello": "world" }`;
-                const postResponse = `{ "ping": "pong" }`;
-
-                let server: Server;
-                let port: number;
-
-                beforeEach(async () => {
-                    const app = express();
-                    app.get("/test", (request, response) => {
-                        response.contentType("application/json");
-                        response.send(getResponse);
-                    });
-                    app.get("/test-plain", (request, response) => {
-                        response.contentType("text/plain");
-                        response.send("plaintext");
-                    });
-                    app.use(raw({
-                        type: () => true
-                    }));
-                    app.post("/pong", (request, response) => {
-                        response.contentType(request.header("Content-Type")!);
-                        response.send(request.body);
-                    });
-                    server = app.listen(0);
-                    await once(server, "listening");
-                    port = (server.address() as AddressInfo).port;
-                });
-
                 it("Successful GET (text)", async () => {
                     const {polyOut} = this.podFactory();
-                    const response = await polyOut.fetch(`http://localhost:${port}/test`);
-                    await assert.eventually.equal(response.text(), getResponse);
+                    const response = await polyOut.fetch(`${this.httpbinUrl}/robots.txt`);
+                    await assert.eventually.equal(response.text(), "User-agent: *\nDisallow: /deny\n");
                 });
 
                 it("Successful GET (json)", async () => {
                     const {polyOut} = this.podFactory();
-                    const response = await polyOut.fetch(`http://localhost:${port}/test`);
-                    await assert.eventually.deepEqual(response.json(), JSON.parse(getResponse));
+                    const response = await polyOut.fetch(`${this.httpbinUrl}/json`);
+                    await assert.eventually.property(response.json(), "slideshow");
                 });
 
                 it("Successful GET (plaintext)", async () => {
                     const {polyOut} = this.podFactory();
-                    const response = await polyOut.fetch(`http://localhost:${port}/test-plain`);
+                    const response = await polyOut.fetch(`${this.httpbinUrl}/robots.txt`);
                     await assert.isRejected(response.json(), /json/i);
                 });
 
                 it("Successful POST", async () => {
+                    const postBody = `"test-post"`;
                     const {polyOut} = this.podFactory();
                     const response = await polyOut.fetch(
-                        `http://localhost:${port}/pong`,
+                        `${this.httpbinUrl}/anything`,
                         {
                             method: "post",
-                            body: postResponse,
+                            body: postBody,
                             headers: {
                                 "Content-Type": "application/json"
                             }
                         }
                     );
 
-                    await assert.eventually.equal(response.text(), postResponse);
+                    const json = await response.json();
+
+                    assert.property(json, "data", postBody);
+                    assert.property(json, "method", "POST");
                 });
 
                 it("404", async () => {
                     const {polyOut} = this.podFactory();
-                    const response = polyOut.fetch(`http://localhost:${port}/404`);
+                    const response = polyOut.fetch(`${this.httpbinUrl}/status/404`);
                     await assert.eventually.propertyVal(response, "status", 404);
-                });
-
-                afterEach(async () => {
-                    server.close();
-                    await once(server, "close");
                 });
 
             });
@@ -196,6 +163,10 @@ export class PodSpec {
 /**
  * Convenience function to instantiate the [[PodSpec]] and run it immediately afterwards.
  */
-export function podSpec(podFactory: () => Pod, path = "/"): void {
-    return new PodSpec(podFactory, path).run();
+export function podSpec(
+    podFactory: () => Pod,
+    path = "/",
+    httpbinUrl = "https://httpbin.org"
+): void {
+    return new PodSpec(podFactory, path, httpbinUrl).run();
 }

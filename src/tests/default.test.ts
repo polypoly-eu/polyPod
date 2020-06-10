@@ -5,6 +5,7 @@ import fetch from "node-fetch";
 import {Volume} from "memfs";
 import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
+import {getHttpbinUrl} from "../specs";
 
 chai.use(chaiAsPromised);
 
@@ -15,7 +16,9 @@ describe("Mock pod", () => {
             dataset(),
             new Volume().promises as any,
             fetch
-        )
+        ),
+        "/",
+        getHttpbinUrl()
     );
 
 });

@@ -8,7 +8,7 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "test": "jest && ts-mocha src/tests/**.test.ts",
+    "test": "jest && ts-mocha src/**/*.test.ts",
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
@@ -29,17 +29,14 @@
     "@polypoly-eu/rdf-spec": "^0.1.0",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.0.2",
-    "@types/body-parser": "^1.19.0",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",
-    "@types/express": "^4.17.6",
     "@types/jest": "^26.0.0",
     "@types/node": "^14.0.13",
     "@types/node-fetch": "^2.5.7",
     "@types/rdfjs__dataset": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
-    "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chokidar-cli": "^2.1.0",
@@ -58,10 +55,8 @@
   },
   "peerDependencies": {
     "@polypoly-eu/rdf-spec": "^0.1.0",
-    "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "express": "^4.17.1",
     "fast-check": "^1.24.2"
   },
   "dependencies": {
