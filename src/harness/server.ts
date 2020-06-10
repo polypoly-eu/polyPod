@@ -68,6 +68,8 @@ export async function serve(
         res.send(bootstrap);
     });
 
+    app.use("/", express.static(join(rootDir, manifest.assetBasePath)));
+
     const rpcRouter = Router();
     const remotePod = new RemoteServerPod(pod);
     remotePod.listenOnRouter(rpcRouter);
