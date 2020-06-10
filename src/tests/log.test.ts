@@ -3,7 +3,7 @@ import {Volume} from "memfs";
 import {LogPod, nullLogger} from "../log";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
-import {podSpec} from "@polypoly-eu/poly-api/dist/specs";
+import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/specs";
 import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 
@@ -15,6 +15,6 @@ describe("Log pod", () => {
         const fs = new Volume().promises as any;
         const underlying = new DefaultPod(dataset(), fs, fetch);
         return new LogPod(underlying, nullLogger);
-    });
+    }, "/", getHttpbinUrl());
 
 });

@@ -10,7 +10,7 @@ import express, {Router} from "express";
 import {VolatilePod} from "../volatile";
 import fetch from "node-fetch";
 import {once} from "events";
-import {podSpec} from "@polypoly-eu/poly-api/dist/specs";
+import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/specs";
 import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 
@@ -30,7 +30,7 @@ describe("Remote pod", () => {
             const server = new RemoteServerPod(underlying);
             server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
             return RemoteClientPod.fromRawPort(fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>);
-        });
+        }, "/", getHttpbinUrl());
 
         afterAll(() => {
             ports.forEach(port => port.close());
@@ -65,7 +65,7 @@ describe("Remote pod", () => {
             const clientPod = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
 
             return Object.assign(clientPod, { fs });
-        });
+        }, "/", getHttpbinUrl());
 
         afterAll(async () => {
             server.close();
