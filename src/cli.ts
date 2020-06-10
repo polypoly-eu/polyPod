@@ -43,19 +43,9 @@ yargs
     .command(
         "build",
         "build the feature",
-        yargs =>
-            yargs
-                .options({
-                    w: {
-                        type: "boolean",
-                        default: false,
-                        alias: "watch",
-                        describe: "watch sources and rebuild"
-                    }
-                }),
+        yargs => yargs,
         argv => buildCommand({
-            dir: argv.d,
-            watch: argv.w
+            dir: argv.d
         })
     )
     .help()

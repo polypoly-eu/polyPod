@@ -8,19 +8,16 @@ import {join} from "path";
 import {rootDir} from "../_dir";
 import {promises as fs} from "fs";
 import {Manifest} from "@polypoly-eu/customs";
-// @ts-ignore
-import {browserScriptsPath} from "../../build/paths";
+import {bootstrap} from "@polypoly-eu/feature-harness";
 
-export interface Config {
-    bootstrapPath: string;
+export interface Paths {
     reactPath: string;
     reactDomPath: string;
 }
 
-export const defaultConfig: Config = {
-    bootstrapPath: join(rootDir, browserScriptsPath, "bootstrap.js.txt"),
-    reactPath: join(rootDir, browserScriptsPath, "react.development.js"),
-    reactDomPath: join(rootDir, browserScriptsPath, "react-dom.development.js")
+export const defaultPaths: Paths = {
+    reactPath: join(rootDir, "dist/browser/react.development.js"),
+    reactDomPath: join(rootDir, "dist/browser/react-dom.development.js")
 };
 
 async function sendFile(path: string, res: Response): Promise<void> {
@@ -33,7 +30,7 @@ export async function serve(
     pod: Pod,
     rootDir: string,
     manifest: Manifest,
-    config: Config
+    paths: Paths = defaultPaths
 ): Promise<Server> {
     const app = express();
 
@@ -58,17 +55,17 @@ export async function serve(
 
     app.get("/react.js", (req, res) => {
         res.contentType("text/javascript");
-        sendFile(config.reactPath, res);
+        sendFile(paths.reactPath, res);
     });
 
     app.get("/react-dom.js", (req, res) => {
         res.contentType("text/javascript");
-        sendFile(config.reactDomPath, res);
+        sendFile(paths.reactDomPath, res);
     });
 
     app.get("/bootstrap.js", (req, res) => {
         res.contentType("text/javascript");
-        sendFile(config.bootstrapPath, res);
+        res.send(bootstrap);
     });
 
     const rpcRouter = Router();

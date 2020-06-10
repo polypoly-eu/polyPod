@@ -1,3 +1,5 @@
+const spec = `{ "type": "fetch", "uri": "/rpc" }`;
+
 export const htmlSkeleton =
     `
         <!DOCTYPE HTML>
@@ -14,7 +16,7 @@ export const htmlSkeleton =
                 <div id="feature">
                     Feature div. Paint here!
                 </div>
-                <script src="/bootstrap.js"></script>
+                <script src="/bootstrap.js" data-spec='${spec}'></script>
             </body>
         </html>
     `;

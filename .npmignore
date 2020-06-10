@@ -7,5 +7,4 @@ src
 .eslintrc.js
 .github
 example
-build
 data

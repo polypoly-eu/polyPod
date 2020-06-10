@@ -1,4 +1,4 @@
-import {defaultConfig, serve} from "../harness/server";
+import {serve} from "../harness/server";
 import {detectFeature, Ops} from "./_common";
 import {DefaultPod, FS} from "@polypoly-eu/poly-api";
 import {promises as _fs} from "fs";
@@ -29,7 +29,7 @@ export async function serveCommand(options: ServeCommandOps): Promise<void> {
             ),
             options.log ? defaultLogger : nullLogger
         );
-    await serve(options.port, pod, dir, manifest, defaultConfig);
+    await serve(options.port, pod, dir, manifest);
     const uri = `http://localhost:${options.port}/`;
     console.log(`Server booted: ${uri}`);
     await open(uri);

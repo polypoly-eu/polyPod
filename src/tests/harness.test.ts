@@ -5,12 +5,11 @@ import {Volume} from "memfs";
 import {promises as fs} from "fs";
 import {rootDir} from "../_dir";
 import {join} from "path";
-import {defaultConfig, serve} from "../harness/server";
+import {defaultPaths, serve} from "../harness/server";
 import {fetchWithBaseURI, rawPromise} from "../util";
 import {once} from "events";
 import {AddressInfo} from "net";
 import {JSDOM} from "jsdom";
-import {tempBundle} from "./util";
 import tempy from "tempy";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
@@ -34,11 +33,6 @@ describe("Harness", () => {
 
     let pod: Pod;
     let logger: JestMockLogger;
-    let bootstrapPath: string;
-
-    beforeAll(async () => {
-        bootstrapPath = await tempBundle("bootstrap");
-    });
 
     beforeEach(() => {
         logger = jestMockLogger();
@@ -58,14 +52,12 @@ describe("Harness", () => {
             jsPath: join(rootDir, "data", "test-feature.js")
         };
 
-        const config = {
-            ...defaultConfig,
-            bootstrapPath
-        };
-
         const completed = rawPromise<void>();
 
-        const server = await serve(0, pod, "/", manifest, config);
+        const server = await serve(0, pod, "/", manifest, {
+            reactPath: join(rootDir, "node_modules/react/umd/react.development.js"),
+            reactDomPath: join(rootDir, "node_modules/react-dom/umd/react-dom.development.js")
+        });
         const port = (server.address() as AddressInfo).port;
 
         const baseURI = `http://localhost:${port}`;
@@ -75,7 +67,7 @@ describe("Harness", () => {
             runScripts: "dangerously",
             resources: "usable"
         });
-        dom.window.addEventListener("completed", () => completed.resolve());
+        dom.window.document.addEventListener("completed", () => completed.resolve());
         dom.window.fetch = jsdomFetch;
 
         await completed.promise;
