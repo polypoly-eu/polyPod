@@ -37,7 +37,7 @@
   "peerDependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "fp-ts": "^2.6.3",
+    "fp-ts": "^2.6.5",
     "io-ts": "^2.2.4"
   },
   "devDependencies": {
@@ -59,7 +59,7 @@
     "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
     "fast-check": "^1.24.2",
-    "fp-ts": "^2.6.3",
+    "fp-ts": "^2.6.5",
     "io-ts": "^2.2.4",
     "jest": "^25.5.4",
     "express": "^4.17.1",
