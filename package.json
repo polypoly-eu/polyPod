@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/orodruin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "CLI tool to build POD features",
   "main": "dist/index.js",
   "bin": {
