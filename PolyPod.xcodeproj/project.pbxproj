@@ -11,6 +11,8 @@
 		1A00DFF724569F3A0049F3F7 /* pod.html in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF624569F3A0049F3F7 /* pod.html */; };
 		1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF8245961FB0049F3F7 /* messagePort.js */; };
 		1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */; };
+		1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */; };
+		1A66F76B2490DFA000ED4308 /* FetchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F76A2490DFA000ED4308 /* FetchResponse.swift */; };
 		1A8F4873247E3F7000089217 /* helloWorld.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A8F4872247E3F7000089217 /* helloWorld.zip */; };
 		1A8F4875247E40C600089217 /* PostOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4874247E40C600089217 /* PostOffice.swift */; };
 		1A8F487B247E5C5700089217 /* iframe-inner.js in Resources */ = {isa = PBXBuildFile; fileRef = 1A8F487A247E5C5700089217 /* iframe-inner.js */; };
@@ -47,6 +49,8 @@
 		1A00DFF624569F3A0049F3F7 /* pod.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = pod.html; sourceTree = "<group>"; };
 		1A00DFF8245961FB0049F3F7 /* messagePort.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = messagePort.js; sourceTree = "<group>"; };
 		1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageName.swift; sourceTree = "<group>"; };
+		1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestInit.swift; sourceTree = "<group>"; };
+		1A66F76A2490DFA000ED4308 /* FetchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResponse.swift; sourceTree = "<group>"; };
 		1A8F4872247E3F7000089217 /* helloWorld.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = helloWorld.zip; sourceTree = "<group>"; };
 		1A8F4874247E40C600089217 /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffice.swift; sourceTree = "<group>"; };
 		1A8F487A247E5C5700089217 /* iframe-inner.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "iframe-inner.js"; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				1AF468B3242A350800E51B6D /* Preferences.swift */,
 				1AF468DB24349E6B00E51B6D /* PodApi.swift */,
 				1A8F4874247E40C600089217 /* PostOffice.swift */,
+				1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */,
+				1A66F76A2490DFA000ED4308 /* FetchResponse.swift */,
 			);
 			path = PodApi;
 			sourceTree = "<group>";
@@ -268,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */,
+				1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */,
 				1A8F4886247E91E000089217 /* Unpack.swift in Sources */,
 				1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */,
 				1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */,
@@ -289,6 +296,7 @@
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */,
 				1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */,
+				1A66F76B2490DFA000ED4308 /* FetchResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

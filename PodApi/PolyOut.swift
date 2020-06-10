@@ -10,29 +10,27 @@ import Foundation
 
 class PolyOut {
     
-    func makeHttpRequest(urlString: String, requestData: [String: Any], completionHandler: @escaping ([String: Any]?) -> Void) {
+    func makeHttpRequest(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?) -> Void) {
         guard let url = URL(string: urlString) else {
             // todo: handle this
             completionHandler(nil)
             return
         }
         
-        let initData = requestData["init"] as? [String: Any] ?? [:]
-        
-        let method = initData["method"] as? String ?? "GET"
+        let method = requestInit.method ?? "GET"
         
         var request = URLRequest(url: url)
         request.httpMethod = method.uppercased()
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+        /*
         if let headers = initData["headers"] as? [String: String] {
             for (key, value) in headers {
                 request.setValue(value, forHTTPHeaderField: key)
             }
         }
-        
-        if let body = initData["body"] as? String, body.count > 0 {
+        */
+        if let body = requestInit.body, body.count > 0 {
             let postString = body
             request.httpBody = postString.data(using: .utf8)
         }
@@ -49,21 +47,9 @@ class PolyOut {
                 return
             }
             
-            var responseData: [String: Any] = [:]
+            let fetchResponse = FetchResponse(response: httpResponse, data: data)
             
-            if let data = data {
-                let responseString = String(data: data, encoding: .utf8)!
-                responseData["bufferedText"] = responseString
-            }
-            
-            responseData["ok"] = true
-            responseData["redirected"] = false
-            responseData["status"] = httpResponse.statusCode
-            responseData["statusText"] = "OK"
-            responseData["type"] = "basic"
-            responseData["url"] = httpResponse.url?.absoluteString ?? ""
-            
-            completionHandler(responseData)
+            completionHandler(fetchResponse)
         })
 
         task.resume()

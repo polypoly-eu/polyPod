@@ -65,27 +65,18 @@ class PostOffice: NSObject {
         let args = argsValue.arrayValue!
         
         let url = args[0].stringValue!
-
-        PodApi.shared.polyOut.makeHttpRequest(urlString: url, requestData: [:]) { responseData in
-            guard let responseData = responseData else {
+        let requestInitData = args[1].dictionaryValue!
+        
+        let fetchRequestInit = FetchRequestInit(initData: requestInitData)
+        
+        PodApi.shared.polyOut.makeHttpRequest(urlString: url, requestInit: fetchRequestInit) { fetchResponse in
+            guard let fetchResponse = fetchResponse else {
                 // todo: handle error
                 completionHandler(MessagePackValue())
                 return
             }
             
-            var fetchResponse: [MessagePackValue] = []
-            
-            for (key, value) in responseData {
-                if let asString = value as? String {
-                    fetchResponse.append([.string(key), .string(asString)])
-                } else if let asBool = value as? Bool {
-                    fetchResponse.append([.string(key), .bool(asBool)])
-                } else if let asInt = value as? Int {
-                    fetchResponse.append([.string(key), .int(Int64(asInt))])
-                }
-            }
-
-            let data = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", .array(fetchResponse)])
+            let data = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", .array(fetchResponse.messagePackArray)])
                 
             let packedData = pack(data)
                 
