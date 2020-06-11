@@ -63,7 +63,7 @@
     "@rollup/plugin-node-resolve": "^8.0.1",
     "@rollup/plugin-sucrase": "^3.0.2",
     "express": "^4.17.1",
-    "fp-ts": "^2.6.2",
+    "fp-ts": "^2.6.5",
     "io-ts": "^2.2.4",
     "memfs": "^3.2.0",
     "mkdirp": "^1.0.4",
