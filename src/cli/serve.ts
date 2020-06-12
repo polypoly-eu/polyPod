@@ -7,14 +7,16 @@ import open from "open";
 import {LogPod, nullLogger, defaultLogger} from "@polypoly-eu/podigree";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
+import {Server} from "http";
 
 export interface ServeCommandOps extends Ops {
     port: number;
     inmemory: boolean;
     log: boolean;
+    open: boolean;
 }
 
-export async function serveCommand(options: ServeCommandOps): Promise<void> {
+export async function serveCommand(options: ServeCommandOps): Promise<Server> {
     const [dir, manifest] = await detectFeature(options);
     const fs: FS =
         options.inmemory ?
@@ -29,8 +31,10 @@ export async function serveCommand(options: ServeCommandOps): Promise<void> {
             ),
             options.log ? defaultLogger : nullLogger
         );
-    await serve(options.port, pod, dir, manifest);
+    const server = await serve(options.port, pod, dir, manifest);
     const uri = `http://localhost:${options.port}/`;
     console.log(`Server booted: ${uri}`);
-    await open(uri);
+    if (options.open)
+        await open(uri);
+    return server;
 }

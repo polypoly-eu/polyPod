@@ -26,5 +26,9 @@ export default class ExampleFeature {
             <Quads quads={selected} />,
             document.getElementById("feature")
         );
+
+        window.testCompleted({
+            failures: selected.length === 1 ? 0 : 1
+        });
     }
 }

@@ -31,13 +31,20 @@ yargs
                         default: false,
                         alias: "log",
                         describe: "log API actions"
+                    },
+                    o: {
+                        type: "boolean",
+                        default: true,
+                        alias: "open",
+                        describe: "open browser after server has started"
                     }
                 }),
         argv => serveCommand({
             log: argv.l,
             dir: argv.d,
             port: argv.port,
-            inmemory: argv.m
+            inmemory: argv.m,
+            open: argv.o
         })
     )
     .command(
