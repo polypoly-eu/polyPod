@@ -3,11 +3,10 @@ import copy from "rollup-plugin-copy";
 import executable from "rollup-plugin-executable";
 
 export default {
-    input: "src/cli.ts",
+    input: ["src/index.ts", "src/cli.ts"],
     output: {
-        file: "dist/cli.js",
-        format: "cjs",
-        banner: "#!/usr/bin/env node"
+        dir: "dist",
+        format: "cjs"
     },
     plugins: [
         sucrase({

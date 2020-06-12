@@ -4,7 +4,7 @@
   "description": "CLI tool to build POD features",
   "main": "dist/index.js",
   "bin": {
-    "orodruin": "dist/cli.js"
+    "orodruin": "bin/cli.js"
   },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
