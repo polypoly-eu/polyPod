@@ -5,7 +5,7 @@ import {Volume} from "memfs";
 import {promises as fs} from "fs";
 import {rootDir} from "../_dir";
 import {join} from "path";
-import {serve} from "../harness/server";
+import {serve} from "../serve";
 import {fetchWithBaseURI, rawPromise} from "../util";
 import {once} from "events";
 import {AddressInfo} from "net";
@@ -27,7 +27,7 @@ function jestMockLogger(): JestMockLogger {
     };
 }
 
-describe("Harness", () => {
+describe("Serve", () => {
 
     jest.setTimeout(20000);
 
@@ -54,7 +54,7 @@ describe("Harness", () => {
 
         const completed = rawPromise<void>();
 
-        const server = await serve(0, pod, "/", manifest, {
+        const server = await serve(12345, pod, "/", manifest, {
             reactPath: join(rootDir, "node_modules/react/umd/react.development.js"),
             reactDomPath: join(rootDir, "node_modules/react-dom/umd/react-dom.development.js")
         });

@@ -2,7 +2,6 @@ import {Manifest} from "@polypoly-eu/customs";
 import {InputOptions, Plugin, rollup} from "rollup";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import {rootDir} from "../_dir";
 import * as sass from "sass";
 import {promises as fs} from "fs";
 import mkdirp from "mkdirp";
@@ -12,20 +11,20 @@ import sucrase from "@rollup/plugin-sucrase";
 // @ts-ignore
 import nodeSassTildeImporter from "node-sass-tilde-importer";
 
-const plugins: Plugin[] = [
-    resolve(),
-    commonjs(),
-    sucrase({
-        exclude: [`${rootDir}/node_modules/**`],
-        transforms: ["typescript", "jsx"]
-    })
-];
-
-async function processJS(input: string, output: string): Promise<void> {
+async function processJS(root: string, input: string, _output: string): Promise<void> {
     console.log("Processing JS ...");
 
+    const plugins: Plugin[] = [
+        resolve(),
+        commonjs(),
+        sucrase({
+            exclude: [`${root}/node_modules/**`],
+            transforms: ["typescript", "jsx"]
+        })
+    ];
+
     const inputOptions: InputOptions = {
-        input,
+        input: join(root, input),
         external: [
             "react",
             "react-dom"
@@ -34,6 +33,8 @@ async function processJS(input: string, output: string): Promise<void> {
     };
 
     const rollupBuild = await rollup(inputOptions);
+
+    const output = join(root, _output);
 
     console.log(`Writing to ${output}`);
 
@@ -75,7 +76,7 @@ export async function build(dir: string, manifest: Manifest): Promise<void> {
         throw new Error("Orodruin input (S)CSS file is not set");
 
     await Promise.all([
-        processJS(join(dir, inputJS), join(dir, manifest.jsPath)),
+        processJS(dir, inputJS, manifest.jsPath),
         processStyle(join(dir, inputStyle), join(dir, manifest.assetBasePath, manifest.cssPath))
     ]);
 

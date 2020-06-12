@@ -1,4 +1,4 @@
-import {serve} from "../harness/server";
+import {serve} from "../serve";
 import {detectFeature, Ops} from "./_common";
 import {DefaultPod, FS} from "@polypoly-eu/poly-api";
 import {promises as _fs} from "fs";

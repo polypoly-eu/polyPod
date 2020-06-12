@@ -1,6 +1,5 @@
 import express, {Response, Router} from "express";
 import {Server} from "http";
-import {htmlSkeleton} from "./html";
 import {once} from "events";
 import {Pod} from "@polypoly-eu/poly-api";
 import {RemoteServerPod} from "@polypoly-eu/podigree";
@@ -8,7 +7,7 @@ import {join} from "path";
 import {rootDir} from "../_dir";
 import {promises as fs} from "fs";
 import {Manifest} from "@polypoly-eu/customs";
-import {bootstrap} from "@polypoly-eu/feature-harness";
+import {generateHTML, Asset} from "@polypoly-eu/feature-harness";
 
 export interface Paths {
     reactPath: string;
@@ -34,7 +33,22 @@ export async function serve(
 ): Promise<Server> {
     const app = express();
 
-    const html = htmlSkeleton;
+    const assets: Asset[] = [
+        { type: "style", uri: "feature.css" },
+        { type: "script", uri: "react.js" },
+        { type: "script", uri: "react-dom.js" },
+        { type: "script", uri: "feature.js" }
+    ];
+
+    const html = generateHTML({
+        baseURI: `http://localhost:${port}`,
+        csp: false, // FIXME enable CSP even for dev mode
+        spec: {
+            type: "fetch",
+            uri: "/rpc"
+        },
+        assets
+    });
 
     app.get("/", (req, res) => {
         res.contentType("text/html");
@@ -61,11 +75,6 @@ export async function serve(
     app.get("/react-dom.js", (req, res) => {
         res.contentType("text/javascript");
         sendFile(paths.reactDomPath, res);
-    });
-
-    app.get("/bootstrap.js", (req, res) => {
-        res.contentType("text/javascript");
-        res.send(bootstrap);
     });
 
     app.use("/", express.static(join(rootDir, manifest.assetBasePath)));

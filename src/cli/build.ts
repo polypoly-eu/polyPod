@@ -1,5 +1,5 @@
 import {detectFeature, Ops} from "./_common";
-import {build} from "../feature/build";
+import {build} from "../build";
 
 export type BuildCommandOps = Ops;
 
