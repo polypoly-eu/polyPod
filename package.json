@@ -42,7 +42,7 @@
     "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
-    "fast-check": "^1.24.2",
+    "fast-check": "^1.25.0",
     "jest": "^25.5.4",
     "memfs": "^3.2.0",
     "mocha": "^7.2.0",
@@ -57,7 +57,7 @@
     "@polypoly-eu/rdf-spec": "^0.1.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "fast-check": "^1.24.2"
+    "fast-check": "^1.25.0"
   },
   "dependencies": {
     "@types/rdf-js": "^3.0.1",
