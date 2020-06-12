@@ -52,14 +52,6 @@ class FeatureViewController: UIViewController {
         podContent = podContent.replacingOccurrences(of: "featureName", with: featureName)
         webView.loadHTMLString(podContent, baseURL: featureUrl)
     }
-    
-    private func loadFeatureManifest(_ url: URL) -> Manifest? {
-        let filePath = url.appendingPathComponent("Manifest.json")
-        guard let data = try? Data(contentsOf: filePath) else { return nil }
-        let decoder = JSONDecoder()
-        let manifest = try? decoder.decode(Manifest.self, from: data)
-        return manifest
-    }
 
 }
 

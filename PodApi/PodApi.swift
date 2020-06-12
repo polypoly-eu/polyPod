@@ -12,10 +12,6 @@ class PodApi {
 
     static let  shared = PodApi()
     
-    lazy var preferences: Preferences  = {
-        return Preferences()
-    }()
-    
     lazy var polyIn: PolyIn  = {
         return PolyIn()
     }()
