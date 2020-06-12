@@ -10,6 +10,12 @@ import Foundation
 
 class PolyOut {
     
+    private let session: NetworkSession
+    
+    init(session: NetworkSession = URLSession.shared) {
+        self.session = session
+    }
+    
     func makeHttpRequest(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?) -> Void) {
         guard let url = URL(string: urlString) else {
             // todo: handle this
@@ -35,7 +41,7 @@ class PolyOut {
             request.httpBody = postString.data(using: .utf8)
         }
         
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+        session.loadData(with: request, completionHandler: { (data, response, error) in
             if let error = error {
                 // todo: handle error
                 completionHandler(nil)
@@ -51,7 +57,5 @@ class PolyOut {
             
             completionHandler(fetchResponse)
         })
-
-        task.resume()
     }
 }
