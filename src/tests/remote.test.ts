@@ -5,7 +5,6 @@ import {RemoteClientPod, RemoteServerPod} from "../remote";
 import {MessageChannel, MessagePort} from "worker_threads";
 import {Port, fromNodeMessagePort} from "@polypoly-eu/port-authority";
 import {Server} from "http";
-import {AddressInfo} from "net";
 import express, {Router} from "express";
 import fetch from "node-fetch";
 import {once} from "events";
