@@ -7,12 +7,10 @@ import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 import {getHttpbinUrl} from "../specs";
 
-chai.use(chaiAsPromised);
-
 describe("Mock pod", () => {
 
     podSpec(
-        () => new DefaultPod(
+        new DefaultPod(
             dataset(),
             new Volume().promises as any,
             fetch

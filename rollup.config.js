@@ -44,6 +44,7 @@ export default [
         external: [
             "@polypoly-eu/rdf-spec",
             "chai",
+            "chai-as-promised",
             "fast-check",
             "path"
         ]
