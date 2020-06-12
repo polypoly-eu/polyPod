@@ -46,8 +46,6 @@
     "@rollup/plugin-sucrase": "^3.0.2",
     "@rollup/plugin-virtual": "^2.0.2",
     "@rdfjs/dataset": "^1.0.1",
-    "@types/chai": "^4.2.11",
-    "@types/chai-as-promised": "^7.1.2",
     "@types/jest": "^26.0.0",
     "@types/node-fetch": "^2.5.7",
     "@types/rdfjs__dataset": "^1.0.2",
