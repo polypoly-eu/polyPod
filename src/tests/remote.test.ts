@@ -7,30 +7,23 @@ import {Port, fromNodeMessagePort} from "@polypoly-eu/port-authority";
 import {Server} from "http";
 import {AddressInfo} from "net";
 import express, {Router} from "express";
-import {VolatilePod} from "../volatile";
 import fetch from "node-fetch";
 import {once} from "events";
 import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/specs";
-import chai from "chai";
-import chaiAsPromised from "chai-as-promised";
-
-chai.use(chaiAsPromised);
 
 describe("Remote pod", () => {
 
     describe("MessagePort (node)", () => {
 
         const ports: MessagePort[] = [];
+        const fs = new Volume().promises as any;
+        const {port1, port2} = new MessageChannel();
+        ports.push(port1, port2);
+        const underlying = new DefaultPod(dataset(), fs, fetch);
+        const server = new RemoteServerPod(underlying);
+        server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
 
-        podSpec(() => {
-            const fs = new Volume().promises as any;
-            const {port1, port2} = new MessageChannel();
-            ports.push(port1, port2);
-            const underlying = new DefaultPod(dataset(), fs, fetch);
-            const server = new RemoteServerPod(underlying);
-            server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
-            return RemoteClientPod.fromRawPort(fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>);
-        }, "/", getHttpbinUrl());
+        podSpec(RemoteClientPod.fromRawPort(fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>), "/", getHttpbinUrl());
 
         afterAll(() => {
             ports.forEach(port => port.close());
@@ -40,32 +33,30 @@ describe("Remote pod", () => {
 
     describe("Express/fetch", () => {
 
-        const pod: VolatilePod = new VolatilePod(null!);
+        const fs = new Volume().promises as any;
+        const port = 12345;
+
         let server: Server;
-        let port: number;
 
         beforeAll(async () => {
             const app = express();
             const router = Router();
             app.use("/", router);
 
-            const serverPod = new RemoteServerPod(pod);
+            const backendPod = new DefaultPod(dataset(), fs, fetch);
+            const serverPod = new RemoteServerPod(backendPod);
 
             await serverPod.listenOnRouter(router);
 
-            server = app.listen();
+            server = app.listen(port);
             await once(server, "listening");
-            port = (server.address() as AddressInfo).port;
         });
 
-        podSpec(() => {
-            const fs = new Volume().promises as any;
-            pod.pod = new DefaultPod(dataset(), fs, fetch);
-
-            const clientPod = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
-
-            return Object.assign(clientPod, { fs });
-        }, "/", getHttpbinUrl());
+        podSpec(
+            RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any),
+            "/",
+            getHttpbinUrl()
+        );
 
         afterAll(async () => {
             server.close();
