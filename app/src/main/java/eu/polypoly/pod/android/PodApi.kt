@@ -1,16 +1,11 @@
 package eu.polypoly.pod.android
 
-import android.content.Context
 import eu.polypoly.bubblewrap.Codec
 import eu.polypoly.pod.android.polyOut.PolyOut
 import org.msgpack.value.Value
 
 // sufficient for now to have just a singleton, later on there should be one PodApi object per Feature
 object PodApi {
-    fun init(context: Context) {
-        PolyOut.init(context)
-    }
-
     private fun decodeCall(value: Value): Pair<String, List<Value>> {
         val map = value.asMapValue().keyValueArray
         return Pair(
