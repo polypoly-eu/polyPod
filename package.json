@@ -56,7 +56,7 @@
   "dependencies": {
     "@polypoly-eu/customs": "0.0.1",
     "@polypoly-eu/feature-harness": "0.0.1",
-    "@polypoly-eu/poly-api": "^0.2.0",
+    "@polypoly-eu/poly-api": "^0.3.0",
     "@polypoly-eu/podigree": "^0.1.0",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-commonjs": "^13.0.0",
