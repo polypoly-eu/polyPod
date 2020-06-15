@@ -56,7 +56,7 @@
     "chai-as-promised": "^7.1.1",
     "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
-    "fast-check": "^1.25.0",
+    "fast-check": "^1.25.1",
     "fp-ts": "^2.6.5",
     "io-ts": "^2.2.5",
     "jest": "^25.5.4",
