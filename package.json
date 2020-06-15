@@ -38,7 +38,7 @@
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "fast-check": "^1.25.0"
+    "fast-check": "^1.25.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
@@ -57,7 +57,7 @@
     "chokidar-cli": "^2.1.0",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
-    "fast-check": "^1.25.0",
+    "fast-check": "^1.25.1",
     "karma": "^5.1.0",
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
