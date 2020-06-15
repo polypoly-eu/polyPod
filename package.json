@@ -26,15 +26,16 @@
     "url": "https://github.com/polypoly-eu/orodruin/issues"
   },
   "homepage": "https://github.com/polypoly-eu/orodruin#readme",
+  "peerDependencies": {
+    "puppeteer": "^3.3.0"
+  },
   "devDependencies": {
     "@rollup/plugin-virtual": "^2.0.2",
     "@types/express": "^4.17.6",
     "@types/jest": "^26.0.0",
     "@types/jsdom": "^16.2.3",
     "@types/mkdirp": "^1.0.1",
-    "@types/node": "^14.0.13",
     "@types/node-fetch": "^2.5.6",
-    "@types/puppeteer": "^3.0.0",
     "@types/rdfjs__dataset": "^1.0.2",
     "@types/sass": "^1.16.0",
     "@types/semver": "^7.2.0",
@@ -45,6 +46,7 @@
     "eslint": "^6.8.0",
     "jest": "^25.5.4",
     "jsdom": "^16.2.2",
+    "puppeteer": "^3.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rollup-plugin-copy": "^3.3.0",
@@ -62,6 +64,8 @@
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
     "@rollup/plugin-sucrase": "^3.0.2",
+    "@types/puppeteer": "^3.0.0",
+    "@types/node": "^14.0.13",
     "express": "^4.17.1",
     "fp-ts": "^2.6.5",
     "io-ts": "^2.2.5",

@@ -27,8 +27,9 @@ export default class ExampleFeature {
             document.getElementById("feature")
         );
 
-        window.testCompleted({
-            failures: selected.length === 1 ? 0 : 1
-        });
+        if (window.testCompleted)
+            window.testCompleted({
+                failures: selected.length === 1 ? 0 : 1
+            });
     }
 }

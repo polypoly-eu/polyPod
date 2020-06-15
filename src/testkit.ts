@@ -1,6 +1,5 @@
 import {Page} from "puppeteer";
 import {rawPromise} from "./util";
-import {serveCommand} from "./cli/serve";
 
 interface TestResult {
     failures: number;
@@ -31,23 +30,4 @@ export function raiseOnFailure(result: TestResult): void {
 
     if (result.message)
         console.log(result.message);
-}
-
-export async function testFeature(page: Page): Promise<void> {
-    const resultSupplier = await preparePage(page);
-
-    const server = await serveCommand({
-        inmemory: true,
-        log: false,
-        open: false,
-        port: 12345
-    });
-
-    try {
-        await page.goto(`http://localhost:12345/`);
-        raiseOnFailure(await resultSupplier());
-    }
-    finally {
-        server.close();
-    }
 }

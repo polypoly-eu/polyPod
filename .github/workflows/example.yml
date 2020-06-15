@@ -20,7 +20,8 @@ jobs:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     - name: npm build (orodruin)
       run: |
-          npm run build
+        npm rebuild
+        npm run build
     - name: npm install (feature)
       run: |
         cd example
@@ -30,5 +31,4 @@ jobs:
     - name: npm test (feature)
       run: |
         cd example
-        npm rebuild
         npm run test:feature

@@ -8,14 +8,11 @@
   "scripts": {
     "serve": "orodruin serve -l",
     "build": "orodruin build",
-    "test:feature": "npm run build && jest"
+    "test:feature": "orodruin build && orodruin test"
   },
   "devDependencies": {
     "@polypoly-eu/poly-look": "^0.0.3",
-    "@polypoly-eu/orodruin": "file:/..",
-    "jest": "^26.0.1",
-    "jest-puppeteer": "^4.4.0",
-    "puppeteer": "^3.3.0"
+    "@polypoly-eu/orodruin": "file:/.."
   },
   "engines": {
     "polypoly": "^0.3.0"

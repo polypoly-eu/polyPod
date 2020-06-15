@@ -1,6 +1,7 @@
 import yargs from "yargs";
 import {serveCommand} from "./cli/serve";
 import {buildCommand} from "./cli/build";
+import {testCommand} from "./cli/test";
 
 yargs
     .options({
@@ -53,6 +54,20 @@ yargs
         yargs => yargs,
         argv => buildCommand({
             dir: argv.d
+        })
+    )
+    .command(
+        "test [port]",
+        "run feature in headless mode",
+        yargs =>
+            yargs
+                .positional("port", {
+                    describe: "port to bind on",
+                    default: 4000
+                }),
+        argv => testCommand({
+            dir: argv.d,
+            port: argv.port,
         })
     )
     .help()
