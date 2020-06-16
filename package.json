@@ -66,6 +66,7 @@
     "@rollup/plugin-sucrase": "^3.0.2",
     "@types/puppeteer": "^3.0.0",
     "@types/node": "^14.0.13",
+    "exposed-promises": "^1.0.0",
     "express": "^4.17.1",
     "fp-ts": "^2.6.5",
     "io-ts": "^2.2.5",

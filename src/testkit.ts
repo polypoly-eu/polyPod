@@ -1,5 +1,5 @@
 import {Page} from "puppeteer";
-import {rawPromise} from "./util";
+import {exposedPromise} from "exposed-promises";
 
 interface TestResult {
     failures: number;
@@ -13,7 +13,7 @@ declare global {
 }
 
 export async function preparePage(page: Page): Promise<() => Promise<TestResult>> {
-    const {resolve, promise} = rawPromise<TestResult>();
+    const {resolve, promise} = exposedPromise<TestResult>();
 
     await page.exposeFunction("testCompleted", (result: TestResult) => resolve(result));
 

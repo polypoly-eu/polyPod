@@ -6,7 +6,6 @@ import {promises as fs} from "fs";
 import {rootDir} from "../_dir";
 import {join} from "path";
 import {serve} from "../serve";
-import {fetchWithBaseURI, rawPromise} from "../util";
 import {once} from "events";
 import {AddressInfo} from "net";
 import {JSDOM} from "jsdom";
@@ -14,6 +13,7 @@ import tempy from "tempy";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import {parse, Range} from "semver";
+import {exposedPromise} from "exposed-promises";
 
 interface JestMockLogger extends Logger {
     called: jest.Mock<void, [string, Record<string, any>]>;
@@ -24,6 +24,15 @@ function jestMockLogger(): JestMockLogger {
     return {
         called: jest.fn(),
         finished: jest.fn()
+    };
+}
+
+function fetchWithBaseURI(baseURI: string, fetch: typeof window.fetch): typeof window.fetch {
+    return (input, init?) => {
+        if (typeof input == "string")
+            return fetch(baseURI + input, init);
+        else
+            return fetch ({ ...input, url: baseURI + input.url }, init);
     };
 }
 
@@ -52,7 +61,7 @@ describe("Serve", () => {
             jsPath: join(rootDir, "data", "test-feature.js")
         };
 
-        const completed = rawPromise<void>();
+        const completed = exposedPromise<void>();
 
         const server = await serve(12345, pod, "/", manifest, {
             reactPath: join(rootDir, "node_modules/react/umd/react.development.js"),
