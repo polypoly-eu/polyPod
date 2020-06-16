@@ -26,7 +26,7 @@
   "dependencies": {
     "@pnpm/read-package-json": "^3.1.2",
     "fp-ts": "^2.6.5",
-    "io-ts": "^2.2.2",
+    "io-ts": "^2.2.5",
     "semver": "^7.3.2"
   },
   "devDependencies": {
