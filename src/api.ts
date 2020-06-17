@@ -1,9 +1,7 @@
 /**
  * API type description for the interaction between Feature and Pod.
  *
- * The main interfaces are:
- * - [[Pod]] for the interface that the Feature sees, and
- * - [[Feature]] for the interface that the Pod sees.
+ * The main interfaces is [[Pod]] for the interface that the Feature sees.
  * @packageDocumentation
  */
 
@@ -151,95 +149,4 @@ export interface Pod {
      * `polyOut` is the interface to interact with the outside world. Refer to [[PolyOut]] for its definition.
      */
     readonly polyOut: PolyOut;
-}
-
-/**
- * This interface represents the API that a Feature offers to a Pod after it has been instantiated. For the
- * instantiation API, refer to [[FeatureConstructor]].
- *
- * After the Feature has been instantiated according to [[FeatureConstructor]], the Pod will call the [[init]] method
- * to provide the [[Pod]] API to the Feature. At this point, the Feature has full control over the (asynchronous)
- * control flow and may perform arbitrary computations, including side effects. This notwithstanding, the Pod may still
- * (e.g. by user's request) cancel Feature execution by external means, such as killing the process the Feature runs in.
- *
- */
-export interface Feature {
-    /**
-     * Yields control flow to the Feature.
-     *
-     * This method is only called once. The Pod assumes nothing about when this method will return, but it will `await`
-     * the resulting promise. If the promise completes, the Feature is assumed to be terminated. If a new Feature run
-     * is requested by the user, the Pod will re-bootstrap it; i.e., neither [[FeatureConstructor]] nor [[Feature]]
-     * instances are re-used.
-     *
-     * As soon as this method is called, the Feature can start making the following assumptions about the runtime
-     * environment:
-     *
-     * 1. the Pod API is initialized and responds to requests
-     * 2. the Feature is being executed in a DOM environment (browser, iframe, [JSDOM](https://github.com/jsdom/jsdom/), ...)
-     * 3. there is a DOM element with the id `feature` in which the Feature may render arbitrary content
-     *
-     * Features _may_ use arbitrary browser APIs for manipulating DOM nodes, including events. They _must not_ use other
-     * APIs, including `fetch` or storage such as IndexedDB. Pod implementations _may_ impose additional restrictions.
-     * Those restriction can be syntactic (e.g. forbidding an API) or semantic (e.g. demanding the use of a particular
-     * set of styles).
-     *
-     * Interaction with the outside world can be done through the [[Pod]] API. In particular, HTTP requests can be done
-     * with [[PolyOut]]. Note that the built-in HTTP querying methods of the browser are reserved for use from the Pod.
-     *
-     * @param pod The implementation of the [[Pod]] API that is exclusively used by this Feature
-     */
-    init(pod: Pod): Promise<void>;
-}
-
-/**
- * This interface represents the API that a Feature offers to a Pod to be instantiated. For the instance API, refer to
- * [[Feature]].
- *
- * A Feature resides in a self-contained JavaScript file. This file _should_ be in the following shape:
- *
- * ```
- * // arbitrary code
- * const Feature = class {
- *     // ...
- * }
- * ```
- *
- * or alternatively in IIFE form:
- *
- * ```
- * const Feature = (() => {
- *     // ...
- * })();
- * ```
- *
- * Evaluating this file _must_ result in the `Feature` identifier being bound to a class (or constructor function) that
- * satisfies this interface, i.e., construct an object with no arguments. Pods will instantiate the feature as follows:
- *
- * ```
- * const instance = new Feature();
- * ```
- *
- * Evaluating the feature file _should_ not carry out any computation. Invoking the constructor _should_ only perform
- * synchronous operations. When the constructor completes and returns an object, the Pod assumes that the Feature has
- * been successfully instantiated. It is not guaranteed that any system resources are present until this point. More
- * complex computation, such as rendering content or interacting with the [[Pod]] API happens later (see
- * [[Feature.init]] for details). Both this phase and the later initialization with the Pod API is referred to as
- * _bootstrapping_.
- *
- * At any point during bootstrappping, Pods _may_ inject their own code into Feature, for example to override certain
- * browser APIs.
- *
- * The runtime in which the Pod evaluates the Feature script file does not provide any module-specific environment such
- * as `module.exports`, nor module-specific syntax like `import` or `export`. Attempting to load more JavaScript code
- * is undefined behaviour and may lead to failure to bootstrap the Feature.
- */
-export interface FeatureConstructor {
-    /**
-     * A constructor without arguments. The constructor should only be used to perform static initialization of
-     * properties.
-     *
-     * This constructor is only called once. For subsequent Feature runs, the Feature script file is re-evaluated.
-     */
-    new(): Feature;
 }
