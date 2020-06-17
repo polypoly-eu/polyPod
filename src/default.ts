@@ -10,8 +10,8 @@
 import * as RDF from "rdf-js";
 import {dataFactory} from "@polypoly-eu/rdf";
 import {Pod, PolyIn, PolyOut} from "./api";
-import {Fetch} from "./fetch";
-import {FS} from "./fs";
+import {Fetch, Response, RequestInit} from "./fetch";
+import {EncodingOptions, FS} from "./fs";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -61,11 +61,35 @@ export class DefaultPod implements Pod {
      * The [[PolyOut]] interface. See [[PolyOut]] for the description.
      */
     get polyOut(): PolyOut {
-        return {
-            readFile: this.fs.readFile.bind(this.fs),
-            writeFile: this.fs.writeFile.bind(this.fs),
-            stat: this.fs.stat.bind(this.fs),
-            fetch: this.fetch.bind(this.fetch)
+        const fs = this.fs;
+        const _fetch = this.fetch;
+
+        return new class implements PolyOut {
+            fetch(input: string, init?: RequestInit): Promise<Response> {
+                return _fetch(input, init);
+            }
+
+            readFile(path: string, options: EncodingOptions): Promise<string>;
+            readFile(path: string): Promise<Uint8Array>;
+            readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
+                if (options === undefined)
+                    return fs.readFile(path);
+                else
+                    return fs.readFile(path, options);
+            }
+
+            readdir(path: string): Promise<string[]> {
+                return fs.readdir(path);
+            }
+
+            async stat(path: string): Promise<void> {
+                await fs.stat(path);
+            }
+
+            writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+                return fs.writeFile(path, content, options);
+            }
+
         };
     }
 

@@ -3,8 +3,6 @@ import {DefaultPod} from "../default";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import {Volume} from "memfs";
-import chai from "chai";
-import chaiAsPromised from "chai-as-promised";
 import {getHttpbinUrl} from "../specs";
 
 describe("Mock pod", () => {

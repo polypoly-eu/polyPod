@@ -18,6 +18,8 @@ export interface EncodingOptions {
  */
 export interface FS {
     readFile(path: string, options: EncodingOptions): Promise<string>;
+    readFile(path: string): Promise<Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): Promise<void>;
     stat(path: string): Promise<void>;
+    readdir(path: string): Promise<string[]>;
 }

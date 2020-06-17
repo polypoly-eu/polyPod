@@ -18,6 +18,7 @@ import fc from "fast-check";
 import {DataFactorySpec, gens} from "@polypoly-eu/rdf-spec";
 import chai, {assert} from "chai";
 import chaiAsPromised from "chai-as-promised";
+import {encodeUtf8} from "./_util";
 
 /**
  * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].
@@ -102,6 +103,7 @@ export class PodSpec {
                         await polyOut.writeFile(path, content, { encoding: "utf-8" });
 
                         await assert.eventually.equal(polyOut.readFile(path, { encoding: "utf-8" }), content);
+                        await assert.eventually.deepEqual(polyOut.readFile(path), encodeUtf8(content));
                     }));
                 });
 
