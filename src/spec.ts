@@ -13,12 +13,35 @@
  * @packageDocumentation
  */
 
-import {Pod} from "../api";
+import {Pod} from "./api";
 import fc from "fast-check";
 import {DataFactorySpec, gens} from "@polypoly-eu/rdf-spec";
 import chai, {assert} from "chai";
 import chaiAsPromised from "chai-as-promised";
-import {encodeUtf8} from "./_util";
+
+let httpbinUrl: string | undefined;
+
+export function getHttpbinUrl(): string {
+    if (httpbinUrl !== undefined)
+        return httpbinUrl;
+
+    if (process.env.HTTPBIN_URL) {
+        httpbinUrl = process.env.HTTPBIN_URL;
+    }
+    else {
+        console.warn("Using live httpbin API; set HTTPBIN_URI to use local server ...");
+        httpbinUrl = "https://httpbin.org";
+    }
+
+    return httpbinUrl;
+}
+
+function encodeUtf8(string: string): Uint8Array {
+    if (typeof TextEncoder !== "undefined")
+        return new TextEncoder().encode(string);
+    else
+        return Buffer.from(string, "utf-8");
+}
 
 /**
  * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].

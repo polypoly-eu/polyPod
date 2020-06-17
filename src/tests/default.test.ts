@@ -1,9 +1,8 @@
-import {podSpec} from "../specs/api";
+import {getHttpbinUrl, podSpec} from "../spec";
 import {DefaultPod} from "../default";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import {Volume} from "memfs";
-import {getHttpbinUrl} from "../specs";
 
 describe("Mock pod", () => {
 
