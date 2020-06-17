@@ -64,26 +64,26 @@ export class PodSpec {
     }
 
     polyIn(): void {
-        const {polyIn} = this.pod;
+        const {dataFactory, polyIn} = this.pod;
 
         describe("polyIn", () => {
 
             describe("factory", () => {
-                new DataFactorySpec(polyIn.factory).run();
+                new DataFactorySpec(dataFactory).run();
             });
 
             it("add only allows default graph", async () => {
-                const quad = polyIn.factory.quad(
-                    polyIn.factory.namedNode("http://example.org/s"),
-                    polyIn.factory.namedNode("http://example.org/p"),
-                    polyIn.factory.namedNode("http://example.org/o"),
-                    polyIn.factory.namedNode("http://example.org/g")
+                const quad = dataFactory.quad(
+                    dataFactory.namedNode("http://example.org/s"),
+                    dataFactory.namedNode("http://example.org/p"),
+                    dataFactory.namedNode("http://example.org/o"),
+                    dataFactory.namedNode("http://example.org/g")
                 );
                 await assert.isRejected(polyIn.add(quad), /default/);
             });
 
             it("add/select", async () => {
-                const {triple} = gens(polyIn.factory);
+                const {triple} = gens(dataFactory);
                 await fc.assert(fc.asyncProperty(fc.array(triple), async quads => {
                     await polyIn.add(...quads);
                     for (const quad of quads) {

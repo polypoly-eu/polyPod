@@ -31,6 +31,8 @@ import {EncodingOptions, FS} from "./fs";
  */
 export class DefaultPod implements Pod {
 
+    public readonly dataFactory: RDF.DataFactory = dataFactory;
+
     constructor(
         public readonly store: RDF.DatasetCore,
         public readonly fs: FS,
@@ -43,7 +45,6 @@ export class DefaultPod implements Pod {
      */
     get polyIn(): PolyIn {
         return {
-            factory: dataFactory,
             select: async matcher =>
                 Array.from(
                     this.store.match(matcher.subject, matcher.predicate, matcher.object, dataFactory.defaultGraph())
@@ -89,7 +90,6 @@ export class DefaultPod implements Pod {
             writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
                 return fs.writeFile(path, content, options);
             }
-
         };
     }
 

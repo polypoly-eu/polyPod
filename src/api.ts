@@ -42,35 +42,6 @@ export interface Matcher {
 export interface PolyIn {
 
     /**
-     * A [spec-compliant](http://rdf.js.org/data-model-spec/) data factory that is _not_ guaranteed to support variables.
-     *
-     * Example:
-     * ```
-     * const quad = factory.triple(
-     *   factory.namedNode("http://example.org/s"),
-     *   factory.namedNode("http://example.org/p"),
-     *   factory.namedNode("http://example.org/o")
-     * );
-     * ```
-     *
-     * The factory is an exception in that it is synchronous as opposed to the general asynchronous [[Pod]] API. This is
-     * by design for these reasons:
-     *
-     * 1. Features may construct a large number of RDF terms. Eventually, those will likely be saved in the Pod using
-     *    the [[add]] call. Round-tripping the construction of those terms across an asynchronous boundary will lead
-     *    to an unacceptable runtime overhead.
-     * 2. There are many small, self-contained data factory implementations that can be shipped with Pods, for example
-     *    [@rdfjs/data-model](https://github.com/rdfjs-base/data-model). The Polypoly `rdf-spec` package can be used to
-     *    ensure correctness of the factory implementations.
-     * 3. There is no point in imposing access-control over manipulation of RDF terms before they are stored in the Pod.
-     * 4. Pod implementors may choose to provide a custom implementation for more efficient serialization of RDF terms
-     *    that are passed into the Pod. This is much easier to implement when the Pod controls the creation of terms.
-     *
-     * Pertaining to the last point, Features _must_ use the factory to create new RDF terms.
-     */
-    readonly factory: RDF.DataFactory;
-
-    /**
      * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
      * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
      * contain triples that match the property exactly.
@@ -140,6 +111,36 @@ export interface PolyOut extends FS {
  * i.e. all methods return promises. The only exception is the RDF data factory; see [[PolyIn.factory]] for details.
  */
 export interface Pod {
+
+    /**
+     * A [spec-compliant](http://rdf.js.org/data-model-spec/) data factory that is _not_ guaranteed to support variables.
+     *
+     * Example:
+     * ```
+     * const quad = factory.triple(
+     *   factory.namedNode("http://example.org/s"),
+     *   factory.namedNode("http://example.org/p"),
+     *   factory.namedNode("http://example.org/o")
+     * );
+     * ```
+     *
+     * The factory is an exception in that it is synchronous as opposed to the general asynchronous [[Pod]] API. This is
+     * by design for these reasons:
+     *
+     * 1. Features may construct a large number of RDF terms. Eventually, those will likely be saved in the Pod using
+     *    the [[add]] call. Round-tripping the construction of those terms across an asynchronous boundary will lead
+     *    to an unacceptable runtime overhead.
+     * 2. There are many small, self-contained data factory implementations that can be shipped with Pods, for example
+     *    [@rdfjs/data-model](https://github.com/rdfjs-base/data-model). The Polypoly `rdf-spec` package can be used to
+     *    ensure correctness of the factory implementations.
+     * 3. There is no point in imposing access-control over manipulation of RDF terms before they are stored in the Pod.
+     * 4. Pod implementors may choose to provide a custom implementation for more efficient serialization of RDF terms
+     *    that are passed into the Pod. This is much easier to implement when the Pod controls the creation of terms.
+     *
+     * Pertaining to the last point, Features _must_ use the factory to create new RDF terms.
+     */
+    readonly dataFactory: RDF.DataFactory;
+
     /**
      * `polyIn` is the interface to interact with the Pod store. Refer to [[PolyIn]] for its definition.
      */
