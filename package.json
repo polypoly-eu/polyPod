@@ -68,7 +68,7 @@
     "@types/node": "^14.0.13",
     "exposed-promises": "^1.0.0",
     "express": "^4.17.1",
-    "fp-ts": "^2.6.5",
+    "fp-ts": "^2.6.6",
     "io-ts": "^2.2.5",
     "memfs": "^3.2.0",
     "mkdirp": "^1.0.4",
