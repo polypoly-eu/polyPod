@@ -1,3 +1,6 @@
 [submodule "Features/PodCheck"]
 	path = Features/PodCheck
 	url = git@github.com:polypoly-eu/podCheck-feature.git
+[submodule "Features/HelloWorld"]
+	path = Features/HelloWorld
+	url = git@github.com:polypoly-eu/helloWorld-feature.git
