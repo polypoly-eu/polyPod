@@ -26,6 +26,7 @@
 		1A66F78824937A2E00ED4308 /* MessagePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4883247E91E000089217 /* MessagePack.swift */; };
 		1A66F78924937A2E00ED4308 /* LiteralConvertibles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4884247E91E000089217 /* LiteralConvertibles.swift */; };
 		1A66F78A24937A2E00ED4308 /* Subdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4885247E91E000089217 /* Subdata.swift */; };
+		1A66F78E2498A80E00ED4308 /* podCheck.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A66F78D2498A80E00ED4308 /* podCheck.zip */; };
 		1A8F4873247E3F7000089217 /* helloWorld.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A8F4872247E3F7000089217 /* helloWorld.zip */; };
 		1A8F4875247E40C600089217 /* PostOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4874247E40C600089217 /* PostOffice.swift */; };
 		1A8F487B247E5C5700089217 /* iframe-inner.js in Resources */ = {isa = PBXBuildFile; fileRef = 1A8F487A247E5C5700089217 /* iframe-inner.js */; };
@@ -75,6 +76,7 @@
 		1A66F7762493743D00ED4308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A66F77C2493774100ED4308 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		1A66F77E249378E400ED4308 /* PolyOutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOutTests.swift; sourceTree = "<group>"; };
+		1A66F78D2498A80E00ED4308 /* podCheck.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = podCheck.zip; sourceTree = "<group>"; };
 		1A8F4872247E3F7000089217 /* helloWorld.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = helloWorld.zip; sourceTree = "<group>"; };
 		1A8F4874247E40C600089217 /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffice.swift; sourceTree = "<group>"; };
 		1A8F487A247E5C5700089217 /* iframe-inner.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "iframe-inner.js"; sourceTree = "<group>"; };
@@ -153,6 +155,14 @@
 			path = PolyPodTests;
 			sourceTree = "<group>";
 		};
+		1A66F78C2498A80E00ED4308 /* PodCheck */ = {
+			isa = PBXGroup;
+			children = (
+				1A66F78D2498A80E00ED4308 /* podCheck.zip */,
+			);
+			path = PodCheck;
+			sourceTree = "<group>";
+		};
 		1A8F487E247E91E000089217 /* MessagePack */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +235,7 @@
 		1AA6DE492419212E008DB1B2 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				1A66F78C2498A80E00ED4308 /* PodCheck */,
 				1AA6DE4A2419212E008DB1B2 /* HelloWorld */,
 				1A8F487A247E5C5700089217 /* iframe-inner.js */,
 				1AA6DE512419212E008DB1B2 /* feature.html */,
@@ -345,6 +356,7 @@
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
 				1AA6DE3A24191C94008DB1B2 /* Main.storyboard in Resources */,
+				1A66F78E2498A80E00ED4308 /* podCheck.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

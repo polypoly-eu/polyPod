@@ -28,7 +28,7 @@ class PolyOut {
         var request = URLRequest(url: url)
         request.httpMethod = method.uppercased()
         
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         /*
         if let headers = initData["headers"] as? [String: String] {
             for (key, value) in headers {

@@ -57,6 +57,7 @@ class FeaturesWallet {
     func importFeatures() {
         importEnvironmentFiles()
         importFeature("helloWorld")
+        importFeature("podCheck")
     }
     
     private func importEnvironmentFiles() {
