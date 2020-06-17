@@ -1,0 +1,3 @@
+[submodule "Features/PodCheck"]
+	path = Features/PodCheck
+	url = git@github.com:polypoly-eu/podCheck-feature.git
