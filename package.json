@@ -44,7 +44,7 @@
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
     "@rollup/plugin-sucrase": "^3.0.2",
-    "@rollup/plugin-typescript": "^4.1.2",
+    "@rollup/plugin-typescript": "^5.0.0",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",
     "@types/mocha": "^7.0.2",
