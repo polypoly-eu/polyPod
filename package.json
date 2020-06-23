@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/rdf-spec": "^0.1.0",
-    "@rollup/plugin-node-resolve": "^8.0.1",
+    "@rollup/plugin-node-resolve": "^8.1.0",
     "@rollup/plugin-sucrase": "^3.0.2",
     "@rollup/plugin-virtual": "^2.0.2",
     "@rdfjs/dataset": "^1.0.1",
