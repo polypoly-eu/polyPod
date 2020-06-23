@@ -3,7 +3,7 @@ import {Volume} from "memfs";
 import {ValidatingPod, ValidationError} from "../validation";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
-import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/specs";
+import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/spec";
 
 describe("Validating pod", () => {
 
@@ -18,9 +18,7 @@ describe("Validating pod", () => {
         const underlying = new DefaultPod(dataset(), fs, fetch);
         const pod = new ValidatingPod(underlying);
 
-        it("No encoding", async () => {
-            // @ts-ignore
-            await expect(pod.polyOut.readFile("foo")).rejects.toThrowError(ValidationError);
+        it("Unknown encoding", async () => {
             // @ts-ignore
             await expect(pod.polyOut.writeFile("foo", "bar")).rejects.toThrowError(ValidationError);
         });
@@ -28,7 +26,7 @@ describe("Validating pod", () => {
         it("Malformed RDF terms", () => {
             expect(() =>
                 // @ts-ignore
-                pod.polyIn.factory.literal("test", {
+                pod.dataFactory.literal("test", {
                     value: "bar",
                     termType: "NamedNode",
                 })

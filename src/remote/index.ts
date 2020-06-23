@@ -1,11 +1,10 @@
-import {Pod, PolyIn, PolyOut} from "@polypoly-eu/poly-api";
+import {RequestInit, Response, Pod, PolyIn, PolyOut, EncodingOptions} from "@polypoly-eu/poly-api";
 import {DataFactory} from "rdf-js";
 import {endpointClient, ClientOf, ServerOf, EndpointRequest, EndpointResponse, endpointServer} from "@polypoly-eu/postoffice";
 import {FetchResponse, PodEndpoint, PolyInEndpoint, PolyOutEndpoint} from "./endpoints";
 import {ResponsePort, liftServer, server, bubblewrapFetchPort, RequestPort, client, Port, liftClient, bubblewrapRouterPort} from "@polypoly-eu/port-authority";
 import {podBubblewrap, dataFactory, bubblewrapPort} from "./bubblewrap";
 import {Router} from "express";
-import {bindFS} from "../util";
 
 export class RemoteClientPod implements Pod {
 
@@ -27,31 +26,47 @@ export class RemoteClientPod implements Pod {
 
     constructor(
         private clientPort: RequestPort<EndpointRequest, EndpointResponse>,
-        private readonly dataFactory: DataFactory
+        public readonly dataFactory: DataFactory
     ) {
         this.rpcClient = endpointClient<PodEndpoint>(client(clientPort));
     }
 
     get polyIn(): PolyIn {
         return {
-            factory: this.dataFactory,
             add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
             select: matcher => this.rpcClient.polyIn().select(matcher)()
         };
     }
 
     get polyOut(): PolyOut {
-        return {
-            readFile: (path, options) =>
-                this.rpcClient.polyOut().readFile(path, options)(),
-            writeFile: (path, contents, options) =>
-                this.rpcClient.polyOut().writeFile(path, contents, options)(),
-            stat: path =>
-                this.rpcClient.polyOut().stat(path)(),
-            fetch: (input, init) =>
-                // we need to `|| {}` here because the msgpack library (via bubblewrap) maps `undefined` to `null`,
-                // which confuses some fetch implementations
-                this.rpcClient.polyOut().fetch(input, init || {})()
+        const {rpcClient} = this;
+
+        return new class implements PolyOut {
+            fetch(input: string, init?: RequestInit): Promise<Response> {
+                return rpcClient.polyOut().fetch(input, init || {})();
+            }
+
+            readFile(path: string, options: EncodingOptions): Promise<string>;
+            readFile(path: string): Promise<Uint8Array>;
+            readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
+                if (options === undefined)
+                    return rpcClient.polyOut().readFile(path)();
+                else
+                    return rpcClient.polyOut().readFile(path, options)();
+            }
+
+            readdir(path: string): Promise<string[]> {
+                return rpcClient.polyOut().readdir(path)();
+            }
+
+            stat(path: string): Promise<void> {
+                return rpcClient.polyOut().stat(path)();
+            }
+
+            writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+                return rpcClient.polyOut().writeFile(path, content, options)();
+            }
+
         };
     }
 
@@ -82,9 +97,23 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
     polyOut(): ServerOf<PolyOutEndpoint> {
         const polyOut = this.pod.polyOut;
 
+        // the following implementation delegates strictly to the pod that has been provided to the constructor
+        // the only difference is that `fetch` needs to return a slightly modified response
+
         return {
-            fetch: async (input, init) => FetchResponse.of(await polyOut.fetch(input, init)),
-            ...bindFS(polyOut)
+            fetch: async (input, init) => {
+                const response = await polyOut.fetch(input, init);
+                return FetchResponse.of(response);
+            },
+            readFile: (path, options?) => {
+                if (options === undefined)
+                    return polyOut.readFile(path);
+                else
+                    return polyOut.readFile(path, options);
+            },
+            readdir: path => polyOut.readdir(path),
+            stat: path => polyOut.stat(path),
+            writeFile: (path, content, options) => polyOut.writeFile(path, content, options)
         };
     }
 

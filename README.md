@@ -19,8 +19,6 @@ This repository is structured as a TypeScript library with the following impleme
 
 | Module       | Implementation name | Purpose                                                                 |
 | ------------ | ------------------- | ----------------------------------------------------------------------- |
-| `log`        | `LogPod`            | log each side-effecting call before it starts and after it completes    |
-| `volatile`   | `VolatilePod`       | directly delegates to an underlying, mutable Pod (for testing purposes) |
 | `validation` | `ValidatingPod`     | validates all arguments for each side-effecting call                    |
 | `remote`     | `RemoteClientPod`   | access a remote Pod on a client port                                    |
 | `remote`     | `RemoteServerPod`   | (helper to register a Pod on a server port)                             |

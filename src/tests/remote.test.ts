@@ -8,7 +8,7 @@ import {Server} from "http";
 import express, {Router} from "express";
 import fetch from "node-fetch";
 import {once} from "events";
-import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/specs";
+import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/spec";
 
 describe("Remote pod", () => {
 

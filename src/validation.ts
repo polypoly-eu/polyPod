@@ -147,6 +147,7 @@ async function decoders(): Promise<Decoders> {
 export class ValidatingPod implements Pod {
 
     private readonly _decoders: Promise<Decoders>;
+    public readonly dataFactory = new DataFactory(true);
 
     constructor(
         private readonly pod: Pod
@@ -157,10 +158,8 @@ export class ValidatingPod implements Pod {
     get polyIn(): PolyIn {
         const pod = this;
         const polyIn = this.pod.polyIn;
-        const strictFactory = new DataFactory(true);
 
         return {
-            factory: strictFactory,
             async select(matcher?: unknown): Promise<Quad[]> {
                 const decoders = await pod._decoders;
 
@@ -188,7 +187,7 @@ export class ValidatingPod implements Pod {
         const pod = this;
         const polyOut = this.pod.polyOut;
 
-        return {
+        return new class implements PolyOut {
             async fetch(input?: unknown, init?: unknown): Promise<Response> {
                 const decoders = await pod._decoders;
 
@@ -202,15 +201,32 @@ export class ValidatingPod implements Pod {
                     validatedInit = decoders.expect(init, "RequestInit must be wellformed", decoders.fetchRequest);
 
                 return polyOut.fetch(validatedInput, validatedInit);
-            },
-            async readFile(path?: unknown, options?: unknown): Promise<string> {
+            }
+
+            async readdir(path?: unknown): Promise<string[]> {
                 const decoders = await pod._decoders;
 
                 const validatedPath = decoders.expect(path, "Path must be a string", decoders.string);
+
+                return polyOut.readdir(validatedPath);
+            }
+
+            readFile(path: unknown, options?: unknown): Promise<string>;
+            readFile(path?: unknown): Promise<Uint8Array>;
+
+            async readFile(path?: unknown, options?: unknown): Promise<string | Uint8Array> {
+                const decoders = await pod._decoders;
+
+                const validatedPath = decoders.expect(path, "Path must be a string", decoders.string);
+
+                if (options === undefined)
+                    return polyOut.readFile(validatedPath);
+
                 const validatedOptions = decoders.expect(options, "Options must be wellformed", decoders.encodingOptions);
 
                 return polyOut.readFile(validatedPath, validatedOptions);
-            },
+            }
+
             async writeFile(path?: unknown, contents?: unknown, options?: unknown): Promise<void> {
                 const decoders = await pod._decoders;
 
@@ -219,7 +235,8 @@ export class ValidatingPod implements Pod {
                 const validatedOptions = decoders.expect(options, "Options must be wellformed", decoders.encodingOptions);
 
                 return polyOut.writeFile(validatedPath, validatedContents, validatedOptions);
-            },
+            }
+
             async stat(path?: unknown): Promise<void> {
                 const decoders = await pod._decoders;
 

@@ -10,10 +10,11 @@ export type PolyInEndpoint = ObjectEndpointSpec<{
 }>;
 
 export type PolyOutEndpoint = ObjectEndpointSpec<{
-    readFile(path: string, options: EncodingOptions): ValueEndpointSpec<string>;
+    readdir(path: string): ValueEndpointSpec<string[]>;
+    readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<void>;
-    fetch(input: string, init?: RequestInit): ValueEndpointSpec<Response>;
+    fetch(input: string, init: RequestInit): ValueEndpointSpec<Response>;
 }>;
 
 export type PodEndpoint = ObjectEndpointSpec<{
