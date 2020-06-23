@@ -22,9 +22,9 @@ export interface Matcher {
  * `PolyIn` specifies the interaction of the Feature with the Pod store. It is concerned with creating and manipulating
  * RDF triples according to the [RDFJS](http://rdf.js.org/) specification.
  *
- * Features _must_ use the [[factory]] to create any RDF term they intend to pass to the interface, e.g. for querying
- * and storing, or alternatively re-use RDF terms that have been obtained through PolyIn via other means. It is not
- * allowed to use other data factory implementations.
+ * Features _must_ use the [[Pod.dataFactory]] to create any RDF term they intend to pass to the interface, e.g. for
+ * querying and storing, or alternatively re-use RDF terms that have been obtained through PolyIn via other means. It is
+ * not allowed to use other data factory implementations.
  *
  * Features _may_ rely on the convention that all RDF triples stored in the Pod are associated with the default graph.
  * In other words, when querying for quads, for all returned quads, the expression `q.graph.equals(factory.defaultGraph())`
@@ -40,7 +40,6 @@ export interface Matcher {
  * on, except for internal purposes of the Feature.
  */
 export interface PolyIn {
-
     /**
      * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
      * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
@@ -108,10 +107,23 @@ export interface PolyOut extends FS {
  *
  * Pod implementors may use any technology they see fit to provide the API, including remote procedure calls or HTTP
  * requests, as long as that is transparent to the Features. To that extent, the API is designed to be asynchronous,
- * i.e. all methods return promises. The only exception is the RDF data factory; see [[PolyIn.factory]] for details.
+ * i.e. all methods return promises. The only exception is the RDF data factory; see [[Pod.dataFactory]] for details.
+ *
+ * The API is provided to the Feature as a global variable (`window.pod`). The API may be initialized asynchronously.
+ * The Pod signals availability of the API to the Feature by triggering a custom event with the name `"podReady"`.
+ * Features should listen on this event and only then carry out their logic. Listening can be done as follows:
+ *
+ * ```javascript
+ * window.addEventListener("podReady", () => {
+ *   // window.pod initialized after this point
+ * }
+ * ```
+ *
+ * Additionally, Features may carry out their custom initialization logic concurrently. Note that the API initialization
+ * process may only be started by the Pod once the `load` event has been triggered. In other words, if the Feature
+ * executes JavaScript code synchronously on load, the API may only be available afterwards.
  */
 export interface Pod {
-
     /**
      * A [spec-compliant](http://rdf.js.org/data-model-spec/) data factory that is _not_ guaranteed to support variables.
      *

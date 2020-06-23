@@ -10,16 +10,15 @@ This repository defines the interfaces that the Pod and the Features use to comm
 There are two sides: the Pod needs to bootstrap and initialize the Feature, and the Feature needs to request data from or store data in the Pod.
 As far as possible, we try to stick to standardized APIs, for example [RDFJS](http://rdf.js.org/).
 
-Additionally, Features may expect access to the browser DOM via standard means (e.g. the `document` global variable).
-DOM access is an implementation detail of the runtime that Pods provide to the Feature.
-It is – along with the packaging requirements for Features – only specified textually in this repository.
+Features are vanilla web applications, that is, they comprise a HTML document that may reference scripts and other types of assets such as stylesheets and images.
+The JavaScript code may access to the browser DOM via standard means (e.g. the `document` global variable).
+In other words, the Feature may assume it is running within a standard browser.
 
-While Features are implemented in JavaScript, the Pod itself can be implemented in any language that is capable of executing JavaScript code in some kind of sandbox.
-The sandbox is necessary to prevent Features from accessing arbitrary other APIs, e.g. writing cookies, or interfering with other Features.
-In a browser-based Pod implementation, this can be achieved by confining Features to an `iframe`.
+To constrain Features, Pod implementations may choose to run them inside a sandboxed `iframe`.
+This implies that Features cannot assume access to arbitrary other APIs, e.g. writing cookies, or interfering with other Features.
 
 Pod implementations are free to bootstrap Features and provide them with the Pod interfaces in any way they see fit.
-This may also depend on the host language:
+This may also depend on the host platform:
 Some host languages can pass host objects implementing the API directly to the JavaScript runtime, while others need to provide a messaging layer.
 It is also possible to implement the API remotely via HTTP.
 This specification makes no assumptions about the underlying communication layer between Pod and Feature.
@@ -30,29 +29,36 @@ The following example shows an example feature that exercises a few different in
 First, it creates an RDF triple and adds it to the Pod's store.
 Secondly, it queries the Pod for all stored triples and renders them as an HTML list to the DOM; specifically to the DOM node with the id `feature`.
 
-```javascript
-export default class ExampleFeature {
-    async init(pod) {
-        const {polyIn} = pod;
-        const quad = polyIn.factory.triple(
-            polyIn.factory.namedNode("http://example.org/s"),
-            polyIn.factory.namedNode("http://example.org/p"),
-            polyIn.factory.namedNode("http://example.org/o")
-        );
-        await pod.polyIn.add(quad);
-        const selected = await pod.polyIn.select({});
-        const ul = document.createElement("ul");
-        const root = document.getElementById("feature");
-        root.innerHTML = "";
-        root.appendChild(ul);
-        for (const quad of selected) {
-            console.dir(quad);
-            const li = document.createElement("li");
-            ul.appendChild(li);
-            li.appendChild(document.createTextNode(JSON.stringify(quad)));
-        }
-    }
-}
+```html
+<!DOCTYPE HTML>
+<html>
+    <body>
+        <div class="feature"></div>
+
+        <script>
+            window.addEventListener("podReady", async () => {
+                const {polyIn} = window.pod;
+                const quad = polyIn.factory.triple(
+                    polyIn.factory.namedNode("http://example.org/s"),
+                    polyIn.factory.namedNode("http://example.org/p"),
+                    polyIn.factory.namedNode("http://example.org/o")
+                );
+                await pod.polyIn.add(quad);
+                const selected = await pod.polyIn.select({});
+                const ul = document.createElement("ul");
+                const root = document.getElementById("feature");
+                root.innerHTML = "";
+                root.appendChild(ul);
+                for (const quad of selected) {
+                    console.dir(quad);
+                    const li = document.createElement("li");
+                    ul.appendChild(li);
+                    li.appendChild(document.createTextNode(JSON.stringify(quad)));
+                }
+            });
+        </script>
+    </body>
+</html>
 ```
 
 ## Structure

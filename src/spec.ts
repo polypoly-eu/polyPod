@@ -45,13 +45,12 @@ function encodeUtf8(string: string): Uint8Array {
 
 /**
  * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].
- *
- * It assumes that Pods can be cheaply created.
 
  * The specification manipulates files only under a path that is provided in the constructor. Callers should ensure
  * that the path exists, is empty, and not used for other purposes.
  *
- * Note that the tests create and tear down HTTP servers to exercise [[PolyOut]].
+ * Note that the tests use the [httpbin](https://httpbin.org/) service. Test runners should either ensure Internet
+ * access or provide a URI to a local httpbin service.
  */
 export class PodSpec {
 
