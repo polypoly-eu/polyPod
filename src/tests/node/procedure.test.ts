@@ -2,17 +2,18 @@ import {nodeLoopbackLifecycle} from "./_common";
 import {procedureSpec, ProcedureSpecLifecycle} from "../../specs/procedure";
 import {procedureLiftedLifecycle} from "../_lifecycles";
 import {bubblewrapFetchPort, jsonFetchPort} from "../../fetch";
-import express, {Express, Router} from "express";
-import {bubblewrapRouterPort, jsonRouterPort} from "../../node";
-import {Server} from "http";
+import {bubblewrapMiddlewarePort, jsonMiddlewarePort} from "../../node";
+import {createServer, RequestListener, Server} from "http";
 import {AddressInfo} from "net";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
 // @ts-ignore
 import fetch from "node-fetch";
 
-async function startServer(app: Express): Promise<[Server, number]> {
-    const server = await new Promise<Server>(resolve => {
-        const server = app.listen();
+async function startServer(app: RequestListener): Promise<[Server, number]> {
+    const server = createServer(app);
+
+    await new Promise(resolve => {
+        server.listen();
         server.once("listening", () => resolve(server));
     });
 
@@ -28,13 +29,7 @@ function stopServer(server: Server): Promise<void> {
 }
 
 const jsonHttpLifecycle: ProcedureSpecLifecycle = async () => {
-    const app = express();
-
-    const router = Router();
-    const receive = jsonRouterPort(router);
-
-    app.use(router);
-
+    const [app, receive] = jsonMiddlewarePort();
     const [server, port] = await startServer(app);
 
     const send = jsonFetchPort(
@@ -51,13 +46,7 @@ const jsonHttpLifecycle: ProcedureSpecLifecycle = async () => {
 const rawHttpLifecycle: ProcedureSpecLifecycle = async () => {
     const bubblewrap = Bubblewrap.create();
 
-    const app = express();
-
-    const router = Router();
-    const receive = bubblewrapRouterPort(router, bubblewrap);
-
-    app.use(router);
-
+    const [app, receive] = bubblewrapMiddlewarePort(bubblewrap);
     const [server, port] = await startServer(app);
 
     const send = bubblewrapFetchPort(

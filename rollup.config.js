@@ -20,6 +20,7 @@ export default {
         "body-parser",
         "chai",
         "chai-as-promised",
+        "connect",
         "fast-check"
     ]
 };

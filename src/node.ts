@@ -6,12 +6,13 @@
 
 import {Handler, mapReceivePort, Port} from "./port";
 import {MessagePort} from "worker_threads";
-import {ResponsePort} from "./procedure";
-import {Router} from "express";
+import {ResponsePort, WithResolvers} from "./procedure";
 import {recoverPromise, Try} from "./util";
 import {OptionsJson, Options} from "body-parser";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
 import {json, raw} from "body-parser";
+import {IncomingMessage, RequestListener} from "http";
+import createServer, {NextHandleFunction, HandleFunction} from "connect";
 
 /**
  * Converts a Node `MessagePort` into a raw [[Port]] with unknown types.
@@ -36,10 +37,10 @@ export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
 }
 
 /**
- * Given an [Express Router](https://expressjs.com/en/4x/api.html#router), register a `POST` route on the `/` path that
- * acts as a [[ResponsePort]] for reading some `POST` body and responds with an arbitrary object.
+ * Creates a [[ResponsePort]] and an accompanying middleware that reacts on any `POST` request and responds with an
+ * arbitrary object.
  *
- * The request type can be chosen freely by users. It must be a request type that is understood by Express. Ensure that
+ * The request's body type can be chosen freely by users. Ensure that
  * [body-parser](https://www.npmjs.com/package/body-parser) middleware or similar middleware is set up for the
  * appropriate content type in the router. Otherwise, handlers will receive an empty or ill-typed body. See
  * [[jsonRouterPort]] and [[bubblewrapRouterPort]] for convenience wrappers that handle conversions.
@@ -56,97 +57,116 @@ export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
  * application-level protocol how to map errors into a response body and back from it. The default client
  * ([[fetchPort]]) requires a parse function that should be an inverse to `format`.
  *
- * The resulting [[ResponsePort]] only calls the first handler that has been added. This mirrors the behaviour of
- * Express when multiple routes are added to a router. There is no notion of calling the Express' `next` function to
- * try another handler. This is similar to [[liftServer]].
+ * The resulting [[ResponsePort]] only calls the first handler that has been added. This is similar to [[liftServer]].
  *
- * @param router the router to which the `POST` route handler will be added
  * @param contentType the HTTP content type of the response
  * @param format a function that converts a successful response or an error into a body; it should never throw
  */
-export function routerPort<T, Body = any>(
-    router: Router,
+export function middlewarePort<T, Body = any>(
     contentType: string,
     format: (result: Try<T>) => Body
-): ResponsePort<Body, T> {
-    return {
-        addHandler: handler => {
-            router.post<any, Body, Body>("/", async (request, response) => {
-                const result = await recoverPromise(new Promise<T>(((resolve, reject) => {
-                    handler({
-                        request: request.body,
-                        resolvers: {resolve, reject}
-                    });
-                })));
+): [HandleFunction, ResponsePort<Body, T>] {
+    let _handler: Handler<WithResolvers<Body, T>> | undefined = undefined;
 
-                const body = format(result);
+    const middleware: NextHandleFunction = async (_request, response, next) => {
+        if (_handler === undefined)
+            return; // yolo
 
-                response.contentType(contentType);
-                response.writeHead(200);
-                response.write(body);
-                response.end();
+        const handler = _handler;
+        const request = _request as IncomingMessage & { body: Body };
+
+        if (request.method !== "POST")
+            next();
+
+        const result = await recoverPromise(new Promise<T>(((resolve, reject) => {
+            handler({
+                request: request.body,
+                resolvers: {resolve, reject}
             });
-        }
+        })));
+
+        const body = format(result);
+
+        response.setHeader("Content-Type", contentType);
+        response.writeHead(200);
+        response.write(body);
+        response.end();
     };
+
+    return [
+        middleware,
+        {
+            addHandler: handler => {
+                if (_handler === undefined)
+                    _handler = handler;
+            }
+        }
+    ];
 }
 
 /**
- * Wrapper around [[routerPort]] set up for JSON communication. The content type is set to `application/json`.
+ * Wrapper around [[middlewarePort]] set up for JSON communication. The content type is set to `application/json`.
  *
  * This wrapper follows the same error protocol as [[jsonFetchPort]]. The formatting uses `JSON.stringify` to convert
  * the [[Try]] representing the outcome of the promise to a string. Conversely, incoming requests are parsed using
  * `JSON.parse`.
  */
-export function jsonRouterPort(
-    router: Router,
-    options?: OptionsJson
-): ResponsePort<any, any> {
+export function jsonMiddlewarePort(options?: OptionsJson): [RequestListener, ResponsePort<any, any>] {
     const contentType = "application/json";
 
-    router.use(json({
+    const server = createServer();
+
+    server.use(json({
         ...options,
         strict: false,
         type: contentType
     }));
 
-    return routerPort<any, any>(
-        router,
+    const [handler, port] = middlewarePort<any, any>(
         contentType,
         JSON.stringify
     );
+
+    server.use(handler);
+
+    return [server, port];
 }
 
 /**
- * Wrapper around [[routerPort]] set up for raw byte stream communication. The content type is set to
+ * Wrapper around [[middlewarePort]] set up for raw byte stream communication. The content type is set to
  * `application/octet-stream`.
  *
  * This wrapper follows the same error protocol as [[bubblewrapFetchPort]]. The formatting uses standard Bubblewrap
  * encoding to convert the [[Try]] representing the outcome of the promise to a string. Conversely, incoming requests
  * are decoded using standard Bubblewrap decoding.
  */
-export function bubblewrapRouterPort(
-    router: Router,
+export function bubblewrapMiddlewarePort(
     bubblewrap: Bubblewrap,
     options?: Options
-): ResponsePort<any, any> {
+): [RequestListener, ResponsePort<any, any>] {
     const contentType = "application/octet-stream";
 
-    router.use(raw({
+    const server = createServer();
+
+    server.use(raw({
         ...options,
         type: contentType
     }));
 
-    const rawPort = routerPort<any, Buffer>(
-        router,
+    const [handler, rawPort] = middlewarePort<any, Buffer>(
         contentType,
         value => Buffer.from(bubblewrap.encode(value))
     );
 
-    return mapReceivePort(
+    server.use(handler);
+
+    const port = mapReceivePort(
         rawPort,
         data => ({
             resolvers: data.resolvers,
             request: bubblewrap.decode(data.request)
         })
     );
+
+    return [server, port];
 }
