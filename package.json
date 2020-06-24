@@ -60,7 +60,7 @@
     "fast-check": "^1.25.1"
   },
   "dependencies": {
-    "@types/rdf-js": "^3.0.1",
+    "@types/rdf-js": "^3.0.2",
     "@polypoly-eu/rdf": "^0.1.0"
   }
 }
