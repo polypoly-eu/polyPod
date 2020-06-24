@@ -54,7 +54,7 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
-    "@types/rdf-js": "^3.0.1",
+    "@types/rdf-js": "^3.0.2",
     "chai": "^4.2.0",
     "fast-check": "^1.25.1"
   }
