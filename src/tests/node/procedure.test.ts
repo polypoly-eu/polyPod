@@ -69,13 +69,13 @@ describe("Node/Procedure", () => {
 
     });
 
-    describe("express/fetch (JSON)", () => {
+    describe("HTTP/fetch (JSON)", () => {
 
         procedureSpec(jsonHttpLifecycle);
 
     });
 
-    describe("express/fetch (Uint8Array)", () => {
+    describe("HTTP/fetch (Uint8Array)", () => {
 
         procedureSpec(rawHttpLifecycle);
 

@@ -34,7 +34,7 @@ Interoperability with [Bubblewrap](https://github.com/polypoly-eu/bubblewrap) is
 
 ```javascript
 import {MessageChannel} from "worker_threads";
-import {fromNodeMessagePort} from "@polypoly-eu/port-authority";
+import {fromNodeMessagePort} from "@polypoly-eu/port-authority/dist/node";
 
 const channel = new MessageChannel();
 
@@ -53,10 +53,8 @@ This repository is structured as a TypeScript library with the following modules
 * `port` contains the universal port abstraction
 * `procedure` contains the universal request-response abstractions
 * `browser` provides browser-specific code
-* `node` provides Node-specific code (contains asynchronous imports to the [body-parser](https://www.npmjs.com/package/body-parser) library)
+* `node` provides Node-specific code (code-split into a separate import)
 * `fetch` provides universal code based on the Fetch API (requires [a polyfill on Node.js](https://www.npmjs.com/package/node-fetch))
-
-body-parser is declared as peer dependency.
 
 ## Limitations
 
