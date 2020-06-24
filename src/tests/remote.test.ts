@@ -3,9 +3,9 @@ import {Volume} from "memfs";
 import {dataset} from "@rdfjs/dataset";
 import {RemoteClientPod, RemoteServerPod} from "../remote";
 import {MessageChannel, MessagePort} from "worker_threads";
-import {Port, fromNodeMessagePort} from "@polypoly-eu/port-authority";
-import {Server} from "http";
-import express, {Router} from "express";
+import {Port} from "@polypoly-eu/port-authority";
+import {fromNodeMessagePort} from "@polypoly-eu/port-authority/dist/node";
+import {createServer, Server} from "http";
 import fetch from "node-fetch";
 import {once} from "events";
 import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/spec";
@@ -30,7 +30,7 @@ describe("Remote pod", () => {
 
     });
 
-    describe("Express/fetch", () => {
+    describe("HTTP/fetch", () => {
 
         const fs = new Volume().promises as any;
         const port = 12345;
@@ -38,16 +38,13 @@ describe("Remote pod", () => {
         let server: Server;
 
         beforeAll(async () => {
-            const app = express();
-            const router = Router();
-            app.use("/", router);
-
             const backendPod = new DefaultPod(dataset(), fs, fetch);
             const serverPod = new RemoteServerPod(backendPod);
 
-            await serverPod.listenOnRouter(router);
+            const app = await serverPod.listenOnMiddleware();
 
-            server = app.listen(port);
+            server = createServer(app);
+            server.listen(port);
             await once(server, "listening");
         });
 

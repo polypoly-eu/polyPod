@@ -2,9 +2,9 @@ import {RequestInit, Response, Pod, PolyIn, PolyOut, EncodingOptions} from "@pol
 import {DataFactory} from "rdf-js";
 import {endpointClient, ClientOf, ServerOf, EndpointRequest, EndpointResponse, endpointServer} from "@polypoly-eu/postoffice";
 import {FetchResponse, PodEndpoint, PolyInEndpoint, PolyOutEndpoint} from "./endpoints";
-import {ResponsePort, liftServer, server, bubblewrapFetchPort, RequestPort, client, Port, liftClient, bubblewrapRouterPort} from "@polypoly-eu/port-authority";
+import {ResponsePort, liftServer, server, bubblewrapFetchPort, RequestPort, client, Port, liftClient} from "@polypoly-eu/port-authority";
 import {podBubblewrap, dataFactory, bubblewrapPort} from "./bubblewrap";
-import {Router} from "express";
+import {RequestListener} from "http";
 
 export class RemoteClientPod implements Pod {
 
@@ -86,12 +86,14 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         this.listen(liftServer<EndpointRequest, EndpointResponse>(bubblewrapPort(rawPort)));
     }
 
-    async listenOnRouter(router: Router): Promise<void> {
-        this.listen(await bubblewrapRouterPort(
-            router,
+    async listenOnMiddleware(): Promise<RequestListener> {
+        const {bubblewrapMiddlewarePort} = await import("@polypoly-eu/port-authority/dist/node");
+        const [middleware, port] = bubblewrapMiddlewarePort(
             podBubblewrap,
             { limit: "10mb" }
-        ));
+        );
+        this.listen(port);
+        return middleware;
     }
 
     polyOut(): ServerOf<PolyOutEndpoint> {
