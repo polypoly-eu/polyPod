@@ -31,7 +31,7 @@ const jsonHttpLifecycle: ProcedureSpecLifecycle = async () => {
     const app = express();
 
     const router = Router();
-    const receive = await jsonRouterPort(router);
+    const receive = jsonRouterPort(router);
 
     app.use(router);
 
@@ -54,7 +54,7 @@ const rawHttpLifecycle: ProcedureSpecLifecycle = async () => {
     const app = express();
 
     const router = Router();
-    const receive = await bubblewrapRouterPort(router, bubblewrap);
+    const receive = bubblewrapRouterPort(router, bubblewrap);
 
     app.use(router);
 

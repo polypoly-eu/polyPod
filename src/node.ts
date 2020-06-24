@@ -11,6 +11,7 @@ import {Router} from "express";
 import {recoverPromise, Try} from "./util";
 import {OptionsJson, Options} from "body-parser";
 import {Bubblewrap} from "@polypoly-eu/bubblewrap";
+import {json, raw} from "body-parser";
 
 /**
  * Converts a Node `MessagePort` into a raw [[Port]] with unknown types.
@@ -92,20 +93,15 @@ export function routerPort<T, Body = any>(
 /**
  * Wrapper around [[routerPort]] set up for JSON communication. The content type is set to `application/json`.
  *
- * The `body-parser` dependency must be present, because the `json` parser is installed in the router by this function.
- * Passing options to the parser can be done using the `options` parameter.
- *
  * This wrapper follows the same error protocol as [[jsonFetchPort]]. The formatting uses `JSON.stringify` to convert
  * the [[Try]] representing the outcome of the promise to a string. Conversely, incoming requests are parsed using
  * `JSON.parse`.
  */
-export async function jsonRouterPort(
+export function jsonRouterPort(
     router: Router,
     options?: OptionsJson
-): Promise<ResponsePort<any, any>> {
+): ResponsePort<any, any> {
     const contentType = "application/json";
-
-    const {json} = await import("body-parser");
 
     router.use(json({
         ...options,
@@ -124,21 +120,16 @@ export async function jsonRouterPort(
  * Wrapper around [[routerPort]] set up for raw byte stream communication. The content type is set to
  * `application/octet-stream`.
  *
- * The `body-parser` dependency must be present, because the `raw` parser is installed in the router by this function.
- * Passing options to the parser can be done using the `options` parameter.
- *
  * This wrapper follows the same error protocol as [[bubblewrapFetchPort]]. The formatting uses standard Bubblewrap
  * encoding to convert the [[Try]] representing the outcome of the promise to a string. Conversely, incoming requests
  * are decoded using standard Bubblewrap decoding.
  */
-export async function bubblewrapRouterPort(
+export function bubblewrapRouterPort(
     router: Router,
     bubblewrap: Bubblewrap,
     options?: Options
-): Promise<ResponsePort<any, any>> {
+): ResponsePort<any, any> {
     const contentType = "application/octet-stream";
-
-    const {raw} = await import("body-parser");
 
     router.use(raw({
         ...options,
