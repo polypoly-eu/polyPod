@@ -11,12 +11,16 @@ import Foundation
 class PolyOut {
     
     private let session: NetworkSession
+    private let fileStoragePath: URL
     
     init(session: NetworkSession = URLSession.shared) {
         self.session = session
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        fileStoragePath = paths[0]
     }
     
-    func makeHttpRequest(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?) -> Void) {
+    func fetch(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?) -> Void) {
         guard let url = URL(string: urlString) else {
             // todo: handle this
             completionHandler(nil)
@@ -57,5 +61,34 @@ class PolyOut {
             
             completionHandler(fetchResponse)
         })
+    }
+    
+    func stat(path: String, completionHandler: (Bool) -> Void) {
+        let filePath = fileStoragePath.appendingPathComponent(path)
+            
+        let exists = FileManager.default.fileExists(atPath: filePath.path)
+        completionHandler(exists)
+    }
+    
+    func fileRead(path: String, completionHandler: @escaping (String?, Error?) -> Void) {
+        let filePath = fileStoragePath.appendingPathComponent(path)
+        
+        do {
+            let content = try String(contentsOf: filePath, encoding: String.Encoding.utf8)
+            completionHandler(content, nil)
+        } catch {
+            completionHandler(nil, error)
+        }
+    }
+    
+    func fileWrite(path: String, data: String, completionHandler: @escaping (Error?) -> Void) {
+        let filePath = fileStoragePath.appendingPathComponent(path)
+        
+        do {
+           try data.write(to: filePath, atomically: false, encoding: String.Encoding.utf8)
+           completionHandler(nil)
+        } catch {
+           completionHandler(error)
+        }
     }
 }

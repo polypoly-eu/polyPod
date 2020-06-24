@@ -33,17 +33,22 @@ class PostOffice: NSObject {
         }
 
         if api == "polyOut" {
-            handlePolyOut(messageId: messageId, request: request[1], completionHandler: { response in
-                self.completeEvent(messageId: messageId, response: response, completionHandler: completionHandler)
+            handlePolyOut(request: request[1], completionHandler: { (response, error) in
+                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         }
     }
     
-    private func completeEvent(messageId: MessagePackValue, response: MessagePackValue, completionHandler: @escaping ([UInt8]) -> Void) {
+    private func completeEvent(messageId: MessagePackValue, response: MessagePackValue?, error: MessagePackValue?, completionHandler: @escaping ([UInt8]) -> Void) {
         var dict: [MessagePackValue: MessagePackValue] = [:]
         
         dict["id"] = messageId
-        dict["response"] = response
+        if response != nil {
+            dict["response"] = response
+        }
+        if error != nil {
+            dict["error"] = error
+        }
         
         let packedDict = pack(MessagePackValue.map(dict))
 
@@ -52,15 +57,24 @@ class PostOffice: NSObject {
         completionHandler(byteArrayFromData)
     }
     
-    private func handlePolyOut(messageId: MessagePackValue, request: MessagePackValue, completionHandler: @escaping (MessagePackValue) -> Void) {
+    private func handlePolyOut(request: MessagePackValue, completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let method = request[MessagePackValue("method")]
         
-        if method == "fetch" {
-            handlePolyOutFetch(messageId: messageId, request: request, completionHandler: completionHandler)
+        switch method {
+        case "fetch":
+            handlePolyOutFetch(request: request, completionHandler: completionHandler)
+        case "stat":
+            handlePolyOutStat(request: request, completionHandler: completionHandler)
+        case "readFile":
+            handlePolyOutReadFile(request: request, completionHandler: completionHandler)
+        case "writeFile":
+            handlePolyOutWriteFile(request: request, completionHandler: completionHandler)
+        default:
+            print("Method unknown", method)
         }
     }
     
-    private func handlePolyOutFetch(messageId: MessagePackValue, request: MessagePackValue, completionHandler: @escaping (MessagePackValue) -> Void) {
+    private func handlePolyOutFetch(request: MessagePackValue, completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let argsValue = request[MessagePackValue("args")]!
         let args = argsValue.arrayValue!
         
@@ -69,10 +83,10 @@ class PostOffice: NSObject {
         
         let fetchRequestInit = FetchRequestInit(initData: requestInitData)
         
-        PodApi.shared.polyOut.makeHttpRequest(urlString: url, requestInit: fetchRequestInit) { fetchResponse in
+        PodApi.shared.polyOut.fetch(urlString: url, requestInit: fetchRequestInit) { fetchResponse in
             guard let fetchResponse = fetchResponse else {
                 // todo: handle error
-                completionHandler(MessagePackValue())
+                completionHandler(nil, MessagePackValue())
                 return
             }
             
@@ -80,7 +94,53 @@ class PostOffice: NSObject {
                 
             let packedData = pack(data)
                 
-            completionHandler(MessagePackValue(type: 2, data: packedData))
+            completionHandler(MessagePackValue(type: 2, data: packedData), nil)
+        }
+    }
+    
+    private func handlePolyOutStat(request: MessagePackValue, completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let argsValue = request[MessagePackValue("args")]!
+        let args = argsValue.arrayValue!
+        
+        let path = args[0].stringValue!
+        
+        PodApi.shared.polyOut.stat(path: path) { fileExists in
+            if fileExists {
+                completionHandler(MessagePackValue(), nil)
+            } else {
+                completionHandler(nil, MessagePackValue())
+            }
+        }
+    }
+    
+    private func handlePolyOutReadFile(request: MessagePackValue, completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let argsValue = request[MessagePackValue("args")]!
+        let args = argsValue.arrayValue!
+        
+        let path = args[0].stringValue!
+        
+        PodApi.shared.polyOut.fileRead(path: path) { (fileContent, error) in
+            if let fileContent = fileContent {
+                completionHandler(.string(fileContent), nil)
+            } else {
+                completionHandler(nil, MessagePackValue())
+            }
+        }
+    }
+    
+    private func handlePolyOutWriteFile(request: MessagePackValue, completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let argsValue = request[MessagePackValue("args")]!
+        let args = argsValue.arrayValue!
+        
+        let path = args[0].stringValue!
+        let data = args[1].stringValue!
+        
+        PodApi.shared.polyOut.fileWrite(path: path, data: data) { error in
+            if error != nil {
+                completionHandler(nil, MessagePackValue())
+            } else {
+                completionHandler(MessagePackValue(), nil)
+            }
         }
     }
 }
