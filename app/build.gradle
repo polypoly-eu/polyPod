@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs'
-    id "com.moowork.node" version "1.3.1"
+    id "com.github.node-gradle.node" version "2.2.4"
 }
 
 task npmCopy(type: Copy) {
@@ -17,6 +17,11 @@ task npmCopy(type: Copy) {
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets")
         task.dependsOn(npmCopy)
+}
+
+node {
+    download = true
+    version = "14.4.0"
 }
 
 android {
@@ -84,6 +89,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
-    debugImplementation 'androidx.fragment:fragment-testing:1.2.4'  // doesn't work with androidTestImplementation, no clue why
+    debugImplementation 'androidx.fragment:fragment-testing:1.2.5'  // doesn't work with androidTestImplementation, no clue why
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
 }
