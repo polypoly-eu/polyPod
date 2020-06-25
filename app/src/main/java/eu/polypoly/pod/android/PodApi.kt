@@ -16,8 +16,8 @@ object PodApi {
 
     suspend fun dispatch(value: List<Value>): Value {
         val (outer, _) = decodeCall(value[0])
+        val (inner, args) = decodeCall(value[1])
         if (outer == "polyOut") {
-            val (inner, args) = decodeCall(value[1])
             if (inner == "fetch") {
                 val result = PolyOut.fetch(args[0].asStringValue().toString())
                 val codec =
@@ -26,6 +26,6 @@ object PodApi {
             }
         }
 
-        throw IllegalArgumentException()
+        throw IllegalArgumentException("Unable to handle request, unsupported call target: '${outer}.${inner}()'")
     }
 }

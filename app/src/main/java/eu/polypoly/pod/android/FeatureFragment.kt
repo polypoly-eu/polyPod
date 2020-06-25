@@ -73,9 +73,14 @@ class FeatureFragment : Fragment() {
                         val request = decoded["request"]!!.asArrayValue().list()
 
                         lifecycleScope.launch {
-                            val response = api.dispatch(request)
-                            Log.d("postoffice", "Got response from api.dispatch: '$response'")
-                            val encoded = Bubblewrap.encode(mapOf(Pair("response", response), Pair("id", id)), codec)
+                            val encoded = try {
+                                val response = api.dispatch(request)
+                                Log.d("postoffice", "Got response from api.dispatch: '$response'")
+                                Bubblewrap.encode(mapOf(Pair("response", response), Pair("id", id)), codec)
+                            } catch (e: Exception) {
+                                Log.e("postoffice", "Something went wrong with dispatching the request: ${e.message}", e)
+                                Bubblewrap.encode(mapOf(Pair("error", Codec.string.encode("Something went wrong: ${e.message}")), Pair("id", id)), codec)
+                            }
                             val raw = TextUtils.join(",", encoded.map { it.toString() })
                             outerPort.postMessage(WebMessage(raw))
                         }
