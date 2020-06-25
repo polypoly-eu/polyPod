@@ -5,7 +5,7 @@ import * as ReactDOM from "react-dom";
 const view = (
   <div>
     <span className="helloWorldStyle">
-      Hello World!
+      Hello Welt!
     </span>
   </div>
 );

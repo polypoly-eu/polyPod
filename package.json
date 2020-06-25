@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "description": "qapp as a feature",
   "scripts": {
-    "build": "faucet"
+    "build": "faucet",
+    "watch": "faucet --watch",
+    "live": "live-server --port=8080 --host=0.0.0.0 --watch=dist dist"
   },
   "devDependencies": {
     "@polypoly-eu/poly-look": "0.0.3",
@@ -13,6 +15,7 @@
     "d3": "^5.15.0",
     "faucet-pipeline-static": "^1.2.0",
     "faucet-pipeline-typescript": "^2.1.6",
+    "live-server": "^1.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "tslib": "^2.0.0",
