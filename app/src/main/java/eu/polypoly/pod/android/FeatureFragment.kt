@@ -85,7 +85,7 @@ class FeatureFragment : Fragment() {
             }
         }
 
-        val url = "https://appassets.androidplatform.net/assets/feature/container.html"
+        val url = "https://appassets.androidplatform.net/assets/feature/container.html?featureName=" + args.featureName
         webView.loadUrl(url)
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {

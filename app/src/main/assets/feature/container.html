@@ -27,11 +27,22 @@
             };
             el.contentWindow.postMessage("", "*", [port2]);
           }
+
+          function loadFeature() {
+              const queryString = window.location.search;
+              const urlParams = new URLSearchParams(queryString);
+              const featureName = urlParams.get("featureName");
+              console.log(`Loading Feature: "${featureName}"`);
+              const iFrame = document.getElementById("harness");
+              iFrame.onload = ev => initIframe(ev.target);
+              iFrame.src = `features/${featureName}/iframe.html`;
+          }
     </script>
+    <title>Feature</title>
 </head>
-<body>
+<body onload="loadFeature();">
     <div id="root">
-        <iframe id="harness" src="features/helloWorld/iframe.html" onload="initIframe(this);"></iframe>
+        <iframe id="harness"></iframe>
     </div>
 </body>
 </html>
