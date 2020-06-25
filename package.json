@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/customs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "TypeScript reference implementation of the Feature manifest format",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
