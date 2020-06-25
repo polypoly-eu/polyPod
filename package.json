@@ -1,7 +1,7 @@
 {
   "name": "@polypoly-eu/orodruin",
   "version": "0.0.5",
-  "description": "CLI tool to build POD features",
+  "description": "CLI tool supporting the testing lifecycle of Features",
   "main": "dist/index.js",
   "bin": {
     "orodruin": "bin/cli.js"
