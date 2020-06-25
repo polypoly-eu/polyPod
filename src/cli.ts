@@ -1,6 +1,5 @@
 import yargs from "yargs";
 import {serveCommand} from "./cli/serve";
-import {buildCommand} from "./cli/build";
 import {testCommand} from "./cli/test";
 
 yargs
@@ -46,14 +45,6 @@ yargs
             port: argv.port,
             inmemory: argv.m,
             open: argv.o
-        })
-    )
-    .command(
-        "build",
-        "build the feature",
-        yargs => yargs,
-        argv => buildCommand({
-            dir: argv.d
         })
     )
     .command(

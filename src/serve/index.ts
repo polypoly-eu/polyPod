@@ -1,89 +1,38 @@
-import express, {Response, Router} from "express";
 import {Server} from "http";
 import {once} from "events";
 import {Pod} from "@polypoly-eu/poly-api";
 import {RemoteServerPod} from "@polypoly-eu/podigree";
 import {join} from "path";
-import {rootDir} from "../_dir";
-import {promises as fs} from "fs";
 import {Manifest} from "@polypoly-eu/customs";
-import {generateHTML, Asset} from "@polypoly-eu/feature-harness";
+import {RemoteClientSpec} from "@polypoly-eu/feature-bootstrap";
+import createServer, {NextHandleFunction} from "connect";
+import serveStatic from "serve-static";
 
-export interface Paths {
-    reactPath: string;
-    reactDomPath: string;
-}
-
-export const defaultPaths: Paths = {
-    reactPath: join(rootDir, "dist/browser/react.development.js"),
-    reactDomPath: join(rootDir, "dist/browser/react-dom.development.js")
-};
-
-async function sendFile(path: string, res: Response): Promise<void> {
-    const contents = await fs.readFile(path, { encoding: "utf-8" });
-    res.send(contents);
+export function cookieMiddleware(uri: string): NextHandleFunction {
+    const spec: RemoteClientSpec = {
+        type: "fetch",
+        uri
+    };
+    const cookie = encodeURIComponent(JSON.stringify(spec));
+    return (request, response, next) => {
+        response.setHeader("Set-Cookie", `polypoly-bootstrap=${cookie}`);
+        next();
+    };
 }
 
 export async function serve(
     port: number,
     pod: Pod,
     rootDir: string,
-    manifest: Manifest,
-    paths: Paths = defaultPaths
+    manifest: Manifest
 ): Promise<Server> {
-    const app = express();
+    const app = createServer();
 
-    const assets: Asset[] = [
-        { type: "style", uri: "feature.css" },
-        { type: "script", uri: "react.js" },
-        { type: "script", uri: "react-dom.js" },
-        { type: "script", uri: "feature.js" }
-    ];
+    // FIXME enable csp
 
-    const html = generateHTML({
-        baseURI: `http://localhost:${port}`,
-        csp: false, // FIXME enable CSP even for dev mode
-        spec: {
-            type: "fetch",
-            uri: "/rpc"
-        },
-        assets
-    });
-
-    app.get("/", (req, res) => {
-        res.contentType("text/html");
-        res.send(html);
-    });
-
-    // TODO use express.static?
-
-    app.get("/feature.js", (req, res) => {
-        res.contentType("text/javascript");
-        sendFile(join(rootDir, manifest.jsPath), res);
-    });
-
-    app.get("/feature.css", (req, res) => {
-        res.contentType("text/css");
-        sendFile(join(rootDir, manifest.assetBasePath, manifest.cssPath), res);
-    });
-
-    app.get("/react.js", (req, res) => {
-        res.contentType("text/javascript");
-        sendFile(paths.reactPath, res);
-    });
-
-    app.get("/react-dom.js", (req, res) => {
-        res.contentType("text/javascript");
-        sendFile(paths.reactDomPath, res);
-    });
-
-    app.use("/", express.static(join(rootDir, manifest.assetBasePath)));
-
-    const rpcRouter = Router();
-    const remotePod = new RemoteServerPod(pod);
-    remotePod.listenOnRouter(rpcRouter);
-
-    app.use("/rpc", rpcRouter);
+    app.use(cookieMiddleware(`http://localhost:${port}/rpc`));
+    app.use("/rpc", await new RemoteServerPod(pod).listenOnMiddleware());
+    app.use(serveStatic(join(rootDir, manifest.root)) as NextHandleFunction);
 
     const server = app.listen(port);
     await once(server, "listening");

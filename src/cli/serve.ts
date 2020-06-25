@@ -4,7 +4,6 @@ import {DefaultPod, FS} from "@polypoly-eu/poly-api";
 import {promises as _fs} from "fs";
 import {Volume} from "memfs";
 import open from "open";
-import {LogPod, nullLogger, defaultLogger} from "@polypoly-eu/podigree";
 import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import {Server} from "http";
@@ -22,15 +21,7 @@ export async function serveCommand(options: ServeCommandOps): Promise<Server> {
         options.inmemory ?
             (new Volume().promises as any) :
             _fs;
-    const pod =
-        new LogPod(
-            new DefaultPod(
-                dataset(),
-                fs,
-                fetch
-            ),
-            options.log ? defaultLogger : nullLogger
-        );
+    const pod = new DefaultPod(dataset(), fs, fetch);
     const server = await serve(options.port, pod, dir, manifest);
     const uri = `http://localhost:${options.port}/`;
     console.log(`Server booted: ${uri}`);

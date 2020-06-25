@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import {pod} from "@polypoly-eu/feature-bootstrap";
 
 function Quad({ quad }) {
     return <li>{JSON.stringify(quad)}</li>;
@@ -11,25 +12,23 @@ function Quads({ quads }) {
     }</ul>;
 }
 
-export default class ExampleFeature {
-    async init(pod) {
-        const {polyIn} = pod;
-        const quad = polyIn.factory.quad(
-            polyIn.factory.namedNode("http://example.org/s"),
-            polyIn.factory.namedNode("http://example.org/p"),
-            polyIn.factory.namedNode("http://example.org/o")
-        );
-        await pod.polyIn.add(quad);
-        const selected = await pod.polyIn.select({});
+pod.then(async pod => {
+    const {dataFactory, polyIn} = pod;
+    const quad = dataFactory.quad(
+        dataFactory.namedNode("http://example.org/s"),
+        dataFactory.namedNode("http://example.org/p"),
+        dataFactory.namedNode("http://example.org/o")
+    );
+    await polyIn.add(quad);
+    const selected = await polyIn.select({});
 
-        ReactDOM.render(
-            <Quads quads={selected} />,
-            document.getElementById("feature")
-        );
+    ReactDOM.render(
+        <Quads quads={selected} />,
+        document.getElementById("feature")
+    );
 
-        if (window.testCompleted)
-            window.testCompleted({
-                failures: selected.length === 1 ? 0 : 1
-            });
-    }
-}
+    if (window.testCompleted)
+        window.testCompleted({
+            failures: selected.length === 1 ? 0 : 1
+        });
+});

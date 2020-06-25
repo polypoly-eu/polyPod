@@ -2,23 +2,30 @@
   "name": "example",
   "version": "0.0.1",
   "description": "Example feature",
-  "main": "dist/feature.js",
+  "main": "dist/index.js",
   "author": "",
   "license": "UNLICENSED",
   "scripts": {
     "serve": "orodruin serve -l",
-    "build": "orodruin build",
-    "test:feature": "orodruin build && orodruin test"
+    "build": "rollup -c",
+    "test:feature": "npm run build && orodruin test"
   },
   "devDependencies": {
+    "@polypoly-eu/feature-bootstrap": "0.0.1",
+    "@polypoly-eu/orodruin": "file:/..",
     "@polypoly-eu/poly-look": "^0.0.3",
-    "@polypoly-eu/orodruin": "file:/.."
+    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-node-resolve": "^8.1.0",
+    "@rollup/plugin-sucrase": "^3.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rollup": "^2.18.0",
+    "rollup-plugin-copy": "^3.3.0"
   },
   "engines": {
-    "polypoly": "^0.3.0"
+    "polypoly": "^0.4.2"
   },
   "polypoly": {
-    "assets": "dist",
-    "style": "feature.css"
+    "root": "dist"
   }
 }

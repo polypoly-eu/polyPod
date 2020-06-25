@@ -1,91 +1,50 @@
-import {Pod} from "@polypoly-eu/poly-api";
-import {Logger, LogPod} from "@polypoly-eu/podigree";
-import {DefaultPod} from "@polypoly-eu/poly-api";
-import {Volume} from "memfs";
-import {promises as fs} from "fs";
-import {rootDir} from "../_dir";
-import {join} from "path";
+import {Server} from "http";
 import {serve} from "../serve";
-import {once} from "events";
-import {AddressInfo} from "net";
-import {JSDOM} from "jsdom";
-import tempy from "tempy";
-import {dataset} from "@rdfjs/dataset";
-import fetch from "node-fetch";
+import {DefaultPod} from "@polypoly-eu/poly-api";
 import {parse, Range} from "semver";
-import {exposedPromise} from "exposed-promises";
-
-interface JestMockLogger extends Logger {
-    called: jest.Mock<void, [string, Record<string, any>]>;
-    finished: jest.Mock<void, [string, any?]>;
-}
-
-function jestMockLogger(): JestMockLogger {
-    return {
-        called: jest.fn(),
-        finished: jest.fn()
-    };
-}
-
-function fetchWithBaseURI(baseURI: string, fetch: typeof window.fetch): typeof window.fetch {
-    return (input, init?) => {
-        if (typeof input == "string")
-            return fetch(baseURI + input, init);
-        else
-            return fetch ({ ...input, url: baseURI + input.url }, init);
-    };
-}
+import {once} from "events";
+import fetch from "node-fetch";
 
 describe("Serve", () => {
 
-    jest.setTimeout(20000);
+    const port = 12345;
+    let pod: DefaultPod;
+    let server: Server;
 
-    let pod: Pod;
-    let logger: JestMockLogger;
-
-    beforeEach(() => {
-        logger = jestMockLogger();
-        pod = new LogPod(new DefaultPod(dataset(), new Volume().promises as any, fetch), logger);
+    beforeAll(async () => {
+        server = await serve(
+            port,
+            pod,
+            __dirname,
+            {
+                name: "test",
+                version: parse("0.0.0")!,
+                api: new Range("0.0.0"),
+                root: "data"
+            }
+        );
     });
 
-    it("Feature can be bootstrapped", async () => {
-        const cssPath = tempy.file({ extension: "css" });
-        await fs.writeFile(cssPath, Buffer.of(), { flag: "w" });
-
-        const manifest = {
-            cssPath,
-            version: parse("0.0.0")!,
-            api: new Range("0.0.0"),
-            name: "test",
-            assetBasePath: ".",
-            jsPath: join(rootDir, "data", "test-feature.js")
-        };
-
-        const completed = exposedPromise<void>();
-
-        const server = await serve(12345, pod, "/", manifest, {
-            reactPath: join(rootDir, "node_modules/react/umd/react.development.js"),
-            reactDomPath: join(rootDir, "node_modules/react-dom/umd/react-dom.development.js")
-        });
-        const port = (server.address() as AddressInfo).port;
-
-        const baseURI = `http://localhost:${port}`;
-        const jsdomFetch = fetchWithBaseURI(baseURI, fetch as any);
-
-        const dom = await JSDOM.fromURL(baseURI, {
-            runScripts: "dangerously",
-            resources: "usable"
-        });
-        dom.window.document.addEventListener("completed", () => completed.resolve());
-        dom.window.fetch = jsdomFetch;
-
-        await completed.promise;
-
+    afterAll(async () => {
         server.close();
         await once(server, "close");
+    });
 
-        expect(logger.called).toHaveBeenCalledTimes(1);
-        expect(logger.finished).toHaveBeenCalledTimes(1);
+    it("Cookie header", async () => {
+        const response = await fetch(`http://localhost:${port}`);
+        expect(response.headers.has("Set-Cookie")).toBeTruthy();
+    });
+
+    it("RPC", async () => {
+        const response = await fetch(`http://localhost:${port}/rpc`, {
+            method: "post"
+        });
+        expect(response.status).toBe(200);
+    });
+
+    it("404 on unknown routes", async () => {
+        const response = await fetch(`http://localhost:${port}/whatever`);
+        expect(response.status).toBe(404);
     });
 
 });

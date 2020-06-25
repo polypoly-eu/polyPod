@@ -1,5 +1,4 @@
 import sucrase from "@rollup/plugin-sucrase";
-import copy from "rollup-plugin-copy";
 import executable from "rollup-plugin-executable";
 
 export default {
@@ -12,18 +11,6 @@ export default {
         sucrase({
             exclude: ["node_modules/**"],
             transforms: ["typescript"]
-        }),
-        copy({
-            targets: [
-                {
-                    src: "node_modules/react/umd/react.development.js",
-                    dest: "dist/browser"
-                },
-                {
-                    src: "node_modules/react-dom/umd/react-dom.development.js",
-                    dest: "dist/browser"
-                }
-            ]
         }),
         executable()
     ],
@@ -45,8 +32,6 @@ export default {
         "node-fetch",
         "open",
         "mkdirp",
-        "node-sass-tilde-importer",
-        "rollup",
         "sass",
         "yargs"
     ]
