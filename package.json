@@ -27,7 +27,7 @@
   "homepage": "https://github.com/polypoly-eu/postoffice#readme",
   "devDependencies": {
     "@rollup/plugin-sucrase": "^3.0.2",
-    "@types/jest": "^26.0.0",
+    "@types/jest": "^26.0.3",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "chokidar-cli": "^2.1.0",
