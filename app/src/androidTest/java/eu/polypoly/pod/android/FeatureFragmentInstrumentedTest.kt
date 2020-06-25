@@ -1,5 +1,6 @@
 package eu.polypoly.pod.android
 
+import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -32,7 +33,7 @@ class FeatureFragmentInstrumentedTest {
     }
 
     @Test
-    fun canNavigateToSecondFragment() {
+    fun canNavigateToFeatureFragment() {
         onView(withText("Hello first fragment"))
             .check(matches(isDisplayed()))  // verify I'm starting on first view
 
@@ -48,7 +49,11 @@ class FeatureFragmentInstrumentedTest {
 
     @Test
     fun canFindTextInWebView() {
-        launchFragmentInContainer<FeatureFragment>()
+        val fragmentArgs = Bundle().apply {
+            putString("featureName", "helloWorld")
+        }
+
+        launchFragmentInContainer<FeatureFragment>(fragmentArgs)
 
         onWebView()
             .inWindow(selectFrameByIdOrName("harness"))
