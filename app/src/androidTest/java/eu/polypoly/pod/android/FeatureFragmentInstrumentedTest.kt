@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class SecondFragmentInstrumentedTest {
+class FeatureFragmentInstrumentedTest {
 
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java)
@@ -48,7 +48,7 @@ class SecondFragmentInstrumentedTest {
 
     @Test
     fun canFindTextInWebView() {
-        launchFragmentInContainer<SecondFragment>()
+        launchFragmentInContainer<FeatureFragment>()
 
         onWebView()
             .inWindow(selectFrameByIdOrName("harness"))

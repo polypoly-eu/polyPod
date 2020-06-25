@@ -1,11 +1,11 @@
 package eu.polypoly.pod.android
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 /**
@@ -25,7 +25,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
-            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment("From FirstFragment")
+            val action = FirstFragmentDirections.actionFirstFragmentToFeatureFragment("helloWorld")
             findNavController().navigate(action)
         }
     }

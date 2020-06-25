@@ -13,9 +13,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
-import androidx.webkit.WebViewAssetLoader.ResourcesPathHandler
 import eu.polypoly.bubblewrap.Bubblewrap
 import eu.polypoly.bubblewrap.Codec
 import kotlinx.coroutines.launch
@@ -23,7 +23,9 @@ import kotlinx.coroutines.launch
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class FeatureFragment : Fragment() {
+
+    private val args: FeatureFragmentArgs by navArgs()
 
     private val api: PodApi = PodApi
     private lateinit var webView: WebView
@@ -33,11 +35,12 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        return inflater.inflate(R.layout.fragment_feature, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("FeatureFragment", "Inside FeatureFragment, feature to load: '${args.featureName}'")
         webView = view.findViewById(R.id.web_view)
 
         webView.settings.javaScriptEnabled = true
@@ -86,7 +89,7 @@ class SecondFragment : Fragment() {
         webView.loadUrl(url)
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_FeatureFragment_to_FirstFragment)
         }
     }
 }

@@ -27,7 +27,7 @@ import org.robolectric.annotation.LooperMode
  */
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
-class SecondFragmentTest {
+class FeatureFragmentTest {
 
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java)
@@ -56,7 +56,7 @@ class SecondFragmentTest {
     @Ignore("Getting 'java.lang.IllegalStateException: On main thread!', most likely Robolectric doesn't support WebViews, would make sense actually")
     @Test
     fun canFindTextInWebView() {
-        launchFragmentInContainer<SecondFragment>()
+        launchFragmentInContainer<FeatureFragment>()
 
         onWebView()
             .inWindow(selectFrameByIdOrName("harness"))
