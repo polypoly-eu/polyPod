@@ -13,15 +13,13 @@ export interface EngineManifest {
 export interface MainManifest {
     readonly name: string;
     readonly version: SemVer;
-    readonly jsPath: string;
 }
 
-export interface AssetManifest {
-    readonly assetBasePath: string;
-    readonly cssPath: string;
+export interface RootManifest {
+    readonly root: string;
 }
 
-export interface Manifest extends EngineManifest, MainManifest, AssetManifest {}
+export interface Manifest extends EngineManifest, MainManifest, RootManifest {}
 
 // TODO duplicated code with podigree, should be a library
 export class ValidationError extends Error {
@@ -88,15 +86,10 @@ const engineDecoder = Decode.type({
         )
 });
 
-const assetDecoder = Decode.type({
-    polypoly: Decode.intersection(
-        Decode.type({
-            style: relativeDecoder
-        }),
-        Decode.partial({
-            assets: relativeDecoder
-        })
-    )
+const rootDecoder = Decode.type({
+    polypoly: Decode.type({
+        root: relativeDecoder
+    })
 });
 
 export async function readManifest(pkgPath: string): Promise<Manifest> {
@@ -104,13 +97,11 @@ export async function readManifest(pkgPath: string): Promise<Manifest> {
 
     const rawMain = expect(packageManifest, "Failed to parse main manifest", mainDecoder);
     const rawEngine = expect(packageManifest.engines, "Failed to parse engines", engineDecoder);
-    const rawAssets = expect(packageManifest, "Failed to parse Feature spec", assetDecoder);
+    const rawRoot = expect(packageManifest, "Failed to parse Feature spec", rootDecoder);
 
     return {
         api: rawEngine.polypoly,
-        assetBasePath: rawAssets.polypoly.assets || ".",
-        cssPath: rawAssets.polypoly.style,
-        jsPath: rawMain.main,
+        root: rawRoot.polypoly.root,
         name: rawMain.name,
         version: rawMain.version
     };

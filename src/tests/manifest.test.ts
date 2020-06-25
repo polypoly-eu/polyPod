@@ -6,8 +6,7 @@ describe("Parsing", () => {
     describe("Successful parse", () => {
 
         it.each([
-            "ok.json",
-            "ok-default-dir.json"
+            "ok.json"
         ])("%s", async pkg => {
             expect(await readManifest(join(__dirname, "data", pkg))).toMatchSnapshot();
         });

@@ -6,7 +6,6 @@
     "polypoly": "^0.1.0"
   },
   "polypoly": {
-    "assets": "../assets",
-    "style": "feature.css"
+    "root": "../root"
   }
 }

@@ -6,7 +6,6 @@
     "polypoly": "^a.b.c"
   },
   "polypoly": {
-    "assets": "assets",
-    "style": "feature.css"
+    "root": "assets"
   }
 }
