@@ -25,7 +25,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
-            val action = FirstFragmentDirections.actionFirstFragmentToFeatureFragment("helloWorld")
+            val action = FirstFragmentDirections.actionFirstFragmentToFeatureFragment("podCheck")
             findNavController().navigate(action)
         }
     }
