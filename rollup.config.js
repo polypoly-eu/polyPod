@@ -18,12 +18,9 @@ export default {
         "@polypoly-eu/customs",
         "@polypoly-eu/poly-api",
         "@polypoly-eu/podigree",
-        "@polypoly-eu/feature-harness",
         "@rdfjs/dataset",
-        "@rollup/plugin-node-resolve",
-        "@rollup/plugin-commonjs",
-        "@rollup/plugin-sucrase",
-        "express",
+        "connect",
+        "exposed-promises",
         "fs",
         "path",
         "puppeteer",
@@ -31,8 +28,7 @@ export default {
         "memfs",
         "node-fetch",
         "open",
-        "mkdirp",
-        "sass",
+        "serve-static",
         "yargs"
     ]
 };
