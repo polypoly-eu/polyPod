@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/polypoly-eu/bubblewrap#readme",
   "devDependencies": {
-    "@polypoly-eu/rdf": "0.1.0",
-    "@polypoly-eu/rdf-spec": "0.1.0",
+    "@polypoly-eu/rdf": "^0.1.0",
+    "@polypoly-eu/rdf-spec": "^0.1.0",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
     "@rollup/plugin-sucrase": "^3.0.2",
