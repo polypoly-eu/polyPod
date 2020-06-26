@@ -11,9 +11,8 @@ struct FetchRequestInit {
     let body: String?
     let method: String?
     
-    init(initData: [MessagePackValue: MessagePackValue]?) {
-
-        body = initData?["body"]?.stringValue
-        method = initData?["method"]?.stringValue
+    init(with dictionary: [String: Any]) {
+        body = dictionary["body"] as? String
+        method = dictionary["method"] as? String
     }
 }

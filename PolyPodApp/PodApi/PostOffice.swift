@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PostOffice {
 
@@ -20,35 +21,38 @@ class PostOffice {
 
         let data = Data(bytes: bytesArray, count: bytesArray.count)
 
-        let unpacked = try! unpackAll(data)
-        let unpackedDict = unpacked[0].dictionaryValue!
+        let unpacked = try! unpackFirst(data)
+        guard let decoded = Bubblewrap.decode(messagePackValue: unpacked) as? [String: Any] else {
+            completionHandler([])
+            return
+        }
 
-        let messageId = unpackedDict[MessagePackValue("id")]!
-        let requestValue = unpackedDict[MessagePackValue("request")]!
-        let request = requestValue.arrayValue!
+        let messageId = decoded["id"] as! UInt64
+        let requestValue = decoded["request"]!
+        let request = requestValue as! [[String: Any]]
         
-        guard let api = request[0][MessagePackValue("method")] else {
+        guard let api = request[0]["method"] as? String else {
             completionHandler([])
             return
         }
         
-        guard let method = request[1][MessagePackValue("method")]?.stringValue else {
+        guard let method = request[1]["method"] as? String else {
             completionHandler([])
             return
         }
         
-        guard let args = request[1][MessagePackValue("args")]?.arrayValue else {
+        guard let args = request[1]["args"] as? [Any] else {
             completionHandler([])
             return
         }
 
         switch api {
-        case "polyOut":
-            handlePolyOut(method: method, args: args, completionHandler: { (response, error) in
-                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
-            })
         case "polyIn":
             handlePolyIn(method: method, args: args, completionHandler: { (response, error) in
+                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
+            })
+        case "polyOut":
+            handlePolyOut(method: method, args: args, completionHandler: { (response, error) in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         default:
@@ -56,10 +60,10 @@ class PostOffice {
         }
     }
     
-    private func completeEvent(messageId: MessagePackValue, response: MessagePackValue?, error: MessagePackValue?, completionHandler: @escaping ([UInt8]) -> Void) {
+    private func completeEvent(messageId: UInt64, response: MessagePackValue?, error: MessagePackValue?, completionHandler: @escaping ([UInt8]) -> Void) {
         var dict: [MessagePackValue: MessagePackValue] = [:]
         
-        dict["id"] = messageId
+        dict["id"] = .uint(messageId)
         if response != nil {
             dict["response"] = response
         }
@@ -76,7 +80,7 @@ class PostOffice {
 }
 
 extension PostOffice {
-    private func handlePolyIn(method: String, args: [MessagePackValue], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+    private func handlePolyIn(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         switch method {
         case "add":
             handlePolyInAdd(args: args, completionHandler: completionHandler)
@@ -87,17 +91,64 @@ extension PostOffice {
         }
     }
     
-    private func handlePolyInAdd(args: [MessagePackValue], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        completionHandler(nil, nil)
+    private func createNode(for extendedData: ExtendedData, in managedContext: NSManagedObjectContext) -> NSManagedObject? {
+        let entityName = extendedData.classname.replacingOccurrences(of: "@polypoly-eu/rdf.", with: "")
+
+        guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: managedContext) else {
+            assert(false)
+        }
+        
+        let node = NSManagedObject(entity: entity, insertInto: managedContext)
+         
+        for (key, value) in extendedData.properties {
+            if let childExtendedData = value as? ExtendedData {
+                let childNode = createNode(for: childExtendedData, in: managedContext)
+                node.setValue(childNode, forKey: key)
+            } else {
+                node.setValue(value, forKeyPath: key)
+            }
+        }
+        
+        return node
     }
     
-    private func handlePolyInSelect(args: [MessagePackValue], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+    private func handlePolyInAdd(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        for arg in args {
+            guard let extendedData = arg as? ExtendedData else {
+                completionHandler(nil, MessagePackValue("Bad data"))
+                return
+            }
+
+            guard let graph = extendedData.properties["graph"] as? ExtendedData, graph.classname == "@polypoly-eu/rdf.DefaultGraph" else {
+                completionHandler(nil, MessagePackValue("/default/"))
+                return
+            }
+            
+            let _ = createNode(for: extendedData, in: managedContext)
+        }
+        
+        do {
+            try managedContext.save()
+        } catch {
+            print("Could not save. \(error)")
+        }
+        
+        completionHandler(MessagePackValue(), nil)
+    }
+    
+    private func handlePolyInSelect(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         completionHandler(nil, nil)
     }
 }
 
 extension PostOffice {
-    private func handlePolyOut(method: String, args: [MessagePackValue], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+    private func handlePolyOut(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         switch method {
         case "fetch":
             handlePolyOutFetch(args: args, completionHandler: completionHandler)
@@ -112,11 +163,11 @@ extension PostOffice {
         }
     }
     
-    private func handlePolyOutFetch(args: [MessagePackValue], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let url = args[0].stringValue!
-        let requestInitData = args[1].dictionaryValue!
+    private func handlePolyOutFetch(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let url = args[0] as! String
+        let requestInitData = args[1] as! [String: Any]
         
-        let fetchRequestInit = FetchRequestInit(initData: requestInitData)
+        let fetchRequestInit = FetchRequestInit(with: requestInitData)
         
         PodApi.shared.polyOut.fetch(urlString: url, requestInit: fetchRequestInit) { fetchResponse in
             guard let fetchResponse = fetchResponse else {
@@ -133,8 +184,8 @@ extension PostOffice {
         }
     }
     
-    private func handlePolyOutStat(args: [MessagePackValue], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let path = args[0].stringValue!
+    private func handlePolyOutStat(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let path = args[0] as! String
         
         PodApi.shared.polyOut.stat(path: path) { fileExists in
             if fileExists {
@@ -145,8 +196,8 @@ extension PostOffice {
         }
     }
     
-    private func handlePolyOutReadFile(args: [MessagePackValue], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let path = args[0].stringValue!
+    private func handlePolyOutReadFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let path = args[0] as! String
         
         PodApi.shared.polyOut.fileRead(path: path) { (fileContent, error) in
             if let fileContent = fileContent {
@@ -157,9 +208,9 @@ extension PostOffice {
         }
     }
     
-    private func handlePolyOutWriteFile(args: [MessagePackValue], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let path = args[0].stringValue!
-        let data = args[1].stringValue!
+    private func handlePolyOutWriteFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let path = args[0] as! String
+        let data = args[1] as! String
         
         PodApi.shared.polyOut.fileWrite(path: path, data: data) { error in
             if error != nil {
