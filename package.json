@@ -1,0 +1,38 @@
+{
+  "name": "@polypoly-eu/aop-ts",
+  "version": "0.0.0",
+  "description": "Aspect-oriented programming without annotations",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "scripts": {
+    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "dev": "tsc --watch --incremental",
+    "eslint": "eslint src --ext .ts",
+    "test": "jest"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/aop-ts.git"
+  },
+  "author": "Lars Hupel",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/polypoly-eu/aop-ts/issues"
+  },
+  "homepage": "https://github.com/polypoly-eu/aop-ts#readme",
+  "devDependencies": {
+    "@rollup/plugin-sucrase": "^3.0.2",
+    "@types/jest": "^25.2.3",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "eslint": "^6.8.0",
+    "expect-type": "^0.7.4",
+    "jest": "^25.5.4",
+    "rollup": "^2.13.1",
+    "ts-jest": "^25.5.1",
+    "typescript": "^3.9.3"
+  }
+}
