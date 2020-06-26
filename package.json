@@ -6,19 +6,27 @@
   "scripts": {
     "build": "faucet",
     "watch": "faucet --watch",
-    "live": "live-server --port=8080 --host=0.0.0.0 --watch=dist dist"
+    "serve": "orodruin serve -m"
   },
   "devDependencies": {
+    "@polypoly-eu/feature-bootstrap": "0.0.1",
+    "@polypoly-eu/orodruin": "0.0.6",
+    "@polypoly-eu/poly-api": "^0.4.2",
     "@polypoly-eu/poly-look": "0.0.3",
     "@types/react": "^16.9.31",
     "@types/react-dom": "^16.9.6",
     "d3": "^5.15.0",
     "faucet-pipeline-static": "^1.2.0",
     "faucet-pipeline-typescript": "^2.1.6",
-    "live-server": "^1.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "tslib": "^2.0.0",
     "typescript": "3.8.3"
+  },
+  "engines": {
+    "polypoly": "^0.4.2"
+  },
+  "polypoly": {
+    "root": "dist"
   }
 }
