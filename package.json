@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/aop-ts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Aspect-oriented programming without annotations",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
