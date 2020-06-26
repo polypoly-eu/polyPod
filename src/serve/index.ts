@@ -31,7 +31,7 @@ export async function serve(
     // FIXME enable csp
 
     app.use("/rpc", await new RemoteServerPod(pod).listenOnMiddleware());
-    app.use(cookieMiddleware(`http://localhost:${port}/rpc`));
+    app.use(cookieMiddleware(`/rpc`));
     app.use(serveStatic(join(rootDir, manifest.root)) as NextHandleFunction);
 
     const server = app.listen(port);
