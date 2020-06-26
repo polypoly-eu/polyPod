@@ -67,8 +67,7 @@ const mainDecoder = Decode.type({
 
                 return right(parsed);
             }
-        ),
-    main: relativeDecoder
+        )
 });
 
 const engineDecoder = Decode.type({

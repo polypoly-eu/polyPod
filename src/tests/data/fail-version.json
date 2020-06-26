@@ -1,7 +1,6 @@
 {
   "name": "feature-fail-version",
   "version": "0.0.0",
-  "main": "feature.js",
   "engines": {
     "polypoly": "^a.b.c"
   },
