@@ -62,7 +62,7 @@
     "body-parser": "^1.19.0",
     "connect": "^3.7.0",
     "exposed-promises": "^1.0.0",
-    "fp-ts": "^2.6.6",
+    "fp-ts": "^2.6.7",
     "io-ts": "^2.2.6",
     "memfs": "^3.2.0",
     "node-fetch": "^2.6.0",
