@@ -53,9 +53,9 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
-    "@polypoly-eu/customs": "^0.1.1",
+    "@polypoly-eu/customs": "^0.1.2",
     "@polypoly-eu/poly-api": "^0.4.2",
-    "@polypoly-eu/podigree": "^0.2.0",
+    "@polypoly-eu/podigree": "^0.2.1",
     "@rdfjs/dataset": "^1.0.1",
     "@types/puppeteer": "^3.0.1",
     "@types/node": "^14.0.13",
@@ -63,7 +63,7 @@
     "connect": "^3.7.0",
     "exposed-promises": "^1.0.0",
     "fp-ts": "^2.6.7",
-    "io-ts": "^2.2.6",
+    "io-ts": "2.2.7",
     "memfs": "^3.2.0",
     "node-fetch": "^2.6.0",
     "open": "^7.0.4",
