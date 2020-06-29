@@ -65,7 +65,7 @@
     "node-fetch": "^2.6.0",
     "rollup": "^2.18.0",
     "ts-jest": "^25.5.1",
-    "typedoc": "^0.17.7",
+    "typedoc": "^0.17.8",
     "typescript": "^3.9.5"
   }
 }
