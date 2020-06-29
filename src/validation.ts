@@ -24,9 +24,8 @@ interface Decoders {
 }
 
 async function decoders(): Promise<Decoders> {
-    const {draw} = await import("io-ts/lib/Tree");
     const Decode = await import("io-ts/lib/Decoder");
-    const {fold, left, right} = await import("fp-ts/lib/Either");
+    const {fold} = await import("fp-ts/lib/Either");
     const {pipe} = await import("fp-ts/lib/pipeable");
     const strictFactory = new DataFactory(true);
 
@@ -35,7 +34,7 @@ async function decoders(): Promise<Decoders> {
             decoder.decode(input),
             fold(
                 error => {
-                    throw new ValidationError(msg, draw(error));
+                    throw new ValidationError(msg, Decode.draw(error));
                 },
                 t => t
             )
@@ -72,60 +71,61 @@ async function decoders(): Promise<Decoders> {
             try {
                 const converted = convert(u as any, strictFactory);
                 if (converted instanceof Model)
-                    return right(converted as Term);
+                    return Decode.success(converted as Term);
                 else
-                    return left("Expected term");
+                    return Decode.failure(u,"Expected term");
             }
             catch (err) {
-                return left(err.message);
+                return Decode.failure(u, err.message);
             }
         }
     };
 
-    const subject: Decoder<Quad_Subject> = Decode.parse(
+    const subject: Decoder<Quad_Subject> = pipe(
         term,
-        input => {
+        Decode.parse(input => {
             if (input.termType === "Literal")
-                return left("Subject can't be a literal");
+                return Decode.failure(input, "Subject can't be a literal");
             if (input.termType === "DefaultGraph")
-                return left("Subject can't be the default graph");
-            return right(input);
-        }
+                return Decode.failure(input, "Subject can't be the default graph");
+            return Decode.success(input);
+        })
     );
 
-    const predicate: Decoder<Quad_Predicate> = Decode.parse(
+    const predicate: Decoder<Quad_Predicate> = pipe(
         term,
-        input => {
+        Decode.parse(input => {
             if (input.termType !== "Variable" && input.termType !== "NamedNode")
-                return left("Predicate must be either variable or named node");
-            return right(input);
-        }
+                return Decode.failure(input, "Predicate must be either variable or named node");
+            return Decode.success(input);
+        })
     );
 
-    const object: Decoder<Quad_Object> = Decode.parse(
+    const object: Decoder<Quad_Object> = pipe(
         term,
-        input => {
+        Decode.parse(input => {
             if (input.termType === "DefaultGraph")
-                return left("Object can't be the default graph");
-            return right(input);
-        }
+                return Decode.failure(input,"Object can't be the default graph");
+            return Decode.success(input);
+        })
     );
 
-    const graph: Decoder<Quad_Graph> = Decode.parse(
+    const graph: Decoder<Quad_Graph> = pipe(
         term,
-        input => {
+        Decode.parse(input => {
             if (input.termType === "Literal")
-                return left("Graph can't be a literal");
-            return right(input);
-        }
+                return Decode.failure(input, "Graph can't be a literal");
+            return Decode.success(input);
+        })
     );
 
     const matcher = Decode.partial<Matcher>({ subject, predicate, object });
 
-    const quad = Decode.parse(
+    const quad = pipe(
         Decode.type({ subject, predicate, object, graph }),
-        ({subject, predicate, object, graph}) =>
-            right(strictFactory.quad(subject, predicate, object, graph))
+        Decode.parse(({subject, predicate, object, graph}) =>
+            Decode.success(strictFactory.quad(subject, predicate, object, graph))
+        )
     );
 
     const encodingOptions = Decode.type<EncodingOptions>({

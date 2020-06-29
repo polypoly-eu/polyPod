@@ -4,7 +4,7 @@ import {dataset} from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/spec";
 import {interceptorOfLogger, Logger, nullLogger, TracingPod} from "../tracing";
-import {Interceptor, AsyncOperation} from "@polypoly-eu/aop-ts";
+import {Interceptor} from "@polypoly-eu/aop-ts";
 
 describe("Tracing pod", () => {
 
