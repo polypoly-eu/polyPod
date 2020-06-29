@@ -23,7 +23,6 @@ export default {
         "fp-ts/lib/Either",
         "fp-ts/lib/pipeable",
         "io-ts/lib/Decoder",
-        "io-ts/lib/Tree",
         "path",
         "semver"
     ]

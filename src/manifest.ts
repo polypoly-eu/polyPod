@@ -1,8 +1,7 @@
 import * as Decode from "io-ts/lib/Decoder";
-import {left, right, fold} from "fp-ts/lib/Either";
+import {fold} from "fp-ts/lib/Either";
 import readPkg from "@pnpm/read-package-json";
 import {pipe} from "fp-ts/lib/pipeable";
-import {draw} from "io-ts/lib/Tree";
 import {parse as parseSemVer, SemVer, Range} from "semver";
 import {normalize, isAbsolute} from "path";
 
@@ -22,66 +21,57 @@ export interface RootManifest {
 export interface Manifest extends EngineManifest, MainManifest, RootManifest {}
 
 // TODO duplicated code with podigree, should be a library
-export class ValidationError extends Error {
-    constructor(
-        msg: string,
-        readonly details?: string
-    ) {
-        super(msg);
-    }
-}
-
 function expect<T>(input: unknown, msg: string, decoder: Decode.Decoder<T>): T {
     return pipe(
         decoder.decode(input),
         fold(
             error => {
-                throw new ValidationError(msg, draw(error));
+                throw new Error(msg + "\n" + Decode.draw(error));
             },
             t => t
         )
     );
 }
 
-const relativeDecoder = Decode.parse(
+const relativeDecoder = pipe(
     Decode.string,
-    string => {
+    Decode.parse(string => {
         const path = normalize(string);
 
         if (isAbsolute(path) || path.startsWith(".."))
-            return left("Path must be relative");
+            return Decode.failure(string, "relative");
 
-        return right(string);
-    }
+        return Decode.success(string);
+    })
 );
 
 const mainDecoder = Decode.type({
     name: Decode.string,
     version:
-        Decode.parse(
+        pipe(
             Decode.string,
-            string => {
+            Decode.parse(string => {
                 const parsed = parseSemVer(string);
                 if (parsed === null)
-                    return left(`Invalid version string ${string}`);
+                    return Decode.failure(string, "version string");
 
-                return right(parsed);
-            }
+                return Decode.success(parsed);
+            })
         )
 });
 
 const engineDecoder = Decode.type({
     polypoly:
-        Decode.parse(
+        pipe(
             Decode.string,
-            string => {
+            Decode.parse(string => {
                 try {
-                    return right(new Range(string));
+                    return Decode.success(new Range(string));
                 }
                 catch (err) {
-                    return left(err.message);
+                    return Decode.failure(string, err.message);
                 }
-            }
+            })
         )
 });
 

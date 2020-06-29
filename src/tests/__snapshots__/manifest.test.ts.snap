@@ -1,12 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Parsing Failed parse fail-absolute.json 1`] = `"Failed to parse Feature spec"`;
+exports[`Parsing Failed parse fail-absolute.json 1`] = `
+"Failed to parse Feature spec
+required property \\"polypoly\\"
+└─ required property \\"root\\"
+   └─ cannot decode \\"/root\\", should be relative"
+`;
 
-exports[`Parsing Failed parse fail-empty.json 1`] = `"Failed to parse main manifest"`;
+exports[`Parsing Failed parse fail-empty.json 1`] = `
+"Failed to parse main manifest
+required property \\"version\\"
+└─ cannot decode \\"\\", should be version string"
+`;
 
-exports[`Parsing Failed parse fail-traversal.json 1`] = `"Failed to parse Feature spec"`;
+exports[`Parsing Failed parse fail-traversal.json 1`] = `
+"Failed to parse Feature spec
+required property \\"polypoly\\"
+└─ required property \\"root\\"
+   └─ cannot decode \\"../root\\", should be relative"
+`;
 
-exports[`Parsing Failed parse fail-version.json 1`] = `"Failed to parse engines"`;
+exports[`Parsing Failed parse fail-version.json 1`] = `
+"Failed to parse engines
+required property \\"polypoly\\"
+└─ cannot decode \\"^a.b.c\\", should be Invalid comparator: ^a.b.c"
+`;
 
 exports[`Parsing Successful parse ok.json 1`] = `
 Object {
