@@ -73,7 +73,7 @@ async function decoders(): Promise<Decoders> {
                 if (converted instanceof Model)
                     return Decode.success(converted as Term);
                 else
-                    return Decode.failure(u,"Expected term");
+                    return Decode.failure(u, "Expected term");
             }
             catch (err) {
                 return Decode.failure(u, err.message);
