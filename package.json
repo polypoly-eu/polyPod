@@ -28,7 +28,7 @@
   "devDependencies": {
     "@polypoly-eu/rdf-spec": "^0.1.0",
     "@rdfjs/dataset": "^1.0.1",
-    "@rollup/plugin-sucrase": "^3.0.2",
+    "@rollup/plugin-sucrase": "^3.1.0",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",
     "@types/jest": "^26.0.3",
