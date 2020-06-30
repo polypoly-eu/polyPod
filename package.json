@@ -73,7 +73,7 @@
     "puppeteer-firefox": "^0.5.1",
     "rollup": "^2.18.0",
     "ts-mocha": "^7.0.0",
-    "typedoc": "^0.17.7",
+    "typedoc": "^0.17.8",
     "typescript": "^3.9.5"
   }
 }
