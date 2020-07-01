@@ -5,7 +5,8 @@ module.exports = {
     typescript: true,
     externals: {
       "react": "React",
-      "react-dom": "ReactDOM"
+      "react-dom": "ReactDOM",
+      "uuid": "uuidv1",
     }
   }],
 
@@ -18,6 +19,9 @@ module.exports = {
   }, {
     source: "react-dom/umd/react-dom.development.js",
     target: "./dist/react-dom.js",
+  }, {
+    source: "./node_modules/uuid/dist/umd/uuidv1.min.js",
+    target: "./dist/uuidv1.js",
   }],
 
   manifest: {
