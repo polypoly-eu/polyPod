@@ -28,5 +28,11 @@
   },
   "polypoly": {
     "root": "dist"
+  },
+  "dependencies": {
+    "@sentry/react": "^5.18.1",
+    "i18next": "^19.5.2",
+    "react-i18next": "^11.7.0",
+    "uuid": "^8.2.0"
   }
 }
