@@ -50,7 +50,7 @@
     "ts-jest": "^25.5.1",
     "ts-mocha": "^7.0.0",
     "typedoc": "^0.17.8",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.6"
   },
   "peerDependencies": {
     "@polypoly-eu/rdf-spec": "^0.1.0",
