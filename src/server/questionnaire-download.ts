@@ -67,10 +67,12 @@ export async function downloadActiveQuestionnairesMetadata() {
   );
 };
 
+//TODO implement timeout
 function timeoutPromise<T>(timeout: number, promise: Promise<T>): Promise<T> {
   return promise;
 }
 
+//TODO implement agent with versionnumber
 function userAgent(): string {
   return "PolyPoly";
 }

@@ -47,7 +47,3 @@ ReactDOM.render(
   document.getElementById("feature")
 );
 
-(async function() {
-	let result = await downloadActiveQuestionnairesMetadata();
-	console.log(result);
-})();

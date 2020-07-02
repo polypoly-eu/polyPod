@@ -1,6 +1,6 @@
 module.exports = {
   js: [{
-    source: "./src/HelloWorld.tsx",
+    source: "./src/index.tsx",
     target: "./dist/bundle.js",
     typescript: true,
     externals: {
