@@ -22,6 +22,19 @@ struct ExtendedData {
         }
         self.properties = properties
     }
+    
+    init(classname: String, properties: [String: Any]) {
+        self.classname = classname
+        self.properties = properties
+    }
+    
+    var propertyList: [[Any]] {
+        var propertyList: [[Any]] = []
+        for (key, value) in properties {
+            propertyList.append([key, value])
+        }
+        return propertyList
+    }
 }
 
 class Bubblewrap {
@@ -60,5 +73,43 @@ class Bubblewrap {
             break
         }
         assert(false)
+    }
+    
+    static func encode(extendedData: ExtendedData) -> MessagePackValue {
+        let classname = extendedData.classname
+        let propertyList = extendedData.propertyList
+        
+        var messagePackPropertyList: [MessagePackValue] = []
+        for property in propertyList {
+            let propertyName = property[0] as! String
+            let propertyValue = property[1]
+            var value: MessagePackValue?
+            switch propertyValue {
+            case let asBool as Bool:
+                value = .bool(asBool)
+            case let asInt as Int64:
+                value = .int(asInt)
+            case let asUInt as UInt64:
+                value = .uint(asUInt)
+            case let asFloat as Float:
+                value = .float(asFloat)
+            case let asDouble as Double:
+                value = .double(asDouble)
+            case let asString as String:
+                value = .string(asString)
+            case let asData as Data:
+                value = .binary(asData)
+            case let asArray as [MessagePackValue]:
+                value = .array(asArray)
+            case let asExtendedData as ExtendedData:
+                value = .extended(2, pack(encode(extendedData: asExtendedData)))
+            default:
+                continue
+            }
+            messagePackPropertyList.append(.array([.string(propertyName), value!]))
+        }
+        
+        let endoced = MessagePackValue.array([.string(classname), .array(messagePackPropertyList)])
+        return endoced
     }
 }

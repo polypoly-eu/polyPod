@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class PostOffice {
 
@@ -91,33 +90,8 @@ extension PostOffice {
         }
     }
     
-    private func createNode(for extendedData: ExtendedData, in managedContext: NSManagedObjectContext) -> NSManagedObject? {
-        let entityName = extendedData.classname.replacingOccurrences(of: "@polypoly-eu/rdf.", with: "")
-
-        guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: managedContext) else {
-            assert(false)
-        }
-        
-        let node = NSManagedObject(entity: entity, insertInto: managedContext)
-         
-        for (key, value) in extendedData.properties {
-            if let childExtendedData = value as? ExtendedData {
-                let childNode = createNode(for: childExtendedData, in: managedContext)
-                node.setValue(childNode, forKey: key)
-            } else {
-                node.setValue(value, forKeyPath: key)
-            }
-        }
-        
-        return node
-    }
-    
     private func handlePolyInAdd(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+        var extendedDataSet: [ExtendedData] = []
         
         for arg in args {
             guard let extendedData = arg as? ExtendedData else {
@@ -130,20 +104,37 @@ extension PostOffice {
                 return
             }
             
-            let _ = createNode(for: extendedData, in: managedContext)
+            extendedDataSet.append(extendedData)
         }
         
-        do {
-            try managedContext.save()
-        } catch {
-            print("Could not save. \(error)")
+        PodApi.shared.polyIn.addQuads(quads: extendedDataSet) { didSave in
+            if didSave {
+                completionHandler(MessagePackValue(), nil)
+            } else {
+                completionHandler(nil, MessagePackValue("Failed"))
+            }
         }
-        
-        completionHandler(MessagePackValue(), nil)
     }
     
     private func handlePolyInSelect(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        completionHandler(nil, nil)
+        guard let extendedData = args[0] as? ExtendedData else {
+            completionHandler(nil, MessagePackValue("Bad data"))
+            return
+        }
+        
+        PodApi.shared.polyIn.selectQuads(matcher: extendedData) { quads in
+            guard let quads = quads else {
+                completionHandler(nil, MessagePackValue("Bad data"))
+                return
+            }
+            
+            var encodedQuads: [MessagePackValue] = []
+            for quad in quads {
+                let encodedQuad = Bubblewrap.encode(extendedData: quad)
+                encodedQuads.append(encodedQuad)
+            }
+            completionHandler(.array(encodedQuads), nil)
+        }
     }
 }
 

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="BlankNode" representedClassName="BlankNode" parentEntity="Term" syncable="YES" codeGenerationType="class"/>
-    <entity name="DefaultGraph" representedClassName="DefaultGraph" parentEntity="Term" syncable="YES" codeGenerationType="class"/>
-    <entity name="Literal" representedClassName="Literal" parentEntity="Term" syncable="YES" codeGenerationType="class">
+    <entity name="BlankNode" representedClassName=".BlankNode" parentEntity="Term" syncable="YES"/>
+    <entity name="DefaultGraph" representedClassName=".DefaultGraph" parentEntity="Term" syncable="YES"/>
+    <entity name="Literal" representedClassName=".Literal" parentEntity="Term" syncable="YES">
         <attribute name="language" optional="YES" attributeType="String"/>
         <relationship name="datatype" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NamedNode"/>
     </entity>
-    <entity name="NamedNode" representedClassName="NamedNode" parentEntity="Term" syncable="YES" codeGenerationType="class"/>
-    <entity name="Quad" representedClassName="Quad" syncable="YES" codeGenerationType="class">
+    <entity name="NamedNode" representedClassName=".NamedNode" parentEntity="Term" syncable="YES"/>
+    <entity name="Quad" representedClassName=".Quad" syncable="YES">
         <relationship name="graph" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
         <relationship name="object" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
         <relationship name="predicate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
     </entity>
-    <entity name="Term" representedClassName="Term" isAbstract="YES" syncable="YES" codeGenerationType="class">
+    <entity name="Term" representedClassName=".Term" isAbstract="YES" syncable="YES">
         <attribute name="termType" optional="YES" attributeType="String"/>
         <attribute name="value" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Variable" representedClassName="Variable" parentEntity="Term" syncable="YES" codeGenerationType="class"/>
+    <entity name="Variable" representedClassName=".Variable" parentEntity="Term" syncable="YES"/>
     <elements>
-        <element name="Quad" positionX="-73.85546875" positionY="-214.421875" width="128" height="103"/>
+        <element name="Quad" positionX="80.796875" positionY="-140.37890625" width="128" height="103"/>
         <element name="Term" positionX="-371.05078125" positionY="-102.140625" width="128" height="73"/>
-        <element name="NamedNode" positionX="-467.02734375" positionY="53.4453125" width="128" height="43"/>
+        <element name="NamedNode" positionX="-576.578125" positionY="55.5859375" width="128" height="43"/>
         <element name="BlankNode" positionX="-262.6953125" positionY="54.25390625" width="128" height="43"/>
-        <element name="Literal" positionX="-331.96875" positionY="193.703125" width="128" height="73"/>
-        <element name="Variable" positionX="-97.37890625" positionY="54.39453125" width="128" height="43"/>
-        <element name="DefaultGraph" positionX="84.33984375" positionY="49.39453125" width="128" height="43"/>
+        <element name="Literal" positionX="-408.89453125" positionY="54.0625" width="128" height="73"/>
+        <element name="Variable" positionX="-97.15234375" positionY="54.35546875" width="128" height="43"/>
+        <element name="DefaultGraph" positionX="82.1953125" positionY="55.66015625" width="128" height="43"/>
     </elements>
 </model>

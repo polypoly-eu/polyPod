@@ -7,11 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A00DFEE2446FA6C0049F3F7 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 1A00DFED2446FA6C0049F3F7 /* Zip */; };
 		1A00DFF724569F3A0049F3F7 /* pod.html in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF624569F3A0049F3F7 /* pod.html */; };
 		1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF8245961FB0049F3F7 /* messagePort.js */; };
 		1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */; };
 		1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21C324A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld */; };
+		1A4C21DB24A63DAB006CC1FD /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 1A4C21DA24A63DAB006CC1FD /* Zip */; };
+		1A4C21DE24A63DD4006CC1FD /* Term+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */; };
+		1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21DD24A63DD4006CC1FD /* Term+CoreDataProperties.swift */; };
+		1A4C21EC24A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E024A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift */; };
+		1A4C21ED24A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E124A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift */; };
+		1A4C21EE24A63E4B006CC1FD /* NamedNode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E224A63E4B006CC1FD /* NamedNode+CoreDataClass.swift */; };
+		1A4C21EF24A63E4B006CC1FD /* NamedNode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E324A63E4B006CC1FD /* NamedNode+CoreDataProperties.swift */; };
+		1A4C21F024A63E4C006CC1FD /* BlankNode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E424A63E4B006CC1FD /* BlankNode+CoreDataClass.swift */; };
+		1A4C21F124A63E4C006CC1FD /* BlankNode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E524A63E4B006CC1FD /* BlankNode+CoreDataProperties.swift */; };
+		1A4C21F224A63E4C006CC1FD /* Quad+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E624A63E4B006CC1FD /* Quad+CoreDataClass.swift */; };
+		1A4C21F324A63E4C006CC1FD /* Quad+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E724A63E4B006CC1FD /* Quad+CoreDataProperties.swift */; };
+		1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E824A63E4B006CC1FD /* Variable+CoreDataClass.swift */; };
+		1A4C21F524A63E4C006CC1FD /* Variable+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E924A63E4B006CC1FD /* Variable+CoreDataProperties.swift */; };
+		1A4C21F624A63E4C006CC1FD /* Literal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21EA24A63E4B006CC1FD /* Literal+CoreDataClass.swift */; };
+		1A4C21F724A63E4C006CC1FD /* Literal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21EB24A63E4B006CC1FD /* Literal+CoreDataProperties.swift */; };
 		1A57E65624A4C4110043E3AD /* Bubblewrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A57E65524A4C4110043E3AD /* Bubblewrap.swift */; };
 		1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */; };
 		1A66F76B2490DFA000ED4308 /* FetchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F76A2490DFA000ED4308 /* FetchResponse.swift */; };
@@ -73,6 +87,20 @@
 		1A00DFF8245961FB0049F3F7 /* messagePort.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = messagePort.js; sourceTree = "<group>"; };
 		1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageName.swift; sourceTree = "<group>"; };
 		1A4C21C424A5F6A2006CC1FD /* PolyPodModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PolyPodModel.xcdatamodel; sourceTree = "<group>"; };
+		1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Term+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A4C21DD24A63DD4006CC1FD /* Term+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Term+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A4C21E024A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultGraph+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A4C21E124A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultGraph+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A4C21E224A63E4B006CC1FD /* NamedNode+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NamedNode+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A4C21E324A63E4B006CC1FD /* NamedNode+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NamedNode+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A4C21E424A63E4B006CC1FD /* BlankNode+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlankNode+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A4C21E524A63E4B006CC1FD /* BlankNode+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlankNode+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A4C21E624A63E4B006CC1FD /* Quad+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quad+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A4C21E724A63E4B006CC1FD /* Quad+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quad+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A4C21E824A63E4B006CC1FD /* Variable+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Variable+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A4C21E924A63E4B006CC1FD /* Variable+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Variable+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A4C21EA24A63E4B006CC1FD /* Literal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Literal+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A4C21EB24A63E4B006CC1FD /* Literal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Literal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A57E65524A4C4110043E3AD /* Bubblewrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubblewrap.swift; sourceTree = "<group>"; };
 		1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestInit.swift; sourceTree = "<group>"; };
 		1A66F76A2490DFA000ED4308 /* FetchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResponse.swift; sourceTree = "<group>"; };
@@ -124,7 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A00DFEE2446FA6C0049F3F7 /* Zip in Frameworks */,
+				1A4C21DB24A63DAB006CC1FD /* Zip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +220,20 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
+				1A4C21E024A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift */,
+				1A4C21E124A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift */,
+				1A4C21E224A63E4B006CC1FD /* NamedNode+CoreDataClass.swift */,
+				1A4C21E324A63E4B006CC1FD /* NamedNode+CoreDataProperties.swift */,
+				1A4C21E424A63E4B006CC1FD /* BlankNode+CoreDataClass.swift */,
+				1A4C21E524A63E4B006CC1FD /* BlankNode+CoreDataProperties.swift */,
+				1A4C21E624A63E4B006CC1FD /* Quad+CoreDataClass.swift */,
+				1A4C21E724A63E4B006CC1FD /* Quad+CoreDataProperties.swift */,
+				1A4C21E824A63E4B006CC1FD /* Variable+CoreDataClass.swift */,
+				1A4C21E924A63E4B006CC1FD /* Variable+CoreDataProperties.swift */,
+				1A4C21EA24A63E4B006CC1FD /* Literal+CoreDataClass.swift */,
+				1A4C21EB24A63E4B006CC1FD /* Literal+CoreDataProperties.swift */,
+				1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */,
+				1A4C21DD24A63DD4006CC1FD /* Term+CoreDataProperties.swift */,
 				1A57E65424A4C3FB0043E3AD /* Bubblewrap */,
 				1AA6DE492419212E008DB1B2 /* Features */,
 				1AA6DE4624192079008DB1B2 /* PodApi */,
@@ -301,7 +343,7 @@
 			);
 			name = PolyPod;
 			packageProductDependencies = (
-				1A00DFED2446FA6C0049F3F7 /* Zip */,
+				1A4C21DA24A63DAB006CC1FD /* Zip */,
 			);
 			productName = PolyPod;
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
@@ -336,7 +378,7 @@
 			);
 			mainGroup = 1AA6DE2624191C94008DB1B2;
 			packageReferences = (
-				1A00DFEC2446FA6C0049F3F7 /* XCRemoteSwiftPackageReference "Zip" */,
+				1A4C21D924A63DAB006CC1FD /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 1AA6DE3024191C94008DB1B2 /* Products */;
 			projectDirPath = "";
@@ -400,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A4C21EC24A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift in Sources */,
 				1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */,
 				1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */,
 				1A66F77D2493774100ED4308 /* NetworkSession.swift in Sources */,
@@ -408,16 +451,29 @@
 				1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */,
 				1A8F488A247E91E000089217 /* MessagePack.swift in Sources */,
 				1A8F488B247E91E000089217 /* LiteralConvertibles.swift in Sources */,
+				1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */,
 				1A8F488C247E91E000089217 /* Subdata.swift in Sources */,
+				1A4C21F024A63E4C006CC1FD /* BlankNode+CoreDataClass.swift in Sources */,
 				1A57E65624A4C4110043E3AD /* Bubblewrap.swift in Sources */,
+				1A4C21F124A63E4C006CC1FD /* BlankNode+CoreDataProperties.swift in Sources */,
+				1A4C21F324A63E4C006CC1FD /* Quad+CoreDataProperties.swift in Sources */,
 				1A8F4875247E40C600089217 /* PostOffice.swift in Sources */,
 				1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */,
+				1A4C21F624A63E4C006CC1FD /* Literal+CoreDataClass.swift in Sources */,
 				1A8F4888247E91E000089217 /* Pack.swift in Sources */,
+				1A4C21DE24A63DD4006CC1FD /* Term+CoreDataClass.swift in Sources */,
+				1A4C21EE24A63E4B006CC1FD /* NamedNode+CoreDataClass.swift in Sources */,
 				1AA6DE3724191C94008DB1B2 /* FeatureViewController.swift in Sources */,
+				1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
 				1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */,
+				1A4C21ED24A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1A8F4889247E91E000089217 /* ConvenienceInitializers.swift in Sources */,
+				1A4C21F524A63E4C006CC1FD /* Variable+CoreDataProperties.swift in Sources */,
+				1A4C21F724A63E4C006CC1FD /* Literal+CoreDataProperties.swift in Sources */,
+				1A4C21EF24A63E4B006CC1FD /* NamedNode+CoreDataProperties.swift in Sources */,
 				1AF46893241FBA7200E51B6D /* JSONSerialization+Additions.swift in Sources */,
+				1A4C21F224A63E4C006CC1FD /* Quad+CoreDataClass.swift in Sources */,
 				1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */,
 				1AF468DE24361D9D00E51B6D /* FileManager+Additions.swift in Sources */,
 				1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */,
@@ -685,20 +741,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1A00DFEC2446FA6C0049F3F7 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		1A4C21D924A63DAB006CC1FD /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1A00DFED2446FA6C0049F3F7 /* Zip */ = {
+		1A4C21DA24A63DAB006CC1FD /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1A00DFEC2446FA6C0049F3F7 /* XCRemoteSwiftPackageReference "Zip" */;
+			package = 1A4C21D924A63DAB006CC1FD /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
