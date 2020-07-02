@@ -1,5 +1,4 @@
-// ported from https://github.com/polypoly-eu/qapp/blob/master/server/questionnaire-download.js
-import * as POD_ENV from "../../env";
+import * as POD_ENV from "../env";
 import { pod } from "@polypoly-eu/feature-bootstrap";
 
 export async function downloadQuestionnaireData(questionnaireId) {
