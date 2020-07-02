@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useTranslation } from 'react-i18next';
+import StartSurveyButton from "../../components/buttons/StartSurveyButton";
 
 //TODO implement questionnaire state
 export default function MainSurveyCard({ questionnaire }) {
@@ -9,5 +10,6 @@ export default function MainSurveyCard({ questionnaire }) {
     return <>
       <h1>{title}</h1>
       <em>{questionnaire.submissionDeadlineString(i18n.language)}</em>
+      <StartSurveyButton questionnaire = {questionnaire} />
     </>;
   }

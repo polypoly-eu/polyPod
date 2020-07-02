@@ -13,6 +13,8 @@ import {
     useParams,
     useRouteMatch
   } from "react-router-dom";
+import HomeScreen from "../home/HomeScreen";
+import QuestionScreen from "../questionnaire/QuestionScreen";
 
 export default function AppNavigator() {
     const [onboardingShown, setOnboardingShown] = useState(null);
@@ -105,19 +107,14 @@ export default function AppNavigator() {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/topics">Topics</Link>
-              </li>
             </ul>
-
             <hr />
-
             <Switch>
               <Route exact path="/">
-                home
+                <HomeScreen />
               </Route>
-              <Route path="/topics">
-topics
+              <Route exact path="/survey">
+                <QuestionScreen />
               </Route>
             </Switch>
           </div>

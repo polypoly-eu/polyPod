@@ -1,4 +1,6 @@
+import ActiveSurveys from "./ActiveSurveys";
+import React from "react";
 
-function HomeScreen() {
-
+export default function HomeScreen() {
+    return <ActiveSurveys />
 }
