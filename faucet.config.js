@@ -7,6 +7,7 @@ module.exports = {
       "react": "React",
       "react-dom": "ReactDOM",
       "uuid": "uuidv1",
+      "react-router-dom": "ReactRouterDOM"
     }
   }],
 
@@ -22,6 +23,9 @@ module.exports = {
   }, {
     source: "./node_modules/uuid/dist/umd/uuidv1.min.js",
     target: "./dist/uuidv1.js",
+  }, {
+    source: "react-router-dom/umd/react-router-dom.min.js",
+    target: "./dist/react-router-dom.js",
   }],
 
   manifest: {

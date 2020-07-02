@@ -5,6 +5,14 @@ import { getStoredLanguage, storeLanguage, getStoredOrPhoneLanguageCode } from "
 import AsyncStorage from "../../util/async-storage";
 import React from "react";
 import LoadingScreen from "../loading/LoadingScreen";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams,
+    useRouteMatch
+  } from "react-router-dom";
 
 export default function AppNavigator() {
     const [onboardingShown, setOnboardingShown] = useState(null);
@@ -90,5 +98,29 @@ export default function AppNavigator() {
     ) {
       return <LoadingScreen />;
     }
-    return <div>finished</div>
+    return (
+        <Router>
+          <div>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/topics">Topics</Link>
+              </li>
+            </ul>
+
+            <hr />
+
+            <Switch>
+              <Route exact path="/">
+                home
+              </Route>
+              <Route path="/topics">
+topics
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      );
 }
