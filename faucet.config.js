@@ -6,7 +6,7 @@ module.exports = {
     externals: {
       "react": "React",
       "react-dom": "ReactDOM",
-      "uuid": "uuidv1",
+      "uuid": "uuid",
       "react-router-dom": "ReactRouterDOM"
     }
   }],
@@ -21,8 +21,8 @@ module.exports = {
     source: "react-dom/umd/react-dom.development.js",
     target: "./dist/react-dom.js",
   }, {
-    source: "./node_modules/uuid/dist/umd/uuidv1.min.js",
-    target: "./dist/uuidv1.js",
+    source: "uuid/dist/umd/uuid.min.js",
+    target: "./dist/uuid.js",
   }, {
     source: "react-router-dom/umd/react-router-dom.min.js",
     target: "./dist/react-router-dom.js",

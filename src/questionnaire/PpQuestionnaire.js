@@ -1,5 +1,5 @@
 import assert from '../util/assert';
-import v1 from 'uuid';
+import {v1} from 'uuid';
 import PpQObject from './PpQObject.js';
 import localizedDate from './localizedDate.js';
 
