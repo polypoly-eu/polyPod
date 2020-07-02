@@ -30,11 +30,9 @@
     "root": "dist"
   },
   "dependencies": {
-    "@sentry/react": "^5.18.1",
     "@types/react-router-dom": "^5.1.5",
     "i18next": "^19.5.2",
     "react-i18next": "^11.7.0",
-    "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
     "uuid": "^8.2.0"
   }
