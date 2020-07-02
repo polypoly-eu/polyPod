@@ -40,6 +40,6 @@
     "jest": "^25.5.4",
     "rollup": "^2.18.1",
     "ts-jest": "^25.5.1",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.6"
   }
 }
