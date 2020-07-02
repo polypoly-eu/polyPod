@@ -2,6 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { QuestionnaireListContext, QuestionnaireListProvider } from './context/questionnaire-list-context';
 import ActiveSurveys from "./screens/home/ActiveSurveys";
+import { QuestionnaireProvider } from "./context/questionnaire-context";
+import AppNavigator from "./screens/navigation/AppNavigator";
 
 function UpdateQuestionnaireButton() {
   // @ts-ignore
@@ -12,8 +14,9 @@ function UpdateQuestionnaireButton() {
 
 const view = (
   <QuestionnaireListProvider>
-    <ActiveSurveys/>
-    <UpdateQuestionnaireButton/>
+    <QuestionnaireProvider>
+      <AppNavigator />
+    </QuestionnaireProvider>
   </QuestionnaireListProvider>
 );
 

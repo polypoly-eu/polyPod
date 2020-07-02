@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 
-// import {getStoredLanguage} from '../screens/language/language-utils';
+import {getStoredLanguage} from '../screens/language/language-utils';
 
 import {PpQReplacer} from './../questionnaire/PpQSerializer.js';
 import PpQuestionnaireLinkResult from '../questionnaire/PpQuestionnaireLinkResult';
@@ -212,7 +212,4 @@ export const QuestionnaireListProvider = ({children}) => {
   );
 };
 
-// hacky stuff
-async function getStoredLanguage() {
-  return "de";
-}
+
