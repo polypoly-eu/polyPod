@@ -1,7 +1,7 @@
 import * as POD_ENV from "../env";
 import { pod } from "@polypoly-eu/feature-bootstrap";
 
-export async function downloadQuestionnaireData(questionnaireId) {
+export async function downloadQuestionnaireData(questionnaireId: string) {
   const api = await pod;
 
   const statusCheckEndpoint =
@@ -21,9 +21,9 @@ export async function downloadQuestionnaireData(questionnaireId) {
       }
     }),
   );
-};
+}
 
-export async function downloadQuestionnaireResults(questionnaireId) {
+export async function downloadQuestionnaireResults(questionnaireId: string) {
   const api = await pod;
 
   const statusCheckEndpoint =
@@ -43,7 +43,7 @@ export async function downloadQuestionnaireResults(questionnaireId) {
       }
     }),
   );
-};
+}
 
 export async function downloadActiveQuestionnairesMetadata() {
   const api = await pod;
@@ -64,7 +64,7 @@ export async function downloadActiveQuestionnairesMetadata() {
       }
     }),
   );
-};
+}
 
 //TODO implement timeout
 function timeoutPromise<T>(timeout: number, promise: Promise<T>): Promise<T> {

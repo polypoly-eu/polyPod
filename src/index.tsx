@@ -6,7 +6,6 @@ import { QuestionnaireProvider } from "./context/questionnaire-context";
 import AppNavigator from "./screens/navigation/AppNavigator";
 
 function UpdateQuestionnaireButton() {
-  // @ts-ignore
   const { updateStoredQuestionnaires } = React.useContext(QuestionnaireListContext);
 
   return <button onClick={() => updateStoredQuestionnaires()}>Refresh</button>;

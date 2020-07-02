@@ -6,10 +6,10 @@ export async function getStoredLanguage() {
 }
 
 
-export const getStoredOrPhoneLanguageCode = async function(t) {
+export const getStoredOrPhoneLanguageCode = async function(t: any) {
     return "de";
 };
 
-export const storeLanguage = async function(languageCode) {
+export const storeLanguage = async function(languageCode: string) {
     return;
 };

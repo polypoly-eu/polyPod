@@ -3,8 +3,10 @@ import {useTranslation} from 'react-i18next';
 
 import {getStoredLanguage} from '../screens/language/language-utils';
 
-import {PpQReplacer} from './../questionnaire/PpQSerializer.js';
+import {PpQReplacer} from '../questionnaire/PpQSerializer';
 import PpQuestionnaireLinkResult from '../questionnaire/PpQuestionnaireLinkResult';
+
+import Questionnaire from "../questionnaire/PpQuestionnaire";
 
 import {
   downloadQuestionnaireData,
@@ -18,12 +20,20 @@ import {
   appendQuestionnaireToIndex,
   storeQuestionnaireData,
   storeQuestionnaireResults,
-} from '../context/questionnaire-storage';
+} from './questionnaire-storage';
 import {storeAnswers, loadAnswers} from './answers-storage';
 
-export const QuestionnaireListContext = createContext({});
+export const QuestionnaireListContext = createContext<{
+    triggerUpdate: () => void,
+    saveQuestionnaireAnswers: (questionnaire: Questionnaire) => void,
+    markQuestionaireSubmitted: (questionnaire: Questionnaire) => void,
+    questionaireInitializationStatus: boolean,
+    questionnaireList: any[],
+    setQuestionnaireList: (newList: any[]) => void,
+    updateStoredQuestionnaires: () => Promise<void>
+}>({} as any);
 
-export const QuestionnaireListProvider = ({children}) => {
+export const QuestionnaireListProvider: React.FC = ({children}) => {
   const {i18n} = useTranslation();
 
   // State to indicate when the list of questionnaire is initialized.
@@ -40,17 +50,17 @@ export const QuestionnaireListProvider = ({children}) => {
   /**
    * I save questionnaire on disk without notifying any UI updates
    */
-  const saveQuestionnaireAnswers = questionnaire => {
+  const saveQuestionnaireAnswers = (questionnaire: Questionnaire) => {
     storeAnswers(questionnaire);
   };
 
-  const markQuestionaireSubmitted = questionnaire => {
+  const markQuestionaireSubmitted = (questionnaire: Questionnaire) => {
     questionnaire.updateSubmittedTime();
     saveQuestionnaireAnswers(questionnaire);
     triggerUpdate();
   };
 
-  const buildQuestionnaireObject = questionaireDataJson => {
+  const buildQuestionnaireObject = (questionaireDataJson: string) => {
     const currentQuestionaireData = JSON.parse(
       questionaireDataJson,
       PpQReplacer,
@@ -64,7 +74,7 @@ export const QuestionnaireListProvider = ({children}) => {
     return currentQuestionaire;
   };
 
-  const ensureLanguage = async questionnaire => {
+  const ensureLanguage = async (questionnaire: Questionnaire) => {
     // If after loading a questionnaire the language is not set, use the current language.
     if (questionnaire.question_language === null) {
       const languageCode = await getStoredLanguage();
@@ -72,7 +82,7 @@ export const QuestionnaireListProvider = ({children}) => {
     }
   };
 
-  const downloadAndStoreQuestionnaire = async function(questionaireMetadata) {
+  const downloadAndStoreQuestionnaire = async function(questionaireMetadata: any) {
     const responseContent = await downloadQuestionnaireData(
       questionaireMetadata.questionnaireId,
     );
@@ -108,7 +118,7 @@ export const QuestionnaireListProvider = ({children}) => {
     return newMetadata;
   };
 
-  const updateQuestionnaireResults = async questionnaire => {
+  const updateQuestionnaireResults = async (questionnaire: Questionnaire) => {
     const responseContent = await downloadQuestionnaireResults(
       questionnaire.id,
     );
@@ -152,7 +162,7 @@ export const QuestionnaireListProvider = ({children}) => {
     }
   };
 
-  const loadResults = async questionnaire => {
+  const loadResults = async (questionnaire: Questionnaire) => {
     const questionnaireResultsJson = await loadStoredQuestionnaireResultsJson(
       questionnaire.id,
     );

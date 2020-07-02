@@ -4,7 +4,6 @@ import React from "react";
 
 
 export default function QuestionScreen() {
-    //@ts-ignore
     const {currentQuestion} = useContext(QuestionnaireContext);
 
     if (!currentQuestion) {

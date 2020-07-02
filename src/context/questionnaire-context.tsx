@@ -1,19 +1,34 @@
 import React, {createContext, useState} from 'react';
 
 import Questionnaire from '../questionnaire/PpQuestionnaire';
+import Question from "../questionnaire/PpQuestion";
 
-export const QuestionnaireContext = createContext({});
+export const QuestionnaireContext = createContext<{
+    questionnaireHolder: QuestionnaireHolder,
+    currentQuestion: Question,
+    getQuestionnaire: () => Questionnaire,
+    setQuestionnaire: (newQuestionnaire: Questionnaire) => void,
+    isFirstQuestion: (question: Question) => boolean,
+    isAtFirstQuestion: () => boolean,
+    isLastQuestion: (question: Question) => boolean,
+    isAtLastQuestion: () => boolean,
+    notifyUpdated: () => void,
+    switchToNextQuestion: () => void,
+    switchToPreviousQuestion: () => void,
+    switchToFirstQuestion: () => void,
+    setQuestionnaireAndSwitchToFirstUnansweredQuestion: (questionnaire: Questionnaire) => void
+}>({} as any);
 
 class QuestionnaireHolder {
-  private _questionnaire: any;
-  constructor(questionnaire) {
+  private _questionnaire: Questionnaire;
+  constructor(questionnaire: Questionnaire) {
     this._questionnaire = questionnaire;
   }
 
   copy() {
     return new QuestionnaireHolder(this.questionnaire);
   }
-  copyWith(newQuestionnaire) {
+  copyWith(newQuestionnaire: Questionnaire) {
     return new QuestionnaireHolder(newQuestionnaire);
   }
 
@@ -24,9 +39,9 @@ class QuestionnaireHolder {
 
 const INITIAL_VALUE = new QuestionnaireHolder(new Questionnaire());
 
-export const QuestionnaireProvider = ({children}) => {
+export const QuestionnaireProvider: React.FC = ({children}) => {
   const [questionnaireHolder, setQuestionnaireHolder] = useState(INITIAL_VALUE);
-  const [currentQuestion, setCurrentQuestion] = useState();
+  const [currentQuestion, setCurrentQuestion] = useState<Question | undefined>();
 
   const switchToNextQuestion = () => {
     const nextQuestion = getQuestionnaire().activeQuestionAfter(
@@ -53,7 +68,7 @@ export const QuestionnaireProvider = ({children}) => {
     }
   };
 
-  const setQuestionnaireAndSwitchToFirstUnansweredQuestion = questionnaire => {
+  const setQuestionnaireAndSwitchToFirstUnansweredQuestion = (questionnaire: Questionnaire) => {
     setQuestionnaire(questionnaire);
     const unansweredQuestion = questionnaire.firstUnansweredQuestion();
     if (unansweredQuestion) {
@@ -66,7 +81,7 @@ export const QuestionnaireProvider = ({children}) => {
    */
   const getQuestionnaire = () => questionnaireHolder.questionnaire;
 
-  const setQuestionnaire = newQuestionnaire => {
+  const setQuestionnaire = (newQuestionnaire: Questionnaire) => {
     setQuestionnaireHolder(questionnaireHolder.copyWith(newQuestionnaire));
   };
 
@@ -84,7 +99,7 @@ export const QuestionnaireProvider = ({children}) => {
    * @param question
    * @returns {boolean}
    */
-  const isFirstQuestion = question => {
+  const isFirstQuestion = (question: Question) => {
     return getQuestionnaire().isFirstQuestion(question);
   };
 
@@ -93,7 +108,7 @@ export const QuestionnaireProvider = ({children}) => {
    * @param question
    * @returns {boolean}
    */
-  const isLastQuestion = question => {
+  const isLastQuestion = (question: Question) => {
     return getQuestionnaire().isLastQuestion(question);
   };
 

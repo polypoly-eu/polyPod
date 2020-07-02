@@ -5,7 +5,6 @@ import { QuestionnaireListContext, QuestionnaireListProvider } from '../../conte
 
 
 export default function ActiveSurveys() {
-    //@ts-ignore
     const {questionnaireList} = React.useContext(QuestionnaireListContext);
     const {t} = useTranslation();
 

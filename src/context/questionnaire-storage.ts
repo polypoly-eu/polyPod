@@ -1,11 +1,11 @@
 import AsyncStorage from '../util/async-storage';
 const INDEX_KEY = 'questionaires-index';
 
-function questionnaireDataStorageId(questionnaireId) {
+function questionnaireDataStorageId(questionnaireId: string): string {
   return 'questionnaire-' + questionnaireId + '-data';
 }
 
-function questionnaireResultsStorageId(questionnaireId) {
+function questionnaireResultsStorageId(questionnaireId: string): string {
   return 'questionnaire-' + questionnaireId + '-results-update';
 }
 
@@ -22,7 +22,7 @@ export async function hasQuestionnaires() {
   return questionairesIndex && questionairesIndex.length > 0;
 }
 
-export async function loadQuestionnaireDataJson(questionnaireIndex) {
+export async function loadQuestionnaireDataJson(questionnaireIndex: string) {
   if (!(await hasQuestionnaires())) {
     return null;
   }
@@ -37,29 +37,29 @@ export async function loadQuestionnaireDataJson(questionnaireIndex) {
   return questionnaireDataJson;
 }
 
-export async function appendQuestionnaireToIndex(questionnaireId) {
+export async function appendQuestionnaireToIndex(questionnaireId: string): Promise<void> {
   let questionairesIndex = await loadQuestionnaireIndex();
   questionairesIndex.push(questionnaireId);
   await AsyncStorage.setItem(INDEX_KEY, JSON.stringify(questionairesIndex));
 }
 
 export async function storeQuestionnaireData(
-  questionnaireId,
-  questionnaireDataJson,
-) {
+  questionnaireId: string,
+  questionnaireDataJson: string,
+): Promise<void> {
   await AsyncStorage.setItem(
     questionnaireDataStorageId(questionnaireId),
     questionnaireDataJson,
   );
 }
 
-export async function loadStoredQuestionnaireResultsJson(questionnaireId) {
+export async function loadStoredQuestionnaireResultsJson(questionnaireId: string): Promise<string> {
   return await AsyncStorage.getItem(
     questionnaireResultsStorageId(questionnaireId),
   );
 }
 
-export async function storeQuestionnaireResults(questionnaireId, resultsData) {
+export async function storeQuestionnaireResults(questionnaireId: string, resultsData: any) {
   await AsyncStorage.setItem(
     questionnaireResultsStorageId(questionnaireId),
     JSON.stringify(resultsData),
