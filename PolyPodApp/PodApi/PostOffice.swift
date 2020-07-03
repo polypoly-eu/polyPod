@@ -47,11 +47,11 @@ class PostOffice {
 
         switch api {
         case "polyIn":
-            handlePolyIn(method: method, args: args, completionHandler: { (response, error) in
+            handlePolyIn(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         case "polyOut":
-            handlePolyOut(method: method, args: args, completionHandler: { (response, error) in
+            handlePolyOut(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         default:
@@ -122,7 +122,7 @@ extension PostOffice {
             return
         }
         
-        PodApi.shared.polyIn.selectQuads(matcher: extendedData) { (quads, error) in
+        PodApi.shared.polyIn.selectQuads(matcher: extendedData) { quads, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
                 return
@@ -165,10 +165,13 @@ extension PostOffice {
         
         let fetchRequestInit = FetchRequestInit(with: requestInitData)
         
-        PodApi.shared.polyOut.fetch(urlString: url, requestInit: fetchRequestInit) { fetchResponse in
+        PodApi.shared.polyOut.fetch(urlString: url, requestInit: fetchRequestInit) { fetchResponse, error in
+            if let error = error {
+                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                return
+            }
             guard let fetchResponse = fetchResponse else {
-                // todo: handle error
-                completionHandler(nil, MessagePackValue())
+                completionHandler(nil, MessagePackValue(PolyApiError.unknownError.localizedDescription))
                 return
             }
             
@@ -195,12 +198,17 @@ extension PostOffice {
     private func handlePolyOutReadFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.fileRead(path: path) { (fileContent, error) in
-            if let fileContent = fileContent {
-                completionHandler(.string(fileContent), nil)
-            } else {
-                completionHandler(nil, MessagePackValue())
+        PodApi.shared.polyOut.fileRead(path: path) { fileContent, error in
+            if let error = error {
+                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                return
             }
+            guard let fileContent = fileContent else {
+                completionHandler(nil, MessagePackValue(PolyApiError.unknownError.localizedDescription))
+                return
+            }
+                
+            completionHandler(.string(fileContent), nil)
         }
     }
     
@@ -209,8 +217,8 @@ extension PostOffice {
         let data = args[1] as! String
         
         PodApi.shared.polyOut.fileWrite(path: path, data: data) { error in
-            if error != nil {
-                completionHandler(nil, MessagePackValue())
+            if let error = error {
+                completionHandler(nil, MessagePackValue(error.localizedDescription))
             } else {
                 completionHandler(MessagePackValue(), nil)
             }

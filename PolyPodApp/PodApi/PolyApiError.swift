@@ -10,4 +10,5 @@ enum PolyApiError: Error {
     case unknownError
     case databaseError
     case badSearchQuery
+    case paramterMissing
 }

@@ -20,10 +20,9 @@ class PolyOut {
         fileStoragePath = paths[0]
     }
     
-    func fetch(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?) -> Void) {
+    func fetch(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?, Error?) -> Void) {
         guard let url = URL(string: urlString) else {
-            // todo: handle this
-            completionHandler(nil)
+            completionHandler(nil, PolyApiError.paramterMissing)
             return
         }
         
@@ -47,19 +46,17 @@ class PolyOut {
         
         session.loadData(with: request, completionHandler: { (data, response, error) in
             if let error = error {
-                // todo: handle error
-                completionHandler(nil)
+                completionHandler(nil, error)
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse else {
-                // todo: handle this
-                completionHandler(nil)
+                completionHandler(nil, PolyApiError.unknownError)
                 return
             }
             
             let fetchResponse = FetchResponse(response: httpResponse, data: data)
             
-            completionHandler(fetchResponse)
+            completionHandler(fetchResponse, nil)
         })
     }
     
