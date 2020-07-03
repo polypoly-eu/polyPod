@@ -1,4 +1,5 @@
 import React from "react";
+import FooterNavigation from "../basic/FooterNavigation";
 
 export default function QuestionCard({
                                          index,
@@ -16,8 +17,8 @@ export default function QuestionCard({
             )}
             <AnswerComponent />
             <AcceptComponent />
+            <FooterNavigation />
         </div>
     );
 
-    // TODO footer navigation
 }

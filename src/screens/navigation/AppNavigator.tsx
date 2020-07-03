@@ -16,6 +16,7 @@ import {
 import HomeScreen from "../home/HomeScreen";
 import QuestionScreen from "../questionnaire/QuestionScreen";
 import IntroNavigator from "../intro/IntroNavigator";
+import SurveyCompletedScreen from "../finish/SurveyCompletedScreen";
 
 export default function AppNavigator() {
     const [onboardingShown, setOnboardingShown] = useState(null);
@@ -120,6 +121,9 @@ export default function AppNavigator() {
             </Route>
             <Route exact path="/survey">
               <QuestionScreen />
+            </Route>
+            <Route exact path="/survey-completed">
+              <SurveyCompletedScreen />
             </Route>
           </Switch>
           <footer>

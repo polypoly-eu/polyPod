@@ -9,6 +9,7 @@ export default function PolyRangeButton({
                                             disabled = false,
                                             checked = false,
                                         }) {
+    if (checked) label = label+"*"
     return (
         <PolyIconButton
             icon={<strong>{label}</strong>}
