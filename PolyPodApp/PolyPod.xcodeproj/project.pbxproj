@@ -10,6 +10,7 @@
 		1A00DFF724569F3A0049F3F7 /* pod.html in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF624569F3A0049F3F7 /* pod.html */; };
 		1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF8245961FB0049F3F7 /* messagePort.js */; };
 		1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */; };
+		1A183E9224AF1E860025F6BB /* PolyApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A183E9124AF1E860025F6BB /* PolyApiError.swift */; };
 		1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21C324A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld */; };
 		1A4C21DB24A63DAB006CC1FD /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 1A4C21DA24A63DAB006CC1FD /* Zip */; };
 		1A4C21DE24A63DD4006CC1FD /* Term+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */; };
@@ -86,6 +87,7 @@
 		1A00DFF624569F3A0049F3F7 /* pod.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = pod.html; sourceTree = "<group>"; };
 		1A00DFF8245961FB0049F3F7 /* messagePort.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = messagePort.js; sourceTree = "<group>"; };
 		1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageName.swift; sourceTree = "<group>"; };
+		1A183E9124AF1E860025F6BB /* PolyApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyApiError.swift; sourceTree = "<group>"; };
 		1A4C21C424A5F6A2006CC1FD /* PolyPodModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PolyPodModel.xcdatamodel; sourceTree = "<group>"; };
 		1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Term+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1A4C21DD24A63DD4006CC1FD /* Term+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Term+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */,
 				1AF468DB24349E6B00E51B6D /* PodApi.swift */,
 				1A8F4874247E40C600089217 /* PostOffice.swift */,
+				1A183E9124AF1E860025F6BB /* PolyApiError.swift */,
 			);
 			path = PodApi;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				1A8F488C247E91E000089217 /* Subdata.swift in Sources */,
 				1A4C21F024A63E4C006CC1FD /* BlankNode+CoreDataClass.swift in Sources */,
 				1A57E65624A4C4110043E3AD /* Bubblewrap.swift in Sources */,
+				1A183E9224AF1E860025F6BB /* PolyApiError.swift in Sources */,
 				1A4C21F124A63E4C006CC1FD /* BlankNode+CoreDataProperties.swift in Sources */,
 				1A4C21F324A63E4C006CC1FD /* Quad+CoreDataProperties.swift in Sources */,
 				1A8F4875247E40C600089217 /* PostOffice.swift in Sources */,

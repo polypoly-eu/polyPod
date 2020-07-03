@@ -122,15 +122,20 @@ extension PostOffice {
             return
         }
         
-        PodApi.shared.polyIn.selectQuads(matcher: extendedData) { quads in
+        PodApi.shared.polyIn.selectQuads(matcher: extendedData) { (quads, error) in
+            if let error = error {
+                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                return
+            }
+            
             guard let quads = quads else {
-                completionHandler(nil, MessagePackValue("Bad data"))
+                completionHandler(nil, MessagePackValue(PolyApiError.unknownError.localizedDescription))
                 return
             }
             
             var encodedQuads: [MessagePackValue] = []
             for quad in quads {
-                let encodedQuad = Bubblewrap.encode(extendedData: quad)
+                let encodedQuad = MessagePackValue.extended(2, pack(Bubblewrap.encode(extendedData: quad)))
                 encodedQuads.append(encodedQuad)
             }
             completionHandler(.array(encodedQuads), nil)
