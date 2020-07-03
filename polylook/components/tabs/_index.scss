@@ -1,0 +1,34 @@
+@use '../../colour';
+
+.tabs {
+  margin-bottom: 2rem;
+
+  ul {
+    display: flex;
+    // justify-content: space-around;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  li {
+    flex: 1 1 0;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  a {
+    color: colour.$grey-grey;
+    text-decoration: none;
+    font-size: 2rem;
+
+  }
+
+  .tabs-active {
+    border-bottom: 10px solid colour.$core-black;
+    border-radius: 5px;
+
+    a {
+      color: colour.$core-black;
+    }
+  }
+}

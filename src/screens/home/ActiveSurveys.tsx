@@ -2,7 +2,7 @@ import * as React from "react";
 import { useTranslation } from 'react-i18next';
 import MainSurveyCard from './MainSurveyCard';
 import { QuestionnaireListContext, QuestionnaireListProvider } from '../../context/questionnaire-list-context';
-
+import { Tabs, Tab } from '../../../polylook/components/tabs';
 
 export default function ActiveSurveys() {
     const {questionnaireList} = React.useContext(QuestionnaireListContext);
@@ -13,14 +13,12 @@ export default function ActiveSurveys() {
                                                   //);
 
     // TODO: Adjust the link targets
-    return <main>
-      <nav className="tabs">
-        <ul>
-          <li className="tabs-active"><a href="/">Featured</a></li>
-          <li><a href="/">Übermittelt</a></li>
-          <li><a href="/">Abgelaufen</a></li>
-        </ul>
-      </nav>
+    return <>
+      <Tabs>
+        <Tab active={true}><a href="/">Featured</a></Tab>
+        <Tab><a href="/">Übermittelt</a></Tab>
+        <Tab><a href="/">Abgelaufen</a></Tab>
+      </Tabs>
       {activeQuestionnaire.map(questionnaire => <MainSurveyCard key={questionnaire.id} questionnaire={questionnaire}/>)}
-    </main>
+    </>
   }

@@ -1,0 +1,11 @@
+// Pancake Stack
+// http://1linelayouts.glitch.me
+.layout {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr auto;
+
+  > * {
+    padding: 2rem;
+  }
+}
