@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { QuestionnaireContext } from "../../context/questionnaire-context";
 import React from "react";
 import MultipleChoiceQuestion from "../../components/cards/MultipleChoiceQuestion";
+import TextQuestion from "../../components/cards/TextQuestion";
+import RangeQuestion from "../../components/cards/RangeQuestion";
 
 
 export default function QuestionScreen() {
@@ -13,9 +15,9 @@ export default function QuestionScreen() {
 
 
     const components = {
-        //TextQuestion: TextQuestion,
+        TextQuestion: TextQuestion,
         MultipleChoiceQuestion: MultipleChoiceQuestion,
-        //RangeQuestion: RangeQuestion,
+        RangeQuestion: RangeQuestion,
     };
 
     const Card = components[currentQuestion.screen()];

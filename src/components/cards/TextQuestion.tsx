@@ -3,12 +3,12 @@ import { QuestionnaireContext } from "../../context/questionnaire-context";
 import { QuestionnaireListContext } from "../../context/questionnaire-list-context";
 import QuestionCard from "./QuestionCard";
 import React from "react";
-import PolyCheckboxGroup from "../basic/PolyCheckboxGroup";
 import NextButton from "../buttons/NextButton";
+import PolyTextInput from "../basic/PolyTextInput";
 
-export default function MultipleChoiceQuestion({index, question}) {
+export default function TextQuestion({index, question}) {
     const {getQuestionnaire} = useContext(QuestionnaireContext);
-    const {saveQuestionnaireAnswers} = useContext(
+    const {saveQuestionnaireAnswers, triggerUpdate} = useContext(
         QuestionnaireListContext,
     );
 
@@ -18,19 +18,17 @@ export default function MultipleChoiceQuestion({index, question}) {
             question={question.description()}
             instruction={question.explanation()}
             AnswerComponent={() => (
-                <PolyCheckboxGroup
-                    detoxindex={index}
-                    options={question.choices()}
-                    label={choice => choice.value()}
-                    value={choice => choice.id}
-                    checked={choice => choice.isSelected()}
-                    disabled={choice => !choice.enabled}
-                    onChecked={checkbox => {
-                        checkbox.item.selected(checkbox.checked);
+                <PolyTextInput
+                    initialText={question.answer()}
+                    maxLength={question.maxLength}
+                    multiline={question.multiline}
+                    numberOfLines={question.numberOfLines}
+                    oneWord={question.oneWordValidation}
+                    onChangeText={text => {
+                        question.setAnswer(text);
                         saveQuestionnaireAnswers(getQuestionnaire());
-                        // notifyUpdated() is required to re-render the UI and checkbox states
-
-                        // triggerUpdate();
+                        // we should not notifyUpdated() here,
+                        // otherwise the component will be re-rendered and keyboard will hide
                     }}
                 />
             )}

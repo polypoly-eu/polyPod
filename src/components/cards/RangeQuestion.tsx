@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { QuestionnaireContext } from "../../context/questionnaire-context";
 import { QuestionnaireListContext } from "../../context/questionnaire-list-context";
-import QuestionCard from "./QuestionCard";
 import React from "react";
-import PolyCheckboxGroup from "../basic/PolyCheckboxGroup";
+import QuestionCard from "./QuestionCard";
 import NextButton from "../buttons/NextButton";
+import PolyRange from "../basic/PolyRange";
 
-export default function MultipleChoiceQuestion({index, question}) {
+export default function RangeQuestion({index, question}) {
     const {getQuestionnaire} = useContext(QuestionnaireContext);
-    const {saveQuestionnaireAnswers} = useContext(
+    const {saveQuestionnaireAnswers, triggerUpdate} = useContext(
         QuestionnaireListContext,
     );
 
@@ -18,19 +18,17 @@ export default function MultipleChoiceQuestion({index, question}) {
             question={question.description()}
             instruction={question.explanation()}
             AnswerComponent={() => (
-                <PolyCheckboxGroup
-                    detoxindex={index}
-                    options={question.choices()}
-                    label={choice => choice.value()}
-                    value={choice => choice.id}
-                    checked={choice => choice.isSelected()}
-                    disabled={choice => !choice.enabled}
+                <PolyRange
+                    options={question.values()}
+                    checked={option => option === question.value()}
+                    limits={question.labels}
                     onChecked={checkbox => {
-                        checkbox.item.selected(checkbox.checked);
+                        if (checkbox.checked) {
+                            question.setValue(checkbox.item);
+                        } else {
+                            question.setValue(null);
+                        }
                         saveQuestionnaireAnswers(getQuestionnaire());
-                        // notifyUpdated() is required to re-render the UI and checkbox states
-
-                        // triggerUpdate();
                     }}
                 />
             )}

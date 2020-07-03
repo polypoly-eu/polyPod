@@ -1,34 +1,17 @@
 import { useState } from "react";
 import React from "react";
 import PolyCheckbox from "./PolyCheckbox";
+import { compareMaps } from "../../util/compare-maps";
 
 const indices = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-function compareMaps(map1, map2) {
-    let testVal;
-    if (map1.size !== map2.size) {
-        return false;
-    }
-    for (const [key, val] of map1) {
-        testVal = map2.get(key);
-        // in cases of an undefined value, make sure the key
-        // actually exists on the object so there are no false positives
-        if (testVal !== val || (testVal === undefined && !map2.has(key))) {
-            return false;
-        }
-    }
-    return true;
-}
-
 export default function PolyCheckboxGroup(props: any = {}) {
     const {
-        detoxindex = 0,
         options = [],
         label = (_item, _index) => _item,
         value = (_item, _index) => _item,
         checked = (_item, _index) => false,
         disabled = (_item, _index) => false,
-        spacing = 16,
         onChecked = () => {},
     } = props;
 
@@ -71,7 +54,6 @@ export default function PolyCheckboxGroup(props: any = {}) {
                 <div key={index.toString()}>
                     <PolyCheckbox
                         index={index}
-                        detoxindex={detoxindex}
                         indexExtractor={
                             options.length > indices.length
                                 ? () => null

@@ -4,7 +4,6 @@ export default function PolyCheckbox(props: any = {}) {
     const {
         item = undefined,
         index = 1,
-        detoxindex = 1,
         indexExtractor = _index => _index,
 
         label = 'Checkbox',
