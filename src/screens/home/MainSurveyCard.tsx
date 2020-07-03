@@ -22,7 +22,7 @@ export default function MainSurveyCard(
         </p>
       </main>
       <footer>
-        <StartSurveyButton questionnaire = {questionnaire} />
+        <StartSurveyButton questionnaire = {questionnaire} route = "/intro" />
       </footer>
     </section>;
 }

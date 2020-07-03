@@ -5,13 +5,15 @@ import React from "react";
 import Questionnaire from "../../questionnaire/PpQuestionnaire";
 
 export default function StartSurveyButton(
-    { questionnaire }: { questionnaire : Questionnaire }
+    { questionnaire, route }: { questionnaire : Questionnaire, route : string }
 ) {
     const {setQuestionnaireAndSwitchToFirstUnansweredQuestion} = useContext(
         QuestionnaireContext
     );
     return (
-        <Link className="button" onClick={() => setQuestionnaireAndSwitchToFirstUnansweredQuestion(questionnaire)} to="/survey">
+        <Link className="button"
+        onClick={() => setQuestionnaireAndSwitchToFirstUnansweredQuestion(questionnaire)}
+        to={route}>
             Start
         </Link>
     )

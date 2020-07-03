@@ -15,6 +15,7 @@ import {
   } from "react-router-dom";
 import HomeScreen from "../home/HomeScreen";
 import QuestionScreen from "../questionnaire/QuestionScreen";
+import IntroNavigator from "../intro/IntroNavigator";
 
 export default function AppNavigator() {
     const [onboardingShown, setOnboardingShown] = useState(null);
@@ -113,6 +114,9 @@ export default function AppNavigator() {
           <Switch>
             <Route exact path="/">
               <HomeScreen />
+            </Route>
+            <Route exact path="/intro">
+              <IntroNavigator />
             </Route>
             <Route exact path="/survey">
               <QuestionScreen />
