@@ -28,6 +28,7 @@
     "@polypoly-eu/feature-bootstrap": "0.0.1",
     "@polypoly-eu/poly-look": "0.0.3",
     "d3": "^5.15.0",
+    "faucet-pipeline-sass": "^1.4.0",
     "i18next": "^19.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

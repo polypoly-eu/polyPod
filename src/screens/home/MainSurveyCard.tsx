@@ -10,9 +10,19 @@ export default function MainSurveyCard(
     const {t, i18n} = useTranslation();
 
     const title = t(questionnaire.title);
-    return <>
-      <h1>{title}</h1>
-      <em>{questionnaire.submissionDeadlineString(i18n.language)}</em>
-      <StartSurveyButton questionnaire = {questionnaire} />
-    </>;
+    return <section className="card">
+      <header>
+        <h1 className="card-title">{title}</h1>
+      </header>
+      <main>
+        <p className="card-content">
+          Der Einsendeschluss ist am
+          <br/>
+          <strong>{questionnaire.submissionDeadlineString(i18n.language)}</strong>
+        </p>
+      </main>
+      <footer>
+        <StartSurveyButton questionnaire = {questionnaire} />
+      </footer>
+    </section>;
 }

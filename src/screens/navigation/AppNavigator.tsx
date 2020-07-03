@@ -101,22 +101,26 @@ export default function AppNavigator() {
     }
     return (
         <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-            </ul>
-            <hr />
-            <Switch>
-              <Route exact path="/">
-                <HomeScreen />
-              </Route>
-              <Route exact path="/survey">
-                <QuestionScreen />
-              </Route>
-            </Switch>
-          </div>
+          <header>
+            <div/>
+            <h1 className="page-title">
+              <Link to="/">polyPod</Link>
+            </h1>
+            <div>
+              <img src="/icons/settings.svg" width="60" height="60"/>
+            </div>
+          </header>
+          <Switch>
+            <Route exact path="/">
+              <HomeScreen />
+            </Route>
+            <Route exact path="/survey">
+              <QuestionScreen />
+            </Route>
+          </Switch>
+          <footer>
+            <button>Prüfe auf neue Umfragen</button>
+          </footer>
         </Router>
       );
 }

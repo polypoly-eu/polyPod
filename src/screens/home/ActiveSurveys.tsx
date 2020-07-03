@@ -12,7 +12,15 @@ export default function ActiveSurveys() {
                                                    //questionnaire.isActive(),
                                                   //);
 
-    return <ul>
-      {activeQuestionnaire.map(questionnaire => <li key={questionnaire.id}><MainSurveyCard questionnaire={questionnaire}/></li>)}
-    </ul>
+    // TODO: Adjust the link targets
+    return <main>
+      <nav className="tabs">
+        <ul>
+          <li className="tabs-active"><a href="/">Featured</a></li>
+          <li><a href="/">Übermittelt</a></li>
+          <li><a href="/">Abgelaufen</a></li>
+        </ul>
+      </nav>
+      {activeQuestionnaire.map(questionnaire => <MainSurveyCard key={questionnaire.id} questionnaire={questionnaire}/>)}
+    </main>
   }

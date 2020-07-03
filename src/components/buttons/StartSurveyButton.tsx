@@ -11,8 +11,8 @@ export default function StartSurveyButton(
         QuestionnaireContext
     );
     return (
-        <Link onClick={() => setQuestionnaireAndSwitchToFirstUnansweredQuestion(questionnaire)} to="/survey">
-            Start Survey
+        <Link className="button" onClick={() => setQuestionnaireAndSwitchToFirstUnansweredQuestion(questionnaire)} to="/survey">
+            Start
         </Link>
     )
 }

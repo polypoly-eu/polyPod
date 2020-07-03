@@ -1,0 +1,120 @@
+@use 'reboot';
+@use 'colour';
+
+@font-face {
+  font-family: "Rubik";
+  src: url("/fonts/Rubik-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Rubik";
+  font-weight: bold;
+  src: url("/fonts/Rubik-Bold.woff2") format("woff2");
+}
+
+.feature {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr auto;
+  background-color: colour.$core-offwhite;
+  color: colour.$core-black;
+
+  > * {
+    padding: 2rem;
+  }
+
+  > header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding-bottom: 3rem;
+  }
+
+  > footer {
+    display: flex;
+    background: white;
+    justify-content: center;
+  }
+}
+
+.page-title,
+.page-title a {
+  text-decoration: none;
+  color: #4a5568; // this is apparently a custom colour
+}
+
+button,
+a.button {
+  font-size: 2rem;
+  background: transparent;
+  flex-grow: 1;
+  border: 8px solid black;
+  border-radius: 3px;
+  padding: 1rem 3rem;
+  text-decoration: none;
+  display: inline-block;
+  color: colour.$core-black;
+  text-align: center;
+}
+
+.tabs {
+  margin-bottom: 2rem;
+
+  ul {
+    display: flex;
+    // justify-content: space-around;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  li {
+    flex: 1 1 0;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  a {
+    color: colour.$grey-grey;
+    text-decoration: none;
+    font-size: 2rem;
+
+  }
+
+  .tabs-active {
+    border-bottom: 10px solid colour.$core-black;
+    border-radius: 5px;
+
+    a {
+      color: colour.$core-black;
+    }
+  }
+}
+
+.card {
+  background: url("/icons/onboarding.png") colour.$core-nude no-repeat center center;
+  background-size: cover;
+  height: 850px;
+  border-radius: 25px;
+  padding: 2rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  > * {
+    width: 400px;
+  }
+
+  > header {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+  }
+
+  > main {
+    font-size: 1.6rem;
+  }
+
+  button,
+  .button {
+    background-color: colour.$core-black;
+    color: colour.$core-nude;
+  }
+}

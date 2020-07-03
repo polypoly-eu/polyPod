@@ -1,0 +1,137 @@
+// This reboot follows the old tradition of rebooting
+// Following the path of Normalize and Bootstrap
+// We have always done it like this.
+@use 'colour';
+
+// Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  // Remove the margin in all browsers.
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  font-size: 140%;
+  // font-family: $font-family-base;
+  // @include font-size($font-size-base);
+  // font-weight: $font-weight-base;
+  // line-height: $line-height-base;
+  // color: $body-color;
+  // text-align: $body-text-align;
+  // Prevent adjustments of font size after orientation changes in iOS.
+  -webkit-text-size-adjust: 100%; // 3
+  // Change the default tap highlight to be completely transparent in iOS.
+  -webkit-tap-highlight-color: rgba(colour.$core-black, 0); // 4
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  // margin-bottom: $headings-margin-bottom;
+  // font-family: $headings-font-family;
+  // font-style: $headings-font-style;
+  // font-weight: $headings-font-weight;
+  // line-height: $headings-line-height;
+  // color: $headings-color;
+}
+
+p {
+  margin-top: 0;
+  // margin-bottom: $paragraph-margin-bottom;
+}
+
+// Lists
+
+ol,
+ul {
+  padding-left: 2rem;
+}
+
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
+
+blockquote {
+  margin: 0 0 1rem;
+}
+
+strong {
+  // Add the correct font weight in Chrome, Edge, and Safari
+  // font-weight: $font-weight-bolder;
+}
+
+
+
+small {
+  // Add the correct font size in all browsers
+  // @include font-size($small-font-size);
+}
+
+
+// Mark
+mark {
+  // padding: $mark-padding;
+  // background-color: $mark-bg;
+}
+
+// Links
+// a {
+//   color: $link-color;
+//   text-decoration: $link-decoration;
+
+//   &:hover {
+//     color: $link-hover-color;
+//     text-decoration: $link-hover-decoration;
+//   }
+// }
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+button {
+  // Remove the default `border-radius` that macOS Chrome adds.
+  border-radius: 0;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  // Remove the margin in Firefox and Safari
+  margin: 0;
+  font-family: inherit;
+  // @include font-size(inherit);
+  line-height: inherit;
+}
+
+button,
+input {
+  // Show the overflow in Edge
+  overflow: visible;
+}
+
+button,
+select {
+  // Remove the inheritance of text transform in Firefox
+  text-transform: none;
+}
