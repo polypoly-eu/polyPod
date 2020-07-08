@@ -63,7 +63,7 @@
     "jest": "^25.5.4",
     "memfs": "^3.2.0",
     "node-fetch": "^2.6.0",
-    "rollup": "^2.20.0",
+    "rollup": "^2.21.0",
     "ts-jest": "^25.5.1",
     "typedoc": "^0.17.8",
     "typescript": "^3.9.6"
