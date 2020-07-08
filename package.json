@@ -36,7 +36,7 @@
   },
   "peerDependencies": {
     "body-parser": "^1.19.0",
-    "fp-ts": "^2.6.7",
+    "fp-ts": "^2.7.0",
     "io-ts": "2.2.7"
   },
   "devDependencies": {
@@ -58,7 +58,7 @@
     "connect": "^3.7.0",
     "eslint": "^6.8.0",
     "fast-check": "^1.25.1",
-    "fp-ts": "^2.6.7",
+    "fp-ts": "^2.7.0",
     "io-ts": "2.2.7",
     "jest": "^25.5.4",
     "memfs": "^3.2.0",
