@@ -58,7 +58,7 @@
     "@polypoly-eu/podigree": "^0.2.1",
     "@rdfjs/dataset": "^1.0.1",
     "@types/puppeteer": "^3.0.1",
-    "@types/node": "^14.0.19",
+    "@types/node": "^14.0.22",
     "body-parser": "^1.19.0",
     "connect": "^3.7.0",
     "exposed-promises": "^1.0.0",
