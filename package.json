@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.1",
-    "@rollup/plugin-node-resolve": "^8.1.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@rollup/plugin-typescript": "^5.0.2",
     "@types/chai": "^4.2.11",
