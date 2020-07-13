@@ -1,3 +1,3 @@
 export * from "./validation";
-export * from "./remote/index";
+export * from "./remote";
 export * from "./tracing";

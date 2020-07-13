@@ -19,6 +19,7 @@ This repository is structured as a TypeScript library with the following impleme
 
 | Module       | Implementation name | Purpose                                                                 |
 | ------------ | ------------------- | ----------------------------------------------------------------------- |
+| `tracing`    | `TracingPod`        | intercepts all side-effecting calls                                     |
 | `validation` | `ValidatingPod`     | validates all arguments for each side-effecting call                    |
 | `remote`     | `RemoteClientPod`   | access a remote Pod on a client port                                    |
 | `remote`     | `RemoteServerPod`   | (helper to register a Pod on a server port)                             |

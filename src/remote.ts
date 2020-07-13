@@ -1,10 +1,106 @@
-import {RequestInit, Response, Pod, PolyIn, PolyOut, EncodingOptions, Stats} from "@polypoly-eu/poly-api";
-import {DataFactory} from "rdf-js";
-import {endpointClient, ClientOf, ServerOf, EndpointRequest, EndpointResponse, endpointServer} from "@polypoly-eu/postoffice";
-import {FetchResponse, FileStats, PodEndpoint, PolyInEndpoint, PolyOutEndpoint} from "./endpoints";
-import {ResponsePort, liftServer, server, bubblewrapFetchPort, RequestPort, client, Port, liftClient} from "@polypoly-eu/port-authority";
-import {podBubblewrap, dataFactory, bubblewrapPort} from "./bubblewrap";
+import {RequestInit, Response, Pod, PolyIn, PolyOut, EncodingOptions, Stats, Matcher} from "@polypoly-eu/poly-api";
+import {DataFactory, Quad} from "rdf-js";
+import {endpointClient, ClientOf, ServerOf, EndpointRequest, EndpointResponse, endpointServer, ObjectEndpointSpec, ValueEndpointSpec} from "@polypoly-eu/postoffice";
+import {ResponsePort, liftServer, server, bubblewrapFetchPort, RequestPort, client, Port, liftClient, mapPort} from "@polypoly-eu/port-authority";
 import {RequestListener} from "http";
+import * as RDF from "@polypoly-eu/rdf";
+import {Bubblewrap, Classes} from "@polypoly-eu/bubblewrap";
+
+type PolyInEndpoint = ObjectEndpointSpec<{
+    select(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
+    add(...quads: Quad[]): ValueEndpointSpec<void>;
+}>;
+
+type PolyOutEndpoint = ObjectEndpointSpec<{
+    readdir(path: string): ValueEndpointSpec<string[]>;
+    readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
+    writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
+    stat(path: string): ValueEndpointSpec<Stats>;
+    fetch(input: string, init: RequestInit): ValueEndpointSpec<Response>;
+}>;
+
+type PodEndpoint = ObjectEndpointSpec<{
+    polyIn(): PolyInEndpoint;
+    polyOut(): PolyOutEndpoint;
+}>;
+
+class FetchResponse implements Response {
+
+    readonly ok: boolean;
+    readonly redirected: boolean;
+    readonly status: number;
+    readonly statusText: string;
+    readonly type: ResponseType;
+    readonly url: string;
+
+    static async of(response: Response): Promise<FetchResponse> {
+        return new FetchResponse(
+            response,
+            await response.text()
+        );
+    }
+
+    constructor(
+        response: Response,
+        private readonly bufferedText: string
+    ) {
+        this.ok = response.ok;
+        this.redirected = response.redirected;
+        this.status = response.status;
+        this.statusText = response.statusText;
+        this.type = response.type;
+        this.url = response.url;
+    }
+
+    async json(): Promise<any> {
+        // JSON parse error must be asynchronous (i.e. rejected promise)
+        return JSON.parse(this.bufferedText);
+    }
+
+    text(): Promise<string> {
+        return Promise.resolve(this.bufferedText);
+    }
+
+}
+
+class FileStats implements Stats {
+
+    static of(stats: Stats): FileStats {
+        return new FileStats(
+            stats.isFile(),
+            stats.isDirectory()
+        );
+    }
+
+    constructor(
+        readonly file: boolean,
+        readonly directory: boolean
+    ) {}
+
+    isFile(): boolean { return this.file; }
+    isDirectory(): boolean { return this.directory; }
+
+}
+
+export const podBubblewrapClasses: Classes = {
+    "@polypoly-eu/podigree.FetchResponse": FetchResponse,
+    "@polypoly-eu/podigree.FileStats": FileStats,
+    "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
+    "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
+    "@polypoly-eu/rdf.Literal": RDF.Literal,
+    "@polypoly-eu/rdf.Variable": RDF.Variable,
+    "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph,
+    "@polypoly-eu/rdf.Quad": RDF.Quad
+};
+
+function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<any, any> {
+    const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
+    return mapPort(
+        rawPort,
+        buf => podBubblewrap.decode(buf),
+        data => podBubblewrap.encode(data)
+    );
+}
 
 export class RemoteClientPod implements Pod {
 
@@ -13,20 +109,20 @@ export class RemoteClientPod implements Pod {
     static fromFetch(url: string, fetch: typeof window.fetch = window.fetch): RemoteClientPod {
         const port = bubblewrapFetchPort(
             url,
-            podBubblewrap,
+            Bubblewrap.create(podBubblewrapClasses),
             fetch
         );
 
-        return new RemoteClientPod(port, dataFactory);
+        return new RemoteClientPod(port);
     }
 
     static fromRawPort(rawPort: Port<Uint8Array, Uint8Array>): RemoteClientPod {
-        return new RemoteClientPod(liftClient(bubblewrapPort(rawPort)), dataFactory);
+        return new RemoteClientPod(liftClient(bubblewrapPort(rawPort)));
     }
 
     constructor(
         private clientPort: RequestPort<EndpointRequest, EndpointResponse>,
-        public readonly dataFactory: DataFactory
+        public readonly dataFactory: DataFactory = RDF.dataFactory
     ) {
         this.rpcClient = endpointClient<PodEndpoint>(client(clientPort));
     }
@@ -89,7 +185,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
     async listenOnMiddleware(): Promise<RequestListener> {
         const {bubblewrapMiddlewarePort} = await import("@polypoly-eu/port-authority/dist/node");
         const [middleware, port] = bubblewrapMiddlewarePort(
-            podBubblewrap,
+            Bubblewrap.create(podBubblewrapClasses),
             { limit: "10mb" }
         );
         this.listen(port);
