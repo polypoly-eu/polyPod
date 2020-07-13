@@ -10,7 +10,7 @@ This repository defines the interfaces that the Pod and the Features use to comm
 There are two sides: the Pod needs to bootstrap and initialize the Feature, and the Feature needs to request data from or store data in the Pod.
 As far as possible, we try to stick to standardized APIs, for example [RDFJS](http://rdf.js.org/).
 
-Features are vanilla web applications, that is, they comprise a HTML document that may reference scripts and other types of assets such as stylesheets and images.
+Features are vanilla web applications, that is, they comprise an HTML document that may reference scripts and other types of assets such as stylesheets and images.
 The JavaScript code may access to the browser DOM via standard means (e.g. the `document` global variable).
 In other words, the Feature may assume it is running within a standard browser.
 
@@ -37,11 +37,12 @@ Secondly, it queries the Pod for all stored triples and renders them as an HTML 
 
         <script>
             window.addEventListener("podReady", async () => {
-                const {polyIn} = window.pod;
-                const quad = polyIn.factory.triple(
-                    polyIn.factory.namedNode("http://example.org/s"),
-                    polyIn.factory.namedNode("http://example.org/p"),
-                    polyIn.factory.namedNode("http://example.org/o")
+                // API is also attached to the event
+                const {dataFactory} = window.pod;
+                const quad = dataFactory.quad(
+                    dataFactory.namedNode("http://example.org/s"),
+                    dataFactory.namedNode("http://example.org/p"),
+                    dataFactory.namedNode("http://example.org/o")
                 );
                 await pod.polyIn.add(quad);
                 const selected = await pod.polyIn.select({});
@@ -66,6 +67,9 @@ Secondly, it queries the Pod for all stored triples and renders them as an HTML 
 This repository is structured as a TypeScript library with the following modules:
 
 * `api` contains type definitions, describing the shape of the interfaces
+    * `fs` defines the filesystem operations
+    * `fetch` defines the [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)-compatible API for HTTP requests
+* `feature` contains additional type definitions for the DOM that Features can expect
 * `default` provides a minimal reference implementation (excluding the DOM interface)
 * `specs/api` is a conformance test for API implementations (excluding the DOM interface)
 

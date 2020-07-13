@@ -129,7 +129,7 @@ export interface Pod {
      *
      * Example:
      * ```
-     * const quad = factory.triple(
+     * const quad = factory.quad(
      *   factory.namedNode("http://example.org/s"),
      *   factory.namedNode("http://example.org/p"),
      *   factory.namedNode("http://example.org/o")
