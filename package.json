@@ -56,6 +56,6 @@
   "dependencies": {
     "@types/rdf-js": "^3.0.2",
     "chai": "^4.2.0",
-    "fast-check": "^1.25.1"
+    "fast-check": "^1.26.0"
   }
 }
