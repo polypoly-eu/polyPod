@@ -11,7 +11,7 @@ import * as RDF from "rdf-js";
 import {dataFactory} from "@polypoly-eu/rdf";
 import {Pod, PolyIn, PolyOut} from "./api";
 import {Fetch, Response, RequestInit} from "./fetch";
-import {EncodingOptions, FS} from "./fs";
+import {EncodingOptions, FS, Stats} from "./fs";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -83,8 +83,8 @@ export class DefaultPod implements Pod {
                 return fs.readdir(path);
             }
 
-            async stat(path: string): Promise<void> {
-                await fs.stat(path);
+            stat(path: string): Promise<Stats> {
+                return fs.stat(path);
             }
 
             writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {

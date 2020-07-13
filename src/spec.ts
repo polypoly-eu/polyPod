@@ -108,7 +108,6 @@ export class PodSpec {
                 async function skipIfExists(path: string): Promise<void> {
                     let cont = true;
                     try {
-                        // don't overwrite existing files
                         await polyOut.stat(path);
                         cont = false;
                     }
@@ -134,6 +133,28 @@ export class PodSpec {
                         await skipIfExists(path);
 
                         await assert.isRejected(polyOut.readFile(path, { encoding: "utf-8" }));
+                    }));
+                });
+
+                it("stat (root)", async () => {
+                    const stat = await polyOut.stat(this.path);
+                    assert.ok(stat.isDirectory());
+                    assert.notOk(stat.isFile());
+                });
+
+                it("stat (files)", async () => {
+                    await fc.assert(fc.asyncProperty(pathGen, async path => {
+                        let assertion: () => void;
+                        try {
+                            const stat = await polyOut.stat(path);
+                            assertion = () => assert.notEqual(stat.isFile(), stat.isDirectory());
+                        }
+                        catch {
+                            assertion = () => {
+                                // intentionally left blank
+                            };
+                        }
+                        assertion();
                     }));
                 });
 

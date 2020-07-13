@@ -11,6 +11,11 @@ export interface EncodingOptions {
     encoding: BufferEncoding;
 }
 
+export interface Stats {
+    isFile(): boolean;
+    isDirectory(): boolean;
+}
+
 /**
  * A stripped-down version of the Promise-based filesystem API from Node.js.
  *
@@ -20,6 +25,6 @@ export interface FS {
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): Promise<void>;
-    stat(path: string): Promise<void>;
+    stat(path: string): Promise<Stats>;
     readdir(path: string): Promise<string[]>;
 }
