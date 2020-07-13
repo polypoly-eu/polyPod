@@ -1,4 +1,4 @@
-import {Matcher, Pod, PolyIn, PolyOut, Response, RequestInit, EncodingOptions} from "@polypoly-eu/poly-api";
+import {Matcher, Pod, PolyIn, PolyOut, Response, RequestInit, EncodingOptions, Stats} from "@polypoly-eu/poly-api";
 import {Term, Quad, Quad_Subject, Quad_Predicate, Quad_Object, Quad_Graph} from "rdf-js";
 import {DataFactory, Model} from "@polypoly-eu/rdf";
 import {convert} from "@polypoly-eu/rdf-spec";
@@ -237,7 +237,7 @@ export class ValidatingPod implements Pod {
                 return polyOut.writeFile(validatedPath, validatedContents, validatedOptions);
             }
 
-            async stat(path?: unknown): Promise<void> {
+            async stat(path?: unknown): Promise<Stats> {
                 const decoders = await pod._decoders;
 
                 const validatedPath = decoders.expect(path, "Path must be a string", decoders.string);

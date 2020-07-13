@@ -1,5 +1,5 @@
 import {ObjectEndpointSpec, ValueEndpointSpec} from "@polypoly-eu/postoffice";
-import {Matcher, Response, RequestInit, EncodingOptions} from "@polypoly-eu/poly-api";
+import {Matcher, Response, RequestInit, EncodingOptions, Stats} from "@polypoly-eu/poly-api";
 import {Quad} from "rdf-js";
 import * as RDF from "@polypoly-eu/rdf";
 import {Classes} from "@polypoly-eu/bubblewrap";
@@ -13,7 +13,7 @@ export type PolyOutEndpoint = ObjectEndpointSpec<{
     readdir(path: string): ValueEndpointSpec<string[]>;
     readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
-    stat(path: string): ValueEndpointSpec<void>;
+    stat(path: string): ValueEndpointSpec<Stats>;
     fetch(input: string, init: RequestInit): ValueEndpointSpec<Response>;
 }>;
 
@@ -61,8 +61,28 @@ export class FetchResponse implements Response {
 
 }
 
+export class FileStats implements Stats {
+
+    static of(stats: Stats): FileStats {
+        return new FileStats(
+            stats.isFile(),
+            stats.isDirectory()
+        );
+    }
+
+    constructor(
+        readonly file: boolean,
+        readonly directory: boolean
+    ) {}
+
+    isFile(): boolean { return this.file; }
+    isDirectory(): boolean { return this.directory; }
+
+}
+
 export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/podigree.FetchResponse": FetchResponse,
+    "@polypoly-eu/podigree.FileStats": FileStats,
     "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
     "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
     "@polypoly-eu/rdf.Literal": RDF.Literal,

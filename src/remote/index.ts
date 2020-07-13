@@ -1,7 +1,7 @@
-import {RequestInit, Response, Pod, PolyIn, PolyOut, EncodingOptions} from "@polypoly-eu/poly-api";
+import {RequestInit, Response, Pod, PolyIn, PolyOut, EncodingOptions, Stats} from "@polypoly-eu/poly-api";
 import {DataFactory} from "rdf-js";
 import {endpointClient, ClientOf, ServerOf, EndpointRequest, EndpointResponse, endpointServer} from "@polypoly-eu/postoffice";
-import {FetchResponse, PodEndpoint, PolyInEndpoint, PolyOutEndpoint} from "./endpoints";
+import {FetchResponse, FileStats, PodEndpoint, PolyInEndpoint, PolyOutEndpoint} from "./endpoints";
 import {ResponsePort, liftServer, server, bubblewrapFetchPort, RequestPort, client, Port, liftClient} from "@polypoly-eu/port-authority";
 import {podBubblewrap, dataFactory, bubblewrapPort} from "./bubblewrap";
 import {RequestListener} from "http";
@@ -59,7 +59,7 @@ export class RemoteClientPod implements Pod {
                 return rpcClient.polyOut().readdir(path)();
             }
 
-            stat(path: string): Promise<void> {
+            stat(path: string): Promise<Stats> {
                 return rpcClient.polyOut().stat(path)();
             }
 
@@ -114,7 +114,10 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
                     return polyOut.readFile(path, options);
             },
             readdir: path => polyOut.readdir(path),
-            stat: path => polyOut.stat(path),
+            stat: async path => {
+                const stats = await polyOut.stat(path);
+                return FileStats.of(stats);
+            },
             writeFile: (path, content, options) => polyOut.writeFile(path, content, options)
         };
     }

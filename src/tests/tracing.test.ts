@@ -76,7 +76,7 @@ describe("Tracing pod", () => {
             polyOutInterceptor
         );
 
-        await expect(pod.polyOut.stat("/")).resolves.toEqual(undefined);
+        await expect(pod.polyOut.stat("/")).resolves.toBeDefined();
         await expect(pod.polyIn.select({})).resolves.toEqual([]);
         await expect(pod.polyOut.fetch("http://evil.com")).rejects.toThrowError("rejected");
     });
