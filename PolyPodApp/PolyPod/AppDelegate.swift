@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FeaturesWallet.shared.cleanFeatures()
         FeaturesWallet.shared.importFeatures()
         
+        let managedContext = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
+        let count = try! managedContext.count(for: fetchRequest)
+        print("Number of quads in Core Data:", count)
+        
         return true
     }
 

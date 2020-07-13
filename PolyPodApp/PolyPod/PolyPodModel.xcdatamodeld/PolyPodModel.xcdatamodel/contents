@@ -19,12 +19,12 @@
     </entity>
     <entity name="Variable" representedClassName=".Variable" parentEntity="Term" syncable="YES"/>
     <elements>
+        <element name="BlankNode" positionX="-262.6953125" positionY="54.25390625" width="128" height="43"/>
+        <element name="DefaultGraph" positionX="82.1953125" positionY="55.66015625" width="128" height="43"/>
+        <element name="Literal" positionX="-408.89453125" positionY="54.0625" width="128" height="73"/>
+        <element name="NamedNode" positionX="-576.578125" positionY="55.5859375" width="128" height="43"/>
         <element name="Quad" positionX="80.796875" positionY="-140.37890625" width="128" height="103"/>
         <element name="Term" positionX="-371.05078125" positionY="-102.140625" width="128" height="73"/>
-        <element name="NamedNode" positionX="-576.578125" positionY="55.5859375" width="128" height="43"/>
-        <element name="BlankNode" positionX="-262.6953125" positionY="54.25390625" width="128" height="43"/>
-        <element name="Literal" positionX="-408.89453125" positionY="54.0625" width="128" height="73"/>
         <element name="Variable" positionX="-97.15234375" positionY="54.35546875" width="128" height="43"/>
-        <element name="DefaultGraph" positionX="82.1953125" positionY="55.66015625" width="128" height="43"/>
     </elements>
 </model>

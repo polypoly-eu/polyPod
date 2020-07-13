@@ -78,9 +78,7 @@ extension FeatureViewController: WKScriptMessageHandler {
             DispatchQueue.main.async { [weak self] in
                 let javascriptCommand = "port1.postMessage(\(responseData));"
                 self?.webView.evaluateJavaScript(javascriptCommand, completionHandler: { result, error in
-                    if error == nil {
-                        print("JavaScript execution successful")
-                    } else {
+                    if error != nil {
                         print("Received an error from JavaScript: \(error!)")
                     }
                 })

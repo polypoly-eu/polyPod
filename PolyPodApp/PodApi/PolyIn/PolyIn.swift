@@ -40,22 +40,17 @@ class PolyIn {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         
+        let (predicate, filterOperation) = quadsPredicateAndFilter(matcher: matcher)
+        
         do {
-            var subjects: [Term]?
-            if let subjectsMatcher = matcher.properties["subject"] as? ExtendedData {
-                subjects = try fetchSubjects(subjectsMatcher: subjectsMatcher, in: managedContext)
-            }
-            var predicates: [Term]?
-            if let predicatesMatcher = matcher.properties["predicate"] as? ExtendedData {
-                predicates = try fetchPredicates(predicatesMatcher: predicatesMatcher, in: managedContext)
-            }
-            var objects: [Term]?
-            if let objectsMatcher = matcher.properties["object"] as? ExtendedData {
-                objects = try fetchObjects(objectsMatcher: objectsMatcher, in: managedContext)
+            let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
+            fetchRequest.predicate = predicate
+            var quads = try managedContext.fetch(fetchRequest)
+            
+            if let filterOperation = filterOperation {
+                quads = quads.filter(filterOperation)
             }
             
-            let fetchRequest: NSFetchRequest<Quad> = quadsFetchRequest(subjects: subjects, predicates: predicates, objects: objects)
-            let quads = try managedContext.fetch(fetchRequest)
             var result: [ExtendedData] = []
             for quad in quads {
                 let extendedData = createExtendedData(for: quad)
@@ -107,24 +102,42 @@ class PolyIn {
         return extendedData
     }
     
-    private func quadsFetchRequest(subjects: [Term]?, predicates: [Term]?, objects: [Term]?) -> NSFetchRequest<Quad> {
-        let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
+    private func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate, ((Quad) -> Bool)?) {
         var formatItems: [String] = []
         var arguments: [Any] = []
 
-        if let subjects = subjects {
-            formatItems.append("subject IN %@")
-            arguments.append(subjects)
+        if let subjectsMatcher = matcher.properties["subject"] as? ExtendedData {
+            formatItems.append("subject.termType == %@ && subject.value == %@")
+            arguments.append(subjectsMatcher.properties["termType"] as! String)
+            arguments.append(subjectsMatcher.properties["value"] as! String)
         }
-        if let predicates = predicates {
-            formatItems.append("predicate IN %@")
-            arguments.append(predicates)
+        if let predicatesMatcher = matcher.properties["predicate"] as? ExtendedData {
+            formatItems.append("predicate.termType == %@ && predicate.value == %@")
+            arguments.append(predicatesMatcher.properties["termType"] as! String)
+            arguments.append(predicatesMatcher.properties["value"] as! String)
         }
-        if let objects = objects {
-            formatItems.append("object IN %@")
-            arguments.append(objects)
+        var filterOperation: ((Quad) -> Bool)? = nil
+        if let objectsMatcher = matcher.properties["object"] as? ExtendedData {
+            let termType = objectsMatcher.properties["termType"] as! String
+            if termType == "Literal" {
+                let language = objectsMatcher.properties["language"] as! String
+                let datatype = objectsMatcher.properties["datatype"] as! ExtendedData
+                let termType = datatype.properties["termType"] as! String
+                let value = datatype.properties["value"] as! String
+                filterOperation = { (quad: Quad) -> Bool in
+                        let literal = quad.object as! Literal
+                        if literal.language == language && literal.datatype?.termType == termType && literal.datatype?.value == value {
+                            return true
+                        }
+                        return false
+                    
+                }
+            }
+            formatItems.append("object.termType == %@ && object.value == %@")
+            arguments.append(termType)
+            arguments.append(objectsMatcher.properties["value"] as! String)
         }
-        
+            
         var format:String = ""
         for (i, formatItem) in formatItems.enumerated() {
             if i != 0 {
@@ -133,8 +146,8 @@ class PolyIn {
             format += formatItem
         }
         
-        fetchRequest.predicate = NSPredicate(format: format, argumentArray: arguments)
-        return fetchRequest
+        let predicate = NSPredicate(format: format, argumentArray: arguments)
+        return (predicate, filterOperation)
     }
     
     private func fetchSubjects(subjectsMatcher: ExtendedData, in managedContext: NSManagedObjectContext) throws -> [Term] {
