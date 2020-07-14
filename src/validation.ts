@@ -15,12 +15,12 @@ export class ValidationError extends Error {
 
 
 interface Decoders {
-    expect<T>(input: unknown, msg: string, decoder: Decoder<T>): T;
-    encodingOptions: Decoder<EncodingOptions>;
-    fetchRequest: Decoder<RequestInit>;
-    matcher: Decoder<Partial<Matcher>>;
-    quads: Decoder<Quad[]>;
-    string: Decoder<string>;
+    expect<I, A>(input: I, msg: string, decoder: Decoder<I, A>): A;
+    encodingOptions: Decoder<unknown, EncodingOptions>;
+    fetchRequest: Decoder<unknown, RequestInit>;
+    matcher: Decoder<unknown, Partial<Matcher>>;
+    quads: Decoder<unknown, Quad[]>;
+    string: Decoder<unknown, string>;
 }
 
 async function decoders(): Promise<Decoders> {
@@ -29,7 +29,7 @@ async function decoders(): Promise<Decoders> {
     const {pipe} = await import("fp-ts/lib/pipeable");
     const strictFactory = new DataFactory(true);
 
-    function expect<T>(input: unknown, msg: string, decoder: Decoder<T>): T {
+    function expect<I, A>(input: I, msg: string, decoder: Decoder<I, A>): A {
         return pipe(
             decoder.decode(input),
             fold(
@@ -66,7 +66,7 @@ async function decoders(): Promise<Decoders> {
         )
     });
 
-    const term: Decoder<Term> = {
+    const term: Decoder<unknown, Term> = {
         decode: u => {
             try {
                 const converted = convert(u as any, strictFactory);
@@ -81,7 +81,7 @@ async function decoders(): Promise<Decoders> {
         }
     };
 
-    const subject: Decoder<Quad_Subject> = pipe(
+    const subject: Decoder<unknown, Quad_Subject> = pipe(
         term,
         Decode.parse(input => {
             if (input.termType === "Literal")
@@ -92,7 +92,7 @@ async function decoders(): Promise<Decoders> {
         })
     );
 
-    const predicate: Decoder<Quad_Predicate> = pipe(
+    const predicate: Decoder<unknown, Quad_Predicate> = pipe(
         term,
         Decode.parse(input => {
             if (input.termType !== "Variable" && input.termType !== "NamedNode")
@@ -101,7 +101,7 @@ async function decoders(): Promise<Decoders> {
         })
     );
 
-    const object: Decoder<Quad_Object> = pipe(
+    const object: Decoder<unknown, Quad_Object> = pipe(
         term,
         Decode.parse(input => {
             if (input.termType === "DefaultGraph")
@@ -110,7 +110,7 @@ async function decoders(): Promise<Decoders> {
         })
     );
 
-    const graph: Decoder<Quad_Graph> = pipe(
+    const graph: Decoder<unknown, Quad_Graph> = pipe(
         term,
         Decode.parse(input => {
             if (input.termType === "Literal")
@@ -141,8 +141,6 @@ async function decoders(): Promise<Decoders> {
         string: Decode.string
     };
 }
-
-
 
 export class ValidatingPod implements Pod {
 
