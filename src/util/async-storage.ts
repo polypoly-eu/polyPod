@@ -2,7 +2,7 @@ const storage = new Map<string, string>();
 
 //TODO implement storage
 
-export default {
+const AsyncStorage = {
   async getItem(key: string): Promise<string | null> {
     return storage.get(key);
   },
@@ -11,3 +11,5 @@ export default {
     storage.set(key, value);
   }
 };
+
+export default AsyncStorage;

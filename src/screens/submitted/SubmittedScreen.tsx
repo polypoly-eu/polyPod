@@ -13,7 +13,7 @@ export default function SubmittedScreen() {
             {t('survey.screen_submitted.thank_you')}
             <PolyButton
                 title={t('survey.button.home')}
-                onPress={() => history.push("/")}
+                onPress={() => history.push("/home")}
             />
         </div>
     );

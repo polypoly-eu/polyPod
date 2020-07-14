@@ -12,7 +12,7 @@ function SettingsButton() {
 function HomeHeader() {
   return <SmallHeader right={<SettingsButton/>}>
     <h1 className="page-title">
-      <Link to="/">polyPod</Link>
+      <Link to="/home">polyPod</Link>
     </h1>
   </SmallHeader>;
 }

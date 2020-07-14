@@ -11,7 +11,8 @@ import {
     Route,
     Link,
     useParams,
-    useRouteMatch
+    useRouteMatch,
+    Redirect
   } from "react-router-dom";
 import HomeScreen from "../home/HomeScreen";
 import QuestionScreen from "../questionnaire/QuestionScreen";
@@ -21,6 +22,10 @@ import SurveyLegalScreen from "../legal/SurveyLegalScreen";
 import SubmittedScreen from "../submitted/SubmittedScreen";
 import AnswersSubmissionErrorScreen from "../error/AnswersSubmissionErrorScreen";
 import AnswersScreen from "../answers/AnswersScreen";
+import OnboardingScreenOne from "../onboarding/OnboardingScreenOne";
+import OnboardingScreenTwo from "../onboarding/OnboardingScreenTwo";
+import OnboardingScreenThree from "../onboarding/OnboardingScreenThree";
+import OnboardingScreenFour from "../onboarding/OnboardingScreenFour";
 
 export default function AppNavigator() {
     const [onboardingShown, setOnboardingShown] = useState(null);
@@ -109,6 +114,21 @@ export default function AppNavigator() {
       <Router>
         <Switch>
           <Route exact path="/">
+          {onboardingShown ? <Redirect to={{pathname: "/home", state: {from:"/"}}} /> : <Redirect to={{pathname: "/onboarding", state: {from:"/"}}} />}
+          </Route>
+          <Route exact path="/onboarding">
+            <OnboardingScreenOne />
+          </Route>
+          <Route exact path="/onboarding2">
+            <OnboardingScreenTwo />
+          </Route>
+          <Route exact path="/onboarding3">
+            <OnboardingScreenThree />
+          </Route>
+          <Route exact path="/onboarding4">
+            <OnboardingScreenFour />
+          </Route>
+          <Route exact path="/home">
             <HomeScreen />
           </Route>
           <Route path="/intro">

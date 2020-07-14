@@ -24,7 +24,7 @@ export default function AnswersSubmissionErrorScreen() {
             <PolyButton
                 title={t('survey.button.home')}
                 onPress={() => {
-                    history.push("/")
+                    history.push("/home")
                 }}
             />
         </div>
