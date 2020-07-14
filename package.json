@@ -36,7 +36,7 @@
     "@types/benchmark": "^1.0.33",
     "@types/jest": "^26.0.4",
     "@types/n3": "^1.4.0",
-    "@types/rdf-js": "^3.0.2",
+    "@types/rdf-js": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "benchmark": "^2.1.4",
