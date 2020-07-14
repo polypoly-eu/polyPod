@@ -18,6 +18,9 @@ import QuestionScreen from "../questionnaire/QuestionScreen";
 import IntroNavigator from "../intro/IntroNavigator";
 import SurveyCompletedScreen from "../finish/SurveyCompletedScreen";
 import SurveyLegalScreen from "../legal/SurveyLegalScreen";
+import SubmittedScreen from "../submitted/SubmittedScreen";
+import AnswersSubmissionErrorScreen from "../error/AnswersSubmissionErrorScreen";
+import AnswersScreen from "../answers/AnswersScreen";
 
 export default function AppNavigator() {
     const [onboardingShown, setOnboardingShown] = useState(null);
@@ -119,6 +122,15 @@ export default function AppNavigator() {
           </Route>
           <Route exact path="/survey-legal">
             <SurveyLegalScreen />
+          </Route>
+          <Route exact path="/survey-submitted">
+            <SubmittedScreen />
+          </Route>
+          <Route exact path="/survey-error">
+            <AnswersSubmissionErrorScreen />
+          </Route>
+          <Route exact path="/answers">
+            <AnswersScreen />
           </Route>
         </Switch>
       </Router>

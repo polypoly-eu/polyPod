@@ -24,7 +24,7 @@ export default function SubmitSurveyButton({
                     .then(() => {
                         markQuestionaireSubmitted(getQuestionnaire());
                         onFinished();
-                        //navigation.navigate(SubmittedScreenRoute);
+                        history.push("/survey-submitted");
                     })
                     .catch(ex => {
                         try {
@@ -32,8 +32,7 @@ export default function SubmitSurveyButton({
                         } catch (_) {}
                         // Make sure this is called, as otherwise the Loading screen will not dissapear.
                         onFinished();
-                        // TODO error screen
-                        //navigation.navigate(AnswersSubmissionErrorScreenPath);
+                        history.push("/survey-error");
                     });
             }}
         />

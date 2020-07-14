@@ -12,12 +12,15 @@ export default function SurveyLegalScreen() {
     const {t} = useTranslation();
     const {getQuestionnaire} = useContext(QuestionnaireContext);
     const history = useHistory();
+
+    // TODO figure out how Trans works
     return (
         <div>
             <Loader loading={showLoader} />
             <div>{t('survey.screen_legal.title')}</div>
             <div>
                 <Trans i18nKey={getQuestionnaire().legal.content}>
+                    leading
                     <a href={t(getQuestionnaire().legal.link)}>
                         {getQuestionnaire().legal.link}
                     </a>
