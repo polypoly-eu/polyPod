@@ -54,8 +54,8 @@
   },
   "dependencies": {
     "@polypoly-eu/customs": "^0.1.2",
-    "@polypoly-eu/poly-api": "^0.4.2",
-    "@polypoly-eu/podigree": "^0.2.1",
+    "@polypoly-eu/poly-api": "^0.5.0",
+    "@polypoly-eu/podigree": "^0.3.0",
     "@rdfjs/dataset": "^1.0.1",
     "@types/puppeteer": "^3.0.1",
     "@types/node": "^14.0.23",
