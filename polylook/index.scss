@@ -5,6 +5,11 @@
 @use 'components/footer';
 @use 'components/tabs';
 
+/* TODO Lucas: aufräumen */
+.invisible {
+  visibility: hidden;
+}
+
 @font-face {
   font-family: "Rubik";
   src: url("/fonts/Rubik-Regular.woff2") format("woff2");

@@ -1,10 +1,10 @@
-import { useTranslation } from "react-i18next";
-import React, { useContext } from "react";
-import { QuestionnaireContext } from "../../context/questionnaire-context";
+import {useTranslation} from "react-i18next";
+import React, {useContext} from "react";
+import {QuestionnaireContext} from "../../context/questionnaire-context";
 import ReviewSurveyButton from "../../components/buttons/ReviewSurveyButton";
 import FinalizeSurveyButton from "../../components/buttons/FinalizeSurveyButton";
 
-const SurveyCompletedScreen = function() {
+const SurveyCompletedScreen = function () {
     const {t} = useTranslation();
     const {getQuestionnaire} = useContext(QuestionnaireContext);
 
@@ -16,16 +16,15 @@ const SurveyCompletedScreen = function() {
     return (
         <div>
             {t('survey.screen_completed.thank_you')}
-          <FinalizeSurveyButton
-            title={t('survey.button.finalize')}
-          />
-          <ReviewSurveyButton
-            title={t('survey.button.review')}
-            questionnaire={getQuestionnaire()}
-          />
+            <FinalizeSurveyButton
+                title={t('survey.button.finalize')}
+            />
+            <ReviewSurveyButton
+                title={t('survey.button.review')}
+                questionnaire={getQuestionnaire()}
+            />
         </div>
     );
-  };
+};
 
-  export const route = 'Survey Completed';
-  export default SurveyCompletedScreen;
+export default SurveyCompletedScreen;
