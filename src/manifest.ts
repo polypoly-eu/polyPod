@@ -21,7 +21,7 @@ export interface RootManifest {
 export interface Manifest extends EngineManifest, MainManifest, RootManifest {}
 
 // TODO duplicated code with podigree, should be a library
-function expect<T>(input: unknown, msg: string, decoder: Decode.Decoder<T>): T {
+function expect<I, A>(input: I, msg: string, decoder: Decode.Decoder<I, A>): A {
     return pipe(
         decoder.decode(input),
         fold(
