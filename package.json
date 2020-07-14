@@ -59,7 +59,7 @@
     "fast-check": "^1.26.0"
   },
   "dependencies": {
-    "@types/rdf-js": "^3.0.2",
+    "@types/rdf-js": "^3.0.3",
     "@polypoly-eu/rdf": "^0.1.0"
   }
 }
