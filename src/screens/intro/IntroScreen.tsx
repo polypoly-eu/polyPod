@@ -5,6 +5,7 @@ import StartSurveyButton from "../../components/buttons/StartSurveyButton";
 import ResultsSurveyButton from "../../components/buttons/ResultsSurveyButton";
 import ReviewSurveyButton from "../../components/buttons/ReviewSurveyButton";
 import ContinueSurveyButton from "../../components/buttons/ContinueSurveyButton";
+import { Link } from "react-router-dom";
 
 const IntroScreen = function() {
     const {t, i18n} = useTranslation();
@@ -31,6 +32,7 @@ const IntroScreen = function() {
           <div>
               {t(questionnaire.author.name)}
               {t('intro.author')}
+              <Link to="/intro/authordetails">Details</Link>
           </div>
       );
     };

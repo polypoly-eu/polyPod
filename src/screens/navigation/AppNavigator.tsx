@@ -111,7 +111,7 @@ export default function AppNavigator() {
           <Route exact path="/">
             <HomeScreen />
           </Route>
-          <Route exact path="/intro">
+          <Route path="/intro">
             <IntroNavigator />
           </Route>
           <Route exact path="/survey">
