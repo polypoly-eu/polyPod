@@ -6,7 +6,7 @@ import AsyncStorage from "../../util/async-storage";
 import React from "react";
 import LoadingScreen from "../loading/LoadingScreen";
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
     Link,
