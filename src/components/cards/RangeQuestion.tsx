@@ -8,7 +8,7 @@ import PolyRange from "../basic/PolyRange";
 
 export default function RangeQuestion({index, question}) {
     const {getQuestionnaire} = useContext(QuestionnaireContext);
-    const {saveQuestionnaireAnswers, triggerUpdate} = useContext(
+    const {saveQuestionnaireAnswers} = useContext(
         QuestionnaireListContext,
     );
 

@@ -3,6 +3,7 @@
     "module": "ESNext",
     "target": "es2019",
     "esModuleInterop": true,
+    "noUnusedLocals": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
     "jsx": "react"

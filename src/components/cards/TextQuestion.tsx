@@ -8,7 +8,7 @@ import PolyTextInput from "../basic/PolyTextInput";
 
 export default function TextQuestion({index, question}) {
     const {getQuestionnaire} = useContext(QuestionnaireContext);
-    const {saveQuestionnaireAnswers, triggerUpdate} = useContext(
+    const {saveQuestionnaireAnswers} = useContext(
         QuestionnaireListContext,
     );
 

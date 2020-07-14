@@ -9,8 +9,6 @@ const AuthorDetailsScreen = function() {
     const {getQuestionnaire} = useContext(QuestionnaireContext);
     const questionnaire = getQuestionnaire();
 
-    const xml = questionnaire.author.logo;
-
     const history = useHistory();
 /* TODO "Back" übersetzen */
     return (

@@ -1,4 +1,4 @@
-import { useTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import React from "react";
 import PolyButton from "../../components/buttons/PolyButton";
 import { useHistory } from "react-router-dom";
@@ -7,7 +7,6 @@ import AsyncStorage from "../../util/async-storage";
 // TODO Settings useEffect warum auch immer
 
 export default function OnboardingScreenFour() {
-    const {t} = useTranslation();
     const history = useHistory();
 
     const goToNextScreen = () => {
