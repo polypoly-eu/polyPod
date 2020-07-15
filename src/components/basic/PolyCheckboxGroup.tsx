@@ -49,25 +49,24 @@ export default function PolyCheckboxGroup(props: any = {}) {
     );
 
     return (
-        <div>
+        <div className="checkbox-group">
             {options.map((item, index) => (
-                <div key={index.toString()}>
-                    <PolyCheckbox
-                        index={index}
-                        indexExtractor={
-                            options.length > indices.length
-                                ? () => null
-                                : _index => indices.charAt(_index)
-                        }
-                        label={label(item, index)}
-                        value={value(item, index)}
-                        item={item}
-                        checked={!!selectedCheckboxes.get(index)}
-                        disabled={!!disabledCheckboxes.get(index)}
-                        grouped={true}
-                        onChecked={onSelect}
-                    />
-                </div>
+              <PolyCheckbox
+                  index={index}
+                  key={index.toString()}
+                  indexExtractor={
+                      options.length > indices.length
+                          ? () => null
+                          : _index => indices.charAt(_index)
+                  }
+                  label={label(item, index)}
+                  value={value(item, index)}
+                  item={item}
+                  checked={!!selectedCheckboxes.get(index)}
+                  disabled={!!disabledCheckboxes.get(index)}
+                  grouped={true}
+                  onChecked={onSelect}
+              />
             ))}
         </div>
     );

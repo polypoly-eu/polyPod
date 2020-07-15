@@ -5,6 +5,15 @@
 @use 'components/footer';
 @use 'components/tabs';
 
+/* hidden from view, but not from screen readers */
+%visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
 /* TODO Lucas: aufräumen */
 .invisible {
   visibility: hidden;
@@ -12,13 +21,13 @@
 
 @font-face {
   font-family: "Rubik";
-  src: url("/fonts/Rubik-Regular.woff2") format("woff2");
+  src: url("./fonts/Rubik-Regular.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Rubik";
   font-weight: bold;
-  src: url("/fonts/Rubik-Bold.woff2") format("woff2");
+  src: url("./fonts/Rubik-Bold.woff2") format("woff2");
 }
 
 #feature {
@@ -45,11 +54,16 @@ a.button {
   display: inline-block;
   color: colour.$core-black;
   text-align: center;
+
+  &.inverted {
+    background: colour.$core-black;
+    color: colour.$core-offwhite;
+  }
 }
 
 // not sure yet what about this is generic
 .card {
-  background: url("/icons/onboarding.png") colour.$core-nude no-repeat center center;
+  background: url("./icons/onboarding.png") colour.$core-nude no-repeat center center;
   background-size: cover;
   height: 850px;
   border-radius: 25px;
@@ -75,4 +89,68 @@ a.button {
     background-color: colour.$core-black;
     color: colour.$core-nude;
   }
+}
+
+.call-out-section {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  border-top: 2px solid #718096;
+  border-bottom: 2px solid #718096;
+  padding: 2rem 0 1rem;
+  background: url("./icons/chevron.svg") no-repeat right center;
+
+  & > * {
+    margin-bottom: 1rem;
+  }
+
+  strong {
+    font-size: 2rem;
+    font-weight: normal;
+    color: #0f5bb1;
+  }
+
+  p {
+    font-size: 1.8rem;
+    color: #000;
+  }
+}
+
+.question-card-index {
+  font-size: 2rem;
+  color: #735c01;
+  margin-bottom: 1rem;
+}
+
+.question-card-question {
+  font-size: 2rem;
+  color: #1a202c;
+  margin-bottom: 2rem;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.choice {
+  display: flex;
+  border: 1px solid #a0aec0;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  & > * {
+    padding: 0.4rem;
+  }
+
+  input {
+    @extend %visually-hidden;
+  }
+}
+
+.choice-index {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  border-radius: 5px;
 }

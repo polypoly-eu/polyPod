@@ -5,3 +5,19 @@
   padding-bottom: 3rem;
 }
 
+.big-header {
+  display: flex;
+  flex-direction: column;
+  padding-top: 14rem;
+  padding-bottom: 2rem;
+  background-color: #fdeccf;
+
+  & > * {
+    max-width: 75%;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #735c01;
+  }
+}

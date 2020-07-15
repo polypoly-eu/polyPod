@@ -4,7 +4,8 @@ import React from "react";
 import MultipleChoiceQuestion from "../../components/cards/MultipleChoiceQuestion";
 import TextQuestion from "../../components/cards/TextQuestion";
 import RangeQuestion from "../../components/cards/RangeQuestion";
-
+import Layout from "../../../polylook/components/layout";
+import FooterNavigation from "../../components/basic/FooterNavigation";
 
 export default function QuestionScreen() {
     const {currentQuestion} = useContext(QuestionnaireContext);
@@ -22,5 +23,7 @@ export default function QuestionScreen() {
 
     const Card = components[currentQuestion.screen()];
 
-    return <Card index={currentQuestion.index} question={currentQuestion} />
+    return <Layout header={<div/>} footer={<FooterNavigation/>}>
+      <Card index={currentQuestion.index} question={currentQuestion} />
+    </Layout>
 };

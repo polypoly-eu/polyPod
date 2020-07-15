@@ -1,24 +1,21 @@
 import React from "react";
-import FooterNavigation from "../basic/FooterNavigation";
 
 export default function QuestionCard({
-                                         index,
-                                         question,
-                                         instruction = '',
-                                         AnswerComponent = () => <div />,
-                                         AcceptComponent = () => <div />,
-                                     }) {
+  index,
+  question,
+  instruction = '',
+    AnswerComponent = () => <div />,
+    AcceptComponent = () => <div />,
+}) {
     return (
-        <div>
-            <div>{ index + 1 }</div>
-            <div>{ question }</div>
-            {instruction.length > 0 && (
-                <div>{instruction}</div>
-            )}
-            <AnswerComponent />
-            <AcceptComponent />
-            <FooterNavigation />
-        </div>
+      <main className="question-card">
+        <div className="question-card-index">{ index + 1 }</div>
+        <h1 className="question-card-question">{ question }</h1>
+        {instruction.length > 0 && (
+          <p className="question-card-instruction">{instruction}</p>
+        )}
+        <AnswerComponent />
+        <AcceptComponent />
+      </main>
     );
-
-}
+  }

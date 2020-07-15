@@ -2,106 +2,108 @@ import { useTranslation } from "react-i18next";
 import React, { useContext } from "react";
 import { QuestionnaireContext } from "../../context/questionnaire-context";
 import StartSurveyButton from "../../components/buttons/StartSurveyButton";
-import ResultsSurveyButton from "../../components/buttons/ResultsSurveyButton";
-import ReviewSurveyButton from "../../components/buttons/ReviewSurveyButton";
-import ContinueSurveyButton from "../../components/buttons/ContinueSurveyButton";
+// import ResultsSurveyButton from "../../components/buttons/ResultsSurveyButton";
+// import ReviewSurveyButton from "../../components/buttons/ReviewSurveyButton";
+// import ContinueSurveyButton from "../../components/buttons/ContinueSurveyButton";
 import { Link } from "react-router-dom";
+import Layout from "../../../polylook/components/layout";
+import { CenteredFooter } from "../../../polylook/components/footer";
 
-const IntroScreen = function() {
-    const {t, i18n} = useTranslation();
-    const {getQuestionnaire} = useContext(QuestionnaireContext);
-    const questionnaire = getQuestionnaire();
+function IntroHeader({ questionnaire }) {
+  const {t, i18n} = useTranslation();
 
-    const getDetails = () => {
-      return (
-        <div >
-            {`${t('intro.survey_by')} `}
-            {t(questionnaire.author.name)}
-            {t(questionnaire.title).toUpperCase()}
-            {`${t('intro.published')}: `}
-            {questionnaire.publishedDateString(i18n.language)}
-            {`${t('intro.expires')}: `}
-            {questionnaire.submissionDeadlineString(i18n.language)}
-        </div>
-      );
-    };
+  return (
+    <div className="big-header">
+      <p>
+        {`${t('intro.survey_by')} `}
+        <strong>{t(questionnaire.author.name)}</strong>
+      </p>
+      <h1>
+        {t(questionnaire.title).toUpperCase()}
+      </h1>
+      <p>
+        {`${t('intro.published')}: `}
+        <strong>{questionnaire.publishedDateString(i18n.language)}</strong>
+      </p>
+      <p>
+        {`${t('intro.expires')}: `}
+        <strong>{questionnaire.submissionDeadlineString(i18n.language)}</strong>
+      </p>
+    </div>
+  );
+}
 
-    const getAuthor = () => {
-      return (
-          // TODO onPress={() => navigation.navigate(AuthorDetailsScreenRoute)}>
-          <div>
-              {t(questionnaire.author.name)}
-              {t('intro.author')}
-              <Link to="/intro/authordetails">Details</Link>
-          </div>
-      );
-    };
+function ActionButtons({ questionnaire }) {
+  return <CenteredFooter>
+    <StartSurveyButton
+      questionnaire = {questionnaire}
+      route = "/survey"
+    />
+  </CenteredFooter>
 
-    const getActionButtons = () => {
-      return /* questionnaire.isActive()*/ true ? (
-        questionnaire.hasAnsweredQuestions() ? (
-          createContinueSurveyButton()
-        ) : (
-          createSurveyButton()
-        )
-      ) : questionnaire.hasResult() ? (
-        <>
-          {createResultsSurveyButton()}
-          {createReviewSurveyButton()}
-        </>
-      ) : (
-        createReviewSurveyButton()
-      );
-    };
+  /* TODO:
+     Depending on isActive, hasAnsweredQuestions, hasResults show:
 
-    const createResultsSurveyButton = () => (
-      <ResultsSurveyButton
-        title={t('intro.button.results')}
-        questionnaire={questionnaire}
-      />
-    );
-
-    const createReviewSurveyButton = () => (
-      <ReviewSurveyButton
-        title={t('intro.button.view')}
-        questionnaire={questionnaire}
-      />
-    );
-
-    const createContinueSurveyButton = () => (
       <ContinueSurveyButton
         title={t('intro.button.continue')}
         questionnaire={questionnaire}
       />
-    );
-
-    const createSurveyButton = () => (
-      <StartSurveyButton
-        questionnaire = {questionnaire}
-        route = "/survey"
+      <ResultsSurveyButton
+        title={t('intro.button.results')}
+        questionnaire={questionnaire}
       />
-    );
+      <ReviewSurveyButton
+        title={t('intro.button.view')}
+        questionnaire={questionnaire}
+      />
+   */
+}
 
-    const createSubmittedDate = () => {
-      return (
-        <div>
-          {`${t('intro.submitted')}: `}
-            {questionnaire.submittedTimeString(i18n.language)}
-        </div>
-      );
-    };
+function Description({ questionnaire }) {
+  const {t} = useTranslation();
 
-    return (
+  return <p>
+    {t(questionnaire.description)}
+  </p>;
+}
 
-        <div>
-          {getDetails()}
-            {t(questionnaire.description)}
-          {getAuthor()}
-            {questionnaire.isSubmitted() && createSubmittedDate()}
-            {getActionButtons()}
-          </div>
-    );
-  };
+function Author({ questionnaire }) {
+  const {t} = useTranslation();
 
-  export const route = 'Intro';
-  export default IntroScreen;
+  return (
+    // TODO onPress={() => navigation.navigate(AuthorDetailsScreenRoute)}>
+      <Link to="/intro/authordetails" className="call-out-section">
+        <strong>{t(questionnaire.author.name)}</strong>
+        <p>{t('intro.author')}</p>
+      </Link>
+  );
+}
+
+function SubmissionDate({ questionnaire }) {
+  const {t,i18n} = useTranslation();
+
+  return questionnaire.isSubmitted() ? (
+    <div>
+      {`${t('intro.submitted')}: `}
+        {questionnaire.submittedTimeString(i18n.language)}
+    </div>
+  ) : null;
+}
+
+const IntroScreen = function() {
+  const {getQuestionnaire} = useContext(QuestionnaireContext);
+  const questionnaire = getQuestionnaire();
+
+  return (
+    <Layout header={<IntroHeader questionnaire={questionnaire}/>} footer={<ActionButtons questionnaire={questionnaire}/>}>
+      <main>
+        <Description questionnaire={questionnaire}/>
+        <Author questionnaire={questionnaire}/>
+        <SubmissionDate questionnaire={questionnaire}/>
+      </main>
+    </Layout>
+  );
+};
+
+export const route = 'Intro';
+export default IntroScreen;
