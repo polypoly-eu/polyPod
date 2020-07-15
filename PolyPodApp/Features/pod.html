@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>polyPod</title>
-    <link type="text/css" rel="stylesheet" href="../polyLook.css"/>
+    <link type="text/css" rel="stylesheet" href="polyLook.css"/>
     <script>
       const {port1, port2} = new MessageChannel();
       function initIframe(el) {
@@ -21,7 +21,6 @@
   </head>
   <body>
     <div class="featureFrameWrapper">
-      <span class="title">Feature: featureName</span>
       <iframe id="harness" onload="initIframe(this);" src="index.html">
     </div>
   </body>

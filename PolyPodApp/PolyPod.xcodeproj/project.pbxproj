@@ -63,6 +63,7 @@
 		1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */; };
 		1AF1178624BE22D50063EE37 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
 		1AF1178724BE22DB0063EE37 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
+		1AF1178A24BF0AF20063EE37 /* questionnaire-feature.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */; };
 		1AF46893241FBA7200E51B6D /* JSONSerialization+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */; };
 		1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */; };
 		1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */; };
@@ -131,6 +132,7 @@
 		1AA6DE5924192463008DB1B2 /* domConsole.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = domConsole.js; sourceTree = "<group>"; };
 		1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKUserContentController+Additions.swift"; sourceTree = "<group>"; };
 		1AF1178524BE22D50063EE37 /* FileStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStats.swift; sourceTree = "<group>"; };
+		1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "questionnaire-feature.zip"; sourceTree = "<group>"; };
 		1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Additions.swift"; sourceTree = "<group>"; };
 		1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListViewController.swift; sourceTree = "<group>"; };
 		1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesWallet.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		1AA6DE492419212E008DB1B2 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				1AF1178824BF0AB90063EE37 /* Questionnaire-Feature */,
 				1A66F78C2498A80E00ED4308 /* PodCheck */,
 				1AA6DE4A2419212E008DB1B2 /* HelloWorld */,
 				1A00DFF624569F3A0049F3F7 /* pod.html */,
@@ -307,6 +310,14 @@
 				1A8F4872247E3F7000089217 /* helloWorld.zip */,
 			);
 			path = HelloWorld;
+			sourceTree = "<group>";
+		};
+		1AF1178824BF0AB90063EE37 /* Questionnaire-Feature */ = {
+			isa = PBXGroup;
+			children = (
+				1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */,
+			);
+			path = "Questionnaire-Feature";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +416,7 @@
 			files = (
 				1A00DFF724569F3A0049F3F7 /* pod.html in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
+				1AF1178A24BF0AF20063EE37 /* questionnaire-feature.zip in Resources */,
 				1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */,
 				1AF468A9242263FC00E51B6D /* polyLook.css in Resources */,
 				1A8F4873247E3F7000089217 /* helloWorld.zip in Resources */,
@@ -673,6 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8FPR9ASV66;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -694,6 +707,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8FPR9ASV66;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

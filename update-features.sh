@@ -10,7 +10,9 @@ for D in */; do
     npm install
     npm run build
     echo "\033[1;34mMove feature to Xcode project\033[0m"
-    zip -r -j -X $FEATURE_NAME.zip dist/*
+    cd dist
+    zip -r ../$FEATURE_NAME.zip .
+    cd ..
     mv $FEATURE_NAME.zip ../../PolyPodApp/Features/$FEATURE_NAME
     cd ..
 done

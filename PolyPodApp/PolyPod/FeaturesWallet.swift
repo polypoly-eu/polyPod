@@ -14,27 +14,17 @@ class FeaturesWallet {
     static let shared = FeaturesWallet()
     
     lazy var featuresFileUrl: URL = {
-        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let documentsUrl = URL(fileURLWithPath: documentsDirectory)
+        let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         let featuresUrl = documentsUrl.appendingPathComponent("Features")
         return featuresUrl
     }()
     
     func cleanFeatures() {
-        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let documentsUrl = URL(fileURLWithPath: documentsDirectory)
+        let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         let featuresUrl = documentsUrl.appendingPathComponent("Features")
         
         do {
             try FileManager.default.removeItem(at: featuresUrl)
-        } catch {
-            print(error.localizedDescription);
-        }
-        
-        let quadsUrl = documentsUrl.appendingPathComponent("quads.json")
-        
-        do {
-            try FileManager.default.removeItem(at: quadsUrl)
         } catch {
             print(error.localizedDescription);
         }
@@ -55,20 +45,16 @@ class FeaturesWallet {
     }
     
     func importFeatures() {
-        importEnvironmentFiles()
+        createFeaturesFolder()
         importFeature("helloWorld")
         importFeature("podCheck")
+        importFeature("questionnaire-feature")
     }
     
-    private func importEnvironmentFiles() {
+    private func createFeaturesFolder() {
         let featureDirUrl = URL(string: featuresFileUrl.path)!
         do {
             try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
-            try FileManager.default.copyBundleFile(forResource: "runfeature", ofType: "js", toDestinationUrl: featureDirUrl)
-            try FileManager.default.copyBundleFile(forResource: "iframe-inner", ofType: "js", toDestinationUrl: featureDirUrl)
-            try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featureDirUrl)
-            try FileManager.default.copyBundleFile(forResource: "domConsole", ofType: "js", toDestinationUrl: featureDirUrl)
-            print("Imported environment files")
         } catch {
             print(error.localizedDescription);
         }
@@ -83,7 +69,8 @@ class FeaturesWallet {
                     let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip")!
                     let unzipDirectory = try Zip.quickUnzipFile(filePath)
                     try FileManager.default.moveItem(at: unzipDirectory, to: featuresFileUrl.appendingPathComponent(featureName))
-                    try FileManager.default.copyBundleFile(forResource: "feature", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
+                    try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
+                    try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     print("Imported feature: ", featureName)
                 } else {
                     print("Feature for import not found: ", featureName)

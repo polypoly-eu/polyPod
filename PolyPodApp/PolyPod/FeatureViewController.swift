@@ -39,6 +39,7 @@ class FeatureViewController: UIViewController {
         configuration.userContentController = contentController
 
         webView = WKWebView(frame: CGRect(), configuration: configuration)
+        webView.scrollView.isScrollEnabled = false
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -47,10 +48,8 @@ class FeatureViewController: UIViewController {
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
         let featureUrl = FeaturesWallet.shared.featuresFileUrl.appendingPathComponent(featureName)
-        let podPath = Bundle.main.path(forResource: "pod", ofType: "html")!
-        var podContent = try! String(contentsOfFile: podPath)
-        podContent = podContent.replacingOccurrences(of: "featureName", with: featureName)
-        webView.loadHTMLString(podContent, baseURL: featureUrl)
+        let featureFileUrl = featureUrl.appendingPathComponent("pod.html")
+        webView.loadFileURL(featureFileUrl, allowingReadAccessTo: featureUrl)
     }
 
 }
