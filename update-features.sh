@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "\033[1;34mUpdating submodules ...\033[0m"
-git submodule update --init
+git submodule update --remote
 cd Features
 for D in */; do
     cd $D
