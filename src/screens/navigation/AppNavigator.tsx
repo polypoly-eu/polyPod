@@ -5,15 +5,7 @@ import { getStoredLanguage, storeLanguage, getStoredOrPhoneLanguageCode } from "
 import AsyncStorage from "../../util/async-storage";
 import React from "react";
 import LoadingScreen from "../loading/LoadingScreen";
-import {
-    HashRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams,
-    useRouteMatch,
-    Redirect
-  } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import HomeScreen from "../home/HomeScreen";
 import QuestionScreen from "../questionnaire/QuestionScreen";
 import IntroNavigator from "../intro/IntroNavigator";
