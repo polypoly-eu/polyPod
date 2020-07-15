@@ -50,7 +50,7 @@ class PolyOut {
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse else {
-                completionHandler(nil, PolyApiError.unknownError)
+                completionHandler(nil, PolyApiError.unknown)
                 return
             }
             
@@ -60,19 +60,29 @@ class PolyOut {
         })
     }
     
-    func stat(path: String, completionHandler: (Bool) -> Void) {
+    func stat(path: String, completionHandler: @escaping (FileStats?, Error?) -> Void) {
         let filePath = fileStoragePath.appendingPathComponent(path)
             
-        let exists = FileManager.default.fileExists(atPath: filePath.path)
-        completionHandler(exists)
+        var isDir : ObjCBool = false
+        let exists = FileManager.default.fileExists(atPath: filePath.path, isDirectory: &isDir)
+        if exists {
+            completionHandler(FileStats(isDirectory: isDir.boolValue), nil)
+        } else {
+            completionHandler(nil, PolyApiError.noSuchFile)
+        }
     }
     
-    func fileRead(path: String, completionHandler: @escaping (String?, Error?) -> Void) {
+    func fileRead(path: String, options: [String: Any], completionHandler: @escaping (Any?, Error?) -> Void) {
         let filePath = fileStoragePath.appendingPathComponent(path)
         
         do {
-            let content = try String(contentsOf: filePath, encoding: String.Encoding.utf8)
-            completionHandler(content, nil)
+            if "utf-8" == options["encoding"] as? String {
+                let content = try String(contentsOf: filePath, encoding: String.Encoding.utf8)
+                completionHandler(content, nil)
+            } else {
+                let content = try Data(contentsOf: filePath)
+                completionHandler(content, nil)
+            }
         } catch {
             completionHandler(nil, error)
         }

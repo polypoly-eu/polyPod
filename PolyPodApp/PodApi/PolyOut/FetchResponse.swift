@@ -33,7 +33,7 @@ struct FetchResponse {
         url = response.url?.absoluteString ?? ""
     }
     
-    public var messagePackArray: [MessagePackValue] {
+    public var messagePackObject: MessagePackValue {
         var messagePackArray: [MessagePackValue] = []
 
         messagePackArray.append(["bufferedText", .string(bufferedText)])
@@ -44,6 +44,8 @@ struct FetchResponse {
         messagePackArray.append(["type", .string(type)])
         messagePackArray.append(["url", .string(url)])
         
-        return messagePackArray
+        let object = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", .array(messagePackArray)])
+            
+        return object
     }
 }

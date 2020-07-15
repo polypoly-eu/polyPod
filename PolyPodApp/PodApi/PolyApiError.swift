@@ -7,8 +7,9 @@
 //
 
 enum PolyApiError: Error {
-    case unknownError
+    case unknown
     case databaseError
     case badSearchQuery
     case paramterMissing
+    case noSuchFile
 }

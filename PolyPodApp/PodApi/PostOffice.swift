@@ -129,7 +129,7 @@ extension PostOffice {
             }
             
             guard let quads = quads else {
-                completionHandler(nil, MessagePackValue(PolyApiError.unknownError.localizedDescription))
+                completionHandler(nil, MessagePackValue(PolyApiError.unknown.localizedDescription))
                 return
             }
             
@@ -171,13 +171,13 @@ extension PostOffice {
                 return
             }
             guard let fetchResponse = fetchResponse else {
-                completionHandler(nil, MessagePackValue(PolyApiError.unknownError.localizedDescription))
+                completionHandler(nil, MessagePackValue(PolyApiError.unknown.localizedDescription))
                 return
             }
             
-            let data = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", .array(fetchResponse.messagePackArray)])
+            let object = fetchResponse.messagePackObject
                 
-            let packedData = pack(data)
+            let packedData = pack(object)
                 
             completionHandler(MessagePackValue(type: 2, data: packedData), nil)
         }
@@ -186,29 +186,44 @@ extension PostOffice {
     private func handlePolyOutStat(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.stat(path: path) { fileExists in
-            if fileExists {
-                completionHandler(MessagePackValue(), nil)
-            } else {
-                completionHandler(nil, MessagePackValue())
+        PodApi.shared.polyOut.stat(path: path) { fileStats, error in
+            if let error = error {
+                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                return
             }
+            guard let fileStats = fileStats else {
+                completionHandler(nil, MessagePackValue(PolyApiError.unknown.localizedDescription))
+                return
+            }
+            let object = fileStats.messagePackObject
+                
+            let packedData = pack(object)
+                
+            completionHandler(MessagePackValue(type: 2, data: packedData), nil)
         }
     }
     
     private func handlePolyOutReadFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.fileRead(path: path) { fileContent, error in
+        var options: [String: Any] = [:]
+        if args.count > 1 {
+            options = args[1] as! [String: Any]
+        }
+        PodApi.shared.polyOut.fileRead(path: path, options: options) { data, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
                 return
             }
-            guard let fileContent = fileContent else {
-                completionHandler(nil, MessagePackValue(PolyApiError.unknownError.localizedDescription))
+            if let asString = data as? String {
+                completionHandler(.string(asString), nil)
                 return
             }
-                
-            completionHandler(.string(fileContent), nil)
+            if let asBinary = data as? Data {
+                completionHandler(.binary(asBinary), nil)
+                return
+            }
+            completionHandler(nil, MessagePackValue(PolyApiError.unknown.localizedDescription))
         }
     }
     
