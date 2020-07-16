@@ -15,7 +15,7 @@ class FeatureListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Pod Wallet"
+        self.title = "PolyPod"
     }
     
     // MARK: - Table view data source
@@ -41,7 +41,7 @@ class FeatureListViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Select one of the features to run it."
+        return "Select one of your features"
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
