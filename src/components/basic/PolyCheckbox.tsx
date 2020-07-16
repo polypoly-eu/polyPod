@@ -37,10 +37,12 @@ export default function PolyCheckbox(props: any = {}) {
     }, [amChecked, disabled, grouped, index, item, label, onChecked, props]);
 
     return (
-      <label className="choice">
-        <input type="checkbox" checked={amChecked()} onChange={onPress} />
-        <div className="choice-index">{indexExtractor(index)}</div>
-        <div className="choice-text">{label}</div>
-      </label>
+      <div className="choice">
+        <input id={`choice-${index}`} className="choice-input" type="checkbox" checked={amChecked()} onChange={onPress} />
+        <label className="choice-label" htmlFor={`choice-${index}`}>
+          <div className="choice-index">{indexExtractor(index)}</div>
+          <div className="choice-text">{label}</div>
+        </label>
+      </div>
     );
 }

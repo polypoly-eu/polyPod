@@ -2,11 +2,12 @@
 // Following the path of Normalize and Bootstrap
 // We have always done it like this.
 @use 'colour';
+@use 'variables';
 
-// Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
 *,
 *::before,
 *::after {
+  // Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
   box-sizing: border-box;
 }
 
@@ -14,41 +15,47 @@ html,
 body {
   // Remove the margin in all browsers.
   margin: 0;
+}
+
+html {
   height: 100%;
 }
 
 body {
-  font-family: "Rubik", sans-serif;
-  font-size: 140%;
-  // font-family: $font-family-base;
+  min-height: 100%;
+  font-family: variables.$font-family-base;
   // @include font-size($font-size-base);
-  // font-weight: $font-weight-base;
-  // line-height: $line-height-base;
-  // color: $body-color;
-  // text-align: $body-text-align;
   // Prevent adjustments of font size after orientation changes in iOS.
-  -webkit-text-size-adjust: 100%; // 3
+  -webkit-text-size-adjust: 100%;
   // Change the default tap highlight to be completely transparent in iOS.
-  -webkit-tap-highlight-color: rgba(colour.$core-black, 0); // 4
+  -webkit-tap-highlight-color: rgba(colour.$core-black, 0);
+  background-color: colour.$core-offwhite;
+  color: colour.$core-black;
 }
 
 h1, h2, h3 {
   margin-top: 0;
-  margin-bottom: 0;
-  // margin-bottom: $headings-margin-bottom;
-  // font-family: $headings-font-family;
-  // font-style: $headings-font-style;
-  // font-weight: $headings-font-weight;
-  // line-height: $headings-line-height;
-  // color: $headings-color;
+  margin-bottom: variables.$headings-margin-bottom;
+  color: variables.$headings-color;
+  font-weight: variables.$font-weight-bolder;
+}
+
+h1 {
+  font-size: 1.4rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-size: 1rem;
 }
 
 p {
   margin-top: 0;
-  // margin-bottom: $paragraph-margin-bottom;
+  margin-bottom: variables.$paragraph-margin-bottom;
 }
-
-// Lists
 
 ol,
 ul {
@@ -74,22 +81,19 @@ blockquote {
 
 strong {
   // Add the correct font weight in Chrome, Edge, and Safari
-  // font-weight: $font-weight-bolder;
+  font-weight: variables.$font-weight-bolder;
 }
 
-
-
-small {
+// small {
   // Add the correct font size in all browsers
   // @include font-size($small-font-size);
-}
-
+// }
 
 // Mark
-mark {
+// mark {
   // padding: $mark-padding;
   // background-color: $mark-bg;
-}
+// }
 
 // Links
 // a {
@@ -120,7 +124,7 @@ textarea {
   // Remove the margin in Firefox and Safari
   margin: 0;
   font-family: inherit;
-  // @include font-size(inherit);
+  font-size: 1rem;
   line-height: inherit;
 }
 

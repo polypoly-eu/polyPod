@@ -19,13 +19,12 @@
   a {
     color: colour.$grey-grey;
     text-decoration: none;
-    font-size: 2rem;
-
+    // font-size: 2rem;
   }
 
   .tabs-active {
-    border-bottom: 10px solid colour.$core-black;
-    border-radius: 5px;
+    border-bottom: 6px solid colour.$core-black;
+    border-radius: 3px;
 
     a {
       color: colour.$core-black;

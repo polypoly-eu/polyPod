@@ -1,9 +1,13 @@
 import React from "react";
 
-export function SmallHeader({ left = <div/>, children, right = <div/> }) {
+export function SmallHeader({ children }) {
   return <header className="small-header">
-    {left}
     {children}
-    {right}
+  </header>;
+}
+
+export function BigHeader({ children }) {
+  return <header className="big-header">
+    {children}
   </header>;
 }

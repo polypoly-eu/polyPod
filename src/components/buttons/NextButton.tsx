@@ -16,6 +16,7 @@ export default function NextButton() {
     return (
         <PolyButton
             title="generic.button.okay"
+            inverted
             onPress={() => {
                 triggerUpdate();
                 if (isAtLastQuestion()) {

@@ -8,12 +8,13 @@ import StartSurveyButton from "../../components/buttons/StartSurveyButton";
 import { Link } from "react-router-dom";
 import Layout from "../../../polylook/components/layout";
 import { CenteredFooter } from "../../../polylook/components/footer";
+import { BigHeader } from "../../../polylook/components/header";
 
 function IntroHeader({ questionnaire }) {
   const {t, i18n} = useTranslation();
 
   return (
-    <div className="big-header">
+    <BigHeader>
       <p>
         {`${t('intro.survey_by')} `}
         <strong>{t(questionnaire.author.name)}</strong>
@@ -29,7 +30,7 @@ function IntroHeader({ questionnaire }) {
         {`${t('intro.expires')}: `}
         <strong>{questionnaire.submissionDeadlineString(i18n.language)}</strong>
       </p>
-    </div>
+    </BigHeader>
   );
 }
 

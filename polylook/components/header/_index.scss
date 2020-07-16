@@ -1,23 +1,18 @@
 .small-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-content: center;
-  padding-bottom: 3rem;
 }
 
 .big-header {
   display: flex;
   flex-direction: column;
-  padding-top: 14rem;
-  padding-bottom: 2rem;
+  padding-top: 8rem;
+  // TODO: Figure out where these colors come from
   background-color: #fdeccf;
+  color: #735c01;
 
   & > * {
     max-width: 75%;
-    margin-bottom: 1rem;
-  }
-
-  p {
-    color: #735c01;
   }
 }

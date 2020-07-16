@@ -1,5 +1,6 @@
 @use 'reboot';
 @use 'colour';
+@use 'variables';
 @use 'components/layout';
 @use 'components/header';
 @use 'components/footer';
@@ -27,29 +28,23 @@
 @font-face {
   font-family: "Rubik";
   font-weight: bold;
-  src: url("./fonts/Rubik-Bold.woff2") format("woff2");
-}
-
-#feature {
-  height: 100%;
-  background-color: colour.$core-offwhite;
-  color: colour.$core-black;
+  src: url("./fonts/Rubik-Medium.woff2") format("woff2");
 }
 
 .page-title,
 .page-title a {
+  font-size: 1.2rem;
   text-decoration: none;
   color: #4a5568; // this is apparently a custom colour
 }
 
 button,
 a.button {
-  font-size: 2rem;
   background: transparent;
   flex-grow: 1;
-  border: 8px solid black;
+  border: 2px solid black;
   border-radius: 3px;
-  padding: 1rem 3rem;
+  padding: 0.2rem 1rem;
   text-decoration: none;
   display: inline-block;
   color: colour.$core-black;
@@ -65,23 +60,19 @@ a.button {
 .card {
   background: url("./icons/onboarding.png") colour.$core-nude no-repeat center center;
   background-size: cover;
-  height: 850px;
+  height: 300px;
   border-radius: 25px;
-  padding: 2rem;
+  padding: 1rem;
   display: grid;
   grid-template-rows: auto 1fr auto;
 
   > * {
-    width: 400px;
+    max-width: 75%;
   }
 
-  > header {
-    font-size: 2.2rem;
+  > header * {
+    font-size: 1.2rem;
     text-transform: uppercase;
-  }
-
-  > main {
-    font-size: 1.6rem;
   }
 
   button,
@@ -97,33 +88,31 @@ a.button {
   text-decoration: none;
   border-top: 2px solid #718096;
   border-bottom: 2px solid #718096;
-  padding: 2rem 0 1rem;
+  padding: 1rem;
   background: url("./icons/chevron.svg") no-repeat right center;
 
-  & > * {
+  & > :not(:last-child) {
     margin-bottom: 1rem;
   }
 
   strong {
-    font-size: 2rem;
-    font-weight: normal;
+    font-size: 1.2rem;
+    // TODO: Where does this color come from? Is this the link color?
     color: #0f5bb1;
   }
 
   p {
-    font-size: 1.8rem;
     color: #000;
   }
 }
 
 .question-card-index {
-  font-size: 2rem;
+  font-size: 1.2rem;
   color: #735c01;
   margin-bottom: 1rem;
 }
 
 .question-card-question {
-  font-size: 2rem;
   color: #1a202c;
   margin-bottom: 2rem;
 }
@@ -133,24 +122,34 @@ a.button {
   flex-direction: column;
 }
 
-.choice {
+.choice-input {
+  @extend %visually-hidden;
+}
+
+// TODO Where do these colors come from?
+.choice-label {
   display: flex;
+  align-items: center;
   border: 1px solid #a0aec0;
   border-radius: 5px;
   margin-bottom: 1rem;
-  padding: 1rem;
+  padding: 0.4rem;
+  --choice-index-color: #e2e8f0;
+  --choice-index-background-color: #4a5568;
 
   & > * {
-    padding: 0.4rem;
+    padding: 0.4rem 0.6rem;
   }
 
-  input {
-    @extend %visually-hidden;
+  :checked ~ & {
+    --choice-index-color: #2d3748;
+    --choice-index-background-color: #ebe019;
+    background-color: #ebe019;
   }
 }
 
 .choice-index {
-  background-color: #e2e8f0;
-  color: #4a5568;
+  background-color: var(--choice-index-color);
+  color: var(--choice-index-background-color);
   border-radius: 5px;
 }

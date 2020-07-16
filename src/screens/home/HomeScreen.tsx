@@ -5,12 +5,8 @@ import { SmallHeader } from  "../../../polylook/components/header";
 import { CenteredFooter } from  "../../../polylook/components/footer";
 import Layout from "../../../polylook/components/layout";
 
-function SettingsButton() {
-  return <img src="/icons/settings.svg" width="60" height="60"/>;
-}
-
 function HomeHeader() {
-  return <SmallHeader right={<SettingsButton/>}>
+  return <SmallHeader>
     <h1 className="page-title">
       <Link to="/home">polyPod</Link>
     </h1>
