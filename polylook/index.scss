@@ -184,4 +184,21 @@ a.button {
   display: flex;
   flex-direction: column;
   flex: 1;
+
+  progress {
+    width: 100%;
+  }
+
+  progress[value] {
+    -webkit-appearance: none;
+  }
+
+  progress[value]::-webkit-progress-bar {
+    background-color: #fcf79e;
+    border-radius: 2px;
+  }
+
+  progress[value]::-webkit-progress-value {
+    background-color: #2d3748;
+  }
 }
