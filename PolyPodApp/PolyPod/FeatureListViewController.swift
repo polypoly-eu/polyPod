@@ -12,6 +12,12 @@ class FeatureListViewController: UITableViewController {
 
     let featuresList: [String] = FeaturesWallet.shared.featuresList()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "Pod Wallet"
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -34,9 +40,8 @@ class FeatureListViewController: UITableViewController {
 
     // MARK: - Table view delegate
     
-    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Welcome to your pod wallet. Select one of the features to start it."
+        return "Select one of the features to run it."
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -44,6 +49,10 @@ class FeatureListViewController: UITableViewController {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.black
         header.textLabel?.font = UIFont.systemFont(ofSize: 18.0)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 80
     }
     
     /*

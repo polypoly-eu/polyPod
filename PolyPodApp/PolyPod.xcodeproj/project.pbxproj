@@ -44,7 +44,6 @@
 		1A66F78924937A2E00ED4308 /* LiteralConvertibles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4884247E91E000089217 /* LiteralConvertibles.swift */; };
 		1A66F78A24937A2E00ED4308 /* Subdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4885247E91E000089217 /* Subdata.swift */; };
 		1A66F78E2498A80E00ED4308 /* podCheck.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A66F78D2498A80E00ED4308 /* podCheck.zip */; };
-		1A8F4873247E3F7000089217 /* helloWorld.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A8F4872247E3F7000089217 /* helloWorld.zip */; };
 		1A8F4875247E40C600089217 /* PostOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4874247E40C600089217 /* PostOffice.swift */; };
 		1A8F4886247E91E000089217 /* Unpack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F487F247E91E000089217 /* Unpack.swift */; };
 		1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4880247E91E000089217 /* ConvenienceProperties.swift */; };
@@ -112,7 +111,6 @@
 		1A66F77C2493774100ED4308 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		1A66F77E249378E400ED4308 /* PolyOutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOutTests.swift; sourceTree = "<group>"; };
 		1A66F78D2498A80E00ED4308 /* podCheck.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = podCheck.zip; sourceTree = "<group>"; };
-		1A8F4872247E3F7000089217 /* helloWorld.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = helloWorld.zip; sourceTree = "<group>"; };
 		1A8F4874247E40C600089217 /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffice.swift; sourceTree = "<group>"; };
 		1A8F487F247E91E000089217 /* Unpack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unpack.swift; sourceTree = "<group>"; };
 		1A8F4880247E91E000089217 /* ConvenienceProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceProperties.swift; sourceTree = "<group>"; };
@@ -298,18 +296,9 @@
 			children = (
 				1AF1178824BF0AB90063EE37 /* Questionnaire-Feature */,
 				1A66F78C2498A80E00ED4308 /* PodCheck */,
-				1AA6DE4A2419212E008DB1B2 /* HelloWorld */,
 				1A00DFF624569F3A0049F3F7 /* pod.html */,
 			);
 			path = Features;
-			sourceTree = "<group>";
-		};
-		1AA6DE4A2419212E008DB1B2 /* HelloWorld */ = {
-			isa = PBXGroup;
-			children = (
-				1A8F4872247E3F7000089217 /* helloWorld.zip */,
-			);
-			path = HelloWorld;
 			sourceTree = "<group>";
 		};
 		1AF1178824BF0AB90063EE37 /* Questionnaire-Feature */ = {
@@ -419,7 +408,6 @@
 				1AF1178A24BF0AF20063EE37 /* questionnaire-feature.zip in Resources */,
 				1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */,
 				1AF468A9242263FC00E51B6D /* polyLook.css in Resources */,
-				1A8F4873247E3F7000089217 /* helloWorld.zip in Resources */,
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
 				1AA6DE3A24191C94008DB1B2 /* Main.storyboard in Resources */,

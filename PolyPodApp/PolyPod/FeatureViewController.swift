@@ -28,6 +28,8 @@ class FeatureViewController: UIViewController {
         
         preferences["directusCredentials"] = ["email": "api@polypoly.eu", "password": "v~[U[f<{A5s|(<O3'{(9%5{Bc"]
         
+        self.title = featureName
+        
         let contentController = WKUserContentController();
         MessageName.allCases.forEach {
             contentController.add(self, name: $0.rawValue)
