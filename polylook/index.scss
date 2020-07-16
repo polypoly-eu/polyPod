@@ -54,6 +54,14 @@ a.button {
     background: colour.$core-black;
     color: colour.$core-offwhite;
   }
+
+  // TODO find a good name
+  &.alt {
+    padding: 0.2rem;
+    border: none;
+    background-color: #fcf79e;
+    flex-grow: 0; //no, that's not okay. I know
+  }
 }
 
 // not sure yet what about this is generic
@@ -152,4 +160,28 @@ a.button {
   background-color: var(--choice-index-color);
   color: var(--choice-index-background-color);
   border-radius: 5px;
+}
+
+.chevron-up {
+  transform: rotate(270deg);
+}
+
+.chevron-down {
+  transform: rotate(90deg);
+}
+
+.questionnaire-footer {
+  display: flex;
+  background-color: colour.$core-offwhite;
+  font-size: 0.8rem;
+
+  & > :not(:last-child) {
+    margin-right: 0.2rem;
+  }
+}
+
+.questionnaire-progress {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }

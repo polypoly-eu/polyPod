@@ -8,22 +8,22 @@ import Layout from "../../../polylook/components/layout";
 import FooterNavigation from "../../components/basic/FooterNavigation";
 
 export default function QuestionScreen() {
-    const {currentQuestion} = useContext(QuestionnaireContext);
+  const {currentQuestion} = useContext(QuestionnaireContext);
 
-    if (!currentQuestion) {
-      return <div />;
-    }
+  if (!currentQuestion) {
+    return <div />;
+  }
 
 
-    const components = {
-        TextQuestion: TextQuestion,
-        MultipleChoiceQuestion: MultipleChoiceQuestion,
-        RangeQuestion: RangeQuestion,
-    };
+  const components = {
+    TextQuestion: TextQuestion,
+    MultipleChoiceQuestion: MultipleChoiceQuestion,
+    RangeQuestion: RangeQuestion,
+  };
 
-    const Card = components[currentQuestion.screen()];
+  const Card = components[currentQuestion.screen()];
 
-    return <Layout header={<div/>} footer={<FooterNavigation/>}>
-      <Card index={currentQuestion.index} question={currentQuestion} />
-    </Layout>
+  return <Layout header={<div/>} footer={<FooterNavigation/>}>
+    <Card index={currentQuestion.index} question={currentQuestion} />
+  </Layout>
 };
