@@ -14,16 +14,20 @@ class FeaturesWallet {
     static let shared = FeaturesWallet()
     
     lazy var featuresFileUrl: URL = {
-        let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let featuresUrl = documentsUrl.appendingPathComponent("Features")
-        return featuresUrl
+        do {
+            let documentsUrl = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let featuresUrl = documentsUrl.appendingPathComponent("Features")
+            return featuresUrl
+        } catch {
+            print(error.localizedDescription);
+        }
+        return URL(fileURLWithPath: "")
     }()
     
     func cleanFeatures() {
-        let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let featuresUrl = documentsUrl.appendingPathComponent("Features")
-        
         do {
+            let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let featuresUrl = documentsUrl.appendingPathComponent("Features")
             try FileManager.default.removeItem(at: featuresUrl)
         } catch {
             print(error.localizedDescription);
