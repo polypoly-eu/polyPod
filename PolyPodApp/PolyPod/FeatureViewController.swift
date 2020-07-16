@@ -13,21 +13,11 @@ class FeatureViewController: UIViewController {
 
     var webView: WKWebView!
     
-    let preferencesFilename: String = "preferences"
-    
-    var preferences: [String: Any] = [:]
-    
     var featureName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let storedPreferences = try? JSONSerialization.loadJSON(withFilename: preferencesFilename) as? [String : Any] {
-            preferences = storedPreferences
-        }
-        
-        preferences["directusCredentials"] = ["email": "api@polypoly.eu", "password": "v~[U[f<{A5s|(<O3'{(9%5{Bc"]
-        
+
         self.title = featureName
         
         let contentController = WKUserContentController();
