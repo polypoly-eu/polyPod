@@ -25,7 +25,7 @@ class PolyOut {
             completionHandler(nil, PolyApiError.paramterMissing)
             return
         }
-        
+
         let method = requestInit.method ?? "GET"
         
         var request = URLRequest(url: url)

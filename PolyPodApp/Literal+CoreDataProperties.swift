@@ -17,7 +17,7 @@ extension Literal {
         return NSFetchRequest<Literal>(entityName: "Literal")
     }
 
-    @NSManaged public var language: String?
-    @NSManaged public var datatype: NamedNode?
+    @NSManaged public var language: String
+    @NSManaged public var datatype: NamedNode
 
 }

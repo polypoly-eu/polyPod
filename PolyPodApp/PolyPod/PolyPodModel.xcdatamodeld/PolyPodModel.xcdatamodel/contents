@@ -3,19 +3,19 @@
     <entity name="BlankNode" representedClassName=".BlankNode" parentEntity="Term" syncable="YES"/>
     <entity name="DefaultGraph" representedClassName=".DefaultGraph" parentEntity="Term" syncable="YES"/>
     <entity name="Literal" representedClassName=".Literal" parentEntity="Term" syncable="YES">
-        <attribute name="language" optional="YES" attributeType="String"/>
-        <relationship name="datatype" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NamedNode"/>
+        <attribute name="language" attributeType="String"/>
+        <relationship name="datatype" maxCount="1" deletionRule="Nullify" destinationEntity="NamedNode"/>
     </entity>
     <entity name="NamedNode" representedClassName=".NamedNode" parentEntity="Term" syncable="YES"/>
     <entity name="Quad" representedClassName=".Quad" syncable="YES">
-        <relationship name="graph" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
-        <relationship name="object" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
-        <relationship name="predicate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
-        <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
+        <relationship name="graph" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
+        <relationship name="object" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
+        <relationship name="predicate" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
+        <relationship name="subject" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
     </entity>
     <entity name="Term" representedClassName=".Term" isAbstract="YES" syncable="YES">
-        <attribute name="termType" optional="YES" attributeType="String"/>
-        <attribute name="value" optional="YES" attributeType="String"/>
+        <attribute name="termType" attributeType="String"/>
+        <attribute name="value" attributeType="String"/>
     </entity>
     <entity name="Variable" representedClassName=".Variable" parentEntity="Term" syncable="YES"/>
     <elements>

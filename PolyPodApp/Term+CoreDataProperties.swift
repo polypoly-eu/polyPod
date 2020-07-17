@@ -17,7 +17,7 @@ extension Term {
         return NSFetchRequest<Term>(entityName: "Term")
     }
 
-    @NSManaged public var termType: String?
-    @NSManaged public var value: String?
+    @NSManaged public var termType: String
+    @NSManaged public var value: String
 
 }

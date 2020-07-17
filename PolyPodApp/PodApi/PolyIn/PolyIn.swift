@@ -51,15 +51,32 @@ class PolyIn {
                 quads = quads.filter(filterOperation)
             }
             
-            var result: [ExtendedData] = []
-            for quad in quads {
-                let extendedData = createExtendedData(for: quad)
-                result.append(extendedData)
-            }
+            let result = extendedData(from: quads)
             completionHandler(result, nil)
         } catch {
             completionHandler(nil, error)
         }
+    }
+    
+    private func extendedData(from quads: [Quad]) -> [ExtendedData] {
+        var result: [ExtendedData] = []
+        
+        for (index, quad) in quads.enumerated() {
+            var isDuplicate = false
+            for otherIndex in index+1..<quads.count {
+                let otherQuad = quads[otherIndex]
+                if otherQuad.matches(other: quad) {
+                    isDuplicate = true
+                    break
+                }
+            }
+            if !isDuplicate {
+                let extendedData = createExtendedData(for: quad)
+                result.append(extendedData)
+            }
+        }
+        
+        return result
     }
     
     private func createNode(for extendedData: ExtendedData, in managedContext: NSManagedObjectContext) -> NSManagedObject? {
@@ -126,7 +143,7 @@ class PolyIn {
                 let value = datatype.properties["value"] as! String
                 filterOperation = { (quad: Quad) -> Bool in
                         let literal = quad.object as! Literal
-                        if literal.language == language && literal.datatype?.termType == termType && literal.datatype?.value == value {
+                        if literal.language == language && literal.datatype.termType == termType && literal.datatype.value == value {
                             return true
                         }
                         return false

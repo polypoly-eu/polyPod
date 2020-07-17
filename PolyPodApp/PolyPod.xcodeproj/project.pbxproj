@@ -63,6 +63,9 @@
 		1AF1178624BE22D50063EE37 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
 		1AF1178724BE22DB0063EE37 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
 		1AF1178A24BF0AF20063EE37 /* questionnaire-feature.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */; };
+		1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */; };
+		1AF1178E24C174A00063EE37 /* Term+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178D24C174A00063EE37 /* Term+Additions.swift */; };
+		1AF1179024C178990063EE37 /* Literal+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178F24C178990063EE37 /* Literal+Additions.swift */; };
 		1AF46893241FBA7200E51B6D /* JSONSerialization+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */; };
 		1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */; };
 		1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */; };
@@ -131,6 +134,9 @@
 		1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKUserContentController+Additions.swift"; sourceTree = "<group>"; };
 		1AF1178524BE22D50063EE37 /* FileStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStats.swift; sourceTree = "<group>"; };
 		1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "questionnaire-feature.zip"; sourceTree = "<group>"; };
+		1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quad+Additions.swift"; sourceTree = "<group>"; };
+		1AF1178D24C174A00063EE37 /* Term+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Term+Additions.swift"; sourceTree = "<group>"; };
+		1AF1178F24C178990063EE37 /* Literal+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Literal+Additions.swift"; sourceTree = "<group>"; };
 		1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Additions.swift"; sourceTree = "<group>"; };
 		1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListViewController.swift; sourceTree = "<group>"; };
 		1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesWallet.swift; sourceTree = "<group>"; };
@@ -230,12 +236,15 @@
 				1A4C21E524A63E4B006CC1FD /* BlankNode+CoreDataProperties.swift */,
 				1A4C21E624A63E4B006CC1FD /* Quad+CoreDataClass.swift */,
 				1A4C21E724A63E4B006CC1FD /* Quad+CoreDataProperties.swift */,
+				1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */,
 				1A4C21E824A63E4B006CC1FD /* Variable+CoreDataClass.swift */,
 				1A4C21E924A63E4B006CC1FD /* Variable+CoreDataProperties.swift */,
 				1A4C21EA24A63E4B006CC1FD /* Literal+CoreDataClass.swift */,
 				1A4C21EB24A63E4B006CC1FD /* Literal+CoreDataProperties.swift */,
+				1AF1178F24C178990063EE37 /* Literal+Additions.swift */,
 				1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */,
 				1A4C21DD24A63DD4006CC1FD /* Term+CoreDataProperties.swift */,
+				1AF1178D24C174A00063EE37 /* Term+Additions.swift */,
 				1A57E65424A4C3FB0043E3AD /* Bubblewrap */,
 				1AA6DE492419212E008DB1B2 /* Features */,
 				1AA6DE4624192079008DB1B2 /* PodApi */,
@@ -455,9 +464,11 @@
 				1A8F488C247E91E000089217 /* Subdata.swift in Sources */,
 				1A4C21F024A63E4C006CC1FD /* BlankNode+CoreDataClass.swift in Sources */,
 				1A57E65624A4C4110043E3AD /* Bubblewrap.swift in Sources */,
+				1AF1178E24C174A00063EE37 /* Term+Additions.swift in Sources */,
 				1A183E9224AF1E860025F6BB /* PolyApiError.swift in Sources */,
 				1A4C21F124A63E4C006CC1FD /* BlankNode+CoreDataProperties.swift in Sources */,
 				1A4C21F324A63E4C006CC1FD /* Quad+CoreDataProperties.swift in Sources */,
+				1AF1179024C178990063EE37 /* Literal+Additions.swift in Sources */,
 				1A8F4875247E40C600089217 /* PostOffice.swift in Sources */,
 				1AF1178624BE22D50063EE37 /* FileStats.swift in Sources */,
 				1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */,
@@ -478,6 +489,7 @@
 				1A4C21F224A63E4C006CC1FD /* Quad+CoreDataClass.swift in Sources */,
 				1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */,
 				1AF468DE24361D9D00E51B6D /* FileManager+Additions.swift in Sources */,
+				1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */,
 				1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */,
