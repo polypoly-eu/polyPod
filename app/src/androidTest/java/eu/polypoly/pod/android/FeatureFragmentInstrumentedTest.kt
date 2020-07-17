@@ -29,38 +29,63 @@ class FeatureFragmentInstrumentedTest {
 
     @Test
     fun firstFragmentIsShown() {
-        onView(withText("helloWorld"))
+        onView(withText("test"))
             .check(matches(isDisplayed()))
     }
 
+    // TODO - move test Feature out of "main"
     @Test
     fun canNavigateToFeatureFragment() {
-        onView(withText("helloWorld"))
+        onView(withText("test"))
             .check(matches(isDisplayed()))  // verify I'm starting on first view
 
-        onView(withText("helloWorld"))
+        onView(withText("test"))
             .perform(click())
 
-        onView(withText("helloWorld"))
+        onView(withText("test"))
             .check(doesNotExist())
 
         onWebView()
             .inWindow(selectFrameByIdOrName("harness"))
-            .withElement(findElement(Locator.CLASS_NAME, "helloWorldStyle"))
-            .check(webMatches(getText(), containsString("Hello World!")))
+            .withElement(findElement(Locator.ID, "id_001"))
+            .check(webMatches(getText(), containsString("This is test feature.")))
     }
 
     @Test
     fun canFindTextInWebView() {
-        val fragmentArgs = Bundle().apply {
-            putString("featureName", "helloWorld")
-        }
-
-        launchFragmentInContainer<FeatureFragment>(fragmentArgs)
-
+        launchTestFeature()
         onWebView()
             .inWindow(selectFrameByIdOrName("harness"))
-            .withElement(findElement(Locator.CLASS_NAME, "helloWorldStyle"))
-            .check(webMatches(getText(), containsString("Hello World!")))
+            .withElement(findElement(Locator.ID, "id_001"))
+            .check(webMatches(getText(), containsString("This is test feature.")))
+    }
+
+    @Test
+    fun basicJavaScriptOnFeatureSideWorks() {
+        launchTestFeature()
+        onWebView()
+            .inWindow(selectFrameByIdOrName("harness"))
+            .withElement(findElement(Locator.ID, "id_002"))
+            .perform(webClick())
+            .withElement(findElement(Locator.ID, "results"))
+            .check(webMatches(getText(), containsString("All OK")))
+    }
+
+    @Test
+    fun afterStartingAFeature_podObjectExists() {
+        launchTestFeature()
+        onWebView()
+            .inWindow(selectFrameByIdOrName("harness"))
+            .withElement(findElement(Locator.ID, "id_003"))
+            .perform(webClick())
+            .withElement(findElement(Locator.ID, "results"))
+            .check(webMatches(getText(), containsString("All OK")))
+    }
+
+    private fun launchTestFeature() {
+        val fragmentArgs = Bundle().apply {
+            putString("featureName", "test")
+        }
+        launchFragmentInContainer<FeatureFragment>(fragmentArgs)
     }
 }
