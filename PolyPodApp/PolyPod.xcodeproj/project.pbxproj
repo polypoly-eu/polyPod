@@ -225,21 +225,7 @@
 			path = Quads;
 			sourceTree = "<group>";
 		};
-		1A8F487E247E91E000089217 /* MessagePack */ = {
-			isa = PBXGroup;
-			children = (
-				1A8F487F247E91E000089217 /* Unpack.swift */,
-				1A8F4880247E91E000089217 /* ConvenienceProperties.swift */,
-				1A8F4881247E91E000089217 /* Pack.swift */,
-				1A8F4882247E91E000089217 /* ConvenienceInitializers.swift */,
-				1A8F4883247E91E000089217 /* MessagePack.swift */,
-				1A8F4884247E91E000089217 /* LiteralConvertibles.swift */,
-				1A8F4885247E91E000089217 /* Subdata.swift */,
-			);
-			path = MessagePack;
-			sourceTree = "<group>";
-		};
-		1AA6DE2624191C94008DB1B2 = {
+		1A6F4DF624C1B9BE00874DF9 /* CoreDataModels */ = {
 			isa = PBXGroup;
 			children = (
 				1A4C21E024A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift */,
@@ -259,7 +245,29 @@
 				1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */,
 				1A4C21DD24A63DD4006CC1FD /* Term+CoreDataProperties.swift */,
 				1AF1178D24C174A00063EE37 /* Term+Additions.swift */,
+			);
+			path = CoreDataModels;
+			sourceTree = "<group>";
+		};
+		1A8F487E247E91E000089217 /* MessagePack */ = {
+			isa = PBXGroup;
+			children = (
+				1A8F487F247E91E000089217 /* Unpack.swift */,
+				1A8F4880247E91E000089217 /* ConvenienceProperties.swift */,
+				1A8F4881247E91E000089217 /* Pack.swift */,
+				1A8F4882247E91E000089217 /* ConvenienceInitializers.swift */,
+				1A8F4883247E91E000089217 /* MessagePack.swift */,
+				1A8F4884247E91E000089217 /* LiteralConvertibles.swift */,
+				1A8F4885247E91E000089217 /* Subdata.swift */,
+			);
+			path = MessagePack;
+			sourceTree = "<group>";
+		};
+		1AA6DE2624191C94008DB1B2 = {
+			isa = PBXGroup;
+			children = (
 				1A57E65424A4C3FB0043E3AD /* Bubblewrap */,
+				1A6F4DF624C1B9BE00874DF9 /* CoreDataModels */,
 				1AA6DE492419212E008DB1B2 /* Features */,
 				1AA6DE4624192079008DB1B2 /* PodApi */,
 				1AA6DE3124191C94008DB1B2 /* PolyPod */,
