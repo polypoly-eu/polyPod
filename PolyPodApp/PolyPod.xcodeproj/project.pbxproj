@@ -34,8 +34,6 @@
 		1A66F77F249378E400ED4308 /* PolyOutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F77E249378E400ED4308 /* PolyOutTests.swift */; };
 		1A66F7802493793D00ED4308 /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1A66F7812493794000ED4308 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F77C2493774100ED4308 /* NetworkSession.swift */; };
-		1A66F78224937A2100ED4308 /* FetchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F76A2490DFA000ED4308 /* FetchResponse.swift */; };
-		1A66F78324937A2300ED4308 /* FetchRequestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */; };
 		1A66F78424937A2E00ED4308 /* Unpack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F487F247E91E000089217 /* Unpack.swift */; };
 		1A66F78524937A2E00ED4308 /* ConvenienceProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4880247E91E000089217 /* ConvenienceProperties.swift */; };
 		1A66F78624937A2E00ED4308 /* Pack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4881247E91E000089217 /* Pack.swift */; };
@@ -44,6 +42,8 @@
 		1A66F78924937A2E00ED4308 /* LiteralConvertibles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4884247E91E000089217 /* LiteralConvertibles.swift */; };
 		1A66F78A24937A2E00ED4308 /* Subdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4885247E91E000089217 /* Subdata.swift */; };
 		1A66F78E2498A80E00ED4308 /* podCheck.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1A66F78D2498A80E00ED4308 /* podCheck.zip */; };
+		1A6F4DF224C1A76200874DF9 /* PolyIn+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F4DF124C1A76200874DF9 /* PolyIn+Add.swift */; };
+		1A6F4DF424C1A76E00874DF9 /* PolyIn+Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F4DF324C1A76E00874DF9 /* PolyIn+Select.swift */; };
 		1A8F4875247E40C600089217 /* PostOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4874247E40C600089217 /* PostOffice.swift */; };
 		1A8F4886247E91E000089217 /* Unpack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F487F247E91E000089217 /* Unpack.swift */; };
 		1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4880247E91E000089217 /* ConvenienceProperties.swift */; };
@@ -61,11 +61,12 @@
 		1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5924192463008DB1B2 /* domConsole.js */; };
 		1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */; };
 		1AF1178624BE22D50063EE37 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
-		1AF1178724BE22DB0063EE37 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
 		1AF1178A24BF0AF20063EE37 /* questionnaire-feature.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */; };
 		1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */; };
 		1AF1178E24C174A00063EE37 /* Term+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178D24C174A00063EE37 /* Term+Additions.swift */; };
 		1AF1179024C178990063EE37 /* Literal+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178F24C178990063EE37 /* Literal+Additions.swift */; };
+		1AF1179224C1A20E0063EE37 /* PolyOut+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179124C1A20E0063EE37 /* PolyOut+Fetch.swift */; };
+		1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */; };
 		1AF46893241FBA7200E51B6D /* JSONSerialization+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */; };
 		1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */; };
 		1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */; };
@@ -114,6 +115,8 @@
 		1A66F77C2493774100ED4308 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		1A66F77E249378E400ED4308 /* PolyOutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOutTests.swift; sourceTree = "<group>"; };
 		1A66F78D2498A80E00ED4308 /* podCheck.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = podCheck.zip; sourceTree = "<group>"; };
+		1A6F4DF124C1A76200874DF9 /* PolyIn+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Add.swift"; sourceTree = "<group>"; };
+		1A6F4DF324C1A76E00874DF9 /* PolyIn+Select.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Select.swift"; sourceTree = "<group>"; };
 		1A8F4874247E40C600089217 /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffice.swift; sourceTree = "<group>"; };
 		1A8F487F247E91E000089217 /* Unpack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unpack.swift; sourceTree = "<group>"; };
 		1A8F4880247E91E000089217 /* ConvenienceProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceProperties.swift; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 		1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quad+Additions.swift"; sourceTree = "<group>"; };
 		1AF1178D24C174A00063EE37 /* Term+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Term+Additions.swift"; sourceTree = "<group>"; };
 		1AF1178F24C178990063EE37 /* Literal+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Literal+Additions.swift"; sourceTree = "<group>"; };
+		1AF1179124C1A20E0063EE37 /* PolyOut+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyOut+Fetch.swift"; sourceTree = "<group>"; };
+		1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyOut+FS.swift"; sourceTree = "<group>"; };
 		1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Additions.swift"; sourceTree = "<group>"; };
 		1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListViewController.swift; sourceTree = "<group>"; };
 		1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesWallet.swift; sourceTree = "<group>"; };
@@ -177,10 +182,9 @@
 		1A66F76C2493715400ED4308 /* PolyOut */ = {
 			isa = PBXGroup;
 			children = (
+				1AF1179424C1A49A0063EE37 /* FS */,
+				1AF1179324C1A2630063EE37 /* Fetch */,
 				1AF468B1242A34D700E51B6D /* PolyOut.swift */,
-				1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */,
-				1A66F76A2490DFA000ED4308 /* FetchResponse.swift */,
-				1AF1178524BE22D50063EE37 /* FileStats.swift */,
 				1A66F77C2493774100ED4308 /* NetworkSession.swift */,
 			);
 			path = PolyOut;
@@ -189,6 +193,7 @@
 		1A66F76D2493719B00ED4308 /* PolyIn */ = {
 			isa = PBXGroup;
 			children = (
+				1A6F4DF524C1A82F00874DF9 /* Quads */,
 				1AF468AF242A34CF00E51B6D /* PolyIn.swift */,
 			);
 			path = PolyIn;
@@ -209,6 +214,15 @@
 				1A66F78D2498A80E00ED4308 /* podCheck.zip */,
 			);
 			path = PodCheck;
+			sourceTree = "<group>";
+		};
+		1A6F4DF524C1A82F00874DF9 /* Quads */ = {
+			isa = PBXGroup;
+			children = (
+				1A6F4DF124C1A76200874DF9 /* PolyIn+Add.swift */,
+				1A6F4DF324C1A76E00874DF9 /* PolyIn+Select.swift */,
+			);
+			path = Quads;
 			sourceTree = "<group>";
 		};
 		1A8F487E247E91E000089217 /* MessagePack */ = {
@@ -316,6 +330,25 @@
 				1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */,
 			);
 			path = "Questionnaire-Feature";
+			sourceTree = "<group>";
+		};
+		1AF1179324C1A2630063EE37 /* Fetch */ = {
+			isa = PBXGroup;
+			children = (
+				1AF1179124C1A20E0063EE37 /* PolyOut+Fetch.swift */,
+				1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */,
+				1A66F76A2490DFA000ED4308 /* FetchResponse.swift */,
+			);
+			path = Fetch;
+			sourceTree = "<group>";
+		};
+		1AF1179424C1A49A0063EE37 /* FS */ = {
+			isa = PBXGroup;
+			children = (
+				1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */,
+				1AF1178524BE22D50063EE37 /* FileStats.swift */,
+			);
+			path = FS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,13 +465,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A66F78524937A2E00ED4308 /* ConvenienceProperties.swift in Sources */,
-				1AF1178724BE22DB0063EE37 /* FileStats.swift in Sources */,
 				1A66F78424937A2E00ED4308 /* Unpack.swift in Sources */,
-				1A66F78324937A2300ED4308 /* FetchRequestInit.swift in Sources */,
 				1A66F78824937A2E00ED4308 /* MessagePack.swift in Sources */,
 				1A66F7802493793D00ED4308 /* PolyOut.swift in Sources */,
 				1A66F78A24937A2E00ED4308 /* Subdata.swift in Sources */,
-				1A66F78224937A2100ED4308 /* FetchResponse.swift in Sources */,
 				1A66F78624937A2E00ED4308 /* Pack.swift in Sources */,
 				1A66F7812493794000ED4308 /* NetworkSession.swift in Sources */,
 				1A66F77F249378E400ED4308 /* PolyOutTests.swift in Sources */,
@@ -455,12 +485,14 @@
 				1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */,
 				1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */,
 				1A66F77D2493774100ED4308 /* NetworkSession.swift in Sources */,
+				1A6F4DF424C1A76E00874DF9 /* PolyIn+Select.swift in Sources */,
 				1A8F4886247E91E000089217 /* Unpack.swift in Sources */,
 				1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */,
 				1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */,
 				1A8F488A247E91E000089217 /* MessagePack.swift in Sources */,
 				1A8F488B247E91E000089217 /* LiteralConvertibles.swift in Sources */,
 				1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */,
+				1A6F4DF224C1A76200874DF9 /* PolyIn+Add.swift in Sources */,
 				1A8F488C247E91E000089217 /* Subdata.swift in Sources */,
 				1A4C21F024A63E4C006CC1FD /* BlankNode+CoreDataClass.swift in Sources */,
 				1A57E65624A4C4110043E3AD /* Bubblewrap.swift in Sources */,
@@ -480,6 +512,7 @@
 				1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
 				1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */,
+				1AF1179224C1A20E0063EE37 /* PolyOut+Fetch.swift in Sources */,
 				1A4C21ED24A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1A8F4889247E91E000089217 /* ConvenienceInitializers.swift in Sources */,
 				1A4C21F524A63E4C006CC1FD /* Variable+CoreDataProperties.swift in Sources */,
@@ -491,6 +524,7 @@
 				1AF468DE24361D9D00E51B6D /* FileManager+Additions.swift in Sources */,
 				1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */,
 				1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */,
+				1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */,
 				1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */,
