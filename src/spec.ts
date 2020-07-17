@@ -192,8 +192,8 @@ export class PodSpec {
 
                     const json = await response.json();
 
-                    assert.property(json, "data", postBody);
-                    assert.property(json, "method", "POST");
+                    assert.propertyVal(json, "data", postBody);
+                    assert.propertyVal(json, "method", "POST");
                 });
 
                 it("404", async () => {
