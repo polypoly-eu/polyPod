@@ -9,6 +9,7 @@ import kotlin.coroutines.suspendCoroutine
 
 private const val TAG = "polyOut"
 
+// TODO - convert to a class and create an instance per Feature
 object PolyOut {
     private val client = OkHttpClient()
 
