@@ -31,5 +31,8 @@
     "eslint": "^7.5.0",
     "prettier": "^2.0.5",
     "typescript": "^3.9.7"
-  }
+  },
+  "files": [
+    ".eslintrc.js"
+  ]
 }
