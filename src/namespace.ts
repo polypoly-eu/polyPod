@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import {BaseQuad, DataFactory, NamedNode} from "rdf-js";
+import { BaseQuad, DataFactory, NamedNode } from "rdf-js";
 
 /**
  * Produces an object that, when accessed at any property, generates a named node that's composed of the base IRI and
@@ -25,9 +25,14 @@ import {BaseQuad, DataFactory, NamedNode} from "rdf-js";
  *
  * @returns A record (backed by a `Proxy`) that can be accessed at any property
  */
-export function namespace<Q extends BaseQuad>(baseIRI: string, dataFactory: DataFactory<Q>): Record<string, NamedNode> {
-    return new Proxy({}, {
-        get: (target, property: string) =>
-            dataFactory.namedNode(`${baseIRI}${property}`)
-    });
+export function namespace<Q extends BaseQuad>(
+    baseIRI: string,
+    dataFactory: DataFactory<Q>
+): Record<string, NamedNode> {
+    return new Proxy(
+        {},
+        {
+            get: (target, property: string) => dataFactory.namedNode(`${baseIRI}${property}`),
+        }
+    );
 }

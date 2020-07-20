@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import fc, {Arbitrary} from "fast-check";
+import fc, { Arbitrary } from "fast-check";
 import * as RDF from "rdf-js";
 
 export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
@@ -29,19 +29,18 @@ export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
  * - variables are hexadecimal strings and are only generated if the data factory supports them
  */
 export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory<Q>): Gens<Q> {
-    const namedNode = fc.webUrl().map(url => factory.namedNode(url));
+    const namedNode = fc.webUrl().map((url) => factory.namedNode(url));
 
-    const blankNode = fc.hexaString().map(id => factory.blankNode(id));
+    const blankNode = fc.hexaString().map((id) => factory.blankNode(id));
 
-    const literal =
-        fc.tuple(fc.hexaString(), fc.oneof(fc.constant(undefined), namedNode))
-            .map(([value, datatype]) => factory.literal(value, datatype));
+    const literal = fc
+        .tuple(fc.hexaString(), fc.oneof(fc.constant(undefined), namedNode))
+        .map(([value, datatype]) => factory.literal(value, datatype));
 
-    const variable =
-        factory.variable ?
-            // @ts-ignore
-            fc.hexaString().map(id => factory.variable(id)) :
-            undefined;
+    const variable = factory.variable
+        ? // @ts-ignore
+          fc.hexaString().map((id) => factory.variable(id))
+        : undefined;
 
     const variables = variable ? [variable] : [];
 
@@ -59,7 +58,9 @@ export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory
     const graph = fc.oneof(fc.constant(factory.defaultGraph()), namedNode, blankNode, ...variables);
 
     const triple = fc.tuple(subject, predicate, object).map(([s, p, o]) => factory.quad(s, p, o));
-    const quad = fc.tuple(subject, predicate, object, graph).map(([s, p, o, g]) => factory.quad(s, p, o, g));
+    const quad = fc
+        .tuple(subject, predicate, object, graph)
+        .map(([s, p, o, g]) => factory.quad(s, p, o, g));
 
     return {
         namedNode,
@@ -68,6 +69,6 @@ export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory
         variable,
         term,
         triple,
-        quad
+        quad,
     };
 }

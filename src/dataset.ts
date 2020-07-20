@@ -4,9 +4,9 @@
  * @packageDocumentation
  */
 
-import {BaseQuad, DataFactory, DatasetCore, DatasetCoreFactory, Quad} from "rdf-js";
-import {assert} from "chai";
-import {namespace} from "./namespace";
+import { BaseQuad, DataFactory, DatasetCore, DatasetCoreFactory, Quad } from "rdf-js";
+import { assert } from "chai";
+import { namespace } from "./namespace";
 
 /**
  * Class containing test cases data factories. Use [[DatasetSpec.run]] to execute all tests.
@@ -16,11 +16,14 @@ import {namespace} from "./namespace";
  * The tests are composed of simple unit tests originating from the
  * [reference implementation](https://github.com/rdfjs-base/dataset).
  */
-export class DatasetSpec<OutQuad extends BaseQuad = Quad, D extends DatasetCore<OutQuad> = DatasetCore<OutQuad>> {
+export class DatasetSpec<
+    OutQuad extends BaseQuad = Quad,
+    D extends DatasetCore<OutQuad> = DatasetCore<OutQuad>
+> {
     constructor(
         private readonly datasetFactory: DatasetCoreFactory<OutQuad, OutQuad, D>,
         private readonly dataFactory: DataFactory<OutQuad>
-    ) { }
+    ) {}
 
     factory(): void {
         const ex = namespace("http://example.org/", this.dataFactory);
@@ -132,7 +135,12 @@ export class DatasetSpec<OutQuad extends BaseQuad = Quad, D extends DatasetCore<
 
             it("should remove the Quad with the same SPOG as the given Quad", () => {
                 const quad = this.dataFactory.quad(ex.subject, ex.predicate, ex.object);
-                const quadCloned = this.dataFactory.quad(quad.subject, quad.predicate, quad.object, quad.graph);
+                const quadCloned = this.dataFactory.quad(
+                    quad.subject,
+                    quad.predicate,
+                    quad.object,
+                    quad.graph
+                );
                 const dataset = this.datasetFactory.dataset([quad]);
 
                 dataset.delete(quadCloned);

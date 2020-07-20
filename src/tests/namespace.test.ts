@@ -1,4 +1,4 @@
-import {namespace} from "../namespace";
+import { namespace } from "../namespace";
 import DataFactory from "@rdfjs/data-model";
 import assert from "assert";
 

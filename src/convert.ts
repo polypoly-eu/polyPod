@@ -5,13 +5,16 @@
  */
 
 import * as RDF from "rdf-js";
-import {DataFactory} from "rdf-js";
-import {gens} from "./gen";
+import { DataFactory } from "rdf-js";
+import { gens } from "./gen";
 import fc from "fast-check";
-import {assert} from "chai";
+import { assert } from "chai";
 
 export function convert<T extends RDF.Term>(t: T, dataFactory: RDF.DataFactory<any>): T;
-export function convert<InQuad extends RDF.BaseQuad, OutQuad extends RDF.BaseQuad>(quad: InQuad, dataFactory: RDF.DataFactory<InQuad, OutQuad>): OutQuad;
+export function convert<InQuad extends RDF.BaseQuad, OutQuad extends RDF.BaseQuad>(
+    quad: InQuad,
+    dataFactory: RDF.DataFactory<InQuad, OutQuad>
+): OutQuad;
 
 /**
  * This function converts an RDF term or a quad into another representation, specified by the given data factory.
@@ -38,19 +41,19 @@ export function convert(input: RDF.BaseQuad | RDF.Term, dataFactory: RDF.DataFac
             case "DefaultGraph":
                 return dataFactory.defaultGraph();
             case "Literal":
-                return dataFactory.literal(term.value, term.language === "" ? convert(term.datatype, dataFactory) : term.language);
+                return dataFactory.literal(
+                    term.value,
+                    term.language === "" ? convert(term.datatype, dataFactory) : term.language
+                );
             case "NamedNode":
                 return dataFactory.namedNode(term.value);
             case "Variable":
-                if (dataFactory.variable)
-                    return dataFactory.variable(term.value);
-                else
-                    throw new Error("Variables are not supported");
+                if (dataFactory.variable) return dataFactory.variable(term.value);
+                else throw new Error("Variables are not supported");
             default:
                 throw new Error("Unknown term type");
         }
-    }
-    else {
+    } else {
         const quad: RDF.BaseQuad = input;
 
         return dataFactory.quad(
@@ -73,7 +76,6 @@ export function convert(input: RDF.BaseQuad | RDF.Term, dataFactory: RDF.DataFac
  * Tests in this class are written in the same style as [[DataFactorySpec]].
  */
 export class ConvertSpec<Q extends RDF.BaseQuad> {
-
     /**
      * Create a new instance of the executable convert spec.
      * @param f1 the data factory _from which_ terms and quads are converted
@@ -88,18 +90,21 @@ export class ConvertSpec<Q extends RDF.BaseQuad> {
         const { term, quad } = gens(this.f1);
 
         it("Equal after conversion (term)", () => {
-            fc.assert(fc.property(term, term => {
-                const converted = convert(term, this.f2);
-                assert.isTrue(term.equals(converted));
-            }));
+            fc.assert(
+                fc.property(term, (term) => {
+                    const converted = convert(term, this.f2);
+                    assert.isTrue(term.equals(converted));
+                })
+            );
         });
 
         it("Equal after conversion (quad)", () => {
-            fc.assert(fc.property(quad, quad => {
-                const converted = convert(quad, this.f2);
-                assert.isTrue(quad.equals(converted));
-            }));
+            fc.assert(
+                fc.property(quad, (quad) => {
+                    const converted = convert(quad, this.f2);
+                    assert.isTrue(quad.equals(converted));
+                })
+            );
         });
     }
-
 }

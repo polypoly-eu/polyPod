@@ -1,5 +1,5 @@
-import {DataFactorySpec} from "../data-factory";
-import {factories} from "./_factories";
+import { DataFactorySpec } from "../data-factory";
+import { factories } from "./_factories";
 
 for (const [name, factory] of Object.entries(factories))
     describe(name, () => {
