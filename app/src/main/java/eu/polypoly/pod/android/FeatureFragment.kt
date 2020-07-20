@@ -9,10 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
 import android.webkit.WebMessagePort.WebMessageCallback
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
@@ -92,9 +90,5 @@ class FeatureFragment : Fragment() {
 
         val url = "https://appassets.androidplatform.net/assets/feature/container.html?featureName=" + args.featureName
         webView.loadUrl(url)
-
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_FeatureFragment_to_FeaturesListFragment)
-        }
     }
 }
