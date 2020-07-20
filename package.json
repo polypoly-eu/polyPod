@@ -6,6 +6,9 @@
   "scripts": {
     "test": "eslint --ext .ts test"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/polypoly-eu/eslint-config-polypoly.git"
