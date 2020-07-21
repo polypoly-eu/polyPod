@@ -1,13 +1,12 @@
-import {DefaultPod, PolyIn, PolyOut} from "@polypoly-eu/poly-api";
-import {Volume} from "memfs";
-import {dataset} from "@rdfjs/dataset";
+import { DefaultPod, PolyIn, PolyOut } from "@polypoly-eu/poly-api";
+import { Volume } from "memfs";
+import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
-import {getHttpbinUrl, podSpec} from "@polypoly-eu/poly-api/dist/spec";
-import {interceptorOfLogger, Logger, nullLogger, TracingPod} from "../tracing";
-import {Interceptor} from "@polypoly-eu/aop-ts";
+import { getHttpbinUrl, podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { interceptorOfLogger, Logger, nullLogger, TracingPod } from "../tracing";
+import { Interceptor } from "@polypoly-eu/aop-ts";
 
 describe("Tracing pod", () => {
-
     const fs = new Volume().promises as any;
     const underlying = new DefaultPod(dataset(), fs, fetch);
 
@@ -16,22 +15,25 @@ describe("Tracing pod", () => {
     });
 
     describe("No logger", () => {
-        podSpec(new TracingPod(
-            underlying,
-            interceptorOfLogger(nullLogger),
-            interceptorOfLogger(nullLogger)
-        ), "/", getHttpbinUrl());
+        podSpec(
+            new TracingPod(
+                underlying,
+                interceptorOfLogger(nullLogger),
+                interceptorOfLogger(nullLogger)
+            ),
+            "/",
+            getHttpbinUrl()
+        );
     });
 
     describe("Logger", () => {
-
         it("Records calls", async () => {
             const called = jest.fn();
             const finished = jest.fn();
 
             const logger: Logger = {
                 called,
-                finished
+                finished,
             };
 
             const pod = new TracingPod(
@@ -48,7 +50,6 @@ describe("Tracing pod", () => {
             expect(finished).toHaveBeenCalledTimes(1);
             expect(finished).toHaveBeenCalledWith("select", []);
         });
-
     });
 
     it("polyOut-then-polyIn", async () => {
@@ -58,16 +59,15 @@ describe("Tracing pod", () => {
             async guard(): Promise<undefined> {
                 hasAccessedPolyIn = true;
                 return;
-            }
+            },
         };
 
         const polyOutInterceptor: Interceptor<PolyOut> = {
             async guard(): Promise<undefined> {
-                if (hasAccessedPolyIn)
-                    throw new Error("rejected");
+                if (hasAccessedPolyIn) throw new Error("rejected");
 
                 return;
-            }
+            },
         };
 
         const pod = new TracingPod(
@@ -80,5 +80,4 @@ describe("Tracing pod", () => {
         await expect(pod.polyIn.select({})).resolves.toEqual([]);
         await expect(pod.polyOut.fetch("http://evil.com")).rejects.toThrowError("rejected");
     });
-
 });

@@ -1,6 +1,13 @@
-import {AsyncOperation, AsyncRecord, Filter, Interceptor, nullInterceptor, intercept} from "@polypoly-eu/aop-ts";
-import {PolyIn, PolyOut, Pod} from "@polypoly-eu/poly-api";
-import {DataFactory} from "rdf-js";
+import {
+    AsyncOperation,
+    AsyncRecord,
+    Filter,
+    Interceptor,
+    nullInterceptor,
+    intercept,
+} from "@polypoly-eu/aop-ts";
+import { PolyIn, PolyOut, Pod } from "@polypoly-eu/poly-api";
+import { DataFactory } from "rdf-js";
 
 export interface Logger {
     called(operation: string, args: any[]): void;
@@ -11,7 +18,7 @@ export const nullLogger: Logger = {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     called: () => {},
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    finished: () => {}
+    finished: () => {},
 };
 
 export const defaultLogger: Logger = {
@@ -23,23 +30,26 @@ export const defaultLogger: Logger = {
             console.log(`Return value:`);
             console.dir(ret);
         }
-    }
+    },
 };
 
-export function interceptorOfLogger<This extends AsyncRecord<This>>(logger: Logger): Interceptor<This> {
+export function interceptorOfLogger<This extends AsyncRecord<This>>(
+    logger: Logger
+): Interceptor<This> {
     return {
-        async guard<Name extends keyof This>(operation: AsyncOperation<This, Name>): Promise<Filter<This, Name>> {
+        async guard<Name extends keyof This>(
+            operation: AsyncOperation<This, Name>
+        ): Promise<Filter<This, Name>> {
             logger.called(String(operation.name), operation.args);
-            return (async res => {
+            return (async (res) => {
                 logger.finished(String(operation.name), res);
                 return res;
             }) as Filter<This, Name>;
-        }
+        },
     };
 }
 
 export class TracingPod implements Pod {
-
     public readonly dataFactory: DataFactory;
     public readonly polyIn: PolyIn;
     public readonly polyOut: PolyOut;
@@ -53,5 +63,4 @@ export class TracingPod implements Pod {
         this.polyIn = intercept(pod.polyIn, interceptPolyIn);
         this.polyOut = intercept(pod.polyOut, interceptPolyOut);
     }
-
 }

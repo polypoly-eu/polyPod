@@ -1,10 +1,38 @@
-import {RequestInit, Response, Pod, PolyIn, PolyOut, EncodingOptions, Stats, Matcher} from "@polypoly-eu/poly-api";
-import {DataFactory, Quad} from "rdf-js";
-import {endpointClient, ClientOf, ServerOf, EndpointRequest, EndpointResponse, endpointServer, ObjectEndpointSpec, ValueEndpointSpec} from "@polypoly-eu/postoffice";
-import {ResponsePort, liftServer, server, bubblewrapFetchPort, RequestPort, client, Port, liftClient, mapPort} from "@polypoly-eu/port-authority";
-import {RequestListener} from "http";
+import {
+    RequestInit,
+    Response,
+    Pod,
+    PolyIn,
+    PolyOut,
+    EncodingOptions,
+    Stats,
+    Matcher,
+} from "@polypoly-eu/poly-api";
+import { DataFactory, Quad } from "rdf-js";
+import {
+    endpointClient,
+    ClientOf,
+    ServerOf,
+    EndpointRequest,
+    EndpointResponse,
+    endpointServer,
+    ObjectEndpointSpec,
+    ValueEndpointSpec,
+} from "@polypoly-eu/postoffice";
+import {
+    ResponsePort,
+    liftServer,
+    server,
+    bubblewrapFetchPort,
+    RequestPort,
+    client,
+    Port,
+    liftClient,
+    mapPort,
+} from "@polypoly-eu/port-authority";
+import { RequestListener } from "http";
 import * as RDF from "@polypoly-eu/rdf";
-import {Bubblewrap, Classes} from "@polypoly-eu/bubblewrap";
+import { Bubblewrap, Classes } from "@polypoly-eu/bubblewrap";
 
 type PolyInEndpoint = ObjectEndpointSpec<{
     select(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
@@ -25,7 +53,6 @@ type PodEndpoint = ObjectEndpointSpec<{
 }>;
 
 class FetchResponse implements Response {
-
     readonly ok: boolean;
     readonly redirected: boolean;
     readonly status: number;
@@ -34,16 +61,10 @@ class FetchResponse implements Response {
     readonly url: string;
 
     static async of(response: Response): Promise<FetchResponse> {
-        return new FetchResponse(
-            response,
-            await response.text()
-        );
+        return new FetchResponse(response, await response.text());
     }
 
-    constructor(
-        response: Response,
-        private readonly bufferedText: string
-    ) {
+    constructor(response: Response, private readonly bufferedText: string) {
         this.ok = response.ok;
         this.redirected = response.redirected;
         this.status = response.status;
@@ -60,26 +81,21 @@ class FetchResponse implements Response {
     text(): Promise<string> {
         return Promise.resolve(this.bufferedText);
     }
-
 }
 
 class FileStats implements Stats {
-
     static of(stats: Stats): FileStats {
-        return new FileStats(
-            stats.isFile(),
-            stats.isDirectory()
-        );
+        return new FileStats(stats.isFile(), stats.isDirectory());
     }
 
-    constructor(
-        readonly file: boolean,
-        readonly directory: boolean
-    ) {}
+    constructor(readonly file: boolean, readonly directory: boolean) {}
 
-    isFile(): boolean { return this.file; }
-    isDirectory(): boolean { return this.directory; }
-
+    isFile(): boolean {
+        return this.file;
+    }
+    isDirectory(): boolean {
+        return this.directory;
+    }
 }
 
 export const podBubblewrapClasses: Classes = {
@@ -90,28 +106,23 @@ export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/rdf.Literal": RDF.Literal,
     "@polypoly-eu/rdf.Variable": RDF.Variable,
     "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph,
-    "@polypoly-eu/rdf.Quad": RDF.Quad
+    "@polypoly-eu/rdf.Quad": RDF.Quad,
 };
 
 function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<any, any> {
     const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
     return mapPort(
         rawPort,
-        buf => podBubblewrap.decode(buf),
-        data => podBubblewrap.encode(data)
+        (buf) => podBubblewrap.decode(buf),
+        (data) => podBubblewrap.encode(data)
     );
 }
 
 export class RemoteClientPod implements Pod {
-
     private readonly rpcClient: ClientOf<PodEndpoint>;
 
     static fromFetch(url: string, fetch: typeof window.fetch = window.fetch): RemoteClientPod {
-        const port = bubblewrapFetchPort(
-            url,
-            Bubblewrap.create(podBubblewrapClasses),
-            fetch
-        );
+        const port = bubblewrapFetchPort(url, Bubblewrap.create(podBubblewrapClasses), fetch);
 
         return new RemoteClientPod(port);
     }
@@ -130,14 +141,14 @@ export class RemoteClientPod implements Pod {
     get polyIn(): PolyIn {
         return {
             add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
-            select: matcher => this.rpcClient.polyIn().select(matcher)()
+            select: (matcher) => this.rpcClient.polyIn().select(matcher)(),
         };
     }
 
     get polyOut(): PolyOut {
-        const {rpcClient} = this;
+        const { rpcClient } = this;
 
-        return new class implements PolyOut {
+        return new (class implements PolyOut {
             fetch(input: string, init?: RequestInit): Promise<Response> {
                 return rpcClient.polyOut().fetch(input, init || {})();
             }
@@ -145,10 +156,8 @@ export class RemoteClientPod implements Pod {
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
             readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
-                if (options === undefined)
-                    return rpcClient.polyOut().readFile(path)();
-                else
-                    return rpcClient.polyOut().readFile(path, options)();
+                if (options === undefined) return rpcClient.polyOut().readFile(path)();
+                else return rpcClient.polyOut().readFile(path, options)();
             }
 
             readdir(path: string): Promise<string[]> {
@@ -162,17 +171,12 @@ export class RemoteClientPod implements Pod {
             writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
                 return rpcClient.polyOut().writeFile(path, content, options)();
             }
-
-        };
+        })();
     }
-
 }
 
 export class RemoteServerPod implements ServerOf<PodEndpoint> {
-
-    constructor(
-        private readonly pod: Pod
-    ) {}
+    constructor(private readonly pod: Pod) {}
 
     listen(port: ResponsePort<EndpointRequest, EndpointResponse>): void {
         server(port, endpointServer<PodEndpoint>(this));
@@ -183,7 +187,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
     }
 
     async listenOnMiddleware(): Promise<RequestListener> {
-        const {bubblewrapMiddlewarePort} = await import("@polypoly-eu/port-authority/dist/node");
+        const { bubblewrapMiddlewarePort } = await import("@polypoly-eu/port-authority/dist/node");
         const [middleware, port] = bubblewrapMiddlewarePort(
             Bubblewrap.create(podBubblewrapClasses),
             { limit: "10mb" }
@@ -204,22 +208,19 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
                 return FetchResponse.of(response);
             },
             readFile: (path, options?) => {
-                if (options === undefined)
-                    return polyOut.readFile(path);
-                else
-                    return polyOut.readFile(path, options);
+                if (options === undefined) return polyOut.readFile(path);
+                else return polyOut.readFile(path, options);
             },
-            readdir: path => polyOut.readdir(path),
-            stat: async path => {
+            readdir: (path) => polyOut.readdir(path),
+            stat: async (path) => {
                 const stats = await polyOut.stat(path);
                 return FileStats.of(stats);
             },
-            writeFile: (path, content, options) => polyOut.writeFile(path, content, options)
+            writeFile: (path, content, options) => polyOut.writeFile(path, content, options),
         };
     }
 
     polyIn(): ServerOf<PolyInEndpoint> {
         return this.pod.polyIn;
     }
-
 }

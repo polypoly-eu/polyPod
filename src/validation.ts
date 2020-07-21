@@ -1,18 +1,23 @@
-import {Matcher, Pod, PolyIn, PolyOut, Response, RequestInit, EncodingOptions, Stats} from "@polypoly-eu/poly-api";
-import {Term, Quad, Quad_Subject, Quad_Predicate, Quad_Object, Quad_Graph} from "rdf-js";
-import {DataFactory, Model} from "@polypoly-eu/rdf";
-import {convert} from "@polypoly-eu/rdf-spec";
-import {Decoder} from "io-ts/lib/Decoder";
+import {
+    Matcher,
+    Pod,
+    PolyIn,
+    PolyOut,
+    Response,
+    RequestInit,
+    EncodingOptions,
+    Stats,
+} from "@polypoly-eu/poly-api";
+import { Term, Quad, Quad_Subject, Quad_Predicate, Quad_Object, Quad_Graph } from "rdf-js";
+import { DataFactory, Model } from "@polypoly-eu/rdf";
+import { convert } from "@polypoly-eu/rdf-spec";
+import { Decoder } from "io-ts/lib/Decoder";
 
 export class ValidationError extends Error {
-    constructor(
-        msg: string,
-        readonly details: string
-    ) {
+    constructor(msg: string, readonly details: string) {
         super(msg);
     }
 }
-
 
 interface Decoders {
     expect<I, A>(input: I, msg: string, decoder: Decoder<I, A>): A;
@@ -25,18 +30,18 @@ interface Decoders {
 
 async function decoders(): Promise<Decoders> {
     const Decode = await import("io-ts/lib/Decoder");
-    const {fold} = await import("fp-ts/lib/Either");
-    const {pipe} = await import("fp-ts/lib/pipeable");
+    const { fold } = await import("fp-ts/lib/Either");
+    const { pipe } = await import("fp-ts/lib/pipeable");
     const strictFactory = new DataFactory(true);
 
     function expect<I, A>(input: I, msg: string, decoder: Decoder<I, A>): A {
         return pipe(
             decoder.decode(input),
             fold(
-                error => {
+                (error) => {
                     throw new ValidationError(msg, Decode.draw(error));
                 },
-                t => t
+                (t) => t
             )
         );
     }
@@ -63,27 +68,24 @@ async function decoders(): Promise<Decoders> {
             "strict-origin",
             "strict-origin-when-cross-origin",
             "unsafe-url"
-        )
+        ),
     });
 
     const term: Decoder<unknown, Term> = {
-        decode: u => {
+        decode: (u) => {
             try {
                 const converted = convert(u as any, strictFactory);
-                if (converted instanceof Model)
-                    return Decode.success(converted as Term);
-                else
-                    return Decode.failure(u, "Expected term");
-            }
-            catch (err) {
+                if (converted instanceof Model) return Decode.success(converted as Term);
+                else return Decode.failure(u, "Expected term");
+            } catch (err) {
                 return Decode.failure(u, err.message);
             }
-        }
+        },
     };
 
     const subject: Decoder<unknown, Quad_Subject> = pipe(
         term,
-        Decode.parse(input => {
+        Decode.parse((input) => {
             if (input.termType === "Literal")
                 return Decode.failure(input, "Subject can't be a literal");
             if (input.termType === "DefaultGraph")
@@ -94,7 +96,7 @@ async function decoders(): Promise<Decoders> {
 
     const predicate: Decoder<unknown, Quad_Predicate> = pipe(
         term,
-        Decode.parse(input => {
+        Decode.parse((input) => {
             if (input.termType !== "Variable" && input.termType !== "NamedNode")
                 return Decode.failure(input, "Predicate must be either variable or named node");
             return Decode.success(input);
@@ -103,16 +105,16 @@ async function decoders(): Promise<Decoders> {
 
     const object: Decoder<unknown, Quad_Object> = pipe(
         term,
-        Decode.parse(input => {
+        Decode.parse((input) => {
             if (input.termType === "DefaultGraph")
-                return Decode.failure(input,"Object can't be the default graph");
+                return Decode.failure(input, "Object can't be the default graph");
             return Decode.success(input);
         })
     );
 
     const graph: Decoder<unknown, Quad_Graph> = pipe(
         term,
-        Decode.parse(input => {
+        Decode.parse((input) => {
             if (input.termType === "Literal")
                 return Decode.failure(input, "Graph can't be a literal");
             return Decode.success(input);
@@ -123,13 +125,24 @@ async function decoders(): Promise<Decoders> {
 
     const quad = pipe(
         Decode.type({ subject, predicate, object, graph }),
-        Decode.parse(({subject, predicate, object, graph}) =>
+        Decode.parse(({ subject, predicate, object, graph }) =>
             Decode.success(strictFactory.quad(subject, predicate, object, graph))
         )
     );
 
     const encodingOptions = Decode.type<EncodingOptions>({
-        encoding: Decode.literal("ascii", "utf8", "utf-8", "utf16le", "ucs2", "ucs-2", "base64", "latin1", "binary", "hex")
+        encoding: Decode.literal(
+            "ascii",
+            "utf8",
+            "utf-8",
+            "utf16le",
+            "ucs2",
+            "ucs-2",
+            "base64",
+            "latin1",
+            "binary",
+            "hex"
+        ),
     });
 
     return {
@@ -138,18 +151,15 @@ async function decoders(): Promise<Decoders> {
         fetchRequest,
         matcher,
         quads: Decode.array(quad),
-        string: Decode.string
+        string: Decode.string,
     };
 }
 
 export class ValidatingPod implements Pod {
-
     private readonly _decoders: Promise<Decoders>;
     public readonly dataFactory = new DataFactory(true);
 
-    constructor(
-        private readonly pod: Pod
-    ) {
+    constructor(private readonly pod: Pod) {
         this._decoders = decoders();
     }
 
@@ -163,10 +173,13 @@ export class ValidatingPod implements Pod {
 
                 let validatedMatcher: Partial<Matcher>;
 
-                if (matcher === undefined || matcher === null)
-                    validatedMatcher = {};
+                if (matcher === undefined || matcher === null) validatedMatcher = {};
                 else
-                    validatedMatcher = decoders.expect(matcher, "Matcher must be wellformed", decoders.matcher);
+                    validatedMatcher = decoders.expect(
+                        matcher,
+                        "Matcher must be wellformed",
+                        decoders.matcher
+                    );
 
                 return polyIn.select(validatedMatcher);
             },
@@ -174,10 +187,14 @@ export class ValidatingPod implements Pod {
                 const decoders = await pod._decoders;
 
                 // we assume that non-default graphs are filtered out in the underlying pod
-                const validatedQuads = decoders.expect(quads, "Quads must be wellformed", decoders.quads);
+                const validatedQuads = decoders.expect(
+                    quads,
+                    "Quads must be wellformed",
+                    decoders.quads
+                );
 
                 return polyIn.add(...validatedQuads);
-            }
+            },
         };
     }
 
@@ -185,18 +202,25 @@ export class ValidatingPod implements Pod {
         const pod = this;
         const polyOut = this.pod.polyOut;
 
-        return new class implements PolyOut {
+        const Impl = class implements PolyOut {
             async fetch(input?: unknown, init?: unknown): Promise<Response> {
                 const decoders = await pod._decoders;
 
-                const validatedInput = decoders.expect(input, "Input must be a string", decoders.string);
+                const validatedInput = decoders.expect(
+                    input,
+                    "Input must be a string",
+                    decoders.string
+                );
 
                 let validatedInit: RequestInit;
 
-                if (init === undefined || init === null)
-                    validatedInit = {};
+                if (init === undefined || init === null) validatedInit = {};
                 else
-                    validatedInit = decoders.expect(init, "RequestInit must be wellformed", decoders.fetchRequest);
+                    validatedInit = decoders.expect(
+                        init,
+                        "RequestInit must be wellformed",
+                        decoders.fetchRequest
+                    );
 
                 return polyOut.fetch(validatedInput, validatedInit);
             }
@@ -204,7 +228,11 @@ export class ValidatingPod implements Pod {
             async readdir(path?: unknown): Promise<string[]> {
                 const decoders = await pod._decoders;
 
-                const validatedPath = decoders.expect(path, "Path must be a string", decoders.string);
+                const validatedPath = decoders.expect(
+                    path,
+                    "Path must be a string",
+                    decoders.string
+                );
 
                 return polyOut.readdir(validatedPath);
             }
@@ -215,12 +243,19 @@ export class ValidatingPod implements Pod {
             async readFile(path?: unknown, options?: unknown): Promise<string | Uint8Array> {
                 const decoders = await pod._decoders;
 
-                const validatedPath = decoders.expect(path, "Path must be a string", decoders.string);
+                const validatedPath = decoders.expect(
+                    path,
+                    "Path must be a string",
+                    decoders.string
+                );
 
-                if (options === undefined)
-                    return polyOut.readFile(validatedPath);
+                if (options === undefined) return polyOut.readFile(validatedPath);
 
-                const validatedOptions = decoders.expect(options, "Options must be wellformed", decoders.encodingOptions);
+                const validatedOptions = decoders.expect(
+                    options,
+                    "Options must be wellformed",
+                    decoders.encodingOptions
+                );
 
                 return polyOut.readFile(validatedPath, validatedOptions);
             }
@@ -228,9 +263,21 @@ export class ValidatingPod implements Pod {
             async writeFile(path?: unknown, contents?: unknown, options?: unknown): Promise<void> {
                 const decoders = await pod._decoders;
 
-                const validatedPath = decoders.expect(path, "Path must be a string", decoders.string);
-                const validatedContents = decoders.expect(contents, "Contents must be a string", decoders.string);
-                const validatedOptions = decoders.expect(options, "Options must be wellformed", decoders.encodingOptions);
+                const validatedPath = decoders.expect(
+                    path,
+                    "Path must be a string",
+                    decoders.string
+                );
+                const validatedContents = decoders.expect(
+                    contents,
+                    "Contents must be a string",
+                    decoders.string
+                );
+                const validatedOptions = decoders.expect(
+                    options,
+                    "Options must be wellformed",
+                    decoders.encodingOptions
+                );
 
                 return polyOut.writeFile(validatedPath, validatedContents, validatedOptions);
             }
@@ -238,11 +285,16 @@ export class ValidatingPod implements Pod {
             async stat(path?: unknown): Promise<Stats> {
                 const decoders = await pod._decoders;
 
-                const validatedPath = decoders.expect(path, "Path must be a string", decoders.string);
+                const validatedPath = decoders.expect(
+                    path,
+                    "Path must be a string",
+                    decoders.string
+                );
 
                 return polyOut.stat(validatedPath);
             }
         };
-    }
 
+        return new Impl();
+    }
 }
