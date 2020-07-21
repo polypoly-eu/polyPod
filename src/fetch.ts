@@ -5,10 +5,10 @@
  * @packageDocumentation
  */
 
-import {RequestPort} from "./procedure";
-import {mapSendPort} from "./port";
-import {Bubblewrap} from "@polypoly-eu/bubblewrap";
-import {rethrowPromise, Try} from "./util";
+import { RequestPort } from "./procedure";
+import { mapSendPort } from "./port";
+import { Bubblewrap } from "@polypoly-eu/bubblewrap";
+import { rethrowPromise, Try } from "./util";
 
 /**
  * Uses a [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) implementation to
@@ -42,13 +42,13 @@ export function fetchPort<T>(
     fetch: typeof window.fetch
 ): RequestPort<BodyInit, T> {
     return {
-        send: async request => {
+        send: async (request) => {
             const response = await fetch(url, {
                 headers: {
-                    "Content-Type": contentType
+                    "Content-Type": contentType,
                 },
                 method: "post",
-                body: request.request
+                body: request.request,
             });
 
             if (!response.ok) {
@@ -59,11 +59,10 @@ export function fetchPort<T>(
             try {
                 const parsed = await parse(response);
                 request.resolvers.resolve(parsed);
-            }
-            catch (err) {
+            } catch (err) {
                 request.resolvers.reject(err);
             }
-        }
+        },
     };
 }
 
@@ -73,24 +72,18 @@ export function fetchPort<T>(
  * This wrapper follows the same error protocol as [[jsonRouterPort]]. Outgoing requests are transformed into strings
  * using `JSON.stringify`. Conversely, incoming responses are parsed using `JSON.parse`.
  */
-export function jsonFetchPort(
-    url: string,
-    fetch: typeof window.fetch
-): RequestPort<any, any> {
+export function jsonFetchPort(url: string, fetch: typeof window.fetch): RequestPort<any, any> {
     const rawPort = fetchPort<any>(
         url,
         "application/json",
-        async body => rethrowPromise(await body.json()),
+        async (body) => rethrowPromise(await body.json()),
         fetch
     );
 
-    return mapSendPort(
-        rawPort,
-        data => ({
-            resolvers: data.resolvers,
-            request: JSON.stringify(data.request)
-        })
-    );
+    return mapSendPort(rawPort, (data) => ({
+        resolvers: data.resolvers,
+        request: JSON.stringify(data.request),
+    }));
 }
 
 /**
@@ -108,21 +101,16 @@ export function bubblewrapFetchPort(
     const rawPort = fetchPort<any>(
         url,
         "application/octet-stream",
-        async body => {
+        async (body) => {
             const decoded: Try<any> = bubblewrap.decode(new Uint8Array(await body.arrayBuffer()));
-            if (decoded.tag === "failure")
-                throw decoded.err;
-            else
-                return decoded.value;
+            if (decoded.tag === "failure") throw decoded.err;
+            else return decoded.value;
         },
         fetch
     );
 
-    return mapSendPort(
-        rawPort,
-        data => ({
-            resolvers: data.resolvers,
-            request: bubblewrap.encode(data.request)
-        })
-    );
+    return mapSendPort(rawPort, (data) => ({
+        resolvers: data.resolvers,
+        request: bubblewrap.encode(data.request),
+    }));
 }

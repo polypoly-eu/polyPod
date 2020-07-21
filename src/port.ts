@@ -16,7 +16,7 @@ export type Handler<T> = (t: T) => void;
  * the handler.
  */
 export function mapHandler<T, U>(handler: Handler<T>, f: (x: U) => T): Handler<U> {
-    return u => handler(f(u));
+    return (u) => handler(f(u));
 }
 
 /**
@@ -46,7 +46,7 @@ export interface SendPort<Out> {
  */
 export function mapSendPort<Out, Out2>(port: SendPort<Out>, f: (x: Out2) => Out): SendPort<Out2> {
     return {
-        send: value => port.send(f(value))
+        send: (value) => port.send(f(value)),
     };
 }
 
@@ -71,9 +71,12 @@ export interface ReceivePort<In> {
  * Map operation for [[ReceivePort]]s. The returned port behaves identically to the original port, but applies a
  * function to incoming messages _before_ they are sent to the handlers.
  */
-export function mapReceivePort<In, In2>(port: ReceivePort<In>, f: (x: In) => In2): ReceivePort<In2> {
+export function mapReceivePort<In, In2>(
+    port: ReceivePort<In>,
+    f: (x: In) => In2
+): ReceivePort<In2> {
     return {
-        addHandler: handler => port.addHandler(mapHandler(handler, f))
+        addHandler: (handler) => port.addHandler(mapHandler(handler, f)),
     };
 }
 
@@ -85,18 +88,21 @@ export function mapReceivePort<In, In2>(port: ReceivePort<In>, f: (x: In) => In2
  * @typeParam Out type of outgoing messages
  * @typeParam In type of incoming messages
  */
-export interface Port<In, Out> extends SendPort<Out>, ReceivePort<In> {
-}
+export interface Port<In, Out> extends SendPort<Out>, ReceivePort<In> {}
 
 /**
  * Maps a [[Port]] on both the incoming (covariant) and outgoing (contravariant) messages.
  *
  * See [[mapSendPort]] and [[mapReceivePort]] for the components.
  */
-export function mapPort<In1, Out1, In2, Out2>(port: Port<In1, Out1>, inf: (in1: In1) => In2, outf: (out2: Out2) => Out1): Port<In2, Out2> {
+export function mapPort<In1, Out1, In2, Out2>(
+    port: Port<In1, Out1>,
+    inf: (in1: In1) => In2,
+    outf: (out2: Out2) => Out1
+): Port<In2, Out2> {
     return {
         ...mapSendPort(port, outf),
-        ...mapReceivePort(port, inf)
+        ...mapReceivePort(port, inf),
     };
 }
 
@@ -107,7 +113,7 @@ export function mapPort<In1, Out1, In2, Out2>(port: Port<In1, Out1>, inf: (in1: 
  * @param to port to which messages are forwarded
  */
 export function forward<InOut>(from: ReceivePort<InOut>, to: SendPort<InOut>): void {
-    from.addHandler(t => to.send(t));
+    from.addHandler((t) => to.send(t));
 }
 
 /**
@@ -132,11 +138,11 @@ export function loopback<InOut>(): [SendPort<InOut>, ReceivePort<InOut>] {
     const handlers: Handler<InOut>[] = [];
     return [
         {
-            send: value => handlers.forEach(handler => handler(value))
+            send: (value) => handlers.forEach((handler) => handler(value)),
         },
         {
-            addHandler: handler => handlers.push(handler)
-        }
+            addHandler: (handler) => handlers.push(handler),
+        },
     ];
 }
 
@@ -148,7 +154,7 @@ export function loopback<InOut>(): [SendPort<InOut>, ReceivePort<InOut>] {
 export function join<In, Out>(send: SendPort<Out>, receive: ReceivePort<In>): Port<In, Out> {
     return {
         send: (out: Out) => send.send(out),
-        addHandler: (handler: Handler<In>) => receive.addHandler(handler)
+        addHandler: (handler: Handler<In>) => receive.addHandler(handler),
     };
 }
 
@@ -159,11 +165,10 @@ export function join<In, Out>(send: SendPort<Out>, receive: ReceivePort<In>): Po
  * This function is the dual to [[SendPort.send]] because it allows to observe exactly one message.
  */
 export function receiveSingle<In>(port: ReceivePort<In>): Promise<In> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         let done = false;
-        const handler: Handler<In> = data => {
-            if (done)
-                return;
+        const handler: Handler<In> = (data) => {
+            if (done) return;
 
             done = true;
             resolve(data);

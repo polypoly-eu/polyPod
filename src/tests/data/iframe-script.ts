@@ -1,5 +1,5 @@
-import {iframeInnerPort} from "../../browser";
-import {connect} from "../../port";
+import { iframeInnerPort } from "../../browser";
+import { connect } from "../../port";
 
 async function init(): Promise<void> {
     const port1 = await iframeInnerPort("1");

@@ -11,7 +11,7 @@
  * @packageDocumentation
  */
 
-import {Handler, Port, ReceivePort, SendPort} from "./port";
+import { Handler, Port, ReceivePort, SendPort } from "./port";
 
 /**
  * A pair of `resolve` and `reject` callbacks that resolve an underlying `Promise`.
@@ -89,15 +89,14 @@ export type Procedure<Req, Res> = (req: Req) => Promise<Res>;
  * @param port the port used to send messages
  * @returns a function that can be used to transparently send messages over a [[RequestPort]] and await the response
  */
-export function client<Req, Res>(
-    port: RequestPort<Req, Res>
-): Procedure<Req, Res> {
-    return req => new Promise<Res>((resolve, reject) => {
-        port.send({
-            request: req,
-            resolvers: { resolve, reject }
+export function client<Req, Res>(port: RequestPort<Req, Res>): Procedure<Req, Res> {
+    return (req) =>
+        new Promise<Res>((resolve, reject) => {
+            port.send({
+                request: req,
+                resolvers: { resolve, reject },
+            });
         });
-    });
 }
 
 /**
@@ -126,12 +125,11 @@ export function server<Req, Res>(
     port: ResponsePort<Req, Res>,
     procedure: Procedure<Req, Res>
 ): void {
-    port.addHandler(async request => {
+    port.addHandler(async (request) => {
         try {
             const response = await procedure(request.request);
             request.resolvers.resolve(response);
-        }
-        catch (err) {
+        } catch (err) {
             request.resolvers.reject(err);
         }
     });
@@ -148,9 +146,7 @@ export interface ClientRequest<Req> {
 /**
  * Responses that may be successful or failed with an associated request identifier.
  */
-export type ServerResponse<Res> =
-    { id: number; response: Res } |
-    { id: number; error: unknown }
+export type ServerResponse<Res> = { id: number; response: Res } | { id: number; error: unknown };
 
 /**
  * Lifts a raw [[Port]] that supports sending identified requests and receiving identified responses to a
@@ -197,23 +193,21 @@ export function liftClient<Req, Res>(
 ): RequestPort<Req, Res> {
     let id = 0;
     const pending = new Map<number, PromiseResolvers<Res>>();
-    port.addHandler(response => {
+    port.addHandler((response) => {
         const { resolve, reject } = pending.get(response.id)!;
-        if ("error" in response)
-            reject(response.error);
-        else
-            resolve(response.response);
+        if ("error" in response) reject(response.error);
+        else resolve(response.response);
     });
 
     return {
-        send: req => {
+        send: (req) => {
             const currentId = ++id;
             pending.set(currentId, req.resolvers);
             port.send({
                 request: req.request,
-                id: currentId
+                id: currentId,
             });
-        }
+        },
     };
 }
 
@@ -253,35 +247,32 @@ export function liftServer<Req, Res>(
 ): ResponsePort<Req, Res> {
     let handler: Handler<WithResolvers<Req, Res>> | undefined = undefined;
 
-    port.addHandler(async request => {
+    port.addHandler(async (request) => {
         const h = handler;
-        if (!h)
-            return;
+        if (!h) return;
 
         try {
             const response = await new Promise<Res>((resolve, reject) => {
                 h({
                     request: request.request,
-                    resolvers: {resolve, reject}
+                    resolvers: { resolve, reject },
                 });
             });
             port.send({
                 id: request.id,
-                response
+                response,
             });
-        }
-        catch (err) {
+        } catch (err) {
             port.send({
                 id: request.id,
-                error: err
+                error: err,
             });
         }
     });
 
     return {
-        addHandler: h => {
-            if (!handler)
-                handler = h;
-        }
+        addHandler: (h) => {
+            if (!handler) handler = h;
+        },
     };
 }

@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import {Handler, mapPort, Port, ReceivePort} from "./port";
+import { Handler, mapPort, Port, ReceivePort } from "./port";
 
 /**
  * Converts a browser `MessagePort` into a raw [[Port]].
@@ -24,8 +24,8 @@ export function fromBrowserMessagePort(port: MessagePort): Port<MessageEvent, an
             port.postMessage(value);
         },
         addHandler(handler: Handler<MessageEvent>): void {
-            port.addEventListener("message", message => handler(message));
-        }
+            port.addEventListener("message", (message) => handler(message));
+        },
     };
 }
 
@@ -71,16 +71,20 @@ export function fromBrowserMessagePort(port: MessagePort): Port<MessageEvent, an
  */
 export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
     return new Promise((resolve, reject) => {
-        const handler: Handler<MessageEvent> = event => {
-            if (event.source !== window.parent || event.data !== secret)
-                return;
+        const handler: Handler<MessageEvent> = (event) => {
+            if (event.source !== window.parent || event.data !== secret) return;
 
             if (event.ports.length === 1) {
                 event.ports[0].start();
                 const rawPort = fromBrowserMessagePort(event.ports[0]);
-                resolve(mapPort(rawPort, event => event.data, any => any));
-            }
-            else {
+                resolve(
+                    mapPort(
+                        rawPort,
+                        (event) => event.data,
+                        (any) => any
+                    )
+                );
+            } else {
                 reject(`Malformed message`);
             }
 
@@ -117,11 +121,14 @@ export function iframeOuterPort(
     iframe: HTMLIFrameElement,
     init?: (port: ReceivePort<any>) => void
 ): Port<any, any> {
-    const {port1, port2} = new MessageChannel();
+    const { port1, port2 } = new MessageChannel();
     const rawPort = fromBrowserMessagePort(port1);
-    const port = mapPort(rawPort, event => event.data, any => any);
-    if (init)
-        init(port);
+    const port = mapPort(
+        rawPort,
+        (event) => event.data,
+        (any) => any
+    );
+    if (init) init(port);
     port1.start();
     iframe.contentWindow!.postMessage(secret, "*", [port2]);
     return port;

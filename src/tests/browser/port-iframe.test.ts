@@ -1,14 +1,14 @@
-import {portSpec} from "../../specs/port";
-import {iframeOuterPort} from "../../browser";
-import {Port, receiveSingle} from "../../port";
-import {flipLifecycle} from "../_lifecycles";
-import {assert} from "chai";
-import {timeout, TimeoutError} from "promise-timeout";
-import {Resource} from "../../util";
+import { portSpec } from "../../specs/port";
+import { iframeOuterPort } from "../../browser";
+import { Port, receiveSingle } from "../../port";
+import { flipLifecycle } from "../_lifecycles";
+import { assert } from "chai";
+import { timeout, TimeoutError } from "promise-timeout";
+import { Resource } from "../../util";
 
 async function makeIframe(root: HTMLElement, src: string): Promise<HTMLIFrameElement> {
     const iframe = document.createElement("iframe");
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         iframe.onload = () => resolve(iframe);
         iframe.setAttribute("src", src);
         root.appendChild(iframe);
@@ -30,16 +30,14 @@ const iframeLifecycle: () => Promise<Resource<[Port<any, any>, Port<any, any>]>>
         value: [port1, port2],
         cleanup: async () => {
             document.body.removeChild(root);
-        }
+        },
     };
 };
 
 describe("Browser", function () {
-
     this.timeout(10000);
 
     describe("iframe basics", () => {
-
         it("simple communication", async () => {
             const resource = await iframeLifecycle();
             const [port1, port2] = resource.value;
@@ -68,19 +66,13 @@ describe("Browser", function () {
 
             await assert.isRejected(timeoutedPromise, TimeoutError);
         });
-
     });
 
     describe("iframe", () => {
-
         portSpec(iframeLifecycle);
 
         describe("Flipped", () => {
-
             portSpec(flipLifecycle(iframeLifecycle));
-
         });
-
     });
-
 });

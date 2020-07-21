@@ -4,15 +4,15 @@
  * @packageDocumentation
  */
 
-import {Handler, mapReceivePort, Port} from "./port";
-import {MessagePort} from "worker_threads";
-import {ResponsePort, WithResolvers} from "./procedure";
-import {recoverPromise, Try} from "./util";
-import {OptionsJson, Options} from "body-parser";
-import {Bubblewrap} from "@polypoly-eu/bubblewrap";
-import {json, raw} from "body-parser";
-import {IncomingMessage, RequestListener} from "http";
-import createServer, {NextHandleFunction, HandleFunction} from "connect";
+import { Handler, mapReceivePort, Port } from "./port";
+import { MessagePort } from "worker_threads";
+import { ResponsePort, WithResolvers } from "./procedure";
+import { recoverPromise, Try } from "./util";
+import { OptionsJson, Options } from "body-parser";
+import { Bubblewrap } from "@polypoly-eu/bubblewrap";
+import { json, raw } from "body-parser";
+import { IncomingMessage, RequestListener } from "http";
+import createServer, { NextHandleFunction, HandleFunction } from "connect";
 
 /**
  * Converts a Node `MessagePort` into a raw [[Port]] with unknown types.
@@ -32,7 +32,7 @@ export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
         },
         addHandler(handler: Handler<any>): void {
             port.on("message", handler);
-        }
+        },
     };
 }
 
@@ -69,21 +69,21 @@ export function middlewarePort<T, Body = any>(
     let _handler: Handler<WithResolvers<Body, T>> | undefined = undefined;
 
     const middleware: NextHandleFunction = async (_request, response, next) => {
-        if (_handler === undefined)
-            return; // yolo
+        if (_handler === undefined) return; // yolo
 
         const handler = _handler;
         const request = _request as IncomingMessage & { body: Body };
 
-        if (request.method !== "POST")
-            next();
+        if (request.method !== "POST") next();
 
-        const result = await recoverPromise(new Promise<T>(((resolve, reject) => {
-            handler({
-                request: request.body,
-                resolvers: {resolve, reject}
-            });
-        })));
+        const result = await recoverPromise(
+            new Promise<T>((resolve, reject) => {
+                handler({
+                    request: request.body,
+                    resolvers: { resolve, reject },
+                });
+            })
+        );
 
         const body = format(result);
 
@@ -96,11 +96,10 @@ export function middlewarePort<T, Body = any>(
     return [
         middleware,
         {
-            addHandler: handler => {
-                if (_handler === undefined)
-                    _handler = handler;
-            }
-        }
+            addHandler: (handler) => {
+                if (_handler === undefined) _handler = handler;
+            },
+        },
     ];
 }
 
@@ -111,21 +110,22 @@ export function middlewarePort<T, Body = any>(
  * the [[Try]] representing the outcome of the promise to a string. Conversely, incoming requests are parsed using
  * `JSON.parse`.
  */
-export function jsonMiddlewarePort(options?: OptionsJson): [RequestListener, ResponsePort<any, any>] {
+export function jsonMiddlewarePort(
+    options?: OptionsJson
+): [RequestListener, ResponsePort<any, any>] {
     const contentType = "application/json";
 
     const server = createServer();
 
-    server.use(json({
-        ...options,
-        strict: false,
-        type: contentType
-    }));
-
-    const [handler, port] = middlewarePort<any, any>(
-        contentType,
-        JSON.stringify
+    server.use(
+        json({
+            ...options,
+            strict: false,
+            type: contentType,
+        })
     );
+
+    const [handler, port] = middlewarePort<any, any>(contentType, JSON.stringify);
 
     server.use(handler);
 
@@ -148,25 +148,23 @@ export function bubblewrapMiddlewarePort(
 
     const server = createServer();
 
-    server.use(raw({
-        ...options,
-        type: contentType
-    }));
+    server.use(
+        raw({
+            ...options,
+            type: contentType,
+        })
+    );
 
-    const [handler, rawPort] = middlewarePort<any, Buffer>(
-        contentType,
-        value => Buffer.from(bubblewrap.encode(value))
+    const [handler, rawPort] = middlewarePort<any, Buffer>(contentType, (value) =>
+        Buffer.from(bubblewrap.encode(value))
     );
 
     server.use(handler);
 
-    const port = mapReceivePort(
-        rawPort,
-        data => ({
-            resolvers: data.resolvers,
-            request: bubblewrap.decode(data.request)
-        })
-    );
+    const port = mapReceivePort(rawPort, (data) => ({
+        resolvers: data.resolvers,
+        request: bubblewrap.decode(data.request),
+    }));
 
     return [server, port];
 }

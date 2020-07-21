@@ -34,10 +34,8 @@ export type Try<T> = Success<T> | Failure;
  * See [[recoverPromise]] for the inverse operation.
  */
 export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
-    if (t.tag === "success")
-        return t.value;
-    else
-        throw t.err;
+    if (t.tag === "success") return t.value;
+    else throw t.err;
 }
 
 /**
@@ -50,13 +48,12 @@ export async function recoverPromise<T>(p: Promise<T>): Promise<Try<T>> {
     try {
         return {
             tag: "success",
-            value: await p
+            value: await p,
         };
-    }
-    catch (err) {
+    } catch (err) {
         return {
             tag: "failure",
-            err
+            err,
         };
     }
 }
@@ -72,8 +69,7 @@ export function mapResource<T, U>(resource: Resource<T>, f: (t: T) => U): Resour
     return {
         value: f(resource.value),
         cleanup: async () => {
-            if (resource.cleanup)
-                await resource.cleanup();
-        }
+            if (resource.cleanup) await resource.cleanup();
+        },
     };
 }
