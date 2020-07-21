@@ -1,9 +1,9 @@
 import * as Decode from "io-ts/lib/Decoder";
-import {fold} from "fp-ts/lib/Either";
+import { fold } from "fp-ts/lib/Either";
 import readPkg from "@pnpm/read-package-json";
-import {pipe} from "fp-ts/lib/pipeable";
-import {parse as parseSemVer, SemVer, Range} from "semver";
-import {normalize, isAbsolute} from "path";
+import { pipe } from "fp-ts/lib/pipeable";
+import { parse as parseSemVer, SemVer, Range } from "semver";
+import { normalize, isAbsolute } from "path";
 
 export interface EngineManifest {
     readonly api: Range;
@@ -25,21 +25,20 @@ function expect<I, A>(input: I, msg: string, decoder: Decode.Decoder<I, A>): A {
     return pipe(
         decoder.decode(input),
         fold(
-            error => {
+            (error) => {
                 throw new Error(msg + "\n" + Decode.draw(error));
             },
-            t => t
+            (t) => t
         )
     );
 }
 
 const relativeDecoder = pipe(
     Decode.string,
-    Decode.parse(string => {
+    Decode.parse((string) => {
         const path = normalize(string);
 
-        if (isAbsolute(path) || path.startsWith(".."))
-            return Decode.failure(string, "relative");
+        if (isAbsolute(path) || path.startsWith("..")) return Decode.failure(string, "relative");
 
         return Decode.success(string);
     })
@@ -47,38 +46,34 @@ const relativeDecoder = pipe(
 
 const mainDecoder = Decode.type({
     name: Decode.string,
-    version:
-        pipe(
-            Decode.string,
-            Decode.parse(string => {
-                const parsed = parseSemVer(string);
-                if (parsed === null)
-                    return Decode.failure(string, "version string");
+    version: pipe(
+        Decode.string,
+        Decode.parse((string) => {
+            const parsed = parseSemVer(string);
+            if (parsed === null) return Decode.failure(string, "version string");
 
-                return Decode.success(parsed);
-            })
-        )
+            return Decode.success(parsed);
+        })
+    ),
 });
 
 const engineDecoder = Decode.type({
-    polypoly:
-        pipe(
-            Decode.string,
-            Decode.parse(string => {
-                try {
-                    return Decode.success(new Range(string));
-                }
-                catch (err) {
-                    return Decode.failure(string, err.message);
-                }
-            })
-        )
+    polypoly: pipe(
+        Decode.string,
+        Decode.parse((string) => {
+            try {
+                return Decode.success(new Range(string));
+            } catch (err) {
+                return Decode.failure(string, err.message);
+            }
+        })
+    ),
 });
 
 const rootDecoder = Decode.type({
     polypoly: Decode.type({
-        root: relativeDecoder
-    })
+        root: relativeDecoder,
+    }),
 });
 
 export async function readManifest(pkgPath: string): Promise<Manifest> {
@@ -92,6 +87,6 @@ export async function readManifest(pkgPath: string): Promise<Manifest> {
         api: rawEngine.polypoly,
         root: rawRoot.polypoly.root,
         name: rawMain.name,
-        version: rawMain.version
+        version: rawMain.version,
     };
 }
