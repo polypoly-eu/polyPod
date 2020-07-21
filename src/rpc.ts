@@ -32,18 +32,17 @@
  * @packageDocumentation
  */
 
-import {EndpointSpec, ServerOf, ClientOf, Callable} from "./types";
-import {EndpointProcedure, EndpointRequestPart, EndpointRequest} from "./protocol";
+import { EndpointSpec, ServerOf, ClientOf, Callable } from "./types";
+import { EndpointProcedure, EndpointRequestPart, EndpointRequest } from "./protocol";
 
 /**
  * Turns the implementation of an endpoint specification into a plain function.
  */
 export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>): EndpointProcedure {
     async function process(impl: any, parts: ReadonlyArray<EndpointRequestPart>): Promise<any> {
-        if (parts.length === 0)
-            return impl;
+        if (parts.length === 0) return impl;
 
-        const [{method, args}, ...rest] = parts;
+        const [{ method, args }, ...rest] = parts;
 
         const f = impl[method];
         if (typeof f !== "function")
@@ -52,7 +51,7 @@ export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>):
         return process(await Promise.resolve(f.call(impl, ...args)), rest);
     }
 
-    return req => process(impl, req);
+    return (req) => process(impl, req);
 }
 
 /**
@@ -79,13 +78,15 @@ function requestBuilder(client: EndpointProcedure, state: EndpointRequest): Requ
             // nested call: return a callable function
             return (...args: any[]) =>
                 requestBuilder(client, [...state, { method: property, args: args }]);
-        }
+        },
     });
 }
 
 /**
  * Constructs a proxy object that turns a function call chain into a plain function call.
  */
-export function endpointClient<Spec extends EndpointSpec>(client: EndpointProcedure): ClientOf<Spec> {
+export function endpointClient<Spec extends EndpointSpec>(
+    client: EndpointProcedure
+): ClientOf<Spec> {
     return requestBuilder(client, []) as ClientOf<Spec>;
 }

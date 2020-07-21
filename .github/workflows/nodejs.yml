@@ -13,9 +13,13 @@ jobs:
         node-version: 10.x
         registry-url: 'https://npm.pkg.github.com'
         scope: '@polypoly-eu'
-    - name: npm install and test
+    - name: npm install
       run: |
-        npm ci
+        npm ci --ignore-scripts
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: npm test
+      run: |
         npm test
     - name: ESLint
       run: |

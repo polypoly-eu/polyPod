@@ -1,9 +1,11 @@
-import {ClientOf, ObjectEndpointSpec, ServerOf, ValueEndpointSpec} from "../types";
+import { ClientOf, ObjectEndpointSpec, ServerOf, ValueEndpointSpec } from "../types";
 
 // compilation tests
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function check<T>(t: T): void { /* intentionally left blank */ }
+function check<T>(t: T): void {
+    /* intentionally left blank */
+}
 
 declare const client1: ClientOf<ValueEndpointSpec<number>>;
 declare const client2: ClientOf<ValueEndpointSpec<Promise<number>>>;
@@ -50,27 +52,43 @@ check(() => {
 
     check<ServerOf<ValueEndpointSpec<number>>>(server2);
 
-    check<ServerOf<ObjectEndpointSpec<{
-        test(): ValueEndpointSpec<number>;
-    }>>>(server3);
+    check<
+        ServerOf<
+            ObjectEndpointSpec<{
+                test(): ValueEndpointSpec<number>;
+            }>
+        >
+    >(server3);
 
-    check<ServerOf<ObjectEndpointSpec<{
-        test(): ObjectEndpointSpec<{
-            test2(): ValueEndpointSpec<number>;
-        }>;
-    }>>>(server4);
+    check<
+        ServerOf<
+            ObjectEndpointSpec<{
+                test(): ObjectEndpointSpec<{
+                    test2(): ValueEndpointSpec<number>;
+                }>;
+            }>
+        >
+    >(server4);
 
-    check<ServerOf<ObjectEndpointSpec<{
-        test(): ObjectEndpointSpec<{
-            test2(): ValueEndpointSpec<number>;
-        }>;
-    }>>>(server5);
+    check<
+        ServerOf<
+            ObjectEndpointSpec<{
+                test(): ObjectEndpointSpec<{
+                    test2(): ValueEndpointSpec<number>;
+                }>;
+            }>
+        >
+    >(server5);
 
-    check<ServerOf<ObjectEndpointSpec<{
-        test(): ObjectEndpointSpec<{
-            test2(): ValueEndpointSpec<number>;
-        }>;
-    }>>>(server6);
+    check<
+        ServerOf<
+            ObjectEndpointSpec<{
+                test(): ObjectEndpointSpec<{
+                    test2(): ValueEndpointSpec<number>;
+                }>;
+            }>
+        >
+    >(server6);
 });
 
 it("It compiled", () => {

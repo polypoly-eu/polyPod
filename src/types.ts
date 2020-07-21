@@ -53,10 +53,7 @@ export type EndpointSpec = ValueEndpointSpec<any> | ObjectEndpointSpec<any>;
 /**
  * Wraps a type `T` into `Promise`, unless `T` is already a `Promise`.
  */
-export type ForcePromise<T> =
-    T extends Promise<any> ?
-        T :
-        Promise<T>;
+export type ForcePromise<T> = T extends Promise<any> ? T : Promise<T>;
 
 /**
  * Type union of `T` and `Promise<T>`, unless `T` is already a `Promise`.
@@ -91,21 +88,17 @@ export type MaybePromise<T> = T | ForcePromise<T>;
  * Note that the inner method `nested.foo` is assumed to always return a `Promise<string>`, whereas the outer method
  * `test` may return `number` or `Promise<number>`.
  */
-export type ServerOf<Spec extends EndpointSpec> =
-    Spec extends ValueEndpointSpec<infer T> ?
-        MaybePromise<T> :
-        Spec extends ObjectEndpointSpec<infer T> ?
-            {
-                [P in keyof T]:
-                    T[P] extends (...args: infer Args) => infer Return ?
-                        (
-                            Return extends EndpointSpec ?
-                                (...args: Args) => MaybePromise<ServerOf<Return>>:
-                                never
-                        ) :
-                        never
-            } :
-            never;
+export type ServerOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec<infer T>
+    ? MaybePromise<T>
+    : Spec extends ObjectEndpointSpec<infer T>
+    ? {
+          [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
+              ? Return extends EndpointSpec
+                  ? (...args: Args) => MaybePromise<ServerOf<Return>>
+                  : never
+              : never;
+      }
+    : never;
 
 /**
  * This alias denotes the “end” of a call chain. It is a function taking no arguments and returning a `Promise` of `T`
@@ -147,18 +140,14 @@ export type Callable<T> = () => ForcePromise<T>;
  * Ultimately, when a user calls methods on this proxy object, these calls are transmitted through a protocol to a
  * server implementation that closely mirrors the shape of the proxy.
  */
-export type ClientOf<Spec extends EndpointSpec> =
-    Spec extends ValueEndpointSpec<infer T> ?
-        Callable<T> :
-        Spec extends ObjectEndpointSpec<infer T> ?
-            {
-                [P in keyof T]:
-                    T[P] extends (...args: infer Args) => infer Return ?
-                        (
-                            Return extends EndpointSpec ?
-                                (...args: Args) => ClientOf<Return> :
-                                never
-                        ) :
-                       never
-            } :
-            never;
+export type ClientOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec<infer T>
+    ? Callable<T>
+    : Spec extends ObjectEndpointSpec<infer T>
+    ? {
+          [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
+              ? Return extends EndpointSpec
+                  ? (...args: Args) => ClientOf<Return>
+                  : never
+              : never;
+      }
+    : never;
