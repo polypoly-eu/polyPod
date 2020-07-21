@@ -13,22 +13,20 @@
  * @packageDocumentation
  */
 
-import {Pod} from "./api";
+import { Pod } from "./api";
 import fc from "fast-check";
-import {DataFactorySpec, gens} from "@polypoly-eu/rdf-spec";
-import chai, {assert} from "chai";
+import { DataFactorySpec, gens } from "@polypoly-eu/rdf-spec";
+import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 let httpbinUrl: string | undefined;
 
 export function getHttpbinUrl(): string {
-    if (httpbinUrl !== undefined)
-        return httpbinUrl;
+    if (httpbinUrl !== undefined) return httpbinUrl;
 
     if (process.env.HTTPBIN_URL) {
         httpbinUrl = process.env.HTTPBIN_URL;
-    }
-    else {
+    } else {
         console.warn("Using live httpbin API; set HTTPBIN_URI to use local server ...");
         httpbinUrl = "https://httpbin.org";
     }
@@ -37,10 +35,8 @@ export function getHttpbinUrl(): string {
 }
 
 function encodeUtf8(string: string): Uint8Array {
-    if (typeof TextEncoder !== "undefined")
-        return new TextEncoder().encode(string);
-    else
-        return Buffer.from(string, "utf-8");
+    if (typeof TextEncoder !== "undefined") return new TextEncoder().encode(string);
+    else return Buffer.from(string, "utf-8");
 }
 
 /**
@@ -53,7 +49,6 @@ function encodeUtf8(string: string): Uint8Array {
  * access or provide a URI to a local httpbin service.
  */
 export class PodSpec {
-
     constructor(
         private readonly pod: Pod,
         private readonly path: string,
@@ -63,10 +58,9 @@ export class PodSpec {
     }
 
     polyIn(): void {
-        const {dataFactory, polyIn} = this.pod;
+        const { dataFactory, polyIn } = this.pod;
 
         describe("polyIn", () => {
-
             describe("factory", () => {
                 new DataFactorySpec(dataFactory).run();
             });
@@ -82,58 +76,66 @@ export class PodSpec {
             });
 
             it("add/select", async () => {
-                const {triple} = gens(dataFactory);
-                await fc.assert(fc.asyncProperty(fc.array(triple), async quads => {
-                    await polyIn.add(...quads);
-                    for (const quad of quads) {
-                        const selected = await polyIn.select(quad);
-                        assert.lengthOf(selected, 1);
-                        assert.ok(quad.equals(selected[0]));
-                    }
-                }));
+                const { triple } = gens(dataFactory);
+                await fc.assert(
+                    fc.asyncProperty(fc.array(triple), async (quads) => {
+                        await polyIn.add(...quads);
+                        for (const quad of quads) {
+                            const selected = await polyIn.select(quad);
+                            assert.lengthOf(selected, 1);
+                            assert.ok(quad.equals(selected[0]));
+                        }
+                    })
+                );
             });
-
         });
     }
 
     polyOut(): void {
-        const {polyOut} = this.pod;
+        const { polyOut } = this.pod;
 
         describe("polyOut", () => {
-
             describe("Filesystem", () => {
-
-                const pathGen = fc.hexaString(1, 30).map(path => this.path + "/" + path);
+                const pathGen = fc.hexaString(1, 30).map((path) => this.path + "/" + path);
 
                 async function skipIfExists(path: string): Promise<void> {
                     let cont = true;
                     try {
                         await polyOut.stat(path);
                         cont = false;
-                    }
-                    catch {
+                    } catch {
                         // intentionally left blank
                     }
                     fc.pre(cont);
                 }
 
                 it("write/read", async () => {
-                    await fc.assert(fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
-                        await skipIfExists(path);
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
+                            await skipIfExists(path);
 
-                        await polyOut.writeFile(path, content, { encoding: "utf-8" });
+                            await polyOut.writeFile(path, content, { encoding: "utf-8" });
 
-                        await assert.eventually.equal(polyOut.readFile(path, { encoding: "utf-8" }), content);
-                        await assert.eventually.deepEqual(polyOut.readFile(path), encodeUtf8(content));
-                    }));
+                            await assert.eventually.equal(
+                                polyOut.readFile(path, { encoding: "utf-8" }),
+                                content
+                            );
+                            await assert.eventually.deepEqual(
+                                polyOut.readFile(path),
+                                encodeUtf8(content)
+                            );
+                        })
+                    );
                 });
 
                 it("stat/read", async () => {
-                    await fc.assert(fc.asyncProperty(pathGen, async path => {
-                        await skipIfExists(path);
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, async (path) => {
+                            await skipIfExists(path);
 
-                        await assert.isRejected(polyOut.readFile(path, { encoding: "utf-8" }));
-                    }));
+                            await assert.isRejected(polyOut.readFile(path, { encoding: "utf-8" }));
+                        })
+                    );
                 });
 
                 it("stat (root)", async () => {
@@ -143,28 +145,31 @@ export class PodSpec {
                 });
 
                 it("stat (files)", async () => {
-                    await fc.assert(fc.asyncProperty(pathGen, async path => {
-                        let assertion: () => void;
-                        try {
-                            const stat = await polyOut.stat(path);
-                            assertion = () => assert.notEqual(stat.isFile(), stat.isDirectory());
-                        }
-                        catch {
-                            assertion = () => {
-                                // intentionally left blank
-                            };
-                        }
-                        assertion();
-                    }));
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, async (path) => {
+                            let assertion: () => void;
+                            try {
+                                const stat = await polyOut.stat(path);
+                                assertion = () =>
+                                    assert.notEqual(stat.isFile(), stat.isDirectory());
+                            } catch {
+                                assertion = () => {
+                                    // intentionally left blank
+                                };
+                            }
+                            assertion();
+                        })
+                    );
                 });
-
             });
 
             describe("HTTP requests", () => {
-
                 it("Successful GET (text)", async () => {
                     const response = await polyOut.fetch(`${this.httpbinUrl}/robots.txt`);
-                    await assert.eventually.equal(response.text(), "User-agent: *\nDisallow: /deny\n");
+                    await assert.eventually.equal(
+                        response.text(),
+                        "User-agent: *\nDisallow: /deny\n"
+                    );
                 });
 
                 it("Successful GET (json)", async () => {
@@ -179,16 +184,13 @@ export class PodSpec {
 
                 it("Successful POST", async () => {
                     const postBody = `"test-post"`;
-                    const response = await polyOut.fetch(
-                        `${this.httpbinUrl}/anything`,
-                        {
-                            method: "post",
-                            body: postBody,
-                            headers: {
-                                "Content-Type": "application/json"
-                            }
-                        }
-                    );
+                    const response = await polyOut.fetch(`${this.httpbinUrl}/anything`, {
+                        method: "post",
+                        body: postBody,
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
 
                     const json = await response.json();
 
@@ -200,9 +202,7 @@ export class PodSpec {
                     const response = polyOut.fetch(`${this.httpbinUrl}/status/404`);
                     await assert.eventually.propertyVal(response, "status", 404);
                 });
-
             });
-
         });
     }
 
@@ -210,16 +210,11 @@ export class PodSpec {
         this.polyIn();
         this.polyOut();
     }
-
 }
 
 /**
  * Convenience function to instantiate the [[PodSpec]] and run it immediately afterwards.
  */
-export function podSpec(
-    pod: Pod,
-    path = "/",
-    httpbinUrl = "https://httpbin.org"
-): void {
+export function podSpec(pod: Pod, path = "/", httpbinUrl = "https://httpbin.org"): void {
     return new PodSpec(pod, path, httpbinUrl).run();
 }

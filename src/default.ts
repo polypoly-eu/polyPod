@@ -8,10 +8,10 @@
  */
 
 import * as RDF from "rdf-js";
-import {dataFactory} from "@polypoly-eu/rdf";
-import {Pod, PolyIn, PolyOut} from "./api";
-import {Fetch, Response, RequestInit} from "./fetch";
-import {EncodingOptions, FS, Stats} from "./fs";
+import { dataFactory } from "@polypoly-eu/rdf";
+import { Pod, PolyIn, PolyOut } from "./api";
+import { Fetch, Response, RequestInit } from "./fetch";
+import { EncodingOptions, FS, Stats } from "./fs";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -30,31 +30,34 @@ import {EncodingOptions, FS, Stats} from "./fs";
  * systems, unless the underlying implementations implement their own access control logic.
  */
 export class DefaultPod implements Pod {
-
     public readonly dataFactory: RDF.DataFactory = dataFactory;
 
     constructor(
         public readonly store: RDF.DatasetCore,
         public readonly fs: FS,
         public readonly fetch: Fetch
-    ) {
-    }
+    ) {}
 
     /**
      * The [[PolyIn]] interface. See [[PolyIn]] for the description.
      */
     get polyIn(): PolyIn {
         return {
-            select: async matcher =>
+            select: async (matcher) =>
                 Array.from(
-                    this.store.match(matcher.subject, matcher.predicate, matcher.object, dataFactory.defaultGraph())
+                    this.store.match(
+                        matcher.subject,
+                        matcher.predicate,
+                        matcher.object,
+                        dataFactory.defaultGraph()
+                    )
                 ),
             add: async (...quads) =>
-                quads.forEach(quad => {
+                quads.forEach((quad) => {
                     if (!quad.graph.equals(dataFactory.defaultGraph()))
                         throw new Error("Only default graph allowed");
                     this.store.add(quad);
-                })
+                }),
         };
     }
 
@@ -65,7 +68,7 @@ export class DefaultPod implements Pod {
         const fs = this.fs;
         const _fetch = this.fetch;
 
-        return new class implements PolyOut {
+        return new (class implements PolyOut {
             fetch(input: string, init?: RequestInit): Promise<Response> {
                 return _fetch(input, init);
             }
@@ -73,10 +76,8 @@ export class DefaultPod implements Pod {
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
             readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
-                if (options === undefined)
-                    return fs.readFile(path);
-                else
-                    return fs.readFile(path, options);
+                if (options === undefined) return fs.readFile(path);
+                else return fs.readFile(path, options);
             }
 
             readdir(path: string): Promise<string[]> {
@@ -90,8 +91,6 @@ export class DefaultPod implements Pod {
             writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
                 return fs.writeFile(path, content, options);
             }
-        };
+        })();
     }
-
 }
-

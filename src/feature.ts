@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import {Pod} from "./api";
+import { Pod } from "./api";
 
 /**
  * Custom event that signals availability of the [[Pod]] API. See [[Pod]] for details.
@@ -25,6 +25,6 @@ declare global {
     }
 
     interface WindowEventMap {
-        "podReady": PodReadyEvent;
+        podReady: PodReadyEvent;
     }
 }

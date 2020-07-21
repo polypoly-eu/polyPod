@@ -6,8 +6,8 @@
  */
 
 import * as RDF from "rdf-js";
-import {Fetch} from "./fetch";
-import {FS} from "./fs";
+import { Fetch } from "./fetch";
+import { FS } from "./fs";
 
 /**
  * A _matcher_ specifies a filter for querying the Pod store.
@@ -83,7 +83,6 @@ export interface PolyIn {
      */
     add(...quads: RDF.Quad[]): Promise<void>;
 }
-
 
 /**
  * `PolyOut` specifies the interaction of the Feature with the environment. It is concerned with file system operations
