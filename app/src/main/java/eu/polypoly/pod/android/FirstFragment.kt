@@ -29,16 +29,11 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        view.findViewById<Button>(R.id.button_first).setOnClickListener {
-//            val action = FirstFragmentDirections.actionFirstFragmentToFeatureFragment("podCheck")
-//            findNavController().navigate(action)
-//        }
-
         val context = requireContext()
         val features = findInstalledFeatures(context)
 
         viewManager = LinearLayoutManager(context)
-        viewAdapter = InstalledFeatureTeaser(features)
+        viewAdapter = InstalledFeatureTeaser(this, features)
 
         recyclerView = view.findViewById(R.id.features_list)
         recyclerView.apply {

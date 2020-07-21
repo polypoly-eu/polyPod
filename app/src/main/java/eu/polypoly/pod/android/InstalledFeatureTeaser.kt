@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-class InstalledFeatureTeaser(private val installedFeatures: Array<String>) : RecyclerView.Adapter<InstalledFeatureTeaser.ViewHolder>() {
+class InstalledFeatureTeaser(private val originatingFragment: Fragment, private val installedFeatures: Array<String>) : RecyclerView.Adapter<InstalledFeatureTeaser.ViewHolder>() {
 
     class ViewHolder(val itemListView: ConstraintLayout) : RecyclerView.ViewHolder(itemListView)
 
@@ -21,5 +23,10 @@ class InstalledFeatureTeaser(private val installedFeatures: Array<String>) : Rec
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val textView = holder.itemListView.getViewById(R.id.textView) as TextView
         textView.text = installedFeatures[position]
+        holder.itemListView.setOnClickListener {
+            // FIXME - navigation assumes we're coming from FirstFragment, which might not necessary be true
+            val action = FirstFragmentDirections.actionFirstFragmentToFeatureFragment(installedFeatures[position])
+            findNavController(originatingFragment).navigate(action)
+        }
     }
 }
