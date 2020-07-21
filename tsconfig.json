@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "es2019",
+    "target": "es6",
+    "noEmit": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
-    "jsx": "react"
+    "jsx": "react",
+    "allowJs": true
   }
 }

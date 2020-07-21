@@ -20,7 +20,7 @@ export default function QuestionScreen() {
         RangeQuestion: RangeQuestion,
     };
 
-    const Card = components[currentQuestion.screen()];
+    const Card = components[currentQuestion.screen() as any];
 
     return (
         <Layout header={<div />} footer={<FooterNavigation />}>
