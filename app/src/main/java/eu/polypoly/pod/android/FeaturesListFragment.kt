@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class FeaturesListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -23,7 +23,7 @@ class FirstFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_first, container, false)
+        return inflater.inflate(R.layout.fragment_features_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

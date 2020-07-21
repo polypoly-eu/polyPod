@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/FeaturesListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="eu.polypoly.pod.android.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/FeaturesListFragment"
+        android:name="eu.polypoly.pod.android.FeaturesListFragment"
+        android:label="@string/features_list_fragment_label"
+        tools:layout="@layout/fragment_features_list">
 
         <action
-            android:id="@+id/action_FirstFragment_to_FeatureFragment"
+            android:id="@+id/action_FeaturesListFragment_to_FeatureFragment"
             app:destination="@id/FeatureFragment" />
     </fragment>
     <fragment
@@ -22,8 +22,8 @@
         tools:layout="@layout/fragment_feature">
 
         <action
-            android:id="@+id/action_FeatureFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_FeatureFragment_to_FeaturesListFragment"
+            app:destination="@id/FeaturesListFragment" />
 
         <argument
             android:name="featureName"

@@ -94,7 +94,7 @@ class FeatureFragment : Fragment() {
         webView.loadUrl(url)
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_FeatureFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_FeatureFragment_to_FeaturesListFragment)
         }
     }
 }

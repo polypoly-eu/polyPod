@@ -2,7 +2,7 @@
     <string name="app_name">polyPod-Android</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
+    <string name="features_list_fragment_label">Features list Fragment</string>
     <string name="feature_fragment_label">Feature Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
