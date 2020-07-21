@@ -10,12 +10,16 @@ export interface AsyncOperation<This extends AsyncRecord<This>, Name extends key
     args: Parameters<This[Name]>;
 }
 
-export type Filter<This extends AsyncRecord<This>, Name extends keyof This> =
-    (ret: UnPromise<ReturnType<This[Name]>>) => ReturnType<This[Name]>;
+export type Filter<This extends AsyncRecord<This>, Name extends keyof This> = (
+    ret: UnPromise<ReturnType<This[Name]>>
+) => ReturnType<This[Name]>;
 
 export type Eliminators<This extends AsyncRecord<This>> = {
-    [Name in keyof This]: (self: This, ...args: Parameters<This[Name]>) => Filter<This, Name> | undefined;
-}
+    [Name in keyof This]: (
+        self: This,
+        ...args: Parameters<This[Name]>
+    ) => Filter<This, Name> | undefined;
+};
 
 export function eliminate<This extends AsyncRecord<This>, Name extends keyof This>(
     operation: AsyncOperation<This, Name>,
@@ -25,13 +29,15 @@ export function eliminate<This extends AsyncRecord<This>, Name extends keyof Thi
 }
 
 export interface Interceptor<This extends AsyncRecord<This>> {
-    guard<Name extends keyof This>(operation: AsyncOperation<This, Name>): Promise<Filter<This, Name> | undefined>;
+    guard<Name extends keyof This>(
+        operation: AsyncOperation<This, Name>
+    ): Promise<Filter<This, Name> | undefined>;
 }
 
 export const nullInterceptor: Interceptor<any> = {
     async guard(): Promise<undefined> {
         return;
-    }
+    },
 };
 
 export function intercept<This extends AsyncRecord<This>>(
@@ -48,11 +54,11 @@ export function intercept<This extends AsyncRecord<This>>(
                 const operation: AsyncOperation<This, Name> = {
                     name,
                     self: target,
-                    args
+                    args,
                 };
 
-                const nullFilter = (async t => t) as Filter<This, Name>;
-                const filter = await interceptor.guard(operation) || nullFilter;
+                const nullFilter = (async (t) => t) as Filter<This, Name>;
+                const filter = (await interceptor.guard(operation)) || nullFilter;
 
                 const result: RawReturn = await func.call(target, ...args);
 
@@ -60,6 +66,6 @@ export function intercept<This extends AsyncRecord<This>>(
             };
 
             return wrapped as This[Name];
-        }
+        },
     });
 }

@@ -13,5 +13,5 @@ export const foobar: Foobar = {
     },
     async h(param, ...params): Promise<void> {
         return void (param + params.length);
-    }
+    },
 };

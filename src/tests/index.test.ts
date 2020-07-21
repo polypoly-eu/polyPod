@@ -1,9 +1,8 @@
-import {eliminate, intercept, nullInterceptor, AsyncOperation} from "../index";
-import {foobar, Foobar} from "./_common";
-import {expectTypeOf} from "expect-type";
+import { eliminate, intercept, nullInterceptor, AsyncOperation } from "../index";
+import { foobar, Foobar } from "./_common";
+import { expectTypeOf } from "expect-type";
 
 describe("AOP", () => {
-
     it("No behaviour change", async () => {
         const wrapped = intercept<Foobar>(foobar, nullInterceptor);
         expectTypeOf(wrapped).toMatchTypeOf<Foobar>();
@@ -22,18 +21,19 @@ describe("AOP", () => {
         const wrapped = intercept<Foobar>(foobar, {
             async guard<Name extends keyof Foobar>(operation: AsyncOperation<Foobar, Name>) {
                 return eliminate(operation, {
-                    f: () => { throw new Error("rejected"); },
+                    f: () => {
+                        throw new Error("rejected");
+                    },
                     g: () => undefined,
                     h: (self, param, ...rest) => {
                         expectTypeOf(self).toMatchTypeOf<Foobar>();
                         expectTypeOf(param).toBeString();
                         expectTypeOf(rest).toMatchTypeOf<number[]>();
-                        if (rest.length === 1)
-                            return undefined;
+                        if (rest.length === 1) return undefined;
                         throw new Error("rejected");
-                    }
+                    },
                 });
-            }
+            },
         });
 
         await expect(wrapped.f(1)).rejects.toThrowError("rejected");
@@ -46,21 +46,20 @@ describe("AOP", () => {
         const wrapped = intercept<Foobar>(foobar, {
             async guard<Name extends keyof Foobar>(operation: AsyncOperation<Foobar, Name>) {
                 return eliminate(operation, {
-                    f: () => async str => {
+                    f: () => async (str) => {
                         expectTypeOf(str).toBeString();
                         return str + str;
                     },
-                    g: () => async num => {
+                    g: () => async (num) => {
                         expectTypeOf(num).toBeNumber();
                         return num * 3;
                     },
-                    h: () => undefined
+                    h: () => undefined,
                 });
-            }
+            },
         });
 
         await expect(wrapped.f(1)).resolves.toEqual("11");
         await expect(wrapped.g(1, "2")).resolves.toEqual(6);
     });
-
 });
