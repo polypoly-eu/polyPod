@@ -1,5 +1,5 @@
-import {dataFactory} from "../index";
-import {ConvertSpec, DataFactorySpec} from "@polypoly-eu/rdf-spec";
+import { dataFactory } from "../index";
+import { ConvertSpec, DataFactorySpec } from "@polypoly-eu/rdf-spec";
 import * as RDFJS from "@rdfjs/data-model";
 
 describe("Spec", () => {

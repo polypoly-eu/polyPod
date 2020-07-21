@@ -18,17 +18,13 @@ export abstract class Model {
     abstract termType: string;
 
     equals(other: RDF.Term | null | undefined): boolean {
-        if (!other || other.termType !== this.termType)
-            return false;
+        if (!other || other.termType !== this.termType) return false;
 
         for (const [key, value] of Object.entries(this)) {
             const otherValue = (other as any)[key];
             if (value instanceof Model) {
-                if (!value.equals(otherValue))
-                    return false;
-            }
-            else if (otherValue !== value)
-                return false;
+                if (!value.equals(otherValue)) return false;
+            } else if (otherValue !== value) return false;
         }
 
         return true;
@@ -38,9 +34,7 @@ export abstract class Model {
 export class NamedNode extends Model implements RDF.NamedNode {
     termType: "NamedNode" = "NamedNode";
 
-    constructor(
-        public value: string
-    ) {
+    constructor(public value: string) {
         super();
         Object.freeze(this);
     }
@@ -53,45 +47,38 @@ export class BlankNode extends Model implements RDF.BlankNode {
 
     value: string;
 
-    constructor(
-        value?: string
-    ) {
+    constructor(value?: string) {
         super();
 
-        if (value)
-            this.value = value;
-        else
-            this.value = "b" + (++BlankNode.nextId);
+        if (value) this.value = value;
+        else this.value = "b" + ++BlankNode.nextId;
 
         Object.freeze(this);
     }
 }
 
 export class Literal extends Model implements RDF.Literal {
-    static readonly langStringDatatype = new NamedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#langString');
-    static readonly stringDatatype = new NamedNode('http://www.w3.org/2001/XMLSchema#string');
+    static readonly langStringDatatype = new NamedNode(
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    );
+    static readonly stringDatatype = new NamedNode("http://www.w3.org/2001/XMLSchema#string");
 
     language: string;
     datatype: RDF.NamedNode;
     termType: "Literal" = "Literal";
 
-    constructor(
-        public value: string,
-        languageOrDatatype?: string | RDF.NamedNode
-    ) {
+    constructor(public value: string, languageOrDatatype?: string | RDF.NamedNode) {
         super();
 
         if (typeof languageOrDatatype === "string") {
             if (languageOrDatatype.indexOf(":") === -1) {
                 this.language = languageOrDatatype;
                 this.datatype = Literal.langStringDatatype;
-            }
-            else {
+            } else {
                 this.language = "";
                 this.datatype = new NamedNode(languageOrDatatype);
             }
-        }
-        else {
+        } else {
             this.language = "";
             this.datatype = languageOrDatatype || Literal.stringDatatype;
         }
@@ -103,9 +90,7 @@ export class Literal extends Model implements RDF.Literal {
 export class Variable extends Model implements RDF.Variable {
     termType: "Variable" = "Variable";
 
-    constructor(
-        public value: string
-    ) {
+    constructor(public value: string) {
         super();
         Object.freeze(this);
     }
@@ -134,8 +119,13 @@ export class Quad implements RDF.Quad {
     }
 
     equals(other: RDF.BaseQuad | null | undefined): boolean {
-        return !!other && other.subject.equals(this.subject) && other.predicate.equals(this.predicate) &&
-            other.object.equals(this.object) && other.graph.equals(this.graph);
+        return (
+            !!other &&
+            other.subject.equals(this.subject) &&
+            other.predicate.equals(this.predicate) &&
+            other.object.equals(this.object) &&
+            other.graph.equals(this.graph)
+        );
     }
 }
 
@@ -143,7 +133,7 @@ const prototypes = {
     subject: [NamedNode.prototype, BlankNode.prototype, Variable.prototype],
     predicate: [NamedNode.prototype, Variable.prototype],
     object: [NamedNode.prototype, Literal.prototype, BlankNode.prototype, Variable.prototype],
-    graph: [DefaultGraph.prototype, NamedNode.prototype, BlankNode.prototype, Variable.prototype]
+    graph: [DefaultGraph.prototype, NamedNode.prototype, BlankNode.prototype, Variable.prototype],
 };
 
 /**
@@ -175,9 +165,7 @@ const prototypes = {
  * For the semantics of the methods, refer to [the spec](https://rdf.js.org/data-model-spec/).
  */
 export class DataFactory implements RDF.DataFactory<Quad, Quad> {
-    constructor(
-        private readonly strict: boolean
-    ) {
+    constructor(private readonly strict: boolean) {
         Object.freeze(this);
     }
 
@@ -196,15 +184,16 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
 
     literal(value: string, languageOrDatatype?: string | NamedNode): Literal {
         if (this.strict) {
-            if (typeof value !== "string")
-                throw new Error("Expected string as value");
+            if (typeof value !== "string") throw new Error("Expected string as value");
 
             if (
                 languageOrDatatype !== undefined &&
                 typeof languageOrDatatype !== "string" &&
                 Object.getPrototypeOf(languageOrDatatype) !== NamedNode.prototype
             )
-                throw new Error("Expected undefined, string or NamedNode prototype as language/datatype");
+                throw new Error(
+                    "Expected undefined, string or NamedNode prototype as language/datatype"
+                );
         }
 
         return new Literal(value, languageOrDatatype);
@@ -212,14 +201,18 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
 
     namedNode(value: string): NamedNode {
         if (this.strict) {
-            if (typeof value !== "string")
-                throw new Error("Expected string");
+            if (typeof value !== "string") throw new Error("Expected string");
         }
 
         return new NamedNode(value);
     }
 
-    quad(subject: RDF.Quad_Subject, predicate: RDF.Quad_Predicate, object: RDF.Quad_Object, graph?: RDF.Quad_Graph): Quad {
+    quad(
+        subject: RDF.Quad_Subject,
+        predicate: RDF.Quad_Predicate,
+        object: RDF.Quad_Object,
+        graph?: RDF.Quad_Graph
+    ): Quad {
         if (this.strict) {
             if (!prototypes.subject.includes(Object.getPrototypeOf(subject)))
                 throw new Error("Invalid prototype of subject");
@@ -236,8 +229,7 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
 
     variable(value: string): Variable {
         if (this.strict) {
-            if (typeof value !== "string")
-                throw new Error("Expected string");
+            if (typeof value !== "string") throw new Error("Expected string");
         }
 
         return new Variable(value);

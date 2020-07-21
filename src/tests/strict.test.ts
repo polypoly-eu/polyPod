@@ -1,5 +1,5 @@
-import {ConvertSpec, DataFactorySpec} from "@polypoly-eu/rdf-spec";
-import {DataFactory} from "../index";
+import { ConvertSpec, DataFactorySpec } from "@polypoly-eu/rdf-spec";
+import { DataFactory } from "../index";
 import * as Foreign from "@rdfjs/data-model";
 
 const dataFactory = new DataFactory(true);
@@ -17,7 +17,6 @@ describe("Conversion @rdfjs/data-model → this", () => {
 });
 
 describe("Strict", () => {
-
     it("Rejects foreign terms (quad)", () => {
         const s = Foreign.namedNode("http://example.org/s");
         const p = Foreign.namedNode("http://example.org/p");
@@ -35,5 +34,4 @@ describe("Strict", () => {
     it("Rejects ill-typed invocations", () => {
         expect(() => dataFactory.variable(null!)).toThrowError();
     });
-
 });
