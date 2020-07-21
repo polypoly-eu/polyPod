@@ -23,7 +23,7 @@
  * @packageDocumentation
  */
 
-import {encode, decode, ExtensionCodec} from "@msgpack/msgpack";
+import { encode, decode, ExtensionCodec } from "@msgpack/msgpack";
 
 /**
  * Symbol for static class methods that provide custom deserialization logic. See [[Class]] for an example.
@@ -141,6 +141,7 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  * It is not possible to customize this behaviour for arrays, raw objects, or `undefined` values nested below objects
  * of registered classes.
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type Class<T extends MaybeSerializable> = Function & {
     prototype: T;
     [deserialize]?: (any: any) => T;
@@ -179,7 +180,7 @@ export const msgPackEtypeError = 0x03;
  *
  * This class has no properties.
  */
-export class Undefined { }
+export class Undefined {}
 
 /**
  * Encoding and decoding of JavaScript values to and from byte arrays.
@@ -201,10 +202,7 @@ export class Undefined { }
 export class Bubblewrap {
     codec?: ExtensionCodec;
 
-    private constructor(
-        private readonly classes: Classes,
-        private readonly strict: boolean
-    ) { }
+    private constructor(private readonly classes: Classes, private readonly strict: boolean) {}
 
     /**
      * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes.
@@ -227,25 +225,23 @@ export class Bubblewrap {
         const thisKeys = Object.keys(this.classes);
         const thatKeys = Object.keys(more);
         for (const thisKey of thisKeys)
-            if (thatKeys.includes(thisKey))
-                throw new Error(`Duplicate identifier ${thisKey}`);
+            if (thatKeys.includes(thisKey)) throw new Error(`Duplicate identifier ${thisKey}`);
         return new Bubblewrap({ ...this.classes, ...more }, this.strict);
     }
 
     private registerStrict(codec: ExtensionCodec): void {
-        if (!this.strict)
-            return;
+        if (!this.strict) return;
 
         const knownPrototypes = [
             Object.prototype,
             Error.prototype,
             Undefined.prototype,
-            ...Object.values(this.classes).map(cls => cls.prototype)
+            ...Object.values(this.classes).map((cls) => cls.prototype),
         ];
 
         codec.register({
             type: msgPackEtypeStrict,
-            encode: value => {
+            encode: (value) => {
                 if (typeof value === "object" && !Array.isArray(value)) {
                     if (knownPrototypes.includes(Object.getPrototypeOf(value)))
                         // this value is probably fine, please go on
@@ -255,7 +251,9 @@ export class Bubblewrap {
                 }
                 return null;
             },
-            decode: () => { throw new Error("Attempted to decode a dummy type"); }
+            decode: () => {
+                throw new Error("Attempted to decode a dummy type");
+            },
         });
     }
 
@@ -266,19 +264,18 @@ export class Bubblewrap {
 
         codec.register({
             type: msgPackEtypeUndef,
-            encode: value => value instanceof Undefined ? encode(null) : null,
-            decode: () => undefined
+            encode: (value) => (value instanceof Undefined ? encode(null) : null),
+            decode: () => undefined,
         });
 
         codec.register({
             type: msgPackEtypeClass,
-            encode: _value => {
+            encode: (_value) => {
                 const entries = Object.entries(this.classes);
                 // assume that later entries take precedence over earlier ones
                 entries.reverse();
                 for (const [name, Class] of entries) {
-                    if (!(_value instanceof Class))
-                        continue;
+                    if (!(_value instanceof Class)) continue;
 
                     // @ts-ignore
                     const value: MaybeSerializable = _value;
@@ -288,51 +285,45 @@ export class Bubblewrap {
 
                     const raw = Object.entries(value);
                     const entries = raw.map(([key, value]) => {
-                        if (value === undefined)
-                            return [key, new Undefined()];
-                        else
-                            return [key, value];
+                        if (value === undefined) return [key, new Undefined()];
+                        else return [key, value];
                     });
 
-                    return encode([name, entries], { extensionCodec: codec })
+                    return encode([name, entries], { extensionCodec: codec });
                 }
 
                 return null;
             },
-            decode: buffer => {
+            decode: (buffer) => {
                 const [name, raw] = decode(buffer, { extensionCodec: codec }) as any;
                 const Class = this.classes[name];
 
                 const deserializer = Class[deserialize];
-                if (deserializer !== undefined)
-                    return deserializer(raw);
+                if (deserializer !== undefined) return deserializer(raw);
 
                 const object = Object.create(Class.prototype);
-                for (const [key, value] of raw as [string, any][])
-                    object[key] = value;
+                for (const [key, value] of raw as [string, any][]) object[key] = value;
                 return object;
-            }
+            },
         });
 
         codec.register({
             type: msgPackEtypeError,
-            encode: value => value instanceof Error ? encode(value.message) : null,
-            decode: buffer => new Error(decode(buffer) as string)
+            encode: (value) => (value instanceof Error ? encode(value.message) : null),
+            decode: (buffer) => new Error(decode(buffer) as string),
         });
 
         return codec;
     }
 
-    encode(value: any): Uint8Array {
-        if (!this.codec)
-            this.codec = this.makeCodec();
+    encode(value: unknown): Uint8Array {
+        if (!this.codec) this.codec = this.makeCodec();
 
         return encode(value, { extensionCodec: this.codec });
     }
 
     decode(buffer: Uint8Array): any {
-        if (!this.codec)
-            this.codec = this.makeCodec();
+        if (!this.codec) this.codec = this.makeCodec();
 
         return decode(buffer, { extensionCodec: this.codec });
     }
