@@ -6,11 +6,9 @@ import React from "react";
 import NextButton from "../buttons/NextButton";
 import PolyTextInput from "../basic/PolyTextInput";
 
-export default function TextQuestion({index, question}) {
-    const {getQuestionnaire} = useContext(QuestionnaireContext);
-    const {saveQuestionnaireAnswers} = useContext(
-        QuestionnaireListContext,
-    );
+export default function TextQuestion({ index, question }) {
+    const { getQuestionnaire } = useContext(QuestionnaireContext);
+    const { saveQuestionnaireAnswers } = useContext(QuestionnaireListContext);
 
     return (
         <QuestionCard
@@ -24,7 +22,7 @@ export default function TextQuestion({index, question}) {
                     multiline={question.multiline}
                     numberOfLines={question.numberOfLines}
                     oneWord={question.oneWordValidation}
-                    onChangeText={text => {
+                    onChangeText={(text) => {
                         question.setAnswer(text);
                         saveQuestionnaireAnswers(getQuestionnaire());
                         // we should not notifyUpdated() here,

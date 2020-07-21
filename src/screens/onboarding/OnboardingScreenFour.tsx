@@ -10,24 +10,24 @@ export default function OnboardingScreenFour() {
     const history = useHistory();
 
     const goToNextScreen = () => {
-        AsyncStorage.setItem('onboardingshown', 'true').then(() => {
-          history.push("/home");
+        AsyncStorage.setItem("onboardingshown", "true").then(() => {
+            history.push("/home");
         });
-      };
+    };
 
     return (
-          <div>
+        <div>
             <Trans i18nKey="onboarding.screen_04.message">
-              leading <strong>polypoly</strong>
-              with <strong>polyPod</strong>
-              trailing
+                leading <strong>polypoly</strong>
+                with <strong>polyPod</strong>
+                trailing
             </Trans>
             <PolyButton
-              title={'onboarding.screen_04.button.continue'}
-              onPress={() => {
-                goToNextScreen();
-              }}
+                title={"onboarding.screen_04.button.continue"}
+                onPress={() => {
+                    goToNextScreen();
+                }}
             />
-          </div>
+        </div>
     );
-  };
+}

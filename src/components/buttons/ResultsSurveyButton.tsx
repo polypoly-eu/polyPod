@@ -1,11 +1,8 @@
 import PolyButton from "./PolyButton";
 import React from "react";
 
-export default function ResultsSurveyButton({
-    title = 'generic.button.results',
-    questionnaire,
-  }) {
-    const openLink = function(link) {
+export default function ResultsSurveyButton({ title = "generic.button.results", questionnaire }) {
+    const openLink = function (link) {
         /*
       Linking.canOpenURL(link)
         .then(supported => {
@@ -18,11 +15,11 @@ export default function ResultsSurveyButton({
     };
 
     return (
-      <PolyButton
-        title={title}
-        onPress={() => {
-          openLink(questionnaire.result.url);
-        }}
-      />
+        <PolyButton
+            title={title}
+            onPress={() => {
+                openLink(questionnaire.result.url);
+            }}
+        />
     );
-  }
+}

@@ -2,14 +2,14 @@ import React from "react";
 import PolyIconButton from "./PolyIconButton";
 
 export default function PolyRangeButton({
-                                            label = '1',
-                                            index = 1,
-                                            item,
-                                            onChecked = range => {},
-                                            disabled = false,
-                                            checked = false,
-                                        }) {
-    if (checked) label = label+"*"
+    label = "1",
+    index = 1,
+    item,
+    onChecked = (range) => {},
+    disabled = false,
+    checked = false,
+}) {
+    if (checked) label = label + "*";
     return (
         <PolyIconButton
             icon={<strong>{label}</strong>}

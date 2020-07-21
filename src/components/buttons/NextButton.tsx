@@ -6,10 +6,8 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 export default function NextButton() {
-    const {isAtLastQuestion, switchToNextQuestion} = useContext(
-        QuestionnaireContext,
-    );
-    const {triggerUpdate} = useContext(QuestionnaireListContext);
+    const { isAtLastQuestion, switchToNextQuestion } = useContext(QuestionnaireContext);
+    const { triggerUpdate } = useContext(QuestionnaireListContext);
 
     const history = useHistory();
 

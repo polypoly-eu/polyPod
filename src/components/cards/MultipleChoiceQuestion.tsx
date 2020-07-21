@@ -6,11 +6,9 @@ import React from "react";
 import PolyCheckboxGroup from "../basic/PolyCheckboxGroup";
 import NextButton from "../buttons/NextButton";
 
-export default function MultipleChoiceQuestion({index, question}) {
-    const {getQuestionnaire} = useContext(QuestionnaireContext);
-    const {saveQuestionnaireAnswers} = useContext(
-        QuestionnaireListContext,
-    );
+export default function MultipleChoiceQuestion({ index, question }) {
+    const { getQuestionnaire } = useContext(QuestionnaireContext);
+    const { saveQuestionnaireAnswers } = useContext(QuestionnaireListContext);
 
     return (
         <QuestionCard
@@ -21,11 +19,11 @@ export default function MultipleChoiceQuestion({index, question}) {
                 <PolyCheckboxGroup
                     detoxindex={index}
                     options={question.choices()}
-                    label={choice => choice.value()}
-                    value={choice => choice.id}
-                    checked={choice => choice.isSelected()}
-                    disabled={choice => !choice.enabled}
-                    onChecked={checkbox => {
+                    label={(choice) => choice.value()}
+                    value={(choice) => choice.id}
+                    checked={(choice) => choice.isSelected()}
+                    disabled={(choice) => !choice.enabled}
+                    onChecked={(checkbox) => {
                         checkbox.item.selected(checkbox.checked);
                         saveQuestionnaireAnswers(getQuestionnaire());
                         // notifyUpdated() is required to re-render the UI and checkbox states

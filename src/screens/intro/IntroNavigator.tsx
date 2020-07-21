@@ -5,16 +5,16 @@ import AuthorDetailsScreen from "./AuthorDetailsScreen";
 
 function IntroNavigator() {
     return (
-            <Switch>
-                <Route exact path="/intro">
-                    <IntroScreen />
-                </Route>
-                <Route exact path="/intro/authordetails">
-                    <AuthorDetailsScreen />
-                </Route>
-            </Switch>
+        <Switch>
+            <Route exact path="/intro">
+                <IntroScreen />
+            </Route>
+            <Route exact path="/intro/authordetails">
+                <AuthorDetailsScreen />
+            </Route>
+        </Switch>
     );
-  }
+}
 
-  export const route = 'IntroNavigator';
-  export default IntroNavigator;
+export const route = "IntroNavigator";
+export default IntroNavigator;

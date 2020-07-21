@@ -3,7 +3,7 @@ import React from "react";
 import PolyCheckbox from "./PolyCheckbox";
 import { compareMaps } from "../../util/compare-maps";
 
-const indices = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const indices = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export default function PolyCheckboxGroup(props: any = {}) {
     const {
@@ -15,13 +15,9 @@ export default function PolyCheckboxGroup(props: any = {}) {
         onChecked = () => {},
     } = props;
 
-    let newChecked = new Map(
-        options.map((each, index) => [index, checked(each, index)]),
-    );
+    const newChecked = new Map(options.map((each, index) => [index, checked(each, index)]));
 
-    let newDisabled = new Map(
-        options.map((each, index) => [index, disabled(each, index)]),
-    );
+    const newDisabled = new Map(options.map((each, index) => [index, disabled(each, index)]));
 
     const [selectedCheckboxes, setSelectedCheckboxes] = useState(newChecked);
     const [disabledCheckboxes, setDisabledCheckboxes] = useState(newDisabled);
@@ -39,34 +35,34 @@ export default function PolyCheckboxGroup(props: any = {}) {
     }
 
     const onSelect = React.useCallback(
-        checkbox => {
+        (checkbox) => {
             const newSelected = new Map(selectedCheckboxes);
             newSelected.set(checkbox.index, checkbox.checked);
             setSelectedCheckboxes(newSelected);
             onChecked(checkbox);
         },
-        [onChecked, selectedCheckboxes],
+        [onChecked, selectedCheckboxes]
     );
 
     return (
         <div className="checkbox-group">
             {options.map((item, index) => (
-              <PolyCheckbox
-                  index={index}
-                  key={index.toString()}
-                  indexExtractor={
-                      options.length > indices.length
-                          ? () => null
-                          : _index => indices.charAt(_index)
-                  }
-                  label={label(item, index)}
-                  value={value(item, index)}
-                  item={item}
-                  checked={!!selectedCheckboxes.get(index)}
-                  disabled={!!disabledCheckboxes.get(index)}
-                  grouped={true}
-                  onChecked={onSelect}
-              />
+                <PolyCheckbox
+                    index={index}
+                    key={index.toString()}
+                    indexExtractor={
+                        options.length > indices.length
+                            ? () => null
+                            : (_index) => indices.charAt(_index)
+                    }
+                    label={label(item, index)}
+                    value={value(item, index)}
+                    item={item}
+                    checked={!!selectedCheckboxes.get(index)}
+                    disabled={!!disabledCheckboxes.get(index)}
+                    grouped={true}
+                    onChecked={onSelect}
+                />
             ))}
         </div>
     );

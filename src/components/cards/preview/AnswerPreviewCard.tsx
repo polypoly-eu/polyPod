@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 export default function AnswerPreviewCard({
-                                              question = 'What is your lucky number?',
-                                              AnswerComponent = () => <div />,
-                                          }) {
+    question = "What is your lucky number?",
+    AnswerComponent = () => <div />,
+}) {
     return (
         <div>
             {question}

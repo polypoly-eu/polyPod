@@ -6,6 +6,7 @@
   "scripts": {
     "build": "faucet",
     "watch": "faucet --watch",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "check": "tsc --noEmit --watch --noImplicitAny --allowJS",
     "serve": "orodruin serve -m"
   },
@@ -14,6 +15,7 @@
     "@types/react": "^16.9.31",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^5.1.5",
+    "eslint-plugin-react": "^7.20.3",
     "faucet-pipeline-sass": "^1.4.0",
     "faucet-pipeline-static": "^1.2.0",
     "faucet-pipeline-typescript": "^2.1.6",
@@ -27,9 +29,10 @@
   },
   "dependencies": {
     "@polypoly-eu/feature-bootstrap": "0.0.1",
-    "@polypoly-eu/poly-look": "0.0.3",
-    "d3": "^5.15.0",
+    "@polypoly-eu/eslint-config-polypoly": "0.0.1",
+    "eslint": "^7.5.0",
     "i18next": "^19.5.2",
+    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.7.0",

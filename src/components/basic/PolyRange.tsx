@@ -1,4 +1,4 @@
-import {compareMaps} from "../../util/compare-maps";
+import { compareMaps } from "../../util/compare-maps";
 import { useState } from "react";
 import React from "react";
 import PolyRangeButton from "./PolyRangeButton";
@@ -13,13 +13,11 @@ export default function PolyRange(props: any = {}) {
         onChecked = () => {},
     } = props;
 
-    let newChecked = checked
+    const newChecked = checked
         ? new Map(options.map((each, index) => [index, checked(each, index)]))
         : new Map();
 
-    let newDisabled = new Map(
-        options.map((each, index) => [index, disabled(each, index)]),
-    );
+    const newDisabled = new Map(options.map((each, index) => [index, disabled(each, index)]));
 
     const [selectedCheckboxes, setSelectedCheckboxes] = useState(newChecked);
     const [disabledCheckboxes, setDisabledCheckboxes] = useState(newDisabled);
@@ -36,7 +34,7 @@ export default function PolyRange(props: any = {}) {
         setDisabledCheckboxes(newChecked);
     }
 
-    const onSelect = checkbox => {
+    const onSelect = (checkbox) => {
         const newSelected = new Map(selectedCheckboxes);
         newSelected.set(checkbox.index, checkbox.checked);
         setSelectedCheckboxes(newSelected);

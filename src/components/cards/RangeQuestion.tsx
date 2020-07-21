@@ -6,11 +6,9 @@ import QuestionCard from "./QuestionCard";
 import NextButton from "../buttons/NextButton";
 import PolyRange from "../basic/PolyRange";
 
-export default function RangeQuestion({index, question}) {
-    const {getQuestionnaire} = useContext(QuestionnaireContext);
-    const {saveQuestionnaireAnswers} = useContext(
-        QuestionnaireListContext,
-    );
+export default function RangeQuestion({ index, question }) {
+    const { getQuestionnaire } = useContext(QuestionnaireContext);
+    const { saveQuestionnaireAnswers } = useContext(QuestionnaireListContext);
 
     return (
         <QuestionCard
@@ -20,9 +18,9 @@ export default function RangeQuestion({index, question}) {
             AnswerComponent={() => (
                 <PolyRange
                     options={question.values()}
-                    checked={option => option === question.value()}
+                    checked={(option) => option === question.value()}
                     limits={question.labels}
-                    onChecked={checkbox => {
+                    onChecked={(checkbox) => {
                         if (checkbox.checked) {
                             question.setValue(checkbox.item);
                         } else {

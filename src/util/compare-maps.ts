@@ -13,4 +13,3 @@ export function compareMaps(map1, map2): boolean {
     }
     return true;
 }
-
