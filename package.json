@@ -49,7 +49,7 @@
     "rollup": "^2.22.2",
     "rollup-plugin-executable": "^1.6.0",
     "tempy": "^0.6.0",
-    "ts-jest": "^25.5.1",
+    "ts-jest": "^26.1.3",
     "typescript": "^3.9.7"
   },
   "dependencies": {
