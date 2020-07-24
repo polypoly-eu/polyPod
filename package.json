@@ -33,7 +33,7 @@
     "eslint": "^7.5.0",
     "jest": "^25.5.4",
     "prettier": "^2.0.5",
-    "rollup": "^2.22.2",
+    "rollup": "^2.23.0",
     "ts-jest": "^25.5.1",
     "typedoc": "^0.17.8",
     "typescript": "^3.9.7"
