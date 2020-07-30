@@ -29,20 +29,20 @@ class FeatureFragmentInstrumentedTest {
 
     @Test
     fun firstFragmentIsShown() {
-        onView(withText("test"))
+        onView(withText("testFeature"))
             .check(matches(isDisplayed()))
     }
 
     // TODO - move test Feature out of "main"
     @Test
     fun canNavigateToFeatureFragment() {
-        onView(withText("test"))
+        onView(withText("testFeature"))
             .check(matches(isDisplayed()))  // verify I'm starting on first view
 
-        onView(withText("test"))
+        onView(withText("testFeature"))
             .perform(click())
 
-        onView(withText("test"))
+        onView(withText("testFeature"))
             .check(doesNotExist())
 
         onWebView()
@@ -84,7 +84,7 @@ class FeatureFragmentInstrumentedTest {
 
     private fun launchTestFeature() {
         val fragmentArgs = Bundle().apply {
-            putString("featureName", "test")
+            putString("featureName", "testFeature")
         }
         launchFragmentInContainer<FeatureFragment>(fragmentArgs)
     }
