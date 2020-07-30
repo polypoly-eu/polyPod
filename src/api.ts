@@ -6,7 +6,7 @@
  */
 
 import * as RDF from "rdf-js";
-import { Fetch } from "./fetch";
+import type { Fetch } from "@polypoly-eu/fetch-spec";
 import { FS } from "./fs";
 
 /**

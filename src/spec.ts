@@ -18,21 +18,7 @@ import fc from "fast-check";
 import { DataFactorySpec, gens } from "@polypoly-eu/rdf-spec";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
-
-let httpbinUrl: string | undefined;
-
-export function getHttpbinUrl(): string {
-    if (httpbinUrl !== undefined) return httpbinUrl;
-
-    if (process.env.HTTPBIN_URL) {
-        httpbinUrl = process.env.HTTPBIN_URL;
-    } else {
-        console.warn("Using live httpbin API; set HTTPBIN_URI to use local server ...");
-        httpbinUrl = "https://httpbin.org";
-    }
-
-    return httpbinUrl;
-}
+import { fetchSpec } from "@polypoly-eu/fetch-spec";
 
 function encodeUtf8(string: string): Uint8Array {
     if (typeof TextEncoder !== "undefined") return new TextEncoder().encode(string);
@@ -163,46 +149,7 @@ export class PodSpec {
                 });
             });
 
-            describe("HTTP requests", () => {
-                it("Successful GET (text)", async () => {
-                    const response = await polyOut.fetch(`${this.httpbinUrl}/robots.txt`);
-                    await assert.eventually.equal(
-                        response.text(),
-                        "User-agent: *\nDisallow: /deny\n"
-                    );
-                });
-
-                it("Successful GET (json)", async () => {
-                    const response = await polyOut.fetch(`${this.httpbinUrl}/json`);
-                    await assert.eventually.property(response.json(), "slideshow");
-                });
-
-                it("Successful GET (plaintext)", async () => {
-                    const response = await polyOut.fetch(`${this.httpbinUrl}/robots.txt`);
-                    await assert.isRejected(response.json(), /json/i);
-                });
-
-                it("Successful POST", async () => {
-                    const postBody = `"test-post"`;
-                    const response = await polyOut.fetch(`${this.httpbinUrl}/anything`, {
-                        method: "post",
-                        body: postBody,
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    });
-
-                    const json = await response.json();
-
-                    assert.propertyVal(json, "data", postBody);
-                    assert.propertyVal(json, "method", "POST");
-                });
-
-                it("404", async () => {
-                    const response = polyOut.fetch(`${this.httpbinUrl}/status/404`);
-                    await assert.eventually.propertyVal(response, "status", 404);
-                });
-            });
+            fetchSpec(polyOut.fetch.bind(polyOut), this.httpbinUrl);
         });
     }
 

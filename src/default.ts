@@ -10,7 +10,7 @@
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
 import { Pod, PolyIn, PolyOut } from "./api";
-import { Fetch, Response, RequestInit } from "./fetch";
+import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
 
 /**
