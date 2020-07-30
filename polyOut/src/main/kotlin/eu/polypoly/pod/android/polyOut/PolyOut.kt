@@ -1,13 +1,10 @@
 package eu.polypoly.pod.android.polyOut
 
-import android.util.Log
 import okhttp3.*
 import java.io.IOException
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
-
-private const val TAG = "polyOut"
 
 // TODO - convert to a class and create an instance per Feature
 object PolyOut {
@@ -25,7 +22,7 @@ object PolyOut {
 
 private class FetchCallback(private val cont: Continuation<String>) : Callback {
     override fun onFailure(call: Call, e: IOException) {
-        Log.e(TAG, "Err, something went wrong: ${e.message}", e)
+//        Log.e(TAG, "Err, something went wrong: ${e.message}", e)
         cont.resumeWith(Result.failure(e))
     }
 
