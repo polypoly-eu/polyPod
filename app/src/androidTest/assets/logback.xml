@@ -1,0 +1,14 @@
+<configuration>
+    <appender name="tests_log" class="ch.qos.logback.classic.android.LogcatAppender">
+        <tagEncoder>
+            <pattern>polyPod</pattern>
+        </tagEncoder>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="tests_log" />
+    </root>
+</configuration>

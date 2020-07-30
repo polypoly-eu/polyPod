@@ -2,7 +2,6 @@ package eu.polypoly.pod.android
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +12,16 @@ import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
 import eu.polypoly.pod.android.postoffice.PostOfficeMessageCallback
+import org.slf4j.LoggerFactory
 
 /**
  * A [Fragment] that is responsible for handling a single Feature
  */
 open class FeatureFragment : Fragment() {
+    companion object {
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+    }
 
     private val args: FeatureFragmentArgs by navArgs()
 
@@ -34,7 +38,7 @@ open class FeatureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("FeatureFragment", "Inside FeatureFragment, feature to load: '${args.featureName}'")
+        logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
         setupWebView(view)
         webView.loadUrl("https://appassets.androidplatform.net/assets/feature/container.html?featureName=" + args.featureName)
     }

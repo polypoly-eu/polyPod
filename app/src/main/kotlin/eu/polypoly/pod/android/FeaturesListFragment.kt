@@ -2,18 +2,22 @@ package eu.polypoly.pod.android
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.slf4j.LoggerFactory
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FeaturesListFragment : Fragment() {
+    companion object {
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+    }
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -49,7 +53,7 @@ class FeaturesListFragment : Fragment() {
             features = arrayOf()
         }
         for (feature in features) {
-            Log.d("MainActivity", "Found feature: '${feature}'")
+            logger.debug("Found feature: '{}'", feature)
         }
         return features
     }

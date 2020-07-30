@@ -1,0 +1,25 @@
+<configuration>
+    <appender name="logcat" class="ch.qos.logback.classic.android.LogcatAppender">
+        <tagEncoder>
+            <pattern>polyPod</pattern>
+        </tagEncoder>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="DebugLog" class="ch.qos.logback.core.FileAppender">
+        <file>${DATA_DIR}/debug.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="logcat" />
+    </root>
+
+    <root level="DEBUG">
+        <appender-ref ref="DebugLog" />
+    </root>
+</configuration>
