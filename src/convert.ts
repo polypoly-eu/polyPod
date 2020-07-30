@@ -32,7 +32,8 @@ export function convert<InQuad extends RDF.BaseQuad, OutQuad extends RDF.BaseQua
  * [[ConvertSpec]].
  */
 export function convert(input: RDF.BaseQuad | RDF.Term, dataFactory: RDF.DataFactory<any>): any {
-    if ("termType" in input) {
+    // @ts-ignore
+    if ("termType" in input && input.termType !== "Quad") {
         const term: RDF.Term = input;
 
         switch (term.termType) {
@@ -54,7 +55,7 @@ export function convert(input: RDF.BaseQuad | RDF.Term, dataFactory: RDF.DataFac
                 throw new Error("Unknown term type");
         }
     } else {
-        const quad: RDF.BaseQuad = input;
+        const quad = input as RDF.BaseQuad;
 
         return dataFactory.quad(
             convert(quad.subject, dataFactory),
