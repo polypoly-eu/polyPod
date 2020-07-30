@@ -30,7 +30,7 @@
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.1",
     "@polypoly-eu/rdf": "^0.1.0",
-    "@polypoly-eu/rdf-spec": "^0.1.0",
+    "@polypoly-eu/rdf-spec": "^0.2.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@rollup/plugin-sucrase": "^3.1.0",
@@ -41,7 +41,7 @@
     "benchmark": "^2.1.4",
     "chokidar-cli": "^2.1.0",
     "eslint": "^7.5.0",
-    "fast-check": "^1.26.0",
+    "fast-check": "^2.0.0",
     "jest": "^25.5.4",
     "n3": "^1.6.0",
     "prettier": "^2.0.5",
