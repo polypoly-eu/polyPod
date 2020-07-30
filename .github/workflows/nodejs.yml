@@ -1,0 +1,26 @@
+name: Node CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@polypoly-eu'
+    - name: npm install
+      run: |
+        npm ci --ignore-scripts
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: Build
+      run: |
+        npm run build
+    - name: Lint
+      run: |
+        npm run lint
