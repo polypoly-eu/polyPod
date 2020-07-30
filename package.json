@@ -6,7 +6,9 @@
   "scripts": {
     "build": "faucet",
     "watch": "faucet --watch",
+    "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "stylelint": "stylelint polylook/**/*.scss",
     "check": "tsc --noEmit --watch --noImplicitAny --allowJS",
     "serve": "orodruin serve -m"
   },
@@ -28,8 +30,9 @@
     "root": "dist"
   },
   "dependencies": {
-    "@polypoly-eu/feature-bootstrap": "0.0.1",
     "@polypoly-eu/eslint-config-polypoly": "0.0.1",
+    "@polypoly-eu/feature-bootstrap": "0.0.1",
+    "@polypoly-eu/stylelint-config-polypoly": "0.0.1",
     "eslint": "^7.5.0",
     "i18next": "^19.5.2",
     "prettier": "^2.0.5",
@@ -37,6 +40,7 @@
     "react-dom": "^16.13.1",
     "react-i18next": "^11.7.0",
     "react-router-dom": "5.2.0",
+    "stylelint": "^13.6.1",
     "tslib": "^2.0.0",
     "uuid": "^8.2.0"
   }
