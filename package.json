@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/fetch-spec",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Standalone executable spec for window.fetch",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
