@@ -21,7 +21,7 @@
     "faucet-pipeline-sass": "^1.4.0",
     "faucet-pipeline-static": "^1.2.0",
     "faucet-pipeline-typescript": "^2.1.6",
-    "typescript": "3.8.3"
+    "typescript": "3.9.7"
   },
   "engines": {
     "polypoly": "^0.4.2"
