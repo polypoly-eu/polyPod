@@ -248,6 +248,21 @@ public interface Codec<T> {
         };
     }
 
+    Codec<Boolean> bool = new Codec<Boolean>() {
+        @Override
+        public Value encode(Boolean bool) {
+            if (bool)
+                return ImmutableBooleanValueImpl.TRUE;
+            else
+                return ImmutableBooleanValueImpl.FALSE;
+        }
+
+        @Override
+        public Boolean decode(Value value) {
+            return value.asBooleanValue().getBoolean();
+        }
+    };
+
     Codec<Double> doubleNumber = new Codec<Double>() {
         @Override
         public Value encode(Double number) {

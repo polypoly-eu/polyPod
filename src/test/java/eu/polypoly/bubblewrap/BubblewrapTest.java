@@ -23,6 +23,19 @@ class BubblewrapTest {
     }
 
     @Group
+    class BoolSpec implements CodecSpec<Boolean> {
+        @Override
+        public Codec<Boolean> instance() {
+            return Codec.bool;
+        }
+
+        @Override
+        public Arbitrary<Boolean> t() {
+            return Arbitraries.of(true, false);
+        }
+    }
+
+    @Group
     class StringSpec implements CodecSpec<String> {
         @Override
         public Codec<String> instance() {
