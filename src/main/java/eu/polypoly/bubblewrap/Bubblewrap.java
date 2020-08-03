@@ -1,6 +1,8 @@
 package eu.polypoly.bubblewrap;
 
+import org.msgpack.core.MessageBufferPacker;
 import org.msgpack.core.MessagePack;
+import org.msgpack.core.MessageUnpacker;
 import org.msgpack.value.Value;
 
 import java.io.IOException;
@@ -12,7 +14,7 @@ public class Bubblewrap {
     private Bubblewrap() {}
 
     public static <T> byte[] encode(T t, Codec<T> codec) {
-        var packer = MessagePack.newDefaultBufferPacker();
+        MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
         try {
             packer.packValue(codec.encode(t));
         }
@@ -24,7 +26,7 @@ public class Bubblewrap {
     }
 
     public static <T> T decode(byte[] data, Codec<T> codec) {
-        var unpacker = MessagePack.newDefaultUnpacker(data);
+        MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(data);
         Value value;
         try {
             value = unpacker.unpackValue();

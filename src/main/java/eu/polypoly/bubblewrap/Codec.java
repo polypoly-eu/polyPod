@@ -1,7 +1,12 @@
 package eu.polypoly.bubblewrap;
 
+import org.msgpack.core.MessageBufferPacker;
 import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessageTypeCastException;
+import org.msgpack.core.MessageUnpacker;
+import org.msgpack.value.ArrayValue;
+import org.msgpack.value.ExtensionValue;
+import org.msgpack.value.MapValue;
 import org.msgpack.value.Value;
 import org.msgpack.value.impl.*;
 
@@ -9,6 +14,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.stream.Stream;
 
 public interface Codec<T> {
 
@@ -32,8 +38,8 @@ public interface Codec<T> {
     };
 
     default <U> Codec<U> xmap(Function<T, U> tu, Function<U, T> ut) {
-        var codecT = this;
-        return new Codec<>() {
+        Codec<T> codecT = this;
+        return new Codec<U>() {
             @Override
             public Value encode(U u) {
                 return codecT.encode(ut.apply(u));
@@ -47,8 +53,8 @@ public interface Codec<T> {
     }
 
     default Codec<T> withUndefined() {
-        var codec = this;
-        return new Codec<>() {
+        Codec<T> codec = this;
+        return new Codec<T>() {
             @Override
             public Value encode(T t) {
                 if (t == null)
@@ -68,11 +74,11 @@ public interface Codec<T> {
     }
 
     default Codec<T> taggedClass(String name) {
-        var codec = this;
-        return new Codec<>() {
+        Codec<T> codec = this;
+        return new Codec<T>() {
             @Override
             public Value encode(T t) {
-                var packer = MessagePack.newDefaultBufferPacker();
+                MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
                 try {
                     packer.packArrayHeader(2);
                     packer.packString(name);
@@ -87,19 +93,19 @@ public interface Codec<T> {
 
             @Override
             public T decode(Value value) {
-                var ext = value.asExtensionValue();
+                ExtensionValue ext = value.asExtensionValue();
                 if (ext.getType() != msgPackEtypeClass)
                     throw new MessageTypeCastException("Expected object");
 
-                var unpacker = MessagePack.newDefaultUnpacker(ext.getData());
+                MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(ext.getData());
 
                 Value data;
 
                 try {
-                    var length = unpacker.unpackArrayHeader();
+                    int length = unpacker.unpackArrayHeader();
                     if (length != 2)
                         throw new IllegalArgumentException("Malformed message, array must have two elements");
-                    var actualName = unpacker.unpackString();
+                    String actualName = unpacker.unpackString();
                     if (!actualName.equals(name))
                         throw new MessageTypeCastException("Expected " + name + ", got " + actualName);
                     data = unpacker.unpackValue();
@@ -114,22 +120,22 @@ public interface Codec<T> {
     }
 
     default Codec<T[]> array(IntFunction<T[]> creator) {
-        var codec = this;
-        return new Codec<>() {
+        Codec<T> codec = this;
+        return new Codec<T[]>() {
             @Override
             public Value encode(T[] array) {
                 Objects.requireNonNull(array);
                 return new ImmutableArrayValueImpl(
-                        List.of(array).stream().map(codec::encode).toArray(Value[]::new)
+                    Stream.of(array).map(codec::encode).toArray(Value[]::new)
                 );
             }
 
             @Override
             public T[] decode(Value value) {
-                var array = value.asArrayValue();
-                var size = array.size();
-                var result = creator.apply(size);
-                for (var i = 0; i < size; ++i)
+                ArrayValue array = value.asArrayValue();
+                int size = array.size();
+                T[] result = creator.apply(size);
+                for (int i = 0; i < size; ++i)
                     result[i] = codec.decode(array.get(i));
                 return result;
             }
@@ -137,13 +143,13 @@ public interface Codec<T> {
     }
 
     default Codec<Map<String, T>> map() {
-        var codec = this;
-        return new Codec<>() {
+        Codec<T> codec = this;
+        return new Codec<Map<String, T>>() {
             @Override
             public Value encode(Map<String, T> map) {
                 Objects.requireNonNull(map);
-                var encoded = new ArrayList<Value>(map.size() * 2);
-                for (var entry : map.entrySet()) {
+                List<Value> encoded = new ArrayList<Value>(map.size() * 2);
+                for (Map.Entry<String, T> entry : map.entrySet()) {
                     encoded.add(string.encode(entry.getKey()));
                     encoded.add(codec.encode(entry.getValue()));
                 }
@@ -152,9 +158,9 @@ public interface Codec<T> {
 
             @Override
             public Map<String, T> decode(Value value) {
-                var map = value.asMapValue();
-                var decoded = new LinkedHashMap<String, T>(map.size());
-                for (var entry : map.entrySet())
+                MapValue map = value.asMapValue();
+                Map<String, T> decoded = new LinkedHashMap<String, T>(map.size());
+                for (Map.Entry<Value, Value> entry : map.entrySet())
                     decoded.put(string.decode(entry.getKey()), codec.decode(entry.getValue()));
                 return decoded;
             }
@@ -165,7 +171,7 @@ public interface Codec<T> {
         @Override
         public Value encode(JSError e) {
             Objects.requireNonNull(e);
-            var packer = MessagePack.newDefaultBufferPacker();
+            MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
             try {
                 packer.packString(e.getMessage());
             }
@@ -178,11 +184,11 @@ public interface Codec<T> {
 
         @Override
         public JSError decode(Value value) {
-            var ext = value.asExtensionValue();
+            ExtensionValue ext = value.asExtensionValue();
             if (ext.getType() != msgPackEtypeError)
                 throw new MessageTypeCastException("Expected `Error`");
 
-            var unpacker = MessagePack.newDefaultUnpacker(ext.getData());
+            MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(ext.getData());
             try {
                 return new JSError(unpacker.unpackString());
             }
@@ -206,11 +212,11 @@ public interface Codec<T> {
     };
 
     static <K, V> Codec<Map<K, V>> kvArray(Codec<K> keyCodec, Codec<V> valueCodec) {
-        return new Codec<>() {
+        return new Codec<Map<K, V>>() {
             @Override
             public Value encode(Map<K, V> map) {
                 Objects.requireNonNull(map);
-                var encoded =
+                Value[] encoded =
                     map.entrySet().stream().map(entry ->
                         new ImmutableArrayValueImpl(new Value[] {
                                 keyCodec.encode(entry.getKey()),
@@ -223,16 +229,16 @@ public interface Codec<T> {
 
             @Override
             public Map<K, V> decode(Value value) {
-                var array = value.asArrayValue();
+                ArrayValue array = value.asArrayValue();
 
-                var decoded = new LinkedHashMap<K, V>(array.size());
-                for (var kv : array) {
-                    var inner = kv.asArrayValue();
+                Map<K, V> decoded = new LinkedHashMap<K, V>(array.size());
+                for (Value kv : array) {
+                    ArrayValue inner = kv.asArrayValue();
                     if (inner.size() != 2)
                         throw new IllegalArgumentException("Malformed message; expected two array elements");
 
-                    var k = keyCodec.decode(inner.get(0));
-                    var v = valueCodec.decode(inner.get(1));
+                    K k = keyCodec.decode(inner.get(0));
+                    V v = valueCodec.decode(inner.get(1));
 
                     decoded.put(k, v);
                 }
@@ -242,7 +248,7 @@ public interface Codec<T> {
         };
     }
 
-    Codec<Double> doubleNumber = new Codec<>() {
+    Codec<Double> doubleNumber = new Codec<Double>() {
         @Override
         public Value encode(Double number) {
             return new ImmutableDoubleValueImpl(number);

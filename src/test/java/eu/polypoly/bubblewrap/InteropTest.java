@@ -11,8 +11,10 @@ import org.graalvm.polyglot.TypeLiteral;
 import org.graalvm.polyglot.Value;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.DoubleSupplier;
@@ -30,7 +32,11 @@ class InteropTest {
         private final static Codec<TestA> codec =
             Codec.kvArray(Codec.string, Codec.id).xmap(
                 raw -> new TestA(Codec.doubleNumber.decode(raw.get("a"))),
-                obj -> Map.of("a", Codec.doubleNumber.encode(obj.a))
+                obj -> {
+                    Map<String, org.msgpack.value.Value> map = new LinkedHashMap<>();
+                    map.put("a", Codec.doubleNumber.encode(obj.a));
+                    return map;
+                }
             ).taggedClass("TestA");
     }
 
@@ -43,11 +49,11 @@ class InteropTest {
     void setup() throws IOException {
         context = Context.newBuilder("js").allowAllAccess(true).build();
 
-        var bubblewrapJS = getClass().getClassLoader().getResource("bubblewrap.js");
+        URL bubblewrapJS = getClass().getClassLoader().getResource("bubblewrap.js");
 
         context.eval(Source.newBuilder("js", bubblewrapJS).build());
 
-        var bootstrapText =
+        String bootstrapText =
             "class TestA { constructor(a) { this.a = a } f() { return this.a } };\n" +
                 "const Bubblewrap = bubblewrap.Bubblewrap.create({ TestA });\n";
 
@@ -55,9 +61,9 @@ class InteropTest {
 
         jsClass = context.getBindings("js").getMember("TestA");
 
-        var jsBubblewrap = context.getBindings("js").getMember("Bubblewrap");
-        jsEncode = jsBubblewrap.getMember("encode").as(new TypeLiteral<>() {});
-        jsDecode = jsBubblewrap.getMember("decode").as(new TypeLiteral<>() {});
+        Value jsBubblewrap = context.getBindings("js").getMember("Bubblewrap");
+        jsEncode = jsBubblewrap.getMember("encode").as(new TypeLiteral<Function<Value, Value>>() {});
+        jsDecode = jsBubblewrap.getMember("decode").as(new TypeLiteral<Function<Value, Value>>() {});
     }
 
     @AfterProperty
@@ -67,27 +73,27 @@ class InteropTest {
 
     @Property
     void encode_in_js_and_decode_in_java(@ForAll double a) throws IOException {
-        var jsObject = jsClass.newInstance(a);
-        var encoded = jsEncode.apply(jsObject);
+        Value jsObject = jsClass.newInstance(a);
+        Value encoded = jsEncode.apply(jsObject);
 
         Assertions.assertThat(encoded.hasArrayElements()).isTrue();
 
         // TODO custom host mapping for Uint8Array?
-        var shortBuffer = encoded.as(short[].class);
-        var buffer = new byte[shortBuffer.length];
-        for (var i = 0; i < shortBuffer.length; ++i)
+        short[] shortBuffer = encoded.as(short[].class);
+        byte[] buffer = new byte[shortBuffer.length];
+        for (int i = 0; i < shortBuffer.length; ++i)
             buffer[i] = (byte) shortBuffer[i];
 
-        var decoded = Bubblewrap.decode(buffer, TestA.codec);
+        TestA decoded = Bubblewrap.decode(buffer, TestA.codec);
 
         Assertions.assertThat(decoded.a).isEqualTo(a);
     }
 
     @Property
     void encode_in_java_and_decode_in_js(@ForAll double a) throws IOException {
-        var encoded = Bubblewrap.encode(new TestA(a), TestA.codec);
+        byte[] encoded = Bubblewrap.encode(new TestA(a), TestA.codec);
 
-        var decoded = jsDecode.apply(Value.asValue(encoded));
+        Value decoded = jsDecode.apply(Value.asValue(encoded));
 
         Assertions.assertThat(jsClass.isMetaInstance(decoded)).isTrue();
         Assertions.assertThat(decoded.getMember("a").asDouble()).isEqualTo(a);

@@ -5,6 +5,7 @@ import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
 import net.jqwik.api.Provide;
 import org.assertj.core.api.Assertions;
+import org.msgpack.value.Value;
 
 public interface CodecSpec<T> {
 
@@ -15,15 +16,15 @@ public interface CodecSpec<T> {
 
     @Property
     default void short_roundtrip(@ForAll("t") T t) {
-        var encoded = instance().encode(t);
-        var decoded = instance().decode(encoded);
+        Value encoded = instance().encode(t);
+        T decoded = instance().decode(encoded);
         Assertions.assertThat(decoded).isEqualTo(t);
     }
 
     @Property
     default void long_roundtrip(@ForAll("t") T t) {
-        var encoded = Bubblewrap.encode(t, instance());
-        var decoded = Bubblewrap.decode(encoded, instance());
+        byte[] encoded = Bubblewrap.encode(t, instance());
+        T decoded = Bubblewrap.decode(encoded, instance());
         Assertions.assertThat(decoded).isEqualTo(t);
     }
 

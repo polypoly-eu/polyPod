@@ -84,7 +84,7 @@ class BubblewrapTest {
         @Override
         public Arbitrary<String> t() {
             return Arbitraries.frequencyOf(
-                    Tuple.of(1, Arbitraries.constant(null)),
+                    Tuple.of(1, Arbitraries.just(null)),
                     Tuple.of(10, Arbitraries.strings())
             );
         }
