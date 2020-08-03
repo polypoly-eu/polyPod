@@ -15,6 +15,29 @@ java {
 
 dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.8.0'
-    compileOnly 'org.graalvm.sdk:graal-sdk:20.1.0'
+    testCompileOnly 'org.graalvm.sdk:graal-sdk:20.1.0'
 }
 
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+task testJar(type: ShadowJar) {
+    archiveClassifier = 'tests'
+    from sourceSets.test.output
+    configurations = [project.configurations.testRuntime]
+}
+
+task mochaTest(type: Exec) {
+    dependsOn shadowJar
+    dependsOn testJar
+    File main = tasks.shadowJar.outputs.files.singleFile
+    File test = tasks.testJar.outputs.files.singleFile
+    File javaHome = org.gradle.internal.jvm.Jvm.current().getJavaHome()
+    String node = "${javaHome}/bin/node"
+    String cp = "${main}:${test}"
+    commandLine node,
+        "--jvm",
+        "--polyglot",
+        "--vm.cp=${cp}",
+        "./node_modules/mocha/bin/mocha",
+        "src/test/javascript/**.test.js"
+}

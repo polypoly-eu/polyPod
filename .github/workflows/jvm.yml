@@ -1,0 +1,26 @@
+name: JVM CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: DeLaGuardo/setup-graalvm@3
+      with:
+        graalvm-version: '20.1.0.java11'
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 13.x
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@polypoly-eu'
+    - name: npm install
+      run: |
+        npm ci --ignore-scripts
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - uses: eskatos/gradle-command-action@v1
+      with:
+        arguments: mochaTest

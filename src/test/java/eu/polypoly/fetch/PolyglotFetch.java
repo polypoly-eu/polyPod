@@ -13,6 +13,7 @@ public final class PolyglotFetch {
 
     private Value fromFuture(CompletionStage<?> stage) {
         var promiseConstructor = global.getMember("Promise");
+        var errorConstructor = global.getMember("Error");
 
         return promiseConstructor.newInstance((ProxyExecutable) arguments -> {
             Value resolve = arguments[0];
@@ -22,7 +23,7 @@ public final class PolyglotFetch {
                 resolve.execute(result);
             }
             catch (Exception ex) {
-                reject.execute(ex);
+                reject.execute(errorConstructor.newInstance(ex.toString()));
             }
             return null;
         });
