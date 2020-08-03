@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
     id "com.github.node-gradle.node" version "2.2.4"
     id "com.github.johnrengelman.shadow" version "6.0.0"
 }
@@ -7,6 +8,10 @@ plugins {
 repositories {
     jcenter()
 }
+
+import groovy.json.JsonSlurper
+def packageJson = new JsonSlurper().parse file('package.json')
+version = packageJson.version
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -43,3 +48,25 @@ task mochaTest(type: Exec) {
 }
 
 tasks.test.dependsOn mochaTest
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/polypoly-eu/java-fetch")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.token") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+
+    publications {
+        gpr(MavenPublication) {
+            groupId = 'eu.polypoly'
+            artifactId = 'java-fetch'
+
+            from(components.java)
+        }
+    }
+}

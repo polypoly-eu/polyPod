@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "0.0.0",
   "devDependencies": {
     "@polypoly-eu/fetch-spec": "0.0.1",
     "chai": "^4.2.0",
