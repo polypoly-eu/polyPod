@@ -33,7 +33,7 @@
     "@polypoly-eu/eslint-config-polypoly": "0.0.1",
     "@polypoly-eu/feature-bootstrap": "0.0.1",
     "@polypoly-eu/stylelint-config-polypoly": "0.0.1",
-    "eslint": "^7.5.0",
+    "eslint": "^7.6.0",
     "i18next": "^19.5.2",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
