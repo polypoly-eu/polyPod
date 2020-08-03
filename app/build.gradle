@@ -8,9 +8,7 @@ plugins {
 
 task npmCopy(type: Copy) {
     dependsOn npm_install
-    from "node_modules/@polypoly-eu/feature-harness/data/bootstrap.js"
-    from "node_modules/react/umd/react.development.js"
-    from "node_modules/react-dom/umd/react-dom.development.js"
+    from "node_modules/@polypoly-eu/feature-bootstrap/dist/index.js"
     into "build/js"
 }
 
