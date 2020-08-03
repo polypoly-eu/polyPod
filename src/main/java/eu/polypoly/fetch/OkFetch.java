@@ -3,7 +3,6 @@ package eu.polypoly.fetch;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executors;
@@ -40,10 +39,12 @@ public final class OkFetch implements Fetch {
                 return body;
 
             try {
-                body = CompletableFuture.completedStage(response.body().string());
+                body = CompletableFuture.completedFuture(response.body().string());
             }
             catch (IOException ex) {
-                body = CompletableFuture.failedStage(ex);
+                CompletableFuture<String> future = new CompletableFuture<>();
+                future.completeExceptionally(ex);
+                body = future;
             }
             finally {
                 response.body().close();
@@ -56,9 +57,9 @@ public final class OkFetch implements Fetch {
     private final OkHttpClient client;
 
     private static OkHttpClient defaultClient() {
-        var builder = new OkHttpClient.Builder();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.dispatcher(new Dispatcher(Executors.newSingleThreadExecutor(runnable -> {
-            var thread = new Thread(runnable);
+            Thread thread = new Thread(runnable);
             thread.setDaemon(false);
             return thread;
         })));
@@ -75,20 +76,21 @@ public final class OkFetch implements Fetch {
 
     @Override
     public CompletionStage<Response> fetch(String input, RequestInit init) {
-        var request = new Request.Builder()
-            .url(input);
+        Request.Builder request = new Request.Builder().url(input);
 
         RequestBody body = null;
         if (init.body != null)
             body = RequestBody.create(init.body, null);
 
-        var method = Objects.requireNonNullElse(init.method, "get");
+        String method = "get";
+        if (init.method != null)
+            method = init.method;
         request.method(method.toUpperCase(), body);
 
         if (init.headers != null)
             request.headers(Headers.of(init.headers));
 
-        var promise = new CompletableFuture<Response>();
+        CompletableFuture<Response> promise = new CompletableFuture<>();
         client.newCall(request.build()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -100,6 +102,6 @@ public final class OkFetch implements Fetch {
                 promise.complete(new OkResponse(response));
             }
         });
-        return promise.minimalCompletionStage();
+        return promise;
     }
 }

@@ -9,8 +9,8 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {
@@ -41,3 +41,5 @@ task mochaTest(type: Exec) {
         "./node_modules/mocha/bin/mocha",
         "src/test/javascript/**.test.js"
 }
+
+tasks.test.dependsOn mochaTest
