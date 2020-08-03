@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.slf4j.LoggerFactory
+import java.io.File
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -48,13 +50,28 @@ class FeaturesListFragment : Fragment() {
     }
 
     private fun findInstalledFeatures(context: Context): Array<String> {
-        var features = context.assets.list("features")
-        if (features.isNullOrEmpty()) {
-            features = arrayOf()
+        val mainDir = context.getExternalFilesDir(null)
+        val featuresDir = File(mainDir, "features")
+        if (!featuresDir.exists()) {
+            val created = featuresDir.mkdirs()
+            logger.debug("Directory for Features created: $created")
+        } else {
+            logger.debug("Directory for Features already exists")
         }
-        for (feature in features) {
-            logger.debug("Found feature: '{}'", feature)
+        val filesList = featuresDir.listFiles()
+        return if (filesList != null) {
+            val features: MutableList<String> = ArrayList(filesList.size)
+            for (file in filesList) {
+                logger.debug("Found file: '${file.absolutePath}'")
+                features.add(file.name.replace(".zip", ""))
+            }
+
+            for (feature in features) {
+                logger.debug("Found feature: '{}'", feature)
+            }
+            features.toTypedArray()
+        } else {
+            emptyArray()
         }
-        return features
     }
 }

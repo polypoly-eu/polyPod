@@ -14,9 +14,17 @@ task buildFeatureContainer(type: Copy) {
     into "build/container/container/"
 }
 
+task buildTestFeature(type: Zip) {
+    archiveFileName = "testFeature.zip"
+    destinationDirectory = file("$buildDir/")
+    from "$projectDir/src/androidTest/resources/testFeature/"
+}
+
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets")
-        task.dependsOn(buildFeatureContainer)
+        task.dependsOn buildFeatureContainer
+    if (task.name == "connectedAndroidTest")
+        task.dependsOn copyTestFeatureOntoDevice
 }
 
 node {
@@ -79,6 +87,17 @@ android {
             }
         }
     }
+}
+
+task copyTestFeatureOntoDevice(type: Exec) {
+    dependsOn buildTestFeature
+    def adb = android.getAdbExecutable().absolutePath
+    def mkdirCommand = [adb, 'shell', "mkdir", '-p', '/sdcard/Android/data/eu.polypoly.pod.android/files/features/']
+    commandLine mkdirCommand
+    logger.info("Directory created on the device")
+    def copyCommand = [adb, 'push', "--sync", "$buildDir/testFeature.zip", '/sdcard/Android/data/eu.polypoly.pod.android/files/features/testFeature.zip']
+    commandLine copyCommand
+    logger.info("testFeature copied onto the device")
 }
 
 repositories {

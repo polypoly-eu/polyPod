@@ -15,6 +15,9 @@ import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
 import eu.polypoly.pod.android.polyOut.PolyOut
 import eu.polypoly.pod.android.postoffice.PostOfficeMessageCallback
 import org.slf4j.LoggerFactory
+import java.io.File
+import java.nio.file.Files
+import java.util.zip.ZipFile
 
 /**
  * A [Fragment] that is responsible for handling a single Feature
@@ -53,7 +56,11 @@ open class FeatureFragment : Fragment() {
         webView = view.findViewById(R.id.web_view)
         webView.settings.javaScriptEnabled = true
 
+        val mainDir = requireContext().getExternalFilesDir(null)
+        val featuresDir = File(mainDir, "features")
+        val featureFile = ZipFile(File(featuresDir, args.featureName + ".zip"))
         val assetLoader = WebViewAssetLoader.Builder()
+            .addPathHandler("/features/${args.featureName}/", FeaturesPathHandler(featureFile))
             .addPathHandler("/", PodPathHandler(requireContext()))
             .build()
 
@@ -83,12 +90,32 @@ open class FeatureFragment : Fragment() {
         val assetsPathHandler: AssetsPathHandler = AssetsPathHandler(context)
 
         override fun handle(path: String): WebResourceResponse? {
-            logger.debug("I'm supposed to handle path: '$path'")
             val finalPath = when (path) {
                 "pod.js" -> "container/pod.js"
                 else -> path.replaceFirst(Regex("^assets/"), "")
             }
-            return assetsPathHandler.handle(finalPath)
+            val response = assetsPathHandler.handle(finalPath)
+            logger.debug("PodPathHandler, I'm supposed to handle path: '{}', finalPath: '{}', handling: '{}'", path, finalPath, response != null)
+            return response
+        }
+    }
+
+    private class FeaturesPathHandler(val featureFile: ZipFile) : WebViewAssetLoader.PathHandler {
+        override fun handle(path: String): WebResourceResponse? {
+            logger.debug("FeaturesPathHandler, I'm supposed to handle path: '{}'", path)
+            val entry = featureFile.getEntry(path)
+            if (entry == null) {
+                logger.debug("FeaturesPathHandler, path '{}' not found, skipping", path)
+                return null
+            }
+            val mimeType = try {
+                Files.probeContentType(File(path).toPath())
+            } catch (ex: Exception) {
+                "text/plain"
+            }
+
+            logger.debug("FeaturesPathHandler, handling path: '{}', entry: '{}', mimeType: '{}'", path, entry.name, mimeType)
+            return WebResourceResponse(mimeType, null, featureFile.getInputStream(entry))
         }
     }
 }
