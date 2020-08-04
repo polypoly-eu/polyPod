@@ -1,24 +1,20 @@
 package eu.polypoly.pod.android.polyOut
 
+import eu.polypoly.fetch.OkFetch
+import eu.polypoly.fetch.RequestInit
+import kotlinx.coroutines.future.await
 import okhttp3.*
 import org.slf4j.LoggerFactory
 import java.io.IOException
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 // TODO - convert to a class and create an instance per Feature
 object PolyOut {
-    private val client = OkHttpClient()
+    private val client = OkFetch(OkHttpClient())
 
     suspend fun fetch(uri: String): String =
-        suspendCoroutine { continuation ->
-            val request = Request.Builder()
-                .url(uri)
-                .build()
-
-            client.newCall(request).enqueue(FetchCallback(continuation))
-        }
+        client.fetch(uri, RequestInit(null, null, null)).await().text().await()
 }
 
 private class FetchCallback(private val cont: Continuation<String>) : Callback {
