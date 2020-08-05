@@ -13,14 +13,19 @@
     "serve": "orodruin serve -m"
   },
   "devDependencies": {
-    "@polypoly-eu/orodruin": "0.0.8",
+    "@polypoly-eu/eslint-config-polypoly": "0.0.1",
+    "@polypoly-eu/orodruin": "0.0.10",
+    "@polypoly-eu/stylelint-config-polypoly": "0.0.1",
     "@types/react": "^16.9.44",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^5.1.5",
+    "eslint": "^7.6.0",
     "eslint-plugin-react": "^7.20.3",
     "faucet-pipeline-sass": "^1.4.0",
     "faucet-pipeline-static": "^1.2.0",
     "faucet-pipeline-typescript": "^2.1.6",
+    "prettier": "^2.0.5",
+    "stylelint": "^13.6.1",
     "typescript": "3.9.7"
   },
   "engines": {
@@ -30,17 +35,12 @@
     "root": "dist"
   },
   "dependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.1",
-    "@polypoly-eu/feature-bootstrap": "0.0.1",
-    "@polypoly-eu/stylelint-config-polypoly": "0.0.1",
-    "eslint": "^7.6.0",
+    "@polypoly-eu/feature-bootstrap": "0.0.2",
     "i18next": "^19.5.2",
-    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.7.0",
     "react-router-dom": "5.2.0",
-    "stylelint": "^13.6.1",
     "tslib": "^2.0.0",
     "uuid": "^8.2.0"
   }
