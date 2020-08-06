@@ -30,7 +30,6 @@
     "puppeteer": "^3.3.0"
   },
   "devDependencies": {
-    "@polypoly-eu/feature-bootstrap": "0.0.3",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/connect": "^3.4.33",
     "@types/jest": "^26.0.9",
@@ -54,6 +53,7 @@
   },
   "dependencies": {
     "@polypoly-eu/customs": "^0.1.2",
+    "@polypoly-eu/feature-bootstrap": "0.0.3",
     "@polypoly-eu/poly-api": "^0.6.0",
     "@polypoly-eu/podigree": "^0.4.0",
     "@rdfjs/dataset": "^1.0.1",
