@@ -40,7 +40,7 @@ open class FeatureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
         setupWebView(view)
-        webView.loadUrl("https://appassets.androidplatform.net/assets/feature/container.html?featureName=" + args.featureName)
+        webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
 
     private fun setupWebView(view: View) {

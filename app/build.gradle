@@ -6,20 +6,20 @@ plugins {
     id "com.github.node-gradle.node" version "2.2.4"
 }
 
-task npmCopy(type: Copy) {
+task buildFeatureContainer(type: NpmTask) {
     dependsOn npm_install
-    from "node_modules/@polypoly-eu/feature-bootstrap/dist/index.js"
-    into "build/js"
+    npmCommand = ['run', 'build']
 }
 
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets")
-        task.dependsOn(npmCopy)
+        task.dependsOn(buildFeatureContainer)
 }
 
 node {
     download = true
-    version = "14.4.0"
+    version = "14.6.0"
+    nodeModulesDir = file("feature_container")
 }
 
 android {
@@ -54,7 +54,7 @@ android {
 
     sourceSets {
         main {
-            assets.srcDirs += file('build/js')
+            assets.srcDirs += file('feature_container/dist')
             java.srcDirs += file('src/main/kotlin')
         }
         test {
