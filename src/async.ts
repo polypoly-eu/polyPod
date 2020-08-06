@@ -1,13 +1,5 @@
-import {
-    RequestInit,
-    Response,
-    Pod,
-    PolyOut,
-    PolyIn,
-    EncodingOptions,
-    Matcher,
-    Stats,
-} from "@polypoly-eu/poly-api";
+import { Pod, PolyOut, PolyIn, EncodingOptions, Matcher, Stats } from "@polypoly-eu/poly-api";
+import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 
 class AsyncPolyOut implements PolyOut {

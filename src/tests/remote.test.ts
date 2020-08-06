@@ -8,7 +8,8 @@ import { fromNodeMessagePort } from "@polypoly-eu/port-authority/dist/node";
 import { createServer, Server } from "http";
 import fetch from "node-fetch";
 import { once } from "events";
-import { getHttpbinUrl, podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
 
 describe("Remote pod", () => {
     describe("MessagePort (node)", () => {

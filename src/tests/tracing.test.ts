@@ -2,7 +2,8 @@ import { DefaultPod, PolyIn, PolyOut } from "@polypoly-eu/poly-api";
 import { Volume } from "memfs";
 import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
-import { getHttpbinUrl, podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
 import { interceptorOfLogger, Logger, nullLogger, TracingPod } from "../tracing";
 import { Interceptor } from "@polypoly-eu/aop-ts";
 

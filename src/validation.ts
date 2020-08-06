@@ -1,17 +1,9 @@
-import {
-    Matcher,
-    Pod,
-    PolyIn,
-    PolyOut,
-    Response,
-    RequestInit,
-    EncodingOptions,
-    Stats,
-} from "@polypoly-eu/poly-api";
+import { Matcher, Pod, PolyIn, PolyOut, EncodingOptions, Stats } from "@polypoly-eu/poly-api";
 import { Term, Quad, Quad_Subject, Quad_Predicate, Quad_Object, Quad_Graph } from "rdf-js";
 import { DataFactory, Model } from "@polypoly-eu/rdf";
 import { convert } from "@polypoly-eu/rdf-spec";
 import { Decoder } from "io-ts/lib/Decoder";
+import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 
 export class ValidationError extends Error {
     constructor(msg: string, readonly details: string) {

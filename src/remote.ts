@@ -1,13 +1,5 @@
-import {
-    RequestInit,
-    Response,
-    Pod,
-    PolyIn,
-    PolyOut,
-    EncodingOptions,
-    Stats,
-    Matcher,
-} from "@polypoly-eu/poly-api";
+import { Pod, PolyIn, PolyOut, EncodingOptions, Stats, Matcher } from "@polypoly-eu/poly-api";
+import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 import {
     endpointClient,

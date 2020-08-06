@@ -3,7 +3,8 @@ import { Volume } from "memfs";
 import { ValidatingPod, ValidationError } from "../validation";
 import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
-import { getHttpbinUrl, podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
 
 describe("Validating pod", () => {
     const fs = new Volume().promises as any;

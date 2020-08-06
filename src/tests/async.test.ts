@@ -2,7 +2,8 @@ import { Pod, DefaultPod } from "@polypoly-eu/poly-api";
 import { Volume } from "memfs";
 import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
-import { getHttpbinUrl, podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
 import { AsyncPod } from "../async";
 import { DataFactory } from "@polypoly-eu/rdf";
 
