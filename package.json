@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/orodruin",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "CLI tool supporting the testing lifecycle of Features",
   "main": "dist/index.js",
   "bin": {
