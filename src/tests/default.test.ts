@@ -14,12 +14,6 @@ describe("Mock pod", () => {
 
 // eslint-disable-next-line
 function compile(): void {
-    window.addEventListener("podReady", (event) => {
-        // eslint-disable-next-line
-        const pod1: Pod = event.detail;
-        // eslint-disable-next-line
-        const pod2: Pod | undefined = window.pod;
-        // eslint-disable-next-line
-        const _window: Window = event.target;
-    });
+    // eslint-disable-next-line
+    const pod: Pod = window.pod;
 }
