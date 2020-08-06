@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.1",
-    "@polypoly-eu/orodruin": "0.0.10",
+    "@polypoly-eu/orodruin": "0.0.12",
     "@polypoly-eu/stylelint-config-polypoly": "0.0.1",
     "@types/react": "^16.9.44",
     "@types/react-dom": "^16.9.6",
@@ -35,7 +35,7 @@
     "root": "dist"
   },
   "dependencies": {
-    "@polypoly-eu/feature-bootstrap": "0.0.2",
+    "@polypoly-eu/poly-api": "^0.6.0",
     "i18next": "^19.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

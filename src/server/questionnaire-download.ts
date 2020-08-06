@@ -1,13 +1,13 @@
 import * as POD_ENV from "../env";
-import { pod } from "@polypoly-eu/feature-bootstrap";
+import type {} from "@polypoly-eu/poly-api";
 
-export async function downloadQuestionnaireData(questionnaireId: string) {
-    const api = await pod;
+const { polyOut } = window.pod;
 
+export async function downloadQuestionnaireData(questionnaireId: string): Promise<string> {
     const statusCheckEndpoint = POD_ENV.API_HOME + "questionnaire/" + questionnaireId + "/content";
     return timeoutPromise(
         10000,
-        api.polyOut
+        polyOut
             .fetch(statusCheckEndpoint, {
                 headers: {
                     "User-Agent": userAgent(),
@@ -24,13 +24,11 @@ export async function downloadQuestionnaireData(questionnaireId: string) {
     );
 }
 
-export async function downloadQuestionnaireResults(questionnaireId: string) {
-    const api = await pod;
-
+export async function downloadQuestionnaireResults(questionnaireId: string): Promise<string> {
     const statusCheckEndpoint = POD_ENV.API_HOME + "questionnaire/" + questionnaireId + "/results";
     return timeoutPromise(
         10000,
-        api.polyOut
+        polyOut
             .fetch(statusCheckEndpoint, {
                 headers: {
                     "User-Agent": userAgent(),
@@ -47,13 +45,11 @@ export async function downloadQuestionnaireResults(questionnaireId: string) {
     );
 }
 
-export async function downloadActiveQuestionnairesMetadata() {
-    const api = await pod;
-
+export async function downloadActiveQuestionnairesMetadata(): Promise<string> {
     const statusCheckEndpoint = POD_ENV.API_HOME + "questionnaires";
     return timeoutPromise(
         10000,
-        api.polyOut
+        polyOut
             .fetch(statusCheckEndpoint, {
                 headers: {
                     "User-Agent": userAgent(),
