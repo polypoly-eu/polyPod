@@ -1,6 +1,7 @@
 package eu.polypoly.pod.android
 
 import eu.polypoly.bubblewrap.Codec
+import eu.polypoly.pod.android.polyOut.FetchInit
 import eu.polypoly.pod.android.polyOut.PolyOut
 import org.msgpack.value.Value
 
@@ -19,10 +20,10 @@ object PodApi {
         val (inner, args) = decodeCall(value[1])
         if (outer == "polyOut") {
             if (inner == "fetch") {
-                val result = PolyOut.fetch(args[0].asStringValue().toString())
+                val result = PolyOut.fetch(args[0].asStringValue().toString(), FetchInit())
                 val codec =
                     Codec.kvArray(Codec.string, Codec.string).taggedClass("@polypoly-eu/podigree.FetchResponse")
-                return codec.encode(mapOf(Pair("bufferedText", result)))
+                return codec.encode(mapOf(Pair("bufferedText", result.bodyContent)))
             }
         }
 
