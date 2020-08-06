@@ -6,9 +6,17 @@
     <script src="/pod.js"></script>
 </head>
 <body>
-<span id="results"></span>
-<div id="id_001">This is test feature.</div>
-<button id="id_002" onclick="verifySimpleJavaScriptCall()">002</button>
-<button id="id_003" onclick="verifyPodObjectExists()">003</button>
+<span id="status">Starting</span>
+<span id="result"></span>
+<input id="input.1"/><input id="input.2"/>
+<button id="javascript.simple" onclick="execute(() => simpleJavaScriptCall())">javascript.simple</button>
+<button id="podApi.resolves" onclick="execute(() => awaitPodObject())">podApi.resolves</button>
+<button id="fetch.simple" onclick="execute(() => simpleFetch())">fetch.simple</button>
+<button id="fetch.empty_method" onclick="execute(() => callFetchWithNoMethod())">fetch.empty_method</button>
+<button id="fetch.post_method" onclick="execute(() => callFetchWithPostMethod())">fetch.post_method</button>
+<button id="fetch.single_string_header" onclick="execute(() => callFetchWithSingleHeaderInStringForm())">fetch.single_string_header</button>
+<button id="fetch.get_static_response" onclick="execute(() => verifyBodyOfFetchResponse())">fetch.get_static_response</button>
+<button id="fetch.get_response_status" onclick="execute(() => verifyResponseStatusOfFetchCall())">fetch.get_response_status</button>
+<button id="fetch.get_response_ok" onclick="execute(() => verifyResponseOkOfFetchCall())">fetch.get_response_ok</button>
 </body>
 </html>

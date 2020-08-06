@@ -1,6 +1,7 @@
 package eu.polypoly.pod.android
 
 import android.os.Bundle
+import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -15,11 +16,17 @@ import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
-import org.hamcrest.CoreMatchers.containsString
+import eu.polypoly.pod.android.polyOut.PolyOutTestDouble
+import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * Idea - verify that a Feature can successfully start and get a correctly setup environment with PodApi available,
+ * can get its WebView and can render there, JavaScript works, etc...
+ * Verifying that PodApi works does _not_ belong here and has its own test suite.
+ */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class FeatureFragmentInstrumentedTest {
@@ -28,12 +35,11 @@ class FeatureFragmentInstrumentedTest {
     val activityRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun firstFragmentIsShown() {
+    fun whenStartingTheApp_firstFragmentIsShown() {
         onView(withText("testFeature"))
             .check(matches(isDisplayed()))
     }
 
-    // TODO - move test Feature out of "main"
     @Test
     fun canNavigateToFeatureFragment() {
         onView(withText("testFeature"))
@@ -43,49 +49,62 @@ class FeatureFragmentInstrumentedTest {
             .perform(click())
 
         onView(withText("testFeature"))
-            .check(doesNotExist())
+            .check(doesNotExist())  // I'm not on the first fragment any more
 
-        onWebView()
-            .inWindow(selectFrameByIdOrName("harness"))
-            .withElement(findElement(Locator.ID, "id_001"))
-            .check(webMatches(getText(), containsString("This is test feature.")))
+        onFeature()
+            .withElement(findElement(Locator.ID, "status"))
+            .check(webMatches(getText(), `is`("Starting")))
     }
 
     @Test
     fun canFindTextInWebView() {
         launchTestFeature()
-        onWebView()
-            .inWindow(selectFrameByIdOrName("harness"))
-            .withElement(findElement(Locator.ID, "id_001"))
-            .check(webMatches(getText(), containsString("This is test feature.")))
+        onFeature()
+            .withElement(findElement(Locator.ID, "status"))
+            .check(webMatches(getText(), `is`("Starting")))
     }
 
     @Test
     fun basicJavaScriptOnFeatureSideWorks() {
         launchTestFeature()
-        onWebView()
-            .inWindow(selectFrameByIdOrName("harness"))
-            .withElement(findElement(Locator.ID, "id_002"))
+        onFeature()
+            .withElement(findElement(Locator.ID, "javascript.simple"))
             .perform(webClick())
-            .withElement(findElement(Locator.ID, "results"))
-            .check(webMatches(getText(), containsString("All OK")))
+        // wait to let the call get through
+        Thread.sleep(1000)
+        onFeature()
+            .withElement(findElement(Locator.ID, "status"))
+            .check(webMatches(getText(), `is`("All OK")))
     }
 
     @Test
-    fun afterStartingAFeature_podObjectExists() {
-        launchTestFeature()
-        onWebView()
-            .inWindow(selectFrameByIdOrName("harness"))
-            .withElement(findElement(Locator.ID, "id_003"))
+    fun afterStartingAFeature_podObjectEventuallyResolves() {
+        val fragmentScenario = launchTestFeature()
+        val polyOut = PolyOutTestDouble()
+        val podApi: PodApi = PodApiTestDouble(polyOut)
+        fragmentScenario.onFragment { fragment ->
+            fragment.overridePodApi(podApi)
+        }
+        // wait for the feature container to finish initializing itself
+        Thread.sleep(2000)
+        onFeature()
+            .withElement(findElement(Locator.ID, "podApi.resolves"))
             .perform(webClick())
-            .withElement(findElement(Locator.ID, "results"))
-            .check(webMatches(getText(), containsString("All OK")))
+        // wait to let the call get through
+        Thread.sleep(1000)
+        onFeature()
+            .withElement(findElement(Locator.ID, "status"))
+            .check(webMatches(getText(), `is`("All OK")))
     }
 
-    private fun launchTestFeature() {
+    private fun launchTestFeature(): FragmentScenario<FeatureFragmentTestDouble> {
         val fragmentArgs = Bundle().apply {
             putString("featureName", "testFeature")
         }
-        launchFragmentInContainer<FeatureFragment>(fragmentArgs)
+        return launchFragmentInContainer<FeatureFragmentTestDouble>(fragmentArgs)
     }
+
+    private fun onFeature() =
+        onWebView()
+            .inWindow(selectFrameByIdOrName("harness"))
 }

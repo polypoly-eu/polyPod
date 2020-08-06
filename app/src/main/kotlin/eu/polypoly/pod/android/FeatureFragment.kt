@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
+import eu.polypoly.pod.android.polyOut.PolyOut
 import eu.polypoly.pod.android.postoffice.PostOfficeMessageCallback
 import org.slf4j.LoggerFactory
 
@@ -26,8 +27,7 @@ open class FeatureFragment : Fragment() {
 
     private val args: FeatureFragmentArgs by navArgs()
 
-    // TODO - create API object per Feature
-    private val api: PodApi = PodApi
+    protected lateinit var api: PodApi
     private lateinit var webView: WebView
 
     override fun onCreateView(
@@ -40,8 +40,13 @@ open class FeatureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
+        api = setupPodApi()
         setupWebView(view)
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
+    }
+
+    private fun setupPodApi(): PodApi {
+        return PodApi(PolyOut())
     }
 
     private fun setupWebView(view: View) {

@@ -1,2 +1,2 @@
-rootProject.name='polyPod-Android'
+rootProject.name = 'polyPod-Android'
 include ':polyOut', ':app'

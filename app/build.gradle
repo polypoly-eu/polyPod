@@ -73,6 +73,9 @@ android {
             includeAndroidResources = true
             all {
                 systemProperty 'robolectric.logging.enabled', 'true'
+                testLogging {
+                    events "passed", "skipped", "failed", "standardOut", "standardError"
+                }
             }
         }
     }
@@ -129,6 +132,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'com.google.truth:truth:1.0.1'
+    androidTestImplementation 'com.google.truth.extensions:truth-java8-extension:1.0.1'
     // fragment-testing requires entry with 'debugImplementation' scope, but also with 'androidTestImplementation'
     // linter tells more (hence ignoring FragmentGradleConfiguration linter option)
     //noinspection FragmentGradleConfiguration
