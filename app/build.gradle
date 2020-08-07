@@ -6,9 +6,12 @@ plugins {
     id "com.github.node-gradle.node" version "2.2.4"
 }
 
-task buildFeatureContainer(type: NpmTask) {
+task buildFeatureContainer(type: Copy) {
     dependsOn npm_install
-    npmCommand = ['run', 'build']
+    from "feature_container/node_modules/@polypoly-eu/feature-bootstrap/dist/index.js"
+    from "feature_container/src"
+    rename "index.js", "pod.js"
+    into "build/container/container/"
 }
 
 tasks.whenTaskAdded { task ->
@@ -54,7 +57,7 @@ android {
 
     sourceSets {
         main {
-            assets.srcDirs += file('feature_container/dist')
+            assets.srcDirs += file('build/container')
             java.srcDirs += file('src/main/kotlin')
         }
         test {
