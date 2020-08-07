@@ -15,7 +15,7 @@ task buildFeatureContainer(type: Copy) {
 }
 
 tasks.whenTaskAdded { task ->
-    if (task.name == "generateDebugAssets")
+    if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets")
         task.dependsOn(buildFeatureContainer)
 }
 
