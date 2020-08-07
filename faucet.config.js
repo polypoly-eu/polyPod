@@ -1,8 +1,9 @@
 module.exports = {
-  js: [{
+  essugar: [{
     source: "./src/index.tsx",
     target: "./dist/bundle.js",
     typescript: true,
+    jsx: true,
     externals: {
       "react": "React",
       "react-dom": "ReactDOM",
@@ -46,5 +47,7 @@ module.exports = {
   watchDirs: [
     "./src",
     "./polylook"
-  ]
+  ],
+
+  plugins: [require("faucet-pipeline-essugar")]
 }

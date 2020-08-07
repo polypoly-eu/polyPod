@@ -9,7 +9,7 @@
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx src polylook",
     "stylelint": "stylelint polylook/**/*.scss",
-    "check": "tsc --noEmit --watch --noImplicitAny --allowJS",
+    "check": "tsc",
     "serve": "orodruin serve -m"
   },
   "devDependencies": {
@@ -21,12 +21,14 @@
     "@types/react-router-dom": "^5.1.5",
     "eslint": "^7.6.0",
     "eslint-plugin-react": "^7.20.3",
+    "faucet-pipeline-core": "^1.5.0",
+    "faucet-pipeline-essugar": "0.0.2",
     "faucet-pipeline-sass": "^1.4.0",
     "faucet-pipeline-static": "^1.2.0",
     "faucet-pipeline-typescript": "^2.1.6",
     "prettier": "^2.0.5",
     "stylelint": "^13.6.1",
-    "typescript": "3.9.7"
+    "typescript": "^3.9.7"
   },
   "engines": {
     "polypoly": "^0.4.2"
