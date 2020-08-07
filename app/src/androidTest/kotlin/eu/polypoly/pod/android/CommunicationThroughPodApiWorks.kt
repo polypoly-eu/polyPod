@@ -15,6 +15,7 @@ import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.time.Instant
 
 /**
  * Idea - those tests verify that the communication between the Feature and the Pod works.
@@ -34,29 +35,32 @@ class CommunicationThroughPodApiWorks {
     fun canDoSimpleFetchGet() {
         val podApi = launchTestFeature()
         clickButton("fetch.simple")
-        Thread.sleep(2000)  // TODO - how _not_ to wait?
         val polyOut = podApi.polyOut as PolyOutTestDouble
-        assertThat(polyOut.fetchWasCalled).isTrue()
+        waitUntil({
+            assertThat(polyOut.fetchWasCalled).isTrue()
+        })
     }
 
     @Test
     fun whenCalledWithNoMethodSpecified_methodIsEmpty() {
         val podApi = launchTestFeature()
         clickButton("fetch.empty_method")
-        Thread.sleep(2000)  // TODO - how _not_ to wait?
         val polyOut = podApi.polyOut as PolyOutTestDouble
-        assertThat(polyOut.fetchWasCalled).isTrue()
-        assertThat(polyOut.fetchInit.method).isNull()
+        waitUntil({
+            assertThat(polyOut.fetchWasCalled).isTrue()
+            assertThat(polyOut.fetchInit.method).isNull()
+        })
     }
 
     @Test
     fun canPassMethodToFetch() {
         val podApi = launchTestFeature()
         clickButton("fetch.post_method")
-        Thread.sleep(2000)  // TODO - how _not_ to wait?
         val polyOut = podApi.polyOut as PolyOutTestDouble
-        assertThat(polyOut.fetchWasCalled).isTrue()
-        assertThat(polyOut.fetchInit.method).isEqualTo("POST")
+        waitUntil({
+            assertThat(polyOut.fetchWasCalled).isTrue()
+            assertThat(polyOut.fetchInit.method).isEqualTo("POST")
+        })
     }
 
     @Test
@@ -67,12 +71,13 @@ class CommunicationThroughPodApiWorks {
         setInput(1, key)
         setInput(2, value)
         clickButton("fetch.single_string_header")
-        Thread.sleep(2000)  // TODO - how _not_ to wait?
         val polyOut = podApi.polyOut as PolyOutTestDouble
-        assertThat(polyOut.fetchWasCalled).isTrue()
-        val headers = polyOut.fetchInit.headers
-        assertThat(headers).hasSize(1)
-        assertThat(headers).containsEntry(key, value)
+        waitUntil({
+            assertThat(polyOut.fetchWasCalled).isTrue()
+            val headers = polyOut.fetchInit.headers
+            assertThat(headers).hasSize(1)
+            assertThat(headers).containsEntry(key, value)
+        })
     }
 
     @Test
@@ -83,14 +88,15 @@ class CommunicationThroughPodApiWorks {
         setInput(1, body)
         polyOut.returnBody(body)
         clickButton("fetch.get_static_response")
-        Thread.sleep(2000)  // TODO - how _not_ to wait?
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+            onFeature()
+                .withElement(findElement(Locator.ID, "result"))
+                .check(webMatches(getText(), `is`(body)))
+        })
         assertThat(polyOut.fetchWasCalled).isTrue()
-        onFeature()
-            .withElement(findElement(Locator.ID, "status"))
-            .check(webMatches(getText(), `is`("All OK")))
-        onFeature()
-            .withElement(findElement(Locator.ID, "result"))
-            .check(webMatches(getText(), `is`(body)))
     }
 
     @Test
@@ -101,14 +107,15 @@ class CommunicationThroughPodApiWorks {
         setInput(1, "$status")
         polyOut.returnStatus(status)
         clickButton("fetch.get_response_status")
-        Thread.sleep(2000)  // TODO - how _not_ to wait?
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+            onFeature()
+                .withElement(findElement(Locator.ID, "result"))
+                .check(webMatches(getText(), `is`("$status")))
+        })
         assertThat(polyOut.fetchWasCalled).isTrue()
-        onFeature()
-            .withElement(findElement(Locator.ID, "status"))
-            .check(webMatches(getText(), `is`("All OK")))
-        onFeature()
-            .withElement(findElement(Locator.ID, "result"))
-            .check(webMatches(getText(), `is`("$status")))
     }
 
     @Test
@@ -119,14 +126,15 @@ class CommunicationThroughPodApiWorks {
         setInput(1, "$ok")
         polyOut.returnOk(ok)
         clickButton("fetch.get_response_ok")
-        Thread.sleep(2000)  // TODO - how _not_ to wait?
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+            onFeature()
+                .withElement(findElement(Locator.ID, "result"))
+                .check(webMatches(getText(), `is`("$ok")))
+        })
         assertThat(polyOut.fetchWasCalled).isTrue()
-        onFeature()
-            .withElement(findElement(Locator.ID, "status"))
-            .check(webMatches(getText(), `is`("All OK")))
-        onFeature()
-            .withElement(findElement(Locator.ID, "result"))
-            .check(webMatches(getText(), `is`("$ok")))
     }
 
     private fun launchTestFeature(): PodApiTestDouble {
@@ -157,5 +165,21 @@ class CommunicationThroughPodApiWorks {
         onFeature()
             .withElement(findElement(Locator.ID, id))
             .perform(webClick())
+    }
+
+    private fun waitUntil(function: () -> Unit, timeout: Long = 2000) {
+        // TODO - is there a better way?
+        var lastError: AssertionError? = null
+        val until = Instant.now().plusMillis(timeout)
+        while (Instant.now().isBefore(until)) {
+            try {
+                function.invoke()
+                return
+            } catch (err: AssertionError) {
+                lastError = err
+            }
+            Thread.sleep(100)
+        }
+        throw lastError!!
     }
 }
