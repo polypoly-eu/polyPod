@@ -1,5 +1,6 @@
 package eu.polypoly.pod.android
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -48,7 +49,7 @@ open class FeatureFragment : Fragment() {
         webView.settings.javaScriptEnabled = true
 
         val assetLoader = WebViewAssetLoader.Builder()
-            .addPathHandler("/assets/", AssetsPathHandler(requireContext()))
+            .addPathHandler("/", PodPathHandler(requireContext()))
             .build()
 
         webView.webViewClient = object : WebViewClient() {
@@ -71,5 +72,18 @@ open class FeatureFragment : Fragment() {
         val innerPort = channel[1]
         outerPort.setWebMessageCallback(PostOfficeMessageCallback(lifecycleScope, outerPort, api))
         view.postWebMessage(WebMessage("", arrayOf(innerPort)), Uri.parse("*"))
+    }
+
+    private class PodPathHandler(context: Context) : WebViewAssetLoader.PathHandler {
+        val assetsPathHandler: AssetsPathHandler = AssetsPathHandler(context)
+
+        override fun handle(path: String): WebResourceResponse? {
+            logger.debug("I'm supposed to handle path: '$path'")
+            val finalPath = when (path) {
+                "pod.js" -> "container/pod.js"
+                else -> path.replaceFirst(Regex("^assets/"), "")
+            }
+            return assetsPathHandler.handle(finalPath)
+        }
     }
 }
