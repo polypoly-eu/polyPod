@@ -16,7 +16,7 @@
     "@polypoly-eu/eslint-config-polypoly": "0.0.1",
     "@polypoly-eu/orodruin": "0.0.12",
     "@polypoly-eu/stylelint-config-polypoly": "0.0.1",
-    "@types/react": "^16.9.44",
+    "@types/react": "^16.9.45",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^5.1.5",
     "eslint": "^7.6.0",
