@@ -54,7 +54,7 @@
     "ts-jest": "^25.5.1",
     "ts-mocha": "^7.0.0",
     "ts-node": "^8.10.2",
-    "typedoc": "^0.17.8",
+    "typedoc": "^0.18.0",
     "typescript": "^3.9.7"
   },
   "peerDependencies": {
