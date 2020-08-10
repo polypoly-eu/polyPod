@@ -3,10 +3,9 @@ package eu.polypoly.pod.android.polyOut
 import eu.polypoly.fetch.OkFetch
 import eu.polypoly.fetch.RequestInit
 import kotlinx.coroutines.future.await
-import okhttp3.OkHttpClient
 
 open class PolyOut {
-    private val client = OkFetch(OkHttpClient())
+    private val client = OkFetch()
 
     open suspend fun fetch(resource: String, init: FetchInit): FetchResponse {
         val result = client.fetch(resource, RequestInit(null, init.headers, init.method)).await()
