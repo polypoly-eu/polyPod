@@ -33,8 +33,6 @@ The following implementations are not spec-compliant:
 
 * [rdflib](https://github.com/linkeddata/rdflib.js)
 
-As an additional tool, this library also provides a converter for RDF terms and quads into other representations.
-
 ## Example
 
 Assuming you want to test that the reference data factory implementation conforms to the specification, you can add this to your tests:
