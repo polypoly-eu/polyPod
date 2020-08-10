@@ -4,8 +4,8 @@ import React from "react";
 import MultipleChoiceQuestion from "../../components/cards/MultipleChoiceQuestion";
 import TextQuestion from "../../components/cards/TextQuestion";
 import RangeQuestion from "../../components/cards/RangeQuestion";
-import Layout from "../../../polylook/components/layout";
 import FooterNavigation from "../../components/basic/FooterNavigation";
+import { Layout } from "@polypoly-eu/poly-look/lib/layout";
 
 export default function QuestionScreen() {
     const { currentQuestion } = useContext(QuestionnaireContext);

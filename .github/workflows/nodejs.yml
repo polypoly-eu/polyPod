@@ -23,5 +23,5 @@ jobs:
         npm run build
     - name: Lint
       run: |
-        npm run lint
+        npm run eslint
         npm run check

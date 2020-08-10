@@ -2,13 +2,10 @@ import { useTranslation } from "react-i18next";
 import React, { useContext } from "react";
 import { QuestionnaireContext } from "../../context/questionnaire-context";
 import StartSurveyButton from "../../components/buttons/StartSurveyButton";
-// import ResultsSurveyButton from "../../components/buttons/ResultsSurveyButton";
-// import ReviewSurveyButton from "../../components/buttons/ReviewSurveyButton";
-// import ContinueSurveyButton from "../../components/buttons/ContinueSurveyButton";
 import { Link } from "react-router-dom";
-import Layout from "../../../polylook/components/layout";
-import { CenteredFooter } from "../../../polylook/components/footer";
-import { BigHeader } from "../../../polylook/components/header";
+import { BigHeader } from "@polypoly-eu/poly-look/lib/header";
+import { CenteredFooter } from "@polypoly-eu/poly-look/lib/footer";
+import { Layout } from "@polypoly-eu/poly-look/lib/layout";
 
 function IntroHeader({ questionnaire }) {
     const { t, i18n } = useTranslation();
