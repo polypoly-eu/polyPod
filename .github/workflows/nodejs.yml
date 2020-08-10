@@ -24,9 +24,12 @@ jobs:
         npm ci --ignore-scripts
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: npm rebuild
+      run: |
+        npm rebuild
     - name: npm test
       run: |
-        npm test
+        xvfb-run --auto-servernum npm test
       env:
         HTTPBIN_URL: 'http://localhost'
     - name: ESLint
