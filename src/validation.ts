@@ -1,30 +1,12 @@
 import type { Matcher, Pod, PolyIn, PolyOut, EncodingOptions, Stats } from "@polypoly-eu/poly-api";
 import type { Term, Quad, Quad_Subject, Quad_Predicate, Quad_Object, Quad_Graph } from "rdf-js";
 import { DataFactory, Model } from "@polypoly-eu/rdf";
-import { convert } from "@polypoly-eu/rdf-spec";
+import { convert } from "@polypoly-eu/rdf-convert";
 import type { Decoder } from "io-ts/lib/Decoder";
 import * as Decode from "io-ts/lib/Decoder";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
-import { fold } from "fp-ts/lib/Either";
 import { pipe } from "fp-ts/lib/pipeable";
-
-export class ValidationError extends Error {
-    constructor(msg: string, readonly details: string) {
-        super(msg);
-    }
-}
-
-function expect<I, A>(input: I, msg: string, decoder: Decoder<I, A>): A {
-    return pipe(
-        decoder.decode(input),
-        fold(
-            (error) => {
-                throw new ValidationError(msg, Decode.draw(error));
-            },
-            (t) => t
-        )
-    );
-}
+import { expect } from "./_util";
 
 interface Decoders {
     encodingOptions: Decoder<unknown, EncodingOptions>;
