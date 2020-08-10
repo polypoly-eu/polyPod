@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/rdf-convert",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Converts terms and quads between different RDFJS-compliant data factories",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
