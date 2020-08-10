@@ -137,6 +137,22 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyOut.fetchWasCalled).isTrue()
     }
 
+    @Test
+    fun canPassBodyToFetch() {
+        val podApi = launchTestFeature()
+        val polyOut = podApi.polyOut as PolyOutTestDouble
+        val body = "example"
+        setInput(1, body)
+        clickButton("fetch.post_body")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyOut.fetchWasCalled).isTrue()
+        assertThat(polyOut.fetchInit.body).isEqualTo(body)
+    }
+
     private fun launchTestFeature(): PodApiTestDouble {
         val fragmentArgs = Bundle().apply {
             putString("featureName", "testFeature")

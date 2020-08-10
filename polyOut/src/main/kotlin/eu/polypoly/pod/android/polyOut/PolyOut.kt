@@ -8,7 +8,7 @@ open class PolyOut {
     private val client = OkFetch()
 
     open suspend fun fetch(resource: String, init: FetchInit): FetchResponse {
-        val result = client.fetch(resource, RequestInit(null, init.headers, init.method)).await()
+        val result = client.fetch(resource, RequestInit(init.body, init.headers, init.method)).await()
         val response = FetchResponse()
         response.ok = result.ok()
         response.status = result.status()

@@ -61,6 +61,12 @@ function verifyResponseOkOfFetchCall() {
         });
 }
 
+function callFetchWithPostMethodAndBody() {
+    console.log("callFetchWithPostMethodAndBOdy()");
+    let body = getInput(1);
+    window.pod.polyOut.fetch("http://httpbin.org/post", {method: "POST", body: body});
+}
+
 async function execute(test) {
     setStatus("Running...");
     await awaitPodApi();

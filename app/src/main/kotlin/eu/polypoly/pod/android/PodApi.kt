@@ -55,6 +55,9 @@ open class PodApi(val polyOut: PolyOut) {
                         .forEach { (k, v) -> headers[k] = v }
                     fetchInit.headers = headers
                 }
+                "body" -> {
+                    fetchInit.body = argsMap[key]!!.toString()  // this has to be a String
+                }
             }
         }
         return fetchInit
