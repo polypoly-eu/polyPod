@@ -100,6 +100,14 @@ export interface PolyOut extends FS {
 }
 
 /**
+ * @hidden
+ */
+export interface PolyLifecycle {
+    listFeatures(): Promise<Record<string, boolean>>;
+    startFeature(id: string, background: boolean): Promise<void>;
+}
+
+/**
  * This interface represents the API that a Pod offers to a Feature. It comprises multiple sub-components that are
  * concerned with different aspects. Those sub-components are grouped according to data flow (see member documentation
  * for details).
@@ -161,4 +169,9 @@ export interface Pod {
      * `polyOut` is the interface to interact with the outside world. Refer to [[PolyOut]] for its definition.
      */
     readonly polyOut: PolyOut;
+
+    /**
+     * @hidden
+     */
+    readonly polyLifecycle?: PolyLifecycle;
 }
