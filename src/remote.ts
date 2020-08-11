@@ -1,4 +1,12 @@
-import { Pod, PolyIn, PolyOut, EncodingOptions, Stats, Matcher } from "@polypoly-eu/poly-api";
+import {
+    Pod,
+    PolyLifecycle,
+    PolyIn,
+    PolyOut,
+    EncodingOptions,
+    Stats,
+    Matcher,
+} from "@polypoly-eu/poly-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 import {
@@ -39,9 +47,15 @@ type PolyOutEndpoint = ObjectEndpointSpec<{
     fetch(input: string, init: RequestInit): ValueEndpointSpec<Response>;
 }>;
 
+type PolyLifecycleEndpoint = ObjectEndpointSpec<{
+    listFeatures(): ValueEndpointSpec<Record<string, boolean>>;
+    startFeature(id: string, background: boolean): ValueEndpointSpec<void>;
+}>;
+
 type PodEndpoint = ObjectEndpointSpec<{
     polyIn(): PolyInEndpoint;
     polyOut(): PolyOutEndpoint;
+    polyLifecycle(): PolyLifecycleEndpoint;
 }>;
 
 class FetchResponse implements Response {
@@ -165,6 +179,26 @@ export class RemoteClientPod implements Pod {
             }
         })();
     }
+
+    get polyLifecycle(): PolyLifecycle {
+        return {
+            listFeatures: () => this.rpcClient.polyLifecycle().listFeatures()(),
+            startFeature: (id, background) =>
+                this.rpcClient.polyLifecycle().startFeature(id, background)(),
+        };
+    }
+}
+
+// TODO move to poly-api?
+// TODO should this throw instead?
+class DummyPolyLifecycle implements PolyLifecycle {
+    async listFeatures(): Promise<Record<string, boolean>> {
+        return {};
+    }
+
+    async startFeature(): Promise<void> {
+        return;
+    }
 }
 
 export class RemoteServerPod implements ServerOf<PodEndpoint> {
@@ -214,5 +248,11 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
 
     polyIn(): ServerOf<PolyInEndpoint> {
         return this.pod.polyIn;
+    }
+
+    polyLifecycle(): ServerOf<PolyLifecycleEndpoint> {
+        if (this.pod.polyLifecycle) return this.pod.polyLifecycle;
+
+        return new DummyPolyLifecycle();
     }
 }

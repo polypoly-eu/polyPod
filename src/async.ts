@@ -1,4 +1,12 @@
-import { Pod, PolyOut, PolyIn, EncodingOptions, Matcher, Stats } from "@polypoly-eu/poly-api";
+import {
+    Pod,
+    PolyOut,
+    PolyLifecycle,
+    PolyIn,
+    EncodingOptions,
+    Matcher,
+    Stats,
+} from "@polypoly-eu/poly-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 
@@ -39,12 +47,32 @@ class AsyncPolyIn implements PolyIn {
     }
 }
 
+class AsyncPolyLifecycle implements PolyLifecycle {
+    constructor(private readonly promise: Promise<PolyLifecycle | undefined>) {}
+
+    private async force(): Promise<PolyLifecycle> {
+        const lifecycle = await this.promise;
+        if (lifecycle) return lifecycle;
+        throw new Error("Lifecycle is not implemented");
+    }
+
+    async listFeatures(): Promise<Record<string, boolean>> {
+        return (await this.force()).listFeatures();
+    }
+
+    async startFeature(id: string, background: boolean): Promise<void> {
+        return (await this.force()).startFeature(id, background);
+    }
+}
+
 export class AsyncPod implements Pod {
     readonly polyOut: PolyOut;
     readonly polyIn: PolyIn;
+    readonly polyLifecycle: PolyLifecycle;
 
     constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
         this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
         this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
+        this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
     }
 }

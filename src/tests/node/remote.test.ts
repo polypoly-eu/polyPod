@@ -1,4 +1,4 @@
-import { DefaultPod } from "@polypoly-eu/poly-api";
+import { PolyLifecycle, Pod, DefaultPod } from "@polypoly-eu/poly-api";
 import { Volume } from "memfs";
 import { dataset } from "@rdfjs/dataset";
 import { RemoteClientPod, RemoteServerPod } from "../../remote";
@@ -10,6 +10,10 @@ import fetch from "node-fetch";
 import { once } from "events";
 import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
+import chai, { assert } from "chai";
+import chaiAsPromised from "chai-as-promised";
+
+chai.use(chaiAsPromised);
 
 describe("Remote pod", () => {
     describe("MessagePort (node)", () => {
@@ -35,12 +39,13 @@ describe("Remote pod", () => {
     describe("HTTP/fetch", () => {
         const fs = new Volume().promises as any;
         const port = 12345;
+        let underlying: Pod;
 
         let server: Server;
 
         before(async () => {
-            const backendPod = new DefaultPod(dataset(), fs, fetch);
-            const serverPod = new RemoteServerPod(backendPod);
+            underlying = new DefaultPod(dataset(), fs, fetch);
+            const serverPod = new RemoteServerPod(underlying);
 
             const app = await serverPod.listenOnMiddleware();
 
@@ -54,6 +59,40 @@ describe("Remote pod", () => {
             "/",
             getHttpbinUrl()
         );
+
+        // TODO move to api
+        describe("Lifecycle", () => {
+            let log: any[];
+
+            beforeEach(() => {
+                log = [];
+                const polyLifecycle: PolyLifecycle = {
+                    startFeature: async (...args) => {
+                        log.push(args);
+                    },
+                    listFeatures: async () => ({ "test-on": true, "test-off": false }),
+                };
+                Object.assign(underlying, { polyLifecycle });
+            });
+
+            it("Lists features", async () => {
+                const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
+                await assert.eventually.deepEqual(client.polyLifecycle.listFeatures(), {
+                    "test-on": true,
+                    "test-off": false,
+                });
+            });
+
+            it("Starts feature", async () => {
+                const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
+                await client.polyLifecycle.startFeature("hi", false);
+                await client.polyLifecycle.startFeature("yo", true);
+                assert.deepEqual(log, [
+                    ["hi", false],
+                    ["yo", true],
+                ]);
+            });
+        });
 
         after(async () => {
             server.close();
