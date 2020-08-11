@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/podigree",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "An assortment of Pod implementations of noble descent",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/polypoly-eu/podigree#readme",
   "files": [
-    "dist/*.d.ts", "dist/*.js"
+    "dist/*.d.ts",
+    "dist/*.js"
   ],
   "dependencies": {
     "@polypoly-eu/aop-ts": "0.0.1",
