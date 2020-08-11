@@ -4,8 +4,12 @@ import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
-import { interceptorOfLogger, Logger, nullLogger, TracingPod } from "../tracing";
+import { interceptorOfLogger, Logger, nullLogger, TracingPod } from "../../tracing";
 import { Interceptor } from "@polypoly-eu/aop-ts";
+import chai, { assert } from "chai";
+import chaiAsPromised from "chai-as-promised";
+
+chai.use(chaiAsPromised);
 
 describe("Tracing pod", () => {
     const fs = new Volume().promises as any;
@@ -29,12 +33,16 @@ describe("Tracing pod", () => {
 
     describe("Logger", () => {
         it("Records calls", async () => {
-            const called = jest.fn();
-            const finished = jest.fn();
+            const callLog: any[] = [];
+            const finishLog: any[] = [];
 
             const logger: Logger = {
-                called,
-                finished,
+                called: (...args) => {
+                    callLog.push(args);
+                },
+                finished: (...args) => {
+                    finishLog.push(args);
+                },
             };
 
             const pod = new TracingPod(
@@ -45,11 +53,8 @@ describe("Tracing pod", () => {
 
             await pod.polyIn.select({});
 
-            expect(called).toHaveBeenCalledTimes(1);
-            expect(called).toHaveBeenCalledWith("select", [{}]);
-
-            expect(finished).toHaveBeenCalledTimes(1);
-            expect(finished).toHaveBeenCalledWith("select", []);
+            assert.deepEqual(callLog, [["select", [{}]]]);
+            assert.deepEqual(finishLog, [["select", []]]);
         });
     });
 
@@ -77,8 +82,8 @@ describe("Tracing pod", () => {
             polyOutInterceptor
         );
 
-        await expect(pod.polyOut.stat("/")).resolves.toBeDefined();
-        await expect(pod.polyIn.select({})).resolves.toEqual([]);
-        await expect(pod.polyOut.fetch("http://evil.com")).rejects.toThrowError("rejected");
+        await assert.eventually.isObject(pod.polyOut.stat("/"));
+        await assert.eventually.deepEqual(pod.polyIn.select({}), []);
+        await assert.isRejected(pod.polyOut.fetch("http://evil.com"), /rejected/);
     });
 });

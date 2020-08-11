@@ -1,10 +1,14 @@
 import { DefaultPod } from "@polypoly-eu/poly-api";
 import { Volume } from "memfs";
-import { ValidatingPod } from "../validation";
+import { ValidatingPod } from "../../validation";
 import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
+import chai, { assert } from "chai";
+import chaiAsPromised from "chai-as-promised";
+
+chai.use(chaiAsPromised);
 
 describe("Validating pod", () => {
     const fs = new Volume().promises as any;
@@ -18,20 +22,23 @@ describe("Validating pod", () => {
         const pod = new ValidatingPod(underlying);
 
         it("Unknown encoding", async () => {
-            await expect(
+            await assert.isRejected(
                 // @ts-ignore
-                pod.polyOut.writeFile("foo", "bar", { encoding: "wtf-8" })
-            ).rejects.toThrowError(/cannot decode "wtf-8"/);
+                pod.polyOut.writeFile("foo", "bar", { encoding: "wtf-8" }),
+                /cannot decode "wtf-8"/
+            );
         });
 
         it("Malformed RDF terms", () => {
-            expect(() =>
-                // @ts-ignore
-                pod.dataFactory.literal("test", {
-                    value: "bar",
-                    termType: "NamedNode",
-                })
-            ).toThrowError(/prototype/);
+            assert.throws(
+                () =>
+                    // @ts-ignore
+                    pod.dataFactory.literal("test", {
+                        value: "bar",
+                        termType: "NamedNode",
+                    }),
+                /prototype/
+            );
         });
     });
 });

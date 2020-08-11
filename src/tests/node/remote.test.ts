@@ -1,7 +1,7 @@
 import { DefaultPod } from "@polypoly-eu/poly-api";
 import { Volume } from "memfs";
 import { dataset } from "@rdfjs/dataset";
-import { RemoteClientPod, RemoteServerPod } from "../remote";
+import { RemoteClientPod, RemoteServerPod } from "../../remote";
 import { MessageChannel, MessagePort } from "worker_threads";
 import { Port } from "@polypoly-eu/port-authority";
 import { fromNodeMessagePort } from "@polypoly-eu/port-authority/dist/node";
@@ -27,7 +27,7 @@ describe("Remote pod", () => {
             getHttpbinUrl()
         );
 
-        afterAll(() => {
+        after(() => {
             ports.forEach((port) => port.close());
         });
     });
@@ -38,7 +38,7 @@ describe("Remote pod", () => {
 
         let server: Server;
 
-        beforeAll(async () => {
+        before(async () => {
             const backendPod = new DefaultPod(dataset(), fs, fetch);
             const serverPod = new RemoteServerPod(backendPod);
 
@@ -55,7 +55,7 @@ describe("Remote pod", () => {
             getHttpbinUrl()
         );
 
-        afterAll(async () => {
+        after(async () => {
             server.close();
             await once(server, "close");
         });

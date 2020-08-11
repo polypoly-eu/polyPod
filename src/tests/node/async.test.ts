@@ -4,7 +4,7 @@ import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
-import { AsyncPod } from "../async";
+import { AsyncPod } from "../../async";
 import { DataFactory } from "@polypoly-eu/rdf";
 
 describe("Async pod", () => {
