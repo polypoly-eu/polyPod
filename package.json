@@ -9,7 +9,6 @@
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
-    "bundle": "rollup -c",
     "eslint": "eslint src --ext .ts",
     "test:orodruin": "jest"
   },
@@ -53,17 +52,14 @@
   },
   "dependencies": {
     "@polypoly-eu/customs": "^0.1.2",
-    "@polypoly-eu/feature-bootstrap": "0.0.3",
     "@polypoly-eu/poly-api": "^0.6.0",
-    "@polypoly-eu/podigree": "^0.4.0",
+    "@polypoly-eu/podigree": "^0.5.0",
     "@rdfjs/dataset": "^1.0.1",
     "@types/puppeteer": "^3.0.1",
     "@types/node": "^14.0.27",
     "body-parser": "^1.19.0",
     "connect": "^3.7.0",
     "exposed-promises": "^1.0.0",
-    "fp-ts": "^2.8.1",
-    "io-ts": "2.2.9",
     "memfs": "^3.2.0",
     "node-fetch": "^2.6.0",
     "open": "^7.1.0",

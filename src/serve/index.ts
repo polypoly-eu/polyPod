@@ -1,10 +1,10 @@
-import {Server, ServerResponse} from "http";
+import type {Server, ServerResponse} from "http";
 import {once} from "events";
-import {Pod} from "@polypoly-eu/poly-api";
+import type {Pod} from "@polypoly-eu/poly-api";
 import {RemoteServerPod} from "@polypoly-eu/podigree";
 import {join} from "path";
-import {Manifest} from "@polypoly-eu/customs";
-import type {RemoteClientSpec} from "@polypoly-eu/feature-bootstrap/dist/remote-client-spec";
+import type {Manifest} from "@polypoly-eu/customs";
+import type {RemoteClientSpec} from "@polypoly-eu/podigree/dist/bootstrap";
 import createServer, {IncomingMessage, NextHandleFunction} from "connect";
 import serveStatic from "serve-static";
 import {promises as fs} from "fs";
@@ -29,7 +29,7 @@ export async function serve(
 ): Promise<Server> {
     const app = createServer();
 
-    const bootstrap = await fs.readFile(require.resolve("@polypoly-eu/feature-bootstrap"), "utf-8");
+    const bootstrap = await fs.readFile(require.resolve("@polypoly-eu/podigree/dist/bootstrap.js"), "utf-8");
 
     // FIXME enable csp
 
