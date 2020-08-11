@@ -37,7 +37,7 @@
     "@polypoly-eu/rdf-convert": "0.0.1",
     "@types/rdf-js": "^3.0.3",
     "fp-ts": "^2.8.1",
-    "io-ts": "2.2.8"
+    "io-ts": "2.2.9"
   },
   "peerDependencies": {
     "body-parser": "^1.19.0"
