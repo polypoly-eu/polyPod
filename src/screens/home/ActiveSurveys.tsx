@@ -1,7 +1,7 @@
 import * as React from "react";
 import MainSurveyCard from "./MainSurveyCard";
 import { QuestionnaireListContext } from "../../context/questionnaire-list-context";
-import { Tabs, Tab } from "../../../polylook/components/tabs";
+import { Tabs, Tab } from "@polypoly-eu/poly-look/lib/tabs";
 
 export default function ActiveSurveys() {
     const { questionnaireList } = React.useContext(QuestionnaireListContext);

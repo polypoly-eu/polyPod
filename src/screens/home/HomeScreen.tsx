@@ -1,9 +1,9 @@
 import ActiveSurveys from "./ActiveSurveys";
 import React from "react";
 import { Link } from "react-router-dom";
-import { SmallHeader } from "../../../polylook/components/header";
-import { CenteredFooter } from "../../../polylook/components/footer";
-import Layout from "../../../polylook/components/layout";
+import { SmallHeader } from "@polypoly-eu/poly-look/lib/header";
+import { CenteredFooter } from "@polypoly-eu/poly-look/lib/footer";
+import { Layout } from "@polypoly-eu/poly-look/lib/layout";
 
 function HomeHeader() {
     return (
