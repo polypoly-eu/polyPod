@@ -12,9 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
+import eu.polypoly.pod.android.logging.LoggerFactory
 import eu.polypoly.pod.android.polyOut.PolyOut
 import eu.polypoly.pod.android.postoffice.PostOfficeMessageCallback
-import org.slf4j.LoggerFactory
 import java.io.File
 import java.nio.file.Files
 import java.util.zip.ZipFile

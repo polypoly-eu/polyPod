@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.slf4j.LoggerFactory
+import eu.polypoly.pod.android.logging.LoggerFactory
 import java.io.File
 import java.util.*
 

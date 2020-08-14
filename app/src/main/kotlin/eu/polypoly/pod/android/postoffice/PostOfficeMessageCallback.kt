@@ -6,9 +6,9 @@ import android.webkit.WebMessagePort
 import eu.polypoly.bubblewrap.Bubblewrap
 import eu.polypoly.bubblewrap.Codec
 import eu.polypoly.pod.android.PodApi
+import eu.polypoly.pod.android.logging.LoggerFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.slf4j.LoggerFactory
 
 class PostOfficeMessageCallback(private val coroutineScope: CoroutineScope, private val outerPort: WebMessagePort, private val api: PodApi) : WebMessagePort.WebMessageCallback() {
     companion object {

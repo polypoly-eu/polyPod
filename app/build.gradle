@@ -127,7 +127,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "androidx.webkit:webkit:1.2.0"
-    implementation 'com.github.tony19:logback-android:2.0.0'
     implementation 'com.google.android.material:material:1.2.0'
     implementation 'org.slf4j:slf4j-api:1.7.30'
 
@@ -148,7 +147,7 @@ dependencies {
     // linter tells more (hence ignoring FragmentGradleConfiguration linter option)
     //noinspection FragmentGradleConfiguration
     testImplementation 'androidx.fragment:fragment-testing:1.2.5'
-    testImplementation 'org.slf4j:slf4j-simple:1.7.30'
+    testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.30'
 
     // instrumented tests dependencies
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -1,12 +1,12 @@
 package eu.polypoly.pod.android
 
 import eu.polypoly.pod.android.bubblewrap.FetchResponseCodec
+import eu.polypoly.pod.android.logging.LoggerFactory
 import eu.polypoly.pod.android.polyOut.FetchInit
 import eu.polypoly.pod.android.polyOut.PolyOut
 import org.msgpack.value.MapValue
 import org.msgpack.value.StringValue
 import org.msgpack.value.Value
-import org.slf4j.LoggerFactory
 
 open class PodApi(val polyOut: PolyOut) {
     companion object {
