@@ -5,20 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>polyPod</title>
     <link type="text/css" rel="stylesheet" href="polyLook.css"/>
-    <script>
-      const {port1, port2} = new MessageChannel();
-      function initIframe(el) {
-        port1.start();
-        port1.onmessage = event => {
-          // incoming msgpack-encoded events:
-          webkit.messageHandlers.event.postMessage(event.data);
-        };
-        el.contentWindow.postMessage("", "*", [port2]);
-
-        // outgoing msgpack-encoded events:
-        //port1.postMessage(...)
-      }
-    </script>
+    <script src="initIframe.js"></script>
   </head>
   <body>
     <div class="featureFrameWrapper">

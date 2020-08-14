@@ -60,6 +60,8 @@
 		1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3D24191C96008DB1B2 /* LaunchScreen.storyboard */; };
 		1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5924192463008DB1B2 /* domConsole.js */; };
 		1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */; };
+		1ABADBCB24E2E06600369791 /* initIframe.js in Resources */ = {isa = PBXBuildFile; fileRef = 1ABADBCA24E2E06600369791 /* initIframe.js */; };
+		1ABADBCD24E2E2F800369791 /* pod.js in Resources */ = {isa = PBXBuildFile; fileRef = 1ABADBCC24E2E2F700369791 /* pod.js */; };
 		1AF1178624BE22D50063EE37 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
 		1AF1178A24BF0AF20063EE37 /* questionnaire-feature.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */; };
 		1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */; };
@@ -135,6 +137,8 @@
 		1AA6DE4024191C96008DB1B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AA6DE5924192463008DB1B2 /* domConsole.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = domConsole.js; sourceTree = "<group>"; };
 		1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKUserContentController+Additions.swift"; sourceTree = "<group>"; };
+		1ABADBCA24E2E06600369791 /* initIframe.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = initIframe.js; sourceTree = "<group>"; };
+		1ABADBCC24E2E2F700369791 /* pod.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = pod.js; sourceTree = "<group>"; };
 		1AF1178524BE22D50063EE37 /* FileStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStats.swift; sourceTree = "<group>"; };
 		1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "questionnaire-feature.zip"; sourceTree = "<group>"; };
 		1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quad+Additions.swift"; sourceTree = "<group>"; };
@@ -313,6 +317,7 @@
 				1A66F76C2493715400ED4308 /* PolyOut */,
 				1AA6DE5924192463008DB1B2 /* domConsole.js */,
 				1AF468A8242263FC00E51B6D /* polyLook.css */,
+				1ABADBCC24E2E2F700369791 /* pod.js */,
 				1A00DFF8245961FB0049F3F7 /* messagePort.js */,
 				1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */,
 				1AF468DB24349E6B00E51B6D /* PodApi.swift */,
@@ -328,6 +333,7 @@
 				1AF1178824BF0AB90063EE37 /* Questionnaire-Feature */,
 				1A66F78C2498A80E00ED4308 /* PodCheck */,
 				1A00DFF624569F3A0049F3F7 /* pod.html */,
+				1ABADBCA24E2E06600369791 /* initIframe.js */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -453,6 +459,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ABADBCB24E2E06600369791 /* initIframe.js in Resources */,
+				1ABADBCD24E2E2F800369791 /* pod.js in Resources */,
 				1A00DFF724569F3A0049F3F7 /* pod.html in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
 				1AF1178A24BF0AF20063EE37 /* questionnaire-feature.zip in Resources */,

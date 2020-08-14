@@ -74,6 +74,8 @@ class FeaturesWallet {
                     try FileManager.default.moveItem(at: unzipDirectory, to: featuresFileUrl.appendingPathComponent(featureName))
                     try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
+                    try FileManager.default.copyBundleFile(forResource: "initIframe", ofType: "js", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
+                    try FileManager.default.copyBundleFile(forResource: "pod", ofType: "js", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     print("Imported feature: ", featureName)
                 } else {
                     print("Feature for import not found: ", featureName)
