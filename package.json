@@ -68,7 +68,7 @@
     "chokidar-cli": "^2.1.0",
     "connect": "^3.7.0",
     "electron": "^9.2.0",
-    "electron-mocha": "^9.0.1",
+    "electron-mocha": "^9.1.0",
     "eslint": "^7.6.0",
     "fast-check": "^1.26.0",
     "js-cookie": "^2.2.1",
