@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/FeaturesListFragment"
-        android:name="eu.polypoly.pod.android.FeaturesListFragment"
+        android:name="eu.polypoly.pod.android.FeatureWalletFragment"
         android:label="@string/features_list_fragment_label"
-        tools:layout="@layout/fragment_features_list">
+        tools:layout="@layout/fragment_feature_wallet">
 
         <action
-            android:id="@+id/action_FeaturesListFragment_to_FeatureFragment"
+            android:id="@+id/action_FeatureWalletFragment_to_FeatureFragment"
             app:destination="@id/FeatureFragment" />
     </fragment>
     <fragment

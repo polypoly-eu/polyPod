@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-class InstalledFeatureTeaser(private val originatingFragment: Fragment, private val installedFeatures: Array<String>) : RecyclerView.Adapter<InstalledFeatureTeaser.ViewHolder>() {
+class InstalledFeatureTeaser(private val originatingFragment: Fragment, private val installedFeatures: List<String>) : RecyclerView.Adapter<InstalledFeatureTeaser.ViewHolder>() {
 
     class ViewHolder(val itemListView: ConstraintLayout) : RecyclerView.ViewHolder(itemListView)
 
@@ -25,7 +25,7 @@ class InstalledFeatureTeaser(private val originatingFragment: Fragment, private 
         textView.text = installedFeatures[position]
         holder.itemListView.setOnClickListener {
             // FIXME - navigation assumes we're coming from FirstFragment, which might not necessary be true
-            val action = FeaturesListFragmentDirections.actionFeaturesListFragmentToFeatureFragment(installedFeatures[position])
+            val action = FeatureWalletFragmentDirections.actionFeatureWalletFragmentToFeatureFragment(installedFeatures[position])
             findNavController(originatingFragment).navigate(action)
         }
     }

@@ -18,6 +18,8 @@ Currently, there is only a handful of tests, mostly serving as an example of how
 
 Although I've tried using Robolectric, it doesn't seem to be possible right now. So far all the tests require either a WebView where Features are loaded and do something, or they expect some state of the Pod, namely existence of an installed "testFeature". Robolectric doesn't handle WebViews, indeed that would be an overkill. Second condition cannot be fulfilled inside unit tests. Therefore, there are only connected tests so far.
 
+Unfortunately, it seems that connectedTests are flaky, they seem to fail without any pattern.
+
 ### Target and temporary implementations
 
 Current status of the code is a mix between things that are already agreed upon and things that are merely made to work. The first ones are written in a better way and are tested, the latter work for me™. For now the only two things that's specified and agreed upon are how Features should initialize and how the communication between the Features and the Pod should look like. Current implementation and tests cover only parts of those two topics, simply because the only Feature that they should support in the [Questionnaire Feature](https://github.com/polypoly-eu/questionnaire-feature).

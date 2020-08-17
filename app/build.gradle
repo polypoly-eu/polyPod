@@ -143,6 +143,8 @@ dependencies {
     testImplementation 'androidx.test:runner:1.2.0'
     testImplementation 'androidx.test:rules:1.2.0'
     testImplementation 'androidx.test.espresso:espresso-web:3.2.0'
+    testImplementation 'com.google.truth:truth:1.0.1'
+    testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0.1'
     // fragment-testing requires entry with 'debugImplementation' scope, but also with 'testImplementation'
     // linter tells more (hence ignoring FragmentGradleConfiguration linter option)
     //noinspection FragmentGradleConfiguration
