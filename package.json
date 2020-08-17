@@ -41,7 +41,7 @@
     "chai-as-promised": "^7.1.1",
     "chokidar-cli": "^2.1.0",
     "electron": "^9.2.0",
-    "electron-mocha": "^9.0.1",
+    "electron-mocha": "^9.1.0",
     "eslint": "^7.6.0",
     "jasmine": "^3.6.1",
     "jest": "^25.5.4",
