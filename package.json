@@ -59,7 +59,7 @@
     "@types/jsdom": "^16.2.3",
     "@types/js-cookie": "^2.2.6",
     "@types/mocha": "^8.0.3",
-    "@types/node": "^14.0.27",
+    "@types/node": "^14.6.0",
     "@types/node-fetch": "^2.5.7",
     "@types/rdfjs__dataset": "^1.0.3",
     "body-parser": "^1.19.0",
