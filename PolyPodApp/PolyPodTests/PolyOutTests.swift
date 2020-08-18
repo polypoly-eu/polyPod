@@ -61,7 +61,7 @@ class PolyOutTests: XCTestCase {
         sessionGetData = responseText.data(using: .utf8)
 
         let expectation = XCTestExpectation(description: "Test valid response")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(initData: [:]), completionHandler: { fetchResponse in
+        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: [:]), completionHandler: { (fetchResponse, error) in
             XCTAssertNotNil(fetchResponse, "fetchResponse is nil")
             
             XCTAssertEqual(fetchResponse!.url, URL_STRING)
@@ -84,7 +84,7 @@ class PolyOutTests: XCTestCase {
         sessionError = URLError(.unknown)
         
         let expectation = XCTestExpectation(description: "Test error")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(initData: [:]), completionHandler: { fetchResponse in
+        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: [:]), completionHandler: { (fetchResponse, error) in
             XCTAssertNil(fetchResponse, "fetchResponse is not nil")
 
             expectation.fulfill()
@@ -100,11 +100,11 @@ class PolyOutTests: XCTestCase {
         
         let responseText = "This is the post response"
         sessionPostData = responseText.data(using: .utf8)
-        let requestInitData = [MessagePackValue("method") : MessagePackValue("post"),
-                               MessagePackValue("body") : MessagePackValue("This is the body")]
-            
+        let requestInitData = ["method" : "post",
+                               "body" : "This is the body"]
+        
         let expectation = XCTestExpectation(description: "Test valid response")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(initData: requestInitData), completionHandler: { fetchResponse in
+        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: requestInitData), completionHandler: { (fetchResponse, error) in
             XCTAssertNotNil(fetchResponse, "fetchResponse is nil")
             
             XCTAssertEqual(fetchResponse!.url, URL_STRING)
@@ -126,10 +126,10 @@ class PolyOutTests: XCTestCase {
         
         let responseText = "This is the post response"
         sessionPostData = responseText.data(using: .utf8)
-        let requestInitData = [MessagePackValue("method") : MessagePackValue("post")]
+        let requestInitData = ["method" : "post"]
             
         let expectation = XCTestExpectation(description: "Test valid response")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(initData: requestInitData), completionHandler: { fetchResponse in
+        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: requestInitData), completionHandler: { (fetchResponse, error) in
             XCTAssertNil(fetchResponse, "fetchResponse is nil")
             
             expectation.fulfill()
@@ -144,11 +144,11 @@ class PolyOutTests: XCTestCase {
         let polyOut = PolyOut(session: NetworkSessionMock())
         
         sessionError = URLError(.unknown)
-        let requestInitData = [MessagePackValue("method") : MessagePackValue("post"),
-        MessagePackValue("body") : MessagePackValue("This is the body")]
+        let requestInitData = ["method" : "post",
+                               "body" : "This is the body"]
         
         let expectation = XCTestExpectation(description: "Test error")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(initData: requestInitData), completionHandler: { fetchResponse in
+        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: requestInitData), completionHandler: { (fetchResponse, error) in
             XCTAssertNil(fetchResponse, "fetchResponse is not nil")
             
             expectation.fulfill()

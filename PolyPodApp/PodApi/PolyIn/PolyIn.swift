@@ -6,6 +6,11 @@
 //  Copyright © 2020 polypoly. All rights reserved.
 //
 
-class PolyIn {
+protocol PolyInProtocol {
+    func addQuads(quads: [ExtendedData], completionHandler: (Bool) -> Void)
+    func selectQuads(matcher: ExtendedData, completionHandler: ([ExtendedData]?, Error?) -> Void)
+}
+
+class PolyIn: PolyInProtocol {
     
 }
