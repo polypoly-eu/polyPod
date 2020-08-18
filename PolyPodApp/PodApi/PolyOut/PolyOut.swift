@@ -8,7 +8,14 @@
 
 import Foundation
 
-class PolyOut {
+protocol PolyOutProtocol {
+    func fetch(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?, Error?) -> Void)
+    func stat(path: String, completionHandler: @escaping (FileStats?, Error?) -> Void)
+    func fileRead(path: String, options: [String: Any], completionHandler: @escaping (Any?, Error?) -> Void)
+    func fileWrite(path: String, data: String, completionHandler: @escaping (Error?) -> Void)
+}
+
+class PolyOut: PolyOutProtocol {
     
     let session: NetworkSession
     let fileStoragePath: URL
