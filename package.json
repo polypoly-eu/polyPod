@@ -38,7 +38,7 @@
     "@types/chai": "^4.2.12",
     "@types/jest": "^26.0.10",
     "@types/n3": "^1.4.3",
-    "@types/node": "^14.0.27",
+    "@types/node": "^14.6.0",
     "@types/rdfjs__dataset": "^1.0.3",
     "chokidar-cli": "^2.1.0",
     "eslint": "^7.7.0",
