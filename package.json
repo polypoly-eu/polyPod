@@ -44,7 +44,7 @@
     "jest": "^26.4.0",
     "jsdom": "^16.4.0",
     "puppeteer": "^3.3.0",
-    "rollup": "^2.26.3",
+    "rollup": "^2.26.4",
     "rollup-plugin-executable": "^1.6.0",
     "tempy": "^0.6.0",
     "ts-jest": "^26.2.0",
