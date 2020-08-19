@@ -18,7 +18,7 @@ import org.slf4j.Logger
 object LoggerFactory {
     fun getLogger(name: String): Logger {
         return if (isAndroid())
-            AndroidLogger(name)
+            AndroidLogger("polyPod")
         else {
             org.slf4j.LoggerFactory.getLogger(name)
         }
@@ -26,7 +26,7 @@ object LoggerFactory {
 
     fun getLogger(clazz: Class<*>?): Logger {
         return if (isAndroid())
-            AndroidLogger(clazz!!.simpleName)
+            AndroidLogger("polyPod")
         else {
             org.slf4j.LoggerFactory.getLogger(clazz)
         }

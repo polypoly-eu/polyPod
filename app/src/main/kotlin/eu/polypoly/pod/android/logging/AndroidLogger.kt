@@ -3,6 +3,7 @@ package eu.polypoly.pod.android.logging
 import android.util.Log
 import org.slf4j.Logger
 import org.slf4j.Marker
+import org.slf4j.helpers.MessageFormatter
 
 /**
  * Translating from SLF4J's Logger to Android's Log API.
@@ -11,23 +12,34 @@ import org.slf4j.Marker
 class AndroidLogger(val tag: String) : Logger {
 
     override fun warn(msg: String) {
-        Log.w(tag, msg)
+        if (isWarnEnabled)
+            Log.w(tag, msg)
     }
 
     override fun warn(format: String, arg: Any) {
-        TODO("Not yet implemented")
+        if (isWarnEnabled) {
+            val msg = MessageFormatter.format(format, arg)
+            Log.w(tag, msg.message)
+        }
     }
 
     override fun warn(format: String, arg1: Any, arg2: Any) {
-        TODO("Not yet implemented")
+        if (isWarnEnabled) {
+            val msg = MessageFormatter.format(format, arg1, arg2)
+            Log.w(tag, msg.message)
+        }
     }
 
     override fun warn(format: String, vararg arguments: Any) {
-        TODO("Not yet implemented")
+        if (isWarnEnabled) {
+            val msg = MessageFormatter.arrayFormat(format, arguments)
+            Log.w(tag, msg.message)
+        }
     }
 
     override fun warn(msg: String, t: Throwable) {
-        Log.w(tag, msg, t)
+        if (isWarnEnabled)
+            Log.w(tag, msg, t)
     }
 
     override fun warn(marker: Marker, msg: String) {
@@ -55,23 +67,34 @@ class AndroidLogger(val tag: String) : Logger {
     }
 
     override fun info(msg: String) {
-        Log.i(tag, msg)
+        if (isInfoEnabled)
+            Log.i(tag, msg)
     }
 
     override fun info(format: String, arg: Any) {
-        TODO("Not yet implemented")
+        if (isInfoEnabled) {
+            val msg = MessageFormatter.format(format, arg)
+            Log.i(tag, msg.message)
+        }
     }
 
     override fun info(format: String, arg1: Any, arg2: Any) {
-        TODO("Not yet implemented")
+        if (isInfoEnabled) {
+            val msg = MessageFormatter.format(format, arg1, arg2)
+            Log.i(tag, msg.message)
+        }
     }
 
     override fun info(format: String, vararg arguments: Any) {
-        TODO("Not yet implemented")
+        if (isInfoEnabled) {
+            val msg = MessageFormatter.arrayFormat(format, arguments)
+            Log.i(tag, msg.message)
+        }
     }
 
     override fun info(msg: String, t: Throwable) {
-        Log.i(tag, msg, t)
+        if (isInfoEnabled)
+            Log.i(tag, msg, t)
     }
 
     override fun info(marker: Marker, msg: String) {
@@ -103,23 +126,34 @@ class AndroidLogger(val tag: String) : Logger {
     }
 
     override fun error(msg: String) {
-        Log.e(tag, msg)
+        if (isErrorEnabled)
+            Log.e(tag, msg)
     }
 
     override fun error(format: String, arg: Any) {
-        TODO("Not yet implemented")
+        if (isErrorEnabled) {
+            val msg = MessageFormatter.format(format, arg)
+            Log.e(tag, msg.message)
+        }
     }
 
     override fun error(format: String, arg1: Any, arg2: Any) {
-        TODO("Not yet implemented")
+        if (isErrorEnabled) {
+            val msg = MessageFormatter.format(format, arg1, arg2)
+            Log.e(tag, msg.message)
+        }
     }
 
     override fun error(format: String, vararg arguments: Any) {
-        TODO("Not yet implemented")
+        if (isErrorEnabled) {
+            val msg = MessageFormatter.arrayFormat(format, arguments)
+            Log.e(tag, msg.message)
+        }
     }
 
     override fun error(msg: String, t: Throwable) {
-        Log.e(tag, msg, t)
+        if (isErrorEnabled)
+            Log.e(tag, msg, t)
     }
 
     override fun error(marker: Marker, msg: String) {
@@ -151,23 +185,34 @@ class AndroidLogger(val tag: String) : Logger {
     }
 
     override fun debug(msg: String) {
-        Log.d(tag, msg)
+        if (isDebugEnabled)
+            Log.d(tag, msg)
     }
 
     override fun debug(format: String, arg: Any) {
-        TODO("Not yet implemented")
+        if (isDebugEnabled) {
+            val msg = MessageFormatter.format(format, arg)
+            Log.d(tag, msg.message)
+        }
     }
 
     override fun debug(format: String, arg1: Any, arg2: Any) {
-        TODO("Not yet implemented")
+        if (isDebugEnabled) {
+            val msg = MessageFormatter.format(format, arg1, arg2)
+            Log.d(tag, msg.message)
+        }
     }
 
     override fun debug(format: String, vararg arguments: Any) {
-        TODO("Not yet implemented")
+        if (isDebugEnabled) {
+            val msg = MessageFormatter.arrayFormat(format, arguments)
+            Log.d(tag, msg.message)
+        }
     }
 
     override fun debug(msg: String, t: Throwable) {
-        Log.d(tag, msg, t)
+        if (isDebugEnabled)
+            Log.d(tag, msg, t)
     }
 
     override fun debug(marker: Marker, msg: String) {
@@ -199,23 +244,34 @@ class AndroidLogger(val tag: String) : Logger {
     }
 
     override fun trace(msg: String) {
-        Log.v(tag, msg)
+        if (isTraceEnabled)
+            Log.v(tag, msg)
     }
 
     override fun trace(format: String, arg: Any) {
-        TODO("Not yet implemented")
+        if (isTraceEnabled) {
+            val msg = MessageFormatter.format(format, arg)
+            Log.v(tag, msg.message)
+        }
     }
 
     override fun trace(format: String, arg1: Any, arg2: Any) {
-        TODO("Not yet implemented")
+        if (isTraceEnabled) {
+            val msg = MessageFormatter.format(format, arg1, arg2)
+            Log.v(tag, msg.message)
+        }
     }
 
     override fun trace(format: String, vararg arguments: Any) {
-        TODO("Not yet implemented")
+        if (isTraceEnabled) {
+            val msg = MessageFormatter.arrayFormat(format, arguments)
+            Log.v(tag, msg.message)
+        }
     }
 
     override fun trace(msg: String, t: Throwable) {
-        Log.v(tag, msg, t)
+        if (isTraceEnabled)
+            Log.v(tag, msg, t)
     }
 
     override fun trace(marker: Marker, msg: String) {
