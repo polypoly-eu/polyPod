@@ -27,6 +27,10 @@
     "url": "https://github.com/polypoly-eu/bubblewrap/issues"
   },
   "homepage": "https://github.com/polypoly-eu/bubblewrap#readme",
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.1",
     "@polypoly-eu/rdf": "^0.1.0",
