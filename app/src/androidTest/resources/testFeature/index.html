@@ -8,7 +8,7 @@
 <body>
 <span id="status">Starting</span>
 <span id="result"></span>
-<input id="input.1"/><input id="input.2"/>
+<input id="input.1"/><input id="input.2"/><input id="input.3"/><input id="input.4"/>
 <button id="javascript.simple" onclick="execute(() => simpleJavaScriptCall())">javascript.simple</button>
 <button id="podApi.resolves" onclick="execute(() => awaitPodObject())">podApi.resolves</button>
 <button id="fetch.simple" onclick="execute(() => simpleFetch())">fetch.simple</button>
@@ -20,5 +20,6 @@
 <button id="fetch.get_response_ok" onclick="execute(() => verifyResponseOkOfFetchCall())">fetch.get_response_ok</button>
 <button id="fetch.post_body" onclick="execute(() => callFetchWithPostMethodAndBody())">fetch.post_body</button>
 <button id="polyIn.add.no_quads" onclick="execute(() => canCallPolyInAddWithNoQuads())">polyIn.add.no_quads</button>
+<button id="polyIn.add.single_quad" onclick="execute(() => canCallPolyInAddWithSingleQuad())">polyIn.add.single_quad</button>
 </body>
 </html>

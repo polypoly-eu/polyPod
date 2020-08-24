@@ -10,7 +10,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import com.google.common.truth.Truth.assertThat
+import eu.polypoly.pod.android.polyIn.IRI
 import eu.polypoly.pod.android.polyIn.PolyInTestDouble
+import eu.polypoly.pod.android.polyIn.RdfQuad
 import eu.polypoly.pod.android.polyOut.PolyOutTestDouble
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
@@ -50,6 +52,7 @@ class CommunicationThroughPodApiWorks {
         execute { canPassResponseOKFromFetch() }
         execute { canPassBodyToFetch() }
         execute { canCallPolyInAddWithNoQuads() }
+        execute { canPassSingleQuadToPolyInAdd() }
     }
 
     private fun execute(test: () -> Unit) {
@@ -173,6 +176,29 @@ class CommunicationThroughPodApiWorks {
         })
         assertThat(polyIn.addWasCalled).isTrue()
         assertThat(polyIn.addParams).hasLength(0)
+    }
+
+    private fun canPassSingleQuadToPolyInAdd() {
+        val podApi = launchTestFeature()
+        val polyIn = podApi.polyIn
+        val subject = "http://example.org/s"
+        val predicate = "http://example.org/p"
+        val `object` = "http://example.org/o"
+        val graph = "http://example.org/g"
+        val quad = RdfQuad(IRI(subject), IRI(predicate), IRI(`object`), IRI(graph))
+        setInput(1, subject)
+        setInput(2, predicate)
+        setInput(3, `object`)
+        setInput(4, graph)
+        clickButton("polyIn.add.single_quad")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.addWasCalled).isTrue()
+        assertThat(polyIn.addParams).hasLength(1)
+        assertThat(polyIn.addParams!![0]).isEqualTo(quad)
     }
 
     // test functions above, helper function below

@@ -69,7 +69,23 @@ function callFetchWithPostMethodAndBody() {
 
 function canCallPolyInAddWithNoQuads() {
     console.log("canCallPolyInAddWithNoQuads()");
-    window.pod.polyIn.add();
+    window.pod.polyIn.add(null);
+}
+
+function canCallPolyInAddWithSingleQuad() {
+    console.log("canCallPolyInAddWithSingleQuad()");
+    let subject = getInput(1);
+    let predicate = getInput(2);
+    let object = getInput(3);
+    let graph = getInput(4);
+    let dataFactory = window.pod.dataFactory;
+    const quad = dataFactory.quad(
+        dataFactory.namedNode(subject),
+        dataFactory.namedNode(predicate),
+        dataFactory.namedNode(object),
+        dataFactory.namedNode(graph)
+    );
+    window.pod.polyIn.add(quad);    // I know, it should be an array, but I'm following zombies (http://blog.wingman-sw.com/tdd-guided-by-zombies),  will fix in next commit
 }
 
 async function execute(test) {

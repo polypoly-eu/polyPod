@@ -52,7 +52,7 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
 
     private suspend fun handlePolyInAdd(args: List<Value>): Value {
         logger.info("dispatch() -> polyIn.add")
-        polyIn.add()
+        polyIn.add(null)
         return ValueFactory.newNil()
     }
 
