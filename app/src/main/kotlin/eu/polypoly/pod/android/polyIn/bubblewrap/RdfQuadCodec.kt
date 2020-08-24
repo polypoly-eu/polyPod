@@ -18,10 +18,8 @@ class RdfQuadCodec : Codec<RdfQuad> {
 
     val iriCodec = IRICodec()
 
-    override fun encode(quad: RdfQuad?): Value {
+    override fun encode(quad: RdfQuad): Value {
         logger.debug("RdfQuadCodec.encode(), quad: '{}'", quad)
-        if (quad == null)
-            return newNil()
         val subject = iriCodec.encode(quad.subject)
         val predicate = iriCodec.encode(quad.predicate)
         val `object` = iriCodec.encode(quad.`object`)
@@ -31,10 +29,8 @@ class RdfQuadCodec : Codec<RdfQuad> {
         return wrapAsExtensionValue(value)
     }
 
-    override fun decode(v: Value): RdfQuad? {
+    override fun decode(v: Value): RdfQuad {
         logger.debug("RdfQuadCodec.decode(), v: '{}'", v.toJson())
-        if (v.isNilValue)
-            return null
         if (!v.isExtensionValue || v.asExtensionValue().type != 2.toByte())
             throw IllegalArgumentException("Expected ExtensionValue of type '2', got '${v.valueType}'")
         val arg = v.asExtensionValue()

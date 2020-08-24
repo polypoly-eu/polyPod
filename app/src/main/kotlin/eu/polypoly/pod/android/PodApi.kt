@@ -53,9 +53,10 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
 
     private suspend fun handlePolyInAdd(args: List<Value>): Value {
         logger.debug("dispatch() -> polyIn.add")
-        val quadValue = args[0] // add() takes only one parameter
+        val quadValue = args[0].asArrayValue() // add() takes only one parameter
         val codec = RdfQuadCodec()
-        polyIn.add(codec.decode(quadValue))
+        val quads = quadValue.map { codec.decode(it) }
+        polyIn.add(quads)
         return ValueFactory.newNil()  // add() doesn't return anything
     }
 

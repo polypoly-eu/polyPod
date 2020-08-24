@@ -7,10 +7,6 @@ class PolyOutTestDouble : PolyOut() {
     var responseStatus: Int? = null
     var responseOk = false
 
-    init {
-        reset()
-    }
-
     fun reset() {
         fetchWasCalled = false
         fetchInit = FetchInit()

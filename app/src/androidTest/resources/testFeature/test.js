@@ -1,3 +1,5 @@
+let quads = [];
+
 function simpleJavaScriptCall() {
     console.log("simpleJavaScriptCall()");
 }
@@ -69,23 +71,24 @@ function callFetchWithPostMethodAndBody() {
 
 function canCallPolyInAddWithNoQuads() {
     console.log("canCallPolyInAddWithNoQuads()");
-    window.pod.polyIn.add(null);
+    window.pod.polyIn.add([]);
 }
 
 function canCallPolyInAddWithSingleQuad() {
     console.log("canCallPolyInAddWithSingleQuad()");
-    let subject = getInput(1);
-    let predicate = getInput(2);
-    let object = getInput(3);
-    let graph = getInput(4);
-    let dataFactory = window.pod.dataFactory;
-    const quad = dataFactory.quad(
-        dataFactory.namedNode(subject),
-        dataFactory.namedNode(predicate),
-        dataFactory.namedNode(object),
-        dataFactory.namedNode(graph)
-    );
-    window.pod.polyIn.add(quad);    // I know, it should be an array, but I'm following zombies (http://blog.wingman-sw.com/tdd-guided-by-zombies),  will fix in next commit
+    const quad = createQuadFromInputs();
+    window.pod.polyIn.add([quad]);
+}
+
+function addQuadToCollection() {
+    console.log(`addQuadToCollection(), current value: '${quads}'`);
+    const quad = createQuadFromInputs();
+    quads.push(quad);
+}
+
+function canCallPolyInAddWithMultipleQuads() {
+    console.log(`canCallPolyInAddWithMultipleQuads(), quads: '${quads}'`);
+    window.pod.polyIn.add(quads);
 }
 
 async function execute(test) {
@@ -124,4 +127,18 @@ function getInput(i) {
 function setResult(result) {
     console.debug(`Setting result: '${result}'`);
     document.getElementById("result").innerText = result;
+}
+
+function createQuadFromInputs() {
+    let subject = getInput(1);
+    let predicate = getInput(2);
+    let object = getInput(3);
+    let graph = getInput(4);
+    let dataFactory = window.pod.dataFactory;
+    return dataFactory.quad(
+        dataFactory.namedNode(subject),
+        dataFactory.namedNode(predicate),
+        dataFactory.namedNode(object),
+        dataFactory.namedNode(graph)
+    );
 }

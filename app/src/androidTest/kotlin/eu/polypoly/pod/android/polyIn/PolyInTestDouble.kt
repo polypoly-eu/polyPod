@@ -2,13 +2,15 @@ package eu.polypoly.pod.android.polyIn
 
 class PolyInTestDouble : PolyIn() {
     var addWasCalled = false
-    var addParams: Array<Any>? = null
+    var addParams: List<RdfQuad>? = null
 
-    override suspend fun add(quad: RdfQuad?) {
+    fun reset() {
+        addWasCalled = false
+        addParams = null
+    }
+
+    override suspend fun add(quads: List<RdfQuad>) {
         addWasCalled = true
-        addParams = if (quad == null)
-            emptyArray()
-        else
-            arrayOf(quad)
+        addParams = quads
     }
 }

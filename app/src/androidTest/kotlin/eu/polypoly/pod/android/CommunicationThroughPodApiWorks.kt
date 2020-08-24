@@ -53,6 +53,7 @@ class CommunicationThroughPodApiWorks {
         execute { canPassBodyToFetch() }
         execute { canCallPolyInAddWithNoQuads() }
         execute { canPassSingleQuadToPolyInAdd() }
+        execute { canPassMultipleQuadsToPolyInAdd() }
     }
 
     private fun execute(test: () -> Unit) {
@@ -175,7 +176,7 @@ class CommunicationThroughPodApiWorks {
                 .check(webMatches(getText(), `is`("All OK")))
         })
         assertThat(polyIn.addWasCalled).isTrue()
-        assertThat(polyIn.addParams).hasLength(0)
+        assertThat(polyIn.addParams).hasSize(0)
     }
 
     private fun canPassSingleQuadToPolyInAdd() {
@@ -197,8 +198,45 @@ class CommunicationThroughPodApiWorks {
                 .check(webMatches(getText(), `is`("All OK")))
         })
         assertThat(polyIn.addWasCalled).isTrue()
-        assertThat(polyIn.addParams).hasLength(1)
+        assertThat(polyIn.addParams).hasSize(1)
         assertThat(polyIn.addParams!![0]).isEqualTo(quad)
+    }
+
+    private fun canPassMultipleQuadsToPolyInAdd() {
+        val podApi = launchTestFeature()
+        val polyIn = podApi.polyIn
+
+        val subject1 = "http://example.org/s1"
+        val predicate1 = "http://example.org/p1"
+        val object1 = "http://example.org/o1"
+        val graph1 = "http://example.org/g1"
+        val quad1 = RdfQuad(IRI(subject1), IRI(predicate1), IRI(object1), IRI(graph1))
+        setInput(1, subject1)
+        setInput(2, predicate1)
+        setInput(3, object1)
+        setInput(4, graph1)
+        clickButton("comm.polyIn.add.add_quad_to_collection")
+
+        val subject2 = "http://example.org/s1"
+        val predicate2 = "http://example.org/p1"
+        val object2 = "http://example.org/o1"
+        val graph2 = "http://example.org/g1"
+        val quad2 = RdfQuad(IRI(subject2), IRI(predicate2), IRI(object2), IRI(graph2))
+        setInput(1, subject2)
+        setInput(2, predicate2)
+        setInput(3, object2)
+        setInput(4, graph2)
+        clickButton("comm.polyIn.add.add_quad_to_collection")
+
+        clickButton("comm.polyIn.add.multiple_quads")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.addWasCalled).isTrue()
+        assertThat(polyIn.addParams).hasSize(2)
+        assertThat(polyIn.addParams).containsExactlyElementsIn(arrayOf(quad1, quad2))
     }
 
     // test functions above, helper function below
