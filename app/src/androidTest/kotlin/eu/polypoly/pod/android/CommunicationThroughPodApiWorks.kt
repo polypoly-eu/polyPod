@@ -41,7 +41,7 @@ class CommunicationThroughPodApiWorks {
     val activityRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun masterTest() {
+    fun polyOut() {
         podApi = launchTestFeature()
         execute { canDoSimpleFetchGet() }
         execute { whenCalledWithNoMethodSpecified_methodIsEmpty() }
@@ -51,40 +51,57 @@ class CommunicationThroughPodApiWorks {
         execute { canPassResponseStatusFromFetch() }
         execute { canPassResponseOKFromFetch() }
         execute { canPassBodyToFetch() }
+    }
+
+    @Test
+    fun polyIn() {
+        podApi = launchTestFeature()
         execute { canCallPolyInAddWithNoQuads() }
         execute { canPassSingleQuadToPolyInAdd() }
         execute { canPassMultipleQuadsToPolyInAdd() }
-    }
-
-    private fun execute(test: () -> Unit) {
-        podApi.reset()
-        test()
+        execute { canPassEmptyMatcherToPolyInSelect() }
+        execute { canPassMatcherWithSubjectToPolyInSelect() }
+        execute { canPassMatcherWithPredicateToPolyInSelect() }
+        execute { canPassMatcherWithObjectToPolyInSelect() }
+        execute { canPassMatcherWithAllThreeFieldsToPolyInSelect() }
+        execute { canGetEmptyArrayFromPolyInSelect() }
+        execute { canGetArrayWithSingleQuadFromPolyInSelect() }
+        execute { canGetArrayWithMultipleQuadsFromPolyInSelect() }
     }
 
     private fun canDoSimpleFetchGet() {
         clickButton("comm.polyOut.fetch.simple")
         val polyOut = podApi.polyOut
         waitUntil({
-            assertThat(polyOut.fetchWasCalled).isTrue()
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
         })
+        assertThat(polyOut.fetchWasCalled).isTrue()
     }
 
     private fun whenCalledWithNoMethodSpecified_methodIsEmpty() {
         clickButton("comm.polyOut.fetch.empty_method")
         val polyOut = podApi.polyOut
         waitUntil({
-            assertThat(polyOut.fetchWasCalled).isTrue()
-            assertThat(polyOut.fetchInit.method).isNull()
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
         })
+        assertThat(polyOut.fetchWasCalled).isTrue()
+        assertThat(polyOut.fetchInit.method).isNull()
     }
 
     private fun canPassMethodToFetch() {
         clickButton("comm.polyOut.fetch.post_method")
         val polyOut = podApi.polyOut
         waitUntil({
-            assertThat(polyOut.fetchWasCalled).isTrue()
-            assertThat(polyOut.fetchInit.method).isEqualTo("POST")
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
         })
+        assertThat(polyOut.fetchWasCalled).isTrue()
+        assertThat(polyOut.fetchInit.method).isEqualTo("POST")
     }
 
     private fun canPassSingleHeaderAsString() {
@@ -95,11 +112,14 @@ class CommunicationThroughPodApiWorks {
         clickButton("comm.polyOut.fetch.single_string_header")
         val polyOut = podApi.polyOut
         waitUntil({
-            assertThat(polyOut.fetchWasCalled).isTrue()
-            val headers = polyOut.fetchInit.headers
-            assertThat(headers).hasSize(1)
-            assertThat(headers).containsEntry(key, value)
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
         })
+        assertThat(polyOut.fetchWasCalled).isTrue()
+        val headers = polyOut.fetchInit.headers
+        assertThat(headers).hasSize(1)
+        assertThat(headers).containsEntry(key, value)
     }
 
     private fun canPassStaticResponseFromFetch() {
@@ -180,7 +200,6 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassSingleQuadToPolyInAdd() {
-        val podApi = launchTestFeature()
         val polyIn = podApi.polyIn
         val subject = "http://example.org/s"
         val predicate = "http://example.org/p"
@@ -203,7 +222,6 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassMultipleQuadsToPolyInAdd() {
-        val podApi = launchTestFeature()
         val polyIn = podApi.polyIn
 
         val subject1 = "http://example.org/s1"
@@ -239,6 +257,148 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyIn.addParams).containsExactlyElementsIn(arrayOf(quad1, quad2))
     }
 
+    private fun canPassEmptyMatcherToPolyInSelect() {
+        val polyIn = podApi.polyIn
+        clickButton("comm.polyIn.select.pass_empty_matcher")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.selectWasCalled).isTrue()
+        val matcher = polyIn.selectMatcher
+        assertThat(matcher).isNotNull()
+        assertThat(matcher!!.subject).isNull()
+        assertThat(matcher.predicate).isNull()
+        assertThat(matcher.`object`).isNull()
+    }
+
+    private fun canPassMatcherWithSubjectToPolyInSelect() {
+        val polyIn = podApi.polyIn
+        val subject = IRI("http://example.org/s")
+        setInput(1, subject.iri)
+        clickButton("comm.polyIn.select.pass_matcher_with_subject")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.selectWasCalled).isTrue()
+        val matcher = polyIn.selectMatcher
+        assertThat(matcher).isNotNull()
+        assertThat(matcher!!.subject).isEqualTo(subject)
+        assertThat(matcher.predicate).isNull()
+        assertThat(matcher.`object`).isNull()
+    }
+
+    private fun canPassMatcherWithPredicateToPolyInSelect() {
+        val polyIn = podApi.polyIn
+        val predicate = IRI("http://example.org/p")
+        setInput(1, predicate.iri)
+        clickButton("comm.polyIn.select.pass_matcher_with_predicate")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.selectWasCalled).isTrue()
+        val matcher = polyIn.selectMatcher
+        assertThat(matcher).isNotNull()
+        assertThat(matcher!!.subject).isNull()
+        assertThat(matcher.predicate).isEqualTo(predicate)
+        assertThat(matcher.`object`).isNull()
+    }
+
+    private fun canPassMatcherWithObjectToPolyInSelect() {
+        val polyIn = podApi.polyIn
+        val `object` = IRI("http://example.org/o")
+        setInput(1, `object`.iri)
+        clickButton("comm.polyIn.select.pass_matcher_with_object")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.selectWasCalled).isTrue()
+        val matcher = polyIn.selectMatcher
+        assertThat(matcher).isNotNull()
+        assertThat(matcher!!.subject).isNull()
+        assertThat(matcher.predicate).isNull()
+        assertThat(matcher.`object`).isEqualTo(`object`)
+    }
+
+    private fun canPassMatcherWithAllThreeFieldsToPolyInSelect() {
+        val polyIn = podApi.polyIn
+        val subject = IRI("http://example.org/s")
+        val predicate = IRI("http://example.org/p")
+        val `object` = IRI("http://example.org/o")
+        setInput(1, subject.iri)
+        setInput(2, predicate.iri)
+        setInput(3, `object`.iri)
+        clickButton("comm.polyIn.select.pass_matcher_with_all_three_fields")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.selectWasCalled).isTrue()
+        val matcher = polyIn.selectMatcher
+        assertThat(matcher).isNotNull()
+        assertThat(matcher!!.subject).isEqualTo(subject)
+        assertThat(matcher.predicate).isEqualTo(predicate)
+        assertThat(matcher.`object`).isEqualTo(`object`)
+    }
+
+    private fun canGetEmptyArrayFromPolyInSelect() {
+        val polyIn = podApi.polyIn
+        polyIn.selectReturn = emptyList()
+        clickButton("comm.polyIn.select.get_empty_array")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+            onFeature()
+                .withElement(findElement(Locator.ID, "result"))
+                .check(webMatches(getText(), `is`("[]")))
+        })
+        assertThat(polyIn.selectWasCalled).isTrue()
+    }
+
+    private fun canGetArrayWithSingleQuadFromPolyInSelect() {
+        val polyIn = podApi.polyIn
+        val quad = Quad(IRI("subject"), IRI("predicate"), IRI("object"), IRI("graph"))
+        val expectedResult = """[{"subject":{"value":"subject","termType":"NamedNode"},"predicate":{"value":"predicate","termType":"NamedNode"},"object":{"value":"object","termType":"NamedNode"},"graph":{"value":"graph","termType":"NamedNode"}}]"""
+        polyIn.selectReturn = listOf(quad)
+        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+            onFeature()
+                .withElement(findElement(Locator.ID, "result"))
+                .check(webMatches(getText(), `is`(expectedResult)))
+        })
+        assertThat(polyIn.selectWasCalled).isTrue()
+    }
+
+    private fun canGetArrayWithMultipleQuadsFromPolyInSelect() {
+        val polyIn = podApi.polyIn
+        val quad1 = Quad(IRI("subject1"), IRI("predicate1"), IRI("object1"), IRI("graph1"))
+        val quad2 = Quad(IRI("subject2"), IRI("predicate2"), IRI("object2"), IRI("graph2"))
+        val expectedResult = """[{"subject":{"value":"subject1","termType":"NamedNode"},"predicate":{"value":"predicate1","termType":"NamedNode"},"object":{"value":"object1","termType":"NamedNode"},"graph":{"value":"graph1","termType":"NamedNode"}},{"subject":{"value":"subject2","termType":"NamedNode"},"predicate":{"value":"predicate2","termType":"NamedNode"},"object":{"value":"object2","termType":"NamedNode"},"graph":{"value":"graph2","termType":"NamedNode"}}]"""
+        polyIn.selectReturn = listOf(quad1, quad2)
+        clickButton("comm.polyIn.select.get_array_with_multiple_quads")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+            onFeature()
+                .withElement(findElement(Locator.ID, "result"))
+                .check(webMatches(getText(), `is`(expectedResult)))
+        })
+        assertThat(polyIn.selectWasCalled).isTrue()
+    }
+
     // test functions above, helper function below
 
     private fun launchTestFeature(): PodApiTestDouble {
@@ -253,6 +413,11 @@ class CommunicationThroughPodApiWorks {
             fragment.overridePodApi(podApi)
         }
         return podApi
+    }
+
+    private fun execute(test: () -> Unit) {
+        podApi.reset()
+        test()
     }
 
     private fun onFeature() =

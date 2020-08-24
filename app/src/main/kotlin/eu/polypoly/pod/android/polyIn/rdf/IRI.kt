@@ -12,9 +12,11 @@ data class IRI(val iri: String) {
                         val iri = it["value"] ?: throw IllegalArgumentException("Expected value")
                         IRI(iri)
                     },
-                    { mapOf(Pair("value", it.iri)) }
+                    { mapOf(
+                        Pair("value", it.iri),
+                        Pair("termType", "NamedNode")
+                    ) }
                 )
                 .taggedClass("@polypoly-eu/rdf.NamedNode")
     }
-
 }

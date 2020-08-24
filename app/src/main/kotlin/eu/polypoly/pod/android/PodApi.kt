@@ -3,6 +3,7 @@ package eu.polypoly.pod.android
 import eu.polypoly.pod.android.bubblewrap.FetchResponseCodec
 import eu.polypoly.pod.android.logging.LoggerFactory
 import eu.polypoly.pod.android.polyIn.PolyIn
+import eu.polypoly.pod.android.polyIn.rdf.Matcher
 import eu.polypoly.pod.android.polyIn.rdf.Quad
 import eu.polypoly.pod.android.polyOut.FetchInit
 import eu.polypoly.pod.android.polyOut.PolyOut
@@ -16,6 +17,8 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
+
+    val fetchResponseCodec = FetchResponseCodec()
 
     private fun decodeCall(value: Value): Pair<String, List<Value>> {
         val map = value.asMapValue().keyValueArray
@@ -38,6 +41,7 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
             "polyIn" -> {
                 when (inner) {
                     "add" -> return handlePolyInAdd(args)
+                    "select" -> return handlePolyInSelect(args)
                 }
             }
         }
@@ -47,8 +51,7 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
     private suspend fun handlePolyOutFetch(args: List<Value>): Value {
         logger.debug("dispatch() -> polyOut.fetch")
         val result = polyOut.fetch(args[0].asStringValue().toString(), decodePolyOutFetchCallArgs(args[1]))
-        val codec = FetchResponseCodec()
-        return codec.encode(result)
+        return fetchResponseCodec.encode(result)
     }
 
     private suspend fun handlePolyInAdd(args: List<Value>): Value {
@@ -57,6 +60,12 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
         val quads = quadValue.map { Quad.codec.decode(it) }
         polyIn.add(quads)
         return ValueFactory.newNil()  // add() doesn't return anything
+    }
+
+    private suspend fun handlePolyInSelect(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyIn.select")
+        val result = polyIn.select(Matcher.codec.decode(args[0]))
+        return ValueFactory.newArray(result.map { Quad.codec.encode(it) })
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {

@@ -91,6 +91,69 @@ function canCallPolyInAddWithMultipleQuads() {
     window.pod.polyIn.add(quads);
 }
 
+function canPassEmptyMatcherToPolyInSelect() {
+    console.log("canPassEmptyMatcherToPolyInSelect()");
+    window.pod.polyIn.select({});
+}
+
+function canPassMatcherWithSubjectToPolyInSelect() {
+    console.log("canPassMatcherWithSubjectToPolyInSelect()");
+    const subject = getInput(1);
+    let dataFactory = window.pod.dataFactory;
+    let matcher = {subject: dataFactory.namedNode(subject)};
+    window.pod.polyIn.select(matcher);
+}
+
+function canPassMatcherWithPredicateToPolyInSelect() {
+    console.log("canPassMatcherWithPredicateToPolyInSelect()");
+    const predicate = getInput(1);
+    let dataFactory = window.pod.dataFactory;
+    let matcher = {predicate: dataFactory.namedNode(predicate)};
+    window.pod.polyIn.select(matcher);
+}
+
+function canPassMatcherWithObjectToPolyInSelect() {
+    console.log("canPassMatcherWithObjectToPolyInSelect()");
+    const object = getInput(1);
+    let dataFactory = window.pod.dataFactory;
+    let matcher = {object: dataFactory.namedNode(object)};
+    window.pod.polyIn.select(matcher);
+}
+
+function canPassMatcherWithAllThreeFieldsToPolyInSelect() {
+    console.log("canPassMatcherWithAllThreeFieldsToPolyInSelect()");
+    const subject = getInput(1);
+    const predicate = getInput(2);
+    const object = getInput(3);
+    let dataFactory = window.pod.dataFactory;
+    let matcher = {subject: dataFactory.namedNode(subject), predicate: dataFactory.namedNode(predicate), object: dataFactory.namedNode(object)};
+    window.pod.polyIn.select(matcher);
+}
+
+function canGetEmptyArrayFromPolyInSelect() {
+    console.log("canGetEmptyArrayFromPolyInSelect()");
+    window.pod.polyIn.select({})
+        .then(result => {
+            setResult(JSON.stringify(result));
+        });
+}
+
+function canGetArrayWithSingleQuadFromPolyInSelect() {
+    console.log("canGetArrayWithSingleQuadFromPolyInSelect()");
+    window.pod.polyIn.select({})
+        .then(result => {
+            setResult(JSON.stringify(result));
+        });
+}
+
+function canGetArrayWithMultipleQuadsFromPolyInSelect() {
+    console.log("canGetArrayWithMultipleQuadsFromPolyInSelect()");
+    window.pod.polyIn.select({})
+        .then(result => {
+            setResult(JSON.stringify(result));
+        });
+}
+
 async function execute(test) {
     setStatus("Running...");
     await awaitPodApi();
