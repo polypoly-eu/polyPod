@@ -23,55 +23,71 @@ import java.time.Instant
  * Also, communication doesn't mean that for example `fetch` must correctly work. Here the important thing is
  * that when the Feature calls certain function, the parameters are correctly transferred and the actual function
  * on the Pod side is properly called. Returning results from such calls also needs to be tested here.
+ *
+ * This class contains just one function annotated with @Test that executes multiple actual tests.
+ * That is because starting the fragments takes ~1 second. Running each test separately makes the suite slow.
+ * Unfortunately, because Truth and JUnit 4 do not support soft assertions (assert multiple things, but actually fail after the last one if necessary),
+ * the first assertion that fails, will fail the whole test. Fixing issues will need to be done one-by-one.
  */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class CommunicationThroughPodApiWorks {
+    lateinit var podApi: PodApiTestDouble
 
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun canDoSimpleFetchGet() {
-        val podApi = launchTestFeature()
+    fun masterTest() {
+        podApi = launchTestFeature()
+        execute { canDoSimpleFetchGet() }
+        execute { whenCalledWithNoMethodSpecified_methodIsEmpty() }
+        execute { canPassMethodToFetch() }
+        execute { canPassSingleHeaderAsString() }
+        execute { canPassStaticResponseFromFetch() }
+        execute { canPassResponseStatusFromFetch() }
+        execute { canPassResponseOKFromFetch() }
+        execute { canPassBodyToFetch() }
+    }
+
+    private fun execute(test: () -> Unit) {
+        podApi.reset()
+        test()
+    }
+
+    private fun canDoSimpleFetchGet() {
         clickButton("fetch.simple")
-        val polyOut = podApi.polyOut as PolyOutTestDouble
+        val polyOut = podApi.polyOut
         waitUntil({
             assertThat(polyOut.fetchWasCalled).isTrue()
         })
     }
 
-    @Test
-    fun whenCalledWithNoMethodSpecified_methodIsEmpty() {
-        val podApi = launchTestFeature()
+    private fun whenCalledWithNoMethodSpecified_methodIsEmpty() {
         clickButton("fetch.empty_method")
-        val polyOut = podApi.polyOut as PolyOutTestDouble
+        val polyOut = podApi.polyOut
         waitUntil({
             assertThat(polyOut.fetchWasCalled).isTrue()
             assertThat(polyOut.fetchInit.method).isNull()
         })
     }
 
-    @Test
-    fun canPassMethodToFetch() {
-        val podApi = launchTestFeature()
+    private fun canPassMethodToFetch() {
         clickButton("fetch.post_method")
-        val polyOut = podApi.polyOut as PolyOutTestDouble
+        val polyOut = podApi.polyOut
         waitUntil({
             assertThat(polyOut.fetchWasCalled).isTrue()
             assertThat(polyOut.fetchInit.method).isEqualTo("POST")
         })
     }
 
-    @Test
-    fun canPassSingleHeaderAsString() {
-        val podApi = launchTestFeature()
+    private fun canPassSingleHeaderAsString() {
         val key = "key"
         val value = "value"
         setInput(1, key)
         setInput(2, value)
         clickButton("fetch.single_string_header")
-        val polyOut = podApi.polyOut as PolyOutTestDouble
+        val polyOut = podApi.polyOut
         waitUntil({
             assertThat(polyOut.fetchWasCalled).isTrue()
             val headers = polyOut.fetchInit.headers
@@ -80,10 +96,8 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    @Test
-    fun canPassStaticResponseFromFetch() {
-        val podApi = launchTestFeature()
-        val polyOut = podApi.polyOut as PolyOutTestDouble
+    private fun canPassStaticResponseFromFetch() {
+        val polyOut = podApi.polyOut
         val body = "body"
         setInput(1, body)
         polyOut.returnBody(body)
@@ -99,10 +113,8 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyOut.fetchWasCalled).isTrue()
     }
 
-    @Test
-    fun canPassResponseStatusFromFetch() {
-        val podApi = launchTestFeature()
-        val polyOut = podApi.polyOut as PolyOutTestDouble
+    private fun canPassResponseStatusFromFetch() {
+        val polyOut = podApi.polyOut
         val status = 418
         setInput(1, "$status")
         polyOut.returnStatus(status)
@@ -118,10 +130,8 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyOut.fetchWasCalled).isTrue()
     }
 
-    @Test
-    fun canPassResponseOKFromFetch() {
-        val podApi = launchTestFeature()
-        val polyOut = podApi.polyOut as PolyOutTestDouble
+    private fun canPassResponseOKFromFetch() {
+        val polyOut = podApi.polyOut
         val ok = true
         setInput(1, "$ok")
         polyOut.returnOk(ok)
@@ -137,10 +147,8 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyOut.fetchWasCalled).isTrue()
     }
 
-    @Test
-    fun canPassBodyToFetch() {
-        val podApi = launchTestFeature()
-        val polyOut = podApi.polyOut as PolyOutTestDouble
+    private fun canPassBodyToFetch() {
+        val polyOut = podApi.polyOut
         val body = "example"
         setInput(1, body)
         clickButton("fetch.post_body")

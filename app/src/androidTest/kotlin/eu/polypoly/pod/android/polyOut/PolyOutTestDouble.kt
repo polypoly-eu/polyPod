@@ -1,11 +1,23 @@
 package eu.polypoly.pod.android.polyOut
 
 class PolyOutTestDouble : PolyOut() {
-    var fetchWasCalled = false
+    var fetchWasCalled: Boolean = false
     var fetchInit: FetchInit = FetchInit()
     var responseBody: String? = null
     var responseStatus: Int? = null
     var responseOk = false
+
+    init {
+        reset()
+    }
+
+    fun reset() {
+        fetchWasCalled = false
+        fetchInit = FetchInit()
+        responseBody = null
+        responseStatus = null
+        responseOk = false
+    }
 
     override suspend fun fetch(resource: String, init: FetchInit): FetchResponse {
         fetchWasCalled = true

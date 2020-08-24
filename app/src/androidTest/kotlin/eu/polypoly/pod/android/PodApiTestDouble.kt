@@ -1,5 +1,9 @@
 package eu.polypoly.pod.android
 
-import eu.polypoly.pod.android.polyOut.PolyOut
+import eu.polypoly.pod.android.polyOut.PolyOutTestDouble
 
-class PodApiTestDouble(polyOut: PolyOut) : PodApi(polyOut)
+class PodApiTestDouble(override val polyOut: PolyOutTestDouble) : PodApi(polyOut) {
+    fun reset() {
+        polyOut.reset()
+    }
+}

@@ -8,7 +8,7 @@ import org.msgpack.value.MapValue
 import org.msgpack.value.StringValue
 import org.msgpack.value.Value
 
-open class PodApi(val polyOut: PolyOut) {
+open class PodApi(open val polyOut: PolyOut) {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
