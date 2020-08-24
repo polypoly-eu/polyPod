@@ -322,9 +322,10 @@ export class Bubblewrap {
         return encode(value, { extensionCodec: this.codec });
     }
 
-    decode(buffer: Uint8Array): any {
+    decode(_buffer: ArrayLike<number> | ArrayBuffer): any {
         if (!this.codec) this.codec = this.makeCodec();
 
+        const buffer = new Uint8Array(_buffer);
         return decode(buffer, { extensionCodec: this.codec });
     }
 }
