@@ -67,6 +67,11 @@ function callFetchWithPostMethodAndBody() {
     window.pod.polyOut.fetch("http://httpbin.org/post", {method: "POST", body: body});
 }
 
+function canCallPolyInAddWithNoQuads() {
+    console.log("canCallPolyInAddWithNoQuads()");
+    window.pod.polyIn.add();
+}
+
 async function execute(test) {
     setStatus("Running...");
     await awaitPodApi();

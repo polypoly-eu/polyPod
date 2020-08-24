@@ -49,6 +49,7 @@ class CommunicationThroughPodApiWorks {
         execute { canPassResponseStatusFromFetch() }
         execute { canPassResponseOKFromFetch() }
         execute { canPassBodyToFetch() }
+        execute { canCallPolyInAddWithNoQuads() }
     }
 
     private fun execute(test: () -> Unit) {
@@ -161,6 +162,20 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyOut.fetchWasCalled).isTrue()
         assertThat(polyOut.fetchInit.body).isEqualTo(body)
     }
+
+    private fun canCallPolyInAddWithNoQuads() {
+        val polyIn = podApi.polyIn
+        clickButton("polyIn.add.no_quads")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.addWasCalled).isTrue()
+        assertThat(polyIn.addParams).hasLength(0)
+    }
+
+    // test functions above, helper function below
 
     private fun launchTestFeature(): PodApiTestDouble {
         val fragmentArgs = Bundle().apply {

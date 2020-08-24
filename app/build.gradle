@@ -23,7 +23,7 @@ task buildTestFeature(type: Zip) {
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets")
         task.dependsOn buildFeatureContainer
-    if (task.name == "connectedAndroidTest")
+    if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice
 }
 

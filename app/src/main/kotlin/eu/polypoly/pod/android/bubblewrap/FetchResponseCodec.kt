@@ -3,8 +3,7 @@ package eu.polypoly.pod.android.bubblewrap
 import eu.polypoly.bubblewrap.Codec
 import eu.polypoly.pod.android.polyOut.FetchResponse
 import org.msgpack.value.Value
-import org.msgpack.value.impl.ImmutableBooleanValueImpl
-import org.msgpack.value.impl.ImmutableLongValueImpl
+import org.msgpack.value.ValueFactory
 
 class FetchResponseCodec : Codec<FetchResponse> {
     override fun encode(result: FetchResponse): Value {
@@ -13,14 +12,9 @@ class FetchResponseCodec : Codec<FetchResponse> {
         if (result.bodyContent != null)
             response["bufferedText"] = Codec.string.encode(result.bodyContent!!)
         if (result.status != null)
-            response["status"] = ImmutableLongValueImpl(result.status!!.toLong())
+            response["status"] = ValueFactory.newInteger(result.status!!.toLong())
         if (result.ok != null)
-            response["ok"] =
-                if (result.ok!!) {
-                    ImmutableBooleanValueImpl.TRUE
-                } else {
-                    ImmutableBooleanValueImpl.FALSE
-                }
+            response["ok"] = ValueFactory.newBoolean(result.ok!!)
         return codec.encode(response)
     }
 

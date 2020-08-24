@@ -8,12 +8,14 @@ import eu.polypoly.pod.android.polyOut.PolyOut
 import org.msgpack.value.MapValue
 import org.msgpack.value.StringValue
 import org.msgpack.value.Value
+import org.msgpack.value.ValueFactory
 
 open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
+
     private fun decodeCall(value: Value): Pair<String, List<Value>> {
         val map = value.asMapValue().keyValueArray
         return Pair(
@@ -23,19 +25,35 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
     }
 
     suspend fun dispatch(value: List<Value>): Value {
-        logger.debug("dispatch(), value: '{}'", value.toString());
+        logger.debug("dispatch(), value: '{}'", value.toString())
         val (outer, _) = decodeCall(value[0])
         val (inner, args) = decodeCall(value[1])
-        if (outer == "polyOut") {
-            if (inner == "fetch") {
-                logger.debug("dispatch() -> polyOut.fetch");
-                val result = polyOut.fetch(args[0].asStringValue().toString(), decodePolyOutFetchCallArgs(args[1]))
-                val codec = FetchResponseCodec()
-                return codec.encode(result)
+        when (outer) {
+            "polyOut" -> {
+                when (inner) {
+                    "fetch" -> return handlePolyOutFetch(args)
+                }
+            }
+            "polyIn" -> {
+                when (inner) {
+                    "add" -> return handlePolyInAdd(args)
+                }
             }
         }
-
         throw IllegalArgumentException("Unable to handle request, unsupported call target: '${outer}.${inner}()'")
+    }
+
+    private suspend fun handlePolyOutFetch(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyOut.fetch")
+        val result = polyOut.fetch(args[0].asStringValue().toString(), decodePolyOutFetchCallArgs(args[1]))
+        val codec = FetchResponseCodec()
+        return codec.encode(result)
+    }
+
+    private suspend fun handlePolyInAdd(args: List<Value>): Value {
+        logger.info("dispatch() -> polyIn.add")
+        polyIn.add()
+        return ValueFactory.newNil()
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {

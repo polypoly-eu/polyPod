@@ -3,7 +3,7 @@
 <head>
     <title>Test Feature</title>
     <script src="test.js"></script>
-    <script src="/pod.js"></script>
+    <script src="/pod.js" async></script>
 </head>
 <body>
 <span id="status">Starting</span>
@@ -19,5 +19,6 @@
 <button id="fetch.get_response_status" onclick="execute(() => verifyResponseStatusOfFetchCall())">fetch.get_response_status</button>
 <button id="fetch.get_response_ok" onclick="execute(() => verifyResponseOkOfFetchCall())">fetch.get_response_ok</button>
 <button id="fetch.post_body" onclick="execute(() => callFetchWithPostMethodAndBody())">fetch.post_body</button>
+<button id="polyIn.add.no_quads" onclick="execute(() => canCallPolyInAddWithNoQuads())">polyIn.add.no_quads</button>
 </body>
 </html>
