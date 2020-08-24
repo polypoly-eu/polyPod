@@ -10,6 +10,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import com.google.common.truth.Truth.assertThat
+import eu.polypoly.pod.android.polyIn.PolyInTestDouble
 import eu.polypoly.pod.android.polyOut.PolyOutTestDouble
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
@@ -167,7 +168,8 @@ class CommunicationThroughPodApiWorks {
         }
         val fragmentScenario = launchFragmentInContainer<FeatureFragmentTestDouble>(fragmentArgs)
         val polyOut = PolyOutTestDouble()
-        val podApi = PodApiTestDouble(polyOut)
+        val polyIn = PolyInTestDouble()
+        val podApi = PodApiTestDouble(polyOut, polyIn)
         fragmentScenario.onFragment { fragment ->
             fragment.overridePodApi(podApi)
         }

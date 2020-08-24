@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
 import eu.polypoly.pod.android.logging.LoggerFactory
+import eu.polypoly.pod.android.polyIn.PolyIn
 import eu.polypoly.pod.android.polyOut.PolyOut
 import eu.polypoly.pod.android.postoffice.PostOfficeMessageCallback
 import java.io.File
@@ -49,7 +50,7 @@ open class FeatureFragment : Fragment() {
     }
 
     private fun setupPodApi(): PodApi {
-        return PodApi(PolyOut())
+        return PodApi(PolyOut(), PolyIn())
     }
 
     private fun setupWebView(view: View) {

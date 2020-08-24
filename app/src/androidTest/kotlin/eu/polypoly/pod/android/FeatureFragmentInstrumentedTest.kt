@@ -16,6 +16,7 @@ import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
+import eu.polypoly.pod.android.polyIn.PolyInTestDouble
 import eu.polypoly.pod.android.polyOut.PolyOutTestDouble
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
@@ -81,7 +82,8 @@ class FeatureFragmentInstrumentedTest {
     fun afterStartingAFeature_podObjectEventuallyResolves() {
         val fragmentScenario = launchTestFeature()
         val polyOut = PolyOutTestDouble()
-        val podApi: PodApi = PodApiTestDouble(polyOut)
+        val polyIn = PolyInTestDouble()
+        val podApi: PodApi = PodApiTestDouble(polyOut, polyIn)
         fragmentScenario.onFragment { fragment ->
             fragment.overridePodApi(podApi)
         }
