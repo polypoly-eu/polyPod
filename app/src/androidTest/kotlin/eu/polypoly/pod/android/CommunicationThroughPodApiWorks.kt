@@ -61,7 +61,7 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canDoSimpleFetchGet() {
-        clickButton("fetch.simple")
+        clickButton("comm.polyOut.fetch.simple")
         val polyOut = podApi.polyOut
         waitUntil({
             assertThat(polyOut.fetchWasCalled).isTrue()
@@ -69,7 +69,7 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun whenCalledWithNoMethodSpecified_methodIsEmpty() {
-        clickButton("fetch.empty_method")
+        clickButton("comm.polyOut.fetch.empty_method")
         val polyOut = podApi.polyOut
         waitUntil({
             assertThat(polyOut.fetchWasCalled).isTrue()
@@ -78,7 +78,7 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassMethodToFetch() {
-        clickButton("fetch.post_method")
+        clickButton("comm.polyOut.fetch.post_method")
         val polyOut = podApi.polyOut
         waitUntil({
             assertThat(polyOut.fetchWasCalled).isTrue()
@@ -91,7 +91,7 @@ class CommunicationThroughPodApiWorks {
         val value = "value"
         setInput(1, key)
         setInput(2, value)
-        clickButton("fetch.single_string_header")
+        clickButton("comm.polyOut.fetch.single_string_header")
         val polyOut = podApi.polyOut
         waitUntil({
             assertThat(polyOut.fetchWasCalled).isTrue()
@@ -106,7 +106,7 @@ class CommunicationThroughPodApiWorks {
         val body = "body"
         setInput(1, body)
         polyOut.returnBody(body)
-        clickButton("fetch.get_static_response")
+        clickButton("comm.polyOut.fetch.get_static_response")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -123,7 +123,7 @@ class CommunicationThroughPodApiWorks {
         val status = 418
         setInput(1, "$status")
         polyOut.returnStatus(status)
-        clickButton("fetch.get_response_status")
+        clickButton("comm.polyOut.fetch.get_response_status")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -140,7 +140,7 @@ class CommunicationThroughPodApiWorks {
         val ok = true
         setInput(1, "$ok")
         polyOut.returnOk(ok)
-        clickButton("fetch.get_response_ok")
+        clickButton("comm.polyOut.fetch.get_response_ok")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -156,7 +156,7 @@ class CommunicationThroughPodApiWorks {
         val polyOut = podApi.polyOut
         val body = "example"
         setInput(1, body)
-        clickButton("fetch.post_body")
+        clickButton("comm.polyOut.fetch.post_body")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -168,7 +168,7 @@ class CommunicationThroughPodApiWorks {
 
     private fun canCallPolyInAddWithNoQuads() {
         val polyIn = podApi.polyIn
-        clickButton("polyIn.add.no_quads")
+        clickButton("comm.polyIn.add.no_quads")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -190,7 +190,7 @@ class CommunicationThroughPodApiWorks {
         setInput(2, predicate)
         setInput(3, `object`)
         setInput(4, graph)
-        clickButton("polyIn.add.single_quad")
+        clickButton("comm.polyIn.add.single_quad")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
