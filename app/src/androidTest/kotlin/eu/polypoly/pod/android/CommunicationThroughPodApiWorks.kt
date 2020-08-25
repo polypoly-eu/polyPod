@@ -10,9 +10,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import com.google.common.truth.Truth.assertThat
-import eu.polypoly.pod.android.polyIn.IRI
 import eu.polypoly.pod.android.polyIn.PolyInTestDouble
-import eu.polypoly.pod.android.polyIn.RdfQuad
+import eu.polypoly.pod.android.polyIn.rdf.IRI
+import eu.polypoly.pod.android.polyIn.rdf.Quad
 import eu.polypoly.pod.android.polyOut.PolyOutTestDouble
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
@@ -186,7 +186,7 @@ class CommunicationThroughPodApiWorks {
         val predicate = "http://example.org/p"
         val `object` = "http://example.org/o"
         val graph = "http://example.org/g"
-        val quad = RdfQuad(IRI(subject), IRI(predicate), IRI(`object`), IRI(graph))
+        val quad = Quad(IRI(subject), IRI(predicate), IRI(`object`), IRI(graph))
         setInput(1, subject)
         setInput(2, predicate)
         setInput(3, `object`)
@@ -210,7 +210,7 @@ class CommunicationThroughPodApiWorks {
         val predicate1 = "http://example.org/p1"
         val object1 = "http://example.org/o1"
         val graph1 = "http://example.org/g1"
-        val quad1 = RdfQuad(IRI(subject1), IRI(predicate1), IRI(object1), IRI(graph1))
+        val quad1 = Quad(IRI(subject1), IRI(predicate1), IRI(object1), IRI(graph1))
         setInput(1, subject1)
         setInput(2, predicate1)
         setInput(3, object1)
@@ -221,7 +221,7 @@ class CommunicationThroughPodApiWorks {
         val predicate2 = "http://example.org/p1"
         val object2 = "http://example.org/o1"
         val graph2 = "http://example.org/g1"
-        val quad2 = RdfQuad(IRI(subject2), IRI(predicate2), IRI(object2), IRI(graph2))
+        val quad2 = Quad(IRI(subject2), IRI(predicate2), IRI(object2), IRI(graph2))
         setInput(1, subject2)
         setInput(2, predicate2)
         setInput(3, object2)
