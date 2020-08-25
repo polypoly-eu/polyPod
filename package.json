@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/eslint-config-polypoly",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "ESLint configuration for Polypoly projects",
   "main": ".eslintrc.js",
   "scripts": {
