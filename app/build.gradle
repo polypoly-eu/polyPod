@@ -8,9 +8,9 @@ plugins {
 
 task buildFeatureContainer(type: Copy) {
     dependsOn npm_install
-    from "feature_container/node_modules/@polypoly-eu/feature-bootstrap/dist/index.js"
+    from "feature_container/node_modules/@polypoly-eu/podigree/dist/bootstrap.js"
     from "feature_container/src"
-    rename "index.js", "pod.js"
+    rename "bootstrap.js", "pod.js"
     into "build/container/container/"
 }
 
