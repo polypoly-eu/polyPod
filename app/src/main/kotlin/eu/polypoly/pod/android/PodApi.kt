@@ -3,7 +3,7 @@ package eu.polypoly.pod.android
 import eu.polypoly.pod.android.bubblewrap.FetchResponseCodec
 import eu.polypoly.pod.android.logging.LoggerFactory
 import eu.polypoly.pod.android.polyIn.PolyIn
-import eu.polypoly.pod.android.polyIn.bubblewrap.RdfQuadCodec
+import eu.polypoly.pod.android.polyIn.rdf.Quad
 import eu.polypoly.pod.android.polyOut.FetchInit
 import eu.polypoly.pod.android.polyOut.PolyOut
 import org.msgpack.value.MapValue
@@ -54,8 +54,7 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
     private suspend fun handlePolyInAdd(args: List<Value>): Value {
         logger.debug("dispatch() -> polyIn.add")
         val quadValue = args[0].asArrayValue() // add() takes only one parameter
-        val codec = RdfQuadCodec()
-        val quads = quadValue.map { codec.decode(it) }
+        val quads = quadValue.map { Quad.codec.decode(it) }
         polyIn.add(quads)
         return ValueFactory.newNil()  // add() doesn't return anything
     }
