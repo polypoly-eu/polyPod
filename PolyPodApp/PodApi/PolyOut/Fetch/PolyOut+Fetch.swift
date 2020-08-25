@@ -20,15 +20,13 @@ extension PolyOut {
         
         var request = URLRequest(url: url)
         request.httpMethod = method.uppercased()
-        
-        //request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        /*
-        if let headers = initData["headers"] as? [String: String] {
+
+        if let headers = requestInit.headers {
             for (key, value) in headers {
                 request.setValue(value, forHTTPHeaderField: key)
             }
         }
-        */
+        
         if let body = requestInit.body, body.count > 0 {
             let postString = body
             request.httpBody = postString.data(using: .utf8)
