@@ -26,6 +26,7 @@ class FeatureViewController: UIViewController {
         }
         
         contentController.installUserScript("messagePort", forMainFrameOnly: true)
+        contentController.installUserScript("domConsole", forMainFrameOnly: false)
         
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
