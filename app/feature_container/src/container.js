@@ -13,9 +13,8 @@ window.onmessage = event => {
     outerPort.onmessage = event => {
         // console.log(`Data coming from Pod to the Feature`);
         // console.dir(event.data);
-        const bytes = event.data.split(",");
-        const buf = Uint8Array.of(...bytes.map(byte => parseInt(byte)));
-        port1.postMessage(buf);
+        const bytes = Uint8Array.from(atob(event.data), c => c.charCodeAt(0));
+        port1.postMessage(bytes);
     }
 }
 
@@ -24,8 +23,9 @@ function initIframe(iFrame) {
     port1.start();
     port1.onmessage = event => {
         // console.log(`Data coming from the Feature to the Pod`);
-        // console.dir(event.data);
-        outerPort.postMessage(event.data.toString());
+        const base64 = btoa(String.fromCharCode(...new Uint8Array(event.data)));
+        console.dir(base64);
+        outerPort.postMessage(base64);
     };
     iFrame.contentWindow.postMessage("", "*", [port2]);
 }

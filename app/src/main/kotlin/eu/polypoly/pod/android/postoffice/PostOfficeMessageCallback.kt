@@ -1,6 +1,6 @@
 package eu.polypoly.pod.android.postoffice
 
-import android.text.TextUtils
+import android.util.Base64
 import android.webkit.WebMessage
 import android.webkit.WebMessagePort
 import eu.polypoly.bubblewrap.Bubblewrap
@@ -17,7 +17,8 @@ class PostOfficeMessageCallback(private val coroutineScope: CoroutineScope, priv
     }
 
     override fun onMessage(port: WebMessagePort?, message: WebMessage) {
-        val data = message.data.split(',').map { Integer.parseInt(it).toByte() }.toByteArray()
+        logger.debug("Incoming message from a Feature: '{}'", message.data)
+        val data = Base64.decode(message.data, Base64.DEFAULT)
         val codec = Codec.id.map()
         val decoded = Bubblewrap.decode(data, codec)
 
@@ -42,7 +43,8 @@ class PostOfficeMessageCallback(private val coroutineScope: CoroutineScope, priv
                     ), codec
                 )
             }
-            val raw = TextUtils.join(",", encoded.map { it.toString() })
+            val raw = Base64.encodeToString(encoded, Base64.NO_WRAP)
+            logger.debug("Sending back data to a Feature: '{}'", raw)
             outerPort.postMessage(WebMessage(raw))
         }
     }
