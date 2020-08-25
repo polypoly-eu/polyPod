@@ -4,11 +4,7 @@ import org.msgpack.core.MessageBufferPacker;
 import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessageTypeCastException;
 import org.msgpack.core.MessageUnpacker;
-import org.msgpack.value.ArrayValue;
-import org.msgpack.value.ExtensionValue;
-import org.msgpack.value.MapValue;
-import org.msgpack.value.Value;
-import org.msgpack.value.impl.*;
+import org.msgpack.value.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -58,7 +54,7 @@ public interface Codec<T> {
             @Override
             public Value encode(T t) {
                 if (t == null)
-                    return new ImmutableExtensionValueImpl(msgPackEtypeUndef, new byte[0]);
+                    return ValueFactory.newExtension(msgPackEtypeUndef, new byte[0]);
 
                 return codec.encode(t);
             }
@@ -88,7 +84,7 @@ public interface Codec<T> {
                     throw new RuntimeException("Encoding object failed", ex);
                 }
 
-                return new ImmutableExtensionValueImpl(msgPackEtypeClass, packer.toByteArray());
+                return ValueFactory.newExtension(msgPackEtypeClass, packer.toByteArray());
             }
 
             @Override
@@ -125,7 +121,7 @@ public interface Codec<T> {
             @Override
             public Value encode(T[] array) {
                 Objects.requireNonNull(array);
-                return new ImmutableArrayValueImpl(
+                return ValueFactory.newArray(
                     Stream.of(array).map(codec::encode).toArray(Value[]::new)
                 );
             }
@@ -153,7 +149,7 @@ public interface Codec<T> {
                     encoded.add(string.encode(entry.getKey()));
                     encoded.add(codec.encode(entry.getValue()));
                 }
-                return new ImmutableMapValueImpl(encoded.toArray(new Value[0]));
+                return ValueFactory.newMap(encoded.toArray(new Value[0]));
             }
 
             @Override
@@ -179,7 +175,7 @@ public interface Codec<T> {
                 throw new RuntimeException("Encoding exception failed", ex);
             }
 
-            return new ImmutableExtensionValueImpl(msgPackEtypeError, packer.toByteArray());
+            return ValueFactory.newExtension(msgPackEtypeError, packer.toByteArray());
         }
 
         @Override
@@ -202,7 +198,7 @@ public interface Codec<T> {
         @Override
         public Value encode(String s) {
             Objects.requireNonNull(s);
-            return new ImmutableStringValueImpl(s);
+            return ValueFactory.newString(s);
         }
 
         @Override
@@ -218,13 +214,13 @@ public interface Codec<T> {
                 Objects.requireNonNull(map);
                 Value[] encoded =
                     map.entrySet().stream().map(entry ->
-                        new ImmutableArrayValueImpl(new Value[] {
-                                keyCodec.encode(entry.getKey()),
-                                valueCodec.encode(entry.getValue())
-                        })
+                        ValueFactory.newArray(
+                            keyCodec.encode(entry.getKey()),
+                            valueCodec.encode(entry.getValue())
+                        )
                     ).toArray(Value[]::new);
 
-                return new ImmutableArrayValueImpl(encoded);
+                return ValueFactory.newArray(encoded);
             }
 
             @Override
@@ -251,10 +247,7 @@ public interface Codec<T> {
     Codec<Boolean> bool = new Codec<Boolean>() {
         @Override
         public Value encode(Boolean bool) {
-            if (bool)
-                return ImmutableBooleanValueImpl.TRUE;
-            else
-                return ImmutableBooleanValueImpl.FALSE;
+            return ValueFactory.newBoolean(bool);
         }
 
         @Override
@@ -266,7 +259,7 @@ public interface Codec<T> {
     Codec<Double> doubleNumber = new Codec<Double>() {
         @Override
         public Value encode(Double number) {
-            return new ImmutableDoubleValueImpl(number);
+            return ValueFactory.newFloat(number);
         }
 
         @Override
