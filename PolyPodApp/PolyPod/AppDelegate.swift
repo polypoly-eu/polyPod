@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FeaturesWallet.shared.cleanFeatures()
         FeaturesWallet.shared.importFeatures()
         
+        LocationTracker.shared.startLocationLogging()
+        
         let managedContext = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
         let count = try! managedContext.count(for: fetchRequest)
