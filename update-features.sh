@@ -1,8 +1,6 @@
 #!/bin/bash
 
-echo "\033[1;34mUpdating submodules ...\033[0m"
-git submodule update --remote
-cd Features
+cd Submodules/Features
 for D in */; do
     cd $D
     FEATURE_NAME="$(basename $(pwd))"
@@ -13,6 +11,6 @@ for D in */; do
     cd dist
     zip -r ../$FEATURE_NAME.zip .
     cd ..
-    mv $FEATURE_NAME.zip ../../PolyPodApp/Features/$FEATURE_NAME
+    mv $FEATURE_NAME.zip ../../../PolyPodApp/Features/$FEATURE_NAME
     cd ..
 done

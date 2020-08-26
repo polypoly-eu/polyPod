@@ -1,6 +1,8 @@
 (function () {
 	'use strict';
 
+	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
 	function createCommonjsModule(fn, basedir, module) {
 		return module = {
 		  path: basedir,
@@ -14,161 +16,6 @@
 	function commonjsRequire () {
 		throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
 	}
-
-	var js_cookie = createCommonjsModule(function (module, exports) {
-	(function (factory) {
-		var registeredInModuleLoader;
-		{
-			module.exports = factory();
-			registeredInModuleLoader = true;
-		}
-		if (!registeredInModuleLoader) {
-			var OldCookies = window.Cookies;
-			var api = window.Cookies = factory();
-			api.noConflict = function () {
-				window.Cookies = OldCookies;
-				return api;
-			};
-		}
-	}(function () {
-		function extend () {
-			var i = 0;
-			var result = {};
-			for (; i < arguments.length; i++) {
-				var attributes = arguments[ i ];
-				for (var key in attributes) {
-					result[key] = attributes[key];
-				}
-			}
-			return result;
-		}
-
-		function decode (s) {
-			return s.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
-		}
-
-		function init (converter) {
-			function api() {}
-
-			function set (key, value, attributes) {
-				if (typeof document === 'undefined') {
-					return;
-				}
-
-				attributes = extend({
-					path: '/'
-				}, api.defaults, attributes);
-
-				if (typeof attributes.expires === 'number') {
-					attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e+5);
-				}
-
-				// We're using "expires" because "max-age" is not supported by IE
-				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
-
-				try {
-					var result = JSON.stringify(value);
-					if (/^[\{\[]/.test(result)) {
-						value = result;
-					}
-				} catch (e) {}
-
-				value = converter.write ?
-					converter.write(value, key) :
-					encodeURIComponent(String(value))
-						.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
-
-				key = encodeURIComponent(String(key))
-					.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
-					.replace(/[\(\)]/g, escape);
-
-				var stringifiedAttributes = '';
-				for (var attributeName in attributes) {
-					if (!attributes[attributeName]) {
-						continue;
-					}
-					stringifiedAttributes += '; ' + attributeName;
-					if (attributes[attributeName] === true) {
-						continue;
-					}
-
-					// Considers RFC 6265 section 5.2:
-					// ...
-					// 3.  If the remaining unparsed-attributes contains a %x3B (";")
-					//     character:
-					// Consume the characters of the unparsed-attributes up to,
-					// not including, the first %x3B (";") character.
-					// ...
-					stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
-				}
-
-				return (document.cookie = key + '=' + value + stringifiedAttributes);
-			}
-
-			function get (key, json) {
-				if (typeof document === 'undefined') {
-					return;
-				}
-
-				var jar = {};
-				// To prevent the for loop in the first place assign an empty array
-				// in case there are no cookies at all.
-				var cookies = document.cookie ? document.cookie.split('; ') : [];
-				var i = 0;
-
-				for (; i < cookies.length; i++) {
-					var parts = cookies[i].split('=');
-					var cookie = parts.slice(1).join('=');
-
-					if (!json && cookie.charAt(0) === '"') {
-						cookie = cookie.slice(1, -1);
-					}
-
-					try {
-						var name = decode(parts[0]);
-						cookie = (converter.read || converter)(cookie, name) ||
-							decode(cookie);
-
-						if (json) {
-							try {
-								cookie = JSON.parse(cookie);
-							} catch (e) {}
-						}
-
-						jar[name] = cookie;
-
-						if (key === name) {
-							break;
-						}
-					} catch (e) {}
-				}
-
-				return key ? jar[key] : jar;
-			}
-
-			api.set = set;
-			api.get = function (key) {
-				return get(key, false /* read as raw */);
-			};
-			api.getJSON = function (key) {
-				return get(key, true /* read as json */);
-			};
-			api.remove = function (key, attributes) {
-				set(key, '', extend(attributes, {
-					expires: -1
-				}));
-			};
-
-			api.defaults = {};
-
-			api.withConverter = init;
-
-			return api;
-		}
-
-		return init(function () {});
-	}));
-	});
 
 	var ChainRec = createCommonjsModule(function (module, exports) {
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -370,7 +217,7 @@
 	    };
 	}
 	exports.untupled = untupled;
-	function pipe(a, ab, bc, cd, de, ef, fg, gh, hi, ij) {
+	function pipe(a, ab, bc, cd, de, ef, fg, gh, hi, ij, jk, kl, lm, mn, no, op, pq, qr, rs, st) {
 	    switch (arguments.length) {
 	        case 1:
 	            return a;
@@ -392,6 +239,26 @@
 	            return hi(gh(fg(ef(de(cd(bc(ab(a))))))));
 	        case 10:
 	            return ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))));
+	        case 11:
+	            return jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))));
+	        case 12:
+	            return kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))));
+	        case 13:
+	            return lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))));
+	        case 14:
+	            return mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))));
+	        case 15:
+	            return no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))))));
+	        case 16:
+	            return op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))))));
+	        case 17:
+	            return pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))))))));
+	        case 18:
+	            return qr(pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))))))));
+	        case 19:
+	            return rs(qr(pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))))))))));
+	        case 20:
+	            return st(rs(qr(pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))))))))));
 	    }
 	    return;
 	}
@@ -420,7 +287,7 @@
 
 	var Either = createCommonjsModule(function (module, exports) {
 	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.apS = exports.apSW = exports.bind = exports.bindW = exports.bindTo = exports.exists = exports.elem = exports.toError = exports.either = exports.getValidationMonoid = exports.MonadThrow = exports.ChainRec = exports.Extend = exports.Alt = exports.Bifunctor = exports.Traversable = exports.Foldable = exports.Monad = exports.Applicative = exports.Functor = exports.getValidationSemigroup = exports.getValidation = exports.getAltValidation = exports.getApplicativeValidation = exports.getWitherable = exports.getFilterable = exports.getApplyMonoid = exports.getApplySemigroup = exports.getSemigroup = exports.getEq = exports.getShow = exports.URI = exports.throwError = exports.sequence = exports.traverse = exports.reduceRight = exports.foldMap = exports.reduce = exports.extend = exports.duplicate = exports.alt = exports.flatten = exports.chainFirst = exports.chainFirstW = exports.chain = exports.chainW = exports.of = exports.apSecond = exports.apFirst = exports.ap = exports.apW = exports.mapLeft = exports.bimap = exports.map = exports.filterOrElse = exports.orElse = exports.swap = exports.getOrElse = exports.getOrElseW = exports.fold = exports.fromPredicate = exports.fromOption = exports.stringifyJSON = exports.parseJSON = exports.tryCatch = exports.fromNullable = exports.right = exports.left = exports.isRight = exports.isLeft = void 0;
+	exports.apS = exports.apSW = exports.bind = exports.bindW = exports.bindTo = exports.exists = exports.elem = exports.toError = exports.either = exports.getValidationMonoid = exports.MonadThrow = exports.ChainRec = exports.Extend = exports.Alt = exports.Bifunctor = exports.Traversable = exports.Foldable = exports.Monad = exports.Applicative = exports.Functor = exports.getValidationSemigroup = exports.getValidation = exports.getAltValidation = exports.getApplicativeValidation = exports.getWitherable = exports.getFilterable = exports.getApplyMonoid = exports.getApplySemigroup = exports.getSemigroup = exports.getEq = exports.getShow = exports.URI = exports.throwError = exports.sequence = exports.traverse = exports.reduceRight = exports.foldMap = exports.reduce = exports.duplicate = exports.extend = exports.alt = exports.flatten = exports.chainFirst = exports.chainFirstW = exports.chain = exports.chainW = exports.of = exports.apSecond = exports.apFirst = exports.ap = exports.apW = exports.mapLeft = exports.bimap = exports.map = exports.filterOrElse = exports.orElse = exports.swap = exports.getOrElse = exports.getOrElseW = exports.fold = exports.fromPredicate = exports.fromOption = exports.stringifyJSON = exports.parseJSON = exports.tryCatch = exports.fromNullable = exports.right = exports.left = exports.isRight = exports.isLeft = void 0;
 
 
 	// -------------------------------------------------------------------------------------
@@ -646,29 +513,35 @@
 	 * @category combinators
 	 * @since 2.0.0
 	 */
-	exports.filterOrElse = function (predicate, onFalse) { return function (ma) {
-	    return chain_(ma, function (a) { return (predicate(a) ? exports.right(a) : exports.left(onFalse(a))); });
-	}; };
+	exports.filterOrElse = function (predicate, onFalse) {
+	    return exports.chain(function (a) { return (predicate(a) ? exports.right(a) : exports.left(onFalse(a))); });
+	};
 	// -------------------------------------------------------------------------------------
 	// non-pipeables
 	// -------------------------------------------------------------------------------------
-	var map_ = function (ma, f) { return (exports.isLeft(ma) ? ma : exports.right(f(ma.right))); };
-	var ap_ = function (mab, ma) {
-	    return exports.isLeft(mab) ? mab : exports.isLeft(ma) ? ma : exports.right(mab.right(ma.right));
-	};
-	var chain_ = function (ma, f) {
-	    return exports.isLeft(ma) ? ma : f(ma.right);
-	};
-	var reduce_ = function (fa, b, f) { return (exports.isLeft(fa) ? b : f(b, fa.right)); };
-	var foldMap_ = function (M) { return function (fa, f) { return (exports.isLeft(fa) ? M.empty : f(fa.right)); }; };
-	var reduceRight_ = function (fa, b, f) { return (exports.isLeft(fa) ? b : f(fa.right, b)); };
-	var traverse_ = function (F) { return function (ma, f) {
-	    return exports.isLeft(ma) ? F.of(exports.left(ma.left)) : F.map(f(ma.right), exports.right);
+	var map_ = function (fa, f) { return _function.pipe(fa, exports.map(f)); };
+	var ap_ = function (fab, fa) { return _function.pipe(fab, exports.ap(fa)); };
+	/* istanbul ignore next */
+	var chain_ = function (ma, f) { return _function.pipe(ma, exports.chain(f)); };
+	/* istanbul ignore next */
+	var reduce_ = function (fa, b, f) { return _function.pipe(fa, exports.reduce(b, f)); };
+	/* istanbul ignore next */
+	var foldMap_ = function (M) { return function (fa, f) {
+	    var foldMapM = exports.foldMap(M);
+	    return _function.pipe(fa, foldMapM(f));
 	}; };
-	var bimap_ = function (fea, f, g) { return (exports.isLeft(fea) ? exports.left(f(fea.left)) : exports.right(g(fea.right))); };
-	var mapLeft_ = function (fea, f) { return (exports.isLeft(fea) ? exports.left(f(fea.left)) : fea); };
-	var alt_ = function (fa, that) { return (exports.isLeft(fa) ? that() : fa); };
-	var extend_ = function (wa, f) { return (exports.isLeft(wa) ? wa : exports.right(f(wa))); };
+	/* istanbul ignore next */
+	var reduceRight_ = function (fa, b, f) { return _function.pipe(fa, exports.reduceRight(b, f)); };
+	var traverse_ = function (F) {
+	    var traverseF = exports.traverse(F);
+	    return function (ta, f) { return _function.pipe(ta, traverseF(f)); };
+	};
+	var bimap_ = function (fa, f, g) { return _function.pipe(fa, exports.bimap(f, g)); };
+	var mapLeft_ = function (fa, f) { return _function.pipe(fa, exports.mapLeft(f)); };
+	/* istanbul ignore next */
+	var alt_ = function (fa, that) { return _function.pipe(fa, exports.alt(that)); };
+	/* istanbul ignore next */
+	var extend_ = function (wa, f) { return _function.pipe(wa, exports.extend(f)); };
 	var chainRec_ = function (a, f) {
 	    return ChainRec.tailRec(f(a), function (e) {
 	        return exports.isLeft(e) ? exports.right(exports.left(e.left)) : exports.isLeft(e.right) ? exports.left(f(e.right.left)) : exports.right(exports.right(e.right.right));
@@ -684,21 +557,25 @@
 	 * @category Functor
 	 * @since 2.0.0
 	 */
-	exports.map = function (f) { return function (fa) { return map_(fa, f); }; };
+	exports.map = function (f) { return function (fa) {
+	    return exports.isLeft(fa) ? fa : exports.right(f(fa.right));
+	}; };
 	/**
 	 * Map a pair of functions over the two type arguments of the bifunctor.
 	 *
 	 * @category Bifunctor
 	 * @since 2.0.0
 	 */
-	exports.bimap = function (f, g) { return function (fa) { return bimap_(fa, f, g); }; };
+	exports.bimap = function (f, g) { return function (fa) { return (exports.isLeft(fa) ? exports.left(f(fa.left)) : exports.right(g(fa.right))); }; };
 	/**
 	 * Map a function over the first type argument of a bifunctor.
 	 *
 	 * @category Bifunctor
 	 * @since 2.0.0
 	 */
-	exports.mapLeft = function (f) { return function (fa) { return mapLeft_(fa, f); }; };
+	exports.mapLeft = function (f) { return function (fa) {
+	    return exports.isLeft(fa) ? exports.left(f(fa.left)) : fa;
+	}; };
 	/**
 	 * Less strict version of [`ap`](#ap).
 	 *
@@ -706,7 +583,7 @@
 	 * @since 2.8.0
 	 */
 	exports.apW = function (fa) { return function (fab) {
-	    return ap_(fab, fa);
+	    return exports.isLeft(fab) ? fab : exports.isLeft(fa) ? fa : exports.right(fab.right(fa.right));
 	}; };
 	/**
 	 * Apply a function to an argument under a type constructor.
@@ -721,18 +598,18 @@
 	 * @category Apply
 	 * @since 2.0.0
 	 */
-	exports.apFirst = function (fb) { return function (fa) {
-	    return ap_(map_(fa, function (a) { return function () { return a; }; }), fb);
-	}; };
+	exports.apFirst = function (fb) {
+	    return _function.flow(exports.map(function (a) { return function () { return a; }; }), exports.ap(fb));
+	};
 	/**
 	 * Combine two effectful actions, keeping only the result of the second.
 	 *
 	 * @category Apply
 	 * @since 2.0.0
 	 */
-	exports.apSecond = function (fb) { return function (fa) {
-	    return ap_(map_(fa, function () { return function (b) { return b; }; }), fb);
-	}; };
+	exports.apSecond = function (fb) {
+	    return _function.flow(exports.map(function () { return function (b) { return b; }; }), exports.ap(fb));
+	};
 	/**
 	 * @category Applicative
 	 * @since 2.7.0
@@ -744,7 +621,9 @@
 	 * @category Monad
 	 * @since 2.6.0
 	 */
-	exports.chainW = function (f) { return function (ma) { return chain_(ma, f); }; };
+	exports.chainW = function (f) { return function (ma) {
+	    return exports.isLeft(ma) ? ma : f(ma.right);
+	}; };
 	/**
 	 * Composes computations in sequence, using the return value of one computation to determine the next computation.
 	 *
@@ -758,7 +637,11 @@
 	 * @category Monad
 	 * @since 2.8.0
 	 */
-	exports.chainFirstW = function (f) { return function (ma) { return chain_(ma, function (a) { return map_(f(a), function () { return a; }); }); }; };
+	exports.chainFirstW = function (f) { return function (ma) {
+	    return _function.pipe(ma, exports.chainW(function (a) {
+	        return _function.pipe(f(a), exports.map(function () { return a; }));
+	    }));
+	}; };
 	/**
 	 * Composes computations in sequence, using the return value of one computation to determine the next computation and
 	 * keeping only the result of the first.
@@ -771,7 +654,9 @@
 	 * @category Monad
 	 * @since 2.0.0
 	 */
-	exports.flatten = function (mma) { return chain_(mma, _function.identity); };
+	exports.flatten = 
+	/*#__PURE__*/
+	exports.chain(_function.identity);
 	/**
 	 * Identifies an associative operation on a type constructor. It is similar to `Semigroup`, except that it applies to
 	 * types of kind `* -> *`.
@@ -780,50 +665,48 @@
 	 * @since 2.0.0
 	 */
 	exports.alt = function (that) { return function (fa) {
-	    return alt_(fa, that);
+	    return exports.isLeft(fa) ? that() : fa;
 	}; };
 	/**
 	 * @category Extend
 	 * @since 2.0.0
 	 */
-	exports.duplicate = function (wa) { return extend_(wa, _function.identity); };
+	exports.extend = function (f) { return function (wa) {
+	    return exports.isLeft(wa) ? wa : exports.right(f(wa));
+	}; };
 	/**
 	 * @category Extend
 	 * @since 2.0.0
 	 */
-	exports.extend = function (f) { return function (ma) {
-	    return extend_(ma, f);
-	}; };
+	exports.duplicate = 
+	/*#__PURE__*/
+	exports.extend(_function.identity);
 	/**
 	 * @category Foldable
 	 * @since 2.0.0
 	 */
 	exports.reduce = function (b, f) { return function (fa) {
-	    return reduce_(fa, b, f);
+	    return exports.isLeft(fa) ? b : f(b, fa.right);
 	}; };
 	/**
 	 * @category Foldable
 	 * @since 2.0.0
 	 */
-	exports.foldMap = function (M) {
-	    var foldMapM = foldMap_(M);
-	    return function (f) { return function (fa) { return foldMapM(fa, f); }; };
-	};
+	exports.foldMap = function (M) { return function (f) { return function (fa) {
+	    return exports.isLeft(fa) ? M.empty : f(fa.right);
+	}; }; };
 	/**
 	 * @category Foldable
 	 * @since 2.0.0
 	 */
 	exports.reduceRight = function (b, f) { return function (fa) {
-	    return reduceRight_(fa, b, f);
+	    return exports.isLeft(fa) ? b : f(fa.right, b);
 	}; };
 	/**
 	 * @category Traversable
 	 * @since 2.6.3
 	 */
-	exports.traverse = function (F) {
-	    var traverseF = traverse_(F);
-	    return function (f) { return function (fa) { return traverseF(fa, f); }; };
-	};
+	exports.traverse = function (F) { return function (f) { return function (ta) { return (exports.isLeft(ta) ? F.of(exports.left(ta.left)) : F.map(f(ta.right), exports.right)); }; }; };
 	/**
 	 * @category Traversable
 	 * @since 2.6.3
@@ -1507,9 +1390,28 @@
 	});
 
 	var DecodeError = createCommonjsModule(function (module, exports) {
+	var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (commonjsGlobal && commonjsGlobal.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
+	    var result = {};
+	    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result;
+	};
 	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.getSemigroup = exports.fold = exports.lazy = exports.member = exports.index = exports.key = exports.leaf = exports.optional = exports.required = void 0;
-
+	exports.getSemigroup = exports.fold = exports.wrap = exports.lazy = exports.member = exports.index = exports.key = exports.leaf = exports.optional = exports.required = void 0;
+	var FS = __importStar(FreeSemigroup);
 	/**
 	 * @category model
 	 * @since 2.2.7
@@ -1564,6 +1466,15 @@
 	    errors: errors
 	}); };
 	/**
+	 * @category constructors
+	 * @since 2.2.9
+	 */
+	exports.wrap = function (error, errors) { return ({
+	    _tag: 'Wrap',
+	    error: error,
+	    errors: errors
+	}); };
+	/**
 	 * @category destructors
 	 * @since 2.2.7
 	 */
@@ -1580,6 +1491,8 @@
 	                return patterns.Member(e.index, e.errors);
 	            case 'Lazy':
 	                return patterns.Lazy(e.id, e.errors);
+	            case 'Wrap':
+	                return patterns.Wrap(e.error, e.errors);
 	        }
 	    };
 	    return f;
@@ -1589,7 +1502,7 @@
 	 * @since 2.2.7
 	 */
 	function getSemigroup() {
-	    return FreeSemigroup.getSemigroup();
+	    return FS.getSemigroup();
 	}
 	exports.getSemigroup = getSemigroup;
 	});
@@ -1633,7 +1546,7 @@
 
 	var Guard = createCommonjsModule(function (module, exports) {
 	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.schemableGuard = exports.URI = exports.lazy = exports.sum = exports.union = exports.intersect = exports.tuple = exports.array = exports.record = exports.partial = exports.type = exports.nullable = exports.refine = exports.object = exports.UnknownRecord = exports.UnknownArray = exports.boolean = exports.number = exports.string = exports.literal = void 0;
+	exports.WithRefine = exports.WithUnion = exports.WithUnknownContainers = exports.Schemable = exports.URI = exports.id = exports.compose = exports.zero = exports.alt = exports.lazy = exports.sum = exports.union = exports.intersect = exports.tuple = exports.record = exports.array = exports.partial = exports.type = exports.nullable = exports.refine = exports.UnknownRecord = exports.UnknownArray = exports.boolean = exports.number = exports.string = exports.literal = void 0;
 	/**
 	 * **This module is experimental**
 	 *
@@ -1702,12 +1615,6 @@
 	exports.UnknownRecord = {
 	    is: function (u) { return Object.prototype.toString.call(u) === '[object Object]'; }
 	};
-	/**
-	 * @internal
-	 */
-	exports.object = {
-	    is: function (u) { return u != null && !exports.string.is(u) && !exports.number.is(u) && !exports.boolean.is(u); }
-	};
 	// -------------------------------------------------------------------------------------
 	// combinators
 	// -------------------------------------------------------------------------------------
@@ -1716,14 +1623,14 @@
 	 * @since 2.2.0
 	 */
 	exports.refine = function (refinement) { return function (from) { return ({
-	    is: function (u) { return from.is(u) && refinement(u); }
+	    is: function (i) { return from.is(i) && refinement(i); }
 	}); }; };
 	/**
 	 * @category combinators
 	 * @since 2.2.0
 	 */
 	exports.nullable = function (or) { return ({
-	    is: function (u) { return u === null || or.is(u); }
+	    is: function (i) { return i === null || or.is(i); }
 	}); };
 	/**
 	 * @category combinators
@@ -1758,6 +1665,13 @@
 	 * @category combinators
 	 * @since 2.2.0
 	 */
+	exports.array = function (item) {
+	    return pipeable_1.pipe(exports.UnknownArray, exports.refine(function (us) { return us.every(item.is); }));
+	};
+	/**
+	 * @category combinators
+	 * @since 2.2.0
+	 */
 	exports.record = function (codomain) {
 	    return pipeable_1.pipe(exports.UnknownRecord, exports.refine(function (r) {
 	        for (var k in r) {
@@ -1767,13 +1681,6 @@
 	        }
 	        return true;
 	    }));
-	};
-	/**
-	 * @category combinators
-	 * @since 2.2.0
-	 */
-	exports.array = function (items) {
-	    return pipeable_1.pipe(exports.UnknownArray, exports.refine(function (us) { return us.every(items.is); }));
 	};
 	/**
 	 * @category combinators
@@ -1831,6 +1738,34 @@
 	        is: function (u) { return get().is(u); }
 	    };
 	};
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	exports.alt = function (that) { return function (me) { return ({
+	    is: function (i) { return me.is(i) || that().is(i); }
+	}); }; };
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	exports.zero = function () { return ({
+	    is: function (_) { return false; }
+	}); };
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	exports.compose = function (to) { return function (from) { return ({
+	    is: function (i) { return from.is(i) && to.is(i); }
+	}); }; };
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	exports.id = function () { return ({
+	    is: function (_) { return true; }
+	}); };
 	// -------------------------------------------------------------------------------------
 	// instances
 	// -------------------------------------------------------------------------------------
@@ -1841,9 +1776,9 @@
 	exports.URI = 'io-ts/Guard';
 	/**
 	 * @category instances
-	 * @since 2.2.3
+	 * @since 2.2.8
 	 */
-	exports.schemableGuard = {
+	exports.Schemable = {
 	    URI: exports.URI,
 	    literal: exports.literal,
 	    string: exports.string,
@@ -1857,19 +1792,56 @@
 	    tuple: exports.tuple,
 	    intersect: exports.intersect,
 	    sum: exports.sum,
-	    lazy: function (_, f) { return exports.lazy(f); },
+	    lazy: function (_, f) { return exports.lazy(f); }
+	};
+	/**
+	 * @category instances
+	 * @since 2.2.8
+	 */
+	exports.WithUnknownContainers = {
 	    UnknownArray: exports.UnknownArray,
-	    UnknownRecord: exports.UnknownRecord,
-	    union: exports.union,
+	    UnknownRecord: exports.UnknownRecord
+	};
+	/**
+	 * @category instances
+	 * @since 2.2.8
+	 */
+	exports.WithUnion = {
+	    union: exports.union
+	};
+	/**
+	 * @category instances
+	 * @since 2.2.8
+	 */
+	exports.WithRefine = {
 	    refine: exports.refine
 	};
 	});
 
 	var Kleisli = createCommonjsModule(function (module, exports) {
+	var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (commonjsGlobal && commonjsGlobal.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
+	    var result = {};
+	    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result;
+	};
 	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.alt = exports.map = exports.compose = exports.lazy = exports.sum = exports.intersect = exports.union = exports.tuple = exports.record = exports.array = exports.partial = exports.type = exports.nullable = exports.parse = exports.refine = exports.mapLeftWithInput = exports.literal = exports.fromRefinement = void 0;
-
-
+	exports.alt = exports.map = exports.id = exports.compose = exports.lazy = exports.fromSum = exports.intersect = exports.union = exports.fromTuple = exports.fromRecord = exports.fromArray = exports.fromPartial = exports.fromType = exports.nullable = exports.parse = exports.refine = exports.mapLeftWithInput = exports.literal = exports.fromRefinement = void 0;
+	var E = __importStar(Either);
+	var G = __importStar(Guard);
 
 	// -------------------------------------------------------------------------------------
 	// constructors
@@ -1895,7 +1867,7 @@
 	            values[_i] = arguments[_i];
 	        }
 	        return ({
-	            decode: function (i) { return (Guard.literal.apply(Guard, values).is(i) ? M.of(i) : M.throwError(onError(i, values))); }
+	            decode: function (i) { return (G.literal.apply(G, values).is(i) ? M.of(i) : M.throwError(onError(i, values))); }
 	        });
 	    }; };
 	}
@@ -1947,7 +1919,7 @@
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	function type(M) {
+	function fromType(M) {
 	    var traverse = traverseRecordWithIndex(M);
 	    return function (onPropertyError) { return function (properties) { return ({
 	        decode: function (i) {
@@ -1957,15 +1929,15 @@
 	        }
 	    }); }; };
 	}
-	exports.type = type;
+	exports.fromType = fromType;
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	function partial(M) {
+	function fromPartial(M) {
 	    var traverse = traverseRecordWithIndex(M);
-	    var undefinedProperty = M.of(Either.right(undefined));
-	    var skipProperty = M.of(Either.left(undefined));
+	    var undefinedProperty = M.of(E.right(undefined));
+	    var skipProperty = M.of(E.left(undefined));
 	    return function (onPropertyError) { return function (properties) { return ({
 	        decode: function (i) {
 	            return M.map(traverse(properties, function (key, decoder) {
@@ -1977,39 +1949,39 @@
 	                        : // don't add missing properties
 	                            skipProperty;
 	                }
-	                return M.bimap(decoder.decode(ikey), function (e) { return onPropertyError(key, e); }, function (a) { return Either.right(a); });
+	                return M.bimap(decoder.decode(ikey), function (e) { return onPropertyError(key, e); }, function (a) { return E.right(a); });
 	            }), compactRecord);
 	        }
 	    }); }; };
 	}
-	exports.partial = partial;
+	exports.fromPartial = fromPartial;
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	function array(M) {
+	function fromArray(M) {
 	    var traverse = traverseArrayWithIndex(M);
-	    return function (onItemError) { return function (items) { return ({
-	        decode: function (is) { return traverse(is, function (index, i) { return M.mapLeft(items.decode(i), function (e) { return onItemError(index, e); }); }); }
+	    return function (onItemError) { return function (item) { return ({
+	        decode: function (is) { return traverse(is, function (index, i) { return M.mapLeft(item.decode(i), function (e) { return onItemError(index, e); }); }); }
 	    }); }; };
 	}
-	exports.array = array;
+	exports.fromArray = fromArray;
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	function record(M) {
+	function fromRecord(M) {
 	    var traverse = traverseRecordWithIndex(M);
 	    return function (onKeyError) { return function (codomain) { return ({
 	        decode: function (ir) { return traverse(ir, function (key, i) { return M.mapLeft(codomain.decode(i), function (e) { return onKeyError(key, e); }); }); }
 	    }); }; };
 	}
-	exports.record = record;
+	exports.fromRecord = fromRecord;
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	function tuple(M) {
+	function fromTuple(M) {
 	    var traverse = traverseArrayWithIndex(M);
 	    return function (onIndexError) { return function () {
 	        var components = [];
@@ -2025,7 +1997,7 @@
 	        });
 	    }; };
 	}
-	exports.tuple = tuple;
+	exports.fromTuple = fromTuple;
 	/**
 	 * @category combinators
 	 * @since 2.2.7
@@ -2067,7 +2039,7 @@
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	function sum(M) {
+	function fromSum(M) {
 	    return function (onTagError) { return function (tag) { return function (members) {
 	        var keys = Object.keys(members);
 	        return {
@@ -2081,7 +2053,7 @@
 	        };
 	    }; }; };
 	}
-	exports.sum = sum;
+	exports.fromSum = fromSum;
 	/**
 	 * @category combinators
 	 * @since 2.2.7
@@ -2105,6 +2077,16 @@
 	    }); }; };
 	}
 	exports.compose = compose;
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	function id(M) {
+	    return function () { return ({
+	        decode: M.of
+	    }); };
+	}
+	exports.id = id;
 	/**
 	 * @category combinators
 	 * @since 2.2.7
@@ -2158,7 +2140,7 @@
 	    var out = {};
 	    for (var k in r) {
 	        var rk = r[k];
-	        if (Either.isRight(rk)) {
+	        if (E.isRight(rk)) {
 	            out[k] = rk.right;
 	        }
 	    }
@@ -2166,14 +2148,34 @@
 	};
 	});
 
-	var KleisliDecoder = createCommonjsModule(function (module, exports) {
+	var Decoder = createCommonjsModule(function (module, exports) {
+	var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (commonjsGlobal && commonjsGlobal.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
+	    var result = {};
+	    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result;
+	};
 	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.alt = exports.map = exports.compose = exports.lazy = exports.sum = exports.intersect = exports.union = exports.tuple = exports.record = exports.array = exports.partial = exports.type = exports.nullable = exports.parse = exports.refine = exports.mapLeftWithInput = exports.literal = exports.fromRefinement = exports.failure = exports.success = exports.error = exports.ap = exports.SE = void 0;
+	exports.stringify = exports.draw = exports.WithRefine = exports.WithUnion = exports.WithUnknownContainers = exports.Schemable = exports.Category = exports.Alt = exports.Functor = exports.URI = exports.id = exports.compose = exports.alt = exports.map = exports.lazy = exports.sum = exports.fromSum = exports.intersect = exports.union = exports.tuple = exports.fromTuple = exports.record = exports.fromRecord = exports.array = exports.fromArray = exports.partial = exports.fromPartial = exports.type = exports.fromType = exports.nullable = exports.parse = exports.refine = exports.withMessage = exports.mapLeftWithInput = exports.UnknownRecord = exports.UnknownArray = exports.boolean = exports.number = exports.string = exports.literal = exports.fromGuard = exports.fromRefinement = exports.failure = exports.success = exports.error = exports.ap = exports.SE = void 0;
+	var E = __importStar(Either);
 
-
-
-
-
+	var DE = __importStar(DecodeError);
+	var FS = __importStar(FreeSemigroup);
+	var G = __importStar(Guard);
+	var K = __importStar(Kleisli);
 	// -------------------------------------------------------------------------------------
 	// Kleisli config
 	// -------------------------------------------------------------------------------------
@@ -2182,63 +2184,70 @@
 	 */
 	exports.SE = 
 	/*#__PURE__*/
-	DecodeError.getSemigroup();
+	DE.getSemigroup();
 	/**
 	 * @internal
 	 */
 	exports.ap = function (fab, fa) {
-	    return Either.isLeft(fab)
-	        ? Either.isLeft(fa)
-	            ? Either.left(exports.SE.concat(fab.left, fa.left))
+	    return E.isLeft(fab)
+	        ? E.isLeft(fa)
+	            ? E.left(exports.SE.concat(fab.left, fa.left))
 	            : fab
-	        : Either.isLeft(fa)
+	        : E.isLeft(fa)
 	            ? fa
-	            : Either.right(fab.right(fa.right));
+	            : E.right(fab.right(fa.right));
 	};
 	var M = {
-	    URI: Either.URI,
+	    URI: E.URI,
 	    _E: undefined,
-	    map: function (fa, f) { return pipeable_1.pipe(fa, Either.map(f)); },
+	    map: function (fa, f) { return pipeable_1.pipe(fa, E.map(f)); },
 	    ap: exports.ap,
-	    of: Either.right,
-	    chain: function (ma, f) { return pipeable_1.pipe(ma, Either.chain(f)); },
-	    throwError: Either.left,
-	    bimap: function (fa, f, g) { return pipeable_1.pipe(fa, Either.bimap(f, g)); },
-	    mapLeft: function (fa, f) { return pipeable_1.pipe(fa, Either.mapLeft(f)); },
+	    of: E.right,
+	    chain: function (ma, f) { return pipeable_1.pipe(ma, E.chain(f)); },
+	    throwError: E.left,
+	    bimap: function (fa, f, g) { return pipeable_1.pipe(fa, E.bimap(f, g)); },
+	    mapLeft: function (fa, f) { return pipeable_1.pipe(fa, E.mapLeft(f)); },
 	    alt: function (me, that) {
-	        if (Either.isRight(me)) {
+	        if (E.isRight(me)) {
 	            return me;
 	        }
 	        var ea = that();
-	        return Either.isLeft(ea) ? Either.left(exports.SE.concat(me.left, ea.left)) : ea;
+	        return E.isLeft(ea) ? E.left(exports.SE.concat(me.left, ea.left)) : ea;
 	    }
 	};
 	/**
 	 * @category DecodeError
 	 * @since 2.2.7
 	 */
-	exports.error = function (actual, message) { return FreeSemigroup.of(DecodeError.leaf(actual, message)); };
+	exports.error = function (actual, message) { return FS.of(DE.leaf(actual, message)); };
 	/**
 	 * @category DecodeError
 	 * @since 2.2.7
 	 */
-	exports.success = Either.right;
+	exports.success = E.right;
 	/**
 	 * @category DecodeError
 	 * @since 2.2.7
 	 */
 	exports.failure = function (actual, message) {
-	    return Either.left(exports.error(actual, message));
+	    return E.left(exports.error(actual, message));
 	};
 	// -------------------------------------------------------------------------------------
 	// constructors
 	// -------------------------------------------------------------------------------------
 	/**
 	 * @category constructors
-	 * @since 2.2.7
+	 * @since 2.2.8
 	 */
 	exports.fromRefinement = function (refinement, expected) {
-	    return Kleisli.fromRefinement(M)(refinement, function (u) { return exports.error(u, expected); });
+	    return K.fromRefinement(M)(refinement, function (u) { return exports.error(u, expected); });
+	};
+	/**
+	 * @category constructors
+	 * @since 2.2.8
+	 */
+	exports.fromGuard = function (guard, expected) {
+	    return exports.fromRefinement(guard.is, expected);
 	};
 	/**
 	 * @category constructors
@@ -2246,168 +2255,7 @@
 	 */
 	exports.literal = 
 	/*#__PURE__*/
-	Kleisli.literal(M)(function (u, values) { return exports.error(u, values.map(function (value) { return JSON.stringify(value); }).join(' | ')); });
-	// -------------------------------------------------------------------------------------
-	// combinators
-	// -------------------------------------------------------------------------------------
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.mapLeftWithInput = 
-	/*#__PURE__*/
-	Kleisli.mapLeftWithInput(M);
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.refine = function (refinement, id) { return Kleisli.refine(M)(refinement, function (a) { return exports.error(a, id); }); };
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.parse = 
-	/*#__PURE__*/
-	Kleisli.parse(M);
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.nullable = 
-	/*#__PURE__*/
-	Kleisli.nullable(M)(function (u, e) { return FreeSemigroup.concat(FreeSemigroup.of(DecodeError.member(0, exports.error(u, 'null'))), FreeSemigroup.of(DecodeError.member(1, e))); });
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.type = function (properties) {
-	    return Kleisli.type(M)(function (k, e) { return FreeSemigroup.of(DecodeError.key(k, DecodeError.required, e)); })(properties);
-	};
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.partial = function (properties) {
-	    return Kleisli.partial(M)(function (k, e) { return FreeSemigroup.of(DecodeError.key(k, DecodeError.optional, e)); })(properties);
-	};
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.array = function (items) {
-	    return Kleisli.array(M)(function (i, e) { return FreeSemigroup.of(DecodeError.index(i, DecodeError.optional, e)); })(items);
-	};
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.record = function (codomain) {
-	    return Kleisli.record(M)(function (k, e) { return FreeSemigroup.of(DecodeError.key(k, DecodeError.optional, e)); })(codomain);
-	};
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.tuple = function () {
-	    var components = [];
-	    for (var _i = 0; _i < arguments.length; _i++) {
-	        components[_i] = arguments[_i];
-	    }
-	    return Kleisli.tuple(M)(function (i, e) { return FreeSemigroup.of(DecodeError.index(i, DecodeError.required, e)); }).apply(void 0, components);
-	};
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.union = 
-	/*#__PURE__*/
-	Kleisli.union(M)(function (i, e) { return FreeSemigroup.of(DecodeError.member(i, e)); });
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.intersect = 
-	/*#__PURE__*/
-	Kleisli.intersect(M);
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.sum = function (tag) { return function (members) {
-	    return Kleisli.sum(M)(function (tag, value, keys) {
-	        return FreeSemigroup.of(DecodeError.key(tag, DecodeError.required, exports.error(value, keys.length === 0 ? 'never' : keys.map(function (k) { return JSON.stringify(k); }).join(' | '))));
-	    })(tag)(members);
-	}; };
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.lazy = 
-	/*#__PURE__*/
-	Kleisli.lazy(M)(function (id, e) { return FreeSemigroup.of(DecodeError.lazy(id, e)); });
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.compose = 
-	/*#__PURE__*/
-	Kleisli.compose(M);
-	// -------------------------------------------------------------------------------------
-	// pipeables
-	// -------------------------------------------------------------------------------------
-	/**
-	 * @category Functor
-	 * @since 2.2.7
-	 */
-	exports.map = 
-	/*#__PURE__*/
-	Kleisli.map(M);
-	/**
-	 * @category Alt
-	 * @since 2.2.7
-	 */
-	exports.alt = 
-	/*#__PURE__*/
-	Kleisli.alt(M);
-	});
-
-	var Decoder = createCommonjsModule(function (module, exports) {
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.stringify = exports.draw = exports.schemableDecoder = exports.altDecoder = exports.functorDecoder = exports.URI = exports.alt = exports.map = exports.compose = exports.lazy = exports.sum = exports.intersect = exports.union = exports.tuple = exports.record = exports.array = exports.partial = exports.type = exports.nullable = exports.parse = exports.refine = exports.mapLeftWithInput = exports.object = exports.UnknownRecord = exports.UnknownArray = exports.boolean = exports.number = exports.string = exports.literal = exports.fromGuard = exports.failure = exports.success = exports.error = void 0;
-
-
-
-
-
-
-	/**
-	 * @category DecodeError
-	 * @since 2.2.7
-	 */
-	exports.error = KleisliDecoder.error;
-	/**
-	 * @category DecodeError
-	 * @since 2.2.7
-	 */
-	exports.success = KleisliDecoder.success;
-	/**
-	 * @category DecodeError
-	 * @since 2.2.7
-	 */
-	exports.failure = KleisliDecoder.failure;
-	// -------------------------------------------------------------------------------------
-	// constructors
-	// -------------------------------------------------------------------------------------
-	/**
-	 * @category constructors
-	 * @since 2.2.7
-	 */
-	exports.fromGuard = function (guard, expected) { return KleisliDecoder.fromRefinement(guard.is, expected); };
-	/**
-	 * @category constructors
-	 * @since 2.2.7
-	 */
-	exports.literal = KleisliDecoder.literal;
+	K.literal(M)(function (u, values) { return exports.error(u, values.map(function (value) { return JSON.stringify(value); }).join(' | ')); });
 	// -------------------------------------------------------------------------------------
 	// primitives
 	// -------------------------------------------------------------------------------------
@@ -2417,41 +2265,35 @@
 	 */
 	exports.string = 
 	/*#__PURE__*/
-	exports.fromGuard(Guard.string, 'string');
+	exports.fromGuard(G.string, 'string');
 	/**
 	 * @category primitives
 	 * @since 2.2.7
 	 */
 	exports.number = 
 	/*#__PURE__*/
-	exports.fromGuard(Guard.number, 'number');
+	exports.fromGuard(G.number, 'number');
 	/**
 	 * @category primitives
 	 * @since 2.2.7
 	 */
 	exports.boolean = 
 	/*#__PURE__*/
-	exports.fromGuard(Guard.boolean, 'boolean');
+	exports.fromGuard(G.boolean, 'boolean');
 	/**
 	 * @category primitives
 	 * @since 2.2.7
 	 */
 	exports.UnknownArray = 
 	/*#__PURE__*/
-	exports.fromGuard(Guard.UnknownArray, 'Array<unknown>');
+	exports.fromGuard(G.UnknownArray, 'Array<unknown>');
 	/**
 	 * @category primitives
 	 * @since 2.2.7
 	 */
 	exports.UnknownRecord = 
 	/*#__PURE__*/
-	exports.fromGuard(Guard.UnknownRecord, 'Record<string, unknown>');
-	/**
-	 * @internal
-	 */
-	exports.object = 
-	/*#__PURE__*/
-	exports.fromGuard(Guard.object, 'object');
+	exports.fromGuard(G.UnknownRecord, 'Record<string, unknown>');
 	// -------------------------------------------------------------------------------------
 	// combinators
 	// -------------------------------------------------------------------------------------
@@ -2459,47 +2301,97 @@
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	exports.mapLeftWithInput = KleisliDecoder.mapLeftWithInput;
+	exports.mapLeftWithInput = 
+	/*#__PURE__*/
+	K.mapLeftWithInput(M);
 	/**
 	 * @category combinators
-	 * @since 2.2.7
+	 * @since 2.2.9
 	 */
-	exports.refine = KleisliDecoder.refine;
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.parse = KleisliDecoder.parse;
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.nullable = KleisliDecoder.nullable;
-	/**
-	 * @category combinators
-	 * @since 2.2.7
-	 */
-	exports.type = function (properties) {
-	    return pipeable_1.pipe(exports.object, exports.compose(KleisliDecoder.type(properties)));
+	exports.withMessage = function (message) {
+	    return exports.mapLeftWithInput(function (input, e) { return FS.of(DE.wrap(message(input, e), e)); });
 	};
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	exports.partial = function (properties) {
-	    return pipeable_1.pipe(exports.object, exports.compose(KleisliDecoder.partial(properties)));
+	exports.refine = function (refinement, id) { return K.refine(M)(refinement, function (a) { return exports.error(a, id); }); };
+	/**
+	 * @category combinators
+	 * @since 2.2.7
+	 */
+	exports.parse = 
+	/*#__PURE__*/
+	K.parse(M);
+	/**
+	 * @category combinators
+	 * @since 2.2.7
+	 */
+	exports.nullable = 
+	/*#__PURE__*/
+	K.nullable(M)(function (u, e) { return FS.concat(FS.of(DE.member(0, exports.error(u, 'null'))), FS.of(DE.member(1, e))); });
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	exports.fromType = function (properties) {
+	    return K.fromType(M)(function (k, e) { return FS.of(DE.key(k, DE.required, e)); })(properties);
 	};
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	exports.array = function (items) { return pipeable_1.pipe(exports.UnknownArray, exports.compose(KleisliDecoder.array(items))); };
+	exports.type = function (properties) { return pipeable_1.pipe(exports.UnknownRecord, exports.compose(exports.fromType(properties))); };
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	exports.fromPartial = function (properties) {
+	    return K.fromPartial(M)(function (k, e) { return FS.of(DE.key(k, DE.optional, e)); })(properties);
+	};
+	/**
+	 * @category combinators
+	 * @since 2.2.7
+	 */
+	exports.partial = function (properties) { return pipeable_1.pipe(exports.UnknownRecord, exports.compose(exports.fromPartial(properties))); };
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	exports.fromArray = function (item) {
+	    return K.fromArray(M)(function (i, e) { return FS.of(DE.index(i, DE.optional, e)); })(item);
+	};
+	/**
+	 * @category combinators
+	 * @since 2.2.7
+	 */
+	exports.array = function (item) {
+	    return pipeable_1.pipe(exports.UnknownArray, exports.compose(exports.fromArray(item)));
+	};
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	exports.fromRecord = function (codomain) {
+	    return K.fromRecord(M)(function (k, e) { return FS.of(DE.key(k, DE.optional, e)); })(codomain);
+	};
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
 	exports.record = function (codomain) {
-	    return pipeable_1.pipe(exports.UnknownRecord, exports.compose(KleisliDecoder.record(codomain)));
+	    return pipeable_1.pipe(exports.UnknownRecord, exports.compose(exports.fromRecord(codomain)));
+	};
+	/**
+	 * @category combinators
+	 * @since 2.2.8
+	 */
+	exports.fromTuple = function () {
+	    var components = [];
+	    for (var _i = 0; _i < arguments.length; _i++) {
+	        components[_i] = arguments[_i];
+	    }
+	    return K.fromTuple(M)(function (i, e) { return FS.of(DE.index(i, DE.required, e)); }).apply(void 0, components);
 	};
 	/**
 	 * @category combinators
@@ -2510,40 +2402,49 @@
 	    for (var _i = 0; _i < arguments.length; _i++) {
 	        components[_i] = arguments[_i];
 	    }
-	    return pipeable_1.pipe(exports.UnknownArray, exports.compose(KleisliDecoder.tuple.apply(KleisliDecoder, components)));
+	    return pipeable_1.pipe(exports.UnknownArray, exports.compose(exports.fromTuple.apply(void 0, components)));
 	};
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	exports.union = KleisliDecoder.union;
+	exports.union = 
+	/*#__PURE__*/
+	K.union(M)(function (i, e) { return FS.of(DE.member(i, e)); });
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	exports.intersect = KleisliDecoder.intersect;
+	exports.intersect = 
+	/*#__PURE__*/
+	K.intersect(M);
 	/**
 	 * @category combinators
-	 * @since 2.2.7
+	 * @since 2.2.8
 	 */
-	exports.sum = function (tag) { return function (members) {
-	    return pipeable_1.pipe(exports.object, exports.compose(KleisliDecoder.sum(tag)(members)));
+	exports.fromSum = function (tag) { return function (members) {
+	    return K.fromSum(M)(function (tag, value, keys) {
+	        return FS.of(DE.key(tag, DE.required, exports.error(value, keys.length === 0 ? 'never' : keys.map(function (k) { return JSON.stringify(k); }).join(' | '))));
+	    })(tag)(members);
 	}; };
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	exports.lazy = KleisliDecoder.lazy;
+	exports.sum = function (tag) { return function (members) { return pipeable_1.pipe(exports.UnknownRecord, exports.compose(exports.fromSum(tag)(members))); }; };
 	/**
 	 * @category combinators
 	 * @since 2.2.7
 	 */
-	exports.compose = KleisliDecoder.compose;
+	exports.lazy = 
+	/*#__PURE__*/
+	K.lazy(M)(function (id, e) { return FS.of(DE.lazy(id, e)); });
 	// -------------------------------------------------------------------------------------
 	// non-pipeables
 	// -------------------------------------------------------------------------------------
 	var map_ = function (fa, f) { return pipeable_1.pipe(fa, exports.map(f)); };
 	var alt_ = function (me, that) { return pipeable_1.pipe(me, exports.alt(that)); };
+	var compose_ = function (ab, la) { return pipeable_1.pipe(la, exports.compose(ab)); };
 	// -------------------------------------------------------------------------------------
 	// pipeables
 	// -------------------------------------------------------------------------------------
@@ -2551,12 +2452,30 @@
 	 * @category Functor
 	 * @since 2.2.7
 	 */
-	exports.map = KleisliDecoder.map;
+	exports.map = 
+	/*#__PURE__*/
+	K.map(M);
 	/**
 	 * @category Alt
 	 * @since 2.2.7
 	 */
-	exports.alt = KleisliDecoder.alt;
+	exports.alt = 
+	/*#__PURE__*/
+	K.alt(M);
+	/**
+	 * @category Semigroupoid
+	 * @since 2.2.8
+	 */
+	exports.compose = 
+	/*#__PURE__*/
+	K.compose(M);
+	/**
+	 * @category Category
+	 * @since 2.2.8
+	 */
+	exports.id = 
+	/*#__PURE__*/
+	K.id(M);
 	// -------------------------------------------------------------------------------------
 	// instances
 	// -------------------------------------------------------------------------------------
@@ -2567,26 +2486,35 @@
 	exports.URI = 'io-ts/Decoder';
 	/**
 	 * @category instances
-	 * @since 2.2.7
+	 * @since 2.2.8
 	 */
-	exports.functorDecoder = {
+	exports.Functor = {
 	    URI: exports.URI,
 	    map: map_
 	};
 	/**
 	 * @category instances
-	 * @since 2.2.7
+	 * @since 2.2.8
 	 */
-	exports.altDecoder = {
+	exports.Alt = {
 	    URI: exports.URI,
 	    map: map_,
 	    alt: alt_
 	};
 	/**
 	 * @category instances
-	 * @since 2.2.7
+	 * @since 2.2.8
 	 */
-	exports.schemableDecoder = {
+	exports.Category = {
+	    URI: exports.URI,
+	    compose: compose_,
+	    id: exports.id
+	};
+	/**
+	 * @category instances
+	 * @since 2.2.8
+	 */
+	exports.Schemable = {
 	    URI: exports.URI,
 	    literal: exports.literal,
 	    string: exports.string,
@@ -2600,10 +2528,28 @@
 	    tuple: exports.tuple,
 	    intersect: exports.intersect,
 	    sum: exports.sum,
-	    lazy: exports.lazy,
+	    lazy: exports.lazy
+	};
+	/**
+	 * @category instances
+	 * @since 2.2.8
+	 */
+	exports.WithUnknownContainers = {
 	    UnknownArray: exports.UnknownArray,
-	    UnknownRecord: exports.UnknownRecord,
-	    union: exports.union,
+	    UnknownRecord: exports.UnknownRecord
+	};
+	/**
+	 * @category instances
+	 * @since 2.2.8
+	 */
+	exports.WithUnion = {
+	    union: exports.union
+	};
+	/**
+	 * @category instances
+	 * @since 2.2.8
+	 */
+	exports.WithRefine = {
 	    refine: exports.refine
 	};
 	var empty = [];
@@ -2627,14 +2573,15 @@
 	    }
 	    return r;
 	};
-	var toTree = DecodeError.fold({
+	var toTree = DE.fold({
 	    Leaf: function (input, error) { return make("cannot decode " + JSON.stringify(input) + ", should be " + error); },
 	    Key: function (key, kind, errors) { return make(kind + " property " + JSON.stringify(key), toForest(errors)); },
 	    Index: function (index, kind, errors) { return make(kind + " index " + index, toForest(errors)); },
 	    Member: function (index, errors) { return make("member " + index, toForest(errors)); },
-	    Lazy: function (id, errors) { return make("lazy type " + id, toForest(errors)); }
+	    Lazy: function (id, errors) { return make("lazy type " + id, toForest(errors)); },
+	    Wrap: function (error, errors) { return make(error, toForest(errors)); }
 	});
-	var toForest = FreeSemigroup.fold(function (value) { return [toTree(value)]; }, function (left, right) { return toForest(left).concat(toForest(right)); });
+	var toForest = FS.fold(function (value) { return [toTree(value)]; }, function (left, right) { return toForest(left).concat(toForest(right)); });
 	/**
 	 * @since 2.2.7
 	 */
@@ -2644,284 +2591,8 @@
 	 */
 	exports.stringify = 
 	/*#__PURE__*/
-	Either.fold(exports.draw, function (a) { return JSON.stringify(a, null, 2); });
+	E.fold(exports.draw, function (a) { return JSON.stringify(a, null, 2); });
 	});
-
-	/**
-	 * Abstract superclass for all term types defined in this module. It should not be subclassed outside of this module.
-	 *
-	 * This class defines a generic [[equals]] function according to the RDFJS specification.
-	 */
-	class Model {
-	    
-
-	    equals(other) {
-	        if (!other || other.termType !== this.termType)
-	            return false;
-
-	        for (const [key, value] of Object.entries(this)) {
-	            const otherValue = (other )[key];
-	            if (value instanceof Model) {
-	                if (!value.equals(otherValue))
-	                    return false;
-	            }
-	            else if (otherValue !== value)
-	                return false;
-	        }
-
-	        return true;
-	    }
-	}
-
-	class NamedNode extends Model  {
-	    __init() {this.termType = "NamedNode";}
-
-	    constructor(
-	         value
-	    ) {
-	        super();this.value = value;NamedNode.prototype.__init.call(this);        Object.freeze(this);
-	    }
-	}
-
-	class BlankNode extends Model  {
-	     static __initStatic() {this.nextId = 0;}
-
-	    __init2() {this.termType = "BlankNode";}
-
-	    
-
-	    constructor(
-	        value
-	    ) {
-	        super();BlankNode.prototype.__init2.call(this);
-	        if (value)
-	            this.value = value;
-	        else
-	            this.value = "b" + (++BlankNode.nextId);
-
-	        Object.freeze(this);
-	    }
-	} BlankNode.__initStatic();
-
-	class Literal extends Model  {
-	    static  __initStatic2() {this.langStringDatatype = new NamedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#langString');}
-	    static  __initStatic3() {this.stringDatatype = new NamedNode('http://www.w3.org/2001/XMLSchema#string');}
-
-	    
-	    
-	    __init3() {this.termType = "Literal";}
-
-	    constructor(
-	         value,
-	        languageOrDatatype
-	    ) {
-	        super();this.value = value;Literal.prototype.__init3.call(this);
-	        if (typeof languageOrDatatype === "string") {
-	            if (languageOrDatatype.indexOf(":") === -1) {
-	                this.language = languageOrDatatype;
-	                this.datatype = Literal.langStringDatatype;
-	            }
-	            else {
-	                this.language = "";
-	                this.datatype = new NamedNode(languageOrDatatype);
-	            }
-	        }
-	        else {
-	            this.language = "";
-	            this.datatype = languageOrDatatype || Literal.stringDatatype;
-	        }
-
-	        Object.freeze(this);
-	    }
-	} Literal.__initStatic2(); Literal.__initStatic3();
-
-	class Variable extends Model  {
-	    __init4() {this.termType = "Variable";}
-
-	    constructor(
-	         value
-	    ) {
-	        super();this.value = value;Variable.prototype.__init4.call(this);        Object.freeze(this);
-	    }
-	}
-
-	class DefaultGraph extends Model  {
-	    static  __initStatic4() {this.instance = new DefaultGraph();}
-
-	     constructor() {
-	        super();DefaultGraph.prototype.__init5.call(this);DefaultGraph.prototype.__init6.call(this);        Object.freeze(this);
-	    }
-
-	    __init5() {this.termType = "DefaultGraph";}
-	    __init6() {this.value = "";}
-	} DefaultGraph.__initStatic4();
-
-	class Quad  {
-	    constructor(
-	         subject,
-	         predicate,
-	         object,
-	         graph
-	    ) {this.subject = subject;this.predicate = predicate;this.object = object;this.graph = graph;
-	        Object.freeze(this);
-	    }
-
-	    equals(other) {
-	        return !!other && other.subject.equals(this.subject) && other.predicate.equals(this.predicate) &&
-	            other.object.equals(this.object) && other.graph.equals(this.graph);
-	    }
-	}
-
-	const prototypes = {
-	    subject: [NamedNode.prototype, BlankNode.prototype, Variable.prototype],
-	    predicate: [NamedNode.prototype, Variable.prototype],
-	    object: [NamedNode.prototype, Literal.prototype, BlankNode.prototype, Variable.prototype],
-	    graph: [DefaultGraph.prototype, NamedNode.prototype, BlankNode.prototype, Variable.prototype]
-	};
-
-	/**
-	 * A spec-compliant implementation of an RDFJS data factory supporting variables.
-	 *
-	 * The type of quads generated is [[Quad]], which restricts the term types of subject, predicate, object and graph
-	 * appropriately. For example, it is not permitted to use a [[Literal]] in subject position.
-	 *
-	 * The values returned by this factory satisfy two additional assumptions:
-	 *
-	 * 1. They are direct instances of exported classes, such as [[BlankNode]].
-	 *    There is no manual fiddling with prototypes.
-	 * 2. Those exported classes are subclasses of [[Model]] (except [[Quad]]).
-	 *
-	 * These guarantees are important for users of the data factory who want to transmit the values across serialization
-	 * boundaries. The spec mandates that all entities come with a JVM-style `equals` method. Unfortunately, when
-	 * transporting JS objects through any kind of channel (`JSON.stringify`, `MessagePort`, `postMessage`, ...) they lose
-	 * their methods and prototype. It is hence crucial that the prototype can be restored by the receiver of such an
-	 * object. Sadly, the reference implementation makes that hard by not having dedicated classes; instead, when entities
-	 * are created, the prototype is manually constructed and subsequently not exposed. This implementation solves the
-	 * problem through the exported classes that can reattached after deserialization.
-	 *
-	 * All objects returned by this factory are frozen. The factory itself is frozen too.
-	 *
-	 * Optionally, strict validation of input can be enabled. This enforces that all terms that are passed in have been
-	 * generated by this library and that the types of the inputs are correct (which would otherwise be enforced through
-	 * TypeScript).
-	 *
-	 * For the semantics of the methods, refer to [the spec](https://rdf.js.org/data-model-spec/).
-	 */
-	class DataFactory  {
-	    constructor(
-	          strict
-	    ) {this.strict = strict;
-	        Object.freeze(this);
-	    }
-
-	    blankNode(value) {
-	        if (this.strict) {
-	            if (value !== undefined && typeof value !== "string")
-	                throw new Error("Expected string or undefined");
-	        }
-
-	        return new BlankNode(value);
-	    }
-
-	    defaultGraph() {
-	        return DefaultGraph.instance;
-	    }
-
-	    literal(value, languageOrDatatype) {
-	        if (this.strict) {
-	            if (typeof value !== "string")
-	                throw new Error("Expected string as value");
-
-	            if (
-	                languageOrDatatype !== undefined &&
-	                typeof languageOrDatatype !== "string" &&
-	                Object.getPrototypeOf(languageOrDatatype) !== NamedNode.prototype
-	            )
-	                throw new Error("Expected undefined, string or NamedNode prototype as language/datatype");
-	        }
-
-	        return new Literal(value, languageOrDatatype);
-	    }
-
-	    namedNode(value) {
-	        if (this.strict) {
-	            if (typeof value !== "string")
-	                throw new Error("Expected string");
-	        }
-
-	        return new NamedNode(value);
-	    }
-
-	    quad(subject, predicate, object, graph) {
-	        if (this.strict) {
-	            if (!prototypes.subject.includes(Object.getPrototypeOf(subject)))
-	                throw new Error("Invalid prototype of subject");
-	            if (!prototypes.predicate.includes(Object.getPrototypeOf(predicate)))
-	                throw new Error("Invalid prototype of predicate");
-	            if (!prototypes.object.includes(Object.getPrototypeOf(object)))
-	                throw new Error("Invalid prototype of object");
-	            if (graph !== undefined && !prototypes.graph.includes(Object.getPrototypeOf(graph)))
-	                throw new Error("Invalid prototype of graph");
-	        }
-
-	        return new Quad(subject, predicate, object, graph || this.defaultGraph());
-	    }
-
-	    variable(value) {
-	        if (this.strict) {
-	            if (typeof value !== "string")
-	                throw new Error("Expected string");
-	        }
-
-	        return new Variable(value);
-	    }
-	}
-
-	/**
-	 * The default instance of [[DataFactory]].
-	 *
-	 * This instance does not perform strict validation of input.
-	 */
-	const dataFactory = new DataFactory(false);
-
-	/**
-	 * Turns the implementation of an endpoint specification into a plain function.
-	 */
-
-	/**
-	 * @hidden
-	 */
-
-
-	/**
-	 * @hidden
-	 */
-	function requestBuilder(client, state) {
-	    return new Proxy(new Function() , {
-	        apply(target, thisArg, argArray) {
-	            if (!Array.isArray(argArray) || argArray.length !== 0)
-	                throw new Error("Argument list must be empty");
-
-	            // end of line, make the call
-	            return client(state);
-	        },
-	        get(target, property) {
-	            if (typeof property !== "string")
-	                throw new Error(`Property ${String(property)} is not a string`);
-
-	            // nested call: return a callable function
-	            return (...args) =>
-	                requestBuilder(client, [...state, { method: property, args: args }]);
-	        }
-	    });
-	}
-
-	/**
-	 * Constructs a proxy object that turns a function call chain into a plain function call.
-	 */
-	function endpointClient(client) {
-	    return requestBuilder(client, []) ;
-	}
 
 	/**
 	 * Utilities for error handling.
@@ -3769,6 +3440,437 @@
 	exports.iframeOuterPort = iframeOuterPort;
 	exports.jsonFetchPort = jsonFetchPort;
 	});
+
+	/**
+	 * Abstract superclass for all term types defined in this module. It should not be subclassed outside of this module.
+	 *
+	 * This class defines a generic [[equals]] function according to the RDFJS specification.
+	 */
+	class Model {
+	    
+
+	    equals(other) {
+	        if (!other || other.termType !== this.termType)
+	            return false;
+
+	        for (const [key, value] of Object.entries(this)) {
+	            const otherValue = (other )[key];
+	            if (value instanceof Model) {
+	                if (!value.equals(otherValue))
+	                    return false;
+	            }
+	            else if (otherValue !== value)
+	                return false;
+	        }
+
+	        return true;
+	    }
+	}
+
+	class NamedNode extends Model  {
+	    __init() {this.termType = "NamedNode";}
+
+	    constructor(
+	         value
+	    ) {
+	        super();this.value = value;NamedNode.prototype.__init.call(this);        Object.freeze(this);
+	    }
+	}
+
+	class BlankNode extends Model  {
+	     static __initStatic() {this.nextId = 0;}
+
+	    __init2() {this.termType = "BlankNode";}
+
+	    
+
+	    constructor(
+	        value
+	    ) {
+	        super();BlankNode.prototype.__init2.call(this);
+	        if (value)
+	            this.value = value;
+	        else
+	            this.value = "b" + (++BlankNode.nextId);
+
+	        Object.freeze(this);
+	    }
+	} BlankNode.__initStatic();
+
+	class Literal extends Model  {
+	    static  __initStatic2() {this.langStringDatatype = new NamedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#langString');}
+	    static  __initStatic3() {this.stringDatatype = new NamedNode('http://www.w3.org/2001/XMLSchema#string');}
+
+	    
+	    
+	    __init3() {this.termType = "Literal";}
+
+	    constructor(
+	         value,
+	        languageOrDatatype
+	    ) {
+	        super();this.value = value;Literal.prototype.__init3.call(this);
+	        if (typeof languageOrDatatype === "string") {
+	            if (languageOrDatatype.indexOf(":") === -1) {
+	                this.language = languageOrDatatype;
+	                this.datatype = Literal.langStringDatatype;
+	            }
+	            else {
+	                this.language = "";
+	                this.datatype = new NamedNode(languageOrDatatype);
+	            }
+	        }
+	        else {
+	            this.language = "";
+	            this.datatype = languageOrDatatype || Literal.stringDatatype;
+	        }
+
+	        Object.freeze(this);
+	    }
+	} Literal.__initStatic2(); Literal.__initStatic3();
+
+	class Variable extends Model  {
+	    __init4() {this.termType = "Variable";}
+
+	    constructor(
+	         value
+	    ) {
+	        super();this.value = value;Variable.prototype.__init4.call(this);        Object.freeze(this);
+	    }
+	}
+
+	class DefaultGraph extends Model  {
+	    static  __initStatic4() {this.instance = new DefaultGraph();}
+
+	     constructor() {
+	        super();DefaultGraph.prototype.__init5.call(this);DefaultGraph.prototype.__init6.call(this);        Object.freeze(this);
+	    }
+
+	    __init5() {this.termType = "DefaultGraph";}
+	    __init6() {this.value = "";}
+	} DefaultGraph.__initStatic4();
+
+	class Quad  {
+	    constructor(
+	         subject,
+	         predicate,
+	         object,
+	         graph
+	    ) {this.subject = subject;this.predicate = predicate;this.object = object;this.graph = graph;
+	        Object.freeze(this);
+	    }
+
+	    equals(other) {
+	        return !!other && other.subject.equals(this.subject) && other.predicate.equals(this.predicate) &&
+	            other.object.equals(this.object) && other.graph.equals(this.graph);
+	    }
+	}
+
+	const prototypes = {
+	    subject: [NamedNode.prototype, BlankNode.prototype, Variable.prototype],
+	    predicate: [NamedNode.prototype, Variable.prototype],
+	    object: [NamedNode.prototype, Literal.prototype, BlankNode.prototype, Variable.prototype],
+	    graph: [DefaultGraph.prototype, NamedNode.prototype, BlankNode.prototype, Variable.prototype]
+	};
+
+	/**
+	 * A spec-compliant implementation of an RDFJS data factory supporting variables.
+	 *
+	 * The type of quads generated is [[Quad]], which restricts the term types of subject, predicate, object and graph
+	 * appropriately. For example, it is not permitted to use a [[Literal]] in subject position.
+	 *
+	 * The values returned by this factory satisfy two additional assumptions:
+	 *
+	 * 1. They are direct instances of exported classes, such as [[BlankNode]].
+	 *    There is no manual fiddling with prototypes.
+	 * 2. Those exported classes are subclasses of [[Model]] (except [[Quad]]).
+	 *
+	 * These guarantees are important for users of the data factory who want to transmit the values across serialization
+	 * boundaries. The spec mandates that all entities come with a JVM-style `equals` method. Unfortunately, when
+	 * transporting JS objects through any kind of channel (`JSON.stringify`, `MessagePort`, `postMessage`, ...) they lose
+	 * their methods and prototype. It is hence crucial that the prototype can be restored by the receiver of such an
+	 * object. Sadly, the reference implementation makes that hard by not having dedicated classes; instead, when entities
+	 * are created, the prototype is manually constructed and subsequently not exposed. This implementation solves the
+	 * problem through the exported classes that can reattached after deserialization.
+	 *
+	 * All objects returned by this factory are frozen. The factory itself is frozen too.
+	 *
+	 * Optionally, strict validation of input can be enabled. This enforces that all terms that are passed in have been
+	 * generated by this library and that the types of the inputs are correct (which would otherwise be enforced through
+	 * TypeScript).
+	 *
+	 * For the semantics of the methods, refer to [the spec](https://rdf.js.org/data-model-spec/).
+	 */
+	class DataFactory  {
+	    constructor(
+	          strict
+	    ) {this.strict = strict;
+	        Object.freeze(this);
+	    }
+
+	    blankNode(value) {
+	        if (this.strict) {
+	            if (value !== undefined && typeof value !== "string")
+	                throw new Error("Expected string or undefined");
+	        }
+
+	        return new BlankNode(value);
+	    }
+
+	    defaultGraph() {
+	        return DefaultGraph.instance;
+	    }
+
+	    literal(value, languageOrDatatype) {
+	        if (this.strict) {
+	            if (typeof value !== "string")
+	                throw new Error("Expected string as value");
+
+	            if (
+	                languageOrDatatype !== undefined &&
+	                typeof languageOrDatatype !== "string" &&
+	                Object.getPrototypeOf(languageOrDatatype) !== NamedNode.prototype
+	            )
+	                throw new Error("Expected undefined, string or NamedNode prototype as language/datatype");
+	        }
+
+	        return new Literal(value, languageOrDatatype);
+	    }
+
+	    namedNode(value) {
+	        if (this.strict) {
+	            if (typeof value !== "string")
+	                throw new Error("Expected string");
+	        }
+
+	        return new NamedNode(value);
+	    }
+
+	    quad(subject, predicate, object, graph) {
+	        if (this.strict) {
+	            if (!prototypes.subject.includes(Object.getPrototypeOf(subject)))
+	                throw new Error("Invalid prototype of subject");
+	            if (!prototypes.predicate.includes(Object.getPrototypeOf(predicate)))
+	                throw new Error("Invalid prototype of predicate");
+	            if (!prototypes.object.includes(Object.getPrototypeOf(object)))
+	                throw new Error("Invalid prototype of object");
+	            if (graph !== undefined && !prototypes.graph.includes(Object.getPrototypeOf(graph)))
+	                throw new Error("Invalid prototype of graph");
+	        }
+
+	        return new Quad(subject, predicate, object, graph || this.defaultGraph());
+	    }
+
+	    variable(value) {
+	        if (this.strict) {
+	            if (typeof value !== "string")
+	                throw new Error("Expected string");
+	        }
+
+	        return new Variable(value);
+	    }
+	}
+
+	/**
+	 * The default instance of [[DataFactory]].
+	 *
+	 * This instance does not perform strict validation of input.
+	 */
+	const dataFactory = new DataFactory(false);
+
+	var js_cookie = createCommonjsModule(function (module, exports) {
+	(function (factory) {
+		var registeredInModuleLoader;
+		{
+			module.exports = factory();
+			registeredInModuleLoader = true;
+		}
+		if (!registeredInModuleLoader) {
+			var OldCookies = window.Cookies;
+			var api = window.Cookies = factory();
+			api.noConflict = function () {
+				window.Cookies = OldCookies;
+				return api;
+			};
+		}
+	}(function () {
+		function extend () {
+			var i = 0;
+			var result = {};
+			for (; i < arguments.length; i++) {
+				var attributes = arguments[ i ];
+				for (var key in attributes) {
+					result[key] = attributes[key];
+				}
+			}
+			return result;
+		}
+
+		function decode (s) {
+			return s.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
+		}
+
+		function init (converter) {
+			function api() {}
+
+			function set (key, value, attributes) {
+				if (typeof document === 'undefined') {
+					return;
+				}
+
+				attributes = extend({
+					path: '/'
+				}, api.defaults, attributes);
+
+				if (typeof attributes.expires === 'number') {
+					attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e+5);
+				}
+
+				// We're using "expires" because "max-age" is not supported by IE
+				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
+				try {
+					var result = JSON.stringify(value);
+					if (/^[\{\[]/.test(result)) {
+						value = result;
+					}
+				} catch (e) {}
+
+				value = converter.write ?
+					converter.write(value, key) :
+					encodeURIComponent(String(value))
+						.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+
+				key = encodeURIComponent(String(key))
+					.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
+					.replace(/[\(\)]/g, escape);
+
+				var stringifiedAttributes = '';
+				for (var attributeName in attributes) {
+					if (!attributes[attributeName]) {
+						continue;
+					}
+					stringifiedAttributes += '; ' + attributeName;
+					if (attributes[attributeName] === true) {
+						continue;
+					}
+
+					// Considers RFC 6265 section 5.2:
+					// ...
+					// 3.  If the remaining unparsed-attributes contains a %x3B (";")
+					//     character:
+					// Consume the characters of the unparsed-attributes up to,
+					// not including, the first %x3B (";") character.
+					// ...
+					stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
+				}
+
+				return (document.cookie = key + '=' + value + stringifiedAttributes);
+			}
+
+			function get (key, json) {
+				if (typeof document === 'undefined') {
+					return;
+				}
+
+				var jar = {};
+				// To prevent the for loop in the first place assign an empty array
+				// in case there are no cookies at all.
+				var cookies = document.cookie ? document.cookie.split('; ') : [];
+				var i = 0;
+
+				for (; i < cookies.length; i++) {
+					var parts = cookies[i].split('=');
+					var cookie = parts.slice(1).join('=');
+
+					if (!json && cookie.charAt(0) === '"') {
+						cookie = cookie.slice(1, -1);
+					}
+
+					try {
+						var name = decode(parts[0]);
+						cookie = (converter.read || converter)(cookie, name) ||
+							decode(cookie);
+
+						if (json) {
+							try {
+								cookie = JSON.parse(cookie);
+							} catch (e) {}
+						}
+
+						jar[name] = cookie;
+
+						if (key === name) {
+							break;
+						}
+					} catch (e) {}
+				}
+
+				return key ? jar[key] : jar;
+			}
+
+			api.set = set;
+			api.get = function (key) {
+				return get(key, false /* read as raw */);
+			};
+			api.getJSON = function (key) {
+				return get(key, true /* read as json */);
+			};
+			api.remove = function (key, attributes) {
+				set(key, '', extend(attributes, {
+					expires: -1
+				}));
+			};
+
+			api.defaults = {};
+
+			api.withConverter = init;
+
+			return api;
+		}
+
+		return init(function () {});
+	}));
+	});
+
+	/**
+	 * Turns the implementation of an endpoint specification into a plain function.
+	 */
+
+	/**
+	 * @hidden
+	 */
+
+
+	/**
+	 * @hidden
+	 */
+	function requestBuilder(client, state) {
+	    return new Proxy(new Function() , {
+	        apply(target, thisArg, argArray) {
+	            if (!Array.isArray(argArray) || argArray.length !== 0)
+	                throw new Error("Argument list must be empty");
+
+	            // end of line, make the call
+	            return client(state);
+	        },
+	        get(target, property) {
+	            if (typeof property !== "string")
+	                throw new Error(`Property ${String(property)} is not a string`);
+
+	            // nested call: return a callable function
+	            return (...args) =>
+	                requestBuilder(client, [...state, { method: property, args: args }]);
+	        }
+	    });
+	}
+
+	/**
+	 * Constructs a proxy object that turns a function call chain into a plain function call.
+	 */
+	function endpointClient(client) {
+	    return requestBuilder(client, []) ;
+	}
 
 	var utf8 = createCommonjsModule(function (module, exports) {
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -5506,6 +5608,7 @@
 	 * It is not possible to customize this behaviour for arrays, raw objects, or `undefined` values nested below objects
 	 * of registered classes.
 	 */
+	// eslint-disable-next-line @typescript-eslint/ban-types
 
 
 
@@ -5544,7 +5647,7 @@
 	 *
 	 * This class has no properties.
 	 */
-	class Undefined { }
+	class Undefined {}
 
 	/**
 	 * Encoding and decoding of JavaScript values to and from byte arrays.
@@ -5566,10 +5669,7 @@
 	class Bubblewrap {
 	    
 
-	     constructor(
-	          classes,
-	          strict
-	    ) {this.classes = classes;this.strict = strict; }
+	     constructor(  classes,   strict) {this.classes = classes;this.strict = strict;}
 
 	    /**
 	     * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes.
@@ -5592,25 +5692,23 @@
 	        const thisKeys = Object.keys(this.classes);
 	        const thatKeys = Object.keys(more);
 	        for (const thisKey of thisKeys)
-	            if (thatKeys.includes(thisKey))
-	                throw new Error(`Duplicate identifier ${thisKey}`);
+	            if (thatKeys.includes(thisKey)) throw new Error(`Duplicate identifier ${thisKey}`);
 	        return new Bubblewrap({ ...this.classes, ...more }, this.strict);
 	    }
 
 	     registerStrict(codec) {
-	        if (!this.strict)
-	            return;
+	        if (!this.strict) return;
 
 	        const knownPrototypes = [
 	            Object.prototype,
 	            Error.prototype,
 	            Undefined.prototype,
-	            ...Object.values(this.classes).map(cls => cls.prototype)
+	            ...Object.values(this.classes).map((cls) => cls.prototype),
 	        ];
 
 	        codec.register({
 	            type: msgPackEtypeStrict,
-	            encode: value => {
+	            encode: (value) => {
 	                if (typeof value === "object" && !Array.isArray(value)) {
 	                    if (knownPrototypes.includes(Object.getPrototypeOf(value)))
 	                        // this value is probably fine, please go on
@@ -5620,7 +5718,9 @@
 	                }
 	                return null;
 	            },
-	            decode: () => { throw new Error("Attempted to decode a dummy type"); }
+	            decode: () => {
+	                throw new Error("Attempted to decode a dummy type");
+	            },
 	        });
 	    }
 
@@ -5631,19 +5731,18 @@
 
 	        codec.register({
 	            type: msgPackEtypeUndef,
-	            encode: value => value instanceof Undefined ? dist$1.encode(null) : null,
-	            decode: () => undefined
+	            encode: (value) => (value instanceof Undefined ? dist$1.encode(null) : null),
+	            decode: () => undefined,
 	        });
 
 	        codec.register({
 	            type: msgPackEtypeClass,
-	            encode: _value => {
+	            encode: (_value) => {
 	                const entries = Object.entries(this.classes);
 	                // assume that later entries take precedence over earlier ones
 	                entries.reverse();
 	                for (const [name, Class] of entries) {
-	                    if (!(_value instanceof Class))
-	                        continue;
+	                    if (!(_value instanceof Class)) continue;
 
 	                    // @ts-ignore
 	                    const value = _value;
@@ -5653,52 +5752,47 @@
 
 	                    const raw = Object.entries(value);
 	                    const entries = raw.map(([key, value]) => {
-	                        if (value === undefined)
-	                            return [key, new Undefined()];
-	                        else
-	                            return [key, value];
+	                        if (value === undefined) return [key, new Undefined()];
+	                        else return [key, value];
 	                    });
 
-	                    return dist$1.encode([name, entries], { extensionCodec: codec })
+	                    return dist$1.encode([name, entries], { extensionCodec: codec });
 	                }
 
 	                return null;
 	            },
-	            decode: buffer => {
+	            decode: (buffer) => {
 	                const [name, raw] = dist$1.decode(buffer, { extensionCodec: codec }) ;
 	                const Class = this.classes[name];
 
 	                const deserializer = Class[deserialize];
-	                if (deserializer !== undefined)
-	                    return deserializer(raw);
+	                if (deserializer !== undefined) return deserializer(raw);
 
 	                const object = Object.create(Class.prototype);
-	                for (const [key, value] of raw )
-	                    object[key] = value;
+	                for (const [key, value] of raw ) object[key] = value;
 	                return object;
-	            }
+	            },
 	        });
 
 	        codec.register({
 	            type: msgPackEtypeError,
-	            encode: value => value instanceof Error ? dist$1.encode(value.message) : null,
-	            decode: buffer => new Error(dist$1.decode(buffer) )
+	            encode: (value) => (value instanceof Error ? dist$1.encode(value.message) : null),
+	            decode: (buffer) => new Error(dist$1.decode(buffer) ),
 	        });
 
 	        return codec;
 	    }
 
 	    encode(value) {
-	        if (!this.codec)
-	            this.codec = this.makeCodec();
+	        if (!this.codec) this.codec = this.makeCodec();
 
 	        return dist$1.encode(value, { extensionCodec: this.codec });
 	    }
 
-	    decode(buffer) {
-	        if (!this.codec)
-	            this.codec = this.makeCodec();
+	    decode(_buffer) {
+	        if (!this.codec) this.codec = this.makeCodec();
 
+	        const buffer = new Uint8Array(_buffer);
 	        return dist$1.decode(buffer, { extensionCodec: this.codec });
 	    }
 	}
@@ -5824,6 +5918,14 @@
 	            }
 	        })();
 	    }
+
+	    get polyLifecycle() {
+	        return {
+	            listFeatures: () => this.rpcClient.polyLifecycle().listFeatures()(),
+	            startFeature: (id, background) =>
+	                this.rpcClient.polyLifecycle().startFeature(id, background)(),
+	        };
+	    }
 	}
 
 	class AsyncPolyOut  {
@@ -5863,14 +5965,46 @@
 	    }
 	}
 
+	class AsyncPolyLifecycle  {
+	    constructor(  promise) {this.promise = promise;}
+
+	     async force() {
+	        const lifecycle = await this.promise;
+	        if (lifecycle) return lifecycle;
+	        throw new Error("Lifecycle is not implemented");
+	    }
+
+	    async listFeatures() {
+	        return (await this.force()).listFeatures();
+	    }
+
+	    async startFeature(id, background) {
+	        return (await this.force()).startFeature(id, background);
+	    }
+	}
+
 	class AsyncPod  {
+	    
 	    
 	    
 
 	    constructor(  promise,   dataFactory) {this.promise = promise;this.dataFactory = dataFactory;
 	        this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
 	        this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
+	        this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
 	    }
+	}
+
+	function expect(input, msg, decoder) {
+	    return pipeable_1.pipe(
+	        decoder.decode(input),
+	        Either.fold(
+	            (error) => {
+	                throw new Error(msg + "\n" + Decoder.draw(error));
+	            },
+	            (t) => t
+	        )
+	    );
 	}
 
 	const iframeInnerDecoder = Decoder.type({
@@ -5886,19 +6020,6 @@
 	    iframe: iframeInnerDecoder,
 	    fetch: fetchDecoder,
 	});
-
-	function parseSpec(spec) {
-	    const parsed = JSON.parse(spec);
-	    return pipeable_1.pipe(
-	        specDecoder.decode(parsed),
-	        Either.fold(
-	            () => {
-	                throw new Error("Could not decode spec");
-	            },
-	            (t) => t
-	        )
-	    );
-	}
 
 	async function podOfSpec(spec) {
 	    switch (spec.type) {
@@ -5919,7 +6040,7 @@
 
 	    if (cookie === undefined) return { type: "iframe" };
 
-	    return parseSpec(cookie);
+	    return expect(JSON.parse(cookie), "Failed to parse spec", specDecoder);
 	}
 
 	window.pod = new AsyncPod(podOfSpec(detectSpec()), new DataFactory(false));

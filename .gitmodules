@@ -1,6 +1,10 @@
-[submodule "Features/PodCheck"]
-	path = Features/PodCheck
+[submodule "Submodules/Features/podCheck-feature"]
+	path = Submodules/Features/podCheck-feature
 	url = git@github.com:polypoly-eu/podCheck-feature.git
-[submodule "Features/questionnaire-feature"]
-	path = Features/questionnaire-feature
+[submodule "Submodules/Features/questionnaire-feature"]
+	path = Submodules/Features/questionnaire-feature
 	url = git@github.com:polypoly-eu/questionnaire-feature.git
+[submodule "Submodules/podigree"]
+	path = Submodules/podigree
+	url = git@github.com:polypoly-eu/podigree.git
+
