@@ -11,6 +11,7 @@ import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import com.google.common.truth.Truth.assertThat
 import eu.polypoly.pod.android.polyIn.PolyInTestDouble
+import eu.polypoly.pod.android.polyIn.rdf.BlankNode
 import eu.polypoly.pod.android.polyIn.rdf.IRI
 import eu.polypoly.pod.android.polyIn.rdf.Quad
 import eu.polypoly.pod.android.polyOut.PolyOutTestDouble
@@ -59,6 +60,8 @@ class CommunicationThroughPodApiWorks {
         execute { canCallPolyInAddWithNoQuads() }
         execute { canPassSingleQuadToPolyInAdd() }
         execute { canPassMultipleQuadsToPolyInAdd() }
+        execute { addSupportsQuadsWithIRISubject() }
+        execute { addSupportsQuadsWithBlankNodeSubject() }
         execute { canPassEmptyMatcherToPolyInSelect() }
         execute { canPassMatcherWithSubjectToPolyInSelect() }
         execute { canPassMatcherWithPredicateToPolyInSelect() }
@@ -255,6 +258,50 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyIn.addWasCalled).isTrue()
         assertThat(polyIn.addParams).hasSize(2)
         assertThat(polyIn.addParams).containsExactlyElementsIn(arrayOf(quad1, quad2))
+    }
+
+    private fun addSupportsQuadsWithIRISubject() {
+        val polyIn = podApi.polyIn
+        val subject = "http://example.org/s"
+        val predicate = "http://example.org/p"
+        val `object` = "http://example.org/o"
+        val graph = "http://example.org/g"
+        val quad = Quad(IRI(subject), IRI(predicate), IRI(`object`), IRI(graph))
+        setInput(1, subject)
+        setInput(2, predicate)
+        setInput(3, `object`)
+        setInput(4, graph)
+        clickButton("comm.polyIn.add.quad_with_iri_subject")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.addWasCalled).isTrue()
+        assertThat(polyIn.addParams).hasSize(1)
+        assertThat(polyIn.addParams!![0]).isEqualTo(quad)
+    }
+
+    private fun addSupportsQuadsWithBlankNodeSubject() {
+        val polyIn = podApi.polyIn
+        val subject = "subject"
+        val predicate = "http://example.org/p"
+        val `object` = "http://example.org/o"
+        val graph = "http://example.org/g"
+        val quad = Quad(BlankNode(subject), IRI(predicate), IRI(`object`), IRI(graph))
+        setInput(1, subject)
+        setInput(2, predicate)
+        setInput(3, `object`)
+        setInput(4, graph)
+        clickButton("comm.polyIn.add.quad_with_blank_node_subject")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.addWasCalled).isTrue()
+        assertThat(polyIn.addParams).hasSize(1)
+        assertThat(polyIn.addParams!![0]).isEqualTo(quad)
     }
 
     private fun canPassEmptyMatcherToPolyInSelect() {

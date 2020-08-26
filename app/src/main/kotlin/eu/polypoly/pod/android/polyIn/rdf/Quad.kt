@@ -3,11 +3,14 @@ package eu.polypoly.pod.android.polyIn.rdf
 import eu.polypoly.bubblewrap.Codec
 
 data class Quad(
-    val subject: IRI,    // or BlankNode
+    val subject: QuadSubject,    // IRI or BlankNode
     val predicate: IRI,
     val `object`: IRI,    // or Literal or BlankNode
     val graph: IRI  // or BlankNode or constant DefaultGraph
 ) {
+
+    constructor(subject: IRI, predicate: IRI, `object`: IRI, graph: IRI) : this(IRISubject(subject), predicate, `object`, graph)
+    constructor(subject: BlankNode, predicate: IRI, `object`: IRI, graph: IRI) : this(BlankNodeSubject(subject), predicate, `object`, graph)
 
     companion object {
         val codec: Codec<Quad> =
@@ -19,7 +22,7 @@ data class Quad(
                         val `object` = it["object"] ?: throw IllegalArgumentException("Expected object")
                         val graph = it["graph"] ?: throw IllegalArgumentException("Expected graph")
                         Quad(
-                            IRI.codec.decode(subject),
+                            QuadSubject.codec.decode(subject),
                             IRI.codec.decode(predicate),
                             IRI.codec.decode(`object`),
                             IRI.codec.decode(graph)
@@ -27,7 +30,7 @@ data class Quad(
                     },
                     {
                         mapOf(
-                            Pair("subject", IRI.codec.encode(it.subject)),
+                            Pair("subject", QuadSubject.codec.encode(it.subject)),
                             Pair("predicate", IRI.codec.encode(it.predicate)),
                             Pair("object", IRI.codec.encode(it.`object`)),
                             Pair("graph", IRI.codec.encode(it.graph)),

@@ -91,6 +91,38 @@ function canCallPolyInAddWithMultipleQuads() {
     window.pod.polyIn.add(quads);
 }
 
+function addSupportsQuadsWithIRISubject() {
+    console.log(`addSupportsQuadsWithIRISubject()`);
+    let subject = getInput(1);
+    let predicate = getInput(2);
+    let object = getInput(3);
+    let graph = getInput(4);
+    let dataFactory = window.pod.dataFactory;
+    const quad = dataFactory.quad(
+        dataFactory.namedNode(subject),
+        dataFactory.namedNode(predicate),
+        dataFactory.namedNode(object),
+        dataFactory.namedNode(graph)
+    );
+    window.pod.polyIn.add([quad]);
+}
+
+function addSupportsQuadsWithBlankNodeSubject() {
+    console.log(`addSupportsQuadsWithBlankNodeSubject()`);
+    let subject = getInput(1);
+    let predicate = getInput(2);
+    let object = getInput(3);
+    let graph = getInput(4);
+    let dataFactory = window.pod.dataFactory;
+    const quad = dataFactory.quad(
+        dataFactory.blankNode(subject),
+        dataFactory.namedNode(predicate),
+        dataFactory.namedNode(object),
+        dataFactory.namedNode(graph)
+    );
+    window.pod.polyIn.add([quad]);
+}
+
 function canPassEmptyMatcherToPolyInSelect() {
     console.log("canPassEmptyMatcherToPolyInSelect()");
     window.pod.polyIn.select({});
