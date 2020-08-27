@@ -5,12 +5,14 @@ import eu.polypoly.bubblewrap.Codec
 data class Quad(
     val subject: QuadSubject,    // IRI or BlankNode
     val predicate: IRI,
-    val `object`: IRI,    // or Literal or BlankNode
+    val `object`: QuadObject,    // IRI or Literal or BlankNode
     val graph: IRI  // or BlankNode or constant DefaultGraph
 ) {
 
-    constructor(subject: IRI, predicate: IRI, `object`: IRI, graph: IRI) : this(IRISubject(subject), predicate, `object`, graph)
-    constructor(subject: BlankNode, predicate: IRI, `object`: IRI, graph: IRI) : this(BlankNodeSubject(subject), predicate, `object`, graph)
+    constructor(subject: IRI, predicate: IRI, `object`: IRI, graph: IRI) : this(IRISubject(subject), predicate, IRIObject(`object`), graph)
+    constructor(subject: BlankNode, predicate: IRI, `object`: IRI, graph: IRI) : this(BlankNodeSubject(subject), predicate, IRIObject(`object`), graph)
+    constructor(subject: IRI, predicate: IRI, `object`: BlankNode, graph: IRI) : this(IRISubject(subject), predicate, BlankNodeObject(`object`), graph)
+    constructor(subject: BlankNode, predicate: IRI, `object`: BlankNode, graph: IRI) : this(BlankNodeSubject(subject), predicate, BlankNodeObject(`object`), graph)
 
     companion object {
         val codec: Codec<Quad> =
@@ -24,7 +26,7 @@ data class Quad(
                         Quad(
                             QuadSubject.codec.decode(subject),
                             IRI.codec.decode(predicate),
-                            IRI.codec.decode(`object`),
+                            QuadObject.codec.decode(`object`),
                             IRI.codec.decode(graph)
                         )
                     },
@@ -32,7 +34,7 @@ data class Quad(
                         mapOf(
                             Pair("subject", QuadSubject.codec.encode(it.subject)),
                             Pair("predicate", IRI.codec.encode(it.predicate)),
-                            Pair("object", IRI.codec.encode(it.`object`)),
+                            Pair("object", QuadObject.codec.encode(it.`object`)),
                             Pair("graph", IRI.codec.encode(it.graph)),
                         )
                     }
