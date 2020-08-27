@@ -2,7 +2,7 @@ package eu.polypoly.pod.android.polyIn.rdf
 
 import eu.polypoly.bubblewrap.Codec
 import org.msgpack.value.Value
-import org.msgpack.value.ValueFactory.newArray
+import org.msgpack.value.ValueFactory.newMap
 import org.msgpack.value.ValueFactory.newString
 
 sealed class QuadGraph {
@@ -38,11 +38,10 @@ sealed class QuadGraph {
 data class IRIGraph(val graph: IRI) : QuadGraph()
 data class BlankNodeGraph(val graph: BlankNode) : QuadGraph()
 object DefaultGraph: QuadGraph() {
-    val msgPackValue: Value = newArray(
-        newString("@polypoly-eu/rdf.DefaultGraph"),
-        newArray(
-            newArray(newString("value"), newString("")),
-            newArray(newString("termType"), newString("DefaultGraph")),
+    val msgPackValue: Value = newMap(
+        mapOf(
+            Pair(newString("value"), newString("")),
+            Pair(newString("termType"), newString("DefaultGraph"))
         )
     )
 }
