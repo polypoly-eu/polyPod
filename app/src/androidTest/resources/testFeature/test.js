@@ -155,6 +155,22 @@ function addSupportsQuadsWithIRIGraph() {
     window.pod.polyIn.add([quad]);
 }
 
+function addSupportsQuadsWithBlankNodeGraph() {
+    console.log(`addSupportsQuadsWithBlankNodeGraph()`);
+    let subject = getInput(1);
+    let predicate = getInput(2);
+    let object = getInput(3);
+    let graph = getInput(4);
+    let dataFactory = window.pod.dataFactory;
+    const quad = dataFactory.quad(
+        dataFactory.namedNode(subject),
+        dataFactory.namedNode(predicate),
+        dataFactory.namedNode(object),
+        dataFactory.blankNode(graph)
+    );
+    window.pod.polyIn.add([quad]);
+}
+
 function addSupportsQuadsWithDefaultGraph() {
     console.log(`addSupportsQuadsWithDefaultGraph()`);
     let subject = getInput(1);

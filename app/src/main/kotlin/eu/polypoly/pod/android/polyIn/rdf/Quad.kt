@@ -13,6 +13,7 @@ data class Quad(
     constructor(subject: BlankNode, predicate: IRI, `object`: IRI, graph: IRI) : this(BlankNodeSubject(subject), predicate, IRIObject(`object`), IRIGraph(graph))
     constructor(subject: IRI, predicate: IRI, `object`: BlankNode, graph: IRI) : this(IRISubject(subject), predicate, BlankNodeObject(`object`), IRIGraph(graph))
     constructor(subject: BlankNode, predicate: IRI, `object`: BlankNode, graph: IRI) : this(BlankNodeSubject(subject), predicate, BlankNodeObject(`object`), IRIGraph(graph))
+    constructor(subject: IRI, predicate: IRI, `object`: IRI, graph: BlankNode) : this(IRISubject(subject), predicate, IRIObject(`object`), BlankNodeGraph(graph))
     constructor(subject: IRI, predicate: IRI, `object`: IRI, graph: DefaultGraph) : this(IRISubject(subject), predicate, IRIObject(`object`), graph)
 
     companion object {

@@ -65,6 +65,7 @@ class CommunicationThroughPodApiWorks {
         execute { addSupportsQuadsWithBlankNodeSubject() }
         execute { addSupportsQuadsWithBlankNodeObject() }
         execute { addSupportsQuadsWithIRIGraph() }
+        execute { addSupportsQuadsWithBlankNodeGraph() }
         execute { addSupportsQuadsWithDefaultGraph() }
         execute { canPassEmptyMatcherToPolyInSelect() }
         execute { canPassMatcherWithSubjectToPolyInSelect() }
@@ -342,6 +343,28 @@ class CommunicationThroughPodApiWorks {
         setInput(3, `object`)
         setInput(4, graph)
         clickButton("comm.polyIn.add.quad_with_iri_graph")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.addWasCalled).isTrue()
+        assertThat(polyIn.addParams).hasSize(1)
+        assertThat(polyIn.addParams!![0]).isEqualTo(quad)
+    }
+
+    private fun addSupportsQuadsWithBlankNodeGraph() {
+        val polyIn = podApi.polyIn
+        val subject = "http://example.org/s"
+        val predicate = "http://example.org/p"
+        val `object` = "http://example.org/o"
+        val graph = "graph"
+        val quad = Quad(IRI(subject), IRI(predicate), IRI(`object`), BlankNode(graph))
+        setInput(1, subject)
+        setInput(2, predicate)
+        setInput(3, `object`)
+        setInput(4, graph)
+        clickButton("comm.polyIn.add.quad_with_blank_node_graph")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
