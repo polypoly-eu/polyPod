@@ -9,13 +9,6 @@ data class Quad(
     val graph: QuadGraph  // IRI or BlankNode or constant DefaultGraph
 ) {
 
-    constructor(subject: IRI, predicate: IRI, `object`: IRI, graph: IRI) : this(IRISubject(subject), predicate, IRIObject(`object`), IRIGraph(graph))
-    constructor(subject: BlankNode, predicate: IRI, `object`: IRI, graph: IRI) : this(BlankNodeSubject(subject), predicate, IRIObject(`object`), IRIGraph(graph))
-    constructor(subject: IRI, predicate: IRI, `object`: BlankNode, graph: IRI) : this(IRISubject(subject), predicate, BlankNodeObject(`object`), IRIGraph(graph))
-    constructor(subject: BlankNode, predicate: IRI, `object`: BlankNode, graph: IRI) : this(BlankNodeSubject(subject), predicate, BlankNodeObject(`object`), IRIGraph(graph))
-    constructor(subject: IRI, predicate: IRI, `object`: IRI, graph: BlankNode) : this(IRISubject(subject), predicate, IRIObject(`object`), BlankNodeGraph(graph))
-    constructor(subject: IRI, predicate: IRI, `object`: IRI, graph: DefaultGraph) : this(IRISubject(subject), predicate, IRIObject(`object`), graph)
-
     companion object {
         val codec: Codec<Quad> =
             Codec.kvArray(Codec.string, Codec.id)
@@ -42,6 +35,65 @@ data class Quad(
                     }
                 )
                 .taggedClass("@polypoly-eu/rdf.Quad")
+
+        val builder = QuadBuilder
     }
 
+}
+
+class QuadBuilder {
+    companion object {
+        fun new(): QuadBuilder {
+            return QuadBuilder()
+        }
+    }
+
+    var subject: QuadSubject? = null
+    var predicate: IRI? = null
+    var `object`: QuadObject? = null
+    var graph: QuadGraph? = null
+
+    fun withSubject(subject: IRI): QuadBuilder {
+        this.subject = IRISubject(subject)
+        return this
+    }
+
+    fun withSubject(subject: BlankNode): QuadBuilder {
+        this.subject = BlankNodeSubject(subject)
+        return this
+    }
+
+    fun withPredicate(predicate: IRI): QuadBuilder {
+        this.predicate = predicate
+        return this
+    }
+
+    fun withObject(`object`: IRI): QuadBuilder {
+        this.`object` = IRIObject(`object`)
+        return this
+    }
+
+    fun withObject(`object`: BlankNode): QuadBuilder {
+        this.`object` = BlankNodeObject(`object`)
+        return this
+    }
+
+    fun withGraph(graph: IRI): QuadBuilder {
+        this.graph = IRIGraph(graph)
+        return this
+    }
+
+    fun withGraph(graph: BlankNode): QuadBuilder {
+        this.graph = BlankNodeGraph(graph)
+        return this
+    }
+
+    fun withDefaultGraph(): QuadBuilder {
+        this.graph = DefaultGraph
+        return this
+    }
+
+    fun build(): Quad {
+        return Quad(subject!!, predicate!!, `object`!!, graph!!)
+    }
 }

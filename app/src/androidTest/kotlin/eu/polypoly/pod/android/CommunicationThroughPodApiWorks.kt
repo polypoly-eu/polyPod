@@ -12,7 +12,6 @@ import androidx.test.rule.ActivityTestRule
 import com.google.common.truth.Truth.assertThat
 import eu.polypoly.pod.android.polyIn.PolyInTestDouble
 import eu.polypoly.pod.android.polyIn.rdf.BlankNode
-import eu.polypoly.pod.android.polyIn.rdf.DefaultGraph
 import eu.polypoly.pod.android.polyIn.rdf.IRI
 import eu.polypoly.pod.android.polyIn.rdf.Quad
 import eu.polypoly.pod.android.polyOut.PolyOutTestDouble
@@ -213,7 +212,12 @@ class CommunicationThroughPodApiWorks {
         val predicate = "http://example.org/p"
         val `object` = "http://example.org/o"
         val graph = "http://example.org/g"
-        val quad = Quad(IRI(subject), IRI(predicate), IRI(`object`), IRI(graph))
+        val quad = Quad.builder.new()
+            .withSubject(IRI(subject))
+            .withPredicate(IRI(predicate))
+            .withObject(IRI(`object`))
+            .withGraph(IRI(graph))
+            .build()
         setInput(1, subject)
         setInput(2, predicate)
         setInput(3, `object`)
@@ -236,7 +240,12 @@ class CommunicationThroughPodApiWorks {
         val predicate1 = "http://example.org/p1"
         val object1 = "http://example.org/o1"
         val graph1 = "http://example.org/g1"
-        val quad1 = Quad(IRI(subject1), IRI(predicate1), IRI(object1), IRI(graph1))
+        val quad1 = Quad.builder.new()
+            .withSubject(IRI(subject1))
+            .withPredicate(IRI(predicate1))
+            .withObject(IRI(object1))
+            .withGraph(IRI(graph1))
+            .build()
         setInput(1, subject1)
         setInput(2, predicate1)
         setInput(3, object1)
@@ -247,7 +256,12 @@ class CommunicationThroughPodApiWorks {
         val predicate2 = "http://example.org/p1"
         val object2 = "http://example.org/o1"
         val graph2 = "http://example.org/g1"
-        val quad2 = Quad(IRI(subject2), IRI(predicate2), IRI(object2), IRI(graph2))
+        val quad2 = Quad.builder.new()
+            .withSubject(IRI(subject2))
+            .withPredicate(IRI(predicate2))
+            .withObject(IRI(object2))
+            .withGraph(IRI(graph2))
+            .build()
         setInput(1, subject2)
         setInput(2, predicate2)
         setInput(3, object2)
@@ -271,7 +285,12 @@ class CommunicationThroughPodApiWorks {
         val predicate = "http://example.org/p"
         val `object` = "http://example.org/o"
         val graph = "http://example.org/g"
-        val quad = Quad(IRI(subject), IRI(predicate), IRI(`object`), IRI(graph))
+        val quad = Quad.builder.new()
+            .withSubject(IRI(subject))
+            .withPredicate(IRI(predicate))
+            .withObject(IRI(`object`))
+            .withGraph(IRI(graph))
+            .build()
         setInput(1, subject)
         setInput(2, predicate)
         setInput(3, `object`)
@@ -293,7 +312,12 @@ class CommunicationThroughPodApiWorks {
         val predicate = "http://example.org/p"
         val `object` = "http://example.org/o"
         val graph = "http://example.org/g"
-        val quad = Quad(BlankNode(subject), IRI(predicate), IRI(`object`), IRI(graph))
+        val quad = Quad.builder.new()
+            .withSubject(BlankNode(subject))
+            .withPredicate(IRI(predicate))
+            .withObject(IRI(`object`))
+            .withGraph(IRI(graph))
+            .build()
         setInput(1, subject)
         setInput(2, predicate)
         setInput(3, `object`)
@@ -315,7 +339,12 @@ class CommunicationThroughPodApiWorks {
         val predicate = "http://example.org/p"
         val `object` = "object"
         val graph = "http://example.org/g"
-        val quad = Quad(IRI(subject), IRI(predicate), BlankNode(`object`), IRI(graph))
+        val quad = Quad.builder.new()
+            .withSubject(IRI(subject))
+            .withPredicate(IRI(predicate))
+            .withObject(BlankNode(`object`))
+            .withGraph(IRI(graph))
+            .build()
         setInput(1, subject)
         setInput(2, predicate)
         setInput(3, `object`)
@@ -337,7 +366,12 @@ class CommunicationThroughPodApiWorks {
         val predicate = "http://example.org/p"
         val `object` = "http://example.org/o"
         val graph = "http://example.org/g"
-        val quad = Quad(IRI(subject), IRI(predicate), IRI(`object`), IRI(graph))
+        val quad = Quad.builder.new()
+            .withSubject(IRI(subject))
+            .withPredicate(IRI(predicate))
+            .withObject(IRI(`object`))
+            .withGraph(IRI(graph))
+            .build()
         setInput(1, subject)
         setInput(2, predicate)
         setInput(3, `object`)
@@ -359,7 +393,12 @@ class CommunicationThroughPodApiWorks {
         val predicate = "http://example.org/p"
         val `object` = "http://example.org/o"
         val graph = "graph"
-        val quad = Quad(IRI(subject), IRI(predicate), IRI(`object`), BlankNode(graph))
+        val quad = Quad.builder.new()
+            .withSubject(IRI(subject))
+            .withPredicate(IRI(predicate))
+            .withObject(IRI(`object`))
+            .withGraph(BlankNode(graph))
+            .build()
         setInput(1, subject)
         setInput(2, predicate)
         setInput(3, `object`)
@@ -380,7 +419,12 @@ class CommunicationThroughPodApiWorks {
         val subject = "http://example.org/s"
         val predicate = "http://example.org/p"
         val `object` = "http://example.org/o"
-        val quad = Quad(IRI(subject), IRI(predicate), IRI(`object`), DefaultGraph)
+        val quad = Quad.builder.new()
+            .withSubject(IRI(subject))
+            .withPredicate(IRI(predicate))
+            .withObject(IRI(`object`))
+            .withDefaultGraph()
+            .build()
         setInput(1, subject)
         setInput(2, predicate)
         setInput(3, `object`)
@@ -504,7 +548,12 @@ class CommunicationThroughPodApiWorks {
 
     private fun canGetArrayWithSingleQuadFromPolyInSelect() {
         val polyIn = podApi.polyIn
-        val quad = Quad(IRI("subject"), IRI("predicate"), IRI("object"), IRI("graph"))
+        val quad = Quad.builder.new()
+            .withSubject(IRI("subject"))
+            .withPredicate(IRI("predicate"))
+            .withObject(IRI("object"))
+            .withGraph(IRI("graph"))
+            .build()
         val expectedResult = """[{"subject":{"value":"subject","termType":"NamedNode"},"predicate":{"value":"predicate","termType":"NamedNode"},"object":{"value":"object","termType":"NamedNode"},"graph":{"value":"graph","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
         clickButton("comm.polyIn.select.get_array_with_single_quad")
@@ -521,8 +570,18 @@ class CommunicationThroughPodApiWorks {
 
     private fun canGetArrayWithMultipleQuadsFromPolyInSelect() {
         val polyIn = podApi.polyIn
-        val quad1 = Quad(IRI("subject1"), IRI("predicate1"), IRI("object1"), IRI("graph1"))
-        val quad2 = Quad(IRI("subject2"), IRI("predicate2"), IRI("object2"), IRI("graph2"))
+        val quad1 = Quad.builder.new()
+            .withSubject(IRI("subject1"))
+            .withPredicate(IRI("predicate1"))
+            .withObject(IRI("object1"))
+            .withGraph(IRI("graph1"))
+            .build()
+        val quad2 = Quad.builder.new()
+            .withSubject(IRI("subject2"))
+            .withPredicate(IRI("predicate2"))
+            .withObject(IRI("object2"))
+            .withGraph(IRI("graph2"))
+            .build()
         val expectedResult = """[{"subject":{"value":"subject1","termType":"NamedNode"},"predicate":{"value":"predicate1","termType":"NamedNode"},"object":{"value":"object1","termType":"NamedNode"},"graph":{"value":"graph1","termType":"NamedNode"}},{"subject":{"value":"subject2","termType":"NamedNode"},"predicate":{"value":"predicate2","termType":"NamedNode"},"object":{"value":"object2","termType":"NamedNode"},"graph":{"value":"graph2","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad1, quad2)
         clickButton("comm.polyIn.select.get_array_with_multiple_quads")
