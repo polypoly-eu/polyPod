@@ -139,6 +139,37 @@ function addSupportsQuadsWithBlankNodeObject() {
     window.pod.polyIn.add([quad]);
 }
 
+function addSupportsQuadsWithIRIGraph() {
+    console.log(`addSupportsQuadsWithIRIGraph()`);
+    let subject = getInput(1);
+    let predicate = getInput(2);
+    let object = getInput(3);
+    let graph = getInput(4);
+    let dataFactory = window.pod.dataFactory;
+    const quad = dataFactory.quad(
+        dataFactory.namedNode(subject),
+        dataFactory.namedNode(predicate),
+        dataFactory.namedNode(object),
+        dataFactory.namedNode(graph)
+    );
+    window.pod.polyIn.add([quad]);
+}
+
+function addSupportsQuadsWithDefaultGraph() {
+    console.log(`addSupportsQuadsWithDefaultGraph()`);
+    let subject = getInput(1);
+    let predicate = getInput(2);
+    let object = getInput(3);
+    let dataFactory = window.pod.dataFactory;
+    const quad = dataFactory.quad(
+        dataFactory.namedNode(subject),
+        dataFactory.namedNode(predicate),
+        dataFactory.namedNode(object),
+        dataFactory.defaultGraph()
+    );
+    window.pod.polyIn.add([quad]);
+}
+
 function canPassEmptyMatcherToPolyInSelect() {
     console.log("canPassEmptyMatcherToPolyInSelect()");
     window.pod.polyIn.select({});
