@@ -32,6 +32,18 @@ function callFetchWithSingleHeaderInStringForm() {
     window.pod.polyOut.fetch("http://httpbin.org/headers", {headers: headers});
 }
 
+function callFetchWithMultipleHeadersInStringForm() {
+    console.log("callFetchWithMultipleHeadersInStringForm()");
+    let key1 = getInput(1);
+    let value1 = getInput(2);
+    let key2 = getInput(3);
+    let value2 = getInput(4);
+    let headers = {};
+    headers[key1] = value1;
+    headers[key2] = value2;
+    window.pod.polyOut.fetch("http://httpbin.org/headers", {headers: headers});
+}
+
 function verifyBodyOfFetchResponse() {
     console.log("verifyBodyOfFetchResponse()");
     window.pod.polyOut.fetch("http://httpbin.org/robots.txt")

@@ -46,6 +46,7 @@ class CommunicationThroughPodApiWorks {
         execute { whenCalledWithNoMethodSpecified_methodIsEmpty() }
         execute { canPassMethodToFetch() }
         execute { canPassSingleHeaderAsString() }
+        execute { canPassMultipleHeadersAsString() }
         execute { canPassStaticResponseFromFetch() }
         execute { canPassResponseStatusFromFetch() }
         execute { canPassResponseOKFromFetch() }
@@ -133,7 +134,25 @@ class CommunicationThroughPodApiWorks {
         assertThat(headers).containsEntry(key, value)
     }
 
-    // TODO - what about multiple headers?
+    private fun canPassMultipleHeadersAsString() {
+        val key1 = "key1"
+        val value1 = "value1"
+        val key2 = "key2"
+        val value2 = "value2"
+        setInputs(key1, value1, key2, value2)
+        clickButton("comm.polyOut.fetch.multiple_string_headers")
+        val polyOut = podApi.polyOut
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyOut.fetchWasCalled).isTrue()
+        val headers = polyOut.fetchInit.headers
+        assertThat(headers).hasSize(2)
+        assertThat(headers).containsEntry(key1, value1)
+        assertThat(headers).containsEntry(key2, value2)
+    }
 
     private fun canPassStaticResponseFromFetch() {
         val polyOut = podApi.polyOut
@@ -682,6 +701,13 @@ class CommunicationThroughPodApiWorks {
         setInput(1, val1)
         setInput(2, val2)
         setInput(3, val3)
+    }
+
+    private fun setInputs(val1: String, val2: String, val3: String, val4: String) {
+        setInput(1, val1)
+        setInput(2, val2)
+        setInput(3, val3)
+        setInput(4, val4)
     }
 
     private fun setInputs(quad: Quad) {
