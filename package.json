@@ -37,7 +37,7 @@
     "@rdfjs/data-model": "^1.1.2",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.10",
-    "@types/n3": "^1.4.3",
+    "@types/n3": "^1.4.4",
     "@types/rdfjs__dataset": "^1.0.3",
     "chokidar-cli": "^2.1.0",
     "eslint": "^7.7.0",
