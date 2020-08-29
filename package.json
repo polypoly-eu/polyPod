@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/polypoly-eu/poly-api#readme",
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.1",
+    "@polypoly-eu/eslint-config-polypoly": "0.0.2",
     "@polypoly-eu/rdf-spec": "^0.1.0",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.1.0",
