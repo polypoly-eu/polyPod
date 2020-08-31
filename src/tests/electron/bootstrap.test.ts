@@ -1,13 +1,66 @@
 import { DefaultPod } from "@polypoly-eu/poly-api";
-import { Server } from "http";
+import { IncomingMessage, ServerResponse, RequestListener, Server } from "http";
 import { once } from "events";
 import { dataset } from "@rdfjs/dataset";
 import { promises as fs } from "fs";
 import fetch from "node-fetch";
-import { assertPod, assets, completion } from "../_bootstrap";
-import { createServer } from "http";
+import http from "http";
 import { RemoteServerPod } from "../../remote";
 import { iframeOuterPort } from "@polypoly-eu/port-authority";
+import { dataFactory } from "@polypoly-eu/rdf";
+import { assert } from "chai";
+import createServer from "connect";
+import { join } from "path";
+
+function assertPod(pod: DefaultPod): void {
+    const expectedQuad = dataFactory.quad(
+        dataFactory.namedNode("http://example.org/s"),
+        dataFactory.namedNode("http://example.org/p"),
+        dataFactory.namedNode("http://example.org/o")
+    );
+
+    assert.equal(pod.store.size, 1);
+    assert.isTrue(pod.store.has(expectedQuad));
+}
+
+function completion(_window: Window): Promise<void> {
+    return new Promise((resolve) => {
+        _window.addEventListener("message", (event) => {
+            if (event.data === "completed") resolve();
+        });
+    });
+}
+
+function assets(): RequestListener {
+    const app = createServer();
+    app.use("/feature.js", async (request: IncomingMessage, response: ServerResponse) => {
+        response.setHeader("Content-Type", "text/javascript");
+        response.writeHead(200);
+        response.write(await fs.readFile(join(__dirname, "../data/feature.js")));
+        response.end();
+    });
+    app.use("/pod.js", async (request: IncomingMessage, response: ServerResponse) => {
+        response.setHeader("Content-Type", "text/javascript");
+        response.writeHead(200);
+        response.write(await fs.readFile(join(__dirname, "../../../dist/bootstrap.js")));
+        response.end();
+    });
+    app.use("/index.html", (request: IncomingMessage, response: ServerResponse) => {
+        response.setHeader("Content-Type", "text/html");
+        response.writeHead(200);
+        response.write(`
+            <!DOCTYPE HTML>
+            <html>
+                <body>
+                    <script src="pod.js"></script>
+                    <script src="feature.js"></script>
+                </body>
+            </html>
+        `);
+        response.end();
+    });
+    return app;
+}
 
 describe("Bootstrap (Electron)", () => {
     const port = 12345;
@@ -19,7 +72,7 @@ describe("Bootstrap (Electron)", () => {
         pod = new DefaultPod(dataset(), fs as any, fetch);
         const app = assets();
 
-        server = createServer(app);
+        server = http.createServer(app);
         server.listen(port);
         await once(server, "listening");
     });
