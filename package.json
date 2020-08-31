@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/polypoly-eu/aop-ts#readme",
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.1",
+    "@polypoly-eu/eslint-config-polypoly": "0.0.2",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.10",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
