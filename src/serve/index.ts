@@ -1,18 +1,18 @@
-import type {Server, ServerResponse} from "http";
-import {once} from "events";
-import type {Pod} from "@polypoly-eu/poly-api";
-import {RemoteServerPod} from "@polypoly-eu/podigree";
-import {join} from "path";
-import type {Manifest} from "@polypoly-eu/customs";
-import type {RemoteClientSpec} from "@polypoly-eu/podigree/dist/bootstrap";
-import createServer, {IncomingMessage, NextHandleFunction} from "connect";
+import type { Server, ServerResponse } from "http";
+import { once } from "events";
+import type { Pod } from "@polypoly-eu/poly-api";
+import { RemoteServerPod } from "@polypoly-eu/podigree";
+import { join } from "path";
+import type { Manifest } from "@polypoly-eu/customs";
+import type { RemoteClientSpec } from "@polypoly-eu/podigree/dist/bootstrap";
+import createServer, { IncomingMessage, NextHandleFunction } from "connect";
 import serveStatic from "serve-static";
-import {promises as fs} from "fs";
+import { promises as fs } from "fs";
 
 export function cookieMiddleware(uri: string): NextHandleFunction {
     const spec: RemoteClientSpec = {
         type: "fetch",
-        uri
+        uri,
     };
     const cookie = encodeURIComponent(JSON.stringify(spec));
     return (request, response, next) => {
@@ -29,7 +29,10 @@ export async function serve(
 ): Promise<Server> {
     const app = createServer();
 
-    const bootstrap = await fs.readFile(require.resolve("@polypoly-eu/podigree/dist/bootstrap.js"), "utf-8");
+    const bootstrap = await fs.readFile(
+        require.resolve("@polypoly-eu/podigree/dist/bootstrap.js"),
+        "utf-8"
+    );
 
     // FIXME enable csp
 

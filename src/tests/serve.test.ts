@@ -1,28 +1,22 @@
-import {Server} from "http";
-import {serve} from "../serve";
-import {DefaultPod} from "@polypoly-eu/poly-api";
-import {parse, Range} from "semver";
-import {once} from "events";
+import { Server } from "http";
+import { serve } from "../serve";
+import { DefaultPod } from "@polypoly-eu/poly-api";
+import { parse, Range } from "semver";
+import { once } from "events";
 import fetch from "node-fetch";
 
 describe("Serve", () => {
-
     const port = 12345;
     let pod: DefaultPod;
     let server: Server;
 
     beforeAll(async () => {
-        server = await serve(
-            port,
-            pod,
-            __dirname,
-            {
-                name: "test",
-                version: parse("0.0.0")!,
-                api: new Range("0.0.0"),
-                root: "data"
-            }
-        );
+        server = await serve(port, pod, __dirname, {
+            name: "test",
+            version: parse("0.0.0")!,
+            api: new Range("0.0.0"),
+            root: "data",
+        });
     });
 
     afterAll(async () => {
@@ -37,7 +31,7 @@ describe("Serve", () => {
 
     it("RPC", async () => {
         const response = await fetch(`http://localhost:${port}/rpc`, {
-            method: "post"
+            method: "post",
         });
         expect(response.status).toBe(200);
     });
@@ -46,5 +40,4 @@ describe("Serve", () => {
         const response = await fetch(`http://localhost:${port}/whatever`);
         expect(response.status).toBe(404);
     });
-
 });

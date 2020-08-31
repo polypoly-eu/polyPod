@@ -1,9 +1,7 @@
-import {preparePage, raiseOnFailure} from "../testkit";
+import { preparePage, raiseOnFailure } from "../testkit";
 
-export async function test(
-    url: string
-): Promise<void> {
-    const {default: puppeteer} = await import("puppeteer");
+export async function test(url: string): Promise<void> {
+    const { default: puppeteer } = await import("puppeteer");
 
     const browser = await puppeteer.launch();
 
@@ -14,8 +12,7 @@ export async function test(
         const results = await resultSupplier();
         console.log(`Results: ${JSON.stringify(results)}`);
         raiseOnFailure(results);
-    }
-    finally {
+    } finally {
         await browser.close();
     }
 }
