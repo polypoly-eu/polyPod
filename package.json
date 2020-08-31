@@ -41,7 +41,7 @@
     "@types/benchmark": "^1.0.33",
     "@types/jest": "^26.0.10",
     "@types/n3": "^1.4.4",
-    "@types/rdf-js": "^3.0.3",
+    "@types/rdf-js": "^4.0.0",
     "benchmark": "^2.1.4",
     "chokidar-cli": "^2.1.0",
     "eslint": "^7.7.0",
