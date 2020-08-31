@@ -13,9 +13,9 @@ import androidx.test.espresso.web.assertion.WebViewAssertions.webMatches
 import androidx.test.espresso.web.sugar.Web.onWebView
 import androidx.test.espresso.web.webdriver.DriverAtoms.*
 import androidx.test.espresso.web.webdriver.Locator
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.rule.ActivityTestRule
 import eu.polypoly.pod.android.polyIn.PolyInTestDouble
 import eu.polypoly.pod.android.polyOut.PolyOutTestDouble
 import org.hamcrest.CoreMatchers.`is`
@@ -33,7 +33,7 @@ import org.junit.runner.RunWith
 class FeatureFragmentInstrumentedTest {
 
     @get:Rule
-    val activityRule = ActivityTestRule(MainActivity::class.java)
+    val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
     fun whenStartingTheApp_firstFragmentIsShown() {
