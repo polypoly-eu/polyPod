@@ -116,19 +116,20 @@ export interface PolyLifecycle {
  * requests, as long as that is transparent to the Features. To that extent, the API is designed to be asynchronous,
  * i.e. all methods return promises. The only exception is the RDF data factory; see [[Pod.dataFactory]] for details.
  *
- * The API is provided to the Feature as a global variable (`window.pod`). The API may be initialized asynchronously.
- * The Pod signals availability of the API to the Feature by triggering a custom event with the name `"podReady"`.
- * Features should listen on this event and only then carry out their logic. Listening can be done as follows:
+ * The API is provided to the Feature as a global variable (`window.pod`). The API is initialized eagerly. The Feature
+ * is required to include a `script` tag referencing a well-known path to a JavaScript file in order
+ * for the API to be bootstrapped properly:
  *
- * ```javascript
- * window.addEventListener("podReady", () => {
- *   // window.pod initialized after this point
- * }
+ * ```html
+ * <script src="/pod.js"></script>
  * ```
  *
- * Additionally, Features may carry out their custom initialization logic concurrently. Note that the API initialization
- * process may only be started by the Pod once the `load` event has been triggered. In other words, if the Feature
- * executes JavaScript code synchronously on load, the API may only be available afterwards.
+ * The Feature should load this script file before any custom code is executed. Otherwise, the
+ * presence of the `window.pod` object is not guaranteed. It should be noted that asynchronous calls
+ * to the Pod APIs may only be resolved when the `load` event of the document has triggered.
+ *
+ * This notwithstanding, Features may carry out custom initialization logic that does not depend on
+ * the API concurrently.
  */
 export interface Pod {
     /**

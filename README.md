@@ -35,32 +35,35 @@ Secondly, it queries the Pod for all stored triples and renders them as an HTML 
     <body>
         <div class="feature"></div>
 
+        <!-- bootstrapping script provided by the Pod -->
+        <script src="/pod.js"></script>
+
         <script>
-            window.addEventListener("podReady", async () => {
-                // API is also attached to the event
-                const {dataFactory} = window.pod;
-                const quad = dataFactory.quad(
-                    dataFactory.namedNode("http://example.org/s"),
-                    dataFactory.namedNode("http://example.org/p"),
-                    dataFactory.namedNode("http://example.org/o")
-                );
-                await pod.polyIn.add(quad);
-                const selected = await pod.polyIn.select({});
-                const ul = document.createElement("ul");
-                const root = document.getElementById("feature");
-                root.innerHTML = "";
-                root.appendChild(ul);
-                for (const quad of selected) {
-                    console.dir(quad);
-                    const li = document.createElement("li");
-                    ul.appendChild(li);
-                    li.appendChild(document.createTextNode(JSON.stringify(quad)));
-                }
-            });
+            const {dataFactory} = window.pod;
+            const quad = dataFactory.quad(
+                dataFactory.namedNode("http://example.org/s"),
+                dataFactory.namedNode("http://example.org/p"),
+                dataFactory.namedNode("http://example.org/o")
+            );
+            await pod.polyIn.add(quad);
+            const selected = await pod.polyIn.select({});
+            const ul = document.createElement("ul");
+            const root = document.getElementById("feature");
+            root.innerHTML = "";
+            root.appendChild(ul);
+            for (const quad of selected) {
+                console.dir(quad);
+                const li = document.createElement("li");
+                ul.appendChild(li);
+                li.appendChild(document.createTextNode(JSON.stringify(quad)));
+            }
         </script>
     </body>
 </html>
 ```
+
+Loading `/pod.js` is sufficient for bootstrapping the API and make the `window.pod` object available.
+Except for the `/pod.js` resource that is provided by the Pod, all other resources needed by the Feature should be referenced using relative paths.
 
 ## Structure
 
