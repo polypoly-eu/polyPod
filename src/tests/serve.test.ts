@@ -24,11 +24,6 @@ describe("Serve", () => {
         await once(server, "close");
     });
 
-    it("Cookie header", async () => {
-        const response = await fetch(`http://localhost:${port}`);
-        expect(response.headers.has("Set-Cookie")).toBeTruthy();
-    });
-
     it("RPC", async () => {
         const response = await fetch(`http://localhost:${port}/rpc`, {
             method: "post",
