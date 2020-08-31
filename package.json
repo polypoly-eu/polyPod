@@ -32,7 +32,7 @@
     "dist/*.d.ts"
   ],
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.1",
+    "@polypoly-eu/eslint-config-polypoly": "0.0.2",
     "@polypoly-eu/rdf": "^0.1.0",
     "@polypoly-eu/rdf-spec": "^0.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
