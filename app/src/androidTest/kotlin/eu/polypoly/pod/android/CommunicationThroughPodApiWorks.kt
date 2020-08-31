@@ -34,7 +34,7 @@ import java.time.Instant
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class CommunicationThroughPodApiWorks {
-    lateinit var podApi: PodApiTestDouble
+    private lateinit var podApi: PodApiTestDouble
 
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java)
@@ -61,7 +61,9 @@ class CommunicationThroughPodApiWorks {
         execute { canPassMultipleQuadsToPolyInAdd() }
         execute { addSupportsQuadsWithIRISubject() }
         execute { addSupportsQuadsWithBlankNodeSubject() }
+        execute { addSupportsQuadsWithIRIObject() }
         execute { addSupportsQuadsWithBlankNodeObject() }
+        execute { addSupportsQuadsWithLiteralObject() }
         execute { addSupportsQuadsWithIRIGraph() }
         execute { addSupportsQuadsWithBlankNodeGraph() }
         execute { addSupportsQuadsWithDefaultGraph() }
@@ -76,6 +78,7 @@ class CommunicationThroughPodApiWorks {
         execute { canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect() }
         execute { canGetArrayWithSingleQuadWithIRIObjectFromPolyInSelect() }
         execute { canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect() }
+        execute { canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect() }
         execute { canGetArrayWithSingleQuadWithIRIGraphFromPolyInSelect() }
         execute { canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect() }
         execute { canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect() }
@@ -312,6 +315,23 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyIn.addParams!![0]).isEqualTo(quad)
     }
 
+    private fun addSupportsQuadsWithIRIObject() {
+        val polyIn = podApi.polyIn
+        val quad = Quad.builder.newDefault()
+            .withObject(IRI("http://example.org/o"))
+            .build()
+        setInputs(quad)
+        clickButton("comm.polyIn.add.quad_with_iri_object")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.addWasCalled).isTrue()
+        assertThat(polyIn.addParams).hasSize(1)
+        assertThat(polyIn.addParams!![0]).isEqualTo(quad)
+    }
+
     private fun addSupportsQuadsWithBlankNodeObject() {
         val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
@@ -319,6 +339,23 @@ class CommunicationThroughPodApiWorks {
             .build()
         setInputs(quad)
         clickButton("comm.polyIn.add.quad_with_blank_node_object")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+        })
+        assertThat(polyIn.addWasCalled).isTrue()
+        assertThat(polyIn.addParams).hasSize(1)
+        assertThat(polyIn.addParams!![0]).isEqualTo(quad)
+    }
+
+    private fun addSupportsQuadsWithLiteralObject() {
+        val polyIn = podApi.polyIn
+        val quad = Quad.builder.newDefault()
+            .withObject(Literal("string"))
+            .build()
+        setInputs(quad)
+        clickButton("comm.polyIn.add.quad_with_literal_object")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -578,6 +615,25 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyIn.selectWasCalled).isTrue()
     }
 
+    private fun canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect() {
+        val polyIn = podApi.polyIn
+        val quad = Quad.builder.newDefault()
+            .withObject(Literal("string"))
+            .build()
+        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"Literal","datatype":{"value":"http://www.w3.org/2001/XMLSchema#string","termType":"NamedNode"}},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
+        polyIn.selectReturn = listOf(quad)
+        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        waitUntil({
+            onFeature()
+                .withElement(findElement(Locator.ID, "status"))
+                .check(webMatches(getText(), `is`("All OK")))
+            onFeature()
+                .withElement(findElement(Locator.ID, "result"))
+                .check(webMatches(getText(), `is`(expectedResult)))
+        })
+        assertThat(polyIn.selectWasCalled).isTrue()
+    }
+
     private fun canGetArrayWithSingleQuadWithIRIGraphFromPolyInSelect() {
         val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
@@ -766,6 +822,7 @@ fun QuadObject.asString(): String {
     return when (this) {
         is IRIObject -> `object`.iri
         is BlankNodeObject -> `object`.value
+        is LiteralObject -> `object`.value
     }
 }
 

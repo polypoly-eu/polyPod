@@ -78,6 +78,11 @@ class QuadBuilder {
         return this
     }
 
+    fun withObject(`object`: Literal): QuadBuilder {
+        this.`object` = LiteralObject(`object`)
+        return this
+    }
+
     fun withGraph(graph: IRI): QuadBuilder {
         this.graph = IRIGraph(graph)
         return this
