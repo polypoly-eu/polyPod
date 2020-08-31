@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/polypoly-eu/rdf-spec#readme",
   "devDependencies": {
-    "@graphy/core.data.factory": "^4.3.0",
+    "@graphy/core.data.factory": "^4.3.2",
     "@graphy/memory.dataset.fast": "^4.3.0",
     "@polypoly-eu/eslint-config-polypoly": "0.0.1",
     "@rdfjs/data-model": "^1.1.2",
