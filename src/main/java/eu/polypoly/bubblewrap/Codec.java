@@ -14,6 +14,23 @@ import java.util.stream.Stream;
 
 public interface Codec<T> {
 
+    final class Choice<T, U extends T> {
+        final Class<U> clazz;
+        final Codec<U> codec;
+
+        public Choice(Class<U> clazz, Codec<U> codec) {
+            this.clazz = clazz;
+            this.codec = codec;
+        }
+
+        Optional<Value> tryEncode(T t) {
+            if (clazz.isAssignableFrom(t.getClass()))
+                return Optional.of(codec.encode(clazz.cast(t)));
+
+            return Optional.empty();
+        }
+    }
+
     byte msgPackEtypeUndef = 1;
     byte msgPackEtypeClass = 2;
     byte msgPackEtypeError = 3;
@@ -242,6 +259,10 @@ public interface Codec<T> {
                 return decoded;
             }
         };
+    }
+
+    static <T> Codec<T> choice(Codec.Choice<T, ? extends T>... choices) {
+        return new ChoiceCodec<T>(Arrays.asList(choices));
     }
 
     Codec<Boolean> bool = new Codec<Boolean>() {

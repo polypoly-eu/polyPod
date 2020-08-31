@@ -112,3 +112,4 @@ docs
 build
 
 .jqwik-database
+out

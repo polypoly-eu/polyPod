@@ -7,7 +7,7 @@ import net.jqwik.api.Tuple;
 
 import java.util.Map;
 
-class BubblewrapTest {
+class CodecTest {
 
     @Group
     class DoubleSpec implements CodecSpec<Double> {
