@@ -17,7 +17,6 @@ import eu.polypoly.pod.android.polyIn.PolyIn
 import eu.polypoly.pod.android.polyOut.PolyOut
 import eu.polypoly.pod.android.postoffice.PostOfficeMessageCallback
 import java.io.File
-import java.nio.file.Files
 import java.util.zip.ZipFile
 
 /**
@@ -109,14 +108,23 @@ open class FeatureFragment : Fragment() {
                 logger.debug("FeaturesPathHandler, path '{}' not found, skipping", path)
                 return null
             }
-            val mimeType = try {
-                Files.probeContentType(File(path).toPath())
-            } catch (ex: Exception) {
-                "text/plain"
-            }
+            val mimeType = guessMimeType(path)
 
             logger.debug("FeaturesPathHandler, handling path: '{}', entry: '{}', mimeType: '{}'", path, entry.name, mimeType)
             return WebResourceResponse(mimeType, null, featureFile.getInputStream(entry))
+        }
+
+        private fun guessMimeType(path: String): String {
+            return when (path.substringAfterLast(".")) {
+                "html" -> "text/html"
+                "js" -> "application/javascript"
+                "css" -> "text/css"
+                "png" -> "image/png"
+                "jpg" -> "image/jpeg"
+                "svg" -> "image/svg+xml"
+                "woff2" -> "font/woff2"
+                else -> "text/plain"
+            }
         }
     }
 }

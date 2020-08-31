@@ -17,7 +17,7 @@ import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.time.Instant
+import java.util.*
 
 /**
  * Idea - those tests verify that the communication between the Feature and the Pod works.
@@ -789,8 +789,8 @@ class CommunicationThroughPodApiWorks {
     private fun waitUntil(function: () -> Unit, timeout: Long = 2000) {
         // TODO - is there a better way?
         var lastError: AssertionError? = null
-        val until = Instant.now().plusMillis(timeout)
-        while (Instant.now().isBefore(until)) {
+        val until = Date(Date().time + timeout)
+        while (Date().before(until)) {
             try {
                 function.invoke()
                 return
