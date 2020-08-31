@@ -287,7 +287,7 @@ class CommunicationThroughPodApiWorks {
             .withSubject(IRI("http://example.org/s"))
             .build()
         setInputs(quad)
-        clickButton("comm.polyIn.add.quad_with_iri_subject")
+        clickButton("comm.polyIn.add.quad_with_named_node_subject")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -321,7 +321,7 @@ class CommunicationThroughPodApiWorks {
             .withObject(IRI("http://example.org/o"))
             .build()
         setInputs(quad)
-        clickButton("comm.polyIn.add.quad_with_iri_object")
+        clickButton("comm.polyIn.add.quad_with_named_node_object")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -372,7 +372,7 @@ class CommunicationThroughPodApiWorks {
             .withGraph(IRI("http://example.org/g"))
             .build()
         setInputs(quad)
-        clickButton("comm.polyIn.add.quad_with_iri_graph")
+        clickButton("comm.polyIn.add.quad_with_named_node_graph")
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
