@@ -33,8 +33,8 @@
     "@graphy/core.data.factory": "^4.3.2",
     "@graphy/memory.dataset.fast": "^4.3.2",
     "@polypoly-eu/eslint-config-polypoly": "0.0.2",
-    "@polypoly-eu/rdf-spec": "^0.2.0",
-    "@rdfjs/data-model": "^1.1.2",
+    "@polypoly-eu/rdf-spec": "^0.3.1",
+    "@rdfjs/data-model": "^1.2.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.10",
     "@types/n3": "^1.4.4",
@@ -51,6 +51,6 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@types/rdf-js": "^3.0.3"
+    "@types/rdf-js": "^4.0.0"
   }
 }

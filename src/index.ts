@@ -6,7 +6,10 @@
 
 import * as RDF from "rdf-js";
 
-export function convert<T extends RDF.Term>(t: T, dataFactory: RDF.DataFactory<any>): T;
+export function convert<T extends Exclude<RDF.Term, RDF.BaseQuad>>(
+    t: T,
+    dataFactory: RDF.DataFactory<any>
+): T;
 export function convert<InQuad extends RDF.BaseQuad, OutQuad extends RDF.BaseQuad>(
     quad: InQuad,
     dataFactory: RDF.DataFactory<InQuad, OutQuad>
@@ -24,37 +27,32 @@ export function convert<InQuad extends RDF.BaseQuad, OutQuad extends RDF.BaseQua
  * assert.ok(output.equals(input));
  * ```
  */
-export function convert(input: RDF.BaseQuad | RDF.Term, dataFactory: RDF.DataFactory<any>): any {
-    // @ts-ignore
-    if ("termType" in input && input.termType !== "Quad") {
-        const term: RDF.Term = input;
+export function convert(input: RDF.Term, dataFactory: RDF.DataFactory<any>): RDF.Term {
+    const term: RDF.Term = input;
 
-        switch (term.termType) {
-            case "BlankNode":
-                return dataFactory.blankNode(term.value);
-            case "DefaultGraph":
-                return dataFactory.defaultGraph();
-            case "Literal":
-                return dataFactory.literal(
-                    term.value,
-                    term.language === "" ? convert(term.datatype, dataFactory) : term.language
-                );
-            case "NamedNode":
-                return dataFactory.namedNode(term.value);
-            case "Variable":
-                if (dataFactory.variable) return dataFactory.variable(term.value);
-                else throw new Error("Variables are not supported");
-            default:
-                throw new Error("Unknown term type");
-        }
-    } else {
-        const quad = input as RDF.BaseQuad;
-
-        return dataFactory.quad(
-            convert(quad.subject, dataFactory),
-            convert(quad.predicate, dataFactory),
-            convert(quad.object, dataFactory),
-            convert(quad.graph, dataFactory)
-        );
+    switch (term.termType) {
+        case "BlankNode":
+            return dataFactory.blankNode(term.value);
+        case "DefaultGraph":
+            return dataFactory.defaultGraph();
+        case "Literal":
+            return dataFactory.literal(
+                term.value,
+                term.language === "" ? convert(term.datatype, dataFactory) : term.language
+            );
+        case "NamedNode":
+            return dataFactory.namedNode(term.value);
+        case "Variable":
+            if (dataFactory.variable) return dataFactory.variable(term.value);
+            else throw new Error("Variables are not supported");
+        default:
+            // backwards compatibility: term type should be "Quad", but some implementations don't
+            // set it accordingly
+            return dataFactory.quad(
+                convert(term.subject, dataFactory),
+                convert(term.predicate, dataFactory),
+                convert(term.object, dataFactory),
+                convert(term.graph, dataFactory)
+            );
     }
 }
