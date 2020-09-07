@@ -40,7 +40,7 @@
     "@types/n3": "^1.4.4",
     "@types/rdfjs__dataset": "^1.0.3",
     "chokidar-cli": "^2.1.0",
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.1",
     "fast-check": "^2.2.1",
     "jest": "^26.4.2",
     "n3": "^1.6.2",
