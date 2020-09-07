@@ -55,6 +55,6 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@msgpack/msgpack": "^1.12.2"
+    "@msgpack/msgpack": "^2.0.0"
   }
 }
