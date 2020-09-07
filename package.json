@@ -29,7 +29,7 @@
     "puppeteer": "^3.3.0"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.3",
+    "@polypoly-eu/eslint-config-polypoly": "0.0.4",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/connect": "^3.4.33",
     "@types/jest": "^26.0.10",
