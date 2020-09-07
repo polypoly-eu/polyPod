@@ -31,7 +31,7 @@
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.4",
     "@polypoly-eu/rdf-spec": "^0.3.1",
-    "@rdfjs/data-model": "^1.1.2",
+    "@rdfjs/data-model": "^1.2.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.13",
     "chokidar-cli": "^2.1.0",
