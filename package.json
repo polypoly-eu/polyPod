@@ -15,7 +15,7 @@
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^5.1.5",
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.1",
     "eslint-plugin-react": "^7.20.6",
     "faucet-pipeline-core": "^1.5.0",
     "faucet-pipeline-essugar": "0.0.2",
