@@ -1,0 +1,12 @@
+plugins {
+    id "com.github.node-gradle.node"
+}
+
+task build {
+    dependsOn npm_install, npm_run_build
+}
+
+node {
+    download = true
+    version = "14.6.0"
+}

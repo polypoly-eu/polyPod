@@ -2,30 +2,30 @@
 
 let quads = [];
 
-function simpleJavaScriptCall() {
+export function simpleJavaScriptCall() {
     console.log("simpleJavaScriptCall()");
 }
 
-function awaitPodObject() {
+export function awaitPodObject() {
     console.log(`pod: ${window.pod}`);
 }
 
-function simpleFetch() {
+export function simpleFetch() {
     console.log("simpleFetch()");
     window.pod.polyOut.fetch("https://httpbin.org/robots.txt");
 }
 
-function callFetchWithNoMethod() {
+export function callFetchWithNoMethod() {
     console.log("callFetchWithNoMethod()");
     window.pod.polyOut.fetch("https://httpbin.org/robots.txt");
 }
 
-function callFetchWithPostMethod() {
+export function callFetchWithPostMethod() {
     console.log("callFetchWithPostMethod()");
     window.pod.polyOut.fetch("http://httpbin.org/post", {method: "POST"});
 }
 
-function callFetchWithSingleHeaderInStringForm() {
+export function callFetchWithSingleHeaderInStringForm() {
     console.log("callFetchWithSingleHeaderInStringForm()");
     let key = getInput(1);
     let value = getInput(2);
@@ -34,7 +34,7 @@ function callFetchWithSingleHeaderInStringForm() {
     window.pod.polyOut.fetch("http://httpbin.org/headers", {headers: headers});
 }
 
-function callFetchWithMultipleHeadersInStringForm() {
+export function callFetchWithMultipleHeadersInStringForm() {
     console.log("callFetchWithMultipleHeadersInStringForm()");
     let key1 = getInput(1);
     let value1 = getInput(2);
@@ -46,7 +46,7 @@ function callFetchWithMultipleHeadersInStringForm() {
     window.pod.polyOut.fetch("http://httpbin.org/headers", {headers: headers});
 }
 
-function verifyBodyOfFetchResponse() {
+export function verifyBodyOfFetchResponse() {
     console.log("verifyBodyOfFetchResponse()");
     window.pod.polyOut.fetch("http://httpbin.org/robots.txt")
         .then(response =>
@@ -55,7 +55,7 @@ function verifyBodyOfFetchResponse() {
                 .then(text => setResult(text)));
 }
 
-function verifyResponseStatusOfFetchCall() {
+export function verifyResponseStatusOfFetchCall() {
     console.log("verifyResponseStatusOfFetchCall()");
     window.pod.polyOut.fetch("http://httpbin.org/robots.txt")
         .then(response => {
@@ -66,7 +66,7 @@ function verifyResponseStatusOfFetchCall() {
         });
 }
 
-function verifyResponseOkOfFetchCall() {
+export function verifyResponseOkOfFetchCall() {
     console.log("verifyResponseOkOfFetchCall()");
     window.pod.polyOut.fetch("http://httpbin.org/robots.txt")
         .then(response => {
@@ -77,41 +77,41 @@ function verifyResponseOkOfFetchCall() {
         });
 }
 
-function callFetchWithPostMethodAndBody() {
+export function callFetchWithPostMethodAndBody() {
     console.log("callFetchWithPostMethodAndBOdy()");
     let body = getInput(1);
     window.pod.polyOut.fetch("http://httpbin.org/post", {method: "POST", body: body});
 }
 
-function canCallPolyInAddWithNoQuads() {
+export function canCallPolyInAddWithNoQuads() {
     console.log("canCallPolyInAddWithNoQuads()");
     window.pod.polyIn.add([]);
 }
 
-function canCallPolyInAddWithSingleQuad() {
+export function canCallPolyInAddWithSingleQuad() {
     console.log("canCallPolyInAddWithSingleQuad()");
     const quad = QuadBuilder.fromInputs().build();
     window.pod.polyIn.add([quad]);
 }
 
-function addQuadToCollection() {
+export function addQuadToCollection() {
     console.log(`addQuadToCollection(), current value: '${quads}'`);
     const quad = QuadBuilder.fromInputs().build();
     quads.push(quad);
 }
 
-function canCallPolyInAddWithMultipleQuads() {
+export function canCallPolyInAddWithMultipleQuads() {
     console.log(`canCallPolyInAddWithMultipleQuads(), quads: '${quads}'`);
     window.pod.polyIn.add(quads);
 }
 
-function addSupportsQuadsWithNamedNodeSubject() {
+export function addSupportsQuadsWithNamedNodeSubject() {
     console.log(`addSupportsQuadsWithNamedNodeSubject()`);
     const quad = QuadBuilder.fromInputs().build();
     window.pod.polyIn.add([quad]);
 }
 
-function addSupportsQuadsWithBlankNodeSubject() {
+export function addSupportsQuadsWithBlankNodeSubject() {
     console.log(`addSupportsQuadsWithBlankNodeSubject()`);
     let subject = getInput(1);
     const quad = QuadBuilder.fromInputs()
@@ -120,7 +120,7 @@ function addSupportsQuadsWithBlankNodeSubject() {
     window.pod.polyIn.add([quad]);
 }
 
-function addSupportsQuadsWithNamedNodeObject() {
+export function addSupportsQuadsWithNamedNodeObject() {
     console.log(`addSupportsQuadsWithNamedNodeObject()`);
     let object = getInput(3);
     const quad = QuadBuilder.fromInputs()
@@ -129,7 +129,7 @@ function addSupportsQuadsWithNamedNodeObject() {
     window.pod.polyIn.add([quad]);
 }
 
-function addSupportsQuadsWithBlankNodeObject() {
+export function addSupportsQuadsWithBlankNodeObject() {
     console.log(`addSupportsQuadsWithBlankNodeObject()`);
     let object = getInput(3);
     const quad = QuadBuilder.fromInputs()
@@ -138,7 +138,7 @@ function addSupportsQuadsWithBlankNodeObject() {
     window.pod.polyIn.add([quad]);
 }
 
-function addSupportsQuadsWithLiteralObject() {
+export function addSupportsQuadsWithLiteralObject() {
     console.log(`addSupportsQuadsWithLiteralObject()`);
     let object = getInput(3);
     const quad = QuadBuilder.fromInputs()
@@ -147,7 +147,7 @@ function addSupportsQuadsWithLiteralObject() {
     window.pod.polyIn.add([quad]);
 }
 
-function addSupportsQuadsWithNamedNodeGraph() {
+export function addSupportsQuadsWithNamedNodeGraph() {
     console.log(`addSupportsQuadsWithNamedNodeGraph()`);
     let graph = getInput(4);
     const quad = QuadBuilder.fromInputs()
@@ -156,7 +156,7 @@ function addSupportsQuadsWithNamedNodeGraph() {
     window.pod.polyIn.add([quad]);
 }
 
-function addSupportsQuadsWithBlankNodeGraph() {
+export function addSupportsQuadsWithBlankNodeGraph() {
     console.log(`addSupportsQuadsWithBlankNodeGraph()`);
     let graph = getInput(4);
     const quad = QuadBuilder.fromInputs()
@@ -165,7 +165,7 @@ function addSupportsQuadsWithBlankNodeGraph() {
     window.pod.polyIn.add([quad]);
 }
 
-function addSupportsQuadsWithDefaultGraph() {
+export function addSupportsQuadsWithDefaultGraph() {
     console.log(`addSupportsQuadsWithDefaultGraph()`);
     const quad = QuadBuilder.fromInputs()
         .withGraph(window.pod.dataFactory.defaultGraph())
@@ -173,33 +173,33 @@ function addSupportsQuadsWithDefaultGraph() {
     window.pod.polyIn.add([quad]);
 }
 
-function canPassEmptyMatcherToPolyInSelect() {
+export function canPassEmptyMatcherToPolyInSelect() {
     console.log("canPassEmptyMatcherToPolyInSelect()");
     window.pod.polyIn.select({});
 }
 
-function canPassMatcherWithSubjectToPolyInSelect() {
+export function canPassMatcherWithSubjectToPolyInSelect() {
     console.log("canPassMatcherWithSubjectToPolyInSelect()");
     const subject = getInput(1);
     let matcher = {subject: window.pod.dataFactory.namedNode(subject)};
     window.pod.polyIn.select(matcher);
 }
 
-function canPassMatcherWithPredicateToPolyInSelect() {
+export function canPassMatcherWithPredicateToPolyInSelect() {
     console.log("canPassMatcherWithPredicateToPolyInSelect()");
     const predicate = getInput(1);
     let matcher = {predicate: window.pod.dataFactory.namedNode(predicate)};
     window.pod.polyIn.select(matcher);
 }
 
-function canPassMatcherWithObjectToPolyInSelect() {
+export function canPassMatcherWithObjectToPolyInSelect() {
     console.log("canPassMatcherWithObjectToPolyInSelect()");
     const object = getInput(1);
     let matcher = {object: window.pod.dataFactory.namedNode(object)};
     window.pod.polyIn.select(matcher);
 }
 
-function canPassMatcherWithAllThreeFieldsToPolyInSelect() {
+export function canPassMatcherWithAllThreeFieldsToPolyInSelect() {
     console.log("canPassMatcherWithAllThreeFieldsToPolyInSelect()");
     const subject = getInput(1);
     const predicate = getInput(2);
@@ -209,7 +209,7 @@ function canPassMatcherWithAllThreeFieldsToPolyInSelect() {
     window.pod.polyIn.select(matcher);
 }
 
-function canGetEmptyArrayFromPolyInSelect() {
+export function canGetEmptyArrayFromPolyInSelect() {
     console.log("canGetEmptyArrayFromPolyInSelect()");
     window.pod.polyIn.select({})
         .then(result => {
@@ -217,7 +217,7 @@ function canGetEmptyArrayFromPolyInSelect() {
         });
 }
 
-function canGetArrayWithSingleQuadFromPolyInSelect() {
+export function canGetArrayWithSingleQuadFromPolyInSelect() {
     console.log("canGetArrayWithSingleQuadFromPolyInSelect()");
     window.pod.polyIn.select({})
         .then(result => {
@@ -225,7 +225,7 @@ function canGetArrayWithSingleQuadFromPolyInSelect() {
         });
 }
 
-function canGetArrayWithMultipleQuadsFromPolyInSelect() {
+export function canGetArrayWithMultipleQuadsFromPolyInSelect() {
     console.log("canGetArrayWithMultipleQuadsFromPolyInSelect()");
     window.pod.polyIn.select({})
         .then(result => {
@@ -233,7 +233,7 @@ function canGetArrayWithMultipleQuadsFromPolyInSelect() {
         });
 }
 
-async function execute(test) {
+export async function execute(test) {
     setStatus("Running...");
     await awaitPodApi();
     try {
@@ -273,16 +273,11 @@ function setResult(result) {
 }
 
 class QuadBuilder {
-    #subject;
-    #predicate;
-    #object;
-    #graph;
-
     constructor(subject, predicate, object, graph) {
-        this.#subject = subject;
-        this.#predicate = predicate;
-        this.#object = object;
-        this.#graph = graph;
+        this.subject = subject;
+        this.predicate = predicate;
+        this.object = object;
+        this.graph = graph;
     }
 
     static fromInputs() {
@@ -295,21 +290,21 @@ class QuadBuilder {
     }
 
     withSubject(subject) {
-        this.#subject = subject;
+        this.subject = subject;
         return this;
     }
 
     withObject(object) {
-        this.#object = object;
+        this.object = object;
         return this;
     }
 
     withGraph(graph) {
-        this.#graph = graph;
+        this.graph = graph;
         return this;
     }
 
     build() {
-        return window.pod.dataFactory.quad(this.#subject, this.#predicate, this.#object, this.#graph);
+        return window.pod.dataFactory.quad(this.subject, this.predicate, this.object, this.graph);
     }
 }

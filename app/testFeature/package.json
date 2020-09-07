@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "faucet"
+  },
+  "devDependencies": {
+    "faucet-pipeline-js": "^2.1.6",
+    "faucet-pipeline-static": "^1.2.0"
+  }
+}

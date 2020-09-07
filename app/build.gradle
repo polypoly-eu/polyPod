@@ -16,9 +16,10 @@ task buildFeatureContainer(type: Copy) {
 }
 
 task buildTestFeature(type: Zip) {
+    dependsOn ":app:testFeature:build"
     archiveFileName = "testFeature.zip"
     destinationDirectory = file("$buildDir/")
-    from "$projectDir/src/androidTest/resources/testFeature/"
+    from "$projectDir/testFeature/dist"
 }
 
 tasks.whenTaskAdded { task ->
