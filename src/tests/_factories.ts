@@ -4,6 +4,12 @@ import RDFJS from "@rdfjs/data-model";
 import Graphy from "@graphy/core.data.factory";
 import { DataFactory as N3 } from "n3";
 
+// TODO <https://github.com/blake-regalia/graphy.js/pull/34>
+Object.assign(Object.getPrototypeOf(Graphy.quad()), {
+    termType: "Quad",
+    value: "",
+});
+
 export const factories: Record<string, DataFactory> = {
     "@rdfjs/data-model": RDFJS,
     "@graphy/core.data.factory": Graphy,

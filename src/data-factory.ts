@@ -397,6 +397,9 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                 assert.equal(predicate.equals(quad.predicate), true);
                 assert.equal(object.equals(quad.object), true);
                 assert.equal(graph.equals(quad.graph), true);
+
+                assert.equal(quad.termType, "Quad");
+                assert.equal(quad.value, "");
             });
 
             it("should create an object .graph set to DefaultGraph if the argument isn't given", () => {
@@ -407,6 +410,9 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                 const quad = this.dataFactory.quad(subject, predicate, object);
 
                 assert.equal(quad.graph.equals(graph), true);
+
+                assert.equal(quad.termType, "Quad");
+                assert.equal(quad.value, "");
             });
 
             describe(".equals", () => {
@@ -421,6 +427,18 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                     assert.equal(quad1.equals(quad2), true);
                 });
 
+                it("should return true even if the other equal quad is from a non-RDF* factory", () => {
+                    const subject = this.dataFactory.namedNode("http://example.org/subject");
+                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
+                    const object = this.dataFactory.namedNode("http://example.org/object");
+                    const graph = this.dataFactory.namedNode("http://example.org/graph");
+                    const quad1 = this.dataFactory.quad(subject, predicate, object, graph);
+                    const quad2 = { subject, predicate, object, graph };
+
+                    // @ts-ignore
+                    assert.equal(quad1.equals(quad2), true);
+                });
+
                 it("should return false if the subject of the other quad is not the same", () => {
                     const subject1 = this.dataFactory.namedNode("http://example.org/subject");
                     const subject2 = this.dataFactory.namedNode("http://example.com/subject");
@@ -430,6 +448,19 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                     const quad1 = this.dataFactory.quad(subject1, predicate, object, graph);
                     const quad2 = this.dataFactory.quad(subject2, predicate, object, graph);
 
+                    assert.equal(quad1.equals(quad2), false);
+                });
+
+                it("should return false even if the other non-equal quad is from a non-RDF* factory", () => {
+                    const subject1 = this.dataFactory.namedNode("http://example.org/subject");
+                    const subject2 = this.dataFactory.namedNode("http://example.com/subject");
+                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
+                    const object = this.dataFactory.namedNode("http://example.org/object");
+                    const graph = this.dataFactory.namedNode("http://example.org/graph");
+                    const quad1 = this.dataFactory.quad(subject1, predicate, object, graph);
+                    const quad2 = { subject: subject2, predicate, object, graph };
+
+                    // @ts-ignore
                     assert.equal(quad1.equals(quad2), false);
                 });
 
@@ -477,6 +508,44 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                     const quad = this.dataFactory.quad(subject, predicate, object, graph);
 
                     assert.equal(quad.equals(null!), false);
+                });
+
+                it("should return false if value is another term", () => {
+                    const subject = this.dataFactory.namedNode("http://example.org/subject");
+                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
+                    const object = this.dataFactory.namedNode("http://example.org/object");
+                    const graph = this.dataFactory.namedNode("http://example.org/graph");
+                    const quad = this.dataFactory.quad(subject, predicate, object, graph);
+
+                    assert.equal(
+                        quad.equals(this.dataFactory.namedNode("http://example.org/subject")),
+                        false
+                    );
+                    assert.equal(quad.equals(this.dataFactory.literal("abc")), false);
+                    if (this.dataFactory.variable)
+                        assert.equal(quad.equals(this.dataFactory.variable("var")), false);
+                    assert.equal(quad.equals(this.dataFactory.blankNode("bnode")), false);
+                    assert.equal(quad.equals(this.dataFactory.defaultGraph()), false);
+                });
+
+                it("should return true for an equal nested quad", () => {
+                    const subject = this.dataFactory.quad(
+                        this.dataFactory.namedNode("http://example.org/subjectInner1"),
+                        this.dataFactory.namedNode("http://example.org/predicateInner1"),
+                        this.dataFactory.namedNode("http://example.org/objectInner1")
+                    );
+                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
+                    const object = this.dataFactory.quad(
+                        this.dataFactory.namedNode("http://example.org/subjectInner2"),
+                        this.dataFactory.namedNode("http://example.org/predicateInner2"),
+                        this.dataFactory.namedNode("http://example.org/objectInner2"),
+                        this.dataFactory.namedNode("http://example.org/graphInner2")
+                    );
+                    const graph = this.dataFactory.namedNode("http://example.org/graph");
+                    const quad1 = this.dataFactory.quad(subject, predicate, object, graph);
+                    const quad2 = this.dataFactory.quad(subject, predicate, object, graph);
+
+                    assert.equal(quad1.equals(quad2), true);
                 });
             });
         });

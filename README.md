@@ -27,6 +27,7 @@ Currently, the following libraries are covered:
 * [graphy.js](https://graphy.link/), with two caveats:
   * `memory.dataset.fast` only works with quads from the `core.data.factory` factory, not with other quads
   * `memory.dataset.fast` does not implement the `DatasetCoreFactory` interface (see test for details)
+  * `core.data.factory` only supports RDF.js up to version 3 (pending support for version 4)
 * [N3.js](https://github.com/rdfjs/N3.js) (only data factory)
 
 The following implementations are not spec-compliant:

@@ -27,7 +27,7 @@ import { BaseQuad, DataFactory, NamedNode } from "rdf-js";
  */
 export function namespace<Q extends BaseQuad>(
     baseIRI: string,
-    dataFactory: DataFactory<Q>
+    dataFactory: Pick<DataFactory<Q>, "namedNode">
 ): Record<string, NamedNode> {
     return new Proxy(
         {},
