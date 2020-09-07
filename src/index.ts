@@ -31,10 +31,10 @@ export abstract class Model {
     }
 }
 
-export class NamedNode extends Model implements RDF.NamedNode {
+export class NamedNode<Iri extends string = string> extends Model implements RDF.NamedNode {
     termType: "NamedNode" = "NamedNode";
 
-    constructor(public value: string) {
+    constructor(public value: Iri) {
         super();
         Object.freeze(this);
     }
@@ -118,9 +118,14 @@ export class Quad implements RDF.Quad {
         Object.freeze(this);
     }
 
-    equals(other: RDF.BaseQuad | null | undefined): boolean {
+    termType: "Quad" = "Quad";
+    value: "" = "";
+
+    equals(other: RDF.Term | null | undefined): boolean {
+        // `|| !other.termType` is for backwards-compatibility with old factories without RDF* support.
         return (
             !!other &&
+            (other.termType === "Quad" || !other.termType) &&
             other.subject.equals(this.subject) &&
             other.predicate.equals(this.predicate) &&
             other.object.equals(this.object) &&
@@ -130,9 +135,15 @@ export class Quad implements RDF.Quad {
 }
 
 const prototypes = {
-    subject: [NamedNode.prototype, BlankNode.prototype, Variable.prototype],
+    subject: [NamedNode.prototype, BlankNode.prototype, Variable.prototype, Quad.prototype],
     predicate: [NamedNode.prototype, Variable.prototype],
-    object: [NamedNode.prototype, Literal.prototype, BlankNode.prototype, Variable.prototype],
+    object: [
+        NamedNode.prototype,
+        Literal.prototype,
+        BlankNode.prototype,
+        Variable.prototype,
+        Quad.prototype,
+    ],
     graph: [DefaultGraph.prototype, NamedNode.prototype, BlankNode.prototype, Variable.prototype],
 };
 
@@ -199,7 +210,7 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         return new Literal(value, languageOrDatatype);
     }
 
-    namedNode(value: string): NamedNode {
+    namedNode<Iri extends string = string>(value: Iri): NamedNode<Iri> {
         if (this.strict) {
             if (typeof value !== "string") throw new Error("Expected string");
         }

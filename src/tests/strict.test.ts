@@ -1,4 +1,4 @@
-import { ConvertSpec, DataFactorySpec } from "@polypoly-eu/rdf-spec";
+import { DataFactorySpec } from "@polypoly-eu/rdf-spec";
 import { DataFactory } from "../index";
 import * as Foreign from "@rdfjs/data-model";
 
@@ -6,14 +6,6 @@ const dataFactory = new DataFactory(true);
 
 describe("Spec", () => {
     new DataFactorySpec(dataFactory).run();
-});
-
-describe("Conversion this → @rdfjs/data-model", () => {
-    new ConvertSpec(dataFactory, Foreign).run();
-});
-
-describe("Conversion @rdfjs/data-model → this", () => {
-    new ConvertSpec(Foreign, dataFactory).run();
 });
 
 describe("Strict", () => {
