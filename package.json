@@ -25,6 +25,10 @@
     "url": "https://github.com/polypoly-eu/rdf/issues"
   },
   "homepage": "https://github.com/polypoly-eu/rdf#readme",
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
   "dependencies": {
     "@types/rdf-js": "^4.0.0"
   },
