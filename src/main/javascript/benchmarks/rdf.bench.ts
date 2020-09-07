@@ -5,7 +5,7 @@ import { Quad } from "rdf-js";
 import { promises as fs } from "fs";
 import { Bubblewrap, Classes } from "../index";
 import * as RDF from "@polypoly-eu/rdf";
-import { convert } from "@polypoly-eu/rdf-spec";
+import { convert } from "@polypoly-eu/rdf-convert";
 import * as assert from "assert";
 
 const suite = new Suite();
