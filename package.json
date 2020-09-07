@@ -32,7 +32,7 @@
     "dist/*.d.ts"
   ],
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.2",
+    "@polypoly-eu/eslint-config-polypoly": "0.0.4",
     "@polypoly-eu/rdf": "^0.1.0",
     "@polypoly-eu/rdf-spec": "^0.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
@@ -46,13 +46,13 @@
     "chokidar-cli": "^2.1.0",
     "eslint": "^7.8.1",
     "fast-check": "^2.2.1",
-    "jest": "^25.5.4",
+    "jest": "^26.4.2",
     "n3": "^1.6.3",
     "prettier": "^2.1.1",
     "rollup": "^2.26.10",
-    "ts-jest": "^25.5.1",
+    "ts-jest": "^26.3.0",
     "typedoc": "^0.19.1",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
   },
   "dependencies": {
     "@msgpack/msgpack": "^2.0.0"
