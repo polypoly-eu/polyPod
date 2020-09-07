@@ -12,7 +12,7 @@ export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
     blankNode: Arbitrary<RDF.BlankNode>;
     literal: Arbitrary<RDF.Literal>;
     variable?: Arbitrary<RDF.Variable>;
-    term: Arbitrary<RDF.Term>;
+    term: Arbitrary<Exclude<RDF.Term, RDF.BaseQuad>>;
     triple: Arbitrary<Q>;
     quad: Arbitrary<Q>;
 }
