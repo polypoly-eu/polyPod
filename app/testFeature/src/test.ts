@@ -1,6 +1,7 @@
-"use strict";
+import {Pod} from "@polypoly-eu/poly-api";
+import * as RDF from "rdf-js";
 
-let quads = [];
+let quads: Array<RDF.Quad> = [];
 
 export function simpleJavaScriptCall() {
     console.log("simpleJavaScriptCall()");
@@ -85,24 +86,24 @@ export function callFetchWithPostMethodAndBody() {
 
 export function canCallPolyInAddWithNoQuads() {
     console.log("canCallPolyInAddWithNoQuads()");
-    window.pod.polyIn.add([]);
+    window.pod.polyIn.add();
 }
 
 export function canCallPolyInAddWithSingleQuad() {
     console.log("canCallPolyInAddWithSingleQuad()");
     const quad = QuadBuilder.fromInputs().build();
-    window.pod.polyIn.add([quad]);
+    window.pod.polyIn.add(quad);
 }
 
 export function canCallPolyInAddWithMultipleQuads() {
     console.log(`canCallPolyInAddWithMultipleQuads(), quads: '${quads}'`);
-    window.pod.polyIn.add(quads);
+    window.pod.polyIn.add(...quads);
 }
 
 export function addSupportsQuadsWithNamedNodeSubject() {
     console.log(`addSupportsQuadsWithNamedNodeSubject()`);
     const quad = QuadBuilder.fromInputs().build();
-    window.pod.polyIn.add([quad]);
+    window.pod.polyIn.add(quad);
 }
 
 export function addSupportsQuadsWithBlankNodeSubject() {
@@ -111,7 +112,7 @@ export function addSupportsQuadsWithBlankNodeSubject() {
     const quad = QuadBuilder.fromInputs()
         .withSubject(window.pod.dataFactory.blankNode(subject))
         .build();
-    window.pod.polyIn.add([quad]);
+    window.pod.polyIn.add(quad);
 }
 
 export function addSupportsQuadsWithNamedNodeObject() {
@@ -120,7 +121,7 @@ export function addSupportsQuadsWithNamedNodeObject() {
     const quad = QuadBuilder.fromInputs()
         .withObject(window.pod.dataFactory.namedNode(object))
         .build();
-    window.pod.polyIn.add([quad]);
+    window.pod.polyIn.add(quad);
 }
 
 export function addSupportsQuadsWithBlankNodeObject() {
@@ -129,7 +130,7 @@ export function addSupportsQuadsWithBlankNodeObject() {
     const quad = QuadBuilder.fromInputs()
         .withObject(window.pod.dataFactory.blankNode(object))
         .build();
-    window.pod.polyIn.add([quad]);
+    window.pod.polyIn.add(quad);
 }
 
 export function addSupportsQuadsWithLiteralObject() {
@@ -138,7 +139,7 @@ export function addSupportsQuadsWithLiteralObject() {
     const quad = QuadBuilder.fromInputs()
         .withObject(window.pod.dataFactory.literal(object))
         .build();
-    window.pod.polyIn.add([quad]);
+    window.pod.polyIn.add(quad);
 }
 
 export function addSupportsQuadsWithNamedNodeGraph() {
@@ -147,7 +148,7 @@ export function addSupportsQuadsWithNamedNodeGraph() {
     const quad = QuadBuilder.fromInputs()
         .withGraph(window.pod.dataFactory.namedNode(graph))
         .build();
-    window.pod.polyIn.add([quad]);
+    window.pod.polyIn.add(quad);
 }
 
 export function addSupportsQuadsWithBlankNodeGraph() {
@@ -156,7 +157,7 @@ export function addSupportsQuadsWithBlankNodeGraph() {
     const quad = QuadBuilder.fromInputs()
         .withGraph(window.pod.dataFactory.blankNode(graph))
         .build();
-    window.pod.polyIn.add([quad]);
+    window.pod.polyIn.add(quad);
 }
 
 export function addSupportsQuadsWithDefaultGraph() {
@@ -164,7 +165,7 @@ export function addSupportsQuadsWithDefaultGraph() {
     const quad = QuadBuilder.fromInputs()
         .withGraph(window.pod.dataFactory.defaultGraph())
         .build();
-    window.pod.polyIn.add([quad]);
+    window.pod.polyIn.add(quad);
 }
 
 export function canPassEmptyMatcherToPolyInSelect() {
@@ -238,11 +239,11 @@ export function addQuadToCollection() {
     quads.push(quad);
 }
 
-export async function execute(test) {
+export async function execute(test: () => void) {
     setStatus("Running...");
     await awaitPodApi();
     try {
-        test();
+        await test();
         setStatus("All OK");
     } catch (e) {
         console.log(`Something went wrong: ${e}`);
@@ -255,7 +256,7 @@ function setStatus(status) {
     document.getElementById("status").innerText = status;
 }
 
-async function awaitPodApi() {
+async function awaitPodApi(): Promise<Pod> {
     return new Promise(resolve => {
         let timerId;
         timerId = setInterval(() => {
@@ -268,8 +269,8 @@ async function awaitPodApi() {
     });
 }
 
-function getInput(i) {
-    return document.getElementById(`input.${i}`).value;
+function getInput(i): string {
+    return (document.getElementById(`input.${i}`) as HTMLInputElement).value;
 }
 
 function setResult(result) {
@@ -278,14 +279,19 @@ function setResult(result) {
 }
 
 class QuadBuilder {
-    constructor(subject, predicate, object, graph) {
+    private subject: RDF.Quad_Subject;
+    private predicate: RDF.Quad_Predicate;
+    private object: RDF.Quad_Object;
+    private graph: RDF.Quad_Graph;
+
+    constructor(subject: RDF.Quad_Subject, predicate: RDF.Quad_Predicate, object: RDF.Quad_Object, graph: RDF.Quad_Graph) {
         this.subject = subject;
         this.predicate = predicate;
         this.object = object;
         this.graph = graph;
     }
 
-    static fromInputs() {
+    static fromInputs(): QuadBuilder {
         let dataFactory = window.pod.dataFactory;
         let subject = dataFactory.namedNode(getInput(1));
         let predicate = dataFactory.namedNode(getInput(2));
@@ -294,22 +300,22 @@ class QuadBuilder {
         return new QuadBuilder(subject, predicate, object, graph);
     }
 
-    withSubject(subject) {
+    withSubject(subject: RDF.Quad_Subject): QuadBuilder {
         this.subject = subject;
         return this;
     }
 
-    withObject(object) {
+    withObject(object: RDF.Quad_Object): QuadBuilder {
         this.object = object;
         return this;
     }
 
-    withGraph(graph) {
+    withGraph(graph: RDF.Quad_Graph): QuadBuilder {
         this.graph = graph;
         return this;
     }
 
-    build() {
+    build(): RDF.Quad {
         return window.pod.dataFactory.quad(this.subject, this.predicate, this.object, this.graph);
     }
 }
