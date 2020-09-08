@@ -40,6 +40,8 @@ import java.util.*
 @LargeTest
 class CommunicationThroughPodApiWorks {
     private lateinit var podApi: PodApiTestDouble
+    private lateinit var polyOut: PolyOutTestDouble
+    private lateinit var polyIn: PolyInTestDouble
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
@@ -47,6 +49,7 @@ class CommunicationThroughPodApiWorks {
     @Test
     fun polyOut() {
         podApi = launchTestFeature()
+        polyOut = podApi.polyOut
         execute { canDoSimpleFetchGet() }
         execute { whenCalledWithNoMethodSpecified_methodIsEmpty() }
         execute { canPassMethodToFetch() }
@@ -61,6 +64,7 @@ class CommunicationThroughPodApiWorks {
     @Test
     fun polyIn() {
         podApi = launchTestFeature()
+        polyIn = podApi.polyIn
         execute { canCallPolyInAddWithNoQuads() }
         execute { canPassSingleQuadToPolyInAdd() }
         execute { canPassMultipleQuadsToPolyInAdd() }
@@ -92,7 +96,7 @@ class CommunicationThroughPodApiWorks {
 
     private fun canDoSimpleFetchGet() {
         clickButton("comm.polyOut.fetch.simple")
-        val polyOut = podApi.polyOut
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -103,7 +107,7 @@ class CommunicationThroughPodApiWorks {
 
     private fun whenCalledWithNoMethodSpecified_methodIsEmpty() {
         clickButton("comm.polyOut.fetch.empty_method")
-        val polyOut = podApi.polyOut
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -115,7 +119,7 @@ class CommunicationThroughPodApiWorks {
 
     private fun canPassMethodToFetch() {
         clickButton("comm.polyOut.fetch.post_method")
-        val polyOut = podApi.polyOut
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -129,8 +133,9 @@ class CommunicationThroughPodApiWorks {
         val key = "key"
         val value = "value"
         setInputs(key, value)
+
         clickButton("comm.polyOut.fetch.single_string_header")
-        val polyOut = podApi.polyOut
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -148,8 +153,9 @@ class CommunicationThroughPodApiWorks {
         val key2 = "key2"
         val value2 = "value2"
         setInputs(key1, value1, key2, value2)
+
         clickButton("comm.polyOut.fetch.multiple_string_headers")
-        val polyOut = podApi.polyOut
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -163,11 +169,12 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassStaticResponseFromFetch() {
-        val polyOut = podApi.polyOut
         val body = "body"
         setInputs(body)
         polyOut.returnBody(body)
+
         clickButton("comm.polyOut.fetch.get_static_response")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -180,11 +187,12 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassResponseStatusFromFetch() {
-        val polyOut = podApi.polyOut
         val status = 418
         setInputs("$status")
         polyOut.returnStatus(status)
+
         clickButton("comm.polyOut.fetch.get_response_status")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -197,11 +205,12 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassResponseOKFromFetch() {
-        val polyOut = podApi.polyOut
         val ok = true
         setInputs("$ok")
         polyOut.returnOk(ok)
+
         clickButton("comm.polyOut.fetch.get_response_ok")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -214,10 +223,11 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassBodyToFetch() {
-        val polyOut = podApi.polyOut
         val body = "example"
         setInputs(body)
+
         clickButton("comm.polyOut.fetch.post_body")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -228,8 +238,8 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canCallPolyInAddWithNoQuads() {
-        val polyIn = podApi.polyIn
         clickButton("comm.polyIn.add.no_quads")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -240,10 +250,11 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassSingleQuadToPolyInAdd() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault().build()
         setInputs(quad)
+
         clickButton("comm.polyIn.add.single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -255,8 +266,6 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassMultipleQuadsToPolyInAdd() {
-        val polyIn = podApi.polyIn
-
         clearQuadCollection()
         val quad1 = Quad.builder.new()
             .withSubject(IRI("http://example.org/s1"))
@@ -275,6 +284,7 @@ class CommunicationThroughPodApiWorks {
         addQuadToCollection(quad2)
 
         clickButton("comm.polyIn.add.multiple_quads")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -286,12 +296,13 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun addSupportsQuadsWithIRISubject() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withSubject(IRI("http://example.org/s"))
             .build()
         setInputs(quad)
+
         clickButton("comm.polyIn.add.quad_with_named_node_subject")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -303,12 +314,13 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun addSupportsQuadsWithBlankNodeSubject() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withSubject(BlankNode("subject"))
             .build()
         setInputs(quad)
+
         clickButton("comm.polyIn.add.quad_with_blank_node_subject")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -320,12 +332,13 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun addSupportsQuadsWithIRIObject() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withObject(IRI("http://example.org/o"))
             .build()
         setInputs(quad)
+
         clickButton("comm.polyIn.add.quad_with_named_node_object")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -337,12 +350,13 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun addSupportsQuadsWithBlankNodeObject() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withObject(BlankNode("object"))
             .build()
         setInputs(quad)
+
         clickButton("comm.polyIn.add.quad_with_blank_node_object")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -354,12 +368,13 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun addSupportsQuadsWithLiteralObject() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withObject(Literal("string"))
             .build()
         setInputs(quad)
+
         clickButton("comm.polyIn.add.quad_with_literal_object")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -371,12 +386,13 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun addSupportsQuadsWithIRIGraph() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withGraph(IRI("http://example.org/g"))
             .build()
         setInputs(quad)
+
         clickButton("comm.polyIn.add.quad_with_named_node_graph")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -388,12 +404,13 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun addSupportsQuadsWithBlankNodeGraph() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withGraph(BlankNode("graph"))
             .build()
         setInputs(quad)
+
         clickButton("comm.polyIn.add.quad_with_blank_node_graph")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -405,12 +422,13 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun addSupportsQuadsWithDefaultGraph() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withDefaultGraph()
             .build()
         setInputs(quad)
+
         clickButton("comm.polyIn.add.quad_with_default_graph")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -422,8 +440,8 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassEmptyMatcherToPolyInSelect() {
-        val polyIn = podApi.polyIn
         clickButton("comm.polyIn.select.pass_empty_matcher")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -438,10 +456,11 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassMatcherWithSubjectToPolyInSelect() {
-        val polyIn = podApi.polyIn
         val subject = IRI("http://example.org/s")
         setInput(1, subject.iri)
+
         clickButton("comm.polyIn.select.pass_matcher_with_subject")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -456,10 +475,11 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassMatcherWithPredicateToPolyInSelect() {
-        val polyIn = podApi.polyIn
         val predicate = IRI("http://example.org/p")
         setInput(1, predicate.iri)
+
         clickButton("comm.polyIn.select.pass_matcher_with_predicate")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -474,10 +494,11 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassMatcherWithObjectToPolyInSelect() {
-        val polyIn = podApi.polyIn
         val `object` = IRI("http://example.org/o")
         setInput(1, `object`.iri)
+
         clickButton("comm.polyIn.select.pass_matcher_with_object")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -492,12 +513,13 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canPassMatcherWithAllThreeFieldsToPolyInSelect() {
-        val polyIn = podApi.polyIn
         val subject = IRI("http://example.org/s")
         val predicate = IRI("http://example.org/p")
         val `object` = IRI("http://example.org/o")
         setInputs(subject.iri, predicate.iri, `object`.iri)
+
         clickButton("comm.polyIn.select.pass_matcher_with_all_three_fields")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -512,9 +534,10 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetEmptyArrayFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         polyIn.selectReturn = emptyList()
+
         clickButton("comm.polyIn.select.get_empty_array")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -527,11 +550,11 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithSingleQuadFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault().build()
         val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
         clickButton("comm.polyIn.select.get_array_with_single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -544,13 +567,14 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithSingleQuadWithIRISubjectFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withSubject(IRI("http://example.com/s"))
             .build()
         val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+
         clickButton("comm.polyIn.select.get_array_with_single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -563,13 +587,14 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withSubject(BlankNode("subject"))
             .build()
         val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"BlankNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+
         clickButton("comm.polyIn.select.get_array_with_single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -582,13 +607,14 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithSingleQuadWithIRIObjectFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withObject(IRI("http://example.com/o"))
             .build()
         val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+
         clickButton("comm.polyIn.select.get_array_with_single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -601,13 +627,14 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withObject(BlankNode("object"))
             .build()
         val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"BlankNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+
         clickButton("comm.polyIn.select.get_array_with_single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -620,13 +647,14 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withObject(Literal("string"))
             .build()
         val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"Literal","datatype":{"value":"http://www.w3.org/2001/XMLSchema#string","termType":"NamedNode"}},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+
         clickButton("comm.polyIn.select.get_array_with_single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -639,13 +667,14 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithSingleQuadWithIRIGraphFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withGraph(IRI("http://example.com/g"))
             .build()
         val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+
         clickButton("comm.polyIn.select.get_array_with_single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -658,13 +687,14 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withGraph(BlankNode("graph"))
             .build()
         val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"BlankNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+
         clickButton("comm.polyIn.select.get_array_with_single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -677,13 +707,14 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad = Quad.builder.newDefault()
             .withDefaultGraph()
             .build()
         val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"","termType":"DefaultGraph"}}]"""
         polyIn.selectReturn = listOf(quad)
+
         clickButton("comm.polyIn.select.get_array_with_single_quad")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -696,7 +727,6 @@ class CommunicationThroughPodApiWorks {
     }
 
     private fun canGetArrayWithMultipleQuadsFromPolyInSelect() {
-        val polyIn = podApi.polyIn
         val quad1 = Quad.builder.new()
             .withSubject(IRI("subject1"))
             .withPredicate(IRI("predicate1"))
@@ -711,7 +741,9 @@ class CommunicationThroughPodApiWorks {
             .build()
         val expectedResult = """[{"subject":{"value":"${quad1.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad1.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad1.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad1.graph.asString()}","termType":"NamedNode"}},{"subject":{"value":"${quad2.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad2.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad2.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad2.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad1, quad2)
+
         clickButton("comm.polyIn.select.get_array_with_multiple_quads")
+
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
@@ -741,6 +773,7 @@ class CommunicationThroughPodApiWorks {
 
     private fun execute(test: () -> Unit) {
         podApi.reset()
+        clearQuadCollection()
         test()
     }
 
