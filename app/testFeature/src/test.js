@@ -94,12 +94,6 @@ export function canCallPolyInAddWithSingleQuad() {
     window.pod.polyIn.add([quad]);
 }
 
-export function addQuadToCollection() {
-    console.log(`addQuadToCollection(), current value: '${quads}'`);
-    const quad = QuadBuilder.fromInputs().build();
-    quads.push(quad);
-}
-
 export function canCallPolyInAddWithMultipleQuads() {
     console.log(`canCallPolyInAddWithMultipleQuads(), quads: '${quads}'`);
     window.pod.polyIn.add(quads);
@@ -231,6 +225,17 @@ export function canGetArrayWithMultipleQuadsFromPolyInSelect() {
         .then(result => {
             setResult(JSON.stringify(result));
         });
+}
+
+export function clearQuadCollection() {
+    console.log(`clearQuadCollection()`);
+    quads = [];
+}
+
+export function addQuadToCollection() {
+    console.log(`addQuadToCollection(), current value: '${quads}'`);
+    const quad = QuadBuilder.fromInputs().build();
+    quads.push(quad);
 }
 
 export async function execute(test) {

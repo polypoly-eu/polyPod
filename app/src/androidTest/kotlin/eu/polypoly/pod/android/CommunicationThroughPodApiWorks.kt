@@ -30,6 +30,11 @@ import java.util.*
  * That is because starting the fragments takes ~1 second. Running each test separately makes the suite slow.
  * Unfortunately, because Truth and JUnit 4 do not support soft assertions (assert multiple things, but actually fail after the last one if necessary),
  * the first assertion that fails, will fail the whole test. Fixing issues will need to be done one-by-one.
+ *
+ * Also, this file contains only half of the code for each test.
+ * The other half is in testFeature/src/test.js.
+ * Method names match on both sides so it should not be hard to find all code related to any single test.
+ * Still, some assertions are made on JavaScript side so some failures can look awkward.
  */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -252,14 +257,14 @@ class CommunicationThroughPodApiWorks {
     private fun canPassMultipleQuadsToPolyInAdd() {
         val polyIn = podApi.polyIn
 
+        clearQuadCollection()
         val quad1 = Quad.builder.new()
             .withSubject(IRI("http://example.org/s1"))
             .withPredicate(IRI("http://example.org/p1"))
             .withObject(IRI("http://example.org/o1"))
             .withGraph(IRI("http://example.org/g1"))
             .build()
-        setInputs(quad1)
-        clickButton("comm.polyIn.add.add_quad_to_collection")
+        addQuadToCollection(quad1)
 
         val quad2 = Quad.builder.new()
             .withSubject(IRI("http://example.org/s2"))
@@ -267,8 +272,7 @@ class CommunicationThroughPodApiWorks {
             .withObject(IRI("http://example.org/o2"))
             .withGraph(IRI("http://example.org/g2"))
             .build()
-        setInputs(quad2)
-        clickButton("comm.polyIn.add.add_quad_to_collection")
+        addQuadToCollection(quad2)
 
         clickButton("comm.polyIn.add.multiple_quads")
         waitUntil({
@@ -743,6 +747,15 @@ class CommunicationThroughPodApiWorks {
     private fun onFeature() =
         onWebView()
             .inWindow(selectFrameByIdOrName("harness"))
+
+    private fun clearQuadCollection() {
+        clickButton("comm.polyIn.clear_quad_collection")
+    }
+
+    private fun addQuadToCollection(quad: Quad) {
+        setInputs(quad)
+        clickButton("comm.polyIn.add_quad_to_collection")
+    }
 
     private fun setInputs(val1: String) {
         setInput(1, val1)
