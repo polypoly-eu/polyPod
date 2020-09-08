@@ -1,41 +1,44 @@
-import {Pod} from "@polypoly-eu/poly-api";
+import {Pod, PolyIn, PolyOut} from "@polypoly-eu/poly-api";
 import * as RDF from "rdf-js";
 
 let quads: Array<RDF.Quad> = [];
+let pod: Pod;
+let polyOut: PolyOut;
+let polyIn: PolyIn;
 
 export function simpleJavaScriptCall() {
     console.log("simpleJavaScriptCall()");
 }
 
 export function awaitPodObject() {
-    console.log(`pod: ${window.pod}`);
+    console.log(`pod: ${pod}`);
 }
 
-export function simpleFetch() {
+export async function simpleFetch() {
     console.log("simpleFetch()");
-    window.pod.polyOut.fetch("https://httpbin.org/robots.txt");
+    await polyOut.fetch("https://httpbin.org/robots.txt");
 }
 
-export function callFetchWithNoMethod() {
+export async function callFetchWithNoMethod() {
     console.log("callFetchWithNoMethod()");
-    window.pod.polyOut.fetch("https://httpbin.org/robots.txt");
+    await polyOut.fetch("https://httpbin.org/robots.txt");
 }
 
-export function callFetchWithPostMethod() {
+export async function callFetchWithPostMethod() {
     console.log("callFetchWithPostMethod()");
-    window.pod.polyOut.fetch("http://httpbin.org/post", {method: "POST"});
+    await polyOut.fetch("http://httpbin.org/post", {method: "POST"});
 }
 
-export function callFetchWithSingleHeaderInStringForm() {
+export async function callFetchWithSingleHeaderInStringForm() {
     console.log("callFetchWithSingleHeaderInStringForm()");
     let key = getInput(1);
     let value = getInput(2);
     let headers = {};
     headers[key] = value;
-    window.pod.polyOut.fetch("http://httpbin.org/headers", {headers: headers});
+    await polyOut.fetch("http://httpbin.org/headers", {headers: headers});
 }
 
-export function callFetchWithMultipleHeadersInStringForm() {
+export async function callFetchWithMultipleHeadersInStringForm() {
     console.log("callFetchWithMultipleHeadersInStringForm()");
     let key1 = getInput(1);
     let value1 = getInput(2);
@@ -44,188 +47,182 @@ export function callFetchWithMultipleHeadersInStringForm() {
     let headers = {};
     headers[key1] = value1;
     headers[key2] = value2;
-    window.pod.polyOut.fetch("http://httpbin.org/headers", {headers: headers});
+    await polyOut.fetch("http://httpbin.org/headers", {headers: headers});
 }
 
-export function verifyBodyOfFetchResponse() {
+export async function verifyBodyOfFetchResponse() {
     console.log("verifyBodyOfFetchResponse()");
-    window.pod.polyOut.fetch("http://httpbin.org/robots.txt")
-        .then(response =>
-            // TODO - how to handle/reject streams?
-            response.text()
-                .then(text => setResult(text)));
+    let response = await polyOut.fetch("http://httpbin.org/robots.txt");
+    // TODO - how to handle/reject streams?
+    let text = await response.text();
+    setResult(text);
 }
 
-export function verifyResponseStatusOfFetchCall() {
+export async function verifyResponseStatusOfFetchCall() {
     console.log("verifyResponseStatusOfFetchCall()");
-    window.pod.polyOut.fetch("http://httpbin.org/robots.txt")
-        .then(response => {
-            if (typeof response.status === "number")
-                setResult(response.status)
-            else
-                throw new TypeError(`response.ok is not a number, it is: '${typeof response.status}'`)
-        });
+    let response = await polyOut.fetch("http://httpbin.org/robots.txt");
+    if (typeof response.status === "number")
+        setResult(response.status)
+    else
+        throw new TypeError(`response.ok is not a number, it is: '${typeof response.status}'`)
 }
 
-export function verifyResponseOkOfFetchCall() {
+export async function verifyResponseOkOfFetchCall() {
     console.log("verifyResponseOkOfFetchCall()");
-    window.pod.polyOut.fetch("http://httpbin.org/robots.txt")
-        .then(response => {
-            if (typeof response.ok === "boolean")
-                setResult(response.ok)
-            else
-                throw new TypeError(`response.ok is not a boolean, it is: '${typeof response.ok}'`)
-        });
+    let response = await polyOut.fetch("http://httpbin.org/robots.txt");
+    if (typeof response.ok === "boolean")
+        setResult(response.ok)
+    else
+        throw new TypeError(`response.ok is not a boolean, it is: '${typeof response.ok}'`)
 }
 
-export function callFetchWithPostMethodAndBody() {
+export async function callFetchWithPostMethodAndBody() {
     console.log("callFetchWithPostMethodAndBOdy()");
     let body = getInput(1);
-    window.pod.polyOut.fetch("http://httpbin.org/post", {method: "POST", body: body});
+    await polyOut.fetch("http://httpbin.org/post", {method: "POST", body: body});
 }
 
-export function canCallPolyInAddWithNoQuads() {
+export async function canCallPolyInAddWithNoQuads() {
     console.log("canCallPolyInAddWithNoQuads()");
-    window.pod.polyIn.add();
+    await polyIn.add();
 }
 
-export function canCallPolyInAddWithSingleQuad() {
+export async function canCallPolyInAddWithSingleQuad() {
     console.log("canCallPolyInAddWithSingleQuad()");
     const quad = QuadBuilder.fromInputs().build();
-    window.pod.polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
-export function canCallPolyInAddWithMultipleQuads() {
+export async function canCallPolyInAddWithMultipleQuads() {
     console.log(`canCallPolyInAddWithMultipleQuads(), quads: '${quads}'`);
-    window.pod.polyIn.add(...quads);
+    await polyIn.add(...quads);
 }
 
-export function addSupportsQuadsWithNamedNodeSubject() {
+export async function addSupportsQuadsWithNamedNodeSubject() {
     console.log(`addSupportsQuadsWithNamedNodeSubject()`);
     const quad = QuadBuilder.fromInputs().build();
-    window.pod.polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
-export function addSupportsQuadsWithBlankNodeSubject() {
+export async function addSupportsQuadsWithBlankNodeSubject() {
     console.log(`addSupportsQuadsWithBlankNodeSubject()`);
     let subject = getInput(1);
     const quad = QuadBuilder.fromInputs()
         .withSubject(window.pod.dataFactory.blankNode(subject))
         .build();
-    window.pod.polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
-export function addSupportsQuadsWithNamedNodeObject() {
+export async function addSupportsQuadsWithNamedNodeObject() {
     console.log(`addSupportsQuadsWithNamedNodeObject()`);
     let object = getInput(3);
     const quad = QuadBuilder.fromInputs()
         .withObject(window.pod.dataFactory.namedNode(object))
         .build();
-    window.pod.polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
-export function addSupportsQuadsWithBlankNodeObject() {
+export async function addSupportsQuadsWithBlankNodeObject() {
     console.log(`addSupportsQuadsWithBlankNodeObject()`);
     let object = getInput(3);
     const quad = QuadBuilder.fromInputs()
         .withObject(window.pod.dataFactory.blankNode(object))
         .build();
-    window.pod.polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
-export function addSupportsQuadsWithLiteralObject() {
+export async function addSupportsQuadsWithLiteralObject() {
     console.log(`addSupportsQuadsWithLiteralObject()`);
     let object = getInput(3);
     const quad = QuadBuilder.fromInputs()
         .withObject(window.pod.dataFactory.literal(object))
         .build();
-    window.pod.polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
-export function addSupportsQuadsWithNamedNodeGraph() {
+export async function addSupportsQuadsWithNamedNodeGraph() {
     console.log(`addSupportsQuadsWithNamedNodeGraph()`);
     let graph = getInput(4);
     const quad = QuadBuilder.fromInputs()
         .withGraph(window.pod.dataFactory.namedNode(graph))
         .build();
-    window.pod.polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
-export function addSupportsQuadsWithBlankNodeGraph() {
+export async function addSupportsQuadsWithBlankNodeGraph() {
     console.log(`addSupportsQuadsWithBlankNodeGraph()`);
     let graph = getInput(4);
     const quad = QuadBuilder.fromInputs()
         .withGraph(window.pod.dataFactory.blankNode(graph))
         .build();
-    window.pod.polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
-export function addSupportsQuadsWithDefaultGraph() {
+export async function addSupportsQuadsWithDefaultGraph() {
     console.log(`addSupportsQuadsWithDefaultGraph()`);
     const quad = QuadBuilder.fromInputs()
         .withGraph(window.pod.dataFactory.defaultGraph())
         .build();
-    window.pod.polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
-export function canPassEmptyMatcherToPolyInSelect() {
+export async function canPassEmptyMatcherToPolyInSelect() {
     console.log("canPassEmptyMatcherToPolyInSelect()");
-    window.pod.polyIn.select({});
+    await polyIn.select({});
 }
 
-export function canPassMatcherWithSubjectToPolyInSelect() {
+export async function canPassMatcherWithSubjectToPolyInSelect() {
     console.log("canPassMatcherWithSubjectToPolyInSelect()");
     const subject = getInput(1);
     let matcher = {subject: window.pod.dataFactory.namedNode(subject)};
-    window.pod.polyIn.select(matcher);
+    await polyIn.select(matcher);
 }
 
-export function canPassMatcherWithPredicateToPolyInSelect() {
+export async function canPassMatcherWithPredicateToPolyInSelect() {
     console.log("canPassMatcherWithPredicateToPolyInSelect()");
     const predicate = getInput(1);
     let matcher = {predicate: window.pod.dataFactory.namedNode(predicate)};
-    window.pod.polyIn.select(matcher);
+    await polyIn.select(matcher);
 }
 
-export function canPassMatcherWithObjectToPolyInSelect() {
+export async function canPassMatcherWithObjectToPolyInSelect() {
     console.log("canPassMatcherWithObjectToPolyInSelect()");
     const object = getInput(1);
     let matcher = {object: window.pod.dataFactory.namedNode(object)};
-    window.pod.polyIn.select(matcher);
+    await polyIn.select(matcher);
 }
 
-export function canPassMatcherWithAllThreeFieldsToPolyInSelect() {
+export async function canPassMatcherWithAllThreeFieldsToPolyInSelect() {
     console.log("canPassMatcherWithAllThreeFieldsToPolyInSelect()");
     const subject = getInput(1);
     const predicate = getInput(2);
     const object = getInput(3);
     let dataFactory = window.pod.dataFactory;
     let matcher = {subject: dataFactory.namedNode(subject), predicate: dataFactory.namedNode(predicate), object: dataFactory.namedNode(object)};
-    window.pod.polyIn.select(matcher);
+    await polyIn.select(matcher);
 }
 
-export function canGetEmptyArrayFromPolyInSelect() {
+export async function canGetEmptyArrayFromPolyInSelect() {
     console.log("canGetEmptyArrayFromPolyInSelect()");
-    window.pod.polyIn.select({})
-        .then(result => {
-            setResult(JSON.stringify(result));
-        });
+    let result = await polyIn.select({});
+    if (!Array.isArray(result) || result.length !== 0)
+        throw Error(`Expected empty array, got '${JSON.stringify(result)}'`);
 }
 
-export function canGetArrayWithSingleQuadFromPolyInSelect() {
+export async function canGetArrayWithSingleQuadFromPolyInSelect() {
     console.log("canGetArrayWithSingleQuadFromPolyInSelect()");
-    window.pod.polyIn.select({})
-        .then(result => {
-            setResult(JSON.stringify(result));
-        });
+    const expectedResult = QuadBuilder.fromInputs().build();
+    let result = await polyIn.select({});
+    if (result.length !== 1)
+        throw Error(`Expected array with single element, got ${result.length} elements`);
+    if (!result[0].equals(expectedResult))
+        throw Error(`Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(result[0])}'`);
 }
 
-export function canGetArrayWithMultipleQuadsFromPolyInSelect() {
+export async function canGetArrayWithMultipleQuadsFromPolyInSelect() {
     console.log("canGetArrayWithMultipleQuadsFromPolyInSelect()");
-    window.pod.polyIn.select({})
-        .then(result => {
-            setResult(JSON.stringify(result));
-        });
+    let result = await polyIn.select({});
+    setResult(JSON.stringify(result));
 }
 
 export function clearQuadCollection() {
@@ -241,7 +238,9 @@ export function addQuadToCollection() {
 
 export async function execute(test: () => void) {
     setStatus("Running...");
-    await awaitPodApi();
+    pod = await awaitPodApi();
+    polyIn = pod.polyIn;
+    polyOut = pod.polyOut;
     try {
         await test();
         setStatus("All OK");
@@ -280,7 +279,7 @@ function setResult(result) {
 
 class QuadBuilder {
     private subject: RDF.Quad_Subject;
-    private predicate: RDF.Quad_Predicate;
+    private readonly predicate: RDF.Quad_Predicate;
     private object: RDF.Quad_Object;
     private graph: RDF.Quad_Graph;
 
