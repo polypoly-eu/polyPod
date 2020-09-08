@@ -18,7 +18,7 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    val fetchResponseCodec = FetchResponseCodec()
+    private val fetchResponseCodec = FetchResponseCodec()
 
     private fun decodeCall(value: Value): Pair<String, List<Value>> {
         val map = value.asMapValue().keyValueArray
@@ -56,8 +56,7 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
 
     private suspend fun handlePolyInAdd(args: List<Value>): Value {
         logger.debug("dispatch() -> polyIn.add")
-        val quadValue = args[0].asArrayValue() // add() takes only one parameter
-        val quads = quadValue.map { Quad.codec.decode(it) }
+        val quads = args.map { Quad.codec.decode(it) }
         polyIn.add(quads)
         return ValueFactory.newNil()  // add() doesn't return anything
     }
