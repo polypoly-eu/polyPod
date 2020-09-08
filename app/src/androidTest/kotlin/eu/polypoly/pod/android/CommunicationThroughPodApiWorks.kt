@@ -539,191 +539,171 @@ class CommunicationThroughPodApiWorks {
         clickButton("comm.polyIn.select.get_empty_array")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`("[]")))
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithSingleQuadFromPolyInSelect() {
         val quad = Quad.builder.newDefault().build()
-        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+        addQuadToCollection(quad)
+
         clickButton("comm.polyIn.select.get_array_with_single_quad")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithSingleQuadWithIRISubjectFromPolyInSelect() {
         val quad = Quad.builder.newDefault()
             .withSubject(IRI("http://example.com/s"))
             .build()
-        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+        addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        clickButton("comm.polyIn.select.get_array_with_single_quad_with_named_node_subject")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect() {
         val quad = Quad.builder.newDefault()
             .withSubject(BlankNode("subject"))
             .build()
-        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"BlankNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+        addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        clickButton("comm.polyIn.select.get_array_with_single_quad_with_blank_node_subject")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithSingleQuadWithIRIObjectFromPolyInSelect() {
         val quad = Quad.builder.newDefault()
             .withObject(IRI("http://example.com/o"))
             .build()
-        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+        addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        clickButton("comm.polyIn.select.get_array_with_single_quad_with_named_node_object")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect() {
         val quad = Quad.builder.newDefault()
             .withObject(BlankNode("object"))
             .build()
-        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"BlankNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+        addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        clickButton("comm.polyIn.select.get_array_with_single_quad_with_blank_node_object")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect() {
         val quad = Quad.builder.newDefault()
             .withObject(Literal("string"))
             .build()
-        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"Literal","datatype":{"value":"http://www.w3.org/2001/XMLSchema#string","termType":"NamedNode"}},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+        addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        clickButton("comm.polyIn.select.get_array_with_single_quad_with_literal_object")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithSingleQuadWithIRIGraphFromPolyInSelect() {
         val quad = Quad.builder.newDefault()
             .withGraph(IRI("http://example.com/g"))
             .build()
-        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+        addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        clickButton("comm.polyIn.select.get_array_with_single_quad_with_named_node_graph")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect() {
         val quad = Quad.builder.newDefault()
             .withGraph(BlankNode("graph"))
             .build()
-        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad.graph.asString()}","termType":"BlankNode"}}]"""
         polyIn.selectReturn = listOf(quad)
+        addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        clickButton("comm.polyIn.select.get_array_with_single_quad_with_blank_node_graph")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect() {
         val quad = Quad.builder.newDefault()
             .withDefaultGraph()
             .build()
-        val expectedResult = """[{"subject":{"value":"${quad.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"","termType":"DefaultGraph"}}]"""
         polyIn.selectReturn = listOf(quad)
+        addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        clickButton("comm.polyIn.select.get_array_with_single_quad_with_default_graph")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     private fun canGetArrayWithMultipleQuadsFromPolyInSelect() {
@@ -739,20 +719,19 @@ class CommunicationThroughPodApiWorks {
             .withObject(IRI("object2"))
             .withGraph(IRI("graph2"))
             .build()
-        val expectedResult = """[{"subject":{"value":"${quad1.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad1.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad1.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad1.graph.asString()}","termType":"NamedNode"}},{"subject":{"value":"${quad2.subject.asString()}","termType":"NamedNode"},"predicate":{"value":"${quad2.predicate.iri}","termType":"NamedNode"},"object":{"value":"${quad2.`object`.asString()}","termType":"NamedNode"},"graph":{"value":"${quad2.graph.asString()}","termType":"NamedNode"}}]"""
         polyIn.selectReturn = listOf(quad1, quad2)
+        addQuadToCollection(quad1)
+        addQuadToCollection(quad2)
 
         clickButton("comm.polyIn.select.get_array_with_multiple_quads")
 
         waitUntil({
+            assertThat(polyIn.selectWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
-            onFeature()
-                .withElement(findElement(Locator.ID, "result"))
-                .check(webMatches(getText(), `is`(expectedResult)))
+            // actual assertion on JavaScript side
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
     }
 
     // test functions above, helper function below
