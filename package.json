@@ -39,9 +39,11 @@
     "@polypoly-eu/postoffice": "^0.1.0",
     "@polypoly-eu/rdf": "^0.2.0",
     "@polypoly-eu/rdf-convert": "^0.1.0",
+    "@rdfjs/dataset": "^1.0.1",
     "@types/rdf-js": "^4.0.0",
     "fp-ts": "^2.8.2",
-    "io-ts": "2.2.10"
+    "io-ts": "2.2.10",
+    "memfs": "^3.2.0"
   },
   "peerDependencies": {
     "body-parser": "^1.19.0"
@@ -49,7 +51,6 @@
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.4",
     "@polypoly-eu/rdf-spec": "^0.3.1",
-    "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
@@ -69,7 +70,6 @@
     "electron-mocha": "^9.1.0",
     "eslint": "^7.8.1",
     "fast-check": "^1.26.0",
-    "memfs": "^3.2.0",
     "mocha": "^8.1.3",
     "node-fetch": "^2.6.1",
     "prettier": "^2.1.1",
