@@ -25,6 +25,10 @@
     "url": "https://github.com/polypoly-eu/poly-api/issues"
   },
   "homepage": "https://github.com/polypoly-eu/poly-api#readme",
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.4",
     "@polypoly-eu/rdf-spec": "^0.3.1",
