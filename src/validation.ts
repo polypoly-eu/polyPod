@@ -1,5 +1,13 @@
 import type { Matcher, Pod, PolyIn, PolyOut, EncodingOptions, Stats } from "@polypoly-eu/poly-api";
-import type { Term, Quad, Quad_Subject, Quad_Predicate, Quad_Object, Quad_Graph } from "rdf-js";
+import type {
+    Term,
+    Quad,
+    Quad_Subject,
+    Quad_Predicate,
+    Quad_Object,
+    Quad_Graph,
+    BaseQuad,
+} from "rdf-js";
 import { DataFactory, Model } from "@polypoly-eu/rdf";
 import { convert } from "@polypoly-eu/rdf-convert";
 import type { Decoder } from "io-ts/lib/Decoder";
@@ -44,11 +52,13 @@ async function decoders(): Promise<Decoders> {
         ),
     });
 
-    const term: Decoder<unknown, Term> = {
+    // TODO support RDF*?
+    const term: Decoder<unknown, Exclude<Term, BaseQuad>> = {
         decode: (u) => {
             try {
                 const converted = convert(u as any, strictFactory);
-                if (converted instanceof Model) return Decode.success(converted as Term);
+                if (converted instanceof Model)
+                    return Decode.success(converted as Exclude<Term, BaseQuad>);
                 else return Decode.failure(u, "Expected term");
             } catch (err) {
                 return Decode.failure(u, err.message);
