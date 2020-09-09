@@ -3,7 +3,6 @@
   "version": "0.7.0",
   "description": "Definitions, spec, and dummy implementation for the API of a Pod",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
