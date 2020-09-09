@@ -61,6 +61,7 @@
 		1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5924192463008DB1B2 /* domConsole.js */; };
 		1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */; };
 		1AB4F37E2508D64600E66BCC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1AB4F37D2508D64600E66BCC /* Settings.bundle */; };
+		1AB4F37F2508D6E800E66BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */; };
 		1ABADBCB24E2E06600369791 /* initIframe.js in Resources */ = {isa = PBXBuildFile; fileRef = 1ABADBCA24E2E06600369791 /* initIframe.js */; };
 		1ABADBCD24E2E2F800369791 /* pod.js in Resources */ = {isa = PBXBuildFile; fileRef = 1ABADBCC24E2E2F700369791 /* pod.js */; };
 		1ABADBD224EBC5D500369791 /* FetchRequestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */; };
@@ -181,7 +182,6 @@
 		1ABADBF024EE6FB700369791 /* DataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFactory.swift; sourceTree = "<group>"; };
 		1ABADC0824EFAA3600369791 /* CLLocation+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Model.swift"; sourceTree = "<group>"; };
 		1ABADC0A24EFB80900369791 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		1ABADC3824F6610600369791 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
 		1AF1178524BE22D50063EE37 /* FileStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStats.swift; sourceTree = "<group>"; };
 		1AF1178924BF0AF20063EE37 /* questionnaire-feature.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "questionnaire-feature.zip"; sourceTree = "<group>"; };
 		1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quad+Additions.swift"; sourceTree = "<group>"; };
@@ -336,7 +336,6 @@
 		1AA6DE3124191C94008DB1B2 /* PolyPod */ = {
 			isa = PBXGroup;
 			children = (
-				1ABADC3824F6610600369791 /* PolyPod.entitlements */,
 				1A4C21C324A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld */,
 				1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */,
 				1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */,
@@ -569,6 +568,7 @@
 				1A66F77F249378E400ED4308 /* PolyOutTests.swift in Sources */,
 				1ABADBFA24EE710B00369791 /* BlankNode+CoreDataProperties.swift in Sources */,
 				1ABADC0324EE710C00369791 /* Term+CoreDataClass.swift in Sources */,
+				1AB4F37F2508D6E800E66BCC /* AppDelegate.swift in Sources */,
 				1ABADC0124EE710B00369791 /* Literal+CoreDataProperties.swift in Sources */,
 				1ABADBD924EBC5FC00369791 /* PolyOut+Fetch.swift in Sources */,
 				1ABADBEF24ED282A00369791 /* PolyApiError.swift in Sources */,
