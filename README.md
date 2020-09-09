@@ -17,9 +17,11 @@ Those implementations are provided as composable façades that may be nested.
 
 This repository is structured as a TypeScript library with the following implementations per top-level module:
 
-| Module       | Implementation name | Purpose                                                                 |
-| ------------ | ------------------- | ----------------------------------------------------------------------- |
-| `tracing`    | `TracingPod`        | intercepts all side-effecting calls                                     |
-| `validation` | `ValidatingPod`     | validates all arguments for each side-effecting call                    |
-| `remote`     | `RemoteClientPod`   | access a remote Pod on a client port                                    |
-| `remote`     | `RemoteServerPod`   | (helper to register a Pod on a server port)                             |
+| Module       | Implementation name | Purpose                                              |
+| ------------ | ------------------- | -----------------------------------------------------|
+| `tracing`    | `TracingPod`        | intercepts all side-effecting calls                  |
+| `validation` | `ValidatingPod`     | validates all arguments for each side-effecting call |
+| `remote`     | `RemoteClientPod`   | access a remote Pod on a client port                 |
+| `remote`     | `RemoteServerPod`   | (helper to register a Pod on a server port)          |
+| `async`      | `AsyncPod`          | turns a promised Pod into a regular Pod              |
+| `browser`    | `browserPod`        | a Pod that can be run in-browser                     |
