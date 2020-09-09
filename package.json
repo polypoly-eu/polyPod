@@ -30,7 +30,7 @@
   ],
   "homepage": "https://github.com/polypoly-eu/rdf-convert#readme",
   "devDependencies": {
-    "@graphy/core.data.factory": "^4.3.2",
+    "@graphy/core.data.factory": "^4.3.3",
     "@graphy/memory.dataset.fast": "^4.3.2",
     "@polypoly-eu/eslint-config-polypoly": "0.0.4",
     "@polypoly-eu/rdf-spec": "^0.3.1",
