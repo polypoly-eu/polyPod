@@ -37,6 +37,7 @@ extension PolyIn {
 
         guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: managedContext) else {
             assert(false)
+            return nil
         }
         
         let node = NSManagedObject(entity: entity, insertInto: managedContext)

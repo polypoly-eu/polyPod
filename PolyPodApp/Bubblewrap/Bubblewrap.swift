@@ -73,6 +73,7 @@ class Bubblewrap {
             break
         }
         assert(false)
+        return nil
     }
     
     static func encode(extendedData: ExtendedData) -> MessagePackValue {
