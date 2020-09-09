@@ -10,12 +10,19 @@ import UIKit
 
 class FeatureListViewController: UITableViewController {
 
+    @IBOutlet weak var settingsItem: UIBarButtonItem!
+    
     let featuresList: [String] = FeaturesWallet.shared.featuresList()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "PolyPod"
+        
+        self.settingsItem.title = NSString(string: "\u{2699}\u{0000FE0E}") as String
+        let font = UIFont.systemFont(ofSize: 36.0)
+        let color = UIColor.black
+        self.settingsItem.setTitleTextAttributes([.font: font, .foregroundColor: color], for: .normal)
     }
     
     // MARK: - Table view data source
@@ -98,4 +105,7 @@ class FeatureListViewController: UITableViewController {
         }
     }
 
+    @IBAction func settingsPressed(_ sender: Any) {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+    }
 }
