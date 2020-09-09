@@ -6,9 +6,9 @@
   "author": "",
   "license": "UNLICENSED",
   "scripts": {
-    "serve": "orodruin serve -l",
+    "serve": "orodruin serve",
     "build": "rollup -c",
-    "test:feature": "npm run build && orodruin test"
+    "test:feature": "npm run build && orodruin test && orodruin test -b"
   },
   "devDependencies": {
     "@polypoly-eu/orodruin": "file:/..",

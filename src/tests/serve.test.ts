@@ -3,20 +3,26 @@ import { serve } from "../serve";
 import { DefaultPod } from "@polypoly-eu/poly-api";
 import { parse, Range } from "semver";
 import { once } from "events";
+import { dataset } from "@rdfjs/dataset";
+import { promises as fs } from "fs";
 import fetch from "node-fetch";
 
 describe("Serve", () => {
     const port = 12345;
-    let pod: DefaultPod;
     let server: Server;
 
     beforeAll(async () => {
-        server = await serve(port, pod, __dirname, {
-            name: "test",
-            version: parse("0.0.0")!,
-            api: new Range("0.0.0"),
-            root: "data",
-        });
+        server = await serve(
+            port,
+            __dirname,
+            {
+                name: "test",
+                version: parse("0.0.0")!,
+                api: new Range("0.0.0"),
+                root: "data",
+            },
+            new DefaultPod(dataset(), fs, fetch)
+        );
     });
 
     afterAll(async () => {

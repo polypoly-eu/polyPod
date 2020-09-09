@@ -7,7 +7,7 @@ function Quad({ quad }) {
 
 function Quads({ quads }) {
     return <ul>{
-        quads.map(quad => <Quad quad={quad} />)
+        quads.map((quad, idx) => <Quad quad={quad} key={idx} />)
     }</ul>;
 }
 

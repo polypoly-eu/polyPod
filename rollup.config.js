@@ -2,6 +2,7 @@ import sucrase from "@rollup/plugin-sucrase";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import executable from "rollup-plugin-executable";
+import nodePolyfills from "rollup-plugin-node-polyfills";
 
 export default [
     {
@@ -23,12 +24,12 @@ export default [
             "@polypoly-eu/podigree",
             "@rdfjs/dataset",
             "connect",
+            "ejs",
             "exposed-promises",
             "fs",
             "path",
             "puppeteer",
             "events",
-            "memfs",
             "node-fetch",
             "open",
             "serve-static",
@@ -39,11 +40,15 @@ export default [
         input: "src/container.ts",
         output: {
             file: "dist/container.js",
+            name: "Container",
             format: "iife"
         },
         plugins: [
-            resolve(),
+            resolve({
+                preferBuiltins: true
+            }),
             commonjs(),
+            nodePolyfills(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"]

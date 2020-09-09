@@ -20,17 +20,11 @@ yargs
                     default: 4000,
                 })
                 .options({
-                    m: {
+                    b: {
                         type: "boolean",
                         default: false,
-                        alias: "memory",
-                        describe: "use empty in-memory filesystem for polyOut",
-                    },
-                    l: {
-                        type: "boolean",
-                        default: false,
-                        alias: "log",
-                        describe: "log API actions",
+                        alias: "browser",
+                        describe: "use browser-based API",
                     },
                     o: {
                         type: "boolean",
@@ -41,10 +35,9 @@ yargs
                 }),
         (argv) =>
             serveCommand({
-                log: argv.l,
                 dir: argv.d,
                 port: argv.port,
-                inmemory: argv.m,
+                browser: argv.b,
                 open: argv.o,
             })
     )
@@ -52,13 +45,23 @@ yargs
         "test [port]",
         "run feature in headless mode",
         (yargs) =>
-            yargs.positional("port", {
-                describe: "port to bind on",
-                default: 4000,
-            }),
+            yargs
+                .positional("port", {
+                    describe: "port to bind on",
+                    default: 4000,
+                })
+                .options({
+                    b: {
+                        type: "boolean",
+                        default: false,
+                        alias: "browser",
+                        describe: "use browser-based API",
+                    },
+                }),
         (argv) =>
             testCommand({
                 dir: argv.d,
+                browser: argv.b,
                 port: argv.port,
             })
     )

@@ -19,10 +19,18 @@
                 border: 0;
             }
         </style>
+        <script src="/container.js" data-pod="<%= pod %>"></script>
     </head>
 <body>
+    <h1>Dashboard</h1>
+    <div>
+        <div>
+            <input type="button" value="Reload" onclick="Container.reloadIframe();">
+        </div>
+    </div>
+    <h1>Feature</h1>
     <div id="container">
     </div>
-    <script src="/container.js"></script>
+    <script>Container.loadIframe();</script>
 </body>
 </html>
