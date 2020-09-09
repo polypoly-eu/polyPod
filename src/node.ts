@@ -69,6 +69,13 @@ export function middlewarePort<T, Body = any>(
     let _handler: Handler<WithResolvers<Body, T>> | undefined = undefined;
 
     const middleware: NextHandleFunction = async (_request, response, next) => {
+        if (_request.method === "GET") {
+            // this is to signal that the endpoint exists
+            response.writeHead(200);
+            response.end();
+            return;
+        }
+
         if (_handler === undefined) return; // yolo
 
         const handler = _handler;
