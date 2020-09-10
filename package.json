@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/port-authority",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A typed view on communication through ports",
   "main": "dist/index.js",
   "scripts": {
