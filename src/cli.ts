@@ -1,6 +1,7 @@
 import yargs from "yargs";
 import { serveCommand } from "./cli/serve";
 import { testCommand } from "./cli/test";
+import { packageCommand } from "./cli/package";
 
 yargs
     .options({
@@ -63,6 +64,21 @@ yargs
                 dir: argv.d,
                 browser: argv.b,
                 port: argv.port,
+            })
+    )
+    .command(
+        "package target",
+        "package a static bundle of the feature",
+        (yargs) =>
+            yargs.positional("target", {
+                describe: "target directory",
+                type: "string",
+                demandOption: true,
+            }),
+        (argv) =>
+            packageCommand({
+                dir: argv.d,
+                target: argv.target,
             })
     )
     .help()

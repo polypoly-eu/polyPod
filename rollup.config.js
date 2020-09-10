@@ -27,12 +27,16 @@ export default [
             "ejs",
             "exposed-promises",
             "fs",
+            "mkdirp",
             "path",
             "puppeteer",
+            "recursive-copy",
+            "rimraf",
             "events",
             "node-fetch",
             "open",
             "serve-static",
+            "util",
             "yargs"
         ]
     },
