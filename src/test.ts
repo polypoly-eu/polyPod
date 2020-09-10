@@ -1,4 +1,4 @@
-import { preparePage, raiseOnFailure } from "../testkit";
+import { preparePage, raiseOnFailure } from "./testkit";
 
 export async function test(url: string): Promise<void> {
     const { default: puppeteer } = await import("puppeteer");

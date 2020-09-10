@@ -25,6 +25,13 @@
     "url": "https://github.com/polypoly-eu/orodruin/issues"
   },
   "homepage": "https://github.com/polypoly-eu/orodruin#readme",
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts",
+    "dist/cli",
+    "bin",
+    "data"
+  ],
   "peerDependencies": {
     "puppeteer": "^5.2.1"
   },
