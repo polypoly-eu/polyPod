@@ -41,7 +41,7 @@
     "@types/rdfjs__dataset": "^1.0.3",
     "chokidar-cli": "^2.1.0",
     "eslint": "^7.9.0",
-    "fast-check": "^2.2.1",
+    "fast-check": "^2.3.0",
     "jest": "^26.4.2",
     "n3": "^1.6.3",
     "prettier": "^2.1.1",
