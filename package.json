@@ -46,7 +46,7 @@
     "jest": "^26.4.2",
     "mocha": "^7.2.0",
     "n3": "^1.6.3",
-    "prettier": "^2.1.1",
+    "prettier": "^2.1.2",
     "rdf-data-factory": "^1.0.2",
     "rollup": "^2.26.11",
     "ts-jest": "^26.3.0",
