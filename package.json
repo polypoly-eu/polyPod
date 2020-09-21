@@ -37,7 +37,7 @@
     "@polypoly-eu/rdf-spec": "^0.3.1",
     "@rdfjs/data-model": "^1.2.0",
     "@rollup/plugin-sucrase": "^3.1.0",
-    "@types/jest": "^26.0.13",
+    "@types/jest": "^26.0.14",
     "chokidar-cli": "^2.1.0",
     "eslint": "^7.9.0",
     "jest": "^26.4.2",
