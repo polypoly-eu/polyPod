@@ -38,7 +38,7 @@
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.14",
     "@types/n3": "^1.4.4",
-    "@types/rdfjs__dataset": "^1.0.3",
+    "@types/rdfjs__dataset": "^1.0.4",
     "chokidar-cli": "^2.1.0",
     "eslint": "^7.9.0",
     "fast-check": "^2.3.0",
