@@ -46,7 +46,7 @@
     "@types/jsdom": "^16.2.4",
     "@types/mkdirp": "^1.0.1",
     "@types/node-fetch": "^2.5.7",
-    "@types/rdfjs__dataset": "^1.0.3",
+    "@types/rdfjs__dataset": "^1.0.4",
     "@types/rimraf": "^3.0.0",
     "@types/serve-static": "^1.13.5",
     "@types/yargs": "^15.0.7",
