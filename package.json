@@ -55,7 +55,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chokidar-cli": "^2.1.0",
-    "eslint": "^7.9.0",
+    "eslint": "^7.10.0",
     "fast-check": "^2.3.0",
     "karma": "^5.2.3",
     "karma-chrome-launcher": "^3.1.0",
