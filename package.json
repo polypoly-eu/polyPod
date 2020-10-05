@@ -50,7 +50,7 @@
     "@types/rimraf": "^3.0.0",
     "@types/serve-static": "^1.13.5",
     "@types/yargs": "^15.0.7",
-    "babel-jest": "^26.3.0",
+    "babel-jest": "^26.5.0",
     "eslint": "^7.10.0",
     "jest": "^26.5.0",
     "jsdom": "^16.4.0",
