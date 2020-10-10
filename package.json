@@ -45,7 +45,7 @@
     "@types/rdf-js": "^4.0.0",
     "benchmark": "^2.1.4",
     "chokidar-cli": "^2.1.0",
-    "eslint": "^7.10.0",
+    "eslint": "^7.11.0",
     "fast-check": "^2.4.0",
     "jest": "^26.5.2",
     "n3": "^1.6.3",
