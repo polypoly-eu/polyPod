@@ -41,7 +41,7 @@
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/connect": "^3.4.33",
-    "@types/ejs": "^3.0.4",
+    "@types/ejs": "^3.0.5",
     "@types/jest": "^26.0.14",
     "@types/jsdom": "^16.2.4",
     "@types/mkdirp": "^1.0.1",
