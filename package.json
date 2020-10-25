@@ -52,7 +52,7 @@
     "prettier": "^2.1.2",
     "rollup": "^2.32.1",
     "ts-jest": "^25.5.1",
-    "ts-mocha": "^7.0.0",
+    "ts-mocha": "^8.0.0",
     "ts-node": "^9.0.0",
     "typedoc": "^0.19.2",
     "typescript": "^3.9.7"
