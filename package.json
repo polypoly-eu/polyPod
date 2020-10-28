@@ -41,7 +41,7 @@
     "@types/node": "^14.14.5",
     "@types/rdfjs__dataset": "^1.0.4",
     "chokidar-cli": "^2.1.0",
-    "eslint": "^7.12.0",
+    "eslint": "^7.12.1",
     "jasmine": "^3.6.2",
     "jest": "^26.6.1",
     "mocha": "^8.2.0",
