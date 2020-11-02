@@ -48,7 +48,7 @@
     "n3": "^1.6.3",
     "prettier": "^2.1.2",
     "rdf-data-factory": "^1.0.4",
-    "rollup": "^2.32.1",
+    "rollup": "^2.33.1",
     "ts-jest": "^26.4.3",
     "ts-mocha": "^8.0.0",
     "typedoc": "^0.19.2",
