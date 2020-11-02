@@ -30,7 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "eslint": "^7.12.1",
-    "expect-type": "^0.8.0",
+    "expect-type": "^0.9.0",
     "jest": "^25.5.4",
     "prettier": "^2.1.2",
     "rollup": "^2.33.1",
