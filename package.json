@@ -69,7 +69,7 @@
     "electron": "^10.1.5",
     "electron-mocha": "^9.3.1",
     "eslint": "^7.12.1",
-    "fast-check": "^2.6.0",
+    "fast-check": "^2.6.1",
     "mocha": "^8.2.1",
     "node-fetch": "^2.6.1",
     "prettier": "^2.1.2",
