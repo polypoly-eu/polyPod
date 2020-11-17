@@ -33,7 +33,7 @@
     "data"
   ],
   "peerDependencies": {
-    "puppeteer": "^5.4.1"
+    "puppeteer": "^5.5.0"
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.4",
@@ -55,7 +55,7 @@
     "jest": "^26.6.3",
     "jsdom": "^16.4.0",
     "prettier": "^2.1.2",
-    "puppeteer": "^5.4.1",
+    "puppeteer": "^5.5.0",
     "rollup": "^2.33.2",
     "rollup-plugin-executable": "^1.6.0",
     "rollup-plugin-node-polyfills": "^0.2.1",
