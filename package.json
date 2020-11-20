@@ -27,12 +27,12 @@
   },
   "peerDependencies": {
     "eslint": "^7.13.0",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.0",
     "typescript": "^4.0.5"
   },
   "devDependencies": {
     "eslint": "^7.13.0",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.0",
     "typescript": "^4.0.5"
   },
   "files": [
