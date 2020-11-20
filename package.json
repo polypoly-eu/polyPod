@@ -54,7 +54,7 @@
     "eslint": "^7.13.0",
     "jest": "^26.6.3",
     "jsdom": "^16.4.0",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.0",
     "puppeteer": "^5.5.0",
     "rollup": "^2.33.3",
     "rollup-plugin-executable": "^1.6.0",
