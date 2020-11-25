@@ -57,7 +57,7 @@
     "prettier": "^2.2.0",
     "puppeteer": "^5.5.0",
     "rollup": "^2.33.3",
-    "rollup-plugin-executable": "^1.6.0",
+    "rollup-plugin-executable": "^1.6.1",
     "rollup-plugin-node-polyfills": "^0.2.1",
     "tempy": "^1.0.0",
     "ts-jest": "^26.4.4",
