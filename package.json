@@ -43,7 +43,7 @@
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.4",
     "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^10.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@rollup/plugin-typescript": "^8.0.0",
     "@types/chai": "^4.2.14",
