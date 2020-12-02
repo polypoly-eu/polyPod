@@ -33,7 +33,7 @@
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.2",
     "@rollup/plugin-sucrase": "^3.1.0",
-    "@types/jest": "^26.0.15",
+    "@types/jest": "^26.0.16",
     "@types/node": "^14.14.10",
     "eslint": "^7.14.0",
     "jest": "^25.5.4",
