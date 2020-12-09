@@ -36,7 +36,7 @@
     "@polypoly-eu/rdf-spec": "^0.3.1",
     "@rdfjs/data-model": "^1.2.0",
     "@rollup/plugin-sucrase": "^3.1.0",
-    "@types/jest": "^26.0.17",
+    "@types/jest": "^26.0.18",
     "@types/n3": "^1.4.4",
     "@types/rdfjs__dataset": "^1.0.4",
     "chokidar-cli": "^2.1.0",
