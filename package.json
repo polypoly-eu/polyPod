@@ -40,7 +40,7 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/benchmark": "^2.1.0",
-    "@types/jest": "^26.0.18",
+    "@types/jest": "^26.0.19",
     "@types/n3": "^1.4.4",
     "@types/rdf-js": "^4.0.0",
     "benchmark": "^2.1.4",
