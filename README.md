@@ -12,6 +12,12 @@ We might later on decide to increase the minimal version.
 
 Addendum: commit [551aaf0e](https://github.com/polypoly-eu/polyPod-Android/commit/551aaf0e5d2240552f685cbf90fb9921701fafe9) introduces usage of `Files.probeContentType()` and `File.toPath()`, both require at least API 26, so our contract is broken. Both calls are used to guess mime types when serving Feature files and are expected to be replaced later on as installing and loading of Features will get properly specified, currently they're not.
 
+### Building
+
+An easy way to build polyPod for Android is to install [Android Studio](https://developer.android.com/studio) and import the project.
+
+In order to fetch the dependencies hosted by us, you need to [create a GitHub access token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) and set `gpr.user` and `gpr.token` in one of the property files picked up by Gradle, e.g. `~/gradle.properties.`
+
 ### Testing
 
 Currently, there is only a handful of tests, mostly serving as an example of how testing could work. Those tests require a connected running device of some sort, real or emulated. Once such a device or emulator is connected and running, you can execute the tests using `connectedAndroidTest` gradle task. Gradle output is a bit lacking, but you should be able to find a report from tests execution [here](app/build/reports/androidTests/connected/index.html). 
