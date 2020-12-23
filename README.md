@@ -33,4 +33,4 @@ $ orodruin --help
 ## Developing Features
 
 After building orodruin as described above, you can use it to develop features.
-See <example/README.md> for an example.
+See [example/README.md](example/README.md) for an example.
