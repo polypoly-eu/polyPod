@@ -2,7 +2,24 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 function Quad({ quad }) {
-    return <li>{JSON.stringify(quad)}</li>;
+    return <li>
+	       <table>
+		   <tbody>
+		       <tr>
+			   <th>Subject</th>
+			   <td>{JSON.stringify(quad.subject)}</td>
+		       </tr>
+		       <tr>
+			   <th>Predicate</th>
+			   <td>{JSON.stringify(quad.predicate)}</td>
+		       </tr>
+		       <tr>
+			   <th>Object</th>
+			   <td>{JSON.stringify(quad.object)}</td>
+		       </tr>
+		   </tbody>
+	       </table>
+	   </li>;
 }
 
 function Quads({ quads }) {
