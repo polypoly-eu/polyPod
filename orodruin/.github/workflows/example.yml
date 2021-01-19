@@ -1,0 +1,34 @@
+name: Example Feature
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 13.x
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@polypoly-eu'
+    - name: npm install (orodruin)
+      run: |
+        npm ci --ignore-scripts
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: npm build (orodruin)
+      run: |
+        npm rebuild
+        npm run build
+    - name: npm install (feature)
+      run: |
+        cd example
+        npm install --ignore-scripts
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: npm test (feature)
+      run: |
+        cd example
+        npm run test:feature

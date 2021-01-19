@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>orodruin</title>
+        <style>
+            #container {
+                display: flex;
+                margin: 0;
+                padding: 0;
+                resize: both;
+                overflow: hidden;
+                border: 4px dashed black;
+            }
+            #container > iframe {
+                flex-grow: 1;
+                margin: 0;
+                padding: 0;
+                border: 0;
+            }
+        </style>
+        <script src="container.js" data-pod="<%= pod %>"></script>
+    </head>
+<body>
+    <h1>Dashboard</h1>
+    <div>
+        <div>
+            <input type="button" value="Reload" onclick="Container.reloadIframe();">
+        </div>
+    </div>
+    <h1>Feature</h1>
+    <div id="container">
+    </div>
+    <script>Container.loadIframe();</script>
+</body>
+</html>
