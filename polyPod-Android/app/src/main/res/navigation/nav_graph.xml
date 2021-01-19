@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FeaturesListFragment">
+
+    <fragment
+        android:id="@+id/FeaturesListFragment"
+        android:name="eu.polypoly.pod.android.FeatureWalletFragment"
+        android:label="@string/features_list_fragment_label"
+        tools:layout="@layout/fragment_feature_wallet">
+
+        <action
+            android:id="@+id/action_FeatureWalletFragment_to_FeatureFragment"
+            app:destination="@id/FeatureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/FeatureFragment"
+        android:name="eu.polypoly.pod.android.FeatureFragment"
+        android:label="@string/feature_fragment_label"
+        tools:layout="@layout/fragment_feature">
+
+        <action
+            android:id="@+id/action_FeatureFragment_to_FeaturesListFragment"
+            app:destination="@id/FeaturesListFragment" />
+
+        <argument
+            android:name="featureName"
+            app:argType="string" />
+    </fragment>
+</navigation>

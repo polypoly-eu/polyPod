@@ -1,0 +1,164 @@
+plugins {
+    id 'name.remal.check-dependency-updates' version '1.0.211'  // and run "checkDependencyUpdates" task
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs'
+    id "com.github.node-gradle.node" version "2.2.4"
+}
+
+task buildFeatureContainer(type: Copy) {
+    dependsOn npm_install
+    from "feature_container/node_modules/@polypoly-eu/podigree/dist/bootstrap.js"
+    from "feature_container/src"
+    rename "bootstrap.js", "pod.js"
+    into "build/container/container/"
+}
+
+task buildTestFeature(type: Zip) {
+    dependsOn ":app:testFeature:build"
+    archiveFileName = "testFeature.zip"
+    destinationDirectory = file("$buildDir/")
+    from "$projectDir/testFeature/dist"
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets")
+        task.dependsOn buildFeatureContainer
+    if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
+        task.dependsOn copyTestFeatureOntoDevice
+}
+
+node {
+    download = true
+    version = "14.6.0"
+    nodeModulesDir = file("feature_container")
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "eu.polypoly.pod.android"
+        minSdkVersion 23
+        targetSdkVersion 29 // cannot use 30 because of Robolectric's lack of support for that, see https://github.com/robolectric/robolectric/issues/5644
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs += file('build/container')
+            java.srcDirs += file('src/main/kotlin')
+        }
+        test {
+            java.srcDirs += file('src/test/kotlin')
+        }
+        androidTest {
+            java.srcDirs += file('src/androidTest/kotlin')
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            all {
+                systemProperty 'robolectric.logging.enabled', 'true'
+                testLogging {
+                    events "passed", "skipped", "failed", "standardOut", "standardError"
+                }
+            }
+        }
+    }
+}
+
+task copyTestFeatureOntoDevice(type: Exec) {
+    dependsOn buildTestFeature
+    def adb = android.getAdbExecutable().absolutePath
+    def mkdirCommand = [adb, 'shell', "mkdir", '-p', '/sdcard/Android/data/eu.polypoly.pod.android/files/features/']
+    commandLine mkdirCommand
+    logger.info("Directory created on the device")
+    def copyCommand = [adb, 'push', "--sync", "$buildDir/testFeature.zip", '/sdcard/Android/data/eu.polypoly.pod.android/files/features/testFeature.zip']
+    commandLine copyCommand
+    logger.info("testFeature copied onto the device")
+}
+
+repositories {
+    maven {
+        name = "bubblewrap"
+        url = uri("https://maven.pkg.github.com/polypoly-eu/bubblewrap")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+            password = project.findProperty("gpr.token") ?: System.getenv("TOKEN")
+        }
+    }
+}
+
+dependencies {
+    implementation project(":polyOut")
+    implementation 'eu.polypoly:bubblewrap:0.1.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation "androidx.webkit:webkit:1.3.0"
+    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+
+    // this unfortunately is needed to test the app
+    debugImplementation 'androidx.test:core:1.3.0'
+    debugImplementation 'androidx.fragment:fragment-testing:1.2.5'
+
+    // dependencies for tests that do not require Android device/emulator running
+    testImplementation 'junit:junit:4.13'   // yuck...
+    testImplementation 'androidx.test.ext:junit:1.1.2'
+    testImplementation 'androidx.test:runner:1.3.0'
+    testImplementation 'org.robolectric:robolectric:4.3.1'
+    testImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation 'androidx.test:runner:1.3.0'
+    testImplementation 'androidx.test:rules:1.3.0'
+    testImplementation 'androidx.test.espresso:espresso-web:3.3.0'
+    testImplementation 'com.google.truth:truth:1.0.1'
+    testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0.1'
+    // fragment-testing requires entry with 'debugImplementation' scope, but also with 'testImplementation'
+    // linter tells more (hence ignoring FragmentGradleConfiguration linter option)
+    //noinspection FragmentGradleConfiguration
+    testImplementation 'androidx.fragment:fragment-testing:1.2.5'
+    testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.30'
+
+    // instrumented tests dependencies
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'com.google.truth:truth:1.0.1'
+    androidTestImplementation 'com.google.truth.extensions:truth-java8-extension:1.0.1'
+    // fragment-testing requires entry with 'debugImplementation' scope, but also with 'androidTestImplementation'
+    // linter tells more (hence ignoring FragmentGradleConfiguration linter option)
+    //noinspection FragmentGradleConfiguration
+    androidTestImplementation 'androidx.fragment:fragment-testing:1.2.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-web:3.3.0'
+}
