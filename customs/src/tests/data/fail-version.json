@@ -1,0 +1,10 @@
+{
+  "name": "feature-fail-version",
+  "version": "0.0.0",
+  "engines": {
+    "polypoly": "^a.b.c"
+  },
+  "polypoly": {
+    "root": "assets"
+  }
+}
