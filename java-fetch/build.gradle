@@ -1,0 +1,72 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id "com.github.node-gradle.node" version "2.2.4"
+    id "com.github.johnrengelman.shadow" version "6.0.0"
+}
+
+repositories {
+    jcenter()
+}
+
+import groovy.json.JsonSlurper
+def packageJson = new JsonSlurper().parse file('package.json')
+version = packageJson.version
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:4.8.0'
+    testCompileOnly 'org.graalvm.sdk:graal-sdk:20.1.0'
+}
+
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+task testJar(type: ShadowJar) {
+    archiveClassifier = 'tests'
+    from sourceSets.test.output
+    configurations = [project.configurations.testRuntime]
+}
+
+task mochaTest(type: Exec) {
+    dependsOn shadowJar
+    dependsOn testJar
+    File main = tasks.shadowJar.outputs.files.singleFile
+    File test = tasks.testJar.outputs.files.singleFile
+    File javaHome = org.gradle.internal.jvm.Jvm.current().getJavaHome()
+    String node = "${javaHome}/bin/node"
+    String cp = "${main}:${test}"
+    commandLine node,
+        "--jvm",
+        "--polyglot",
+        "--vm.cp=${cp}",
+        "./node_modules/mocha/bin/mocha",
+        "src/test/javascript/**.test.js"
+}
+
+tasks.test.dependsOn mochaTest
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/polypoly-eu/java-fetch")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.token") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+
+    publications {
+        gpr(MavenPublication) {
+            groupId = 'eu.polypoly'
+            artifactId = 'java-fetch'
+
+            from(components.java)
+        }
+    }
+}
