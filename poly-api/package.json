@@ -23,8 +23,8 @@
     "dist/*.d.ts"
   ],
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.4",
-    "@polypoly-eu/rdf-spec": "^0.3.1",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
+    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/chai": "^4.2.14",

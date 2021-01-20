@@ -22,7 +22,7 @@
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "dependencies": {
-    "@polypoly-eu/bubblewrap": "^0.1.2",
+    "@polypoly-eu/bubblewrap": "file:../bubblewrap",
     "@types/body-parser": "^1.19.0",
     "@types/connect": "^3.4.33",
     "@types/node": "^14.6.4"
@@ -35,7 +35,7 @@
     "fast-check": "^2.11.0"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.4",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",

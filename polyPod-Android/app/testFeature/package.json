@@ -9,6 +9,6 @@
     "tslib": "^2.0.1"
   },
   "dependencies": {
-    "@polypoly-eu/poly-api": "^0.6.1"
+    "@polypoly-eu/poly-api": "file:../../../poly-api"
   }
 }
