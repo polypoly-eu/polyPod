@@ -11,14 +11,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polypoly-eu/eslint-config-polypoly.git"
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
-  "author": "",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/polypoly-eu/eslint-config-polypoly/issues"
-  },
-  "homepage": "https://github.com/polypoly-eu/eslint-config-polypoly#readme",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",

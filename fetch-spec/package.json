@@ -21,14 +21,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polypoly-eu/fetch-spec.git"
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
-  "author": "Lars Hupel",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/polypoly-eu/fetch-spec/issues"
-  },
-  "homepage": "https://github.com/polypoly-eu/fetch-spec#readme",
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "0.0.2",
     "@rollup/plugin-sucrase": "^3.1.0",

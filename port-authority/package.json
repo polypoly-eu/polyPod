@@ -19,14 +19,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polypoly-eu/port-authority.git"
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
-  "author": "Lars Hupel",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/polypoly-eu/port-authority/issues"
-  },
-  "homepage": "https://github.com/polypoly-eu/port-authority#readme",
   "dependencies": {
     "@polypoly-eu/bubblewrap": "^0.1.2",
     "@types/body-parser": "^1.19.0",

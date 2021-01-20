@@ -20,14 +20,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polypoly-eu/rdf-spec.git"
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
-  "author": "Lars Hupel",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/polypoly-eu/rdf-spec/issues"
-  },
-  "homepage": "https://github.com/polypoly-eu/rdf-spec#readme",
   "devDependencies": {
     "@graphy/core.data.factory": "^4.3.3",
     "@graphy/memory.dataset.fast": "^4.3.3",

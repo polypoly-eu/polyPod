@@ -19,14 +19,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polypoly-eu/podigree.git"
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
-  "author": "Lars Hupel",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/polypoly-eu/podigree/issues"
-  },
-  "homepage": "https://github.com/polypoly-eu/podigree#readme",
   "files": [
     "dist/*.d.ts",
     "dist/*.js"

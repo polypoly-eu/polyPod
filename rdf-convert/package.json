@@ -17,18 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polypoly-eu/rdf-convert.git"
-  },
-  "author": "Lars Hupel",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/polypoly-eu/rdf-convert/issues"
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "files": [
     "dist/*.ts",
     "dist/*.js"
   ],
-  "homepage": "https://github.com/polypoly-eu/rdf-convert#readme",
   "devDependencies": {
     "@graphy/core.data.factory": "^4.3.3",
     "@graphy/memory.dataset.fast": "^4.3.3",

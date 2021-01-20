@@ -16,14 +16,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polypoly-eu/poly-api.git"
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
-  "author": "Lars Hupel",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/polypoly-eu/poly-api/issues"
-  },
-  "homepage": "https://github.com/polypoly-eu/poly-api#readme",
   "files": [
     "dist/*.js",
     "dist/*.d.ts"

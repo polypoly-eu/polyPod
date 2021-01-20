@@ -17,14 +17,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polypoly-eu/orodruin.git"
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
-  "author": "Lars Hupel",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/polypoly-eu/orodruin/issues"
-  },
-  "homepage": "https://github.com/polypoly-eu/orodruin#readme",
   "files": [
     "dist/*.js",
     "dist/*.d.ts",
