@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
+    "@polypoly-eu/fetch-spec": "file:../fetch-spec",
     "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
