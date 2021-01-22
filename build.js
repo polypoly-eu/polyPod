@@ -1,15 +1,14 @@
 "use strict";
 
+const fs = require("fs");
 const {spawn} = require("child_process");
 
 // TODO: Don't hard code the package tree
 const packageTree = {
     "aop-ts": {
-	buildStep: true,
 	dependencies: ["eslint-config-polypoly"]
     },
     "bubblewrap": {
-	buildStep: true,
 	dependencies: [
 	    "eslint-config-polypoly",
 	    "rdf",
@@ -18,19 +17,17 @@ const packageTree = {
 	]
     },
     "customs": {
-	buildStep: true,
 	dependencies: ["eslint-config-polypoly"]
     },
     "eslint-config-polypoly": {
-	buildStep: false,
+	skipRunBuild: true,
 	dependencies: []
     },
     "fetch-spec": {
-	buildStep: true,
 	dependencies: ["eslint-config-polypoly"]
     },
     "orodruin": {
-	buildStep: true,
+	fullInstallNeeded: true,
 	dependencies: [
 	    "customs",
 	    "eslint-config-polypoly",
@@ -39,7 +36,7 @@ const packageTree = {
 	]
     },
     "podigree": {
-	buildStep: true,
+	fullInstallNeeded: true,
 	dependencies: [
 	    "aop-ts",
 	    "bubblewrap",
@@ -53,7 +50,6 @@ const packageTree = {
 	]
     },
     "poly-api": {
-	buildStep: true,
 	dependencies: [
 	    "eslint-config-polypoly",
 	    "fetch-spec",
@@ -62,44 +58,34 @@ const packageTree = {
 	]
     },
     "port-authority": {
-	buildStep: true,
 	dependencies: [
 	    "bubblewrap",
 	    "eslint-config-polypoly"
 	]
     },
     "postoffice": {
-	buildStep: true,
 	dependencies: ["eslint-config-polypoly"]
     },
     "rdf": {
-	buildStep: true,
 	dependencies: [
 	    "eslint-config-polypoly",
 	    "rdf-spec"
 	]
     },
     "rdf-convert": {
-	buildStep: true,
 	dependencies: [
 	    "eslint-config-polypoly",
 	    "rdf-spec"
 	]
     },
     "rdf-spec": {
-	buildStep: true,
 	dependencies: ["eslint-config-polypoly"]
     }
 }
 
-function execCommand(command, args, workingDir) {
-    const oldWorkingDir = process.cwd();
-    try {
-	process.chdir(workingDir);
-    } catch {
-	return Promise.reject(`Directory ${workingDir} does not exist`);
-    }
+const logMessage = (message) => console.log(`\n***** ${message}`);
 
+function execCommand(command, args) {
     const spawnedProcess = spawn(command, args);
 
     spawnedProcess.stdout.on("data", function(data) {
@@ -112,7 +98,6 @@ function execCommand(command, args, workingDir) {
 
     return new Promise((resolve, reject) => {
 	spawnedProcess.on("exit", function(code) {
-	    process.chdir(oldWorkingDir);
 	    if (code === 0)
 		resolve();
 	    else
@@ -121,41 +106,70 @@ function execCommand(command, args, workingDir) {
     });
 }
 
-const npmCi = path => execCommand("npm", ["ci", "--ignore-scripts"], path);
-const npmBuild = path => execCommand("npm", ["run", "build"], path);
-const npmCiAndBuild = path => npmCi(path).then(() => npmBuild(path));
-const logMessage = (message) => console.log(`\n***** ${message}`);
+const npm = (...args) => execCommand("npm", args);
+
+async function npmInstallDependencies(pkg) {
+    // TODO: Some packages will currently only install their dependencies
+    //       properly with the following workaround.
+    //       Probably because of: https://github.com/npm/cli/issues/1397
+    if (pkg.fullInstallNeeded) {
+	console.log("Performing a full dependency reinstall - this might take a while");
+	fs.rmdirSync("node_modules", { recursive: true });
+	fs.unlinkSync("package-lock.json");
+	await npm("install");
+	return;
+    }
+
+    await npm("ci", "--ignore-scripts");
+}
+
+async function npmExecuteBuildSteps(pkg) {
+    if (!pkg.skipRunBuild)
+	await npm("run", "build");
+}
+
+const npmRunBuild = () => execCommand("npm", ["run", "build"]);
+
+async function buildNpmPackage(name, pkg) {
+    const oldPath = process.cwd();
+    try {
+	process.chdir(name);
+    } catch {
+	throw `Directory ${name} does not exist`;
+    }
+
+    try {
+	await npmInstallDependencies(pkg);
+	await npmExecuteBuildSteps(pkg);
+    } finally {
+	process.chdir(oldPath);
+    }
+}
 
 async function buildPackage(name) {
     if (!(name in packageTree))
 	throw `Unable to find package ${name}`;
 
     const pkg = packageTree[name];
-    if ("built" in pkg || pkg.built)
+    if (pkg.built)
 	return;
 
     for (let dep of pkg.dependencies)
 	await buildPackage(dep);
 
     logMessage(`Building ${name} ...`);
-    await npmCi(name);
-    if (pkg.buildStep)
-	await npmBuild(name);
+    await buildNpmPackage(name, pkg);
     pkg.built = true;
 }
 
-async function buildAllExcept(excludedNames) {
+async function buildAll() {
     for (let name in packageTree)
-	if (!excludedNames.includes(name))
-	    await buildPackage(name);
+	await buildPackage(name);
 }
 
-// TODO: Build podigree and orodruin as well, currently not possible,
-//       probably due to: https://github.com/npm/cli/issues/1397
-
-buildAllExcept(["podigree", "orodruin"])
+buildAll()
     .then(() => {
-	logMessage("Build succeeded!\n\nNow manually build first podigree and then orodruin and/or polyPod-Android.\n");
+	logMessage("Build succeeded!\n\nNow you need to build polyPod-Android manually (sorry).\n");
     })
     .catch((error) => {
 	logMessage(`Build failed: ${error}\n`);
