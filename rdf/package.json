@@ -2,8 +2,16 @@
   "name": "@polypoly-eu/rdf",
   "version": "0.2.0",
   "description": "TypeScript implementation of the RDF Data Model spec",
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
@@ -12,23 +20,12 @@
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/polypoly-eu/polyPod.git"
-  },
-  "files": [
-    "dist/*.js",
-    "dist/*.d.ts"
-  ],
   "dependencies": {
     "@types/rdf-js": "^4.0.0"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.4",
-    "@polypoly-eu/rdf-spec": "^0.3.1",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
+    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rdfjs/data-model": "^1.2.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.20",
@@ -40,5 +37,6 @@
     "ts-jest": "^26.4.4",
     "typedoc": "^0.19.2",
     "typescript": "^4.0.5"
-  }
+  },
+  "private": true
 }

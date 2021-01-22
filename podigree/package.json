@@ -2,8 +2,16 @@
   "name": "@polypoly-eu/podigree",
   "version": "0.6.2",
   "description": "An assortment of Pod implementations of noble descent",
+  "files": [
+    "dist/*.d.ts",
+    "dist/*.js"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
@@ -14,37 +22,24 @@
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/polypoly-eu/polyPod.git"
-  },
-  "files": [
-    "dist/*.d.ts",
-    "dist/*.js"
-  ],
   "dependencies": {
-    "@polypoly-eu/aop-ts": "0.0.1",
-    "@polypoly-eu/bubblewrap": "^0.1.2",
-    "@polypoly-eu/poly-api": "^0.7.2",
-    "@polypoly-eu/port-authority": "^0.2.1",
-    "@polypoly-eu/postoffice": "^0.1.0",
-    "@polypoly-eu/rdf": "^0.2.0",
-    "@polypoly-eu/rdf-convert": "^0.1.0",
+    "@polypoly-eu/aop-ts": "file:../aop-ts",
+    "@polypoly-eu/bubblewrap": "file:../bubblewrap",
+    "@polypoly-eu/poly-api": "file:../poly-api",
+    "@polypoly-eu/port-authority": "file:../port-authority",
+    "@polypoly-eu/postoffice": "file:../postoffice",
+    "@polypoly-eu/rdf": "file:../rdf",
+    "@polypoly-eu/rdf-convert": "file:../rdf-convert",
     "@rdfjs/dataset": "^1.0.1",
     "@types/rdf-js": "^4.0.0",
     "fp-ts": "^2.8.2",
     "io-ts": "2.2.10",
     "memfs": "^3.2.0"
   },
-  "peerDependencies": {
-    "body-parser": "^1.19.0"
-  },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.4",
-    "@polypoly-eu/rdf-spec": "^0.3.1",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
+    "@polypoly-eu/fetch-spec": "file:../fetch-spec",
+    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",
@@ -71,5 +66,9 @@
     "ts-mocha": "^8.0.0",
     "typedoc": "^0.19.2",
     "typescript": "^4.0.5"
-  }
+  },
+  "peerDependencies": {
+    "body-parser": "^1.19.0"
+  },
+  "private": true
 }

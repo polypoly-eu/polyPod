@@ -2,8 +2,16 @@
   "name": "@polypoly-eu/bubblewrap",
   "version": "0.1.2",
   "description": "Lossless encoding and decoding of objects into byte arrays",
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
   "scripts": {
     "benchmark": "./bin/run-benchmarks.sh",
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && npm run rollup",
@@ -14,22 +22,14 @@
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+  "dependencies": {
+    "@msgpack/msgpack": "^2.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/polypoly-eu/polyPod.git"
-  },
-  "files": [
-    "dist/*.js",
-    "dist/*.d.ts"
-  ],
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.4",
-    "@polypoly-eu/rdf": "^0.2.0",
-    "@polypoly-eu/rdf-convert": "^0.1.0",
-    "@polypoly-eu/rdf-spec": "^0.3.1",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
+    "@polypoly-eu/rdf": "file:../rdf",
+    "@polypoly-eu/rdf-convert": "file:../rdf-convert",
+    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",
@@ -49,7 +49,5 @@
     "typedoc": "^0.19.2",
     "typescript": "^4.0.5"
   },
-  "dependencies": {
-    "@msgpack/msgpack": "^2.0.0"
-  }
+  "private": true
 }

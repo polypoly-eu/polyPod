@@ -1,14 +1,16 @@
 {
-  "private": true,
   "scripts": {
     "build": "faucet"
   },
+  "dependencies": {
+    "@polypoly-eu/poly-api": "file:../../../poly-api",
+    "@rdfjs/data-model": "^1.2.0"
+  },
   "devDependencies": {
+    "@types/rdf-js": "^4.0.0",
     "faucet-pipeline-typescript": "^2.1.6",
     "faucet-pipeline-static": "^1.2.0",
     "tslib": "^2.0.1"
   },
-  "dependencies": {
-    "@polypoly-eu/poly-api": "^0.6.1"
-  }
+  "private": true
 }

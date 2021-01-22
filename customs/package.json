@@ -4,18 +4,15 @@
   "description": "TypeScript reference implementation of the Feature manifest format",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "test": "jest"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "dependencies": {
     "@pnpm/read-package-json": "^3.1.5",
@@ -25,7 +22,7 @@
     "semver": "^7.3.2"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.2",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.21",
@@ -35,5 +32,6 @@
     "rollup": "^2.37.0",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.7"
-  }
+  },
+  "private": true
 }
