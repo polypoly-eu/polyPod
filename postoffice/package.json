@@ -4,6 +4,10 @@
   "description": "RPC library for TypeScript",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
@@ -11,13 +15,6 @@
     "test": "jest",
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
@@ -31,5 +28,6 @@
     "ts-jest": "^25.5.1",
     "typedoc": "^0.19.2",
     "typescript": "^3.9.7"
-  }
+  },
+  "private": true
 }

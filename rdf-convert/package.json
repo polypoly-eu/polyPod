@@ -2,8 +2,16 @@
   "name": "@polypoly-eu/rdf-convert",
   "version": "0.1.0",
   "description": "Converts terms and quads between different RDFJS-compliant data factories",
+  "files": [
+    "dist/*.ts",
+    "dist/*.js"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
@@ -12,17 +20,9 @@
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+  "dependencies": {
+    "@types/rdf-js": "^4.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/polypoly-eu/polyPod.git"
-  },
-  "files": [
-    "dist/*.ts",
-    "dist/*.js"
-  ],
   "devDependencies": {
     "@graphy/core.data.factory": "^4.3.3",
     "@graphy/memory.dataset.fast": "^4.3.3",
@@ -44,7 +44,5 @@
     "typedoc": "^0.19.2",
     "typescript": "^4.0.5"
   },
-  "dependencies": {
-    "@types/rdf-js": "^4.0.0"
-  }
+  "private": true
 }

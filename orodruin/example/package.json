@@ -1,10 +1,7 @@
 {
   "name": "example",
   "version": "0.0.1",
-  "description": "Example feature",
   "main": "dist/index.js",
-  "author": "",
-  "license": "UNLICENSED",
   "scripts": {
     "serve": "orodruin serve",
     "build": "rollup -c",
@@ -23,6 +20,7 @@
   "engines": {
     "polypoly": "^0.6.0"
   },
+  "private": true,
   "polypoly": {
     "root": "dist"
   }

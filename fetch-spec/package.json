@@ -2,8 +2,16 @@
   "name": "@polypoly-eu/fetch-spec",
   "version": "0.0.1",
   "description": "Standalone executable spec for window.fetch",
+  "files": [
+    "dist/*.ts",
+    "dist/*.js"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
@@ -15,13 +23,6 @@
     "test:jasmine": "ts-node node_modules/.bin/jasmine --config=jasmine.json",
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
@@ -55,8 +56,5 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1"
   },
-  "files": [
-    "dist/*.ts",
-    "dist/*.js"
-  ]
+  "private": true
 }

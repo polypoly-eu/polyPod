@@ -2,23 +2,6 @@
   "name": "@polypoly-eu/orodruin",
   "version": "0.0.14",
   "description": "CLI tool supporting the development lifecycle of Features",
-  "main": "dist/index.js",
-  "bin": {
-    "orodruin": "bin/cli.js"
-  },
-  "scripts": {
-    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
-    "dev": "tsc --watch --incremental",
-    "eslint": "eslint src --ext .ts",
-    "test:orodruin": "rollup -c && jest"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/polypoly-eu/polyPod.git"
-  },
   "files": [
     "dist/*.js",
     "dist/*.d.ts",
@@ -26,8 +9,39 @@
     "bin",
     "data"
   ],
-  "peerDependencies": {
-    "puppeteer": "^5.5.0"
+  "main": "dist/index.js",
+  "bin": {
+    "orodruin": "bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
+  "scripts": {
+    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "dev": "tsc --watch --incremental",
+    "eslint": "eslint src --ext .ts",
+    "test:orodruin": "rollup -c && jest"
+  },
+  "dependencies": {
+    "@polypoly-eu/customs": "file:../customs",
+    "@polypoly-eu/podigree": "file:../podigree",
+    "@polypoly-eu/poly-api": "file:../poly-api",
+    "@polypoly-eu/port-authority": "file:../port-authority",
+    "@rdfjs/dataset": "^1.0.1",
+    "@types/node": "^14.6.4",
+    "body-parser": "^1.19.0",
+    "connect": "^3.7.0",
+    "ejs": "^3.1.5",
+    "exposed-promises": "^1.0.0",
+    "mkdirp": "^1.0.4",
+    "node-fetch": "^2.6.1",
+    "open": "^7.2.1",
+    "recursive-copy": "^2.0.11",
+    "rimraf": "^3.0.2",
+    "semver": "^7.3.2",
+    "serve-static": "^1.14.1",
+    "yargs": "^16.0.3"
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
@@ -57,24 +71,8 @@
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.3"
   },
-  "dependencies": {
-    "@polypoly-eu/customs": "file:../customs",
-    "@polypoly-eu/podigree": "file:../podigree",
-    "@polypoly-eu/poly-api": "file:../poly-api",
-    "@polypoly-eu/port-authority": "file:../port-authority",
-    "@rdfjs/dataset": "^1.0.1",
-    "@types/node": "^14.6.4",
-    "body-parser": "^1.19.0",
-    "connect": "^3.7.0",
-    "ejs": "^3.1.5",
-    "exposed-promises": "^1.0.0",
-    "mkdirp": "^1.0.4",
-    "node-fetch": "^2.6.1",
-    "open": "^7.2.1",
-    "recursive-copy": "^2.0.11",
-    "rimraf": "^3.0.2",
-    "semver": "^7.3.2",
-    "serve-static": "^1.14.1",
-    "yargs": "^16.0.3"
-  }
+  "peerDependencies": {
+    "puppeteer": "^5.5.0"
+  },
+  "private": true
 }
