@@ -2,6 +2,7 @@
 
 const {spawn} = require("child_process");
 
+// TODO: Don't hard code the package tree
 const packageTree = {
     "aop-ts": {
 	buildStep: true,
@@ -123,29 +124,40 @@ function execCommand(command, args, workingDir) {
 const npmCi = path => execCommand("npm", ["ci", "--ignore-scripts"], path);
 const npmBuild = path => execCommand("npm", ["run", "build"], path);
 const npmCiAndBuild = path => npmCi(path).then(() => npmBuild(path));
+const logMessage = (message) => console.log(`\n***** ${message}`);
 
-function buildDepsFor(packages) {
-    // TODO: Don't hard code, use packageTree above
-    return npmCi("eslint-config-polypoly")
-	.then(() => npmCiAndBuild("aop-ts"))
-	.then(() => npmCiAndBuild("customs"))
-	.then(() => npmCiAndBuild("fetch-spec"))
-	.then(() => npmCiAndBuild("postoffice"))
-	.then(() => npmCiAndBuild("rdf-spec"))
-	.then(() => npmCiAndBuild("rdf"))
-	.then(() => npmCiAndBuild("rdf-convert"))
-	.then(() => npmCiAndBuild("bubblewrap"))
-	.then(() => npmCiAndBuild("poly-api"))
-	.then(() => npmCiAndBuild("port-authority"));
+async function buildPackage(name) {
+    if (!(name in packageTree))
+	throw `Unable to find package ${name}`;
+
+    const pkg = packageTree[name];
+    if ("built" in pkg || pkg.built)
+	return;
+
+    for (let dep of pkg.dependencies)
+	await buildPackage(dep);
+
+    logMessage(`Building ${name} ...`);
+    await npmCi(name);
+    if (pkg.buildStep)
+	await npmBuild(name);
+    pkg.built = true;
+}
+
+async function buildAllExcept(excludedNames) {
+    for (let name in packageTree)
+	if (!excludedNames.includes(name))
+	    await buildPackage(name);
 }
 
 // TODO: Build podigree and orodruin as well, currently not possible,
 //       probably due to: https://github.com/npm/cli/issues/1397
 
-buildDepsFor(["podigree", "orodruin"])
+buildAllExcept(["podigree", "orodruin"])
     .then(() => {
-	console.log("Done! Now manually build first podigree and then orodruin and/or polyPod-Android");
+	logMessage("Build succeeded!\n\nNow manually build first podigree and then orodruin and/or polyPod-Android.\n");
     })
     .catch((error) => {
-	console.error(`Build failed: ${error}`);
+	logMessage(`Build failed: ${error}\n`);
+	process.exit(1);
     });
