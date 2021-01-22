@@ -2,20 +2,43 @@
 
 The polyPod
 
+At the moment, the polyPod is essentially a runtime for _features_; small,
+sandboxed JavaScript applications that can be launched from the polyPod app.
+
+But it will be much more than that, for more information read [the polyPod
+whitepaper].
+
 ## Please note
 
-We are in the process of migrating the individual repositories that
-make up the polyPod into this repository, which will contain all the
-code necessary to build the polyPod for Android, the polyPod for iOS,
-as well as polyPod features.
+The code in this repository used to be spread across more than a dozen
+individual repositories. While it generally works, there are still a few things
+we need to fix, including adjusting the overall structure and documentation.
 
-What still needs to be done:
+## Components
 
-1. We need to get all dependencies from the source tree, rather than
-   GitHub Packages. We will probably need to introduce some central
-   build code for this.
-2. We need to migrate all GitHub actions into `/.github`.
-3. We need to improve the structure of this repository and provide
-   some high level instructions on how to work with the relevant parts
-   in this README.
-4. We need to integrate [polyPod-iOS](https://github.com/polypoly-eu/polyPod-iOS).
+### CLI for building and testing Features
+
+The [orodruin](orodruin) package includes everything needed to develop and test features.
+
+### polyPod app for Android
+
+You can find the Android version of the polyPod in [polyPod-Android](polyPod-Android).
+
+### The shared polyPod core code
+
+All the other packages contain the internal workings of the polyPod, such as the
+feature runtime execution environment. Refer to the individual packages to learn
+more about what they are for, but note that we aim to improve the structure,
+naming and documentation to make things more understandable.
+
+## Building
+
+To build all components, just ensure you have [Node.js](https://nodejs.org/)
+version 14.10 or newer, then execute:
+
+    $ node build.js
+
+To run the tests, please refer to the individual code bases - we don't support
+this at the top level yet, see above.
+
+[the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
