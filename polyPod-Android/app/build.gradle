@@ -91,15 +91,26 @@ android {
     }
 }
 
-task copyTestFeatureOntoDevice(type: Exec) {
+task copyTestFeatureOntoDevice {
     dependsOn buildTestFeature
     def adb = android.getAdbExecutable().absolutePath
-    def mkdirCommand = [adb, 'shell', "mkdir", '-p', '/sdcard/Android/data/eu.polypoly.pod.android/files/features/']
-    commandLine mkdirCommand
-    logger.info("Directory created on the device")
-    def copyCommand = [adb, 'push', "--sync", "$buildDir/testFeature.zip", '/sdcard/Android/data/eu.polypoly.pod.android/files/features/testFeature.zip']
-    commandLine copyCommand
-    logger.info("testFeature copied onto the device")
+    def tempPath = "/data/local/tmp/testFeature.zip"
+    def packageName = "eu.polypoly.pod.android"
+    def featurePath = "/data/user/0/$packageName/files/features/"
+    doLast {
+        exec {
+            commandLine adb, 'push', "--sync", "$buildDir/testFeature.zip", tempPath
+            logger.info("testFeature copied onto the device")
+        }
+        exec {
+            commandLine adb, 'shell', "run-as", packageName, "mkdir", '-p', featurePath
+            logger.info("Feature directory created on the device")
+        }
+        exec {
+            commandLine adb, 'shell', "run-as", packageName, "cp", tempPath, featurePath
+            logger.info("testFeature moved to features directory on the device")
+        }
+    }
 }
 
 repositories {
