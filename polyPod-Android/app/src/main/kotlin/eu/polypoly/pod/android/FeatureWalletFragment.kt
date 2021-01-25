@@ -46,5 +46,8 @@ class FeatureWalletFragment : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
+        (if (features.isEmpty()) recyclerView else view.findViewById(R.id.noFeaturesText) as View)
+            .visibility = View.GONE
     }
 }

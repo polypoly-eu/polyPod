@@ -4,4 +4,5 @@
     <!-- Strings used for fragments for navigation -->
     <string name="features_list_fragment_label">Features list Fragment</string>
     <string name="feature_fragment_label">Feature Fragment</string>
+    <string name="no_features">Doesn\'t seem like there\'s any features yet.\nCome back again in a bit!</string>
 </resources>
