@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
+import eu.polypoly.pod.android.features.FeatureWallet
 import eu.polypoly.pod.android.logging.LoggerFactory
 import eu.polypoly.pod.android.polyIn.PolyIn
 import eu.polypoly.pod.android.polyOut.PolyOut
@@ -56,11 +57,9 @@ open class FeatureFragment : Fragment() {
         webView = view.findViewById(R.id.web_view)
         webView.settings.javaScriptEnabled = true
 
-        val mainDir = requireContext().getExternalFilesDir(null)
-        val featuresDir = File(mainDir, "features")
-        val featureFile = ZipFile(File(featuresDir, args.featureName + ".zip"))
+        val feature = FeatureWallet().loadFeature(requireContext(), args.featureName)
         val assetLoader = WebViewAssetLoader.Builder()
-            .addPathHandler("/features/${args.featureName}/", FeaturesPathHandler(featureFile))
+            .addPathHandler("/features/${args.featureName}/", FeaturesPathHandler(feature))
             .addPathHandler("/", PodPathHandler(requireContext()))
             .build()
 

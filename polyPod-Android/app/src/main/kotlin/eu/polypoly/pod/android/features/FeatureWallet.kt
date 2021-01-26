@@ -4,6 +4,7 @@ import android.content.Context
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.util.*
+import java.util.zip.ZipFile
 
 class FeatureWallet {
     companion object {
@@ -12,8 +13,7 @@ class FeatureWallet {
     }
 
     public fun listFeatures(context: Context): List<String> {
-        val mainDir = context.getExternalFilesDir(null)
-        val featuresDir = File(mainDir, "features")
+        val featuresDir = getFeaturesDir(context)
         logger.warn("Features directory: '{}'", featuresDir.absolutePath)
         if (!featuresDir.exists()) {
             val created = featuresDir.mkdirs()
@@ -37,5 +37,14 @@ class FeatureWallet {
             logger.debug("No Features found")
             emptyList()
         }
+    }
+
+    public fun loadFeature(context: Context, name: String): ZipFile {
+        return ZipFile(File(getFeaturesDir(context), "$name.zip"))
+    }
+
+    private fun getFeaturesDir(context: Context): File {
+        val mainDir = context.getExternalFilesDir(null)
+        return File(mainDir, "features")
     }
 }
