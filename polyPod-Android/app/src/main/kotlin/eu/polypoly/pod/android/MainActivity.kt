@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import eu.polypoly.pod.android.features.FeatureWallet
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FeatureWallet().installBundledFeatures(applicationContext)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
     }

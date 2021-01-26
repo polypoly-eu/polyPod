@@ -3,6 +3,7 @@ package eu.polypoly.pod.android.features
 import android.content.Context
 import org.slf4j.LoggerFactory
 import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 import java.util.zip.ZipFile
 
@@ -41,6 +42,17 @@ class FeatureWallet {
 
     public fun loadFeature(context: Context, name: String): ZipFile {
         return ZipFile(File(getFeaturesDir(context), "$name.zip"))
+    }
+
+    public fun installBundledFeatures(context: Context) {
+        for (featureBundle in context.assets.list("features").orEmpty()) {
+            logger.debug("Installing $featureBundle from assets")
+            val source = context.assets.open("features/$featureBundle")
+            val featuresDir = getFeaturesDir(context)
+            featuresDir.mkdirs()
+            val destination = FileOutputStream(File(featuresDir, featureBundle))
+            source.copyTo(destination)
+        }
     }
 
     private fun getFeaturesDir(context: Context): File {

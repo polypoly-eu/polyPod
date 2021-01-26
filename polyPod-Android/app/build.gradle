@@ -12,7 +12,13 @@ task buildFeatureContainer(type: Copy) {
     from "feature_container/node_modules/@polypoly-eu/podigree/dist/bootstrap.js"
     from "feature_container/src"
     rename "bootstrap.js", "pod.js"
-    into "build/container/container/"
+    into "build/generated-assets/container/"
+}
+
+task buildPolyHelloFeature(type: Zip) {
+    archiveFileName = "polyHello.zip"
+    destinationDirectory = file("$buildDir/generated-assets/features")
+    from "$projectDir/../../polyHello-feature"
 }
 
 task buildTestFeature(type: Zip) {
@@ -23,8 +29,10 @@ task buildTestFeature(type: Zip) {
 }
 
 tasks.whenTaskAdded { task ->
-    if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets")
+    if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
         task.dependsOn buildFeatureContainer
+        task.dependsOn buildPolyHelloFeature
+    }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice
 }
@@ -67,7 +75,7 @@ android {
 
     sourceSets {
         main {
-            assets.srcDirs += file('build/container')
+            assets.srcDirs += file('build/generated-assets')
             java.srcDirs += file('src/main/kotlin')
         }
         test {
