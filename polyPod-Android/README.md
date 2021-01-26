@@ -37,3 +37,5 @@ Almost everything else is written in such a way that one can start the Feature a
 The Pod bundles no Features, but expects them as zipped files in `/sdcard/Android/data/eu.polypoly.pod.android/files/features/` directory. On one hand this directory is available from outside, so one can copy some features there using adb tool: `adb push --sync feature.zip /sdcard/Android/data/eu.polypoly.pod.android/files/features/`. On the other the Features will be automatically deleted on uninstalling the Pod itself and that will happen quite often during development. In the target picture it might be a good idea, but as the platform gets more and more restrictive, it might get a bit painful at times, yet I didn't find a better solution.
 
 File format is very simple: at the root there needs to be an `index.html` file and any other file in the archive will be addressed using path relative to this `index.html` file. That currently means that just zipping od `dist` directory created after building Features will do.
+
+**Please note:** Loading features this way does currently not work.
