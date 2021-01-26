@@ -1,3 +1,6 @@
+# We currently need to remove package-lock.json before building, hence ignore
+package-lock.json
+
 # Logs
 logs
 *.log
