@@ -68,6 +68,8 @@ open class FeatureFragment : Fragment() {
                 view: WebView,
                 request: WebResourceRequest
             ): WebResourceResponse? {
+                if (request.url.lastPathSegment == "favicon.ico")
+                    return WebResourceResponse(null, null, null)
                 return assetLoader.shouldInterceptRequest(request.url)
             }
 
