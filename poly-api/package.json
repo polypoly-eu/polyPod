@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "@types/rdf-js": "^4.0.0",
-    "@polypoly-eu/rdf": "^0.2.0",
-    "@polypoly-eu/fetch-spec": "0.0.1"
+    "@polypoly-eu/rdf": "file:../rdf",
+    "@polypoly-eu/fetch-spec": "file:../fetch-spec"
   },    
   "devDependencies": {
     "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
@@ -52,7 +52,7 @@
     "typescript": "^4.0.5"
   },
   "peerDependencies": {
-    "@polypoly-eu/rdf-spec": "^0.3.1",
+    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "fast-check": "^2.11.0"
