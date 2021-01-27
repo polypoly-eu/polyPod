@@ -4,13 +4,12 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs'
-    id "com.github.node-gradle.node" version "2.2.4"
 }
 
 task buildFeatureContainer(type: Copy) {
-    dependsOn npm_install
-    from "feature_container/node_modules/@polypoly-eu/podigree/dist/bootstrap.js"
-    from "feature_container/src"
+    // TODO: Move this logic into the feature container's build script
+    from "../../android-feature-container/node_modules/@polypoly-eu/podigree/dist/bootstrap.js"
+    from "../../android-feature-container/src"
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
 }
@@ -22,10 +21,9 @@ task buildPolyHelloFeature(type: Zip) {
 }
 
 task buildTestFeature(type: Zip) {
-    dependsOn ":app:testFeature:build"
     archiveFileName = "testFeature.zip"
-    destinationDirectory = file("$buildDir/")
-    from "$projectDir/testFeature/dist"
+    destinationDirectory = file("$buildDir")
+    from "$projectDir/../../testFeature/dist"
 }
 
 tasks.whenTaskAdded { task ->
@@ -35,12 +33,6 @@ tasks.whenTaskAdded { task ->
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice
-}
-
-node {
-    download = true
-    version = "14.6.0"
-    nodeModulesDir = file("feature_container")
 }
 
 android {

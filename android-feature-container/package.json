@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@polypoly-eu/podigree": "file:../podigree"
+  },
+  "private": true
+}
