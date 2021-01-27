@@ -55,8 +55,5 @@ class FeatureWallet {
         }
     }
 
-    private fun getFeaturesDir(context: Context): File {
-        val mainDir = context.getExternalFilesDir(null)
-        return File(mainDir, "features")
-    }
+    private fun getFeaturesDir(context: Context) = File(context.filesDir, "features")
 }

@@ -104,7 +104,7 @@ task copyTestFeatureOntoDevice {
     def adb = android.getAdbExecutable().absolutePath
     def tempPath = "/data/local/tmp/testFeature.zip"
     def packageName = "eu.polypoly.pod.android"
-    def featurePath = "/data/user/0/$packageName/files/features/"
+    def featurePath = "files/features"
     doLast {
         exec {
             commandLine adb, 'push', "--sync", "$buildDir/testFeature.zip", tempPath
