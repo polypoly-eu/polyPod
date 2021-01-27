@@ -1,4 +1,4 @@
-name: core
+name: dev
 on: [push, pull_request]
 jobs:
   build:
