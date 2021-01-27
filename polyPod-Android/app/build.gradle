@@ -95,7 +95,7 @@ task copyTestFeatureOntoDevice {
     dependsOn buildTestFeature
     def adb = android.getAdbExecutable().absolutePath
     def tempPath = "/data/local/tmp/testFeature.zip"
-    def packageName = "coop.polypoly.polypod"
+    def packageName = android.defaultConfig.applicationId
     def featurePath = "files/features"
     doLast {
         exec {
