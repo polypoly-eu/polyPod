@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="eu.polypoly.pod.android.MainActivity">
+    tools:context="coop.polypoly.polypod.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

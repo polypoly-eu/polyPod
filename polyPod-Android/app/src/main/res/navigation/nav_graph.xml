@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FeaturesListFragment"
-        android:name="eu.polypoly.pod.android.FeatureWalletFragment"
+        android:name="coop.polypoly.polypod.FeatureWalletFragment"
         android:label="@string/features_list_fragment_label"
         tools:layout="@layout/fragment_feature_wallet">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/FeatureFragment"
-        android:name="eu.polypoly.pod.android.FeatureFragment"
+        android:name="coop.polypoly.polypod.FeatureFragment"
         android:label="@string/feature_fragment_label"
         tools:layout="@layout/fragment_feature">
 

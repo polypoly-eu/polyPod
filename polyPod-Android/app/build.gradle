@@ -40,7 +40,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "eu.polypoly.pod.android"
+        applicationId "coop.polypoly.polypod"
         minSdkVersion 23
         targetSdkVersion 29 // cannot use 30 because of Robolectric's lack of support for that, see https://github.com/robolectric/robolectric/issues/5644
         versionCode 1
@@ -95,7 +95,7 @@ task copyTestFeatureOntoDevice {
     dependsOn buildTestFeature
     def adb = android.getAdbExecutable().absolutePath
     def tempPath = "/data/local/tmp/testFeature.zip"
-    def packageName = "eu.polypoly.pod.android"
+    def packageName = "coop.polypoly.polypod"
     def featurePath = "files/features"
     doLast {
         exec {
