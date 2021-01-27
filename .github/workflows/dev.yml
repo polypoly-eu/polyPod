@@ -8,4 +8,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.10
-      - run: node build.js
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - name: core packages
+        run: node build.js
+      - name: polyPod-Android
+        working-directory: polyPod-Android
+        run: ./gradlew assemble
