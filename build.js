@@ -115,7 +115,8 @@ async function npmInstallDependencies(pkg) {
     if (pkg.fullInstallNeeded) {
 	console.log("Performing a full dependency reinstall - this might take a while");
 	fs.rmdirSync("node_modules", { recursive: true });
-	fs.unlinkSync("package-lock.json");
+	if (fs.existsSync("package-lock.json"))
+	    fs.unlinkSync("package-lock.json");
 	await npm("install");
 	return;
     }
