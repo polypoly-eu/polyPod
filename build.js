@@ -6,89 +6,89 @@ const {spawn} = require("child_process");
 // TODO: Don't hard code the package tree
 const packageTree = {
     "aop-ts": {
-	dependencies: ["eslint-config-polypoly"]
+        dependencies: ["eslint-config-polypoly"]
     },
     "bubblewrap": {
-	dependencies: [
-	    "eslint-config-polypoly",
-	    "rdf",
-	    "rdf-convert",
-	    "rdf-spec"
-	]
+        dependencies: [
+            "eslint-config-polypoly",
+            "rdf",
+            "rdf-convert",
+            "rdf-spec"
+        ]
     },
     "customs": {
-	dependencies: ["eslint-config-polypoly"]
+        dependencies: ["eslint-config-polypoly"]
     },
     "eslint-config-polypoly": {
-	skipRunBuild: true,
-	dependencies: []
+        skipRunBuild: true,
+        dependencies: []
     },
     "fetch-spec": {
-	dependencies: ["eslint-config-polypoly"]
+        dependencies: ["eslint-config-polypoly"]
     },
     "orodruin": {
-	fullInstallNeeded: true,
-	dependencies: [
-	    "customs",
-	    "eslint-config-polypoly",
-	    "podigree",
-	    "poly-api"
-	]
+        fullInstallNeeded: true,
+        dependencies: [
+            "customs",
+            "eslint-config-polypoly",
+            "podigree",
+            "poly-api"
+        ]
     },
     "podigree": {
-	fullInstallNeeded: true,
-	dependencies: [
-	    "aop-ts",
-	    "bubblewrap",
-	    "eslint-config-polypoly",
-	    "poly-api",
-	    "port-authority",
-	    "postoffice",
-	    "rdf",
-	    "rdf-convert",
-	    "rdf-spec"
-	]
+        fullInstallNeeded: true,
+        dependencies: [
+            "aop-ts",
+            "bubblewrap",
+            "eslint-config-polypoly",
+            "poly-api",
+            "port-authority",
+            "postoffice",
+            "rdf",
+            "rdf-convert",
+            "rdf-spec"
+        ]
     },
     "poly-api": {
-	dependencies: [
-	    "eslint-config-polypoly",
-	    "fetch-spec",
-	    "rdf",
-	    "rdf-spec"
-	]
+        dependencies: [
+            "eslint-config-polypoly",
+            "fetch-spec",
+            "rdf",
+            "rdf-spec"
+        ]
     },
     "port-authority": {
-	dependencies: [
-	    "bubblewrap",
-	    "eslint-config-polypoly"
-	]
+        dependencies: [
+            "bubblewrap",
+            "eslint-config-polypoly"
+        ]
     },
     "postoffice": {
-	dependencies: ["eslint-config-polypoly"]
+        dependencies: ["eslint-config-polypoly"]
     },
     "rdf": {
-	dependencies: [
-	    "eslint-config-polypoly",
-	    "rdf-spec"
-	]
+        dependencies: [
+            "eslint-config-polypoly",
+            "rdf-spec"
+        ]
     },
     "rdf-convert": {
-	dependencies: [
-	    "eslint-config-polypoly",
-	    "rdf-spec"
-	]
+        dependencies: [
+            "eslint-config-polypoly",
+            "rdf-spec"
+        ]
     },
     "rdf-spec": {
-	dependencies: ["eslint-config-polypoly"]
+        dependencies: ["eslint-config-polypoly"]
     },
     "android-feature-container": {
-	fullInstallNeeded: true,
-	skipRunBuild: true,
-	dependencies: ["podigree"]
+        fullInstallNeeded: true,
+        skipRunBuild: true,
+        dependencies: ["podigree"]
     },
     "testFeature": {
-	fullInstallNeeded: true,
-	dependencies: ["poly-api"]
+        fullInstallNeeded: true,
+        dependencies: ["poly-api"]
     }
 }
 
@@ -98,20 +98,20 @@ function execCommand(command, args) {
     const spawnedProcess = spawn(command, args);
 
     spawnedProcess.stdout.on("data", function(data) {
-	console.log(data.toString());
+        console.log(data.toString());
     });
 
     spawnedProcess.stderr.on("data", function(data) {
-	console.error(data.toString());
+        console.error(data.toString());
     });
 
     return new Promise((resolve, reject) => {
-	spawnedProcess.on("exit", function(code) {
-	    if (code === 0)
-		resolve();
-	    else
-		reject(`Process exited with {code}`);
-	});
+        spawnedProcess.on("exit", function(code) {
+            if (code === 0)
+                resolve();
+            else
+                reject(`Process exited with {code}`);
+        });
     });
 }
 
@@ -122,12 +122,12 @@ async function npmInstallDependencies(pkg) {
     //       properly with the following workaround.
     //       Probably because of: https://github.com/npm/cli/issues/1397
     if (pkg.fullInstallNeeded) {
-	console.log("Performing a full dependency reinstall - this might take a while");
-	fs.rmdirSync("node_modules", { recursive: true });
-	if (fs.existsSync("package-lock.json"))
-	    fs.unlinkSync("package-lock.json");
-	await npm("install");
-	return;
+        console.log("Performing a full dependency reinstall - this might take a while");
+        fs.rmdirSync("node_modules", { recursive: true });
+        if (fs.existsSync("package-lock.json"))
+            fs.unlinkSync("package-lock.json");
+        await npm("install");
+        return;
     }
 
     await npm("ci", "--ignore-scripts");
@@ -135,7 +135,7 @@ async function npmInstallDependencies(pkg) {
 
 async function npmExecuteBuildSteps(pkg) {
     if (!pkg.skipRunBuild)
-	await npm("run", "build");
+        await npm("run", "build");
 }
 
 const npmRunBuild = () => execCommand("npm", ["run", "build"]);
@@ -143,29 +143,29 @@ const npmRunBuild = () => execCommand("npm", ["run", "build"]);
 async function buildNpmPackage(name, pkg) {
     const oldPath = process.cwd();
     try {
-	process.chdir(name);
+        process.chdir(name);
     } catch {
-	throw `Directory ${name} does not exist`;
+        throw `Directory ${name} does not exist`;
     }
 
     try {
-	await npmInstallDependencies(pkg);
-	await npmExecuteBuildSteps(pkg);
+        await npmInstallDependencies(pkg);
+        await npmExecuteBuildSteps(pkg);
     } finally {
-	process.chdir(oldPath);
+        process.chdir(oldPath);
     }
 }
 
 async function buildPackage(name) {
     if (!(name in packageTree))
-	throw `Unable to find package ${name}`;
+        throw `Unable to find package ${name}`;
 
     const pkg = packageTree[name];
     if (pkg.built)
-	return;
+        return;
 
     for (let dep of pkg.dependencies)
-	await buildPackage(dep);
+        await buildPackage(dep);
 
     logMessage(`Building ${name} ...`);
     await buildNpmPackage(name, pkg);
@@ -174,14 +174,14 @@ async function buildPackage(name) {
 
 async function buildAll() {
     for (let name in packageTree)
-	await buildPackage(name);
+        await buildPackage(name);
 }
 
 buildAll()
     .then(() => {
-	logMessage("Build succeeded!\n\nNow you need to build polyPod-Android manually (sorry).\n");
+        logMessage("Build succeeded!\n\nNow you need to build polyPod-Android manually (sorry).\n");
     })
     .catch((error) => {
-	logMessage(`Build failed: ${error}\n`);
-	process.exit(1);
+        logMessage(`Build failed: ${error}\n`);
+        process.exit(1);
     });
