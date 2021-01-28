@@ -31,10 +31,14 @@ feature runtime execution environment. Refer to the individual packages to learn
 more about what they are for, but note that we aim to improve the structure,
 naming and documentation to make things more understandable.
 
+## Requirements
+
+- [Node.js](https://nodejs.org/) version 14.10.1 or newer
+- [Yarn](https://yarnpkg.com/) version 1.22.5 or newer
+
 ## Building
 
-To build all components, just ensure you have [Node.js](https://nodejs.org/)
-version 14.10 or newer, then execute:
+Just execute:
 
     $ node build.js
 

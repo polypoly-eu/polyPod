@@ -26,7 +26,6 @@ const packageTree = {
         dependencies: ["eslint-config-polypoly"]
     },
     "orodruin": {
-        fullInstallNeeded: true,
         dependencies: [
             "customs",
             "eslint-config-polypoly",
@@ -35,7 +34,6 @@ const packageTree = {
         ]
     },
     "podigree": {
-        fullInstallNeeded: true,
         dependencies: [
             "aop-ts",
             "bubblewrap",
@@ -81,12 +79,10 @@ const packageTree = {
         dependencies: ["eslint-config-polypoly"]
     },
     "android-feature-container": {
-        fullInstallNeeded: true,
         skipRunBuild: true,
         dependencies: ["podigree"]
     },
     "testFeature": {
-        fullInstallNeeded: true,
         dependencies: ["poly-api"]
     }
 }
@@ -114,29 +110,9 @@ function execCommand(command, args) {
     });
 }
 
-const npm = (...args) => execCommand("npm", args);
+const yarn = (...args) => execCommand("yarn", args);
 
-async function npmInstallDependencies(pkg) {
-    // TODO: Some packages will currently only install their dependencies
-    //       properly with the following workaround.
-    //       Probably because of: https://github.com/npm/cli/issues/1397
-    if (pkg.fullInstallNeeded) {
-        console.log("Performing full install, this might take a while...");
-        await npm("install", "--no-package-lock");
-        return;
-    }
-
-    await npm("ci", "--ignore-scripts");
-}
-
-async function npmExecuteBuildSteps(pkg) {
-    if (!pkg.skipRunBuild)
-        await npm("run", "build");
-}
-
-const npmRunBuild = () => execCommand("npm", ["run", "build"]);
-
-async function buildNpmPackage(name, pkg) {
+async function buildNodePackage(name, pkg) {
     const oldPath = process.cwd();
     try {
         process.chdir(name);
@@ -145,8 +121,9 @@ async function buildNpmPackage(name, pkg) {
     }
 
     try {
-        await npmInstallDependencies(pkg);
-        await npmExecuteBuildSteps(pkg);
+        await yarn("install", "--frozen-lockfile");
+        if (!pkg.skipRunBuild)
+            await yarn("run", "build");
     } finally {
         process.chdir(oldPath);
     }
@@ -164,7 +141,7 @@ async function buildPackage(name) {
         await buildPackage(dep);
 
     logMessage(`Building ${name} ...`);
-    await buildNpmPackage(name, pkg);
+    await buildNodePackage(name, pkg);
     pkg.built = true;
 }
 
