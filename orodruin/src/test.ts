@@ -1,7 +1,6 @@
-//import { preparePage, raiseOnFailure } from "./testkit";
+import { preparePage, raiseOnFailure } from "./testkit";
 
 export async function test(url: string): Promise<void> {
-    /*
     const { default: puppeteer } = await import("puppeteer");
 
     const browser = await puppeteer.launch();
@@ -16,5 +15,4 @@ export async function test(url: string): Promise<void> {
     } finally {
         await browser.close();
     }
-    */
 }
