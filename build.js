@@ -1,6 +1,5 @@
 "use strict";
 
-const fs = require("fs");
 const {spawn} = require("child_process");
 
 // TODO: Don't hard code the package tree
@@ -122,11 +121,8 @@ async function npmInstallDependencies(pkg) {
     //       properly with the following workaround.
     //       Probably because of: https://github.com/npm/cli/issues/1397
     if (pkg.fullInstallNeeded) {
-        console.log("Performing a full dependency reinstall - this might take a while");
-        fs.rmdirSync("node_modules", { recursive: true });
-        if (fs.existsSync("package-lock.json"))
-            fs.unlinkSync("package-lock.json");
-        await npm("install");
+        console.log("Performing full install, this might take a while...");
+        await npm("install", "--no-package-lock");
         return;
     }
 
