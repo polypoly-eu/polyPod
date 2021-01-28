@@ -20,8 +20,6 @@ export function convertSpec<Q extends RDF.BaseQuad>(
 ): void {
     const { term, quad } = gens(f1);
 
-    // TODO: Fix and reenable these tests
-    /*
     it("Equal after conversion (term)", () => {
         fc.assert(
             fc.property(term, (term) => {
@@ -39,5 +37,4 @@ export function convertSpec<Q extends RDF.BaseQuad>(
             })
         );
     });
-    */
 }
