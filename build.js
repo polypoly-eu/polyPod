@@ -1,96 +1,63 @@
 "use strict";
 
+const fs = require("fs");
 const {spawn} = require("child_process");
 
-// TODO: Don't hard code the package tree
-const packageTree = {
-    "aop-ts": {
-        dependencies: ["eslint-config-polypoly"]
-    },
-    "bubblewrap": {
-        dependencies: [
-            "eslint-config-polypoly",
-            "rdf",
-            "rdf-convert",
-            "rdf-spec"
-        ]
-    },
-    "customs": {
-        skipRunTest: true, // These fail :(
-        dependencies: ["eslint-config-polypoly"]
-    },
-    "eslint-config-polypoly": {
-        skipRunBuild: true, // No build script
-        skipRunLint: true, // No lint script
-        dependencies: []
-    },
-    "fetch-spec": {
-        skipRunTest: true, // These fail :(
-        dependencies: ["eslint-config-polypoly"]
-    },
-    "orodruin": {
-        dependencies: [
-            "customs",
-            "eslint-config-polypoly",
-            "podigree",
-            "poly-api"
-        ]
-    },
-    "podigree": {
-        skipRunTest: true, // These fail :(
-        dependencies: [
-            "aop-ts",
-            "bubblewrap",
-            "eslint-config-polypoly",
-            "poly-api",
-            "port-authority",
-            "postoffice",
-            "rdf",
-            "rdf-convert",
-            "rdf-spec"
-        ]
-    },
-    "poly-api": {
-        skipRunTest: true, // These fail :(
-        dependencies: [
-            "eslint-config-polypoly",
-            "fetch-spec",
-            "rdf",
-            "rdf-spec"
-        ]
-    },
-    "port-authority": {
-        dependencies: [
-            "bubblewrap",
-            "eslint-config-polypoly"
-        ]
-    },
-    "postoffice": {
-        dependencies: ["eslint-config-polypoly"]
-    },
-    "rdf": {
-        dependencies: [
-            "eslint-config-polypoly",
-            "rdf-spec"
-        ]
-    },
-    "rdf-convert": {
-        dependencies: [
-            "eslint-config-polypoly",
-            "rdf-spec"
-        ]
-    },
-    "rdf-spec": {
-        dependencies: ["eslint-config-polypoly"]
-    },
-    "testFeature": {
-        skipRunLint: true, // No lint script
-        skipRunTest: true, // No test script
-        dependencies: ["poly-api"]
+const packageScope = "@polypoly-eu";
+
+const packages = [
+    "aop-ts",
+    "bubblewrap",
+    "customs",
+    "eslint-config-polypoly",
+    "fetch-spec",
+    "orodruin",
+    "podigree",
+    "poly-api",
+    "port-authority",
+    "postoffice",
+    "rdf",
+    "rdf-convert",
+    "rdf-spec",
+    "testFeature"
+];
+
+const skipTestsFor = new Set(["customs", "fetch-spec", "podigree", "poly-api"]);
+
+function parseManifest(path) {
+    try {
+        return JSON.parse(fs.readFileSync(path));
+    } catch {
+        throw `Cannot read ${path}`;
     }
 }
 
+function extractLocalDependencies(manifest) {
+    const prefix = `${packageScope}/`;
+    return [
+        ...Object.keys(manifest.dependencies || {}),
+        ...Object.keys(manifest.devDependencies || {})
+    ].filter(key => key.startsWith(prefix))
+        .map(key => key.slice(prefix.length));
+}
+
+const extractCommands = manifest => new Set(Object.keys(manifest.scripts));
+
+function createPackageData(name) {
+    const manifest = parseManifest(`${name}/package.json`);
+    return {
+        name: name,
+        dependencies: extractLocalDependencies(manifest),
+        commands: extractCommands(manifest),
+        skipCommands: new Set(skipTestsFor.has(name) ? ["test"] : [])
+    };
+}
+
+const createPackageTree = () =>
+      Object.fromEntries(packages.map(name => [name, createPackageData(name)]));
+
 const logTopLevelMessage = (message) => console.log(`\n***** ${message}`);
+
 const logDetailMessage = (message) => console.log(`\n*** ${message}`);
 
 function execCommand(command, args) {
@@ -121,32 +88,17 @@ async function yarnInstall(name) {
     await yarn("install", "--frozen-lockfile");
 }
 
-async function yarnRunBuild(name, pkg) {
-    if (pkg.skipRunBuild)
+async function yarnRun(command, pkg) {
+    if (!pkg.commands.has(command))
         return;
 
-    logDetailMessage(`${name}: Executing build steps ...`);
-    await yarn("run", "build");
-}
-
-async function yarnRunLint(name, pkg) {
-    if (pkg.skipRunLint) {
-        logDetailMessage(`${name}: Skipped linting`);
+    if (pkg.skipCommands.has(command)) {
+        logDetailMessage(`${name}: Skipping ${command} command`);
         return;
     }
 
-    logDetailMessage(`${name}: Linting ...`);
-    await yarn("run", "eslint");
-}
-
-async function yarnRunTest(name, pkg) {
-    if (pkg.skipRunTest) {
-        logDetailMessage(`${name}: Skipped tests`);
-        return;
-    }
-
-    logDetailMessage(`${name}: Running tests ...`);
-    await yarn("run", "test");
+    logDetailMessage(`${pkg.name}: Executing ${command} command ...`);
+    await yarn("run", command);
 }
 
 async function buildNodePackage(name, pkg, {runLinting, runTests}) {
@@ -158,19 +110,19 @@ async function buildNodePackage(name, pkg, {runLinting, runTests}) {
     }
 
     try {
-        await yarnInstall(name);
-        await yarnRunBuild(name, pkg);
+        await yarnInstall(pkg.name);
+        await yarnRun("build", pkg);
         if (runLinting)
-            await yarnRunLint(name, pkg);
+            await yarnRun("eslint", pkg);
         if (runTests)
-            await yarnRunTest(name, pkg);
+            await yarnRun("test", pkg);
     } finally {
         process.chdir(oldPath);
     }
 }
 
-async function buildPackage(name, options) {
-    if (!(name in packageTree))
+async function buildPackage(packageTree, name, options) {
+    if (!packageTree.hasOwnProperty(name))
         throw `Unable to find package ${name}`;
 
     const pkg = packageTree[name];
@@ -178,19 +130,19 @@ async function buildPackage(name, options) {
         return;
 
     for (let dep of pkg.dependencies)
-        await buildPackage(dep, options);
+        await buildPackage(packageTree, dep, options);
 
     logTopLevelMessage(`Building ${name} ...`);
     await buildNodePackage(name, pkg, options);
     pkg.built = true;
 }
 
-async function buildAll(options) {
-    for (let name in packageTree)
-        await buildPackage(name, options);
+async function buildAll(packageTree, options) {
+    for (let name of Object.keys(packageTree))
+        await buildPackage(packageTree, name, options);
 }
 
-async function main() {
+(async function() {
     const parameters = process.argv.slice(2);
     if (parameters.includes("--help")) {
         console.log(`Usage: node build.js [--with-linting] [--with-tests]`);
@@ -198,7 +150,8 @@ async function main() {
     }
 
     try {
-        await buildAll({
+        const packageTree = createPackageTree();
+        await buildAll(packageTree, {
             runLinting: parameters.includes("--with-linting"),
             runTests: parameters.includes("--with-tests")
         });
@@ -209,6 +162,4 @@ async function main() {
         logTopLevelMessage(`Build failed: ${error}\n`);
         return 1;
     }
-}
-
-main().then(process.exit);
+})().then(process.exit);
