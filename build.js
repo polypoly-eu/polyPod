@@ -76,7 +76,7 @@ async function yarnRun(command, pkg) {
         return;
 
     if (pkg.skipCommands.includes(command)) {
-        logDetailMessage(`${name}: Skipping ${command} command`);
+        logDetailMessage(`${pkg.name}: Skipping ${command} command`);
         return;
     }
 
