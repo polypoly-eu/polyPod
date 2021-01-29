@@ -16,7 +16,11 @@ Addendum: commit [551aaf0e](https://github.com/polypoly-eu/polyPod-Android/commi
 
 An easy way to build polyPod for Android is to install [Android Studio](https://developer.android.com/studio) and import the project.
 
-In order to fetch the dependencies hosted by us, you need to [create a GitHub access token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) and set `gpr.user` and `gpr.token` in one of the property files picked up by Gradle, e.g. `~/gradle.properties.`
+On the commandline, figure out what versions of Java and Gradle you need (sorry) and run:
+
+```
+./gradlew assemble
+```
 
 ### Testing
 
@@ -34,8 +38,6 @@ Almost everything else is written in such a way that one can start the Feature a
 
 ### Feature loading
 
-The Pod bundles no Features, but expects them as zipped files in `/sdcard/Android/data/eu.polypoly.pod.android/files/features/` directory. On one hand this directory is available from outside, so one can copy some features there using adb tool: `adb push --sync feature.zip /sdcard/Android/data/eu.polypoly.pod.android/files/features/`. On the other the Features will be automatically deleted on uninstalling the Pod itself and that will happen quite often during development. In the target picture it might be a good idea, but as the platform gets more and more restrictive, it might get a bit painful at times, yet I didn't find a better solution.
+The polyPod already bundles the features it ships with, but it will also load additional feature packages from the `files/features/` on the internal storage. You can manually push a feature there by using `adb push` to get it on the device, and `adb shell run-as coop.polypoly.polypod` to copy it into the polyPod's internal files. Please note that features will be automatically deleted when the polyPod app is being uninstalled.
 
-File format is very simple: at the root there needs to be an `index.html` file and any other file in the archive will be addressed using path relative to this `index.html` file. That currently means that just zipping od `dist` directory created after building Features will do.
-
-**Please note:** Loading features this way does currently not work.
+The file format of features is very simple: at the root there needs to be an `index.html` file and any other file in the archive will be addressed using a path relative to this `index.html` file.
