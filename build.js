@@ -3,27 +3,6 @@
 const fs = require("fs");
 const {spawn} = require("child_process");
 
-const packageScope = "@polypoly-eu";
-
-const packages = [
-    "aop-ts",
-    "bubblewrap",
-    "customs",
-    "eslint-config-polypoly",
-    "fetch-spec",
-    "orodruin",
-    "podigree",
-    "poly-api",
-    "port-authority",
-    "postoffice",
-    "rdf",
-    "rdf-convert",
-    "rdf-spec",
-    "testFeature"
-];
-
-const skipTestsFor = new Set(["customs", "fetch-spec", "podigree", "poly-api"]);
-
 function parseManifest(path) {
     try {
         return JSON.parse(fs.readFileSync(path));
@@ -32,8 +11,8 @@ function parseManifest(path) {
     }
 }
 
-function extractLocalDependencies(manifest) {
-    const prefix = `${packageScope}/`;
+function extractLocalDependencies(manifest, scope) {
+    const prefix = `${scope}/`;
     return [
         ...Object.keys(manifest.dependencies || {}),
         ...Object.keys(manifest.devDependencies || {})
@@ -41,20 +20,24 @@ function extractLocalDependencies(manifest) {
         .map(key => key.slice(prefix.length));
 }
 
-const extractCommands = manifest => new Set(Object.keys(manifest.scripts));
+const extractCommands = manifest => Object.keys(manifest.scripts);
 
-function createPackageData(name) {
+function createPackageData(name, metaManifest) {
     const manifest = parseManifest(`${name}/package.json`);
     return {
         name: name,
-        dependencies: extractLocalDependencies(manifest),
+        dependencies: extractLocalDependencies(manifest, metaManifest.scope),
         commands: extractCommands(manifest),
-        skipCommands: new Set(skipTestsFor.has(name) ? ["test"] : [])
+        skipCommands: metaManifest.skipTestsFor.includes(name) ? ["test"] : []
     };
 }
 
-const createPackageTree = () =>
-      Object.fromEntries(packages.map(name => [name, createPackageData(name)]));
+function createPackageTree() {
+    const metaManifest = parseManifest("packages.json");
+    return Object.fromEntries(
+        metaManifest.packages.map(
+            name => [name, createPackageData(name, metaManifest)]));
+}
 
 const logTopLevelMessage = (message) => console.log(`\n***** ${message}`);
 
@@ -89,10 +72,10 @@ async function yarnInstall(name) {
 }
 
 async function yarnRun(command, pkg) {
-    if (!pkg.commands.has(command))
+    if (!pkg.commands.includes(command))
         return;
 
-    if (pkg.skipCommands.has(command)) {
+    if (pkg.skipCommands.includes(command)) {
         logDetailMessage(`${name}: Skipping ${command} command`);
         return;
     }

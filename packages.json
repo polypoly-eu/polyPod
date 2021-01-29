@@ -1,0 +1,25 @@
+{
+    "scope": "@polypoly-eu",
+    "packages": [
+        "aop-ts",
+        "bubblewrap",
+        "customs",
+        "eslint-config-polypoly",
+        "fetch-spec",
+        "orodruin",
+        "podigree",
+        "poly-api",
+        "port-authority",
+        "postoffice",
+        "rdf",
+        "rdf-convert",
+        "rdf-spec",
+        "testFeature"
+    ],
+    "skipTestsFor": [
+        "customs",
+        "fetch-spec",
+        "podigree",
+        "poly-api"
+    ]
+}
