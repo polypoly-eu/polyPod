@@ -18,11 +18,13 @@ we need to fix, including adjusting the overall structure and documentation.
 
 ### CLI for building and testing Features
 
-The [orodruin](orodruin) package includes everything needed to develop and test features.
+The [orodruin](orodruin) package includes everything needed to develop and test
+features.
 
 ### polyPod app for Android
 
-You can find the Android version of the polyPod in [polyPod-Android](polyPod-Android).
+You can find the Android version of the polyPod in
+[polyPod-Android](polyPod-Android).
 
 ### The shared polyPod core code
 
