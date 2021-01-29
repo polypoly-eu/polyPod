@@ -84,12 +84,12 @@ async function yarnRun(command, pkg) {
     await yarn("run", command);
 }
 
-async function buildNodePackage(name, pkg, {runLinting, runTests}) {
+async function buildNodePackage(pkg, {runLinting, runTests}) {
     const oldPath = process.cwd();
     try {
-        process.chdir(name);
+        process.chdir(pkg.name);
     } catch {
-        throw `Directory ${name} does not exist`;
+        throw `Directory ${pkg.name} does not exist`;
     }
 
     try {
@@ -104,7 +104,7 @@ async function buildNodePackage(name, pkg, {runLinting, runTests}) {
     }
 }
 
-async function buildPackage(packageTree, name, options) {
+async function buildPackage(name, packageTree, options) {
     if (!packageTree.hasOwnProperty(name))
         throw `Unable to find package ${name}`;
 
@@ -113,19 +113,19 @@ async function buildPackage(packageTree, name, options) {
         return;
 
     for (let dep of pkg.dependencies)
-        await buildPackage(packageTree, dep, options);
+        await buildPackage(dep, packageTree, options);
 
     const entries = Object.entries(packageTree);
     const total = entries.length;
     const current = entries.filter(([_, pkg]) => pkg.built).length + 1;
     logTopLevelMessage(`Building ${name} [${current}/${total}] ...`);
-    await buildNodePackage(name, pkg, options);
+    await buildNodePackage(pkg, options);
     pkg.built = true;
 }
 
 async function buildAll(packageTree, options) {
     for (let name of Object.keys(packageTree))
-        await buildPackage(packageTree, name, options);
+        await buildPackage(name, packageTree, options);
 }
 
 (async function() {
