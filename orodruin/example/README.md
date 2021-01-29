@@ -26,6 +26,4 @@ $ yarn run build
 $ yarn run serve
 ```
 
-### 4. Visit the development server in a web browser
-
-<http://localhost:4000>
+This will open the feature in your default browser.

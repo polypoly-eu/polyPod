@@ -44,7 +44,7 @@ Just execute:
 
     $ node build.js
 
-Then you can build [polyPod-Android](polyPod-Android), or
+After this you can build [polyPod-Android](polyPod-Android), or
 [orodruin/example](orodruin/example).
 
 ### Wat
@@ -66,8 +66,6 @@ can presumably move to Yarna 2.x, workspaces and all, and get rid of that nasty
 custom build script.
 
 ## Testing
-
-### Automated tests
 
 To run the tests, just execute:
 
