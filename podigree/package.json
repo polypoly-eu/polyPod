@@ -20,7 +20,7 @@
     "test:electron": "electron-mocha --renderer --require ts-node/register src/tests/electron/*.test.ts",
     "test:node": "ts-mocha src/tests/node/*.test.ts",
     "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
+    "dev:docs": "chokidar 'src/**/*' -c 'yarn run docs'"
   },
   "dependencies": {
     "@polypoly-eu/aop-ts": "link:../aop-ts",

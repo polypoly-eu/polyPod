@@ -17,7 +17,7 @@
     "eslint": "eslint src --ext .ts",
     "test": "jest && ts-mocha src/**/*.test.ts",
     "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
+    "dev:docs": "chokidar 'src/**/*' -c 'yarn run docs'"
   },
   "dependencies": {
     "@types/rdf-js": "^4.0.0",

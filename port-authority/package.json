@@ -16,7 +16,7 @@
     "test:browser": "karma start",
     "test:node": "ts-mocha src/tests/{node,universal}/**.test.ts",
     "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
+    "dev:docs": "chokidar 'src/**/*' -c 'yarn run docs'"
   },
   "dependencies": {
     "@polypoly-eu/bubblewrap": "link:../bubblewrap",

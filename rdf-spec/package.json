@@ -17,7 +17,7 @@
     "test:mocha": "ts-mocha src/tests/**.test.ts",
     "test:jasmine": "ts-node node_modules/.bin/jasmine --config=jasmine.json",
     "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
+    "dev:docs": "chokidar 'src/**/*' -c 'yarn run docs'"
   },
   "dependencies": {
     "@types/rdf-js": "^4.0.0",

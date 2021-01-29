@@ -20,7 +20,7 @@
     "eslint": "eslint src --ext .ts",
     "test": "jest",
     "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
+    "dev:docs": "chokidar 'src/**/*' -c 'yarn run docs'"
   },
   "dependencies": {
     "@msgpack/msgpack": "^2.0.0"
