@@ -23,13 +23,13 @@
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "dependencies": {
-    "@polypoly-eu/aop-ts": "file:../aop-ts",
-    "@polypoly-eu/bubblewrap": "file:../bubblewrap",
-    "@polypoly-eu/poly-api": "file:../poly-api",
-    "@polypoly-eu/port-authority": "file:../port-authority",
-    "@polypoly-eu/postoffice": "file:../postoffice",
-    "@polypoly-eu/rdf": "file:../rdf",
-    "@polypoly-eu/rdf-convert": "file:../rdf-convert",
+    "@polypoly-eu/aop-ts": "link:../aop-ts",
+    "@polypoly-eu/bubblewrap": "link:../bubblewrap",
+    "@polypoly-eu/poly-api": "link:../poly-api",
+    "@polypoly-eu/port-authority": "link:../port-authority",
+    "@polypoly-eu/postoffice": "link:../postoffice",
+    "@polypoly-eu/rdf": "link:../rdf",
+    "@polypoly-eu/rdf-convert": "link:../rdf-convert",
     "@rdfjs/dataset": "^1.0.1",
     "@types/rdf-js": "^4.0.0",
     "fp-ts": "^2.8.2",
@@ -37,9 +37,9 @@
     "memfs": "^3.2.0"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
-    "@polypoly-eu/fetch-spec": "file:../fetch-spec",
-    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
+    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
+    "@polypoly-eu/fetch-spec": "link:../fetch-spec",
+    "@polypoly-eu/rdf-spec": "link:../rdf-spec",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",

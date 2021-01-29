@@ -25,7 +25,7 @@
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
+    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",

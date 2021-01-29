@@ -533,77 +533,61 @@
   resolved "https://registry.yarnpkg.com/@pnpm/types/-/types-6.4.0.tgz#312c3bf0b43b003508cb21bd3815406ea0f3b669"
   integrity sha512-nco4+4sZqNHn60Y4VE/fbtlShCBqipyUO+nKRPvDHqLrecMW9pzHWMVRxk4nrMRoeowj3q0rX3GYRBa8lsHTAg==
 
-"@polypoly-eu/aop-ts@file:../aop-ts":
-  version "0.0.1"
+"@polypoly-eu/aop-ts@link:../aop-ts":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/bubblewrap@file:../bubblewrap":
-  version "0.1.2"
-  dependencies:
-    "@msgpack/msgpack" "^2.0.0"
+"@polypoly-eu/bubblewrap@link:../bubblewrap":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/customs@file:../customs":
-  version "0.1.2"
-  dependencies:
-    "@pnpm/read-package-json" "^3.1.5"
-    "@types/semver" "^7.3.3"
-    fp-ts "^2.8.2"
-    io-ts "2.2.10"
-    semver "^7.3.2"
+"@polypoly-eu/customs@link:../customs":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/eslint-config-polypoly@file:../eslint-config-polypoly":
-  version "0.0.4"
-  dependencies:
-    "@typescript-eslint/eslint-plugin" "^4.1.0"
-    "@typescript-eslint/parser" "^4.1.0"
-    eslint-config-prettier "^6.11.0"
-    eslint-plugin-prettier "^3.1.4"
+"@polypoly-eu/eslint-config-polypoly@link:../eslint-config-polypoly":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/fetch-spec@file:../fetch-spec":
-  version "0.0.1"
+"@polypoly-eu/fetch-spec@link:../fetch-spec":
+  version "0.0.0"
+  uid ""
 
 "@polypoly-eu/podigree@file:../podigree":
   version "0.6.2"
   dependencies:
-    "@polypoly-eu/aop-ts" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-7c776065-a032-41ed-b90d-4ae7b89a8caf-1611858442603/node_modules/@polypoly-eu/aop-ts"
-    "@polypoly-eu/bubblewrap" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-7c776065-a032-41ed-b90d-4ae7b89a8caf-1611858442603/node_modules/@polypoly-eu/bubblewrap"
-    "@polypoly-eu/poly-api" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-7c776065-a032-41ed-b90d-4ae7b89a8caf-1611858442603/node_modules/@polypoly-eu/poly-api"
-    "@polypoly-eu/port-authority" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-7c776065-a032-41ed-b90d-4ae7b89a8caf-1611858442603/node_modules/@polypoly-eu/port-authority"
-    "@polypoly-eu/postoffice" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-7c776065-a032-41ed-b90d-4ae7b89a8caf-1611858442603/node_modules/@polypoly-eu/postoffice"
-    "@polypoly-eu/rdf" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-7c776065-a032-41ed-b90d-4ae7b89a8caf-1611858442603/node_modules/@polypoly-eu/rdf"
-    "@polypoly-eu/rdf-convert" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-7c776065-a032-41ed-b90d-4ae7b89a8caf-1611858442603/node_modules/@polypoly-eu/rdf-convert"
+    "@polypoly-eu/aop-ts" "link:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-f1d14fc5-fe75-4d96-b49b-17fc9c2de507-1611924639933/node_modules/@polypoly-eu/aop-ts"
+    "@polypoly-eu/bubblewrap" "link:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-f1d14fc5-fe75-4d96-b49b-17fc9c2de507-1611924639933/node_modules/@polypoly-eu/bubblewrap"
+    "@polypoly-eu/poly-api" "link:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-f1d14fc5-fe75-4d96-b49b-17fc9c2de507-1611924639933/node_modules/@polypoly-eu/poly-api"
+    "@polypoly-eu/port-authority" "link:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-f1d14fc5-fe75-4d96-b49b-17fc9c2de507-1611924639933/node_modules/@polypoly-eu/port-authority"
+    "@polypoly-eu/postoffice" "link:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-f1d14fc5-fe75-4d96-b49b-17fc9c2de507-1611924639933/node_modules/@polypoly-eu/postoffice"
+    "@polypoly-eu/rdf" "link:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-f1d14fc5-fe75-4d96-b49b-17fc9c2de507-1611924639933/node_modules/@polypoly-eu/rdf"
+    "@polypoly-eu/rdf-convert" "link:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-podigree-0.6.2-f1d14fc5-fe75-4d96-b49b-17fc9c2de507-1611924639933/node_modules/@polypoly-eu/rdf-convert"
     "@rdfjs/dataset" "^1.0.1"
     "@types/rdf-js" "^4.0.0"
     fp-ts "^2.8.2"
     io-ts "2.2.10"
     memfs "^3.2.0"
 
-"@polypoly-eu/poly-api@file:../poly-api":
-  version "0.7.2"
-  dependencies:
-    "@polypoly-eu/fetch-spec" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-poly-api-0.7.2-25c15538-b0f8-40cb-93b5-10ecb3be7d70-1611858442614/node_modules/@polypoly-eu/fetch-spec"
-    "@polypoly-eu/rdf" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-poly-api-0.7.2-25c15538-b0f8-40cb-93b5-10ecb3be7d70-1611858442614/node_modules/@polypoly-eu/rdf"
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/poly-api@link:../poly-api":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/port-authority@file:../port-authority":
-  version "0.2.1"
-  dependencies:
-    "@polypoly-eu/bubblewrap" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-port-authority-0.2.1-c3aa03a5-36a2-4093-a297-7a2eee631f4a-1611858442612/node_modules/@polypoly-eu/bubblewrap"
-    "@types/body-parser" "^1.19.0"
-    "@types/connect" "^3.4.33"
-    "@types/node" "^14.6.4"
+"@polypoly-eu/port-authority@link:../port-authority":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/postoffice@file:../postoffice":
-  version "0.1.0"
+"@polypoly-eu/postoffice@link:../postoffice":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/rdf-convert@file:../rdf-convert":
-  version "0.1.0"
-  dependencies:
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/rdf-convert@link:../rdf-convert":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/rdf@file:../rdf":
-  version "0.2.0"
-  dependencies:
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/rdf@link:../rdf":
+  version "0.0.0"
+  uid ""
 
 "@rdfjs/data-model@^1.1.1":
   version "1.2.0"

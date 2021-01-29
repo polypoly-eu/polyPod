@@ -522,13 +522,9 @@
   resolved "https://registry.yarnpkg.com/@pnpm/types/-/types-6.4.0.tgz#312c3bf0b43b003508cb21bd3815406ea0f3b669"
   integrity sha512-nco4+4sZqNHn60Y4VE/fbtlShCBqipyUO+nKRPvDHqLrecMW9pzHWMVRxk4nrMRoeowj3q0rX3GYRBa8lsHTAg==
 
-"@polypoly-eu/eslint-config-polypoly@file:../eslint-config-polypoly":
-  version "0.0.4"
-  dependencies:
-    "@typescript-eslint/eslint-plugin" "^4.1.0"
-    "@typescript-eslint/parser" "^4.1.0"
-    eslint-config-prettier "^6.11.0"
-    eslint-plugin-prettier "^3.1.4"
+"@polypoly-eu/eslint-config-polypoly@link:../eslint-config-polypoly":
+  version "0.0.0"
+  uid ""
 
 "@rollup/plugin-sucrase@^3.1.0":
   version "3.1.0"

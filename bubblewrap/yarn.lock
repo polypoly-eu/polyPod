@@ -507,30 +507,21 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@polypoly-eu/eslint-config-polypoly@file:../eslint-config-polypoly":
-  version "0.0.4"
-  dependencies:
-    "@typescript-eslint/eslint-plugin" "^4.1.0"
-    "@typescript-eslint/parser" "^4.1.0"
-    eslint-config-prettier "^6.11.0"
-    eslint-plugin-prettier "^3.1.4"
+"@polypoly-eu/eslint-config-polypoly@link:../eslint-config-polypoly":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/rdf-convert@file:../rdf-convert":
-  version "0.1.0"
-  dependencies:
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/rdf-convert@link:../rdf-convert":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/rdf-spec@file:../rdf-spec":
-  version "0.3.1"
-  dependencies:
-    "@types/rdf-js" "^4.0.0"
-    chai "^4.2.0"
-    fast-check "^2.2.1"
+"@polypoly-eu/rdf-spec@link:../rdf-spec":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/rdf@file:../rdf":
-  version "0.2.0"
-  dependencies:
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/rdf@link:../rdf":
+  version "0.0.0"
+  uid ""
 
 "@rollup/plugin-commonjs@^17.0.0":
   version "17.0.0"

@@ -3,7 +3,7 @@
     "build": "faucet"
   },
   "dependencies": {
-    "@polypoly-eu/poly-api": "file:../poly-api",
+    "@polypoly-eu/poly-api": "link:../poly-api",
     "@rdfjs/data-model": "^1.2.0"
   },
   "devDependencies": {

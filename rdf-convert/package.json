@@ -26,8 +26,8 @@
   "devDependencies": {
     "@graphy/core.data.factory": "^4.3.3",
     "@graphy/memory.dataset.fast": "^4.3.3",
-    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
-    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
+    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
+    "@polypoly-eu/rdf-spec": "link:../rdf-spec",
     "@rdfjs/data-model": "^1.2.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.20",

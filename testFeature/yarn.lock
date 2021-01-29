@@ -2,20 +2,17 @@
 # yarn lockfile v1
 
 
-"@polypoly-eu/fetch-spec@file:../fetch-spec":
-  version "0.0.1"
+"@polypoly-eu/fetch-spec@link:../fetch-spec":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/poly-api@file:../poly-api":
-  version "0.7.2"
-  dependencies:
-    "@polypoly-eu/fetch-spec" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-poly-api-0.7.2-a6d0bdee-46ad-44cc-95f0-b13a0f3ba91c-1611857233202/node_modules/@polypoly-eu/fetch-spec"
-    "@polypoly-eu/rdf" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-poly-api-0.7.2-a6d0bdee-46ad-44cc-95f0-b13a0f3ba91c-1611857233202/node_modules/@polypoly-eu/rdf"
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/poly-api@link:../poly-api":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/rdf@file:../rdf":
-  version "0.2.0"
-  dependencies:
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/rdf@link:../rdf":
+  version "0.0.0"
+  uid ""
 
 "@rdfjs/data-model@^1.2.0":
   version "1.2.0"

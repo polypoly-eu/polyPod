@@ -26,10 +26,10 @@
     "@msgpack/msgpack": "^2.0.0"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
-    "@polypoly-eu/rdf": "file:../rdf",
-    "@polypoly-eu/rdf-convert": "file:../rdf-convert",
-    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
+    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
+    "@polypoly-eu/rdf": "link:../rdf",
+    "@polypoly-eu/rdf-convert": "link:../rdf-convert",
+    "@polypoly-eu/rdf-spec": "link:../rdf-spec",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",

@@ -82,59 +82,45 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@polypoly-eu/aop-ts@file:../aop-ts":
-  version "0.0.1"
+"@polypoly-eu/aop-ts@link:../aop-ts":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/bubblewrap@file:../bubblewrap":
-  version "0.1.2"
-  dependencies:
-    "@msgpack/msgpack" "^2.0.0"
+"@polypoly-eu/bubblewrap@link:../bubblewrap":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/eslint-config-polypoly@file:../eslint-config-polypoly":
-  version "0.0.4"
-  dependencies:
-    "@typescript-eslint/eslint-plugin" "^4.1.0"
-    "@typescript-eslint/parser" "^4.1.0"
-    eslint-config-prettier "^6.11.0"
-    eslint-plugin-prettier "^3.1.4"
+"@polypoly-eu/eslint-config-polypoly@link:../eslint-config-polypoly":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/fetch-spec@file:../fetch-spec":
-  version "0.0.1"
+"@polypoly-eu/fetch-spec@link:../fetch-spec":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/poly-api@file:../poly-api":
-  version "0.7.2"
-  dependencies:
-    "@polypoly-eu/fetch-spec" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-poly-api-0.7.2-477ea614-99b4-46ca-8008-65233b0853fe-1611856055497/node_modules/@polypoly-eu/fetch-spec"
-    "@polypoly-eu/rdf" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-poly-api-0.7.2-477ea614-99b4-46ca-8008-65233b0853fe-1611856055497/node_modules/@polypoly-eu/rdf"
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/poly-api@link:../poly-api":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/port-authority@file:../port-authority":
-  version "0.2.1"
-  dependencies:
-    "@polypoly-eu/bubblewrap" "file:../../../../Library/Caches/Yarn/v6/npm-@polypoly-eu-port-authority-0.2.1-c815f4c2-539b-47e2-8580-9b1944632dee-1611856055791/node_modules/@polypoly-eu/bubblewrap"
-    "@types/body-parser" "^1.19.0"
-    "@types/connect" "^3.4.33"
-    "@types/node" "^14.6.4"
+"@polypoly-eu/port-authority@link:../port-authority":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/postoffice@file:../postoffice":
-  version "0.1.0"
+"@polypoly-eu/postoffice@link:../postoffice":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/rdf-convert@file:../rdf-convert":
-  version "0.1.0"
-  dependencies:
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/rdf-convert@link:../rdf-convert":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/rdf-spec@file:../rdf-spec":
-  version "0.3.1"
-  dependencies:
-    "@types/rdf-js" "^4.0.0"
-    chai "^4.2.0"
-    fast-check "^2.2.1"
+"@polypoly-eu/rdf-spec@link:../rdf-spec":
+  version "0.0.0"
+  uid ""
 
-"@polypoly-eu/rdf@file:../rdf":
-  version "0.2.0"
-  dependencies:
-    "@types/rdf-js" "^4.0.0"
+"@polypoly-eu/rdf@link:../rdf":
+  version "0.0.0"
+  uid ""
 
 "@rdfjs/data-model@^1.1.1":
   version "1.2.0"

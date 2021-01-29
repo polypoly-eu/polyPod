@@ -24,8 +24,8 @@
     "@types/rdf-js": "^4.0.0"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
-    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
+    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
+    "@polypoly-eu/rdf-spec": "link:../rdf-spec",
     "@rdfjs/data-model": "^1.2.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.20",
