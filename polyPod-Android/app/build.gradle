@@ -7,9 +7,8 @@ plugins {
 }
 
 task buildFeatureContainer(type: Copy) {
-    // TODO: Move this logic into the feature container's build script
-    from "../../android-feature-container/node_modules/@polypoly-eu/podigree/dist/bootstrap.js"
-    from "../../android-feature-container/src"
+    from "../../podigree/dist/bootstrap.js"
+    from "../feature-container/src"
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
 }

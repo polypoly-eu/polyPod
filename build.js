@@ -78,10 +78,6 @@ const packageTree = {
     "rdf-spec": {
         dependencies: ["eslint-config-polypoly"]
     },
-    "android-feature-container": {
-        skipRunBuild: true,
-        dependencies: ["podigree"]
-    },
     "testFeature": {
         dependencies: ["poly-api"]
     }
