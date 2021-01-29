@@ -84,9 +84,11 @@ make any major changes:
 - [podigree](podigree)
 - [poly-api](poly-api)
 
-These packages also have failing tests - but they already failed in a similar way
-before integrating them into this repository, so they are less urgent to fix:
+These failures look eerily similar - I presume whatever problem there is in
+_customs_, it causes the others to fail.
 
-- [fetch-spec](fetch-spec)
+The tests for [fetch-spec](fetch-spec) fail as well, but they already failed in
+the [fetch-spec microrepo](https://github.com/polypoly-eu/fetch-spec) - since it
+seems unrelated to the migration we can figure that one out later.
 
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
