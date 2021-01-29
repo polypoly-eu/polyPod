@@ -12,7 +12,7 @@ jobs:
         with:
           java-version: 8
       - name: core packages
-        run: node build.js
+        run: node build.js --with-linting --with-tests
       - name: polyPod-Android
         working-directory: polyPod-Android
         run: ./gradlew assemble
