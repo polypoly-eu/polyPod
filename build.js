@@ -159,7 +159,6 @@ async function buildAll(packageTree, options) {
             runTests: parameters.includes("--with-tests")
         });
         logTopLevelMessage("Build succeeded!");
-        logDetailMessage("Now you need to build polyPod-Android manually (sorry).");
         return 0;
     } catch(error) {
         logTopLevelMessage(`Build failed: ${error}\n`);
