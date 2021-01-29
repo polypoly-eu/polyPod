@@ -11,15 +11,21 @@ Build orodruin as described [here](../README.md).
 ### 1. Install dependencies (including orodruin)
 
 ```
-$ npm install
+$ yarn install
 ```
 
-### 2. Start the development server
+### 2. Build the feature
 
 ```
-$ npm run serve
+$ yarn run build
 ```
 
-### 3. Visit the development server in a web browser
+### 3. Start the development server
+
+```
+$ yarn run serve
+```
+
+### 4. Visit the development server in a web browser
 
 <http://localhost:4000>
