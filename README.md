@@ -36,7 +36,7 @@ naming and documentation to make things more understandable.
 ## Requirements
 
 - [Node.js](https://nodejs.org/) version 14.10.1 or newer
-- [Yarn](https://yarnpkg.com/) version 1.22.5 or newer
+- [Yarn](https://yarnpkg.com/) version 1.22.5 or newer (but not Yarn 2.x)
 
 ## Building
 
@@ -44,7 +44,42 @@ Just execute:
 
     $ node build.js
 
-To run the tests, please refer to the individual code bases - we don't support
-this at the top level yet, see above.
+Then you can build [polyPod-Android](polyPod-Android), or
+[orodruin/example](orodruin/example).
+
+### Wat
+
+Yes, we have a nasty custom build script.
+
+The initial polyPod code base is composed of various small modules that used to
+live in different repositories, including each other via package
+registries. After migrating these projects into a single repository, we kept
+them as separate packages for now. Building these properly turned out to be a
+challenge.
+
+Yes we tried Yarna workspaces, Yarna 2.x, pnpm, you name it. The ultimate
+problem seems to be this: The _podigree_ dependency required by _orodruin_
+breaks the build (i.e. leads to a broken _container.js_) if it is referenced
+through a symbolic link. Yarn's `file:` protocol forces copying the directory
+into `node_modules`, which alleviates the issues. If we can solve this issue, we
+can presumably move to Yarna 2.x, workspaces and all, and get rid of that nasty
+custom build script.
+
+## Testing
+
+### Automated tests
+
+To run the tests, just execute:
+
+    $ node build.js --with-tests
+
+Or even:
+
+    $ node build.js --with-linting --with-tests
+
+Please note that some tests are currently not being executed by these commands -
+because they fail. We will reenable them as soon as we got them to work
+reliably.
+
 
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
