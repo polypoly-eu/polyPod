@@ -22,7 +22,6 @@ const packageTree = {
     "eslint-config-polypoly": {
         skipRunBuild: true, // No build script
         skipRunLint: true, // No lint script
-        skipRunTest: true, // No test script
         dependencies: []
     },
     "fetch-spec": {
