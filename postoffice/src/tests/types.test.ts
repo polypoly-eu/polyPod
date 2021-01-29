@@ -9,14 +9,18 @@ function check<T>(t: T): void {
 
 declare const client1: ClientOf<ValueEndpointSpec<number>>;
 declare const client2: ClientOf<ValueEndpointSpec<Promise<number>>>;
-declare const client3: ClientOf<ObjectEndpointSpec<{
-    test(): ValueEndpointSpec<number>;
-}>>;
-declare const client4: ClientOf<ObjectEndpointSpec<{
-    test(): ObjectEndpointSpec<{
-        test2(): ValueEndpointSpec<number>;
-    }>;
-}>>;
+declare const client3: ClientOf<
+    ObjectEndpointSpec<{
+        test(): ValueEndpointSpec<number>;
+    }>
+>;
+declare const client4: ClientOf<
+    ObjectEndpointSpec<{
+        test(): ObjectEndpointSpec<{
+            test2(): ValueEndpointSpec<number>;
+        }>;
+    }>
+>;
 declare const server1: number;
 declare const server2: Promise<number>;
 declare const server3: {

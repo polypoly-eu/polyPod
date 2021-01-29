@@ -69,7 +69,6 @@ const packageTree = {
         ]
     },
     "postoffice": {
-        skipRunLint: true, // These fail :(
         dependencies: ["eslint-config-polypoly"]
     },
     "rdf": {
