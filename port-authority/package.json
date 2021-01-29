@@ -12,7 +12,7 @@
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "coverage": "nyc ts-mocha src/tests/{node,universal}/**.test.ts",
-    "test": "npm run test:browser && npm run test:node",
+    "test": "yarn run test:browser && yarn run test:node",
     "test:browser": "karma start",
     "test:node": "ts-mocha src/tests/{node,universal}/**.test.ts",
     "docs": "typedoc",

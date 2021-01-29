@@ -30,7 +30,6 @@ const packageTree = {
         dependencies: ["eslint-config-polypoly"]
     },
     "orodruin": {
-        skipRunTest: true, // These fail :(
         dependencies: [
             "customs",
             "eslint-config-polypoly",
@@ -62,7 +61,6 @@ const packageTree = {
         ]
     },
     "port-authority": {
-        skipRunTest: true, // These fail :(
         dependencies: [
             "bubblewrap",
             "eslint-config-polypoly"
