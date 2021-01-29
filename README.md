@@ -75,9 +75,16 @@ Or even:
 
     $ node build.js --with-linting --with-tests
 
-Please note that some tests are currently not being executed by these commands -
-because they fail. We will reenable them as soon as we got them to work
-reliably.
+### Broken tests
 
+Some tests are currently not run because they fail - this needs fixing before we
+make any major changes:
+
+- [customs](customs)
+- [fetch-spec](fetch-spec)
+- [orodruin](orodruin)
+- [podigree](podigree)
+- [poly-api](poly-api)
+- [port-authority](port-authority)
 
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
