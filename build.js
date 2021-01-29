@@ -132,7 +132,10 @@ async function buildPackage(packageTree, name, options) {
     for (let dep of pkg.dependencies)
         await buildPackage(packageTree, dep, options);
 
-    logTopLevelMessage(`Building ${name} ...`);
+    const entries = Object.entries(packageTree);
+    const total = entries.length;
+    const current = entries.filter(([_, pkg]) => pkg.built).length + 1;
+    logTopLevelMessage(`Building ${name} [${current}/${total}] ...`);
     await buildNodePackage(name, pkg, options);
     pkg.built = true;
 }
