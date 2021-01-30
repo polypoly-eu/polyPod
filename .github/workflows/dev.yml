@@ -11,8 +11,12 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 8
-      - name: core packages
-        run: node build.js --with-linting --with-tests
-      - name: polyPod-Android
+      - name: Build core packages
+        run: ./build.js
+      - name: Lint core packages
+        run: ./build.js lint
+      - name: Test core packages
+        run: ./build.js test
+      - name: Build polyPod-Android
         working-directory: polyPod-Android
         run: ./gradlew assemble

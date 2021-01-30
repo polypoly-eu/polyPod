@@ -69,11 +69,11 @@ custom build script.
 
 To run the tests, just execute:
 
-    $ ./build.js --with-tests
+    $ ./build.js test
 
-Or even:
+To run the linter:
 
-    $ ./build.js --with-linting --with-tests
+    $ ./build.js lint
 
 ### Broken tests
 

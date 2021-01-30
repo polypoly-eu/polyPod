@@ -6,6 +6,11 @@ const fs = require("fs");
 const path = require("path");
 const {spawn} = require("child_process");
 
+function showUsage(scriptPath) {
+    console.error(`Usage: ${path.basename(scriptPath)} [lint | test]`);
+    console.error("  Run without arguments to build all packages");
+}
+
 function parseManifest(path) {
     try {
         return JSON.parse(fs.readFileSync(path));
@@ -23,15 +28,13 @@ function extractLocalDependencies(manifest, scope) {
         .map(key => key.slice(prefix.length));
 }
 
-const extractCommands = manifest => Object.keys(manifest.scripts);
-
 function createPackageData(name, metaManifest) {
     const manifest = parseManifest(`${name}/package.json`);
     return {
         name: name,
         dependencies: extractLocalDependencies(manifest, metaManifest.scope),
-        commands: extractCommands(manifest),
-        skipCommands: metaManifest.skipTestsFor.includes(name) ? ["test"] : []
+        scripts: Object.keys(manifest.scripts),
+        skipScripts: metaManifest.skipTestsFor.includes(name) ? ["test"] : []
     };
 }
 
@@ -42,12 +45,12 @@ function createPackageTree() {
             name => [name, createPackageData(name, metaManifest)]));
 }
 
-const logTopLevelMessage = (message) => console.log(`\n***** ${message}`);
+const logMain = (message) => console.log(`\n***** ${message}`);
 
-const logDetailMessage = (message) => console.log(`\n*** ${message}`);
+const logDetail = (message) => console.log(`\n*** ${message}`);
 
-function execCommand(command, args) {
-    const spawnedProcess = spawn(command, args);
+function executeProcess(executable, args) {
+    const spawnedProcess = spawn(executable, args);
 
     spawnedProcess.stdout.on("data", function(data) {
         console.log(data.toString());
@@ -67,27 +70,33 @@ function execCommand(command, args) {
     });
 }
 
-const yarn = (...args) => execCommand("yarn", args);
+const yarn = (...args) => executeProcess("yarn", args);
 
 async function yarnInstall(name) {
-    logDetailMessage(`${name}: Installing dependencies ...`);
+    logDetail(`${name}: Installing dependencies ...`);
     await yarn("install", "--frozen-lockfile");
 }
 
-async function yarnRun(command, pkg) {
-    if (!pkg.commands.includes(command))
+async function yarnRun(script, pkg) {
+    if (!pkg.scripts.includes(script))
         return;
 
-    if (pkg.skipCommands.includes(command)) {
-        logDetailMessage(`${pkg.name}: Skipping ${command} command`);
+    if (pkg.skipScripts.includes(script)) {
+        logDetail(`${pkg.name}: Skipping ${script} script`);
         return;
     }
 
-    logDetailMessage(`${pkg.name}: Executing ${command} command ...`);
-    await yarn("run", command);
+    logDetail(`${pkg.name}: Executing ${script} script ...`);
+    await yarn("run", script);
 }
 
-async function buildNodePackage(pkg, {runLinting, runTests}) {
+const commands = {
+    build: pkg => yarnInstall(pkg.name).then(() => yarnRun("build", pkg)),
+    lint: pkg => yarnRun("eslint", pkg),
+    test: pkg => yarnRun("test", pkg)
+};
+
+async function executeCommand(pkg, command) {
     const oldPath = process.cwd();
     try {
         process.chdir(pkg.name);
@@ -96,18 +105,13 @@ async function buildNodePackage(pkg, {runLinting, runTests}) {
     }
 
     try {
-        await yarnInstall(pkg.name);
-        await yarnRun("build", pkg);
-        if (runLinting)
-            await yarnRun("eslint", pkg);
-        if (runTests)
-            await yarnRun("test", pkg);
+        await commands[command](pkg);
     } finally {
         process.chdir(oldPath);
     }
 }
 
-async function buildPackage(name, packageTree, options) {
+async function processPackage(name, packageTree, command) {
     if (!packageTree.hasOwnProperty(name))
         throw `Unable to find package ${name}`;
 
@@ -116,40 +120,42 @@ async function buildPackage(name, packageTree, options) {
         return;
 
     for (let dep of pkg.dependencies)
-        await buildPackage(dep, packageTree, options);
+        await processPackage(dep, packageTree, command);
 
     const entries = Object.entries(packageTree);
     const total = entries.length;
     const current = entries.filter(([_, pkg]) => pkg.built).length + 1;
-    logTopLevelMessage(`Building ${name} [${current}/${total}] ...`);
-    await buildNodePackage(pkg, options);
+    logMain(`Executing ${command} for ${name} [${current}/${total}] ...`);
+    await executeCommand(pkg, command);
     pkg.built = true;
 }
 
-async function buildAll(packageTree, options) {
+async function processAll(packageTree, command) {
     for (let name of Object.keys(packageTree))
-        await buildPackage(name, packageTree, options);
+        await processPackage(name, packageTree, command);
 }
 
 (async () => {
     const [, scriptPath, ...parameters] = process.argv;
-    if (parameters.includes("--help")) {
-        const basename = path.basename(scriptPath);
-        console.log(`Usage: ${basename} [--with-linting] [--with-tests]`);
+    if (parameters.includes("--help") || parameters.length > 1) {
+        showUsage(scriptPath);
+        return 1;
+    }
+
+    const command = parameters.length ? parameters[0] : "build";
+    if (!["build", "test", "lint"].includes(command)) {
+        showUsage(scriptPath);
         return 1;
     }
 
     process.chdir(path.dirname(scriptPath));
     try {
         const packageTree = createPackageTree();
-        await buildAll(packageTree, {
-            runLinting: parameters.includes("--with-linting"),
-            runTests: parameters.includes("--with-tests")
-        });
-        logTopLevelMessage("Build succeeded!");
+        await processAll(packageTree, command);
+        logMain("Build succeeded!");
         return 0;
     } catch(error) {
-        logTopLevelMessage(`Build failed: ${error}\n`);
+        logMain(`Build failed: ${error}\n`);
         return 1;
     }
 })().then(process.exit);
