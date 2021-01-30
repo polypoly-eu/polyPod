@@ -42,7 +42,7 @@ naming and documentation to make things more understandable.
 
 Just execute:
 
-    $ node build.js
+    $ ./build.js
 
 After this you can build [polyPod-Android](polyPod-Android), or
 [orodruin/example](orodruin/example).
@@ -69,11 +69,11 @@ custom build script.
 
 To run the tests, just execute:
 
-    $ node build.js --with-tests
+    $ ./build.js --with-tests
 
 Or even:
 
-    $ node build.js --with-linting --with-tests
+    $ ./build.js --with-linting --with-tests
 
 ### Broken tests
 
