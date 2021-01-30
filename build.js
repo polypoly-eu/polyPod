@@ -134,7 +134,8 @@ async function buildAll(packageTree, options) {
 (async () => {
     const [, scriptPath, ...parameters] = process.argv;
     if (parameters.includes("--help")) {
-        console.log(`Usage: node build.js [--with-linting] [--with-tests]`);
+        const basename = path.basename(scriptPath);
+        console.log(`Usage: ${basename} [--with-linting] [--with-tests]`);
         return 1;
     }
 
