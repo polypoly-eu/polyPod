@@ -129,7 +129,7 @@ async function buildAll(packageTree, options) {
         await buildPackage(name, packageTree, options);
 }
 
-(async function() {
+(async () => {
     const [, scriptPath, ...parameters] = process.argv;
     if (parameters.includes("--help")) {
         console.log(`Usage: node build.js [--with-linting] [--with-tests]`);
