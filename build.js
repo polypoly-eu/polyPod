@@ -1,6 +1,7 @@
 "use strict";
 
 const fs = require("fs");
+const path = require("path");
 const {spawn} = require("child_process");
 
 function parseManifest(path) {
@@ -129,12 +130,13 @@ async function buildAll(packageTree, options) {
 }
 
 (async function() {
-    const parameters = process.argv.slice(2);
+    const [, scriptPath, ...parameters] = process.argv;
     if (parameters.includes("--help")) {
         console.log(`Usage: node build.js [--with-linting] [--with-tests]`);
         return 1;
     }
 
+    process.chdir(path.dirname(scriptPath));
     try {
         const packageTree = createPackageTree();
         await buildAll(packageTree, {
