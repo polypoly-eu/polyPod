@@ -74,7 +74,7 @@ const yarn = (...args) => executeProcess("yarn", args);
 
 async function yarnInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await yarn("install", "--frozen-lockfile");
+    await yarn("install", "--immutable");
 }
 
 async function yarnRun(script, pkg) {

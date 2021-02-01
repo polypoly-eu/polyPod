@@ -36,7 +36,8 @@ naming and documentation to make things more understandable.
 ## Requirements
 
 - [Node.js](https://nodejs.org/) version 14.10.1 or newer
-- [Yarn](https://yarnpkg.com/) version 1.22.5 or newer (but not Yarn 2.x)
+- [Yarn](https://yarnpkg.com/) version 2.4.0 or newer
+  (`npm install -g yarn` will do)
 
 ## Building
 
@@ -57,13 +58,13 @@ registries. After migrating these projects into a single repository, we kept
 them as separate packages for now. Building these properly turned out to be a
 challenge.
 
-Yes we tried Yarna workspaces, Yarna 2.x, pnpm, you name it. The ultimate
-problem seems to be this: The _podigree_ dependency required by _orodruin_
-breaks the build (i.e. leads to a broken _container.js_) if it is referenced
-through a symbolic link. Yarn's `file:` protocol forces copying the directory
-into `node_modules`, which alleviates the issues. If we can solve this issue, we
-can presumably move to Yarna 2.x, workspaces and all, and get rid of that nasty
-custom build script.
+Yes we tried Yarna workspaces, pnp, pnpm, you name it. The ultimate problem
+seems to be this: The _podigree_ dependency required by _orodruin_ breaks the
+build (i.e. leads to a broken _container.js_) if it is referenced through a
+symbolic link. Yarn's `file:` protocol forces copying the directory into
+`node_modules`, which alleviates the issues. If we can solve this issue, we can
+presumably move to `nodeLinker: "pnp"`, workspaces and all that, and get rid of
+that nasty custom build script.
 
 ## Testing
 
