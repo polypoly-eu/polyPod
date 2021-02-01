@@ -646,15 +646,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polypoly-eu/aop-ts@link:../aop-ts::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
+"@polypoly-eu/aop-ts@link:../aop-ts::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/aop-ts@link:../aop-ts::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
+  resolution: "@polypoly-eu/aop-ts@link:../aop-ts::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
   languageName: node
   linkType: soft
 
-"@polypoly-eu/bubblewrap@link:../bubblewrap::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
+"@polypoly-eu/bubblewrap@link:../bubblewrap::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/bubblewrap@link:../bubblewrap::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
+  resolution: "@polypoly-eu/bubblewrap@link:../bubblewrap::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
   languageName: node
   linkType: soft
 
@@ -670,9 +670,9 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@polypoly-eu/fetch-spec@link:../fetch-spec::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
+"@polypoly-eu/fetch-spec@link:../fetch-spec::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/fetch-spec@link:../fetch-spec::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
+  resolution: "@polypoly-eu/fetch-spec@link:../fetch-spec::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
   languageName: node
   linkType: soft
 
@@ -738,7 +738,7 @@ __metadata:
 
 "@polypoly-eu/podigree@file:../podigree::locator=%40polypoly-eu%2Forodruin%40workspace%3A.":
   version: 0.6.2
-  resolution: "@polypoly-eu/podigree@file:../podigree#../podigree::hash=3a194e&locator=%40polypoly-eu%2Forodruin%40workspace%3A."
+  resolution: "@polypoly-eu/podigree@file:../podigree#../podigree::hash=d41c5f&locator=%40polypoly-eu%2Forodruin%40workspace%3A."
   dependencies:
     "@polypoly-eu/aop-ts": "link:../aop-ts"
     "@polypoly-eu/bubblewrap": "link:../bubblewrap"
@@ -755,7 +755,7 @@ __metadata:
     memfs: ^3.2.0
   peerDependencies:
     body-parser: ^1.19.0
-  checksum: 06f765b616deda5bb849e1dc9cb99ba4817b83f47466d61fba6443a4415168d79f40539ce1a515cf220f4edbc53ca392c83d16026ab8372bc4d758008a7bd688
+  checksum: 9489f5514919f6304306aeead0d5f8d3d3457110ce275b45390ff9e975ddb4b92cbfd1b9dc744f3c473f4a248f084bcd9b9ea70276c349d5919bd4c813c91a22
   languageName: node
   linkType: hard
 
@@ -765,9 +765,9 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@polypoly-eu/poly-api@link:../poly-api::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
+"@polypoly-eu/poly-api@link:../poly-api::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/poly-api@link:../poly-api::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
+  resolution: "@polypoly-eu/poly-api@link:../poly-api::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
   languageName: node
   linkType: soft
 
@@ -777,27 +777,27 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@polypoly-eu/port-authority@link:../port-authority::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
+"@polypoly-eu/port-authority@link:../port-authority::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/port-authority@link:../port-authority::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
+  resolution: "@polypoly-eu/port-authority@link:../port-authority::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
   languageName: node
   linkType: soft
 
-"@polypoly-eu/postoffice@link:../postoffice::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
+"@polypoly-eu/postoffice@link:../postoffice::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/postoffice@link:../postoffice::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
+  resolution: "@polypoly-eu/postoffice@link:../postoffice::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
   languageName: node
   linkType: soft
 
-"@polypoly-eu/rdf-convert@link:../rdf-convert::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
+"@polypoly-eu/rdf-convert@link:../rdf-convert::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/rdf-convert@link:../rdf-convert::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
+  resolution: "@polypoly-eu/rdf-convert@link:../rdf-convert::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
   languageName: node
   linkType: soft
 
-"@polypoly-eu/rdf@link:../rdf::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
+"@polypoly-eu/rdf@link:../rdf::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/rdf@link:../rdf::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3D3a194e%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
+  resolution: "@polypoly-eu/rdf@link:../rdf::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
   languageName: node
   linkType: soft
 
