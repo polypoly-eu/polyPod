@@ -17,7 +17,6 @@
         "testFeature"
     ],
     "skipTestsFor": [
-        "customs",
         "fetch-spec",
         "podigree",
         "poly-api"

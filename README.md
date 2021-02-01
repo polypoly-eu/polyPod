@@ -80,12 +80,8 @@ To run the linter:
 Some tests are currently not run because they fail - this needs fixing before we
 make any major changes:
 
-- [customs](customs)
 - [podigree](podigree)
 - [poly-api](poly-api)
-
-These failures look eerily similar - I presume whatever problem there is in
-_customs_, it causes the others to fail.
 
 The tests for [fetch-spec](fetch-spec) fail as well, but they already failed in
 the [fetch-spec microrepo](https://github.com/polypoly-eu/fetch-spec) - since it

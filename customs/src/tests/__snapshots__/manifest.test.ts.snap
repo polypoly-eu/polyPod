@@ -31,10 +31,7 @@ Object {
   "api": Range {
     "includePrerelease": false,
     "loose": false,
-    "options": Object {
-      "includePrerelease": false,
-      "loose": false,
-    },
+    "options": Object {},
     "range": ">=0.1.0 <0.2.0-0",
     "raw": "^0.1.0",
     "set": Array [
@@ -42,20 +39,14 @@ Object {
         Comparator {
           "loose": false,
           "operator": ">=",
-          "options": Object {
-            "includePrerelease": false,
-            "loose": false,
-          },
+          "options": Object {},
           "semver": SemVer {
             "build": Array [],
             "includePrerelease": false,
             "loose": false,
             "major": 0,
             "minor": 1,
-            "options": Object {
-              "includePrerelease": false,
-              "loose": false,
-            },
+            "options": Object {},
             "patch": 0,
             "prerelease": Array [],
             "raw": "0.1.0",
@@ -66,20 +57,14 @@ Object {
         Comparator {
           "loose": false,
           "operator": "<",
-          "options": Object {
-            "includePrerelease": false,
-            "loose": false,
-          },
+          "options": Object {},
           "semver": SemVer {
             "build": Array [],
             "includePrerelease": false,
             "loose": false,
             "major": 0,
             "minor": 2,
-            "options": Object {
-              "includePrerelease": false,
-              "loose": false,
-            },
+            "options": Object {},
             "patch": 0,
             "prerelease": Array [
               0,
@@ -100,10 +85,7 @@ Object {
     "loose": false,
     "major": 0,
     "minor": 0,
-    "options": Object {
-      "includePrerelease": false,
-      "loose": false,
-    },
+    "options": Object {},
     "patch": 0,
     "prerelease": Array [],
     "raw": "0.0.0",
