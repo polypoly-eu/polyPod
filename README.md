@@ -36,7 +36,7 @@ naming and documentation to make things more understandable.
 ## Requirements
 
 - [Node.js](https://nodejs.org/) version 14.10.1 or newer
-- [Yarn](https://yarnpkg.com/) version 2.4.0 or newer
+- [Yarn](https://yarnpkg.com/) version 2.4.0 or newer\
   (`npm install -g yarn` will do)
 
 ## Building
