@@ -49,8 +49,8 @@ const logMain = (message) => console.log(`\n***** ${message}`);
 
 const logDetail = (message) => console.log(`\n*** ${message}`);
 
-function executeProcess(executable, args) {
-    const spawnedProcess = spawn(executable, args);
+function executeProcess(executable, args, env = process.env) {
+    const spawnedProcess = spawn(executable, args, {env: env});
 
     spawnedProcess.stdout.on("data", function(data) {
         console.log(data.toString());
@@ -70,7 +70,8 @@ function executeProcess(executable, args) {
     });
 }
 
-const yarn = (...args) => executeProcess("yarn", args);
+const yarn = (...args) =>
+    executeProcess("yarn", args, {...process.env, FORCE_COLOR: 1});
 
 async function yarnInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
