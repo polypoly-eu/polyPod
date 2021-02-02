@@ -32,9 +32,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polypoly-eu/orodruin@link:/..::locator=example%40workspace%3A.":
+"@polypoly-eu/orodruin@link:..::locator=example%40workspace%3A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/orodruin@link:/..::locator=example%40workspace%3A."
+  resolution: "@polypoly-eu/orodruin@link:..::locator=example%40workspace%3A."
   languageName: node
   linkType: soft
 
@@ -427,7 +427,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example@workspace:."
   dependencies:
-    "@polypoly-eu/orodruin": "link:/.."
+    "@polypoly-eu/orodruin": "link:.."
     "@rollup/plugin-sucrase": ^3.1.0
     connect: ^3.7.0
     react: ^16.13.1
