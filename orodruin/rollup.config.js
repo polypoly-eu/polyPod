@@ -52,7 +52,10 @@ export default [
                 preferBuiltins: true
             }),
             commonjs(),
-            nodePolyfills(),
+            nodePolyfills({
+                // Workaround for https://github.com/ionic-team/rollup-plugin-node-polyfills/issues/17
+                include: '../**/node_modules/**/*.js'
+            }),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"]

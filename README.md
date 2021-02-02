@@ -58,16 +58,14 @@ registries. After migrating these projects into a single repository, we kept
 them as separate packages for now. Building these properly turned out to be a
 challenge.
 
-While the build, the tests and linting works just fine, things are currently
-broken, which is apparent when trying to run
-[orodruin/example](orodruin/example) - the issues are documented there.
+Now that we've worked out the last kink around linked node modules, and since
+we're using Yarn 2.x, we should be able to switch to workspaces to eliminate
+quite a bit of the logic in `build.js`.
 
-_If_ we can fix those, we can leave things as they are, or even switch to
-`nodeLinker: pnp` and workspaces, eliminating much of the logic in `build.js`
-and speeding up the build while at it.
-
-If we cannot fix these issues, we will likely have to revert to Yarn 1.x and
-using the `file:` protocol as a workaround :(
+If we want to switch to `nodeLinker: pnp`, we have to find a better workaround
+for _rollup-plugin-node-polyfills_ to discover modules, however. Out of the box,
+[it doesn't support links in `node_modules`][node-polyfills issue], let alone
+pnp.
 
 ## Testing
 
@@ -92,3 +90,4 @@ the [fetch-spec microrepo](https://github.com/polypoly-eu/fetch-spec) - since it
 seems unrelated to the migration we can figure that one out later.
 
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
+[node-polyfills issue]: https://github.com/ionic-team/rollup-plugin-node-polyfills/issues/17
