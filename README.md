@@ -16,15 +16,22 @@ we need to fix, including adjusting the overall structure and documentation.
 
 ## Components
 
-### CLI for building and testing Features
-
-The [orodruin](orodruin) package includes everything needed to develop and test
-features.
-
 ### polyPod app for Android
 
 You can find the Android version of the polyPod in
 [polyPod-Android](polyPod-Android).
+
+### Features
+
+This repository contains various features we use for documentation and testing
+purposes, as well as features that get bundled with the polyPod itself:
+
+- [orodruin/example](orodruin/example) is an example feature that uses some
+  polyPod APIs.
+- [testFeature](testFeature) is a feature polyPod implementations can write test
+  against, to verify it all works properly end to end.
+- [polyHello-feature](polyHello-feature) is the most trivial feature imaginable,
+  currently being bundled with the polyPod.
 
 ### The shared polyPod core code
 
