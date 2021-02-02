@@ -19,30 +19,29 @@ function parseManifest(path) {
     }
 }
 
-function extractLocalDependencies(manifest, scope) {
-    const prefix = `${scope}/`;
-    return [
-        ...Object.keys(manifest.dependencies || {}),
-        ...Object.keys(manifest.devDependencies || {})
-    ].filter(key => key.startsWith(prefix))
-        .map(key => key.slice(prefix.length));
-}
+const extractLocalDependencies = (manifest, scope) =>
+      [
+          ...Object.keys(manifest.dependencies || {}),
+          ...Object.keys(manifest.devDependencies || {})
+      ].filter(key => key.startsWith(`${scope}/`));
 
-function createPackageData(name, metaManifest) {
-    const manifest = parseManifest(`${name}/package.json`);
+function createPackageData(path, metaManifest) {
+    const manifest = parseManifest(`${path}/package.json`);
     return {
-        name: name,
+        path,
+        name: manifest.name,
         dependencies: extractLocalDependencies(manifest, metaManifest.scope),
         scripts: Object.keys(manifest.scripts),
-        skipScripts: metaManifest.skipTestsFor.includes(name) ? ["test"] : []
+        skipScripts: metaManifest.skipTestsFor.includes(path) ? ["test"] : []
     };
 }
 
 function createPackageTree() {
     const metaManifest = parseManifest("packages.json");
     return Object.fromEntries(
-        metaManifest.packages.map(
-            name => [name, createPackageData(name, metaManifest)]));
+        metaManifest.packages
+            .map(path => createPackageData(path, metaManifest))
+            .map(data => [data.name, data]));
 }
 
 const logMain = (message) => console.log(`\n***** ${message}`);
@@ -100,9 +99,9 @@ const commands = {
 async function executeCommand(pkg, command) {
     const oldPath = process.cwd();
     try {
-        process.chdir(pkg.name);
+        process.chdir(pkg.path);
     } catch {
-        throw `Directory ${pkg.name} does not exist`;
+        throw `Directory ${pkg.path} for package ${pkg.name} does not exist`;
     }
 
     try {
@@ -126,7 +125,7 @@ async function processPackage(name, packageTree, command) {
     const entries = Object.entries(packageTree);
     const total = entries.length;
     const current = entries.filter(([_, pkg]) => pkg.built).length + 1;
-    logMain(`Executing ${command} for ${name} [${current}/${total}] ...`);
+    logMain(`Executing ${command} for ${path} [${current}/${total}] ...`);
     await executeCommand(pkg, command);
     pkg.built = true;
 }
