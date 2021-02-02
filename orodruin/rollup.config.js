@@ -48,11 +48,11 @@ export default [
             format: "iife"
         },
         plugins: [
-            nodePolyfills(),
             resolve({
                 preferBuiltins: true
             }),
             commonjs(),
+            nodePolyfills(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"]
