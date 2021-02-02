@@ -28,23 +28,16 @@ $ yarn run serve
 
 This will open the feature in your default browser.
 
-## Nice, huh? The rest is, however, broken :(
-
-There are two issues we need to address:
-
-### 1. The tests don't run
-
-While you can run:
+## Testing
 
 ```
 $ yarn run test
 ```
 
-It will simply launch a server and hang. This needs fixing - particularly since
-we had a nasty issue that only turned up in manual testing - the `include` added
-to `rollup-plugin-node-polyfills` in `../rollup.config.js`.
+Please note that these may well hang if there's an issue - this needs improving.
 
-### 2. The _orodruin_ command is not being installed along with the package
+## Room for improvement
 
-No idea why, but there's a workaround for this implemented (in `package.json`
-and `test.sh`), so we can probably look away for now.
+The _orodruin_ command is currently not being installed along with the
+_orodruin_ package, which requires workarounds in `package.json` and
+`test.sh`. That needs fixing.

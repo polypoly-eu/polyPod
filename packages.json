@@ -20,7 +20,6 @@
     "skipTestsFor": [
         "fetch-spec",
         "podigree",
-        "poly-api",
-        "orodruin/example"
+        "poly-api"
     ]
 }
