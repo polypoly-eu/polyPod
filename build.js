@@ -125,7 +125,7 @@ async function processPackage(name, packageTree, command) {
     const entries = Object.entries(packageTree);
     const total = entries.length;
     const current = entries.filter(([_, pkg]) => pkg.built).length + 1;
-    logMain(`Executing ${command} for ${path} [${current}/${total}] ...`);
+    logMain(`Executing ${command} for ${pkg.path} [${current}/${total}] ...`);
     await executeCommand(pkg, command);
     pkg.built = true;
 }
