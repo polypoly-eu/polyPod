@@ -22,6 +22,15 @@ $ yarn run build
 
 ### 3. Start the development server
 
+Currently, something is broken and the _orodruin_ binary is not found. So you'll
+have to run:
+
+```
+$ node ../dist/cli.js serve
+```
+
+In theory, it should however work like this:
+
 ```
 $ yarn run serve
 ```

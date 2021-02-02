@@ -58,13 +58,17 @@ registries. After migrating these projects into a single repository, we kept
 them as separate packages for now. Building these properly turned out to be a
 challenge.
 
-Yes we tried Yarna workspaces, pnp, pnpm, you name it. The ultimate problem
-seems to be this: The _podigree_ dependency required by _orodruin_ breaks the
-build (i.e. leads to a broken _container.js_) if it is referenced through a
-symbolic link. Yarn's `file:` protocol forces copying the directory into
-`node_modules`, which alleviates the issues. If we can solve this issue, we can
-presumably move to `nodeLinker: "pnp"`, workspaces and all that, and get rid of
-that nasty custom build script.
+Currently, it appears _orodruin_ is only being built correctly when referencing
+_podigree_ using Yarn's `file:` rather than `link:` protocol. Since we are
+currently using the `link:` protocol, _orodruin is currently broken_. You can
+tell if you try to run [orodruin/example](orodruin/example).
+
+If we can't fix this issue, we have to revert to Yarn 1.x and using the `file:`
+protocol for the _podigree_ dependency in _orodruin_. Yarn 2.x supports the file
+protocol as well, but this will make _orodruin_'s `yarn.lock` file unstable.
+
+If we do manage to fix this, we can probably switch to `nodeLinker: pnp` and
+Yarn workspaces, eliminating most/all of the logic currently in `build.js`.
 
 ## Testing
 
