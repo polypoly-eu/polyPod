@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "serve": "orodruin serve",
+    "serve": "node node_modules/@polypoly-eu/orodruin/bin/cli.js serve",
     "build": "rollup -c",
-    "test:feature": "./test.sh"
+    "test": "./test.sh"
   },
   "devDependencies": {
     "@polypoly-eu/orodruin": "link:..",
