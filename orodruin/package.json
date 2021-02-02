@@ -10,9 +10,7 @@
     "data"
   ],
   "main": "dist/index.js",
-  "bin": {
-    "orodruin": "bin/cli.js"
-  },
+  "bin": "bin/cli.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
@@ -25,7 +23,7 @@
   },
   "dependencies": {
     "@polypoly-eu/customs": "link:../customs",
-    "@polypoly-eu/podigree": "file:../podigree",
+    "@polypoly-eu/podigree": "link:../podigree",
     "@polypoly-eu/poly-api": "link:../poly-api",
     "@polypoly-eu/port-authority": "link:../port-authority",
     "@rdfjs/dataset": "^1.0.1",
@@ -60,8 +58,11 @@
     "@types/semver": "^7.3.3",
     "@types/serve-static": "^1.13.9",
     "@types/yargs": "^15.0.12",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
     "babel-jest": "^26.6.3",
     "eslint": "^7.18.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.6.3",
     "jsdom": "^16.4.0",
     "prettier": "^2.2.1",
