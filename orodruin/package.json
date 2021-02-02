@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@polypoly-eu/customs": "link:../customs",
-    "@polypoly-eu/podigree": "file:../podigree",
+    "@polypoly-eu/podigree": "link:../podigree",
     "@polypoly-eu/poly-api": "link:../poly-api",
     "@polypoly-eu/port-authority": "link:../port-authority",
     "@rdfjs/dataset": "^1.0.1",

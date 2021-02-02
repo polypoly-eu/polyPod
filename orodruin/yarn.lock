@@ -646,18 +646,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polypoly-eu/aop-ts@link:../aop-ts::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
-  version: 0.0.0-use.local
-  resolution: "@polypoly-eu/aop-ts@link:../aop-ts::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
-  languageName: node
-  linkType: soft
-
-"@polypoly-eu/bubblewrap@link:../bubblewrap::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
-  version: 0.0.0-use.local
-  resolution: "@polypoly-eu/bubblewrap@link:../bubblewrap::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
-  languageName: node
-  linkType: soft
-
 "@polypoly-eu/customs@link:../customs::locator=%40polypoly-eu%2Forodruin%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@polypoly-eu/customs@link:../customs::locator=%40polypoly-eu%2Forodruin%40workspace%3A."
@@ -670,19 +658,13 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@polypoly-eu/fetch-spec@link:../fetch-spec::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
-  version: 0.0.0-use.local
-  resolution: "@polypoly-eu/fetch-spec@link:../fetch-spec::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
-  languageName: node
-  linkType: soft
-
 "@polypoly-eu/orodruin@workspace:.":
   version: 0.0.0-use.local
   resolution: "@polypoly-eu/orodruin@workspace:."
   dependencies:
     "@polypoly-eu/customs": "link:../customs"
     "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly"
-    "@polypoly-eu/podigree": "file:../podigree"
+    "@polypoly-eu/podigree": "link:../podigree"
     "@polypoly-eu/poly-api": "link:../poly-api"
     "@polypoly-eu/port-authority": "link:../port-authority"
     "@rdfjs/dataset": ^1.0.1
@@ -736,28 +718,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@polypoly-eu/podigree@file:../podigree::locator=%40polypoly-eu%2Forodruin%40workspace%3A.":
-  version: 0.6.2
-  resolution: "@polypoly-eu/podigree@file:../podigree#../podigree::hash=d41c5f&locator=%40polypoly-eu%2Forodruin%40workspace%3A."
-  dependencies:
-    "@polypoly-eu/aop-ts": "link:../aop-ts"
-    "@polypoly-eu/bubblewrap": "link:../bubblewrap"
-    "@polypoly-eu/fetch-spec": "link:../fetch-spec"
-    "@polypoly-eu/poly-api": "link:../poly-api"
-    "@polypoly-eu/port-authority": "link:../port-authority"
-    "@polypoly-eu/postoffice": "link:../postoffice"
-    "@polypoly-eu/rdf": "link:../rdf"
-    "@polypoly-eu/rdf-convert": "link:../rdf-convert"
-    "@rdfjs/dataset": ^1.0.1
-    "@types/rdf-js": ^4.0.0
-    fp-ts: ^2.8.2
-    io-ts: 2.2.10
-    memfs: ^3.2.0
-  peerDependencies:
-    body-parser: ^1.19.0
-  checksum: 9489f5514919f6304306aeead0d5f8d3d3457110ce275b45390ff9e975ddb4b92cbfd1b9dc744f3c473f4a248f084bcd9b9ea70276c349d5919bd4c813c91a22
+"@polypoly-eu/podigree@link:../podigree::locator=%40polypoly-eu%2Forodruin%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@polypoly-eu/podigree@link:../podigree::locator=%40polypoly-eu%2Forodruin%40workspace%3A."
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@polypoly-eu/poly-api@link:../poly-api::locator=%40polypoly-eu%2Forodruin%40workspace%3A.":
   version: 0.0.0-use.local
@@ -765,39 +730,9 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@polypoly-eu/poly-api@link:../poly-api::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
-  version: 0.0.0-use.local
-  resolution: "@polypoly-eu/poly-api@link:../poly-api::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
-  languageName: node
-  linkType: soft
-
 "@polypoly-eu/port-authority@link:../port-authority::locator=%40polypoly-eu%2Forodruin%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@polypoly-eu/port-authority@link:../port-authority::locator=%40polypoly-eu%2Forodruin%40workspace%3A."
-  languageName: node
-  linkType: soft
-
-"@polypoly-eu/port-authority@link:../port-authority::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
-  version: 0.0.0-use.local
-  resolution: "@polypoly-eu/port-authority@link:../port-authority::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
-  languageName: node
-  linkType: soft
-
-"@polypoly-eu/postoffice@link:../postoffice::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
-  version: 0.0.0-use.local
-  resolution: "@polypoly-eu/postoffice@link:../postoffice::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
-  languageName: node
-  linkType: soft
-
-"@polypoly-eu/rdf-convert@link:../rdf-convert::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
-  version: 0.0.0-use.local
-  resolution: "@polypoly-eu/rdf-convert@link:../rdf-convert::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
-  languageName: node
-  linkType: soft
-
-"@polypoly-eu/rdf@link:../rdf::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A.":
-  version: 0.0.0-use.local
-  resolution: "@polypoly-eu/rdf@link:../rdf::locator=%40polypoly-eu%2Fpodigree%40file%3A..%2Fpodigree%23..%2Fpodigree%3A%3Ahash%3Dd41c5f%26locator%3D%2540polypoly-eu%252Forodruin%2540workspace%253A."
   languageName: node
   linkType: soft
 
@@ -1112,7 +1047,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/rdf-js@npm:*, @types/rdf-js@npm:^4.0.0":
+"@types/rdf-js@npm:*":
   version: 4.0.1
   resolution: "@types/rdf-js@npm:4.0.1"
   dependencies:
@@ -1368,14 +1303,14 @@ __metadata:
   linkType: hard
 
 "ajv@npm:^7.0.2":
-  version: 7.0.3
-  resolution: "ajv@npm:7.0.3"
+  version: 7.0.4
+  resolution: "ajv@npm:7.0.4"
   dependencies:
     fast-deep-equal: ^3.1.1
     json-schema-traverse: ^1.0.0
     require-from-string: ^2.0.2
     uri-js: ^4.2.2
-  checksum: 3236a5ce8c49fb831fe9c7ae67a6d7f732340f0dbd6e6add2c4e6556519ba274f84c4d68ccdfc19a6d038bf2333341562cd8a28272c71585cb663dd76b62f7ea
+  checksum: 959acf9a337746a0cc0fb954a94d8146734ff72796a0adf06c97f33412626c0dc5cf71f14558b6c0e352b2c19eda32bf5e2ef36ab6d5a8b06f6ee0eab850813f
   languageName: node
   linkType: hard
 
@@ -3120,13 +3055,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fp-ts@npm:^2.8.2":
-  version: 2.9.3
-  resolution: "fp-ts@npm:2.9.3"
-  checksum: d32ea0a319fa50f8760aabf455da4d633f3736cec284b44fc11ba28362a9b51912a15c5ffea415f31f04bbedddd009b15e4547d8b67cda171a43c59c033497c1
-  languageName: node
-  linkType: hard
-
 "fragment-cache@npm:^0.2.1":
   version: 0.2.1
   resolution: "fragment-cache@npm:0.2.1"
@@ -3156,13 +3084,6 @@ __metadata:
   dependencies:
     minipass: ^3.0.0
   checksum: e14a490658621cf1f7d8cbf9e92a9cc4dc7ce050418e4817e877e4531c438223db79f7a1774668087428d665a3de95f87014ce36c8afdc841fea42bcb782abcb
-  languageName: node
-  linkType: hard
-
-"fs-monkey@npm:1.0.1":
-  version: 1.0.1
-  resolution: "fs-monkey@npm:1.0.1"
-  checksum: 2ecb8ef5896fc66a5d6fbb9af6e1f9c5723b46ff46cbd91c815262c405318dad8cb6f1bbb36d9c63ec257131731fbdfa433683bc1fea34b4be17b07e64c826cc
   languageName: node
   linkType: hard
 
@@ -3614,15 +3535,6 @@ __metadata:
   version: 2.0.3
   resolution: "inherits@npm:2.0.3"
   checksum: 9488f9433effbc24474f6baee8014e5337c7f99305ecb4204fa5864ae7655c24225780d87fc65ed8d3d374715a18c5dc8c69fe3bf9745cde2e7acd0ac068a07b
-  languageName: node
-  linkType: hard
-
-"io-ts@npm:2.2.10":
-  version: 2.2.10
-  resolution: "io-ts@npm:2.2.10"
-  peerDependencies:
-    fp-ts: ^2.0.0
-  checksum: d6ab978796d656daf0b92fa259201ad78a3a696b598ecf72ad186fd2754b37c9c2309c72659e57c4e3992ce6cbda25337e1867c837f5cd0f2863ce8afeef67ea
   languageName: node
   linkType: hard
 
@@ -4789,15 +4701,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memfs@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "memfs@npm:3.2.0"
-  dependencies:
-    fs-monkey: 1.0.1
-  checksum: 48bf758246937c6ceadaecc31e81050d4745dac5e031e3080961c28311bcc4b29e99f9cc4110103a0cb9f004c30c59926eaf15d10f4ac9a00b773b256a918ae2
-  languageName: node
-  linkType: hard
-
 "merge-stream@npm:^2.0.0":
   version: 2.0.0
   resolution: "merge-stream@npm:2.0.0"
@@ -5951,8 +5854,8 @@ __metadata:
   linkType: hard
 
 "rollup@npm:^2.37.0":
-  version: 2.38.3
-  resolution: "rollup@npm:2.38.3"
+  version: 2.38.4
+  resolution: "rollup@npm:2.38.4"
   dependencies:
     fsevents: ~2.3.1
   dependenciesMeta:
@@ -5960,7 +5863,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 4b33d6bfff5df08ad46e10b8d321574d01d1b03b0d68f25f81b81b0b9b4adcbe57b741de34360f910ffeeccc5878bf9a7de0d85bc9b10068ac17465044192713
+  checksum: dab8b6c64fced8b1b606d4018bb8e37b96bfd5b711c1cd8523c017fb71694bc3dfed2625e959e670b53d56cfae9fb6941f4005f1de02770e1f9d76d50e5d026d
   languageName: node
   linkType: hard
 
