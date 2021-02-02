@@ -28,8 +28,8 @@ purposes, as well as features that get bundled with the polyPod itself:
 
 - [orodruin/example](orodruin/example) is an example feature that uses some
   polyPod APIs.
-- [testFeature](testFeature) is a feature polyPod implementations can write test
-  against, to verify it all works properly end to end.
+- [testFeature](testFeature) is a feature polyPod implementations can write
+  tests against, to verify it all works properly end to end.
 - [polyHello-feature](polyHello-feature) is the most trivial feature imaginable,
   currently being bundled with the polyPod.
 
