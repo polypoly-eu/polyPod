@@ -13,10 +13,10 @@ task buildFeatureContainer(type: Copy) {
     into "build/generated-assets/container/"
 }
 
-task buildPolyHelloFeature(type: Zip) {
-    archiveFileName = "polyHello.zip"
+task buildPolyExplorerFeature(type: Zip) {
+    archiveFileName = "polyExplorer.zip"
     destinationDirectory = file("$buildDir/generated-assets/features")
-    from "$projectDir/../../polyHello-feature"
+    from "$projectDir/../../polyExplorer-feature"
 }
 
 task buildTestFeature(type: Zip) {
@@ -28,7 +28,7 @@ task buildTestFeature(type: Zip) {
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
         task.dependsOn buildFeatureContainer
-        task.dependsOn buildPolyHelloFeature
+        task.dependsOn buildPolyExplorerFeature
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice
