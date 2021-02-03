@@ -17,16 +17,16 @@
     "eslint": "eslint src --ext .ts",
     "test": "jest && ts-mocha src/**/*.test.ts",
     "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'yarn run docs'"
+    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "dependencies": {
-    "@polypoly-eu/fetch-spec": "link:../fetch-spec",
-    "@polypoly-eu/rdf": "link:../rdf",
+    "@polypoly-eu/fetch-spec": "file:../fetch-spec",
+    "@polypoly-eu/rdf": "file:../rdf",
     "@types/rdf-js": "^4.0.0"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
-    "@polypoly-eu/rdf-spec": "link:../rdf-spec",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
+    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/chai": "^4.2.14",

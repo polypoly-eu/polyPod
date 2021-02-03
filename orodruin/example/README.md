@@ -35,9 +35,3 @@ $ yarn run test
 ```
 
 Please note that these may well hang if there's an issue - this needs improving.
-
-## Room for improvement
-
-The _orodruin_ command is currently not being installed along with the
-_orodruin_ package, which requires workarounds in `package.json` and
-`test.sh`. That needs fixing.

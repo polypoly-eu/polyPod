@@ -69,15 +69,15 @@ function executeProcess(executable, args, env = process.env) {
     });
 }
 
-const yarn = (...args) =>
-    executeProcess("yarn", args, {...process.env, FORCE_COLOR: 1});
+const npm = (...args) =>
+    executeProcess("npm", args, {...process.env, FORCE_COLOR: 1});
 
-async function yarnInstall(name) {
+async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await yarn("install", "--immutable");
+    await npm("ci");
 }
 
-async function yarnRun(script, pkg) {
+async function npmRun(script, pkg) {
     if (!pkg.scripts.includes(script))
         return;
 
@@ -87,13 +87,13 @@ async function yarnRun(script, pkg) {
     }
 
     logDetail(`${pkg.name}: Executing ${script} script ...`);
-    await yarn("run", script);
+    await npm("run", script);
 }
 
 const commands = {
-    build: pkg => yarnInstall(pkg.name).then(() => yarnRun("build", pkg)),
-    lint: pkg => yarnRun("eslint", pkg),
-    test: pkg => yarnRun("test", pkg)
+    build: pkg => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
+    lint: pkg => npmRun("eslint", pkg),
+    test: pkg => npmRun("test", pkg)
 };
 
 async function executeCommand(pkg, command) {

@@ -22,7 +22,7 @@
     "semver": "^7.3.2"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.21",

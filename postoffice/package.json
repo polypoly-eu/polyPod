@@ -14,10 +14,10 @@
     "eslint": "eslint src --ext .ts",
     "test": "jest",
     "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'yarn run docs'"
+    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.20",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
