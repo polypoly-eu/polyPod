@@ -5,6 +5,8 @@
 const fs = require("fs");
 const path = require("path");
 const {spawn} = require("child_process");
+const {startServer, stopServer} = require("./dummyServer")
+
 
 function showUsage(scriptPath) {
     console.error(`Usage: ${path.basename(scriptPath)} [lint | test]`);
@@ -132,8 +134,16 @@ async function processPackage(name, packageTree, command) {
 }
 
 async function processAll(packageTree, command) {
-    for (let name of Object.keys(packageTree))
+    if (command == "test") {
+        startServer();
+    }
+    try {
+        for (let name of Object.keys(packageTree))
         await processPackage(name, packageTree, command);
+    }
+    finally {
+        stopServer();
+    }
 }
 
 (async () => {

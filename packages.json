@@ -7,6 +7,7 @@
         "eslint-config-polypoly",
         "fetch-spec",
         "orodruin",
+        "orodruin/example",
         "podigree",
         "poly-api",
         "port-authority",
@@ -17,8 +18,5 @@
         "testFeature"
     ],
     "skipTestsFor": [
-        "fetch-spec",
-        "podigree",
-        "poly-api"
     ]
 }
