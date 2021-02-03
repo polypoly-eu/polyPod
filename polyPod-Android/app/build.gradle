@@ -16,13 +16,13 @@ task buildFeatureContainer(type: Copy) {
 task buildPolyExplorerFeature(type: Zip) {
     archiveFileName = "polyExplorer.zip"
     destinationDirectory = file("$buildDir/generated-assets/features")
-    from "$projectDir/../../polyExplorer-feature"
+    from "$projectDir/../../features/polyExplorer"
 }
 
 task buildTestFeature(type: Zip) {
-    archiveFileName = "testFeature.zip"
+    archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
-    from "$projectDir/../../testFeature/dist"
+    from "$projectDir/../../features/test/dist"
 }
 
 tasks.whenTaskAdded { task ->
@@ -93,13 +93,13 @@ android {
 task copyTestFeatureOntoDevice {
     dependsOn buildTestFeature
     def adb = android.getAdbExecutable().absolutePath
-    def tempPath = "/data/local/tmp/testFeature.zip"
+    def tempPath = "/data/local/tmp/test.zip"
     def packageName = android.defaultConfig.applicationId
     def featurePath = "files/features"
     doLast {
         exec {
-            commandLine adb, 'push', "--sync", "$buildDir/testFeature.zip", tempPath
-            logger.info("testFeature copied onto the device")
+            commandLine adb, 'push', "--sync", "$buildDir/test.zip", tempPath
+            logger.info("test feature copied onto the device")
         }
         exec {
             commandLine adb, 'shell', "run-as", packageName, "mkdir", '-p', featurePath
@@ -107,7 +107,7 @@ task copyTestFeatureOntoDevice {
         }
         exec {
             commandLine adb, 'shell', "run-as", packageName, "cp", tempPath, featurePath
-            logger.info("testFeature moved to features directory on the device")
+            logger.info("test feature moved to features directory on the device")
         }
     }
 }

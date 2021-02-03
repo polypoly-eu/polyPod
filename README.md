@@ -24,14 +24,8 @@ You can find the Android version of the polyPod in
 ### Features
 
 This repository contains various features we use for documentation and testing
-purposes, as well as features that get bundled with the polyPod itself:
-
-- [polyExplorer-feature](polyHello-feature) is still under active development,
-  but will be the one feature bundled with the initial polyPod release.
-- [orodruin/example](orodruin/example) is an example feature that uses some
-  polyPod APIs.
-- [testFeature](testFeature) is a feature polyPod implementations can write
-  tests against, to verify it all works properly end to end.
+purposes, as well as features that get bundled with the polyPod itself, you can
+find them in [features](features).
 
 ### The shared polyPod core code
 

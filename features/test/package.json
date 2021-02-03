@@ -1,10 +1,10 @@
 {
-  "name": "testFeature",
+  "name": "test-feature",
   "scripts": {
     "build": "faucet"
   },
   "dependencies": {
-    "@polypoly-eu/poly-api": "file:../poly-api",
+    "@polypoly-eu/poly-api": "file:../../poly-api",
     "@rdfjs/data-model": "^1.2.0"
   },
   "devDependencies": {

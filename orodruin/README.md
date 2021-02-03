@@ -11,11 +11,11 @@ dependency, but if you would like to work with the command directly, you can
 install it globally:
 
 ```
-$ yarn install -g
+$ npm install -g
 $ orodruin --help
 ```
 
 ## Developing Features
 
-After building orodruin as described above, you can use it to develop features.
-See [example](example) for an example.
+After building orodruin, you can use it to develop features. See
+[../features/example](../features/example) for an example.

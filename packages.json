@@ -5,17 +5,17 @@
         "bubblewrap",
         "customs",
         "eslint-config-polypoly",
+        "features/example",
+        "features/test",
         "fetch-spec",
         "orodruin",
-        "orodruin/example",
         "podigree",
         "poly-api",
         "port-authority",
         "postoffice",
         "rdf",
         "rdf-convert",
-        "rdf-spec",
-        "testFeature"
+        "rdf-spec"
     ],
     "skipTestsFor": [
         "fetch-spec",
