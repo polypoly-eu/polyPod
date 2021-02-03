@@ -16,7 +16,7 @@ task buildFeatureContainer(type: Copy) {
 task buildPolyExplorerFeature(type: Zip) {
     archiveFileName = "polyExplorer.zip"
     destinationDirectory = file("$buildDir/generated-assets/features")
-    from "$projectDir/../../features/polyExplorer"
+    from "$projectDir/../../features/polyExplorer/dist"
 }
 
 task buildTestFeature(type: Zip) {

@@ -1,0 +1,21 @@
+{
+  "name": "poly-explorer-feature",
+  "scripts": {
+    "eslint": "eslint src --ext .js --ext .jsx",
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@polypoly-eu/eslint-config-polypoly": "file:../../eslint-config-polypoly",
+    "@rollup/plugin-sucrase": "^3.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.22.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rollup": "^2.26.11",
+    "rollup-plugin-copy": "^3.3.0"
+  },
+  "private": true
+}

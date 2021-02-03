@@ -6,6 +6,7 @@
         "customs",
         "eslint-config-polypoly",
         "features/example",
+        "features/polyExplorer",
         "features/test",
         "fetch-spec",
         "orodruin",
