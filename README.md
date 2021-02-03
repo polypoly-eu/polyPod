@@ -42,7 +42,7 @@ naming and documentation to make things more understandable.
 
 ## Requirements
 
-Just [Node.js](https://nodejs.org/) version 14.10.1 or newer.
+Just [Node.js](https://nodejs.org/) version 15.x.
 
 ## Building
 
