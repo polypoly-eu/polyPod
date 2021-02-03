@@ -3,6 +3,7 @@ import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 export * from "./api";
+export * from "./dummyServer";
 
 let httpbinUrl: string | undefined;
 
