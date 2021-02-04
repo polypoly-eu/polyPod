@@ -4,10 +4,10 @@
         "aop-ts",
         "bubblewrap",
         "customs",
+        "dummy-server",
         "eslint-config-polypoly",
         "fetch-spec",
         "orodruin",
-        "orodruin/example",
         "podigree",
         "poly-api",
         "port-authority",
@@ -16,7 +16,5 @@
         "rdf-convert",
         "rdf-spec",
         "testFeature"
-    ],
-    "skipTestsFor": [
     ]
 }

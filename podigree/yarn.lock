@@ -112,6 +112,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@polypoly-eu/dummy-server@link:../dummy-server::locator=%40polypoly-eu%2Fpodigree%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@polypoly-eu/dummy-server@link:../dummy-server::locator=%40polypoly-eu%2Fpodigree%40workspace%3A."
+  languageName: node
+  linkType: soft
+
 "@polypoly-eu/eslint-config-polypoly@link:../eslint-config-polypoly::locator=%40polypoly-eu%2Fpodigree%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@polypoly-eu/eslint-config-polypoly@link:../eslint-config-polypoly::locator=%40polypoly-eu%2Fpodigree%40workspace%3A."
@@ -130,6 +136,7 @@ __metadata:
   dependencies:
     "@polypoly-eu/aop-ts": "link:../aop-ts"
     "@polypoly-eu/bubblewrap": "link:../bubblewrap"
+    "@polypoly-eu/dummy-server": "link:../dummy-server"
     "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly"
     "@polypoly-eu/fetch-spec": "link:../fetch-spec"
     "@polypoly-eu/poly-api": "link:../poly-api"

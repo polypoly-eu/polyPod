@@ -5,8 +5,6 @@
 const fs = require("fs");
 const path = require("path");
 const {spawn} = require("child_process");
-const {startServer, stopServer} = require("./dummyServer")
-
 
 function showUsage(scriptPath) {
     console.error(`Usage: ${path.basename(scriptPath)} [lint | test]`);
@@ -35,8 +33,7 @@ function createPackageData(name, metaManifest) {
     return {
         name: name,
         dependencies: extractLocalDependencies(manifest, metaManifest.scope),
-        scripts: Object.keys(manifest.scripts),
-        skipScripts: metaManifest.skipTestsFor.includes(name) ? ["test"] : []
+        scripts: Object.keys(manifest.scripts)
     };
 }
 
@@ -84,11 +81,6 @@ async function yarnRun(script, pkg) {
     if (!pkg.scripts.includes(script))
         return;
 
-    if (pkg.skipScripts.includes(script)) {
-        logDetail(`${pkg.name}: Skipping ${script} script`);
-        return;
-    }
-
     logDetail(`${pkg.name}: Executing ${script} script ...`);
     await yarn("run", script);
 }
@@ -134,16 +126,8 @@ async function processPackage(name, packageTree, command) {
 }
 
 async function processAll(packageTree, command) {
-    if (command == "test") {
-        startServer();
-    }
-    try {
-        for (let name of Object.keys(packageTree))
+    for (let name of Object.keys(packageTree))
         await processPackage(name, packageTree, command);
-    }
-    finally {
-        stopServer();
-    }
 }
 
 (async () => {

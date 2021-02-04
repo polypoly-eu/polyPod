@@ -1,7 +1,11 @@
-const express = require("express");
+const http = require('http');
+const socketio = require("socket.io");
+let app = require("express")();
 let bodyParser = require("body-parser");
 
-const app = express();
+let server = http.createServer(app);
+
+io = socketio(server);
 
 app.use(bodyParser.text({ type: "*/*" }));
 
@@ -21,17 +25,18 @@ app.put("/", (req, res) => res.send("Received a PUT HTTP method"));
 
 app.delete("/", (req, res) => res.send("Received a DELETE HTTP method"));
 
-let serverSingleton = null;
-
-async function startServer() {
-    serverSingleton = app.listen(process.env.PORT, () =>
-        console.log(`Example app listening on port ${process.env.PORT}!`)
+function startServer(port) {
+    io.on("connection", (socketServer) => {
+        socketServer.on("npmStop", () => {
+            console.log("Dummy server stopped");
+            process.exit(0);
+        });
+    });    
+    server.listen(port, () =>
+        console.log(`Dummy server is listening on port ${port}!`)
     );
 }
 
-async function stopServer() {
-    serverSingleton.close();
-}
 module.exports = {
-    startServer, stopServer
+    startServer
 } 
