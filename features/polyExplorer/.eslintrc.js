@@ -3,11 +3,19 @@ module.exports = {
         "@polypoly-eu/eslint-config-polypoly",
         "plugin:react/recommended"
     ],
-    parser: "espree",
-    parserOptions: {
-        ecmaVersion: 2015
-    },
     env: {
         browser: true
-    }
+    },
+    overrides: [
+        {
+            // For some reason, plugin:react/recommended doesn't set these options
+            files: ["*.jsx"],
+            parserOptions: {
+                sourceType: "module",
+                ecmaFeatures: {
+                    jsx: true
+                }
+            }
+        }
+    ]
 };
