@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-const socketio = require("socket.io-client");
+import * as socketio from "socket.io-client";
 
 // TODO: make this a parameter
 let port = process.env.PORT;
 if (!port) {
-    port = 5005;
+  port = 5005;
 }
 
 const socketClient = socketio.connect(`http://localhost:${port}`);

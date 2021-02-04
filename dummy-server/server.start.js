@@ -1,9 +1,10 @@
 #!/usr/bin/env node
+import { startServer } from "./dummy-server";
 
 // TODO: make this a parameter
 let port = process.env.PORT;
 if (!port) {
-    port = 5005;
+  port = 5005;
 }
 
-require("./dummy-server").startServer(port);  
+startServer(port);
