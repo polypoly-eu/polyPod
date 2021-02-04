@@ -11,6 +11,7 @@
     "@polypoly-eu/orodruin": "file:../../orodruin",
     "@rollup/plugin-sucrase": "^3.1.0",
     "connect": "^3.7.0",
+    "puppeteer": "^5.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rollup": "^2.26.11",
