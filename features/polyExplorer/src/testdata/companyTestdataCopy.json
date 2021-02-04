@@ -1,0 +1,42 @@
+[
+    {
+        "company": "BMW",
+        "featured": true
+    },
+    {
+        "company": "IKEA",
+        "featured": true
+    },
+    {
+        "company": "PayPal",
+        "featured": true
+    },
+    {
+        "company": "Microsoft",
+        "featured": false
+    },
+    {
+        "company": "Apple",
+        "featured": false
+    },
+    {
+        "company": "Bayer",
+        "featured": true
+    },
+    {
+        "company": "Audi",
+        "featured": false
+    },
+    {
+        "company": "VW",
+        "featured": true
+    },
+    {
+        "company": "Mercedes",
+        "featured": false
+    },
+    {
+        "company": "Henkel",
+        "featured": false
+    }
+]

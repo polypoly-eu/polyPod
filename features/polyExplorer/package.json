@@ -17,5 +17,8 @@
     "rollup": "^2.26.11",
     "rollup-plugin-copy": "^3.3.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
 }
