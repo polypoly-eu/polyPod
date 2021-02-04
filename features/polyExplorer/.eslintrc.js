@@ -6,6 +6,11 @@ module.exports = {
     env: {
         browser: true
     },
+    settings: {
+        react: {
+            version: "detect"
+        }
+    },
     overrides: [
         {
             // For some reason, plugin:react/recommended doesn't set these options
