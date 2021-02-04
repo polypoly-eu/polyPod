@@ -1,9 +1,9 @@
 const http = require('http');
 const socketio = require("socket.io");
-let app = require("express")();
-let bodyParser = require("body-parser");
+const app = require("express")();
+const bodyParser = require("body-parser");
 
-let server = http.createServer(app);
+const server = http.createServer(app);
 
 io = socketio(server);
 
