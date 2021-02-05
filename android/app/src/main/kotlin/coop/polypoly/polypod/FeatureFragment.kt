@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -43,6 +44,7 @@ open class FeatureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (view.findViewById(R.id.feature_title) as TextView).text = args.featureName
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
         api = setupPodApi()
         setupWebView(view)
