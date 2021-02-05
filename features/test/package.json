@@ -1,0 +1,18 @@
+{
+  "name": "test-feature",
+  "scripts": {
+    "build": "faucet"
+  },
+  "dependencies": {
+    "@polypoly-eu/poly-api": "file:../../poly-api",
+    "@rdfjs/data-model": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/rdf-js": "^4.0.0",
+    "faucet-pipeline-core": "^1.5.0",
+    "faucet-pipeline-static": "^1.2.0",
+    "faucet-pipeline-typescript": "^2.1.6",
+    "tslib": "^2.0.1"
+  },
+  "private": true
+}

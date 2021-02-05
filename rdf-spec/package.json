@@ -12,12 +12,12 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "test": "yarn run test:jest && yarn run test:mocha && yarn run test:jasmine",
+    "test": "npm run test:jest && npm run test:mocha && npm run test:jasmine",
     "test:jest": "jest",
     "test:mocha": "ts-mocha src/tests/**.test.ts",
     "test:jasmine": "ts-node node_modules/.bin/jasmine --config=jasmine.json",
     "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'yarn run docs'"
+    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "dependencies": {
     "@types/rdf-js": "^4.0.0",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@graphy/core.data.factory": "^4.3.3",
     "@graphy/memory.dataset.fast": "^4.3.3",
-    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
     "@rdfjs/data-model": "^1.1.3",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.1.0",

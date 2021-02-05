@@ -22,10 +22,10 @@
     "test": "rollup -c && jest"
   },
   "dependencies": {
-    "@polypoly-eu/customs": "link:../customs",
-    "@polypoly-eu/podigree": "link:../podigree",
-    "@polypoly-eu/poly-api": "link:../poly-api",
-    "@polypoly-eu/port-authority": "link:../port-authority",
+    "@polypoly-eu/customs": "file:../customs",
+    "@polypoly-eu/podigree": "file:../podigree",
+    "@polypoly-eu/poly-api": "file:../poly-api",
+    "@polypoly-eu/port-authority": "file:../port-authority",
     "@rdfjs/dataset": "^1.0.1",
     "@types/node": "^14.6.4",
     "@types/puppeteer": "^3.0.2",
@@ -43,7 +43,7 @@
     "yargs": "^16.0.3"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
+    "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",

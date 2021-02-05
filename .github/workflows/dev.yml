@@ -7,16 +7,16 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 15.x
       - uses: actions/setup-java@v1
         with:
           java-version: 8
-      - name: Build core packages
+      - name: Build core/features
         run: ./build.js
-      - name: Lint core packages
+      - name: Lint core/features
         run: ./build.js lint
-      - name: Test core packages
+      - name: Test core/features
         run: ./build.js test
-      - name: Build polyPod-Android
-        working-directory: polyPod-Android
+      - name: Build android
+        working-directory: android
         run: ./gradlew assemble

@@ -18,20 +18,13 @@ we need to fix, including adjusting the overall structure and documentation.
 
 ### polyPod app for Android
 
-You can find the Android version of the polyPod in
-[polyPod-Android](polyPod-Android).
+You can find the Android version of the polyPod in [android](android).
 
 ### Features
 
 This repository contains various features we use for documentation and testing
-purposes, as well as features that get bundled with the polyPod itself:
-
-- [orodruin/example](orodruin/example) is an example feature that uses some
-  polyPod APIs.
-- [testFeature](testFeature) is a feature polyPod implementations can write
-  tests against, to verify it all works properly end to end.
-- [polyHello-feature](polyHello-feature) is the most trivial feature imaginable,
-  currently being bundled with the polyPod.
+purposes, as well as features that get bundled with the polyPod itself, you can
+find them in [features](features).
 
 ### The shared polyPod core code
 
@@ -42,9 +35,7 @@ naming and documentation to make things more understandable.
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/) version 14.10.1 or newer
-- [Yarn](https://yarnpkg.com/) version 2.4.0 or newer\
-  (`npm install -g yarn` will do)
+Just [Node.js](https://nodejs.org/) version 15.x.
 
 ## Building
 
@@ -52,27 +43,23 @@ Just execute:
 
     $ ./build.js
 
-After this you can build [polyPod-Android](polyPod-Android), or
-[orodruin/example](orodruin/example).
+After this you can build [android](android), or try
+[features/example](features/example).
 
 ### Wat
 
 Yes, we have a nasty custom build script.
 
-The initial polyPod code base is composed of various small modules that used to
-live in different repositories, including each other via package
-registries. After migrating these projects into a single repository, we kept
-them as separate packages for now. Building these properly turned out to be a
-challenge.
+The initial polyPod code base was composed of various small modules that used to
+live in different repositories, including each other via package registries. We
+migrated all of these packages into a single repository (the kids call it
+_monorepo_), to make the code base easier to work with.
 
-Now that we've worked out the last kink around linked node modules, and since
-we're using Yarn 2.x, we should be able to switch to workspaces to eliminate
-quite a bit of the logic in `build.js`.
-
-If we want to switch to `nodeLinker: pnp`, we have to find a better workaround
-for _rollup-plugin-node-polyfills_ to discover modules, however. Out of the box,
-[it doesn't support links in `node_modules`][node-polyfills issue], let alone
-pnp.
+We experimented with Yarn and pnpm workspaces to eliminate some of the logic of
+`build.js`, and with a few workarounds we can make it work. But for now, we
+decided to stick to NPM and a short build script to make it all work together.
+NPM is probably not the best package manager for Node.js, but it is the most
+widely understood and supported one.
 
 ## Testing
 
