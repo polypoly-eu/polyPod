@@ -18,7 +18,7 @@
     "@polypoly-eu/eslint-config-polypoly": "link:../eslint-config-polypoly",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.20",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",

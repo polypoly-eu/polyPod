@@ -48,11 +48,14 @@ export default [
             format: "iife"
         },
         plugins: [
-            nodePolyfills(),
             resolve({
                 preferBuiltins: true
             }),
             commonjs(),
+            nodePolyfills({
+                // Workaround for https://github.com/ionic-team/rollup-plugin-node-polyfills/issues/17
+                include: '../**/node_modules/**/*.js'
+            }),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"]

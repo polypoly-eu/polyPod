@@ -16,15 +16,22 @@ we need to fix, including adjusting the overall structure and documentation.
 
 ## Components
 
-### CLI for building and testing Features
-
-The [orodruin](orodruin) package includes everything needed to develop and test
-features.
-
 ### polyPod app for Android
 
 You can find the Android version of the polyPod in
 [polyPod-Android](polyPod-Android).
+
+### Features
+
+This repository contains various features we use for documentation and testing
+purposes, as well as features that get bundled with the polyPod itself:
+
+- [orodruin/example](orodruin/example) is an example feature that uses some
+  polyPod APIs.
+- [testFeature](testFeature) is a feature polyPod implementations can write
+  tests against, to verify it all works properly end to end.
+- [polyHello-feature](polyHello-feature) is the most trivial feature imaginable,
+  currently being bundled with the polyPod.
 
 ### The shared polyPod core code
 
@@ -58,13 +65,14 @@ registries. After migrating these projects into a single repository, we kept
 them as separate packages for now. Building these properly turned out to be a
 challenge.
 
-Yes we tried Yarna workspaces, pnp, pnpm, you name it. The ultimate problem
-seems to be this: The _podigree_ dependency required by _orodruin_ breaks the
-build (i.e. leads to a broken _container.js_) if it is referenced through a
-symbolic link. Yarn's `file:` protocol forces copying the directory into
-`node_modules`, which alleviates the issues. If we can solve this issue, we can
-presumably move to `nodeLinker: "pnp"`, workspaces and all that, and get rid of
-that nasty custom build script.
+Now that we've worked out the last kink around linked node modules, and since
+we're using Yarn 2.x, we should be able to switch to workspaces to eliminate
+quite a bit of the logic in `build.js`.
+
+If we want to switch to `nodeLinker: pnp`, we have to find a better workaround
+for _rollup-plugin-node-polyfills_ to discover modules, however. Out of the box,
+[it doesn't support links in `node_modules`][node-polyfills issue], let alone
+pnp.
 
 ## Testing
 
@@ -77,3 +85,4 @@ To run the linter:
     $ ./build.js lint
 
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
+[node-polyfills issue]: https://github.com/ionic-team/rollup-plugin-node-polyfills/issues/17

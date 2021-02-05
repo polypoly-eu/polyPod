@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "serve": "orodruin serve",
+    "serve": "node node_modules/@polypoly-eu/orodruin/bin/cli.js serve",
     "build": "rollup -c",
-    "test:feature": "./test.sh"
+    "test": "./test.sh"
   },
   "devDependencies": {
-    "@polypoly-eu/orodruin": "link:/..",
+    "@polypoly-eu/orodruin": "link:..",
     "@rollup/plugin-sucrase": "^3.1.0",
     "connect": "^3.7.0",
     "react": "^16.13.1",

@@ -5,9 +5,9 @@ __metadata:
   version: 4
   cacheKey: 7
 
-"@polypoly-eu/poly-api@link:../poly-api::locator=root-workspace-0b6124%40workspace%3A.":
+"@polypoly-eu/poly-api@link:../poly-api::locator=testFeature%40workspace%3A.":
   version: 0.0.0-use.local
-  resolution: "@polypoly-eu/poly-api@link:../poly-api::locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@polypoly-eu/poly-api@link:../poly-api::locator=testFeature%40workspace%3A."
   languageName: node
   linkType: soft
 
@@ -1237,20 +1237,6 @@ resolve@^1.17.0:
   languageName: node
   linkType: hard
 
-"root-workspace-0b6124@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "root-workspace-0b6124@workspace:."
-  dependencies:
-    "@polypoly-eu/poly-api": "link:../poly-api"
-    "@rdfjs/data-model": ^1.2.0
-    "@types/rdf-js": ^4.0.0
-    faucet-pipeline-core: ^1.5.0
-    faucet-pipeline-static: ^1.2.0
-    faucet-pipeline-typescript: ^2.1.6
-    tslib: ^2.0.1
-  languageName: unknown
-  linkType: soft
-
 "safe-buffer@npm:^5.0.1, safe-buffer@npm:^5.1.2":
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
@@ -1393,6 +1379,20 @@ resolve@^1.17.0:
   checksum: d1d988eceb1ad2ecfaaf6fc5ecfe0c46fa005d04fe4c283355ccc52d3ffb4b6bf459a62f9ac7e36fd35251ab020399bdf527ab48b968120e06b4f61906a87d62
   languageName: node
   linkType: hard
+
+"testFeature@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "testFeature@workspace:."
+  dependencies:
+    "@polypoly-eu/poly-api": "link:../poly-api"
+    "@rdfjs/data-model": ^1.2.0
+    "@types/rdf-js": ^4.0.0
+    faucet-pipeline-core: ^1.5.0
+    faucet-pipeline-static: ^1.2.0
+    faucet-pipeline-typescript: ^2.1.6
+    tslib: ^2.0.1
+  languageName: unknown
+  linkType: soft
 
 "to-regex-range@npm:^5.0.1":
   version: 5.0.1
