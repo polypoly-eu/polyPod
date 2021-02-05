@@ -18,8 +18,7 @@ we need to fix, including adjusting the overall structure and documentation.
 
 ### polyPod app for Android
 
-You can find the Android version of the polyPod in
-[polyPod-Android](polyPod-Android).
+You can find the Android version of the polyPod in [android](android).
 
 ### Features
 
@@ -44,8 +43,8 @@ Just execute:
 
     $ ./build.js
 
-After this you can build [polyPod-Android](polyPod-Android), or
-[orodruin/example](orodruin/example).
+After this you can build [android](android), or try
+[features/example](features/example).
 
 ### Wat
 
