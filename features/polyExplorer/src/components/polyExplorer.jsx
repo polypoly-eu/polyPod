@@ -4,7 +4,7 @@ import CompanyList from "./companyList.jsx";
 
 const PolyExplorer = () => {
     let [showFeatured, setShowFeatured] = useState(true);
-    let [companyData, setCompanyData] = useState([
+    let [companyData] = useState([
         {
             name: "BMW",
             featured: true,
@@ -46,9 +46,7 @@ const PolyExplorer = () => {
             featured: false,
         },
     ]);
-    let [featuredCompanyData, setFeaturedCompanyData] = useState(
-        companyData.filter((e) => e.featured)
-    );
+    let [featuredCompanyData] = useState(companyData.filter((e) => e.featured));
 
     const handleShowFeatureChange = (bool) => {
         setShowFeatured(bool);

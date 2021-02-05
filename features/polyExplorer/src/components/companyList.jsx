@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const CompanyList = ({ companies }) => {
     let styles = {
@@ -30,8 +30,8 @@ const CompanyList = ({ companies }) => {
 
     return (
         <div style={styles.companyCardContainer}>
-            {companies.map((company) => (
-                <div style={styles.companyCard}>
+            {companies.map((company, index) => (
+                <div key={index} style={styles.companyCard}>
                     <p style={{ fontSize: "32px" }}>{company.name}</p>
                     <p style={{ fontSize: "28px" }}>
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr,

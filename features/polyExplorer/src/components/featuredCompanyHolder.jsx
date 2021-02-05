@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FeaturedCompany from "./featuredCompany.jsx";
 
 const FeaturedCompanyHolder = ({ featuredCompanies }) => {
@@ -19,8 +19,8 @@ const FeaturedCompanyHolder = ({ featuredCompanies }) => {
 
     return (
         <div style={styles.featuredCompanyCardContainer}>
-            {featuredCompanies.map((company) => (
-                <FeaturedCompany company={company} />
+            {featuredCompanies.map((company, index) => (
+                <FeaturedCompany key={index} company={company} />
             ))}
         </div>
     );
