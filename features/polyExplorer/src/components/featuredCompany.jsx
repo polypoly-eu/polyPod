@@ -1,7 +1,7 @@
 import React from "react";
 
 const FeaturedCompany = ({ company }) => {
-    let styles = {
+    const styles = {
         companyCard: {
             minWidth: "800px",
             height: "94%",
@@ -18,12 +18,13 @@ const FeaturedCompany = ({ company }) => {
             fontSize: "48px",
             textAlign: "center",
         },
+        companyText:{ fontSize: "32px" }
     };
 
     return (
         <div style={styles.companyCard}>
             <h2 style={styles.companyName}>{company.name}</h2>
-            <p style={{ fontSize: "32px" }}>
+            <p style={styles.companyText}>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                 diam nonumy eirmod tempor invidunt ut labore et dolore magna
                 aliquyam erat, sed diam voluptua. At vero eos et accusam et

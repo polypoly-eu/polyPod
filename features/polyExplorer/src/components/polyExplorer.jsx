@@ -3,8 +3,8 @@ import FeaturedCompanyHolder from "./featuredCompanyHolder.jsx";
 import CompanyList from "./companyList.jsx";
 
 const PolyExplorer = () => {
-    let [showFeatured, setShowFeatured] = useState(true);
-    let [companyData] = useState([
+    const [showFeatured, setShowFeatured] = useState(true);
+    const [companyData] = useState([
         {
             name: "BMW",
             featured: true,
@@ -46,23 +46,23 @@ const PolyExplorer = () => {
             featured: false,
         },
     ]);
-    let [featuredCompanyData] = useState(companyData.filter((e) => e.featured));
+    const [featuredCompanyData] = useState(companyData.filter((e) => e.featured));
 
-    const handleShowFeatureChange = (bool) => {
-        setShowFeatured(bool);
+    const handleShowFeatureChange = (featured) => {
+        setShowFeatured(featured);
     };
 
-    const getContent = () => {
+    const getTabContent = () => {
         if (showFeatured)
             return (
                 <FeaturedCompanyHolder
                     featuredCompanies={featuredCompanyData}
                 />
             );
-        else return <CompanyList companies={companyData} />;
+        return <CompanyList companies={companyData} />;
     };
 
-    let styles = {
+    const styles = {
         explorerContainer: {
             position: "absolute",
             backgroundColor: "#172553",
@@ -101,7 +101,7 @@ const PolyExplorer = () => {
                     All companies
                 </button>
             </div>
-            {getContent()}
+            {getTabContent()}
         </div>
     );
 };

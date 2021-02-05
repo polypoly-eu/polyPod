@@ -1,7 +1,7 @@
 import React from "react";
 
 const CompanyList = ({ companies }) => {
-    let styles = {
+    const styles = {
         companyCardContainer: {
             display: "flex",
             overflowY: "auto",
@@ -26,14 +26,20 @@ const CompanyList = ({ companies }) => {
             borderRadius: "24px",
             padding: "32px",
         },
+        companyName: {
+            fontSize: "32px"
+        },
+        companyText: {
+            fontSize: "28px"
+        }
     };
 
     return (
         <div style={styles.companyCardContainer}>
             {companies.map((company, index) => (
                 <div key={index} style={styles.companyCard}>
-                    <p style={{ fontSize: "32px" }}>{company.name}</p>
-                    <p style={{ fontSize: "28px" }}>
+                    <p  style={styles.companyName}>{company.name}</p>
+                    <p style={styles.companyText}>
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
                         sed diam nonumy eirmod tempor invidunt ut labore et
                         dolore magna aliquyam erat, sed diam voluptua.

@@ -2,7 +2,7 @@ import React from "react";
 import FeaturedCompany from "./featuredCompany.jsx";
 
 const FeaturedCompanyHolder = ({ featuredCompanies }) => {
-    let styles = {
+    const styles = {
         featuredCompanyCardContainer: {
             display: "flex",
             overflowX: "auto",
