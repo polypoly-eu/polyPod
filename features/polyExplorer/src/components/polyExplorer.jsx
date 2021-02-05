@@ -81,7 +81,7 @@ const PolyExplorer = () => {
             backgroundColor: "#172553",
             width: "50%",
             height: "100%",
-            fontSize: 32,
+            fontSize: 16,
             color: "white",
             borderColor: "transparent",
             boxShadow: "4px 4px #0a1947",

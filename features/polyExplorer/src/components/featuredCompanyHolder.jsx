@@ -13,7 +13,7 @@ const FeaturedCompanyHolder = ({ featuredCompanies }) => {
             top: "10%",
             height: "80%",
             width: "100%",
-            padding: "8px",
+            padding: "4px",
         },
     };
 

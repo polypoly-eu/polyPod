@@ -3,13 +3,12 @@ import React from "react";
 const FeaturedCompany = ({ company }) => {
     const styles = {
         companyCard: {
-            minWidth: "800px",
-            height: "94%",
+            minWidth: "260px",
+            height: "84%",
             backgroundColor: "#34408e",
             boxShadow: "4px 4px #0a1947",
             color: "white",
-            margin: "16px",
-            marginLeft: "32px",
+            marginRight: "28px",
             borderRadius: "24px",
             padding: "32px",
         },
@@ -18,7 +17,7 @@ const FeaturedCompany = ({ company }) => {
             fontSize: "48px",
             textAlign: "center",
         },
-        companyText: { fontSize: "32px" },
+        companyText: { fontSize: "14px" },
     };
 
     return (

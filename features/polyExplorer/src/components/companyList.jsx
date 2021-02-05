@@ -6,31 +6,31 @@ const CompanyList = ({ companies }) => {
             display: "flex",
             overflowY: "auto",
             flexWrap: "wrap",
-            marginTop: 32,
+            marginTop: 12,
             position: "absolute",
             top: "10%",
             height: "80%",
             width: "98.5%",
-            padding: "8px",
             alignItems: "center",
         },
         companyCard: {
-            width: "800px",
-            height: "15%",
+            width: "260px",
+            height: "130px",
             backgroundColor: "#34408e",
             boxShadow: "4px 4px #0a1947",
             color: "white",
-            marginTop: "32px",
+            marginTop: "22px",
             marginLeft: "auto",
             marginRight: "auto",
             borderRadius: "24px",
             padding: "32px",
+            paddingTop: 0
         },
         companyName: {
-            fontSize: "32px",
+            fontSize: "22px",
         },
         companyText: {
-            fontSize: "28px",
+            fontSize: "14px",
         },
     };
 
