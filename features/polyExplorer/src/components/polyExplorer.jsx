@@ -46,7 +46,9 @@ const PolyExplorer = () => {
             featured: false,
         },
     ]);
-    const [featuredCompanyData] = useState(companyData.filter((e) => e.featured));
+    const [featuredCompanyData] = useState(
+        companyData.filter((e) => e.featured)
+    );
 
     const handleShowFeatureChange = (featured) => {
         setShowFeatured(featured);

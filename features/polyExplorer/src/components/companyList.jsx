@@ -27,18 +27,18 @@ const CompanyList = ({ companies }) => {
             padding: "32px",
         },
         companyName: {
-            fontSize: "32px"
+            fontSize: "32px",
         },
         companyText: {
-            fontSize: "28px"
-        }
+            fontSize: "28px",
+        },
     };
 
     return (
         <div style={styles.companyCardContainer}>
             {companies.map((company, index) => (
                 <div key={index} style={styles.companyCard}>
-                    <p  style={styles.companyName}>{company.name}</p>
+                    <p style={styles.companyName}>{company.name}</p>
                     <p style={styles.companyText}>
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
                         sed diam nonumy eirmod tempor invidunt ut labore et

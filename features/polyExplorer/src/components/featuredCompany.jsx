@@ -18,7 +18,7 @@ const FeaturedCompany = ({ company }) => {
             fontSize: "48px",
             textAlign: "center",
         },
-        companyText:{ fontSize: "32px" }
+        companyText: { fontSize: "32px" },
     };
 
     return (
