@@ -24,7 +24,7 @@ const CompanyList = ({ companies }) => {
             marginRight: "auto",
             borderRadius: "24px",
             padding: "32px",
-            paddingTop: 0
+            paddingTop: 0,
         },
         companyName: {
             fontSize: "22px",
