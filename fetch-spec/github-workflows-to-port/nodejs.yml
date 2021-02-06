@@ -24,6 +24,8 @@ jobs:
     - name: npm test
       run: |
         xvfb-run --auto-servernum npm test
+      env:
+        DISPLAY: ':0'
     - name: ESLint
       run: |
         npm run eslint
