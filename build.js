@@ -73,7 +73,12 @@ const npm = (...args) =>
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await npm("ci");
+    if (name == "fetch-spec") {
+        await npw("rebuild")
+    }
+    else {
+        await npm("ci");
+    }
 }
 
 async function npmRun(script, pkg) {

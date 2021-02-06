@@ -17,7 +17,7 @@
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "pretest": "start-dummy-server &",
-    "test": "npm-run-all test:jest test:mocha test:jasmine",
+    "test": "npm-run-all test:jest test:mocha test:jasmine test:electron",
     "test:electron": "electron-mocha --renderer --require ts-node/register src/tests/browser/*.test.ts",
     "test:jest": "jest",
     "test:mocha": "ts-mocha src/tests/node/*.test.ts",
