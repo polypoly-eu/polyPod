@@ -6,6 +6,18 @@ const fs = require("fs");
 const path = require("path");
 const {spawn} = require("child_process");
 
+function parseCommandLine() {
+    const [, scriptPath, ...parameters] = process.argv;
+    if (parameters.includes("--help") || parameters.length > 1)
+        return {scriptPath, command: null};
+
+    const command = parameters.length ? parameters[0] : "build";
+    return {
+        scriptPath,
+        command: ["build", "test", "lint"].includes(command) ? command : null
+    }
+}
+
 function showUsage(scriptPath) {
     console.error(`Usage: ${path.basename(scriptPath)} [lint | test]`);
     console.error("  Run without arguments to build all packages");
@@ -36,8 +48,7 @@ function createPackageData(path, metaManifest) {
     };
 }
 
-function createPackageTree() {
-    const metaManifest = parseManifest("packages.json");
+function createPackageTree(metaManifest) {
     return Object.fromEntries(
         metaManifest.packages
             .map(path => createPackageData(path, metaManifest))
@@ -136,21 +147,24 @@ async function processAll(packageTree, command) {
 }
 
 (async () => {
-    const [, scriptPath, ...parameters] = process.argv;
-    if (parameters.includes("--help") || parameters.length > 1) {
-        showUsage(scriptPath);
-        return 1;
-    }
-
-    const command = parameters.length ? parameters[0] : "build";
-    if (!["build", "test", "lint"].includes(command)) {
+    const {scriptPath, command} = parseCommandLine();
+    if (!command) {
         showUsage(scriptPath);
         return 1;
     }
 
     process.chdir(path.dirname(scriptPath));
+
+    const metaManifest = parseManifest("packages.json");
+    const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
+    if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
+        console.error(`Node.js v${metaManifest.requiredNodeMajorVersion} ` +
+                      `or later required, you are on ${process.version}`);
+        return 1;
+    }
+
     try {
-        const packageTree = createPackageTree();
+        const packageTree = createPackageTree(metaManifest);
         await processAll(packageTree, command);
         logMain("Build succeeded!");
         return 0;

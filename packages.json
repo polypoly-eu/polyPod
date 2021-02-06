@@ -1,4 +1,5 @@
 {
+    "requiredNodeMajorVersion": 15,
     "scope": "@polypoly-eu",
     "packages": [
         "aop-ts",
