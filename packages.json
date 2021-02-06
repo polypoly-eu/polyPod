@@ -17,7 +17,6 @@
         "postoffice",
         "rdf",
         "rdf-convert",
-        "rdf-spec",
-        "testFeature"
+        "rdf-spec"
     ]
 }

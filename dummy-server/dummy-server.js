@@ -1,7 +1,8 @@
 import { createServer } from "http";
 import socketio from "socket.io";
-import * as express from "express";
-import { text } from "body-parser";
+import express from "express";
+import bodyParser from 'body-parser';
+const { text } = bodyParser;
 
 const app = express();
 const server = createServer(app);
@@ -42,6 +43,4 @@ function startServer(port) {
   );
 }
 
-export default {
-  startServer,
-};
+export { startServer };

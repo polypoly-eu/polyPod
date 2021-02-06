@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { startServer } from "./dummy-server";
+import { startServer } from "./dummy-server.js";
 
 // TODO: make this a parameter
 let port = process.env.PORT;
