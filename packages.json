@@ -2,26 +2,26 @@
     "requiredNodeMajorVersion": 15,
     "scope": "@polypoly-eu",
     "packages": [
-        "aop-ts",
-        "bubblewrap",
-        "customs",
-        "eslint-config-polypoly",
+        "core/aop-ts",
+        "core/bubblewrap",
+        "core/customs",
+        "core/fetch-spec",
+        "core/orodruin",
+        "core/podigree",
+        "core/poly-api",
+        "core/port-authority",
+        "core/postoffice",
+        "core/rdf",
+        "core/rdf-convert",
+        "core/rdf-spec",
+        "eslint-config",
         "features/example",
         "features/polyExplorer",
-        "features/test",
-        "fetch-spec",
-        "orodruin",
-        "podigree",
-        "poly-api",
-        "port-authority",
-        "postoffice",
-        "rdf",
-        "rdf-convert",
-        "rdf-spec"
+        "features/test"
     ],
     "skipTestsFor": [
-        "fetch-spec",
-        "podigree",
-        "poly-api"
+        "core/fetch-spec",
+        "core/podigree",
+        "core/poly-api"
     ]
 }
