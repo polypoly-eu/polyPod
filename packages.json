@@ -1,7 +1,6 @@
 {
     "scope": "@polypoly-eu",
     "packages": [
-        "fetch-spec",
         "aop-ts",
         "bubblewrap",
         "customs",
@@ -10,6 +9,7 @@
         "features/example",
         "features/polyExplorer",
         "features/test",
+        "fetch-spec",
         "orodruin",
         "podigree",
         "poly-api",
