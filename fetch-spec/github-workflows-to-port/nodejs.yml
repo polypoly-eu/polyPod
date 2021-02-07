@@ -6,12 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-18.04
 
-    services:
-      httpbin:
-        image: kennethreitz/httpbin
-        ports:
-          - "80:80"
-
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
@@ -31,7 +25,7 @@ jobs:
       run: |
         xvfb-run --auto-servernum npm test
       env:
-        HTTPBIN_URL: 'http://localhost'
+        DISPLAY: ':0'
     - name: ESLint
       run: |
         npm run eslint

@@ -71,17 +71,5 @@ To run the linter:
 
     $ ./build.js lint
 
-### Broken tests
-
-Some tests are currently not run because they fail - this needs fixing before we
-make any major changes:
-
-- [podigree](podigree)
-- [poly-api](poly-api)
-
-The tests for [fetch-spec](fetch-spec) fail as well, but they already failed in
-the [fetch-spec microrepo](https://github.com/polypoly-eu/fetch-spec) - since it
-seems unrelated to the migration we can figure that one out later.
-
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
 [node-polyfills issue]: https://github.com/ionic-team/rollup-plugin-node-polyfills/issues/17

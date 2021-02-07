@@ -43,8 +43,7 @@ function createPackageData(path, metaManifest) {
         path,
         name: manifest.name,
         dependencies: extractLocalDependencies(manifest, metaManifest.scope),
-        scripts: Object.keys(manifest.scripts),
-        skipScripts: metaManifest.skipTestsFor.includes(path) ? ["test"] : []
+        scripts: Object.keys(manifest.scripts)
     };
 }
 
@@ -86,16 +85,15 @@ const npm = (...args) =>
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
     await npm("ci");
+    if (name == "@polypoly-eu/fetch-spec") {
+        console.log("Calling npm rebuild");
+        await npm("rebuild")
+    }
 }
 
 async function npmRun(script, pkg) {
     if (!pkg.scripts.includes(script))
         return;
-
-    if (pkg.skipScripts.includes(script)) {
-        logDetail(`${pkg.name}: Skipping ${script} script`);
-        return;
-    }
 
     logDetail(`${pkg.name}: Executing ${script} script ...`);
     await npm("run", script);

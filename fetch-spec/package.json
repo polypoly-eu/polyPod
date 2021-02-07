@@ -16,15 +16,18 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
+    "pretest": "start-dummy-server &",
     "test": "npm-run-all test:jest test:mocha test:jasmine test:electron",
     "test:electron": "electron-mocha --renderer --require ts-node/register src/tests/browser/*.test.ts",
     "test:jest": "jest",
     "test:mocha": "ts-mocha src/tests/node/*.test.ts",
     "test:jasmine": "ts-node node_modules/.bin/jasmine --config=jasmine.json",
+    "posttest": "stop-dummy-server",
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "devDependencies": {
+    "@polypoly-eu/dummy-server": "file:../dummy-server",
     "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/chai": "^4.2.14",

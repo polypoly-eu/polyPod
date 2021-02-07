@@ -5,6 +5,7 @@
         "aop-ts",
         "bubblewrap",
         "customs",
+        "dummy-server",
         "eslint-config-polypoly",
         "features/example",
         "features/polyExplorer",
@@ -18,10 +19,5 @@
         "rdf",
         "rdf-convert",
         "rdf-spec"
-    ],
-    "skipTestsFor": [
-        "fetch-spec",
-        "podigree",
-        "poly-api"
     ]
 }

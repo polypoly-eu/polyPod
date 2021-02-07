@@ -16,7 +16,7 @@ jobs:
       - name: Lint core/features
         run: ./build.js lint
       - name: Test core/features
-        run: ./build.js test
+        run: xvfb-run --auto-servernum ./build.js test
       - name: Build android
         working-directory: android
         run: ./gradlew assemble

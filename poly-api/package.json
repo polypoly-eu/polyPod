@@ -15,7 +15,9 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
+    "pretest": "start-dummy-server &",
     "test": "jest && ts-mocha src/**/*.test.ts",
+    "posttest": "stop-dummy-server",
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
@@ -25,6 +27,7 @@
     "@types/rdf-js": "^4.0.0"
   },
   "devDependencies": {
+    "@polypoly-eu/dummy-server": "file:../dummy-server",
     "@polypoly-eu/eslint-config-polypoly": "file:../eslint-config-polypoly",
     "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rdfjs/dataset": "^1.0.1",
