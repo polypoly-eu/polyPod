@@ -85,10 +85,6 @@ const npm = (...args) =>
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
     await npm("ci");
-    if (name == "@polypoly-eu/fetch-spec") {
-        console.log("Calling npm rebuild");
-        await npm("rebuild")
-    }
 }
 
 async function npmRun(script, pkg) {
