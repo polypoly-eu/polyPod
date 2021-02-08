@@ -13,6 +13,7 @@ whitepaper].
 - [android](android): The polyPod app for Android
 - [features](features): polyPod features
 - [core](core): The polyPod core code
+- [build](build): The build logic
 
 ## Requirements
 
