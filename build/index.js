@@ -13,7 +13,7 @@ function parseCommandLine() {
     return {
         scriptPath,
         command: ["build", "test", "lint"].includes(command) ? command : null
-    }
+    };
 }
 
 function showUsage(scriptPath) {
@@ -29,14 +29,15 @@ function parseManifest(path) {
     }
 }
 
-const extractLocalDependencies = (manifest) => {
+function extractLocalDependencies(manifest) {
     const allDependencies = {
         ...manifest.dependencies,
         ...manifest.devDependencies
     };
-    return Object.keys(allDependencies)
-        .filter(key => allDependencies[key].startsWith("file:"));
-};
+    return Object.keys(allDependencies).filter((key) =>
+        allDependencies[key].startsWith("file:")
+    );
+}
 
 function createPackageData(path) {
     const manifest = parseManifest(`${path}/package.json`);
@@ -51,8 +52,9 @@ function createPackageData(path) {
 function createPackageTree(metaManifest) {
     return Object.fromEntries(
         metaManifest.packages
-            .map(path => createPackageData(path))
-            .map(data => [data.name, data]));
+            .map((path) => createPackageData(path))
+            .map((data) => [data.name, data])
+    );
 }
 
 const logMain = (message) => console.log(`\n***** ${message}`);
@@ -62,20 +64,18 @@ const logDetail = (message) => console.log(`\n*** ${message}`);
 function executeProcess(executable, args, env = process.env) {
     const spawnedProcess = spawn(executable, args, {env: env});
 
-    spawnedProcess.stdout.on("data", function(data) {
+    spawnedProcess.stdout.on("data", function (data) {
         console.log(data.toString());
     });
 
-    spawnedProcess.stderr.on("data", function(data) {
+    spawnedProcess.stderr.on("data", function (data) {
         console.error(data.toString());
     });
 
     return new Promise((resolve, reject) => {
-        spawnedProcess.on("exit", function(code) {
-            if (code === 0)
-                resolve();
-            else
-                reject(`Process exited with {code}`);
+        spawnedProcess.on("exit", function (code) {
+            if (code === 0) resolve();
+            else reject(`Process exited with {code}`);
         });
     });
 }
@@ -89,17 +89,16 @@ async function npmInstall(name) {
 }
 
 async function npmRun(script, pkg) {
-    if (!pkg.scripts.includes(script))
-        return;
+    if (!pkg.scripts.includes(script)) return;
 
     logDetail(`${pkg.name}: Executing ${script} script ...`);
     await npm("run", script);
 }
 
 const commands = {
-    build: pkg => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
-    lint: pkg => npmRun("lint", pkg),
-    test: pkg => npmRun("test", pkg)
+    build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
+    lint: (pkg) => npmRun("lint", pkg),
+    test: (pkg) => npmRun("test", pkg)
 };
 
 async function executeCommand(pkg, command) {
@@ -118,19 +117,17 @@ async function executeCommand(pkg, command) {
 }
 
 async function processPackage(name, packageTree, command) {
-    if (!packageTree.hasOwnProperty(name))
-        throw `Unable to find package ${name}`;
+    if (!(name in packageTree)) throw `Unable to find package ${name}`;
 
     const pkg = packageTree[name];
-    if (pkg.built)
-        return;
+    if (pkg.built) return;
 
     for (let dep of pkg.dependencies)
         await processPackage(dep, packageTree, command);
 
     const entries = Object.entries(packageTree);
     const total = entries.length;
-    const current = entries.filter(([_, pkg]) => pkg.built).length + 1;
+    const current = entries.filter(([, pkg]) => pkg.built).length + 1;
     logMain(`Executing ${command} for ${pkg.path} [${current}/${total}] ...`);
     await executeCommand(pkg, command);
     pkg.built = true;
@@ -153,8 +150,10 @@ async function main() {
     const metaManifest = parseManifest("build/packages.json");
     const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
     if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
-        console.error(`Node.js v${metaManifest.requiredNodeMajorVersion} ` +
-                      `or later required, you are on ${process.version}`);
+        console.error(
+            `Node.js v${metaManifest.requiredNodeMajorVersion} or later ` +
+                `required, you are on ${process.version}`
+        );
         return 1;
     }
 
@@ -163,7 +162,7 @@ async function main() {
         await processAll(packageTree, command);
         logMain("Build succeeded!");
         return 0;
-    } catch(error) {
+    } catch (error) {
         logMain(`Build failed: ${error}\n`);
         return 1;
     }
