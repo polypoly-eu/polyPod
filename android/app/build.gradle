@@ -7,7 +7,7 @@ plugins {
 }
 
 task buildFeatureContainer(type: Copy) {
-    from "../../podigree/dist/bootstrap.js"
+    from "../../core/podigree/dist/bootstrap.js"
     from "../feature-container/src"
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
