@@ -1,6 +1,7 @@
 {
     "requiredNodeMajorVersion": 15,
     "packages": [
+        "build",
         "core/aop-ts",
         "core/bubblewrap",
         "core/customs",

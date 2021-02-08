@@ -1,0 +1,5 @@
+{
+    "extends": [
+        "@polypoly-eu/eslint-config"
+    ]
+}
