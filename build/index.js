@@ -2,17 +2,17 @@
 
 const fs = require("fs");
 const path = require("path");
-const {spawn} = require("child_process");
+const { spawn } = require("child_process");
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
     if (parameters.includes("--help") || parameters.length > 1)
-        return {scriptPath, command: null};
+        return { scriptPath, command: null };
 
     const command = parameters.length ? parameters[0] : "build";
     return {
         scriptPath,
-        command: ["build", "test", "lint"].includes(command) ? command : null
+        command: ["build", "test", "lint"].includes(command) ? command : null,
     };
 }
 
@@ -32,7 +32,7 @@ function parseManifest(path) {
 function extractLocalDependencies(manifest) {
     const allDependencies = {
         ...manifest.dependencies,
-        ...manifest.devDependencies
+        ...manifest.devDependencies,
     };
     return Object.keys(allDependencies).filter((key) =>
         allDependencies[key].startsWith("file:")
@@ -45,7 +45,7 @@ function createPackageData(path) {
         path,
         name: manifest.name,
         dependencies: extractLocalDependencies(manifest),
-        scripts: Object.keys(manifest.scripts)
+        scripts: Object.keys(manifest.scripts),
     };
 }
 
@@ -62,7 +62,7 @@ const logMain = (message) => console.log(`\n***** ${message}`);
 const logDetail = (message) => console.log(`\n*** ${message}`);
 
 function executeProcess(executable, args, env = process.env) {
-    const spawnedProcess = spawn(executable, args, {env: env});
+    const spawnedProcess = spawn(executable, args, { env: env });
 
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
@@ -81,7 +81,7 @@ function executeProcess(executable, args, env = process.env) {
 }
 
 const npm = (...args) =>
-    executeProcess("npm", args, {...process.env, FORCE_COLOR: 1});
+    executeProcess("npm", args, { ...process.env, FORCE_COLOR: 1 });
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
@@ -98,7 +98,7 @@ async function npmRun(script, pkg) {
 const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
     lint: (pkg) => npmRun("lint", pkg),
-    test: (pkg) => npmRun("test", pkg)
+    test: (pkg) => npmRun("test", pkg),
 };
 
 async function executeCommand(pkg, command) {
@@ -139,7 +139,7 @@ async function processAll(packageTree, command) {
 }
 
 async function main() {
-    const {scriptPath, command} = parseCommandLine();
+    const { scriptPath, command } = parseCommandLine();
     if (!command) {
         showUsage(scriptPath);
         return 1;
