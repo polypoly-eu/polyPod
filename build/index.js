@@ -64,16 +64,16 @@ const logDetail = (message) => console.log(`\n*** ${message}`);
 function executeProcess(executable, args, env = process.env) {
     const spawnedProcess = spawn(executable, args, {env: env});
 
-    spawnedProcess.stdout.on("data", function (data) {
+    spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
     });
 
-    spawnedProcess.stderr.on("data", function (data) {
+    spawnedProcess.stderr.on("data", (data) => {
         console.error(data.toString());
     });
 
     return new Promise((resolve, reject) => {
-        spawnedProcess.on("exit", function (code) {
+        spawnedProcess.on("exit", (code) => {
             if (code === 0) resolve();
             else reject(`Process exited with {code}`);
         });
