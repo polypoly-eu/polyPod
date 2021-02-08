@@ -31,18 +31,21 @@ function parseManifest(path) {
     }
 }
 
-const extractLocalDependencies = (manifest, scope) =>
-      [
-          ...Object.keys(manifest.dependencies || {}),
-          ...Object.keys(manifest.devDependencies || {})
-      ].filter(key => key.startsWith(`${scope}/`));
+const extractLocalDependencies = (manifest) => {
+    const allDependencies = {
+        ...manifest.dependencies,
+        ...manifest.devDependencies
+    };
+    return Object.keys(allDependencies)
+        .filter(key => allDependencies[key].startsWith("file:"));
+};
 
-function createPackageData(path, metaManifest) {
+function createPackageData(path) {
     const manifest = parseManifest(`${path}/package.json`);
     return {
         path,
         name: manifest.name,
-        dependencies: extractLocalDependencies(manifest, metaManifest.scope),
+        dependencies: extractLocalDependencies(manifest),
         scripts: Object.keys(manifest.scripts)
     };
 }
@@ -50,7 +53,7 @@ function createPackageData(path, metaManifest) {
 function createPackageTree(metaManifest) {
     return Object.fromEntries(
         metaManifest.packages
-            .map(path => createPackageData(path, metaManifest))
+            .map(path => createPackageData(path))
             .map(data => [data.name, data]));
 }
 

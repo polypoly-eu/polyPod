@@ -1,6 +1,5 @@
 {
     "requiredNodeMajorVersion": 15,
-    "scope": "@polypoly-eu",
     "packages": [
         "core/aop-ts",
         "core/bubblewrap",
