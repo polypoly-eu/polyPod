@@ -150,7 +150,7 @@ async function main() {
 
     process.chdir(path.dirname(scriptPath));
 
-    const metaManifest = parseManifest("packages.json");
+    const metaManifest = parseManifest("build/packages.json");
     const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
     if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
         console.error(`Node.js v${metaManifest.requiredNodeMajorVersion} ` +
