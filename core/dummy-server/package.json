@@ -16,7 +16,8 @@
         "start": "node server.start.js",
         "build": "",
         "stop": "node server.stop.js",
-        "eslint": "eslint . --ext .js"
+        "eslint": "eslint . --ext .js",
+        "lint": "npm run eslint"
     },
     "dependencies": {
         "express": "4.17.1",

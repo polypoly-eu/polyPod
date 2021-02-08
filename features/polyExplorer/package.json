@@ -2,6 +2,7 @@
   "name": "poly-explorer-feature",
   "scripts": {
     "eslint": "eslint src --ext .js --ext .jsx",
+    "lint": "npm run eslint",
     "build": "rollup -c"
   },
   "devDependencies": {

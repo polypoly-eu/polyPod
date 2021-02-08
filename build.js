@@ -100,7 +100,7 @@ async function npmRun(script, pkg) {
 
 const commands = {
     build: pkg => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
-    lint: pkg => npmRun("eslint", pkg),
+    lint: pkg => npmRun("lint", pkg),
     test: pkg => npmRun("test", pkg)
 };
 

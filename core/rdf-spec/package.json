@@ -12,6 +12,7 @@
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
+    "lint": "npm run eslint",
     "test": "npm run test:jest && npm run test:mocha && npm run test:jasmine",
     "test:jest": "jest",
     "test:mocha": "ts-mocha src/tests/**.test.ts",
