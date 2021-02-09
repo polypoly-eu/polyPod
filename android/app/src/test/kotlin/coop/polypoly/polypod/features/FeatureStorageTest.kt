@@ -13,14 +13,14 @@ import java.io.File
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
-class FeatureWalletTest {
+class FeatureStorageTest {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
     private val context: Context = ApplicationProvider.getApplicationContext<Context>()
-    private val wallet = FeatureWallet()
+    private val wallet = FeatureStorage()
 
     private lateinit var featuresDir: File
 

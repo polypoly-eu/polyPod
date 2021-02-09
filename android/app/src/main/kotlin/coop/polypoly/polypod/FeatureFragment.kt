@@ -13,8 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
-import coop.polypoly.polypod.FeatureFragmentArgs
-import coop.polypoly.polypod.features.FeatureWallet
+import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.PolyIn
 import eu.polypoly.pod.android.polyOut.PolyOut
@@ -59,7 +58,7 @@ open class FeatureFragment : Fragment() {
         webView = view.findViewById(R.id.web_view)
         webView.settings.javaScriptEnabled = true
 
-        val feature = FeatureWallet().loadFeature(requireContext(), args.featureName)
+        val feature = FeatureStorage().loadFeature(requireContext(), args.featureName)
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler("/features/${args.featureName}/", FeaturesPathHandler(feature))
             .addPathHandler("/", PodPathHandler(requireContext()))

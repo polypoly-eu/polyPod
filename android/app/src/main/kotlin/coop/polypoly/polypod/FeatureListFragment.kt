@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import coop.polypoly.polypod.features.FeatureWallet
+import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FeatureWalletFragment : Fragment() {
+class FeatureListFragment : Fragment() {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
@@ -22,13 +22,13 @@ class FeatureWalletFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private val featureWallet = FeatureWallet()
+    private val featureWallet = FeatureStorage()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_feature_wallet, container, false)
+        return inflater.inflate(R.layout.fragment_feature_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

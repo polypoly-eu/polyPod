@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FeaturesListFragment"
-        android:name="coop.polypoly.polypod.FeatureWalletFragment"
+        android:name="coop.polypoly.polypod.FeatureListFragment"
         android:label="@string/features_list_fragment_label"
-        tools:layout="@layout/fragment_feature_wallet">
+        tools:layout="@layout/fragment_feature_list">
 
         <action
             android:id="@+id/action_FeatureWalletFragment_to_FeatureFragment"
