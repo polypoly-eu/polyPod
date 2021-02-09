@@ -22,7 +22,7 @@ class FeatureListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private val featureWallet = FeatureStorage()
+    private val featureStorage = FeatureStorage()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +35,7 @@ class FeatureListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val context = requireContext()
-        val features = featureWallet.listFeatures(context)
+        val features = featureStorage.listFeatures(context)
 
         viewManager = LinearLayoutManager(context)
         viewAdapter = InstalledFeatureTeaser(this, features)

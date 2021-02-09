@@ -27,7 +27,7 @@ class InstalledFeatureTeaser(private val originatingFragment: Fragment, private 
         holder.itemListView.setOnClickListener {
             // FIXME - navigation assumes we're coming from FirstFragment, which might not necessary be true
             val action =
-                FeatureListFragmentDirections.actionFeatureWalletFragmentToFeatureFragment(
+                FeatureListFragmentDirections.actionFeatureListFragmentToFeatureFragment(
                     installedFeatures[position]
                 )
             findNavController(originatingFragment).navigate(action)

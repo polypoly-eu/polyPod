@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_feature_list">
 
         <action
-            android:id="@+id/action_FeatureWalletFragment_to_FeatureFragment"
+            android:id="@+id/action_FeatureListFragment_to_FeatureFragment"
             app:destination="@id/FeatureFragment" />
     </fragment>
     <fragment
