@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import coop.polypoly.polypod.FeatureListFragmentDirections
 
 class InstalledFeatureTeaser(private val originatingFragment: Fragment, private val installedFeatures: List<String>) : RecyclerView.Adapter<InstalledFeatureTeaser.ViewHolder>() {
 

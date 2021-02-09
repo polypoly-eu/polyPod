@@ -11,8 +11,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.google.common.truth.Truth.assertThat
 import coop.polypoly.polypod.polyIn.PolyInTestDouble
-import coop.polypoly.polypod.polyOut.PolyOutTestDouble
 import coop.polypoly.polypod.polyIn.rdf.*
+import coop.polypoly.polypod.polyOut.PolyOutTestDouble
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
 import org.junit.Test

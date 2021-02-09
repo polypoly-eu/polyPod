@@ -2,7 +2,6 @@ package coop.polypoly.polypod.polyIn
 
 import coop.polypoly.polypod.polyIn.rdf.Matcher
 import coop.polypoly.polypod.polyIn.rdf.Quad
-import coop.polypoly.polypod.polyIn.PolyIn
 
 class PolyInTestDouble : PolyIn() {
     var selectWasCalled = false
