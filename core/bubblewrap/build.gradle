@@ -19,13 +19,9 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.17.1'
 }
 
-ext.rollupOutputDir = file("$buildDir/js")
+ext.jsOutputDir = file("$buildDir/js")
 
-task npmRollup(type: NpmTask) {
-    args = ["run", "rollup"]
-}
-
-sourceSets.test.output.dir rollupOutputDir, builtBy: npmRollup
+sourceSets.test.output.dir jsOutputDir
 
 test {
     useJUnitPlatform {
