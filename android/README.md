@@ -14,9 +14,13 @@ Addendum: commit [551aaf0e](https://github.com/polypoly-eu/polyPod-Android/commi
 
 ### Building
 
-An easy way to build polyPod for Android is to install [Android Studio](https://developer.android.com/studio) and import the project.
+#### Android Studio
 
-On the commandline, figure out what versions of Java and Gradle you need (sorry) and run:
+We recommend [Android Studio](https://developer.android.com/studio) if you want to work on the code, simply install it and open this directory as an existing project.
+
+#### Command line
+
+If you merely want to build the code, you can get [OpenJDK 8](https://openjdk.java.net) and run:
 
 ```
 ./gradlew assemble
