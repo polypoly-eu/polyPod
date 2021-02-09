@@ -20,3 +20,6 @@ jobs:
       - name: Build android
         working-directory: android
         run: ./gradlew assemble
+      - name: Test android
+        working-directory: android
+        run: ./gradlew test
