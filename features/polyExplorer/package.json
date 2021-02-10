@@ -27,5 +27,7 @@
     "rollup-plugin-copy": "^3.3.0"
   },
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "d3": "^6.5.0"
+  }
 }

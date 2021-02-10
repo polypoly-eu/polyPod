@@ -67,7 +67,7 @@ const PolyExplorer = () => {
     const styles = {
         explorerContainer: {
             position: "absolute",
-            backgroundColor: "#172553",
+            backgroundColor: "#0F1938",
             width: "100%",
             height: "100%",
             overflow: "hidden",
@@ -76,15 +76,15 @@ const PolyExplorer = () => {
             position: "absolute",
             height: "10%",
             width: "100%",
+            boxShadow: "2px 2px #ffffff",
         },
         companyButton: {
-            backgroundColor: "#172553",
+            backgroundColor: "#0F1938",
             width: "50%",
             height: "100%",
             fontSize: 16,
             color: "white",
             borderColor: "transparent",
-            boxShadow: "4px 4px #0a1947",
         },
     };
     return (
