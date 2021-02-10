@@ -17,17 +17,28 @@
             android:id="@+id/feature_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:textSize="20dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/jost_medium"
-            android:textColor="#000000" />
+            android:textSize="22dp"
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/feature_author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/jost_medium"
             android:textSize="14dp"
-            android:text="polypoly Cooperative" />
+            android:textColor="#777" />
+
+        <TextView
+            android:id="@+id/feature_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/jost_medium"
+            android:textSize="16dp"
+            android:textColor="#444" />
 
     </LinearLayout>
 

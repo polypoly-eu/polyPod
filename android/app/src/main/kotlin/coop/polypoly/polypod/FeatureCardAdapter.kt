@@ -7,8 +7,9 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import coop.polypoly.polypod.features.Feature
 
-class FeatureCardAdapter(private val originatingFragment: Fragment, private val features: List<String>) : RecyclerView.Adapter<FeatureCardAdapter.ViewHolder>() {
+class FeatureCardAdapter(private val originatingFragment: Fragment, private val features: List<Feature>) : RecyclerView.Adapter<FeatureCardAdapter.ViewHolder>() {
 
     class ViewHolder(val featureCardView: CardView) : RecyclerView.ViewHolder(featureCardView)
 
@@ -21,13 +22,17 @@ class FeatureCardAdapter(private val originatingFragment: Fragment, private val 
     override fun getItemCount() = features.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val featureNameView = holder.featureCardView.findViewById(R.id.feature_name) as TextView
-        featureNameView.text = features[position]
+        val feature = features[position]
+        mapOf(R.id.feature_name to feature.name,
+            R.id.feature_author to feature.author,
+            R.id.feature_description to feature.description).forEach {
+            (holder.featureCardView.findViewById(it.key) as TextView).text = it.value
+        }
         holder.featureCardView.setOnClickListener {
             // FIXME - navigation assumes we're coming from FirstFragment, which might not necessary be true
             val action =
                 FeatureListFragmentDirections.actionFeatureListFragmentToFeatureFragment(
-                    features[position]
+                    feature.name
                 )
             findNavController(originatingFragment).navigate(action)
         }
