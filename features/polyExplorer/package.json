@@ -3,13 +3,21 @@
   "scripts": {
     "eslint": "eslint src --ext .js --ext .jsx",
     "lint": "npm run eslint",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.13",
     "@polypoly-eu/eslint-config": "file:../../eslint-config",
     "@rollup/plugin-sucrase": "^3.1.0",
+    "@storybook/addon-actions": "^6.1.17",
+    "@storybook/addon-essentials": "^6.1.17",
+    "@storybook/addon-links": "^6.1.17",
+    "@storybook/react": "^6.1.17",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
-    "eslint": "^7.18.0",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.19.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.22.0",
@@ -18,5 +26,6 @@
     "rollup": "^2.26.11",
     "rollup-plugin-copy": "^3.3.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {}
 }

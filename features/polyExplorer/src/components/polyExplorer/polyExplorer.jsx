@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import FeaturedCompanyHolder from "./featuredCompanyHolder.jsx";
-import CompanyList from "./companyList.jsx";
+import FeaturedCompanyHolder from "../featuredCompanyHolder/featuredCompanyHolder.jsx";
+import CompanyList from "../companyList/companyList.jsx";
 
 const PolyExplorer = () => {
     const [showFeatured, setShowFeatured] = useState(true);
