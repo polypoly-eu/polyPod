@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
@@ -46,12 +48,20 @@ open class FeatureFragment : Fragment() {
         (view.findViewById(R.id.feature_title) as TextView).text = args.featureName
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
         api = setupPodApi()
+        setupNavBar(view)
         setupWebView(view)
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
 
     private fun setupPodApi(): PodApi {
         return PodApi(PolyOut(), PolyIn())
+    }
+
+    private fun setupNavBar(view: View) {
+        val closeButton: View = view.findViewById(R.id.close_button)
+        closeButton.setOnClickListener {
+            findNavController().navigate(FeatureFragmentDirections.actionFeatureFragmentToFeaturesListFragment())
+        }
     }
 
     private fun setupWebView(view: View) {
