@@ -25,10 +25,6 @@
         android:label="@string/feature_fragment_label"
         tools:layout="@layout/fragment_feature">
 
-        <action
-            android:id="@+id/action_FeatureFragment_to_FeaturesListFragment"
-            app:destination="@id/FeaturesListFragment" />
-
         <argument
             android:name="featureName"
             app:argType="string" />

@@ -59,7 +59,7 @@ open class FeatureFragment : Fragment() {
     private fun setupNavBar(view: View) {
         val closeButton: View = view.findViewById(R.id.close_button)
         closeButton.setOnClickListener {
-            findNavController().navigate(FeatureFragmentDirections.actionFeatureFragmentToFeaturesListFragment())
+            findNavController().popBackStack()
         }
     }
 
