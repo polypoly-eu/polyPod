@@ -65,6 +65,7 @@ open class FeatureFragment : Fragment() {
 
     private fun setupWebView(view: View) {
         webView = view.findViewById(R.id.web_view)
+        webView.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark, context?.theme))
         webView.settings.javaScriptEnabled = true
 
         val feature = FeatureStorage().loadFeature(requireContext(), args.featureName)
