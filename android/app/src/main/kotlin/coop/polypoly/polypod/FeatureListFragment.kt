@@ -38,7 +38,7 @@ class FeatureListFragment : Fragment() {
         val features = featureStorage.listFeatures(context)
 
         viewManager = LinearLayoutManager(context)
-        viewAdapter = InstalledFeatureTeaser(this, features)
+        viewAdapter = FeatureCardAdapter(this, features)
 
         recyclerView = view.findViewById(R.id.features_list)
         recyclerView.apply {

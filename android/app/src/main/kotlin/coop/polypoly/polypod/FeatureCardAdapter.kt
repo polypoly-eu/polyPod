@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-class InstalledFeatureTeaser(private val originatingFragment: Fragment, private val features: List<String>) : RecyclerView.Adapter<InstalledFeatureTeaser.ViewHolder>() {
+class FeatureCardAdapter(private val originatingFragment: Fragment, private val features: List<String>) : RecyclerView.Adapter<FeatureCardAdapter.ViewHolder>() {
 
     class ViewHolder(val featureCardView: CardView) : RecyclerView.ViewHolder(featureCardView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val featureCardView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.installed_feature_teaser, parent, false) as CardView
+            .inflate(R.layout.feature_card, parent, false) as CardView
         return ViewHolder(featureCardView)
     }
 
