@@ -1,5 +1,5 @@
 import React from "react";
-import FeaturedCompany from "./featuredCompany.jsx";
+import FeaturedCompany from "../featuredCompany/featuredCompany.jsx";
 
 const FeaturedCompanyHolder = ({ featuredCompanies }) => {
     const styles = {
