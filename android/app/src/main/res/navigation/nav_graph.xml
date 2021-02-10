@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_FeatureListFragment_to_FeatureFragment"
             app:destination="@id/FeatureFragment" />
+
+        <action
+            android:id="@+id/action_FeatureListFragment_to_SettingsActivity"
+            app:destination="@id/SettingsActivity" />
     </fragment>
     <fragment
         android:id="@+id/FeatureFragment"
@@ -29,4 +33,7 @@
             android:name="featureName"
             app:argType="string" />
     </fragment>
+    <activity
+        android:id="@+id/SettingsActivity"
+        android:name="coop.polypoly.polypod.SettingsActivity" />
 </navigation>
