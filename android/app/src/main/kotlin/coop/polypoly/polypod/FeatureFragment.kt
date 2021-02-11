@@ -34,6 +34,7 @@ open class FeatureFragment : Fragment() {
 
     protected lateinit var api: PodApi
     private lateinit var webView: WebView
+    private lateinit var navApi: PodNavApi
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +52,7 @@ open class FeatureFragment : Fragment() {
         api = setupPodApi()
         setupAppBar(view)
         setupWebView(view, featureBackgroundColor)
+        navApi = PodNavApi(webView)
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
 
@@ -62,6 +64,14 @@ open class FeatureFragment : Fragment() {
         val closeButton: View = view.findViewById(R.id.close_button)
         closeButton.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        view.findViewById<View>(R.id.info_button).setOnClickListener {
+            navApi.triggerAction("info")
+        }
+
+        view.findViewById<View>(R.id.search_button).setOnClickListener {
+            navApi.triggerAction("search")
         }
     }
 
@@ -139,6 +149,33 @@ open class FeatureFragment : Fragment() {
                 "woff2" -> "font/woff2"
                 else -> "text/plain"
             }
+        }
+    }
+
+    // The podNav API is currently experimental and not part of the formal
+    // feature API yet - as soon as we know what it needs to look like,
+    // that should change.
+    private class PodNavApi(private val webView: WebView) {
+        private val apiJsObject = "podNav"
+        private val registeredActions = HashSet<String>()
+
+        init {
+            webView.addJavascriptInterface(object {
+                @JavascriptInterface
+                @Suppress("unused")
+                fun registerAction(action: String) {
+                    // TODO: Only show actions previously registered here
+                    registeredActions.add(action)
+                }
+            }, apiJsObject)
+        }
+
+        fun triggerAction(action: String) {
+            if (!registeredActions.contains(action))
+                return
+            // Absolutely horrible. Disgusting. I'm sorry.
+            val featureWindow = "document.getElementsByTagName('iframe')[0].contentWindow"
+            webView.evaluateJavascript("$featureWindow.$apiJsObject.actions['$action']()") {}
         }
     }
 }
