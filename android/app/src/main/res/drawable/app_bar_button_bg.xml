@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enterFadeDuration="250"
+    android:exitFadeDuration="100">
+
+    <item android:state_pressed="false">
+        <shape android:shape="oval">
+            <size
+                android:width="43dp"
+                android:height="37dp" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <size
+                android:width="43dp"
+                android:height="37dp" />
+            <solid android:color="#4888" />
+        </shape>
+    </item>
+
+</selector>

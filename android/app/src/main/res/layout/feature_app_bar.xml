@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <coop.polypoly.polypod.AppBarButton
                 android:id="@+id/close_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,18 +40,18 @@
                 app:layout_constraintLeft_toLeftOf="@+id/close_button"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <coop.polypoly.polypod.AppBarButton
                 android:id="@+id/search_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
                 android:contentDescription="Search"
                 android:src="@drawable/ic_search"
-                android:layout_marginRight="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/info_button"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <coop.polypoly.polypod.AppBarButton
                 android:id="@+id/info_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
