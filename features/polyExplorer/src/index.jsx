@@ -11,13 +11,12 @@ function registerPodNavActions() {
         console.log(text);
     }
 
-    if (!window.podNav)
-        return;
+    if (!window.podNav) return;
 
     window.podNav.actions = {
         info: () => alert("Here be info!"),
-        search: () => alert("Here be search!")
-    }
+        search: () => alert("Here be search!"),
+    };
     window.podNav.registerAction("info");
     window.podNav.registerAction("search");
 }
