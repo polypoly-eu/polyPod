@@ -38,7 +38,6 @@ const PolyExplorer = () => {
             position: "absolute",
             height: "10%",
             width: "100%",
-            boxShadow: "2px 2px #ffffff",
         },
         companyButton: {
             backgroundColor: "#0F1938",

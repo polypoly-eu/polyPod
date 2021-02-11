@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
 /*
@@ -16,18 +16,7 @@ const DataTypeBubbleCategory = ({
     defaultColor,
 }) => {
     const bubbleRef = useRef(null);
-    let counter = 0;
-
-    data.forEach((e) => {
-        e.category = dataCategories[counter];
-        if (counter == 3) {
-            counter = 0;
-        } else counter++;
-    });
-
-    // state
-    let edgePadding = 5;
-    let bubbleColor = "navy";
+    const edgePadding = 5;
 
     const makeHierarchy = () => {
         return d3.hierarchy({ children: data }).sum((d) => d.value);

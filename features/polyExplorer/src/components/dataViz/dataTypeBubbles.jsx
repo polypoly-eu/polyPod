@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
 /*
@@ -9,6 +9,7 @@ import * as d3 from "d3";
 
 const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
     const bubbleRef = useRef(null);
+    const edgePadding = 5;
 
     const makeHierarchy = () => {
         return d3.hierarchy({ children: data }).sum((d) => d.value);

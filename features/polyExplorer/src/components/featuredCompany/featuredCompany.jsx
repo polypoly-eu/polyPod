@@ -1,6 +1,6 @@
 import React from "react";
 
-const FeaturedCompany = ({ company, onShowCompanyDatasharing }) => {
+const FeaturedCompany = ({ company }) => {
     const styles = {
         companyCard: {
             minWidth: "260px",

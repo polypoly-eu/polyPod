@@ -62,6 +62,7 @@ export default function makeExampleData() {
         return companyData;
     };
 
+    /*
     const getJurisdictionValues = (jurisdictionData) => {
         let treeData = { name: "World", children: [] };
         jurisdictionData.forEach((e) => {
@@ -80,6 +81,7 @@ export default function makeExampleData() {
         });
         return treeData;
     };
+    */
 
     // {name : world, children : [{jurisdictionCode : <code>, countries : [{countryCode : <code>, value : <value>},{},...]},..]}
     const getCountryValues = (jurisdictionData) => {
