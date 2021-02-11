@@ -1,54 +1,16 @@
 import React, { useState } from "react";
 import FeaturedCompanyHolder from "../featuredCompanyHolder/featuredCompanyHolder.jsx";
 import CompanyList from "../companyList/companyList.jsx";
+import makeExampleData from "../dataViz/makeExampleData.jsx";
 
 const PolyExplorer = () => {
     const [showFeatured, setShowFeatured] = useState(true);
-    const [companyData] = useState([
-        {
-            name: "BMW",
-            featured: true,
-        },
-        {
-            name: "IKEA",
-            featured: true,
-        },
-        {
-            name: "PayPal",
-            featured: true,
-        },
-        {
-            name: "Microsoft",
-            featured: false,
-        },
-        {
-            name: "Apple",
-            featured: false,
-        },
-        {
-            name: "Bayer",
-            featured: true,
-        },
-        {
-            name: "Audi",
-            featured: false,
-        },
-        {
-            name: "VW",
-            featured: true,
-        },
-        {
-            name: "Mercedes",
-            featured: false,
-        },
-        {
-            name: "Henkel",
-            featured: false,
-        },
-    ]);
+    const [companyData] = useState(makeExampleData());
     const [featuredCompanyData] = useState(
         companyData.filter((e) => e.featured)
     );
+
+    console.log(companyData);
 
     const handleShowFeatureChange = (featured) => {
         setShowFeatured(featured);
