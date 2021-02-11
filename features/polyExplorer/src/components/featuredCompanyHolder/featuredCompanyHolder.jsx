@@ -1,21 +1,9 @@
 import React from "react";
 import FeaturedCompany from "../featuredCompany/featuredCompany.jsx";
+import { default as stylesArray } from "./featuredCompanyHolderStyle.json";
 
 const FeaturedCompanyHolder = ({ featuredCompanies }) => {
-    const styles = {
-        featuredCompanyCardContainer: {
-            display: "flex",
-            overflowX: "auto",
-            flexWrap: "nowrap",
-            margin: 16,
-            marginTop: 32,
-            position: "absolute",
-            top: "10%",
-            height: "80%",
-            width: "100%",
-            padding: "4px",
-        },
-    };
+    const styles = stylesArray[0];
 
     return (
         <div style={styles.featuredCompanyCardContainer}>

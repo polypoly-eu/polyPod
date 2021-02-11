@@ -1,5 +1,6 @@
 import copy from "rollup-plugin-copy";
 import sucrase from "@rollup/plugin-sucrase";
+import json from "@rollup/plugin-json";
 
 export default {
     input: "src/index.jsx",
@@ -7,14 +8,14 @@ export default {
         file: "dist/index.js",
         format: "iife",
         globals: {
-            "react": "React",
-            "react-dom": "ReactDOM"
-        }
+            react: "React",
+            "react-dom": "ReactDOM",
+        },
     },
     plugins: [
         sucrase({
             transforms: ["jsx"],
-            production: true
+            production: true,
         }),
         copy({
             targets: [
@@ -22,13 +23,14 @@ export default {
                     src: [
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
-                        "src/index.html"
+                        "src/index.html",
                     ],
-                    dest: "dist"
-                }
+                    dest: "dist",
+                },
             ],
-            verbose: true
-        })
+            verbose: true,
+        }),
+        json(),
     ],
-    external: ["react", "react-dom"]
+    external: ["react", "react-dom"],
 };

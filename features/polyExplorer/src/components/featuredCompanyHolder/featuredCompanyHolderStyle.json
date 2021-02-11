@@ -1,0 +1,16 @@
+[
+    {
+        "featuredCompanyCardContainer": {
+            "display": "flex",
+            "overflowX": "auto",
+            "flexWrap": "nowrap",
+            "margin": 16,
+            "marginTop": 32,
+            "position": "absolute",
+            "top": "10%",
+            "height": "80%",
+            "width": "100%",
+            "padding": "4px"
+        }
+    }
+]
