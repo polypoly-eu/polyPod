@@ -1,0 +1,23 @@
+[
+    {
+        "companyCard": {
+            "minWidth": "260px",
+            "height": "84%",
+            "backgroundColor": "#34408e",
+            "boxShadow": "4px 4px #0a1947",
+            "color": "white",
+            "marginRight": "28px",
+            "borderRadius": "24px",
+            "padding": "32px"
+        },
+        "companyName": {
+            "color": "white",
+            "fontSize": "48px",
+            "textAlign": "center"
+        },
+        "companyText": { "fontSize": "14px" },
+        "dataSharingButton": {
+            "backgroundColor": "#fe8988"
+        }
+    }
+]

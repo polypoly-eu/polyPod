@@ -1,27 +1,8 @@
 import React from "react";
+import { default as stylesArray } from "./featuredCompanyStyle.json";
 
 const FeaturedCompany = ({ company }) => {
-    const styles = {
-        companyCard: {
-            minWidth: "260px",
-            height: "84%",
-            backgroundColor: "#34408e",
-            boxShadow: "4px 4px #0a1947",
-            color: "white",
-            marginRight: "28px",
-            borderRadius: "24px",
-            padding: "32px",
-        },
-        companyName: {
-            color: "white",
-            fontSize: "48px",
-            textAlign: "center",
-        },
-        companyText: { fontSize: "14px" },
-        dataSharingButton: {
-            backgroundColor: "#fe8988",
-        },
-    };
+    const styles = stylesArray[0];
 
     return (
         <div style={styles.companyCard}>
