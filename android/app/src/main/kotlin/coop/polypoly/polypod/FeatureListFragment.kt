@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coop.polypoly.polypod.features.FeatureStorage
@@ -34,7 +35,15 @@ class FeatureListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.window?.navigationBarColor = resources.getColor(R.color.featureListBackground, context?.theme)
+
         val context = requireContext()
+
+        val settingsButton: View = view.findViewById(R.id.settings_button)
+        settingsButton.setOnClickListener {
+            findNavController().navigate(FeatureListFragmentDirections.actionFeatureListFragmentToSettingsActivity())
+        }
+
         val features = featureStorage.listFeatures(context)
 
         viewManager = LinearLayoutManager(context)

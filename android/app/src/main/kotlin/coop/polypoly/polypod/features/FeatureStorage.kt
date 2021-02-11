@@ -7,13 +7,15 @@ import java.io.FileOutputStream
 import java.util.*
 import java.util.zip.ZipFile
 
+class Feature(val name: String, val author: String, val description: String) {};
+
 class FeatureStorage {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    public fun listFeatures(context: Context): List<String> {
+    public fun listFeatures(context: Context): List<Feature> {
         val featuresDir = getFeaturesDir(context)
         logger.warn("Features directory: '{}'", featuresDir.absolutePath)
         if (!featuresDir.exists()) {
@@ -25,13 +27,17 @@ class FeatureStorage {
         val filesList = featuresDir.listFiles()
         return if (filesList != null) {
             logger.debug("Found {} Features", filesList.size)
-            val features: MutableList<String> = ArrayList(filesList.size)
+            val features: MutableList<Feature> = ArrayList(filesList.size)
             for (file in filesList) {
                 logger.debug("Found file: '${file.absolutePath}'")
-                features.add(file.name.replace(".zip", ""))
+                // TODO: Read this information from the feature manifest
+                val name = file.name.replace(".zip", "")
+                val author = "polypoly Cooperative"
+                val description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
+                features.add(Feature(name, author, description))
             }
             for (feature in features) {
-                logger.debug("Found Feature: '{}'", feature)
+                logger.debug("Found Feature: '{}'", feature.name)
             }
             features
         } else {

@@ -10,6 +10,7 @@ import android.webkit.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
@@ -45,8 +46,11 @@ open class FeatureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (view.findViewById(R.id.feature_title) as TextView).text = args.featureName
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
+        val featureBackgroundColor = resources.getColor(R.color.colorPrimaryDark, context?.theme)
+        activity?.window?.navigationBarColor = featureBackgroundColor
         api = setupPodApi()
-        setupWebView(view)
+        setupAppBar(view)
+        setupWebView(view, featureBackgroundColor)
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
 
@@ -54,8 +58,16 @@ open class FeatureFragment : Fragment() {
         return PodApi(PolyOut(), PolyIn())
     }
 
-    private fun setupWebView(view: View) {
+    private fun setupAppBar(view: View) {
+        val closeButton: View = view.findViewById(R.id.close_button)
+        closeButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun setupWebView(view: View, backgroundColor: Int) {
         webView = view.findViewById(R.id.web_view)
+        webView.setBackgroundColor(backgroundColor)
         webView.settings.javaScriptEnabled = true
 
         val feature = FeatureStorage().loadFeature(requireContext(), args.featureName)

@@ -45,6 +45,6 @@ class FeatureStorageTest {
         assertThat(featureFile.createNewFile()).isTrue()
         val result = featureStorage.listFeatures(context)
         assertThat(result).hasSize(1)
-        assertThat(result).containsExactly("feature1")
+        assertThat(result.first().name).isEqualTo("feature1")
     }
 }
