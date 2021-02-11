@@ -46,9 +46,11 @@ open class FeatureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (view.findViewById(R.id.feature_title) as TextView).text = args.featureName
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
+        val featureBackgroundColor = resources.getColor(R.color.colorPrimaryDark, context?.theme)
+        activity?.window?.navigationBarColor = featureBackgroundColor
         api = setupPodApi()
         setupAppBar(view)
-        setupWebView(view)
+        setupWebView(view, featureBackgroundColor)
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
 
@@ -63,9 +65,9 @@ open class FeatureFragment : Fragment() {
         }
     }
 
-    private fun setupWebView(view: View) {
+    private fun setupWebView(view: View, backgroundColor: Int) {
         webView = view.findViewById(R.id.web_view)
-        webView.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark, context?.theme))
+        webView.setBackgroundColor(backgroundColor)
         webView.settings.javaScriptEnabled = true
 
         val feature = FeatureStorage().loadFeature(requireContext(), args.featureName)
