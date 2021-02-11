@@ -47,7 +47,7 @@ open class FeatureFragment : Fragment() {
         (view.findViewById(R.id.feature_title) as TextView).text = args.featureName
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
         api = setupPodApi()
-        setupNavBar(view)
+        setupAppBar(view)
         setupWebView(view)
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
@@ -56,7 +56,7 @@ open class FeatureFragment : Fragment() {
         return PodApi(PolyOut(), PolyIn())
     }
 
-    private fun setupNavBar(view: View) {
+    private fun setupAppBar(view: View) {
         val closeButton: View = view.findViewById(R.id.close_button)
         closeButton.setOnClickListener {
             findNavController().popBackStack()
