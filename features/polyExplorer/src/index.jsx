@@ -8,7 +8,7 @@ function registerPodNavActions() {
     // This is just a crutch until we have real callbacks for the info and
     // search action.
     function alert(text) {
-        console.log(text);
+        window.alert(`You pressed ${text}. This is a pop-up for you!`);
     }
 
     if (!window.podNav) return;
