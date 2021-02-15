@@ -39,7 +39,7 @@ const DummyPopUp = ({ text, onPopUpClose }) => {
     return (
         <div style={style.background}>
             <div style={style.container}>
-                <h2 style={style.text}>You have invoked the {text} popup</h2>
+                <h2 style={style.text}>{text}</h2>
                 <button onClick={() => onPopUpClose()} style={style.button}>
                     Close
                 </button>

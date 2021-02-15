@@ -20,7 +20,12 @@ We recommend [Android Studio](https://developer.android.com/studio) if you want 
 
 #### Command line
 
-If you merely want to build the code, you can get [OpenJDK 8](https://openjdk.java.net) and run:
+If you merely want to build the code, get:
+
+1. [OpenJDK 8](https://openjdk.java.net)
+2. [Android SDK command line tools](https://developer.android.com/studio/index.html#command-tools)
+
+Then set `sdk.dir` in `local.properties` and finally run:
 
 ```
 ./gradlew assemble
