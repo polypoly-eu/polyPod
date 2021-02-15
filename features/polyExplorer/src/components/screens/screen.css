@@ -1,0 +1,8 @@
+.shared-div {
+    width: 90%;
+    margin: 8px;
+    padding: 12px;
+    border: transparent;
+    border-radius: "20px";
+    font-size: "20px";
+}
