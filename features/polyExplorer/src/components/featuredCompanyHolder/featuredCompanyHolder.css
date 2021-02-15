@@ -1,4 +1,4 @@
-.featured-company-card-container {
+.featured-company-holder {
     display: flex;
     overflow-x: auto;
     flex-wrap: nowrap;
