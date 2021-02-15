@@ -5,7 +5,7 @@ const CompanyList = ({ companies }) => {
     return (
         <div className="company-card-container">
             {companies.map((company, index) => (
-                <div key={index} className="companyCard">
+                <div key={index} className="company-card">
                     <p className="company-name">{company.name}</p>
                     <p className="company-text">
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr,

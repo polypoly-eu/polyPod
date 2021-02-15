@@ -1,7 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
-import SwiperCore from "swiper";
 
 import FeaturedCompany from "../featuredCompany/featuredCompany.jsx";
 import "./featuredCompanyHolder.css";
@@ -16,7 +15,7 @@ const FeaturedCompanyHolder = ({ featuredCompanies, onShowScreenChange }) => {
                 onSwiper={(swiper) => console.log(swiper)}
             >
                 {featuredCompanies.map((company, index) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={index}>
                         <FeaturedCompany
                             key={index}
                             company={company}
