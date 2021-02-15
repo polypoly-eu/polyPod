@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import FeaturedCompanyHolder from "../featuredCompanyHolder/featuredCompanyHolder.jsx";
 import CompanyList from "../companyList/companyList.jsx";
 import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataTypeScreen.jsx";
@@ -54,12 +55,22 @@ const PolyExplorer = () => {
                     <button
                         onClick={() => handleShowFeatureChange(true)}
                         className="nav-button"
+                        style={
+                            showFeatured
+                                ? { borderBottom: "4px solid white" }
+                                : {}
+                        }
                     >
                         Featured Companies
                     </button>
                     <button
                         onClick={() => handleShowFeatureChange(false)}
                         className="nav-button"
+                        style={
+                            showFeatured
+                                ? {}
+                                : { borderBottom: "4px solid white" }
+                        }
                     >
                         All companies
                     </button>
