@@ -1,14 +1,13 @@
 import React from "react";
-import { default as stylesArray } from "./companyListStyles.json";
+import "./companyList.css";
 
 const CompanyList = ({ companies }) => {
-    const styles = stylesArray[0];
     return (
-        <div style={styles.companyCardContainer}>
+        <div className="company-card-container">
             {companies.map((company, index) => (
-                <div key={index} style={styles.companyCard}>
-                    <p style={styles.companyName}>{company.name}</p>
-                    <p style={styles.companyText}>
+                <div key={index} className="companyCard">
+                    <p className="company-name">{company.name}</p>
+                    <p className="company-text">
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
                         sed diam nonumy eirmod tempor invidunt ut labore et
                         dolore magna aliquyam erat, sed diam voluptua.

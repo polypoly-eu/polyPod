@@ -1,40 +1,55 @@
 import React from "react";
-import { default as stylesArray } from "./featuredCompanyStyle.json";
+import "./featuredCompany.css";
 
-const FeaturedCompany = ({ company }) => {
-    const styles = stylesArray[0];
-    console.log(company);
-
+const FeaturedCompany = ({ company, onShowScreenChange }) => {
     const getContentButtons = () => {
         if (company.jurisdictions === undefined)
             return (
-                <div style={styles.contentButtonHolder}>
-                    <button style={styles.dataSharedButton}>
+                <div className="featured-content-button-holder">
+                    <button className="featured-content-button data-shared">
                         shares {company.dataTypesShared.length} datatypes
                     </button>
-                    <button style={styles.purposesSharedButton}>
+                    <button className="featured-content-button purpose-shared">
                         for {company.dataSharingPurposes.length} purposes
                     </button>
-                    <button style={styles.companiesSharedButton}>
+                    <button className="featured-content-button companies-shared">
                         with {company.sharedWithCompanies.length} companies
                     </button>
-                    <button style={styles.jurisdictionsSharedButton}>
+                    <button className="featured-content-button jurisdictions-shared">
                         in X jurisdictions
                     </button>
                 </div>
             );
         return (
-            <div style={styles.contentButtonHolder}>
-                <button style={styles.dataSharedButton}>
+            <div className="featured-content-button-holder">
+                <button
+                    onClick={() =>
+                        onShowScreenChange("dataTypes", company.name)
+                    }
+                    className="featured-content-button data-shared"
+                >
                     shares {company.dataTypesShared.length} datatypes
                 </button>
-                <button style={styles.purposesSharedButton}>
+                <button
+                    onClick={() => onShowScreenChange("purposes", company.name)}
+                    className="featured-content-button purpose-shared"
+                >
                     for {company.dataSharingPurposes.length} purposes
                 </button>
-                <button style={styles.companiesSharedButton}>
+                <button
+                    onClick={() =>
+                        onShowScreenChange("companies", company.name)
+                    }
+                    className="featured-content-button companies-shared"
+                >
                     with {company.sharedWithCompanies.length} companies
                 </button>
-                <button style={styles.jurisdictionsSharedButton}>
+                <button
+                    onClick={() =>
+                        onShowScreenChange("jurisdictions", company.name)
+                    }
+                    className="featured-content-button jurisdictions-shared"
+                >
                     in {company.jurisdictions.children.length} jurisdictions
                 </button>
             </div>
@@ -42,9 +57,9 @@ const FeaturedCompany = ({ company }) => {
     };
 
     return (
-        <div style={styles.companyCard}>
-            <h2 style={styles.companyName}>{company.name}</h2>
-            <p style={styles.companyText}>Company Information</p>
+        <div className="featured-company-card">
+            <h2 className="featured-company-name">{company.name}</h2>
+            <p className="featured-company-text">Company Information</p>
             {getContentButtons()}
         </div>
     );

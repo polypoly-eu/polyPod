@@ -1,0 +1,12 @@
+.featured-company-card-container {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    margin: 16px;
+    margin-top: 32px;
+    position: absolute;
+    top: 10%;
+    height: 80%;
+    width: 100%;
+    padding: 4px;
+}

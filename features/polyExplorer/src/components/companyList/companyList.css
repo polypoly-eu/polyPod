@@ -1,0 +1,33 @@
+.company-card-container {
+    display: flex;
+    overflow-y: auto;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    position: absolute;
+    top: 10%;
+    height: 80%;
+    width: 98.5%;
+    align-items: center;
+}
+
+.company-card {
+    width: 260px;
+    height: 130px;
+    background-color: #34408e;
+    box-shadow: 4px 4px #0a1947;
+    color: white;
+    margin-top: 22px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 24px;
+    padding: 32px;
+    padding-top: 0px;
+}
+
+.company-name {
+    font-size: 22px;
+}
+
+.company-text {
+    font-size: 14px;
+}

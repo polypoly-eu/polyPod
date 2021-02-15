@@ -1,14 +1,16 @@
 import React from "react";
 import FeaturedCompany from "../featuredCompany/featuredCompany.jsx";
-import { default as stylesArray } from "./featuredCompanyHolderStyle.json";
+import "./featuredCompanyHolder.css";
 
-const FeaturedCompanyHolder = ({ featuredCompanies }) => {
-    const styles = stylesArray[0];
-
+const FeaturedCompanyHolder = ({ featuredCompanies, onShowScreenChange }) => {
     return (
-        <div style={styles.featuredCompanyCardContainer}>
+        <div className="featured-company-card-container">
             {featuredCompanies.map((company, index) => (
-                <FeaturedCompany key={index} company={company} />
+                <FeaturedCompany
+                    key={index}
+                    company={company}
+                    onShowScreenChange={onShowScreenChange}
+                />
             ))}
         </div>
     );

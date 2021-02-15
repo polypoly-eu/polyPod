@@ -1,0 +1,52 @@
+.featured-company-card {
+    min-width: 75%;
+    height: 84%;
+    background-color: #34408e;
+    box-shadow: 4px 4px #0a1947;
+    color: white;
+    margin-right: 28px;
+    border-radius: 24px;
+    padding: 16px;
+}
+
+.featured-company-name {
+    color: white;
+    font-size: 48px;
+    text-align: center;
+}
+
+.featured-company-text {
+    font-size: 14px;
+}
+
+.featured-content-button-holder {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.featured-content-button {
+    width: 90%;
+    margin: 8px;
+    padding: 12px;
+    border: transparent;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+.data-shared {
+    background-color: #fe8988;
+}
+
+.purpose-shared {
+    background-color: #2fb6d8;
+}
+
+.companies-shared {
+    background-color: #4cce89;
+}
+
+.jurisdiction-shared {
+    background-color: #d5dd3b;
+}

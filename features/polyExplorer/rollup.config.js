@@ -1,6 +1,7 @@
 import copy from "rollup-plugin-copy";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
+import css from "rollup-plugin-css-only";
 
 export default {
     input: "src/index.jsx",
@@ -13,6 +14,7 @@ export default {
         },
     },
     plugins: [
+        css({ output: "css/bundle.css" }),
         sucrase({
             transforms: ["jsx"],
             production: true,
