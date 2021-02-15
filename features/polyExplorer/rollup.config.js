@@ -2,6 +2,7 @@ import copy from "rollup-plugin-copy";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 import css from "rollup-plugin-css-only";
+import resolve from "@rollup/plugin-node-resolve";
 
 export default {
     input: "src/index.jsx",
@@ -33,6 +34,7 @@ export default {
             verbose: true,
         }),
         json(),
+        resolve(),
     ],
     external: ["react", "react-dom"],
 };

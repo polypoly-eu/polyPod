@@ -1,5 +1,5 @@
 import React from "react";
-//import DataTypeBubbles from "../dataViz/dataTypeBubbles.jsx";
+import DataTypeBubbles from "../../dataViz/dataTypeBubbles.jsx";
 import "../screen.css";
 
 const SharedDataTypeScreen = ({ company, onShowScreenChange }) => {
@@ -10,15 +10,14 @@ const SharedDataTypeScreen = ({ company, onShowScreenChange }) => {
             </button>
             <h2>{company.name}</h2>
             <div>shares {company.dataTypesShared.length} datatypes</div>
-        </div>
-    );
-};
-/* To return when d3 works
             <DataTypeBubbles
-                data={company.sharedDataTypes}
+                data={company.dataTypesShared}
                 width="300"
                 height="400"
                 bubbleColor="#fe8988"
-            />*/
+            />
+        </div>
+    );
+};
 
 export default SharedDataTypeScreen;
