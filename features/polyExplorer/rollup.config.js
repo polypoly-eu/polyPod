@@ -23,11 +23,7 @@ export default {
         copy({
             targets: [
                 {
-                    src: [
-                        "node_modules/react/umd/react.development.js",
-                        "node_modules/react-dom/umd/react-dom.development.js",
-                        "src/index.html",
-                    ],
+                    src: "src/index.html",
                     dest: "dist",
                 },
             ],
