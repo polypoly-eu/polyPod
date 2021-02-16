@@ -14,6 +14,11 @@ export default {
             "react-dom": "ReactDOM",
         },
     },
+    //This is meant to supress the warning for d3-selection circular dependencies (https://github.com/d3/d3-selection/issues/168)
+    onwarn: function (warning, warn) {
+        if (warning.code === "CIRCULAR_DEPENDENCY") return;
+        warn(warning);
+    },
     plugins: [
         css({ output: "css/bundle.css" }),
         sucrase({
