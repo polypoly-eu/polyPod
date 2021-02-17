@@ -1,0 +1,47 @@
+.company-tag {
+    position: relative;
+    box-sizing: border-box;
+    width: 360px;
+    height: 80px;
+    padding: 8px;
+    border: none;
+    background-color: #0f1938;
+}
+
+.company-tag .company-logo {
+    box-sizing: border-box;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 60px;
+    width: 60px;
+    border: 1px solid #3e495b;
+    border-radius: 50%;
+}
+
+.company-tag .company-info {
+    position: absolute;
+    color: white;
+    top: 16px;
+    left: 80px;
+    text-align: left;
+}
+
+.company-info .company-name {
+    font-size: 16px;
+    margin: 0;
+}
+
+.company-info .company-location {
+    font-size: 14px;
+    display: inline;
+}
+
+.company-location .location-icon {
+    float: left;
+}
+
+.company-location .location-name {
+    float: left;
+    margin-left: 2px;
+}
