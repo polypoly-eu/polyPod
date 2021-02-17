@@ -1,8 +1,8 @@
 const pixelViewport = {
     name: "Pixel 2",
     styles: {
-        width: "411px",
-        height: "731px",
+        width: "360px",
+        height: "640px",
     },
 };
 
