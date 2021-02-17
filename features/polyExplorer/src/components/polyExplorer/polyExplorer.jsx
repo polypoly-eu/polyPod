@@ -54,23 +54,13 @@ const PolyExplorer = () => {
                 <div className="nav-button-container">
                     <button
                         onClick={() => handleShowFeatureChange(true)}
-                        className="nav-button"
-                        style={
-                            showFeatured
-                                ? { borderBottom: "4px solid white" }
-                                : {}
-                        }
+                        className={showFeatured ? "nav-button active" : "nav-button"}
                     >
                         Featured Companies
                     </button>
                     <button
                         onClick={() => handleShowFeatureChange(false)}
-                        className="nav-button"
-                        style={
-                            showFeatured
-                                ? {}
-                                : { borderBottom: "4px solid white" }
-                        }
+                        className={showFeatured ? "nav-button" : "nav-button active"}
                     >
                         All companies
                     </button>

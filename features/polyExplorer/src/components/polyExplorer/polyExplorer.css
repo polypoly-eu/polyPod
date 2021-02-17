@@ -25,3 +25,7 @@ body {
     border-color: transparent;
     outline: none;
 }
+
+.nav-button.active {
+    border-bottom: 4px solid white;
+}
