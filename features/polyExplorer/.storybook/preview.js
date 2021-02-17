@@ -1,5 +1,5 @@
 const pixelViewport = {
-    name: "Pixel 2",
+    name: "polyPhone",
     styles: {
         width: "360px",
         height: "640px",
