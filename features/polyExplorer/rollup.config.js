@@ -32,6 +32,7 @@ export default {
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
                         "src/index.html",
+                        "src/static/*",
                     ],
                     dest: "dist",
                 },
