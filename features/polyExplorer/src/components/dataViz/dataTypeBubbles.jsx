@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
+import "./dataViz.css";
 
 /*
     Component to visualize data in a non-ordered bubble-diagram
@@ -7,7 +8,7 @@ import * as d3 from "d3";
     data object: [{dataType, value},{},..]
 */
 
-const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
+const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
     const bubbleRef = useRef(null);
     const edgePadding = 5;
 
@@ -27,8 +28,7 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
             .select(bubbleRef.current)
             .append("svg")
             .attr("height", height)
-            .attr("width", width)
-            .style("border", "thin black solid");
+            .attr("width", width);
     };
 
     // d3 svg bubble-diagram drawing function
@@ -47,8 +47,7 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
 
         leaf.append("circle")
             .attr("r", (d) => d.r)
-            .attr("fill-opacity", 0.7)
-            .attr("fill", bubbleColor)
+            .style("fill", bubbleColor)
             .style("vertical-align", "center");
 
         leaf.append("text")
@@ -57,21 +56,18 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
             })
             .attr("text-anchor", "middle")
             .attr("y", ".3em")
-            .style("fill", "white")
+            .style("fill", textColor)
             .style("font-size", (d) => {
-                return (14 + d.value).toString() + "px";
-            });
+                return (10 + d.value / 2).toString() + "px";
+            })
+            .style("font-weight", "500");
     };
 
     useEffect(() => {
         drawDataBubbles(createBubbleContainer());
     });
 
-    return (
-        <div>
-            <div ref={bubbleRef}></div>
-        </div>
-    );
+    return <div className="bubble-chart" ref={bubbleRef}></div>;
 };
 
 export default DataTypeBubbles;

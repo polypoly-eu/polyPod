@@ -6,3 +6,7 @@
     border-radius: "20px";
     font-size: "20px";
 }
+
+.screen-content {
+    align-items: center;
+}

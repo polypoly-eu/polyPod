@@ -1,14 +1,12 @@
 import React from "react";
 import FeaturedCompany from "./featuredCompany";
+import makeExampleData from "../dataViz/makeExampleData";
 
-const featuredCompany = {
-    name: "BMW",
-    featured: true,
-};
+const companyData = makeExampleData();
 
 export default {
     title: "featuredCompany",
     component: FeaturedCompany,
 };
 
-export const populated = () => <FeaturedCompany company={featuredCompany} />;
+export const populated = () => <FeaturedCompany company={companyData[0]} />;

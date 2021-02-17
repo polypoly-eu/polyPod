@@ -34,8 +34,7 @@ const DataTypeBubbleCategory = ({
             .select(bubbleRef.current)
             .append("svg")
             .attr("height", height)
-            .attr("width", width)
-            .style("border", "thin black solid");
+            .attr("width", width);
     };
 
     // d3 svg bubble-diagram drawing function
@@ -76,11 +75,7 @@ const DataTypeBubbleCategory = ({
         drawDataBubbles(createBubbleContainer());
     });
 
-    return (
-        <div>
-            <div ref={bubbleRef}></div>
-        </div>
-    );
+    return <div className="bubble-chart" ref={bubbleRef}></div>;
 };
 
 export default DataTypeBubbleCategory;

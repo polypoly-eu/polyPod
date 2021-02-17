@@ -51,12 +51,29 @@ export default function makeExampleData() {
     // Methods
     const getCompanyDataSharing = (companyName) => {
         let companyData = [];
+        const categories = [
+            "personalData",
+            "socialData",
+            "technicalData",
+            "behavioralData",
+            "financialData",
+        ];
+        let counter = 0;
+
+        //makes 'random' categories
+        const getCategory = () => {
+            let category = categories[counter];
+            if (counter == 4) counter = 0;
+            else counter++;
+            return category;
+        };
 
         rawSharingData.default.forEach((e) => {
             if (e[companyName] != "")
                 companyData.push({
                     dataType: e["Data Type"],
                     value: e[companyName],
+                    category: getCategory(),
                 });
         });
         return companyData;

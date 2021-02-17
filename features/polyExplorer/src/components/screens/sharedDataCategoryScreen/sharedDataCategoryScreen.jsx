@@ -1,26 +1,30 @@
 import React from "react";
-import DataTypeBubbles from "../../dataViz/dataTypeBubbles.jsx";
+import DataTypeBubbleCategory from "../../dataViz/dataTypeBubbleCategory.jsx";
 import "../screen.css";
+import "./sharedDataCategoryScreen.css";
 
 const SharedDataTypeScreen = ({ company, onShowScreenChange }) => {
+    /*const availableCategories = [
+        "personalData",
+        "socialData",
+        "technicalData",
+        "behavioralData",
+        "financialData",
+    ];*/
+
     return (
         <div className="explorer-container">
             <button onClick={() => onShowScreenChange("start", undefined)}>
                 X
             </button>
             <h2>{company.name}</h2>
-            <div>
-                <p className="">shares</p>{" "}
-                <p>{company.dataTypesShared.length} datatypes</p>
-            </div>
-
+            <div>shares {company.dataTypesShared.length} datatypes</div>
             <div className="screen-content">
-                <DataTypeBubbles
+                <DataTypeBubbleCategory
                     data={company.dataTypesShared}
                     width="300"
                     height="400"
-                    bubbleColor="#FB8A89"
-                    textColor="#0f1938"
+                    bubbleColor="#fe8988"
                 />
             </div>
         </div>
