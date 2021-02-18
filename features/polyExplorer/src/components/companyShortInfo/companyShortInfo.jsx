@@ -22,7 +22,7 @@ const CompanyShortInfo = ({ company }) => {
                             />
                         </svg>
                     </div>
-                    <p className="location-name">{company.location}</p>
+                    <p className="location-name">{company.location.city}, {company.location.countryCode}, {company.jurisdiction}</p>
                 </div>
             </div>
         </button>

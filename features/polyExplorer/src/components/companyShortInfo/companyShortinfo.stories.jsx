@@ -3,7 +3,11 @@ import CompanyShortInfo from "./companyShortInfo.jsx";
 
 const company = {
     name: "Amazon Europe Core SARL",
-    location: "Luxemburg, LU",
+    location: {
+        city: "Luxemburg",
+        countryCode: "LU",
+    },
+    jurisdiction: "EU-GDPR",
 };
 
 export default {
