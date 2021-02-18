@@ -1,8 +1,24 @@
 .company-list {
+    position: relative;
     flex: 1 1 auto;
     flex-wrap: wrap;
     margin-top: 24px;
     overflow-y: auto;
+}
+
+.filter-button {
+    position: absolute;
+    top: -8px;
+    right: 24px;
+    z-index: 1;
+    width: 60px;
+    height: 48px;
+    border: none;
+    background: url("../images/filter-background.svg");
+}
+
+.filter-button:focus {
+    outline: 0;
 }
 
 .company-group {
