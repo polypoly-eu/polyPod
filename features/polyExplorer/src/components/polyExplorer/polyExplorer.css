@@ -8,9 +8,13 @@
     src: url("../fonts/jost_medium.ttf");
 }
 
+* {
+    font-family: "Jost";
+    color: #edf2f7;
+}
+
 body {
     margin: 0;
-    font-family: "Jost";
 }
 
 .explorer-container {
@@ -36,12 +40,12 @@ body {
     font-family: "Jost Medium";
     font-size: 16px;
     line-height: 16px;
-    color: #979797;
+    color: #8d9caf;
     border-color: transparent;
     outline: none;
 }
 
 .nav-button.active {
-    border-bottom: 4px solid white;
-    color: white;
+    border-bottom: 4px solid #edf2f7;
+    color: #edf2f7;
 }

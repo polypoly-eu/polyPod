@@ -4,13 +4,11 @@
     box-sizing: border-box;
     width: 360px;
     background-color: transparent;
-    color: white;
     margin: 24px auto 0px auto;
     border-radius: 24px;
 }
 
 .featured-company-name {
-    color: white;
     font-size: 48px;
     text-align: center;
 }
@@ -31,6 +29,7 @@
     border: transparent;
     border-radius: 20px;
     font-size: 20px;
+    color: black;
 }
 
 .data-shared {
