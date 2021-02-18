@@ -1,4 +1,5 @@
 import React from "react";
+import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import "./featuredCompany.css";
 
 const FeaturedCompany = ({ company, onShowScreenChange }) => {
@@ -58,7 +59,7 @@ const FeaturedCompany = ({ company, onShowScreenChange }) => {
 
     return (
         <div className="featured-company-card">
-            <h2 className="featured-company-name">{company.name}</h2>
+            <CompanyShortInfo company={company} />
             <p className="featured-company-text">Company Information</p>
             {getContentButtons()}
         </div>

@@ -148,8 +148,27 @@ export default function makeExampleData() {
         });
     });
 
-    exampleCompanies[0].location = { city: "Munich", countryID: 1 };
-    exampleCompanies[1].location = { city: "Delft", countryID: 2 };
+    exampleCompanies[0].location = { city: "Munich", countryCode: "DE" };
+    exampleCompanies[1].location = { city: "Delft", countryCode: "NE" };
+    exampleCompanies[2].location = { city: "Delft", countryCode: "NE" };
+    exampleCompanies[3].location = { city: "Delft", countryCode: "NE" };
+    exampleCompanies[4].location = { city: "Delft", countryCode: "NE" };
+    exampleCompanies[5].location = { city: "Delft", countryCode: "NE" };
+    exampleCompanies[6].location = { city: "Delft", countryCode: "NE" };
+    exampleCompanies[7].location = { city: "Delft", countryCode: "NE" };
+    exampleCompanies[8].location = { city: "Delft", countryCode: "NE" };
+    exampleCompanies[9].location = { city: "Delft", countryCode: "NE" };
+
+    exampleCompanies[0].jurisdiction = "EU-GDPR";
+    exampleCompanies[1].jurisdiction = "EU-GDPR";
+    exampleCompanies[2].jurisdiction = "EU-GDPR";
+    exampleCompanies[3].jurisdiction = "EU-GDPR";
+    exampleCompanies[4].jurisdiction = "EU-GDPR";
+    exampleCompanies[5].jurisdiction = "EU-GDPR";
+    exampleCompanies[6].jurisdiction = "EU-GDPR";
+    exampleCompanies[7].jurisdiction = "EU-GDPR";
+    exampleCompanies[8].jurisdiction = "EU-GDPR";
+    exampleCompanies[9].jurisdiction = "EU-GDPR";
 
     exampleCompanies[0].yearlyProfits = [
         {
@@ -190,7 +209,7 @@ export default function makeExampleData() {
         { purpose: "purpose6", value: 1 },
     ];
 
-    exampleCompanies[0].jurisdictions = getCountryValues(BMWjurisdictionData);
+    exampleCompanies[0].jurisdictionG = getCountryValues(BMWjurisdictionData);
     exampleCompanies[1].jurisdictions = getCountryValues(IKEAjurisdictionData);
 
     exampleCompanies[0].dataTypesShared = getCompanyDataSharing("BMW**");

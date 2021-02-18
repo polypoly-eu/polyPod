@@ -1,5 +1,5 @@
 import React from "react";
-import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx"
+import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import "./companyList.css";
 
 const CompanyList = ({ companies }) => {

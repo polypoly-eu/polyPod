@@ -35,14 +35,16 @@
 
 .info-box .company-location {
     font-size: 14px;
+    width: 60px;
     display: inline;
 }
 
 .company-location .location-icon {
-    float: left;
+    display: inline-block;
 }
 
 .company-location .location-name {
-    transform: translateY(-10px);
-    margin-left: 2px;
+    display: inline-block;
+    transform: translateY(-4px);
+    margin: 0;
 }

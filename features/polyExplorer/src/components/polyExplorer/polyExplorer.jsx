@@ -66,7 +66,7 @@ const PolyExplorer = () => {
                             showFeatured ? "nav-button" : "nav-button active"
                         }
                     >
-                        All companies ({ companyData.length })
+                        All companies ({companyData.length})
                     </button>
                 </div>
                 {getTabContent()}

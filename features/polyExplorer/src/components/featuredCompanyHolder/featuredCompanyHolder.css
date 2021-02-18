@@ -2,10 +2,9 @@
     display: flex;
     overflow-x: auto;
     flex-wrap: nowrap;
-    margin: 16px;
-    margin-top: 32px;
     position: relative;
+    margin: 0;
     height: 80%;
     width: 100%;
-    padding: 4px;
+    padding: 0px;
 }

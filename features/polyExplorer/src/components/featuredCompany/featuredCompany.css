@@ -1,12 +1,11 @@
 .featured-company-card {
-    min-width: 75%;
-    height: 84%;
-    background-color: #34408e;
-    box-shadow: 4px 4px #0a1947;
+    box-sizing: border-box;
+    width: 360px;
+    height: 500px;
+    background-color: transparent;
     color: white;
     margin-right: 28px;
     border-radius: 24px;
-    padding: 16px;
 }
 
 .featured-company-name {
