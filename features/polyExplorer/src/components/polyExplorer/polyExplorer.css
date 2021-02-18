@@ -29,7 +29,7 @@ body {
 
 .nav-button-container {
     flex: 0 1 auto;
-    height: 40px;
+    height: 35px;
     width: 100%;
 }
 
@@ -37,6 +37,7 @@ body {
     background-color: #0f1938;
     width: 50%;
     height: 100%;
+    padding-bottom: 12px;
     font-family: "Jost Medium";
     font-size: 16px;
     line-height: 16px;
