@@ -6,14 +6,16 @@ import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataType
 import SharedPurposeScreen from "../screens/sharedPurposeScreen/sharedPurposeScreen.jsx";
 import SharedWithCompaniesScreen from "../screens/sharedWithCompanyScreen/sharedWithCompanyScreen.jsx";
 import SharedJurisdictionsScreen from "../screens/sharedJurisdictionsScreen/sharedJurisdictionsScreen.jsx";
+import FeaturedCompanyInfo from "../featuredCompanyInfo/featuredCompanyInfo.jsx";
+import CompanyInfo from "../companyInfo/companyInfo.jsx";
 import makeExampleData from "../dataViz/makeExampleData.jsx";
 import "./polyExplorer.css";
 
 const PolyExplorer = () => {
     const [showFeatured, setShowFeatured] = useState(true);
     const [showScreen, setShowScreen] = useState("start");
-    const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [companyData] = useState(makeExampleData());
+    const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [featuredCompanyData] = useState(
         companyData.filter((e) => e.featured)
     );
@@ -24,22 +26,8 @@ const PolyExplorer = () => {
 
     const handleShowScreenChange = (showScreen, companyName) => {
         setShowScreen(showScreen);
-        setSelectedCompany(companyName);
-    };
-
-    const getTabContent = () => {
-        if (showFeatured)
-            return (
-                <FeaturedCompanyHolder
-                    featuredCompanies={featuredCompanyData}
-                    onShowScreenChange={handleShowScreenChange}
-                />
-            );
-        return (
-            <CompanyList
-                companies={companyData}
-                onShowScreenChange={handleShowScreenChange}
-            />
+        setSelectedCompany(
+            companyData.filter((company) => companyName === company.name)[0]
         );
     };
 
@@ -69,50 +57,56 @@ const PolyExplorer = () => {
                         All companies ({companyData.length})
                     </button>
                 </div>
-                {getTabContent()}
+                {showFeatured ? (
+                    <FeaturedCompanyHolder
+                        featuredCompanies={featuredCompanyData}
+                        onShowScreenChange={handleShowScreenChange}
+                    />
+                ) : (
+                    <CompanyList
+                        companies={companyData}
+                        onShowScreenChange={handleShowScreenChange}
+                    />
+                )}
             </div>
         ),
         //better filter from identifier than name
         dataTypes: (
             <SharedDataTypeScreen
-                company={
-                    companyData.filter(
-                        (company) => selectedCompany === company.name
-                    )[0]
-                }
+                company={selectedCompany}
                 onShowScreenChange={handleShowScreenChange}
             />
         ),
         purposes: (
             <SharedPurposeScreen
-                company={
-                    companyData.filter(
-                        (company) => selectedCompany === company.name
-                    )[0]
-                }
+                company={selectedCompany}
                 onShowScreenChange={handleShowScreenChange}
             />
         ),
         companies: (
             <SharedWithCompaniesScreen
-                company={
-                    companyData.filter(
-                        (company) => selectedCompany === company.name
-                    )[0]
-                }
+                company={selectedCompany}
                 onShowScreenChange={handleShowScreenChange}
             />
         ),
         jurisdictions: (
             <SharedJurisdictionsScreen
-                company={
-                    companyData.filter(
-                        (company) => selectedCompany === company.name
-                    )[0]
-                }
+                company={selectedCompany}
                 onShowScreenChange={handleShowScreenChange}
             />
         ),
+        companyInfo:
+            selectedCompany && selectedCompany.featured ? (
+                <FeaturedCompanyInfo
+                    company={selectedCompany}
+                    onShowScreenChange={handleShowScreenChange}
+                />
+            ) : (
+                <CompanyInfo
+                    company={selectedCompany}
+                    onShowScreenChange={handleShowScreenChange}
+                />
+            ),
     };
 
     //polyExplorer "render"

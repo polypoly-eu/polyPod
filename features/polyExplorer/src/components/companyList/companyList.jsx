@@ -13,7 +13,7 @@ function groupCompanies(companies) {
     return groups;
 }
 
-const CompanyList = ({ companies }) => {
+const CompanyList = ({ companies, onShowScreenChange }) => {
     const companyGroups = groupCompanies(companies);
     return (
         <div className="company-list">
@@ -23,7 +23,11 @@ const CompanyList = ({ companies }) => {
                     <div className="company-group-label">{label}</div>
                     <div className="company-group-companies">
                         {companies.map((company, index) => (
-                            <CompanyShortInfo key={index} company={company} />
+                            <CompanyShortInfo
+                                key={index}
+                                company={company}
+                                onShowScreenChange={onShowScreenChange}
+                            />
                         ))}
                     </div>
                 </div>

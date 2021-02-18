@@ -60,7 +60,10 @@ const FeaturedCompany = ({ company, onShowScreenChange }) => {
 
     return (
         <div className="featured-company-card">
-            <CompanyShortInfo company={company} />
+            <CompanyShortInfo
+                company={company}
+                onShowScreenChange={onShowScreenChange}
+            />
             {getContentButtons()}
         </div>
     );

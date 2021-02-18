@@ -1,9 +1,12 @@
 import React from "react";
 import "./companyShortInfo.css";
 
-const CompanyShortInfo = ({ company }) => {
+const CompanyShortInfo = ({ company, onShowScreenChange }) => {
     return (
-        <button className="company-short-info">
+        <button
+            onClick={() => onShowScreenChange("companyInfo", company.name)}
+            className="company-short-info"
+        >
             <div className="company-logo"></div>
             <div className="info-box">
                 <p className="company-name">{company.name}</p>
