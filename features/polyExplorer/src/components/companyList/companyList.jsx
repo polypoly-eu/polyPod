@@ -1,18 +1,12 @@
 import React from "react";
+import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx"
 import "./companyList.css";
 
 const CompanyList = ({ companies }) => {
     return (
-        <div className="company-card-container">
+        <div className="company-list">
             {companies.map((company, index) => (
-                <div key={index} className="company-card">
-                    <p className="company-name">{company.name}</p>
-                    <p className="company-text">
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                        sed diam nonumy eirmod tempor invidunt ut labore et
-                        dolore magna aliquyam erat, sed diam voluptua.
-                    </p>
-                </div>
+                <CompanyShortInfo key={index} company={company} />
             ))}
         </div>
     );

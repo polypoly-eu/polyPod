@@ -44,6 +44,14 @@ const companyData = [
     },
 ];
 
+companyData.forEach((company) => {
+    company.location = {
+        city: "Cologne",
+        countryCode: "DE",
+    };
+    company.jurisdiction = "EU-GDPR";
+});
+
 export default {
     title: "componentList",
     component: CompanyList,
