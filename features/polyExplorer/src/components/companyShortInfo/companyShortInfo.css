@@ -1,8 +1,8 @@
 .company-short-info {
     position: relative;
     box-sizing: border-box;
-    width: 360px;
-    height: 80px;
+    width: 321px;
+    height: 90px;
     padding: 8px;
     border: none;
     background-color: #0f1938;
@@ -12,7 +12,7 @@
 .company-short-info .company-logo {
     box-sizing: border-box;
     position: absolute;
-    top: 10px;
+    top: 15px;
     left: 10px;
     height: 60px;
     width: 60px;
