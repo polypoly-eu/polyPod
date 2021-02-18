@@ -1,5 +1,6 @@
 .company-short-info {
     position: relative;
+    display: block;
     box-sizing: border-box;
     width: 321px;
     height: 90px;
@@ -7,6 +8,7 @@
     border: none;
     background-color: #0f1938;
     outline: none;
+    margin: auto;
 }
 
 .company-short-info .company-logo {
