@@ -14,6 +14,8 @@ body {
 }
 
 .explorer-container {
+    display: flex;
+    flex-flow: column;
     position: absolute;
     background-color: #0f1938;
     width: 100%;
@@ -22,7 +24,7 @@ body {
 }
 
 .nav-button-container {
-    position: relative;
+    flex: 0 1 auto;
     height: 40px;
     width: 100%;
 }

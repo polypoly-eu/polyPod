@@ -1,5 +1,6 @@
 .company-list {
     display: flex;
+    flex: 1 1 auto;
     overflow-y: auto;
     flex-wrap: wrap;
     margin-top: 12px;
