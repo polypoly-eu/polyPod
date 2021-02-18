@@ -1,4 +1,4 @@
-.company-tag {
+.company-short-info {
     position: relative;
     box-sizing: border-box;
     width: 360px;
@@ -8,7 +8,7 @@
     background-color: #0f1938;
 }
 
-.company-tag .company-logo {
+.company-short-info .company-logo {
     box-sizing: border-box;
     position: absolute;
     top: 10px;
@@ -19,7 +19,7 @@
     border-radius: 50%;
 }
 
-.company-tag .company-info {
+.company-short-info .info-box {
     position: absolute;
     color: white;
     top: 16px;
@@ -27,12 +27,12 @@
     text-align: left;
 }
 
-.company-info .company-name {
+.info-box .company-name {
     font-size: 16px;
     margin: 0;
 }
 
-.company-info .company-location {
+.info-box .company-location {
     font-size: 14px;
     display: inline;
 }

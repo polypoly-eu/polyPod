@@ -1,7 +1,7 @@
 import React from "react";
-import "./companyTag.css";
+import "./companyShortInfo.css";
 
-const CompanyHead = ({ company }) => {
+const CompanyShortInfo = ({ company }) => {
     return (
         <button className="company-tag">
             <div className="company-logo"></div>
@@ -29,4 +29,4 @@ const CompanyHead = ({ company }) => {
     );
 };
 
-export default CompanyHead;
+export default CompanyShortInfo;
