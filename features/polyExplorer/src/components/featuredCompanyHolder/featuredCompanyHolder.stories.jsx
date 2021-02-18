@@ -1,28 +1,8 @@
 import React from "react";
 import FeaturedCompanyHolder from "./featuredCompanyHolder";
+import makeExampleData from "../dataViz/makeExampleData";
 
-const featuredCompanies = [
-    {
-        name: "BMW",
-        featured: true,
-    },
-    {
-        name: "IKEA",
-        featured: true,
-    },
-    {
-        name: "PayPal",
-        featured: true,
-    },
-    {
-        name: "Microsoft",
-        featured: false,
-    },
-    {
-        name: "Apple",
-        featured: false,
-    },
-];
+const featuredCompanies = makeExampleData();
 
 export default {
     title: "featuredCompanyHolder",
