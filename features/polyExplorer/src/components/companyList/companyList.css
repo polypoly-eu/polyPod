@@ -1,9 +1,23 @@
 .company-list {
-    display: flex;
     flex: 1 1 auto;
+    margin-top: 20px;
     overflow-y: auto;
-    flex-wrap: wrap;
-    margin-top: 12px;
+}
+
+.company-group {
     position: relative;
-    align-items: center;
+    margin-left: 20px;
+}
+
+.company-group-label {
+    position: absolute;
+    top: 12px;
+    z-index: 1;
+    font-family: "Jost Medium";
+    font-size: 16px;
+    color: #8d9caf;
+}
+
+.company-group-companies {
+    margin-left: 8px;
 }
