@@ -4,8 +4,7 @@
     flex-wrap: nowrap;
     margin: 16px;
     margin-top: 32px;
-    position: absolute;
-    top: 10%;
+    position: relative;
     height: 80%;
     width: 100%;
     padding: 4px;

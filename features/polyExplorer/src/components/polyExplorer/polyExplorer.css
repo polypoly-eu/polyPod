@@ -22,7 +22,7 @@ body {
 }
 
 .nav-button-container {
-    position: absolute;
+    position: relative;
     height: 40px;
     width: 100%;
 }
