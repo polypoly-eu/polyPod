@@ -42,6 +42,6 @@
 }
 
 .company-location .location-name {
-    float: left;
+    transform: translateY(-10px);
     margin-left: 2px;
 }

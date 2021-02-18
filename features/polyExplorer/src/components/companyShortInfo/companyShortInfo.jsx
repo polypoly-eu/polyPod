@@ -3,9 +3,9 @@ import "./companyShortInfo.css";
 
 const CompanyShortInfo = ({ company }) => {
     return (
-        <button className="company-tag">
+        <button className="company-short-info">
             <div className="company-logo"></div>
-            <div className="company-info">
+            <div className="info-box">
                 <p className="company-name">{company.name}</p>
                 <div className="company-location">
                     <div className="location-icon">
