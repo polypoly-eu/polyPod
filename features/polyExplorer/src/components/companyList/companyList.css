@@ -1,10 +1,12 @@
 .company-list {
     flex: 1 1 auto;
+    flex-wrap: wrap;
     margin-top: 20px;
     overflow-y: auto;
 }
 
 .company-group {
+    display: inline-block;
     position: relative;
     margin-left: 20px;
 }
