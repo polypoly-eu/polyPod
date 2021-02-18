@@ -8,3 +8,12 @@
     width: 100%;
     padding: 0px;
 }
+
+.swiper-pagination-bullet-active {
+    background-color: white !important;
+}
+
+.swiper-pagination-bullet {
+    background-color: transparent;
+    border: 2px solid white;
+}

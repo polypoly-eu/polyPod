@@ -1,6 +1,10 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.css";
+import SwiperCore, { Pagination } from "swiper";
+import "swiper/swiper-bundle.min.css";
+
+// install Swiper modules
+SwiperCore.use(Pagination);
 
 import FeaturedCompany from "../featuredCompany/featuredCompany.jsx";
 import "./featuredCompanyHolder.css";
@@ -11,6 +15,7 @@ const FeaturedCompanyHolder = ({ featuredCompanies, onShowScreenChange }) => {
             <Swiper
                 spaceBetween={1}
                 slidesPerView={1}
+                pagination
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
             >
