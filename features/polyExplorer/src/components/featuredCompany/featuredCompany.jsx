@@ -4,7 +4,7 @@ import "./featuredCompany.css";
 
 const FeaturedCompany = ({ company, onShowScreenChange }) => {
     const getContentButtons = () => {
-        if (company.jurisdictions === undefined)
+        if (company.jurisdictionsShared === undefined)
             return (
                 <div className="featured-content-button-holder">
                     <button className="featured-content-button data-shared">
@@ -51,7 +51,8 @@ const FeaturedCompany = ({ company, onShowScreenChange }) => {
                     }
                     className="featured-content-button jurisdictions-shared"
                 >
-                    in {company.jurisdictions.children.length} jurisdictions
+                    in {company.jurisdictionsShared.children.length}{" "}
+                    jurisdictions
                 </button>
             </div>
         );

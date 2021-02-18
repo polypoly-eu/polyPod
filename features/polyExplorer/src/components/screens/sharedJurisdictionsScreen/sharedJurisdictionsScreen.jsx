@@ -9,7 +9,7 @@ const SharedJurisdictionsScreen = ({ company, onShowScreenChange }) => {
             </button>
             <h2>{company.name}</h2>
             <div className="shared-div">
-                shares data with {company.jurisdictions.children.length}{" "}
+                shares data with {company.jurisdictionsShared.children.length}{" "}
                 companies
             </div>
         </div>
