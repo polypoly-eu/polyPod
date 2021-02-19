@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -52,7 +53,11 @@ open class FeatureFragment : Fragment() {
         api = setupPodApi()
         setupAppBar(view)
         setupWebView(view, featureBackgroundColor)
-        navApi = PodNavApi(webView)
+        navApi = PodNavApi(webView) {
+            activity?.runOnUiThread(Runnable {
+                updateAppBarActions(view)
+            })
+        }
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
 
@@ -61,9 +66,11 @@ open class FeatureFragment : Fragment() {
     }
 
     private fun setupAppBar(view: View) {
-        val closeButton: View = view.findViewById(R.id.close_button)
-        closeButton.setOnClickListener {
-            findNavController().popBackStack()
+        view.findViewById<View>(R.id.close_button).setOnClickListener {
+            if (navApi.hasAction("back"))
+                navApi.triggerAction("back")
+            else
+                findNavController().popBackStack()
         }
 
         view.findViewById<View>(R.id.info_button).setOnClickListener {
@@ -73,6 +80,12 @@ open class FeatureFragment : Fragment() {
         view.findViewById<View>(R.id.search_button).setOnClickListener {
             navApi.triggerAction("search")
         }
+    }
+
+    private fun updateAppBarActions(view: View) {
+        view.findViewById<ImageView>(R.id.close_button).setImageResource(if (navApi.hasAction("back")) R.drawable.ic_back_light else R.drawable.ic_close)
+        view.findViewById<View>(R.id.info_button).visibility = if (navApi.hasAction("info")) View.VISIBLE else View.GONE
+        view.findViewById<View>(R.id.search_button).visibility = if (navApi.hasAction("search")) View.VISIBLE else View.GONE
     }
 
     private fun setupWebView(view: View, backgroundColor: Int) {
@@ -155,7 +168,7 @@ open class FeatureFragment : Fragment() {
     // The podNav API is currently experimental and not part of the formal
     // feature API yet - as soon as we know what it needs to look like,
     // that should change.
-    private class PodNavApi(private val webView: WebView) {
+    private class PodNavApi(private val webView: WebView, onActionsChanged: () -> Unit) {
         private val apiJsObject = "podNav"
         private val registeredActions = HashSet<String>()
 
@@ -163,15 +176,20 @@ open class FeatureFragment : Fragment() {
             webView.addJavascriptInterface(object {
                 @JavascriptInterface
                 @Suppress("unused")
-                fun registerAction(action: String) {
-                    // TODO: Only show actions previously registered here
-                    registeredActions.add(action)
+                fun setActiveActions(actions: Array<String>) {
+                    registeredActions.clear()
+                    registeredActions.addAll(actions)
+                    onActionsChanged()
                 }
             }, apiJsObject)
         }
 
+        fun hasAction(action: String): Boolean {
+            return registeredActions.contains(action)
+        }
+
         fun triggerAction(action: String) {
-            if (!registeredActions.contains(action))
+            if (!hasAction(action))
                 return
             // Absolutely horrible. Disgusting. I'm sorry.
             val featureWindow = "document.getElementsByTagName('iframe')[0].contentWindow"

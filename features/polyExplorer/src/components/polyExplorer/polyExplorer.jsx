@@ -15,9 +15,12 @@ import "./polyExplorer.css";
 // search action.
 function alert(text) {
     const handlePopUpClose = () => {
+        window.podNav.setActiveActions(["info", "search"]);
         ReactDOM.render(<PolyExplorer />, document.getElementById("feature"));
     };
 
+    window.podNav.actions.back = () => handlePopUpClose();
+    window.podNav.setActiveActions(["back"]);
     ReactDOM.render(
         <DummyPopUp text={text} onPopUpClose={handlePopUpClose} />,
         document.getElementById("feature")
@@ -32,10 +35,8 @@ if (window.podNav) {
 }
 
 const PolyExplorer = () => {
-    if (window.podNav) {
-        window.podNav.registerAction("info");
-        window.podNav.registerAction("search");
-    }
+    if (window.podNav)
+        window.podNav.setActiveActions(["info", "search"])
 
     const [showFeatured, setShowFeatured] = useState(true);
     const [showScreen, setShowScreen] = useState("start");

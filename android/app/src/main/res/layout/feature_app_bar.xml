@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="Search"
                 android:src="@drawable/ic_search"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/info_button"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="Info"
                 android:src="@drawable/ic_info_light"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
