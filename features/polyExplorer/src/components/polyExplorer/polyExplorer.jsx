@@ -27,17 +27,7 @@ function alert(text) {
     );
 }
 
-if (window.podNav) {
-    window.podNav.actions = {
-        info: () => alert("Here be info!"),
-        search: () => alert("Here be search!"),
-    };
-}
-
 const PolyExplorer = () => {
-    if (window.podNav)
-        window.podNav.setActiveActions(["info", "search"])
-
     const [showFeatured, setShowFeatured] = useState(true);
     const [showScreen, setShowScreen] = useState("start");
     const [companyData] = useState(makeExampleData());
@@ -60,6 +50,23 @@ const PolyExplorer = () => {
             companyData.filter((company) => companyName === company.name)[0]
         );
     };
+
+    function updatePodNavigation() {
+        if (window.podNav) {
+            window.podNav.actions = {
+                info: () => alert("Here be info!"),
+                search: () => alert("Here be search!"),
+                back: () => handleShowScreenChange("start"),
+            };
+            window.podNav.setActiveActions(showScreen === "start" ? ["info", "search"] : ["back"]);
+        } else {
+            // Fallback navigation for testing the feature outside the pod
+            window.addEventListener("keyup", function({key}) {
+                if (key === "Escape")
+                    handleShowScreenChange("start");
+            });
+        }
+    }
 
     const handleUpdateInitalSlide = (newInitialSlide) => {
         setfeaturedCompanyTabInitialSlide(newInitialSlide);
@@ -110,34 +117,31 @@ const PolyExplorer = () => {
         dataTypes: (
             <SharedDataTypeScreen
                 company={selectedCompany}
-                onShowScreenChange={handleShowScreenChange}
             />
         ),
         purposes: (
             <SharedPurposeScreen
                 company={selectedCompany}
-                onShowScreenChange={handleShowScreenChange}
             />
         ),
         companies: (
             <SharedWithCompaniesScreen
                 company={selectedCompany}
-                onShowScreenChange={handleShowScreenChange}
             />
         ),
         jurisdictions: (
             <SharedJurisdictionsScreen
                 company={selectedCompany}
-                onShowScreenChange={handleShowScreenChange}
             />
         ),
         companyInfo: (
             <CompanyInfo
                 company={selectedCompany}
-                onShowScreenChange={handleShowScreenChange}
             />
         ),
     };
+
+    updatePodNavigation();
 
     //polyExplorer "render"
     return getScreenContent();

@@ -2,12 +2,9 @@ import React from "react";
 import DataTypeBubbles from "../../dataViz/dataTypeBubbles.jsx";
 import "../screen.css";
 
-const SharedDataTypeScreen = ({ company, onShowScreenChange }) => {
+const SharedDataTypeScreen = ({ company }) => {
     return (
         <div className="explorer-container">
-            <button onClick={() => onShowScreenChange("start", undefined)}>
-                X
-            </button>
             <h2>{company.name}</h2>
             <div>
                 <p className="">shares</p>{" "}

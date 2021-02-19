@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.webkit.*
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -53,11 +54,7 @@ open class FeatureFragment : Fragment() {
         api = setupPodApi()
         setupAppBar(view)
         setupWebView(view, featureBackgroundColor)
-        navApi = PodNavApi(webView) {
-            activity?.runOnUiThread(Runnable {
-                updateAppBarActions(view)
-            })
-        }
+        setupNavigation(view, webView)
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
 
@@ -67,10 +64,7 @@ open class FeatureFragment : Fragment() {
 
     private fun setupAppBar(view: View) {
         view.findViewById<View>(R.id.close_button).setOnClickListener {
-            if (navApi.hasAction("back"))
-                navApi.triggerAction("back")
-            else
-                findNavController().popBackStack()
+            navigateBack()
         }
 
         view.findViewById<View>(R.id.info_button).setOnClickListener {
@@ -82,10 +76,11 @@ open class FeatureFragment : Fragment() {
         }
     }
 
-    private fun updateAppBarActions(view: View) {
-        view.findViewById<ImageView>(R.id.close_button).setImageResource(if (navApi.hasAction("back")) R.drawable.ic_back_light else R.drawable.ic_close)
-        view.findViewById<View>(R.id.info_button).visibility = if (navApi.hasAction("info")) View.VISIBLE else View.GONE
-        view.findViewById<View>(R.id.search_button).visibility = if (navApi.hasAction("search")) View.VISIBLE else View.GONE
+    private fun navigateBack() {
+        if (navApi.hasAction("back"))
+            navApi.triggerAction("back")
+        else
+            findNavController().popBackStack()
     }
 
     private fun setupWebView(view: View, backgroundColor: Int) {
@@ -121,6 +116,24 @@ open class FeatureFragment : Fragment() {
         val innerPort = channel[1]
         outerPort.setWebMessageCallback(PostOfficeMessageCallback(lifecycleScope, outerPort, api))
         view.postWebMessage(WebMessage("", arrayOf(innerPort)), Uri.parse("*"))
+    }
+
+    private fun setupNavigation(view: View, webView: WebView) {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() = navigateBack()
+        })
+
+        navApi = PodNavApi(webView) {
+            activity?.runOnUiThread(Runnable {
+                updateAppBarActions(view)
+            })
+        }
+    }
+
+    private fun updateAppBarActions(view: View) {
+        view.findViewById<ImageView>(R.id.close_button).setImageResource(if (navApi.hasAction("back")) R.drawable.ic_back_light else R.drawable.ic_close)
+        view.findViewById<View>(R.id.info_button).visibility = if (navApi.hasAction("info")) View.VISIBLE else View.GONE
+        view.findViewById<View>(R.id.search_button).visibility = if (navApi.hasAction("search")) View.VISIBLE else View.GONE
     }
 
     private class PodPathHandler(context: Context) : WebViewAssetLoader.PathHandler {

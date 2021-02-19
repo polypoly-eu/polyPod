@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import "./companyInfo.css";
 
-const CompanyInfo = ({ company, onShowScreenChange }) => {
+const CompanyInfo = ({ company }) => {
     const [openTab, setOpenTab] = useState("location");
     const availableTabs = ["location", "structure", "revenue"];
 
@@ -31,10 +31,7 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
 
     return (
         <div className="explorer-container">
-            <button onClick={() => onShowScreenChange("start", undefined)}>
-                X
-            </button>
-            <CompanyShortInfo company={company} onShowScreenChange={() => {}} />
+            <CompanyShortInfo company={company} />
             <div className="tab-button-container">
                 {availableTabs.map((tab, index) => (
                     <button
