@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as ReactDOM from "react-dom";
 
 import FeaturedCompanyHolder from "../featuredCompanyHolder/featuredCompanyHolder.jsx";
 import CompanyList from "../companyList/companyList.jsx";
@@ -58,12 +59,13 @@ const PolyExplorer = () => {
                 search: () => alert("Here be search!"),
                 back: () => handleShowScreenChange("start"),
             };
-            window.podNav.setActiveActions(showScreen === "start" ? ["info", "search"] : ["back"]);
+            window.podNav.setActiveActions(
+                showScreen === "start" ? ["info", "search"] : ["back"]
+            );
         } else {
             // Fallback navigation for testing the feature outside the pod
-            window.addEventListener("keyup", function({key}) {
-                if (key === "Escape")
-                    handleShowScreenChange("start");
+            window.addEventListener("keyup", function ({ key }) {
+                if (key === "Escape") handleShowScreenChange("start");
             });
         }
     }
@@ -114,31 +116,11 @@ const PolyExplorer = () => {
             </div>
         ),
         //better filter from identifier than name
-        dataTypes: (
-            <SharedDataTypeScreen
-                company={selectedCompany}
-            />
-        ),
-        purposes: (
-            <SharedPurposeScreen
-                company={selectedCompany}
-            />
-        ),
-        companies: (
-            <SharedWithCompaniesScreen
-                company={selectedCompany}
-            />
-        ),
-        jurisdictions: (
-            <SharedJurisdictionsScreen
-                company={selectedCompany}
-            />
-        ),
-        companyInfo: (
-            <CompanyInfo
-                company={selectedCompany}
-            />
-        ),
+        dataTypes: <SharedDataTypeScreen company={selectedCompany} />,
+        purposes: <SharedPurposeScreen company={selectedCompany} />,
+        companies: <SharedWithCompaniesScreen company={selectedCompany} />,
+        jurisdictions: <SharedJurisdictionsScreen company={selectedCompany} />,
+        companyInfo: <CompanyInfo company={selectedCompany} />,
     };
 
     updatePodNavigation();
