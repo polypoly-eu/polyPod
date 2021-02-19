@@ -16,6 +16,7 @@ const FeaturedCompanyHolder = ({ featuredCompanies, onShowScreenChange }) => {
                 spaceBetween={1}
                 slidesPerView={1}
                 pagination
+                loop="true"
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
             >
