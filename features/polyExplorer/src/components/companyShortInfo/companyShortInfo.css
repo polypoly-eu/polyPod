@@ -55,3 +55,7 @@
     transform: translateY(-4px);
     margin: 0;
 }
+
+.location-name .jurisdiction-name {
+    color: #60e6de;
+}

@@ -14,7 +14,7 @@ const CompanyShortInfo = ({ company, onShowScreenChange }) => {
                     <div className="location-icon"></div>
                     <p className="location-name">
                         {company.location.city}, {company.location.countryCode},{" "}
-                        {company.jurisdiction}
+                        <span className="jurisdiction-name">{company.jurisdiction}</span>
                     </p>
                 </div>
             </div>
