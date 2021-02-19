@@ -13,6 +13,7 @@ const DummyPopUp = ({ text, onPopUpClose }) => {
             borderRadius: "20px",
         },
         text: {
+            color: "#000000",
             textAlign: "center",
         },
         button: {
