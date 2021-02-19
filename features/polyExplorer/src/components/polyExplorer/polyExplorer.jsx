@@ -19,6 +19,10 @@ const PolyExplorer = () => {
     const [featuredCompanyData] = useState(
         companyData.filter((e) => e.featured)
     );
+    const [
+        featuredCompanyTabInitialSlide,
+        setfeaturedCompanyTabInitialSlide,
+    ] = useState(0);
 
     const handleShowFeatureChange = (featured) => {
         setShowFeatured(featured);
@@ -29,6 +33,10 @@ const PolyExplorer = () => {
         setSelectedCompany(
             companyData.filter((company) => companyName === company.name)[0]
         );
+    };
+
+    const handleUpdateInitalSlide = (newInitialSlide) => {
+        setfeaturedCompanyTabInitialSlide(newInitialSlide);
     };
 
     const getScreenContent = () => {
@@ -61,6 +69,8 @@ const PolyExplorer = () => {
                     <FeaturedCompanyHolder
                         featuredCompanies={featuredCompanyData}
                         onShowScreenChange={handleShowScreenChange}
+                        initialSlide={featuredCompanyTabInitialSlide}
+                        onUpdateInitialSlide={handleUpdateInitalSlide}
                     />
                 ) : (
                     <CompanyList

@@ -1,4 +1,5 @@
 import React from "react";
+import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 
 const CompanyInfo = ({ company, onShowScreenChange }) => {
     return (
@@ -6,7 +7,6 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
             <button onClick={() => onShowScreenChange("start", undefined)}>
                 X
             </button>
-            <h2>{company.name}</h2>
         </div>
     );
 };

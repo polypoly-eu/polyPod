@@ -9,7 +9,12 @@ SwiperCore.use(Pagination);
 import FeaturedCompany from "../featuredCompany/featuredCompany.jsx";
 import "./featuredCompanyHolder.css";
 
-const FeaturedCompanyHolder = ({ featuredCompanies, onShowScreenChange }) => {
+const FeaturedCompanyHolder = ({
+    featuredCompanies,
+    onShowScreenChange,
+    initialSlide,
+    onUpdateInitialSlide,
+}) => {
     return (
         <div className="featured-company-holder">
             <Swiper
@@ -17,8 +22,10 @@ const FeaturedCompanyHolder = ({ featuredCompanies, onShowScreenChange }) => {
                 slidesPerView={1}
                 pagination
                 loop="true"
-                onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
+                initialSlide={initialSlide}
+                onSlideChange={(swiper) =>
+                    onUpdateInitialSlide(swiper.activeIndex - 1)
+                }
             >
                 {featuredCompanies.map((company, index) => (
                     <SwiperSlide key={index}>
