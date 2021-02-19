@@ -87,7 +87,7 @@ const PolyExplorer = () => {
                             showFeatured ? "nav-button active" : "nav-button"
                         }
                     >
-                        Featured Companies
+                        Featured companies
                     </button>
                     <button
                         onClick={() => handleShowFeatureChange(false)}
