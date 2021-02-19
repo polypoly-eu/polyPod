@@ -6,7 +6,6 @@ import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataType
 import SharedPurposeScreen from "../screens/sharedPurposeScreen/sharedPurposeScreen.jsx";
 import SharedWithCompaniesScreen from "../screens/sharedWithCompanyScreen/sharedWithCompanyScreen.jsx";
 import SharedJurisdictionsScreen from "../screens/sharedJurisdictionsScreen/sharedJurisdictionsScreen.jsx";
-import FeaturedCompanyInfo from "../featuredCompanyInfo/featuredCompanyInfo.jsx";
 import CompanyInfo from "../companyInfo/companyInfo.jsx";
 import makeExampleData from "../dataViz/makeExampleData.jsx";
 import "./polyExplorer.css";
@@ -105,18 +104,12 @@ const PolyExplorer = () => {
                 onShowScreenChange={handleShowScreenChange}
             />
         ),
-        companyInfo:
-            selectedCompany && selectedCompany.featured ? (
-                <FeaturedCompanyInfo
-                    company={selectedCompany}
-                    onShowScreenChange={handleShowScreenChange}
-                />
-            ) : (
-                <CompanyInfo
-                    company={selectedCompany}
-                    onShowScreenChange={handleShowScreenChange}
-                />
-            ),
+        companyInfo: (
+            <CompanyInfo
+                company={selectedCompany}
+                onShowScreenChange={handleShowScreenChange}
+            />
+        ),
     };
 
     //polyExplorer "render"
