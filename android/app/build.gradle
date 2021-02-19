@@ -6,9 +6,8 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
-task buildFeatureContainer(type: Copy) {
+task copyFeatureContainerBootstrap(type: Copy) {
     from "../../core/podigree/dist/bootstrap.js"
-    from "../feature-container/src"
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
 }
@@ -27,7 +26,7 @@ task buildTestFeature(type: Zip) {
 
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
-        task.dependsOn buildFeatureContainer
+        task.dependsOn copyFeatureContainerBootstrap
         task.dependsOn buildPolyExplorerFeature
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
