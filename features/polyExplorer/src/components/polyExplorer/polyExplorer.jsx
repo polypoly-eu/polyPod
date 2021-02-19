@@ -7,10 +7,36 @@ import SharedPurposeScreen from "../screens/sharedPurposeScreen/sharedPurposeScr
 import SharedWithCompaniesScreen from "../screens/sharedWithCompanyScreen/sharedWithCompanyScreen.jsx";
 import SharedJurisdictionsScreen from "../screens/sharedJurisdictionsScreen/sharedJurisdictionsScreen.jsx";
 import CompanyInfo from "../companyInfo/companyInfo.jsx";
+import DummyPopUp from "../dummyPopUp/dummyPopUp.jsx";
 import makeExampleData from "../dataViz/makeExampleData.jsx";
 import "./polyExplorer.css";
 
+// This is just a crutch until we have real callbacks for the info and
+// search action.
+function alert(text) {
+    const handlePopUpClose = () => {
+        ReactDOM.render(<PolyExplorer />, document.getElementById("feature"));
+    };
+
+    ReactDOM.render(
+        <DummyPopUp text={text} onPopUpClose={handlePopUpClose} />,
+        document.getElementById("feature")
+    );
+}
+
+if (window.podNav) {
+    window.podNav.actions = {
+        info: () => alert("Here be info!"),
+        search: () => alert("Here be search!"),
+    };
+}
+
 const PolyExplorer = () => {
+    if (window.podNav) {
+        window.podNav.registerAction("info");
+        window.podNav.registerAction("search");
+    }
+
     const [showFeatured, setShowFeatured] = useState(true);
     const [showScreen, setShowScreen] = useState("start");
     const [companyData] = useState(makeExampleData());
