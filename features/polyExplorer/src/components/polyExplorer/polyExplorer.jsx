@@ -86,7 +86,9 @@ const PolyExplorer = () => {
                 showFeatured={showFeatured}
                 setShowFeatured={setShowFeatured}
                 featuredCompanyTabInitialSlide={featuredCompanyTabInitialSlide}
-                setFeaturedCompanyTabInitialSlide={setFeaturedCompanyTabInitialSlide}
+                setFeaturedCompanyTabInitialSlide={
+                    setFeaturedCompanyTabInitialSlide
+                }
             />
         ),
         dataTypes: <SharedDataTypeScreen company={selectedCompany} />,

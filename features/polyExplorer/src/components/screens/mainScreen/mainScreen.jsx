@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import i18n from "../../../i18n.js";
 import FeaturedCompanyHolder from "../../featuredCompanyHolder/featuredCompanyHolder.jsx";
@@ -28,13 +28,17 @@ const MainScreen = ({
             <div className="nav-button-container">
                 <button
                     onClick={handleShowFeatured}
-                    className={showFeatured ? "nav-button active" : "nav-button"}
+                    className={
+                        showFeatured ? "nav-button active" : "nav-button"
+                    }
                 >
                     {i18n.t("polyExplorer:tabLabel.featuredCompanies")}
                 </button>
                 <button
                     onClick={handleShowCompanyList}
-                    className={showFeatured ? "nav-button" : "nav-button active"}
+                    className={
+                        showFeatured ? "nav-button" : "nav-button active"
+                    }
                 >
                     {i18n.t("polyExplorer:tabLabel.allCompanies", {
                         total: companyData.length,
