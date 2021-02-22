@@ -130,7 +130,7 @@ const PolyExplorer = () => {
         purposes: <SharedPurposeScreen company={selectedCompany} />,
         companies: <SharedWithCompaniesScreen company={selectedCompany} />,
         jurisdictions: <SharedJurisdictionsScreen company={selectedCompany} />,
-        companyInfo: <CompanyInfo company={selectedCompany} />,
+        companyInfoScreen: <CompanyInfoScreen company={selectedCompany} />,
         companyFilterScreen: <CompanyFilterScreen companies={companyData} />,
         companySearchScreen: <CompanySearchScreen companies={companyData} />,
     };
