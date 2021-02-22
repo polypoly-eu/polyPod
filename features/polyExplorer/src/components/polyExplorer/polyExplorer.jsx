@@ -8,6 +8,7 @@ import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataType
 import SharedPurposeScreen from "../screens/sharedPurposeScreen/sharedPurposeScreen.jsx";
 import SharedWithCompaniesScreen from "../screens/sharedWithCompanyScreen/sharedWithCompanyScreen.jsx";
 import SharedJurisdictionsScreen from "../screens/sharedJurisdictionsScreen/sharedJurisdictionsScreen.jsx";
+import CompanyFilterScreen from "../screens/companyFilterScreen/companyFilterScreen.jsx";
 import CompanyInfo from "../companyInfo/companyInfo.jsx";
 import DummyPopUp from "../dummyPopUp/dummyPopUp.jsx";
 import makeExampleData from "../dataViz/makeExampleData.jsx";
@@ -124,6 +125,7 @@ const PolyExplorer = () => {
         companies: <SharedWithCompaniesScreen company={selectedCompany} />,
         jurisdictions: <SharedJurisdictionsScreen company={selectedCompany} />,
         companyInfo: <CompanyInfo company={selectedCompany} />,
+        companyFilterScreen: <CompanyFilterScreen companies={companyData} />,
     };
 
     updatePodNavigation();
