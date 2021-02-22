@@ -52,7 +52,7 @@ const PolyExplorer = () => {
     function updatePodNavigation() {
         const actions = {
             info: () => alert("Here be info!"),
-            search: () => handleShowScreenChange("companySearchScreen"),
+            search: () => handleShowScreenChange("companySearch"),
             back: () => handleShowScreenChange("main"),
         };
 
@@ -89,9 +89,9 @@ const PolyExplorer = () => {
         purposes: <SharedPurposeScreen company={selectedCompany} />,
         companies: <SharedWithCompaniesScreen company={selectedCompany} />,
         jurisdictions: <SharedJurisdictionsScreen company={selectedCompany} />,
-        companyInfoScreen: <CompanyInfoScreen company={selectedCompany} />,
-        companyFilterScreen: <CompanyFilterScreen companies={companyData} />,
-        companySearchScreen: <CompanySearchScreen companies={companyData} />,
+        companyInfo: <CompanyInfoScreen company={selectedCompany} />,
+        companyFilter: <CompanyFilterScreen companies={companyData} />,
+        companySearch: <CompanySearchScreen companies={companyData} />,
     };
 
     updatePodNavigation();

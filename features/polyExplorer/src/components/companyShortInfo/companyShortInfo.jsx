@@ -4,9 +4,7 @@ import "./companyShortInfo.css";
 const CompanyShortInfo = ({ company, onShowScreenChange }) => {
     return (
         <button
-            onClick={() =>
-                onShowScreenChange("companyInfoScreen", company.name)
-            }
+            onClick={() => onShowScreenChange("companyInfo", company.name)}
             className="company-short-info"
         >
             <div className="company-logo"></div>
