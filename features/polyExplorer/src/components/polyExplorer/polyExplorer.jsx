@@ -34,7 +34,7 @@ function alert(text) {
 
 const PolyExplorer = () => {
     const [showFeatured, setShowFeatured] = useState(true);
-    const [showScreen, setShowScreen] = useState("start");
+    const [showScreen, setShowScreen] = useState("main");
     const [companyData] = useState(makeExampleData());
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [featuredCompanyData] = useState(
@@ -60,13 +60,13 @@ const PolyExplorer = () => {
         const actions = {
             info: () => alert("Here be info!"),
             search: () => handleShowScreenChange("companySearchScreen"),
-            back: () => handleShowScreenChange("start"),
+            back: () => handleShowScreenChange("main"),
         };
 
         if (window.podNav) {
             window.podNav.actions = actions;
             window.podNav.setActiveActions(
-                showScreen === "start" ? ["info", "search"] : ["back"]
+                showScreen === "main" ? ["info", "search"] : ["back"]
             );
         } else {
             // Fallback navigation for testing the feature outside the pod
@@ -88,7 +88,7 @@ const PolyExplorer = () => {
 
     //All screens that can be rendered
     const screenOf = {
-        start: (
+        main: (
             <div className="explorer-container">
                 <div className="nav-button-container">
                     <button
