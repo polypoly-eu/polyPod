@@ -15,16 +15,18 @@ import DummyPopUp from "../dummyPopUp/dummyPopUp.jsx";
 import makeExampleData from "../dataViz/makeExampleData.jsx";
 import "./polyExplorer.css";
 
-// This is just a crutch until we have real callbacks for the info and
-// search action.
+// This is just a crutch until we have a proper callback for the info action
 function alert(text) {
     const handlePopUpClose = () => {
-        window.podNav.setActiveActions(["info", "search"]);
+        if (window.podNav)
+            window.podNav.setActiveActions(["info", "search"]);
         ReactDOM.render(<PolyExplorer />, document.getElementById("feature"));
     };
 
-    window.podNav.actions.back = () => handlePopUpClose();
-    window.podNav.setActiveActions(["back"]);
+    if (window.podNav) {
+        window.podNav.actions.back = () => handlePopUpClose();
+        window.podNav.setActiveActions(["back"]);
+    }
     ReactDOM.render(
         <DummyPopUp text={text} onPopUpClose={handlePopUpClose} />,
         document.getElementById("feature")
@@ -56,19 +58,23 @@ const PolyExplorer = () => {
     };
 
     function updatePodNavigation() {
+        const actions = {
+            info: () => alert("Here be info!"),
+            search: () => handleShowScreenChange("companySearchScreen"),
+            back: () => handleShowScreenChange("start"),
+        };
+
         if (window.podNav) {
-            window.podNav.actions = {
-                info: () => alert("Here be info!"),
-                search: () => handleShowScreenChange("companySearchScreen"),
-                back: () => handleShowScreenChange("start"),
-            };
+            window.podNav.actions = actions;
             window.podNav.setActiveActions(
                 showScreen === "start" ? ["info", "search"] : ["back"]
             );
         } else {
             // Fallback navigation for testing the feature outside the pod
             window.addEventListener("keyup", function ({ key }) {
-                if (key === "Escape") handleShowScreenChange("start");
+                if (key === "Escape") actions.back();
+                else if (key === "s") actions.search();
+                else if (key === "i") actions.info();
             });
         }
     }
