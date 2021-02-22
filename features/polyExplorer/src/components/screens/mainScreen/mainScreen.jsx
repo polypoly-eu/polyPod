@@ -4,6 +4,9 @@ import i18n from "../../../i18n.js";
 import FeaturedCompanyHolder from "../../featuredCompanyHolder/featuredCompanyHolder.jsx";
 import CompanyList from "../../companyList/companyList.jsx";
 
+import "../screen.css";
+import "./mainScreen.css";
+
 const MainScreen = ({
     handleShowScreenChange,
     featuredCompanyData,
