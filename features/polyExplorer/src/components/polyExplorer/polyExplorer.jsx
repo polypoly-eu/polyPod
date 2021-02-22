@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import * as ReactDOM from "react-dom";
 
-import i18n from "../../i18n.js";
-import FeaturedCompanyHolder from "../featuredCompanyHolder/featuredCompanyHolder.jsx";
-import CompanyList from "../companyList/companyList.jsx";
+import MainScreen from "../screens/mainScreen/mainScreen.jsx";
 import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataTypeScreen.jsx";
 import SharedPurposeScreen from "../screens/sharedPurposeScreen/sharedPurposeScreen.jsx";
 import SharedWithCompaniesScreen from "../screens/sharedWithCompanyScreen/sharedWithCompanyScreen.jsx";
@@ -33,8 +31,8 @@ function alert(text) {
 }
 
 const PolyExplorer = () => {
-    const [showFeatured, setShowFeatured] = useState(true);
     const [showScreen, setShowScreen] = useState("main");
+    const [showFeatured, setShowFeatured] = useState(true);
     const [companyData] = useState(makeExampleData());
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [featuredCompanyData] = useState(
@@ -42,12 +40,8 @@ const PolyExplorer = () => {
     );
     const [
         featuredCompanyTabInitialSlide,
-        setfeaturedCompanyTabInitialSlide,
+        setFeaturedCompanyTabInitialSlide,
     ] = useState(0);
-
-    const handleShowFeatureChange = (featured) => {
-        setShowFeatured(featured);
-    };
 
     const handleShowScreenChange = (showScreen, companyName) => {
         setShowScreen(showScreen);
@@ -78,54 +72,24 @@ const PolyExplorer = () => {
         }
     }
 
-    const handleUpdateInitalSlide = (newInitialSlide) => {
-        setfeaturedCompanyTabInitialSlide(newInitialSlide);
-    };
-
     const getScreenContent = () => {
         return screenOf[showScreen];
     };
 
     //All screens that can be rendered
     const screenOf = {
-        main: (
-            <div className="explorer-container">
-                <div className="nav-button-container">
-                    <button
-                        onClick={() => handleShowFeatureChange(true)}
-                        className={
-                            showFeatured ? "nav-button active" : "nav-button"
-                        }
-                    >
-                        {i18n.t("polyExplorer:tabLabel.featuredCompanies")}
-                    </button>
-                    <button
-                        onClick={() => handleShowFeatureChange(false)}
-                        className={
-                            showFeatured ? "nav-button" : "nav-button active"
-                        }
-                    >
-                        {i18n.t("polyExplorer:tabLabel.allCompanies", {
-                            total: companyData.length,
-                        })}
-                    </button>
-                </div>
-                {showFeatured ? (
-                    <FeaturedCompanyHolder
-                        featuredCompanies={featuredCompanyData}
-                        onShowScreenChange={handleShowScreenChange}
-                        initialSlide={featuredCompanyTabInitialSlide}
-                        onUpdateInitialSlide={handleUpdateInitalSlide}
-                    />
-                ) : (
-                    <CompanyList
-                        companies={companyData}
-                        onShowScreenChange={handleShowScreenChange}
-                    />
-                )}
-            </div>
-        ),
         //better filter from identifier than name
+        main: (
+            <MainScreen
+                handleShowScreenChange={handleShowScreenChange}
+                featuredCompanyData={featuredCompanyData}
+                companyData={companyData}
+                showFeatured={showFeatured}
+                setShowFeatured={setShowFeatured}
+                featuredCompanyTabInitialSlide={featuredCompanyTabInitialSlide}
+                setFeaturedCompanyTabInitialSlide={setFeaturedCompanyTabInitialSlide}
+            />
+        ),
         dataTypes: <SharedDataTypeScreen company={selectedCompany} />,
         purposes: <SharedPurposeScreen company={selectedCompany} />,
         companies: <SharedWithCompaniesScreen company={selectedCompany} />,
