@@ -11,6 +11,7 @@ const strings = {
     "common:screenTitles.companyInfo": "companyInfo",
     "common:screenTitles.companyFilter": "companyFilter",
     "common:screenTitles.companySearch": "companySearch",
+    "common:screenTitles.info": "info",
     "mainScreen:tabLabel.featuredCompanies": "Featured companies",
     "mainScreen:tabLabel.allCompanies": "All companies ({{total}})",
 };

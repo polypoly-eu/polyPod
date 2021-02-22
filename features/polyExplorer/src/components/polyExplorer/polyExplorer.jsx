@@ -9,26 +9,9 @@ import SharedWithCompaniesScreen from "../screens/sharedWithCompanyScreen/shared
 import SharedJurisdictionsScreen from "../screens/sharedJurisdictionsScreen/sharedJurisdictionsScreen.jsx";
 import CompanyFilterScreen from "../screens/companyFilterScreen/companyFilterScreen.jsx";
 import CompanySearchScreen from "../screens/companySearchScreen/companySearchScreen.jsx";
-import DummyPopUp from "../dummyPopUp/dummyPopUp.jsx";
+import InfoScreen from "../screens/infoScreen/infoScreen.jsx";
 import CompanyInfoScreen from "../screens/companyInfoScreen/companyInfoScreen.jsx";
 import makeExampleData from "../dataViz/makeExampleData.jsx";
-
-// This is just a crutch until we have a proper callback for the info action
-function alert(text) {
-    const handlePopUpClose = () => {
-        if (window.podNav) window.podNav.setActiveActions(["info", "search"]);
-        ReactDOM.render(<PolyExplorer />, document.getElementById("feature"));
-    };
-
-    if (window.podNav) {
-        window.podNav.actions.back = () => handlePopUpClose();
-        window.podNav.setActiveActions(["back"]);
-    }
-    ReactDOM.render(
-        <DummyPopUp text={text} onPopUpClose={handlePopUpClose} />,
-        document.getElementById("feature")
-    );
-}
 
 const PolyExplorer = () => {
     const [showScreen, setShowScreen] = useState("main");
@@ -53,7 +36,7 @@ const PolyExplorer = () => {
     function updatePodNavigation() {
         const title = i18n.t(`common:screenTitles.${showScreen}`);
         const actions = {
-            info: () => alert("Here be info!"),
+            info: () => handleShowScreenChange("info"),
             search: () => handleShowScreenChange("companySearch"),
             back: () => handleShowScreenChange("main"),
         };
@@ -96,6 +79,7 @@ const PolyExplorer = () => {
         companyInfo: <CompanyInfoScreen company={selectedCompany} />,
         companyFilter: <CompanyFilterScreen companies={companyData} />,
         companySearch: <CompanySearchScreen companies={companyData} />,
+        info: <InfoScreen />,
     };
 
     updatePodNavigation();
