@@ -71,13 +71,7 @@ const PolyExplorer = () => {
         }
     }
 
-    const getScreenContent = () => {
-        return screenOf[showScreen];
-    };
-
-    //All screens that can be rendered
-    const screenOf = {
-        //better filter from identifier than name
+    const screens = {
         main: (
             <MainScreen
                 handleShowScreenChange={handleShowScreenChange}
@@ -101,9 +95,7 @@ const PolyExplorer = () => {
     };
 
     updatePodNavigation();
-
-    //polyExplorer "render"
-    return getScreenContent();
+    return screens[showScreen];
 };
 
 export default PolyExplorer;
