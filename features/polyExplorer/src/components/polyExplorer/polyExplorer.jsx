@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as ReactDOM from "react-dom";
+//import * as ReactDOM from "react-dom";
 
 import i18n from "../../i18n.js";
 import MainScreen from "../screens/mainScreen/mainScreen.jsx";
