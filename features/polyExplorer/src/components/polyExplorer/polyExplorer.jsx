@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as ReactDOM from "react-dom";
 
+import i18n from "../../i18n.js";
 import FeaturedCompanyHolder from "../featuredCompanyHolder/featuredCompanyHolder.jsx";
 import CompanyList from "../companyList/companyList.jsx";
 import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataTypeScreen.jsx";
@@ -89,7 +90,7 @@ const PolyExplorer = () => {
                             showFeatured ? "nav-button active" : "nav-button"
                         }
                     >
-                        Featured companies
+                        {i18n.t("polyExplorer:tabLabel.featuredCompanies")}
                     </button>
                     <button
                         onClick={() => handleShowFeatureChange(false)}
@@ -97,7 +98,9 @@ const PolyExplorer = () => {
                             showFeatured ? "nav-button" : "nav-button active"
                         }
                     >
-                        All companies ({companyData.length})
+                        {i18n.t("polyExplorer:tabLabel.allCompanies", {
+                            total: companyData.length,
+                        })}
                     </button>
                 </div>
                 {showFeatured ? (
