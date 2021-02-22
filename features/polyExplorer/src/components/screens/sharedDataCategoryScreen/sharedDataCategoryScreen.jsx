@@ -3,7 +3,7 @@ import DataTypeBubbleCategory from "../../dataViz/dataTypeBubbleCategory.jsx";
 import "../screen.css";
 import "./sharedDataCategoryScreen.css";
 
-const SharedDataTypeScreen = ({ company, onShowScreenChange }) => {
+const SharedDataCategoryScreen = ({ company, onShowScreenChange }) => {
     /*const availableCategories = [
         "personalData",
         "socialData",
@@ -31,4 +31,4 @@ const SharedDataTypeScreen = ({ company, onShowScreenChange }) => {
     );
 };
 
-export default SharedDataTypeScreen;
+export default SharedDataCategoryScreen;
