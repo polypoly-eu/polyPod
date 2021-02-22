@@ -9,6 +9,7 @@ import SharedPurposeScreen from "../screens/sharedPurposeScreen/sharedPurposeScr
 import SharedWithCompaniesScreen from "../screens/sharedWithCompanyScreen/sharedWithCompanyScreen.jsx";
 import SharedJurisdictionsScreen from "../screens/sharedJurisdictionsScreen/sharedJurisdictionsScreen.jsx";
 import CompanyFilterScreen from "../screens/companyFilterScreen/companyFilterScreen.jsx";
+import CompanySearchScreen from "../screens/companySearchScreen/companySearchScreen.jsx";
 import CompanyInfo from "../companyInfo/companyInfo.jsx";
 import DummyPopUp from "../dummyPopUp/dummyPopUp.jsx";
 import makeExampleData from "../dataViz/makeExampleData.jsx";
@@ -58,7 +59,7 @@ const PolyExplorer = () => {
         if (window.podNav) {
             window.podNav.actions = {
                 info: () => alert("Here be info!"),
-                search: () => alert("Here be search!"),
+                search: () => handleShowScreenChange("companySearchScreen"),
                 back: () => handleShowScreenChange("start"),
             };
             window.podNav.setActiveActions(
@@ -126,6 +127,7 @@ const PolyExplorer = () => {
         jurisdictions: <SharedJurisdictionsScreen company={selectedCompany} />,
         companyInfo: <CompanyInfo company={selectedCompany} />,
         companyFilterScreen: <CompanyFilterScreen companies={companyData} />,
+        companySearchScreen: <CompanySearchScreen companies={companyData} />,
     };
 
     updatePodNavigation();
