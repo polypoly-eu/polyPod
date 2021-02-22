@@ -11,7 +11,6 @@ import CompanySearchScreen from "../screens/companySearchScreen/companySearchScr
 import DummyPopUp from "../dummyPopUp/dummyPopUp.jsx";
 import CompanyInfoScreen from "../screens/companyInfoScreen/companyInfoScreen.jsx";
 import makeExampleData from "../dataViz/makeExampleData.jsx";
-import "./polyExplorer.css";
 
 // This is just a crutch until we have a proper callback for the info action
 function alert(text) {
