@@ -123,17 +123,25 @@ open class FeatureFragment : Fragment() {
             override fun handleOnBackPressed() = navigateBack()
         })
 
-        navApi = PodNavApi(webView) {
+        navApi = PodNavApi(webView, {
             activity?.runOnUiThread(Runnable {
                 updateAppBarActions(view)
             })
-        }
+        }, {
+            activity?.runOnUiThread(Runnable {
+                updateAppBarTitle(view, it)
+            })
+        })
     }
 
     private fun updateAppBarActions(view: View) {
         view.findViewById<ImageView>(R.id.close_button).setImageResource(if (navApi.hasAction("back")) R.drawable.ic_back_light else R.drawable.ic_close)
         view.findViewById<View>(R.id.info_button).visibility = if (navApi.hasAction("info")) View.VISIBLE else View.GONE
         view.findViewById<View>(R.id.search_button).visibility = if (navApi.hasAction("search")) View.VISIBLE else View.GONE
+    }
+
+    private fun updateAppBarTitle(view: View, title: String) {
+        view.findViewById<TextView>(R.id.feature_title).text = title
     }
 
     private class PodPathHandler(context: Context) : WebViewAssetLoader.PathHandler {
@@ -181,7 +189,7 @@ open class FeatureFragment : Fragment() {
     // The podNav API is currently experimental and not part of the formal
     // feature API yet - as soon as we know what it needs to look like,
     // that should change.
-    private class PodNavApi(private val webView: WebView, onActionsChanged: () -> Unit) {
+    private class PodNavApi(private val webView: WebView, onActionsChanged: () -> Unit, onTitleChanged: (String) -> Unit) {
         private val apiJsObject = "podNav"
         private val registeredActions = HashSet<String>()
 
@@ -193,6 +201,12 @@ open class FeatureFragment : Fragment() {
                     registeredActions.clear()
                     registeredActions.addAll(actions)
                     onActionsChanged()
+                }
+
+                @JavascriptInterface
+                @Suppress("unused")
+                fun setTitle(title: String) {
+                    onTitleChanged(title)
                 }
             }, apiJsObject)
         }

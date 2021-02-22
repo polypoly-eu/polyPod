@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as ReactDOM from "react-dom";
 
+import i18n from "../../i18n.js";
 import MainScreen from "../screens/mainScreen/mainScreen.jsx";
 import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataTypeScreen.jsx";
 import SharedPurposeScreen from "../screens/sharedPurposeScreen/sharedPurposeScreen.jsx";
@@ -50,6 +51,7 @@ const PolyExplorer = () => {
     };
 
     function updatePodNavigation() {
+        const title = i18n.t(`common:screenTitles.${showScreen}`);
         const actions = {
             info: () => alert("Here be info!"),
             search: () => handleShowScreenChange("companySearch"),
@@ -58,11 +60,13 @@ const PolyExplorer = () => {
 
         if (window.podNav) {
             window.podNav.actions = actions;
+            window.podNav.setTitle(title);
             window.podNav.setActiveActions(
                 showScreen === "main" ? ["info", "search"] : ["back"]
             );
         } else {
             // Fallback navigation for testing the feature outside the pod
+            document.title = title;
             window.addEventListener("keyup", function ({ key }) {
                 if (key === "Escape") actions.back();
                 else if (key === "s") actions.search();
