@@ -16,10 +16,15 @@ module.exports = {
     },
     overrides: [
         {
-            // For some reason, plugin:react/recommended doesn't set these options
+            files: ["*.js", "*.jsx"],
+            parserOptions: {
+                sourceType: "module"
+            }
+        },
+        {
+            // For some reason, plugin:react/recommended doesn't set this
             files: ["*.jsx"],
             parserOptions: {
-                sourceType: "module",
                 ecmaFeatures: {
                     jsx: true
                 }
