@@ -18,8 +18,7 @@ import "./polyExplorer.css";
 // This is just a crutch until we have a proper callback for the info action
 function alert(text) {
     const handlePopUpClose = () => {
-        if (window.podNav)
-            window.podNav.setActiveActions(["info", "search"]);
+        if (window.podNav) window.podNav.setActiveActions(["info", "search"]);
         ReactDOM.render(<PolyExplorer />, document.getElementById("feature"));
     };
 

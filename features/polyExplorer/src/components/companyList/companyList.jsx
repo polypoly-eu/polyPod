@@ -19,8 +19,8 @@ const CompanyList = ({ companies, onShowScreenChange }) => {
         <div className="company-list">
             <button
                 className="filter-button"
-                onClick={() => onShowScreenChange("companyFilterScreen")}>
-            </button>
+                onClick={() => onShowScreenChange("companyFilterScreen")}
+            ></button>
             {Object.entries(companyGroups).map(([label, companies], index) => (
                 <div key={index} className="company-group">
                     <div className="company-group-label">{label}</div>
