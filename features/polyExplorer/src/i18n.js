@@ -4,14 +4,14 @@
 
 const strings = {
     "common:screenTitles.main": "polyExplorer",
-    "common:screenTitles.dataTypes": "dataTypes",
-    "common:screenTitles.purposes": "purposes",
-    "common:screenTitles.companies": "companies",
-    "common:screenTitles.jurisdictions": "jurisdictions",
-    "common:screenTitles.companyInfo": "companyInfo",
-    "common:screenTitles.companyFilter": "companyFilter",
-    "common:screenTitles.companySearch": "companySearch",
-    "common:screenTitles.info": "info",
+    "common:screenTitles.dataTypes": "Data exploration",
+    "common:screenTitles.purposes": "Data exploration",
+    "common:screenTitles.companies": "Data exploration",
+    "common:screenTitles.jurisdictions": "Data exploration",
+    "common:screenTitles.companyInfo": "Company profile",
+    "common:screenTitles.companyFilter": "Filter",
+    "common:screenTitles.companySearch": "Search",
+    "common:screenTitles.info": "Data sources and process",
     "mainScreen:tabLabel.featuredCompanies": "Featured companies",
     "mainScreen:tabLabel.allCompanies": "All companies ({{total}})",
 };
