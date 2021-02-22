@@ -3,7 +3,7 @@ import DataTypeBubbleCategory from "../../dataViz/dataTypeBubbleCategory.jsx";
 import "../screen.css";
 import "./sharedDataCategoryScreen.css";
 
-const SharedDataCategoryScreen = ({ company, onShowScreenChange }) => {
+const SharedDataCategoryScreen = ({ company }) => {
     /*const availableCategories = [
         "personalData",
         "socialData",
@@ -14,9 +14,6 @@ const SharedDataCategoryScreen = ({ company, onShowScreenChange }) => {
 
     return (
         <div className="explorer-container">
-            <button onClick={() => onShowScreenChange("start", undefined)}>
-                X
-            </button>
             <h2>{company.name}</h2>
             <div>shares {company.dataTypesShared.length} datatypes</div>
             <div className="screen-content">
