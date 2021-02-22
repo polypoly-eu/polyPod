@@ -14,6 +14,10 @@ const strings = {
     "common:screenTitles.info": "Data sources and process",
     "mainScreen:tabLabel.featuredCompanies": "Featured companies",
     "mainScreen:tabLabel.allCompanies": "All companies ({{total}})",
+    "companyFilterScreen:jurisdictions": "Jurisdictions",
+    "companyFilterScreen:locations": "Locations",
+    "companyFilterScreen:revenue": "Revenue",
+    "companyFilterScreen:apply": "Apply",
 };
 
 export default {

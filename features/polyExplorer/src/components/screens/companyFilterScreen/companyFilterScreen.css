@@ -1,0 +1,48 @@
+button:focus {
+    outline: 0;
+}
+
+.screen-content {
+    padding: 20px;
+}
+
+.reset-button {
+    position: absolute;
+    top: 32px;
+    right: 8px;
+    border: none;
+    background: #0f1938;
+    color: #fff;
+}
+
+.screen-content h1 {
+    margin: 12px 0;
+    font-family: "Jost Medium";
+    font-size: 16px;
+}
+
+.filter-options button {
+    margin: 0 4px 8px 0;
+    padding: 8px 12px;
+    border: 1px solid #8d9caf;
+    border-radius: 16px;
+    background: transparent;
+    color: #8d9caf;
+    font-size: 14px;
+}
+
+.filter-options button.active {
+    background: #8d9caf;
+    color: #0f1938;
+}
+
+.apply-button {
+    display: block;
+    width: 300px;
+    height: 48px;
+    margin: 32px auto 0 auto;
+    border-radius: 4px;
+    color: #0f1938;
+    font-family: "Jost Medium";
+    font-size: 18px;
+}
