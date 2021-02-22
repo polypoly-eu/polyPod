@@ -10,8 +10,8 @@ import SharedWithCompaniesScreen from "../screens/sharedWithCompanyScreen/shared
 import SharedJurisdictionsScreen from "../screens/sharedJurisdictionsScreen/sharedJurisdictionsScreen.jsx";
 import CompanyFilterScreen from "../screens/companyFilterScreen/companyFilterScreen.jsx";
 import CompanySearchScreen from "../screens/companySearchScreen/companySearchScreen.jsx";
-import CompanyInfo from "../companyInfo/companyInfo.jsx";
 import DummyPopUp from "../dummyPopUp/dummyPopUp.jsx";
+import CompanyInfoScreen from "../screens/companyInfoScreen/companyInfoScreen.jsx";
 import makeExampleData from "../dataViz/makeExampleData.jsx";
 import "./polyExplorer.css";
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
-import "./companyInfo.css";
+import CompanyShortInfo from "../../companyShortInfo/companyShortInfo.jsx";
+import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
+import "./companyInfoScreen.css";
 
 const CompanyInfo = ({ company }) => {
     const [openTab, setOpenTab] = useState("location");
@@ -22,7 +23,7 @@ const CompanyInfo = ({ company }) => {
     const featuredTabContent = {
         location: <div className={"location-block"}></div>,
         structure: 0,
-        revenue: 0,
+        revenue: <CompanyRevenueChart company={company}></CompanyRevenueChart>,
     };
 
     const handleOpenTabChange = (tab) => {
@@ -50,6 +51,13 @@ const CompanyInfo = ({ company }) => {
                     ? featuredTabContent[openTab]
                     : tabContent[openTab]}
             </div>
+            <p className="company-info-text">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                takimata sanctus est Lorem ipsum dolor sit amet.
+            </p>
         </div>
     );
 };
