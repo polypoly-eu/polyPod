@@ -97,6 +97,11 @@ const CompanyInfo = ({ company }) => {
                     sea takimata sanctus est Lorem ipsum dolor sit amet.
                 </p>
             </div>
+            {company.featured ? (
+                <button className="explore-data-btn">Explore Data</button>
+            ) : (
+                <div></div>
+            )}
         </div>
     );
 };

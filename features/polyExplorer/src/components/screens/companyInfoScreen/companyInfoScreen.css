@@ -117,3 +117,17 @@
 .company-info-text-container .company-info-text {
     margin: 8px 32px;
 }
+
+.explore-data-btn {
+    box-sizing: border-box;
+    width: 300px;
+    height: 48px;
+    background-color: #edf2f7;
+    color: #0f1938;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 8px auto;
+    border-radius: 8px;
+    border: transparent;
+    outline: none;
+}
