@@ -3,8 +3,8 @@
 // now we're keeping it simple.
 
 const strings = {
-    "polyExplorer:tabLabel.featuredCompanies": "Featured companies",
-    "polyExplorer:tabLabel.allCompanies": "All companies ({{total}})",
+    "mainScreen:tabLabel.featuredCompanies": "Featured companies",
+    "mainScreen:tabLabel.allCompanies": "All companies ({{total}})",
 };
 
 export default {

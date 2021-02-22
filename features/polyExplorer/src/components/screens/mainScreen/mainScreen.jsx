@@ -32,7 +32,7 @@ const MainScreen = ({
                         showFeatured ? "nav-button active" : "nav-button"
                     }
                 >
-                    {i18n.t("polyExplorer:tabLabel.featuredCompanies")}
+                    {i18n.t("mainScreen:tabLabel.featuredCompanies")}
                 </button>
                 <button
                     onClick={handleShowCompanyList}
@@ -40,7 +40,7 @@ const MainScreen = ({
                         showFeatured ? "nav-button" : "nav-button active"
                     }
                 >
-                    {i18n.t("polyExplorer:tabLabel.allCompanies", {
+                    {i18n.t("mainScreen:tabLabel.allCompanies", {
                         total: companyData.length,
                     })}
                 </button>
