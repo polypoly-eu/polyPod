@@ -55,6 +55,38 @@
 .tab-content-container .Others {
     background-color: #8d9caf;
 }
+.location-tooltip {
+    display: flex;
+    padding: 0 4px;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.location-tooltip img {
+    margin-top: 4px;
+}
+
+.location-tooltip p {
+    color: #8d9caf !important;
+    font-weight: 500;
+    font-size: 10px;
+    margin: 7px 8px 0px 2px;
+}
+
+.location-tooltip .circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateY(8px);
+}
+
+.location-tooltip button {
+    border: transparent;
+    background-color: transparent;
+    outline: none;
+    padding: 0 2px;
+}
 
 .company-info-text-container {
     margin: 0 auto;
@@ -62,6 +94,6 @@
     max-width: 412px;
 }
 
-.company-info-text {
+.company-info-text-container .company-info-text {
     margin: 8px 32px;
 }

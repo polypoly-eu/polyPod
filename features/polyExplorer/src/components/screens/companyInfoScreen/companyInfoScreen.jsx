@@ -7,6 +7,10 @@ const CompanyInfo = ({ company }) => {
     const [openTab, setOpenTab] = useState("location");
     const availableTabs = ["location", "structure", "revenue"];
 
+    const handleJurisdictionInfo = () => {
+        console.log("Nothing is done here yet!");
+    };
+
     //get this from somewhere else
     const tabTranslation = {
         location: "Location",
@@ -15,7 +19,25 @@ const CompanyInfo = ({ company }) => {
     };
     const tabContent = {
         location: (
-            <div className={`location-block ${company.jurisdiction}`}></div>
+            <div>
+                <div className={`location-block ${company.jurisdiction}`}></div>
+                <div className="location-tooltip">
+                    <button onClick={() => handleJurisdictionInfo()}>
+                        <img src="./images/question-circle.svg" />
+                    </button>
+                    <p>Jurisdictions</p>
+                    <div className="circle EU-GDPR"></div>
+                    <p>EU-GDPR</p>
+                    <div className="circle Russia"></div>
+                    <p>Russia</p>
+                    <div className="circle Five-Eyes"></div>
+                    <p>Five-Eyes</p>
+                    <div className="circle China"></div>
+                    <p>China</p>
+                    <div className="circle Others"></div>
+                    <p>Others</p>
+                </div>
+            </div>
         ),
         structure: 0,
         revenue: 0,
