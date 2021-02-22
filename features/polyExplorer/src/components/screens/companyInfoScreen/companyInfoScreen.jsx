@@ -11,6 +11,25 @@ const CompanyInfo = ({ company }) => {
         console.log("Nothing is done here yet!");
     };
 
+    const locationTooltip = (
+        <div className="location-tooltip">
+            <button onClick={() => handleJurisdictionInfo()}>
+                <img src="./images/question-circle.svg" />
+            </button>
+            <p>Jurisdictions</p>
+            <div className="circle EU-GDPR"></div>
+            <p>EU-GDPR</p>
+            <div className="circle Russia"></div>
+            <p>Russia</p>
+            <div className="circle Five-Eyes"></div>
+            <p>Five-Eyes</p>
+            <div className="circle China"></div>
+            <p>China</p>
+            <div className="circle Others"></div>
+            <p>Undisclosed</p>
+        </div>
+    );
+
     //get this from somewhere else
     const tabTranslation = {
         location: "Location",
@@ -20,30 +39,26 @@ const CompanyInfo = ({ company }) => {
     const tabContent = {
         location: (
             <div>
-                <div className={`location-block ${company.jurisdiction}`}></div>
-                <div className="location-tooltip">
-                    <button onClick={() => handleJurisdictionInfo()}>
-                        <img src="./images/question-circle.svg" />
-                    </button>
-                    <p>Jurisdictions</p>
-                    <div className="circle EU-GDPR"></div>
-                    <p>EU-GDPR</p>
-                    <div className="circle Russia"></div>
-                    <p>Russia</p>
-                    <div className="circle Five-Eyes"></div>
-                    <p>Five-Eyes</p>
-                    <div className="circle China"></div>
-                    <p>China</p>
-                    <div className="circle Others"></div>
-                    <p>Others</p>
+                <div className={`location-block ${company.jurisdiction}`}>
+                    <img src="./images/location-pin.svg" alt="location-pin" />
+                    <p className={`location-text`}>
+                        {company.location.city}, {company.location.countryCode},{" "}
+                        {company.jurisdiction}
+                    </p>
                 </div>
+                {locationTooltip}
             </div>
         ),
         structure: 0,
         revenue: 0,
     };
     const featuredTabContent = {
-        location: <div className={"location-block"}></div>,
+        location: (
+            <div>
+                <div className={"location-block"}></div>
+                {locationTooltip}
+            </div>
+        ),
         structure: 0,
         revenue: <CompanyRevenueChart company={company}></CompanyRevenueChart>,
     };

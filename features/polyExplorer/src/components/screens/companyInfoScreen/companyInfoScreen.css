@@ -40,6 +40,10 @@
     background-color: #60e6de;
 }
 
+.EU-GDPR p {
+    color: #002850;
+}
+
 .tab-content-container .Russia {
     background-color: #fe8988;
 }
@@ -55,6 +59,22 @@
 .tab-content-container .Others {
     background-color: #8d9caf;
 }
+
+.location-block img {
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto;
+    transform: translateY(67px);
+}
+
+.location-block p {
+    display: block;
+    width: 142px;
+    margin: 0 auto;
+    transform: translate(84px, 48px);
+}
+
 .location-tooltip {
     display: flex;
     padding: 0 4px;
@@ -64,14 +84,14 @@
 }
 
 .location-tooltip img {
-    margin-top: 4px;
+    margin: 4px auto;
 }
 
 .location-tooltip p {
-    color: #8d9caf !important;
+    color: #8d9caf;
     font-weight: 500;
     font-size: 10px;
-    margin: 7px 8px 0px 2px;
+    margin: 7px 6px 0px 2px;
 }
 
 .location-tooltip .circle {
@@ -89,7 +109,7 @@
 }
 
 .company-info-text-container {
-    margin: 0 auto;
+    margin: 8px auto;
     width: 100%;
     max-width: 412px;
 }
