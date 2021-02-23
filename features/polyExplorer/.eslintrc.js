@@ -19,7 +19,8 @@ module.exports = {
         {
             files: ["*.js", "*.jsx"],
             parserOptions: {
-                sourceType: "module"
+                sourceType: "module",
+                ecmaVersion: 2018
             }
         },
         {
