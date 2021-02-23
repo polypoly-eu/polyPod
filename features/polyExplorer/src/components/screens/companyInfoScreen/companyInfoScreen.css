@@ -111,7 +111,7 @@
 .company-info-text-container {
     margin: 8px auto;
     width: 100%;
-    max-width: 412px;
+    max-width: 474px;
 }
 
 .company-info-text-container .company-info-text {
@@ -120,9 +120,24 @@
     overflow-y: scroll;
 }
 
+.company-info-text-container .company-info-source {
+    font-size: 12px;
+    margin: 4px 32px;
+}
+
+.company-info-text-container .gradient-box {
+    width: 100%;
+    max-width: 474px;
+    height: 20px;
+    background-image: -moz-linear-gradient(transparent, #0f1938);
+    background-image: -webkit-linear-gradient(transparent, #0f1938);
+    transform: translateY(-26px);
+}
+
 .explore-data-btn {
     box-sizing: border-box;
-    width: 300px;
+    width: 85%;
+    max-width: 414px;
     height: 48px;
     background-color: #edf2f7;
     color: #0f1938;

@@ -112,6 +112,8 @@ const CompanyInfo = ({ company }) => {
                     dolore te feugait nulla facilisi. Lorem ipsum dolor sit
                     amet,
                 </p>
+                <div className="gradient-box"></div>
+                <p className="company-info-source">Source: Wikipedia</p>
             </div>
             {company.featured ? (
                 <button className="explore-data-btn">Explore Data</button>
