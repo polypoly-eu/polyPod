@@ -116,6 +116,8 @@
 
 .company-info-text-container .company-info-text {
     margin: 8px 32px;
+    height: 182px;
+    overflow-y: scroll;
 }
 
 .explore-data-btn {
