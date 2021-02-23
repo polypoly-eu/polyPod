@@ -17,12 +17,6 @@ const allRevenueRanges = {
     1000000: "&euro; 1B &ge;",
 };
 
-function revenueRangeStart(revenue) {
-    for (let step of Object.keys(allRevenueRanges).sort((a, b) => b - a))
-        if (revenue > step) return step;
-    return 0;
-}
-
 function mostRecentYearlyProfit(company) {
     const profitPerYearEntries = company.yearlyProfits.map(
         ({ year, profits }) => [year, profits]
@@ -31,6 +25,12 @@ function mostRecentYearlyProfit(company) {
     const profitPerYear = Object.fromEntries(profitPerYearEntries);
     const mostRecentYear = Math.max(...Object.keys(profitPerYear));
     return profitPerYear[mostRecentYear].reduce((a, b) => a + b, 0);
+}
+
+function revenueRangeStart(revenue) {
+    for (let step of Object.keys(allRevenueRanges).sort((a, b) => b - a))
+        if (revenue > step) return step;
+    return 0;
 }
 
 function extractFilterOptions(companies) {
@@ -49,45 +49,39 @@ function extractFilterOptions(companies) {
 }
 
 const CompanyFilterScreen = ({ companies }) => {
-    const [filteredJurisdictions, setFilteredJurisdictions] = useState(
-        new Set()
-    );
-    const [filteredLocations, setFilteredLocations] = useState(new Set());
-    const [filteredRevenueRanges, setFilteredRevenueRanges] = useState(
-        new Set()
-    );
+    const [activeFilters, setActiveFilters] = useState({});
 
-    function resetFilters() {
-        setFilteredJurisdictions(new Set());
-        setFilteredLocations(new Set());
-        setFilteredRevenueRanges(new Set());
-    }
+    const resetFilters = () => setActiveFilters({});
 
-    function toggleFilterOption(options, setOptions, option) {
+    function toggleFilterOption(category, option) {
+        const options = (activeFilters[category] =
+            activeFilters[category] || new Set());
         if (options.has(option)) options.delete(option);
         else options.add(option);
-        setOptions(new Set(options));
+        setActiveFilters({ ...activeFilters });
     }
 
-    const toggleJurisdiction = (jurisdiction) =>
-        toggleFilterOption(
-            filteredJurisdictions,
-            setFilteredJurisdictions,
-            jurisdiction
-        );
+    function isFilterOptionActive(category, option) {
+        if (!(category in activeFilters)) return false;
+        return activeFilters[category].has(option);
+    }
 
-    const toggleLocation = (location) =>
-        toggleFilterOption(filteredLocations, setFilteredLocations, location);
+    const possibleFilters = extractFilterOptions(companies);
 
-    const toggleRevenueRange = (revenueRange) =>
-        toggleFilterOption(
-            filteredRevenueRanges,
-            setFilteredRevenueRanges,
-            revenueRange
-        );
-
-    const { jurisdictions, locations, revenueRanges } = extractFilterOptions(
-        companies
+    const FilterSection = ({ title, category, displayText }) => (
+        <div className="filter-section">
+            <h1>{title}</h1>
+            {[...possibleFilters[category]].map((option, index) => (
+                <button
+                    key={index}
+                    className={
+                        isFilterOptionActive(category, option) ? "active" : ""
+                    }
+                    onClick={() => toggleFilterOption(category, option)}
+                    dangerouslySetInnerHTML={{ __html: displayText(option) }}
+                ></button>
+            ))}
+        </div>
     );
 
     return (
@@ -97,55 +91,23 @@ const CompanyFilterScreen = ({ companies }) => {
                     RESET
                 </button>
 
-                <h1>{i18n.t("companyFilterScreen:jurisdictions")}</h1>
-                <div className="filter-options">
-                    {[...jurisdictions].map((jurisdiction, index) => (
-                        <button
-                            key={index}
-                            className={
-                                filteredJurisdictions.has(jurisdiction)
-                                    ? "active"
-                                    : ""
-                            }
-                            onClick={() => toggleJurisdiction(jurisdiction)}
-                        >
-                            {jurisdiction}
-                        </button>
-                    ))}
-                </div>
+                <FilterSection
+                    title={i18n.t("companyFilterScreen:jurisdictions")}
+                    category="jurisdictions"
+                    displayText={(option) => option}
+                />
 
-                <h1>{i18n.t("companyFilterScreen:locations")}</h1>
-                <div className="filter-options">
-                    {[...locations].map((location, index) => (
-                        <button
-                            key={index}
-                            className={
-                                filteredLocations.has(location) ? "active" : ""
-                            }
-                            onClick={() => toggleLocation(location)}
-                        >
-                            {location}
-                        </button>
-                    ))}
-                </div>
+                <FilterSection
+                    title={i18n.t("companyFilterScreen:locations")}
+                    category="locations"
+                    displayText={(option) => option}
+                />
 
-                <h1>{i18n.t("companyFilterScreen:revenue")}</h1>
-                <div className="filter-options">
-                    {[...revenueRanges].map((revenueRange, index) => (
-                        <button
-                            key={index}
-                            className={
-                                filteredRevenueRanges.has(revenueRange)
-                                    ? "active"
-                                    : ""
-                            }
-                            onClick={() => toggleRevenueRange(revenueRange)}
-                            dangerouslySetInnerHTML={{
-                                __html: allRevenueRanges[revenueRange],
-                            }}
-                        ></button>
-                    ))}
-                </div>
+                <FilterSection
+                    title={i18n.t("companyFilterScreen:revenue")}
+                    category="revenueRanges"
+                    displayText={(option) => allRevenueRanges[option]}
+                />
 
                 <button className="apply-button">
                     {i18n.t("companyFilterScreen:apply")}
