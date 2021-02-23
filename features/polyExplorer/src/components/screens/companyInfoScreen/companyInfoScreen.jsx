@@ -69,7 +69,7 @@ const CompanyInfo = ({ company }) => {
 
     return (
         <div className="explorer-container">
-            <CompanyShortInfo company={company} />
+            <CompanyShortInfo company={company} onShowScreenChange={() => {}} />
             <div className="tab-button-container">
                 {availableTabs.map((tab, index) => (
                     <button
