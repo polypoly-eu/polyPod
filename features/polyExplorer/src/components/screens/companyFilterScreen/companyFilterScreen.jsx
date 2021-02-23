@@ -93,9 +93,7 @@ const CompanyFilterScreen = ({ companies }) => {
     return (
         <div className="explorer-container">
             <div className="screen-content">
-                <button
-                    className="reset-button"
-                    onClick={resetFilters}>
+                <button className="reset-button" onClick={resetFilters}>
                     RESET
                 </button>
 
