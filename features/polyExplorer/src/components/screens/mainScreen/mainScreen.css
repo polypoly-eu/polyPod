@@ -1,17 +1,3 @@
-body {
-    margin: 0;
-}
-
-.explorer-container {
-    display: flex;
-    flex-flow: column;
-    position: absolute;
-    background-color: #0f1938;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
 .nav-button-container {
     flex: 0 1 auto;
     height: 35px;

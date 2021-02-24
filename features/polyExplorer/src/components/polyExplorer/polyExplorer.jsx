@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import i18n from "../../i18n.js";
+import "./PolyExplorer.css";
 import MainScreen from "../screens/mainScreen/mainScreen.jsx";
 import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataTypeScreen.jsx";
 import SharedPurposeScreen from "../screens/sharedPurposeScreen/sharedPurposeScreen.jsx";
