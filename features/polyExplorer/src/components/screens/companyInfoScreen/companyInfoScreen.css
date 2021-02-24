@@ -129,9 +129,12 @@
     width: 100%;
     max-width: 474px;
     height: 20px;
+    transform: translateY(-26px);
+}
+
+.company-info-text-container .gradient {
     background-image: -moz-linear-gradient(transparent, #0f1938);
     background-image: -webkit-linear-gradient(transparent, #0f1938);
-    transform: translateY(-26px);
 }
 
 .explore-data-btn {

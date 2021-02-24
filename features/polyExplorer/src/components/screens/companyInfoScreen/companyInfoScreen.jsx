@@ -5,6 +5,7 @@ import "./companyInfoScreen.css";
 
 const CompanyInfo = ({ company }) => {
     const [openTab, setOpenTab] = useState("location");
+    const [scrolledToBottom, setScrolledToBottom] = useState(false);
     const availableTabs = ["location", "structure", "revenue"];
 
     const handleJurisdictionInfo = () => {
@@ -67,6 +68,15 @@ const CompanyInfo = ({ company }) => {
         setOpenTab(tab);
     };
 
+    const handleInfoTextScrollBottom = (e) => {
+        const reachedBottom =
+            e.target.scrollHeight - e.target.scrollTop - 2 <=
+            e.target.clientHeight;
+        if (reachedBottom) {
+            setScrolledToBottom(true);
+        } else setScrolledToBottom(false);
+    };
+
     return (
         <div className="explorer-container">
             <CompanyShortInfo company={company} onShowScreenChange={() => {}} />
@@ -89,7 +99,10 @@ const CompanyInfo = ({ company }) => {
                     : tabContent[openTab]}
             </div>
             <div className="company-info-text-container">
-                <p className="company-info-text">
+                <p
+                    className="company-info-text"
+                    onScroll={(e) => handleInfoTextScrollBottom(e)}
+                >
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                     diam nonumy eirmod tempor invidunt ut labore et dolore magna
                     aliquyam erat, sed diam voluptua. At vero eos et accusam et
@@ -112,7 +125,13 @@ const CompanyInfo = ({ company }) => {
                     dolore te feugait nulla facilisi. Lorem ipsum dolor sit
                     amet,
                 </p>
-                <div className="gradient-box"></div>
+                <div
+                    className={
+                        scrolledToBottom
+                            ? "gradient-box"
+                            : "gradient-box gradient"
+                    }
+                ></div>
                 <p className="company-info-source">Source: Wikipedia</p>
             </div>
             {company.featured ? (
