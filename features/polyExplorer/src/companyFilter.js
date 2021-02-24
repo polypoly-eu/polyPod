@@ -46,11 +46,9 @@ const extractValue = (company, field) =>
 
 export function extractFilters(companies) {
     const filters = emptyFilters();
-    for (let company of companies) {
-        filters.jurisdiction.add(extractValue(company, "jurisdiction"));
-        filters.location.add(extractValue(company, "location"));
-        filters.revenueRange.add(extractValue(company, "revenueRange"));
-    }
+    for (let company of companies)
+        for (let field of fields(filters))
+            filters[field].add(extractValue(company, field));
     return filters;
 }
 
