@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import i18n from "../../i18n.js";
-import { emptyFilters } from "../../companyFilter.js";
+import { emptyFilters, removeFilter } from "../../companyFilter.js";
 import "./polyExplorer.css";
 import MainScreen from "../screens/mainScreen/mainScreen.jsx";
 import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataTypeScreen.jsx";
@@ -33,6 +33,11 @@ const PolyExplorer = () => {
         setSelectedCompany(
             companyData.filter((company) => companyName === company.name)[0]
         );
+    };
+
+    const handleRemoveFilter = (field, value) => {
+        removeFilter(activeFilters, field, value);
+        setActiveFilters({ ...activeFilters });
     };
 
     const handleFilterApply = (newActiveFilters) => {
@@ -78,6 +83,7 @@ const PolyExplorer = () => {
                     setFeaturedCompanyTabInitialSlide
                 }
                 activeFilters={activeFilters}
+                onRemoveFilter={handleRemoveFilter}
             />
         ),
         dataTypes: <SharedDataTypeScreen company={selectedCompany} />,

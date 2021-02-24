@@ -6,6 +6,29 @@
     overflow-y: auto;
 }
 
+.active-filters {
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.active-filters::-webkit-scrollbar {
+    display: none;
+}
+
+.active-filters button {
+    margin-left: 4px;
+    margin-bottom: 12px;
+    padding: 7.5px 12px;
+    border-radius: 16px;
+    background: #a9b6c6;
+    color: #0f1938;
+    font-size: 14px;
+}
+
+.active-filters button:first-child {
+    margin-left: 0;
+}
+
 .filter-button {
     position: fixed;
     margin-left: 300px;

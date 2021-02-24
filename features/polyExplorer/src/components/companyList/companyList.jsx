@@ -1,6 +1,6 @@
 import React from "react";
 
-import { applyFilters } from "../../companyFilter.js";
+import { applyFilters, displayString } from "../../companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 
 import "./companyList.css";
@@ -16,11 +16,39 @@ function groupCompanies(companies) {
     return groups;
 }
 
-const CompanyList = ({ companies, onShowScreenChange, activeFilters }) => {
+const ActiveFilters = ({ activeFilters, onRemoveFilter }) => {
+    const filterList = [];
+    for (let [field, values] of Object.entries(activeFilters))
+        for (let value of values) filterList.push([field, value]);
+    return (
+        <div className="active-filters">
+            {filterList.map(([field, value], index) => (
+                <button
+                    key={index}
+                    onClick={() => onRemoveFilter(field, value)}
+                    dangerouslySetInnerHTML={{
+                        __html: displayString(field, value),
+                    }}
+                ></button>
+            ))}
+        </div>
+    );
+};
+
+const CompanyList = ({
+    companies,
+    onShowScreenChange,
+    activeFilters,
+    onRemoveFilter,
+}) => {
     const filteredCompanies = applyFilters(activeFilters, companies);
     const companyGroups = groupCompanies(filteredCompanies);
     return (
         <div className="company-list">
+            <ActiveFilters
+                activeFilters={activeFilters}
+                onRemoveFilter={onRemoveFilter}
+            />
             <button
                 className="filter-button"
                 onClick={() => onShowScreenChange("companyFilter")}
