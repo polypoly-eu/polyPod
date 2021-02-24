@@ -78,7 +78,12 @@ const PolyExplorer = () => {
         jurisdictions: <SharedJurisdictionsScreen company={selectedCompany} />,
         companyInfo: <CompanyInfoScreen company={selectedCompany} />,
         companyFilter: <CompanyFilterScreen companies={companyData} />,
-        companySearch: <CompanySearchScreen companies={companyData} />,
+        companySearch: (
+            <CompanySearchScreen
+                companies={companyData}
+                handleShowScreenChange={handleShowScreenChange}
+            />
+        ),
         info: <InfoScreen />,
     };
 

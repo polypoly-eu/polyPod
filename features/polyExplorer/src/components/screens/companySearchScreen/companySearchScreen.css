@@ -1,0 +1,74 @@
+.search-bar-container {
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+}
+
+.search-bar-container .search-bar {
+    box-sizing: border-box;
+    display: block;
+    background-color: transparent;
+    width: 95%;
+    height: 40px;
+    font-size: 18px;
+    border: 1px solid #edf2f7;
+    border-radius: 40px;
+    margin: 0 auto;
+    padding: 0 24px;
+    outline: none;
+}
+
+.search-bar-container button {
+    position: absolute;
+    top: -8px;
+    right: 26px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 34px;
+}
+
+.company-search {
+    width: 100%;
+    max-width: 460px;
+    margin: 16px auto;
+}
+
+.suggestion-holder .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.suggestion-container p {
+    margin-top: 0;
+    margin-left: 12px;
+    font-size: 12px;
+    color: #8d9caf;
+}
+
+.suggestions button {
+    width: 80%;
+    max-width: 414px;
+    background-color: transparent;
+    border: transparent;
+    outline: none;
+}
+
+.company-search .no-answers {
+    margin: 8px 32px;
+    color: #8d9caf;
+}
+
+.company-search button {
+    width: 80%;
+    max-width: 414px;
+    background-color: transparent;
+    border: transparent;
+    outline: none;
+    font-size: 18px;
+    margin: 4px 30px;
+    text-align: left;
+    padding: 1px 3px;
+}
