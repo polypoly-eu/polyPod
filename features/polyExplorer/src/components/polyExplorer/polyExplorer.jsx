@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import i18n from "../../i18n.js";
+import { emptyFilters } from "../../companyFilter.js";
 import "./polyExplorer.css";
 import MainScreen from "../screens/mainScreen/mainScreen.jsx";
 import SharedDataTypeScreen from "../screens/sharedDataTypeScreen/sharedDataTypeScreen.jsx";
@@ -25,12 +26,18 @@ const PolyExplorer = () => {
         featuredCompanyTabInitialSlide,
         setFeaturedCompanyTabInitialSlide,
     ] = useState(0);
+    const [activeFilters, setActiveFilters] = useState(emptyFilters());
 
     const handleShowScreenChange = (showScreen, companyName) => {
         setShowScreen(showScreen);
         setSelectedCompany(
             companyData.filter((company) => companyName === company.name)[0]
         );
+    };
+
+    const handleFilterApply = (newActiveFilters) => {
+        setActiveFilters(newActiveFilters);
+        handleShowScreenChange("main");
     };
 
     function updatePodNavigation() {
@@ -70,6 +77,7 @@ const PolyExplorer = () => {
                 setFeaturedCompanyTabInitialSlide={
                     setFeaturedCompanyTabInitialSlide
                 }
+                activeFilters={activeFilters}
             />
         ),
         dataTypes: <SharedDataTypeScreen company={selectedCompany} />,
@@ -77,7 +85,13 @@ const PolyExplorer = () => {
         companies: <SharedWithCompaniesScreen company={selectedCompany} />,
         jurisdictions: <SharedJurisdictionsScreen company={selectedCompany} />,
         companyInfo: <CompanyInfoScreen company={selectedCompany} />,
-        companyFilter: <CompanyFilterScreen companies={companyData} />,
+        companyFilter: (
+            <CompanyFilterScreen
+                companies={companyData}
+                activeFilters={activeFilters}
+                onApply={handleFilterApply}
+            />
+        ),
         companySearch: (
             <CompanySearchScreen
                 companies={companyData}

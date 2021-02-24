@@ -1,115 +1,70 @@
 import React, { useState } from "react";
 
 import i18n from "../../../i18n.js";
+import * as companyFilter from "../../../companyFilter.js";
 
 import "../screen.css";
 import "./companyFilterScreen.css";
 
-const allRevenueRanges = {
-    0: "&euro; 0 - 100k",
-    100: "&euro; 100k - 500k",
-    500: "&euro; 500k - 1M",
-    1000: "&euro; 1M - 5M",
-    5000: "&euro; 5M - 20M",
-    20000: "&euro; 20M - 50M",
-    50000: "&euro; 50M - 100M",
-    100000: "&euro; 100M - 1B",
-    1000000: "&euro; 1B &ge;",
-};
+const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
+    const [newActiveFilters, setNewActiveFilters] = useState(activeFilters);
 
-function mostRecentYearlyProfit(company) {
-    const profitPerYearEntries = company.yearlyProfits.map(
-        ({ year, profits }) => [year, profits]
-    );
-    if (!profitPerYearEntries.length) return 0;
-    const profitPerYear = Object.fromEntries(profitPerYearEntries);
-    const mostRecentYear = Math.max(...Object.keys(profitPerYear));
-    return profitPerYear[mostRecentYear].reduce((a, b) => a + b, 0);
-}
+    const handleReset = () => setNewActiveFilters(companyFilter.emptyFilters());
 
-function revenueRangeStart(revenue) {
-    for (let step of Object.keys(allRevenueRanges).sort((a, b) => b - a))
-        if (revenue > step) return step;
-    return 0;
-}
+    const allFilters = companyFilter.extractFilters(companies);
 
-function extractFilterOptions(companies) {
-    const filterOptions = {
-        jurisdictions: new Set(),
-        locations: new Set(),
-        revenueRanges: new Set(),
-    };
-    for (let company of companies) {
-        filterOptions.locations.add(company.location.countryCode);
-        filterOptions.jurisdictions.add(company.jurisdiction);
-        const yearlyProfit = mostRecentYearlyProfit(company);
-        filterOptions.revenueRanges.add(revenueRangeStart(yearlyProfit));
-    }
-    return filterOptions;
-}
+    const isFilterActive = (field, value) =>
+        companyFilter.hasFilter(newActiveFilters, field, value);
 
-const CompanyFilterScreen = ({ companies }) => {
-    const [activeFilters, setActiveFilters] = useState({});
-
-    const resetFilters = () => setActiveFilters({});
-
-    function toggleFilterOption(category, option) {
-        const options = (activeFilters[category] =
-            activeFilters[category] || new Set());
-        if (options.has(option)) options.delete(option);
-        else options.add(option);
-        setActiveFilters({ ...activeFilters });
+    function handleToggle(field, value) {
+        const { hasFilter, addFilter, removeFilter } = companyFilter;
+        if (hasFilter(newActiveFilters, field, value))
+            removeFilter(newActiveFilters, field, value);
+        else addFilter(newActiveFilters, field, value);
+        setNewActiveFilters({ ...newActiveFilters });
     }
 
-    function isFilterOptionActive(category, option) {
-        if (!(category in activeFilters)) return false;
-        return activeFilters[category].has(option);
-    }
-
-    const possibleFilters = extractFilterOptions(companies);
-
-    const FilterSection = ({ title, category, displayText }) => (
+    const FilterSection = ({ title, field }) => (
         <div className="filter-section">
             <h1>{title}</h1>
-            {[...possibleFilters[category]].map((option, index) => (
+            {companyFilter.values(allFilters, field).map((value, index) => (
                 <button
                     key={index}
-                    className={
-                        isFilterOptionActive(category, option) ? "active" : ""
-                    }
-                    onClick={() => toggleFilterOption(category, option)}
-                    dangerouslySetInnerHTML={{ __html: displayText(option) }}
+                    className={isFilterActive(field, value) ? "active" : ""}
+                    onClick={() => handleToggle(field, value)}
+                    dangerouslySetInnerHTML={{
+                        __html: companyFilter.displayString(field, value),
+                    }}
                 ></button>
             ))}
         </div>
     );
 
+    const handleApply = () => onApply(newActiveFilters);
+
     return (
         <div className="explorer-container">
             <div className="screen-content">
-                <button className="reset-button" onClick={resetFilters}>
+                <button className="reset-button" onClick={handleReset}>
                     RESET
                 </button>
 
                 <FilterSection
                     title={i18n.t("companyFilterScreen:jurisdictions")}
-                    category="jurisdictions"
-                    displayText={(option) => option}
+                    field="jurisdiction"
                 />
 
                 <FilterSection
                     title={i18n.t("companyFilterScreen:locations")}
-                    category="locations"
-                    displayText={(option) => option}
+                    field="location"
                 />
 
                 <FilterSection
                     title={i18n.t("companyFilterScreen:revenue")}
-                    category="revenueRanges"
-                    displayText={(option) => allRevenueRanges[option]}
+                    field="revenueRange"
                 />
 
-                <button className="apply-button">
+                <button className="apply-button" onClick={handleApply}>
                     {i18n.t("companyFilterScreen:apply")}
                 </button>
             </div>

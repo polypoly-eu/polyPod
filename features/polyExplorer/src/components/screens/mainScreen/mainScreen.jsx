@@ -15,6 +15,7 @@ const MainScreen = ({
     setShowFeatured,
     featuredCompanyTabInitialSlide,
     setFeaturedCompanyTabInitialSlide,
+    activeFilters,
 }) => {
     const handleShowFeatured = () => setShowFeatured(true);
     const handleShowCompanyList = () => setShowFeatured(false);
@@ -56,6 +57,7 @@ const MainScreen = ({
                 <CompanyList
                     companies={companyData}
                     onShowScreenChange={handleShowScreenChange}
+                    activeFilters={activeFilters}
                 />
             )}
         </div>

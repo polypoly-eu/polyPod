@@ -1,5 +1,8 @@
 import React from "react";
+
+import { applyFilters } from "../../companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
+
 import "./companyList.css";
 
 function groupCompanies(companies) {
@@ -13,8 +16,9 @@ function groupCompanies(companies) {
     return groups;
 }
 
-const CompanyList = ({ companies, onShowScreenChange }) => {
-    const companyGroups = groupCompanies(companies);
+const CompanyList = ({ companies, onShowScreenChange, activeFilters }) => {
+    const filteredCompanies = applyFilters(activeFilters, companies);
+    const companyGroups = groupCompanies(filteredCompanies);
     return (
         <div className="company-list">
             <button
