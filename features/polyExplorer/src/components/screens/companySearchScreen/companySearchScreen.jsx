@@ -17,6 +17,7 @@ const CompanySearchScreen = ({ companies, handleShowScreenChange }) => {
     const handleClear = () => {
         inputRef.current.value = "";
         setSearchString("");
+        inputRef.current.focus();
     };
 
     return (
