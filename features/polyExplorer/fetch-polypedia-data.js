@@ -10,4 +10,4 @@ if (!shell.which("git")) {
 shell.cd(path);
 shell.exec("git clone https://github.com/polypoly-eu/polypedia-data/");
 shell.exec(`git reset --hard ${desiredRevision}`);
-shell.cp("./data/3_integrated/polyexplorer/*", "./polypedia_data");
+shell.cp("./data/3_integrated/polyexplorer/*.json", "../dist/data");
