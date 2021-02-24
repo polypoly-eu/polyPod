@@ -16,16 +16,22 @@ function mostRecentYearlyProfit(company) {
     return profitPerYear[mostRecentYear].reduce((a, b) => a + b, 0);
 }
 
-const allRevenueRanges = {
-    0: "&euro; 0 - 100k",
-    100: "&euro; 100k - 500k",
-    500: "&euro; 500k - 1M",
-    1000: "&euro; 1M - 5M",
-    5000: "&euro; 5M - 20M",
-    20000: "&euro; 20M - 50M",
-    50000: "&euro; 50M - 100M",
-    100000: "&euro; 100M - 1B",
-    1000000: "&euro; 1B &ge;",
+const displayStrings = {
+    revenueRange: {
+        0: "&euro; 0 - 100k",
+        100: "&euro; 100k - 500k",
+        500: "&euro; 500k - 1M",
+        1000: "&euro; 1M - 5M",
+        5000: "&euro; 5M - 20M",
+        20000: "&euro; 20M - 50M",
+        50000: "&euro; 50M - 100M",
+        100000: "&euro; 100M - 1B",
+        1000000: "&euro; 1B &ge;",
+    },
+    location: {
+        DE: "Germany",
+        NE: "Netherlands",
+    },
 };
 
 const extractValue = (company, field) =>
@@ -36,9 +42,8 @@ const extractValue = (company, field) =>
             // Reading profits here and calling it revenue - but that's all we
             // have right now.
             const revenue = mostRecentYearlyProfit(company);
-            const reversedRanges = Object.keys(allRevenueRanges).sort(
-                (a, b) => b - a
-            );
+            const allRanges = Object.keys(displayStrings.revenueRange);
+            const reversedRanges = allRanges.sort((a, b) => b - a);
             for (let step of reversedRanges) if (revenue > step) return step;
             return 0;
         },
@@ -53,7 +58,7 @@ export function extractFilters(companies) {
 }
 
 export const displayString = (field, value) =>
-    field === "revenueRange" ? allRevenueRanges[value] : value;
+    (displayStrings[field] || [])[value] || value;
 
 export const hasFilter = (filters, field, value) => filters[field].has(value);
 
