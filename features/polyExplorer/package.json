@@ -6,7 +6,8 @@
     "build": "rollup -c",
     "watch": "rollup --watch -c",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "fetch-polypedia-data": "node fetch-polypedia-data.js"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",

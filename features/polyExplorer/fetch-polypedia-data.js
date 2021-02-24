@@ -1,13 +1,12 @@
 const shell = require("shelljs");
-const desiredRevision = "cd5da73c430aa4c6b4c30be951cf8bbd90f576fe";
-const path = "./polypedia_data";
+const desiredRevision = "5374149f";
 
 if (!shell.which("git")) {
     shell.echo("Sorry, this script requires git");
     shell.exit(1);
 }
 
-shell.cd(path);
-shell.exec("git clone https://github.com/polypoly-eu/polypedia-data/");
-shell.exec(`git reset --hard ${desiredRevision}`);
-shell.cp("./data/3_integrated/polyexplorer/*.json", "../dist/data");
+shell.exec("git clone git@github.com:polypoly-eu/polypedia-data");
+shell.cd("polypedia-data");
+shell.exec("git reset --hard " + desiredRevision);
+shell.cp("./data/3_integrated/polyExplorer/*.json", "../dist/data");
