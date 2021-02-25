@@ -1,4 +1,4 @@
-const shell = require("shelljs");
+import shell from "shelljs";
 const desiredRevision = "5374149f";
 
 if (!shell.which("git")) {
