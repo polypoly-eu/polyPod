@@ -26,6 +26,24 @@ button:focus {
     font-size: 16px;
 }
 
+.filter-section h1::before {
+    position: relative;
+    top: 6px;
+    margin-right: 12px;
+}
+
+.filter-section.jurisdiction h1::before {
+    content: url("../images/filter-icons/jurisdictions.svg");
+}
+
+.filter-section.location h1::before {
+    content: url("../images/filter-icons/locations.svg");
+}
+
+.filter-section.revenueRange h1::before {
+    content: url("../images/filter-icons/revenue.svg");
+}
+
 .filter-section button {
     margin: 0 4px 8px 0;
     padding: 8px 12px;

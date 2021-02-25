@@ -25,7 +25,7 @@ const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
     }
 
     const FilterSection = ({ title, field }) => (
-        <div className="filter-section">
+        <div className={`filter-section ${field}`}>
             <h1>{title}</h1>
             {companyFilter.values(allFilters, field).map((value, index) => (
                 <button
