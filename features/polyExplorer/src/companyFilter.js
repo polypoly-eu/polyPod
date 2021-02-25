@@ -9,9 +9,9 @@ export const emptyFilters = () => ({
 });
 
 function mostRecentYearlyProfit(company) {
-    const profitPerYearEntries = (company.yearlyProfits || []).map(
-        ({ year, profits }) => [year, profits]
-    );
+    const profitPerYearEntries = (
+        company.yearlyProfits || []
+    ).map(({ year, profits }) => [year, profits]);
     if (!profitPerYearEntries.length) return -1;
     const profitPerYear = Object.fromEntries(profitPerYearEntries);
     const mostRecentYear = Math.max(...Object.keys(profitPerYear));
