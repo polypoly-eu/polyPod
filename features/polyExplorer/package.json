@@ -1,10 +1,11 @@
 {
   "name": "poly-explorer-feature",
   "scripts": {
-    "eslint": "eslint src --ext .js --ext .jsx",
+    "eslint": "eslint src test --ext .js --ext .jsx",
     "lint": "npm run eslint",
     "build": "rollup -c",
     "watch": "rollup --watch -c",
+    "test": "mocha",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "fetch-polypedia-data": "node fetch-polypedia-data.js"
@@ -25,6 +26,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.22.0",
+    "mocha": "^8.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rollup": "^2.26.11",
@@ -35,5 +37,6 @@
     "d3": "^6.5.0",
     "rollup-plugin-css-only": "^3.1.0",
     "swiper": "^6.4.11"
-  }
+  },
+  "type": "module"
 }
