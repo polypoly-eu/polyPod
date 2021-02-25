@@ -171,7 +171,7 @@ describe("companyFilter", function () {
         assert.ok(!companyFilter.empty(this.filters));
     });
 
-    it("Extracting filters does not modify company data", function() {
+    it("Extracting filters does not modify company data", function () {
         const companyDataBackup = JSON.stringify(companyData);
         companyFilter.extractFilters(companyData);
         assert.equal(JSON.stringify(companyData), companyDataBackup);
