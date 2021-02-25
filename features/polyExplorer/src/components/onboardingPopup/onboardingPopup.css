@@ -7,8 +7,7 @@
 }
 
 .onboarding-popup-container .onboarding-popup {
-    height: 80%;
-    max-height: 960px;
+    height: 540px;
     width: 80%;
     max-width: 540px;
     background: #e2e8f0;
@@ -58,5 +57,5 @@
     outline: none;
     border: none;
     padding: 8px;
-    margin-right: 22px;
+    margin: 0 22px 0 20px;
 }
