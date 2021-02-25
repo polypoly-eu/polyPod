@@ -17,15 +17,18 @@ import OnboardingPopup from "../onboardingPopup/onboardingPopup.jsx";
 import { default as polyPediaCompanies } from "../../data/companies.json";
 //To go soon
 import makeExampleData from "../dataViz/makeExampleData.jsx";
+const fakeFeaturedCompanies = makeExampleData().filter((e) => e.featured);
+for (let company of fakeFeaturedCompanies) company.name += " (Fake)";
 
 const PolyExplorer = () => {
     const [showScreen, setShowScreen] = useState("main");
     const [showFeatured, setShowFeatured] = useState(true);
-    const [companyData] = useState(polyPediaCompanies);
+    const [companyData] = useState([
+        ...polyPediaCompanies,
+        ...fakeFeaturedCompanies,
+    ]);
     const [selectedCompany, setSelectedCompany] = useState(undefined);
-    const [featuredCompanyData] = useState(
-        makeExampleData().filter((e) => e.featured)
-    );
+    const [featuredCompanyData] = useState(fakeFeaturedCompanies);
     const [
         featuredCompanyTabInitialSlide,
         setFeaturedCompanyTabInitialSlide,
