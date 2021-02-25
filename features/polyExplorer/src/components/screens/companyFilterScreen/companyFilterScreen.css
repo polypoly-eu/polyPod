@@ -12,9 +12,11 @@ button:focus {
 
 .reset-button {
     position: absolute;
-    top: 32px;
+    top: 20px;
     right: 8px;
-    background: #0f1938;
+    width: 60px;
+    height: 48px;
+    background: url("../images/reset-filter-background.svg");
     color: #fff;
 }
 
