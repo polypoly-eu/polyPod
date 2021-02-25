@@ -1,6 +1,10 @@
+.short-info {
+    flex: 0 0 auto;
+}
+
 .tab-button-container {
     box-sizing: border-box;
-    flex: 0 1 auto;
+    flex: 0 0 auto;
     height: 35px;
     margin: 0 auto;
     width: 100%;
@@ -108,38 +112,38 @@
     padding: 0 2px;
 }
 
-.company-info-text-container {
-    margin: 8px auto;
+.company-info-text {
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    overflow-y: auto;
     width: 100%;
     max-width: 474px;
+    padding: 4px 32px;
 }
 
-.company-info-text-container .company-info-text {
-    margin: 8px 32px;
-    height: 182px;
-    overflow-y: scroll;
-}
-
-.company-info-text-container .company-info-source {
+.company-info-source {
     color: #8d9caf;
+    flex: 0 0 auto;
     font-size: 12px;
     margin: 4px 32px;
     transform: translateY(-24px);
 }
 
-.company-info-text-container .gradient-box {
+.gradient-box {
+    flex: 0 0 auto;
     width: 100%;
     max-width: 474px;
     height: 20px;
-    transform: translateY(-26px);
+    transform: translateY(-34px);
 }
 
-.company-info-text-container .gradient {
+.gradient {
     background-image: -moz-linear-gradient(transparent, #0f1938);
     background-image: -webkit-linear-gradient(transparent, #0f1938);
 }
 
 .explore-data-btn {
+    flex: 0 0 auto;
     box-sizing: border-box;
     width: 85%;
     max-width: 414px;

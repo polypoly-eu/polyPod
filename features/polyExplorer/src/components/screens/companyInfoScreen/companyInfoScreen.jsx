@@ -79,7 +79,13 @@ const CompanyInfo = ({ company }) => {
 
     return (
         <div className="explorer-container">
-            <CompanyShortInfo company={company} onShowScreenChange={() => {}} />
+            <div className="short-info">
+                <CompanyShortInfo
+                    company={company}
+                    onShowScreenChange={() => {}}
+                />
+            </div>
+
             <div className="tab-button-container">
                 {availableTabs.map((tab, index) => (
                     <button
@@ -98,42 +104,38 @@ const CompanyInfo = ({ company }) => {
                     ? featuredTabContent[openTab]
                     : tabContent[openTab]}
             </div>
-            <div className="company-info-text-container">
-                <p
-                    className="company-info-text"
-                    onScroll={(e) => handleInfoTextScrollBottom(e)}
-                >
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Duis
-                    autem vel eum iriure dolor in hendrerit in vulputate velit
-                    esse molestie consequat, vel illum dolore eu feugiat nulla
-                    facilisis at vero eros et accumsan et iusto odio dignissim
-                    qui blandit praesent luptatum zzril delenit augue duis
-                    dolore te feugait nulla facilisi. Lorem ipsum dolor sit
-                    amet,
-                </p>
-                <div
-                    className={
-                        scrolledToBottom
-                            ? "gradient-box"
-                            : "gradient-box gradient"
-                    }
-                ></div>
-                <p className="company-info-source">Source: Wikipedia</p>
-            </div>
+            <p
+                className="company-info-text"
+                onScroll={(e) => handleInfoTextScrollBottom(e)}
+            >
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+                est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+                consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                invidunt ut labore et dolore magna aliquyam erat, sed diam
+                voluptua. At vero eos et accusam et justo duo dolores et ea
+                rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+                Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in
+                hendrerit in vulputate velit esse molestie consequat, vel illum
+                dolore eu feugiat nulla facilisis at vero eros et accumsan et
+                iusto odio dignissim qui blandit praesent luptatum zzril delenit
+                augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+                sit amet,
+            </p>
+            <div
+                className={
+                    scrolledToBottom ? "gradient-box" : "gradient-box gradient"
+                }
+            ></div>
+            <p className="company-info-source">Source: Wikipedia</p>
+
             {company.featured ? (
                 <button className="explore-data-btn">Explore Data</button>
             ) : (
