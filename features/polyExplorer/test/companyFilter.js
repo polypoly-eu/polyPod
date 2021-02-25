@@ -128,4 +128,17 @@ describe("companyFilter", function () {
         const filtered = companyFilter.applyFilters(this.filters, companyData);
         assert.deepEqual(filtered, [companyByName("genericNlCompany")]);
     });
+
+    it("Unknown revenue is extracted correctly", function () {
+        const emptyCompanyData = [{location: { countryCode: "" }}];
+        const extractedFilters = companyFilter.extractFilters(emptyCompanyData);
+        assertHas(extractedFilters, "revenueRange", "-1");
+    });
+
+    it("Unknown revenue is matched correctly", function () {
+        const emptyCompanyData = [{location: { countryCode: "" }}];
+        this.add("revenueRange", "-1");
+        const filtered = companyFilter.applyFilters(this.filters, emptyCompanyData);
+        assert.deepEqual(filtered, emptyCompanyData);
+    });
 });

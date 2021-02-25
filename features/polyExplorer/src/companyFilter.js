@@ -1,5 +1,7 @@
 "use strict";
 
+import i18n from "./i18n.js";
+
 export const emptyFilters = () => ({
     jurisdiction: new Set(),
     location: new Set(),
@@ -7,10 +9,10 @@ export const emptyFilters = () => ({
 });
 
 function mostRecentYearlyProfit(company) {
-    const profitPerYearEntries = company.yearlyProfits.map(
+    const profitPerYearEntries = (company.yearlyProfits || []).map(
         ({ year, profits }) => [year, profits]
     );
-    if (!profitPerYearEntries.length) return 0;
+    if (!profitPerYearEntries.length) return -1;
     const profitPerYear = Object.fromEntries(profitPerYearEntries);
     const mostRecentYear = Math.max(...Object.keys(profitPerYear));
     return profitPerYear[mostRecentYear].reduce((a, b) => a + b, 0);
@@ -18,6 +20,7 @@ function mostRecentYearlyProfit(company) {
 
 const displayStrings = {
     revenueRange: {
+        "-1": i18n.t("common:companyFilter.missing"),
         0: "&euro; 0 - 100k",
         100: "&euro; 100k - 500k",
         500: "&euro; 500k - 1M",
@@ -42,6 +45,7 @@ const extractValue = (company, field) =>
             // Reading profits here and calling it revenue - but that's all we
             // have right now.
             const revenue = mostRecentYearlyProfit(company);
+            if (revenue === -1) return "-1";
             const allRanges = Object.keys(displayStrings.revenueRange);
             const reversedRanges = allRanges.sort((a, b) => b - a);
             for (let step of reversedRanges) if (revenue > step) return step;
