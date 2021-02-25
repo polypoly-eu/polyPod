@@ -25,6 +25,7 @@ const ActiveFilters = ({ activeFilters, onRemoveFilter }) => {
             {filterList.map(([field, value], index) => (
                 <button
                     key={index}
+                    className={field}
                     onClick={() => onRemoveFilter(field, value)}
                     dangerouslySetInnerHTML={{
                         __html: displayString(field, value),

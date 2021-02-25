@@ -18,15 +18,35 @@
 .active-filters button {
     margin-left: 4px;
     margin-bottom: 12px;
-    padding: 7.5px 12px;
+    height: 32px;
+    padding: 0 12px 0 12px;
     border-radius: 16px;
+    line-height: 32px;
     background: #a9b6c6;
     color: #0f1938;
     font-size: 14px;
 }
 
 .active-filters button:first-child {
-    margin-left: 0;
+    margin-left: 12px;
+}
+
+.active-filters button::before {
+    position: relative;
+    top: 4px;
+    margin-right: 4px;
+}
+
+.active-filters button.jurisdiction::before {
+    content: url("../images/filter-icons/jurisdictions-blue.svg");
+}
+
+.active-filters button.location::before {
+    content: url("../images/filter-icons/locations-blue.svg");
+}
+
+.active-filters button.revenueRange::before {
+    content: url("../images/filter-icons/revenue-blue.svg");
 }
 
 .filter-button {
