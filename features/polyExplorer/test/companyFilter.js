@@ -14,7 +14,7 @@ describe("companyFilter", function () {
                     year: 2019,
                     date: "31.12.2019",
                     amount: 501000,
-                }
+                },
             ],
         },
         {
