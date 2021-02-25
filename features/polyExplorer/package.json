@@ -1,7 +1,7 @@
 {
   "name": "poly-explorer-feature",
   "scripts": {
-    "eslint": "eslint src test --ext .js --ext .jsx",
+    "eslint": "eslint src test scripts --ext .js --ext .jsx",
     "lint": "npm run eslint",
     "build": "rollup -c",
     "watch": "rollup --watch -c",

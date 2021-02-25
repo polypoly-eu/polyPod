@@ -1,7 +1,9 @@
 import { createRequire } from "module";
 import fs from "fs";
 
-const polyPediaData = createRequire(import.meta.url)("../polypedia-data/data/3_integrated/polyExplorer/companies.json");
+const polyPediaData = createRequire(import.meta.url)(
+    "../polypedia-data/data/3_integrated/polyExplorer/companies.json"
+);
 
 function parsePolypediaData() {
     const companyData = [];
