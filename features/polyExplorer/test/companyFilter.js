@@ -9,27 +9,18 @@ describe("companyFilter", function () {
             name: "genericDeCompany",
             jurisdiction: "EU-GDPR",
             location: { countryCode: "DE" },
-            yearlyProfits: [
-                {
-                    year: "2019",
-                    profits: [501],
-                },
-            ],
+            annualRevenue: {
+                "31.12.2019": 501000,
+            },
         },
         {
             name: "genericNlCompany",
             jurisdiction: "EU-GDPR",
             location: { countryCode: "NL" },
-            yearlyProfits: [
-                {
-                    year: "2018",
-                    profits: [1001],
-                },
-                {
-                    year: "2019",
-                    profits: [101],
-                },
-            ],
+            annualRevenue: {
+                "31.12.2018": 1001000,
+                "31.3.2019": 101000,
+            },
         },
     ];
 

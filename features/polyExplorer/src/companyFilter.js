@@ -8,14 +8,17 @@ export const emptyFilters = () => ({
     revenueRange: new Set(),
 });
 
-function mostRecentYearlyProfit(company) {
-    const profitPerYearEntries = (
-        company.yearlyProfits || []
-    ).map(({ year, profits }) => [year, profits]);
-    if (!profitPerYearEntries.length) return -1;
-    const profitPerYear = Object.fromEntries(profitPerYearEntries);
-    const mostRecentYear = Math.max(...Object.keys(profitPerYear));
-    return profitPerYear[mostRecentYear].reduce((a, b) => a + b, 0);
+function mostRecentAnnualRevenue(company) {
+    const revenuePerYear = company.annualRevenue || {};
+    if (!Object.keys(revenuePerYear).length) return -1;
+    const sortedDates = Object.keys(revenuePerYear).sort((a, b) => {
+        const [yearA, yearB] = [a, b].map((date) =>
+            date.slice(date.lastIndexOf(".") + 1)
+        );
+        return yearA.localeCompare(yearB);
+    });
+    const mostRecentYear = [...sortedDates].pop();
+    return revenuePerYear[mostRecentYear] / 1000;
 }
 
 const displayStrings = {
@@ -44,9 +47,7 @@ const extractValue = (company, field) =>
         jurisdiction: (company) => company.jurisdiction,
         location: (company) => company.location.countryCode,
         revenueRange: (company) => {
-            // Reading profits here and calling it revenue - but that's all we
-            // have right now.
-            const revenue = mostRecentYearlyProfit(company);
+            const revenue = mostRecentAnnualRevenue(company);
             if (revenue === -1) return "-1";
             const allRanges = Object.keys(displayStrings.revenueRange);
             const reversedRanges = allRanges.sort((a, b) => b - a);
