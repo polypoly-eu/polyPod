@@ -144,4 +144,10 @@ describe("companyFilter", function () {
         );
         assert.deepEqual(filtered, emptyCompanyData);
     });
+
+    it("Empty filters are classified correctly", function () {
+        assert.ok(companyFilter.empty(this.filters));
+        this.add("jurisdiction", "GDPR-EU");
+        assert.ok(!companyFilter.empty(this.filters));
+    });
 });

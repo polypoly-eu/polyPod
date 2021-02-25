@@ -1,6 +1,6 @@
 import React from "react";
 
-import { applyFilters, displayString } from "../../companyFilter.js";
+import { applyFilters, displayString, empty } from "../../companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 
 import "./companyList.css";
@@ -50,24 +50,33 @@ const CompanyList = ({
                 activeFilters={activeFilters}
                 onRemoveFilter={onRemoveFilter}
             />
-            <button
-                className="filter-button"
-                onClick={() => onShowScreenChange("companyFilter")}
-            ></button>
-            {Object.entries(companyGroups).map(([label, companies], index) => (
-                <div key={index} className="company-group">
-                    <div className="company-group-label">{label}</div>
-                    <div className="company-group-companies">
-                        {companies.map((company, index) => (
-                            <CompanyShortInfo
-                                key={index}
-                                company={company}
-                                onShowScreenChange={onShowScreenChange}
-                            />
-                        ))}
-                    </div>
-                </div>
-            ))}
+            <div
+                className={
+                    "companies" +
+                    (empty(activeFilters) ? "" : " filters-visible")
+                }
+            >
+                <button
+                    className="filter-button"
+                    onClick={() => onShowScreenChange("companyFilter")}
+                ></button>
+                {Object.entries(companyGroups).map(
+                    ([label, companies], index) => (
+                        <div key={index} className="company-group">
+                            <div className="company-group-label">{label}</div>
+                            <div className="company-group-companies">
+                                {companies.map((company, index) => (
+                                    <CompanyShortInfo
+                                        key={index}
+                                        company={company}
+                                        onShowScreenChange={onShowScreenChange}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )
+                )}
+            </div>
         </div>
     );
 };

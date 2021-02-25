@@ -1,13 +1,14 @@
 .company-list {
-    position: relative;
     flex: 1 1 auto;
-    width: 360px;
-    margin: 2px auto 0 auto;
     overflow-y: auto;
 }
 
 .active-filters {
+    position: fixed;
+    z-index: 2;
+    width: 100%;
     overflow-x: scroll;
+    background: #0f1938;
     white-space: nowrap;
 }
 
@@ -32,6 +33,10 @@
     margin-left: 12px;
 }
 
+.active-filters button:last-child {
+    margin-right: 12px;
+}
+
 .active-filters button::before {
     position: relative;
     top: 4px;
@@ -48,6 +53,15 @@
 
 .active-filters button.revenueRange::before {
     content: url("../images/filter-icons/revenue-blue.svg");
+}
+
+.companies {
+    width: 360px;
+    margin: 24px auto 0 auto;
+}
+
+.companies.filters-visible {
+    margin-top: 68px;
 }
 
 .filter-button {

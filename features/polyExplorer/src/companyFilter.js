@@ -86,3 +86,6 @@ const matches = (filters, company) =>
 
 export const applyFilters = (filters, companies) =>
     companies.filter((company) => matches(filters, company));
+
+export const empty = (filters) =>
+    !Object.values(filters).some((values) => values.size);
