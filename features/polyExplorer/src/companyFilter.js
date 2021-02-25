@@ -9,16 +9,12 @@ export const emptyFilters = () => ({
 });
 
 function mostRecentAnnualRevenue(company) {
-    const revenuePerYear = company.annualRevenue || {};
-    if (!Object.keys(revenuePerYear).length) return -1;
-    const sortedDates = Object.keys(revenuePerYear).sort((a, b) => {
-        const [yearA, yearB] = [a, b].map((date) =>
-            date.slice(date.lastIndexOf(".") + 1)
-        );
-        return yearA.localeCompare(yearB);
-    });
-    const mostRecentYear = [...sortedDates].pop();
-    return revenuePerYear[mostRecentYear] / 1000;
+    const annualRevenues = company.annualRevenues || [];
+    if (!annualRevenues.length) return -1;
+    const lastAnnualRevenue = annualRevenues
+        .sort((a, b) => a.year - b.year)
+        .pop();
+    return lastAnnualRevenue.amount / 1000;
 }
 
 const displayStrings = {

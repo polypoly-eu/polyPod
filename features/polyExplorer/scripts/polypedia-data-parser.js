@@ -5,13 +5,19 @@ const polyPediaData = createRequire(import.meta.url)(
     "../polypedia-data/data/3_integrated/polyExplorer/companies.json"
 );
 
+const extractYear = (date) =>
+    parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
+
 function extractAnnualRevenues(entry) {
     if (!entry.financial_data) return null;
     const all = entry.financial_data.data.map(({ data }) => data).flat();
     const filtered = all.filter(({ currency }) => currency === "EUR");
-    return Object.fromEntries(
-        filtered.map(({ date, amount }) => [date, amount])
-    );
+    return filtered.map(({ date, amount, currency }) => ({
+        date,
+        amount,
+        currency,
+        year: extractYear(date),
+    }));
 }
 
 function parsePolypediaData() {
@@ -36,7 +42,7 @@ function parsePolypediaData() {
                     entry.legal_entities.basic_info.registered_address.value
                         .country,
             },
-            annualRevenue: extractAnnualRevenues(entry),
+            annualRevenues: extractAnnualRevenues(entry),
         });
     });
     fs.writeFile(

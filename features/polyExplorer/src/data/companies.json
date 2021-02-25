@@ -7,15 +7,50 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2011": 58000,
-            "31.12.2012": 470000,
-            "31.12.2013": 2600000,
-            "31.12.2015": 2100000,
-            "31.12.2016": 7600000,
-            "31.12.2017": 24000000,
-            "31.12.2018": 48000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2011",
+                "amount": 58000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 470000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 2600000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 2100000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 7600000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 24000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 48000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Simplesurance GmbH",
@@ -25,11 +60,26 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2014": 2400000,
-            "31.12.2016": 5400000,
-            "31.12.2018": 9632879.68
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2014",
+                "amount": 2400000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 5400000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 9632879.68,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "GetYourGuide Deutschland GmbH",
@@ -39,14 +89,44 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2010": 81000,
-            "31.12.2011": 260000,
-            "31.12.2013": 3287618.73,
-            "31.12.2015": 17443381.77,
-            "31.12.2016": 25204316.63,
-            "31.12.2017": 50866250.43
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2010",
+                "amount": 81000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 260000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 3287618.73,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 17443381.77,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 25204316.63,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 50866250.43,
+                "currency": "EUR",
+                "year": 2017
+            }
+        ]
     },
     {
         "name": "Rocket Internet SE",
@@ -56,18 +136,68 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2014": 28787222,
-            "31.12.2017": 1500000000,
-            "31.12.2008": 14000000,
-            "31.12.2009": 7100000,
-            "31.12.2010": 25000000,
-            "31.12.2011": 6745554.92,
-            "31.12.2013": 26031350,
-            "31.12.2016": 28106675,
-            "31.12.2018": 14769098,
-            "31.12.2019": 17712146
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2014",
+                "amount": 28787222,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 1500000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2008",
+                "amount": 14000000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 7100000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 25000000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 6745554.92,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 26031350,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 28106675,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 14769098,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 17712146,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Samsung Electronics GmbH",
@@ -77,20 +207,80 @@
             "city": "Schwalbach",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2008": 1753843975,
-            "31.12.2009": 2131182921,
-            "31.12.2010": 2518947814,
-            "31.12.2011": 3057119230,
-            "31.12.2012": 4933270531,
-            "31.12.2013": 5275526038,
-            "31.12.2014": 4590756425,
-            "31.12.2015": 4896315683,
-            "31.12.2016": 4901884771,
-            "31.12.2017": 5191576020,
-            "31.12.2018": 4751967707,
-            "31.12.2019": 4319212586
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 1753843975,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 2131182921,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 2518947814,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 3057119230,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 4933270531,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 5275526038,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 4590756425,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 4896315683,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 4901884771,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 5191576020,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 4751967707,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 4319212586,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Smartly.io Solutions GmbH",
@@ -100,7 +290,7 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "Monedo Holding GmbH",
@@ -110,12 +300,32 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2012": 1400000,
-            "31.12.2013": 11000000,
-            "31.12.2015": 9267213.59,
-            "31.12.2018": 12681548.74
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2012",
+                "amount": 1400000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 11000000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 9267213.59,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 12681548.74,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "SAP Deutschland SE & Co. KG",
@@ -125,7 +335,7 @@
             "city": "Walldorf",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "Zalando SE",
@@ -135,16 +345,56 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2009": 43000000,
-            "31.12.2011": 509857640.23,
-            "31.12.2013": 1158622000,
-            "31.12.2014": 1761340000,
-            "31.12.2015": 2950800000,
-            "31.12.2016": 3650700000,
-            "31.12.2018": 5338500000,
-            "31.12.2019": 6391000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2009",
+                "amount": 43000000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 509857640.23,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 1158622000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 1761340000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 2950800000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 3650700000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 5338500000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 6391000000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Nordstern Studio GmbH",
@@ -154,10 +404,20 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2009": 130000,
-            "31.12.2011": 140000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2009",
+                "amount": 130000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 140000,
+                "currency": "EUR",
+                "year": 2011
+            }
+        ]
     },
     {
         "name": "Lesara AG",
@@ -167,11 +427,26 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2013": 1300000,
-            "31.12.2015": 6700000,
-            "31.12.2016": 45000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2013",
+                "amount": 1300000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 6700000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 45000000,
+                "currency": "EUR",
+                "year": 2016
+            }
+        ]
     },
     {
         "name": "auxmoney GmbH",
@@ -181,18 +456,68 @@
             "city": "Düsseldorf",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2007": 340000,
-            "31.12.2008": 470000,
-            "31.12.2009": 1700000,
-            "31.12.2010": 1400000,
-            "31.12.2011": 2000000,
-            "31.12.2013": 11000000,
-            "31.12.2014": 3600000,
-            "31.12.2015": 9300000,
-            "31.12.2016": 10000000,
-            "31.12.2017": 20000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2007",
+                "amount": 340000,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2008",
+                "amount": 470000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 1700000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 1400000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 2000000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 11000000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 3600000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 9300000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 10000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 20000000,
+                "currency": "EUR",
+                "year": 2017
+            }
+        ]
     },
     {
         "name": "FC Bayern München AG",
@@ -202,19 +527,74 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "30.06.2009": 258331291.52,
-            "30.06.2010": 302343519.05,
-            "30.06.2011": 279575180.88,
-            "30.06.2012": 314497179.67,
-            "30.06.2013": 384963841.55,
-            "30.06.2014": 464921356.35,
-            "30.06.2015": 468294050.64,
-            "30.06.2016": 568340223.17,
-            "30.06.2017": 581749879.28,
-            "30.06.2018": 616083714.6,
-            "30.06.2019": 340000000
-        }
+        "annualRevenues": [
+            {
+                "date": "30.06.2009",
+                "amount": 258331291.52,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "30.06.2010",
+                "amount": 302343519.05,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "30.06.2011",
+                "amount": 279575180.88,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "30.06.2012",
+                "amount": 314497179.67,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "30.06.2013",
+                "amount": 384963841.55,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "30.06.2014",
+                "amount": 464921356.35,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "30.06.2015",
+                "amount": 468294050.64,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "30.06.2016",
+                "amount": 568340223.17,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "30.06.2017",
+                "amount": 581749879.28,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "30.06.2018",
+                "amount": 616083714.6,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "30.06.2019",
+                "amount": 340000000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "eGym GmbH",
@@ -224,16 +604,56 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2010": 80000,
-            "31.12.2012": 1600000,
-            "31.12.2013": 6400000,
-            "31.12.2015": 18000000,
-            "31.12.2016": 61000000,
-            "31.12.2017": 61000000,
-            "31.12.2018": 39607288.05,
-            "31.12.2019": 50656041.21
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2010",
+                "amount": 80000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 1600000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 6400000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 18000000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 61000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 61000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 39607288.05,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 50656041.21,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Contentful GmbH",
@@ -243,16 +663,56 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2012": 15000,
-            "31.12.2013": 780000,
-            "31.12.2014": 2900000,
-            "31.12.2015": 2500000,
-            "31.12.2016": 16000000,
-            "31.12.2017": 7235076.81,
-            "31.12.2018": 9206280.17,
-            "31.12.2019": 18254172.48
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2012",
+                "amount": 15000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 780000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 2900000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 2500000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 16000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 7235076.81,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 9206280.17,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 18254172.48,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "BioWink GmbH",
@@ -262,13 +722,38 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2014": 2400000,
-            "31.12.2015": 8200000,
-            "31.12.2016": 21000000,
-            "31.12.2017": 19000000,
-            "31.12.2018": 11000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2014",
+                "amount": 2400000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 8200000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 21000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 19000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 11000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Dreamlines Tours GmbH",
@@ -278,7 +763,7 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "Delivery Hero SE",
@@ -288,10 +773,20 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2018": 55640501.92,
-            "31.12.2019": 91531469.33
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2018",
+                "amount": 55640501.92,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 91531469.33,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "SCHUFA Holding AG",
@@ -301,15 +796,50 @@
             "city": "Wiesbaden",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2008": 93933544.07,
-            "31.12.2011": 112726075.64,
-            "31.12.2013": 123432630.49,
-            "31.12.2015": 145823407.53,
-            "31.12.2016": 163752836.37,
-            "31.12.2018": 190277369.04,
-            "31.12.2019": 212245538.2
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 93933544.07,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 112726075.64,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 123432630.49,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 145823407.53,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 163752836.37,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 190277369.04,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 212245538.2,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Spotify GmbH",
@@ -319,17 +849,62 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2009": 420000,
-            "31.12.2010": 730000,
-            "31.12.2011": 1800000,
-            "31.12.2012": 22000000,
-            "31.12.2014": 37730954.01,
-            "31.12.2015": 69295647.64,
-            "31.12.2016": 72902733.4,
-            "31.12.2017": 18800478.45,
-            "31.12.2018": 19584740.33
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2009",
+                "amount": 420000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 730000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 1800000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 22000000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 37730954.01,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 69295647.64,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 72902733.4,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 18800478.45,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 19584740.33,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Adform Germany GmbH",
@@ -339,14 +914,44 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2012": 57000,
-            "31.12.2013": 360000,
-            "31.12.2015": 670000,
-            "31.12.2016": 1600000,
-            "31.12.2017": 2200000,
-            "31.12.2019": 1700000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2012",
+                "amount": 57000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 360000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 670000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 1600000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 2200000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 1700000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Chrono24 GmbH",
@@ -356,15 +961,50 @@
             "city": "Karlsruhe",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2010": 4900000,
-            "31.12.2012": 3100000,
-            "31.12.2013": 4200000,
-            "31.12.2015": 13000000,
-            "31.12.2016": 10000000,
-            "31.12.2017": 15000000,
-            "31.12.2018": 17000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2010",
+                "amount": 4900000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 3100000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 4200000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 13000000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 10000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 15000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 17000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "MessageBird GmbH",
@@ -374,7 +1014,7 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "N26 Bank GmbH",
@@ -384,10 +1024,20 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2016": 87000000,
-            "31.12.2018": 480000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2016",
+                "amount": 87000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 480000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Goeuro Travel GmbH",
@@ -397,13 +1047,38 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2011": 43000,
-            "31.12.2013": 160000,
-            "31.12.2014": 1900000,
-            "31.12.2016": 31237906,
-            "31.12.2018": 96844268
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2011",
+                "amount": 43000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 160000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 1900000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 31237906,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 96844268,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "DB Vertrieb GmbH",
@@ -413,7 +1088,7 @@
             "city": "Frankfurt a. Main",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "AdColony GmbH",
@@ -423,16 +1098,56 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2009": 150000,
-            "31.12.2010": 670000,
-            "31.12.2012": 1300000,
-            "31.12.2013": 2100000,
-            "31.12.2014": 6500000,
-            "31.12.2016": 6300000,
-            "31.12.2017": 6200000,
-            "31.12.2018": 2700000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2009",
+                "amount": 150000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 670000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 1300000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 2100000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 6500000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 6300000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 6200000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 2700000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Bayer AG",
@@ -442,17 +1157,62 @@
             "city": "Leverkusen",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2008": 9400000000,
-            "31.12.2009": 9500000000,
-            "31.12.2010": 9500000000,
-            "31.12.2011": 9300000000,
-            "31.12.2013": 40157000000,
-            "31.12.2014": 11000000000,
-            "31.12.2016": 390000000,
-            "31.12.2017": 14730000000,
-            "31.12.2019": 43545000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 9400000000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 9500000000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 9500000000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 9300000000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 40157000000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 11000000000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 390000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 14730000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 43545000000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "yd.Yourdelivery GmbH",
@@ -462,16 +1222,56 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2009": 6000000,
-            "31.12.2010": 12000000,
-            "31.12.2012": 6300000,
-            "31.12.2013": 7347141.44,
-            "31.12.2014": 12796603.2,
-            "31.12.2015": 31766504.95,
-            "31.12.2016": 45321202.67,
-            "31.12.2017": 66567329.8
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2009",
+                "amount": 6000000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 12000000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 6300000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 7347141.44,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 12796603.2,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 31766504.95,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 45321202.67,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 66567329.8,
+                "currency": "EUR",
+                "year": 2017
+            }
+        ]
     },
     {
         "name": "FinanceFox Beteiligung GmbH",
@@ -481,10 +1281,20 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2016": 340000,
-            "31.12.2018": 330000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2016",
+                "amount": 340000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 330000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "BASF SE",
@@ -494,15 +1304,50 @@
             "city": "Ludwigshafen a. Rhein",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2009": 14079000000,
-            "31.12.2011": 21599000000,
-            "31.12.2013": 23466000000,
-            "31.12.2014": 24543000000,
-            "31.12.2016": 23652000000,
-            "31.12.2017": 23195000000,
-            "31.12.2019": 22185000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2009",
+                "amount": 14079000000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 21599000000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 23466000000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 24543000000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 23652000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 23195000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 22185000000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Axel Springer SE",
@@ -512,14 +1357,44 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2008": 1669063000,
-            "31.12.2012": 1551200000,
-            "31.12.2013": 1507100000,
-            "31.12.2014": 1174600000,
-            "31.12.2017": 823200000,
-            "31.12.2019": 806800000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 1669063000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 1551200000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 1507100000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 1174600000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 823200000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 806800000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "ProSiebenSat.1 Media SE",
@@ -529,18 +1404,68 @@
             "city": "Unterföhring",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2008": 5858149.92,
-            "31.12.2009": 7621242.12,
-            "31.12.2010": 11323012.41,
-            "31.12.2011": 19572339.41,
-            "31.12.2012": 24300829.98,
-            "31.12.2014": 29992949.75,
-            "31.12.2015": 30846150.17,
-            "31.12.2016": 99194800.11,
-            "31.12.2018": 102150143.67,
-            "31.12.2019": 107490545.28
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 5858149.92,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 7621242.12,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 11323012.41,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 19572339.41,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 24300829.98,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 29992949.75,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 30846150.17,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 99194800.11,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 102150143.67,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 107490545.28,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "LMnext de GmbH",
@@ -550,13 +1475,38 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2015": 9300000,
-            "31.12.2016": 8000000,
-            "31.12.2017": 3400000,
-            "31.12.2018": 2900000,
-            "31.12.2019": 3800000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2015",
+                "amount": 9300000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 8000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 3400000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 2900000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 3800000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "wefox Germany GmbH",
@@ -566,11 +1516,26 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2016": 4900000,
-            "31.12.2017": 1283375.55,
-            "31.12.2018": 1610364.72
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2016",
+                "amount": 4900000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 1283375.55,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 1610364.72,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "SPIEGEL-Verlag Rudolf Augstein GmbH & Co. KG",
@@ -580,7 +1545,7 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "Exasol AG",
@@ -590,17 +1555,62 @@
             "city": "Nürnberg",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2007": 31000000,
-            "31.12.2009": 29000000,
-            "31.12.2010": 27000000,
-            "31.12.2011": 28000000,
-            "31.12.2012": 29000000,
-            "31.12.2014": 29000000,
-            "31.12.2015": 38000000,
-            "31.12.2017": 36000000,
-            "31.12.2019": 41000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2007",
+                "amount": 31000000,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 29000000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 27000000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 28000000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 29000000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 29000000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 38000000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 36000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 41000000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Klarna GmbH",
@@ -610,15 +1620,50 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2011": 840000,
-            "31.12.2012": 1100000,
-            "31.12.2013": 2300000,
-            "31.12.2014": 1400000,
-            "31.12.2016": 1900000,
-            "31.12.2017": 2600000,
-            "31.12.2018": 11000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2011",
+                "amount": 840000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 1100000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 2300000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 1400000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 1900000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 2600000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 11000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "HelloFresh SE",
@@ -628,14 +1673,44 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2012": 8900000,
-            "31.12.2014": 16234511.07,
-            "31.12.2015": 20627031.84,
-            "31.12.2017": 40145351.05,
-            "31.12.2018": 68200000,
-            "31.12.2019": 117290000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2012",
+                "amount": 8900000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 16234511.07,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 20627031.84,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 40145351.05,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 68200000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 117290000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Launchmetrics Germany GmbH",
@@ -645,7 +1720,7 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "solarisBank AG",
@@ -655,12 +1730,32 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2016": 19000000,
-            "31.12.2017": 45000000,
-            "31.12.2018": 250000000,
-            "31.12.2019": 450000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2016",
+                "amount": 19000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 45000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 250000000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 450000000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Doctolib GmbH",
@@ -670,10 +1765,20 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2017": 350000,
-            "31.12.2018": 940000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2017",
+                "amount": 350000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 940000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Deposit Solutions GmbH",
@@ -683,13 +1788,38 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2012": 120000,
-            "31.12.2013": 440000,
-            "31.12.2014": 1400000,
-            "31.12.2015": 3500000,
-            "31.12.2017": 5745547.79
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2012",
+                "amount": 120000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 440000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 1400000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 3500000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 5745547.79,
+                "currency": "EUR",
+                "year": 2017
+            }
+        ]
     },
     {
         "name": "SoundCloud Global Ltd. & Co. KG",
@@ -699,7 +1829,7 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "Mobile.de GmbH",
@@ -709,20 +1839,80 @@
             "city": "Kleinmachnow",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2007": 65143770.07,
-            "31.12.2008": 69008877.19,
-            "31.12.2009": 70722924.1,
-            "31.12.2010": 78541388.32,
-            "31.12.2011": 96749329.43,
-            "31.12.2012": 120788154.96,
-            "31.12.2013": 139889053.38,
-            "31.12.2015": 173759183120,
-            "31.12.2016": 204537146.77,
-            "31.12.2017": 240052322.12,
-            "31.12.2018": 273198665.43,
-            "31.12.2019": 352389496.8
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2007",
+                "amount": 65143770.07,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2008",
+                "amount": 69008877.19,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 70722924.1,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 78541388.32,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 96749329.43,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 120788154.96,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 139889053.38,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 173759183120,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 204537146.77,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 240052322.12,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 273198665.43,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 352389496.8,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Adidas AG",
@@ -732,19 +1922,74 @@
             "city": "Herzogenaurach",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2008": 860577000,
-            "31.12.2010": 1539794000,
-            "31.12.2011": 1765801000,
-            "31.12.2012": 2004541000,
-            "31.12.2013": 1952467000,
-            "31.12.2014": 2142780000,
-            "31.12.2015": 2833869000,
-            "31.12.2016": 3288775000,
-            "31.12.2017": 3732306000,
-            "31.12.2018": 4127278000,
-            "31.12.2019": 4444309000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 860577000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 1539794000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 1765801000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 2004541000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 1952467000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 2142780000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 2833869000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 3288775000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 3732306000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 4127278000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 4444309000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Amazon EU S.à r.l., Niederlassung Deutschland",
@@ -754,7 +1999,7 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "Comuto Deutschland GmbH",
@@ -764,16 +2009,56 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2007": 86000,
-            "31.12.2008": 270000,
-            "31.12.2010": 4100000,
-            "31.12.2011": 5600000,
-            "31.12.2013": 6200000,
-            "31.12.2015": 7700000,
-            "31.12.2016": 12000000,
-            "31.12.2018": 7600000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2007",
+                "amount": 86000,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2008",
+                "amount": 270000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 4100000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 5600000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 6200000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 7700000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 12000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 7600000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Amazon Digital Germany GmbH",
@@ -783,20 +2068,80 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2008": 48000000,
-            "31.12.2009": 12527874.99,
-            "31.12.2010": 14738670.97,
-            "31.12.2011": 97000000,
-            "31.12.2012": 25995590.84,
-            "31.12.2013": 34984684.16,
-            "31.12.2014": 60265978.82,
-            "31.12.2015": 116556039.01,
-            "31.12.2016": 429331211.64,
-            "31.12.2017": 556037182,
-            "31.12.2018": 579700078,
-            "31.12.2019": 668113364
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 48000000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 12527874.99,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 14738670.97,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 97000000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 25995590.84,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 34984684.16,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 60265978.82,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 116556039.01,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 429331211.64,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 556037182,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 579700078,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 668113364,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "About YOU GmbH",
@@ -806,10 +2151,20 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2011": 3400000,
-            "29.02.2012": 3000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2011",
+                "amount": 3400000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "29.02.2012",
+                "amount": 3000000,
+                "currency": "EUR",
+                "year": 2012
+            }
+        ]
     },
     {
         "name": "Blacklane GmbH",
@@ -819,13 +2174,38 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2011": 66000,
-            "31.12.2013": 1800000,
-            "31.12.2015": 8100000,
-            "31.12.2016": 12000000,
-            "31.12.2018": 10000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2011",
+                "amount": 66000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 1800000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 8100000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 12000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 10000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Schufa Holding AG",
@@ -835,19 +2215,74 @@
             "city": "Wiesbaden",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2008": 88758868.77,
-            "31.12.2009": 93933544.07,
-            "31.12.2010": 96954981.25,
-            "31.12.2011": 107697378.05,
-            "31.12.2012": 112726075.64,
-            "31.12.2013": 119943468.03,
-            "31.12.2014": 123432630.49,
-            "31.12.2015": 145823407.53,
-            "31.12.2017": 163752836.37,
-            "31.12.2018": 173437731,
-            "31.12.2019": 212245538.2
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 88758868.77,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 93933544.07,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 96954981.25,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 107697378.05,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 112726075.64,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 119943468.03,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 123432630.49,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 145823407.53,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 163752836.37,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 173437731,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 212245538.2,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Saxonia International Management Consulting GmbH",
@@ -857,7 +2292,7 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "signavio GmbH",
@@ -867,15 +2302,50 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2010": 780000,
-            "31.12.2011": 1400000,
-            "31.12.2012": 1600000,
-            "31.12.2014": 6200000,
-            "31.12.2016": 9936809.99,
-            "31.12.2017": 12392143.83,
-            "31.12.2018": 18652187.94
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2010",
+                "amount": 780000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 1400000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 1600000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 6200000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 9936809.99,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 12392143.83,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 18652187.94,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Beqom Deutschland GmbH",
@@ -885,10 +2355,20 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2016": 1400000,
-            "31.12.2018": 2900000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2016",
+                "amount": 1400000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 2900000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Sigfox Germany GmbH",
@@ -898,12 +2378,32 @@
             "city": "Grasbrunn",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2016": 800000,
-            "31.12.2017": 9600000,
-            "31.12.2018": 14000000,
-            "31.12.2019": 20000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2016",
+                "amount": 800000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 9600000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 14000000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 20000000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Movinga GmbH",
@@ -913,11 +2413,26 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2016": 2900000,
-            "31.12.2017": 1100000,
-            "31.12.2018": 3300000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2016",
+                "amount": 2900000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 1100000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 3300000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Outfittery GmbH",
@@ -927,14 +2442,44 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2013": 1600000,
-            "31.12.2014": 9300000,
-            "31.12.2015": 18669273.32,
-            "31.12.2016": 79000000,
-            "31.12.2017": 44025737.76,
-            "31.12.2018": 52666679.09
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2013",
+                "amount": 1600000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 9300000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 18669273.32,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 79000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 44025737.76,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 52666679.09,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Acronis Germany GmbH",
@@ -944,15 +2489,50 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2007": 9300000,
-            "31.12.2008": 25000000,
-            "31.12.2010": 5217571.76,
-            "31.12.2012": 4800000,
-            "31.12.2014": 5200000,
-            "31.12.2016": 5100000,
-            "31.12.2018": 13070807.35
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2007",
+                "amount": 9300000,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2008",
+                "amount": 25000000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 5217571.76,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 4800000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 5200000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 5100000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 13070807.35,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Intel Deutschland GmbH",
@@ -962,16 +2542,56 @@
             "city": "Neubiberg",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2010": 62000,
-            "31.12.2011": 460000,
-            "31.12.2012": 1991038911.53,
-            "31.12.2013": 1949138916.41,
-            "31.12.2014": 1845572669.05,
-            "31.12.2016": 2986242185.59,
-            "31.12.2017": 2932876501.06,
-            "31.12.2019": 692614701.04
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2010",
+                "amount": 62000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 460000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 1991038911.53,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 1949138916.41,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 1845572669.05,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 2986242185.59,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 2932876501.06,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 692614701.04,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Cloud & Heat Technologies GmbH",
@@ -981,15 +2601,50 @@
             "city": "Dresden",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2011": 29000,
-            "31.12.2013": 6100000,
-            "31.12.2014": 6300000,
-            "31.12.2015": 5500000,
-            "31.12.2016": 8400000,
-            "31.12.2017": 26000000,
-            "31.12.2018": 21000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2011",
+                "amount": 29000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 6100000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 6300000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 5500000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 8400000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 26000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 21000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Konux GmbH",
@@ -999,13 +2654,38 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2015": 3000000,
-            "31.12.2016": 10000000,
-            "31.12.2017": 16000000,
-            "31.12.2018": 29000000,
-            "31.12.2019": 45000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2015",
+                "amount": 3000000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 10000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 16000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 29000000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 45000000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Spotcap Global Services GmbH",
@@ -1015,13 +2695,38 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2014": 3600000,
-            "31.12.2016": 3400000,
-            "31.12.2017": 3000000,
-            "31.12.2018": 4200000,
-            "31.12.2019": 6700000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2014",
+                "amount": 3600000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 3400000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 3000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 4200000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 6700000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "FlixMobility GmbH",
@@ -1031,13 +2736,38 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2014": 69000000,
-            "31.12.2015": 215286381.34,
-            "31.12.2016": 352143987.14,
-            "31.12.2017": 30979533.07,
-            "31.12.2018": 20291075
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2014",
+                "amount": 69000000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 215286381.34,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 352143987.14,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 30979533.07,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 20291075,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Tado GmbH",
@@ -1047,14 +2777,44 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2011": 650000,
-            "31.12.2012": 1700000,
-            "31.12.2014": 11000000,
-            "31.12.2015": 25000000,
-            "31.12.2016": 30000000,
-            "31.12.2018": 48000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2011",
+                "amount": 650000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 1700000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 11000000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 25000000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 30000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 48000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Raisin GmbH",
@@ -1064,12 +2824,32 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2014": 460000,
-            "31.12.2015": 16000000,
-            "31.12.2017": 37000000,
-            "31.12.2019": 220000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2014",
+                "amount": 460000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 16000000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 37000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 220000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Shazam Media Services GmbH",
@@ -1079,7 +2859,7 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "Deliveroo Germany GmbH",
@@ -1089,12 +2869,32 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2015": 36000,
-            "31.12.2016": 33000000,
-            "31.12.2017": 23840000,
-            "31.12.2018": 25106000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2015",
+                "amount": 36000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 33000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 23840000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 25106000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Helpling GmbH & Co. KG",
@@ -1104,7 +2904,7 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "TikTok Germany GmbH",
@@ -1114,7 +2914,7 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "Check24 Vergleichsportal GmbH",
@@ -1124,15 +2924,50 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2007": 53000,
-            "31.12.2008": 33000000,
-            "31.03.2009": 33000000,
-            "31.03.2010": 44000000,
-            "31.03.2011": 60000000,
-            "31.03.2012": 51000000,
-            "31.03.2014": 16327413
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2007",
+                "amount": 53000,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2008",
+                "amount": 33000000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.03.2009",
+                "amount": 33000000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.03.2010",
+                "amount": 44000000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.03.2011",
+                "amount": 60000000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.03.2012",
+                "amount": 51000000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.03.2014",
+                "amount": 16327413,
+                "currency": "EUR",
+                "year": 2014
+            }
+        ]
     },
     {
         "name": "PGI Ventures UG",
@@ -1142,7 +2977,7 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "Ströer SE & Co. KGaA",
@@ -1152,17 +2987,62 @@
             "city": "Köln",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2009": 320000000,
-            "31.12.2010": 340000000,
-            "31.12.2011": 577100000,
-            "31.12.2013": 560600000,
-            "31.12.2014": 622000000,
-            "31.12.2015": 721100000,
-            "31.12.2016": 19724854.04,
-            "31.12.2018": 25524027.25,
-            "31.12.2019": 27776181.37
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2009",
+                "amount": 320000000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 340000000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 577100000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 560600000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 622000000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 721100000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 19724854.04,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 25524027.25,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 27776181.37,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ]
     },
     {
         "name": "Gruner + Jahr GmbH",
@@ -1172,7 +3052,7 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     },
     {
         "name": "NavVis GmbH",
@@ -1182,13 +3062,38 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenue": {
-            "31.12.2014": 270000,
-            "31.12.2015": 1400000,
-            "31.12.2016": 5300000,
-            "31.12.2017": 11000000,
-            "31.12.2018": 21000000
-        }
+        "annualRevenues": [
+            {
+                "date": "31.12.2014",
+                "amount": 270000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 1400000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 5300000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 11000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 21000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ]
     },
     {
         "name": "Socialbakers Germany GmbH",
@@ -1198,6 +3103,6 @@
             "city": "Frankfurt a. Main",
             "countryCode": "DE"
         },
-        "annualRevenue": null
+        "annualRevenues": null
     }
 ]
