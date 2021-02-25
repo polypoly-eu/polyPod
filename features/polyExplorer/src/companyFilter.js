@@ -32,6 +32,8 @@ const displayStrings = {
         1000000: "&euro; 1B &ge;",
     },
     location: {
+        // TODO: Translated country names will be part of the input data soon -
+        // hard coded for now.
         DE: "Germany",
         NE: "Netherlands",
     },
