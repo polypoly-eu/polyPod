@@ -53,7 +53,7 @@ const CompanyInfo = ({ company }) => {
         structure: 0,
         revenue: (
             <div>
-                {company.annualRevenues.map(({ year, amount }) => (
+                {(company.annualRevenues || []).map(({ year, amount }) => (
                     <div key={year}>
                         {year}: {amount}
                     </div>
