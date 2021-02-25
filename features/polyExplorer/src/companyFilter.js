@@ -76,7 +76,10 @@ export const removeFilter = (filters, field, value) =>
 
 export const fields = (filters) => Object.keys(filters);
 
-export const values = (filters, field) => [...filters[field]];
+export const values = (filters, field) =>
+    [...filters[field]].sort((a, b) =>
+        Number.isNaN(a) || Number.isNaN(b) ? a.localeCompare(b) : a - b
+    );
 
 const matches = (filters, company) =>
     fields(filters).every(

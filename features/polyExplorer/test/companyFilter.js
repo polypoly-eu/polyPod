@@ -88,6 +88,23 @@ describe("companyFilter", function () {
         ]);
     });
 
+    it("Values are sorted", function () {
+        this.add("location", "DE");
+        this.add("location", "NL");
+        this.add("revenueRange", "-1");
+        this.add("revenueRange", "500");
+        this.add("revenueRange", "1000");
+        assert.deepEqual(companyFilter.values(this.filters, "location"), [
+            "DE",
+            "NL",
+        ]);
+        assert.deepEqual(companyFilter.values(this.filters, "revenueRange"), [
+            "-1",
+            "500",
+            "1000",
+        ]);
+    });
+
     it("Extracting filters from company data works", function () {
         const expectedFilters = [
             ["jurisdiction", "EU-GDPR"],
