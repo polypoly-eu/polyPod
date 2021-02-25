@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import i18n from "../../../i18n.js";
 import FeaturedCompanyHolder from "../../featuredCompanyHolder/featuredCompanyHolder.jsx";

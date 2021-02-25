@@ -12,6 +12,7 @@ import CompanyFilterScreen from "../screens/companyFilterScreen/companyFilterScr
 import CompanySearchScreen from "../screens/companySearchScreen/companySearchScreen.jsx";
 import InfoScreen from "../screens/infoScreen/infoScreen.jsx";
 import CompanyInfoScreen from "../screens/companyInfoScreen/companyInfoScreen.jsx";
+import OnboardingPopup from "../onboardingPopup/onboardingPopup.jsx";
 
 import { default as polyPediaCompanies } from "../../data/companies.json";
 //To go soon
@@ -30,6 +31,9 @@ const PolyExplorer = () => {
         setFeaturedCompanyTabInitialSlide,
     ] = useState(0);
     const [activeFilters, setActiveFilters] = useState(emptyFilters());
+
+    //Move this up to polyPod level (props)
+    const [firstTime, setFirstTime] = useState(true);
 
     const handleShowScreenChange = (showScreen, companyName) => {
         setShowScreen(showScreen);
@@ -111,7 +115,16 @@ const PolyExplorer = () => {
     };
 
     updatePodNavigation();
-    return screens[showScreen];
+    return (
+        <div className="poly-explorer">
+            {screens[showScreen]}{" "}
+            {firstTime ? (
+                <OnboardingPopup
+                    onCloseOnboardingPopup={() => setFirstTime(false)}
+                />
+            ) : null}
+        </div>
+    );
 };
 
 export default PolyExplorer;
