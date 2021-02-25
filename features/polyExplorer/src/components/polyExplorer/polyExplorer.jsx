@@ -76,13 +76,13 @@ const PolyExplorer = () => {
     const screens = {
         main: (
             <MainScreen
-                handleShowScreenChange={handleShowScreenChange}
+                showFeatured={showFeatured}
                 featuredCompanyData={featuredCompanyData}
                 companyData={companyData}
-                showFeatured={showFeatured}
-                setShowFeatured={setShowFeatured}
+                onShowScreenChange={handleShowScreenChange}
+                onShowFeaturedChange={setShowFeatured}
                 featuredCompanyTabInitialSlide={featuredCompanyTabInitialSlide}
-                setFeaturedCompanyTabInitialSlide={
+                onFeaturedCompanyTabInitialSlideChange={
                     setFeaturedCompanyTabInitialSlide
                 }
                 activeFilters={activeFilters}
@@ -104,7 +104,7 @@ const PolyExplorer = () => {
         companySearch: (
             <CompanySearchScreen
                 companies={companyData}
-                handleShowScreenChange={handleShowScreenChange}
+                onShowScreenChange={handleShowScreenChange}
             />
         ),
         info: <InfoScreen />,

@@ -8,21 +8,21 @@ import "../screen.css";
 import "./mainScreen.css";
 
 const MainScreen = ({
-    handleShowScreenChange,
+    showFeatured,
     featuredCompanyData,
     companyData,
-    showFeatured,
-    setShowFeatured,
+    onShowScreenChange,
+    onShowFeaturedChange,
     featuredCompanyTabInitialSlide,
-    setFeaturedCompanyTabInitialSlide,
+    onFeaturedCompanyTabInitialSlideChange,
     activeFilters,
     onRemoveFilter,
 }) => {
-    const handleShowFeatured = () => setShowFeatured(true);
-    const handleShowCompanyList = () => setShowFeatured(false);
+    const handleShowFeatured = () => onShowFeaturedChange(true);
+    const handleShowCompanyList = () => onShowFeaturedChange(false);
 
     const handleUpdateInitialSlide = (newInitialSlide) => {
-        setFeaturedCompanyTabInitialSlide(newInitialSlide);
+        onFeaturedCompanyTabInitialSlideChange(newInitialSlide);
     };
 
     return (
@@ -50,14 +50,14 @@ const MainScreen = ({
             {showFeatured ? (
                 <FeaturedCompanyHolder
                     featuredCompanies={featuredCompanyData}
-                    onShowScreenChange={handleShowScreenChange}
+                    onShowScreenChange={onShowScreenChange}
                     initialSlide={featuredCompanyTabInitialSlide}
                     onUpdateInitialSlide={handleUpdateInitialSlide}
                 />
             ) : (
                 <CompanyList
                     companies={companyData}
-                    onShowScreenChange={handleShowScreenChange}
+                    onShowScreenChange={onShowScreenChange}
                     activeFilters={activeFilters}
                     onRemoveFilter={onRemoveFilter}
                 />

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "../screen.css";
 import "./companySearchScreen.css";
 
-const CompanySearchScreen = ({ companies, handleShowScreenChange }) => {
+const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
     const [searchString, setSearchString] = useState("");
     const featuredComanies = companies.filter((e) => e.featured == true);
     const shownCompanies = companies.filter((c) =>
@@ -48,7 +48,7 @@ const CompanySearchScreen = ({ companies, handleShowScreenChange }) => {
                                     <button
                                         key={index}
                                         onClick={() =>
-                                            handleShowScreenChange(
+                                            onShowScreenChange(
                                                 "companyInfo",
                                                 company.name
                                             )
@@ -75,7 +75,7 @@ const CompanySearchScreen = ({ companies, handleShowScreenChange }) => {
                                                 (company, index) => (
                                                     <button
                                                         onClick={() =>
-                                                            handleShowScreenChange(
+                                                            onShowScreenChange(
                                                                 "companyInfo",
                                                                 company.name
                                                             )
@@ -94,7 +94,7 @@ const CompanySearchScreen = ({ companies, handleShowScreenChange }) => {
                                     {shownCompanies.map((company, index) => (
                                         <button
                                             onClick={() =>
-                                                handleShowScreenChange(
+                                                onShowScreenChange(
                                                     "companyInfo",
                                                     company.name
                                                 )
