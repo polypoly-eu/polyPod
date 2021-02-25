@@ -12,15 +12,18 @@ import CompanyFilterScreen from "../screens/companyFilterScreen/companyFilterScr
 import CompanySearchScreen from "../screens/companySearchScreen/companySearchScreen.jsx";
 import InfoScreen from "../screens/infoScreen/infoScreen.jsx";
 import CompanyInfoScreen from "../screens/companyInfoScreen/companyInfoScreen.jsx";
+
+import { default as polyPediaCompanies } from "../../data/companies.json";
+//To go soon
 import makeExampleData from "../dataViz/makeExampleData.jsx";
 
 const PolyExplorer = () => {
     const [showScreen, setShowScreen] = useState("main");
     const [showFeatured, setShowFeatured] = useState(true);
-    const [companyData] = useState(makeExampleData());
+    const [companyData] = useState(polyPediaCompanies);
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [featuredCompanyData] = useState(
-        companyData.filter((e) => e.featured)
+        makeExampleData().filter((e) => e.featured)
     );
     const [
         featuredCompanyTabInitialSlide,

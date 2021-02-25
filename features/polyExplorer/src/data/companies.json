@@ -1,0 +1,650 @@
+[
+    {
+        "name": "Ada Health GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Simplesurance GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "GetYourGuide Deutschland GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Rocket Internet SE",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Samsung Electronics GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Schwalbach",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Smartly.io Solutions GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Monedo Holding GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "SAP Deutschland SE & Co. KG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Walldorf",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Zalando SE",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Nordstern Studio GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Lesara AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "auxmoney GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Düsseldorf",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "FC Bayern München AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "eGym GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Contentful GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "BioWink GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Dreamlines Tours GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Delivery Hero SE",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "SCHUFA Holding AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Wiesbaden",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Spotify GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Adform Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Chrono24 GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Karlsruhe",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "MessageBird GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "N26 Bank GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Goeuro Travel GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "DB Vertrieb GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Frankfurt a. Main",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "AdColony GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Bayer AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Leverkusen",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "yd.Yourdelivery GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "FinanceFox Beteiligung GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "BASF SE",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Ludwigshafen a. Rhein",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Axel Springer SE",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "ProSiebenSat.1 Media SE",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Unterföhring",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "LMnext de GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "wefox Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "SPIEGEL-Verlag Rudolf Augstein GmbH & Co. KG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Exasol AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Nürnberg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Klarna GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "HelloFresh SE",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Launchmetrics Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "solarisBank AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Doctolib GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Deposit Solutions GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "SoundCloud Global Ltd. & Co. KG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Mobile.de GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Kleinmachnow",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Adidas AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Herzogenaurach",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Comuto Deutschland GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "About YOU GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Blacklane GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Saxonia International Management Consulting GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "signavio GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Beqom Deutschland GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Sigfox Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Grasbrunn",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Movinga GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Outfittery GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Acronis Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Intel Deutschland GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Neubiberg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Cloud & Heat Technologies GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Dresden",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Konux GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Spotcap Global Services GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "FlixMobility GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Tado GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Raisin GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Shazam Media Services GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Deliveroo Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Helpling GmbH & Co. KG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Check24 Vergleichsportal GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "PGI Ventures UG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Ströer SE & Co. KGaA",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Köln",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Gruner + Jahr GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "NavVis GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Socialbakers Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Frankfurt a. Main",
+            "countryCode": "DE"
+        }
+    }
+]
