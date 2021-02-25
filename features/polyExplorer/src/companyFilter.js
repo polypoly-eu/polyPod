@@ -11,7 +11,7 @@ export const emptyFilters = () => ({
 function mostRecentAnnualRevenue(company) {
     const annualRevenues = company.annualRevenues || [];
     if (!annualRevenues.length) return -1;
-    const lastAnnualRevenue = annualRevenues
+    const lastAnnualRevenue = [...annualRevenues]
         .sort((a, b) => a.year - b.year)
         .pop();
     return lastAnnualRevenue.amount / 1000;
