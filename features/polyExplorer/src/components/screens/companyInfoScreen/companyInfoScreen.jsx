@@ -51,7 +51,15 @@ const CompanyInfo = ({ company }) => {
             </div>
         ),
         structure: 0,
-        revenue: <pre>{JSON.stringify(company.annualRevenues, null, 2)}</pre>,
+        revenue: (
+            <div>
+                {company.annualRevenues.map(({ year, amount }) => (
+                    <div key={year}>
+                        {year}: {amount}
+                    </div>
+                ))}
+            </div>
+        ),
     };
     const featuredTabContent = {
         location: (
