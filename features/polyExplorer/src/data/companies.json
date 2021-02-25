@@ -414,11 +414,29 @@
         }
     },
     {
+        "name": "Amazon EU S.à r.l., Niederlassung Deutschland",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        }
+    },
+    {
         "name": "Comuto Deutschland GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
         "location": {
             "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Amazon Digital Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
             "countryCode": "DE"
         }
     },
@@ -437,6 +455,15 @@
         "jurisdiction": "EU-GDPR",
         "location": {
             "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Schufa Holding AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Wiesbaden",
             "countryCode": "DE"
         }
     },
@@ -586,6 +613,15 @@
     },
     {
         "name": "Helpling GmbH & Co. KG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "TikTok Germany GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
         "location": {

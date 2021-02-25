@@ -1,5 +1,5 @@
 import shell from "shelljs";
-const desiredRevision = "5374149f";
+const desiredRevision = "8bffb960";
 
 if (!shell.which("git")) {
     shell.echo("Sorry, this script requires git");
