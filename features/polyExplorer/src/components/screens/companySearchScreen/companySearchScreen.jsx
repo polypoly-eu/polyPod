@@ -33,7 +33,9 @@ const CompanySearchScreen = ({ companies, handleShowScreenChange }) => {
                         onChange={(e) => handleSearch(e.target.value)}
                     />
                     {searchString == "" ? null : (
-                        <button onClick={() => handleClear()}>x</button>
+                        <button onClick={() => handleClear()}>
+                            <img src="./images/clear-search.svg" />
+                        </button>
                     )}
                 </div>
                 <div className="company-search">

@@ -121,8 +121,10 @@
 }
 
 .company-info-text-container .company-info-source {
+    color: #8d9caf;
     font-size: 12px;
     margin: 4px 32px;
+    transform: translateY(-24px);
 }
 
 .company-info-text-container .gradient-box {

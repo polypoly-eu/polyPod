@@ -1,10 +1,11 @@
 .nav-button-container {
     flex: 0 1 auto;
-    height: 35px;
+    height: 40px;
     width: 100%;
 }
 
 .nav-button {
+    box-sizing: border-box;
     background-color: #0f1938;
     width: 50%;
     height: 100%;
@@ -13,11 +14,11 @@
     font-size: 16px;
     line-height: 16px;
     color: #8d9caf;
-    border-color: transparent;
+    border-bottom: 4px solid transparent;
     outline: none;
 }
 
 .nav-button.active {
-    border-bottom: 4px solid #edf2f7;
+    border-color: #edf2f7;
     color: #edf2f7;
 }
