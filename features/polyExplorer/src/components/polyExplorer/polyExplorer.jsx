@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import i18n from "../../i18n.js";
+import { pod, podNav } from "../../fakePod.js";
 import { emptyFilters, removeFilter } from "../../companyFilter.js";
 import "./polyExplorer.css";
 import MainScreen from "../screens/mainScreen/mainScreen.jsx";
@@ -20,38 +21,10 @@ import makeExampleData from "../dataViz/makeExampleData.jsx";
 const fakeFeaturedCompanies = makeExampleData().filter((e) => e.featured);
 for (let company of fakeFeaturedCompanies) company.name += " (Fake)";
 
-function initFakePod() {
-    const fakePodStorage = {
-        get quads() {
-            return JSON.parse(localStorage.getItem("fakePodStorage") || "[]");
-        },
-        set quads(quads) {
-            localStorage.setItem("fakePodStorage", JSON.stringify(quads));
-        },
-    };
-
-    window.pod = {
-        polyIn: {
-            select: async () => fakePodStorage.quads,
-            add: async (quad) =>
-                (fakePodStorage.quads = [...fakePodStorage.quads, quad]),
-        },
-        dataFactory: {
-            quad: (subject, predicate, object) => ({
-                subject,
-                predicate,
-                object,
-            }),
-            namedNode: (value) => ({ value }),
-        },
-    };
-}
-
 const namespace = "http://polypoly.coop/schema/polyExplorer/#";
 
 async function readFirstRun() {
-    if (!window.pod) return true;
-    const quads = await window.pod.polyIn.select({});
+    const quads = await pod.polyIn.select({});
     return !quads.some(
         ({ subject, predicate, object }) =>
             subject.value === `${namespace}polyExplorer` &&
@@ -61,8 +34,7 @@ async function readFirstRun() {
 }
 
 async function writeFirstRun(firstRun) {
-    if (!window.pod) return;
-    const { dataFactory, polyIn } = window.pod;
+    const { dataFactory, polyIn } = pod;
     const quad = dataFactory.quad(
         dataFactory.namedNode(`${namespace}polyExplorer`),
         dataFactory.namedNode(`${namespace}firstRun`),
@@ -111,28 +83,15 @@ const PolyExplorer = () => {
     }
 
     function updatePodNavigation() {
-        const title = i18n.t(`common:screenTitles.${showScreen}`);
-        const actions = {
+        podNav.setTitle(i18n.t(`common:screenTitles.${showScreen}`));
+        podNav.actions = {
             info: () => handleShowScreenChange("info"),
             search: () => handleShowScreenChange("companySearch"),
             back: () => handleShowScreenChange("main"),
         };
-
-        if (window.podNav) {
-            window.podNav.actions = actions;
-            window.podNav.setTitle(title);
-            window.podNav.setActiveActions(
-                showScreen === "main" ? ["info", "search"] : ["back"]
-            );
-        } else {
-            // Fallback navigation for testing the feature outside the pod
-            document.title = title;
-            window.addEventListener("keyup", function ({ key }) {
-                if (key === "Escape") actions.back();
-                else if (key === "s") actions.search();
-                else if (key === "i") actions.info();
-            });
-        }
+        podNav.setActiveActions(
+            showScreen === "main" ? ["info", "search"] : ["back"]
+        );
     }
 
     const screens = {
@@ -172,7 +131,6 @@ const PolyExplorer = () => {
         info: <InfoScreen />,
     };
 
-    if (!window.pod) initFakePod();
     readFirstRun().then(setFirstRun);
     updatePodNavigation();
     return (
