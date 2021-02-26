@@ -67,9 +67,11 @@ const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
                     field="revenueRange"
                 />
 
-                <button className="apply-button" onClick={handleApply}>
-                    {i18n.t("companyFilterScreen:apply")}
-                </button>
+                <div className="button-area">
+                    <button className="apply-button" onClick={handleApply}>
+                        {i18n.t("companyFilterScreen:apply")}
+                    </button>
+                </div>
             </div>
         </div>
     );

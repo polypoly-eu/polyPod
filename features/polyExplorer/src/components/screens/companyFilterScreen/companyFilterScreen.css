@@ -1,3 +1,8 @@
+.screen-content {
+    height: 100%;
+    overflow: hidden scroll;
+}
+
 button {
     border: none;
 }
@@ -11,7 +16,7 @@ button:focus {
 }
 
 .reset-button {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 8px;
     width: 60px;
@@ -64,11 +69,33 @@ button:focus {
     color: #0f1938;
 }
 
+.button-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    height: 107px;
+    background: #0f1938;
+}
+
+.button-area::before {
+    content: "";
+    position: absolute;
+    top: -57px;
+    right: 0;
+    left: 0;
+    height: 57px;
+    pointer-events: none;
+    background: linear-gradient(transparent, #0f1938);
+}
+
 .apply-button {
-    display: block;
     width: 300px;
     height: 48px;
-    margin: 32px auto 0 auto;
     border-radius: 4px;
     color: #0f1938;
     font-family: "Jost Medium";
