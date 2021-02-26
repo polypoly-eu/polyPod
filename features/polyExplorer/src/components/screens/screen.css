@@ -12,7 +12,6 @@
 }
 
 .screen-shadow {
-    pointer-events: none;
     z-index: 200;
     position: absolute;
     width: 100%;
