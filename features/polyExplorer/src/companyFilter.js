@@ -1,7 +1,6 @@
 "use strict";
 
 import i18n from "./i18n.js";
-import { default as polyPediaGlobalData } from "./data/global.json";
 
 export const emptyFilters = () => ({
     industryCategory: new Set(),
@@ -19,7 +18,7 @@ function mostRecentAnnualRevenue(company) {
     return lastAnnualRevenue.amount / 1000;
 }
 
-const displayStrings = {
+const displayStrings = (globalData) => ({
     revenueRange: {
         "-1": i18n.t("common:companyFilter.missing"),
         0: "&euro; 0 - 100k",
@@ -33,12 +32,12 @@ const displayStrings = {
         1000000: "&euro; 1B &ge;",
     },
     location: Object.fromEntries(
-        Object.entries(polyPediaGlobalData[0].countries).map(([code, data]) => [
+        Object.entries(globalData.countries || {}).map(([code, data]) => [
             code,
             data[i18n.t("common:companyFilter.countryNameKey")],
         ])
     ),
-};
+});
 
 const extractValue = (company, field) =>
     ({
@@ -49,7 +48,7 @@ const extractValue = (company, field) =>
         revenueRange: (company) => {
             const revenue = mostRecentAnnualRevenue(company);
             if (revenue === -1) return "-1";
-            const allRanges = Object.keys(displayStrings.revenueRange);
+            const allRanges = Object.keys(displayStrings({}).revenueRange);
             const reversedRanges = allRanges.sort((a, b) => b - a);
             for (let step of reversedRanges) if (revenue > step) return step;
             return 0;
@@ -64,8 +63,8 @@ export function extractFilters(companies) {
     return filters;
 }
 
-export const displayString = (field, value) =>
-    (displayStrings[field] || [])[value] || value;
+export const displayString = (field, value, globalData) =>
+    (displayStrings(globalData)[field] || [])[value] || value;
 
 export const hasFilter = (filters, field, value) => filters[field].has(value);
 

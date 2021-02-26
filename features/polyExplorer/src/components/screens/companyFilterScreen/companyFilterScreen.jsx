@@ -6,7 +6,12 @@ import * as companyFilter from "../../../companyFilter.js";
 import "../screen.css";
 import "./companyFilterScreen.css";
 
-const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
+const CompanyFilterScreen = ({
+    companies,
+    activeFilters,
+    globalData,
+    onApply,
+}) => {
     const [newActiveFilters, setNewActiveFilters] = useState(
         companyFilter.copy(activeFilters)
     );
@@ -35,7 +40,11 @@ const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
                     className={isFilterActive(field, value) ? "active" : ""}
                     onClick={() => handleToggle(field, value)}
                     dangerouslySetInnerHTML={{
-                        __html: companyFilter.displayString(field, value),
+                        __html: companyFilter.displayString(
+                            field,
+                            value,
+                            globalData
+                        ),
                     }}
                 ></button>
             ))}

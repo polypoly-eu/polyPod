@@ -16,7 +16,7 @@ function groupCompanies(companies) {
     return groups;
 }
 
-const ActiveFilters = ({ activeFilters, onRemoveFilter }) => {
+const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
     const filterList = [];
     for (let [field, values] of Object.entries(activeFilters))
         for (let value of values) filterList.push([field, value]);
@@ -28,7 +28,7 @@ const ActiveFilters = ({ activeFilters, onRemoveFilter }) => {
                     className={field}
                     onClick={() => onRemoveFilter(field, value)}
                     dangerouslySetInnerHTML={{
-                        __html: displayString(field, value),
+                        __html: displayString(field, value, globalData),
                     }}
                 ></button>
             ))}
@@ -38,6 +38,7 @@ const ActiveFilters = ({ activeFilters, onRemoveFilter }) => {
 
 const CompanyList = ({
     companies,
+    globalData,
     onShowScreenChange,
     activeFilters,
     onRemoveFilter,
@@ -48,6 +49,7 @@ const CompanyList = ({
         <div className="company-list">
             <ActiveFilters
                 activeFilters={activeFilters}
+                globalData={globalData}
                 onRemoveFilter={onRemoveFilter}
             />
             <div

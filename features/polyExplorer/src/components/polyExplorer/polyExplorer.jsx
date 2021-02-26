@@ -16,6 +16,7 @@ import CompanyInfoScreen from "../screens/companyInfoScreen/companyInfoScreen.js
 import OnboardingPopup from "../onboardingPopup/onboardingPopup.jsx";
 
 import { default as polyPediaCompanies } from "../../data/companies.json";
+import { default as polyPediaGlobalData } from "../../data/global.json";
 //To go soon
 import makeExampleData from "../dataViz/makeExampleData.jsx";
 const fakeFeaturedCompanies = makeExampleData().filter((e) => e.featured);
@@ -50,6 +51,7 @@ const PolyExplorer = () => {
         ...polyPediaCompanies,
         ...fakeFeaturedCompanies,
     ]);
+    const globalData = polyPediaGlobalData[0];
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [featuredCompanyData] = useState(fakeFeaturedCompanies);
     const [
@@ -100,6 +102,7 @@ const PolyExplorer = () => {
                 showFeatured={showFeatured}
                 featuredCompanyData={featuredCompanyData}
                 companyData={companyData}
+                globalData={globalData}
                 onShowScreenChange={handleShowScreenChange}
                 onShowFeaturedChange={setShowFeatured}
                 featuredCompanyTabInitialSlide={featuredCompanyTabInitialSlide}
@@ -118,6 +121,7 @@ const PolyExplorer = () => {
         companyFilter: (
             <CompanyFilterScreen
                 companies={companyData}
+                globalData={globalData}
                 activeFilters={activeFilters}
                 onApply={handleFilterApply}
             />

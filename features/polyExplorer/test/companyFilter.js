@@ -79,7 +79,7 @@ describe("companyFilter", function () {
     });
 
     it("Display string for revenue range is correct", function () {
-        const display = companyFilter.displayString("revenueRange", 500);
+        const display = companyFilter.displayString("revenueRange", 500, {});
         assert.equal(display, "&euro; 500k - 1M");
     });
 

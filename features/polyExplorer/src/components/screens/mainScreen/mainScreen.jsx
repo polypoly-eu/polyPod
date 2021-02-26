@@ -11,6 +11,7 @@ const MainScreen = ({
     showFeatured,
     featuredCompanyData,
     companyData,
+    globalData,
     onShowScreenChange,
     onShowFeaturedChange,
     featuredCompanyTabInitialSlide,
@@ -57,6 +58,7 @@ const MainScreen = ({
             ) : (
                 <CompanyList
                     companies={companyData}
+                    globalData={globalData}
                     onShowScreenChange={onShowScreenChange}
                     activeFilters={activeFilters}
                     onRemoveFilter={onRemoveFilter}
