@@ -16,7 +16,9 @@ button:focus {
 }
 
 .screen-content {
-    align-items: center;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
 }
 
 .screen-shadow {
