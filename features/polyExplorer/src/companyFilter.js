@@ -92,3 +92,24 @@ export const applyFilters = (filters, companies) =>
 
 export const empty = (filters) =>
     !Object.values(filters).some((values) => values.size);
+
+export function copy(filters) {
+    const copiedFilters = emptyFilters();
+    for (let field of fields(filters))
+        for (let value of values(filters, field))
+            addFilter(copiedFilters, field, value);
+    return copiedFilters;
+}
+
+export function equal(filtersA, filtersB) {
+    const fieldsA = fields(filtersA);
+    const fieldsB = fields(filtersB);
+    if (fieldsA.length !== fieldsB.length) return false;
+    return fieldsA.every((field) => {
+        if (!fieldsB.includes(field)) return false;
+        const valuesA = values(filtersA, field);
+        const valuesB = values(filtersB, field);
+        if (valuesA.length !== valuesB.length) return false;
+        return valuesA.every((value) => valuesB.includes(value));
+    });
+}

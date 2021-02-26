@@ -90,3 +90,7 @@
     font-family: "Jost Medium";
     font-size: 18px;
 }
+
+.company-filter-screen .apply-button.disabled {
+    opacity: 0.6;
+}

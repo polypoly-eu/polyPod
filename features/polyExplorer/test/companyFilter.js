@@ -176,4 +176,21 @@ describe("companyFilter", function () {
         companyFilter.extractFilters(companyData);
         assert.equal(JSON.stringify(companyData), companyDataBackup);
     });
+
+    it("Deep copying filters works", function () {
+        this.add("jurisdiction", "EU-GDPR");
+        const copied = companyFilter.copy(this.filters);
+        companyFilter.removeFilter(copied, "jurisdiction", "EU-GDPR");
+        assertHas(this.filters, "jurisdiction", "EU-GDPR");
+    });
+
+    it("Equals works", function () {
+        this.add("location", "NL");
+        this.add("location", "DE");
+        const comparable = companyFilter.emptyFilters();
+        companyFilter.addFilter(comparable, "location", "DE");
+        assert.ok(!companyFilter.equal(this.filters, comparable));
+        companyFilter.addFilter(comparable, "location", "NL");
+        assert.ok(companyFilter.equal(this.filters, comparable));
+    });
 });

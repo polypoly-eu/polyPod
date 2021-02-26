@@ -7,7 +7,9 @@ import "../screen.css";
 import "./companyFilterScreen.css";
 
 const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
-    const [newActiveFilters, setNewActiveFilters] = useState(activeFilters);
+    const [newActiveFilters, setNewActiveFilters] = useState(
+        companyFilter.copy(activeFilters)
+    );
 
     const handleReset = () => setNewActiveFilters(companyFilter.emptyFilters());
 
@@ -40,7 +42,12 @@ const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
         </div>
     );
 
-    const handleApply = () => onApply(newActiveFilters);
+    const filtersChanged = () =>
+        !companyFilter.equal(activeFilters, newActiveFilters);
+
+    function handleApply({ target }) {
+        if (!target.className.includes("disabled")) onApply(newActiveFilters);
+    }
 
     return (
         <div className="explorer-container">
@@ -69,7 +76,13 @@ const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
                 />
 
                 <div className="button-area">
-                    <button className="apply-button" onClick={handleApply}>
+                    <button
+                        className={
+                            "apply-button" +
+                            (filtersChanged() ? "" : " disabled")
+                        }
+                        onClick={handleApply}
+                    >
                         {i18n.t("companyFilterScreen:apply")}
                     </button>
                 </div>
