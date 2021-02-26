@@ -5,8 +5,20 @@ import "./companySearchScreen.css";
 const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
     const [searchString, setSearchString] = useState("");
     const featuredComanies = companies.filter((e) => e.featured == true);
-    const shownCompanies = companies.filter((c) =>
-        c.name.toLowerCase().includes(searchString)
+
+    const shownCompaniesUnsorted =
+        searchString.length > 3 ||
+        companies.filter((c) => c.name.toLowerCase().startsWith(searchString))
+            .length == 0
+            ? companies.filter((c) =>
+                  c.name.toLowerCase().includes(searchString)
+              )
+            : companies.filter((c) =>
+                  c.name.toLowerCase().startsWith(searchString)
+              );
+
+    const shownCompanies = shownCompaniesUnsorted.sort((a, b) =>
+        a.name > b.name ? 1 : -1
     );
     const inputRef = useRef();
 
