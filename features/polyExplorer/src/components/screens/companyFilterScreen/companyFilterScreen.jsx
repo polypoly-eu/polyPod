@@ -48,6 +48,11 @@ const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
                 <button className="reset-button" onClick={handleReset}></button>
 
                 <FilterSection
+                    title={i18n.t("companyFilterScreen:industryCategories")}
+                    field="industryCategory"
+                />
+
+                <FilterSection
                     title={i18n.t("companyFilterScreen:jurisdictions")}
                     field="jurisdiction"
                 />

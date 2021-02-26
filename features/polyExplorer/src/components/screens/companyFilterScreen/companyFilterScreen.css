@@ -32,6 +32,10 @@ button:focus {
     margin-right: 12px;
 }
 
+.filter-section.industryCategory h1::before {
+    content: url("../images/filter-icons/industry-categories.svg");
+}
+
 .filter-section.jurisdiction h1::before {
     content: url("../images/filter-icons/jurisdictions.svg");
 }

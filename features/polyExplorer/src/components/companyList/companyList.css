@@ -46,6 +46,10 @@
     margin-right: 4px;
 }
 
+.active-filters button.industryCategory::before {
+    content: url("../images/filter-icons/industry-categories-blue.svg");
+}
+
 .active-filters button.jurisdiction::before {
     content: url("../images/filter-icons/jurisdictions-blue.svg");
 }

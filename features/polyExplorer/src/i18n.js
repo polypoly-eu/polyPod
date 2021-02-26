@@ -15,6 +15,7 @@ const strings = {
     "common:companyFilter.missing": "Unknown",
     "mainScreen:tabLabel.featuredCompanies": "Featured companies",
     "mainScreen:tabLabel.allCompanies": "All companies ({{total}})",
+    "companyFilterScreen:industryCategories": "Industry categories",
     "companyFilterScreen:jurisdictions": "Jurisdictions",
     "companyFilterScreen:locations": "Locations",
     "companyFilterScreen:revenue": "Revenue",

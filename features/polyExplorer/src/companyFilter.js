@@ -3,6 +3,7 @@
 import i18n from "./i18n.js";
 
 export const emptyFilters = () => ({
+    industryCategory: new Set(),
     jurisdiction: new Set(),
     location: new Set(),
     revenueRange: new Set(),
@@ -40,6 +41,8 @@ const displayStrings = {
 
 const extractValue = (company, field) =>
     ({
+        industryCategory: () =>
+            company.industryCategory || i18n.t("common:companyFilter.missing"),
         jurisdiction: (company) => company.jurisdiction,
         location: (company) => company.location.countryCode,
         revenueRange: (company) => {
