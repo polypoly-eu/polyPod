@@ -88,6 +88,9 @@ open class FeatureFragment : Fragment() {
         webView.setBackgroundColor(backgroundColor)
         webView.settings.javaScriptEnabled = true
 
+        // Enabling localStorage until window.pod.polyIn works
+        webView.settings.setDomStorageEnabled(true);
+
         val feature = FeatureStorage().loadFeature(requireContext(), args.featureName)
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler("/features/${args.featureName}/", FeaturesPathHandler(feature))

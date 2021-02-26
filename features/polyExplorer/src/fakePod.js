@@ -11,7 +11,10 @@ const fakeStorage = {
     },
 };
 
-export const pod = window.pod || {
+// The polyPod does already export window.pod, but it isn't implemented yet, so
+// we ignore the existing window.pod object here and always go with the fake for
+// now.
+export const pod = {
     polyIn: {
         select: async () => fakeStorage.quads,
         add: async (quad) => (fakeStorage.quads = [...fakeStorage.quads, quad]),
