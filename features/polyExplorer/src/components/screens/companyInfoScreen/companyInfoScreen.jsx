@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import CompanyShortInfo from "../../companyShortInfo/companyShortInfo.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import "./companyInfoScreen.css";
@@ -7,6 +7,7 @@ const CompanyInfo = ({ company }) => {
     const [openTab, setOpenTab] = useState("location");
     const [scrolledToBottom, setScrolledToBottom] = useState(false);
     const availableTabs = ["location", "structure", "revenue"];
+    const tabContentRef = useRef();
 
     const handleJurisdictionInfo = () => {
         console.log("Nothing is done here yet!");
@@ -74,6 +75,7 @@ const CompanyInfo = ({ company }) => {
 
     const handleOpenTabChange = (tab) => {
         setOpenTab(tab);
+        tabContentRef.current.scrollIntoView();
     };
 
     const handleInfoTextScrollBottom = (e) => {
@@ -93,7 +95,6 @@ const CompanyInfo = ({ company }) => {
                     onShowScreenChange={() => {}}
                 />
             </div>
-
             <div className="tab-button-container">
                 {availableTabs.map((tab, index) => (
                     <button
@@ -107,36 +108,39 @@ const CompanyInfo = ({ company }) => {
                     </button>
                 ))}
             </div>
-            <div className="tab-content-container">
-                {company.featured
-                    ? featuredTabContent[openTab]
-                    : tabContent[openTab]}
+            <div className="scroll-container">
+                <div ref={tabContentRef} className="tab-content-container">
+                    {company.featured
+                        ? featuredTabContent[openTab]
+                        : tabContent[openTab]}
+                </div>
+                <p
+                    className="company-info-text"
+                    onScroll={(e) => handleInfoTextScrollBottom(e)}
+                >
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                    diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                    nonumy eirmod tempor invidunt ut labore et dolore magna
+                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                    nonumy eirmod tempor invidunt ut labore et dolore magna
+                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+                    sea takimata sanctus est Lorem ipsum dolor sit amet. Duis
+                    autem vel eum iriure dolor in hendrerit in vulputate velit
+                    esse molestie consequat, vel illum dolore eu feugiat nulla
+                    facilisis at vero eros et accumsan et iusto odio dignissim
+                    qui blandit praesent luptatum zzril delenit augue duis
+                    dolore te feugait nulla facilisi. Lorem ipsum dolor sit
+                    amet,
+                </p>
             </div>
-            <p
-                className="company-info-text"
-                onScroll={(e) => handleInfoTextScrollBottom(e)}
-            >
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                sed diam voluptua. At vero eos et accusam et justo duo dolores
-                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-                est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                invidunt ut labore et dolore magna aliquyam erat, sed diam
-                voluptua. At vero eos et accusam et justo duo dolores et ea
-                rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in
-                hendrerit in vulputate velit esse molestie consequat, vel illum
-                dolore eu feugiat nulla facilisis at vero eros et accumsan et
-                iusto odio dignissim qui blandit praesent luptatum zzril delenit
-                augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
-                sit amet,
-            </p>
             <div
                 className={
                     scrolledToBottom ? "gradient-box" : "gradient-box gradient"

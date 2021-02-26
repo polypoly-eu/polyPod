@@ -28,6 +28,12 @@
     color: #edf2f7;
 }
 
+.scroll-container {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    margin-bottom: 18px;
+}
+
 .tab-content-container {
     position: relative;
     height: 203px;
@@ -114,8 +120,6 @@
 
 .company-info-text {
     box-sizing: border-box;
-    flex: 1 1 auto;
-    overflow-y: auto;
     width: 100%;
     max-width: 474px;
     padding: 4px 32px;
