@@ -1,9 +1,10 @@
-import { createRequire } from "module";
 import fs from "fs";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 
-const polyPediaData = createRequire(import.meta.url)(
-    "../polypedia-data/data/3_integrated/polyExplorer/companies.json"
-);
+const polyPediaCompanyData = require("../polypedia-data/data/3_integrated/polyExplorer/companies.json");
+
+const polyPediaGlobalData = require("../polypedia-data/data/3_integrated/polyExplorer/global.json");
 
 const extractYear = (date) =>
     parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
@@ -20,9 +21,9 @@ function extractAnnualRevenues(entry) {
     }));
 }
 
-function parsePolyPediaData() {
+function parsePolyPediaCompanyData() {
     const companyData = [];
-    polyPediaData.forEach((entry) => {
+    polyPediaCompanyData.forEach((entry) => {
         companyData.push({
             name: entry.legal_entities.identifiers.legal_name.value,
             featured: false,
@@ -48,10 +49,10 @@ function parsePolyPediaData() {
     return companyData;
 }
 
-function savePolyExplorerData(companyData) {
+function savePolyExplorerFile(fileName, data) {
     fs.writeFile(
-        "./src/data/companies.json",
-        JSON.stringify(companyData, null, 4),
+        `./src/data/${fileName}`,
+        JSON.stringify(data, null, 4),
         "utf8",
         (err) => {
             if (err) {
@@ -61,4 +62,23 @@ function savePolyExplorerData(companyData) {
     );
 }
 
-savePolyExplorerData(parsePolyPediaData());
+const savePolyExplorerCompanyData = (data) =>
+    savePolyExplorerFile("companies.json", data);
+
+function parsePolyPediaGlobalData() {
+    const globalData = { countries: {} };
+    Object.entries(polyPediaGlobalData.countries).forEach(([code, data]) => {
+        globalData.countries[code] = Object.fromEntries(
+            Object.entries(data).filter(([key]) => key.startsWith("Name_"))
+        );
+    });
+    // Workaround to keep sucrase from complaining - top level objects don't
+    // seem to work
+    return [globalData];
+}
+
+const savePolyExplorerGlobalData = (data) =>
+    savePolyExplorerFile("global.json", data);
+
+savePolyExplorerCompanyData(parsePolyPediaCompanyData());
+savePolyExplorerGlobalData(parsePolyPediaGlobalData());

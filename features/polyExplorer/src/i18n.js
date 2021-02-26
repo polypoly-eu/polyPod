@@ -13,6 +13,7 @@ const strings = {
     "common:screenTitles.companySearch": "Search",
     "common:screenTitles.info": "Data sources and process",
     "common:companyFilter.missing": "Unknown",
+    "common:companyFilter.countryNameKey": "Name_EN",
     "mainScreen:tabLabel.featuredCompanies": "Featured companies",
     "mainScreen:tabLabel.allCompanies": "All companies ({{total}})",
     "companyFilterScreen:industryCategories": "Industry categories",

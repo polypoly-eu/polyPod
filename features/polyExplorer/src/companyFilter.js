@@ -1,6 +1,7 @@
 "use strict";
 
 import i18n from "./i18n.js";
+import { default as polyPediaGlobalData } from "./data/global.json";
 
 export const emptyFilters = () => ({
     industryCategory: new Set(),
@@ -31,12 +32,12 @@ const displayStrings = {
         100000: "&euro; 100M - 1B",
         1000000: "&euro; 1B &ge;",
     },
-    location: {
-        // TODO: Translated country names will be part of the input data soon -
-        // hard coded for now.
-        DE: "Germany",
-        NE: "Netherlands",
-    },
+    location: Object.fromEntries(
+        Object.entries(polyPediaGlobalData[0].countries).map(([code, data]) => [
+            code,
+            data[i18n.t("common:companyFilter.countryNameKey")],
+        ])
+    ),
 };
 
 const extractValue = (company, field) =>
