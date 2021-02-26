@@ -1,5 +1,11 @@
+import path from "path";
 import shell from "shelljs";
-const desiredRevision = "8bffb960";
+
+const [, , desiredRevision] = process.argv;
+if (!desiredRevision) {
+    console.error(`Usage: ${path.basename(process.argv[1])} DESIRED_REVISION`);
+    process.exit(1);
+}
 
 if (!shell.which("git")) {
     shell.echo("Sorry, this script requires git");
