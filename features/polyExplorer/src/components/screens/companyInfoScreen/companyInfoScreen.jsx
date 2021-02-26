@@ -89,70 +89,78 @@ const CompanyInfo = ({ company }) => {
 
     return (
         <div className="explorer-container">
-            <div className="short-info">
-                <CompanyShortInfo
-                    company={company}
-                    onShowScreenChange={() => {}}
-                />
-            </div>
-            <div className="tab-button-container">
-                {availableTabs.map((tab, index) => (
-                    <button
-                        key={index}
-                        className={
-                            openTab === tab ? "tab-button active" : "tab-button"
-                        }
-                        onClick={() => handleOpenTabChange(tab)}
-                    >
-                        {tabTranslation[tab]}
-                    </button>
-                ))}
-            </div>
-            <div className="scroll-container">
-                <div ref={tabContentRef} className="tab-content-container">
-                    {company.featured
-                        ? featuredTabContent[openTab]
-                        : tabContent[openTab]}
+            <div className="screen-shadow"></div>
+            <div className="screen-content">
+                <div className="short-info">
+                    <CompanyShortInfo
+                        company={company}
+                        onShowScreenChange={() => {}}
+                    />
                 </div>
-                <p
-                    className="company-info-text"
-                    onScroll={(e) => handleInfoTextScrollBottom(e)}
-                >
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Duis
-                    autem vel eum iriure dolor in hendrerit in vulputate velit
-                    esse molestie consequat, vel illum dolore eu feugiat nulla
-                    facilisis at vero eros et accumsan et iusto odio dignissim
-                    qui blandit praesent luptatum zzril delenit augue duis
-                    dolore te feugait nulla facilisi. Lorem ipsum dolor sit
-                    amet,
-                </p>
-            </div>
-            <div
-                className={
-                    scrolledToBottom ? "gradient-box" : "gradient-box gradient"
-                }
-            ></div>
-            <p className="company-info-source">Source: Wikipedia</p>
+                <div className="tab-button-container">
+                    {availableTabs.map((tab, index) => (
+                        <button
+                            key={index}
+                            className={
+                                openTab === tab
+                                    ? "tab-button active"
+                                    : "tab-button"
+                            }
+                            onClick={() => handleOpenTabChange(tab)}
+                        >
+                            {tabTranslation[tab]}
+                        </button>
+                    ))}
+                </div>
+                <div className="scroll-container">
+                    <div ref={tabContentRef} className="tab-content-container">
+                        {company.featured
+                            ? featuredTabContent[openTab]
+                            : tabContent[openTab]}
+                    </div>
+                    <p
+                        className="company-info-text"
+                        onScroll={(e) => handleInfoTextScrollBottom(e)}
+                    >
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                        sed diam nonumy eirmod tempor invidunt ut labore et
+                        dolore magna aliquyam erat, sed diam voluptua. At vero
+                        eos et accusam et justo duo dolores et ea rebum. Stet
+                        clita kasd gubergren, no sea takimata sanctus est Lorem
+                        ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+                        consetetur sadipscing elitr, sed diam nonumy eirmod
+                        tempor invidunt ut labore et dolore magna aliquyam erat,
+                        sed diam voluptua. At vero eos et accusam et justo duo
+                        dolores et ea rebum. Stet clita kasd gubergren, no sea
+                        takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                        ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                        diam nonumy eirmod tempor invidunt ut labore et dolore
+                        magna aliquyam erat, sed diam voluptua. At vero eos et
+                        accusam et justo duo dolores et ea rebum. Stet clita
+                        kasd gubergren, no sea takimata sanctus est Lorem ipsum
+                        dolor sit amet. Duis autem vel eum iriure dolor in
+                        hendrerit in vulputate velit esse molestie consequat,
+                        vel illum dolore eu feugiat nulla facilisis at vero eros
+                        et accumsan et iusto odio dignissim qui blandit praesent
+                        luptatum zzril delenit augue duis dolore te feugait
+                        nulla facilisi. Lorem ipsum dolor sit amet,
+                    </p>
+                </div>
+                <div
+                    className={
+                        scrolledToBottom
+                            ? "gradient-box"
+                            : "gradient-box gradient"
+                    }
+                ></div>
+                <p className="company-info-source">Source: Wikipedia</p>
 
-            {company.featured ? (
-                <button className="explore-data-btn">Explore Data</button>
-            ) : (
-                <div></div>
-            )}
+                {company.featured ? (
+                    <button className="explore-data-btn">Explore Data</button>
+                ) : (
+                    <div></div>
+                )}
+            </div>
         </div>
     );
 };

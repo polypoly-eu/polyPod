@@ -5,13 +5,14 @@ import "../screen.css";
 const SharedDataTypeScreen = ({ company }) => {
     return (
         <div className="explorer-container">
-            <h2>{company.name}</h2>
-            <div>
-                <p className="">shares</p>{" "}
-                <p>{company.dataTypesShared.length} datatypes</p>
-            </div>
-
+            <div className="screen-shadow"></div>
             <div className="screen-content">
+                <h2>{company.name}</h2>
+                <div>
+                    <p className="">shares</p>{" "}
+                    <p>{company.dataTypesShared.length} datatypes</p>
+                </div>
+
                 <DataTypeBubbles
                     data={company.dataTypesShared}
                     width="300"

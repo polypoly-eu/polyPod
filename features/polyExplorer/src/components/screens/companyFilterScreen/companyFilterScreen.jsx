@@ -44,6 +44,7 @@ const CompanyFilterScreen = ({ companies, activeFilters, onApply }) => {
 
     return (
         <div className="explorer-container">
+            <div className="screen-shadow"></div>
             <div className="screen-content">
                 <button className="reset-button" onClick={handleReset}></button>
 
