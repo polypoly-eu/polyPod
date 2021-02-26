@@ -3,7 +3,7 @@
     max-width: 460px;
     position: relative;
     display: flex;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
 }
 
 .search-bar-container .search-bar {
