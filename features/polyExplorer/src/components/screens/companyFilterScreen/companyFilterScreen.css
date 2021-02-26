@@ -1,13 +1,10 @@
-.screen-content {
+.company-filter-screen {
     height: 100%;
+    padding: 20px;
     overflow: hidden scroll;
 }
 
-.screen-content {
-    padding: 20px;
-}
-
-.reset-button {
+.company-filter-screen .reset-button {
     position: fixed;
     top: 20px;
     right: 8px;
@@ -17,35 +14,35 @@
     color: #fff;
 }
 
-.filter-section h1 {
+.company-filter-screen .filter-section h1 {
     margin: 12px 0;
     font-family: "Jost Medium";
     font-size: 16px;
 }
 
-.filter-section h1::before {
+.company-filter-screen .filter-section h1::before {
     position: relative;
     top: 6px;
     margin-right: 12px;
 }
 
-.filter-section.industryCategory h1::before {
+.company-filter-screen .filter-section.industryCategory h1::before {
     content: url("../images/filter-icons/industry-categories.svg");
 }
 
-.filter-section.jurisdiction h1::before {
+.company-filter-screen .filter-section.jurisdiction h1::before {
     content: url("../images/filter-icons/jurisdictions.svg");
 }
 
-.filter-section.location h1::before {
+.company-filter-screen .filter-section.location h1::before {
     content: url("../images/filter-icons/locations.svg");
 }
 
-.filter-section.revenueRange h1::before {
+.company-filter-screen .filter-section.revenueRange h1::before {
     content: url("../images/filter-icons/revenue.svg");
 }
 
-.filter-section button {
+.company-filter-screen .filter-section button {
     height: 32px;
     margin: 0 4px 8px 0;
     padding: 0 12px 1px 12px;
@@ -56,12 +53,12 @@
     font-size: 14px;
 }
 
-.filter-section button.active {
+.company-filter-screen .filter-section button.active {
     background: #8d9caf;
     color: #0f1938;
 }
 
-.button-area {
+.company-filter-screen .button-area {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,7 +71,7 @@
     background: #0f1938;
 }
 
-.button-area::before {
+.company-filter-screen .button-area::before {
     content: "";
     position: absolute;
     top: -57px;
@@ -85,7 +82,7 @@
     background: linear-gradient(transparent, #0f1938);
 }
 
-.apply-button {
+.company-filter-screen .apply-button {
     width: 300px;
     height: 48px;
     border-radius: 4px;
