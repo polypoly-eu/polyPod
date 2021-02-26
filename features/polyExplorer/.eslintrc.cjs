@@ -6,7 +6,10 @@ module.exports = {
     env: {
         browser: true,
         es6: true,
-        mocha: true
+        // Only needed for tests/
+        mocha: true,
+        // Only needed for scripts/
+        node: true
     },
     settings: {
         react: {
