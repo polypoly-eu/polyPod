@@ -31,14 +31,23 @@ let fakeNavigationListener;
 export const podNav = window.podNav || {
     setTitle: (title) => (document.title = title),
     setActiveActions: (actions) => {
+        const actionKeys = {
+            Escape: "back",
+            s: "search",
+            i: "info",
+        };
         if (fakeNavigationListener)
             window.removeEventListener("keyup", fakeNavigationListener);
+        else {
+            const actionUsage = Object.entries(actionKeys)
+                .map((pair) => `[${pair.join(" = ")}]`)
+                .join(", ");
+            console.log(
+                `Keyboard polyPod navigation available: ${actionUsage}`
+            );
+        }
         fakeNavigationListener = function ({ key }) {
-            const action = {
-                Escape: "back",
-                s: "search",
-                i: "info",
-            }[key];
+            const action = actionKeys[key];
             if (actions.includes(action))
                 (podNav.actions[action] || (() => {}))();
         };
