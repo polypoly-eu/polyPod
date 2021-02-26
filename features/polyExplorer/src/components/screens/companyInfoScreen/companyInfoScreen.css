@@ -1,17 +1,11 @@
-.short-info {
-    flex: 0 0 auto;
-}
-
 .tab-button-container {
     box-sizing: border-box;
-    flex: 0 0 auto;
     height: 35px;
     margin: 0 auto;
-    width: 100%;
-    max-width: 412px;
 }
 
 .tab-button-container .tab-button {
+    box-sizing: border-box;
     background-color: #0f1938;
     width: 33.3%;
     height: 100%;
@@ -32,12 +26,17 @@
     flex: 1 1 auto;
     overflow-y: auto;
     margin-bottom: 18px;
+    width: 100%;
+    max-width: 412px;
+}
+
+.scroll-container .swiper-container {
 }
 
 .tab-content-container {
     position: relative;
     height: 203px;
-    margin: 0 auto;
+    margin: 2px auto 0 auto;
     width: 100%;
     max-width: 412px;
 }

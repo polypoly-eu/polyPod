@@ -1,13 +1,12 @@
 import React, { useRef, useState } from "react";
 import CompanyShortInfo from "../../companyShortInfo/companyShortInfo.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyInfoScreen.css";
 
 const CompanyInfo = ({ company }) => {
-    const [openTab, setOpenTab] = useState("location");
     const [scrolledToBottom, setScrolledToBottom] = useState(false);
-    const availableTabs = ["location", "structure", "revenue"];
-    const tabContentRef = useRef();
+    const [initialTab, setInitialTab] = useState(0);
 
     const handleJurisdictionInfo = () => {
         console.log("Nothing is done here yet!");
@@ -38,44 +37,80 @@ const CompanyInfo = ({ company }) => {
         structure: "Structure",
         revenue: "Revenue",
     };
-    const tabContent = {
-        location: (
-            <div>
-                <div className={`location-block ${company.jurisdiction}`}>
-                    <img src="./images/location-pin.svg" alt="location-pin" />
-                    <p className={`location-text`}>
-                        {company.location.city}, {company.location.countryCode},{" "}
-                        {company.jurisdiction}
-                    </p>
-                </div>
-                {locationTooltip}
-            </div>
-        ),
-        structure: 0,
-        revenue: (
-            <div>
-                {(company.annualRevenues || []).map(({ year, amount }) => (
-                    <div key={year}>
-                        {year}: {amount}
+    const tabContent = [
+        {
+            tabName: "location",
+            content: (
+                <div>
+                    <div className={`location-block ${company.jurisdiction}`}>
+                        <img
+                            src="./images/location-pin.svg"
+                            alt="location-pin"
+                        />
+                        <p className={`location-text`}>
+                            {company.location.city},{" "}
+                            {company.location.countryCode},{" "}
+                            {company.jurisdiction}
+                        </p>
                     </div>
-                ))}
-            </div>
-        ),
-    };
-    const featuredTabContent = {
-        location: (
-            <div>
-                <div className={"location-block"}></div>
-                {locationTooltip}
-            </div>
-        ),
-        structure: 0,
-        revenue: <CompanyRevenueChart company={company}></CompanyRevenueChart>,
-    };
+                    {locationTooltip}
+                </div>
+            ),
+        },
+        {
+            tabName: "structure",
+            content: null,
+        },
+        {
+            tabName: "revenue",
+            content: (
+                <div>
+                    {(company.annualRevenues || []).map(({ year, amount }) => (
+                        <div key={year}>
+                            {year}: {amount}
+                        </div>
+                    ))}
+                </div>
+            ),
+        },
+    ];
 
-    const handleOpenTabChange = (tab) => {
-        setOpenTab(tab);
-        tabContentRef.current.scrollIntoView();
+    const featuredTabContent = [
+        {
+            tabName: "location",
+            content: (
+                <div>
+                    <div className={"location-block"}></div>
+                    {locationTooltip}
+                </div>
+            ),
+        },
+        {
+            tabName: "structure",
+            content: null,
+        },
+        {
+            tabName: "revenue",
+            content: (
+                <div>
+                    {(company.annualRevenues || []).map(({ year, amount }) => (
+                        <div key={year}>
+                            {year}: {amount}
+                        </div>
+                    ))}
+                </div>
+            ),
+        },
+    ];
+
+    const handleInitialTabChange = (index) => {
+        let openTab = index;
+        if (index > featuredTabContent.length - 1) openTab = 0;
+        else if (index < 0)
+            openTab = company.featured
+                ? featuredTabContent.length - 1
+                : tabContent.length - 1;
+        setInitialTab(openTab);
     };
 
     const handleInfoTextScrollBottom = (e) => {
@@ -91,32 +126,70 @@ const CompanyInfo = ({ company }) => {
         <div className="explorer-container">
             <div className="screen-shadow"></div>
             <div className="screen-content">
-                <div className="short-info">
-                    <CompanyShortInfo
-                        company={company}
-                        onShowScreenChange={() => {}}
-                    />
-                </div>
-                <div className="tab-button-container">
-                    {availableTabs.map((tab, index) => (
-                        <button
-                            key={index}
-                            className={
-                                openTab === tab
-                                    ? "tab-button active"
-                                    : "tab-button"
-                            }
-                            onClick={() => handleOpenTabChange(tab)}
-                        >
-                            {tabTranslation[tab]}
-                        </button>
-                    ))}
-                </div>
                 <div className="scroll-container">
-                    <div ref={tabContentRef} className="tab-content-container">
+                    <div className="short-info">
+                        <CompanyShortInfo
+                            company={company}
+                            onShowScreenChange={() => {}}
+                        />
+                    </div>
+                    <div className="tab-button-container">
                         {company.featured
-                            ? featuredTabContent[openTab]
-                            : tabContent[openTab]}
+                            ? featuredTabContent.map((tab, index) => (
+                                  <button
+                                      key={index}
+                                      className={
+                                          featuredTabContent[initialTab]
+                                              .tabName === tab.tabName
+                                              ? "tab-button active"
+                                              : "tab-button"
+                                      }
+                                      onClick={() =>
+                                          handleInitialTabChange(index)
+                                      }
+                                  >
+                                      {tabTranslation[tab.tabName]}
+                                  </button>
+                              ))
+                            : tabContent.map((tab, index) => (
+                                  <button
+                                      key={index}
+                                      className={
+                                          tabContent[initialTab].tabName ===
+                                          tab.tabName
+                                              ? "tab-button active"
+                                              : "tab-button"
+                                      }
+                                      onClick={() =>
+                                          handleInitialTabChange(index)
+                                      }
+                                  >
+                                      {tabTranslation[tab.tabName]}
+                                  </button>
+                              ))}
+                    </div>
+                    <div className="tab-content-container">
+                        <Swiper
+                            spaceBetween={1}
+                            slidesPerView={1}
+                            loop="true"
+                            initialSlide={initialTab}
+                            onSlideChange={(swiper) =>
+                                handleInitialTabChange(swiper.activeIndex - 1)
+                            }
+                        >
+                            {company.featured
+                                ? featuredTabContent.map((tab, index) => (
+                                      <SwiperSlide key={index}>
+                                          {tab.content}
+                                      </SwiperSlide>
+                                  ))
+                                : tabContent.map((tab, index) => (
+                                      <SwiperSlide key={index}>
+                                          {tab.content}
+                                      </SwiperSlide>
+                                  ))}
+                        </Swiper>
                     </div>
                     <p
                         className="company-info-text"
