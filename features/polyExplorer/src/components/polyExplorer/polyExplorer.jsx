@@ -20,6 +20,57 @@ import makeExampleData from "../dataViz/makeExampleData.jsx";
 const fakeFeaturedCompanies = makeExampleData().filter((e) => e.featured);
 for (let company of fakeFeaturedCompanies) company.name += " (Fake)";
 
+function initFakePod() {
+    const fakePodStorage = {
+        get quads() {
+            return JSON.parse(localStorage.getItem("fakePodStorage") || "[]");
+        },
+        set quads(quads) {
+            localStorage.setItem("fakePodStorage", JSON.stringify(quads));
+        },
+    };
+
+    window.pod = {
+        polyIn: {
+            select: async () => fakePodStorage.quads,
+            add: async (quad) =>
+                (fakePodStorage.quads = [...fakePodStorage.quads, quad]),
+        },
+        dataFactory: {
+            quad: (subject, predicate, object) => ({
+                subject,
+                predicate,
+                object,
+            }),
+            namedNode: (value) => ({ value }),
+        },
+    };
+}
+
+const namespace = "http://polypoly.coop/schema/polyExplorer/#";
+
+async function readFirstRun() {
+    if (!window.pod) return true;
+    const quads = await window.pod.polyIn.select({});
+    return !quads.some(
+        ({ subject, predicate, object }) =>
+            subject.value === `${namespace}polyExplorer` &&
+            predicate.value === `${namespace}firstRun` &&
+            object.value === `${namespace}false`
+    );
+}
+
+async function writeFirstRun(firstRun) {
+    if (!window.pod) return;
+    const { dataFactory, polyIn } = window.pod;
+    const quad = dataFactory.quad(
+        dataFactory.namedNode(`${namespace}polyExplorer`),
+        dataFactory.namedNode(`${namespace}firstRun`),
+        dataFactory.namedNode(`${namespace}false`)
+    );
+    polyIn.add(quad);
+}
+
 const PolyExplorer = () => {
     const [showScreen, setShowScreen] = useState("main");
     const [showFeatured, setShowFeatured] = useState(true);
@@ -33,10 +84,9 @@ const PolyExplorer = () => {
         featuredCompanyTabInitialSlide,
         setFeaturedCompanyTabInitialSlide,
     ] = useState(0);
-    const [activeFilters, setActiveFilters] = useState(emptyFilters());
 
-    //Move this up to polyPod level (props)
-    const [firstTime, setFirstTime] = useState(true);
+    const [activeFilters, setActiveFilters] = useState(emptyFilters());
+    const [firstRun, setFirstRun] = useState(false);
 
     const handleShowScreenChange = (showScreen, companyName) => {
         setShowScreen(showScreen);
@@ -54,6 +104,11 @@ const PolyExplorer = () => {
         setActiveFilters(newActiveFilters);
         handleShowScreenChange("main");
     };
+
+    function handleCloseOnboardingPopup() {
+        setFirstRun(false);
+        writeFirstRun(false);
+    }
 
     function updatePodNavigation() {
         const title = i18n.t(`common:screenTitles.${showScreen}`);
@@ -117,13 +172,15 @@ const PolyExplorer = () => {
         info: <InfoScreen />,
     };
 
+    if (!window.pod) initFakePod();
+    readFirstRun().then(setFirstRun);
     updatePodNavigation();
     return (
         <div className="poly-explorer">
             {screens[showScreen]}{" "}
-            {firstTime ? (
+            {firstRun ? (
                 <OnboardingPopup
-                    onCloseOnboardingPopup={() => setFirstTime(false)}
+                    onCloseOnboardingPopup={handleCloseOnboardingPopup}
                 />
             ) : null}
         </div>
