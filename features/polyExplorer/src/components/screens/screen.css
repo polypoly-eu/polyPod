@@ -1,3 +1,11 @@
+button {
+    border: none;
+}
+
+button:focus {
+    outline: 0;
+}
+
 .shared-div {
     width: 90%;
     margin: 8px;

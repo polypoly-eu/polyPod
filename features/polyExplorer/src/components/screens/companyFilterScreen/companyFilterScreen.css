@@ -3,14 +3,6 @@
     overflow: hidden scroll;
 }
 
-button {
-    border: none;
-}
-
-button:focus {
-    outline: 0;
-}
-
 .screen-content {
     padding: 20px;
 }
