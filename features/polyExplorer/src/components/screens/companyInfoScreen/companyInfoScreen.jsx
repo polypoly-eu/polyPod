@@ -7,6 +7,7 @@ import "./companyInfoScreen.css";
 const CompanyInfo = ({ company }) => {
     const [scrolledToBottom, setScrolledToBottom] = useState(false);
     const [initialTab, setInitialTab] = useState(0);
+    const [swiper, setSwiper] = useState(null);
 
     const handleJurisdictionInfo = () => {
         console.log("Nothing is done here yet!");
@@ -103,16 +104,6 @@ const CompanyInfo = ({ company }) => {
         },
     ];
 
-    const handleInitialTabChange = (index) => {
-        let openTab = index;
-        if (index > featuredTabContent.length - 1) openTab = 0;
-        else if (index < 0)
-            openTab = company.featured
-                ? featuredTabContent.length - 1
-                : tabContent.length - 1;
-        setInitialTab(openTab);
-    };
-
     const handleInfoTextScrollBottom = (e) => {
         const reachedBottom =
             e.target.scrollHeight - e.target.scrollTop - 2 <=
@@ -139,14 +130,11 @@ const CompanyInfo = ({ company }) => {
                                   <button
                                       key={index}
                                       className={
-                                          featuredTabContent[initialTab]
-                                              .tabName === tab.tabName
+                                          initialTab === index
                                               ? "tab-button active"
                                               : "tab-button"
                                       }
-                                      onClick={() =>
-                                          handleInitialTabChange(index)
-                                      }
+                                      onClick={() => swiper.slideTo(index)}
                                   >
                                       {tabTranslation[tab.tabName]}
                                   </button>
@@ -155,14 +143,11 @@ const CompanyInfo = ({ company }) => {
                                   <button
                                       key={index}
                                       className={
-                                          tabContent[initialTab].tabName ===
-                                          tab.tabName
+                                          initialTab === index
                                               ? "tab-button active"
                                               : "tab-button"
                                       }
-                                      onClick={() =>
-                                          handleInitialTabChange(index)
-                                      }
+                                      onClick={() => swiper.slideTo(index)}
                                   >
                                       {tabTranslation[tab.tabName]}
                                   </button>
@@ -170,12 +155,12 @@ const CompanyInfo = ({ company }) => {
                     </div>
                     <div className="tab-content-container">
                         <Swiper
+                            onSwiper={setSwiper}
                             spaceBetween={1}
                             slidesPerView={1}
-                            loop="true"
                             initialSlide={initialTab}
                             onSlideChange={(swiper) =>
-                                handleInitialTabChange(swiper.activeIndex - 1)
+                                setInitialTab(swiper.activeIndex)
                             }
                         >
                             {company.featured
