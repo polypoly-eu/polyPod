@@ -66,7 +66,7 @@ async function writeFirstRun(firstRun) {
     const quad = dataFactory.quad(
         dataFactory.namedNode(`${namespace}polyExplorer`),
         dataFactory.namedNode(`${namespace}firstRun`),
-        dataFactory.namedNode(`${namespace}false`)
+        dataFactory.namedNode(`${namespace}${firstRun}`)
     );
     polyIn.add(quad);
 }
