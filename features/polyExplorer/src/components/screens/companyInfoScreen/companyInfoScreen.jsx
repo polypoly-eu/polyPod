@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import CompanyShortInfo from "../../companyShortInfo/companyShortInfo.jsx";
-import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
+//import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyInfoScreen.css";
 
