@@ -8,7 +8,9 @@
     "test": "mocha",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "fetch-polypedia-data": "node scripts/fetch-polypedia-data.js && node scripts/polypedia-data-parser"
+    "polypedia:fetch": "node scripts/fetch-polypedia-data",
+    "polypedia:convert": "node scripts/convert-polypedia-data",
+    "update-polypedia-data": "npm run polypedia:fetch && npm run polypedia:convert"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",

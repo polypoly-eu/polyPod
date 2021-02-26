@@ -20,7 +20,7 @@ function extractAnnualRevenues(entry) {
     }));
 }
 
-function parsePolypediaData() {
+function parsePolyPediaData() {
     const companyData = [];
     polyPediaData.forEach((entry) => {
         companyData.push({
@@ -45,6 +45,10 @@ function parsePolypediaData() {
             annualRevenues: extractAnnualRevenues(entry),
         });
     });
+    return companyData;
+}
+
+function savePolyExplorerData(companyData) {
     fs.writeFile(
         "./src/data/companies.json",
         JSON.stringify(companyData, null, 4),
@@ -57,4 +61,4 @@ function parsePolypediaData() {
     );
 }
 
-parsePolypediaData();
+savePolyExplorerData(parsePolyPediaData());
