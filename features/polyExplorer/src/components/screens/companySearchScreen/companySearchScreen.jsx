@@ -22,6 +22,7 @@ const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
 
     return (
         <div className="explorer-container">
+            <div className="screen-shadow"></div>
             <div className="screen-content">
                 <div className="search-bar-container">
                     <input

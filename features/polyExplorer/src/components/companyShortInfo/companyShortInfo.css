@@ -11,33 +11,25 @@
     margin: 0 auto;
 }
 
-.company-short-info .company-logo {
-    box-sizing: border-box;
-    position: absolute;
-    top: 15px;
-    left: 10px;
-    height: 60px;
-    width: 60px;
-    border: 1px solid #3e495b;
-    border-radius: 50%;
+.company-short-info .featured-indicator {
+    display: inline-block;
+    height: 19px;
+    width: 18px;
 }
 
 .company-short-info .info-box {
-    position: absolute;
     color: #edf2f7;
-    top: 16px;
-    left: 80px;
     text-align: left;
 }
 
 .info-box .company-name {
     font-family: "Jost Medium";
-    font-size: 16px;
+    font-size: 20px;
     margin: 0;
 }
 
 .info-box .company-location {
-    font-size: 16px;
+    font-size: 14px;
     width: 60px;
     display: inline;
 }

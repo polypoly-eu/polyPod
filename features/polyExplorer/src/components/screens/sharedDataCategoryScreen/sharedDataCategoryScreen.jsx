@@ -14,9 +14,11 @@ const SharedDataCategoryScreen = ({ company }) => {
 
     return (
         <div className="explorer-container">
-            <h2>{company.name}</h2>
-            <div>shares {company.dataTypesShared.length} datatypes</div>
+            <div className="screen-shadow"></div>
             <div className="screen-content">
+                <h2>{company.name}</h2>
+                <div>shares {company.dataTypesShared.length} datatypes</div>
+
                 <DataTypeBubbleCategory
                     data={company.dataTypesShared}
                     width="300"
