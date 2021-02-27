@@ -149,15 +149,15 @@ export default function makeExampleData() {
     });
 
     exampleCompanies[0].location = { city: "Munich", countryCode: "DE" };
-    exampleCompanies[1].location = { city: "Delft", countryCode: "NE" };
-    exampleCompanies[2].location = { city: "Delft", countryCode: "NE" };
-    exampleCompanies[3].location = { city: "Delft", countryCode: "NE" };
-    exampleCompanies[4].location = { city: "Delft", countryCode: "NE" };
-    exampleCompanies[5].location = { city: "Delft", countryCode: "NE" };
-    exampleCompanies[6].location = { city: "Delft", countryCode: "NE" };
-    exampleCompanies[7].location = { city: "Delft", countryCode: "NE" };
-    exampleCompanies[8].location = { city: "Delft", countryCode: "NE" };
-    exampleCompanies[9].location = { city: "Delft", countryCode: "NE" };
+    exampleCompanies[1].location = { city: "Delft", countryCode: "NL" };
+    exampleCompanies[2].location = { city: "Delft", countryCode: "NL" };
+    exampleCompanies[3].location = { city: "Delft", countryCode: "NL" };
+    exampleCompanies[4].location = { city: "Delft", countryCode: "NL" };
+    exampleCompanies[5].location = { city: "Delft", countryCode: "NL" };
+    exampleCompanies[6].location = { city: "Delft", countryCode: "NL" };
+    exampleCompanies[7].location = { city: "Delft", countryCode: "NL" };
+    exampleCompanies[8].location = { city: "Delft", countryCode: "NL" };
+    exampleCompanies[9].location = { city: "Delft", countryCode: "NL" };
 
     exampleCompanies[0].jurisdiction = "EU-GDPR";
     exampleCompanies[1].jurisdiction = "EU-GDPR";
