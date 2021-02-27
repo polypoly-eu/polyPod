@@ -29,26 +29,6 @@ const allRevenueRanges = [
     1000000,
 ];
 
-const displayStrings = (i18n, globalData) => ({
-    industryCategory: {
-        "?": i18n.t("common:companyFilter.missing"),
-    },
-    revenueRange: Object.fromEntries(
-        allRevenueRanges.map((range) => [
-            range,
-            range === "-1"
-                ? i18n.t("common:companyFilter.missing")
-                : i18n.t(`common:companyFilter.revenueRange.${range}`),
-        ])
-    ),
-    location: Object.fromEntries(
-        Object.entries(globalData.countries || {}).map(([code, data]) => [
-            code,
-            data[i18n.t("common:companyFilter.countryNameKey")],
-        ])
-    ),
-});
-
 const extractValue = (company, field) =>
     ({
         industryCategory: () => company.industryCategory || "?",
@@ -72,8 +52,29 @@ export function extractFilters(companies) {
     return filters;
 }
 
-export const displayString = (field, value, i18n, globalData) =>
-    (displayStrings(i18n, globalData)[field] || [])[value] || value;
+export function displayString(field, value, i18n, globalData) {
+    const displayStrings = {
+        industryCategory: {
+            "?": () => i18n.t("common:companyFilter.missing"),
+        },
+        revenueRange: Object.fromEntries(
+            allRevenueRanges.map((range) => [
+                range,
+                () =>
+                    range === -1
+                        ? i18n.t("common:companyFilter.missing")
+                        : i18n.t(`common:companyFilter.revenueRange.${range}`),
+            ])
+        ),
+        location: Object.fromEntries(
+            Object.entries(globalData.countries || {}).map(([code, data]) => [
+                code,
+                () => data[i18n.t("common:companyFilter.countryNameKey")],
+            ])
+        ),
+    };
+    return ((displayStrings[field] || [])[value] || (() => value))();
+}
 
 export const hasFilter = (filters, field, value) => filters[field].has(value);
 
