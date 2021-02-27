@@ -2,7 +2,21 @@
 // include a third party translation library (like i18next) in a bit, but for
 // now we're keeping it simple.
 
-import strings from "./data/strings.json";
+import commonEn from "./locales/en/common.json";
+import companyFilterScreenEn from "./locales/en/companyFilterScreen.json";
+import companyInfoScreenEn from "./locales/en/companyInfoScreen.json";
+import companySearchScreenEn from "./locales/en/companySearchScreen.json";
+import mainScreenEn from "./locales/en/mainScreen.json";
+
+const strings = {
+    en: {
+        common: commonEn,
+        companyFilterScreen: companyFilterScreenEn,
+        companyInfoScreen: companyInfoScreenEn,
+        companySearchScreen: companySearchScreenEn,
+        mainScreen: mainScreenEn,
+    },
+};
 
 export default {
     t: (key, options = {}) => {
