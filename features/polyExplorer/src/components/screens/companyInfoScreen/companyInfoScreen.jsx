@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import i18n from "../../../i18n.js";
 import CompanyShortInfo from "../../companyShortInfo/companyShortInfo.jsx";
 //import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,25 +19,24 @@ const CompanyInfo = ({ company }) => {
             <button onClick={() => handleJurisdictionInfo()}>
                 <img src="./images/question-circle.svg" />
             </button>
-            <p>Jurisdictions</p>
+            <p>{i18n.t("companyInfoScreen:jurisdictions")}</p>
             <div className="circle EU-GDPR"></div>
-            <p>EU-GDPR</p>
+            <p>{i18n.t("common:jurisdictions.euGdpr")}</p>
             <div className="circle Russia"></div>
-            <p>Russia</p>
+            <p>{i18n.t("common:jurisdictions.russia")}</p>
             <div className="circle Five-Eyes"></div>
-            <p>Five-Eyes</p>
+            <p>{i18n.t("common:jurisdictions.fiveEyes")}</p>
             <div className="circle China"></div>
-            <p>China</p>
+            <p>{i18n.t("common:jurisdictions.china")}</p>
             <div className="circle Others"></div>
-            <p>Undisclosed</p>
+            <p>{i18n.t("common:jurisdictions.undisclosed")}</p>
         </div>
     );
 
-    //get this from somewhere else
     const tabTranslation = {
-        location: "Location",
-        structure: "Structure",
-        revenue: "Revenue",
+        location: i18n.t("companyInfoScreen:tabLabel.location"),
+        structure: i18n.t("companyInfoScreen:tabLabel.structure"),
+        revenue: i18n.t("companyInfoScreen:tabLabel.revenue"),
     };
     const tabContent = [
         {
@@ -211,10 +211,14 @@ const CompanyInfo = ({ company }) => {
                             : "gradient-box gradient"
                     }
                 ></div>
-                <p className="company-info-source">Source: Wikipedia</p>
+                <p className="company-info-source">
+                    {i18n.t("companyInfoScreen:source")}: Wikipedia
+                </p>
 
                 {company.featured ? (
-                    <button className="explore-data-btn">Explore Data</button>
+                    <button className="explore-data-btn">
+                        {i18n.t("companyInfoScreen:buttonLabel.exploreData")}
+                    </button>
                 ) : (
                     <div></div>
                 )}

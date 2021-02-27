@@ -20,7 +20,13 @@
             "companyFilter.revenueRange.20000": "&euro; 20M - 50M",
             "companyFilter.revenueRange.50000": "&euro; 50M - 100M",
             "companyFilter.revenueRange.100000": "&euro; 100M - 1B",
-            "companyFilter.revenueRange.1000000": "&euro; 1B &ge;"
+            "companyFilter.revenueRange.1000000": "&euro; 1B &ge;",
+            "jurisdictions.euGdpr": "EU-GDPR",
+            "jurisdictions.russia": "Russia",
+            "jurisdictions.fiveEyes": "Five-Eyes",
+            "jurisdictions.china": "China",
+            "jurisdictions.undisclosed": "Undisclosed"
+
         },
         "mainScreen": {
             "tabLabel.featuredCompanies": "Featured companies",
@@ -32,6 +38,14 @@
             "locations": "Locations",
             "revenue": "Revenue",
             "apply": "Apply"
+        },
+        "companyInfoScreen": {
+            "tabLabel.location": "Location",
+            "tabLabel.structure": "Structure",
+            "tabLabel.revenue": "Revenue",
+            "jurisdictions": "Jurisdictions",
+            "source": "Source",
+            "buttonLabel.exploreData": "Explore data"
         }
     }
 }
