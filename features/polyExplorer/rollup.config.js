@@ -21,6 +21,7 @@ export default {
     },
     plugins: [
         css({ output: "css/bundle.css" }),
+        json(),
         sucrase({
             transforms: ["jsx"],
             production: true,
@@ -39,7 +40,6 @@ export default {
             ],
             verbose: true,
         }),
-        json(),
         resolve(),
     ],
     external: ["react", "react-dom"],

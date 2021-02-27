@@ -2,10 +2,7 @@
 // include a third party translation library (like i18next) in a bit, but for
 // now we're keeping it simple.
 
-// Sucrase complains about JSON files starting with '{', so we have to wrap it
-// in an array for now.
-import stringsWrapper from "./data/strings.json";
-const strings = stringsWrapper[0];
+import strings from "./data/strings.json";
 
 export default {
     t: (key, options = {}) => {
