@@ -6,7 +6,8 @@ import strings from "./data/strings.json";
 
 export default {
     t: (key, options = {}) => {
-        let translation = strings[key];
+        const [namespace, keyInNamespace] = key.split(/:(.+)/);
+        let translation = strings["en"][namespace][keyInNamespace];
         for (let [name, value] of Object.entries(options))
             translation = translation.replace(`{{${name}}}`, value);
         return translation;

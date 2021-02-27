@@ -1,29 +1,37 @@
 {
-    "common:screenTitles.main": "polyExplorer",
-    "common:screenTitles.dataTypes": "Data exploration",
-    "common:screenTitles.purposes": "Data exploration",
-    "common:screenTitles.companies": "Data exploration",
-    "common:screenTitles.jurisdictions": "Data exploration",
-    "common:screenTitles.companyInfo": "Company profile",
-    "common:screenTitles.companyFilter": "Filter",
-    "common:screenTitles.companySearch": "Search",
-    "common:screenTitles.info": "Data sources and process",
-    "common:companyFilter.missing": "Unknown",
-    "common:companyFilter.countryNameKey": "Name_EN",
-    "common:companyFilter.revenueRange.0": "&euro; 0 - 100k",
-    "common:companyFilter.revenueRange.100": "&euro; 100k - 500k",
-    "common:companyFilter.revenueRange.500": "&euro; 500k - 1M",
-    "common:companyFilter.revenueRange.1000": "&euro; 1M - 5M",
-    "common:companyFilter.revenueRange.5000": "&euro; 5M - 20M",
-    "common:companyFilter.revenueRange.20000": "&euro; 20M - 50M",
-    "common:companyFilter.revenueRange.50000": "&euro; 50M - 100M",
-    "common:companyFilter.revenueRange.100000": "&euro; 100M - 1B",
-    "common:companyFilter.revenueRange.1000000": "&euro; 1B &ge;",
-    "mainScreen:tabLabel.featuredCompanies": "Featured companies",
-    "mainScreen:tabLabel.allCompanies": "All companies ({{total}})",
-    "companyFilterScreen:industryCategories": "Industry categories",
-    "companyFilterScreen:jurisdictions": "Jurisdictions",
-    "companyFilterScreen:locations": "Locations",
-    "companyFilterScreen:revenue": "Revenue",
-    "companyFilterScreen:apply": "Apply"
+    "en": {
+        "common": {
+            "screenTitles.main": "polyExplorer",
+            "screenTitles.dataTypes": "Data exploration",
+            "screenTitles.purposes": "Data exploration",
+            "screenTitles.companies": "Data exploration",
+            "screenTitles.jurisdictions": "Data exploration",
+            "screenTitles.companyInfo": "Company profile",
+            "screenTitles.companyFilter": "Filter",
+            "screenTitles.companySearch": "Search",
+            "screenTitles.info": "Data sources and process",
+            "companyFilter.missing": "Unknown",
+            "companyFilter.countryNameKey": "Name_EN",
+            "companyFilter.revenueRange.0": "&euro; 0 - 100k",
+            "companyFilter.revenueRange.100": "&euro; 100k - 500k",
+            "companyFilter.revenueRange.500": "&euro; 500k - 1M",
+            "companyFilter.revenueRange.1000": "&euro; 1M - 5M",
+            "companyFilter.revenueRange.5000": "&euro; 5M - 20M",
+            "companyFilter.revenueRange.20000": "&euro; 20M - 50M",
+            "companyFilter.revenueRange.50000": "&euro; 50M - 100M",
+            "companyFilter.revenueRange.100000": "&euro; 100M - 1B",
+            "companyFilter.revenueRange.1000000": "&euro; 1B &ge;"
+        },
+        "mainScreen": {
+            "tabLabel.featuredCompanies": "Featured companies",
+            "tabLabel.allCompanies": "All companies ({{total}})"
+        },
+        "companyFilterScreen": {
+            "industryCategories": "Industry categories",
+            "jurisdictions": "Jurisdictions",
+            "locations": "Locations",
+            "revenue": "Revenue",
+            "apply": "Apply"
+        }
+    }
 }
