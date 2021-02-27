@@ -15,8 +15,8 @@ import InfoScreen from "../screens/infoScreen/infoScreen.jsx";
 import CompanyInfoScreen from "../screens/companyInfoScreen/companyInfoScreen.jsx";
 import OnboardingPopup from "../onboardingPopup/onboardingPopup.jsx";
 
-import { default as polyPediaCompanies } from "../../data/companies.json";
-import { default as polyPediaGlobalData } from "../../data/global.json";
+import polyPediaCompanies from "../../data/companies.json";
+import polyPediaGlobalData from "../../data/global.json";
 //To go soon
 import makeExampleData from "../dataViz/makeExampleData.jsx";
 const fakeFeaturedCompanies = makeExampleData().filter((e) => e.featured);
