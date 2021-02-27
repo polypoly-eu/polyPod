@@ -72,9 +72,7 @@ function parsePolyPediaGlobalData() {
             Object.entries(data).filter(([key]) => key.startsWith("Name_"))
         );
     });
-    // Workaround to keep sucrase from complaining - top level objects don't
-    // seem to work
-    return [globalData];
+    return globalData;
 }
 
 const savePolyExplorerGlobalData = (data) =>

@@ -51,7 +51,6 @@ const PolyExplorer = () => {
         ...polyPediaCompanies,
         ...fakeFeaturedCompanies,
     ]);
-    const globalData = polyPediaGlobalData[0];
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [featuredCompanyData] = useState(fakeFeaturedCompanies);
     const [
@@ -102,7 +101,7 @@ const PolyExplorer = () => {
                 showFeatured={showFeatured}
                 featuredCompanyData={featuredCompanyData}
                 companyData={companyData}
-                globalData={globalData}
+                globalData={polyPediaGlobalData}
                 onShowScreenChange={handleShowScreenChange}
                 onShowFeaturedChange={setShowFeatured}
                 featuredCompanyTabInitialSlide={featuredCompanyTabInitialSlide}
@@ -121,7 +120,7 @@ const PolyExplorer = () => {
         companyFilter: (
             <CompanyFilterScreen
                 companies={companyData}
-                globalData={globalData}
+                globalData={polyPediaGlobalData}
                 activeFilters={activeFilters}
                 onApply={handleFilterApply}
             />
