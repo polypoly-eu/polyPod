@@ -1,15 +1,15 @@
 {
     "en": {
         "common": {
-            "screenTitles.main": "polyExplorer",
-            "screenTitles.dataTypes": "Data exploration",
-            "screenTitles.purposes": "Data exploration",
-            "screenTitles.companies": "Data exploration",
-            "screenTitles.jurisdictions": "Data exploration",
-            "screenTitles.companyInfo": "Company profile",
-            "screenTitles.companyFilter": "Filter",
-            "screenTitles.companySearch": "Search",
-            "screenTitles.info": "Data sources and process",
+            "screenTitle.main": "polyExplorer",
+            "screenTitle.dataTypes": "Data exploration",
+            "screenTitle.purposes": "Data exploration",
+            "screenTitle.companies": "Data exploration",
+            "screenTitle.jurisdictions": "Data exploration",
+            "screenTitle.companyInfo": "Company profile",
+            "screenTitle.companyFilter": "Filter",
+            "screenTitle.companySearch": "Search",
+            "screenTitle.info": "Data sources and process",
             "companyFilter.missing": "Unknown",
             "companyFilter.countryNameKey": "Name_EN",
             "companyFilter.revenueRange.0": "&euro; 0 - 100k",
@@ -21,16 +21,16 @@
             "companyFilter.revenueRange.50000": "&euro; 50M - 100M",
             "companyFilter.revenueRange.100000": "&euro; 100M - 1B",
             "companyFilter.revenueRange.1000000": "&euro; 1B &ge;",
-            "jurisdictions.euGdpr": "EU-GDPR",
-            "jurisdictions.russia": "Russia",
-            "jurisdictions.fiveEyes": "Five-Eyes",
-            "jurisdictions.china": "China",
-            "jurisdictions.undisclosed": "Undisclosed"
+            "jurisdiction.euGdpr": "EU-GDPR",
+            "jurisdiction.russia": "Russia",
+            "jurisdiction.fiveEyes": "Five-Eyes",
+            "jurisdiction.china": "China",
+            "jurisdiction.undisclosed": "Undisclosed"
 
         },
         "mainScreen": {
-            "tabLabel.featuredCompanies": "Featured companies",
-            "tabLabel.allCompanies": "All companies ({{total}})"
+            "tab.featuredCompanies": "Featured companies",
+            "tab.allCompanies": "All companies ({{total}})"
         },
         "companyFilterScreen": {
             "industryCategories": "Industry categories",
@@ -40,12 +40,12 @@
             "apply": "Apply"
         },
         "companyInfoScreen": {
-            "tabLabel.location": "Location",
-            "tabLabel.structure": "Structure",
-            "tabLabel.revenue": "Revenue",
+            "tab.location": "Location",
+            "tab.structure": "Structure",
+            "tab.revenue": "Revenue",
             "jurisdictions": "Jurisdictions",
             "source": "Source",
-            "buttonLabel.exploreData": "Explore data"
+            "button.exploreData": "Explore data"
         }
     }
 }

@@ -84,7 +84,7 @@ const PolyExplorer = () => {
     }
 
     function updatePodNavigation() {
-        podNav.setTitle(i18n.t(`common:screenTitles.${showScreen}`));
+        podNav.setTitle(i18n.t(`common:screenTitle.${showScreen}`));
         podNav.actions = {
             info: () => handleShowScreenChange("info"),
             search: () => handleShowScreenChange("companySearch"),

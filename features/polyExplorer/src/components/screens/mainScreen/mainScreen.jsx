@@ -35,7 +35,7 @@ const MainScreen = ({
                         showFeatured ? "nav-button active" : "nav-button"
                     }
                 >
-                    {i18n.t("mainScreen:tabLabel.featuredCompanies")}
+                    {i18n.t("mainScreen:tab.featuredCompanies")}
                 </button>
                 <button
                     onClick={handleShowCompanyList}
@@ -43,7 +43,7 @@ const MainScreen = ({
                         showFeatured ? "nav-button" : "nav-button active"
                     }
                 >
-                    {i18n.t("mainScreen:tabLabel.allCompanies", {
+                    {i18n.t("mainScreen:tab.allCompanies", {
                         total: companyData.length,
                     })}
                 </button>

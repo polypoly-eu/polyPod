@@ -21,22 +21,22 @@ const CompanyInfo = ({ company }) => {
             </button>
             <p>{i18n.t("companyInfoScreen:jurisdictions")}</p>
             <div className="circle EU-GDPR"></div>
-            <p>{i18n.t("common:jurisdictions.euGdpr")}</p>
+            <p>{i18n.t("common:jurisdiction.euGdpr")}</p>
             <div className="circle Russia"></div>
-            <p>{i18n.t("common:jurisdictions.russia")}</p>
+            <p>{i18n.t("common:jurisdiction.russia")}</p>
             <div className="circle Five-Eyes"></div>
-            <p>{i18n.t("common:jurisdictions.fiveEyes")}</p>
+            <p>{i18n.t("common:jurisdiction.fiveEyes")}</p>
             <div className="circle China"></div>
-            <p>{i18n.t("common:jurisdictions.china")}</p>
+            <p>{i18n.t("common:jurisdiction.china")}</p>
             <div className="circle Others"></div>
-            <p>{i18n.t("common:jurisdictions.undisclosed")}</p>
+            <p>{i18n.t("common:jurisdiction.undisclosed")}</p>
         </div>
     );
 
     const tabTranslation = {
-        location: i18n.t("companyInfoScreen:tabLabel.location"),
-        structure: i18n.t("companyInfoScreen:tabLabel.structure"),
-        revenue: i18n.t("companyInfoScreen:tabLabel.revenue"),
+        location: i18n.t("companyInfoScreen:tab.location"),
+        structure: i18n.t("companyInfoScreen:tab.structure"),
+        revenue: i18n.t("companyInfoScreen:tab.revenue"),
     };
     const tabContent = [
         {
@@ -217,7 +217,7 @@ const CompanyInfo = ({ company }) => {
 
                 {company.featured ? (
                     <button className="explore-data-btn">
-                        {i18n.t("companyInfoScreen:buttonLabel.exploreData")}
+                        {i18n.t("companyInfoScreen:button.exploreData")}
                     </button>
                 ) : (
                     <div></div>
