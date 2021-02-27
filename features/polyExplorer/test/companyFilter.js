@@ -79,7 +79,12 @@ describe("companyFilter", function () {
     });
 
     it("Display string for revenue range is correct", function () {
-        const i18nStub = { t: (key) => key };
+        const i18nStub = {
+            t: (key) =>
+                key === "common:companyFilter.revenueRange.500"
+                    ? "&euro; 500k - 1M"
+                    : "",
+        };
         const display = companyFilter.displayString(
             "revenueRange",
             500,

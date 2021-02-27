@@ -16,22 +16,31 @@ function mostRecentAnnualRevenue(company) {
     return lastAnnualRevenue.amount / 1000;
 }
 
+const allRevenueRanges = [
+    -1,
+    0,
+    100,
+    500,
+    1000,
+    5000,
+    20000,
+    50000,
+    100000,
+    1000000,
+];
+
 const displayStrings = (i18n, globalData) => ({
     industryCategory: {
         "?": i18n.t("common:companyFilter.missing"),
     },
-    revenueRange: {
-        "-1": i18n.t("common:companyFilter.missing"),
-        0: "&euro; 0 - 100k",
-        100: "&euro; 100k - 500k",
-        500: "&euro; 500k - 1M",
-        1000: "&euro; 1M - 5M",
-        5000: "&euro; 5M - 20M",
-        20000: "&euro; 20M - 50M",
-        50000: "&euro; 50M - 100M",
-        100000: "&euro; 100M - 1B",
-        1000000: "&euro; 1B &ge;",
-    },
+    revenueRange: Object.fromEntries(
+        allRevenueRanges.map((range) => [
+            range,
+            range === "-1"
+                ? i18n.t("common:companyFilter.missing")
+                : i18n.t(`common:companyFilter.revenueRange.${range}`),
+        ])
+    ),
     location: Object.fromEntries(
         Object.entries(globalData.countries || {}).map(([code, data]) => [
             code,
@@ -48,12 +57,10 @@ const extractValue = (company, field) =>
         revenueRange: (company) => {
             const revenue = mostRecentAnnualRevenue(company);
             if (revenue === -1) return "-1";
-            const allRanges = Object.keys(
-                displayStrings({ t: () => {} }, {}).revenueRange
-            );
-            const reversedRanges = allRanges.sort((a, b) => b - a);
-            for (let step of reversedRanges) if (revenue > step) return step;
-            return 0;
+            const reversedRanges = allRevenueRanges.sort((a, b) => b - a);
+            for (let step of reversedRanges)
+                if (revenue > step) return `${step}`;
+            return "0";
         },
     }[field](company));
 
