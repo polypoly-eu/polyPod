@@ -2,26 +2,10 @@
 // include a third party translation library (like i18next) in a bit, but for
 // now we're keeping it simple.
 
-const strings = {
-    "common:screenTitles.main": "polyExplorer",
-    "common:screenTitles.dataTypes": "Data exploration",
-    "common:screenTitles.purposes": "Data exploration",
-    "common:screenTitles.companies": "Data exploration",
-    "common:screenTitles.jurisdictions": "Data exploration",
-    "common:screenTitles.companyInfo": "Company profile",
-    "common:screenTitles.companyFilter": "Filter",
-    "common:screenTitles.companySearch": "Search",
-    "common:screenTitles.info": "Data sources and process",
-    "common:companyFilter.missing": "Unknown",
-    "common:companyFilter.countryNameKey": "Name_EN",
-    "mainScreen:tabLabel.featuredCompanies": "Featured companies",
-    "mainScreen:tabLabel.allCompanies": "All companies ({{total}})",
-    "companyFilterScreen:industryCategories": "Industry categories",
-    "companyFilterScreen:jurisdictions": "Jurisdictions",
-    "companyFilterScreen:locations": "Locations",
-    "companyFilterScreen:revenue": "Revenue",
-    "companyFilterScreen:apply": "Apply",
-};
+// Sucrase complains about JSON files starting with '{', so we have to wrap it
+// in an array for now.
+import stringsWrapper from "./data/strings.json";
+const strings = stringsWrapper[0];
 
 export default {
     t: (key, options = {}) => {

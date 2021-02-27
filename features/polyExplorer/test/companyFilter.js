@@ -79,7 +79,13 @@ describe("companyFilter", function () {
     });
 
     it("Display string for revenue range is correct", function () {
-        const display = companyFilter.displayString("revenueRange", 500, {});
+        const i18nStub = { t: (key) => key };
+        const display = companyFilter.displayString(
+            "revenueRange",
+            500,
+            i18nStub,
+            {}
+        );
         assert.equal(display, "&euro; 500k - 1M");
     });
 

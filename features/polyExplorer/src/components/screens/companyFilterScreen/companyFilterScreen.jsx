@@ -43,6 +43,7 @@ const CompanyFilterScreen = ({
                         __html: companyFilter.displayString(
                             field,
                             value,
+                            i18n,
                             globalData
                         ),
                     }}

@@ -1,5 +1,6 @@
 import React from "react";
 
+import i18n from "../../i18n.js";
 import { applyFilters, displayString, empty } from "../../companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 
@@ -28,7 +29,7 @@ const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
                     className={field}
                     onClick={() => onRemoveFilter(field, value)}
                     dangerouslySetInnerHTML={{
-                        __html: displayString(field, value, globalData),
+                        __html: displayString(field, value, i18n, globalData),
                     }}
                 ></button>
             ))}
