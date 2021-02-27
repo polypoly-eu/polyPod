@@ -46,6 +46,11 @@
             "jurisdictions": "Jurisdictions",
             "source": "Source",
             "button.exploreData": "Explore data"
+        },
+        "companySearchScreen": {
+            "typeHere": "Type here",
+            "suggestions": "Suggestions",
+            "noMatch": "No Companies with that name yet, but more will come soon!"
         }
     }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import i18n from "../../../i18n.js";
 import "../screen.css";
 import "./companySearchScreen.css";
 
@@ -41,7 +42,7 @@ const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
                         type="text"
                         ref={inputRef}
                         autoFocus="autofocus"
-                        placeholder="Type here"
+                        placeholder={i18n.t("companySearchScreen:typeHere")}
                         className="search-bar"
                         onChange={(e) => handleSearch(e.target.value)}
                     />
@@ -54,7 +55,7 @@ const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
                 <div className="company-search">
                     {searchString == "" ? (
                         <div className="suggestion-container">
-                            <p>Suggestions</p>
+                            <p>{i18n.t("companySearchScreen:suggestions")}</p>
                             <div className="suggestions">
                                 {" "}
                                 {featuredComanies.map((company, index) => (
@@ -77,11 +78,14 @@ const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
                             {shownCompanies.length == 0 ? (
                                 <div>
                                     <p className="no-answers">
-                                        No Companies with that name yet, but
-                                        more will come soon!
+                                        {i18n.t("companySearchScreen:noMatch")}
                                     </p>
                                     <div className="suggestion-container">
-                                        <p>Suggestions</p>
+                                        <p>
+                                            {i18n.t(
+                                                "companySearchScreen:suggestions"
+                                            )}
+                                        </p>
                                         <div className="suggestions">
                                             {" "}
                                             {featuredComanies.map(
