@@ -1,5 +1,6 @@
 package coop.polypoly.polypod
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -83,13 +84,14 @@ open class FeatureFragment : Fragment() {
             findNavController().popBackStack()
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun setupWebView(view: View, backgroundColor: Int) {
         webView = view.findViewById(R.id.web_view)
         webView.setBackgroundColor(backgroundColor)
         webView.settings.javaScriptEnabled = true
 
         // Enabling localStorage until window.pod.polyIn works
-        webView.settings.setDomStorageEnabled(true);
+        webView.settings.domStorageEnabled = true
 
         val feature = FeatureStorage().loadFeature(requireContext(), args.featureName)
         val assetLoader = WebViewAssetLoader.Builder()
@@ -127,13 +129,13 @@ open class FeatureFragment : Fragment() {
         })
 
         navApi = PodNavApi(webView, {
-            activity?.runOnUiThread(Runnable {
+            activity?.runOnUiThread {
                 updateAppBarActions(view)
-            })
+            }
         }, {
-            activity?.runOnUiThread(Runnable {
+            activity?.runOnUiThread {
                 updateAppBarTitle(view, it)
-            })
+            }
         })
     }
 

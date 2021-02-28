@@ -9,19 +9,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.slf4j.LoggerFactory
 import java.io.File
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Config.OLDEST_SDK])
 class FeatureStorageTest {
-    companion object {
-        @Suppress("JAVA_CLASS_ON_COMPANION")
-        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
-    }
-
-    private val context: Context = ApplicationProvider.getApplicationContext<Context>()
+    private val context: Context = ApplicationProvider.getApplicationContext()
     private val featureStorage = FeatureStorage()
 
     private lateinit var featuresDir: File

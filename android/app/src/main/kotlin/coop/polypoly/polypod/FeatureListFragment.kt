@@ -9,17 +9,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coop.polypoly.polypod.features.FeatureStorage
-import coop.polypoly.polypod.logging.LoggerFactory
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FeatureListFragment : Fragment() {
-    companion object {
-        @Suppress("JAVA_CLASS_ON_COMPANION")
-        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
-    }
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager

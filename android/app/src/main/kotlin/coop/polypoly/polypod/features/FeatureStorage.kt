@@ -7,7 +7,7 @@ import java.io.FileOutputStream
 import java.util.*
 import java.util.zip.ZipFile
 
-class Feature(val name: String, val author: String, val description: String) {};
+class Feature(val name: String, val author: String, val description: String)
 
 class FeatureStorage {
     companion object {
@@ -15,7 +15,7 @@ class FeatureStorage {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    public fun listFeatures(context: Context): List<Feature> {
+    fun listFeatures(context: Context): List<Feature> {
         val featuresDir = getFeaturesDir(context)
         logger.warn("Features directory: '{}'", featuresDir.absolutePath)
         if (!featuresDir.exists()) {
@@ -46,11 +46,11 @@ class FeatureStorage {
         }
     }
 
-    public fun loadFeature(context: Context, name: String): ZipFile {
+    fun loadFeature(context: Context, name: String): ZipFile {
         return ZipFile(File(getFeaturesDir(context), "$name.zip"))
     }
 
-    public fun installBundledFeatures(context: Context) {
+    fun installBundledFeatures(context: Context) {
         for (featureBundle in context.assets.list("features").orEmpty()) {
             logger.debug("Installing $featureBundle from assets")
             val source = context.assets.open("features/$featureBundle")

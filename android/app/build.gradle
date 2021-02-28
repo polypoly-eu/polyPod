@@ -33,7 +33,7 @@ tasks.whenTaskAdded { task ->
         task.dependsOn copyTestFeatureOntoDevice
 }
 
-def polyEpoch() {
+static def polyEpoch() {
     // Seconds since 2019-05-04 00:00 UTC - to avoid the year 2038 problem.
     def now = new Date()
     def polypolyFounding = new Date(119, 4, 4)
