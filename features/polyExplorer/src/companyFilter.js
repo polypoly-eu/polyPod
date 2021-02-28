@@ -57,6 +57,12 @@ export function displayString(field, value, i18n, globalData) {
         industryCategory: {
             "?": () => i18n.t("common:companyFilter.missing"),
         },
+        jurisdiction: {
+            "EU-GDPR": () => i18n.t("common:jurisdiction.euGdpr"),
+            Russia: () => i18n.t("common:jurisdiction.russia"),
+            "Five-Eyes": () => i18n.t("common:jurisdiction.fiveEyes"),
+            China: () => i18n.t("common:jurisdiction.china"),
+        },
         revenueRange: Object.fromEntries(
             allRevenueRanges.map((range) => [
                 range,
