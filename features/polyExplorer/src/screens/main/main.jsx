@@ -1,8 +1,8 @@
 import React from "react";
 
-import i18n from "../../../i18n.js";
-import FeaturedCompanyHolder from "../../featuredCompanyHolder/featuredCompanyHolder.jsx";
-import CompanyList from "../../companyList/companyList.jsx";
+import i18n from "../../i18n.js";
+import FeaturedCompanyHolder from "../../components/featuredCompanyHolder/featuredCompanyHolder.jsx";
+import CompanyList from "../../components/companyList/companyList.jsx";
 
 import "../screen.css";
 import "./main.css";

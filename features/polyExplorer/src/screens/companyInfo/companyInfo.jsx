@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import i18n from "../../../i18n.js";
-import CompanyShortInfo from "../../companyShortInfo/companyShortInfo.jsx";
+import i18n from "../../i18n.js";
+import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 //import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyInfo.css";

@@ -1,6 +1,6 @@
 import React from "react";
-import i18n from "../../../i18n.js";
-import DataTypeBubbles from "../../dataViz/dataTypeBubbles.jsx";
+import i18n from "../../i18n.js";
+import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import "../screen.css";
 
 const SharedDataTypeScreen = ({ company }) => {

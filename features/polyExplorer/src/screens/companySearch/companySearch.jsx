@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import i18n from "../../../i18n.js";
+import i18n from "../../i18n.js";
 import "../screen.css";
 import "./companySearch.css";
 
