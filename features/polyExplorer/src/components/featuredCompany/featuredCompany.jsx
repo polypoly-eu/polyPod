@@ -3,69 +3,79 @@ import i18n from "../../i18n.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import "./featuredCompany.css";
 
-const FeaturedCompany = ({ company, onShowScreenChange }) => {
-    const getContentButtons = () => {
-        return (
-            <div className="featured-content-button-holder">
-                <button
-                    onClick={() =>
-                        onShowScreenChange("dataTypes", company.name)
-                    }
-                    className="featured-content-button data-shared"
-                >
-                    {i18n.t("common:sharing.shares")}{" "}
-                    {company.dataTypesShared.length}{" "}
-                    {i18n.t("common:sharing.dataTypes")}
-                </button>
-                <button
-                    onClick={() => onShowScreenChange("purposes", company.name)}
-                    className="featured-content-button purpose-shared"
-                >
-                    {i18n.t("common:sharing.for")}{" "}
-                    {company.dataSharingPurposes.length}{" "}
-                    {i18n.t("common:sharing.purposes")}
-                </button>
-                <button
-                    onClick={() =>
-                        onShowScreenChange("companies", company.name)
-                    }
-                    className="featured-content-button companies-shared"
-                >
-                    {i18n.t("common:sharing.with")}{" "}
-                    {company.sharedWithCompanies.length}{" "}
-                    {i18n.t("common:sharing.companies")}
-                </button>
-                {company.jurisdictionsShared === undefined ? (
-                    <button className="featured-content-button jurisdictions-shared">
-                        {i18n.t("common:sharing.in")}
-                        {" X "}
-                        {i18n.t("common:sharing.jurisdictions")}
-                    </button>
-                ) : (
-                    <button
-                        onClick={() =>
-                            onShowScreenChange("jurisdictions", company.name)
-                        }
-                        className="featured-content-button jurisdictions-shared"
-                    >
-                        {i18n.t("common:sharing.in")}{" "}
-                        {company.jurisdictionsShared.children.length}{" "}
-                        {i18n.t("common:sharing.jurisdictions")}
-                    </button>
-                )}
-            </div>
-        );
-    };
-
+const DataSharingGauge = ({ count, max }) => {
+    const percentage = (count / max) * 100;
     return (
-        <div className="featured-company-card">
-            <CompanyShortInfo
-                company={company}
-                onShowScreenChange={onShowScreenChange}
-            />
-            {getContentButtons()}
+        <div className="data-sharing-gauge">
+            <div className="data-sharing-gauge-outline">
+                <div
+                    className="data-sharing-gauge-fill"
+                    style={{ width: `${percentage}%` }}
+                ></div>
+            </div>
+            <div className="data-sharing-gauge-max">{max}</div>
         </div>
     );
 };
+
+const DataSharingButton = ({ sharingType, count, max, onOpenDetails }) => (
+    <button
+        onClick={onOpenDetails}
+        className={`data-sharing-button ${sharingType}-shared`}
+    >
+        <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
+        <h2>
+            {count} {i18n.t(`common:sharing.${sharingType}`)}
+        </h2>
+        <DataSharingGauge count={count} max={max} />
+    </button>
+);
+
+const FeaturedCompany = ({ company, maxValues, onShowScreenChange }) => (
+    <div className="featured-company-card">
+        <CompanyShortInfo
+            company={company}
+            onShowScreenChange={onShowScreenChange}
+        />
+        <div className="data-sharing-button-list">
+            <DataSharingButton
+                sharingType="dataTypes"
+                count={company.dataTypesShared.length}
+                max={maxValues.dataTypes}
+                onOpenDetails={() =>
+                    onShowScreenChange("dataTypes", company.name)
+                }
+            />
+            <DataSharingButton
+                sharingType="purposes"
+                count={company.dataSharingPurposes.length}
+                max={maxValues.purposes}
+                onOpenDetails={() =>
+                    onShowScreenChange("purposes", company.name)
+                }
+            />
+            <DataSharingButton
+                sharingType="companies"
+                count={company.sharedWithCompanies.length}
+                max={maxValues.companies}
+                onOpenDetails={() =>
+                    onShowScreenChange("companies", company.name)
+                }
+            />
+            <DataSharingButton
+                sharingType="jurisdictions"
+                count={
+                    company.jurisdictionsShared
+                        ? company.jurisdictionsShared.children.length
+                        : 0
+                }
+                max={maxValues.jurisdictions}
+                onOpenDetails={() =>
+                    onShowScreenChange("jurisdictions", company.name)
+                }
+            />
+        </div>
+    </div>
+);
 
 export default FeaturedCompany;

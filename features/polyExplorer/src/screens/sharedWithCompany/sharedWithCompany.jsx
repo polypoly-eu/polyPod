@@ -9,9 +9,7 @@ const SharedWithCompaniesScreen = ({ company }) => {
             <div className="screen-content">
                 <h2>{company.name}</h2>
                 <div className="shared-div">
-                    {i18n.t("common:sharing.shares")}{" "}
-                    {i18n.t("common:sharing.data")}{" "}
-                    {i18n.t("common:sharing.with")}{" "}
+                    {i18n.t("common:sharing.detailPrefix.companies")}{" "}
                     {company.sharedWithCompanies.length}{" "}
                     {i18n.t("common:sharing.companies")}
                 </div>

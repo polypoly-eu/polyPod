@@ -7,8 +7,7 @@ const SharedPurposeScreen = ({ company }) => {
         <div className="explorer-container">
             <h2>{company.name}</h2>
             <div className="shared-div">
-                {i18n.t("common:sharing.shares")}{" "}
-                {i18n.t("common:sharing.data")} {i18n.t("common:sharing.for")}{" "}
+                {i18n.t("common:sharing.detailPrefix.purposes")}{" "}
                 {company.dataSharingPurposes.length}{" "}
                 {i18n.t("common:sharing.purposes")}
             </div>

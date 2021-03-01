@@ -3,47 +3,101 @@
     align-items: center;
     box-sizing: border-box;
     width: 360px;
-    background-color: transparent;
     margin: 24px auto 0px auto;
     border-radius: 24px;
 }
 
-.featured-company-name {
-    font-size: 48px;
-    text-align: center;
-}
-
-.featured-content-button-holder {
+.data-sharing-button-list {
     display: flex;
     align-items: center;
     width: 100%;
     flex-wrap: wrap;
-    margin: 40px auto 0 auto;
+    margin: 8px auto 0 auto;
 }
 
-.featured-content-button {
+.data-sharing-button {
     display: block;
-    width: 90%;
-    margin: 8px auto;
-    padding: 12px;
-    border: transparent;
-    border-radius: 20px;
+    width: 289px;
+    background: transparent;
+    margin: 0 auto;
     font-size: 20px;
-    color: black;
+    text-align: left;
 }
 
-.data-shared {
-    background-color: #fe8988;
+.data-sharing-button h1, .data-sharing-button h2 {
+    margin: 0;
 }
 
-.purpose-shared {
-    background-color: #2fb6d8;
+.data-sharing-button h1 {
+    position: relative;
+    top: 4px;
+    font-size: 16px;
 }
 
-.companies-shared {
-    background-color: #4cce89;
+.data-sharing-button h2 {
+    font-size: 24px;
 }
 
-.jurisdiction-shared {
-    background-color: #d5dd3b;
+.data-sharing-gauge-max {
+    font-size: 12px;
+    text-align: right;
+}
+
+.data-sharing-gauge-outline {
+    height: 12px;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.data-sharing-gauge-fill {
+    height: 100%;
+}
+
+.dataTypes-shared h2, .dataTypes-shared .data-sharing-gauge-max {
+    color: #fe8988;
+}
+
+.dataTypes-shared .data-sharing-gauge-outline {
+    border-color: #fe8988;
+}
+
+.dataTypes-shared .data-sharing-gauge-fill {
+    background: #fe8988;
+}
+
+.purposes-shared h2, .purposes-shared .data-sharing-gauge-max {
+    color: #3ba6ff;
+}
+
+.purposes-shared .data-sharing-gauge-outline {
+    border-color: #3ba6ff;
+}
+
+.purposes-shared .data-sharing-gauge-fill {
+    background: #3ba6ff;
+}
+
+.companies-shared h2, .companies-shared .data-sharing-gauge-max {
+    color: #7ee8a2;
+}
+
+.companies-shared .data-sharing-gauge-outline {
+    border-color: #7ee8a2;
+}
+
+.companies-shared .data-sharing-gauge-fill {
+    background: #7ee8a2;
+}
+
+.jurisdictions-shared h2, .jurisdictions-shared .data-sharing-gauge-max {
+    color: #edf2f7;
+}
+
+.jurisdictions-shared .data-sharing-gauge-outline {
+    border-color: #edf2f7;
+}
+
+.jurisdictions-shared .data-sharing-gauge-fill {
+    background: #edf2f7;
 }

@@ -9,9 +9,7 @@ const SharedJurisdictionsScreen = ({ company }) => {
             <div className="screen-content">
                 <h2>{company.name}</h2>
                 <div className="shared-div">
-                    {i18n.t("common:sharing.shares")}{" "}
-                    {i18n.t("common:sharing.data")}{" "}
-                    {i18n.t("common:sharing.in")}{" "}
+                    {i18n.t("common:sharing.detailPrefix.jurisdictions")}{" "}
                     {company.jurisdictionsShared.children.length}{" "}
                     {i18n.t("common:sharing.jurisdictions")}
                 </div>

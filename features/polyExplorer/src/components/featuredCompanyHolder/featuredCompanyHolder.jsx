@@ -15,6 +15,25 @@ const FeaturedCompanyHolder = ({
     initialSlide,
     onUpdateInitialSlide,
 }) => {
+    const counts = {
+        dataTypes: featuredCompanies.map(
+            (company) => company.dataTypesShared.length
+        ),
+        purposes: featuredCompanies.map(
+            (company) => company.dataSharingPurposes.length
+        ),
+        companies: featuredCompanies.map(
+            (company) => company.sharedWithCompanies.length
+        ),
+        jurisdictions: featuredCompanies.map((company) =>
+            company.jurisdictionsShared
+                ? company.jurisdictionsShared.children.length
+                : 0
+        ),
+    };
+    const maxValues = Object.fromEntries(
+        Object.entries(counts).map(([key, value]) => [key, Math.max(...value)])
+    );
     return (
         <div className="featured-company-holder">
             <Swiper
@@ -32,6 +51,7 @@ const FeaturedCompanyHolder = ({
                         <FeaturedCompany
                             key={index}
                             company={company}
+                            maxValues={maxValues}
                             onShowScreenChange={onShowScreenChange}
                         />
                     </SwiperSlide>

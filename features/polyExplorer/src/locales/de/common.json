@@ -49,22 +49,28 @@
         "China",
     "jurisdiction.undisclosed":
         "Sonstige",
-    "sharing.shares":
+    "sharing.prefix.dataTypes":
+        "teilt",
+    "sharing.detailPrefix.dataTypes":
         "teilt",
     "sharing.dataTypes":
         "Datentypen",
-    "sharing.for":
+    "sharing.prefix.purposes":
         "für",
+    "sharing.detailPrefix.purposes":
+        "teilt Daten für",
     "sharing.purposes":
         "Zwecke",
-    "sharing.with":
+    "sharing.prefix.companies":
         "mit",
+    "sharing.detailPrefix.companies":
+        "teilt Daten mit",
     "sharing.companies":
         "Firmen",
-    "sharing.in":
+    "sharing.prefix.jurisdictions":
         "in",
+    "sharing.detailPrefix.jurisdictions":
+        "teilt Daten in",
     "sharing.jurisdictions":
-        "Rechtsräumen",
-    "sharing.data":
-        "Daten"
+        "Rechtsräumen"
 }

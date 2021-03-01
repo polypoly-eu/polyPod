@@ -10,7 +10,9 @@ const SharedDataTypeScreen = ({ company }) => {
             <div className="screen-content">
                 <h2>{company.name}</h2>
                 <div>
-                    <p className="">{i18n.t("common:sharing.shares")}</p>{" "}
+                    <p className="">
+                        {i18n.t("common:sharing.detailPrefix.dataTypes")}
+                    </p>{" "}
                     <p>
                         {company.dataTypesShared.length}{" "}
                         {i18n.t("common:sharing.dataTypes")}
