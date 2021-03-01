@@ -5,31 +5,6 @@ import "./featuredCompany.css";
 
 const FeaturedCompany = ({ company, onShowScreenChange }) => {
     const getContentButtons = () => {
-        if (company.jurisdictionsShared === undefined)
-            return (
-                <div className="featured-content-button-holder">
-                    <button className="featured-content-button data-shared">
-                        {i18n.t("common:sharing.shares")}{" "}
-                        {company.dataTypesShared.length}{" "}
-                        {i18n.t("common:sharing.dataTypes")}
-                    </button>
-                    <button className="featured-content-button purpose-shared">
-                        {i18n.t("common:sharing.for")}{" "}
-                        {company.dataSharingPurposes.length}{" "}
-                        {i18n.t("common:sharing.purposes")}
-                    </button>
-                    <button className="featured-content-button companies-shared">
-                        {i18n.t("common:sharing.with")}{" "}
-                        {company.sharedWithCompanies.length}{" "}
-                        {i18n.t("common:sharing.companies")}
-                    </button>
-                    <button className="featured-content-button jurisdictions-shared">
-                        {i18n.t("common:sharing.in")}
-                        {" X "}
-                        {i18n.t("common:sharing.jurisdictions")}
-                    </button>
-                </div>
-            );
         return (
             <div className="featured-content-button-holder">
                 <button
@@ -60,16 +35,24 @@ const FeaturedCompany = ({ company, onShowScreenChange }) => {
                     {company.sharedWithCompanies.length}{" "}
                     {i18n.t("common:sharing.companies")}
                 </button>
-                <button
-                    onClick={() =>
-                        onShowScreenChange("jurisdictions", company.name)
-                    }
-                    className="featured-content-button jurisdictions-shared"
-                >
-                    {i18n.t("common:sharing.in")}{" "}
-                    {company.jurisdictionsShared.children.length}{" "}
-                    {i18n.t("common:sharing.jurisdictions")}
-                </button>
+                {company.jurisdictionsShared === undefined ? (
+                    <button className="featured-content-button jurisdictions-shared">
+                        {i18n.t("common:sharing.in")}
+                        {" X "}
+                        {i18n.t("common:sharing.jurisdictions")}
+                    </button>
+                ) : (
+                    <button
+                        onClick={() =>
+                            onShowScreenChange("jurisdictions", company.name)
+                        }
+                        className="featured-content-button jurisdictions-shared"
+                    >
+                        {i18n.t("common:sharing.in")}{" "}
+                        {company.jurisdictionsShared.children.length}{" "}
+                        {i18n.t("common:sharing.jurisdictions")}
+                    </button>
+                )}
             </div>
         );
     };
