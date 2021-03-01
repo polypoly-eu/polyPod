@@ -1,5 +1,6 @@
 .company-filter-screen {
     padding: 20px;
+    padding-bottom: calc(107px + 27px);
     overflow: hidden scroll;
 }
 
