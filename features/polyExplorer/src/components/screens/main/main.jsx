@@ -5,7 +5,7 @@ import FeaturedCompanyHolder from "../../featuredCompanyHolder/featuredCompanyHo
 import CompanyList from "../../companyList/companyList.jsx";
 
 import "../screen.css";
-import "./mainScreen.css";
+import "./main.css";
 
 const MainScreen = ({
     showFeatured,

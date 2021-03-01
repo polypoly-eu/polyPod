@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import i18n from "../../../i18n.js";
 import "../screen.css";
-import "./companySearchScreen.css";
+import "./companySearch.css";
 
 const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
     const [searchString, setSearchString] = useState("");
