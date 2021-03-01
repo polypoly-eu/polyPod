@@ -48,5 +48,23 @@
     "jurisdiction.china":
         "China",
     "jurisdiction.undisclosed":
-        "Sonstige"
+        "Sonstige",
+    "sharing.shares":
+        "teilt",
+    "sharing.dataTypes":
+        "Datentypen",
+    "sharing.for":
+        "für",
+    "sharing.purposes":
+        "Zwecke",
+    "sharing.with":
+        "mit",
+    "sharing.companies":
+        "Firmen",
+    "sharing.in":
+        "in",
+    "sharing.jurisdictions":
+        "Rechtsräumen",
+    "sharing.data":
+        "Daten"
 }

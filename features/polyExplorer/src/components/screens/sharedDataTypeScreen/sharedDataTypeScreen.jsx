@@ -1,4 +1,5 @@
 import React from "react";
+import i18n from "../../../i18n.js";
 import DataTypeBubbles from "../../dataViz/dataTypeBubbles.jsx";
 import "../screen.css";
 
@@ -9,8 +10,11 @@ const SharedDataTypeScreen = ({ company }) => {
             <div className="screen-content">
                 <h2>{company.name}</h2>
                 <div>
-                    <p className="">shares</p>{" "}
-                    <p>{company.dataTypesShared.length} datatypes</p>
+                    <p className="">{i18n.t("common:sharing.shares")}</p>{" "}
+                    <p>
+                        {company.dataTypesShared.length}{" "}
+                        {i18n.t("common:sharing.dataTypes")}
+                    </p>
                 </div>
 
                 <DataTypeBubbles
