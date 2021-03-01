@@ -33,7 +33,9 @@
 .company-search {
     width: 100%;
     max-width: 460px;
-    margin: 16px auto;
+    margin: 0 auto;
+    padding: 16px 0;
+    overflow-y: scroll;
 }
 
 .suggestion-holder .suggestions {
