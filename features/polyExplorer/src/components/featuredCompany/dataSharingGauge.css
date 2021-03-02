@@ -1,0 +1,129 @@
+.data-sharing-gauge {
+    height: 28px;
+}
+
+.data-sharing-gauge-outline,
+.data-sharing-gauge-fill {
+    height: 12px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.data-sharing-gauge-outline {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.data-sharing-gauge-fill {
+    position: relative;
+    left: 0;
+    top: -12px;
+}
+
+.data-sharing-gauge-fill.partial {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.data-sharing-gauge-average-marker {
+    position: relative;
+    top: calc(-12px - 12px);
+    left: 0;
+    border-right-style: solid;
+    border-right-width: 2px;
+}
+
+.data-sharing-gauge-average-marker.dark {
+    height: 14px;
+    margin-top: -1px;
+    border-color: #0f1938;
+}
+
+.data-sharing-gauge-average-marker.light {
+    height: 10px;
+    margin-top: 1px;
+    margin-bottom: 2px;
+}
+
+.data-sharing-gauge-average-label,
+.data-sharing-gauge-max-label {
+    font-size: 12px;
+}
+
+.data-sharing-gauge-average-label {
+    position: absolute;
+    top: 12px;
+    right: calc(-40px - 1px);
+    width: 80px;
+    text-align: center;
+}
+
+.data-sharing-gauge-average-marker.dark .data-sharing-gauge-average-label {
+    margin-top: 2px;
+}
+
+.data-sharing-gauge-average-marker.light .data-sharing-gauge-average-label {
+    margin-top: 0;
+}
+
+.data-sharing-gauge-max-label {
+    position: relative;
+    top: -24px;
+    text-align: right;
+}
+
+.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-max-label,
+.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-average-label {
+    color: #fe8988;
+}
+
+.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-outline,
+.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-average-marker.light {
+    border-color: #fe8988;
+}
+
+.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-fill {
+    background: #fe8988;
+}
+
+.data-sharing-gauge[data-sharing-type="purposes"] .data-sharing-gauge-max-label,
+.data-sharing-purposes .data-sharing-gauge-average-label {
+    color: #3ba6ff;
+}
+
+.data-sharing-gauge[data-sharing-type="purposes"] .data-sharing-gauge-outline,
+.data-sharing-gauge[data-sharing-type="purposes"] .data-sharing-gauge-average-marker.light {
+    border-color: #3ba6ff;
+}
+
+.data-sharing-gauge[data-sharing-type="purposes"] .data-sharing-gauge-fill {
+    background: #3ba6ff;
+}
+
+.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-max-label,
+.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-average-label {
+    color: #7ee8a2;
+}
+
+.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-outline,
+.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-average-marker.light {
+    border-color: #7ee8a2;
+}
+
+.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-fill {
+    background: #7ee8a2;
+}
+
+.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-max-label,
+.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-average-label {
+    color: #edf2f7;
+}
+
+.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-outline,
+.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-average-marker.light {
+    border-color: #edf2f7;
+}
+
+.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-fill {
+    background: #edf2f7;
+}

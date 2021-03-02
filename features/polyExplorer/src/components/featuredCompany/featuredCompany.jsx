@@ -1,36 +1,8 @@
 import React from "react";
 import i18n from "../../i18n.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
+import DataSharingGauge from "./dataSharingGauge.jsx";
 import "./featuredCompany.css";
-
-const DataSharingGauge = ({ count, max, average }) => {
-    const countPercentage = (count / max) * 100;
-    const averagePercentage = (average / max) * 100;
-    return (
-        <div className="data-sharing-gauge">
-            <div className="data-sharing-gauge-outline"></div>
-            <div
-                className={
-                    "data-sharing-gauge-fill" +
-                    (countPercentage <= 98 ? " partial" : "")
-                }
-                style={{ width: `${countPercentage}%` }}
-            ></div>
-            <div
-                className={
-                    "data-sharing-gauge-average-marker " +
-                    (averagePercentage > countPercentage ? "light" : "dark")
-                }
-                style={{ width: `${averagePercentage}%` }}
-            >
-                <div className="data-sharing-gauge-average-label">
-                    {average}
-                </div>
-            </div>
-            <div className="data-sharing-gauge-max-label">{max}</div>
-        </div>
-    );
-};
 
 const DataSharingButton = ({
     sharingType,
@@ -47,7 +19,12 @@ const DataSharingButton = ({
         <h2>
             {count} {i18n.t(`common:sharing.${sharingType}`)}
         </h2>
-        <DataSharingGauge count={count} max={max} average={average} />
+        <DataSharingGauge
+            sharingType={sharingType}
+            count={count}
+            max={max}
+            average={average}
+        />
     </button>
 );
 
