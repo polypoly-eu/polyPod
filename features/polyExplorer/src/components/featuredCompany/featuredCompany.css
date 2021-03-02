@@ -44,28 +44,88 @@
     font-size: 24px;
 }
 
-.data-sharing-gauge-max {
-    font-size: 12px;
-    text-align: right;
+.data-sharing-gauge {
+    height: 28px;
+}
+
+.data-sharing-gauge-outline,
+.data-sharing-gauge-fill {
+    height: 12px;
+    border-radius: 6px;
+    box-sizing: border-box;
 }
 
 .data-sharing-gauge-outline {
-    height: 12px;
-    border-radius: 6px;
     border-style: solid;
     border-width: 1px;
 }
 
 .data-sharing-gauge-fill {
-    height: 100%;
+    position: relative;
+    left: 0;
+    top: -12px;
+}
+
+.data-sharing-gauge-fill.partial {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.data-sharing-gauge-average-marker {
+    position: relative;
+    top: calc(-12px - 12px);
+    left: 0;
+    border-right-style: solid;
+    border-right-width: 2px;
+}
+
+.data-sharing-gauge-average-marker.dark {
+    height: 14px;
+    margin-top: -1px;
+    border-color: #0f1938;
+}
+
+.data-sharing-gauge-average-marker.light {
+    height: 10px;
+    margin-top: 1px;
+    margin-bottom: 2px;
+}
+
+.data-sharing-gauge-average-label,
+.data-sharing-gauge-max-label {
+    font-size: 12px;
+}
+
+.data-sharing-gauge-average-label {
+    position: absolute;
+    top: 12px;
+    right: calc(-40px - 1px);
+    width: 80px;
+    text-align: center;
+}
+
+.data-sharing-gauge-average-marker.dark .data-sharing-gauge-average-label {
+    margin-top: 2px;
+}
+
+.data-sharing-gauge-average-marker.light .data-sharing-gauge-average-label {
+    margin-top: 0;
+}
+
+.data-sharing-gauge-max-label {
+    position: relative;
+    top: -24px;
+    text-align: right;
 }
 
 .dataTypes-shared h2,
-.dataTypes-shared .data-sharing-gauge-max {
+.dataTypes-shared .data-sharing-gauge-max-label,
+.dataTypes-shared .data-sharing-gauge-average-label {
     color: #fe8988;
 }
 
-.dataTypes-shared .data-sharing-gauge-outline {
+.dataTypes-shared .data-sharing-gauge-outline,
+.dataTypes-shared .data-sharing-gauge-average-marker.light {
     border-color: #fe8988;
 }
 
@@ -74,11 +134,13 @@
 }
 
 .purposes-shared h2,
-.purposes-shared .data-sharing-gauge-max {
+.purposes-shared .data-sharing-gauge-max-label,
+.purposes-shared .data-sharing-gauge-average-label {
     color: #3ba6ff;
 }
 
-.purposes-shared .data-sharing-gauge-outline {
+.purposes-shared .data-sharing-gauge-outline,
+.purposes-shared .data-sharing-gauge-average-marker.light {
     border-color: #3ba6ff;
 }
 
@@ -87,11 +149,13 @@
 }
 
 .companies-shared h2,
-.companies-shared .data-sharing-gauge-max {
+.companies-shared .data-sharing-gauge-max-label,
+.companies-shared .data-sharing-gauge-average-label {
     color: #7ee8a2;
 }
 
-.companies-shared .data-sharing-gauge-outline {
+.companies-shared .data-sharing-gauge-outline,
+.companies-shared .data-sharing-gauge-average-marker.light {
     border-color: #7ee8a2;
 }
 
@@ -100,11 +164,13 @@
 }
 
 .jurisdictions-shared h2,
-.jurisdictions-shared .data-sharing-gauge-max {
+.jurisdictions-shared .data-sharing-gauge-max-label,
+.jurisdictions-shared .data-sharing-gauge-average-label {
     color: #edf2f7;
 }
 
-.jurisdictions-shared .data-sharing-gauge-outline {
+.jurisdictions-shared .data-sharing-gauge-outline,
+.jurisdictions-shared .data-sharing-gauge-average-marker.light {
     border-color: #edf2f7;
 }
 

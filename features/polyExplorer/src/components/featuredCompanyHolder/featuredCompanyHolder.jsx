@@ -34,6 +34,12 @@ const FeaturedCompanyHolder = ({
     const maxValues = Object.fromEntries(
         Object.entries(counts).map(([key, value]) => [key, Math.max(...value)])
     );
+    const averageValues = Object.fromEntries(
+        Object.entries(counts).map(([key, value]) => [
+            key,
+            Math.round(value.reduce((a, b) => a + b, 0) / value.length),
+        ])
+    );
     return (
         <div className="featured-company-holder">
             <Swiper
@@ -52,6 +58,7 @@ const FeaturedCompanyHolder = ({
                             key={index}
                             company={company}
                             maxValues={maxValues}
+                            averageValues={averageValues}
                             onShowScreenChange={onShowScreenChange}
                         />
                     </SwiperSlide>

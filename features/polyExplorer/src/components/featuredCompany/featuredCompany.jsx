@@ -3,22 +3,42 @@ import i18n from "../../i18n.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import "./featuredCompany.css";
 
-const DataSharingGauge = ({ count, max }) => {
-    const percentage = (count / max) * 100;
+const DataSharingGauge = ({ count, max, average }) => {
+    const countPercentage = (count / max) * 100;
+    const averagePercentage = (average / max) * 100;
     return (
         <div className="data-sharing-gauge">
-            <div className="data-sharing-gauge-outline">
-                <div
-                    className="data-sharing-gauge-fill"
-                    style={{ width: `${percentage}%` }}
-                ></div>
+            <div className="data-sharing-gauge-outline"></div>
+            <div
+                className={
+                    "data-sharing-gauge-fill" +
+                    (countPercentage <= 98 ? " partial" : "")
+                }
+                style={{ width: `${countPercentage}%` }}
+            ></div>
+            <div
+                className={
+                    "data-sharing-gauge-average-marker " +
+                    (averagePercentage > countPercentage ? "light" : "dark")
+                }
+                style={{ width: `${averagePercentage}%` }}
+            >
+                <div className="data-sharing-gauge-average-label">
+                    {average}
+                </div>
             </div>
-            <div className="data-sharing-gauge-max">{max}</div>
+            <div className="data-sharing-gauge-max-label">{max}</div>
         </div>
     );
 };
 
-const DataSharingButton = ({ sharingType, count, max, onOpenDetails }) => (
+const DataSharingButton = ({
+    sharingType,
+    count,
+    max,
+    average,
+    onOpenDetails,
+}) => (
     <button
         onClick={onOpenDetails}
         className={`data-sharing-button ${sharingType}-shared`}
@@ -27,11 +47,16 @@ const DataSharingButton = ({ sharingType, count, max, onOpenDetails }) => (
         <h2>
             {count} {i18n.t(`common:sharing.${sharingType}`)}
         </h2>
-        <DataSharingGauge count={count} max={max} />
+        <DataSharingGauge count={count} max={max} average={average} />
     </button>
 );
 
-const FeaturedCompany = ({ company, maxValues, onShowScreenChange }) => (
+const FeaturedCompany = ({
+    company,
+    maxValues,
+    averageValues,
+    onShowScreenChange,
+}) => (
     <div className="featured-company-card">
         <div className="short-info-margin">
             <CompanyShortInfo
@@ -44,6 +69,7 @@ const FeaturedCompany = ({ company, maxValues, onShowScreenChange }) => (
                 sharingType="dataTypes"
                 count={company.dataTypesShared.length}
                 max={maxValues.dataTypes}
+                average={averageValues.dataTypes}
                 onOpenDetails={() =>
                     onShowScreenChange("dataTypes", company.name)
                 }
@@ -52,6 +78,7 @@ const FeaturedCompany = ({ company, maxValues, onShowScreenChange }) => (
                 sharingType="purposes"
                 count={company.dataSharingPurposes.length}
                 max={maxValues.purposes}
+                average={averageValues.purposes}
                 onOpenDetails={() =>
                     onShowScreenChange("purposes", company.name)
                 }
@@ -60,6 +87,7 @@ const FeaturedCompany = ({ company, maxValues, onShowScreenChange }) => (
                 sharingType="companies"
                 count={company.sharedWithCompanies.length}
                 max={maxValues.companies}
+                average={averageValues.companies}
                 onOpenDetails={() =>
                     onShowScreenChange("companies", company.name)
                 }
@@ -72,6 +100,7 @@ const FeaturedCompany = ({ company, maxValues, onShowScreenChange }) => (
                         : 0
                 }
                 max={maxValues.jurisdictions}
+                average={averageValues.jurisdictions}
                 onOpenDetails={() =>
                     onShowScreenChange("jurisdictions", company.name)
                 }
