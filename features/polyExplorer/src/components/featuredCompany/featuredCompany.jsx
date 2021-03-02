@@ -9,6 +9,7 @@ const DataSharingButton = ({
     count,
     max,
     average,
+    showLegend,
     onOpenDetails,
 }) => (
     <button
@@ -24,6 +25,7 @@ const DataSharingButton = ({
             count={count}
             max={max}
             average={average}
+            showLegend={showLegend}
         />
     </button>
 );
@@ -78,6 +80,7 @@ const FeaturedCompany = ({
                 }
                 max={maxValues.jurisdictions}
                 average={averageValues.jurisdictions}
+                showLegend="true"
                 onOpenDetails={() =>
                     onShowScreenChange("jurisdictions", company.name)
                 }

@@ -1,7 +1,13 @@
 import React from "react";
 import "./dataSharingGauge.css";
 
-const DataSharingGauge = ({ sharingType, count, max, average }) => {
+const DataSharingGauge = ({
+    sharingType,
+    count,
+    max,
+    average,
+    showLegend = false,
+}) => {
     const countPercentage = (count / max) * 100;
     const averagePercentage = (average / max) * 100;
     return (
@@ -26,6 +32,16 @@ const DataSharingGauge = ({ sharingType, count, max, average }) => {
                 </div>
             </div>
             <div className="data-sharing-gauge-max-label">{max}</div>
+            {showLegend && (
+                <div className="data-sharing-gauge-legend">
+                    <span>
+                        <img src="images/question-circle.svg"></img>
+                        Amount of entries:
+                    </span>
+                    <span>average</span>
+                    <span>total</span>
+                </div>
+            )}
         </div>
     );
 };
