@@ -2,9 +2,13 @@
     position: relative;
     align-items: center;
     box-sizing: border-box;
-    width: 360px;
+    width: 100%;
     margin: 24px auto 0px auto;
     border-radius: 24px;
+}
+
+.featured-company-card .short-info-margin {
+    margin-left: 12px;
 }
 
 .data-sharing-button-list {
@@ -17,14 +21,16 @@
 
 .data-sharing-button {
     display: block;
-    width: 289px;
+    width: 85%;
+    max-width: 414px;
     background: transparent;
     margin: 0 auto;
     font-size: 20px;
     text-align: left;
 }
 
-.data-sharing-button h1, .data-sharing-button h2 {
+.data-sharing-button h1,
+.data-sharing-button h2 {
     margin: 0;
 }
 
@@ -54,7 +60,8 @@
     height: 100%;
 }
 
-.dataTypes-shared h2, .dataTypes-shared .data-sharing-gauge-max {
+.dataTypes-shared h2,
+.dataTypes-shared .data-sharing-gauge-max {
     color: #fe8988;
 }
 
@@ -66,7 +73,8 @@
     background: #fe8988;
 }
 
-.purposes-shared h2, .purposes-shared .data-sharing-gauge-max {
+.purposes-shared h2,
+.purposes-shared .data-sharing-gauge-max {
     color: #3ba6ff;
 }
 
@@ -78,7 +86,8 @@
     background: #3ba6ff;
 }
 
-.companies-shared h2, .companies-shared .data-sharing-gauge-max {
+.companies-shared h2,
+.companies-shared .data-sharing-gauge-max {
     color: #7ee8a2;
 }
 
@@ -90,7 +99,8 @@
     background: #7ee8a2;
 }
 
-.jurisdictions-shared h2, .jurisdictions-shared .data-sharing-gauge-max {
+.jurisdictions-shared h2,
+.jurisdictions-shared .data-sharing-gauge-max {
     color: #edf2f7;
 }
 

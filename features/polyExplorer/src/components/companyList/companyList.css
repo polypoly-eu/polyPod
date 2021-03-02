@@ -37,7 +37,8 @@
     margin-right: 12px;
 }
 
-.active-filters button::before, button::after {
+.active-filters button::before,
+button::after {
     position: relative;
     top: 4px;
 }
@@ -91,7 +92,7 @@
 }
 
 .company-group {
-    display: inline-block;
+    display: flex;
     position: relative;
     margin-left: 12px;
 }

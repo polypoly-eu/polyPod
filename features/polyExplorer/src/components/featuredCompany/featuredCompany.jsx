@@ -33,10 +33,12 @@ const DataSharingButton = ({ sharingType, count, max, onOpenDetails }) => (
 
 const FeaturedCompany = ({ company, maxValues, onShowScreenChange }) => (
     <div className="featured-company-card">
-        <CompanyShortInfo
-            company={company}
-            onShowScreenChange={onShowScreenChange}
-        />
+        <div className="short-info-margin">
+            <CompanyShortInfo
+                company={company}
+                onShowScreenChange={onShowScreenChange}
+            />
+        </div>
         <div className="data-sharing-button-list">
             <DataSharingButton
                 sharingType="dataTypes"

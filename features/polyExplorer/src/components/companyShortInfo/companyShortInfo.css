@@ -1,8 +1,9 @@
 .company-short-info {
     display: flex;
     box-sizing: border-box;
-    width: 350px;
-    padding: 20px;
+    width: 90%;
+    max-width: 434px;
+    padding: 8px;
     border: none;
     background-color: #0f1938;
     outline: none;
@@ -64,7 +65,7 @@
 .company-short-info .company-category {
     font-size: 14px;
     transform: translateY(-4px);
-    width: 180px;
+    width: 90%;
     display: inline-block;
 }
 
