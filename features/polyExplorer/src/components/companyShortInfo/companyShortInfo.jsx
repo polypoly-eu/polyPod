@@ -7,7 +7,15 @@ const CompanyShortInfo = ({ company, onShowScreenChange }) => {
             onClick={() => onShowScreenChange("companyInfo", company.name)}
             className="company-short-info"
         >
-            <div className="company-logo"></div>
+            {company.featured ? (
+                <img
+                    src="./images/star.svg"
+                    alt=""
+                    className="featured-indicator"
+                />
+            ) : (
+                <div className="non-featured-aligner" />
+            )}
             <div className="info-box">
                 <p className="company-name">{company.name}</p>
                 <div className="company-location">
@@ -18,6 +26,10 @@ const CompanyShortInfo = ({ company, onShowScreenChange }) => {
                             {company.jurisdiction}
                         </span>
                     </p>
+                </div>
+                <div className="company-category">
+                    <div className="category-icon"></div>
+                    <p className="category-name">Unspecified</p>
                 </div>
             </div>
         </button>

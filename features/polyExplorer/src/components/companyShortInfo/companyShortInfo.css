@@ -1,43 +1,44 @@
 .company-short-info {
-    position: relative;
-    display: block;
+    display: flex;
     box-sizing: border-box;
-    width: 321px;
-    height: 90px;
-    padding: 8px;
+    width: 350px;
+    padding: 20px;
     border: none;
     background-color: #0f1938;
     outline: none;
     margin: 0 auto;
 }
 
-.company-short-info .company-logo {
+.company-short-info .featured-indicator {
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.company-short-info .non-featured-aligner {
+    display: inline-block;
     box-sizing: border-box;
-    position: absolute;
-    top: 15px;
-    left: 10px;
-    height: 60px;
-    width: 60px;
-    border: 1px solid #3e495b;
-    border-radius: 50%;
+    min-width: 19px;
+    width: 19px;
+    height: 19px;
+    margin-top: 4px;
 }
 
 .company-short-info .info-box {
-    position: absolute;
+    display: inline-block;
     color: #edf2f7;
-    top: 16px;
-    left: 80px;
     text-align: left;
+    margin-left: 6px;
 }
 
 .info-box .company-name {
+    position: relative;
     font-family: "Jost Medium";
-    font-size: 16px;
+    font-size: 20px;
     margin: 0;
 }
 
 .info-box .company-location {
-    font-size: 16px;
+    font-size: 14px;
     width: 60px;
     display: inline;
 }
@@ -58,4 +59,26 @@
 
 .location-name .jurisdiction-name {
     color: #60e6de;
+}
+
+.company-short-info .company-category {
+    font-size: 14px;
+    transform: translateY(-4px);
+    width: 180px;
+    display: inline-block;
+}
+
+.company-category .category-name {
+    display: inline-block;
+    transform: translateY(-4px);
+    margin: 0;
+    color: #8d9caf;
+}
+
+.company-category .category-icon {
+    display: inline-block;
+    transform: translateX(-4px);
+    width: 20px;
+    height: 20px;
+    background: url("../images/unknown.svg");
 }
