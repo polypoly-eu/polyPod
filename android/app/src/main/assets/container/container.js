@@ -6,19 +6,6 @@
 const {port1, port2} = new MessageChannel();
 let outerPort;
 
-// To keep the burden of supporting older system WebView versions low on feature
-// developers, we polyfill some modern JavaScript features.
-// The more permanent solution is to not rely on the system WebView anymore.
-function initPolyfills() {
-    if (!Object.fromEntries) {
-        Object.fromEntries = function(entries) {
-            const obj = {};
-            entries.forEach(([key, value]) => obj[key] = value);
-            return obj;
-        };
-    }
-}
-
 function initMessaging() {
     window.onmessage = event => {
         outerPort = event.ports[0];
@@ -53,6 +40,5 @@ function loadFeature() {
     iFrame.src = `features/${featureName}/index.html`;
 }
 
-initPolyfills();
 initMessaging();
 loadFeature();
