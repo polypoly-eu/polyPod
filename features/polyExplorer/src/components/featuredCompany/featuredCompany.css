@@ -35,8 +35,7 @@
 }
 
 .data-sharing-button h1 {
-    position: relative;
-    top: 4px;
+    margin-bottom: -7px;
     font-size: 16px;
 }
 
