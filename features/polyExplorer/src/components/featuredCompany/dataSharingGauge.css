@@ -2,6 +2,27 @@
     height: 28px;
 }
 
+.data-sharing-gauge[data-sharing-type="dataTypes"] {
+    --highlight-color: #fe8988;
+}
+
+.data-sharing-gauge[data-sharing-type="purposes"] {
+    --highlight-color: #3ba6ff;
+}
+
+.data-sharing-gauge[data-sharing-type="companies"] {
+    --highlight-color: #7ee8a2;
+}
+
+.data-sharing-gauge[data-sharing-type="jurisdictions"] {
+    --highlight-color: #edf2f7;
+}
+
+.data-sharing-gauge-outline,
+.data-sharing-gauge-average-marker.light {
+    border-color: var(--highlight-color);
+}
+
 .data-sharing-gauge-outline,
 .data-sharing-gauge-fill {
     height: 12px;
@@ -18,6 +39,7 @@
     position: relative;
     left: 0;
     top: -12px;
+    background: var(--highlight-color);
 }
 
 .data-sharing-gauge-fill.partial {
@@ -48,6 +70,7 @@
 .data-sharing-gauge-average-label,
 .data-sharing-gauge-max-label {
     font-size: 12px;
+    color: var(--highlight-color);
 }
 
 .data-sharing-gauge-average-label {
@@ -70,60 +93,4 @@
     position: relative;
     top: -24px;
     text-align: right;
-}
-
-.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-max-label,
-.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-average-label {
-    color: #fe8988;
-}
-
-.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-outline,
-.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-average-marker.light {
-    border-color: #fe8988;
-}
-
-.data-sharing-gauge[data-sharing-type="dataTypes"] .data-sharing-gauge-fill {
-    background: #fe8988;
-}
-
-.data-sharing-gauge[data-sharing-type="purposes"] .data-sharing-gauge-max-label,
-.data-sharing-purposes .data-sharing-gauge-average-label {
-    color: #3ba6ff;
-}
-
-.data-sharing-gauge[data-sharing-type="purposes"] .data-sharing-gauge-outline,
-.data-sharing-gauge[data-sharing-type="purposes"] .data-sharing-gauge-average-marker.light {
-    border-color: #3ba6ff;
-}
-
-.data-sharing-gauge[data-sharing-type="purposes"] .data-sharing-gauge-fill {
-    background: #3ba6ff;
-}
-
-.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-max-label,
-.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-average-label {
-    color: #7ee8a2;
-}
-
-.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-outline,
-.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-average-marker.light {
-    border-color: #7ee8a2;
-}
-
-.data-sharing-gauge[data-sharing-type="companies"] .data-sharing-gauge-fill {
-    background: #7ee8a2;
-}
-
-.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-max-label,
-.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-average-label {
-    color: #edf2f7;
-}
-
-.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-outline,
-.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-average-marker.light {
-    border-color: #edf2f7;
-}
-
-.data-sharing-gauge[data-sharing-type="jurisdictions"] .data-sharing-gauge-fill {
-    background: #edf2f7;
 }
