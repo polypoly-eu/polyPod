@@ -1,4 +1,5 @@
 import React from "react";
+import i18n from "../../i18n.js";
 import "./dataSharingGauge.css";
 
 const DataSharingGauge = ({
@@ -36,10 +37,12 @@ const DataSharingGauge = ({
                 <div className="data-sharing-gauge-legend">
                     <span>
                         <img src="images/question-circle.svg"></img>
-                        Amount of entries:
+                        {i18n.t("featuredCompany:gauge.legend.explanation")}
                     </span>
-                    <span>average</span>
-                    <span>total</span>
+                    <span>
+                        {i18n.t("featuredCompany:gauge.legend.average")}
+                    </span>
+                    <span>{i18n.t("featuredCompany:gauge.legend.total")}</span>
                 </div>
             )}
         </div>
