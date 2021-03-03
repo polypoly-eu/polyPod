@@ -44,13 +44,14 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
     const getScaleVars = (value) => {
         const [unit, unitNumber] = getUnit(value);
         let scaleRef = Math.ceil(value / unitNumber / numSteps) * numSteps;
-        if (scaleRef - value / unitNumber < 1) scaleRef += 4;
+        if (scaleRef - value / unitNumber < scaleRef * 0.05)
+            scaleRef += Math.ceil((scaleRef * 0.05) / 4) * 4;
         return [scaleRef, unit, unitNumber];
     };
 
     const getHeight = (amount, scaleRef) => {
         //max percentage(max is 64%) * amount / scaleRef * 100
-        return amount == null ? 0 : ((0.64 * amount) / scaleRef) * 100;
+        return amount == null ? 0 : ((0.62 * amount) / scaleRef) * 100;
     };
 
     const highestValue = getHighestAmount();
@@ -178,9 +179,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[0] ? (
-                        <p className="in-bar-number">{amounts[0]}</p>
+                        <p className="in-bar-number">{amounts[0].toFixed(0)}</p>
                     ) : (
-                        <p className="no-data-tag">No Data</p>
+                        <p className="no-data-for-column-tag">No Data</p>
                     )}
                 </div>
                 <div
@@ -189,28 +190,52 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         left: "30%",
                         height: getHeight(amounts[1], scaleRef) + "%",
                     }}
-                ></div>
+                >
+                    {amounts[1] ? (
+                        <p className="in-bar-number">{amounts[1].toFixed(0)}</p>
+                    ) : (
+                        <p className="no-data-for-column-tag">No Data</p>
+                    )}
+                </div>
                 <div
                     className="bar"
                     style={{
                         left: "45%",
                         height: getHeight(amounts[2], scaleRef) + "%",
                     }}
-                ></div>
+                >
+                    {amounts[2] ? (
+                        <p className="in-bar-number">{amounts[2].toFixed(0)}</p>
+                    ) : (
+                        <p className="no-data-for-column-tag">No Data</p>
+                    )}
+                </div>
                 <div
                     className="bar"
                     style={{
                         left: "60%",
                         height: getHeight(amounts[3], scaleRef) + "%",
                     }}
-                ></div>
+                >
+                    {amounts[3] ? (
+                        <p className="in-bar-number">{amounts[3].toFixed(0)}</p>
+                    ) : (
+                        <p className="no-data-for-column-tag">No Data</p>
+                    )}
+                </div>
                 <div
                     className="bar"
                     style={{
                         left: "75%",
                         height: getHeight(amounts[4], scaleRef) + "%",
                     }}
-                ></div>
+                >
+                    {amounts[4] ? (
+                        <p className="in-bar-number">{amounts[4].toFixed(0)}</p>
+                    ) : (
+                        <p className="no-data-for-column-tag">No Data</p>
+                    )}
+                </div>
             </div>
         );
     }
