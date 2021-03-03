@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import i18n from "../../i18n.js";
 import * as companyFilter from "../../companyFilter.js";
+import Screen from "../../components/screen/screen.jsx";
 
-import "../screen.css";
 import "./companyFilter.css";
 
 const CompanyFilterScreen = ({
@@ -60,44 +60,40 @@ const CompanyFilterScreen = ({
     }
 
     return (
-        <div className="explorer-container">
-            <div className="screen-shadow"></div>
-            <div className="screen-content company-filter-screen">
-                <button className="reset-button" onClick={handleReset}></button>
+        <Screen className="company-filter-screen">
+            <button className="reset-button" onClick={handleReset}></button>
 
-                <FilterSection
-                    title={i18n.t("companyFilterScreen:industryCategories")}
-                    field="industryCategory"
-                />
+            <FilterSection
+                title={i18n.t("companyFilterScreen:industryCategories")}
+                field="industryCategory"
+            />
 
-                <FilterSection
-                    title={i18n.t("companyFilterScreen:jurisdictions")}
-                    field="jurisdiction"
-                />
+            <FilterSection
+                title={i18n.t("companyFilterScreen:jurisdictions")}
+                field="jurisdiction"
+            />
 
-                <FilterSection
-                    title={i18n.t("companyFilterScreen:locations")}
-                    field="location"
-                />
+            <FilterSection
+                title={i18n.t("companyFilterScreen:locations")}
+                field="location"
+            />
 
-                <FilterSection
-                    title={i18n.t("companyFilterScreen:revenue")}
-                    field="revenueRange"
-                />
+            <FilterSection
+                title={i18n.t("companyFilterScreen:revenue")}
+                field="revenueRange"
+            />
 
-                <div className="button-area">
-                    <button
-                        className={
-                            "apply-button" +
-                            (filtersChanged() ? "" : " disabled")
-                        }
-                        onClick={handleApply}
-                    >
-                        {i18n.t("companyFilterScreen:apply")}
-                    </button>
-                </div>
+            <div className="button-area">
+                <button
+                    className={
+                        "apply-button" + (filtersChanged() ? "" : " disabled")
+                    }
+                    onClick={handleApply}
+                >
+                    {i18n.t("companyFilterScreen:apply")}
+                </button>
             </div>
-        </div>
+        </Screen>
     );
 };
 

@@ -1,6 +1,8 @@
 import React from "react";
+
+import Screen from "../../components/screen/screen.jsx";
 import DataTypeBubbleCategory from "../../dataViz/dataTypeBubbleCategory.jsx";
-import "../screen.css";
+
 import "./sharedDataCategoryScreen.css";
 
 const SharedDataCategoryScreen = ({ company }) => {
@@ -13,19 +15,16 @@ const SharedDataCategoryScreen = ({ company }) => {
     ];*/
 
     return (
-        <div className="explorer-container">
-            <div className="screen-shadow"></div>
-            <div className="screen-content">
-                <h2>{company.name}</h2>
-                <div>shares {company.dataTypesShared.length} datatypes</div>
-                <DataTypeBubbleCategory
-                    data={company.dataTypesShared}
-                    width="300"
-                    height="400"
-                    bubbleColor="#fe8988"
-                />
-            </div>
-        </div>
+        <Screen className="shared-data-category-screen">
+            <h2>{company.name}</h2>
+            <div>shares {company.dataTypesShared.length} datatypes</div>
+            <DataTypeBubbleCategory
+                data={company.dataTypesShared}
+                width="300"
+                height="400"
+                bubbleColor="#fe8988"
+            />
+        </Screen>
     );
 };
 

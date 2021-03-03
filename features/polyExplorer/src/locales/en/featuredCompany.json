@@ -1,5 +1,8 @@
 {
-    "gauge.legend.explanation": "Amount of entries:",
-    "gauge.legend.average": "average",
-    "gauge.legend.total": "total"
+    "gauge.legend.explanation":
+        "Amount of entries:",
+    "gauge.legend.average":
+        "average",
+    "gauge.legend.total":
+        "total"
 }

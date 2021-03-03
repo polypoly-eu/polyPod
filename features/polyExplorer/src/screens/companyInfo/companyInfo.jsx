@@ -113,9 +113,10 @@ const CompanyInfo = ({ company }) => {
         } else setScrolledToBottom(false);
     };
 
+    // TODO: Use the Screen component
     return (
         <div className="explorer-container">
-            <div className="screen-shadow"></div>
+            <div className="top-shadow"></div>
             <div className="screen-content">
                 <div className="scroll-container">
                     <div className="short-info">
