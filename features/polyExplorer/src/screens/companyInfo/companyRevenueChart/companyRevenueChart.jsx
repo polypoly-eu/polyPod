@@ -6,6 +6,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
     const years = [2015, 2016, 2017, 2018, 2019];
 
     const numSteps = 4;
+    console.log(annualRevenues);
 
     //from 2015
     const recentAnnualRevenues = annualRevenues?.filter(
@@ -22,7 +23,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
 
     const getYearlyAmount = (year, unitNumber) => {
         let amount;
-        annualRevenues.forEach((e) => {
+        annualRevenues?.forEach((e) => {
             e.year == year ? (amount = e.amount / unitNumber) : null;
         });
         return amount ? amount : null;
@@ -59,92 +60,11 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
     years.forEach((year) => {
         amounts.push(getYearlyAmount(year, unitNumber));
     });
-    if (amounts.length == 0) {
-        return (
-            <div className="revenue-chart-container">
-                <div className="revenue-chart">
-                    <div className="gridline" style={{ bottom: "95%" }}></div>
-                    <div className="gridline" style={{ bottom: "85%" }}></div>
-                    <div className="gridline" style={{ bottom: "75%" }}></div>
-                    <div className="gridline" style={{ bottom: "65%" }}></div>
-                    <div className="gridline" style={{ bottom: "55%" }}></div>
-                    <div className="gridline" style={{ bottom: "45%" }}></div>
-                    <div className="gridline" style={{ bottom: "35%" }}></div>
-                    <div className="gridline" style={{ bottom: "25%" }}></div>
-                    <div className="gridline" style={{ bottom: "15%" }}></div>
-                    <div className="x-axis" style={{ left: "20%" }}>
-                        {years[0]}
-                    </div>
-                    <div className="x-axis" style={{ left: "35%" }}>
-                        {years[1]}
-                    </div>
-                    <div className="x-axis" style={{ left: "50%" }}>
-                        {years[2]}
-                    </div>
-                    <div className="x-axis" style={{ left: "65%" }}>
-                        {years[3]}
-                    </div>
-                    <div className="x-axis" style={{ left: "80%" }}>
-                        {years[4]}
-                    </div>
-                    <div className="y-axis" style={{ bottom: "95%" }}>
-                        {scale[4]}
-                    </div>
-                    <div className="y-axis" style={{ bottom: "75%" }}>
-                        {scale[3]}
-                    </div>
-                    <div className="y-axis" style={{ bottom: "55%" }}>
-                        {scale[2]}
-                    </div>
-                    <div className="y-axis" style={{ bottom: "35%" }}>
-                        {scale[1]}
-                    </div>
-                    <div className="y-axis" style={{ bottom: "15%" }}>
-                        {scale[0]}
-                    </div>
-                    <div className="unit">
-                        {i18n.t(`companyInfoScreen:${unit}`)} (EUR)
-                    </div>
-                </div>
-                <p className="source">Source: polyPedia</p>
-                <div
-                    className="bar"
-                    style={{
-                        left: "15%",
-                        height: getHeight(amounts[0], scaleRef) + "%",
-                    }}
-                ></div>
-                <div
-                    className="bar"
-                    style={{
-                        left: "30%",
-                        height: getHeight(amounts[1], scaleRef) + "%",
-                    }}
-                ></div>
-                <div
-                    className="bar"
-                    style={{
-                        left: "45%",
-                        height: getHeight(amounts[2], scaleRef) + "%",
-                    }}
-                ></div>
-                <div
-                    className="bar"
-                    style={{
-                        left: "60%",
-                        height: getHeight(amounts[3], scaleRef) + "%",
-                    }}
-                ></div>
-                <div
-                    className="bar"
-                    style={{
-                        left: "75%",
-                        height: getHeight(amounts[4], scaleRef) + "%",
-                    }}
-                ></div>
-            </div>
-        );
-    } else {
+    console.log(amounts);
+    if (
+        amounts.filter((e) => e != null).length == 0 ||
+        annualRevenues == null
+    ) {
         const defaultScale = [0, 20, 40, 60, 80];
         const defaultUnit = "M";
 
@@ -200,6 +120,97 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                 <p className="source">
                     {i18n.t("companyInfoScreen:source")}: polyPedia
                 </p>
+            </div>
+        );
+    } else {
+        return (
+            <div className="revenue-chart-container">
+                <div className="revenue-chart">
+                    <div className="gridline" style={{ bottom: "95%" }}></div>
+                    <div className="gridline" style={{ bottom: "85%" }}></div>
+                    <div className="gridline" style={{ bottom: "75%" }}></div>
+                    <div className="gridline" style={{ bottom: "65%" }}></div>
+                    <div className="gridline" style={{ bottom: "55%" }}></div>
+                    <div className="gridline" style={{ bottom: "45%" }}></div>
+                    <div className="gridline" style={{ bottom: "35%" }}></div>
+                    <div className="gridline" style={{ bottom: "25%" }}></div>
+                    <div className="gridline" style={{ bottom: "15%" }}></div>
+                    <div className="x-axis" style={{ left: "20%" }}>
+                        {years[0]}
+                    </div>
+                    <div className="x-axis" style={{ left: "35%" }}>
+                        {years[1]}
+                    </div>
+                    <div className="x-axis" style={{ left: "50%" }}>
+                        {years[2]}
+                    </div>
+                    <div className="x-axis" style={{ left: "65%" }}>
+                        {years[3]}
+                    </div>
+                    <div className="x-axis" style={{ left: "80%" }}>
+                        {years[4]}
+                    </div>
+                    <div className="y-axis" style={{ bottom: "95%" }}>
+                        {scale[4]}
+                    </div>
+                    <div className="y-axis" style={{ bottom: "75%" }}>
+                        {scale[3]}
+                    </div>
+                    <div className="y-axis" style={{ bottom: "55%" }}>
+                        {scale[2]}
+                    </div>
+                    <div className="y-axis" style={{ bottom: "35%" }}>
+                        {scale[1]}
+                    </div>
+                    <div className="y-axis" style={{ bottom: "15%" }}>
+                        {scale[0]}
+                    </div>
+                    <div className="unit">
+                        {i18n.t(`companyInfoScreen:${unit}`)} (EUR)
+                    </div>
+                </div>
+                <p className="source">Source: polyPedia</p>
+                <div
+                    className="bar"
+                    style={{
+                        left: "15%",
+                        height: getHeight(amounts[0], scaleRef) + "%",
+                    }}
+                >
+                    {amounts[0] ? (
+                        <p className="in-bar-number">{amounts[0]}</p>
+                    ) : (
+                        <p className="no-data-tag">No Data</p>
+                    )}
+                </div>
+                <div
+                    className="bar"
+                    style={{
+                        left: "30%",
+                        height: getHeight(amounts[1], scaleRef) + "%",
+                    }}
+                ></div>
+                <div
+                    className="bar"
+                    style={{
+                        left: "45%",
+                        height: getHeight(amounts[2], scaleRef) + "%",
+                    }}
+                ></div>
+                <div
+                    className="bar"
+                    style={{
+                        left: "60%",
+                        height: getHeight(amounts[3], scaleRef) + "%",
+                    }}
+                ></div>
+                <div
+                    className="bar"
+                    style={{
+                        left: "75%",
+                        height: getHeight(amounts[4], scaleRef) + "%",
+                    }}
+                ></div>
             </div>
         );
     }

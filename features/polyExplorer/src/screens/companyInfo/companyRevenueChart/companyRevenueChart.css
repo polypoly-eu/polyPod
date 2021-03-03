@@ -62,3 +62,9 @@
     left: 24%;
     font-size: 14px;
 }
+
+.revenue-chart-container .no-data-tag {
+    transform: translate(8px, -50px);
+    font-size: 12px;
+    color: #8d9caf;
+}
