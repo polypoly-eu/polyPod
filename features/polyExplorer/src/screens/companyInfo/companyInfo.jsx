@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import i18n from "../../i18n.js";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
-//import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
+import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyInfo.css";
 
@@ -65,13 +65,7 @@ const CompanyInfo = ({ company }) => {
         {
             tabName: "revenue",
             content: (
-                <div>
-                    {(company.annualRevenues || []).map(({ year, amount }) => (
-                        <div key={year}>
-                            {year}: {amount}
-                        </div>
-                    ))}
-                </div>
+                <CompanyRevenueChart annualRevenues={company.annualRevenues} />
             ),
         },
     ];
@@ -93,13 +87,7 @@ const CompanyInfo = ({ company }) => {
         {
             tabName: "revenue",
             content: (
-                <div>
-                    {(company.annualRevenues || []).map(({ year, amount }) => (
-                        <div key={year}>
-                            {year}: {amount}
-                        </div>
-                    ))}
-                </div>
+                <CompanyRevenueChart annualRevenues={company.annualRevenues} />
             ),
         },
     ];

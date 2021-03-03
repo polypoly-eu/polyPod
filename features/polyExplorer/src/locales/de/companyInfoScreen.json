@@ -10,5 +10,11 @@
     "source":
         "Quelle",
     "button.exploreData":
-        "Daten erkunden"
+        "Daten erkunden",
+    "K":
+        "Tsd",
+    "M":
+        "Mio",
+    "B":
+        "Mrd"
 }

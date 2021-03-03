@@ -24,6 +24,7 @@
 
 .scroll-container {
     flex: 1 1 auto;
+    margin: auto;
     overflow-y: auto;
     margin-bottom: 18px;
     width: 100%;
@@ -125,8 +126,10 @@
     color: #8d9caf;
     flex: 0 0 auto;
     font-size: 12px;
-    margin: 4px 32px;
+    margin: 4px auto;
     transform: translateY(-24px);
+    width: 80%;
+    max-width: 350px;
 }
 
 .gradient-box {

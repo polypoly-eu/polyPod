@@ -10,5 +10,11 @@
     "source":
         "Source",
     "button.exploreData":
-        "Explore data"
+        "Explore data",
+    "K":
+        "K",
+    "M":
+        "M",
+    "B":
+        "B"
 }
