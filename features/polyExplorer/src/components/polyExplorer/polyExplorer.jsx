@@ -131,7 +131,7 @@ const PolyExplorer = () => {
                 onShowScreenChange={handleShowScreenChange}
             />
         ),
-        info: <InfoScreen />,
+        info: <InfoScreen onClose={() => handleShowScreenChange("main")} />,
     };
 
     readFirstRun().then(setFirstRun);

@@ -1,0 +1,79 @@
+.info-screen {
+    display: block;
+    padding: 32px 24px;
+    background: #edf2f7;
+    overflow-y: scroll;
+    font-size: 16px;
+}
+
+.info-screen h1,
+.info-screen h2,
+.info-screen button {
+    font-family: "Jost Medium";
+}
+
+.info-screen h1,
+.info-screen h2 {
+    margin-top: 0;
+    color: #0f1938;
+    text-align: center;
+}
+
+.info-screen h2,
+.info-screen button {
+    margin-top: 40px;
+}
+
+.info-screen h1 {
+    font-size: 24px;
+}
+
+.info-screen h2 {
+    font-size: 20px;
+}
+
+.info-screen p,
+.info-screen span {
+    color: #0f1938;
+}
+
+.info-screen .gauge-explanation-graphic {
+    position: relative;
+    width: 300px;
+    margin: 52px auto 0 auto;
+}
+
+.info-screen .gauge-explanation-graphic span {
+    display: inline-block;
+    position: relative;
+    width: 78px;
+    vertical-align: top;
+    font-size: 12px;
+}
+
+.info-screen .gauge-explanation-graphic span:first-child {
+    width: 125px;
+    margin-bottom: 8px;
+    left: 24px;
+}
+
+.info-screen .gauge-explanation-graphic span:nth-child(3) {
+    left: 0;
+}
+
+.info-screen .gauge-explanation-graphic span:nth-child(4) {
+    left: 16px;
+}
+
+.info-screen .gauge-explanation-graphic span:nth-child(5) {
+    left: 48px;
+}
+
+.info-screen button {
+    width: 300px;
+    height: 56px;
+    border-radius: 4px;
+    background: #0f1938;
+    color: #fff;
+    font-size: 18px;
+}

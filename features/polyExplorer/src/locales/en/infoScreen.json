@@ -1,0 +1,13 @@
+{
+    "headline.main": "Amount of entries",
+    "text.main": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+    "gaugeExplanation.first": "At vero eos et accusam et justo duo dolores et ea rebum stet.",
+    "gaugeExplanation.second": "Kasd gubergren, no sear takimata sanctus est",
+    "gaugeExplanation.third": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr.n",
+    "gaugeExplanation.fourth": "At vero eos et accusam et justo duo dolores et ea rebum stet.",
+    "headline.average": "Average amount of entries:",
+    "text.average": "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    "headline.total": "Total amount of entries:",
+    "text.total": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    "button.explore": "Let's Explore"
+}
