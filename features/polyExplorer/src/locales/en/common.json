@@ -1,13 +1,7 @@
 {
     "screenTitle.main":
         "polyExplorer",
-    "screenTitle.dataTypes":
-        "Data exploration",
-    "screenTitle.purposes":
-        "Data exploration",
-    "screenTitle.companies":
-        "Data exploration",
-    "screenTitle.jurisdictions":
+    "screenTitle.dataExploration":
         "Data exploration",
     "screenTitle.companyInfo":
         "Company profile",
