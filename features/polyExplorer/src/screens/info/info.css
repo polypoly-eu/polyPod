@@ -1,0 +1,39 @@
+.info-screen {
+    display: block !important;
+    overflow: hidden scroll;
+    background: #edf2f7;
+}
+
+.info-screen * {
+    color: #0f1938;
+    font-size: 16px;
+}
+
+.info-screen h1 {
+    margin-bottom: 0;
+    font-family: "Jost Medium";
+    font-size: 24px;
+    text-align: center;
+}
+
+.info-screen h1,
+.info-screen p {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.info-screen img {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.info-screen button {
+    display: block;
+    width: 300px;
+    height: 56px;
+    margin: 0 auto 32px auto;
+    border-radius: 4px;
+    background: #0f1938;
+    color: #fff;
+    font-size: 18px;
+}
