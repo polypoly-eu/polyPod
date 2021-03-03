@@ -9,6 +9,7 @@ import companySearchScreenEn from "./locales/en/companySearchScreen.json";
 import mainScreenEn from "./locales/en/mainScreen.json";
 import onboardingPopupEn from "./locales/en/onboardingPopup.json";
 import featuredCompanyEn from "./locales/en/featuredCompany.json";
+import dataExplorationEn from "./locales/en/dataExploration.json";
 
 import commonDe from "./locales/de/common.json";
 import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
@@ -17,6 +18,7 @@ import companySearchScreenDe from "./locales/de/companySearchScreen.json";
 import mainScreenDe from "./locales/de/mainScreen.json";
 import onboardingPopupDe from "./locales/de/onboardingPopup.json";
 import featuredCompanyDe from "./locales/de/featuredCompany.json";
+import dataExplorationDe from "./locales/de/dataExploration.json";
 
 const strings = {
     en: {
@@ -27,6 +29,7 @@ const strings = {
         mainScreen: mainScreenEn,
         onboardingPopup: onboardingPopupEn,
         featuredCompany: featuredCompanyEn,
+        dataExploration: dataExplorationEn,
     },
     de: {
         common: commonDe,
@@ -36,6 +39,7 @@ const strings = {
         mainScreen: mainScreenDe,
         onboardingPopup: onboardingPopupDe,
         featuredCompany: featuredCompanyDe,
+        dataExploration: dataExplorationDe,
     },
 };
 

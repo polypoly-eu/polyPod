@@ -1,0 +1,14 @@
+{
+    "dataTypes.text.intro":
+        "Dies sind die Datentypen die {{name}} bis zu {{sharingCount}} mal mit anderen Firmen teilt, z. B. Informationen über {{mostSharedType}} werden {{mostSharedCount}} mal geteilt.",
+    "dataTypes.text.grouping":
+        "Datentypen können in verschiedene Kategorien gruppiert werden:",
+    "dataTypes.title.personal":
+        "Persönliche Daten",
+    "dataTypes.title.social":
+        "Soziale Daten",
+    "dataTypes.title.technical":
+        "Technische Daten",
+    "dataTypes.title.financial":
+        "Finanzdaten"
+}

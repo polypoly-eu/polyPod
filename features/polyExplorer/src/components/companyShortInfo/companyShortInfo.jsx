@@ -1,7 +1,7 @@
 import React from "react";
 import "./companyShortInfo.css";
 
-const CompanyShortInfo = ({ company, onShowScreenChange }) => {
+const CompanyShortInfo = ({ company, onShowScreenChange = () => {} }) => {
     return (
         <button
             onClick={() => onShowScreenChange("companyInfo", company.name)}
