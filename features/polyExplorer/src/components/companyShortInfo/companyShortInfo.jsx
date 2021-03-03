@@ -22,10 +22,14 @@ const CompanyShortInfo = ({ company, onShowScreenChange = () => {} }) => {
                 <div className="company-location">
                     <div className="location-icon"></div>
                     <p className="location-name">
-                        {company.location.city}, {company.location.countryCode},{" "}
-                        <span className="jurisdiction-name">
-                            {company.jurisdiction}
-                        </span>
+                        {company.location
+                            ? `${company.location.city}, ${company.location.countryCode}, `
+                            : null}
+                        {company.jurisdiction ? (
+                            <span className="jurisdiction-name">
+                                {company.jurisdiction}
+                            </span>
+                        ) : null}
                     </p>
                 </div>
                 <div className="company-category">

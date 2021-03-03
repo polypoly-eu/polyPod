@@ -43,17 +43,35 @@ const CompanyInfo = ({ company }) => {
             tabName: "location",
             content: (
                 <div>
-                    <div className={`location-block ${company.jurisdiction}`}>
-                        <img
-                            src="./images/location-pin.svg"
-                            alt="location-pin"
-                        />
-                        <p className={`location-text`}>
-                            {company.location.city},{" "}
-                            {company.location.countryCode},{" "}
-                            {company.jurisdiction}
-                        </p>
-                    </div>
+                    {company.jurisdiction ? (
+                        <div
+                            className={`location-block ${company.jurisdiction}`}
+                        >
+                            {company.location ? (
+                                <div>
+                                    <img
+                                        src="./images/location-pin.svg"
+                                        alt="location-pin"
+                                    />
+                                    <p className={`location-text`}>
+                                        {company.location.city},{" "}
+                                        {company.location.countryCode},{" "}
+                                        {company.jurisdiction}
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="no-location">
+                                    There is no location for the company yet
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="location-block Others">
+                            <div className="no-location">
+                                There is no location for the company yet
+                            </div>
+                        </div>
+                    )}
                     {locationTooltip}
                 </div>
             ),

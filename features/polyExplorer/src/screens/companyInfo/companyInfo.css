@@ -82,6 +82,14 @@
     transform: translate(84px, 48px);
 }
 
+.location-block .no-location {
+    display: block;
+    width: 142px;
+    margin: 0 auto;
+    transform: translateY(56px);
+    text-align: center;
+}
+
 .location-tooltip {
     display: flex;
     padding: 0 4px;
