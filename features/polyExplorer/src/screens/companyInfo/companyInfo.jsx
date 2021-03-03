@@ -106,7 +106,10 @@ const CompanyInfo = ({ company }) => {
         <div className="explorer-container">
             <div className="top-shadow"></div>
             <div className="screen-content">
-                <div className="scroll-container">
+                <div
+                    className="scroll-container"
+                    onScroll={(e) => handleInfoTextScrollBottom(e)}
+                >
                     <div className="short-info">
                         <CompanyShortInfo
                             company={company}
@@ -165,10 +168,7 @@ const CompanyInfo = ({ company }) => {
                                   ))}
                         </Swiper>
                     </div>
-                    <p
-                        className="company-info-text"
-                        onScroll={(e) => handleInfoTextScrollBottom(e)}
-                    >
+                    <p className="company-info-text">
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
                         sed diam nonumy eirmod tempor invidunt ut labore et
                         dolore magna aliquyam erat, sed diam voluptua. At vero
@@ -192,6 +192,9 @@ const CompanyInfo = ({ company }) => {
                         luptatum zzril delenit augue duis dolore te feugait
                         nulla facilisi. Lorem ipsum dolor sit amet,
                     </p>
+                    <p className="company-info-source">
+                        {i18n.t("companyInfoScreen:source")}: Wikipedia
+                    </p>
                 </div>
                 <div
                     className={
@@ -200,9 +203,6 @@ const CompanyInfo = ({ company }) => {
                             : "gradient-box gradient"
                     }
                 ></div>
-                <p className="company-info-source">
-                    {i18n.t("companyInfoScreen:source")}: Wikipedia
-                </p>
 
                 {company.featured ? (
                     <button className="explore-data-btn">

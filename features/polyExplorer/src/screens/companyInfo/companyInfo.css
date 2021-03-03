@@ -120,16 +120,16 @@
     width: 100%;
     max-width: 474px;
     padding: 4px 32px;
+    margin-bottom: 4px;
 }
 
 .company-info-source {
     color: #8d9caf;
     flex: 0 0 auto;
     font-size: 12px;
-    margin: 4px auto;
-    transform: translateY(-24px);
+    margin: 0px auto;
     width: 80%;
-    max-width: 350px;
+    max-width: 314px;
 }
 
 .gradient-box {
