@@ -4,30 +4,32 @@ import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import DataSharingGauge from "./dataSharingGauge.jsx";
 import "./featuredCompany.css";
 
-const DataSharingButton = ({
+const DataSharingSection = ({
     sharingType,
     count,
     max,
     average,
-    showLegend,
     onOpenDetails,
+    showLegend = false,
+    onLegendClick = () => {},
 }) => (
-    <button
-        onClick={onOpenDetails}
-        className={`data-sharing-button ${sharingType}-shared`}
-    >
-        <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
-        <h2>
-            {count} {i18n.t(`common:sharing.${sharingType}`)}
-        </h2>
+    <div className={`data-sharing-section ${sharingType}-shared`}>
+        <div onClick={onOpenDetails}>
+            <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
+            <h2>
+                {count} {i18n.t(`common:sharing.${sharingType}`)}
+            </h2>
+        </div>
         <DataSharingGauge
             sharingType={sharingType}
             count={count}
             max={max}
             average={average}
+            onClick={onOpenDetails}
             showLegend={showLegend}
+            onLegendClick={onLegendClick}
         />
-    </button>
+    </div>
 );
 
 const FeaturedCompany = ({
@@ -43,8 +45,8 @@ const FeaturedCompany = ({
                 onShowScreenChange={onShowScreenChange}
             />
         </div>
-        <div className="data-sharing-button-list">
-            <DataSharingButton
+        <div className="data-sharing-section-list">
+            <DataSharingSection
                 sharingType="dataTypes"
                 count={company.dataTypesShared.length}
                 max={maxValues.dataTypes}
@@ -53,7 +55,7 @@ const FeaturedCompany = ({
                     onShowScreenChange("dataExploration", company.name)
                 }
             />
-            <DataSharingButton
+            <DataSharingSection
                 sharingType="purposes"
                 count={company.dataSharingPurposes.length}
                 max={maxValues.purposes}
@@ -62,7 +64,7 @@ const FeaturedCompany = ({
                     onShowScreenChange("dataExploration", company.name)
                 }
             />
-            <DataSharingButton
+            <DataSharingSection
                 sharingType="companies"
                 count={company.sharedWithCompanies.length}
                 max={maxValues.companies}
@@ -71,7 +73,7 @@ const FeaturedCompany = ({
                     onShowScreenChange("dataExploration", company.name)
                 }
             />
-            <DataSharingButton
+            <DataSharingSection
                 sharingType="jurisdictions"
                 count={
                     company.jurisdictionsShared
@@ -81,6 +83,7 @@ const FeaturedCompany = ({
                 max={maxValues.jurisdictions}
                 average={averageValues.jurisdictions}
                 showLegend="true"
+                onLegendClick={() => onShowScreenChange("featuredCompanyHelp")}
                 onOpenDetails={() =>
                     onShowScreenChange("dataExploration", company.name)
                 }

@@ -10,6 +10,7 @@ import CompanyFilterScreen from "../../screens/companyFilter/companyFilter.jsx";
 import CompanySearchScreen from "../../screens/companySearch/companySearch.jsx";
 import InfoScreen from "../../screens/info/info.jsx";
 import CompanyInfoScreen from "../../screens/companyInfo/companyInfo.jsx";
+import FeaturedCompanyHelpScreen from "../../screens/featuredCompanyHelp/featuredCompanyHelp.jsx";
 import OnboardingPopup from "../onboardingPopup/onboardingPopup.jsx";
 
 import polyPediaCompanies from "../../data/companies.json";
@@ -117,6 +118,11 @@ const PolyExplorer = () => {
                 globalData={polyPediaGlobalData}
                 activeFilters={activeFilters}
                 onApply={handleFilterApply}
+            />
+        ),
+        featuredCompanyHelp: (
+            <FeaturedCompanyHelpScreen
+                onClose={() => handleShowScreenChange("main")}
             />
         ),
         companySearch: (

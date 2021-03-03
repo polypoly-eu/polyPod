@@ -11,7 +11,7 @@
     margin-left: 12px;
 }
 
-.data-sharing-button-list {
+.data-sharing-section-list {
     display: flex;
     align-items: center;
     width: 100%;
@@ -19,7 +19,7 @@
     margin: 8px auto 0 auto;
 }
 
-.data-sharing-button {
+.data-sharing-section {
     display: block;
     width: 85%;
     max-width: 414px;
@@ -29,17 +29,17 @@
     text-align: left;
 }
 
-.data-sharing-button h1,
-.data-sharing-button h2 {
+.data-sharing-section h1,
+.data-sharing-section h2 {
     margin: 0;
 }
 
-.data-sharing-button h1 {
+.data-sharing-section h1 {
     margin-bottom: -7px;
     font-size: 16px;
 }
 
-.data-sharing-button h2 {
+.data-sharing-section h2 {
     font-size: 24px;
 }
 

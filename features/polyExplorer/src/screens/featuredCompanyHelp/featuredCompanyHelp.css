@@ -1,0 +1,84 @@
+.featured-company-help-screen {
+    display: block !important;
+    overflow-y: scroll;
+    background: #edf2f7;
+    font-size: 16px;
+}
+
+.featured-company-help-screen-content {
+    padding: 32px;
+}
+
+.featured-company-help-screen h1,
+.featured-company-help-screen h2,
+.featured-company-help-screen button {
+    font-family: "Jost Medium";
+}
+
+.featured-company-help-screen h1,
+.featured-company-help-screen h2 {
+    margin-top: 0;
+    color: #0f1938;
+    text-align: center;
+}
+
+.featured-company-help-screen h2,
+.featured-company-help-screen button {
+    margin-top: 40px;
+}
+
+.featured-company-help-screen h1 {
+    font-size: 24px;
+}
+
+.featured-company-help-screen h2 {
+    font-size: 20px;
+}
+
+.featured-company-help-screen p,
+.featured-company-help-screen span {
+    color: #0f1938;
+}
+
+.featured-company-help-screen .gauge-explanation-graphic {
+    position: relative;
+    width: 300px;
+    margin: 52px auto 0 auto;
+}
+
+.featured-company-help-screen .gauge-explanation-graphic span {
+    display: inline-block;
+    position: relative;
+    width: 78px;
+    vertical-align: top;
+    font-size: 12px;
+}
+
+.featured-company-help-screen .gauge-explanation-graphic span:first-child {
+    width: 125px;
+    margin-bottom: 8px;
+    left: 24px;
+}
+
+.featured-company-help-screen .gauge-explanation-graphic span:nth-child(3) {
+    left: 0;
+}
+
+.featured-company-help-screen .gauge-explanation-graphic span:nth-child(4) {
+    left: 16px;
+}
+
+.featured-company-help-screen .gauge-explanation-graphic span:nth-child(5) {
+    left: 48px;
+}
+
+.featured-company-help-screen button {
+    display: block;
+    width: 300px;
+    height: 56px;
+    margin: 0 auto 32px auto;
+    border-radius: 4px;
+    background: #0f1938;
+    color: #fff;
+    font-size: 18px;
+}

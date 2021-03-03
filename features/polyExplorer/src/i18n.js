@@ -10,7 +10,7 @@ import mainScreenEn from "./locales/en/mainScreen.json";
 import onboardingPopupEn from "./locales/en/onboardingPopup.json";
 import featuredCompanyEn from "./locales/en/featuredCompany.json";
 import dataExplorationScreenEn from "./locales/en/dataExplorationScreen.json";
-import infoScreenEn from "./locales/en/infoScreen.json";
+import featuredCompanyHelpScreenEn from "./locales/en/featuredCompanyHelpScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
@@ -20,7 +20,7 @@ import mainScreenDe from "./locales/de/mainScreen.json";
 import onboardingPopupDe from "./locales/de/onboardingPopup.json";
 import featuredCompanyDe from "./locales/de/featuredCompany.json";
 import dataExplorationScreenDe from "./locales/de/dataExplorationScreen.json";
-import infoScreenDe from "./locales/de/infoScreen.json";
+import featuredCompanyHelpScreenDe from "./locales/de/featuredCompanyHelpScreen.json";
 
 const strings = {
     en: {
@@ -32,7 +32,7 @@ const strings = {
         onboardingPopup: onboardingPopupEn,
         featuredCompany: featuredCompanyEn,
         dataExplorationScreen: dataExplorationScreenEn,
-        infoScreen: infoScreenEn,
+        featuredCompanyHelpScreen: featuredCompanyHelpScreenEn,
     },
     de: {
         common: commonDe,
@@ -43,7 +43,7 @@ const strings = {
         onboardingPopup: onboardingPopupDe,
         featuredCompany: featuredCompanyDe,
         dataExplorationScreen: dataExplorationScreenDe,
-        infoScreen: infoScreenDe,
+        featuredCompanyHelpScreen: featuredCompanyHelpScreenDe,
     },
 };
 
