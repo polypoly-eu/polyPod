@@ -69,7 +69,6 @@ button::after {
 }
 
 .companies {
-    width: 360px;
     margin: 24px auto 0 auto;
 }
 
@@ -79,7 +78,8 @@ button::after {
 
 .filter-button {
     position: fixed;
-    margin-left: 300px;
+    right: 0;
+    margin-top: -12px;
     z-index: 1;
     width: 60px;
     height: 48px;
