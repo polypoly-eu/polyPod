@@ -27,7 +27,7 @@ const MainScreen = ({
     };
 
     return (
-        <Screen className="main-screen" topShadow="false">
+        <Screen className="main-screen" topShadow={false}>
             <div className="nav-button-container">
                 <button
                     onClick={handleShowFeatured}
