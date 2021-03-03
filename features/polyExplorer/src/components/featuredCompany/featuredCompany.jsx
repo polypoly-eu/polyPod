@@ -50,7 +50,7 @@ const FeaturedCompany = ({
                 max={maxValues.dataTypes}
                 average={averageValues.dataTypes}
                 onOpenDetails={() =>
-                    onShowScreenChange("dataTypes", company.name)
+                    onShowScreenChange("dataExploration", company.name)
                 }
             />
             <DataSharingButton
@@ -59,7 +59,7 @@ const FeaturedCompany = ({
                 max={maxValues.purposes}
                 average={averageValues.purposes}
                 onOpenDetails={() =>
-                    onShowScreenChange("purposes", company.name)
+                    onShowScreenChange("dataExploration", company.name)
                 }
             />
             <DataSharingButton
@@ -68,7 +68,7 @@ const FeaturedCompany = ({
                 max={maxValues.companies}
                 average={averageValues.companies}
                 onOpenDetails={() =>
-                    onShowScreenChange("companies", company.name)
+                    onShowScreenChange("dataExploration", company.name)
                 }
             />
             <DataSharingButton
@@ -82,7 +82,7 @@ const FeaturedCompany = ({
                 average={averageValues.jurisdictions}
                 showLegend="true"
                 onOpenDetails={() =>
-                    onShowScreenChange("jurisdictions", company.name)
+                    onShowScreenChange("dataExploration", company.name)
                 }
             />
         </div>

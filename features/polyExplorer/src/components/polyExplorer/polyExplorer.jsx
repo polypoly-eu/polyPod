@@ -5,10 +5,7 @@ import { pod, podNav } from "../../fakePod.js";
 import { emptyFilters, removeFilter } from "../../companyFilter.js";
 import "./polyExplorer.css";
 import MainScreen from "../../screens/main/main.jsx";
-import SharedDataTypeScreen from "../../screens/sharedDataType/sharedDataType.jsx";
-import SharedPurposeScreen from "../../screens/sharedPurpose/sharedPurpose.jsx";
-import SharedWithCompaniesScreen from "../../screens/sharedWithCompany/sharedWithCompany.jsx";
-import SharedJurisdictionsScreen from "../../screens/sharedJurisdictions/sharedJurisdictions.jsx";
+import DataExplorationScreen from "../../screens/dataExploration/dataExploration.jsx";
 import CompanyFilterScreen from "../../screens/companyFilter/companyFilter.jsx";
 import CompanySearchScreen from "../../screens/companySearch/companySearch.jsx";
 import InfoScreen from "../../screens/info/info.jsx";
@@ -112,10 +109,7 @@ const PolyExplorer = () => {
                 onRemoveFilter={handleRemoveFilter}
             />
         ),
-        dataTypes: <SharedDataTypeScreen company={selectedCompany} />,
-        purposes: <SharedPurposeScreen company={selectedCompany} />,
-        companies: <SharedWithCompaniesScreen company={selectedCompany} />,
-        jurisdictions: <SharedJurisdictionsScreen company={selectedCompany} />,
+        dataExploration: <DataExplorationScreen company={selectedCompany} />,
         companyInfo: <CompanyInfoScreen company={selectedCompany} />,
         companyFilter: (
             <CompanyFilterScreen

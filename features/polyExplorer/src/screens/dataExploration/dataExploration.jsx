@@ -7,9 +7,9 @@ import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 
 import "swiper/swiper-bundle.min.css";
-import "./sharedDataType.css";
+import "./dataExploration.css";
 
-const SharedDataTypeScreen = ({ company }) => {
+const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
 
     const FakeChart = () => <div className="fake-chart">TODO</div>;
@@ -27,7 +27,7 @@ const SharedDataTypeScreen = ({ company }) => {
             <Swiper onSwiper={setSwiper} direction="vertical">
                 <SwiperSlide>
                     <p>
-                        {i18n.t("dataExploration:dataTypes.text.intro", {
+                        {i18n.t("dataExplorationScreen:dataTypes.text.intro", {
                             name: "Amazon",
                             sharingCount: 117,
                             mostSharedType: "Foo",
@@ -47,12 +47,12 @@ const SharedDataTypeScreen = ({ company }) => {
                         <SwiperSlide key={group}>
                             <p>
                                 {i18n.t(
-                                    "dataExploration:dataTypes.text.grouping"
+                                    "dataExplorationScreen:dataTypes.text.grouping"
                                 )}
                             </p>
                             <h2>
                                 {i18n.t(
-                                    `dataExploration:dataTypes.title.${group}`
+                                    `dataExplorationScreen:dataTypes.title.${group}`
                                 )}
                             </h2>
                             <FakeChart />
@@ -69,4 +69,4 @@ const SharedDataTypeScreen = ({ company }) => {
     );
 };
 
-export default SharedDataTypeScreen;
+export default DataExplorationScreen;
