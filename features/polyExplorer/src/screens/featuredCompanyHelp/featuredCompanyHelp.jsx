@@ -7,17 +7,20 @@ import "./featuredCompanyHelp.css";
 
 const GaugeExplanationGraphic = () => (
     <div className="gauge-explanation-graphic">
-        <span>
+        <span className="gauge-explanation-entries">
+            {i18n.t("featuredCompanyHelpScreen:gaugeExplanation.entries")}
+        </span>
+        <span className="gauge-explanation-first">
             {i18n.t("featuredCompanyHelpScreen:gaugeExplanation.first")}
         </span>
         <img srcSet="images/gauge-explanation-2x.png 2x"></img>
-        <span>
+        <span className="gauge-explanation-second">
             {i18n.t("featuredCompanyHelpScreen:gaugeExplanation.second")}
         </span>
-        <span>
+        <span className="gauge-explanation-third">
             {i18n.t("featuredCompanyHelpScreen:gaugeExplanation.third")}
         </span>
-        <span>
+        <span className="gauge-explanation-fourth">
             {i18n.t("featuredCompanyHelpScreen:gaugeExplanation.fourth")}
         </span>
     </div>

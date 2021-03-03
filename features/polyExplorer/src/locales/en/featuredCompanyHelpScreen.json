@@ -1,6 +1,7 @@
 {
     "headline.main": "Amount of entries",
     "text.main": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+    "gaugeExplanation.entries": "Data Entries",
     "gaugeExplanation.first": "At vero eos et accusam et justo duo dolores et ea rebum stet.",
     "gaugeExplanation.second": "Kasd gubergren, no sear takimata sanctus est",
     "gaugeExplanation.third": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr.n",

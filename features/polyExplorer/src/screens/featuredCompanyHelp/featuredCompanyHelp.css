@@ -46,7 +46,20 @@
     margin: 52px auto 0 auto;
 }
 
-.featured-company-help-screen .gauge-explanation-graphic span {
+/* Hack until we have a better asset to work with */
+.featured-company-help-screen .gauge-explanation-entries {
+    position: absolute;
+    left: 32px;
+    top: 79px;
+    font-size: 24px;
+    color: #3749a9;
+    background: #edf2f7;
+}
+
+.featured-company-help-screen .gauge-explanation-first,
+.featured-company-help-screen .gauge-explanation-second,
+.featured-company-help-screen .gauge-explanation-third,
+.featured-company-help-screen .gauge-explanation-fourth {
     display: inline-block;
     position: relative;
     width: 78px;
@@ -54,21 +67,21 @@
     font-size: 12px;
 }
 
-.featured-company-help-screen .gauge-explanation-graphic span:first-child {
+.featured-company-help-screen .gauge-explanation-first {
     width: 125px;
     margin-bottom: 8px;
     left: 24px;
 }
 
-.featured-company-help-screen .gauge-explanation-graphic span:nth-child(3) {
+.featured-company-help-screen .gauge-explanation-second {
     left: 0;
 }
 
-.featured-company-help-screen .gauge-explanation-graphic span:nth-child(4) {
+.featured-company-help-screen .gauge-explanation-third {
     left: 16px;
 }
 
-.featured-company-help-screen .gauge-explanation-graphic span:nth-child(5) {
+.featured-company-help-screen .gauge-explanation-fourth {
     left: 48px;
 }
 
