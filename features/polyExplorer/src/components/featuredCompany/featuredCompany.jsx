@@ -82,7 +82,7 @@ const FeaturedCompany = ({
                 }
                 max={maxValues.jurisdictions}
                 average={averageValues.jurisdictions}
-                showLegend="true"
+                showLegend={true}
                 onLegendClick={() => onShowScreenChange("featuredCompanyHelp")}
                 onOpenDetails={() =>
                     onShowScreenChange("dataExploration", company.name)
