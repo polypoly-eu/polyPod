@@ -1,9 +1,12 @@
 .info-screen {
-    display: block;
-    padding: 32px 24px;
-    background: #edf2f7;
+    display: block !important;
     overflow-y: scroll;
+    background: #edf2f7;
     font-size: 16px;
+}
+
+.info-screen-content {
+    padding: 32px;
 }
 
 .info-screen h1,
@@ -70,8 +73,10 @@
 }
 
 .info-screen button {
+    display: block;
     width: 300px;
     height: 56px;
+    margin: 0 auto 32px auto;
     border-radius: 4px;
     background: #0f1938;
     color: #fff;

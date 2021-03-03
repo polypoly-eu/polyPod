@@ -17,16 +17,18 @@ const GaugeExplanationGraphic = () => (
 
 const InfoScreen = ({ onClose }) => (
     <Screen className="info-screen">
-        <h1>{i18n.t("infoScreen:headline.main")}</h1>
-        <p>{i18n.t("infoScreen:text.main")}</p>
+        <div className="info-screen-content">
+            <h1>{i18n.t("infoScreen:headline.main")}</h1>
+            <p>{i18n.t("infoScreen:text.main")}</p>
 
-        <GaugeExplanationGraphic />
+            <GaugeExplanationGraphic />
 
-        <h2>{i18n.t("infoScreen:headline.average")}</h2>
-        <p>{i18n.t("infoScreen:text.average")}</p>
+            <h2>{i18n.t("infoScreen:headline.average")}</h2>
+            <p>{i18n.t("infoScreen:text.average")}</p>
 
-        <h2>{i18n.t("infoScreen:headline.total")}</h2>
-        <p>{i18n.t("infoScreen:text.total")}</p>
+            <h2>{i18n.t("infoScreen:headline.total")}</h2>
+            <p>{i18n.t("infoScreen:text.total")}</p>
+        </div>
 
         <button onClick={onClose}>{i18n.t("infoScreen:button.explore")}</button>
     </Screen>
