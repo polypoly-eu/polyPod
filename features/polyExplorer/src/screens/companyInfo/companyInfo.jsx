@@ -5,7 +5,7 @@ import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyInfo.css";
 
-const CompanyInfo = ({ company }) => {
+const CompanyInfo = ({ company, onShowScreenChange }) => {
     const [scrolledToBottom, setScrolledToBottom] = useState(false);
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
@@ -223,7 +223,12 @@ const CompanyInfo = ({ company }) => {
                 ></div>
 
                 {company.featured ? (
-                    <button className="explore-data-btn">
+                    <button
+                        className="explore-data-btn"
+                        onClick={() =>
+                            onShowScreenChange("dataExploration", company.name)
+                        }
+                    >
                         {i18n.t("companyInfoScreen:button.exploreData")}
                     </button>
                 ) : (

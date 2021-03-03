@@ -111,7 +111,12 @@ const PolyExplorer = () => {
             />
         ),
         dataExploration: <DataExplorationScreen company={selectedCompany} />,
-        companyInfo: <CompanyInfoScreen company={selectedCompany} />,
+        companyInfo: (
+            <CompanyInfoScreen
+                company={selectedCompany}
+                onShowScreenChange={handleShowScreenChange}
+            />
+        ),
         companyFilter: (
             <CompanyFilterScreen
                 companies={companyData}
