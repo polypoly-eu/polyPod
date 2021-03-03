@@ -49,6 +49,8 @@
         "China",
     "jurisdiction.undisclosed":
         "Undisclosed",
+    "category.undisclosed":
+        "Undisclosed",
     "sharing.prefix.dataTypes":
         "shares",
     "sharing.detailPrefix.dataTypes":

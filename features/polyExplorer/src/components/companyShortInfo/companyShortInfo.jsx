@@ -1,4 +1,5 @@
 import React from "react";
+import i18n from "../../i18n.js";
 import "./companyShortInfo.css";
 
 const CompanyShortInfo = ({ company, onShowScreenChange = () => {} }) => {
@@ -29,7 +30,9 @@ const CompanyShortInfo = ({ company, onShowScreenChange = () => {} }) => {
                 </div>
                 <div className="company-category">
                     <div className="category-icon"></div>
-                    <p className="category-name">Unspecified</p>
+                    <p className="category-name">
+                        {i18n.t("common:category.undisclosed")}
+                    </p>
                 </div>
             </div>
         </button>

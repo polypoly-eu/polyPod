@@ -49,6 +49,8 @@
         "China",
     "jurisdiction.undisclosed":
         "Sonstige",
+    "category.undisclosed":
+        "Nicht spezifiziert",
     "sharing.prefix.dataTypes":
         "teilt",
     "sharing.detailPrefix.dataTypes":
