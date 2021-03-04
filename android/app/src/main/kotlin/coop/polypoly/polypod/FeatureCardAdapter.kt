@@ -1,7 +1,9 @@
 package coop.polypoly.polypod
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -23,6 +25,7 @@ class FeatureCardAdapter(private val originatingFragment: Fragment, private val 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val feature = features[position]
+        holder.featureCardView.findViewById<ImageView>(R.id.thumbnail).setBackgroundColor(Color.parseColor(feature.primaryColor))
         mapOf(R.id.feature_name to feature.name,
             R.id.feature_author to feature.author,
             R.id.feature_description to feature.description).forEach {
