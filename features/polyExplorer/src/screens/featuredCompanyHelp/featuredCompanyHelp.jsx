@@ -27,7 +27,7 @@ const GaugeExplanationGraphic = () => (
 );
 
 const FeaturedCompanyHelpScreen = ({ onClose }) => (
-    <Screen className="featured-company-help-screen">
+    <Screen className="featured-company-help-screen" light={true}>
         <div className="featured-company-help-screen-content">
             <h1>{i18n.t("featuredCompanyHelpScreen:headline.main")}</h1>
             <p>{i18n.t("featuredCompanyHelpScreen:text.main")}</p>

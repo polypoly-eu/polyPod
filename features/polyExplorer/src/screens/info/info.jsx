@@ -6,7 +6,7 @@ import Screen from "../../components/screen/screen.jsx";
 import "./info.css";
 
 const InfoScreen = ({ onClose }) => (
-    <Screen className="info-screen">
+    <Screen className="info-screen" light={true}>
         <h1>{i18n.t("infoScreen:headline.sources")}</h1>
         <p>{i18n.t("infoScreen:text.sources")}</p>
         <img src="images/info-sources.svg"></img>
