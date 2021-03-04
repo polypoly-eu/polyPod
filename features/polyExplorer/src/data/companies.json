@@ -50,7 +50,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Simplesurance GmbH",
@@ -79,7 +82,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "GetYourGuide Deutschland GmbH",
@@ -126,7 +132,10 @@
                 "currency": "EUR",
                 "year": 2017
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Rocket Internet SE",
@@ -197,7 +206,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Samsung Electronics GmbH",
@@ -280,7 +292,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Smartly.io Solutions GmbH",
@@ -290,7 +305,10 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Monedo Holding GmbH",
@@ -325,7 +343,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "SAP Deutschland SE & Co. KG",
@@ -335,7 +356,10 @@
             "city": "Walldorf",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Zalando SE",
@@ -394,7 +418,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Nordstern Studio GmbH",
@@ -417,7 +444,10 @@
                 "currency": "EUR",
                 "year": 2011
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Lesara AG",
@@ -446,7 +476,10 @@
                 "currency": "EUR",
                 "year": 2016
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "auxmoney GmbH",
@@ -517,7 +550,10 @@
                 "currency": "EUR",
                 "year": 2017
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "FC Bayern München AG",
@@ -594,7 +630,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "eGym GmbH",
@@ -653,7 +692,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Contentful GmbH",
@@ -712,7 +754,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "BioWink GmbH",
@@ -753,7 +798,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Dreamlines Tours GmbH",
@@ -763,7 +811,10 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Delivery Hero SE",
@@ -786,7 +837,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "SCHUFA Holding AG",
@@ -839,7 +893,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Spotify GmbH",
@@ -904,7 +961,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Adform Germany GmbH",
@@ -951,7 +1011,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Chrono24 GmbH",
@@ -1004,7 +1067,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "MessageBird GmbH",
@@ -1014,7 +1080,10 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "N26 Bank GmbH",
@@ -1037,7 +1106,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Goeuro Travel GmbH",
@@ -1078,7 +1150,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "DB Vertrieb GmbH",
@@ -1088,7 +1163,23 @@
             "city": "Frankfurt a. Main",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "APPLE INC.",
+        "featured": false,
+        "jurisdiction": "US_CA - CCPA",
+        "location": {
+            "city": "Cupertino",
+            "countryCode": "US"
+        },
+        "annualRevenues": [],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "AdColony GmbH",
@@ -1147,7 +1238,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Bayer AG",
@@ -1212,7 +1306,23 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": null,
+        "featured": false,
+        "jurisdiction": null,
+        "location": {
+            "city": null,
+            "countryCode": null
+        },
+        "annualRevenues": [],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "yd.Yourdelivery GmbH",
@@ -1271,7 +1381,10 @@
                 "currency": "EUR",
                 "year": 2017
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "FinanceFox Beteiligung GmbH",
@@ -1294,7 +1407,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "BASF SE",
@@ -1347,7 +1463,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Axel Springer SE",
@@ -1394,7 +1513,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "ProSiebenSat.1 Media SE",
@@ -1465,7 +1587,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "LMnext de GmbH",
@@ -1506,7 +1631,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "wefox Germany GmbH",
@@ -1535,7 +1663,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "SPIEGEL-Verlag Rudolf Augstein GmbH & Co. KG",
@@ -1545,7 +1676,10 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Exasol AG",
@@ -1610,7 +1744,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Klarna GmbH",
@@ -1663,7 +1800,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "HelloFresh SE",
@@ -1710,7 +1850,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Launchmetrics Germany GmbH",
@@ -1720,7 +1863,10 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "solarisBank AG",
@@ -1755,7 +1901,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Doctolib GmbH",
@@ -1778,7 +1927,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Deposit Solutions GmbH",
@@ -1819,7 +1971,10 @@
                 "currency": "EUR",
                 "year": 2017
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "SoundCloud Global Ltd. & Co. KG",
@@ -1829,7 +1984,23 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": null,
+        "featured": false,
+        "jurisdiction": null,
+        "location": {
+            "city": null,
+            "countryCode": null
+        },
+        "annualRevenues": [],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Mobile.de GmbH",
@@ -1912,7 +2083,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Adidas AG",
@@ -1989,7 +2163,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Amazon EU S.à r.l., Niederlassung Deutschland",
@@ -1999,7 +2176,10 @@
             "city": "München",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Comuto Deutschland GmbH",
@@ -2058,7 +2238,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Amazon Digital Germany GmbH",
@@ -2141,7 +2324,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "About YOU GmbH",
@@ -2164,7 +2350,10 @@
                 "currency": "EUR",
                 "year": 2012
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Blacklane GmbH",
@@ -2205,7 +2394,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Schufa Holding AG",
@@ -2282,7 +2474,591 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "Amazon Europe Core SARL",
+        "featured": true,
+        "jurisdiction": "~ - \"LU\" - \"EU - GDPR\"",
+        "location": {
+            "city": "Luxembourg",
+            "countryCode": "LU"
+        },
+        "annualRevenues": [],
+        "dataRecipients": [
+            "",
+            "LiveRamp, Inc.",
+            "JSDelivr",
+            "Free Stream Media Corp. dba Samba TV",
+            "Freewheel",
+            "Salesforce.com, Inc.",
+            "The Rubicon Project, Inc.",
+            "Lucid Holdings, LLC",
+            "The Kantar Group Limited",
+            "PaperG, Inc. dba Thunder Industries",
+            "Oracle Data Cloud",
+            "Adjust GmbH",
+            "King",
+            "AppsFlyer",
+            "Cloudflare",
+            "White Ops, Inc.",
+            "jQuery",
+            "Branch",
+            "Index Exchange, Inc.",
+            "Teads",
+            "OpenX",
+            "zeotap GmbH",
+            "Jivox Corporation",
+            "comScore, Inc.",
+            "ADITION technologies AG",
+            "Innovid Inc.",
+            "mParticle",
+            "Bannerflow AB",
+            "RhythmOne DBA Unruly Group Ltd",
+            "PubMatic, Inc.",
+            "BIDSWITCH GmbH",
+            "Threedium",
+            "RevJet",
+            "TripleLift, Inc.",
+            "Verizon Media EMEA Limited",
+            "Oracle Data Cloud - Moat",
+            "Dynata LLC",
+            "Treasure Data",
+            "Twitter",
+            "BlueKai",
+            "MoPub",
+            "Kochava Inc.",
+            "Sizmek by Amazon",
+            "emetriq GmbH",
+            "Telaria SAS",
+            "Xandr, Inc.",
+            "Flashtalking, Inc.",
+            "Adobe Inc",
+            "Evidon",
+            "Eulerian Technologies",
+            "[M]Platform",
+            "Exactag GmbH",
+            "Sirdata",
+            "MMI",
+            "DoubleVerify Inc.",
+            "Weborama",
+            "Neodata Group srl",
+            "Habu",
+            "Mapp Digital",
+            "Meetrics GmbH",
+            "NeuStar, Inc.",
+            "IRI",
+            "Tapad, Inc.",
+            "Lytics",
+            "Taboola Europe Limited",
+            "TrustArc",
+            "Nielsen LLC",
+            "Facebook",
+            "Sublime",
+            "Adform",
+            "smartclip Europe GmbH",
+            "CREATEJS",
+            "SpotX, Inc.",
+            "Google Advertising Products",
+            "Singular",
+            "Audiens S.r.l.",
+            "Amazon",
+            "Stream Eye",
+            "Adloox SA",
+            "Integral Ad Science, Inc."
+        ],
+        "dataSharingPurposes": {
+            "unspecified": {
+                "count": 28
+            },
+            "dpv:CreatePersonalizedRecommendations": {
+                "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
+                "dpv:Superclass": "dpv:CreatePersonalizedReccomendations",
+                "Translation_DE": "Personalisierte Empfehlungen erstellen",
+                "Translation_EN": "Create Personalized Recommendations",
+                "Synonyms": "",
+                "count": 19
+            },
+            "dpv:FraudPreventionAndDetection": {
+                "dpv:Purpose": "dpv:FraudPreventionAndDetection",
+                "dpv:Superclass": "dpv:Security",
+                "Translation_DE": "Betrugsprävention und -aufdeckung",
+                "Translation_EN": "Fraud Prevention and Detection",
+                "Synonyms": "",
+                "count": 58
+            },
+            "dpv:LegalCompliance": {
+                "dpv:Purpose": "dpv:LegalCompliance",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Rechtskonformität",
+                "Translation_EN": "Legal Compliance",
+                "Synonyms": "",
+                "count": 19
+            },
+            "dpv:Advertising": {
+                "dpv:Purpose": "dpv:Advertising",
+                "dpv:Superclass": "dpv:Marketing",
+                "Translation_DE": "Werbung",
+                "Translation_EN": "Advertising",
+                "Synonyms": "",
+                "count": 39
+            },
+            "dpv:Security": {
+                "dpv:Purpose": "dpv:Security",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Sicherheit",
+                "Translation_EN": "Security",
+                "Synonyms": "",
+                "count": 38
+            },
+            "dpv:ImproveExistingProductsAndServices": {
+                "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
+                "dpv:Superclass": "dpv:OptimisationForController",
+                "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
+                "Translation_EN": "Improve Existing Products and Services",
+                "Synonyms": "",
+                "count": 58
+            },
+            "dpv:OptimisationForConsumer": {
+                "dpv:Purpose": "dpv:OptimisationForConsumer",
+                "dpv:Superclass": "dpv:ServiceOptimization",
+                "Translation_DE": "Optimierung für den Verbraucher",
+                "Translation_EN": "Optimisation for Consumer",
+                "Synonyms": "",
+                "count": 19
+            },
+            "dpv:DeliveryOfGoods": {
+                "dpv:Purpose": "dpv:DeliveryOfGoods",
+                "dpv:Superclass": "dpv:RequestedServiceProvision",
+                "Translation_DE": "Lieferung von Waren",
+                "Translation_EN": "Delivery of Goods",
+                "Synonyms": "",
+                "count": 19
+            },
+            "dpv:ServiceProvision": {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Dienstbereitstellung",
+                "Translation_EN": "Service Provision",
+                "Synonyms": "",
+                "count": 104
+            },
+            "dpv:Analytics": {
+                "dpv:Purpose": "dpv:Analytics",
+                "dpv:Superclass": "dpv:ServiceProvision",
+                "Translation_DE": "Analytik",
+                "Translation_EN": "Analytics",
+                "Synonyms": "",
+                "count": 76
+            },
+            "dpv:CommercialInterest": {
+                "dpv:Purpose": "dpv:CommercialInterest",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Kommerzielles Interesse",
+                "Translation_EN": "Commercial Interest",
+                "Synonyms": "",
+                "count": 81
+            },
+            "dpv:PersonalisedAdvertising": {
+                "dpv:Purpose": "dpv:PersonalisedAdvertising",
+                "dpv:Superclass": "dpv:Advertising;dpv:ServicePersonalization",
+                "Translation_DE": "Personalisierte Werbung",
+                "Translation_EN": "Personalised Advertising",
+                "Synonyms": "",
+                "count": 33
+            },
+            "dpv:ResearchAndDevelopment": {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Forschung und Entwicklung",
+                "Translation_EN": "Research and Development",
+                "Synonyms": "",
+                "count": 102
+            },
+            "dpv:Payment": {
+                "dpv:Purpose": "dpv:Payment",
+                "dpv:Superclass": "dpv:ServiceProvision",
+                "Translation_DE": "Bezahlung",
+                "Translation_EN": "Payment",
+                "Synonyms": "",
+                "count": 19
+            },
+            "dpv:OptimisationForController": {
+                "dpv:Purpose": "dpv:OptimisationForController",
+                "dpv:Superclass": "dpv:ServiceOptimization",
+                "Translation_DE": "Optimierung für Controller",
+                "Translation_EN": "Optimisation for Controller",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:CommercialResearch": {
+                "dpv:Purpose": "dpv:CommercialResearch",
+                "dpv:Superclass": "dpv:ResearchAndDevelopment",
+                "Translation_DE": "Kommerzielle Forschung",
+                "Translation_EN": "Commercial Research",
+                "Synonyms": "",
+                "count": 27
+            }
+        },
+        "dataTypesShared": {
+            "dpv:CommunicationsMetadata": {
+                "dpv:Category": "dpv:CommunicationsMetadata",
+                "dpv:Superclass": "dpv:PublicLife",
+                "Translation_DE": "Kommunikations-Metadaten",
+                "Translation_EN": "Communications Metadata",
+                "Polypoly_Parent_Category": "SozialDaten",
+                "Synonyms": "",
+                "count": 27
+            },
+            "unspecified": {
+                "count": 151
+            },
+            "dpv:Preference": {
+                "dpv:Category": "dpv:Preference",
+                "dpv:Superclass": "dpv:Internal",
+                "Translation_DE": "Präferenz",
+                "Translation_EN": "Preference",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 21
+            },
+            "dpv:BrowserFingerprint": {
+                "dpv:Category": "dpv:BrowserFingerprint",
+                "dpv:Superclass": "dpv:DeviceBased",
+                "Translation_DE": "Browser-Fingerabdruck",
+                "Translation_EN": "Browser Fingerprint",
+                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Synonyms": "",
+                "count": 13
+            },
+            "dpv:Communication": {
+                "dpv:Category": "dpv:Communication",
+                "dpv:Superclass": "dpv:Social",
+                "Translation_DE": "Kommunikation",
+                "Translation_EN": "Communication",
+                "Polypoly_Parent_Category": "SozialDaten",
+                "Synonyms": "",
+                "count": 11
+            },
+            "dpv:DeviceSoftware": {
+                "dpv:Category": "dpv:DeviceSoftware",
+                "dpv:Superclass": "dpv:DeviceBased",
+                "Translation_DE": "Geräte-Software",
+                "Translation_EN": "Device Software",
+                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:FinancialAccount": {
+                "dpv:Category": "dpv:FinancialAccount",
+                "dpv:Superclass": "dpv:Financial",
+                "Translation_DE": "Finanzkonto",
+                "Translation_EN": "Financial Account",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:CreditRecord": {
+                "dpv:Category": "dpv:CreditRecord",
+                "dpv:Superclass": "dpv:Credit",
+                "Translation_DE": "Kreditrekord",
+                "Translation_EN": "Credit Record",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 24
+            },
+            "dpv:TelephoneNumber": {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "dpv:Superclass": "dpv:Contact",
+                "Translation_DE": "Telefon-Nummer",
+                "Translation_EN": "Telephone Number",
+                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Synonyms": "",
+                "count": 15
+            },
+            "dpv:ServiceConsumptionBehavior": {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "dpv:Superclass": "dpv:Behavioral",
+                "Translation_DE": "Service-Verbrauchs-Verhalten",
+                "Translation_EN": "Service Consumption Behavior",
+                "Polypoly_Parent_Category": "VerhaltensDaten",
+                "Synonyms": "",
+                "count": 18
+            },
+            "dpv:Sale": {
+                "dpv:Category": "dpv:Sale",
+                "dpv:Superclass": "dpv:Transactional",
+                "Translation_DE": "Verkauf",
+                "Translation_EN": "Sale",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:Password": {
+                "dpv:Category": "dpv:Password",
+                "dpv:Superclass": "dpv:Authenticating",
+                "Translation_DE": "Passwort",
+                "Translation_EN": "Password",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:Financial": {
+                "dpv:Category": "dpv:Financial",
+                "dpv:Superclass": "dpv:PersonalDataCategory",
+                "Translation_DE": "Finanzen",
+                "Translation_EN": "Financial",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 22
+            },
+            "dpv:Transactional": {
+                "dpv:Category": "dpv:Transactional",
+                "dpv:Superclass": "dpv:Financial",
+                "Translation_DE": "Transaktionsbezogen",
+                "Translation_EN": "Transactional",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:Language": {
+                "dpv:Category": "dpv:Language",
+                "dpv:Superclass": "dpv:Ethnicity",
+                "Translation_DE": "Sprache",
+                "Translation_EN": "Language",
+                "Polypoly_Parent_Category": "SozialDaten",
+                "Synonyms": "",
+                "count": 5
+            },
+            "dpv:BrowsingBehavior": {
+                "dpv:Category": "dpv:BrowsingBehavior",
+                "dpv:Superclass": "dpv:Behavioral",
+                "Translation_DE": "Browsing-Verhalten",
+                "Translation_EN": "Browsing Behavior",
+                "Polypoly_Parent_Category": "VerhaltensDaten",
+                "Synonyms": "",
+                "count": 30
+            },
+            "dpv:Authenticating": {
+                "dpv:Category": "dpv:Authenticating",
+                "dpv:Superclass": "dpv:Internal",
+                "Translation_DE": "Authentifizierung",
+                "Translation_EN": "Authenticating",
+                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Synonyms": "",
+                "count": 15
+            },
+            "dpv:Dislike": {
+                "dpv:Category": "dpv:Dislike",
+                "dpv:Superclass": "dpv:Interest",
+                "Translation_DE": "Nicht mögen",
+                "Translation_EN": "Dislike",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:Tax": {
+                "dpv:Category": "dpv:Tax",
+                "dpv:Superclass": "dpv:Transactional",
+                "Translation_DE": "Steuer",
+                "Translation_EN": "Tax",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 4
+            },
+            "dpv:Transaction": {
+                "dpv:Category": "dpv:Transaction",
+                "dpv:Superclass": "dpv:Transactional",
+                "Translation_DE": "Transaktion",
+                "Translation_EN": "Transaction",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 3
+            },
+            "dpv:IPAddress": {
+                "dpv:Category": "dpv:IPAddress",
+                "dpv:Superclass": "dpv:DeviceBased",
+                "Translation_DE": "IP-Adresse",
+                "Translation_EN": "IP Address",
+                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Synonyms": "",
+                "count": 5
+            },
+            "dpv:Purchase": {
+                "dpv:Category": "dpv:Purchase",
+                "dpv:Superclass": "dpv:Transactional",
+                "Translation_DE": "Einkaufen",
+                "Translation_EN": "Purchase",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:LoanRecord": {
+                "dpv:Category": "dpv:LoanRecord",
+                "dpv:Superclass": "dpv:Transactional",
+                "Translation_DE": "Darlehenssatz",
+                "Translation_EN": "Loan Record",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 4
+            },
+            "dpv:Demographic": {
+                "dpv:Category": "dpv:Demographic",
+                "dpv:Superclass": "dpv:External",
+                "Translation_DE": "Demografische Daten",
+                "Translation_EN": "Demographic",
+                "Polypoly_Parent_Category": "SozialDaten",
+                "Synonyms": "",
+                "count": 9
+            },
+            "dpv:Accent": {
+                "dpv:Category": "dpv:Accent",
+                "dpv:Superclass": "dpv:Language",
+                "Translation_DE": "Akzent",
+                "Translation_EN": "Accent",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 5
+            },
+            "dpv:BankAccount": {
+                "dpv:Category": "dpv:BankAccount",
+                "dpv:Superclass": "dpv:FinancialAccount",
+                "Translation_DE": "Bankkonto",
+                "Translation_EN": "Bank Account",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 9
+            },
+            "dpv:DeviceApplications": {
+                "dpv:Category": "dpv:DeviceApplications",
+                "dpv:Superclass": "dpv:DeviceSoftware",
+                "Translation_DE": "Geräteanwendungen",
+                "Translation_EN": "Device Applications",
+                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:Age": {
+                "dpv:Category": "dpv:Age",
+                "dpv:Superclass": "dpv:PhysicalCharacteristic",
+                "Translation_DE": "Alter",
+                "Translation_EN": "Age",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
+                "count": 11
+            },
+            "dpv:Name": {
+                "dpv:Category": "dpv:Name",
+                "dpv:Superclass": "dpv:Identifying",
+                "Translation_DE": "Name",
+                "Translation_EN": "Name",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 11
+            },
+            "dpv:Interest": {
+                "dpv:Category": "dpv:Interest",
+                "dpv:Superclass": "dpv:Preference",
+                "Translation_DE": "Interesse",
+                "Translation_EN": "Interest",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 15
+            },
+            "dpv:Picture": {
+                "dpv:Category": "dpv:Picture",
+                "dpv:Superclass": "dpv:Identifying",
+                "Translation_DE": "Bild",
+                "Translation_EN": "Picture",
+                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Synonyms": "",
+                "count": 7
+            },
+            "dpv:Like": {
+                "dpv:Category": "dpv:Like",
+                "dpv:Superclass": "dpv:Interest",
+                "Translation_DE": "Mögen",
+                "Translation_EN": "Like",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 2
+            },
+            "dpv:Location": {
+                "dpv:Category": "dpv:Location",
+                "dpv:Superclass": "dpv:Tracking",
+                "Translation_DE": "Standort",
+                "Translation_EN": "Location",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 17
+            },
+            "dpv:PurchasesandSpendingHabit": {
+                "dpv:Category": "dpv:PurchasesandSpendingHabit",
+                "dpv:Superclass": "dpv:Transactional",
+                "Translation_DE": "Einkäufe und Ausgabegewohnheiten",
+                "Translation_EN": "Purchases and Spending Habit",
+                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Synonyms": "",
+                "count": 3
+            },
+            "dpv:PhysicalAddress": {
+                "dpv:Category": "dpv:PhysicalAddress",
+                "dpv:Superclass": "dpv:Contact",
+                "Translation_DE": "Physikalische Adresse",
+                "Translation_EN": "Physical Address",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 5
+            },
+            "dpv:VoiceCommunicationRecording": {
+                "dpv:Category": "dpv:VoiceCommunicationRecording",
+                "dpv:Superclass": "dpv:Communication",
+                "Translation_DE": "Aufzeichnung der Sprachkommunikation",
+                "Translation_EN": "Voice Communication Recording",
+                "Polypoly_Parent_Category": "SozialDaten",
+                "Synonyms": "",
+                "count": 5
+            },
+            "dpv:Dialect": {
+                "dpv:Category": "dpv:Dialect",
+                "dpv:Superclass": "dpv:Language",
+                "Translation_DE": "Dialekt",
+                "Translation_EN": "Dialect",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 5
+            },
+            "dpv:DeviceBased": {
+                "dpv:Category": "dpv:DeviceBased",
+                "dpv:Superclass": "dpv:Tracking",
+                "Translation_DE": "Gerätebasiert",
+                "Translation_EN": "Device Based",
+                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Synonyms": "",
+                "count": 228
+            },
+            "dpv:OfficialID": {
+                "dpv:Category": "dpv:OfficialID",
+                "dpv:Superclass": "dpv:Identifying",
+                "Translation_DE": "Offizieller Ausweis",
+                "Translation_EN": "Official ID",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 9
+            },
+            "dpv:EmailAddress": {
+                "dpv:Category": "dpv:EmailAddress",
+                "dpv:Superclass": "dpv:Contact",
+                "Translation_DE": "E-Mail Adresse",
+                "Translation_EN": "Email Address",
+                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Synonyms": "",
+                "count": 16
+            }
+        }
     },
     {
         "name": "Saxonia International Management Consulting GmbH",
@@ -2292,7 +3068,10 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "signavio GmbH",
@@ -2345,7 +3124,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Beqom Deutschland GmbH",
@@ -2368,7 +3150,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Sigfox Germany GmbH",
@@ -2403,7 +3188,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Movinga GmbH",
@@ -2432,7 +3220,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Outfittery GmbH",
@@ -2479,7 +3270,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Acronis Germany GmbH",
@@ -2532,7 +3326,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Intel Deutschland GmbH",
@@ -2591,7 +3388,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Cloud & Heat Technologies GmbH",
@@ -2644,7 +3444,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Konux GmbH",
@@ -2685,7 +3488,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Spotcap Global Services GmbH",
@@ -2726,7 +3532,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "FlixMobility GmbH",
@@ -2767,7 +3576,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Tado GmbH",
@@ -2814,7 +3626,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Raisin GmbH",
@@ -2849,7 +3664,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Shazam Media Services GmbH",
@@ -2859,7 +3677,23 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": null,
+        "featured": false,
+        "jurisdiction": null,
+        "location": {
+            "city": null,
+            "countryCode": null
+        },
+        "annualRevenues": [],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Deliveroo Germany GmbH",
@@ -2894,7 +3728,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Helpling GmbH & Co. KG",
@@ -2904,7 +3741,10 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "TikTok Germany GmbH",
@@ -2914,7 +3754,10 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Check24 Vergleichsportal GmbH",
@@ -2967,7 +3810,10 @@
                 "currency": "EUR",
                 "year": 2014
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "PGI Ventures UG",
@@ -2977,7 +3823,10 @@
             "city": "Berlin",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Ströer SE & Co. KGaA",
@@ -3042,7 +3891,10 @@
                 "currency": "EUR",
                 "year": 2019
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Gruner + Jahr GmbH",
@@ -3052,7 +3904,10 @@
             "city": "Hamburg",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "NavVis GmbH",
@@ -3093,7 +3948,10 @@
                 "currency": "EUR",
                 "year": 2018
             }
-        ]
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     },
     {
         "name": "Socialbakers Germany GmbH",
@@ -3103,6 +3961,9 @@
             "city": "Frankfurt a. Main",
             "countryCode": "DE"
         },
-        "annualRevenues": null
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
     }
 ]
