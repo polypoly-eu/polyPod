@@ -2,7 +2,7 @@ import React from "react";
 import i18n from "../../i18n.js";
 import "./onboardingPopup.css";
 
-const OnboardingPopup = ({ onCloseOnboardingPopup }) => {
+const OnboardingPopup = ({ onClose, onMoreInfo }) => {
     return (
         <div className="onboarding-popup-container">
             <div className="onboarding-popup">
@@ -16,8 +16,10 @@ const OnboardingPopup = ({ onCloseOnboardingPopup }) => {
                     <div className="image-placeholder"></div>
                 </div>
                 <div className="button-container">
-                    <a>{i18n.t("onboardingPopup:button.learnMore")}</a>
-                    <button onClick={() => onCloseOnboardingPopup()}>
+                    <a onClick={onMoreInfo}>
+                        {i18n.t("onboardingPopup:button.learnMore")}
+                    </a>
+                    <button onClick={onClose}>
                         {i18n.t("onboardingPopup:button.ok")}
                     </button>
                 </div>

@@ -77,9 +77,14 @@ const PolyExplorer = () => {
         handleShowScreenChange("main");
     };
 
-    function handleCloseOnboardingPopup() {
+    function handleOnboardingPopupClose() {
         setFirstRun(false);
         writeFirstRun(false);
+    }
+
+    function handleOnboardingPopupMoreInfo() {
+        handleOnboardingPopupClose();
+        handleShowScreenChange("info");
     }
 
     function updatePodNavigation() {
@@ -148,7 +153,8 @@ const PolyExplorer = () => {
             {screens[showScreen]}{" "}
             {firstRun ? (
                 <OnboardingPopup
-                    onCloseOnboardingPopup={handleCloseOnboardingPopup}
+                    onClose={handleOnboardingPopupClose}
+                    onMoreInfo={handleOnboardingPopupMoreInfo}
                 />
             ) : null}
         </div>
