@@ -2,6 +2,7 @@ package coop.polypoly.polypod
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,11 +14,11 @@ import coop.polypoly.polypod.features.Feature
 
 class FeatureCardAdapter(private val originatingFragment: Fragment, private val features: List<Feature>) : RecyclerView.Adapter<FeatureCardAdapter.ViewHolder>() {
 
-    class ViewHolder(val featureCardView: CardView) : RecyclerView.ViewHolder(featureCardView)
+    class ViewHolder(val featureCardView: View) : RecyclerView.ViewHolder(featureCardView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val featureCardView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.feature_card, parent, false) as CardView
+            .inflate(R.layout.feature_card, parent, false)
         return ViewHolder(featureCardView)
     }
 
