@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import i18n from "../../i18n.js";
 import { pod, podNav } from "../../fakePod.js";
 import { emptyFilters, removeFilter } from "../../companyFilter.js";
-import "./polyExplorer.css";
+
 import MainScreen from "../../screens/main/main.jsx";
 import DataExplorationScreen from "../../screens/dataExploration/dataExploration.jsx";
 import CompanyFilterScreen from "../../screens/companyFilter/companyFilter.jsx";
