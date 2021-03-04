@@ -32,7 +32,8 @@ class FeatureCardAdapter(private val originatingFragment: Fragment, private val 
             // FIXME - navigation assumes we're coming from FirstFragment, which might not necessary be true
             val action =
                 FeatureListFragmentDirections.actionFeatureListFragmentToFeatureFragment(
-                    feature.name
+                    feature.name,
+                    feature.primaryColor
                 )
             findNavController(originatingFragment).navigate(action)
         }

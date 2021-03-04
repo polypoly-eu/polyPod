@@ -7,7 +7,7 @@ import java.io.FileOutputStream
 import java.util.*
 import java.util.zip.ZipFile
 
-class Feature(val name: String, val author: String, val description: String)
+class Feature(val name: String, val author: String, val description: String, val primaryColor: String)
 
 class FeatureStorage {
     companion object {
@@ -34,7 +34,8 @@ class FeatureStorage {
                 val name = file.name.replace(".zip", "")
                 val author = "polypoly Cooperative"
                 val description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
-                features.add(Feature(name, author, description))
+                val primaryColor = "#0f1938"
+                features.add(Feature(name, author, description, primaryColor))
             }
             for (feature in features) {
                 logger.debug("Found Feature: '{}'", feature.name)

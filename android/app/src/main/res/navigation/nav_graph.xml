@@ -32,6 +32,9 @@
         <argument
             android:name="featureName"
             app:argType="string" />
+        <argument
+            android:name="featurePrimaryColor"
+            app:argType="string" />
     </fragment>
 
     <activity
