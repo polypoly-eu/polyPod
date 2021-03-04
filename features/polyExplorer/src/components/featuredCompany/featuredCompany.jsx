@@ -1,7 +1,7 @@
 import React from "react";
 import i18n from "../../i18n.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
-import DataSharingGauge from "./dataSharingGauge.jsx";
+import DataSharingGauge from "../dataSharingGauge/dataSharingGauge.jsx";
 import "./featuredCompany.css";
 
 const DataSharingSection = ({

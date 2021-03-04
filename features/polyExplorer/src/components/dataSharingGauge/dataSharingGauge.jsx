@@ -14,7 +14,7 @@ const DataSharingGauge = ({ sharingType, count, max, average }) => {
                     {count} {i18n.t(`common:sharing.${sharingType}`)}
                 </span>
                 <span className="data-sharing-gauge-max-label">
-                    {i18n.t("featuredCompany:label.gauge.total", {
+                    {i18n.t("dataSharingGauge:label.total", {
                         value: max,
                     })}
                 </span>
@@ -35,7 +35,7 @@ const DataSharingGauge = ({ sharingType, count, max, average }) => {
                 style={{ width: `${averagePercentage}%` }}
             >
                 <div className="data-sharing-gauge-average-label">
-                    {i18n.t("featuredCompany:label.gauge.average", {
+                    {i18n.t("dataSharingGauge:label.average", {
                         value: average,
                     })}
                 </div>

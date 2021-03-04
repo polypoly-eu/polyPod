@@ -1,8 +1,4 @@
 {
     "text.legend":
-        "Wie liest man das?",
-    "label.gauge.average":
-        "Durchschnitt: {{value}}",
-    "label.gauge.total":
-        "Gesamt: {{value}}"
+        "Wie liest man das?"
 }

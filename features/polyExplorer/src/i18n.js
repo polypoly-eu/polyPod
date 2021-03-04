@@ -9,6 +9,7 @@ import companySearchScreenEn from "./locales/en/companySearchScreen.json";
 import mainScreenEn from "./locales/en/mainScreen.json";
 import onboardingPopupEn from "./locales/en/onboardingPopup.json";
 import featuredCompanyEn from "./locales/en/featuredCompany.json";
+import dataSharingGaugeEn from "./locales/en/dataSharingGauge.json";
 import dataExplorationScreenEn from "./locales/en/dataExplorationScreen.json";
 import featuredCompanyHelpScreenEn from "./locales/en/featuredCompanyHelpScreen.json";
 import infoScreenEn from "./locales/en/infoScreen.json";
@@ -21,6 +22,7 @@ import companySearchScreenDe from "./locales/de/companySearchScreen.json";
 import mainScreenDe from "./locales/de/mainScreen.json";
 import onboardingPopupDe from "./locales/de/onboardingPopup.json";
 import featuredCompanyDe from "./locales/de/featuredCompany.json";
+import dataSharingGaugeDe from "./locales/de/dataSharingGauge.json";
 import dataExplorationScreenDe from "./locales/de/dataExplorationScreen.json";
 import featuredCompanyHelpScreenDe from "./locales/de/featuredCompanyHelpScreen.json";
 import infoScreenDe from "./locales/de/infoScreen.json";
@@ -35,6 +37,7 @@ const strings = {
         mainScreen: mainScreenEn,
         onboardingPopup: onboardingPopupEn,
         featuredCompany: featuredCompanyEn,
+        dataSharingGauge: dataSharingGaugeEn,
         dataExplorationScreen: dataExplorationScreenEn,
         featuredCompanyHelpScreen: featuredCompanyHelpScreenEn,
         infoScreen: infoScreenEn,
@@ -48,6 +51,7 @@ const strings = {
         mainScreen: mainScreenDe,
         onboardingPopup: onboardingPopupDe,
         featuredCompany: featuredCompanyDe,
+        dataSharingGauge: dataSharingGaugeDe,
         dataExplorationScreen: dataExplorationScreenDe,
         featuredCompanyHelpScreen: featuredCompanyHelpScreenDe,
         infoScreen: infoScreenDe,
