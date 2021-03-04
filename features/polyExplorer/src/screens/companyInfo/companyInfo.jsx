@@ -19,7 +19,9 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
             <button onClick={() => handleJurisdictionInfo()}>
                 <img src="./images/question-circle.svg" />
             </button>
-            <p>{i18n.t("companyInfoScreen:jurisdictions")}</p>
+            <p className="jurisdictions-label">
+                {i18n.t("companyInfoScreen:jurisdictions")}
+            </p>
             <div className="circle EU-GDPR"></div>
             <p>{i18n.t("common:jurisdiction.euGdpr")}</p>
             <div className="circle Russia"></div>

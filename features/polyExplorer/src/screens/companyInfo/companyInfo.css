@@ -109,6 +109,13 @@
     margin: 7px 6px 0px 2px;
 }
 
+/* Temporary workaround for 320px viewport width */
+p.jurisdictions-label {
+    width: 0;
+    overflow: hidden;
+    margin-right: 2px;
+}
+
 .location-tooltip .circle {
     width: 10px;
     height: 10px;
