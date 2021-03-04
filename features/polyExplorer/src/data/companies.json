@@ -1312,19 +1312,6 @@
         "dataTypesShared": null
     },
     {
-        "name": null,
-        "featured": false,
-        "jurisdiction": null,
-        "location": {
-            "city": null,
-            "countryCode": null
-        },
-        "annualRevenues": [],
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null
-    },
-    {
         "name": "yd.Yourdelivery GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -1985,19 +1972,6 @@
             "countryCode": "DE"
         },
         "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null
-    },
-    {
-        "name": null,
-        "featured": false,
-        "jurisdiction": null,
-        "location": {
-            "city": null,
-            "countryCode": null
-        },
-        "annualRevenues": [],
         "dataRecipients": null,
         "dataSharingPurposes": null,
         "dataTypesShared": null
@@ -3678,19 +3652,6 @@
             "countryCode": "DE"
         },
         "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null
-    },
-    {
-        "name": null,
-        "featured": false,
-        "jurisdiction": null,
-        "location": {
-            "city": null,
-            "countryCode": null
-        },
-        "annualRevenues": [],
         "dataRecipients": null,
         "dataSharingPurposes": null,
         "dataTypesShared": null

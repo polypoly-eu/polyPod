@@ -24,45 +24,47 @@ function extractAnnualRevenues(entry) {
 function parsePolyPediaCompanyData() {
     const companyData = [];
     polyPediaCompanyData.forEach((entry) => {
-        companyData.push({
-            name: entry.legal_entities[0].identifiers.legal_name.value,
-            featured:
-                entry.data_recipients &&
-                entry.derived_purpose_info &&
-                entry.derived_category_info
-                    ? true
-                    : false,
-            jurisdiction:
-                entry.legal_entities[0].data_collection.data_regions
-                    .value instanceof Array
-                    ? entry.legal_entities[0].data_collection.data_regions
-                          .value[0] === "GDPR" &&
-                      entry.legal_entities[0].data_collection.data_regions
-                          .value[1] === "EU"
-                        ? "EU-GDPR"
+        if (entry.legal_entities[0].identifiers.legal_name.value != null) {
+            companyData.push({
+                name: entry.legal_entities[0].identifiers.legal_name.value,
+                featured:
+                    entry.data_recipients &&
+                    entry.derived_purpose_info &&
+                    entry.derived_category_info
+                        ? true
+                        : false,
+                jurisdiction:
+                    entry.legal_entities[0].data_collection.data_regions
+                        .value instanceof Array
+                        ? entry.legal_entities[0].data_collection.data_regions
+                              .value[0] === "GDPR" &&
+                          entry.legal_entities[0].data_collection.data_regions
+                              .value[1] === "EU"
+                            ? "EU-GDPR"
+                            : entry.legal_entities[0].data_collection
+                                  .data_regions.value[0]
                         : entry.legal_entities[0].data_collection.data_regions
-                              .value[0]
-                    : entry.legal_entities[0].data_collection.data_regions
-                          .value,
-            location: {
-                city:
-                    entry.legal_entities[0].basic_info.registered_address.value
-                        .city,
-                countryCode:
-                    entry.legal_entities[0].basic_info.registered_address.value
-                        .country,
-            },
-            annualRevenues: extractAnnualRevenues(entry),
-            dataRecipients: entry.data_recipients
-                ? entry.data_recipients
-                : null,
-            dataSharingPurposes: entry.derived_purpose_info
-                ? entry.derived_purpose_info
-                : null,
-            dataTypesShared: entry.derived_category_info
-                ? entry.derived_category_info
-                : null,
-        });
+                              .value,
+                location: {
+                    city:
+                        entry.legal_entities[0].basic_info.registered_address
+                            .value.city,
+                    countryCode:
+                        entry.legal_entities[0].basic_info.registered_address
+                            .value.country,
+                },
+                annualRevenues: extractAnnualRevenues(entry),
+                dataRecipients: entry.data_recipients
+                    ? entry.data_recipients
+                    : null,
+                dataSharingPurposes: entry.derived_purpose_info
+                    ? entry.derived_purpose_info
+                    : null,
+                dataTypesShared: entry.derived_category_info
+                    ? entry.derived_category_info
+                    : null,
+            });
+        }
     });
     return companyData;
 }
