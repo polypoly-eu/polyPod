@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 
-import i18n from "../../i18n.js";
-import { pod, podNav } from "../../fakePod.js";
-import { emptyFilters, removeFilter } from "../../companyFilter.js";
+import i18n from "./i18n.js";
+import { pod, podNav } from "./fakePod.js";
+import { emptyFilters, removeFilter } from "./companyFilter.js";
 
-import MainScreen from "../../screens/main/main.jsx";
-import DataExplorationScreen from "../../screens/dataExploration/dataExploration.jsx";
-import CompanyFilterScreen from "../../screens/companyFilter/companyFilter.jsx";
-import CompanySearchScreen from "../../screens/companySearch/companySearch.jsx";
-import InfoScreen from "../../screens/info/info.jsx";
-import CompanyInfoScreen from "../../screens/companyInfo/companyInfo.jsx";
-import FeaturedCompanyHelpScreen from "../../screens/featuredCompanyHelp/featuredCompanyHelp.jsx";
-import OnboardingPopup from "../onboardingPopup/onboardingPopup.jsx";
+import MainScreen from "./screens/main/main.jsx";
+import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
+import CompanyFilterScreen from "./screens/companyFilter/companyFilter.jsx";
+import CompanySearchScreen from "./screens/companySearch/companySearch.jsx";
+import InfoScreen from "./screens/info/info.jsx";
+import CompanyInfoScreen from "./screens/companyInfo/companyInfo.jsx";
+import FeaturedCompanyHelpScreen from "./screens/featuredCompanyHelp/featuredCompanyHelp.jsx";
+import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 
-import polyPediaCompanies from "../../data/companies.json";
-import polyPediaGlobalData from "../../data/global.json";
+import polyPediaCompanies from "./data/companies.json";
+import polyPediaGlobalData from "./data/global.json";
 //To go soon
-import makeExampleData from "../dataViz/makeExampleData.jsx";
+import makeExampleData from "./components/dataViz/makeExampleData.jsx";
 const fakeFeaturedCompanies = makeExampleData().filter((e) => e.featured);
 for (let company of fakeFeaturedCompanies) company.name += " (Fake)";
 
