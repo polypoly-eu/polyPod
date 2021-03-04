@@ -1,5 +1,5 @@
 .data-sharing-gauge {
-    height: 28px;
+    height: 66px;
 }
 
 .data-sharing-gauge[data-sharing-type="dataTypes"] {
@@ -16,6 +16,28 @@
 
 .data-sharing-gauge[data-sharing-type="jurisdictions"] {
     --highlight-color: #edf2f7;
+}
+
+.data-sharing-top-labels {
+    position: relative;
+}
+
+.data-sharing-gauge-main-label {
+    margin: 0;
+    color: var(--highlight-color);
+    font-size: 24px;
+}
+
+.data-sharing-gauge-max-label,
+.data-sharing-gauge-average-label {
+    font-size: 12px;
+    color: var(--highlight-color);
+}
+
+.data-sharing-gauge-max-label {
+    position: absolute;
+    right: 0;
+    bottom: 4px;
 }
 
 .data-sharing-gauge-outline,
@@ -67,12 +89,6 @@
     margin-bottom: 2px;
 }
 
-.data-sharing-gauge-average-label,
-.data-sharing-gauge-max-label {
-    font-size: 12px;
-    color: var(--highlight-color);
-}
-
 .data-sharing-gauge-average-label {
     position: absolute;
     top: 12px;
@@ -88,10 +104,4 @@
 
 .data-sharing-gauge-average-marker.light .data-sharing-gauge-average-label {
     margin-top: 0;
-}
-
-.data-sharing-gauge-max-label {
-    position: relative;
-    top: -59px;
-    text-align: right;
 }

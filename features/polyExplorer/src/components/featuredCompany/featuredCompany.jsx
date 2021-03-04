@@ -16,9 +16,6 @@ const DataSharingSection = ({
         onClick={onOpenDetails}
     >
         <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
-        <h2>
-            {count} {i18n.t(`common:sharing.${sharingType}`)}
-        </h2>
         <DataSharingGauge
             sharingType={sharingType}
             count={count}

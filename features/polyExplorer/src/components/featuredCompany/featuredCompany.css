@@ -31,34 +31,9 @@
     text-align: left;
 }
 
-.data-sharing-section h1,
-.data-sharing-section h2 {
-    margin: 0;
-}
-
 .data-sharing-section h1 {
-    margin-bottom: -7px;
+    margin: 0 0 -7px 0;
     font-size: 16px;
-}
-
-.data-sharing-section h2 {
-    font-size: 24px;
-}
-
-.dataTypes-shared h2 {
-    color: #fe8988;
-}
-
-.purposes-shared h2 {
-    color: #3ba6ff;
-}
-
-.companies-shared h2 {
-    color: #7ee8a2;
-}
-
-.jurisdictions-shared h2 {
-    color: #edf2f7;
 }
 
 .data-sharing-legend {
