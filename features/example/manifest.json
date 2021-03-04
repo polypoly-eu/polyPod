@@ -1,0 +1,11 @@
+{
+    "name": "example-feature",
+    "engines": {
+        "polypoly": "^0.6.0"
+    },
+    "polypoly": {
+        "root": "dist"
+    },
+    "thumbnail": "assets/thumbnail.png",
+    "color": "#000000"
+}
