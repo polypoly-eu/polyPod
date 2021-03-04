@@ -16,6 +16,10 @@
             app:destination="@id/FeatureFragment" />
 
         <action
+            android:id="@+id/action_FeatureListFragment_to_OnboardingActivity"
+            app:destination="@id/OnboardingActivity" />
+
+        <action
             android:id="@+id/action_FeatureListFragment_to_SettingsActivity"
             app:destination="@id/SettingsActivity" />
     </fragment>
@@ -29,7 +33,13 @@
             android:name="featureName"
             app:argType="string" />
     </fragment>
+
+    <activity
+        android:id="@+id/OnboardingActivity"
+        android:name="coop.polypoly.polypod.OnboardingActivity" />
+
     <activity
         android:id="@+id/SettingsActivity"
         android:name="coop.polypoly.polypod.SettingsActivity" />
+
 </navigation>
