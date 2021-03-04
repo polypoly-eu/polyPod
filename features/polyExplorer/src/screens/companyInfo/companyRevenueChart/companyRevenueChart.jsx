@@ -62,11 +62,11 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
     years.forEach((year) => {
         amounts.push(getYearlyAmount(year, unitNumber));
     });
-    console.log(amounts);
     if (
         amounts.filter((e) => e != null).length == 0 ||
         annualRevenues == null
     ) {
+        //A generic empty graph
         const defaultScale = [0, 20, 40, 60, 80];
         const defaultUnit = "M";
 
