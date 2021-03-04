@@ -95,33 +95,3 @@
     top: -24px;
     text-align: right;
 }
-
-.data-sharing-gauge-legend {
-    position: relative;
-    top: -24px;
-    height: 24px;
-    text-align: center;
-}
-
-.data-sharing-gauge-legend span {
-    position: absolute;
-    font-size: 12px;
-    color: #8d9caf;
-}
-
-.data-sharing-gauge-legend img {
-    position: relative;
-    top: 2px;
-    width: 14px;
-    height: 14px;
-    margin-right: 1px;
-}
-
-.data-sharing-gauge-legend span:first-child {
-    top: -2px;
-    left: 0;
-}
-
-.data-sharing-gauge-legend span:last-child {
-    right: 0;
-}

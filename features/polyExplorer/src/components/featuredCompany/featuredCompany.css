@@ -19,12 +19,14 @@
     margin: 8px auto 0 auto;
 }
 
-.data-sharing-section {
-    display: block;
+.data-sharing-section, .data-sharing-legend {
     width: 85%;
     max-width: 414px;
-    background: transparent;
     margin: 0 auto;
+}
+
+.data-sharing-section {
+    background: transparent;
     font-size: 20px;
     text-align: left;
 }
@@ -57,4 +59,21 @@
 
 .jurisdictions-shared h2 {
     color: #edf2f7;
+}
+
+.data-sharing-legend {
+    height: 30px;
+    margin-top: 8px;
+    border: solid 1px #3e495b;
+    border-left: none;
+    border-right: none;
+    line-height: 30px;
+    color: #8d9caf;
+    font-size: 10px;
+}
+
+.data-sharing-legend img {
+    position: relative;
+    top: 3px;
+    margin-right: 4px;
 }

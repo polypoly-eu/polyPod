@@ -10,25 +10,28 @@ const DataSharingSection = ({
     max,
     average,
     onOpenDetails,
-    showLegend = false,
-    onLegendClick = () => {},
 }) => (
-    <div className={`data-sharing-section ${sharingType}-shared`}>
-        <div onClick={onOpenDetails}>
-            <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
-            <h2>
-                {count} {i18n.t(`common:sharing.${sharingType}`)}
-            </h2>
-        </div>
+    <div
+        className={`data-sharing-section ${sharingType}-shared`}
+        onClick={onOpenDetails}
+    >
+        <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
+        <h2>
+            {count} {i18n.t(`common:sharing.${sharingType}`)}
+        </h2>
         <DataSharingGauge
             sharingType={sharingType}
             count={count}
             max={max}
             average={average}
-            onClick={onOpenDetails}
-            showLegend={showLegend}
-            onLegendClick={onLegendClick}
         />
+    </div>
+);
+
+const DataSharingLegend = ({ onClick }) => (
+    <div className="data-sharing-legend" onClick={onClick}>
+        <img src="images/question-circle-filled.svg"></img>
+        {i18n.t("featuredCompany:text.legend")}
     </div>
 );
 
@@ -37,59 +40,57 @@ const FeaturedCompany = ({
     maxValues,
     averageValues,
     onShowScreenChange,
-}) => (
-    <div className="featured-company-card">
-        <div className="short-info-margin">
-            <CompanyShortInfo
-                company={company}
-                onShowScreenChange={onShowScreenChange}
-            />
+}) => {
+    const handleOpenDetails = () =>
+        onShowScreenChange("dataExploration", company.name);
+
+    return (
+        <div className="featured-company-card">
+            <div className="short-info-margin">
+                <CompanyShortInfo
+                    company={company}
+                    onShowScreenChange={onShowScreenChange}
+                />
+            </div>
+            <div className="data-sharing-section-list">
+                <DataSharingSection
+                    sharingType="dataTypes"
+                    count={company.dataTypesShared.length}
+                    max={maxValues.dataTypes}
+                    average={averageValues.dataTypes}
+                    onOpenDetails={handleOpenDetails}
+                />
+                <DataSharingSection
+                    sharingType="purposes"
+                    count={company.dataSharingPurposes.length}
+                    max={maxValues.purposes}
+                    average={averageValues.purposes}
+                    onOpenDetails={handleOpenDetails}
+                />
+                <DataSharingSection
+                    sharingType="companies"
+                    count={company.sharedWithCompanies.length}
+                    max={maxValues.companies}
+                    average={averageValues.companies}
+                    onOpenDetails={handleOpenDetails}
+                />
+                <DataSharingSection
+                    sharingType="jurisdictions"
+                    count={
+                        company.jurisdictionsShared
+                            ? company.jurisdictionsShared.children.length
+                            : 0
+                    }
+                    max={maxValues.jurisdictions}
+                    average={averageValues.jurisdictions}
+                    onOpenDetails={handleOpenDetails}
+                />
+                <DataSharingLegend
+                    onClick={() => onShowScreenChange("featuredCompanyHelp")}
+                />
+            </div>
         </div>
-        <div className="data-sharing-section-list">
-            <DataSharingSection
-                sharingType="dataTypes"
-                count={company.dataTypesShared.length}
-                max={maxValues.dataTypes}
-                average={averageValues.dataTypes}
-                onOpenDetails={() =>
-                    onShowScreenChange("dataExploration", company.name)
-                }
-            />
-            <DataSharingSection
-                sharingType="purposes"
-                count={company.dataSharingPurposes.length}
-                max={maxValues.purposes}
-                average={averageValues.purposes}
-                onOpenDetails={() =>
-                    onShowScreenChange("dataExploration", company.name)
-                }
-            />
-            <DataSharingSection
-                sharingType="companies"
-                count={company.sharedWithCompanies.length}
-                max={maxValues.companies}
-                average={averageValues.companies}
-                onOpenDetails={() =>
-                    onShowScreenChange("dataExploration", company.name)
-                }
-            />
-            <DataSharingSection
-                sharingType="jurisdictions"
-                count={
-                    company.jurisdictionsShared
-                        ? company.jurisdictionsShared.children.length
-                        : 0
-                }
-                max={maxValues.jurisdictions}
-                average={averageValues.jurisdictions}
-                showLegend={true}
-                onLegendClick={() => onShowScreenChange("featuredCompanyHelp")}
-                onOpenDetails={() =>
-                    onShowScreenChange("dataExploration", company.name)
-                }
-            />
-        </div>
-    </div>
-);
+    );
+};
 
 export default FeaturedCompany;
