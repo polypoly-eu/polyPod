@@ -180,7 +180,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[0] ? (
-                        getHeight(amounts[0], scaleRef) > 5 ? (
+                        getHeight(amounts[0], scaleRef) > 15 ? (
                             <p className="in-bar-number">
                                 {amounts[0].toFixed(0)}
                             </p>
@@ -201,7 +201,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[1] ? (
-                        getHeight(amounts[1], scaleRef) > 5 ? (
+                        getHeight(amounts[1], scaleRef) > 15 ? (
                             <p className="in-bar-number">
                                 {amounts[1].toFixed(0)}
                             </p>
@@ -222,7 +222,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[2] ? (
-                        getHeight(amounts[2], scaleRef) > 5 ? (
+                        getHeight(amounts[2], scaleRef) > 15 ? (
                             <p className="in-bar-number">
                                 {amounts[2].toFixed(0)}
                             </p>
@@ -243,7 +243,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[3] ? (
-                        getHeight(amounts[3], scaleRef) > 5 ? (
+                        getHeight(amounts[3], scaleRef) > 15 ? (
                             <p className="in-bar-number">
                                 {amounts[3].toFixed(0)}
                             </p>
@@ -264,7 +264,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[4] ? (
-                        getHeight(amounts[4], scaleRef) > 5 ? (
+                        getHeight(amounts[4], scaleRef) > 15 ? (
                             <p className="in-bar-number">
                                 {amounts[4].toFixed(0)}
                             </p>
