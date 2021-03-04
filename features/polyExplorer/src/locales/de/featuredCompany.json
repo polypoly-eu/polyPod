@@ -2,7 +2,7 @@
     "text.legend":
         "Wie liest man das?",
     "label.gauge.average":
-        "Durchschnitt:",
+        "Durchschnitt: {{value}}",
     "label.gauge.total":
-        "Gesamt:"
+        "Gesamt: {{value}}"
 }

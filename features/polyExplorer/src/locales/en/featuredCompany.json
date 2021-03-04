@@ -2,7 +2,7 @@
     "text.legend":
         "How to read this?",
     "label.gauge.average":
-        "Average:",
+        "Average: {{value}}",
     "label.gauge.total":
-        "Total:"
+        "Total: {{value}}"
 }

@@ -1,4 +1,7 @@
 import React from "react";
+
+import i18n from "../../i18n.js";
+
 import "./dataSharingGauge.css";
 
 const DataSharingGauge = ({ sharingType, count, max, average }) => {
@@ -22,10 +25,14 @@ const DataSharingGauge = ({ sharingType, count, max, average }) => {
                 style={{ width: `${averagePercentage}%` }}
             >
                 <div className="data-sharing-gauge-average-label">
-                    {average}
+                    {i18n.t("featuredCompany:label.gauge.average", {
+                        value: average,
+                    })}
                 </div>
             </div>
-            <div className="data-sharing-gauge-max-label">{max}</div>
+            <div className="data-sharing-gauge-max-label">
+                {i18n.t("featuredCompany:label.gauge.total", { value: max })}
+            </div>
         </div>
     );
 };
