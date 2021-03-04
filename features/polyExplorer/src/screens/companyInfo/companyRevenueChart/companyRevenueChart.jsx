@@ -179,7 +179,15 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[0] ? (
-                        <p className="in-bar-number">{amounts[0].toFixed(0)}</p>
+                        getHeight(amounts[0], scaleRef) > 5 ? (
+                            <p className="in-bar-number">
+                                {amounts[0].toFixed(0)}
+                            </p>
+                        ) : (
+                            <p className="over-bar-number">
+                                {amounts[0].toFixed(0)}
+                            </p>
+                        )
                     ) : (
                         <p className="no-data-for-column-tag">No Data</p>
                     )}
@@ -192,7 +200,15 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[1] ? (
-                        <p className="in-bar-number">{amounts[1].toFixed(0)}</p>
+                        getHeight(amounts[1], scaleRef) > 5 ? (
+                            <p className="in-bar-number">
+                                {amounts[1].toFixed(0)}
+                            </p>
+                        ) : (
+                            <p className="over-bar-number">
+                                {amounts[1].toFixed(0)}
+                            </p>
+                        )
                     ) : (
                         <p className="no-data-for-column-tag">No Data</p>
                     )}
@@ -205,7 +221,15 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[2] ? (
-                        <p className="in-bar-number">{amounts[2].toFixed(0)}</p>
+                        getHeight(amounts[2], scaleRef) > 5 ? (
+                            <p className="in-bar-number">
+                                {amounts[2].toFixed(0)}
+                            </p>
+                        ) : (
+                            <p className="over-bar-number">
+                                {amounts[2].toFixed(0)}
+                            </p>
+                        )
                     ) : (
                         <p className="no-data-for-column-tag">No Data</p>
                     )}
@@ -218,7 +242,15 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[3] ? (
-                        <p className="in-bar-number">{amounts[3].toFixed(0)}</p>
+                        getHeight(amounts[3], scaleRef) > 5 ? (
+                            <p className="in-bar-number">
+                                {amounts[3].toFixed(0)}
+                            </p>
+                        ) : (
+                            <p className="over-bar-number">
+                                {amounts[3].toFixed(0)}
+                            </p>
+                        )
                     ) : (
                         <p className="no-data-for-column-tag">No Data</p>
                     )}
@@ -231,7 +263,15 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     }}
                 >
                     {amounts[4] ? (
-                        <p className="in-bar-number">{amounts[4].toFixed(0)}</p>
+                        getHeight(amounts[4], scaleRef) > 5 ? (
+                            <p className="in-bar-number">
+                                {amounts[4].toFixed(0)}
+                            </p>
+                        ) : (
+                            <p className="over-bar-number">
+                                {amounts[4].toFixed(0)}
+                            </p>
+                        )
                     ) : (
                         <p className="no-data-for-column-tag">No Data</p>
                     )}
