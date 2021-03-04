@@ -1,4 +1,6 @@
 .data-region-info-screen {
+    display: block !important;
+    overflow: hidden scroll;
 }
 
 .data-region-info-screen .heading {
@@ -7,6 +9,27 @@
     margin: 30px auto 24px auto;
     color: #0f1938;
     font-size: 24px;
+    text-align: center;
+}
+
+.data-region-info-screen .sub-heading {
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 30px auto 24px auto;
+    color: #0f1938;
+    font-size: 22px;
+}
+
+.data-region-info-screen .sub-sub-heading {
+    display: block;
+    box-sizing: border-box;
+    margin: 30px auto 24px auto;
+    color: #0f1938;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: -0.01em;
 }
 
 .data-region-info-screen .world-map {
@@ -19,13 +42,23 @@
     border-bottom: 1px solid #3e495b;
 }
 
-.data-region-info-screen .text {
+.data-region-info-screen p {
     color: #0f1938;
     width: 300px;
     margin: 21px auto 0 auto;
     font-size: 16px;
     line-height: 120%;
     letter-spacing: -0.01em;
+}
+.data-region-info-screen button {
+    display: block;
+    width: 300px;
+    height: 56px;
+    margin: 32px auto 32px auto;
+    border-radius: 4px;
+    background: #0f1938;
+    color: #fff;
+    font-size: 18px;
 }
 
 .data-region-info-screen .location-tooltip {

@@ -143,7 +143,11 @@ const PolyExplorer = () => {
             />
         ),
         info: <InfoScreen onClose={() => handleShowScreenChange("main")} />,
-        dataRegionInfo: <DataRegionInfoScreen />,
+        dataRegionInfo: (
+            <DataRegionInfoScreen
+                onClose={() => handleShowScreenChange("main")}
+            />
+        ),
     };
 
     readFirstRun().then(setFirstRun);

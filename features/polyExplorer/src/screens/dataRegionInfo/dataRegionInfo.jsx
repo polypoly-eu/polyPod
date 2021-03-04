@@ -5,7 +5,7 @@ import Screen from "../../components/screen/screen.jsx";
 
 import "./dataRegionInfo.css";
 
-const DataRegionInfo = () => {
+const DataRegionInfo = ({ onClose }) => {
     const locationTooltip = (
         <div className="location-tooltip">
             <p>{i18n.t("companyInfoScreen:jurisdictions")}</p>
@@ -33,7 +33,59 @@ const DataRegionInfo = () => {
                 className="world-map"
             />
             {locationTooltip}
-            <p className="text">{i18n.t("dataRegionInfoScreen:world")}</p>
+            <p>{i18n.t("dataRegionInfoScreen:world")}</p>
+            <h2 className="sub-heading">
+                {i18n.t("common:jurisdiction.euGdpr")}
+            </h2>
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("dataRegionInfoScreen:euGdpr.text"),
+                }}
+            ></div>
+            <h2 className="sub-heading">
+                {i18n.t("dataRegionInfoScreen:subHeading.fiveEyes")}
+            </h2>
+            <h2 className="sub-sub-heading">USA</h2>
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("dataRegionInfoScreen:USA.text"),
+                }}
+            ></div>
+            <h2 className="sub-sub-heading">
+                {i18n.t("common:jurisdiction.fiveEyes")}
+            </h2>
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("dataRegionInfoScreen:fiveEyes.text"),
+                }}
+            ></div>
+            <h2 className="sub-heading">
+                {i18n.t("common:jurisdiction.russia")}
+            </h2>
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("dataRegionInfoScreen:russia.text"),
+                }}
+            ></div>
+            <h2 className="sub-heading">
+                {i18n.t("common:jurisdiction.china")}
+            </h2>
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("dataRegionInfoScreen:china.text"),
+                }}
+            ></div>
+            <h2 className="sub-heading">
+                {i18n.t("common:jurisdiction.undisclosed")}
+            </h2>
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("dataRegionInfoScreen:undisclosed.text"),
+                }}
+            ></div>
+            <button onClick={onClose}>
+                {i18n.t("infoScreen:button.explore")}
+            </button>
         </Screen>
     );
 };
