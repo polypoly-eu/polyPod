@@ -66,7 +66,7 @@ const FeaturedCompany = ({
                 />
                 <DataSharingSection
                     sharingType="companies"
-                    count={company.sharedWithCompanies.length}
+                    count={company.dataRecipients.length}
                     max={maxValues.companies}
                     average={averageValues.companies}
                     onOpenDetails={handleOpenDetails}

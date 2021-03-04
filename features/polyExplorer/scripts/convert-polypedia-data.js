@@ -58,10 +58,14 @@ function parsePolyPediaCompanyData() {
                     ? entry.data_recipients
                     : null,
                 dataSharingPurposes: entry.derived_purpose_info
-                    ? entry.derived_purpose_info
+                    ? Object.keys(entry.derived_purpose_info).map(
+                          (i) => entry.derived_purpose_info[i]
+                      )
                     : null,
                 dataTypesShared: entry.derived_category_info
-                    ? entry.derived_category_info
+                    ? Object.keys(entry.derived_category_info).map(
+                          (i) => entry.derived_category_info[i]
+                      )
                     : null,
             });
         }

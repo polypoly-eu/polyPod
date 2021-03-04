@@ -17,9 +17,9 @@ import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 import polyPediaCompanies from "./data/companies.json";
 import polyPediaGlobalData from "./data/global.json";
 //To go soon
-import makeExampleData from "./components/dataViz/makeExampleData.jsx";
-const fakeFeaturedCompanies = makeExampleData().filter((e) => e.featured);
-for (let company of fakeFeaturedCompanies) company.name += " (Fake)";
+//import makeExampleData from "./components/dataViz/makeExampleData.jsx";
+//const fakeFeaturedCompanies = makeExampleData().filter((e) => e.featured);
+//for (let company of fakeFeaturedCompanies) company.name += " (Fake)";
 
 const namespace = "http://polypoly.coop/schema/polyExplorer/#";
 
@@ -46,12 +46,12 @@ async function writeFirstRun(firstRun) {
 const PolyExplorer = () => {
     const [showScreen, setShowScreen] = useState("main");
     const [showFeatured, setShowFeatured] = useState(true);
-    const [companyData] = useState([
-        ...polyPediaCompanies,
-        ...fakeFeaturedCompanies,
-    ]);
+    const [companyData] = useState(polyPediaCompanies);
     const [selectedCompany, setSelectedCompany] = useState(undefined);
-    const [featuredCompanyData] = useState(fakeFeaturedCompanies);
+    const featuredCompanyData = companyData.filter(
+        (company) => company.featured == true
+    );
+    console.log(featuredCompanyData);
     const [
         featuredCompanyTabInitialSlide,
         setFeaturedCompanyTabInitialSlide,

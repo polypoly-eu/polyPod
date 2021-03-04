@@ -23,7 +23,7 @@ const FeaturedCompanyHolder = ({
             (company) => company.dataSharingPurposes.length
         ),
         companies: featuredCompanies.map(
-            (company) => company.sharedWithCompanies.length
+            (company) => company.dataRecipients.length
         ),
         jurisdictions: featuredCompanies.map((company) =>
             company.jurisdictionsShared

@@ -13,7 +13,7 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
     const edgePadding = 5;
 
     const makeHierarchy = () => {
-        return d3.hierarchy({ children: data }).sum((d) => d.value);
+        return d3.hierarchy({ children: data }).sum((d) => d.count);
     };
 
     const pack = () => {
@@ -50,17 +50,20 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
             .style("fill", bubbleColor)
             .style("vertical-align", "center");
 
+        //Ok this is weird, count is already a function of some sort
+        /*
         leaf.append("text")
             .text((d) => {
-                return d.value.toString();
+                return d.count.toString();
             })
             .attr("text-anchor", "middle")
             .attr("y", ".3em")
             .style("fill", textColor)
             .style("font-size", (d) => {
-                return (10 + d.value / 2).toString() + "px";
+                "14px"; //return (10 + d.count / 2).toString() + "px";
             })
             .style("font-weight", "500");
+            */
     };
 
     useEffect(() => {
