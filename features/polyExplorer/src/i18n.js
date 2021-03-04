@@ -12,6 +12,7 @@ import featuredCompanyEn from "./locales/en/featuredCompany.json";
 import dataExplorationScreenEn from "./locales/en/dataExplorationScreen.json";
 import featuredCompanyHelpScreenEn from "./locales/en/featuredCompanyHelpScreen.json";
 import infoScreenEn from "./locales/en/infoScreen.json";
+import dataRegionInfoScreenEn from "./locales/en/dataRegionInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
@@ -23,6 +24,7 @@ import featuredCompanyDe from "./locales/de/featuredCompany.json";
 import dataExplorationScreenDe from "./locales/de/dataExplorationScreen.json";
 import featuredCompanyHelpScreenDe from "./locales/de/featuredCompanyHelpScreen.json";
 import infoScreenDe from "./locales/de/infoScreen.json";
+import dataRegionInfoScreenDe from "./locales/de/dataRegionInfoScreen.json";
 
 const strings = {
     en: {
@@ -36,6 +38,7 @@ const strings = {
         dataExplorationScreen: dataExplorationScreenEn,
         featuredCompanyHelpScreen: featuredCompanyHelpScreenEn,
         infoScreen: infoScreenEn,
+        dataRegionInfoScreen: dataRegionInfoScreenEn,
     },
     de: {
         common: commonDe,
@@ -48,6 +51,7 @@ const strings = {
         dataExplorationScreen: dataExplorationScreenDe,
         featuredCompanyHelpScreen: featuredCompanyHelpScreenDe,
         infoScreen: infoScreenDe,
+        dataRegionInfoScreen: dataRegionInfoScreenDe,
     },
 };
 

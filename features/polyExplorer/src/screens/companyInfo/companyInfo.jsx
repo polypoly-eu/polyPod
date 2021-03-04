@@ -11,7 +11,7 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
     const [swiper, setSwiper] = useState(null);
 
     const handleJurisdictionInfo = () => {
-        console.log("Nothing is done here yet!");
+        onShowScreenChange("dataRegionInfo");
     };
 
     const locationTooltip = (

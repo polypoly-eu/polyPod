@@ -10,6 +10,7 @@ import CompanyFilterScreen from "./screens/companyFilter/companyFilter.jsx";
 import CompanySearchScreen from "./screens/companySearch/companySearch.jsx";
 import InfoScreen from "./screens/info/info.jsx";
 import CompanyInfoScreen from "./screens/companyInfo/companyInfo.jsx";
+import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
 import FeaturedCompanyHelpScreen from "./screens/featuredCompanyHelp/featuredCompanyHelp.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 
@@ -137,6 +138,7 @@ const PolyExplorer = () => {
             />
         ),
         info: <InfoScreen onClose={() => handleShowScreenChange("main")} />,
+        dataRegionInfo: <DataRegionInfoScreen />,
     };
 
     readFirstRun().then(setFirstRun);

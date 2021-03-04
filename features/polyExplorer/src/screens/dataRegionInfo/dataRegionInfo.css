@@ -1,0 +1,74 @@
+.data-region-info-screen {
+}
+
+.data-region-info-screen .heading {
+    display: block;
+    box-sizing: border-box;
+    margin: 30px auto 24px auto;
+    color: #0f1938;
+    font-size: 24px;
+}
+
+.data-region-info-screen .world-map {
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 414px;
+    padding: 4px;
+    margin: 0 auto;
+    border-top: 1px solid #3e495b;
+    border-bottom: 1px solid #3e495b;
+}
+
+.data-region-info-screen .text {
+    color: #0f1938;
+    width: 300px;
+    margin: 21px auto 0 auto;
+    font-size: 16px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+}
+
+.data-region-info-screen .location-tooltip {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 4px 0 19px;
+    width: 100%;
+    max-width: 414px;
+    margin: 0 auto;
+    border-bottom: 1px solid #3e495b;
+    background-color: #e2e8f0;
+}
+
+.data-region-info-screen .location-tooltip .EU-GDPR {
+    background-color: #60e6de;
+}
+
+.data-region-info-screen .location-tooltip .Russia {
+    background-color: #fe8988;
+}
+
+.data-region-info-screen .location-tooltip .Five-Eyes {
+    background-color: #ec453d;
+}
+
+.data-region-info-screen .location-tooltip .China {
+    background-color: #c5271e;
+}
+
+.data-region-info-screen .location-tooltip .Others {
+    background-color: #8d9caf;
+}
+
+.data-region-info-screen .location-tooltip p {
+    color: #0f1938;
+    font-weight: 500;
+    font-size: 10px;
+    margin: 4px 6px 4px 2px;
+}
+
+.data-region-info-screen .location-tooltip .circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateY(8px);
+}
