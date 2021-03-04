@@ -6,21 +6,19 @@ const OnboardingPopup = ({ onCloseOnboardingPopup }) => {
     return (
         <div className="onboarding-popup-container">
             <div className="onboarding-popup">
-                <div className="image-container"></div>
-                <div className="text-container">
-                    <h1>{i18n.t("onboardingPopup:title")}</h1>
+                <h1>{i18n.t("onboardingPopup:title")}</h1>
+                <div className="onboarding-popup-content">
                     <div
                         dangerouslySetInnerHTML={{
                             __html: i18n.t("onboardingPopup:text"),
                         }}
                     ></div>
+                    <div className="image-placeholder"></div>
                 </div>
                 <div className="button-container">
+                    <a>{i18n.t("onboardingPopup:button.learnMore")}</a>
                     <button onClick={() => onCloseOnboardingPopup()}>
                         {i18n.t("onboardingPopup:button.ok")}
-                    </button>
-                    <button>
-                        {i18n.t("onboardingPopup:button.learnMore")}
                     </button>
                 </div>
             </div>

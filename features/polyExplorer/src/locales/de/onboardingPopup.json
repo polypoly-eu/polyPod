@@ -1,10 +1,10 @@
 {
     "title":
-        "Datendetails",
+        "Quellen",
     "text":
-        "<p>Bitte beachten: Die Daten in diesem Feature kommen aus mehreren verschiedenen Quellen.</p><p>Daten über das Datenschutz-Verhalten basiert auf unseren eigenen Nachforschungen.</p><p>Finden Sie mehr über unsere Datenquellen und -verarbeitung heraus.<p>",
+        "<p>Die generellen Informationen über Firmenprofile basieren auf den Datensätzen von North Data, Brex und Open Corporate, aus 01/2021. Die Datensätze wurden aggregiert und normalisiert ...</p>",
     "button.learnMore":
-        "MEHR ERFAHREN",
+        "Mehr erfahren",
     "button.ok":
-        "OK"
+        "Verstanden"
 }
