@@ -9,20 +9,21 @@
 .construction-popup-container .construction-popup {
     display: flex;
     flex-flow: column;
-    margin: 64px auto;
-    width: 300px;
-    height: 440px;
+    margin: 84px auto;
+    width: 280px;
+    height: 340px;
     background-color: #f7fafc;
+    border-radius: 8px;
 }
 
 .construction-popup img {
-    margin: 64px auto 16px auto;
+    margin: 20px auto;
 }
 
 .construction-popup button {
     background-color: #0f1938;
     width: 200px;
     height: 48px;
-    margin: 78px auto 32px auto;
+    margin: 24px auto;
     border-radius: 4px;
 }

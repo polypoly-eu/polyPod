@@ -1,5 +1,7 @@
 import React from "react";
 
+import i18n from "../../i18n.js";
+
 import "./constructionPopup.css";
 
 const ConstructionPopup = ({ onClose }) => {
@@ -7,7 +9,9 @@ const ConstructionPopup = ({ onClose }) => {
         <div className="construction-popup-container">
             <div className="construction-popup">
                 <img src="./images/construction.gif" />
-                <button onClick={onClose}>Ok</button>
+                <button onClick={onClose}>
+                    {i18n.t("onboardingPopup:button.ok")}
+                </button>
             </div>
         </div>
     );
