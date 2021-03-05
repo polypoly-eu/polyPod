@@ -19,7 +19,8 @@
     margin: 8px auto 0 auto;
 }
 
-.data-sharing-section, .data-sharing-legend {
+.data-sharing-section,
+.data-sharing-legend {
     width: 85%;
     max-width: 414px;
     margin: 0 auto;
@@ -39,11 +40,11 @@
 .data-sharing-legend {
     height: 30px;
     margin-top: 8px;
-    border: solid 1px #3e495b;
+    border: solid 1px #525e72;
     border-left: none;
     border-right: none;
     line-height: 30px;
-    color: #8d9caf;
+    color: #a9b6c6;
     font-size: 10px;
 }
 
