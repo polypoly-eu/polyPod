@@ -179,7 +179,8 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
     return (
         <div className="explorer-container">
             <div className="top-shadow"></div>
-            <div className="screen-content">
+
+            <div className="screen-content company-info-screen">
                 <div
                     className="scroll-container"
                     onScroll={(e) => handleInfoTextScrollBottom(e)}
