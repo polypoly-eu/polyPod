@@ -32,8 +32,8 @@ class FeatureStorage {
                 logger.debug("Found file: '${file.absolutePath}'")
                 // TODO: Read this information from the feature manifest
                 val name = file.name.replace(".zip", "")
-                val author = "polypoly Cooperative"
-                val description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
+                val author = "polypoly - Die Genossenschaft"
+                val description = "Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel."
                 val primaryColor = "#0f1938"
                 features.add(Feature(name, author, description, primaryColor))
             }
