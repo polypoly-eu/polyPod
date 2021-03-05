@@ -10,18 +10,18 @@
     margin: 0;
 }
 
-.company-short-info .featured-indicator {
+.company-short-info .featured-indicator,
+.company-short-info .non-featured-aligner {
     display: inline-block;
     margin-top: 4px;
+    margin-right: 2px;
 }
 
 .company-short-info .non-featured-aligner {
-    display: inline-block;
     box-sizing: border-box;
     min-width: 19px;
     width: 19px;
     height: 19px;
-    margin-top: 4px;
 }
 
 .company-short-info .info-box {
