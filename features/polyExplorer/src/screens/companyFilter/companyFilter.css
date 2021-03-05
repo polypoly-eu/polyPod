@@ -46,15 +46,15 @@
     height: 32px;
     margin: 0 4px 8px 0;
     padding: 0 12px 1px 12px;
-    border: 1px solid #a9b6c6;
+    border: 1px solid #cbd5e0;
     border-radius: 16px;
     background: transparent;
-    color: #a9b6c6;
+    color: #cbd5e0;
     font-size: 14px;
 }
 
 .company-filter-screen .filter-section button.active {
-    background: #a9b6c6;
+    background: #cbd5e0;
     color: #0f1938;
 }
 
