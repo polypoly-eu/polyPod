@@ -16,10 +16,6 @@ import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 
 import polyPediaCompanies from "./data/companies.json";
 import polyPediaGlobalData from "./data/global.json";
-//To go soon
-//import makeExampleData from "./components/dataViz/makeExampleData.jsx";
-//const fakeFeaturedCompanies = makeExampleData().filter((e) => e.featured);
-//for (let company of fakeFeaturedCompanies) company.name += " (Fake)";
 
 const namespace = "http://polypoly.coop/schema/polyExplorer/#";
 

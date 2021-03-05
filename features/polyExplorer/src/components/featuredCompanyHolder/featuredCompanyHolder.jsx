@@ -14,6 +14,7 @@ const FeaturedCompanyHolder = ({
     onShowScreenChange,
     initialSlide,
     onUpdateInitialSlide,
+    setShowConstructionPopUp,
 }) => {
     const counts = {
         dataTypes: featuredCompanies.map(
@@ -60,6 +61,7 @@ const FeaturedCompanyHolder = ({
                             maxValues={maxValues}
                             averageValues={averageValues}
                             onShowScreenChange={onShowScreenChange}
+                            setShowConstructionPopUp={setShowConstructionPopUp}
                         />
                     </SwiperSlide>
                 ))}

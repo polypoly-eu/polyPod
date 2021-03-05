@@ -37,9 +37,10 @@ const FeaturedCompany = ({
     maxValues,
     averageValues,
     onShowScreenChange,
+    setShowConstructionPopUp,
 }) => {
-    const handleOpenDetails = () =>
-        onShowScreenChange("dataExploration", company.name);
+    /*const handleOpenDetails = () =>
+        onShowScreenChange("dataExploration", company.name);*/
 
     return (
         <div className="featured-company-card">
@@ -55,21 +56,21 @@ const FeaturedCompany = ({
                     count={company.dataTypesShared.length}
                     max={maxValues.dataTypes}
                     average={averageValues.dataTypes}
-                    onOpenDetails={handleOpenDetails}
+                    onOpenDetails={() => setShowConstructionPopUp(true)}
                 />
                 <DataSharingSection
                     sharingType="purposes"
                     count={company.dataSharingPurposes.length}
                     max={maxValues.purposes}
                     average={averageValues.purposes}
-                    onOpenDetails={handleOpenDetails}
+                    onOpenDetails={() => setShowConstructionPopUp(true)}
                 />
                 <DataSharingSection
                     sharingType="companies"
                     count={company.dataRecipients.length}
                     max={maxValues.companies}
                     average={averageValues.companies}
-                    onOpenDetails={handleOpenDetails}
+                    onOpenDetails={() => setShowConstructionPopUp(true)}
                 />
                 <DataSharingSection
                     sharingType="jurisdictions"
@@ -80,7 +81,7 @@ const FeaturedCompany = ({
                     }
                     max={maxValues.jurisdictions}
                     average={averageValues.jurisdictions}
-                    onOpenDetails={handleOpenDetails}
+                    onOpenDetails={() => setShowConstructionPopUp(true)}
                 />
                 <DataSharingLegend
                     onClick={() => onShowScreenChange("featuredCompanyHelp")}
