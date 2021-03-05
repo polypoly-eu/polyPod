@@ -11,7 +11,7 @@
     flex-direction: column;
     width: 90%;
     height: 95%;
-    max-width: 380px;
+    max-width: 300px;
     max-height: 560px;
     border-radius: 8px;
     margin: 8px auto;
@@ -19,8 +19,17 @@
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.543846);
 }
 
-.onboarding-popup h1 {
-    flex: 0 0 auto;
+.onboarding-popup-content {
+    flex: 1 1 auto;
+    overflow-y: scroll;
+}
+
+.onboarding-popup-content img {
+    margin: 0 auto;
+}
+
+.onboarding-popup-content h1 {
+    margin-top: 4px;
     margin-bottom: 12px;
     text-align: center;
     font-weight: 600;
@@ -29,35 +38,22 @@
     vertical-align: bottom;
 }
 
-.onboarding-popup-content {
-    flex: 1 1 auto;
-    width: 240px;
-    margin: 0 auto;
-    overflow-y: scroll;
-}
-
 .onboarding-popup-content p {
+    width: 240px;
+    margin: 0 auto 8px auto;
     text-align: left;
     font-weight: 500;
     font-size: 16px;
     line-height: 120%;
     letter-spacing: -0.01em;
-    margin: 0 0 28px 0;
     color: #0f1938;
-}
-
-.onboarding-popup-content .image-placeholder {
-    width: 240px;
-    height: 216px;
-    margin: 0 auto;
-    background: #f7fafc;
 }
 
 .onboarding-popup-container .button-container {
     flex: 0 0 auto;
     width: 100%;
     margin-bottom: 28px;
-    padding-top: 12px;
+    padding-top: 16px;
     background: #f7fafc;
     text-align: center;
 }
