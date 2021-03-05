@@ -1,6 +1,10 @@
 {
     "screenTitle.main" : "polyExplorer",
     "screenTitle.dataExploration" : "Data exploration",
+    "screenTitle.dataTypes" : "Data exploration",
+    "screenTitle.purposes" : "Data exploration",
+    "screenTitle.companies" : "Data exploration",
+    "screenTitle.jurisdictions" : "Data exploration",
     "screenTitle.companyInfo" : "Company profile",
     "screenTitle.companyFilter" : "Filter",
     "screenTitle.featuredCompanyHelp" : "How to read this?",
@@ -28,5 +32,13 @@
     "sharing.prefix.purposes" : "to",
     "sharing.detailPrefix.purposes" : "shares data to",
     "sharing.purposes" : "Purposes",
-    "sharing.prefix.companies" : "with"
+    "sharing.prefix.companies" : "with",
+    "sharing.detailPrefix.companies" : "shares data with",
+    "sharing.companies" : "Companies",
+    "sharing.prefix.jurisdictions" : "in",
+    "sharing.detailPrefix.jurisdictions" : "shares data in",
+    "sharing.jurisdictions" : "jurisdictions",
+    "sharing.jurisdictions.prefix" : "in",
+    "sharing.data" : "data",
+    "category.undisclosed" : "Undisclosed"
 }

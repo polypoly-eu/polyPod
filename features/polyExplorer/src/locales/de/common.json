@@ -1,6 +1,10 @@
 {
     "screenTitle.main" : "polyExplorer",
     "screenTitle.dataExploration" : "Daten erkunden",
+    "screenTitle.dataTypes" : "Daten erkunden",
+    "screenTitle.purposes" : "Daten erkunden",
+    "screenTitle.companies" : "Daten erkunden",
+    "screenTitle.jurisdictions" : "Daten erkunden",
     "screenTitle.companyInfo" : "Firmenprofil",
     "screenTitle.companyFilter" : "Filter",
     "screenTitle.featuredCompanyHelp" : "Wie ist das zu verstehen?",
@@ -28,5 +32,13 @@
     "sharing.prefix.purposes" : "für",
     "sharing.detailPrefix.purposes" : "teilt Daten für",
     "sharing.purposes" : "Zwecke",
-    "sharing.prefix.companies" : "mit"
+    "sharing.prefix.companies" : "mit",
+    "sharing.detailPrefix.companies" : "teilt Daten mit",
+    "sharing.companies" : "Firmen",
+    "sharing.prefix.jurisdictions" : "in",
+    "sharing.detailPrefix.jurisdictions" : "teilt Daten in",
+    "sharing.jurisdictions" : "Rechtsräumen",
+    "sharing.jurisdictions.prefix" : "in",
+    "sharing.data" : "Daten",
+    "category.undisclosed" : "Unbekannt"
 }
