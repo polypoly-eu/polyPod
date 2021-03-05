@@ -9,6 +9,8 @@
         "No data available yet.",
     "tab.revenue":
         "Revenue",
+    "tab.revenue.fallbackText":
+        "No data available yet.",
     "jurisdictions":
         "Jurisdictions",
     "source":

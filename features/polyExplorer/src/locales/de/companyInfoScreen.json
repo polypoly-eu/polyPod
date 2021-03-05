@@ -9,6 +9,8 @@
         "Noch keine Daten verfügbar.",
     "tab.revenue":
         "Umsatz",
+    "tab.revenue.fallbackText":
+        "Noch keine Daten verfügbar.",
     "jurisdictions":
         "Rechtsraum",
     "source":
