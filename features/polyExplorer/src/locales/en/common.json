@@ -3,14 +3,6 @@
         "polyExplorer",
     "screenTitle.dataExploration":
         "Data exploration",
-    "screenTitle.dataTypes":
-        "Data exploration",
-    "screenTitle.purposes":
-        "Data exploration",
-    "screenTitle.companies":
-        "Data exploration",
-    "screenTitle.jurisdictions":
-        "Data exploration",
     "screenTitle.companyInfo":
         "Company profile",
     "screenTitle.companyFilter":
@@ -53,6 +45,8 @@
         "China",
     "jurisdiction.undisclosed":
         "Other",
+    "category.undisclosed":
+        "Undisclosed",
     "sharing.prefix.dataTypes":
         "shares",
     "sharing.detailprefix.dataTypes":
@@ -77,10 +71,4 @@
         "shares data in",
     "sharing.jurisdictions":
         "jurisdictions",
-    "sharing.jurisdictions.prefix":
-        "in",
-    "sharing.data":
-        "data",
-    "category.undisclosed":
-        "Undisclosed"
 }
