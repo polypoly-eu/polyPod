@@ -101,8 +101,8 @@ const PolyExplorer = () => {
         );
     }
 
-    readFirstRun().then(setFirstRun);
     updatePodNavigation();
+    setTimeout(() => readFirstRun().then(setFirstRun), 300);
 
     const screens = {
         main: (
