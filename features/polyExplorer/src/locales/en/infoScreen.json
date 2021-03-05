@@ -2,7 +2,7 @@
     "headline.sources":
         "Sources",
     "text.sources":
-        "The general company profile information is based on datasets from north data, brex and open corporate from 01/2021. The datasets were aggregated and aligned …",
+        "<p>The general company profile information is based on datasets from north data, brex and open corporate from 01/2021. The datasets were aggregated and aligned …</p>",
     "headline.research":
         "Research",
     "text.research.first":
@@ -20,7 +20,7 @@
     "headline.presentation":
         "Presentation",
     "text.presentation":
-        "Our approach is to explain and explore data in our data driven stories and features. We will guide you if wanted and needed. And we will allow you to explore more and deeper as well.",
+        "<p>Our approach is to explain and explore data in our data driven stories and features. We will guide you if wanted and needed. And we will allow you to explore more and deeper as well.</p>",
     "button.explore":
         "Let's Explore"
 }

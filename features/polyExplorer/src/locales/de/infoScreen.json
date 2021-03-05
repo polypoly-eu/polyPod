@@ -2,25 +2,25 @@
     "headline.sources":
         "Quellen",
     "text.sources":
-        "Die generellen Informationen über Firmenprofile basieren auf den Datensätzen von North Data, Brex und Open Corporate, aus 01/2021. Die Datensätze wurden aggregiert und normalisiert ...",
+        "<p>Die allgemeinen Firmeninformationen (Name, Rechtsform, Adresse, Struktur, Umsatz...) haben wir aus Datensätzen von Northdata, Brex and Open Corporate zusammengestellt.<p>Die Informationen zur Datensicherheit bei ausgewählten Firmen sind das Ergebnis der Recherchen von polypoly. Diese basiert aktuell auf den Datenschutzerklärungen der Unternehmen auf deren Deutschen Webseiten. Es handelt sich also nicht um alle Daten, die ein Unternehmen erhebt und teilt, sondern solche, die wir derzeit nachvollziehen können.</p>",
     "headline.research":
         "Recherche",
     "text.research.first":
-        "<p>Our research is focused on the impact data privacy behavior has on the individual user. There we try to find and visualize information usually invisible or hard to get to and understand. When we research privacy policies and data behavior for example we are usually looking for the following:</p><p><ul><li>What data is gathered</li><li>What data is shared</li><li>Who are the companies data is shared with</li><li>What is the purpose/reason given for sharing that data</li></ul></p>",
+        "<p>Unsere Recherche konzentriert sich auf Auswirkungen des Datensicherheitsverhaltens von Firmen auf die einzelnen Nutzer.</p><p>Wir suchen nach Informationen zu folgenden Fragen:</p><p><ul><li>Welche Daten werden gesammelt?</li><li>Welche Daten werden geteilt?</li><li>Welche Gründe werden für das Teilen der Daten angegeben?</li><li>Mit welchen Unternehmen werden diese Daten geteilt?</li><li>In welchen Datenregionen und damit Gesetzesräumen befinden sich diese Unternehmen?</li></p>",
     "text.research.second":
-        "<p>Often the information is hidden or misleading. No two privacy policies are alike and very few share any structural similarity. since the introduction of GDPR , there have been some improvements, but we still need to do a fair amount of decoding.</p><p>We also do a good amount of context research e.g. to better understand what the impact of individual data types could be, what certain companies or industries are doing with user data, what the impact of jurisdictions is.</p><p>The research continues and we will keep updating our database on a regular basis. This research is also informed by the work of others in this field e.g. XXX?</p><p>For the current version of polyExplorer we selected 5 companies and present them as \"featured\". This selection does not indicate any judgment on those companies. We simply spend more time researching about them. The selection and number of featured companies will grow over time.</p>",
+        "<p>Diese Fragen sind in den Datenschutzerklärungen der Firmen nur selten eindeutig beantwortet. Es gibt keine Norm für diese Informationen. Ein Teil unserer Arbeit besteht daher darin, die unklaren Formulierungen mit den Datentypen und -kategorien , die das W3C entwickelt zu verbinden und so eine Vergleichbarkeit herzustellen.</p><p>Aktuell haben wir 10 Unternehmen ausgewählt und deren Datenverhalten genauer recherchiert. Diese Auswahl stellt keine Wertung dar. Sie wird sich mit der Zeit ändern. Die Arbeit geht weiter.</p>",
     "headline.validation":
         "Validierung",
     "text.validation":
-        "We are a young company with few people and grand ambitions. For now we validate our data according to the four eyes principle, which means that we check the data and correlations by at least two people from our research team.",
+        "<p>Wir sind eine junge Organisation mit einem kleinen Team und großen Zielen. Unserer redaktionellen Verantwortung entsprechen wir durch das Vier-Augen-Prinzip. Das bedeutet, das Daten und Korrellationen immer von mindestens zwei Researchern geprüft werden.</p>",
     "headline.aggregation":
         "Aggregierung",
     "text.aggregation":
-        "We work on making data clear and understandable, This means that we build correlations, between datasets, that we aggregate data to make it more accessible and comparable.",
+        "MISSING",
     "headline.presentation":
         "Präsentation",
     "text.presentation":
-        "Our approach is to explain and explore data in our data driven stories and features. We will guide you if wanted and needed. And we will allow you to explore more and deeper as well.",
+        "<p>Wir visualisieren Daten, um sie zugänglicher zu machen. Der Ansatz in unseren datenbasierten Geschichten wird im Englischen als \"explain and explore\" bezeichnet. Wir erzählen und erklären, wo es sinnvoll oder nötig ist und bieten Ihnen auch die Möglichkeit, Daten selbst zu filtern und erkunden. Diese Möglichkeit wird schrittweise zunehmen.</p>",
     "button.explore":
         "Los geht's"
 }

@@ -8,7 +8,11 @@ import "./info.css";
 const InfoScreen = ({ onClose }) => (
     <Screen className="info-screen" light={true}>
         <h1>{i18n.t("infoScreen:headline.sources")}</h1>
-        <p>{i18n.t("infoScreen:text.sources")}</p>
+        <div
+            dangerouslySetInnerHTML={{
+                __html: i18n.t("infoScreen:text.sources"),
+            }}
+        ></div>
         <img src="images/info-sources.svg"></img>
 
         <h1>{i18n.t("infoScreen:headline.research")}</h1>
@@ -32,7 +36,11 @@ const InfoScreen = ({ onClose }) => (
         <p>{i18n.t("infoScreen:text.aggregation")}</p>
 
         <h1>{i18n.t("infoScreen:headline.presentation")}</h1>
-        <p>{i18n.t("infoScreen:text.presentation")}</p>
+        <div
+            dangerouslySetInnerHTML={{
+                __html: i18n.t("infoScreen:text.sources"),
+            }}
+        ></div>
 
         <button onClick={onClose}>{i18n.t("infoScreen:button.explore")}</button>
     </Screen>
