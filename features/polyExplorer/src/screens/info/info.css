@@ -31,7 +31,8 @@
 }
 
 .info-screen img {
-    display: block;
+    /* Hidden until we have the final images */
+    display: none;
     width: 300px;
     margin: 0 auto;
 }
