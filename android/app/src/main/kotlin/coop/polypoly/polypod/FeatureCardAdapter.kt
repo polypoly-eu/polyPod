@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -24,15 +23,29 @@ class FeatureCardAdapter(private val originatingFragment: Fragment, private val 
 
     override fun getItemCount() = features.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val feature = features[position]
-        holder.featureCardView.findViewById<ImageView>(R.id.thumbnail).setBackgroundColor(Color.parseColor(feature.primaryColor))
+    private fun updateThumbnail(view: View, feature: Feature) {
+        val thumbnail = view.findViewById<ImageView>(R.id.thumbnail)
+        // We cannot read images from the feature manifest yet, hence hard coded
+        if (feature.name == "polyExplorer")
+            thumbnail.setImageResource(R.drawable.thumbnail_polyexplorer)
+        else
+            thumbnail.setBackgroundColor(Color.parseColor(feature.primaryColor))
+    }
+
+    private fun updateTexts(view: View, feature: Feature) {
         mapOf(R.id.feature_name to feature.name,
             R.id.feature_author to feature.author,
             R.id.feature_description to feature.description).forEach {
-            (holder.featureCardView.findViewById(it.key) as TextView).text = it.value
+            (view.findViewById(it.key) as TextView).text = it.value
         }
-        holder.featureCardView.setOnClickListener {
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val view = holder.featureCardView
+        val feature = features[position]
+        updateThumbnail(view, feature)
+        updateTexts(view, feature)
+        view.setOnClickListener {
             // FIXME - navigation assumes we're coming from FirstFragment, which might not necessary be true
             val action =
                 FeatureListFragmentDirections.actionFeatureListFragmentToFeatureFragment(
