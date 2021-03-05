@@ -20,20 +20,17 @@ const CompanyShortInfo = ({ company, onShowScreenChange = () => {} }) => {
             <div className="info-box">
                 <p className="company-name">{company.name}</p>
                 <div className="company-location">
-                    <div className="location-icon"></div>
                     <p className="location-name">
                         {company.location
                             ? `${company.location.city}, ${company.location.countryCode}, `
                             : null}
-                        {company.jurisdiction ? (
-                            <span className="jurisdiction-name">
-                                {company.jurisdiction}
-                            </span>
-                        ) : null}
+                        <span
+                            className={`circle ${company.jurisdiction}`}
+                        ></span>
+                        {company.jurisdiction || null}
                     </p>
                 </div>
                 <div className="company-category">
-                    <div className="category-icon"></div>
                     <p className="category-name">
                         {i18n.t("common:category.undisclosed")}
                     </p>

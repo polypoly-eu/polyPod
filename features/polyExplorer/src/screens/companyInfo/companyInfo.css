@@ -12,7 +12,7 @@
     padding-bottom: 12px;
     font-size: 16px;
     line-height: 16px;
-    color: #8d9caf;
+    color: #a9b6c6;
     border-color: transparent;
     outline: none;
 }
@@ -64,7 +64,7 @@
 }
 
 .tab-content-container .Others {
-    background-color: #8d9caf;
+    background-color: #a9b6c6;
 }
 
 .location-block img {
@@ -103,7 +103,7 @@
 }
 
 .location-tooltip p {
-    color: #8d9caf;
+    color: #a9b6c6;
     font-weight: 500;
     font-size: 10px;
     margin: 7px 6px 0px 2px;
@@ -139,7 +139,7 @@ p.jurisdictions-label {
 }
 
 .company-info-source {
-    color: #8d9caf;
+    color: #a9b6c6;
     flex: 0 0 auto;
     font-size: 12px;
     margin: 0px auto;
@@ -166,7 +166,7 @@ p.jurisdictions-label {
     width: 85%;
     max-width: 414px;
     height: 48px;
-    background-color: #edf2f7;
+    background-color: #f7fafc;
     color: #0f1938;
     font-size: 18px;
     font-weight: 600;

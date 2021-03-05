@@ -15,7 +15,7 @@
     max-height: 560px;
     border-radius: 8px;
     margin: 8px auto;
-    background: #edf2f7;
+    background: #f7fafc;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.543846);
 }
 
@@ -50,7 +50,7 @@
     width: 240px;
     height: 216px;
     margin: 0 auto;
-    background: #e2e8f0;
+    background: #f7fafc;
 }
 
 .onboarding-popup-container .button-container {
@@ -58,7 +58,7 @@
     width: 100%;
     margin-bottom: 28px;
     padding-top: 12px;
-    background: #edf2f7;
+    background: #f7fafc;
     text-align: center;
 }
 

@@ -57,9 +57,10 @@ const PolyExplorer = () => {
 
     const handleShowScreenChange = (showScreen, companyName) => {
         setShowScreen(showScreen);
-        setSelectedCompany(
-            companyData.filter((company) => companyName === company.name)[0]
-        );
+        if (companyName)
+            setSelectedCompany(
+                companyData.filter((company) => companyName === company.name)[0]
+            );
     };
 
     const handleRemoveFilter = (field, value) => {
@@ -87,12 +88,21 @@ const PolyExplorer = () => {
         podNav.actions = {
             info: () => handleShowScreenChange("info"),
             search: () => handleShowScreenChange("companySearch"),
-            back: () => handleShowScreenChange("main"),
+            back: () => {
+                if (showScreen === "dataRegionInfo") {
+                    handleShowScreenChange("companyInfo");
+                    return;
+                }
+                handleShowScreenChange("main");
+            },
         };
         podNav.setActiveActions(
             showScreen === "main" ? ["info", "search"] : ["back"]
         );
     }
+
+    readFirstRun().then(setFirstRun);
+    updatePodNavigation();
 
     const screens = {
         main: (
@@ -127,9 +137,7 @@ const PolyExplorer = () => {
             />
         ),
         featuredCompanyHelp: (
-            <FeaturedCompanyHelpScreen
-                onClose={() => handleShowScreenChange("main")}
-            />
+            <FeaturedCompanyHelpScreen onClose={podNav.actions.back} />
         ),
         companySearch: (
             <CompanySearchScreen
@@ -137,16 +145,10 @@ const PolyExplorer = () => {
                 onShowScreenChange={handleShowScreenChange}
             />
         ),
-        info: <InfoScreen onClose={() => handleShowScreenChange("main")} />,
-        dataRegionInfo: (
-            <DataRegionInfoScreen
-                onClose={() => handleShowScreenChange("main")}
-            />
-        ),
+        info: <InfoScreen onClose={podNav.actions.back} />,
+        dataRegionInfo: <DataRegionInfoScreen onClose={podNav.actions.back} />,
     };
 
-    readFirstRun().then(setFirstRun);
-    updatePodNavigation();
     return (
         <div className="poly-explorer">
             {screens[showScreen]}{" "}

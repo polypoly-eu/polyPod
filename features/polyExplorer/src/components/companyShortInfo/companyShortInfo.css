@@ -58,8 +58,33 @@
     margin: 0;
 }
 
-.location-name .jurisdiction-name {
-    color: #60e6de;
+.company-location .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #a9b6c6;
+    margin-right: 4px;
+}
+
+.company-location .EU-GDPR {
+    background-color: #60e6de;
+}
+
+.company-location .Russia {
+    background-color: #fe8988;
+}
+
+.company-location .Five-Eyes {
+    background-color: #ec453d;
+}
+
+.company-location .China {
+    background-color: #c5271e;
+}
+
+.company-location .Others {
+    background-color: #a9b6c6;
 }
 
 .company-short-info .company-category {
@@ -71,9 +96,8 @@
 
 .company-category .category-name {
     display: inline-block;
-    transform: translateY(-4px);
     margin: 0;
-    color: #8d9caf;
+    color: #a9b6c6;
 }
 
 .company-category .category-icon {
