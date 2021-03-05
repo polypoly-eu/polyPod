@@ -2,17 +2,17 @@
     "headline.main":
         "Amount of entries",
     "text.main":
-        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        "Numbers here are indicating the maximum per category which the company is allowed to share based on their privacy policy - which you have accepted when you use their services. This information is based on the privacy policy provided by the company on their German website.",
     "gaugeExplanation.entries":
         "Data Entries",
     "gaugeExplanation.first":
-        "At vero eos et accusam et justo duo dolores et ea rebum stet.",
+        "Maximale Anzahl für diese Firma",
     "gaugeExplanation.second":
-        "Kasd gubergren, no sear takimata sanctus est",
+        "Maximale Anzahl für diese Firma",
     "gaugeExplanation.third":
-        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr.n",
+        "Durchschnittlicher Wert aller derzeit verfügbaren Firmeninformationen in dieser Kategorie",
     "gaugeExplanation.fourth":
-        "At vero eos et accusam et justo duo dolores et ea rebum stet.",
+        "Wert der Firma, die in dieser Kategorie von allen derzeit verfügbaren Firmeninformationen, den höchsten Wert aufweist.",
     "headline.average":
         "Average amount of entries:",
     "text.average":

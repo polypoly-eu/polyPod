@@ -2,17 +2,17 @@
     "headline.main":
         "Anzahl Einträge",
     "text.main":
-        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        "Die genannten Zahlen geben in jeder Kategorie an, wie hoch die maximale Anzahl ist, die diese Firma laut ihrer Datenschutzerklärung teilen darf. Grundlage dafür ist die Datenschutzerklärung, der sie als Nutzer:in zugestimmt haben, wenn sie Dienste der Firma nutzen oder deren Deutsche Website  besuchen.",
     "gaugeExplanation.entries":
         "Dateneinträge",
     "gaugeExplanation.first":
-        "At vero eos et accusam et justo duo dolores et ea rebum stet.",
+        "Maximale Anzahl für diese Firma",
     "gaugeExplanation.second":
-        "Kasd gubergren, no sear takimata sanctus est",
+        "Maximale Anzahl für diese Firma",
     "gaugeExplanation.third":
-        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr.n",
+        "Durchschnittlicher Wert aller derzeit verfügbaren Firmeninformationen in dieser Kategorie",
     "gaugeExplanation.fourth":
-        "At vero eos et accusam et justo duo dolores et ea rebum stet.",
+        "Wert der Firma, die in dieser Kategorie von allen derzeit verfügbaren Firmeninformationen, den höchsten Wert aufweist.",
     "headline.average":
         "Durchschnittliche Anzahl Einträge:",
     "text.average":

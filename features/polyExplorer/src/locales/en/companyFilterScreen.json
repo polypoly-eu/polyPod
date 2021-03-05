@@ -1,12 +1,7 @@
 {
-    "industryCategories":
-        "Industry categories",
-    "jurisdictions":
-        "Jurisdictions",
-    "locations":
-        "Locations",
-    "revenue":
-        "Revenue",
-    "apply":
-        "Apply"
+    "industryCategories" : "Industry categories",
+    "jurisdictions" : "Jurisdictions",
+    "locations" : "Locations",
+    "revenue" : "Revenue",
+    "apply" : "Apply"
 }

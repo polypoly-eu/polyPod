@@ -1,74 +1,32 @@
 {
-    "screenTitle.main":
-        "polyExplorer",
-    "screenTitle.dataExploration":
-        "Daten erkunden",
-    "screenTitle.companyInfo":
-        "Firmenprofil",
-    "screenTitle.companyFilter":
-        "Filter",
-    "screenTitle.featuredCompanyHelp":
-        "Wie liest man das?",
-    "screenTitle.companySearch":
-        "Suche",
-    "screenTitle.info":
-        "Datenquellen und -verarbeitung",
-    "companyFilter.missing":
-        "Unbekannt",
-    "companyFilter.countryNameKey":
-        "Name_DE",
-    "companyFilter.revenueRange.0":
-        "€ 0 - 100k",
-    "companyFilter.revenueRange.100":
-        "€ 100k - 500k",
-    "companyFilter.revenueRange.500":
-        "€ 500k - 1M",
-    "companyFilter.revenueRange.1000":
-        "€ 1M - 5M",
-    "companyFilter.revenueRange.5000":
-        "€ 5M - 20M",
-    "companyFilter.revenueRange.20000":
-        "€ 20M - 50M",
-    "companyFilter.revenueRange.50000":
-        "€ 50M - 100M",
-    "companyFilter.revenueRange.100000":
-        "€ 100M - 1B",
-    "companyFilter.revenueRange.1000000":
-        "€ 1B ≥",
-    "jurisdiction.euGdpr":
-        "DSGVO",
-    "jurisdiction.russia":
-        "Russland",
-    "jurisdiction.fiveEyes":
-        "Five Eyes",
-    "jurisdiction.china":
-        "China",
-    "jurisdiction.undisclosed":
-        "Sonstige",
-    "category.undisclosed":
-        "Nicht spezifiziert",
-    "sharing.prefix.dataTypes":
-        "teilt",
-    "sharing.detailPrefix.dataTypes":
-        "teilt",
-    "sharing.dataTypes":
-        "Datentypen",
-    "sharing.prefix.purposes":
-        "für",
-    "sharing.detailPrefix.purposes":
-        "teilt Daten für",
-    "sharing.purposes":
-        "Zwecke",
-    "sharing.prefix.companies":
-        "mit",
-    "sharing.detailPrefix.companies":
-        "teilt Daten mit",
-    "sharing.companies":
-        "Firmen",
-    "sharing.prefix.jurisdictions":
-        "in",
-    "sharing.detailPrefix.jurisdictions":
-        "teilt Daten in",
-    "sharing.jurisdictions":
-        "Rechtsräumen"
+    "screenTitle.main" : "polyExplorer",
+    "screenTitle.dataExploration" : "Daten erkunden",
+    "screenTitle.companyInfo" : "Firmenprofil",
+    "screenTitle.companyFilter" : "Filter",
+    "screenTitle.featuredCompanyHelp" : "Wie ist das zu verstehen?",
+    "screenTitle.companySearch" : "Suche",
+    "screenTitle.info" : "Datenquellen und -verarbeitung",
+    "companyFilter.missing" : "Unbekannt",
+    "companyFilter.countryNameKey" : "Name_DE",
+    "companyFilter.revenueRange.0" : "€ 0 - 100k",
+    "companyFilter.revenueRange.100" : "€ 100k - 500k",
+    "companyFilter.revenueRange.500" : "€ 500k - 1M",
+    "companyFilter.revenueRange.1000" : "€ 1M - 5M",
+    "companyFilter.revenueRange.5000" : "€ 5M - 20M",
+    "companyFilter.revenueRange.20000" : "€ 20M - 50M",
+    "companyFilter.revenueRange.50000" : "€ 50M - 100M",
+    "companyFilter.revenueRange.100000" : "€ 100M - 1B",
+    "companyFilter.revenueRange.1000000" : "€ 1B ≥",
+    "jurisdiction.euGdpr" : "DSGVO",
+    "jurisdiction.russia" : "Russland",
+    "jurisdiction.fiveEyes" : "Five Eyes",
+    "jurisdiction.china" : "China",
+    "jurisdiction.undisclosed" : "Sonstige",
+    "sharing.prefix.dataTypes" : "teilt",
+    "sharing.detailprefix.dataTypes" : "teilt",
+    "sharing.dataTypes" : "Datentypen",
+    "sharing.prefix.purposes" : "für",
+    "sharing.detailPrefix.purposes" : "teilt Daten für",
+    "sharing.purposes" : "Zwecke",
+    "sharing.prefix.companies" : "mit"
 }
