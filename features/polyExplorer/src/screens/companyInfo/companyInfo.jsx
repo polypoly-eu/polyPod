@@ -154,7 +154,9 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
                     <img src="./images/structure_fallback.svg" />
                     <div className="text">
                         <p>
-                            {i18n.t("companyInfoScreen:tab.structure.fallbackText")}
+                            {i18n.t(
+                                "companyInfoScreen:tab.structure.fallbackText"
+                            )}
                         </p>
                     </div>
                 </div>
