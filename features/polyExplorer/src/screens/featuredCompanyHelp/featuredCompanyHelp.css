@@ -2,6 +2,7 @@
     display: block !important;
     overflow-y: scroll;
     font-size: 16px;
+    padding-top: 30px;
 }
 
 .featured-company-help-screen h1,
