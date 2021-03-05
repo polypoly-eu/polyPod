@@ -96,8 +96,6 @@ const PolyExplorer = () => {
             info: () => handleShowScreenChange("info"),
             search: () => handleShowScreenChange("companySearch"),
             back: () => {
-                if (firstRun || showConstructionPopup) return;
-
                 if (showScreen === "dataRegionInfo") {
                     handleShowScreenChange("companyInfo");
                     return;
