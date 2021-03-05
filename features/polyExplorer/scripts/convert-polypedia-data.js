@@ -36,10 +36,12 @@ function parsePolyPediaCompanyData() {
                 jurisdiction:
                     entry.legal_entities[0].data_collection.data_regions
                         .value instanceof Array
-                        ? entry.legal_entities[0].data_collection.data_regions
-                              .value[0] === "GDPR" &&
-                          entry.legal_entities[0].data_collection.data_regions
-                              .value[1] === "EU"
+                        ? entry.legal_entities[0].data_collection.data_regions.value.indexOf(
+                              "GDPR"
+                          ) >= 0 &&
+                          entry.legal_entities[0].data_collection.data_regions.value.indexOf(
+                              "EU"
+                          ) >= 0
                             ? "EU-GDPR"
                             : entry.legal_entities[0].data_collection
                                   .data_regions.value[0]
