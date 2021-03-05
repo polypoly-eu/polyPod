@@ -13,6 +13,7 @@ import CompanyInfoScreen from "./screens/companyInfo/companyInfo.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
 import FeaturedCompanyHelpScreen from "./screens/featuredCompanyHelp/featuredCompanyHelp.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
+import ConstructionPopup from "./components/constructionPopup/constructionPopup.jsx";
 
 import polyPediaCompanies from "./data/companies.json";
 import polyPediaGlobalData from "./data/global.json";
@@ -54,8 +55,14 @@ const PolyExplorer = () => {
 
     const [activeFilters, setActiveFilters] = useState(emptyFilters());
     const [firstRun, setFirstRun] = useState(false);
+    const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
 
     const handleShowScreenChange = (showScreen, companyName) => {
+        if (showScreen === "dataExploration") {
+            setShowConstructionPopUp(true);
+            return;
+        }
+
         setShowScreen(showScreen);
         if (companyName)
             setSelectedCompany(
@@ -89,10 +96,13 @@ const PolyExplorer = () => {
             info: () => handleShowScreenChange("info"),
             search: () => handleShowScreenChange("companySearch"),
             back: () => {
+                if (firstRun || showConstructionPopup) return;
+
                 if (showScreen === "dataRegionInfo") {
                     handleShowScreenChange("companyInfo");
                     return;
                 }
+
                 handleShowScreenChange("main");
             },
         };
@@ -156,6 +166,11 @@ const PolyExplorer = () => {
                 <OnboardingPopup
                     onClose={handleOnboardingPopupClose}
                     onMoreInfo={handleOnboardingPopupMoreInfo}
+                />
+            ) : null}
+            {showConstructionPopup ? (
+                <ConstructionPopup
+                    onClose={() => setShowConstructionPopUp(false)}
                 />
             ) : null}
         </div>

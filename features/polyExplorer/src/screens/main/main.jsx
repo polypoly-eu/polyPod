@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
@@ -6,9 +6,6 @@ import FeaturedCompanyHolder from "../../components/featuredCompanyHolder/featur
 import CompanyList from "../../components/companyList/companyList.jsx";
 
 import "./main.css";
-
-//Only temporary
-import ConstructionPopup from "../../components/constructionPopup/constructionPopup.jsx";
 
 const MainScreen = ({
     showFeatured,
@@ -28,9 +25,6 @@ const MainScreen = ({
     const handleUpdateInitialSlide = (newInitialSlide) => {
         onFeaturedCompanyTabInitialSlideChange(newInitialSlide);
     };
-
-    //Only temporary
-    const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
 
     return (
         <Screen className="main-screen" topShadow={false}>
@@ -60,7 +54,6 @@ const MainScreen = ({
                     onShowScreenChange={onShowScreenChange}
                     initialSlide={featuredCompanyTabInitialSlide}
                     onUpdateInitialSlide={handleUpdateInitialSlide}
-                    setShowConstructionPopUp={setShowConstructionPopUp}
                 />
             ) : (
                 <CompanyList
@@ -71,11 +64,6 @@ const MainScreen = ({
                     onRemoveFilter={onRemoveFilter}
                 />
             )}
-            {showConstructionPopup ? (
-                <ConstructionPopup
-                    onClose={() => setShowConstructionPopUp(false)}
-                />
-            ) : null}
         </Screen>
     );
 };
