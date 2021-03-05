@@ -39,7 +39,10 @@ const FeaturedCompany = ({
     onShowScreenChange,
 }) => {
     const handleOpenDetails = () =>
-        onShowScreenChange("dataExploration", company.name);
+        // Until the data exploration is ready to use, touching the bars does
+        // nothing for now
+        //onShowScreenChange("dataExploration", company.name);
+        {};
 
     return (
         <div className="featured-company-card">
