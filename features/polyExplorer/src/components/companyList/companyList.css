@@ -94,8 +94,6 @@ button::after {
 .company-group {
     display: flex;
     position: relative;
-    width: 400px;
-    margin: 0 auto;
     padding-left: 28px;
 }
 
@@ -110,5 +108,6 @@ button::after {
 }
 
 .company-group-companies {
+    width: 100%;
     margin-left: -4px;
 }
