@@ -212,6 +212,19 @@
         "dataTypesShared": null
     },
     {
+        "name": "Sophus3 GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Frankfurt a. Main",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
         "name": "Samsung Electronics GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -482,6 +495,19 @@
         "dataTypesShared": null
     },
     {
+        "name": "Bosch Service Solutions GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Frankfurt a. Main",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
         "name": "auxmoney GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -636,6 +662,82 @@
         "dataTypesShared": null
     },
     {
+        "name": "Emetriq GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "28.02.2013",
+                "amount": 2800000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 1324994.37,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 9015553,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 10914824.17,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 10913279.99,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 13456141.83,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 15417535.46,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "smartclip Europe GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2016",
+                "amount": 7511612.73,
+                "currency": "EUR",
+                "year": 2016
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
         "name": "eGym GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -689,6 +791,56 @@
             {
                 "date": "31.12.2019",
                 "amount": 50656041.21,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "Teads Deutschland GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2011",
+                "amount": 1400000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 3600000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 5200000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 11000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 25796,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 26658630.44,
                 "currency": "EUR",
                 "year": 2019
             }
@@ -843,6 +995,19 @@
         "dataTypesShared": null
     },
     {
+        "name": "Usercentrics GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
         "name": "SCHUFA Holding AG",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -892,6 +1057,94 @@
                 "amount": 212245538.2,
                 "currency": "EUR",
                 "year": 2019
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "Exactag GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Düsseldorf",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2010",
+                "amount": 110000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 440000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 930000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 2700000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 3100000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 7000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 7600000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 8300000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "Baqend GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2017",
+                "amount": 750000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 510000,
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -1149,6 +1402,74 @@
                 "amount": 96844268,
                 "currency": "EUR",
                 "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "Nayoki GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.08.2008",
+                "amount": 710000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2008",
+                "amount": 2100000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 2200000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "30.06.2014",
+                "amount": 3300000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "30.06.2015",
+                "amount": 1600000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "30.06.2016",
+                "amount": 4100000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "30.06.2017",
+                "amount": 4000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "30.06.2018",
+                "amount": 4500000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "30.06.2019",
+                "amount": 6500000,
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -1421,7 +1742,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Akzent",
                 "Translation_EN": "Accent",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 34
             },
@@ -1430,7 +1751,7 @@
                 "dpv:Superclass": "dpv:FinancialAccount",
                 "Translation_DE": "Konto-Identifikator",
                 "Translation_EN": "Account Identifier",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 3
             },
@@ -1439,7 +1760,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Alter",
                 "Translation_EN": "Age",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
                 "count": 39
             },
@@ -1448,7 +1769,7 @@
                 "dpv:Superclass": "dpv:Internal",
                 "Translation_DE": "Authentifizierung",
                 "Translation_EN": "Authenticating",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 35
             },
@@ -1457,7 +1778,7 @@
                 "dpv:Superclass": "dpv:External",
                 "Translation_DE": "Verhaltensweisen",
                 "Translation_EN": "Behavioral",
-                "Polypoly_Parent_Category": "VerhaltensDaten",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
                 "count": 3
             },
@@ -1466,7 +1787,7 @@
                 "dpv:Superclass": "dpv:DeviceBased",
                 "Translation_DE": "Browser-Fingerabdruck",
                 "Translation_EN": "Browser Fingerprint",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1475,7 +1796,7 @@
                 "dpv:Superclass": "dpv:Behavioral",
                 "Translation_DE": "Browsing-Verhalten",
                 "Translation_EN": "Browsing Behavior",
-                "Polypoly_Parent_Category": "VerhaltensDaten",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
                 "count": 12
             },
@@ -1484,7 +1805,7 @@
                 "dpv:Superclass": "dpv:BrowsingBehavior",
                 "Translation_DE": "Browsing-Empfehlung",
                 "Translation_EN": "Browsing Referral",
-                "Polypoly_Parent_Category": "VerhaltensDaten",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1493,7 +1814,7 @@
                 "dpv:Superclass": "dpv:Social",
                 "Translation_DE": "Kommunikation",
                 "Translation_EN": "Communication",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 4
             },
@@ -1502,7 +1823,7 @@
                 "dpv:Superclass": "dpv:Location",
                 "Translation_DE": "Land",
                 "Translation_EN": "Country",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 8
             },
@@ -1511,7 +1832,7 @@
                 "dpv:Superclass": "dpv:Credit",
                 "Translation_DE": "Kreditrekord",
                 "Translation_EN": "Credit Record",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -1520,7 +1841,7 @@
                 "dpv:Superclass": "dpv:External",
                 "Translation_DE": "Demografische Daten",
                 "Translation_EN": "Demographic",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1529,7 +1850,7 @@
                 "dpv:Superclass": "dpv:DeviceSoftware",
                 "Translation_DE": "Geräteanwendungen",
                 "Translation_EN": "Device Applications",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -1538,7 +1859,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Gerätebasiert",
                 "Translation_EN": "Device Based",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 17
             },
@@ -1547,7 +1868,7 @@
                 "dpv:Superclass": "dpv:DeviceSoftware",
                 "Translation_DE": "Geräte-Betriebssystem",
                 "Translation_EN": "Device Operating System",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -1556,7 +1877,7 @@
                 "dpv:Superclass": "dpv:DeviceBased",
                 "Translation_DE": "Geräte-Software",
                 "Translation_EN": "Device Software",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -1565,7 +1886,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Dialekt",
                 "Translation_EN": "Dialect",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 34
             },
@@ -1574,7 +1895,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "E-Mail Adresse",
                 "Translation_EN": "Email Address",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 43
             },
@@ -1583,7 +1904,7 @@
                 "dpv:Superclass": "dpv:Ethnicity;dpv:SpecialCategoryPersonalData",
                 "Translation_DE": "Ethnische Herkunft",
                 "Translation_EN": "Ethnic Origin",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1592,7 +1913,7 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Finanzen",
                 "Translation_EN": "Financial",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 41
             },
@@ -1601,7 +1922,7 @@
                 "dpv:Superclass": "dpv:Financial",
                 "Translation_DE": "Finanzkonto",
                 "Translation_EN": "Financial Account",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1610,7 +1931,7 @@
                 "dpv:Superclass": "dpv:Location",
                 "Translation_DE": "GPS-Koordinate",
                 "Translation_EN": "GPS Coordinate",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1619,7 +1940,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Geschlecht",
                 "Translation_EN": "Gender",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1628,7 +1949,7 @@
                 "dpv:Superclass": "dpv:Demographic",
                 "Translation_DE": "Geografisch",
                 "Translation_EN": "Geographic",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -1637,7 +1958,7 @@
                 "dpv:Superclass": "dpv:MedicalHealth",
                 "Translation_DE": "Gesundheit",
                 "Translation_EN": "Health",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 45
             },
@@ -1646,7 +1967,7 @@
                 "dpv:Superclass": "dpv:MedicalHealth",
                 "Translation_DE": "Gesundheit Geschichte",
                 "Translation_EN": "Health History",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1655,7 +1976,7 @@
                 "dpv:Superclass": "dpv:MedicalHealth",
                 "Translation_DE": "Gesundheitsakte",
                 "Translation_EN": "Health Record",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1664,7 +1985,7 @@
                 "dpv:Superclass": "dpv:DeviceBased",
                 "Translation_DE": "IP-Adresse",
                 "Translation_EN": "IP Address",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -1673,7 +1994,7 @@
                 "dpv:Superclass": "dpv:External",
                 "Translation_DE": "Identifizieren",
                 "Translation_EN": "Identifying",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 34
             },
@@ -1682,7 +2003,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Einkommen",
                 "Translation_EN": "Income",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 34
             },
@@ -1691,7 +2012,7 @@
                 "dpv:Superclass": "dpv:HealthHistory",
                 "Translation_DE": "Individuelle Gesundheitsgeschichte",
                 "Translation_EN": "Individual Health History",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1700,7 +2021,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Interesse",
                 "Translation_EN": "Interest",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 7
             },
@@ -1709,7 +2030,7 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Intern",
                 "Translation_EN": "Internal",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -1718,7 +2039,7 @@
                 "dpv:Superclass": "dpv:Ethnicity",
                 "Translation_DE": "Sprache",
                 "Translation_EN": "Language",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 34
             },
@@ -1727,7 +2048,7 @@
                 "dpv:Superclass": "dpv:Behavioral",
                 "Translation_DE": "Linkgeklickt",
                 "Translation_EN": "LinkClicked",
-                "Polypoly_Parent_Category": "VerhaltensDaten",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
                 "count": 3
             },
@@ -1736,7 +2057,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Standort",
                 "Translation_EN": "Location",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -1745,7 +2066,7 @@
                 "dpv:Superclass": "dpv:External;dpv:SpecialCategoryPersonalData",
                 "Translation_DE": "Medizinische Gesundheit",
                 "Translation_EN": "Medical Health",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 35
             },
@@ -1754,7 +2075,7 @@
                 "dpv:Superclass": "dpv:Health",
                 "Translation_DE": "Psychische Gesundheit",
                 "Translation_EN": "Mental Health",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 34
             },
@@ -1763,7 +2084,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Name",
                 "Translation_EN": "Name",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 10
             },
@@ -1772,7 +2093,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Offizieller Ausweis",
                 "Translation_EN": "Official ID",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -1781,7 +2102,7 @@
                 "dpv:Superclass": "dpv:FamilyStructure",
                 "Translation_DE": "Nachkommenschaft",
                 "Translation_EN": "Offspring",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1790,7 +2111,7 @@
                 "dpv:Superclass": "dpv:Financial",
                 "Translation_DE": "Eigentum",
                 "Translation_EN": "Ownership",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 34
             },
@@ -1799,7 +2120,7 @@
                 "dpv:Superclass": "dpv:Authenticating",
                 "Translation_DE": "PIN-Code",
                 "Translation_EN": "PIN Code",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1808,7 +2129,7 @@
                 "dpv:Superclass": "dpv:Authenticating",
                 "Translation_DE": "Passwort",
                 "Translation_EN": "Password",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 14
             },
@@ -1817,7 +2138,7 @@
                 "dpv:Superclass": "dpv:FinancialAccount",
                 "Translation_DE": "Zahlungskarte",
                 "Translation_EN": "Payment Card",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1826,7 +2147,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Physikalische Adresse",
                 "Translation_EN": "Physical Address",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 3
             },
@@ -1835,7 +2156,7 @@
                 "dpv:Superclass": "dpv:Health",
                 "Translation_DE": "Körperliche Gesundheit",
                 "Translation_EN": "Physical Health",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 36
             },
@@ -1844,7 +2165,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Bild",
                 "Translation_EN": "Picture",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 36
             },
@@ -1853,7 +2174,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Datenschutz-Präferenz",
                 "Translation_EN": "Privacy Preference",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 3
             },
@@ -1862,7 +2183,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Einkaufen",
                 "Translation_EN": "Purchase",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 4
             },
@@ -1871,7 +2192,7 @@
                 "dpv:Superclass": "dpv:Professional",
                 "Translation_DE": "Gehalt",
                 "Translation_EN": "Salary",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 34
             },
@@ -1880,7 +2201,7 @@
                 "dpv:Superclass": "dpv:Authenticating",
                 "Translation_DE": "Geheimtext",
                 "Translation_EN": "Secret Text",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 6
             },
@@ -1889,7 +2210,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Telefon-Nummer",
                 "Translation_EN": "Telephone Number",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 10
             },
@@ -1898,7 +2219,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Transaktion",
                 "Translation_EN": "Transaction",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 1
             },
@@ -1907,7 +2228,7 @@
                 "dpv:Superclass": "dpv:Financial",
                 "Translation_DE": "Transaktionsbezogen",
                 "Translation_EN": "Transactional",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 7
             },
@@ -1916,7 +2237,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Benutzername",
                 "Translation_EN": "Username",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 15
             },
@@ -1925,7 +2246,7 @@
                 "dpv:Superclass": "dpv:Communication",
                 "Translation_DE": "Aufzeichnung der Sprachkommunikation",
                 "Translation_EN": "Voice Communication Recording",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 35
             },
@@ -1990,6 +2311,92 @@
                 "amount": 2700000,
                 "currency": "EUR",
                 "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "YellowMap AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Karlsruhe",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2007",
+                "amount": 3100000,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2008",
+                "amount": 3300000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 3200000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 3100000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 3200000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 3600000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 4000000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 4100000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 5600000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 6500000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 7100000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 6900000,
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -2333,6 +2740,80 @@
         "dataTypesShared": null
     },
     {
+        "name": "Meetrics GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 530000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 520000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 1800000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 2500000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 3900000,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 4700000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 5300000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 12000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 8600000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 9200000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
         "name": "LMnext de GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -2483,6 +2964,130 @@
                 "amount": 41000000,
                 "currency": "EUR",
                 "year": 2019
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "adjust GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2013",
+                "amount": 2100000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 4000000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 9800000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 30000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 33000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 39613000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "AWIN AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2007",
+                "amount": 101434793.01,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2008",
+                "amount": 116710782,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 134048233,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 129836492,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 148287511.39,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 160872470.48,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 157660768.58,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 155304321.9,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 228212587.13,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 310052875.5,
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -3057,6 +3662,51 @@
         "dataTypesShared": null
     },
     {
+        "name": "Mapp Digital Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2016",
+                "amount": 31000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 20760897.75,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 16996957.34,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "Etracker.de e. K.",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
         "name": "About YOU GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -3078,6 +3728,45 @@
                 "year": 2012
             }
         ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "Zeotap GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2017",
+                "amount": 49721.98,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 2066152.25,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "AppsFlyer Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
         "dataRecipients": null,
         "dataSharingPurposes": null,
         "dataTypesShared": null
@@ -3436,7 +4125,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Akzent",
                 "Translation_EN": "Accent",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 5
             },
@@ -3445,7 +4134,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Alter",
                 "Translation_EN": "Age",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
                 "count": 11
             },
@@ -3454,7 +4143,7 @@
                 "dpv:Superclass": "dpv:Internal",
                 "Translation_DE": "Authentifizierung",
                 "Translation_EN": "Authenticating",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 15
             },
@@ -3463,7 +4152,7 @@
                 "dpv:Superclass": "dpv:FinancialAccount",
                 "Translation_DE": "Bankkonto",
                 "Translation_EN": "Bank Account",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 9
             },
@@ -3472,7 +4161,7 @@
                 "dpv:Superclass": "dpv:DeviceBased",
                 "Translation_DE": "Browser-Fingerabdruck",
                 "Translation_EN": "Browser Fingerprint",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 13
             },
@@ -3481,7 +4170,7 @@
                 "dpv:Superclass": "dpv:Behavioral",
                 "Translation_DE": "Browsing-Verhalten",
                 "Translation_EN": "Browsing Behavior",
-                "Polypoly_Parent_Category": "VerhaltensDaten",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
                 "count": 30
             },
@@ -3490,7 +4179,7 @@
                 "dpv:Superclass": "dpv:Social",
                 "Translation_DE": "Kommunikation",
                 "Translation_EN": "Communication",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 11
             },
@@ -3499,7 +4188,7 @@
                 "dpv:Superclass": "dpv:PublicLife",
                 "Translation_DE": "Kommunikations-Metadaten",
                 "Translation_EN": "Communications Metadata",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 27
             },
@@ -3508,7 +4197,7 @@
                 "dpv:Superclass": "dpv:Credit",
                 "Translation_DE": "Kreditrekord",
                 "Translation_EN": "Credit Record",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 24
             },
@@ -3517,7 +4206,7 @@
                 "dpv:Superclass": "dpv:External",
                 "Translation_DE": "Demografische Daten",
                 "Translation_EN": "Demographic",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 9
             },
@@ -3526,7 +4215,7 @@
                 "dpv:Superclass": "dpv:DeviceSoftware",
                 "Translation_DE": "Geräteanwendungen",
                 "Translation_EN": "Device Applications",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -3535,7 +4224,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Gerätebasiert",
                 "Translation_EN": "Device Based",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 228
             },
@@ -3544,7 +4233,7 @@
                 "dpv:Superclass": "dpv:DeviceBased",
                 "Translation_DE": "Geräte-Software",
                 "Translation_EN": "Device Software",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -3553,7 +4242,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Dialekt",
                 "Translation_EN": "Dialect",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 5
             },
@@ -3562,7 +4251,7 @@
                 "dpv:Superclass": "dpv:Interest",
                 "Translation_DE": "Nicht mögen",
                 "Translation_EN": "Dislike",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -3571,7 +4260,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "E-Mail Adresse",
                 "Translation_EN": "Email Address",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 16
             },
@@ -3580,7 +4269,7 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Finanzen",
                 "Translation_EN": "Financial",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 22
             },
@@ -3589,7 +4278,7 @@
                 "dpv:Superclass": "dpv:Financial",
                 "Translation_DE": "Finanzkonto",
                 "Translation_EN": "Financial Account",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -3598,7 +4287,7 @@
                 "dpv:Superclass": "dpv:DeviceBased",
                 "Translation_DE": "IP-Adresse",
                 "Translation_EN": "IP Address",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 5
             },
@@ -3607,7 +4296,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Interesse",
                 "Translation_EN": "Interest",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 15
             },
@@ -3616,7 +4305,7 @@
                 "dpv:Superclass": "dpv:Ethnicity",
                 "Translation_DE": "Sprache",
                 "Translation_EN": "Language",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 5
             },
@@ -3625,7 +4314,7 @@
                 "dpv:Superclass": "dpv:Interest",
                 "Translation_DE": "Mögen",
                 "Translation_EN": "Like",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -3634,7 +4323,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Darlehenssatz",
                 "Translation_EN": "Loan Record",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 4
             },
@@ -3643,7 +4332,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Standort",
                 "Translation_EN": "Location",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 17
             },
@@ -3652,7 +4341,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Name",
                 "Translation_EN": "Name",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 11
             },
@@ -3661,7 +4350,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Offizieller Ausweis",
                 "Translation_EN": "Official ID",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 9
             },
@@ -3670,7 +4359,7 @@
                 "dpv:Superclass": "dpv:Authenticating",
                 "Translation_DE": "Passwort",
                 "Translation_EN": "Password",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -3679,7 +4368,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Physikalische Adresse",
                 "Translation_EN": "Physical Address",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 5
             },
@@ -3688,7 +4377,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Bild",
                 "Translation_EN": "Picture",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 7
             },
@@ -3697,7 +4386,7 @@
                 "dpv:Superclass": "dpv:Internal",
                 "Translation_DE": "Präferenz",
                 "Translation_EN": "Preference",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 21
             },
@@ -3706,7 +4395,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Einkaufen",
                 "Translation_EN": "Purchase",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -3715,7 +4404,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Einkäufe und Ausgabegewohnheiten",
                 "Translation_EN": "Purchases and Spending Habit",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 3
             },
@@ -3724,7 +4413,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Verkauf",
                 "Translation_EN": "Sale",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -3733,7 +4422,7 @@
                 "dpv:Superclass": "dpv:Behavioral",
                 "Translation_DE": "Service-Verbrauchs-Verhalten",
                 "Translation_EN": "Service Consumption Behavior",
-                "Polypoly_Parent_Category": "VerhaltensDaten",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
                 "count": 18
             },
@@ -3742,7 +4431,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Steuer",
                 "Translation_EN": "Tax",
-                "Polypoly_Parent_Category": "PersönlichenDaten",
+                "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
                 "count": 4
             },
@@ -3751,7 +4440,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Telefon-Nummer",
                 "Translation_EN": "Telephone Number",
-                "Polypoly_Parent_Category": "TechnischenDaten",
+                "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
                 "count": 15
             },
@@ -3760,7 +4449,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Transaktion",
                 "Translation_EN": "Transaction",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 3
             },
@@ -3769,7 +4458,7 @@
                 "dpv:Superclass": "dpv:Financial",
                 "Translation_DE": "Transaktionsbezogen",
                 "Translation_EN": "Transactional",
-                "Polypoly_Parent_Category": "WirtschaftlichenDaten",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
                 "count": 2
             },
@@ -3778,7 +4467,7 @@
                 "dpv:Superclass": "dpv:Communication",
                 "Translation_DE": "Aufzeichnung der Sprachkommunikation",
                 "Translation_EN": "Voice Communication Recording",
-                "Polypoly_Parent_Category": "SozialDaten",
+                "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
                 "count": 5
             },
@@ -3852,6 +4541,19 @@
                 "year": 2018
             }
         ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "Cloudflare Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
         "dataRecipients": null,
         "dataSharingPurposes": null,
         "dataTypesShared": null
@@ -3994,6 +4696,32 @@
             {
                 "date": "31.12.2018",
                 "amount": 52666679.09,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "financeAds International GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2017",
+                "amount": 3300000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 3300000,
                 "currency": "EUR",
                 "year": 2018
             }
@@ -4221,6 +4949,32 @@
         "dataTypesShared": null
     },
     {
+        "name": "Ebid Service AG",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Karlsruhe",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2013",
+                "amount": 300000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 320000,
+                "currency": "EUR",
+                "year": 2014
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
         "name": "Spotcap Global Services GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -4300,6 +5054,68 @@
             {
                 "date": "31.12.2018",
                 "amount": 20291075,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null
+    },
+    {
+        "name": "Treasure Data (Deutschland) GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2006",
+                "amount": 260000,
+                "currency": "EUR",
+                "year": 2006
+            },
+            {
+                "date": "31.12.2007",
+                "amount": 240000,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 170000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 150000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 95000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 74000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 120000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 180000,
                 "currency": "EUR",
                 "year": 2018
             }
