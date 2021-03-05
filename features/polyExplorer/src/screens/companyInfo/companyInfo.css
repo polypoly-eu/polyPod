@@ -140,13 +140,16 @@ p.jurisdictions-label {
 
 .structure-tab img {
     display: block;
-    width: 94%;
-    margin: auto;
+    height: 100%;
+    margin: 0 auto;
 }
 
 .structure-tab .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    top: 0%;
+    top: 0;
     height: 100%;
     width: 100%;
     z-index: 200;
