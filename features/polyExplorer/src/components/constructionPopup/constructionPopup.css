@@ -10,20 +10,22 @@
     display: flex;
     flex-flow: column;
     margin: 84px auto;
-    width: 280px;
-    height: 340px;
+    width: 300px;
+    height: 400px;
     background-color: #f7fafc;
     border-radius: 8px;
 }
 
 .construction-popup img {
-    margin: 20px auto;
+    margin: 40px auto 60px auto;
 }
 
 .construction-popup button {
-    background-color: #0f1938;
-    width: 200px;
-    height: 48px;
+    width: 240px;
+    height: 42px;
     margin: 24px auto;
     border-radius: 4px;
+    background-color: #0f1938;
+    color: #fff;
+    font-size: 18px;
 }
