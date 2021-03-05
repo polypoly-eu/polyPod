@@ -63,14 +63,18 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
                                 </div>
                             ) : (
                                 <div className="no-location">
-                                    There is no location for the company yet
+                                    {i18n.t(
+                                        "companyInfoScreen:tab.location.fallbackText"
+                                    )}
                                 </div>
                             )}
                         </div>
                     ) : (
                         <div className="location-block Others">
                             <div className="no-location">
-                                There is no location for the company yet
+                                {i18n.t(
+                                    "companyInfoScreen:tab.location.fallbackText"
+                                )}
                             </div>
                         </div>
                     )}
@@ -80,7 +84,18 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
         },
         {
             tabName: "structure",
-            content: null,
+            content: (
+                <div className="structure-tab">
+                    <img src="./images/structure_fallback.svg"></img>
+                    <div className="text">
+                        <p>
+                            {i18n.t(
+                                "companyInfoScreen:tab.structure.fallbackText"
+                            )}
+                        </p>
+                    </div>
+                </div>
+            ),
         },
         {
             tabName: "revenue",
@@ -113,14 +128,18 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
                                 </div>
                             ) : (
                                 <div className="no-location">
-                                    There is no location for the company yet
+                                    {i18n.t(
+                                        "companyInfoScreen:tab.location.fallbackText"
+                                    )}
                                 </div>
                             )}
                         </div>
                     ) : (
                         <div className="location-block Others">
                             <div className="no-location">
-                                There is no location for the company yet
+                                {i18n.t(
+                                    "companyInfoScreen:tab.location.fallbackText"
+                                )}
                             </div>
                         </div>
                     )}
@@ -130,7 +149,14 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
         },
         {
             tabName: "structure",
-            content: null,
+            content: (
+                <div className="structure-tab">
+                    <img src="./images/structure_fallback.svg" />
+                    <p>
+                        {i18n.t("companyInfoScreen:tab.structure.fallbackText")}
+                    </p>
+                </div>
+            ),
         },
         {
             tabName: "revenue",

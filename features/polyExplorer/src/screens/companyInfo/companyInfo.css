@@ -130,6 +130,30 @@ p.jurisdictions-label {
     padding: 0 2px;
 }
 
+.structure-tab {
+    position: relative;
+}
+
+.structure-tab img {
+    display: block;
+    width: 94%;
+    margin: auto;
+}
+
+.structure-tab .text {
+    position: absolute;
+    top: 0%;
+    height: 100%;
+    width: 100%;
+    z-index: 200;
+}
+
+.structure-tab .text p {
+    display: block;
+    margin: 22% auto;
+    width: 200px;
+}
+
 .company-info-text {
     box-sizing: border-box;
     width: 100%;
