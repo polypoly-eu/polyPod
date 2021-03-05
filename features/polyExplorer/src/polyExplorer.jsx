@@ -51,7 +51,6 @@ const PolyExplorer = () => {
     const featuredCompanyData = companyData.filter(
         (company) => company.featured == true
     );
-    console.log(featuredCompanyData);
     const [
         featuredCompanyTabInitialSlide,
         setFeaturedCompanyTabInitialSlide,
