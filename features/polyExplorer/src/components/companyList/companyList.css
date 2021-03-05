@@ -95,6 +95,9 @@ button::after {
     display: flex;
     position: relative;
     margin-left: 12px;
+    width: 400px;
+    margin: 0 auto;
+    padding-left: 20px;
 }
 
 .company-group-label {

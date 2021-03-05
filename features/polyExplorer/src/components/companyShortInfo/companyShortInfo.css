@@ -26,6 +26,7 @@
 
 .company-short-info .info-box {
     display: inline-block;
+    width: 100%;
     color: #edf2f7;
     text-align: left;
     margin-left: 6px;
@@ -33,6 +34,7 @@
 
 .info-box .company-name {
     position: relative;
+    width: 90%;
     font-family: "Jost Medium";
     font-size: 20px;
     margin: 0;
