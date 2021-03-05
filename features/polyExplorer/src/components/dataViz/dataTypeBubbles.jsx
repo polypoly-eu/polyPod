@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import "./dataViz.css";
+//import { text } from "d3";
 
 /*
     Component to visualize data in a non-ordered bubble-diagram
@@ -8,7 +9,7 @@ import "./dataViz.css";
     data object: [{dataType, value},{},..]
 */
 
-const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
+const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
     const bubbleRef = useRef(null);
     const edgePadding = 5;
 
