@@ -14,6 +14,7 @@ const OnboardingPopup = ({ onClose, onMoreInfo }) => {
                             __html: i18n.t("onboardingPopup:text"),
                         }}
                     ></div>
+                    <div className="fade-out"></div>
                 </div>
                 <div className="button-container">
                     <a onClick={onMoreInfo}>
