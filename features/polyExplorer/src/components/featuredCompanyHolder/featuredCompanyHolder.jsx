@@ -11,7 +11,7 @@ import "./featuredCompanyHolder.css";
 
 const FeaturedCompanyHolder = ({
     featuredCompanies,
-    onShowScreenChange,
+    onActiveScreenChange,
     initialSlide,
     onUpdateInitialSlide,
 }) => {
@@ -59,7 +59,7 @@ const FeaturedCompanyHolder = ({
                             company={company}
                             maxValues={maxValues}
                             averageValues={averageValues}
-                            onShowScreenChange={onShowScreenChange}
+                            onActiveScreenChange={onActiveScreenChange}
                         />
                     </SwiperSlide>
                 ))}

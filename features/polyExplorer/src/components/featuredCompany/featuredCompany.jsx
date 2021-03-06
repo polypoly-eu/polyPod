@@ -36,20 +36,17 @@ const FeaturedCompany = ({
     company,
     maxValues,
     averageValues,
-    onShowScreenChange,
+    onActiveScreenChange,
 }) => {
     const handleOpenDetails = () =>
-        // Until the data exploration is ready to use, touching the bars does
-        // nothing for now
-        //onShowScreenChange("dataExploration", company.name);
-        {};
+        onActiveScreenChange("dataExploration", company.name);
 
     return (
         <div className="featured-company-card">
             <div className="short-info-margin">
                 <CompanyShortInfo
                     company={company}
-                    onShowScreenChange={onShowScreenChange}
+                    onActiveScreenChange={onActiveScreenChange}
                 />
             </div>
             <div className="data-sharing-section-list">
@@ -86,7 +83,7 @@ const FeaturedCompany = ({
                     onOpenDetails={handleOpenDetails}
                 />
                 <DataSharingLegend
-                    onClick={() => onShowScreenChange("featuredCompanyHelp")}
+                    onClick={() => onActiveScreenChange("featuredCompanyHelp")}
                 />
             </div>
         </div>

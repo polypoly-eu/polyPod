@@ -5,18 +5,14 @@ import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyInfo.css";
 
-const CompanyInfo = ({ company, onShowScreenChange }) => {
+const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
     const [scrolledToBottom, setScrolledToBottom] = useState(false);
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
 
-    const handleJurisdictionInfo = () => {
-        onShowScreenChange("dataRegionInfo");
-    };
-
     const locationTooltip = (
         <div className="location-tooltip">
-            <button onClick={() => handleJurisdictionInfo()}>
+            <button onClick={onOpenRegionInfo}>
                 <img src="./images/question-circle.svg" />
             </button>
             <p className="jurisdictions-label">
@@ -190,10 +186,7 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
                     onScroll={(e) => handleInfoTextScrollBottom(e)}
                 >
                     <div className="short-info">
-                        <CompanyShortInfo
-                            company={company}
-                            onShowScreenChange={() => {}}
-                        />
+                        <CompanyShortInfo company={company} />
                     </div>
                     <div className="tab-button-container">
                         {company.featured
@@ -286,9 +279,7 @@ const CompanyInfo = ({ company, onShowScreenChange }) => {
                 {company.featured ? (
                     <button
                         className="explore-data-btn"
-                        onClick={() =>
-                            onShowScreenChange("dataExploration", company.name)
-                        }
+                        onClick={() => onOpenExploration(company.name)}
                     >
                         {i18n.t("companyInfoScreen:button.exploreData")}
                     </button>

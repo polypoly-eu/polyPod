@@ -41,7 +41,7 @@ async function writeFirstRun(firstRun) {
 }
 
 const PolyExplorer = () => {
-    const [showScreen, setShowScreen] = useState("main");
+    const [activeScreen, setActiveScreen] = useState("main");
     const [showFeatured, setShowFeatured] = useState(true);
     const [companyData] = useState(polyPediaCompanies);
     const [selectedCompany, setSelectedCompany] = useState(undefined);
@@ -57,13 +57,13 @@ const PolyExplorer = () => {
     const [firstRun, setFirstRun] = useState(false);
     const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
 
-    const handleShowScreenChange = (showScreen, companyName) => {
-        if (showScreen === "dataExploration") {
-            setShowConstructionPopUp(true);
+    const handleActiveScreenChange = (screen, companyName) => {
+        if (screen === "dataExploration") {
+            if (activeScreen !== "main") setShowConstructionPopUp(true);
             return;
         }
 
-        setShowScreen(showScreen);
+        setActiveScreen(screen);
         if (companyName)
             setSelectedCompany(
                 companyData.filter((company) => companyName === company.name)[0]
@@ -77,7 +77,7 @@ const PolyExplorer = () => {
 
     const handleFilterApply = (newActiveFilters) => {
         setActiveFilters(newActiveFilters);
-        handleShowScreenChange("main");
+        handleActiveScreenChange("main");
     };
 
     function handleOnboardingPopupClose() {
@@ -87,25 +87,25 @@ const PolyExplorer = () => {
 
     function handleOnboardingPopupMoreInfo() {
         handleOnboardingPopupClose();
-        handleShowScreenChange("info");
+        handleActiveScreenChange("info");
     }
 
     function updatePodNavigation() {
-        podNav.setTitle(i18n.t(`common:screenTitle.${showScreen}`));
+        podNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
         podNav.actions = {
-            info: () => handleShowScreenChange("info"),
-            search: () => handleShowScreenChange("companySearch"),
+            info: () => handleActiveScreenChange("info"),
+            search: () => handleActiveScreenChange("companySearch"),
             back: () => {
-                if (showScreen === "dataRegionInfo") {
-                    handleShowScreenChange("companyInfo");
+                if (activeScreen === "dataRegionInfo") {
+                    handleActiveScreenChange("companyInfo");
                     return;
                 }
 
-                handleShowScreenChange("main");
+                handleActiveScreenChange("main");
             },
         };
         podNav.setActiveActions(
-            showScreen === "main" ? ["info", "search"] : ["back"]
+            activeScreen === "main" ? ["info", "search"] : ["back"]
         );
     }
 
@@ -119,7 +119,7 @@ const PolyExplorer = () => {
                 featuredCompanyData={featuredCompanyData}
                 companyData={companyData}
                 globalData={polyPediaGlobalData}
-                onShowScreenChange={handleShowScreenChange}
+                onActiveScreenChange={handleActiveScreenChange}
                 onShowFeaturedChange={setShowFeatured}
                 featuredCompanyTabInitialSlide={featuredCompanyTabInitialSlide}
                 onFeaturedCompanyTabInitialSlideChange={
@@ -133,7 +133,12 @@ const PolyExplorer = () => {
         companyInfo: (
             <CompanyInfoScreen
                 company={selectedCompany}
-                onShowScreenChange={handleShowScreenChange}
+                onOpenRegionInfo={() =>
+                    handleActiveScreenChange("dataRegionInfo")
+                }
+                onOpenExploration={(companyName) =>
+                    handleActiveScreenChange("dataExploration", companyName)
+                }
             />
         ),
         companyFilter: (
@@ -150,7 +155,9 @@ const PolyExplorer = () => {
         companySearch: (
             <CompanySearchScreen
                 companies={companyData}
-                onShowScreenChange={handleShowScreenChange}
+                onOpenInfo={(companyName) =>
+                    handleActiveScreenChange("companyInfo", companyName)
+                }
             />
         ),
         info: <InfoScreen onClose={podNav.actions.back} />,
@@ -159,7 +166,7 @@ const PolyExplorer = () => {
 
     return (
         <div className="poly-explorer">
-            {screens[showScreen]}{" "}
+            {screens[activeScreen]}{" "}
             {firstRun ? (
                 <OnboardingPopup
                     onClose={handleOnboardingPopupClose}

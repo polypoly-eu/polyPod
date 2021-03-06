@@ -5,7 +5,7 @@ import Screen from "../../components/screen/screen.jsx";
 
 import "./companySearch.css";
 
-const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
+const CompanySearchScreen = ({ companies, onOpenInfo }) => {
     const [searchString, setSearchString] = useState("");
     const featuredComanies = companies.filter((e) => e.featured == true);
 
@@ -61,12 +61,7 @@ const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
                             {featuredComanies.map((company, index) => (
                                 <button
                                     key={index}
-                                    onClick={() =>
-                                        onShowScreenChange(
-                                            "companyInfo",
-                                            company.name
-                                        )
-                                    }
+                                    onClick={() => onOpenInfo(company.name)}
                                 >
                                     {company.name}
                                 </button>
@@ -92,10 +87,7 @@ const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
                                             (company, index) => (
                                                 <button
                                                     onClick={() =>
-                                                        onShowScreenChange(
-                                                            "companyInfo",
-                                                            company.name
-                                                        )
+                                                        onOpenInfo(company.name)
                                                     }
                                                     key={index}
                                                 >
@@ -110,12 +102,7 @@ const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
                             <div>
                                 {shownCompanies.map((company, index) => (
                                     <button
-                                        onClick={() =>
-                                            onShowScreenChange(
-                                                "companyInfo",
-                                                company.name
-                                            )
-                                        }
+                                        onClick={() => onOpenInfo(company.name)}
                                         key={index}
                                     >
                                         {company.name}
