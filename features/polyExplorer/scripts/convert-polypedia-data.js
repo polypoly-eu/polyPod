@@ -1,5 +1,7 @@
 import fs from "fs";
 import { createRequire } from "module";
+import { default as descriptions } from "./descriptions.js";
+
 const require = createRequire(import.meta.url);
 
 const polyPediaCompanyData = require("../polypedia-data/data/3_integrated/polyExplorer/companies.json");
@@ -69,6 +71,32 @@ function parsePolyPediaCompanyData() {
                           (i) => entry.derived_category_info[i]
                       )
                     : null,
+                description: {
+                    value:
+                        Object.keys(descriptions.de).findIndex(
+                            (e) =>
+                                e.toLowerCase() ===
+                                entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                        ) >= 0
+                            ? descriptions.de[
+                                  Object.keys(descriptions.de)[
+                                      Object.keys(descriptions.de).findIndex(
+                                          (e) =>
+                                              e.toLowerCase() ===
+                                              entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                                      )
+                                  ]
+                              ]
+                            : descriptions.de.fallback,
+                    source:
+                        Object.keys(descriptions.de).findIndex(
+                            (e) =>
+                                e.toLowerCase() ===
+                                entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                        ) >= 0
+                            ? "Wikipedia"
+                            : null,
+                },
             });
         }
     });
