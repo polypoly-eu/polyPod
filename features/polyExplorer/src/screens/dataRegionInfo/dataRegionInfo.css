@@ -32,14 +32,13 @@
     letter-spacing: -0.01em;
 }
 
-.data-region-info-screen .world-map {
+.data-region-info-screen img {
     width: 100%;
+    display: block;
     box-sizing: border-box;
     max-width: 414px;
     padding: 4px;
     margin: 0 auto;
-    border-top: 1px solid #3e495b;
-    border-bottom: 1px solid #3e495b;
 }
 
 .data-region-info-screen p {
@@ -59,17 +58,6 @@
     background: #0f1938;
     color: #fff;
     font-size: 18px;
-}
-
-.data-region-info-screen .location-tooltip {
-    display: flex;
-    box-sizing: border-box;
-    padding: 0 4px 0 19px;
-    width: 100%;
-    max-width: 414px;
-    margin: 0 auto;
-    border-bottom: 1px solid #3e495b;
-    background-color: #e2e8f0;
 }
 
 .data-region-info-screen .location-tooltip .EU-GDPR {

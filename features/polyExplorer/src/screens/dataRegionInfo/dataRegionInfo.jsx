@@ -6,37 +6,17 @@ import Screen from "../../components/screen/screen.jsx";
 import "./dataRegionInfo.css";
 
 const DataRegionInfo = ({ onClose }) => {
-    const locationTooltip = (
-        <div className="location-tooltip">
-            <p>{i18n.t("companyInfoScreen:jurisdictions")}</p>
-            <div className="circle EU-GDPR"></div>
-            <p>{i18n.t("common:jurisdiction.euGdpr")}</p>
-            <div className="circle Russia"></div>
-            <p>{i18n.t("common:jurisdiction.russia")}</p>
-            <div className="circle Five-Eyes"></div>
-            <p>{i18n.t("common:jurisdiction.fiveEyes")}</p>
-            <div className="circle China"></div>
-            <p>{i18n.t("common:jurisdiction.china")}</p>
-            <div className="circle Others"></div>
-            <p>{i18n.t("common:jurisdiction.undisclosed")}</p>
-        </div>
-    );
-
     return (
         <Screen className="data-region-info-screen" light={true}>
             <h1 className="heading">
                 {i18n.t("dataRegionInfoScreen:heading")}
             </h1>
-            <img
-                src="./images/dataregion-info-world-map.svg"
-                alt=""
-                className="world-map"
-            />
-            {locationTooltip}
+            <img src="./images/maps/world.svg" alt="" />
             <p>{i18n.t("dataRegionInfoScreen:world")}</p>
             <h2 className="sub-heading">
                 {i18n.t("common:jurisdiction.euGdpr")}
             </h2>
+            <img src="./images/maps/europe.svg" alt="" />
             <div
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("dataRegionInfoScreen:euGdpr.text"),
@@ -45,6 +25,11 @@ const DataRegionInfo = ({ onClose }) => {
             <h2 className="sub-heading">
                 {i18n.t("dataRegionInfoScreen:subHeading.fiveEyes")}
             </h2>
+            <img
+                src="./images/maps/five-eyes.svg"
+                alt=""
+                className="world-map"
+            />
             <h2 className="sub-sub-heading">USA</h2>
             <div
                 dangerouslySetInnerHTML={{
@@ -62,6 +47,7 @@ const DataRegionInfo = ({ onClose }) => {
             <h2 className="sub-heading">
                 {i18n.t("common:jurisdiction.russia")}
             </h2>
+            <img src="./images/maps/russia.svg" alt="" />
             <div
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("dataRegionInfoScreen:russia.text"),
@@ -70,6 +56,7 @@ const DataRegionInfo = ({ onClose }) => {
             <h2 className="sub-heading">
                 {i18n.t("common:jurisdiction.china")}
             </h2>
+            <img src="./images/maps/china.svg" alt="" />
             <div
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("dataRegionInfoScreen:china.text"),
@@ -78,6 +65,7 @@ const DataRegionInfo = ({ onClose }) => {
             <h2 className="sub-heading">
                 {i18n.t("common:jurisdiction.undisclosed")}
             </h2>
+            <img src="./images/maps/others.svg" alt="" />
             <div
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("dataRegionInfoScreen:undisclosed.text"),
