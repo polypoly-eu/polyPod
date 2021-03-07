@@ -14,7 +14,7 @@ class OnboardingActivity : AppCompatActivity() {
 
         val closeButton = findViewById<ImageButton>(R.id.close_button)
         closeButton.setOnClickListener {
-            finish()
+            close()
         }
 
         val carousel = findViewById<CarouselView>(R.id.carousel)
@@ -50,10 +50,16 @@ class OnboardingActivity : AppCompatActivity() {
                 val button = slide.findViewById<View>(R.id.end_onboarding_button)
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
-                    finish()
+                    close()
                 }
             }
             slide
         }
+    }
+
+    private fun close() {
+        if (Preferences.isFirstRun(baseContext))
+            Preferences.setFirstRun(baseContext, false)
+        finish()
     }
 }
