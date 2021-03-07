@@ -51,12 +51,11 @@
         android:id="@+id/end_onboarding_button"
         android:layout_width="340dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="80dp"
         android:text="@string/button_end_onboarding"
         android:textColor="#0f1938"
         android:background="#fb8a89"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/content_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
