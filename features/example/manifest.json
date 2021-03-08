@@ -1,11 +1,28 @@
 {
-    "name": "example-feature",
-    "engines": {
-        "polypoly": "^0.6.0"
-    },
-    "polypoly": {
-        "root": "dist"
-    },
+    "name": "The Test Feature",
+    "description": "This is an example feature",
     "thumbnail": "assets/thumbnail.png",
-    "color": "#000000"
-}
+    "primaryColor": "#000000",
+    "links": [
+      {
+        "link1": "https://example.com/1"
+      },
+      {
+        "link2": "https://example.com/2"
+      }
+    ],
+    "translations": [
+      {
+        "language": "de",
+        "description": "Das ist eine Beispiel-Feature",
+        "links": [
+          {
+            "link1": "https://example.com/1"
+          },
+          {
+            "link2": "https://example.com/2"
+          }
+        ]
+      }
+    ]
+  }

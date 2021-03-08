@@ -3,7 +3,8 @@ import { fold } from "fp-ts/lib/Either";
 import readPkg from "@pnpm/read-package-json";
 import { pipe } from "fp-ts/lib/pipeable";
 import { parse as parseSemVer, SemVer, Range } from "semver";
-import { normalize, isAbsolute } from "path";
+import { normalize, isAbsolute, join, dirname } from "path";
+import { promises as fs } from "fs";
 
 export interface EngineManifest {
     readonly api: Range;
@@ -18,7 +19,20 @@ export interface RootManifest {
     readonly root: string;
 }
 
-export interface Manifest extends EngineManifest, MainManifest, RootManifest {}
+export interface FeatureManifest {
+    readonly name: string;
+    readonly description: string;
+    readonly thumbnail: string;
+    readonly primaryColor: string;
+    // TODO: Typecheck links object
+    // readonly links: Map<string, Url>;
+    readonly links: unknown[];
+    // TODO: Typecheck translations object
+    //readonly translations: Array<Translation>;
+    readonly translations: unknown[];
+}
+
+export interface Manifest extends EngineManifest, MainManifest, RootManifest, FeatureManifest {}
 
 // TODO duplicated code with podigree, should be a library
 function expect<I, A>(input: I, msg: string, decoder: Decode.Decoder<I, A>): A {
@@ -73,7 +87,17 @@ const engineDecoder = Decode.type({
 const rootDecoder = Decode.type({
     polypoly: Decode.type({
         root: relativeDecoder,
+        manifest: relativeDecoder,
     }),
+});
+
+const featureDecoder = Decode.type({
+    name: Decode.string,
+    description: Decode.string,
+    thumbnail: relativeDecoder,
+    primaryColor: Decode.string,
+    links: Decode.UnknownArray,
+    translations: Decode.UnknownArray,
 });
 
 export async function readManifest(pkgPath: string): Promise<Manifest> {
@@ -83,10 +107,35 @@ export async function readManifest(pkgPath: string): Promise<Manifest> {
     const rawEngine = expect(packageManifest.engines, "Failed to parse engines", engineDecoder);
     const rawRoot = expect(packageManifest, "Failed to parse Feature spec", rootDecoder);
 
+    let featureManifest: FeatureManifest = {
+        name: rawMain.name,
+        description: "",
+        thumbnail: "",
+        primaryColor: "",
+        links: [],
+        translations: [],
+    };
+
+    if (rawRoot.polypoly.manifest) {
+        const manifestPath = join(dirname(pkgPath), rawRoot.polypoly.manifest);
+        const featureManifestJson = JSON.parse(await fs.readFile(manifestPath, "utf8"));
+
+        featureManifest = expect(
+            featureManifestJson,
+            "Failed to parse Feature manifest",
+            featureDecoder
+        );
+    }
+
     return {
         api: rawEngine.polypoly,
         root: rawRoot.polypoly.root,
-        name: rawMain.name,
+        name: featureManifest.name,
         version: rawMain.version,
+        description: featureManifest.description,
+        thumbnail: featureManifest.thumbnail,
+        primaryColor: featureManifest.primaryColor,
+        links: featureManifest.links,
+        translations: featureManifest.translations,
     };
 }
