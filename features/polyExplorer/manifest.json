@@ -1,28 +1,6 @@
 {
-    "name": "The PolyExplorer Feature",
-    "description": "This is a PolyExplorer feature, built as part of original polypoly application",
+    "name": "The Test Feature",
+    "description": "Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel.",
     "thumbnail": "assets/thumbnail.png",
-    "primaryColor": "#000000",
-    "links": [
-      {
-        "link1": "https://polypoly.coop/1"
-      },
-      {
-        "link2": "https://polypoly.coop/2"
-      }
-    ],
-    "translations": [
-      {
-        "language": "de",
-        "description": "Dies ist eine PolyExplorer-Funktion, die als Teil der ursprünglichen Polypoly-Anwendung erstellt wurde",
-        "links": [
-          {
-            "link1": "https://de.polypoly.coop/1"
-          },
-          {
-            "link2": "https://de.polypoly.coop/2"
-          }
-        ]
-      }
-    ]
+    "primaryColor": "#0f1938"
   }
