@@ -37,8 +37,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:fontFamily="@font/jost_medium"
-                    android:textSize="22sp"
-                    android:textColor="#002" />
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <TextView
                     android:id="@+id/feature_author"
@@ -46,8 +46,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="13dp"
                     android:fontFamily="@font/jost_regular"
-                    android:textSize="15sp"
-                    android:textColor="#557" />
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <TextView
                     android:id="@+id/feature_description"
@@ -55,9 +55,9 @@
                     android:layout_height="wrap_content"
                     android:maxWidth="304dp"
                     android:fontFamily="@font/jost_regular"
-                    android:textSize="17sp"
-                    android:lineHeight="19dp"
-                    android:textColor="#224" />
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="-3sp"
+                    android:textColor="@color/colorPrimaryDark" />
 
             </LinearLayout>
 
