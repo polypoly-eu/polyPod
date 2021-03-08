@@ -4674,6 +4674,11 @@
         "description": {
             "value": null,
             "source": null
+        },
+        "jurisdictionsShared": {
+            "children": [
+                "EU-GDPR"
+            ]
         }
     },
     {

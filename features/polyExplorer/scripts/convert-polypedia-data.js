@@ -90,16 +90,40 @@ function parseEntity(entityData) {
     };
 }
 
+const entityKey = (entity) => entity.name.toLowerCase();
+
+function enrichWithJurisdictionsShared(entityMap) {
+    for (let [key, entity] of Object.entries(entityMap)) {
+        for (let dataRecipient of entity.dataRecipients || []) {
+            const recipientKey = entityKey({ name: dataRecipient });
+            if (!(recipientKey in entityMap)) continue;
+
+            const recipientJurisdiction = entityMap[recipientKey].jurisdiction;
+            entity.jurisdictionsShared = entity.jurisdictionsShared || {};
+            entity.jurisdictionsShared.children =
+                entity.jurisdictionsShared.children || [];
+            if (
+                !entity.jurisdictionsShared.children.includes(
+                    recipientJurisdiction
+                )
+            )
+                entity.jurisdictionsShared.children.push(recipientJurisdiction);
+        }
+    }
+}
+
 function parsePolyPediaCompanyData() {
-    const companyData = {};
+    const entityMap = {};
     polyPediaCompanyData.forEach((entityData) => {
         const entity = parseEntity(entityData);
         if (!entity) return;
 
-        const key = entity.name.toLowerCase();
-        companyData[key] = { ...entity, ...(companyData[key] || {}) };
+        const key = entityKey(entity);
+        entityMap[key] = { ...entity, ...(entityMap[key] || {}) };
     });
-    return Object.values(companyData);
+
+    enrichWithJurisdictionsShared(entityMap);
+    return Object.values(entityMap);
 }
 
 function savePolyExplorerFile(fileName, data) {
