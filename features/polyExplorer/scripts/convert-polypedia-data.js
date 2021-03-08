@@ -1,5 +1,7 @@
 import fs from "fs";
 import { createRequire } from "module";
+import { default as descriptions } from "./descriptions.js";
+
 const require = createRequire(import.meta.url);
 
 const polyPediaCompanyData = require("../polypedia-data/data/3_integrated/polyExplorer/companies.json");
@@ -11,7 +13,7 @@ const extractYear = (date) =>
 
 function extractAnnualRevenues(entry) {
     if (!entry.financial_data) return null;
-    const all = entry.financial_data.data.map(({ data }) => data).flat();
+    const all = entry.financial_data.map(({ data }) => data).flat();
     const filtered = all.filter(({ currency }) => currency === "EUR");
     return filtered.map(({ date, amount, currency }) => ({
         date,
@@ -24,27 +26,79 @@ function extractAnnualRevenues(entry) {
 function parsePolyPediaCompanyData() {
     const companyData = [];
     polyPediaCompanyData.forEach((entry) => {
-        companyData.push({
-            name: entry.legal_entities.identifiers.legal_name.value,
-            featured: false,
-            jurisdiction:
-                entry.legal_entities.data_collection.data_regions.value[0] ===
-                    "GDPR" &&
-                entry.legal_entities.data_collection.data_regions.value[1] ===
-                    "EU"
-                    ? "EU-GDPR"
-                    : entry.legal_entities.data_collection.data_regions
-                          .value[0],
-            location: {
-                city:
-                    entry.legal_entities.basic_info.registered_address.value
-                        .city,
-                countryCode:
-                    entry.legal_entities.basic_info.registered_address.value
-                        .country,
-            },
-            annualRevenues: extractAnnualRevenues(entry),
-        });
+        if (entry.legal_entities[0].identifiers.legal_name.value != null) {
+            companyData.push({
+                name: entry.legal_entities[0].identifiers.legal_name.value,
+                featured:
+                    entry.data_recipients &&
+                    entry.derived_purpose_info &&
+                    entry.derived_category_info
+                        ? true
+                        : false,
+                jurisdiction:
+                    entry.legal_entities[0].data_collection.data_regions
+                        .value instanceof Array
+                        ? entry.legal_entities[0].data_collection.data_regions.value.indexOf(
+                              "GDPR"
+                          ) >= 0 &&
+                          entry.legal_entities[0].data_collection.data_regions.value.indexOf(
+                              "EU"
+                          ) >= 0
+                            ? "EU-GDPR"
+                            : entry.legal_entities[0].data_collection
+                                  .data_regions.value[0]
+                        : entry.legal_entities[0].data_collection.data_regions
+                              .value,
+                location: {
+                    city:
+                        entry.legal_entities[0].basic_info.registered_address
+                            .value.city,
+                    countryCode:
+                        entry.legal_entities[0].basic_info.registered_address
+                            .value.country,
+                },
+                annualRevenues: extractAnnualRevenues(entry),
+                dataRecipients: entry.data_recipients
+                    ? entry.data_recipients
+                    : null,
+                dataSharingPurposes: entry.derived_purpose_info
+                    ? Object.keys(entry.derived_purpose_info).map(
+                          (i) => entry.derived_purpose_info[i]
+                      )
+                    : null,
+                dataTypesShared: entry.derived_category_info
+                    ? Object.keys(entry.derived_category_info).map(
+                          (i) => entry.derived_category_info[i]
+                      )
+                    : null,
+                description: {
+                    value:
+                        Object.keys(descriptions.de).findIndex(
+                            (e) =>
+                                e.toLowerCase() ===
+                                entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                        ) >= 0
+                            ? descriptions.de[
+                                  Object.keys(descriptions.de)[
+                                      Object.keys(descriptions.de).findIndex(
+                                          (e) =>
+                                              e.toLowerCase() ===
+                                              entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                                      )
+                                  ]
+                              ]
+                            : descriptions.de.fallback,
+                    source:
+                        Object.keys(descriptions.de).findIndex(
+                            (e) =>
+                                e.toLowerCase() ===
+                                entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                        ) >= 0
+                            ? "Wikipedia"
+                            : null,
+                },
+            });
+        }
     });
     return companyData;
 }

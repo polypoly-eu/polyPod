@@ -7,7 +7,7 @@ import java.io.FileOutputStream
 import java.util.*
 import java.util.zip.ZipFile
 
-class Feature(val name: String, val author: String, val description: String)
+class Feature(val name: String, val author: String, val description: String, val primaryColor: String)
 
 class FeatureStorage {
     companion object {
@@ -32,9 +32,10 @@ class FeatureStorage {
                 logger.debug("Found file: '${file.absolutePath}'")
                 // TODO: Read this information from the feature manifest
                 val name = file.name.replace(".zip", "")
-                val author = "polypoly Cooperative"
-                val description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
-                features.add(Feature(name, author, description))
+                val author = "polypoly - Die Genossenschaft"
+                val description = "Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel."
+                val primaryColor = "#0f1938"
+                features.add(Feature(name, author, description, primaryColor))
             }
             for (feature in features) {
                 logger.debug("Found Feature: '{}'", feature.name)

@@ -3,11 +3,14 @@
     overflow-x: auto;
     flex-wrap: nowrap;
     position: relative;
-    margin: 0;
-    height: 590px;
+    margin: 0 auto;
+    height: 530px;
     width: 100%;
-    padding: 0px;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    max-width: 414px;
+}
+
+.featured-company-card {
+    padding: 0 12px;
 }
 
 .swiper-pagination-bullet-active {

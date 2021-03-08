@@ -8,6 +8,12 @@ import companyInfoScreenEn from "./locales/en/companyInfoScreen.json";
 import companySearchScreenEn from "./locales/en/companySearchScreen.json";
 import mainScreenEn from "./locales/en/mainScreen.json";
 import onboardingPopupEn from "./locales/en/onboardingPopup.json";
+import featuredCompanyEn from "./locales/en/featuredCompany.json";
+import dataSharingGaugeEn from "./locales/en/dataSharingGauge.json";
+import dataExplorationScreenEn from "./locales/en/dataExplorationScreen.json";
+import featuredCompanyHelpScreenEn from "./locales/en/featuredCompanyHelpScreen.json";
+import infoScreenEn from "./locales/en/infoScreen.json";
+import dataRegionInfoScreenEn from "./locales/en/dataRegionInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
@@ -15,6 +21,12 @@ import companyInfoScreenDe from "./locales/de/companyInfoScreen.json";
 import companySearchScreenDe from "./locales/de/companySearchScreen.json";
 import mainScreenDe from "./locales/de/mainScreen.json";
 import onboardingPopupDe from "./locales/de/onboardingPopup.json";
+import featuredCompanyDe from "./locales/de/featuredCompany.json";
+import dataSharingGaugeDe from "./locales/de/dataSharingGauge.json";
+import dataExplorationScreenDe from "./locales/de/dataExplorationScreen.json";
+import featuredCompanyHelpScreenDe from "./locales/de/featuredCompanyHelpScreen.json";
+import infoScreenDe from "./locales/de/infoScreen.json";
+import dataRegionInfoScreenDe from "./locales/de/dataRegionInfoScreen.json";
 
 const strings = {
     en: {
@@ -24,6 +36,12 @@ const strings = {
         companySearchScreen: companySearchScreenEn,
         mainScreen: mainScreenEn,
         onboardingPopup: onboardingPopupEn,
+        featuredCompany: featuredCompanyEn,
+        dataSharingGauge: dataSharingGaugeEn,
+        dataExplorationScreen: dataExplorationScreenEn,
+        featuredCompanyHelpScreen: featuredCompanyHelpScreenEn,
+        infoScreen: infoScreenEn,
+        dataRegionInfoScreen: dataRegionInfoScreenEn,
     },
     de: {
         common: commonDe,
@@ -32,6 +50,12 @@ const strings = {
         companySearchScreen: companySearchScreenDe,
         mainScreen: mainScreenDe,
         onboardingPopup: onboardingPopupDe,
+        featuredCompany: featuredCompanyDe,
+        dataSharingGauge: dataSharingGaugeDe,
+        dataExplorationScreen: dataExplorationScreenDe,
+        featuredCompanyHelpScreen: featuredCompanyHelpScreenDe,
+        infoScreen: infoScreenDe,
+        dataRegionInfoScreen: dataRegionInfoScreenDe,
     },
 };
 

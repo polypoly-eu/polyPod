@@ -20,8 +20,9 @@
         "lint": "npm run eslint"
     },
     "dependencies": {
-        "express": "4.17.1",
-        "socket-io-server": "1.0.5"
+        "express": "^4.17.1",
+        "socket.io": "^3.1.2",
+        "socket.io-client": "3.1.2"
     },
     "devDependencies": {
         "@polypoly-eu/eslint-config": "file:../../eslint-config",

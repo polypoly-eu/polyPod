@@ -46,7 +46,7 @@ android {
 
     defaultConfig {
         applicationId "coop.polypoly.polypod"
-        minSdkVersion 23
+        minSdkVersion 24 // as long as we use the system WebView, going lower would mean a lot of limitations for feature developers
         targetSdkVersion 29 // cannot use 30 because of Robolectric's lack of support for that, see https://github.com/robolectric/robolectric/issues/5644
         versionCode polyEpoch()
         versionName "0.1"
@@ -148,6 +148,7 @@ dependencies {
     implementation "androidx.preference:preference:1.1.1"
     implementation 'com.google.android.material:material:1.2.0'
     implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'com.synnapps:carouselview:0.1.5'
 
     // this unfortunately is needed to test the app
     debugImplementation 'androidx.test:core:1.3.0'

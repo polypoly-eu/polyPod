@@ -46,15 +46,15 @@
     height: 32px;
     margin: 0 4px 8px 0;
     padding: 0 12px 1px 12px;
-    border: 1px solid #8d9caf;
+    border: 1px solid #cbd5e0;
     border-radius: 16px;
     background: transparent;
-    color: #8d9caf;
+    color: #cbd5e0;
     font-size: 14px;
 }
 
 .company-filter-screen .filter-section button.active {
-    background: #8d9caf;
+    background: #cbd5e0;
     color: #0f1938;
 }
 
@@ -89,6 +89,7 @@
     color: #0f1938;
     font-family: "Jost Medium";
     font-size: 18px;
+    background-color: #f7fafc;
 }
 
 .company-filter-screen .apply-button.disabled {

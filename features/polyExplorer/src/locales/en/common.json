@@ -1,18 +1,14 @@
 {
     "screenTitle.main":
         "polyExplorer",
-    "screenTitle.dataTypes":
-        "Data exploration",
-    "screenTitle.purposes":
-        "Data exploration",
-    "screenTitle.companies":
-        "Data exploration",
-    "screenTitle.jurisdictions":
+    "screenTitle.dataExploration":
         "Data exploration",
     "screenTitle.companyInfo":
         "Company profile",
     "screenTitle.companyFilter":
         "Filter",
+    "screenTitle.featuredCompanyHelp":
+        "How to read this?",
     "screenTitle.companySearch":
         "Search",
     "screenTitle.info":
@@ -48,6 +44,8 @@
     "jurisdiction.china":
         "China",
     "jurisdiction.undisclosed":
+        "Other",
+    "category.undisclosed":
         "Undisclosed",
     "sharing.prefix.dataTypes":
         "shares",
@@ -56,9 +54,9 @@
     "sharing.dataTypes":
         "Data Types",
     "sharing.prefix.purposes":
-        "for",
+        "to",
     "sharing.detailPrefix.purposes":
-        "shares data for",
+        "shares data to",
     "sharing.purposes":
         "Purposes",
     "sharing.prefix.companies":
@@ -72,5 +70,5 @@
     "sharing.detailPrefix.jurisdictions":
         "shares data in",
     "sharing.jurisdictions":
-        "Data Regions"
+        "jurisdictions"
 }

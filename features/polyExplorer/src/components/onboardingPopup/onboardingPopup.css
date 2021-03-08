@@ -1,5 +1,4 @@
 .onboarding-popup-container {
-    display: flex;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -7,56 +6,78 @@
     z-index: 100;
 }
 
-.onboarding-popup-container .onboarding-popup {
-    height: 560px;
-    width: 80%;
-    max-width: 380px;
-    background: #e2e8f0;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.543846);
+.onboarding-popup {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 95%;
+    max-width: 300px;
+    max-height: 560px;
     border-radius: 8px;
-    margin: auto;
+    margin: 8px auto;
+    background: #f7fafc;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.543846);
 }
 
-.onboarding-popup-container .image-container {
-    width: 300px;
-    height: 210px;
+.onboarding-popup-content {
+    position: relative;
+    flex: 1 1 auto;
+    overflow-y: scroll;
+}
+
+.onboarding-popup-content img {
     margin: 0 auto;
 }
 
-.onboarding-popup-container .text-container {
-    width: 100%;
-}
-
-.onboarding-popup-container .text-container h1 {
+.onboarding-popup-content h1 {
+    margin-top: 4px;
+    margin-bottom: 12px;
     text-align: center;
     font-weight: 600;
     font-size: 24px;
     color: #0f1938;
+    vertical-align: bottom;
 }
 
-.onboarding-popup-container .text-container p {
+.onboarding-popup-content p {
+    width: 240px;
+    margin: 0 auto 8px auto;
     text-align: left;
     font-weight: 500;
     font-size: 16px;
     line-height: 120%;
     letter-spacing: -0.01em;
-    margin: 20px 22px;
     color: #0f1938;
+}
+
+.onboarding-popup-content .fade-out {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(transparent, #f7fafc);
+    pointer-events: none;
 }
 
 .onboarding-popup-container .button-container {
+    flex: 0 0 auto;
     width: 100%;
-    justify-content: right;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.onboarding-popup-container .button-container a {
+    color: #0f1938;
+    text-decoration: underline;
 }
 
 .onboarding-popup-container .button-container button {
-    font-weight: 600;
-    float: right;
-    font-size: 16px;
-    color: #0f1938;
-    background: transparent;
-    outline: none;
-    border: none;
-    padding: 8px;
-    margin: 0 22px 0 20px;
+    display: block;
+    width: 240px;
+    height: 42px;
+    margin: 10px auto 0 auto;
+    border-radius: 4px;
+    background: #0f1938;
+    color: #fff;
+    font-size: 18px;
 }

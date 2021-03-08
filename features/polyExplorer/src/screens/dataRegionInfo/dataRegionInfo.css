@@ -1,0 +1,95 @@
+.data-region-info-screen {
+    display: block !important;
+    overflow: hidden scroll;
+}
+
+.data-region-info-screen .heading {
+    display: block;
+    box-sizing: border-box;
+    margin: 30px auto 24px auto;
+    color: #0f1938;
+    font-size: 24px;
+    text-align: center;
+}
+
+.data-region-info-screen .sub-heading {
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 30px auto 24px auto;
+    color: #0f1938;
+    font-size: 22px;
+}
+
+.data-region-info-screen .sub-sub-heading {
+    display: block;
+    box-sizing: border-box;
+    margin: 30px auto 24px auto;
+    color: #0f1938;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: -0.01em;
+}
+
+.data-region-info-screen img {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    max-width: 414px;
+    padding: 4px;
+    margin: 0 auto;
+}
+
+.data-region-info-screen p {
+    color: #0f1938;
+    width: 300px;
+    margin: 21px auto 0 auto;
+    font-size: 16px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+}
+.data-region-info-screen button {
+    display: block;
+    width: 300px;
+    height: 56px;
+    margin: 32px auto 32px auto;
+    border-radius: 4px;
+    background: #0f1938;
+    color: #fff;
+    font-size: 18px;
+}
+
+.data-region-info-screen .location-tooltip .EU-GDPR {
+    background-color: #60e6de;
+}
+
+.data-region-info-screen .location-tooltip .Russia {
+    background-color: #fe8988;
+}
+
+.data-region-info-screen .location-tooltip .Five-Eyes {
+    background-color: #ec453d;
+}
+
+.data-region-info-screen .location-tooltip .China {
+    background-color: #c5271e;
+}
+
+.data-region-info-screen .location-tooltip .Others {
+    background-color: #8d9caf;
+}
+
+.data-region-info-screen .location-tooltip p {
+    color: #0f1938;
+    font-weight: 500;
+    font-size: 10px;
+    margin: 4px 6px 4px 2px;
+}
+
+.data-region-info-screen .location-tooltip .circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateY(8px);
+}

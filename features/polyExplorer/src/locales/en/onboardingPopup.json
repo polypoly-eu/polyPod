@@ -1,10 +1,10 @@
 {
     "title":
-        "Data Background",
+        "Sources",
     "text":
-        "<p>Please note: Data used in this feature comes from different sources.</p><p>Data about privacy behaviour is our own research based on policies provided on the German websites of featured companies.</p><p>Find more about our sources and process.</p>",
+        "<p>The general company profile information is based on datasets from north data, brex and open corporate from 01/2021. The datasets were aggreggated and aligned ...</p>",
     "button.learnMore":
-        "LEARN MORE",
+        "Learn more",
     "button.ok":
-        "OK"
+        "Got it"
 }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">polyPod</string>
-    <string name="action_settings">Settings</string>
+    <string name="activity_settings">Einstellungen</string>
     <!-- Strings used for fragments for navigation -->
     <string name="features_list_fragment_label">Features list Fragment</string>
     <string name="feature_fragment_label">Feature Fragment</string>
@@ -8,4 +8,5 @@
     <string name="close">Close</string>
     <string name="search">Search</string>
     <string name="info">Info</string>
+    <string name="button_end_onboarding">Los geht\'s</string>
 </resources>

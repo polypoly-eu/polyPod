@@ -1,25 +1,23 @@
 import React, { useState } from "react";
 import i18n from "../../i18n.js";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
-//import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
+import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyInfo.css";
 
-const CompanyInfo = ({ company }) => {
+const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
     const [scrolledToBottom, setScrolledToBottom] = useState(false);
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
 
-    const handleJurisdictionInfo = () => {
-        console.log("Nothing is done here yet!");
-    };
-
     const locationTooltip = (
         <div className="location-tooltip">
-            <button onClick={() => handleJurisdictionInfo()}>
+            <button onClick={onOpenRegionInfo}>
                 <img src="./images/question-circle.svg" />
             </button>
-            <p>{i18n.t("companyInfoScreen:jurisdictions")}</p>
+            <p className="jurisdictions-label">
+                {i18n.t("companyInfoScreen:jurisdictions")}
+            </p>
             <div className="circle EU-GDPR"></div>
             <p>{i18n.t("common:jurisdiction.euGdpr")}</p>
             <div className="circle Russia"></div>
@@ -43,35 +41,62 @@ const CompanyInfo = ({ company }) => {
             tabName: "location",
             content: (
                 <div>
-                    <div className={`location-block ${company.jurisdiction}`}>
-                        <img
-                            src="./images/location-pin.svg"
-                            alt="location-pin"
-                        />
-                        <p className={`location-text`}>
-                            {company.location.city},{" "}
-                            {company.location.countryCode},{" "}
-                            {company.jurisdiction}
-                        </p>
-                    </div>
+                    {company.jurisdiction ? (
+                        <div
+                            className={`location-block ${company.jurisdiction}`}
+                        >
+                            {company.location ? (
+                                <div>
+                                    <img
+                                        src="./images/location-pin.svg"
+                                        alt="location-pin"
+                                    />
+                                    <p className={`location-text`}>
+                                        {company.location.city},{" "}
+                                        {company.location.countryCode},{" "}
+                                        {company.jurisdiction}
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="no-location">
+                                    {i18n.t(
+                                        "companyInfoScreen:tab.location.fallbackText"
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="location-block Others">
+                            <div className="no-location">
+                                {i18n.t(
+                                    "companyInfoScreen:tab.location.fallbackText"
+                                )}
+                            </div>
+                        </div>
+                    )}
                     {locationTooltip}
                 </div>
             ),
         },
         {
             tabName: "structure",
-            content: null,
+            content: (
+                <div className="structure-tab">
+                    <img src="./images/structure_fallback.svg"></img>
+                    <div className="text">
+                        <p>
+                            {i18n.t(
+                                "companyInfoScreen:tab.structure.fallbackText"
+                            )}
+                        </p>
+                    </div>
+                </div>
+            ),
         },
         {
             tabName: "revenue",
             content: (
-                <div>
-                    {(company.annualRevenues || []).map(({ year, amount }) => (
-                        <div key={year}>
-                            {year}: {amount}
-                        </div>
-                    ))}
-                </div>
+                <CompanyRevenueChart annualRevenues={company.annualRevenues} />
             ),
         },
     ];
@@ -81,25 +106,62 @@ const CompanyInfo = ({ company }) => {
             tabName: "location",
             content: (
                 <div>
-                    <div className={"location-block"}></div>
+                    {company.jurisdiction ? (
+                        <div
+                            className={`location-block ${company.jurisdiction}`}
+                        >
+                            {company.location ? (
+                                <div>
+                                    <img
+                                        src="./images/location-pin.svg"
+                                        alt="location-pin"
+                                    />
+                                    <p className={`location-text`}>
+                                        {company.location.city},{" "}
+                                        {company.location.countryCode},{" "}
+                                        {company.jurisdiction}
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="no-location">
+                                    {i18n.t(
+                                        "companyInfoScreen:tab.location.fallbackText"
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="location-block Others">
+                            <div className="no-location">
+                                {i18n.t(
+                                    "companyInfoScreen:tab.location.fallbackText"
+                                )}
+                            </div>
+                        </div>
+                    )}
                     {locationTooltip}
                 </div>
             ),
         },
         {
             tabName: "structure",
-            content: null,
+            content: (
+                <div className="structure-tab">
+                    <img src="./images/structure_fallback.svg" />
+                    <div className="text">
+                        <p>
+                            {i18n.t(
+                                "companyInfoScreen:tab.structure.fallbackText"
+                            )}
+                        </p>
+                    </div>
+                </div>
+            ),
         },
         {
             tabName: "revenue",
             content: (
-                <div>
-                    {(company.annualRevenues || []).map(({ year, amount }) => (
-                        <div key={year}>
-                            {year}: {amount}
-                        </div>
-                    ))}
-                </div>
+                <CompanyRevenueChart annualRevenues={company.annualRevenues} />
             ),
         },
     ];
@@ -113,16 +175,18 @@ const CompanyInfo = ({ company }) => {
         } else setScrolledToBottom(false);
     };
 
+    // TODO: Use the Screen component
     return (
         <div className="explorer-container">
-            <div className="screen-shadow"></div>
-            <div className="screen-content">
-                <div className="scroll-container">
+            <div className="top-shadow"></div>
+
+            <div className="screen-content company-info-screen">
+                <div
+                    className="scroll-container"
+                    onScroll={(e) => handleInfoTextScrollBottom(e)}
+                >
                     <div className="short-info">
-                        <CompanyShortInfo
-                            company={company}
-                            onShowScreenChange={() => {}}
-                        />
+                        <CompanyShortInfo company={company} />
                     </div>
                     <div className="tab-button-container">
                         {company.featured
@@ -176,33 +240,16 @@ const CompanyInfo = ({ company }) => {
                                   ))}
                         </Swiper>
                     </div>
-                    <p
-                        className="company-info-text"
-                        onScroll={(e) => handleInfoTextScrollBottom(e)}
-                    >
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                        sed diam nonumy eirmod tempor invidunt ut labore et
-                        dolore magna aliquyam erat, sed diam voluptua. At vero
-                        eos et accusam et justo duo dolores et ea rebum. Stet
-                        clita kasd gubergren, no sea takimata sanctus est Lorem
-                        ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                        consetetur sadipscing elitr, sed diam nonumy eirmod
-                        tempor invidunt ut labore et dolore magna aliquyam erat,
-                        sed diam voluptua. At vero eos et accusam et justo duo
-                        dolores et ea rebum. Stet clita kasd gubergren, no sea
-                        takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                        ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                        diam nonumy eirmod tempor invidunt ut labore et dolore
-                        magna aliquyam erat, sed diam voluptua. At vero eos et
-                        accusam et justo duo dolores et ea rebum. Stet clita
-                        kasd gubergren, no sea takimata sanctus est Lorem ipsum
-                        dolor sit amet. Duis autem vel eum iriure dolor in
-                        hendrerit in vulputate velit esse molestie consequat,
-                        vel illum dolore eu feugiat nulla facilisis at vero eros
-                        et accumsan et iusto odio dignissim qui blandit praesent
-                        luptatum zzril delenit augue duis dolore te feugait
-                        nulla facilisi. Lorem ipsum dolor sit amet,
+                    <p className="company-info-text">
+                        {company.description.value}
                     </p>
+
+                    {company.description.source ? (
+                        <p className="company-info-source">
+                            {i18n.t("companyInfoScreen:source")}:{" "}
+                            {company.description.source}
+                        </p>
+                    ) : null}
                 </div>
                 <div
                     className={
@@ -211,12 +258,12 @@ const CompanyInfo = ({ company }) => {
                             : "gradient-box gradient"
                     }
                 ></div>
-                <p className="company-info-source">
-                    {i18n.t("companyInfoScreen:source")}: Wikipedia
-                </p>
 
                 {company.featured ? (
-                    <button className="explore-data-btn">
+                    <button
+                        className="explore-data-btn"
+                        onClick={() => onOpenExploration(company.name)}
+                    >
                         {i18n.t("companyInfoScreen:button.exploreData")}
                     </button>
                 ) : (

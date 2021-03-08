@@ -33,6 +33,11 @@ class FeatureListFragment : Fragment() {
 
         val context = requireContext()
 
+        val infoButton: View = view.findViewById(R.id.info_button)
+        infoButton.setOnClickListener {
+            findNavController().navigate(FeatureListFragmentDirections.actionFeatureListFragmentToOnboardingActivity())
+        }
+
         val settingsButton: View = view.findViewById(R.id.settings_button)
         settingsButton.setOnClickListener {
             findNavController().navigate(FeatureListFragmentDirections.actionFeatureListFragmentToSettingsActivity())

@@ -11,7 +11,7 @@ import "./featuredCompanyHolder.css";
 
 const FeaturedCompanyHolder = ({
     featuredCompanies,
-    onShowScreenChange,
+    onActiveScreenChange,
     initialSlide,
     onUpdateInitialSlide,
 }) => {
@@ -23,7 +23,7 @@ const FeaturedCompanyHolder = ({
             (company) => company.dataSharingPurposes.length
         ),
         companies: featuredCompanies.map(
-            (company) => company.sharedWithCompanies.length
+            (company) => company.dataRecipients.length
         ),
         jurisdictions: featuredCompanies.map((company) =>
             company.jurisdictionsShared
@@ -33,6 +33,12 @@ const FeaturedCompanyHolder = ({
     };
     const maxValues = Object.fromEntries(
         Object.entries(counts).map(([key, value]) => [key, Math.max(...value)])
+    );
+    const averageValues = Object.fromEntries(
+        Object.entries(counts).map(([key, value]) => [
+            key,
+            Math.round(value.reduce((a, b) => a + b, 0) / value.length),
+        ])
     );
     return (
         <div className="featured-company-holder">
@@ -52,7 +58,8 @@ const FeaturedCompanyHolder = ({
                             key={index}
                             company={company}
                             maxValues={maxValues}
-                            onShowScreenChange={onShowScreenChange}
+                            averageValues={averageValues}
+                            onActiveScreenChange={onActiveScreenChange}
                         />
                     </SwiperSlide>
                 ))}

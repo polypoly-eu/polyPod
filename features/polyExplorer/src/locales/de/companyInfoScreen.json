@@ -1,14 +1,26 @@
 {
     "tab.location":
         "Adresse",
+    "tab.location.fallbackText":
+        "Noch keine Adresse verfügbar.",
     "tab.structure":
         "Struktur",
+    "tab.structure.fallbackText":
+        "Noch keine Daten verfügbar.",
     "tab.revenue":
         "Umsatz",
+    "tab.revenue.fallbackText":
+        "Noch keine Daten verfügbar.",
     "jurisdictions":
         "Rechtsraum",
     "source":
         "Quelle",
     "button.exploreData":
-        "Daten erkunden"
+        "Daten erkunden",
+    "K":
+        "Tsd",
+    "M":
+        "Mio",
+    "B":
+        "Mrd"
 }

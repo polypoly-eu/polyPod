@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
+
 import i18n from "../../i18n.js";
-import "../screen.css";
+import Screen from "../../components/screen/screen.jsx";
+
 import "./companySearch.css";
 
-const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
+const CompanySearchScreen = ({ companies, onOpenInfo }) => {
     const [searchString, setSearchString] = useState("");
     const featuredComanies = companies.filter((e) => e.featured == true);
 
@@ -34,100 +36,84 @@ const CompanySearchScreen = ({ companies, onShowScreenChange }) => {
     };
 
     return (
-        <div className="explorer-container">
-            <div className="screen-shadow"></div>
-            <div className="screen-content">
-                <div className="search-bar-container">
-                    <input
-                        type="text"
-                        ref={inputRef}
-                        autoFocus="autofocus"
-                        placeholder={i18n.t("companySearchScreen:typeHere")}
-                        className="search-bar"
-                        onChange={(e) => handleSearch(e.target.value)}
-                    />
-                    {searchString == "" ? null : (
-                        <button onClick={() => handleClear()}>
-                            <img src="./images/clear-search.svg" />
-                        </button>
-                    )}
-                </div>
-                <div className="company-search">
-                    {searchString == "" ? (
-                        <div className="suggestion-container">
-                            <p>{i18n.t("companySearchScreen:suggestions")}</p>
-                            <div className="suggestions">
-                                {" "}
-                                {featuredComanies.map((company, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() =>
-                                            onShowScreenChange(
-                                                "companyInfo",
-                                                company.name
+        <Screen className="company-search-screen">
+            <div className="search-bar-container">
+                <input
+                    type="text"
+                    ref={inputRef}
+                    autoFocus="autofocus"
+                    placeholder={i18n.t("companySearchScreen:typeHere")}
+                    className="search-bar"
+                    onChange={(e) => handleSearch(e.target.value)}
+                />
+                {searchString == "" ? null : (
+                    <button onClick={() => handleClear()}>
+                        <img src="./images/clear-search.svg" />
+                    </button>
+                )}
+            </div>
+            <div className="company-search">
+                {searchString == "" ? (
+                    <div className="suggestion-container">
+                        <p>{i18n.t("companySearchScreen:suggestions")}</p>
+                        <div className="suggestions">
+                            {" "}
+                            {featuredComanies.map((company, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => onOpenInfo(company.name)}
+                                >
+                                    {company.name}
+                                </button>
+                            ))}{" "}
+                        </div>
+                    </div>
+                ) : (
+                    <div>
+                        {shownCompanies.length == 0 ? (
+                            <div>
+                                <p className="no-answers">
+                                    {i18n.t("companySearchScreen:noMatch")}
+                                </p>
+                                <div className="suggestion-container">
+                                    <p>
+                                        {i18n.t(
+                                            "companySearchScreen:suggestions"
+                                        )}
+                                    </p>
+                                    <div className="suggestions">
+                                        {" "}
+                                        {featuredComanies.map(
+                                            (company, index) => (
+                                                <button
+                                                    onClick={() =>
+                                                        onOpenInfo(company.name)
+                                                    }
+                                                    key={index}
+                                                >
+                                                    {company.name}
+                                                </button>
                                             )
-                                        }
+                                        )}{" "}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <div>
+                                {shownCompanies.map((company, index) => (
+                                    <button
+                                        onClick={() => onOpenInfo(company.name)}
+                                        key={index}
                                     >
                                         {company.name}
                                     </button>
-                                ))}{" "}
+                                ))}
                             </div>
-                        </div>
-                    ) : (
-                        <div>
-                            {shownCompanies.length == 0 ? (
-                                <div>
-                                    <p className="no-answers">
-                                        {i18n.t("companySearchScreen:noMatch")}
-                                    </p>
-                                    <div className="suggestion-container">
-                                        <p>
-                                            {i18n.t(
-                                                "companySearchScreen:suggestions"
-                                            )}
-                                        </p>
-                                        <div className="suggestions">
-                                            {" "}
-                                            {featuredComanies.map(
-                                                (company, index) => (
-                                                    <button
-                                                        onClick={() =>
-                                                            onShowScreenChange(
-                                                                "companyInfo",
-                                                                company.name
-                                                            )
-                                                        }
-                                                        key={index}
-                                                    >
-                                                        {company.name}
-                                                    </button>
-                                                )
-                                            )}{" "}
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div>
-                                    {shownCompanies.map((company, index) => (
-                                        <button
-                                            onClick={() =>
-                                                onShowScreenChange(
-                                                    "companyInfo",
-                                                    company.name
-                                                )
-                                            }
-                                            key={index}
-                                        >
-                                            {company.name}
-                                        </button>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
+                        )}
+                    </div>
+                )}
             </div>
-        </div>
+        </Screen>
     );
 };
 

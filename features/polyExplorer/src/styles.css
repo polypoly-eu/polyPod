@@ -1,0 +1,26 @@
+@font-face {
+    font-family: "Jost";
+    src: url("../fonts/jost_regular.ttf");
+}
+
+@font-face {
+    font-family: "Jost Medium";
+    src: url("../fonts/jost_medium.ttf");
+}
+
+* {
+    font-family: "Jost";
+    color: #edf2f7;
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    border: none;
+}
+
+button:focus {
+    outline: 0;
+}

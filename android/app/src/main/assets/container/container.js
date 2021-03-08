@@ -1,20 +1,20 @@
-const {port1, port2} = new MessageChannel();
-
-let outerPort;
-
 // outerPort - bootstrap's end of a channel with the Pod
 // port1 - bootstrap's end of a channel with the Feature
 // port2 - Feature's end of a channel with the bootstrap
-
+//
 // Pod <-> innerPort <-> outerPort <-> boostrap <-> port1 <-> port2 <-> Feature
+const {port1, port2} = new MessageChannel();
+let outerPort;
 
-window.onmessage = event => {
-    outerPort = event.ports[0];
-    outerPort.onmessage = event => {
-        // console.log(`Data coming from Pod to the Feature`);
-        // console.dir(event.data);
-        const bytes = Uint8Array.from(atob(event.data), c => c.charCodeAt(0));
-        port1.postMessage(bytes);
+function initMessaging() {
+    window.onmessage = event => {
+        outerPort = event.ports[0];
+        outerPort.onmessage = event => {
+            // console.log(`Data coming from Pod to the Feature`);
+            // console.dir(event.data);
+            const bytes = Uint8Array.from(atob(event.data), c => c.charCodeAt(0));
+            port1.postMessage(bytes);
+        }
     }
 }
 
@@ -40,4 +40,5 @@ function loadFeature() {
     iFrame.src = `features/${featureName}/index.html`;
 }
 
+initMessaging();
 loadFeature();

@@ -1,18 +1,14 @@
 {
     "screenTitle.main":
         "polyExplorer",
-    "screenTitle.dataTypes":
-        "Daten erkunden",
-    "screenTitle.purposes":
-        "Daten erkunden",
-    "screenTitle.companies":
-        "Daten erkunden",
-    "screenTitle.jurisdictions":
+    "screenTitle.dataExploration":
         "Daten erkunden",
     "screenTitle.companyInfo":
         "Firmenprofil",
     "screenTitle.companyFilter":
         "Filter",
+    "screenTitle.featuredCompanyHelp":
+        "Wie ist das zu verstehen?",
     "screenTitle.companySearch":
         "Suche",
     "screenTitle.info":
@@ -49,6 +45,8 @@
         "China",
     "jurisdiction.undisclosed":
         "Sonstige",
+    "category.undisclosed":
+        "Unbekannt",
     "sharing.prefix.dataTypes":
         "teilt",
     "sharing.detailPrefix.dataTypes":

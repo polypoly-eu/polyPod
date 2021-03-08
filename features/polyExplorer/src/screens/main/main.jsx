@@ -1,10 +1,10 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
+import Screen from "../../components/screen/screen.jsx";
 import FeaturedCompanyHolder from "../../components/featuredCompanyHolder/featuredCompanyHolder.jsx";
 import CompanyList from "../../components/companyList/companyList.jsx";
 
-import "../screen.css";
 import "./main.css";
 
 const MainScreen = ({
@@ -12,7 +12,7 @@ const MainScreen = ({
     featuredCompanyData,
     companyData,
     globalData,
-    onShowScreenChange,
+    onActiveScreenChange,
     onShowFeaturedChange,
     featuredCompanyTabInitialSlide,
     onFeaturedCompanyTabInitialSlideChange,
@@ -27,7 +27,7 @@ const MainScreen = ({
     };
 
     return (
-        <div className="explorer-container">
+        <Screen className="main-screen" topShadow={false}>
             <div className="nav-button-container">
                 <button
                     onClick={handleShowFeatured}
@@ -51,7 +51,7 @@ const MainScreen = ({
             {showFeatured ? (
                 <FeaturedCompanyHolder
                     featuredCompanies={featuredCompanyData}
-                    onShowScreenChange={onShowScreenChange}
+                    onActiveScreenChange={onActiveScreenChange}
                     initialSlide={featuredCompanyTabInitialSlide}
                     onUpdateInitialSlide={handleUpdateInitialSlide}
                 />
@@ -59,12 +59,12 @@ const MainScreen = ({
                 <CompanyList
                     companies={companyData}
                     globalData={globalData}
-                    onShowScreenChange={onShowScreenChange}
+                    onActiveScreenChange={onActiveScreenChange}
                     activeFilters={activeFilters}
                     onRemoveFilter={onRemoveFilter}
                 />
             )}
-        </div>
+        </Screen>
     );
 };
 

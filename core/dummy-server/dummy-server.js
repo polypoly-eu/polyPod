@@ -1,5 +1,5 @@
 import { createServer } from "http";
-import socketio from "socket.io";
+import { Server } from "socket.io";
 import express from "express";
 import bodyParser from "body-parser";
 const { text } = bodyParser;
@@ -7,7 +7,7 @@ const { text } = bodyParser;
 const app = express();
 const server = createServer(app);
 
-const io = socketio(server);
+const io = new Server(server);
 
 app.use(text({ type: "*/*" }));
 

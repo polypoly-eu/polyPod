@@ -12,7 +12,7 @@
     padding-bottom: 12px;
     font-size: 16px;
     line-height: 16px;
-    color: #8d9caf;
+    color: #a9b6c6;
     border-color: transparent;
     outline: none;
 }
@@ -24,10 +24,15 @@
 
 .scroll-container {
     flex: 1 1 auto;
+    margin: auto;
     overflow-y: auto;
     margin-bottom: 18px;
     width: 100%;
     max-width: 412px;
+}
+
+.company-info-screen .company-short-info {
+    margin: 24px auto 4px auto;
 }
 
 .tab-content-container {
@@ -63,7 +68,7 @@
 }
 
 .tab-content-container .Others {
-    background-color: #8d9caf;
+    background-color: #a9b6c6;
 }
 
 .location-block img {
@@ -81,12 +86,20 @@
     transform: translate(84px, 48px);
 }
 
+.location-block .no-location {
+    display: block;
+    width: 142px;
+    margin: 0 auto;
+    transform: translateY(56px);
+    text-align: center;
+}
+
 .location-tooltip {
     display: flex;
     padding: 0 4px;
     width: 100%;
     max-width: 360px;
-    margin: 0 auto;
+    margin: 0 0 0 24px;
 }
 
 .location-tooltip img {
@@ -94,10 +107,17 @@
 }
 
 .location-tooltip p {
-    color: #8d9caf;
+    color: #a9b6c6;
     font-weight: 500;
     font-size: 10px;
     margin: 7px 6px 0px 2px;
+}
+
+/* Temporary workaround for 320px viewport width */
+p.jurisdictions-label {
+    width: 0;
+    overflow: hidden;
+    margin-right: 2px;
 }
 
 .location-tooltip .circle {
@@ -114,19 +134,48 @@
     padding: 0 2px;
 }
 
+.structure-tab {
+    position: relative;
+}
+
+.structure-tab img {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.structure-tab .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 200;
+}
+
+.structure-tab .text p {
+    display: block;
+    margin: 22% auto;
+    width: 200px;
+}
+
 .company-info-text {
     box-sizing: border-box;
     width: 100%;
     max-width: 474px;
     padding: 4px 32px;
+    margin-bottom: 4px;
 }
 
 .company-info-source {
-    color: #8d9caf;
+    color: #a9b6c6;
     flex: 0 0 auto;
     font-size: 12px;
-    margin: 4px 32px;
-    transform: translateY(-24px);
+    margin: 0px auto;
+    width: 80%;
+    max-width: 314px;
 }
 
 .gradient-box {
@@ -148,7 +197,7 @@
     width: 85%;
     max-width: 414px;
     height: 48px;
-    background-color: #edf2f7;
+    background-color: #f7fafc;
     color: #0f1938;
     font-size: 18px;
     font-weight: 600;
