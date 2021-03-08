@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:maxWidth="400dp"
+            android:maxWidth="320dp"
             android:fontFamily="@font/jost_regular"
             android:textSize="20dp"
             android:textColor="@color/colorPrimaryDark" />
@@ -47,7 +47,7 @@
 
     <Button
         android:id="@+id/end_onboarding_button"
-        android:layout_width="340dp"
+        android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginBottom="80dp"
         android:text="@string/button_end_onboarding"
