@@ -119,9 +119,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                 <div className="no-data-text">
                     {i18n.t("companyInfoScreen:tab.revenue.fallbackText")}
                 </div>
-                <p className="source">
-                    {i18n.t("companyInfoScreen:source")}: polyPedia
-                </p>
+                <div className="overlay"></div>
             </div>
         );
     } else {
