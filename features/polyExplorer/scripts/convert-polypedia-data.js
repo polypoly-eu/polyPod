@@ -91,12 +91,15 @@ function parseEntity(entityData) {
 }
 
 function parsePolyPediaCompanyData() {
-    const companyData = [];
+    const companyData = {};
     polyPediaCompanyData.forEach((entityData) => {
         const entity = parseEntity(entityData);
-        if (entity) companyData.push(entity);
+        if (!entity) return;
+
+        const key = entity.name.toLowerCase();
+        companyData[key] = { ...entity, ...(companyData[key] || {}) };
     });
-    return companyData;
+    return Object.values(companyData);
 }
 
 function savePolyExplorerFile(fileName, data) {
