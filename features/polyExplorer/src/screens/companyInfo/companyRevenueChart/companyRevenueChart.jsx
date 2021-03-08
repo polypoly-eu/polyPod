@@ -188,7 +188,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
                 <div
@@ -209,7 +211,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
                 <div
@@ -230,7 +234,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
                 <div
@@ -251,7 +257,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
                 <div
@@ -272,7 +280,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
             </div>
