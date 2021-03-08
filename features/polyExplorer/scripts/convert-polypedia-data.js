@@ -93,7 +93,7 @@ function parseEntity(entityData) {
 const entityKey = (entity) => entity.name.toLowerCase();
 
 function enrichWithJurisdictionsShared(entityMap) {
-    for (let [key, entity] of Object.entries(entityMap)) {
+    for (let entity of Object.values(entityMap)) {
         for (let dataRecipient of entity.dataRecipients || []) {
             const recipientKey = entityKey({ name: dataRecipient });
             if (!(recipientKey in entityMap)) continue;
