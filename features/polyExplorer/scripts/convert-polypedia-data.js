@@ -31,71 +31,70 @@ function parseDataRegion(value) {
     return value.indexOf("CCPA") !== -1 ? "Five-Eyes" : value;
 }
 
+function parseEntity(entityData) {
+    const entity = entityData.legal_entities[0];
+    const legalName = entity.identifiers.legal_name.value;
+    if (!legalName) return null;
+
+    return {
+        name: legalName,
+        featured:
+            entityData.data_recipients &&
+            entityData.derived_purpose_info &&
+            entityData.derived_category_info
+                ? true
+                : false,
+        jurisdiction: parseDataRegion(
+            entity.data_collection.data_regions.value
+        ),
+        location: {
+            city: entity.basic_info.registered_address.value.city,
+            countryCode: entity.basic_info.registered_address.value.country,
+        },
+        annualRevenues: extractAnnualRevenues(entityData),
+        dataRecipients: entityData.data_recipients
+            ? entityData.data_recipients
+            : null,
+        dataSharingPurposes: entityData.derived_purpose_info
+            ? Object.keys(entityData.derived_purpose_info).map(
+                  (i) => entityData.derived_purpose_info[i]
+              )
+            : null,
+        dataTypesShared: entityData.derived_category_info
+            ? Object.keys(entityData.derived_category_info).map(
+                  (i) => entityData.derived_category_info[i]
+              )
+            : null,
+        description: {
+            value:
+                Object.keys(descriptions.de).findIndex(
+                    (e) => e.toLowerCase() === legalName.toLowerCase()
+                ) >= 0
+                    ? descriptions.de[
+                          Object.keys(descriptions.de)[
+                              Object.keys(descriptions.de).findIndex(
+                                  (e) =>
+                                      e.toLowerCase() ===
+                                      legalName.toLowerCase()
+                              )
+                          ]
+                      ]
+                    : null,
+            source:
+                Object.keys(descriptions.de).findIndex(
+                    (e) => e.toLowerCase() === legalName.toLowerCase()
+                ) >= 0
+                    ? "Wikipedia"
+                    : null,
+        },
+    };
+}
+
 function parsePolyPediaCompanyData() {
     const companyData = [];
-    polyPediaCompanyData.forEach((entry) => {
-        if (entry.legal_entities[0].identifiers.legal_name.value != null) {
-            companyData.push({
-                name: entry.legal_entities[0].identifiers.legal_name.value,
-                featured:
-                    entry.data_recipients &&
-                    entry.derived_purpose_info &&
-                    entry.derived_category_info
-                        ? true
-                        : false,
-                jurisdiction: parseDataRegion(
-                    entry.legal_entities[0].data_collection.data_regions.value
-                ),
-                location: {
-                    city:
-                        entry.legal_entities[0].basic_info.registered_address
-                            .value.city,
-                    countryCode:
-                        entry.legal_entities[0].basic_info.registered_address
-                            .value.country,
-                },
-                annualRevenues: extractAnnualRevenues(entry),
-                dataRecipients: entry.data_recipients
-                    ? entry.data_recipients
-                    : null,
-                dataSharingPurposes: entry.derived_purpose_info
-                    ? Object.keys(entry.derived_purpose_info).map(
-                          (i) => entry.derived_purpose_info[i]
-                      )
-                    : null,
-                dataTypesShared: entry.derived_category_info
-                    ? Object.keys(entry.derived_category_info).map(
-                          (i) => entry.derived_category_info[i]
-                      )
-                    : null,
-                description: {
-                    value:
-                        Object.keys(descriptions.de).findIndex(
-                            (e) =>
-                                e.toLowerCase() ===
-                                entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
-                        ) >= 0
-                            ? descriptions.de[
-                                  Object.keys(descriptions.de)[
-                                      Object.keys(descriptions.de).findIndex(
-                                          (e) =>
-                                              e.toLowerCase() ===
-                                              entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
-                                      )
-                                  ]
-                              ]
-                            : null,
-                    source:
-                        Object.keys(descriptions.de).findIndex(
-                            (e) =>
-                                e.toLowerCase() ===
-                                entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
-                        ) >= 0
-                            ? "Wikipedia"
-                            : null,
-                },
-            });
-        }
+    polyPediaCompanyData.forEach((entityData) => {
+        const entity = parseEntity(entityData);
+        if (entity) companyData.push(entity);
     });
     return companyData;
 }
