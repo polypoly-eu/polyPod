@@ -1632,7 +1632,7 @@
     {
         "name": "APPLE INC.",
         "featured": true,
-        "jurisdiction": "US_CA - CCPA",
+        "jurisdiction": "Five-Eyes",
         "location": {
             "city": "Cupertino",
             "countryCode": "US"

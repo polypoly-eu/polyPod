@@ -23,6 +23,14 @@ function extractAnnualRevenues(entry) {
     }));
 }
 
+function parseDataRegion(value) {
+    if (value instanceof Array)
+        return ["GDPR", "EU"].every((part) => value.includes(part))
+            ? "EU-GDPR"
+            : value[0];
+    return value.indexOf("CCPA") !== -1 ? "Five-Eyes" : value;
+}
+
 function parsePolyPediaCompanyData() {
     const companyData = [];
     polyPediaCompanyData.forEach((entry) => {
@@ -35,20 +43,9 @@ function parsePolyPediaCompanyData() {
                     entry.derived_category_info
                         ? true
                         : false,
-                jurisdiction:
-                    entry.legal_entities[0].data_collection.data_regions
-                        .value instanceof Array
-                        ? entry.legal_entities[0].data_collection.data_regions.value.indexOf(
-                              "GDPR"
-                          ) >= 0 &&
-                          entry.legal_entities[0].data_collection.data_regions.value.indexOf(
-                              "EU"
-                          ) >= 0
-                            ? "EU-GDPR"
-                            : entry.legal_entities[0].data_collection
-                                  .data_regions.value[0]
-                        : entry.legal_entities[0].data_collection.data_regions
-                              .value,
+                jurisdiction: parseDataRegion(
+                    entry.legal_entities[0].data_collection.data_regions.value
+                ),
                 location: {
                     city:
                         entry.legal_entities[0].basic_info.registered_address
