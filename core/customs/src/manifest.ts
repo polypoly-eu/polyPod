@@ -5,8 +5,6 @@ import { pipe } from "fp-ts/lib/pipeable";
 import { parse as parseSemVer, SemVer, Range } from "semver";
 import { normalize, isAbsolute, join, dirname } from "path";
 import { promises as fs } from "fs";
-import { Url } from "url";
-import { unknown } from "io-ts";
 
 export interface EngineManifest {
     readonly api: Range;
@@ -27,19 +25,12 @@ export interface FeatureManifest {
     readonly thumbnail: string;
     readonly primaryColor: string;
     // TODO: Typecheck links object
-    // readonly links: Map<string, Url>;
-    readonly links: unknown[];
+    readonly links: unknown;
     // TODO: Typecheck translations object
-    //readonly translations: Array<Translation>;
     readonly translations: unknown[];
 }
 
 export interface Manifest extends EngineManifest, MainManifest, RootManifest, FeatureManifest {}
-
-export interface Link {
-    readonly name: string;
-    readonly URL: Url;
-}
 
 // TODO duplicated code with podigree, should be a library
 function expect<I, A>(input: I, msg: string, decoder: Decode.Decoder<I, A>): A {
@@ -103,7 +94,7 @@ const featureDecoder = Decode.type({
     description: Decode.string,
     thumbnail: relativeDecoder,
     primaryColor: Decode.string,
-    links: Decode.UnknownArray,
+    links: Decode.UnknownRecord,
     translations: Decode.UnknownArray,
 });
 
@@ -119,7 +110,7 @@ export async function readManifest(pkgPath: string): Promise<Manifest> {
         description: "",
         thumbnail: "",
         primaryColor: "",
-        links: [],
+        links: {},
         translations: [],
     };
 
