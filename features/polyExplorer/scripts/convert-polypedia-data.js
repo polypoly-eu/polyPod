@@ -89,11 +89,11 @@ function parseEntity(entityData) {
                     : null,
         },
         category:
-            Object.keys(categories).filter(
+            Object.keys(categories.de).filter(
                 (e) => e.toLowerCase() === legalName.toLowerCase()
             ).length > 0
-                ? categories[
-                      Object.keys(categories).filter(
+                ? categories.de[
+                      Object.keys(categories.de).filter(
                           (e) => e.toLowerCase() === legalName.toLowerCase()
                       )[0]
                   ]
