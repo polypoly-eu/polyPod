@@ -24,7 +24,7 @@ describe("Serve", () => {
                 thumbnail: "thumbnail_test",
                 primaryColor: "#000000",
                 links: [],
-                translations: []
+                translations: [],
             },
             new DefaultPod(dataset(), fs, fetch)
         );
