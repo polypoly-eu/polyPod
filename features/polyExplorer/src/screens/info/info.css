@@ -1,6 +1,7 @@
 .info-screen {
     display: block !important;
     overflow: hidden scroll;
+    padding-top: 20px;
 }
 
 .info-screen * {

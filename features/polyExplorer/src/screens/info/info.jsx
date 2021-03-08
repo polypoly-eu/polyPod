@@ -7,6 +7,12 @@ import "./info.css";
 
 const InfoScreen = ({ onClose }) => (
     <Screen className="info-screen" light={true}>
+        <div
+            dangerouslySetInnerHTML={{
+                __html: i18n.t("infoScreen:text.intro"),
+            }}
+        ></div>
+
         <h1>{i18n.t("infoScreen:headline.sources")}</h1>
         <div
             dangerouslySetInnerHTML={{
@@ -45,7 +51,7 @@ const InfoScreen = ({ onClose }) => (
         <h1>{i18n.t("infoScreen:headline.presentation")}</h1>
         <div
             dangerouslySetInnerHTML={{
-                __html: i18n.t("infoScreen:text.sources"),
+                __html: i18n.t("infoScreen:text.presentation"),
             }}
         ></div>
 
