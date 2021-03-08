@@ -29,7 +29,11 @@ const InfoScreen = ({ onClose }) => (
         ></div>
 
         <h1>{i18n.t("infoScreen:headline.validation")}</h1>
-        <p>{i18n.t("infoScreen:text.validation")}</p>
+        <div
+            dangerouslySetInnerHTML={{
+                __html: i18n.t("infoScreen:text.validation"),
+            }}
+        ></div>
 
         <h1>{i18n.t("infoScreen:headline.aggregation")}</h1>
         <img src="images/info-aggregation.svg"></img>
