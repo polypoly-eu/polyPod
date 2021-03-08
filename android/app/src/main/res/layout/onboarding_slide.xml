@@ -29,7 +29,7 @@
             android:id="@+id/headline_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jost_medium"
+            android:fontFamily="@font/jost_regular"
             android:textSize="30dp"
             android:textColor="#0f1938" />
 
