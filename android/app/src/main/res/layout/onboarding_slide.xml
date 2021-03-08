@@ -9,7 +9,7 @@
         android:id="@+id/content_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
+        android:paddingTop="10dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:orientation="vertical"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:maxWidth="400dp"
             android:fontFamily="@font/polydisplay_semi_1_0"
-            android:textSize="36dp"
+            android:textSize="30dp"
             android:textColor="#0f1938" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:maxWidth="400dp"
             android:fontFamily="@font/jost_medium"
-            android:textSize="36dp"
+            android:textSize="30dp"
             android:textColor="#0f1938" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_marginTop="30dp"
             android:maxWidth="400dp"
             android:fontFamily="@font/jost_regular"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:textColor="#0f1938" />
 
     </LinearLayout>
