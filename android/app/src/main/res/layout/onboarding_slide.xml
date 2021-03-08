@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/polydisplay_semi_1_0"
             android:textSize="30dp"
-            android:textColor="#0f1938" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/headline_sub"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/jost_regular"
             android:textSize="30dp"
-            android:textColor="#0f1938" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/body_text"
@@ -41,7 +41,7 @@
             android:maxWidth="400dp"
             android:fontFamily="@font/jost_regular"
             android:textSize="20dp"
-            android:textColor="#0f1938" />
+            android:textColor="@color/colorPrimaryDark" />
 
     </LinearLayout>
 
@@ -51,8 +51,8 @@
         android:layout_height="60dp"
         android:layout_marginBottom="80dp"
         android:text="@string/button_end_onboarding"
-        android:textColor="#0f1938"
-        android:background="#fb8a89"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/onboarding_button_bg"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
