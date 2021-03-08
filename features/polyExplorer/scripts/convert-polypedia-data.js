@@ -89,15 +89,11 @@ function parseEntity(entityData) {
                     : null,
             category:
                 Object.keys(categories).filter(
-                    (e) =>
-                        e.toLowerCase() ===
-                        entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                    (e) => e.toLowerCase() === legalName.toLowerCase()
                 ).length > 0
                     ? categories[
                           Object.keys(categories).filter(
-                              (e) =>
-                                  e.toLowerCase() ===
-                                  entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                              (e) => e.toLowerCase() === legalName.toLowerCase()
                           )[0]
                       ]
                     : null,
