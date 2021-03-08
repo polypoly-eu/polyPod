@@ -7,6 +7,7 @@
 .info-screen * {
     color: #0f1938;
     font-size: 16px;
+    line-height: 120%;
 }
 
 .info-screen>* {
@@ -25,10 +26,6 @@
 
 .info-screen p {
     margin-top: 4px;
-}
-
-.info-screen ul {
-    margin-top: 32px;
 }
 
 .info-screen img {
