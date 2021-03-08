@@ -1,6 +1,7 @@
 import fs from "fs";
 import { createRequire } from "module";
 import { default as descriptions } from "./descriptions.js";
+import { default as categories } from "./categories.js";
 
 const require = createRequire(import.meta.url);
 
@@ -85,6 +86,20 @@ function parseEntity(entityData) {
                     (e) => e.toLowerCase() === legalName.toLowerCase()
                 ) >= 0
                     ? "Wikipedia"
+                    : null,
+            category:
+                Object.keys(categories).filter(
+                    (e) =>
+                        e.toLowerCase() ===
+                        entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                ).length > 0
+                    ? categories[
+                          Object.keys(categories).filter(
+                              (e) =>
+                                  e.toLowerCase() ===
+                                  entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
+                          )[0]
+                      ]
                     : null,
         },
     };
