@@ -1061,6 +1061,476 @@
         "category": null
     },
     {
+        "name": "SCHUFA Holding AG",
+        "featured": true,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Wiesbaden",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 93933544.07,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 112726075.64,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 123432630.49,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 145823407.53,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 163752836.37,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 190277369.04,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 212245538.2,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ],
+        "dataRecipients": [
+            "",
+            "AWIN AG",
+            "Alphabet Inc.",
+            "EBID Service AG",
+            "Etracker GmbH",
+            "Google Ireland Limited",
+            "Microsoft Corporation",
+            "Outbrain Inc.",
+            "Schufa",
+            "UserCentrics GmbH",
+            "financeAds International GmbH"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:Advertising",
+                "dpv:Superclass": "dpv:Marketing",
+                "Translation_DE": "Werbung",
+                "Translation_EN": "Advertising",
+                "Synonyms": "",
+                "count": 27
+            },
+            {
+                "dpv:Purpose": "dpv:Analytics",
+                "dpv:Superclass": "dpv:ServiceProvision",
+                "Translation_DE": "Analytik",
+                "Translation_EN": "Analytics",
+                "Synonyms": "",
+                "count": 29
+            },
+            {
+                "dpv:Purpose": "dpv:CommercialInterest",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Kommerzielles Interesse",
+                "Translation_EN": "Commercial Interest",
+                "Synonyms": "",
+                "count": 41
+            },
+            {
+                "dpv:Purpose": "dpv:CommercialResearch",
+                "dpv:Superclass": "dpv:ResearchAndDevelopment",
+                "Translation_DE": "Kommerzielle Forschung",
+                "Translation_EN": "Commercial Research",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
+                "dpv:Superclass": "dpv:CreatePersonalizedReccomendations",
+                "Translation_DE": "Personalisierte Empfehlungen erstellen",
+                "Translation_EN": "Create Personalized Recommendations",
+                "Synonyms": "",
+                "count": 6
+            },
+            {
+                "dpv:Purpose": "dpv:CustomerCare",
+                "dpv:Superclass": "dpv:ServiceProvision",
+                "Translation_DE": "Kundenbetreuung",
+                "Translation_EN": "Customer Care",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:FraudPreventionAndDetection",
+                "dpv:Superclass": "dpv:Security",
+                "Translation_DE": "Betrugsprävention und -aufdeckung",
+                "Translation_EN": "Fraud Prevention and Detection",
+                "Synonyms": "",
+                "count": 3
+            },
+            {
+                "dpv:Purpose": "dpv:LegalCompliance",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Rechtskonformität",
+                "Translation_EN": "Legal Compliance",
+                "Synonyms": "",
+                "count": 6
+            },
+            {
+                "dpv:Purpose": "dpv:Marketing",
+                "dpv:Superclass": "dpv:CommercialInterest",
+                "Translation_DE": "Marketing",
+                "Translation_EN": "Marketing",
+                "Synonyms": "Publicity;Public Relations",
+                "count": 14
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForController",
+                "dpv:Superclass": "dpv:ServiceOptimization",
+                "Translation_DE": "Optimierung für Controller",
+                "Translation_EN": "Optimisation for Controller",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Forschung und Entwicklung",
+                "Translation_EN": "Research and Development",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:Security",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Sicherheit",
+                "Translation_EN": "Security",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:SellTargettedAdvertisements",
+                "dpv:Superclass": "dpv:CommercialInterest",
+                "Translation_DE": "Gezielte Werbung verkaufen",
+                "Translation_EN": "Sell Targetted Advertisements",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "dpv:Superclass": "dpv:Purpose",
+                "Translation_DE": "Dienstbereitstellung",
+                "Translation_EN": "Service Provision",
+                "Synonyms": "",
+                "count": 18
+            },
+            {
+                "dpv:Purpose": "dpv:UserInterfacePersonalisation",
+                "dpv:Superclass": "dpv:ServicePersonalization",
+                "Translation_DE": "Personalisierung der Benutzeroberfläche",
+                "Translation_EN": "User Interface Personalisation",
+                "Synonyms": "",
+                "count": 2
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:Age",
+                "dpv:Superclass": "dpv:PhysicalCharacteristic",
+                "Translation_DE": "Alter",
+                "Translation_EN": "Age",
+                "Polypoly_Parent_Category": "Persönliche Daten",
+                "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:BankAccount",
+                "dpv:Superclass": "dpv:FinancialAccount",
+                "Translation_DE": "Bankkonto",
+                "Translation_EN": "Bank Account",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:BrowserFingerprint",
+                "dpv:Superclass": "dpv:DeviceBased",
+                "Translation_DE": "Browser-Fingerabdruck",
+                "Translation_EN": "Browser Fingerprint",
+                "Polypoly_Parent_Category": "Technische Daten",
+                "Synonyms": "",
+                "count": 15
+            },
+            {
+                "dpv:Category": "dpv:BrowsingBehavior",
+                "dpv:Superclass": "dpv:Behavioral",
+                "Translation_DE": "Browsing-Verhalten",
+                "Translation_EN": "Browsing Behavior",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
+                "Synonyms": "",
+                "count": 9
+            },
+            {
+                "dpv:Category": "dpv:BrowsingReferral",
+                "dpv:Superclass": "dpv:BrowsingBehavior",
+                "Translation_DE": "Browsing-Empfehlung",
+                "Translation_EN": "Browsing Referral",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
+                "Synonyms": "",
+                "count": 10
+            },
+            {
+                "dpv:Category": "dpv:CommunicationsMetadata",
+                "dpv:Superclass": "dpv:PublicLife",
+                "Translation_DE": "Kommunikations-Metadaten",
+                "Translation_EN": "Communications Metadata",
+                "Polypoly_Parent_Category": "Soziale Daten",
+                "Synonyms": "",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:CreditScore",
+                "dpv:Superclass": "dpv:CreditWorthiness",
+                "Translation_DE": "Kredit-Score",
+                "Translation_EN": "Credit Score",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
+                "Synonyms": "",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:CreditWorthiness",
+                "dpv:Superclass": "dpv:Credit",
+                "Translation_DE": "Kreditwürdigkeit",
+                "Translation_EN": "Credit Worthiness",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:DerivedPersonalData",
+                "dpv:Superclass": "dpv:PersonalDataCategory",
+                "Translation_DE": "Abgeleitete persönliche Daten",
+                "Translation_EN": "Derived Personal Data",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
+                "Synonyms": "",
+                "count": 3
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "dpv:Superclass": "dpv:Tracking",
+                "Translation_DE": "Gerätebasiert",
+                "Translation_EN": "Device Based",
+                "Polypoly_Parent_Category": "Technische Daten",
+                "Synonyms": "",
+                "count": 7
+            },
+            {
+                "dpv:Category": "dpv:DeviceOperatingSystem",
+                "dpv:Superclass": "dpv:DeviceSoftware",
+                "Translation_DE": "Geräte-Betriebssystem",
+                "Translation_EN": "Device Operating System",
+                "Polypoly_Parent_Category": "Technische Daten",
+                "Synonyms": "",
+                "count": 7
+            },
+            {
+                "dpv:Category": "dpv:Financial",
+                "dpv:Superclass": "dpv:PersonalDataCategory",
+                "Translation_DE": "Finanzen",
+                "Translation_EN": "Financial",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
+                "Synonyms": "",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:FinancialAccount",
+                "dpv:Superclass": "dpv:Financial",
+                "Translation_DE": "Finanzkonto",
+                "Translation_EN": "Financial Account",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:FinancialAccountNumber",
+                "dpv:Superclass": "dpv:AccountIdentifier",
+                "Translation_DE": "Finanzielle Kontonummer",
+                "Translation_EN": "Financial Account Number",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:GeneralReputation",
+                "dpv:Superclass": "dpv:PublicLife",
+                "Translation_DE": "Allgemeine Reputation",
+                "Translation_EN": "General Reputation",
+                "Polypoly_Parent_Category": "Soziale Daten",
+                "Synonyms": "",
+                "count": 3
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "dpv:Superclass": "dpv:DeviceBased",
+                "Translation_DE": "IP-Adresse",
+                "Translation_EN": "IP Address",
+                "Polypoly_Parent_Category": "Technische Daten",
+                "Synonyms": "",
+                "count": 14
+            },
+            {
+                "dpv:Category": "dpv:Language",
+                "dpv:Superclass": "dpv:Ethnicity",
+                "Translation_DE": "Sprache",
+                "Translation_EN": "Language",
+                "Polypoly_Parent_Category": "Soziale Daten",
+                "Synonyms": "",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:LifeHistory",
+                "dpv:Superclass": "dpv:Historical",
+                "Translation_DE": "Lebensgeschichte",
+                "Translation_EN": "Life History",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:LinkClicked",
+                "dpv:Superclass": "dpv:Behavioral",
+                "Translation_DE": "Linkgeklickt",
+                "Translation_EN": "LinkClicked",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
+                "Synonyms": "",
+                "count": 3
+            },
+            {
+                "dpv:Category": "dpv:Location",
+                "dpv:Superclass": "dpv:Tracking",
+                "Translation_DE": "Standort",
+                "Translation_EN": "Location",
+                "Polypoly_Parent_Category": "Persönliche Daten",
+                "Synonyms": "",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:Name",
+                "dpv:Superclass": "dpv:Identifying",
+                "Translation_DE": "Name",
+                "Translation_EN": "Name",
+                "Polypoly_Parent_Category": "Persönliche Daten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:PersonalDataCategory",
+                "dpv:Superclass": "",
+                "Translation_DE": "Persönliche Daten",
+                "Translation_EN": "Personal Data",
+                "Polypoly_Parent_Category": "Persönliche Daten",
+                "Synonyms": "",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:PhysicalAddress",
+                "dpv:Superclass": "dpv:Contact",
+                "Translation_DE": "Physikalische Adresse",
+                "Translation_EN": "Physical Address",
+                "Polypoly_Parent_Category": "Persönliche Daten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:Preference",
+                "dpv:Superclass": "dpv:Internal",
+                "Translation_DE": "Präferenz",
+                "Translation_EN": "Preference",
+                "Polypoly_Parent_Category": "Persönliche Daten",
+                "Synonyms": "",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:PublicLife",
+                "dpv:Superclass": "dpv:Social",
+                "Translation_DE": "Öffentliches Leben",
+                "Translation_EN": "Public Life",
+                "Polypoly_Parent_Category": "Soziale Daten",
+                "Synonyms": "",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:Purchase",
+                "dpv:Superclass": "dpv:Transactional",
+                "Translation_DE": "Einkaufen",
+                "Translation_EN": "Purchase",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "dpv:Superclass": "dpv:Contact",
+                "Translation_DE": "Telefon-Nummer",
+                "Translation_EN": "Telephone Number",
+                "Polypoly_Parent_Category": "Technische Daten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:Tracking",
+                "dpv:Superclass": "dpv:PersonalDataCategory",
+                "Translation_DE": "Nachverfolgung",
+                "Translation_EN": "Tracking",
+                "Polypoly_Parent_Category": "Verhaltensdaten",
+                "Synonyms": "",
+                "count": 11
+            },
+            {
+                "dpv:Category": "dpv:Transactional",
+                "dpv:Superclass": "dpv:Financial",
+                "Translation_DE": "Transaktionsbezogen",
+                "Translation_EN": "Transactional",
+                "Polypoly_Parent_Category": "Wirtschaftliche Daten",
+                "Synonyms": "",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:UID",
+                "dpv:Superclass": "dpv:Identifying",
+                "Translation_DE": "UID",
+                "Translation_EN": "UID",
+                "Polypoly_Parent_Category": "Technische Daten",
+                "Synonyms": "",
+                "count": 13
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": "Banken & Finanzen",
+        "jurisdictionsShared": {
+            "children": [
+                "EU-GDPR"
+            ]
+        }
+    },
+    {
         "name": "Dreamlines Tours GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -1126,67 +1596,6 @@
             "source": null
         },
         "category": null
-    },
-    {
-        "name": "SCHUFA Holding AG",
-        "featured": false,
-        "jurisdiction": "EU-GDPR",
-        "location": {
-            "city": "Wiesbaden",
-            "countryCode": "DE"
-        },
-        "annualRevenues": [
-            {
-                "date": "31.12.2008",
-                "amount": 93933544.07,
-                "currency": "EUR",
-                "year": 2008
-            },
-            {
-                "date": "31.12.2011",
-                "amount": 112726075.64,
-                "currency": "EUR",
-                "year": 2011
-            },
-            {
-                "date": "31.12.2013",
-                "amount": 123432630.49,
-                "currency": "EUR",
-                "year": 2013
-            },
-            {
-                "date": "31.12.2015",
-                "amount": 145823407.53,
-                "currency": "EUR",
-                "year": 2015
-            },
-            {
-                "date": "31.12.2016",
-                "amount": 163752836.37,
-                "currency": "EUR",
-                "year": 2016
-            },
-            {
-                "date": "31.12.2018",
-                "amount": 190277369.04,
-                "currency": "EUR",
-                "year": 2018
-            },
-            {
-                "date": "31.12.2019",
-                "amount": 212245538.2,
-                "currency": "EUR",
-                "year": 2019
-            }
-        ],
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "category": "Banken & Finanzen"
     },
     {
         "name": "Exactag GmbH",

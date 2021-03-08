@@ -25,6 +25,7 @@ function extractAnnualRevenues(entry) {
 }
 
 function parseDataRegion(value) {
+    if (!value) return null;
     if (value instanceof Array)
         return ["GDPR", "EU"].every((part) => value.includes(part))
             ? "EU-GDPR"
@@ -32,11 +33,21 @@ function parseDataRegion(value) {
     return value.indexOf("CCPA") !== -1 ? "Five-Eyes" : value;
 }
 
+function parseLegalName(entityData) {
+    const legalName = entityData.legal_entities[0].identifiers.legal_name.value;
+    if (
+        !legalName &&
+        entityData.legal_entities[0].identifiers.common_name === "Schufa"
+    )
+        return "SCHUFA Holding AG";
+    return legalName;
+}
+
 function parseEntity(entityData) {
-    const entity = entityData.legal_entities[0];
-    const legalName = entity.identifiers.legal_name.value;
+    const legalName = parseLegalName(entityData);
     if (!legalName) return null;
 
+    const legalEntityData = entityData.legal_entities[0];
     return {
         name: legalName,
         featured:
@@ -46,11 +57,12 @@ function parseEntity(entityData) {
                 ? true
                 : false,
         jurisdiction: parseDataRegion(
-            entity.data_collection.data_regions.value
+            legalEntityData.data_collection.data_regions.value
         ),
         location: {
-            city: entity.basic_info.registered_address.value.city,
-            countryCode: entity.basic_info.registered_address.value.country,
+            city: legalEntityData.basic_info.registered_address.value.city,
+            countryCode:
+                legalEntityData.basic_info.registered_address.value.country,
         },
         annualRevenues: extractAnnualRevenues(entityData),
         dataRecipients: entityData.data_recipients
@@ -103,6 +115,23 @@ function parseEntity(entityData) {
 
 const entityKey = (entity) => entity.name.toLowerCase();
 
+function isEmpty(value) {
+    if (value && typeof value === "object")
+        return Object.values(value).every(
+            (nestedValue) => nestedValue === null
+        );
+    return value === null;
+}
+
+function merge(oldEntity, newEntity) {
+    if (!oldEntity) return newEntity;
+    for (let [property, value] of Object.entries(newEntity)) {
+        if (property in oldEntity && !isEmpty(oldEntity[property])) continue;
+        oldEntity[property] = value;
+    }
+    return oldEntity;
+}
+
 function enrichWithJurisdictionsShared(entityMap) {
     for (let entity of Object.values(entityMap)) {
         for (let dataRecipient of entity.dataRecipients || []) {
@@ -130,7 +159,7 @@ function parsePolyPediaCompanyData() {
         if (!entity) return;
 
         const key = entityKey(entity);
-        entityMap[key] = { ...entity, ...(entityMap[key] || {}) };
+        entityMap[key] = merge(entityMap[key], entity);
     });
 
     enrichWithJurisdictionsShared(entityMap);
