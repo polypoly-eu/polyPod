@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-6dp"
             android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/jost_regular"
+            android:fontFamily="@font/jost_light"
             android:textSize="36sp"
             android:lineSpacingExtra="-6sp" />
 
