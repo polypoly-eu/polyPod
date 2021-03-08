@@ -25,8 +25,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/polydisplay_semi_1_0"
-            android:textSize="36sp"
-            android:lineSpacingExtra="-6sp" />
+            android:textSize="@dimen/onboarding_headline_size"
+            android:lineSpacingExtra="@dimen/onboarding_headline_extra_spacing" />
 
         <TextView
             android:id="@+id/headline_sub"
@@ -35,8 +35,8 @@
             android:layout_marginTop="-6dp"
             android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/jost_light"
-            android:textSize="36sp"
-            android:lineSpacingExtra="-6sp" />
+            android:textSize="@dimen/onboarding_headline_size"
+            android:lineSpacingExtra="@dimen/onboarding_headline_extra_spacing" />
 
         <TextView
             android:id="@+id/body_text"
@@ -46,8 +46,8 @@
             android:maxWidth="320dp"
             android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/jost_regular"
-            android:textSize="20sp"
-            android:lineSpacingExtra="-4dp" />
+            android:textSize="@dimen/onboarding_text_size"
+            android:lineSpacingExtra="@dimen/onboarding_text_extra_spacing" />
 
     </LinearLayout>
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="onboarding_headline_size">36sp</dimen>
+    <dimen name="onboarding_headline_extra_spacing">-6sp</dimen>
+    <dimen name="onboarding_text_size">20sp</dimen>
+    <dimen name="onboarding_text_extra_spacing">-4sp</dimen>
+</resources>
