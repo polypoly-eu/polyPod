@@ -23,7 +23,7 @@ describe("Serve", () => {
                 description: "test",
                 thumbnail: "thumbnail_test",
                 primaryColor: "#000000",
-                links: [],
+                links: {},
                 translations: [],
             },
             new DefaultPod(dataset(), fs, fetch)
