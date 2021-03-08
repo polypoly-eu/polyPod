@@ -53,8 +53,6 @@ export default {
         "Yelp Ireland Limited": `Yelp, Inc. ist ein US-amerikanisches Internetunternehmen, das ein Empfehlungsportal für Dienstleister betreibt. Es wurde 2004 von Jeremy Stoppelman und Russel Simmons gegründet, und ihre Yelp-Website wurde im Februar 2005 mit dem Schwerpunkt nutzergenerierte Rezensionen überarbeitet. Zwischen 2005 und 2010 erhielt Yelp eine Kapitalausstattung von 130 Millionen US-Dollar und wurde 2012 eine Aktiengesellschaft am US-Aktienmarkt. Umsätze erwirtschaftet das Unternehmen durch Werbung für Geschäfte auf seiner Website. Sein Internet-Bewertungssystem für gewerbliche Einträge war bereits Gegenstand sowohl von Kontroversen als auch Rechtsstreitigkeiten.`,
         "Zalando SE":
             "Zalando SE mit Sitz in Berlin ist ein börsennotierter Online-Versandhändler für Schuhe, Mode und Kosmetik, welcher 2008 von David Schneider und Robert Gentz gegründet wurde.",
-        fallback:
-            "Für dieses Unternehmen haben wir noch keine Beschreibung, es kommen aber täglich neue dazu!",
     },
     en: {
         "Tado GmbH": `tado° GmbH is a German technology company headquartered in Munich (Germany) and a manufacturer of home thermostats and air conditioning controls.`,

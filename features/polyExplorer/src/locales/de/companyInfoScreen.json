@@ -22,5 +22,7 @@
     "M":
         "Mio",
     "B":
-        "Mrd"
+        "Mrd",
+    "description.fallback":
+        "Für dieses Unternehmen haben wir noch keine Beschreibung, es kommen aber täglich neue dazu!"
 }

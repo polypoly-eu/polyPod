@@ -241,7 +241,9 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                         </Swiper>
                     </div>
                     <p className="company-info-text">
-                        {company.description.value}
+                        {company.description.value
+                            ? company.description.value
+                            : i18n.t("companyInfoScreen:description.fallback")}
                     </p>
 
                     {company.description.source ? (

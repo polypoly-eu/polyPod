@@ -87,7 +87,7 @@ function parsePolyPediaCompanyData() {
                                       )
                                   ]
                               ]
-                            : descriptions.de.fallback,
+                            : null,
                     source:
                         Object.keys(descriptions.de).findIndex(
                             (e) =>
