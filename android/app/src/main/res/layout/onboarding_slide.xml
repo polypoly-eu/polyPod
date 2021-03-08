@@ -21,7 +21,6 @@
             android:id="@+id/headline_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="400dp"
             android:fontFamily="@font/polydisplay_semi_1_0"
             android:textSize="30dp"
             android:textColor="#0f1938" />
@@ -30,7 +29,6 @@
             android:id="@+id/headline_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="400dp"
             android:fontFamily="@font/jost_medium"
             android:textSize="30dp"
             android:textColor="#0f1938" />
