@@ -87,17 +87,17 @@ function parseEntity(entityData) {
                 ) >= 0
                     ? "Wikipedia"
                     : null,
-            category:
-                Object.keys(categories).filter(
-                    (e) => e.toLowerCase() === legalName.toLowerCase()
-                ).length > 0
-                    ? categories[
-                          Object.keys(categories).filter(
-                              (e) => e.toLowerCase() === legalName.toLowerCase()
-                          )[0]
-                      ]
-                    : null,
         },
+        category:
+            Object.keys(categories).filter(
+                (e) => e.toLowerCase() === legalName.toLowerCase()
+            ).length > 0
+                ? categories[
+                      Object.keys(categories).filter(
+                          (e) => e.toLowerCase() === legalName.toLowerCase()
+                      )[0]
+                  ]
+                : null,
     };
 }
 

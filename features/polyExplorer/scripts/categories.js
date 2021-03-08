@@ -7,6 +7,8 @@ export default {
     "Adform Germany GmbH": "Internet & Multimedia",
     "Adidas AG": "Textile & Fashion",
     "Allianz SE": "Insurance",
+    "Amazon Europe Core SARL": "Retail & Consumption",
+    "APPLE INC.": "IT",
     "ASOS Germany GmbH": "Internet & Multimedia",
     "Auto 1 Group GmbH": "Internet & Multimedia",
     "auxmoney GmbH": "Banks & Finance",

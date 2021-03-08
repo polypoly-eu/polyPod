@@ -2433,7 +2433,7 @@
             "value": null,
             "source": null
         },
-        "category": null
+        "category": "IT"
     },
     {
         "name": "AdColony GmbH",
@@ -4744,10 +4744,12 @@
             "value": null,
             "source": null
         },
+        "category": "Retail & Consumption",
         "jurisdictionsShared": {
-            "children": ["EU-GDPR"]
-        },
-        "category": null
+            "children": [
+                "EU-GDPR"
+            ]
+        }
     },
     {
         "name": "Saxonia International Management Consulting GmbH",
