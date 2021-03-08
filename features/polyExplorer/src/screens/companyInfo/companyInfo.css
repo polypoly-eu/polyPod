@@ -176,8 +176,9 @@ p.jurisdictions-label {
     flex: 0 0 auto;
     font-size: 12px;
     margin: 0px auto;
-    width: 80%;
-    max-width: 314px;
+    width: 100%;
+    padding: 0 32px;
+    max-width: 474px;
 }
 
 .gradient-box {
