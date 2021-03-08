@@ -2,5 +2,5 @@
     "label.average":
         "Durchschnitt: {{value}}",
     "label.total":
-        "Gesamt: {{value}}"
+        "Maximum: {{value}}"
 }
