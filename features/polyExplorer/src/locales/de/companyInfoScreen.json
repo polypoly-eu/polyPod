@@ -23,6 +23,8 @@
         "Mio",
     "B":
         "Mrd",
+    "no-data":
+        "Keine Daten",
     "description.fallback":
         "Für dieses Unternehmen haben wir noch keine Beschreibung, es kommen aber täglich neue dazu!"
 }
