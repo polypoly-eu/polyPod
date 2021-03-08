@@ -54,7 +54,7 @@ export default {
         "Zalando SE":
             "Zalando SE mit Sitz in Berlin ist ein börsennotierter Online-Versandhändler für Schuhe, Mode und Kosmetik, welcher 2008 von David Schneider und Robert Gentz gegründet wurde.",
         fallback:
-            "Für dieses Land haben wir noch keine Beschreibung, es kommen aber täglich neue dazu!",
+            "Für dieses Unternehmen haben wir noch keine Beschreibung, es kommen aber täglich neue dazu!",
     },
     en: {
         "Tado GmbH": `tado° GmbH is a German technology company headquartered in Munich (Germany) and a manufacturer of home thermostats and air conditioning controls.`,
