@@ -94,14 +94,10 @@ Object {
     Object {
       "description": "Das ist eine Beispiel-Feature",
       "language": "de",
-      "links": Array [
-        Object {
-          "link1": "https://example.com/1",
-        },
-        Object {
-          "link2": "https://example.com/2",
-        },
-      ],
+      "links": Object {
+        "link1": "https://example.com/1",
+        "link2": "https://example.com/2",
+      },
     },
   ],
   "version": SemVer {
