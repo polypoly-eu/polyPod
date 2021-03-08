@@ -246,7 +246,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             __html: company.description.value
                                 ? company.description.value.replace(
                                       "\n",
-                                      "<br/>"
+                                      "<br/><br/>"
                                   )
                                 : i18n.t(
                                       "companyInfoScreen:description.fallback"
