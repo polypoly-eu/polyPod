@@ -35,9 +35,12 @@ const InfoScreen = ({ onClose }) => (
             }}
         ></div>
 
-        <h1>{i18n.t("infoScreen:headline.aggregation")}</h1>
-        <img src="images/info-aggregation.svg"></img>
-        <p>{i18n.t("infoScreen:text.aggregation")}</p>
+        {/* Hidden for now until we can come up with a text*/}
+        <div style={{ display: "none" }}>
+            <h1>{i18n.t("infoScreen:headline.aggregation")}</h1>
+            <img src="images/info-aggregation.svg"></img>
+            <p>{i18n.t("infoScreen:text.aggregation")}</p>
+        </div>
 
         <h1>{i18n.t("infoScreen:headline.presentation")}</h1>
         <div
