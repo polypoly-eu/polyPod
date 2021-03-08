@@ -9,6 +9,11 @@ SwiperCore.use(Pagination);
 import FeaturedCompany from "../featuredCompany/featuredCompany.jsx";
 import "./featuredCompanyHolder.css";
 
+function calculateAverage(values) {
+    const average = values.reduce((a, b) => a + b, 0) / values.length;
+    return Math.round(10 * average) / 10;
+}
+
 const FeaturedCompanyHolder = ({
     featuredCompanies,
     onActiveScreenChange,
@@ -37,7 +42,7 @@ const FeaturedCompanyHolder = ({
     const averageValues = Object.fromEntries(
         Object.entries(counts).map(([key, value]) => [
             key,
-            Math.round(value.reduce((a, b) => a + b, 0) / value.length),
+            calculateAverage(value),
         ])
     );
     return (
