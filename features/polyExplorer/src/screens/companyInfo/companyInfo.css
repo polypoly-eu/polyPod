@@ -184,6 +184,7 @@ p.jurisdictions-label {
 .gradient-box {
     flex: 0 0 auto;
     width: 100%;
+    margin: 0px auto;
     max-width: 474px;
     height: 20px;
     transform: translateY(-34px);
