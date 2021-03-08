@@ -119,7 +119,6 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                 <div className="no-data-text">
                     {i18n.t("companyInfoScreen:tab.revenue.fallbackText")}
                 </div>
-                <div className="overlay"></div>
             </div>
         );
     } else {
