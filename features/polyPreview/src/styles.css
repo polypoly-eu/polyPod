@@ -44,21 +44,19 @@ h2 {
     font-family: "Jost Light";
 }
 
-button {
+a {
     display: block;
     width: 100%;
     max-width: 300px;
     height: 48px;
     margin: 0 auto;
-    border: none;
     border-radius: 4px;
     background: #fb8a89;
     font-family: "Jost Medium";
     font-size: 14px;
-}
-
-button:focus {
-    outline: 0;
+    text-decoration: none;
+    text-align: center;
+    line-height: 48px;
 }
 
 .swiper-container {
