@@ -1,16 +1,46 @@
 {
-    "button.learnMore":
+    "intro.headline":
         "MISSING",
-    "slide1.headline":
+    "intro.subHeadline":
         "MISSING",
-    "slide1.subHeadline":
+    "intro.bodyText":
         "MISSING",
-    "slide1.bodyText":
+    "explore.headline":
         "MISSING",
-    "slide7.headline":
+    "explore.subHeadline":
         "MISSING",
-    "slide7.subHeadline":
+    "explore.bodyText":
         "MISSING",
-    "slide7.bodyText":
+    "know.headline":
+        "MISSING",
+    "know.subHeadline":
+        "MISSING",
+    "know.bodyText":
+        "MISSING",
+    "correct.headline":
+        "MISSING",
+    "correct.subHeadline":
+        "MISSING",
+    "correct.bodyText":
+        "MISSING",
+    "control.headline":
+        "MISSING",
+    "control.subHeadline":
+        "MISSING",
+    "control.bodyText":
+        "MISSING",
+    "earn.headline":
+        "MISSING",
+    "earn.subHeadline":
+        "MISSING",
+    "earn.bodyText":
+        "MISSING",
+    "outro.headline":
+        "MISSING",
+    "outro.subHeadline":
+        "MISSING",
+    "outro.bodyText":
+        "MISSING",
+    "outro.button.learnMore":
         "MISSING"
 }
