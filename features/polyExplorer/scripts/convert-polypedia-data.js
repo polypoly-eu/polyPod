@@ -104,13 +104,10 @@ function parseEntity(entityData, globalData) {
 
 const entityKey = (entity) => entity.name.toLowerCase();
 
-function isEmpty(value) {
-    if (value && typeof value === "object")
-        return Object.values(value).every(
-            (nestedValue) => nestedValue === null
-        );
-    return value === null || typeof value === "undefined";
-}
+const isEmpty = (value) =>
+    value === null ||
+    typeof value === "undefined" ||
+    (typeof value === "object" && Object.values(value).every(isEmpty));
 
 function mergeEntities(oldEntity, newEntity) {
     if (!oldEntity) return newEntity;
