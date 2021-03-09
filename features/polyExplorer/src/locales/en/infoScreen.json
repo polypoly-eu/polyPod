@@ -18,7 +18,7 @@
     "headline.aggregation":
         "Aggregation",
     "text.aggregation":
-        "We work on making data clear and understandable, This means that we build correlations, between datasets, that we aggregate data to make it more accessible and comparable.",
+        "<p>We work on making data clear and understandable, This means that we build correlations, between datasets, and also aggregate data to make it more accessible and comparable.</p><p>To get from a Privacy Policy document that is often vague and uses a lot of open language to a clear and comparable representation of data flows can be challenging.</p><p>Over the course of interpreting vague and indefinite language, our researchers have tried to be as specific as can be where possible, but making sure they don't read more into a text than is there. Regarding ambiguous statements in privacy policies, we have aimed to use the W3C Data Privacy Vocabulary (in short: DPV) to the appropriate level of granularity. For example, when a vague statement could be referring to a number of datatypes, we chose the DPV term that covers the possibilities more generally.</p>",
     "headline.presentation":
         "Presentation",
     "text.presentation":
