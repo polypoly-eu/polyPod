@@ -2,1003 +2,1253 @@
     "countries": {
         "AD": {
             "Name_EN": "Andorra",
-            "Name_DE": "Andorra"
+            "Name_DE": "Andorra",
+            "dataRegion": "EU-GDPR"
         },
         "AE": {
             "Name_EN": "United Arab Emirates",
-            "Name_DE": "Vereinigte Arabische Emirate"
+            "Name_DE": "Vereinigte Arabische Emirate",
+            "dataRegion": "Unknown"
         },
         "AF": {
             "Name_EN": "Afghanistan",
-            "Name_DE": "Afghanistan"
+            "Name_DE": "Afghanistan",
+            "dataRegion": "Unknown"
         },
         "AG": {
             "Name_EN": "Antigua and Barbuda",
-            "Name_DE": "Antigua und Barbuda"
+            "Name_DE": "Antigua und Barbuda",
+            "dataRegion": "Unknown"
         },
         "AI": {
             "Name_EN": "Anguilla",
-            "Name_DE": "Anguilla"
+            "Name_DE": "Anguilla",
+            "dataRegion": "Five-Eyes"
         },
         "AL": {
             "Name_EN": "Albania",
-            "Name_DE": "Albanien"
+            "Name_DE": "Albanien",
+            "dataRegion": "Unknown"
         },
         "AM": {
             "Name_EN": "Armenia",
-            "Name_DE": "Armenien"
+            "Name_DE": "Armenien",
+            "dataRegion": "Unknown"
         },
         "AO": {
             "Name_EN": "Angola",
-            "Name_DE": "Angola"
+            "Name_DE": "Angola",
+            "dataRegion": "Unknown"
         },
         "AQ": {
             "Name_EN": "Antarctica",
-            "Name_DE": "Antarktis"
+            "Name_DE": "Antarktis",
+            "dataRegion": "Unknown"
         },
         "AR": {
             "Name_EN": "Argentina",
-            "Name_DE": "Argentinien"
+            "Name_DE": "Argentinien",
+            "dataRegion": "Unknown"
         },
         "AS": {
             "Name_EN": "American Samoa",
-            "Name_DE": "Amerikanisch-Samoa"
+            "Name_DE": "Amerikanisch-Samoa",
+            "dataRegion": "Five-Eyes"
         },
         "AT": {
             "Name_EN": "Austria",
-            "Name_DE": "Österreich"
+            "Name_DE": "Österreich",
+            "dataRegion": "EU-GDPR"
         },
         "AU": {
             "Name_EN": "Australia",
-            "Name_DE": "Australien"
+            "Name_DE": "Australien",
+            "dataRegion": "Five-Eyes"
         },
         "AW": {
             "Name_EN": "Aruba",
-            "Name_DE": "Aruba"
+            "Name_DE": "Aruba",
+            "dataRegion": ""
         },
         "AX": {
             "Name_EN": "Åland Islands",
-            "Name_DE": "Åland-Inseln"
+            "Name_DE": "Åland-Inseln",
+            "dataRegion": "Unknown"
         },
         "AZ": {
             "Name_EN": "Azerbaijan",
-            "Name_DE": "Aserbaidschan"
+            "Name_DE": "Aserbaidschan",
+            "dataRegion": "Unknown"
         },
         "BA": {
             "Name_EN": "Bosnia and Herzegovina",
-            "Name_DE": "Bosnien und Herzegowina"
+            "Name_DE": "Bosnien und Herzegowina",
+            "dataRegion": "Unknown"
         },
         "BB": {
             "Name_EN": "Barbados",
-            "Name_DE": "Barbados"
+            "Name_DE": "Barbados",
+            "dataRegion": "Unknown"
         },
         "BD": {
             "Name_EN": "Bangladesh",
-            "Name_DE": "Bangladesch"
+            "Name_DE": "Bangladesch",
+            "dataRegion": "Unknown"
         },
         "BE": {
             "Name_EN": "Belgium",
-            "Name_DE": "Belgien"
+            "Name_DE": "Belgien",
+            "dataRegion": "EU-GDPR"
         },
         "BF": {
             "Name_EN": "Burkina Faso",
-            "Name_DE": "Burkina Faso"
+            "Name_DE": "Burkina Faso",
+            "dataRegion": "Unknown"
         },
         "BG": {
             "Name_EN": "Bulgaria",
-            "Name_DE": "Bulgarien"
+            "Name_DE": "Bulgarien",
+            "dataRegion": "Unknown"
         },
         "BH": {
             "Name_EN": "Bahrain",
-            "Name_DE": "Bahrain"
+            "Name_DE": "Bahrain",
+            "dataRegion": "Unknown"
         },
         "BI": {
             "Name_EN": "Burundi",
-            "Name_DE": "Burundi"
+            "Name_DE": "Burundi",
+            "dataRegion": "Unknown"
         },
         "BJ": {
             "Name_EN": "Benin",
-            "Name_DE": "Benin"
+            "Name_DE": "Benin",
+            "dataRegion": "Unknown"
         },
         "BL": {
             "Name_EN": "Saint Barthélemy",
-            "Name_DE": "St. Barthélemy"
+            "Name_DE": "St. Barthélemy",
+            "dataRegion": "EU-GDPR"
         },
         "BM": {
             "Name_EN": "Bermuda",
-            "Name_DE": "Bermuda"
+            "Name_DE": "Bermuda",
+            "dataRegion": "Five-Eyes"
         },
         "BN": {
             "Name_EN": "Brunei Darussalam",
-            "Name_DE": "Brunei Darussalam"
+            "Name_DE": "Brunei Darussalam",
+            "dataRegion": "Unknown"
         },
         "BO": {
             "Name_EN": "Bolivia",
-            "Name_DE": "Bolivien"
+            "Name_DE": "Bolivien",
+            "dataRegion": "Unknown"
         },
         "BQ": {
             "Name_EN": "Bonaire, Sint Eustatius and Saba",
-            "Name_DE": "Bonaire, Sint Eustatius und Saba"
+            "Name_DE": "Bonaire, Sint Eustatius und Saba",
+            "dataRegion": "EU-GDPR"
         },
         "BR": {
             "Name_EN": "Brazil",
-            "Name_DE": "Brasilien"
+            "Name_DE": "Brasilien",
+            "dataRegion": "Unknown"
         },
         "BS": {
             "Name_EN": "Bahamas",
-            "Name_DE": "Bahamas"
+            "Name_DE": "Bahamas",
+            "dataRegion": "Unknown"
         },
         "BT": {
             "Name_EN": "Bhutan",
-            "Name_DE": "Bhutan"
+            "Name_DE": "Bhutan",
+            "dataRegion": "Unknown"
         },
         "BW": {
             "Name_EN": "Botswana",
-            "Name_DE": "Botswana"
+            "Name_DE": "Botswana",
+            "dataRegion": "Unknown"
         },
         "BY": {
             "Name_EN": "Belarus",
-            "Name_DE": "Weißrussland"
+            "Name_DE": "Weißrussland",
+            "dataRegion": "Unknown"
         },
         "BZ": {
             "Name_EN": "Belize",
-            "Name_DE": "Belize"
+            "Name_DE": "Belize",
+            "dataRegion": "Unknown"
         },
         "CA": {
             "Name_EN": "Canada",
-            "Name_DE": "Kanada"
+            "Name_DE": "Kanada",
+            "dataRegion": "Five-Eyes"
         },
         "CC": {
             "Name_EN": "Cocos (Keeling) Islands",
-            "Name_DE": "Cocos (Keeling) Inseln"
+            "Name_DE": "Cocos (Keeling) Inseln",
+            "dataRegion": "Unknown"
         },
         "CD": {
             "Name_EN": "Congo, The Democratic Republic of the",
-            "Name_DE": "Kongo, die Demokratische Republik"
+            "Name_DE": "Kongo, die Demokratische Republik",
+            "dataRegion": "Unknown"
         },
         "CF": {
             "Name_EN": "Central African Republic",
-            "Name_DE": "Zentralafrikanische Republik"
+            "Name_DE": "Zentralafrikanische Republik",
+            "dataRegion": "Unknown"
         },
         "CG": {
             "Name_EN": "Congo",
-            "Name_DE": "Kongo"
+            "Name_DE": "Kongo",
+            "dataRegion": "Unknown"
         },
         "CH": {
             "Name_EN": "Switzerland",
-            "Name_DE": "Schweiz"
+            "Name_DE": "Schweiz",
+            "dataRegion": "EU-GDPR"
         },
         "CI": {
             "Name_EN": "Côte d'Ivoire",
-            "Name_DE": "Côte d'Ivoire"
+            "Name_DE": "Côte d'Ivoire",
+            "dataRegion": "Unknown"
         },
         "CK": {
             "Name_EN": "Cook Islands",
-            "Name_DE": "Cook-Inseln"
+            "Name_DE": "Cook-Inseln",
+            "dataRegion": "Unknown"
         },
         "CL": {
             "Name_EN": "Chile",
-            "Name_DE": "Chile"
+            "Name_DE": "Chile",
+            "dataRegion": "Unknown"
         },
         "CM": {
             "Name_EN": "Cameroon",
-            "Name_DE": "Kamerun"
+            "Name_DE": "Kamerun",
+            "dataRegion": "Unknown"
         },
         "CN": {
             "Name_EN": "China",
-            "Name_DE": "China"
+            "Name_DE": "China",
+            "dataRegion": "China"
         },
         "CO": {
             "Name_EN": "Colombia",
-            "Name_DE": "Kolumbien"
+            "Name_DE": "Kolumbien",
+            "dataRegion": "Unknown"
         },
         "CR": {
             "Name_EN": "Costa Rica",
-            "Name_DE": "Costa Rica"
+            "Name_DE": "Costa Rica",
+            "dataRegion": "Unknown"
         },
         "CU": {
             "Name_EN": "Cuba",
-            "Name_DE": "Kuba"
+            "Name_DE": "Kuba",
+            "dataRegion": "Unknown"
         },
         "CV": {
             "Name_EN": "Cape Verde",
-            "Name_DE": "Kap Verde"
+            "Name_DE": "Kap Verde",
+            "dataRegion": "Unknown"
         },
         "CW": {
             "Name_EN": "Curaçao",
-            "Name_DE": "Curaçao"
+            "Name_DE": "Curaçao",
+            "dataRegion": "EU-GDPR"
         },
         "CX": {
             "Name_EN": "Christmas Island",
-            "Name_DE": "Weihnachtsinsel"
+            "Name_DE": "Weihnachtsinsel",
+            "dataRegion": "Unknown"
         },
         "CY": {
             "Name_EN": "Cyprus",
-            "Name_DE": "Zypern"
+            "Name_DE": "Zypern",
+            "dataRegion": "EU-GDPR"
         },
         "CZ": {
             "Name_EN": "Czech Republic",
-            "Name_DE": "Tschechische Republik"
+            "Name_DE": "Tschechische Republik",
+            "dataRegion": "EU-GDPR"
         },
         "DE": {
             "Name_EN": "Germany",
-            "Name_DE": "Deutschland"
+            "Name_DE": "Deutschland",
+            "dataRegion": "EU-GDPR"
         },
         "DJ": {
             "Name_EN": "Djibouti",
-            "Name_DE": "Dschibuti"
+            "Name_DE": "Dschibuti",
+            "dataRegion": "Unknown"
         },
         "DK": {
             "Name_EN": "Denmark",
-            "Name_DE": "Dänemark"
+            "Name_DE": "Dänemark",
+            "dataRegion": "EU-GDPR"
         },
         "DM": {
             "Name_EN": "Dominica",
-            "Name_DE": "Dominica"
+            "Name_DE": "Dominica",
+            "dataRegion": "Unknown"
         },
         "DO": {
             "Name_EN": "Dominican Republic",
-            "Name_DE": "Dominikanische Republik"
+            "Name_DE": "Dominikanische Republik",
+            "dataRegion": "Unknown"
         },
         "DZ": {
             "Name_EN": "Algeria",
-            "Name_DE": "Algerien"
+            "Name_DE": "Algerien",
+            "dataRegion": "Unknown"
         },
         "EC": {
             "Name_EN": "Ecuador",
-            "Name_DE": "Ecuador"
+            "Name_DE": "Ecuador",
+            "dataRegion": "Unknown"
         },
         "EE": {
             "Name_EN": "Estonia",
-            "Name_DE": "Estland"
+            "Name_DE": "Estland",
+            "dataRegion": "Unknown"
         },
         "EG": {
             "Name_EN": "Egypt",
-            "Name_DE": "Ägypten"
+            "Name_DE": "Ägypten",
+            "dataRegion": "Unknown"
         },
         "EH": {
             "Name_EN": "Western Sahara",
-            "Name_DE": "Westsahara"
+            "Name_DE": "Westsahara",
+            "dataRegion": "Unknown"
         },
         "ER": {
             "Name_EN": "Eritrea",
-            "Name_DE": "Eritrea"
+            "Name_DE": "Eritrea",
+            "dataRegion": "Unknown"
         },
         "ES": {
             "Name_EN": "Spain",
-            "Name_DE": "Spanien"
+            "Name_DE": "Spanien",
+            "dataRegion": "Unknown"
         },
         "ET": {
             "Name_EN": "Ethiopia",
-            "Name_DE": "Äthiopien"
+            "Name_DE": "Äthiopien",
+            "dataRegion": "Unknown"
         },
         "FI": {
             "Name_EN": "Finland",
-            "Name_DE": "Finnland"
+            "Name_DE": "Finnland",
+            "dataRegion": "EU-GDPR"
         },
         "FJ": {
             "Name_EN": "Fiji",
-            "Name_DE": "Fidschi"
+            "Name_DE": "Fidschi",
+            "dataRegion": "Unknown"
         },
         "FK": {
             "Name_EN": "Falkland Islands (Malvinas)",
-            "Name_DE": "Falklandinseln (Malwinen)"
+            "Name_DE": "Falklandinseln (Malwinen)",
+            "dataRegion": "Five-Eyes"
         },
         "FM": {
             "Name_EN": "Micronesia, Federated States of",
-            "Name_DE": "Mikronesien, Föderierte Staaten von"
+            "Name_DE": "Mikronesien, Föderierte Staaten von",
+            "dataRegion": "Unknown"
         },
         "FO": {
             "Name_EN": "Faroe Islands",
-            "Name_DE": "Färöer Inseln"
+            "Name_DE": "Färöer Inseln",
+            "dataRegion": "Unknown"
         },
         "FR": {
             "Name_EN": "France",
-            "Name_DE": "Frankreich"
+            "Name_DE": "Frankreich",
+            "dataRegion": "EU-GDPR"
         },
         "GA": {
             "Name_EN": "Gabon",
-            "Name_DE": "Gabun"
+            "Name_DE": "Gabun",
+            "dataRegion": "Unknown"
         },
         "GB": {
             "Name_EN": "United Kingdom",
-            "Name_DE": "Vereinigtes Königreich"
+            "Name_DE": "Vereinigtes Königreich",
+            "dataRegion": "Five-Eyes"
         },
         "GD": {
             "Name_EN": "Grenada",
-            "Name_DE": "Grenada"
+            "Name_DE": "Grenada",
+            "dataRegion": "Unknown"
         },
         "GE": {
             "Name_EN": "Georgia",
-            "Name_DE": "Georgien"
+            "Name_DE": "Georgien",
+            "dataRegion": "Unknown"
         },
         "GF": {
             "Name_EN": "French Guiana",
-            "Name_DE": "Französisch-Guayana"
+            "Name_DE": "Französisch-Guayana",
+            "dataRegion": "EU-GDPR"
         },
         "GG": {
             "Name_EN": "Guernsey",
-            "Name_DE": "Guernsey"
+            "Name_DE": "Guernsey",
+            "dataRegion": "EU-GDPR"
         },
         "GH": {
             "Name_EN": "Ghana",
-            "Name_DE": "Ghana"
+            "Name_DE": "Ghana",
+            "dataRegion": "Unknown"
         },
         "GI": {
             "Name_EN": "Gibraltar",
-            "Name_DE": "Gibraltar"
+            "Name_DE": "Gibraltar",
+            "dataRegion": "EU-GDPR"
         },
         "GL": {
             "Name_EN": "Greenland",
-            "Name_DE": "Grönland"
+            "Name_DE": "Grönland",
+            "dataRegion": "Unknown"
         },
         "GM": {
             "Name_EN": "Gambia",
-            "Name_DE": "Gambia"
+            "Name_DE": "Gambia",
+            "dataRegion": "Unknown"
         },
         "GN": {
             "Name_EN": "Guinea",
-            "Name_DE": "Guinea"
+            "Name_DE": "Guinea",
+            "dataRegion": "Unknown"
         },
         "GP": {
             "Name_EN": "Guadeloupe",
-            "Name_DE": "Guadeloupe"
+            "Name_DE": "Guadeloupe",
+            "dataRegion": "EU-GDPR"
         },
         "GQ": {
             "Name_EN": "Equatorial Guinea",
-            "Name_DE": "Äquatorial-Guinea"
+            "Name_DE": "Äquatorial-Guinea",
+            "dataRegion": "Unknown"
         },
         "GR": {
             "Name_EN": "Greece",
-            "Name_DE": "Griechenland"
+            "Name_DE": "Griechenland",
+            "dataRegion": "EU-GDPR"
         },
         "GS": {
             "Name_EN": "South Georgia and the South Sandwich Islands",
-            "Name_DE": "Südgeorgien und die Südlichen Sandwichinseln"
+            "Name_DE": "Südgeorgien und die Südlichen Sandwichinseln",
+            "dataRegion": "Five-Eyes"
         },
         "GT": {
             "Name_EN": "Guatemala",
-            "Name_DE": "Guatemala"
+            "Name_DE": "Guatemala",
+            "dataRegion": "Unknown"
         },
         "GU": {
             "Name_EN": "Guam",
-            "Name_DE": "Guam"
+            "Name_DE": "Guam",
+            "dataRegion": "Unknown"
         },
         "GW": {
             "Name_EN": "Guinea-Bissau",
-            "Name_DE": "Guinea-Bissau"
+            "Name_DE": "Guinea-Bissau",
+            "dataRegion": "Unknown"
         },
         "GY": {
             "Name_EN": "Guyana",
-            "Name_DE": "Guyana"
+            "Name_DE": "Guyana",
+            "dataRegion": "Unknown"
         },
         "HK": {
             "Name_EN": "Hong Kong",
-            "Name_DE": "Hongkong"
+            "Name_DE": "Hongkong",
+            "dataRegion": "Unknown"
         },
         "HM": {
             "Name_EN": "Heard Island and McDonald Islands",
-            "Name_DE": "Heard-Insel und McDonald-Inseln"
+            "Name_DE": "Heard-Insel und McDonald-Inseln",
+            "dataRegion": "Unknown"
         },
         "HN": {
             "Name_EN": "Honduras",
-            "Name_DE": "Honduras"
+            "Name_DE": "Honduras",
+            "dataRegion": "Unknown"
         },
         "HR": {
             "Name_EN": "Croatia",
-            "Name_DE": "Kroatien"
+            "Name_DE": "Kroatien",
+            "dataRegion": "EU-GDPR"
         },
         "HT": {
             "Name_EN": "Haiti",
-            "Name_DE": "Haiti"
+            "Name_DE": "Haiti",
+            "dataRegion": "Unknown"
         },
         "HU": {
             "Name_EN": "Hungary",
-            "Name_DE": "Ungarn"
+            "Name_DE": "Ungarn",
+            "dataRegion": "EU-GDPR"
         },
         "ID": {
             "Name_EN": "Indonesia",
-            "Name_DE": "Indonesien"
+            "Name_DE": "Indonesien",
+            "dataRegion": "Unknown"
         },
         "IE": {
             "Name_EN": "Ireland",
-            "Name_DE": "Irland"
+            "Name_DE": "Irland",
+            "dataRegion": "EU-GDPR"
         },
         "IL": {
             "Name_EN": "Israel",
-            "Name_DE": "Israel"
+            "Name_DE": "Israel",
+            "dataRegion": "Unknown"
         },
         "IM": {
             "Name_EN": "Isle of Man",
-            "Name_DE": "Isle of Man"
+            "Name_DE": "Isle of Man",
+            "dataRegion": "Five-Eyes"
         },
         "IN": {
             "Name_EN": "India",
-            "Name_DE": "Indien"
+            "Name_DE": "Indien",
+            "dataRegion": "Unknown"
         },
         "IO": {
             "Name_EN": "British Indian Ocean Territory",
-            "Name_DE": "Britisches Territorium im Indischen Ozean"
+            "Name_DE": "Britisches Territorium im Indischen Ozean",
+            "dataRegion": "Five-Eyes"
         },
         "IQ": {
             "Name_EN": "Iraq",
-            "Name_DE": "Irak"
+            "Name_DE": "Irak",
+            "dataRegion": "Unknown"
         },
         "IR": {
             "Name_EN": "Iran, Islamic Republic of",
-            "Name_DE": "Iran, Islamische Republik"
+            "Name_DE": "Iran, Islamische Republik",
+            "dataRegion": "Unknown"
         },
         "IS": {
             "Name_EN": "Iceland",
-            "Name_DE": "Island"
+            "Name_DE": "Island",
+            "dataRegion": "Unknown"
         },
         "IT": {
             "Name_EN": "Italy",
-            "Name_DE": "Italien"
+            "Name_DE": "Italien",
+            "dataRegion": "EU-GDPR"
         },
         "JE": {
             "Name_EN": "Jersey",
-            "Name_DE": "Jersey"
+            "Name_DE": "Jersey",
+            "dataRegion": "Five-Eyes"
         },
         "JM": {
             "Name_EN": "Jamaica",
-            "Name_DE": "Jamaika"
+            "Name_DE": "Jamaika",
+            "dataRegion": "Unknown"
         },
         "JO": {
             "Name_EN": "Jordan",
-            "Name_DE": "Jordanien"
+            "Name_DE": "Jordanien",
+            "dataRegion": "Unknown"
         },
         "JP": {
             "Name_EN": "Japan",
-            "Name_DE": "Japan"
+            "Name_DE": "Japan",
+            "dataRegion": "Unknown"
         },
         "KE": {
             "Name_EN": "Kenya",
-            "Name_DE": "Kenia"
+            "Name_DE": "Kenia",
+            "dataRegion": "Unknown"
         },
         "KG": {
             "Name_EN": "Kyrgyzstan",
-            "Name_DE": "Kirgisistan"
+            "Name_DE": "Kirgisistan",
+            "dataRegion": "Unknown"
         },
         "KH": {
             "Name_EN": "Cambodia",
-            "Name_DE": "Kambodscha"
+            "Name_DE": "Kambodscha",
+            "dataRegion": "Unknown"
         },
         "KI": {
             "Name_EN": "Kiribati",
-            "Name_DE": "Kiribati"
+            "Name_DE": "Kiribati",
+            "dataRegion": "Unknown"
         },
         "KM": {
             "Name_EN": "Comoros",
-            "Name_DE": "Komoren"
+            "Name_DE": "Komoren",
+            "dataRegion": "Unknown"
         },
         "KN": {
             "Name_EN": "Saint Kitts and Nevis",
-            "Name_DE": "St. Kitts und Nevis"
+            "Name_DE": "St. Kitts und Nevis",
+            "dataRegion": "Unknown"
         },
         "KP": {
             "Name_EN": "Korea, Democratic People's Republic of",
-            "Name_DE": "Korea, Demokratische Volksrepublik"
+            "Name_DE": "Korea, Demokratische Volksrepublik",
+            "dataRegion": "Unknown"
         },
         "KR": {
             "Name_EN": "Korea, Republic of",
-            "Name_DE": "Korea, Republik"
+            "Name_DE": "Korea, Republik",
+            "dataRegion": "Unknown"
         },
         "KW": {
             "Name_EN": "Kuwait",
-            "Name_DE": "Kuwait"
+            "Name_DE": "Kuwait",
+            "dataRegion": "Unknown"
         },
         "KY": {
             "Name_EN": "Cayman Islands",
-            "Name_DE": "Cayman-Inseln"
+            "Name_DE": "Cayman-Inseln",
+            "dataRegion": "Five-Eyes"
         },
         "KZ": {
             "Name_EN": "Kazakhstan",
-            "Name_DE": "Kasachstan"
+            "Name_DE": "Kasachstan",
+            "dataRegion": "Unknown"
         },
         "LA": {
             "Name_EN": "Lao People's Democratic Republic",
-            "Name_DE": "Laotische Demokratische Volksrepublik"
+            "Name_DE": "Laotische Demokratische Volksrepublik",
+            "dataRegion": "Unknown"
         },
         "LB": {
             "Name_EN": "Lebanon",
-            "Name_DE": "Libanon"
+            "Name_DE": "Libanon",
+            "dataRegion": "Unknown"
         },
         "LC": {
             "Name_EN": "Saint Lucia",
-            "Name_DE": "St. Lucia"
+            "Name_DE": "St. Lucia",
+            "dataRegion": "Unknown"
         },
         "LI": {
             "Name_EN": "Liechtenstein",
-            "Name_DE": "Liechtenstein"
+            "Name_DE": "Liechtenstein",
+            "dataRegion": "EU-GDPR"
         },
         "LK": {
             "Name_EN": "Sri Lanka",
-            "Name_DE": "Sri Lanka"
+            "Name_DE": "Sri Lanka",
+            "dataRegion": "Unknown"
         },
         "LR": {
             "Name_EN": "Liberia",
-            "Name_DE": "Liberia"
+            "Name_DE": "Liberia",
+            "dataRegion": "Unknown"
         },
         "LS": {
             "Name_EN": "Lesotho",
-            "Name_DE": "Lesotho"
+            "Name_DE": "Lesotho",
+            "dataRegion": "Unknown"
         },
         "LT": {
             "Name_EN": "Lithuania",
-            "Name_DE": "Litauen"
+            "Name_DE": "Litauen",
+            "dataRegion": "EU-GDPR"
         },
         "LU": {
             "Name_EN": "Luxembourg",
-            "Name_DE": "Luxemburg"
+            "Name_DE": "Luxemburg",
+            "dataRegion": "EU-GDPR"
         },
         "LV": {
             "Name_EN": "Latvia",
-            "Name_DE": "Lettland"
+            "Name_DE": "Lettland",
+            "dataRegion": "EU-GDPR"
         },
         "LY": {
             "Name_EN": "Libya",
-            "Name_DE": "Libyen"
+            "Name_DE": "Libyen",
+            "dataRegion": "Unknown"
         },
         "MA": {
             "Name_EN": "Morocco",
-            "Name_DE": "Marokko"
+            "Name_DE": "Marokko",
+            "dataRegion": "Unknown"
         },
         "MC": {
             "Name_EN": "Monaco",
-            "Name_DE": "Monaco"
+            "Name_DE": "Monaco",
+            "dataRegion": "Unknown"
         },
         "MD": {
             "Name_EN": "Moldova, Republic of",
-            "Name_DE": "Moldawien, Republik"
+            "Name_DE": "Moldawien, Republik",
+            "dataRegion": "Unknown"
         },
         "ME": {
             "Name_EN": "Montenegro",
-            "Name_DE": "Montenegro"
+            "Name_DE": "Montenegro",
+            "dataRegion": "EU-GDPR"
         },
         "MF": {
             "Name_EN": "Saint Martin (French Part)",
-            "Name_DE": "St. Martin (französischer Teil)"
+            "Name_DE": "St. Martin (französischer Teil)",
+            "dataRegion": "EU-GDPR"
         },
         "MG": {
             "Name_EN": "Madagascar",
-            "Name_DE": "Madagaskar"
+            "Name_DE": "Madagaskar",
+            "dataRegion": "Unknown"
         },
         "MH": {
             "Name_EN": "Marshall Islands",
-            "Name_DE": "Marshall-Inseln"
+            "Name_DE": "Marshall-Inseln",
+            "dataRegion": "Unknown"
         },
         "MK": {
             "Name_EN": "Macedonia, The former Yugoslav Republic of",
-            "Name_DE": "Mazedonien, die ehemalige jugoslawische Republik"
+            "Name_DE": "Mazedonien, die ehemalige jugoslawische Republik",
+            "dataRegion": "Unknown"
         },
         "ML": {
             "Name_EN": "Mali",
-            "Name_DE": "Mali"
+            "Name_DE": "Mali",
+            "dataRegion": "Unknown"
         },
         "MM": {
             "Name_EN": "Myanmar",
-            "Name_DE": "Myanmar"
+            "Name_DE": "Myanmar",
+            "dataRegion": "Unknown"
         },
         "MN": {
             "Name_EN": "Mongolia",
-            "Name_DE": "Mongolei"
+            "Name_DE": "Mongolei",
+            "dataRegion": "Unknown"
         },
         "MO": {
             "Name_EN": "Macao",
-            "Name_DE": "Macao"
+            "Name_DE": "Macao",
+            "dataRegion": ""
         },
         "MP": {
             "Name_EN": "Northern Mariana Islands",
-            "Name_DE": "Nördliche Marianen"
+            "Name_DE": "Nördliche Marianen",
+            "dataRegion": "Unknown"
         },
         "MQ": {
             "Name_EN": "Martinique",
-            "Name_DE": "Martinique"
+            "Name_DE": "Martinique",
+            "dataRegion": "EU-GDPR"
         },
         "MR": {
             "Name_EN": "Mauritania",
-            "Name_DE": "Mauretanien"
+            "Name_DE": "Mauretanien",
+            "dataRegion": "Unknown"
         },
         "MS": {
             "Name_EN": "Montserrat",
-            "Name_DE": "Montserrat"
+            "Name_DE": "Montserrat",
+            "dataRegion": "Unknown"
         },
         "MT": {
             "Name_EN": "Malta",
-            "Name_DE": "Malta"
+            "Name_DE": "Malta",
+            "dataRegion": "EU-GDPR"
         },
         "MU": {
             "Name_EN": "Mauritius",
-            "Name_DE": "Mauritius"
+            "Name_DE": "Mauritius",
+            "dataRegion": "Unknown"
         },
         "MV": {
             "Name_EN": "Maldives",
-            "Name_DE": "Malediven"
+            "Name_DE": "Malediven",
+            "dataRegion": "Unknown"
         },
         "MW": {
             "Name_EN": "Malawi",
-            "Name_DE": "Malawi"
+            "Name_DE": "Malawi",
+            "dataRegion": "Unknown"
         },
         "MX": {
             "Name_EN": "Mexico",
-            "Name_DE": "Mexiko"
+            "Name_DE": "Mexiko",
+            "dataRegion": "Unknown"
         },
         "MY": {
             "Name_EN": "Malaysia",
-            "Name_DE": "Malaysia"
+            "Name_DE": "Malaysia",
+            "dataRegion": "Unknown"
         },
         "MZ": {
             "Name_EN": "Mozambique",
-            "Name_DE": "Mosambik"
+            "Name_DE": "Mosambik",
+            "dataRegion": "Unknown"
         },
         "NA": {
             "Name_EN": "Namibia",
-            "Name_DE": "Namibia"
+            "Name_DE": "Namibia",
+            "dataRegion": "Unknown"
         },
         "NC": {
             "Name_EN": "New Caledonia",
-            "Name_DE": "Neukaledonien"
+            "Name_DE": "Neukaledonien",
+            "dataRegion": "EU-GDPR"
         },
         "NE": {
             "Name_EN": "Niger",
-            "Name_DE": "Niger"
+            "Name_DE": "Niger",
+            "dataRegion": "Unknown"
         },
         "NF": {
             "Name_EN": "Norfolk Island",
-            "Name_DE": "Norfolkinsel"
+            "Name_DE": "Norfolkinsel",
+            "dataRegion": "Five-Eyes"
         },
         "NG": {
             "Name_EN": "Nigeria",
-            "Name_DE": "Nigeria"
+            "Name_DE": "Nigeria",
+            "dataRegion": "Unknown"
         },
         "NI": {
             "Name_EN": "Nicaragua",
-            "Name_DE": "Nicaragua"
+            "Name_DE": "Nicaragua",
+            "dataRegion": "Unknown"
         },
         "NL": {
             "Name_EN": "Netherlands",
-            "Name_DE": "Niederlande"
+            "Name_DE": "Niederlande",
+            "dataRegion": "EU-GDPR"
         },
         "NO": {
             "Name_EN": "Norway",
-            "Name_DE": "Norwegen"
+            "Name_DE": "Norwegen",
+            "dataRegion": "EU-GDPR"
         },
         "NP": {
             "Name_EN": "Nepal",
-            "Name_DE": "Nepal"
+            "Name_DE": "Nepal",
+            "dataRegion": "Unknown"
         },
         "NR": {
             "Name_EN": "Nauru",
-            "Name_DE": "Nauru"
+            "Name_DE": "Nauru",
+            "dataRegion": "Unknown"
         },
         "NU": {
             "Name_EN": "Niue",
-            "Name_DE": "Niue"
+            "Name_DE": "Niue",
+            "dataRegion": "Unknown"
         },
         "NZ": {
             "Name_EN": "New Zealand",
-            "Name_DE": "Neu Seeland"
+            "Name_DE": "Neu Seeland",
+            "dataRegion": "Five-Eyes"
         },
         "OM": {
             "Name_EN": "Oman",
-            "Name_DE": "Oman"
+            "Name_DE": "Oman",
+            "dataRegion": "Unknown"
         },
         "PA": {
             "Name_EN": "Panama",
-            "Name_DE": "Panama"
+            "Name_DE": "Panama",
+            "dataRegion": "Unknown"
         },
         "PE": {
             "Name_EN": "Peru",
-            "Name_DE": "Peru"
+            "Name_DE": "Peru",
+            "dataRegion": "Unknown"
         },
         "PF": {
             "Name_EN": "French Polynesia",
-            "Name_DE": "Französisch-Polynesien"
+            "Name_DE": "Französisch-Polynesien",
+            "dataRegion": "EU-GDPR"
         },
         "PG": {
             "Name_EN": "Papua New Guinea",
-            "Name_DE": "Papua-Neuguinea"
+            "Name_DE": "Papua-Neuguinea",
+            "dataRegion": "Unknown"
         },
         "PH": {
             "Name_EN": "Philippines",
-            "Name_DE": "Philippinen"
+            "Name_DE": "Philippinen",
+            "dataRegion": "Unknown"
         },
         "PK": {
             "Name_EN": "Pakistan",
-            "Name_DE": "Pakistan"
+            "Name_DE": "Pakistan",
+            "dataRegion": "Unknown"
         },
         "PL": {
             "Name_EN": "Poland",
-            "Name_DE": "Polen"
+            "Name_DE": "Polen",
+            "dataRegion": "EU-GDPR"
         },
         "PM": {
             "Name_EN": "Saint Pierre and Miquelon",
-            "Name_DE": "St. Pierre und Miquelon"
+            "Name_DE": "St. Pierre und Miquelon",
+            "dataRegion": "EU-GDPR"
         },
         "PN": {
             "Name_EN": "Pitcairn",
-            "Name_DE": "Pitcairn"
+            "Name_DE": "Pitcairn",
+            "dataRegion": "Five-Eyes"
         },
         "PR": {
             "Name_EN": "Puerto Rico",
-            "Name_DE": "Puerto Rico"
+            "Name_DE": "Puerto Rico",
+            "dataRegion": "Five-Eyes"
         },
         "PS": {
             "Name_EN": "Palestine, State of",
-            "Name_DE": "Palästina, Staat"
+            "Name_DE": "Palästina, Staat",
+            "dataRegion": "Unknown"
         },
         "PT": {
             "Name_EN": "Portugal",
-            "Name_DE": "Portugal"
+            "Name_DE": "Portugal",
+            "dataRegion": "EU-GDPR"
         },
         "PW": {
             "Name_EN": "Palau",
-            "Name_DE": "Palau"
+            "Name_DE": "Palau",
+            "dataRegion": "Unknown"
         },
         "PY": {
             "Name_EN": "Paraguay",
-            "Name_DE": "Paraguay"
+            "Name_DE": "Paraguay",
+            "dataRegion": "Unknown"
         },
         "QA": {
             "Name_EN": "Qatar",
-            "Name_DE": "Katar"
+            "Name_DE": "Katar",
+            "dataRegion": "Unknown"
         },
         "RE": {
             "Name_EN": "Reunion",
-            "Name_DE": "Reunion"
+            "Name_DE": "Reunion",
+            "dataRegion": "EU-GDPR"
         },
         "RO": {
             "Name_EN": "Romania",
-            "Name_DE": "Rumänien"
+            "Name_DE": "Rumänien",
+            "dataRegion": "Unknown"
         },
         "RS": {
             "Name_EN": "Serbia",
-            "Name_DE": "Serbien"
+            "Name_DE": "Serbien",
+            "dataRegion": "Unknown"
         },
         "RU": {
             "Name_EN": "Russian Federation",
-            "Name_DE": "Russische Föderation"
+            "Name_DE": "Russische Föderation",
+            "dataRegion": "Russia"
         },
         "RW": {
             "Name_EN": "Rwanda",
-            "Name_DE": "Ruanda"
+            "Name_DE": "Ruanda",
+            "dataRegion": "Unknown"
         },
         "SA": {
             "Name_EN": "Saudi Arabia",
-            "Name_DE": "Saudi-Arabien"
+            "Name_DE": "Saudi-Arabien",
+            "dataRegion": "Unknown"
         },
         "SB": {
             "Name_EN": "Solomon Islands",
-            "Name_DE": "Salomon-Inseln"
+            "Name_DE": "Salomon-Inseln",
+            "dataRegion": "Unknown"
         },
         "SC": {
             "Name_EN": "Seychelles",
-            "Name_DE": "Seychellen"
+            "Name_DE": "Seychellen",
+            "dataRegion": "Unknown"
         },
         "SD": {
             "Name_EN": "Sudan",
-            "Name_DE": "Sudan"
+            "Name_DE": "Sudan",
+            "dataRegion": "Unknown"
         },
         "SE": {
             "Name_EN": "Sweden",
-            "Name_DE": "Schweden"
+            "Name_DE": "Schweden",
+            "dataRegion": "EU-GDPR"
         },
         "SG": {
             "Name_EN": "Singapore",
-            "Name_DE": "Singapur"
+            "Name_DE": "Singapur",
+            "dataRegion": "Unknown"
         },
         "SH": {
             "Name_EN": "Saint Helena, Ascension and Tristan Da Cunha",
-            "Name_DE": "St. Helena, Ascension und Tristan Da Cunha"
+            "Name_DE": "St. Helena, Ascension und Tristan Da Cunha",
+            "dataRegion": "Five-Eyes"
         },
         "SI": {
             "Name_EN": "Slovenia",
-            "Name_DE": "Slowenien"
+            "Name_DE": "Slowenien",
+            "dataRegion": "EU-GDPR"
         },
         "SJ": {
             "Name_EN": "Svalbard and Jan Mayen",
-            "Name_DE": "Svalbard und Jan Mayen"
+            "Name_DE": "Svalbard und Jan Mayen",
+            "dataRegion": "EU-GDPR"
         },
         "SK": {
             "Name_EN": "Slovakia",
-            "Name_DE": "Slowakei"
+            "Name_DE": "Slowakei",
+            "dataRegion": "EU-GDPR"
         },
         "SL": {
             "Name_EN": "Sierra Leone",
-            "Name_DE": "Sierra Leone"
+            "Name_DE": "Sierra Leone",
+            "dataRegion": "Unknown"
         },
         "SM": {
             "Name_EN": "San Marino",
-            "Name_DE": "San Marino"
+            "Name_DE": "San Marino",
+            "dataRegion": "EU-GDPR"
         },
         "SN": {
             "Name_EN": "Senegal",
-            "Name_DE": "Senegal"
+            "Name_DE": "Senegal",
+            "dataRegion": "Unknown"
         },
         "SO": {
             "Name_EN": "Somalia",
-            "Name_DE": "Somalia"
+            "Name_DE": "Somalia",
+            "dataRegion": "Unknown"
         },
         "SR": {
             "Name_EN": "Suriname",
-            "Name_DE": "Surinam"
+            "Name_DE": "Surinam",
+            "dataRegion": "Unknown"
         },
         "SS": {
             "Name_EN": "South Sudan",
-            "Name_DE": "Südsudan"
+            "Name_DE": "Südsudan",
+            "dataRegion": "Unknown"
         },
         "ST": {
             "Name_EN": "Sao Tome and Principe",
-            "Name_DE": "Sao Tome und Principe"
+            "Name_DE": "Sao Tome und Principe",
+            "dataRegion": "Unknown"
         },
         "SV": {
             "Name_EN": "El Salvador",
-            "Name_DE": "El Salvador"
+            "Name_DE": "El Salvador",
+            "dataRegion": "Unknown"
         },
         "SX": {
             "Name_EN": "Sint Maarten (Dutch Part)",
-            "Name_DE": "Sint Maarten (Niederländischer Teil)"
+            "Name_DE": "Sint Maarten (Niederländischer Teil)",
+            "dataRegion": "EU-GDPR"
         },
         "SY": {
             "Name_EN": "Syrian Arab Republic",
-            "Name_DE": "Syrien, Arabische Republik"
+            "Name_DE": "Syrien, Arabische Republik",
+            "dataRegion": "Unknown"
         },
         "SZ": {
             "Name_EN": "Eswatini",
-            "Name_DE": "Eswatini"
+            "Name_DE": "Eswatini",
+            "dataRegion": "Unknown"
         },
         "TC": {
             "Name_EN": "Turks and Caicos Islands",
-            "Name_DE": "Turks- und Caicosinseln"
+            "Name_DE": "Turks- und Caicosinseln",
+            "dataRegion": "Five-Eyes"
         },
         "TD": {
             "Name_EN": "Chad",
-            "Name_DE": "Tschad"
+            "Name_DE": "Tschad",
+            "dataRegion": "Unknown"
         },
         "TF": {
             "Name_EN": "French Southern Territories",
-            "Name_DE": "Französische Süd-Territorien"
+            "Name_DE": "Französische Süd-Territorien",
+            "dataRegion": "EU-GDPR"
         },
         "TG": {
             "Name_EN": "Togo",
-            "Name_DE": "Togo"
+            "Name_DE": "Togo",
+            "dataRegion": "Unknown"
         },
         "TH": {
             "Name_EN": "Thailand",
-            "Name_DE": "Thailand"
+            "Name_DE": "Thailand",
+            "dataRegion": "Unknown"
         },
         "TJ": {
             "Name_EN": "Tajikistan",
-            "Name_DE": "Tadschikistan"
+            "Name_DE": "Tadschikistan",
+            "dataRegion": "Unknown"
         },
         "TK": {
             "Name_EN": "Tokelau",
-            "Name_DE": "Tokelau"
+            "Name_DE": "Tokelau",
+            "dataRegion": "Five-Eyes"
         },
         "TL": {
             "Name_EN": "Timor-Leste",
-            "Name_DE": "Timor-Leste"
+            "Name_DE": "Timor-Leste",
+            "dataRegion": "Unknown"
         },
         "TM": {
             "Name_EN": "Turkmenistan",
-            "Name_DE": "Turkmenistan"
+            "Name_DE": "Turkmenistan",
+            "dataRegion": "Unknown"
         },
         "TN": {
             "Name_EN": "Tunisia",
-            "Name_DE": "Tunesien"
+            "Name_DE": "Tunesien",
+            "dataRegion": "Unknown"
         },
         "TO": {
             "Name_EN": "Tonga",
-            "Name_DE": "Tonga"
+            "Name_DE": "Tonga",
+            "dataRegion": "Unknown"
         },
         "TR": {
             "Name_EN": "Turkey",
-            "Name_DE": "Türkei"
+            "Name_DE": "Türkei",
+            "dataRegion": "Unknown"
         },
         "TT": {
             "Name_EN": "Trinidad and Tobago",
-            "Name_DE": "Trinidad und Tobago"
+            "Name_DE": "Trinidad und Tobago",
+            "dataRegion": "Unknown"
         },
         "TV": {
             "Name_EN": "Tuvalu",
-            "Name_DE": "Tuvalu"
+            "Name_DE": "Tuvalu",
+            "dataRegion": "Unknown"
         },
         "TW": {
             "Name_EN": "Taiwan, Province of China",
-            "Name_DE": "Taiwan, Provinz China"
+            "Name_DE": "Taiwan, Provinz China",
+            "dataRegion": ""
         },
         "TZ": {
             "Name_EN": "Tanzania, United Republic of",
-            "Name_DE": "Tansania, Vereinigte Republik"
+            "Name_DE": "Tansania, Vereinigte Republik",
+            "dataRegion": "Unknown"
         },
         "UA": {
             "Name_EN": "Ukraine",
-            "Name_DE": "Ukraine"
+            "Name_DE": "Ukraine",
+            "dataRegion": "Unknown"
         },
         "UG": {
             "Name_EN": "Uganda",
-            "Name_DE": "Uganda"
+            "Name_DE": "Uganda",
+            "dataRegion": "Unknown"
         },
         "UM": {
             "Name_EN": "United States Minor Outlying Islands",
-            "Name_DE": "Vereinigte Staaten Minor Outlying Islands"
+            "Name_DE": "Vereinigte Staaten Minor Outlying Islands",
+            "dataRegion": "Five-Eyes"
         },
         "US": {
             "Name_EN": "United States ",
-            "Name_DE": "Vereinigte Staaten "
+            "Name_DE": "Vereinigte Staaten ",
+            "dataRegion": "Five-Eyes"
         },
         "UY": {
             "Name_EN": "Uruguay",
-            "Name_DE": "Uruguay"
+            "Name_DE": "Uruguay",
+            "dataRegion": "Unknown"
         },
         "UZ": {
             "Name_EN": "Uzbekistan",
-            "Name_DE": "Usbekistan"
+            "Name_DE": "Usbekistan",
+            "dataRegion": "Unknown"
         },
         "VA": {
             "Name_EN": "Holy See (Vatican City State)",
-            "Name_DE": "Heiliger Stuhl (Staat Vatikanstadt)"
+            "Name_DE": "Heiliger Stuhl (Staat Vatikanstadt)",
+            "dataRegion": "EU-GDPR"
         },
         "VC": {
             "Name_EN": "Saint Vincent and the Grenadines",
-            "Name_DE": "St. Vincent und die Grenadinen"
+            "Name_DE": "St. Vincent und die Grenadinen",
+            "dataRegion": "Unknown"
         },
         "VE": {
             "Name_EN": "Venezuela",
-            "Name_DE": "Venezuela"
+            "Name_DE": "Venezuela",
+            "dataRegion": "Unknown"
         },
         "VG": {
             "Name_EN": "Virgin Islands, British",
-            "Name_DE": "Jungferninseln, Britische"
+            "Name_DE": "Jungferninseln, Britische",
+            "dataRegion": "Five-Eyes"
         },
         "VI": {
             "Name_EN": "Virgin Islands, U.S.",
-            "Name_DE": "Jungferninseln, U.S."
+            "Name_DE": "Jungferninseln, U.S.",
+            "dataRegion": "Five-Eyes"
         },
         "VN": {
             "Name_EN": "Viet Nam",
-            "Name_DE": "Vietnam"
+            "Name_DE": "Vietnam",
+            "dataRegion": "Unknown"
         },
         "VU": {
             "Name_EN": "Vanuatu",
-            "Name_DE": "Vanuatu"
+            "Name_DE": "Vanuatu",
+            "dataRegion": "Unknown"
         },
         "WF": {
             "Name_EN": "Wallis and Futuna",
-            "Name_DE": "Wallis und Futuna"
+            "Name_DE": "Wallis und Futuna",
+            "dataRegion": "EU-GDPR"
         },
         "WS": {
             "Name_EN": "Samoa",
-            "Name_DE": "Samoa"
+            "Name_DE": "Samoa",
+            "dataRegion": "Unknown"
         },
         "XZ": {
             "Name_EN": "Installations in International Waters",
-            "Name_DE": "Anlagen in internationalen Gewässern"
+            "Name_DE": "Anlagen in internationalen Gewässern",
+            "dataRegion": "Unknown"
         },
         "YE": {
             "Name_EN": "Yemen",
-            "Name_DE": "Jemen"
+            "Name_DE": "Jemen",
+            "dataRegion": "Unknown"
         },
         "YT": {
             "Name_EN": "Mayotte",
-            "Name_DE": "Mayotte"
+            "Name_DE": "Mayotte",
+            "dataRegion": "EU-GDPR"
         },
         "ZA": {
             "Name_EN": "South Africa",
-            "Name_DE": "Südafrika"
+            "Name_DE": "Südafrika",
+            "dataRegion": "Unknown"
         },
         "ZM": {
             "Name_EN": "Zambia",
-            "Name_DE": "Sambia"
+            "Name_DE": "Sambia",
+            "dataRegion": "Unknown"
         },
         "ZW": {
             "Name_EN": "Zimbabwe",
-            "Name_DE": "Simbabwe"
+            "Name_DE": "Simbabwe",
+            "dataRegion": "Unknown"
         },
         "XK": {
             "Name_EN": "Kosovo",
-            "Name_DE": "Kosovo"
+            "Name_DE": "Kosovo",
+            "dataRegion": "Unknown"
         }
     }
 }
