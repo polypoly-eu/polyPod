@@ -92,6 +92,7 @@ open class FeatureFragment : Fragment() {
         webView = view.findViewById(R.id.web_view)
         webView.setBackgroundColor(backgroundColor)
         webView.settings.javaScriptEnabled = true
+        webView.settings.textZoom = 100
 
         // Enabling localStorage until window.pod.polyIn works
         webView.settings.domStorageEnabled = true

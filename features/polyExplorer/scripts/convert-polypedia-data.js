@@ -24,18 +24,21 @@ function extractAnnualRevenues(entry) {
     }));
 }
 
-function parseDataRegion(value) {
-    if (value instanceof Array)
-        return ["GDPR", "EU"].every((part) => value.includes(part))
-            ? "EU-GDPR"
-            : value[0];
-    return value.indexOf("CCPA") !== -1 ? "Five-Eyes" : value;
+function fixEntityData(entityData) {
+    if (entityData.legal_entities[0].identifiers.common_name === "Schufa")
+        entityData.legal_entities[0].identifiers.legal_name.value =
+            "SCHUFA Holding AG";
 }
 
-function parseEntity(entityData) {
-    const entity = entityData.legal_entities[0];
-    const legalName = entity.identifiers.legal_name.value;
+function parseEntity(entityData, globalData) {
+    fixEntityData(entityData);
+
+    const legalEntityData = entityData.legal_entities[0];
+    const legalName = legalEntityData.identifiers.legal_name.value;
     if (!legalName) return null;
+
+    const countryCode =
+        legalEntityData.basic_info.registered_address.value.country;
 
     return {
         name: legalName,
@@ -45,12 +48,10 @@ function parseEntity(entityData) {
             entityData.derived_category_info
                 ? true
                 : false,
-        jurisdiction: parseDataRegion(
-            entity.data_collection.data_regions.value
-        ),
+        jurisdiction: (globalData.countries[countryCode] || {}).dataRegion,
         location: {
-            city: entity.basic_info.registered_address.value.city,
-            countryCode: entity.basic_info.registered_address.value.country,
+            city: legalEntityData.basic_info.registered_address.value.city,
+            countryCode,
         },
         annualRevenues: extractAnnualRevenues(entityData),
         dataRecipients: entityData.data_recipients
@@ -103,6 +104,19 @@ function parseEntity(entityData) {
 
 const entityKey = (entity) => entity.name.toLowerCase();
 
+const isEmpty = (value) =>
+    value === null ||
+    typeof value === "undefined" ||
+    (typeof value === "object" && Object.values(value).every(isEmpty));
+
+function mergeEntities(oldEntity, newEntity) {
+    if (!oldEntity) return newEntity;
+    for (let [key, value] of Object.entries(newEntity))
+        if (!(key in oldEntity) || isEmpty(oldEntity[key]))
+            oldEntity[key] = value;
+    return oldEntity;
+}
+
 function enrichWithJurisdictionsShared(entityMap) {
     for (let entity of Object.values(entityMap)) {
         for (let dataRecipient of entity.dataRecipients || []) {
@@ -123,14 +137,14 @@ function enrichWithJurisdictionsShared(entityMap) {
     }
 }
 
-function parsePolyPediaCompanyData() {
+function parsePolyPediaCompanyData(globalData) {
     const entityMap = {};
     polyPediaCompanyData.forEach((entityData) => {
-        const entity = parseEntity(entityData);
+        const entity = parseEntity(entityData, globalData);
         if (!entity) return;
 
         const key = entityKey(entity);
-        entityMap[key] = { ...entity, ...(entityMap[key] || {}) };
+        entityMap[key] = mergeEntities(entityMap[key], entity);
     });
 
     enrichWithJurisdictionsShared(entityMap);
@@ -153,12 +167,20 @@ function savePolyExplorerFile(fileName, data) {
 const savePolyExplorerCompanyData = (data) =>
     savePolyExplorerFile("companies.json", data);
 
+const parseDataRegion = (countryData) =>
+    ({
+        GDPR: "EU-GDPR",
+        "5 Eyes": "Five-Eyes",
+    }[countryData.Regulatory_Region] || countryData.Regulatory_Region);
+
 function parsePolyPediaGlobalData() {
     const globalData = { countries: {} };
     Object.entries(polyPediaGlobalData.countries).forEach(([code, data]) => {
-        globalData.countries[code] = Object.fromEntries(
+        const country = Object.fromEntries(
             Object.entries(data).filter(([key]) => key.startsWith("Name_"))
         );
+        country.dataRegion = parseDataRegion(data);
+        globalData.countries[code] = country;
     });
     return globalData;
 }
@@ -166,5 +188,7 @@ function parsePolyPediaGlobalData() {
 const savePolyExplorerGlobalData = (data) =>
     savePolyExplorerFile("global.json", data);
 
-savePolyExplorerCompanyData(parsePolyPediaCompanyData());
-savePolyExplorerGlobalData(parsePolyPediaGlobalData());
+const globalData = parsePolyPediaGlobalData();
+const companyData = parsePolyPediaCompanyData(globalData);
+savePolyExplorerGlobalData(globalData);
+savePolyExplorerCompanyData(companyData);

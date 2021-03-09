@@ -37,7 +37,7 @@
                 android:layout_marginBottom="2dp"
                 android:fontFamily="@font/jost_medium"
                 android:textColor="@color/featureForeground"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@+id/close_button"
                 app:layout_constraintTop_toTopOf="parent" />
