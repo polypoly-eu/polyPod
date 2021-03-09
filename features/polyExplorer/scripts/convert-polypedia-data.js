@@ -111,10 +111,9 @@ const isEmpty = (value) =>
 
 function mergeEntities(oldEntity, newEntity) {
     if (!oldEntity) return newEntity;
-    for (let [property, value] of Object.entries(newEntity)) {
-        if (property in oldEntity && !isEmpty(oldEntity[property])) continue;
-        oldEntity[property] = value;
-    }
+    for (let [key, value] of Object.entries(newEntity))
+        if (!(key in oldEntity) || isEmpty(oldEntity[key]))
+            oldEntity[key] = value;
     return oldEntity;
 }
 
