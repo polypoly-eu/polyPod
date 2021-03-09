@@ -9,29 +9,21 @@
         <link rel="stylesheet" href="css/bundle.css" />
     </head>
     <body>
-        <template id="slide-template">
-            <div class="swiper-slide" data-key="slideContentWrapper"></div>
-        </template>
-
-        <template id="outer-slide-content-template">
-            <div class="outer-slide">
-                <h1 data-key="headline"></h1>
-                <h2 data-key="subHeadline"></h2>
-                <div data-key="bodyText"></div>
-                <button
-                    data-key="learnMoreButton"
-                    data-i18n-key="common:button.learnMore"
-                    hidden
-                ></button>
-            </div>
-        </template>
-
-        <template id="inner-slide-content-template">
-            <div class="inner-slide"></div>
-        </template>
-
         <div class="swiper-container">
-            <div class="swiper-wrapper"></div>
+            <div class="swiper-wrapper">
+                <div id="slide-1" class="swiper-slide">
+                    <h1 data-i18n-key="common:slide1.headline"></h1>
+                    <h2 data-i18n-key="common:slide1.subHeadline"></h2>
+                    <div data-i18n-key="common:slide1.bodyText"></div>
+                </div>
+
+                <div id="slide-7" class="swiper-slide">
+                    <h1 data-i18n-key="common:slide1.headline"></h1>
+                    <h2 data-i18n-key="common:slide1.subHeadline"></h2>
+                    <div data-i18n-key="common:slide1.bodyText"></div>
+                    <button data-i18n-key="common:button.learnMore"></button>
+                </div>
+            </div>
             <div class="swiper-pagination"></div>
         </div>
         <script src="index.js"></script>
