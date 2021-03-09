@@ -1,6 +1,16 @@
 {
-    "hello":
-        "Hallo, Welt!",
-    "todo":
-        "Wir müssen das hier noch fertig machen"
+    "button.learnMore":
+        "Mehr erfahren",
+    "slide1.headline":
+        "Wir entwickeln<br>den polyPod -",
+    "slide1.subHeadline":
+        "gemeinsam,<br>als Genossenschaft",
+    "slide1.bodyText":
+        "<p>Mit Hilfe unserer Mitglieder entwickeln wir den polyPod ständig weiter. Gemeinsam wollen wir durchsetzen, was uns zusteht: unser Recht auf Privatsphäre!</p><p>Gespannt, wie es weitergeht? Die nächsten Schritte:</p>",
+    "slide7.headline":
+        "Helpen Sie mit!<br>Werden Sie",
+    "slide7.subHeadline":
+        "Anteilseigner:in<br>bei polypoly",
+    "slide7.bodyText":
+        "<p>Helfen Sie uns, gemeinsam den polyPod weiter zu entwickeln. Werden Sie bereits ab 5 € Anteilseigner:in von polypoly – Die Genossenschaft – und damit Miteigentümer:in am polyPod.</p>"
 }

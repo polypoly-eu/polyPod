@@ -1,6 +1,16 @@
 {
-    "hello":
-        "Hello, world!",
-    "todo":
-        "We have yet to finish this"
+    "button.learnMore":
+        "MISSING",
+    "slide1.headline":
+        "MISSING",
+    "slide1.subHeadline":
+        "MISSING",
+    "slide1.bodyText":
+        "MISSING",
+    "slide7.headline":
+        "MISSING",
+    "slide7.subHeadline":
+        "MISSING",
+    "slide7.bodyText":
+        "MISSING"
 }
