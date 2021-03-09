@@ -2,6 +2,7 @@ import React from "react";
 import i18n from "../../i18n.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import DataSharingGauge from "../dataSharingGauge/dataSharingGauge.jsx";
+import DataSharingLegend from "../dataSharingLegend/dataSharingLegend.jsx";
 import "./featuredCompany.css";
 
 const DataSharingSection = ({
@@ -22,13 +23,6 @@ const DataSharingSection = ({
             max={max}
             average={average}
         />
-    </div>
-);
-
-const DataSharingLegend = ({ onClick }) => (
-    <div className="data-sharing-legend" onClick={onClick}>
-        <img src="images/question-circle-filled.svg"></img>
-        {i18n.t("featuredCompany:text.legend")}
     </div>
 );
 

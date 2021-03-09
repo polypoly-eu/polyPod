@@ -6,13 +6,14 @@ import Screen from "../../components/screen/screen.jsx";
 import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
+import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
 
 const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
-    const [activeSection, setActiveSection] = useState("dataTypes");
+    const [activeSection] = useState("dataTypes");
 
     const getHighestValueObject = () => {
         let highest = { count: 0 };
@@ -85,6 +86,7 @@ const DataExplorationScreen = ({ company }) => {
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <DataSharingLegend onClick={() => {}} />
                 </SwiperSlide>
                 <SwiperSlide>
                     <h1>
@@ -119,6 +121,7 @@ const DataExplorationScreen = ({ company }) => {
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <DataSharingLegend onClick={() => {}} />
                 </SwiperSlide>
                 <SwiperSlide>
                     <h1>
@@ -145,6 +148,7 @@ const DataExplorationScreen = ({ company }) => {
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <DataSharingLegend onClick={() => {}} />
                 </SwiperSlide>
                 {categories.map((group) => (
                     <SwiperSlide key={group}>
@@ -166,6 +170,7 @@ const DataExplorationScreen = ({ company }) => {
                         <p className="source">
                             {i18n.t("common:source")}: polyPedia
                         </p>
+                        <DataSharingLegend onClick={() => {}} />
                     </SwiperSlide>
                 ))}
             </Swiper>
