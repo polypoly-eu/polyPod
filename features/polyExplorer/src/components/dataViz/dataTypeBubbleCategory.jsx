@@ -12,11 +12,15 @@ const DataTypeBubbleCategory = ({
     width,
     height,
     category,
-    categoryColor,
     defaultColor,
+    textColor,
 }) => {
     const bubbleRef = useRef(null);
     const edgePadding = 5;
+
+    const clearSvg = () => {
+        d3.select(bubbleRef.current).selectAll("svg").remove();
+    };
 
     const makeHierarchy = () => {
         return d3.hierarchy({ children: data }).sum((d) => d.value);
@@ -53,10 +57,10 @@ const DataTypeBubbleCategory = ({
 
         leaf.append("circle")
             .attr("r", (d) => d.r)
-            .attr("fill-opacity", 0.7)
-            .attr("fill", (d) => {
-                d.data.category === category ? categoryColor : defaultColor;
-            })
+            .attr("fill-opacity", (d) =>
+                d.data.Polypoly_Parent_Category == category ? 1 : 0.2
+            )
+            .attr("fill", defaultColor)
             .style("vertical-align", "center");
 
         leaf.append("text")
@@ -65,13 +69,14 @@ const DataTypeBubbleCategory = ({
             })
             .attr("text-anchor", "middle")
             .attr("y", ".3em")
-            .style("fill", "white")
+            .style("fill", textColor)
             .style("font-size", (d) => {
-                return (14 + d.value).toString() + "px";
+                return (5 + d.value / 5).toString() + "px";
             });
     };
 
     useEffect(() => {
+        clearSvg();
         drawDataBubbles(createBubbleContainer());
     });
 

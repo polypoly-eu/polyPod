@@ -3,6 +3,8 @@
         "These are the data types {{name}} shares up to {{sharingCount}} times with other companies. E.g. information about {{mostSharedType}} is shared {{mostSharedCount}} times.",
     "dataTypes.text.grouping":
         "Data types can be grouped into different categories:",
+    "dataTypes.without-category":
+        "Without category",
     "dataTypes.title.personal":
         "Personal Data",
     "dataTypes.title.social":

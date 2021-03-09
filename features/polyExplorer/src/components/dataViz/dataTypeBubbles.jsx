@@ -9,12 +9,21 @@ import "./dataViz.css";
     data object: [{dataType, value},{},..]
 */
 
-const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
-    const bubbleRef = useRef(null);
+const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
+    const bubbleRef = useRef();
     const edgePadding = 5;
 
+    //This is necessary because later d.count is a function
+    data.forEach((e) => {
+        e.value = e.count;
+    });
+
+    const clearSvg = () => {
+        d3.select(bubbleRef.current).selectAll("svg").remove();
+    };
+
     const makeHierarchy = () => {
-        return d3.hierarchy({ children: data }).sum((d) => d.count);
+        return d3.hierarchy({ children: data }).sum((d) => d.value);
     };
 
     const pack = () => {
@@ -51,23 +60,21 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
             .style("fill", bubbleColor)
             .style("vertical-align", "center");
 
-        //Ok this is weird, count is already a function of some sort
-        /*
         leaf.append("text")
             .text((d) => {
-                return d.count.toString();
+                return d.value.toString();
             })
             .attr("text-anchor", "middle")
             .attr("y", ".3em")
             .style("fill", textColor)
             .style("font-size", (d) => {
-                "14px"; //return (10 + d.count / 2).toString() + "px";
+                return (5 + d.value / 5).toString() + "px";
             })
             .style("font-weight", "500");
-            */
     };
 
     useEffect(() => {
+        clearSvg();
         drawDataBubbles(createBubbleContainer());
     });
 

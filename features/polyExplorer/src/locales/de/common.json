@@ -72,5 +72,7 @@
     "sharing.detailPrefix.jurisdictions":
         "teilt Daten in",
     "sharing.jurisdictions":
-        "Datenregionen"
+        "Datenregionen",
+    "source":
+        "Quelle"
 }

@@ -58,11 +58,6 @@ const PolyExplorer = () => {
     const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
 
     const handleActiveScreenChange = (screen, companyName) => {
-        if (screen === "dataExploration") {
-            if (activeScreen !== "main") setShowConstructionPopUp(true);
-            return;
-        }
-
         setActiveScreen(screen);
         if (companyName)
             setSelectedCompany(
