@@ -20,5 +20,8 @@
     <!-- These strings should really be coming from the feature manifests, but for now they don't -->
     <string name="feature_polyexplorer_author">polypoly - Die Genossenschaft</string>
     <string name="feature_polyexplorer_description">Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel.</string>
-    <string name="feature_polyexplorer_primary_color">#0f1938</string>
+    <string name="feature_polyexplorer_primarycolor">#0f1938</string>
+    <string name="feature_polypreview_author">polypoly - Die Genossenschaft</string>
+    <string name="feature_polypreview_description">Ihr polyPod wird stetig weiterentwickelt. Wenn Sie wissen möchten was wir Planen; hier eine Vorschau.</string>
+    <string name="feature_polypreview_primarycolor">#fff5f5</string>
 </resources>
