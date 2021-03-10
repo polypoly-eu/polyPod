@@ -1,6 +1,6 @@
 import fs from "fs";
 import { createRequire } from "module";
-import { default as descriptions } from "./descriptions.js";
+import { default as fallbackDescriptions } from "./descriptions.js";
 import { default as categories } from "./categories.js";
 
 const require = createRequire(import.meta.url);
@@ -12,6 +12,8 @@ const polyPediaGlobalData = require("../polypedia-data/data/3_integrated/polyExp
 const extractYear = (date) =>
     parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
 
+const entityKey = (legalName) => legalName.toLowerCase();
+
 function extractAnnualRevenues(entry) {
     if (!entry.financial_data) return null;
     const all = entry.financial_data.map(({ data }) => data).flat();
@@ -22,6 +24,26 @@ function extractAnnualRevenues(entry) {
         currency,
         year: extractYear(date),
     }));
+}
+
+function parseDescription(legalEntityData) {
+    const key = entityKey(legalEntityData.identifiers.legal_name.value);
+    const editorialData =
+        ((legalEntityData.editorial_content || {}).editorials || [])[0] || {};
+    const description = editorialData.body_i18n || {};
+    for (let languageCode of Object.keys(fallbackDescriptions))
+        if (!description.languageCode) {
+            const fallbackDescription = (Object.entries(
+                fallbackDescriptions[languageCode]
+            ).find(([companyName]) => entityKey(companyName) === key) || [])[1];
+            if (fallbackDescription)
+                description[languageCode] = fallbackDescription;
+        }
+    // TODO: Don't hard code 'de' and 'Wikipedia'
+    return {
+        value: description["de"] || null,
+        source: description["de"] ? "Wikipedia" : null,
+    };
 }
 
 function fixEntityData(entityData) {
@@ -67,28 +89,7 @@ function parseEntity(entityData, globalData) {
                   (i) => entityData.derived_category_info[i]
               )
             : null,
-        description: {
-            value:
-                Object.keys(descriptions.de).findIndex(
-                    (e) => e.toLowerCase() === legalName.toLowerCase()
-                ) >= 0
-                    ? descriptions.de[
-                          Object.keys(descriptions.de)[
-                              Object.keys(descriptions.de).findIndex(
-                                  (e) =>
-                                      e.toLowerCase() ===
-                                      legalName.toLowerCase()
-                              )
-                          ]
-                      ]
-                    : null,
-            source:
-                Object.keys(descriptions.de).findIndex(
-                    (e) => e.toLowerCase() === legalName.toLowerCase()
-                ) >= 0
-                    ? "Wikipedia"
-                    : null,
-        },
+        description: parseDescription(legalEntityData),
         category:
             Object.keys(categories.de).filter(
                 (e) => e.toLowerCase() === legalName.toLowerCase()
@@ -101,8 +102,6 @@ function parseEntity(entityData, globalData) {
                 : null,
     };
 }
-
-const entityKey = (entity) => entity.name.toLowerCase();
 
 const isEmpty = (value) =>
     value === null ||
@@ -120,7 +119,7 @@ function mergeEntities(oldEntity, newEntity) {
 function enrichWithJurisdictionsShared(entityMap) {
     for (let entity of Object.values(entityMap)) {
         for (let dataRecipient of entity.dataRecipients || []) {
-            const recipientKey = entityKey({ name: dataRecipient });
+            const recipientKey = entityKey(dataRecipient);
             if (!(recipientKey in entityMap)) continue;
 
             const recipientJurisdiction = entityMap[recipientKey].jurisdiction;
@@ -143,7 +142,7 @@ function parsePolyPediaCompanyData(globalData) {
         const entity = parseEntity(entityData, globalData);
         if (!entity) return;
 
-        const key = entityKey(entity);
+        const key = entityKey(entity.name);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     });
 
