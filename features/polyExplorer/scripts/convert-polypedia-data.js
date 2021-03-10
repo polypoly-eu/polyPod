@@ -39,10 +39,15 @@ function parseDescription(legalEntityData) {
             if (fallbackDescription)
                 description[languageCode] = fallbackDescription;
         }
-    // TODO: Don't hard code 'de' and 'Wikipedia'
+    const descriptionEmpty = Object.values(description).every(
+        (value) => value === null
+    );
+    // We currently hard code "Wikipedia" as source, until we get the data from
+    // polyPedia as well.
+    const source = "Wikipedia";
     return {
-        value: description["de"] || null,
-        source: description["de"] ? "Wikipedia" : null,
+        value: descriptionEmpty ? null : description,
+        source: descriptionEmpty ? null : source,
     };
 }
 

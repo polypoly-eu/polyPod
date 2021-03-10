@@ -243,14 +243,15 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                     <p
                         className="company-info-text"
                         dangerouslySetInnerHTML={{
-                            __html: company.description.value
-                                ? company.description.value.replace(
-                                      "\n",
-                                      "<br/><br/>"
-                                  )
-                                : i18n.t(
-                                      "companyInfoScreen:description.fallback"
-                                  ),
+                            __html:
+                                (
+                                    (company.description.value || {})[
+                                        i18n.language
+                                    ] || ""
+                                ).replace("\n", "<br/><br/>") ||
+                                i18n.t(
+                                    "companyInfoScreen:description.fallback"
+                                ),
                         }}
                     ></p>
 
