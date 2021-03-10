@@ -33,7 +33,7 @@
 
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/activity_settings"
+            android:label="@string/settings_title"
             android:theme="@style/Theme.AppCompat.Light" />
     </application>
 

@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/FeaturesListFragment"
         android:name="coop.polypoly.polypod.FeatureListFragment"
-        android:label="@string/features_list_fragment_label"
         tools:layout="@layout/fragment_feature_list">
 
         <action
@@ -26,7 +25,6 @@
     <fragment
         android:id="@+id/FeatureFragment"
         android:name="coop.polypoly.polypod.FeatureFragment"
-        android:label="@string/feature_fragment_label"
         tools:layout="@layout/fragment_feature">
 
         <argument

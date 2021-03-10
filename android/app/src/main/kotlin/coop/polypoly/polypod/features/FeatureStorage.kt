@@ -1,6 +1,7 @@
 package coop.polypoly.polypod.features
 
 import android.content.Context
+import coop.polypoly.polypod.R
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream
@@ -30,12 +31,7 @@ class FeatureStorage {
             val features: MutableList<Feature> = ArrayList(filesList.size)
             for (file in filesList) {
                 logger.debug("Found file: '${file.absolutePath}'")
-                // TODO: Read this information from the feature manifest
-                val name = file.name.replace(".zip", "")
-                val author = "polypoly - Die Genossenschaft"
-                val description = "Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel."
-                val primaryColor = "#0f1938"
-                features.add(Feature(name, author, description, primaryColor))
+                features.add(loadMetaData(context, file.name))
             }
             for (feature in features) {
                 logger.debug("Found Feature: '{}'", feature.name)
@@ -45,6 +41,24 @@ class FeatureStorage {
             logger.debug("No Features found")
             emptyList()
         }
+    }
+
+    private fun loadMetaData(context: Context, fileName: String): Feature {
+        // TODO: Actually read this information from the feature manifest
+        val name = fileName.replace(".zip", "")
+        val author = getMetaDataString(context, "author")
+        val description = getMetaDataString(context, "description")
+        val primaryColor = getMetaDataString(context, "primaryColor")
+        return Feature(name, author, description, primaryColor)
+    }
+
+    private fun getMetaDataString(context: Context, key: String): String {
+        // TODO: Don't hard code 'polyexplorer'
+        return mapOf(
+            "author" to context.getString(R.string.feature_polyexplorer_author),
+            "description" to context.getString(R.string.feature_polyexplorer_description),
+            "primaryColor" to context.getString(R.string.feature_polyexplorer_primary_color)
+        )[key] ?: ""
     }
 
     fun loadFeature(context: Context, name: String): ZipFile {
