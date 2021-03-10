@@ -26,6 +26,35 @@ import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import eu.polypoly.pod.android.polyOut.PolyOut
 import java.util.zip.ZipFile
 
+private fun luminance(color: Int): Double = Color.red(color) * 0.2126 + Color.green(color) * 0.7152 + Color.blue(color) * 0.0722;
+
+private enum class ForegroundResources(
+    val color: Int,
+    val closeIcon: Int,
+    val backIcon: Int,
+    val infoIcon: Int,
+    val searchIcon: Int
+) {
+    LIGHT(
+        color = R.color.feature_foreground_light,
+        closeIcon = R.drawable.ic_close_light,
+        backIcon = R.drawable.ic_back_light,
+        infoIcon = R.drawable.ic_info_light,
+        searchIcon = R.drawable.ic_search_light
+    ),
+    DARK(
+        color = R.color.feature_foreground_dark,
+        closeIcon = R.drawable.ic_close_dark,
+        backIcon = R.drawable.ic_back_dark,
+        infoIcon = R.drawable.ic_info_dark,
+        searchIcon = R.drawable.ic_search_dark
+    );
+
+    companion object {
+        fun fromBackgroundColor(color: Int): ForegroundResources = if (luminance(color) > 50) DARK else LIGHT
+    }
+}
+
 /**
  * A [Fragment] that is responsible for handling a single Feature
  */
@@ -37,6 +66,8 @@ open class FeatureFragment : Fragment() {
 
     private val args: FeatureFragmentArgs by navArgs()
 
+    private lateinit var feature: Feature
+    private lateinit var foregroundResources: ForegroundResources
     protected lateinit var api: PodApi
     private lateinit var webView: WebView
     private lateinit var navApi: PodNavApi
@@ -52,11 +83,12 @@ open class FeatureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (view.findViewById(R.id.feature_title) as TextView).text = args.featureName
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
-        val feature = FeatureStorage().loadFeature(requireContext(), args.featureFile)
+        feature = FeatureStorage().loadFeature(requireContext(), args.featureFile)
+        foregroundResources = ForegroundResources.fromBackgroundColor(feature.primaryColor)
         activity?.window?.navigationBarColor = feature.primaryColor
         api = setupPodApi()
-        setupAppBar(view, feature.primaryColor)
-        setupWebView(view, feature)
+        setupAppBar(view)
+        setupWebView(view)
         setupNavigation(view, webView)
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
@@ -65,18 +97,25 @@ open class FeatureFragment : Fragment() {
         return PodApi(PolyOut(), PolyIn())
     }
 
-    private fun setupAppBar(view: View, featureColor: Int) {
-        view.findViewById<View>(R.id.app_bar).setBackgroundColor(featureColor)
+    private fun setupAppBar(view: View) {
+        view.findViewById<View>(R.id.app_bar).setBackgroundColor(feature.primaryColor)
+        view.findViewById<TextView>(R.id.feature_title).setTextColor(resources.getColor(foregroundResources.color, context?.theme))
 
-        view.findViewById<View>(R.id.close_button).setOnClickListener {
+        val closeButton = view.findViewById<ImageView>(R.id.close_button)
+        closeButton.setImageResource(foregroundResources.closeIcon)
+        closeButton.setOnClickListener {
             navigateBack()
         }
 
-        view.findViewById<View>(R.id.info_button).setOnClickListener {
+        val infoButton = view.findViewById<ImageView>(R.id.info_button)
+        infoButton.setImageResource(foregroundResources.infoIcon)
+        infoButton.setOnClickListener {
             navApi.triggerAction("info")
         }
 
-        view.findViewById<View>(R.id.search_button).setOnClickListener {
+        val searchButton = view.findViewById<ImageView>(R.id.search_button)
+        searchButton.setImageResource(foregroundResources.searchIcon)
+        searchButton.setOnClickListener {
             navApi.triggerAction("search")
         }
     }
@@ -89,7 +128,7 @@ open class FeatureFragment : Fragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun setupWebView(view: View, feature: Feature) {
+    private fun setupWebView(view: View) {
         webView = view.findViewById(R.id.web_view)
         webView.setBackgroundColor(feature.primaryColor)
         webView.settings.javaScriptEnabled = true
@@ -144,7 +183,7 @@ open class FeatureFragment : Fragment() {
     }
 
     private fun updateAppBarActions(view: View) {
-        view.findViewById<ImageView>(R.id.close_button).setImageResource(if (navApi.hasAction("back")) R.drawable.ic_back_light else R.drawable.ic_close_light)
+        view.findViewById<ImageView>(R.id.close_button).setImageResource(if (navApi.hasAction("back")) foregroundResources.backIcon else foregroundResources.closeIcon)
         view.findViewById<View>(R.id.info_button).visibility = if (navApi.hasAction("info")) View.VISIBLE else View.GONE
         view.findViewById<View>(R.id.search_button).visibility = if (navApi.hasAction("search")) View.VISIBLE else View.GONE
     }
