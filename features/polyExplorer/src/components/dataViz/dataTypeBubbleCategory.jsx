@@ -13,7 +13,6 @@ const DataTypeBubbleCategory = ({
     height,
     category,
     defaultColor,
-    textColor,
 }) => {
     const bubbleRef = useRef(null);
     const edgePadding = 5;
