@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="coop.polypoly.polypod">
 
-    <uses-permission-sdk-23 android:name="android.permission.INTERNET"/>
-
     <application
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
