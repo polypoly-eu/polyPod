@@ -1,6 +1,6 @@
 import fs from "fs";
 import { createRequire } from "module";
-import { default as descriptions } from "./descriptions.js";
+import { default as fallbackDescriptions } from "./descriptions.js";
 import { default as categories } from "./categories.js";
 
 const require = createRequire(import.meta.url);
@@ -12,6 +12,8 @@ const polyPediaGlobalData = require("../polypedia-data/data/3_integrated/polyExp
 const extractYear = (date) =>
     parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
 
+const entityKey = (legalName) => legalName.toLowerCase();
+
 function extractAnnualRevenues(entry) {
     if (!entry.financial_data) return null;
     const all = entry.financial_data.map(({ data }) => data).flat();
@@ -22,6 +24,38 @@ function extractAnnualRevenues(entry) {
         currency,
         year: extractYear(date),
     }));
+}
+
+function parseDescription(legalEntityData) {
+    const key = entityKey(legalEntityData.identifiers.legal_name.value);
+    const editorialData =
+        ((legalEntityData.editorial_content || {}).editorials || [])[0] || {};
+    const description = editorialData.body_i18n || {};
+    for (let languageCode of Object.keys(fallbackDescriptions))
+        if (!description.languageCode) {
+            const fallbackDescription = (Object.entries(
+                fallbackDescriptions[languageCode]
+            ).find(([companyName]) => entityKey(companyName) === key) || [])[1];
+            if (fallbackDescription)
+                description[languageCode] = fallbackDescription;
+        }
+    const descriptionEmpty = Object.values(description).every(
+        (value) => value === null
+    );
+    // We currently hard code "Wikipedia" as source, until we get the data from
+    // polyPedia as well.
+    const source = "Wikipedia";
+    return {
+        value: descriptionEmpty ? null : description,
+        source: descriptionEmpty ? null : source,
+    };
+}
+
+function parseCategory(legalName) {
+    const categoryStringKey = Object.keys(categories.de).find(
+        (e) => entityKey(e) === entityKey(legalName)
+    );
+    return categories.de[categoryStringKey] || null;
 }
 
 function fixEntityData(entityData) {
@@ -42,21 +76,18 @@ function parseEntity(entityData, globalData) {
 
     return {
         name: legalName,
-        featured:
+        featured: !!(
             entityData.data_recipients &&
             entityData.derived_purpose_info &&
             entityData.derived_category_info
-                ? true
-                : false,
+        ),
         jurisdiction: (globalData.countries[countryCode] || {}).dataRegion,
         location: {
             city: legalEntityData.basic_info.registered_address.value.city,
             countryCode,
         },
         annualRevenues: extractAnnualRevenues(entityData),
-        dataRecipients: entityData.data_recipients
-            ? entityData.data_recipients
-            : null,
+        dataRecipients: entityData.data_recipients || null,
         dataSharingPurposes: entityData.derived_purpose_info
             ? Object.keys(entityData.derived_purpose_info).map(
                   (i) => entityData.derived_purpose_info[i]
@@ -67,42 +98,10 @@ function parseEntity(entityData, globalData) {
                   (i) => entityData.derived_category_info[i]
               )
             : null,
-        description: {
-            value:
-                Object.keys(descriptions.de).findIndex(
-                    (e) => e.toLowerCase() === legalName.toLowerCase()
-                ) >= 0
-                    ? descriptions.de[
-                          Object.keys(descriptions.de)[
-                              Object.keys(descriptions.de).findIndex(
-                                  (e) =>
-                                      e.toLowerCase() ===
-                                      legalName.toLowerCase()
-                              )
-                          ]
-                      ]
-                    : null,
-            source:
-                Object.keys(descriptions.de).findIndex(
-                    (e) => e.toLowerCase() === legalName.toLowerCase()
-                ) >= 0
-                    ? "Wikipedia"
-                    : null,
-        },
-        category:
-            Object.keys(categories.de).filter(
-                (e) => e.toLowerCase() === legalName.toLowerCase()
-            ).length > 0
-                ? categories.de[
-                      Object.keys(categories.de).filter(
-                          (e) => e.toLowerCase() === legalName.toLowerCase()
-                      )[0]
-                  ]
-                : null,
+        description: parseDescription(legalEntityData),
+        category: parseCategory(legalName),
     };
 }
-
-const entityKey = (entity) => entity.name.toLowerCase();
 
 const isEmpty = (value) =>
     value === null ||
@@ -120,7 +119,7 @@ function mergeEntities(oldEntity, newEntity) {
 function enrichWithJurisdictionsShared(entityMap) {
     for (let entity of Object.values(entityMap)) {
         for (let dataRecipient of entity.dataRecipients || []) {
-            const recipientKey = entityKey({ name: dataRecipient });
+            const recipientKey = entityKey(dataRecipient);
             if (!(recipientKey in entityMap)) continue;
 
             const recipientJurisdiction = entityMap[recipientKey].jurisdiction;
@@ -143,7 +142,7 @@ function parsePolyPediaCompanyData(globalData) {
         const entity = parseEntity(entityData, globalData);
         if (!entity) return;
 
-        const key = entityKey(entity);
+        const key = entityKey(entity.name);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     });
 

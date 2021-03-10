@@ -19,6 +19,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
 import coop.polypoly.polypod.features.FeatureStorage
+import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
@@ -51,11 +52,11 @@ open class FeatureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (view.findViewById(R.id.feature_title) as TextView).text = args.featureName
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
-        val featureBackgroundColor = resources.getColor(R.color.colorPrimaryDark, context?.theme)
-        activity?.window?.navigationBarColor = featureBackgroundColor
+        val feature = FeatureStorage().loadFeature(requireContext(), args.featureFile)
+        activity?.window?.navigationBarColor = feature.primaryColor
         api = setupPodApi()
-        setupAppBar(view)
-        setupWebView(view, featureBackgroundColor)
+        setupAppBar(view, feature.primaryColor)
+        setupWebView(view, feature)
         setupNavigation(view, webView)
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + args.featureName)
     }
@@ -64,8 +65,8 @@ open class FeatureFragment : Fragment() {
         return PodApi(PolyOut(), PolyIn())
     }
 
-    private fun setupAppBar(view: View) {
-        view.findViewById<View>(R.id.app_bar).setBackgroundColor(Color.parseColor(args.featurePrimaryColor))
+    private fun setupAppBar(view: View, featureColor: Int) {
+        view.findViewById<View>(R.id.app_bar).setBackgroundColor(featureColor)
 
         view.findViewById<View>(R.id.close_button).setOnClickListener {
             navigateBack()
@@ -88,18 +89,17 @@ open class FeatureFragment : Fragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun setupWebView(view: View, backgroundColor: Int) {
+    private fun setupWebView(view: View, feature: Feature) {
         webView = view.findViewById(R.id.web_view)
-        webView.setBackgroundColor(backgroundColor)
+        webView.setBackgroundColor(feature.primaryColor)
         webView.settings.javaScriptEnabled = true
         webView.settings.textZoom = 100
 
         // Enabling localStorage until window.pod.polyIn works
         webView.settings.domStorageEnabled = true
 
-        val feature = FeatureStorage().loadFeature(requireContext(), args.featureName)
         val assetLoader = WebViewAssetLoader.Builder()
-            .addPathHandler("/features/${args.featureName}/", FeaturesPathHandler(feature))
+            .addPathHandler("/features/${feature.name}/", FeaturesPathHandler(feature.content))
             .addPathHandler("/", PodPathHandler(requireContext()))
             .build()
 
