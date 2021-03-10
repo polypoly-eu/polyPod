@@ -30,6 +30,9 @@
         <argument
             android:name="featureName"
             app:argType="string" />
+        <argument
+            android:name="featureFile"
+            app:argType="string" />
     </fragment>
 
     <activity

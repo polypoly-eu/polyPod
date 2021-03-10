@@ -2,30 +2,19 @@ package coop.polypoly.polypod.features
 
 import android.content.Context
 import android.graphics.Color
-import coop.polypoly.polypod.R
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 import java.util.zip.ZipFile
 
-open class PartialFeature(
+data class Feature(
+    val fileName: String,
     val name: String,
     val author: String,
     val description: String,
-    val primaryColorHex: String
-) {
-    val primaryColor = Color.parseColor(primaryColorHex)
-}
-
-class Feature(
-    feature: PartialFeature,
+    val primaryColor: Int,
     val content: ZipFile
-) : PartialFeature(
-    feature.name,
-    feature.author,
-    feature.description,
-    feature.primaryColorHex
 )
 
 class FeatureStorage {
@@ -34,7 +23,7 @@ class FeatureStorage {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    fun listFeatures(context: Context): List<PartialFeature> {
+    fun listFeatures(context: Context): List<Feature> {
         val featuresDir = getFeaturesDir(context)
         logger.warn("Features directory: '{}'", featuresDir.absolutePath)
         if (!featuresDir.exists()) {
@@ -46,10 +35,10 @@ class FeatureStorage {
         val filesList = featuresDir.listFiles()
         return if (filesList != null) {
             logger.debug("Found {} Features", filesList.size)
-            val features: MutableList<PartialFeature> = ArrayList(filesList.size)
+            val features: MutableList<Feature> = ArrayList(filesList.size)
             for (file in filesList) {
                 logger.debug("Found file: '${file.absolutePath}'")
-                features.add(loadFeatureData(context, file.name))
+                features.add(loadFeature(context, file.name))
             }
             for (feature in features) {
                 logger.debug("Found Feature: '{}'", feature.name)
@@ -61,13 +50,18 @@ class FeatureStorage {
         }
     }
 
-    private fun loadFeatureData(context: Context, fileName: String): PartialFeature {
+    fun loadFeature(context: Context, fileName: String): Feature {
+        val content = ZipFile(File(getFeaturesDir(context), fileName))
         // TODO: Actually read this information from the feature manifest
         val name = fileName.replace(".zip", "")
-        val author = getMetaDataString(context, name, "author")
-        val description = getMetaDataString(context, name, "description")
-        val primaryColor = getMetaDataString(context, name, "primaryColor")
-        return PartialFeature(name, author, description, primaryColor)
+        return Feature(
+            fileName,
+            name,
+            author = getMetaDataString(context, name, "author"),
+            description = getMetaDataString(context, name, "description"),
+            primaryColor = Color.parseColor(getMetaDataString(context, name, "primaryColor")),
+            content
+        )
     }
 
     private fun getMetaDataString(context: Context, featureName: String, key: String): String {
@@ -76,11 +70,6 @@ class FeatureStorage {
             "string",
             context.packageName
         ))
-    }
-
-    fun loadFeature(context: Context, name: String): Feature {
-        val feature = loadFeatureData(context, name)
-        return Feature(feature, ZipFile(File(getFeaturesDir(context), "$name.zip")))
     }
 
     fun installBundledFeatures(context: Context) {

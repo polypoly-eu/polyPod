@@ -52,7 +52,7 @@ open class FeatureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (view.findViewById(R.id.feature_title) as TextView).text = args.featureName
         logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
-        val feature = FeatureStorage().loadFeature(requireContext(), args.featureName)
+        val feature = FeatureStorage().loadFeature(requireContext(), args.featureFile)
         activity?.window?.navigationBarColor = feature.primaryColor
         api = setupPodApi()
         setupAppBar(view, feature.primaryColor)

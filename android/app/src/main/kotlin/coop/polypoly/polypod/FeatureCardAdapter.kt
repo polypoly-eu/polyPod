@@ -1,6 +1,5 @@
 package coop.polypoly.polypod
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import coop.polypoly.polypod.features.PartialFeature
+import coop.polypoly.polypod.features.Feature
 
-class FeatureCardAdapter(private val originatingFragment: Fragment, private val features: List<PartialFeature>) : RecyclerView.Adapter<FeatureCardAdapter.ViewHolder>() {
+class FeatureCardAdapter(private val originatingFragment: Fragment, private val features: List<Feature>) : RecyclerView.Adapter<FeatureCardAdapter.ViewHolder>() {
 
     class ViewHolder(val featureCardView: View) : RecyclerView.ViewHolder(featureCardView)
 
@@ -23,7 +22,7 @@ class FeatureCardAdapter(private val originatingFragment: Fragment, private val 
 
     override fun getItemCount() = features.size
 
-    private fun updateThumbnail(view: View, feature: PartialFeature) {
+    private fun updateThumbnail(view: View, feature: Feature) {
         val thumbnail = view.findViewById<ImageView>(R.id.thumbnail)
         thumbnail.setBackgroundColor(feature.primaryColor)
         // We cannot read images from the feature manifest yet, hence hard coded
@@ -35,7 +34,7 @@ class FeatureCardAdapter(private val originatingFragment: Fragment, private val 
             thumbnail.setImageResource(thumbnailResourceId)
     }
 
-    private fun updateTexts(view: View, feature: PartialFeature) {
+    private fun updateTexts(view: View, feature: Feature) {
         mapOf(R.id.feature_name to feature.name,
             R.id.feature_author to feature.author,
             R.id.feature_description to feature.description).forEach {
@@ -51,7 +50,7 @@ class FeatureCardAdapter(private val originatingFragment: Fragment, private val 
         view.setOnClickListener {
             // FIXME - navigation assumes we're coming from FirstFragment, which might not necessary be true
             val action =
-                FeatureListFragmentDirections.actionFeatureListFragmentToFeatureFragment(feature.name)
+                FeatureListFragmentDirections.actionFeatureListFragmentToFeatureFragment(feature.name, feature.fileName)
             findNavController(originatingFragment).navigate(action)
         }
     }
