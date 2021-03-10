@@ -15,7 +15,7 @@
     <string name="onboarding_slide3_body_text">Nach und nach biete ich Ihnen immer mehr Möglichkeiten, Ihre Privatsphäre zu schützen. Ich melde mich natürlich, sobald eine neue Funktion für Sie bereit steht.</string>
     <string name="settings_title">Einstellungen</string>
     <string name="settings_version">Version</string>
-    <!-- This string won't show up in production verisons, no need to translate -->
+    <!-- This string won't show up in production versions, no need to translate -->
     <string name="feature_list_no_features">Doesn\'t seem like there\'s any features yet.\nCome back again in a bit!</string>
     <!-- These strings should really be coming from the feature manifests, but for now they don't -->
     <string name="feature_polyexplorer_author">polypoly - Die Genossenschaft</string>
