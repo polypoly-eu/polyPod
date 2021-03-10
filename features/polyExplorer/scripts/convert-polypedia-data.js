@@ -51,6 +51,13 @@ function parseDescription(legalEntityData) {
     };
 }
 
+function parseCategory(legalName) {
+    const categoryStringKey = Object.keys(categories.de).find(
+        (e) => entityKey(e) === entityKey(legalName)
+    );
+    return categories.de[categoryStringKey] || null;
+}
+
 function fixEntityData(entityData) {
     if (entityData.legal_entities[0].identifiers.common_name === "Schufa")
         entityData.legal_entities[0].identifiers.legal_name.value =
@@ -69,21 +76,18 @@ function parseEntity(entityData, globalData) {
 
     return {
         name: legalName,
-        featured:
+        featured: !!(
             entityData.data_recipients &&
             entityData.derived_purpose_info &&
             entityData.derived_category_info
-                ? true
-                : false,
+        ),
         jurisdiction: (globalData.countries[countryCode] || {}).dataRegion,
         location: {
             city: legalEntityData.basic_info.registered_address.value.city,
             countryCode,
         },
         annualRevenues: extractAnnualRevenues(entityData),
-        dataRecipients: entityData.data_recipients
-            ? entityData.data_recipients
-            : null,
+        dataRecipients: entityData.data_recipients || null,
         dataSharingPurposes: entityData.derived_purpose_info
             ? Object.keys(entityData.derived_purpose_info).map(
                   (i) => entityData.derived_purpose_info[i]
@@ -95,16 +99,7 @@ function parseEntity(entityData, globalData) {
               )
             : null,
         description: parseDescription(legalEntityData),
-        category:
-            Object.keys(categories.de).filter(
-                (e) => e.toLowerCase() === legalName.toLowerCase()
-            ).length > 0
-                ? categories.de[
-                      Object.keys(categories.de).filter(
-                          (e) => e.toLowerCase() === legalName.toLowerCase()
-                      )[0]
-                  ]
-                : null,
+        category: parseCategory(legalName),
     };
 }
 
