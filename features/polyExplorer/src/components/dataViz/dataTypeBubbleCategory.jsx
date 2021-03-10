@@ -37,8 +37,7 @@ const DataTypeBubbleCategory = ({
         return d3
             .select(bubbleRef.current)
             .append("svg")
-            .attr("height", height)
-            .attr("width", width);
+            .attr("viewBox", `0 0 ${width} ${height}`);
     };
 
     // d3 svg bubble-diagram drawing function
@@ -63,16 +62,18 @@ const DataTypeBubbleCategory = ({
             .attr("fill", defaultColor)
             .style("vertical-align", "center");
 
+        //This is just so the size of the graph is equal to the other dataBubble-Graphs
         leaf.append("text")
             .text((d) => {
                 return d.value.toString();
             })
             .attr("text-anchor", "middle")
             .attr("y", ".3em")
-            .style("fill", textColor)
+            .style("fill", "transparent")
             .style("font-size", (d) => {
-                return (5 + d.value / 5).toString() + "px";
-            });
+                return (8 + d.value / 60).toString() + "px";
+            })
+            .style("font-weight", "500");
     };
 
     useEffect(() => {

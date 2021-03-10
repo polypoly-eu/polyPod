@@ -14,6 +14,7 @@ import "./dataExploration.css";
 const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
     const [activeSection] = useState("dataTypes");
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const getHighestValueObject = () => {
         let highest = { count: 0 };
@@ -32,6 +33,9 @@ const DataExplorationScreen = ({ company }) => {
         });
         return categories;
     };
+
+    const highestValueObject = getHighestValueObject();
+    const categories = getCategories();
 
     const progressBar = (
         <div className="progress-bar">
@@ -58,127 +62,126 @@ const DataExplorationScreen = ({ company }) => {
         </div>
     );
 
-    const highestValueObject = getHighestValueObject();
-    const categories = getCategories();
+    const getHeading = () => {
+        if (activeIndex < 3)
+            return (
+                <h1>
+                    {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
+                    <span className="highlight">
+                        {company.dataTypesShared.length}{" "}
+                        {i18n.t("common:sharing.dataTypes")}
+                    </span>
+                </h1>
+            );
+        else return <h1></h1>;
+    };
+
+    const getChartForSlide = () => {
+        if (activeIndex == 0)
+            return (
+                <DataTypeBubbles
+                    data={company.dataTypesShared}
+                    bubbleColor="#FB8A89"
+                    textColor="#0f1938"
+                    width="360"
+                    height="360"
+                />
+            );
+        else if (activeIndex > 0 && activeIndex <= 2)
+            return (
+                <DataTypeBubbles
+                    data={company.dataTypesShared}
+                    bubbleColor="#FB8A89"
+                    textColor="#0f1938"
+                    width="360"
+                    height="360"
+                    opacity={0.2}
+                />
+            );
+        else if (activeIndex > 2 && activeIndex <= categories.length + 2)
+            return (
+                <DataTypeBubbleCategory
+                    data={company.dataTypesShared}
+                    defaultColor="#FB8A89"
+                    category={categories[activeIndex - 3]}
+                    textColor="#0f1938"
+                    width="360"
+                    height="360"
+                />
+            );
+    };
 
     return (
         <Screen className="data-exploration">
-            <div className="company-short-info-margin">
+            <div className="company-short-info-container">
                 <CompanyShortInfo company={company} />
             </div>
             {progressBar}
-            <Swiper onSwiper={setSwiper} direction="vertical">
-                <SwiperSlide>
-                    <h1>
-                        {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
-                        <span className="highlight">
-                            {company.dataTypesShared.length}{" "}
-                            {i18n.t("common:sharing.dataTypes")}
-                        </span>
-                    </h1>
-                    <DataTypeBubbles
-                        data={company.dataTypesShared}
-                        bubbleColor="#FB8A89"
-                        textColor="#0f1938"
-                        width="320"
-                        height="320"
-                    />
+            <div className="exploration-content">
+                <div className="static-content">
+                    {getHeading()}
+                    {getChartForSlide()}
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend onClick={() => {}} />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <h1>
-                        {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
-                        <span className="highlight">
-                            {company.dataTypesShared.length}{" "}
-                            {i18n.t("common:sharing.dataTypes")}
-                        </span>
-                    </h1>
-                    <div className="bubble-chart-overlay">
-                        <p>
-                            {i18n.t(
-                                "dataExplorationScreen:dataTypes.text.intro",
-                                {
-                                    name: company.name,
-                                    sharingCount:
-                                        company.dataTypesShared.length,
-                                    mostSharedType:
-                                        highestValueObject.Translation_DE,
-                                    mostSharedCount: highestValueObject.count,
-                                }
-                            )}
-                        </p>
-                    </div>
-                    <DataTypeBubbles
-                        data={company.dataTypesShared}
-                        bubbleColor="#FB8A89"
-                        textColor="#0f1938"
-                        width="320"
-                        height="320"
-                    />
-                    <p className="source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
-                    <DataSharingLegend onClick={() => {}} />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <h1>
-                        {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
-                        <span className="highlight">
-                            {company.dataTypesShared.length}{" "}
-                            {i18n.t("common:sharing.dataTypes")}
-                        </span>
-                    </h1>
-                    <div className="bubble-chart-overlay">
-                        <p>
-                            {i18n.t(
-                                "dataExplorationScreen:dataTypes.text.grouping"
-                            )}
-                        </p>
-                    </div>
-                    <DataTypeBubbles
-                        data={company.dataTypesShared}
-                        bubbleColor="#FB8A89"
-                        textColor="#0f1938"
-                        width="320"
-                        height="320"
-                    />
-                    <p className="source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
-                    <DataSharingLegend onClick={() => {}} />
-                </SwiperSlide>
-                {categories.map((group) => (
-                    <SwiperSlide key={group}>
-                        <h2>
-                            {group == undefined
-                                ? i18n.t(
-                                      "dataExplorationScreen:dataTypes.without-category"
-                                  )
-                                : group}
-                        </h2>
-                        <DataTypeBubbleCategory
-                            data={company.dataTypesShared}
-                            defaultColor="#FB8A89"
-                            category={group}
-                            textColor="#0f1938"
-                            width="320"
-                            height="320"
-                        />
-                        <p className="source">
-                            {i18n.t("common:source")}: polyPedia
-                        </p>
-                        <DataSharingLegend onClick={() => {}} />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-            <button
-                className="down-button"
-                style={{ fontSize: "20px", color: "black" }}
-                onClick={() => swiper.slideNext()}
-            ></button>
+                    <button
+                        className="down-button"
+                        style={{ fontSize: "20px", color: "black" }}
+                        onClick={() => swiper.slideNext()}
+                    ></button>
+                </div>
+                <div className="swipable-content">
+                    <Swiper
+                        onSwiper={setSwiper}
+                        direction="vertical"
+                        onSlideChange={(swiper) =>
+                            setActiveIndex(swiper.activeIndex)
+                        }
+                    >
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
+                        ></SwiperSlide>
+                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                            <p className="on-bubble">
+                                {i18n.t(
+                                    "dataExplorationScreen:dataTypes.text.intro",
+                                    {
+                                        name: company.name,
+                                        sharingCount:
+                                            company.dataTypesShared.length,
+                                        mostSharedType:
+                                            highestValueObject.Translation_DE,
+                                        mostSharedCount:
+                                            highestValueObject.count,
+                                    }
+                                )}
+                            </p>
+                        </SwiperSlide>
+                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                            <p className="on-bubble">
+                                {i18n.t(
+                                    "dataExplorationScreen:dataTypes.text.grouping"
+                                )}
+                            </p>
+                        </SwiperSlide>
+                        {categories.map((group) => (
+                            <SwiperSlide
+                                key={group}
+                                onClick={() => swiper.slideNext()}
+                            >
+                                <h2>
+                                    {group == undefined
+                                        ? i18n.t(
+                                              "dataExplorationScreen:dataTypes.without-category"
+                                          )
+                                        : group}
+                                </h2>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
+            </div>
         </Screen>
     );
 };

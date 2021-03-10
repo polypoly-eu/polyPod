@@ -1,26 +1,22 @@
-.data-exploration h1,
-.data-exploration .swiper-slide p {
-    width: 296px;
-    margin: 0 auto;
-    font-size: 24px;
-}
-
-.data-exploration h1 .highlight {
-    color: #fb8a89;
-}
-
 .data-exploration h2 {
     text-align: center;
     font-size: 20px;
     margin-bottom: 8px;
 }
 
-.data-exploration .company-short-info-margin {
+.data-exploration .company-short-info-container button {
     margin: 24px 0 0 22px;
 }
 
+.data-exploration .company-short-info-container {
+    width: 100%;
+    max-width: 412px;
+    margin: 0 auto;
+}
+
 .data-exploration .progress-bar {
-    width: 300px;
+    width: 84%;
+    max-width: 350px;
     height: 4px;
     display: flex;
     flex-direction: row;
@@ -29,7 +25,7 @@
 
 .data-exploration .progress-bar .progress-bar-part {
     height: 4px;
-    width: 74px;
+    width: 25%;
 }
 
 .data-exploration .progress-bar .dataTypes {
@@ -56,8 +52,77 @@
     opacity: 1;
 }
 
+.data-exploration .exploration-content {
+    position: relative;
+    height: 100%;
+}
+
+.exploration-content .static-content,
+.dynamic-content {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 412px;
+}
+
+.exploration-content .static-content {
+    height: 50%;
+}
+
+.data-exploration .static-content h1 {
+    width: 296px;
+    margin: 8px auto;
+    font-size: 24px;
+    height: 24px;
+}
+
+.data-exploration .static-content h1 .highlight {
+    color: #fb8a89;
+}
+
+.data-exploration .static-content .bubble-chart {
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    height: 90%;
+    max-width: 412px;
+}
+
+.data-exploration .static-content .bubble-chart svg {
+    display: block;
+    margin: auto;
+}
+
+.data-exploration .static-content .source {
+    font-size: 10px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.01em;
+    color: #a9b6c6;
+    transform: translateY(-10px);
+    padding-left: 12%;
+}
+
+.data-exploration .static-content .down-button {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 17px auto 17px auto;
+    background: url("../images/chevron-down.svg") no-repeat;
+}
+
+.exploration-content .swipable-content {
+    height: 100%;
+}
+
 .data-exploration .swiper-container {
     width: 100%;
+    max-width: 412px;
     height: 100%;
 }
 
@@ -65,59 +130,10 @@
     position: relative;
 }
 
-.swiper-slide .bubble-chart-overlay p {
-    width: 50%;
-    text-align: left;
-    margin: 35% auto auto auto;
-    transform: translateY(-50%);
-    font-size: 14px;
+.data-exploration .swipable-content .on-bubble {
+    width: 260px;
+    margin: 45% auto 0 auto;
+    font-size: 16px;
     line-height: 120%;
     letter-spacing: -0.01em;
-}
-
-.data-exploration .swiper-slide .bubble-chart-overlay {
-    position: absolute;
-    height: 300px;
-    width: 100%;
-    top: 6%;
-    left: 0;
-    background-color: rgba(15, 25, 56, 0.8);
-}
-
-.data-exploration .bubble-chart {
-    margin: 0 auto;
-}
-
-.data-exploration .bubble-chart svg {
-    display: block;
-    margin-left: -20px;
-}
-
-.data-exploration .swiper-slide .source {
-    font-size: 10px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
-    letter-spacing: -0.01em;
-    color: #a9b6c6;
-    transform: translateY(-38px);
-}
-
-.data-exploration .fake-chart {
-    width: 300px;
-    height: 289px;
-    margin: 0 auto;
-    padding-top: 128px;
-    box-sizing: border-box;
-    background: #fb8a89;
-    color: #fff;
-    font-size: 24px;
-    text-align: center;
-}
-
-.data-exploration .down-button {
-    width: 24px;
-    height: 24px;
-    margin: 17px auto 17px auto;
-    background: url("../images/chevron-down.svg") no-repeat;
 }

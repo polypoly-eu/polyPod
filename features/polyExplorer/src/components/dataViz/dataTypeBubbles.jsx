@@ -9,7 +9,14 @@ import "./dataViz.css";
     data object: [{dataType, value},{},..]
 */
 
-const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
+const DataTypeBubbles = ({
+    data,
+    width,
+    height,
+    bubbleColor,
+    textColor,
+    opacity = 1,
+}) => {
     const bubbleRef = useRef();
     const edgePadding = 5;
 
@@ -17,6 +24,8 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
     data.forEach((e) => {
         e.value = e.count;
     });
+
+    //data.sort((a, b) => b.value - a.value);
 
     const clearSvg = () => {
         d3.select(bubbleRef.current).selectAll("svg").remove();
@@ -37,8 +46,7 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
         return d3
             .select(bubbleRef.current)
             .append("svg")
-            .attr("height", height)
-            .attr("width", width);
+            .attr("viewBox", `0 0 ${width} ${height}`);
     };
 
     // d3 svg bubble-diagram drawing function
@@ -47,6 +55,7 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
         const packLayout = pack();
 
         const root = packLayout(hierarchicalData);
+        console.log(hierarchicalData);
 
         const leaf = bubbleContainer
             .selectAll("g")
@@ -58,7 +67,8 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
         leaf.append("circle")
             .attr("r", (d) => d.r)
             .style("fill", bubbleColor)
-            .style("vertical-align", "center");
+            .style("vertical-align", "center")
+            .attr("fill-opacity", opacity);
 
         leaf.append("text")
             .text((d) => {
@@ -68,7 +78,7 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor, textColor }) => {
             .attr("y", ".3em")
             .style("fill", textColor)
             .style("font-size", (d) => {
-                return (5 + d.value / 5).toString() + "px";
+                return (8 + d.value / 60).toString() + "px";
             })
             .style("font-weight", "500");
     };
