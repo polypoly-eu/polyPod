@@ -59,15 +59,15 @@ function parseCategory(legalName) {
 }
 
 function fixEntityData(entityData) {
-    if (entityData.legal_entities[0].identifiers.common_name === "Schufa")
-        entityData.legal_entities[0].identifiers.legal_name.value =
+    if (entityData.legal_entity.identifiers.common_name === "Schufa")
+        entityData.legal_entity.identifiers.legal_name.value =
             "SCHUFA Holding AG";
 }
 
 function parseEntity(entityData, globalData) {
     fixEntityData(entityData);
 
-    const legalEntityData = entityData.legal_entities[0];
+    const legalEntityData = entityData.legal_entity;
     const legalName = legalEntityData.identifiers.legal_name.value;
     if (!legalName) return null;
 
