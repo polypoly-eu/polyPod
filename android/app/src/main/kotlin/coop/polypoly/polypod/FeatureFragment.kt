@@ -15,7 +15,7 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.logging.LoggerFactory
 
-private fun luminance(color: Int): Double = Color.red(color) * 0.2126 + Color.green(color) * 0.7152 + Color.blue(color) * 0.0722;
+private fun luminance(color: Int): Double = Color.red(color) * 0.2126 + Color.green(color) * 0.7152 + Color.blue(color) * 0.0722
 
 private enum class ForegroundResources(
     val color: Int,
