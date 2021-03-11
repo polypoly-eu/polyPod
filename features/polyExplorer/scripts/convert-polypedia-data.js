@@ -32,7 +32,7 @@ function parseDescription(legalEntityData) {
         ((legalEntityData.editorial_content || {}).editorials || [])[0] || {};
     const description = editorialData.body_i18n || {};
     for (let languageCode of Object.keys(fallbackDescriptions))
-        if (!description.languageCode) {
+        if (!description[languageCode]) {
             const fallbackDescription = (Object.entries(
                 fallbackDescriptions[languageCode]
             ).find(([companyName]) => entityKey(companyName) === key) || [])[1];
