@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import android.util.AttributeSet
 import android.webkit.*
+import android.widget.LinearLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -17,15 +18,21 @@ import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import eu.polypoly.pod.android.polyOut.PolyOut
 import java.util.zip.ZipFile
 
-class FeatureContainer(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs), LifecycleOwner {
+@SuppressLint("SetJavaScriptEnabled")
+class FeatureContainer(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs), LifecycleOwner {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    private val registry: LifecycleRegistry = LifecycleRegistry(this)
-    private val api: PodApi = PodApi(PolyOut(), PolyIn())
-    private lateinit var navApi: PodNavApi
+    private val webView = WebView(context)
+    private val registry = LifecycleRegistry(this)
+    private val api = PodApi(PolyOut(), PolyIn())
+    private val navApi: PodNavApi = PodNavApi(
+        webView,
+        { navActionsChangedHandler(it) },
+        { navTitleChangedHandler(it) }
+    )
 
     var feature: Feature? = null
         set(value) {
@@ -37,33 +44,28 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) : WebView(
     var navActionsChangedHandler: (List<String>) -> Unit = {}
     var navTitleChangedHandler: (String) -> Unit = {}
 
-    override fun getLifecycle(): Lifecycle {
-        return registry
+    init {
+
+        webView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        webView.settings.textZoom = 100
+        webView.settings.javaScriptEnabled = true
+        // Enabling localStorage until window.pod.polyIn works
+        webView.settings.domStorageEnabled = true
+        addView(webView)
     }
+
+    override fun getLifecycle(): Lifecycle = registry
 
     fun triggerNavAction(name: String): Boolean = navApi.triggerAction(name)
 
     private fun loadFeature(feature: Feature) {
-        setupWebView(feature)
-        navApi = PodNavApi(this, { navActionsChangedHandler(it) }, { navTitleChangedHandler(it) })
-        loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + feature.name)
-    }
-
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun setupWebView(feature: Feature) {
-        setBackgroundColor(feature.primaryColor)
-        settings.javaScriptEnabled = true
-        settings.textZoom = 100
-
-        // Enabling localStorage until window.pod.polyIn works
-        settings.domStorageEnabled = true
+        webView.setBackgroundColor(feature.primaryColor)
 
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler("/features/${feature.name}/", FeaturesPathHandler(feature.content))
             .addPathHandler("/", PodPathHandler(context))
             .build()
-
-        webViewClient = object : WebViewClient() {
+        webView.webViewClient = object : WebViewClient() {
             override fun shouldInterceptRequest(
                 view: WebView,
                 request: WebResourceRequest
@@ -77,6 +79,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) : WebView(
                 initPostOffice(view!!)
             }
         }
+
+        webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + feature.name)
     }
 
     private fun initPostOffice(view: WebView) {
