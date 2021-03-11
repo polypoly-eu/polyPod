@@ -77,7 +77,25 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             ): WebResourceResponse? {
                 if (request.url.lastPathSegment == "favicon.ico")
                     return WebResourceResponse(null, null, null)
-                return assetLoader.shouldInterceptRequest(request.url)
+                val response = assetLoader.shouldInterceptRequest(request.url)
+                if (response == null) {
+                    logger.warn("Feature ${feature.name} tried to load forbidden URL: ${request.url}")
+                    val statusCode = 403
+                    val reasonPhrase =
+                        "Forbidden making requests to external servers is"
+                    val message = "$statusCode - $reasonPhrase"
+                    val errorResponse = WebResourceResponse(
+                        "text/plain",
+                        "UTF-8",
+                        message.byteInputStream()
+                    )
+                    errorResponse.setStatusCodeAndReasonPhrase(
+                        statusCode,
+                        reasonPhrase
+                    )
+                    return errorResponse
+                }
+                return response
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
