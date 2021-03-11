@@ -14,6 +14,7 @@ import dataExplorationScreenEn from "./locales/en/dataExplorationScreen.json";
 import featuredCompanyHelpScreenEn from "./locales/en/featuredCompanyHelpScreen.json";
 import infoScreenEn from "./locales/en/infoScreen.json";
 import dataRegionInfoScreenEn from "./locales/en/dataRegionInfoScreen.json";
+import dataTypeBubbleEn from "./locales/en/dataTypeBubble.json";
 
 import commonDe from "./locales/de/common.json";
 import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
@@ -27,6 +28,7 @@ import dataExplorationScreenDe from "./locales/de/dataExplorationScreen.json";
 import featuredCompanyHelpScreenDe from "./locales/de/featuredCompanyHelpScreen.json";
 import infoScreenDe from "./locales/de/infoScreen.json";
 import dataRegionInfoScreenDe from "./locales/de/dataRegionInfoScreen.json";
+import dataTypeBubbleDe from "./locales/de/dataTypeBubble.json";
 
 const strings = {
     en: {
@@ -42,6 +44,7 @@ const strings = {
         featuredCompanyHelpScreen: featuredCompanyHelpScreenEn,
         infoScreen: infoScreenEn,
         dataRegionInfoScreen: dataRegionInfoScreenEn,
+        dataTypeBubble: dataTypeBubbleEn,
     },
     de: {
         common: commonDe,
@@ -56,6 +59,7 @@ const strings = {
         featuredCompanyHelpScreen: featuredCompanyHelpScreenDe,
         infoScreen: infoScreenDe,
         dataRegionInfoScreen: dataRegionInfoScreenDe,
+        dataTypeBubble: dataTypeBubbleDe,
     },
 };
 

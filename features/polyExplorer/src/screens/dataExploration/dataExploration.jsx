@@ -5,6 +5,7 @@ import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
+import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 
@@ -15,6 +16,12 @@ const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
     const [activeSection] = useState("dataTypes");
     const [activeIndex, setActiveIndex] = useState(0);
+
+    const correlationTypeBundle = [
+        "dpv:Communication",
+        "dpv:IPAddress",
+        "dpv:Interest",
+    ];
 
     const getHighestValueObject = () => {
         let highest = { count: 0 };
@@ -73,6 +80,17 @@ const DataExplorationScreen = ({ company }) => {
                     </span>
                 </h1>
             );
+        if (
+            activeIndex > categories.length + 2 &&
+            activeIndex <= categories.length + 4
+        )
+            return (
+                <h2>
+                    {i18n.t(
+                        "dataExplorationScreen:dataTypes.heading.correlations"
+                    )}
+                </h2>
+            );
         else return <h1></h1>;
     };
 
@@ -105,6 +123,35 @@ const DataExplorationScreen = ({ company }) => {
                     defaultColor="#FB8A89"
                     category={categories[activeIndex - 3]}
                     textColor="#0f1938"
+                    width="360"
+                    height="360"
+                    highlightedType="dpv:Communication"
+                />
+            );
+        else if (
+            activeIndex > categories.length + 2 &&
+            activeIndex <= categories.length + 3
+        )
+            return (
+                <DataTypeBubbles
+                    data={company.dataTypesShared}
+                    bubbleColor="#FB8A89"
+                    textColor="#0f1938"
+                    width="360"
+                    height="360"
+                    opacity={0.2}
+                    showValues={false}
+                />
+            );
+        else if (
+            activeIndex > categories.length + 3 &&
+            activeIndex <= categories.length + 4
+        )
+            return (
+                <DataTypeBubbleCorrelation
+                    data={company.dataTypesShared}
+                    correlationColor="#FB8A89"
+                    typeBundle={correlationTypeBundle}
                     width="360"
                     height="360"
                 />
@@ -165,20 +212,29 @@ const DataExplorationScreen = ({ company }) => {
                                 )}
                             </p>
                         </SwiperSlide>
-                        {categories.map((group) => (
+                        {categories.map((group, index) => (
                             <SwiperSlide
-                                key={group}
+                                key={index}
                                 onClick={() => swiper.slideNext()}
                             >
                                 <h2>
-                                    {group == undefined
-                                        ? i18n.t(
-                                              "dataExplorationScreen:dataTypes.without-category"
-                                          )
-                                        : group}
+                                    {group ||
+                                        i18n.t(
+                                            "dataExplorationScreen:dataTypes.without-category"
+                                        )}
                                 </h2>
                             </SwiperSlide>
                         ))}
+                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                            <p className="on-bubble">
+                                {i18n.t(
+                                    "dataExplorationScreen:dataTypes.text.correlations"
+                                )}
+                            </p>
+                        </SwiperSlide>
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
+                        ></SwiperSlide>
                     </Swiper>
                 </div>
             </div>

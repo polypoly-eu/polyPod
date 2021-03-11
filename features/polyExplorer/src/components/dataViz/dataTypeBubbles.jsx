@@ -16,6 +16,7 @@ const DataTypeBubbles = ({
     bubbleColor,
     textColor,
     opacity = 1,
+    showValues = true,
 }) => {
     const bubbleRef = useRef();
     const edgePadding = 5;
@@ -55,7 +56,6 @@ const DataTypeBubbles = ({
         const packLayout = pack();
 
         const root = packLayout(hierarchicalData);
-        console.log(hierarchicalData);
 
         const leaf = bubbleContainer
             .selectAll("g")
@@ -70,17 +70,20 @@ const DataTypeBubbles = ({
             .style("vertical-align", "center")
             .attr("fill-opacity", opacity);
 
-        leaf.append("text")
-            .text((d) => {
-                return d.value.toString();
-            })
-            .attr("text-anchor", "middle")
-            .attr("y", ".3em")
-            .style("fill", textColor)
-            .style("font-size", (d) => {
-                return (8 + d.value / 60).toString() + "px";
-            })
-            .style("font-weight", "500");
+        showValues
+            ? leaf
+                  .append("text")
+                  .text((d) => {
+                      return d.value.toString();
+                  })
+                  .attr("text-anchor", "middle")
+                  .attr("y", ".3em")
+                  .style("fill", textColor)
+                  .style("font-size", (d) => {
+                      return (8 + d.value / 60).toString() + "px";
+                  })
+                  .style("font-weight", "500")
+            : null;
     };
 
     useEffect(() => {
