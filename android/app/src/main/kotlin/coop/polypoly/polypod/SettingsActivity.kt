@@ -6,9 +6,13 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 
 class SettingsFragment : PreferenceFragmentCompat() {
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?
+    ) {
         setPreferencesFromResource(R.xml.settings, rootKey)
-        val version = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+        val version =
+            "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
         findPreference<Preference>("version")?.summary = version
     }
 }
