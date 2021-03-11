@@ -19,7 +19,8 @@ import eu.polypoly.pod.android.polyOut.PolyOut
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
-class FeatureContainer(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs), LifecycleOwner {
+class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
+    LinearLayout(context, attrs), LifecycleOwner {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
@@ -46,7 +47,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) : LinearLa
 
     init {
 
-        webView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        webView.layoutParams =
+            LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
         // Enabling localStorage until window.pod.polyIn works
@@ -62,7 +64,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) : LinearLa
         webView.setBackgroundColor(feature.primaryColor)
 
         val assetLoader = WebViewAssetLoader.Builder()
-            .addPathHandler("/features/${feature.name}/", FeaturesPathHandler(feature.content))
+            .addPathHandler(
+                "/features/${feature.name}/",
+                FeaturesPathHandler(feature.content)
+            )
             .addPathHandler("/", PodPathHandler(context))
             .build()
         webView.webViewClient = object : WebViewClient() {
@@ -80,18 +85,25 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) : LinearLa
             }
         }
 
-        webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=" + feature.name)
+        webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=${feature.name}")
     }
 
     private fun initPostOffice(view: WebView) {
         val channel: Array<WebMessagePort> = view.createWebMessageChannel()
         val outerPort = channel[0]
         val innerPort = channel[1]
-        outerPort.setWebMessageCallback(PostOfficeMessageCallback(lifecycleScope, outerPort, api))
+        outerPort.setWebMessageCallback(
+            PostOfficeMessageCallback(
+                lifecycleScope,
+                outerPort,
+                api
+            )
+        )
         view.postWebMessage(WebMessage("", arrayOf(innerPort)), Uri.parse("*"))
     }
 
-    private class PodPathHandler(context: Context) : WebViewAssetLoader.PathHandler {
+    private class PodPathHandler(context: Context) :
+        WebViewAssetLoader.PathHandler {
         val assetsPathHandler: WebViewAssetLoader.AssetsPathHandler =
             WebViewAssetLoader.AssetsPathHandler(context)
 
@@ -101,23 +113,44 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) : LinearLa
                 else -> path.replaceFirst(Regex("^assets/"), "")
             }
             val response = assetsPathHandler.handle(finalPath)
-            logger.debug("PodPathHandler, I'm supposed to handle path: '{}', finalPath: '{}', handling: '{}'", path, finalPath, response != null)
+            logger.debug(
+                "PodPathHandler, I'm supposed to handle path: '{}', finalPath: '{}', handling: '{}'",
+                path,
+                finalPath,
+                response != null
+            )
             return response
         }
     }
 
-    private class FeaturesPathHandler(val featureFile: ZipFile) : WebViewAssetLoader.PathHandler {
+    private class FeaturesPathHandler(val featureFile: ZipFile) :
+        WebViewAssetLoader.PathHandler {
         override fun handle(path: String): WebResourceResponse? {
-            logger.debug("FeaturesPathHandler, I'm supposed to handle path: '{}'", path)
+            logger.debug(
+                "FeaturesPathHandler, I'm supposed to handle path: '{}'",
+                path
+            )
             val entry = featureFile.getEntry(path)
             if (entry == null) {
-                logger.debug("FeaturesPathHandler, path '{}' not found, skipping", path)
+                logger.debug(
+                    "FeaturesPathHandler, path '{}' not found, skipping",
+                    path
+                )
                 return null
             }
             val mimeType = guessMimeType(path)
 
-            logger.debug("FeaturesPathHandler, handling path: '{}', entry: '{}', mimeType: '{}'", path, entry.name, mimeType)
-            return WebResourceResponse(mimeType, null, featureFile.getInputStream(entry))
+            logger.debug(
+                "FeaturesPathHandler, handling path: '{}', entry: '{}', mimeType: '{}'",
+                path,
+                entry.name,
+                mimeType
+            )
+            return WebResourceResponse(
+                mimeType,
+                null,
+                featureFile.getInputStream(entry)
+            )
         }
 
         private fun guessMimeType(path: String): String {
@@ -137,7 +170,11 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) : LinearLa
     // The podNav API is currently experimental and not part of the formal
     // feature API yet - as soon as we know what it needs to look like,
     // that should change.
-    private class PodNavApi(private val webView: WebView, onActionsChanged: (List<String>) -> Unit, onTitleChanged: (String) -> Unit) {
+    private class PodNavApi(
+        private val webView: WebView,
+        onActionsChanged: (List<String>) -> Unit,
+        onTitleChanged: (String) -> Unit
+    ) {
         private val apiJsObject = "podNav"
         private val registeredActions = HashSet<String>()
 
@@ -165,7 +202,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) : LinearLa
             // We are making too many assumptions about the code loaded into
             // the WebView here, it would be nicer if the container would
             // expose the actions some other way.
-            val featureWindow = "document.getElementsByTagName('iframe')[0].contentWindow"
+            val featureWindow =
+                "document.getElementsByTagName('iframe')[0].contentWindow"
             webView.evaluateJavascript("$featureWindow.$apiJsObject.actions['$action']()") {}
             return true
         }

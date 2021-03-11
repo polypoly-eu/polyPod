@@ -11,11 +11,14 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.features.Feature
+import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 
-private fun luminance(color: Int): Double = Color.red(color) * 0.2126 + Color.green(color) * 0.7152 + Color.blue(color) * 0.0722
+private fun luminance(color: Int): Double =
+    Color.red(color) * 0.2126 +
+        Color.green(color) * 0.7152 +
+        Color.blue(color) * 0.0722
 
 private enum class ForegroundResources(
     val color: Int,
@@ -40,7 +43,8 @@ private enum class ForegroundResources(
     );
 
     companion object {
-        fun fromBackgroundColor(color: Int): ForegroundResources = if (luminance(color) > 50) DARK else LIGHT
+        fun fromBackgroundColor(color: Int): ForegroundResources =
+            if (luminance(color) > 50) DARK else LIGHT
     }
 }
 
@@ -68,10 +72,16 @@ open class FeatureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (view.findViewById(R.id.feature_title) as TextView).text = args.featureName
-        logger.debug("Inside FeatureFragment, feature to load: '{}'", args.featureName)
-        feature = FeatureStorage().loadFeature(requireContext(), args.featureFile)
-        foregroundResources = ForegroundResources.fromBackgroundColor(feature.primaryColor)
+        (view.findViewById(R.id.feature_title) as TextView).text =
+            args.featureName
+        logger.debug(
+            "Inside FeatureFragment, feature to load: '{}'",
+            args.featureName
+        )
+        feature =
+            FeatureStorage().loadFeature(requireContext(), args.featureFile)
+        foregroundResources =
+            ForegroundResources.fromBackgroundColor(feature.primaryColor)
         activity?.window?.navigationBarColor = feature.primaryColor
         setupAppBar(view)
         featureContainer = view.findViewById(R.id.feature_container)
@@ -80,8 +90,14 @@ open class FeatureFragment : Fragment() {
     }
 
     private fun setupAppBar(view: View) {
-        view.findViewById<View>(R.id.app_bar).setBackgroundColor(feature.primaryColor)
-        view.findViewById<TextView>(R.id.feature_title).setTextColor(resources.getColor(foregroundResources.color, context?.theme))
+        view.findViewById<View>(R.id.app_bar)
+            .setBackgroundColor(feature.primaryColor)
+        view.findViewById<TextView>(R.id.feature_title).setTextColor(
+            resources.getColor(
+                foregroundResources.color,
+                context?.theme
+            )
+        )
 
         val closeButton = view.findViewById<ImageView>(R.id.close_button)
         closeButton.setImageResource(foregroundResources.closeIcon)
@@ -108,9 +124,11 @@ open class FeatureFragment : Fragment() {
     }
 
     private fun setupNavigation(view: View) {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() = navigateBack()
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() = navigateBack()
+            })
         featureContainer.navTitleChangedHandler = {
             activity?.runOnUiThread {
                 updateAppBarTitle(view, it)
