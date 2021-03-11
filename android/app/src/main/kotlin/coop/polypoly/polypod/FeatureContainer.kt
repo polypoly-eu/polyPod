@@ -2,6 +2,7 @@ package coop.polypoly.polypod
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
 import android.webkit.*
@@ -210,6 +211,14 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 @Suppress("unused")
                 fun setTitle(title: String) {
                     onTitleChanged(title)
+                }
+
+                @JavascriptInterface
+                @Suppress("unused")
+                fun openUrl(url: String) {
+                    webView.context.startActivity(
+                        Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    )
                 }
             }, apiJsObject)
         }
