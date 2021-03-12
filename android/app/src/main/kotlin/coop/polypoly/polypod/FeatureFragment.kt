@@ -22,30 +22,37 @@ private fun luminance(color: Int): Double =
 
 private enum class ForegroundResources(
     val color: Int,
-    val closeIcon: Int,
-    val backIcon: Int,
-    val infoIcon: Int,
-    val searchIcon: Int
+    val icons: Map<String, Int>
 ) {
     LIGHT(
         color = R.color.feature_foreground_light,
-        closeIcon = R.drawable.ic_close_light,
-        backIcon = R.drawable.ic_back_light,
-        infoIcon = R.drawable.ic_info_light,
-        searchIcon = R.drawable.ic_search_light
+        icons = mapOf(
+            "close" to R.drawable.ic_close_light,
+            "back" to R.drawable.ic_back_light,
+            "info" to R.drawable.ic_info_light,
+            "search" to R.drawable.ic_search_light
+        )
     ),
     DARK(
         color = R.color.feature_foreground_dark,
-        closeIcon = R.drawable.ic_close_dark,
-        backIcon = R.drawable.ic_back_dark,
-        infoIcon = R.drawable.ic_info_dark,
-        searchIcon = R.drawable.ic_search_dark
+        icons = mapOf(
+            "close" to R.drawable.ic_close_dark,
+            "back" to R.drawable.ic_back_dark,
+            "info" to R.drawable.ic_info_dark,
+            "search" to R.drawable.ic_search_dark
+        )
     );
 
     companion object {
         fun fromBackgroundColor(color: Int): ForegroundResources =
             if (luminance(color) > 50) DARK else LIGHT
     }
+}
+
+private enum class ActionButton(val action: String, val id: Int) {
+    CLOSE("close", R.id.close_button),
+    INFO("info", R.id.info_button),
+    SEARCH("search", R.id.search_button)
 }
 
 /**
@@ -99,28 +106,18 @@ open class FeatureFragment : Fragment() {
             )
         )
 
-        val closeButton = view.findViewById<ImageView>(R.id.close_button)
-        closeButton.setImageResource(foregroundResources.closeIcon)
-        closeButton.setOnClickListener {
-            navigateBack()
+        for (actionButton in ActionButton.values()) {
+            val buttonView = view.findViewById<ImageView>(actionButton.id)
+            buttonView.setImageResource(
+                foregroundResources.icons.getValue(actionButton.action)
+            )
+            buttonView.setOnClickListener {
+                if (actionButton == ActionButton.CLOSE)
+                    navigateBack()
+                else
+                    featureContainer.triggerNavAction(actionButton.action)
+            }
         }
-
-        val infoButton = view.findViewById<ImageView>(R.id.info_button)
-        infoButton.setImageResource(foregroundResources.infoIcon)
-        infoButton.setOnClickListener {
-            featureContainer.triggerNavAction("info")
-        }
-
-        val searchButton = view.findViewById<ImageView>(R.id.search_button)
-        searchButton.setImageResource(foregroundResources.searchIcon)
-        searchButton.setOnClickListener {
-            featureContainer.triggerNavAction("search")
-        }
-    }
-
-    private fun navigateBack() {
-        if (!featureContainer.triggerNavAction("back"))
-            findNavController().popBackStack()
     }
 
     private fun setupNavigation(view: View) {
@@ -129,6 +126,7 @@ open class FeatureFragment : Fragment() {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() = navigateBack()
             })
+
         featureContainer.navTitleChangedHandler = {
             activity?.runOnUiThread {
                 updateAppBarTitle(view, it)
@@ -142,15 +140,25 @@ open class FeatureFragment : Fragment() {
         }
     }
 
+    private fun navigateBack() {
+        if (!featureContainer.triggerNavAction("back"))
+            findNavController().popBackStack()
+    }
+
     private fun updateAppBarActions(view: View, navActions: List<String>) {
-        view.findViewById<ImageView>(R.id.close_button).setImageResource(
-            if (navActions.contains("back")) foregroundResources.backIcon
-            else foregroundResources.closeIcon
-        )
-        view.findViewById<View>(R.id.info_button).visibility =
-            if (navActions.contains("info")) View.VISIBLE else View.GONE
-        view.findViewById<View>(R.id.search_button).visibility =
-            if (navActions.contains("search")) View.VISIBLE else View.GONE
+        for (actionButton in ActionButton.values()) {
+            val buttonView = view.findViewById<ImageView>(actionButton.id)
+            if (actionButton == ActionButton.CLOSE) {
+                buttonView.setImageResource(
+                    foregroundResources.icons.getValue(
+                        if ("back" in navActions) "back" else "close"
+                    )
+                )
+                continue
+            }
+            buttonView.visibility =
+                if (actionButton.action in navActions) View.VISIBLE else View.GONE
+        }
     }
 
     private fun updateAppBarTitle(view: View, title: String) {
