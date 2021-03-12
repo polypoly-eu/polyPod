@@ -13,6 +13,7 @@ import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
 
 const PurposeChart = ({ purposes }) => {
+    /*
     const getHighestCount = () => {
         console.log(typeof purposes);
         let highest = 0;
@@ -21,9 +22,14 @@ const PurposeChart = ({ purposes }) => {
         });
     };
 
-    const highestCount = getHighestCount();
+    const calculateScaleValues = (highest) => {
+        if (highest <= 80) {
+        }
+    };
+*/
+    //const scaleValues = calculateScaleValues(getHighestCount());
 
-    const scale = <div className="scale"></div>;
+    //const scale = <div className="scale"></div>;
 
     return (
         <div className="purpose-chart">
@@ -39,6 +45,7 @@ const PurposeChart = ({ purposes }) => {
                         <img src="./images/question-circle-light.svg" />
                         <div>{i18n.t("common:how-to-read")}</div>
                     </div>
+                    {purposes}
                 </div>
             </div>
         </div>
@@ -97,12 +104,12 @@ const DataExplorationScreen = ({ company }) => {
             ></div>
             <div
                 className={`progress-bar-part companiesShared ${
-                    false == "companies" ? "active" : ""
+                    activeIndex > 100 ? "active" : ""
                 }`}
             ></div>
             <div
                 className={`progress-bar-part jurisdictions ${
-                    false == "jurisdictions" ? "active" : ""
+                    activeIndex > 100 ? "active" : ""
                 }`}
             ></div>
         </div>
