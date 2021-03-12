@@ -61,6 +61,37 @@
         "category": "Gesundheitswesen & Soziales"
     },
     {
+        "name": "Jobandtalent de GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2017",
+                "amount": 14000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 22000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": "Service"
+    },
+    {
         "name": "Simplesurance GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -1926,6 +1957,42 @@
         "category": "Internet & Multimedia"
     },
     {
+        "name": "Scandit GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": null
+    },
+    {
+        "name": "MindMaze Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Willstätt",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": null
+    },
+    {
         "name": "Chrono24 GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -2003,6 +2070,24 @@
             "source": null
         },
         "category": "Internet & Multimedia"
+    },
+    {
+        "name": "B264 GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Düsseldorf",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": null
     },
     {
         "name": "N26 Bank GmbH",
@@ -3128,6 +3213,85 @@
         "category": "EDV & IT"
     },
     {
+        "name": "navabi GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Niederzier",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 240000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 540000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 2200000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 6800000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 5900000,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 16000000,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 20000000,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 20000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 22000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 26000000,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": null
+    },
+    {
         "name": "AdColony GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -4250,6 +4414,24 @@
         "category": "Versicherung"
     },
     {
+        "name": "Spotahome Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Frankfurt a. Main",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": "EDV & IT"
+    },
+    {
         "name": "SPIEGEL-Verlag Rudolf Augstein GmbH & Co. KG",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -4607,6 +4789,75 @@
             "source": null
         },
         "category": "Internet & Multimedia"
+    },
+    {
+        "name": "Verizon Media Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2008",
+                "amount": 61000000,
+                "currency": "EUR",
+                "year": 2008
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 61000000,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 61000000,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 57000000,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 59000000,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 60000000,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 60000000,
+                "currency": "EUR",
+                "year": 2018
+            },
+            {
+                "date": "31.12.2019",
+                "amount": 60000000,
+                "currency": "EUR",
+                "year": 2019
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": {
+                "en": "Verizon Media is a division of Verizon Communications that focuses on media and online business. Verizon Communications acquired AOL in 2015.[5][6] When Verizon Communications purchased Yahoo! in 2017, it merged AOL and Yahoo! into a subsidiary named Oath Inc.[3][7][8]\n\nIn December 2018, Verizon announced it would write down the combined value of its purchases of AOL and Yahoo! by $4.6 billion, roughly half.[9]\n\nVerizon renamed the company Verizon Media in January 2019.[10] Within Verizon Media, AOL and Yahoo! maintain their respective brands."
+            },
+            "source": "Wikipedia"
+        },
+        "category": "Kultur & Unterhaltung & Veranstaltung"
     },
     {
         "name": "solarisBank AG",
@@ -5712,6 +5963,24 @@
         "category": "Handel & Konsum"
     },
     {
+        "name": "Amazon EU S.à r.l., Niederlassung Deutschland",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "München",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": null
+    },
+    {
         "name": "Adidas AG",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -5799,24 +6068,6 @@
         "category": "Textil & Mode"
     },
     {
-        "name": "Amazon EU S.à r.l., Niederlassung Deutschland",
-        "featured": false,
-        "jurisdiction": "EU-GDPR",
-        "location": {
-            "city": "München",
-            "countryCode": "DE"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "category": null
-    },
-    {
         "name": "Comuto Deutschland GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -5884,6 +6135,24 @@
             "source": "Wikipedia"
         },
         "category": "Verkehr & Transport & Logistik"
+    },
+    {
+        "name": "Bitfury Surround GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": null
     },
     {
         "name": "Amazon Digital Germany GmbH",
@@ -7163,6 +7432,24 @@
         "category": null
     },
     {
+        "name": "TikTok Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Berlin",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": null
+    },
+    {
         "name": "Acronis Germany GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -7224,6 +7511,97 @@
             "source": "Wikipedia"
         },
         "category": "EDV & IT"
+    },
+    {
+        "name": "Google Germany GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        },
+        "annualRevenues": [
+            {
+                "date": "31.12.2006",
+                "amount": 35584859.91,
+                "currency": "EUR",
+                "year": 2006
+            },
+            {
+                "date": "31.12.2007",
+                "amount": 79747749.28,
+                "currency": "EUR",
+                "year": 2007
+            },
+            {
+                "date": "31.12.2009",
+                "amount": 146241722.73,
+                "currency": "EUR",
+                "year": 2009
+            },
+            {
+                "date": "31.12.2010",
+                "amount": 155698127.1,
+                "currency": "EUR",
+                "year": 2010
+            },
+            {
+                "date": "31.12.2011",
+                "amount": 190474306.98,
+                "currency": "EUR",
+                "year": 2011
+            },
+            {
+                "date": "31.12.2012",
+                "amount": 202834060.92,
+                "currency": "EUR",
+                "year": 2012
+            },
+            {
+                "date": "31.12.2013",
+                "amount": 263677629.95,
+                "currency": "EUR",
+                "year": 2013
+            },
+            {
+                "date": "31.12.2014",
+                "amount": 278779005.29,
+                "currency": "EUR",
+                "year": 2014
+            },
+            {
+                "date": "31.12.2015",
+                "amount": 324869618.47,
+                "currency": "EUR",
+                "year": 2015
+            },
+            {
+                "date": "31.12.2016",
+                "amount": 378470398.83,
+                "currency": "EUR",
+                "year": 2016
+            },
+            {
+                "date": "31.12.2017",
+                "amount": 431358086.1,
+                "currency": "EUR",
+                "year": 2017
+            },
+            {
+                "date": "31.12.2018",
+                "amount": 544066622,
+                "currency": "EUR",
+                "year": 2018
+            }
+        ],
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": null
     },
     {
         "name": "Intel Deutschland GmbH",
@@ -7352,6 +7730,24 @@
             "source": null
         },
         "category": "EDV & IT"
+    },
+    {
+        "name": "Yelp GmbH",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "category": null
     },
     {
         "name": "Konux GmbH",
@@ -8707,24 +9103,6 @@
             "source": null
         },
         "category": "Service"
-    },
-    {
-        "name": "TikTok Germany GmbH",
-        "featured": false,
-        "jurisdiction": "EU-GDPR",
-        "location": {
-            "city": "Berlin",
-            "countryCode": "DE"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "category": null
     },
     {
         "name": "Check24 Vergleichsportal GmbH",
