@@ -1,5 +1,6 @@
 {
   "name": "poly-explorer-feature",
+  "version": "0.0.1",
   "scripts": {
     "eslint": "eslint src test scripts --ext .js --ext .jsx",
     "lint": "npm run eslint",
@@ -40,5 +41,12 @@
     "rollup-plugin-css-only": "^3.1.0",
     "swiper": "^6.4.11"
   },
-  "type": "module"
+  "type": "module",
+  "engines": {
+    "polypoly": "^0.6.0"
+  },
+  "polypoly": {
+      "root": "",
+      "manifest": "manifest.json"
+  }
 }
