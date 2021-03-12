@@ -128,15 +128,11 @@ open class FeatureFragment : Fragment() {
             })
 
         featureContainer.navTitleChangedHandler = {
-            activity?.runOnUiThread {
-                updateAppBarTitle(view, it)
-            }
+            activity?.runOnUiThread { updateAppBarTitle(view, it) }
         }
 
         featureContainer.navActionsChangedHandler = {
-            activity?.runOnUiThread {
-                updateAppBarActions(view, it)
-            }
+            activity?.runOnUiThread { updateAppBarActions(view, it) }
         }
     }
 
