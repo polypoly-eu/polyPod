@@ -6,33 +6,6 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
-task copyFeatureContainerBootstrap(type: Copy) {
-    from "../../core/podigree/dist/bootstrap.js"
-    rename "bootstrap.js", "pod.js"
-    into "build/generated-assets/container/"
-}
-
-task buildPolyExplorerFeature(type: Zip) {
-    archiveFileName = "polyExplorer.zip"
-    destinationDirectory = file("$buildDir/generated-assets/features")
-    from "$projectDir/../../features/polyExplorer/dist"
-}
-
-task buildTestFeature(type: Zip) {
-    archiveFileName = "test.zip"
-    destinationDirectory = file("$buildDir")
-    from "$projectDir/../../features/test/dist"
-}
-
-tasks.whenTaskAdded { task ->
-    if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
-        task.dependsOn copyFeatureContainerBootstrap
-        task.dependsOn buildPolyExplorerFeature
-    }
-    if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
-        task.dependsOn copyTestFeatureOntoDevice
-}
-
 static def polyEpoch() {
     // Seconds since 2019-05-04 00:00 UTC - to avoid the year 2038 problem.
     def now = new Date()
@@ -111,28 +84,6 @@ android {
     }
 }
 
-task copyTestFeatureOntoDevice {
-    dependsOn buildTestFeature
-    def adb = android.getAdbExecutable().absolutePath
-    def tempPath = "/data/local/tmp/test.zip"
-    def packageName = android.defaultConfig.applicationId
-    def featurePath = "files/features"
-    doLast {
-        exec {
-            commandLine adb, 'push', "--sync", "$buildDir/test.zip", tempPath
-            logger.info("test feature copied onto the device")
-        }
-        exec {
-            commandLine adb, 'shell', "run-as", packageName, "mkdir", '-p', featurePath
-            logger.info("Feature directory created on the device")
-        }
-        exec {
-            commandLine adb, 'shell', "run-as", packageName, "cp", tempPath, featurePath
-            logger.info("test feature moved to features directory on the device")
-        }
-    }
-}
-
 dependencies {
     implementation project(":bubblewrap")
     implementation project(":polyOut")
@@ -183,4 +134,59 @@ dependencies {
     //noinspection FragmentGradleConfiguration
     androidTestImplementation 'androidx.fragment:fragment-testing:1.2.5'
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.3.0'
+}
+
+task copyFeatureContainerBootstrap(type: Copy) {
+    from "../../core/podigree/dist/bootstrap.js"
+    rename "bootstrap.js", "pod.js"
+    into "build/generated-assets/container/"
+}
+
+task packageAndCopyBundledFeatures
+
+["polyExplorer", "polyPreview"].each { featureName ->
+    def taskName = "packageAndCopyFeature_$featureName"
+    task "$taskName"(type: Zip) {
+        archiveFileName = "${featureName}.zip"
+        destinationDirectory = file("$buildDir/generated-assets/features")
+        from "$projectDir/../../features/$featureName/dist"
+    }
+    packageAndCopyBundledFeatures.dependsOn "$taskName"
+}
+
+task packageTestFeature(type: Zip) {
+    archiveFileName = "test.zip"
+    destinationDirectory = file("$buildDir")
+    from "$projectDir/../../features/test/dist"
+}
+
+task copyTestFeatureOntoDevice {
+    dependsOn packageTestFeature
+    def adb = android.getAdbExecutable().absolutePath
+    def tempPath = "/data/local/tmp/test.zip"
+    def packageName = android.defaultConfig.applicationId
+    def featurePath = "files/features"
+    doLast {
+        exec {
+            commandLine adb, 'push', "--sync", "$buildDir/test.zip", tempPath
+            logger.info("test feature copied onto the device")
+        }
+        exec {
+            commandLine adb, 'shell', "run-as", packageName, "mkdir", '-p', featurePath
+            logger.info("Feature directory created on the device")
+        }
+        exec {
+            commandLine adb, 'shell', "run-as", packageName, "cp", tempPath, featurePath
+            logger.info("test feature moved to features directory on the device")
+        }
+    }
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
+        task.dependsOn copyFeatureContainerBootstrap
+        task.dependsOn packageAndCopyBundledFeatures
+    }
+    if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
+        task.dependsOn copyTestFeatureOntoDevice
 }

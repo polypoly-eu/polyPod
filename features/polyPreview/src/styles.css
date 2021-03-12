@@ -1,0 +1,162 @@
+:root {
+    --headline-font-size: 40px;
+    --card-headline-font-size: 28px;
+    --body-text-font-size: 20px;
+    --button-font-size: 18px;
+}
+
+@font-face {
+    font-family: "Jost";
+    src: url("../fonts/jost_regular.ttf");
+}
+
+@font-face {
+    font-family: "Jost Light";
+    src: url("../fonts/jost_light.ttf");
+}
+
+@font-face {
+    font-family: "Jost Medium";
+    src: url("../fonts/jost_medium.ttf");
+}
+
+#font-face {
+    font-family: "polyDisplay";
+    src: url("../fonts/polydisplay_semi_1_0.otf");
+}
+
+* {
+    font-family: "Jost";
+    line-height: 120%;
+    color: #0f1938;
+    letter-spacing: -0.01em;
+}
+
+html, body, .swiper-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.swiper-container {
+    box-shadow: inset 0 8px 4px -4px rgba(0, 0, 0, 0.25);
+}
+
+h1, h2 {
+    margin: 0;
+    font-size: var(--headline-font-size);
+}
+
+h1 {
+    margin-top: 20px;
+    font-family: "polyDisplay";
+    font-weight: 600;
+}
+
+h2 {
+    margin-bottom: 32px;
+    font-family: "Jost Light";
+    font-weight: 300;
+}
+
+button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: 48px;
+    margin: 12px auto 0 auto;
+    border: none;
+    border-radius: 4px;
+    background: #fb8a89;
+    font-family: "Jost Medium";
+    font-size: var(--button-font-size);
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    line-height: 48px;
+}
+
+button:focus {
+    outline: 0;
+}
+
+button:active {
+    filter: drop-shadow(4px 4px 4px #0006);
+}
+
+.swiper-container {
+    background: #fff5f5;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 30px;
+    padding-bottom: 70px;
+}
+
+.body-text {
+    flex: 1 0 auto;
+    font-size: var(--body-text-font-size);
+    font-weight: 400;
+}
+
+.card {
+    box-sizing: border-box;
+    height: 100%;
+    margin: -10px;
+    margin-top: -4px;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.card h1, .card h2 {
+    font-size: var(--card-headline-font-size);
+}
+
+.card .action-container {
+    height: 85px;
+    margin: 12px 0 28px 0;
+}
+
+.swiper-pagination-bullets {
+    bottom: 30px !important;
+}
+
+.swiper-pagination-bullet {
+    box-sizing: border-box;
+    width: 9px !important;
+    height: 9px !important;
+    border: 1px solid #0f1938;
+    opacity: 1 !important;
+    background: transparent !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #0f1938 !important;
+}
+
+@media (max-width: 359px), (max-height: 579px) {
+    :root {
+        --scale-factor: 0.7;
+    }
+
+    h1, h2 {
+        font-size: calc(var(--headline-font-size) * var(--scale-factor));
+    }
+
+    button {
+        font-size: calc(var(--button-font-size) * var(--scale-factor));
+    }
+
+    .card h1, .card h2 {
+        font-size: calc(var(--card-headline-font-size) * var(--scale-factor));
+    }
+
+    .body-text {
+        font-size: calc(var(--body-text-font-size) * var(--scale-factor));
+    }
+}

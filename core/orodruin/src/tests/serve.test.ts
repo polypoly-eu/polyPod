@@ -20,6 +20,11 @@ describe("Serve", () => {
                 version: parse("0.0.0")!,
                 api: new Range("0.0.0"),
                 root: "data",
+                description: "test",
+                thumbnail: "thumbnail_test",
+                primaryColor: "#000000",
+                links: {},
+                translations: [],
             },
             new DefaultPod(dataset(), fs, fetch)
         );

@@ -78,6 +78,8 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                 </div>
             ),
         },
+        // We're hiding the structure tab until we have content for it
+        /*
         {
             tabName: "structure",
             content: (
@@ -93,6 +95,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                 </div>
             ),
         },
+        */
         {
             tabName: "revenue",
             content: (
@@ -143,6 +146,8 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                 </div>
             ),
         },
+        // We're hiding the structure tab until we have content for it
+        /*
         {
             tabName: "structure",
             content: (
@@ -158,6 +163,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                 </div>
             ),
         },
+        */
         {
             tabName: "revenue",
             content: (
@@ -243,14 +249,15 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                     <p
                         className="company-info-text"
                         dangerouslySetInnerHTML={{
-                            __html: company.description.value
-                                ? company.description.value.replace(
-                                      "\n",
-                                      "<br/><br/>"
-                                  )
-                                : i18n.t(
-                                      "companyInfoScreen:description.fallback"
-                                  ),
+                            __html:
+                                (
+                                    (company.description.value || {})[
+                                        i18n.language
+                                    ] || ""
+                                ).replace("\n", "<br/><br/>") ||
+                                i18n.t(
+                                    "companyInfoScreen:description.fallback"
+                                ),
                         }}
                     ></p>
 

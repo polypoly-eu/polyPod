@@ -1,5 +1,6 @@
 {
   "name": "poly-explorer-feature",
+  "version": "0.0.1",
   "scripts": {
     "eslint": "eslint src test scripts --ext .js --ext .jsx",
     "lint": "npm run eslint",
@@ -8,7 +9,7 @@
     "test": "mocha",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "polypedia:fetch": "node scripts/fetch-polypedia-data 7aa0d72",
+    "polypedia:fetch": "node scripts/fetch-polypedia-data dd4a91b",
     "polypedia:convert": "node scripts/convert-polypedia-data",
     "update-polypedia-data": "npm run polypedia:fetch && npm run polypedia:convert"
   },
@@ -40,5 +41,12 @@
     "rollup-plugin-css-only": "^3.1.0",
     "swiper": "^6.4.11"
   },
-  "type": "module"
+  "type": "module",
+  "engines": {
+    "polypoly": "^0.6.0"
+  },
+  "polypoly": {
+      "root": "",
+      "manifest": "manifest.json"
+  }
 }

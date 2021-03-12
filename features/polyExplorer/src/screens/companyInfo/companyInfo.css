@@ -7,7 +7,13 @@
 .tab-button-container .tab-button {
     box-sizing: border-box;
     background-color: #0f1938;
-    width: 33.3%;
+    /*
+      We only have two tabs until we reenable the structure tab.  Once we
+      rewrite this to automatically adjust to the number of tabs, we wouldn't
+      need this change anymore.
+    */
+    /*width: 33.3%;*/
+    width: 50%;
     height: 100%;
     padding-bottom: 12px;
     font-size: 16px;

@@ -56,7 +56,7 @@
         android:layout_width="300dp"
         android:layout_height="54dp"
         android:layout_marginBottom="80dp"
-        android:text="@string/button_end_onboarding"
+        android:text="@string/onboarding_button_end"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18dp"

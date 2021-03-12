@@ -3,6 +3,6 @@
 
     <Preference
         app:key="version"
-        app:title="Version" />
+        app:title="@string/settings_version" />
 
 </PreferenceScreen>
