@@ -20,26 +20,33 @@ private fun luminance(color: Int): Double =
         Color.green(color) * 0.7152 +
         Color.blue(color) * 0.0722
 
+private enum class Action(val id: String) {
+    CLOSE("close"),
+    BACK("back"),
+    INFO("info"),
+    SEARCH("search")
+}
+
 private enum class ForegroundResources(
     val color: Int,
-    val icons: Map<String, Int>
+    val icons: Map<Action, Int>
 ) {
     LIGHT(
         color = R.color.feature_foreground_light,
         icons = mapOf(
-            "close" to R.drawable.ic_close_light,
-            "back" to R.drawable.ic_back_light,
-            "info" to R.drawable.ic_info_light,
-            "search" to R.drawable.ic_search_light
+            Action.CLOSE to R.drawable.ic_close_light,
+            Action.BACK to R.drawable.ic_back_light,
+            Action.INFO to R.drawable.ic_info_light,
+            Action.SEARCH to R.drawable.ic_search_light
         )
     ),
     DARK(
         color = R.color.feature_foreground_dark,
         icons = mapOf(
-            "close" to R.drawable.ic_close_dark,
-            "back" to R.drawable.ic_back_dark,
-            "info" to R.drawable.ic_info_dark,
-            "search" to R.drawable.ic_search_dark
+            Action.CLOSE to R.drawable.ic_close_dark,
+            Action.BACK to R.drawable.ic_back_dark,
+            Action.INFO to R.drawable.ic_info_dark,
+            Action.SEARCH to R.drawable.ic_search_dark
         )
     );
 
@@ -49,10 +56,10 @@ private enum class ForegroundResources(
     }
 }
 
-private enum class ActionButton(val action: String, val id: Int) {
-    CLOSE("close", R.id.close_button),
-    INFO("info", R.id.info_button),
-    SEARCH("search", R.id.search_button)
+private enum class ActionButton(val action: Action, val buttonId: Int) {
+    CLOSE(Action.CLOSE, R.id.close_button),
+    INFO(Action.INFO, R.id.info_button),
+    SEARCH(Action.SEARCH, R.id.search_button)
 }
 
 /**
@@ -73,9 +80,7 @@ open class FeatureFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_feature, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_feature, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -107,7 +112,7 @@ open class FeatureFragment : Fragment() {
         )
 
         for (actionButton in ActionButton.values()) {
-            val buttonView = view.findViewById<ImageView>(actionButton.id)
+            val buttonView = view.findViewById<ImageView>(actionButton.buttonId)
             buttonView.setImageResource(
                 foregroundResources.icons.getValue(actionButton.action)
             )
@@ -115,7 +120,7 @@ open class FeatureFragment : Fragment() {
                 if (actionButton == ActionButton.CLOSE)
                     navigateBack()
                 else
-                    featureContainer.triggerNavAction(actionButton.action)
+                    featureContainer.triggerNavAction(actionButton.action.id)
             }
         }
     }
@@ -143,17 +148,17 @@ open class FeatureFragment : Fragment() {
 
     private fun updateAppBarActions(view: View, navActions: List<String>) {
         for (actionButton in ActionButton.values()) {
-            val buttonView = view.findViewById<ImageView>(actionButton.id)
+            val buttonView = view.findViewById<ImageView>(actionButton.buttonId)
             if (actionButton == ActionButton.CLOSE) {
                 buttonView.setImageResource(
                     foregroundResources.icons.getValue(
-                        if ("back" in navActions) "back" else "close"
+                        if (Action.BACK.id in navActions) Action.BACK else Action.CLOSE
                     )
                 )
                 continue
             }
             buttonView.visibility =
-                if (actionButton.action in navActions) View.VISIBLE else View.GONE
+                if (actionButton.action.id in navActions) View.VISIBLE else View.GONE
         }
     }
 
