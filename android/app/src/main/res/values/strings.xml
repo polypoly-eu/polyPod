@@ -15,8 +15,6 @@
     <string name="onboarding_slide3_body_text">Nach und nach biete ich Ihnen immer mehr Möglichkeiten, Ihre Privatsphäre zu schützen. Ich melde mich natürlich, sobald eine neue Funktion für Sie bereit steht.</string>
     <string name="settings_title">Einstellungen</string>
     <string name="settings_version">Version</string>
-    <!-- This string won't show up in production versions, no need to translate -->
-    <string name="feature_list_no_features">Doesn\'t seem like there\'s any features yet.\nCome back again in a bit!</string>
     <!-- These strings should really be coming from the feature manifests, but for now they don't -->
     <string name="feature_polyexplorer_author">polypoly - Die Genossenschaft</string>
     <string name="feature_polyexplorer_description">Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel.</string>
@@ -24,4 +22,7 @@
     <string name="feature_polypreview_author">polypoly - Die Genossenschaft</string>
     <string name="feature_polypreview_description">Ihr polyPod wird stetig weiterentwickelt. Wenn Sie wissen möchten was wir Planen; hier eine Vorschau.</string>
     <string name="feature_polypreview_primarycolor">#fff5f5</string>
+    <!-- These strings will only be visible to feature developers, no need to translate them -->
+    <string name="dev_feature_list_no_features">No features there are at this point.\nCome again later or correctly deploy your feature you should.</string>
+    <string name="dev_message_forbidden_resource_requested">Forbidden making requests to external servers is</string>
 </resources>

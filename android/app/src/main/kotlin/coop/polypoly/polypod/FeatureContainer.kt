@@ -83,7 +83,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                     logger.warn("Feature ${feature.name} tried to load forbidden URL: ${request.url}")
                     val statusCode = 403
                     val reasonPhrase =
-                        "Forbidden making requests to external servers is"
+                        context.getString(R.string.dev_message_forbidden_resource_requested)
                     val message = "$statusCode - $reasonPhrase"
                     val errorResponse = WebResourceResponse(
                         "text/plain",
