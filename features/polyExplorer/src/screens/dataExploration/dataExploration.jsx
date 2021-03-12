@@ -12,16 +12,48 @@ import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLeg
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
 
+const PurposeChart = ({ purposes }) => {
+    const getHighestCount = () => {
+        console.log(typeof purposes);
+        let highest = 0;
+        purposes.forEach((e) => {
+            e.count > highest ? (highest = e.count) : null;
+        });
+    };
+
+    const highestCount = getHighestCount();
+
+    const scale = <div className="scale"></div>;
+
+    return (
+        <div className="purpose-chart">
+            <div className="scale-container">
+                <div className="descriptions">
+                    <div>
+                        {i18n.t(
+                            "dataExplorationScreen:purposes.description.scale"
+                        )}
+                    </div>
+                    <div className="fill"></div>
+                    <div className="help">
+                        <img src="./images/question-circle-light.svg" />
+                        <div>{i18n.t("common:how-to-read")}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
-    const [activeSection] = useState("dataTypes");
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const correlationTypeBundle = [
-        "dpv:Communication",
-        "dpv:IPAddress",
-        "dpv:Interest",
-    ];
+    //To go soon
+    const correlationTypeBundle = [];
+    for (let i = 0; i < 3; i++) {
+        correlationTypeBundle.push(company.dataTypesShared[i]["dpv:Category"]);
+    }
 
     const getHighestValueObject = () => {
         let highest = { count: 0 };
@@ -41,6 +73,11 @@ const DataExplorationScreen = ({ company }) => {
         return categories;
     };
 
+    const goToSlide = (slide) => {
+        swiper.slideTo(slide, 0);
+        setActiveIndex(slide);
+    };
+
     const highestValueObject = getHighestValueObject();
     const categories = getCategories();
 
@@ -48,22 +85,24 @@ const DataExplorationScreen = ({ company }) => {
         <div className="progress-bar">
             <div
                 className={`progress-bar-part dataTypes ${
-                    activeSection == "dataTypes" ? "active" : ""
+                    activeIndex < categories.length + 4 ? "active" : ""
                 }`}
+                onClick={() => goToSlide(0)}
             ></div>
             <div
                 className={`progress-bar-part purposes ${
-                    activeSection == "purposes" ? "active" : ""
+                    activeIndex > categories.length + 4 ? "active" : ""
                 }`}
+                onClick={() => goToSlide(categories.length + 5)}
             ></div>
             <div
                 className={`progress-bar-part companiesShared ${
-                    activeSection == "companies" ? "active" : ""
+                    false == "companies" ? "active" : ""
                 }`}
             ></div>
             <div
                 className={`progress-bar-part jurisdictions ${
-                    activeSection == "jurisdictions" ? "active" : ""
+                    false == "jurisdictions" ? "active" : ""
                 }`}
             ></div>
         </div>
@@ -91,7 +130,7 @@ const DataExplorationScreen = ({ company }) => {
                     )}
                 </h2>
             );
-        else return <h1></h1>;
+        else if (activeIndex < categories.length + 5) return <h1></h1>;
     };
 
     const getChartForSlide = () => {
@@ -125,7 +164,13 @@ const DataExplorationScreen = ({ company }) => {
                     textColor="#0f1938"
                     width="360"
                     height="360"
-                    highlightedType="dpv:Communication"
+                    highlightedType={
+                        company.dataTypesShared.filter(
+                            (e) =>
+                                e.Polypoly_Parent_Category ===
+                                categories[activeIndex - 3]
+                        )[0]["dpv:Category"]
+                    }
                 />
             );
         else if (
@@ -143,10 +188,7 @@ const DataExplorationScreen = ({ company }) => {
                     showValues={false}
                 />
             );
-        else if (
-            activeIndex > categories.length + 3 &&
-            activeIndex <= categories.length + 4
-        )
+        else if (activeIndex == categories.length + 4)
             return (
                 <DataTypeBubbleCorrelation
                     data={company.dataTypesShared}
@@ -156,6 +198,8 @@ const DataExplorationScreen = ({ company }) => {
                     height="360"
                 />
             );
+        else if (activeIndex == categories.length + 5)
+            return <PurposeChart purposes={company.dataSharingPurposes} />;
     };
 
     return (
@@ -232,6 +276,9 @@ const DataExplorationScreen = ({ company }) => {
                                 )}
                             </p>
                         </SwiperSlide>
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
+                        ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>

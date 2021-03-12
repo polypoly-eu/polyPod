@@ -145,3 +145,36 @@
     line-height: 120%;
     letter-spacing: -0.01em;
 }
+
+.data-exploration .purpose-chart {
+    width: 84%;
+    max-width: 350px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.data-exploration .purpose-chart .descriptions {
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+}
+
+.data-exploration .purpose-chart .descriptions div {
+    display: inline-block;
+}
+
+.data-exploration .purpose-chart .descriptions img {
+    margin: 0 4px;
+}
+
+.data-exploration .purpose-chart .descriptions .fill {
+    flex-grow: 1;
+}
+
+.data-exploration .purpose-chart .descriptions .help div {
+    transform: translateY(-4px);
+    color: #a9b6c6;
+}

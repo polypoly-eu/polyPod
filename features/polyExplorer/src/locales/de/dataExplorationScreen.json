@@ -13,8 +13,10 @@
         "Technische Daten",
     "dataTypes.title.financial":
         "Finanzdaten",
-        "dataTypes.heading.correlations":
+    "dataTypes.heading.correlations":
         "Datenkorrelationen",
     "dataTypes.text.correlations":
-        "Wenn Datentypen nicht einzeln, sondern im Packet geteilt werden, geben sie weitere Einblicke."
+        "Wenn Datentypen nicht einzeln, sondern im Packet geteilt werden, geben sie weitere Einblicke.",
+    "purposes.description.scale":
+        "Anzahl der Nennungen"
 }

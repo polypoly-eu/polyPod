@@ -74,18 +74,18 @@ const DataTypeBubbleCategory = ({
         correlationCenter
     ) => {
         const dx = r + name.length * 4;
-        const edgeDistance = -20;
+        const edgeDistanceX = name.length * 3.5;
         const possibilities = [
             { x: x, y: y - (r + 8) }, //above
             { x: x, y: y + (r + 16) }, //below
-            { x: x + dx, y: y + r / 2 }, //right
-            { x: x - dx, y: y + r / 2 }, //left
+            { x: x + dx, y: y + r / 4 }, //right
+            { x: x - dx, y: y + r / 4 }, //left
         ].filter(
             (e) =>
-                e.x - edgeDistance > 0 &&
-                maxWidth - e.x > edgeDistance &&
-                e.y - edgeDistance > 0 &&
-                maxHeight - e.y > edgeDistance
+                e.x - edgeDistanceX > 0 &&
+                maxWidth - e.x > edgeDistanceX &&
+                e.y > 0 &&
+                maxHeight - e.y > 0
         );
         return getFurthestFromCenter(possibilities, correlationCenter);
     };

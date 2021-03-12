@@ -87,7 +87,7 @@ const DataTypeBubbleCategory = ({
                         .attr("x", d.x + 1)
                         .attr(
                             "y",
-                            d.y > height / 2 ? d.y - d.r - 20 : d.y + d.r + 20
+                            d.y > height / 2 ? d.y - d.r - 20 : d.y + d.r + 24
                         )
                         .attr("text-anchor", "middle")
                         .style("font-size", "14px")
