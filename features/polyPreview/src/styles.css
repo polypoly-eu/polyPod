@@ -1,3 +1,10 @@
+:root {
+    --headline-font-size: 40px;
+    --card-headline-font-size: 28px;
+    --body-text-font-size: 20px;
+    --button-font-size: 18px;
+}
+
 @font-face {
     font-family: "Jost";
     src: url("../fonts/jost_regular.ttf");
@@ -37,7 +44,7 @@ html, body, .swiper-container {
 
 h1, h2 {
     margin: 0;
-    font-size: 40px;
+    font-size: var(--headline-font-size);
 }
 
 h1 {
@@ -62,7 +69,7 @@ button {
     border-radius: 4px;
     background: #fb8a89;
     font-family: "Jost Medium";
-    font-size: 18px;
+    font-size: var(--button-font-size);
     font-weight: 500;
     text-decoration: none;
     text-align: center;
@@ -91,7 +98,7 @@ button:active {
 
 .body-text {
     flex: 1 0 auto;
-    font-size: 20px;
+    font-size: var(--body-text-font-size);
     font-weight: 400;
 }
 
@@ -107,7 +114,7 @@ button:active {
 }
 
 .card h1, .card h2 {
-    font-size: 28px;
+    font-size: var(--card-headline-font-size);
 }
 
 .card .action-container {
@@ -130,4 +137,26 @@ button:active {
 
 .swiper-pagination-bullet-active {
     background: #0f1938 !important;
+}
+
+@media (max-width: 359px), (max-height: 579px) {
+    :root {
+        --scale-factor: 0.7;
+    }
+
+    h1, h2 {
+        font-size: calc(var(--headline-font-size) * var(--scale-factor));
+    }
+
+    button {
+        font-size: calc(var(--button-font-size) * var(--scale-factor));
+    }
+
+    .card h1, .card h2 {
+        font-size: calc(var(--card-headline-font-size) * var(--scale-factor));
+    }
+
+    .body-text {
+        font-size: calc(var(--body-text-font-size) * var(--scale-factor));
+    }
 }
