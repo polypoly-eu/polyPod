@@ -75,7 +75,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             override fun shouldInterceptRequest(
                 view: WebView,
                 request: WebResourceRequest
-            ): WebResourceResponse? {
+            ): WebResourceResponse {
                 if (request.url.lastPathSegment == "favicon.ico")
                     return WebResourceResponse(null, null, null)
                 val response = assetLoader.shouldInterceptRequest(request.url)
