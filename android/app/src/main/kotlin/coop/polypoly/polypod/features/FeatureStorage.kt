@@ -14,8 +14,24 @@ data class Feature(
     val author: String,
     val description: String,
     val primaryColor: Int,
+    val links: Map<String, String>,
     val content: ZipFile
-)
+) {
+    fun getUrl(target: String): String? = when (target) {
+        in links.keys -> links[target]
+        in links.values -> target
+        else -> null
+    }
+}
+
+// TODO: Get this information from the feature manifest
+private fun getFeatureLinks(featureName: String) =
+    when (featureName) {
+        "polyPreview" -> mapOf(
+            "membership" to "https://polypoly.coop/de-de/membership"
+        )
+        else -> emptyMap()
+    }
 
 class FeatureStorage {
     companion object {
@@ -52,7 +68,6 @@ class FeatureStorage {
 
     fun loadFeature(context: Context, fileName: String): Feature {
         val content = ZipFile(File(getFeaturesDir(context), fileName))
-        // TODO: Actually read this information from the feature manifest
         val name = fileName.replace(".zip", "")
         return Feature(
             fileName,
@@ -66,23 +81,23 @@ class FeatureStorage {
                     "primaryColor"
                 )
             ),
-            content
+            links = getFeatureLinks(name),
+            content = content
         )
     }
 
+    // TODO: Get this information from the feature manifest
     private fun getMetaDataString(
         context: Context,
         featureName: String,
         key: String
-    ): String {
-        return context.getString(
-            context.resources.getIdentifier(
-                "feature_${featureName}_$key".toLowerCase(),
-                "string",
-                context.packageName
-            )
+    ) = context.getString(
+        context.resources.getIdentifier(
+            "feature_${featureName}_$key".toLowerCase(),
+            "string",
+            context.packageName
         )
-    }
+    )
 
     fun installBundledFeatures(context: Context) {
         for (featureBundle in context.assets.list("features").orEmpty()) {
