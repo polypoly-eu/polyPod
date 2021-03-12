@@ -15,7 +15,7 @@ class Preferences {
         fun setFirstRun(context: Context, firstRun: Boolean) {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val edit = prefs.edit()
-            edit.putBoolean(firstRunKey,  firstRun)
+            edit.putBoolean(firstRunKey, firstRun)
             edit.commit()
         }
     }

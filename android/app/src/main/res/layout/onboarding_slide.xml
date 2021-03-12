@@ -17,40 +17,46 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" >
 
+
+
         <TextView
             android:id="@+id/headline_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/polydisplay_semi_1_0"
-            android:textSize="30dp"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textSize="@dimen/onboarding_headline_size"
+            android:lineSpacingExtra="@dimen/onboarding_headline_extra_spacing" />
 
         <TextView
             android:id="@+id/headline_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jost_regular"
-            android:textSize="30dp"
-            android:textColor="@color/colorPrimaryDark" />
+            android:layout_marginTop="-6dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/jost_light"
+            android:textSize="@dimen/onboarding_headline_size"
+            android:lineSpacingExtra="@dimen/onboarding_headline_extra_spacing" />
 
         <TextView
             android:id="@+id/body_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
             android:maxWidth="320dp"
+            android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/jost_regular"
-            android:textSize="20dp"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textSize="@dimen/onboarding_text_size"
+            android:lineSpacingExtra="@dimen/onboarding_text_extra_spacing" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/end_onboarding_button"
         android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_height="54dp"
         android:layout_marginBottom="80dp"
-        android:text="@string/button_end_onboarding"
+        android:text="@string/onboarding_button_end"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18dp"

@@ -15,14 +15,15 @@
         app:cardCornerRadius="5dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -36,8 +37,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:fontFamily="@font/jost_medium"
-                    android:textSize="22sp"
-                    android:textColor="#002" />
+                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <TextView
                     android:id="@+id/feature_author"
@@ -45,8 +46,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="13dp"
                     android:fontFamily="@font/jost_regular"
-                    android:textSize="15sp"
-                    android:textColor="#557" />
+                    android:textSize="14dp"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <TextView
                     android:id="@+id/feature_description"
@@ -54,9 +55,9 @@
                     android:layout_height="wrap_content"
                     android:maxWidth="304dp"
                     android:fontFamily="@font/jost_regular"
-                    android:textSize="17sp"
-                    android:lineHeight="19dp"
-                    android:textColor="#224" />
+                    android:textSize="16dp"
+                    android:lineSpacingExtra="-3dp"
+                    android:textColor="@color/colorPrimaryDark" />
 
             </LinearLayout>
 

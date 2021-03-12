@@ -9,10 +9,12 @@
         "Filter",
     "screenTitle.featuredCompanyHelp":
         "Wie ist das zu verstehen?",
+    "screenTitle.dataRegionInfo":
+        "Wie ist das zu verstehen?",
     "screenTitle.companySearch":
         "Suche",
     "screenTitle.info":
-        "Datenquellen und -verarbeitung",
+        "Information",
     "companyFilter.missing":
         "Unbekannt",
     "companyFilter.countryNameKey":
@@ -70,5 +72,5 @@
     "sharing.detailPrefix.jurisdictions":
         "teilt Daten in",
     "sharing.jurisdictions":
-        "Rechtsräumen"
+        "Datenregionen"
 }

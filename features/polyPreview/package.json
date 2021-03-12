@@ -1,0 +1,24 @@
+{
+  "name": "poly-preview-feature",
+  "scripts": {
+    "lint": "eslint src",
+    "build": "rollup -c",
+    "watch": "rollup --watch -c"
+  },
+  "dependencies": {
+    "rollup-plugin-css-only": "^3.1.0",
+    "swiper": "^6.4.11"
+  },
+  "devDependencies": {
+    "@polypoly-eu/eslint-config": "file:../../eslint-config",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "rollup": "^2.26.11",
+    "rollup-plugin-copy": "^3.3.0"
+  },
+  "private": true
+}

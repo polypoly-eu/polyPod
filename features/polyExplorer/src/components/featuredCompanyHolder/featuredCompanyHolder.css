@@ -4,13 +4,22 @@
     flex-wrap: nowrap;
     position: relative;
     margin: 0 auto;
-    height: 530px;
+    height: 100%;
     width: 100%;
     max-width: 414px;
 }
 
 .featured-company-card {
-    padding: 0 12px;
+    height: 100%;
+    padding: 0 12px 90px 0;
+    overflow-y: scroll;
+}
+
+.swiper-pagination-bullets {
+    bottom: 0 !important;
+    padding: 30px 0 20px 0;
+    background: linear-gradient(transparent, #0f1938 40%);
+    pointer-events: none;
 }
 
 .swiper-pagination-bullet-active {

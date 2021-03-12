@@ -32,7 +32,9 @@ const CompanyShortInfo = ({ company, onActiveScreenChange = () => {} }) => {
                 </div>
                 <div className="company-category">
                     <p className="category-name">
-                        {i18n.t("common:category.undisclosed")}
+                        {company.category
+                            ? company.category
+                            : i18n.t("common:category.undisclosed")}
                     </p>
                 </div>
             </div>

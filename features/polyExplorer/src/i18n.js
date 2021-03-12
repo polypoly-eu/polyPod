@@ -59,12 +59,15 @@ const strings = {
     },
 };
 
-export default {
+const i18n = {
+    language: "de",
     t: (key, options = {}) => {
         const [namespace, keyInNamespace] = key.split(/:(.+)/);
-        let translation = strings["de"][namespace][keyInNamespace];
+        let translation = strings[i18n.language][namespace][keyInNamespace];
         for (let [name, value] of Object.entries(options))
             translation = translation.replace(`{{${name}}}`, value);
         return translation;
     },
 };
+
+export default i18n;

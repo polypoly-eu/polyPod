@@ -22,5 +22,9 @@
     "M":
         "M",
     "B":
-        "B"
+        "B",
+        "no-data":
+        "No data",
+    "description.fallback":
+        "We don't have a description for this company yet, but we are adding new ones every day!"
 }

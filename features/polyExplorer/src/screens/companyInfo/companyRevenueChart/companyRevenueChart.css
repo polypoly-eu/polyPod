@@ -1,5 +1,6 @@
 .revenue-chart-container {
     width: 100%;
+    position: relative;
 }
 
 .revenue-chart-container .revenue-chart {
@@ -58,8 +59,11 @@
 
 .revenue-chart-container .no-data-text {
     position: absolute;
-    top: 36%;
-    left: 24%;
+    left: 50%;
+    top: 35%;
+    padding-left: 16px;
+    width: 180px;
+    transform: translateX(-50%);
     font-size: 14px;
 }
 

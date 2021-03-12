@@ -20,6 +20,10 @@
     outline: none;
 }
 
+.search-bar-container .search-bar::placeholder {
+    color: #a9b6c6;
+}
+
 .search-bar-container button {
     position: absolute;
     top: -6px;

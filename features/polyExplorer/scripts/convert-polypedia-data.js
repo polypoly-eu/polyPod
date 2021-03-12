@@ -1,6 +1,7 @@
 import fs from "fs";
 import { createRequire } from "module";
-import { default as descriptions } from "./descriptions.js";
+import { default as fallbackDescriptions } from "./descriptions.js";
+import { default as categories } from "./categories.js";
 
 const require = createRequire(import.meta.url);
 
@@ -10,6 +11,8 @@ const polyPediaGlobalData = require("../polypedia-data/data/3_integrated/polyExp
 
 const extractYear = (date) =>
     parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
+
+const entityKey = (legalName) => legalName.toLowerCase();
 
 function extractAnnualRevenues(entry) {
     if (!entry.financial_data) return null;
@@ -23,84 +26,128 @@ function extractAnnualRevenues(entry) {
     }));
 }
 
-function parsePolyPediaCompanyData() {
-    const companyData = [];
-    polyPediaCompanyData.forEach((entry) => {
-        if (entry.legal_entities[0].identifiers.legal_name.value != null) {
-            companyData.push({
-                name: entry.legal_entities[0].identifiers.legal_name.value,
-                featured:
-                    entry.data_recipients &&
-                    entry.derived_purpose_info &&
-                    entry.derived_category_info
-                        ? true
-                        : false,
-                jurisdiction:
-                    entry.legal_entities[0].data_collection.data_regions
-                        .value instanceof Array
-                        ? entry.legal_entities[0].data_collection.data_regions.value.indexOf(
-                              "GDPR"
-                          ) >= 0 &&
-                          entry.legal_entities[0].data_collection.data_regions.value.indexOf(
-                              "EU"
-                          ) >= 0
-                            ? "EU-GDPR"
-                            : entry.legal_entities[0].data_collection
-                                  .data_regions.value[0]
-                        : entry.legal_entities[0].data_collection.data_regions
-                              .value,
-                location: {
-                    city:
-                        entry.legal_entities[0].basic_info.registered_address
-                            .value.city,
-                    countryCode:
-                        entry.legal_entities[0].basic_info.registered_address
-                            .value.country,
-                },
-                annualRevenues: extractAnnualRevenues(entry),
-                dataRecipients: entry.data_recipients
-                    ? entry.data_recipients
-                    : null,
-                dataSharingPurposes: entry.derived_purpose_info
-                    ? Object.keys(entry.derived_purpose_info).map(
-                          (i) => entry.derived_purpose_info[i]
-                      )
-                    : null,
-                dataTypesShared: entry.derived_category_info
-                    ? Object.keys(entry.derived_category_info).map(
-                          (i) => entry.derived_category_info[i]
-                      )
-                    : null,
-                description: {
-                    value:
-                        Object.keys(descriptions.de).findIndex(
-                            (e) =>
-                                e.toLowerCase() ===
-                                entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
-                        ) >= 0
-                            ? descriptions.de[
-                                  Object.keys(descriptions.de)[
-                                      Object.keys(descriptions.de).findIndex(
-                                          (e) =>
-                                              e.toLowerCase() ===
-                                              entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
-                                      )
-                                  ]
-                              ]
-                            : descriptions.de.fallback,
-                    source:
-                        Object.keys(descriptions.de).findIndex(
-                            (e) =>
-                                e.toLowerCase() ===
-                                entry.legal_entities[0].identifiers.legal_name.value.toLowerCase()
-                        ) >= 0
-                            ? "Wikipedia"
-                            : null,
-                },
-            });
+function parseDescription(legalEntityData) {
+    const key = entityKey(legalEntityData.identifiers.legal_name.value);
+    const editorialData =
+        ((legalEntityData.editorial_content || {}).editorials || [])[0] || {};
+    const description = editorialData.body_i18n || {};
+    for (let languageCode of Object.keys(fallbackDescriptions))
+        if (!description[languageCode]) {
+            const fallbackDescription = (Object.entries(
+                fallbackDescriptions[languageCode]
+            ).find(([companyName]) => entityKey(companyName) === key) || [])[1];
+            if (fallbackDescription)
+                description[languageCode] = fallbackDescription;
         }
+    const descriptionEmpty = Object.values(description).every(
+        (value) => value === null
+    );
+    // We currently hard code "Wikipedia" as source, until we get the data from
+    // polyPedia as well.
+    const source = "Wikipedia";
+    return {
+        value: descriptionEmpty ? null : description,
+        source: descriptionEmpty ? null : source,
+    };
+}
+
+function parseCategory(legalName) {
+    const categoryStringKey = Object.keys(categories.de).find(
+        (e) => entityKey(e) === entityKey(legalName)
+    );
+    return categories.de[categoryStringKey] || null;
+}
+
+function fixEntityData(entityData) {
+    if (entityData.legal_entity.identifiers.common_name === "Schufa")
+        entityData.legal_entity.identifiers.legal_name.value =
+            "SCHUFA Holding AG";
+}
+
+function parseEntity(entityData, globalData) {
+    fixEntityData(entityData);
+
+    const legalEntityData = entityData.legal_entity;
+    const legalName = legalEntityData.identifiers.legal_name.value;
+    if (!legalName) return null;
+
+    const countryCode =
+        legalEntityData.basic_info.registered_address.value.country;
+
+    return {
+        name: legalName,
+        featured: !!(
+            entityData.data_recipients &&
+            entityData.derived_purpose_info &&
+            entityData.derived_category_info
+        ),
+        jurisdiction: (globalData.countries[countryCode] || {}).dataRegion,
+        location: {
+            city: legalEntityData.basic_info.registered_address.value.city,
+            countryCode,
+        },
+        annualRevenues: extractAnnualRevenues(entityData),
+        dataRecipients: entityData.data_recipients || null,
+        dataSharingPurposes: entityData.derived_purpose_info
+            ? Object.keys(entityData.derived_purpose_info).map(
+                  (i) => entityData.derived_purpose_info[i]
+              )
+            : null,
+        dataTypesShared: entityData.derived_category_info
+            ? Object.keys(entityData.derived_category_info).map(
+                  (i) => entityData.derived_category_info[i]
+              )
+            : null,
+        description: parseDescription(legalEntityData),
+        category: parseCategory(legalName),
+    };
+}
+
+const isEmpty = (value) =>
+    value === null ||
+    typeof value === "undefined" ||
+    (typeof value === "object" && Object.values(value).every(isEmpty));
+
+function mergeEntities(oldEntity, newEntity) {
+    if (!oldEntity) return newEntity;
+    for (let [key, value] of Object.entries(newEntity))
+        if (!(key in oldEntity) || isEmpty(oldEntity[key]))
+            oldEntity[key] = value;
+    return oldEntity;
+}
+
+function enrichWithJurisdictionsShared(entityMap) {
+    for (let entity of Object.values(entityMap)) {
+        for (let dataRecipient of entity.dataRecipients || []) {
+            const recipientKey = entityKey(dataRecipient);
+            if (!(recipientKey in entityMap)) continue;
+
+            const recipientJurisdiction = entityMap[recipientKey].jurisdiction;
+            entity.jurisdictionsShared = entity.jurisdictionsShared || {};
+            entity.jurisdictionsShared.children =
+                entity.jurisdictionsShared.children || [];
+            if (
+                !entity.jurisdictionsShared.children.includes(
+                    recipientJurisdiction
+                )
+            )
+                entity.jurisdictionsShared.children.push(recipientJurisdiction);
+        }
+    }
+}
+
+function parsePolyPediaCompanyData(globalData) {
+    const entityMap = {};
+    polyPediaCompanyData.forEach((entityData) => {
+        const entity = parseEntity(entityData, globalData);
+        if (!entity) return;
+
+        const key = entityKey(entity.name);
+        entityMap[key] = mergeEntities(entityMap[key], entity);
     });
-    return companyData;
+
+    enrichWithJurisdictionsShared(entityMap);
+    return Object.values(entityMap);
 }
 
 function savePolyExplorerFile(fileName, data) {
@@ -119,12 +166,20 @@ function savePolyExplorerFile(fileName, data) {
 const savePolyExplorerCompanyData = (data) =>
     savePolyExplorerFile("companies.json", data);
 
+const parseDataRegion = (countryData) =>
+    ({
+        GDPR: "EU-GDPR",
+        "5 Eyes": "Five-Eyes",
+    }[countryData.Regulatory_Region] || countryData.Regulatory_Region);
+
 function parsePolyPediaGlobalData() {
     const globalData = { countries: {} };
     Object.entries(polyPediaGlobalData.countries).forEach(([code, data]) => {
-        globalData.countries[code] = Object.fromEntries(
+        const country = Object.fromEntries(
             Object.entries(data).filter(([key]) => key.startsWith("Name_"))
         );
+        country.dataRegion = parseDataRegion(data);
+        globalData.countries[code] = country;
     });
     return globalData;
 }
@@ -132,5 +187,7 @@ function parsePolyPediaGlobalData() {
 const savePolyExplorerGlobalData = (data) =>
     savePolyExplorerFile("global.json", data);
 
-savePolyExplorerCompanyData(parsePolyPediaCompanyData());
-savePolyExplorerGlobalData(parsePolyPediaGlobalData());
+const globalData = parsePolyPediaGlobalData();
+const companyData = parsePolyPediaCompanyData(globalData);
+savePolyExplorerGlobalData(globalData);
+savePolyExplorerCompanyData(companyData);

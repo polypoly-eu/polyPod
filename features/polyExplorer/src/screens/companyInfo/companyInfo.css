@@ -7,7 +7,13 @@
 .tab-button-container .tab-button {
     box-sizing: border-box;
     background-color: #0f1938;
-    width: 33.3%;
+    /*
+      We only have two tabs until we reenable the structure tab.  Once we
+      rewrite this to automatically adjust to the number of tabs, we wouldn't
+      need this change anymore.
+    */
+    /*width: 33.3%;*/
+    width: 50%;
     height: 100%;
     padding-bottom: 12px;
     font-size: 16px;
@@ -140,6 +146,8 @@ p.jurisdictions-label {
 
 .structure-tab img {
     display: block;
+    width: 100%;
+    max-width: 414px;
     height: 100%;
     margin: 0 auto;
 }
@@ -174,13 +182,15 @@ p.jurisdictions-label {
     flex: 0 0 auto;
     font-size: 12px;
     margin: 0px auto;
-    width: 80%;
-    max-width: 314px;
+    width: 100%;
+    padding: 0 32px;
+    max-width: 474px;
 }
 
 .gradient-box {
     flex: 0 0 auto;
     width: 100%;
+    margin: 0px auto;
     max-width: 474px;
     height: 20px;
     transform: translateY(-34px);

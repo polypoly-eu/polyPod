@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="coop.polypoly.polypod">
 
-    <uses-permission-sdk-23 android:name="android.permission.INTERNET"/>
-
     <application
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
@@ -33,7 +31,7 @@
 
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/activity_settings"
+            android:label="@string/settings_title"
             android:theme="@style/Theme.AppCompat.Light" />
     </application>
 

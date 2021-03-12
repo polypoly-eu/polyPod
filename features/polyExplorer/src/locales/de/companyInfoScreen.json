@@ -12,7 +12,7 @@
     "tab.revenue.fallbackText":
         "Noch keine Daten verfügbar.",
     "jurisdictions":
-        "Rechtsraum",
+        "Datenregion",
     "source":
         "Quelle",
     "button.exploreData":
@@ -22,5 +22,9 @@
     "M":
         "Mio",
     "B":
-        "Mrd"
+        "Mrd",
+    "no-data":
+        "Keine Daten",
+    "description.fallback":
+        "Für dieses Unternehmen haben wir noch keine Beschreibung, es kommen aber täglich neue dazu!"
 }

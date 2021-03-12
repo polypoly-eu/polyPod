@@ -119,9 +119,6 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                 <div className="no-data-text">
                     {i18n.t("companyInfoScreen:tab.revenue.fallbackText")}
                 </div>
-                <p className="source">
-                    {i18n.t("companyInfoScreen:source")}: polyPedia
-                </p>
             </div>
         );
     } else {
@@ -171,7 +168,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         {i18n.t(`companyInfoScreen:${unit}`)} (EUR)
                     </div>
                 </div>
-                <p className="source">Source: polyPedia</p>
+                <p className="source">
+                    {i18n.t("companyInfoScreen:source")}: polyPedia
+                </p>
                 <div
                     className="bar"
                     style={{
@@ -190,7 +189,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
                 <div
@@ -211,7 +212,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
                 <div
@@ -232,7 +235,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
                 <div
@@ -253,7 +258,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
                 <div
@@ -274,7 +281,9 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                             </p>
                         )
                     ) : (
-                        <p className="no-data-for-column-tag">No Data</p>
+                        <p className="no-data-for-column-tag">
+                            {i18n.t("companyInfoScreen:no-data")}
+                        </p>
                     )}
                 </div>
             </div>

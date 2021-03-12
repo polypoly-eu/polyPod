@@ -1,7 +1,7 @@
 .company-short-info {
     display: flex;
     box-sizing: border-box;
-    width: 90%;
+    width: 100%;
     padding: 8px;
     border: none;
     background-color: #0f1938;
