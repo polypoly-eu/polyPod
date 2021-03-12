@@ -1138,6 +1138,8 @@
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out advertising i.e. process or artefact used to call attention to a product, service, etc. through announcements, notices, or other forms of communication.",
                 "count": 27
             },
             {
@@ -1146,6 +1148,8 @@
                 "Translation_DE": "Analytik",
                 "Translation_EN": "Analytics",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product.",
                 "count": 29
             },
             {
@@ -1154,6 +1158,8 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller",
                 "count": 41
             },
             {
@@ -1162,6 +1168,8 @@
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research in a commercial setting e.g. in a company",
                 "count": 1
             },
             {
@@ -1170,6 +1178,8 @@
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "create and provide personalised recommendations",
                 "count": 6
             },
             {
@@ -1178,6 +1188,8 @@
                 "Translation_DE": "Kundenbetreuung",
                 "Translation_EN": "Customer Care",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide assistance for customer complaints and satisfaction",
                 "count": 1
             },
             {
@@ -1186,6 +1198,8 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "detect and prevent fraud",
                 "count": 3
             },
             {
@@ -1194,6 +1208,8 @@
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations.",
                 "count": 6
             },
             {
@@ -1202,6 +1218,8 @@
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
                 "Synonyms": "Publicity;Public Relations",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service",
                 "count": 14
             },
             {
@@ -1210,6 +1228,8 @@
                 "Translation_DE": "Optimierung für Controller",
                 "Translation_EN": "Optimisation for Controller",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise activities and services for the Controller",
                 "count": 1
             },
             {
@@ -1218,6 +1238,8 @@
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research and development for new methods, products, or services",
                 "count": 1
             },
             {
@@ -1226,6 +1248,8 @@
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "ensure and enforce security e.g. of data",
                 "count": 1
             },
             {
@@ -1234,6 +1258,8 @@
                 "Translation_DE": "Gezielte Werbung verkaufen",
                 "Translation_EN": "Sell Targetted Advertisements",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "sell or provide targetted advertisements",
                 "count": 1
             },
             {
@@ -1242,6 +1268,8 @@
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide service or activity",
                 "count": 18
             },
             {
@@ -1250,6 +1278,8 @@
                 "Translation_DE": "Personalisierung der Benutzeroberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "personalise interfaces presented to the user",
                 "count": 2
             }
         ],
@@ -1261,6 +1291,8 @@
                 "Translation_EN": "Age",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about age",
                 "count": 1
             },
             {
@@ -1270,6 +1302,8 @@
                 "Translation_EN": "Bank Account",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about bank accounts.",
                 "count": 1
             },
             {
@@ -1279,6 +1313,8 @@
                 "Translation_EN": "Browser Fingerprint",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the web browser which is used as a 'fingerprint'",
                 "count": 15
             },
             {
@@ -1288,6 +1324,8 @@
                 "Translation_EN": "Browsing Behavior",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about browsing behaviour.",
                 "count": 9
             },
             {
@@ -1297,6 +1335,8 @@
                 "Translation_EN": "Browsing Referral",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about web browsing referrer or referral, which can be based on location, targeted referrals, direct, organic search, social media or actions, campaigns.",
                 "count": 10
             },
             {
@@ -1306,6 +1346,8 @@
                 "Translation_EN": "Communications Metadata",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about communication metadata in the public sphere",
                 "count": 8
             },
             {
@@ -1315,6 +1357,8 @@
                 "Translation_EN": "Credit Score",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about credit score.",
                 "count": 5
             },
             {
@@ -1324,6 +1368,8 @@
                 "Translation_EN": "Credit Worthiness",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about credit worthiness.",
                 "count": 1
             },
             {
@@ -1333,6 +1379,8 @@
                 "Translation_EN": "Derived Personal Data",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Derived data is data that is obtained or derived from other data.",
                 "count": 3
             },
             {
@@ -1342,6 +1390,8 @@
                 "Translation_EN": "Device Based",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about devices",
                 "count": 7
             },
             {
@@ -1351,6 +1401,8 @@
                 "Translation_EN": "Device Operating System",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the operating system (OS) or system software that manages hardware or software resources.",
                 "count": 7
             },
             {
@@ -1360,6 +1412,8 @@
                 "Translation_EN": "Financial",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about finance including monetary characteristics and transactions",
                 "count": 2
             },
             {
@@ -1369,6 +1423,8 @@
                 "Translation_EN": "Financial Account",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial accounts.",
                 "count": 1
             },
             {
@@ -1378,6 +1434,8 @@
                 "Translation_EN": "Financial Account Number",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial account number",
                 "count": 1
             },
             {
@@ -1387,6 +1445,8 @@
                 "Translation_EN": "General Reputation",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about reputation in the public sphere",
                 "count": 3
             },
             {
@@ -1396,6 +1456,8 @@
                 "Translation_EN": "IP Address",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the Internet protocol (IP) address of a device",
                 "count": 14
             },
             {
@@ -1405,6 +1467,8 @@
                 "Translation_EN": "Language",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about language and lingual history.",
                 "count": 8
             },
             {
@@ -1414,6 +1478,8 @@
                 "Translation_EN": "Life History",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about personal history regarding events or activities - including their occurences that might be directly related or have had an influence (e.g. World War, 9/11)",
                 "count": 1
             },
             {
@@ -1423,6 +1489,8 @@
                 "Translation_EN": "LinkClicked",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the links that an individual has clicked.",
                 "count": 3
             },
             {
@@ -1432,6 +1500,8 @@
                 "Translation_EN": "Location",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location",
                 "count": 8
             },
             {
@@ -1441,6 +1511,8 @@
                 "Translation_EN": "Name",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about names associated or used as given name or nickname.",
                 "count": 1
             },
             {
@@ -1450,6 +1522,8 @@
                 "Translation_EN": "Personal Data",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "A category of personal data",
                 "count": 8
             },
             {
@@ -1459,6 +1533,8 @@
                 "Translation_EN": "Physical Address",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about physical address.",
                 "count": 1
             },
             {
@@ -1468,6 +1544,8 @@
                 "Translation_EN": "Preference",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about preferences or interests",
                 "count": 5
             },
             {
@@ -1477,6 +1555,8 @@
                 "Translation_EN": "Public Life",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about public life",
                 "count": 2
             },
             {
@@ -1486,6 +1566,8 @@
                 "Translation_EN": "Purchase",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about purchases such as items bought e.g. grocery or clothing",
                 "count": 1
             },
             {
@@ -1495,6 +1577,8 @@
                 "Translation_EN": "Telephone Number",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about telephone number.",
                 "count": 1
             },
             {
@@ -1504,6 +1588,8 @@
                 "Translation_EN": "Tracking",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about thoughts",
                 "count": 11
             },
             {
@@ -1513,6 +1599,8 @@
                 "Translation_EN": "Transactional",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an purchasing, spending or income",
                 "count": 1
             },
             {
@@ -1522,12 +1610,17 @@
                 "Translation_EN": "UID",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about unique identifiers.",
                 "count": 13
             }
         ],
         "description": {
-            "value": null,
-            "source": null
+            "value": {
+                "en": "Schufa Holding AG (German Schutzgemeinschaft für allgemeine Kreditsicherung; English General Credit Protection Agency) is a German private credit bureau supported by creditors. It has its headquarters in Wiesbaden, the capital of Hessen, Germany. Schufa's purpose is to protect its clients from credit risks. It also offers protection from insolvency to borrowers. Schufa has 943 million records on 67.7 million natural persons, and 6 million companies. Schufa processes more than 165 million credit checks each year. Of those, 2.5 million are self-checks by citizens. Schufa employs 900 people (as of 2019). In 2016 Sales amounted to approx. 190 million Euros. Hamburg's former finance senator Michael Freytag has been board chairman of Schufa Holding AG since 1 November 2010. The chairman of the supervisory board is Michael Breuer (President Rheinischer Sparkassen- und Giroverband).",
+                "de": "Die Schufa Holding AG (Eigenschreibung SCHUFA, früher SCHUFA e. V. Schutzgemeinschaft für allgemeine Kreditsicherung) ist eine privatwirtschaftliche deutsche Wirtschaftsauskunftei in der Rechtsform einer Aktiengesellschaft mit dem Geschäftssitz in Wiesbaden. Zu den Aktionären gehören Kreditinstitute, Handelsunternehmen und sonstige Dienstleister. Ihr Geschäftszweck ist, ihre Vertragspartner mit Informationen zur Bonität (Kreditwürdigkeit) Dritter zu versorgen. Die Schufa verfügt über 943 Millionen Einzeldaten zu 67,9 Millionen natürlichen Personen und zu 6 Millionen Unternehmen. Die Schufa bearbeitet jährlich mehr als 165 Mio. Anfragen zur Kreditwürdigkeit. Davon sind 2,7 Millionen Auskünfte an Verbraucher, die ihre Daten einsehen wollen. Sie beschäftigt rund 900 Mitarbeiter (Stand 2019). Im Jahr 2019 belief sich der Umsatz auf 212 Mio. €. Vorstandsvorsitzende ist seit dem 1. Juli 2020 Tanja Birkholz.[1] Seit Juli 2020 ist Christian Polenz Schufa-Aufsichtsratsvorsitzender."
+            },
+            "source": "Wikipedia"
         },
         "category": "Banken & Finanzen",
         "jurisdictionsShared": {
@@ -2117,6 +2210,8 @@
                 "Translation_DE": "Akademische Forschung",
                 "Translation_EN": "Academic Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct or assist with research conducted in an academic context e.g. within universities",
                 "count": 91
             },
             {
@@ -2125,6 +2220,8 @@
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out advertising i.e. process or artefact used to call attention to a product, service, etc. through announcements, notices, or other forms of communication.",
                 "count": 2
             },
             {
@@ -2133,6 +2230,8 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller",
                 "count": 66
             },
             {
@@ -2141,6 +2240,8 @@
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research in a commercial setting e.g. in a company",
                 "count": 20
             },
             {
@@ -2149,6 +2250,8 @@
                 "Translation_DE": "Kommunikation zur Kundenbetreuung",
                 "Translation_EN": "Communication for Customer Care",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests.",
                 "count": 5
             },
             {
@@ -2157,6 +2260,8 @@
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "create and provide personalised recommendations",
                 "count": 1
             },
             {
@@ -2165,6 +2270,8 @@
                 "Translation_DE": "Kundenbetreuung",
                 "Translation_EN": "Customer Care",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide assistance for customer complaints and satisfaction",
                 "count": 23
             },
             {
@@ -2173,6 +2280,8 @@
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "deliver goods and services",
                 "count": 1
             },
             {
@@ -2181,6 +2290,8 @@
                 "Translation_DE": "Direktmarketing",
                 "Translation_EN": "Direct arketing",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual",
                 "count": 4
             },
             {
@@ -2189,6 +2300,8 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "detect and prevent fraud",
                 "count": 9
             },
             {
@@ -2197,6 +2310,8 @@
                 "Translation_DE": " Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "verify and authorise identity",
                 "count": 1
             },
             {
@@ -2205,6 +2320,8 @@
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "improve existing products and services",
                 "count": 107
             },
             {
@@ -2213,6 +2330,8 @@
                 "Translation_DE": "Interne Ressourcen-Optimierung",
                 "Translation_EN": "Internal Resource Optimisation",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise internal resources used by the organisation e.g. resource usage",
                 "count": 17
             },
             {
@@ -2221,6 +2340,8 @@
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations.",
                 "count": 82
             },
             {
@@ -2229,6 +2350,8 @@
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
                 "Synonyms": "Publicity;Public Relations",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service",
                 "count": 6
             },
             {
@@ -2237,6 +2360,8 @@
                 "Translation_DE": "Nicht-kommerzielle Forschung",
                 "Translation_EN": "Non-Commercial Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research in a non-commercial setting e.g. for a non-profit-organisation (NGO)",
                 "count": 18
             },
             {
@@ -2245,6 +2370,8 @@
                 "Translation_DE": "Optimierung für Controller",
                 "Translation_EN": "Optimisation for Controller",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise activities and services for the Controller",
                 "count": 20
             },
             {
@@ -2253,6 +2380,8 @@
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "process users’ payment transactions.",
                 "count": 8
             },
             {
@@ -2261,6 +2390,8 @@
                 "Translation_DE": "Personalisierte Vorteile",
                 "Translation_EN": "Personalised Benefits",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "personalise benefits received by the user",
                 "count": 3
             },
             {
@@ -2269,6 +2400,8 @@
                 "Translation_DE": "Registrierung Authentifizierung",
                 "Translation_EN": "Registration Authentication",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "register, authenticate, and identify in context of a service.",
                 "count": 1
             },
             {
@@ -2277,6 +2410,8 @@
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research and development for new methods, products, or services",
                 "count": 7
             },
             {
@@ -2285,6 +2420,8 @@
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "ensure and enforce security e.g. of data",
                 "count": 39
             },
             {
@@ -2293,6 +2430,8 @@
                 "Translation_DE": "Service-Optimierung",
                 "Translation_EN": "Service Optimization",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise service or activity",
                 "count": 2
             },
             {
@@ -2301,6 +2440,8 @@
                 "Translation_DE": "Dienstpersonalisierung",
                 "Translation_EN": "Service Personalization",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "personalise service or activity",
                 "count": 2
             },
             {
@@ -2309,6 +2450,8 @@
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide service or activity",
                 "count": 239
             },
             {
@@ -2317,6 +2460,8 @@
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product.",
                 "count": 20
             },
             {
@@ -2325,6 +2470,8 @@
                 "Translation_DE": "Personalisierung der Benutzeroberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "personalise interfaces presented to the user",
                 "count": 1
             },
             {
@@ -2339,6 +2486,8 @@
                 "Translation_EN": "Accent",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an linguistic and speech accents.",
                 "count": 34
             },
             {
@@ -2348,6 +2497,8 @@
                 "Translation_EN": "Account Identifier",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial account identifier.",
                 "count": 3
             },
             {
@@ -2357,6 +2508,8 @@
                 "Translation_EN": "Age",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about age",
                 "count": 39
             },
             {
@@ -2366,6 +2519,8 @@
                 "Translation_EN": "Authenticating",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about authentication and information used for authenticating",
                 "count": 35
             },
             {
@@ -2375,6 +2530,8 @@
                 "Translation_EN": "Behavioral",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about behavior or activity",
                 "count": 3
             },
             {
@@ -2384,6 +2541,8 @@
                 "Translation_EN": "Browser Fingerprint",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the web browser which is used as a 'fingerprint'",
                 "count": 1
             },
             {
@@ -2393,6 +2552,8 @@
                 "Translation_EN": "Browsing Behavior",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about browsing behaviour.",
                 "count": 12
             },
             {
@@ -2402,6 +2563,8 @@
                 "Translation_EN": "Browsing Referral",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about web browsing referrer or referral, which can be based on location, targeted referrals, direct, organic search, social media or actions, campaigns.",
                 "count": 1
             },
             {
@@ -2411,6 +2574,8 @@
                 "Translation_EN": "Communication",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information communicated from or to an individual",
                 "count": 4
             },
             {
@@ -2420,6 +2585,8 @@
                 "Translation_EN": "Country",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about country e.g. residence, travel.",
                 "count": 8
             },
             {
@@ -2429,6 +2596,8 @@
                 "Translation_EN": "Credit Record",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about credit record.",
                 "count": 2
             },
             {
@@ -2438,6 +2607,8 @@
                 "Translation_EN": "Demographic",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about demography and demographic characteristics",
                 "count": 1
             },
             {
@@ -2447,6 +2618,8 @@
                 "Translation_EN": "Device Applications",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about applications or application-like software on a device.",
                 "count": 2
             },
             {
@@ -2456,6 +2629,8 @@
                 "Translation_EN": "Device Based",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about devices",
                 "count": 17
             },
             {
@@ -2465,6 +2640,8 @@
                 "Translation_EN": "Device Operating System",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the operating system (OS) or system software that manages hardware or software resources.",
                 "count": 2
             },
             {
@@ -2474,6 +2651,8 @@
                 "Translation_EN": "Device Software",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about software on or related to a device.",
                 "count": 2
             },
             {
@@ -2483,6 +2662,8 @@
                 "Translation_EN": "Dialect",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about linguistic dialects.",
                 "count": 34
             },
             {
@@ -2492,6 +2673,8 @@
                 "Translation_EN": "Email Address",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about Email address.",
                 "count": 43
             },
             {
@@ -2501,6 +2684,8 @@
                 "Translation_EN": "Ethnic Origin",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about ethnic origin",
                 "count": 1
             },
             {
@@ -2510,6 +2695,8 @@
                 "Translation_EN": "Financial",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about finance including monetary characteristics and transactions",
                 "count": 41
             },
             {
@@ -2519,6 +2706,8 @@
                 "Translation_EN": "Financial Account",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial accounts.",
                 "count": 1
             },
             {
@@ -2528,6 +2717,8 @@
                 "Translation_EN": "GPS Coordinate",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location expressed using Global Position System coordinates (GPS)",
                 "count": 1
             },
             {
@@ -2537,6 +2728,8 @@
                 "Translation_EN": "Gender",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about gender",
                 "count": 1
             },
             {
@@ -2546,6 +2739,11 @@
                 "Translation_EN": "Geographic",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location or based on geography (e.g.",
+                "null": [
+                    " home address)"
+                ],
                 "count": 2
             },
             {
@@ -2555,6 +2753,8 @@
                 "Translation_EN": "Health",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about health.",
                 "count": 45
             },
             {
@@ -2564,6 +2764,8 @@
                 "Translation_EN": "Health History",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about health history.",
                 "count": 1
             },
             {
@@ -2573,6 +2775,8 @@
                 "Translation_EN": "Health Record",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about health record.",
                 "count": 1
             },
             {
@@ -2582,6 +2786,8 @@
                 "Translation_EN": "IP Address",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the Internet protocol (IP) address of a device",
                 "count": 2
             },
             {
@@ -2591,6 +2797,8 @@
                 "Translation_EN": "Identifying",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information that uniquely or semi-uniquely identifies an individual or a group",
                 "count": 34
             },
             {
@@ -2600,6 +2808,8 @@
                 "Translation_EN": "Income",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial income e.g. for individual or household or family",
                 "count": 34
             },
             {
@@ -2609,6 +2819,8 @@
                 "Translation_EN": "Individual Health History",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about information health history.",
                 "count": 1
             },
             {
@@ -2618,6 +2830,8 @@
                 "Translation_EN": "Interest",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about interests",
                 "count": 7
             },
             {
@@ -2627,6 +2841,8 @@
                 "Translation_EN": "Internal",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about internal characteristics that cannot be seen or observed",
                 "count": 2
             },
             {
@@ -2636,6 +2852,8 @@
                 "Translation_EN": "Language",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about language and lingual history.",
                 "count": 34
             },
             {
@@ -2645,6 +2863,8 @@
                 "Translation_EN": "LinkClicked",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the links that an individual has clicked.",
                 "count": 3
             },
             {
@@ -2654,6 +2874,8 @@
                 "Translation_EN": "Location",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location",
                 "count": 2
             },
             {
@@ -2663,6 +2885,8 @@
                 "Translation_EN": "Medical Health",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about health, medical conditions or health care",
                 "count": 35
             },
             {
@@ -2672,6 +2896,8 @@
                 "Translation_EN": "Mental Health",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about mental health.",
                 "count": 34
             },
             {
@@ -2681,6 +2907,8 @@
                 "Translation_EN": "Name",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about names associated or used as given name or nickname.",
                 "count": 10
             },
             {
@@ -2690,6 +2918,8 @@
                 "Translation_EN": "Official ID",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an official identifier or identification document",
                 "count": 2
             },
             {
@@ -2699,6 +2929,8 @@
                 "Translation_EN": "Offspring",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about offspring(s).",
                 "count": 1
             },
             {
@@ -2708,6 +2940,13 @@
                 "Translation_EN": "Ownership",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about ownership and history",
+                "null": [
+                    " including renting",
+                    " borrowing",
+                    " possessions."
+                ],
                 "count": 34
             },
             {
@@ -2717,6 +2956,8 @@
                 "Translation_EN": "PIN Code",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about Personal identification number (PIN), which is usually used in the process of authenticating the individual as a user accessing a system.",
                 "count": 1
             },
             {
@@ -2726,6 +2967,8 @@
                 "Translation_EN": "Password",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about password used in the process of authenticating the individual as a user accessing a system.",
                 "count": 14
             },
             {
@@ -2735,6 +2978,8 @@
                 "Translation_EN": "Payment Card",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about payment card such as Credit Card, Debit Card.",
                 "count": 1
             },
             {
@@ -2744,6 +2989,8 @@
                 "Translation_EN": "Physical Address",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about physical address.",
                 "count": 3
             },
             {
@@ -2753,6 +3000,8 @@
                 "Translation_EN": "Physical Health",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about physical health.",
                 "count": 36
             },
             {
@@ -2762,6 +3011,8 @@
                 "Translation_EN": "Picture",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about visual representation or image e.g. profile photo.",
                 "count": 36
             },
             {
@@ -2771,6 +3022,8 @@
                 "Translation_EN": "Privacy Preference",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about privacy preferences",
                 "count": 3
             },
             {
@@ -2780,6 +3033,8 @@
                 "Translation_EN": "Purchase",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about purchases such as items bought e.g. grocery or clothing",
                 "count": 4
             },
             {
@@ -2789,6 +3044,8 @@
                 "Translation_EN": "Salary",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about salary",
                 "count": 34
             },
             {
@@ -2798,6 +3055,8 @@
                 "Translation_EN": "Secret Text",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about secret text used in the process of authenticating the individual as a user accessing a system, e.g., when recovering a lost password.",
                 "count": 6
             },
             {
@@ -2807,6 +3066,8 @@
                 "Translation_EN": "Telephone Number",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about telephone number.",
                 "count": 10
             },
             {
@@ -2816,6 +3077,8 @@
                 "Translation_EN": "Transaction",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial transactions e.g. bank transfers",
                 "count": 1
             },
             {
@@ -2825,6 +3088,8 @@
                 "Translation_EN": "Transactional",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an purchasing, spending or income",
                 "count": 7
             },
             {
@@ -2834,6 +3099,8 @@
                 "Translation_EN": "Username",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about usernames.",
                 "count": 15
             },
             {
@@ -2843,6 +3110,8 @@
                 "Translation_EN": "Voice Communication Recording",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about vocal recorded communication (e.g. telephony, VoIP)",
                 "count": 35
             },
             {
@@ -3130,6 +3399,8 @@
                 "Translation_DE": "Zugangskontrolle",
                 "Translation_EN": "Access Control",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct or enforce access control",
                 "count": 1
             },
             {
@@ -3138,6 +3409,8 @@
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out advertising i.e. process or artefact used to call attention to a product, service, etc. through announcements, notices, or other forms of communication.",
                 "count": 76
             },
             {
@@ -3146,6 +3419,8 @@
                 "Translation_DE": "Analytik",
                 "Translation_EN": "Analytics",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product.",
                 "count": 22
             },
             {
@@ -3154,6 +3429,8 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller",
                 "count": 4
             },
             {
@@ -3162,6 +3439,8 @@
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research in a commercial setting e.g. in a company",
                 "count": 1
             },
             {
@@ -3170,14 +3449,18 @@
                 "Translation_DE": "Kommunikation zur Kundenbetreuung",
                 "Translation_EN": "Communication for Customer Care",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests.",
                 "count": 9
             },
             {
                 "dpv:Purpose": "dpv:ImproveInternalCRMProcesses",
                 "dpv:Superclass": "dpv:OptimisationForController",
                 "Translation_DE": "Interne CRM-Prozesse verbessern",
-                "Translation_EN": "Improve nternal CRM Processes",
+                "Translation_EN": "Improve internal CRM Processes",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "improve customer-relationship management (CRM) processes",
                 "count": 4
             },
             {
@@ -3186,6 +3469,8 @@
                 "Translation_DE": "Service-Robustheit erhöhen",
                 "Translation_EN": "Increase Service Robustness",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "improve the robustness and resilience of services",
                 "count": 13
             },
             {
@@ -3194,6 +3479,8 @@
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations.",
                 "count": 10
             },
             {
@@ -3202,6 +3489,8 @@
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
                 "Synonyms": "Publicity;Public Relations",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service",
                 "count": 72
             },
             {
@@ -3210,6 +3499,8 @@
                 "Translation_DE": "Optimierung für den Verbraucher",
                 "Translation_EN": "Optimisation for Consumer",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise activities and services for the consumer or user",
                 "count": 1
             },
             {
@@ -3218,6 +3509,8 @@
                 "Translation_DE": "Optimierung für Controller",
                 "Translation_EN": "Optimisation for Controller",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise activities and services for the Controller",
                 "count": 8
             },
             {
@@ -3226,6 +3519,8 @@
                 "Translation_DE": "Optimierung der Benutzeroberfläche",
                 "Translation_EN": "Optimise User Interface",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise interfaces presented to the user",
                 "count": 27
             },
             {
@@ -3234,6 +3529,8 @@
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "ensure and enforce security e.g. of data",
                 "count": 6
             },
             {
@@ -3242,6 +3539,8 @@
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide service or activity",
                 "count": 2
             },
             {
@@ -3250,6 +3549,8 @@
                 "Translation_DE": "Soziale Medien",
                 "Translation_EN": "Social Media",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "market through and on social media.",
                 "count": 2
             },
             {
@@ -3258,6 +3559,8 @@
                 "Translation_DE": "Personalisierung der Benutzeroberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "personalise interfaces presented to the user",
                 "count": 9
             },
             {
@@ -3272,6 +3575,8 @@
                 "Translation_EN": "Browser Fingerprint",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the web browser which is used as a 'fingerprint'",
                 "count": 12
             },
             {
@@ -3281,6 +3586,8 @@
                 "Translation_EN": "Browsing Behavior",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about browsing behaviour.",
                 "count": 87
             },
             {
@@ -3290,6 +3597,8 @@
                 "Translation_EN": "Browsing Referral",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about web browsing referrer or referral, which can be based on location, targeted referrals, direct, organic search, social media or actions, campaigns.",
                 "count": 3
             },
             {
@@ -3299,6 +3608,8 @@
                 "Translation_EN": "Communication",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information communicated from or to an individual",
                 "count": 1
             },
             {
@@ -3308,6 +3619,8 @@
                 "Translation_EN": "Communications Metadata",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about communication metadata in the public sphere",
                 "count": 8
             },
             {
@@ -3317,6 +3630,8 @@
                 "Translation_EN": "Derived Personal Data",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Derived data is data that is obtained or derived from other data.",
                 "count": 1
             },
             {
@@ -3326,6 +3641,8 @@
                 "Translation_EN": "Device Based",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about devices",
                 "count": 3
             },
             {
@@ -3335,6 +3652,8 @@
                 "Translation_EN": "Financial",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about finance including monetary characteristics and transactions",
                 "count": 1
             },
             {
@@ -3344,6 +3663,8 @@
                 "Translation_EN": "GPS Coordinate",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location expressed using Global Position System coordinates (GPS)",
                 "count": 2
             },
             {
@@ -3353,6 +3674,11 @@
                 "Translation_EN": "Geographic",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location or based on geography (e.g.",
+                "null": [
+                    " home address)"
+                ],
                 "count": 9
             },
             {
@@ -3362,6 +3688,8 @@
                 "Translation_EN": "IP Address",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the Internet protocol (IP) address of a device",
                 "count": 10
             },
             {
@@ -3371,6 +3699,8 @@
                 "Translation_EN": "Interest",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about interests",
                 "count": 4
             },
             {
@@ -3380,6 +3710,8 @@
                 "Translation_EN": "Language",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about language and lingual history.",
                 "count": 3
             },
             {
@@ -3389,6 +3721,8 @@
                 "Translation_EN": "LinkClicked",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the links that an individual has clicked.",
                 "count": 2
             },
             {
@@ -3398,6 +3732,8 @@
                 "Translation_EN": "Preference",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about preferences or interests",
                 "count": 20
             },
             {
@@ -3407,6 +3743,8 @@
                 "Translation_EN": "Tracking",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about thoughts",
                 "count": 20
             },
             {
@@ -3416,6 +3754,8 @@
                 "Translation_EN": "UID",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about unique identifiers.",
                 "count": 37
             },
             {
@@ -3425,6 +3765,8 @@
                 "Translation_EN": "Username",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about usernames.",
                 "count": 4
             },
             {
@@ -4451,6 +4793,8 @@
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out advertising i.e. process or artefact used to call attention to a product, service, etc. through announcements, notices, or other forms of communication.",
                 "count": 190
             },
             {
@@ -4459,6 +4803,8 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller",
                 "count": 117
             },
             {
@@ -4467,6 +4813,8 @@
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research in a commercial setting e.g. in a company",
                 "count": 75
             },
             {
@@ -4475,6 +4823,8 @@
                 "Translation_DE": "Kommunikation zur Kundenbetreuung",
                 "Translation_EN": "Communication for Customer Care",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests.",
                 "count": 27
             },
             {
@@ -4483,6 +4833,8 @@
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "create and provide personalised recommendations",
                 "count": 3
             },
             {
@@ -4491,6 +4843,8 @@
                 "Translation_DE": "Direktmarketing",
                 "Translation_EN": "Direct arketing",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual",
                 "count": 27
             },
             {
@@ -4499,6 +4853,8 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "detect and prevent fraud",
                 "count": 53
             },
             {
@@ -4507,6 +4863,8 @@
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "improve existing products and services",
                 "count": 58
             },
             {
@@ -4515,6 +4873,8 @@
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations.",
                 "count": 122
             },
             {
@@ -4523,6 +4883,8 @@
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
                 "Synonyms": "Publicity;Public Relations",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service",
                 "count": 102
             },
             {
@@ -4531,6 +4893,8 @@
                 "Translation_DE": "Optimierung für Controller",
                 "Translation_EN": "Optimisation for Controller",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise activities and services for the Controller",
                 "count": 1
             },
             {
@@ -4539,6 +4903,8 @@
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "process users’ payment transactions.",
                 "count": 18
             },
             {
@@ -4547,6 +4913,8 @@
                 "Translation_DE": "Personalisierte Werbung",
                 "Translation_EN": "Personalised Advertising",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide personalised advertising",
                 "count": 6
             },
             {
@@ -4555,6 +4923,8 @@
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "register, authenticate, and identify in context of a service.",
                 "count": 5
             },
             {
@@ -4563,6 +4933,8 @@
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research and development for new methods, products, or services",
                 "count": 27
             },
             {
@@ -4571,6 +4943,8 @@
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "ensure and enforce security e.g. of data",
                 "count": 172
             },
             {
@@ -4579,6 +4953,8 @@
                 "Translation_DE": "Daten an Dritte verkaufen",
                 "Translation_EN": "Sell Data to Third Parties",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "sell data or information to third parties",
                 "count": 1
             },
             {
@@ -4587,6 +4963,8 @@
                 "Translation_DE": "Einblicke aus Daten verkaufen",
                 "Translation_EN": "Sell Insightsfrom Data",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "sell or commercially provide insights obtained from analysis of data",
                 "count": 4
             },
             {
@@ -4595,6 +4973,8 @@
                 "Translation_DE": "Gezielte Werbung verkaufen",
                 "Translation_EN": "Sell Targetted Advertisements",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "sell or provide targetted advertisements",
                 "count": 13
             },
             {
@@ -4603,6 +4983,8 @@
                 "Translation_DE": "Service-Optimierung",
                 "Translation_EN": "Service Optimization",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise service or activity",
                 "count": 30
             },
             {
@@ -4611,6 +4993,8 @@
                 "Translation_DE": "Dienstpersonalisierung",
                 "Translation_EN": "Service Personalization",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "personalise service or activity",
                 "count": 5
             },
             {
@@ -4619,6 +5003,8 @@
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide service or activity",
                 "count": 192
             },
             {
@@ -4627,6 +5013,8 @@
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product.",
                 "count": 65
             },
             {
@@ -4635,6 +5023,8 @@
                 "Translation_DE": "Personalisierung der Benutzeroberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "personalise interfaces presented to the user",
                 "count": 1
             },
             {
@@ -4649,6 +5039,8 @@
                 "Translation_EN": "Accent",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an linguistic and speech accents.",
                 "count": 7
             },
             {
@@ -4658,6 +5050,8 @@
                 "Translation_EN": "Age",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about age",
                 "count": 1
             },
             {
@@ -4667,6 +5061,8 @@
                 "Translation_EN": "Bank Account",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about bank accounts.",
                 "count": 1
             },
             {
@@ -4676,6 +5072,8 @@
                 "Translation_EN": "Behavioral",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about behavior or activity",
                 "count": 2
             },
             {
@@ -4685,6 +5083,8 @@
                 "Translation_EN": "Browser Fingerprint",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the web browser which is used as a 'fingerprint'",
                 "count": 26
             },
             {
@@ -4694,6 +5094,8 @@
                 "Translation_EN": "Browser Fingerprint",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the web browser which is used as a 'fingerprint'",
                 "count": 26
             },
             {
@@ -4703,6 +5105,8 @@
                 "Translation_EN": "Browsing Behavior",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about browsing behaviour.",
                 "count": 188
             },
             {
@@ -4712,6 +5116,8 @@
                 "Translation_EN": "Browsing Referral",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about web browsing referrer or referral, which can be based on location, targeted referrals, direct, organic search, social media or actions, campaigns.",
                 "count": 24
             },
             {
@@ -4721,6 +5127,8 @@
                 "Translation_EN": "Call Log",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the calls that an individual has made.",
                 "count": 6
             },
             {
@@ -4730,6 +5138,8 @@
                 "Translation_EN": "Communication",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information communicated from or to an individual",
                 "count": 2
             },
             {
@@ -4739,6 +5149,8 @@
                 "Translation_EN": "Communications Metadata",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about communication metadata in the public sphere",
                 "count": 27
             },
             {
@@ -4748,6 +5160,8 @@
                 "Translation_EN": "Country",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about country e.g. residence, travel.",
                 "count": 3
             },
             {
@@ -4757,6 +5171,8 @@
                 "Translation_EN": "Credit",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about reputation with regards to money",
                 "count": 2
             },
             {
@@ -4766,6 +5182,8 @@
                 "Translation_EN": "Demographic",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about demography and demographic characteristics",
                 "count": 3
             },
             {
@@ -4775,6 +5193,8 @@
                 "Translation_EN": "Device Applications",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about applications or application-like software on a device.",
                 "count": 3
             },
             {
@@ -4784,6 +5204,8 @@
                 "Translation_EN": "Device Based",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about devices",
                 "count": 38
             },
             {
@@ -4793,6 +5215,8 @@
                 "Translation_EN": "Device Operating System",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the operating system (OS) or system software that manages hardware or software resources.",
                 "count": 24
             },
             {
@@ -4802,6 +5226,8 @@
                 "Translation_EN": "Device Software",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about software on or related to a device.",
                 "count": 25
             },
             {
@@ -4811,6 +5237,8 @@
                 "Translation_EN": "Dialect",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about linguistic dialects.",
                 "count": 7
             },
             {
@@ -4820,6 +5248,8 @@
                 "Translation_EN": "Email Address",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about Email address.",
                 "count": 35
             },
             {
@@ -4829,6 +5259,8 @@
                 "Translation_EN": "Email Content",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the contents of Emails sent or recieved",
                 "count": 26
             },
             {
@@ -4838,6 +5270,8 @@
                 "Translation_EN": "Financial",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about finance including monetary characteristics and transactions",
                 "count": 34
             },
             {
@@ -4847,6 +5281,8 @@
                 "Translation_EN": "GPS Coordinate",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location expressed using Global Position System coordinates (GPS)",
                 "count": 24
             },
             {
@@ -4856,6 +5292,8 @@
                 "Translation_EN": "General Reputation",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about reputation in the public sphere",
                 "count": 123
             },
             {
@@ -4865,6 +5303,11 @@
                 "Translation_EN": "Geographic",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location or based on geography (e.g.",
+                "null": [
+                    " home address)"
+                ],
                 "count": 29
             },
             {
@@ -4874,6 +5317,8 @@
                 "Translation_EN": "IP Address",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the Internet protocol (IP) address of a device",
                 "count": 40
             },
             {
@@ -4883,6 +5328,8 @@
                 "Translation_EN": "Identifying",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information that uniquely or semi-uniquely identifies an individual or a group",
                 "count": 1
             },
             {
@@ -4892,6 +5339,8 @@
                 "Translation_EN": "Interest",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about interests",
                 "count": 30
             },
             {
@@ -4901,6 +5350,8 @@
                 "Translation_EN": "Language",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about language and lingual history.",
                 "count": 27
             },
             {
@@ -4910,6 +5361,8 @@
                 "Translation_EN": "Location",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location",
                 "count": 39
             },
             {
@@ -4919,6 +5372,8 @@
                 "Translation_EN": "Name",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about names associated or used as given name or nickname.",
                 "count": 138
             },
             {
@@ -4928,6 +5383,8 @@
                 "Translation_EN": "Official ID",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an official identifier or identification document",
                 "count": 1
             },
             {
@@ -4937,6 +5394,8 @@
                 "Translation_EN": "Password",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about password used in the process of authenticating the individual as a user accessing a system.",
                 "count": 28
             },
             {
@@ -4946,6 +5405,8 @@
                 "Translation_EN": "Payment Card",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about payment card such as Credit Card, Debit Card.",
                 "count": 8
             },
             {
@@ -4955,6 +5416,8 @@
                 "Translation_EN": "Payment Card Expiry",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about payment card expiry such as a date.",
                 "count": 1
             },
             {
@@ -4964,6 +5427,8 @@
                 "Translation_EN": "Payment Card Number",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about payment card number.",
                 "count": 2
             },
             {
@@ -4973,6 +5438,8 @@
                 "Translation_EN": "Physical Address",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about physical address.",
                 "count": 4
             },
             {
@@ -4982,6 +5449,8 @@
                 "Translation_EN": "PhysicalCharacteristic",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about physical characteristics",
                 "count": 2
             },
             {
@@ -4991,6 +5460,8 @@
                 "Translation_EN": "Picture",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about visual representation or image e.g. profile photo.",
                 "count": 10
             },
             {
@@ -5000,6 +5471,8 @@
                 "Translation_EN": "Preference",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about preferences or interests",
                 "count": 2
             },
             {
@@ -5009,6 +5482,8 @@
                 "Translation_EN": "Privacy Preference",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about privacy preferences",
                 "count": 24
             },
             {
@@ -5018,6 +5493,8 @@
                 "Translation_EN": "Public Life",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about public life",
                 "count": 123
             },
             {
@@ -5027,6 +5504,8 @@
                 "Translation_EN": "Purchase",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about purchases such as items bought e.g. grocery or clothing",
                 "count": 25
             },
             {
@@ -5036,6 +5515,8 @@
                 "Translation_EN": "Service Consumption Behavior",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the consumption of a service, e.g. time and duration of consumption.",
                 "count": 35
             },
             {
@@ -5045,6 +5526,8 @@
                 "Translation_EN": "Social Network",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about friends or connections expressed as a social network",
                 "count": 24
             },
             {
@@ -5054,6 +5537,8 @@
                 "Translation_EN": "Tax",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial tax e.g. tax records or tax due",
                 "count": 1
             },
             {
@@ -5063,6 +5548,8 @@
                 "Translation_EN": "Telephone Number",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about telephone number.",
                 "count": 34
             },
             {
@@ -5072,6 +5559,8 @@
                 "Translation_EN": "Tracking",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about thoughts",
                 "count": 1
             },
             {
@@ -5081,6 +5570,8 @@
                 "Translation_EN": "Transaction",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial transactions e.g. bank transfers",
                 "count": 5
             },
             {
@@ -5090,6 +5581,8 @@
                 "Translation_EN": "Transactional",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an purchasing, spending or income",
                 "count": 9
             },
             {
@@ -5099,6 +5592,8 @@
                 "Translation_EN": "Voice Communication Recording",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about vocal recorded communication (e.g. telephony, VoIP)",
                 "count": 27
             },
             {
@@ -5108,6 +5603,8 @@
                 "Translation_EN": "Voice Mail",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about voice mail messages.",
                 "count": 6
             },
             {
@@ -5765,6 +6262,8 @@
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out advertising i.e. process or artefact used to call attention to a product, service, etc. through announcements, notices, or other forms of communication.",
                 "count": 39
             },
             {
@@ -5773,6 +6272,8 @@
                 "Translation_DE": "Analytik",
                 "Translation_EN": "Analytics",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product.",
                 "count": 76
             },
             {
@@ -5781,6 +6282,8 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller",
                 "count": 81
             },
             {
@@ -5789,6 +6292,8 @@
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research in a commercial setting e.g. in a company",
                 "count": 27
             },
             {
@@ -5797,6 +6302,8 @@
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "create and provide personalised recommendations",
                 "count": 19
             },
             {
@@ -5805,6 +6312,8 @@
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "deliver goods and services",
                 "count": 19
             },
             {
@@ -5813,6 +6322,8 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "detect and prevent fraud",
                 "count": 58
             },
             {
@@ -5821,6 +6332,8 @@
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "improve existing products and services",
                 "count": 58
             },
             {
@@ -5829,6 +6342,8 @@
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations.",
                 "count": 19
             },
             {
@@ -5837,6 +6352,8 @@
                 "Translation_DE": "Optimierung für den Verbraucher",
                 "Translation_EN": "Optimisation for Consumer",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise activities and services for the consumer or user",
                 "count": 19
             },
             {
@@ -5845,6 +6362,8 @@
                 "Translation_DE": "Optimierung für Controller",
                 "Translation_EN": "Optimisation for Controller",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise activities and services for the Controller",
                 "count": 2
             },
             {
@@ -5853,6 +6372,8 @@
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "process users’ payment transactions.",
                 "count": 19
             },
             {
@@ -5861,6 +6382,8 @@
                 "Translation_DE": "Personalisierte Werbung",
                 "Translation_EN": "Personalised Advertising",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide personalised advertising",
                 "count": 33
             },
             {
@@ -5869,6 +6392,8 @@
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research and development for new methods, products, or services",
                 "count": 102
             },
             {
@@ -5877,6 +6402,8 @@
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "ensure and enforce security e.g. of data",
                 "count": 38
             },
             {
@@ -5885,6 +6412,8 @@
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide service or activity",
                 "count": 104
             },
             {
@@ -5899,6 +6428,8 @@
                 "Translation_EN": "Accent",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an linguistic and speech accents.",
                 "count": 5
             },
             {
@@ -5908,6 +6439,8 @@
                 "Translation_EN": "Age",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about age",
                 "count": 11
             },
             {
@@ -5917,6 +6450,8 @@
                 "Translation_EN": "Authenticating",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about authentication and information used for authenticating",
                 "count": 15
             },
             {
@@ -5926,6 +6461,8 @@
                 "Translation_EN": "Bank Account",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about bank accounts.",
                 "count": 9
             },
             {
@@ -5935,6 +6472,8 @@
                 "Translation_EN": "Browser Fingerprint",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the web browser which is used as a 'fingerprint'",
                 "count": 13
             },
             {
@@ -5944,6 +6483,8 @@
                 "Translation_EN": "Browsing Behavior",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about browsing behaviour.",
                 "count": 30
             },
             {
@@ -5953,6 +6494,8 @@
                 "Translation_EN": "Communication",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information communicated from or to an individual",
                 "count": 11
             },
             {
@@ -5962,6 +6505,8 @@
                 "Translation_EN": "Communications Metadata",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about communication metadata in the public sphere",
                 "count": 27
             },
             {
@@ -5971,6 +6516,8 @@
                 "Translation_EN": "Credit Record",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about credit record.",
                 "count": 24
             },
             {
@@ -5980,6 +6527,8 @@
                 "Translation_EN": "Demographic",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about demography and demographic characteristics",
                 "count": 9
             },
             {
@@ -5989,6 +6538,8 @@
                 "Translation_EN": "Device Applications",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about applications or application-like software on a device.",
                 "count": 2
             },
             {
@@ -5998,6 +6549,8 @@
                 "Translation_EN": "Device Based",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about devices",
                 "count": 228
             },
             {
@@ -6007,6 +6560,8 @@
                 "Translation_EN": "Device Software",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about software on or related to a device.",
                 "count": 2
             },
             {
@@ -6016,6 +6571,8 @@
                 "Translation_EN": "Dialect",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about linguistic dialects.",
                 "count": 5
             },
             {
@@ -6025,6 +6582,8 @@
                 "Translation_EN": "Dislike",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about dislikes or preferences regarding repulsions.",
                 "count": 2
             },
             {
@@ -6034,6 +6593,8 @@
                 "Translation_EN": "Email Address",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about Email address.",
                 "count": 16
             },
             {
@@ -6043,6 +6604,8 @@
                 "Translation_EN": "Financial",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about finance including monetary characteristics and transactions",
                 "count": 22
             },
             {
@@ -6052,6 +6615,8 @@
                 "Translation_EN": "Financial Account",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial accounts.",
                 "count": 2
             },
             {
@@ -6061,6 +6626,8 @@
                 "Translation_EN": "IP Address",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the Internet protocol (IP) address of a device",
                 "count": 5
             },
             {
@@ -6070,6 +6637,8 @@
                 "Translation_EN": "Interest",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about interests",
                 "count": 15
             },
             {
@@ -6079,6 +6648,8 @@
                 "Translation_EN": "Language",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about language and lingual history.",
                 "count": 5
             },
             {
@@ -6088,6 +6659,8 @@
                 "Translation_EN": "Like",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about likes or preferences regarding attractions.",
                 "count": 2
             },
             {
@@ -6097,6 +6670,8 @@
                 "Translation_EN": "Loan Record",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about loans, whether applied, provided or rejected, and its history",
                 "count": 4
             },
             {
@@ -6106,6 +6681,8 @@
                 "Translation_EN": "Location",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location",
                 "count": 17
             },
             {
@@ -6115,6 +6692,8 @@
                 "Translation_EN": "Name",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about names associated or used as given name or nickname.",
                 "count": 11
             },
             {
@@ -6124,6 +6703,8 @@
                 "Translation_EN": "Official ID",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an official identifier or identification document",
                 "count": 9
             },
             {
@@ -6133,6 +6714,8 @@
                 "Translation_EN": "Password",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about password used in the process of authenticating the individual as a user accessing a system.",
                 "count": 2
             },
             {
@@ -6142,6 +6725,8 @@
                 "Translation_EN": "Physical Address",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about physical address.",
                 "count": 5
             },
             {
@@ -6151,6 +6736,8 @@
                 "Translation_EN": "Picture",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about visual representation or image e.g. profile photo.",
                 "count": 7
             },
             {
@@ -6160,6 +6747,8 @@
                 "Translation_EN": "Preference",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about preferences or interests",
                 "count": 21
             },
             {
@@ -6169,6 +6758,8 @@
                 "Translation_EN": "Purchase",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about purchases such as items bought e.g. grocery or clothing",
                 "count": 2
             },
             {
@@ -6178,6 +6769,8 @@
                 "Translation_EN": "Purchases and Spending Habit",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about analysis of purchases made and money spent expressed as a habit e.g. monthly shopping trends",
                 "count": 3
             },
             {
@@ -6187,6 +6780,8 @@
                 "Translation_EN": "Sale",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about sales e.g. selling of goods or services",
                 "count": 2
             },
             {
@@ -6196,6 +6791,8 @@
                 "Translation_EN": "Service Consumption Behavior",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the consumption of a service, e.g. time and duration of consumption.",
                 "count": 18
             },
             {
@@ -6205,6 +6802,8 @@
                 "Translation_EN": "Tax",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial tax e.g. tax records or tax due",
                 "count": 4
             },
             {
@@ -6214,6 +6813,8 @@
                 "Translation_EN": "Telephone Number",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about telephone number.",
                 "count": 15
             },
             {
@@ -6223,6 +6824,8 @@
                 "Translation_EN": "Transaction",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial transactions e.g. bank transfers",
                 "count": 3
             },
             {
@@ -6232,6 +6835,8 @@
                 "Translation_EN": "Transactional",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an purchasing, spending or income",
                 "count": 2
             },
             {
@@ -6241,6 +6846,8 @@
                 "Translation_EN": "Voice Communication Recording",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about vocal recorded communication (e.g. telephony, VoIP)",
                 "count": 5
             },
             {
@@ -7139,6 +7746,8 @@
                 "Translation_DE": "Akademische Forschung",
                 "Translation_EN": "Academic Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct or assist with research conducted in an academic context e.g. within universities",
                 "count": 25
             },
             {
@@ -7147,6 +7756,8 @@
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out advertising i.e. process or artefact used to call attention to a product, service, etc. through announcements, notices, or other forms of communication.",
                 "count": 40
             },
             {
@@ -7155,6 +7766,8 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller",
                 "count": 60
             },
             {
@@ -7163,6 +7776,8 @@
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research in a commercial setting e.g. in a company",
                 "count": 50
             },
             {
@@ -7171,6 +7786,8 @@
                 "Translation_DE": "Kommunikation zur Kundenbetreuung",
                 "Translation_EN": "Communication for Customer Care",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests.",
                 "count": 9
             },
             {
@@ -7179,6 +7796,8 @@
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "create and provide personalised recommendations",
                 "count": 8
             },
             {
@@ -7187,6 +7806,8 @@
                 "Translation_DE": "Kundenbetreuung",
                 "Translation_EN": "Customer Care",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide assistance for customer complaints and satisfaction",
                 "count": 9
             },
             {
@@ -7195,6 +7816,8 @@
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "deliver goods and services",
                 "count": 14
             },
             {
@@ -7203,6 +7826,8 @@
                 "Translation_DE": "Direktmarketing",
                 "Translation_EN": "Direct arketing",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual",
                 "count": 39
             },
             {
@@ -7211,6 +7836,8 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "detect and prevent fraud",
                 "count": 149
             },
             {
@@ -7219,6 +7846,8 @@
                 "Translation_DE": " Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "verify and authorise identity",
                 "count": 26
             },
             {
@@ -7227,6 +7856,8 @@
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "improve existing products and services",
                 "count": 119
             },
             {
@@ -7235,6 +7866,8 @@
                 "Translation_DE": "Service-Robustheit erhöhen",
                 "Translation_EN": "Increase Service Robustness",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "improve the robustness and resilience of services",
                 "count": 27
             },
             {
@@ -7243,6 +7876,8 @@
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations.",
                 "count": 116
             },
             {
@@ -7251,6 +7886,8 @@
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
                 "Synonyms": "Publicity;Public Relations",
+                "Explanation_DE": "",
+                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service",
                 "count": 53
             },
             {
@@ -7259,6 +7896,8 @@
                 "Translation_DE": "Nicht-kommerzielle Forschung",
                 "Translation_EN": "Non-Commercial Research",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research in a non-commercial setting e.g. for a non-profit-organisation (NGO)",
                 "count": 25
             },
             {
@@ -7267,6 +7906,8 @@
                 "Translation_DE": "Optimierung für den Verbraucher",
                 "Translation_EN": "Optimisation for Consumer",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "optimise activities and services for the consumer or user",
                 "count": 25
             },
             {
@@ -7275,6 +7916,8 @@
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "process users’ payment transactions.",
                 "count": 53
             },
             {
@@ -7283,6 +7926,8 @@
                 "Translation_DE": "Personalisierte Werbung",
                 "Translation_EN": "Personalised Advertising",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide personalised advertising",
                 "count": 41
             },
             {
@@ -7291,6 +7936,8 @@
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "register, authenticate, and identify in context of a service.",
                 "count": 1
             },
             {
@@ -7299,6 +7946,8 @@
                 "Translation_DE": "Registrierung Authentifizierung",
                 "Translation_EN": "Registration Authentication",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "register, authenticate, and identify in context of a service.",
                 "count": 9
             },
             {
@@ -7307,6 +7956,8 @@
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "conduct research and development for new methods, products, or services",
                 "count": 77
             },
             {
@@ -7315,6 +7966,8 @@
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "ensure and enforce security e.g. of data",
                 "count": 114
             },
             {
@@ -7323,6 +7976,8 @@
                 "Translation_DE": "Einblicke aus Daten verkaufen",
                 "Translation_EN": "Sell Insightsfrom Data",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "sell or commercially provide insights obtained from analysis of data",
                 "count": 41
             },
             {
@@ -7331,6 +7986,8 @@
                 "Translation_DE": "Gezielte Werbung verkaufen",
                 "Translation_EN": "Sell Targetted Advertisements",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "sell or provide targetted advertisements",
                 "count": 130
             },
             {
@@ -7339,6 +7996,8 @@
                 "Translation_DE": "Dienstpersonalisierung",
                 "Translation_EN": "Service Personalization",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "personalise service or activity",
                 "count": 22
             },
             {
@@ -7347,6 +8006,8 @@
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "provide service or activity",
                 "count": 128
             },
             {
@@ -7355,6 +8016,8 @@
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product.",
                 "count": 136
             },
             {
@@ -7363,6 +8026,8 @@
                 "Translation_DE": "Personalisierung der Benutzeroberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "personalise interfaces presented to the user",
                 "count": 39
             },
             {
@@ -7377,6 +8042,8 @@
                 "Translation_EN": "Age",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about age",
                 "count": 5
             },
             {
@@ -7386,6 +8053,8 @@
                 "Translation_EN": "Association",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about associations in a social network with other individuals, groups, or entities e.g. friend of a friend",
                 "count": 38
             },
             {
@@ -7395,6 +8064,8 @@
                 "Translation_EN": "Authenticating",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about authentication and information used for authenticating",
                 "count": 38
             },
             {
@@ -7404,6 +8075,8 @@
                 "Translation_EN": "Behavioral",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about behavior or activity",
                 "count": 81
             },
             {
@@ -7413,6 +8086,8 @@
                 "Translation_EN": "Biometric",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about biometrics and biometric characteristics.",
                 "count": 1
             },
             {
@@ -7422,6 +8097,8 @@
                 "Translation_EN": "Browser Fingerprint",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the web browser which is used as a 'fingerprint'",
                 "count": 34
             },
             {
@@ -7431,6 +8108,8 @@
                 "Translation_EN": "Browsing Behavior",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about browsing behaviour.",
                 "count": 61
             },
             {
@@ -7440,6 +8119,8 @@
                 "Translation_EN": "Browsing Referral",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about web browsing referrer or referral, which can be based on location, targeted referrals, direct, organic search, social media or actions, campaigns.",
                 "count": 3
             },
             {
@@ -7449,6 +8130,8 @@
                 "Translation_EN": "Communication",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information communicated from or to an individual",
                 "count": 4
             },
             {
@@ -7458,6 +8141,8 @@
                 "Translation_EN": "Communications Metadata",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about communication metadata in the public sphere",
                 "count": 46
             },
             {
@@ -7467,6 +8152,8 @@
                 "Translation_EN": "Connection",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about and including connections in a social network",
                 "count": 38
             },
             {
@@ -7476,6 +8163,8 @@
                 "Translation_EN": "Contact",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about contacts or used for contacting e.g. email address or phone number",
                 "count": 45
             },
             {
@@ -7485,6 +8174,8 @@
                 "Translation_EN": "Country",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about country e.g. residence, travel.",
                 "count": 4
             },
             {
@@ -7494,6 +8185,8 @@
                 "Translation_EN": "Demographic",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about demography and demographic characteristics",
                 "count": 7
             },
             {
@@ -7503,6 +8196,8 @@
                 "Translation_EN": "Device Applications",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about applications or application-like software on a device.",
                 "count": 38
             },
             {
@@ -7512,6 +8207,8 @@
                 "Translation_EN": "Device Based",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about devices",
                 "count": 101
             },
             {
@@ -7521,6 +8218,8 @@
                 "Translation_EN": "Device Operating System",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the operating system (OS) or system software that manages hardware or software resources.",
                 "count": 23
             },
             {
@@ -7530,6 +8229,8 @@
                 "Translation_EN": "Device Software",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about software on or related to a device.",
                 "count": 8
             },
             {
@@ -7539,6 +8240,8 @@
                 "Translation_EN": "Email Address",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about Email address.",
                 "count": 11
             },
             {
@@ -7548,6 +8251,8 @@
                 "Translation_EN": "GPS Coordinate",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location expressed using Global Position System coordinates (GPS)",
                 "count": 18
             },
             {
@@ -7557,6 +8262,8 @@
                 "Translation_EN": "Gender",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about gender",
                 "count": 5
             },
             {
@@ -7566,6 +8273,11 @@
                 "Translation_EN": "Geographic",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location or based on geography (e.g.",
+                "null": [
+                    " home address)"
+                ],
                 "count": 39
             },
             {
@@ -7575,6 +8287,8 @@
                 "Translation_EN": "Health",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about health.",
                 "count": 37
             },
             {
@@ -7584,6 +8298,8 @@
                 "Translation_EN": "IP Address",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the Internet protocol (IP) address of a device",
                 "count": 89
             },
             {
@@ -7593,6 +8309,8 @@
                 "Translation_EN": "Identifying",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information that uniquely or semi-uniquely identifies an individual or a group",
                 "count": 19
             },
             {
@@ -7602,6 +8320,8 @@
                 "Translation_EN": "Interest",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about interests",
                 "count": 44
             },
             {
@@ -7611,6 +8331,8 @@
                 "Translation_EN": "Language",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about language and lingual history.",
                 "count": 15
             },
             {
@@ -7620,6 +8342,8 @@
                 "Translation_EN": "Life History",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about personal history regarding events or activities - including their occurences that might be directly related or have had an influence (e.g. World War, 9/11)",
                 "count": 37
             },
             {
@@ -7629,6 +8353,8 @@
                 "Translation_EN": "Like",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about likes or preferences regarding attractions.",
                 "count": 6
             },
             {
@@ -7638,6 +8364,8 @@
                 "Translation_EN": "Location",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about location",
                 "count": 87
             },
             {
@@ -7647,6 +8375,8 @@
                 "Translation_EN": "Name",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about names associated or used as given name or nickname.",
                 "count": 11
             },
             {
@@ -7656,6 +8386,8 @@
                 "Translation_EN": "Official ID",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an official identifier or identification document",
                 "count": 1
             },
             {
@@ -7665,6 +8397,8 @@
                 "Translation_EN": "Payment Card",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about payment card such as Credit Card, Debit Card.",
                 "count": 38
             },
             {
@@ -7674,6 +8408,8 @@
                 "Translation_EN": "Payment Card Number",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about payment card number.",
                 "count": 36
             },
             {
@@ -7683,6 +8419,8 @@
                 "Translation_EN": "Physical Address",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about physical address.",
                 "count": 39
             },
             {
@@ -7692,6 +8430,8 @@
                 "Translation_EN": "PhysicalCharacteristic",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about physical characteristics",
                 "count": 19
             },
             {
@@ -7701,6 +8441,8 @@
                 "Translation_EN": "Physical Trait",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about defining traits or features regarding the body.",
                 "count": 18
             },
             {
@@ -7710,6 +8452,8 @@
                 "Translation_EN": "Picture",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about visual representation or image e.g. profile photo.",
                 "count": 65
             },
             {
@@ -7719,6 +8463,8 @@
                 "Translation_EN": "Political Affiliation",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about political affiliation and history",
                 "count": 37
             },
             {
@@ -7728,6 +8474,8 @@
                 "Translation_EN": "Preference",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about preferences or interests",
                 "count": 17
             },
             {
@@ -7737,6 +8485,8 @@
                 "Translation_EN": "Privacy Preference",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about privacy preferences",
                 "count": 37
             },
             {
@@ -7746,6 +8496,8 @@
                 "Translation_EN": "Purchase",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about purchases such as items bought e.g. grocery or clothing",
                 "count": 1
             },
             {
@@ -7755,6 +8507,8 @@
                 "Translation_EN": "Purchases and Spending Habit",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about analysis of purchases made and money spent expressed as a habit e.g. monthly shopping trends",
                 "count": 1
             },
             {
@@ -7764,6 +8518,8 @@
                 "Translation_EN": "Religion",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about religion, religious inclinations, and religious history.",
                 "count": 37
             },
             {
@@ -7773,6 +8529,8 @@
                 "Translation_EN": "Service Consumption Behavior",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about the consumption of a service, e.g. time and duration of consumption.",
                 "count": 83
             },
             {
@@ -7782,6 +8540,8 @@
                 "Translation_EN": "Social Media Communication",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about social media communication, including the communication itself and metadata.",
                 "count": 43
             },
             {
@@ -7791,6 +8551,8 @@
                 "Translation_EN": "Social Network",
                 "Polypoly_Parent_Category": "Soziale Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about friends or connections expressed as a social network",
                 "count": 40
             },
             {
@@ -7800,6 +8562,8 @@
                 "Translation_EN": "Special Category Personal Data",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Personal data belonging to one of 'special categories' that are more sensitive and require additional measures",
                 "count": 38
             },
             {
@@ -7809,6 +8573,8 @@
                 "Translation_EN": "Telephone Number",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about telephone number.",
                 "count": 12
             },
             {
@@ -7818,6 +8584,8 @@
                 "Translation_EN": "Tracking",
                 "Polypoly_Parent_Category": "Verhaltensdaten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about thoughts",
                 "count": 1
             },
             {
@@ -7827,6 +8595,8 @@
                 "Translation_EN": "Transaction",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about financial transactions e.g. bank transfers",
                 "count": 6
             },
             {
@@ -7836,6 +8606,8 @@
                 "Translation_EN": "Transactional",
                 "Polypoly_Parent_Category": "Wirtschaftliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about an purchasing, spending or income",
                 "count": 40
             },
             {
@@ -7845,6 +8617,8 @@
                 "Translation_EN": "UID",
                 "Polypoly_Parent_Category": "Technische Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about unique identifiers.",
                 "count": 4
             },
             {
@@ -7854,6 +8628,8 @@
                 "Translation_EN": "Username",
                 "Polypoly_Parent_Category": "Persönliche Daten",
                 "Synonyms": "",
+                "Explanation_DE": "",
+                "Explanation_EN": "Information about usernames.",
                 "count": 2
             },
             {

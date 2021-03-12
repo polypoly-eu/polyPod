@@ -78,6 +78,8 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                 </div>
             ),
         },
+        // We're hiding the structure tab until we have content for it
+        /*
         {
             tabName: "structure",
             content: (
@@ -93,6 +95,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                 </div>
             ),
         },
+        */
         {
             tabName: "revenue",
             content: (
@@ -143,6 +146,8 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                 </div>
             ),
         },
+        // We're hiding the structure tab until we have content for it
+        /*
         {
             tabName: "structure",
             content: (
@@ -158,6 +163,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                 </div>
             ),
         },
+        */
         {
             tabName: "revenue",
             content: (

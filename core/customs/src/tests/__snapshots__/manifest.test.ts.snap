@@ -3,8 +3,10 @@
 exports[`Parsing Failed parse fail-absolute.json 1`] = `
 "Failed to parse Feature spec
 required property \\"polypoly\\"
-└─ required property \\"root\\"
-   └─ cannot decode \\"/root\\", should be relative"
+├─ required property \\"root\\"
+│  └─ cannot decode \\"/root\\", should be relative
+└─ required property \\"manifest\\"
+   └─ cannot decode undefined, should be string"
 `;
 
 exports[`Parsing Failed parse fail-empty.json 1`] = `
@@ -16,8 +18,10 @@ required property \\"version\\"
 exports[`Parsing Failed parse fail-traversal.json 1`] = `
 "Failed to parse Feature spec
 required property \\"polypoly\\"
-└─ required property \\"root\\"
-   └─ cannot decode \\"../root\\", should be relative"
+├─ required property \\"root\\"
+│  └─ cannot decode \\"../root\\", should be relative
+└─ required property \\"manifest\\"
+   └─ cannot decode undefined, should be string"
 `;
 
 exports[`Parsing Failed parse fail-version.json 1`] = `
@@ -77,8 +81,25 @@ Object {
       ],
     ],
   },
-  "name": "feature-ok",
+  "description": "This is an example feature",
+  "links": Object {
+    "link1": "https://example.com/1",
+    "link2": "https://example.com/2",
+  },
+  "name": "The Test Feature",
+  "primaryColor": "#000000",
   "root": "assets",
+  "thumbnail": "assets/thumbnail.png",
+  "translations": Array [
+    Object {
+      "description": "Das ist eine Beispiel-Feature",
+      "language": "de",
+      "links": Object {
+        "link1": "https://example.com/1",
+        "link2": "https://example.com/2",
+      },
+    },
+  ],
   "version": SemVer {
     "build": Array [],
     "includePrerelease": false,

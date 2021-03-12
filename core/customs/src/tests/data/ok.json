@@ -5,6 +5,7 @@
     "polypoly": "^0.1.0"
   },
   "polypoly": {
-    "root": "assets"
+    "root": "assets",
+    "manifest": "manifest.json"
   }
 }

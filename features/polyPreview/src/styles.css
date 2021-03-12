@@ -44,12 +44,13 @@ h2 {
     font-family: "Jost Light";
 }
 
-a {
+button {
     display: block;
     width: 100%;
     max-width: 300px;
     height: 48px;
     margin: 0 auto;
+    border: none;
     border-radius: 4px;
     background: #fb8a89;
     font-family: "Jost Medium";
@@ -57,6 +58,14 @@ a {
     text-decoration: none;
     text-align: center;
     line-height: 48px;
+}
+
+button:focus {
+    outline: 0;
+}
+
+button:active {
+    filter: drop-shadow(4px 4px 4px #0006);
 }
 
 .swiper-container {

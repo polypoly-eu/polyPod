@@ -59,17 +59,29 @@ class FeatureStorage {
             name,
             author = getMetaDataString(context, name, "author"),
             description = getMetaDataString(context, name, "description"),
-            primaryColor = Color.parseColor(getMetaDataString(context, name, "primaryColor")),
+            primaryColor = Color.parseColor(
+                getMetaDataString(
+                    context,
+                    name,
+                    "primaryColor"
+                )
+            ),
             content
         )
     }
 
-    private fun getMetaDataString(context: Context, featureName: String, key: String): String {
-        return context.getString(context.resources.getIdentifier(
-            "feature_${featureName}_$key".toLowerCase(),
-            "string",
-            context.packageName
-        ))
+    private fun getMetaDataString(
+        context: Context,
+        featureName: String,
+        key: String
+    ): String {
+        return context.getString(
+            context.resources.getIdentifier(
+                "feature_${featureName}_$key".toLowerCase(),
+                "string",
+                context.packageName
+            )
+        )
     }
 
     fun installBundledFeatures(context: Context) {
@@ -83,5 +95,6 @@ class FeatureStorage {
         }
     }
 
-    private fun getFeaturesDir(context: Context) = File(context.filesDir, "features")
+    private fun getFeaturesDir(context: Context) =
+        File(context.filesDir, "features")
 }
