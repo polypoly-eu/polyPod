@@ -10,6 +10,14 @@ import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.io.File
+import java.io.FileOutputStream
+import java.util.zip.ZipOutputStream
+
+private fun createMockFeaturePackage(parent: File, child: String): File {
+    val featurePackage = File(parent, child)
+    ZipOutputStream(FileOutputStream(featurePackage)).close()
+    return featurePackage
+}
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
@@ -35,8 +43,7 @@ class FeatureStorageTest {
 
     @Test
     fun whenOneFeatureIsInstalled_featuresListContainsItsName() {
-        val featureFile = File(featuresDir, "feature1.zip")
-        assertThat(featureFile.createNewFile()).isTrue()
+        createMockFeaturePackage(featuresDir, "feature1.zip")
         val result = featureStorage.listFeatures(context)
         assertThat(result).hasSize(1)
         assertThat(result.first().name).isEqualTo("feature1")

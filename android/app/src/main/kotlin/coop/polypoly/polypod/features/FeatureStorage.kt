@@ -24,6 +24,13 @@ data class Feature(
     }
 }
 
+private fun parseFeatureColor(value: String) =
+    try {
+        Color.parseColor(value)
+    } catch (_: Exception) {
+        0
+    }
+
 // TODO: Get this information from the feature manifest
 private fun getFeatureLinks(featureName: String) =
     when (featureName) {
@@ -74,12 +81,8 @@ class FeatureStorage {
             name,
             author = getMetaDataString(context, name, "author"),
             description = getMetaDataString(context, name, "description"),
-            primaryColor = Color.parseColor(
-                getMetaDataString(
-                    context,
-                    name,
-                    "primaryColor"
-                )
+            primaryColor = parseFeatureColor(
+                getMetaDataString(context, name, "primaryColor")
             ),
             links = getFeatureLinks(name),
             content = content
@@ -91,13 +94,14 @@ class FeatureStorage {
         context: Context,
         featureName: String,
         key: String
-    ) = context.getString(
-        context.resources.getIdentifier(
+    ): String {
+        val stringId = context.resources.getIdentifier(
             "feature_${featureName}_$key".toLowerCase(),
             "string",
             context.packageName
         )
-    )
+        return if (stringId != 0) context.getString(stringId) else ""
+    }
 
     fun installBundledFeatures(context: Context) {
         for (featureBundle in context.assets.list("features").orEmpty()) {
