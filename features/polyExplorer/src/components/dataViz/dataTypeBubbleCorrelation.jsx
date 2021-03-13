@@ -67,28 +67,68 @@ const DataTypeBubbleCategory = ({
         return furthest;
     };
 
-    const getTextPosition = (
-        { x, y, r, name },
-        maxWidth,
-        maxHeight,
-        correlationCenter
-    ) => {
-        const dx = r + name.length * 4;
-        const edgeDistanceX = name.length * 3.5;
-        const possibilities = [
-            { x: x, y: y - (r + 8) }, //above
-            { x: x, y: y + (r + 16) }, //below
-            { x: x + dx, y: y + r / 4 }, //right
-            { x: x - dx, y: y + r / 4 }, //left
-        ].filter(
-            (e) =>
-                e.x - edgeDistanceX > 0 &&
-                maxWidth - e.x > edgeDistanceX &&
-                e.y > 0 &&
-                maxHeight - e.y > 0
+    function findLabelPosition(label, bubble, container, correlationCenter) {
+        const bounds = label.node().getBBox();
+        const apothems = {
+            x: bounds.width / 2,
+            y: bounds.height / 2,
+        };
+
+        // Vertically, the text's bounding box height looks larger than the
+        // text, so we get away without an additional margin. Horizontally, it
+        // fits the text visually tightly.
+        const marginX = 4;
+
+        const offset = {
+            x: bubble.r + apothems.x + marginX,
+            y: bubble.r + apothems.y,
+        };
+        const possibilities = {
+            top: {
+                x: bubble.x,
+                y: bubble.y - offset.y,
+            },
+            bottom: {
+                x: bubble.x,
+                y: bubble.y + offset.y,
+            },
+            left: {
+                x: bubble.x - offset.x,
+                y: bubble.y,
+            },
+            right: {
+                x: bubble.x + offset.x,
+                y: bubble.y,
+            },
+        };
+
+        const validPossibilities = Object.values(possibilities).filter(
+            (position) =>
+                position.x - apothems.x > 0 &&
+                position.x + apothems.x < container.node().scrollWidth &&
+                position.y - apothems.y > 0 &&
+                position.y + apothems.y < container.node().scrollHeight
         );
-        return getFurthestFromCenter(possibilities, correlationCenter);
-    };
+        return getFurthestFromCenter(validPossibilities, correlationCenter);
+    }
+
+    function appendLabel(container, text, bubble, correlationCenter) {
+        const label = container
+            .append("text")
+            .text(text)
+            .style("fill", "#F7FAFC")
+            .style("font-size", 14)
+            .style("font-weight", "500")
+            .style("text-anchor", "middle")
+            .style("alignment-baseline", "middle");
+        const position = findLabelPosition(
+            label,
+            bubble,
+            container,
+            correlationCenter
+        );
+        label.attr("x", position.x).attr("y", position.y);
+    }
 
     const getCorrelationCenter = () => {
         let x = 0;
@@ -180,8 +220,8 @@ const DataTypeBubbleCategory = ({
 
         const correlationCenter = getCorrelationCenter();
 
+        //draw a new circle over the line -> d3/svg has no z-index
         correlatingElements.forEach((e) => {
-            //draw a new circle over the line -> d3/svg has no z-index
             bubbleContainer
                 .append("circle")
                 .attr("r", e.r)
@@ -189,23 +229,19 @@ const DataTypeBubbleCategory = ({
                 .attr("fill-opacity", 1)
                 .attr("fill", correlationColor)
                 .style("vertical-align", "center");
+        });
 
-            const textPosition = getTextPosition(
-                e,
-                bubbleContainer._groups[0][0].scrollWidth,
-                bubbleContainer._groups[0][0].scrollHeight,
+        correlatingElements.forEach((e) => {
+            appendLabel(
+                bubbleContainer,
+                e.name,
+                {
+                    x: e.x + 1,
+                    y: e.y + 1,
+                    r: e.r,
+                },
                 correlationCenter
             );
-
-            bubbleContainer
-                .append("text")
-                .text(e.name)
-                .attr("text-anchor", "middle")
-                .attr("x", textPosition.x)
-                .attr("y", textPosition.y)
-                .style("fill", "#F7FAFC")
-                .style("font-size", 14)
-                .style("font-weight", "500");
         });
     };
 
