@@ -233,6 +233,7 @@ const DataExplorationScreen = ({ company }) => {
                     <Swiper
                         onSwiper={setSwiper}
                         direction="vertical"
+                        initialSlide={activeIndex}
                         onSlideChange={(swiper) =>
                             setActiveIndex(swiper.activeIndex)
                         }
