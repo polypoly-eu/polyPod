@@ -42,30 +42,44 @@ const DataTypeBubbleCategory = ({
             .attr("viewBox", `0 0 ${width} ${height}`);
     };
 
-    const calculateDistance = (x1, y1, x2, y2) => {
-        return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
-    };
+    const calculateRectBounds = (center, apothems) => ({
+        left: center.x - apothems.x,
+        right: center.x + apothems.x,
+        top: center.y - apothems.y,
+        bottom: center.y + apothems.y,
+    });
 
-    const getFurthestFromCenter = (possibilities, correlationCenter) => {
-        let furthest = possibilities[0];
-        possibilities.forEach((p) => {
-            calculateDistance(
-                p.x,
-                p.y,
-                correlationCenter.x,
-                correlationCenter.y
-            ) >
-            calculateDistance(
-                furthest.x,
-                furthest.y,
-                correlationCenter.x,
-                correlationCenter.y
-            )
-                ? (furthest = p)
-                : null;
+    const containsRect = (containerRect, rect) =>
+        rect.left > containerRect.left &&
+        rect.right < containerRect.right &&
+        rect.top > containerRect.top &&
+        rect.bottom < containerRect.bottom;
+
+    const findContainedPositions = (positions, container) =>
+        Object.values(positions).filter((p) => {
+            const containerBounds = container.node().getBBox();
+            const containerRect = {
+                left: containerBounds.x,
+                right: containerBounds.x + containerBounds.width,
+                top: containerBounds.y,
+                bottom: containerBounds.y + containerBounds.height,
+            };
+            return containsRect(containerRect, p.rect);
         });
-        return furthest;
-    };
+
+    function calculateRectToPointDistance(rect, point) {
+        const dx = Math.max(rect.left - point.x, 0, point.x - rect.right);
+        const dy = Math.max(rect.top - point.y, 0, point.y - rect.bottom);
+        return Math.sqrt(dx ** 2 + dy ** 2);
+    }
+
+    function findFurthestFromCenter(positions, correlationCenter) {
+        const distancePerPosition = positions.map((p) => [
+            p,
+            calculateRectToPointDistance(p.rect, correlationCenter),
+        ]);
+        return distancePerPosition.sort((a, b) => b[1] - a[1])[0][0];
+    }
 
     function findLabelPosition(label, bubble, container, correlationCenter) {
         const bounds = label.node().getBBox();
@@ -83,7 +97,7 @@ const DataTypeBubbleCategory = ({
             x: bubble.r + apothems.x + marginX,
             y: bubble.r + apothems.y,
         };
-        const possibilities = {
+        const positions = {
             top: {
                 x: bubble.x,
                 y: bubble.y - offset.y,
@@ -101,15 +115,11 @@ const DataTypeBubbleCategory = ({
                 y: bubble.y,
             },
         };
+        for (let [, p] of Object.entries(positions))
+            p.rect = calculateRectBounds(p, apothems);
 
-        const validPossibilities = Object.values(possibilities).filter(
-            (position) =>
-                position.x - apothems.x > 0 &&
-                position.x + apothems.x < container.node().scrollWidth &&
-                position.y - apothems.y > 0 &&
-                position.y + apothems.y < container.node().scrollHeight
-        );
-        return getFurthestFromCenter(validPossibilities, correlationCenter);
+        const containedPositions = findContainedPositions(positions, container);
+        return findFurthestFromCenter(containedPositions, correlationCenter);
     }
 
     function appendLabel(container, text, bubble, correlationCenter) {
