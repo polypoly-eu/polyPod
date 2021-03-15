@@ -54,21 +54,21 @@ const DataExplorationScreen = ({ company }) => {
         <div className="progress-bar">
             <div
                 className={`progress-bar-part dataTypes ${
-                    activeIndex < categories.length + 4 ? "active" : ""
+                    activeIndex < categories.length + 6 ? "active" : ""
                 }`}
                 onClick={() => goToSlide(0)}
             ></div>
             <div
                 className={`progress-bar-part purposes ${
-                    activeIndex == categories.length + 5 ? "active" : ""
+                    activeIndex == categories.length + 6 ? "active" : ""
                 }`}
-                onClick={() => goToSlide(categories.length + 5)}
+                onClick={() => goToSlide(categories.length + 6)}
             ></div>
             <div
                 className={`progress-bar-part companiesShared ${
-                    activeIndex > categories.length + 5 ? "active" : ""
+                    activeIndex > categories.length + 7 ? "active" : ""
                 }`}
-                onClick={() => goToSlide(categories.length + 6)}
+                onClick={() => goToSlide(categories.length + 7)}
             ></div>
             <div
                 className={`progress-bar-part jurisdictions ${
