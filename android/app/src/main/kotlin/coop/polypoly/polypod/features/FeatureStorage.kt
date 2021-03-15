@@ -70,7 +70,7 @@ class FeatureStorage {
         val manifestString: String = content.getInputStream(
             content.getEntry("manifest.json")
         ).reader().readText()
-        val manifest = FeatureManifest(manifestString).getManifest()
+        val manifest = FeatureManifest.parse(manifestString)
         return Feature(
             fileName,
             name = manifest.name,

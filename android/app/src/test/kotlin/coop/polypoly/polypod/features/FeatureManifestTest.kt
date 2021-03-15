@@ -12,6 +12,7 @@ private const val manifestString = """
     {
         "name": "testManifest",
         "description": "testDescription",
+        "author": "testAuthor",
         "thumbnail": "assets/thumbnail.png",
         "primaryColor": "#000000",
         "links": {
@@ -28,7 +29,7 @@ class FeatureManifestTest {
 
     @Test
     fun correctManifestParsing_works() {
-        val manifest = FeatureManifest(manifestString).getManifest()
+        val manifest = FeatureManifest.parse(manifestString)
         assertThat(manifest.name).isEqualTo("testManifest")
         assertThat(manifest.description).isEqualTo("testDescription")
         assertThat(manifest.links["link1"]).isEqualTo(
