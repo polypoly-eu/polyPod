@@ -58,7 +58,7 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
+    width: 90%;
     max-width: 412px;
 }
 
@@ -89,7 +89,7 @@
     box-sizing: border-box;
     display: block;
     margin: 0 auto;
-    width: 80%;
+    width: 85%;
     height: 90%;
     max-width: 412px;
 }
@@ -130,6 +130,7 @@
 .data-exploration .construction-container img {
     display: block;
     margin: 0 auto;
+    width: 40%;
 }
 
 .exploration-content .swipable-content {
@@ -153,7 +154,7 @@
 }
 
 .data-exploration .swipable-content .on-bubble {
-    width: 260px;
+    width: 220px;
     margin: 40% auto 0 auto;
     font-size: 16px;
     line-height: 120%;
