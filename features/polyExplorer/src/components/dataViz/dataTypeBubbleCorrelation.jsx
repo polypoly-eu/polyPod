@@ -246,6 +246,9 @@ const DataTypeBubbleCategory = ({
     };
 
     useEffect(() => {
+        data.forEach((e) => {
+            e.value = e.count;
+        });
         clearSvg();
         drawDataBubbles(createBubbleContainer());
     });

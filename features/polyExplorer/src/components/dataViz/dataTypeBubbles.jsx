@@ -24,10 +24,6 @@ const DataTypeBubbles = ({
     //this is needed for the font-size calculations
     let highestValue = 0;
     //This is necessary because later d.count is a function
-    data.forEach((e) => {
-        e.value = e.count;
-        e.count > highestValue ? (highestValue = e.count) : null;
-    });
 
     //data.sort((a, b) => b.value - a.value);
 
@@ -92,6 +88,10 @@ const DataTypeBubbles = ({
     };
 
     useEffect(() => {
+        data.forEach((e) => {
+            e.value = e.count;
+            e.count > highestValue ? (highestValue = e.count) : null;
+        });
         clearSvg();
         drawDataBubbles(createBubbleContainer());
     });

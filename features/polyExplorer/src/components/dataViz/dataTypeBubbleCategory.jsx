@@ -48,7 +48,6 @@ const DataTypeBubbleCategory = ({
         let packLayout = pack();
 
         const root = packLayout(hierarchicalData);
-
         const leaf = bubbleContainer
             .selectAll("g")
             .data(root.leaves())
@@ -66,7 +65,7 @@ const DataTypeBubbleCategory = ({
             .each(function (d) {
                 if (d.data["dpv:Category"] === highlightedType) {
                     const diagram = d3.select(this.parentNode.parentNode);
-                    const height = bubbleContainer._groups[0][0].scrollHeight;
+                    const height = diagram.scrollHeight;
 
                     /*
                     diagram
@@ -136,6 +135,9 @@ const DataTypeBubbleCategory = ({
     };
 
     useEffect(() => {
+        data.forEach((e) => {
+            e.value = e.count;
+        });
         clearSvg();
         drawDataBubbles(createBubbleContainer());
     });
