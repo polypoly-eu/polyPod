@@ -106,15 +106,15 @@ const DataTypeBubbleCategory = ({
                         .attr(
                             "y1",
                             d.y > height / 2 + 100
-                                ? d.y + d.r + 3
-                                : d.y - d.r - 3
+                                ? d.y + d.r + 2
+                                : d.y - d.r - 0
                         )
                         .attr("x2", d.x + 1)
                         .attr(
                             "y2",
                             d.y > height / 2 + 100
-                                ? d.y + d.r + 12
-                                : d.y - d.r - 12
+                                ? d.y + d.r + 11
+                                : d.y - d.r - 9
                         );
                 }
             });
