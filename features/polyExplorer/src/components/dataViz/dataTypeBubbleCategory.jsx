@@ -66,28 +66,29 @@ const DataTypeBubbleCategory = ({
                 if (d.data["dpv:Category"] === highlightedType) {
                     const diagram = d3.select(this.parentNode.parentNode);
                     const height = bubbleContainer._groups[0][0].scrollHeight;
-                    //x+1 because it seemed a little of otherwise
+
+                    /*
                     diagram
-                        .append("line")
-                        .style("stroke", "#F7FAFC")
-                        .style("stroke-width", 1)
-                        .attr("x1", d.x + 1)
+                        .append("rect")
+                        .attr("x", d.x - 100)
                         .attr(
-                            "y1",
-                            d.y > height / 2 ? d.y - d.r - 3 : d.y + d.r + 3
+                            "y",
+                            d.y > height / 2 + 100 ? d.y + d.r : d.y - d.r - 32
                         )
-                        .attr("x2", d.x + 1)
-                        .attr(
-                            "y2",
-                            d.y > height / 2 ? d.y - d.r - 12 : d.y + d.r + 12
-                        );
+                        .attr("height", 16)
+                        .attr("width", 150)
+                        .style("fill", "#0f1938")
+                        .attr("fill-opacity", 0.7);
+                        */
 
                     diagram
                         .append("text")
                         .attr("x", d.x + 1)
                         .attr(
                             "y",
-                            d.y > height / 2 ? d.y - d.r - 20 : d.y + d.r + 24
+                            d.y > height / 2 + 100
+                                ? d.y + d.r + 24
+                                : d.y - d.r - 20
                         )
                         .attr("text-anchor", "middle")
                         .style("font-size", "14px")
@@ -96,6 +97,25 @@ const DataTypeBubbleCategory = ({
                             d.data[
                                 i18n.t("dataTypeBubble:category.translation")
                             ]
+                        );
+
+                    diagram
+                        .append("line")
+                        .style("stroke", "#F7FAFC")
+                        .style("stroke-width", 1)
+                        .attr("x1", d.x + 1)
+                        .attr(
+                            "y1",
+                            d.y > height / 2 + 100
+                                ? d.y + d.r + 3
+                                : d.y - d.r - 3
+                        )
+                        .attr("x2", d.x + 1)
+                        .attr(
+                            "y2",
+                            d.y > height / 2 + 100
+                                ? d.y + d.r + 12
+                                : d.y - d.r - 12
                         );
                 }
             });

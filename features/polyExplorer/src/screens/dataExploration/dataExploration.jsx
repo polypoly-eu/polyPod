@@ -6,51 +6,12 @@ import Screen from "../../components/screen/screen.jsx";
 import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
+import PurposeChart from "../../components/dataViz/purposeChart.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
-
-const PurposeChart = ({ purposes }) => {
-    /*
-    const getHighestCount = () => {
-        console.log(typeof purposes);
-        let highest = 0;
-        purposes.forEach((e) => {
-            e.count > highest ? (highest = e.count) : null;
-        });
-    };
-
-    const calculateScaleValues = (highest) => {
-        if (highest <= 80) {
-        }
-    };
-*/
-    //const scaleValues = calculateScaleValues(getHighestCount());
-
-    //const scale = <div className="scale"></div>;
-
-    return (
-        <div className="purpose-chart">
-            <div className="scale-container">
-                <div className="descriptions">
-                    <div>
-                        {i18n.t(
-                            "dataExplorationScreen:purposes.description.scale"
-                        )}
-                    </div>
-                    <div className="fill"></div>
-                    <div className="help">
-                        <img src="./images/question-circle-light.svg" />
-                        <div>{i18n.t("common:how-to-read")}</div>
-                    </div>
-                    {purposes}
-                </div>
-            </div>
-        </div>
-    );
-};
 
 const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
@@ -58,7 +19,7 @@ const DataExplorationScreen = ({ company }) => {
 
     //To go soon
     const correlationTypeBundle = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 9; i += 3) {
         correlationTypeBundle.push(company.dataTypesShared[i]["dpv:Category"]);
     }
 
