@@ -89,7 +89,7 @@ const DataExplorationScreen = ({ company }) => {
                     </span>
                 </h1>
             );
-        if (
+        else if (
             activeIndex > categories.length + 2 &&
             activeIndex <= categories.length + 4
         )
@@ -100,8 +100,7 @@ const DataExplorationScreen = ({ company }) => {
                     )}
                 </h2>
             );
-
-        //else if (activeIndex > categories.length + 5) return <h1></h1>;
+        else return <h1></h1>;
     };
 
     const getChartForSlide = () => {
