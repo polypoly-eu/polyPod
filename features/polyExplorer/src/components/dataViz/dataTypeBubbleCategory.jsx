@@ -67,20 +67,6 @@ const DataTypeBubbleCategory = ({
                     const diagram = d3.select(this.parentNode.parentNode);
                     const height = diagram.scrollHeight;
 
-                    /*
-                    diagram
-                        .append("rect")
-                        .attr("x", d.x - 100)
-                        .attr(
-                            "y",
-                            d.y > height / 2 + 100 ? d.y + d.r : d.y - d.r - 32
-                        )
-                        .attr("height", 16)
-                        .attr("width", 150)
-                        .style("fill", "#0f1938")
-                        .attr("fill-opacity", 0.7);
-                        */
-
                     const labelPosition = {
                         x: d.x + 1,
                         y:
