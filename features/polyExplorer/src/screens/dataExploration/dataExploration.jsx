@@ -7,6 +7,7 @@ import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
 import PurposeChart from "../../components/dataViz/purposeChart.jsx";
+import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 
@@ -59,14 +60,15 @@ const DataExplorationScreen = ({ company }) => {
             ></div>
             <div
                 className={`progress-bar-part purposes ${
-                    activeIndex > categories.length + 4 ? "active" : ""
+                    activeIndex == categories.length + 5 ? "active" : ""
                 }`}
                 onClick={() => goToSlide(categories.length + 5)}
             ></div>
             <div
                 className={`progress-bar-part companiesShared ${
-                    activeIndex > 100 ? "active" : ""
+                    activeIndex > categories.length + 5 ? "active" : ""
                 }`}
+                onClick={() => goToSlide(categories.length + 6)}
             ></div>
             <div
                 className={`progress-bar-part jurisdictions ${
@@ -98,7 +100,8 @@ const DataExplorationScreen = ({ company }) => {
                     )}
                 </h2>
             );
-        else if (activeIndex < categories.length + 5) return <h1></h1>;
+
+        //else if (activeIndex > categories.length + 5) return <h1></h1>;
     };
 
     const getChartForSlide = () => {
@@ -166,8 +169,19 @@ const DataExplorationScreen = ({ company }) => {
                     height="360"
                 />
             );
+        /*
         else if (activeIndex == categories.length + 5)
             return <PurposeChart purposes={company.dataSharingPurposes} />;
+        else if (activeIndex > categories.length + 5)
+            return (
+                <CompanyBubbles
+                    data={company.dataRecipients}
+                    width="200"
+                    height="200"
+                    bubbleColor="#7EE8A2"
+                />
+            );
+            */
     };
 
     return (
