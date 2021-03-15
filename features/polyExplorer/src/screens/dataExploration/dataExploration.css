@@ -118,6 +118,15 @@
     background: url("../images/chevron-down.svg") no-repeat;
 }
 
+.data-exploration .static-content .construction-container {
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    height: 90%;
+    max-width: 412px;
+}
+
 .exploration-content .swipable-content {
     height: 100%;
 }
