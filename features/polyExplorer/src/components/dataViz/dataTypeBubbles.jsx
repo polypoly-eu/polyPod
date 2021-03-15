@@ -21,9 +21,12 @@ const DataTypeBubbles = ({
     const bubbleRef = useRef();
     const edgePadding = 5;
 
+    //this is needed for the font-size calculations
+    let highestValue = 0;
     //This is necessary because later d.count is a function
     data.forEach((e) => {
         e.value = e.count;
+        e.count > highestValue ? (highestValue = e.count) : null;
     });
 
     //data.sort((a, b) => b.value - a.value);
@@ -80,7 +83,9 @@ const DataTypeBubbles = ({
                   .attr("y", ".3em")
                   .style("fill", textColor)
                   .style("font-size", (d) => {
-                      return (8 + d.value / 60).toString() + "px";
+                      return (
+                          (8 + d.value / (highestValue / 4)).toString() + "px"
+                      );
                   })
                   .style("font-weight", "500")
             : null;
