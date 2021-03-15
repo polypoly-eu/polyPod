@@ -1,6 +1,11 @@
 {
     "name": "The Test Feature",
+    "author": "polypoly SCE",
     "description": "Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel.",
     "thumbnail": "assets/thumbnail.png",
-    "primaryColor": "#0f1938"
-  }
+    "primaryColor": "#0f1938",
+    "links": {
+        "link1": "https://example.com/1",
+        "link2": "https://example.com/2"
+    }
+}

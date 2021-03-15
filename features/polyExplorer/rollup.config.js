@@ -33,6 +33,7 @@ export default {
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
                         "src/static/*",
+                        "manifest.json",
                     ],
                     dest: "dist",
                 },
