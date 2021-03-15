@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import i18n from "../../i18n.js";
+import utils from "./utils.js";
 
 /*
     Component to visualize data in a non-ordered bubble-diagram
@@ -81,22 +82,20 @@ const DataTypeBubbleCategory = ({
                         .attr("fill-opacity", 0.7);
                         */
 
-                    diagram
-                        .append("text")
-                        .attr("x", d.x + 1)
-                        .attr(
-                            "y",
+                    const labelPosition = {
+                        x: d.x + 1,
+                        y:
                             d.y > height / 2 + 100
                                 ? d.y + d.r + 24
-                                : d.y - d.r - 20
-                        )
-                        .attr("text-anchor", "middle")
-                        .style("font-size", "14px")
-                        .style("fill", "#F7FAFC")
-                        .text(
-                            d.data[
-                                i18n.t("dataTypeBubble:category.translation")
-                            ]
+                                : d.y - d.r - 20,
+                    };
+                    const labelText =
+                        d.data[i18n.t("dataTypeBubble:category.translation")];
+                    utils
+                        .appendLabel(diagram, labelText)
+                        .attr(
+                            "transform",
+                            `translate(${labelPosition.x}, ${labelPosition.y})`
                         );
 
                     diagram
