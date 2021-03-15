@@ -14,6 +14,7 @@ function initSwiper() {
         pagination: {
             el: ".swiper-pagination",
         },
+        loop: true,
     });
 }
 

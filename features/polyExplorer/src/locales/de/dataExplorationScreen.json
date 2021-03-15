@@ -3,6 +3,8 @@
         "Dies sind die Datentypen die {{name}} bis zu {{sharingCount}} mal mit anderen Firmen teilt, z. B. Informationen über {{mostSharedType}} werden {{mostSharedCount}} mal geteilt.",
     "dataTypes.text.grouping":
         "Datentypen können in verschiedene Kategorien gruppiert werden:",
+    "dataTypes.without-category":
+        "Ohne Kategorie",
     "dataTypes.title.personal":
         "Persönliche Daten",
     "dataTypes.title.social":
@@ -10,5 +12,13 @@
     "dataTypes.title.technical":
         "Technische Daten",
     "dataTypes.title.financial":
-        "Finanzdaten"
+        "Finanzdaten",
+    "dataTypes.heading.correlations":
+        "Datenkorrelationen",
+    "dataTypes.text.correlations":
+        "Wenn Datentypen nicht einzeln, sondern im Packet geteilt werden, geben sie weitere Einblicke.",
+    "purposes.description.scale":
+        "Anzahl der Nennungen",
+    "construction.text":
+        "Dieser Teil wird gerade noch gebaut, aber ihr könnt schonmal durchklicken, wenn ihr neugierig seid."
 }
