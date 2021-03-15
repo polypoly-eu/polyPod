@@ -20,32 +20,46 @@ private fun luminance(color: Int): Double =
         Color.green(color) * 0.7152 +
         Color.blue(color) * 0.0722
 
+private enum class Action(val id: String) {
+    CLOSE("close"),
+    BACK("back"),
+    INFO("info"),
+    SEARCH("search")
+}
+
 private enum class ForegroundResources(
     val color: Int,
-    val closeIcon: Int,
-    val backIcon: Int,
-    val infoIcon: Int,
-    val searchIcon: Int
+    val icons: Map<Action, Int>
 ) {
     LIGHT(
         color = R.color.feature_foreground_light,
-        closeIcon = R.drawable.ic_close_light,
-        backIcon = R.drawable.ic_back_light,
-        infoIcon = R.drawable.ic_info_light,
-        searchIcon = R.drawable.ic_search_light
+        icons = mapOf(
+            Action.CLOSE to R.drawable.ic_close_light,
+            Action.BACK to R.drawable.ic_back_light,
+            Action.INFO to R.drawable.ic_info_light,
+            Action.SEARCH to R.drawable.ic_search_light
+        )
     ),
     DARK(
         color = R.color.feature_foreground_dark,
-        closeIcon = R.drawable.ic_close_dark,
-        backIcon = R.drawable.ic_back_dark,
-        infoIcon = R.drawable.ic_info_dark,
-        searchIcon = R.drawable.ic_search_dark
+        icons = mapOf(
+            Action.CLOSE to R.drawable.ic_close_dark,
+            Action.BACK to R.drawable.ic_back_dark,
+            Action.INFO to R.drawable.ic_info_dark,
+            Action.SEARCH to R.drawable.ic_search_dark
+        )
     );
 
     companion object {
         fun fromBackgroundColor(color: Int): ForegroundResources =
             if (luminance(color) > 50) DARK else LIGHT
     }
+}
+
+private enum class ActionButton(val action: Action, val buttonId: Int) {
+    CLOSE(Action.CLOSE, R.id.close_button),
+    INFO(Action.INFO, R.id.info_button),
+    SEARCH(Action.SEARCH, R.id.search_button)
 }
 
 /**
@@ -66,9 +80,7 @@ open class FeatureFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_feature, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_feature, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -99,28 +111,18 @@ open class FeatureFragment : Fragment() {
             )
         )
 
-        val closeButton = view.findViewById<ImageView>(R.id.close_button)
-        closeButton.setImageResource(foregroundResources.closeIcon)
-        closeButton.setOnClickListener {
-            navigateBack()
+        for (actionButton in ActionButton.values()) {
+            val buttonView = view.findViewById<ImageView>(actionButton.buttonId)
+            buttonView.setImageResource(
+                foregroundResources.icons.getValue(actionButton.action)
+            )
+            buttonView.setOnClickListener {
+                if (actionButton == ActionButton.CLOSE)
+                    navigateBack()
+                else
+                    featureContainer.triggerNavAction(actionButton.action.id)
+            }
         }
-
-        val infoButton = view.findViewById<ImageView>(R.id.info_button)
-        infoButton.setImageResource(foregroundResources.infoIcon)
-        infoButton.setOnClickListener {
-            featureContainer.triggerNavAction("info")
-        }
-
-        val searchButton = view.findViewById<ImageView>(R.id.search_button)
-        searchButton.setImageResource(foregroundResources.searchIcon)
-        searchButton.setOnClickListener {
-            featureContainer.triggerNavAction("search")
-        }
-    }
-
-    private fun navigateBack() {
-        if (!featureContainer.triggerNavAction("back"))
-            findNavController().popBackStack()
     }
 
     private fun setupNavigation(view: View) {
@@ -129,28 +131,35 @@ open class FeatureFragment : Fragment() {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() = navigateBack()
             })
+
         featureContainer.navTitleChangedHandler = {
-            activity?.runOnUiThread {
-                updateAppBarTitle(view, it)
-            }
+            activity?.runOnUiThread { updateAppBarTitle(view, it) }
         }
 
         featureContainer.navActionsChangedHandler = {
-            activity?.runOnUiThread {
-                updateAppBarActions(view, it)
-            }
+            activity?.runOnUiThread { updateAppBarActions(view, it) }
         }
     }
 
+    private fun navigateBack() {
+        if (!featureContainer.triggerNavAction("back"))
+            findNavController().popBackStack()
+    }
+
     private fun updateAppBarActions(view: View, navActions: List<String>) {
-        view.findViewById<ImageView>(R.id.close_button).setImageResource(
-            if (navActions.contains("back")) foregroundResources.backIcon
-            else foregroundResources.closeIcon
-        )
-        view.findViewById<View>(R.id.info_button).visibility =
-            if (navActions.contains("info")) View.VISIBLE else View.GONE
-        view.findViewById<View>(R.id.search_button).visibility =
-            if (navActions.contains("search")) View.VISIBLE else View.GONE
+        for (actionButton in ActionButton.values()) {
+            val buttonView = view.findViewById<ImageView>(actionButton.buttonId)
+            if (actionButton == ActionButton.CLOSE) {
+                buttonView.setImageResource(
+                    foregroundResources.icons.getValue(
+                        if (Action.BACK.id in navActions) Action.BACK else Action.CLOSE
+                    )
+                )
+                continue
+            }
+            buttonView.visibility =
+                if (actionButton.action.id in navActions) View.VISIBLE else View.GONE
+        }
     }
 
     private fun updateAppBarTitle(view: View, title: String) {
