@@ -130,7 +130,7 @@ const DataTypeBubbleCategory = ({
             .style("alignment-baseline", "middle");
 
         // Vertically, the text's bounding box height looks larger than the
-        // text, so the paddings account for that. Horizontally howeve , it fits
+        // text, so the paddings account for that. Horizontally however, it fits
         // the text visually tightly, so the padding defined here is what it
         // looks like.
         const padding = {
