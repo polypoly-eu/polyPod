@@ -9,12 +9,31 @@ import "./dataViz.css";
     data object: [{dataType, value},{},..]
 */
 
-const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
-    const bubbleRef = useRef(null);
+const DataTypeBubbles = ({
+    data,
+    width,
+    height,
+    bubbleColor,
+    textColor,
+    opacity = 1,
+    showValues = true,
+}) => {
+    const bubbleRef = useRef();
     const edgePadding = 5;
 
+    //This is necessary because later d.count is a function
+    data.forEach((e) => {
+        e.value = e.count;
+    });
+
+    //data.sort((a, b) => b.value - a.value);
+
+    const clearSvg = () => {
+        d3.select(bubbleRef.current).selectAll("svg").remove();
+    };
+
     const makeHierarchy = () => {
-        return d3.hierarchy({ children: data }).sum((d) => d.count);
+        return d3.hierarchy({ children: data }).sum((d) => d.value);
     };
 
     const pack = () => {
@@ -28,8 +47,7 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
         return d3
             .select(bubbleRef.current)
             .append("svg")
-            .attr("height", height)
-            .attr("width", width);
+            .attr("viewBox", `0 0 ${width} ${height}`);
     };
 
     // d3 svg bubble-diagram drawing function
@@ -49,25 +67,27 @@ const DataTypeBubbles = ({ data, width, height, bubbleColor }) => {
         leaf.append("circle")
             .attr("r", (d) => d.r)
             .style("fill", bubbleColor)
-            .style("vertical-align", "center");
+            .style("vertical-align", "center")
+            .attr("fill-opacity", opacity);
 
-        //Ok this is weird, count is already a function of some sort
-        /*
-        leaf.append("text")
-            .text((d) => {
-                return d.count.toString();
-            })
-            .attr("text-anchor", "middle")
-            .attr("y", ".3em")
-            .style("fill", textColor)
-            .style("font-size", (d) => {
-                "14px"; //return (10 + d.count / 2).toString() + "px";
-            })
-            .style("font-weight", "500");
-            */
+        showValues
+            ? leaf
+                  .append("text")
+                  .text((d) => {
+                      return d.value.toString();
+                  })
+                  .attr("text-anchor", "middle")
+                  .attr("y", ".3em")
+                  .style("fill", textColor)
+                  .style("font-size", (d) => {
+                      return (8 + d.value / 60).toString() + "px";
+                  })
+                  .style("font-weight", "500")
+            : null;
     };
 
     useEffect(() => {
+        clearSvg();
         drawDataBubbles(createBubbleContainer());
     });
 
