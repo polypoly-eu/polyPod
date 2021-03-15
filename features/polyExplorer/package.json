@@ -41,12 +41,5 @@
     "rollup-plugin-css-only": "^3.1.0",
     "swiper": "^6.4.11"
   },
-  "type": "module",
-  "engines": {
-    "polypoly": "^0.6.0"
-  },
-  "polypoly": {
-      "root": "",
-      "manifest": "manifest.json"
-  }
+  "type": "module"
 }

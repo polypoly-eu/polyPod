@@ -20,12 +20,5 @@
     "rollup": "^2.26.11",
     "rollup-plugin-copy": "^3.3.0"
   },
-  "private": true,
-  "engines": {
-    "polypoly": "^0.6.0"
-  },
-  "polypoly": {
-      "root": "",
-      "manifest": "manifest.json"
-  }
+  "private": true
 }

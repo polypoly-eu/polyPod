@@ -35,7 +35,7 @@ export default {
         copyWatch({
             targets: [
                 {
-                    src: ["src/static/*", "manifest.json"],
+                    src: ["src/static/*"],
                     dest: "dist",
                 },
             ],
