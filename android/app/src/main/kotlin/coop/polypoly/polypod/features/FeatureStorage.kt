@@ -32,15 +32,6 @@ private fun parseFeatureColor(value: String) =
         0
     }
 
-// TODO: Get this information from the feature manifest
-private fun getFeatureLinks(featureName: String) =
-    when (featureName) {
-        "polyPreview" -> mapOf(
-            "membership" to "https://polypoly.coop/de-de/membership"
-        )
-        else -> emptyMap()
-    }
-
 class FeatureStorage {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
