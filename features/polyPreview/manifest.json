@@ -1,11 +1,8 @@
 {
     "name": "PolyPreview",
     "author": "polypoly SCE",
-    "description": "PolyPreview description.",
+    "description": "Ihr polyPod wird stetig weiterentwickelt. Wenn Sie wissen möchten was wir Planen; hier eine Vorschau.",
     "thumbnail": "assets/thumbnail.png",
-    "primaryColor": "#0f1938",
-    "links": {
-        "link1": "https://example.com/1",
-        "link2": "https://example.com/2"
-    }
+    "primaryColor": "#fff5f5",
+    "links": {}
 }
