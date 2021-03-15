@@ -6,8 +6,8 @@ import Screen from "../../components/screen/screen.jsx";
 import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
-import PurposeChart from "../../components/dataViz/purposeChart.jsx";
-import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
+//import PurposeChart from "../../components/dataViz/purposeChart.jsx";
+//import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 
