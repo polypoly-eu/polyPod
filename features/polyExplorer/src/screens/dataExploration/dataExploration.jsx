@@ -6,7 +6,7 @@ import Screen from "../../components/screen/screen.jsx";
 import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
-//import PurposeChart from "../../components/dataViz/purposeChart.jsx";
+import PurposeChart from "../../components/dataViz/purposeChart.jsx";
 //import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
@@ -168,6 +168,8 @@ const DataExplorationScreen = ({ company }) => {
                     height="360"
                 />
             );
+        else if (activeIndex == categories.length + 6)
+            return <PurposeChart purposes={company.dataSharingPurposes} />;
         else
             return (
                 <div className="construction-container">
@@ -175,9 +177,8 @@ const DataExplorationScreen = ({ company }) => {
                     <img src="./images/construction.gif" />
                 </div>
             );
+
         /*
-        else if (activeIndex == categories.length + 5)
-            return <PurposeChart purposes={company.dataSharingPurposes} />;
         else if (activeIndex > categories.length + 5)
             return (
                 <CompanyBubbles
@@ -270,6 +271,9 @@ const DataExplorationScreen = ({ company }) => {
                                 )}
                             </p>
                         </SwiperSlide>
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
+                        ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
