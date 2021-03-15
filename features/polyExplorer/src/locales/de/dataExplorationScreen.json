@@ -18,5 +18,7 @@
     "dataTypes.text.correlations":
         "Wenn Datentypen nicht einzeln, sondern im Packet geteilt werden, geben sie weitere Einblicke.",
     "purposes.description.scale":
-        "Anzahl der Nennungen"
+        "Anzahl der Nennungen",
+    "construction.text":
+        "Dieser Teil wird gerade noch gebaut, aber ihr könnt schonmal durchklicken, wenn ihr neugierig seid."
 }

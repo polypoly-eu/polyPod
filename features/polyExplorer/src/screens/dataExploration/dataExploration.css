@@ -127,6 +127,11 @@
     max-width: 412px;
 }
 
+.data-exploration .construction-container img {
+    display: block;
+    margin: 0 auto;
+}
+
 .exploration-content .swipable-content {
     height: 100%;
 }

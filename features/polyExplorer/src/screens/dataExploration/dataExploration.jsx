@@ -79,7 +79,7 @@ const DataExplorationScreen = ({ company }) => {
     );
 
     const getHeading = () => {
-        if (activeIndex < 3)
+        if (activeIndex < 3 && activeIndex > 0)
             return (
                 <h1>
                     {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
@@ -90,8 +90,8 @@ const DataExplorationScreen = ({ company }) => {
                 </h1>
             );
         else if (
-            activeIndex > categories.length + 2 &&
-            activeIndex <= categories.length + 4
+            activeIndex > categories.length + 3 &&
+            activeIndex <= categories.length + 5
         )
             return (
                 <h2>
@@ -104,7 +104,7 @@ const DataExplorationScreen = ({ company }) => {
     };
 
     const getChartForSlide = () => {
-        if (activeIndex == 0)
+        if (activeIndex == 1)
             return (
                 <DataTypeBubbles
                     data={company.dataTypesShared}
@@ -114,7 +114,7 @@ const DataExplorationScreen = ({ company }) => {
                     height="360"
                 />
             );
-        else if (activeIndex > 0 && activeIndex <= 2)
+        else if (activeIndex > 1 && activeIndex <= 3)
             return (
                 <DataTypeBubbles
                     data={company.dataTypesShared}
@@ -125,12 +125,12 @@ const DataExplorationScreen = ({ company }) => {
                     opacity={0.2}
                 />
             );
-        else if (activeIndex > 2 && activeIndex <= categories.length + 2)
+        else if (activeIndex > 3 && activeIndex <= categories.length + 3)
             return (
                 <DataTypeBubbleCategory
                     data={company.dataTypesShared}
                     defaultColor="#FB8A89"
-                    category={categories[activeIndex - 3]}
+                    category={categories[activeIndex - 4]}
                     textColor="#0f1938"
                     width="360"
                     height="360"
@@ -138,14 +138,14 @@ const DataExplorationScreen = ({ company }) => {
                         company.dataTypesShared.filter(
                             (e) =>
                                 e.Polypoly_Parent_Category ===
-                                categories[activeIndex - 3]
+                                categories[activeIndex - 4]
                         )[0]["dpv:Category"]
                     }
                 />
             );
         else if (
-            activeIndex > categories.length + 2 &&
-            activeIndex <= categories.length + 3
+            activeIndex > categories.length + 3 &&
+            activeIndex <= categories.length + 4
         )
             return (
                 <DataTypeBubbles
@@ -158,7 +158,7 @@ const DataExplorationScreen = ({ company }) => {
                     showValues={false}
                 />
             );
-        else if (activeIndex == categories.length + 4)
+        else if (activeIndex == categories.length + 5)
             return (
                 <DataTypeBubbleCorrelation
                     data={company.dataTypesShared}
@@ -167,6 +167,13 @@ const DataExplorationScreen = ({ company }) => {
                     width="360"
                     height="360"
                 />
+            );
+        else
+            return (
+                <div className="construction-container">
+                    <p>{i18n.t("dataExplorationScreen:construction.text")}</p>
+                    <img src="./images/construction.gif" />
+                </div>
             );
         /*
         else if (activeIndex == categories.length + 5)
@@ -193,9 +200,11 @@ const DataExplorationScreen = ({ company }) => {
                 <div className="static-content">
                     {getHeading()}
                     {getChartForSlide()}
-                    <p className="source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
+                    {activeIndex > 0 ? (
+                        <p className="source">
+                            {i18n.t("common:source")}: polyPedia
+                        </p>
+                    ) : null}
                     <DataSharingLegend onClick={() => {}} />
                     <button
                         className="down-button"
@@ -212,6 +221,9 @@ const DataExplorationScreen = ({ company }) => {
                             setActiveIndex(swiper.activeIndex)
                         }
                     >
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
+                        ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
@@ -258,9 +270,6 @@ const DataExplorationScreen = ({ company }) => {
                                 )}
                             </p>
                         </SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
