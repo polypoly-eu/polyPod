@@ -14,8 +14,31 @@ data class Feature(
     val author: String,
     val description: String,
     val primaryColor: Int,
+    val links: Map<String, String>,
     val content: ZipFile
-)
+) {
+    fun getUrl(target: String): String? = when (target) {
+        in links.keys -> links[target]
+        in links.values -> target
+        else -> null
+    }
+}
+
+private fun parseFeatureColor(value: String) =
+    try {
+        Color.parseColor(value)
+    } catch (_: Exception) {
+        0
+    }
+
+// TODO: Get this information from the feature manifest
+private fun getFeatureLinks(featureName: String) =
+    when (featureName) {
+        "polyPreview" -> mapOf(
+            "membership" to "https://polypoly.coop/de-de/membership"
+        )
+        else -> emptyMap()
+    }
 
 class FeatureStorage {
     companion object {
@@ -52,36 +75,32 @@ class FeatureStorage {
 
     fun loadFeature(context: Context, fileName: String): Feature {
         val content = ZipFile(File(getFeaturesDir(context), fileName))
-        // TODO: Actually read this information from the feature manifest
         val name = fileName.replace(".zip", "")
         return Feature(
             fileName,
             name,
             author = getMetaDataString(context, name, "author"),
             description = getMetaDataString(context, name, "description"),
-            primaryColor = Color.parseColor(
-                getMetaDataString(
-                    context,
-                    name,
-                    "primaryColor"
-                )
+            primaryColor = parseFeatureColor(
+                getMetaDataString(context, name, "primaryColor")
             ),
-            content
+            links = getFeatureLinks(name),
+            content = content
         )
     }
 
+    // TODO: Get this information from the feature manifest
     private fun getMetaDataString(
         context: Context,
         featureName: String,
         key: String
     ): String {
-        return context.getString(
-            context.resources.getIdentifier(
-                "feature_${featureName}_$key".toLowerCase(),
-                "string",
-                context.packageName
-            )
+        val stringId = context.resources.getIdentifier(
+            "feature_${featureName}_$key".toLowerCase(),
+            "string",
+            context.packageName
         )
+        return if (stringId != 0) context.getString(stringId) else ""
     }
 
     fun installBundledFeatures(context: Context) {

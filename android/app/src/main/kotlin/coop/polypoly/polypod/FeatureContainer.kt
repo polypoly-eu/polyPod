@@ -1,12 +1,14 @@
 package coop.polypoly.polypod
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
 import android.webkit.*
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -31,9 +33,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     private val registry = LifecycleRegistry(this)
     private val api = PodApi(PolyOut(), PolyIn())
     private val navApi: PodNavApi = PodNavApi(
-        webView,
-        { navActionsChangedHandler(it) },
-        { navTitleChangedHandler(it) }
+        webView = webView,
+        onActionsChanged = { navActionsChangedHandler(it) },
+        onTitleChanged = { navTitleChangedHandler(it) },
+        onOpenUrlRequested = ::handleOpenUrl
     )
 
     var feature: Feature? = null
@@ -46,8 +49,34 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     var navActionsChangedHandler: (List<String>) -> Unit = {}
     var navTitleChangedHandler: (String) -> Unit = {}
 
-    init {
+    private fun handleOpenUrl(target: String) {
+        val featureName = feature?.name ?: return
+        val url = feature?.getUrl(target)
+        if (url == null) {
+            val message = context.getString(
+                R.string.message_url_open_prevented, featureName, target
+            )
+            Toast.makeText(webView.context, message, Toast.LENGTH_LONG).show()
+            return
+        }
 
+        val message = context.getString(
+            R.string.message_url_open_requested, featureName, url
+        )
+        val confirmLabel = context.getString(R.string.button_url_open_confirm)
+        val rejectLabel = context.getString(R.string.button_url_open_reject)
+        AlertDialog.Builder(context)
+            .setMessage(message)
+            .setPositiveButton(confirmLabel) { _, _ ->
+                context.startActivity(
+                    Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                )
+            }
+            .setNegativeButton(rejectLabel) { _, _ -> }
+            .show()
+    }
+
+    init {
         webView.layoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
@@ -75,7 +104,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             override fun shouldInterceptRequest(
                 view: WebView,
                 request: WebResourceRequest
-            ): WebResourceResponse? {
+            ): WebResourceResponse {
                 if (request.url.lastPathSegment == "favicon.ico")
                     return WebResourceResponse(null, null, null)
                 val response = assetLoader.shouldInterceptRequest(request.url)
@@ -83,7 +112,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                     logger.warn("Feature ${feature.name} tried to load forbidden URL: ${request.url}")
                     val statusCode = 403
                     val reasonPhrase =
-                        "Forbidden making requests to external servers is"
+                        context.getString(R.string.dev_message_forbidden_resource_requested)
                     val message = "$statusCode - $reasonPhrase"
                     val errorResponse = WebResourceResponse(
                         "text/plain",
@@ -192,7 +221,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     private class PodNavApi(
         private val webView: WebView,
         onActionsChanged: (List<String>) -> Unit,
-        onTitleChanged: (String) -> Unit
+        onTitleChanged: (String) -> Unit,
+        onOpenUrlRequested: (String) -> Unit
     ) {
         private val apiJsObject = "podNav"
         private val registeredActions = HashSet<String>()
@@ -215,10 +245,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
                 @JavascriptInterface
                 @Suppress("unused")
-                fun openUrl(url: String) {
-                    webView.context.startActivity(
-                        Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    )
+                fun openUrl(target: String) {
+                    onOpenUrlRequested(target)
                 }
             }, apiJsObject)
         }

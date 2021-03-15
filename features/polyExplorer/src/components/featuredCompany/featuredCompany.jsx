@@ -26,6 +26,13 @@ const DataSharingSection = ({
     </div>
 );
 
+const DataSharingLegend = ({ onClick }) => (
+    <div className="data-sharing-legend" onClick={onClick}>
+        <img src="images/question-circle.svg"></img>
+        {i18n.t("featuredCompany:text.legend")}
+    </div>
+);
+
 const FeaturedCompany = ({
     company,
     maxValues,

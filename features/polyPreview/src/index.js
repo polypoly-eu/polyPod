@@ -20,7 +20,7 @@ function initSwiper() {
 function initLearnMoreButton() {
     const button = document.getElementById("learn-more");
     button.addEventListener("click", function () {
-        podNav.openUrl(button.dataset.target);
+        podNav.openUrl(this.dataset.target);
     });
 }
 
