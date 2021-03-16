@@ -68,6 +68,42 @@ const DataTypeBubbleCategory = ({
             return containsRect(containerRect, p.rect);
         });
 
+    function calculateElementRect(element) {
+        const bounds = element.getBBox();
+        const rect = {
+            left: bounds.x,
+            right: bounds.x + bounds.width,
+            top: bounds.y,
+            bottom: bounds.y + bounds.height,
+        };
+
+        // The element's bounding box is relative to its own coordinate system,
+        // i.e. it does not consider its transformation matrix.This is an
+        // attempt to do that manually, that does however not consider anything
+        // but translate().
+        const transform = element.transform.baseVal.consolidate().matrix;
+        rect.left += transform.e;
+        rect.right += transform.e;
+        rect.top += transform.f;
+        rect.bottom += transform.f;
+        return rect;
+    }
+
+    const detectRectCollision = (a, b) =>
+        a.left < b.right &&
+        a.right > b.left &&
+        a.top < b.bottom &&
+        a.bottom > b.top;
+
+    const findCollisionFreePositions = (positions, elements) =>
+        positions.filter(
+            (position) =>
+                !elements.some((element) => {
+                    const elementRect = calculateElementRect(element);
+                    return detectRectCollision(position.rect, elementRect);
+                })
+        );
+
     function calculateRectToPointDistance(rect, point) {
         const dx = Math.max(rect.left - point.x, 0, point.x - rect.right);
         const dy = Math.max(rect.top - point.y, 0, point.y - rect.bottom);
@@ -116,7 +152,14 @@ const DataTypeBubbleCategory = ({
             p.rect = calculateRectBounds(p, apothems);
 
         const containedPositions = findContainedPositions(positions, container);
-        return findFurthestFromCenter(containedPositions, correlationCenter);
+        const validPositions = findCollisionFreePositions(
+            containedPositions,
+            d3
+                .selectAll("g.label")
+                .nodes()
+                .filter((otherLabel) => !label.node().isSameNode(otherLabel))
+        );
+        return findFurthestFromCenter(validPositions, correlationCenter);
     }
 
     function appendBubbleLabel(container, bubble, correlationCenter) {

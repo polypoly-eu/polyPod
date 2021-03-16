@@ -1,5 +1,5 @@
 function appendLabel(container, text) {
-    const label = container.append("g");
+    const label = container.append("g").attr("class", "label");
     label
         .append("text")
         .text(text)
