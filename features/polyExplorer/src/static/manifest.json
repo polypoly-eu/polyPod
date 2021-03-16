@@ -4,7 +4,5 @@
     "description": "Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel.",
     "thumbnail": "",
     "primaryColor": "#0f1938",
-    "links": {
-        "membership": "https://polypoly.coop/de-de/membership"
-    }
+    "links": {}
 }
