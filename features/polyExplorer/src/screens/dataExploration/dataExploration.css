@@ -158,6 +158,10 @@
     height: 100%;
 }
 
+.exploration-content .unswipable {
+    pointer-events: none;
+}
+
 .data-exploration .swiper-container {
     width: 100%;
     max-width: 412px;

@@ -17,6 +17,7 @@ import "./dataExploration.css";
 const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    let slidePointerEvents = true;
 
     const getCategories = () => {
         const categories = [];
@@ -234,9 +235,10 @@ const DataExplorationScreen = ({ company }) => {
                 </div>
             );
         else if (activeScreen === "purposesStart") {
+            slidePointerEvents = false;
             return (
                 <div className="static-content">
-                    {filler}
+                    <PurposeChart purposes={company.dataSharingPurposes} />
                     {button}
                 </div>
             );
@@ -274,7 +276,11 @@ const DataExplorationScreen = ({ company }) => {
             {progressBar}
             <div className="exploration-content">
                 {getStaticContent()}
-                <div className="swipable-content">
+                <div
+                    className={`swipable-content ${
+                        slidePointerEvents ? "" : "unswipable"
+                    }`}
+                >
                     <Swiper
                         onSwiper={setSwiper}
                         direction="vertical"
@@ -335,11 +341,9 @@ const DataExplorationScreen = ({ company }) => {
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
-                        <SwiperSlide onClick={() => swiper.slideNext()}>
-                            <PurposeChart
-                                purposes={company.dataSharingPurposes}
-                            />
-                        </SwiperSlide>
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
+                        ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>

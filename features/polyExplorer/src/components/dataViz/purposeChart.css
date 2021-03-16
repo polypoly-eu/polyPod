@@ -1,11 +1,10 @@
 .data-exploration .purpose-chart {
-    width: 94%;
+    width: 88%;
     max-width: 350px;
-    height: 90%;
     margin: 0 auto;
     position: relative;
     z-index: 200;
-    margin-bottom: 24px;
+    flex: 1 1 auto;
 }
 
 .data-exploration .purpose-chart .scale-container {
