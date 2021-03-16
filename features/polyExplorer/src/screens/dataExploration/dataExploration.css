@@ -102,8 +102,8 @@
 }
 
 .data-exploration .static-content .bubble-chart svg {
-    display: block;
-    margin: auto;
+    width: 100%;
+    height: 100%;
 }
 
 .data-exploration .static-content .source {
