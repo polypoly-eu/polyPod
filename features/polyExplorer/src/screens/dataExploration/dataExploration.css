@@ -49,21 +49,20 @@
 .data-exploration .exploration-content {
     position: relative;
     height: 100%;
+    overflow: hidden;
 }
 
-.exploration-content .static-content,
-.dynamic-content {
-    display: block;
+.data-exploration .static-content {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 0;
     left: 50%;
+    bottom: 0;
     transform: translateX(-50%);
-    width: 90%;
+    width: 100%;
     max-width: 412px;
-}
-
-.exploration-content .static-content {
-    height: 50%;
+    height: 100%;
 }
 
 .data-exploration .static-content h1 {
@@ -86,17 +85,15 @@
 }
 
 .data-exploration .static-content .bubble-chart {
-    box-sizing: border-box;
     display: block;
-    margin: 0 auto;
-    width: 85%;
-    height: 90%;
-    max-width: 412px;
+    margin: 0 20px;
+    flex: 1 1 auto;
+    overflow: hidden;
 }
 
 .data-exploration .static-content .bubble-chart svg {
-    display: block;
-    margin: auto;
+    width: 100%;
+    height: 100%;
 }
 
 .data-exploration .static-content .source {
