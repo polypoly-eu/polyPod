@@ -74,7 +74,8 @@
 }
 
 .data-exploration .static-content h1 {
-    width: 296px;
+    width: 84%;
+    max-width: 350px;
     margin: 8px auto;
     font-size: 24px;
 }
@@ -109,14 +110,25 @@
 .data-exploration .static-content .source {
     font-size: 10px;
     line-height: 14px;
-    display: flex;
-    align-items: center;
     letter-spacing: -0.01em;
     color: #a9b6c6;
-    padding-left: 4%;
+    width: 84%;
+    max-width: 350px;
+    margin: 8px auto;
 }
 .data-exploration .data-sharing-legend {
-    width: 94%;
+    width: 84%;
+    max-width: 350px;
+    margin: 8px auto;
+}
+
+.data-exploration .static-content .data-sharing-legend-fill {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    width: 84%;
+    max-width: 350px;
+    margin: 8px auto;
+    height: 31px;
 }
 
 .data-exploration .static-content .down-button {

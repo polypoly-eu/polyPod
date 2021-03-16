@@ -155,6 +155,7 @@ const DataExplorationScreen = ({ company }) => {
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <div className="data-sharing-legend-fill"></div>
                     {filler}
                     {button}
                 </div>
@@ -206,6 +207,7 @@ const DataExplorationScreen = ({ company }) => {
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <div className="data-sharing-legend-fill"></div>
                     {button}
                 </div>
             );
@@ -227,6 +229,7 @@ const DataExplorationScreen = ({ company }) => {
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <DataSharingLegend onClick={() => {}} />
                     {button}
                 </div>
             );
