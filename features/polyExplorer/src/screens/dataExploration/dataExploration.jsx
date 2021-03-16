@@ -7,7 +7,7 @@ import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
 import PurposeChart from "../../components/dataViz/purposeChart.jsx";
-//import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
+import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 
@@ -17,14 +17,6 @@ import "./dataExploration.css";
 const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-
-    const getHighestValueObject = () => {
-        let highest = { count: 0 };
-        company.dataTypesShared.forEach((e) =>
-            e.count > highest.count ? (highest = e) : null
-        );
-        return highest;
-    };
 
     const getCategories = () => {
         const categories = [];
@@ -36,153 +28,239 @@ const DataExplorationScreen = ({ company }) => {
         return categories;
     };
 
+    const getScreens = () => {
+        const screens = [
+            "construction",
+            "dataTypesStart",
+            "dataTypesUnderText",
+            "dataTypesUnderText",
+        ];
+        Object.keys(categories).forEach((c) => {
+            screens.push(`dataTypesCategory${c}`);
+        });
+        screens.push("dataTypesUnderTextNoNumbers");
+        screens.push("dataTypesCorrelation");
+        screens.push("purposesStart");
+        screens.push("companiesStart");
+        return screens;
+    };
+
+    //To go soon
+    const correlationTypeBundle = [];
+    for (let i = 0; i < 9; i += 3) {
+        correlationTypeBundle.push(company.dataTypesShared[i]["dpv:Category"]);
+    }
+
+    const getHighestValueObject = () => {
+        let highest = { count: 0 };
+        company.dataTypesShared.forEach((e) =>
+            e.count > highest.count ? (highest = e) : null
+        );
+        return highest;
+    };
+
     const goToSlide = (slide) => {
         swiper.slideTo(slide, 0);
         setActiveIndex(slide);
     };
 
-    const highestValueObject = getHighestValueObject();
+    //Navigation
     const categories = getCategories();
+    const screens = getScreens();
+    const activeScreen = screens[activeIndex];
+
+    const highestValueObject = getHighestValueObject();
 
     const progressBar = (
         <div className="progress-bar">
             <div
                 className={`progress-bar-part dataTypes ${
-                    activeIndex < categories.length + 6 ? "active" : ""
+                    activeScreen.startsWith("dataTypes") ? "active" : ""
                 }`}
-                onClick={() => goToSlide(0)}
+                onClick={() => goToSlide(screens.indexOf("dataTypesStart"))}
             ></div>
             <div
                 className={`progress-bar-part purposes ${
-                    activeIndex == categories.length + 6 ? "active" : ""
+                    activeScreen == "purposesStart" ? "active" : ""
                 }`}
-                onClick={() => goToSlide(categories.length + 6)}
+                onClick={() => goToSlide(screens.indexOf("purposesStart"))}
             ></div>
             <div
                 className={`progress-bar-part companiesShared ${
-                    activeIndex > categories.length + 7 ? "active" : ""
+                    activeScreen.startsWith("companies") ? "active" : ""
                 }`}
-                onClick={() => goToSlide(categories.length + 7)}
+                onClick={() => goToSlide(screens.indexOf("companiesStart"))}
             ></div>
             <div
                 className={`progress-bar-part jurisdictions ${
-                    activeIndex > 100 ? "active" : ""
+                    activeScreen.startsWith("jurisdictions") ? "active" : ""
                 }`}
+                //onClick={() => goToSlide(screens.indexOf("jurisdictionsStart"))}
             ></div>
         </div>
     );
 
-    const getHeading = () => {
-        if (activeIndex < 3 && activeIndex > 0)
+    const getStaticContent = () => {
+        const button = (
+            <button
+                className="down-button"
+                style={{ fontSize: "20px", color: "black" }}
+                onClick={() => swiper.slideNext()}
+            ></button>
+        );
+        const filler = <div className="filler"></div>;
+        if (activeScreen === "dataTypesStart")
             return (
-                <h1>
-                    {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
-                    <span className="highlight">
-                        {company.dataTypesShared.length}{" "}
-                        {i18n.t("common:sharing.dataTypes")}
-                    </span>
-                </h1>
-            );
-        else if (
-            activeIndex > categories.length + 3 &&
-            activeIndex <= categories.length + 5
-        )
-            return (
-                <h2>
-                    {i18n.t(
-                        "dataExplorationScreen:dataTypes.heading.correlations"
-                    )}
-                </h2>
-            );
-        else return <h1></h1>;
-    };
-
-    const getChartForSlide = () => {
-        if (activeIndex == 1)
-            return (
-                <DataTypeBubbles
-                    data={company.dataTypesShared}
-                    bubbleColor="#FB8A89"
-                    textColor="#0f1938"
-                    width="360"
-                    height="360"
-                />
-            );
-        else if (activeIndex > 1 && activeIndex <= 3)
-            return (
-                <DataTypeBubbles
-                    data={company.dataTypesShared}
-                    bubbleColor="#FB8A89"
-                    textColor="#0f1938"
-                    width="360"
-                    height="360"
-                    opacity={0.2}
-                />
-            );
-        else if (activeIndex > 3 && activeIndex <= categories.length + 3)
-            return (
-                <DataTypeBubbleCategory
-                    data={company.dataTypesShared}
-                    defaultColor="#FB8A89"
-                    category={categories[activeIndex - 4]}
-                    textColor="#0f1938"
-                    width="360"
-                    height="360"
-                    highlightedType={
-                        company.dataTypesShared.filter(
-                            (e) =>
-                                e.Polypoly_Parent_Category ===
-                                categories[activeIndex - 4]
-                        )[0]["dpv:Category"]
-                    }
-                />
-            );
-        else if (
-            activeIndex > categories.length + 3 &&
-            activeIndex <= categories.length + 4
-        )
-            return (
-                <DataTypeBubbles
-                    data={company.dataTypesShared}
-                    bubbleColor="#FB8A89"
-                    textColor="#0f1938"
-                    width="360"
-                    height="360"
-                    opacity={0.2}
-                    showValues={false}
-                />
-            );
-        else if (activeIndex == categories.length + 5)
-            return (
-                <DataTypeBubbleCorrelation
-                    data={company.dataTypesShared}
-                    correlationColor="#FB8A89"
-                    typeBundle={company.correlatingDataTypes}
-                    width="360"
-                    height="360"
-                />
-            );
-        else if (activeIndex == categories.length + 6)
-            return <PurposeChart purposes={company.dataSharingPurposes} />;
-        else
-            return (
-                <div className="construction-container">
-                    <p>{i18n.t("dataExplorationScreen:construction.text")}</p>
-                    <img src="./images/construction.gif" />
+                <div className="static-content">
+                    <h1>
+                        {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
+                        <span className="highlight">
+                            {company.dataTypesShared.length}{" "}
+                            {i18n.t("common:sharing.dataTypes")}
+                        </span>
+                    </h1>
+                    <DataTypeBubbles
+                        data={company.dataTypesShared}
+                        bubbleColor="#FB8A89"
+                        textColor="#0f1938"
+                        width="360"
+                        height="360"
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <DataSharingLegend onClick={() => {}} />
+                    {filler}
+                    {button}
                 </div>
             );
-
-        /*
-        else if (activeIndex > categories.length + 5)
+        else if (activeScreen === "dataTypesUnderText")
             return (
-                <CompanyBubbles
-                    data={company.dataRecipients}
-                    width="200"
-                    height="200"
-                    bubbleColor="#7EE8A2"
-                />
+                <div className="static-content">
+                    <h1>
+                        {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
+                        <span className="highlight">
+                            {company.dataTypesShared.length}{" "}
+                            {i18n.t("common:sharing.dataTypes")}
+                        </span>
+                    </h1>
+                    <DataTypeBubbles
+                        data={company.dataTypesShared}
+                        bubbleColor="#FB8A89"
+                        textColor="#0f1938"
+                        width="360"
+                        height="360"
+                        opacity={0.2}
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    {filler}
+                    {button}
+                </div>
             );
-            */
+        else if (activeScreen.startsWith("dataTypesCategory"))
+            return (
+                <div className="static-content">
+                    <h1></h1>
+                    <DataTypeBubbleCategory
+                        data={company.dataTypesShared}
+                        defaultColor="#FB8A89"
+                        category={categories[activeIndex - 4]}
+                        textColor="#0f1938"
+                        width="360"
+                        height="360"
+                        highlightedType={
+                            company.dataTypesShared.filter(
+                                (e) =>
+                                    e.Polypoly_Parent_Category ===
+                                    categories[parseInt(activeScreen.slice(-1))]
+                            )[0]["dpv:Category"]
+                        }
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <DataSharingLegend onClick={() => {}} />
+                    {filler}
+                    {button}
+                </div>
+            );
+        else if (activeScreen === "dataTypesUnderTextNoNumbers")
+            return (
+                <div className="static-content">
+                    <h2 className="highlight">
+                        {i18n.t(
+                            "dataExplorationScreen:dataTypes.heading.correlations"
+                        )}
+                    </h2>
+                    <DataTypeBubbles
+                        data={company.dataTypesShared}
+                        bubbleColor="#FB8A89"
+                        textColor="#0f1938"
+                        width="360"
+                        height="360"
+                        opacity={0.2}
+                        showValues={false}
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    {button}
+                </div>
+            );
+        else if (activeScreen === "dataTypesCorrelation")
+            return (
+                <div className="static-content">
+                    <h2 className="highlight">
+                        {i18n.t(
+                            "dataExplorationScreen:dataTypes.heading.correlations"
+                        )}
+                    </h2>
+                    <DataTypeBubbleCorrelation
+                        data={company.dataTypesShared}
+                        correlationColor="#FB8A89"
+                        typeBundle={company.correlatingDataTypes}
+                        width="360"
+                        height="360"
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    {button}
+                </div>
+            );
+        else if (activeScreen === "purposesStart") {
+            return (
+                <div className="static-content">
+                    {filler}
+                    {button}
+                </div>
+            );
+        } else if (activeScreen === "companiesStart")
+            return (
+                <div className="static-content">
+                    <CompanyBubbles
+                        data={company.dataRecipients}
+                        width="200"
+                        height="200"
+                        bubbleColor="#7EE8A2"
+                    />
+                    {button}
+                </div>
+            );
+        else if (activeScreen === "construction")
+            return (
+                <div className="static-content">
+                    <div className="construction-container">
+                        <p>
+                            {i18n.t("dataExplorationScreen:construction.text")}
+                        </p>
+                        <img src="./images/construction.gif" />
+                    </div>
+                    {button}
+                </div>
+            );
     };
 
     return (
@@ -192,21 +270,7 @@ const DataExplorationScreen = ({ company }) => {
             </div>
             {progressBar}
             <div className="exploration-content">
-                <div className="static-content">
-                    {getHeading()}
-                    {getChartForSlide()}
-                    {activeIndex > 0 ? (
-                        <p className="source">
-                            {i18n.t("common:source")}: polyPedia
-                        </p>
-                    ) : null}
-                    <DataSharingLegend onClick={() => {}} />
-                    <button
-                        className="down-button"
-                        style={{ fontSize: "20px", color: "black" }}
-                        onClick={() => swiper.slideNext()}
-                    ></button>
-                </div>
+                {getStaticContent()}
                 <div className="swipable-content">
                     <Swiper
                         onSwiper={setSwiper}
@@ -268,6 +332,11 @@ const DataExplorationScreen = ({ company }) => {
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
+                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                            <PurposeChart
+                                purposes={company.dataSharingPurposes}
+                            />
+                        </SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
