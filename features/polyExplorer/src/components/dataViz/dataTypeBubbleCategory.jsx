@@ -76,7 +76,9 @@ const DataTypeBubbleCategory = ({
                     };
                     const labelText =
                         d.data[
-                            i18n.t("dataExploration:from.polyPedia.translation")
+                            i18n.t(
+                                "dataExplorationScreen:from.polyPedia.translation"
+                            )
                         ];
                     utils
                         .appendLabel(diagram, labelText)
