@@ -11,11 +11,30 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.io.File
 import java.io.FileOutputStream
+import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+
+private const val manifestString = """
+    {
+        "name": "testManifest",
+        "description": "testDescription",
+        "author": "testAuthor",
+        "thumbnail": "assets/thumbnail.png",
+        "primaryColor": "#000000",
+        "links": {
+            "link1": "https://example.com/1",
+            "link2": "https://example.com/2"
+        }
+    }
+    """
 
 private fun createMockFeaturePackage(parent: File, child: String): File {
     val featurePackage = File(parent, child)
-    ZipOutputStream(FileOutputStream(featurePackage)).close()
+    ZipOutputStream(FileOutputStream(featurePackage)).use { zipOut ->
+        zipOut.putNextEntry(ZipEntry("manifest.json"))
+        zipOut.write(manifestString.toByteArray())
+        zipOut.closeEntry()
+    }
     return featurePackage
 }
 
@@ -46,6 +65,6 @@ class FeatureStorageTest {
         createMockFeaturePackage(featuresDir, "feature1.zip")
         val result = featureStorage.listFeatures(context)
         assertThat(result).hasSize(1)
-        assertThat(result.first().name).isEqualTo("feature1")
+        assertThat(result.first().name).isEqualTo("testManifest")
     }
 }

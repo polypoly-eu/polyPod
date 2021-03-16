@@ -5,6 +5,7 @@ import android.graphics.Color
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream
+import java.io.InputStream
 import java.util.*
 import java.util.zip.ZipFile
 
@@ -29,15 +30,6 @@ private fun parseFeatureColor(value: String) =
         Color.parseColor(value)
     } catch (_: Exception) {
         0
-    }
-
-// TODO: Get this information from the feature manifest
-private fun getFeatureLinks(featureName: String) =
-    when (featureName) {
-        "polyPreview" -> mapOf(
-            "membership" to "https://polypoly.coop/de-de/membership"
-        )
-        else -> emptyMap()
     }
 
 class FeatureStorage {
@@ -75,32 +67,21 @@ class FeatureStorage {
 
     fun loadFeature(context: Context, fileName: String): Feature {
         val content = ZipFile(File(getFeaturesDir(context), fileName))
-        val name = fileName.replace(".zip", "")
+        val manifestString: String = content.getInputStream(
+            content.getEntry("manifest.json")
+        ).reader().readText()
+        val manifest = FeatureManifest.parse(manifestString)
         return Feature(
             fileName,
-            name,
-            author = getMetaDataString(context, name, "author"),
-            description = getMetaDataString(context, name, "description"),
+            name = manifest.name,
+            author = manifest.author,
+            description = manifest.description,
             primaryColor = parseFeatureColor(
-                getMetaDataString(context, name, "primaryColor")
+                manifest.primaryColor
             ),
-            links = getFeatureLinks(name),
+            links = manifest.links,
             content = content
         )
-    }
-
-    // TODO: Get this information from the feature manifest
-    private fun getMetaDataString(
-        context: Context,
-        featureName: String,
-        key: String
-    ): String {
-        val stringId = context.resources.getIdentifier(
-            "feature_${featureName}_$key".toLowerCase(),
-            "string",
-            context.packageName
-        )
-        return if (stringId != 0) context.getString(stringId) else ""
     }
 
     fun installBundledFeatures(context: Context) {

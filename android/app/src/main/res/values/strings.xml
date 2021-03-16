@@ -19,15 +19,7 @@
     <string name="message_url_open_requested">%1$s möchte eine URL in Ihrem Browser öffnen:\n\n%2$s\n\nZulassen?</string>
     <string name="button_url_open_confirm">Ja</string>
     <string name="button_url_open_reject">Nein</string>
-
-    <!-- These strings should really be coming from the feature manifests, but for now they don't -->
-    <string name="feature_polyexplorer_author">polypoly - Die Genossenschaft</string>
-    <string name="feature_polyexplorer_description">Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel.</string>
-    <string name="feature_polyexplorer_primarycolor">#0f1938</string>
-    <string name="feature_polypreview_author">polypoly - Die Genossenschaft</string>
-    <string name="feature_polypreview_description">Ihr polyPod wird stetig weiterentwickelt. Wenn Sie wissen möchten was wir Planen; hier eine Vorschau.</string>
-    <string name="feature_polypreview_primarycolor">#fff5f5</string>
-
+    
     <!-- These strings will only be visible to feature developers, no need to translate them -->
     <string name="dev_feature_list_no_features">No features there are at this point.\nCome again later or correctly deploy your feature you should.</string>
     <string name="dev_message_forbidden_resource_requested">Forbidden making requests to external servers is</string>
