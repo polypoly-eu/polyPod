@@ -2,6 +2,7 @@ import fs from "fs";
 import { createRequire } from "module";
 import { default as fallbackDescriptions } from "./descriptions.js";
 import { default as categories } from "./categories.js";
+import { default as highlights } from "./highlights.js";
 
 const require = createRequire(import.meta.url);
 
@@ -100,6 +101,7 @@ function parseEntity(entityData, globalData) {
             : null,
         description: parseDescription(legalEntityData),
         category: parseCategory(legalName),
+        correlatingDataTypes: highlights[legalName]?.correlatingDataTypes,
     };
 }
 

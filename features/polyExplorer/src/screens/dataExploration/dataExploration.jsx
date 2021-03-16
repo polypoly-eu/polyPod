@@ -18,12 +18,6 @@ const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
 
-    //To go soon
-    const correlationTypeBundle = [];
-    for (let i = 0; i < 9; i += 3) {
-        correlationTypeBundle.push(company.dataTypesShared[i]["dpv:Category"]);
-    }
-
     const getHighestValueObject = () => {
         let highest = { count: 0 };
         company.dataTypesShared.forEach((e) =>
@@ -163,7 +157,7 @@ const DataExplorationScreen = ({ company }) => {
                 <DataTypeBubbleCorrelation
                     data={company.dataTypesShared}
                     correlationColor="#FB8A89"
-                    typeBundle={correlationTypeBundle}
+                    typeBundle={company.correlatingDataTypes}
                     width="360"
                     height="360"
                 />
