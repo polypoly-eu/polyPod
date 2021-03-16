@@ -65,19 +65,20 @@
     height: 100%;
 }
 
-.data-exploration .static-content h1 {
+.data-exploration .static-content h1,
+.data-exploration .static-content h2 {
     width: 296px;
-    margin: 8px auto;
-    font-size: 24px;
     height: 24px;
+    margin: 8px auto;
+}
+
+.data-exploration .static-content h1 {
+    font-size: 24px;
 }
 
 .data-exploration .static-content h2 {
-    width: 296px;
     text-align: center;
-    margin: 8px auto;
     font-size: 20px;
-    height: 24px;
 }
 
 .data-exploration .static-content h1 .highlight {
