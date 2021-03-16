@@ -78,7 +78,7 @@ const DataTypeBubbleCategory = ({
         };
 
         // The element's bounding box is relative to its own coordinate system,
-        // i.e. it does not consider its transformation matrix.This is an
+        // i.e. it does not consider its transformation matrix. This is an
         // attempt to do that manually, that does however not consider anything
         // but translate().
         const transform = element.transform.baseVal.consolidate().matrix;
