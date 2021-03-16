@@ -65,7 +65,7 @@ const DataTypeBubbleCategory = ({
             .each(function (d) {
                 if (d.data["dpv:Category"] === highlightedType) {
                     const diagram = d3.select(this.parentNode.parentNode);
-                    const height = diagram.scrollHeight;
+                    const height = diagram.node().getBBox().height;
 
                     const labelPosition = {
                         x: d.x + 1,
@@ -75,7 +75,9 @@ const DataTypeBubbleCategory = ({
                                 : d.y - d.r - 20,
                     };
                     const labelText =
-                        d.data[i18n.t("dataTypeBubble:category.translation")];
+                        d.data[
+                            i18n.t("dataExploration:from.polyPedia.translation")
+                        ];
                     utils
                         .appendLabel(diagram, labelText)
                         .attr(

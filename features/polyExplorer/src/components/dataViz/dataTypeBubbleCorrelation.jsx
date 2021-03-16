@@ -170,7 +170,9 @@ const DataTypeBubbleCategory = ({
                         r: d.r,
                         name:
                             d.data[
-                                i18n.t("dataTypeBubble:category.translation")
+                                i18n.t(
+                                    "dataExploration:from.polyPedia.translation"
+                                )
                             ],
                     });
                 }

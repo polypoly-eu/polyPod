@@ -20,5 +20,7 @@
     "purposes.description.scale":
         "Number of mentions",
     "construction.text":
-        "This part is currently under construction, but you can go through it if you're curious."
+        "This part is currently under construction, but you can go through it if you're curious.",
+    "from.polyPedia.translation": 
+        "Translation_EN"    
 }
