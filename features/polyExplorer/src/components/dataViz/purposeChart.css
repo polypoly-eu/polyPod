@@ -1,0 +1,136 @@
+.data-exploration .purpose-chart {
+    width: 94%;
+    max-width: 350px;
+    height: 90%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 200;
+    margin-bottom: 24px;
+}
+
+.data-exploration .purpose-chart .scale-container {
+    width: 95%;
+    padding: 0 2.5%;
+    margin-bottom: 4px;
+}
+
+.data-exploration .purpose-chart .descriptions {
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+}
+
+.data-exploration .purpose-chart .descriptions div {
+    display: inline-block;
+}
+
+.data-exploration .purpose-chart .descriptions img {
+    margin: 0 4px;
+}
+
+.data-exploration .purpose-chart .descriptions .fill {
+    flex-grow: 1;
+}
+
+.data-exploration .purpose-chart .descriptions .help div {
+    transform: translateY(-4px);
+    color: #a9b6c6;
+}
+
+.data-exploration .purpose-chart .scale {
+    display: flex;
+    flex-direction: row;
+}
+
+.data-exploration .purpose-chart .scale p {
+    font-size: 8px;
+    line-height: 135%;
+    letter-spacing: -0.02em;
+}
+
+.data-exploration .purpose-chart .scale .origin {
+    display: flex;
+    flex-direction: column;
+    width: 1px;
+}
+
+.data-exploration .purpose-chart .scale p {
+    margin: 0;
+    transform: translateX(-2px);
+}
+
+.data-exploration .purpose-chart .scale .origin div {
+    height: 10px;
+    width: 1px;
+    background-color: #f7fafc;
+}
+
+.data-exploration .purpose-chart .scale .tick-box {
+    flex: 1 1 auto;
+    position: relative;
+}
+
+.data-exploration .purpose-chart .tick-box .tick {
+    position: absolute;
+    height: 10px;
+    width: 1px;
+    background-color: #f7fafc;
+    right: 0;
+    bottom: 0;
+}
+
+.data-exploration .purpose-chart .tick-box .half-tick {
+    position: absolute;
+    height: 4px;
+    width: 1px;
+    background-color: #f7fafc;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+}
+
+.data-exploration .purpose-chart .tick-box p {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(4px);
+}
+
+.data-exploration .purpose-chart .bars {
+    position: absolute;
+    height: 85%;
+    width: 100%;
+    padding: 0 2.5%;
+    overflow-y: scroll;
+    z-index: 2000;
+}
+
+.data-exploration .purpose-chart .bar-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.data-exploration .purpose-chart .bar-box .above-bar {
+    display: flex;
+    flex-direction: row;
+}
+
+.data-exploration .purpose-chart .bar-box .above-bar p {
+    font-size: 12px;
+    line-height: 150%;
+    letter-spacing: -0.01em;
+    margin-right: 4px;
+    margin-bottom: 0;
+}
+
+.data-exploration .purpose-chart .bar-box .above-bar img {
+    transform: translateY(6px);
+}
+
+.data-exploration .purpose-chart .bar-box .bar {
+    height: 12px;
+    background-color: #3ba6ff;
+}
