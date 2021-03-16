@@ -58,12 +58,12 @@ const DataTypeBubbleCategory = ({
 
     const findContainedPositions = (positions, container) =>
         Object.values(positions).filter((p) => {
-            const containerBounds = container.node().getBBox();
+            const viewBox = container.node().viewBox.baseVal;
             const containerRect = {
-                left: containerBounds.x,
-                right: containerBounds.x + containerBounds.width,
-                top: containerBounds.y,
-                bottom: containerBounds.y + containerBounds.height,
+                left: viewBox.x,
+                right: viewBox.x + viewBox.width,
+                top: viewBox.y,
+                bottom: viewBox.y + viewBox.height,
             };
             return containsRect(containerRect, p.rect);
         });
