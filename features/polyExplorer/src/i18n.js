@@ -14,6 +14,11 @@ import dataExplorationScreenEn from "./locales/en/dataExplorationScreen.json";
 import featuredCompanyHelpScreenEn from "./locales/en/featuredCompanyHelpScreen.json";
 import infoScreenEn from "./locales/en/infoScreen.json";
 import dataRegionInfoScreenEn from "./locales/en/dataRegionInfoScreen.json";
+import explorationInfoEn from "./locales/en/explorationInfo.json";
+import explorationDataTypesInfoScreenEn from "./locales/en/explorationDataTypesInfoScreen.json";
+import explorationCategoryInfoScreenEn from "./locales/en/explorationCategoryInfoScreen.json";
+import explorationCorrelationInfoScreenEn from "./locales/en/explorationCorrelationInfoScreen.json";
+import explorationPurposeInfoScreenEn from "./locales/en/explorationPurposeInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
@@ -27,6 +32,11 @@ import dataExplorationScreenDe from "./locales/de/dataExplorationScreen.json";
 import featuredCompanyHelpScreenDe from "./locales/de/featuredCompanyHelpScreen.json";
 import infoScreenDe from "./locales/de/infoScreen.json";
 import dataRegionInfoScreenDe from "./locales/de/dataRegionInfoScreen.json";
+import explorationInfoDe from "./locales/de/explorationInfo.json";
+import explorationDataTypesInfoScreenDe from "./locales/de/explorationDataTypesInfoScreen.json";
+import explorationCategoryInfoScreenDe from "./locales/de/explorationCategoryInfoScreen.json";
+import explorationCorrelationInfoScreenDe from "./locales/de/explorationCorrelationInfoScreen.json";
+import explorationPurposeInfoScreenDe from "./locales/de/explorationPurposeInfoScreen.json";
 
 const strings = {
     en: {
@@ -42,6 +52,11 @@ const strings = {
         featuredCompanyHelpScreen: featuredCompanyHelpScreenEn,
         infoScreen: infoScreenEn,
         dataRegionInfoScreen: dataRegionInfoScreenEn,
+        explorationInfo: explorationInfoEn,
+        explorationDataTypesInfoScreen: explorationDataTypesInfoScreenEn,
+        explorationCategoryInfoScreen: explorationCategoryInfoScreenEn,
+        explorationCorrelationInfoScreen: explorationCorrelationInfoScreenEn,
+        explorationPurposeInfoScreen: explorationPurposeInfoScreenEn,
     },
     de: {
         common: commonDe,
@@ -56,6 +71,11 @@ const strings = {
         featuredCompanyHelpScreen: featuredCompanyHelpScreenDe,
         infoScreen: infoScreenDe,
         dataRegionInfoScreen: dataRegionInfoScreenDe,
+        explorationInfo: explorationInfoDe,
+        explorationDataTypesInfoScreen: explorationDataTypesInfoScreenDe,
+        explorationCategoryInfoScreen: explorationCategoryInfoScreenDe,
+        explorationCorrelationInfoScreen: explorationCorrelationInfoScreenDe,
+        explorationPurposeInfoScreen: explorationPurposeInfoScreenDe,
     },
 };
 

@@ -1,12 +1,18 @@
 import React from "react";
 
-import Screen from "../../../components/screen/screen.jsx";
+import i18n from "../../../i18n.js";
+import ExplorationInfoScreen from "../../../components/explorationInfoScreen/explorationInfoScreen.jsx";
 
 const CorrelationInfo = ({ onClose }) => {
     return (
-        <Screen className="correlation-info" light={true}>
-            <button onClick={() => onClose()}>back</button>
-        </Screen>
+        <ExplorationInfoScreen
+            className="correlation-info"
+            headline={i18n.t("explorationCorrelationInfoScreen:headline")}
+            onClose={onClose}
+        >
+            <p>Dieser Bereich ist noch nicht fertig.</p>
+            <img src="images/construction.gif"></img>
+        </ExplorationInfoScreen>
     );
 };
 

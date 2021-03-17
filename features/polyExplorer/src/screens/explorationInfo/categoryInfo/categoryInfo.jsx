@@ -1,12 +1,18 @@
 import React from "react";
 
-import Screen from "../../../components/screen/screen.jsx";
+import i18n from "../../../i18n.js";
+import ExplorationInfoScreen from "../../../components/explorationInfoScreen/explorationInfoScreen.jsx";
 
 const CategoryInfo = ({ onClose }) => {
     return (
-        <Screen className="category-info" light={true}>
-            <button onClick={() => onClose()}>back</button>
-        </Screen>
+        <ExplorationInfoScreen
+            className="category-info"
+            headline={i18n.t("explorationCategoryInfoScreen:headline")}
+            onClose={onClose}
+        >
+            <p>Dieser Bereich ist noch nicht fertig.</p>
+            <img src="images/construction.gif"></img>
+        </ExplorationInfoScreen>
     );
 };
 
