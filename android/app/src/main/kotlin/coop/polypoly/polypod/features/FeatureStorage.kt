@@ -1,50 +1,11 @@
 package coop.polypoly.polypod.features
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.util.DisplayMetrics
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 import java.util.zip.ZipFile
-
-data class Feature(
-    val fileName: String,
-    val name: String,
-    val author: String,
-    val description: String,
-    val primaryColor: Int,
-    val links: Map<String, String>,
-    val thumbnailPath: String,
-    val content: ZipFile
-) {
-    fun getUrl(target: String): String? = when (target) {
-        in links.keys -> links[target]
-        in links.values -> target
-        else -> null
-    }
-
-    val thumbnail: Bitmap?
-        get() {
-            val entry = content.getEntry(thumbnailPath) ?: return null
-            val options = BitmapFactory.Options()
-            // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
-            options.inDensity = DisplayMetrics.DENSITY_XHIGH
-            content.getInputStream(entry).use {
-                return BitmapFactory.decodeStream(it, null, options)
-            }
-        }
-}
-
-private fun parseFeatureColor(value: String) =
-    try {
-        Color.parseColor(value)
-    } catch (_: Exception) {
-        0
-    }
 
 class FeatureStorage {
     companion object {
@@ -85,18 +46,7 @@ class FeatureStorage {
             content.getEntry("manifest.json")
         ).reader().readText()
         val manifest = FeatureManifest.parse(manifestString)
-        return Feature(
-            fileName,
-            name = manifest.name,
-            author = manifest.author,
-            description = manifest.description,
-            primaryColor = parseFeatureColor(
-                manifest.primaryColor
-            ),
-            links = manifest.links,
-            thumbnailPath = manifest.thumbnail,
-            content = content
-        )
+        return Feature(fileName, content, manifest)
     }
 
     fun installBundledFeatures(context: Context) {

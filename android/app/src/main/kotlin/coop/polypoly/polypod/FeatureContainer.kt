@@ -51,7 +51,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun handleOpenUrl(target: String) {
         val featureName = feature?.name ?: return
-        val url = feature?.getUrl(target)
+        val url = feature?.findUrl(target)
         if (url == null) {
             val message = context.getString(
                 R.string.message_url_open_prevented, featureName, target
