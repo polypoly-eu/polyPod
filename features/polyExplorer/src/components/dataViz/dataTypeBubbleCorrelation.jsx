@@ -234,47 +234,7 @@ const DataTypeBubbleCategory = ({
             })
             .style("font-weight", "500");
 
-        bubbleContainer
-            .append("line")
-            .style("stroke", "#F7FAFC")
-            .style("stroke-width", 1)
-            .attr("x1", correlatingElements[0].x)
-            .attr("y1", correlatingElements[0].y)
-            .attr("x2", correlatingElements[1].x)
-            .attr("y2", correlatingElements[1].y);
-
-        if (correlatingElements.length > 2) {
-            bubbleContainer
-                .append("line")
-                .style("stroke", "#F7FAFC")
-                .style("stroke-width", 1)
-                .attr("x1", correlatingElements[1].x)
-                .attr("y1", correlatingElements[1].y)
-                .attr("x2", correlatingElements[2].x)
-                .attr("y2", correlatingElements[2].y);
-
-            bubbleContainer
-                .append("line")
-                .style("stroke", "#F7FAFC")
-                .style("stroke-width", 1)
-                .attr("x1", correlatingElements[0].x)
-                .attr("y1", correlatingElements[0].y)
-                .attr("x2", correlatingElements[2].x)
-                .attr("y2", correlatingElements[2].y);
-        }
-
         const correlationCenter = getCorrelationCenter();
-
-        //draw a new circle over the line -> d3/svg has no z-index
-        correlatingElements.forEach((e) => {
-            bubbleContainer
-                .append("circle")
-                .attr("r", e.r)
-                .attr("transform", `translate(${e.x + 1},${e.y + 1})`)
-                .attr("fill-opacity", 1)
-                .attr("fill", correlationColor)
-                .style("vertical-align", "center");
-        });
 
         correlatingElements.forEach((e) => {
             appendBubbleLabel(
