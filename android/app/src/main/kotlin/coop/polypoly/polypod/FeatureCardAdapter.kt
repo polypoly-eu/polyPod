@@ -32,13 +32,9 @@ class FeatureCardAdapter(
     private fun updateThumbnail(view: View, feature: Feature) {
         val thumbnail = view.findViewById<ImageView>(R.id.thumbnail)
         thumbnail.setBackgroundColor(feature.primaryColor)
-        // We cannot read images from the feature manifest yet, hence hard coded
-        val thumbnailResourceId = mapOf(
-            "polyExplorer" to R.drawable.thumbnail_polyexplorer,
-            "polyPreview" to R.drawable.thumbnail_polypreview
-        )[feature.name]
-        if (thumbnailResourceId != null)
-            thumbnail.setImageResource(thumbnailResourceId)
+        feature.thumbnail?.let {
+            thumbnail.setImageBitmap(it)
+        }
     }
 
     private fun updateTexts(view: View, feature: Feature) {

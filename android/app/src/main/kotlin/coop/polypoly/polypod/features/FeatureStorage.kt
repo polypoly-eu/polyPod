@@ -1,11 +1,13 @@
 package coop.polypoly.polypod.features
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.util.DisplayMetrics
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream
-import java.io.InputStream
 import java.util.*
 import java.util.zip.ZipFile
 
@@ -16,6 +18,7 @@ data class Feature(
     val description: String,
     val primaryColor: Int,
     val links: Map<String, String>,
+    val thumbnailPath: String,
     val content: ZipFile
 ) {
     fun getUrl(target: String): String? = when (target) {
@@ -23,6 +26,17 @@ data class Feature(
         in links.values -> target
         else -> null
     }
+
+    val thumbnail: Bitmap?
+        get() {
+            val entry = content.getEntry(thumbnailPath) ?: return null
+            val options = BitmapFactory.Options()
+            // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
+            options.inDensity = DisplayMetrics.DENSITY_XHIGH
+            content.getInputStream(entry).use {
+                return BitmapFactory.decodeStream(it, null, options)
+            }
+        }
 }
 
 private fun parseFeatureColor(value: String) =
@@ -80,6 +94,7 @@ class FeatureStorage {
                 manifest.primaryColor
             ),
             links = manifest.links,
+            thumbnailPath = manifest.thumbnail,
             content = content
         )
     }
