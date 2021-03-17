@@ -22,6 +22,7 @@ const DataExplorationScreen = ({
     openCategoryInfo,
     openCorrelationInfo,
     openPurposeInfo,
+    maxCompanies,
 }) => {
     //Methods
     const getCategories = () => {
@@ -282,6 +283,7 @@ const DataExplorationScreen = ({
                         width="200"
                         height="200"
                         bubbleColor="#7EE8A2"
+                        maxCompanies={maxCompanies}
                     />
                     {button}
                 </div>

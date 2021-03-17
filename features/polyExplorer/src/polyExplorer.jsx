@@ -208,6 +208,7 @@ const PolyExplorer = () => {
                         "purposes"
                     )
                 }
+                maxCompanies={featuredCompanyMaxValues.companies}
             />
         ),
         companyInfo: (
