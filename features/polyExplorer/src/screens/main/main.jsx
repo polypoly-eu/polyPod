@@ -19,6 +19,8 @@ const MainScreen = ({
     activeFilters,
     onRemoveFilter,
     onResetDataExploration,
+    featuredCompanyMaxValues,
+    featuredCompanyAverageValues,
 }) => {
     const handleShowFeatured = () => onShowFeaturedChange(true);
     const handleShowCompanyList = () => onShowFeaturedChange(false);
@@ -56,6 +58,8 @@ const MainScreen = ({
                     onActiveScreenChange={onActiveScreenChange}
                     initialSlide={featuredCompanyTabInitialSlide}
                     onUpdateInitialSlide={handleUpdateInitialSlide}
+                    maxValues={featuredCompanyMaxValues}
+                    averageValues={featuredCompanyAverageValues}
                 />
             ) : (
                 <CompanyList

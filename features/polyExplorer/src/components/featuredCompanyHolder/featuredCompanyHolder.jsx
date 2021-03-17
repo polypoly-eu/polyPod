@@ -9,42 +9,14 @@ SwiperCore.use(Pagination);
 import FeaturedCompany from "../featuredCompany/featuredCompany.jsx";
 import "./featuredCompanyHolder.css";
 
-function calculateAverage(values) {
-    const average = values.reduce((a, b) => a + b, 0) / values.length;
-    return Math.round(10 * average) / 10;
-}
-
 const FeaturedCompanyHolder = ({
     featuredCompanies,
     onActiveScreenChange,
     initialSlide,
     onUpdateInitialSlide,
+    maxValues,
+    averageValues,
 }) => {
-    const counts = {
-        dataTypes: featuredCompanies.map(
-            (company) => company.dataTypesShared.length
-        ),
-        purposes: featuredCompanies.map(
-            (company) => company.dataSharingPurposes.length
-        ),
-        companies: featuredCompanies.map(
-            (company) => company.dataRecipients.length
-        ),
-        jurisdictions: featuredCompanies.map((company) =>
-            company.jurisdictionsShared
-                ? company.jurisdictionsShared.children.length
-                : 0
-        ),
-    };
-    const maxValues = Object.fromEntries(
-        Object.entries(counts).map(([key, value]) => [key, Math.max(...value)])
-    );
-    const averageValues = Object.fromEntries(
-        Object.entries(counts).map(([key, value]) => [
-            key,
-            calculateAverage(value),
-        ])
-    );
     return (
         <div className="featured-company-holder">
             <Swiper

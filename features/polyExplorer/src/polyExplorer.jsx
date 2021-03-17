@@ -64,6 +64,37 @@ const PolyExplorer = () => {
         "construction"
     );
 
+    //Get the max values of all featured companies
+    function calculateAverage(values) {
+        const average = values.reduce((a, b) => a + b, 0) / values.length;
+        return Math.round(10 * average) / 10;
+    }
+    const counts = {
+        dataTypes: featuredCompanyData.map(
+            (company) => company.dataTypesShared.length
+        ),
+        purposes: featuredCompanyData.map(
+            (company) => company.dataSharingPurposes.length
+        ),
+        companies: featuredCompanyData.map(
+            (company) => company.dataRecipients.length
+        ),
+        jurisdictions: featuredCompanyData.map((company) =>
+            company.jurisdictionsShared
+                ? company.jurisdictionsShared.children.length
+                : 0
+        ),
+    };
+    const featuredCompanyMaxValues = Object.fromEntries(
+        Object.entries(counts).map(([key, value]) => [key, Math.max(...value)])
+    );
+    const featuredCompanyAverageValues = Object.fromEntries(
+        Object.entries(counts).map(([key, value]) => [
+            key,
+            calculateAverage(value),
+        ])
+    );
+
     const handleActiveScreenChange = (screen, companyName) => {
         setActiveScreen(screen);
         if (companyName)
@@ -139,6 +170,8 @@ const PolyExplorer = () => {
                 activeFilters={activeFilters}
                 onRemoveFilter={handleRemoveFilter}
                 onResetDataExploration={handleResetDataExploration}
+                featuredCompanyMaxValues={featuredCompanyMaxValues}
+                featuredCompanyAverageValues={featuredCompanyAverageValues}
             />
         ),
         dataExploration: (
