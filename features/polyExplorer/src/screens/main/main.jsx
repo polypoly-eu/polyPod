@@ -18,6 +18,7 @@ const MainScreen = ({
     onFeaturedCompanyTabInitialSlideChange,
     activeFilters,
     onRemoveFilter,
+    onResetDataExploration,
 }) => {
     const handleShowFeatured = () => onShowFeaturedChange(true);
     const handleShowCompanyList = () => onShowFeaturedChange(false);
@@ -26,6 +27,7 @@ const MainScreen = ({
         onFeaturedCompanyTabInitialSlideChange(newInitialSlide);
     };
 
+    onResetDataExploration();
     return (
         <Screen className="main-screen" topShadow={false}>
             <div className="nav-button-container">

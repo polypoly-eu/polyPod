@@ -2,12 +2,12 @@ import React from "react";
 
 import Screen from "../../../components/screen/screen.jsx";
 
-const CorrelationInfo = ({ onClose }) => {
+const DataTypesInfo = ({ onClose }) => {
     return (
-        <Screen className="correlation-info" light={true}>
+        <Screen className="data-types-info" light={true}>
             <button onClick={() => onClose()}>back</button>
         </Screen>
     );
 };
 
-export default CorrelationInfo;
+export default DataTypesInfo;

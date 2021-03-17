@@ -15,12 +15,15 @@ import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
 
-const DataExplorationScreen = ({ company }) => {
-    const [swiper, setSwiper] = useState(null);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [showPurposePopup, setShowPurposePopup] = useState(null);
-    let slidePointerEvents = true;
-
+const DataExplorationScreen = ({
+    company,
+    startSection,
+    openDataTypesInfo,
+    openCategoryInfo,
+    openCorrelationInfo,
+    openPurposeInfo,
+}) => {
+    //Methods
     const getCategories = () => {
         const categories = [];
         company.dataTypesShared.forEach((e) => {
@@ -34,25 +37,19 @@ const DataExplorationScreen = ({ company }) => {
     const getScreens = () => {
         const screens = [
             "construction",
-            "dataTypesStart",
+            "dataTypes",
             "dataTypesUnderText",
-            "dataTypesUnderText",
+            "dataTypesCategory",
         ];
         Object.keys(categories).forEach((c) => {
             screens.push(`dataTypesCategory${c}`);
         });
         screens.push("dataTypesUnderTextNoNumbers");
         screens.push("dataTypesCorrelation");
-        screens.push("purposesStart");
-        screens.push("companiesStart");
+        screens.push("purposes");
+        screens.push("companies");
         return screens;
     };
-
-    //To go soon
-    const correlationTypeBundle = [];
-    for (let i = 0; i < 9; i += 3) {
-        correlationTypeBundle.push(company.dataTypesShared[i]["dpv:Category"]);
-    }
 
     const getHighestValueObject = () => {
         let highest = { count: 0 };
@@ -70,9 +67,24 @@ const DataExplorationScreen = ({ company }) => {
     //Navigation
     const categories = getCategories();
     const screens = getScreens();
-    const activeScreen = screens[activeIndex];
 
+    //State
+    const [swiper, setSwiper] = useState(null);
+    const [activeIndex, setActiveIndex] = useState(
+        screens.indexOf(startSection)
+    );
+
+    //Constants
+    const activeScreen = screens[activeIndex];
     const highestValueObject = getHighestValueObject();
+
+    const [showPurposePopup, setShowPurposePopup] = useState(null);
+
+    //To go soon
+    const correlationTypeBundle = [];
+    for (let i = 0; i < 9; i += 3) {
+        correlationTypeBundle.push(company.dataTypesShared[i]["dpv:Category"]);
+    }
 
     const progressBar = (
         <div className="progress-bar">
@@ -80,19 +92,19 @@ const DataExplorationScreen = ({ company }) => {
                 className={`progress-bar-part dataTypes ${
                     activeScreen.startsWith("dataTypes") ? "active" : ""
                 }`}
-                onClick={() => goToSlide(screens.indexOf("dataTypesStart"))}
+                onClick={() => goToSlide(screens.indexOf("dataTypes"))}
             ></div>
             <div
                 className={`progress-bar-part purposes ${
-                    activeScreen == "purposesStart" ? "active" : ""
+                    activeScreen == "purposes" ? "active" : ""
                 }`}
-                onClick={() => goToSlide(screens.indexOf("purposesStart"))}
+                onClick={() => goToSlide(screens.indexOf("purposes"))}
             ></div>
             <div
                 className={`progress-bar-part companiesShared ${
                     activeScreen.startsWith("companies") ? "active" : ""
                 }`}
-                onClick={() => goToSlide(screens.indexOf("companiesStart"))}
+                onClick={() => goToSlide(screens.indexOf("companies"))}
             ></div>
             <div
                 className={`progress-bar-part jurisdictions ${
@@ -112,7 +124,7 @@ const DataExplorationScreen = ({ company }) => {
             ></button>
         );
         const filler = <div className="filler"></div>;
-        if (activeScreen === "dataTypesStart")
+        if (activeScreen === "dataTypes")
             return (
                 <div className="static-content">
                     <h1>
@@ -132,12 +144,19 @@ const DataExplorationScreen = ({ company }) => {
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend onClick={() => {}} />
+                    <DataSharingLegend
+                        onClick={() => {
+                            openDataTypesInfo();
+                        }}
+                    />
                     {filler}
                     {button}
                 </div>
             );
-        else if (activeScreen === "dataTypesUnderText")
+        else if (
+            activeScreen === "dataTypesUnderText" ||
+            activeScreen === "dataTypesCategory"
+        )
             return (
                 <div className="static-content">
                     <h1>
@@ -185,7 +204,11 @@ const DataExplorationScreen = ({ company }) => {
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend onClick={() => {}} />
+                    <DataSharingLegend
+                        onClick={() => {
+                            openCategoryInfo();
+                        }}
+                    />
                     {filler}
                     {button}
                 </div>
@@ -232,22 +255,26 @@ const DataExplorationScreen = ({ company }) => {
                     <p className="source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend onClick={() => {}} />
+                    <DataSharingLegend
+                        onClick={() => {
+                            openCorrelationInfo();
+                        }}
+                    />
                     {button}
                 </div>
             );
-        else if (activeScreen === "purposesStart") {
-            slidePointerEvents = false;
+        else if (activeScreen === "purposes") {
             return (
                 <div className="static-content">
                     <PurposeChart
                         purposes={company.dataSharingPurposes}
                         openPopup={setShowPurposePopup}
+                        openPurposeInfo={openPurposeInfo}
                     />
                     {button}
                 </div>
             );
-        } else if (activeScreen === "companiesStart")
+        } else if (activeScreen === "companies")
             return (
                 <div className="static-content">
                     <CompanyBubbles
@@ -281,11 +308,7 @@ const DataExplorationScreen = ({ company }) => {
             {progressBar}
             <div className="exploration-content">
                 {getStaticContent()}
-                <div
-                    className={`swipable-content ${
-                        slidePointerEvents ? "" : "unswipable"
-                    }`}
-                >
+                <div className={`swipable-content`}>
                     <Swiper
                         onSwiper={setSwiper}
                         direction="vertical"
@@ -348,6 +371,7 @@ const DataExplorationScreen = ({ company }) => {
                         ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
+                            className="purpose-slide"
                         ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}

@@ -4,7 +4,7 @@ import i18n from "../../i18n.js";
 
 import "./purposeChart.css";
 
-const PurposeChart = ({ purposes, openPopup }) => {
+const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
     const getHighestCount = () => {
         let highest = 0;
         purposes.forEach((e) => {
@@ -96,7 +96,7 @@ const PurposeChart = ({ purposes, openPopup }) => {
                         )}
                     </div>
                     <div className="fill"></div>
-                    <div className="help">
+                    <div className="help" onClick={() => openPurposeInfo()}>
                         <img src="./images/question-circle.svg" />
                         <div>{i18n.t("common:how-to-read")}</div>
                     </div>

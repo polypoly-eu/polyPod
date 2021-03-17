@@ -11,6 +11,10 @@ import CompanySearchScreen from "./screens/companySearch/companySearch.jsx";
 import InfoScreen from "./screens/info/info.jsx";
 import CompanyInfoScreen from "./screens/companyInfo/companyInfo.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
+import DataTypesInfoScreen from "./screens/explorationInfo/dataTypesInfo/dataTypesInfo.jsx";
+import CategoryInfoScreen from "./screens/explorationInfo/categoryInfo/categoryInfo.jsx";
+import CorrelationInfoScreen from "./screens/explorationInfo/correlationInfo/correlationInfo.jsx";
+import PurposeInfoScreen from "./screens/explorationInfo/purposeInfo/purposeInfo.jsx";
 import FeaturedCompanyHelpScreen from "./screens/featuredCompanyHelp/featuredCompanyHelp.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 import ConstructionPopup from "./components/constructionPopup/constructionPopup.jsx";
@@ -56,6 +60,9 @@ const PolyExplorer = () => {
     const [activeFilters, setActiveFilters] = useState(emptyFilters());
     const [firstRun, setFirstRun] = useState(false);
     const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
+    const [dataExploringSection, setDataExploringSection] = useState(
+        "construction"
+    );
 
     const handleActiveScreenChange = (screen, companyName) => {
         setActiveScreen(screen);
@@ -63,6 +70,11 @@ const PolyExplorer = () => {
             setSelectedCompany(
                 companyData.filter((company) => companyName === company.name)[0]
             );
+    };
+
+    const handleExplorationInfoScreen = (screen, activeSection) => {
+        setActiveScreen(screen);
+        setDataExploringSection(activeSection);
     };
 
     const handleRemoveFilter = (field, value) => {
@@ -84,6 +96,10 @@ const PolyExplorer = () => {
         handleOnboardingPopupClose();
         handleActiveScreenChange("info");
     }
+
+    const handleResetDataExploration = () => {
+        setDataExploringSection("dataTypes");
+    };
 
     function updatePodNavigation() {
         podNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
@@ -122,9 +138,39 @@ const PolyExplorer = () => {
                 }
                 activeFilters={activeFilters}
                 onRemoveFilter={handleRemoveFilter}
+                onResetDataExploration={handleResetDataExploration}
             />
         ),
-        dataExploration: <DataExplorationScreen company={selectedCompany} />,
+        dataExploration: (
+            <DataExplorationScreen
+                company={selectedCompany}
+                startSection={dataExploringSection}
+                openDataTypesInfo={() =>
+                    handleExplorationInfoScreen(
+                        "explorationDataTypesInfo",
+                        "dataTypes"
+                    )
+                }
+                openCategoryInfo={() =>
+                    handleExplorationInfoScreen(
+                        "explorationCategoryInfo",
+                        "dataTypesCategory"
+                    )
+                }
+                openCorrelationInfo={() =>
+                    handleExplorationInfoScreen(
+                        "explorationCorrelationInfo",
+                        "dataTypesCorrelation"
+                    )
+                }
+                openPurposeInfo={() =>
+                    handleExplorationInfoScreen(
+                        "explorationPurposeInfo",
+                        "purposes"
+                    )
+                }
+            />
+        ),
         companyInfo: (
             <CompanyInfoScreen
                 company={selectedCompany}
@@ -157,6 +203,26 @@ const PolyExplorer = () => {
         ),
         info: <InfoScreen onClose={podNav.actions.back} />,
         dataRegionInfo: <DataRegionInfoScreen onClose={podNav.actions.back} />,
+        explorationDataTypesInfo: (
+            <DataTypesInfoScreen
+                onClose={() => handleActiveScreenChange("dataExploration")}
+            />
+        ),
+        explorationCategoryInfo: (
+            <CategoryInfoScreen
+                onClose={() => handleActiveScreenChange("dataExploration")}
+            />
+        ),
+        explorationCorrelationInfo: (
+            <CorrelationInfoScreen
+                onClose={() => handleActiveScreenChange("dataExploration")}
+            />
+        ),
+        explorationPurposeInfo: (
+            <PurposeInfoScreen
+                onClose={() => handleActiveScreenChange("dataExploration")}
+            />
+        ),
     };
 
     return (

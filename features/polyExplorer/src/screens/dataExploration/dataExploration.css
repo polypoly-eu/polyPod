@@ -168,6 +168,7 @@
     width: 100%;
     max-width: 412px;
     height: 100%;
+    pointer-events: none;
 }
 
 .data-exploration .swipable-content h2 {
@@ -178,6 +179,25 @@
 
 .data-exploration .swiper-slide {
     position: relative;
+    pointer-events: all;
+}
+
+.data-exploration .swiper-wrapper {
+    pointer-events: none;
+}
+
+.data-exploration .swiper-slide-active {
+    height: 80% !important;
+    margin-bottom: 20%;
+}
+
+.data-exploration .swiper-slide-next {
+    pointer-events: none;
+}
+
+.data-exploration .purpose-slide {
+    height: 0% !important;
+    margin-bottom: 100%;
 }
 
 .data-exploration .swipable-content .on-bubble {
