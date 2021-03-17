@@ -10,6 +10,7 @@ import PurposeChart from "../../components/dataViz/purposeChart.jsx";
 import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
+import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
@@ -17,6 +18,7 @@ import "./dataExploration.css";
 const DataExplorationScreen = ({ company }) => {
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [showPurposePopup, setShowPurposePopup] = useState(null);
     let slidePointerEvents = true;
 
     const getCategories = () => {
@@ -238,7 +240,10 @@ const DataExplorationScreen = ({ company }) => {
             slidePointerEvents = false;
             return (
                 <div className="static-content">
-                    <PurposeChart purposes={company.dataSharingPurposes} />
+                    <PurposeChart
+                        purposes={company.dataSharingPurposes}
+                        openPopup={setShowPurposePopup}
+                    />
                     {button}
                 </div>
             );
@@ -350,6 +355,12 @@ const DataExplorationScreen = ({ company }) => {
                     </Swiper>
                 </div>
             </div>
+            {showPurposePopup ? (
+                <PurposeInfoPopup
+                    purpose={showPurposePopup}
+                    onClose={() => setShowPurposePopup(null)}
+                />
+            ) : null}
         </Screen>
     );
 };

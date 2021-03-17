@@ -4,7 +4,7 @@ import i18n from "../../i18n.js";
 
 import "./purposeChart.css";
 
-const PurposeChart = ({ purposes }) => {
+const PurposeChart = ({ purposes, openPopup }) => {
     const getHighestCount = () => {
         let highest = 0;
         purposes.forEach((e) => {
@@ -72,7 +72,10 @@ const PurposeChart = ({ purposes }) => {
                                 ]
                             }
                         </p>
-                        <img src="./images/question-circle-light.svg" />
+                        <img
+                            src="./images/question-circle-light.svg"
+                            onClick={() => openPopup(p["dpv:Purpose"])}
+                        />
                     </div>
                     <div
                         className="bar"
