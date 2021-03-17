@@ -18,7 +18,6 @@ const MainScreen = ({
     onFeaturedCompanyTabInitialSlideChange,
     activeFilters,
     onRemoveFilter,
-    onResetDataExploration,
     featuredCompanyMaxValues,
     featuredCompanyAverageValues,
 }) => {
@@ -29,7 +28,6 @@ const MainScreen = ({
         onFeaturedCompanyTabInitialSlideChange(newInitialSlide);
     };
 
-    onResetDataExploration();
     return (
         <Screen className="main-screen" topShadow={false}>
             <div className="nav-button-container">

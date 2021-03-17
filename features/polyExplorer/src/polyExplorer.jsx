@@ -60,8 +60,9 @@ const PolyExplorer = () => {
     const [activeFilters, setActiveFilters] = useState(emptyFilters());
     const [firstRun, setFirstRun] = useState(false);
     const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
+    const initialDataExplorationSection = "construction";
     const [dataExploringSection, setDataExploringSection] = useState(
-        "construction"
+        initialDataExplorationSection
     );
 
     //Get the max values of all featured companies
@@ -128,23 +129,29 @@ const PolyExplorer = () => {
         handleActiveScreenChange("info");
     }
 
-    const handleResetDataExploration = () => {
-        setDataExploringSection("dataTypes");
-    };
+    function handleBack() {
+        if (activeScreen === "dataRegionInfo") {
+            handleActiveScreenChange("companyInfo");
+            return;
+        }
+
+        if (/^exploration.*Info$/.test(activeScreen)) {
+            handleActiveScreenChange("dataExploration");
+            return;
+        }
+
+        if (activeScreen === "dataExploration")
+            setDataExploringSection(initialDataExplorationSection);
+
+        handleActiveScreenChange("main");
+    }
 
     function updatePodNavigation() {
         podNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
         podNav.actions = {
             info: () => handleActiveScreenChange("info"),
             search: () => handleActiveScreenChange("companySearch"),
-            back: () => {
-                if (activeScreen === "dataRegionInfo") {
-                    handleActiveScreenChange("companyInfo");
-                    return;
-                }
-
-                handleActiveScreenChange("main");
-            },
+            back: handleBack,
         };
         podNav.setActiveActions(
             activeScreen === "main" ? ["info", "search"] : ["back"]
@@ -169,7 +176,6 @@ const PolyExplorer = () => {
                 }
                 activeFilters={activeFilters}
                 onRemoveFilter={handleRemoveFilter}
-                onResetDataExploration={handleResetDataExploration}
                 featuredCompanyMaxValues={featuredCompanyMaxValues}
                 featuredCompanyAverageValues={featuredCompanyAverageValues}
             />
@@ -237,24 +243,16 @@ const PolyExplorer = () => {
         info: <InfoScreen onClose={podNav.actions.back} />,
         dataRegionInfo: <DataRegionInfoScreen onClose={podNav.actions.back} />,
         explorationDataTypesInfo: (
-            <DataTypesInfoScreen
-                onClose={() => handleActiveScreenChange("dataExploration")}
-            />
+            <DataTypesInfoScreen onClose={podNav.actions.back} />
         ),
         explorationCategoryInfo: (
-            <CategoryInfoScreen
-                onClose={() => handleActiveScreenChange("dataExploration")}
-            />
+            <CategoryInfoScreen onClose={podNav.actions.back} />
         ),
         explorationCorrelationInfo: (
-            <CorrelationInfoScreen
-                onClose={() => handleActiveScreenChange("dataExploration")}
-            />
+            <CorrelationInfoScreen onClose={podNav.actions.back} />
         ),
         explorationPurposeInfo: (
-            <PurposeInfoScreen
-                onClose={() => handleActiveScreenChange("dataExploration")}
-            />
+            <PurposeInfoScreen onClose={podNav.actions.back} />
         ),
     };
 
