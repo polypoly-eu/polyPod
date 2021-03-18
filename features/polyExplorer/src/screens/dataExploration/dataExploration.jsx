@@ -8,6 +8,7 @@ import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCateg
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
 import PurposeChart from "../../components/dataViz/purposeChart.jsx";
 import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
+import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
@@ -23,6 +24,7 @@ const DataExplorationScreen = ({
     openCorrelationInfo,
     openPurposeInfo,
     maxCompanies,
+    dataRecipients,
 }) => {
     //Methods
     const getCategories = () => {
