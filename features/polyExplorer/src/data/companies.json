@@ -3214,7 +3214,12 @@
             "dpv:VoiceCommunicationRecording",
             "dpv:PhysicalAddress",
             "dpv:MentalHealth"
-        ]
+        ],
+        "jurisdictionsShared": {
+            "children": [
+                "EU-GDPR"
+            ]
+        }
     },
     {
         "name": "navabi GmbH",
@@ -3942,7 +3947,8 @@
         ],
         "jurisdictionsShared": {
             "children": [
-                "EU-GDPR"
+                "EU-GDPR",
+                "Five-Eyes"
             ]
         }
     },
@@ -9245,7 +9251,8 @@
         "location": {
             "city": "New York",
             "countryCode": "US"
-        }
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "Microsoft Corporation",
@@ -9253,7 +9260,8 @@
         "location": {
             "city": "Redmond",
             "countryCode": "US"
-        }
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "Google Ireland Limited",
@@ -9261,7 +9269,8 @@
         "location": {
             "city": "Dublin",
             "countryCode": "IE"
-        }
+        },
+        "jurisdiction": "EU-GDPR"
     },
     {
         "name": "Etracker GmbH",
@@ -9269,7 +9278,8 @@
         "location": {
             "city": "Hamburg",
             "countryCode": "DE"
-        }
+        },
+        "jurisdiction": "EU-GDPR"
     },
     {
         "name": "Accenture",
@@ -9349,7 +9359,8 @@
         "location": {
             "city": "Walldorf",
             "countryCode": "DE"
-        }
+        },
+        "jurisdiction": "EU-GDPR"
     },
     {
         "name": "SalesForce",

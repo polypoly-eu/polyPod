@@ -48,15 +48,12 @@ function fixEntityData(entityData) {
             "SCHUFA Holding AG";
 }
 
-function parseEntity(entityData, globalData) {
+function parseEntity(entityData) {
     fixEntityData(entityData);
 
     const legalEntityData = entityData.legal_entity;
     const legalName = legalEntityData.identifiers.legal_name.value;
     if (!legalName) return null;
-
-    const countryCode =
-        legalEntityData.basic_info.registered_address.value.country;
 
     return {
         name: legalName,
@@ -65,10 +62,11 @@ function parseEntity(entityData, globalData) {
             entityData.derived_purpose_info &&
             entityData.derived_category_info
         ),
-        jurisdiction: (globalData.countries[countryCode] || {}).dataRegion,
+        jurisdiction: null,
         location: {
             city: legalEntityData.basic_info.registered_address.value.city,
-            countryCode,
+            countryCode:
+                legalEntityData.basic_info.registered_address.value.country,
         },
         annualRevenues: extractAnnualRevenues(entityData),
         dataRecipients: entityData.data_recipients || null,
@@ -106,6 +104,12 @@ function enrichWithPatchData(entityMap) {
         const key = entityKey(name);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     }
+}
+
+function enrichWithGlobalData(entityMap, globalData) {
+    for (let entity of Object.values(entityMap))
+        entity.jurisdiction =
+            globalData.countries[entity.location?.countryCode]?.dataRegion;
 }
 
 function enrichWithJurisdictionsShared(entityMap) {
@@ -158,7 +162,7 @@ function removeInvalidEntities(entityMap) {
 function parsePolyPediaCompanyData(globalData) {
     const entityMap = {};
     polyPediaCompanyData.forEach((entityData) => {
-        const entity = parseEntity(entityData, globalData);
+        const entity = parseEntity(entityData);
         if (!entity) return;
 
         const key = entityKey(entity.name);
@@ -166,6 +170,7 @@ function parsePolyPediaCompanyData(globalData) {
     });
 
     enrichWithPatchData(entityMap);
+    enrichWithGlobalData(entityMap, globalData);
     enrichWithJurisdictionsShared(entityMap);
     removeInvalidEntities(entityMap);
     return Object.values(entityMap);
