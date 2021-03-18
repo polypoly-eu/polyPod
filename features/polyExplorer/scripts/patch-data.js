@@ -710,7 +710,7 @@ Object.assign(patchData, {
         category: "Consulting",
         location: {
             city: "Dublin",
-            country: "IE",
+            countryCode: "IE",
         },
     },
     "American Heart Association": {
@@ -718,7 +718,7 @@ Object.assign(patchData, {
         category: "NGO",
         location: {
             city: "Chicago",
-            country: "US",
+            countryCode: "US",
         },
     },
     Cisco: {
@@ -726,7 +726,7 @@ Object.assign(patchData, {
         category: "EDV & IT",
         location: {
             city: "San Jose",
-            country: "US",
+            countryCode: "US",
         },
     },
     Deloitte: {
@@ -734,7 +734,7 @@ Object.assign(patchData, {
         category: "Consulting",
         location: {
             city: "London",
-            country: "UK",
+            countryCode: "UK",
         },
     },
     "Department of Medicine at Brigham and Women's Hospital": {
@@ -742,7 +742,7 @@ Object.assign(patchData, {
         category: "Health",
         location: {
             city: "Boston",
-            country: "US",
+            countryCode: "US",
         },
     },
     "Green Dot Corporation": {
@@ -750,7 +750,7 @@ Object.assign(patchData, {
         category: "Finance",
         location: {
             city: "Passadena",
-            country: "US",
+            countryCode: "US",
         },
     },
     "Harvard T H Chan School": {
@@ -758,7 +758,7 @@ Object.assign(patchData, {
         category: "Science",
         location: {
             city: "Boston",
-            country: "US",
+            countryCode: "US",
         },
     },
     IBM: {
@@ -766,7 +766,7 @@ Object.assign(patchData, {
         category: "EDV & IT",
         location: {
             city: "Armonk",
-            country: "US",
+            countryCode: "US",
         },
     },
     NIEHS: {
@@ -774,7 +774,7 @@ Object.assign(patchData, {
         category: "Science",
         location: {
             city: "Durham",
-            country: "US",
+            countryCode: "US",
         },
     },
     // Seems this one is in the data under "SAP Deutschland SE & Co. KG", but
@@ -792,7 +792,7 @@ Object.assign(patchData, {
         category: "EDV & IT",
         location: {
             city: "San Francisco",
-            country: "US",
+            countryCode: "US",
         },
     },
     "University Of Michigan": {
@@ -800,7 +800,7 @@ Object.assign(patchData, {
         category: "Science",
         location: {
             city: "Ann Arbor",
-            country: "US",
+            countryCode: "US",
         },
     },
 });

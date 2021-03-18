@@ -3217,7 +3217,8 @@
         ],
         "jurisdictionsShared": {
             "children": [
-                "EU-GDPR"
+                "EU-GDPR",
+                "Five-Eyes"
             ]
         }
     },
@@ -9286,31 +9287,34 @@
         "category": "Consulting",
         "location": {
             "city": "Dublin",
-            "country": "IE"
-        }
+            "countryCode": "IE"
+        },
+        "jurisdiction": "EU-GDPR"
     },
     {
         "name": "American Heart Association",
         "category": "NGO",
         "location": {
             "city": "Chicago",
-            "country": "US"
-        }
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "Cisco",
         "category": "EDV & IT",
         "location": {
             "city": "San Jose",
-            "country": "US"
-        }
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "Deloitte",
         "category": "Consulting",
         "location": {
             "city": "London",
-            "country": "UK"
+            "countryCode": "UK"
         }
     },
     {
@@ -9318,40 +9322,45 @@
         "category": "Health",
         "location": {
             "city": "Boston",
-            "country": "US"
-        }
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "Green Dot Corporation",
         "category": "Finance",
         "location": {
             "city": "Passadena",
-            "country": "US"
-        }
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "Harvard T H Chan School",
         "category": "Science",
         "location": {
             "city": "Boston",
-            "country": "US"
-        }
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "IBM",
         "category": "EDV & IT",
         "location": {
             "city": "Armonk",
-            "country": "US"
-        }
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "NIEHS",
         "category": "Science",
         "location": {
             "city": "Durham",
-            "country": "US"
-        }
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "SAP",
@@ -9367,15 +9376,17 @@
         "category": "EDV & IT",
         "location": {
             "city": "San Francisco",
-            "country": "US"
-        }
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     },
     {
         "name": "University Of Michigan",
         "category": "Science",
         "location": {
             "city": "Ann Arbor",
-            "country": "US"
-        }
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     }
 ]
