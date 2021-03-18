@@ -78,6 +78,8 @@
     max-width: 350px;
     margin: 8px auto;
     font-size: 24px;
+    height: 24px;
+    flex: 0 0 auto;
 }
 
 .data-exploration .static-content .filler {
@@ -130,7 +132,7 @@
     width: 84%;
     max-width: 350px;
     margin: 8px auto;
-    height: 31px;
+    height: 32px;
 }
 
 .data-exploration .static-content .down-button {
