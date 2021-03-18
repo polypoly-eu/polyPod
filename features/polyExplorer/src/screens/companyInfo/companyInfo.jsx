@@ -191,7 +191,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                     className="scroll-container"
                     onScroll={(e) => handleInfoTextScrollBottom(e)}
                 >
-                    <div className="short-info">
+                    <div className="company-short-info">
                         <CompanyShortInfo company={company} />
                     </div>
                     <div className="tab-button-container">
