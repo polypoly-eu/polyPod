@@ -369,6 +369,9 @@ const DataExplorationScreen = ({
                             fontSize="16"
                         />
                     </div>
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
                 </div>
             );
     };
