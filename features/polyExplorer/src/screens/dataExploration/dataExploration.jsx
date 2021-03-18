@@ -118,12 +118,6 @@ const DataExplorationScreen = ({
     const highestValueObject = getHighestValueObject();
     const jurisdictionTreeFormatData = getJurisdictionTreeFormat();
 
-    //To go soon
-    const correlationTypeBundle = [];
-    for (let i = 0; i < 9; i += 3) {
-        correlationTypeBundle.push(company.dataTypesShared[i]["dpv:Category"]);
-    }
-
     const progressBar = (
         <div className="progress-bar">
             <div
