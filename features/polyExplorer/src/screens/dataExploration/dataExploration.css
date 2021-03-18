@@ -14,7 +14,7 @@
     height: 4px;
     display: flex;
     flex-direction: row;
-    margin: 16px auto;
+    margin: 16px auto 0 auto;
 }
 
 .data-exploration .progress-bar .progress-bar-part {
@@ -69,17 +69,15 @@
 .data-exploration .static-content h1,
 .data-exploration .static-content h2 {
     width: 296px;
-    height: 24px;
-    margin: 8px auto;
+    flex: 0 0 auto;
 }
 
 .data-exploration .static-content h1 {
     width: 84%;
     max-width: 350px;
-    margin: 8px auto;
     font-size: 24px;
-    height: 24px;
-    flex: 0 0 auto;
+    height: 32px;
+    margin: 8px auto;
 }
 
 .data-exploration .static-content .filler {
@@ -88,13 +86,18 @@
 }
 
 .data-exploration .static-content h2 {
-    width: 296px;
     text-align: center;
     font-size: 20px;
+    height: 28px;
+    margin: 12px auto 8px auto;
 }
 
-.data-exploration .static-content .highlight {
+.data-exploration .static-content .highlight-data-type {
     color: #fb8a89;
+}
+
+.data-exploration .static-content .highlight-purpose {
+    color: #3ba6ff;
 }
 
 .data-exploration .static-content .bubble-chart {

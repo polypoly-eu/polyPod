@@ -166,7 +166,7 @@ const DataExplorationScreen = ({
                 <div className="static-content">
                     <h1>
                         {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
-                        <span className="highlight">
+                        <span className="highlight-data-type">
                             {company.dataTypesShared.length}{" "}
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
@@ -198,7 +198,7 @@ const DataExplorationScreen = ({
                 <div className="static-content">
                     <h1>
                         {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
-                        <span className="highlight">
+                        <span className="highlight-data-type">
                             {company.dataTypesShared.length}{" "}
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
@@ -253,7 +253,7 @@ const DataExplorationScreen = ({
         else if (activeScreen === "dataTypesUnderTextNoNumbers")
             return (
                 <div className="static-content">
-                    <h2 className="highlight">
+                    <h2 className="highlight-data-type">
                         {i18n.t(
                             "dataExplorationScreen:dataTypes.heading.correlations"
                         )}
@@ -277,7 +277,7 @@ const DataExplorationScreen = ({
         else if (activeScreen === "dataTypesCorrelation")
             return (
                 <div className="static-content">
-                    <h2 className="highlight">
+                    <h2 className="highlight-data-type">
                         {i18n.t(
                             "dataExplorationScreen:dataTypes.heading.correlations"
                         )}
@@ -300,9 +300,16 @@ const DataExplorationScreen = ({
                     {button}
                 </div>
             );
-        else if (activeScreen === "purposes") {
+        else if (activeScreen === "purposes")
             return (
                 <div className="static-content">
+                    <h1>
+                        {i18n.t("common:sharing.prefix.purposes")}{" "}
+                        <span className="highlight-purpose">
+                            {company.dataSharingPurposes.length}{" "}
+                            {i18n.t("common:sharing.purposes")}
+                        </span>
+                    </h1>
                     <PurposeChart
                         purposes={company.dataSharingPurposes}
                         openPopup={setShowPurposePopup}
@@ -311,7 +318,7 @@ const DataExplorationScreen = ({
                     {button}
                 </div>
             );
-        } else if (activeScreen === "companies")
+        else if (activeScreen === "companies")
             return (
                 <div className="static-content">
                     <CompanyBubbles
@@ -340,8 +347,9 @@ const DataExplorationScreen = ({
             return (
                 <div className="static-content">
                     <h1>
-                        in {jurisdictionTreeFormatData.children.length}{" "}
-                        {i18n.t("dataExplorationScreen:jurisdictions.heading")}
+                        {i18n.t("common:sharing.prefix.jurisdictions")}{" "}
+                        {jurisdictionTreeFormatData.children.length}{" "}
+                        {i18n.t("common:sharing.jurisdictions")}
                     </h1>
                     <div className="jurisdiction-tree">
                         <JurisdictionTree
