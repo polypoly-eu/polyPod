@@ -102,11 +102,9 @@ function mergeEntities(oldEntity, newEntity) {
 }
 
 function enrichWithPatchData(entityMap) {
-    for (let entity of Object.values(entityMap)) {
-        const entityPatchKey = Object.keys(patchData).find(
-            (name) => entityKey(name) === entityKey(entity.name)
-        );
-        if (entityPatchKey) mergeEntities(entity, patchData[entityPatchKey]);
+    for (let [name, entity] of Object.entries(patchData)) {
+        const key = entityKey(name);
+        entityMap[key] = mergeEntities(entityMap[key], entity);
     }
 }
 
@@ -117,6 +115,7 @@ function enrichWithJurisdictionsShared(entityMap) {
             if (!(recipientKey in entityMap)) continue;
 
             const recipientJurisdiction = entityMap[recipientKey].jurisdiction;
+            if (!recipientJurisdiction) continue;
             entity.jurisdictionsShared = entity.jurisdictionsShared || {};
             entity.jurisdictionsShared.children =
                 entity.jurisdictionsShared.children || [];
@@ -130,6 +129,11 @@ function enrichWithJurisdictionsShared(entityMap) {
     }
 }
 
+const isValidEntity = (entity) =>
+    ["name", "location"].every(
+        (requiredField) => !isEmpty(entity[requiredField])
+    );
+
 function parsePolyPediaCompanyData(globalData) {
     const entityMap = {};
     polyPediaCompanyData.forEach((entityData) => {
@@ -142,7 +146,7 @@ function parsePolyPediaCompanyData(globalData) {
 
     enrichWithPatchData(entityMap);
     enrichWithJurisdictionsShared(entityMap);
-    return Object.values(entityMap);
+    return Object.values(entityMap).filter(isValidEntity);
 }
 
 function savePolyExplorerFile(fileName, data) {
