@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
+import i18n from "../../i18n.js";
+import utils from "./utils.js";
 import "./dataViz.css";
 
 const CompanyBubbles = ({
@@ -68,14 +70,41 @@ const CompanyBubbles = ({
 
             bubbles.filter((d) => d.children).style("fill", "transparent");
 
-            bubbles
-                .filter((d) => d.parent && d.children)
-                .style("stroke", bubbleColor);
+            const industryBubbles = bubbles.filter(
+                (d) => d.parent && d.children
+            );
+            industryBubbles.style("stroke", bubbleColor);
 
-            bubbles
-                .filter((d) => !d.children)
+            const companyBubbles = bubbles.filter((d) => !d.children);
+            companyBubbles
                 .style("fill", bubbleColor)
                 .style("fill-opacity", 0.15);
+
+            industryBubbles.each((e) => {
+                const industry =
+                    e.data.name || i18n.t("common:category.undisclosed");
+                const count = categoryMap[e.data.name].children.length;
+                const label = utils.appendLabel(
+                    container,
+                    `${industry}: ${count}`
+                );
+
+                const bounds = label.node().getBBox();
+                const lineLength = 8;
+                label.attr(
+                    "transform",
+                    `translate(${e.x}, ${
+                        e.y - e.r - bounds.height / 2 - lineLength
+                    })`
+                );
+                container.append('line')
+                    .style("stroke", "white")
+                    .style("stroke-width", 1)
+                    .attr("x1", e.x)
+                    .attr("y1", e.y - e.r - lineLength)
+                    .attr("x2", e.x)
+                    .attr("y2", e.y - e.r);
+            });
         },
     };
 

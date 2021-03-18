@@ -328,8 +328,8 @@ const DataExplorationScreen = ({
                     <CompanyBubbles
                         view="flat"
                         data={dataRecipients}
-                        width="200"
-                        height="200"
+                        width="360"
+                        height="360"
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                     />
@@ -357,8 +357,8 @@ const DataExplorationScreen = ({
                     <CompanyBubbles
                         view="flat"
                         data={dataRecipients}
-                        width="200"
-                        height="200"
+                        width="360"
+                        height="360"
                         opacity={0.1}
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
@@ -382,8 +382,8 @@ const DataExplorationScreen = ({
                     <CompanyBubbles
                         view="industries"
                         data={dataRecipients}
-                        width="200"
-                        height="200"
+                        width="360"
+                        height="360"
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                     />
