@@ -111,6 +111,10 @@
     height: 100%;
 }
 
+.data-exploration .jurisdiction-tree {
+    margin: 0 24px 0 22px;
+}
+
 .data-exploration .static-content .source {
     font-size: 10px;
     line-height: 14px;

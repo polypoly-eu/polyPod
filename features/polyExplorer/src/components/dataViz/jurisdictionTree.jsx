@@ -1,49 +1,60 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-const RectangleTree = ({ data, width, height, fontSize }) => {
+const JurisdictionTree = ({ data, width, height, fontSize }) => {
     let treeRef = useRef(null);
 
     const createTreeContainer = () => {
         return d3
             .select(treeRef.current)
             .append("svg")
-            .attr("height", height)
-            .attr("width", width)
-            .style("border", "thin black solid")
+            .attr("viewBox", `0 0 ${width} ${height}`)
             .style("font", "10px sans-serif");
     };
 
-    const drawRectangleTree = (treeContainer) => {
+    const drawJurisdictionTree = (treeContainer) => {
         const root = d3
             .hierarchy(data)
             .sum((d) => d.value)
             .sort((a, b) => b.value - a.value);
 
-        const treemapRoot = d3.treemap().size([width, height]).padding(1)(root);
+        const treemapRoot = d3.treemap().size([width, height]).padding(2)(root);
         const nodes = treeContainer
             .selectAll("g")
             .data(treemapRoot.leaves())
             .join("g")
             .attr("transform", (d) => `translate(${d.x0},${d.y0})`);
 
-        const fader = (color) => d3.interpolateRgb(color, "#fff")(0.3);
-        const colorScale = d3.scaleOrdinal(d3.schemeCategory10.map(fader));
+        const backgroundColors = {
+            "EU-GDPR": "#60E6DE",
+            "Five-Eyes": "#EC453D",
+            China: "#C5271E",
+            Russia: "#FE8988",
+            Other: "#A9B6C6",
+        };
+
+        const fontColors = {
+            "EU-GDPR": "#0F1938",
+            "Five-Eyes": "white",
+            China: "white",
+            Russia: "white",
+            Other: "#0F1938",
+        };
 
         nodes
             .append("rect")
             .attr("width", (d) => d.x1 - d.x0)
             .attr("height", (d) => d.y1 - d.y0)
-            .attr("fill", (d) => colorScale(d.data.category));
+            .attr("fill", (d) => backgroundColors[d.data.category]);
 
         nodes
             .append("text")
-            .text((d) => `${d.data.name} ${d.data.value}`)
+            .text((d) => `${d.data.name}: ${d.data.value}`)
             .attr("font-size", `${fontSize}px`)
             .attr("x", 3)
             .attr("y", fontSize)
             .call(wrapText)
-            .style("fill", "white");
+            .style("fill", (d) => fontColors[d.data.category]);
     };
 
     function wrapText(selection) {
@@ -85,10 +96,10 @@ const RectangleTree = ({ data, width, height, fontSize }) => {
     }
 
     useEffect(() => {
-        drawRectangleTree(createTreeContainer());
+        drawJurisdictionTree(createTreeContainer());
     });
 
     return <div ref={treeRef}></div>;
 };
 
-export default RectangleTree;
+export default JurisdictionTree;

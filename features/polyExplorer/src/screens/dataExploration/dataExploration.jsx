@@ -37,6 +37,39 @@ const DataExplorationScreen = ({
         return categories;
     };
 
+    const getJurisdictionTreeFormat = () => {
+        const jurisdictionTreeFormatData = { name: "World", children: [] };
+        dataRecipients.forEach((e) => {
+            let jurisdiction = jurisdictionTreeFormatData.children.find(
+                (j) => j.name === e.jurisdiction
+            );
+            if (jurisdiction !== undefined) {
+                let country = jurisdiction.children.find(
+                    (c) => c.name === e.location.countryCode
+                );
+                if (country !== undefined) country.value++;
+                else
+                    jurisdiction.children.push({
+                        name: e.location.countryCode,
+                        value: 1,
+                        category: e.jurisdiction,
+                    });
+            } else {
+                jurisdictionTreeFormatData.children.push({
+                    name: e.jurisdiction,
+                    children: [
+                        {
+                            name: e.location.countryCode,
+                            value: 1,
+                            category: e.jurisdiction,
+                        },
+                    ],
+                });
+            }
+        });
+        return jurisdictionTreeFormatData;
+    };
+
     const getScreens = () => {
         const screens = [
             "construction",
@@ -51,6 +84,7 @@ const DataExplorationScreen = ({
         screens.push("dataTypesCorrelation");
         screens.push("purposes");
         screens.push("companies");
+        screens.push("jurisdictions");
         return screens;
     };
 
@@ -76,12 +110,12 @@ const DataExplorationScreen = ({
     const [activeIndex, setActiveIndex] = useState(
         screens.indexOf(startSection)
     );
+    const [showPurposePopup, setShowPurposePopup] = useState(null);
 
     //Constants
     const activeScreen = screens[activeIndex];
     const highestValueObject = getHighestValueObject();
-
-    const [showPurposePopup, setShowPurposePopup] = useState(null);
+    const jurisdictionTreeFormatData = getJurisdictionTreeFormat();
 
     //To go soon
     const correlationTypeBundle = [];
@@ -113,7 +147,7 @@ const DataExplorationScreen = ({
                 className={`progress-bar-part jurisdictions ${
                     activeScreen.startsWith("jurisdictions") ? "active" : ""
                 }`}
-                //onClick={() => goToSlide(screens.indexOf("jurisdictionsStart"))}
+                onClick={() => goToSlide(screens.indexOf("jurisdictions"))}
             ></div>
         </div>
     );
@@ -302,6 +336,23 @@ const DataExplorationScreen = ({
                     {button}
                 </div>
             );
+        else if (activeScreen === "jurisdictions")
+            return (
+                <div className="static-content">
+                    <h1>
+                        in {jurisdictionTreeFormatData.children.length}{" "}
+                        {i18n.t("dataExplorationScreen:jurisdictions.heading")}
+                    </h1>
+                    <div className="jurisdiction-tree">
+                        <JurisdictionTree
+                            data={getJurisdictionTreeFormat()}
+                            width="300"
+                            height="250"
+                            fontSize="16"
+                        />
+                    </div>
+                </div>
+            );
     };
 
     return (
@@ -376,6 +427,9 @@ const DataExplorationScreen = ({
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                             className="purpose-slide"
+                        ></SwiperSlide>
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}

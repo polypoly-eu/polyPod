@@ -22,5 +22,7 @@
     "construction.text":
         "This part is currently under construction, but you can go through it if you're curious.",
     "from.polyPedia.translation": 
-        "Translation_EN"    
+        "Translation_EN",
+    "jurisdictions.heading": 
+        "Jurisdictions"  
 }
