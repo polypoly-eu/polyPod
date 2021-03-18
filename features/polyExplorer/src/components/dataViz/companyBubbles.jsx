@@ -2,7 +2,14 @@ import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import "./dataViz.css";
 
-const CompanyBubbles = ({ data, view, width, height, bubbleColor }) => {
+const CompanyBubbles = ({
+    data,
+    view,
+    width,
+    height,
+    opacity = 1,
+    bubbleColor,
+}) => {
     const bubbleRef = useRef();
     const edgePadding = 5;
 
@@ -14,7 +21,8 @@ const CompanyBubbles = ({ data, view, width, height, bubbleColor }) => {
         return d3
             .select(bubbleRef.current)
             .append("svg")
-            .attr("viewBox", `0 0 ${width} ${height}`);
+            .attr("viewBox", `0 0 ${width} ${height}`)
+            .style("opacity", opacity);
     };
 
     function appendBubbles(container, data) {

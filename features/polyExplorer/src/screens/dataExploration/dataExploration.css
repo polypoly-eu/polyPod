@@ -100,6 +100,10 @@
     color: #3ba6ff;
 }
 
+.data-exploration .static-content .highlight-companies {
+    color: #7ee8a2;
+}
+
 .data-exploration .static-content .bubble-chart {
     display: block;
     width: 100%;

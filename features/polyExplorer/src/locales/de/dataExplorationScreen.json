@@ -19,8 +19,12 @@
         "Wenn Datentypen nicht einzeln, sondern im Packet geteilt werden, geben sie weitere Einblicke.",
     "purposes.description.scale":
         "Anzahl der Nennungen",
+    "companies.text.intro":
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
+    "companies.heading.industries":
+        "Industrien",
     "construction.text":
         "Dieser Teil wird gerade noch gebaut, aber ihr könnt schonmal durchklicken, wenn ihr neugierig seid.",
-    "from.polyPedia.translation": 
+    "from.polyPedia.translation":
         "Translation_DE"
 }

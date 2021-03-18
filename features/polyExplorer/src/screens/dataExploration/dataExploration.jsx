@@ -23,6 +23,7 @@ const DataExplorationScreen = ({
     openCategoryInfo,
     openCorrelationInfo,
     openPurposeInfo,
+    openCompaniesInfo,
     maxCompanies,
     dataRecipients,
 }) => {
@@ -84,6 +85,7 @@ const DataExplorationScreen = ({
         screens.push("dataTypesCorrelation");
         screens.push("purposes");
         screens.push("companies");
+        screens.push("companiesExplanation");
         screens.push("companiesIndustries");
         screens.push("jurisdictions");
         return screens;
@@ -316,6 +318,13 @@ const DataExplorationScreen = ({
         else if (activeScreen === "companies")
             return (
                 <div className="static-content">
+                    <h1>
+                        {i18n.t("common:sharing.prefix.companies")}{" "}
+                        <span className="highlight-companies">
+                            {dataRecipients.length}{" "}
+                            {i18n.t("common:sharing.companies")}
+                        </span>
+                    </h1>
                     <CompanyBubbles
                         view="flat"
                         data={dataRecipients}
@@ -324,12 +333,52 @@ const DataExplorationScreen = ({
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                     />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <DataSharingLegend
+                        onClick={() => {
+                            openCompaniesInfo();
+                        }}
+                    />
+                    {button}
+                </div>
+            );
+        else if (activeScreen === "companiesExplanation")
+            return (
+                <div className="static-content">
+                    <h1>
+                        {i18n.t("common:sharing.prefix.companies")}{" "}
+                        <span className="highlight-companies">
+                            {dataRecipients.length}{" "}
+                            {i18n.t("common:sharing.companies")}
+                        </span>
+                    </h1>
+                    <CompanyBubbles
+                        view="flat"
+                        data={dataRecipients}
+                        width="200"
+                        height="200"
+                        opacity={0.1}
+                        bubbleColor="#7EE8A2"
+                        maxCompanies={maxCompanies}
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <div className="data-sharing-legend-fill"></div>
+                    {filler}
                     {button}
                 </div>
             );
         else if (activeScreen === "companiesIndustries")
             return (
                 <div className="static-content">
+                    <h2 className="highlight-companies">
+                        {i18n.t(
+                            "dataExplorationScreen:companies.heading.industries"
+                        )}
+                    </h2>
                     <CompanyBubbles
                         view="industries"
                         data={dataRecipients}
@@ -337,6 +386,14 @@ const DataExplorationScreen = ({
                         height="200"
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <DataSharingLegend
+                        onClick={() => {
+                            openCompaniesInfo();
+                        }}
                     />
                     {button}
                 </div>
@@ -452,6 +509,13 @@ const DataExplorationScreen = ({
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
+                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                            <p className="on-bubble">
+                                {i18n.t(
+                                    "dataExplorationScreen:companies.text.intro"
+                                )}
+                            </p>
+                        </SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                         ></SwiperSlide>

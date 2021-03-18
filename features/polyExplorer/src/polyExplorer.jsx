@@ -15,6 +15,7 @@ import DataTypesInfoScreen from "./screens/explorationInfo/dataTypesInfo/dataTyp
 import CategoryInfoScreen from "./screens/explorationInfo/categoryInfo/categoryInfo.jsx";
 import CorrelationInfoScreen from "./screens/explorationInfo/correlationInfo/correlationInfo.jsx";
 import PurposeInfoScreen from "./screens/explorationInfo/purposeInfo/purposeInfo.jsx";
+import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/companiesInfo.jsx";
 import FeaturedCompanyHelpScreen from "./screens/featuredCompanyHelp/featuredCompanyHelp.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 import ConstructionPopup from "./components/constructionPopup/constructionPopup.jsx";
@@ -208,6 +209,12 @@ const PolyExplorer = () => {
                         "purposes"
                     )
                 }
+                openCompaniesInfo={() =>
+                    handleExplorationInfoScreen(
+                        "explorationCompaniesInfo",
+                        "companies"
+                    )
+                }
                 maxCompanies={featuredCompanyMaxValues.companies}
                 dataRecipients={companyData.filter(
                     (c) => selectedCompany?.dataRecipients.indexOf(c.name) >= 0
@@ -257,6 +264,9 @@ const PolyExplorer = () => {
         ),
         explorationPurposeInfo: (
             <PurposeInfoScreen onClose={podNav.actions.back} />
+        ),
+        explorationCompaniesInfo: (
+            <CompaniesInfoScreen onClose={podNav.actions.back} />
         ),
     };
 
