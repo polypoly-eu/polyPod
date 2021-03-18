@@ -7852,7 +7852,7 @@
             "value": null,
             "source": null
         },
-        "category": null
+        "category": "Werbung"
     },
     {
         "name": "Spotcap Global Services GmbH",
@@ -9372,5 +9372,133 @@
             "source": null
         },
         "category": "Marketing & Kommunikation"
+    },
+    {
+        "name": "Outbrain Inc.",
+        "category": "EDV & IT",
+        "location": {
+            "city": "New York",
+            "countryCode": "US"
+        }
+    },
+    {
+        "name": "Microsoft Corporation",
+        "category": "EDV & IT",
+        "location": {
+            "city": "Redmond",
+            "countryCode": "US"
+        }
+    },
+    {
+        "name": "Google Ireland Limited",
+        "category": "Internet & Multimedia",
+        "location": {
+            "city": "Dublin",
+            "countryCode": "IE"
+        }
+    },
+    {
+        "name": "Etracker GmbH",
+        "category": "Werbung",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "Accenture",
+        "category": "Consulting",
+        "location": {
+            "city": "Dublin",
+            "country": "IE"
+        }
+    },
+    {
+        "name": "American Heart Association",
+        "category": "NGO",
+        "location": {
+            "city": "Chicago",
+            "country": "US"
+        }
+    },
+    {
+        "name": "Cisco",
+        "category": "EDV & IT",
+        "location": {
+            "city": "San Jose",
+            "country": "US"
+        }
+    },
+    {
+        "name": "Deloitte",
+        "category": "Consulting",
+        "location": {
+            "city": "London",
+            "country": "UK"
+        }
+    },
+    {
+        "name": "Department of Medicine at Brigham and Women's Hospital",
+        "category": "Health",
+        "location": {
+            "city": "Boston",
+            "country": "US"
+        }
+    },
+    {
+        "name": "Green Dot Corporation",
+        "category": "Finance",
+        "location": {
+            "city": "Passadena",
+            "country": "US"
+        }
+    },
+    {
+        "name": "Harvard T H Chan School",
+        "category": "Science",
+        "location": {
+            "city": "Boston",
+            "country": "US"
+        }
+    },
+    {
+        "name": "IBM",
+        "category": "EDV & IT",
+        "location": {
+            "city": "Armonk",
+            "country": "US"
+        }
+    },
+    {
+        "name": "NIEHS",
+        "category": "Science",
+        "location": {
+            "city": "Durham",
+            "country": "US"
+        }
+    },
+    {
+        "name": "SAP",
+        "category": "EDV & IT",
+        "location": {
+            "city": "Walldorf",
+            "countryCode": "DE"
+        }
+    },
+    {
+        "name": "SalesForce",
+        "category": "EDV & IT",
+        "location": {
+            "city": "San Francisco",
+            "country": "US"
+        }
+    },
+    {
+        "name": "University Of Michigan",
+        "category": "Science",
+        "location": {
+            "city": "Ann Arbor",
+            "country": "US"
+        }
     }
 ]

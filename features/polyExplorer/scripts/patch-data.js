@@ -675,4 +675,134 @@ for (let entity of Object.values(patchData))
     if ("category" in entity)
         entity.category = "de" in entity.category ? entity.category.de : null;
 
+// Until we have sufficient data on data recipients from polyPedia, we'll add
+// some manually.
+Object.assign(patchData, {
+    "Outbrain Inc.": {
+        name: "Outbrain Inc.",
+        category: "EDV & IT",
+        location: { city: "New York", countryCode: "US" },
+    },
+    "Microsoft Corporation": {
+        name: "Microsoft Corporation",
+        category: "EDV & IT",
+        location: { city: "Redmond", countryCode: "US" },
+    },
+    "Google Ireland Limited": {
+        name: "Google Ireland Limited",
+        category: "Internet & Multimedia",
+        location: { city: "Dublin", countryCode: "IE" },
+    },
+    // Seems this one is in the data under "Etracker.de e. K.", but I'm not sure
+    // and we can't merge it here, so we duplicate it for now:
+    "Etracker GmbH": {
+        name: "Etracker GmbH",
+        category: "Werbung",
+        location: { city: "Hamburg", countryCode: "DE" },
+    },
+    // This one is in the data under the same name/key, just missing the
+    // category:
+    "EBID Service AG": {
+        category: "Werbung",
+    },
+    Accenture: {
+        name: "Accenture",
+        category: "Consulting",
+        location: {
+            city: "Dublin",
+            country: "IE",
+        },
+    },
+    "American Heart Association": {
+        name: "American Heart Association",
+        category: "NGO",
+        location: {
+            city: "Chicago",
+            country: "US",
+        },
+    },
+    Cisco: {
+        name: "Cisco",
+        category: "EDV & IT",
+        location: {
+            city: "San Jose",
+            country: "US",
+        },
+    },
+    Deloitte: {
+        name: "Deloitte",
+        category: "Consulting",
+        location: {
+            city: "London",
+            country: "UK",
+        },
+    },
+    "Department of Medicine at Brigham and Women's Hospital": {
+        name: "Department of Medicine at Brigham and Women's Hospital",
+        category: "Health",
+        location: {
+            city: "Boston",
+            country: "US",
+        },
+    },
+    "Green Dot Corporation": {
+        name: "Green Dot Corporation",
+        category: "Finance",
+        location: {
+            city: "Passadena",
+            country: "US",
+        },
+    },
+    "Harvard T H Chan School": {
+        name: "Harvard T H Chan School",
+        category: "Science",
+        location: {
+            city: "Boston",
+            country: "US",
+        },
+    },
+    IBM: {
+        name: "IBM",
+        category: "EDV & IT",
+        location: {
+            city: "Armonk",
+            country: "US",
+        },
+    },
+    NIEHS: {
+        name: "NIEHS",
+        category: "Science",
+        location: {
+            city: "Durham",
+            country: "US",
+        },
+    },
+    // Seems this one is in the data under "SAP Deutschland SE & Co. KG", but
+    // I'm not sure and we can't merge it here, so we duplicate it for now:
+    SAP: {
+        name: "SAP",
+        category: "EDV & IT",
+        location: {
+            city: "Walldorf",
+            countryCode: "DE",
+        },
+    },
+    SalesForce: {
+        name: "SalesForce",
+        category: "EDV & IT",
+        location: {
+            city: "San Francisco",
+            country: "US",
+        },
+    },
+    "University Of Michigan": {
+        name: "University Of Michigan",
+        category: "Science",
+        location: {
+            city: "Ann Arbor",
+            country: "US",
+        },
+    },
+});
+
 export default patchData;
