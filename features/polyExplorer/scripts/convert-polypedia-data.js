@@ -1,7 +1,6 @@
 import fs from "fs";
 import { createRequire } from "module";
-import { default as fallbackDescriptions } from "./descriptions.js";
-import { default as categories } from "./categories.js";
+import { default as patchData } from "./patch-data.js";
 import { default as highlights } from "./highlights.js";
 
 const require = createRequire(import.meta.url);
@@ -28,18 +27,9 @@ function extractAnnualRevenues(entry) {
 }
 
 function parseDescription(legalEntityData) {
-    const key = entityKey(legalEntityData.identifiers.legal_name.value);
     const editorialData =
         ((legalEntityData.editorial_content || {}).editorials || [])[0] || {};
     const description = editorialData.body_i18n || {};
-    for (let languageCode of Object.keys(fallbackDescriptions))
-        if (!description[languageCode]) {
-            const fallbackDescription = (Object.entries(
-                fallbackDescriptions[languageCode]
-            ).find(([companyName]) => entityKey(companyName) === key) || [])[1];
-            if (fallbackDescription)
-                description[languageCode] = fallbackDescription;
-        }
     const descriptionEmpty = Object.values(description).every(
         (value) => value === null
     );
@@ -50,13 +40,6 @@ function parseDescription(legalEntityData) {
         value: descriptionEmpty ? null : description,
         source: descriptionEmpty ? null : source,
     };
-}
-
-function parseCategory(legalName) {
-    const categoryStringKey = Object.keys(categories.de).find(
-        (e) => entityKey(e) === entityKey(legalName)
-    );
-    return categories.de[categoryStringKey] || null;
 }
 
 function fixEntityData(entityData) {
@@ -100,7 +83,7 @@ function parseEntity(entityData, globalData) {
               )
             : null,
         description: parseDescription(legalEntityData),
-        category: parseCategory(legalName),
+        category: null,
         correlatingDataTypes: highlights[legalName]?.correlatingDataTypes,
     };
 }
@@ -116,6 +99,15 @@ function mergeEntities(oldEntity, newEntity) {
         if (!(key in oldEntity) || isEmpty(oldEntity[key]))
             oldEntity[key] = value;
     return oldEntity;
+}
+
+function enrichWithPatchData(entityMap) {
+    for (let entity of Object.values(entityMap)) {
+        const entityPatchKey = Object.keys(patchData).find(
+            (name) => entityKey(name) === entityKey(entity.name)
+        );
+        if (entityPatchKey) mergeEntities(entity, patchData[entityPatchKey]);
+    }
 }
 
 function enrichWithJurisdictionsShared(entityMap) {
@@ -148,6 +140,7 @@ function parsePolyPediaCompanyData(globalData) {
         entityMap[key] = mergeEntities(entityMap[key], entity);
     });
 
+    enrichWithPatchData(entityMap);
     enrichWithJurisdictionsShared(entityMap);
     return Object.values(entityMap);
 }
