@@ -134,6 +134,27 @@ const isValidEntity = (entity) =>
         (requiredField) => !isEmpty(entity[requiredField])
     );
 
+function removeInvalidEntities(entityMap) {
+    for (let [key, entity] of Object.entries(entityMap)) {
+        if (!isValidEntity(entity)) {
+            delete entityMap[key];
+            continue;
+        }
+        const { dataRecipients } = entity;
+        if (!dataRecipients) continue;
+        entity.dataRecipients = dataRecipients.filter((recipientName) => {
+            const recipientKey = entityKey(recipientName);
+            const keep =
+                recipientKey in entityMap &&
+                "category" in entityMap[recipientKey];
+            if (!keep)
+                console.error(`Removing data recipient '${recipientName}' from \
+'${entity.name}' - insufficient entity data available`);
+            return keep;
+        });
+    }
+}
+
 function parsePolyPediaCompanyData(globalData) {
     const entityMap = {};
     polyPediaCompanyData.forEach((entityData) => {
@@ -146,7 +167,8 @@ function parsePolyPediaCompanyData(globalData) {
 
     enrichWithPatchData(entityMap);
     enrichWithJurisdictionsShared(entityMap);
-    return Object.values(entityMap).filter(isValidEntity);
+    removeInvalidEntities(entityMap);
+    return Object.values(entityMap);
 }
 
 function savePolyExplorerFile(fileName, data) {
