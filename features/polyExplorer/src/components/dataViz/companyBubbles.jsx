@@ -2,62 +2,84 @@ import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import "./dataViz.css";
 
-const CompanyBubbles = ({ data, width, height, bubbleColor }) => {
+const CompanyBubbles = ({ data, view, width, height, bubbleColor }) => {
     const bubbleRef = useRef();
     const edgePadding = 5;
-
-    const companies = [];
-
-    data.forEach((e) => {
-        companies.push({ name: e, value: 1 });
-    });
 
     const clearSvg = () => {
         d3.select(bubbleRef.current).selectAll("svg").remove();
     };
 
-    const makeHierarchy = () => {
-        return d3.hierarchy({ children: companies }).sum((d) => d.value);
-    };
-
-    const pack = () => {
-        return d3
-            .pack()
-            .size([width - edgePadding, height - edgePadding])
-            .padding(3);
-    };
-
-    const createBubbleContainer = () => {
+    const appendBubbleContainer = () => {
         return d3
             .select(bubbleRef.current)
             .append("svg")
             .attr("viewBox", `0 0 ${width} ${height}`);
     };
 
-    // d3 svg bubble-diagram drawing function
-    const drawDataBubbles = (bubbleContainer) => {
-        const hierarchicalData = makeHierarchy(data);
-        const packLayout = pack();
+    function appendBubbles(container, data) {
+        const root = d3.hierarchy(data).sum(() => 1);
 
-        const root = packLayout(hierarchicalData);
+        const packLayout = d3
+            .pack()
+            .size([width - edgePadding, height - edgePadding])
+            .padding(3);
+        packLayout(root);
 
-        const leaf = bubbleContainer
-            .selectAll("g")
-            .data(root.leaves())
+        return container
+            .selectAll("circle")
+            .data(root.descendants())
             .enter()
-            .append("g")
-            .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`);
+            .append("circle")
+            .attr("cx", (d) => d.x)
+            .attr("cy", (d) => d.y)
+            .attr("r", (d) => d.r);
+    }
 
-        leaf.append("circle")
-            .attr("r", (d) => d.r)
-            .style("fill", bubbleColor)
-            .style("vertical-align", "center")
-            .attr("fill-opacity", 1);
+    const drawFunctions = {
+        flat: (container) => {
+            const viewData = {
+                children: data.map((company) => ({ name: company })),
+            };
+            const bubbles = appendBubbles(container, viewData);
+            bubbles.filter((d) => d.children).style("fill", "transparent");
+            bubbles.filter((d) => !d.children).style("fill", bubbleColor);
+        },
+        industries: (container) => {
+            const categoryMap = {};
+            for (let { name, category } of data) {
+                if (!categoryMap[category])
+                    categoryMap[category] = { name: category, children: [] };
+                categoryMap[category].children.push({ name });
+            }
+            const viewData = {
+                children: Object.values(categoryMap),
+            };
+
+            const bubbles = appendBubbles(container, viewData);
+
+            bubbles.filter((d) => d.children).style("fill", "transparent");
+
+            bubbles
+                .filter((d) => d.parent && d.children)
+                .style("stroke", bubbleColor);
+
+            bubbles
+                .filter((d) => !d.children)
+                .style("fill", bubbleColor)
+                .style("fill-opacity", 0.15);
+        },
     };
+
+    function draw() {
+        const bubbleContainer = appendBubbleContainer();
+        const drawFunction = drawFunctions[view];
+        if (drawFunction) drawFunction(bubbleContainer);
+    }
 
     useEffect(() => {
         clearSvg();
-        drawDataBubbles(createBubbleContainer());
+        draw();
     });
 
     return <div className="bubble-chart" ref={bubbleRef}></div>;

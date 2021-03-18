@@ -84,6 +84,7 @@ const DataExplorationScreen = ({
         screens.push("dataTypesCorrelation");
         screens.push("purposes");
         screens.push("companies");
+        screens.push("companiesIndustries");
         screens.push("jurisdictions");
         return screens;
     };
@@ -322,7 +323,22 @@ const DataExplorationScreen = ({
             return (
                 <div className="static-content">
                     <CompanyBubbles
-                        data={company.dataRecipients}
+                        view="flat"
+                        data={dataRecipients}
+                        width="200"
+                        height="200"
+                        bubbleColor="#7EE8A2"
+                        maxCompanies={maxCompanies}
+                    />
+                    {button}
+                </div>
+            );
+        else if (activeScreen === "companiesIndustries")
+            return (
+                <div className="static-content">
+                    <CompanyBubbles
+                        view="industries"
+                        data={dataRecipients}
                         width="200"
                         height="200"
                         bubbleColor="#7EE8A2"
@@ -435,6 +451,9 @@ const DataExplorationScreen = ({
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                             className="purpose-slide"
+                        ></SwiperSlide>
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
