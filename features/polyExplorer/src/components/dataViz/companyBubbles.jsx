@@ -97,7 +97,8 @@ const CompanyBubbles = ({
                         e.y - e.r - bounds.height / 2 - lineLength
                     })`
                 );
-                container.append('line')
+                container
+                    .append("line")
                     .style("stroke", "white")
                     .style("stroke-width", 1)
                     .attr("x1", e.x)
