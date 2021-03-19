@@ -42,34 +42,36 @@ const DataExplorationScreen = ({
 
     const getJurisdictionTreeFormat = () => {
         const jurisdictionTreeFormatData = { name: "World", children: [] };
-        dataRecipients.forEach((e) => {
-            let jurisdiction = jurisdictionTreeFormatData.children.find(
-                (j) => j.name === e.jurisdiction
-            );
-            if (jurisdiction !== undefined) {
-                let country = jurisdiction.children.find(
-                    (c) => c.name === e.location.countryCode
+        dataRecipients
+            .filter((e) => !!e)
+            .forEach((e) => {
+                let jurisdiction = jurisdictionTreeFormatData.children.find(
+                    (j) => j.name === e.jurisdiction
                 );
-                if (country !== undefined) country.value++;
-                else
-                    jurisdiction.children.push({
-                        name: e.location.countryCode,
-                        value: 1,
-                        category: e.jurisdiction,
-                    });
-            } else {
-                jurisdictionTreeFormatData.children.push({
-                    name: e.jurisdiction,
-                    children: [
-                        {
+                if (jurisdiction !== undefined) {
+                    let country = jurisdiction.children.find(
+                        (c) => c.name === e.location.countryCode
+                    );
+                    if (country !== undefined) country.value++;
+                    else
+                        jurisdiction.children.push({
                             name: e.location.countryCode,
                             value: 1,
                             category: e.jurisdiction,
-                        },
-                    ],
-                });
-            }
-        });
+                        });
+                } else {
+                    jurisdictionTreeFormatData.children.push({
+                        name: e.jurisdiction,
+                        children: [
+                            {
+                                name: e.location.countryCode,
+                                value: 1,
+                                category: e.jurisdiction,
+                            },
+                        ],
+                    });
+                }
+            });
         return jurisdictionTreeFormatData;
     };
 
