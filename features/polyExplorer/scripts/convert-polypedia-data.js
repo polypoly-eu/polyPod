@@ -49,14 +49,14 @@ function parseDescription(legalEntityData) {
     };
 }
 
-function fixEntityData(entityData) {
+function fixPolyPediaEntityData(entityData) {
     if (entityData.legal_entity.identifiers.common_name === "Schufa")
         entityData.legal_entity.identifiers.legal_name.value =
             "SCHUFA Holding AG";
 }
 
 function parseEntity(entityData) {
-    fixEntityData(entityData);
+    fixPolyPediaEntityData(entityData);
 
     const legalEntityData = entityData.legal_entity;
     const legalName = legalEntityData.identifiers.legal_name.value;
@@ -150,7 +150,7 @@ const isValidEntity = (entity) =>
         (requiredField) => !isEmpty(entity[requiredField])
     );
 
-function removeInvalidEntities(entityMap) {
+function fixCompanyData(entityMap) {
     for (let [key, entity] of Object.entries(entityMap)) {
         if (!isValidEntity(entity)) {
             delete entityMap[key];
@@ -188,7 +188,7 @@ function parsePolyPediaCompanyData(globalData) {
     enrichWithPatchData(entityMap);
     enrichWithGlobalData(entityMap, globalData);
     enrichWithJurisdictionsShared(entityMap);
-    removeInvalidEntities(entityMap);
+    fixCompanyData(entityMap);
     return Object.values(entityMap);
 }
 
