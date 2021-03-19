@@ -209,8 +209,7 @@
 }
 
 .data-exploration .purpose-slide {
-    height: 0% !important;
-    margin-bottom: 100%;
+    pointer-events: none;
 }
 
 .data-exploration .swipable-content .on-bubble {
