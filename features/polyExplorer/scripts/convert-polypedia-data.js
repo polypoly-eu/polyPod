@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import { createRequire } from "module";
 import { default as patchData } from "./patch-data.js";
 import { default as highlights } from "./highlights.js";
@@ -8,6 +9,12 @@ const require = createRequire(import.meta.url);
 const polyPediaCompanyData = require("../polypedia-data/data/3_integrated/polyExplorer/companies.json");
 
 const polyPediaGlobalData = require("../polypedia-data/data/3_integrated/polyExplorer/global.json");
+
+const dataIssueLog = {
+    missingDataRecipients: {},
+    patchedCompaniesModified: [],
+    patchedCompaniesNew: [],
+};
 
 const extractYear = (date) =>
     parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
@@ -102,6 +109,11 @@ function mergeEntities(oldEntity, newEntity) {
 function enrichWithPatchData(entityMap) {
     for (let [name, entity] of Object.entries(patchData)) {
         const key = entityKey(name);
+        dataIssueLog[
+            key in entityMap
+                ? "patchedCompaniesModified"
+                : "patchedCompaniesNew"
+        ].push(name);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     }
 }
@@ -151,9 +163,13 @@ function removeInvalidEntities(entityMap) {
             const keep =
                 recipientKey in entityMap &&
                 "category" in entityMap[recipientKey];
-            if (!keep)
-                console.error(`Removing data recipient '${recipientName}' from \
-'${entity.name}' - insufficient entity data available`);
+            if (!keep) {
+                dataIssueLog.missingDataRecipients[recipientName] =
+                    dataIssueLog.missingDataRecipients[recipientName] || [];
+                dataIssueLog.missingDataRecipients[recipientName].push(
+                    entity.name
+                );
+            }
             return keep;
         });
     }
@@ -213,7 +229,38 @@ function parsePolyPediaGlobalData() {
 const savePolyExplorerGlobalData = (data) =>
     savePolyExplorerFile("global.json", data);
 
+function writeDataIssueLog() {
+    const scriptPath = process.argv[1];
+    const logFile = `${path.dirname(scriptPath)}/${path.basename(
+        scriptPath
+    )}.log`;
+
+    const {
+        missingDataRecipients,
+        patchedCompaniesModified,
+        patchedCompaniesNew,
+    } = dataIssueLog;
+    const missingDataRecipientNames = Object.keys(missingDataRecipients);
+    const listPrefix = "- ";
+    const contents = `
+Missing data recipients:       ${missingDataRecipientNames.length}
+Patched existing companies:    ${patchedCompaniesModified.length}
+New companies from patch data: ${patchedCompaniesNew.length}
+
+Missing data recipients:
+${listPrefix}${missingDataRecipientNames.join("\n" + listPrefix)}
+
+Patched companies (modified):
+${listPrefix}${patchedCompaniesModified.join("\n" + listPrefix)}
+
+Patched companies (new):
+${listPrefix}${patchedCompaniesNew.join("\n" + listPrefix)}
+`;
+    fs.writeFileSync(logFile, contents);
+}
+
 const globalData = parsePolyPediaGlobalData();
 const companyData = parsePolyPediaCompanyData(globalData);
 savePolyExplorerGlobalData(globalData);
 savePolyExplorerCompanyData(companyData);
+writeDataIssueLog();
