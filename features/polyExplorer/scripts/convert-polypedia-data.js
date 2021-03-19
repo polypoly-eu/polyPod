@@ -273,7 +273,12 @@ Duplicate keys (merged):
 ${duplicateKeys.map((s) => listPrefix + s).join("\n")}
 
 Missing data recipients:
-${missingDataRecipientNames.map((s) => listPrefix + s).join("\n")}
+${Object.entries(missingDataRecipients)
+    .map(
+        ([k, v]) =>
+            listPrefix + "'" + k + "'" + " [mentioned by " + v.join(", ") + "]"
+    )
+    .join("\n")}
 
 Patched companies (modified):
 ${patchedCompaniesModified.map((s) => listPrefix + s).join("\n")}
