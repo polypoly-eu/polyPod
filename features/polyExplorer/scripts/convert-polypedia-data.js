@@ -269,7 +269,7 @@ ${Object.entries(renamedEntities)
     .map((k, v) => listPrefix + k + ": " + v)
     .join("\n")}
 
-Duplicate keys:
+Duplicate keys (merged):
 ${duplicateKeys.map((s) => listPrefix + s).join("\n")}
 
 Missing data recipients:
