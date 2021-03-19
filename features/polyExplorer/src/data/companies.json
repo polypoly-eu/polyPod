@@ -991,6 +991,11 @@
             "source": null
         },
         "category": null,
+        "correlatingDataTypes": [
+            "dpv:OfficialID",
+            "dpv:TelephoneNumber",
+            "dpv:Transaction"
+        ],
         "jurisdictionsShared": {
             "children": [
                 "EU-GDPR",
