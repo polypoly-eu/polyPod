@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import { createRequire } from "module";
 import { default as patchData } from "./patch-data.js";
-import { default as highlights } from "./highlights.js";
 
 const require = createRequire(import.meta.url);
 
@@ -99,7 +98,6 @@ function parseEntity(entityData) {
             : null,
         description: parseDescription(legalEntityData),
         category: null,
-        correlatingDataTypes: highlights[legalName]?.correlatingDataTypes,
     };
 }
 

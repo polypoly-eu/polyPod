@@ -13,6 +13,8 @@ import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 
+import highlights from "../../data/highlights.js";
+
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
 
@@ -282,7 +284,9 @@ const DataExplorationScreen = ({
                     <DataTypeBubbleCorrelation
                         data={company.dataTypesShared}
                         correlationColor="#FB8A89"
-                        typeBundle={company.correlatingDataTypes}
+                        typeBundle={
+                            highlights[company.name].correlatingDataTypes
+                        }
                         width="360"
                         height="360"
                     />

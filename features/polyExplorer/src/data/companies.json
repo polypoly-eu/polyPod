@@ -991,11 +991,6 @@
             "source": null
         },
         "category": null,
-        "correlatingDataTypes": [
-            "dpv:OfficialID",
-            "dpv:TelephoneNumber",
-            "dpv:Transaction"
-        ],
         "jurisdictionsShared": {
             "children": [
                 "EU-GDPR",
@@ -3156,11 +3151,6 @@
             "source": "Wikipedia"
         },
         "category": "Banken & Finanzen",
-        "correlatingDataTypes": [
-            "dpv:BrowsingReferral",
-            "dpv:BrowserFingerprint",
-            "dpv:IPAddress"
-        ],
         "jurisdictionsShared": {
             "children": [
                 "EU-GDPR",
@@ -4941,11 +4931,6 @@
             "source": "Wikipedia"
         },
         "category": "EDV & IT",
-        "correlatingDataTypes": [
-            "dpv:VoiceCommunicationRecording",
-            "dpv:PhysicalAddress",
-            "dpv:MentalHealth"
-        ],
         "jurisdictionsShared": {
             "children": [
                 "EU-GDPR",
@@ -5915,11 +5900,6 @@
             "source": "Wikipedia"
         },
         "category": null,
-        "correlatingDataTypes": [
-            "dpv:IPAddress",
-            "dpv:GPSCoordinate",
-            "dpv:Interest"
-        ],
         "jurisdictionsShared": {
             "children": [
                 "EU-GDPR",
@@ -8015,12 +7995,7 @@
             },
             "source": "Wikipedia"
         },
-        "category": null,
-        "correlatingDataTypes": [
-            "dpv:GeneralReputation",
-            "dpv:TelephoneNumber",
-            "dpv:GPSCoordinate"
-        ]
+        "category": null
     },
     {
         "name": "Mobile.de GmbH",
@@ -9436,11 +9411,6 @@
             "source": "Wikipedia"
         },
         "category": "Handel & Konsum",
-        "correlatingDataTypes": [
-            "dpv:CreditRecord",
-            "dpv:Language",
-            "dpv:BrowsingBehavior"
-        ],
         "jurisdictionsShared": {
             "children": [
                 "EU-GDPR"
@@ -12013,12 +11983,7 @@
             },
             "source": "Wikipedia"
         },
-        "category": null,
-        "correlatingDataTypes": [
-            "dpv:TelephoneNumber",
-            "dpv:LifeHistory",
-            "dpv:Biometric"
-        ]
+        "category": null
     },
     {
         "name": "Deliveroo Germany GmbH",
