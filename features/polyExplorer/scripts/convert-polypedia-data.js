@@ -256,7 +256,7 @@ function writeDataIssueLog() {
     } = dataIssueLog;
     const missingDataRecipientNames = Object.keys(missingDataRecipients);
     const listPrefix = "- ";
-    const contents = `
+    const contents = `\
 Renamed entities:              ${Object.keys(renamedEntities).length}
 Source hard coded:             ${sourceHardCoded ? "Yes" : "No"}
 Duplicate keys (merged):       ${duplicateKeys.length}
