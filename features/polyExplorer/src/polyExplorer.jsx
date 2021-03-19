@@ -15,6 +15,7 @@ import DataTypesInfoScreen from "./screens/explorationInfo/dataTypesInfo/dataTyp
 import CategoryInfoScreen from "./screens/explorationInfo/categoryInfo/categoryInfo.jsx";
 import CorrelationInfoScreen from "./screens/explorationInfo/correlationInfo/correlationInfo.jsx";
 import PurposeInfoScreen from "./screens/explorationInfo/purposeInfo/purposeInfo.jsx";
+import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/companiesInfo.jsx";
 import FeaturedCompanyHelpScreen from "./screens/featuredCompanyHelp/featuredCompanyHelp.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 import ConstructionPopup from "./components/constructionPopup/constructionPopup.jsx";
@@ -60,8 +61,40 @@ const PolyExplorer = () => {
     const [activeFilters, setActiveFilters] = useState(emptyFilters());
     const [firstRun, setFirstRun] = useState(false);
     const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
+    const initialDataExplorationSection = "construction";
     const [dataExploringSection, setDataExploringSection] = useState(
-        "construction"
+        initialDataExplorationSection
+    );
+
+    //Get the max values of all featured companies
+    function calculateAverage(values) {
+        const average = values.reduce((a, b) => a + b, 0) / values.length;
+        return Math.round(10 * average) / 10;
+    }
+    const counts = {
+        dataTypes: featuredCompanyData.map(
+            (company) => company.dataTypesShared.length
+        ),
+        purposes: featuredCompanyData.map(
+            (company) => company.dataSharingPurposes.length
+        ),
+        companies: featuredCompanyData.map(
+            (company) => company.dataRecipients.length
+        ),
+        jurisdictions: featuredCompanyData.map((company) =>
+            company.jurisdictionsShared
+                ? company.jurisdictionsShared.children.length
+                : 0
+        ),
+    };
+    const featuredCompanyMaxValues = Object.fromEntries(
+        Object.entries(counts).map(([key, value]) => [key, Math.max(...value)])
+    );
+    const featuredCompanyAverageValues = Object.fromEntries(
+        Object.entries(counts).map(([key, value]) => [
+            key,
+            calculateAverage(value),
+        ])
     );
 
     const handleActiveScreenChange = (screen, companyName) => {
@@ -97,23 +130,29 @@ const PolyExplorer = () => {
         handleActiveScreenChange("info");
     }
 
-    const handleResetDataExploration = () => {
-        setDataExploringSection("dataTypes");
-    };
+    function handleBack() {
+        if (activeScreen === "dataRegionInfo") {
+            handleActiveScreenChange("companyInfo");
+            return;
+        }
+
+        if (/^exploration.*Info$/.test(activeScreen)) {
+            handleActiveScreenChange("dataExploration");
+            return;
+        }
+
+        if (activeScreen === "dataExploration")
+            setDataExploringSection(initialDataExplorationSection);
+
+        handleActiveScreenChange("main");
+    }
 
     function updatePodNavigation() {
         podNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
         podNav.actions = {
             info: () => handleActiveScreenChange("info"),
             search: () => handleActiveScreenChange("companySearch"),
-            back: () => {
-                if (activeScreen === "dataRegionInfo") {
-                    handleActiveScreenChange("companyInfo");
-                    return;
-                }
-
-                handleActiveScreenChange("main");
-            },
+            back: handleBack,
         };
         podNav.setActiveActions(
             activeScreen === "main" ? ["info", "search"] : ["back"]
@@ -138,7 +177,8 @@ const PolyExplorer = () => {
                 }
                 activeFilters={activeFilters}
                 onRemoveFilter={handleRemoveFilter}
-                onResetDataExploration={handleResetDataExploration}
+                featuredCompanyMaxValues={featuredCompanyMaxValues}
+                featuredCompanyAverageValues={featuredCompanyAverageValues}
             />
         ),
         dataExploration: (
@@ -169,6 +209,16 @@ const PolyExplorer = () => {
                         "purposes"
                     )
                 }
+                openCompaniesInfo={() =>
+                    handleExplorationInfoScreen(
+                        "explorationCompaniesInfo",
+                        "companies"
+                    )
+                }
+                maxCompanies={featuredCompanyMaxValues.companies}
+                dataRecipients={companyData.filter(
+                    (c) => selectedCompany?.dataRecipients?.indexOf(c.name) >= 0
+                )}
             />
         ),
         companyInfo: (
@@ -204,24 +254,19 @@ const PolyExplorer = () => {
         info: <InfoScreen onClose={podNav.actions.back} />,
         dataRegionInfo: <DataRegionInfoScreen onClose={podNav.actions.back} />,
         explorationDataTypesInfo: (
-            <DataTypesInfoScreen
-                onClose={() => handleActiveScreenChange("dataExploration")}
-            />
+            <DataTypesInfoScreen onClose={podNav.actions.back} />
         ),
         explorationCategoryInfo: (
-            <CategoryInfoScreen
-                onClose={() => handleActiveScreenChange("dataExploration")}
-            />
+            <CategoryInfoScreen onClose={podNav.actions.back} />
         ),
         explorationCorrelationInfo: (
-            <CorrelationInfoScreen
-                onClose={() => handleActiveScreenChange("dataExploration")}
-            />
+            <CorrelationInfoScreen onClose={podNav.actions.back} />
         ),
         explorationPurposeInfo: (
-            <PurposeInfoScreen
-                onClose={() => handleActiveScreenChange("dataExploration")}
-            />
+            <PurposeInfoScreen onClose={podNav.actions.back} />
+        ),
+        explorationCompaniesInfo: (
+            <CompaniesInfoScreen onClose={podNav.actions.back} />
         ),
     };
 

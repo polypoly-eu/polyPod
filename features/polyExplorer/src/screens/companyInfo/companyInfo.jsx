@@ -10,6 +10,17 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
 
+    const cityImageMap = {
+        München: "munich",
+        "Mountain View": "mountainview",
+        Wiesbaden: "wiesbaden",
+        Berlin: "berlin",
+        Dubai: "dubai",
+        Luxembourg: "luxembourg",
+        "WILMINGTON, New Castle": "wilmington",
+        Cupertino: "cupertino",
+    };
+
     const locationTooltip = (
         <div className="location-tooltip">
             <button onClick={onOpenRegionInfo}>
@@ -50,6 +61,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                                     <img
                                         src="./images/location-pin.svg"
                                         alt="location-pin"
+                                        className="pin"
                                     />
                                     <p className={`location-text`}>
                                         {company.location.city},{" "}
@@ -108,22 +120,21 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         {
             tabName: "location",
             content: (
-                <div>
+                <div className="featured-map">
                     {company.jurisdiction ? (
-                        <div
-                            className={`location-block ${company.jurisdiction}`}
-                        >
+                        <div className={`location-block`}>
                             {company.location ? (
                                 <div>
                                     <img
+                                        src={`./images/maps/cities/${
+                                            cityImageMap[company.location.city]
+                                        }.svg`}
+                                    />
+                                    <img
                                         src="./images/location-pin.svg"
                                         alt="location-pin"
+                                        className="featured-pin"
                                     />
-                                    <p className={`location-text`}>
-                                        {company.location.city},{" "}
-                                        {company.location.countryCode},{" "}
-                                        {company.jurisdiction}
-                                    </p>
                                 </div>
                             ) : (
                                 <div className="no-location">
@@ -191,7 +202,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                     className="scroll-container"
                     onScroll={(e) => handleInfoTextScrollBottom(e)}
                 >
-                    <div className="short-info">
+                    <div className="company-short-info">
                         <CompanyShortInfo company={company} />
                     </div>
                     <div className="tab-button-container">
@@ -251,7 +262,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                         dangerouslySetInnerHTML={{
                             __html:
                                 (
-                                    (company.description.value || {})[
+                                    (company.description?.value || {})[
                                         i18n.language
                                     ] || ""
                                 ).replace("\n", "<br/><br/>") ||
@@ -261,7 +272,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                         }}
                     ></p>
 
-                    {company.description.source ? (
+                    {company.description?.source ? (
                         <p className="company-info-source">
                             {i18n.t("companyInfoScreen:source")}:{" "}
                             {company.description.source}

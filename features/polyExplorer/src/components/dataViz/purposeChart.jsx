@@ -17,11 +17,6 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
 
     const fillScale = (highest, multiple) => {
         const scale = [];
-        console.log(
-            `highest: ${highest}, multiple:${multiple}; theother thing: ${
-                Math.ceil(highest / multiple) * multiple
-            }`
-        );
         for (
             let i = multiple;
             i <= Math.ceil(highest / multiple) * multiple;

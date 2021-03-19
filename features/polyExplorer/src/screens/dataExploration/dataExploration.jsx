@@ -8,6 +8,7 @@ import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCateg
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
 import PurposeChart from "../../components/dataViz/purposeChart.jsx";
 import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
+import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
@@ -22,6 +23,9 @@ const DataExplorationScreen = ({
     openCategoryInfo,
     openCorrelationInfo,
     openPurposeInfo,
+    openCompaniesInfo,
+    maxCompanies,
+    dataRecipients,
 }) => {
     //Methods
     const getCategories = () => {
@@ -32,6 +36,39 @@ const DataExplorationScreen = ({
                 : categories.push(e.Polypoly_Parent_Category);
         });
         return categories;
+    };
+
+    const getJurisdictionTreeFormat = () => {
+        const jurisdictionTreeFormatData = { name: "World", children: [] };
+        dataRecipients.forEach((e) => {
+            let jurisdiction = jurisdictionTreeFormatData.children.find(
+                (j) => j.name === e.jurisdiction
+            );
+            if (jurisdiction !== undefined) {
+                let country = jurisdiction.children.find(
+                    (c) => c.name === e.location.countryCode
+                );
+                if (country !== undefined) country.value++;
+                else
+                    jurisdiction.children.push({
+                        name: e.location.countryCode,
+                        value: 1,
+                        category: e.jurisdiction,
+                    });
+            } else {
+                jurisdictionTreeFormatData.children.push({
+                    name: e.jurisdiction,
+                    children: [
+                        {
+                            name: e.location.countryCode,
+                            value: 1,
+                            category: e.jurisdiction,
+                        },
+                    ],
+                });
+            }
+        });
+        return jurisdictionTreeFormatData;
     };
 
     const getScreens = () => {
@@ -48,6 +85,9 @@ const DataExplorationScreen = ({
         screens.push("dataTypesCorrelation");
         screens.push("purposes");
         screens.push("companies");
+        screens.push("companiesExplanation");
+        screens.push("companiesIndustries");
+        screens.push("jurisdictions");
         return screens;
     };
 
@@ -73,18 +113,12 @@ const DataExplorationScreen = ({
     const [activeIndex, setActiveIndex] = useState(
         screens.indexOf(startSection)
     );
+    const [showPurposePopup, setShowPurposePopup] = useState(null);
 
     //Constants
     const activeScreen = screens[activeIndex];
     const highestValueObject = getHighestValueObject();
-
-    const [showPurposePopup, setShowPurposePopup] = useState(null);
-
-    //To go soon
-    const correlationTypeBundle = [];
-    for (let i = 0; i < 9; i += 3) {
-        correlationTypeBundle.push(company.dataTypesShared[i]["dpv:Category"]);
-    }
+    const jurisdictionTreeFormatData = getJurisdictionTreeFormat();
 
     const progressBar = (
         <div className="progress-bar">
@@ -110,7 +144,7 @@ const DataExplorationScreen = ({
                 className={`progress-bar-part jurisdictions ${
                     activeScreen.startsWith("jurisdictions") ? "active" : ""
                 }`}
-                //onClick={() => goToSlide(screens.indexOf("jurisdictionsStart"))}
+                onClick={() => goToSlide(screens.indexOf("jurisdictions"))}
             ></div>
         </div>
     );
@@ -129,7 +163,7 @@ const DataExplorationScreen = ({
                 <div className="static-content">
                     <h1>
                         {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
-                        <span className="highlight">
+                        <span className="highlight-data-type">
                             {company.dataTypesShared.length}{" "}
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
@@ -161,7 +195,7 @@ const DataExplorationScreen = ({
                 <div className="static-content">
                     <h1>
                         {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
-                        <span className="highlight">
+                        <span className="highlight-data-type">
                             {company.dataTypesShared.length}{" "}
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
@@ -216,7 +250,7 @@ const DataExplorationScreen = ({
         else if (activeScreen === "dataTypesUnderTextNoNumbers")
             return (
                 <div className="static-content">
-                    <h2 className="highlight">
+                    <h2 className="highlight-data-type">
                         {i18n.t(
                             "dataExplorationScreen:dataTypes.heading.correlations"
                         )}
@@ -240,7 +274,7 @@ const DataExplorationScreen = ({
         else if (activeScreen === "dataTypesCorrelation")
             return (
                 <div className="static-content">
-                    <h2 className="highlight">
+                    <h2 className="highlight-data-type">
                         {i18n.t(
                             "dataExplorationScreen:dataTypes.heading.correlations"
                         )}
@@ -263,9 +297,16 @@ const DataExplorationScreen = ({
                     {button}
                 </div>
             );
-        else if (activeScreen === "purposes") {
+        else if (activeScreen === "purposes")
             return (
                 <div className="static-content">
+                    <h1>
+                        {i18n.t("common:sharing.prefix.purposes")}{" "}
+                        <span className="highlight-purpose">
+                            {company.dataSharingPurposes.length}{" "}
+                            {i18n.t("common:sharing.purposes")}
+                        </span>
+                    </h1>
                     <PurposeChart
                         purposes={company.dataSharingPurposes}
                         openPopup={setShowPurposePopup}
@@ -274,14 +315,85 @@ const DataExplorationScreen = ({
                     {button}
                 </div>
             );
-        } else if (activeScreen === "companies")
+        else if (activeScreen === "companies")
             return (
                 <div className="static-content">
+                    <h1>
+                        {i18n.t("common:sharing.prefix.companies")}{" "}
+                        <span className="highlight-companies">
+                            {dataRecipients.length}{" "}
+                            {i18n.t("common:sharing.companies")}
+                        </span>
+                    </h1>
                     <CompanyBubbles
-                        data={company.dataRecipients}
-                        width="200"
-                        height="200"
+                        view="flat"
+                        data={dataRecipients}
+                        width="360"
+                        height="360"
                         bubbleColor="#7EE8A2"
+                        maxCompanies={maxCompanies}
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <DataSharingLegend
+                        onClick={() => {
+                            openCompaniesInfo();
+                        }}
+                    />
+                    {button}
+                </div>
+            );
+        else if (activeScreen === "companiesExplanation")
+            return (
+                <div className="static-content">
+                    <h1>
+                        {i18n.t("common:sharing.prefix.companies")}{" "}
+                        <span className="highlight-companies">
+                            {dataRecipients.length}{" "}
+                            {i18n.t("common:sharing.companies")}
+                        </span>
+                    </h1>
+                    <CompanyBubbles
+                        view="flat"
+                        data={dataRecipients}
+                        width="360"
+                        height="360"
+                        opacity={0.1}
+                        bubbleColor="#7EE8A2"
+                        maxCompanies={maxCompanies}
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <div className="data-sharing-legend-fill"></div>
+                    {filler}
+                    {button}
+                </div>
+            );
+        else if (activeScreen === "companiesIndustries")
+            return (
+                <div className="static-content">
+                    <h2 className="highlight-companies">
+                        {i18n.t(
+                            "dataExplorationScreen:companies.heading.industries"
+                        )}
+                    </h2>
+                    <CompanyBubbles
+                        view="industries"
+                        data={dataRecipients}
+                        width="360"
+                        height="360"
+                        bubbleColor="#7EE8A2"
+                        maxCompanies={maxCompanies}
+                    />
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <DataSharingLegend
+                        onClick={() => {
+                            openCompaniesInfo();
+                        }}
                     />
                     {button}
                 </div>
@@ -296,6 +408,27 @@ const DataExplorationScreen = ({
                         <img src="./images/construction.gif" />
                     </div>
                     {button}
+                </div>
+            );
+        else if (activeScreen === "jurisdictions")
+            return (
+                <div className="static-content">
+                    <h1>
+                        {i18n.t("common:sharing.prefix.jurisdictions")}{" "}
+                        {jurisdictionTreeFormatData.children.length}{" "}
+                        {i18n.t("common:sharing.jurisdictions")}
+                    </h1>
+                    <div className="jurisdiction-tree">
+                        <JurisdictionTree
+                            data={getJurisdictionTreeFormat()}
+                            width="300"
+                            height="250"
+                            fontSize="16"
+                        />
+                    </div>
+                    <p className="source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
                 </div>
             );
     };
@@ -372,6 +505,19 @@ const DataExplorationScreen = ({
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}
                             className="purpose-slide"
+                        ></SwiperSlide>
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
+                        ></SwiperSlide>
+                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                            <p className="on-bubble">
+                                {i18n.t(
+                                    "dataExplorationScreen:companies.text.intro"
+                                )}
+                            </p>
+                        </SwiperSlide>
+                        <SwiperSlide
+                            onClick={() => swiper.slideNext()}
                         ></SwiperSlide>
                         <SwiperSlide
                             onClick={() => swiper.slideNext()}

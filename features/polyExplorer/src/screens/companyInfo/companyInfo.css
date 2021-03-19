@@ -39,7 +39,7 @@
 }
 
 .company-info-screen .company-short-info {
-    margin: 24px auto 4px auto;
+    margin: 6px 8px 4px 8px;
 }
 
 .tab-content-container {
@@ -50,7 +50,13 @@
     max-width: 412px;
 }
 
+.tab-content-container .featured-map {
+    width: 320px;
+    margin: 0 auto;
+}
+
 .tab-content-container .location-block {
+    position: relative;
     height: 177px;
 }
 
@@ -78,12 +84,22 @@
     background-color: #a9b6c6;
 }
 
-.location-block img {
+.location-block .pin {
     display: block;
     width: 36px;
     height: 36px;
     margin: 0 auto;
     transform: translateY(67px);
+}
+
+.location-block .featured-pin {
+    display: block;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .location-block p {

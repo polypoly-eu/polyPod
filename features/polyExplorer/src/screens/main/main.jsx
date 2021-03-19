@@ -18,7 +18,8 @@ const MainScreen = ({
     onFeaturedCompanyTabInitialSlideChange,
     activeFilters,
     onRemoveFilter,
-    onResetDataExploration,
+    featuredCompanyMaxValues,
+    featuredCompanyAverageValues,
 }) => {
     const handleShowFeatured = () => onShowFeaturedChange(true);
     const handleShowCompanyList = () => onShowFeaturedChange(false);
@@ -27,7 +28,6 @@ const MainScreen = ({
         onFeaturedCompanyTabInitialSlideChange(newInitialSlide);
     };
 
-    onResetDataExploration();
     return (
         <Screen className="main-screen" topShadow={false}>
             <div className="nav-button-container">
@@ -56,6 +56,8 @@ const MainScreen = ({
                     onActiveScreenChange={onActiveScreenChange}
                     initialSlide={featuredCompanyTabInitialSlide}
                     onUpdateInitialSlide={handleUpdateInitialSlide}
+                    maxValues={featuredCompanyMaxValues}
+                    averageValues={featuredCompanyAverageValues}
                 />
             ) : (
                 <CompanyList

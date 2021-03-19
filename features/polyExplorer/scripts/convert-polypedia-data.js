@@ -1,7 +1,6 @@
 import fs from "fs";
 import { createRequire } from "module";
-import { default as fallbackDescriptions } from "./descriptions.js";
-import { default as categories } from "./categories.js";
+import { default as patchData } from "./patch-data.js";
 import { default as highlights } from "./highlights.js";
 
 const require = createRequire(import.meta.url);
@@ -28,18 +27,9 @@ function extractAnnualRevenues(entry) {
 }
 
 function parseDescription(legalEntityData) {
-    const key = entityKey(legalEntityData.identifiers.legal_name.value);
     const editorialData =
         ((legalEntityData.editorial_content || {}).editorials || [])[0] || {};
     const description = editorialData.body_i18n || {};
-    for (let languageCode of Object.keys(fallbackDescriptions))
-        if (!description[languageCode]) {
-            const fallbackDescription = (Object.entries(
-                fallbackDescriptions[languageCode]
-            ).find(([companyName]) => entityKey(companyName) === key) || [])[1];
-            if (fallbackDescription)
-                description[languageCode] = fallbackDescription;
-        }
     const descriptionEmpty = Object.values(description).every(
         (value) => value === null
     );
@@ -52,28 +42,18 @@ function parseDescription(legalEntityData) {
     };
 }
 
-function parseCategory(legalName) {
-    const categoryStringKey = Object.keys(categories.de).find(
-        (e) => entityKey(e) === entityKey(legalName)
-    );
-    return categories.de[categoryStringKey] || null;
-}
-
 function fixEntityData(entityData) {
     if (entityData.legal_entity.identifiers.common_name === "Schufa")
         entityData.legal_entity.identifiers.legal_name.value =
             "SCHUFA Holding AG";
 }
 
-function parseEntity(entityData, globalData) {
+function parseEntity(entityData) {
     fixEntityData(entityData);
 
     const legalEntityData = entityData.legal_entity;
     const legalName = legalEntityData.identifiers.legal_name.value;
     if (!legalName) return null;
-
-    const countryCode =
-        legalEntityData.basic_info.registered_address.value.country;
 
     return {
         name: legalName,
@@ -82,10 +62,11 @@ function parseEntity(entityData, globalData) {
             entityData.derived_purpose_info &&
             entityData.derived_category_info
         ),
-        jurisdiction: (globalData.countries[countryCode] || {}).dataRegion,
+        jurisdiction: null,
         location: {
             city: legalEntityData.basic_info.registered_address.value.city,
-            countryCode,
+            countryCode:
+                legalEntityData.basic_info.registered_address.value.country,
         },
         annualRevenues: extractAnnualRevenues(entityData),
         dataRecipients: entityData.data_recipients || null,
@@ -100,7 +81,7 @@ function parseEntity(entityData, globalData) {
               )
             : null,
         description: parseDescription(legalEntityData),
-        category: parseCategory(legalName),
+        category: null,
         correlatingDataTypes: highlights[legalName]?.correlatingDataTypes,
     };
 }
@@ -118,6 +99,19 @@ function mergeEntities(oldEntity, newEntity) {
     return oldEntity;
 }
 
+function enrichWithPatchData(entityMap) {
+    for (let [name, entity] of Object.entries(patchData)) {
+        const key = entityKey(name);
+        entityMap[key] = mergeEntities(entityMap[key], entity);
+    }
+}
+
+function enrichWithGlobalData(entityMap, globalData) {
+    for (let entity of Object.values(entityMap))
+        entity.jurisdiction =
+            globalData.countries[entity.location?.countryCode]?.dataRegion;
+}
+
 function enrichWithJurisdictionsShared(entityMap) {
     for (let entity of Object.values(entityMap)) {
         for (let dataRecipient of entity.dataRecipients || []) {
@@ -125,6 +119,7 @@ function enrichWithJurisdictionsShared(entityMap) {
             if (!(recipientKey in entityMap)) continue;
 
             const recipientJurisdiction = entityMap[recipientKey].jurisdiction;
+            if (!recipientJurisdiction) continue;
             entity.jurisdictionsShared = entity.jurisdictionsShared || {};
             entity.jurisdictionsShared.children =
                 entity.jurisdictionsShared.children || [];
@@ -138,17 +133,46 @@ function enrichWithJurisdictionsShared(entityMap) {
     }
 }
 
+const isValidEntity = (entity) =>
+    ["name", "location"].every(
+        (requiredField) => !isEmpty(entity[requiredField])
+    );
+
+function removeInvalidEntities(entityMap) {
+    for (let [key, entity] of Object.entries(entityMap)) {
+        if (!isValidEntity(entity)) {
+            delete entityMap[key];
+            continue;
+        }
+        const { dataRecipients } = entity;
+        if (!dataRecipients) continue;
+        entity.dataRecipients = dataRecipients.filter((recipientName) => {
+            const recipientKey = entityKey(recipientName);
+            const keep =
+                recipientKey in entityMap &&
+                "category" in entityMap[recipientKey];
+            if (!keep)
+                console.error(`Removing data recipient '${recipientName}' from \
+'${entity.name}' - insufficient entity data available`);
+            return keep;
+        });
+    }
+}
+
 function parsePolyPediaCompanyData(globalData) {
     const entityMap = {};
     polyPediaCompanyData.forEach((entityData) => {
-        const entity = parseEntity(entityData, globalData);
+        const entity = parseEntity(entityData);
         if (!entity) return;
 
         const key = entityKey(entity.name);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     });
 
+    enrichWithPatchData(entityMap);
+    enrichWithGlobalData(entityMap, globalData);
     enrichWithJurisdictionsShared(entityMap);
+    removeInvalidEntities(entityMap);
     return Object.values(entityMap);
 }
 

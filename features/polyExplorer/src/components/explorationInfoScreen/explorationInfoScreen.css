@@ -1,0 +1,50 @@
+.exploration-info {
+    width: 100%;
+    max-width: 412px;
+    margin: 0 auto;
+    padding: 30px 0;
+    overflow: hidden scroll;
+}
+
+.exploration-info * {
+    color: #0f1938;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+}
+
+.exploration-info>* {
+    padding: 0 30px;
+}
+
+.exploration-info h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 24px;
+    font-family: "Jost Medium";
+    font-weight: 500;
+}
+
+.exploration-info p {
+    font-size: 16px;
+    font-family: "Jost";
+    font-weight: 400;
+}
+
+.exploration-info img,
+.exploration-info button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.exploration-info button {
+    width: 260px;
+    height: 48px;
+    margin: 30px auto;
+    border-radius: 4px;
+    background: #0f1938;
+    color: white;
+    font-size: 18px;
+    font-family: "Jost Medium";
+    font-weight: 500;
+}

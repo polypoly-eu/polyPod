@@ -19,10 +19,13 @@ function initSwiper() {
 }
 
 function initLearnMoreButton() {
-    const button = document.getElementById("learn-more");
-    button.addEventListener("click", function () {
-        podNav.openUrl(this.dataset.target);
-    });
+    // In loop mode, Swiper creates a duplicate of the slide with the 'learn
+    // more' button, so we need to add the click handler to all.
+    for (let button of document.getElementsByClassName("learn-more")) {
+        button.addEventListener("click", function () {
+            podNav.openUrl(this.dataset.target);
+        });
+    }
 }
 
 function insertStrings() {

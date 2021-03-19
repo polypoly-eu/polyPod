@@ -3,11 +3,11 @@ import React from "react";
 import i18n from "../../../i18n.js";
 import ExplorationInfoScreen from "../../../components/explorationInfoScreen/explorationInfoScreen.jsx";
 
-const CorrelationInfo = ({ onClose }) => {
+const CompaniesInfo = ({ onClose }) => {
     return (
         <ExplorationInfoScreen
-            className="correlation-info"
-            headline={i18n.t("explorationCorrelationInfoScreen:headline")}
+            className="companies-info"
+            headline={i18n.t("explorationCompaniesInfoScreen:headline")}
             onClose={onClose}
         >
             <p>Dieser Bereich ist noch nicht fertig.</p>
@@ -16,4 +16,4 @@ const CorrelationInfo = ({ onClose }) => {
     );
 };
 
-export default CorrelationInfo;
+export default CompaniesInfo;

@@ -1150,7 +1150,6 @@
             }
         ],
         "dataRecipients": [
-            "",
             "AWIN AG",
             "Alphabet Inc.",
             "EBID Service AG",
@@ -1158,7 +1157,6 @@
             "Google Ireland Limited",
             "Microsoft Corporation",
             "Outbrain Inc.",
-            "Schufa",
             "UserCentrics GmbH",
             "financeAds International GmbH"
         ],
@@ -2277,21 +2275,17 @@
         },
         "annualRevenues": [],
         "dataRecipients": [
-            "",
             "Accenture",
             "American Heart Association",
             "Cisco",
             "Deloitte",
-            "Department of Medicine at Brigham and Women’s Hospital",
-            "Green Dot Bank",
             "Green Dot Corporation",
             "Harvard T H Chan School",
             "IBM",
             "NIEHS",
             "SAP",
             "SalesForce",
-            "University Of Michigan",
-            "d/b/a GoBank"
+            "University Of Michigan"
         ],
         "dataSharingPurposes": [
             {
@@ -3220,7 +3214,13 @@
             "dpv:VoiceCommunicationRecording",
             "dpv:PhysicalAddress",
             "dpv:MentalHealth"
-        ]
+        ],
+        "jurisdictionsShared": {
+            "children": [
+                "EU-GDPR",
+                "Five-Eyes"
+            ]
+        }
     },
     {
         "name": "navabi GmbH",
@@ -3544,27 +3544,13 @@
         },
         "annualRevenues": [],
         "dataRecipients": [
-            "",
-            "ADFORM A/S",
-            "AMAZON WEB SERVICES, INC.",
-            "Adition",
-            "Adobe Systems Software Ireland Limited",
             "Baqend GmbH",
             "Bosch Service Solutions GmbH",
-            "Criteo SA",
-            "FACEBOOK IRELAND LIMITED",
             "Google Ireland Limited",
             "Google LLC",
-            "IDEOMEDIA SRL",
-            "INTESYS SRL",
-            "LINKEDIN CORPORATION",
-            "LongTail Ad Solutions, Inc.",
             "Nayoki GmbH",
             "Outbrain Inc.",
-            "PINTEREST EUROPE LIMITED",
-            "Sophus3 GmbH",
-            "ZENWESHARE",
-            "mediascale Gesellschaft für innovative Medienvermarktung mbH & Co. KG, Munich, Germany"
+            "Sophus3 GmbH"
         ],
         "dataSharingPurposes": [
             {
@@ -3962,7 +3948,8 @@
         ],
         "jurisdictionsShared": {
             "children": [
-                "EU-GDPR"
+                "EU-GDPR",
+                "Five-Eyes"
             ]
         }
     },
@@ -5024,34 +5011,7 @@
             "countryCode": "US"
         },
         "annualRevenues": [],
-        "dataRecipients": [
-            "",
-            "AdPushup Inc.",
-            "AddApptr",
-            "AdinPlay",
-            "Affinity Global Advertising Pvt. Ltd.",
-            "ClickioDQ&A",
-            "Engine Media",
-            "ExMarketPlace FZ LLC",
-            "Ezoic",
-            "Freestar",
-            "JW Player",
-            "MSO Digital GmbH & Co. KG",
-            "Marfeel",
-            "Mediavine",
-            "OCM Digital Media",
-            "OKO",
-            "Publift",
-            "SEM, SEO y Más",
-            "Total Media",
-            "Traffective",
-            "WOSO",
-            "WayToGrow",
-            "Yieldbird",
-            "YourBow",
-            "optAd360",
-            "video intelligence AG"
-        ],
+        "dataRecipients": [],
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:Advertising",
@@ -6463,84 +6423,10 @@
         },
         "annualRevenues": [],
         "dataRecipients": [
-            "",
-            "ADITION technologies AG",
-            "Adform",
             "Adjust GmbH",
-            "Adloox SA",
-            "Adobe Inc",
-            "Amazon",
-            "AppsFlyer",
-            "Audiens S.r.l.",
-            "BIDSWITCH GmbH",
-            "Bannerflow AB",
-            "BlueKai",
-            "Branch",
-            "CREATEJS",
-            "Cloudflare",
-            "DoubleVerify Inc.",
-            "Dynata LLC",
-            "Eulerian Technologies",
-            "Evidon",
             "Exactag GmbH",
-            "Facebook",
-            "Flashtalking, Inc.",
-            "Free Stream Media Corp. dba Samba TV",
-            "Freewheel",
-            "Google Advertising Products",
-            "Habu",
-            "IRI",
-            "Index Exchange, Inc.",
-            "Innovid Inc.",
-            "Integral Ad Science, Inc.",
-            "JSDelivr",
-            "Jivox Corporation",
-            "King",
-            "Kochava Inc.",
-            "LiveRamp, Inc.",
-            "Lucid Holdings, LLC",
-            "Lytics",
-            "MMI",
-            "Mapp Digital",
             "Meetrics GmbH",
-            "MoPub",
-            "Neodata Group srl",
-            "NeuStar, Inc.",
-            "Nielsen LLC",
-            "OpenX",
-            "Oracle Data Cloud",
-            "Oracle Data Cloud - Moat",
-            "PaperG, Inc. dba Thunder Industries",
-            "PubMatic, Inc.",
-            "RevJet",
-            "RhythmOne DBA Unruly Group Ltd",
-            "Salesforce.com, Inc.",
-            "Singular",
-            "Sirdata",
-            "Sizmek by Amazon",
-            "SpotX, Inc.",
-            "Stream Eye",
-            "Sublime",
-            "Taboola Europe Limited",
-            "Tapad, Inc.",
-            "Teads",
-            "Telaria SAS",
-            "The Kantar Group Limited",
-            "The Rubicon Project, Inc.",
-            "Threedium",
-            "Treasure Data",
-            "TripleLift, Inc.",
-            "TrustArc",
-            "Twitter",
-            "Verizon Media EMEA Limited",
-            "Weborama",
-            "White Ops, Inc.",
-            "Xandr, Inc.",
-            "[M]Platform",
-            "comScore, Inc.",
             "emetriq GmbH",
-            "jQuery",
-            "mParticle",
             "smartclip Europe GmbH",
             "zeotap GmbH"
         ],
@@ -7852,7 +7738,7 @@
             "value": null,
             "source": null
         },
-        "category": null
+        "category": "Werbung"
     },
     {
         "name": "Spotcap Global Services GmbH",
@@ -8146,20 +8032,7 @@
             "countryCode": "US"
         },
         "annualRevenues": [],
-        "dataRecipients": [
-            "",
-            "Apple",
-            "Facebook Technologies Ireland Limited",
-            "Facebook Technologies LLC",
-            "Facebook  Technologies Ireland  Limited",
-            "Facebook  Technologies, LLC",
-            "Google",
-            "Microsoft",
-            "Reddit Inc",
-            "Tealium",
-            "Twitter Inc",
-            "University College London"
-        ],
+        "dataRecipients": [],
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:AcademicResearch",
@@ -9372,5 +9245,148 @@
             "source": null
         },
         "category": "Marketing & Kommunikation"
+    },
+    {
+        "name": "Outbrain Inc.",
+        "category": "EDV & IT",
+        "location": {
+            "city": "New York",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "Microsoft Corporation",
+        "category": "EDV & IT",
+        "location": {
+            "city": "Redmond",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "Google Ireland Limited",
+        "category": "Internet & Multimedia",
+        "location": {
+            "city": "Dublin",
+            "countryCode": "IE"
+        },
+        "jurisdiction": "EU-GDPR"
+    },
+    {
+        "name": "Etracker GmbH",
+        "category": "Werbung",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        },
+        "jurisdiction": "EU-GDPR"
+    },
+    {
+        "name": "Accenture",
+        "category": "Consulting",
+        "location": {
+            "city": "Dublin",
+            "countryCode": "IE"
+        },
+        "jurisdiction": "EU-GDPR"
+    },
+    {
+        "name": "American Heart Association",
+        "category": "NGO",
+        "location": {
+            "city": "Chicago",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "Cisco",
+        "category": "EDV & IT",
+        "location": {
+            "city": "San Jose",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "Deloitte",
+        "category": "Consulting",
+        "location": {
+            "city": "London",
+            "countryCode": "UK"
+        }
+    },
+    {
+        "name": "Department of Medicine at Brigham and Women's Hospital",
+        "category": "Health",
+        "location": {
+            "city": "Boston",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "Green Dot Corporation",
+        "category": "Finance",
+        "location": {
+            "city": "Passadena",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "Harvard T H Chan School",
+        "category": "Science",
+        "location": {
+            "city": "Boston",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "IBM",
+        "category": "EDV & IT",
+        "location": {
+            "city": "Armonk",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "NIEHS",
+        "category": "Science",
+        "location": {
+            "city": "Durham",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "SAP",
+        "category": "EDV & IT",
+        "location": {
+            "city": "Walldorf",
+            "countryCode": "DE"
+        },
+        "jurisdiction": "EU-GDPR"
+    },
+    {
+        "name": "SalesForce",
+        "category": "EDV & IT",
+        "location": {
+            "city": "San Francisco",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
+    },
+    {
+        "name": "University Of Michigan",
+        "category": "Science",
+        "location": {
+            "city": "Ann Arbor",
+            "countryCode": "US"
+        },
+        "jurisdiction": "Five-Eyes"
     }
 ]
