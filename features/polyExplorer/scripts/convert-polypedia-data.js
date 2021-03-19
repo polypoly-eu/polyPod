@@ -11,6 +11,9 @@ const polyPediaCompanyData = require("../polypedia-data/data/3_integrated/polyEx
 const polyPediaGlobalData = require("../polypedia-data/data/3_integrated/polyExplorer/global.json");
 
 const dataIssueLog = {
+    renamedEntities: [],
+    sourceHardCoded: false,
+    duplicateKeys: [],
     missingDataRecipients: {},
     patchedCompaniesModified: [],
     patchedCompaniesNew: [],
@@ -43,6 +46,7 @@ function parseDescription(legalEntityData) {
     // We currently hard code "Wikipedia" as source, until we get the data from
     // polyPedia as well.
     const source = "Wikipedia";
+    dataIssueLog.sourceHardCoded = true;
     return {
         value: descriptionEmpty ? null : description,
         source: descriptionEmpty ? null : source,
@@ -50,9 +54,15 @@ function parseDescription(legalEntityData) {
 }
 
 function fixPolyPediaEntityData(entityData) {
-    if (entityData.legal_entity.identifiers.common_name === "Schufa")
-        entityData.legal_entity.identifiers.legal_name.value =
-            "SCHUFA Holding AG";
+    const commonNameMap = {
+        Schufa: "SCHUFA Holding AG",
+    };
+    const commonName = entityData.legal_entity.identifiers.common_name;
+    if (commonName in commonNameMap) {
+        const legalName = commonNameMap[commonName];
+        entityData.legal_entity.identifiers.legal_name.value = legalName;
+        dataIssueLog.renamedEntities[(commonName, legalName)];
+    }
 }
 
 function parseEntity(entityData) {
@@ -182,6 +192,7 @@ function parsePolyPediaCompanyData(globalData) {
         if (!entity) return;
 
         const key = entityKey(entity.name);
+        if (key in entityMap) dataIssueLog.duplicateKeys.push(key);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     });
 
@@ -236,6 +247,9 @@ function writeDataIssueLog() {
     )}.log`;
 
     const {
+        renamedEntities,
+        sourceHardCoded,
+        duplicateKeys,
         missingDataRecipients,
         patchedCompaniesModified,
         patchedCompaniesNew,
@@ -243,9 +257,20 @@ function writeDataIssueLog() {
     const missingDataRecipientNames = Object.keys(missingDataRecipients);
     const listPrefix = "- ";
     const contents = `
+Renamed entities:              ${Object.keys(renamedEntities).length}
+Source hard coded:             ${sourceHardCoded ? "Yes" : "No"}
+Duplicate keys (merged):       ${duplicateKeys.length}
 Missing data recipients:       ${missingDataRecipientNames.length}
 Patched existing companies:    ${patchedCompaniesModified.length}
 New companies from patch data: ${patchedCompaniesNew.length}
+
+Renamed entities:
+${Object.entries(renamedEntities)
+    .map((k, v) => listPrefix + k + ": " + v)
+    .join("\n")}
+
+Duplicate keys:
+${duplicateKeys.map((s) => listPrefix + s).join("\n")}
 
 Missing data recipients:
 ${listPrefix}${missingDataRecipientNames.join("\n" + listPrefix)}
