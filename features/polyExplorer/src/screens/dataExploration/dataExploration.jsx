@@ -450,13 +450,9 @@ const DataExplorationScreen = ({
                             setActiveIndex(swiper.activeIndex)
                         }
                     >
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
                                     "dataExplorationScreen:dataTypes.text.intro",
@@ -472,7 +468,7 @@ const DataExplorationScreen = ({
                                 )}
                             </p>
                         </SwiperSlide>
-                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                        <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
                                     "dataExplorationScreen:dataTypes.text.grouping"
@@ -492,36 +488,25 @@ const DataExplorationScreen = ({
                                 </h2>
                             </SwiperSlide>
                         ))}
-                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                        <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
                                     "dataExplorationScreen:dataTypes.text.correlations"
                                 )}
                             </p>
                         </SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                            className="purpose-slide"
-                        ></SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide className="purpose-slide"></SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
                                     "dataExplorationScreen:companies.text.intro"
                                 )}
                             </p>
                         </SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
                     </Swiper>
                 </div>
             </div>
