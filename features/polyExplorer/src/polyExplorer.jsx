@@ -216,8 +216,11 @@ const PolyExplorer = () => {
                     )
                 }
                 maxCompanies={featuredCompanyMaxValues.companies}
-                dataRecipients={companyData.filter(
-                    (c) => selectedCompany?.dataRecipients?.indexOf(c.name) >= 0
+                dataRecipients={selectedCompany?.dataRecipients?.map((name) =>
+                    companyData.find(
+                        (company) =>
+                            company.name.toLowerCase() === name.toLowerCase()
+                    )
                 )}
             />
         ),
