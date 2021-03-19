@@ -273,13 +273,13 @@ Duplicate keys:
 ${duplicateKeys.map((s) => listPrefix + s).join("\n")}
 
 Missing data recipients:
-${listPrefix}${missingDataRecipientNames.join("\n" + listPrefix)}
+${missingDataRecipientNames.map((s) => listPrefix + s).join("\n")}
 
 Patched companies (modified):
-${listPrefix}${patchedCompaniesModified.join("\n" + listPrefix)}
+${patchedCompaniesModified.map((s) => listPrefix + s).join("\n")}
 
 Patched companies (new):
-${listPrefix}${patchedCompaniesNew.join("\n" + listPrefix)}
+${patchedCompaniesNew.map((s) => listPrefix + s).join("\n")}
 `;
     fs.writeFileSync(logFile, contents);
 }
