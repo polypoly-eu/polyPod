@@ -90,5 +90,7 @@
     "purpose.name.i18nkey":
         "Translation_DE",
     "purpose.description.i18nkey":
-        "Explanation_DE"
+        "Explanation_DE",
+    "button.ok":
+        "OK"
 }
