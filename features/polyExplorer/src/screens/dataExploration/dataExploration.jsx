@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import i18n from "../../i18n.js";
@@ -153,6 +153,37 @@ const DataExplorationScreen = ({
         </div>
     );
 
+    function makeSwiperContentScrollable(element) {
+        let startScroll, touchStart;
+
+        element.addEventListener(
+            "touchstart",
+            function (event) {
+                startScroll = element.scrollTop;
+                touchStart = event.targetTouches[0].pageY;
+            },
+            true
+        );
+
+        element.addEventListener(
+            "touchmove",
+            function (event) {
+                const scrollDiff = element.scrollHeight - element.offsetHeight;
+                if (scrollDiff <= 0) return;
+
+                const touchCurrent = event.targetTouches[0].pageY;
+                const touchesDiff = touchCurrent - touchStart;
+                const topToBottom = touchesDiff < 0 && startScroll === 0;
+                const bottomToTop =
+                    touchesDiff > 0 && startScroll === scrollDiff;
+                const middle = startScroll > 0 && startScroll < scrollDiff;
+                if (topToBottom || bottomToTop || middle)
+                    event.stopPropagation();
+            },
+            true
+        );
+    }
+
     const getStaticContent = () => {
         const button = (
             <button
@@ -306,18 +337,7 @@ const DataExplorationScreen = ({
         else if (activeScreen === "purposes")
             return (
                 <div className="static-content">
-                    <h1>
-                        {i18n.t("common:sharing.prefix.purposes")}{" "}
-                        <span className="highlight-purpose">
-                            {company.dataSharingPurposes.length}{" "}
-                            {i18n.t("common:sharing.purposes")}
-                        </span>
-                    </h1>
-                    <PurposeChart
-                        purposes={company.dataSharingPurposes}
-                        openPopup={setShowPurposePopup}
-                        openPurposeInfo={openPurposeInfo}
-                    />
+                    {filler}
                     {button}
                 </div>
             );
@@ -439,6 +459,11 @@ const DataExplorationScreen = ({
             );
     };
 
+    useEffect(() => {
+        const scrollable = document.querySelector(".purpose-content .bars");
+        makeSwiperContentScrollable(scrollable);
+    });
+
     return (
         <Screen className="data-exploration">
             <div className="company-short-info-container">
@@ -502,7 +527,22 @@ const DataExplorationScreen = ({
                             </p>
                         </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
-                        <SwiperSlide className="purpose-slide"></SwiperSlide>
+                        <SwiperSlide>
+                            <div className="purpose-content">
+                                <h1>
+                                    {i18n.t("common:sharing.prefix.purposes")}{" "}
+                                    <span className="highlight-purpose">
+                                        {company.dataSharingPurposes.length}{" "}
+                                        {i18n.t("common:sharing.purposes")}
+                                    </span>
+                                </h1>
+                                <PurposeChart
+                                    purposes={company.dataSharingPurposes}
+                                    openPopup={setShowPurposePopup}
+                                    openPurposeInfo={openPurposeInfo}
+                                />
+                            </div>
+                        </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide>
                             <p className="on-bubble">
