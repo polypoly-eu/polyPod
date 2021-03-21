@@ -117,7 +117,7 @@ const DataExplorationScreen = ({
     const [activeIndex, setActiveIndex] = useState(
         screens.indexOf(startSection)
     );
-    const [showPurposePopup, setShowPurposePopup] = useState(null);
+    const [purposePopupContent, setPurposePopupContent] = useState(null);
 
     //Constants
     const activeScreen = screens[activeIndex];
@@ -538,7 +538,7 @@ const DataExplorationScreen = ({
                                 </h1>
                                 <PurposeChart
                                     purposes={company.dataSharingPurposes}
-                                    openPopup={setShowPurposePopup}
+                                    openPopup={setPurposePopupContent}
                                     openPurposeInfo={openPurposeInfo}
                                 />
                             </div>
@@ -556,10 +556,10 @@ const DataExplorationScreen = ({
                     </Swiper>
                 </div>
             </div>
-            {showPurposePopup ? (
+            {purposePopupContent ? (
                 <PurposeInfoPopup
-                    purpose={showPurposePopup}
-                    onClose={() => setShowPurposePopup(null)}
+                    purpose={purposePopupContent}
+                    onClose={() => setPurposePopupContent(null)}
                 />
             ) : null}
         </Screen>

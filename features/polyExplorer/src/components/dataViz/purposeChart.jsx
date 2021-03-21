@@ -70,7 +70,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                         </p>
                         <img
                             src="./images/question-circle-light.svg"
-                            onClick={() => openPopup(p["dpv:Purpose"])}
+                            onClick={() => openPopup(p)}
                         />
                     </div>
                     <div
