@@ -175,7 +175,7 @@ const DataExplorationScreen = ({
                 const touchesDiff = touchCurrent - touchStart;
                 const topToBottom = touchesDiff < 0 && startScroll === 0;
                 const bottomToTop =
-                    touchesDiff > 0 && startScroll === scrollDiff;
+                    touchesDiff > 0 && startScroll >= scrollDiff;
                 const middle = startScroll > 0 && startScroll < scrollDiff;
                 if (topToBottom || bottomToTop || middle)
                     event.stopPropagation();
