@@ -112,6 +112,12 @@
     flex-direction: column;
 }
 
+/* Some extra space to ensure the last element is not cut off - this should
+   probably be fixed in DataExplorationScreen instead */
+.data-exploration .bar-box:last-child {
+    margin-bottom: 40px;
+}
+
 .data-exploration .purpose-chart .bar-box .above-bar {
     display: flex;
     flex-direction: row;
