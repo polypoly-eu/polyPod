@@ -459,6 +459,20 @@ const DataExplorationScreen = ({
             );
     };
 
+    function handleSwipableContentClick(event) {
+        // Workaround for ensuring data sharing legend (which is covered by
+        // swipable content) is clickable. There isprobably a more elegant way.
+        const sharingLegend = document.querySelector(".data-sharing-legend");
+        const bounds = sharingLegend.getBoundingClientRect();
+        if (
+            event.clientX > bounds.left &&
+            event.clientX < bounds.right &&
+            event.clientY > bounds.top &&
+            event.clientY < bounds.bottom
+        )
+            sharingLegend.click();
+    }
+
     useEffect(() => {
         const scrollable = document.querySelector(".purpose-content .bars");
         makeSwiperContentScrollable(scrollable);
@@ -472,7 +486,10 @@ const DataExplorationScreen = ({
             {progressBar}
             <div className="exploration-content">
                 {getStaticContent()}
-                <div className={`swipable-content`}>
+                <div
+                    className="swipable-content"
+                    onClick={handleSwipableContentClick}
+                >
                     <Swiper
                         onSwiper={setSwiper}
                         direction="vertical"
