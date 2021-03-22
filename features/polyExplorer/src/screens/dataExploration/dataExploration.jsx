@@ -17,6 +17,7 @@ import highlights from "../../data/highlights.js";
 
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
+import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
 
 const DataExplorationScreen = ({
     company,
@@ -423,17 +424,15 @@ const DataExplorationScreen = ({
                         {jurisdictionTreeFormatData.children.length}{" "}
                         {i18n.t("common:sharing.jurisdictions")}
                     </h1>
-                    <div className="jurisdiction-tree">
+                    <div className="jurisdiction-tree-container">
                         <JurisdictionTree
                             data={getJurisdictionTreeFormat()}
                             width="300"
                             height="250"
                             fontSize="13"
                         />
+                        <JurisdictionLegend />
                     </div>
-                    <p className="source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
                 </div>
             );
     };

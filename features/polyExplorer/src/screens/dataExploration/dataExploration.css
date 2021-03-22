@@ -118,19 +118,14 @@
     height: 100%;
 }
 
-.data-exploration .jurisdiction-tree {
-    margin: 0 24px -14px 22px;
+.data-exploration .jurisdiction-tree-container {
+    margin: 0 24px 0 22px;
 }
 
-.data-exploration .static-content .source {
-    font-size: 10px;
-    line-height: 14px;
-    letter-spacing: -0.01em;
-    color: #a9b6c6;
-    width: 84%;
-    max-width: 350px;
-    margin: 8px auto;
+.data-exploration .jurisdiction-tree-container .jurisdiction-tree {
+    margin-bottom: -8px;
 }
+
 .data-exploration .data-sharing-legend {
     width: 84%;
     max-width: 350px;

@@ -111,7 +111,7 @@ const JurisdictionTree = ({ data, width, height, fontSize }) => {
         drawJurisdictionTree(createTreeContainer());
     });
 
-    return <div ref={treeRef}></div>;
+    return <div className="jurisdiction-tree" ref={treeRef}></div>;
 };
 
 export default JurisdictionTree;
