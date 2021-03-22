@@ -30,12 +30,12 @@ class PolyInTest {
     @Test
     fun storingStrings_works() {
 
-        var storageData: List<Quad>  = listOf()
-        storageData = storageData.plus(QuadBuilder.new().withDefaultGraph()
-            .withObject(BlankNode("privateData"))
-            .withSubject(BlankNode("someCompany"))
-            .withPredicate(IRI("https://polypoly.coop/storing"))
-            .build()
+        val storageData: List<Quad>  = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData"))
+                .withSubject(BlankNode("someCompany"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build()
         )
         runBlocking {
             polyIn.add(storageData)

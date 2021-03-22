@@ -12,7 +12,6 @@ open class PolyIn(private val databaseName: String = "data.nt") {
     open suspend fun select(matcher: Matcher): List<Quad> {
         val retList: MutableList<Quad> = mutableListOf()
 
-        // TODO: Kotlin-fy this
         val stmtsIterator = model.listStatements(
             matcher.subject?.let { ResourceFactory.createResource(matcher.subject.iri) },
             matcher.predicate?.let {ResourceFactory.createProperty(matcher.predicate.iri) },
