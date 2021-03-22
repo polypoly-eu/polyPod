@@ -43,6 +43,14 @@ const DataExplorationScreen = ({
         return categories;
     };
 
+    const getTotalTypesShared = () => {
+        let total = 0;
+        company.dataTypesShared.forEach((e) => {
+            total += e.count;
+        });
+        return total;
+    };
+
     const getJurisdictionTreeFormat = () => {
         const jurisdictionTreeFormatData = { name: "World", children: [] };
         dataRecipients
@@ -498,8 +506,7 @@ const DataExplorationScreen = ({
                                     "dataExplorationScreen:dataTypes.text.intro",
                                     {
                                         name: company.name,
-                                        sharingCount:
-                                            company.dataTypesShared.length,
+                                        sharingCount: getTotalTypesShared(),
                                         mostSharedType:
                                             highestValueObject.Translation_DE,
                                         mostSharedCount:
