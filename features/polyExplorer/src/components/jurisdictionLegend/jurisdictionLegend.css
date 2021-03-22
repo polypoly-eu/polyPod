@@ -4,6 +4,7 @@
     flex-direction: row;
     padding: 2px 8px;
     width: 100%;
+    margin-top: 4px;
 }
 
 .location-legend p {
@@ -63,6 +64,6 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    transform: translateY(px);
+    transform: translateY(3px);
     flex: 0 0 auto;
 }

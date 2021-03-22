@@ -112,8 +112,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                                         }.svg`}
                                     />
                                     <img
-                                        src="./images/location-pin.svg"
-                                        alt="location-pin"
+                                        src={`./images/location-pins/${company.jurisdiction}.svg`}
                                         className="featured-pin"
                                     />
                                 </div>
