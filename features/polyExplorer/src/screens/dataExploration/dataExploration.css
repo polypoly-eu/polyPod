@@ -160,6 +160,10 @@
     background: url("../images/chevron-down.svg") no-repeat;
 }
 
+.data-exploration .down-button-hidden {
+    visibility: hidden;
+}
+
 .data-exploration .static-content .construction-container {
     box-sizing: border-box;
     display: block;

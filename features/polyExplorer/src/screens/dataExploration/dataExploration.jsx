@@ -592,8 +592,12 @@ const DataExplorationScreen = ({
                 </div>
             </div>
             <button
-                className="down-button"
-                style={{ fontSize: "20px", color: "black" }}
+                className={
+                    "down-button" +
+                    (activeIndex === screens.length - 1
+                        ? " down-button-hidden"
+                        : "")
+                }
                 onClick={() => swiper.slideNext()}
             ></button>
             {purposePopupContent ? (
