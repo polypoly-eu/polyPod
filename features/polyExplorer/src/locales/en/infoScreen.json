@@ -4,7 +4,7 @@
     "headline.sources":
         "Sources",
     "text.sources":
-        "<p>The general company profile information is based on datasets from north data, brex and open corporate from 01/2021. The datasets were aggregated and aligned …</p>",
+        "<p>The general company profile information (Name, legal form, address, structure, revenue...) is based on datasets from North Data, Brex and OpenCorporate.<p>The information about data privacy for selected companies is the result of research done by the polypoly Cooperative. This is based among other sources on the privacy policies of the companies german websites. These is not all the data that a company collects or shares, but only the data behaviour that we could research.</p>",
     "headline.research":
         "Research",
     "text.research.first":
