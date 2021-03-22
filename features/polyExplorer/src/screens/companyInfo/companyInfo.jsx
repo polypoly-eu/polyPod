@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import i18n from "../../i18n.js";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
+import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyInfo.css";
+import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 
 const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
     const [scrolledToBottom, setScrolledToBottom] = useState(false);
@@ -18,29 +20,9 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         Dubai: "dubai",
         Luxembourg: "luxembourg",
         "WILMINGTON, New Castle": "wilmington",
+        "WILMINGTON, DELAWARE": "wilmington",
         Cupertino: "cupertino",
     };
-
-    const locationTooltip = (
-        <div className="location-tooltip">
-            <button onClick={onOpenRegionInfo}>
-                <img src="./images/question-circle.svg" />
-            </button>
-            <p className="jurisdictions-label">
-                {i18n.t("companyInfoScreen:jurisdictions")}
-            </p>
-            <div className="circle EU-GDPR"></div>
-            <p>{i18n.t("common:jurisdiction.euGdpr")}</p>
-            <div className="circle Russia"></div>
-            <p>{i18n.t("common:jurisdiction.russia")}</p>
-            <div className="circle Five-Eyes"></div>
-            <p>{i18n.t("common:jurisdiction.fiveEyes")}</p>
-            <div className="circle China"></div>
-            <p>{i18n.t("common:jurisdiction.china")}</p>
-            <div className="circle Others"></div>
-            <p>{i18n.t("common:jurisdiction.undisclosed")}</p>
-        </div>
-    );
 
     const tabTranslation = {
         location: i18n.t("companyInfoScreen:tab.location"),
@@ -51,7 +33,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         {
             tabName: "location",
             content: (
-                <div>
+                <div className="location-map">
                     {company.jurisdiction ? (
                         <div
                             className={`location-block ${company.jurisdiction}`}
@@ -86,7 +68,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             </div>
                         </div>
                     )}
-                    {locationTooltip}
+                    <JurisdictionLegend onOpenRegionInfo={onOpenRegionInfo} />
                 </div>
             ),
         },
@@ -120,11 +102,11 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         {
             tabName: "location",
             content: (
-                <div className="featured-map">
+                <div className="featured-map-container">
                     {company.jurisdiction ? (
                         <div className={`location-block`}>
                             {company.location ? (
-                                <div>
+                                <div className="featured-map">
                                     <img
                                         src={`./images/maps/cities/${
                                             cityImageMap[company.location.city]
@@ -153,7 +135,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             </div>
                         </div>
                     )}
-                    {locationTooltip}
+                    <JurisdictionLegend />
                 </div>
             ),
         },

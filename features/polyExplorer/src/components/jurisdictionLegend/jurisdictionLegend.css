@@ -1,0 +1,68 @@
+.location-legend {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    padding: 2px 8px;
+    width: 100%;
+}
+
+.location-legend p {
+    flex: 0 0 auto;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -0.01em;
+    color: #a9b6c6;
+    margin: 2px 4px;
+}
+
+.location-legend .source {
+    flex: 0 0 auto;
+}
+
+.location-legend .legend {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.location-legend .data-region {
+    flex: 0 0 auto;
+}
+
+.location-legend .legend div {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    margin-left: 4px;
+}
+
+.location-legend .EU-GDPR {
+    background-color: #60e6de;
+}
+
+.location-legend .Russia {
+    background-color: #fe8988;
+}
+
+.location-legend .Five-Eyes {
+    background-color: #ec453d;
+}
+
+.location-legend .China {
+    background-color: #c5271e;
+}
+
+.location-legend .Others {
+    background-color: #a9b6c6;
+}
+
+.location-legend .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateY(px);
+    flex: 0 0 auto;
+}

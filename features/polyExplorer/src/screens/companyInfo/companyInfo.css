@@ -50,6 +50,11 @@
     max-width: 412px;
 }
 
+.tab-content-container .featured-map-container {
+    width: 100%;
+    max-width: 412px;
+}
+
 .tab-content-container .featured-map {
     width: 320px;
     margin: 0 auto;
@@ -60,27 +65,27 @@
     height: 177px;
 }
 
-.tab-content-container .EU-GDPR {
-    background-color: #60e6de;
-}
-
 .EU-GDPR p {
     color: #002850;
 }
 
-.tab-content-container .Russia {
+.location-map .EU-GDPR {
+    background-color: #60e6de;
+}
+
+.location-map .Russia {
     background-color: #fe8988;
 }
 
-.tab-content-container .Five-Eyes {
+.location-map .Five-Eyes {
     background-color: #ec453d;
 }
 
-.tab-content-container .China {
+.location-map .China {
     background-color: #c5271e;
 }
 
-.tab-content-container .Others {
+.location-map .Others {
     background-color: #a9b6c6;
 }
 
@@ -134,13 +139,6 @@
     font-weight: 500;
     font-size: 10px;
     margin: 7px 6px 0px 2px;
-}
-
-/* Temporary workaround for 320px viewport width */
-p.jurisdictions-label {
-    width: 0;
-    overflow: hidden;
-    margin-right: 2px;
 }
 
 .location-tooltip .circle {
