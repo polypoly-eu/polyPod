@@ -54,7 +54,6 @@ const JurisdictionTree = ({ data, width, height, fontSize }) => {
                 (d) => backgroundColors[d.data.category] || "#0F1938"
             );
 
-        console.log(nodes);
         nodes
             .append("text")
             .text((d) => `${d.data.name}: ${d.data.value}`)
