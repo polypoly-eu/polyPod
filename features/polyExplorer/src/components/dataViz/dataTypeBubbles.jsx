@@ -73,7 +73,8 @@ const DataTypeBubbles = ({
             ? leaf
                   .append("text")
                   .text((d) => {
-                      return d.value.toString();
+                      if (highestValue < 2000) return d.value.toString();
+                      else return d.value > 25 ? d.value : "";
                   })
                   .attr("text-anchor", "middle")
                   .attr("y", ".3em")
