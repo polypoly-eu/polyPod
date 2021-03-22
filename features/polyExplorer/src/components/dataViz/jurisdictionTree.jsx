@@ -4,7 +4,9 @@ import * as d3 from "d3";
 const JurisdictionTree = ({ data, width, height, fontSize }) => {
     let treeRef = useRef(null);
 
-    console.log(data);
+    const clearSvg = () => {
+        d3.select(treeRef.current).selectAll("svg").remove();
+    };
 
     const createTreeContainer = () => {
         return d3
@@ -108,6 +110,7 @@ const JurisdictionTree = ({ data, width, height, fontSize }) => {
     }
 
     useEffect(() => {
+        clearSvg();
         drawJurisdictionTree(createTreeContainer());
     });
 
