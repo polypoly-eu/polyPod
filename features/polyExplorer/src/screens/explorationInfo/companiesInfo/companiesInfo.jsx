@@ -10,8 +10,12 @@ const CompaniesInfo = ({ onClose }) => {
             headline={i18n.t("explorationCompaniesInfoScreen:headline")}
             onClose={onClose}
         >
-            <p>Dieser Bereich ist noch nicht fertig.</p>
-            <img src="images/construction.gif"></img>
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("explorationCompaniesInfoScreen:text.1"),
+                }}
+            />
+            <p>{i18n.t("explorationCompaniesInfoScreen:text.2")}</p>
         </ExplorationInfoScreen>
     );
 };

@@ -1,4 +1,8 @@
 {
     "headline":
-        "Companies"
+        "Companies",
+    "text.1":
+        "<p>This visualization shows how many companies receive data and which industries those companies operate in.</p><p>It might be surprising to see that data end up in industries that users would not expect. Those industries often provide a hint about the actual or additional business model behind a service.</p>",
+    "text.2":
+        "Sie sehen so, ob z.B. Daten aus der Interaktion mit (featured company) bei Firmen in der Branche (Werbung/ Marking) landen."
 }
