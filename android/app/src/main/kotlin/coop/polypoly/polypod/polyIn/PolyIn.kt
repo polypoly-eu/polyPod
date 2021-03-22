@@ -1,5 +1,6 @@
 package coop.polypoly.polypod.polyIn
 
+import coop.polypoly.polypod.MainActivity
 import coop.polypoly.polypod.polyIn.rdf.*
 import org.apache.jena.rdf.model.*
 import java.io.File
@@ -43,7 +44,7 @@ open class PolyIn(private val databaseName: String = "data.nt") {
     private fun load(): Model {
         val model = ModelFactory.createDefaultModel()
 
-        val database = File(databaseName)
+        val database = File(MainActivity.getContext()?.filesDir, databaseName)
         if (!database.exists()) {
             database.createNewFile()
         }
@@ -54,7 +55,7 @@ open class PolyIn(private val databaseName: String = "data.nt") {
     }
 
     private fun save() {
-        File(databaseName).outputStream().use { out ->
+        File(MainActivity.getContext()?.filesDir, databaseName).outputStream().use { out ->
             model.write(out, "N-TRIPLE")
         }
     }
