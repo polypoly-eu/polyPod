@@ -12,6 +12,7 @@ import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
+import CompaniesByIndustry from "../../components/companiesByIndustry/companiesByIndustry.jsx";
 
 import highlights from "../../data/highlights.js";
 
@@ -93,6 +94,7 @@ const DataExplorationScreen = ({
         screens.push("companies");
         screens.push("companiesExplanation");
         screens.push("companiesIndustries");
+        screens.push("companiesList");
         screens.push("jurisdictions");
         return screens;
     };
@@ -406,6 +408,8 @@ const DataExplorationScreen = ({
                     />
                 </div>
             );
+        else if (activeScreen === "companiesList")
+            return <div className="static-content">{filler}</div>;
         else if (activeScreen === "construction")
             return (
                 <div className="static-content">
@@ -459,8 +463,11 @@ const DataExplorationScreen = ({
     }
 
     useEffect(() => {
-        const scrollable = document.querySelector(".purpose-content .bars");
-        makeSwiperContentScrollable(scrollable);
+        const scrollableElements = document.querySelectorAll(
+            ".purpose-content .bars, .companies-by-industry"
+        );
+        for (let element of scrollableElements)
+            makeSwiperContentScrollable(element);
     });
 
     return (
@@ -554,6 +561,19 @@ const DataExplorationScreen = ({
                             </p>
                         </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
+                        <SwiperSlide>
+                            <div className="companies-list-content">
+                                <h2>
+                                    <span className="highlight-companies">
+                                        {i18n.t(
+                                            "dataExplorationScreen:companies.heading.list"
+                                        )}
+                                    </span>
+                                </h2>
+                                <p>{i18n.t("dataExplorationScreen:companies.text.list")}</p>
+                                <CompaniesByIndustry companies={dataRecipients} />
+                            </div>
+                        </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
                     </Swiper>
                 </div>

@@ -23,6 +23,10 @@
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
     "companies.heading.industries":
         "Industries",
+    "companies.heading.list":
+        "Complete list of companies",
+    "companies.text.list":
+        "Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
     "construction.text":
         "This part is currently under construction, but you can go through it if you're curious.",
     "from.polyPedia.translation":

@@ -224,3 +224,20 @@
     width: 100%;
     height: 100%;
 }
+
+.data-exploration .companies-list-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.data-exploration .companies-list-content>p {
+    width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.data-exploration .companies-list-content .companies-by-industry {
+    flex: auto;
+    min-height: 0;
+}
