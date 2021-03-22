@@ -10,8 +10,12 @@ const PurposeInfo = ({ onClose }) => {
             headline={i18n.t("explorationPurposeInfoScreen:headline")}
             onClose={onClose}
         >
-            <p>Dieser Bereich ist noch nicht fertig.</p>
-            <img src="images/construction.gif"></img>
+            <p>{i18n.t("explorationPurposeInfoScreen:text.1")}</p>
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("explorationPurposeInfoScreen:text.2"),
+                }}
+            />
         </ExplorationInfoScreen>
     );
 };
