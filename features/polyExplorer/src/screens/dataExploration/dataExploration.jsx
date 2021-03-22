@@ -185,13 +185,6 @@ const DataExplorationScreen = ({
     }
 
     const getStaticContent = () => {
-        const button = (
-            <button
-                className="down-button"
-                style={{ fontSize: "20px", color: "black" }}
-                onClick={() => swiper.slideNext()}
-            ></button>
-        );
         const filler = <div className="filler"></div>;
         if (activeScreen === "dataTypes")
             return (
@@ -219,7 +212,6 @@ const DataExplorationScreen = ({
                         }}
                     />
                     {filler}
-                    {button}
                 </div>
             );
         else if (
@@ -248,7 +240,6 @@ const DataExplorationScreen = ({
                     </p>
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
-                    {button}
                 </div>
             );
         else if (activeScreen.startsWith("dataTypesCategory"))
@@ -279,7 +270,6 @@ const DataExplorationScreen = ({
                         }}
                     />
                     {filler}
-                    {button}
                 </div>
             );
         else if (activeScreen === "dataTypesUnderTextNoNumbers")
@@ -303,7 +293,6 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <div className="data-sharing-legend-fill"></div>
-                    {button}
                 </div>
             );
         else if (activeScreen === "dataTypesCorrelation")
@@ -331,16 +320,10 @@ const DataExplorationScreen = ({
                             openCorrelationInfo();
                         }}
                     />
-                    {button}
                 </div>
             );
         else if (activeScreen === "purposes")
-            return (
-                <div className="static-content">
-                    {filler}
-                    {button}
-                </div>
-            );
+            return <div className="static-content">{filler}</div>;
         else if (activeScreen === "companies")
             return (
                 <div className="static-content">
@@ -367,7 +350,6 @@ const DataExplorationScreen = ({
                             openCompaniesInfo();
                         }}
                     />
-                    {button}
                 </div>
             );
         else if (activeScreen === "companiesExplanation")
@@ -394,7 +376,6 @@ const DataExplorationScreen = ({
                     </p>
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
-                    {button}
                 </div>
             );
         else if (activeScreen === "companiesIndustries")
@@ -421,7 +402,6 @@ const DataExplorationScreen = ({
                             openCompaniesInfo();
                         }}
                     />
-                    {button}
                 </div>
             );
         else if (activeScreen === "construction")
@@ -433,7 +413,6 @@ const DataExplorationScreen = ({
                         </p>
                         <img src="./images/construction.gif" />
                     </div>
-                    {button}
                 </div>
             );
         else if (activeScreen === "jurisdictions")
@@ -574,6 +553,11 @@ const DataExplorationScreen = ({
                     </Swiper>
                 </div>
             </div>
+            <button
+                className="down-button"
+                style={{ fontSize: "20px", color: "black" }}
+                onClick={() => swiper.slideNext()}
+            ></button>
             {purposePopupContent ? (
                 <PurposeInfoPopup
                     purpose={purposePopupContent}
