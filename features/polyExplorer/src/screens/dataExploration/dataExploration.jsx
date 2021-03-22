@@ -449,7 +449,7 @@ const DataExplorationScreen = ({
                             data={getJurisdictionTreeFormat()}
                             width="300"
                             height="250"
-                            fontSize="16"
+                            fontSize="13"
                         />
                     </div>
                     <p className="source">
