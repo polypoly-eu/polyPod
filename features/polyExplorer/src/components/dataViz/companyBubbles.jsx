@@ -65,7 +65,7 @@ const CompanyBubbles = ({
         },
         industries: (container) => {
             const categoryMap = {};
-            for (let { name, category } of data) {
+            for (let { name, category } of data.filter((e) => !!e)) {
                 if (!categoryMap[category])
                     categoryMap[category] = { name: category, children: [] };
                 categoryMap[category].children.push({ name });
