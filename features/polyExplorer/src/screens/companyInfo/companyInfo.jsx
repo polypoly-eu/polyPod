@@ -5,7 +5,6 @@ import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyInfo.css";
-import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 
 const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
     const [scrolledToBottom, setScrolledToBottom] = useState(false);
