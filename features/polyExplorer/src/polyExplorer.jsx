@@ -16,6 +16,7 @@ import CategoryInfoScreen from "./screens/explorationInfo/categoryInfo/categoryI
 import CorrelationInfoScreen from "./screens/explorationInfo/correlationInfo/correlationInfo.jsx";
 import PurposeInfoScreen from "./screens/explorationInfo/purposeInfo/purposeInfo.jsx";
 import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/companiesInfo.jsx";
+import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/jurisdictionInfo.jsx";
 import FeaturedCompanyInfoScreen from "./screens/featuredCompanyInfo/featuredCompanyInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 import ConstructionPopup from "./components/constructionPopup/constructionPopup.jsx";
@@ -215,6 +216,12 @@ const PolyExplorer = () => {
                         "companies"
                     )
                 }
+                openJurisdictionInfo={() =>
+                    handleExplorationInfoScreen(
+                        "explorationJurisdictionsInfo",
+                        "jurisdictions"
+                    )
+                }
                 maxCompanies={featuredCompanyMaxValues.companies}
                 dataRecipients={selectedCompany?.dataRecipients?.map((name) =>
                     companyData.find(
@@ -270,6 +277,9 @@ const PolyExplorer = () => {
         ),
         explorationCompaniesInfo: (
             <CompaniesInfoScreen onClose={podNav.actions.back} />
+        ),
+        explorationJurisdictionsInfo: (
+            <JurisdictionInfoScreen onClose={podNav.actions.back} />
         ),
     };
 

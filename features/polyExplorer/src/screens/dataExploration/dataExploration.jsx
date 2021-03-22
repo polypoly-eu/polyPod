@@ -27,6 +27,7 @@ const DataExplorationScreen = ({
     openCorrelationInfo,
     openPurposeInfo,
     openCompaniesInfo,
+    openJurisdictionInfo,
     maxCompanies,
     dataRecipients,
 }) => {
@@ -432,6 +433,11 @@ const DataExplorationScreen = ({
                             fontSize="13"
                         />
                         <JurisdictionLegend />
+                        <DataSharingLegend
+                            onClick={() => {
+                                openJurisdictionInfo();
+                            }}
+                        />
                     </div>
                 </div>
             );

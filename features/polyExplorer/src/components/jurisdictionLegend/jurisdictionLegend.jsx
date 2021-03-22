@@ -12,7 +12,7 @@ const JurisdictionLegend = ({ onOpenRegionInfo = false }) => {
             </div>
             <div className="data-regions">
                 <p className="jurisdictions-label">
-                    {i18n.t("companyInfoScreen:jurisdictions")}:
+                    {i18n.t("companyDetailsScreen:jurisdictions")}:
                 </p>
             </div>
             <div className="legend">

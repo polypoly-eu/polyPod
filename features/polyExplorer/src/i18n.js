@@ -20,6 +20,7 @@ import explorationCategoryInfoScreenEn from "./locales/en/explorationCategoryInf
 import explorationCorrelationInfoScreenEn from "./locales/en/explorationCorrelationInfoScreen.json";
 import explorationPurposeInfoScreenEn from "./locales/en/explorationPurposeInfoScreen.json";
 import explorationCompaniesInfoScreenEn from "./locales/en/explorationCompaniesInfoScreen.json";
+import explorationJurisdictionInfoScreenEn from "./locales/en/explorationJurisdictionInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
@@ -39,6 +40,7 @@ import explorationCategoryInfoScreenDe from "./locales/de/explorationCategoryInf
 import explorationCorrelationInfoScreenDe from "./locales/de/explorationCorrelationInfoScreen.json";
 import explorationPurposeInfoScreenDe from "./locales/de/explorationPurposeInfoScreen.json";
 import explorationCompaniesInfoScreenDe from "./locales/de/explorationCompaniesInfoScreen.json";
+import explorationJurisdictionInfoScreenDe from "./locales/de/explorationJurisdictionInfoScreen.json";
 
 const strings = {
     en: {
@@ -60,6 +62,7 @@ const strings = {
         explorationCorrelationInfoScreen: explorationCorrelationInfoScreenEn,
         explorationPurposeInfoScreen: explorationPurposeInfoScreenEn,
         explorationCompaniesInfoScreen: explorationCompaniesInfoScreenEn,
+        explorationJurisdictionInfoScreen: explorationJurisdictionInfoScreenEn,
     },
     de: {
         common: commonDe,
@@ -80,6 +83,7 @@ const strings = {
         explorationCorrelationInfoScreen: explorationCorrelationInfoScreenDe,
         explorationPurposeInfoScreen: explorationPurposeInfoScreenDe,
         explorationCompaniesInfoScreen: explorationCompaniesInfoScreenDe,
+        explorationJurisdictionInfoScreen: explorationJurisdictionInfoScreenDe,
     },
 };
 
