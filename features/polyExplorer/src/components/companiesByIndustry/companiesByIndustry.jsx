@@ -12,7 +12,6 @@ function CompaniesByIndustry({ companies }) {
         if (!categoryMap[category]) categoryMap[category] = [];
         categoryMap[category].push(company);
     }
-    console.log(categoryMap);
 
     return (
         <div className="companies-by-industry">
