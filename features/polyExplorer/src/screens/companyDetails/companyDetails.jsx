@@ -4,9 +4,9 @@ import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "./companyInfo.css";
+import "./companyDetails.css";
 
-const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
+const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
     const [scrolledToBottom, setScrolledToBottom] = useState(false);
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
@@ -24,9 +24,9 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
     };
 
     const tabTranslation = {
-        location: i18n.t("companyInfoScreen:tab.location"),
-        structure: i18n.t("companyInfoScreen:tab.structure"),
-        revenue: i18n.t("companyInfoScreen:tab.revenue"),
+        location: i18n.t("companyDetailsScreen:tab.location"),
+        structure: i18n.t("companyDetailsScreen:tab.structure"),
+        revenue: i18n.t("companyDetailsScreen:tab.revenue"),
     };
     const tabContent = [
         {
@@ -53,7 +53,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             ) : (
                                 <div className="no-location">
                                     {i18n.t(
-                                        "companyInfoScreen:tab.location.fallbackText"
+                                        "companyDetailsScreen:tab.location.fallbackText"
                                     )}
                                 </div>
                             )}
@@ -62,7 +62,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                         <div className="location-block Others">
                             <div className="no-location">
                                 {i18n.t(
-                                    "companyInfoScreen:tab.location.fallbackText"
+                                    "companyDetailsScreen:tab.location.fallbackText"
                                 )}
                             </div>
                         </div>
@@ -81,7 +81,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                     <div className="text">
                         <p>
                             {i18n.t(
-                                "companyInfoScreen:tab.structure.fallbackText"
+                                "companyDetailsScreen:tab.structure.fallbackText"
                             )}
                         </p>
                     </div>
@@ -120,7 +120,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             ) : (
                                 <div className="no-location">
                                     {i18n.t(
-                                        "companyInfoScreen:tab.location.fallbackText"
+                                        "companyDetailsScreen:tab.location.fallbackText"
                                     )}
                                 </div>
                             )}
@@ -129,7 +129,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                         <div className="location-block Others">
                             <div className="no-location">
                                 {i18n.t(
-                                    "companyInfoScreen:tab.location.fallbackText"
+                                    "companyDetailsScreen:tab.location.fallbackText"
                                 )}
                             </div>
                         </div>
@@ -148,7 +148,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                     <div className="text">
                         <p>
                             {i18n.t(
-                                "companyInfoScreen:tab.structure.fallbackText"
+                                "companyDetailsScreen:tab.structure.fallbackText"
                             )}
                         </p>
                     </div>
@@ -178,7 +178,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         <div className="explorer-container">
             <div className="top-shadow"></div>
 
-            <div className="screen-content company-info-screen">
+            <div className="screen-content company-details-screen">
                 <div
                     className="scroll-container"
                     onScroll={(e) => handleInfoTextScrollBottom(e)}
@@ -239,7 +239,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                         </Swiper>
                     </div>
                     <p
-                        className="company-info-text"
+                        className="company-details-text"
                         dangerouslySetInnerHTML={{
                             __html:
                                 (
@@ -248,14 +248,14 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                                     ] || ""
                                 ).replace("\n", "<br/><br/>") ||
                                 i18n.t(
-                                    "companyInfoScreen:description.fallback"
+                                    "companyDetailsScreen:description.fallback"
                                 ),
                         }}
                     ></p>
 
                     {company.description?.source ? (
-                        <p className="company-info-source">
-                            {i18n.t("companyInfoScreen:source")}:{" "}
+                        <p className="company-details-source">
+                            {i18n.t("companyDetailsScreen:source")}:{" "}
                             {company.description.source}
                         </p>
                     ) : null}
@@ -273,7 +273,7 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                         className="explore-data-btn"
                         onClick={() => onOpenExploration(company.name)}
                     >
-                        {i18n.t("companyInfoScreen:button.exploreData")}
+                        {i18n.t("companyDetailsScreen:button.exploreData")}
                     </button>
                 ) : (
                     <div></div>
@@ -283,4 +283,4 @@ const CompanyInfo = ({ company, onOpenRegionInfo, onOpenExploration }) => {
     );
 };
 
-export default CompanyInfo;
+export default CompanyDetails;

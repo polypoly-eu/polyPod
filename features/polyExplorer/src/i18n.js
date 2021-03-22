@@ -4,7 +4,7 @@
 
 import commonEn from "./locales/en/common.json";
 import companyFilterScreenEn from "./locales/en/companyFilterScreen.json";
-import companyInfoScreenEn from "./locales/en/companyInfoScreen.json";
+import companyDetailsScreenEn from "./locales/en/companyDetailsScreen.json";
 import companySearchScreenEn from "./locales/en/companySearchScreen.json";
 import mainScreenEn from "./locales/en/mainScreen.json";
 import onboardingPopupEn from "./locales/en/onboardingPopup.json";
@@ -23,7 +23,7 @@ import explorationCompaniesInfoScreenEn from "./locales/en/explorationCompaniesI
 
 import commonDe from "./locales/de/common.json";
 import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
-import companyInfoScreenDe from "./locales/de/companyInfoScreen.json";
+import companyDetailsScreenDe from "./locales/de/companyDetailsScreen.json";
 import companySearchScreenDe from "./locales/de/companySearchScreen.json";
 import mainScreenDe from "./locales/de/mainScreen.json";
 import onboardingPopupDe from "./locales/de/onboardingPopup.json";
@@ -44,7 +44,7 @@ const strings = {
     en: {
         common: commonEn,
         companyFilterScreen: companyFilterScreenEn,
-        companyInfoScreen: companyInfoScreenEn,
+        companyDetailsScreen: companyDetailsScreenEn,
         companySearchScreen: companySearchScreenEn,
         mainScreen: mainScreenEn,
         onboardingPopup: onboardingPopupEn,
@@ -64,7 +64,7 @@ const strings = {
     de: {
         common: commonDe,
         companyFilterScreen: companyFilterScreenDe,
-        companyInfoScreen: companyInfoScreenDe,
+        companyDetailsScreen: companyDetailsScreenDe,
         companySearchScreen: companySearchScreenDe,
         mainScreen: mainScreenDe,
         onboardingPopup: onboardingPopupDe,

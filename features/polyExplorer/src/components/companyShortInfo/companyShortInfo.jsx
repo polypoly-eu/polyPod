@@ -5,7 +5,7 @@ import "./companyShortInfo.css";
 const CompanyShortInfo = ({ company, onActiveScreenChange = () => {} }) => {
     return (
         <button
-            onClick={() => onActiveScreenChange("companyInfo", company.name)}
+            onClick={() => onActiveScreenChange("companyDetails", company.name)}
             className="company-short-info"
         >
             {company.featured ? (

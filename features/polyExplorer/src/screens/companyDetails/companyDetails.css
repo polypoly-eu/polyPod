@@ -38,7 +38,7 @@
     max-width: 412px;
 }
 
-.company-info-screen .company-short-info {
+.company-details-screen .company-short-info {
     margin: 6px 8px 4px 8px;
 }
 
@@ -184,7 +184,7 @@
     width: 200px;
 }
 
-.company-info-text {
+.company-details-text {
     box-sizing: border-box;
     width: 100%;
     max-width: 474px;
@@ -192,7 +192,7 @@
     margin-bottom: 4px;
 }
 
-.company-info-source {
+.company-details-source {
     color: #a9b6c6;
     flex: 0 0 auto;
     font-size: 12px;

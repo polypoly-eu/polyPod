@@ -9,7 +9,7 @@ import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx
 import CompanyFilterScreen from "./screens/companyFilter/companyFilter.jsx";
 import CompanySearchScreen from "./screens/companySearch/companySearch.jsx";
 import InfoScreen from "./screens/info/info.jsx";
-import CompanyInfoScreen from "./screens/companyInfo/companyInfo.jsx";
+import CompanyDetailsScreen from "./screens/companyDetails/companyDetails.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
 import DataTypesInfoScreen from "./screens/explorationInfo/dataTypesInfo/dataTypesInfo.jsx";
 import CategoryInfoScreen from "./screens/explorationInfo/categoryInfo/categoryInfo.jsx";
@@ -132,7 +132,7 @@ const PolyExplorer = () => {
 
     function handleBack() {
         if (activeScreen === "dataRegionInfo") {
-            handleActiveScreenChange("companyInfo");
+            handleActiveScreenChange("companyDetails");
             return;
         }
 
@@ -224,8 +224,8 @@ const PolyExplorer = () => {
                 )}
             />
         ),
-        companyInfo: (
-            <CompanyInfoScreen
+        companyDetails: (
+            <CompanyDetailsScreen
                 company={selectedCompany}
                 onOpenRegionInfo={() =>
                     handleActiveScreenChange("dataRegionInfo")
@@ -250,7 +250,7 @@ const PolyExplorer = () => {
             <CompanySearchScreen
                 companies={companyData}
                 onOpenInfo={(companyName) =>
-                    handleActiveScreenChange("companyInfo", companyName)
+                    handleActiveScreenChange("companyDetails", companyName)
                 }
             />
         ),
