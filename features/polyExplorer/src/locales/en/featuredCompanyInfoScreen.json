@@ -2,7 +2,7 @@
     "headline.main":
         "Amount of entries",
     "text.main":
-        "Numbers here are indicating the maximum per category which the company is allowed to share based on their privacy policy - which you have accepted when you use their services. This information is based on the privacy policy provided by the company on their German website.",
+        "Numbers here are indicating the maximum per category which the company is allowed to share based on their privacy policy - which you have accepted when you use their services or visited their german website.",
     "gaugeExplanation.entries":
         "Data Entries",
     "gaugeExplanation.first":
