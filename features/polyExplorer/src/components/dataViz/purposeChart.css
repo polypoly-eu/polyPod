@@ -1,10 +1,13 @@
 .data-exploration .purpose-chart {
+    display: flex;
+    flex-direction: column;
     width: 88%;
     max-width: 350px;
     margin: 0 auto;
     position: relative;
     z-index: 200;
     flex: 1 1 auto;
+    min-height: 0;
 }
 
 .data-exploration .purpose-chart .scale-container {
@@ -99,8 +102,7 @@
 }
 
 .data-exploration .purpose-chart .bars {
-    position: absolute;
-    height: 85%;
+    flex: 1 1 auto;
     width: 100%;
     padding: 0 2.5%;
     overflow-y: scroll;

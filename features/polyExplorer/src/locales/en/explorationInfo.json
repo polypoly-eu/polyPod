@@ -1,4 +1,6 @@
 {
     "button.close":
-        "OK"
+        "OK",
+    "graphic.language.suffix":
+        "en"
 }

@@ -41,4 +41,11 @@ export default {
             "dpv:Biometric",
         ],
     },
+    "PAYPAL, INC.": {
+        correlatingDataTypes: [
+            "dpv:OfficialID",
+            "dpv:TelephoneNumber",
+            "dpv:Transaction",
+        ],
+    },
 };

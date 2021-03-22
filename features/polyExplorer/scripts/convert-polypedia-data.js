@@ -1,13 +1,22 @@
 import fs from "fs";
+import path from "path";
 import { createRequire } from "module";
 import { default as patchData } from "./patch-data.js";
-import { default as highlights } from "./highlights.js";
 
 const require = createRequire(import.meta.url);
 
 const polyPediaCompanyData = require("../polypedia-data/data/3_integrated/polyExplorer/companies.json");
 
 const polyPediaGlobalData = require("../polypedia-data/data/3_integrated/polyExplorer/global.json");
+
+const dataIssueLog = {
+    renamedEntities: [],
+    sourceHardCoded: false,
+    duplicateKeys: [],
+    missingDataRecipients: {},
+    patchedCompaniesModified: [],
+    patchedCompaniesNew: [],
+};
 
 const extractYear = (date) =>
     parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
@@ -36,20 +45,27 @@ function parseDescription(legalEntityData) {
     // We currently hard code "Wikipedia" as source, until we get the data from
     // polyPedia as well.
     const source = "Wikipedia";
+    dataIssueLog.sourceHardCoded = true;
     return {
         value: descriptionEmpty ? null : description,
         source: descriptionEmpty ? null : source,
     };
 }
 
-function fixEntityData(entityData) {
-    if (entityData.legal_entity.identifiers.common_name === "Schufa")
-        entityData.legal_entity.identifiers.legal_name.value =
-            "SCHUFA Holding AG";
+function fixPolyPediaEntityData(entityData) {
+    const commonNameMap = {
+        Schufa: "SCHUFA Holding AG",
+    };
+    const commonName = entityData.legal_entity.identifiers.common_name;
+    if (commonName in commonNameMap) {
+        const legalName = commonNameMap[commonName];
+        entityData.legal_entity.identifiers.legal_name.value = legalName;
+        dataIssueLog.renamedEntities[(commonName, legalName)];
+    }
 }
 
 function parseEntity(entityData) {
-    fixEntityData(entityData);
+    fixPolyPediaEntityData(entityData);
 
     const legalEntityData = entityData.legal_entity;
     const legalName = legalEntityData.identifiers.legal_name.value;
@@ -82,7 +98,6 @@ function parseEntity(entityData) {
             : null,
         description: parseDescription(legalEntityData),
         category: null,
-        correlatingDataTypes: highlights[legalName]?.correlatingDataTypes,
     };
 }
 
@@ -102,6 +117,11 @@ function mergeEntities(oldEntity, newEntity) {
 function enrichWithPatchData(entityMap) {
     for (let [name, entity] of Object.entries(patchData)) {
         const key = entityKey(name);
+        dataIssueLog[
+            key in entityMap
+                ? "patchedCompaniesModified"
+                : "patchedCompaniesNew"
+        ].push(name);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     }
 }
@@ -138,7 +158,7 @@ const isValidEntity = (entity) =>
         (requiredField) => !isEmpty(entity[requiredField])
     );
 
-function removeInvalidEntities(entityMap) {
+function fixCompanyData(entityMap) {
     for (let [key, entity] of Object.entries(entityMap)) {
         if (!isValidEntity(entity)) {
             delete entityMap[key];
@@ -151,9 +171,13 @@ function removeInvalidEntities(entityMap) {
             const keep =
                 recipientKey in entityMap &&
                 "category" in entityMap[recipientKey];
-            if (!keep)
-                console.error(`Removing data recipient '${recipientName}' from \
-'${entity.name}' - insufficient entity data available`);
+            if (!keep) {
+                dataIssueLog.missingDataRecipients[recipientName] =
+                    dataIssueLog.missingDataRecipients[recipientName] || [];
+                dataIssueLog.missingDataRecipients[recipientName].push(
+                    entity.name
+                );
+            }
             return keep;
         });
     }
@@ -166,13 +190,14 @@ function parsePolyPediaCompanyData(globalData) {
         if (!entity) return;
 
         const key = entityKey(entity.name);
+        if (key in entityMap) dataIssueLog.duplicateKeys.push(key);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     });
 
     enrichWithPatchData(entityMap);
     enrichWithGlobalData(entityMap, globalData);
     enrichWithJurisdictionsShared(entityMap);
-    removeInvalidEntities(entityMap);
+    fixCompanyData(entityMap);
     return Object.values(entityMap);
 }
 
@@ -213,7 +238,57 @@ function parsePolyPediaGlobalData() {
 const savePolyExplorerGlobalData = (data) =>
     savePolyExplorerFile("global.json", data);
 
+function writeDataIssueLog() {
+    const scriptPath = process.argv[1];
+    const logFile = `${path.dirname(scriptPath)}/${path.basename(
+        scriptPath
+    )}.log`;
+
+    const {
+        renamedEntities,
+        sourceHardCoded,
+        duplicateKeys,
+        missingDataRecipients,
+        patchedCompaniesModified,
+        patchedCompaniesNew,
+    } = dataIssueLog;
+    const missingDataRecipientNames = Object.keys(missingDataRecipients);
+    const listPrefix = "- ";
+    const contents = `\
+Renamed entities:              ${Object.keys(renamedEntities).length}
+Source hard coded:             ${sourceHardCoded ? "Yes" : "No"}
+Duplicate keys (merged):       ${duplicateKeys.length}
+Missing data recipients:       ${missingDataRecipientNames.length}
+Patched existing companies:    ${patchedCompaniesModified.length}
+New companies from patch data: ${patchedCompaniesNew.length}
+
+Renamed entities:
+${Object.entries(renamedEntities)
+    .map((k, v) => listPrefix + k + ": " + v)
+    .join("\n")}
+
+Duplicate keys (merged):
+${duplicateKeys.map((s) => listPrefix + s).join("\n")}
+
+Missing data recipients:
+${Object.entries(missingDataRecipients)
+    .map(
+        ([k, v]) =>
+            listPrefix + "'" + k + "'" + " [mentioned by " + v.join(", ") + "]"
+    )
+    .join("\n")}
+
+Patched companies (modified):
+${patchedCompaniesModified.map((s) => listPrefix + s).join("\n")}
+
+Patched companies (new):
+${patchedCompaniesNew.map((s) => listPrefix + s).join("\n")}
+`;
+    fs.writeFileSync(logFile, contents);
+}
+
 const globalData = parsePolyPediaGlobalData();
 const companyData = parsePolyPediaCompanyData(globalData);
 savePolyExplorerGlobalData(globalData);
 savePolyExplorerCompanyData(companyData);
+writeDataIssueLog();

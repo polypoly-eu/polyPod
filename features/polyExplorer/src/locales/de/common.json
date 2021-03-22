@@ -3,11 +3,11 @@
         "polyExplorer",
     "screenTitle.dataExploration":
         "Daten erkunden",
-    "screenTitle.companyInfo":
+    "screenTitle.companyDetails":
         "Firmenprofil",
     "screenTitle.companyFilter":
         "Filter",
-    "screenTitle.featuredCompanyHelp":
+    "screenTitle.featuredCompanyInfo":
         "Wie ist das zu verstehen?",
     "screenTitle.dataRegionInfo":
         "Wie ist das zu verstehen?",
@@ -86,5 +86,11 @@
     "source":
         "Quelle",
     "how-to-read":
-        "Wie ist das zu verstehen?"
+        "Wie ist das zu verstehen?",
+    "purpose.name.i18nkey":
+        "Translation_DE",
+    "purpose.description.i18nkey":
+        "Explanation_DE",
+    "button.ok":
+        "OK"
 }

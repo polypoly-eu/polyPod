@@ -33,7 +33,8 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
         else if (highest <= 140) return fillScale(highest, 20);
         else if (highest <= 200) return fillScale(highest, 25);
         else if (highest <= 400) return fillScale(highest, 50);
-        else return fillScale(highest, 100);
+        else if (highest <= 1000) return fillScale(highest, 100);
+        else return fillScale(highest, 500);
     };
     const highestCount = getHighestCount();
     const scaleValues = calculateScaleValues(highestCount);
@@ -69,7 +70,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                         </p>
                         <img
                             src="./images/question-circle-light.svg"
-                            onClick={() => openPopup(p["dpv:Purpose"])}
+                            onClick={() => openPopup(p)}
                         />
                     </div>
                     <div

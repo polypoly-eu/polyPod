@@ -11,6 +11,7 @@ const CompanyBubbles = ({
     height,
     opacity = 1,
     bubbleColor,
+    maxCompanies,
 }) => {
     const bubbleRef = useRef();
     const edgePadding = 5;
@@ -30,10 +31,17 @@ const CompanyBubbles = ({
     function appendBubbles(container, data) {
         const root = d3.hierarchy(data).sum(() => 1);
 
+        // This formula needs some revisiting, it was just tinkered
+        // together. The idea is that the radius is small enough so that all
+        // visualisations here look alright when the amountof companies is at
+        // maxCompanies - there must be a more reliable way to achieve that.
+        const bubbleRadius = (width * Math.PI) / maxCompanies / 6;
+
         const packLayout = d3
             .pack()
             .size([width - edgePadding, height - edgePadding])
-            .padding(3);
+            .padding((d) => d.data.padding || 1)
+            .radius(() => bubbleRadius);
         packLayout(root);
 
         return container
@@ -57,12 +65,13 @@ const CompanyBubbles = ({
         },
         industries: (container) => {
             const categoryMap = {};
-            for (let { name, category } of data) {
+            for (let { name, category } of data.filter((e) => !!e)) {
                 if (!categoryMap[category])
                     categoryMap[category] = { name: category, children: [] };
                 categoryMap[category].children.push({ name });
             }
             const viewData = {
+                padding: 40,
                 children: Object.values(categoryMap),
             };
 
@@ -97,7 +106,8 @@ const CompanyBubbles = ({
                         e.y - e.r - bounds.height / 2 - lineLength
                     })`
                 );
-                container.append('line')
+                container
+                    .append("line")
                     .style("stroke", "white")
                     .style("stroke-width", 1)
                     .attr("x1", e.x)

@@ -9,14 +9,14 @@ import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx
 import CompanyFilterScreen from "./screens/companyFilter/companyFilter.jsx";
 import CompanySearchScreen from "./screens/companySearch/companySearch.jsx";
 import InfoScreen from "./screens/info/info.jsx";
-import CompanyInfoScreen from "./screens/companyInfo/companyInfo.jsx";
+import CompanyDetailsScreen from "./screens/companyDetails/companyDetails.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
 import DataTypesInfoScreen from "./screens/explorationInfo/dataTypesInfo/dataTypesInfo.jsx";
 import CategoryInfoScreen from "./screens/explorationInfo/categoryInfo/categoryInfo.jsx";
 import CorrelationInfoScreen from "./screens/explorationInfo/correlationInfo/correlationInfo.jsx";
 import PurposeInfoScreen from "./screens/explorationInfo/purposeInfo/purposeInfo.jsx";
 import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/companiesInfo.jsx";
-import FeaturedCompanyHelpScreen from "./screens/featuredCompanyHelp/featuredCompanyHelp.jsx";
+import FeaturedCompanyInfoScreen from "./screens/featuredCompanyInfo/featuredCompanyInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 import ConstructionPopup from "./components/constructionPopup/constructionPopup.jsx";
 
@@ -132,7 +132,7 @@ const PolyExplorer = () => {
 
     function handleBack() {
         if (activeScreen === "dataRegionInfo") {
-            handleActiveScreenChange("companyInfo");
+            handleActiveScreenChange("companyDetails");
             return;
         }
 
@@ -216,13 +216,16 @@ const PolyExplorer = () => {
                     )
                 }
                 maxCompanies={featuredCompanyMaxValues.companies}
-                dataRecipients={companyData.filter(
-                    (c) => selectedCompany?.dataRecipients?.indexOf(c.name) >= 0
+                dataRecipients={selectedCompany?.dataRecipients?.map((name) =>
+                    companyData.find(
+                        (company) =>
+                            company.name.toLowerCase() === name.toLowerCase()
+                    )
                 )}
             />
         ),
-        companyInfo: (
-            <CompanyInfoScreen
+        companyDetails: (
+            <CompanyDetailsScreen
                 company={selectedCompany}
                 onOpenRegionInfo={() =>
                     handleActiveScreenChange("dataRegionInfo")
@@ -240,14 +243,14 @@ const PolyExplorer = () => {
                 onApply={handleFilterApply}
             />
         ),
-        featuredCompanyHelp: (
-            <FeaturedCompanyHelpScreen onClose={podNav.actions.back} />
+        featuredCompanyInfo: (
+            <FeaturedCompanyInfoScreen onClose={podNav.actions.back} />
         ),
         companySearch: (
             <CompanySearchScreen
                 companies={companyData}
                 onOpenInfo={(companyName) =>
-                    handleActiveScreenChange("companyInfo", companyName)
+                    handleActiveScreenChange("companyDetails", companyName)
                 }
             />
         ),

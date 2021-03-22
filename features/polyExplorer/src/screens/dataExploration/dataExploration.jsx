@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import i18n from "../../i18n.js";
@@ -13,8 +13,11 @@ import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 
+import highlights from "../../data/highlights.js";
+
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
+import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
 
 const DataExplorationScreen = ({
     company,
@@ -40,34 +43,36 @@ const DataExplorationScreen = ({
 
     const getJurisdictionTreeFormat = () => {
         const jurisdictionTreeFormatData = { name: "World", children: [] };
-        dataRecipients.forEach((e) => {
-            let jurisdiction = jurisdictionTreeFormatData.children.find(
-                (j) => j.name === e.jurisdiction
-            );
-            if (jurisdiction !== undefined) {
-                let country = jurisdiction.children.find(
-                    (c) => c.name === e.location.countryCode
+        dataRecipients
+            .filter((e) => !!e)
+            .forEach((e) => {
+                let jurisdiction = jurisdictionTreeFormatData.children.find(
+                    (j) => j.name === e.jurisdiction
                 );
-                if (country !== undefined) country.value++;
-                else
-                    jurisdiction.children.push({
-                        name: e.location.countryCode,
-                        value: 1,
-                        category: e.jurisdiction,
-                    });
-            } else {
-                jurisdictionTreeFormatData.children.push({
-                    name: e.jurisdiction,
-                    children: [
-                        {
+                if (jurisdiction !== undefined) {
+                    let country = jurisdiction.children.find(
+                        (c) => c.name === e.location.countryCode
+                    );
+                    if (country !== undefined) country.value++;
+                    else
+                        jurisdiction.children.push({
                             name: e.location.countryCode,
                             value: 1,
                             category: e.jurisdiction,
-                        },
-                    ],
-                });
-            }
-        });
+                        });
+                } else {
+                    jurisdictionTreeFormatData.children.push({
+                        name: e.jurisdiction,
+                        children: [
+                            {
+                                name: e.location.countryCode,
+                                value: 1,
+                                category: e.jurisdiction,
+                            },
+                        ],
+                    });
+                }
+            });
         return jurisdictionTreeFormatData;
     };
 
@@ -113,7 +118,7 @@ const DataExplorationScreen = ({
     const [activeIndex, setActiveIndex] = useState(
         screens.indexOf(startSection)
     );
-    const [showPurposePopup, setShowPurposePopup] = useState(null);
+    const [purposePopupContent, setPurposePopupContent] = useState(null);
 
     //Constants
     const activeScreen = screens[activeIndex];
@@ -149,14 +154,38 @@ const DataExplorationScreen = ({
         </div>
     );
 
-    const getStaticContent = () => {
-        const button = (
-            <button
-                className="down-button"
-                style={{ fontSize: "20px", color: "black" }}
-                onClick={() => swiper.slideNext()}
-            ></button>
+    function makeSwiperContentScrollable(element) {
+        let startScroll, touchStart;
+
+        element.addEventListener(
+            "touchstart",
+            function (event) {
+                startScroll = element.scrollTop;
+                touchStart = event.targetTouches[0].pageY;
+            },
+            true
         );
+
+        element.addEventListener(
+            "touchmove",
+            function (event) {
+                const scrollDiff = element.scrollHeight - element.offsetHeight;
+                if (scrollDiff <= 0) return;
+
+                const touchCurrent = event.targetTouches[0].pageY;
+                const touchesDiff = touchCurrent - touchStart;
+                const topToBottom = touchesDiff < 0 && startScroll === 0;
+                const bottomToTop =
+                    touchesDiff > 0 && startScroll >= scrollDiff;
+                const middle = startScroll > 0 && startScroll < scrollDiff;
+                if (topToBottom || bottomToTop || middle)
+                    event.stopPropagation();
+            },
+            true
+        );
+    }
+
+    const getStaticContent = () => {
         const filler = <div className="filler"></div>;
         if (activeScreen === "dataTypes")
             return (
@@ -184,7 +213,6 @@ const DataExplorationScreen = ({
                         }}
                     />
                     {filler}
-                    {button}
                 </div>
             );
         else if (
@@ -213,7 +241,6 @@ const DataExplorationScreen = ({
                     </p>
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
-                    {button}
                 </div>
             );
         else if (activeScreen.startsWith("dataTypesCategory"))
@@ -244,7 +271,6 @@ const DataExplorationScreen = ({
                         }}
                     />
                     {filler}
-                    {button}
                 </div>
             );
         else if (activeScreen === "dataTypesUnderTextNoNumbers")
@@ -268,7 +294,6 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <div className="data-sharing-legend-fill"></div>
-                    {button}
                 </div>
             );
         else if (activeScreen === "dataTypesCorrelation")
@@ -282,7 +307,9 @@ const DataExplorationScreen = ({
                     <DataTypeBubbleCorrelation
                         data={company.dataTypesShared}
                         correlationColor="#FB8A89"
-                        typeBundle={company.correlatingDataTypes}
+                        typeBundle={
+                            highlights[company.name].correlatingDataTypes
+                        }
                         width="360"
                         height="360"
                     />
@@ -294,27 +321,10 @@ const DataExplorationScreen = ({
                             openCorrelationInfo();
                         }}
                     />
-                    {button}
                 </div>
             );
         else if (activeScreen === "purposes")
-            return (
-                <div className="static-content">
-                    <h1>
-                        {i18n.t("common:sharing.prefix.purposes")}{" "}
-                        <span className="highlight-purpose">
-                            {company.dataSharingPurposes.length}{" "}
-                            {i18n.t("common:sharing.purposes")}
-                        </span>
-                    </h1>
-                    <PurposeChart
-                        purposes={company.dataSharingPurposes}
-                        openPopup={setShowPurposePopup}
-                        openPurposeInfo={openPurposeInfo}
-                    />
-                    {button}
-                </div>
-            );
+            return <div className="static-content">{filler}</div>;
         else if (activeScreen === "companies")
             return (
                 <div className="static-content">
@@ -341,7 +351,6 @@ const DataExplorationScreen = ({
                             openCompaniesInfo();
                         }}
                     />
-                    {button}
                 </div>
             );
         else if (activeScreen === "companiesExplanation")
@@ -368,7 +377,6 @@ const DataExplorationScreen = ({
                     </p>
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
-                    {button}
                 </div>
             );
         else if (activeScreen === "companiesIndustries")
@@ -395,7 +403,6 @@ const DataExplorationScreen = ({
                             openCompaniesInfo();
                         }}
                     />
-                    {button}
                 </div>
             );
         else if (activeScreen === "construction")
@@ -407,7 +414,6 @@ const DataExplorationScreen = ({
                         </p>
                         <img src="./images/construction.gif" />
                     </div>
-                    {button}
                 </div>
             );
         else if (activeScreen === "jurisdictions")
@@ -418,20 +424,38 @@ const DataExplorationScreen = ({
                         {jurisdictionTreeFormatData.children.length}{" "}
                         {i18n.t("common:sharing.jurisdictions")}
                     </h1>
-                    <div className="jurisdiction-tree">
+                    <div className="jurisdiction-tree-container">
                         <JurisdictionTree
                             data={getJurisdictionTreeFormat()}
                             width="300"
                             height="250"
-                            fontSize="16"
+                            fontSize="13"
                         />
+                        <JurisdictionLegend />
                     </div>
-                    <p className="source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
                 </div>
             );
     };
+
+    function handleSwipableContentClick(event) {
+        // Workaround for ensuring data sharing legend (which is covered by
+        // swipable content) is clickable. There isprobably a more elegant way.
+        const sharingLegend = document.querySelector(".data-sharing-legend");
+        if (!sharingLegend) return;
+        const bounds = sharingLegend.getBoundingClientRect();
+        if (
+            event.clientX > bounds.left &&
+            event.clientX < bounds.right &&
+            event.clientY > bounds.top &&
+            event.clientY < bounds.bottom
+        )
+            sharingLegend.click();
+    }
+
+    useEffect(() => {
+        const scrollable = document.querySelector(".purpose-content .bars");
+        makeSwiperContentScrollable(scrollable);
+    });
 
     return (
         <Screen className="data-exploration">
@@ -441,7 +465,10 @@ const DataExplorationScreen = ({
             {progressBar}
             <div className="exploration-content">
                 {getStaticContent()}
-                <div className={`swipable-content`}>
+                <div
+                    className="swipable-content"
+                    onClick={handleSwipableContentClick}
+                >
                     <Swiper
                         onSwiper={setSwiper}
                         direction="vertical"
@@ -450,13 +477,9 @@ const DataExplorationScreen = ({
                             setActiveIndex(swiper.activeIndex)
                         }
                     >
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
                                     "dataExplorationScreen:dataTypes.text.intro",
@@ -472,7 +495,7 @@ const DataExplorationScreen = ({
                                 )}
                             </p>
                         </SwiperSlide>
-                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                        <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
                                     "dataExplorationScreen:dataTypes.text.grouping"
@@ -492,43 +515,52 @@ const DataExplorationScreen = ({
                                 </h2>
                             </SwiperSlide>
                         ))}
-                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                        <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
                                     "dataExplorationScreen:dataTypes.text.correlations"
                                 )}
                             </p>
                         </SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                            className="purpose-slide"
-                        ></SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide onClick={() => swiper.slideNext()}>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide>
+                            <div className="purpose-content">
+                                <h1>
+                                    {i18n.t("common:sharing.prefix.purposes")}{" "}
+                                    <span className="highlight-purpose">
+                                        {company.dataSharingPurposes.length}{" "}
+                                        {i18n.t("common:sharing.purposes")}
+                                    </span>
+                                </h1>
+                                <PurposeChart
+                                    purposes={company.dataSharingPurposes}
+                                    openPopup={setPurposePopupContent}
+                                    openPurposeInfo={openPurposeInfo}
+                                />
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
                                     "dataExplorationScreen:companies.text.intro"
                                 )}
                             </p>
                         </SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
-                        <SwiperSlide
-                            onClick={() => swiper.slideNext()}
-                        ></SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
                     </Swiper>
                 </div>
             </div>
-            {showPurposePopup ? (
+            <button
+                className="down-button"
+                style={{ fontSize: "20px", color: "black" }}
+                onClick={() => swiper.slideNext()}
+            ></button>
+            {purposePopupContent ? (
                 <PurposeInfoPopup
-                    purpose={showPurposePopup}
-                    onClose={() => setShowPurposePopup(null)}
+                    purpose={purposePopupContent}
+                    onClose={() => setPurposePopupContent(null)}
                 />
             ) : null}
         </Screen>

@@ -4,6 +4,8 @@ import * as d3 from "d3";
 const JurisdictionTree = ({ data, width, height, fontSize }) => {
     let treeRef = useRef(null);
 
+    console.log(data);
+
     const createTreeContainer = () => {
         return d3
             .select(treeRef.current)
@@ -45,16 +47,26 @@ const JurisdictionTree = ({ data, width, height, fontSize }) => {
             .append("rect")
             .attr("width", (d) => d.x1 - d.x0)
             .attr("height", (d) => d.y1 - d.y0)
-            .attr("fill", (d) => backgroundColors[d.data.category]);
+            .attr(
+                "fill",
+                (d) => backgroundColors[d.data.category] || "#0F1938"
+            );
 
+        console.log(nodes);
         nodes
             .append("text")
             .text((d) => `${d.data.name}: ${d.data.value}`)
-            .attr("font-size", `${fontSize}px`)
-            .attr("x", 3)
-            .attr("y", fontSize)
+            .attr("font-size", (d) =>
+                d.x1 - d.x0 > 24
+                    ? `${fontSize}px`
+                    : `${fontSize - (d.x1 - d.x0) / 2}px`
+            )
+            .attr("x", (d) => (d.x1 - d.x0 > 24 ? 3 : 2))
+            .attr("y", (d) =>
+                d.x1 - d.x0 > 24 ? fontSize : fontSize - (d.x1 - d.x0) / 2
+            )
             .call(wrapText)
-            .style("fill", (d) => fontColors[d.data.category]);
+            .style("fill", (d) => fontColors[d.data.category] || "white");
     };
 
     function wrapText(selection) {
@@ -99,7 +111,7 @@ const JurisdictionTree = ({ data, width, height, fontSize }) => {
         drawJurisdictionTree(createTreeContainer());
     });
 
-    return <div ref={treeRef}></div>;
+    return <div className="jurisdiction-tree" ref={treeRef}></div>;
 };
 
 export default JurisdictionTree;

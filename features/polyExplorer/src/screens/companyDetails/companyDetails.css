@@ -38,7 +38,7 @@
     max-width: 412px;
 }
 
-.company-info-screen .company-short-info {
+.company-details-screen .company-short-info {
     margin: 6px 8px 4px 8px;
 }
 
@@ -46,6 +46,11 @@
     position: relative;
     height: 203px;
     margin: 2px auto 0 auto;
+    width: 100%;
+    max-width: 412px;
+}
+
+.tab-content-container .featured-map-container {
     width: 100%;
     max-width: 412px;
 }
@@ -60,27 +65,27 @@
     height: 177px;
 }
 
-.tab-content-container .EU-GDPR {
-    background-color: #60e6de;
-}
-
 .EU-GDPR p {
     color: #002850;
 }
 
-.tab-content-container .Russia {
+.location-map .EU-GDPR {
+    background-color: #60e6de;
+}
+
+.location-map .Russia {
     background-color: #fe8988;
 }
 
-.tab-content-container .Five-Eyes {
+.location-map .Five-Eyes {
     background-color: #ec453d;
 }
 
-.tab-content-container .China {
+.location-map .China {
     background-color: #c5271e;
 }
 
-.tab-content-container .Others {
+.location-map .Others {
     background-color: #a9b6c6;
 }
 
@@ -136,13 +141,6 @@
     margin: 7px 6px 0px 2px;
 }
 
-/* Temporary workaround for 320px viewport width */
-p.jurisdictions-label {
-    width: 0;
-    overflow: hidden;
-    margin-right: 2px;
-}
-
 .location-tooltip .circle {
     width: 10px;
     height: 10px;
@@ -186,7 +184,7 @@ p.jurisdictions-label {
     width: 200px;
 }
 
-.company-info-text {
+.company-details-text {
     box-sizing: border-box;
     width: 100%;
     max-width: 474px;
@@ -194,7 +192,7 @@ p.jurisdictions-label {
     margin-bottom: 4px;
 }
 
-.company-info-source {
+.company-details-source {
     color: #a9b6c6;
     flex: 0 0 auto;
     font-size: 12px;
