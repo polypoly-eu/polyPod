@@ -11,7 +11,7 @@ const CorrelationInfo = ({ onClose }) => {
             headline={i18n.t("explorationCorrelationInfoScreen:headline")}
             onClose={onClose}
         >
-            <p>Dieser Bereich ist noch nicht fertig.</p>
+            <p>{i18n.t("explorationCorrelationInfoScreen:text.1")}</p>
             <Infographic svgName="correlation" />
         </ExplorationInfoScreen>
     );
