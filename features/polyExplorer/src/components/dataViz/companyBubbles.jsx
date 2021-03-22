@@ -40,7 +40,7 @@ const CompanyBubbles = ({
         const packLayout = d3
             .pack()
             .size([width - edgePadding, height - edgePadding])
-            .padding(1)
+            .padding((d) => d.data.padding || 1)
             .radius(() => bubbleRadius);
         packLayout(root);
 
@@ -71,6 +71,7 @@ const CompanyBubbles = ({
                 categoryMap[category].children.push({ name });
             }
             const viewData = {
+                padding: 40,
                 children: Object.values(categoryMap),
             };
 
