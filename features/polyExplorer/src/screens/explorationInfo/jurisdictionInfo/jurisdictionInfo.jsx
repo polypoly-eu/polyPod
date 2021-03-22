@@ -7,7 +7,7 @@ import ExplorationInfoScreen from "../../../components/explorationInfoScreen/exp
 const JurisdictionInfo = ({ onClose }) => {
     return (
         <ExplorationInfoScreen
-            className="data-types-info"
+            className="jurisdiction-info"
             headline={i18n.t("explorationJurisdictionInfoScreen:headline")}
             onClose={onClose}
         >
