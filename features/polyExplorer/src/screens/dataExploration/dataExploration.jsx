@@ -577,8 +577,14 @@ const DataExplorationScreen = ({
                                         )}
                                     </span>
                                 </h2>
-                                <p>{i18n.t("dataExplorationScreen:companies.text.list")}</p>
-                                <CompaniesByIndustry companies={dataRecipients} />
+                                <p>
+                                    {i18n.t(
+                                        "dataExplorationScreen:companies.text.list"
+                                    )}
+                                </p>
+                                <CompaniesByIndustry
+                                    companies={dataRecipients}
+                                />
                             </div>
                         </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
