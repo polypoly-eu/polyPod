@@ -77,7 +77,7 @@ const FeaturedCompany = ({
                     onOpenDetails={handleOpenDetails}
                 />
                 <DataSharingLegend
-                    onClick={() => onActiveScreenChange("featuredCompanyHelp")}
+                    onClick={() => onActiveScreenChange("featuredCompanyInfo")}
                 />
             </div>
         </div>

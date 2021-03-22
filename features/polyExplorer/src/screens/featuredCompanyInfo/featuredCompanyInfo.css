@@ -1,4 +1,4 @@
-.featured-company-help-screen {
+.featured-company-info-screen {
     display: block !important;
     overflow-y: scroll;
     font-size: 16px;
@@ -6,37 +6,37 @@
     padding-top: 30px;
 }
 
-.featured-company-help-screen h1,
-.featured-company-help-screen h2,
-.featured-company-help-screen button {
+.featured-company-info-screen h1,
+.featured-company-info-screen h2,
+.featured-company-info-screen button {
     font-family: "Jost Medium";
     max-width: 300px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.featured-company-help-screen h1,
-.featured-company-help-screen h2 {
+.featured-company-info-screen h1,
+.featured-company-info-screen h2 {
     margin-top: 0;
     color: #0f1938;
     text-align: center;
 }
 
-.featured-company-help-screen h2,
-.featured-company-help-screen button {
+.featured-company-info-screen h2,
+.featured-company-info-screen button {
     margin-top: 40px;
 }
 
-.featured-company-help-screen h1 {
+.featured-company-info-screen h1 {
     font-size: 24px;
 }
 
-.featured-company-help-screen h2 {
+.featured-company-info-screen h2 {
     font-size: 20px;
 }
 
-.featured-company-help-screen p,
-.featured-company-help-screen span {
+.featured-company-info-screen p,
+.featured-company-info-screen span {
     color: #0f1938;
     width: 300px;
     margin: 0 auto;
@@ -45,14 +45,14 @@
     letter-spacing: -0.01em;
 }
 
-.featured-company-help-screen .gauge-explanation-graphic {
+.featured-company-info-screen .gauge-explanation-graphic {
     position: relative;
     width: 300px;
     margin: 52px auto 0 auto;
 }
 
 /* Hack until we have a better asset to work with */
-.featured-company-help-screen .gauge-explanation-entries {
+.featured-company-info-screen .gauge-explanation-entries {
     position: absolute;
     left: 32px;
     top: 57px;
@@ -61,10 +61,10 @@
     background: #f7fafc;
 }
 
-.featured-company-help-screen .gauge-explanation-first,
-.featured-company-help-screen .gauge-explanation-second,
-.featured-company-help-screen .gauge-explanation-third,
-.featured-company-help-screen .gauge-explanation-fourth {
+.featured-company-info-screen .gauge-explanation-first,
+.featured-company-info-screen .gauge-explanation-second,
+.featured-company-info-screen .gauge-explanation-third,
+.featured-company-info-screen .gauge-explanation-fourth {
     display: inline-block;
     position: relative;
     width: 78px;
@@ -72,25 +72,25 @@
     font-size: 12px;
 }
 
-.featured-company-help-screen .gauge-explanation-first {
+.featured-company-info-screen .gauge-explanation-first {
     width: 125px;
     margin-bottom: 8px;
     left: 24px;
 }
 
-.featured-company-help-screen .gauge-explanation-second {
+.featured-company-info-screen .gauge-explanation-second {
     left: 0;
 }
 
-.featured-company-help-screen .gauge-explanation-third {
+.featured-company-info-screen .gauge-explanation-third {
     left: 16px;
 }
 
-.featured-company-help-screen .gauge-explanation-fourth {
+.featured-company-info-screen .gauge-explanation-fourth {
     left: 48px;
 }
 
-.featured-company-help-screen button {
+.featured-company-info-screen button {
     display: block;
     box-sizing: border-box;
     width: 300px;

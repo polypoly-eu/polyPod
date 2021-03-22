@@ -11,7 +11,7 @@ import onboardingPopupEn from "./locales/en/onboardingPopup.json";
 import featuredCompanyEn from "./locales/en/featuredCompany.json";
 import dataSharingGaugeEn from "./locales/en/dataSharingGauge.json";
 import dataExplorationScreenEn from "./locales/en/dataExplorationScreen.json";
-import featuredCompanyHelpScreenEn from "./locales/en/featuredCompanyHelpScreen.json";
+import featuredCompanyInfoScreenEn from "./locales/en/featuredCompanyInfoScreen.json";
 import infoScreenEn from "./locales/en/infoScreen.json";
 import dataRegionInfoScreenEn from "./locales/en/dataRegionInfoScreen.json";
 import explorationInfoEn from "./locales/en/explorationInfo.json";
@@ -30,7 +30,7 @@ import onboardingPopupDe from "./locales/de/onboardingPopup.json";
 import featuredCompanyDe from "./locales/de/featuredCompany.json";
 import dataSharingGaugeDe from "./locales/de/dataSharingGauge.json";
 import dataExplorationScreenDe from "./locales/de/dataExplorationScreen.json";
-import featuredCompanyHelpScreenDe from "./locales/de/featuredCompanyHelpScreen.json";
+import featuredCompanyInfoScreenDe from "./locales/de/featuredCompanyInfoScreen.json";
 import infoScreenDe from "./locales/de/infoScreen.json";
 import dataRegionInfoScreenDe from "./locales/de/dataRegionInfoScreen.json";
 import explorationInfoDe from "./locales/de/explorationInfo.json";
@@ -51,7 +51,7 @@ const strings = {
         featuredCompany: featuredCompanyEn,
         dataSharingGauge: dataSharingGaugeEn,
         dataExplorationScreen: dataExplorationScreenEn,
-        featuredCompanyHelpScreen: featuredCompanyHelpScreenEn,
+        featuredCompanyInfoScreen: featuredCompanyInfoScreenEn,
         infoScreen: infoScreenEn,
         dataRegionInfoScreen: dataRegionInfoScreenEn,
         explorationInfo: explorationInfoEn,
@@ -71,7 +71,7 @@ const strings = {
         featuredCompany: featuredCompanyDe,
         dataSharingGauge: dataSharingGaugeDe,
         dataExplorationScreen: dataExplorationScreenDe,
-        featuredCompanyHelpScreen: featuredCompanyHelpScreenDe,
+        featuredCompanyInfoScreen: featuredCompanyInfoScreenDe,
         infoScreen: infoScreenDe,
         dataRegionInfoScreen: dataRegionInfoScreenDe,
         explorationInfo: explorationInfoDe,
