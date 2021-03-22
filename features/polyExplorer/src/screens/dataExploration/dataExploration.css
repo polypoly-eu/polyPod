@@ -66,6 +66,16 @@
     overflow: hidden;
 }
 
+.data-exploration .static-content .bubble-source {
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -0.01em;
+    color: #a9b6c6;
+    width: 84%;
+    max-width: 350px;
+    margin: 8px auto;
+}
+
 .data-exploration h1,
 .data-exploration h2 {
     width: 296px;

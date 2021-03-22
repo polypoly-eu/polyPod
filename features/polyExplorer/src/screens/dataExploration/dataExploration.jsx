@@ -204,7 +204,7 @@ const DataExplorationScreen = ({
                         width="360"
                         height="360"
                     />
-                    <p className="source">
+                    <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
@@ -236,7 +236,7 @@ const DataExplorationScreen = ({
                         height="360"
                         opacity={0.2}
                     />
-                    <p className="source">
+                    <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <div className="data-sharing-legend-fill"></div>
@@ -262,7 +262,7 @@ const DataExplorationScreen = ({
                             )[0]["dpv:Category"]
                         }
                     />
-                    <p className="source">
+                    <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
@@ -290,7 +290,7 @@ const DataExplorationScreen = ({
                         opacity={0.2}
                         showValues={false}
                     />
-                    <p className="source">
+                    <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <div className="data-sharing-legend-fill"></div>
@@ -313,7 +313,7 @@ const DataExplorationScreen = ({
                         width="360"
                         height="360"
                     />
-                    <p className="source">
+                    <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
@@ -343,7 +343,7 @@ const DataExplorationScreen = ({
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                     />
-                    <p className="source">
+                    <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
@@ -372,7 +372,7 @@ const DataExplorationScreen = ({
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                     />
-                    <p className="source">
+                    <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <div className="data-sharing-legend-fill"></div>
@@ -395,7 +395,7 @@ const DataExplorationScreen = ({
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                     />
-                    <p className="source">
+                    <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
