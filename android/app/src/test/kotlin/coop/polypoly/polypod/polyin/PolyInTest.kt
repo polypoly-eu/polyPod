@@ -14,17 +14,21 @@ import org.junit.runner.RunWith
 import org.msgpack.value.ValueFactory
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import java.io.File
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Config.OLDEST_SDK])
 class PolyInTest {
-    val testScope = GlobalScope
+    private val polyIn = PolyIn("test_database.nt")
+
+    @Before
+    fun setup() {
+        polyIn.clean()
+    }
 
     @Test
     fun storingStrings_works() {
-        val polyIn = PolyIn("test_database.nt")
-        polyIn.clean()
 
         var storageData: List<Quad>  = listOf()
         storageData = storageData.plus(QuadBuilder.new().withDefaultGraph()
@@ -36,9 +40,8 @@ class PolyInTest {
         runBlocking {
             polyIn.add(storageData)
         }
-        var returnedData: List<Quad>
-        runBlocking {
-            returnedData = polyIn.select(
+        val returnedData = runBlocking {
+            polyIn.select(
                 Matcher(null, null, null)
             )
         }
@@ -51,34 +54,29 @@ class PolyInTest {
         val polyIn = PolyIn("test_database.nt")
         polyIn.clean()
 
-        var storageData: List<Quad>  = listOf()
-        storageData = storageData.plus(QuadBuilder.new().withDefaultGraph()
-            .withObject(BlankNode("privateData"))
-            .withSubject(BlankNode("someCompany"))
-            .withPredicate(IRI("https://polypoly.coop/storing"))
-            .build()
-        )
-
-        storageData = storageData.plus(QuadBuilder.new().withDefaultGraph()
-            .withObject(BlankNode("privateData2"))
-            .withSubject(BlankNode("someCompany2"))
-            .withPredicate(IRI("https://polypoly.coop/storing"))
-            .build()
-        )
-
-        storageData = storageData.plus(QuadBuilder.new().withDefaultGraph()
-            .withObject(BlankNode("privateData3"))
-            .withSubject(BlankNode("someCompany3"))
-            .withPredicate(IRI("https://polypoly.coop/justChecking"))
-            .build()
+        val storageData: List<Quad>  = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData"))
+                .withSubject(BlankNode("someCompany"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build(),
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData2"))
+                .withSubject(BlankNode("someCompany2"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build(),
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData3"))
+                .withSubject(BlankNode("someCompany3"))
+                .withPredicate(IRI("https://polypoly.coop/justChecking"))
+                .build()
         )
 
         runBlocking {
             polyIn.add(storageData)
         }
-        var returnedData: List<Quad>
-        runBlocking {
-            returnedData = polyIn.select(
+        val returnedData = runBlocking {
+            polyIn.select(
                 Matcher(
                     null,
                     IRI("https://polypoly.coop/justChecking"),

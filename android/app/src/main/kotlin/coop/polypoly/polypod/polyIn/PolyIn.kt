@@ -4,24 +4,22 @@ import coop.polypoly.polypod.polyIn.rdf.*
 import org.apache.jena.rdf.model.*
 import java.io.File
 
-
-open class PolyIn(private val databaseName: String = "database.nt") {
+open class PolyIn(private val databaseName: String = "data.nt") {
     val NS = "polypoly"
 
-    private var model: Model = load()
+    private val model: Model = load()
 
     open suspend fun select(matcher: Matcher): List<Quad> {
-        var retList: List<Quad> = listOf()
+        val retList: MutableList<Quad> = mutableListOf()
 
         // TODO: Kotlin-fy this
         val stmtsIterator = model.listStatements(
-            if (matcher.subject == null) null else ResourceFactory.createResource(matcher.subject.iri),
-            if (matcher.predicate == null) null else ResourceFactory.createProperty(matcher.predicate.iri),
+            matcher.subject?.let { ResourceFactory.createResource(matcher.subject.iri) },
+            matcher.predicate?.let {ResourceFactory.createProperty(matcher.predicate.iri) },
             matcher.`object`?.iri,
         )
-        while (stmtsIterator.hasNext()) {
-            val stmt = stmtsIterator.next()
-            retList = retList.plus(QuadBuilder.new()
+        for (stmt in stmtsIterator) {
+            retList.add(QuadBuilder.new()
                 .withDefaultGraph()
                 .withSubject(IRI(stmt.subject.uri))
                 .withPredicate(IRI(stmt.predicate.uri))
@@ -34,7 +32,7 @@ open class PolyIn(private val databaseName: String = "database.nt") {
 
     open suspend fun add(quads: List<Quad>) {
         quads.forEach { quad ->
-            model = model.add(
+            model.add(
                 quadSubjectToResource(quad.subject),
                 model.createProperty(quad.predicate.iri),
                 quadObjectToResource(quad.`object`)
@@ -44,26 +42,26 @@ open class PolyIn(private val databaseName: String = "database.nt") {
     }
 
     private fun load(): Model {
-        model = ModelFactory.createDefaultModel()
+        val model = ModelFactory.createDefaultModel()
 
         val database = File(databaseName)
         if (!database.exists()) {
             database.createNewFile()
         }
         database.inputStream().use { inputStream ->
-            model = model.read(inputStream, null, "N-TRIPLE")
+            model.read(inputStream, null, "N-TRIPLE")
         }
         return model
     }
 
     private fun save() {
         File(databaseName).outputStream().use { out ->
-            model = model.write(out, "N-TRIPLE")
+            model.write(out, "N-TRIPLE")
         }
     }
 
     open fun clean() {
-        model = model.removeAll()
+        model.removeAll()
         save()
     }
 
