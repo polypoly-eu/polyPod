@@ -16,6 +16,7 @@ const FeaturedCompanyHolder = ({
     onUpdateInitialSlide,
     maxValues,
     averageValues,
+    onOpenDataExplorationSection,
 }) => {
     return (
         <div className="featured-company-holder">
@@ -37,6 +38,9 @@ const FeaturedCompanyHolder = ({
                             maxValues={maxValues}
                             averageValues={averageValues}
                             onActiveScreenChange={onActiveScreenChange}
+                            onOpenDataExplorationSection={
+                                onOpenDataExplorationSection
+                            }
                         />
                     </SwiperSlide>
                 ))}

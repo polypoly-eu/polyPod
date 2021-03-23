@@ -31,10 +31,8 @@ const FeaturedCompany = ({
     maxValues,
     averageValues,
     onActiveScreenChange,
+    onOpenDataExplorationSection,
 }) => {
-    const handleOpenDetails = () =>
-        onActiveScreenChange("dataExploration", company.name);
-
     return (
         <div className="featured-company-card">
             <div className="short-info-margin">
@@ -49,21 +47,27 @@ const FeaturedCompany = ({
                     count={company.dataTypesShared.length}
                     max={maxValues.dataTypes}
                     average={averageValues.dataTypes}
-                    onOpenDetails={handleOpenDetails}
+                    onOpenDetails={() =>
+                        onOpenDataExplorationSection("dataTypes", company.name)
+                    }
                 />
                 <DataSharingSection
                     sharingType="purposes"
                     count={company.dataSharingPurposes.length}
                     max={maxValues.purposes}
                     average={averageValues.purposes}
-                    onOpenDetails={handleOpenDetails}
+                    onOpenDetails={() =>
+                        onOpenDataExplorationSection("purposes", company.name)
+                    }
                 />
                 <DataSharingSection
                     sharingType="companies"
                     count={company.dataRecipients.length}
                     max={maxValues.companies}
                     average={averageValues.companies}
-                    onOpenDetails={handleOpenDetails}
+                    onOpenDetails={() =>
+                        onOpenDataExplorationSection("companies", company.name)
+                    }
                 />
                 <DataSharingSection
                     sharingType="jurisdictions"
@@ -74,7 +78,12 @@ const FeaturedCompany = ({
                     }
                     max={maxValues.jurisdictions}
                     average={averageValues.jurisdictions}
-                    onOpenDetails={handleOpenDetails}
+                    onOpenDetails={() =>
+                        onOpenDataExplorationSection(
+                            "jurisdictions",
+                            company.name
+                        )
+                    }
                 />
                 <DataSharingLegend
                     onClick={() => onActiveScreenChange("featuredCompanyInfo")}

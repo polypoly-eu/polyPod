@@ -88,7 +88,6 @@ const DataExplorationScreen = ({
 
     const getScreens = () => {
         const screens = [
-            "construction",
             "dataTypes",
             "dataTypesUnderText",
             "dataTypesCategory",
@@ -498,7 +497,6 @@ const DataExplorationScreen = ({
                             setActiveIndex(swiper.activeIndex)
                         }
                     >
-                        <SwiperSlide></SwiperSlide>
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide>
                             <p className="on-bubble">
