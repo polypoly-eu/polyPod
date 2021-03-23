@@ -15,7 +15,11 @@ const CompaniesInfo = ({ onClose }) => {
                     __html: i18n.t("explorationCompaniesInfoScreen:text.1"),
                 }}
             />
-            <p>{i18n.t("explorationCompaniesInfoScreen:text.2")}</p>
+            <img
+                src={`./images/infographics/companies/${i18n.t(
+                    "common:country.image.ending"
+                )}.svg`}
+            />
         </ExplorationInfoScreen>
     );
 };
