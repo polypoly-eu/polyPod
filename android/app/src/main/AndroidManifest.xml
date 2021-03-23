@@ -30,7 +30,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:label="@string/settings_title"
             android:theme="@style/Theme.AppCompat.Light" />
     </application>
