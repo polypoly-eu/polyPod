@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FeatureStorage().installBundledFeatures(applicationContext)
+        FeatureStorage().installBundledFeatures(this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
     }
