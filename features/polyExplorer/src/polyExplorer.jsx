@@ -62,7 +62,7 @@ const PolyExplorer = () => {
     const [activeFilters, setActiveFilters] = useState(emptyFilters());
     const [firstRun, setFirstRun] = useState(false);
     const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
-    const initialDataExplorationSection = "construction";
+    const initialDataExplorationSection = "dataTypes";
     const [dataExploringSection, setDataExploringSection] = useState(
         initialDataExplorationSection
     );
