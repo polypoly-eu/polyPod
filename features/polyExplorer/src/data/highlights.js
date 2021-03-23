@@ -222,7 +222,7 @@ export default {
             },
         },
     },
-    "PAYPAL, INC.": {
+    "PayPal (Europe) S.à r.l. et Cie, S.C.A.": {
         dataTypeCorrelation: {
             types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
             explanation: {
