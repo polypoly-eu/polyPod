@@ -1,6 +1,5 @@
 package coop.polypoly.polypod.polyIn
 
-import coop.polypoly.polypod.MainActivity
 import coop.polypoly.polypod.polyIn.rdf.*
 import org.apache.jena.rdf.model.*
 import java.io.File
