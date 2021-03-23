@@ -7,7 +7,11 @@ import "./dataRegionInfo.css";
 
 const DataRegionInfo = ({ onClose }) => {
     return (
-        <ExplorationInfoScreen className="data-region-info-screen" light={true}>
+        <ExplorationInfoScreen
+            className="data-region-info-screen"
+            light={true}
+            onClose={onClose}
+        >
             <h1 className="heading">
                 {i18n.t("dataRegionInfoScreen:heading")}
             </h1>
@@ -153,9 +157,6 @@ const DataRegionInfo = ({ onClose }) => {
                     __html: i18n.t("dataRegionInfoScreen:undisclosed.text"),
                 }}
             ></div>
-            <button onClick={onClose}>
-                {i18n.t("infoScreen:button.explore")}
-            </button>
         </ExplorationInfoScreen>
     );
 };

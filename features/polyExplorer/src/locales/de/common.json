@@ -91,6 +91,8 @@
         "Translation_DE",
     "purpose.description.i18nkey":
         "Explanation_DE",
+    "country.image.ending":
+        "de",
     "button.ok":
         "OK"
 }

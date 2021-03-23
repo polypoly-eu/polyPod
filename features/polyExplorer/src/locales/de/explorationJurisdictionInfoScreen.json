@@ -3,6 +3,10 @@
     "text.1": "Länder und Regionen haben unterschiedliche Gesetze und Umstände, die das Datenverhalten von Firmen beeinflussen. Diese sind manchmal kulturell, aber oft auch politisch motiviert. Wir haben einige dieser Regionen in „Datenregionen\" aufgeteilt, um ein besseres Verständnis dafür zu wecken. Entscheidend ist, in welchen Datenregionen die Unternehmen sitzen, die am Ende die Nutzerdaten erhalten.",
     "subheading.1": "Treemap",
     "text.2": "Diese sogenannte Treemap zeigt, wie sich die Daten auf verschiedene Datenregionen verteilen.",
+    "legend.1": "Alle Blöcke zusammen repräsentieren alle geteilten Daten.",
+    "legend.2": "Die einzelnen Blöcke zeigen, welcher Anteil der gesamten Datenmenge in der jeweiligen Datenregion landet.",
+    "legend.3": "Diese Ansicht zeigt die einzelnen Länder innerhalb ihrer Datenregionen.",
+    "legend.4": "Gerade die Datenregionen ausserhalb der DSGVO Region verdienen für Nutzer in der EU besondere Aufmerksamkeit.",
     "subheading.2": "Warum keine Weltkarte?",
     "text.3": "Obwohl wir hier Länder zeigen, geht es eher um die Verteilung der Daten, als um die Lage der Länder. Eine Darstellung der Verteilung ist auch auf einer Weltkarte möglich, aber sie ist schwieriger, weil kleine Länder schwerer zu erkennen sind als große und sich z.B. beim Einfärben der Flächen missverständnliche Eindrücke ergeben können. Daher haben wir die besser geeignete Treemap als Darstellung gewählt."
 }

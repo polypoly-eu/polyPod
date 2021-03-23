@@ -34,10 +34,10 @@
 
 .data-region-info-screen img {
     width: 100%;
+    background-color: #0f1938;
     max-width: 412px;
     display: block;
     box-sizing: border-box;
-    padding: 4px;
     margin: 0 auto;
 }
 

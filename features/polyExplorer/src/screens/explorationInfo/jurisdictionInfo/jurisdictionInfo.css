@@ -1,0 +1,78 @@
+.jurisdiction-info .tree-legend {
+    display: flex;
+    flex-direction: row;
+    padding: 0 28px;
+}
+
+.jurisdiction-info .tree-legend p {
+    font-size: 12px;
+    padding: 0 4px;
+}
+
+.jurisdiction-info .legend-container {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    padding: 0 30px;
+}
+
+.jurisdiction-info .legend {
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.jurisdiction-info .legend div {
+    display: flex;
+    flex-direction: row;
+}
+
+.jurisdiction-info .legend .EU-GDPR {
+    background-color: #60e6de;
+}
+
+.jurisdiction-info .legend .Russia {
+    background-color: #fe8988;
+}
+
+.jurisdiction-info .legend .Five-Eyes {
+    background-color: #ec453d;
+}
+
+.jurisdiction-info .legend .China {
+    background-color: #c5271e;
+}
+
+.jurisdiction-info .legend .Others {
+    background-color: #8d9caf;
+}
+
+.jurisdiction-info .legend-container p {
+    color: #0f1938;
+    width: auto;
+    font-weight: 500;
+    font-size: 10px;
+    padding: 0;
+    margin: 4px 6px 4px 2px;
+}
+
+.jurisdiction-info .legend-container .fixed-graphic {
+    width: 320px;
+    margin: 0 auto 12px auto;
+}
+
+.jurisdiction-info .legend .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateY(5px);
+}
+
+.jurisdiction-info .separator {
+    width: 80%;
+    border: 1px solid #8d9caf;
+    margin: 24px auto;
+}
