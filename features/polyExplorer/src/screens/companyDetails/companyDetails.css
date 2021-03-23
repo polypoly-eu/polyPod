@@ -51,8 +51,9 @@
 }
 
 .tab-content-container .featured-map-container {
-    width: 100%;
+    width: 320px;
     max-width: 412px;
+    margin: auto;
 }
 
 .tab-content-container .featured-map {
