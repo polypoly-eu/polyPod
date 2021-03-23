@@ -54,7 +54,7 @@ class PushNotificationWorker(
         val pushNotification =
             NotificationCompat.Builder(context, CHANNEL_ID)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setSmallIcon(R.drawable.ic_info_light)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setAutoCancel(true)
                 .setContentTitle(notification.title)
                 .setContentText(notification.text)
