@@ -32,6 +32,8 @@ const DataExplorationScreen = ({
     maxCompanies,
     dataRecipients,
 }) => {
+    const validDataRecipients = dataRecipients.filter((e) => !!e);
+
     //Methods
     const getCategories = () => {
         const categories = [];
@@ -53,36 +55,34 @@ const DataExplorationScreen = ({
 
     const getJurisdictionTreeFormat = () => {
         const jurisdictionTreeFormatData = { name: "World", children: [] };
-        dataRecipients
-            .filter((e) => !!e)
-            .forEach((e) => {
-                let jurisdiction = jurisdictionTreeFormatData.children.find(
-                    (j) => j.name === e.jurisdiction
+        validDataRecipients.forEach((e) => {
+            let jurisdiction = jurisdictionTreeFormatData.children.find(
+                (j) => j.name === e.jurisdiction
+            );
+            if (jurisdiction !== undefined) {
+                let country = jurisdiction.children.find(
+                    (c) => c.name === e.location.countryCode
                 );
-                if (jurisdiction !== undefined) {
-                    let country = jurisdiction.children.find(
-                        (c) => c.name === e.location.countryCode
-                    );
-                    if (country !== undefined) country.value++;
-                    else
-                        jurisdiction.children.push({
+                if (country !== undefined) country.value++;
+                else
+                    jurisdiction.children.push({
+                        name: e.location.countryCode,
+                        value: 1,
+                        category: e.jurisdiction,
+                    });
+            } else {
+                jurisdictionTreeFormatData.children.push({
+                    name: e.jurisdiction,
+                    children: [
+                        {
                             name: e.location.countryCode,
                             value: 1,
                             category: e.jurisdiction,
-                        });
-                } else {
-                    jurisdictionTreeFormatData.children.push({
-                        name: e.jurisdiction,
-                        children: [
-                            {
-                                name: e.location.countryCode,
-                                value: 1,
-                                category: e.jurisdiction,
-                            },
-                        ],
-                    });
-                }
-            });
+                        },
+                    ],
+                });
+            }
+        });
         return jurisdictionTreeFormatData;
     };
 
@@ -341,13 +341,13 @@ const DataExplorationScreen = ({
                     <h1>
                         {i18n.t("common:sharing.prefix.companies")}{" "}
                         <span className="highlight-companies">
-                            {dataRecipients.length}{" "}
+                            {validDataRecipients.length}{" "}
                             {i18n.t("common:sharing.companies")}
                         </span>
                     </h1>
                     <CompanyBubbles
                         view="flat"
-                        data={dataRecipients}
+                        data={validDataRecipients}
                         width="360"
                         height="360"
                         bubbleColor="#7EE8A2"
@@ -369,13 +369,13 @@ const DataExplorationScreen = ({
                     <h1>
                         {i18n.t("common:sharing.prefix.companies")}{" "}
                         <span className="highlight-companies">
-                            {dataRecipients.length}{" "}
+                            {validDataRecipients.length}{" "}
                             {i18n.t("common:sharing.companies")}
                         </span>
                     </h1>
                     <CompanyBubbles
                         view="flat"
-                        data={dataRecipients}
+                        data={validDataRecipients}
                         width="360"
                         height="360"
                         opacity={0.1}
@@ -399,7 +399,7 @@ const DataExplorationScreen = ({
                     </h2>
                     <CompanyBubbles
                         view="industries"
-                        data={dataRecipients}
+                        data={validDataRecipients}
                         width="360"
                         height="360"
                         bubbleColor="#7EE8A2"
@@ -582,7 +582,7 @@ const DataExplorationScreen = ({
                                     )}
                                 </p>
                                 <CompaniesByIndustry
-                                    companies={dataRecipients}
+                                    companies={validDataRecipients}
                                 />
                             </div>
                         </SwiperSlide>
