@@ -88,7 +88,6 @@ const DataExplorationScreen = ({
 
     const getScreens = () => {
         const screens = [
-            "construction",
             "dataTypes",
             "dataTypesUnderText",
             "dataTypesCategory",
@@ -499,7 +498,6 @@ const DataExplorationScreen = ({
                         }
                     >
                         <SwiperSlide></SwiperSlide>
-                        <SwiperSlide></SwiperSlide>
                         <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
@@ -579,7 +577,8 @@ const DataExplorationScreen = ({
                                 </h2>
                                 <p>
                                     {i18n.t(
-                                        "dataExplorationScreen:companies.text.list"
+                                        "dataExplorationScreen:companies.text.list",
+                                        { name: company.name }
                                     )}
                                 </p>
                                 <CompaniesByIndustry

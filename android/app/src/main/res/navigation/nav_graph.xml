@@ -41,6 +41,6 @@
 
     <activity
         android:id="@+id/SettingsActivity"
-        android:name="coop.polypoly.polypod.SettingsActivity" />
+        android:name="coop.polypoly.polypod.settings.SettingsActivity" />
 
 </navigation>

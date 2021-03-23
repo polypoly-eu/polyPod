@@ -131,6 +131,11 @@ const PolyExplorer = () => {
         handleActiveScreenChange("info");
     }
 
+    const handleOpenDataExplorationSection = (section, company) => {
+        setDataExploringSection(section);
+        handleActiveScreenChange("dataExploration", company);
+    };
+
     function handleBack() {
         if (activeScreen === "dataRegionInfo") {
             handleActiveScreenChange("companyDetails");
@@ -180,6 +185,7 @@ const PolyExplorer = () => {
                 onRemoveFilter={handleRemoveFilter}
                 featuredCompanyMaxValues={featuredCompanyMaxValues}
                 featuredCompanyAverageValues={featuredCompanyAverageValues}
+                onOpenDataExplorationSection={handleOpenDataExplorationSection}
             />
         ),
         dataExploration: (

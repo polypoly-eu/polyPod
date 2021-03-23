@@ -31,7 +31,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
-    private val api = PodApi(PolyOut(), PolyIn())
+    private val api = PodApi(PolyOut(), PolyIn("data.nt", context.filesDir))
     private val navApi: PodNavApi = PodNavApi(
         webView = webView,
         onActionsChanged = { navActionsChangedHandler(it) },

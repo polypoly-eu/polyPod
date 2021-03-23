@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settings_nav_graph.xml"
+    app:startDestination="@id/MainFragment">
+
+    <fragment
+        android:id="@+id/MainFragment"
+        android:name="coop.polypoly.polypod.settings.MainFragment"
+        android:label="@string/settings_title">
+    </fragment>
+
+    <fragment
+        android:id="@+id/ImprintFragment"
+        android:name="coop.polypoly.polypod.settings.ImprintFragment"
+        android:label="@string/settings_imprint_title">
+    </fragment>
+
+    <fragment
+        android:id="@+id/PrivacyPolicyFragment"
+        android:name="coop.polypoly.polypod.settings.PrivacyPolicyFragment"
+        android:label="@string/settings_privacy_policy_title">
+    </fragment>
+
+    <fragment
+        android:id="@+id/TermsOfUseFragment"
+        android:name="coop.polypoly.polypod.settings.TermsOfUseFragment"
+        android:label="@string/settings_terms_of_use_title">
+    </fragment>
+
+</navigation>
