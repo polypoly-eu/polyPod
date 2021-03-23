@@ -260,7 +260,7 @@ const DataExplorationScreen = ({
                     <DataTypeBubbleCategory
                         data={company.dataTypesShared}
                         defaultColor="#FB8A89"
-                        category={categories[activeIndex - 4]}
+                        category={categories[activeIndex - 3]}
                         textColor="#0f1938"
                         width="360"
                         height="360"
