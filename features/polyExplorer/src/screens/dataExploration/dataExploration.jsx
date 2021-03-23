@@ -179,15 +179,15 @@ const DataExplorationScreen = ({
         element.addEventListener(
             "touchmove",
             function (event) {
-                const scrollDiff = element.scrollHeight - element.offsetHeight;
+                const scrollDiff = element.scrollHeight - element.clientHeight;
                 if (scrollDiff <= 0) return;
 
                 const touchCurrent = event.targetTouches[0].pageY;
                 const touchesDiff = touchCurrent - touchStart;
                 const topToBottom = touchesDiff < 0 && startScroll === 0;
-                const bottomToTop =
-                    touchesDiff > 0 && startScroll >= scrollDiff;
-                const middle = startScroll > 0 && startScroll < scrollDiff;
+                const atEnd = Math.abs(startScroll - scrollDiff) < 1;
+                const bottomToTop = touchesDiff > 0 && atEnd;
+                const middle = startScroll > 0 && !atEnd;
                 if (topToBottom || bottomToTop || middle)
                     event.stopPropagation();
             },
