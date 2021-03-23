@@ -6,7 +6,7 @@ import androidx.preference.PreferenceManager
 class Preferences {
     companion object {
         private const val firstRunKey = "firstRun"
-        private const val seenNotificationIdKey = "seenNotificationId"
+        private const val seenInAppNotificationIdKey = "seenInAppNotificationId"
         private const val seenPushNotificationIdKey = "seenPushNotificationId"
 
         private fun getPrefs(context: Context) =
@@ -21,12 +21,15 @@ class Preferences {
             edit.commit()
         }
 
-        fun getSeenNotificationId(context: Context): Int =
-            getPrefs(context).getInt(seenNotificationIdKey, 0)
+        fun getSeenInAppNotificationId(context: Context): Int =
+            getPrefs(context).getInt(seenInAppNotificationIdKey, 0)
 
-        fun setSeenNotificationId(context: Context, seenNotificationId: Int) {
+        fun setSeenInAppNotificationId(
+            context: Context,
+            seenNotificationId: Int
+        ) {
             val edit = getPrefs(context).edit()
-            edit.putInt(seenNotificationIdKey, seenNotificationId)
+            edit.putInt(seenInAppNotificationIdKey, seenNotificationId)
             edit.commit()
         }
 
