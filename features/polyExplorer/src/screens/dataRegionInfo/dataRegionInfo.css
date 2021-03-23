@@ -32,13 +32,9 @@
     letter-spacing: -0.01em;
 }
 
-.data-region-info-screen img {
-    width: 100%;
+.data-region-info-screen .map {
+    padding: 0 0;
     background-color: #0f1938;
-    max-width: 412px;
-    display: block;
-    box-sizing: border-box;
-    margin: 0 auto;
 }
 
 .data-region-info-screen button {

@@ -53,3 +53,10 @@
     font-family: "Jost Medium";
     font-weight: 500;
 }
+
+.exploration-info img {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 412px;
+    padding: 4px 28px;
+}
