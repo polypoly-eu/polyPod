@@ -8,16 +8,8 @@ import coop.polypoly.polypod.features.FeatureStorage
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        private var appContext: Context? = null
-        fun getContext(): Context? {
-            return appContext
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appContext = getApplicationContext()
         FeatureStorage().installBundledFeatures(applicationContext)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
