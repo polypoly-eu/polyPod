@@ -12,10 +12,10 @@ class UpdateNotification(private val context: Context) {
         context.resources.getInteger(R.integer.update_notification_push_delay)
 
     val inAppNotificationSeen: Boolean
-        get() = Preferences.getSeenNotificationId(context) == id
+        get() = id != 0 && Preferences.getSeenNotificationId(context) == id
 
     val pushNotificationSeen: Boolean
-        get() = Preferences.getSeenPushNotificationId(context) == id
+        get() = id != 0 && Preferences.getSeenPushNotificationId(context) == id
 
     fun markInAppNotificationSeen() {
         Preferences.setSeenNotificationId(context, id)
