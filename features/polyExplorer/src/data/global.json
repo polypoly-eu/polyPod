@@ -68,7 +68,7 @@
         "AW": {
             "Name_EN": "Aruba",
             "Name_DE": "Aruba",
-            "dataRegion": ""
+            "dataRegion": "Unknown"
         },
         "AX": {
             "Name_EN": "Åland Islands",
@@ -733,7 +733,7 @@
         "MO": {
             "Name_EN": "Macao",
             "Name_DE": "Macao",
-            "dataRegion": ""
+            "dataRegion": "Unknown"
         },
         "MP": {
             "Name_EN": "Northern Mariana Islands",
