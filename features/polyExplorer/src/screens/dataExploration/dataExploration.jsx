@@ -135,9 +135,6 @@ const DataExplorationScreen = ({
     const highestValueObject = getHighestValueObject();
     const jurisdictionTreeFormatData = getJurisdictionTreeFormat();
 
-    console.log(activeIndex);
-    console.log(activeScreen);
-
     const progressBar = (
         <div className="progress-bar">
             <div
