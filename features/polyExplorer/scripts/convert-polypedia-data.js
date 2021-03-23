@@ -56,7 +56,7 @@ function fixPolyPediaEntityData(entityData) {
     const commonNameMap = {
         Schufa: "SCHUFA Holding AG",
     };
-    const commonName = entityData.legal_entity.identifiers.common_name;
+    const commonName = entityData.legal_entity?.identifiers.common_name;
     if (commonName in commonNameMap) {
         const legalName = commonNameMap[commonName];
         entityData.legal_entity.identifiers.legal_name.value = legalName;
@@ -68,7 +68,7 @@ function parseEntity(entityData) {
     fixPolyPediaEntityData(entityData);
 
     const legalEntityData = entityData.legal_entity;
-    const legalName = legalEntityData.identifiers.legal_name.value;
+    const legalName = legalEntityData?.identifiers.legal_name.value;
     if (!legalName) return null;
 
     return {
