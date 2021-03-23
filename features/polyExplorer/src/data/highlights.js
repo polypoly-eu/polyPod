@@ -1,51 +1,259 @@
+const parentCategories = {
+    social: "Soziale Daten",
+    technical: "Technische Daten",
+    behavioral: "Verhaltensdaten",
+    financial: "Wirtschaftliche Daten",
+};
+
 export default {
     "SCHUFA Holding AG": {
-        correlatingDataTypes: [
-            "dpv:BrowsingReferral",
-            "dpv:BrowserFingerprint",
-            "dpv:IPAddress",
-        ],
+        dataTypeCorrelation: {
+            types: [
+                "dpv:BrowsingReferral",
+                "dpv:BrowserFingerprint",
+                "dpv:IPAddress",
+            ],
+            explanation: {
+                de: "MISSING",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.social]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+                explanation: {
+                    de: "MISSINg",
+                },
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+        },
     },
     "APPLE INC.": {
-        correlatingDataTypes: [
-            "dpv:VoiceCommunicationRecording",
-            "dpv:PhysicalAddress",
-            "dpv:MentalHealth",
-        ],
+        dataTypeCorrelation: {
+            types: [
+                "dpv:VoiceCommunicationRecording",
+                "dpv:PhysicalAddress",
+                "dpv:MentalHealth",
+            ],
+            explanation: {
+                de: "MISSING",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.social]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+                explanation: {
+                    de: "MISSINg",
+                },
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+        },
     },
     "Bayerische Motoren Werke Aktiengesellschaft": {
-        correlatingDataTypes: [
-            "dpv:IPAddress",
-            "dpv:GPSCoordinate",
-            "dpv:Interest",
-        ],
+        dataTypeCorrelation: {
+            types: ["dpv:IPAddress", "dpv:GPSCoordinate", "dpv:Interest"],
+            explanation: {
+                de: "MISSING",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.social]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+                explanation: {
+                    de: "MISSINg",
+                },
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+        },
     },
     "ALPHABET INC.": {
-        correlatingDataTypes: [
-            "dpv:GeneralReputation",
-            "dpv:TelephoneNumber",
-            "dpv:GPSCoordinate",
-        ],
+        dataTypeCorrelation: {
+            types: [
+                "dpv:GeneralReputation",
+                "dpv:TelephoneNumber",
+                "dpv:GPSCoordinate",
+            ],
+            explanation: {
+                de: "MISSING",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.social]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+                explanation: {
+                    de: "MISSINg",
+                },
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+        },
     },
     "Amazon Europe Core SARL": {
-        correlatingDataTypes: [
-            "dpv:CreditRecord",
-            "dpv:Language",
-            "dpv:BrowsingBehavior",
-        ],
+        dataTypeCorrelation: {
+            types: ["dpv:CreditRecord", "dpv:Language", "dpv:BrowsingBehavior"],
+            explanation: {
+                de: "MISSING",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.social]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+                explanation: {
+                    de: "MISSINg",
+                },
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+        },
     },
     "FACEBOOK, INC": {
-        correlatingDataTypes: [
-            "dpv:TelephoneNumber",
-            "dpv:LifeHistory",
-            "dpv:Biometric",
-        ],
+        dataTypeCorrelation: {
+            types: ["dpv:TelephoneNumber", "dpv:LifeHistory", "dpv:Biometric"],
+            explanation: {
+                de: "MISSING",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.social]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+                explanation: {
+                    de: "MISSINg",
+                },
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+        },
     },
     "PAYPAL, INC.": {
-        correlatingDataTypes: [
-            "dpv:OfficialID",
-            "dpv:TelephoneNumber",
-            "dpv:Transaction",
-        ],
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de: "MISSING",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.social]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+                explanation: {
+                    de: "MISSINg",
+                },
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
+        },
     },
 };

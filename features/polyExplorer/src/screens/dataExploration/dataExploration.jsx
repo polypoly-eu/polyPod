@@ -318,7 +318,7 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         correlationColor="#FB8A89"
                         typeBundle={
-                            highlights[company.name].correlatingDataTypes
+                            highlights[company.name].dataTypeCorrelation.types
                         }
                         width="360"
                         height="360"
