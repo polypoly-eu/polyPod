@@ -579,7 +579,8 @@ const DataExplorationScreen = ({
                                 </h2>
                                 <p>
                                     {i18n.t(
-                                        "dataExplorationScreen:companies.text.list"
+                                        "dataExplorationScreen:companies.text.list",
+                                        { name: company.name }
                                     )}
                                 </p>
                                 <CompaniesByIndustry

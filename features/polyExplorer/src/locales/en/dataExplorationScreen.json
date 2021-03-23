@@ -26,7 +26,7 @@
     "companies.heading.list":
         "Complete list of companies",
     "companies.text.list":
-        "Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
+        "All companies receiving data from {{name}}:",
     "construction.text":
         "This part is currently under construction, but you can go through it if you're curious.",
     "from.polyPedia.translation":
