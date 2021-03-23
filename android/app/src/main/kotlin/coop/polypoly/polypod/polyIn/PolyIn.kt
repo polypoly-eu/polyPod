@@ -7,7 +7,7 @@ import java.io.File
 
 open class PolyIn(
     private val databaseName: String = "data.nt",
-    private val dataBaseFolder: File? = null,
+    private val databaseFolder: File? = null,
 ) {
     val NS = "polypoly"
 
@@ -47,7 +47,7 @@ open class PolyIn(
     private fun load(): Model {
         val model = ModelFactory.createDefaultModel()
 
-        val database = File(dataBaseFolder, databaseName)
+        val database = File(databaseFolder, databaseName)
         if (!database.exists()) {
             database.createNewFile()
         }
@@ -58,7 +58,7 @@ open class PolyIn(
     }
 
     private fun save() {
-        File(dataBaseFolder, databaseName).outputStream().use { out ->
+        File(databaseFolder, databaseName).outputStream().use { out ->
             model.write(out, "N-TRIPLE")
         }
     }
