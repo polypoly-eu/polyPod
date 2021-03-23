@@ -30,7 +30,8 @@
     <string name="message_url_open_requested">%1$s möchte eine URL in Ihrem Browser öffnen:\n\n%2$s\n\nZulassen?</string>
     <string name="button_url_open_confirm">Ja</string>
     <string name="button_url_open_reject">Nein</string>
-    
+    <string name="button_update_notification_close">OK</string>
+
     <!-- These strings will only be visible to feature developers, no need to translate them -->
     <string name="dev_feature_list_no_features">No features there are at this point.\nCome again later or correctly deploy your feature you should.</string>
     <string name="dev_message_forbidden_resource_requested">Forbidden making requests to external servers is</string>
