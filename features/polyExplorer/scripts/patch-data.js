@@ -7,9 +7,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "Acronis Germany GmbH": {
@@ -20,9 +23,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "EDV & IT",
-            en: "IT",
+        industryCategory: {
+            id: "ic:IT",
+            name: {
+                de: "EDV & IT",
+                en: "IT",
+            },
         },
     },
     "Adidas AG": {
@@ -33,9 +39,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Textil & Mode",
-            en: "Textile & Fashion",
+        industryCategory: {
+            id: "ic:TextileAndFashion",
+            name: {
+                de: "Textil & Mode",
+                en: "Textile & Fashion",
+            },
         },
     },
     "Allianz SE": {
@@ -46,9 +55,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Versicherung",
-            en: "Insurance",
+        industryCategory: {
+            id: "ic:Insurance",
+            name: {
+                de: "Versicherung",
+                en: "Insurance",
+            },
         },
     },
     "Axel Springer SE": {
@@ -68,9 +80,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Chemie & Pharma",
-            en: "Chemical & Pharmazeutical",
+        industryCategory: {
+            id: "ic:ChemicalAndPharmazeutical",
+            name: {
+                de: "Chemie & Pharma",
+                en: "Chemical & Pharmazeutical",
+            },
         },
     },
     "Bayer AG": {
@@ -81,9 +96,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Chemie & Pharma",
-            en: "Chemical & Pharmazeutical",
+        industryCategory: {
+            id: "ic:ChemicalAndPharmazeutical",
+            name: {
+                de: "Chemie & Pharma",
+                en: "Chemical & Pharmazeutical",
+            },
         },
     },
     "Blacklane GmbH": {
@@ -94,9 +112,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Verkehr & Transport & Logistik",
-            en: "Traffic & Transport & Logistics",
+        industryCategory: {
+            id: "ic:TrafficAndTransportAndLogistics",
+            name: {
+                de: "Verkehr & Transport & Logistik",
+                en: "Traffic & Transport & Logistics",
+            },
         },
     },
     "Bayerische Motoren Werke AG": {
@@ -107,9 +128,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Automotive",
-            en: "Automotive",
+        industryCategory: {
+            id: "ic:Automotice",
+            name: {
+                de: "Automotive",
+                en: "Automotive",
+            },
         },
     },
     "booking.com B.V": {
@@ -129,9 +153,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "Comuto Deutschland GmbH": {
@@ -142,9 +169,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Verkehr & Transport & Logistik",
-            en: "Traffic & Transport & Logistics",
+        industryCategory: {
+            id: "ic:TrafficAndTransportAndLogistics",
+            name: {
+                de: "Verkehr & Transport & Logistik",
+                en: "Traffic & Transport & Logistics",
+            },
         },
     },
     "DB Vertrieb GmbH": {
@@ -155,9 +185,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Verkehr & Transport & Logistik",
-            en: "Traffic & Transport & Logistics",
+        industryCategory: {
+            id: "ic:TrafficAndTransportAndLogistics",
+            name: {
+                de: "Verkehr & Transport & Logistik",
+                en: "Traffic & Transport & Logistics",
+            },
         },
     },
     "Deliveroo Germany GmbH": {
@@ -168,9 +201,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "Delivery Hero SE": {
@@ -181,9 +217,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "eGym GmbH": {
@@ -194,9 +233,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Gesundheitswesen & Soziales",
-            en: "Health & Social",
+        industryCategory: {
+            id: "ic:HealthAndSocial",
+            name: {
+                de: "Gesundheitswesen & Soziales",
+                en: "Health & Social",
+            },
         },
     },
     "FC Bayern München AG": {
@@ -207,9 +249,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "Yelp Ireland Limited": {
@@ -220,9 +265,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "Zalando SE": {
@@ -233,9 +281,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "Tado GmbH": {
@@ -246,9 +297,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Energie & Umwelt",
-            en: "Energy & Environment",
+        industryCategory: {
+            id: "ic:EnergyAndEnvironment",
+            name: {
+                de: "Energie & Umwelt",
+                en: "Energy & Environment",
+            },
         },
     },
     "Ubisoft Blue Byte GmbH": {
@@ -259,9 +313,12 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "Verizon Media Germany GmbH": {
@@ -272,399 +329,597 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "1 & 1 Ionos": {
-        category: {
-            de: "Telekommunikation",
-            en: "Telecommunication",
+        industryCategory: {
+            id: "ic:Telecommunication",
+            name: {
+                de: "Telekommunikation",
+                en: "Telecommunication",
+            },
         },
     },
     "Ada Health GmbH": {
-        category: {
-            de: "Gesundheitswesen & Soziales",
-            en: "Health & Social",
+        industryCategory: {
+            id: "ic:HealthAndSocial",
+            name: {
+                de: "Gesundheitswesen & Soziales",
+                en: "Health & Social",
+            },
         },
     },
     "AdColony GmbH": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "Adform Germany GmbH": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "Amazon Europe Core SARL": {
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "APPLE INC.": {
-        category: {
-            de: "EDV & IT",
-            en: "IT",
+        industryCategory: {
+            id: "ic:IT",
+            name: {
+                de: "EDV & IT",
+                en: "IT",
+            },
         },
     },
     "ASOS Germany GmbH": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "Auto 1 Group GmbH": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "auxmoney GmbH": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "Baker & McKenzie International B.V.": {
-        category: {
-            de: "Recht & Steuern",
-            en: "Law & Taxes",
+        industryCategory: {
+            id: "ic:LawAndTaxes",
+            name: {
+                de: "Recht & Steuern",
+                en: "Law & Taxes",
+            },
         },
     },
     "BOOHOO GROUP PLC": {
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "booking.com B.V.": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "CLOUD & HEAT Technologies GmbH": {
-        category: {
-            de: "EDV & IT",
-            en: "IT",
+        industryCategory: {
+            id: "ic:IT",
+            name: {
+                de: "EDV & IT",
+                en: "IT",
+            },
         },
     },
     "Contentful GmbH": {
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "Deposit Solutions GmbH": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "Doctolib GmbH": {
-        category: {
-            de: "Gesundheitswesen & Soziales",
-            en: "Health & Social",
+        industryCategory: {
+            id: "ic:HealthAndSocial",
+            name: {
+                de: "Gesundheitswesen & Soziales",
+                en: "Health & Social",
+            },
         },
     },
     "Dreamlines Tours GmbH": {
-        category: {
-            de: "Verkehr & Transport & Logistik",
-            en: "Traffic & Transport & Logistics",
+        industryCategory: {
+            id: "ic:TrafficAndTransportAndLogistics",
+            name: {
+                de: "Verkehr & Transport & Logistik",
+                en: "Traffic & Transport & Logistics",
+            },
         },
     },
     "FinanceFox Beteiligung GmbH": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "FlixMobility GmbH": {
-        category: {
-            de: "Verkehr & Transport & Logistik",
-            en: "Traffic & Transport & Logistics",
+        industryCategory: {
+            id: "ic:TrafficAndTransportAndLogistics",
+            name: {
+                de: "Verkehr & Transport & Logistik",
+                en: "Traffic & Transport & Logistics",
+            },
         },
     },
     "GetYourGuide Deutschland GmbH": {
-        category: {
-            de: "Service",
-            en: "Service",
+        industryCategory: {
+            id: "ic:Service",
+            name: {
+                de: "Service",
+                en: "Service",
+            },
         },
     },
     "GOEURO Travel GmbH": {
-        category: {
-            de: "Verkehr & Transport & Logistik",
-            en: "Traffic & Transport & Logistics",
+        industryCategory: {
+            id: "ic:TrafficAndTransportAndLogistics",
+            name: {
+                de: "Verkehr & Transport & Logistik",
+                en: "Traffic & Transport & Logistics",
+            },
         },
     },
     "Google LLC": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "Gruner + Jahr GmbH": {
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "Hellofresh SE": {
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "Helpling GmbH & Co. KG": {
-        category: {
-            de: "Service",
-            en: "Service",
+        industryCategory: {
+            id: "ic:Service",
+            name: {
+                de: "Service",
+                en: "Service",
+            },
         },
     },
     "Inter IKEA Systems B.V.": {
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "Immobilien Scout GmbH": {
-        category: {
-            de: "Immobilien & Facility Management",
-            en: "Real Estate & Facility Management",
+        industryCategory: {
+            id: "ic:RealEstateAndFacilityManagement",
+            name: {
+                de: "Immobilien & Facility Management",
+                en: "Real Estate & Facility Management",
+            },
         },
     },
     "Intel Deutschland GmbH": {
-        category: {
-            de: "EDV & IT",
-            en: "IT",
+        industryCategory: {
+            id: "ic:IT",
+            name: {
+                de: "EDV & IT",
+                en: "IT",
+            },
         },
     },
     "Jobandtalent DE GmbH": {
-        category: {
-            de: "Service",
-            en: "Service",
+        industryCategory: {
+            id: "ic:Service",
+            name: {
+                de: "Service",
+                en: "Service",
+            },
         },
     },
     "Klarna GmbH": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "Kreditech Holding SSL GmbH": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "Launchmetrics Germany GmbH": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "yd. yourdelivery GmbH": {
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "MAINSTAY MEDICAL INTERNATIONAL PUBLIC LIMITED COMPANY": {
-        category: {
-            de: "Gesundheitswesen & Soziales",
-            en: "Health & Social",
+        industryCategory: {
+            id: "ic:HealthAndSocial",
+            name: {
+                de: "Gesundheitswesen & Soziales",
+                en: "Health & Social",
+            },
         },
     },
     "MessageBird GmbH": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "mobile.de GmbH": {
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "N26 Bank GmbH": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "Nestle S.A.": {
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "Netflix International B.V.": {
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "Otto (GmbH & Co KG)": {
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "Outfittery GmbH": {
-        category: {
-            de: "Handel & Konsum",
-            en: "Retail & Consumption",
+        industryCategory: {
+            id: "ic:RetailAndConsumption",
+            name: {
+                de: "Handel & Konsum",
+                en: "Retail & Consumption",
+            },
         },
     },
     "Pro Sieben Sat.1 Media": {
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "Raisin GmbH": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "ResearchGate GmbH": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "Roche Deutschland Holding GmbH": {
-        category: {
-            de: "Chemie & Pharma",
-            en: "Chemical & Pharmazeutical",
+        industryCategory: {
+            id: "ic:ChemicalAndPharmazeutical",
+            name: {
+                de: "Chemie & Pharma",
+                en: "Chemical & Pharmazeutical",
+            },
         },
     },
     "Rocket Internet SE": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "Samsung Electronics GmbH": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "SAP Deutschland SE & Co. KG": {
-        category: {
-            de: "EDV & IT",
-            en: "IT",
+        industryCategory: {
+            id: "ic:IT",
+            name: {
+                de: "EDV & IT",
+                en: "IT",
+            },
         },
     },
     "SCHUFA Holding AG": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "Shazam Media Services GmbH": {
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "Siemens Aktiengesellschaft": {
-        category: {
-            de: "EDV & IT",
-            en: "IT",
+        industryCategory: {
+            id: "ic:IT",
+            name: {
+                de: "EDV & IT",
+                en: "IT",
+            },
         },
     },
     "Sigfox Germany GmbH": {
-        category: {
-            de: "Telekommunikation",
-            en: "Telecommunication",
+        industryCategory: {
+            id: "ic:Telecommunication",
+            name: {
+                de: "Telekommunikation",
+                en: "Telecommunication",
+            },
         },
     },
     "Signavio GmbH": {
-        category: {
-            de: "EDV & IT",
-            en: "IT",
+        industryCategory: {
+            id: "ic:IT",
+            name: {
+                de: "EDV & IT",
+                en: "IT",
+            },
         },
     },
     "Simplesurance GmbH": {
-        category: {
-            de: "Versicherung",
-            en: "Insurance",
+        industryCategory: {
+            id: "ic:Insurance",
+            name: {
+                de: "Versicherung",
+                en: "Insurance",
+            },
         },
     },
     "smartly.io Solutions GmbH": {
-        category: {
-            de: "Marketing & Kommunikation",
-            en: "Marketing & Communications",
+        industryCategory: {
+            id: "ic:MarketingAndCommunication",
+            name: {
+                de: "Marketing & Kommunikation",
+                en: "Marketing & Communications",
+            },
         },
     },
     "Smava GmbH": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "Socialbakers Germany GmbH": {
-        category: {
-            de: "Marketing & Kommunikation",
-            en: "Marketing & Communications",
+        industryCategory: {
+            id: "ic:MarketingAndCommunication",
+            name: {
+                de: "Marketing & Kommunikation",
+                en: "Marketing & Communications",
+            },
         },
     },
     "solarisBank AG": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "Soundcloud Global Limited & Co KG": {
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "SPIEGEL-Verlag Rudolf Augstein GmbH & Co. KG": {
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "Spotahome Germany GmbH": {
-        category: {
-            de: "EDV & IT",
-            en: "Sharing Economy",
+        industryCategory: {
+            id: "ic:IT",
+            name: {
+                de: "EDV & IT",
+                en: "Sharing Economy",
+            },
         },
     },
     "Spotcap Global Services GmbH": {
-        category: {
-            de: "Banken & Finanzen",
-            en: "Banks & Finance",
+        industryCategory: {
+            id: "ic:BanksAndFinance",
+            name: {
+                de: "Banken & Finanzen",
+                en: "Banks & Finance",
+            },
         },
     },
     "Spotify GmbH": {
-        category: {
-            de: "Kultur & Unterhaltung & Veranstaltung",
-            en: "Culture & Entertainment & Events",
+        industryCategory: {
+            id: "ic:CultureAndEntertainmentAndEvents",
+            name: {
+                de: "Kultur & Unterhaltung & Veranstaltung",
+                en: "Culture & Entertainment & Events",
+            },
         },
     },
     "Ströer SE & Co. KGaA": {
-        category: {
-            de: "Internet & Multimedia",
-            en: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+                en: "Internet & Multimedia",
+            },
         },
     },
     "wefox Germany GmbH": {
-        category: {
-            de: "Versicherung",
-            en: "Insurance",
+        industryCategory: {
+            id: "ic:Insurance",
+            name: {
+                de: "Versicherung",
+                en: "Insurance",
+            },
         },
     },
 };
@@ -680,34 +935,53 @@ for (let entity of Object.values(patchData))
 Object.assign(patchData, {
     "Outbrain Inc.": {
         name: "Outbrain Inc.",
-        category: "EDV & IT",
+        industryCategory: {
+            id: "ic:IT",
+            name: {
+                de: "EDV & IT",
+            },
+        },
         location: { city: "New York", countryCode: "US" },
     },
     "Microsoft Corporation": {
         name: "Microsoft Corporation",
-        category: "EDV & IT",
+        industryCategory: {
+            id: "ic:IT",
+            name: { de: "EDV & IT" },
+        },
         location: { city: "Redmond", countryCode: "US" },
     },
     "Google Ireland Limited": {
         name: "Google Ireland Limited",
-        category: "Internet & Multimedia",
+        industryCategory: {
+            id: "ic:InternetAndMultimedia",
+            name: {
+                de: "Internet & Multimedia",
+            },
+        },
         location: { city: "Dublin", countryCode: "IE" },
     },
     // Seems this one is in the data under "Etracker.de e. K.", but I'm not sure
     // and we can't merge it here, so we duplicate it for now:
     "Etracker GmbH": {
         name: "Etracker GmbH",
-        category: "Werbung",
+        industryCategory: {
+            id: "ic:Advertising",
+            name: { de: "Werbung" },
+        },
         location: { city: "Hamburg", countryCode: "DE" },
     },
     // This one is in the data under the same name/key, just missing the
-    // category:
+    // industry category:
     "EBID Service AG": {
-        category: "Werbung",
+        industryCategory: { id: "ic:Advertising", name: { de: "Werbung" } },
     },
     Accenture: {
         name: "Accenture",
-        category: "Consulting",
+        industryCategory: {
+            id: "ic:Consulting",
+            name: { de: "Consulting" },
+        },
         location: {
             city: "Dublin",
             countryCode: "IE",
@@ -715,7 +989,7 @@ Object.assign(patchData, {
     },
     "American Heart Association": {
         name: "American Heart Association",
-        category: "NGO",
+        industryCategory: { id: "ic:NGO", name: { de: "NGO" } },
         location: {
             city: "Chicago",
             countryCode: "US",
@@ -723,7 +997,7 @@ Object.assign(patchData, {
     },
     Cisco: {
         name: "Cisco",
-        category: "EDV & IT",
+        industryCategory: { id: "ic:IT", name: { de: "EDV & IT" } },
         location: {
             city: "San Jose",
             countryCode: "US",
@@ -731,7 +1005,7 @@ Object.assign(patchData, {
     },
     Deloitte: {
         name: "Deloitte",
-        category: "Consulting",
+        industryCategory: { id: "ic:Consulting", name: { de: "Consulting" } },
         location: {
             city: "London",
             countryCode: "UK",
@@ -739,7 +1013,7 @@ Object.assign(patchData, {
     },
     "Department of Medicine at Brigham and Women's Hospital": {
         name: "Department of Medicine at Brigham and Women's Hospital",
-        category: "Health",
+        industryCategory: { id: "ic:Health", name: { de: "Health" } },
         location: {
             city: "Boston",
             countryCode: "US",
@@ -747,7 +1021,7 @@ Object.assign(patchData, {
     },
     "Green Dot Corporation": {
         name: "Green Dot Corporation",
-        category: "Finance",
+        industryCategory: { id: "ic:Finance", name: { de: "Finance" } },
         location: {
             city: "Passadena",
             countryCode: "US",
@@ -755,7 +1029,7 @@ Object.assign(patchData, {
     },
     "Harvard T H Chan School": {
         name: "Harvard T H Chan School",
-        category: "Science",
+        industryCategory: { id: "ic:Science", name: { de: "Science" } },
         location: {
             city: "Boston",
             countryCode: "US",
@@ -763,7 +1037,7 @@ Object.assign(patchData, {
     },
     IBM: {
         name: "IBM",
-        category: "EDV & IT",
+        industryCategory: { id: "ic:IT", name: { de: "EDV & IT" } },
         location: {
             city: "Armonk",
             countryCode: "US",
@@ -771,7 +1045,7 @@ Object.assign(patchData, {
     },
     NIEHS: {
         name: "NIEHS",
-        category: "Science",
+        industryCategory: { id: "ic:Science", name: { de: "Science" } },
         location: {
             city: "Durham",
             countryCode: "US",
@@ -781,7 +1055,7 @@ Object.assign(patchData, {
     // I'm not sure and we can't merge it here, so we duplicate it for now:
     SAP: {
         name: "SAP",
-        category: "EDV & IT",
+        industryCategory: { id: "ic:IT", name: { de: "EDV & IT" } },
         location: {
             city: "Walldorf",
             countryCode: "DE",
@@ -789,7 +1063,7 @@ Object.assign(patchData, {
     },
     SalesForce: {
         name: "SalesForce",
-        category: "EDV & IT",
+        industryCategory: { id: "ic:IT", name: { de: "EDV & IT" } },
         location: {
             city: "San Francisco",
             countryCode: "US",
@@ -797,7 +1071,7 @@ Object.assign(patchData, {
     },
     "University Of Michigan": {
         name: "University Of Michigan",
-        category: "Science",
+        industryCategory: { id: "ic:Science", name: { de: "Science" } },
         location: {
             city: "Ann Arbor",
             countryCode: "US",

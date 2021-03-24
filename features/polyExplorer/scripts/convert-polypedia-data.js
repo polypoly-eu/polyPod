@@ -97,7 +97,7 @@ function parseEntity(entityData) {
               )
             : null,
         description: parseDescription(legalEntityData),
-        category: null,
+        industryCategory: null,
     };
 }
 
@@ -170,7 +170,7 @@ function fixCompanyData(entityMap) {
             const recipientKey = entityKey(recipientName);
             const keep =
                 recipientKey in entityMap &&
-                "category" in entityMap[recipientKey];
+                "industryCategory" in entityMap[recipientKey];
             if (!keep) {
                 dataIssueLog.missingDataRecipients[recipientName] =
                     dataIssueLog.missingDataRecipients[recipientName] || [];

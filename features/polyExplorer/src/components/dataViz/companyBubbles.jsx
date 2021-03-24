@@ -20,10 +20,12 @@ const CompanyBubbles = ({
         d3.select(bubbleRef.current).selectAll("svg").remove();
     };
 
-    function groupByCategory(companies) {
+    function groupByIndustry(companies) {
         const groups = {};
-        for (let { name, category } of companies) {
-            const industry = category || i18n.t("common:category.undisclosed");
+        for (let { name, industryCategory } of companies) {
+            const industry =
+                industryCategory?.name?.[i18n.language] ||
+                i18n.t("common:category.undisclosed");
             if (!groups[industry]) groups[industry] = [];
             groups[industry].push(name);
         }
@@ -32,16 +34,16 @@ const CompanyBubbles = ({
 
     // TODO: Pass in as parameter or read directly from highlights.js
     const highlights = (() => {
-        const companiesByCategory = groupByCategory(data);
-        if (!Object.keys(companiesByCategory).length) return {};
+        const companiesByIndustry = groupByIndustry(data);
+        if (!Object.keys(companiesByIndustry).length) return {};
         return {
             industry: {
-                name: Object.keys(companiesByCategory).slice(-1)[0],
+                name: Object.keys(companiesByIndustry).slice(-1)[0],
                 explanation:
                     "Invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et sea rebum.",
             },
             company: {
-                name: Object.values(companiesByCategory)
+                name: Object.values(companiesByIndustry)
                     .slice(-1)[0]
                     .slice(-1)[0],
                 explanation:
@@ -51,11 +53,11 @@ const CompanyBubbles = ({
     })();
 
     function createIndustryViewData(data) {
-        const companiesByCategory = groupByCategory(data);
+        const companiesByIndustry = groupByIndustry(data);
         const viewData = { padding: 40 };
-        viewData.children = Object.entries(companiesByCategory).map(
-            ([category, names]) => ({
-                name: category,
+        viewData.children = Object.entries(companiesByIndustry).map(
+            ([industry, names]) => ({
+                name: industry,
                 children: names.map((name) => ({ name })),
             })
         );

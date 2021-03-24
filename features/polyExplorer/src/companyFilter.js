@@ -16,6 +16,8 @@ function mostRecentAnnualRevenue(company) {
     return lastAnnualRevenue.amount / 1000;
 }
 
+const industryCategoryNames = {};
+
 const allRevenueRanges = [
     -1,
     0,
@@ -31,7 +33,14 @@ const allRevenueRanges = [
 
 const extractValue = (company, field) =>
     ({
-        industryCategory: () => company.industryCategory || "?",
+        industryCategory: (company) => {
+            const category = company.industryCategory;
+            const id = category?.id;
+            if (!id) return "?";
+            if (!(id in industryCategoryNames))
+                industryCategoryNames[id] = category.name;
+            return id;
+        },
         jurisdiction: (company) => company.jurisdiction,
         location: (company) => company.location.countryCode,
         revenueRange: (company) => {
@@ -54,32 +63,32 @@ export function extractFilters(companies) {
 
 export function displayString(field, value, i18n, globalData) {
     const displayStrings = {
-        industryCategory: {
-            "?": () => i18n.t("common:companyFilter.missing"),
+        industryCategory: (value) =>
+            industryCategoryNames[value]?.[i18n.language] ||
+            i18n.t("common:category.undisclosed"),
+        jurisdiction: (value) => {
+            const key =
+                {
+                    "EU-GDPR": "euGdpr",
+                    Russia: "russia",
+                    "Five-Eyes": "fiveEyes",
+                    China: "china",
+                }[value] || "undisclosed";
+            return i18n.t(`common:jurisdiction.${key}`);
         },
-        jurisdiction: {
-            "EU-GDPR": () => i18n.t("common:jurisdiction.euGdpr"),
-            Russia: () => i18n.t("common:jurisdiction.russia"),
-            "Five-Eyes": () => i18n.t("common:jurisdiction.fiveEyes"),
-            China: () => i18n.t("common:jurisdiction.china"),
+        revenueRange: (value) => {
+            if (value === "-1") return i18n.t("common:companyFilter.missing");
+            const key = allRevenueRanges.find(
+                (item) => item === parseInt(value, 10)
+            );
+            return i18n.t(`common:companyFilter.revenueRange.${key}`);
         },
-        revenueRange: Object.fromEntries(
-            allRevenueRanges.map((range) => [
-                range,
-                () =>
-                    range === -1
-                        ? i18n.t("common:companyFilter.missing")
-                        : i18n.t(`common:companyFilter.revenueRange.${range}`),
-            ])
-        ),
-        location: Object.fromEntries(
-            Object.entries(globalData.countries || {}).map(([code, data]) => [
-                code,
-                () => data[i18n.t("common:companyFilter.countryNameKey")],
-            ])
-        ),
+        location: (_value) =>
+            (globalData.countries[value] || {})[
+                i18n.t("common:companyFilter.countryNameKey")
+            ],
     };
-    return ((displayStrings[field] || [])[value] || (() => value))();
+    return displayStrings[field](value) || value;
 }
 
 export const hasFilter = (filters, field, value) => filters[field].has(value);

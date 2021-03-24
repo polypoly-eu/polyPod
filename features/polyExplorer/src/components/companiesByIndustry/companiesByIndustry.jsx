@@ -5,17 +5,18 @@ import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import "./companiesByIndustry.css";
 
 function CompaniesByIndustry({ companies }) {
-    const categoryMap = {};
+    const industryMap = {};
     for (let company of companies) {
-        const category =
-            company.category || i18n.t("common:category.undisclosed");
-        if (!categoryMap[category]) categoryMap[category] = [];
-        categoryMap[category].push(company);
+        const industry =
+            company.industryCategory?.name[i18n.language] ||
+            i18n.t("common:category.undisclosed");
+        if (!industryMap[industry]) industryMap[industry] = [];
+        industryMap[industry].push(company);
     }
 
     return (
         <div className="companies-by-industry">
-            {Object.entries(categoryMap).map(([industry, companies], index) => (
+            {Object.entries(industryMap).map(([industry, companies], index) => (
                 <div key={index} className="companies-by-industry-group">
                     <hr />
                     <h1>
