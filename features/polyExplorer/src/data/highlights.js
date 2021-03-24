@@ -3,6 +3,7 @@ const parentCategories = {
     technical: "Technische Daten",
     behavioral: "Verhaltensdaten",
     financial: "Wirtschaftliche Daten",
+    personal: "Persönliche Daten",
 };
 
 export default {
@@ -18,6 +19,12 @@ export default {
             },
         },
         dataTypeCategories: {
+            [parentCategories.personal]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
@@ -56,6 +63,12 @@ export default {
             },
         },
         dataTypeCategories: {
+            [parentCategories.personal]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
@@ -90,6 +103,12 @@ export default {
             },
         },
         dataTypeCategories: {
+            [parentCategories.personal]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
@@ -118,6 +137,12 @@ export default {
     },
     "ALPHABET INC.": {
         dataTypeCorrelation: {
+            [parentCategories.personal]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
             types: [
                 "dpv:GeneralReputation",
                 "dpv:TelephoneNumber",
@@ -155,6 +180,12 @@ export default {
         },
     },
     "Amazon Europe Core SARL": {
+        [parentCategories.personal]: {
+            category: "dpv:Language",
+            explanation: {
+                de: "MISSING",
+            },
+        },
         dataTypeCorrelation: {
             types: ["dpv:CreditRecord", "dpv:Language", "dpv:BrowsingBehavior"],
             explanation: {
@@ -196,6 +227,12 @@ export default {
             },
         },
         dataTypeCategories: {
+            [parentCategories.personal]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
@@ -230,6 +267,12 @@ export default {
             },
         },
         dataTypeCategories: {
+            [parentCategories.personal]: {
+                category: "dpv:Language",
+                explanation: {
+                    de: "MISSING",
+                },
+            },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {

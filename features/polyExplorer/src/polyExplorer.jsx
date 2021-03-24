@@ -66,6 +66,7 @@ const PolyExplorer = () => {
     const [dataExploringSection, setDataExploringSection] = useState(
         initialDataExplorationSection
     );
+    const [activeCategory, setActiveCategory] = useState(null);
 
     //Get the max values of all featured companies
     function calculateAverage(values) {
@@ -106,9 +107,14 @@ const PolyExplorer = () => {
             );
     };
 
-    const handleExplorationInfoScreen = (screen, activeSection) => {
+    const handleExplorationInfoScreen = (
+        screen,
+        activeSection,
+        activeCategory
+    ) => {
         setActiveScreen(screen);
         setDataExploringSection(activeSection);
+        if (activeCategory) setActiveCategory(activeCategory);
     };
 
     const handleRemoveFilter = (field, value) => {
@@ -168,6 +174,7 @@ const PolyExplorer = () => {
     updatePodNavigation();
     setTimeout(() => readFirstRun().then(setFirstRun), 300);
 
+    console.log(activeCategory);
     const screens = {
         main: (
             <MainScreen
@@ -198,10 +205,11 @@ const PolyExplorer = () => {
                         "dataTypes"
                     )
                 }
-                openCategoryInfo={() =>
+                openCategoryInfo={(activeCategory) =>
                     handleExplorationInfoScreen(
                         "explorationCategoryInfo",
-                        "dataTypesCategory"
+                        "dataTypesCategory",
+                        activeCategory
                     )
                 }
                 openCorrelationInfo={() =>
@@ -273,10 +281,17 @@ const PolyExplorer = () => {
             <DataTypesInfoScreen onClose={podNav.actions.back} />
         ),
         explorationCategoryInfo: (
-            <CategoryInfoScreen onClose={podNav.actions.back} />
+            <CategoryInfoScreen
+                category={activeCategory}
+                company={selectedCompany}
+                onClose={podNav.actions.back}
+            />
         ),
         explorationCorrelationInfo: (
-            <CorrelationInfoScreen onClose={podNav.actions.back} />
+            <CorrelationInfoScreen
+                company={selectedCompany}
+                onClose={podNav.actions.back}
+            />
         ),
         explorationPurposeInfo: (
             <PurposeInfoScreen onClose={podNav.actions.back} />

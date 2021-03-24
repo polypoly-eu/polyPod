@@ -92,8 +92,8 @@ const DataExplorationScreen = ({
             "dataTypesUnderText",
             "dataTypesCategory",
         ];
-        Object.keys(categories).forEach((c) => {
-            screens.push(`dataTypesCategory${c}`);
+        categories.forEach((c) => {
+            screens.push(`dataTypesCategory_${c}`);
         });
         screens.push("dataTypesUnderTextNoNumbers");
         screens.push("dataTypesCorrelation");
@@ -264,20 +264,14 @@ const DataExplorationScreen = ({
                         textColor="#0f1938"
                         width="360"
                         height="360"
-                        highlightedType={
-                            company.dataTypesShared.filter(
-                                (e) =>
-                                    e.Polypoly_Parent_Category ===
-                                    categories[parseInt(activeScreen.slice(-1))]
-                            )[0]["dpv:Category"]
-                        }
+                        highlightedType={activeScreen.split("_")[1]}
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCategoryInfo();
+                            openCategoryInfo(activeScreen.split("_")[1]);
                         }}
                     />
                     {filler}
