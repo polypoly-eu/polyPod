@@ -20,6 +20,48 @@ const CompanyBubbles = ({
         d3.select(bubbleRef.current).selectAll("svg").remove();
     };
 
+    function groupByCategory(companies) {
+        const groups = {};
+        for (let { name, category } of companies) {
+            const industry = category || i18n.t("common:category.undisclosed");
+            if (!groups[industry]) groups[industry] = [];
+            groups[industry].push(name);
+        }
+        return groups;
+    }
+
+    // TODO: Pass in as parameter or read directly from highlights.js
+    const highlights = (() => {
+        const companiesByCategory = groupByCategory(data);
+        if (!Object.keys(companiesByCategory).length) return {};
+        return {
+            industry: {
+                name: Object.keys(companiesByCategory).slice(-1)[0],
+                explanation:
+                    "Invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et sea rebum.",
+            },
+            company: {
+                name: Object.values(companiesByCategory)
+                    .slice(-1)[0]
+                    .slice(-1)[0],
+                explanation:
+                    "Invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et sea rebum.",
+            },
+        };
+    })();
+
+    function createIndustryViewData(data) {
+        const companiesByCategory = groupByCategory(data);
+        const viewData = { padding: 40 };
+        viewData.children = Object.entries(companiesByCategory).map(
+            ([category, names]) => ({
+                name: category,
+                children: names.map((name) => ({ name })),
+            })
+        );
+        return viewData;
+    }
+
     const appendBubbleContainer = () => {
         return d3
             .select(bubbleRef.current)
@@ -54,6 +96,52 @@ const CompanyBubbles = ({
             .attr("r", (d) => d.r);
     }
 
+    function appendBubbleLabel(container, bubble, text) {
+        const label = utils.appendLabel(container, text);
+        const bounds = label.node().getBBox();
+        const lineLength = 8;
+        label.attr(
+            "transform",
+            `translate(${bubble.x}, ${
+                bubble.y - bubble.r - bounds.height / 2 - lineLength
+            })`
+        );
+        container
+            .append("line")
+            .style("stroke", "white")
+            .style("stroke-width", 1)
+            .attr("x1", bubble.x)
+            .attr("y1", bubble.y - bubble.r - lineLength)
+            .attr("x2", bubble.x)
+            .attr("y2", bubble.y - bubble.r);
+    }
+
+    function appendIndustryLabel(container, bubble) {
+        const industry = bubble.data.name;
+        const count = bubble.data.children.length;
+        appendBubbleLabel(container, bubble, `${industry}: ${count}`);
+    }
+
+    function appendExplanation(container, highlightedBubble, explanation) {
+        const containerRect = container.node().viewBox.baseVal;
+        const topExplanation =
+            highlightedBubble.y - highlightedBubble.r >
+            containerRect.height / 2;
+        const explanationWidth = 260;
+        const foreignObject = container
+            .append("foreignObject")
+            .attr("x", (containerRect.width - explanationWidth) / 2)
+            .attr("width", explanationWidth);
+        const div = foreignObject
+            .append("xhtml:div")
+            .attr("class", "on-bubble")
+            .html(explanation);
+        const divHeight = div.node().getBoundingClientRect().height;
+        foreignObject
+            .attr("y", topExplanation ? 0 : containerRect.height - divHeight)
+            .attr("height", divHeight);
+    }
+
     const drawFunctions = {
         flat: (container) => {
             const viewData = {
@@ -63,18 +151,8 @@ const CompanyBubbles = ({
             bubbles.filter((d) => d.children).style("fill", "transparent");
             bubbles.filter((d) => !d.children).style("fill", bubbleColor);
         },
-        industries: (container) => {
-            const categoryMap = {};
-            for (let { name, category } of data.filter((e) => !!e)) {
-                if (!categoryMap[category])
-                    categoryMap[category] = { name: category, children: [] };
-                categoryMap[category].children.push({ name });
-            }
-            const viewData = {
-                padding: 40,
-                children: Object.values(categoryMap),
-            };
-
+        allIndustries: (container) => {
+            const viewData = createIndustryViewData(data);
             const bubbles = appendBubbles(container, viewData);
 
             bubbles.filter((d) => d.children).style("fill", "transparent");
@@ -89,32 +167,68 @@ const CompanyBubbles = ({
                 .style("fill", bubbleColor)
                 .style("fill-opacity", 0.15);
 
-            industryBubbles.each((e) => {
-                const industry =
-                    e.data.name || i18n.t("common:category.undisclosed");
-                const count = categoryMap[e.data.name].children.length;
-                const label = utils.appendLabel(
-                    container,
-                    `${industry}: ${count}`
+            industryBubbles.each((e) => appendIndustryLabel(container, e));
+        },
+        industryHighlight: (container) => {
+            if (!highlights.industry) return;
+
+            const viewData = createIndustryViewData(data);
+            viewData.children.find(
+                (industry) => industry.name === highlights.industry.name
+            ).highlighted = true;
+
+            const bubbles = appendBubbles(container, viewData);
+            bubbles
+                .style("fill", (d) =>
+                    d.children ? "transparent" : bubbleColor
+                )
+                .style("fill-opacity", (d) =>
+                    d.parent?.data.highlighted ? 1 : 0.15
                 );
 
-                const bounds = label.node().getBBox();
-                const lineLength = 8;
-                label.attr(
-                    "transform",
-                    `translate(${e.x}, ${
-                        e.y - e.r - bounds.height / 2 - lineLength
-                    })`
+            let highlightedBubble;
+            bubbles
+                .filter((d) => d.data.highlighted)
+                .each((e) => (highlightedBubble = e));
+            appendIndustryLabel(container, highlightedBubble);
+            appendExplanation(
+                container,
+                highlightedBubble,
+                highlights.industry.explanation
+            );
+        },
+        companyHighlight: (container) => {
+            if (!highlights.company) return;
+
+            const viewData = createIndustryViewData(data);
+            viewData.children.forEach(({ children }) => {
+                const match = children.find(
+                    (company) => company.name === highlights.company.name
                 );
-                container
-                    .append("line")
-                    .style("stroke", "white")
-                    .style("stroke-width", 1)
-                    .attr("x1", e.x)
-                    .attr("y1", e.y - e.r - lineLength)
-                    .attr("x2", e.x)
-                    .attr("y2", e.y - e.r);
+                if (match) match.highlighted = true;
             });
+
+            const bubbles = appendBubbles(container, viewData);
+            bubbles
+                .style("fill", (d) =>
+                    d.children ? "transparent" : bubbleColor
+                )
+                .style("fill-opacity", (d) => (d.data.highlighted ? 1 : 0.15));
+
+            let highlightedBubble;
+            bubbles
+                .filter((d) => d.data.highlighted)
+                .each((e) => (highlightedBubble = e));
+            appendBubbleLabel(
+                container,
+                highlightedBubble,
+                highlightedBubble.data.name
+            );
+            appendExplanation(
+                container,
+                highlightedBubble,
+                highlights.company.explanation
+            );
         },
     };
 

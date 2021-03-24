@@ -102,6 +102,8 @@ const DataExplorationScreen = ({
         screens.push("companies");
         screens.push("companiesExplanation");
         screens.push("companiesIndustries");
+        screens.push("companiesIndustryHighlight");
+        screens.push("companiesCompanyHighlight");
         screens.push("companiesList");
         screens.push("jurisdictions");
         return screens;
@@ -402,7 +404,59 @@ const DataExplorationScreen = ({
                         )}
                     </h2>
                     <CompanyBubbles
-                        view="industries"
+                        view="allIndustries"
+                        data={validDataRecipients}
+                        width="360"
+                        height="360"
+                        bubbleColor="#7EE8A2"
+                        maxCompanies={maxCompanies}
+                    />
+                    <p className="bubble-source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <DataSharingLegend
+                        onClick={() => {
+                            openCompaniesInfo();
+                        }}
+                    />
+                </div>
+            );
+        else if (activeScreen === "companiesIndustryHighlight")
+            return (
+                <div className="static-content">
+                    <h2 className="highlight-companies">
+                        {i18n.t(
+                            "dataExplorationScreen:companies.heading.industries"
+                        )}
+                    </h2>
+                    <CompanyBubbles
+                        view="industryHighlight"
+                        data={validDataRecipients}
+                        width="360"
+                        height="360"
+                        bubbleColor="#7EE8A2"
+                        maxCompanies={maxCompanies}
+                    />
+                    <p className="bubble-source">
+                        {i18n.t("common:source")}: polyPedia
+                    </p>
+                    <DataSharingLegend
+                        onClick={() => {
+                            openCompaniesInfo();
+                        }}
+                    />
+                </div>
+            );
+        else if (activeScreen === "companiesCompanyHighlight")
+            return (
+                <div className="static-content">
+                    <h2 className="highlight-companies">
+                        {i18n.t(
+                            "dataExplorationScreen:companies.heading.industries"
+                        )}
+                    </h2>
+                    <CompanyBubbles
+                        view="companyHighlight"
                         data={validDataRecipients}
                         width="360"
                         height="360"
@@ -569,6 +623,8 @@ const DataExplorationScreen = ({
                                 )}
                             </p>
                         </SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide>
                             <div className="companies-list-content">
