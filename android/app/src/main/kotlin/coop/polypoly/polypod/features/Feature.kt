@@ -15,12 +15,9 @@ class Feature(
     val author: String get() = manifest.author
     val description: String get() = manifest.description
 
-    val primaryColor: Int get() =
-        try {
-            Color.parseColor(manifest.primaryColor)
-        } catch (_: Exception) {
-            0
-        }
+    val primaryColor: Int
+        get() = runCatching { Color.parseColor(manifest.primaryColor) }
+            .getOrDefault(0)
 
     val thumbnail: Bitmap?
         get() {
