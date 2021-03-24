@@ -23,6 +23,7 @@ import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdiction
 const DataExplorationScreen = ({
     company,
     startSection,
+    startCategory = null,
     openDataTypesInfo,
     openCategoryInfo,
     openCorrelationInfo,
@@ -106,6 +107,12 @@ const DataExplorationScreen = ({
         return screens;
     };
 
+    const getStartIndex = () => {
+        if (startSection === "dataTypesCategory" && startCategory)
+            return screens.indexOf(`dataTypesCategory_${startCategory}`);
+        return screens.indexOf(startSection);
+    };
+
     const getHighestValueObject = () => {
         let highest = { count: 0 };
         company.dataTypesShared.forEach((e) =>
@@ -125,9 +132,7 @@ const DataExplorationScreen = ({
 
     //State
     const [swiper, setSwiper] = useState(null);
-    const [activeIndex, setActiveIndex] = useState(
-        screens.indexOf(startSection)
-    );
+    const [activeIndex, setActiveIndex] = useState(getStartIndex());
     const [purposePopupContent, setPurposePopupContent] = useState(null);
 
     //Constants

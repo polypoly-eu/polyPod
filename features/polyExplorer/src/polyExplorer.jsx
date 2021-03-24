@@ -153,8 +153,10 @@ const PolyExplorer = () => {
             return;
         }
 
-        if (activeScreen === "dataExploration")
+        if (activeScreen === "dataExploration") {
             setDataExploringSection(initialDataExplorationSection);
+            setActiveCategory(null);
+        }
 
         handleActiveScreenChange("main");
     }
@@ -174,7 +176,6 @@ const PolyExplorer = () => {
     updatePodNavigation();
     setTimeout(() => readFirstRun().then(setFirstRun), 300);
 
-    console.log(activeCategory);
     const screens = {
         main: (
             <MainScreen
@@ -199,6 +200,7 @@ const PolyExplorer = () => {
             <DataExplorationScreen
                 company={selectedCompany}
                 startSection={dataExploringSection}
+                startCategory={activeCategory}
                 openDataTypesInfo={() =>
                     handleExplorationInfoScreen(
                         "explorationDataTypesInfo",
