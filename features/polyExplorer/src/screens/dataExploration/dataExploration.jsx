@@ -269,7 +269,11 @@ const DataExplorationScreen = ({
                         textColor="#0f1938"
                         width="360"
                         height="360"
-                        highlightedType={activeScreen.split("_")[1]}
+                        highlightedType={
+                            highlights[company.name].dataTypeCategories[
+                                activeScreen.split("_")[1]
+                            ].category
+                        }
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
