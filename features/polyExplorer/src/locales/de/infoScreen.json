@@ -22,7 +22,7 @@
     "headline.presentation":
         "Präsentation",
     "text.presentation":
-        "<p>Wir visualisieren Daten, um sie zugänglicher zu machen. Der Ansatz in unseren datenbasierten Geschichten wird im Englischen als \"explain and explore\" bezeichnet. Wir erzählen und erklären, wo es sinnvoll oder nötig ist und bieten Ihnen auch die Möglichkeit, Daten selbst zu filtern und erkunden. Diese Möglichkeit wird schrittweise zunehmen.</p>",
+        "<p>Wir visualisieren Daten, um sie zugänglicher zu machen. Der Ansatz in unseren datenbasierten Geschichten wird im Englischen als \"explain and explore\" bezeichnet. Wir erzählen und erklären, wo es sinnvoll oder nötig ist und bieten Ihnen auch die Möglichkeit, Daten selbst zu filtern und erkunden. Diese Funktion wird schrittweise erweitert.</p>",
     "button.explore":
         "OK"
 }
