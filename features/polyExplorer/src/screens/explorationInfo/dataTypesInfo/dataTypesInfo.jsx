@@ -13,7 +13,7 @@ const DataTypesInfo = ({ onClose }) => {
             <p>{i18n.t("explorationDataTypesInfoScreen:text.1")}</p>
             <img
                 src={`./images/infographics/dataTypes/${i18n.t(
-                    "common:country.image.ending"
+                    "common:country.code"
                 )}.svg`}
             />
             <h2>{i18n.t("explorationDataTypesInfoScreen:subheading.1")}</h2>

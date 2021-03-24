@@ -13,7 +13,7 @@ const PurposeInfo = ({ onClose }) => {
             <p>{i18n.t("explorationPurposeInfoScreen:text.1")}</p>
             <img
                 src={`./images/infographics/purpose/${i18n.t(
-                    "common:country.image.ending"
+                    "common:country.code"
                 )}.svg`}
             />
             <div

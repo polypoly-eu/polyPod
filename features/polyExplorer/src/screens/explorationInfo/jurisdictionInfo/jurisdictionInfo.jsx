@@ -20,7 +20,7 @@ const JurisdictionInfo = ({ onClose }) => {
             </div>
             <img
                 src={`./images/infographics/jurisdictions/1_${i18n.t(
-                    "common:country.image.ending"
+                    "common:country.code"
                 )}.svg`}
             />
             <br />
@@ -30,7 +30,7 @@ const JurisdictionInfo = ({ onClose }) => {
             </div>
             <img
                 src={`./images/infographics/jurisdictions/2_${i18n.t(
-                    "common:country.image.ending"
+                    "common:country.code"
                 )}.svg`}
             />
             <div className="legend-container">

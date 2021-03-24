@@ -17,7 +17,7 @@ const CompaniesInfo = ({ onClose }) => {
             />
             <img
                 src={`./images/infographics/companies/${i18n.t(
-                    "common:country.image.ending"
+                    "common:country.code"
                 )}.svg`}
             />
         </ExplorationInfoScreen>
