@@ -52,6 +52,9 @@ const CompanyBubbles = ({
 
     function createIndustryViewData(data) {
         const companiesByIndustry = groupByIndustry(data);
+
+        // This padding is what's currently keeping the industry labels from
+        // colliding (for the most part). But we'll need a better solution.
         const viewData = { padding: 40 };
         viewData.children = Object.entries(companiesByIndustry).map(
             ([industry, names]) => ({
@@ -77,7 +80,7 @@ const CompanyBubbles = ({
         // together. The idea is that the radius is small enough so that all
         // visualisations here look alright when the amountof companies is at
         // maxCompanies - there must be a more reliable way to achieve that.
-        const bubbleRadius = (width * Math.PI) / maxCompanies / 6;
+        const bubbleRadius = ((width * Math.PI) / maxCompanies) * 2;
 
         const packLayout = d3
             .pack()
@@ -97,7 +100,7 @@ const CompanyBubbles = ({
     }
 
     function appendBubbleLabel(container, bubble, text) {
-        const label = utils.appendLabel(container, text);
+        const label = utils.appendLabel(container, text, { fontSize: 10 });
         const bounds = label.node().getBBox();
         const lineLength = 8;
         label.attr(
