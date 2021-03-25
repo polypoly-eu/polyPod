@@ -1808,5 +1808,1744 @@
             "Explanation_DE": null,
             "Explanation_EN": null
         }
+    },
+    "personal_data_categories": {
+        "dpv:Accent": {
+            "dpv:Category": "dpv:Accent",
+            "dpv:Superclass": "dpv:Language",
+            "Translation_DE": "Akzent",
+            "Translation_EN": "Accent",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über einen Sprach- und Sprechakzent.",
+            "Explanation_EN": "Information about an linguistic and speech accents."
+        },
+        "dpv:AccountIdentifier": {
+            "dpv:Category": "dpv:AccountIdentifier",
+            "dpv:Superclass": "dpv:FinancialAccount",
+            "Translation_DE": "Konto-Identifikator",
+            "Translation_EN": "Account Identifier",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Kennung eines Finanzkontos.",
+            "Explanation_EN": "Information about financial account identifier."
+        },
+        "dpv:Acquantaince": {
+            "dpv:Category": "dpv:Acquantaince",
+            "dpv:Superclass": "dpv:SocialNetwork",
+            "Translation_DE": "Bekannter",
+            "Translation_EN": "Acquantaince",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Bekanntschaften in einem sozialen Netzwerk.",
+            "Explanation_EN": "Information about acquaintainces in a social network."
+        },
+        "dpv:Age": {
+            "dpv:Category": "dpv:Age",
+            "dpv:Superclass": "dpv:PhysicalCharacteristic",
+            "Translation_DE": "Alter",
+            "Translation_EN": "Age",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
+            "Explanation_DE": "Informationen über das Alter",
+            "Explanation_EN": "Information about age"
+        },
+        "dpv:ApartmentOwned": {
+            "dpv:Category": "dpv:ApartmentOwned",
+            "dpv:Superclass": "dpv:HouseOwned",
+            "Translation_DE": "Eigene Wohnung",
+            "Translation_EN": "Apartment Owned",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Wohnungseigentum und dessen Geschichte",
+            "Explanation_EN": "Information about apartement(s) owned and its history"
+        },
+        "dpv:Association": {
+            "dpv:Category": "dpv:Association",
+            "dpv:Superclass": "dpv:SocialNetwork",
+            "Translation_DE": "Verein",
+            "Translation_EN": "Association",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Assoziationen in einem sozialen Netzwerk mit anderen Personen, Gruppen oder Organisationen, z. B. Freund eines Freundes",
+            "Explanation_EN": "Information about associations in a social network with other individuals, groups, or entities e.g. friend of a friend"
+        },
+        "dpv:Attitude": {
+            "dpv:Category": "dpv:Attitude",
+            "dpv:Superclass": "dpv:Behavioral",
+            "Translation_DE": "Einstellung",
+            "Translation_EN": "Attitude",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Einstellung.",
+            "Explanation_EN": "Information about attitude."
+        },
+        "dpv:Authenticating": {
+            "dpv:Category": "dpv:Authenticating",
+            "dpv:Superclass": "dpv:Internal",
+            "Translation_DE": "Authentifizierung",
+            "Translation_EN": "Authenticating",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Authentifizierung und die zur Authentifizierung verwendeten Informationen",
+            "Explanation_EN": "Information about authentication and information used for authenticating"
+        },
+        "dpv:AuthenticationHistory": {
+            "dpv:Category": "dpv:AuthenticationHistory",
+            "dpv:Superclass": "dpv:Behavioral",
+            "Translation_DE": "Authentifizierungsverlauf",
+            "Translation_EN": "Authentication History",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über frühere Authentifizierungen und deren Ergebnisse, z. B. Anmeldeversuche oder Standort.",
+            "Explanation_EN": "Information about prior authentication and its outcomes such as login attempts or location."
+        },
+        "dpv:BankAccount": {
+            "dpv:Category": "dpv:BankAccount",
+            "dpv:Superclass": "dpv:FinancialAccount",
+            "Translation_DE": "Bankkonto",
+            "Translation_EN": "Bank Account",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Bankkonten.",
+            "Explanation_EN": "Information about bank accounts."
+        },
+        "dpv:Behavioral": {
+            "dpv:Category": "dpv:Behavioral",
+            "dpv:Superclass": "dpv:External",
+            "Translation_DE": "Verhaltensweisen",
+            "Translation_EN": "Behavioral",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Verhalten oder Aktivität",
+            "Explanation_EN": "Information about behavior or activity"
+        },
+        "dpv:Biometric": {
+            "dpv:Category": "dpv:Biometric",
+            "dpv:Superclass": "dpv:Identifying;dpv:SpecialCategoryPersonalData",
+            "Translation_DE": "Biometrisch",
+            "Translation_EN": "Biometric",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über biometrische Daten und biometrische Merkmale.",
+            "Explanation_EN": "Information about biometrics and biometric characteristics."
+        },
+        "dpv:BloodType": {
+            "dpv:Category": "dpv:BloodType",
+            "dpv:Superclass": "dpv:MedicalHealth",
+            "Translation_DE": "Blutgruppe",
+            "Translation_EN": "Blood Type",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Blutgruppe.",
+            "Explanation_EN": "Information about blood type."
+        },
+        "dpv:BrowserFingerprint": {
+            "dpv:Category": "dpv:BrowserFingerprint",
+            "dpv:Superclass": "dpv:DeviceBased",
+            "Translation_DE": "Browser-Fingerabdruck",
+            "Translation_EN": "Browser Fingerprint",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Webbrowser, der als \"Fingerabdruck\" verwendet wird",
+            "Explanation_EN": "Information about the web browser which is used as a 'fingerprint'"
+        },
+        "dpv:BrowsingBehavior": {
+            "dpv:Category": "dpv:BrowsingBehavior",
+            "dpv:Superclass": "dpv:Behavioral",
+            "Translation_DE": "Browsing-Verhalten",
+            "Translation_EN": "Browsing Behavior",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Browsing-Verhalten.",
+            "Explanation_EN": "Information about browsing behaviour."
+        },
+        "dpv:BrowsingReferral": {
+            "dpv:Category": "dpv:BrowsingReferral",
+            "dpv:Superclass": "dpv:BrowsingBehavior",
+            "Translation_DE": "Browsing-Empfehlung",
+            "Translation_EN": "Browsing Referral",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Web-Browsing Referrer oder Verweise, die auf Standort, gezielten Verweisen, direkter, organischer Suche, sozialen Medien oder Aktionen, Kampagnen basieren können.",
+            "Explanation_EN": "Information about web browsing referrer or referral, which can be based on location, targeted referrals, direct, organic search, social media or actions, campaigns."
+        },
+        "dpv:CallLog": {
+            "dpv:Category": "dpv:CallLog",
+            "dpv:Superclass": "dpv:Behavioral",
+            "Translation_DE": "Anrufprotokoll",
+            "Translation_EN": "Call Log",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Anrufe, die eine Person getätigt hat.",
+            "Explanation_EN": "Information about the calls that an individual has made."
+        },
+        "dpv:CarOwned": {
+            "dpv:Category": "dpv:CarOwned",
+            "dpv:Superclass": "dpv:Ownership",
+            "Translation_DE": "Eigenes Auto",
+            "Translation_EN": "Car Owned",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Besitz von Autos und die Besitzhistorie.",
+            "Explanation_EN": "Information about cars ownership and ownership history."
+        },
+        "dpv:Character": {
+            "dpv:Category": "dpv:Character",
+            "dpv:Superclass": "dpv:PublicLife",
+            "Translation_DE": "Zeichen",
+            "Translation_EN": "Character",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Charakter im öffentlichen Raum",
+            "Explanation_EN": "Information about character in the public sphere"
+        },
+        "dpv:Communication": {
+            "dpv:Category": "dpv:Communication",
+            "dpv:Superclass": "dpv:Social",
+            "Translation_DE": "Kommunikation",
+            "Translation_EN": "Communication",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen, die von oder an eine Person kommuniziert wurden",
+            "Explanation_EN": "Information communicated from or to an individual"
+        },
+        "dpv:CommunicationsMetadata": {
+            "dpv:Category": "dpv:CommunicationsMetadata",
+            "dpv:Superclass": "dpv:PublicLife",
+            "Translation_DE": "Kommunikations-Metadaten",
+            "Translation_EN": "Communications Metadata",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Kommunikations-Metadaten in der öffentlichen Sphäre",
+            "Explanation_EN": "Information about communication metadata in the public sphere"
+        },
+        "dpv:Connection": {
+            "dpv:Category": "dpv:Connection",
+            "dpv:Superclass": "dpv:SocialNetwork",
+            "Translation_DE": "Verbindung",
+            "Translation_EN": "Connection",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über und einschließlich Verbindungen in einem sozialen Netzwerk",
+            "Explanation_EN": "Information about and including connections in a social network"
+        },
+        "dpv:Contact": {
+            "dpv:Category": "dpv:Contact",
+            "dpv:Superclass": "dpv:Tracking",
+            "Translation_DE": "Kontakt",
+            "Translation_EN": "Contact",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Kontakte oder zur Kontaktaufnahme verwendet, z. B. E-Mail-Adresse oder Telefonnummer",
+            "Explanation_EN": "Information about contacts or used for contacting e.g. email address or phone number"
+        },
+        "dpv:Country": {
+            "dpv:Category": "dpv:Country",
+            "dpv:Superclass": "dpv:Location",
+            "Translation_DE": "Land",
+            "Translation_EN": "Country",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Land z.B. Wohnsitz, Reise.",
+            "Explanation_EN": "Information about country e.g. residence, travel."
+        },
+        "dpv:Credit": {
+            "dpv:Category": "dpv:Credit",
+            "dpv:Superclass": "dpv:Transactional",
+            "Translation_DE": "Kredit",
+            "Translation_EN": "Credit",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Reputation in Bezug auf Geld",
+            "Explanation_EN": "Information about reputation with regards to money"
+        },
+        "dpv:CreditCapacity": {
+            "dpv:Category": "dpv:CreditCapacity",
+            "dpv:Superclass": "dpv:Credit",
+            "Translation_DE": "Kreditfähigkeit",
+            "Translation_EN": "Credit Capacity",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Kreditwürdigkeit.",
+            "Explanation_EN": "Information about credit capacity."
+        },
+        "dpv:CreditCardNumber": {
+            "dpv:Category": "dpv:CreditCardNumber",
+            "dpv:Superclass": "dpv:PaymentCardNumber",
+            "Translation_DE": "Kreditkartennummer",
+            "Translation_EN": "Credit Card Number",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Kreditkartennummer",
+            "Explanation_EN": "Information about credit card number"
+        },
+        "dpv:CreditRecord": {
+            "dpv:Category": "dpv:CreditRecord",
+            "dpv:Superclass": "dpv:Credit",
+            "Translation_DE": "Kreditrekord",
+            "Translation_EN": "Credit Record",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Kreditwürdigkeit.",
+            "Explanation_EN": "Information about credit record."
+        },
+        "dpv:CreditScore": {
+            "dpv:Category": "dpv:CreditScore",
+            "dpv:Superclass": "dpv:CreditWorthiness",
+            "Translation_DE": "Kredit-Score",
+            "Translation_EN": "Credit Score",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Kreditwürdigkeit.",
+            "Explanation_EN": "Information about credit score."
+        },
+        "dpv:CreditStanding": {
+            "dpv:Category": "dpv:CreditStanding",
+            "dpv:Superclass": "dpv:Credit",
+            "Translation_DE": "Kreditwürdigkeit",
+            "Translation_EN": "Credit Standing",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Kreditwürdigkeit.",
+            "Explanation_EN": "Information about credit standing."
+        },
+        "dpv:CreditWorthiness": {
+            "dpv:Category": "dpv:CreditWorthiness",
+            "dpv:Superclass": "dpv:Credit",
+            "Translation_DE": "Kreditwürdigkeit",
+            "Translation_EN": "Credit Worthiness",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Kreditwürdigkeit.",
+            "Explanation_EN": "Information about credit worthiness."
+        },
+        "dpv:Criminal": {
+            "dpv:Category": "dpv:Criminal",
+            "dpv:Superclass": "dpv:Social",
+            "Translation_DE": "Kriminell",
+            "Translation_EN": "Criminal",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über kriminelle Aktivitäten, z. B. strafrechtliche Verurteilungen oder Gefängnisaufenthalte",
+            "Explanation_EN": "Information about criminal activity e.g. criminal convictions or jail time"
+        },
+        "dpv:CriminalCharge": {
+            "dpv:Category": "dpv:CriminalCharge",
+            "dpv:Superclass": "dpv:Criminal",
+            "Translation_DE": "Strafrechtliche Anklage",
+            "Translation_EN": "Criminal Charge",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Strafanzeigen.",
+            "Explanation_EN": "Information about criminal charges."
+        },
+        "dpv:CriminalConviction": {
+            "dpv:Category": "dpv:CriminalConviction",
+            "dpv:Superclass": "dpv:Criminal",
+            "Translation_DE": "Strafrechtliche Verurteilung",
+            "Translation_EN": "Criminal Conviction",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über strafrechtliche Verurteilungen.",
+            "Explanation_EN": "Information about criminal convictions."
+        },
+        "dpv:CriminalPardon": {
+            "dpv:Category": "dpv:CriminalPardon",
+            "dpv:Superclass": "dpv:Criminal",
+            "Translation_DE": "Strafrechtliche Begnadigung",
+            "Translation_EN": "Criminal Pardon",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über strafrechtliche Begnadigungen.",
+            "Explanation_EN": "Information about criminal pardons."
+        },
+        "dpv:Demeanor": {
+            "dpv:Category": "dpv:Demeanor",
+            "dpv:Superclass": "dpv:Behavioral",
+            "Translation_DE": "Auftreten",
+            "Translation_EN": "Demeanor",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Verhalten.",
+            "Explanation_EN": "Information about demeanor."
+        },
+        "dpv:Demographic": {
+            "dpv:Category": "dpv:Demographic",
+            "dpv:Superclass": "dpv:External",
+            "Translation_DE": "Demografische Daten",
+            "Translation_EN": "Demographic",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Demografie und demografische Merkmale",
+            "Explanation_EN": "Information about demography and demographic characteristics"
+        },
+        "dpv:DerivedPersonalData": {
+            "dpv:Category": "dpv:DerivedPersonalData",
+            "dpv:Superclass": "dpv:PersonalDataCategory",
+            "Translation_DE": "Abgeleitete Personal Data",
+            "Translation_EN": "Derived Personal Data",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Abgeleitete Daten sind Daten, die aus anderen Daten gewonnen oder abgeleitet wurden.",
+            "Explanation_EN": "Derived data is data that is obtained or derived from other data."
+        },
+        "dpv:DeviceApplications": {
+            "dpv:Category": "dpv:DeviceApplications",
+            "dpv:Superclass": "dpv:DeviceSoftware",
+            "Translation_DE": "Geräteanwendungen",
+            "Translation_EN": "Device Applications",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Anwendungen oder anwendungsähnliche Software auf einem Gerät.",
+            "Explanation_EN": "Information about applications or application-like software on a device."
+        },
+        "dpv:DeviceBased": {
+            "dpv:Category": "dpv:DeviceBased",
+            "dpv:Superclass": "dpv:Tracking",
+            "Translation_DE": "Gerätebasiert",
+            "Translation_EN": "Device Based",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Geräte",
+            "Explanation_EN": "Information about devices"
+        },
+        "dpv:DeviceOperatingSystem": {
+            "dpv:Category": "dpv:DeviceOperatingSystem",
+            "dpv:Superclass": "dpv:DeviceSoftware",
+            "Translation_DE": "Geräte-Betriebssystem",
+            "Translation_EN": "Device Operating System",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Betriebssystem (OS) oder die Systemsoftware, die Hardware- oder Softwareressourcen verwaltet.",
+            "Explanation_EN": "Information about the operating system (OS) or system software that manages hardware or software resources."
+        },
+        "dpv:DeviceSoftware": {
+            "dpv:Category": "dpv:DeviceSoftware",
+            "dpv:Superclass": "dpv:DeviceBased",
+            "Translation_DE": "Geräte-Software",
+            "Translation_EN": "Device Software",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Software auf einem Gerät oder im Zusammenhang mit einem Gerät.",
+            "Explanation_EN": "Information about software on or related to a device."
+        },
+        "dpv:Dialect": {
+            "dpv:Category": "dpv:Dialect",
+            "dpv:Superclass": "dpv:Language",
+            "Translation_DE": "Dialekt",
+            "Translation_EN": "Dialect",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen zu sprachlichen Dialekten.",
+            "Explanation_EN": "Information about linguistic dialects."
+        },
+        "dpv:Disability": {
+            "dpv:Category": "dpv:Disability",
+            "dpv:Superclass": "dpv:MedicalHealth",
+            "Translation_DE": "Behinderung",
+            "Translation_EN": "Disability",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Behinderungen.",
+            "Explanation_EN": "Information about disabilities."
+        },
+        "dpv:DisciplinaryAction": {
+            "dpv:Category": "dpv:DisciplinaryAction",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Disziplinarmaßnahmen",
+            "Translation_EN": "Disciplinary Action",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über disziplinarische Maßnahmen und deren Vorgeschichte",
+            "Explanation_EN": "Information about disciplinary actions and its history"
+        },
+        "dpv:Dislike": {
+            "dpv:Category": "dpv:Dislike",
+            "dpv:Superclass": "dpv:Interest",
+            "Translation_DE": "Nicht mögen",
+            "Translation_EN": "Dislike",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Abneigungen oder Vorlieben bezüglich Abstoßungen.",
+            "Explanation_EN": "Information about dislikes or preferences regarding repulsions."
+        },
+        "dpv:Divorce": {
+            "dpv:Category": "dpv:Divorce",
+            "dpv:Superclass": "dpv:FamilyStructure",
+            "Translation_DE": "Scheidung",
+            "Translation_EN": "Divorce",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Scheidung(en).",
+            "Explanation_EN": "Information about divorce(s)."
+        },
+        "dpv:DNACode": {
+            "dpv:Category": "dpv:DNACode",
+            "dpv:Superclass": "dpv:MedicalHealth",
+            "Translation_DE": "DNA-Code",
+            "Translation_EN": "DNA Code",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über DNA.",
+            "Explanation_EN": "Information about DNA."
+        },
+        "dpv:DrugTestResult": {
+            "dpv:Category": "dpv:DrugTestResult",
+            "dpv:Superclass": "dpv:MedicalHealth",
+            "Translation_DE": "Ergebnis des Drogentests",
+            "Translation_EN": "Drug Test Result",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Drogentestergebnisse.",
+            "Explanation_EN": "Information about drug test results."
+        },
+        "dpv:EmailAddress": {
+            "dpv:Category": "dpv:EmailAddress",
+            "dpv:Superclass": "dpv:Contact",
+            "Translation_DE": "E-Mail Adresse",
+            "Translation_EN": "Email Address",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über E-Mail-Adressen.",
+            "Explanation_EN": "Information about Email address."
+        },
+        "dpv:EmailContent": {
+            "dpv:Category": "dpv:EmailContent",
+            "dpv:Superclass": "dpv:Communication",
+            "Translation_DE": "E-Mail-Inhalt",
+            "Translation_EN": "Email Content",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Inhalt von gesendeten oder empfangenen Emails",
+            "Explanation_EN": "Information about the contents of Emails sent or recieved"
+        },
+        "dpv:EmploymentHistory": {
+            "dpv:Category": "dpv:EmploymentHistory",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Beschäftigung Historie",
+            "Translation_EN": "Employment History",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den beruflichen Werdegang",
+            "Explanation_EN": "Information about employment history"
+        },
+        "dpv:Ethnicity": {
+            "dpv:Category": "dpv:Ethnicity",
+            "dpv:Superclass": "dpv:External",
+            "Translation_DE": "Ethnizität",
+            "Translation_EN": "Ethnicity",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die ethnische Herkunft und Abstammung",
+            "Explanation_EN": "Information about ethnic origins and lineage"
+        },
+        "dpv:EthnicOrigin": {
+            "dpv:Category": "dpv:EthnicOrigin",
+            "dpv:Superclass": "dpv:Ethnicity;dpv:SpecialCategoryPersonalData",
+            "Translation_DE": "Ethnische Herkunft",
+            "Translation_EN": "Ethnic Origin",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die ethnische Herkunft",
+            "Explanation_EN": "Information about ethnic origin"
+        },
+        "dpv:External": {
+            "dpv:Category": "dpv:External",
+            "dpv:Superclass": "dpv:PersonalDataCategory",
+            "Translation_DE": "Extern",
+            "Translation_EN": "External",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über äußere Merkmale, die beobachtet werden können",
+            "Explanation_EN": "Information about external characteristics that can be observed"
+        },
+        "dpv:Family": {
+            "dpv:Category": "dpv:Family",
+            "dpv:Superclass": "dpv:Social",
+            "Translation_DE": "Familie",
+            "Translation_EN": "Family",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Familie und Beziehungen",
+            "Explanation_EN": "Information about family and relationships"
+        },
+        "dpv:FamilyHealthHistory": {
+            "dpv:Category": "dpv:FamilyHealthHistory",
+            "dpv:Superclass": "dpv:HealthHistory",
+            "Translation_DE": "Gesundheitsgeschichte der Familie",
+            "Translation_EN": "Family Health History",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die gesundheitliche Vorgeschichte der Familie.",
+            "Explanation_EN": "Information about family health history."
+        },
+        "dpv:Favorite": {
+            "dpv:Category": "dpv:Favorite",
+            "dpv:Superclass": "dpv:Preference",
+            "Translation_DE": "Favorit",
+            "Translation_EN": "Favorite",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Lieblinge",
+            "Explanation_EN": "Information about favorites"
+        },
+        "dpv:FavoriteColor": {
+            "dpv:Category": "dpv:FavoriteColor",
+            "dpv:Superclass": "dpv:Favorite",
+            "Translation_DE": "Lieblingsfarbe",
+            "Translation_EN": "Favorite Color",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Lieblingsfarbe.",
+            "Explanation_EN": "Information about favorite color."
+        },
+        "dpv:FavoriteFood": {
+            "dpv:Category": "dpv:FavoriteFood",
+            "dpv:Superclass": "dpv:Favorite",
+            "Translation_DE": "Lieblingsessen",
+            "Translation_EN": "Favorite Food",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Lieblingsessen.",
+            "Explanation_EN": "Information about favorite food."
+        },
+        "dpv:FavoriteMusic": {
+            "dpv:Category": "dpv:FavoriteMusic",
+            "dpv:Superclass": "dpv:Favorite",
+            "Translation_DE": "Bevorzugte Musik",
+            "Translation_EN": "Favorite Music",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Lieblingsmusik.",
+            "Explanation_EN": "Information about favorite music."
+        },
+        "dpv:Fetish": {
+            "dpv:Category": "dpv:Fetish",
+            "dpv:Superclass": "dpv:Sexual",
+            "Translation_DE": "Fetisch",
+            "Translation_EN": "Fetish",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über sexuelle Fetische einer Person",
+            "Explanation_EN": "Information an individual's sexual fetishes"
+        },
+        "dpv:Financial": {
+            "dpv:Category": "dpv:Financial",
+            "dpv:Superclass": "dpv:PersonalDataCategory",
+            "Translation_DE": "Finanzen",
+            "Translation_EN": "Financial",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Finanzen einschließlich monetärer Merkmale und Transaktionen",
+            "Explanation_EN": "Information about finance including monetary characteristics and transactions"
+        },
+        "dpv:FinancialAccount": {
+            "dpv:Category": "dpv:FinancialAccount",
+            "dpv:Superclass": "dpv:Financial",
+            "Translation_DE": "Finanzkonto",
+            "Translation_EN": "Financial Account",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Finanzkonten.",
+            "Explanation_EN": "Information about financial accounts."
+        },
+        "dpv:FinancialAccountNumber": {
+            "dpv:Category": "dpv:FinancialAccountNumber",
+            "dpv:Superclass": "dpv:AccountIdentifier",
+            "Translation_DE": "Finanzielle Kontonummer",
+            "Translation_EN": "Financial Account Number",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Finanzkontonummern",
+            "Explanation_EN": "Information about financial account number"
+        },
+        "dpv:Fingerprint": {
+            "dpv:Category": "dpv:Fingerprint",
+            "dpv:Superclass": "dpv:Biometric",
+            "Translation_DE": "Fingerabdruck",
+            "Translation_EN": "Fingerprint",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Fingerabdrücke, die für biometrische Zwecke verwendet werden.",
+            "Explanation_EN": "Information about fingerprint used for biometric purposes."
+        },
+        "dpv:Friend": {
+            "dpv:Category": "dpv:Friend",
+            "dpv:Superclass": "dpv:SocialNetwork",
+            "Translation_DE": "Freundschaft",
+            "Translation_EN": "Friend",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Freunde in einem sozialen Netzwerk, einschließlich Aspekte von Freundschaften wie gemeinsame Jahre oder die Art der Freundschaft.",
+            "Explanation_EN": "Information about friends in a social network, including aspects of friendships such as years together or nature of friendship."
+        },
+        "dpv:Gender": {
+            "dpv:Category": "dpv:Gender",
+            "dpv:Superclass": "dpv:PhysicalCharacteristic",
+            "Translation_DE": "Geschlecht",
+            "Translation_EN": "Gender",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Geschlecht",
+            "Explanation_EN": "Information about gender"
+        },
+        "dpv:GeneralReputation": {
+            "dpv:Category": "dpv:GeneralReputation",
+            "dpv:Superclass": "dpv:PublicLife",
+            "Translation_DE": "Allgemeine Reputation",
+            "Translation_EN": "General Reputation",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Reputation im öffentlichen Raum",
+            "Explanation_EN": "Information about reputation in the public sphere"
+        },
+        "dpv:Geographic": {
+            "dpv:Category": "dpv:Geographic",
+            "dpv:Superclass": "dpv:Demographic",
+            "Translation_DE": "Geografisch",
+            "Translation_EN": "Geographic",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Standort oder basierend auf der Geografie (z. B. die Heimatadresse)",
+            "Explanation_EN": "Information about location or based on geography (e.g., home address)"
+        },
+        "dpv:GPSCoordinate": {
+            "dpv:Category": "dpv:GPSCoordinate",
+            "dpv:Superclass": "dpv:Location",
+            "Translation_DE": "GPS-Koordinate",
+            "Translation_EN": "GPS Coordinate",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Standort, ausgedrückt durch Global Position System-Koordinaten (GPS)",
+            "Explanation_EN": "Information about location expressed using Global Position System coordinates (GPS)"
+        },
+        "dpv:GroupMembership": {
+            "dpv:Category": "dpv:GroupMembership",
+            "dpv:Superclass": "dpv:SocialNetwork",
+            "Translation_DE": "Gruppenmitgliedschaft",
+            "Translation_EN": "Group Membership",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Gruppen und Mitgliedschaften, die in einem sozialen Netzwerk enthalten oder damit verbunden sind",
+            "Explanation_EN": "Information about groups and memberships included or associated with in a social network"
+        },
+        "dpv:HairColor": {
+            "dpv:Category": "dpv:HairColor",
+            "dpv:Superclass": "dpv:PhysicalCharacteristic",
+            "Translation_DE": "Haarfarbe",
+            "Translation_EN": "Hair Color",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Haarfarbe",
+            "Explanation_EN": "Information about hair colour"
+        },
+        "dpv:Health": {
+            "dpv:Category": "dpv:Health",
+            "dpv:Superclass": "dpv:MedicalHealth",
+            "Translation_DE": "Gesundheit",
+            "Translation_EN": "Health",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Gesundheit.",
+            "Explanation_EN": "Information about health."
+        },
+        "dpv:HealthHistory": {
+            "dpv:Category": "dpv:HealthHistory",
+            "dpv:Superclass": "dpv:MedicalHealth",
+            "Translation_DE": "Gesundheit Geschichte",
+            "Translation_EN": "Health History",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Gesundheitshistorie.",
+            "Explanation_EN": "Information about health history."
+        },
+        "dpv:HealthRecord": {
+            "dpv:Category": "dpv:HealthRecord",
+            "dpv:Superclass": "dpv:MedicalHealth",
+            "Translation_DE": "Gesundheitsakte",
+            "Translation_EN": "Health Record",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Gesundheitsakte.",
+            "Explanation_EN": "Information about health record."
+        },
+        "dpv:Height": {
+            "dpv:Category": "dpv:Height",
+            "dpv:Superclass": "dpv:PhysicalCharacteristic",
+            "Translation_DE": "Höhe",
+            "Translation_EN": "Height",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Körpergröße",
+            "Explanation_EN": "Information about physical height"
+        },
+        "dpv:Historical": {
+            "dpv:Category": "dpv:Historical",
+            "dpv:Superclass": "dpv:PersonalDataCategory",
+            "Translation_DE": "Historisch",
+            "Translation_EN": "Historical",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über historische Daten, die sich auf die Geschichte oder vergangene Ereignisse beziehen oder für diese relevant sind",
+            "Explanation_EN": "Information about historical data related to or relevant regarding history or past events"
+        },
+        "dpv:HouseOwned": {
+            "dpv:Category": "dpv:HouseOwned",
+            "dpv:Superclass": "dpv:Ownership",
+            "Translation_DE": "Haus im Besitz",
+            "Translation_EN": "House Owned",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Haus(e) im Besitz und Besitzgeschichte.",
+            "Explanation_EN": "Information about house(s) owned and ownership history."
+        },
+        "dpv:Identifying": {
+            "dpv:Category": "dpv:Identifying",
+            "dpv:Superclass": "dpv:External",
+            "Translation_DE": "Identifizieren",
+            "Translation_EN": "Identifying",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen, die eine Einzelperson oder eine Gruppe eindeutig oder halbeindeutig identifizieren",
+            "Explanation_EN": "Information that uniquely or semi-uniquely identifies an individual or a group"
+        },
+        "dpv:Income": {
+            "dpv:Category": "dpv:Income",
+            "dpv:Superclass": "dpv:Transactional",
+            "Translation_DE": "Einkommen",
+            "Translation_EN": "Income",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über finanzielles Einkommen z.B. für Einzelperson oder Haushalt oder Familie",
+            "Explanation_EN": "Information about financial income e.g. for individual or household or family"
+        },
+        "dpv:IncomeBracket": {
+            "dpv:Category": "dpv:IncomeBracket",
+            "dpv:Superclass": "dpv:Demographic",
+            "Translation_DE": "Einkommensklasse",
+            "Translation_EN": "Income Bracket",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Einkommensklassen.",
+            "Explanation_EN": "Information about income bracket."
+        },
+        "dpv:IndividualHealthHistory": {
+            "dpv:Category": "dpv:IndividualHealthHistory",
+            "dpv:Superclass": "dpv:HealthHistory",
+            "Translation_DE": "Individuelle Gesundheitsgeschichte",
+            "Translation_EN": "Individual Health History",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Gesundheitshistorie.",
+            "Explanation_EN": "Information about information health history."
+        },
+        "dpv:Intention": {
+            "dpv:Category": "dpv:Intention",
+            "dpv:Superclass": "dpv:Preference",
+            "Translation_DE": "Intention",
+            "Translation_EN": "Intention",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Absichten",
+            "Explanation_EN": "Information about intentions"
+        },
+        "dpv:Interaction": {
+            "dpv:Category": "dpv:Interaction",
+            "dpv:Superclass": "dpv:PublicLife",
+            "Translation_DE": "Interaktion",
+            "Translation_EN": "Interaction",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Interaktionen im öffentlichen Raum",
+            "Explanation_EN": "Information about interactions in the public sphere"
+        },
+        "dpv:Interest": {
+            "dpv:Category": "dpv:Interest",
+            "dpv:Superclass": "dpv:Preference",
+            "Translation_DE": "Interesse",
+            "Translation_EN": "Interest",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Interessen",
+            "Explanation_EN": "Information about interests"
+        },
+        "dpv:Internal": {
+            "dpv:Category": "dpv:Internal",
+            "dpv:Superclass": "dpv:PersonalDataCategory",
+            "Translation_DE": "Intern",
+            "Translation_EN": "Internal",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über interne Merkmale, die nicht gesehen oder beobachtet werden können",
+            "Explanation_EN": "Information about internal characteristics that cannot be seen or observed"
+        },
+        "dpv:IPAddress": {
+            "dpv:Category": "dpv:IPAddress",
+            "dpv:Superclass": "dpv:DeviceBased",
+            "Translation_DE": "IP-Adresse",
+            "Translation_EN": "IP Address",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Internetprotokoll (IP)-Adresse eines Geräts",
+            "Explanation_EN": "Information about the Internet protocol (IP) address of a device"
+        },
+        "dpv:Job": {
+            "dpv:Category": "dpv:Job",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Job",
+            "Translation_EN": "Job",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über berufliche Tätigkeiten",
+            "Explanation_EN": "Information about professional jobs"
+        },
+        "dpv:KnowledgeandBeliefs": {
+            "dpv:Category": "dpv:KnowledgeandBeliefs",
+            "dpv:Superclass": "dpv:Internal",
+            "Translation_DE": "Wissen und Überzeugungen",
+            "Translation_EN": "Knowledge and Beliefs",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Wissen und Überzeugungen",
+            "Explanation_EN": "Information about knowledge and beliefs"
+        },
+        "dpv:Language": {
+            "dpv:Category": "dpv:Language",
+            "dpv:Superclass": "dpv:Ethnicity",
+            "Translation_DE": "Sprache",
+            "Translation_EN": "Language",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Sprache und Sprachgeschichte.",
+            "Explanation_EN": "Information about language and lingual history."
+        },
+        "dpv:LifeHistory": {
+            "dpv:Category": "dpv:LifeHistory",
+            "dpv:Superclass": "dpv:Historical",
+            "Translation_DE": "Lebensgeschichte",
+            "Translation_EN": "Life History",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die persönliche Geschichte in Bezug auf Ereignisse oder Aktivitäten - einschließlich ihrer Vorkommnisse, die in direktem Zusammenhang stehen oder einen Einfluss gehabt haben könnten (z. B. Weltkrieg, 9/11)",
+            "Explanation_EN": "Information about personal history regarding events or activities - including their occurences that might be directly related or have had an influence (e.g. World War, 9/11)"
+        },
+        "dpv:Like": {
+            "dpv:Category": "dpv:Like",
+            "dpv:Superclass": "dpv:Interest",
+            "Translation_DE": "Mögen",
+            "Translation_EN": "Like",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Vorlieben oder Präferenzen zu Zuneigungen.",
+            "Explanation_EN": "Information about likes or preferences regarding attractions."
+        },
+        "dpv:LinkClicked": {
+            "dpv:Category": "dpv:LinkClicked",
+            "dpv:Superclass": "dpv:Behavioral",
+            "Translation_DE": "Linkgeklickt",
+            "Translation_EN": "LinkClicked",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Links, die eine Person angeklickt hat.",
+            "Explanation_EN": "Information about the links that an individual has clicked."
+        },
+        "dpv:LoanRecord": {
+            "dpv:Category": "dpv:LoanRecord",
+            "dpv:Superclass": "dpv:Transactional",
+            "Translation_DE": "Darlehenssatz",
+            "Translation_EN": "Loan Record",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Kredite, ob beantragt, gewährt oder abgelehnt, und deren Historie",
+            "Explanation_EN": "Information about loans, whether applied, provided or rejected, and its history"
+        },
+        "dpv:Location": {
+            "dpv:Category": "dpv:Location",
+            "dpv:Superclass": "dpv:Tracking",
+            "Translation_DE": "Standort",
+            "Translation_EN": "Location",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Standort",
+            "Explanation_EN": "Information about location"
+        },
+        "dpv:MACAddress": {
+            "dpv:Category": "dpv:MACAddress",
+            "dpv:Superclass": "dpv:DeviceBased",
+            "Translation_DE": "MAC-Adresse",
+            "Translation_EN": "MAC Address",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Media Access Control (MAC)-Adresse eines Geräts",
+            "Explanation_EN": "Information about the Media Access Control (MAC) address of a device"
+        },
+        "dpv:MaritalStatus": {
+            "dpv:Category": "dpv:MaritalStatus",
+            "dpv:Superclass": "dpv:PublicLife",
+            "Translation_DE": "Familienstand",
+            "Translation_EN": "Marital Status",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Familienstand und dessen Historie",
+            "Explanation_EN": "Information about marital status and history"
+        },
+        "dpv:Marriage": {
+            "dpv:Category": "dpv:Marriage",
+            "dpv:Superclass": "dpv:FamilyStructure",
+            "Translation_DE": "Heirat",
+            "Translation_EN": "Marriage",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Heirat(en).",
+            "Explanation_EN": "Information about marriage(s)."
+        },
+        "dpv:MedicalHealth": {
+            "dpv:Category": "dpv:MedicalHealth",
+            "dpv:Superclass": "dpv:External;dpv:SpecialCategoryPersonalData",
+            "Translation_DE": "Medizinische Gesundheit",
+            "Translation_EN": "Medical Health",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Gesundheit, medizinische Bedingungen oder Gesundheitsvorsorge",
+            "Explanation_EN": "Information about health, medical conditions or health care"
+        },
+        "dpv:MentalHealth": {
+            "dpv:Category": "dpv:MentalHealth",
+            "dpv:Superclass": "dpv:Health",
+            "Translation_DE": "Psychische Gesundheit",
+            "Translation_EN": "Mental Health",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die psychische Gesundheit.",
+            "Explanation_EN": "Information about mental health."
+        },
+        "dpv:Name": {
+            "dpv:Category": "dpv:Name",
+            "dpv:Superclass": "dpv:Identifying",
+            "Translation_DE": "Name",
+            "Translation_EN": "Name",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Namen, die mit dem Gerät verbunden sind oder als Vornamen oder Spitznamen verwendet werden.",
+            "Explanation_EN": "Information about names associated or used as given name or nickname."
+        },
+        "dpv:OfficialID": {
+            "dpv:Category": "dpv:OfficialID",
+            "dpv:Superclass": "dpv:Identifying",
+            "Translation_DE": "Offizieller Ausweis",
+            "Translation_EN": "Official ID",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über eine offizielle Kennung oder ein Ausweisdokument",
+            "Explanation_EN": "Information about an official identifier or identification document"
+        },
+        "dpv:Offspring": {
+            "dpv:Category": "dpv:Offspring",
+            "dpv:Superclass": "dpv:FamilyStructure",
+            "Translation_DE": "Nachkommenschaft",
+            "Translation_EN": "Offspring",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Nachkommenschaft(en).",
+            "Explanation_EN": "Information about offspring(s)."
+        },
+        "dpv:Opinion": {
+            "dpv:Category": "dpv:Opinion",
+            "dpv:Superclass": "dpv:Preference",
+            "Translation_DE": "Meinung",
+            "Translation_EN": "Opinion",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Meinungen",
+            "Explanation_EN": "Information about opinions"
+        },
+        "dpv:Ownership": {
+            "dpv:Category": "dpv:Ownership",
+            "dpv:Superclass": "dpv:Financial",
+            "Translation_DE": "Eigentum",
+            "Translation_EN": "Ownership",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Besitz und Geschichte, einschließlich Mieten, Leihen, Besitztümer.",
+            "Explanation_EN": "Information about ownership and history, including renting, borrowing, possessions."
+        },
+        "dpv:Parent": {
+            "dpv:Category": "dpv:Parent",
+            "dpv:Superclass": "dpv:FamilyStructure",
+            "Translation_DE": "Elternteil",
+            "Translation_EN": "Parent",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den/die Elternteil(e).",
+            "Explanation_EN": "Information about parent(s)."
+        },
+        "dpv:Password": {
+            "dpv:Category": "dpv:Password",
+            "dpv:Superclass": "dpv:Authenticating",
+            "Translation_DE": "Passwort",
+            "Translation_EN": "Password",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über ein Passwort, das bei der Authentifizierung der Person als Benutzer beim Zugriff auf ein System verwendet wird.",
+            "Explanation_EN": "Information about password used in the process of authenticating the individual as a user accessing a system."
+        },
+        "dpv:PaymentCard": {
+            "dpv:Category": "dpv:PaymentCard",
+            "dpv:Superclass": "dpv:FinancialAccount",
+            "Translation_DE": "Zahlungskarte",
+            "Translation_EN": "Payment Card",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Zahlungskarte, wie z. B. Kreditkarte, Debitkarte.",
+            "Explanation_EN": "Information about payment card such as Credit Card, Debit Card."
+        },
+        "dpv:PaymentCardExpiry": {
+            "dpv:Category": "dpv:PaymentCardExpiry",
+            "dpv:Superclass": "dpv:PaymentCard",
+            "Translation_DE": "Ablauf der Zahlungskarte",
+            "Translation_EN": "Payment Card Expiry",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Ablaufdatum der Zahlungskarte, z. B. ein Datum.",
+            "Explanation_EN": "Information about payment card expiry such as a date."
+        },
+        "dpv:PaymentCardNumber": {
+            "dpv:Category": "dpv:PaymentCardNumber",
+            "dpv:Superclass": "dpv:AccountIdentifier;dpv:PaymentCard",
+            "Translation_DE": "Zahlungskartennummer",
+            "Translation_EN": "Payment Card Number",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Zahlungskartennummer.",
+            "Explanation_EN": "Information about payment card number."
+        },
+        "dpv:Personality": {
+            "dpv:Category": "dpv:Personality",
+            "dpv:Superclass": "dpv:Behavioral",
+            "Translation_DE": "Persönlichkeit",
+            "Translation_EN": "Personality",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Persönlichkeit (z. B. Kategorisierung in Bezug auf die Big Five Persönlichkeitsmerkmale)",
+            "Explanation_EN": "Information about personality (e.g., categorization in terms of the Big Five personality traits)"
+        },
+        "dpv:PersonalDataCategory": {
+            "dpv:Category": "dpv:PersonalDataCategory",
+            "dpv:Superclass": "",
+            "Translation_DE": "Personal Data",
+            "Translation_EN": "Personal Data",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Eine Kategorie von persönlichen Daten",
+            "Explanation_EN": "A category of personal data"
+        },
+        "dpv:PersonalPossession": {
+            "dpv:Category": "dpv:PersonalPossession",
+            "dpv:Superclass": "dpv:Ownership",
+            "Translation_DE": "Persönlicher Besitz",
+            "Translation_EN": "Personal Possession",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über persönliche Besitztümer.",
+            "Explanation_EN": "Information about personal possessions."
+        },
+        "dpv:PhilosophicalBelief": {
+            "dpv:Category": "dpv:PhilosophicalBelief",
+            "dpv:Superclass": "dpv:KnowledgeBelief;dpv:SpecialCategoryPersonalData",
+            "Translation_DE": "Philosophischer Glaube",
+            "Translation_EN": "Philosophical Belief",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Wissen und Überzeugungen",
+            "Explanation_EN": "Information about knowledge and beliefs"
+        },
+        "dpv:PhysicalAddress": {
+            "dpv:Category": "dpv:PhysicalAddress",
+            "dpv:Superclass": "dpv:Contact",
+            "Translation_DE": "Physikalische Adresse",
+            "Translation_EN": "Physical Address",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die physische Adresse.",
+            "Explanation_EN": "Information about physical address."
+        },
+        "dpv:PhysicalCharacteristic": {
+            "dpv:Category": "dpv:PhysicalCharacteristic",
+            "dpv:Superclass": "dpv:External",
+            "Translation_DE": "Physikalisches Merkmal",
+            "Translation_EN": "PhysicalCharacteristic",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über körperliche Merkmale",
+            "Explanation_EN": "Information about physical characteristics"
+        },
+        "dpv:PhysicalHealth": {
+            "dpv:Category": "dpv:PhysicalHealth",
+            "dpv:Superclass": "dpv:Health",
+            "Translation_DE": "Körperliche Gesundheit",
+            "Translation_EN": "Physical Health",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die körperliche Gesundheit.",
+            "Explanation_EN": "Information about physical health."
+        },
+        "dpv:PhysicalTrait": {
+            "dpv:Category": "dpv:PhysicalTrait",
+            "dpv:Superclass": "dpv:Demographic",
+            "Translation_DE": "Physikalisches Eigenschaft",
+            "Translation_EN": "Physical Trait",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über definierende Eigenschaften oder Merkmale in Bezug auf den Körper.",
+            "Explanation_EN": "Information about defining traits or features regarding the body."
+        },
+        "dpv:Picture": {
+            "dpv:Category": "dpv:Picture",
+            "dpv:Superclass": "dpv:Identifying",
+            "Translation_DE": "Bild",
+            "Translation_EN": "Picture",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die visuelle Darstellung oder das Image, z. B. ein Profilfoto.",
+            "Explanation_EN": "Information about visual representation or image e.g. profile photo."
+        },
+        "dpv:Piercing": {
+            "dpv:Category": "dpv:Piercing",
+            "dpv:Superclass": "dpv:PhysicalCharacteristic",
+            "Translation_DE": "Piercing",
+            "Translation_EN": "Piercing",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Piercings",
+            "Explanation_EN": "Information about piercings"
+        },
+        "dpv:PINCode": {
+            "dpv:Category": "dpv:PINCode",
+            "dpv:Superclass": "dpv:Authenticating",
+            "Translation_DE": "PIN-Code",
+            "Translation_EN": "PIN Code",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die persönliche Identifikationsnummer (PIN), die üblicherweise bei der Authentifizierung der Person als Benutzer beim Zugriff auf ein System verwendet wird.",
+            "Explanation_EN": "Information about Personal identification number (PIN), which is usually used in the process of authenticating the individual as a user accessing a system."
+        },
+        "dpv:PoliticalAffiliation": {
+            "dpv:Category": "dpv:PoliticalAffiliation",
+            "dpv:Superclass": "dpv:PublicLife;dpv:SpecialCategoryPersonalData",
+            "Translation_DE": "Politische Zugehörigkeit",
+            "Translation_EN": "Political Affiliation",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über politische Zugehörigkeit und Geschichte",
+            "Explanation_EN": "Information about political affiliation and history"
+        },
+        "dpv:Preference": {
+            "dpv:Category": "dpv:Preference",
+            "dpv:Superclass": "dpv:Internal",
+            "Translation_DE": "Präferenz",
+            "Translation_EN": "Preference",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Vorlieben oder Interessen",
+            "Explanation_EN": "Information about preferences or interests"
+        },
+        "dpv:Prescription": {
+            "dpv:Category": "dpv:Prescription",
+            "dpv:Superclass": "dpv:MedicalHealth",
+            "Translation_DE": "Verschreibung",
+            "Translation_EN": "Prescription",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über medizinische und pharmazeutische Verordnungen",
+            "Explanation_EN": "Information about medical and pharmaceutical prescriptions"
+        },
+        "dpv:PrivacyPreference": {
+            "dpv:Category": "dpv:PrivacyPreference",
+            "dpv:Superclass": "dpv:Preference",
+            "Translation_DE": "Datenschutz-Präferenz",
+            "Translation_EN": "Privacy Preference",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Datenschutzpräferenzen",
+            "Explanation_EN": "Information about privacy preferences"
+        },
+        "dpv:Proclivitie": {
+            "dpv:Category": "dpv:Proclivitie",
+            "dpv:Superclass": "dpv:Sexual",
+            "Translation_DE": "Proclivitie",
+            "Translation_EN": "Proclivitiy",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Neigungen im sexuellen Kontext",
+            "Explanation_EN": "Information about proclivities in a sexual context"
+        },
+        "dpv:Professional": {
+            "dpv:Category": "dpv:Professional",
+            "dpv:Superclass": "dpv:Socail",
+            "Translation_DE": "Professionell",
+            "Translation_EN": "Professional",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den schulischen oder beruflichen Werdegang",
+            "Explanation_EN": "Information about educational or professional career"
+        },
+        "dpv:ProfessionalCertification": {
+            "dpv:Category": "dpv:ProfessionalCertification",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Professionelle Zertifizierung",
+            "Translation_EN": "Professional Certification",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über berufliche Zertifizierungen",
+            "Explanation_EN": "Information about professional certifications"
+        },
+        "dpv:ProfessionalEvaluation": {
+            "dpv:Category": "dpv:ProfessionalEvaluation",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Professionelle Auswertung",
+            "Translation_EN": "Professional Evaluation",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über berufliche Beurteilungen",
+            "Explanation_EN": "Information about professional evaluations"
+        },
+        "dpv:ProfessionalInterview": {
+            "dpv:Category": "dpv:ProfessionalInterview",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Bewerbungsgespräch",
+            "Translation_EN": "Professional Interview",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über berufliche Gespräche",
+            "Explanation_EN": "Information about professional interviews"
+        },
+        "dpv:PublicLife": {
+            "dpv:Category": "dpv:PublicLife",
+            "dpv:Superclass": "dpv:Social",
+            "Translation_DE": "Öffentliches Leben",
+            "Translation_EN": "Public Life",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das öffentliche Leben",
+            "Explanation_EN": "Information about public life"
+        },
+        "dpv:Purchase": {
+            "dpv:Category": "dpv:Purchase",
+            "dpv:Superclass": "dpv:Transactional",
+            "Translation_DE": "Einkaufen",
+            "Translation_EN": "Purchase",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Einkäufe wie z. B. gekaufte Lebensmittel oder Kleidung",
+            "Explanation_EN": "Information about purchases such as items bought e.g. grocery or clothing"
+        },
+        "dpv:PurchasesAndSpendingHabit": {
+            "dpv:Category": "dpv:PurchasesAndSpendingHabit",
+            "dpv:Superclass": "dpv:Transactional",
+            "Translation_DE": "Einkäufe und Ausgabegewohnheiten",
+            "Translation_EN": "Purchases and Spending Habit",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Analyse der getätigten Einkäufe und des ausgegebenen Geldes, ausgedrückt als Gewohnheit, z. B. monatliche Einkaufstrends",
+            "Explanation_EN": "Information about analysis of purchases made and money spent expressed as a habit e.g. monthly shopping trends"
+        },
+        "dpv:Race": {
+            "dpv:Category": "dpv:Race",
+            "dpv:Superclass": "dpv:Ethnicity;dpv:SpecialCategoryPersonalData",
+            "Translation_DE": "Rasse",
+            "Translation_EN": "Race",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Rasse oder Rassengeschichte",
+            "Explanation_EN": "Information about race or racial history."
+        },
+        "dpv:Reference": {
+            "dpv:Category": "dpv:Reference",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Referenz",
+            "Translation_EN": "Reference",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Referenzen im beruflichen Kontext",
+            "Explanation_EN": "Information about references in the professional context"
+        },
+        "dpv:Relationship": {
+            "dpv:Category": "dpv:Relationship",
+            "dpv:Superclass": "dpv:Family",
+            "Translation_DE": "Beziehung",
+            "Translation_EN": "Relationship",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Beziehungen und Beziehungsgeschichte.",
+            "Explanation_EN": "Information about relationships and relationship history."
+        },
+        "dpv:Religion": {
+            "dpv:Category": "dpv:Religion",
+            "dpv:Superclass": "dpv:PublicLife;dpv:SpecialCategoryPersonalData",
+            "Translation_DE": "Religion",
+            "Translation_EN": "Religion",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Religion, religiöse Neigungen und religiöse Geschichte.",
+            "Explanation_EN": "Information about religion, religious inclinations, and religious history."
+        },
+        "dpv:ReligiousBelief": {
+            "dpv:Category": "dpv:ReligiousBelief",
+            "dpv:Superclass": "dpv:KnowledgeBelief;dpv:SpecialCategoryPersonalData",
+            "Translation_DE": "Religiöser Glaube",
+            "Translation_EN": "Religious Belief",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Religion und religiöse Überzeugungen.",
+            "Explanation_EN": "Information about religion and religious beliefs."
+        },
+        "dpv:Retina": {
+            "dpv:Category": "dpv:Retina",
+            "dpv:Superclass": "dpv:Biometric",
+            "Translation_DE": "Netzhaut",
+            "Translation_EN": "Retina",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Netzhaut und die Netzhautmuster.",
+            "Explanation_EN": "Information about retina and the retinal patterns."
+        },
+        "dpv:RoomNumber": {
+            "dpv:Category": "dpv:RoomNumber",
+            "dpv:Superclass": "dpv:Location",
+            "Translation_DE": "Zimmernummer",
+            "Translation_EN": "Room Number",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Standort, ausgedrückt als Raumnummer oder ähnliche Nummerierungssysteme",
+            "Explanation_EN": "Information about location expressed as Room number or similar numbering systems"
+        },
+        "dpv:Salary": {
+            "dpv:Category": "dpv:Salary",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Gehalt",
+            "Translation_EN": "Salary",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Gehalt",
+            "Explanation_EN": "Information about salary"
+        },
+        "dpv:Sale": {
+            "dpv:Category": "dpv:Sale",
+            "dpv:Superclass": "dpv:Transactional",
+            "Translation_DE": "Verkauf",
+            "Translation_EN": "Sale",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Verkauf, z. B. Verkauf von Waren oder Dienstleistungen",
+            "Explanation_EN": "Information about sales e.g. selling of goods or services"
+        },
+        "dpv:School": {
+            "dpv:Category": "dpv:School",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Schule",
+            "Translation_EN": "School",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Schule, z. B. Name der Schule, Verhalten oder erhaltene Noten.",
+            "Explanation_EN": "Information about school such as name of school, conduct, or grades obtained."
+        },
+        "dpv:SecretText": {
+            "dpv:Category": "dpv:SecretText",
+            "dpv:Superclass": "dpv:Authenticating",
+            "Translation_DE": "Geheimtext",
+            "Translation_EN": "Secret Text",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über geheimen Text, der im Prozess der Authentifizierung der Person als Benutzer beim Zugriff auf ein System verwendet wird, z. B. bei der Wiederherstellung eines verlorenen Passworts.",
+            "Explanation_EN": "Information about secret text used in the process of authenticating the individual as a user accessing a system, e.g., when recovering a lost password."
+        },
+        "dpv:ServiceConsumptionBehavior": {
+            "dpv:Category": "dpv:ServiceConsumptionBehavior",
+            "dpv:Superclass": "dpv:Behavioral",
+            "Translation_DE": "Service-Verbrauchs-Verhalten",
+            "Translation_EN": "Service Consumption Behavior",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den Konsum eines Dienstes, z. B. Zeitpunkt und Dauer des Konsums.",
+            "Explanation_EN": "Information about the consumption of a service, e.g. time and duration of consumption."
+        },
+        "dpv:Sexual": {
+            "dpv:Category": "dpv:Sexual",
+            "dpv:Superclass": "dpv:External;dpv:SpecialCategoryPersonalData",
+            "Translation_DE": "Sexuell",
+            "Translation_EN": "Sexual",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Sexualität und sexuelle Vorgeschichte",
+            "Explanation_EN": "Information about sexuality and sexual history"
+        },
+        "dpv:SexualHistory": {
+            "dpv:Category": "dpv:SexualHistory",
+            "dpv:Superclass": "dpv:Sexual",
+            "Translation_DE": "Sexuelle Geschichte",
+            "Translation_EN": "Sexual History",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die sexuelle Vorgeschichte",
+            "Explanation_EN": "Information about sexual history"
+        },
+        "dpv:SexualPreference": {
+            "dpv:Category": "dpv:SexualPreference",
+            "dpv:Superclass": "dpv:Sexual",
+            "Translation_DE": "Sexuelle Präferenz",
+            "Translation_EN": "Sexual Preference",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über sexuelle Vorlieben",
+            "Explanation_EN": "Information about sexual preferences"
+        },
+        "dpv:Sibling": {
+            "dpv:Category": "dpv:Sibling",
+            "dpv:Superclass": "dpv:FamilyStructure",
+            "Translation_DE": "Geschwister",
+            "Translation_EN": "Sibling",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über ein oder mehrere Geschwister",
+            "Explanation_EN": "Information about sibling(s)."
+        },
+        "dpv:SkinTone": {
+            "dpv:Category": "dpv:SkinTone",
+            "dpv:Superclass": "dpv:PhysicalCharacteristic",
+            "Translation_DE": "Hautton",
+            "Translation_EN": "Skin Tone",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Hautfarbe",
+            "Explanation_EN": "Information about skin tone"
+        },
+        "dpv:Social": {
+            "dpv:Category": "dpv:Social",
+            "dpv:Superclass": "dpv:PersonalDataCategory",
+            "Translation_DE": "Sozial",
+            "Translation_EN": "Social",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über soziale Aspekte wie Familie, öffentliches Leben oder berufliche Netzwerke.",
+            "Explanation_EN": "Information about social aspects such as family, public life, or professional networks."
+        },
+        "dpv:SocialMediaCommunication": {
+            "dpv:Category": "dpv:SocialMediaCommunication",
+            "dpv:Superclass": "dpv:Communication",
+            "Translation_DE": "Kommunikation über soziale Medien",
+            "Translation_EN": "Social Media Communication",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über die Kommunikation in sozialen Medien, einschließlich der Kommunikation selbst und der Metadaten.",
+            "Explanation_EN": "Information about social media communication, including the communication itself and metadata."
+        },
+        "dpv:SocialNetwork": {
+            "dpv:Category": "dpv:SocialNetwork",
+            "dpv:Superclass": "dpv:Social",
+            "Translation_DE": "Soziales Netzwerk",
+            "Translation_EN": "Social Network",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Freunde oder Verbindungen, ausgedrückt als soziales Netzwerk",
+            "Explanation_EN": "Information about friends or connections expressed as a social network"
+        },
+        "dpv:SocialStatus": {
+            "dpv:Category": "dpv:SocialStatus",
+            "dpv:Superclass": "dpv:PublicLife",
+            "Translation_DE": "Sozialer Status",
+            "Translation_EN": "Social Status",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den sozialen Status",
+            "Explanation_EN": "Information about social status"
+        },
+        "dpv:SpecialCategoryPersonalData": {
+            "dpv:Category": "dpv:SpecialCategoryPersonalData",
+            "dpv:Superclass": "dpv:PersonalDataCategory",
+            "Translation_DE": "Besondere Kategorie personenbezogener Daten",
+            "Translation_EN": "Special Category Personal Data",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Personal Data, die zu einer der \"besonderen Kategorien\" gehören, die sensibler sind und zusätzliche Maßnahmen erfordern",
+            "Explanation_EN": "Personal data belonging to one of 'special categories' that are more sensitive and require additional measures"
+        },
+        "dpv:Tattoo": {
+            "dpv:Category": "dpv:Tattoo",
+            "dpv:Superclass": "dpv:PhysicalCharacteristic",
+            "Translation_DE": "Tätowierung",
+            "Translation_EN": "Tattoo",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Tätowierungen",
+            "Explanation_EN": "Information about tattoos"
+        },
+        "dpv:Tax": {
+            "dpv:Category": "dpv:Tax",
+            "dpv:Superclass": "dpv:Transactional",
+            "Translation_DE": "Steuer",
+            "Translation_EN": "Tax",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über finanzielle Steuern, z. B. Steueraufzeichnungen oder fällige Steuern",
+            "Explanation_EN": "Information about financial tax e.g. tax records or tax due"
+        },
+        "dpv:TelephoneNumber": {
+            "dpv:Category": "dpv:TelephoneNumber",
+            "dpv:Superclass": "dpv:Contact",
+            "Translation_DE": "Telefon-Nummer",
+            "Translation_EN": "Telephone Number",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Telefonnummern.",
+            "Explanation_EN": "Information about telephone number."
+        },
+        "dpv:Thought": {
+            "dpv:Category": "dpv:Thought",
+            "dpv:Superclass": "dpv:KnowledgeBelief",
+            "Translation_DE": "Gedanke",
+            "Translation_EN": "Thought",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Gedanken",
+            "Explanation_EN": "Information about thoughts"
+        },
+        "dpv:Tracking": {
+            "dpv:Category": "dpv:Tracking",
+            "dpv:Superclass": "dpv:PersonalDataCategory",
+            "Translation_DE": "Nachverfolgung",
+            "Translation_EN": "Tracking",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Gedanken",
+            "Explanation_EN": "Information about thoughts"
+        },
+        "dpv:Transaction": {
+            "dpv:Category": "dpv:Transaction",
+            "dpv:Superclass": "dpv:Transactional",
+            "Translation_DE": "Transaktion",
+            "Translation_EN": "Transaction",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über finanzielle Transaktionen z.B. Banküberweisungen",
+            "Explanation_EN": "Information about financial transactions e.g. bank transfers"
+        },
+        "dpv:Transactional": {
+            "dpv:Category": "dpv:Transactional",
+            "dpv:Superclass": "dpv:Financial",
+            "Translation_DE": "Transaktionsbezogen",
+            "Translation_EN": "Transactional",
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über einen Einkauf, Ausgaben oder Einkommen",
+            "Explanation_EN": "Information about an purchasing, spending or income"
+        },
+        "dpv:TVViewingBehavior": {
+            "dpv:Category": "dpv:TVViewingBehavior",
+            "dpv:Superclass": "dpv:ServiceConsumptionBehavior",
+            "Translation_DE": "TV-Sehverhalten",
+            "Translation_EN": "TV Viewing Behavior",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Fernsehverhalten, z. B. Zeitstempel des Kanalwechsels, Dauer des Zuschauens, konsumierte Inhalte",
+            "Explanation_EN": "Information about TV viewing behavior, such as timestamps of channel change, duration of viewership, content consumed"
+        },
+        "dpv:UID": {
+            "dpv:Category": "dpv:UID",
+            "dpv:Superclass": "dpv:Identifying",
+            "Translation_DE": "UID",
+            "Translation_EN": "UID",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über eindeutige Identifikatoren.",
+            "Explanation_EN": "Information about unique identifiers."
+        },
+        "dpv:Username": {
+            "dpv:Category": "dpv:Username",
+            "dpv:Superclass": "dpv:Identifying",
+            "Translation_DE": "Benutzername",
+            "Translation_EN": "Username",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Benutzernamen.",
+            "Explanation_EN": "Information about usernames."
+        },
+        "dpv:VoiceCommunicationRecording": {
+            "dpv:Category": "dpv:VoiceCommunicationRecording",
+            "dpv:Superclass": "dpv:Communication",
+            "Translation_DE": "Aufzeichnung der Sprachkommunikation",
+            "Translation_EN": "Voice Communication Recording",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über sprachlich aufgezeichnete Kommunikation (z. B. Telefonie, VoIP)",
+            "Explanation_EN": "Information about vocal recorded communication (e.g. telephony, VoIP)"
+        },
+        "dpv:VoiceMail": {
+            "dpv:Category": "dpv:VoiceMail",
+            "dpv:Superclass": "dpv:Communication",
+            "Translation_DE": "Voicemail",
+            "Translation_EN": "Voice Mail",
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über Voicemail-Nachrichten.",
+            "Explanation_EN": "Information about voice mail messages."
+        },
+        "dpv:Weight": {
+            "dpv:Category": "dpv:Weight",
+            "dpv:Superclass": "dpv:PhysicalCharacteristic",
+            "Translation_DE": "Voicemail",
+            "Translation_EN": "Weight",
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über das Körpergewicht",
+            "Explanation_EN": "Information about physical weight"
+        },
+        "dpv:WorkHistory": {
+            "dpv:Category": "dpv:WorkHistory",
+            "dpv:Superclass": "dpv:Professional",
+            "Translation_DE": "Arbeitshistorie",
+            "Translation_EN": "Work History",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Synonyms": "",
+            "Explanation_DE": "Informationen über den beruflichen Werdegang in einem beruflichen Kontext",
+            "Explanation_EN": "Information about work history in a professional context"
+        },
+        "unspecified": {
+            "dpv:Category": "unspecified",
+            "dpv:Superclass": "",
+            "Translation_DE": "unspezifiziert",
+            "Translation_EN": "unspecified",
+            "Polypoly_Parent_Category": "",
+            "Synonyms": "",
+            "Explanation_DE": "unspezifizierte Zwecke",
+            "Explanation_EN": "purpose unspecified"
+        }
+    },
+    "polypoly_parent_categories": {
+        "pppc:BehavioralData": {
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Translation_EN": "Behavioral Data",
+            "Translation_DE": "Verhaltensdaten"
+        },
+        "pppc:FinancialData": {
+            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Translation_EN": "Financial Data",
+            "Translation_DE": "Wirtschaftliche Daten"
+        },
+        "pppc:PersonalData": {
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Translation_EN": "Personal Data",
+            "Translation_DE": "Persönliche Daten"
+        },
+        "pppc:SocialData": {
+            "Polypoly_Parent_Category": "pppc:SocialData",
+            "Translation_EN": "Social Data",
+            "Translation_DE": "Soziale Daten"
+        },
+        "pppc:TechnicalData": {
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
+            "Translation_EN": "Technical Data",
+            "Translation_DE": "Technische Daten"
+        }
     }
 }

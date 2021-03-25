@@ -14,6 +14,7 @@ import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLeg
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompaniesByIndustry from "../../components/companiesByIndustry/companiesByIndustry.jsx";
 
+import global from "../../data/global.json";
 import highlights from "../../data/highlights.js";
 
 import "swiper/swiper-bundle.min.css";
@@ -559,7 +560,9 @@ const DataExplorationScreen = ({
                                 onClick={() => swiper.slideNext()}
                             >
                                 <h2>
-                                    {group ||
+                                    {global.polypoly_parent_categories[group]?.[
+                                        `Translation_${i18n.language.toUpperCase()}`
+                                    ] ||
                                         i18n.t(
                                             "dataExplorationScreen:dataTypes.without-category"
                                         )}

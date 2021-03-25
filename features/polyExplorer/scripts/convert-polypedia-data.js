@@ -100,8 +100,11 @@ function parseEntity(entityData) {
               )
             : null,
         dataTypesShared: entityData.derived_category_info
-            ? Object.keys(entityData.derived_category_info).map(
-                  (i) => entityData.derived_category_info[i]
+            ? Object.entries(entityData.derived_category_info).map(
+                  ([key, value]) => ({
+                      "dpv:Category": key,
+                      count: value.count,
+                  })
               )
             : null,
         description: parseDescription(legalEntityData),
@@ -164,6 +167,12 @@ function enrichWithTranslations(entity, globalData) {
             )
         );
         Object.assign(purpose, translations);
+    }
+
+    for (let category of entity.dataTypesShared || []) {
+        const categoryData =
+            globalData.personal_data_categories[category["dpv:Category"]];
+        Object.assign(category, categoryData);
     }
 }
 
@@ -277,6 +286,10 @@ function parsePolyPediaGlobalData() {
     });
     globalData.industries = polyPediaGlobalData.industries;
     globalData.data_purposes = polyPediaGlobalData.data_purposes;
+    globalData.personal_data_categories =
+        polyPediaGlobalData.personal_data_categories;
+    globalData.polypoly_parent_categories =
+        polyPediaGlobalData.polypoly_parent_categories;
     return globalData;
 }
 

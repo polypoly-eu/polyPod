@@ -1,9 +1,9 @@
 const parentCategories = {
-    social: "Soziale Daten",
-    technical: "Technische Daten",
-    behavioral: "Verhaltensdaten",
-    financial: "Wirtschaftliche Daten",
-    personal: "Persönliche Daten",
+    social: "pppc:SocialData",
+    technical: "pppc:TechnicalData",
+    behavioral: "pppc:BehavioralData",
+    financial: "pppc:FinancialData",
+    personal: "pppc:PersonalData",
 };
 
 export default {
@@ -51,7 +51,7 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Microsoft Corporation",
+            name: "Microsoft Corporation (US)",
             companyExplanation: {
                 de:
                     "Die Microsoft Corporation ist ein internationaler Hard- und Softwareentwickler und ein Technologieunternehmen mit Hauptsitz in Redmond (USA) und gehört ebenfalls zu den Big-Five-Unternehmen, also den größten Tech-Konzernen der Welt.",
@@ -107,7 +107,7 @@ export default {
             },
         },
         dataRecipient: {
-            name: "IBM",
+            name: "IBM (US)",
             companyExplanation: {
                 de:
                     "IBM ist eines der weltweit führenden Unternehmen – insbesondere für branchenspezifische Lösungen und Dienstleistungen – im IT-, Software- und Hardware-Bereich. Der Unternehmenssitz ist in Armonk (USA).",
@@ -159,7 +159,7 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Bosch Service Solutions GmbH",
+            name: "BOSCH Service Solutions GmbH (DE)",
             companyExplanation: {
                 de:
                     "Bosch Service Solutions ist ein führender Anbieter für Business Process Outsourcing. Bosch Service Solutions  unterstützt bei der Prozessoptimierung mit fünf Kernbereichen: Customer Experience Services, Mobility Services, Monitoring Services und Business Services. Der Firmensitz ist Stuttgart (DE).",
@@ -370,9 +370,10 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Microsoft Corporation",
+            name: "1000Mercis Ltd (GB)",
             companyExplanation: {
-                de: "MISSING: Sollte Alphabet sein, aber Alphabet fehlt noch.",
+                de:
+                    "MISSING: Sollte Alphabet sein, aber Alphabet ist (noch?) nicht in der Liste.",
             },
             industryExplanation: {
                 de: "MISSING: Beschreibung für Alphabets Industrie.",
