@@ -78,6 +78,10 @@ function getStaticContent(progress) {
     if (progress != 1 / 6 && circleText) {
         circleText.style.display = "none";
     }
+
+    const pageNumberText = document.querySelector(".page-number");
+    if (pageNumberText)
+        pageNumberText.style.display = progress === 1 ? "none" : "block";
 }
 
 function initSwiper() {
