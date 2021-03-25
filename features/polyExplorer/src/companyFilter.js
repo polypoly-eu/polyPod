@@ -83,7 +83,7 @@ export function displayString(field, value, i18n, globalData) {
             );
             return i18n.t(`common:companyFilter.revenueRange.${key}`);
         },
-        location: (_value) =>
+        location: (value) =>
             (globalData.countries[value] || {})[
                 i18n.t("common:companyFilter.countryNameKey")
             ],
