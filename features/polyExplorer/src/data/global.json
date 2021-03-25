@@ -1250,5 +1250,563 @@
             "Name_DE": "Kosovo",
             "dataRegion": "Unknown"
         }
+    },
+    "industries": {
+        "ic:Automotive": {
+            "Industry_Category": "ic:Automotive",
+            "Name_EN": "Automotive",
+            "Name_DE": "Automobil",
+            "Definition_EN": "The automotive industry as a branch of industry deals with the mass production of cars as well as other motor vehicles and their manufacturing (e.g. accessory parts).",
+            "Definition_DE": "Die Automobilindustrie als Industriezweig beschäftigt sich mit der Massenproduktion von Autos sowie anderen Kraftfahrzeugen und ihrer Fertigung (z.B. auch Zubehörteile)."
+        },
+        "ic:BanksAndFinance": {
+            "Industry_Category": "ic:BanksAndFinance",
+            "Name_EN": "Banks & Finance",
+            "Name_DE": "Banken & Finanzen",
+            "Definition_EN": "The banking and finance industry includes all companies whose core business is to deal with finance, financial products and financing models.",
+            "Definition_DE": "Die Banken- und Finanzwirtschaft umfasst alle Firmen, deren Kerngeschäft es ist, sich mit Finanzen, Finanzprodukten und Finanzierungsmodellen zu beschäftigen."
+        },
+        "ic:Consulting": {
+            "Industry_Category": "ic:Consulting",
+            "Name_EN": "Consulting",
+            "Name_DE": "Beratung",
+            "Definition_EN": "Consultancies usually offer professional support, assistance and services, which can be directed at other companies, management levels or individuals",
+            "Definition_DE": "Beratungsunternehmen bieten meist fachliche Unterstützung, Hilfestellungen und Dienstleistungen an, die sich beispielsweise an andere Firmen, an Managementebenen oder aber auch Einzelpersonen richten können."
+        },
+        "ic:Education": {
+            "Industry_Category": "ic:Education",
+            "Name_EN": "Education",
+            "Name_DE": "Bildung",
+            "Definition_EN": "All companies in the field of education offer services in the areas of further education, school/university trainings and further education measures as well as any kind of professional workshops.",
+            "Definition_DE": "Alle Unternehmen im Bereich Bildung bieten Angebote und Dienstleistungen an in den Bereichen Fortbildungen, schulische/universitäre Aus- und Weiterbildungsmaßnahmen sowie berufliche Workshops jeglicher Art."
+        },
+        "ic:ChemicalAndPharmaceutical": {
+            "Industry_Category": "ic:ChemicalAndPharmaceutical",
+            "Name_EN": "Chemical & Pharmaceutical",
+            "Name_DE": "Chemie & Pharma",
+            "Definition_EN": "Companies from the chemical and pharmaceutical sector are involved in the production of a wide variety of synthetic and medicinal substances that are either used for further industrial processing or find further use in medical and pharmacy contexts.",
+            "Definition_DE": "Unternehmen aus dem Chemie- und Pharma-Bereich beschäftigen sich mit der Herstellung verschiedenster synthetischer und Arzneistoffen, die entweder zur industriellen Weiterverarbeitung genutzt werden oder in medizinischen und Apothekenkontexten weitere Verwendung finden."
+        },
+        "ic:Service": {
+            "Industry_Category": "ic:Service",
+            "Name_EN": "Service",
+            "Name_DE": "Dienstleistung",
+            "Definition_EN": "Companies in the service industry offer all kinds of services, e.g. telephone hotlines, chat services or other types of professional support.",
+            "Definition_DE": "Unternehmen in der Dienstleistungsbranche bieten jedwede Art von Service-Diensten an, seien es beispielsweise telefonische Hotlines, Chat-Services oder auch andere Arten von fachlicher Unterstützung."
+        },
+        "ic:IT": {
+            "Industry_Category": "ic:IT",
+            "Name_EN": "IT",
+            "Name_DE": "EDV & IT",
+            "Definition_EN": "Information technology (IT) and electronic data processing (EDP) companies deal with the collection, storage, processing and management of computer-based information. In addition, IT companies can make their products available to business and private customers/users.",
+            "Definition_DE": "Unternehmen in den Bereichen Informationstechnik (IT) und elektronischer Datenverarbeitung (EDV) beschäftigen sich mit der Sammlung, Speicherung, Verarbeitung und Verwaltung computerbasierender Informationen. Darüber hinaus können IT-Unternehmen ihre Produkte für geschäftliche und private Kund:innen/Nutzer:innen zur Verfügung stellen."
+        },
+        "ic:EnergyAndEnvironment": {
+            "Industry_Category": "ic:EnergyAndEnvironment",
+            "Name_EN": "Energy & Environment",
+            "Name_DE": "Energie & Umwelt",
+            "Definition_EN": "The Energy & Environment sector is concerned with (renewable) energies and the state of the environment as a core value - for example, the sub-sectors waste management, water management, energy, environmental and energy technology as well as emissions belong to it.",
+            "Definition_DE": "Die Branche Energie & Umwelt beschäftigt sich als Kernwert mit (erneuerbaren) Energien und dem Zustand der Umwelt – so gehören bspw. die Teilbranchen Abfallwirtschaft, Wasserwirtschaft, Energie, Umwelt- und Energietechnik sowie Emissionen dazu."
+        },
+        "ic:ResearchAndDevelopment": {
+            "Industry_Category": "ic:ResearchAndDevelopment",
+            "Name_EN": "Research & Development",
+            "Name_DE": "Forschung & Entwicklung",
+            "Definition_EN": "The corporate sector of research & development can be about basic research as well as application-oriented research areas. For example, the sector includes areas from engineering, technology or product development and mostly aims at innovations.",
+            "Definition_DE": "Im Unternehmensbereich der Forschung & Entwicklung kann es sowohl um Grundlagenforschung, als auch anwendungsorientierte Forschungsbereiche gehen. So umfasst die Branche zum Beispiel Bereiche aus dem Ingenieurwesen, Technik oder Produktentwicklung und strebt zumeist Innovationen an."
+        },
+        "ic:HealthAndSocial": {
+            "Industry_Category": "ic:HealthAndSocial",
+            "Name_EN": "Health & Social",
+            "Name_DE": "Gesundheitswesen & Soziales",
+            "Definition_EN": "Companies in the health & social sector have specialised in working with/on people at their core, for example in nursing professions, counselling centres, but also work in hospitals or private practices belongs to this sector.",
+            "Definition_DE": "Unternehmen im Bereich Gesundheit & Soziales haben sich in ihrem Kern auf die Zusammenarbeit mit/an Menschen spezialisiert, so zum Beispiel in Pflegeberufen, Beratungsstellen, aber auch die Arbeit in Krankenhäusern oder niedergelassenen Praxen gehört in diese Branche."
+        },
+        "ic:RetailAndConsumption": {
+            "Industry_Category": "ic:RetailAndConsumption",
+            "Name_EN": "Retail & Consumption",
+            "Name_DE": "Handel & Konsum",
+            "Definition_EN": "The trade and consumption sector is mainly concerned with the exchange of goods between different decision-makers (e.g. private buyers or companies as customers); these can be: retail trade (all shops) or wholesale trade for mostly business customers.",
+            "Definition_DE": "Die Handels- und Konsumbranche beschäftigt sich hauptsächlich mit dem Austausch von Gütern zwischen verschiedenen Entscheidungstragenden (z.B. private Käufer:innen oder auch Unternehmen als Kund:innen); das können sein: Einzelhandel (alle Geschäfte) oder auch Großhandel für zumeist Geschäftskund:innen."
+        },
+        "ic:Trades": {
+            "Industry_Category": "ic:Trades",
+            "Name_EN": "Trades",
+            "Name_DE": "Handwerk",
+            "Definition_EN": "Craft trades provide commercial and private products and services (no industrial mass production) in the metal/electrical, construction and finishing trades, health, personal care and cleaning trades, wood and food trades.",
+            "Definition_DE": "Das Handwerk erbringt gewerbliche und private Produkte und Dienstleistungen (keine industrielle Massenproduktion) in den Bereichen Metall/Elektro, Bau- und Ausbaugewerbe, Gesundheits-, Körperpflege- und Reinigungsgewerbe, Holz sowie im Nahrungsmittelgewerbe."
+        },
+        "ic:RealEstateAndFacilityManagement": {
+            "Industry_Category": "ic:RealEstateAndFacilityManagement",
+            "Name_EN": "Real Estate & Facility Management",
+            "Name_DE": "Immobilien & Facility Management",
+            "Definition_EN": "All companies working in the fields of real estate & facility management deal at their core with the administration (e.g. renting/sale/brokerage) and management of buildings (houses, flats, school buildings, sports halls, etc.) as well as their technical facilities and/or equipment (e.g. maintenance, care, cleaning of building interiors).",
+            "Definition_DE": "Alle Unternehmen, die in den Bereichen Immobilien & Facility Management beschäftigen sich in ihrem Kern mit der Verwaltung (z.B. Vermietung/Verkauf/Makeln) und Bewirtschaftung von Gebäuden (Häuser, Wohnungen, Schulgebäude, Sporthallen usw.) sowie deren technischer Anlagen und/oder Einrichtungen (z.B. Instandhaltung, Pflege, Reinigung von Gebäudeninnerem)"
+        },
+        "ic:InternetAndMultimedia": {
+            "Industry_Category": "ic:InternetAndMultimedia",
+            "Name_EN": "Internet & Multimedia",
+            "Name_DE": "Internet & Multimedia",
+            "Definition_EN": "The Internet & Multimedia sector includes all companies that work and do business with digital media as their core business. This includes, for example, providers of streaming services, video telephony, messenger services or digital whiteboards.",
+            "Definition_DE": "In der Branche Internet & Multimedia sind alle Unternehmen tätig, die als Kerngeschäft mit digitalen Medien arbeiten und wirtschaften. Dazu zählen zum Beispiel Anbietende von Streaming-Diensten, Videotelefonie, Messenger-Diensten oder auch digitalen Whiteboards."
+        },
+        "ic:CultureAndEntertainmentAndEvents": {
+            "Industry_Category": "ic:CultureAndEntertainmentAndEvents",
+            "Name_EN": "Culture & Entertainment & Events",
+            "Name_DE": "Kultur & Unterhaltung & Veranstaltung",
+            "Definition_EN": "Companies in the culture, entertainment and/or event industry offer numerous services in the B2B and B2C sectors to organise parties and concerts (planning/conception/implementation), but are also active in theatres, cinemas and other local based environments.",
+            "Definition_DE": "Unternehmen in der Kultur-, Unterhaltungs-, und/oder Veranstaltungsbranche bieten im B2B- und B2C-Bereich zahlreiche Angebote an, Feiern, Konzerte zu veranstalten (Planung/Konzeption/Durchführung), sind aber auch stationär in Theater-, Kino- und anderen Umfeldern tätig."
+        },
+        "ic:LawAndTaxes": {
+            "Industry_Category": "ic:LawAndTaxes",
+            "Name_EN": "Law & Taxes",
+            "Name_DE": "Recht & Steuern",
+            "Definition_EN": "Companies whose core business is law and taxes deal with financial and tax law as well as business management and legal issues in general and, for example, represent and advise clients in these areas or are responsible for legal rulings and, if necessary, changes in the law.",
+            "Definition_DE": "Unternehmen, deren Kerngeschäft Recht & Steuern sind, beschäftigen sich u.a. mit finanz- und steuerrechtlichen sowie betriebswirtschaftlichen und juristischen Fragen im Allgemeinen und vertreten und beraten bspw. Klient:innen in eben jenen Bereichen oder sind für Rechtssprechungen und ggf. Gesetzesänderungen verantwortlich."
+        },
+        "ic:Telecommunication": {
+            "Industry_Category": "ic:Telecommunication",
+            "Name_EN": "Telecommunication",
+            "Name_DE": "Telekommunikation",
+            "Definition_EN": "The core business of telecommunications companies is the provision of products that enable the exchange of information and messages, usually with the help of electronic media, e.g. everything to do with smartphone, internet or landline technology.",
+            "Definition_DE": "Das Kerngeschäft von Telekommunikationsunternehmen ist das zur Verfügung stellen von Produkten, die den Austausch von Informationen und Nachrichten mit zumeist der Hilfe von elektronischen Medien, möglich machen, so z.B. alles rundum den Bereich von Smartphone-, Internet- oder Festnetztechnologie."
+        },
+        "ic:TextilesAndFashion": {
+            "Industry_Category": "ic:TextilesAndFashion",
+            "Name_EN": "Textiles & Fashion",
+            "Name_DE": "Textil & Mode",
+            "Definition_EN": "Textile and fashion companies are, among other things, part of the manufacturing (and selling) industry and produce textile products from fibres, which are then further processed in the clothing industry and later sold as finished products, e.g. in the retail trade.",
+            "Definition_DE": "Textil- und Mode-Unternehmen sind u.a. Teil des produzierenden (und verkaufenden) Gewerbes und fertigen aus Fasern textile Produkte, die dann in der Bekleidungsindustrie weiterverarbeitet und später z.B. im Einzelhandel als fertige Produkte verkauft werden."
+        },
+        "ic:TrafficAndTransportAndLogistics": {
+            "Industry_Category": "ic:TrafficAndTransportAndLogistics",
+            "Name_EN": "Traffic & Transport & Logistics",
+            "Name_DE": "Verkehr & Transport & Logistik",
+            "Definition_EN": "Companies in the fields of traffic & transport & logistics are responsible for all areas of passenger and freight transport on roads, railways, waterways and the airways, such as classic goods deliveries, electromobility or even car-sharing models.",
+            "Definition_DE": "Unternehmen in den Bereichen Verkehr & Transport & Logistik sind für alle Bereiche des Personen- und Güterverkehrs auf Straßen, Schienen, Wasserwegen und dem Luftfahrtweg verantwortlich, so z.B. klassisch für Warenlieferungen, Elektromobilität oder auch Carsharing-Modelle."
+        },
+        "ic:Insurance": {
+            "Industry_Category": "ic:Insurance",
+            "Name_EN": "Insurance",
+            "Name_DE": "Versicherung",
+            "Definition_EN": "Insurance companies offer as a business core to be protected (exchange of so-called calculated premiums) - be it e.g. health-related, economic, service-related, professional or age-related.",
+            "Definition_DE": "Versicherungen bieten als Geschäftskern an, sich schützen zu lassen (Tausch von sog. kalkulierten Prämien) – sei es bspw. gesundheitlich, wirtschaftlich, dienstlich, beruflich oder altersbedingt."
+        }
+    },
+    "data_purposes": {
+        "dpv:AcademicResearch": {
+            "dpv:Purpose": "dpv:AcademicResearch",
+            "dpv:Superclass": "dpv:ResearchAndDevelopment",
+            "Translation_DE": "Akademische Forschung",
+            "Translation_EN": "Academic Research",
+            "Synonyms": "",
+            "Explanation_DE": "Forschung in einem akademischen Kontext, z. B. innerhalb von Universitäten, durchführen oder unterstützen",
+            "Explanation_EN": "conduct or assist with research conducted in an academic context e.g. within universities"
+        },
+        "dpv:AccessControl": {
+            "dpv:Purpose": "dpv:AccessControl",
+            "dpv:Superclass": "dpv:Security",
+            "Translation_DE": "Zugangskontrolle",
+            "Translation_EN": "Access Control",
+            "Synonyms": "",
+            "Explanation_DE": "Zugangskontrollen durchführen oder durchsetzen",
+            "Explanation_EN": "conduct or enforce access control"
+        },
+        "dpv:CommercialInterest": {
+            "dpv:Purpose": "dpv:CommercialInterest",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Kommerzielles Interesse",
+            "Translation_EN": "Commercial Interest",
+            "Synonyms": "",
+            "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für den Controller",
+            "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller"
+        },
+        "dpv:CommercialResearch": {
+            "dpv:Purpose": "dpv:CommercialResearch",
+            "dpv:Superclass": "dpv:ResearchAndDevelopment",
+            "Translation_DE": "Kommerzielle Forschung",
+            "Translation_EN": "Commercial Research",
+            "Synonyms": "",
+            "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z.B. in einem Unternehmen",
+            "Explanation_EN": "conduct research in a commercial setting e.g. in a company"
+        },
+        "dpv:CommunicationForCustomerCare": {
+            "dpv:Purpose": "dpv:CommunicationForCustomerCare",
+            "dpv:Superclass": "dpv:CustomerCare",
+            "Translation_DE": "Kommunikation zur Kundenbetreuung",
+            "Translation_EN": "Communication for Customer Care",
+            "Synonyms": "",
+            "Explanation_DE": "mit Nutzern per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen zu kommunizieren.",
+            "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests."
+        },
+        "dpv:Context": {
+            "dpv:Purpose": "dpv:Context",
+            "dpv:Superclass": "dpv:CreatePersonalizedReccomendations",
+            "Translation_DE": "Kontext",
+            "Translation_EN": "Context",
+            "Synonyms": "",
+            "Explanation_DE": "Der \"Kontext\" oder \"Umfang\" des Zwecks, z. B. Beschränkung auf einen bestimmten Geschäftszweig",
+            "Explanation_EN": "The 'context' or 'scope' of the purpose, e.g. restriction to a certain business sector"
+        },
+        "dpv:CreateEventRecommendations": {
+            "dpv:Purpose": "dpv:CreateEventRecommendations",
+            "dpv:Superclass": "dpv:ServicePersonalization",
+            "Translation_DE": "Event-Empfehlungen erstellen",
+            "Translation_EN": "Create Event Recommendations",
+            "Synonyms": "",
+            "Explanation_DE": "personalisierte Empfehlungen für Veranstaltungen zu erstellen und bereitzustellen",
+            "Explanation_EN": "create and provide personalised recommendations for events"
+        },
+        "dpv:CreatePersonalizedRecommendations": {
+            "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
+            "dpv:Superclass": "dpv:CreatePersonalizedReccomendations",
+            "Translation_DE": "Personalisierte Empfehlungen erstellen",
+            "Translation_EN": "Create Personalized Recommendations",
+            "Synonyms": "",
+            "Explanation_DE": "personalisierte Empfehlungen erstellen und bereitstellen",
+            "Explanation_EN": "create and provide personalised recommendations"
+        },
+        "dpv:CreateProductRecommendations": {
+            "dpv:Purpose": "dpv:CreateProductRecommendations",
+            "dpv:Superclass": "dpv:CreatePersonalizedReccomendations",
+            "Translation_DE": "Produktempfehlungen erstellen",
+            "Translation_EN": "Create Product Recommendations",
+            "Synonyms": "",
+            "Explanation_DE": "Produktempfehlungen erstellen, z. B. ähnliche Produkte vorschlagen",
+            "Explanation_EN": "create product recommendations e.g. suggest similar products"
+        },
+        "dpv:CustomerCare": {
+            "dpv:Purpose": "dpv:CustomerCare",
+            "dpv:Superclass": "dpv:ServiceProvision",
+            "Translation_DE": "Kundenbetreuung",
+            "Translation_EN": "Customer Care",
+            "Synonyms": "",
+            "Explanation_DE": "Hilfestellung bei Kundenbeschwerden und -zufriedenheit geben",
+            "Explanation_EN": "provide assistance for customer complaints and satisfaction"
+        },
+        "dpv:DeliveryOfGoods": {
+            "dpv:Purpose": "dpv:DeliveryOfGoods",
+            "dpv:Superclass": "dpv:RequestedServiceProvision",
+            "Translation_DE": "Lieferung von Waren",
+            "Translation_EN": "Delivery of Goods",
+            "Synonyms": "",
+            "Explanation_DE": "Waren und Dienstleistungen ausliefern",
+            "Explanation_EN": "deliver goods and services"
+        },
+        "dpv:DirectMarketing": {
+            "dpv:Purpose": "dpv:DirectMarketing",
+            "dpv:Superclass": "dpv:Marketing",
+            "Translation_DE": "Direktmarketing",
+            "Translation_EN": "Direct arketing",
+            "Synonyms": "",
+            "Explanation_DE": "Direktmarketing durchführen, d.h. Marketing, das direkt an die Person gerichtet ist",
+            "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual"
+        },
+        "dpv:FraudPreventionAndDetection": {
+            "dpv:Purpose": "dpv:FraudPreventionAndDetection",
+            "dpv:Superclass": "dpv:Security",
+            "Translation_DE": "Betrugsprävention und -aufdeckung",
+            "Translation_EN": "Fraud Prevention and Detection",
+            "Synonyms": "",
+            "Explanation_DE": "Betrug erkennen und verhindern",
+            "Explanation_EN": "detect and prevent fraud"
+        },
+        "dpv:IdentityVerification": {
+            "dpv:Purpose": "dpv:IdentityVerification",
+            "dpv:Superclass": "dpv:Security",
+            "Translation_DE": "Identitätsüberprüfung",
+            "Translation_EN": "Identity Verification",
+            "Synonyms": "",
+            "Explanation_DE": "Identität verifizieren und autorisieren",
+            "Explanation_EN": "verify and authorise identity"
+        },
+        "dpv:ImproveExistingProductsAndServices": {
+            "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
+            "dpv:Superclass": "dpv:OptimisationForController",
+            "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
+            "Translation_EN": "Improve Existing Products and Services",
+            "Synonyms": "",
+            "Explanation_DE": "bestehende Produkte und Dienstleistungen zu verbessern",
+            "Explanation_EN": "improve existing products and services"
+        },
+        "dpv:ImproveInternalCRMProcesses": {
+            "dpv:Purpose": "dpv:ImproveInternalCRMProcesses",
+            "dpv:Superclass": "dpv:OptimisationForController",
+            "Translation_DE": "Interne CRM-Prozesse verbessern",
+            "Translation_EN": "Improve internal CRM Processes",
+            "Synonyms": "",
+            "Explanation_DE": "Verbesserung der Kundenbeziehungsmanagement-Prozesse (CRM)",
+            "Explanation_EN": "improve customer-relationship management (CRM) processes"
+        },
+        "dpv:IncreaseServiceRobustness": {
+            "dpv:Purpose": "dpv:IncreaseServiceRobustness",
+            "dpv:Superclass": "dpv:OptimisationForController",
+            "Translation_DE": "Service-Robustheit erhöhen",
+            "Translation_EN": "Increase Service Robustness",
+            "Synonyms": "",
+            "Explanation_DE": "die Robustheit und Ausfallsicherheit von Diensten zu verbessern",
+            "Explanation_EN": "improve the robustness and resilience of services"
+        },
+        "dpv:InternalResourceOptimisation": {
+            "dpv:Purpose": "dpv:InternalResourceOptimisation",
+            "dpv:Superclass": "dpv:OptimisationForController",
+            "Translation_DE": "Interne Ressourcen-Optimierung",
+            "Translation_EN": "Internal Resource Optimisation",
+            "Synonyms": "",
+            "Explanation_DE": "Optimierung interner Ressourcen, die von der Organisation genutzt werden, z. B. die Ressourcennutzung",
+            "Explanation_EN": "optimise internal resources used by the organisation e.g. resource usage"
+        },
+        "dpv:LegalCompliance": {
+            "dpv:Purpose": "dpv:LegalCompliance",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Rechtskonformität",
+            "Translation_EN": "Legal Compliance",
+            "Synonyms": "",
+            "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
+            "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+        },
+        "dpv:Marketing": {
+            "dpv:Purpose": "dpv:Marketing",
+            "dpv:Superclass": "dpv:CommercialInterest",
+            "Translation_DE": "Marketing",
+            "Translation_EN": "Marketing",
+            "Synonyms": "Publicity;Public Relations",
+            "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben",
+            "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service"
+        },
+        "dpv:NonCommercialResearch": {
+            "dpv:Purpose": "dpv:NonCommercialResearch",
+            "dpv:Superclass": "dpv:ResearchAndDevelopment",
+            "Translation_DE": "Nicht-kommerzielle Forschung",
+            "Translation_EN": "Non-Commercial Research",
+            "Synonyms": "",
+            "Explanation_DE": "Forschung in einem nicht-kommerziellen Umfeld betreiben, z. B. für eine Non-Profit-Organisation (NGO)",
+            "Explanation_EN": "conduct research in a non-commercial setting e.g. for a non-profit-organisation (NGO)"
+        },
+        "dpv:OptimisationForConsumer": {
+            "dpv:Purpose": "dpv:OptimisationForConsumer",
+            "dpv:Superclass": "dpv:ServiceOptimization",
+            "Translation_DE": "Optimierung für den Verbraucher",
+            "Translation_EN": "Optimisation for Consumer",
+            "Synonyms": "",
+            "Explanation_DE": "Aktivitäten und Dienste für den Verbraucher oder Nutzer zu optimieren",
+            "Explanation_EN": "optimise activities and services for the consumer or user"
+        },
+        "dpv:OptimisationForController": {
+            "dpv:Purpose": "dpv:OptimisationForController",
+            "dpv:Superclass": "dpv:ServiceOptimization",
+            "Translation_DE": "Optimierung für Controller",
+            "Translation_EN": "Optimisation for Controller",
+            "Synonyms": "",
+            "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Controller",
+            "Explanation_EN": "optimise activities and services for the Controller"
+        },
+        "dpv:OptimiseUserInterface": {
+            "dpv:Purpose": "dpv:OptimiseUserInterface",
+            "dpv:Superclass": "dpv:OptimisationForConsumer",
+            "Translation_DE": "Optimierung der Benutzeroberfläche",
+            "Translation_EN": "Optimise User Interface",
+            "Synonyms": "",
+            "Explanation_DE": "Optimierung von Schnittstellen, die dem Nutzer präsentiert werden",
+            "Explanation_EN": "optimise interfaces presented to the user"
+        },
+        "dpv:Payment": {
+            "dpv:Purpose": "dpv:Payment",
+            "dpv:Superclass": "dpv:ServiceProvision",
+            "Translation_DE": "Bezahlung",
+            "Translation_EN": "Payment",
+            "Synonyms": "",
+            "Explanation_DE": "die Zahlungstransaktionen der Nutzer zu verarbeiten.",
+            "Explanation_EN": "process users’ payment transactions."
+        },
+        "dpv:PersonalisedAdvertising": {
+            "dpv:Purpose": "dpv:PersonalisedAdvertising",
+            "dpv:Superclass": "dpv:Advertising;dpv:ServicePersonalization",
+            "Translation_DE": "Personalisierte Werbung",
+            "Translation_EN": "Personalised Advertising",
+            "Synonyms": "",
+            "Explanation_DE": "personalisierte Werbung bereitstellen",
+            "Explanation_EN": "provide personalised advertising"
+        },
+        "dpv:PersonalisedBenefits": {
+            "dpv:Purpose": "dpv:PersonalisedBenefits",
+            "dpv:Superclass": "dpv:ServicePersonalization",
+            "Translation_DE": "Personalisierte Vorteile",
+            "Translation_EN": "Personalised Benefits",
+            "Synonyms": "",
+            "Explanation_DE": "die vom Nutzer erhaltenen Leistungen zu personalisieren",
+            "Explanation_EN": "personalise benefits received by the user"
+        },
+        "dpv:RegistrationAndAuthentication": {
+            "dpv:Purpose": "dpv:RegistrationAndAuthentication",
+            "dpv:Superclass": "dpv:ServiceProvision",
+            "Translation_DE": "Registrierung und Authentifizierung",
+            "Translation_EN": "Registration and Authentication",
+            "Synonyms": "",
+            "Explanation_DE": "sich zu registrieren, zu authentifizieren und im Zusammenhang mit einem Dienst zu identifizieren",
+            "Explanation_EN": "register, authenticate, and identify in context of a service."
+        },
+        "dpv:ResearchAndDevelopment": {
+            "dpv:Purpose": "dpv:ResearchAndDevelopment",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Forschung und Entwicklung",
+            "Translation_EN": "Research and Development",
+            "Synonyms": "",
+            "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben",
+            "Explanation_EN": "conduct research and development for new methods, products, or services"
+        },
+        "dpv:Sector": {
+            "dpv:Purpose": "dpv:Sector",
+            "dpv:Superclass": "",
+            "Translation_DE": "Branche",
+            "Translation_EN": "Sector",
+            "Synonyms": "",
+            "Explanation_DE": "den \"Sektor\" oder \"Bereich\" eines Zwecks z. B. Landwirtschaft, Werbung",
+            "Explanation_EN": "The 'sector' or 'domain' of a purpose e.g. Agriculture, Advertising"
+        },
+        "dpv:Security": {
+            "dpv:Purpose": "dpv:Security",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Sicherheit",
+            "Translation_EN": "Security",
+            "Synonyms": "",
+            "Explanation_DE": "die Sicherheit z. B. von Daten gewährleisten und durchsetzen",
+            "Explanation_EN": "ensure and enforce security e.g. of data"
+        },
+        "dpv:SellDataToThirdParties": {
+            "dpv:Purpose": "dpv:SellDataToThirdParties",
+            "dpv:Superclass": "dpv:CommercialInterest",
+            "Translation_DE": "Daten an Dritte verkaufen",
+            "Translation_EN": "Sell Data to Third Parties",
+            "Synonyms": "",
+            "Explanation_DE": "Daten oder Informationen an Dritte verkaufen",
+            "Explanation_EN": "sell data or information to third parties"
+        },
+        "dpv:SellInsightsFromData": {
+            "dpv:Purpose": "dpv:SellInsightsFromData",
+            "dpv:Superclass": "dpv:CommercialInterest",
+            "Translation_DE": "Einblicke aus Daten verkaufen",
+            "Translation_EN": "Sell Insightsfrom Data",
+            "Synonyms": "",
+            "Explanation_DE": "aus der Analyse von Daten gewonnene Erkenntnisse verkaufen oder kommerziell bereitstellen",
+            "Explanation_EN": "sell or commercially provide insights obtained from analysis of data"
+        },
+        "dpv:SellProductsToDataSubject": {
+            "dpv:Purpose": "dpv:SellProductsToDataSubject",
+            "dpv:Superclass": "dpv:CommercialInterest",
+            "Translation_DE": "Produkte an Datensubjekte verkaufen",
+            "Translation_EN": "Sell Products to Data Subject",
+            "Synonyms": "",
+            "Explanation_DE": "Produkte oder Dienstleistungen verkaufen",
+            "Explanation_EN": "sell products or services"
+        },
+        "dpv:SellTargettedAdvertisements": {
+            "dpv:Purpose": "dpv:SellTargettedAdvertisements",
+            "dpv:Superclass": "dpv:CommercialInterest",
+            "Translation_DE": "Gezielte Werbung verkaufen",
+            "Translation_EN": "Sell Targetted Advertisements",
+            "Synonyms": "",
+            "Explanation_DE": "zielgerichtete Werbung verkaufen oder anbieten",
+            "Explanation_EN": "sell or provide targetted advertisements"
+        },
+        "dpv:ServiceOptimization": {
+            "dpv:Purpose": "dpv:ServiceOptimization",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Service-Optimierung",
+            "Translation_EN": "Service Optimization",
+            "Synonyms": "",
+            "Explanation_DE": "Service oder Aktivität optimieren",
+            "Explanation_EN": "optimise service or activity"
+        },
+        "dpv:ServicePersonalization": {
+            "dpv:Purpose": "dpv:ServicePersonalization",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Dienstpersonalisierung",
+            "Translation_EN": "Service Personalization",
+            "Synonyms": "",
+            "Explanation_DE": "Dienstleistung oder Aktivität personalisieren",
+            "Explanation_EN": "personalise service or activity"
+        },
+        "dpv:ServiceProvision": {
+            "dpv:Purpose": "dpv:ServiceProvision",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Dienstbereitstellung",
+            "Translation_EN": "Service Provision",
+            "Synonyms": "",
+            "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
+            "Explanation_EN": "provide service or activity"
+        },
+        "dpv:SocialMediaMarketing": {
+            "dpv:Purpose": "dpv:SocialMediaMarketing",
+            "dpv:Superclass": "dpv:Marketing",
+            "Translation_DE": "Soziale Medien",
+            "Translation_EN": "Social Media",
+            "Synonyms": "",
+            "Explanation_DE": "über und in sozialen Medien vermarkten.",
+            "Explanation_EN": "market through and on social media."
+        },
+        "dpv:Analytics": {
+            "dpv:Purpose": "dpv:Analytics",
+            "dpv:Superclass": "dpv:ServiceProvision",
+            "Translation_DE": "Analytik",
+            "Translation_EN": "Analytics",
+            "Synonyms": "",
+            "Explanation_DE": "Benutzerverhalten und Ereignisse für einen Dienst oder ein Produkt zu berechnen, zu analysieren und zu melden.",
+            "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+        },
+        "dpv:UserInterfacePersonalisation": {
+            "dpv:Purpose": "dpv:UserInterfacePersonalisation",
+            "dpv:Superclass": "dpv:ServicePersonalization",
+            "Translation_DE": "Personalisierung der Benutzeroberfläche",
+            "Translation_EN": "User Interface Personalisation",
+            "Synonyms": "",
+            "Explanation_DE": "Oberflächen für den Benutzer personalisieren",
+            "Explanation_EN": "personalise interfaces presented to the user"
+        },
+        "dpv:UsageAnalytics": {
+            "dpv:Purpose": "dpv:UsageAnalytics",
+            "dpv:Superclass": "dpv:ServiceProvision",
+            "Translation_DE": "Verwendungsanalyse",
+            "Translation_EN": "Usage Analytics",
+            "Synonyms": "",
+            "Explanation_DE": "Berechnen, Analysieren und Berichten von Benutzerverhalten und Ereignissen für einen Dienst oder ein Produkt.",
+            "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+        },
+        "dpv:RegistrationAuthentication": {
+            "dpv:Purpose": "dpv:RegistrationAuthentication",
+            "dpv:Superclass": "dpv:ServiceProvision",
+            "Translation_DE": "Registrierung Authentifizierung",
+            "Translation_EN": "Registration Authentication",
+            "Synonyms": "",
+            "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
+            "Explanation_EN": "register, authenticate, and identify in context of a service."
+        },
+        "unspecified": {
+            "dpv:Purpose": "unspecified",
+            "dpv:Superclass": "",
+            "Translation_DE": "unspezifiziert",
+            "Translation_EN": "unspecified",
+            "Synonyms": "",
+            "Explanation_DE": "Zweck nicht spezifiziert",
+            "Explanation_EN": "purpose unspecified"
+        },
+        "dpv:Advertising": {
+            "dpv:Purpose": "dpv:Advertising",
+            "dpv:Superclass": "",
+            "Translation_DE": "Werbung",
+            "Translation_EN": "Advertising",
+            "Synonyms": "",
+            "Explanation_DE": "Werbung und werbliche Ansprache",
+            "Explanation_EN": "Advertising and sending messages with ad content"
+        },
+        "dpv:RequestedServiceProvision": {
+            "dpv:Purpose": "dpv:RequestedServiceProvision",
+            "dpv:Superclass": null,
+            "Translation_DE": null,
+            "Translation_EN": null,
+            "Synonyms": null,
+            "Explanation_DE": null,
+            "Explanation_EN": null
+        }
     }
 }
