@@ -3910,29 +3910,6 @@
         }
     },
     {
-        "name": "i-CD Publishing  Limited (GB)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "GB"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:InternetAndMultimedia",
-            "name": {
-                "en": "Internet & Multimedia",
-                "de": "Internet & Multimedia"
-            }
-        }
-    },
-    {
         "name": "SAP Deutschland SE & Co. KG",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -4091,29 +4068,6 @@
             "name": {
                 "en": "Service",
                 "de": "Dienstleistung"
-            }
-        }
-    },
-    {
-        "name": "Giesecke+Devrient Italia S.R.L. (IT)",
-        "featured": false,
-        "jurisdiction": "EU-GDPR",
-        "location": {
-            "countryCode": "IT"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:IT",
-            "name": {
-                "en": "IT",
-                "de": "EDV & IT"
             }
         }
     },
@@ -7284,29 +7238,6 @@
         }
     },
     {
-        "name": "Atlassian (GB)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "GB"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:IT",
-            "name": {
-                "en": "IT",
-                "de": "EDV & IT"
-            }
-        }
-    },
-    {
         "name": "Zetes SA (BE)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -7772,7 +7703,7 @@
         }
     },
     {
-        "name": "Google_LLC (US)",
+        "name": "Google LLC (US)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
         "location": {
@@ -9295,29 +9226,6 @@
         }
     },
     {
-        "name": "The Rubicon Project, Inc.\n (US)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "US"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:InternetAndMultimedia",
-            "name": {
-                "en": "Internet & Multimedia",
-                "de": "Internet & Multimedia"
-            }
-        }
-    },
-    {
         "name": "Freewheel (US)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
@@ -10702,7 +10610,7 @@
         }
     },
     {
-        "name": "Amazon_Payments_Europe_SCA (LU)",
+        "name": "Amazon Payments Europe SCA (LU)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
         "location": {
@@ -12123,7 +12031,7 @@
         }
     },
     {
-        "name": "Amazon_Europe_Core_SARL (LU)",
+        "name": "Amazon Europe Core SARL (LU)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
         "location": {
@@ -13799,29 +13707,6 @@
             "name": {
                 "en": "IT",
                 "de": "EDV & IT"
-            }
-        }
-    },
-    {
-        "name": "Dun & Bradstreet EMEA (US)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "US"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:Service",
-            "name": {
-                "en": "Service",
-                "de": "Dienstleistung"
             }
         }
     },
@@ -15701,7 +15586,7 @@
         }
     },
     {
-        "name": "Alphabet_Inc (US)",
+        "name": "Alphabet Inc (US)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
         "location": {
@@ -16940,7 +16825,7 @@
         }
     },
     {
-        "name": "PayPal_Europe_SARL_Et_Cie_SCE (LU)",
+        "name": "PayPal Europe SARL Et Cie SCE (LU)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
         "location": {
@@ -18422,7 +18307,7 @@
         }
     },
     {
-        "name": "Amazon_Services_Europe_SARL (LU)",
+        "name": "Amazon Services Europe SARL (LU)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
         "location": {
@@ -19376,7 +19261,7 @@
             "Criteo SA (FR)",
             "Facebook Ireland Limited (IE)",
             "Google Ireland, Ltd. (IE)",
-            "Google_LLC (US)",
+            "Google LLC (US)",
             "IDEOMEDIA SRL (RO)",
             "INTESYS SRL (IT)",
             "JW Player (US)",
@@ -21065,29 +20950,6 @@
         }
     },
     {
-        "name": "24 Solutions AB (US)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "US"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:InternetAndMultimedia",
-            "name": {
-                "en": "Internet & Multimedia",
-                "de": "Internet & Multimedia"
-            }
-        }
-    },
-    {
         "name": "aklamio GmbH (FR)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -22333,10 +22195,10 @@
             "source": null
         },
         "industryCategory": {
-            "id": "ic:RetailAndConsumption",
+            "id": "ic:ResearchAndDevelopment",
             "name": {
-                "en": "Retail & Consumption",
-                "de": "Handel & Konsum"
+                "en": "Research & Development",
+                "de": "Forschung & Entwicklung"
             }
         }
     },
@@ -23248,29 +23110,6 @@
         }
     },
     {
-        "name": "Consultix (FR)",
-        "featured": false,
-        "jurisdiction": "EU-GDPR",
-        "location": {
-            "countryCode": "FR"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:InternetAndMultimedia",
-            "name": {
-                "en": "Internet & Multimedia",
-                "de": "Internet & Multimedia"
-            }
-        }
-    },
-    {
         "name": "More Money Transfer S.A. f.k.a. Gamerly S.A. (CL)",
         "featured": false,
         "jurisdiction": "Unknown",
@@ -23455,7 +23294,7 @@
         }
     },
     {
-        "name": "Amazon_EU_SARL (LU)",
+        "name": "Amazon EU SARL (LU)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
         "location": {
@@ -25506,29 +25345,6 @@
         }
     },
     {
-        "name": "OKO DIGITAL LIMITED (GB)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "GB"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:InternetAndMultimedia",
-            "name": {
-                "en": "Internet & Multimedia",
-                "de": "Internet & Multimedia"
-            }
-        }
-    },
-    {
         "name": "solarisBank AG",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -26903,7 +26719,7 @@
         }
     },
     {
-        "name": "Amazon.com_Inc (US)",
+        "name": "Amazon.com Inc (US)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
         "location": {
@@ -33732,6 +33548,7 @@
             "TWILIO, Inc. (US)",
             "TWILIO, Inc. (US)",
             "Tableau (US)",
+            "Tapad Inc. (US)",
             "Tapjoy Inc. (IUS)",
             "Tapjoy Inc. (US)",
             "Teads (FR)",
@@ -40531,6 +40348,11 @@
             "Adloox SA (FR)",
             "Adobe Inc (US)",
             "Amazon (DE)",
+            "Amazon EU SARL (LU)",
+            "Amazon Europe Core SARL (LU)",
+            "Amazon Media EU SARL (LU)",
+            "Amazon Services Europe SARL (LU)",
+            "Amazon.com Inc (US)",
             "AppsFlyer (IL)",
             "Audiens S.r.l. (IT)",
             "BIDSWITCH GmbH (CH)",
@@ -40590,6 +40412,7 @@
             "Sublime (FR)",
             "Taboola Europe Limited (DE)",
             "Taboola Europe Limited (GB)",
+            "Tapad Inc. (US)",
             "Teads (DE)",
             "Teads (FR)",
             "Teads (LU)",
@@ -44579,7 +44402,7 @@
         }
     },
     {
-        "name": "Amazon_Media_EU_SARL (LU)",
+        "name": "Amazon Media EU SARL (LU)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
         "location": {
@@ -44780,7 +44603,7 @@
         }
     },
     {
-        "name": "PayPal_Holdings_Inc (US)",
+        "name": "PayPal Holdings Inc (US)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
         "location": {
