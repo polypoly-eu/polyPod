@@ -36,15 +36,8 @@ const DataExplorationScreen = ({
     const validDataRecipients = dataRecipients.filter((e) => !!e);
 
     //Methods
-    const getCategories = () => {
-        const categories = [];
-        company.dataTypesShared.forEach((e) => {
-            categories.includes(e.Polypoly_Parent_Category)
-                ? null
-                : categories.push(e.Polypoly_Parent_Category);
-        });
-        return categories;
-    };
+    const getCategories = () =>
+        Object.keys(highlights[company.name].dataTypeCategories);
 
     const getTotalTypesShared = () => {
         let total = 0;
