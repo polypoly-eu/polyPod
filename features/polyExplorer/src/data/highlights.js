@@ -15,38 +15,38 @@ export default {
                 "dpv:IPAddress",
             ],
             explanation: {
-                de: "MISSING",
+                de: "MISSING: Korrelationsbeschreibung",
             },
         },
         dataTypeCategories: {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Alter-Beschreibung",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Sprache-Beschreibung",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Browser-Fingerprint Beschreibung",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSINg",
+                    de: "MISSING: Surfverhalten-Beschreibung",
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Finanz-Beschreibung",
                 },
             },
         },
@@ -123,38 +123,38 @@ export default {
         dataTypeCorrelation: {
             types: ["dpv:IPAddress", "dpv:GPSCoordinate", "dpv:Interest"],
             explanation: {
-                de: "MISSING",
+                de: "MISSING: Korrelationsbeschreibung",
             },
         },
         dataTypeCategories: {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Alter-Beschreibung",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Sprach-Beschreibung",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Browser-Fingerprint Beschreibung",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSINg",
+                    de: "MISSING: Surfverhalten-Beschreibung",
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Finanz-Beschreibung",
                 },
             },
         },
@@ -179,38 +179,38 @@ export default {
                 "dpv:GPSCoordinate",
             ],
             explanation: {
-                de: "MISSING",
+                de: "MISSING: Korrelationsbeschreibung",
             },
         },
         dataTypeCategories: {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Alter-Beschreibung",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Sprach-Beschreibung",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Browser-Fingerprint Beschreibung",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSINg",
+                    de: "MISSING: Surfverhalten-Beschreibung",
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Finanz-Beschreibung",
                 },
             },
         },
@@ -231,38 +231,38 @@ export default {
         dataTypeCorrelation: {
             types: ["dpv:CreditRecord", "dpv:Language", "dpv:BrowsingBehavior"],
             explanation: {
-                de: "MISSING",
+                de: "MISSING: Korrelationsbeschreibung",
             },
         },
         dataTypeCategories: {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Alter-Beschreibung",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Sprach-Beschreibung",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Browser-Fingerprint Beschreibung",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSINg",
+                    de: "MISSING: Surfverhalten-Beschreibung",
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Finanz-Beschreibung",
                 },
             },
         },
@@ -281,38 +281,38 @@ export default {
         dataTypeCorrelation: {
             types: ["dpv:TelephoneNumber", "dpv:LifeHistory", "dpv:Biometric"],
             explanation: {
-                de: "MISSING",
+                de: "MISSING: Korrelationsbeschreibung",
             },
         },
         dataTypeCategories: {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Alter-Beschreibung",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Sprach-Beschreibung",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Browser-Fingerprint Beschreibung",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSINg",
+                    de: "MISSING: Surfverhalten-Beschreibung",
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Finanz-Beschreibung",
                 },
             },
         },
@@ -334,38 +334,38 @@ export default {
         dataTypeCorrelation: {
             types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
             explanation: {
-                de: "MISSING",
+                de: "MISSING: Korrelationsbeschreibung",
             },
         },
         dataTypeCategories: {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Alter-Beschreibung",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Sprach-Beschreibung",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Browser-Fingerprint Beschreibung",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSINg",
+                    de: "MISSING: Surfverhalten-Beschreibung",
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING",
+                    de: "MISSING: Finanz-Beschreibung",
                 },
             },
         },
