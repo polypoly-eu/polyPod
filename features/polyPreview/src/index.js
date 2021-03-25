@@ -81,7 +81,7 @@ function getStaticContent(progress) {
 
     const pageNumberText = document.querySelector(".page-number");
     if (pageNumberText)
-        pageNumberText.style.display = progress === 1 ? "none" : "block";
+        pageNumberText.style.display = progress >= 5.3 / 6 ? "none" : "block";
 }
 
 function initSwiper() {
