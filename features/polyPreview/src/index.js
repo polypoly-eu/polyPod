@@ -1,4 +1,4 @@
-import SwiperCore, { Pagination } from "swiper/core";
+import SwiperCore from "swiper/core";
 import i18n from "./i18n.js";
 
 import "swiper/swiper-bundle.css";
@@ -8,7 +8,7 @@ const podNav = window.podNav || {
     openUrl: (url) => window.open(url, "_blank"),
 };
 
-function getStaticContent(progress, text) {
+function getStaticContent(progress) {
     const circle = document.getElementsByClassName("circle")[0];
 
     let circleText = document.getElementsByClassName("above-circle-text")[0];
