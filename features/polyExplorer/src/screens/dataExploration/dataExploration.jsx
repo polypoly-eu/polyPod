@@ -429,6 +429,7 @@ const DataExplorationScreen = ({
                         height="360"
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
+                        highlight={highlights[company.name]?.dataRecipient}
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
@@ -455,6 +456,7 @@ const DataExplorationScreen = ({
                         height="360"
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
+                        highlight={highlights[company.name]?.dataRecipient}
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia

@@ -12,6 +12,7 @@ const CompanyBubbles = ({
     opacity = 1,
     bubbleColor,
     maxCompanies,
+    highlight = {},
 }) => {
     const bubbleRef = useRef();
     const edgePadding = 5;
@@ -20,34 +21,31 @@ const CompanyBubbles = ({
         d3.select(bubbleRef.current).selectAll("svg").remove();
     };
 
+    const getIndustryName = (industryCategory) =>
+        industryCategory?.name?.[i18n.language] ||
+        i18n.t("common:category.undisclosed");
+
     function groupByIndustry(companies) {
         const groups = {};
         for (let { name, industryCategory } of companies) {
-            const industry =
-                industryCategory?.name?.[i18n.language] ||
-                i18n.t("common:category.undisclosed");
+            const industry = getIndustryName(industryCategory);
             if (!groups[industry]) groups[industry] = [];
             groups[industry].push(name);
         }
         return groups;
     }
 
-    // TODO: Pass in as parameter or read directly from highlights.js
-    const highlights = (() => {
-        const companiesByIndustry = groupByIndustry(data);
-        if (!Object.keys(companiesByIndustry).length) return {};
+    const highlightTexts = (() => {
+        const company = data.find((company) => company.name === highlight.name);
+        if (!company) return {};
         return {
             industry: {
-                name: Object.keys(companiesByIndustry).slice(-1)[0],
-                explanation:
-                    "Invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et sea rebum.",
+                name: getIndustryName(company.industryCategory),
+                explanation: highlight.industryExplanation[i18n.language],
             },
             company: {
-                name: Object.values(companiesByIndustry)
-                    .slice(-1)[0]
-                    .slice(-1)[0],
-                explanation:
-                    "Invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et sea rebum.",
+                name: company.name,
+                explanation: highlight.companyExplanation[i18n.language],
             },
         };
     })();
@@ -172,11 +170,11 @@ const CompanyBubbles = ({
             industryBubbles.each((e) => appendIndustryLabel(container, e));
         },
         industryHighlight: (container) => {
-            if (!highlights.industry) return;
+            if (!highlightTexts.industry) return;
 
             const viewData = createIndustryViewData(data);
             viewData.children.find(
-                (industry) => industry.name === highlights.industry.name
+                (industry) => industry.name === highlightTexts.industry.name
             ).highlighted = true;
 
             const bubbles = appendBubbles(container, viewData);
@@ -196,16 +194,16 @@ const CompanyBubbles = ({
             appendExplanation(
                 container,
                 highlightedBubble,
-                highlights.industry.explanation
+                highlightTexts.industry.explanation
             );
         },
         companyHighlight: (container) => {
-            if (!highlights.company) return;
+            if (!highlightTexts.company) return;
 
             const viewData = createIndustryViewData(data);
             viewData.children.forEach(({ children }) => {
                 const match = children.find(
-                    (company) => company.name === highlights.company.name
+                    (company) => company.name === highlightTexts.company.name
                 );
                 if (match) match.highlighted = true;
             });
@@ -229,7 +227,7 @@ const CompanyBubbles = ({
             appendExplanation(
                 container,
                 highlightedBubble,
-                highlights.company.explanation
+                highlightTexts.company.explanation
             );
         },
     };
