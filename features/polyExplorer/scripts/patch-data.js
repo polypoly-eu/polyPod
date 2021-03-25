@@ -7,13 +7,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
     },
     "Acronis Germany GmbH": {
         description: {
@@ -22,13 +15,6 @@ const patchData = {
                     "Die Acronis AG ist ein Schweizer Softwareunternehmen mit Sitz in Schaffhausen und operativer Hauptzentrale in Singapur. Es entwickelt Datensicherungs-, -wiederherstellungs- und -sicherheitslösungen für physische und virtuelle Server sowie Cloud-Umgebungen. Acronis-Software wird in etwa 180 Ländern vertrieben und ist in 14 Sprachen verfügbar. Die deutsche Tochter des Unternehmens ist die Acronis Germany GmbH mit Sitz in München.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:IT",
-            name: {
-                de: "EDV & IT",
-                en: "IT",
-            },
         },
     },
     "Adidas AG": {
@@ -39,13 +25,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:TextileAndFashion",
-            name: {
-                de: "Textil & Mode",
-                en: "Textile & Fashion",
-            },
-        },
     },
     "Allianz SE": {
         description: {
@@ -54,13 +33,6 @@ const patchData = {
                     "Die Allianz SE mit Sitz in München ist ein 1890 gegründeter, börsennotierter Versicherungskonzern und nach Umsatz einer der weltgrößten.[2][3] Das Unternehmen tritt weltweit unter dem Namen Allianz Group auf. Vorstandsvorsitzender ist seit Mai 2015 Oliver Bäte. Das Unternehmen wies im Jahr 2019 bei einem Gesamterlös von rund 142 Milliarden Euro einen Jahresüberschuss von 8,3 Milliarden Euro (Vorjahr: 7,7 Milliarden Euro) aus.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:Insurance",
-            name: {
-                de: "Versicherung",
-                en: "Insurance",
-            },
         },
     },
     "Axel Springer SE": {
@@ -80,13 +52,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:ChemicalAndPharmazeutical",
-            name: {
-                de: "Chemie & Pharma",
-                en: "Chemical & Pharmazeutical",
-            },
-        },
     },
     "Bayer AG": {
         description: {
@@ -95,13 +60,6 @@ const patchData = {
                     "Die Bayer Aktiengesellschaft (kurz Bayer AG) mit Sitz in Leverkusen ist ein börsennotierter Chemie- und Pharmakonzern mit insgesamt rund 99.500 Mitarbeitern (Stand: Jahresende 2020). Das Geschäft wird über die drei Divisionen Pharmaceuticals, Consumer Health und Crop Science geführt. Im Jahr 2020 erwirtschaftete der Bayerkonzern einen Umsatz von rund 41,4 Milliarden Euro. Der Name Bayer ist auch dadurch bekannt, dass Bayer mit ihrem Tochterunternehmen Bayer 04 Leverkusen im Fußballbereich aktiv ist. Zwischen 2002 und 2005 wurden in einer der größten Umbruchsphasen in der Unternehmensgeschichte die ursprünglichen Sparten Pharma, Pflanzenschutz, Chemie und Kunststoffe als Teilkonzerne ausgegliedert und neu formiert.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:ChemicalAndPharmazeutical",
-            name: {
-                de: "Chemie & Pharma",
-                en: "Chemical & Pharmazeutical",
-            },
         },
     },
     "Blacklane GmbH": {
@@ -112,13 +70,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:TrafficAndTransportAndLogistics",
-            name: {
-                de: "Verkehr & Transport & Logistik",
-                en: "Traffic & Transport & Logistics",
-            },
-        },
     },
     "Bayerische Motoren Werke AG": {
         description: {
@@ -127,13 +78,6 @@ const patchData = {
                     "Die Bayerische Motoren Werke Aktiengesellschaft (BMW AG) ist ein weltweit operierender, börsennotierter Automobil- und Motorradhersteller mit Sitz in München, der unter dem Markennamen BMW Group auftritt. Die Produktpalette umfasst die Automobil- und Motorrad-Marke BMW, die Automarken Mini und Rolls-Royce sowie die BMW-Submarken BMW M und BMW i.\n\n        Der Konzern hat sich vor allem seit den 1960er Jahren unter der Marke BMW als Hersteller hochpreisiger, komfortabel ausgestatteter und gut motorisierter Reisewagen mit sportlichem Anspruch einen Namen gemacht. Daneben zielt die Marke Mini mit Retro-Modellen auf jüngere, lifestyle-orientierte Kundschaft ab, während bei Rolls-Royce in geringer Stückzahl höchstpreisige Luxuslimousinen entstehen. Die Kernmarke BMW geht auf die 1913 durch Karl Rapp in München gegründeten Rapp Motorenwerke zurück. Sie wurden durch Franz Josef Popp ab 1917 ausgebaut und firmierten ab 1918 als Aktiengesellschaft Bayerische Motorenwerke sowie ab 1920 als Süddeutsche Bremsen-AG. Die Motorenbau-Abteilung und der alte Unternehmensname wurden 1922 verkauft und in die 1916 begründete Bayerische Flugzeugwerke AG eingegliedert, die seitdem als BMW firmiert.\n\n        BMW gehört mit 104,2 Milliarden Euro Umsatz und rund 134.000 Beschäftigten im Geschäftsjahr 2019 zu den größten Wirtschaftsunternehmen Deutschlands und zählte mit einer Jahresproduktion von 2,54 Millionen Fahrzeugen im Jahr 2019 zu den 15 größten Autoherstellern der Welt. Das Unternehmen ist sowohl mit Stamm- als auch Vorzugsaktien an der Börse notiert, wobei die Stammaktie im deutschen Leitindex DAX sowie im DivDAX vertreten ist. Größte Anteilseigner mit zusammen etwa 46,8 % sind Susanne Klatten und Stefan Quandt, die der Industriellenfamilie Quandt angehören. Darüber hinaus ist BMW auch 2018 in den Nachhaltigkeitsindeces Dow Jones Sustainability Indices (DJSI) „World“ und „Europe“ sowie FTSE4Good gelistet.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:Automotice",
-            name: {
-                de: "Automotive",
-                en: "Automotive",
-            },
         },
     },
     "booking.com B.V": {
@@ -153,13 +97,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
     },
     "Comuto Deutschland GmbH": {
         description: {
@@ -168,13 +105,6 @@ const patchData = {
                     "Unter der Marke BlaBlaCar betreibt das Unternehmen Comuto S.A. mit Sitz in Paris eine internationale Online-Mitfahrzentrale. BlaBlaCar agiert in insgesamt 22 Ländern (Belgien, Brasilien, Deutschland, Frankreich, Großbritannien, Indien, Italien, Kroatien, Luxemburg, Mexiko, der Niederlande, Polen, Portugal, Rumänien, Russland, Serbien, der Slowakei, Spanien, Tschechien, der Türkei, Ungarn und der Ukraine) und hat über 70 Millionen Mitglieder weltweit. Seit November 2018 ist der französische Fernbusbetreiber Ouibus Teil des Unternehmens und bietet ab Sommer 2019 auch in Deutschland Dienste unter dem Namen BlaBlaBus an.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:TrafficAndTransportAndLogistics",
-            name: {
-                de: "Verkehr & Transport & Logistik",
-                en: "Traffic & Transport & Logistics",
-            },
         },
     },
     "DB Vertrieb GmbH": {
@@ -185,13 +115,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:TrafficAndTransportAndLogistics",
-            name: {
-                de: "Verkehr & Transport & Logistik",
-                en: "Traffic & Transport & Logistics",
-            },
-        },
     },
     "Deliveroo Germany GmbH": {
         description: {
@@ -200,13 +123,6 @@ const patchData = {
                     "Deliveroo ist ein britischer Online-Lieferdienst, der seine Kunden mit Gerichten aus verschiedenen Partner-Restaurants beliefert. Gegründet wurde er 2013 von Will Shu und Greg Orlowski in London. Das Unternehmen operiert mittlerweile auch in den Niederlanden, Frankreich, Belgien, Irland, Spanien, Italien, Australien, Singapur, Dubai und Hongkong. Das Unternehmen ist im Bereich der Gig Economy tätig, in dem es kleine Aufträge an Fahrer vergibt, die formal als Freiberufler oder geringfügig Beschäftigte tätig sind. Die Geschäftstätigkeit in Deutschland wurde Anfang August 2019 eingestellt.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
         },
     },
     "Delivery Hero SE": {
@@ -217,13 +133,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
     },
     "eGym GmbH": {
         description: {
@@ -232,13 +141,6 @@ const patchData = {
                     "eGym entwickelt vollelektronische Kraftgeräte und betreibt eine gleichnamige Internetplattform für Sportler.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:HealthAndSocial",
-            name: {
-                de: "Gesundheitswesen & Soziales",
-                en: "Health & Social",
-            },
         },
     },
     "FC Bayern München AG": {
@@ -249,13 +151,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
     },
     "Yelp Ireland Limited": {
         description: {
@@ -264,13 +159,6 @@ const patchData = {
                     "Yelp, Inc. ist ein US-amerikanisches Internetunternehmen, das ein Empfehlungsportal für Dienstleister betreibt. Es wurde 2004 von Jeremy Stoppelman und Russel Simmons gegründet, und ihre Yelp-Website wurde im Februar 2005 mit dem Schwerpunkt nutzergenerierte Rezensionen überarbeitet. Zwischen 2005 und 2010 erhielt Yelp eine Kapitalausstattung von 130 Millionen US-Dollar und wurde 2012 eine Aktiengesellschaft am US-Aktienmarkt. Umsätze erwirtschaftet das Unternehmen durch Werbung für Geschäfte auf seiner Website. Sein Internet-Bewertungssystem für gewerbliche Einträge war bereits Gegenstand sowohl von Kontroversen als auch Rechtsstreitigkeiten.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
         },
     },
     "Zalando SE": {
@@ -281,13 +169,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
     },
     "Tado GmbH": {
         description: {
@@ -296,13 +177,6 @@ const patchData = {
                     "tado° GmbH is a German technology company headquartered in Munich (Germany) and a manufacturer of home thermostats and air conditioning controls.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:EnergyAndEnvironment",
-            name: {
-                de: "Energie & Umwelt",
-                en: "Energy & Environment",
-            },
         },
     },
     "Ubisoft Blue Byte GmbH": {
@@ -313,13 +187,6 @@ const patchData = {
             },
             source: "Wikipedia",
         },
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
     },
     "Verizon Media Germany GmbH": {
         description: {
@@ -328,598 +195,6 @@ const patchData = {
                     "Verizon Media is a division of Verizon Communications that focuses on media and online business. Verizon Communications acquired AOL in 2015.[5][6] When Verizon Communications purchased Yahoo! in 2017, it merged AOL and Yahoo! into a subsidiary named Oath Inc.[3][7][8]\n\nIn December 2018, Verizon announced it would write down the combined value of its purchases of AOL and Yahoo! by $4.6 billion, roughly half.[9]\n\nVerizon renamed the company Verizon Media in January 2019.[10] Within Verizon Media, AOL and Yahoo! maintain their respective brands.",
             },
             source: "Wikipedia",
-        },
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
-    },
-    "1 & 1 Ionos": {
-        industryCategory: {
-            id: "ic:Telecommunication",
-            name: {
-                de: "Telekommunikation",
-                en: "Telecommunication",
-            },
-        },
-    },
-    "Ada Health GmbH": {
-        industryCategory: {
-            id: "ic:HealthAndSocial",
-            name: {
-                de: "Gesundheitswesen & Soziales",
-                en: "Health & Social",
-            },
-        },
-    },
-    "AdColony GmbH": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "Adform Germany GmbH": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "Amazon Europe Core SARL": {
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
-    },
-    "APPLE INC.": {
-        industryCategory: {
-            id: "ic:IT",
-            name: {
-                de: "EDV & IT",
-                en: "IT",
-            },
-        },
-    },
-    "ASOS Germany GmbH": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "Auto 1 Group GmbH": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "auxmoney GmbH": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "Baker & McKenzie International B.V.": {
-        industryCategory: {
-            id: "ic:LawAndTaxes",
-            name: {
-                de: "Recht & Steuern",
-                en: "Law & Taxes",
-            },
-        },
-    },
-    "BOOHOO GROUP PLC": {
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
-    },
-    "booking.com B.V.": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "CLOUD & HEAT Technologies GmbH": {
-        industryCategory: {
-            id: "ic:IT",
-            name: {
-                de: "EDV & IT",
-                en: "IT",
-            },
-        },
-    },
-    "Contentful GmbH": {
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
-    },
-    "Deposit Solutions GmbH": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "Doctolib GmbH": {
-        industryCategory: {
-            id: "ic:HealthAndSocial",
-            name: {
-                de: "Gesundheitswesen & Soziales",
-                en: "Health & Social",
-            },
-        },
-    },
-    "Dreamlines Tours GmbH": {
-        industryCategory: {
-            id: "ic:TrafficAndTransportAndLogistics",
-            name: {
-                de: "Verkehr & Transport & Logistik",
-                en: "Traffic & Transport & Logistics",
-            },
-        },
-    },
-    "FinanceFox Beteiligung GmbH": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "FlixMobility GmbH": {
-        industryCategory: {
-            id: "ic:TrafficAndTransportAndLogistics",
-            name: {
-                de: "Verkehr & Transport & Logistik",
-                en: "Traffic & Transport & Logistics",
-            },
-        },
-    },
-    "GetYourGuide Deutschland GmbH": {
-        industryCategory: {
-            id: "ic:Service",
-            name: {
-                de: "Service",
-                en: "Service",
-            },
-        },
-    },
-    "GOEURO Travel GmbH": {
-        industryCategory: {
-            id: "ic:TrafficAndTransportAndLogistics",
-            name: {
-                de: "Verkehr & Transport & Logistik",
-                en: "Traffic & Transport & Logistics",
-            },
-        },
-    },
-    "Google LLC": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "Gruner + Jahr GmbH": {
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
-    },
-    "Hellofresh SE": {
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
-    },
-    "Helpling GmbH & Co. KG": {
-        industryCategory: {
-            id: "ic:Service",
-            name: {
-                de: "Service",
-                en: "Service",
-            },
-        },
-    },
-    "Inter IKEA Systems B.V.": {
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
-    },
-    "Immobilien Scout GmbH": {
-        industryCategory: {
-            id: "ic:RealEstateAndFacilityManagement",
-            name: {
-                de: "Immobilien & Facility Management",
-                en: "Real Estate & Facility Management",
-            },
-        },
-    },
-    "Intel Deutschland GmbH": {
-        industryCategory: {
-            id: "ic:IT",
-            name: {
-                de: "EDV & IT",
-                en: "IT",
-            },
-        },
-    },
-    "Jobandtalent DE GmbH": {
-        industryCategory: {
-            id: "ic:Service",
-            name: {
-                de: "Service",
-                en: "Service",
-            },
-        },
-    },
-    "Klarna GmbH": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "Kreditech Holding SSL GmbH": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "Launchmetrics Germany GmbH": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "yd. yourdelivery GmbH": {
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
-    },
-    "MAINSTAY MEDICAL INTERNATIONAL PUBLIC LIMITED COMPANY": {
-        industryCategory: {
-            id: "ic:HealthAndSocial",
-            name: {
-                de: "Gesundheitswesen & Soziales",
-                en: "Health & Social",
-            },
-        },
-    },
-    "MessageBird GmbH": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "mobile.de GmbH": {
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
-    },
-    "N26 Bank GmbH": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "Nestle S.A.": {
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
-    },
-    "Netflix International B.V.": {
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
-    },
-    "Otto (GmbH & Co KG)": {
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
-    },
-    "Outfittery GmbH": {
-        industryCategory: {
-            id: "ic:RetailAndConsumption",
-            name: {
-                de: "Handel & Konsum",
-                en: "Retail & Consumption",
-            },
-        },
-    },
-    "Pro Sieben Sat.1 Media": {
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
-    },
-    "Raisin GmbH": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "ResearchGate GmbH": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "Roche Deutschland Holding GmbH": {
-        industryCategory: {
-            id: "ic:ChemicalAndPharmazeutical",
-            name: {
-                de: "Chemie & Pharma",
-                en: "Chemical & Pharmazeutical",
-            },
-        },
-    },
-    "Rocket Internet SE": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "Samsung Electronics GmbH": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "SAP Deutschland SE & Co. KG": {
-        industryCategory: {
-            id: "ic:IT",
-            name: {
-                de: "EDV & IT",
-                en: "IT",
-            },
-        },
-    },
-    "SCHUFA Holding AG": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "Shazam Media Services GmbH": {
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
-    },
-    "Siemens Aktiengesellschaft": {
-        industryCategory: {
-            id: "ic:IT",
-            name: {
-                de: "EDV & IT",
-                en: "IT",
-            },
-        },
-    },
-    "Sigfox Germany GmbH": {
-        industryCategory: {
-            id: "ic:Telecommunication",
-            name: {
-                de: "Telekommunikation",
-                en: "Telecommunication",
-            },
-        },
-    },
-    "Signavio GmbH": {
-        industryCategory: {
-            id: "ic:IT",
-            name: {
-                de: "EDV & IT",
-                en: "IT",
-            },
-        },
-    },
-    "Simplesurance GmbH": {
-        industryCategory: {
-            id: "ic:Insurance",
-            name: {
-                de: "Versicherung",
-                en: "Insurance",
-            },
-        },
-    },
-    "smartly.io Solutions GmbH": {
-        industryCategory: {
-            id: "ic:MarketingAndCommunication",
-            name: {
-                de: "Marketing & Kommunikation",
-                en: "Marketing & Communications",
-            },
-        },
-    },
-    "Smava GmbH": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "Socialbakers Germany GmbH": {
-        industryCategory: {
-            id: "ic:MarketingAndCommunication",
-            name: {
-                de: "Marketing & Kommunikation",
-                en: "Marketing & Communications",
-            },
-        },
-    },
-    "solarisBank AG": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "Soundcloud Global Limited & Co KG": {
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
-    },
-    "SPIEGEL-Verlag Rudolf Augstein GmbH & Co. KG": {
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
-    },
-    "Spotahome Germany GmbH": {
-        industryCategory: {
-            id: "ic:IT",
-            name: {
-                de: "EDV & IT",
-                en: "Sharing Economy",
-            },
-        },
-    },
-    "Spotcap Global Services GmbH": {
-        industryCategory: {
-            id: "ic:BanksAndFinance",
-            name: {
-                de: "Banken & Finanzen",
-                en: "Banks & Finance",
-            },
-        },
-    },
-    "Spotify GmbH": {
-        industryCategory: {
-            id: "ic:CultureAndEntertainmentAndEvents",
-            name: {
-                de: "Kultur & Unterhaltung & Veranstaltung",
-                en: "Culture & Entertainment & Events",
-            },
-        },
-    },
-    "Ströer SE & Co. KGaA": {
-        industryCategory: {
-            id: "ic:InternetAndMultimedia",
-            name: {
-                de: "Internet & Multimedia",
-                en: "Internet & Multimedia",
-            },
-        },
-    },
-    "wefox Germany GmbH": {
-        industryCategory: {
-            id: "ic:Insurance",
-            name: {
-                de: "Versicherung",
-                en: "Insurance",
-            },
         },
     },
 };
