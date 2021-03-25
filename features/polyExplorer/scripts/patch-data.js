@@ -924,12 +924,6 @@ const patchData = {
     },
 };
 
-// For now, we use only the 'de' value for categories, to not change the format
-// of companies.json yet.
-for (let entity of Object.values(patchData))
-    if ("category" in entity)
-        entity.category = "de" in entity.category ? entity.category.de : null;
-
 // Until we have sufficient data on data recipients from polyPedia, we'll add
 // some manually.
 Object.assign(patchData, {
