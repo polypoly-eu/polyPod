@@ -37,7 +37,7 @@ const DataExplorationScreen = ({
 
     //Methods
     const getCategories = () =>
-        Object.keys(highlights[company.name].dataTypeCategories);
+        Object.keys(highlights[company.name]?.dataTypeCategories || {});
 
     const getTotalTypesShared = () => {
         let total = 0;
