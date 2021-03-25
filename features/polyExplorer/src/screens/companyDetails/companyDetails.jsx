@@ -133,7 +133,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             </div>
                         </div>
                     )}
-                    <JurisdictionLegend />
+                    <JurisdictionLegend onOpenRegionInfo={onOpenRegionInfo} />
                 </div>
             ),
         },

@@ -162,6 +162,7 @@
 
 .data-exploration .down-button-hidden {
     visibility: hidden;
+    display: none;
 }
 
 .data-exploration .static-content .construction-container {
@@ -238,7 +239,7 @@
     height: 100%;
 }
 
-.data-exploration .companies-list-content>p {
+.data-exploration .companies-list-content > p {
     width: 260px;
     margin-left: auto;
     margin-right: auto;
@@ -247,4 +248,21 @@
 .data-exploration .companies-list-content .companies-by-industry {
     flex: auto;
     min-height: 0;
+}
+
+.data-exploration .explore-other {
+    display: block;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 84%;
+    max-width: 412px;
+    height: 48px;
+    background-color: #f7fafc;
+    color: #0f1938;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 12px auto 20px auto;
+    border-radius: 8px;
+    border: transparent;
+    outline: none;
 }

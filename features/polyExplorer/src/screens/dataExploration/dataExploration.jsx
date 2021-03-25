@@ -24,6 +24,7 @@ const DataExplorationScreen = ({
     company,
     startSection,
     startCategory = null,
+    openMain,
     openDataTypesInfo,
     openCategoryInfo,
     openCorrelationInfo,
@@ -32,6 +33,7 @@ const DataExplorationScreen = ({
     openJurisdictionInfo,
     maxCompanies,
     dataRecipients,
+    onOpenRegionInfo,
 }) => {
     const validDataRecipients = dataRecipients.filter((e) => !!e);
 
@@ -482,29 +484,7 @@ const DataExplorationScreen = ({
                 </div>
             );
         else if (activeScreen === "jurisdictions")
-            return (
-                <div className="static-content">
-                    <h1>
-                        {i18n.t("common:sharing.prefix.jurisdictions")}{" "}
-                        {jurisdictionTreeFormatData.children.length}{" "}
-                        {i18n.t("common:sharing.jurisdictions")}
-                    </h1>
-                    <div className="jurisdiction-tree-container">
-                        <JurisdictionTree
-                            data={getJurisdictionTreeFormat()}
-                            width="300"
-                            height="250"
-                            fontSize="13"
-                        />
-                        <JurisdictionLegend />
-                        <DataSharingLegend
-                            onClick={() => {
-                                openJurisdictionInfo();
-                            }}
-                        />
-                    </div>
-                </div>
-            );
+            return <div className="static-content"></div>;
     };
 
     function handleSwipableContentClick(event) {
@@ -641,7 +621,36 @@ const DataExplorationScreen = ({
                                 />
                             </div>
                         </SwiperSlide>
-                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide>
+                            {" "}
+                            <h1>
+                                {i18n.t("common:sharing.prefix.jurisdictions")}{" "}
+                                {jurisdictionTreeFormatData.children.length}{" "}
+                                {i18n.t("common:sharing.jurisdictions")}
+                            </h1>
+                            <div className="jurisdiction-tree-container">
+                                <JurisdictionTree
+                                    data={getJurisdictionTreeFormat()}
+                                    width="300"
+                                    height="250"
+                                    fontSize="13"
+                                />
+                            </div>
+                            <JurisdictionLegend
+                                onOpenRegionInfo={onOpenRegionInfo}
+                            />
+                            <DataSharingLegend
+                                onOpenRegionInfo={() => {
+                                    openJurisdictionInfo();
+                                }}
+                            />
+                            <button
+                                className="explore-other"
+                                onClick={openMain}
+                            >
+                                {i18n.t("dataExplorationScreen:explore.other")}
+                            </button>
+                        </SwiperSlide>
                     </Swiper>
                 </div>
             </div>
