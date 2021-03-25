@@ -43,7 +43,7 @@ class FeatureListFragment : Fragment() {
             findNavController().navigate(FeatureListFragmentDirections.actionFeatureListFragmentToSettingsActivity())
         }
 
-        val features = featureStorage.listFeatures(context)
+        val features = featureStorage.listFeatures(context).sortedBy { it.name }
 
         viewManager = LinearLayoutManager(context)
         viewAdapter = FeatureCardAdapter(this, features)
