@@ -625,34 +625,36 @@ const DataExplorationScreen = ({
                             </div>
                         </SwiperSlide>
                         <SwiperSlide>
-                            {" "}
-                            <h1>
-                                {i18n.t("common:sharing.prefix.jurisdictions")}{" "}
-                                {jurisdictionTreeFormatData.children.length}{" "}
-                                {i18n.t("common:sharing.jurisdictions")}
-                            </h1>
                             <div className="jurisdiction-tree-container">
+                                <h1>
+                                    {i18n.t(
+                                        "common:sharing.prefix.jurisdictions"
+                                    )}{" "}
+                                    {jurisdictionTreeFormatData.children.length}{" "}
+                                    {i18n.t("common:sharing.jurisdictions")}
+                                </h1>
+
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
-                                    width="300"
-                                    height="250"
                                     fontSize="13"
                                 />
+                                <JurisdictionLegend
+                                    onOpenRegionInfo={onOpenRegionInfo}
+                                />
+                                <DataSharingLegend
+                                    onOpenRegionInfo={() => {
+                                        openJurisdictionInfo();
+                                    }}
+                                />
+                                <button
+                                    className="explore-other"
+                                    onClick={openMain}
+                                >
+                                    {i18n.t(
+                                        "dataExplorationScreen:explore.other"
+                                    )}
+                                </button>
                             </div>
-                            <JurisdictionLegend
-                                onOpenRegionInfo={onOpenRegionInfo}
-                            />
-                            <DataSharingLegend
-                                onOpenRegionInfo={() => {
-                                    openJurisdictionInfo();
-                                }}
-                            />
-                            <button
-                                className="explore-other"
-                                onClick={openMain}
-                            >
-                                {i18n.t("dataExplorationScreen:explore.other")}
-                            </button>
                         </SwiperSlide>
                     </Swiper>
                 </div>

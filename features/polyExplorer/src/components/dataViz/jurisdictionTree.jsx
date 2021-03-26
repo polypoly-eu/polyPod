@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-const JurisdictionTree = ({ data, width, height, fontSize }) => {
+const JurisdictionTree = ({ data, fontSize }) => {
+    const width = 300;
+    const height = 250;
     let treeRef = useRef(null);
 
     const clearSvg = () => {
