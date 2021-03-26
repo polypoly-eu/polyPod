@@ -196,7 +196,7 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 474px;
-    padding: 4px 32px;
+    padding: 4px 30px;
     margin-bottom: 4px;
 }
 
@@ -206,7 +206,7 @@
     font-size: 12px;
     margin: 0px auto;
     width: 100%;
-    padding: 0 32px;
+    padding: 0 30px;
     max-width: 474px;
 }
 
@@ -228,7 +228,7 @@
     flex: 0 0 auto;
     box-sizing: border-box;
     width: 85%;
-    max-width: 414px;
+    max-width: 412px;
     height: 48px;
     background-color: #f7fafc;
     color: #0f1938;
