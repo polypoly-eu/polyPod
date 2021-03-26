@@ -16,6 +16,17 @@ function buildIndustryMap(companies) {
     return map;
 }
 
+function CompanyItem({ company, companyCount }) {
+    // This component is currently slowing down the entire data exploration when
+    // there are a lot of data recipients. As a temporary fix, we render a more
+    // economical element for each company when the list is large.
+    if (companyCount > 100)
+        return (
+            <div className="companies-by-industry-eco-item">{company.name}</div>
+        );
+    return <CompanyShortInfo company={company} />;
+}
+
 class CompaniesByIndustry extends React.PureComponent {
     render() {
         const industryMap = buildIndustryMap(this.props.companies);
@@ -32,9 +43,10 @@ class CompaniesByIndustry extends React.PureComponent {
                                 {industry} ({companies.length})
                             </h1>
                             {companies.map((company, index) => (
-                                <CompanyShortInfo
+                                <CompanyItem
                                     key={index}
                                     company={company}
+                                    companyCount={this.props.companies.length}
                                 />
                             ))}
                         </div>
