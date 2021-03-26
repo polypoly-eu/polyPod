@@ -221,8 +221,9 @@ function fixCompanyData(entityMap) {
         entity.dataRecipients = dataRecipients.filter((recipientName) => {
             const recipientKey = entityKey(recipientName);
             const keep =
-                recipientKey in entityMap &&
-                "industryCategory" in entityMap[recipientKey];
+                entityMap[recipientKey] &&
+                entityMap[recipientKey].name &&
+                entityMap[recipientKey].industryCategory;
             if (!keep) {
                 dataIssueLog.missingDataRecipients[recipientName] =
                     dataIssueLog.missingDataRecipients[recipientName] || [];

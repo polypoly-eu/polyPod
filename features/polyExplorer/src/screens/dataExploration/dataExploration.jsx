@@ -36,8 +36,6 @@ const DataExplorationScreen = ({
     dataRecipients,
     onOpenRegionInfo,
 }) => {
-    const validDataRecipients = dataRecipients.filter((e) => !!e);
-
     //Methods
     const getCategories = () =>
         Object.keys(highlights[company.name]?.dataTypeCategories || {});
@@ -52,7 +50,7 @@ const DataExplorationScreen = ({
 
     const getJurisdictionTreeFormat = () => {
         const jurisdictionTreeFormatData = { name: "World", children: [] };
-        validDataRecipients.forEach((e) => {
+        dataRecipients.forEach((e) => {
             let jurisdiction = jurisdictionTreeFormatData.children.find(
                 (j) => j.name === e.jurisdiction
             );
@@ -343,13 +341,13 @@ const DataExplorationScreen = ({
                     <h1>
                         {i18n.t("common:sharing.prefix.companies")}{" "}
                         <span className="highlight-companies">
-                            {validDataRecipients.length}{" "}
+                            {dataRecipients.length}{" "}
                             {i18n.t("common:sharing.companies")}
                         </span>
                     </h1>
                     <CompanyBubbles
                         view="flat"
-                        data={validDataRecipients}
+                        data={dataRecipients}
                         width="360"
                         height="360"
                         bubbleColor="#7EE8A2"
@@ -371,13 +369,13 @@ const DataExplorationScreen = ({
                     <h1>
                         {i18n.t("common:sharing.prefix.companies")}{" "}
                         <span className="highlight-companies">
-                            {validDataRecipients.length}{" "}
+                            {dataRecipients.length}{" "}
                             {i18n.t("common:sharing.companies")}
                         </span>
                     </h1>
                     <CompanyBubbles
                         view="flat"
-                        data={validDataRecipients}
+                        data={dataRecipients}
                         width="360"
                         height="360"
                         opacity={0.1}
@@ -413,7 +411,7 @@ const DataExplorationScreen = ({
                                 companiesCompanyHighlight: "companyHighlight",
                             }[activeScreen]
                         }
-                        data={validDataRecipients}
+                        data={dataRecipients}
                         width="360"
                         height="360"
                         bubbleColor="#7EE8A2"
@@ -579,7 +577,7 @@ const DataExplorationScreen = ({
                                     )}
                                 </p>
                                 <CompaniesByIndustry
-                                    companies={validDataRecipients}
+                                    companies={dataRecipients}
                                 />
                             </div>
                         </SwiperSlide>
