@@ -15,25 +15,14 @@ const CompanyBubbles = ({
     highlight = {},
 }) => {
     const bubbleRef = useRef();
-    const edgePadding = 5;
+    const viewStates = Object.freeze({ flat: 1, industries: 2 });
+    const viewState = useRef();
 
-    const clearSvg = () => {
-        d3.select(bubbleRef.current).selectAll("svg").remove();
-    };
+    const getRoot = () => d3.select(bubbleRef.current);
 
     const getIndustryName = (industryCategory) =>
         industryCategory?.name?.[i18n.language] ||
         i18n.t("common:category.undisclosed");
-
-    function groupByIndustry(companies) {
-        const groups = {};
-        for (let { name, industryCategory } of companies) {
-            const industry = getIndustryName(industryCategory);
-            if (!groups[industry]) groups[industry] = [];
-            groups[industry].push(name);
-        }
-        return groups;
-    }
 
     const highlightTexts = (() => {
         const company = data.find((company) => company.name === highlight.name);
@@ -50,29 +39,6 @@ const CompanyBubbles = ({
         };
     })();
 
-    function createIndustryViewData(data) {
-        const companiesByIndustry = groupByIndustry(data);
-
-        // This padding is what's currently keeping the industry labels from
-        // colliding (for the most part). But we'll need a better solution.
-        const viewData = { padding: 40 };
-        viewData.children = Object.entries(companiesByIndustry).map(
-            ([industry, names]) => ({
-                name: industry,
-                children: names.map((name) => ({ name })),
-            })
-        );
-        return viewData;
-    }
-
-    const appendBubbleContainer = () => {
-        return d3
-            .select(bubbleRef.current)
-            .append("svg")
-            .attr("viewBox", `0 0 ${width} ${height}`)
-            .style("opacity", opacity);
-    };
-
     function appendBubbles(container, data) {
         const root = d3.hierarchy(data).sum(() => 1);
 
@@ -82,6 +48,7 @@ const CompanyBubbles = ({
         // maxCompanies - there must be a more reliable way to achieve that.
         const bubbleRadius = ((width * Math.PI) / maxCompanies) * 2;
 
+        const edgePadding = 5;
         const packLayout = d3
             .pack()
             .size([width - edgePadding, height - edgePadding])
@@ -94,13 +61,75 @@ const CompanyBubbles = ({
             .data(root.descendants())
             .enter()
             .append("circle")
+            .attr("class", "bubble")
             .attr("cx", (d) => d.x)
             .attr("cy", (d) => d.y)
             .attr("r", (d) => d.r);
     }
 
+    const clearAll = () => getRoot().selectAll("svg > *").remove();
+
+    function setUpFlatView(container) {
+        const previousState = viewState.current;
+        viewState.current = viewStates.flat;
+        if (viewState.current === previousState)
+            return getRoot().selectAll(".bubble");
+
+        clearAll();
+        const viewData = {
+            children: data.map((company) => ({ name: company })),
+        };
+        return appendBubbles(container, viewData);
+    }
+
+    function groupByIndustry(companies) {
+        const groups = {};
+        for (let { name, industryCategory } of companies) {
+            const industry = getIndustryName(industryCategory);
+            if (!groups[industry]) groups[industry] = [];
+            groups[industry].push(name);
+        }
+        return groups;
+    }
+
+    function createIndustryViewData(data) {
+        const companiesByIndustry = groupByIndustry(data);
+
+        // This padding is what's currently keeping the industry labels from
+        // colliding (for the most part). But we'll need a better solution.
+        const viewData = { padding: 40 };
+        viewData.children = Object.entries(companiesByIndustry).map(
+            ([industry, names]) => ({
+                name: industry,
+                children: names.map((name) => ({
+                    name,
+                    highlightedCompany: name === highlightTexts?.company?.name,
+                })),
+                highlightedIndustry:
+                    industry === highlightTexts?.industry?.name,
+            })
+        );
+
+        return viewData;
+    }
+
+    function setUpIndustryView(container) {
+        const previousState = viewState.current;
+        viewState.current = viewStates.industries;
+        if (viewState.current === previousState) {
+            const root = getRoot();
+            root.selectAll(".bubble-label, .explanation").remove();
+            return root.selectAll(".bubble");
+        }
+
+        clearAll();
+        const viewData = createIndustryViewData(data);
+        return appendBubbles(container, viewData);
+    }
+
     function appendBubbleLabel(container, bubble, text) {
-        const label = utils.appendLabel(container, text, { fontSize: 10 });
+        const bubbleLabel = container.append("g").attr("class", "bubble-label");
+        const label = utils.appendLabel(bubbleLabel, text, { fontSize: 10 });
         const bounds = label.node().getBBox();
         const lineLength = 8;
         label.attr(
@@ -109,7 +138,7 @@ const CompanyBubbles = ({
                 bubble.y - bubble.r - bounds.height / 2 - lineLength
             })`
         );
-        container
+        bubbleLabel
             .append("line")
             .style("stroke", "white")
             .style("stroke-width", 1)
@@ -125,6 +154,12 @@ const CompanyBubbles = ({
         appendBubbleLabel(container, bubble, `${industry}: ${count}`);
     }
 
+    function findNode(nodes, matchFunction) {
+        let match = null;
+        nodes.filter(matchFunction).each((node) => (match = node));
+        return match;
+    }
+
     function appendExplanation(container, highlightedBubble, explanation) {
         const containerRect = container.node().viewBox.baseVal;
         const topExplanation =
@@ -133,6 +168,7 @@ const CompanyBubbles = ({
         const explanationWidth = 260;
         const foreignObject = container
             .append("foreignObject")
+            .attr("class", "explanation")
             .attr("x", (containerRect.width - explanationWidth) / 2)
             .attr("width", explanationWidth);
         const div = foreignObject
@@ -145,19 +181,14 @@ const CompanyBubbles = ({
             .attr("height", divHeight);
     }
 
-    const drawFunctions = {
+    const renderFunctions = {
         flat: (container) => {
-            const viewData = {
-                children: data.map((company) => ({ name: company })),
-            };
-            const bubbles = appendBubbles(container, viewData);
+            const bubbles = setUpFlatView(container);
             bubbles.filter((d) => d.children).style("fill", "transparent");
             bubbles.filter((d) => !d.children).style("fill", bubbleColor);
         },
         allIndustries: (container) => {
-            const viewData = createIndustryViewData(data);
-            const bubbles = appendBubbles(container, viewData);
-
+            const bubbles = setUpIndustryView(container);
             bubbles.filter((d) => d.children).style("fill", "transparent");
 
             const industryBubbles = bubbles.filter(
@@ -175,24 +206,20 @@ const CompanyBubbles = ({
         industryHighlight: (container) => {
             if (!highlightTexts.industry) return;
 
-            const viewData = createIndustryViewData(data);
-            viewData.children.find(
-                (industry) => industry.name === highlightTexts.industry.name
-            ).highlighted = true;
-
-            const bubbles = appendBubbles(container, viewData);
+            const bubbles = setUpIndustryView(container);
             bubbles
                 .style("fill", (d) =>
                     d.children ? "transparent" : bubbleColor
                 )
                 .style("fill-opacity", (d) =>
-                    d.parent?.data.highlighted ? 1 : 0.15
-                );
+                    d.parent?.data.highlightedIndustry ? 1 : 0.15
+                )
+                .style("stroke", "transparent");
 
-            let highlightedBubble;
-            bubbles
-                .filter((d) => d.data.highlighted)
-                .each((e) => (highlightedBubble = e));
+            const highlightedBubble = findNode(
+                bubbles,
+                (d) => d.data.highlightedIndustry
+            );
             appendIndustryLabel(container, highlightedBubble);
             appendExplanation(
                 container,
@@ -203,25 +230,19 @@ const CompanyBubbles = ({
         companyHighlight: (container) => {
             if (!highlightTexts.company) return;
 
-            const viewData = createIndustryViewData(data);
-            viewData.children.forEach(({ children }) => {
-                const match = children.find(
-                    (company) => company.name === highlightTexts.company.name
-                );
-                if (match) match.highlighted = true;
-            });
-
-            const bubbles = appendBubbles(container, viewData);
+            const bubbles = setUpIndustryView(container);
             bubbles
                 .style("fill", (d) =>
                     d.children ? "transparent" : bubbleColor
                 )
-                .style("fill-opacity", (d) => (d.data.highlighted ? 1 : 0.15));
+                .style("fill-opacity", (d) =>
+                    d.data.highlightedCompany ? 1 : 0.15
+                );
 
-            let highlightedBubble;
-            bubbles
-                .filter((d) => d.data.highlighted)
-                .each((e) => (highlightedBubble = e));
+            const highlightedBubble = findNode(
+                bubbles,
+                (d) => d.data.highlightedCompany
+            );
             appendBubbleLabel(
                 container,
                 highlightedBubble,
@@ -235,17 +256,20 @@ const CompanyBubbles = ({
         },
     };
 
-    function draw() {
-        const bubbleContainer = appendBubbleContainer();
-        const drawFunction = drawFunctions[view];
-        if (drawFunction) drawFunction(bubbleContainer);
+    function render() {
+        const root = getRoot();
+        let container = root.select("svg");
+        if (container.empty()) {
+            container = root
+                .append("svg")
+                .attr("viewBox", `0 0 ${width} ${height}`);
+        }
+        container.style("opacity", opacity);
+        const renderFunction = renderFunctions[view];
+        if (renderFunction) renderFunction(container);
     }
 
-    useEffect(() => {
-        clearSvg();
-        draw();
-    });
-
+    useEffect(render);
     return <div className="bubble-chart" ref={bubbleRef}></div>;
 };
 

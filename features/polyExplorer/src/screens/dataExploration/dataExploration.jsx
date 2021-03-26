@@ -36,8 +36,6 @@ const DataExplorationScreen = ({
     dataRecipients,
     onOpenRegionInfo,
 }) => {
-    const validDataRecipients = dataRecipients.filter((e) => !!e);
-
     //Methods
     const getCategories = () =>
         Object.keys(highlights[company.name]?.dataTypeCategories || {});
@@ -52,7 +50,7 @@ const DataExplorationScreen = ({
 
     const getJurisdictionTreeFormat = () => {
         const jurisdictionTreeFormatData = { name: "World", children: [] };
-        validDataRecipients.forEach((e) => {
+        dataRecipients.forEach((e) => {
             let jurisdiction = jurisdictionTreeFormatData.children.find(
                 (j) => j.name === e.jurisdiction
             );
@@ -343,13 +341,13 @@ const DataExplorationScreen = ({
                     <h1>
                         {i18n.t("common:sharing.prefix.companies")}{" "}
                         <span className="highlight-companies">
-                            {validDataRecipients.length}{" "}
+                            {dataRecipients.length}{" "}
                             {i18n.t("common:sharing.companies")}
                         </span>
                     </h1>
                     <CompanyBubbles
                         view="flat"
-                        data={validDataRecipients}
+                        data={dataRecipients}
                         width="360"
                         height="360"
                         bubbleColor="#7EE8A2"
@@ -371,13 +369,13 @@ const DataExplorationScreen = ({
                     <h1>
                         {i18n.t("common:sharing.prefix.companies")}{" "}
                         <span className="highlight-companies">
-                            {validDataRecipients.length}{" "}
+                            {dataRecipients.length}{" "}
                             {i18n.t("common:sharing.companies")}
                         </span>
                     </h1>
                     <CompanyBubbles
                         view="flat"
-                        data={validDataRecipients}
+                        data={dataRecipients}
                         width="360"
                         height="360"
                         opacity={0.1}
@@ -391,7 +389,13 @@ const DataExplorationScreen = ({
                     {filler}
                 </div>
             );
-        else if (activeScreen === "companiesIndustries")
+        else if (
+            [
+                "companiesIndustries",
+                "companiesIndustryHighlight",
+                "companiesCompanyHighlight",
+            ].includes(activeScreen)
+        )
             return (
                 <div className="static-content">
                     <h2 className="highlight-companies">
@@ -400,61 +404,14 @@ const DataExplorationScreen = ({
                         )}
                     </h2>
                     <CompanyBubbles
-                        view="allIndustries"
-                        data={validDataRecipients}
-                        width="360"
-                        height="360"
-                        bubbleColor="#7EE8A2"
-                        maxCompanies={maxCompanies}
-                    />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
-                    <DataSharingLegend
-                        onClick={() => {
-                            openCompaniesInfo();
-                        }}
-                    />
-                </div>
-            );
-        else if (activeScreen === "companiesIndustryHighlight")
-            return (
-                <div className="static-content">
-                    <h2 className="highlight-companies">
-                        {i18n.t(
-                            "dataExplorationScreen:companies.heading.industries"
-                        )}
-                    </h2>
-                    <CompanyBubbles
-                        view="industryHighlight"
-                        data={validDataRecipients}
-                        width="360"
-                        height="360"
-                        bubbleColor="#7EE8A2"
-                        maxCompanies={maxCompanies}
-                        highlight={highlights[company.name]?.dataRecipient}
-                    />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
-                    <DataSharingLegend
-                        onClick={() => {
-                            openCompaniesInfo();
-                        }}
-                    />
-                </div>
-            );
-        else if (activeScreen === "companiesCompanyHighlight")
-            return (
-                <div className="static-content">
-                    <h2 className="highlight-companies">
-                        {i18n.t(
-                            "dataExplorationScreen:companies.heading.industries"
-                        )}
-                    </h2>
-                    <CompanyBubbles
-                        view="companyHighlight"
-                        data={validDataRecipients}
+                        view={
+                            {
+                                companiesIndustries: "allIndustries",
+                                companiesIndustryHighlight: "industryHighlight",
+                                companiesCompanyHighlight: "companyHighlight",
+                            }[activeScreen]
+                        }
+                        data={dataRecipients}
                         width="360"
                         height="360"
                         bubbleColor="#7EE8A2"
@@ -620,39 +577,41 @@ const DataExplorationScreen = ({
                                     )}
                                 </p>
                                 <CompaniesByIndustry
-                                    companies={validDataRecipients}
+                                    companies={dataRecipients}
                                 />
                             </div>
                         </SwiperSlide>
                         <SwiperSlide>
-                            {" "}
-                            <h1>
-                                {i18n.t("common:sharing.prefix.jurisdictions")}{" "}
-                                {jurisdictionTreeFormatData.children.length}{" "}
-                                {i18n.t("common:sharing.jurisdictions")}
-                            </h1>
                             <div className="jurisdiction-tree-container">
+                                <h1>
+                                    {i18n.t(
+                                        "common:sharing.prefix.jurisdictions"
+                                    )}{" "}
+                                    {jurisdictionTreeFormatData.children.length}{" "}
+                                    {i18n.t("common:sharing.jurisdictions")}
+                                </h1>
+
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
-                                    width="300"
-                                    height="250"
                                     fontSize="13"
                                 />
+                                <JurisdictionLegend
+                                    onOpenRegionInfo={onOpenRegionInfo}
+                                />
+                                <DataSharingLegend
+                                    onOpenRegionInfo={() => {
+                                        openJurisdictionInfo();
+                                    }}
+                                />
+                                <button
+                                    className="explore-other"
+                                    onClick={openMain}
+                                >
+                                    {i18n.t(
+                                        "dataExplorationScreen:explore.other"
+                                    )}
+                                </button>
                             </div>
-                            <JurisdictionLegend
-                                onOpenRegionInfo={onOpenRegionInfo}
-                            />
-                            <DataSharingLegend
-                                onOpenRegionInfo={() => {
-                                    openJurisdictionInfo();
-                                }}
-                            />
-                            <button
-                                className="explore-other"
-                                onClick={openMain}
-                            >
-                                {i18n.t("dataExplorationScreen:explore.other")}
-                            </button>
                         </SwiperSlide>
                     </Swiper>
                 </div>
