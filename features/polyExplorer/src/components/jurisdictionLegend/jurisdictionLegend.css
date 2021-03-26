@@ -2,7 +2,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    padding: 2px 24px 2px 32px;
+    padding: 2px 30px 2px 30px;
     width: 100%;
     margin-top: 4px;
 }
@@ -25,6 +25,7 @@
 
 .location-legend .source p {
     display: block;
+    margin: 0;
 }
 
 .location-legend .legend {
