@@ -22,7 +22,11 @@ const CompanyShortInfo = ({ company, onActiveScreenChange = () => {} }) => {
                 <div className="company-location">
                     <p className="location-name">
                         {company.location
-                            ? `${company.location.city}, ${company.location.countryCode}, `
+                            ? `${
+                                  company.location.city
+                                      ? company.location.city + ","
+                                      : ""
+                              } ${company.location.countryCode}, `
                             : null}
                         <span
                             className={`circle ${company.jurisdiction}`}
