@@ -9,7 +9,6 @@
 .exploration-info * {
     color: #0f1938;
     line-height: 120%;
-    letter-spacing: -0.01em;
 }
 
 .exploration-info h1,
@@ -17,7 +16,6 @@
     margin: 0;
     text-align: center;
     font-family: "Jost Medium";
-    font-weight: 500;
 }
 
 .exploration-info h1 {

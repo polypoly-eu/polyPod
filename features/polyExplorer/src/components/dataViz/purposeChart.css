@@ -22,7 +22,6 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 120%;
-    letter-spacing: -0.01em;
 }
 
 .data-exploration .purpose-chart .descriptions div {
@@ -122,7 +121,6 @@
 .data-exploration .purpose-chart .bar-box .above-bar p {
     font-size: 12px;
     line-height: 150%;
-    letter-spacing: -0.01em;
     margin-right: 4px;
     margin-bottom: 0;
 }
