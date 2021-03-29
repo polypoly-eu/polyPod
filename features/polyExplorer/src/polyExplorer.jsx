@@ -101,10 +101,8 @@ const PolyExplorer = () => {
     );
 
     const handleActiveScreenChange = (screen, companyName) => {
-        if (screen === "main")
-            backStack.length = 0;
-        else
-            backStack.push(activeScreen);
+        if (screen === "main") backStack.length = 0;
+        else backStack.push(activeScreen);
         setActiveScreen(screen);
         if (companyName)
             setSelectedCompany(
@@ -272,9 +270,7 @@ const PolyExplorer = () => {
                 onApply={handleFilterApply}
             />
         ),
-        featuredCompanyInfo: (
-            <FeaturedCompanyInfoScreen onClose={handleBack} />
-        ),
+        featuredCompanyInfo: <FeaturedCompanyInfoScreen onClose={handleBack} />,
         companySearch: (
             <CompanySearchScreen
                 companies={companyData}
@@ -285,9 +281,7 @@ const PolyExplorer = () => {
         ),
         info: <InfoScreen onClose={handleBack} />,
         dataRegionInfo: <DataRegionInfoScreen onClose={handleBack} />,
-        explorationDataTypesInfo: (
-            <DataTypesInfoScreen onClose={handleBack} />
-        ),
+        explorationDataTypesInfo: <DataTypesInfoScreen onClose={handleBack} />,
         explorationCategoryInfo: (
             <CategoryInfoScreen
                 category={activeCategory}
@@ -301,12 +295,8 @@ const PolyExplorer = () => {
                 onClose={handleBack}
             />
         ),
-        explorationPurposeInfo: (
-            <PurposeInfoScreen onClose={handleBack} />
-        ),
-        explorationCompaniesInfo: (
-            <CompaniesInfoScreen onClose={handleBack} />
-        ),
+        explorationPurposeInfo: <PurposeInfoScreen onClose={handleBack} />,
+        explorationCompaniesInfo: <CompaniesInfoScreen onClose={handleBack} />,
         explorationJurisdictionsInfo: (
             <JurisdictionInfoScreen onClose={handleBack} />
         ),
