@@ -30,7 +30,8 @@ const FeaturedCompany = ({
     company,
     maxValues,
     averageValues,
-    onActiveScreenChange,
+    onOpenDetails,
+    onOpenInfo,
     onOpenDataExplorationSection,
 }) => {
     return (
@@ -38,7 +39,7 @@ const FeaturedCompany = ({
             <div className="short-info-margin">
                 <CompanyShortInfo
                     company={company}
-                    onActiveScreenChange={onActiveScreenChange}
+                    onOpenDetails={onOpenDetails}
                 />
             </div>
             <div className="data-sharing-section-list">
@@ -85,9 +86,7 @@ const FeaturedCompany = ({
                         )
                     }
                 />
-                <DataSharingLegend
-                    onClick={() => onActiveScreenChange("featuredCompanyInfo")}
-                />
+                <DataSharingLegend onClick={onOpenInfo} />
             </div>
         </div>
     );

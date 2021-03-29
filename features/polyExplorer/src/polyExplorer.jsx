@@ -127,7 +127,7 @@ const PolyExplorer = () => {
 
     const handleFilterApply = (newActiveFilters) => {
         setActiveFilters(newActiveFilters);
-        handleActiveScreenChange("main");
+        handleBack();
     };
 
     function handleOnboardingPopupClose() {
@@ -183,7 +183,13 @@ const PolyExplorer = () => {
                 featuredCompanyData={featuredCompanyData}
                 companyData={companyData}
                 globalData={polyPediaGlobalData}
-                onActiveScreenChange={handleActiveScreenChange}
+                onOpenDetails={(company) =>
+                    handleActiveScreenChange("companyDetails", company)
+                }
+                onOpenFeaturedInfo={() =>
+                    handleActiveScreenChange("featuredCompanyInfo")
+                }
+                onOpenFilters={() => handleActiveScreenChange("companyFilter")}
                 onShowFeaturedChange={setShowFeatured}
                 featuredCompanyTabInitialSlide={featuredCompanyTabInitialSlide}
                 onFeaturedCompanyTabInitialSlideChange={
@@ -274,7 +280,7 @@ const PolyExplorer = () => {
         companySearch: (
             <CompanySearchScreen
                 companies={companyData}
-                onOpenInfo={(companyName) =>
+                onOpenDetails={(companyName) =>
                     handleActiveScreenChange("companyDetails", companyName)
                 }
             />

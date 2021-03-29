@@ -11,7 +11,8 @@ import "./featuredCompanyHolder.css";
 
 const FeaturedCompanyHolder = ({
     featuredCompanies,
-    onActiveScreenChange,
+    onOpenDetails,
+    onOpenInfo,
     initialSlide,
     onUpdateInitialSlide,
     maxValues,
@@ -37,7 +38,8 @@ const FeaturedCompanyHolder = ({
                             company={company}
                             maxValues={maxValues}
                             averageValues={averageValues}
-                            onActiveScreenChange={onActiveScreenChange}
+                            onOpenDetails={onOpenDetails}
+                            onOpenInfo={onOpenInfo}
                             onOpenDataExplorationSection={
                                 onOpenDataExplorationSection
                             }
