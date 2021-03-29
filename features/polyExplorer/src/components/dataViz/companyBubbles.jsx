@@ -5,7 +5,7 @@ import utils from "./utils.js";
 import "./dataViz.css";
 
 const CompanyBubbles = ({
-    data,
+    companyIndustryMap,
     view,
     width,
     height,
@@ -23,9 +23,16 @@ const CompanyBubbles = ({
     const getIndustryName = (industryCategory) =>
         industryCategory?.name?.[i18n.language] ||
         i18n.t("common:category.undisclosed");
-
     const highlightTexts = (() => {
-        const company = data.find((company) => company.name === highlight.name);
+        if (!highlight.name) return {};
+        const company = (() => {
+            for (let companies of Object.values(companyIndustryMap)) {
+                const match = companies.find(
+                    (company) => company.name === highlight.name
+                );
+                if (match) return match;
+            }
+        })();
         if (!company) return {};
         return {
             industry: {
@@ -77,33 +84,24 @@ const CompanyBubbles = ({
 
         clearAll();
         const viewData = {
-            children: data.map((company) => ({ name: company })),
+            children: Object.values(companyIndustryMap).map((company) => ({
+                name: company,
+            })),
         };
         return appendBubbles(container, viewData);
     }
 
-    function groupByIndustry(companies) {
-        const groups = {};
-        for (let { name, industryCategory } of companies) {
-            const industry = getIndustryName(industryCategory);
-            if (!groups[industry]) groups[industry] = [];
-            groups[industry].push(name);
-        }
-        return groups;
-    }
-
-    function createIndustryViewData(data) {
-        const companiesByIndustry = groupByIndustry(data);
-
+    function createIndustryViewData() {
         // This padding is what's currently keeping the industry labels from
         // colliding (for the most part). But we'll need a better solution.
         const viewData = { padding: 40 };
-        viewData.children = Object.entries(companiesByIndustry).map(
-            ([industry, names]) => ({
+        viewData.children = Object.entries(companyIndustryMap).map(
+            ([industry, companies]) => ({
                 name: industry,
-                children: names.map((name) => ({
-                    name,
-                    highlightedCompany: name === highlightTexts?.company?.name,
+                children: companies.map((company) => ({
+                    name: company.name,
+                    highlightedCompany:
+                        company.name === highlightTexts?.company?.name,
                 })),
                 highlightedIndustry:
                     industry === highlightTexts?.industry?.name,
@@ -123,7 +121,7 @@ const CompanyBubbles = ({
         }
 
         clearAll();
-        const viewData = createIndustryViewData(data);
+        const viewData = createIndustryViewData();
         return appendBubbles(container, viewData);
     }
 
