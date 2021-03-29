@@ -187,7 +187,7 @@ export default {
             },
         },
     },
-    "ALPHABET INC.": {
+    "Google LLC": {
         dataTypeCorrelation: {
             types: [
                 "dpv:GeneralReputation",
