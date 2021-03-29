@@ -6,6 +6,37 @@ const parentCategories = {
     personal: "pppc:PersonalData",
 };
 
+const categoryExplanation = {
+    social: {
+        de:
+            "Soziale Daten sind solche, die mit den Beziehungen zwischen Menschen zu tun haben. Beispiele sind: Daten über Familienbeziehungen, Freundschaften oder die Verbindungen innerhalb sozialer Netzwerke.",
+        en:
+            "Social data is that which has to do with the relations between humans. Examples are: data about family relationships, friendships or the connections within social networks.",
+    },
+    technical: {
+        de:
+            "Technische Daten sind Daten über Wissenschaftliches oder Technisches. Dies können z.B. Daten von Sensoren, Gerätekennungen oder Informationen über Software auf einem Gerät sein.",
+        en:
+            "Technical data is data about something scientific or technological. This can be data from sensors, device identifiers or information about software on a device.",
+    },
+    behavioral: {
+        de:
+            'Verhaltensdaten sind Informationen, die sich auf die Handlungen einer Person beziehen. Das können Clickstream-Daten darüber sein, wie eine Person auf einer Website surft, ihr Gerät benutzt oder weitere Informationen als „diese Person hat dieses Jahr drei Urlaube gemacht".',
+        en:
+            'Behavioural data is information related to a person\'s actions. This can be clickstream data about how a person browses a website, uses their device, or something more like "this person went on 3 holidays this year."',
+    },
+    financial: {
+        de:
+            "Finanzdaten sind einfach alle Informationen, die sich auf den Kauf und Verkauf von Waren, sowie den Transfer von Geld beziehen. Das können auch Daten wie das Gehalt einer Person, ihre Kreditkartennummer oder ob sie ein Auto besitzt, sein.",
+        en:
+            "Financial data is simply any information that relates to the buying and selling of goods, the transfer of money for any reason from one party to another. This can also be data like a person's salary, their credit card number or whether they own a car.",
+    },
+    personal: {
+        de: "MISSING: Category personal",
+        en: "MISSING: Category personal",
+    },
+};
+
 export default {
     "SCHUFA Holding AG": {
         dataTypeCorrelation: {
@@ -22,31 +53,36 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: categoryExplanation.personal.de,
+                    en: categoryExplanation.personal.en,
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING: Sprache-Beschreibung",
+                    de: categoryExplanation.social.de,
+                    en: categoryExplanation.social.en,
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING: Browser-Fingerprint Beschreibung",
+                    de: categoryExplanation.technical.de,
+                    en: categoryExplanation.technical.en,
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSING: Surfverhalten-Beschreibung",
+                    de: categoryExplanation.behavioral.de,
+                    en: categoryExplanation.behavioral.en,
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING: Finanz-Beschreibung",
+                    de: categoryExplanation.financial.de,
+                    en: categoryExplanation.financial.en,
                 },
             },
         },
@@ -78,31 +114,36 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: categoryExplanation.personal.de,
+                    en: categoryExplanation.personal.en,
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING: Sprach-Beschreibung",
+                    de: categoryExplanation.social.de,
+                    en: categoryExplanation.social.en,
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING: Browser-Fingerprint Beschreibung",
+                    de: categoryExplanation.technical.de,
+                    en: categoryExplanation.technical.en,
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSING: Surf-Verhalten Beschreibung",
+                    de: categoryExplanation.behavioral.de,
+                    en: categoryExplanation.behavioral.en,
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING: Finanz-Beschreibung",
+                    de: categoryExplanation.financial.de,
+                    en: categoryExplanation.financial.en,
                 },
             },
         },
@@ -130,31 +171,36 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: categoryExplanation.personal.de,
+                    en: categoryExplanation.personal.en,
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING: Sprach-Beschreibung",
+                    de: categoryExplanation.social.de,
+                    en: categoryExplanation.social.en,
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING: Browser-Fingerprint Beschreibung",
+                    de: categoryExplanation.technical.de,
+                    en: categoryExplanation.technical.en,
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSING: Surfverhalten-Beschreibung",
+                    de: categoryExplanation.behavioral.de,
+                    en: categoryExplanation.behavioral.en,
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING: Finanz-Beschreibung",
+                    de: categoryExplanation.financial.de,
+                    en: categoryExplanation.financial.en,
                 },
             },
         },
@@ -186,31 +232,36 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: categoryExplanation.personal.de,
+                    en: categoryExplanation.personal.en,
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING: Sprach-Beschreibung",
+                    de: categoryExplanation.social.de,
+                    en: categoryExplanation.social.en,
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING: Browser-Fingerprint Beschreibung",
+                    de: categoryExplanation.technical.de,
+                    en: categoryExplanation.technical.en,
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSING: Surfverhalten-Beschreibung",
+                    de: categoryExplanation.behavioral.de,
+                    en: categoryExplanation.behavioral.en,
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING: Finanz-Beschreibung",
+                    de: categoryExplanation.financial.de,
+                    en: categoryExplanation.financial.en,
                 },
             },
         },
@@ -238,31 +289,36 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: categoryExplanation.personal.de,
+                    en: categoryExplanation.personal.en,
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING: Sprach-Beschreibung",
+                    de: categoryExplanation.social.de,
+                    en: categoryExplanation.social.en,
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING: Browser-Fingerprint Beschreibung",
+                    de: categoryExplanation.technical.de,
+                    en: categoryExplanation.technical.en,
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSING: Surfverhalten-Beschreibung",
+                    de: categoryExplanation.behavioral.de,
+                    en: categoryExplanation.behavioral.en,
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING: Finanz-Beschreibung",
+                    de: categoryExplanation.financial.de,
+                    en: categoryExplanation.financial.en,
                 },
             },
         },
@@ -288,31 +344,36 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: categoryExplanation.personal.de,
+                    en: categoryExplanation.personal.en,
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING: Sprach-Beschreibung",
+                    de: categoryExplanation.social.de,
+                    en: categoryExplanation.social.en,
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING: Browser-Fingerprint Beschreibung",
+                    de: categoryExplanation.technical.de,
+                    en: categoryExplanation.technical.en,
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSING: Surfverhalten-Beschreibung",
+                    de: categoryExplanation.behavioral.de,
+                    en: categoryExplanation.behavioral.en,
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING: Finanz-Beschreibung",
+                    de: categoryExplanation.financial.de,
+                    en: categoryExplanation.financial.en,
                 },
             },
         },
@@ -341,31 +402,36 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: categoryExplanation.personal.de,
+                    en: categoryExplanation.personal.en,
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "MISSING: Sprach-Beschreibung",
+                    de: categoryExplanation.social.de,
+                    en: categoryExplanation.social.en,
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
                 explanation: {
-                    de: "MISSING: Browser-Fingerprint Beschreibung",
+                    de: categoryExplanation.technical.de,
+                    en: categoryExplanation.technical.en,
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
                 explanation: {
-                    de: "MISSING: Surfverhalten-Beschreibung",
+                    de: categoryExplanation.behavioral.de,
+                    en: categoryExplanation.behavioral.en,
                 },
             },
             [parentCategories.financial]: {
                 category: "dpv:Financial",
                 explanation: {
-                    de: "MISSING: Finanz-Beschreibung",
+                    de: categoryExplanation.financial.de,
+                    en: categoryExplanation.financial.en,
                 },
             },
         },
