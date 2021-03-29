@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import i18n from "./i18n.js";
 import { pod, podNav } from "./fakePod.js";
@@ -48,6 +48,7 @@ async function writeFirstRun(firstRun) {
 
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
+    const backStack = useRef([]).current;
     const [showFeatured, setShowFeatured] = useState(true);
     const [companyData] = useState(polyPediaCompanies);
     const [selectedCompany, setSelectedCompany] = useState(undefined);
@@ -100,6 +101,8 @@ const PolyExplorer = () => {
     );
 
     const handleActiveScreenChange = (screen, companyName) => {
+        if (screen === "main") backStack.length = 0;
+        else backStack.push(activeScreen);
         setActiveScreen(screen);
         if (companyName)
             setSelectedCompany(
@@ -112,7 +115,7 @@ const PolyExplorer = () => {
         activeSection,
         activeCategory
     ) => {
-        setActiveScreen(screen);
+        handleActiveScreenChange(screen);
         setDataExploringSection(activeSection);
         if (activeCategory) setActiveCategory(activeCategory);
     };
@@ -124,7 +127,7 @@ const PolyExplorer = () => {
 
     const handleFilterApply = (newActiveFilters) => {
         setActiveFilters(newActiveFilters);
-        handleActiveScreenChange("main");
+        handleBack();
     };
 
     function handleOnboardingPopupClose() {
@@ -143,26 +146,17 @@ const PolyExplorer = () => {
     };
 
     function handleBack() {
-        if (activeScreen === "dataRegionInfo") {
-            if (dataExploringSection === "jurisdictions") {
-                handleActiveScreenChange("dataExploration");
-                return;
-            }
-            handleActiveScreenChange("companyDetails");
-            return;
-        }
-
-        if (/^exploration.*Info$/.test(activeScreen)) {
-            handleActiveScreenChange("dataExploration");
-            return;
-        }
-
         if (activeScreen === "dataExploration") {
             setDataExploringSection(initialDataExplorationSection);
             setActiveCategory(null);
         }
 
-        handleActiveScreenChange("main");
+        const previousScreen = backStack.pop();
+        if (previousScreen) {
+            setActiveScreen(previousScreen);
+            return;
+        }
+        setActiveScreen("main");
     }
 
     function updatePodNavigation() {
@@ -173,12 +167,14 @@ const PolyExplorer = () => {
             back: handleBack,
         };
         podNav.setActiveActions(
-            activeScreen === "main" ? ["info", "search"] : ["back"]
+            backStack.length ? ["back"] : ["info", "search"]
         );
     }
 
-    updatePodNavigation();
-    setTimeout(() => readFirstRun().then(setFirstRun), 300);
+    useEffect(() => {
+        updatePodNavigation();
+        setTimeout(() => readFirstRun().then(setFirstRun), 300);
+    });
 
     const screens = {
         main: (
@@ -187,7 +183,13 @@ const PolyExplorer = () => {
                 featuredCompanyData={featuredCompanyData}
                 companyData={companyData}
                 globalData={polyPediaGlobalData}
-                onActiveScreenChange={handleActiveScreenChange}
+                onOpenDetails={(company) =>
+                    handleActiveScreenChange("companyDetails", company)
+                }
+                onOpenFeaturedInfo={() =>
+                    handleActiveScreenChange("featuredCompanyInfo")
+                }
+                onOpenFilters={() => handleActiveScreenChange("companyFilter")}
                 onShowFeaturedChange={setShowFeatured}
                 featuredCompanyTabInitialSlide={featuredCompanyTabInitialSlide}
                 onFeaturedCompanyTabInitialSlideChange={
@@ -205,7 +207,7 @@ const PolyExplorer = () => {
                 company={selectedCompany}
                 startSection={dataExploringSection}
                 startCategory={activeCategory}
-                openMain={podNav.actions.back}
+                openMain={handleBack}
                 openDataTypesInfo={() =>
                     handleExplorationInfoScreen(
                         "explorationDataTypesInfo",
@@ -274,43 +276,35 @@ const PolyExplorer = () => {
                 onApply={handleFilterApply}
             />
         ),
-        featuredCompanyInfo: (
-            <FeaturedCompanyInfoScreen onClose={podNav.actions.back} />
-        ),
+        featuredCompanyInfo: <FeaturedCompanyInfoScreen onClose={handleBack} />,
         companySearch: (
             <CompanySearchScreen
                 companies={companyData}
-                onOpenInfo={(companyName) =>
+                onOpenDetails={(companyName) =>
                     handleActiveScreenChange("companyDetails", companyName)
                 }
             />
         ),
-        info: <InfoScreen onClose={podNav.actions.back} />,
-        dataRegionInfo: <DataRegionInfoScreen onClose={podNav.actions.back} />,
-        explorationDataTypesInfo: (
-            <DataTypesInfoScreen onClose={podNav.actions.back} />
-        ),
+        info: <InfoScreen onClose={handleBack} />,
+        dataRegionInfo: <DataRegionInfoScreen onClose={handleBack} />,
+        explorationDataTypesInfo: <DataTypesInfoScreen onClose={handleBack} />,
         explorationCategoryInfo: (
             <CategoryInfoScreen
                 category={activeCategory}
                 company={selectedCompany}
-                onClose={podNav.actions.back}
+                onClose={handleBack}
             />
         ),
         explorationCorrelationInfo: (
             <CorrelationInfoScreen
                 company={selectedCompany}
-                onClose={podNav.actions.back}
+                onClose={handleBack}
             />
         ),
-        explorationPurposeInfo: (
-            <PurposeInfoScreen onClose={podNav.actions.back} />
-        ),
-        explorationCompaniesInfo: (
-            <CompaniesInfoScreen onClose={podNav.actions.back} />
-        ),
+        explorationPurposeInfo: <PurposeInfoScreen onClose={handleBack} />,
+        explorationCompaniesInfo: <CompaniesInfoScreen onClose={handleBack} />,
         explorationJurisdictionsInfo: (
-            <JurisdictionInfoScreen onClose={podNav.actions.back} />
+            <JurisdictionInfoScreen onClose={handleBack} />
         ),
     };
 

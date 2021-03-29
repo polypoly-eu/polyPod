@@ -2,10 +2,10 @@ import React from "react";
 import i18n from "../../i18n.js";
 import "./companyShortInfo.css";
 
-const CompanyShortInfo = ({ company, onActiveScreenChange = () => {} }) => {
+const CompanyShortInfo = ({ company, onOpenDetails = () => {} }) => {
     return (
         <button
-            onClick={() => onActiveScreenChange("companyDetails", company.name)}
+            onClick={() => onOpenDetails(company.name)}
             className="company-short-info"
         >
             {company.featured ? (

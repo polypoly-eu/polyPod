@@ -5,7 +5,7 @@ import Screen from "../../components/screen/screen.jsx";
 
 import "./companySearch.css";
 
-const CompanySearchScreen = ({ companies, onOpenInfo }) => {
+const CompanySearchScreen = ({ companies, onOpenDetails }) => {
     const [searchString, setSearchString] = useState("");
     const featuredComanies = companies.filter((e) => e.featured == true);
 
@@ -61,7 +61,7 @@ const CompanySearchScreen = ({ companies, onOpenInfo }) => {
                             {featuredComanies.map((company, index) => (
                                 <button
                                     key={index}
-                                    onClick={() => onOpenInfo(company.name)}
+                                    onClick={() => onOpenDetails(company.name)}
                                 >
                                     {company.name}
                                 </button>
@@ -87,7 +87,9 @@ const CompanySearchScreen = ({ companies, onOpenInfo }) => {
                                             (company, index) => (
                                                 <button
                                                     onClick={() =>
-                                                        onOpenInfo(company.name)
+                                                        onOpenDetails(
+                                                            company.name
+                                                        )
                                                     }
                                                     key={index}
                                                 >
@@ -102,7 +104,9 @@ const CompanySearchScreen = ({ companies, onOpenInfo }) => {
                             <div>
                                 {shownCompanies.map((company, index) => (
                                     <button
-                                        onClick={() => onOpenInfo(company.name)}
+                                        onClick={() =>
+                                            onOpenDetails(company.name)
+                                        }
                                         key={index}
                                     >
                                         {company.name}
