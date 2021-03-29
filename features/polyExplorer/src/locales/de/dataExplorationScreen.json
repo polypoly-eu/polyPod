@@ -16,13 +16,13 @@
     "dataTypes.heading.correlations":
         "Mögliche Datenkorrelationen",
     "dataTypes.text.correlations":
-        "Wenn Datentypen nicht einzeln, sondern im Packet geteilt werden, geben sie weitere Einblicke.",
+        "Wenn Datentypen nicht einzeln, sondern im Paket geteilt werden, geben sie weitere Einblicke.",
     "purposes.description.scale":
         "Anzahl der Nennungen",
     "companies.text.intro":
-        "Daten werden oft mit einer überraschenden Anazhl von  Unternehmen geteilt, in vorhersehbaren oder unerwarteten Branchen.",
+        "Daten werden oft mit einer überraschenden Anzahl von  Unternehmen geteilt, in vorhersehbaren oder unerwarteten Branchen.",
     "companies.heading.industries":
-        "Industrien",
+        "Branchen",
     "companies.heading.list":
         "Vollständige Firmenliste",
     "companies.text.list":
