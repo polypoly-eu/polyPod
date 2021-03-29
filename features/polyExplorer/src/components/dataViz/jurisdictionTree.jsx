@@ -7,21 +7,10 @@ const JurisdictionTree = ({ data }) => {
     const fontSize = 10;
     let treeRef = useRef(null);
 
-    const getHighestValue = () => {
-        let highest = 0;
-        data.children.forEach((j) => {
-            j.children.forEach((c) => {
-                c.value > highest ? (highest = c.value) : null;
-            });
-        });
-        return highest;
-    };
-
     const getDistance = (x, y) => {
         return Math.abs(x - y);
     };
 
-    const highestValue = getHighestValue();
     const clearSvg = () => {
         d3.select(treeRef.current).selectAll("svg").remove();
     };
