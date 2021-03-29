@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import i18n from "./i18n.js";
 import { pod, podNav } from "./fakePod.js";
@@ -48,6 +48,7 @@ async function writeFirstRun(firstRun) {
 
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
+    const backStack = useRef([]).current;
     const [showFeatured, setShowFeatured] = useState(true);
     const [companyData] = useState(polyPediaCompanies);
     const [selectedCompany, setSelectedCompany] = useState(undefined);
@@ -100,6 +101,10 @@ const PolyExplorer = () => {
     );
 
     const handleActiveScreenChange = (screen, companyName) => {
+        if (screen === "main")
+            backStack.length = 0;
+        else
+            backStack.push(activeScreen);
         setActiveScreen(screen);
         if (companyName)
             setSelectedCompany(
@@ -112,7 +117,7 @@ const PolyExplorer = () => {
         activeSection,
         activeCategory
     ) => {
-        setActiveScreen(screen);
+        handleActiveScreenChange(screen);
         setDataExploringSection(activeSection);
         if (activeCategory) setActiveCategory(activeCategory);
     };
@@ -143,26 +148,17 @@ const PolyExplorer = () => {
     };
 
     function handleBack() {
-        if (activeScreen === "dataRegionInfo") {
-            if (dataExploringSection === "jurisdictions") {
-                handleActiveScreenChange("dataExploration");
-                return;
-            }
-            handleActiveScreenChange("companyDetails");
-            return;
-        }
-
-        if (/^exploration.*Info$/.test(activeScreen)) {
-            handleActiveScreenChange("dataExploration");
-            return;
-        }
-
         if (activeScreen === "dataExploration") {
             setDataExploringSection(initialDataExplorationSection);
             setActiveCategory(null);
         }
 
-        handleActiveScreenChange("main");
+        const previousScreen = backStack.pop();
+        if (previousScreen) {
+            setActiveScreen(previousScreen);
+            return;
+        }
+        setActiveScreen("main");
     }
 
     function updatePodNavigation() {
@@ -173,7 +169,7 @@ const PolyExplorer = () => {
             back: handleBack,
         };
         podNav.setActiveActions(
-            activeScreen === "main" ? ["info", "search"] : ["back"]
+            backStack.length ? ["back"] : ["info", "search"]
         );
     }
 
