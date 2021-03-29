@@ -84,9 +84,11 @@ const CompanyBubbles = ({
 
         clearAll();
         const viewData = {
-            children: Object.values(companyIndustryMap).map((company) => ({
-                name: company,
-            })),
+            children: Object.values(companyIndustryMap)
+                .flat()
+                .map((company) => ({
+                    name: company,
+                })),
         };
         return appendBubbles(container, viewData);
     }
