@@ -593,7 +593,6 @@ const DataExplorationScreen = ({
 
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
-                                    fontSize="13"
                                 />
                                 <JurisdictionLegend
                                     onOpenRegionInfo={onOpenRegionInfo}
