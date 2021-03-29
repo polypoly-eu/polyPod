@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import i18n from "./i18n.js";
 import { pod, podNav } from "./fakePod.js";
@@ -177,8 +177,10 @@ const PolyExplorer = () => {
         );
     }
 
-    updatePodNavigation();
-    setTimeout(() => readFirstRun().then(setFirstRun), 300);
+    useEffect(() => {
+        updatePodNavigation();
+        setTimeout(() => readFirstRun().then(setFirstRun), 300);
+    });
 
     const screens = {
         main: (
@@ -205,7 +207,7 @@ const PolyExplorer = () => {
                 company={selectedCompany}
                 startSection={dataExploringSection}
                 startCategory={activeCategory}
-                openMain={podNav.actions.back}
+                openMain={handleBack}
                 openDataTypesInfo={() =>
                     handleExplorationInfoScreen(
                         "explorationDataTypesInfo",
@@ -275,7 +277,7 @@ const PolyExplorer = () => {
             />
         ),
         featuredCompanyInfo: (
-            <FeaturedCompanyInfoScreen onClose={podNav.actions.back} />
+            <FeaturedCompanyInfoScreen onClose={handleBack} />
         ),
         companySearch: (
             <CompanySearchScreen
@@ -285,32 +287,32 @@ const PolyExplorer = () => {
                 }
             />
         ),
-        info: <InfoScreen onClose={podNav.actions.back} />,
-        dataRegionInfo: <DataRegionInfoScreen onClose={podNav.actions.back} />,
+        info: <InfoScreen onClose={handleBack} />,
+        dataRegionInfo: <DataRegionInfoScreen onClose={handleBack} />,
         explorationDataTypesInfo: (
-            <DataTypesInfoScreen onClose={podNav.actions.back} />
+            <DataTypesInfoScreen onClose={handleBack} />
         ),
         explorationCategoryInfo: (
             <CategoryInfoScreen
                 category={activeCategory}
                 company={selectedCompany}
-                onClose={podNav.actions.back}
+                onClose={handleBack}
             />
         ),
         explorationCorrelationInfo: (
             <CorrelationInfoScreen
                 company={selectedCompany}
-                onClose={podNav.actions.back}
+                onClose={handleBack}
             />
         ),
         explorationPurposeInfo: (
-            <PurposeInfoScreen onClose={podNav.actions.back} />
+            <PurposeInfoScreen onClose={handleBack} />
         ),
         explorationCompaniesInfo: (
-            <CompaniesInfoScreen onClose={podNav.actions.back} />
+            <CompaniesInfoScreen onClose={handleBack} />
         ),
         explorationJurisdictionsInfo: (
-            <JurisdictionInfoScreen onClose={podNav.actions.back} />
+            <JurisdictionInfoScreen onClose={handleBack} />
         ),
     };
 
