@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="settings_imprint_heading">Impressum fehlt noch</string>
+    <string name="settings_imprint_heading">Impressum</string>
     <string name="settings_imprint_text">
-"
-Das Impressum fehlt leider noch.
-
-Aber wir werden es bald hinzufügen.
+"<p>Angaben gemäß § 5 TMG</p>
+<p>pc polypoly coop SCE mbH<br>
+ („polypoly – Die Genossenschaft“)</p>
+<p>Reichenberger Straße 121<br>
+ 10999 Berlin<br>
+ Deutschland</p>
+<h3>Genossenschaftsregister:</h3>
+<p>Amtsgericht Berlin Charlottenburg, Akt.-Zeichen GnR 921 B</p>
+<h3>Genossenschaftsverband:</h3>
+<p>Die&nbsp;pc polypoly coop SCE mbH ist Mitglied im gesetzlichen Prüfverband des Genossenschaftsverbands der Regionen e.V. mit Sitz in Frankfurt am Main</p>
+<h3>Vertreten durch:</h3>
+<p>Direktor:&nbsp;Thorsten Dittmar</p>
+<p>Verwaltungsrat:&nbsp;Mathias Maierhofer&nbsp;(Vorsitzender), Sabine Seymour (Stellvertretende Vorsitzende), Markus Stegfellner und Dorett Bothmann</p>
+<p>Kontakt:</p>
+<p>hello@polypoly.coop<br>
+ +49 30 62932839</p>
+<h3>Umsatzsteueridentifikationsnummer:</h3>
+<p>gemäß § 27 a Umsatzsteuergesetz</p>
+<p>DE 333726820</p>
+<h3>Redaktionell Verantwortlicher:</h3>
+<p>Thorsten Dittmar</p>
+<p>Reichenberger Straße 121</p>
+<p>10999 Berlin Deutschland</p>
 "
     </string>
 
