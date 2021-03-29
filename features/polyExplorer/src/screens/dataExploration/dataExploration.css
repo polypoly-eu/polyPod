@@ -69,7 +69,6 @@
 .data-exploration .static-content .bubble-source {
     font-size: 10px;
     line-height: 14px;
-    letter-spacing: -0.01em;
     color: #a9b6c6;
     width: 84%;
     max-width: 350px;
@@ -114,7 +113,8 @@
     color: #7ee8a2;
 }
 
-.data-exploration .bubble-chart {
+.data-exploration .bubble-chart,
+.data-exploration .jurisdiction-tree-container .jurisdiction-tree {
     display: block;
     width: 100%;
     height: 100%;
@@ -123,16 +123,24 @@
     overflow: hidden;
 }
 
-.data-exploration .static-content .bubble-chart svg {
+.data-exploration .static-content .bubble-chart svg,
+.data-exploration .jurisdiction-tree-container .jurisdiction-tree svg {
     width: 100%;
     height: 100%;
 }
 
 .data-exploration .jurisdiction-tree-container {
-    margin: 0 24px 0 22px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .data-exploration .jurisdiction-tree-container .jurisdiction-tree {
+    box-sizing: border-box;
+    padding: 0 22px 0 24px;
+}
+
+.data-exploration .jurisdiction-tree-container .jurisdiction-tree svg {
     margin-bottom: -8px;
 }
 
@@ -162,6 +170,7 @@
 
 .data-exploration .down-button-hidden {
     visibility: hidden;
+    display: none;
 }
 
 .data-exploration .static-content .construction-container {
@@ -214,12 +223,14 @@
     pointer-events: none;
 }
 
+.data-exploration .on-bubble {
+    font-size: 16px;
+    line-height: 120%;
+}
+
 .data-exploration .swipable-content .on-bubble {
     width: 220px;
     margin: 40% auto 0 auto;
-    font-size: 16px;
-    line-height: 120%;
-    letter-spacing: -0.01em;
 }
 
 .data-exploration .purpose-content {
@@ -235,7 +246,7 @@
     height: 100%;
 }
 
-.data-exploration .companies-list-content>p {
+.data-exploration .companies-list-content > p {
     width: 260px;
     margin-left: auto;
     margin-right: auto;
@@ -244,4 +255,22 @@
 .data-exploration .companies-list-content .companies-by-industry {
     flex: auto;
     min-height: 0;
+    margin-bottom: 4px;
+}
+
+.data-exploration .explore-other {
+    display: block;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 84%;
+    max-width: 412px;
+    height: 48px;
+    background-color: #f7fafc;
+    color: #0f1938;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 12px auto 20px auto;
+    border-radius: 8px;
+    border: transparent;
+    outline: none;
 }

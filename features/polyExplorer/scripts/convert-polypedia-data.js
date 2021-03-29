@@ -56,7 +56,7 @@ function fixPolyPediaEntityData(entityData) {
     const commonNameMap = {
         Schufa: "SCHUFA Holding AG",
     };
-    const commonName = entityData.legal_entity?.identifiers.common_name;
+    const commonName = entityData.legal_entity?.identifiers?.common_name;
     if (commonName in commonNameMap) {
         const legalName = commonNameMap[commonName];
         entityData.legal_entity.identifiers.legal_name.value = legalName;
@@ -64,11 +64,16 @@ function fixPolyPediaEntityData(entityData) {
     }
 }
 
+function parseIndustryCategory(legalEntityData) {
+    const id = legalEntityData?.entity_details?.industry_category?.value?.[0];
+    return id ? { id } : null;
+}
+
 function parseEntity(entityData) {
     fixPolyPediaEntityData(entityData);
 
     const legalEntityData = entityData.legal_entity;
-    const legalName = legalEntityData?.identifiers.legal_name.value;
+    const legalName = legalEntityData?.identifiers?.legal_name.value;
     if (!legalName) return null;
 
     return {
@@ -87,17 +92,23 @@ function parseEntity(entityData) {
         annualRevenues: extractAnnualRevenues(entityData),
         dataRecipients: entityData.data_recipients || null,
         dataSharingPurposes: entityData.derived_purpose_info
-            ? Object.keys(entityData.derived_purpose_info).map(
-                  (i) => entityData.derived_purpose_info[i]
+            ? Object.entries(entityData.derived_purpose_info).map(
+                  ([key, value]) => ({
+                      "dpv:Purpose": key,
+                      count: value.count,
+                  })
               )
             : null,
         dataTypesShared: entityData.derived_category_info
-            ? Object.keys(entityData.derived_category_info).map(
-                  (i) => entityData.derived_category_info[i]
+            ? Object.entries(entityData.derived_category_info).map(
+                  ([key, value]) => ({
+                      "dpv:Category": key,
+                      count: value.count,
+                  })
               )
             : null,
         description: parseDescription(legalEntityData),
-        category: null,
+        industryCategory: parseIndustryCategory(legalEntityData),
     };
 }
 
@@ -126,10 +137,51 @@ function enrichWithPatchData(entityMap) {
     }
 }
 
+function enrichWithTranslations(entity, globalData) {
+    // In the future, we should read these from the global data at runtime to
+    // keep the data small, but for now we keep this structure to keep the
+    // entries from patch-data.js working.
+
+    if (entity.industryCategory) {
+        const industryData = globalData.industries[entity.industryCategory.id];
+        if (industryData) {
+            const namePrefix = "Name_";
+            entity.industryCategory.name = Object.fromEntries(
+                Object.entries(industryData)
+                    .filter(([key]) => key.startsWith(namePrefix))
+                    .map(([key, value]) => [
+                        key.slice(namePrefix.length).toLowerCase(),
+                        value,
+                    ])
+            );
+        }
+    }
+
+    for (let purpose of entity.dataSharingPurposes || []) {
+        const purposeData = globalData.data_purposes[purpose["dpv:Purpose"]];
+        const translations = Object.fromEntries(
+            Object.entries(purposeData).filter(([key]) =>
+                ["Translation_", "Explanation_"].some((prefix) =>
+                    key.startsWith(prefix)
+                )
+            )
+        );
+        Object.assign(purpose, translations);
+    }
+
+    for (let category of entity.dataTypesShared || []) {
+        const categoryData =
+            globalData.personal_data_categories[category["dpv:Category"]];
+        Object.assign(category, categoryData);
+    }
+}
+
 function enrichWithGlobalData(entityMap, globalData) {
-    for (let entity of Object.values(entityMap))
+    for (let entity of Object.values(entityMap)) {
         entity.jurisdiction =
             globalData.countries[entity.location?.countryCode]?.dataRegion;
+        enrichWithTranslations(entity, globalData);
+    }
 }
 
 function enrichWithJurisdictionsShared(entityMap) {
@@ -169,8 +221,9 @@ function fixCompanyData(entityMap) {
         entity.dataRecipients = dataRecipients.filter((recipientName) => {
             const recipientKey = entityKey(recipientName);
             const keep =
-                recipientKey in entityMap &&
-                "category" in entityMap[recipientKey];
+                entityMap[recipientKey] &&
+                entityMap[recipientKey].name &&
+                entityMap[recipientKey].industryCategory;
             if (!keep) {
                 dataIssueLog.missingDataRecipients[recipientName] =
                     dataIssueLog.missingDataRecipients[recipientName] || [];
@@ -232,6 +285,12 @@ function parsePolyPediaGlobalData() {
         country.dataRegion = parseDataRegion(data);
         globalData.countries[code] = country;
     });
+    globalData.industries = polyPediaGlobalData.industries;
+    globalData.data_purposes = polyPediaGlobalData.data_purposes;
+    globalData.personal_data_categories =
+        polyPediaGlobalData.personal_data_categories;
+    globalData.polypoly_parent_categories =
+        polyPediaGlobalData.polypoly_parent_categories;
     return globalData;
 }
 

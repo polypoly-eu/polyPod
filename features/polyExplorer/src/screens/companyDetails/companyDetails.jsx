@@ -110,6 +110,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                                         src={`./images/maps/cities/${
                                             cityImageMap[company.location.city]
                                         }.svg`}
+                                        className="map"
                                     />
                                     <img
                                         src={`./images/location-pins/${company.jurisdiction}.svg`}
@@ -133,7 +134,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             </div>
                         </div>
                     )}
-                    <JurisdictionLegend />
+                    <JurisdictionLegend onOpenRegionInfo={onOpenRegionInfo} />
                 </div>
             ),
         },

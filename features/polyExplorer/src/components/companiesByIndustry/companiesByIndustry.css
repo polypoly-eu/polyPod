@@ -15,5 +15,9 @@
     color: #a9b6c6;
     font-size: 16px;
     font-family: "Jost Medium";
-    font-weight: 500;
+}
+
+.companies-by-industry-eco-item {
+    padding: 0 34px;
+    font-size: 16px;
 }

@@ -2,41 +2,50 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    padding: 2px 8px;
+    padding: 2px 30px 2px 30px;
     width: 100%;
     margin-top: 4px;
 }
 
 .location-legend p {
+    display: inline-block;
     flex: 0 0 auto;
     font-weight: 500;
     font-size: 10px;
     line-height: 14px;
-    letter-spacing: -0.01em;
     color: #a9b6c6;
-    margin: 2px 4px;
+    margin: 0px 4px;
+    height: 12px;
 }
 
 .location-legend .source {
-    flex: 0 0 auto;
+    flex: 1 1 auto;
+    justify-content: flex-start;
+}
+
+.location-legend .source p {
+    display: block;
+    margin: 0;
 }
 
 .location-legend .legend {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
+    width: 172px;
+    height: 26px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-
-.location-legend .data-region {
-    flex: 0 0 auto;
 }
 
 .location-legend .legend div {
     display: flex;
     flex-direction: row;
     flex: 0 0 auto;
-    margin-left: 4px;
+    height: 12px;
+}
+
+.location-legend .info-button {
+    padding: 4px 0;
 }
 
 .location-legend .EU-GDPR {
@@ -62,8 +71,8 @@
 .location-legend .circle {
     display: inline-block;
     width: 10px;
-    height: 10px;
+    height: 10px !important;
     border-radius: 50%;
-    transform: translateY(3px);
+    transform: translate(2px, 2px);
     flex: 0 0 auto;
 }

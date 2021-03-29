@@ -144,6 +144,10 @@ const PolyExplorer = () => {
 
     function handleBack() {
         if (activeScreen === "dataRegionInfo") {
+            if (dataExploringSection === "jurisdictions") {
+                handleActiveScreenChange("dataExploration");
+                return;
+            }
             handleActiveScreenChange("companyDetails");
             return;
         }
@@ -201,6 +205,7 @@ const PolyExplorer = () => {
                 company={selectedCompany}
                 startSection={dataExploringSection}
                 startCategory={activeCategory}
+                openMain={podNav.actions.back}
                 openDataTypesInfo={() =>
                     handleExplorationInfoScreen(
                         "explorationDataTypesInfo",
@@ -245,6 +250,9 @@ const PolyExplorer = () => {
                             company.name.toLowerCase() === name.toLowerCase()
                     )
                 )}
+                onOpenRegionInfo={() =>
+                    handleActiveScreenChange("dataRegionInfo")
+                }
             />
         ),
         companyDetails: (

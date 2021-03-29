@@ -28,14 +28,12 @@
     font-size: 24px;
     line-height: 120%;
     text-align: center;
-    letter-spacing: -0.01em;
     color: #0f1938;
 }
 
 .purpose-info-popup p {
     font-size: 16px;
     line-height: 120%;
-    letter-spacing: -0.01em;
     color: #0f1938;
 }
 
@@ -56,6 +54,5 @@
     font-size: 18px;
     line-height: 120%;
     text-align: center;
-    letter-spacing: -0.01em;
     padding: 10px;
 }

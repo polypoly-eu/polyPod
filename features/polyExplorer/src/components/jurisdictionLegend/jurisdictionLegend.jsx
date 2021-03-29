@@ -3,19 +3,17 @@ import React from "react";
 import "./jurisdictionLegend.css";
 import i18n from "../../i18n.js";
 
-const JurisdictionLegend = ({ onOpenRegionInfo = false }) => {
+const JurisdictionLegend = ({ onOpenRegionInfo }) => {
     return (
         <div className="location-legend">
             <div className="source">
                 <p>{i18n.t("common:source")}:</p>
                 <p>polyPedia</p>
             </div>
-            <div className="data-regions">
+            <div className="legend">
                 <p className="jurisdictions-label">
                     {i18n.t("companyDetailsScreen:jurisdictions")}:
                 </p>
-            </div>
-            <div className="legend">
                 <div>
                     <div className="circle China"></div>
                     <p>{i18n.t("common:jurisdiction.china")}</p>
@@ -36,12 +34,9 @@ const JurisdictionLegend = ({ onOpenRegionInfo = false }) => {
                     <div className="circle Others"></div>
                     <p>{i18n.t("common:jurisdiction.undisclosed")}</p>
                 </div>
-                {onOpenRegionInfo ? (
-                    <img
-                        src="./images/question-circle.svg"
-                        onClick={onOpenRegionInfo}
-                    />
-                ) : null}
+            </div>
+            <div className="info-button" onClick={onOpenRegionInfo}>
+                <img src="./images/question-circle.svg" />
             </div>
         </div>
     );

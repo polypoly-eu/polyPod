@@ -1,15 +1,18 @@
 @font-face {
     font-family: "Jost";
     src: url("../fonts/jost_regular.ttf");
+    font-weight: 400;
 }
 
 @font-face {
     font-family: "Jost Medium";
     src: url("../fonts/jost_medium.ttf");
+    font-weight: 500;
 }
 
 * {
     font-family: "Jost";
+    letter-spacing: -0.01em;
     color: #edf2f7;
 }
 

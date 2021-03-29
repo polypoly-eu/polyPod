@@ -30,5 +30,7 @@
     "construction.text":
         "Dieser Teil wird gerade noch gebaut, aber ihr könnt schonmal durchklicken, wenn ihr neugierig seid.",
     "from.polyPedia.translation":
-        "Translation_DE"
+        "Translation_DE",
+    "explore.other":
+        "Andere Firmen erkunden"
 }

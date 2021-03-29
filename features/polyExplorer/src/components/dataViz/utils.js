@@ -1,10 +1,10 @@
-function appendLabel(container, text) {
+function appendLabel(container, text, props = {}) {
     const label = container.append("g").attr("class", "label");
     label
         .append("text")
         .text(text)
         .style("fill", "#F7FAFC")
-        .style("font-size", 14)
+        .style("font-size", props.fontSize || 14)
         .style("font-weight", "500")
         .style("text-anchor", "middle")
         .style("alignment-baseline", "middle");

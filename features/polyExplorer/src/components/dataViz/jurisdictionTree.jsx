@@ -1,9 +1,27 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-const JurisdictionTree = ({ data, width, height, fontSize }) => {
+const JurisdictionTree = ({ data }) => {
+    const width = 300;
+    const height = 250;
+    const fontSize = 10;
     let treeRef = useRef(null);
 
+    const getHighestValue = () => {
+        let highest = 0;
+        data.children.forEach((j) => {
+            j.children.forEach((c) => {
+                c.value > highest ? (highest = c.value) : null;
+            });
+        });
+        return highest;
+    };
+
+    const getDistance = (x, y) => {
+        return Math.abs(x - y);
+    };
+
+    const highestValue = getHighestValue();
     const clearSvg = () => {
         d3.select(treeRef.current).selectAll("svg").remove();
     };
@@ -49,25 +67,40 @@ const JurisdictionTree = ({ data, width, height, fontSize }) => {
             .append("rect")
             .attr("width", (d) => d.x1 - d.x0)
             .attr("height", (d) => d.y1 - d.y0)
-            .attr(
-                "fill",
-                (d) => backgroundColors[d.data.category] || "#0F1938"
-            );
-
-        nodes
-            .append("text")
-            .text((d) => `${d.data.name}: ${d.data.value}`)
-            .attr("font-size", (d) =>
-                d.x1 - d.x0 > 24
-                    ? `${fontSize}px`
-                    : `${fontSize - (d.x1 - d.x0) / 2}px`
-            )
-            .attr("x", (d) => (d.x1 - d.x0 > 24 ? 3 : 2))
-            .attr("y", (d) =>
-                d.x1 - d.x0 > 24 ? fontSize : fontSize - (d.x1 - d.x0) / 2
-            )
-            .call(wrapText)
-            .style("fill", (d) => fontColors[d.data.category] || "white");
+            .attr("fill", (d) => backgroundColors[d.data.category] || "#A9B6C6")
+            .each(function (node) {
+                const texts = d3.select(this.parentNode);
+                if (
+                    getDistance(node.x0, node.x1) > 20 &&
+                    getDistance(node.y0, node.y1) > 35
+                ) {
+                    texts
+                        .append("text")
+                        .text(`${node.data.name}: ${node.data.value}`)
+                        .attr("font-size", fontSize)
+                        .attr("x", 3)
+                        .attr("y", fontSize)
+                        .call(wrapText)
+                        .style(
+                            "fill",
+                            fontColors[node.data.category] || "white"
+                        );
+                } else if (
+                    getDistance(node.x0, node.x1) > 40 &&
+                    getDistance(node.y0, node.y1) > 20
+                ) {
+                    texts
+                        .append("text")
+                        .text(`${node.data.name}: ${node.data.value}`)
+                        .attr("font-size", fontSize)
+                        .attr("x", 3)
+                        .attr("y", fontSize)
+                        .style(
+                            "fill",
+                            fontColors[node.data.category] || "white"
+                        );
+                }
+            });
     };
 
     function wrapText(selection) {
