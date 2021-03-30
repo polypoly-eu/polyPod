@@ -262,7 +262,7 @@ const PolyExplorer = () => {
                             company.name.toLowerCase() === name.toLowerCase()
                     )
                 )}
-                onOpenRegionInfo={() =>
+                onOpenRegionInfo={(activeIndex) =>
                     handleExplorationInfoScreen(
                         "explorationJurisdictionsInfo",
                         "jurisdictions",
