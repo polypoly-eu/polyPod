@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="settings_imprint_heading">Impressum fehlt noch</string>
     <string name="settings_imprint_text">
-"
-Das Impressum fehlt leider noch.
+        "
+        <![CDATA[
+        <H1>Impressum fehlt noch</H1>
+        <p>
+            Das Impressum fehlt leider noch.
 
-Aber wir werden es bald hinzufügen.
-"
+            Aber wir werden es bald hinzufügen.
+        <p>
+        ]]>
+        "
     </string>
 
-    <string name="settings_privacy_policy_heading">Datenschutzerklärung fehlt noch</string>
     <string name="settings_privacy_policy_text">
-"
-Die Datenschutzerklärung fehlt leider noch.
-
-Aber wir werden sie bald hinzufügen.
-
-Wir sind uns der Ironie bewusst.
-"
+        "
+        <![CDATA[
+        <H1>Datenschutzerklärung fehlt noch</H1>
+        <p>
+            TEST Die Datenschutzerklärung fehlt leider noch.
+            Aber wir werden sie bald hinzufügen.
+            Wir sind uns der Ironie bewusst.
+        </p>
+        ]]>
+        "
     </string>
 
-    <string name="settings_terms_of_use_heading">Nutzungsvereinbarung fehlt noch</string>
 
     <string name="settings_terms_of_use_text">
-"
-Die Nutzungsvereinbarung fehlt leider noch.
+        "
+        <![CDATA[
+        <H1>Nutzungsvereinbarung fehlt noch</H1>
+        <p>
+            Die Nutzungsvereinbarung fehlt leider noch.
 
-Aber wir werden sie bald hinzufügen.
-"
+            Aber wir werden sie bald hinzufügen.
+        </p>
+        ]]>
+        "
     </string>
 </resources>
