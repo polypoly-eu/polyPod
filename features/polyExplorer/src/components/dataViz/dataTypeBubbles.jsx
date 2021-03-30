@@ -87,7 +87,7 @@ const DataTypeBubbles = ({
                           (8 + d.value / (highestValue / 4)).toString() + "px"
                       );
                   })
-                  .style("font-weight", "500")
+                  .style("font-family", "Jost Medium")
             : null;
 
         if (highlight) {
