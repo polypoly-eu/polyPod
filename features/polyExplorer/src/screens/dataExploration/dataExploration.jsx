@@ -621,9 +621,7 @@ const DataExplorationScreen = ({
                                     onOpenRegionInfo={onOpenRegionInfo}
                                 />
                                 <DataSharingLegend
-                                    onOpenRegionInfo={() => {
-                                        openJurisdictionInfo();
-                                    }}
+                                    onClick={openJurisdictionInfo}
                                 />
                                 <button
                                     className="explore-other"
