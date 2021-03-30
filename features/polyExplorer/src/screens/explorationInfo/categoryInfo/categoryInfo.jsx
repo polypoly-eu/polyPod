@@ -12,15 +12,16 @@ const CategoryInfo = ({ category, company, onClose }) => {
             headline={i18n.t("explorationCategoryInfoScreen:headline")}
             onClose={onClose}
         >
-            <p>
-                {
-                    globals.polypoly_parent_categories[category][
-                        i18n.t(
-                            "dataExplorationScreen:from.polyPedia.description"
-                        )
-                    ]
-                }
-            </p>
+            <p
+                dangerouslySetInnerHTML={{
+                    __html:
+                        globals.polypoly_parent_categories[category][
+                            i18n.t(
+                                "dataExplorationScreen:from.polyPedia.description"
+                            )
+                        ],
+                }}
+            />
             <img
                 src={`./images/infographics/category/${i18n.t(
                     "common:country.code"
@@ -30,13 +31,14 @@ const CategoryInfo = ({ category, company, onClose }) => {
                 .explanation ? (
                 <div>
                     <h2>{i18n.t("explorationCategoryInfoScreen")}</h2>
-                    <p>
-                        {
-                            highlights[company.name].dataTypeCategories[
-                                category
-                            ].explanation[i18n.t("common:country.code")]
-                        }
-                    </p>
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html:
+                                highlights[company.name].dataTypeCategories[
+                                    category
+                                ].explanation[i18n.t("common:country.code")],
+                        }}
+                    ></p>
                 </div>
             ) : null}
         </ExplorationInfoScreen>

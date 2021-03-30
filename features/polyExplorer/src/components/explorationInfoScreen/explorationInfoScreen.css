@@ -33,6 +33,10 @@
     padding: 0 30px;
 }
 
+.exploration-info p p {
+    padding: 0;
+}
+
 .exploration-info img,
 .exploration-info button {
     display: block;

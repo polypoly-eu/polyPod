@@ -3,7 +3,7 @@ const parentCategories = {
     technical: "pppc:TechnicalData",
     behavioral: "pppc:BehavioralData",
     financial: "pppc:FinancialData",
-    personal: "pppc:PersonalData",
+    individual: "pppc:IndividualData",
 };
 
 export default {
@@ -22,7 +22,7 @@ export default {
             },
         },
         dataTypeCategories: {
-            [parentCategories.personal]: {
+            [parentCategories.individual]: {
                 category: "dpv:Age",
             },
             [parentCategories.social]: {
@@ -67,7 +67,7 @@ export default {
             },
         },
         dataTypeCategories: {
-            [parentCategories.personal]: {
+            [parentCategories.individual]: {
                 category: "dpv:Age",
             },
             [parentCategories.social]: {
@@ -119,7 +119,7 @@ export default {
             },
         },
         dataTypeCategories: {
-            [parentCategories.personal]: {
+            [parentCategories.individual]: {
                 category: "dpv:Age",
             },
             [parentCategories.social]: {
@@ -169,7 +169,7 @@ export default {
             },
         },
         dataTypeCategories: {
-            [parentCategories.personal]: {
+            [parentCategories.individual]: {
                 category: "dpv:Age",
                 explanation: {
                     de: "Missing: Personal data",
@@ -218,7 +218,7 @@ export default {
             },
         },
         dataTypeCategories: {
-            [parentCategories.personal]: {
+            [parentCategories.individual]: {
                 category: "dpv:Age",
                 explanation: {
                     de: "Missing: Personal data",
@@ -267,7 +267,7 @@ export default {
             },
         },
         dataTypeCategories: {
-            [parentCategories.personal]: {
+            [parentCategories.individual]: {
                 category: "dpv:Age",
             },
             [parentCategories.social]: {
@@ -312,7 +312,7 @@ export default {
             },
         },
         dataTypeCategories: {
-            [parentCategories.personal]: {
+            [parentCategories.individual]: {
                 category: "dpv:Age",
             },
             [parentCategories.social]: {
