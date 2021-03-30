@@ -4,7 +4,7 @@ import * as d3 from "d3";
 const JurisdictionTree = ({ data }) => {
     const width = 300;
     const height = 250;
-    const fontSize = 10;
+    const fontSize = 14;
     let treeRef = useRef(null);
 
     const getDistance = (x, y) => {

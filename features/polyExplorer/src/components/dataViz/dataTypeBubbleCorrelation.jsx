@@ -232,7 +232,7 @@ const DataTypeBubbleCategory = ({
             .style("font-size", (d) => {
                 return (8 + d.value / 60).toString() + "px";
             })
-            .style("font-weight", "500");
+            .style("font-family", "Jost Medium");
 
         const correlationCenter = getCorrelationCenter();
 

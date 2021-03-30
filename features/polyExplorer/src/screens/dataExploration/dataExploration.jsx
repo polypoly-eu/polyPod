@@ -24,7 +24,7 @@ import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdiction
 const DataExplorationScreen = ({
     company,
     startSection,
-    startCategory = null,
+    startIndex = null,
     openMain,
     openDataTypesInfo,
     openCategoryInfo,
@@ -117,9 +117,7 @@ const DataExplorationScreen = ({
     };
 
     const getStartIndex = () => {
-        if (startSection === "dataTypesCategory" && startCategory)
-            return screens.indexOf(`dataTypesCategory_${startCategory}`);
-        return screens.indexOf(startSection);
+        return startIndex || screens.indexOf(startSection);
     };
 
     const getHighestValueObject = () => {
@@ -241,7 +239,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openDataTypesInfo();
+                            openDataTypesInfo(activeIndex);
                         }}
                     />
                     {filler}
@@ -297,7 +295,10 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCategoryInfo(activeScreen.split("_")[1]);
+                            openCategoryInfo(
+                                activeIndex,
+                                activeScreen.split("_")[1]
+                            );
                         }}
                     />
                     {filler}
@@ -349,7 +350,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCorrelationInfo();
+                            openCorrelationInfo(activeIndex);
                         }}
                     />
                 </div>
@@ -379,7 +380,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCompaniesInfo();
+                            openCompaniesInfo(activeIndex);
                         }}
                     />
                 </div>
@@ -444,7 +445,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCompaniesInfo();
+                            openCompaniesInfo(activeIndex);
                         }}
                     />
                 </div>
@@ -482,12 +483,25 @@ const DataExplorationScreen = ({
     }
 
     useEffect(() => {
+        if (!swiper) return;
+
         const scrollableElements = document.querySelectorAll(
             ".purpose-content .bars, .company-industry-list"
         );
         for (let element of scrollableElements)
             makeSwiperContentScrollable(element);
-    });
+
+        const tapToSwipeElements = document.querySelectorAll(
+            ".swiper-slide:not(.disable-tap-to-swipe)"
+        );
+        for (let element of tapToSwipeElements) {
+            if (element.querySelector(".slide-tap-target")) continue;
+            const slideTapTarget = document.createElement("div");
+            slideTapTarget.className = "slide-tap-target";
+            slideTapTarget.addEventListener("click", () => swiper.slideNext());
+            element.appendChild(slideTapTarget);
+        }
+    }, [swiper]);
 
     return (
         <Screen className="data-exploration">
@@ -534,10 +548,7 @@ const DataExplorationScreen = ({
                             </p>
                         </SwiperSlide>
                         {categories.map((group, index) => (
-                            <SwiperSlide
-                                key={index}
-                                onClick={() => swiper.slideNext()}
-                            >
+                            <SwiperSlide key={index}>
                                 <h2>
                                     {global.polypoly_parent_categories[group]?.[
                                         `Translation_${i18n.language.toUpperCase()}`
@@ -556,7 +567,7 @@ const DataExplorationScreen = ({
                             </p>
                         </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide className="disable-tap-to-swipe">
                             <div className="purpose-content">
                                 <h1>
                                     {i18n.t("common:sharing.prefix.purposes")}{" "}
@@ -568,7 +579,9 @@ const DataExplorationScreen = ({
                                 <PurposeChart
                                     purposes={company.dataSharingPurposes}
                                     openPopup={setPurposePopupContent}
-                                    openPurposeInfo={openPurposeInfo}
+                                    openPurposeInfo={() =>
+                                        openPurposeInfo(activeIndex)
+                                    }
                                 />
                             </div>
                         </SwiperSlide>
@@ -583,7 +596,7 @@ const DataExplorationScreen = ({
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide></SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide className="disable-tap-to-swipe">
                             <div className="companies-list-content">
                                 <h2>
                                     <span className="highlight-companies">
@@ -618,12 +631,14 @@ const DataExplorationScreen = ({
                                     data={getJurisdictionTreeFormat()}
                                 />
                                 <JurisdictionLegend
-                                    onOpenRegionInfo={onOpenRegionInfo}
+                                    onOpenRegionInfo={() =>
+                                        onOpenRegionInfo(activeIndex)
+                                    }
                                 />
                                 <DataSharingLegend
-                                    onOpenRegionInfo={() => {
-                                        openJurisdictionInfo();
-                                    }}
+                                    onClick={() =>
+                                        openJurisdictionInfo(activeIndex)
+                                    }
                                 />
                                 <button
                                     className="explore-other"
