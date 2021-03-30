@@ -199,7 +199,11 @@ const DataExplorationScreen = ({
                 const touchCurrent = event.targetTouches[0].pageY;
                 const touchesDiff = touchCurrent - touchStart;
                 const topToBottom = touchesDiff < 0 && startScroll === 0;
-                const atEnd = Math.abs(startScroll - scrollDiff) < 1;
+                // On some devices, it does not seem possible to scroll all the
+                // way to the bottom, it can be a few pixels off.
+                const scrollDeltaTolerance = 2;
+                const atEnd =
+                    Math.abs(startScroll - scrollDiff) < scrollDeltaTolerance;
                 const bottomToTop = touchesDiff > 0 && atEnd;
                 const middle = startScroll > 0 && !atEnd;
                 if (topToBottom || bottomToTop || middle)
