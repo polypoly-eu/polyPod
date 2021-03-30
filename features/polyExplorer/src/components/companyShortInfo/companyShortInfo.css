@@ -36,7 +36,8 @@
     width: 90%;
     font-family: "Jost Medium";
     font-size: 20px;
-    margin: 0;
+    margin: 0 0 6px 0;
+    line-height: 120%;
 }
 
 .info-box .company-location {

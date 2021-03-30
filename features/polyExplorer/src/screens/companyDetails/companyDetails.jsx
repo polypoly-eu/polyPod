@@ -20,6 +20,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         Luxembourg: "luxembourg",
         "WILMINGTON, New Castle": "wilmington",
         "WILMINGTON, DELAWARE": "wilmington",
+        WILMINGTON: "wilmington",
         Cupertino: "cupertino",
     };
 

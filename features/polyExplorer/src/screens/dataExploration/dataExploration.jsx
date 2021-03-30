@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import i18n from "../../i18n.js";
@@ -12,7 +12,7 @@ import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
-import CompaniesByIndustry from "../../components/companiesByIndustry/companiesByIndustry.jsx";
+import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
 
 import global from "../../data/global.json";
 import highlights from "../../data/highlights.js";
@@ -47,6 +47,18 @@ const DataExplorationScreen = ({
         });
         return total;
     };
+
+    const companyIndustryMap = useMemo(() => {
+        const map = {};
+        for (let company of dataRecipients) {
+            const industry =
+                company.industryCategory?.name[i18n.language] ||
+                i18n.t("common:category.undisclosed");
+            if (!map[industry]) map[industry] = [];
+            map[industry].push(company);
+        }
+        return map;
+    }, dataRecipients);
 
     const getJurisdictionTreeFormat = () => {
         const jurisdictionTreeFormatData = { name: "World", children: [] };
@@ -347,7 +359,7 @@ const DataExplorationScreen = ({
                     </h1>
                     <CompanyBubbles
                         view="flat"
-                        data={dataRecipients}
+                        companyIndustryMap={companyIndustryMap}
                         width="360"
                         height="360"
                         bubbleColor="#7EE8A2"
@@ -375,7 +387,7 @@ const DataExplorationScreen = ({
                     </h1>
                     <CompanyBubbles
                         view="flat"
-                        data={dataRecipients}
+                        companyIndustryMap={companyIndustryMap}
                         width="360"
                         height="360"
                         opacity={0.1}
@@ -411,7 +423,7 @@ const DataExplorationScreen = ({
                                 companiesCompanyHighlight: "companyHighlight",
                             }[activeScreen]
                         }
-                        data={dataRecipients}
+                        companyIndustryMap={companyIndustryMap}
                         width="360"
                         height="360"
                         bubbleColor="#7EE8A2"
@@ -462,7 +474,7 @@ const DataExplorationScreen = ({
 
     useEffect(() => {
         const scrollableElements = document.querySelectorAll(
-            ".purpose-content .bars, .companies-by-industry"
+            ".purpose-content .bars, .company-industry-list"
         );
         for (let element of scrollableElements)
             makeSwiperContentScrollable(element);
@@ -484,7 +496,7 @@ const DataExplorationScreen = ({
                         onSwiper={setSwiper}
                         direction="vertical"
                         initialSlide={activeIndex}
-                        onSlideChange={(swiper) =>
+                        onSlideChangeTransitionStart={(swiper) =>
                             setActiveIndex(swiper.activeIndex)
                         }
                     >
@@ -576,8 +588,9 @@ const DataExplorationScreen = ({
                                         { name: company.name }
                                     )}
                                 </p>
-                                <CompaniesByIndustry
-                                    companies={dataRecipients}
+                                <CompanyIndustryList
+                                    companyIndustryMap={companyIndustryMap}
+                                    ecoItems={dataRecipients.length > 100}
                                 />
                             </div>
                         </SwiperSlide>

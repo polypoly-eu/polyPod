@@ -40,7 +40,8 @@ const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
 const CompanyList = ({
     companies,
     globalData,
-    onActiveScreenChange,
+    onOpenFilters,
+    onOpenDetails,
     activeFilters,
     onRemoveFilter,
 }) => {
@@ -61,7 +62,7 @@ const CompanyList = ({
             >
                 <button
                     className="filter-button"
-                    onClick={() => onActiveScreenChange("companyFilter")}
+                    onClick={onOpenFilters}
                 ></button>
                 {Object.entries(companyGroups).map(
                     ([label, companies], index) => (
@@ -72,9 +73,7 @@ const CompanyList = ({
                                     <CompanyShortInfo
                                         key={index}
                                         company={company}
-                                        onActiveScreenChange={
-                                            onActiveScreenChange
-                                        }
+                                        onOpenDetails={onOpenDetails}
                                     />
                                 ))}
                             </div>

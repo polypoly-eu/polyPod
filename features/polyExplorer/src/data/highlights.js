@@ -23,7 +23,7 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: "Missing: Personal data",
                 },
             },
             [parentCategories.social]: {
@@ -85,7 +85,7 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: "Missing: Personal data",
                 },
             },
             [parentCategories.social]: {
@@ -114,7 +114,6 @@ export default {
                 explanation: {
                     de: "Finanzdaten sind einfach alle Informationen, die sich auf den Kauf und Verkauf von Waren, sowie den Transfer von Geld beziehen. Das können auch Daten wie das Gehalt einer Person, ihre Kreditkartennummer oder ob sie ein Auto besitzt, sein. ",
                     en: "Financial data is simply any information that relates to the buying and selling of goods, the transfer of money for any reason from one party to another. This can also be data like a person's salary, their credit card number or whether they own a car.",
-                },
             },
         },
         dataRecipient: {
@@ -142,6 +141,7 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
+
                     en: "Individual Data is anything that relates to a particular individual - however this is more specific than the broader Personal Data and is reserved for more sensitive datatypes like thoughts, intentions or sexual proclivities.",
                 },
             },
@@ -259,7 +259,7 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: "Missing: Personal data",
                 },
             },
             [parentCategories.social]: {
@@ -288,7 +288,6 @@ export default {
                 explanation: {
                     de: "Finanzdaten sind einfach alle Informationen, die sich auf den Kauf und Verkauf von Waren, sowie den Transfer von Geld beziehen. Das können auch Daten wie das Gehalt einer Person, ihre Kreditkartennummer oder ob sie ein Auto besitzt, sein. ",
                     en:"Financial data is simply any information that relates to the buying and selling of goods, the transfer of money for any reason from one party to another. This can also be data like a person's salary, their credit card number or whether they own a car. ",
-                },
             },
         },
         dataRecipient: {
@@ -315,7 +314,7 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: "Missing: Personal data",
                 },
             },
             [parentCategories.social]: {
@@ -373,7 +372,7 @@ export default {
             [parentCategories.personal]: {
                 category: "dpv:Age",
                 explanation: {
-                    de: "MISSING: Alter-Beschreibung",
+                    de: "Missing: Personal data",
                 },
             },
             [parentCategories.social]: {
