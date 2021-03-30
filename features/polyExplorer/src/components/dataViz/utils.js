@@ -5,7 +5,7 @@ function appendLabel(container, text, props = {}) {
         .text(text)
         .style("fill", "#F7FAFC")
         .style("font-size", props.fontSize || 14)
-        .style("font-weight", "500")
+        .style("font-family", "Jost Medium")
         .style("text-anchor", "middle")
         .style("alignment-baseline", "middle");
 
