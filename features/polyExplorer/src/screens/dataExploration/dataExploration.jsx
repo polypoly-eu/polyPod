@@ -24,7 +24,7 @@ import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdiction
 const DataExplorationScreen = ({
     company,
     startSection,
-    startCategory = null,
+    startIndex = null,
     openMain,
     openDataTypesInfo,
     openCategoryInfo,
@@ -117,9 +117,7 @@ const DataExplorationScreen = ({
     };
 
     const getStartIndex = () => {
-        if (startSection === "dataTypesCategory" && startCategory)
-            return screens.indexOf(`dataTypesCategory_${startCategory}`);
-        return screens.indexOf(startSection);
+        return startIndex || screens.indexOf(startSection);
     };
 
     const getHighestValueObject = () => {
@@ -241,7 +239,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openDataTypesInfo();
+                            openDataTypesInfo(activeIndex);
                         }}
                     />
                     {filler}
@@ -297,7 +295,10 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCategoryInfo(activeScreen.split("_")[1]);
+                            openCategoryInfo(
+                                activeIndex,
+                                activeScreen.split("_")[1]
+                            );
                         }}
                     />
                     {filler}
@@ -349,7 +350,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCorrelationInfo();
+                            openCorrelationInfo(activeIndex);
                         }}
                     />
                 </div>
@@ -379,7 +380,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCompaniesInfo();
+                            openCompaniesInfo(activeIndex);
                         }}
                     />
                 </div>
@@ -444,7 +445,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCompaniesInfo();
+                            openCompaniesInfo(activeIndex);
                         }}
                     />
                 </div>
@@ -578,7 +579,9 @@ const DataExplorationScreen = ({
                                 <PurposeChart
                                     purposes={company.dataSharingPurposes}
                                     openPopup={setPurposePopupContent}
-                                    openPurposeInfo={openPurposeInfo}
+                                    openPurposeInfo={() =>
+                                        openPurposeInfo(activeIndex)
+                                    }
                                 />
                             </div>
                         </SwiperSlide>
@@ -628,10 +631,14 @@ const DataExplorationScreen = ({
                                     data={getJurisdictionTreeFormat()}
                                 />
                                 <JurisdictionLegend
-                                    onOpenRegionInfo={onOpenRegionInfo}
+                                    onOpenRegionInfo={() =>
+                                        onOpenRegionInfo(activeIndex)
+                                    }
                                 />
                                 <DataSharingLegend
-                                    onClick={openJurisdictionInfo}
+                                    onClick={() =>
+                                        openJurisdictionInfo(activeIndex)
+                                    }
                                 />
                                 <button
                                     className="explore-other"
