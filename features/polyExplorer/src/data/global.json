@@ -68,12 +68,12 @@
         "AW": {
             "Name_EN": "Aruba",
             "Name_DE": "Aruba",
-            "dataRegion": "Unknown"
+            "dataRegion": "EU-GDPR"
         },
         "AX": {
             "Name_EN": "Åland Islands",
             "Name_DE": "Åland-Inseln",
-            "dataRegion": "Unknown"
+            "dataRegion": "EU-GDPR"
         },
         "AZ": {
             "Name_EN": "Azerbaijan",
@@ -108,7 +108,7 @@
         "BG": {
             "Name_EN": "Bulgaria",
             "Name_DE": "Bulgarien",
-            "dataRegion": "Unknown"
+            "dataRegion": "EU-GDPR"
         },
         "BH": {
             "Name_EN": "Bahrain",
@@ -208,7 +208,7 @@
         "CH": {
             "Name_EN": "Switzerland",
             "Name_DE": "Schweiz",
-            "dataRegion": "EU-GDPR"
+            "dataRegion": "Unknown"
         },
         "CI": {
             "Name_EN": "Côte d'Ivoire",
@@ -263,7 +263,7 @@
         "CX": {
             "Name_EN": "Christmas Island",
             "Name_DE": "Weihnachtsinsel",
-            "dataRegion": "Unknown"
+            "dataRegion": "Five-Eyes"
         },
         "CY": {
             "Name_EN": "Cyprus",
@@ -313,7 +313,7 @@
         "EE": {
             "Name_EN": "Estonia",
             "Name_DE": "Estland",
-            "dataRegion": "Unknown"
+            "dataRegion": "EU-GDPR"
         },
         "EG": {
             "Name_EN": "Egypt",
@@ -333,7 +333,7 @@
         "ES": {
             "Name_EN": "Spain",
             "Name_DE": "Spanien",
-            "dataRegion": "Unknown"
+            "dataRegion": "EU-GDPR"
         },
         "ET": {
             "Name_EN": "Ethiopia",
@@ -363,7 +363,7 @@
         "FO": {
             "Name_EN": "Faroe Islands",
             "Name_DE": "Färöer Inseln",
-            "dataRegion": "Unknown"
+            "dataRegion": "EU-GDPR"
         },
         "FR": {
             "Name_EN": "France",
@@ -398,7 +398,7 @@
         "GG": {
             "Name_EN": "Guernsey",
             "Name_DE": "Guernsey",
-            "dataRegion": "EU-GDPR"
+            "dataRegion": "Five-Eyes"
         },
         "GH": {
             "Name_EN": "Ghana",
@@ -408,12 +408,12 @@
         "GI": {
             "Name_EN": "Gibraltar",
             "Name_DE": "Gibraltar",
-            "dataRegion": "EU-GDPR"
+            "dataRegion": "Five-Eyes"
         },
         "GL": {
             "Name_EN": "Greenland",
             "Name_DE": "Grönland",
-            "dataRegion": "Unknown"
+            "dataRegion": "EU-GDPR"
         },
         "GM": {
             "Name_EN": "Gambia",
@@ -453,7 +453,7 @@
         "GU": {
             "Name_EN": "Guam",
             "Name_DE": "Guam",
-            "dataRegion": "Unknown"
+            "dataRegion": "Five-Eyes"
         },
         "GW": {
             "Name_EN": "Guinea-Bissau",
@@ -468,12 +468,12 @@
         "HK": {
             "Name_EN": "Hong Kong",
             "Name_DE": "Hongkong",
-            "dataRegion": "Unknown"
+            "dataRegion": "China"
         },
         "HM": {
             "Name_EN": "Heard Island and McDonald Islands",
             "Name_DE": "Heard-Insel und McDonald-Inseln",
-            "dataRegion": "Unknown"
+            "dataRegion": "Five-Eyes"
         },
         "HN": {
             "Name_EN": "Honduras",
@@ -538,7 +538,7 @@
         "IS": {
             "Name_EN": "Iceland",
             "Name_DE": "Island",
-            "dataRegion": "Unknown"
+            "dataRegion": "EU-GDPR"
         },
         "IT": {
             "Name_EN": "Italy",
@@ -733,12 +733,12 @@
         "MO": {
             "Name_EN": "Macao",
             "Name_DE": "Macao",
-            "dataRegion": "Unknown"
+            "dataRegion": "China"
         },
         "MP": {
             "Name_EN": "Northern Mariana Islands",
             "Name_DE": "Nördliche Marianen",
-            "dataRegion": "Unknown"
+            "dataRegion": "Five-Eyes"
         },
         "MQ": {
             "Name_EN": "Martinique",
@@ -938,7 +938,7 @@
         "RO": {
             "Name_EN": "Romania",
             "Name_DE": "Rumänien",
-            "dataRegion": "Unknown"
+            "dataRegion": "EU-GDPR"
         },
         "RS": {
             "Name_EN": "Serbia",
@@ -1133,7 +1133,7 @@
         "TW": {
             "Name_EN": "Taiwan, Province of China",
             "Name_DE": "Taiwan, Provinz China",
-            "dataRegion": ""
+            "dataRegion": "Unknown"
         },
         "TZ": {
             "Name_EN": "Tanzania, United Republic of",
@@ -1815,7 +1815,7 @@
             "dpv:Superclass": "dpv:Language",
             "Translation_DE": "Akzent",
             "Translation_EN": "Accent",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über einen Sprach- und Sprechakzent.",
             "Explanation_EN": "Information about an linguistic and speech accents."
@@ -1845,7 +1845,7 @@
             "dpv:Superclass": "dpv:PhysicalCharacteristic",
             "Translation_DE": "Alter",
             "Translation_EN": "Age",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
             "Explanation_DE": "Informationen über das Alter",
             "Explanation_EN": "Information about age"
@@ -1925,7 +1925,7 @@
             "dpv:Superclass": "dpv:Identifying;dpv:SpecialCategoryPersonalData",
             "Translation_DE": "Biometrisch",
             "Translation_EN": "Biometric",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über biometrische Daten und biometrische Merkmale.",
             "Explanation_EN": "Information about biometrics and biometric characteristics."
@@ -1935,7 +1935,7 @@
             "dpv:Superclass": "dpv:MedicalHealth",
             "Translation_DE": "Blutgruppe",
             "Translation_EN": "Blood Type",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Blutgruppe.",
             "Explanation_EN": "Information about blood type."
@@ -1995,7 +1995,7 @@
             "dpv:Superclass": "dpv:PublicLife",
             "Translation_DE": "Zeichen",
             "Translation_EN": "Character",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über den Charakter im öffentlichen Raum",
             "Explanation_EN": "Information about character in the public sphere"
@@ -2045,7 +2045,7 @@
             "dpv:Superclass": "dpv:Location",
             "Translation_DE": "Land",
             "Translation_EN": "Country",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:SocialData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über das Land z.B. Wohnsitz, Reise.",
             "Explanation_EN": "Information about country e.g. residence, travel."
@@ -2135,7 +2135,7 @@
             "dpv:Superclass": "dpv:Criminal",
             "Translation_DE": "Strafrechtliche Anklage",
             "Translation_EN": "Criminal Charge",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Strafanzeigen.",
             "Explanation_EN": "Information about criminal charges."
@@ -2145,7 +2145,7 @@
             "dpv:Superclass": "dpv:Criminal",
             "Translation_DE": "Strafrechtliche Verurteilung",
             "Translation_EN": "Criminal Conviction",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über strafrechtliche Verurteilungen.",
             "Explanation_EN": "Information about criminal convictions."
@@ -2155,7 +2155,7 @@
             "dpv:Superclass": "dpv:Criminal",
             "Translation_DE": "Strafrechtliche Begnadigung",
             "Translation_EN": "Criminal Pardon",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über strafrechtliche Begnadigungen.",
             "Explanation_EN": "Information about criminal pardons."
@@ -2165,7 +2165,7 @@
             "dpv:Superclass": "dpv:Behavioral",
             "Translation_DE": "Auftreten",
             "Translation_EN": "Demeanor",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über das Verhalten.",
             "Explanation_EN": "Information about demeanor."
@@ -2235,7 +2235,7 @@
             "dpv:Superclass": "dpv:Language",
             "Translation_DE": "Dialekt",
             "Translation_EN": "Dialect",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen zu sprachlichen Dialekten.",
             "Explanation_EN": "Information about linguistic dialects."
@@ -2245,7 +2245,7 @@
             "dpv:Superclass": "dpv:MedicalHealth",
             "Translation_DE": "Behinderung",
             "Translation_EN": "Disability",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Behinderungen.",
             "Explanation_EN": "Information about disabilities."
@@ -2265,7 +2265,7 @@
             "dpv:Superclass": "dpv:Interest",
             "Translation_DE": "Nicht mögen",
             "Translation_EN": "Dislike",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Abneigungen oder Vorlieben bezüglich Abstoßungen.",
             "Explanation_EN": "Information about dislikes or preferences regarding repulsions."
@@ -2295,7 +2295,7 @@
             "dpv:Superclass": "dpv:MedicalHealth",
             "Translation_DE": "Ergebnis des Drogentests",
             "Translation_EN": "Drug Test Result",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Drogentestergebnisse.",
             "Explanation_EN": "Information about drug test results."
@@ -2305,7 +2305,7 @@
             "dpv:Superclass": "dpv:Contact",
             "Translation_DE": "E-Mail Adresse",
             "Translation_EN": "Email Address",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über E-Mail-Adressen.",
             "Explanation_EN": "Information about Email address."
@@ -2315,7 +2315,7 @@
             "dpv:Superclass": "dpv:Communication",
             "Translation_DE": "E-Mail-Inhalt",
             "Translation_EN": "Email Content",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über den Inhalt von gesendeten oder empfangenen Emails",
             "Explanation_EN": "Information about the contents of Emails sent or recieved"
@@ -2335,7 +2335,7 @@
             "dpv:Superclass": "dpv:External",
             "Translation_DE": "Ethnizität",
             "Translation_EN": "Ethnicity",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die ethnische Herkunft und Abstammung",
             "Explanation_EN": "Information about ethnic origins and lineage"
@@ -2345,7 +2345,7 @@
             "dpv:Superclass": "dpv:Ethnicity;dpv:SpecialCategoryPersonalData",
             "Translation_DE": "Ethnische Herkunft",
             "Translation_EN": "Ethnic Origin",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die ethnische Herkunft",
             "Explanation_EN": "Information about ethnic origin"
@@ -2355,7 +2355,7 @@
             "dpv:Superclass": "dpv:PersonalDataCategory",
             "Translation_DE": "Extern",
             "Translation_EN": "External",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über äußere Merkmale, die beobachtet werden können",
             "Explanation_EN": "Information about external characteristics that can be observed"
@@ -2365,7 +2365,7 @@
             "dpv:Superclass": "dpv:Social",
             "Translation_DE": "Familie",
             "Translation_EN": "Family",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Familie und Beziehungen",
             "Explanation_EN": "Information about family and relationships"
@@ -2375,7 +2375,7 @@
             "dpv:Superclass": "dpv:HealthHistory",
             "Translation_DE": "Gesundheitsgeschichte der Familie",
             "Translation_EN": "Family Health History",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die gesundheitliche Vorgeschichte der Familie.",
             "Explanation_EN": "Information about family health history."
@@ -2385,7 +2385,7 @@
             "dpv:Superclass": "dpv:Preference",
             "Translation_DE": "Favorit",
             "Translation_EN": "Favorite",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Lieblinge",
             "Explanation_EN": "Information about favorites"
@@ -2395,7 +2395,7 @@
             "dpv:Superclass": "dpv:Favorite",
             "Translation_DE": "Lieblingsfarbe",
             "Translation_EN": "Favorite Color",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Lieblingsfarbe.",
             "Explanation_EN": "Information about favorite color."
@@ -2405,7 +2405,7 @@
             "dpv:Superclass": "dpv:Favorite",
             "Translation_DE": "Lieblingsessen",
             "Translation_EN": "Favorite Food",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über das Lieblingsessen.",
             "Explanation_EN": "Information about favorite food."
@@ -2415,7 +2415,7 @@
             "dpv:Superclass": "dpv:Favorite",
             "Translation_DE": "Bevorzugte Musik",
             "Translation_EN": "Favorite Music",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Lieblingsmusik.",
             "Explanation_EN": "Information about favorite music."
@@ -2425,7 +2425,7 @@
             "dpv:Superclass": "dpv:Sexual",
             "Translation_DE": "Fetisch",
             "Translation_EN": "Fetish",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über sexuelle Fetische einer Person",
             "Explanation_EN": "Information an individual's sexual fetishes"
@@ -2465,7 +2465,7 @@
             "dpv:Superclass": "dpv:Biometric",
             "Translation_DE": "Fingerabdruck",
             "Translation_EN": "Fingerprint",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Fingerabdrücke, die für biometrische Zwecke verwendet werden.",
             "Explanation_EN": "Information about fingerprint used for biometric purposes."
@@ -2485,7 +2485,7 @@
             "dpv:Superclass": "dpv:PhysicalCharacteristic",
             "Translation_DE": "Geschlecht",
             "Translation_EN": "Gender",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über das Geschlecht",
             "Explanation_EN": "Information about gender"
@@ -2505,7 +2505,7 @@
             "dpv:Superclass": "dpv:Demographic",
             "Translation_DE": "Geografisch",
             "Translation_EN": "Geographic",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über den Standort oder basierend auf der Geografie (z. B. die Heimatadresse)",
             "Explanation_EN": "Information about location or based on geography (e.g., home address)"
@@ -2535,7 +2535,7 @@
             "dpv:Superclass": "dpv:PhysicalCharacteristic",
             "Translation_DE": "Haarfarbe",
             "Translation_EN": "Hair Color",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Haarfarbe",
             "Explanation_EN": "Information about hair colour"
@@ -2545,7 +2545,7 @@
             "dpv:Superclass": "dpv:MedicalHealth",
             "Translation_DE": "Gesundheit",
             "Translation_EN": "Health",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Gesundheit.",
             "Explanation_EN": "Information about health."
@@ -2555,7 +2555,7 @@
             "dpv:Superclass": "dpv:MedicalHealth",
             "Translation_DE": "Gesundheit Geschichte",
             "Translation_EN": "Health History",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Gesundheitshistorie.",
             "Explanation_EN": "Information about health history."
@@ -2565,7 +2565,7 @@
             "dpv:Superclass": "dpv:MedicalHealth",
             "Translation_DE": "Gesundheitsakte",
             "Translation_EN": "Health Record",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Gesundheitsakte.",
             "Explanation_EN": "Information about health record."
@@ -2575,7 +2575,7 @@
             "dpv:Superclass": "dpv:PhysicalCharacteristic",
             "Translation_DE": "Höhe",
             "Translation_EN": "Height",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Körpergröße",
             "Explanation_EN": "Information about physical height"
@@ -2585,7 +2585,7 @@
             "dpv:Superclass": "dpv:PersonalDataCategory",
             "Translation_DE": "Historisch",
             "Translation_EN": "Historical",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über historische Daten, die sich auf die Geschichte oder vergangene Ereignisse beziehen oder für diese relevant sind",
             "Explanation_EN": "Information about historical data related to or relevant regarding history or past events"
@@ -2605,7 +2605,7 @@
             "dpv:Superclass": "dpv:External",
             "Translation_DE": "Identifizieren",
             "Translation_EN": "Identifying",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen, die eine Einzelperson oder eine Gruppe eindeutig oder halbeindeutig identifizieren",
             "Explanation_EN": "Information that uniquely or semi-uniquely identifies an individual or a group"
@@ -2635,7 +2635,7 @@
             "dpv:Superclass": "dpv:HealthHistory",
             "Translation_DE": "Individuelle Gesundheitsgeschichte",
             "Translation_EN": "Individual Health History",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Gesundheitshistorie.",
             "Explanation_EN": "Information about information health history."
@@ -2645,7 +2645,7 @@
             "dpv:Superclass": "dpv:Preference",
             "Translation_DE": "Intention",
             "Translation_EN": "Intention",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Absichten",
             "Explanation_EN": "Information about intentions"
@@ -2665,7 +2665,7 @@
             "dpv:Superclass": "dpv:Preference",
             "Translation_DE": "Interesse",
             "Translation_EN": "Interest",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:SocialData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Interessen",
             "Explanation_EN": "Information about interests"
@@ -2675,7 +2675,7 @@
             "dpv:Superclass": "dpv:PersonalDataCategory",
             "Translation_DE": "Intern",
             "Translation_EN": "Internal",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über interne Merkmale, die nicht gesehen oder beobachtet werden können",
             "Explanation_EN": "Information about internal characteristics that cannot be seen or observed"
@@ -2705,7 +2705,7 @@
             "dpv:Superclass": "dpv:Internal",
             "Translation_DE": "Wissen und Überzeugungen",
             "Translation_EN": "Knowledge and Beliefs",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Wissen und Überzeugungen",
             "Explanation_EN": "Information about knowledge and beliefs"
@@ -2735,7 +2735,7 @@
             "dpv:Superclass": "dpv:Interest",
             "Translation_DE": "Mögen",
             "Translation_EN": "Like",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Vorlieben oder Präferenzen zu Zuneigungen.",
             "Explanation_EN": "Information about likes or preferences regarding attractions."
@@ -2765,7 +2765,7 @@
             "dpv:Superclass": "dpv:Tracking",
             "Translation_DE": "Standort",
             "Translation_EN": "Location",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über den Standort",
             "Explanation_EN": "Information about location"
@@ -2805,7 +2805,7 @@
             "dpv:Superclass": "dpv:External;dpv:SpecialCategoryPersonalData",
             "Translation_DE": "Medizinische Gesundheit",
             "Translation_EN": "Medical Health",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Gesundheit, medizinische Bedingungen oder Gesundheitsvorsorge",
             "Explanation_EN": "Information about health, medical conditions or health care"
@@ -2815,7 +2815,7 @@
             "dpv:Superclass": "dpv:Health",
             "Translation_DE": "Psychische Gesundheit",
             "Translation_EN": "Mental Health",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die psychische Gesundheit.",
             "Explanation_EN": "Information about mental health."
@@ -2825,7 +2825,7 @@
             "dpv:Superclass": "dpv:Identifying",
             "Translation_DE": "Name",
             "Translation_EN": "Name",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Namen, die mit dem Gerät verbunden sind oder als Vornamen oder Spitznamen verwendet werden.",
             "Explanation_EN": "Information about names associated or used as given name or nickname."
@@ -2835,7 +2835,7 @@
             "dpv:Superclass": "dpv:Identifying",
             "Translation_DE": "Offizieller Ausweis",
             "Translation_EN": "Official ID",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über eine offizielle Kennung oder ein Ausweisdokument",
             "Explanation_EN": "Information about an official identifier or identification document"
@@ -2855,7 +2855,7 @@
             "dpv:Superclass": "dpv:Preference",
             "Translation_DE": "Meinung",
             "Translation_EN": "Opinion",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Meinungen",
             "Explanation_EN": "Information about opinions"
@@ -2885,7 +2885,7 @@
             "dpv:Superclass": "dpv:Authenticating",
             "Translation_DE": "Passwort",
             "Translation_EN": "Password",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über ein Passwort, das bei der Authentifizierung der Person als Benutzer beim Zugriff auf ein System verwendet wird.",
             "Explanation_EN": "Information about password used in the process of authenticating the individual as a user accessing a system."
@@ -2925,7 +2925,7 @@
             "dpv:Superclass": "dpv:Behavioral",
             "Translation_DE": "Persönlichkeit",
             "Translation_EN": "Personality",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Persönlichkeit (z. B. Kategorisierung in Bezug auf die Big Five Persönlichkeitsmerkmale)",
             "Explanation_EN": "Information about personality (e.g., categorization in terms of the Big Five personality traits)"
@@ -2935,7 +2935,7 @@
             "dpv:Superclass": "",
             "Translation_DE": "Personal Data",
             "Translation_EN": "Personal Data",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Eine Kategorie von persönlichen Daten",
             "Explanation_EN": "A category of personal data"
@@ -2955,7 +2955,7 @@
             "dpv:Superclass": "dpv:KnowledgeBelief;dpv:SpecialCategoryPersonalData",
             "Translation_DE": "Philosophischer Glaube",
             "Translation_EN": "Philosophical Belief",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Wissen und Überzeugungen",
             "Explanation_EN": "Information about knowledge and beliefs"
@@ -2965,7 +2965,7 @@
             "dpv:Superclass": "dpv:Contact",
             "Translation_DE": "Physikalische Adresse",
             "Translation_EN": "Physical Address",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die physische Adresse.",
             "Explanation_EN": "Information about physical address."
@@ -2975,7 +2975,7 @@
             "dpv:Superclass": "dpv:External",
             "Translation_DE": "Physikalisches Merkmal",
             "Translation_EN": "PhysicalCharacteristic",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über körperliche Merkmale",
             "Explanation_EN": "Information about physical characteristics"
@@ -2985,7 +2985,7 @@
             "dpv:Superclass": "dpv:Health",
             "Translation_DE": "Körperliche Gesundheit",
             "Translation_EN": "Physical Health",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die körperliche Gesundheit.",
             "Explanation_EN": "Information about physical health."
@@ -2995,7 +2995,7 @@
             "dpv:Superclass": "dpv:Demographic",
             "Translation_DE": "Physikalisches Eigenschaft",
             "Translation_EN": "Physical Trait",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über definierende Eigenschaften oder Merkmale in Bezug auf den Körper.",
             "Explanation_EN": "Information about defining traits or features regarding the body."
@@ -3015,7 +3015,7 @@
             "dpv:Superclass": "dpv:PhysicalCharacteristic",
             "Translation_DE": "Piercing",
             "Translation_EN": "Piercing",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Piercings",
             "Explanation_EN": "Information about piercings"
@@ -3035,7 +3035,7 @@
             "dpv:Superclass": "dpv:PublicLife;dpv:SpecialCategoryPersonalData",
             "Translation_DE": "Politische Zugehörigkeit",
             "Translation_EN": "Political Affiliation",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über politische Zugehörigkeit und Geschichte",
             "Explanation_EN": "Information about political affiliation and history"
@@ -3045,7 +3045,7 @@
             "dpv:Superclass": "dpv:Internal",
             "Translation_DE": "Präferenz",
             "Translation_EN": "Preference",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Vorlieben oder Interessen",
             "Explanation_EN": "Information about preferences or interests"
@@ -3055,7 +3055,7 @@
             "dpv:Superclass": "dpv:MedicalHealth",
             "Translation_DE": "Verschreibung",
             "Translation_EN": "Prescription",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über medizinische und pharmazeutische Verordnungen",
             "Explanation_EN": "Information about medical and pharmaceutical prescriptions"
@@ -3065,7 +3065,7 @@
             "dpv:Superclass": "dpv:Preference",
             "Translation_DE": "Datenschutz-Präferenz",
             "Translation_EN": "Privacy Preference",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Datenschutzpräferenzen",
             "Explanation_EN": "Information about privacy preferences"
@@ -3075,7 +3075,7 @@
             "dpv:Superclass": "dpv:Sexual",
             "Translation_DE": "Proclivitie",
             "Translation_EN": "Proclivitiy",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Neigungen im sexuellen Kontext",
             "Explanation_EN": "Information about proclivities in a sexual context"
@@ -3145,7 +3145,7 @@
             "dpv:Superclass": "dpv:Transactional",
             "Translation_DE": "Einkäufe und Ausgabegewohnheiten",
             "Translation_EN": "Purchases and Spending Habit",
-            "Polypoly_Parent_Category": "pppc:FinancialData",
+            "Polypoly_Parent_Category": "pppc:BehavioralData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Analyse der getätigten Einkäufe und des ausgegebenen Geldes, ausgedrückt als Gewohnheit, z. B. monatliche Einkaufstrends",
             "Explanation_EN": "Information about analysis of purchases made and money spent expressed as a habit e.g. monthly shopping trends"
@@ -3155,7 +3155,7 @@
             "dpv:Superclass": "dpv:Ethnicity;dpv:SpecialCategoryPersonalData",
             "Translation_DE": "Rasse",
             "Translation_EN": "Race",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Rasse oder Rassengeschichte",
             "Explanation_EN": "Information about race or racial history."
@@ -3185,7 +3185,7 @@
             "dpv:Superclass": "dpv:PublicLife;dpv:SpecialCategoryPersonalData",
             "Translation_DE": "Religion",
             "Translation_EN": "Religion",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Religion, religiöse Neigungen und religiöse Geschichte.",
             "Explanation_EN": "Information about religion, religious inclinations, and religious history."
@@ -3195,7 +3195,7 @@
             "dpv:Superclass": "dpv:KnowledgeBelief;dpv:SpecialCategoryPersonalData",
             "Translation_DE": "Religiöser Glaube",
             "Translation_EN": "Religious Belief",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Religion und religiöse Überzeugungen.",
             "Explanation_EN": "Information about religion and religious beliefs."
@@ -3215,7 +3215,7 @@
             "dpv:Superclass": "dpv:Location",
             "Translation_DE": "Zimmernummer",
             "Translation_EN": "Room Number",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über den Standort, ausgedrückt als Raumnummer oder ähnliche Nummerierungssysteme",
             "Explanation_EN": "Information about location expressed as Room number or similar numbering systems"
@@ -3275,7 +3275,7 @@
             "dpv:Superclass": "dpv:External;dpv:SpecialCategoryPersonalData",
             "Translation_DE": "Sexuell",
             "Translation_EN": "Sexual",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Sexualität und sexuelle Vorgeschichte",
             "Explanation_EN": "Information about sexuality and sexual history"
@@ -3305,7 +3305,7 @@
             "dpv:Superclass": "dpv:FamilyStructure",
             "Translation_DE": "Geschwister",
             "Translation_EN": "Sibling",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über ein oder mehrere Geschwister",
             "Explanation_EN": "Information about sibling(s)."
@@ -3315,7 +3315,7 @@
             "dpv:Superclass": "dpv:PhysicalCharacteristic",
             "Translation_DE": "Hautton",
             "Translation_EN": "Skin Tone",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über die Hautfarbe",
             "Explanation_EN": "Information about skin tone"
@@ -3365,7 +3365,7 @@
             "dpv:Superclass": "dpv:PersonalDataCategory",
             "Translation_DE": "Besondere Kategorie personenbezogener Daten",
             "Translation_EN": "Special Category Personal Data",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Personal Data, die zu einer der \"besonderen Kategorien\" gehören, die sensibler sind und zusätzliche Maßnahmen erfordern",
             "Explanation_EN": "Personal data belonging to one of 'special categories' that are more sensitive and require additional measures"
@@ -3375,7 +3375,7 @@
             "dpv:Superclass": "dpv:PhysicalCharacteristic",
             "Translation_DE": "Tätowierung",
             "Translation_EN": "Tattoo",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Tätowierungen",
             "Explanation_EN": "Information about tattoos"
@@ -3385,7 +3385,7 @@
             "dpv:Superclass": "dpv:Transactional",
             "Translation_DE": "Steuer",
             "Translation_EN": "Tax",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über finanzielle Steuern, z. B. Steueraufzeichnungen oder fällige Steuern",
             "Explanation_EN": "Information about financial tax e.g. tax records or tax due"
@@ -3405,7 +3405,7 @@
             "dpv:Superclass": "dpv:KnowledgeBelief",
             "Translation_DE": "Gedanke",
             "Translation_EN": "Thought",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Gedanken",
             "Explanation_EN": "Information about thoughts"
@@ -3415,10 +3415,10 @@
             "dpv:Superclass": "dpv:PersonalDataCategory",
             "Translation_DE": "Nachverfolgung",
             "Translation_EN": "Tracking",
-            "Polypoly_Parent_Category": "pppc:BehavioralData",
+            "Polypoly_Parent_Category": "pppc:TechnicalData",
             "Synonyms": "",
-            "Explanation_DE": "Informationen über Gedanken",
-            "Explanation_EN": "Information about thoughts"
+            "Explanation_DE": "Informationen die zum Verfolgen einer Person oder Gruppe verwendet werden z. B. Standort oder E-Mail",
+            "Explanation_EN": "Information used to track an individual or group e.g. location or email"
         },
         "dpv:Transaction": {
             "dpv:Category": "dpv:Transaction",
@@ -3465,7 +3465,7 @@
             "dpv:Superclass": "dpv:Identifying",
             "Translation_DE": "Benutzername",
             "Translation_EN": "Username",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über Benutzernamen.",
             "Explanation_EN": "Information about usernames."
@@ -3495,7 +3495,7 @@
             "dpv:Superclass": "dpv:PhysicalCharacteristic",
             "Translation_DE": "Voicemail",
             "Translation_EN": "Weight",
-            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Polypoly_Parent_Category": "pppc:IndividualData",
             "Synonyms": "",
             "Explanation_DE": "Informationen über das Körpergewicht",
             "Explanation_EN": "Information about physical weight"
@@ -3525,27 +3525,44 @@
         "pppc:BehavioralData": {
             "Polypoly_Parent_Category": "pppc:BehavioralData",
             "Translation_EN": "Behavioral Data",
-            "Translation_DE": "Verhaltensdaten"
+            "Translation_DE": "Verhaltensdaten",
+            "Description_EN": "Behavioural data is information related to a person's actions. This can be clickstream data about how a person browses a website, uses their device, or something more like \"this person went on 3 holidays this year.\" ",
+            "Description_DE": "Verhaltensdaten sind Informationen, die sich auf die Handlungen einer Person beziehen. Das können Clickstream-Daten darüber sein, wie eine Person auf einer Website surft, ihr Gerät benutzt oder weitere Informationen als „diese Person hat dieses Jahr drei Urlaube gemacht\". "
         },
         "pppc:FinancialData": {
             "Polypoly_Parent_Category": "pppc:FinancialData",
             "Translation_EN": "Financial Data",
-            "Translation_DE": "Wirtschaftliche Daten"
+            "Translation_DE": "Wirtschaftliche Daten",
+            "Description_EN": "Financial data is simply any information that relates to the buying and selling of goods, the transfer of money for any reason from one party to another. This can also be data like a person's salary, their credit card number or whether they own a car.",
+            "Description_DE": "Finanzdaten sind einfach alle Informationen, die sich auf den Kauf und Verkauf von Waren, sowie den Transfer von Geld beziehen. Das können auch Daten wie das Gehalt einer Person, ihre Kreditkartennummer oder ob sie ein Auto besitzt, sein. "
         },
-        "pppc:PersonalData": {
-            "Polypoly_Parent_Category": "pppc:PersonalData",
-            "Translation_EN": "Personal Data",
-            "Translation_DE": "Persönliche Daten"
+        "pppc:IndividualData": {
+            "Polypoly_Parent_Category": "pppc:IndividualData",
+            "Translation_EN": "Individual Data",
+            "Translation_DE": "Individuelle Daten",
+            "Description_EN": "Individual Data is anything that relates to a particular individual – however this is more specific than the broader Personal Data and is reserved for more sensitive datatypes like thoughts, intentions or sexual proclivities.",
+            "Description_DE": "Personenbezogene Daten sind alle Daten, die sich auf eine bestimmte Person beziehen – diese sind jedoch spezifischer als die weiter gefassten personenbezogenen Daten und sind für sensiblere Datentypen wie Gedanken, Absichten oder sexuelle Neigungen reserviert. "
         },
         "pppc:SocialData": {
             "Polypoly_Parent_Category": "pppc:SocialData",
             "Translation_EN": "Social Data",
-            "Translation_DE": "Soziale Daten"
+            "Translation_DE": "Soziale Daten",
+            "Description_EN": "Social data is that which has to do with the relations between humans. Examples are: data about family relationships, friendships or the connections within social networks.",
+            "Description_DE": "Soziale Daten sind solche, die mit den Beziehungen zwischen Menschen zu tun haben. Beispiele sind: Daten über Familienbeziehungen, Freundschaften oder die Verbindungen innerhalb sozialer Netzwerke."
         },
         "pppc:TechnicalData": {
             "Polypoly_Parent_Category": "pppc:TechnicalData",
             "Translation_EN": "Technical Data",
-            "Translation_DE": "Technische Daten"
+            "Translation_DE": "Technische Daten",
+            "Description_EN": "Technical data is data about something scientific or technological. This can be data from sensors, device identifiers or information about software on a device. ",
+            "Description_DE": "Technische Daten sind Daten über Wissenschaftliches oder Technisches. Dies können z.B. Daten von Sensoren, Gerätekennungen oder Informationen über Software auf einem Gerät sein. "
+        },
+        "pppc:PersonalData": {
+            "Polypoly_Parent_Category": "pppc:PersonalData",
+            "Translation_EN": "Personal Data",
+            "Translation_DE": "Persönliche Daten",
+            "Description_EN": "Technical data is data about something scientific or technological. This can be data from sensors, device identifiers or information about software on a device. ",
+            "Description_DE": "Technische Daten sind Daten über Wissenschaftliches oder Technisches. Dies können z.B. Daten von Sensoren, Gerätekennungen oder Informationen über Software auf einem Gerät sein. "
         }
     }
 }
