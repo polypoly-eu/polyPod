@@ -221,7 +221,7 @@
     {
         "name": "Earthport (RO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "RO"
         },
@@ -312,7 +312,7 @@
     {
         "name": "Paga mas Tarde (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -701,7 +701,7 @@
     {
         "name": "Equifax Ibérica S.L. (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -770,7 +770,7 @@
     {
         "name": "SEM, SEO y Más (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -1520,7 +1520,7 @@
     {
         "name": "Orange Espagne SAU (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -1887,7 +1887,7 @@
     {
         "name": "CRIF Ltd (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -2577,7 +2577,7 @@
     {
         "name": "Team 4 Collection and Consulting (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -2669,7 +2669,7 @@
     {
         "name": "Vodafone España, S.A.U (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -3337,7 +3337,7 @@
     {
         "name": "Matrix Global Services EAD (BG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "BG"
         },
@@ -3475,7 +3475,7 @@
     {
         "name": "Deltavista International AG (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -3679,7 +3679,7 @@
     {
         "name": "CallPoint New Europe AD dba TELUS International Europe (BG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "BG"
         },
@@ -4884,29 +4884,6 @@
         }
     },
     {
-        "name": "PJSC VimpelCom “Beeline” (RU)",
-        "featured": false,
-        "jurisdiction": "Russia",
-        "location": {
-            "countryCode": "RU"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:Service",
-            "name": {
-                "en": "Service",
-                "de": "Dienstleistung"
-            }
-        }
-    },
-    {
         "name": "Eurocredit (SK)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -5488,7 +5465,7 @@
     {
         "name": "Telefonica SA (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -6394,7 +6371,7 @@
     {
         "name": "Aplazame S.L. (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -7094,7 +7071,7 @@
     {
         "name": "Giesecke+Devrient Mobile Security Iberia S.A. (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -7456,6 +7433,29 @@
         "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "NL"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:Service",
+            "name": {
+                "en": "Service",
+                "de": "Dienstleistung"
+            }
+        }
+    },
+    {
+        "name": "Rostelecom “Tele2” (RU)",
+        "featured": false,
+        "jurisdiction": "Russia",
+        "location": {
+            "countryCode": "RU"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -8483,7 +8483,7 @@
     {
         "name": "Cetelem S.A. (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -8958,7 +8958,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Alter",
                 "Translation_EN": "Age",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
                 "Explanation_DE": "Informationen über das Alter",
                 "Explanation_EN": "Information about age"
@@ -9167,7 +9167,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Standort",
                 "Translation_EN": "Location",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort",
                 "Explanation_EN": "Information about location"
@@ -9178,7 +9178,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Name",
                 "Translation_EN": "Name",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Namen, die mit dem Gerät verbunden sind oder als Vornamen oder Spitznamen verwendet werden.",
                 "Explanation_EN": "Information about names associated or used as given name or nickname."
@@ -9189,7 +9189,7 @@
                 "dpv:Superclass": "",
                 "Translation_DE": "Personal Data",
                 "Translation_EN": "Personal Data",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Eine Kategorie von persönlichen Daten",
                 "Explanation_EN": "A category of personal data"
@@ -9200,7 +9200,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Physikalische Adresse",
                 "Translation_EN": "Physical Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die physische Adresse.",
                 "Explanation_EN": "Information about physical address."
@@ -9211,7 +9211,7 @@
                 "dpv:Superclass": "dpv:Internal",
                 "Translation_DE": "Präferenz",
                 "Translation_EN": "Preference",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Vorlieben oder Interessen",
                 "Explanation_EN": "Information about preferences or interests"
@@ -9255,10 +9255,10 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Nachverfolgung",
                 "Translation_EN": "Tracking",
-                "Polypoly_Parent_Category": "pppc:BehavioralData",
+                "Polypoly_Parent_Category": "pppc:TechnicalData",
                 "Synonyms": "",
-                "Explanation_DE": "Informationen über Gedanken",
-                "Explanation_EN": "Information about thoughts"
+                "Explanation_DE": "Informationen die zum Verfolgen einer Person oder Gruppe verwendet werden z. B. Standort oder E-Mail",
+                "Explanation_EN": "Information used to track an individual or group e.g. location or email"
             },
             {
                 "dpv:Category": "dpv:Transactional",
@@ -9929,29 +9929,6 @@
             "name": {
                 "en": "Banks & Finance",
                 "de": "Banken & Finanzen"
-            }
-        }
-    },
-    {
-        "name": "Grupo MásMóvil “Yoigo” (ES)",
-        "featured": false,
-        "jurisdiction": "Unknown",
-        "location": {
-            "countryCode": "ES"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:Service",
-            "name": {
-                "en": "Service",
-                "de": "Dienstleistung"
             }
         }
     },
@@ -11167,7 +11144,7 @@
     {
         "name": "Marfeel (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -11627,7 +11604,7 @@
     {
         "name": "Barclays Wealth Intermediaries (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -12065,7 +12042,7 @@
     {
         "name": "Envoy Services Limited a.k.a. Worldpay (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -12088,7 +12065,7 @@
     {
         "name": "Giesecke+Devrient Mobile Security (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -13037,7 +13014,7 @@
     {
         "name": "Informa D&B SA (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -13976,7 +13953,7 @@
     {
         "name": "Valitor (IS)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "IS"
         },
@@ -14022,7 +13999,7 @@
     {
         "name": "Orange Espagne S.A.U (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -14508,7 +14485,7 @@
     {
         "name": "Transact Payments Limited (GI)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Five-Eyes",
         "location": {
             "countryCode": "GI"
         },
@@ -14623,7 +14600,7 @@
     {
         "name": "Three (HK)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "China",
         "location": {
             "countryCode": "HK"
         },
@@ -14672,29 +14649,6 @@
         "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "DE"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:Service",
-            "name": {
-                "en": "Service",
-                "de": "Dienstleistung"
-            }
-        }
-    },
-    {
-        "name": "Virgin Group Ltd, “Virgin Mobile” (GB)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "GB"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -14976,7 +14930,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Akzent",
                 "Translation_EN": "Accent",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über einen Sprach- und Sprechakzent.",
                 "Explanation_EN": "Information about an linguistic and speech accents."
@@ -14998,7 +14952,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Alter",
                 "Translation_EN": "Age",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
                 "Explanation_DE": "Informationen über das Alter",
                 "Explanation_EN": "Information about age"
@@ -15075,7 +15029,7 @@
                 "dpv:Superclass": "dpv:Location",
                 "Translation_DE": "Land",
                 "Translation_EN": "Country",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:SocialData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über das Land z.B. Wohnsitz, Reise.",
                 "Explanation_EN": "Information about country e.g. residence, travel."
@@ -15152,7 +15106,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Dialekt",
                 "Translation_EN": "Dialect",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen zu sprachlichen Dialekten.",
                 "Explanation_EN": "Information about linguistic dialects."
@@ -15163,7 +15117,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "E-Mail Adresse",
                 "Translation_EN": "Email Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über E-Mail-Adressen.",
                 "Explanation_EN": "Information about Email address."
@@ -15174,7 +15128,7 @@
                 "dpv:Superclass": "dpv:Ethnicity;dpv:SpecialCategoryPersonalData",
                 "Translation_DE": "Ethnische Herkunft",
                 "Translation_EN": "Ethnic Origin",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die ethnische Herkunft",
                 "Explanation_EN": "Information about ethnic origin"
@@ -15218,7 +15172,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Geschlecht",
                 "Translation_EN": "Gender",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über das Geschlecht",
                 "Explanation_EN": "Information about gender"
@@ -15229,7 +15183,7 @@
                 "dpv:Superclass": "dpv:Demographic",
                 "Translation_DE": "Geografisch",
                 "Translation_EN": "Geographic",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort oder basierend auf der Geografie (z. B. die Heimatadresse)",
                 "Explanation_EN": "Information about location or based on geography (e.g., home address)"
@@ -15240,7 +15194,7 @@
                 "dpv:Superclass": "dpv:MedicalHealth",
                 "Translation_DE": "Gesundheit",
                 "Translation_EN": "Health",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die Gesundheit.",
                 "Explanation_EN": "Information about health."
@@ -15251,7 +15205,7 @@
                 "dpv:Superclass": "dpv:MedicalHealth",
                 "Translation_DE": "Gesundheit Geschichte",
                 "Translation_EN": "Health History",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die Gesundheitshistorie.",
                 "Explanation_EN": "Information about health history."
@@ -15262,7 +15216,7 @@
                 "dpv:Superclass": "dpv:MedicalHealth",
                 "Translation_DE": "Gesundheitsakte",
                 "Translation_EN": "Health Record",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die Gesundheitsakte.",
                 "Explanation_EN": "Information about health record."
@@ -15284,7 +15238,7 @@
                 "dpv:Superclass": "dpv:External",
                 "Translation_DE": "Identifizieren",
                 "Translation_EN": "Identifying",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen, die eine Einzelperson oder eine Gruppe eindeutig oder halbeindeutig identifizieren",
                 "Explanation_EN": "Information that uniquely or semi-uniquely identifies an individual or a group"
@@ -15306,7 +15260,7 @@
                 "dpv:Superclass": "dpv:HealthHistory",
                 "Translation_DE": "Individuelle Gesundheitsgeschichte",
                 "Translation_EN": "Individual Health History",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die Gesundheitshistorie.",
                 "Explanation_EN": "Information about information health history."
@@ -15317,7 +15271,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Interesse",
                 "Translation_EN": "Interest",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:SocialData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Interessen",
                 "Explanation_EN": "Information about interests"
@@ -15328,7 +15282,7 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Intern",
                 "Translation_EN": "Internal",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über interne Merkmale, die nicht gesehen oder beobachtet werden können",
                 "Explanation_EN": "Information about internal characteristics that cannot be seen or observed"
@@ -15361,7 +15315,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Standort",
                 "Translation_EN": "Location",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort",
                 "Explanation_EN": "Information about location"
@@ -15372,7 +15326,7 @@
                 "dpv:Superclass": "dpv:External;dpv:SpecialCategoryPersonalData",
                 "Translation_DE": "Medizinische Gesundheit",
                 "Translation_EN": "Medical Health",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Gesundheit, medizinische Bedingungen oder Gesundheitsvorsorge",
                 "Explanation_EN": "Information about health, medical conditions or health care"
@@ -15383,7 +15337,7 @@
                 "dpv:Superclass": "dpv:Health",
                 "Translation_DE": "Psychische Gesundheit",
                 "Translation_EN": "Mental Health",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die psychische Gesundheit.",
                 "Explanation_EN": "Information about mental health."
@@ -15394,7 +15348,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Name",
                 "Translation_EN": "Name",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Namen, die mit dem Gerät verbunden sind oder als Vornamen oder Spitznamen verwendet werden.",
                 "Explanation_EN": "Information about names associated or used as given name or nickname."
@@ -15405,7 +15359,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Offizieller Ausweis",
                 "Translation_EN": "Official ID",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über eine offizielle Kennung oder ein Ausweisdokument",
                 "Explanation_EN": "Information about an official identifier or identification document"
@@ -15449,7 +15403,7 @@
                 "dpv:Superclass": "dpv:Authenticating",
                 "Translation_DE": "Passwort",
                 "Translation_EN": "Password",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über ein Passwort, das bei der Authentifizierung der Person als Benutzer beim Zugriff auf ein System verwendet wird.",
                 "Explanation_EN": "Information about password used in the process of authenticating the individual as a user accessing a system."
@@ -15471,7 +15425,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Physikalische Adresse",
                 "Translation_EN": "Physical Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die physische Adresse.",
                 "Explanation_EN": "Information about physical address."
@@ -15482,7 +15436,7 @@
                 "dpv:Superclass": "dpv:Health",
                 "Translation_DE": "Körperliche Gesundheit",
                 "Translation_EN": "Physical Health",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die körperliche Gesundheit.",
                 "Explanation_EN": "Information about physical health."
@@ -15504,7 +15458,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Datenschutz-Präferenz",
                 "Translation_EN": "Privacy Preference",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Datenschutzpräferenzen",
                 "Explanation_EN": "Information about privacy preferences"
@@ -15581,7 +15535,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Benutzername",
                 "Translation_EN": "Username",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Benutzernamen.",
                 "Explanation_EN": "Information about usernames."
@@ -15612,7 +15566,7 @@
         "description": {
             "value": {
                 "en": "Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Five companies in the U.S. information technology industry, along with Amazon, Google, Microsoft, and Facebook.[8][9][10] Its hardware products include the iPhone smartphone, the iPad tablet computer, the Mac personal computer, the iPod portable media player, the Apple Watch smartwatch, the Apple TV digital media player, the AirPods wireless earbuds, the AirPods Max headphones, and the HomePod smart speaker line. Apple's software includes iOS, iPadOS, macOS, watchOS, and tvOS operating systems, the iTunes media player, the Safari web browser, the Shazam music identifier, and the iLife and iWork creativity and productivity suites, as well as professional applications like Final Cut Pro X, Logic Pro, and Xcode. Its online services include the iTunes Store, the iOS App Store, Mac App Store, Apple Arcade, Apple Music, Apple TV+, Apple Fitness+, iMessage, and iCloud. Other services include Apple Store, Genius Bar, AppleCare, Apple Pay, Apple Pay Cash, and Apple Card.\nApple was founded by Steve Jobs, Steve Wozniak, and Ronald Wayne in April 1976 to develop and sell Wozniak's Apple I personal computer, though Wayne sold his share back to Jobs and Wozniak within 12 days. It was incorporated as Apple Computer, Inc., in January 1977, and sales of its computers, including the Apple II, grew quickly.",
-                "de": null
+                "de": "Apple Inc. [ˈæpəlˌɪŋk] ist ein US-amerikanischer Hard- und Softwareentwickler und ein Technologieunternehmen, das Computer, Smartphones und Unterhaltungselektronik sowie Betriebssysteme und Anwendungssoftware entwickelt und vertreibt. Zudem betreibt Apple ein Internet-Vertriebsportal für Musik, Filme und Software. Der Hauptsitz von Apple, der Apple Park, befindet sich im kalifornischen Cupertino.\nApple wurde 1976 von Steve Wozniak, Steve Jobs und Ron Wayne als Garagenfirma gegründet und zählte zu den ersten Herstellern von Personal Computern."
             },
             "source": "Wikipedia"
         },
@@ -15748,7 +15702,7 @@
     {
         "name": "Earthport (HK)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "China",
         "location": {
             "countryCode": "HK"
         },
@@ -16476,7 +16430,7 @@
     {
         "name": "video intelligence AG (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -16525,29 +16479,6 @@
         "jurisdiction": "Five-Eyes",
         "location": {
             "countryCode": "GB"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:Service",
-            "name": {
-                "en": "Service",
-                "de": "Dienstleistung"
-            }
-        }
-    },
-    {
-        "name": "Polkomtel, “Plus” (IE)",
-        "featured": false,
-        "jurisdiction": "EU-GDPR",
-        "location": {
-            "countryCode": "IE"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -17623,7 +17554,7 @@
     {
         "name": "BeRuby (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -17787,6 +17718,29 @@
         "jurisdiction": "Five-Eyes",
         "location": {
             "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:Service",
+            "name": {
+                "en": "Service",
+                "de": "Dienstleistung"
+            }
+        }
+    },
+    {
+        "name": "Mobile TeleSystems “MTS” (RU)",
+        "featured": false,
+        "jurisdiction": "Russia",
+        "location": {
+            "countryCode": "RU"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -18783,7 +18737,7 @@
     {
         "name": "Edelman Spain, S.A. (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -20231,7 +20185,7 @@
                 "dpv:Superclass": "dpv:Demographic",
                 "Translation_DE": "Geografisch",
                 "Translation_EN": "Geographic",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort oder basierend auf der Geografie (z. B. die Heimatadresse)",
                 "Explanation_EN": "Information about location or based on geography (e.g., home address)"
@@ -20253,7 +20207,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Interesse",
                 "Translation_EN": "Interest",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:SocialData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Interessen",
                 "Explanation_EN": "Information about interests"
@@ -20286,7 +20240,7 @@
                 "dpv:Superclass": "dpv:Internal",
                 "Translation_DE": "Präferenz",
                 "Translation_EN": "Preference",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Vorlieben oder Interessen",
                 "Explanation_EN": "Information about preferences or interests"
@@ -20297,10 +20251,10 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Nachverfolgung",
                 "Translation_EN": "Tracking",
-                "Polypoly_Parent_Category": "pppc:BehavioralData",
+                "Polypoly_Parent_Category": "pppc:TechnicalData",
                 "Synonyms": "",
-                "Explanation_DE": "Informationen über Gedanken",
-                "Explanation_EN": "Information about thoughts"
+                "Explanation_DE": "Informationen die zum Verfolgen einer Person oder Gruppe verwendet werden z. B. Standort oder E-Mail",
+                "Explanation_EN": "Information used to track an individual or group e.g. location or email"
             },
             {
                 "dpv:Category": "dpv:UID",
@@ -20319,7 +20273,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Benutzername",
                 "Translation_EN": "Username",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Benutzernamen.",
                 "Explanation_EN": "Information about usernames."
@@ -20353,8 +20307,7 @@
         "jurisdictionsShared": {
             "children": [
                 "Five-Eyes",
-                "EU-GDPR",
-                "Unknown"
+                "EU-GDPR"
             ]
         }
     },
@@ -21148,7 +21101,7 @@
     {
         "name": "aklamio GmbH (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -22807,7 +22760,7 @@
     {
         "name": "CONSULTIX SOCIEDAD DE RESPONSABILIDAD LIMITADA PROFESIONAL (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -23199,7 +23152,7 @@
     {
         "name": "Stream Eye (BG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "BG"
         },
@@ -23360,7 +23313,7 @@
     {
         "name": "BIDSWITCH GmbH (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -24106,7 +24059,7 @@
     {
         "name": "Eurocredit (BG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "BG"
         },
@@ -25668,7 +25621,7 @@
     {
         "name": "Swisscom Schweiz AG (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -25973,7 +25926,7 @@
     {
         "name": "Edelman.ergo GmbH (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -26401,7 +26354,7 @@
     {
         "name": "IDEOMEDIA SRL (RO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "RO"
         },
@@ -26552,7 +26505,7 @@
     {
         "name": "Packlink Shipping S.L. (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -26569,6 +26522,29 @@
             "name": {
                 "en": "Retail & Consumption",
                 "de": "Handel & Konsum"
+            }
+        }
+    },
+    {
+        "name": "Grupo MásMóvil “Yoigo” (ES)",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "countryCode": "ES"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:Service",
+            "name": {
+                "en": "Service",
+                "de": "Dienstleistung"
             }
         }
     },
@@ -26927,7 +26903,7 @@
     {
         "name": "Forrester Switzerland GmbH/Forrester Research BV (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -27278,7 +27254,7 @@
     {
         "name": "Deyde Calidad de Datos S.L. (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -28183,7 +28159,7 @@
     {
         "name": "CRIF AG (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -28499,32 +28475,9 @@
         }
     },
     {
-        "name": "Rostelecom “Tele2” (RU)",
-        "featured": false,
-        "jurisdiction": "Russia",
-        "location": {
-            "countryCode": "RU"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:Service",
-            "name": {
-                "en": "Service",
-                "de": "Dienstleistung"
-            }
-        }
-    },
-    {
         "name": "SK ID Solutions AS (EE)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "EE"
         },
@@ -28639,7 +28592,7 @@
     {
         "name": "Vodafone Ono, S.A.U (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -29527,7 +29480,7 @@
     {
         "name": "S.C. Fire Credit S.R.L. (RO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "RO"
         },
@@ -29781,7 +29734,7 @@
     {
         "name": "Money Swap Exchange Limited (CN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "China",
         "location": {
             "countryCode": "HK"
         },
@@ -30236,7 +30189,7 @@
     {
         "name": "Electronic Identification S.L. (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -30328,7 +30281,7 @@
     {
         "name": "SurveyMonkey (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -30830,7 +30783,7 @@
     {
         "name": "eBay International AG (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -31242,6 +31195,29 @@
         }
     },
     {
+        "name": "PJSC VimpelCom “Beeline” (RU)",
+        "featured": false,
+        "jurisdiction": "Russia",
+        "location": {
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:Service",
+            "name": {
+                "en": "Service",
+                "de": "Dienstleistung"
+            }
+        }
+    },
+    {
         "name": "e-Dialog, Inc. (US)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
@@ -31422,6 +31398,29 @@
             "name": {
                 "en": "Internet & Multimedia",
                 "de": "Internet & Multimedia"
+            }
+        }
+    },
+    {
+        "name": "Virgin Group Ltd, “Virgin Mobile” (GB)",
+        "featured": false,
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "countryCode": "GB"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:Service",
+            "name": {
+                "en": "Service",
+                "de": "Dienstleistung"
             }
         }
     },
@@ -32522,7 +32521,7 @@
     {
         "name": "Earthport (BG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "BG"
         },
@@ -32867,7 +32866,7 @@
     {
         "name": "Deutsche Bank AG (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -33533,7 +33532,6 @@
             "BESS Software Solutions GmbH (DE)",
             "BICS SA/NV (BE)",
             "BNP Paribas (FR)",
-            "BNP Paribas (FR)",
             "BUSINESS SUPPORT SERVICES – B2S (FR)",
             "Bambora AB (SE)",
             "Banco Agricola S.A. (SV)",
@@ -33626,7 +33624,6 @@
             "Business Insider (US)",
             "CCC GmbH (DE)",
             "CCC Leipzig (DE)",
-            "CCC Leipzig (DE)",
             "CDDN‘ - Communicatie Data Diensten Nederland (NL)",
             "CIFAS (GB)",
             "CONSULTIX SOCIEDAD DE RESPONSABILIDAD LIMITADA PROFESIONAL (ES)",
@@ -33644,7 +33641,6 @@
             "Callcredit plc. (GB)",
             "Cambridge Blockchain, Inc. (US)",
             "Capita Identity (GB)",
-            "Capita Plc (GB)",
             "Capita Plc (GB)",
             "Cardinal Commerce Corporation (US)",
             "Cardpro [FIS] (US)",
@@ -33717,7 +33713,6 @@
             "Cristal Credit International (US)",
             "Criteo Ltd. (GB)",
             "Criteo SA (FR)",
-            "Criteo SA (FR)",
             "Criteo SA (SE)",
             "Criteo Singapore Pte. Ltd (SG)",
             "Crossover Communication GmbH (DE)",
@@ -33774,7 +33769,6 @@
             "Dun & Bradstreet (GB)",
             "Dun & Bradstreet Inc. (US)",
             "Dun & Bradstreet Limited (GB)",
-            "Dun & Bradstreet Limited (GB)",
             "Duo Security (US)",
             "Dutch Bangla Bank Ltd (BD)",
             "Dynamic Business Information Limited (GB)",
@@ -33823,7 +33817,6 @@
             "Envoy Services Limited a.k.a. Worldpay (NZ)",
             "Envoy Services Limited a.k.a. Worldpay (PL)",
             "Equifax Ibérica S.L. (ES)",
-            "Equifax Ibérica S.L. (ES)",
             "Equifax Ltd (GB)",
             "Ethoca Limited (CA)",
             "Eurocredit (BE)",
@@ -33851,10 +33844,8 @@
             "Fabric Inc (US)",
             "Facebook Business Manager (SE)",
             "Facebook Inc (US)",
-            "Facebook Inc (US)",
             "Facebook Ireland Limited (IE)",
             "FactWorks GmbH (DE)",
-            "Factworks LLC (US)",
             "Factworks LLC (US)",
             "Fichier des Incidents de Remboursement des Crédits aux Particuliers (FICP) (FR)",
             "Fidelitas (AR)",
@@ -33915,10 +33906,8 @@
             "Golden Gate BBB (US)",
             "Google (US)",
             "Google Asia Pacific Pte. Ltd. (SG)",
-            "Google Asia Pacific Pte. Ltd. (SG)",
             "Google Cloud Platform (US)",
             "Google Inc. (US)",
-            "Google Ireland, Ltd. (IE)",
             "Google Ireland, Ltd. (IE)",
             "Gothia A/S (DK)",
             "Gothia AS (NO)",
@@ -33933,7 +33922,6 @@
             "HSBC Bank Plc (GB)",
             "HSBC Bank Plc (IE)",
             "HSBC Merchant Services LLP (GB)",
-            "Hall & Partners Europe Ltd. (GB)",
             "Hall & Partners Europe Ltd. (GB)",
             "Hall and Partners LLC (US)",
             "Hanseatische Inkasso-Treuhand GmbH (DE)",
@@ -33955,7 +33943,6 @@
             "Hutchison Telecom (IT)",
             "Hutchison Telecom (SE)",
             "Hypothesis Inc. (US)",
-            "I + E Research (DE)",
             "I + E Research (DE)",
             "ICC Information Limited (GB)",
             "ICT Group Inc. (US)",
@@ -34008,7 +33995,6 @@
             "JP Morgan AG (DE)",
             "JPMorgan Chase Bank (GB)",
             "JPMorgan Chase Bank (US)",
-            "JPMorgan Chase Bank, National Association London Branch (GB)",
             "JPMorgan Chase Bank, National Association London Branch (GB)",
             "JT [Jersey] Limited (JE)",
             "Jeeves Information Systems AB (SE)",
@@ -34074,7 +34060,6 @@
             "M3 Mobile Co., Ltd. (KR)",
             "MBS (US)",
             "MEILLERGHP GmbH (DE)",
-            "MEILLERGHP GmbH (DE)",
             "MSBB Money Ltd (BR)",
             "Macromill, Inc. (US)",
             "Madad Marketing LLC (US)",
@@ -34118,7 +34103,6 @@
             "Mitek Systems Inc. (US)",
             "Mitto (CH)",
             "Mitto AG (CH)",
-            "Mixpanel Inc. (US)",
             "Mixpanel Inc. (US)",
             "Mmr Research Associates (US)",
             "MoPub (US)",
@@ -34368,7 +34352,6 @@
             "Stripe (US)",
             "StubHub Europe S.à r.l. (LU)",
             "StubHub Services S.à r.l. (LU)",
-            "StubHub Services S.à r.l. (LU)",
             "StubHub, Inc. (US)",
             "Sumologic, Inc. (US)",
             "Supersonic Ltd. (IL)",
@@ -34401,7 +34384,6 @@
             "TRC (US)",
             "TSYS (DE)",
             "TSYS (GB)",
-            "TWILIO, Inc. (US)",
             "TWILIO, Inc. (US)",
             "Tableau (US)",
             "Tapad Inc. (US)",
@@ -34853,7 +34835,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Alter",
                 "Translation_EN": "Age",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
                 "Explanation_DE": "Informationen über das Alter",
                 "Explanation_EN": "Information about age"
@@ -34897,7 +34879,7 @@
                 "dpv:Superclass": "dpv:Identifying;dpv:SpecialCategoryPersonalData",
                 "Translation_DE": "Biometrisch",
                 "Translation_EN": "Biometric",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über biometrische Daten und biometrische Merkmale.",
                 "Explanation_EN": "Information about biometrics and biometric characteristics."
@@ -34941,7 +34923,7 @@
                 "dpv:Superclass": "dpv:Location",
                 "Translation_DE": "Land",
                 "Translation_EN": "Country",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:SocialData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über das Land z.B. Wohnsitz, Reise.",
                 "Explanation_EN": "Information about country e.g. residence, travel."
@@ -35007,7 +34989,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "E-Mail Adresse",
                 "Translation_EN": "Email Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über E-Mail-Adressen.",
                 "Explanation_EN": "Information about Email address."
@@ -35051,7 +35033,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Geschlecht",
                 "Translation_EN": "Gender",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über das Geschlecht",
                 "Explanation_EN": "Information about gender"
@@ -35073,7 +35055,7 @@
                 "dpv:Superclass": "dpv:Demographic",
                 "Translation_DE": "Geografisch",
                 "Translation_EN": "Geographic",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort oder basierend auf der Geografie (z. B. die Heimatadresse)",
                 "Explanation_EN": "Information about location or based on geography (e.g., home address)"
@@ -35139,7 +35121,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Standort",
                 "Translation_EN": "Location",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort",
                 "Explanation_EN": "Information about location"
@@ -35161,7 +35143,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Name",
                 "Translation_EN": "Name",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Namen, die mit dem Gerät verbunden sind oder als Vornamen oder Spitznamen verwendet werden.",
                 "Explanation_EN": "Information about names associated or used as given name or nickname."
@@ -35172,7 +35154,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Offizieller Ausweis",
                 "Translation_EN": "Official ID",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über eine offizielle Kennung oder ein Ausweisdokument",
                 "Explanation_EN": "Information about an official identifier or identification document"
@@ -35183,7 +35165,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Meinung",
                 "Translation_EN": "Opinion",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Meinungen",
                 "Explanation_EN": "Information about opinions"
@@ -35238,7 +35220,7 @@
                 "dpv:Superclass": "",
                 "Translation_DE": "Personal Data",
                 "Translation_EN": "Personal Data",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Eine Kategorie von persönlichen Daten",
                 "Explanation_EN": "A category of personal data"
@@ -35249,7 +35231,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Physikalische Adresse",
                 "Translation_EN": "Physical Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die physische Adresse.",
                 "Explanation_EN": "Information about physical address."
@@ -35293,7 +35275,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Einkäufe und Ausgabegewohnheiten",
                 "Translation_EN": "Purchases and Spending Habit",
-                "Polypoly_Parent_Category": "pppc:FinancialData",
+                "Polypoly_Parent_Category": "pppc:BehavioralData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die Analyse der getätigten Einkäufe und des ausgegebenen Geldes, ausgedrückt als Gewohnheit, z. B. monatliche Einkaufstrends",
                 "Explanation_EN": "Information about analysis of purchases made and money spent expressed as a habit e.g. monthly shopping trends"
@@ -35337,7 +35319,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Steuer",
                 "Translation_EN": "Tax",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über finanzielle Steuern, z. B. Steueraufzeichnungen oder fällige Steuern",
                 "Explanation_EN": "Information about financial tax e.g. tax records or tax due"
@@ -35359,10 +35341,10 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Nachverfolgung",
                 "Translation_EN": "Tracking",
-                "Polypoly_Parent_Category": "pppc:BehavioralData",
+                "Polypoly_Parent_Category": "pppc:TechnicalData",
                 "Synonyms": "",
-                "Explanation_DE": "Informationen über Gedanken",
-                "Explanation_EN": "Information about thoughts"
+                "Explanation_DE": "Informationen die zum Verfolgen einer Person oder Gruppe verwendet werden z. B. Standort oder E-Mail",
+                "Explanation_EN": "Information used to track an individual or group e.g. location or email"
             },
             {
                 "dpv:Category": "dpv:Transaction",
@@ -35403,7 +35385,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Benutzername",
                 "Translation_EN": "Username",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Benutzernamen.",
                 "Explanation_EN": "Information about usernames."
@@ -36304,7 +36286,7 @@
     {
         "name": "Barclays Wealth Intermediaries (EE)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "EE"
         },
@@ -36648,7 +36630,7 @@
     {
         "name": "Experian Bureau de Credito SA (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -37522,7 +37504,7 @@
     {
         "name": "Cedar Rose Int. Services Ltd (RO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "RO"
         },
@@ -37735,7 +37717,7 @@
     {
         "name": "Envoy Services Limited a.k.a. Worldpay (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -38436,7 +38418,7 @@
     {
         "name": "Mitto AG (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -38879,7 +38861,7 @@
     {
         "name": "Mitto (CH)",
         "featured": false,
-        "jurisdiction": "EU-GDPR",
+        "jurisdiction": "Unknown",
         "location": {
             "countryCode": "CH"
         },
@@ -40516,7 +40498,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Alter",
                 "Translation_EN": "Age",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
                 "Explanation_DE": "Informationen über das Alter",
                 "Explanation_EN": "Information about age"
@@ -40560,7 +40542,7 @@
                 "dpv:Superclass": "dpv:Identifying;dpv:SpecialCategoryPersonalData",
                 "Translation_DE": "Biometrisch",
                 "Translation_EN": "Biometric",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über biometrische Daten und biometrische Merkmale.",
                 "Explanation_EN": "Information about biometrics and biometric characteristics."
@@ -40648,7 +40630,7 @@
                 "dpv:Superclass": "dpv:Location",
                 "Translation_DE": "Land",
                 "Translation_EN": "Country",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:SocialData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über das Land z.B. Wohnsitz, Reise.",
                 "Explanation_EN": "Information about country e.g. residence, travel."
@@ -40714,7 +40696,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "E-Mail Adresse",
                 "Translation_EN": "Email Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über E-Mail-Adressen.",
                 "Explanation_EN": "Information about Email address."
@@ -40736,7 +40718,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Geschlecht",
                 "Translation_EN": "Gender",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über das Geschlecht",
                 "Explanation_EN": "Information about gender"
@@ -40747,7 +40729,7 @@
                 "dpv:Superclass": "dpv:Demographic",
                 "Translation_DE": "Geografisch",
                 "Translation_EN": "Geographic",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort oder basierend auf der Geografie (z. B. die Heimatadresse)",
                 "Explanation_EN": "Information about location or based on geography (e.g., home address)"
@@ -40758,7 +40740,7 @@
                 "dpv:Superclass": "dpv:MedicalHealth",
                 "Translation_DE": "Gesundheit",
                 "Translation_EN": "Health",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die Gesundheit.",
                 "Explanation_EN": "Information about health."
@@ -40780,7 +40762,7 @@
                 "dpv:Superclass": "dpv:External",
                 "Translation_DE": "Identifizieren",
                 "Translation_EN": "Identifying",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen, die eine Einzelperson oder eine Gruppe eindeutig oder halbeindeutig identifizieren",
                 "Explanation_EN": "Information that uniquely or semi-uniquely identifies an individual or a group"
@@ -40791,7 +40773,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Interesse",
                 "Translation_EN": "Interest",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:SocialData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Interessen",
                 "Explanation_EN": "Information about interests"
@@ -40824,7 +40806,7 @@
                 "dpv:Superclass": "dpv:Interest",
                 "Translation_DE": "Mögen",
                 "Translation_EN": "Like",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Vorlieben oder Präferenzen zu Zuneigungen.",
                 "Explanation_EN": "Information about likes or preferences regarding attractions."
@@ -40835,7 +40817,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Standort",
                 "Translation_EN": "Location",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort",
                 "Explanation_EN": "Information about location"
@@ -40846,7 +40828,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Name",
                 "Translation_EN": "Name",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Namen, die mit dem Gerät verbunden sind oder als Vornamen oder Spitznamen verwendet werden.",
                 "Explanation_EN": "Information about names associated or used as given name or nickname."
@@ -40857,7 +40839,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Offizieller Ausweis",
                 "Translation_EN": "Official ID",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über eine offizielle Kennung oder ein Ausweisdokument",
                 "Explanation_EN": "Information about an official identifier or identification document"
@@ -40890,7 +40872,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Physikalische Adresse",
                 "Translation_EN": "Physical Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die physische Adresse.",
                 "Explanation_EN": "Information about physical address."
@@ -40901,7 +40883,7 @@
                 "dpv:Superclass": "dpv:External",
                 "Translation_DE": "Physikalisches Merkmal",
                 "Translation_EN": "PhysicalCharacteristic",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über körperliche Merkmale",
                 "Explanation_EN": "Information about physical characteristics"
@@ -40912,7 +40894,7 @@
                 "dpv:Superclass": "dpv:Demographic",
                 "Translation_DE": "Physikalisches Eigenschaft",
                 "Translation_EN": "Physical Trait",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über definierende Eigenschaften oder Merkmale in Bezug auf den Körper.",
                 "Explanation_EN": "Information about defining traits or features regarding the body."
@@ -40934,7 +40916,7 @@
                 "dpv:Superclass": "dpv:PublicLife;dpv:SpecialCategoryPersonalData",
                 "Translation_DE": "Politische Zugehörigkeit",
                 "Translation_EN": "Political Affiliation",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über politische Zugehörigkeit und Geschichte",
                 "Explanation_EN": "Information about political affiliation and history"
@@ -40945,7 +40927,7 @@
                 "dpv:Superclass": "dpv:Internal",
                 "Translation_DE": "Präferenz",
                 "Translation_EN": "Preference",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Vorlieben oder Interessen",
                 "Explanation_EN": "Information about preferences or interests"
@@ -40956,7 +40938,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Datenschutz-Präferenz",
                 "Translation_EN": "Privacy Preference",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Datenschutzpräferenzen",
                 "Explanation_EN": "Information about privacy preferences"
@@ -40978,7 +40960,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Einkäufe und Ausgabegewohnheiten",
                 "Translation_EN": "Purchases and Spending Habit",
-                "Polypoly_Parent_Category": "pppc:FinancialData",
+                "Polypoly_Parent_Category": "pppc:BehavioralData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die Analyse der getätigten Einkäufe und des ausgegebenen Geldes, ausgedrückt als Gewohnheit, z. B. monatliche Einkaufstrends",
                 "Explanation_EN": "Information about analysis of purchases made and money spent expressed as a habit e.g. monthly shopping trends"
@@ -40989,7 +40971,7 @@
                 "dpv:Superclass": "dpv:PublicLife;dpv:SpecialCategoryPersonalData",
                 "Translation_DE": "Religion",
                 "Translation_EN": "Religion",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Religion, religiöse Neigungen und religiöse Geschichte.",
                 "Explanation_EN": "Information about religion, religious inclinations, and religious history."
@@ -41033,7 +41015,7 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Besondere Kategorie personenbezogener Daten",
                 "Translation_EN": "Special Category Personal Data",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Personal Data, die zu einer der \"besonderen Kategorien\" gehören, die sensibler sind und zusätzliche Maßnahmen erfordern",
                 "Explanation_EN": "Personal data belonging to one of 'special categories' that are more sensitive and require additional measures"
@@ -41055,10 +41037,10 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Nachverfolgung",
                 "Translation_EN": "Tracking",
-                "Polypoly_Parent_Category": "pppc:BehavioralData",
+                "Polypoly_Parent_Category": "pppc:TechnicalData",
                 "Synonyms": "",
-                "Explanation_DE": "Informationen über Gedanken",
-                "Explanation_EN": "Information about thoughts"
+                "Explanation_DE": "Informationen die zum Verfolgen einer Person oder Gruppe verwendet werden z. B. Standort oder E-Mail",
+                "Explanation_EN": "Information used to track an individual or group e.g. location or email"
             },
             {
                 "dpv:Category": "dpv:Transaction",
@@ -41099,7 +41081,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Benutzername",
                 "Translation_EN": "Username",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Benutzernamen.",
                 "Explanation_EN": "Information about usernames."
@@ -42126,7 +42108,6 @@
             "Nielsen LLC (US)",
             "OpenX (US)",
             "Oracle Data Cloud (US)",
-            "Oracle Data Cloud (US)",
             "PaperG, Inc. dba Thunder Industries (US)",
             "PubMatic, Inc. (US)",
             "RevJet (US)",
@@ -42313,7 +42294,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Akzent",
                 "Translation_EN": "Accent",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über einen Sprach- und Sprechakzent.",
                 "Explanation_EN": "Information about an linguistic and speech accents."
@@ -42324,7 +42305,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Alter",
                 "Translation_EN": "Age",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
                 "Explanation_DE": "Informationen über das Alter",
                 "Explanation_EN": "Information about age"
@@ -42456,7 +42437,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Dialekt",
                 "Translation_EN": "Dialect",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen zu sprachlichen Dialekten.",
                 "Explanation_EN": "Information about linguistic dialects."
@@ -42467,7 +42448,7 @@
                 "dpv:Superclass": "dpv:Interest",
                 "Translation_DE": "Nicht mögen",
                 "Translation_EN": "Dislike",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Abneigungen oder Vorlieben bezüglich Abstoßungen.",
                 "Explanation_EN": "Information about dislikes or preferences regarding repulsions."
@@ -42478,7 +42459,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "E-Mail Adresse",
                 "Translation_EN": "Email Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über E-Mail-Adressen.",
                 "Explanation_EN": "Information about Email address."
@@ -42522,7 +42503,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Interesse",
                 "Translation_EN": "Interest",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:SocialData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Interessen",
                 "Explanation_EN": "Information about interests"
@@ -42544,7 +42525,7 @@
                 "dpv:Superclass": "dpv:Interest",
                 "Translation_DE": "Mögen",
                 "Translation_EN": "Like",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Vorlieben oder Präferenzen zu Zuneigungen.",
                 "Explanation_EN": "Information about likes or preferences regarding attractions."
@@ -42566,7 +42547,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Standort",
                 "Translation_EN": "Location",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort",
                 "Explanation_EN": "Information about location"
@@ -42577,7 +42558,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Name",
                 "Translation_EN": "Name",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Namen, die mit dem Gerät verbunden sind oder als Vornamen oder Spitznamen verwendet werden.",
                 "Explanation_EN": "Information about names associated or used as given name or nickname."
@@ -42588,7 +42569,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Offizieller Ausweis",
                 "Translation_EN": "Official ID",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über eine offizielle Kennung oder ein Ausweisdokument",
                 "Explanation_EN": "Information about an official identifier or identification document"
@@ -42599,7 +42580,7 @@
                 "dpv:Superclass": "dpv:Authenticating",
                 "Translation_DE": "Passwort",
                 "Translation_EN": "Password",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über ein Passwort, das bei der Authentifizierung der Person als Benutzer beim Zugriff auf ein System verwendet wird.",
                 "Explanation_EN": "Information about password used in the process of authenticating the individual as a user accessing a system."
@@ -42610,7 +42591,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Physikalische Adresse",
                 "Translation_EN": "Physical Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die physische Adresse.",
                 "Explanation_EN": "Information about physical address."
@@ -42632,7 +42613,7 @@
                 "dpv:Superclass": "dpv:Internal",
                 "Translation_DE": "Präferenz",
                 "Translation_EN": "Preference",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Vorlieben oder Interessen",
                 "Explanation_EN": "Information about preferences or interests"
@@ -42654,7 +42635,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Einkäufe und Ausgabegewohnheiten",
                 "Translation_EN": "Purchases and Spending Habit",
-                "Polypoly_Parent_Category": "pppc:FinancialData",
+                "Polypoly_Parent_Category": "pppc:BehavioralData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die Analyse der getätigten Einkäufe und des ausgegebenen Geldes, ausgedrückt als Gewohnheit, z. B. monatliche Einkaufstrends",
                 "Explanation_EN": "Information about analysis of purchases made and money spent expressed as a habit e.g. monthly shopping trends"
@@ -42687,7 +42668,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Steuer",
                 "Translation_EN": "Tax",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über finanzielle Steuern, z. B. Steueraufzeichnungen oder fällige Steuern",
                 "Explanation_EN": "Information about financial tax e.g. tax records or tax due"
@@ -43954,7 +43935,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Akzent",
                 "Translation_EN": "Accent",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über einen Sprach- und Sprechakzent.",
                 "Explanation_EN": "Information about an linguistic and speech accents."
@@ -43965,7 +43946,7 @@
                 "dpv:Superclass": "dpv:PhysicalCharacteristic",
                 "Translation_DE": "Alter",
                 "Translation_EN": "Age",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "“Date Of Birth”;”DOB”;”DateOfBirth”",
                 "Explanation_DE": "Informationen über das Alter",
                 "Explanation_EN": "Information about age"
@@ -44064,7 +44045,7 @@
                 "dpv:Superclass": "dpv:Location",
                 "Translation_DE": "Land",
                 "Translation_EN": "Country",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:SocialData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über das Land z.B. Wohnsitz, Reise.",
                 "Explanation_EN": "Information about country e.g. residence, travel."
@@ -44141,7 +44122,7 @@
                 "dpv:Superclass": "dpv:Language",
                 "Translation_DE": "Dialekt",
                 "Translation_EN": "Dialect",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen zu sprachlichen Dialekten.",
                 "Explanation_EN": "Information about linguistic dialects."
@@ -44152,7 +44133,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "E-Mail Adresse",
                 "Translation_EN": "Email Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über E-Mail-Adressen.",
                 "Explanation_EN": "Information about Email address."
@@ -44163,7 +44144,7 @@
                 "dpv:Superclass": "dpv:Communication",
                 "Translation_DE": "E-Mail-Inhalt",
                 "Translation_EN": "Email Content",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Inhalt von gesendeten oder empfangenen Emails",
                 "Explanation_EN": "Information about the contents of Emails sent or recieved"
@@ -44207,7 +44188,7 @@
                 "dpv:Superclass": "dpv:Demographic",
                 "Translation_DE": "Geografisch",
                 "Translation_EN": "Geographic",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort oder basierend auf der Geografie (z. B. die Heimatadresse)",
                 "Explanation_EN": "Information about location or based on geography (e.g., home address)"
@@ -44229,7 +44210,7 @@
                 "dpv:Superclass": "dpv:External",
                 "Translation_DE": "Identifizieren",
                 "Translation_EN": "Identifying",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen, die eine Einzelperson oder eine Gruppe eindeutig oder halbeindeutig identifizieren",
                 "Explanation_EN": "Information that uniquely or semi-uniquely identifies an individual or a group"
@@ -44240,7 +44221,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Interesse",
                 "Translation_EN": "Interest",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:SocialData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Interessen",
                 "Explanation_EN": "Information about interests"
@@ -44262,7 +44243,7 @@
                 "dpv:Superclass": "dpv:Tracking",
                 "Translation_DE": "Standort",
                 "Translation_EN": "Location",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über den Standort",
                 "Explanation_EN": "Information about location"
@@ -44273,7 +44254,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Name",
                 "Translation_EN": "Name",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Namen, die mit dem Gerät verbunden sind oder als Vornamen oder Spitznamen verwendet werden.",
                 "Explanation_EN": "Information about names associated or used as given name or nickname."
@@ -44284,7 +44265,7 @@
                 "dpv:Superclass": "dpv:Identifying",
                 "Translation_DE": "Offizieller Ausweis",
                 "Translation_EN": "Official ID",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über eine offizielle Kennung oder ein Ausweisdokument",
                 "Explanation_EN": "Information about an official identifier or identification document"
@@ -44295,7 +44276,7 @@
                 "dpv:Superclass": "dpv:Authenticating",
                 "Translation_DE": "Passwort",
                 "Translation_EN": "Password",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über ein Passwort, das bei der Authentifizierung der Person als Benutzer beim Zugriff auf ein System verwendet wird.",
                 "Explanation_EN": "Information about password used in the process of authenticating the individual as a user accessing a system."
@@ -44339,7 +44320,7 @@
                 "dpv:Superclass": "dpv:Contact",
                 "Translation_DE": "Physikalische Adresse",
                 "Translation_EN": "Physical Address",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über die physische Adresse.",
                 "Explanation_EN": "Information about physical address."
@@ -44350,7 +44331,7 @@
                 "dpv:Superclass": "dpv:External",
                 "Translation_DE": "Physikalisches Merkmal",
                 "Translation_EN": "PhysicalCharacteristic",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über körperliche Merkmale",
                 "Explanation_EN": "Information about physical characteristics"
@@ -44372,7 +44353,7 @@
                 "dpv:Superclass": "dpv:Internal",
                 "Translation_DE": "Präferenz",
                 "Translation_EN": "Preference",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Vorlieben oder Interessen",
                 "Explanation_EN": "Information about preferences or interests"
@@ -44383,7 +44364,7 @@
                 "dpv:Superclass": "dpv:Preference",
                 "Translation_DE": "Datenschutz-Präferenz",
                 "Translation_EN": "Privacy Preference",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Datenschutzpräferenzen",
                 "Explanation_EN": "Information about privacy preferences"
@@ -44438,7 +44419,7 @@
                 "dpv:Superclass": "dpv:Transactional",
                 "Translation_DE": "Steuer",
                 "Translation_EN": "Tax",
-                "Polypoly_Parent_Category": "pppc:PersonalData",
+                "Polypoly_Parent_Category": "pppc:IndividualData",
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über finanzielle Steuern, z. B. Steueraufzeichnungen oder fällige Steuern",
                 "Explanation_EN": "Information about financial tax e.g. tax records or tax due"
@@ -44460,10 +44441,10 @@
                 "dpv:Superclass": "dpv:PersonalDataCategory",
                 "Translation_DE": "Nachverfolgung",
                 "Translation_EN": "Tracking",
-                "Polypoly_Parent_Category": "pppc:BehavioralData",
+                "Polypoly_Parent_Category": "pppc:TechnicalData",
                 "Synonyms": "",
-                "Explanation_DE": "Informationen über Gedanken",
-                "Explanation_EN": "Information about thoughts"
+                "Explanation_DE": "Informationen die zum Verfolgen einer Person oder Gruppe verwendet werden z. B. Standort oder E-Mail",
+                "Explanation_EN": "Information used to track an individual or group e.g. location or email"
             },
             {
                 "dpv:Category": "dpv:Transaction",
@@ -45288,29 +45269,6 @@
             "name": {
                 "en": "Internet & Multimedia",
                 "de": "Internet & Multimedia"
-            }
-        }
-    },
-    {
-        "name": "Mobile TeleSystems “MTS” (RU)",
-        "featured": false,
-        "jurisdiction": "Russia",
-        "location": {
-            "countryCode": "RU"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:Service",
-            "name": {
-                "en": "Service",
-                "de": "Dienstleistung"
             }
         }
     },
@@ -46407,7 +46365,7 @@
     {
         "name": "Global Data Company (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -46637,7 +46595,7 @@
     {
         "name": "Axesor (ES)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "ES"
         },
@@ -46700,6 +46658,29 @@
             "name": {
                 "en": "IT",
                 "de": "EDV & IT"
+            }
+        }
+    },
+    {
+        "name": "Polkomtel, “Plus” (IE)",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "countryCode": "IE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:Service",
+            "name": {
+                "en": "Service",
+                "de": "Dienstleistung"
             }
         }
     },

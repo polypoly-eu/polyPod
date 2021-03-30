@@ -2,6 +2,7 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
+import globals from "../../../data/global.json";
 import ExplorationInfoScreen from "../../../components/explorationInfoScreen/explorationInfoScreen.jsx";
 
 const CategoryInfo = ({ category, company, onClose }) => {
@@ -13,8 +14,11 @@ const CategoryInfo = ({ category, company, onClose }) => {
         >
             <p>
                 {
-                    highlights[company.name].dataTypeCategories[category]
-                        .explanation[i18n.t("common:country.code")]
+                    globals.polypoly_parent_categories[category][
+                        i18n.t(
+                            "dataExplorationScreen:from.polyPedia.description"
+                        )
+                    ]
                 }
             </p>
             <img
@@ -23,16 +27,14 @@ const CategoryInfo = ({ category, company, onClose }) => {
                 )}.svg`}
             />
             {highlights[company.name].dataTypeCategories[category]
-                .highlightExplanation ? (
+                .explanation ? (
                 <div>
                     <h2>{i18n.t("explorationCategoryInfoScreen")}</h2>
                     <p>
                         {
                             highlights[company.name].dataTypeCategories[
                                 category
-                            ].highlightExplanation[
-                                i18n.t("common:country.code")
-                            ]
+                            ].explanation[i18n.t("common:country.code")]
                         }
                     </p>
                 </div>
