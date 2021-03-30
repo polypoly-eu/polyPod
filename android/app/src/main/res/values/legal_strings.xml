@@ -31,15 +31,17 @@
 "
     </string>
 
-    <string name="settings_privacy_policy_heading">Datenschutzerklärung fehlt noch</string>
     <string name="settings_privacy_policy_text">
-"
-Die Datenschutzerklärung fehlt leider noch.
-
-Aber wir werden sie bald hinzufügen.
-
-Wir sind uns der Ironie bewusst.
-"
+        "
+        <![CDATA[
+        <H1>Datenschutzerklärung fehlt noch</H1>
+        <p>
+            Die Datenschutzerklärung fehlt leider noch.
+            Aber wir werden sie bald hinzufügen.
+            Wir sind uns der Ironie bewusst.
+        </p>
+        ]]>
+        "
     </string>
 
     <string name="settings_terms_of_use_heading">Allgemeine Geschäftsbedingungen</string>

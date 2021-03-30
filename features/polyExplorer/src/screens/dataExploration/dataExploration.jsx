@@ -97,6 +97,7 @@ const DataExplorationScreen = ({
         const screens = [
             "dataTypes",
             "dataTypesUnderText",
+            "dataTypeHighlight",
             "dataTypesCategory",
         ];
         categories.forEach((c) => {
@@ -198,7 +199,11 @@ const DataExplorationScreen = ({
                 const touchCurrent = event.targetTouches[0].pageY;
                 const touchesDiff = touchCurrent - touchStart;
                 const topToBottom = touchesDiff < 0 && startScroll === 0;
-                const atEnd = Math.abs(startScroll - scrollDiff) < 1;
+                // On some devices, it does not seem possible to scroll all the
+                // way to the bottom, it can be a few pixels off.
+                const scrollDeltaTolerance = 2;
+                const atEnd =
+                    Math.abs(startScroll - scrollDiff) < scrollDeltaTolerance;
                 const bottomToTop = touchesDiff > 0 && atEnd;
                 const middle = startScroll > 0 && !atEnd;
                 if (topToBottom || bottomToTop || middle)
@@ -210,7 +215,7 @@ const DataExplorationScreen = ({
 
     const getStaticContent = () => {
         const filler = <div className="filler"></div>;
-        if (activeScreen === "dataTypes")
+        if (["dataTypes", "dataTypeHighlight"].includes(activeScreen))
             return (
                 <div className="static-content">
                     <h1>
@@ -226,6 +231,10 @@ const DataExplorationScreen = ({
                         textColor="#0f1938"
                         width="360"
                         height="360"
+                        highlight={
+                            activeScreen === "dataTypeHighlight" &&
+                            highestValueObject
+                        }
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
@@ -273,7 +282,7 @@ const DataExplorationScreen = ({
                     <DataTypeBubbleCategory
                         data={company.dataTypesShared}
                         defaultColor="#FB8A89"
-                        category={categories[activeIndex - 3]}
+                        category={categories[activeIndex - 4]}
                         textColor="#0f1938"
                         width="360"
                         height="360"
@@ -516,6 +525,7 @@ const DataExplorationScreen = ({
                                 )}
                             </p>
                         </SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
                         <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
