@@ -2,7 +2,7 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
-import { default as globals } from "../../../data/global.json";
+import globals from "../../../data/global.json";
 import ExplorationInfoScreen from "../../../components/explorationInfoScreen/explorationInfoScreen.jsx";
 
 const CategoryInfo = ({ category, company, onClose }) => {
@@ -12,16 +12,15 @@ const CategoryInfo = ({ category, company, onClose }) => {
             headline={i18n.t("explorationCategoryInfoScreen:headline")}
             onClose={onClose}
         >
-            <p
-                dangerouslySetInnerHTML={{
-                    __html:
-                        globals.polypoly_parent_categories[category][
-                            i18n.t(
-                                "dataExplorationScreen:from.polyPedia.description"
-                            )
-                        ],
-                }}
-            />
+            <p>
+                {
+                    globals.polypoly_parent_categories[category][
+                        i18n.t(
+                            "dataExplorationScreen:from.polyPedia.description"
+                        )
+                    ]
+                }
+            </p>
             <img
                 src={`./images/infographics/category/${i18n.t(
                     "common:country.code"
@@ -31,14 +30,13 @@ const CategoryInfo = ({ category, company, onClose }) => {
                 .explanation ? (
                 <div>
                     <h2>{i18n.t("explorationCategoryInfoScreen")}</h2>
-                    <p
-                        dangerouslySetInnerHTML={{
-                            __html:
-                                highlights[company.name].dataTypeCategories[
-                                    category
-                                ].explanation[i18n.t("common:country.code")],
-                        }}
-                    ></p>
+                    <p>
+                        {
+                            highlights[company.name].dataTypeCategories[
+                                category
+                            ].explanation[i18n.t("common:country.code")]
+                        }
+                    </p>
                 </div>
             ) : null}
         </ExplorationInfoScreen>
