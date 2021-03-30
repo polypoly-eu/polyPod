@@ -57,7 +57,11 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
     const bars = (
         <div className="bars">
             {purposes.map((p, index) => (
-                <div key={index} className="bar-box">
+                <div
+                    key={index}
+                    className="bar-box"
+                    onClick={() => openPopup(p)}
+                >
                     <div className="above-bar">
                         <p className="name">
                             {
@@ -68,10 +72,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                                 ]
                             }
                         </p>
-                        <img
-                            src="./images/question-circle-light.svg"
-                            onClick={() => openPopup(p)}
-                        />
+                        <img src="./images/question-circle-light.svg" />
                     </div>
                     <div
                         className="bar"
