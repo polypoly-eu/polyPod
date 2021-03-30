@@ -5,9 +5,6 @@ import "./companyRevenueChart.css";
 const CompanyRevenueChart = ({ annualRevenues }) => {
     const years = [2015, 2016, 2017, 2018, 2019];
 
-    const numSteps = 4;
-    console.log(annualRevenues);
-
     //from 2015
     const recentAnnualRevenues = annualRevenues?.filter(
         (e) => e.year >= years[0] && e.year <= years[years.length - 1]
@@ -46,7 +43,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
         const [unit, unitNumber] = getUnit(value);
         let refValue = Math.round(value / unitNumber);
         let scaleRef = refValue;
-        for (let i = refValue; true; i++) {
+        for (let i = refValue; refValue > 0; i++) {
             if (i < 20 && i % 4 == 0) {
                 scaleRef = i;
                 break;
