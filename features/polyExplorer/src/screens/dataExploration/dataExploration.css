@@ -15,11 +15,27 @@
     display: flex;
     flex-direction: row;
     margin: 16px auto 0 auto;
+    /*
+     * The progress bar's click area goes a bit over the exploration content, so
+     * the progress bar needs to be higher up
+     */
+    z-index: 2;
 }
 
 .data-exploration .progress-bar .progress-bar-part {
+    position: relative;
     height: 4px;
     width: 25%;
+}
+
+/* This expands the progress bar's tappable area */
+.data-exploration .progress-bar .progress-bar-part:before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 0;
+    left: 0;
+    bottom: -8px;
 }
 
 .data-exploration .progress-bar .dataTypes {
