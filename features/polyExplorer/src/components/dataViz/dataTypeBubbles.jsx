@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
+import i18n from "../../i18n.js";
+import utils from "./utils.js";
 import "./dataViz.css";
 //import { text } from "d3";
 
@@ -17,6 +19,7 @@ const DataTypeBubbles = ({
     textColor,
     opacity = 1,
     showValues = true,
+    highlight = null,
 }) => {
     const bubbleRef = useRef();
     const edgePadding = 5;
@@ -86,6 +89,26 @@ const DataTypeBubbles = ({
                   })
                   .style("font-weight", "500")
             : null;
+
+        if (highlight) {
+            const bubbles = bubbleContainer.selectAll("circle");
+            const highlightedBubble = utils.findNode(
+                bubbles,
+                (d) => d.data["dpv:Category"] === highlight?.["dpv:Category"]
+            );
+            bubbles
+                .filter((d) => d !== highlightedBubble)
+                .style("fill-opacity", opacity * 0.2);
+            const highlightText =
+                highlightedBubble.data[
+                    `Translation_${i18n.language.toUpperCase()}`
+                ];
+            utils.appendCircleLabel(
+                bubbleContainer,
+                highlightedBubble,
+                highlightText
+            );
+        }
     };
 
     useEffect(() => {

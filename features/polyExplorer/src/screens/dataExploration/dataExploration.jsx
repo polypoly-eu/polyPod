@@ -97,6 +97,7 @@ const DataExplorationScreen = ({
         const screens = [
             "dataTypes",
             "dataTypesUnderText",
+            "dataTypeHighlight",
             "dataTypesCategory",
         ];
         categories.forEach((c) => {
@@ -210,7 +211,7 @@ const DataExplorationScreen = ({
 
     const getStaticContent = () => {
         const filler = <div className="filler"></div>;
-        if (activeScreen === "dataTypes")
+        if (["dataTypes", "dataTypeHighlight"].includes(activeScreen))
             return (
                 <div className="static-content">
                     <h1>
@@ -226,6 +227,10 @@ const DataExplorationScreen = ({
                         textColor="#0f1938"
                         width="360"
                         height="360"
+                        highlight={
+                            activeScreen === "dataTypeHighlight" &&
+                            highestValueObject
+                        }
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
@@ -273,7 +278,7 @@ const DataExplorationScreen = ({
                     <DataTypeBubbleCategory
                         data={company.dataTypesShared}
                         defaultColor="#FB8A89"
-                        category={categories[activeIndex - 3]}
+                        category={categories[activeIndex - 4]}
                         textColor="#0f1938"
                         width="360"
                         height="360"
@@ -516,6 +521,7 @@ const DataExplorationScreen = ({
                                 )}
                             </p>
                         </SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
                         <SwiperSlide>
                             <p className="on-bubble">
                                 {i18n.t(
