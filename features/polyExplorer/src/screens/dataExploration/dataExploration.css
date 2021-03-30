@@ -223,6 +223,14 @@
     pointer-events: none;
 }
 
+.data-exploration .slide-tap-target {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    bottom: 60px;
+    left: 0;
+}
+
 .data-exploration .on-bubble {
     font-size: 16px;
     line-height: 120%;
