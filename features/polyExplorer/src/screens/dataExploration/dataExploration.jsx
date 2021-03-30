@@ -592,8 +592,8 @@ const DataExplorationScreen = ({
                         </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide></SwiperSlide>
-                        <SwiperSlide className="disable-tap-to-swipe"></SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide></SwiperSlide>
+                        <SwiperSlide className="disable-tap-to-swipe">
                             <div className="companies-list-content">
                                 <h2>
                                     <span className="highlight-companies">
