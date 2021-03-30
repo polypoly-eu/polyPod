@@ -5,8 +5,6 @@ import "./companyRevenueChart.css";
 const CompanyRevenueChart = ({ annualRevenues }) => {
     const years = [2015, 2016, 2017, 2018, 2019];
 
-    const numSteps = 4;
-
     //from 2015
     const recentAnnualRevenues = annualRevenues?.filter(
         (e) => e.year >= years[0] && e.year <= years[years.length - 1]
@@ -43,16 +41,25 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
     //Scaleref is the next higher multiple of 4 (scale has 4 steps excl. 0)
     const getScaleVars = (value) => {
         const [unit, unitNumber] = getUnit(value);
-        let scaleRef = Math.ceil(value / unitNumber / numSteps) * numSteps;
-        if (scaleRef - value / unitNumber < scaleRef * 0.05)
-            scaleRef += Math.ceil((scaleRef * 0.05) / 4) * 4;
+        let refValue = Math.round(value / unitNumber);
+        let scaleRef = refValue;
+        for (let i = refValue; refValue > 0; i++) {
+            if (i < 20 && i % 4 == 0) {
+                scaleRef = i;
+                break;
+            }
+            if (i >= 20 && i % 4 == 0 && i % 5 == 0) {
+                scaleRef = i;
+                break;
+            }
+        }
+        console.log(scaleRef);
         return [scaleRef, unit, unitNumber];
     };
 
     //Gives bar height in %
     const getHeight = (amount, scaleRef) => {
-        //max percentage(max is 62%) * amount / scaleRef * 100
-        return amount == null ? 0 : ((0.62 * amount) / scaleRef) * 100;
+        return amount == null ? 0 : ((0.73 * amount) / scaleRef) * 100;
     };
 
     const highestValue = getHighestAmount();

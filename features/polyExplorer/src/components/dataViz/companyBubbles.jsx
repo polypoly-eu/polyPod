@@ -118,7 +118,7 @@ const CompanyBubbles = ({
         viewState.current = viewStates.industries;
         if (viewState.current === previousState) {
             const root = getRoot();
-            root.selectAll(".bubble-label, .explanation").remove();
+            root.selectAll(".circle-label, .explanation").remove();
             return root.selectAll(".bubble");
         }
 
@@ -127,37 +127,13 @@ const CompanyBubbles = ({
         return appendBubbles(container, viewData);
     }
 
-    function appendBubbleLabel(container, bubble, text) {
-        const bubbleLabel = container.append("g").attr("class", "bubble-label");
-        const label = utils.appendLabel(bubbleLabel, text, { fontSize: 10 });
-        const bounds = label.node().getBBox();
-        const lineLength = 8;
-        label.attr(
-            "transform",
-            `translate(${bubble.x}, ${
-                bubble.y - bubble.r - bounds.height / 2 - lineLength
-            })`
-        );
-        bubbleLabel
-            .append("line")
-            .style("stroke", "white")
-            .style("stroke-width", 1)
-            .attr("x1", bubble.x)
-            .attr("y1", bubble.y - bubble.r - lineLength)
-            .attr("x2", bubble.x)
-            .attr("y2", bubble.y - bubble.r);
-    }
+    const appendBubbleLabel = (container, bubble, text) =>
+        utils.appendCircleLabel(container, bubble, text, { fontSize: 10 });
 
     function appendIndustryLabel(container, bubble) {
         const industry = bubble.data.name;
         const count = bubble.data.children.length;
         appendBubbleLabel(container, bubble, `${industry}: ${count}`);
-    }
-
-    function findNode(nodes, matchFunction) {
-        let match = null;
-        nodes.filter(matchFunction).each((node) => (match = node));
-        return match;
     }
 
     function appendExplanation(container, highlightedBubble, explanation) {
@@ -216,7 +192,7 @@ const CompanyBubbles = ({
                 )
                 .style("stroke", "transparent");
 
-            const highlightedBubble = findNode(
+            const highlightedBubble = utils.findNode(
                 bubbles,
                 (d) => d.data.highlightedIndustry
             );
@@ -239,7 +215,7 @@ const CompanyBubbles = ({
                     d.data.highlightedCompany ? 1 : 0.15
                 );
 
-            const highlightedBubble = findNode(
+            const highlightedBubble = utils.findNode(
                 bubbles,
                 (d) => d.data.highlightedCompany
             );

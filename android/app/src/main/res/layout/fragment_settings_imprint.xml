@@ -10,27 +10,10 @@
         android:orientation="vertical"
         android:padding="30dp">
 
-        <TextView
+        <coop.polypoly.polypod.settings.HTMLTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings_imprint_heading"
-            android:textStyle="bold"
-            android:textSize="24dp"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="0dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/jost_medium"
-            android:textAlignment="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/settings_imprint_text"
-            android:textSize="16dp"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="0dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/jost_regular" />
+            android:text="@string/settings_imprint_text" />
 
     </LinearLayout>
 
