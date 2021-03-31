@@ -18,7 +18,11 @@ const CompanyFilterScreen = ({
 
     const handleReset = () => setNewActiveFilters(companyFilter.emptyFilters());
 
-    const allFilters = companyFilter.extractFilters(companies);
+    const allFilters = companyFilter.extractFilters(
+        companies,
+        i18n,
+        globalData
+    );
 
     const isFilterActive = (field, value) =>
         companyFilter.hasFilter(newActiveFilters, field, value);
