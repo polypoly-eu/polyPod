@@ -285,9 +285,13 @@ const CompanyBubbles = ({
                 .each((e) => appendIndustryLabel(container, e));
         },
         industryHighlight: (container) => {
-            if (!highlightTexts.industry) return;
-
             const bubbles = setUpIndustryView(container);
+
+            if (!highlightTexts.industry) {
+                appendExplanation(container, {}, "MISSING INDUSTRY HIGHLIGHT");
+                return;
+            }
+
             bubbles
                 .style("fill", (d) =>
                     d.children ? "transparent" : bubbleColor
@@ -309,9 +313,13 @@ const CompanyBubbles = ({
             );
         },
         companyHighlight: (container) => {
-            if (!highlightTexts.company) return;
-
             const bubbles = setUpIndustryView(container);
+
+            if (!highlightTexts.company) {
+                appendExplanation(container, {}, "MISSING COMPANY HIGHLIGHT");
+                return;
+            }
+
             bubbles
                 .style("fill", (d) =>
                     d.children ? "transparent" : bubbleColor
