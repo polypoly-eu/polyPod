@@ -95,8 +95,17 @@ const DataExplorationScreen = ({
         return jurisdictionTreeFormatData;
     };
 
+    const visualizationWidth = 360;
+    const visualizationHeight = 360;
+
     const companyIndustrySets = useMemo(
-        () => buildIndustrySets(companyIndustryMap, maxCompanies),
+        () =>
+            buildIndustrySets(
+                companyIndustryMap,
+                visualizationWidth,
+                visualizationHeight,
+                maxCompanies
+            ),
         [companyIndustryMap, maxCompanies]
     );
 
@@ -236,8 +245,8 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="#0f1938"
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         highlight={
                             activeScreen === "dataTypeHighlight" &&
                             highestValueObject
@@ -271,8 +280,8 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="#0f1938"
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         opacity={0.2}
                     />
                     <p className="bubble-source">
@@ -291,8 +300,8 @@ const DataExplorationScreen = ({
                         defaultColor="#FB8A89"
                         category={categories[activeIndex - 4]}
                         textColor="#0f1938"
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         highlightedType={
                             highlights[company.name].dataTypeCategories[
                                 activeScreen.split("_")[1]
@@ -325,8 +334,8 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="#0f1938"
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         opacity={0.2}
                         showValues={false}
                     />
@@ -351,8 +360,8 @@ const DataExplorationScreen = ({
                             highlights[company.name]?.dataTypeCorrelation
                                 .types || []
                         }
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
@@ -379,8 +388,8 @@ const DataExplorationScreen = ({
                     <CompanyBubbles
                         view="flat"
                         companyIndustryMap={companyIndustryMap}
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                     />
@@ -407,8 +416,8 @@ const DataExplorationScreen = ({
                     <CompanyBubbles
                         view="flat"
                         companyIndustryMap={companyIndustryMap}
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         opacity={0.1}
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
@@ -447,8 +456,8 @@ const DataExplorationScreen = ({
                                 parseInt(activeScreen.split("_")[1], 10)
                             ]
                         }
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                         highlight={highlights[company.name]?.dataRecipient}

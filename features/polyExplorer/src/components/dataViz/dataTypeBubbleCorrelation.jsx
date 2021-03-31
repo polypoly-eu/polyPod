@@ -68,19 +68,15 @@ const DataTypeBubbleCategory = ({
             return containsRect(containerRect, p.rect);
         });
 
-    const detectRectCollision = (a, b) =>
-        a.left < b.right &&
-        a.right > b.left &&
-        a.top < b.bottom &&
-        a.bottom > b.top;
-
     const findCollisionFreePositions = (positions, elements) =>
         positions.filter(
             (position) =>
-                !elements.some((element) => {
-                    const elementRect = utils.calculateElementRect(element);
-                    return detectRectCollision(position.rect, elementRect);
-                })
+                !elements.some((element) =>
+                    utils.detectRectCollision(
+                        position.rect,
+                        utils.calculateElementRect(element)
+                    )
+                )
         );
 
     function calculateRectToPointDistance(rect, point) {

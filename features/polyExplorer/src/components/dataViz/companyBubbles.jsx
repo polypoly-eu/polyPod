@@ -57,48 +57,70 @@ function withTemporaryContainer(f) {
     document.body.removeChild(svg);
 }
 
-function findCollidingIndustryLabels(companyIndustryMap, maxCompanies) {
+function calculateIndustryLabelRects(
+    companyIndustryMap,
+    width,
+    height,
+    maxCompanies
+) {
     const viewData = createIndustryViewData(companyIndustryMap);
-    // TODO: Don't hard code width and height here
-    const root = packIndustryViewData(viewData, 360, 360, maxCompanies);
-
-    const collidingLabels = [];
+    const root = packIndustryViewData(viewData, width, height, maxCompanies);
+    const rects = {};
     withTemporaryContainer((container) => {
-        // TODO: Don't actually draw the bubbles, pass just the necessary data
-        //       to appendIndustryLabel
-        container
-            .selectAll("circle")
-            .data(root.descendants())
-            .enter()
-            .append("circle")
-            .attr("class", "bubble")
-            .attr("cx", (d) => d.x)
-            .attr("cy", (d) => d.y)
-            .attr("r", (d) => d.r);
-        const industryNodes = container
-            .selectAll(".bubble")
-            .filter((d) => d.parent && d.children);
-        industryNodes.each((e) => appendIndustryLabel(container, e).node());
-        const labelRects = [];
-        // TODO: .each doesn't seem to work
-        container.selectAll(".label")._groups[0].forEach((e) => {
-            labelRects.push(utils.calculateElementRect(e));
-        });
-        // TODO: Determine label collisions and add the offenders to
-        //       collidingLabels
+        for (let industryCircle of root.children) {
+            const labelGroup = appendIndustryLabel(container, industryCircle);
+            const label = labelGroup.select(".label").node();
+            rects[industryCircle.data.name] = utils.calculateElementRect(label);
+        }
     });
+    return rects;
+}
+
+function findCollidingIndustryLabels(industries, industryLabelRects) {
+    const collidingLabels = [];
+    const collisionFreeRects = [];
+    for (let [industry, rect] of Object.entries(industryLabelRects)) {
+        if (!industries.includes(industry)) continue;
+        const collides = collisionFreeRects.some((otherRect) =>
+            utils.detectRectCollision(rect, otherRect)
+        );
+        if (collides) {
+            collidingLabels.push(industry);
+            continue;
+        }
+        collisionFreeRects.push(rect);
+    }
     return collidingLabels;
 }
 
-export function buildIndustrySets(companyIndustryMap, maxCompanies) {
-    // eslint-disable-next-line no-unused-vars
-    const collidingLabels = findCollidingIndustryLabels(
+export function buildIndustrySets(
+    companyIndustryMap,
+    width,
+    height,
+    maxCompanies
+) {
+    const industryLabelRects = calculateIndustryLabelRects(
         companyIndustryMap,
+        width,
+        height,
         maxCompanies
     );
+    const sets = [];
+    for (
+        let industries = Object.keys(companyIndustryMap);
+        industries.length;
 
-    // TODO: Create more than one set based on collidingLabels
-    return [Object.keys(companyIndustryMap)];
+    ) {
+        const collidingLabels = findCollidingIndustryLabels(
+            industries,
+            industryLabelRects
+        );
+        sets.push(
+            industries.filter((industry) => !collidingLabels.includes(industry))
+        );
+        industries = collidingLabels;
+    }
+    return sets;
 }
 
 const CompanyBubbles = ({

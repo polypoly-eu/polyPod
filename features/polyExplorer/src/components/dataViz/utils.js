@@ -98,9 +98,16 @@ function calculateElementRect(element) {
     return rect;
 }
 
+const detectRectCollision = (a, b) =>
+    a.left < b.right &&
+    a.right > b.left &&
+    a.top < b.bottom &&
+    a.bottom > b.top;
+
 export default {
     appendLabel,
     appendCircleLabel,
     findNode,
     calculateElementRect,
+    detectRectCollision,
 };
