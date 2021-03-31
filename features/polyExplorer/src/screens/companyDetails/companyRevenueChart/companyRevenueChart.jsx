@@ -53,7 +53,6 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                 break;
             }
         }
-        console.log(scaleRef);
         return [scaleRef, unit, unitNumber];
     };
 
