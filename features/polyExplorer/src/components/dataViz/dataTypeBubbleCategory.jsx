@@ -58,7 +58,7 @@ const DataTypeBubbleCategory = ({
         leaf.append("circle")
             .attr("r", (d) => d.r)
             .attr("fill-opacity", (d) =>
-                d.data.Polypoly_Parent_Category == category ? 1 : 0.2
+                d.data.Polypoly_Parent_Category.indexOf(category) >= 0 ? 1 : 0.2
             )
             .attr("fill", defaultColor)
             .style("vertical-align", "center")
