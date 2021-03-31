@@ -1,10 +1,10 @@
-function appendLabel(container, text, props = {}) {
+function appendLabel(container, text) {
     const label = container.append("g").attr("class", "label");
     label
         .append("text")
         .text(text)
         .style("fill", "#F7FAFC")
-        .style("font-size", props.fontSize || 14)
+        .style("font-size", 14)
         .style("font-family", "Jost Medium")
         .style("text-anchor", "middle")
         .style("alignment-baseline", "middle");
@@ -45,9 +45,9 @@ function findCircleLabelPosition(labelBounds, circle, distance) {
     };
 }
 
-function appendCircleLabel(container, circle, text, props = {}) {
+function appendCircleLabel(container, circle, text) {
     const circleLabel = container.append("g").attr("class", "circle-label");
-    const label = appendLabel(circleLabel, text, props);
+    const label = appendLabel(circleLabel, text);
     const bounds = label.node().getBBox();
     const lineLength = 8;
     const labelPosition = findCircleLabelPosition(bounds, circle, lineLength);

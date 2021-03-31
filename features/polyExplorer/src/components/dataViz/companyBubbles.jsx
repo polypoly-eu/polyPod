@@ -4,9 +4,27 @@ import i18n from "../../i18n.js";
 import utils from "./utils.js";
 import "./dataViz.css";
 
-function createIndustryViewData(companyIndustryMap, highlights = null) {
-    // This padding is what's currently keeping the industry labels from
-    // colliding (for the most part). But we'll need a better solution.
+function calculateCompanyBubblePadding(companyIndustryMap, maxCompanies) {
+    const totalCompanies = Object.values(companyIndustryMap)
+        .map((companies) => companies.length)
+        .reduce((a, b) => a + b, 0);
+    const minPadding = 1;
+    const maxPadding = 10;
+    return (
+        minPadding +
+        (1 - totalCompanies / maxCompanies) * (maxPadding - minPadding)
+    );
+}
+
+function createIndustryViewData(
+    companyIndustryMap,
+    maxCompanies,
+    highlights = null
+) {
+    const companyBubblePadding = calculateCompanyBubblePadding(
+        companyIndustryMap,
+        maxCompanies
+    );
     const viewData = { padding: 40 };
     viewData.children = Object.entries(companyIndustryMap).map(
         ([industry, companies]) => ({
@@ -15,6 +33,7 @@ function createIndustryViewData(companyIndustryMap, highlights = null) {
                 name: company.name,
                 highlightedCompany: company.name === highlights?.company?.name,
             })),
+            padding: companyBubblePadding,
             highlightedIndustry: industry === highlights?.industry?.name,
         })
     );
@@ -41,7 +60,7 @@ function packIndustryViewData(data, width, height, maxCompanies) {
 }
 
 const appendBubbleLabel = (container, bubble, text) =>
-    utils.appendCircleLabel(container, bubble, text, { fontSize: 10 });
+    utils.appendCircleLabel(container, bubble, text);
 
 function appendIndustryLabel(container, bubble) {
     const industry = bubble.data.name;
@@ -63,7 +82,7 @@ function calculateIndustryLabelRects(
     height,
     maxCompanies
 ) {
-    const viewData = createIndustryViewData(companyIndustryMap);
+    const viewData = createIndustryViewData(companyIndustryMap, maxCompanies);
     const root = packIndustryViewData(viewData, width, height, maxCompanies);
     const rects = {};
     withTemporaryContainer((container) => {
@@ -189,6 +208,10 @@ const CompanyBubbles = ({
 
         clearAll();
         const viewData = {
+            padding: calculateCompanyBubblePadding(
+                companyIndustryMap,
+                maxCompanies
+            ),
             children: Object.values(companyIndustryMap)
                 .flat()
                 .map((company) => ({
@@ -210,6 +233,7 @@ const CompanyBubbles = ({
         clearAll();
         const viewData = createIndustryViewData(
             companyIndustryMap,
+            maxCompanies,
             highlightTexts
         );
         return appendBubbles(container, viewData);
