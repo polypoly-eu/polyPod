@@ -36,9 +36,12 @@ export default {
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
             },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
+            */
         },
         dataRecipient: {
             name: "elopage GmbH",
@@ -95,6 +98,7 @@ export default {
                 en:
                     "Microsoft Corporation is an international hardware and software developer and a technology company headquartered in Redmond (USA) and is also one of the Big Five companies, i.e. the largest tech corporations in the world.",
             },
+            // TODO: Way too long!
             industryExplanation: {
                 de:
                     'Die SCHUFA teilt Daten mit Unternehmen der IT-Branche zu Werbe- und Analysezwecken. Durch die Sammlung von Daten über die Besucher:innen ihrer Website mithilfe von Cookies kann aus einer Kombination von Geräte- und Browserattributen ein individueller „Fingerabdruck" erstellt werden, dem eine eindeutige Kennung zugewiesen wird. Dieser wird dann im gesamten Internet verwendet, um eine:n bestimmte:n Website-Besucher:in wiederzuerkennen und zu messen, wie er:sie auf Werbekampagnen reagiert und das weitere Surfverhalten zu analysieren.',
@@ -133,6 +137,8 @@ export default {
                         "Apple uses device location data to provide its services like realtime traffic, maps and Find my Phone, among others. If a user turns on location services, various sensors can pinpoint the whereabouts of a device to within a few metres. In the past, the iPhone 11 made regular location checks to determine if it was in a country where the use of a new Ultra Wide Band data transfer technology was approved, something that couldn't be turned off by the user - unless by travelling to a location where it would become automatically disabled.",
                 },
             },
+            // TODO: dpv:Location doesn't seem to have ended up in dpv:Location!
+            /*
             [parentCategories.behavioral]: {
                 category: "dpv:Location",
                 explanation: {
@@ -142,23 +148,24 @@ export default {
                         "Apple uses the data it gathers about the behaviour of its customers - how they use their devices - to inform product improvement and the research and development of future products and services. This happens also if accounts are set up specifically for children. ",
                 },
             },
+            */
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
-            dataRecipient: {
-                name: "IBM (US)",
-                companyExplanation: {
-                    de:
-                        "IBM ist eines der weltweit führenden Unternehmen – insbesondere für branchenspezifische Lösungen und Dienstleistungen – im IT-, Software- und Hardware-Bereich. Der Unternehmenssitz ist in Armonk (USA).",
-                    en:
-                        "IBM is one of the world's leading companies - especially for industry-specific solutions and services - in the IT, software and hardware sectors. The company is headquartered in Armonk (USA).",
-                },
-                industryExplanation: {
-                    de:
-                        "Apple ist ein Technologieunternehmen, hat aber ein eigenes Spezialgebiet: Endgeräte für Verbraucher:innen. Andere Aspekte des Geschäfts erfordern andere Fachkenntnisse und die IT-Infrastruktur und Back-End-Systeme werden von strategischen Geschäftspartner:innen aus der IT-Branche bereitgestellt.",
-                    en:
-                        "Apple is a technology company but has its area of speciality - consumer end devices. Other aspects of business require different expertise and IT infrastructure and back-end systems are provided by their IT strategic business partners.",
-                },
+        },
+        dataRecipient: {
+            name: "IBM (US)",
+            companyExplanation: {
+                de:
+                    "IBM ist eines der weltweit führenden Unternehmen – insbesondere für branchenspezifische Lösungen und Dienstleistungen – im IT-, Software- und Hardware-Bereich. Der Unternehmenssitz ist in Armonk (USA).",
+                en:
+                    "IBM is one of the world's leading companies - especially for industry-specific solutions and services - in the IT, software and hardware sectors. The company is headquartered in Armonk (USA).",
+            },
+            industryExplanation: {
+                de:
+                    "Apple ist ein Technologieunternehmen, hat aber ein eigenes Spezialgebiet: Endgeräte für Verbraucher:innen. Andere Aspekte des Geschäfts erfordern andere Fachkenntnisse und die IT-Infrastruktur und Back-End-Systeme werden von strategischen Geschäftspartner:innen aus der IT-Branche bereitgestellt.",
+                en:
+                    "Apple is a technology company but has its area of speciality - consumer end devices. Other aspects of business require different expertise and IT infrastructure and back-end systems are provided by their IT strategic business partners.",
             },
         },
     },
@@ -173,15 +180,20 @@ export default {
             },
         },
         dataTypeCategories: {
+            // TODO: dpv:Age doesn't seem to be in there
+            /*
             [parentCategories.individual]: {
                 category: "dpv:Age",
             },
+            */
             [parentCategories.social]: {
                 category: "dpv:Language",
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
             },
+            // TODO: dpv:Tracking seems to be there, but not under behavioral data
+            /*
             [parentCategories.behavioral]: {
                 category: "dpv:Tracking",
                 explanation: {
@@ -191,12 +203,13 @@ export default {
                         "BMW uses cookies on its website that track the behaviour of users as they browse and that are combined to recognise users on subsequent visits and map behaviour over time. The data garnered from this process can be things like the particular model of car that a person has viewed most, or the class of vehicles they spend most time engaging with. BMW shares data such as this with companies like Sophus 3 - a company that specialises in car buying behaviour and works with many major manufacturers.",
                 },
             },
+            */
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
         },
         dataRecipient: {
-            name: "BOSCH Service Solutions GmbH (DE)",
+            name: "Bosch Service Solutions GmbH",
             companyExplanation: {
                 de:
                     "Bosch Service Solutions ist ein führender Anbieter für Business Process Outsourcing. Bosch Service Solutions  unterstützt bei der Prozessoptimierung mit fünf Kernbereichen: Customer Experience Services, Mobility Services, Monitoring Services und Business Services. Der Firmensitz ist Stuttgart (DE).",
@@ -211,7 +224,7 @@ export default {
             },
         },
     },
-    "Google LLC": {
+    "GOOGLE LLC": {
         dataTypeCorrelation: {
             types: [
                 "dpv:GeneralReputation",
@@ -249,7 +262,7 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Waytogrow",
+            name: "WayToGrow (PL)",
             companyExplanation: {
                 de:
                     "Waytogrow ist eine unabhängige Gruppe von Expert:innen, die sich auf programmatische und datengesteuerte Werbung spezialisiert haben. Waytogrow mit Sitz in Warschau (PL) gehört zur Netsprint-Gruppe, einem führenden Unternehmen im digitalen Marketing. ",
@@ -296,20 +309,20 @@ export default {
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
-            dataRecipient: {
-                name: "	Nielsen LLC",
-                companyExplanation: {
-                    de:
-                        "Nielsen LLC ist der globale Marktführer im Bereich Marktforschung und hilft Unternehmen dabei, ihre Konsument:innen und deren Verhalten (besser) zu verstehen – durch qualitative und quantitative Konsument:innen-Befragungen. Der Unternehmenssitz ist in London (UK), das Verwaltungszentrum in New York City (USA).",
-                    en:
-                        "Nielsen LLC is the global leader in market research, helping companies (better) understand their consumers and their behaviour through qualitative and quantitative consumer surveys. The company is headquartered in London (UK) and has its administrative centre in New York City (USA). ",
-                },
-                industryExplanation: {
-                    de:
-                        'Amazon hat sich in relativ kurzer Zeit zu einem globalen Giganten entwickelt und hätte dies nicht tun können, ohne enge Beziehungen zu Unternehmen aufzubauen, die auf dem Gebiet der Marktforschung führend sind. Amazons Bemühungen, das „kund:innenorientierteste Unternehmen der Welt" zu werden, werden durch die Erforschung und Analyse von Kund:innen-Verhalten und Konsummärkten und der Zusammenarbeit mit eben jener Marktforschunginstituten und anderen Unternehmen aus dieser Branche kontinuierlich verbessert.',
-                    en:
-                        "Amazon has become a global giant in a relatively short time and it couldn't have done this without building close ties to companies that are on the cutting edge of market research. Amazon's efforts to become the world's \"most customer focused company\" are fuelled by the research and analysis of customers and markets in a feedback loop of constant improvement.",
-                },
+        },
+        dataRecipient: {
+            name: "Nielsen LLC (US)",
+            companyExplanation: {
+                de:
+                    "Nielsen LLC ist der globale Marktführer im Bereich Marktforschung und hilft Unternehmen dabei, ihre Konsument:innen und deren Verhalten (besser) zu verstehen – durch qualitative und quantitative Konsument:innen-Befragungen. Der Unternehmenssitz ist in London (UK), das Verwaltungszentrum in New York City (USA).",
+                en:
+                    "Nielsen LLC is the global leader in market research, helping companies (better) understand their consumers and their behaviour through qualitative and quantitative consumer surveys. The company is headquartered in London (UK) and has its administrative centre in New York City (USA). ",
+            },
+            industryExplanation: {
+                de:
+                    'Amazon hat sich in relativ kurzer Zeit zu einem globalen Giganten entwickelt und hätte dies nicht tun können, ohne enge Beziehungen zu Unternehmen aufzubauen, die auf dem Gebiet der Marktforschung führend sind. Amazons Bemühungen, das „kund:innenorientierteste Unternehmen der Welt" zu werden, werden durch die Erforschung und Analyse von Kund:innen-Verhalten und Konsummärkten und der Zusammenarbeit mit eben jener Marktforschunginstituten und anderen Unternehmen aus dieser Branche kontinuierlich verbessert.',
+                en:
+                    "Amazon has become a global giant in a relatively short time and it couldn't have done this without building close ties to companies that are on the cutting edge of market research. Amazon's efforts to become the world's \"most customer focused company\" are fuelled by the research and analysis of customers and markets in a feedback loop of constant improvement.",
             },
         },
     },
@@ -333,6 +346,8 @@ export default {
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
             },
+            // TODO: dpv:SpecialCategoryData doesn't seem to be in there
+            /*
             [parentCategories.behavioral]: {
                 category: "dpv:SpecialCategoryData",
                 explanation: {
@@ -342,18 +357,23 @@ export default {
                         "or many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
                 },
             },
+            */
+            // TODO: dpv:Financial doesn't seem to be in there
+            /*
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
+            */
         },
         dataRecipient: {
-            name: "University College London",
+            name: "University College London (GB)",
             companyExplanation: {
                 de:
                     "Das University College London (UK) gehört zur Universität London und ist als Mitglied der Russell-Gruppe (Verbund 24 führender, britischer Forschungsuniversitäten) eine der angesehensten Eliteuniversitäten der Welt.",
                 en:
                     "University College London (UK) is part of the University of London and, as a member of the Russell Group (an association of 24 leading British research universities), is one of the most prestigious elite universities in the world.",
             },
+            // TODO: Waaaay too long
             industryExplanation: {
                 de:
                     "Facebook beteiligt sich an der Finanzierung und Förderung akademischer Forschung in einem breiten Spektrum von Themen – von tiefgreifenden technischen Infrastrukturprojekten, die die Funktion der Systeme verbessern, über die anspruchsvollste Datenwissenschaft, die die Massen an Daten nutzt, bis hin zur Untersuchung der Auswirkungen sozialer Medien auf das Leben der Menschen. Der berüchtigte Datenskandal von Cambridge Analytica wurde durch eine Persönlichkeitsquiz-App ermöglicht, die angeblich Informationen von Facebook-Nutzenden zu Forschungszwecken sammelte. Das Forschungsunternehmen hinter der App verkaufte die Daten dann an SCL, die sie für die Durchführung fragwürdiger Wahlkampagnen nutzten. Die Auswirkungen dieses Skandals trugen maßgeblich zur Einführung der derzeitigen europäischen GDPR-Richtlinien bei.",
