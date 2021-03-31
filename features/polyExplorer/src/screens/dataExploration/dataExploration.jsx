@@ -7,7 +7,9 @@ import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
 import PurposeChart from "../../components/dataViz/purposeChart.jsx";
-import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
+import CompanyBubbles, {
+    buildIndustrySets,
+} from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
@@ -93,6 +95,11 @@ const DataExplorationScreen = ({
         return jurisdictionTreeFormatData;
     };
 
+    const companyIndustrySets = useMemo(
+        () => buildIndustrySets(companyIndustryMap, maxCompanies),
+        [companyIndustryMap, maxCompanies]
+    );
+
     const getScreens = () => {
         const screens = [
             "dataTypes",
@@ -108,7 +115,9 @@ const DataExplorationScreen = ({
         screens.push("purposes");
         screens.push("companies");
         screens.push("companiesExplanation");
-        screens.push("companiesIndustries");
+        companyIndustrySets.forEach((_, index) => {
+            screens.push(`companiesIndustries_${index}`);
+        });
         screens.push("companiesIndustryHighlight");
         screens.push("companiesCompanyHighlight");
         screens.push("companiesList");
@@ -412,8 +421,8 @@ const DataExplorationScreen = ({
                 </div>
             );
         else if (
+            activeScreen.startsWith("companiesIndustries_") ||
             [
-                "companiesIndustries",
                 "companiesIndustryHighlight",
                 "companiesCompanyHighlight",
             ].includes(activeScreen)
@@ -428,12 +437,16 @@ const DataExplorationScreen = ({
                     <CompanyBubbles
                         view={
                             {
-                                companiesIndustries: "allIndustries",
                                 companiesIndustryHighlight: "industryHighlight",
                                 companiesCompanyHighlight: "companyHighlight",
-                            }[activeScreen]
+                            }[activeScreen] || "allIndustries"
                         }
                         companyIndustryMap={companyIndustryMap}
+                        showIndustryLabels={
+                            companyIndustrySets[
+                                parseInt(activeScreen.split("_")[1], 10)
+                            ]
+                        }
                         width="360"
                         height="360"
                         bubbleColor="#7EE8A2"
@@ -593,7 +606,11 @@ const DataExplorationScreen = ({
                                 )}
                             </p>
                         </SwiperSlide>
-                        <SwiperSlide></SwiperSlide>
+                        {companyIndustrySets.map((_, index) => (
+                            <SwiperSlide
+                                key={`industry_${index}`}
+                            ></SwiperSlide>
+                        ))}
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide className="disable-tap-to-swipe">

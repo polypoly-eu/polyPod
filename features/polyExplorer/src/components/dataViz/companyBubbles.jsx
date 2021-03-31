@@ -4,6 +4,103 @@ import i18n from "../../i18n.js";
 import utils from "./utils.js";
 import "./dataViz.css";
 
+function createIndustryViewData(companyIndustryMap, highlights = null) {
+    // This padding is what's currently keeping the industry labels from
+    // colliding (for the most part). But we'll need a better solution.
+    const viewData = { padding: 40 };
+    viewData.children = Object.entries(companyIndustryMap).map(
+        ([industry, companies]) => ({
+            name: industry,
+            children: companies.map((company) => ({
+                name: company.name,
+                highlightedCompany: company.name === highlights?.company?.name,
+            })),
+            highlightedIndustry: industry === highlights?.industry?.name,
+        })
+    );
+    return viewData;
+}
+
+function packIndustryViewData(data, width, height, maxCompanies) {
+    const root = d3.hierarchy(data).sum(() => 1);
+
+    // This formula needs some revisiting, it was just tinkered
+    // together. The idea is that the radius is small enough so that all
+    // visualisations here look alright when the amount of companies is at
+    // maxCompanies - there must be a more reliable way to achieve that.
+    const bubbleRadius = ((width * Math.PI) / maxCompanies) * 2;
+
+    const edgePadding = 5;
+    const packLayout = d3
+        .pack()
+        .size([width - edgePadding, height - edgePadding])
+        .padding((d) => d.data.padding || 1)
+        .radius(() => bubbleRadius);
+    packLayout(root);
+    return root;
+}
+
+const appendBubbleLabel = (container, bubble, text) =>
+    utils.appendCircleLabel(container, bubble, text, { fontSize: 10 });
+
+function appendIndustryLabel(container, bubble) {
+    const industry = bubble.data.name;
+    const count = bubble.data.children.length;
+    return appendBubbleLabel(container, bubble, `${industry}: ${count}`);
+}
+
+function withTemporaryContainer(f) {
+    const svg = document.createElementNS(d3.namespaces.svg, "svg");
+    document.body.appendChild(svg);
+    const container = d3.select(svg);
+    f(container);
+    document.body.removeChild(svg);
+}
+
+function findCollidingIndustryLabels(companyIndustryMap, maxCompanies) {
+    const viewData = createIndustryViewData(companyIndustryMap);
+    // TODO: Don't hard code width and height here
+    const root = packIndustryViewData(viewData, 360, 360, maxCompanies);
+
+    const collidingLabels = [];
+    withTemporaryContainer((container) => {
+        // TODO: Don't actually draw the bubbles, pass just the necessary data
+        //       to appendIndustryLabel
+        container
+            .selectAll("circle")
+            .data(root.descendants())
+            .enter()
+            .append("circle")
+            .attr("class", "bubble")
+            .attr("cx", (d) => d.x)
+            .attr("cy", (d) => d.y)
+            .attr("r", (d) => d.r);
+        const industryNodes = container
+            .selectAll(".bubble")
+            .filter((d) => d.parent && d.children);
+        industryNodes.each((e) => appendIndustryLabel(container, e).node());
+        const labelRects = [];
+        // TODO: .each doesn't seem to work
+        container.selectAll(".label")._groups[0].forEach((e) => {
+            labelRects.push(utils.calculateElementRect(e));
+        });
+        // TODO: Determine label collisions and add the offenders to
+        //       collidingLabels
+    });
+    return collidingLabels;
+}
+
+export function buildIndustrySets(companyIndustryMap, maxCompanies) {
+    // eslint-disable-next-line no-unused-vars
+    const collidingLabels = findCollidingIndustryLabels(
+        companyIndustryMap,
+        maxCompanies
+    );
+
+    // TODO: Create more than one set based on collidingLabels
+    return [Object.keys(companyIndustryMap)];
+}
+
 const CompanyBubbles = ({
     companyIndustryMap,
     view,
@@ -13,6 +110,7 @@ const CompanyBubbles = ({
     bubbleColor,
     maxCompanies,
     highlight = {},
+    showIndustryLabels = [],
 }) => {
     const bubbleRef = useRef();
     const viewStates = Object.freeze({ flat: 1, industries: 2 });
@@ -47,22 +145,7 @@ const CompanyBubbles = ({
     })();
 
     function appendBubbles(container, data) {
-        const root = d3.hierarchy(data).sum(() => 1);
-
-        // This formula needs some revisiting, it was just tinkered
-        // together. The idea is that the radius is small enough so that all
-        // visualisations here look alright when the amountof companies is at
-        // maxCompanies - there must be a more reliable way to achieve that.
-        const bubbleRadius = ((width * Math.PI) / maxCompanies) * 2;
-
-        const edgePadding = 5;
-        const packLayout = d3
-            .pack()
-            .size([width - edgePadding, height - edgePadding])
-            .padding((d) => d.data.padding || 1)
-            .radius(() => bubbleRadius);
-        packLayout(root);
-
+        const root = packIndustryViewData(data, width, height, maxCompanies);
         return container
             .selectAll("circle")
             .data(root.descendants())
@@ -93,26 +176,6 @@ const CompanyBubbles = ({
         return appendBubbles(container, viewData);
     }
 
-    function createIndustryViewData() {
-        // This padding is what's currently keeping the industry labels from
-        // colliding (for the most part). But we'll need a better solution.
-        const viewData = { padding: 40 };
-        viewData.children = Object.entries(companyIndustryMap).map(
-            ([industry, companies]) => ({
-                name: industry,
-                children: companies.map((company) => ({
-                    name: company.name,
-                    highlightedCompany:
-                        company.name === highlightTexts?.company?.name,
-                })),
-                highlightedIndustry:
-                    industry === highlightTexts?.industry?.name,
-            })
-        );
-
-        return viewData;
-    }
-
     function setUpIndustryView(container) {
         const previousState = viewState.current;
         viewState.current = viewStates.industries;
@@ -123,17 +186,11 @@ const CompanyBubbles = ({
         }
 
         clearAll();
-        const viewData = createIndustryViewData();
+        const viewData = createIndustryViewData(
+            companyIndustryMap,
+            highlightTexts
+        );
         return appendBubbles(container, viewData);
-    }
-
-    const appendBubbleLabel = (container, bubble, text) =>
-        utils.appendCircleLabel(container, bubble, text, { fontSize: 10 });
-
-    function appendIndustryLabel(container, bubble) {
-        const industry = bubble.data.name;
-        const count = bubble.data.children.length;
-        appendBubbleLabel(container, bubble, `${industry}: ${count}`);
     }
 
     function appendExplanation(container, highlightedBubble, explanation) {
@@ -177,7 +234,9 @@ const CompanyBubbles = ({
                 .style("fill", bubbleColor)
                 .style("fill-opacity", 0.15);
 
-            industryBubbles.each((e) => appendIndustryLabel(container, e));
+            industryBubbles
+                .filter((d) => showIndustryLabels.includes(d.data.name))
+                .each((e) => appendIndustryLabel(container, e));
         },
         industryHighlight: (container) => {
             if (!highlightTexts.industry) return;

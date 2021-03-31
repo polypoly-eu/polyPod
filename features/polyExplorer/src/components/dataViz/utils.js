@@ -67,6 +67,8 @@ function appendCircleLabel(container, circle, text, props = {}) {
         .attr("y1", lineY)
         .attr("x2", circle.x)
         .attr("y2", lineY + lineLength);
+
+    return circleLabel;
 }
 
 function findNode(selection, matchFunction) {
@@ -75,8 +77,30 @@ function findNode(selection, matchFunction) {
     return match;
 }
 
+function calculateElementRect(element) {
+    const bounds = element.getBBox();
+    const rect = {
+        left: bounds.x,
+        right: bounds.x + bounds.width,
+        top: bounds.y,
+        bottom: bounds.y + bounds.height,
+    };
+
+    // The element's bounding box is relative to its own coordinate system,
+    // i.e. it does not consider its transformation matrix. This is an
+    // attempt to do that manually, that does however not consider anything
+    // but translate().
+    const transform = element.transform.baseVal.consolidate().matrix;
+    rect.left += transform.e;
+    rect.right += transform.e;
+    rect.top += transform.f;
+    rect.bottom += transform.f;
+    return rect;
+}
+
 export default {
     appendLabel,
     appendCircleLabel,
     findNode,
+    calculateElementRect,
 };
