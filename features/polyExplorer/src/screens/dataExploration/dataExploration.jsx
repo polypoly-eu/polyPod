@@ -643,7 +643,7 @@ const DataExplorationScreen = ({
                                 />
                             </div>
                         </SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide className="disable-tap-to-swipe">
                             <div className="jurisdiction-tree-container">
                                 <h1>
                                     {i18n.t(
