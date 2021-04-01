@@ -140,6 +140,7 @@ export function equal(filtersA, filtersB) {
 }
 
 export function sortFilters(filters, i18n, globalData) {
+    if (!filters.length) return [];
     const processField = {
         industryCategory: (filters) => {
             return [...filters].sort((a, b) =>
