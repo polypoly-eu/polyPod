@@ -137,7 +137,7 @@ export default {
                         "Apple uses device location data to provide its services like realtime traffic, maps and Find my Phone, among others. If a user turns on location services, various sensors can pinpoint the whereabouts of a device to within a few metres. In the past, the iPhone 11 made regular location checks to determine if it was in a country where the use of a new Ultra Wide Band data transfer technology was approved, something that couldn't be turned off by the user - unless by travelling to a location where it would become automatically disabled.",
                 },
             },
-            // TODO: dpv:Location doesn't seem to have ended up in dpv:Location!
+            // TODO: dpv:Location doesn't seem to have ended up in behavioural!
             /*
             [parentCategories.behavioral]: {
                 category: "dpv:Location",
