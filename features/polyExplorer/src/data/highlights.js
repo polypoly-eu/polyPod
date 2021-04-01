@@ -47,15 +47,15 @@ export default {
             name: "elopage GmbH (DE)",
             companyExplanation: {
                 de:
-                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool. Dabei können Tools und Apps individuell nach Unternehmensbedarf in einer Art Baukastensystem zusammen gestellt werden.",
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
                 en:
-                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool. Tools and apps can be put together individually according to company needs in a kind of modular system.",
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
             },
             industryExplanation: {
                 de:
-                    "polypoly nutzt verschiedene Dienstleistende, um das Tagesgeschäft als Genossenschaft zu betreiben. Der Prozess, Mitglied zu werden, ist dadurch um ein Vieles einfacher und skalierbarer gestaltet. Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
                 en:
-                    "polypoly uses various service providers in order to run their business day to day. The process of becoming a member is designed to be scalable yet simple and can be performed from the comfort of any device capable of browsing the internet. Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
             },
         },
     },
@@ -217,9 +217,9 @@ export default {
             },
             industryExplanation: {
                 de:
-                    "BMW teilt Daten mit Unternehmen, die u.a. technologische Dienstleistungen für sie erbringen. Damit ein Unternehmen effizient arbeiten kann, müssen die richtigen Lieferant:innen und Dienstleistungsunternehmen ausgewählt werden, die sich um bestimmte Aspekte des Geschäfts kümmern; diese Partner:innen- und Zuliefer:innen-Unternehmen benötigen Daten, um ihre Produkte zielgerichtet für BMW und z.B. die Fahrzeugaustattung zu gestalten.",
+                    "Damit ein Unternehmen wie BMW effizient arbeiten kann, müssen die richtigen Lieferant:innen und Dienstleistungsunternehmen ausgewählt werden; diese Unternehmen benötigen Daten, um ihre Produkte zielgerichtet für BMW und z.B. die Fahrzeugaustattung zu gestalten.",
                 en:
-                    "BMW shares data with companies that provide technological services to them. Part of making a business work efficiently means choosing the right suppliers and services companies to take care of specific aspects of that business and these companies require data to render those services.",
+                    "Part of making a business like BMW work efficiently means choosing the right suppliers and services companies and these companies require data to render those services.",
             },
         },
     },
@@ -270,9 +270,9 @@ export default {
             },
             industryExplanation: {
                 de:
-                    "Mehr als die Hälfte aller Internetseiten nutzen Google Analytics, einigen Berichten zufolge ist ihr Tracking-Code sogar auf einem weitaus höheren Prozentsatz der Seiten vorhanden (~85%). Analytics hilft, Webseitenbetreibenden zu verstehen, wie ihre Dienste genutzt werden und wie sie entsprechend ihrer Zwecke optimiert werden können. Als gewinnorientiertes Unternehmen ist Google bestrebt, die Nutzung von Online-Werbung zu steigern (über 80% ihres Umsatzes im Jahr 2020) und rühmt sich, Partnerschaften mit über 2 Millionen Websites einzugehen, um diese Anzeigen anzuzeigen. Ihre ausgefeilten Analysen, ihre tiefe Marktdurchdringung und ihr riesiges Partner:innen-Netzwerk in fast 100 Ländern machen die hochgranularen Ad-Targeting-Services möglich, die sie anbieten.",
+                    "Google rühmt sich, Partnerschaften mit über 2 Millionen Websites einzugehen, um Anzeigen auszuliefern. Ihre ausgefeilten Analysen, ihre tiefe Marktdurchdringung und ihr riesiges Partner:innen-Netzwerk in fast 100 Ländern machen die hochgranularen Ad-Targeting-Services möglich, die sie anbieten.",
                 en:
-                    "More than half of all internet sites use Google analytics, some reports even say their tracking code is present on a far higher percentage of sites (~85%). Analytics help website operators understand how their services are used and how they can be optimised according to their purposes. As a profit-driven corporation, Google's purpose is to increase the use of online advertising (over 80% of their revenue in 2020) and boasts partnering with over 2 million websites to display these ads. Their sophisticated analytics, deep market penetration and vast partner network across nearly 100 countries, make the highly granular ad targeting services they offer possible.",
+                    "Google boasts partnering with over 2 million websites to display ads. Their sophisticated analytics, deep market penetration and vast partner network across nearly 100 countries, make the highly granular ad targeting services they offer possible.",
             },
         },
     },
@@ -319,9 +319,9 @@ export default {
             },
             industryExplanation: {
                 de:
-                    'Amazon hat sich in relativ kurzer Zeit zu einem globalen Giganten entwickelt und hätte dies nicht tun können, ohne enge Beziehungen zu Unternehmen aufzubauen, die auf dem Gebiet der Marktforschung führend sind. Amazons Bemühungen, das „kund:innenorientierteste Unternehmen der Welt" zu werden, werden durch die Erforschung und Analyse von Kund:innen-Verhalten und Konsummärkten und der Zusammenarbeit mit eben jener Marktforschunginstituten und anderen Unternehmen aus dieser Branche kontinuierlich verbessert.',
+                    'Amazons Bemühungen, das „kund:innenorientierteste Unternehmen der Welt" zu werden, werden auch durch die Zusammenarbeit mit Marktforschunginstituten und anderen Unternehmen aus dieser Branche kontinuierlich verbessert.',
                 en:
-                    "Amazon has become a global giant in a relatively short time and it couldn't have done this without building close ties to companies that are on the cutting edge of market research. Amazon's efforts to become the world's \"most customer focused company\" are fuelled by the research and analysis of customers and markets in a feedback loop of constant improvement.",
+                    "Amazon's efforts to become the world's \"most customer focused company\" are fuelled by the research and analysis of customers and markets in a feedback loop of constant improvement.",
             },
         },
     },
@@ -418,7 +418,7 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Google LLC",
+            name: "Google Inc. (US)",
             companyExplanation: {
                 de:
                     "Google LLC zusammen mit dem Mutterkonzern Alphabet Inc. gehört als Technologie-Konzern zu einer der sog. Big-Five-Unternehmen, also den größten Tech-Konzernen der Welt und hat ihren Hauptsitz in Kalifornien (USA).",
@@ -427,9 +427,9 @@ export default {
             },
             industryExplanation: {
                 de:
-                    "PayPal teilt Daten mit Internet- und Multimedia-Unternehmen hauptsächlich zu Marketingzwecken, von denen einige auch andere Dienste wie Betrugserkennung (MaxMind) oder Analysen (Google LLC.) anbieten. Marketing ist für jedes Unternehmen wichtig und legitim, aber die Größenskala, die das Internet ermöglicht, und die daraus resultierenden Netzwerkeffekte, die in diesem Jahrhundert entstanden sind, gehen weit über klassisch-traditionelle Marketingziele hinaus.",
+                    "Marketing ist für jedes Unternehmen wichtig und legitim, aber die Größenskala, die das Internet ermöglicht, und die daraus resultierenden Netzwerkeffekte, die in diesem Jahrhundert entstanden sind, gehen weit über klassisch-traditionelle Marketingziele hinaus.",
                 en:
-                    "PayPal shares data with internet and multimedia companies chiefly for marketing purposes, some of whom also offer other services like fraud detection (MaxMind), or analytics (Google LLC.) Marketing is important and legitimate for any company, but the difference of scale made possible by the internet and the network effects that have emerged this century turn traditional intuitive understanding on its head.",
+                    "Marketing is important and legitimate for any company, but the difference of scale made possible by the internet and the network effects that have emerged this century turn traditional intuitive understanding on its head.",
             },
         },
     },
