@@ -14,6 +14,7 @@ const dataIssueLog = {
     sourceHardCoded: false,
     duplicateKeys: [],
     missingDataRecipients: {},
+    unknownJurisdictions: [],
     patchedCompaniesModified: [],
     patchedCompaniesNew: [],
 };
@@ -185,6 +186,10 @@ function enrichWithGlobalData(entityMap, globalData) {
     for (let entity of Object.values(entityMap)) {
         entity.jurisdiction =
             globalData.countries[entity.location?.countryCode]?.dataRegion;
+        if (!entity.jurisdiction) {
+            entity.jurisdiction = "Sonstige";
+            dataIssueLog.unknownJurisdictions.push(entity.name);
+        }
         enrichWithTranslations(entity, globalData);
     }
 }
@@ -313,6 +318,7 @@ function writeDataIssueLog() {
         sourceHardCoded,
         duplicateKeys,
         missingDataRecipients,
+        unknownJurisdictions,
         patchedCompaniesModified,
         patchedCompaniesNew,
     } = dataIssueLog;
@@ -323,6 +329,7 @@ Renamed entities:              ${Object.keys(renamedEntities).length}
 Source hard coded:             ${sourceHardCoded ? "Yes" : "No"}
 Duplicate keys (merged):       ${duplicateKeys.length}
 Missing data recipients:       ${missingDataRecipientNames.length}
+Unknown jurisdictions:         ${unknownJurisdictions.length}
 Patched existing companies:    ${patchedCompaniesModified.length}
 New companies from patch data: ${patchedCompaniesNew.length}
 
@@ -341,6 +348,9 @@ ${Object.entries(missingDataRecipients)
             listPrefix + "'" + k + "'" + " [mentioned by " + v.join(", ") + "]"
     )
     .join("\n")}
+
+Companies with unknown jurisdictions:
+${unknownJurisdictions.map((s) => listPrefix + s).join("\n")}
 
 Patched companies (modified):
 ${patchedCompaniesModified.map((s) => listPrefix + s).join("\n")}

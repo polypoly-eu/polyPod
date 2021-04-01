@@ -258,6 +258,7 @@
     {
         "name": "Gothia AS (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -1457,6 +1458,7 @@
     {
         "name": "Opplysningen 1881 AS (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -3938,6 +3940,7 @@
     {
         "name": "Eurocredit (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -5395,6 +5398,7 @@
     {
         "name": "Telenor Norway (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -7000,6 +7004,7 @@
     {
         "name": "Tapjoy Inc.",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IUS"
         },
@@ -7326,6 +7331,7 @@
     {
         "name": "Spotlight PR AB (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -10317,6 +10323,7 @@
     {
         "name": "Earthport (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -15072,6 +15079,7 @@
     {
         "name": "Redpill Linpro MS AS (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -22891,6 +22899,7 @@
     {
         "name": "Bisnode Norge AS (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -27606,6 +27615,7 @@
     {
         "name": "Signicat AS (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -30603,6 +30613,7 @@
     {
         "name": "Skattekontoret Folkeregiste (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -35875,6 +35886,7 @@
     {
         "name": "BankID Norge AS (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
@@ -36450,6 +36462,7 @@
     {
         "name": "DNB ID Solutions AS (NO)",
         "featured": false,
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": false
         },
