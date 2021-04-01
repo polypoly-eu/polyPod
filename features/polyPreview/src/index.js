@@ -85,9 +85,16 @@ function getStaticContent(progress) {
 }
 
 function initSwiper() {
-    const swiper = new SwiperCore(".swiper-container", {});
-    swiper.on("progress", function (swiper, progress) {
-        getStaticContent(progress);
+    new SwiperCore(".swiper-container", {
+        on: {
+            click: function (swiper) {
+                if (swiper.activeIndex == 0 || swiper.activeIndex == 5)
+                    this.slideNext(500);
+            },
+            progress: function (swiper, progress) {
+                getStaticContent(progress);
+            },
+        },
     });
 }
 

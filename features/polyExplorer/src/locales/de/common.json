@@ -21,6 +21,8 @@
         "Wie ist das zu verstehen?",
     "screenTitle.explorationCompaniesInfo":
         "Wie ist das zu verstehen?",
+    "screenTitle.explorationJurisdictionsInfo":
+        "Wie ist das zu verstehen?",
     "screenTitle.companySearch":
         "Suche",
     "screenTitle.info":
@@ -30,23 +32,23 @@
     "companyFilter.countryNameKey":
         "Name_DE",
     "companyFilter.revenueRange.0":
-        "€ 0 - 100k",
+        "€ 0 - 100tsnd",
     "companyFilter.revenueRange.100":
-        "€ 100k - 500k",
+        "€ 100tsnd - 500tsnd",
     "companyFilter.revenueRange.500":
-        "€ 500k - 1M",
+        "€ 500tsnd - 1mio",
     "companyFilter.revenueRange.1000":
-        "€ 1M - 5M",
+        "€ 1mio - 5mio",
     "companyFilter.revenueRange.5000":
-        "€ 5M - 20M",
+        "€ 5mio - 20mio",
     "companyFilter.revenueRange.20000":
-        "€ 20M - 50M",
+        "€ 20mio - 50mio",
     "companyFilter.revenueRange.50000":
-        "€ 50M - 100M",
+        "€ 50mio - 100mio",
     "companyFilter.revenueRange.100000":
-        "€ 100M - 1B",
+        "€ 100mio - 1mrd",
     "companyFilter.revenueRange.1000000":
-        "€ 1B ≥",
+        "€ 1mrd ≥",
     "jurisdiction.euGdpr":
         "DSGVO",
     "jurisdiction.russia":

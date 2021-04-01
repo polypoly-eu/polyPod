@@ -58,53 +58,20 @@ const DataTypeBubbleCategory = ({
         leaf.append("circle")
             .attr("r", (d) => d.r)
             .attr("fill-opacity", (d) =>
-                d.data.Polypoly_Parent_Category == category ? 1 : 0.2
+                d.data.Polypoly_Parent_Category.indexOf(category) >= 0 ? 1 : 0.2
             )
             .attr("fill", defaultColor)
             .style("vertical-align", "center")
             .each(function (d) {
                 if (d.data["dpv:Category"] === highlightedType) {
                     const diagram = d3.select(this.parentNode.parentNode);
-                    const height = diagram.node().getBBox().height;
-
-                    const labelPosition = {
-                        x: d.x + 1,
-                        y:
-                            d.y > height / 2 + 100
-                                ? d.y + d.r + 24
-                                : d.y - d.r - 20,
-                    };
                     const labelText =
                         d.data[
                             i18n.t(
                                 "dataExplorationScreen:from.polyPedia.translation"
                             )
                         ];
-                    utils
-                        .appendLabel(diagram, labelText)
-                        .attr(
-                            "transform",
-                            `translate(${labelPosition.x}, ${labelPosition.y})`
-                        );
-
-                    diagram
-                        .append("line")
-                        .style("stroke", "#F7FAFC")
-                        .style("stroke-width", 1)
-                        .attr("x1", d.x + 1)
-                        .attr(
-                            "y1",
-                            d.y > height / 2 + 100
-                                ? d.y + d.r + 2
-                                : d.y - d.r - 0
-                        )
-                        .attr("x2", d.x + 1)
-                        .attr(
-                            "y2",
-                            d.y > height / 2 + 100
-                                ? d.y + d.r + 11
-                                : d.y - d.r - 9
-                        );
+                    utils.appendCircleLabel(diagram, d, labelText);
                 }
             });
 
@@ -119,7 +86,7 @@ const DataTypeBubbleCategory = ({
             .style("font-size", (d) => {
                 return (8 + d.value / 60).toString() + "px";
             })
-            .style("font-weight", "500");
+            .style("font-family", "Jost Medium");
 
         leaf.select();
     };

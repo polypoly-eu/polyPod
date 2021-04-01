@@ -68,40 +68,15 @@ const DataTypeBubbleCategory = ({
             return containsRect(containerRect, p.rect);
         });
 
-    function calculateElementRect(element) {
-        const bounds = element.getBBox();
-        const rect = {
-            left: bounds.x,
-            right: bounds.x + bounds.width,
-            top: bounds.y,
-            bottom: bounds.y + bounds.height,
-        };
-
-        // The element's bounding box is relative to its own coordinate system,
-        // i.e. it does not consider its transformation matrix. This is an
-        // attempt to do that manually, that does however not consider anything
-        // but translate().
-        const transform = element.transform.baseVal.consolidate().matrix;
-        rect.left += transform.e;
-        rect.right += transform.e;
-        rect.top += transform.f;
-        rect.bottom += transform.f;
-        return rect;
-    }
-
-    const detectRectCollision = (a, b) =>
-        a.left < b.right &&
-        a.right > b.left &&
-        a.top < b.bottom &&
-        a.bottom > b.top;
-
     const findCollisionFreePositions = (positions, elements) =>
         positions.filter(
             (position) =>
-                !elements.some((element) => {
-                    const elementRect = calculateElementRect(element);
-                    return detectRectCollision(position.rect, elementRect);
-                })
+                !elements.some((element) =>
+                    utils.detectRectCollision(
+                        position.rect,
+                        utils.calculateElementRect(element)
+                    )
+                )
         );
 
     function calculateRectToPointDistance(rect, point) {
@@ -232,7 +207,7 @@ const DataTypeBubbleCategory = ({
             .style("font-size", (d) => {
                 return (8 + d.value / 60).toString() + "px";
             })
-            .style("font-weight", "500");
+            .style("font-family", "Jost Medium");
 
         const correlationCenter = getCorrelationCenter();
 

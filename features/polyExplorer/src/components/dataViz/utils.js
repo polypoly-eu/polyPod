@@ -1,11 +1,11 @@
-function appendLabel(container, text, props = {}) {
+function appendLabel(container, text) {
     const label = container.append("g").attr("class", "label");
     label
         .append("text")
         .text(text)
         .style("fill", "#F7FAFC")
-        .style("font-size", props.fontSize || 14)
-        .style("font-weight", "500")
+        .style("font-size", 14)
+        .style("font-family", "Jost Medium")
         .style("text-anchor", "middle")
         .style("alignment-baseline", "middle");
 
@@ -34,23 +34,38 @@ function appendLabel(container, text, props = {}) {
     return label;
 }
 
-function findCircleLabelPosition(labelBounds, circle, distance) {
+function findCircleLabelPosition(
+    labelBounds,
+    containerBounds,
+    circle,
+    distance
+) {
+    let x = circle.x;
+    const xApothem = labelBounds.width / 2;
+    if (circle.x - xApothem < 0) x = xApothem;
+    else if (circle.x + xApothem > containerBounds.width)
+        x = containerBounds.width - xApothem;
+
     const topY = circle.y - circle.r - labelBounds.height - distance;
     const y =
         (topY >= 0 ? topY : circle.y + circle.r + distance) +
         labelBounds.height / 2;
-    return {
-        x: circle.x,
-        y,
-    };
+
+    return { x, y };
 }
 
-function appendCircleLabel(container, circle, text, props = {}) {
+function appendCircleLabel(container, circle, text) {
     const circleLabel = container.append("g").attr("class", "circle-label");
-    const label = appendLabel(circleLabel, text, props);
+    const label = appendLabel(circleLabel, text);
     const bounds = label.node().getBBox();
+    const containerBounds = container.node().viewBox.baseVal;
     const lineLength = 8;
-    const labelPosition = findCircleLabelPosition(bounds, circle, lineLength);
+    const labelPosition = findCircleLabelPosition(
+        bounds,
+        containerBounds,
+        circle,
+        lineLength
+    );
     label.attr(
         "transform",
         `translate(${labelPosition.x}, ${labelPosition.y})`
@@ -67,6 +82,8 @@ function appendCircleLabel(container, circle, text, props = {}) {
         .attr("y1", lineY)
         .attr("x2", circle.x)
         .attr("y2", lineY + lineLength);
+
+    return circleLabel;
 }
 
 function findNode(selection, matchFunction) {
@@ -75,8 +92,37 @@ function findNode(selection, matchFunction) {
     return match;
 }
 
+function calculateElementRect(element) {
+    const bounds = element.getBBox();
+    const rect = {
+        left: bounds.x,
+        right: bounds.x + bounds.width,
+        top: bounds.y,
+        bottom: bounds.y + bounds.height,
+    };
+
+    // The element's bounding box is relative to its own coordinate system,
+    // i.e. it does not consider its transformation matrix. This is an
+    // attempt to do that manually, that does however not consider anything
+    // but translate().
+    const transform = element.transform.baseVal.consolidate().matrix;
+    rect.left += transform.e;
+    rect.right += transform.e;
+    rect.top += transform.f;
+    rect.bottom += transform.f;
+    return rect;
+}
+
+const detectRectCollision = (a, b) =>
+    a.left < b.right &&
+    a.right > b.left &&
+    a.top < b.bottom &&
+    a.bottom > b.top;
+
 export default {
     appendLabel,
     appendCircleLabel,
     findNode,
+    calculateElementRect,
+    detectRectCollision,
 };

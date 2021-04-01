@@ -138,3 +138,58 @@ export function equal(filtersA, filtersB) {
         return valuesA.every((value) => valuesB.includes(value));
     });
 }
+
+export function sortFilters(filters, i18n, globalData) {
+    const processField = {
+        industryCategory: (filters) => {
+            return [...filters].sort((a, b) =>
+                (
+                    industryCategoryNames[a]?.[i18n.language] ||
+                    i18n.t("common:category.undisclosed")
+                ).localeCompare(
+                    industryCategoryNames[b]?.[i18n.language] ||
+                        i18n.t("common:category.undisclosed")
+                )
+            );
+        },
+        jurisdiction: (filters) => {
+            const keys = {
+                "EU-GDPR": "euGdpr",
+                Russia: "russia",
+                "Five-Eyes": "fiveEyes",
+                China: "china",
+            }; //[value] || "undisclosed";
+            return [...filters].sort((a, b) =>
+                i18n
+                    .t(`common:jurisdiction.${keys[a] || "undisclosed"}`)
+                    .localeCompare(
+                        i18n.t(
+                            `common:jurisdiction.${keys[b] || "undisclosed"}`
+                        )
+                    )
+            );
+        },
+        location: (filters) => {
+            filters.delete(false);
+            return [...filters].sort((a, b) =>
+                (
+                    (globalData.countries[a] || {})[
+                        i18n.t("common:companyFilter.countryNameKey")
+                    ] || "zz"
+                ).localeCompare(
+                    (globalData.countries[b] || {})[
+                        i18n.t("common:companyFilter.countryNameKey")
+                    ] || "zz"
+                )
+            );
+        },
+        revenueRange: (filters) => {
+            return [...filters];
+        },
+    };
+
+    for (let field in filters) {
+        filters[field] = processField[field](filters[field]);
+    }
+    return filters;
+}

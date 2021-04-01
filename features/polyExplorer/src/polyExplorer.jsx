@@ -68,6 +68,7 @@ const PolyExplorer = () => {
         initialDataExplorationSection
     );
     const [activeCategory, setActiveCategory] = useState(null);
+    const [activeExplorationIndex, setActiveExplorationIndex] = useState(null);
 
     //Get the max values of all featured companies
     function calculateAverage(values) {
@@ -113,10 +114,12 @@ const PolyExplorer = () => {
     const handleExplorationInfoScreen = (
         screen,
         activeSection,
+        activeIndex,
         activeCategory
     ) => {
         handleActiveScreenChange(screen);
         setDataExploringSection(activeSection);
+        setActiveExplorationIndex(activeIndex);
         if (activeCategory) setActiveCategory(activeCategory);
     };
 
@@ -149,6 +152,7 @@ const PolyExplorer = () => {
         if (activeScreen === "dataExploration") {
             setDataExploringSection(initialDataExplorationSection);
             setActiveCategory(null);
+            setActiveExplorationIndex(null);
         }
 
         const previousScreen = backStack.pop();
@@ -206,43 +210,49 @@ const PolyExplorer = () => {
             <DataExplorationScreen
                 company={selectedCompany}
                 startSection={dataExploringSection}
-                startCategory={activeCategory}
+                startIndex={activeExplorationIndex}
                 openMain={handleBack}
-                openDataTypesInfo={() =>
+                openDataTypesInfo={(activeIndex) =>
                     handleExplorationInfoScreen(
                         "explorationDataTypesInfo",
-                        "dataTypes"
+                        "dataTypes",
+                        activeIndex
                     )
                 }
-                openCategoryInfo={(activeCategory) =>
+                openCategoryInfo={(activeIndex, activeCategory) =>
                     handleExplorationInfoScreen(
                         "explorationCategoryInfo",
                         "dataTypesCategory",
+                        activeIndex,
                         activeCategory
                     )
                 }
-                openCorrelationInfo={() =>
+                openCorrelationInfo={(activeIndex) =>
                     handleExplorationInfoScreen(
                         "explorationCorrelationInfo",
-                        "dataTypesCorrelation"
+                        "dataTypesCorrelation",
+                        activeIndex
                     )
                 }
-                openPurposeInfo={() =>
+                openPurposeInfo={(activeIndex) =>
                     handleExplorationInfoScreen(
                         "explorationPurposeInfo",
-                        "purposes"
+                        "purposes",
+                        activeIndex
                     )
                 }
-                openCompaniesInfo={() =>
+                openCompaniesInfo={(activeIndex) =>
                     handleExplorationInfoScreen(
                         "explorationCompaniesInfo",
-                        "companies"
+                        "companies",
+                        activeIndex
                     )
                 }
-                openJurisdictionInfo={() =>
+                openJurisdictionInfo={(activeIndex) =>
                     handleExplorationInfoScreen(
                         "explorationJurisdictionsInfo",
-                        "jurisdictions"
+                        "jurisdictions",
+                        activeIndex
                     )
                 }
                 maxCompanies={featuredCompanyMaxValues.companies}
@@ -252,8 +262,15 @@ const PolyExplorer = () => {
                             company.name.toLowerCase() === name.toLowerCase()
                     )
                 )}
-                onOpenRegionInfo={() =>
-                    handleActiveScreenChange("dataRegionInfo")
+                onOpenRegionInfo={(activeIndex) =>
+                    handleExplorationInfoScreen(
+                        "explorationJurisdictionsInfo",
+                        "jurisdictions",
+                        activeIndex
+                    )
+                }
+                onOpenDetails={(company) =>
+                    handleActiveScreenChange("companyDetails", company)
                 }
             />
         ),

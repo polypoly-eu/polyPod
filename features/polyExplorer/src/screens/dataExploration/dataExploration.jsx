@@ -7,7 +7,9 @@ import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
 import PurposeChart from "../../components/dataViz/purposeChart.jsx";
-import CompanyBubbles from "../../components/dataViz/companyBubbles.jsx";
+import CompanyBubbles, {
+    buildIndustrySets,
+} from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
@@ -24,7 +26,7 @@ import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdiction
 const DataExplorationScreen = ({
     company,
     startSection,
-    startCategory = null,
+    startIndex = null,
     openMain,
     openDataTypesInfo,
     openCategoryInfo,
@@ -35,6 +37,7 @@ const DataExplorationScreen = ({
     maxCompanies,
     dataRecipients,
     onOpenRegionInfo,
+    onOpenDetails,
 }) => {
     //Methods
     const getCategories = () =>
@@ -93,6 +96,20 @@ const DataExplorationScreen = ({
         return jurisdictionTreeFormatData;
     };
 
+    const visualizationWidth = 360;
+    const visualizationHeight = 360;
+
+    const companyIndustrySets = useMemo(
+        () =>
+            buildIndustrySets(
+                companyIndustryMap,
+                visualizationWidth,
+                visualizationHeight,
+                maxCompanies
+            ),
+        [companyIndustryMap, maxCompanies]
+    );
+
     const getScreens = () => {
         const screens = [
             "dataTypes",
@@ -108,7 +125,9 @@ const DataExplorationScreen = ({
         screens.push("purposes");
         screens.push("companies");
         screens.push("companiesExplanation");
-        screens.push("companiesIndustries");
+        companyIndustrySets.forEach((_, index) => {
+            screens.push(`companiesIndustries_${index}`);
+        });
         screens.push("companiesIndustryHighlight");
         screens.push("companiesCompanyHighlight");
         screens.push("companiesList");
@@ -117,9 +136,7 @@ const DataExplorationScreen = ({
     };
 
     const getStartIndex = () => {
-        if (startSection === "dataTypesCategory" && startCategory)
-            return screens.indexOf(`dataTypesCategory_${startCategory}`);
-        return screens.indexOf(startSection);
+        return startIndex || screens.indexOf(startSection);
     };
 
     const getHighestValueObject = () => {
@@ -229,8 +246,8 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="#0f1938"
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         highlight={
                             activeScreen === "dataTypeHighlight" &&
                             highestValueObject
@@ -241,7 +258,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openDataTypesInfo();
+                            openDataTypesInfo(activeIndex);
                         }}
                     />
                     {filler}
@@ -264,8 +281,8 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="#0f1938"
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         opacity={0.2}
                     />
                     <p className="bubble-source">
@@ -284,8 +301,8 @@ const DataExplorationScreen = ({
                         defaultColor="#FB8A89"
                         category={categories[activeIndex - 4]}
                         textColor="#0f1938"
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         highlightedType={
                             highlights[company.name].dataTypeCategories[
                                 activeScreen.split("_")[1]
@@ -297,7 +314,10 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCategoryInfo(activeScreen.split("_")[1]);
+                            openCategoryInfo(
+                                activeIndex,
+                                activeScreen.split("_")[1]
+                            );
                         }}
                     />
                     {filler}
@@ -315,8 +335,8 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="#0f1938"
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         opacity={0.2}
                         showValues={false}
                     />
@@ -341,15 +361,15 @@ const DataExplorationScreen = ({
                             highlights[company.name]?.dataTypeCorrelation
                                 .types || []
                         }
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCorrelationInfo();
+                            openCorrelationInfo(activeIndex);
                         }}
                     />
                 </div>
@@ -369,8 +389,8 @@ const DataExplorationScreen = ({
                     <CompanyBubbles
                         view="flat"
                         companyIndustryMap={companyIndustryMap}
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                     />
@@ -379,7 +399,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCompaniesInfo();
+                            openCompaniesInfo(activeIndex);
                         }}
                     />
                 </div>
@@ -397,8 +417,8 @@ const DataExplorationScreen = ({
                     <CompanyBubbles
                         view="flat"
                         companyIndustryMap={companyIndustryMap}
-                        width="360"
-                        height="360"
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         opacity={0.1}
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
@@ -411,8 +431,8 @@ const DataExplorationScreen = ({
                 </div>
             );
         else if (
+            activeScreen.startsWith("companiesIndustries_") ||
             [
-                "companiesIndustries",
                 "companiesIndustryHighlight",
                 "companiesCompanyHighlight",
             ].includes(activeScreen)
@@ -427,14 +447,18 @@ const DataExplorationScreen = ({
                     <CompanyBubbles
                         view={
                             {
-                                companiesIndustries: "allIndustries",
                                 companiesIndustryHighlight: "industryHighlight",
                                 companiesCompanyHighlight: "companyHighlight",
-                            }[activeScreen]
+                            }[activeScreen] || "allIndustries"
                         }
                         companyIndustryMap={companyIndustryMap}
-                        width="360"
-                        height="360"
+                        showIndustryLabels={
+                            companyIndustrySets[
+                                parseInt(activeScreen.split("_")[1], 10)
+                            ]
+                        }
+                        width={visualizationWidth}
+                        height={visualizationHeight}
                         bubbleColor="#7EE8A2"
                         maxCompanies={maxCompanies}
                         highlight={highlights[company.name]?.dataRecipient}
@@ -444,7 +468,7 @@ const DataExplorationScreen = ({
                     </p>
                     <DataSharingLegend
                         onClick={() => {
-                            openCompaniesInfo();
+                            openCompaniesInfo(activeIndex);
                         }}
                     />
                 </div>
@@ -482,17 +506,33 @@ const DataExplorationScreen = ({
     }
 
     useEffect(() => {
+        if (!swiper) return;
+
         const scrollableElements = document.querySelectorAll(
             ".purpose-content .bars, .company-industry-list"
         );
         for (let element of scrollableElements)
             makeSwiperContentScrollable(element);
-    });
+
+        const tapToSwipeElements = document.querySelectorAll(
+            ".swiper-slide:not(.disable-tap-to-swipe)"
+        );
+        for (let element of tapToSwipeElements) {
+            if (element.querySelector(".slide-tap-target")) continue;
+            const slideTapTarget = document.createElement("div");
+            slideTapTarget.className = "slide-tap-target";
+            slideTapTarget.addEventListener("click", () => swiper.slideNext());
+            element.appendChild(slideTapTarget);
+        }
+    }, [swiper]);
 
     return (
         <Screen className="data-exploration">
             <div className="company-short-info-container">
-                <CompanyShortInfo company={company} />
+                <CompanyShortInfo
+                    company={company}
+                    onOpenDetails={onOpenDetails}
+                />
             </div>
             {progressBar}
             <div className="exploration-content">
@@ -534,10 +574,7 @@ const DataExplorationScreen = ({
                             </p>
                         </SwiperSlide>
                         {categories.map((group, index) => (
-                            <SwiperSlide
-                                key={index}
-                                onClick={() => swiper.slideNext()}
-                            >
+                            <SwiperSlide key={index}>
                                 <h2>
                                     {global.polypoly_parent_categories[group]?.[
                                         `Translation_${i18n.language.toUpperCase()}`
@@ -556,7 +593,7 @@ const DataExplorationScreen = ({
                             </p>
                         </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide className="disable-tap-to-swipe">
                             <div className="purpose-content">
                                 <h1>
                                     {i18n.t("common:sharing.prefix.purposes")}{" "}
@@ -568,7 +605,9 @@ const DataExplorationScreen = ({
                                 <PurposeChart
                                     purposes={company.dataSharingPurposes}
                                     openPopup={setPurposePopupContent}
-                                    openPurposeInfo={openPurposeInfo}
+                                    openPurposeInfo={() =>
+                                        openPurposeInfo(activeIndex)
+                                    }
                                 />
                             </div>
                         </SwiperSlide>
@@ -580,10 +619,14 @@ const DataExplorationScreen = ({
                                 )}
                             </p>
                         </SwiperSlide>
+                        {companyIndustrySets.map((_, index) => (
+                            <SwiperSlide
+                                key={`industry_${index}`}
+                            ></SwiperSlide>
+                        ))}
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide></SwiperSlide>
-                        <SwiperSlide></SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide className="disable-tap-to-swipe">
                             <div className="companies-list-content">
                                 <h2>
                                     <span className="highlight-companies">
@@ -604,7 +647,7 @@ const DataExplorationScreen = ({
                                 />
                             </div>
                         </SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide className="disable-tap-to-swipe">
                             <div className="jurisdiction-tree-container">
                                 <h1>
                                     {i18n.t(
@@ -618,12 +661,14 @@ const DataExplorationScreen = ({
                                     data={getJurisdictionTreeFormat()}
                                 />
                                 <JurisdictionLegend
-                                    onOpenRegionInfo={onOpenRegionInfo}
+                                    onOpenRegionInfo={() =>
+                                        onOpenRegionInfo(activeIndex)
+                                    }
                                 />
                                 <DataSharingLegend
-                                    onOpenRegionInfo={() => {
-                                        openJurisdictionInfo();
-                                    }}
+                                    onClick={() =>
+                                        openJurisdictionInfo(activeIndex)
+                                    }
                                 />
                                 <button
                                     className="explore-other"
