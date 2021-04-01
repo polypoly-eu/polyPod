@@ -98,7 +98,6 @@ export default {
                 en:
                     "Microsoft Corporation is an international hardware and software developer and a technology company headquartered in Redmond (USA) and is also one of the Big Five companies, i.e. the largest tech corporations in the world.",
             },
-            // TODO: Way too long! - shortened
             industryExplanation: {
                 de:
                     "Die SCHUFA gibt Website-Daten zu Werbe- und Analysezwecken an Unternehmen aus der IT-Branche weiter.",
@@ -209,7 +208,7 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Bosch Service Solutions GmbH (DE)",
+            name: "BOSCH Service Solutions GmbH (DE)",
             companyExplanation: {
                 de:
                     "Bosch Service Solutions ist ein führender Anbieter für Business Process Outsourcing. Bosch Service Solutions  unterstützt bei der Prozessoptimierung mit fünf Kernbereichen: Customer Experience Services, Mobility Services, Monitoring Services und Business Services. Der Firmensitz ist Stuttgart (DE).",
@@ -373,7 +372,6 @@ export default {
                 en:
                     "University College London (UK) is part of the University of London and, as a member of the Russell Group (an association of 24 leading British research universities), is one of the most prestigious elite universities in the world.",
             },
-            // TODO: Waaaay too long - shortened now
             industryExplanation: {
                 de:
                     "Das University College London (UK) gehört zur Universität London und ist als Mitglied der Russell-Gruppe (Verbund 24 führender, britischer Forschungsuniversitäten) eine der angesehensten Eliteuniversitäten der Welt.",
