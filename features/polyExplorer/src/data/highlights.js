@@ -142,10 +142,9 @@ export default {
                         "Apple uses device location data to provide its services like realtime traffic, maps and Find my Phone, among others. If a user turns on location services, various sensors can pinpoint the whereabouts of a device to within a few metres. In the past, the iPhone 11 made regular location checks to determine if it was in a country where the use of a new Ultra Wide Band data transfer technology was approved, something that couldn't be turned off by the user - unless by travelling to a location where it would become automatically disabled.",
                 },
             },
-            // TODO: dpv:Location doesn't seem to have ended up in behavioural!
+            // TODO: We don't have a category to highlight for behavioral
             /*
             [parentCategories.behavioral]: {
- 
             },
             */
             [parentCategories.financial]: {
@@ -351,7 +350,6 @@ export default {
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
             },
-            /*
             [parentCategories.behavioral]: {
                 category: "dpv:PoliticalAffiliation",
                 explanation: {
@@ -361,8 +359,6 @@ export default {
                         "For many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
                 },
             },
-            */
-
             // TODO: dpv:Financial doesn't seem to be in there
             /*
             [parentCategories.financial]: {
