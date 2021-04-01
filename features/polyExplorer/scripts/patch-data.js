@@ -17,6 +17,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
+    // Not present in the data
     "Adidas AG": {
         description: {
             value: {
@@ -26,6 +27,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
+    // Not present in the data
     "Allianz SE": {
         description: {
             value: {
@@ -71,15 +73,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Bayerische Motoren Werke AG": {
-        description: {
-            value: {
-                de:
-                    "Die Bayerische Motoren Werke Aktiengesellschaft (BMW AG) ist ein weltweit operierender, börsennotierter Automobil- und Motorradhersteller mit Sitz in München, der unter dem Markennamen BMW Group auftritt. Die Produktpalette umfasst die Automobil- und Motorrad-Marke BMW, die Automarken Mini und Rolls-Royce sowie die BMW-Submarken BMW M und BMW i.\n\n        Der Konzern hat sich vor allem seit den 1960er Jahren unter der Marke BMW als Hersteller hochpreisiger, komfortabel ausgestatteter und gut motorisierter Reisewagen mit sportlichem Anspruch einen Namen gemacht. Daneben zielt die Marke Mini mit Retro-Modellen auf jüngere, lifestyle-orientierte Kundschaft ab, während bei Rolls-Royce in geringer Stückzahl höchstpreisige Luxuslimousinen entstehen. Die Kernmarke BMW geht auf die 1913 durch Karl Rapp in München gegründeten Rapp Motorenwerke zurück. Sie wurden durch Franz Josef Popp ab 1917 ausgebaut und firmierten ab 1918 als Aktiengesellschaft Bayerische Motorenwerke sowie ab 1920 als Süddeutsche Bremsen-AG. Die Motorenbau-Abteilung und der alte Unternehmensname wurden 1922 verkauft und in die 1916 begründete Bayerische Flugzeugwerke AG eingegliedert, die seitdem als BMW firmiert.\n\n        BMW gehört mit 104,2 Milliarden Euro Umsatz und rund 134.000 Beschäftigten im Geschäftsjahr 2019 zu den größten Wirtschaftsunternehmen Deutschlands und zählte mit einer Jahresproduktion von 2,54 Millionen Fahrzeugen im Jahr 2019 zu den 15 größten Autoherstellern der Welt. Das Unternehmen ist sowohl mit Stamm- als auch Vorzugsaktien an der Börse notiert, wobei die Stammaktie im deutschen Leitindex DAX sowie im DivDAX vertreten ist. Größte Anteilseigner mit zusammen etwa 46,8 % sind Susanne Klatten und Stefan Quandt, die der Industriellenfamilie Quandt angehören. Darüber hinaus ist BMW auch 2018 in den Nachhaltigkeitsindeces Dow Jones Sustainability Indices (DJSI) „World“ und „Europe“ sowie FTSE4Good gelistet.",
-            },
-            source: "Wikipedia",
-        },
-    },
+    // Missing in the data
     "booking.com B.V": {
         description: {
             value: {
@@ -152,7 +146,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Yelp Ireland Limited": {
+    "Yelp GmbH (DE)": {
         description: {
             value: {
                 de:
@@ -179,6 +173,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
+    // Missing in the data
     "Ubisoft Blue Byte GmbH": {
         description: {
             value: {

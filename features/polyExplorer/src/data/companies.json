@@ -34929,8 +34929,10 @@
         "dataSharingPurposes": null,
         "dataTypesShared": null,
         "description": {
-            "value": null,
-            "source": null
+            "value": {
+                "de": "Yelp, Inc. ist ein US-amerikanisches Internetunternehmen, das ein Empfehlungsportal für Dienstleister betreibt. Es wurde 2004 von Jeremy Stoppelman und Russel Simmons gegründet, und ihre Yelp-Website wurde im Februar 2005 mit dem Schwerpunkt nutzergenerierte Rezensionen überarbeitet. Zwischen 2005 und 2010 erhielt Yelp eine Kapitalausstattung von 130 Millionen US-Dollar und wurde 2012 eine Aktiengesellschaft am US-Aktienmarkt. Umsätze erwirtschaftet das Unternehmen durch Werbung für Geschäfte auf seiner Website. Sein Internet-Bewertungssystem für gewerbliche Einträge war bereits Gegenstand sowohl von Kontroversen als auch Rechtsstreitigkeiten."
+            },
+            "source": "Wikipedia"
         },
         "industryCategory": {
             "id": "ic:InternetAndMultimedia",
