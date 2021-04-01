@@ -34,23 +34,38 @@ function appendLabel(container, text) {
     return label;
 }
 
-function findCircleLabelPosition(labelBounds, circle, distance) {
+function findCircleLabelPosition(
+    labelBounds,
+    containerBounds,
+    circle,
+    distance
+) {
+    let x = circle.x;
+    const xApothem = labelBounds.width / 2;
+    if (circle.x - xApothem < 0) x = xApothem;
+    else if (circle.x + xApothem > containerBounds.width)
+        x = containerBounds.width - xApothem;
+
     const topY = circle.y - circle.r - labelBounds.height - distance;
     const y =
         (topY >= 0 ? topY : circle.y + circle.r + distance) +
         labelBounds.height / 2;
-    return {
-        x: circle.x,
-        y,
-    };
+
+    return { x, y };
 }
 
 function appendCircleLabel(container, circle, text) {
     const circleLabel = container.append("g").attr("class", "circle-label");
     const label = appendLabel(circleLabel, text);
     const bounds = label.node().getBBox();
+    const containerBounds = container.node().viewBox.baseVal;
     const lineLength = 8;
-    const labelPosition = findCircleLabelPosition(bounds, circle, lineLength);
+    const labelPosition = findCircleLabelPosition(
+        bounds,
+        containerBounds,
+        circle,
+        lineLength
+    );
     label.attr(
         "transform",
         `translate(${labelPosition.x}, ${labelPosition.y})`
