@@ -25867,7 +25867,7 @@
     },
     {
         "name": "TikTok Technology Limited",
-        "featured": false,
+        "featured": true,
         "jurisdiction": "EU-GDPR",
         "location": {
             "city": "DUBLIN",
