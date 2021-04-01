@@ -6364,7 +6364,8 @@
         "dataRecipients": [
             "Facebook Ireland Limited (IE)",
             "Google Ireland, Ltd. (IE)",
-            "LinkedIn Ireland Unlimited Company (IE)"
+            "LinkedIn Ireland Unlimited Company (IE)",
+            "Twitter, Inc. (US)"
         ],
         "dataSharingPurposes": [
             {
@@ -6442,10 +6443,10 @@
             {
                 "dpv:Purpose": "dpv:RequestedServiceProvision",
                 "count": 86,
-                "Translation_DE": null,
-                "Translation_EN": null,
-                "Explanation_DE": null,
-                "Explanation_EN": null
+                "Translation_DE": "Angefordete dienstbereitstellung",
+                "Translation_EN": "Requested Service Provision",
+                "Explanation_DE": "Angefordete Dienstleistung bereitstellen",
+                "Explanation_EN": "provide requested service of activity"
             },
             {
                 "dpv:Purpose": "dpv:ServiceOptimization",
@@ -6913,7 +6914,8 @@
         },
         "jurisdictionsShared": {
             "children": [
-                "EU-GDPR"
+                "EU-GDPR",
+                "Five-Eyes"
             ]
         }
     },
@@ -8424,7 +8426,7 @@
             }
         ],
         "dataRecipients": [
-            "Alphabet Inc. (US)",
+            "Alphabet Inc (US)",
             "Google Ireland, Ltd. (IE)",
             "Microsoft Corporation (US)",
             "Outbrain Inc. (US)"
@@ -15678,29 +15680,6 @@
     },
     {
         "name": "White Ops, Inc. (US)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "US"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:InternetAndMultimedia",
-            "name": {
-                "en": "Internet & Multimedia",
-                "de": "Internet & Multimedia"
-            }
-        }
-    },
-    {
-        "name": "Alphabet Inc. (US)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
         "location": {
@@ -31533,6 +31512,7 @@
             "Resultados Digitais (BR)",
             "Risk Consult Limited (GB)",
             "Rizal Commercial Banking Corporations [RCBC] (PH)",
+            "Robertson Taylor Insurance Brokers Limited (GB)",
             "Robinson Way Limited (GB)",
             "Rocket Fuel LLC (US)",
             "Rostelecom “Tele2” (RU)",

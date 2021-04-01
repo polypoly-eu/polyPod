@@ -1801,12 +1801,12 @@
         },
         "dpv:RequestedServiceProvision": {
             "dpv:Purpose": "dpv:RequestedServiceProvision",
-            "dpv:Superclass": null,
-            "Translation_DE": null,
-            "Translation_EN": null,
-            "Synonyms": null,
-            "Explanation_DE": null,
-            "Explanation_EN": null
+            "dpv:Superclass": "",
+            "Translation_DE": "Angefordete dienstbereitstellung",
+            "Translation_EN": "Requested Service Provision",
+            "Synonyms": "",
+            "Explanation_DE": "Angefordete Dienstleistung bereitstellen",
+            "Explanation_EN": "provide requested service of activity"
         }
     },
     "personal_data_categories": {
