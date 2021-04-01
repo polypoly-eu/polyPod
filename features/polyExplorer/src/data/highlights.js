@@ -98,12 +98,12 @@ export default {
                 en:
                     "Microsoft Corporation is an international hardware and software developer and a technology company headquartered in Redmond (USA) and is also one of the Big Five companies, i.e. the largest tech corporations in the world.",
             },
-            // TODO: Way too long!
+            // TODO: Way too long! - shortened
             industryExplanation: {
                 de:
-                    'Die SCHUFA teilt Daten mit Unternehmen der IT-Branche zu Werbe- und Analysezwecken. Durch die Sammlung von Daten über die Besucher:innen ihrer Website mithilfe von Cookies kann aus einer Kombination von Geräte- und Browserattributen ein individueller „Fingerabdruck" erstellt werden, dem eine eindeutige Kennung zugewiesen wird. Dieser wird dann im gesamten Internet verwendet, um eine:n bestimmte:n Website-Besucher:in wiederzuerkennen und zu messen, wie er:sie auf Werbekampagnen reagiert und das weitere Surfverhalten zu analysieren.',
+                    "Die SCHUFA gibt Website-Daten zu Werbe- und Analysezwecken an Unternehmen aus der IT-Branche weiter.",
                 en:
-                    'SCHUFA shares data with companies in the IT sector for advertising and analytics purposes. By collecting data on visitors to their website using cookies, an individual "fingerprint" can be generated from a combination of device and browser attributes that is assigned a unique identifier. This is then used across the wider internet to re-identify a particular site visitor and measure how they respond to advertising campaigns and analyse their wider browsing behaviour.',
+                    "SCHUFA shares data with companies in the IT sector for advertising and analytics purposes.",
             },
         },
     },
@@ -265,9 +265,9 @@ export default {
             name: "WayToGrow (PL)",
             companyExplanation: {
                 de:
-                    "Waytogrow ist eine unabhängige Gruppe von Expert:innen, die sich auf programmatische und datengesteuerte Werbung spezialisiert haben. Waytogrow mit Sitz in Warschau (PL) gehört zur Netsprint-Gruppe, einem führenden Unternehmen im digitalen Marketing. ",
+                    "Waytogrow ist eine unabhängige Expert:innen-Gruppe, die sich auf programmatische und datengesteuerte Werbung spezialisiert haben.",
                 en:
-                    "Waytogrow is an independent group of experts specialising in programmatic and data-driven advertising. Waytogrow, based in Warsaw (PL), is part of the Netsprint Group, a leading digital marketing company.",
+                    "Waytogrow is an independent group of experts specialising in programmatic and data-driven advertising.",
             },
             industryExplanation: {
                 de:
@@ -314,9 +314,9 @@ export default {
             name: "Nielsen LLC (US)",
             companyExplanation: {
                 de:
-                    "Nielsen LLC ist der globale Marktführer im Bereich Marktforschung und hilft Unternehmen dabei, ihre Konsument:innen und deren Verhalten (besser) zu verstehen – durch qualitative und quantitative Konsument:innen-Befragungen. Der Unternehmenssitz ist in London (UK), das Verwaltungszentrum in New York City (USA).",
+                    "Nielsen LLC ist der globale Marktführer im Bereich Marktforschung und hilft Unternehmen dabei, ihre Konsument:innen und deren Verhalten (besser) zu verstehen.",
                 en:
-                    "Nielsen LLC is the global leader in market research, helping companies (better) understand their consumers and their behaviour through qualitative and quantitative consumer surveys. The company is headquartered in London (UK) and has its administrative centre in New York City (USA). ",
+                    "Nielsen LLC is the global leader in market research, helping companies (better) understand their consumers and their behaviour.",
             },
             industryExplanation: {
                 de:
@@ -373,12 +373,12 @@ export default {
                 en:
                     "University College London (UK) is part of the University of London and, as a member of the Russell Group (an association of 24 leading British research universities), is one of the most prestigious elite universities in the world.",
             },
-            // TODO: Waaaay too long
+            // TODO: Waaaay too long - shortened now
             industryExplanation: {
                 de:
-                    "Facebook beteiligt sich an der Finanzierung und Förderung akademischer Forschung in einem breiten Spektrum von Themen – von tiefgreifenden technischen Infrastrukturprojekten, die die Funktion der Systeme verbessern, über die anspruchsvollste Datenwissenschaft, die die Massen an Daten nutzt, bis hin zur Untersuchung der Auswirkungen sozialer Medien auf das Leben der Menschen. Der berüchtigte Datenskandal von Cambridge Analytica wurde durch eine Persönlichkeitsquiz-App ermöglicht, die angeblich Informationen von Facebook-Nutzenden zu Forschungszwecken sammelte. Das Forschungsunternehmen hinter der App verkaufte die Daten dann an SCL, die sie für die Durchführung fragwürdiger Wahlkampagnen nutzten. Die Auswirkungen dieses Skandals trugen maßgeblich zur Einführung der derzeitigen europäischen GDPR-Richtlinien bei.",
+                    "Das University College London (UK) gehört zur Universität London und ist als Mitglied der Russell-Gruppe (Verbund 24 führender, britischer Forschungsuniversitäten) eine der angesehensten Eliteuniversitäten der Welt.",
                 en:
-                    "Facebook is involved in funding and promoting academic research across a diverse range of topics – from the deeply technical infrastructure projects that improve the function of its systems and the most sophisticated data science using the masses of data it has, to investigating the impact social media has on people's lives. The infamous Cambridge Analytica data scandal was made possible using a personality quiz app that was supposedly gathering information from Facebook users for research purposes. The research company behind the app then sold the data to SCL who used it for running questionable election campaigns. The fallout from this has contributed significantly to the introduction of the GDPR framework we now enjoy.",
+                    "University College London (UK) is part of the University of London and, as a member of the Russell Group (an association of 24 leading British research universities), is one of the most prestigious elite universities in the world.",
             },
         },
     },
@@ -420,12 +420,12 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Alphabet Inc (US)",
+            name: "Google LLC",
             companyExplanation: {
                 de:
-                    "Alphabet Inc. ist die Dachgesellschaft der Google LLC mit Sitz in Kalifornien (USA) und gehört als Technologie-Konzern zu einer der sog. Big-Five-Unternehmen, also den größten Tech-Konzernen der Welt.",
+                    "Google LLC zusammen mit dem Mutterkonzern Alphabet Inc. gehört als Technologie-Konzern zu einer der sog. Big-Five-Unternehmen, also den größten Tech-Konzernen der Welt und hat ihren Hauptsitz in Kalifornien (USA).",
                 en:
-                    "Alphabet Inc. is the parent company of Google LLC, which is based in California (USA) and, as a technology group, belongs to one of the so-called Big Five companies, i.e. the largest tech groups in the world.",
+                    "Google LLC and its parent holding company Alphabet Inc., are based in California (USA) As a technology group they belong to one of the so-called Big Five companies, i.e. the largest tech groups in the world..",
             },
             industryExplanation: {
                 de:
