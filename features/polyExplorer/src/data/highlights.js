@@ -44,7 +44,7 @@ export default {
             */
         },
         dataRecipient: {
-            name: "elopage GmbH",
+            name: "elopage GmbH (DE)",
             companyExplanation: {
                 de:
                     "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool. Dabei können Tools und Apps individuell nach Unternehmensbedarf in einer Art Baukastensystem zusammen gestellt werden.",
@@ -209,7 +209,7 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Bosch Service Solutions GmbH",
+            name: "Bosch Service Solutions GmbH (DE)",
             companyExplanation: {
                 de:
                     "Bosch Service Solutions ist ein führender Anbieter für Business Process Outsourcing. Bosch Service Solutions  unterstützt bei der Prozessoptimierung mit fünf Kernbereichen: Customer Experience Services, Mobility Services, Monitoring Services und Business Services. Der Firmensitz ist Stuttgart (DE).",
@@ -420,7 +420,7 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Alphabet Inc.",
+            name: "Alphabet Inc (US)",
             companyExplanation: {
                 de:
                     "Alphabet Inc. ist die Dachgesellschaft der Google LLC mit Sitz in Kalifornien (USA) und gehört als Technologie-Konzern zu einer der sog. Big-Five-Unternehmen, also den größten Tech-Konzernen der Welt.",

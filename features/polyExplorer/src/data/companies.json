@@ -393,6 +393,29 @@
         }
     },
     {
+        "name": "sipgate GmbH (DE)",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:InternetAndMultimedia",
+            "name": {
+                "en": "Internet & Multimedia",
+                "de": "Internet & Multimedia"
+            }
+        }
+    },
+    {
         "name": "Credit Management Outsource Solutions C Ltd. (IE)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -418,7 +441,7 @@
     {
         "name": "Metropolitan Bank and Trust Company (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -574,6 +597,29 @@
             "name": {
                 "en": "Service",
                 "de": "Dienstleistung"
+            }
+        }
+    },
+    {
+        "name": "elopage GmbH (DE)",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:RetailAndConsumption",
+            "name": {
+                "en": "Retail & Consumption",
+                "de": "Handel & Konsum"
             }
         }
     },
@@ -1142,7 +1188,7 @@
     {
         "name": "Vitamina Online (MX)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MX"
         },
@@ -1388,7 +1434,7 @@
     {
         "name": "Banco de Guayaquil S.A. (EC)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "EC"
         },
@@ -1571,7 +1617,7 @@
     {
         "name": "Sykes Enterprises Incorporated (SV)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SV"
         },
@@ -1640,7 +1686,7 @@
     {
         "name": "CRIF Ltd (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -2369,7 +2415,7 @@
     {
         "name": "Exchange4Free (ZA)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "ZA"
         },
@@ -2631,7 +2677,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (UY)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "UY"
         },
@@ -2957,7 +3003,7 @@
     {
         "name": "Banco Popular Dominicano, S. A. - Banco Multiple (DO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "DO"
         },
@@ -3164,7 +3210,7 @@
     {
         "name": "Deltavista International AG (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -3233,7 +3279,7 @@
     {
         "name": "Banco Azteca de El Salvador (SV)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SV"
         },
@@ -3456,7 +3502,7 @@
     {
         "name": "TransNetwork Corporation (MX)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MX"
         },
@@ -3595,7 +3641,7 @@
     {
         "name": "Uniteller Financial Services, Inc. a.k.a. Banorte (GT)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "GT"
         },
@@ -3664,7 +3710,7 @@
     {
         "name": "TransNetwork Corporation (HN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "HN"
         },
@@ -3960,7 +4006,7 @@
     {
         "name": "Pronet S.A. (GT)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "GT"
         },
@@ -4000,6 +4046,29 @@
             "name": {
                 "en": "Service",
                 "de": "Dienstleistung"
+            }
+        }
+    },
+    {
+        "name": "Akamai Technologies Inc (US)",
+        "featured": false,
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:InternetAndMultimedia",
+            "name": {
+                "en": "Internet & Multimedia",
+                "de": "Internet & Multimedia"
             }
         }
     },
@@ -4407,7 +4476,7 @@
     {
         "name": "Muslim Commercial Bank Limited (PK)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PK"
         },
@@ -4652,7 +4721,7 @@
     {
         "name": "Criteo Singapore Pte. Ltd (SG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SG"
         },
@@ -4790,7 +4859,7 @@
     {
         "name": "Eurocredit (SL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SL"
         },
@@ -4975,7 +5044,7 @@
     {
         "name": "HDFC Bank Limited [NEFT] (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -4998,7 +5067,7 @@
     {
         "name": "Banco Rendimento (BR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BR"
         },
@@ -5090,7 +5159,7 @@
     {
         "name": "TENGO a.k.a. Astra Honduras S.A. de C.V. (HN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "HN"
         },
@@ -5492,7 +5561,7 @@
     {
         "name": "Banco BHD, S.A. - Banco Multiple (DO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "DO"
         },
@@ -5712,7 +5781,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (BO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BO"
         },
@@ -5735,7 +5804,7 @@
     {
         "name": "Cebuana Lhuillier Services Corporation (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -5804,7 +5873,7 @@
     {
         "name": "Banco Industrial S.A. (GT)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "GT"
         },
@@ -5850,7 +5919,7 @@
     {
         "name": "Punto Express S.A. De C.V. (SV)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SV"
         },
@@ -5896,7 +5965,7 @@
     {
         "name": "Sampath (LK)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "LK"
         },
@@ -6180,6 +6249,29 @@
         }
     },
     {
+        "name": "Accenture (UK) Limited (GB)",
+        "featured": false,
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "countryCode": "GB"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:Consulting",
+            "name": {
+                "en": "Consulting",
+                "de": "Beratung"
+            }
+        }
+    },
+    {
         "name": "smartclip Europe GmbH",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -6304,7 +6396,7 @@
     {
         "name": "Prahbu Group (NP)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "NP"
         },
@@ -6350,9 +6442,10 @@
     {
         "name": "pc polypoly coop SCE mbH",
         "featured": true,
+        "jurisdiction": "EU-GDPR",
         "location": {
             "city": "Berlin",
-            "countryCode": "Deutschland"
+            "countryCode": "DE"
         },
         "annualRevenues": [
             {
@@ -6364,8 +6457,14 @@
         "dataRecipients": [
             "Facebook Ireland Limited (IE)",
             "Google Ireland, Ltd. (IE)",
+            "Hetzner Online GmbH (DE)",
             "LinkedIn Ireland Unlimited Company (IE)",
-            "Twitter, Inc. (US)"
+            "MailJet GmbH (DE)",
+            "MailJet SAS (FR)",
+            "Twitter, Inc. (US)",
+            "elopage GmbH (DE)",
+            "polypoly GmbH (DE)",
+            "sipgate GmbH (DE)"
         ],
         "dataSharingPurposes": [
             {
@@ -7156,7 +7255,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (HN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "HN"
         },
@@ -7293,7 +7392,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (MX)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MX"
         },
@@ -7339,7 +7438,7 @@
     {
         "name": "Everest Bank (NP)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "NP"
         },
@@ -7624,7 +7723,7 @@
     {
         "name": "Rakuten Inc. (JP)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "JP"
         },
@@ -7827,7 +7926,7 @@
     {
         "name": "Bank of the Philippine Islands (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -7896,7 +7995,7 @@
     {
         "name": "Internet Auction Co., Ltd. (KR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "KR"
         },
@@ -8149,7 +8248,7 @@
     {
         "name": "Barclays Wealth Intermediaries (MC)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MC"
         },
@@ -9048,7 +9147,7 @@
     {
         "name": "Maple Team Limited (IL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IL"
         },
@@ -9210,7 +9309,7 @@
     {
         "name": "Punto Facil S.A. (NI)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "NI"
         },
@@ -9233,7 +9332,7 @@
     {
         "name": "VXI Global Solutions LLC (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -9593,7 +9692,7 @@
     {
         "name": "Banco Pichincha C.A. (EC)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "EC"
         },
@@ -9616,7 +9715,7 @@
     {
         "name": "Bank Negara Indonesia [BNI] (ID)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "ID"
         },
@@ -9709,7 +9808,7 @@
     {
         "name": "TransNetwork Corporation (PA)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PA"
         },
@@ -9810,7 +9909,7 @@
     {
         "name": "Bank Alfalah Limited (PK)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PK"
         },
@@ -10231,7 +10330,7 @@
     {
         "name": "eTranzact International PLC (NG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "NG"
         },
@@ -10508,7 +10607,7 @@
     {
         "name": "Rupali Bank Limited (BD)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BD"
         },
@@ -10578,7 +10677,7 @@
     {
         "name": "Cetelem S.A. (BR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BR"
         },
@@ -10911,7 +11010,7 @@
     {
         "name": "Sonali Bank Limited (SO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SO"
         },
@@ -11086,7 +11185,7 @@
     {
         "name": "LinkedIn Singapore Pte. Ltd. (SG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SG"
         },
@@ -11684,6 +11783,29 @@
         }
     },
     {
+        "name": "polypoly GmbH (DE)",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:IT",
+            "name": {
+                "en": "IT",
+                "de": "EDV & IT"
+            }
+        }
+    },
+    {
         "name": "D-Local (GB)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
@@ -11871,7 +11993,7 @@
     {
         "name": "Allied Bank Limited (PK)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PK"
         },
@@ -12009,7 +12131,7 @@
     {
         "name": "Financiera Pagos Internacionales S.A. Compania de Financiamiento Comercial (CO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CO"
         },
@@ -12078,7 +12200,7 @@
     {
         "name": "Continuum India Private Limited (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -12285,7 +12407,7 @@
     {
         "name": "Cheers Interactive (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -12542,7 +12664,7 @@
     {
         "name": "GCS Systems, Ltd. (DO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "DO"
         },
@@ -12657,7 +12779,7 @@
     {
         "name": "Banco Azteca de Guatemala S.A. (GT)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "GT"
         },
@@ -12703,7 +12825,7 @@
     {
         "name": "United Bank Limited (PK)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PK"
         },
@@ -12749,7 +12871,7 @@
     {
         "name": "National Bank of Pakistan (PK)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PK"
         },
@@ -12888,7 +13010,7 @@
     {
         "name": "Soluciones BK SA (GT)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "GT"
         },
@@ -14825,7 +14947,7 @@
     {
         "name": "Banco de Reservas de la Republica Dominicana Banco de Servicios Multiples S.A. (DO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "DO"
         },
@@ -15382,7 +15504,7 @@
     {
         "name": "Earthport (VN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "VN"
         },
@@ -15566,7 +15688,7 @@
     {
         "name": "video intelligence AG (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -16003,7 +16125,7 @@
     {
         "name": "Nepal Investment Bank Ltd. (NP)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "NP"
         },
@@ -16557,7 +16679,7 @@
     {
         "name": "Philippine National Bank (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -16695,7 +16817,7 @@
     {
         "name": "SixthSense Communications LLC (SG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SG"
         },
@@ -16787,7 +16909,7 @@
     {
         "name": "„24/7“ (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -16856,7 +16978,7 @@
     {
         "name": "Bancolombia S.A. (CO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CO"
         },
@@ -16902,7 +17024,7 @@
     {
         "name": "Bank of America N.A. (BA)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BA"
         },
@@ -17904,7 +18026,7 @@
     {
         "name": "AFEX Transferencias Y Cambios LTDA (CL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CL"
         },
@@ -18160,7 +18282,7 @@
     {
         "name": "Sutherland Global Services Inc. (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -18183,7 +18305,7 @@
     {
         "name": "Chargebee (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -19031,7 +19153,7 @@
     {
         "name": "Sampath (SL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SL"
         },
@@ -19054,7 +19176,7 @@
     {
         "name": "Google Asia Pacific Pte. Ltd. (SG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SG"
         },
@@ -19169,7 +19291,7 @@
     {
         "name": "Scanovate Ltd (IL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IL"
         },
@@ -19487,7 +19609,7 @@
     {
         "name": "Hatton National Bank PLC (LK)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "LK"
         },
@@ -19811,7 +19933,7 @@
     {
         "name": "First Global Money Inc. (GY)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "GY"
         },
@@ -20215,7 +20337,7 @@
     {
         "name": "Nueva Elektra del Milenio S.A. de C.V. (MX)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MX"
         },
@@ -20284,7 +20406,7 @@
     {
         "name": "Michel J. Lhuillier Financial Services Inc. , (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -20709,7 +20831,7 @@
     {
         "name": "JMMB Capital and Credit [CCRL] (JM)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "JM"
         },
@@ -21382,7 +21504,7 @@
     {
         "name": "PayKii Inc. (MX)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MX"
         },
@@ -21564,6 +21686,29 @@
         }
     },
     {
+        "name": "Hetzner Online GmbH (DE)",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:IT",
+            "name": {
+                "en": "IT",
+                "de": "EDV & IT"
+            }
+        }
+    },
+    {
         "name": "Teads SA (FR)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -21658,7 +21803,7 @@
     {
         "name": "BIDSWITCH GmbH (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -21889,7 +22034,7 @@
     {
         "name": "TransNetwork Corporation (GT)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "GT"
         },
@@ -21935,7 +22080,7 @@
     {
         "name": "Uniteller Financial Services, Inc. a.k.a. Banorte (HN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "HN"
         },
@@ -22027,7 +22172,7 @@
     {
         "name": "TransNetwork Corporation (NI)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "NI"
         },
@@ -22096,7 +22241,7 @@
     {
         "name": "Uniteller Financial Services, Inc. a.k.a. Banorte (MX)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MX"
         },
@@ -22165,7 +22310,7 @@
     {
         "name": "More Money Transfer S.A. f.k.a. Gamerly S.A. (CL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CL"
         },
@@ -22372,7 +22517,7 @@
     {
         "name": "Ad- X Limited (KR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "KR"
         },
@@ -22640,7 +22785,7 @@
     {
         "name": "G-Xchange Inc. (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -22686,7 +22831,7 @@
     {
         "name": "ExMarketPlace FZ LLC (AE)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "AE"
         },
@@ -22777,7 +22922,7 @@
     {
         "name": "Teleperformance (MY)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MY"
         },
@@ -22952,7 +23097,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (SV)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SV"
         },
@@ -23284,7 +23429,7 @@
     {
         "name": "Banco de la Producción (NI)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "NI"
         },
@@ -23422,7 +23567,7 @@
     {
         "name": "Red Efectiva S.A. de C.V. (MX)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MX"
         },
@@ -23675,7 +23820,7 @@
     {
         "name": "Swisscom Schweiz AG (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -23744,7 +23889,7 @@
     {
         "name": "Eurocredit (BR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BR"
         },
@@ -23972,7 +24117,7 @@
     {
         "name": "Edelman.ergo GmbH (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -24156,7 +24301,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (PE)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PE"
         },
@@ -24364,7 +24509,7 @@
     {
         "name": "SBM Bank Limited (KE)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "KE"
         },
@@ -24877,7 +25022,7 @@
     {
         "name": "Forrester Switzerland GmbH/Forrester Research BV (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -25309,7 +25454,7 @@
     {
         "name": "VMBS Money Transfer Services Limited (JM)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "JM"
         },
@@ -25332,7 +25477,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (GT)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "GT"
         },
@@ -25355,7 +25500,7 @@
     {
         "name": "Punjab National Bank (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -25424,7 +25569,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (NI)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "NI"
         },
@@ -26022,7 +26167,7 @@
     {
         "name": "CRIF AG (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -26305,10 +26450,10 @@
             "source": null
         },
         "industryCategory": {
-            "id": "ic:Service",
+            "id": "ic:Insurance",
             "name": {
-                "en": "Service",
-                "de": "Dienstleistung"
+                "en": "Insurance",
+                "de": "Versicherung"
             }
         }
     },
@@ -26361,7 +26506,7 @@
     {
         "name": "Yes Bank Limited (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -26407,7 +26552,7 @@
     {
         "name": "Vietnam Payment Solution Joint Stock Company (VN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "VN"
         },
@@ -27019,7 +27164,7 @@
     {
         "name": "Banco Davivienda S.A. (CO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CO"
         },
@@ -27042,7 +27187,7 @@
     {
         "name": "Axis Bank Ltd (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -27178,6 +27323,29 @@
         }
     },
     {
+        "name": "MailJet GmbH (DE)",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:InternetAndMultimedia",
+            "name": {
+                "en": "Internet & Multimedia",
+                "de": "Internet & Multimedia"
+            }
+        }
+    },
+    {
         "name": "Golden Gate BBB (US)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
@@ -27249,7 +27417,7 @@
     {
         "name": "Pagos Intermex S.A. De C.V. (MX)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "MX"
         },
@@ -27764,7 +27932,7 @@
     {
         "name": "SynapsIndia (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -27902,7 +28070,7 @@
     {
         "name": "Joint Stock Commercial Bank For Foreign Trade Of Vietnam Vietcombank (VN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "VN"
         },
@@ -27971,7 +28139,7 @@
     {
         "name": "AppsFlyer (IL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IL"
         },
@@ -28175,7 +28343,7 @@
     {
         "name": "Prabhu Group (BD)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BD"
         },
@@ -28410,7 +28578,7 @@
     {
         "name": "eBay International AG (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -28456,7 +28624,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (DO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "DO"
         },
@@ -28502,7 +28670,7 @@
     {
         "name": "TransNetwork Corporation (SV)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SV"
         },
@@ -28617,7 +28785,7 @@
     {
         "name": "Banco De Credito Del Peru (PE)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PE"
         },
@@ -28640,7 +28808,7 @@
     {
         "name": "M3 Mobile Co., Ltd. (KR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "KR"
         },
@@ -28847,7 +29015,7 @@
     {
         "name": "Unitransfer S.A. (HT)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "HT"
         },
@@ -29529,7 +29697,7 @@
     {
         "name": "Sai Gon Thuong Tin Commercial Join Stock Bank (VN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "VN"
         },
@@ -29599,7 +29767,7 @@
     {
         "name": "Dutch Bangla Bank Ltd (BD)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BD"
         },
@@ -29680,7 +29848,7 @@
     {
         "name": "Giesecke+Devrient Mobile Security (IR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IR"
         },
@@ -30721,6 +30889,7 @@
             "ANZ National Bank Limited (NZ)",
             "ARC [Europe] Ltd (GB)",
             "Accenture (IE)",
+            "Accenture (UK) Limited (GB)",
             "Access Markets Int’L [Ami] Partners (US)",
             "Access Payments System (GR)",
             "AccountScore Limited (GB)",
@@ -32784,7 +32953,7 @@
             "children": [
                 "Five-Eyes",
                 "EU-GDPR",
-                "Unknown",
+                "Sonstige",
                 "China",
                 "Russia"
             ]
@@ -32793,7 +32962,7 @@
     {
         "name": "Social Islamic Bank Limited (BD)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BD"
         },
@@ -32839,7 +33008,7 @@
     {
         "name": "Remesas Teledolar S.A. (CR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CR"
         },
@@ -33167,7 +33336,7 @@
     {
         "name": "Affinity Global Advertising Pvt. Ltd. (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -33351,7 +33520,7 @@
     {
         "name": "More Money Transfer S.A. f.k.a. Gamerly S.A. (UY)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "UY"
         },
@@ -33982,7 +34151,7 @@
     {
         "name": "LatentView Analytics Corporation (IN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IN"
         },
@@ -34167,7 +34336,7 @@
     {
         "name": "Queen Bee Capital Co., Ltd. (JP)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "JP"
         },
@@ -34322,7 +34491,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (EC)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "EC"
         },
@@ -34345,7 +34514,7 @@
     {
         "name": "Vodafone Ukraine (UA)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "UA"
         },
@@ -34391,7 +34560,7 @@
     {
         "name": "Banco Internacional Del Peru S.A. (PE)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PE"
         },
@@ -34819,7 +34988,7 @@
     {
         "name": "Envoy Services Limited a.k.a. Worldpay (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -35001,7 +35170,7 @@
     {
         "name": "Bancomer Transfer Services Inc. (CO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CO"
         },
@@ -35093,7 +35262,7 @@
     {
         "name": "Globalenvios S.A. (EC)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "EC"
         },
@@ -35347,7 +35516,7 @@
     {
         "name": "Banco America Central SA (GT)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "GT"
         },
@@ -35439,7 +35608,7 @@
     {
         "name": "Mitto AG (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -35760,7 +35929,7 @@
     {
         "name": "Rizal Commercial Banking Corporations [RCBC] (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -35863,7 +36032,7 @@
     {
         "name": "Mitto (CH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CH"
         },
@@ -35978,7 +36147,7 @@
     {
         "name": "Total Media (IL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IL"
         },
@@ -36161,7 +36330,7 @@
     {
         "name": "Landbank of the Philippines (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -36667,7 +36836,7 @@
     {
         "name": "Earthport (SG)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SG"
         },
@@ -36773,7 +36942,7 @@
     {
         "name": "Transworld Services (CL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CL"
         },
@@ -36836,6 +37005,29 @@
             "name": {
                 "en": "Service",
                 "de": "Dienstleistung"
+            }
+        }
+    },
+    {
+        "name": "MailJet SAS (FR)",
+        "featured": false,
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "countryCode": "FR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:InternetAndMultimedia",
+            "name": {
+                "en": "Internet & Multimedia",
+                "de": "Internet & Multimedia"
             }
         }
     },
@@ -38417,7 +38609,7 @@
     {
         "name": "LBC Express, Inc. (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -39686,7 +39878,7 @@
             "children": [
                 "EU-GDPR",
                 "Five-Eyes",
-                "Unknown"
+                "Sonstige"
             ]
         }
     },
@@ -39763,7 +39955,7 @@
     {
         "name": "Debby and Ron digital LTD (IL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IL"
         },
@@ -39879,7 +40071,7 @@
     {
         "name": "Banco de Oro a.k.a. BDO Unibank, Inc (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -39925,7 +40117,7 @@
     {
         "name": "TransNetwork Corporation (CR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CR"
         },
@@ -40102,7 +40294,7 @@
     {
         "name": "Agente de Cambio Caribe Express (DO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "DO"
         },
@@ -40365,7 +40557,7 @@
     {
         "name": "Resultados Digitais (BR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BR"
         },
@@ -41503,7 +41695,7 @@
             "children": [
                 "Five-Eyes",
                 "EU-GDPR",
-                "Unknown",
+                "Sonstige",
                 "China"
             ]
         }
@@ -41511,7 +41703,7 @@
     {
         "name": "Ultra Chile Sociedad Anonima (AR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "AR"
         },
@@ -41580,7 +41772,7 @@
     {
         "name": "Supersonic Ltd. (IL)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "IL"
         },
@@ -41672,7 +41864,7 @@
     {
         "name": "Fidelitas (AR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "AR"
         },
@@ -41834,7 +42026,7 @@
     {
         "name": "TransNetwork Corporation (CO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "CO"
         },
@@ -42249,7 +42441,7 @@
     {
         "name": "Signed & Delivered (PH)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "PH"
         },
@@ -42295,7 +42487,7 @@
     {
         "name": "More Money Transfer S.A. f.k.a. Gamerly S.A. (BO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "BO"
         },
@@ -42364,7 +42556,7 @@
     {
         "name": "Banco Azteca de Honduras S.A. (HN)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "HN"
         },
@@ -42387,7 +42579,7 @@
     {
         "name": "Republica Dominicana Banco de Servicios Multiples S.A. (DO)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "DO"
         },
@@ -42802,7 +42994,7 @@
     {
         "name": "ID Scan Research Bilisim Teknolojileri Sanayi ve Ticaret Limited Sirketi (TR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "TR"
         },
@@ -43151,7 +43343,7 @@
     {
         "name": "More Money Transfer S.A. f.k.a. Gamerly S.A. (AR)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "AR"
         },
@@ -43427,7 +43619,7 @@
     {
         "name": "Banco Agricola S.A. (SV)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "SV"
         },
@@ -43473,7 +43665,7 @@
     {
         "name": "TransNetwork Corporation (EC)",
         "featured": false,
-        "jurisdiction": "Unknown",
+        "jurisdiction": "Sonstige",
         "location": {
             "countryCode": "EC"
         },
