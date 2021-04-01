@@ -22,6 +22,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         "WILMINGTON, DELAWARE": "wilmington",
         WILMINGTON: "wilmington",
         Cupertino: "cupertino",
+        DUBLIN: "dublin",
     };
 
     const tabTranslation = {

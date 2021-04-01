@@ -545,6 +545,7 @@ const DataExplorationScreen = ({
                         onSwiper={setSwiper}
                         direction="vertical"
                         initialSlide={activeIndex}
+                        spaceBetween={10}
                         onSlideChangeTransitionStart={(swiper) =>
                             setActiveIndex(swiper.activeIndex)
                         }

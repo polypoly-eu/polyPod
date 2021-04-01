@@ -253,7 +253,12 @@ const CompanyBubbles = ({
             .attr("width", explanationWidth);
         const div = foreignObject
             .append("xhtml:div")
-            .attr("class", "on-bubble")
+            .style("padding", "4px")
+            .style("background", "rgba(15, 25, 56, 0.7)")
+            .style("font-family", "Jost Medium")
+            .style("font-size", "14px")
+            .style("line-height", "120%")
+            .style("color", "#f7fafc")
             .html(explanation);
         const divHeight = div.node().getBoundingClientRect().height;
         foreignObject

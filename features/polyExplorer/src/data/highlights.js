@@ -47,15 +47,15 @@ export default {
             name: "elopage GmbH (DE)",
             companyExplanation: {
                 de:
-                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool. Dabei können Tools und Apps individuell nach Unternehmensbedarf in einer Art Baukastensystem zusammen gestellt werden.",
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
                 en:
-                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool. Tools and apps can be put together individually according to company needs in a kind of modular system.",
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
             },
             industryExplanation: {
                 de:
-                    "polypoly nutzt verschiedene Dienstleistende, um das Tagesgeschäft als Genossenschaft zu betreiben. Der Prozess, Mitglied zu werden, ist dadurch um ein Vieles einfacher und skalierbarer gestaltet. Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
                 en:
-                    "polypoly uses various service providers in order to run their business day to day. The process of becoming a member is designed to be scalable yet simple and can be performed from the comfort of any device capable of browsing the internet. Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
             },
         },
     },
@@ -98,12 +98,11 @@ export default {
                 en:
                     "Microsoft Corporation is an international hardware and software developer and a technology company headquartered in Redmond (USA) and is also one of the Big Five companies, i.e. the largest tech corporations in the world.",
             },
-            // TODO: Way too long!
             industryExplanation: {
                 de:
-                    'Die SCHUFA teilt Daten mit Unternehmen der IT-Branche zu Werbe- und Analysezwecken. Durch die Sammlung von Daten über die Besucher:innen ihrer Website mithilfe von Cookies kann aus einer Kombination von Geräte- und Browserattributen ein individueller „Fingerabdruck" erstellt werden, dem eine eindeutige Kennung zugewiesen wird. Dieser wird dann im gesamten Internet verwendet, um eine:n bestimmte:n Website-Besucher:in wiederzuerkennen und zu messen, wie er:sie auf Werbekampagnen reagiert und das weitere Surfverhalten zu analysieren.',
+                    "Die SCHUFA gibt Website-Daten zu Werbe- und Analysezwecken an Unternehmen aus der IT-Branche weiter.",
                 en:
-                    'SCHUFA shares data with companies in the IT sector for advertising and analytics purposes. By collecting data on visitors to their website using cookies, an individual "fingerprint" can be generated from a combination of device and browser attributes that is assigned a unique identifier. This is then used across the wider internet to re-identify a particular site visitor and measure how they respond to advertising campaigns and analyse their wider browsing behaviour.',
+                    "SCHUFA shares data with companies in the IT sector for advertising and analytics purposes.",
             },
         },
     },
@@ -123,7 +122,13 @@ export default {
         },
         dataTypeCategories: {
             [parentCategories.individual]: {
-                category: "dpv:Age",
+                category: "dpv:Location",
+                explanation: {
+                    de:
+                        "Apple verwendet die von Kund:innen-Verhalten gesammelten Daten und wie sie ihre Geräte verwenden, um stetige Produktverbesserungen anzustreben und die Forschung und Entwicklung zukünftiger Produkte und Dienste zu informieren. Dies geschieht auch, wenn Konten speziell für Kinder eingerichtet werden. ",
+                    en:
+                        "Apple uses the data it gathers about the behaviour of its customers - how they use their devices - to inform product improvement and the research and development of future products and services. This happens also if accounts are set up specifically for children. ",
+                },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
@@ -137,16 +142,9 @@ export default {
                         "Apple uses device location data to provide its services like realtime traffic, maps and Find my Phone, among others. If a user turns on location services, various sensors can pinpoint the whereabouts of a device to within a few metres. In the past, the iPhone 11 made regular location checks to determine if it was in a country where the use of a new Ultra Wide Band data transfer technology was approved, something that couldn't be turned off by the user - unless by travelling to a location where it would become automatically disabled.",
                 },
             },
-            // TODO: dpv:Location doesn't seem to have ended up in behavioural!
+            // TODO: We don't have a category to highlight for behavioral
             /*
             [parentCategories.behavioral]: {
-                category: "dpv:Location",
-                explanation: {
-                    de:
-                        "Apple verwendet die von Kund:innen-Verhalten gesammelten Daten und wie sie ihre Geräte verwenden, um stetige Produktverbesserungen anzustreben und die Forschung und Entwicklung zukünftiger Produkte und Dienste zu informieren. Dies geschieht auch, wenn Konten speziell für Kinder eingerichtet werden. ",
-                    en:
-                        "Apple uses the data it gathers about the behaviour of its customers - how they use their devices - to inform product improvement and the research and development of future products and services. This happens also if accounts are set up specifically for children. ",
-                },
             },
             */
             [parentCategories.financial]: {
@@ -191,11 +189,6 @@ export default {
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
-            },
-            // TODO: dpv:Tracking seems to be there, but not under behavioral data
-            /*
-            [parentCategories.behavioral]: {
-                category: "dpv:Tracking",
                 explanation: {
                     de:
                         "BMW verwendet auf der Website Cookies, die das Verhalten der Nutzer:innen beim Surfen verfolgen und die kombiniert werden, um Nutzende bei späteren Besuchen wiederzuerkennen und das Verhalten im Zeitverlauf abzubilden. Die Daten, die aus diesem Prozess gewonnen werden, können Dinge sein, wie das bestimmte Automodell, das eine Person am häufigsten angesehen hat, oder die Fahrzeugklasse, mit der sie die meiste Zeit verbringt. BMW teilt solche Daten mit Unternehmen wie Sophus 3 – einem Unternehmen, das sich auf das Kaufverhalten von Autos spezialisiert hat und mit vielen großen Herstellenden zusammenarbeitet.",
@@ -203,13 +196,18 @@ export default {
                         "BMW uses cookies on its website that track the behaviour of users as they browse and that are combined to recognise users on subsequent visits and map behaviour over time. The data garnered from this process can be things like the particular model of car that a person has viewed most, or the class of vehicles they spend most time engaging with. BMW shares data such as this with companies like Sophus 3 - a company that specialises in car buying behaviour and works with many major manufacturers.",
                 },
             },
+            // TODO: dpv:Tracking seems to be there, but not under behavioral data
+            /*
+            [parentCategories.behavioral]: {
+                category: "dpv:Tracking",
+            },
             */
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
         },
         dataRecipient: {
-            name: "Bosch Service Solutions GmbH (DE)",
+            name: "BOSCH Service Solutions GmbH (DE)",
             companyExplanation: {
                 de:
                     "Bosch Service Solutions ist ein führender Anbieter für Business Process Outsourcing. Bosch Service Solutions  unterstützt bei der Prozessoptimierung mit fünf Kernbereichen: Customer Experience Services, Mobility Services, Monitoring Services und Business Services. Der Firmensitz ist Stuttgart (DE).",
@@ -218,9 +216,9 @@ export default {
             },
             industryExplanation: {
                 de:
-                    "BMW teilt Daten mit Unternehmen, die u.a. technologische Dienstleistungen für sie erbringen. Damit ein Unternehmen effizient arbeiten kann, müssen die richtigen Lieferant:innen und Dienstleistungsunternehmen ausgewählt werden, die sich um bestimmte Aspekte des Geschäfts kümmern; diese Partner:innen- und Zuliefer:innen-Unternehmen benötigen Daten, um ihre Produkte zielgerichtet für BMW und z.B. die Fahrzeugaustattung zu gestalten.",
+                    "Damit ein Unternehmen wie BMW effizient arbeiten kann, müssen die richtigen Lieferant:innen und Dienstleistungsunternehmen ausgewählt werden; diese Unternehmen benötigen Daten, um ihre Produkte zielgerichtet für BMW und z.B. die Fahrzeugaustattung zu gestalten.",
                 en:
-                    "BMW shares data with companies that provide technological services to them. Part of making a business work efficiently means choosing the right suppliers and services companies to take care of specific aspects of that business and these companies require data to render those services.",
+                    "Part of making a business like BMW work efficiently means choosing the right suppliers and services companies and these companies require data to render those services.",
             },
         },
     },
@@ -265,15 +263,15 @@ export default {
             name: "WayToGrow (PL)",
             companyExplanation: {
                 de:
-                    "Waytogrow ist eine unabhängige Gruppe von Expert:innen, die sich auf programmatische und datengesteuerte Werbung spezialisiert haben. Waytogrow mit Sitz in Warschau (PL) gehört zur Netsprint-Gruppe, einem führenden Unternehmen im digitalen Marketing. ",
+                    "Waytogrow ist eine unabhängige Expert:innen-Gruppe, die sich auf programmatische und datengesteuerte Werbung spezialisiert haben.",
                 en:
-                    "Waytogrow is an independent group of experts specialising in programmatic and data-driven advertising. Waytogrow, based in Warsaw (PL), is part of the Netsprint Group, a leading digital marketing company.",
+                    "Waytogrow is an independent group of experts specialising in programmatic and data-driven advertising.",
             },
             industryExplanation: {
                 de:
-                    "Mehr als die Hälfte aller Internetseiten nutzen Google Analytics, einigen Berichten zufolge ist ihr Tracking-Code sogar auf einem weitaus höheren Prozentsatz der Seiten vorhanden (~85%). Analytics hilft, Webseitenbetreibenden zu verstehen, wie ihre Dienste genutzt werden und wie sie entsprechend ihrer Zwecke optimiert werden können. Als gewinnorientiertes Unternehmen ist Google bestrebt, die Nutzung von Online-Werbung zu steigern (über 80% ihres Umsatzes im Jahr 2020) und rühmt sich, Partnerschaften mit über 2 Millionen Websites einzugehen, um diese Anzeigen anzuzeigen. Ihre ausgefeilten Analysen, ihre tiefe Marktdurchdringung und ihr riesiges Partner:innen-Netzwerk in fast 100 Ländern machen die hochgranularen Ad-Targeting-Services möglich, die sie anbieten.",
+                    "Google rühmt sich, Partnerschaften mit über 2 Millionen Websites einzugehen, um Anzeigen auszuliefern. Ihre ausgefeilten Analysen, ihre tiefe Marktdurchdringung und ihr riesiges Partner:innen-Netzwerk in fast 100 Ländern machen die hochgranularen Ad-Targeting-Services möglich, die sie anbieten.",
                 en:
-                    "More than half of all internet sites use Google analytics, some reports even say their tracking code is present on a far higher percentage of sites (~85%). Analytics help website operators understand how their services are used and how they can be optimised according to their purposes. As a profit-driven corporation, Google's purpose is to increase the use of online advertising (over 80% of their revenue in 2020) and boasts partnering with over 2 million websites to display these ads. Their sophisticated analytics, deep market penetration and vast partner network across nearly 100 countries, make the highly granular ad targeting services they offer possible.",
+                    "Google boasts partnering with over 2 million websites to display ads. Their sophisticated analytics, deep market penetration and vast partner network across nearly 100 countries, make the highly granular ad targeting services they offer possible.",
             },
         },
     },
@@ -314,15 +312,15 @@ export default {
             name: "Nielsen LLC (US)",
             companyExplanation: {
                 de:
-                    "Nielsen LLC ist der globale Marktführer im Bereich Marktforschung und hilft Unternehmen dabei, ihre Konsument:innen und deren Verhalten (besser) zu verstehen – durch qualitative und quantitative Konsument:innen-Befragungen. Der Unternehmenssitz ist in London (UK), das Verwaltungszentrum in New York City (USA).",
+                    "Nielsen LLC ist der globale Marktführer im Bereich Marktforschung und hilft Unternehmen dabei, ihre Konsument:innen und deren Verhalten (besser) zu verstehen.",
                 en:
-                    "Nielsen LLC is the global leader in market research, helping companies (better) understand their consumers and their behaviour through qualitative and quantitative consumer surveys. The company is headquartered in London (UK) and has its administrative centre in New York City (USA). ",
+                    "Nielsen LLC is the global leader in market research, helping companies (better) understand their consumers and their behaviour.",
             },
             industryExplanation: {
                 de:
-                    'Amazon hat sich in relativ kurzer Zeit zu einem globalen Giganten entwickelt und hätte dies nicht tun können, ohne enge Beziehungen zu Unternehmen aufzubauen, die auf dem Gebiet der Marktforschung führend sind. Amazons Bemühungen, das „kund:innenorientierteste Unternehmen der Welt" zu werden, werden durch die Erforschung und Analyse von Kund:innen-Verhalten und Konsummärkten und der Zusammenarbeit mit eben jener Marktforschunginstituten und anderen Unternehmen aus dieser Branche kontinuierlich verbessert.',
+                    'Amazons Bemühungen, das „kund:innenorientierteste Unternehmen der Welt" zu werden, werden auch durch die Zusammenarbeit mit Marktforschunginstituten und anderen Unternehmen aus dieser Branche kontinuierlich verbessert.',
                 en:
-                    "Amazon has become a global giant in a relatively short time and it couldn't have done this without building close ties to companies that are on the cutting edge of market research. Amazon's efforts to become the world's \"most customer focused company\" are fuelled by the research and analysis of customers and markets in a feedback loop of constant improvement.",
+                    "Amazon's efforts to become the world's \"most customer focused company\" are fuelled by the research and analysis of customers and markets in a feedback loop of constant improvement.",
             },
         },
     },
@@ -341,23 +339,26 @@ export default {
                 category: "dpv:Age",
             },
             [parentCategories.social]: {
-                category: "dpv:Language",
-            },
-            [parentCategories.technical]: {
-                category: "dpv:BrowserFingerprint",
-            },
-            // TODO: dpv:SpecialCategoryData doesn't seem to be in there
-            /*
-            [parentCategories.behavioral]: {
-                category: "dpv:SpecialCategoryData",
+                category: "dpv:PoliticalAffiliation",
                 explanation: {
                     de:
                         'Für viele der Nutzenden hat Facebook Zugriff auf die Arten von personenbezogenen Daten, die unter der GDPR als „besondere Kategorie personenbezogener Daten" der sensibelsten Art eingestuft werden. Dazu gehören Informationen über die politische Zugehörigkeit, die Religion oder die ethnische Herkunft einer Person. Facebook-Dating erklärt ausdrücklich, dass religiöse Ansichten oder das Interesse an der Partner:innen-Suche mit bestimmten Geschlechtern keinen Einfluss auf die angezeigte Werbung der Nutzenden haben, politische Ansichten sind davon jedoch ausgenommen und werden auch mit dieser Funktion weiter für individualisierte Werbeanzeigen genutzt.',
                     en:
-                        "or many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
+                        "For many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
                 },
             },
-            */
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:PoliticalAffiliation",
+                explanation: {
+                    de:
+                        'Für viele der Nutzenden hat Facebook Zugriff auf die Arten von personenbezogenen Daten, die unter der GDPR als „besondere Kategorie personenbezogener Daten" der sensibelsten Art eingestuft werden. Dazu gehören Informationen über die politische Zugehörigkeit, die Religion oder die ethnische Herkunft einer Person. Facebook-Dating erklärt ausdrücklich, dass religiöse Ansichten oder das Interesse an der Partner:innen-Suche mit bestimmten Geschlechtern keinen Einfluss auf die angezeigte Werbung der Nutzenden haben, politische Ansichten sind davon jedoch ausgenommen und werden auch mit dieser Funktion weiter für individualisierte Werbeanzeigen genutzt.',
+                    en:
+                        "For many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
+                },
+            },
             // TODO: dpv:Financial doesn't seem to be in there
             /*
             [parentCategories.financial]: {
@@ -373,12 +374,11 @@ export default {
                 en:
                     "University College London (UK) is part of the University of London and, as a member of the Russell Group (an association of 24 leading British research universities), is one of the most prestigious elite universities in the world.",
             },
-            // TODO: Waaaay too long
             industryExplanation: {
                 de:
-                    "Facebook beteiligt sich an der Finanzierung und Förderung akademischer Forschung in einem breiten Spektrum von Themen – von tiefgreifenden technischen Infrastrukturprojekten, die die Funktion der Systeme verbessern, über die anspruchsvollste Datenwissenschaft, die die Massen an Daten nutzt, bis hin zur Untersuchung der Auswirkungen sozialer Medien auf das Leben der Menschen. Der berüchtigte Datenskandal von Cambridge Analytica wurde durch eine Persönlichkeitsquiz-App ermöglicht, die angeblich Informationen von Facebook-Nutzenden zu Forschungszwecken sammelte. Das Forschungsunternehmen hinter der App verkaufte die Daten dann an SCL, die sie für die Durchführung fragwürdiger Wahlkampagnen nutzten. Die Auswirkungen dieses Skandals trugen maßgeblich zur Einführung der derzeitigen europäischen GDPR-Richtlinien bei.",
+                    "Der berüchtigte Datenskandal von Cambridge Analytica wurde durch eine Quiz-App ermöglicht, die angeblich Informationen von Facebook-Nutzenden zu Forschungszwecken sammelte und dann für die Durchführung fragwürdiger Wahlkampagnen verkaufte. Die Auswirkungen dieses Skandals trugen maßgeblich zur Einführung der derzeitigen europäischen GDPR-Richtlinien bei.",
                 en:
-                    "Facebook is involved in funding and promoting academic research across a diverse range of topics – from the deeply technical infrastructure projects that improve the function of its systems and the most sophisticated data science using the masses of data it has, to investigating the impact social media has on people's lives. The infamous Cambridge Analytica data scandal was made possible using a personality quiz app that was supposedly gathering information from Facebook users for research purposes. The research company behind the app then sold the data to SCL who used it for running questionable election campaigns. The fallout from this has contributed significantly to the introduction of the GDPR framework we now enjoy.",
+                    "The infamous Cambridge Analytica data scandal was made possible using a personality quiz app that was supposedly gathering information from Facebook users for research purposes. The fallout from this has contributed significantly to the introduction of the GDPR framework we now enjoy.",
             },
         },
     },
@@ -420,22 +420,22 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Alphabet Inc (US)",
+            name: "Google Inc. (US)",
             companyExplanation: {
                 de:
-                    "Alphabet Inc. ist die Dachgesellschaft der Google LLC mit Sitz in Kalifornien (USA) und gehört als Technologie-Konzern zu einer der sog. Big-Five-Unternehmen, also den größten Tech-Konzernen der Welt.",
+                    "Google LLC zusammen mit dem Mutterkonzern Alphabet Inc. gehört als Technologie-Konzern zu einer der sog. Big-Five-Unternehmen, also den größten Tech-Konzernen der Welt und hat ihren Hauptsitz in Kalifornien (USA).",
                 en:
-                    "Alphabet Inc. is the parent company of Google LLC, which is based in California (USA) and, as a technology group, belongs to one of the so-called Big Five companies, i.e. the largest tech groups in the world.",
+                    "Google LLC and its parent holding company Alphabet Inc., are based in California (USA) As a technology group they belong to one of the so-called Big Five companies, i.e. the largest tech groups in the world..",
             },
             industryExplanation: {
                 de:
-                    "PayPal teilt Daten mit Internet- und Multimedia-Unternehmen hauptsächlich zu Marketingzwecken, von denen einige auch andere Dienste wie Betrugserkennung (MaxMind) oder Analysen (Google LLC.) anbieten. Marketing ist für jedes Unternehmen wichtig und legitim, aber die Größenskala, die das Internet ermöglicht, und die daraus resultierenden Netzwerkeffekte, die in diesem Jahrhundert entstanden sind, gehen weit über klassisch-traditionelle Marketingziele hinaus.",
+                    "Marketing ist für jedes Unternehmen wichtig und legitim, aber die Größenskala, die das Internet ermöglicht, und die daraus resultierenden Netzwerkeffekte, die in diesem Jahrhundert entstanden sind, gehen weit über klassisch-traditionelle Marketingziele hinaus.",
                 en:
-                    "PayPal shares data with internet and multimedia companies chiefly for marketing purposes, some of whom also offer other services like fraud detection (MaxMind), or analytics (Google LLC.) Marketing is important and legitimate for any company, but the difference of scale made possible by the internet and the network effects that have emerged this century turn traditional intuitive understanding on its head.",
+                    "Marketing is important and legitimate for any company, but the difference of scale made possible by the internet and the network effects that have emerged this century turn traditional intuitive understanding on its head.",
             },
         },
     },
-    TikTok: {
+    "TikTok Technology Limited": {
         dataTypeCorrelation: {
             types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
             explanation: {
@@ -464,9 +464,12 @@ export default {
                         "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
                 },
             },
+            // TODO: Not in there
+            /*
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
             },
+            */
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
             },
@@ -484,9 +487,9 @@ export default {
             },
             industryExplanation: {
                 de:
-                    'Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt. So ist auch Bytedance eine TikTok-Tochtergesellschaft einer auf den Cayman-Inseln eingetragenen Holdinggesellschaft. Viele Unternehmen entscheiden sich dafür, sich in sogenannten „Steueroasen" wie diesen zu registrieren, wo Unternehmen wenig oder keine Körperschaftssteuern, Kapitalertragssteuern oder Steuern auf in anderen Ländern erwirtschaftete Erträge zahlen müssen. Sie sind froh, ein Geschäft zu betreiben, das auf eine von Steuerzahlenden finanzierte Infrastruktur angewiesen ist, würden aber lieber Anwält:innen eine relativ geringe Gebühr für eine Vermögensumstrukturierung zahlen, die sie weitgehend davon befreit, einen Beitrag zu den Gemeinden zu leisten, in denen sie ihr Geld verdienen.',
+                    "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt. Bytedance ist der auf den Cayman-Inseln eingetragene TikTok-Mutterkonzern.",
                 en:
-                    'Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely. Much like the various entities bearing the TikTok name, their Chinese sister company Bytedance is a subsidiary of a holding company incorporated in the Cayman Islands. Many companies choose to register in so called "Tax Havens" like this where companies must pay little or no corporation taxes, capital gains taxes or taxes on income earned in other countries. They are happy to operate a business that relies on infrastructure funded by tax payers, but would rather pay a lawyer a relatively low fee for asset restructuring that largely exempts them from having to contribute to the communities where they make their money.',
+                    "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely. Much like the various entities bearing the TikTok name, their Chinese sister company Bytedance is a subsidiary of a holding company incorporated in the Cayman Islands.",
             },
         },
     },

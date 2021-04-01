@@ -19,6 +19,9 @@ const FeaturedCompanyHolder = ({
     averageValues,
     onOpenDataExplorationSection,
 }) => {
+    const sortedFeaturedCompanies = [...featuredCompanies].sort((a, b) =>
+        a.name.localeCompare(b.name)
+    );
     return (
         <div className="featured-company-holder">
             <Swiper
@@ -31,7 +34,7 @@ const FeaturedCompanyHolder = ({
                     onUpdateInitialSlide(swiper.activeIndex - 1)
                 }
             >
-                {featuredCompanies.map((company, index) => (
+                {sortedFeaturedCompanies.map((company, index) => (
                     <SwiperSlide key={index}>
                         <FeaturedCompany
                             key={index}
