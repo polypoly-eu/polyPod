@@ -374,9 +374,9 @@ export default {
             },
             industryExplanation: {
                 de:
-                    "Das University College London (UK) gehört zur Universität London und ist als Mitglied der Russell-Gruppe (Verbund 24 führender, britischer Forschungsuniversitäten) eine der angesehensten Eliteuniversitäten der Welt.",
+                    "Der berüchtigte Datenskandal von Cambridge Analytica wurde durch eine Quiz-App ermöglicht, die angeblich Informationen von Facebook-Nutzenden zu Forschungszwecken sammelte und dann für die Durchführung fragwürdiger Wahlkampagnen verkaufte. Die Auswirkungen dieses Skandals trugen maßgeblich zur Einführung der derzeitigen europäischen GDPR-Richtlinien bei.",
                 en:
-                    "University College London (UK) is part of the University of London and, as a member of the Russell Group (an association of 24 leading British research universities), is one of the most prestigious elite universities in the world.",
+                    "The infamous Cambridge Analytica data scandal was made possible using a personality quiz app that was supposedly gathering information from Facebook users for research purposes. The fallout from this has contributed significantly to the introduction of the GDPR framework we now enjoy.",
             },
         },
     },
