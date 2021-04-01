@@ -433,7 +433,7 @@ export default {
             },
         },
     },
-    TikTok: {
+    "TikTok Technology Limited": {
         dataTypeCorrelation: {
             types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
             explanation: {
@@ -462,9 +462,12 @@ export default {
                         "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
                 },
             },
+            // TODO: Not in there
+            /*
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
             },
+            */
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
             },
@@ -482,9 +485,9 @@ export default {
             },
             industryExplanation: {
                 de:
-                    'Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt. So ist auch Bytedance eine TikTok-Tochtergesellschaft einer auf den Cayman-Inseln eingetragenen Holdinggesellschaft. Viele Unternehmen entscheiden sich dafür, sich in sogenannten „Steueroasen" wie diesen zu registrieren, wo Unternehmen wenig oder keine Körperschaftssteuern, Kapitalertragssteuern oder Steuern auf in anderen Ländern erwirtschaftete Erträge zahlen müssen. Sie sind froh, ein Geschäft zu betreiben, das auf eine von Steuerzahlenden finanzierte Infrastruktur angewiesen ist, würden aber lieber Anwält:innen eine relativ geringe Gebühr für eine Vermögensumstrukturierung zahlen, die sie weitgehend davon befreit, einen Beitrag zu den Gemeinden zu leisten, in denen sie ihr Geld verdienen.',
+                    "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt. Bytedance ist der auf den Cayman-Inseln eingetragene TikTok-Mutterkonzern.",
                 en:
-                    'Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely. Much like the various entities bearing the TikTok name, their Chinese sister company Bytedance is a subsidiary of a holding company incorporated in the Cayman Islands. Many companies choose to register in so called "Tax Havens" like this where companies must pay little or no corporation taxes, capital gains taxes or taxes on income earned in other countries. They are happy to operate a business that relies on infrastructure funded by tax payers, but would rather pay a lawyer a relatively low fee for asset restructuring that largely exempts them from having to contribute to the communities where they make their money.',
+                    "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely. Much like the various entities bearing the TikTok name, their Chinese sister company Bytedance is a subsidiary of a holding company incorporated in the Cayman Islands.",
             },
         },
     },
