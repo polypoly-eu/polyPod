@@ -68,8 +68,9 @@ function appendIndustryLabel(container, bubble) {
     return appendBubbleLabel(container, bubble, `${industry}: ${count}`);
 }
 
-function withTemporaryContainer(f) {
+function withTemporaryContainer(width, height, f) {
     const svg = document.createElementNS(d3.namespaces.svg, "svg");
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
     document.body.appendChild(svg);
     const container = d3.select(svg);
     f(container);
@@ -85,7 +86,7 @@ function calculateIndustryLabelRects(
     const viewData = createIndustryViewData(companyIndustryMap, maxCompanies);
     const root = packIndustryViewData(viewData, width, height, maxCompanies);
     const rects = {};
-    withTemporaryContainer((container) => {
+    withTemporaryContainer(width, height, (container) => {
         for (let industryCircle of root.children) {
             const labelGroup = appendIndustryLabel(container, industryCircle);
             const label = labelGroup.select(".label").node();
