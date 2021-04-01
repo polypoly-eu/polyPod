@@ -2,8 +2,8 @@
     "name": "polyPreview",
     "author": "polypoly - Die Genossenschaft",
     "description": "Ihr polyPod wird stetig weiterentwickelt. Wenn Sie wissen möchten, was wir planen: hier eine Vorschau.",
-    "thumbnail": "images/thumbnail.png",
-    "primaryColor": "#fb8a89",
+    "thumbnail": "images/thumbnail.svg",
+    "primaryColor": "#fff5f5",
     "links": {
         "membership": "https://polypoly.coop/de-de/membership"
     }
