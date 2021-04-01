@@ -119,7 +119,7 @@ button:active {
 }
 
 .header-content {
-    width: 60%;
+    margin-right: 76px;
 }
 
 .circle-pagination {

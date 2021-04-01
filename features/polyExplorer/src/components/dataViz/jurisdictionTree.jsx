@@ -58,7 +58,6 @@ const JurisdictionTree = ({ data }) => {
             .attr("height", (d) => Math.max(d.y1 - d.y0, 3))
             .attr("fill", (d) => backgroundColors[d.data.category] || "#A9B6C6")
             .each(function (node) {
-                console.log(node);
                 const texts = d3.select(this.parentNode);
                 if (
                     getDistance(node.x0, node.x1) > 20 &&

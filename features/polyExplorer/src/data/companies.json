@@ -25867,7 +25867,7 @@
     },
     {
         "name": "TikTok Technology Limited",
-        "featured": false,
+        "featured": true,
         "jurisdiction": "EU-GDPR",
         "location": {
             "city": "DUBLIN",
@@ -25877,6 +25877,7 @@
         "dataRecipients": [
             "Akamai Technologies Inc (US)",
             "AppsFlyer (IL)",
+            "BYTEDANCE INC. (US)",
             "Google (US)",
             "LinkedIn Corporation (US)",
             "LinkedIn Ireland Unlimited Company (IE)",
@@ -29245,6 +29246,29 @@
             "name": {
                 "en": "IT",
                 "de": "EDV & IT"
+            }
+        }
+    },
+    {
+        "name": "BYTEDANCE INC. (US)",
+        "featured": false,
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:InternetAndMultimedia",
+            "name": {
+                "en": "Internet & Multimedia",
+                "de": "Internet & Multimedia"
             }
         }
     },

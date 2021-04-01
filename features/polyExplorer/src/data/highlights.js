@@ -478,18 +478,18 @@ export default {
             },
         },
         dataRecipient: {
-            name: "Beijing Bytedance Technology Ltd.",
+            name: "BYTEDANCE INC. (US)",
             companyExplanation: {
                 de:
-                    "ByteDance ist der Mutterkonzern von TikTok mit Sitz in Peking (China). Er ist ein Internet-Technologie-Unternehmen, das mehrere lernfähige Content-Plattformen besitzt und inzwischen einer der weltweit führenden Anwendern von künstlicher Intelligenz ist. Wie viele chinesische Unternehmen – gehört auch das interne Firmenkomitee von ByteDance der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
+                    "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
                 en:
-                    "ByteDance is the parent company of TikTok, based in Beijing (China). It is an internet technology company that owns several adaptive content platforms and is now one of the world's leading users of artificial intelligence. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
+                    "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
             },
             industryExplanation: {
                 de:
-                    "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt. Bytedance ist der auf den Cayman-Inseln eingetragene TikTok-Mutterkonzern.",
+                    "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
                 en:
-                    "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely. Much like the various entities bearing the TikTok name, their Chinese sister company Bytedance is a subsidiary of a holding company incorporated in the Cayman Islands.",
+                    "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
             },
         },
     },
