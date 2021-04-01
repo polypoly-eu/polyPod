@@ -91,12 +91,40 @@ export function displayString(field, value, i18n, globalData) {
     return displayStrings[field](value) || value;
 }
 
-export const hasFilter = (filters, field, value) => filters[field].has(value);
+// This is a bit of a band aid, since sortFilters leads to the filters object
+// containing arrays instead of sets, pretty much all functions dealing with
+// filters need to be prepared for that. We should rather improve the design,
+// however.
+const ensureSet = (iterable) =>
+    iterable instanceof Set
+        ? iterable
+        : {
+              has: (element) => iterable.includes(element),
+              add: (element) => {
+                  if (!iterable.includes(element)) iterable.push(element);
+              },
+              delete: (element) => {
+                  const index = iterable.indexOf(element);
+                  if (index === -1) return false;
+                  iterable.splice(index, 1);
+                  return true;
+              },
+              get size() {
+                  return iterable.length;
+              },
+              [Symbol.iterator]: function* () {
+                  for (let element of iterable) yield element;
+              },
+          };
 
-export const addFilter = (filters, field, value) => filters[field].add(value);
+export const hasFilter = (filters, field, value) =>
+    ensureSet(filters[field]).has(value);
+
+export const addFilter = (filters, field, value) =>
+    ensureSet(filters[field]).add(value);
 
 export const removeFilter = (filters, field, value) =>
-    filters[field].delete(value);
+    ensureSet(filters[field]).delete(value);
 
 export const fields = (filters) => Object.keys(filters);
 
@@ -106,17 +134,16 @@ export const values = (filters, field) =>
     );
 
 const matches = (filters, company) =>
-    fields(filters).every(
-        (field) =>
-            !filters[field].size ||
-            filters[field].has(extractValue(company, field))
-    );
+    fields(filters).every((field) => {
+        const set = ensureSet(filters[field]);
+        return !set.size || set.has(extractValue(company, field));
+    });
 
 export const applyFilters = (filters, companies) =>
     companies.filter((company) => matches(filters, company));
 
 export const empty = (filters) =>
-    !Object.values(filters).some((values) => values.size);
+    !Object.values(filters).some((values) => ensureSet(values).size);
 
 export function copy(filters) {
     const copiedFilters = emptyFilters();
@@ -140,7 +167,6 @@ export function equal(filtersA, filtersB) {
 }
 
 export function sortFilters(filters, i18n, globalData) {
-    if (!Object.keys(filters).length) return [];
     const processField = {
         industryCategory: (filters) => {
             return [...filters].sort((a, b) =>
@@ -190,7 +216,7 @@ export function sortFilters(filters, i18n, globalData) {
     };
 
     for (let field in filters) {
-        filters[field] = processField[field](filters[field]);
+        filters[field] = processField[field](ensureSet(filters[field]));
     }
     return filters;
 }
