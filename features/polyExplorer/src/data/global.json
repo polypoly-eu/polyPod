@@ -1802,7 +1802,7 @@
         "dpv:RequestedServiceProvision": {
             "dpv:Purpose": "dpv:RequestedServiceProvision",
             "dpv:Superclass": "",
-            "Translation_DE": "Angefordete dienstbereitstellung",
+            "Translation_DE": "Angefordete Dienstbereitstellung",
             "Translation_EN": "Requested Service Provision",
             "Synonyms": "",
             "Explanation_DE": "Angefordete Dienstleistung bereitstellen",

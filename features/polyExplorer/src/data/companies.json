@@ -6542,7 +6542,7 @@
             {
                 "dpv:Purpose": "dpv:RequestedServiceProvision",
                 "count": 86,
-                "Translation_DE": "Angefordete dienstbereitstellung",
+                "Translation_DE": "Angefordete Dienstbereitstellung",
                 "Translation_EN": "Requested Service Provision",
                 "Explanation_DE": "Angefordete Dienstleistung bereitstellen",
                 "Explanation_EN": "provide requested service of activity"
