@@ -7,6 +7,61 @@ const parentCategories = {
 };
 
 export default {
+<<<<<<< Updated upstream
+=======
+    "pc polypoly coop SCE mbH": {
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de:
+                    "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en:
+                    "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:OfficialID",
+                explanation: {
+                    de:
+                        "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
+                    en:
+                        "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Language",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:DeviceSoftware",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "elopage GmbH (DE)",
+            companyExplanation: {
+                de:
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
+                en:
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+            },
+            industryExplanation: {
+                de:
+                    "polypoly nutzt verschiedene Dienstleistende, um das Tagesgeschäft als Genossenschaft zu betreiben. Der Prozess, Mitglied zu werden, ist dadurch um ein Vieles einfacher und skalierbarer gestaltet. Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                en:
+                    "polypoly uses various service providers in order to run their business day to day. The process of becoming a member is designed to be scalable yet simple and can be performed from the comfort of any device capable of browsing the internet. Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+            },
+        },
+    },
+>>>>>>> Stashed changes
     "SCHUFA Holding AG": {
         dataTypeCorrelation: {
             types: [
@@ -145,9 +200,9 @@ export default {
             name: "BOSCH Service Solutions GmbH (DE)",
             companyExplanation: {
                 de:
-                    "Bosch Service Solutions ist ein führender Anbieter für Business Process Outsourcing. Bosch Service Solutions  unterstützt bei der Prozessoptimierung mit fünf Kernbereichen: Customer Experience Services, Mobility Services, Monitoring Services und Business Services. Der Firmensitz ist Stuttgart (DE).",
+                    "Bosch Service Solutions ist ein führender Anbieter für Business Process Outsourcing. Der Firmensitz ist Stuttgart (DE).",
                 en:
-                    "Bosch Service Solutions is a leading provider of Business Process Outsourcing. Bosch Service Solutions supports process optimisation with five core areas: Customer Experience Services, Mobility Services, Monitoring Services and Business Services. The company is headquartered in Stuttgart (DE).",
+                    "Bosch Service Solutions is a leading provider of Business Process Outsourcing. The company is headquartered in Stuttgart (DE).",
             },
             industryExplanation: {
                 de: "MISSING: Beschreibung für Boschs Industrie.",
@@ -203,7 +258,14 @@ export default {
                     "Waytogrow is an independent group of experts specialising in programmatic and data-driven advertising. Waytogrow, based in Warsaw (PL), is part of the Netsprint Group, a leading digital marketing company.",
             },
             industryExplanation: {
+<<<<<<< Updated upstream
                 de: "MISSING: Beschreibung von Waytogrows Industrie",
+=======
+                de:
+                    "Google rühmt sich, Partnerschaften mit über 2 Millionen Websites einzugehen, um Anzeigen auszuliefern. Ihre ausgefeilten Analysen, ihre tiefe Marktdurchdringung und ihr riesiges Partner:innen-Netzwerk in fast 100 Ländern machen die hochgranularen Ad-Targeting-Services möglich, die sie anbieten.",
+                en:
+                    "Google boasts partnering with over 2 million websites to display ads. Their sophisticated analytics, deep market penetration and vast partner network across nearly 100 countries, make the highly granular ad targeting services they offer possible.",
+>>>>>>> Stashed changes
             },
         },
     },
@@ -242,6 +304,7 @@ export default {
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
+<<<<<<< Updated upstream
             dataRecipient: {
                 name: "	Nielsen LLC",
                 companyExplanation: {
@@ -253,6 +316,22 @@ export default {
                 industryExplanation: {
                     de: "MISSING: Beschreibung für Nielsens Industrie",
                 },
+=======
+        },
+        dataRecipient: {
+            name: "Nielsen LLC (US)",
+            companyExplanation: {
+                de:
+                    "Nielsen LLC ist der globale Marktführer im Bereich Marktforschung und hilft Unternehmen dabei, ihre Konsument:innen und deren Verhalten (besser) zu verstehen.",
+                en:
+                    "Nielsen LLC is the global leader in market research, helping companies (better) understand their consumers and their behaviour.",
+            },
+            industryExplanation: {
+                de:
+                    'Amazons Bemühungen, das „kund:innenorientierteste Unternehmen der Welt" zu werden, werden auch durch die Zusammenarbeit mit Marktforschunginstituten und anderen Unternehmen aus dieser Branche kontinuierlich verbessert.',
+                en:
+                    "Amazon's efforts to become the world's \"most customer focused company\" are fuelled by the research and analysis of customers and markets in a feedback loop of constant improvement.",
+>>>>>>> Stashed changes
             },
         },
     },
