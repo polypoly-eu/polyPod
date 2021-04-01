@@ -6469,7 +6469,7 @@
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:CommunicationForCustomerCare",
-                "count": 74,
+                "count": 73,
                 "Translation_DE": "Kommunikation zur Kundenbetreuung",
                 "Translation_EN": "Communication for Customer Care",
                 "Explanation_DE": "mit Nutzern per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen zu kommunizieren.",
@@ -6477,7 +6477,7 @@
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
-                "count": 44,
+                "count": 43,
                 "Translation_DE": "Kundenbetreuung",
                 "Translation_EN": "Customer Care",
                 "Explanation_DE": "Hilfestellung bei Kundenbeschwerden und -zufriedenheit geben",
@@ -6509,7 +6509,7 @@
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
-                "count": 55,
+                "count": 54,
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
                 "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben",
@@ -6525,7 +6525,7 @@
             },
             {
                 "dpv:Purpose": "dpv:Payment",
-                "count": 53,
+                "count": 52,
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
                 "Explanation_DE": "die Zahlungstransaktionen der Nutzer zu verarbeiten.",
@@ -6533,7 +6533,7 @@
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAuthentication",
-                "count": 60,
+                "count": 59,
                 "Translation_DE": "Registrierung Authentifizierung",
                 "Translation_EN": "Registration Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
@@ -6541,7 +6541,7 @@
             },
             {
                 "dpv:Purpose": "dpv:RequestedServiceProvision",
-                "count": 86,
+                "count": 85,
                 "Translation_DE": "Angefordete dienstbereitstellung",
                 "Translation_EN": "Requested Service Provision",
                 "Explanation_DE": "Angefordete Dienstleistung bereitstellen",
@@ -6573,19 +6573,11 @@
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
-                "count": 83,
+                "count": 82,
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
                 "Explanation_DE": "Berechnen, Analysieren und Berichten von Benutzerverhalten und Ereignissen für einen Dienst oder ein Produkt.",
                 "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
-            },
-            {
-                "dpv:Purpose": "unspecified",
-                "count": 4,
-                "Translation_DE": "unspezifiziert",
-                "Translation_EN": "unspecified",
-                "Explanation_DE": "Zweck nicht spezifiziert",
-                "Explanation_EN": "purpose unspecified"
             }
         ],
         "dataTypesShared": [
@@ -6982,19 +6974,6 @@
                 "Synonyms": "",
                 "Explanation_DE": "Informationen über Voicemail-Nachrichten.",
                 "Explanation_EN": "Information about voice mail messages."
-            },
-            {
-                "dpv:Category": "unspecified",
-                "count": 11,
-                "dpv:Superclass": "",
-                "Translation_DE": "unspezifiziert",
-                "Translation_EN": "unspecified",
-                "Polypoly_Parent_Category": [
-                    ""
-                ],
-                "Synonyms": "",
-                "Explanation_DE": "unspezifizierte Zwecke",
-                "Explanation_EN": "purpose unspecified"
             }
         ],
         "description": {
@@ -25880,9 +25859,10 @@
     {
         "name": "TikTok Technology Limited",
         "featured": false,
+        "jurisdiction": "EU-GDPR",
         "location": {
             "city": "DUBLIN",
-            "countryCode": "Ireland"
+            "countryCode": "IE"
         },
         "annualRevenues": [],
         "dataRecipients": [
