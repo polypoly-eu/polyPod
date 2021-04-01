@@ -481,9 +481,9 @@ export default {
             name: "BYTEDANCE INC. (US)",
             companyExplanation: {
                 de:
-                    "ByteDance ist ein Technologie-Unternehmen, das inzwischen einer der weltweit führenden Anwender von künstlicher Intelligenz ist. Wie viele chinesische Unternehmen – gehört auch das interne Firmenkomitee von ByteDance der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
+                    "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
                 en:
-                    "ByteDance is a technology company that is now one of the world's leading users of artificial intelligence. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
+                    "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
             },
             industryExplanation: {
                 de:
