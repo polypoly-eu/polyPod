@@ -7,7 +7,9 @@ import "./companySearch.css";
 
 const CompanySearchScreen = ({ companies, onOpenDetails }) => {
     const [searchString, setSearchString] = useState("");
-    const featuredComanies = companies.filter((e) => e.featured == true);
+    const featuredComanies = companies
+        .filter((e) => e.featured == true)
+        .sort((a, b) => a.name.localeCompare(b.name));
 
     const shownCompaniesUnsorted =
         searchString.length > 3 ||
