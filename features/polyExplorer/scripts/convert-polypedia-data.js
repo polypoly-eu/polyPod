@@ -80,6 +80,8 @@ function parseEntity(entityData) {
     return {
         name: legalName,
         featured: !!(
+            // We need to ignore TikTok until the data/highlights are correct
+            legalName !== "TikTok Technology Limited" &&
             entityData.data_recipients &&
             entityData.derived_purpose_info &&
             entityData.derived_category_info

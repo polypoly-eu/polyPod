@@ -25879,7 +25879,7 @@
     },
     {
         "name": "TikTok Technology Limited",
-        "featured": true,
+        "featured": false,
         "location": {
             "city": "DUBLIN",
             "countryCode": "Ireland"
