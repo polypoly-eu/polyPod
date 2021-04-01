@@ -1,7 +1,12 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import { applyFilters, displayString, empty } from "../../companyFilter.js";
+import {
+    applyFilters,
+    displayString,
+    empty,
+    sortFilters,
+} from "../../companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 
 import "./companyList.css";
@@ -18,8 +23,9 @@ function groupCompanies(companies) {
 }
 
 const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
+    const sortedFilters = sortFilters(activeFilters, i18n, globalData);
     const filterList = [];
-    for (let [field, values] of Object.entries(activeFilters))
+    for (let [field, values] of Object.entries(sortedFilters))
         for (let value of values) filterList.push([field, value]);
     return (
         <div className="active-filters">
