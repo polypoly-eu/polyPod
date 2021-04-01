@@ -53,12 +53,12 @@ const extractValue = (company, field) =>
         },
     }[field](company));
 
-export function extractFilters(companies, i18n, globalData) {
+export function extractFilters(companies) {
     const filters = emptyFilters();
     for (let company of companies)
         for (let field of fields(filters))
             filters[field].add(extractValue(company, field));
-    return getSortedArrays(filters, i18n, globalData);
+    return filters;
 }
 
 export function displayString(field, value, i18n, globalData) {
@@ -139,7 +139,7 @@ export function equal(filtersA, filtersB) {
     });
 }
 
-function getSortedArrays(allFilters, i18n, globalData) {
+export function sortFilters(filters, i18n, globalData) {
     const processField = {
         industryCategory: (filters) => {
             return [...filters].sort((a, b) =>
@@ -188,8 +188,8 @@ function getSortedArrays(allFilters, i18n, globalData) {
         },
     };
 
-    for (let field in allFilters) {
-        allFilters[field] = processField[field](allFilters[field]);
+    for (let field in filters) {
+        filters[field] = processField[field](filters[field]);
     }
-    return allFilters;
+    return filters;
 }
