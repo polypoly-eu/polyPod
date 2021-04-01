@@ -38,8 +38,14 @@
     max-width: 412px;
 }
 
-.company-details-screen .company-short-info {
-    margin: 6px 8px 4px 8px;
+.company-details-screen .company-short-info-container {
+    width: 100%;
+    max-width: 412px;
+    margin: 0 auto;
+}
+
+.company-details-screen .company-short-info-container button {
+    margin: 24px 0 0 22px;
 }
 
 .tab-content-container {
