@@ -1,5 +1,5 @@
 const patchData = {
-    "About YOU GmbH": {
+    "About YOU GmbH (DE)": {
         description: {
             value: {
                 de:
@@ -8,7 +8,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Acronis Germany GmbH": {
+    "Acronis Germany GmbH (DE)": {
         description: {
             value: {
                 de:
@@ -35,7 +35,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Axel Springer SE": {
+    "Axel Springer SE (DE)": {
         description: {
             value: {
                 de:
@@ -44,7 +44,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "BASF SE": {
+    "BASF SE (DE)": {
         description: {
             value: {
                 de:
@@ -53,7 +53,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Bayer AG": {
+    "Bayer AG (DE)": {
         description: {
             value: {
                 de:
@@ -62,7 +62,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Blacklane GmbH": {
+    "Blacklane GmbH (DE)": {
         description: {
             value: {
                 de:
@@ -89,7 +89,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Check24 Vergleichsportal GmbH": {
+    "Check24 Vergleichsportal GmbH (DE)": {
         description: {
             value: {
                 de:
@@ -98,7 +98,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Comuto Deutschland GmbH": {
+    "BlaBlaCar (DE)": {
         description: {
             value: {
                 de:
@@ -107,7 +107,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "DB Vertrieb GmbH": {
+    "DB Vertrieb GmbH (DE)": {
         description: {
             value: {
                 de:
@@ -116,7 +116,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Deliveroo Germany GmbH": {
+    "Deliveroo Germany GmbH (DE)": {
         description: {
             value: {
                 de:
@@ -125,7 +125,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Delivery Hero SE": {
+    "Delivery Hero SE (DE)": {
         description: {
             value: {
                 de:
@@ -134,7 +134,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "eGym GmbH": {
+    "eGym GmbH (DE)": {
         description: {
             value: {
                 de:
@@ -143,7 +143,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "FC Bayern München AG": {
+    "FC Bayern München AG (DE)": {
         description: {
             value: {
                 de:
@@ -161,7 +161,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Zalando SE": {
+    "Zalando SE (DE)": {
         description: {
             value: {
                 de:
@@ -170,7 +170,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Tado GmbH": {
+    "Tado GmbH (DE)": {
         description: {
             value: {
                 en:
@@ -188,7 +188,7 @@ const patchData = {
             source: "Wikipedia",
         },
     },
-    "Verizon Media Germany GmbH": {
+    "Verizon Media EMEA Limited (DE)": {
         description: {
             value: {
                 en:
