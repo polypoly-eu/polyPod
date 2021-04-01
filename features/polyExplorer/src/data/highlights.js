@@ -122,7 +122,13 @@ export default {
         },
         dataTypeCategories: {
             [parentCategories.individual]: {
-                category: "dpv:Age",
+                category: "dpv:Location",
+                explanation: {
+                    de:
+                        "Apple verwendet die von Kund:innen-Verhalten gesammelten Daten und wie sie ihre Geräte verwenden, um stetige Produktverbesserungen anzustreben und die Forschung und Entwicklung zukünftiger Produkte und Dienste zu informieren. Dies geschieht auch, wenn Konten speziell für Kinder eingerichtet werden. ",
+                    en:
+                        "Apple uses the data it gathers about the behaviour of its customers - how they use their devices - to inform product improvement and the research and development of future products and services. This happens also if accounts are set up specifically for children. ",
+                },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
@@ -139,13 +145,7 @@ export default {
             // TODO: dpv:Location doesn't seem to have ended up in behavioural!
             /*
             [parentCategories.behavioral]: {
-                category: "dpv:Location",
-                explanation: {
-                    de:
-                        "Apple verwendet die von Kund:innen-Verhalten gesammelten Daten und wie sie ihre Geräte verwenden, um stetige Produktverbesserungen anzustreben und die Forschung und Entwicklung zukünftiger Produkte und Dienste zu informieren. Dies geschieht auch, wenn Konten speziell für Kinder eingerichtet werden. ",
-                    en:
-                        "Apple uses the data it gathers about the behaviour of its customers - how they use their devices - to inform product improvement and the research and development of future products and services. This happens also if accounts are set up specifically for children. ",
-                },
+ 
             },
             */
             [parentCategories.financial]: {
@@ -190,17 +190,17 @@ export default {
             },
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
-            },
-            // TODO: dpv:Tracking seems to be there, but not under behavioral data
-            /*
-            [parentCategories.behavioral]: {
-                category: "dpv:Tracking",
                 explanation: {
                     de:
                         "BMW verwendet auf der Website Cookies, die das Verhalten der Nutzer:innen beim Surfen verfolgen und die kombiniert werden, um Nutzende bei späteren Besuchen wiederzuerkennen und das Verhalten im Zeitverlauf abzubilden. Die Daten, die aus diesem Prozess gewonnen werden, können Dinge sein, wie das bestimmte Automodell, das eine Person am häufigsten angesehen hat, oder die Fahrzeugklasse, mit der sie die meiste Zeit verbringt. BMW teilt solche Daten mit Unternehmen wie Sophus 3 – einem Unternehmen, das sich auf das Kaufverhalten von Autos spezialisiert hat und mit vielen großen Herstellenden zusammenarbeitet.",
                     en:
                         "BMW uses cookies on its website that track the behaviour of users as they browse and that are combined to recognise users on subsequent visits and map behaviour over time. The data garnered from this process can be things like the particular model of car that a person has viewed most, or the class of vehicles they spend most time engaging with. BMW shares data such as this with companies like Sophus 3 - a company that specialises in car buying behaviour and works with many major manufacturers.",
                 },
+            },
+            // TODO: dpv:Tracking seems to be there, but not under behavioral data
+            /*
+            [parentCategories.behavioral]: {
+                category: "dpv:Tracking",
             },
             */
             [parentCategories.financial]: {
@@ -340,23 +340,29 @@ export default {
                 category: "dpv:Age",
             },
             [parentCategories.social]: {
-                category: "dpv:Language",
-            },
-            [parentCategories.technical]: {
-                category: "dpv:BrowserFingerprint",
-            },
-            // TODO: dpv:SpecialCategoryData doesn't seem to be in there
-            /*
-            [parentCategories.behavioral]: {
-                category: "dpv:SpecialCategoryData",
+                category: "dpv:PoliticalAffiliation",
                 explanation: {
                     de:
                         'Für viele der Nutzenden hat Facebook Zugriff auf die Arten von personenbezogenen Daten, die unter der GDPR als „besondere Kategorie personenbezogener Daten" der sensibelsten Art eingestuft werden. Dazu gehören Informationen über die politische Zugehörigkeit, die Religion oder die ethnische Herkunft einer Person. Facebook-Dating erklärt ausdrücklich, dass religiöse Ansichten oder das Interesse an der Partner:innen-Suche mit bestimmten Geschlechtern keinen Einfluss auf die angezeigte Werbung der Nutzenden haben, politische Ansichten sind davon jedoch ausgenommen und werden auch mit dieser Funktion weiter für individualisierte Werbeanzeigen genutzt.',
                     en:
-                        "or many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
+                        "For many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
+                },
+            },
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+            },
+            /*
+            [parentCategories.behavioral]: {
+                category: "dpv:PoliticalAffiliation",
+                explanation: {
+                    de:
+                        'Für viele der Nutzenden hat Facebook Zugriff auf die Arten von personenbezogenen Daten, die unter der GDPR als „besondere Kategorie personenbezogener Daten" der sensibelsten Art eingestuft werden. Dazu gehören Informationen über die politische Zugehörigkeit, die Religion oder die ethnische Herkunft einer Person. Facebook-Dating erklärt ausdrücklich, dass religiöse Ansichten oder das Interesse an der Partner:innen-Suche mit bestimmten Geschlechtern keinen Einfluss auf die angezeigte Werbung der Nutzenden haben, politische Ansichten sind davon jedoch ausgenommen und werden auch mit dieser Funktion weiter für individualisierte Werbeanzeigen genutzt.',
+                    en:
+                        "For many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
                 },
             },
             */
+
             // TODO: dpv:Financial doesn't seem to be in there
             /*
             [parentCategories.financial]: {
