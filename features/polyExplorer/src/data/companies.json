@@ -895,29 +895,6 @@
         }
     },
     {
-        "name": "Apple Search Ads (US)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "US"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:InternetAndMultimedia",
-            "name": {
-                "en": "Internet & Multimedia",
-                "de": "Internet & Multimedia"
-            }
-        }
-    },
-    {
         "name": "BUSINESS SUPPORT SERVICES – B2S (FR)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -7004,9 +6981,9 @@
     {
         "name": "Tapjoy Inc.",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "Five-Eyes",
         "location": {
-            "countryCode": "IUS"
+            "countryCode": "US"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -23313,9 +23290,9 @@
     {
         "name": "24 Solutions AB (SE)",
         "featured": false,
-        "jurisdiction": "Five-Eyes",
+        "jurisdiction": "EU-GDPR",
         "location": {
-            "countryCode": "US"
+            "countryCode": "SE"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -25877,7 +25854,7 @@
         "dataRecipients": [
             "Akamai Technologies Inc (US)",
             "AppsFlyer (IL)",
-            "BYTEDANCE INC. (US)",
+            "ByteDance Ltd. (KY)",
             "Google (US)",
             "LinkedIn Corporation (US)",
             "LinkedIn Ireland Unlimited Company (IE)",
@@ -29204,29 +29181,6 @@
         }
     },
     {
-        "name": "Apple Search Ads (GB)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "GB"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:InternetAndMultimedia",
-            "name": {
-                "en": "Internet & Multimedia",
-                "de": "Internet & Multimedia"
-            }
-        }
-    },
-    {
         "name": "Trustwave (US)",
         "featured": false,
         "jurisdiction": "Five-Eyes",
@@ -29246,29 +29200,6 @@
             "name": {
                 "en": "IT",
                 "de": "EDV & IT"
-            }
-        }
-    },
-    {
-        "name": "BYTEDANCE INC. (US)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "US"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:InternetAndMultimedia",
-            "name": {
-                "en": "Internet & Multimedia",
-                "de": "Internet & Multimedia"
             }
         }
     },
@@ -29729,6 +29660,29 @@
             "name": {
                 "en": "Service",
                 "de": "Dienstleistung"
+            }
+        }
+    },
+    {
+        "name": "ByteDance Ltd. (KY)",
+        "featured": false,
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "countryCode": "KY"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:IT",
+            "name": {
+                "en": "IT",
+                "de": "EDV & IT"
             }
         }
     },
@@ -31135,29 +31089,6 @@
         }
     },
     {
-        "name": "Amazon Web Services (US)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "US"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:IT",
-            "name": {
-                "en": "IT",
-                "de": "EDV & IT"
-            }
-        }
-    },
-    {
         "name": "Outfittery GmbH (DE)",
         "featured": false,
         "jurisdiction": "EU-GDPR",
@@ -31607,6 +31538,7 @@
             "4th Screen Advertising Ltd (GB)",
             "A McLay & Company Limited (GB)",
             "AFEX Transferencias Y Cambios LTDA (CL)",
+            "AMAZON WEB SERVICES, INC. (US)",
             "ANZ National Bank Limited (NZ)",
             "ARC [Europe] Ltd (GB)",
             "AZ Direct GmbH (DE)",
@@ -31656,7 +31588,6 @@
             "Allied Bank Limited (PK)",
             "Allied Irish Bank PLC (GB)",
             "Altares D&B (FR)",
-            "Amazon Web Services (US)",
             "American Express (US)",
             "American Express Travel Related Services Company Inc (US)",
             "Amplitude Inc. (US)",
@@ -31664,9 +31595,6 @@
             "Aplazame S.L. (ES)",
             "AppSignal (NL)",
             "Applause App Quality, Inc. (US)",
-            "Apple Inc. (US)",
-            "Apple Search Ads (GB)",
-            "Apple Search Ads (US)",
             "Appnexus, Inc. (US)",
             "Appointed (GB)",
             "Apptimize, Inc. (US)",
@@ -31889,7 +31817,6 @@
             "DUO Security (GB)",
             "Daniel J Edelman Ltd (GB)",
             "Danske Bank (DK)",
-            "Daon, Inc. (IE)",
             "Daon, Inc. (US)",
             "DataSafe, Inc (US)",
             "Datacolor Dialog-Medien GmbH (DE)",
@@ -34297,29 +34224,6 @@
             "name": {
                 "en": "Banks & Finance",
                 "de": "Banken & Finanzen"
-            }
-        }
-    },
-    {
-        "name": "Apple Inc. (US)",
-        "featured": false,
-        "jurisdiction": "Five-Eyes",
-        "location": {
-            "countryCode": "US"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:IT",
-            "name": {
-                "en": "IT",
-                "de": "EDV & IT"
             }
         }
     },
@@ -40993,29 +40897,6 @@
         "jurisdiction": "EU-GDPR",
         "location": {
             "countryCode": "DE"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": {
-            "id": "ic:Service",
-            "name": {
-                "en": "Service",
-                "de": "Dienstleistung"
-            }
-        }
-    },
-    {
-        "name": "Daon, Inc. (IE)",
-        "featured": false,
-        "jurisdiction": "EU-GDPR",
-        "location": {
-            "countryCode": "IE"
         },
         "annualRevenues": null,
         "dataRecipients": null,
