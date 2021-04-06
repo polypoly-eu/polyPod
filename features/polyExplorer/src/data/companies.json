@@ -34,37 +34,44 @@
             {
                 "date": "31.12.2011",
                 "amount": 58000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 470000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 2600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 2100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 7600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 24000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 48000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -140,12 +147,14 @@
             {
                 "date": "31.12.2017",
                 "amount": 14000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 22000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -636,17 +645,20 @@
             {
                 "date": "31.12.2014",
                 "amount": 2400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 5400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 9632879.68,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -929,32 +941,38 @@
             {
                 "date": "31.12.2010",
                 "amount": 81000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 260000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 3287618.73,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 17443381.77,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 25204316.63,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 50866250.43,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             }
         ],
         "dataRecipients": null,
@@ -1007,52 +1025,62 @@
             {
                 "date": "31.12.2014",
                 "amount": 28787222,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2017",
                 "amount": 1500000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2008",
                 "amount": 14000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 7100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 25000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 6745554.92,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 26031350,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2016",
                 "amount": 28106675,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 14769098,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 17712146,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -1267,62 +1295,74 @@
             {
                 "date": "31.12.2008",
                 "amount": 1753843975,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 2131182921,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 2518947814,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 3057119230,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 4933270531,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 5275526038,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 4590756425,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 4896315683,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 4901884771,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 5191576020,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 4751967707,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 4319212586,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -1812,37 +1852,44 @@
             {
                 "date": "31.12.2007",
                 "amount": 12000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2009",
                 "amount": 21000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 27000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 29000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 32000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 5600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 7700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             }
         ],
         "dataRecipients": null,
@@ -2518,32 +2565,38 @@
             {
                 "date": "31.12.2014",
                 "amount": 2000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 6800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 7400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 3400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 3700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 4200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -2780,27 +2833,32 @@
             {
                 "date": "31.12.2007",
                 "amount": 530000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 1100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2010",
                 "amount": 1000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 1100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 630000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             }
         ],
         "dataRecipients": null,
@@ -3290,17 +3348,20 @@
             {
                 "date": "31.03.2009",
                 "amount": 910000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.03.2011",
                 "amount": 1000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.03.2012",
                 "amount": 1800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             }
         ],
         "dataRecipients": null,
@@ -3422,22 +3483,26 @@
             {
                 "date": "31.12.2012",
                 "amount": 1400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 11000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 9267213.59,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2018",
                 "amount": 12681548.74,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -3836,42 +3901,50 @@
             {
                 "date": "31.12.2009",
                 "amount": 43000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2011",
                 "amount": 509857640.23,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 1158622000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 1761340000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 2950800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 3650700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 5338500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 6391000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -4110,67 +4183,80 @@
             {
                 "date": "31.12.2007",
                 "amount": 32809636.74,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 56968849.54,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 54768493.45,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 56327743.17,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 56844792.55,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 55628509.03,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 59411412.49,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 60202307.46,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 63413907.6,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 62223505.58,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 62421261.2,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 59284989.01,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 59849858.33,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -4200,12 +4286,14 @@
             {
                 "date": "31.12.2009",
                 "amount": 130000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2011",
                 "amount": 140000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             }
         ],
         "dataRecipients": null,
@@ -4488,37 +4576,44 @@
             {
                 "date": "31.12.2009",
                 "amount": 1300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2011",
                 "amount": 1500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2014",
                 "amount": 45903268.3,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 47691055.08,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 48232973.63,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 61801544.53,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 58232608.27,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -4594,17 +4689,20 @@
             {
                 "date": "31.12.2013",
                 "amount": 1300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 6700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 45000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             }
         ],
         "dataRecipients": null,
@@ -4657,7 +4755,8 @@
             {
                 "date": "31.12.2018",
                 "amount": 74000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -5263,52 +5362,62 @@
             {
                 "date": "31.12.2007",
                 "amount": 340000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 470000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 1700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 1400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 2000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 11000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 3600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 9300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 10000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 20000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             }
         ],
         "dataRecipients": null,
@@ -5430,52 +5539,62 @@
             {
                 "date": "31.12.2008",
                 "amount": 95000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 610000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2011",
                 "amount": 1000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 1100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 1300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 880000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 980000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 980000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 1100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 1200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -5597,57 +5716,68 @@
             {
                 "date": "30.06.2009",
                 "amount": 258331291.52,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "30.06.2010",
                 "amount": 302343519.05,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "30.06.2011",
                 "amount": 279575180.88,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "30.06.2012",
                 "amount": 314497179.67,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "30.06.2013",
                 "amount": 384963841.55,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "30.06.2014",
                 "amount": 464921356.35,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "30.06.2015",
                 "amount": 468294050.64,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "30.06.2016",
                 "amount": 568340223.17,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "30.06.2017",
                 "amount": 581749879.28,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "30.06.2018",
                 "amount": 616083714.6,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "30.06.2019",
                 "amount": 340000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -5978,37 +6108,44 @@
             {
                 "date": "28.02.2013",
                 "amount": 2800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2013",
                 "amount": 1324994.37,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 9015553,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 10914824.17,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 10913279.99,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 13456141.83,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 15417535.46,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -6084,42 +6221,50 @@
             {
                 "date": "31.12.2008",
                 "amount": 4600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "30.09.2009",
                 "amount": 3400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2009",
                 "amount": 24000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 5100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 5400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 6000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 9000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2017",
                 "amount": 4900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             }
         ],
         "dataRecipients": null,
@@ -6264,7 +6409,8 @@
             {
                 "date": "31.12.2016",
                 "amount": 7511612.73,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             }
         ],
         "dataRecipients": null,
@@ -6432,7 +6578,8 @@
             {
                 "date": "09.10.2020",
                 "amount": 30000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2020
             }
         ],
         "dataRecipients": [
@@ -7013,7 +7160,8 @@
             {
                 "date": "31.12.2012",
                 "amount": 58000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             }
         ],
         "dataRecipients": null,
@@ -7158,42 +7306,50 @@
             {
                 "date": "31.12.2010",
                 "amount": 80000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 1600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 6400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 18000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 61000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 61000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 39607288.05,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 50656041.21,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -7616,32 +7772,38 @@
             {
                 "date": "31.12.2011",
                 "amount": 1400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 3600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 5200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 11000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 25796,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 26658630.44,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -7740,42 +7902,50 @@
             {
                 "date": "31.12.2012",
                 "amount": 15000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 780000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 2900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 2500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 16000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 7235076.81,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 9206280.17,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 18254172.48,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -8380,27 +8550,32 @@
             {
                 "date": "31.12.2014",
                 "amount": 2400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 8200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 21000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 19000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 11000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -9319,7 +9494,8 @@
             {
                 "date": "31.12.2018",
                 "amount": 42401358.67,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -9419,12 +9595,14 @@
             {
                 "date": "31.12.2018",
                 "amount": 55640501.92,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 91531469.33,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -9479,62 +9657,74 @@
             {
                 "date": "30.11.2007",
                 "amount": 100000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2007",
                 "amount": 100000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 153351.44,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 92653729.64,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 86720015.3,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 82909533.76,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 78036531.25,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 92000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 45228965.46,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 66736384.25,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 67399675.47,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 75698411.63,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -9772,32 +9962,38 @@
             {
                 "date": "31.12.2008",
                 "amount": 15000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2010",
                 "amount": 26000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 25000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 25000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 42189314.98,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 43411193.25,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             }
         ],
         "dataRecipients": null,
@@ -9850,37 +10046,44 @@
             {
                 "date": "31.12.2008",
                 "amount": 93933544.07,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2011",
                 "amount": 112726075.64,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 123432630.49,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 145823407.53,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 163752836.37,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 190277369.04,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 212245538.2,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -9956,42 +10159,50 @@
             {
                 "date": "31.12.2010",
                 "amount": 110000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 440000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 930000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 2700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 3100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2017",
                 "amount": 7000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 7600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 8300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -10090,12 +10301,14 @@
             {
                 "date": "31.12.2017",
                 "amount": 750000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 510000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -10355,47 +10568,56 @@
             {
                 "date": "31.12.2009",
                 "amount": 420000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 730000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 1800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 22000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 37730954.01,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 69295647.64,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 72902733.4,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 18800478.45,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 19584740.33,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -10725,32 +10947,38 @@
             {
                 "date": "31.12.2012",
                 "amount": 57000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 360000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 670000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 1600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 2200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2019",
                 "amount": 1700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -11035,37 +11263,44 @@
             {
                 "date": "31.12.2010",
                 "amount": 4900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 3100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 4200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 13000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 10000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 15000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 17000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -11856,12 +12091,14 @@
             {
                 "date": "31.12.2016",
                 "amount": 87000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 480000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -11891,12 +12128,14 @@
             {
                 "date": "30.06.2008",
                 "amount": 23523325.78,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "30.06.2009",
                 "amount": 5800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             }
         ],
         "dataRecipients": null,
@@ -12593,27 +12832,32 @@
             {
                 "date": "31.12.2011",
                 "amount": 43000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 160000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 1900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 31237906,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 96844268,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -12919,47 +13163,56 @@
             {
                 "date": "31.08.2008",
                 "amount": 710000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2008",
                 "amount": 2100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 2200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "30.06.2014",
                 "amount": 3300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "30.06.2015",
                 "amount": 1600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "30.06.2016",
                 "amount": 4100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "30.06.2017",
                 "amount": 4000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "30.06.2018",
                 "amount": 4500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "30.06.2019",
                 "amount": 6500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -15318,52 +15571,62 @@
             {
                 "date": "31.12.2008",
                 "amount": 240000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 540000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 2200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 6800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 5900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 16000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 20000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 20000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 22000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 26000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -16198,52 +16461,62 @@
             {
                 "date": "31.12.2007",
                 "amount": 24453000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 17671000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 14581000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 54000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 50000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 49000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 42000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 5716947.59,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 5846525.04,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 7303029.61,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -16365,42 +16638,50 @@
             {
                 "date": "31.12.2008",
                 "amount": 63000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 66000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2011",
                 "amount": 46000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 47000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 47000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 49000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 53000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2019",
                 "amount": 48000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -17327,42 +17608,50 @@
             {
                 "date": "31.12.2009",
                 "amount": 150000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 670000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 1300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 2100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 6500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 6300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 6200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 2700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -17508,62 +17797,74 @@
             {
                 "date": "31.12.2007",
                 "amount": 3100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 3300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 3200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 3100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 3200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 3600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 4000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 4100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 5600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 6500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 7100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 6900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -18214,47 +18515,56 @@
             {
                 "date": "31.12.2008",
                 "amount": 9400000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 9500000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 9500000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 9300000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 40157000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 11000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 390000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 14730000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2019",
                 "amount": 43545000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -18562,42 +18872,50 @@
             {
                 "date": "31.12.2009",
                 "amount": 370000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 1000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 820000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 1200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 1500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 1200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 1200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 1200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -18673,12 +18991,14 @@
             {
                 "date": "31.12.2020",
                 "amount": 98990000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2020
             },
             {
                 "date": "31.12.2019",
                 "amount": 1042100000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": [
@@ -19299,42 +19619,50 @@
             {
                 "date": "31.12.2009",
                 "amount": 6000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 12000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 6300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 7347141.44,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 12796603.2,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 31766504.95,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 45321202.67,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 66567329.8,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             }
         ],
         "dataRecipients": null,
@@ -20011,12 +20339,14 @@
             {
                 "date": "31.12.2016",
                 "amount": 340000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 330000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -20437,37 +20767,44 @@
             {
                 "date": "31.12.2009",
                 "amount": 14079000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2011",
                 "amount": 21599000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 23466000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 24543000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 23652000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 23195000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2019",
                 "amount": 22185000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -20522,32 +20859,38 @@
             {
                 "date": "31.12.2008",
                 "amount": 1669063000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2012",
                 "amount": 1551200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 1507100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 1174600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2017",
                 "amount": 823200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2019",
                 "amount": 806800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -20602,47 +20945,56 @@
             {
                 "date": "31.12.2008",
                 "amount": 3500000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 4500000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 3200000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2013",
                 "amount": 3400000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 2700000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 2800000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2017",
                 "amount": 2600000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 1700000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 1400000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -20718,52 +21070,62 @@
             {
                 "date": "31.12.2008",
                 "amount": 5858149.92,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 7621242.12,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 11323012.41,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 19572339.41,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 24300829.98,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 29992949.75,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 30846150.17,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 99194800.11,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 102150143.67,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 107490545.28,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -20839,52 +21201,62 @@
             {
                 "date": "31.12.2008",
                 "amount": 530000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 520000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 1800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 2500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 3900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 4700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 5300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 12000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 8600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 9200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -21144,27 +21516,32 @@
             {
                 "date": "31.12.2015",
                 "amount": 9300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 8000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 3400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 2900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 3800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -21194,17 +21571,20 @@
             {
                 "date": "31.12.2016",
                 "amount": 4900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 1283375.55,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 1610364.72,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -21880,47 +22260,56 @@
             {
                 "date": "31.12.2007",
                 "amount": 31000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2009",
                 "amount": 29000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 27000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 28000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 29000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 29000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 38000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2017",
                 "amount": 36000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2019",
                 "amount": 41000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -22525,32 +22914,38 @@
             {
                 "date": "31.12.2013",
                 "amount": 2100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 4000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 9800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 30000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 33000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 39613000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -22603,52 +22998,62 @@
             {
                 "date": "31.12.2007",
                 "amount": 101434793.01,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 116710782,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 134048233,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 129836492,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 148287511.39,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 160872470.48,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 157660768.58,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 155304321.9,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 228212587.13,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 310052875.5,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -23000,37 +23405,44 @@
             {
                 "date": "31.12.2011",
                 "amount": 840000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 1100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 2300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 1400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 1900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 2600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 11000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -23244,32 +23656,38 @@
             {
                 "date": "31.12.2012",
                 "amount": 8900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 16234511.07,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 20627031.84,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2017",
                 "amount": 40145351.05,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 68200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 117290000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -24013,42 +24431,50 @@
             {
                 "date": "31.12.2008",
                 "amount": 61000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 61000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 61000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 57000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2016",
                 "amount": 59000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 60000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 60000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 60000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -24310,22 +24736,26 @@
             {
                 "date": "31.12.2016",
                 "amount": 19000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 45000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 250000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 450000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -24355,47 +24785,56 @@
             {
                 "date": "31.12.2009",
                 "amount": 130000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 13000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 23000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 30000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 33000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 47000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 51000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 52000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 12684200.81,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -24518,12 +24957,14 @@
             {
                 "date": "31.12.2017",
                 "amount": 350000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 940000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -24714,37 +25155,44 @@
             {
                 "date": "31.12.2007",
                 "amount": 230000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 4200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 8100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 8100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 14000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 16000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 16000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             }
         ],
         "dataRecipients": null,
@@ -24935,27 +25383,32 @@
             {
                 "date": "31.12.2012",
                 "amount": 120000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 440000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 1400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 3500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2017",
                 "amount": 5745547.79,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             }
         ],
         "dataRecipients": null,
@@ -25147,62 +25600,74 @@
             {
                 "date": "31.12.2007",
                 "amount": 65143770.07,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 69008877.19,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 70722924.1,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 78541388.32,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 96749329.43,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 120788154.96,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 139889053.38,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 173759183120,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 204537146.77,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 240052322.12,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 273198665.43,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 352389496.8,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -25624,42 +26089,50 @@
             {
                 "date": "31.12.2007",
                 "amount": 86000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 270000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2010",
                 "amount": 4100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 5600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 6200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 7700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 12000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 7600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -27079,17 +27552,20 @@
             {
                 "date": "31.12.2016",
                 "amount": 31000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 20760897.75,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 16996957.34,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -27695,12 +28171,14 @@
             {
                 "date": "31.12.2011",
                 "amount": 3400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "29.02.2012",
                 "amount": 3000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             }
         ],
         "dataRecipients": null,
@@ -28354,12 +28832,14 @@
             {
                 "date": "31.12.2017",
                 "amount": 49721.98,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 2066152.25,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -28527,42 +29007,50 @@
             {
                 "date": "30.06.2009",
                 "amount": 4400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "30.06.2010",
                 "amount": 4800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "30.06.2011",
                 "amount": 7900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "30.06.2013",
                 "amount": 9532427.79,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "30.06.2015",
                 "amount": 23000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "30.06.2017",
                 "amount": 40019409.22,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "30.06.2018",
                 "amount": 42967877.4,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "30.06.2019",
                 "amount": 35474642.19,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -28937,42 +29425,50 @@
             {
                 "date": "31.12.2009",
                 "amount": 4100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 6200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 5400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 3800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 4200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 4800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2017",
                 "amount": 4400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 5100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -29095,22 +29591,26 @@
             {
                 "date": "31.12.2007",
                 "amount": 125271000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 137371067.34,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 107996000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 131558134.36,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             }
         ],
         "dataRecipients": null,
@@ -29140,27 +29640,32 @@
             {
                 "date": "31.12.2011",
                 "amount": 66000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 1800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 8100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 12000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 10000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -30182,37 +30687,44 @@
             {
                 "date": "31.12.2010",
                 "amount": 780000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 1400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 1600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 6200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 9936809.99,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 12392143.83,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 18652187.94,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -30473,12 +30985,14 @@
             {
                 "date": "31.12.2016",
                 "amount": 1400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 2900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -30738,22 +31252,26 @@
             {
                 "date": "31.12.2016",
                 "amount": 800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 9600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 14000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 20000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -30875,17 +31393,20 @@
             {
                 "date": "31.12.2016",
                 "amount": 2900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 1100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 3300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -31100,32 +31621,38 @@
             {
                 "date": "31.12.2013",
                 "amount": 1600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 9300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 18669273.32,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 79000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 44025737.76,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 52666679.09,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -31224,12 +31751,14 @@
             {
                 "date": "31.12.2017",
                 "amount": 3300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 3300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -31444,37 +31973,44 @@
             {
                 "date": "31.12.2007",
                 "amount": 9300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 25000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2010",
                 "amount": 5217571.76,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 4800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 5200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 5100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 13070807.35,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -33727,57 +34263,68 @@
             {
                 "date": "31.03.2009",
                 "amount": 16663722,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.03.2010",
                 "amount": 13108314,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.03.2011",
                 "amount": 12585109,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.03.2012",
                 "amount": 12851799,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.03.2013",
                 "amount": 13349710,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.03.2014",
                 "amount": 13959811,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.03.2015",
                 "amount": 14779770,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.03.2016",
                 "amount": 17039200,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.03.2017",
                 "amount": 18000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.03.2018",
                 "amount": 22000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.03.2019",
                 "amount": 20000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -33830,47 +34377,56 @@
             {
                 "date": "31.12.2008",
                 "amount": 24000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 19028370.25,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2011",
                 "amount": 22207140.17,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 10000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 8900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 8900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 4700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2017",
                 "amount": 5800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 6600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -33900,62 +34456,74 @@
             {
                 "date": "31.12.2006",
                 "amount": 35584859.91,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2006
             },
             {
                 "date": "31.12.2007",
                 "amount": 79747749.28,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2009",
                 "amount": 146241722.73,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 155698127.1,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 190474306.98,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 202834060.92,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 263677629.95,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 278779005.29,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 324869618.47,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 378470398.83,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 431358086.1,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 544066622,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -34285,42 +34853,50 @@
             {
                 "date": "31.12.2010",
                 "amount": 62000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 460000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 1991038911.53,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 1949138916.41,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 1845572669.05,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 2986242185.59,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 2932876501.06,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2019",
                 "amount": 692614701.04,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -34695,37 +35271,44 @@
             {
                 "date": "31.12.2011",
                 "amount": 29000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 6100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 6300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 5500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 8400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 26000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 21000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -35034,17 +35617,20 @@
             {
                 "date": "31.12.2008",
                 "amount": 36322622.97,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 32077213,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.03.2013",
                 "amount": 5058683,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             }
         ],
         "dataRecipients": null,
@@ -35074,22 +35660,26 @@
             {
                 "date": "31.12.2007",
                 "amount": 1000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2009",
                 "amount": 480000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2012",
                 "amount": 390000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 280000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             }
         ],
         "dataRecipients": null,
@@ -35327,27 +35917,32 @@
             {
                 "date": "31.12.2015",
                 "amount": 3000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 10000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 16000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 29000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 45000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -35423,12 +36018,14 @@
             {
                 "date": "31.12.2013",
                 "amount": 300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 320000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             }
         ],
         "dataRecipients": null,
@@ -35504,27 +36101,32 @@
             {
                 "date": "31.12.2014",
                 "amount": 3600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2016",
                 "amount": 3400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 3000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 4200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 6700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -35577,17 +36179,20 @@
             {
                 "date": "31.12.2016",
                 "amount": 0,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 1186004.84,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 1688160.71,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -35755,22 +36360,26 @@
             {
                 "date": "31.12.2016",
                 "amount": 3300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 5200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 6300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 36000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -36099,47 +36708,56 @@
             {
                 "date": "31.12.2009",
                 "amount": 3000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2012",
                 "amount": 4500000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 3300000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 4300000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 3800000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 6200000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 4600000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 5700000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 11000000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -36468,27 +37086,32 @@
             {
                 "date": "31.12.2014",
                 "amount": 69000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 215286381.34,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 352143987.14,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 30979533.07,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 20291075,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -36541,42 +37164,50 @@
             {
                 "date": "31.12.2006",
                 "amount": 260000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2006
             },
             {
                 "date": "31.12.2007",
                 "amount": 240000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2009",
                 "amount": 170000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 150000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 95000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2015",
                 "amount": 74000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 120000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 180000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -36652,32 +37283,38 @@
             {
                 "date": "31.12.2011",
                 "amount": 650000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 1700000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 11000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 25000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 30000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 48000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -36870,22 +37507,26 @@
             {
                 "date": "31.12.2014",
                 "amount": 460000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 16000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2017",
                 "amount": 37000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2019",
                 "amount": 220000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -37536,37 +38177,44 @@
             {
                 "date": "31.12.2010",
                 "amount": 0,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 620000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 2200000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 2800000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 2600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 3400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 2500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -37734,47 +38382,56 @@
             {
                 "date": "31.12.2007",
                 "amount": 8600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2009",
                 "amount": 10000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 39000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 45000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 170000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2014",
                 "amount": 440000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 970000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 460000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 1100000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             }
         ],
         "dataRecipients": null,
@@ -38956,22 +39613,26 @@
             {
                 "date": "31.12.2015",
                 "amount": 36000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 33000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 23840000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 25106000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -39095,7 +39756,8 @@
             {
                 "date": "31.12.2018",
                 "amount": 9300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -39378,42 +40040,50 @@
             {
                 "date": "31.12.2007",
                 "amount": 13663000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2010",
                 "amount": 33822000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 35074000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 44262000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2015",
                 "amount": 63862886.64,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 79264261.25,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 85324719.59,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 95504087.36,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -39581,27 +40251,32 @@
             {
                 "date": "31.12.2008",
                 "amount": 260000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2010",
                 "amount": 380000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "30.11.2012",
                 "amount": 480000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2012",
                 "amount": 500000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2017",
                 "amount": 680000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             }
         ],
         "dataRecipients": null,
@@ -40841,37 +41516,44 @@
             {
                 "date": "31.12.2007",
                 "amount": 53000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2007
             },
             {
                 "date": "31.12.2008",
                 "amount": 33000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.03.2009",
                 "amount": 33000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.03.2010",
                 "amount": 44000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.03.2011",
                 "amount": 60000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.03.2012",
                 "amount": 51000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.03.2014",
                 "amount": 16327413,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             }
         ],
         "dataRecipients": null,
@@ -41041,17 +41723,20 @@
             {
                 "date": "31.12.2009",
                 "amount": 170000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 170000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 4100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             }
         ],
         "dataRecipients": null,
@@ -41104,62 +41789,74 @@
             {
                 "date": "31.12.2008",
                 "amount": 45968135.61,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 101136181.86,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 97336391.01,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 116997955.43,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2012",
                 "amount": 93810551.4,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 92888272.66,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "14.02.2015",
                 "amount": 31124719.89,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "30.06.2015",
                 "amount": 48688436.41,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "30.06.2016",
                 "amount": 21997033.65,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "30.06.2017",
                 "amount": 61031714.76,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "30.06.2018",
                 "amount": 53026489.53,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "30.06.2019",
                 "amount": 50202039.16,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -42750,47 +43447,56 @@
             {
                 "date": "31.12.2009",
                 "amount": 320000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 340000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2011",
                 "amount": 577100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2011
             },
             {
                 "date": "31.12.2013",
                 "amount": 560600000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 622000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 721100000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 19724854.04,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2018",
                 "amount": 25524027.25,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             },
             {
                 "date": "31.12.2019",
                 "amount": 27776181.37,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2019
             }
         ],
         "dataRecipients": null,
@@ -43902,27 +44608,32 @@
             {
                 "date": "31.12.2014",
                 "amount": 270000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 1400000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 5300000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 11000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 21000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,
@@ -44482,52 +45193,62 @@
             {
                 "date": "30.11.2008",
                 "amount": 3900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2008
             },
             {
                 "date": "31.12.2009",
                 "amount": 3900000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2009
             },
             {
                 "date": "31.12.2010",
                 "amount": 3500000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2010
             },
             {
                 "date": "31.12.2012",
                 "amount": 11000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2012
             },
             {
                 "date": "31.12.2013",
                 "amount": 14368820.27,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2013
             },
             {
                 "date": "31.12.2014",
                 "amount": 11000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2014
             },
             {
                 "date": "31.12.2015",
                 "amount": 27000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2015
             },
             {
                 "date": "31.12.2016",
                 "amount": 32000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2016
             },
             {
                 "date": "31.12.2017",
                 "amount": 27000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2017
             },
             {
                 "date": "31.12.2018",
                 "amount": 64000000,
-                "currency": "EUR"
+                "currency": "EUR",
+                "year": 2018
             }
         ],
         "dataRecipients": null,

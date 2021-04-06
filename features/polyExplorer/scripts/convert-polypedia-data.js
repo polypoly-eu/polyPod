@@ -19,9 +19,8 @@ const dataIssueLog = {
     patchedCompaniesNew: [],
 };
 
-const extractYear = (date) => {
+const extractYear = (date) =>
     parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
-};
 
 const entityKey = (legalName) => legalName.toLowerCase();
 
