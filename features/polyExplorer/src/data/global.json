@@ -1598,8 +1598,8 @@
             "Translation_DE": "Optimierung für Controller",
             "Translation_EN": "Optimisation for Controller",
             "Synonyms": "",
-            "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Controller",
-            "Explanation_EN": "optimise activities and services for the Controller"
+            "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Data Controller, also für die Firma, welche die Daten kontrolliert",
+            "Explanation_EN": "optimise activities and services for the Controller, meaning the company that controls the data handling"
         },
         "dpv:OptimiseUserInterface": {
             "dpv:Purpose": "dpv:OptimiseUserInterface",
