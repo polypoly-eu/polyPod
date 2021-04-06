@@ -118,7 +118,7 @@ const CompanyList = ({
     }, []);
 
     return (
-        <div id="companyList" className="company-list" ref={listRef}>
+        <div id="company-list" className="company-list" ref={listRef}>
             <ActiveFilters
                 activeFilters={activeFilters}
                 globalData={globalData}
