@@ -81,8 +81,15 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
+
         // Enabling localStorage until window.pod.polyIn works
         webView.settings.domStorageEnabled = true
+
+        // Disable text selection
+        webView.isLongClickable = false
+        webView.setOnLongClickListener { true }
+        webView.isHapticFeedbackEnabled = false
+
         addView(webView)
     }
 
