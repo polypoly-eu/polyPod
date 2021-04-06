@@ -6451,114 +6451,114 @@
             {
                 "dpv:Purpose": "dpv:CommunicationForCustomerCare",
                 "count": 73,
-                "Translation_DE": "Kommunikation zur Kundenbetreuung",
+                "Translation_DE": "Kommunikation zur Kund:innen-Betreuung",
                 "Translation_EN": "Communication for Customer Care",
-                "Explanation_DE": "mit Nutzern per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen zu kommunizieren.",
-                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests."
+                "Explanation_DE": "Mit Nutzer:innen per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen kommunizieren.",
+                "Explanation_EN": "Communicate with users via email, phone, sms, chat or push messages regarding your requests."
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
                 "count": 43,
-                "Translation_DE": "Kundenbetreuung",
+                "Translation_DE": "Kund:innen-Betreuung",
                 "Translation_EN": "Customer Care",
-                "Explanation_DE": "Hilfestellung bei Kundenbeschwerden und -zufriedenheit geben",
-                "Explanation_EN": "provide assistance for customer complaints and satisfaction"
+                "Explanation_DE": "Hilfestellung bei Kund:innen-Beschwerden und -Zufriedenheit geben.",
+                "Explanation_EN": "Provide assistance for customer complaints and satisfaction."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
                 "count": 6,
                 "Translation_DE": "Direktmarketing",
-                "Translation_EN": "Direct arketing",
-                "Explanation_DE": "Direktmarketing durchführen, d.h. Marketing, das direkt an die Person gerichtet ist",
-                "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual"
+                "Translation_EN": "Direct marketing",
+                "Explanation_DE": "Direktmarketing durchführen, d.h. gezieltes Marketing, das direkt an eine individuelle Person gerichtet ist.",
+                "Explanation_EN": "Carry out direct marketing i.e. marketing communicated directly to the individual."
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
                 "count": 27,
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
-                "Explanation_DE": "Betrug erkennen und verhindern",
-                "Explanation_EN": "detect and prevent fraud"
+                "Explanation_DE": "Betrug erkennen und verhindern.",
+                "Explanation_EN": "Detect and prevent fraud."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
                 "count": 83,
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
-                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
-                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
+                "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
                 "count": 54,
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
-                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben",
-                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service"
+                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
+                "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForController",
                 "count": 5,
-                "Translation_DE": "Optimierung für Controller",
+                "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
-                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Controller",
-                "Explanation_EN": "optimise activities and services for the Controller"
+                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
+                "Explanation_EN": "Optimise activities and services for the Controller."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
                 "count": 52,
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
-                "Explanation_DE": "die Zahlungstransaktionen der Nutzer zu verarbeiten.",
-                "Explanation_EN": "process users’ payment transactions."
+                "Explanation_DE": "Die Zahlungstransaktionen der Nutzer:innen verarbeiten.",
+                "Explanation_EN": "Process users’ payment transactions."
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAuthentication",
                 "count": 59,
-                "Translation_DE": "Registrierung Authentifizierung",
-                "Translation_EN": "Registration Authentication",
+                "Translation_DE": "Registrierung und Authentifizierung",
+                "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Register, authenticate, and identify in context of a service."
             },
             {
                 "dpv:Purpose": "dpv:RequestedServiceProvision",
                 "count": 85,
-                "Translation_DE": "Angefordete dienstbereitstellung",
+                "Translation_DE": "Angefordete Dienstbereitstellung",
                 "Translation_EN": "Requested Service Provision",
-                "Explanation_DE": "Angefordete Dienstleistung bereitstellen",
-                "Explanation_EN": "provide requested service of activity"
+                "Explanation_DE": "Angefordete Dienstleistung bereitstellen.",
+                "Explanation_EN": "Provide requested service of activity."
             },
             {
                 "dpv:Purpose": "dpv:ServiceOptimization",
                 "count": 14,
                 "Translation_DE": "Service-Optimierung",
-                "Translation_EN": "Service Optimization",
-                "Explanation_DE": "Service oder Aktivität optimieren",
-                "Explanation_EN": "optimise service or activity"
+                "Translation_EN": "Service Optimization,",
+                "Explanation_DE": "Service oder Aktivität optimieren.",
+                "Explanation_EN": "Optimise service or activity."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
                 "count": 55,
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
-                "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
-                "Explanation_EN": "provide service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
+                "Explanation_EN": "Provide service or activity."
             },
             {
                 "dpv:Purpose": "dpv:SocialMediaMarketing",
                 "count": 18,
                 "Translation_DE": "Soziale Medien",
                 "Translation_EN": "Social Media",
-                "Explanation_DE": "über und in sozialen Medien vermarkten.",
-                "Explanation_EN": "market through and on social media."
+                "Explanation_DE": "Über und in sozialen Medien vermarkten.",
+                "Explanation_EN": "Market through and on social media."
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
                 "count": 82,
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
-                "Explanation_DE": "Berechnen, Analysieren und Berichten von Benutzerverhalten und Ereignissen für einen Dienst oder ein Produkt.",
-                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+                "Explanation_DE": ",Berechnen, Analysieren und Berichten von Benutzer:innen-Verhalten und -Ereignissen für einen Dienst oder ein Produkt.",
+                "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
             }
         ],
         "dataTypesShared": [
@@ -8468,120 +8468,120 @@
                 "count": 27,
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
-                "Explanation_DE": "Werbung und werbliche Ansprache",
-                "Explanation_EN": "Advertising and sending messages with ad content"
+                "Explanation_DE": "Werbung und werbliche Ansprache.",
+                "Explanation_EN": "Advertising and sending messages with ad content."
             },
             {
                 "dpv:Purpose": "dpv:Analytics",
                 "count": 29,
                 "Translation_DE": "Analytik",
                 "Translation_EN": "Analytics",
-                "Explanation_DE": "Benutzerverhalten und Ereignisse für einen Dienst oder ein Produkt zu berechnen, zu analysieren und zu melden.",
-                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+                "Explanation_DE": "Benutzer:innen-Verhalten und Ereignisse für einen Dienst oder ein Produkt berechnen, analysieren und melden.",
+                "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
             },
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
                 "count": 41,
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
-                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für den Controller",
-                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller"
+                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
                 "count": 1,
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
-                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z.B. in einem Unternehmen",
-                "Explanation_EN": "conduct research in a commercial setting e.g. in a company"
+                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z. B. in einem Unternehmen.",
+                "Explanation_EN": "Conduct research in a commercial setting e.g. in a company."
             },
             {
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 6,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
-                "Explanation_DE": "personalisierte Empfehlungen erstellen und bereitstellen",
-                "Explanation_EN": "create and provide personalised recommendations"
+                "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
+                "Explanation_EN": "Create and provide personalised recommendations."
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
                 "count": 1,
-                "Translation_DE": "Kundenbetreuung",
+                "Translation_DE": "Kund:innen-Betreuung",
                 "Translation_EN": "Customer Care",
-                "Explanation_DE": "Hilfestellung bei Kundenbeschwerden und -zufriedenheit geben",
-                "Explanation_EN": "provide assistance for customer complaints and satisfaction"
+                "Explanation_DE": "Hilfestellung bei Kund:innen-Beschwerden und -Zufriedenheit geben.",
+                "Explanation_EN": "Provide assistance for customer complaints and satisfaction."
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
                 "count": 3,
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
-                "Explanation_DE": "Betrug erkennen und verhindern",
-                "Explanation_EN": "detect and prevent fraud"
+                "Explanation_DE": "Betrug erkennen und verhindern.",
+                "Explanation_EN": "Detect and prevent fraud."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
                 "count": 6,
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
-                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
-                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
+                "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
                 "count": 14,
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
-                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben",
-                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service"
+                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
+                "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForController",
                 "count": 1,
-                "Translation_DE": "Optimierung für Controller",
+                "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
-                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Controller",
-                "Explanation_EN": "optimise activities and services for the Controller"
+                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
+                "Explanation_EN": "Optimise activities and services for the Controller."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
                 "count": 1,
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
-                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben",
-                "Explanation_EN": "conduct research and development for new methods, products, or services"
+                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben.",
+                "Explanation_EN": "Conduct research and development for new methods, products, or services."
             },
             {
                 "dpv:Purpose": "dpv:Security",
                 "count": 1,
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
-                "Explanation_DE": "die Sicherheit z. B. von Daten gewährleisten und durchsetzen",
-                "Explanation_EN": "ensure and enforce security e.g. of data"
+                "Explanation_DE": "Die Sicherheit z. B. von Daten, gewährleisten und durchsetzen.",
+                "Explanation_EN": "Ensure and enforce security e.g. of data."
             },
             {
                 "dpv:Purpose": "dpv:SellTargettedAdvertisements",
                 "count": 1,
                 "Translation_DE": "Gezielte Werbung verkaufen",
                 "Translation_EN": "Sell Targetted Advertisements",
-                "Explanation_DE": "zielgerichtete Werbung verkaufen oder anbieten",
-                "Explanation_EN": "sell or provide targetted advertisements"
+                "Explanation_DE": "Zielgerichtete Werbung verkaufen oder anbieten.",
+                "Explanation_EN": "Sell or provide targetted advertisements."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
                 "count": 18,
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
-                "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
-                "Explanation_EN": "provide service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
+                "Explanation_EN": "Provide service or activity."
             },
             {
                 "dpv:Purpose": "dpv:UserInterfacePersonalisation",
                 "count": 2,
-                "Translation_DE": "Personalisierung der Benutzeroberfläche",
+                "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
-                "Explanation_DE": "Oberflächen für den Benutzer personalisieren",
-                "Explanation_EN": "personalise interfaces presented to the user"
+                "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
+                "Explanation_EN": "Personalise interfaces presented to the user."
             }
         ],
         "dataTypesShared": [
@@ -13936,224 +13936,224 @@
                 "count": 91,
                 "Translation_DE": "Akademische Forschung",
                 "Translation_EN": "Academic Research",
-                "Explanation_DE": "Forschung in einem akademischen Kontext, z. B. innerhalb von Universitäten, durchführen oder unterstützen",
-                "Explanation_EN": "conduct or assist with research conducted in an academic context e.g. within universities"
+                "Explanation_DE": "Forschung in einem akademischen Kontext, z. B. durch die Durchführung oder Unterstützung von Universitäten.",
+                "Explanation_EN": "Conduct or assist with research conducted in an academic context e.g. within universities."
             },
             {
                 "dpv:Purpose": "dpv:Advertising",
                 "count": 2,
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
-                "Explanation_DE": "Werbung und werbliche Ansprache",
-                "Explanation_EN": "Advertising and sending messages with ad content"
+                "Explanation_DE": "Werbung und werbliche Ansprache.",
+                "Explanation_EN": "Advertising and sending messages with ad content."
             },
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
                 "count": 66,
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
-                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für den Controller",
-                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller"
+                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
                 "count": 20,
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
-                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z.B. in einem Unternehmen",
-                "Explanation_EN": "conduct research in a commercial setting e.g. in a company"
+                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z. B. in einem Unternehmen.",
+                "Explanation_EN": "Conduct research in a commercial setting e.g. in a company."
             },
             {
                 "dpv:Purpose": "dpv:CommunicationForCustomerCare",
                 "count": 5,
-                "Translation_DE": "Kommunikation zur Kundenbetreuung",
+                "Translation_DE": "Kommunikation zur Kund:innen-Betreuung",
                 "Translation_EN": "Communication for Customer Care",
-                "Explanation_DE": "mit Nutzern per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen zu kommunizieren.",
-                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests."
+                "Explanation_DE": "Mit Nutzer:innen per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen kommunizieren.",
+                "Explanation_EN": "Communicate with users via email, phone, sms, chat or push messages regarding your requests."
             },
             {
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 1,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
-                "Explanation_DE": "personalisierte Empfehlungen erstellen und bereitstellen",
-                "Explanation_EN": "create and provide personalised recommendations"
+                "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
+                "Explanation_EN": "Create and provide personalised recommendations."
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
                 "count": 23,
-                "Translation_DE": "Kundenbetreuung",
+                "Translation_DE": "Kund:innen-Betreuung",
                 "Translation_EN": "Customer Care",
-                "Explanation_DE": "Hilfestellung bei Kundenbeschwerden und -zufriedenheit geben",
-                "Explanation_EN": "provide assistance for customer complaints and satisfaction"
+                "Explanation_DE": "Hilfestellung bei Kund:innen-Beschwerden und -Zufriedenheit geben.",
+                "Explanation_EN": "Provide assistance for customer complaints and satisfaction."
             },
             {
                 "dpv:Purpose": "dpv:DeliveryOfGoods",
                 "count": 1,
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
-                "Explanation_DE": "Waren und Dienstleistungen ausliefern",
-                "Explanation_EN": "deliver goods and services"
+                "Explanation_DE": "Waren und Dienstleistungen ausliefern.",
+                "Explanation_EN": "Deliver goods and services."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
                 "count": 4,
                 "Translation_DE": "Direktmarketing",
-                "Translation_EN": "Direct arketing",
-                "Explanation_DE": "Direktmarketing durchführen, d.h. Marketing, das direkt an die Person gerichtet ist",
-                "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual"
+                "Translation_EN": "Direct marketing",
+                "Explanation_DE": "Direktmarketing durchführen, d.h. gezieltes Marketing, das direkt an eine individuelle Person gerichtet ist.",
+                "Explanation_EN": "Carry out direct marketing i.e. marketing communicated directly to the individual."
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
                 "count": 9,
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
-                "Explanation_DE": "Betrug erkennen und verhindern",
-                "Explanation_EN": "detect and prevent fraud"
+                "Explanation_DE": "Betrug erkennen und verhindern.",
+                "Explanation_EN": "Detect and prevent fraud."
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
                 "count": 1,
                 "Translation_DE": "Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
-                "Explanation_DE": "Identität verifizieren und autorisieren",
-                "Explanation_EN": "verify and authorise identity"
+                "Explanation_DE": "Identität verifizieren und autorisieren.",
+                "Explanation_EN": "Verify and authorise identity."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
                 "count": 107,
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
-                "Explanation_DE": "bestehende Produkte und Dienstleistungen zu verbessern",
-                "Explanation_EN": "improve existing products and services"
+                "Explanation_DE": "Bestehende Produkte und Dienstleistungen verbessern.",
+                "Explanation_EN": "Improve existing products and services."
             },
             {
                 "dpv:Purpose": "dpv:InternalResourceOptimisation",
                 "count": 17,
                 "Translation_DE": "Interne Ressourcen-Optimierung",
                 "Translation_EN": "Internal Resource Optimisation",
-                "Explanation_DE": "Optimierung interner Ressourcen, die von der Organisation genutzt werden, z. B. die Ressourcennutzung",
-                "Explanation_EN": "optimise internal resources used by the organisation e.g. resource usage"
+                "Explanation_DE": "Optimierung interner Ressourcen, die von der Organisation genutzt werden, z. B. die Ressourcennutzung.",
+                "Explanation_EN": "Optimise activities and services for the Controller, meaning the company that controls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
                 "count": 82,
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
-                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
-                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
+                "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
                 "count": 6,
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
-                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben",
-                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service"
+                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
+                "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service."
             },
             {
                 "dpv:Purpose": "dpv:NonCommercialResearch",
                 "count": 18,
                 "Translation_DE": "Nicht-kommerzielle Forschung",
                 "Translation_EN": "Non-Commercial Research",
-                "Explanation_DE": "Forschung in einem nicht-kommerziellen Umfeld betreiben, z. B. für eine Non-Profit-Organisation (NGO)",
-                "Explanation_EN": "conduct research in a non-commercial setting e.g. for a non-profit-organisation (NGO)"
+                "Explanation_DE": "Forschung in einem nicht-kommerziellen Umfeld betreiben, z. B. für eine Non-Profit-Organisation (NGO).",
+                "Explanation_EN": "Conduct research in a non-commercial setting e.g. for a non-profit-organisation (NGO)."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForController",
                 "count": 20,
-                "Translation_DE": "Optimierung für Controller",
+                "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
-                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Controller",
-                "Explanation_EN": "optimise activities and services for the Controller"
+                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
+                "Explanation_EN": "Optimise activities and services for the Controller."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
                 "count": 8,
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
-                "Explanation_DE": "die Zahlungstransaktionen der Nutzer zu verarbeiten.",
-                "Explanation_EN": "process users’ payment transactions."
+                "Explanation_DE": "Die Zahlungstransaktionen der Nutzer:innen verarbeiten.",
+                "Explanation_EN": "Process users’ payment transactions."
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedBenefits",
                 "count": 3,
                 "Translation_DE": "Personalisierte Vorteile",
                 "Translation_EN": "Personalised Benefits",
-                "Explanation_DE": "die vom Nutzer erhaltenen Leistungen zu personalisieren",
-                "Explanation_EN": "personalise benefits received by the user"
+                "Explanation_DE": "Die von den Nutzenden erhaltenen Leistungen personalisieren.",
+                "Explanation_EN": "Personalise benefits received by the user."
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAuthentication",
                 "count": 1,
-                "Translation_DE": "Registrierung Authentifizierung",
-                "Translation_EN": "Registration Authentication",
+                "Translation_DE": "Registrierung und Authentifizierung",
+                "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Register, authenticate, and identify in context of a service."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
                 "count": 7,
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
-                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben",
-                "Explanation_EN": "conduct research and development for new methods, products, or services"
+                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben.",
+                "Explanation_EN": "Conduct research and development for new methods, products, or services."
             },
             {
                 "dpv:Purpose": "dpv:Security",
                 "count": 39,
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
-                "Explanation_DE": "die Sicherheit z. B. von Daten gewährleisten und durchsetzen",
-                "Explanation_EN": "ensure and enforce security e.g. of data"
+                "Explanation_DE": "Die Sicherheit z. B. von Daten, gewährleisten und durchsetzen.",
+                "Explanation_EN": "Ensure and enforce security e.g. of data."
             },
             {
                 "dpv:Purpose": "dpv:ServiceOptimization",
                 "count": 2,
                 "Translation_DE": "Service-Optimierung",
-                "Translation_EN": "Service Optimization",
-                "Explanation_DE": "Service oder Aktivität optimieren",
-                "Explanation_EN": "optimise service or activity"
+                "Translation_EN": "Service Optimization,",
+                "Explanation_DE": "Service oder Aktivität optimieren.",
+                "Explanation_EN": "Optimise service or activity."
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
                 "count": 2,
                 "Translation_DE": "Dienstpersonalisierung",
                 "Translation_EN": "Service Personalization",
-                "Explanation_DE": "Dienstleistung oder Aktivität personalisieren",
-                "Explanation_EN": "personalise service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität personalisieren.",
+                "Explanation_EN": "Personalise service or activity."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
                 "count": 239,
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
-                "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
-                "Explanation_EN": "provide service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
+                "Explanation_EN": "Provide service or activity."
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
                 "count": 20,
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
-                "Explanation_DE": "Berechnen, Analysieren und Berichten von Benutzerverhalten und Ereignissen für einen Dienst oder ein Produkt.",
-                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+                "Explanation_DE": ",Berechnen, Analysieren und Berichten von Benutzer:innen-Verhalten und -Ereignissen für einen Dienst oder ein Produkt.",
+                "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
             },
             {
                 "dpv:Purpose": "dpv:UserInterfacePersonalisation",
                 "count": 1,
-                "Translation_DE": "Personalisierung der Benutzeroberfläche",
+                "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
-                "Explanation_DE": "Oberflächen für den Benutzer personalisieren",
-                "Explanation_EN": "personalise interfaces presented to the user"
+                "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
+                "Explanation_EN": "Personalise interfaces presented to the user."
             },
             {
                 "dpv:Purpose": "unspecified",
                 "count": 23,
-                "Translation_DE": "unspezifiziert",
-                "Translation_EN": "unspecified",
-                "Explanation_DE": "Zweck nicht spezifiziert",
-                "Explanation_EN": "purpose unspecified"
+                "Translation_DE": "Unspezifiziert",
+                "Translation_EN": "Unspecified",
+                "Explanation_DE": "Zweck nicht spezifiziert.",
+                "Explanation_EN": "Purpose unspecified."
             }
         ],
         "dataTypesShared": [
@@ -18710,144 +18710,144 @@
                 "count": 1,
                 "Translation_DE": "Zugangskontrolle",
                 "Translation_EN": "Access Control",
-                "Explanation_DE": "Zugangskontrollen durchführen oder durchsetzen",
-                "Explanation_EN": "conduct or enforce access control"
+                "Explanation_DE": "Zugangskontrollen durchführen oder durchsetzen.",
+                "Explanation_EN": "Conduct or enforce access control."
             },
             {
                 "dpv:Purpose": "dpv:Advertising",
                 "count": 76,
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
-                "Explanation_DE": "Werbung und werbliche Ansprache",
-                "Explanation_EN": "Advertising and sending messages with ad content"
+                "Explanation_DE": "Werbung und werbliche Ansprache.",
+                "Explanation_EN": "Advertising and sending messages with ad content."
             },
             {
                 "dpv:Purpose": "dpv:Analytics",
                 "count": 22,
                 "Translation_DE": "Analytik",
                 "Translation_EN": "Analytics",
-                "Explanation_DE": "Benutzerverhalten und Ereignisse für einen Dienst oder ein Produkt zu berechnen, zu analysieren und zu melden.",
-                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+                "Explanation_DE": "Benutzer:innen-Verhalten und Ereignisse für einen Dienst oder ein Produkt berechnen, analysieren und melden.",
+                "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
             },
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
                 "count": 4,
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
-                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für den Controller",
-                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller"
+                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
                 "count": 1,
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
-                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z.B. in einem Unternehmen",
-                "Explanation_EN": "conduct research in a commercial setting e.g. in a company"
+                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z. B. in einem Unternehmen.",
+                "Explanation_EN": "Conduct research in a commercial setting e.g. in a company."
             },
             {
                 "dpv:Purpose": "dpv:CommunicationForCustomerCare",
                 "count": 9,
-                "Translation_DE": "Kommunikation zur Kundenbetreuung",
+                "Translation_DE": "Kommunikation zur Kund:innen-Betreuung",
                 "Translation_EN": "Communication for Customer Care",
-                "Explanation_DE": "mit Nutzern per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen zu kommunizieren.",
-                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests."
+                "Explanation_DE": "Mit Nutzer:innen per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen kommunizieren.",
+                "Explanation_EN": "Communicate with users via email, phone, sms, chat or push messages regarding your requests."
             },
             {
                 "dpv:Purpose": "dpv:ImproveInternalCRMProcesses",
                 "count": 4,
                 "Translation_DE": "Interne CRM-Prozesse verbessern",
                 "Translation_EN": "Improve internal CRM Processes",
-                "Explanation_DE": "Verbesserung der Kundenbeziehungsmanagement-Prozesse (CRM)",
-                "Explanation_EN": "improve customer-relationship management (CRM) processes"
+                "Explanation_DE": "Verbesserung der Kund:innen-Beziehungsmanagement-Prozesse (CRM).",
+                "Explanation_EN": "Improve customer-relationship management (CRM) processes."
             },
             {
                 "dpv:Purpose": "dpv:IncreaseServiceRobustness",
                 "count": 13,
                 "Translation_DE": "Service-Robustheit erhöhen",
                 "Translation_EN": "Increase Service Robustness",
-                "Explanation_DE": "die Robustheit und Ausfallsicherheit von Diensten zu verbessern",
-                "Explanation_EN": "improve the robustness and resilience of services"
+                "Explanation_DE": "Die Robustheit und Ausfallsicherheit von Diensten verbessern.",
+                "Explanation_EN": "Improve the robustness and resilience of services."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
                 "count": 10,
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
-                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
-                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
+                "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
                 "count": 72,
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
-                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben",
-                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service"
+                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
+                "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForConsumer",
                 "count": 1,
-                "Translation_DE": "Optimierung für den Verbraucher",
+                "Translation_DE": "Optimierung für den:die Verbraucher:in",
                 "Translation_EN": "Optimisation for Consumer",
-                "Explanation_DE": "Aktivitäten und Dienste für den Verbraucher oder Nutzer zu optimieren",
-                "Explanation_EN": "optimise activities and services for the consumer or user"
+                "Explanation_DE": "Aktivitäten und Dienste für Verbraucher:innen oder Nutzer:innen optimieren.",
+                "Explanation_EN": "Optimise activities and services for the consumer or user."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForController",
                 "count": 8,
-                "Translation_DE": "Optimierung für Controller",
+                "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
-                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Controller",
-                "Explanation_EN": "optimise activities and services for the Controller"
+                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
+                "Explanation_EN": "Optimise activities and services for the Controller."
             },
             {
                 "dpv:Purpose": "dpv:OptimiseUserInterface",
                 "count": 27,
-                "Translation_DE": "Optimierung der Benutzeroberfläche",
+                "Translation_DE": "Optimierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "Optimise User Interface",
-                "Explanation_DE": "Optimierung von Schnittstellen, die dem Nutzer präsentiert werden",
-                "Explanation_EN": "optimise interfaces presented to the user"
+                "Explanation_DE": "Optimierung von Schnittstellen, die dem:der Nutzer:in präsentiert werden.",
+                "Explanation_EN": "Optimise interfaces presented to the user."
             },
             {
                 "dpv:Purpose": "dpv:Security",
                 "count": 6,
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
-                "Explanation_DE": "die Sicherheit z. B. von Daten gewährleisten und durchsetzen",
-                "Explanation_EN": "ensure and enforce security e.g. of data"
+                "Explanation_DE": "Die Sicherheit z. B. von Daten, gewährleisten und durchsetzen.",
+                "Explanation_EN": "Ensure and enforce security e.g. of data."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
                 "count": 2,
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
-                "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
-                "Explanation_EN": "provide service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
+                "Explanation_EN": "Provide service or activity."
             },
             {
                 "dpv:Purpose": "dpv:SocialMediaMarketing",
                 "count": 2,
                 "Translation_DE": "Soziale Medien",
                 "Translation_EN": "Social Media",
-                "Explanation_DE": "über und in sozialen Medien vermarkten.",
-                "Explanation_EN": "market through and on social media."
+                "Explanation_DE": "Über und in sozialen Medien vermarkten.",
+                "Explanation_EN": "Market through and on social media."
             },
             {
                 "dpv:Purpose": "dpv:UserInterfacePersonalisation",
                 "count": 9,
-                "Translation_DE": "Personalisierung der Benutzeroberfläche",
+                "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
-                "Explanation_DE": "Oberflächen für den Benutzer personalisieren",
-                "Explanation_EN": "personalise interfaces presented to the user"
+                "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
+                "Explanation_EN": "Personalise interfaces presented to the user."
             },
             {
                 "dpv:Purpose": "unspecified",
                 "count": 28,
-                "Translation_DE": "unspezifiziert",
-                "Translation_EN": "unspecified",
-                "Explanation_DE": "Zweck nicht spezifiziert",
-                "Explanation_EN": "purpose unspecified"
+                "Translation_DE": "Unspezifiziert",
+                "Translation_EN": "Unspecified",
+                "Explanation_DE": "Zweck nicht spezifiziert.",
+                "Explanation_EN": "Purpose unspecified."
             }
         ],
         "dataTypesShared": [
@@ -25868,176 +25868,176 @@
                 "count": 1,
                 "Translation_DE": "Zugangskontrolle",
                 "Translation_EN": "Access Control",
-                "Explanation_DE": "Zugangskontrollen durchführen oder durchsetzen",
-                "Explanation_EN": "conduct or enforce access control"
+                "Explanation_DE": "Zugangskontrollen durchführen oder durchsetzen.",
+                "Explanation_EN": "Conduct or enforce access control."
             },
             {
                 "dpv:Purpose": "dpv:Advertising",
                 "count": 20,
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
-                "Explanation_DE": "Werbung und werbliche Ansprache",
-                "Explanation_EN": "Advertising and sending messages with ad content"
+                "Explanation_DE": "Werbung und werbliche Ansprache.",
+                "Explanation_EN": "Advertising and sending messages with ad content."
             },
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
                 "count": 10,
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
-                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für den Controller",
-                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller"
+                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
                 "count": 6,
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
-                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z.B. in einem Unternehmen",
-                "Explanation_EN": "conduct research in a commercial setting e.g. in a company"
+                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z. B. in einem Unternehmen.",
+                "Explanation_EN": "Conduct research in a commercial setting e.g. in a company."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
                 "count": 4,
                 "Translation_DE": "Direktmarketing",
-                "Translation_EN": "Direct arketing",
-                "Explanation_DE": "Direktmarketing durchführen, d.h. Marketing, das direkt an die Person gerichtet ist",
-                "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual"
+                "Translation_EN": "Direct marketing",
+                "Explanation_DE": "Direktmarketing durchführen, d.h. gezieltes Marketing, das direkt an eine individuelle Person gerichtet ist.",
+                "Explanation_EN": "Carry out direct marketing i.e. marketing communicated directly to the individual."
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
                 "count": 22,
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
-                "Explanation_DE": "Betrug erkennen und verhindern",
-                "Explanation_EN": "detect and prevent fraud"
+                "Explanation_DE": "Betrug erkennen und verhindern.",
+                "Explanation_EN": "Detect and prevent fraud."
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
                 "count": 2,
                 "Translation_DE": "Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
-                "Explanation_DE": "Identität verifizieren und autorisieren",
-                "Explanation_EN": "verify and authorise identity"
+                "Explanation_DE": "Identität verifizieren und autorisieren.",
+                "Explanation_EN": "Verify and authorise identity."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
                 "count": 13,
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
-                "Explanation_DE": "bestehende Produkte und Dienstleistungen zu verbessern",
-                "Explanation_EN": "improve existing products and services"
+                "Explanation_DE": "Bestehende Produkte und Dienstleistungen verbessern.",
+                "Explanation_EN": "Improve existing products and services."
             },
             {
                 "dpv:Purpose": "dpv:IncreaseServiceRobustness",
                 "count": 10,
                 "Translation_DE": "Service-Robustheit erhöhen",
                 "Translation_EN": "Increase Service Robustness",
-                "Explanation_DE": "die Robustheit und Ausfallsicherheit von Diensten zu verbessern",
-                "Explanation_EN": "improve the robustness and resilience of services"
+                "Explanation_DE": "Die Robustheit und Ausfallsicherheit von Diensten verbessern.",
+                "Explanation_EN": "Improve the robustness and resilience of services."
             },
             {
                 "dpv:Purpose": "dpv:InternalResourceOptimisation",
                 "count": 6,
                 "Translation_DE": "Interne Ressourcen-Optimierung",
                 "Translation_EN": "Internal Resource Optimisation",
-                "Explanation_DE": "Optimierung interner Ressourcen, die von der Organisation genutzt werden, z. B. die Ressourcennutzung",
-                "Explanation_EN": "optimise internal resources used by the organisation e.g. resource usage"
+                "Explanation_DE": "Optimierung interner Ressourcen, die von der Organisation genutzt werden, z. B. die Ressourcennutzung.",
+                "Explanation_EN": "Optimise activities and services for the Controller, meaning the company that controls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
                 "count": 28,
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
-                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
-                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
+                "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForConsumer",
                 "count": 10,
-                "Translation_DE": "Optimierung für den Verbraucher",
+                "Translation_DE": "Optimierung für den:die Verbraucher:in",
                 "Translation_EN": "Optimisation for Consumer",
-                "Explanation_DE": "Aktivitäten und Dienste für den Verbraucher oder Nutzer zu optimieren",
-                "Explanation_EN": "optimise activities and services for the consumer or user"
+                "Explanation_DE": "Aktivitäten und Dienste für Verbraucher:innen oder Nutzer:innen optimieren.",
+                "Explanation_EN": "Optimise activities and services for the consumer or user."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
                 "count": 2,
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
-                "Explanation_DE": "die Zahlungstransaktionen der Nutzer zu verarbeiten.",
-                "Explanation_EN": "process users’ payment transactions."
+                "Explanation_DE": "Die Zahlungstransaktionen der Nutzer:innen verarbeiten.",
+                "Explanation_EN": "Process users’ payment transactions."
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedAdvertising",
                 "count": 17,
                 "Translation_DE": "Personalisierte Werbung",
                 "Translation_EN": "Personalised Advertising",
-                "Explanation_DE": "personalisierte Werbung bereitstellen",
-                "Explanation_EN": "provide personalised advertising"
+                "Explanation_DE": "Personalisierte Werbung bereitstellen.",
+                "Explanation_EN": "Provide personalised advertising."
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAuthentication",
                 "count": 1,
-                "Translation_DE": "Registrierung Authentifizierung",
-                "Translation_EN": "Registration Authentication",
+                "Translation_DE": "Registrierung und Authentifizierung",
+                "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Register, authenticate, and identify in context of a service."
             },
             {
                 "dpv:Purpose": "dpv:Security",
                 "count": 7,
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
-                "Explanation_DE": "die Sicherheit z. B. von Daten gewährleisten und durchsetzen",
-                "Explanation_EN": "ensure and enforce security e.g. of data"
+                "Explanation_DE": "Die Sicherheit z. B. von Daten, gewährleisten und durchsetzen.",
+                "Explanation_EN": "Ensure and enforce security e.g. of data."
             },
             {
                 "dpv:Purpose": "dpv:SellTargettedAdvertisements",
                 "count": 13,
                 "Translation_DE": "Gezielte Werbung verkaufen",
                 "Translation_EN": "Sell Targetted Advertisements",
-                "Explanation_DE": "zielgerichtete Werbung verkaufen oder anbieten",
-                "Explanation_EN": "sell or provide targetted advertisements"
+                "Explanation_DE": "Zielgerichtete Werbung verkaufen oder anbieten.",
+                "Explanation_EN": "Sell or provide targetted advertisements."
             },
             {
                 "dpv:Purpose": "dpv:ServiceOptimization",
                 "count": 1,
                 "Translation_DE": "Service-Optimierung",
-                "Translation_EN": "Service Optimization",
-                "Explanation_DE": "Service oder Aktivität optimieren",
-                "Explanation_EN": "optimise service or activity"
+                "Translation_EN": "Service Optimization,",
+                "Explanation_DE": "Service oder Aktivität optimieren.",
+                "Explanation_EN": "Optimise service or activity."
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
                 "count": 21,
                 "Translation_DE": "Dienstpersonalisierung",
                 "Translation_EN": "Service Personalization",
-                "Explanation_DE": "Dienstleistung oder Aktivität personalisieren",
-                "Explanation_EN": "personalise service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität personalisieren.",
+                "Explanation_EN": "Personalise service or activity."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
                 "count": 40,
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
-                "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
-                "Explanation_EN": "provide service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
+                "Explanation_EN": "Provide service or activity."
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
                 "count": 15,
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
-                "Explanation_DE": "Berechnen, Analysieren und Berichten von Benutzerverhalten und Ereignissen für einen Dienst oder ein Produkt.",
-                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+                "Explanation_DE": ",Berechnen, Analysieren und Berichten von Benutzer:innen-Verhalten und -Ereignissen für einen Dienst oder ein Produkt.",
+                "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
             },
             {
                 "dpv:Purpose": "unspecified",
                 "count": 1,
-                "Translation_DE": "unspezifiziert",
-                "Translation_EN": "unspecified",
-                "Explanation_DE": "Zweck nicht spezifiziert",
-                "Explanation_EN": "purpose unspecified"
+                "Translation_DE": "Unspezifiziert",
+                "Translation_EN": "Unspecified",
+                "Explanation_DE": "Zweck nicht spezifiziert.",
+                "Explanation_EN": "Purpose unspecified."
             }
         ],
         "dataTypesShared": [
@@ -32695,216 +32695,216 @@
                 "count": 19,
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
-                "Explanation_DE": "Werbung und werbliche Ansprache",
-                "Explanation_EN": "Advertising and sending messages with ad content"
+                "Explanation_DE": "Werbung und werbliche Ansprache.",
+                "Explanation_EN": "Advertising and sending messages with ad content."
             },
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
                 "count": 1003,
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
-                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für den Controller",
-                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller"
+                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
                 "count": 708,
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
-                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z.B. in einem Unternehmen",
-                "Explanation_EN": "conduct research in a commercial setting e.g. in a company"
+                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z. B. in einem Unternehmen.",
+                "Explanation_EN": "Conduct research in a commercial setting e.g. in a company."
             },
             {
                 "dpv:Purpose": "dpv:CommunicationForCustomerCare",
                 "count": 266,
-                "Translation_DE": "Kommunikation zur Kundenbetreuung",
+                "Translation_DE": "Kommunikation zur Kund:innen-Betreuung",
                 "Translation_EN": "Communication for Customer Care",
-                "Explanation_DE": "mit Nutzern per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen zu kommunizieren.",
-                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests."
+                "Explanation_DE": "Mit Nutzer:innen per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen kommunizieren.",
+                "Explanation_EN": "Communicate with users via email, phone, sms, chat or push messages regarding your requests."
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
                 "count": 427,
-                "Translation_DE": "Kundenbetreuung",
+                "Translation_DE": "Kund:innen-Betreuung",
                 "Translation_EN": "Customer Care",
-                "Explanation_DE": "Hilfestellung bei Kundenbeschwerden und -zufriedenheit geben",
-                "Explanation_EN": "provide assistance for customer complaints and satisfaction"
+                "Explanation_DE": "Hilfestellung bei Kund:innen-Beschwerden und -Zufriedenheit geben.",
+                "Explanation_EN": "Provide assistance for customer complaints and satisfaction."
             },
             {
                 "dpv:Purpose": "dpv:DeliveryOfGoods",
                 "count": 8,
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
-                "Explanation_DE": "Waren und Dienstleistungen ausliefern",
-                "Explanation_EN": "deliver goods and services"
+                "Explanation_DE": "Waren und Dienstleistungen ausliefern.",
+                "Explanation_EN": "Deliver goods and services."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
                 "count": 147,
                 "Translation_DE": "Direktmarketing",
-                "Translation_EN": "Direct arketing",
-                "Explanation_DE": "Direktmarketing durchführen, d.h. Marketing, das direkt an die Person gerichtet ist",
-                "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual"
+                "Translation_EN": "Direct marketing",
+                "Explanation_DE": "Direktmarketing durchführen, d.h. gezieltes Marketing, das direkt an eine individuelle Person gerichtet ist.",
+                "Explanation_EN": "Carry out direct marketing i.e. marketing communicated directly to the individual."
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
                 "count": 2943,
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
-                "Explanation_DE": "Betrug erkennen und verhindern",
-                "Explanation_EN": "detect and prevent fraud"
+                "Explanation_DE": "Betrug erkennen und verhindern.",
+                "Explanation_EN": "Detect and prevent fraud."
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
                 "count": 1703,
                 "Translation_DE": "Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
-                "Explanation_DE": "Identität verifizieren und autorisieren",
-                "Explanation_EN": "verify and authorise identity"
+                "Explanation_DE": "Identität verifizieren und autorisieren.",
+                "Explanation_EN": "Verify and authorise identity."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
                 "count": 454,
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
-                "Explanation_DE": "bestehende Produkte und Dienstleistungen zu verbessern",
-                "Explanation_EN": "improve existing products and services"
+                "Explanation_DE": "Bestehende Produkte und Dienstleistungen verbessern.",
+                "Explanation_EN": "Improve existing products and services."
             },
             {
                 "dpv:Purpose": "dpv:ImproveInternalCRMProcesses",
                 "count": 10,
                 "Translation_DE": "Interne CRM-Prozesse verbessern",
                 "Translation_EN": "Improve internal CRM Processes",
-                "Explanation_DE": "Verbesserung der Kundenbeziehungsmanagement-Prozesse (CRM)",
-                "Explanation_EN": "improve customer-relationship management (CRM) processes"
+                "Explanation_DE": "Verbesserung der Kund:innen-Beziehungsmanagement-Prozesse (CRM).",
+                "Explanation_EN": "Improve customer-relationship management (CRM) processes."
             },
             {
                 "dpv:Purpose": "dpv:IncreaseServiceRobustness",
                 "count": 192,
                 "Translation_DE": "Service-Robustheit erhöhen",
                 "Translation_EN": "Increase Service Robustness",
-                "Explanation_DE": "die Robustheit und Ausfallsicherheit von Diensten zu verbessern",
-                "Explanation_EN": "improve the robustness and resilience of services"
+                "Explanation_DE": "Die Robustheit und Ausfallsicherheit von Diensten verbessern.",
+                "Explanation_EN": "Improve the robustness and resilience of services."
             },
             {
                 "dpv:Purpose": "dpv:InternalResourceOptimisation",
                 "count": 85,
                 "Translation_DE": "Interne Ressourcen-Optimierung",
                 "Translation_EN": "Internal Resource Optimisation",
-                "Explanation_DE": "Optimierung interner Ressourcen, die von der Organisation genutzt werden, z. B. die Ressourcennutzung",
-                "Explanation_EN": "optimise internal resources used by the organisation e.g. resource usage"
+                "Explanation_DE": "Optimierung interner Ressourcen, die von der Organisation genutzt werden, z. B. die Ressourcennutzung.",
+                "Explanation_EN": "Optimise activities and services for the Controller, meaning the company that controls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
                 "count": 380,
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
-                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
-                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
+                "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
                 "count": 772,
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
-                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben",
-                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service"
+                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
+                "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForConsumer",
                 "count": 8,
-                "Translation_DE": "Optimierung für den Verbraucher",
+                "Translation_DE": "Optimierung für den:die Verbraucher:in",
                 "Translation_EN": "Optimisation for Consumer",
-                "Explanation_DE": "Aktivitäten und Dienste für den Verbraucher oder Nutzer zu optimieren",
-                "Explanation_EN": "optimise activities and services for the consumer or user"
+                "Explanation_DE": "Aktivitäten und Dienste für Verbraucher:innen oder Nutzer:innen optimieren.",
+                "Explanation_EN": "Optimise activities and services for the consumer or user."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForController",
                 "count": 112,
-                "Translation_DE": "Optimierung für Controller",
+                "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
-                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Controller",
-                "Explanation_EN": "optimise activities and services for the Controller"
+                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
+                "Explanation_EN": "Optimise activities and services for the Controller."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
                 "count": 1857,
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
-                "Explanation_DE": "die Zahlungstransaktionen der Nutzer zu verarbeiten.",
-                "Explanation_EN": "process users’ payment transactions."
+                "Explanation_DE": "Die Zahlungstransaktionen der Nutzer:innen verarbeiten.",
+                "Explanation_EN": "Process users’ payment transactions."
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedAdvertising",
                 "count": 200,
                 "Translation_DE": "Personalisierte Werbung",
                 "Translation_EN": "Personalised Advertising",
-                "Explanation_DE": "personalisierte Werbung bereitstellen",
-                "Explanation_EN": "provide personalised advertising"
+                "Explanation_DE": "Personalisierte Werbung bereitstellen.",
+                "Explanation_EN": "Provide personalised advertising."
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAuthentication",
                 "count": 84,
-                "Translation_DE": "Registrierung Authentifizierung",
-                "Translation_EN": "Registration Authentication",
+                "Translation_DE": "Registrierung und Authentifizierung",
+                "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Register, authenticate, and identify in context of a service."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
                 "count": 472,
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
-                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben",
-                "Explanation_EN": "conduct research and development for new methods, products, or services"
+                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben.",
+                "Explanation_EN": "Conduct research and development for new methods, products, or services."
             },
             {
                 "dpv:Purpose": "dpv:Security",
                 "count": 10,
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
-                "Explanation_DE": "die Sicherheit z. B. von Daten gewährleisten und durchsetzen",
-                "Explanation_EN": "ensure and enforce security e.g. of data"
+                "Explanation_DE": "Die Sicherheit z. B. von Daten, gewährleisten und durchsetzen.",
+                "Explanation_EN": "Ensure and enforce security e.g. of data."
             },
             {
                 "dpv:Purpose": "dpv:SellProductsToDataSubject",
                 "count": 23,
-                "Translation_DE": "Produkte an Datensubjekte verkaufen",
+                "Translation_DE": "Produkte an betroffene Personen verkaufen",
                 "Translation_EN": "Sell Products to Data Subject",
-                "Explanation_DE": "Produkte oder Dienstleistungen verkaufen",
-                "Explanation_EN": "sell products or services"
+                "Explanation_DE": "Produkte oder Dienstleistungen verkaufen.",
+                "Explanation_EN": "Sell products or services."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
                 "count": 607,
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
-                "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
-                "Explanation_EN": "provide service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
+                "Explanation_EN": "Provide service or activity."
             },
             {
                 "dpv:Purpose": "dpv:SocialMediaMarketing",
                 "count": 60,
                 "Translation_DE": "Soziale Medien",
                 "Translation_EN": "Social Media",
-                "Explanation_DE": "über und in sozialen Medien vermarkten.",
-                "Explanation_EN": "market through and on social media."
+                "Explanation_DE": "Über und in sozialen Medien vermarkten.",
+                "Explanation_EN": "Market through and on social media."
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
                 "count": 646,
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
-                "Explanation_DE": "Berechnen, Analysieren und Berichten von Benutzerverhalten und Ereignissen für einen Dienst oder ein Produkt.",
-                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+                "Explanation_DE": ",Berechnen, Analysieren und Berichten von Benutzer:innen-Verhalten und -Ereignissen für einen Dienst oder ein Produkt.",
+                "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
             },
             {
                 "dpv:Purpose": "unspecified",
                 "count": 36,
-                "Translation_DE": "unspezifiziert",
-                "Translation_EN": "unspecified",
-                "Explanation_DE": "Zweck nicht spezifiziert",
-                "Explanation_EN": "purpose unspecified"
+                "Translation_DE": "Unspezifiziert",
+                "Translation_EN": "Unspecified",
+                "Explanation_DE": "Zweck nicht spezifiziert.",
+                "Explanation_EN": "Purpose unspecified."
             }
         ],
         "dataTypesShared": [
@@ -37958,240 +37958,240 @@
                 "count": 25,
                 "Translation_DE": "Akademische Forschung",
                 "Translation_EN": "Academic Research",
-                "Explanation_DE": "Forschung in einem akademischen Kontext, z. B. innerhalb von Universitäten, durchführen oder unterstützen",
-                "Explanation_EN": "conduct or assist with research conducted in an academic context e.g. within universities"
+                "Explanation_DE": "Forschung in einem akademischen Kontext, z. B. durch die Durchführung oder Unterstützung von Universitäten.",
+                "Explanation_EN": "Conduct or assist with research conducted in an academic context e.g. within universities."
             },
             {
                 "dpv:Purpose": "dpv:Advertising",
                 "count": 40,
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
-                "Explanation_DE": "Werbung und werbliche Ansprache",
-                "Explanation_EN": "Advertising and sending messages with ad content"
+                "Explanation_DE": "Werbung und werbliche Ansprache.",
+                "Explanation_EN": "Advertising and sending messages with ad content."
             },
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
                 "count": 60,
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
-                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für den Controller",
-                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller"
+                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
                 "count": 50,
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
-                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z.B. in einem Unternehmen",
-                "Explanation_EN": "conduct research in a commercial setting e.g. in a company"
+                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z. B. in einem Unternehmen.",
+                "Explanation_EN": "Conduct research in a commercial setting e.g. in a company."
             },
             {
                 "dpv:Purpose": "dpv:CommunicationForCustomerCare",
                 "count": 9,
-                "Translation_DE": "Kommunikation zur Kundenbetreuung",
+                "Translation_DE": "Kommunikation zur Kund:innen-Betreuung",
                 "Translation_EN": "Communication for Customer Care",
-                "Explanation_DE": "mit Nutzern per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen zu kommunizieren.",
-                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests."
+                "Explanation_DE": "Mit Nutzer:innen per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen kommunizieren.",
+                "Explanation_EN": "Communicate with users via email, phone, sms, chat or push messages regarding your requests."
             },
             {
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 8,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
-                "Explanation_DE": "personalisierte Empfehlungen erstellen und bereitstellen",
-                "Explanation_EN": "create and provide personalised recommendations"
+                "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
+                "Explanation_EN": "Create and provide personalised recommendations."
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
                 "count": 9,
-                "Translation_DE": "Kundenbetreuung",
+                "Translation_DE": "Kund:innen-Betreuung",
                 "Translation_EN": "Customer Care",
-                "Explanation_DE": "Hilfestellung bei Kundenbeschwerden und -zufriedenheit geben",
-                "Explanation_EN": "provide assistance for customer complaints and satisfaction"
+                "Explanation_DE": "Hilfestellung bei Kund:innen-Beschwerden und -Zufriedenheit geben.",
+                "Explanation_EN": "Provide assistance for customer complaints and satisfaction."
             },
             {
                 "dpv:Purpose": "dpv:DeliveryOfGoods",
                 "count": 14,
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
-                "Explanation_DE": "Waren und Dienstleistungen ausliefern",
-                "Explanation_EN": "deliver goods and services"
+                "Explanation_DE": "Waren und Dienstleistungen ausliefern.",
+                "Explanation_EN": "Deliver goods and services."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
                 "count": 39,
                 "Translation_DE": "Direktmarketing",
-                "Translation_EN": "Direct arketing",
-                "Explanation_DE": "Direktmarketing durchführen, d.h. Marketing, das direkt an die Person gerichtet ist",
-                "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual"
+                "Translation_EN": "Direct marketing",
+                "Explanation_DE": "Direktmarketing durchführen, d.h. gezieltes Marketing, das direkt an eine individuelle Person gerichtet ist.",
+                "Explanation_EN": "Carry out direct marketing i.e. marketing communicated directly to the individual."
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
                 "count": 149,
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
-                "Explanation_DE": "Betrug erkennen und verhindern",
-                "Explanation_EN": "detect and prevent fraud"
+                "Explanation_DE": "Betrug erkennen und verhindern.",
+                "Explanation_EN": "Detect and prevent fraud."
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
                 "count": 26,
                 "Translation_DE": "Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
-                "Explanation_DE": "Identität verifizieren und autorisieren",
-                "Explanation_EN": "verify and authorise identity"
+                "Explanation_DE": "Identität verifizieren und autorisieren.",
+                "Explanation_EN": "Verify and authorise identity."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
                 "count": 119,
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
-                "Explanation_DE": "bestehende Produkte und Dienstleistungen zu verbessern",
-                "Explanation_EN": "improve existing products and services"
+                "Explanation_DE": "Bestehende Produkte und Dienstleistungen verbessern.",
+                "Explanation_EN": "Improve existing products and services."
             },
             {
                 "dpv:Purpose": "dpv:IncreaseServiceRobustness",
                 "count": 27,
                 "Translation_DE": "Service-Robustheit erhöhen",
                 "Translation_EN": "Increase Service Robustness",
-                "Explanation_DE": "die Robustheit und Ausfallsicherheit von Diensten zu verbessern",
-                "Explanation_EN": "improve the robustness and resilience of services"
+                "Explanation_DE": "Die Robustheit und Ausfallsicherheit von Diensten verbessern.",
+                "Explanation_EN": "Improve the robustness and resilience of services."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
                 "count": 116,
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
-                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
-                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
+                "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
                 "count": 53,
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
-                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben",
-                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service"
+                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
+                "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service."
             },
             {
                 "dpv:Purpose": "dpv:NonCommercialResearch",
                 "count": 25,
                 "Translation_DE": "Nicht-kommerzielle Forschung",
                 "Translation_EN": "Non-Commercial Research",
-                "Explanation_DE": "Forschung in einem nicht-kommerziellen Umfeld betreiben, z. B. für eine Non-Profit-Organisation (NGO)",
-                "Explanation_EN": "conduct research in a non-commercial setting e.g. for a non-profit-organisation (NGO)"
+                "Explanation_DE": "Forschung in einem nicht-kommerziellen Umfeld betreiben, z. B. für eine Non-Profit-Organisation (NGO).",
+                "Explanation_EN": "Conduct research in a non-commercial setting e.g. for a non-profit-organisation (NGO)."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForConsumer",
                 "count": 25,
-                "Translation_DE": "Optimierung für den Verbraucher",
+                "Translation_DE": "Optimierung für den:die Verbraucher:in",
                 "Translation_EN": "Optimisation for Consumer",
-                "Explanation_DE": "Aktivitäten und Dienste für den Verbraucher oder Nutzer zu optimieren",
-                "Explanation_EN": "optimise activities and services for the consumer or user"
+                "Explanation_DE": "Aktivitäten und Dienste für Verbraucher:innen oder Nutzer:innen optimieren.",
+                "Explanation_EN": "Optimise activities and services for the consumer or user."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
                 "count": 53,
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
-                "Explanation_DE": "die Zahlungstransaktionen der Nutzer zu verarbeiten.",
-                "Explanation_EN": "process users’ payment transactions."
+                "Explanation_DE": "Die Zahlungstransaktionen der Nutzer:innen verarbeiten.",
+                "Explanation_EN": "Process users’ payment transactions."
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedAdvertising",
                 "count": 41,
                 "Translation_DE": "Personalisierte Werbung",
                 "Translation_EN": "Personalised Advertising",
-                "Explanation_DE": "personalisierte Werbung bereitstellen",
-                "Explanation_EN": "provide personalised advertising"
+                "Explanation_DE": "Personalisierte Werbung bereitstellen.",
+                "Explanation_EN": "Provide personalised advertising."
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAndAuthentication",
                 "count": 1,
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
-                "Explanation_DE": "sich zu registrieren, zu authentifizieren und im Zusammenhang mit einem Dienst zu identifizieren",
-                "Explanation_EN": "register, authenticate, and identify in context of a service."
+                "Explanation_DE": "Sich registrieren, authentifizieren und im Zusammenhang mit einem Dienst identifizieren.",
+                "Explanation_EN": "Register, authenticate, and identify in context of a service."
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAuthentication",
                 "count": 9,
-                "Translation_DE": "Registrierung Authentifizierung",
-                "Translation_EN": "Registration Authentication",
+                "Translation_DE": "Registrierung und Authentifizierung",
+                "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Register, authenticate, and identify in context of a service."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
                 "count": 77,
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
-                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben",
-                "Explanation_EN": "conduct research and development for new methods, products, or services"
+                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben.",
+                "Explanation_EN": "Conduct research and development for new methods, products, or services."
             },
             {
                 "dpv:Purpose": "dpv:Security",
                 "count": 114,
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
-                "Explanation_DE": "die Sicherheit z. B. von Daten gewährleisten und durchsetzen",
-                "Explanation_EN": "ensure and enforce security e.g. of data"
+                "Explanation_DE": "Die Sicherheit z. B. von Daten, gewährleisten und durchsetzen.",
+                "Explanation_EN": "Ensure and enforce security e.g. of data."
             },
             {
                 "dpv:Purpose": "dpv:SellInsightsFromData",
                 "count": 41,
                 "Translation_DE": "Einblicke aus Daten verkaufen",
-                "Translation_EN": "Sell Insightsfrom Data",
-                "Explanation_DE": "aus der Analyse von Daten gewonnene Erkenntnisse verkaufen oder kommerziell bereitstellen",
-                "Explanation_EN": "sell or commercially provide insights obtained from analysis of data"
+                "Translation_EN": "Sell Insights from Data",
+                "Explanation_DE": "Aus der Analyse von Daten gewonnene Erkenntnisse verkaufen oder kommerziell bereitstellen.",
+                "Explanation_EN": "Sell or commercially provide insights obtained from analysis of data."
             },
             {
                 "dpv:Purpose": "dpv:SellTargettedAdvertisements",
                 "count": 130,
                 "Translation_DE": "Gezielte Werbung verkaufen",
                 "Translation_EN": "Sell Targetted Advertisements",
-                "Explanation_DE": "zielgerichtete Werbung verkaufen oder anbieten",
-                "Explanation_EN": "sell or provide targetted advertisements"
+                "Explanation_DE": "Zielgerichtete Werbung verkaufen oder anbieten.",
+                "Explanation_EN": "Sell or provide targetted advertisements."
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
                 "count": 22,
                 "Translation_DE": "Dienstpersonalisierung",
                 "Translation_EN": "Service Personalization",
-                "Explanation_DE": "Dienstleistung oder Aktivität personalisieren",
-                "Explanation_EN": "personalise service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität personalisieren.",
+                "Explanation_EN": "Personalise service or activity."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
                 "count": 128,
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
-                "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
-                "Explanation_EN": "provide service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
+                "Explanation_EN": "Provide service or activity."
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
                 "count": 136,
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
-                "Explanation_DE": "Berechnen, Analysieren und Berichten von Benutzerverhalten und Ereignissen für einen Dienst oder ein Produkt.",
-                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+                "Explanation_DE": ",Berechnen, Analysieren und Berichten von Benutzer:innen-Verhalten und -Ereignissen für einen Dienst oder ein Produkt.",
+                "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
             },
             {
                 "dpv:Purpose": "dpv:UserInterfacePersonalisation",
                 "count": 39,
-                "Translation_DE": "Personalisierung der Benutzeroberfläche",
+                "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
-                "Explanation_DE": "Oberflächen für den Benutzer personalisieren",
-                "Explanation_EN": "personalise interfaces presented to the user"
+                "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
+                "Explanation_EN": "Personalise interfaces presented to the user."
             },
             {
                 "dpv:Purpose": "unspecified",
                 "count": 82,
-                "Translation_DE": "unspezifiziert",
-                "Translation_EN": "unspecified",
-                "Explanation_DE": "Zweck nicht spezifiziert",
-                "Explanation_EN": "purpose unspecified"
+                "Translation_DE": "Unspezifiziert",
+                "Translation_EN": "Unspecified",
+                "Explanation_DE": "Zweck nicht spezifiziert.",
+                "Explanation_EN": "Purpose unspecified."
             }
         ],
         "dataTypesShared": [
@@ -39891,136 +39891,136 @@
                 "count": 39,
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
-                "Explanation_DE": "Werbung und werbliche Ansprache",
-                "Explanation_EN": "Advertising and sending messages with ad content"
+                "Explanation_DE": "Werbung und werbliche Ansprache.",
+                "Explanation_EN": "Advertising and sending messages with ad content."
             },
             {
                 "dpv:Purpose": "dpv:Analytics",
                 "count": 76,
                 "Translation_DE": "Analytik",
                 "Translation_EN": "Analytics",
-                "Explanation_DE": "Benutzerverhalten und Ereignisse für einen Dienst oder ein Produkt zu berechnen, zu analysieren und zu melden.",
-                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+                "Explanation_DE": "Benutzer:innen-Verhalten und Ereignisse für einen Dienst oder ein Produkt berechnen, analysieren und melden.",
+                "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
             },
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
                 "count": 81,
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
-                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für den Controller",
-                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller"
+                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
                 "count": 27,
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
-                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z.B. in einem Unternehmen",
-                "Explanation_EN": "conduct research in a commercial setting e.g. in a company"
+                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z. B. in einem Unternehmen.",
+                "Explanation_EN": "Conduct research in a commercial setting e.g. in a company."
             },
             {
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 19,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
-                "Explanation_DE": "personalisierte Empfehlungen erstellen und bereitstellen",
-                "Explanation_EN": "create and provide personalised recommendations"
+                "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
+                "Explanation_EN": "Create and provide personalised recommendations."
             },
             {
                 "dpv:Purpose": "dpv:DeliveryOfGoods",
                 "count": 19,
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
-                "Explanation_DE": "Waren und Dienstleistungen ausliefern",
-                "Explanation_EN": "deliver goods and services"
+                "Explanation_DE": "Waren und Dienstleistungen ausliefern.",
+                "Explanation_EN": "Deliver goods and services."
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
                 "count": 58,
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
-                "Explanation_DE": "Betrug erkennen und verhindern",
-                "Explanation_EN": "detect and prevent fraud"
+                "Explanation_DE": "Betrug erkennen und verhindern.",
+                "Explanation_EN": "Detect and prevent fraud."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
                 "count": 58,
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
-                "Explanation_DE": "bestehende Produkte und Dienstleistungen zu verbessern",
-                "Explanation_EN": "improve existing products and services"
+                "Explanation_DE": "Bestehende Produkte und Dienstleistungen verbessern.",
+                "Explanation_EN": "Improve existing products and services."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
                 "count": 19,
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
-                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
-                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
+                "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForConsumer",
                 "count": 19,
-                "Translation_DE": "Optimierung für den Verbraucher",
+                "Translation_DE": "Optimierung für den:die Verbraucher:in",
                 "Translation_EN": "Optimisation for Consumer",
-                "Explanation_DE": "Aktivitäten und Dienste für den Verbraucher oder Nutzer zu optimieren",
-                "Explanation_EN": "optimise activities and services for the consumer or user"
+                "Explanation_DE": "Aktivitäten und Dienste für Verbraucher:innen oder Nutzer:innen optimieren.",
+                "Explanation_EN": "Optimise activities and services for the consumer or user."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForController",
                 "count": 2,
-                "Translation_DE": "Optimierung für Controller",
+                "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
-                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Controller",
-                "Explanation_EN": "optimise activities and services for the Controller"
+                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
+                "Explanation_EN": "Optimise activities and services for the Controller."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
                 "count": 19,
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
-                "Explanation_DE": "die Zahlungstransaktionen der Nutzer zu verarbeiten.",
-                "Explanation_EN": "process users’ payment transactions."
+                "Explanation_DE": "Die Zahlungstransaktionen der Nutzer:innen verarbeiten.",
+                "Explanation_EN": "Process users’ payment transactions."
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedAdvertising",
                 "count": 33,
                 "Translation_DE": "Personalisierte Werbung",
                 "Translation_EN": "Personalised Advertising",
-                "Explanation_DE": "personalisierte Werbung bereitstellen",
-                "Explanation_EN": "provide personalised advertising"
+                "Explanation_DE": "Personalisierte Werbung bereitstellen.",
+                "Explanation_EN": "Provide personalised advertising."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
                 "count": 102,
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
-                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben",
-                "Explanation_EN": "conduct research and development for new methods, products, or services"
+                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben.",
+                "Explanation_EN": "Conduct research and development for new methods, products, or services."
             },
             {
                 "dpv:Purpose": "dpv:Security",
                 "count": 38,
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
-                "Explanation_DE": "die Sicherheit z. B. von Daten gewährleisten und durchsetzen",
-                "Explanation_EN": "ensure and enforce security e.g. of data"
+                "Explanation_DE": "Die Sicherheit z. B. von Daten, gewährleisten und durchsetzen.",
+                "Explanation_EN": "Ensure and enforce security e.g. of data."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
                 "count": 104,
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
-                "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
-                "Explanation_EN": "provide service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
+                "Explanation_EN": "Provide service or activity."
             },
             {
                 "dpv:Purpose": "unspecified",
                 "count": 28,
-                "Translation_DE": "unspezifiziert",
-                "Translation_EN": "unspecified",
-                "Explanation_DE": "Zweck nicht spezifiziert",
-                "Explanation_EN": "purpose unspecified"
+                "Translation_DE": "Unspezifiziert",
+                "Translation_EN": "Unspecified",
+                "Explanation_DE": "Zweck nicht spezifiziert.",
+                "Explanation_EN": "Purpose unspecified."
             }
         ],
         "dataTypesShared": [
@@ -41472,192 +41472,192 @@
                 "count": 190,
                 "Translation_DE": "Werbung",
                 "Translation_EN": "Advertising",
-                "Explanation_DE": "Werbung und werbliche Ansprache",
-                "Explanation_EN": "Advertising and sending messages with ad content"
+                "Explanation_DE": "Werbung und werbliche Ansprache.",
+                "Explanation_EN": "Advertising and sending messages with ad content."
             },
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
                 "count": 117,
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
-                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für den Controller",
-                "Explanation_EN": "carry out activities with a commercial interest i.e. of profit or benefit to the Controller"
+                "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
                 "count": 75,
                 "Translation_DE": "Kommerzielle Forschung",
                 "Translation_EN": "Commercial Research",
-                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z.B. in einem Unternehmen",
-                "Explanation_EN": "conduct research in a commercial setting e.g. in a company"
+                "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z. B. in einem Unternehmen.",
+                "Explanation_EN": "Conduct research in a commercial setting e.g. in a company."
             },
             {
                 "dpv:Purpose": "dpv:CommunicationForCustomerCare",
                 "count": 27,
-                "Translation_DE": "Kommunikation zur Kundenbetreuung",
+                "Translation_DE": "Kommunikation zur Kund:innen-Betreuung",
                 "Translation_EN": "Communication for Customer Care",
-                "Explanation_DE": "mit Nutzern per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen zu kommunizieren.",
-                "Explanation_EN": "communicate with users via email, phone, sms, chat or push messages regarding your requests."
+                "Explanation_DE": "Mit Nutzer:innen per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen kommunizieren.",
+                "Explanation_EN": "Communicate with users via email, phone, sms, chat or push messages regarding your requests."
             },
             {
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 3,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
                 "Translation_EN": "Create Personalized Recommendations",
-                "Explanation_DE": "personalisierte Empfehlungen erstellen und bereitstellen",
-                "Explanation_EN": "create and provide personalised recommendations"
+                "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
+                "Explanation_EN": "Create and provide personalised recommendations."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
                 "count": 27,
                 "Translation_DE": "Direktmarketing",
-                "Translation_EN": "Direct arketing",
-                "Explanation_DE": "Direktmarketing durchführen, d.h. Marketing, das direkt an die Person gerichtet ist",
-                "Explanation_EN": "carry out direct marketing i.e. marketing communicated directly to the individual"
+                "Translation_EN": "Direct marketing",
+                "Explanation_DE": "Direktmarketing durchführen, d.h. gezieltes Marketing, das direkt an eine individuelle Person gerichtet ist.",
+                "Explanation_EN": "Carry out direct marketing i.e. marketing communicated directly to the individual."
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
                 "count": 53,
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
-                "Explanation_DE": "Betrug erkennen und verhindern",
-                "Explanation_EN": "detect and prevent fraud"
+                "Explanation_DE": "Betrug erkennen und verhindern.",
+                "Explanation_EN": "Detect and prevent fraud."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
                 "count": 58,
                 "Translation_DE": "Bestehende Produkte und Dienstleistungen verbessern",
                 "Translation_EN": "Improve Existing Products and Services",
-                "Explanation_DE": "bestehende Produkte und Dienstleistungen zu verbessern",
-                "Explanation_EN": "improve existing products and services"
+                "Explanation_DE": "Bestehende Produkte und Dienstleistungen verbessern.",
+                "Explanation_EN": "Improve existing products and services."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
                 "count": 122,
                 "Translation_DE": "Rechtskonformität",
                 "Translation_EN": "Legal Compliance",
-                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu erreichen.",
-                "Explanation_EN": "fulfil obligations or requirements towards achieving compliance with law or regulations."
+                "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
+                "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
                 "count": 102,
                 "Translation_DE": "Marketing",
                 "Translation_EN": "Marketing",
-                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben",
-                "Explanation_EN": "carry out marketing i.e. promoting, selling, and distributing a product or service"
+                "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
+                "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service."
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForController",
                 "count": 1,
-                "Translation_DE": "Optimierung für Controller",
+                "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
-                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für den Controller",
-                "Explanation_EN": "optimise activities and services for the Controller"
+                "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
+                "Explanation_EN": "Optimise activities and services for the Controller."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
                 "count": 18,
                 "Translation_DE": "Bezahlung",
                 "Translation_EN": "Payment",
-                "Explanation_DE": "die Zahlungstransaktionen der Nutzer zu verarbeiten.",
-                "Explanation_EN": "process users’ payment transactions."
+                "Explanation_DE": "Die Zahlungstransaktionen der Nutzer:innen verarbeiten.",
+                "Explanation_EN": "Process users’ payment transactions."
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedAdvertising",
                 "count": 6,
                 "Translation_DE": "Personalisierte Werbung",
                 "Translation_EN": "Personalised Advertising",
-                "Explanation_DE": "personalisierte Werbung bereitstellen",
-                "Explanation_EN": "provide personalised advertising"
+                "Explanation_DE": "Personalisierte Werbung bereitstellen.",
+                "Explanation_EN": "Provide personalised advertising."
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAndAuthentication",
                 "count": 5,
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
-                "Explanation_DE": "sich zu registrieren, zu authentifizieren und im Zusammenhang mit einem Dienst zu identifizieren",
-                "Explanation_EN": "register, authenticate, and identify in context of a service."
+                "Explanation_DE": "Sich registrieren, authentifizieren und im Zusammenhang mit einem Dienst identifizieren.",
+                "Explanation_EN": "Register, authenticate, and identify in context of a service."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
                 "count": 27,
                 "Translation_DE": "Forschung und Entwicklung",
                 "Translation_EN": "Research and Development",
-                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben",
-                "Explanation_EN": "conduct research and development for new methods, products, or services"
+                "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben.",
+                "Explanation_EN": "Conduct research and development for new methods, products, or services."
             },
             {
                 "dpv:Purpose": "dpv:Security",
                 "count": 172,
                 "Translation_DE": "Sicherheit",
                 "Translation_EN": "Security",
-                "Explanation_DE": "die Sicherheit z. B. von Daten gewährleisten und durchsetzen",
-                "Explanation_EN": "ensure and enforce security e.g. of data"
+                "Explanation_DE": "Die Sicherheit z. B. von Daten, gewährleisten und durchsetzen.",
+                "Explanation_EN": "Ensure and enforce security e.g. of data."
             },
             {
                 "dpv:Purpose": "dpv:SellDataToThirdParties",
                 "count": 1,
                 "Translation_DE": "Daten an Dritte verkaufen",
                 "Translation_EN": "Sell Data to Third Parties",
-                "Explanation_DE": "Daten oder Informationen an Dritte verkaufen",
-                "Explanation_EN": "sell data or information to third parties"
+                "Explanation_DE": "Daten oder Informationen an Dritte verkaufen.",
+                "Explanation_EN": "Sell data or information to third parties."
             },
             {
                 "dpv:Purpose": "dpv:SellTargettedAdvertisements",
                 "count": 17,
                 "Translation_DE": "Gezielte Werbung verkaufen",
                 "Translation_EN": "Sell Targetted Advertisements",
-                "Explanation_DE": "zielgerichtete Werbung verkaufen oder anbieten",
-                "Explanation_EN": "sell or provide targetted advertisements"
+                "Explanation_DE": "Zielgerichtete Werbung verkaufen oder anbieten.",
+                "Explanation_EN": "Sell or provide targetted advertisements."
             },
             {
                 "dpv:Purpose": "dpv:ServiceOptimization",
                 "count": 30,
                 "Translation_DE": "Service-Optimierung",
-                "Translation_EN": "Service Optimization",
-                "Explanation_DE": "Service oder Aktivität optimieren",
-                "Explanation_EN": "optimise service or activity"
+                "Translation_EN": "Service Optimization,",
+                "Explanation_DE": "Service oder Aktivität optimieren.",
+                "Explanation_EN": "Optimise service or activity."
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
                 "count": 5,
                 "Translation_DE": "Dienstpersonalisierung",
                 "Translation_EN": "Service Personalization",
-                "Explanation_DE": "Dienstleistung oder Aktivität personalisieren",
-                "Explanation_EN": "personalise service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität personalisieren.",
+                "Explanation_EN": "Personalise service or activity."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
                 "count": 192,
                 "Translation_DE": "Dienstbereitstellung",
                 "Translation_EN": "Service Provision",
-                "Explanation_DE": "Dienstleistung oder Aktivität anbieten",
-                "Explanation_EN": "provide service or activity"
+                "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
+                "Explanation_EN": "Provide service or activity."
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
                 "count": 65,
                 "Translation_DE": "Verwendungsanalyse",
                 "Translation_EN": "Usage Analytics",
-                "Explanation_DE": "Berechnen, Analysieren und Berichten von Benutzerverhalten und Ereignissen für einen Dienst oder ein Produkt.",
-                "Explanation_EN": "calculate, analyse, and report user behaviour and events for a service or product."
+                "Explanation_DE": ",Berechnen, Analysieren und Berichten von Benutzer:innen-Verhalten und -Ereignissen für einen Dienst oder ein Produkt.",
+                "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
             },
             {
                 "dpv:Purpose": "dpv:UserInterfacePersonalisation",
                 "count": 1,
-                "Translation_DE": "Personalisierung der Benutzeroberfläche",
+                "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
-                "Explanation_DE": "Oberflächen für den Benutzer personalisieren",
-                "Explanation_EN": "personalise interfaces presented to the user"
+                "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
+                "Explanation_EN": "Personalise interfaces presented to the user."
             },
             {
                 "dpv:Purpose": "unspecified",
                 "count": 7,
-                "Translation_DE": "unspezifiziert",
-                "Translation_EN": "unspecified",
-                "Explanation_DE": "Zweck nicht spezifiziert",
-                "Explanation_EN": "purpose unspecified"
+                "Translation_DE": "Unspezifiziert",
+                "Translation_EN": "Unspecified",
+                "Explanation_DE": "Zweck nicht spezifiziert.",
+                "Explanation_EN": "Purpose unspecified."
             }
         ],
         "dataTypesShared": [
