@@ -260,10 +260,14 @@ const CompanyBubbles = ({
             .style("line-height", "120%")
             .style("color", "#f7fafc")
             .html(explanation);
-        const divHeight = div.node().getBoundingClientRect().height;
+        const scaleFactor =
+            containerRect.height /
+            container.node().getBoundingClientRect().height;
+        const divHeight =
+            div.node().getBoundingClientRect().height * scaleFactor;
         foreignObject
             .attr("y", topExplanation ? 0 : containerRect.height - divHeight)
-            .attr("height", divHeight);
+            .style("overflow", "visible");
     }
 
     const renderFunctions = {
