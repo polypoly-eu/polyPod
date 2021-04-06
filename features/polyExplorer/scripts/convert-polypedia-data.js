@@ -44,9 +44,9 @@ function parseDescription(legalEntityData) {
     const descriptionEmpty = Object.values(description).every(
         (value) => value === null
     );
-    // We currently hard code "Wikipedia" as source, until we get the data from
-    // polyPedia as well.
-    const source = "Wikipedia";
+    // We currently hard code the source, until we get the data from polyPedia
+    // as well.
+    const source = "Wikipedia, polyPedia";
     dataIssueLog.sourceHardCoded = true;
     return {
         value: descriptionEmpty ? null : description,
