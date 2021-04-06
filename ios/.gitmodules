@@ -4,7 +4,3 @@
 [submodule "Submodules/Features/questionnaire-feature"]
 	path = ios/Submodules/Features/questionnaire-feature
 	url = git@github.com:polypoly-eu/questionnaire-feature.git
-[submodule "Submodules/podigree"]
-	path = ios/Submodules/podigree
-	url = git@github.com:polypoly-eu/podigree.git
-
