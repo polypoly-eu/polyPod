@@ -50,8 +50,8 @@ class FeaturesWallet {
     
     func importFeatures() {
         createFeaturesFolder()
-        importFeature("podCheck")
-        importFeature("questionnaire-feature")
+        importFeature("polyExplorer")
+        importFeature("polyPreview")
     }
     
     private func createFeaturesFolder() {

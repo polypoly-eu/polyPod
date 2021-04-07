@@ -1,6 +1,0 @@
-[submodule "Submodules/Features/podCheck-feature"]
-	path = ios/Submodules/Features/podCheck-feature
-	url = git@github.com:polypoly-eu/podCheck-feature.git
-[submodule "Submodules/Features/questionnaire-feature"]
-	path = ios/Submodules/Features/questionnaire-feature
-	url = git@github.com:polypoly-eu/questionnaire-feature.git
