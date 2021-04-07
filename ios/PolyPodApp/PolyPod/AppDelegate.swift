@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FeaturesWallet.shared.cleanFeatures()
         FeaturesWallet.shared.importFeatures()
         
-        LocationTracker.shared.startLocationLogging()
+        // Location tracking is disabled for now - no feature needs it
+        //LocationTracker.shared.startLocationLogging()
         
         let managedContext = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
