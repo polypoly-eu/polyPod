@@ -2,11 +2,11 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import "../jurisdictionInfo/jurisdictionInfo.css";
-import ExplorationInfoScreen from "../../../components/explorationInfoScreen/explorationInfoScreen.jsx";
+import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
 
 const JurisdictionInfo = ({ onClose }) => {
     return (
-        <ExplorationInfoScreen
+        <InfoScreen
             className="jurisdiction-info"
             headline={i18n.t("explorationJurisdictionInfoScreen:headline")}
             onClose={onClose}
@@ -181,7 +181,7 @@ const JurisdictionInfo = ({ onClose }) => {
                     __html: i18n.t("dataRegionInfoScreen:undisclosed.text"),
                 }}
             ></div>
-        </ExplorationInfoScreen>
+        </InfoScreen>
     );
 };
 

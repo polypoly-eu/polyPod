@@ -1,13 +1,13 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import ExplorationInfoScreen from "../../components/explorationInfoScreen/explorationInfoScreen.jsx";
+import InfoScreen from "../../components/infoScreen/infoScreen.jsx";
 
 import "./dataRegionInfo.css";
 
 const DataRegionInfo = ({ onClose }) => {
     return (
-        <ExplorationInfoScreen
+        <InfoScreen
             className="data-region-info-screen"
             light={true}
             onClose={onClose}
@@ -159,7 +159,7 @@ const DataRegionInfo = ({ onClose }) => {
                     __html: i18n.t("dataRegionInfoScreen:undisclosed.text"),
                 }}
             ></div>
-        </ExplorationInfoScreen>
+        </InfoScreen>
     );
 };
 

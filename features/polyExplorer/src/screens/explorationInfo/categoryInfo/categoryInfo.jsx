@@ -3,11 +3,11 @@ import React from "react";
 import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
 import globals from "../../../data/global.json";
-import ExplorationInfoScreen from "../../../components/explorationInfoScreen/explorationInfoScreen.jsx";
+import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
 
 const CategoryInfo = ({ category, company, onClose }) => {
     return (
-        <ExplorationInfoScreen
+        <InfoScreen
             className="category-info"
             headline={i18n.t("explorationCategoryInfoScreen:headline")}
             onClose={onClose}
@@ -39,7 +39,7 @@ const CategoryInfo = ({ category, company, onClose }) => {
                     </p>
                 </div>
             ) : null}
-        </ExplorationInfoScreen>
+        </InfoScreen>
     );
 };
 

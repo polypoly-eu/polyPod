@@ -1,11 +1,11 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import ExplorationInfoScreen from "../../../components/explorationInfoScreen/explorationInfoScreen.jsx";
+import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
 
 const CompaniesInfo = ({ onClose }) => {
     return (
-        <ExplorationInfoScreen
+        <InfoScreen
             className="companies-info"
             headline={i18n.t("explorationCompaniesInfoScreen:headline")}
             onClose={onClose}
@@ -20,7 +20,7 @@ const CompaniesInfo = ({ onClose }) => {
                     "common:country.code"
                 )}.svg`}
             />
-        </ExplorationInfoScreen>
+        </InfoScreen>
     );
 };
 

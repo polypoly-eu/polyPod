@@ -1,11 +1,11 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import ExplorationInfoScreen from "../../../components/explorationInfoScreen/explorationInfoScreen.jsx";
+import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
 
 const PurposeInfo = ({ onClose }) => {
     return (
-        <ExplorationInfoScreen
+        <InfoScreen
             className="purpose-info"
             headline={i18n.t("explorationPurposeInfoScreen:headline")}
             onClose={onClose}
@@ -21,7 +21,7 @@ const PurposeInfo = ({ onClose }) => {
                     __html: i18n.t("explorationPurposeInfoScreen:text.2"),
                 }}
             />
-        </ExplorationInfoScreen>
+        </InfoScreen>
     );
 };
 
