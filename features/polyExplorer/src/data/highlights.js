@@ -478,7 +478,7 @@ export default {
             },
         },
         dataRecipient: {
-            name: "BYTEDANCE INC. (US)",
+            name: "ByteDance Ltd. (KY)",
             companyExplanation: {
                 de:
                     "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
