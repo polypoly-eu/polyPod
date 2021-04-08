@@ -1,8 +1,8 @@
 window.addEventListener("message", receiveMessage, false);
 
 function receiveMessage({ data }) {
-    if (data.command == "log") {
-        webkit.messageHandlers.log.postMessage(data);
+    if (["log", "podNav"].includes(data.command)) {
+        webkit.messageHandlers[data.command].postMessage(data);
     }
 }
 

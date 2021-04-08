@@ -27,6 +27,7 @@ class FeatureViewController: UIViewController {
         
         contentController.installUserScript("messagePort", forMainFrameOnly: true)
         contentController.installUserScript("domConsole", forMainFrameOnly: false)
+        contentController.installUserScript("podNav", forMainFrameOnly: false)
         
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
@@ -61,6 +62,8 @@ extension FeatureViewController: WKScriptMessageHandler {
                 self.doLog(data: body)
             case .Event:
                 self.doHandleEvent(messageBody: body)
+            case .PodNav:
+                self.doHandlePodNavCommand(messageBody: body)
             }
         }
     }
@@ -85,6 +88,40 @@ extension FeatureViewController: WKScriptMessageHandler {
         }
         
         print("WebView: " + text)
+    }
+
+    private func doHandlePodNavCommand(messageBody: [String: Any]) {
+        guard let messageText = messageBody["text"] as? String else {
+            print("Error: Bad podNav message - missing/unexpected message text: \(messageBody)")
+            return
+        }
+
+        let textData = messageText.data(using: .utf8)!
+        guard let jsonData =
+                try? JSONSerialization.jsonObject(with: textData, options: [])
+                as? [String: Any]
+        else {
+            print("Error: Bad podNav command message - invalid JSON data: \(messageBody)")
+            return
+        }
+
+        guard let commandName = jsonData["name"] as? String
+        else {
+            print("Error: Bad podNav command message - missing/unexpected command name: \(jsonData)")
+            return
+        }
+
+        let commandData = jsonData["data"]
+        switch (commandName) {
+        case "setTitle":
+            self.title = commandData as? String
+        case "setActiveActions":
+            let actions = commandData as! [String]
+            // TODO: Actually change the active actions
+            print("setActiveActions(\(actions)) called")
+        default:
+            print("Error: Bad podNav command message - unknown command '\(commandName)'")
+        }
     }
 }
 

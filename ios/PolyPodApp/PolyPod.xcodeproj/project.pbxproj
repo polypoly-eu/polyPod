@@ -113,6 +113,8 @@
 		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManager+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManager+Additions.swift */; };
+		E923AAF7261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
+		E923AAF8261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
 		E9361680261DA363001AE91F /* polyPreview.zip in Resources */ = {isa = PBXBuildFile; fileRef = E936167E261DA363001AE91F /* polyPreview.zip */; };
 		E9361681261DA363001AE91F /* polyExplorer.zip in Resources */ = {isa = PBXBuildFile; fileRef = E936167F261DA363001AE91F /* polyExplorer.zip */; };
 /* End PBXBuildFile section */
@@ -195,6 +197,7 @@
 		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManager+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Additions.swift"; sourceTree = "<group>"; };
+		E923AAF6261E155500E0A2A8 /* podNav.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = podNav.js; sourceTree = "<group>"; };
 		E936167E261DA363001AE91F /* polyPreview.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = polyPreview.zip; sourceTree = "<group>"; };
 		E936167F261DA363001AE91F /* polyExplorer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = polyExplorer.zip; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -361,6 +364,7 @@
 				1A8F4874247E40C600089217 /* PostOffice.swift */,
 				1A183E9124AF1E860025F6BB /* PolyApiError.swift */,
 				1ABADBEB24EBD02C00369791 /* LocationTracker.swift */,
+				E923AAF6261E155500E0A2A8 /* podNav.js */,
 			);
 			path = PodApi;
 			sourceTree = "<group>";
@@ -492,6 +496,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E923AAF8261E155500E0A2A8 /* podNav.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +508,7 @@
 				E9361680261DA363001AE91F /* polyPreview.zip in Resources */,
 				1ABADBCD24E2E2F800369791 /* pod.js in Resources */,
 				1A00DFF724569F3A0049F3F7 /* pod.html in Resources */,
+				E923AAF7261E155500E0A2A8 /* podNav.js in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
 				1AB4F37E2508D64600E66BCC /* Settings.bundle in Resources */,
 				1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */,
