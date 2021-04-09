@@ -18,10 +18,7 @@ const Infographic = ({ type, texts }) => {
 
     useEffect(() => {
         const svg = d3.select(`#${type}`);
-        console.log(svg);
         Object.keys(texts).forEach((key) => {
-            console.log(key);
-            console.log(svg.select(`#${key}`));
             const textField = svg.select(`#${key}`);
             const box = textField.node().getBBox();
             textField.remove();
