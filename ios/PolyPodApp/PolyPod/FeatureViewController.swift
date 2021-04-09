@@ -15,6 +15,8 @@ class FeatureViewController: UIViewController {
     var featureName: String!
 
     private var backButton: UIBarButtonItem?
+    private var infoButton: UIBarButtonItem?
+    private var searchButton: UIBarButtonItem?
     private var activeActions: [String] = []
     
     override func viewDidLoad() {
@@ -23,12 +25,8 @@ class FeatureViewController: UIViewController {
         title = featureName
 
         super.viewDidLoad()
-        navigationItem.hidesBackButton = true
-        backButton = UIBarButtonItem(title: "Close",
-                                     style: UIBarButtonItem.Style.plain,
-                                     target: self,
-                                     action: #selector(FeatureViewController.back))
-        navigationItem.leftBarButtonItem = backButton
+
+        initNavigationBar()
 
         let contentController = WKUserContentController();
         MessageName.allCases.forEach {
@@ -56,13 +54,40 @@ class FeatureViewController: UIViewController {
         webView.loadFileURL(featureFileUrl, allowingReadAccessTo: featureUrl)
     }
 
+    private func initNavigationBar() {
+        navigationItem.hidesBackButton = true
+        backButton = UIBarButtonItem(title: "Close",
+                                     style: UIBarButtonItem.Style.plain,
+                                     target: self,
+                                     action: #selector(FeatureViewController.back))
+        navigationItem.leftBarButtonItem = backButton
+
+        infoButton = UIBarButtonItem(title: "Info",
+                                     style: UIBarButtonItem.Style.plain,
+                                     target: self,
+                                     action: #selector(FeatureViewController.info))
+
+        searchButton = UIBarButtonItem(title: "Search",
+                                       style: UIBarButtonItem.Style.plain,
+                                       target: self,
+                                       action: #selector(FeatureViewController.search))
+    }
+
     @objc func back() {
         if !triggerAction("back") {
             navigationController?.popViewController(animated: true)
         }
     }
 
-    private func triggerAction(_ action: String) -> Bool {
+    @objc func search() {
+        triggerAction("search")
+    }
+
+    @objc func info() {
+        triggerAction("info")
+    }
+
+    @discardableResult private func triggerAction(_ action: String) -> Bool {
         if !activeActions.contains(action) {
             return false
         }
@@ -153,9 +178,16 @@ extension FeatureViewController: WKScriptMessageHandler {
         case "setTitle":
             title = commandData as? String
         case "setActiveActions":
-            // TODO: Support the 'search' and 'info' actions
             activeActions = commandData as! [String]
             backButton?.title = activeActions.contains("back") ? "Back" : "Close"
+            var actionButtons: [UIBarButtonItem] = []
+            if activeActions.contains("search") {
+                actionButtons.append(searchButton!)
+            }
+            if activeActions.contains("info") {
+                actionButtons.append(infoButton!)
+            }
+            navigationItem.rightBarButtonItems = actionButtons
         default:
             print("Error: Bad podNav command message - unknown command '\(commandName)'")
         }
