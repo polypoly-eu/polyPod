@@ -1,7 +1,11 @@
+.jurisdiction-info {
+    position: relative;
+}
+
 .jurisdiction-info .tree-legend {
     display: flex;
     flex-direction: row;
-    padding: 0 28px;
+    /* padding: 0 28px; */
 }
 
 .jurisdiction-info .tree-legend p {
@@ -13,7 +17,7 @@
     display: flex;
     box-sizing: border-box;
     flex-direction: row;
-    padding: 0 30px;
+    /* padding: 0 30px; */
 }
 
 .jurisdiction-info .legend {
@@ -59,7 +63,7 @@
 }
 
 .jurisdiction-info .legend-container .fixed-graphic {
-    width: 320px;
+    /* width: 320px; */
     margin: 0 auto 12px auto;
 }
 
@@ -72,7 +76,7 @@
 }
 
 .jurisdiction-info .separator {
-    width: 80%;
+    /* width: 80%; */
     border: 1px solid #8d9caf;
     margin: 24px auto;
 }
@@ -80,4 +84,6 @@
 .jurisdiction-info .map {
     padding: 0 0;
     background-color: #0f1938;
+    position: absolute;
+    left: 0;
 }

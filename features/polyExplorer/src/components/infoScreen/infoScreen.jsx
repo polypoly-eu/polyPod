@@ -7,7 +7,7 @@ import "./infoScreen.css";
 
 const InfoScreen = ({ className, headline, onClose, children }) => (
     <Screen className={className} light={true}>
-        <div className="exploration-info">
+        <div className="info">
             <h1>{headline}</h1>
             {children}
             <button onClick={() => onClose()}>
