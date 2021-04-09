@@ -188,6 +188,27 @@ extension FeatureViewController: WKScriptMessageHandler {
                 actionButtons.append(infoButton!)
             }
             navigationItem.rightBarButtonItems = actionButtons
+        case "openUrl":
+            guard let url = URL(string: commandData as? String ?? "") else {
+                print("Error: Bad podNav openUrl command data: \(String(describing: commandData))")
+                break
+            }
+            let alert = UIAlertController(title: "",
+                                          message: """
+                                          polyPreview möchte eine URL in Ihrem Browser öffnen:
+
+                                          \(url)
+
+                                          Zulassen?
+                                          """,
+                                          preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ja",
+                                          style: .default,
+                                          handler: { (action: UIAlertAction!) in
+                                            UIApplication.shared.open(url)
+                                          }))
+            alert.addAction(UIAlertAction(title: "Nein", style: .default))
+            present(alert, animated: true, completion: nil)
         default:
             print("Error: Bad podNav command message - unknown command '\(commandName)'")
         }

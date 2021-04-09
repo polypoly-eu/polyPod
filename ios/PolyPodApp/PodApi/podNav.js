@@ -1,5 +1,5 @@
 window.podNav = (() => {
-    const commands = ["setTitle", "setActiveActions"];
+    const commands = ["setTitle", "setActiveActions", "openUrl"];
     function sendPodNavCommand(name, data) {
         window.parent.postMessage({
             command: "podNav",
