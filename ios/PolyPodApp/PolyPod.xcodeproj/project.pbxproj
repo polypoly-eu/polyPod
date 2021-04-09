@@ -108,7 +108,6 @@
 		1AF46893241FBA7200E51B6D /* JSONSerialization+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */; };
 		1AF4689C2420D45800E51B6D /* FeatureListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */; };
 		1AF4689E2420D5F600E51B6D /* FeaturesWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */; };
-		1AF468A9242263FC00E51B6D /* polyLook.css in Resources */ = {isa = PBXBuildFile; fileRef = 1AF468A8242263FC00E51B6D /* polyLook.css */; };
 		1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AF242A34CF00E51B6D /* PolyIn.swift */; };
 		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
@@ -192,7 +191,6 @@
 		1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Additions.swift"; sourceTree = "<group>"; };
 		1AF4689B2420D45800E51B6D /* FeatureListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListViewController.swift; sourceTree = "<group>"; };
 		1AF4689D2420D5F600E51B6D /* FeaturesWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesWallet.swift; sourceTree = "<group>"; };
-		1AF468A8242263FC00E51B6D /* polyLook.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = polyLook.css; sourceTree = "<group>"; };
 		1AF468AF242A34CF00E51B6D /* PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyIn.swift; sourceTree = "<group>"; };
 		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
@@ -356,7 +354,6 @@
 				1A66F76D2493719B00ED4308 /* PolyIn */,
 				1A66F76C2493715400ED4308 /* PolyOut */,
 				1AA6DE5924192463008DB1B2 /* domConsole.js */,
-				1AF468A8242263FC00E51B6D /* polyLook.css */,
 				1ABADBCC24E2E2F700369791 /* pod.js */,
 				1A00DFF8245961FB0049F3F7 /* messagePort.js */,
 				1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */,
@@ -512,7 +509,6 @@
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
 				1AB4F37E2508D64600E66BCC /* Settings.bundle in Resources */,
 				1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */,
-				1AF468A9242263FC00E51B6D /* polyLook.css in Resources */,
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
 				E9361681261DA363001AE91F /* polyExplorer.zip in Resources */,
