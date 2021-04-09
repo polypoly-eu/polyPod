@@ -20,7 +20,7 @@ class FeatureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = featureName
+        title = featureName
 
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
