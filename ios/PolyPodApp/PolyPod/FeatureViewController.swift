@@ -32,11 +32,11 @@ class FeatureViewController: UIViewController {
         MessageName.allCases.forEach {
             contentController.add(self, name: $0.rawValue)
         }
-        
+
         contentController.installUserScript("messagePort", forMainFrameOnly: true)
         contentController.installUserScript("domConsole", forMainFrameOnly: false)
         contentController.installUserScript("podNav", forMainFrameOnly: false)
-        
+
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
 
