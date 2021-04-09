@@ -12,14 +12,24 @@ import WebKit
 class FeatureViewController: UIViewController {
 
     var webView: WKWebView!
-    
     var featureName: String!
+
+    private var backButton: UIBarButtonItem?
+    private var activeActions: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = featureName
-        
+
+        super.viewDidLoad()
+        navigationItem.hidesBackButton = true
+        backButton = UIBarButtonItem(title: "Close",
+                                     style: UIBarButtonItem.Style.plain,
+                                     target: self,
+                                     action: #selector(FeatureViewController.back))
+        navigationItem.leftBarButtonItem = backButton
+
         let contentController = WKUserContentController();
         MessageName.allCases.forEach {
             contentController.add(self, name: $0.rawValue)
@@ -46,6 +56,32 @@ class FeatureViewController: UIViewController {
         webView.loadFileURL(featureFileUrl, allowingReadAccessTo: featureUrl)
     }
 
+    @objc func back() {
+        if !triggerAction("back") {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+
+    private func triggerAction(_ action: String) -> Bool {
+        if !activeActions.contains(action) {
+            return false
+        }
+
+        // There is already a mechanism for sending messages to the feature's iframe,
+        // we should use that here instead of opening up a new channel.
+        let script = """
+        document.getElementById('harness').contentWindow.postMessage({
+            command: 'triggerPodNavAction',
+            action: '\(action)'
+        }, '*')
+        """
+        webView.evaluateJavaScript(script) { (_, error) in
+            if error != nil {
+                print("Failed to trigger podNav action '\(action)': \(String(describing: error))")
+            }
+        }
+        return true
+    }
 }
 
 extension FeatureViewController: WKScriptMessageHandler {
@@ -63,6 +99,7 @@ extension FeatureViewController: WKScriptMessageHandler {
             case .Event:
                 self.doHandleEvent(messageBody: body)
             case .PodNav:
+                // We should probably use an event message for this instead, rather than a custom new one.
                 self.doHandlePodNavCommand(messageBody: body)
             }
         }
@@ -116,9 +153,9 @@ extension FeatureViewController: WKScriptMessageHandler {
         case "setTitle":
             self.title = commandData as? String
         case "setActiveActions":
-            let actions = commandData as! [String]
-            // TODO: Actually change the active actions
-            print("setActiveActions(\(actions)) called")
+            // TODO: Support the 'search' and 'info' actions
+            activeActions = commandData as! [String]
+            backButton?.title = activeActions.contains("back") ? "Back" : "Close"
         default:
             print("Error: Bad podNav command message - unknown command '\(commandName)'")
         }

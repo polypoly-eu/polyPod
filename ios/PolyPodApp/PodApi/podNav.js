@@ -8,3 +8,8 @@ window.podNav = (() => {
     };
     return Object.fromEntries(commands.map((name) => [name, (data) => sendPodNavCommand(name, data)]));
 })();
+
+window.addEventListener("message", ({ data: { command, action } }) => {
+    if (command === "triggerPodNavAction")
+        podNav.actions[action]();
+}, false);
