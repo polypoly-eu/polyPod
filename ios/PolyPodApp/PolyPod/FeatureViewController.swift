@@ -151,7 +151,7 @@ extension FeatureViewController: WKScriptMessageHandler {
         let commandData = jsonData["data"]
         switch (commandName) {
         case "setTitle":
-            self.title = commandData as? String
+            title = commandData as? String
         case "setActiveActions":
             // TODO: Support the 'search' and 'info' actions
             activeActions = commandData as! [String]
