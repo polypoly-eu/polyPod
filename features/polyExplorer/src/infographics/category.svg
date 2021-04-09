@@ -1,0 +1,42 @@
+<svg width="299" height="196" viewBox="0 0 299 196" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="category">
+<circle id="Ellipse 271" cx="67.5" cy="22.5" r="22.5" fill="#3749A9"/>
+<circle id="Ellipse 272" opacity="0.3" cx="67.5" cy="78.5" r="22.5" fill="#3749A9"/>
+<text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="115" y="27.17">Data types in this category</tspan></text>
+<text id="text3" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="115" y="140.17">The size of each circle represents </tspan><tspan x="115" y="154.17">the number of times this datatype </tspan><tspan x="115" y="168.17">is shared with other companies.</tspan></text>
+<text id="text2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="115" y="83.17">Data types not in this category</tspan></text>
+<g id="Legend_Sizes">
+<g id="Bubbles">
+<circle id="Ellipse 263" cx="67.5" cy="182.5" r="9" stroke="#3749A9"/>
+<path id="Ellipse 264" d="M82.5 176.5C82.5 184.769 75.5755 191.5 67 191.5C58.4245 191.5 51.5 184.769 51.5 176.5C51.5 168.231 58.4245 161.5 67 161.5C75.5755 161.5 82.5 168.231 82.5 176.5Z" stroke="#3749A9"/>
+<path id="Ellipse 265" d="M88.5 169.5C88.5 181.661 78.8636 191.5 67 191.5C55.1364 191.5 45.5 181.661 45.5 169.5C45.5 157.339 55.1364 147.5 67 147.5C78.8636 147.5 88.5 157.339 88.5 169.5Z" stroke="#3749A9"/>
+<path id="Ellipse 266" d="M95.5 164.5C95.5 179.395 82.981 191.5 67.5 191.5C52.019 191.5 39.5 179.395 39.5 164.5C39.5 149.605 52.019 137.5 67.5 137.5C82.981 137.5 95.5 149.605 95.5 164.5Z" stroke="#3749A9"/>
+<circle id="Ellipse 267" cx="67" cy="160" r="31.5" stroke="#3749A9"/>
+<circle id="Ellipse 268" cx="67" cy="156" r="35.5" stroke="#3749A9"/>
+<circle id="Ellipse 269" cx="67" cy="153" r="38.5" stroke="#3749A9"/>
+</g>
+<g id="Scale">
+<g id="Lines">
+<path id="Line" d="M15.4688 191.5H44.5312" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_2" d="M15 173.5H25" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_3" d="M15.0781 147.5H19.9219" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_4" d="M15.0781 161.5H19.9219" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_5" d="M15.0781 137.5H19.9219" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_6" d="M15.0781 128.5H19.9219" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_7" d="M15.1562 120.5H24.8438" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_8" d="M15.4688 114.5H44.5312" stroke="#0F1938" stroke-linecap="square"/>
+</g>
+<g id="Numbers">
+<text id="18" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="0.492188" y="114.475">18</tspan></text>
+<text id="15" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="0.316406" y="122.475">15</tspan></text>
+<text id="12" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="0.248047" y="130.475">12</tspan></text>
+<text id="9" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="4.86719" y="139.475">9</tspan></text>
+<text id="6" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="4.86719" y="149.475">6</tspan></text>
+<text id="19" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="5.23828" y="162.475">3</tspan></text>
+<text id="1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="6.27344" y="175.475">1</tspan></text>
+<text id="0" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="4.75977" y="192.475">0</tspan></text>
+</g>
+</g>
+</g>
+</g>
+</svg>

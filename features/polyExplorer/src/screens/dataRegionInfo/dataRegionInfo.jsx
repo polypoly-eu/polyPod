@@ -42,8 +42,8 @@ const DataRegionInfo = ({ onClose }) => {
                         <p>{i18n.t("common:jurisdiction.undisclosed")}</p>
                     </div>
                 </div>
+                <p>{i18n.t("dataRegionInfoScreen:world")}</p>
             </div>
-            <p>{i18n.t("dataRegionInfoScreen:world")}</p>
             <h2 className="sub-heading">
                 {i18n.t("common:jurisdiction.euGdpr")}
             </h2>

@@ -1,14 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./infographic.css";
+import * as d3 from "d3";
 
-import i18n from "../../i18n.js";
+import infographics from "../../infographics/infographics.js";
 
-const Infographic = ({ svgName }) => {
-    const path = `./images/infographics/${svgName}_${i18n.t(
-        "explorationInfo:graphic.language.suffix"
-    )}.svg`;
+/* This component is used for displaying graphics (svg) with text that needs to be translated into different languages
+   To introduce a new infographic you need to:
+        1. Change the names of the text-elements in figma to either start with text (eg. text1), highlighted, bold etc. (see stylings in infographics.css)
+        2. Export svg from figma with "include 'id' attribute" checked and "outline text" unchecked
+        3. Register the svg in src/infographics/infographics.js
+        4. Add the desired strings to locales/<language>/infographic.json
+        5. Add the infographic component to the screen with type={"the name of the file (eg. dataTypes)"} and texts={(key used in figma graphic):i18n.t("infographic:<i18nkey>")}
+*/
 
-    return <object data={path} className="infographic" />;
+const Infographic = ({ type, texts }) => {
+    const infographic = infographics[type];
+
+    useEffect(() => {
+        const svg = d3.select(`#${type}`);
+        console.log(svg);
+        Object.keys(texts).forEach((key) => {
+            console.log(key);
+            console.log(svg.select(`#${key}`));
+            const textField = svg.select(`#${key}`);
+            const box = textField.node().getBBox();
+            textField.remove();
+            const foreignObject = svg
+                .append("foreignObject")
+                .attr("x", box.x)
+                .attr("width", box.width + 20);
+            const div = foreignObject.append("xhtml:div").html(texts[key]);
+            if (key.startsWith("highlighted"))
+                div.attr("class", "text-field highlighted");
+            else if (key.startsWith("bold"))
+                div.attr("class", "text-field bold");
+            else if (key.startsWith("jurisdiction-white"))
+                div.attr("class", "text-field jurisdiction-white");
+            else if (key.startsWith("jurisdiction-blue"))
+                div.attr("class", "text-field jurisdiction-blue");
+            else div.attr("class", "text-field");
+            const divHeight = div.node().getBoundingClientRect().height;
+            foreignObject
+                .attr("y", box.y + box.height / 2 - divHeight / 2)
+                .style("overflow", "visible");
+        });
+    });
+
+    return (
+        <div
+            className="infographic"
+            dangerouslySetInnerHTML={{ __html: infographic }}
+        ></div>
+    );
 };
 
 export default Infographic;

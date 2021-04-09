@@ -1,0 +1,18 @@
+<svg width="296" height="203" viewBox="0 0 296 203" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="featuredCompany">
+<g id="Bar">
+<text id="100" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="249.142" y="111.672">100</tspan></text>
+<text id="30" opacity="0.7" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="85.1495" y="111.672">30</tspan></text>
+<rect id="Rectangle 693" x="13.7295" y="88.0665" width="255.353" height="10.9409" rx="5.47044" stroke="#3749A9"/>
+<path id="Rectangle 692" d="M13.2295 93.537C13.2295 90.2396 15.9026 87.5665 19.1999 87.5665H77.9831V99.5074H19.1999C15.9025 99.5074 13.2295 96.8344 13.2295 93.537V93.537Z" fill="#3749A9"/>
+<line id="Line 164" opacity="0.7" x1="92.0957" y1="87.5665" x2="92.0957" y2="99.5074" stroke="#3749A9"/>
+<text id="highlighted1" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="24" letter-spacing="-0.01em"><tspan x="13.2295" y="78.5641">25 Data Entries</tspan></text>
+</g>
+<text id="text2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="157.446">Average value from all </tspan><tspan x="0" y="171.446">company information </tspan><tspan x="0" y="185.446">currently available in this </tspan><tspan x="0" y="199.446">category.</tspan></text>
+<text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="13.498" y="11.17">Max value for </tspan><tspan x="13.498" y="25.17">this company.</tspan></text>
+<line id="Line 163" x1="92.0605" y1="142.296" x2="92.0605" y2="117.419" stroke="#0F1938"/>
+<line id="Line 166" x1="44.8164" y1="55.7241" x2="44.8164" y2="30.8473" stroke="#0F1938"/>
+<line id="Line 165" x1="260.79" y1="142.296" x2="260.79" y2="117.419" stroke="#0F1938"/>
+<text id="text3" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="180.3" y="157.446">Highest value for a </tspan><tspan x="180.3" y="171.446">single company, based </tspan><tspan x="180.3" y="185.446">on currently available </tspan><tspan x="180.3" y="199.446">company information.</tspan></text>
+</g>
+</svg>

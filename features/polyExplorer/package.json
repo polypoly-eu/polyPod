@@ -33,7 +33,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rollup": "^2.26.11",
-    "rollup-plugin-copy": "^3.3.0"
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-svg": "^2.0.0"
   },
   "private": true,
   "dependencies": {

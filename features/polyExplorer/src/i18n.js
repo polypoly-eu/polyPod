@@ -21,6 +21,7 @@ import explorationCorrelationInfoScreenEn from "./locales/en/explorationCorrelat
 import explorationPurposeInfoScreenEn from "./locales/en/explorationPurposeInfoScreen.json";
 import explorationCompaniesInfoScreenEn from "./locales/en/explorationCompaniesInfoScreen.json";
 import explorationJurisdictionInfoScreenEn from "./locales/en/explorationJurisdictionInfoScreen.json";
+import infographicEn from "./locales/en/infographic.json";
 
 import commonDe from "./locales/de/common.json";
 import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
@@ -41,6 +42,7 @@ import explorationCorrelationInfoScreenDe from "./locales/de/explorationCorrelat
 import explorationPurposeInfoScreenDe from "./locales/de/explorationPurposeInfoScreen.json";
 import explorationCompaniesInfoScreenDe from "./locales/de/explorationCompaniesInfoScreen.json";
 import explorationJurisdictionInfoScreenDe from "./locales/de/explorationJurisdictionInfoScreen.json";
+import infographicDe from "./locales/de/infographic.json";
 
 const strings = {
     en: {
@@ -63,6 +65,7 @@ const strings = {
         explorationPurposeInfoScreen: explorationPurposeInfoScreenEn,
         explorationCompaniesInfoScreen: explorationCompaniesInfoScreenEn,
         explorationJurisdictionInfoScreen: explorationJurisdictionInfoScreenEn,
+        infographic: infographicEn,
     },
     de: {
         common: commonDe,
@@ -84,6 +87,7 @@ const strings = {
         explorationPurposeInfoScreen: explorationPurposeInfoScreenDe,
         explorationCompaniesInfoScreen: explorationCompaniesInfoScreenDe,
         explorationJurisdictionInfoScreen: explorationJurisdictionInfoScreenDe,
+        infographic: infographicDe,
     },
 };
 
