@@ -6,21 +6,21 @@
     "gaugeExplanation.entries":
         "Data Entries",
     "gaugeExplanation.first":
-        "Max value for this company",
+        "Maximale Anzahl für diese Firma",
     "gaugeExplanation.second":
-        "Max value for this company",
+        "Maximale Anzahl für diese Firma",
     "gaugeExplanation.third":
-        "Average value from all company information currently available in this category",
+        "Durchschnittlicher Wert aller derzeit verfügbaren Firmeninformationen in dieser Kategorie",
     "gaugeExplanation.fourth":
-        "Highest value for a single company, based on currently available company information",
+        "Wert der Firma, die in dieser Kategorie von allen derzeit verfügbaren Firmeninformationen, den höchsten Wert aufweist.",
     "headline.average":
         "Average amount of entries:",
     "text.average":
-        "Shows the average value in this category from all currently available company information.",
+        "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
     "headline.total":
         "Total amount of entries:",
     "text.total":
-        "Shows the highest value of a company in this category from the currently available company information.",
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
     "button.explore":
         "OK"
 }
