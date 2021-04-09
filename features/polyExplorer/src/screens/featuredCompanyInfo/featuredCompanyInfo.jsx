@@ -33,12 +33,14 @@ const FeaturedCompanyInfoScreen = ({ onClose }) => {
             headline={i18n.t("featuredCompanyInfoScreen:headline.main")}
             onClose={onClose}
         >
-            <p>{i18n.t("featuredCompanyInfoScreen:text.main")}</p>
-            <GaugeExplanationGraphic />
-            <h2>{i18n.t("featuredCompanyInfoScreen:headline.average")}</h2>
-            <p>{i18n.t("featuredCompanyInfoScreen:text.average")}</p>
-            <h2>{i18n.t("featuredCompanyInfoScreen:headline.total")}</h2>
-            <p>{i18n.t("featuredCompanyInfoScreen:text.total")}</p>
+            <div className="info-padding">
+                <p>{i18n.t("featuredCompanyInfoScreen:text.main")}</p>
+                <GaugeExplanationGraphic />
+                <h2>{i18n.t("featuredCompanyInfoScreen:headline.average")}</h2>
+                <p>{i18n.t("featuredCompanyInfoScreen:text.average")}</p>
+                <h2>{i18n.t("featuredCompanyInfoScreen:headline.total")}</h2>
+                <p>{i18n.t("featuredCompanyInfoScreen:text.total")}</p>
+            </div>
         </InfoScreen>
     );
 };

@@ -10,17 +10,19 @@ const PurposeInfo = ({ onClose }) => {
             headline={i18n.t("explorationPurposeInfoScreen:headline")}
             onClose={onClose}
         >
-            <p>{i18n.t("explorationPurposeInfoScreen:text.1")}</p>
-            <img
-                src={`./images/infographics/purpose/${i18n.t(
-                    "common:country.code"
-                )}.svg`}
-            />
-            <div
-                dangerouslySetInnerHTML={{
-                    __html: i18n.t("explorationPurposeInfoScreen:text.2"),
-                }}
-            />
+            <div className="info-padding">
+                <p>{i18n.t("explorationPurposeInfoScreen:text.1")}</p>
+                <img
+                    src={`./images/infographics/purpose/${i18n.t(
+                        "common:country.code"
+                    )}.svg`}
+                />
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: i18n.t("explorationPurposeInfoScreen:text.2"),
+                    }}
+                />
+            </div>
         </InfoScreen>
     );
 };

@@ -12,33 +12,35 @@ const CategoryInfo = ({ category, company, onClose }) => {
             headline={i18n.t("explorationCategoryInfoScreen:headline")}
             onClose={onClose}
         >
-            <p>
-                {
-                    globals.polypoly_parent_categories[category][
-                        i18n.t(
-                            "dataExplorationScreen:from.polyPedia.description"
-                        )
-                    ]
-                }
-            </p>
-            <img
-                src={`./images/infographics/category/${i18n.t(
-                    "common:country.code"
-                )}.svg`}
-            />
-            {highlights[company.name].dataTypeCategories[category]
-                .explanation ? (
-                <div>
-                    <h2>{i18n.t("explorationCategoryInfoScreen")}</h2>
-                    <p>
-                        {
-                            highlights[company.name].dataTypeCategories[
-                                category
-                            ].explanation[i18n.t("common:country.code")]
-                        }
-                    </p>
-                </div>
-            ) : null}
+            <div className="info-padding">
+                <p>
+                    {
+                        globals.polypoly_parent_categories[category][
+                            i18n.t(
+                                "dataExplorationScreen:from.polyPedia.description"
+                            )
+                        ]
+                    }
+                </p>
+                <img
+                    src={`./images/infographics/category/${i18n.t(
+                        "common:country.code"
+                    )}.svg`}
+                />
+                {highlights[company.name].dataTypeCategories[category]
+                    .explanation ? (
+                    <div>
+                        <h2>{i18n.t("explorationCategoryInfoScreen")}</h2>
+                        <p>
+                            {
+                                highlights[company.name].dataTypeCategories[
+                                    category
+                                ].explanation[i18n.t("common:country.code")]
+                            }
+                        </p>
+                    </div>
+                ) : null}
+            </div>
         </InfoScreen>
     );
 };

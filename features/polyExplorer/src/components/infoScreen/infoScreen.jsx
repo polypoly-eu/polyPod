@@ -8,11 +8,15 @@ import "./infoScreen.css";
 const InfoScreen = ({ className, headline, onClose, children }) => (
     <Screen className={className} light={true}>
         <div className="info">
-            <h1>{headline}</h1>
+            <div className="info-padding">
+                <h1>{headline}</h1>
+            </div>
             {children}
-            <button onClick={() => onClose()}>
-                {i18n.t("common:button.ok")}
-            </button>
+            <div className="info-padding">
+                <button onClick={() => onClose()}>
+                    {i18n.t("common:button.ok")}
+                </button>
+            </div>
         </div>
     </Screen>
 );

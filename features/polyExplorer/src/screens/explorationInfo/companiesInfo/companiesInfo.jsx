@@ -10,16 +10,18 @@ const CompaniesInfo = ({ onClose }) => {
             headline={i18n.t("explorationCompaniesInfoScreen:headline")}
             onClose={onClose}
         >
-            <div
-                dangerouslySetInnerHTML={{
-                    __html: i18n.t("explorationCompaniesInfoScreen:text.1"),
-                }}
-            />
-            <img
-                src={`./images/infographics/companies/${i18n.t(
-                    "common:country.code"
-                )}.svg`}
-            />
+            <div className="info-padding">
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: i18n.t("explorationCompaniesInfoScreen:text.1"),
+                    }}
+                />
+                <img
+                    src={`./images/infographics/companies/${i18n.t(
+                        "common:country.code"
+                    )}.svg`}
+                />
+            </div>
         </InfoScreen>
     );
 };

@@ -11,19 +11,20 @@ const CorrelationInfo = ({ company, onClose }) => {
             headline={i18n.t("explorationCorrelationInfoScreen:headline")}
             onClose={onClose}
         >
-            <p>{i18n.t("explorationCorrelationInfoScreen:text.1")}</p>
-            <img
-                src={`./images/infographics/correlation/${i18n.t(
-                    "common:country.code"
-                )}.svg`}
-            />
-            <p>
-                {
-                    highlights[company.name].dataTypeCorrelation.explanation[
-                        i18n.t("common:country.code")
-                    ]
-                }
-            </p>
+            <div className="info-padding">
+                <p>{i18n.t("explorationCorrelationInfoScreen:text.1")}</p>
+                <img
+                    src={`./images/infographics/correlation/${i18n.t(
+                        "common:country.code"
+                    )}.svg`}
+                />
+                <p>
+                    {
+                        highlights[company.name].dataTypeCorrelation
+                            .explanation[i18n.t("common:country.code")]
+                    }
+                </p>
+            </div>
         </InfoScreen>
     );
 };

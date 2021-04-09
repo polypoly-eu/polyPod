@@ -1,7 +1,3 @@
-.jurisdiction-info {
-    position: relative;
-}
-
 .jurisdiction-info .tree-legend {
     display: flex;
     flex-direction: row;
@@ -84,6 +80,4 @@
 .jurisdiction-info .map {
     padding: 0 0;
     background-color: #0f1938;
-    position: absolute;
-    left: 0;
 }
