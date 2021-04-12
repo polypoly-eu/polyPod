@@ -2,3 +2,38 @@
     display: block;
     margin: 0 auto;
 }
+
+.infographic svg {
+    display: block;
+    overflow: visible;
+    margin: 12px auto;
+}
+
+.infographic .text-field {
+    color: #0f1938;
+    font-size: 12px;
+    line-height: 120%;
+}
+
+.infographic .highlighted {
+    font-size: 24px;
+    color: #3749a9;
+    white-space: nowrap;
+}
+
+.infographic .bold {
+    font-weight: 600;
+}
+
+.infographic .jurisdiction-white {
+    color: white;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 6;
+}
+
+.infographic .jurisdiction-blue {
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 6;
+}

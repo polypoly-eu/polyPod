@@ -1,0 +1,18 @@
+<svg width="296" height="242" viewBox="0 0 296 242" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="jurisdiction">
+<g id="RU">
+<path id="path12" d="M296 223H227V242H296V223Z" fill="#FE8988"/>
+</g>
+<g id="CN">
+<path id="path13" d="M296 150H227V217H296V150Z" fill="#C5271E"/>
+</g>
+<rect id="EU-GDPR" width="221" height="180" fill="#60E6DE"/>
+<rect id="Five Eyes" y="186" width="221" height="56" fill="#EC453D"/>
+<rect id="text3" x="227" width="69" height="144" fill="#A9B6C6"/>
+<text id="jurisdiction-white2" fill="white" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="230" y="163.475">China</tspan></text>
+<text id="jurisdiction-white3" fill="white" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="230" y="236.475">Russia</tspan></text>
+<text id="jurisdiction-white1" fill="white" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="3" y="197.475">Five Eyes</tspan></text>
+<text id="jurisdiction-blue2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="230" y="12.475">Others</tspan></text>
+<text id="jurisdiction-blue1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="3" y="12.475">EU&#x2013;GDPR</tspan></text>
+</g>
+</svg>

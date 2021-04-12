@@ -2,6 +2,7 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
+import Infographic from "../../../components/infographic/infographic.jsx";
 
 const PurposeInfo = ({ onClose }) => {
     return (
@@ -12,10 +13,14 @@ const PurposeInfo = ({ onClose }) => {
         >
             <div className="info-padding">
                 <p>{i18n.t("explorationPurposeInfoScreen:text.1")}</p>
-                <img
-                    src={`./images/infographics/purpose/${i18n.t(
-                        "common:country.code"
-                    )}.svg`}
+                <Infographic
+                    type="purpose"
+                    texts={{
+                        bold1: i18n.t("infographic:purpose.bold1"),
+                        bold2: i18n.t("infographic:purpose.bold2"),
+                        text1: i18n.t("infographic:category.text1"),
+                        text2: i18n.t("infographic:category.text2"),
+                    }}
                 />
                 <div
                     dangerouslySetInnerHTML={{

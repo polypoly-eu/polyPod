@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import i18n from "../../i18n.js";
 import {
@@ -8,6 +8,7 @@ import {
     sortFilters,
 } from "../../companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import "./companyList.css";
 
@@ -43,6 +44,19 @@ const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
     );
 };
 
+//number of groups needed to fill first screen
+function getStartGroups(companyGroups) {
+    let numberGroups = 0;
+    let numberValues = 0;
+    const keys = Object.keys(companyGroups);
+    for (let e of keys) {
+        numberGroups++;
+        numberValues += companyGroups[e].length;
+        if (numberValues > 15) return keys[numberGroups];
+    }
+    return keys.pop();
+}
+
 const CompanyList = ({
     companies,
     globalData,
@@ -53,12 +67,62 @@ const CompanyList = ({
 }) => {
     const filteredCompanies = applyFilters(activeFilters, companies);
     const companyGroups = groupCompanies(filteredCompanies);
+    const allKeys = Object.keys(companyGroups);
+    const [loadedCompanies, setLoadedCompanies] = useState({});
+    const [toLoadKeys, setToLoadKeys] = useState(allKeys);
+    const [hasMore, setHasMore] = useState(true);
+    const listRef = useRef();
+
+    const handleLoadMoreData = () => {
+        if (toLoadKeys.length > 0) {
+            const moreCompanies = { ...loadedCompanies };
+            const loadKeys = [...toLoadKeys];
+            const newKey = loadKeys.shift();
+            moreCompanies[newKey] = companyGroups[newKey];
+            setToLoadKeys(loadKeys);
+            setLoadedCompanies(moreCompanies);
+        } else setHasMore(false);
+    };
+
+    const handleRemoveFilter = (field, value) => {
+        onRemoveFilter(field, value);
+        const newLoadedCompanies = {};
+        const filteredCompanies = applyFilters(activeFilters, companies);
+        const newCompanyGroups = groupCompanies(filteredCompanies);
+        const newKeys = Object.keys(newCompanyGroups);
+        const newStartGroups = getStartGroups(newCompanyGroups);
+        for (
+            let i = 0;
+            i <= Object.keys(newCompanyGroups).indexOf(newStartGroups);
+            i++
+        ) {
+            newLoadedCompanies[newKeys[i]] = newCompanyGroups[newKeys[i]];
+        }
+        setLoadedCompanies(newLoadedCompanies);
+        const toLoadKeys = [...newKeys];
+        toLoadKeys.splice(0, newKeys.indexOf(newStartGroups));
+        setToLoadKeys(toLoadKeys);
+        listRef.current.scrollTop = 0;
+    };
+
+    useEffect(() => {
+        const loadedCompanies = {};
+        const startGroups = getStartGroups(companyGroups);
+        for (let i = 0; i <= allKeys.indexOf(startGroups); i++) {
+            loadedCompanies[allKeys[i]] = companyGroups[allKeys[i]];
+        }
+        setLoadedCompanies(loadedCompanies);
+        const toLoadKeys = [...allKeys];
+        toLoadKeys.splice(0, allKeys.indexOf(startGroups));
+        setToLoadKeys(toLoadKeys);
+    }, []);
+
     return (
-        <div className="company-list">
+        <div id="company-list" className="company-list" ref={listRef}>
             <ActiveFilters
                 activeFilters={activeFilters}
                 globalData={globalData}
-                onRemoveFilter={onRemoveFilter}
+                onRemoveFilter={handleRemoveFilter}
             />
             <div
                 className={
@@ -70,22 +134,32 @@ const CompanyList = ({
                     className="filter-button"
                     onClick={onOpenFilters}
                 ></button>
-                {Object.entries(companyGroups).map(
-                    ([label, companies], index) => (
-                        <div key={index} className="company-group">
-                            <div className="company-group-label">{label}</div>
-                            <div className="company-group-companies">
-                                {companies.map((company, index) => (
-                                    <CompanyShortInfo
-                                        key={index}
-                                        company={company}
-                                        onOpenDetails={onOpenDetails}
-                                    />
-                                ))}
+                <InfiniteScroll
+                    dataLength={allKeys.length - toLoadKeys.length}
+                    next={handleLoadMoreData}
+                    scrollThreshold="80%"
+                    hasMore={hasMore}
+                    scrollableTarget="company-list"
+                >
+                    {Object.entries(loadedCompanies).map(
+                        ([label, companies], index) => (
+                            <div key={index} className="company-group">
+                                <div className="company-group-label">
+                                    {label}
+                                </div>
+                                <div className="company-group-companies">
+                                    {companies.map((company, index) => (
+                                        <CompanyShortInfo
+                                            key={index}
+                                            company={company}
+                                            onOpenDetails={onOpenDetails}
+                                        />
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    )
-                )}
+                        )
+                    )}
+                </InfiniteScroll>
             </div>
         </div>
     );

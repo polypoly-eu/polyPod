@@ -3,6 +3,7 @@ import React from "react";
 import i18n from "../../../i18n.js";
 import "../jurisdictionInfo/jurisdictionInfo.css";
 import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
+import Infographic from "../../../components/infographic/infographic.jsx";
 
 const JurisdictionInfo = ({ onClose }) => {
     return (
@@ -25,10 +26,25 @@ const JurisdictionInfo = ({ onClose }) => {
                         {i18n.t("explorationJurisdictionInfoScreen:legend.2")}
                     </p>
                 </div>
-                <img
-                    src={`./images/infographics/jurisdictions/1_${i18n.t(
-                        "common:country.code"
-                    )}.svg`}
+                <Infographic
+                    type="jurisdiction"
+                    texts={{
+                        "jurisdiction-blue1": i18n.t(
+                            "common:jurisdiction.euGdpr"
+                        ),
+                        "jurisdiction-blue2": i18n.t(
+                            "common:jurisdiction.undisclosed"
+                        ),
+                        "jurisdiction-white1": i18n.t(
+                            "common:jurisdiction.fiveEyes"
+                        ),
+                        "jurisdiction-white2": i18n.t(
+                            "common:jurisdiction.china"
+                        ),
+                        "jurisdiction-white3": i18n.t(
+                            "common:jurisdiction.russia"
+                        ),
+                    }}
                 />
                 <br />
                 <div className="tree-legend">
@@ -40,11 +56,7 @@ const JurisdictionInfo = ({ onClose }) => {
                     </p>
                 </div>
             </div>
-            <img
-                src={`./images/infographics/jurisdictions/2_${i18n.t(
-                    "common:country.code"
-                )}.svg`}
-            />
+            <Infographic type="jurisdiction2" texts={{}} />
             <div className="info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">

@@ -2,29 +2,9 @@ import React from "react";
 
 import i18n from "../../i18n.js";
 import InfoScreen from "../../components/infoScreen/infoScreen.jsx";
+import Infographic from "../../components/infographic/infographic.jsx";
 
 import "./featuredCompanyInfo.css";
-
-const GaugeExplanationGraphic = () => (
-    <div className="gauge-explanation-graphic">
-        <span className="gauge-explanation-entries">
-            {i18n.t("featuredCompanyInfoScreen:gaugeExplanation.entries")}
-        </span>
-        <span className="gauge-explanation-first">
-            {i18n.t("featuredCompanyInfoScreen:gaugeExplanation.first")}
-        </span>
-        <img srcSet="images/gauge-explanation-2x.png 2x"></img>
-        <span className="gauge-explanation-second">
-            {i18n.t("featuredCompanyInfoScreen:gaugeExplanation.second")}
-        </span>
-        <span className="gauge-explanation-third">
-            {i18n.t("featuredCompanyInfoScreen:gaugeExplanation.third")}
-        </span>
-        <span className="gauge-explanation-fourth">
-            {i18n.t("featuredCompanyInfoScreen:gaugeExplanation.fourth")}
-        </span>
-    </div>
-);
 
 const FeaturedCompanyInfoScreen = ({ onClose }) => {
     return (
@@ -35,7 +15,19 @@ const FeaturedCompanyInfoScreen = ({ onClose }) => {
         >
             <div className="info-padding">
                 <p>{i18n.t("featuredCompanyInfoScreen:text.main")}</p>
-                <GaugeExplanationGraphic />
+
+                <Infographic
+                    type="featuredCompany"
+                    texts={{
+                        highlighted1: i18n.t(
+                            "infographic:featuredCompany.highlighted1"
+                        ),
+                        text1: i18n.t("infographic:featuredCompany.text1"),
+                        text2: i18n.t("infographic:featuredCompany.text2"),
+                        text3: i18n.t("infographic:featuredCompany.text3"),
+                    }}
+                />
+
                 <h2>{i18n.t("featuredCompanyInfoScreen:headline.average")}</h2>
                 <p>{i18n.t("featuredCompanyInfoScreen:text.average")}</p>
                 <h2>{i18n.t("featuredCompanyInfoScreen:headline.total")}</h2>

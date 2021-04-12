@@ -2,9 +2,16 @@
 <!DOCTYPE resources [
     <!ENTITY nbsp "&#160;"><!-- non-breaking space, U+00A0 -->
 ]>
+<!--
+These strings are actually not being used yet - they would need to move to
+values-en, and have the 'en_' prefix removed from their name. But currently,
+that would break the app, since we are currently forcing it to be in German
+by not supplying English strings. So this file is merely for already putting
+all the English strings under version control.
+-->
 <resources>
-    <string name="settings_imprint_heading">Impressum</string>
-    <string name="settings_imprint_text">
+    <string name="en_settings_imprint_heading">Impressum</string>
+    <string name="en_settings_imprint_text">
 <![CDATA[
 <p>Angaben gemäß § 5 TMG</p>
 <p>pc polypoly coop SCE mbH<br/>
@@ -32,7 +39,7 @@
 ]]>
     </string>
 
-    <string name="settings_privacy_policy_text">
+    <string name="en_settings_privacy_policy_text">
 <![CDATA[
 <p>Datenschutz ist uns natürlich nicht nur ein wichtiges Anliegen, sondern wir setzen den Schutz der personenbezogenen Daten auch konkret um. Deshalb versuchen wir zunächst, möglichst wenig Daten zu erheben (Datensparsamkeit). Dort, wo wir dies doch tun, können Sie von uns erwarten, dass wir mit Ihren Daten sensibel und sorgfältig umgehen.</p>
 <p>Wir beachten die Vorschriften der <a href="https://dejure.org/gesetze/DSGVO" class="external-link" rel="nofollow">Datenschutzgrundverordnung</a>, des <a href="https://dejure.org/gesetze/BDSG" class="external-link" rel="nofollow">Bundesdatenschutz</a> – sowie des <a href="https://www.gesetze-im-internet.de/tmg/index.html" class="external-link" rel="nofollow">Telemediengesetzes</a> und werden personenbezogene Daten der Nutzer:innen nur in dem in dieser Datenschutzerklärung beschriebenen Umfang erheben und verarbeiten.</p>
@@ -57,9 +64,9 @@
 ]]>
     </string>
 
-    <string name="settings_terms_of_use_heading">Allgemeine Geschäftsbedingungen</string>
+    <string name="en_settings_terms_of_use_heading">Allgemeine Geschäftsbedingungen</string>
 
-    <string name="settings_terms_of_use_text">
+    <string name="en_settings_terms_of_use_text">
 <![CDATA[
 <p>Diese Allgemeinen Geschäftsbedingungen („Bedingungen", „Vereinbarung") sind eine Vereinbarung zwischen <strong>pc polypoly coop SCE mbH</strong> („Entwickler:innen der mobilen Applikation", „uns", „wir" oder „unser") und Ihnen („Nutzer:in", „Sie" oder „Ihr"). Dieser Vertrag regelt die allgemeinen Bedingungen für Ihre Nutzung der mobilen Anwendung polyPod und aller damit verbundenen Produkte und Dienste (zusammenfassend „mobile Anwendung" oder „Dienste").</p><h2>Altersvoraussetzung</h2>
 <p>Sie müssen mindestens 16 Jahre alt sein, um diese mobile Anwendung zu nutzen. Durch die Nutzung dieser mobilen Applikation und durch die Zustimmung zu dieser Vereinbarung garantieren und versichern Sie, dass Sie mindestens 16 Jahre alt sind.</p><h2>Links zu anderen mobilen Anwendungen</h2>

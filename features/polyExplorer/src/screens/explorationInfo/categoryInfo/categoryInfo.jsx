@@ -4,6 +4,7 @@ import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
 import globals from "../../../data/global.json";
 import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
+import Infographic from "../../../components/infographic/infographic.jsx";
 
 const CategoryInfo = ({ category, company, onClose }) => {
     return (
@@ -22,10 +23,13 @@ const CategoryInfo = ({ category, company, onClose }) => {
                         ]
                     }
                 </p>
-                <img
-                    src={`./images/infographics/category/${i18n.t(
-                        "common:country.code"
-                    )}.svg`}
+                <Infographic
+                    type="category"
+                    texts={{
+                        text1: i18n.t("infographic:category.text1"),
+                        text2: i18n.t("infographic:category.text2"),
+                        text3: i18n.t("infographic:category.text3"),
+                    }}
                 />
                 {highlights[company.name].dataTypeCategories[category]
                     .explanation ? (
