@@ -19,7 +19,7 @@
 .swiper-pagination-bullets {
     bottom: 0 !important;
     padding: 8px 0 20px 0;
-    background: linear-gradient(transparent, #0f1938 40%);
+    background: linear-gradient(rgba(15, 25, 56, 0) 0%, #0f1938 40%);
     pointer-events: none;
 }
 
