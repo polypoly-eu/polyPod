@@ -3,7 +3,7 @@
     max-width: 412px;
     margin: 0 auto;
     overflow: hidden scroll;
-    /* padding-top: 24px; */
+    padding-top: 24px;
     /* padding: 30px 32px 0 32px; */
 }
 
@@ -59,9 +59,9 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 412px;
-    /* padding: 4px 28px; */
+    padding: 4px 0;
 }
 
 .info-padding {
-    padding: 30px 32px 0 32px;
+    padding: 0 32px;
 }
