@@ -37,6 +37,11 @@ class FeatureViewController: UIViewController {
         contentController.installUserScript("domConsole", forMainFrameOnly: false)
         contentController.installUserScript("podNav", forMainFrameOnly: false)
 
+        // The original idea was that the feature explicitly loads pod.js, but in order to
+        // still support the polyfill-based development approach, we explicitly inject it,
+        // at least for now.
+        contentController.installUserScript("pod", forMainFrameOnly: false)
+
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
 

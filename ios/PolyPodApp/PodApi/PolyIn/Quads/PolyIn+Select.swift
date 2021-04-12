@@ -81,6 +81,11 @@ extension PolyIn {
             format += formatItem
         }
         
+        // Passing an empty matcher selects all elements
+        if format == "" {
+            return (NSPredicate(value: true), filterOperation)
+        }
+
         let predicate = NSPredicate(format: format, argumentArray: arguments)
         return (predicate, filterOperation)
     }

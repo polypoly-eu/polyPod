@@ -47,6 +47,10 @@ extension PolyIn {
                 let childNode = createNode(for: childExtendedData, in: managedContext)
                 node.setValue(childNode, forKey: key)
             } else {
+                if entity.attributesByName[key] == nil {
+                    print("Warning: Attempted to set attribute \(key) which is not in \(entityName)")
+                    continue
+                }
                 node.setValue(value, forKeyPath: key)
             }
         }
