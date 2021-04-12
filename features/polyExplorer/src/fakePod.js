@@ -1,33 +1,60 @@
 "use strict";
 
-const fakeStorageKey = "fakePodStorage";
+function isLocalStorageAvailable() {
+    try {
+        localStorage.setItem("test", "test");
+        localStorage.removeItem("test");
+        return true;
+    } catch {
+        return false;
+    }
+}
 
-const fakeStorage = {
-    get quads() {
-        return JSON.parse(localStorage.getItem(fakeStorageKey) || "[]");
-    },
-    set quads(quads) {
-        localStorage.setItem(fakeStorageKey, JSON.stringify(quads));
-    },
-};
+function createFakeStorage() {
+    if (!isLocalStorageAvailable()) {
+        console.log("Neither polyIn nor localStorage available - "
+                    + "using in-memory storage backend");
+        const storage = [];
+        return {
+            get quads() {
+                return storage;
+            },
+            set quads(quads) {
+                storage.length = 0;
+                storage.push(...quads);
+            },
+        };
+    }
 
-// The polyPod does already export window.pod, but it isn't implemented yet, so
-// we ignore the existing window.pod object here and always go with the fake for
-// now.
-export const pod = window.pod || {
-    polyIn: {
-        select: async () => fakeStorage.quads,
-        add: async (quad) => (fakeStorage.quads = [...fakeStorage.quads, quad]),
-    },
-    dataFactory: {
-        quad: (subject, predicate, object) => ({
-            subject,
-            predicate,
-            object,
-        }),
-        namedNode: (value) => ({ value }),
-    },
-};
+    console.log("polyIn not available - using localStorage storage backend");
+    const fakeStorageKey = "fakePodStorage";
+    return {
+        get quads() {
+            return JSON.parse(localStorage.getItem(fakeStorageKey) || "[]");
+        },
+        set quads(quads) {
+            localStorage.setItem(fakeStorageKey, JSON.stringify(quads));
+        },
+    };
+}
+
+export const pod = window.pod || (() => {
+    const fakeStorage = createFakeStorage();
+    return {
+        polyIn: {
+            select: async () => fakeStorage.quads,
+            add: async (quad) => (fakeStorage.quads = [...fakeStorage.quads, quad]),
+        },
+        dataFactory: {
+            quad: (subject, predicate, object) => ({
+                subject,
+                predicate,
+                object,
+            }),
+            namedNode: (value) => ({ value }),
+        },
+    };
+})();
 
 let fakeNavigationListener;
 
