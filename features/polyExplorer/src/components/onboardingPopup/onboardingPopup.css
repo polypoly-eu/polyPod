@@ -54,7 +54,7 @@
     bottom: 0;
     width: 100%;
     height: 40px;
-    background: linear-gradient(rgba(255, 255, 255, 0) 0%, #f7fafc);
+    background: linear-gradient(#f7fafc00 0%, #f7fafc);
     pointer-events: none;
 }
 

@@ -227,7 +227,7 @@
 
 .gradient {
     background-image: -moz-linear-gradient(transparent, #0f1938);
-    background-image: -webkit-linear-gradient(rgba(15, 25, 56, 0), #0f1938);
+    background-image: -webkit-linear-gradient(#0f193800, #0f1938);
 }
 
 .explore-data-btn {
