@@ -117,23 +117,10 @@ extension PostOffice {
     }
     
     private func handlePolyInSelect(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        // TODO: It appears this code assumed to receive an ExtendedData object,
-        //       instead it receives just the property dictionary. We need to
-        //       figure out what the real problem is, but for now we have a
-        //       workaround.
-        #if false
-        guard let extendedData = args[0] as? ExtendedData else {
+        guard let extendedData = extractMatcher(args[0]) else {
             completionHandler(nil, MessagePackValue("Bad data"))
             return
         }
-        #else
-        guard let properties = args[0] as? [String: Any] else {
-            completionHandler(nil, MessagePackValue("Bad data"))
-            return
-        }
-        let extendedData = ExtendedData(classname: "unnamed extended data", properties: properties)
-        #endif
-        
         PodApi.shared.polyIn.selectQuads(matcher: extendedData) { quads, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
@@ -152,6 +139,21 @@ extension PostOffice {
             }
             completionHandler(.array(encodedQuads), nil)
         }
+    }
+
+    private func extractMatcher(_ matcher: Any) -> ExtendedData? {
+        // TODO: Originally, the code expected the matcher to already be of type
+        //       ExtendedData. However, with the use cases so far - an empty
+        //       matcher - all we get is a dictionary. We need to check whether
+        //       that's the intended behaviour - and whether we actually get
+        //       a matcher as ExtendedData under any circumstances.
+        if let properties = matcher as? [String: Any] {
+            return ExtendedData(classname: "unnamed extended data", properties: properties)
+        }
+        if let extendedData = matcher as? ExtendedData {
+            return extendedData
+        }
+        return nil
     }
 }
 
