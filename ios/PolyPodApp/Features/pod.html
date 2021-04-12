@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>polyPod</title>
+    <script src="initIframe.js"></script>
+    <style>
+        html, body, .featureFrameWrapper, iframe {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="featureFrameWrapper">
+      <iframe id="harness" onload="initIframe(this);" src="index.html">
+    </div>
+  </body>
+</html>

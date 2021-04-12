@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BlankNode" representedClassName=".BlankNode" parentEntity="Term" syncable="YES"/>
+    <entity name="DefaultGraph" representedClassName=".DefaultGraph" parentEntity="Term" syncable="YES"/>
+    <entity name="Literal" representedClassName=".Literal" parentEntity="Term" syncable="YES">
+        <attribute name="language" attributeType="String"/>
+        <relationship name="datatype" maxCount="1" deletionRule="Nullify" destinationEntity="NamedNode"/>
+    </entity>
+    <entity name="NamedNode" representedClassName=".NamedNode" parentEntity="Term" syncable="YES"/>
+    <entity name="Quad" representedClassName=".Quad" syncable="YES">
+        <relationship name="graph" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
+        <relationship name="object" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
+        <relationship name="predicate" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
+        <relationship name="subject" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
+    </entity>
+    <entity name="Term" representedClassName=".Term" isAbstract="YES" syncable="YES">
+        <attribute name="termType" attributeType="String"/>
+        <attribute name="value" attributeType="String"/>
+    </entity>
+    <entity name="Variable" representedClassName=".Variable" parentEntity="Term" syncable="YES"/>
+    <elements>
+        <element name="BlankNode" positionX="-262.6953125" positionY="54.25390625" width="128" height="43"/>
+        <element name="DefaultGraph" positionX="82.1953125" positionY="55.66015625" width="128" height="43"/>
+        <element name="Literal" positionX="-408.89453125" positionY="54.0625" width="128" height="73"/>
+        <element name="NamedNode" positionX="-576.578125" positionY="55.5859375" width="128" height="43"/>
+        <element name="Quad" positionX="80.796875" positionY="-140.37890625" width="128" height="103"/>
+        <element name="Term" positionX="-371.05078125" positionY="-102.140625" width="128" height="73"/>
+        <element name="Variable" positionX="-97.15234375" positionY="54.35546875" width="128" height="43"/>
+    </elements>
+</model>
