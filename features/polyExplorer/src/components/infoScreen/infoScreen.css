@@ -1,10 +1,8 @@
 .info {
-    /* width: 100%; */
     max-width: 412px;
     margin: 0 auto;
     overflow: hidden scroll;
     padding-top: 24px;
-    /* padding: 30px 32px 0 32px; */
 }
 
 .info * {
@@ -32,14 +30,11 @@
     font-size: 16px;
     font-family: "Jost";
     font-weight: 400;
-    /* padding: 0 30px; */
 }
 
 .info img,
 .info button {
     display: block;
-    /* margin-left: auto;
-    margin-right: auto; */
 }
 
 .info button {
