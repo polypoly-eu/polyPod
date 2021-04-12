@@ -12,8 +12,10 @@ function isLocalStorageAvailable() {
 
 function createFakeStorage() {
     if (!isLocalStorageAvailable()) {
-        console.log("Neither polyIn nor localStorage available - "
-                    + "using in-memory storage backend");
+        console.log(
+            "Neither polyIn nor localStorage available - " +
+                "using in-memory storage backend"
+        );
         const storage = [];
         return {
             get quads() {
@@ -38,23 +40,26 @@ function createFakeStorage() {
     };
 }
 
-export const pod = window.pod || (() => {
-    const fakeStorage = createFakeStorage();
-    return {
-        polyIn: {
-            select: async () => fakeStorage.quads,
-            add: async (quad) => (fakeStorage.quads = [...fakeStorage.quads, quad]),
-        },
-        dataFactory: {
-            quad: (subject, predicate, object) => ({
-                subject,
-                predicate,
-                object,
-            }),
-            namedNode: (value) => ({ value }),
-        },
-    };
-})();
+export const pod =
+    window.pod ||
+    (() => {
+        const fakeStorage = createFakeStorage();
+        return {
+            polyIn: {
+                select: async () => fakeStorage.quads,
+                add: async (quad) =>
+                    (fakeStorage.quads = [...fakeStorage.quads, quad]),
+            },
+            dataFactory: {
+                quad: (subject, predicate, object) => ({
+                    subject,
+                    predicate,
+                    object,
+                }),
+                namedNode: (value) => ({ value }),
+            },
+        };
+    })();
 
 let fakeNavigationListener;
 
