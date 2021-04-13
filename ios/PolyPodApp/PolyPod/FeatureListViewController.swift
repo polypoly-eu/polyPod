@@ -12,7 +12,7 @@ class FeatureListViewController: UITableViewController {
 
     @IBOutlet weak var settingsItem: UIBarButtonItem!
     
-    let featuresList: [String] = FeaturesWallet.shared.featuresList()
+    let featuresList: [Feature] = FeaturesWallet.shared.featuresList()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class FeatureListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "featureCell", for: indexPath)
 
-        cell.textLabel!.text = featuresList[indexPath.row]
+        cell.textLabel!.text = featuresList[indexPath.row].name
 
         return cell
     }
@@ -101,7 +101,7 @@ class FeatureListViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let featureViewController = segue.destination as? FeatureViewController {
-            featureViewController.featureName = featuresList[tableView.indexPathForSelectedRow!.row]
+            featureViewController.feature = featuresList[tableView.indexPathForSelectedRow!.row]
         }
     }
 

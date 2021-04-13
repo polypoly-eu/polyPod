@@ -12,7 +12,7 @@ import WebKit
 class FeatureViewController: UIViewController {
 
     var webView: WKWebView!
-    var featureName: String!
+    var feature: Feature!
 
     private var backButton: UIBarButtonItem?
     private var infoButton: UIBarButtonItem?
@@ -22,7 +22,7 @@ class FeatureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = featureName
+        title = feature.name
 
         super.viewDidLoad()
 
@@ -54,7 +54,7 @@ class FeatureViewController: UIViewController {
         webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-        let featureUrl = FeaturesWallet.shared.featuresFileUrl.appendingPathComponent(featureName)
+        let featureUrl = feature.path
         let featureFileUrl = featureUrl.appendingPathComponent("pod.html")
         webView.loadFileURL(featureFileUrl, allowingReadAccessTo: featureUrl)
     }
@@ -111,6 +111,43 @@ class FeatureViewController: UIViewController {
             }
         }
         return true
+    }
+
+    private func openUrl(_ target: String) {
+        guard let urlString = feature.findUrl(target: target) else {
+            let alert = UIAlertController(
+                title: "",
+                message: """
+                Ich habe \(feature.name) davon abgehalten, eine URL zu öffnen:
+                \(target)
+                """,
+                preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        guard let url = URL(string: urlString) else {
+            print("Error: Invalid URL format: \(urlString)")
+            return
+        }
+        let alert = UIAlertController(
+            title: "",
+            message: """
+            \(feature.name) möchte eine URL in Ihrem Browser öffnen:
+
+            \(urlString)
+
+            Zulassen?
+            """,
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(
+                            title: "Ja",
+                            style: .default,
+                            handler: { (action: UIAlertAction!) in
+                                UIApplication.shared.open(url)
+                            }))
+        alert.addAction(UIAlertAction(title: "Nein", style: .default))
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -194,26 +231,11 @@ extension FeatureViewController: WKScriptMessageHandler {
             }
             navigationItem.rightBarButtonItems = actionButtons
         case "openUrl":
-            guard let url = URL(string: commandData as? String ?? "") else {
+            guard let target = commandData as? String else {
                 print("Error: Bad podNav openUrl command data: \(String(describing: commandData))")
                 break
             }
-            let alert = UIAlertController(title: "",
-                                          message: """
-                                          polyPreview möchte eine URL in Ihrem Browser öffnen:
-
-                                          \(url)
-
-                                          Zulassen?
-                                          """,
-                                          preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ja",
-                                          style: .default,
-                                          handler: { (action: UIAlertAction!) in
-                                            UIApplication.shared.open(url)
-                                          }))
-            alert.addAction(UIAlertAction(title: "Nein", style: .default))
-            present(alert, animated: true, completion: nil)
+            openUrl(target)
         default:
             print("Error: Bad podNav command message - unknown command '\(commandName)'")
         }

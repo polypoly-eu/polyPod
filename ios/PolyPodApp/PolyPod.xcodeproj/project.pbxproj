@@ -116,6 +116,7 @@
 		E923AAF8261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
 		E9361680261DA363001AE91F /* polyPreview.zip in Resources */ = {isa = PBXBuildFile; fileRef = E936167E261DA363001AE91F /* polyPreview.zip */; };
 		E9361681261DA363001AE91F /* polyExplorer.zip in Resources */ = {isa = PBXBuildFile; fileRef = E936167F261DA363001AE91F /* polyExplorer.zip */; };
+		E9CF1B302625866800216B70 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +199,7 @@
 		E923AAF6261E155500E0A2A8 /* podNav.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = podNav.js; sourceTree = "<group>"; };
 		E936167E261DA363001AE91F /* polyPreview.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = polyPreview.zip; sourceTree = "<group>"; };
 		E936167F261DA363001AE91F /* polyExplorer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = polyExplorer.zip; sourceTree = "<group>"; };
+		E9CF1B2F2625866800216B70 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +345,7 @@
 				1AA6DE3D24191C96008DB1B2 /* LaunchScreen.storyboard */,
 				1AA6DE4024191C96008DB1B2 /* Info.plist */,
 				1AB4F37D2508D64600E66BCC /* Settings.bundle */,
+				E9CF1B2F2625866800216B70 /* Feature.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				1A6F4DF224C1A76200874DF9 /* PolyIn+Add.swift in Sources */,
 				1ABADC0924EFAA3600369791 /* CLLocation+Model.swift in Sources */,
 				1A8F488C247E91E000089217 /* Subdata.swift in Sources */,
+				E9CF1B302625866800216B70 /* Feature.swift in Sources */,
 				1A4C21F024A63E4C006CC1FD /* BlankNode+CoreDataClass.swift in Sources */,
 				1A57E65624A4C4110043E3AD /* Bubblewrap.swift in Sources */,
 				1AF1178E24C174A00063EE37 /* Term+Additions.swift in Sources */,

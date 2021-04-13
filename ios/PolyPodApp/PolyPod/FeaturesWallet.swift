@@ -34,13 +34,13 @@ class FeaturesWallet {
         }
     }
     
-    func featuresList() -> [String] {
-        var featuresList: [String] = []
+    func featuresList() -> [Feature] {
+        var featuresList: [Feature] = []
         
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: featuresFileUrl, includingPropertiesForKeys: nil)
             let subDirs = directoryContents.filter{ $0.hasDirectoryPath }
-            featuresList = subDirs.map{ $0.lastPathComponent }
+            featuresList = subDirs.map{ Feature(path: $0) }
         } catch {
             print(error.localizedDescription)
         }
