@@ -8,7 +8,7 @@ import MainScreen from "./screens/main/main.jsx";
 import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
 import CompanyFilterScreen from "./screens/companyFilter/companyFilter.jsx";
 import CompanySearchScreen from "./screens/companySearch/companySearch.jsx";
-import InfoScreen from "./screens/info/info.jsx";
+import Info from "./screens/info/info.jsx";
 import CompanyDetailsScreen from "./screens/companyDetails/companyDetails.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
 import DataTypesInfoScreen from "./screens/explorationInfo/dataTypesInfo/dataTypesInfo.jsx";
@@ -302,7 +302,7 @@ const PolyExplorer = () => {
                 }
             />
         ),
-        info: <InfoScreen onClose={handleBack} />,
+        info: <Info onClose={handleBack} />,
         dataRegionInfo: <DataRegionInfoScreen onClose={handleBack} />,
         explorationDataTypesInfo: <DataTypesInfoScreen onClose={handleBack} />,
         explorationCategoryInfo: (

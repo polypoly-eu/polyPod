@@ -79,5 +79,6 @@
 
 .jurisdiction-info .map {
     padding: 0 0;
+    display: block;
     background-color: #0f1938;
 }
