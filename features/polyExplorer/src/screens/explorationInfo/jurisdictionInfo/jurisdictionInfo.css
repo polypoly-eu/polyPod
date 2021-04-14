@@ -1,3 +1,10 @@
+.jurisdiction-info .sub-heading {
+    margin: 30px 0 24px 0;
+}
+.jurisdiction-info .sub-sub-heading {
+    font-size: 16px;
+}
+
 .jurisdiction-info .tree-legend {
     display: flex;
     flex-direction: row;
