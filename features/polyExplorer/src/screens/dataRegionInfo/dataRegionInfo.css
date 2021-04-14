@@ -1,35 +1,14 @@
-.data-region-info-screen {
-    display: block !important;
-    overflow: hidden scroll;
-    /* padding: 0 30px; */
-}
-
 .data-region-info-screen .heading {
-    display: block;
-    box-sizing: border-box;
-    margin: 0 auto 24px auto;
-    color: #0f1938;
-    font-size: 24px;
-    text-align: center;
+    margin-bottom: 24px;
 }
 
-.data-region-info-screen .sub-heading {
-    display: block;
-    text-align: center;
-    box-sizing: border-box;
-    margin: 30px auto 24px auto;
-    color: #0f1938;
-    font-size: 22px;
+.data-region-info-screen .sub-heading,
+.data-region-info-screen .sub-sub-heading {
+    margin: 30px 0 24px 0;
 }
 
 .data-region-info-screen .sub-sub-heading {
-    display: block;
-    box-sizing: border-box;
-    margin: 30px auto 24px auto;
-    color: #0f1938;
     font-size: 16px;
-    line-height: 120%;
-    text-align: center;
 }
 
 .data-region-info-screen .map {
@@ -38,22 +17,10 @@
     display: block;
 }
 
-.data-region-info-screen button {
-    display: block;
-    width: 300px;
-    height: 56px;
-    margin: 32px auto 32px auto;
-    border-radius: 4px;
-    background: #0f1938;
-    color: #fff;
-    font-size: 18px;
-}
-
 .data-region-info-screen .legend-container {
     display: flex;
     box-sizing: border-box;
     flex-direction: row;
-    /* padding: 0 30px; */
 }
 
 .data-region-info-screen .legend {
