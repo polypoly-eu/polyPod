@@ -2,16 +2,16 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
-import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
+import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 
 const CorrelationInfo = ({ company, onClose }) => {
     return (
-        <InfoScreen
+        <BaseInfoScreen
             className="correlation-info"
             headline={i18n.t("explorationCorrelationInfoScreen:headline")}
             onClose={onClose}
         >
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <p>{i18n.t("explorationCorrelationInfoScreen:text.1")}</p>
                 <img
                     src={`./images/infographics/correlation/${i18n.t(
@@ -25,7 +25,7 @@ const CorrelationInfo = ({ company, onClose }) => {
                     }
                 </p>
             </div>
-        </InfoScreen>
+        </BaseInfoScreen>
     );
 };
 
