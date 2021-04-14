@@ -2,17 +2,17 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import "../jurisdictionInfo/jurisdictionInfo.css";
-import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
+import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
 const JurisdictionInfo = ({ onClose }) => {
     return (
-        <InfoScreen
+        <BaseInfoScreen
             className="jurisdiction-info"
             headline={i18n.t("explorationJurisdictionInfoScreen:headline")}
             onClose={onClose}
         >
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <p>{i18n.t("explorationJurisdictionInfoScreen:text.1")}</p>
                 <h2>
                     {i18n.t("explorationJurisdictionInfoScreen:subheading.1")}
@@ -57,7 +57,7 @@ const JurisdictionInfo = ({ onClose }) => {
                 </div>
             </div>
             <Infographic type="jurisdiction2" texts={{}} />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -100,7 +100,7 @@ const JurisdictionInfo = ({ onClose }) => {
                 src="./images/maps/jurisdictions/eu-gdpr.svg"
                 className="map"
             />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -126,7 +126,7 @@ const JurisdictionInfo = ({ onClose }) => {
                 alt=""
                 className="map"
             />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -157,7 +157,7 @@ const JurisdictionInfo = ({ onClose }) => {
                 </h2>
             </div>
             <img src="./images/maps/jurisdictions/russia.svg" className="map" />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -179,7 +179,7 @@ const JurisdictionInfo = ({ onClose }) => {
                 </h2>
             </div>
             <img src="./images/maps/jurisdictions/china.svg" className="map" />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -201,7 +201,7 @@ const JurisdictionInfo = ({ onClose }) => {
                 </h2>
             </div>
             <img src="./images/maps/jurisdictions/others.svg" className="map" />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -219,7 +219,7 @@ const JurisdictionInfo = ({ onClose }) => {
                     }}
                 ></div>
             </div>
-        </InfoScreen>
+        </BaseInfoScreen>
     );
 };
 

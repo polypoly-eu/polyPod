@@ -1,19 +1,19 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import InfoScreen from "../../components/infoScreen/infoScreen.jsx";
+import BaseInfoScreen from "../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../components/infographic/infographic.jsx";
 
 import "./featuredCompanyInfo.css";
 
 const FeaturedCompanyInfoScreen = ({ onClose }) => {
     return (
-        <InfoScreen
+        <BaseInfoScreen
             className="featured-company-info-screen"
             headline={i18n.t("featuredCompanyInfoScreen:headline.main")}
             onClose={onClose}
         >
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <p>{i18n.t("featuredCompanyInfoScreen:text.main")}</p>
 
                 <Infographic
@@ -33,7 +33,7 @@ const FeaturedCompanyInfoScreen = ({ onClose }) => {
                 <h2>{i18n.t("featuredCompanyInfoScreen:headline.total")}</h2>
                 <p>{i18n.t("featuredCompanyInfoScreen:text.total")}</p>
             </div>
-        </InfoScreen>
+        </BaseInfoScreen>
     );
 };
 
