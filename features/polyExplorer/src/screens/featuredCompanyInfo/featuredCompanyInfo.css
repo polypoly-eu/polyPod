@@ -1,11 +1,11 @@
-.featured-company-info-screen .gauge-explanation-graphic {
+/* .featured-company-info-screen .gauge-explanation-graphic {
     position: relative;
     width: 300px;
     margin: 52px auto 0 auto;
-}
+} */
 
 /* Hack until we have a better asset to work with */
-.featured-company-info-screen .gauge-explanation-entries {
+/* .featured-company-info-screen .gauge-explanation-entries {
     position: absolute;
     left: 32px;
     top: 57px;
@@ -41,4 +41,4 @@
 
 .featured-company-info-screen .gauge-explanation-fourth {
     left: 48px;
-}
+} */
