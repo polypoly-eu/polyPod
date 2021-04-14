@@ -437,6 +437,7 @@
 				1AA6DE2B24191C94008DB1B2 /* Sources */,
 				1AA6DE2C24191C94008DB1B2 /* Frameworks */,
 				1AA6DE2D24191C94008DB1B2 /* Resources */,
+				E9CF1B7D2627365600216B70 /* Update Bundle Version */,
 			);
 			buildRules = (
 			);
@@ -519,6 +520,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E9CF1B7D2627365600216B70 /* Update Bundle Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Bundle Version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$((`date +%s` - `date -j -vMaym -v4d -v2019y +%s`))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1A66F76E2493743D00ED4308 /* Sources */ = {
