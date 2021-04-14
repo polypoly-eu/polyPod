@@ -3,17 +3,17 @@ import React from "react";
 import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
 import globals from "../../../data/global.json";
-import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
+import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
 const CategoryInfo = ({ category, company, onClose }) => {
     return (
-        <InfoScreen
+        <BaseInfoScreen
             className="category-info"
             headline={i18n.t("explorationCategoryInfoScreen:headline")}
             onClose={onClose}
         >
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <p>
                     {
                         globals.polypoly_parent_categories[category][
@@ -45,7 +45,7 @@ const CategoryInfo = ({ category, company, onClose }) => {
                     </div>
                 ) : null}
             </div>
-        </InfoScreen>
+        </BaseInfoScreen>
     );
 };
 

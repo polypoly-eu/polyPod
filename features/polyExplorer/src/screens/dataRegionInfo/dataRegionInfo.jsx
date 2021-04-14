@@ -1,13 +1,13 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import InfoScreen from "../../components/infoScreen/infoScreen.jsx";
+import BaseInfoScreen from "../../components/baseInfoScreen/baseInfoScreen.jsx";
 
 import "./dataRegionInfo.css";
 
 const DataRegionInfo = ({ onClose }) => {
     return (
-        <InfoScreen
+        <BaseInfoScreen
             className="data-region-info-screen"
             light={true}
             onClose={onClose}
@@ -16,7 +16,7 @@ const DataRegionInfo = ({ onClose }) => {
                 {i18n.t("dataRegionInfoScreen:heading")}
             </h1>
             <img src="./images/maps/jurisdictions/world.svg" className="map" />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -53,7 +53,7 @@ const DataRegionInfo = ({ onClose }) => {
                 src="./images/maps/jurisdictions/eu-gdpr.svg"
                 className="map"
             />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -78,7 +78,7 @@ const DataRegionInfo = ({ onClose }) => {
                 src="./images/maps/jurisdictions/five-eyes.svg"
                 className="map"
             />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -109,7 +109,7 @@ const DataRegionInfo = ({ onClose }) => {
                 </h2>
             </div>
             <img src="./images/maps/jurisdictions/russia.svg" className="map" />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -131,7 +131,7 @@ const DataRegionInfo = ({ onClose }) => {
                 </h2>
             </div>
             <img src="./images/maps/jurisdictions/china.svg" className="map" />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -153,7 +153,7 @@ const DataRegionInfo = ({ onClose }) => {
                 </h2>
             </div>
             <img src="./images/maps/jurisdictions/others.svg" className="map" />
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
                         <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
@@ -171,7 +171,7 @@ const DataRegionInfo = ({ onClose }) => {
                     }}
                 ></div>
             </div>
-        </InfoScreen>
+        </BaseInfoScreen>
     );
 };
 

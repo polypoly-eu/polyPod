@@ -1,17 +1,17 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import InfoScreen from "../../../components/infoScreen/infoScreen.jsx";
+import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
 const CompaniesInfo = ({ onClose }) => {
     return (
-        <InfoScreen
+        <BaseInfoScreen
             className="companies-info"
             headline={i18n.t("explorationCompaniesInfoScreen:headline")}
             onClose={onClose}
         >
-            <div className="info-padding">
+            <div className="base-info-padding">
                 <div
                     dangerouslySetInnerHTML={{
                         __html: i18n.t("explorationCompaniesInfoScreen:text.1"),
@@ -31,7 +31,7 @@ const CompaniesInfo = ({ onClose }) => {
                     }}
                 />
             </div>
-        </InfoScreen>
+        </BaseInfoScreen>
     );
 };
 

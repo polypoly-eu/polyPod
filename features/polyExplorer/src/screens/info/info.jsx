@@ -1,13 +1,13 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import InfoScreen from "../../components/infoScreen/infoScreen.jsx";
+import BaseInfoScreen from "../../components/baseInfoScreen/baseInfoScreen.jsx";
 
 import "./info.css";
 
-const Info = ({ onClose }) => (
-    <InfoScreen className="info-screen" onClose={onClose}>
-        <div className="info-padding">
+const InfoScreen = ({ onClose }) => (
+    <BaseInfoScreen className="info-screen" onClose={onClose}>
+        <div className="base-info-padding">
             <div
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("infoScreen:text.intro"),
@@ -60,7 +60,7 @@ const Info = ({ onClose }) => (
                 }}
             ></div>
         </div>
-    </InfoScreen>
+    </BaseInfoScreen>
 );
 
-export default Info;
+export default InfoScreen;
