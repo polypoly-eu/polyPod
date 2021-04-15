@@ -60,7 +60,6 @@
 		1AB4F37E2508D64600E66BCC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1AB4F37D2508D64600E66BCC /* Settings.bundle */; };
 		1AB4F37F2508D6E800E66BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */; };
 		1ABADBCB24E2E06600369791 /* initIframe.js in Resources */ = {isa = PBXBuildFile; fileRef = 1ABADBCA24E2E06600369791 /* initIframe.js */; };
-		1ABADBCD24E2E2F800369791 /* pod.js in Resources */ = {isa = PBXBuildFile; fileRef = 1ABADBCC24E2E2F700369791 /* pod.js */; };
 		1ABADBD224EBC5D500369791 /* FetchRequestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */; };
 		1ABADBD324EBC5D900369791 /* FetchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F76A2490DFA000ED4308 /* FetchResponse.swift */; };
 		1ABADBD424EBC5EF00369791 /* PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AF242A34CF00E51B6D /* PolyIn.swift */; };
@@ -111,8 +110,6 @@
 		1AF468DE24361D9D00E51B6D /* FileManager+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManager+Additions.swift */; };
 		E923AAF7261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
 		E923AAF8261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
-		E9361680261DA363001AE91F /* polyPreview.zip in Resources */ = {isa = PBXBuildFile; fileRef = E936167E261DA363001AE91F /* polyPreview.zip */; };
-		E9361681261DA363001AE91F /* polyExplorer.zip in Resources */ = {isa = PBXBuildFile; fileRef = E936167F261DA363001AE91F /* polyExplorer.zip */; };
 		E9CF1B302625866800216B70 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 		E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
@@ -176,7 +173,6 @@
 		1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKUserContentController+Additions.swift"; sourceTree = "<group>"; };
 		1AB4F37D2508D64600E66BCC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1ABADBCA24E2E06600369791 /* initIframe.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = initIframe.js; sourceTree = "<group>"; };
-		1ABADBCC24E2E2F700369791 /* pod.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = pod.js; sourceTree = "<group>"; };
 		1ABADBEB24EBD02C00369791 /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		1ABADBF024EE6FB700369791 /* DataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFactory.swift; sourceTree = "<group>"; };
 		1ABADC0824EFAA3600369791 /* CLLocation+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Model.swift"; sourceTree = "<group>"; };
@@ -194,8 +190,6 @@
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManager+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Additions.swift"; sourceTree = "<group>"; };
 		E923AAF6261E155500E0A2A8 /* podNav.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = podNav.js; sourceTree = "<group>"; };
-		E936167E261DA363001AE91F /* polyPreview.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = polyPreview.zip; sourceTree = "<group>"; };
-		E936167F261DA363001AE91F /* polyExplorer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = polyExplorer.zip; sourceTree = "<group>"; };
 		E9CF1B2F2625866800216B70 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
@@ -310,7 +304,7 @@
 			children = (
 				1A57E65424A4C3FB0043E3AD /* Bubblewrap */,
 				1A6F4DF624C1B9BE00874DF9 /* CoreDataModels */,
-				1AA6DE492419212E008DB1B2 /* Features */,
+				1AA6DE492419212E008DB1B2 /* FeatureContainer */,
 				1AA6DE4624192079008DB1B2 /* PodApi */,
 				1AA6DE3124191C94008DB1B2 /* PolyPod */,
 				1A8F487E247E91E000089217 /* MessagePack */,
@@ -345,7 +339,6 @@
 				E9CF1B2F2625866800216B70 /* Feature.swift */,
 				E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */,
 				E9CF1B632625EA3200216B70 /* FeatureView.swift */,
-				E9CF1B712627304800216B70 /* FeatureContainerView.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -357,7 +350,6 @@
 				1A66F76D2493719B00ED4308 /* PolyIn */,
 				1A66F76C2493715400ED4308 /* PolyOut */,
 				1AA6DE5924192463008DB1B2 /* domConsole.js */,
-				1ABADBCC24E2E2F700369791 /* pod.js */,
 				1A00DFF8245961FB0049F3F7 /* messagePort.js */,
 				1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */,
 				1AF468DB24349E6B00E51B6D /* PodApi.swift */,
@@ -369,15 +361,14 @@
 			path = PodApi;
 			sourceTree = "<group>";
 		};
-		1AA6DE492419212E008DB1B2 /* Features */ = {
+		1AA6DE492419212E008DB1B2 /* FeatureContainer */ = {
 			isa = PBXGroup;
 			children = (
-				E936167F261DA363001AE91F /* polyExplorer.zip */,
-				E936167E261DA363001AE91F /* polyPreview.zip */,
+				E9CF1B712627304800216B70 /* FeatureContainerView.swift */,
 				1A00DFF624569F3A0049F3F7 /* pod.html */,
 				1ABADBCA24E2E06600369791 /* initIframe.js */,
 			);
-			path = Features;
+			path = FeatureContainer;
 			sourceTree = "<group>";
 		};
 		1ABADC1024EFBCBF00369791 /* Models */ = {
@@ -438,6 +429,7 @@
 				1AA6DE2C24191C94008DB1B2 /* Frameworks */,
 				1AA6DE2D24191C94008DB1B2 /* Resources */,
 				E9CF1B7D2627365600216B70 /* Update Bundle Version */,
+				E923739E2628228F00D2CFF3 /* Copy polyPod Features */,
 			);
 			buildRules = (
 			);
@@ -506,8 +498,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ABADBCB24E2E06600369791 /* initIframe.js in Resources */,
-				E9361680261DA363001AE91F /* polyPreview.zip in Resources */,
-				1ABADBCD24E2E2F800369791 /* pod.js in Resources */,
 				1A00DFF724569F3A0049F3F7 /* pod.html in Resources */,
 				E923AAF7261E155500E0A2A8 /* podNav.js in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
@@ -515,13 +505,30 @@
 				1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */,
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
-				E9361681261DA363001AE91F /* polyExplorer.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		E923739E2628228F00D2CFF3 /* Copy polyPod Features */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy polyPod Features";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SOURCE_PATH=\"$PROJECT_DIR/../..\"\nTARGET_PATH=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\n\ncp \"$SOURCE_PATH/core/podigree/dist/bootstrap.js\" \"$TARGET_PATH/pod.js\"\n\nFEATURES=\"polyExplorer polyPreview\"\nfor FEATURE in $FEATURES; do\n    pushd \"$SOURCE_PATH/features/$FEATURE/dist\" >/dev/null\n    FEATURE_TARGET_PATH=\"$TARGET_PATH/$FEATURE.zip\"\n    rm -f \"$FEATURE_TARGET_PATH\"\n    zip -rq \"$FEATURE_TARGET_PATH\" .\n    popd >/dev/null\ndone\n";
+		};
 		E9CF1B7D2627365600216B70 /* Update Bundle Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

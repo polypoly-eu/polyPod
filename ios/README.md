@@ -2,12 +2,10 @@
 
 The polyPod app for iOS devices
 
-This code base is still in a proof of concept stage, i.e. we're trying to make a
-very basic version of the polyPod app for Android work on iOS, to see where the
-challenges are.
+While the user interface is of the polyPod itself is still fairly basic, it is
+already a full fledged polyPod implementation.
 
 # Building
 
 1. Run `build.js` in the parent directory.
-2. Run `update-dependencies.sh`.
 3. Open the _PolyPodApp_ project in XCode and build it there.
