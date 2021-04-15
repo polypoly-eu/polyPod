@@ -15,12 +15,23 @@ const strings = {
     },
 };
 
-export default {
+function determineLanguage() {
+    const languages = Object.keys(strings);
+    const parsedLanguage = navigator.language.split("-")[0];
+    if (languages.includes(parsedLanguage))
+        return parsedLanguage;
+    return "en";
+}
+
+const i18n = {
+    language: determineLanguage(),
     t: (key, options = {}) => {
         const [namespace, keyInNamespace] = key.split(/:(.+)/);
-        let translation = strings["de"][namespace][keyInNamespace];
+        let translation = strings[i18n.language][namespace][keyInNamespace];
         for (let [name, value] of Object.entries(options))
             translation = translation.replace(`{{${name}}}`, value);
         return translation;
     },
 };
+
+export default i18n;
