@@ -1,10 +1,16 @@
 {
     "name": "polyPreview",
-    "author": "polypoly - Die Genossenschaft",
-    "description": "Ihr polyPod wird stetig weiterentwickelt. Wenn Sie wissen möchten, was wir planen: hier eine Vorschau.",
+    "author": "polypoly Cooperative",
+    "description": "Your polyPod is constantly being developed further. If you want to know what is planned for the future, here is a preview.",
     "thumbnail": "images/thumbnail.png",
     "primaryColor": "#fff5f5",
     "links": {
         "membership": "https://polypoly.coop/de-de/membership"
+    },
+    "translations": {
+        "de": {
+            "author": "polypoly - Die Genossenschaft",
+            "description": "Ihr polyPod wird stetig weiterentwickelt. Wenn Sie wissen möchten, was wir planen: hier eine Vorschau."
+        }
     }
 }
