@@ -19,8 +19,8 @@ struct FeatureListView: View {
                     }
                 }
             }
-            .navigationBarTitle("polyPod", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Settings", action: handleOpenSettings))
+            .navigationBarTitle("app_name", displayMode: .inline)
+            .navigationBarItems(trailing: Button("settings_title", action: handleOpenSettings))
         }
     }
 
