@@ -77,7 +77,6 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     }
 
     init {
-        WebView.setWebContentsDebuggingEnabled(true);
         webView.layoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
