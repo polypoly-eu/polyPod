@@ -18,8 +18,7 @@ const strings = {
 function determineLanguage() {
     const languages = Object.keys(strings);
     const parsedLanguage = navigator.language.split("-")[0];
-    if (languages.includes(parsedLanguage))
-        return parsedLanguage;
+    if (languages.includes(parsedLanguage)) return parsedLanguage;
     return "en";
 }
 
