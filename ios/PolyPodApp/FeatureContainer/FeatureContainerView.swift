@@ -57,14 +57,14 @@ class FeatureWebView: WKWebView {
         self.openUrlHandler = openUrlHandler
 
         let contentController = WKUserContentController();
-        contentController.installUserScript("messagePort", forMainFrameOnly: true)
-        contentController.installUserScript("domConsole", forMainFrameOnly: false)
-        contentController.installUserScript("podNav", forMainFrameOnly: false)
+        installUserScript(contentController, "messagePort", forMainFrameOnly: true)
+        installUserScript(contentController, "domConsole", forMainFrameOnly: false)
+        installUserScript(contentController, "podNav", forMainFrameOnly: false)
 
         // The original idea was that the feature explicitly loads pod.js, but in order to
         // still support the polyfill-based development approach, we explicitly inject it,
         // at least for now.
-        contentController.installUserScript("pod", forMainFrameOnly: false)
+        installUserScript(contentController, "pod", forMainFrameOnly: false)
 
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
@@ -198,4 +198,19 @@ extension FeatureWebView: WKScriptMessageHandler {
             print("Error: Bad podNav command message - unknown command '\(commandName)'")
         }
     }
+}
+
+func installUserScript(
+    _ contentController: WKUserContentController,
+    _ filename: String,
+    forMainFrameOnly: Bool = false
+) {
+    guard let filePath = Bundle.main.path(forResource: filename, ofType: "js") else { return }
+    guard let contents = try? String(contentsOfFile: filePath) else { return }
+    let userScript = WKUserScript(
+        source: contents,
+        injectionTime: WKUserScriptInjectionTime.atDocumentStart,
+        forMainFrameOnly: forMainFrameOnly
+    )
+    contentController.addUserScript(userScript)
 }

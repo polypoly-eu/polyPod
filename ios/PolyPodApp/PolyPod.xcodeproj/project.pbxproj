@@ -56,7 +56,6 @@
 		1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3B24191C96008DB1B2 /* Assets.xcassets */; };
 		1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3D24191C96008DB1B2 /* LaunchScreen.storyboard */; };
 		1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5924192463008DB1B2 /* domConsole.js */; };
-		1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */; };
 		1AB4F37E2508D64600E66BCC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1AB4F37D2508D64600E66BCC /* Settings.bundle */; };
 		1AB4F37F2508D6E800E66BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */; };
 		1ABADBCB24E2E06600369791 /* initIframe.js in Resources */ = {isa = PBXBuildFile; fileRef = 1ABADBCA24E2E06600369791 /* initIframe.js */; };
@@ -170,7 +169,6 @@
 		1AA6DE3E24191C96008DB1B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AA6DE4024191C96008DB1B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AA6DE5924192463008DB1B2 /* domConsole.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = domConsole.js; sourceTree = "<group>"; };
-		1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKUserContentController+Additions.swift"; sourceTree = "<group>"; };
 		1AB4F37D2508D64600E66BCC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1ABADBCA24E2E06600369791 /* initIframe.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = initIframe.js; sourceTree = "<group>"; };
 		1ABADBEB24EBD02C00369791 /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
@@ -329,7 +327,6 @@
 				1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */,
 				1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */,
 				1AF4689D2420D5F600E51B6D /* FeatureStorage.swift */,
-				1AA6DE5B24192585008DB1B2 /* WKUserContentController+Additions.swift */,
 				1AF46892241FBA7200E51B6D /* JSONSerialization+Additions.swift */,
 				1AF468DD24361D9D00E51B6D /* FileManager+Additions.swift */,
 				1AA6DE3B24191C96008DB1B2 /* Assets.xcassets */,
@@ -656,7 +653,6 @@
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */,
 				1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */,
-				1AA6DE5C24192585008DB1B2 /* WKUserContentController+Additions.swift in Sources */,
 				1A66F76B2490DFA000ED4308 /* FetchResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
