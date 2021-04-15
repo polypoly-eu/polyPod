@@ -24,7 +24,7 @@ struct FeatureListView: View {
         }
     }
 
-    private let features: [Feature] = FeaturesWallet.shared.featuresList()
+    private let features: [Feature] = FeatureStorage.shared.featuresList()
 
     private func handleOpenSettings() {
         UIApplication.shared.open(

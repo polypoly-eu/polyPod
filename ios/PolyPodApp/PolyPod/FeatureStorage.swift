@@ -9,9 +9,9 @@
 import Foundation
 import Zip
 
-class FeaturesWallet {
+class FeatureStorage {
 
-    static let shared = FeaturesWallet()
+    static let shared = FeatureStorage()
     
     lazy var featuresFileUrl: URL = {
         do {
