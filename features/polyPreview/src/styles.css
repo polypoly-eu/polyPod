@@ -72,6 +72,7 @@ button {
     border-radius: 4px;
     background: white;
     font-family: "Jost Medium";
+    font-weight: 500;
     font-size: var(--button-font-size);
     font-weight: 500;
     text-decoration: none;
