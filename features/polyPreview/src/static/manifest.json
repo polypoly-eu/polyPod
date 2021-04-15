@@ -5,12 +5,15 @@
     "thumbnail": "images/thumbnail.png",
     "primaryColor": "#fff5f5",
     "links": {
-        "membership": "https://polypoly.coop/de-de/membership"
+        "membership": "https://polypoly.coop/en-de/membership"
     },
     "translations": {
         "de": {
             "author": "polypoly - Die Genossenschaft",
-            "description": "Ihr polyPod wird stetig weiterentwickelt. Wenn Sie wissen möchten, was wir planen: hier eine Vorschau."
+            "description": "Ihr polyPod wird stetig weiterentwickelt. Wenn Sie wissen möchten, was wir planen: hier eine Vorschau.",
+            "links": {
+                "membership": "https://polypoly.coop/de-de/membership"
+            }
         }
     }
 }
