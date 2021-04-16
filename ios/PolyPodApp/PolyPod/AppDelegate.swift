@@ -9,14 +9,14 @@
 import UIKit
 import CoreData
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        FeaturesWallet.shared.cleanFeatures()
-        FeaturesWallet.shared.importFeatures()
+        FeatureStorage.shared.cleanFeatures()
+        FeatureStorage.shared.importFeatures()
         
         // Location tracking is disabled for now - no feature needs it
         //LocationTracker.shared.startLocationLogging()

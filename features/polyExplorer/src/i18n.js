@@ -91,8 +91,15 @@ const strings = {
     },
 };
 
+function determineLanguage() {
+    const languages = Object.keys(strings);
+    const parsedLanguage = navigator.language.split("-")[0];
+    if (languages.includes(parsedLanguage)) return parsedLanguage;
+    return "en";
+}
+
 const i18n = {
-    language: "de",
+    language: determineLanguage(),
     t: (key, options = {}) => {
         const [namespace, keyInNamespace] = key.split(/:(.+)/);
         let translation = strings[i18n.language][namespace][keyInNamespace];

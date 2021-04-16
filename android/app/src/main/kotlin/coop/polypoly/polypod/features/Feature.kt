@@ -11,9 +11,9 @@ class Feature(
     val content: ZipFile,
     private val manifest: FeatureManifest
 ) {
-    val name: String get() = manifest.name
-    val author: String get() = manifest.author
-    val description: String get() = manifest.description
+    val name: String get() = manifest.name ?: fileName.replace(".zip", "")
+    val author: String get() = manifest.author ?: ""
+    val description: String get() = manifest.description ?: ""
 
     val primaryColor: Int
         get() = runCatching { Color.parseColor(manifest.primaryColor) }
@@ -31,8 +31,8 @@ class Feature(
         }
 
     fun findUrl(target: String): String? = when (target) {
-        in manifest.links.keys -> manifest.links[target]
-        in manifest.links.values -> target
+        in manifest.links?.keys ?: listOf() -> manifest.links?.get(target)
+        in manifest.links?.values ?: listOf() -> target
         else -> null
     }
 }

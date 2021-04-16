@@ -16,6 +16,3 @@ xcuserdata/
 *.ipa
 *.dSYM.zip
 *.dSYM
-
-PolyPodApp/PodApi/pod.js
-PolyPodApp/Features/*.zip
