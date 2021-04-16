@@ -6,6 +6,7 @@ function appendLabel(container, text) {
         .style("fill", "#F7FAFC")
         .style("font-size", 14)
         .style("font-family", "Jost Medium")
+        .style("font-weight", "500")
         .style("text-anchor", "middle")
         .style("alignment-baseline", "middle");
 
