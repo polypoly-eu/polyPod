@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="Info">
+    <PreferenceCategory android:title="@string/settings_about_section">
         <Preference
             android:key="version"
             android:title="@string/settings_version" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Rechtliches">
+    <PreferenceCategory android:title="@string/settings_legal_section">
         <Preference
             app:key="imprint"
             android:title="@string/settings_imprint_title" />
