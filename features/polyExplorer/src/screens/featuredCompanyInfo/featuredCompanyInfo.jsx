@@ -4,8 +4,6 @@ import i18n from "../../i18n.js";
 import BaseInfoScreen from "../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../components/infographic/infographic.jsx";
 
-import "./featuredCompanyInfo.css";
-
 const FeaturedCompanyInfoScreen = ({ onClose }) => {
     return (
         <BaseInfoScreen
