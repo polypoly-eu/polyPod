@@ -39,7 +39,8 @@ const Infographic = ({ type, texts }) => {
             const divHeight = div.node().getBoundingClientRect().height;
             foreignObject
                 .attr("y", box.y + box.height / 2 - divHeight / 2)
-                .style("overflow", "visible");
+                .attr("height", divHeight);
+            // .style("overflow", "visible");
         });
     });
 

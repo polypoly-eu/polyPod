@@ -256,18 +256,19 @@ const CompanyBubbles = ({
             .style("padding", "4px")
             .style("background", "rgba(15, 25, 56, 0.7)")
             .style("font-family", "Jost Medium")
+            .style("font-weight", "500")
             .style("font-size", "14px")
             .style("line-height", "120%")
             .style("color", "#f7fafc")
             .html(explanation);
-        const scaleFactor =
-            containerRect.height /
-            container.node().getBoundingClientRect().height;
-        const divHeight =
-            div.node().getBoundingClientRect().height * scaleFactor;
+        // const scaleFactor =
+        //     containerRect.height /
+        //     container.node().getBoundingClientRect().height;
+        const divHeight = div.node().getBoundingClientRect().height;
         foreignObject
             .attr("y", topExplanation ? 0 : containerRect.height - divHeight)
-            .style("overflow", "visible");
+            .attr("height", divHeight);
+        // .style("overflow", "visible");
     }
 
     const renderFunctions = {
