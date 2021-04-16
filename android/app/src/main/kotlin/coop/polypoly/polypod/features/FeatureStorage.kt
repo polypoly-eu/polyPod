@@ -45,8 +45,17 @@ class FeatureStorage {
         val manifestString: String = content.getInputStream(
             content.getEntry("manifest.json")
         ).reader().readText()
-        val manifest = FeatureManifest.parse(manifestString)
+        val manifest =
+            FeatureManifest.parse(manifestString, determineLanguage(context))
         return Feature(fileName, content, manifest)
+    }
+
+    private fun determineLanguage(context: Context): String {
+        val supportedLocales = arrayOf("en", "de")
+        val userLocale = context.resources.configuration.locales.getFirstMatch(
+            supportedLocales
+        )
+        return userLocale?.language ?: "en"
     }
 
     fun installBundledFeatures(context: Context) {

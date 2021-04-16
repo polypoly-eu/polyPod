@@ -19,12 +19,12 @@ struct FeatureListView: View {
                     }
                 }
             }
-            .navigationBarTitle("polyPod", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Settings", action: handleOpenSettings))
+            .navigationBarTitle("app_name", displayMode: .inline)
+            .navigationBarItems(trailing: Button("settings_title", action: handleOpenSettings))
         }
     }
 
-    private let features: [Feature] = FeaturesWallet.shared.featuresList()
+    private let features: [Feature] = FeatureStorage.shared.featuresList()
 
     private func handleOpenSettings() {
         UIApplication.shared.open(

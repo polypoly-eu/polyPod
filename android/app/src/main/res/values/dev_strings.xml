@@ -1,0 +1,4 @@
+<resources>
+    <string name="dev_feature_list_no_features" translatable="false">No features there are at this point.\nCome again later or correctly deploy your feature you should.</string>
+    <string name="dev_message_forbidden_resource_requested" translatable="false">Forbidden making requests to external servers is</string>
+</resources>

@@ -27,7 +27,9 @@ struct FeatureView: View {
             .navigationBarTitle(Text(title), displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(
-                leading: Button(activeActions.contains("back") ? "Back" : "Close") {
+                leading: Button(
+                    activeActions.contains("back") ? "app_bar_back_button_desc" : "app_bar_close_button_desc"
+                ) {
                     if activeActions.contains("back") {
                         triggerAction("back")
                         return
@@ -36,12 +38,12 @@ struct FeatureView: View {
                 },
                 trailing: HStack {
                     if activeActions.contains("info") {
-                        Button("Info") {
+                        Button("app_bar_info_button_desc") {
                             triggerAction("info")
                         }
                     }
                     if activeActions.contains("search") {
-                        Button("Search") {
+                        Button("app_bar_search_button_desc") {
                             triggerAction("search")
                         }
                     }
@@ -54,10 +56,10 @@ struct FeatureView: View {
         guard let urlString = feature.findUrl(target: target) else {
             let alert = UIAlertController(
                 title: "",
-                message: """
-                Ich habe \(feature.name) davon abgehalten, eine URL zu öffnen:
-                \(target)
-                """,
+                message: String.localizedStringWithFormat(
+                    NSLocalizedString("message_url_open_prevented %@ %@", comment: ""),
+                    feature.name, target
+                ),
                 preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             viewController.present(alert, animated: true, completion: nil)
@@ -69,21 +71,20 @@ struct FeatureView: View {
         }
         let alert = UIAlertController(
             title: "",
-            message: """
-            \(feature.name) möchte eine URL in Ihrem Browser öffnen:
-
-            \(urlString)
-
-            Zulassen?
-            """,
+            message: String.localizedStringWithFormat(
+                NSLocalizedString("message_url_open_requested %@ %@", comment: ""),
+                feature.name, urlString
+            ),
             preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(
-                            title: "Ja",
+                            title: NSLocalizedString("button_url_open_confirm", comment: ""),
                             style: .default,
                             handler: { (action: UIAlertAction!) in
                                 UIApplication.shared.open(url)
                             }))
-        alert.addAction(UIAlertAction(title: "Nein", style: .default))
+        alert.addAction(UIAlertAction(
+                            title: NSLocalizedString("button_url_open_reject", comment: ""),
+                            style: .default))
         viewController.present(alert, animated: true, completion: nil)
     }
 

@@ -22,12 +22,17 @@ class Feature {
         self.path = path
 
         let manifest = parseManifest(path: path.appendingPathComponent("manifest.json"))
-        name = manifest?.name ?? path.lastPathComponent
-        author = manifest?.author
-        description = manifest?.description
-        primaryColor = parseColor(hexValue: manifest?.primaryColor)
-        thumbnail = findThumbnail(featurePath: path, thumbnailPath: manifest?.thumbnail)
-        links = manifest?.links ?? [:]
+        let userLanguage = Locale.current.languageCode ?? "en"
+        let translations = manifest?.translations?[userLanguage]
+        name = translations?.name ?? manifest?.name ?? path.lastPathComponent
+        author = translations?.author ?? manifest?.author
+        description = translations?.description ?? manifest?.description
+        primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest?.primaryColor)
+        thumbnail = findThumbnail(
+            featurePath: path,
+            thumbnailPath: translations?.thumbnail ?? manifest?.thumbnail
+        )
+        links = translations?.links ?? manifest?.links ?? [:]
     }
 
     func findUrl(target: String) -> String? {
@@ -97,6 +102,16 @@ private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
 }
 
 private struct Manifest: Decodable {
+    let name: String?
+    let author: String?
+    let description: String?
+    let thumbnail: String?
+    let primaryColor: String?
+    let links: [String: String]?
+    let translations: [String: ManifestOverride]?
+}
+
+private struct ManifestOverride: Decodable {
     let name: String?
     let author: String?
     let description: String?
