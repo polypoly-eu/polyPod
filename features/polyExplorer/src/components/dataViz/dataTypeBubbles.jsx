@@ -88,6 +88,7 @@ const DataTypeBubbles = ({
                       );
                   })
                   .style("font-family", "Jost Medium")
+                  .style("font-weight", "500")
             : null;
 
         if (highlight) {
