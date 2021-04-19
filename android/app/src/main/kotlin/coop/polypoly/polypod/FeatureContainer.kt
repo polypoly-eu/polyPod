@@ -88,7 +88,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.isLongClickable = false
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
-        
+
         addView(webView)
     }
 

@@ -42,6 +42,7 @@ function createFakeStorage() {
 
 export const pod =
     window.pod ||
+    window.parent.pod ||
     (() => {
         const fakeStorage = createFakeStorage();
         return {
