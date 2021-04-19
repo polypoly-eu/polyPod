@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct FeatureListView: View {
+    private let features: [Feature]
+
+    init(_ features: [Feature]) {
+        self.features = features
+    }
+
     var body: some View {
         List() {
             Section(header: Text("Features:")) {
@@ -26,12 +32,16 @@ struct FeatureListView: View {
             trailing: Button("settings_title", action: handleOpenSettings))
     }
 
-    private let features: [Feature] = FeatureStorage.shared.featuresList()
-
     private func handleOpenSettings() {
         UIApplication.shared.open(
             URL(string: UIApplication.openSettingsURLString)!,
             options: [:],
             completionHandler: nil)
+    }
+}
+
+struct FeatureListView_Previews: PreviewProvider {
+    static var previews: some View {
+        FeatureListView([])
     }
 }

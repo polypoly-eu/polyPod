@@ -11,8 +11,11 @@ import SwiftUI
 struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
 
+    var initialSlide: Int = 0
+
     var body: some View {
         PageViewController(
+            initialIndex: initialSlide,
             Slide(
                 headline: "onboarding_slide1_headline",
                 subHeadline: "onboarding_slide1_sub_headline",
@@ -39,6 +42,14 @@ struct OnboardingView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
             )
+    }
+}
+
+struct OnboardingView_Previews: PreviewProvider {
+    static var previews: some View {
+        OnboardingView(initialSlide: 0)
+        OnboardingView(initialSlide: 1)
+        OnboardingView(initialSlide: 2)
     }
 }
 
@@ -85,9 +96,11 @@ private struct Slide: View {
 }
 
 private struct PageViewController: UIViewControllerRepresentable {
+    private let initialIndex: Int
     private let viewControllers: [UIViewController]
 
-    init(_ slides: Slide...) {
+    init(initialIndex: Int = 0, _ slides: Slide...) {
+        self.initialIndex = initialIndex
         viewControllers = slides.map { UIHostingController(rootView: $0) }
     }
 
@@ -102,7 +115,7 @@ private struct PageViewController: UIViewControllerRepresentable {
         )
         pageViewController.dataSource = context.coordinator
         pageViewController.setViewControllers(
-            [viewControllers[0]],
+            [viewControllers[initialIndex]],
             direction: .forward,
             animated: false
         )
