@@ -9,19 +9,21 @@ import SwiftUI
 
 struct FeatureListView: View {
     var body: some View {
-        NavigationView {
-            List() {
-                Section(header: Text("Features:")) {
-                    ForEach(features, id: \.name) { feature in
-                        NavigationLink(destination: FeatureView(feature: feature)) {
-                            Text(feature.name)
-                        }
+        List() {
+            Section(header: Text("Features:")) {
+                ForEach(features, id: \.name) { feature in
+                    NavigationLink(destination: FeatureView(feature: feature)) {
+                        Text(feature.name)
                     }
                 }
             }
-            .navigationBarTitle("app_name", displayMode: .inline)
-            .navigationBarItems(trailing: Button("settings_title", action: handleOpenSettings))
         }
+        .navigationBarTitle("app_name", displayMode: .inline)
+        .navigationBarItems(
+            leading: NavigationLink(destination: OnboardingView()) {
+                Text("app_bar_info_button_desc")
+            },
+            trailing: Button("settings_title", action: handleOpenSettings))
     }
 
     private let features: [Feature] = FeatureStorage.shared.featuresList()
