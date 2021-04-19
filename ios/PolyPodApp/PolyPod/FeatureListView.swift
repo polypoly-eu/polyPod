@@ -44,32 +44,9 @@ struct FeatureListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             FeatureListView([
-                createFeature(name: "Feature one"),
-                createFeature(name: "Feature two")
+                createStubFeature(name: "Feature one"),
+                createStubFeature(name: "Feature two")
             ])
         }
-    }
-
-    static private func createFeature(
-        name: String,
-        author: String? = nil,
-        description: String? = nil,
-        thumbnail: String? = nil,
-        primaryColor: String? = nil,
-        links: [String: String]? = nil
-    ) -> Feature {
-        let manifest = Feature.Manifest(
-            name: name,
-            author: author,
-            description: description,
-            thumbnail: thumbnail,
-            primaryColor: primaryColor,
-            links: links,
-            translations: nil
-        )
-        return Feature(
-            path: URL(fileURLWithPath: ""),
-            manifest: manifest
-        )
     }
 }

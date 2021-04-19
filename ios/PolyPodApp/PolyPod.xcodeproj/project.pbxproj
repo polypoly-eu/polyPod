@@ -116,6 +116,7 @@
 		E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
 		E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B712627304800216B70 /* FeatureContainerView.swift */; };
+		E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +201,7 @@
 		E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		E9CF1B712627304800216B70 /* FeatureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureContainerView.swift; sourceTree = "<group>"; };
+		E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +349,7 @@
 				E92373BE26289FA900D2CFF3 /* Localizable.strings */,
 				E90F89E92629822400AD7D96 /* OnboardingView.swift */,
 				E90F89ED2629C0C000AD7D96 /* ContentView.swift */,
+				E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				1A6F4DF424C1A76E00874DF9 /* PolyIn+Select.swift in Sources */,
 				1A8F4886247E91E000089217 /* Unpack.swift in Sources */,
 				1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */,
+				E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */,
 				1A8F488A247E91E000089217 /* MessagePack.swift in Sources */,
 				1A8F488B247E91E000089217 /* LiteralConvertibles.swift in Sources */,
 				1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */,
