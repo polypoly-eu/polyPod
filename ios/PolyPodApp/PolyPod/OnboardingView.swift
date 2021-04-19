@@ -27,7 +27,8 @@ struct OnboardingView: View {
                 headline: "onboarding_slide3_headline",
                 subHeadline: "onboarding_slide3_sub_headline",
                 bodyText: "onboarding_slide3_body_text",
-                button: Button("onboarding_button_end") {
+                buttonLabel: "onboarding_button_end",
+                buttonAction: {
                     presentationMode.wrappedValue.dismiss()
                 }
             )
@@ -45,15 +46,41 @@ private struct Slide: View {
     var headline: LocalizedStringKey
     var subHeadline: LocalizedStringKey
     var bodyText: LocalizedStringKey
-    var button: Button<Text>?
+    var buttonLabel: LocalizedStringKey?
+    var buttonAction: (() -> Void)?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(headline).font(.largeTitle)
-            Text(subHeadline).font(.title)
-            Text(bodyText)
-            button
-        }.padding()
+        HStack {
+            VStack(alignment: .leading) {
+                Text(headline)
+                    .font(.largeTitle)
+
+                Text(subHeadline)
+                    .font(.title)
+                    .padding(.bottom, 20)
+
+                Text(bodyText)
+
+                Spacer()
+
+                if let buttonLabel = buttonLabel {
+                    Button(action: buttonAction ?? {}) {
+                        Text(buttonLabel)
+                            .frame(minWidth: 296, minHeight: 48)
+                            .background(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(Color(red: 0.984, green: 0.541, blue: 0.537))
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
+            .padding(32)
+
+            Spacer()
+        }
+        .background(Color.white)
     }
 }
 
