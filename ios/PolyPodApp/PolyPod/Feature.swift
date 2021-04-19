@@ -18,21 +18,28 @@ class Feature {
     let thumbnail: URL?
     private let links: [String: String]
 
-    init(path: URL) {
-        self.path = path
+    static func load(path: URL) -> Feature? {
+        let manifestPath = path.appendingPathComponent("manifest.json")
+        guard let manifest = Manifest.load(path: manifestPath) else {
+            print("Failed to load feature manifest from: \(manifestPath)")
+            return nil
+        }
+        return Feature(path: path, manifest: manifest)
+    }
 
-        let manifest = parseManifest(path: path.appendingPathComponent("manifest.json"))
+    init(path: URL, manifest: Manifest) {
+        self.path = path
         let userLanguage = Locale.current.languageCode ?? "en"
-        let translations = manifest?.translations?[userLanguage]
-        name = translations?.name ?? manifest?.name ?? path.lastPathComponent
-        author = translations?.author ?? manifest?.author
-        description = translations?.description ?? manifest?.description
-        primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest?.primaryColor)
+        let translations = manifest.translations?[userLanguage]
+        name = translations?.name ?? manifest.name ?? path.lastPathComponent
+        author = translations?.author ?? manifest.author
+        description = translations?.description ?? manifest.description
+        primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
         thumbnail = findThumbnail(
             featurePath: path,
-            thumbnailPath: translations?.thumbnail ?? manifest?.thumbnail
+            thumbnailPath: translations?.thumbnail ?? manifest.thumbnail
         )
-        links = translations?.links ?? manifest?.links ?? [:]
+        links = translations?.links ?? manifest.links ?? [:]
     }
 
     func findUrl(target: String) -> String? {
@@ -44,19 +51,38 @@ class Feature {
         }
         return nil
     }
-}
 
-private func parseManifest(path: URL) -> Manifest? {
-    guard let contents = try? String(contentsOf: path) else {
-        return nil
+    struct Manifest: Decodable {
+        let name: String?
+        let author: String?
+        let description: String?
+        let thumbnail: String?
+        let primaryColor: String?
+        let links: [String: String]?
+        let translations: [String: Override]?
+
+        static func load(path: URL) -> Manifest? {
+            guard let contents = try? String(contentsOf: path) else {
+                return nil
+            }
+            guard let data = contents.data(using: .utf8) else {
+                return nil
+            }
+            guard let manifest = try? JSONDecoder().decode(Manifest.self, from: data) else {
+                return nil
+            }
+            return manifest
+        }
+
+        struct Override: Decodable {
+            let name: String?
+            let author: String?
+            let description: String?
+            let thumbnail: String?
+            let primaryColor: String?
+            let links: [String: String]?
+        }
     }
-    guard let data = contents.data(using: .utf8) else {
-        return nil
-    }
-    guard let manifest = try? JSONDecoder().decode(Manifest.self, from: data) else {
-        return nil
-    }
-    return manifest
 }
 
 private func parseColor(hexValue: String?) -> UIColor? {
@@ -99,23 +125,4 @@ private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
         return nil
     }
     return fullPath
-}
-
-private struct Manifest: Decodable {
-    let name: String?
-    let author: String?
-    let description: String?
-    let thumbnail: String?
-    let primaryColor: String?
-    let links: [String: String]?
-    let translations: [String: ManifestOverride]?
-}
-
-private struct ManifestOverride: Decodable {
-    let name: String?
-    let author: String?
-    let description: String?
-    let thumbnail: String?
-    let primaryColor: String?
-    let links: [String: String]?
 }

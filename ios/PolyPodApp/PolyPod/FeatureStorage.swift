@@ -43,7 +43,11 @@ class FeatureStorage {
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: featuresFileUrl, includingPropertiesForKeys: nil)
             let subDirs = directoryContents.filter{ $0.hasDirectoryPath }
-            featuresList = subDirs.map{ Feature(path: $0) }
+            for featureDir in subDirs {
+                if let feature = Feature.load(path: featureDir) {
+                    featuresList.append(feature)
+                }
+            }
         } catch {
             print(error.localizedDescription)
         }
