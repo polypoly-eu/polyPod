@@ -7,7 +7,6 @@ import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
 import android.webkit.*
-import android.webkit.WebView.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
@@ -20,7 +19,6 @@ import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import eu.polypoly.pod.android.polyOut.PolyOut
-import java.io.BufferedReader
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -83,6 +81,9 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
+
+        // Enabling localStorage
+        webView.settings.domStorageEnabled = true
 
         // Disable text selection
         webView.isLongClickable = false
