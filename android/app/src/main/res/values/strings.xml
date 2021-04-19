@@ -3,7 +3,7 @@
     <string name="app_bar_close_button_desc">Close</string>
     <string name="app_bar_search_button_desc">Search</string>
     <string name="app_bar_info_button_desc">Info</string>
-    <string name="onboarding_button_end">Los geht\'s</string>
+    <string name="onboarding_button_end">OK</string>
     <string name="onboarding_slide1_headline">"Hello, may I \nintroduce myself?"</string>
     <string name="onboarding_slide1_sub_headline">I am your\npolyPod.</string>
     <string name="onboarding_slide1_body_text">In the future, I want to help you to keep your data private. That won\'t happen overnight of course, but we\'ll manage this together, step by step.</string>

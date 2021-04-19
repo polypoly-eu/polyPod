@@ -271,7 +271,6 @@ const CompanyBubbles = ({
         foreignObject
             .attr("y", topExplanation ? 0 : containerRect.height - divHeight)
             .attr("height", divHeight);
-        console.log(container.node());
     }
 
     const renderFunctions = {

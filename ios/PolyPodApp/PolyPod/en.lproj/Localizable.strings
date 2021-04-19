@@ -11,7 +11,7 @@
 "app_bar_back_button_desc" = "Back";
 "app_bar_search_button_desc" = "Search";
 "app_bar_info_button_desc" = "Info";
-"onboarding_button_end" = "Los geht's";
+"onboarding_button_end" = "OK";
 "onboarding_slide1_headline" = "Hello, may I \nintroduce myself?";
 "onboarding_slide1_sub_headline" = "I am your\npolyPod.";
 "onboarding_slide1_body_text" = "In the future, I want to help you to keep your data private. That won't happen overnight of course, but we'll manage this together, step by step.";
