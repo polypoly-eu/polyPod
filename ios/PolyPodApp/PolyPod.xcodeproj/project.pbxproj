@@ -117,6 +117,10 @@
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
 		E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B712627304800216B70 /* FeatureContainerView.swift */; };
 		E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */; };
+		E9F370CA262DD92C006254C1 /* jost_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C6262DD92C006254C1 /* jost_light.ttf */; };
+		E9F370CB262DD92C006254C1 /* polydisplay_semi_1_0.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C7262DD92C006254C1 /* polydisplay_semi_1_0.otf */; };
+		E9F370CC262DD92C006254C1 /* jost_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C8262DD92C006254C1 /* jost_medium.ttf */; };
+		E9F370CD262DD92C006254C1 /* jost_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C9262DD92C006254C1 /* jost_regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +206,10 @@
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		E9CF1B712627304800216B70 /* FeatureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureContainerView.swift; sourceTree = "<group>"; };
 		E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUtils.swift; sourceTree = "<group>"; };
+		E9F370C6262DD92C006254C1 /* jost_light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_light.ttf; sourceTree = "<group>"; };
+		E9F370C7262DD92C006254C1 /* polydisplay_semi_1_0.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = polydisplay_semi_1_0.otf; sourceTree = "<group>"; };
+		E9F370C8262DD92C006254C1 /* jost_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_medium.ttf; sourceTree = "<group>"; };
+		E9F370C9262DD92C006254C1 /* jost_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_regular.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +341,7 @@
 		1AA6DE3124191C94008DB1B2 /* PolyPod */ = {
 			isa = PBXGroup;
 			children = (
+				E9F370C5262DD8EF006254C1 /* fonts */,
 				1A4C21C324A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld */,
 				1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */,
 				1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */,
@@ -409,6 +418,17 @@
 				1AF1178524BE22D50063EE37 /* FileStats.swift */,
 			);
 			path = FS;
+			sourceTree = "<group>";
+		};
+		E9F370C5262DD8EF006254C1 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E9F370C6262DD92C006254C1 /* jost_light.ttf */,
+				E9F370C8262DD92C006254C1 /* jost_medium.ttf */,
+				E9F370C9262DD92C006254C1 /* jost_regular.ttf */,
+				E9F370C7262DD92C006254C1 /* polydisplay_semi_1_0.otf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -510,14 +530,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ABADBCB24E2E06600369791 /* initIframe.js in Resources */,
+				E9F370CD262DD92C006254C1 /* jost_regular.ttf in Resources */,
 				1A00DFF724569F3A0049F3F7 /* pod.html in Resources */,
 				E923AAF7261E155500E0A2A8 /* podNav.js in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
 				E92373BC26289FA900D2CFF3 /* Localizable.strings in Resources */,
 				1AB4F37E2508D64600E66BCC /* Settings.bundle in Resources */,
 				1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */,
+				E9F370CC262DD92C006254C1 /* jost_medium.ttf in Resources */,
+				E9F370CA262DD92C006254C1 /* jost_light.ttf in Resources */,
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
+				E9F370CB262DD92C006254C1 /* polydisplay_semi_1_0.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

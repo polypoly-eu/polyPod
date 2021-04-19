@@ -68,37 +68,49 @@ private struct Slide: View {
     var buttonLabel: LocalizedStringKey?
     var buttonAction: (() -> Void)?
 
+    private let indigo = Color(red: 0.059, green: 0.098, blue: 0.22)
+
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(headline)
-                    .font(.largeTitle)
+        VStack(alignment: .leading) {
+            Text(headline)
+                .font(.custom("Jost Light", size: 34))
+                .kerning(-0.38)
+                .fontWeight(.light)
+                .foregroundColor(indigo)
 
-                Text(subHeadline)
-                    .font(.title)
-                    .padding(.bottom, 20)
+            Text(subHeadline)
+                .font(.custom("polyDisplay Semi 1.0", size: 34))
+                .kerning(-0.24)
+                .fontWeight(.semibold)
+                .foregroundColor(indigo)
+                .padding(.bottom, 20)
 
-                Text(bodyText)
-
-                Spacer()
-
-                if let buttonLabel = buttonLabel {
-                    Button(action: buttonAction ?? {}) {
-                        Text(buttonLabel)
-                            .frame(minWidth: 296, minHeight: 48)
-                            .background(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color(red: 0.984, green: 0.541, blue: 0.537))
-                            )
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .frame(maxWidth: .infinity, alignment: .center)
-                }
-            }
-            .padding(32)
+            Text(bodyText)
+                .font(.custom("Jost", size: 20))
+                .kerning(-0.24)
+                .fontWeight(.regular)
+                .foregroundColor(indigo)
 
             Spacer()
+
+            if let buttonLabel = buttonLabel {
+                Button(action: buttonAction ?? {}) {
+                    Text(buttonLabel)
+                        .font(Font.custom("Jost Medium", size: 14))
+                        .kerning(-0.18)
+                        .fontWeight(.medium)
+                        .foregroundColor(indigo)
+                        .frame(minWidth: 296, minHeight: 48)
+                        .background(
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(Color(red: 0.984, green: 0.541, blue: 0.537))
+                        )
+                }
+                .buttonStyle(PlainButtonStyle())
+                .frame(maxWidth: .infinity, alignment: .center)
+            }
         }
+        .padding(28)
         .background(Color.white)
     }
 }
