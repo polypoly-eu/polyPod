@@ -23,6 +23,9 @@ class FeatureStorage {
         }
         return URL(fileURLWithPath: "")
     }()
+
+    lazy private var featureDirUrl: URL =
+        URL(string: featuresFileUrl.path) ?? URL(fileURLWithPath: "")
     
     func cleanFeatures() {
         do {
@@ -55,7 +58,6 @@ class FeatureStorage {
     }
     
     private func createFeaturesFolder() {
-        let featureDirUrl = URL(string: featuresFileUrl.path)!
         do {
             try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
         } catch {
@@ -64,7 +66,6 @@ class FeatureStorage {
     }
     
     private func importFeature(_ featureName: String) {
-        let featureDirUrl = URL(string: featuresFileUrl.path)!
         let featureUrl = featureDirUrl.appendingPathComponent(featureName)
         if !FileManager.default.fileExists(atPath: featureUrl.absoluteString) {
             do {
