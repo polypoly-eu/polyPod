@@ -37,6 +37,7 @@ function loadFeature() {
     console.log(`Loading Feature: "${featureName}"`);
     const iFrame = document.getElementById("harness");
     iFrame.onload = ev => initIframe(ev.target);
+    iFrame.contentWindow.pod = window.pod;
     iFrame.src = `features/${featureName}/index.html`;
 }
 
