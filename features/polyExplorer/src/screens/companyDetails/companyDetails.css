@@ -230,17 +230,22 @@
     background-image: -webkit-linear-gradient(#0f193800, #0f1938);
 }
 
+.explore-data-btn-area {
+    text-align: center;
+    padding: 0 30px;
+}
+
 .explore-data-btn {
     flex: 0 0 auto;
     box-sizing: border-box;
-    width: 85%;
+    width: 296px;
     max-width: 412px;
     height: 48px;
     background-color: #f7fafc;
     color: #0f1938;
     font-size: 18px;
     font-weight: 500;
-    margin: 0 auto 24px auto;
+    margin-bottom: 24px;
     border-radius: 4px;
     border: transparent;
     outline: none;

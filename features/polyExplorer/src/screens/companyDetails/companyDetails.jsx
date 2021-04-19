@@ -271,12 +271,14 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                 ></div>
 
                 {company.featured ? (
-                    <button
-                        className="explore-data-btn"
-                        onClick={() => onOpenExploration(company.name)}
-                    >
-                        {i18n.t("companyDetailsScreen:button.exploreData")}
-                    </button>
+                    <div className="explore-data-btn-area">
+                        <button
+                            className="explore-data-btn"
+                            onClick={() => onOpenExploration(company.name)}
+                        >
+                            {i18n.t("companyDetailsScreen:button.exploreData")}
+                        </button>
+                    </div>
                 ) : (
                     <div></div>
                 )}
