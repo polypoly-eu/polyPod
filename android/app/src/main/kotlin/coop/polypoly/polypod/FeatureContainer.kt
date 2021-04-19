@@ -99,7 +99,6 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
-
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler(
                 "/features/${feature.name}/",
