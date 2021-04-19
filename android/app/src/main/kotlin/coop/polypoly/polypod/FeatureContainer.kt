@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.util.AttributeSet
 import android.webkit.*
@@ -80,8 +79,6 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     }
 
     init {
-        setWebContentsDebuggingEnabled(true);
-
         webView.layoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
@@ -91,12 +88,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.isLongClickable = false
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
-
-        webView.settings.allowFileAccessFromFileURLs = true
-        webView.settings.allowUniversalAccessFromFileURLs = true
-        webView.settings.allowContentAccess = true;
-        webView.settings.allowFileAccess = true;
-
+        
         addView(webView)
     }
 
@@ -139,13 +131,6 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                     return errorResponse
                 }
                 return response
-            }
-
-            override fun onPageStarted(view: WebView?, url: String?, favIcon: Bitmap?) {
-                val content = context.assets.open(
-                    "container/pod.js"
-                )?.bufferedReader().use(BufferedReader::readText)
-                webView.evaluateJavascript(content) { }
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
