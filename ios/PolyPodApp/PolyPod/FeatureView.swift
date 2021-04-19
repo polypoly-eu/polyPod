@@ -11,7 +11,7 @@ import SwiftUI
 struct FeatureView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    let feature: Feature
+    let feature: Feature?
     @State var title: String = ""
     @State var activeActions: [String] = []
     @State var queuedAction: (String, DispatchTime)? = nil
@@ -53,12 +53,12 @@ struct FeatureView: View {
 
     private func openUrl(target: String) {
         let viewController = UIApplication.shared.windows.first!.rootViewController!
-        guard let urlString = feature.findUrl(target: target) else {
+        guard let urlString = feature?.findUrl(target: target) else {
             let alert = UIAlertController(
                 title: "",
                 message: String.localizedStringWithFormat(
                     NSLocalizedString("message_url_open_prevented %@ %@", comment: ""),
-                    feature.name, target
+                    feature?.name ?? "", target
                 ),
                 preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -73,7 +73,7 @@ struct FeatureView: View {
             title: "",
             message: String.localizedStringWithFormat(
                 NSLocalizedString("message_url_open_requested %@ %@", comment: ""),
-                feature.name, urlString
+                feature?.name ?? "", urlString
             ),
             preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(
@@ -90,5 +90,13 @@ struct FeatureView: View {
 
     private func triggerAction(_ action: String) {
         queuedAction = (action, DispatchTime.now())
+    }
+}
+
+struct FeatureView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            FeatureView(feature: nil)
+        }
     }
 }

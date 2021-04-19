@@ -10,7 +10,7 @@ import SwiftUI
 import WebKit
 
 struct FeatureContainerView: UIViewRepresentable {
-    let feature: Feature
+    let feature: Feature?
     @Binding var title: String
     @Binding var activeActions: [String]
     var queuedAction: (String, DispatchTime)?
@@ -47,7 +47,7 @@ class FeatureWebView: WKWebView {
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
 
     init(
-        feature: Feature,
+        feature: Feature?,
         title: Binding<String>,
         activeActions: Binding<[String]>,
         openUrlHandler: @escaping (String) -> Void
@@ -76,6 +76,9 @@ class FeatureWebView: WKWebView {
             contentController.add(self, name: $0.rawValue)
         }
 
+        guard let feature = feature else {
+            return
+        }
         let featureUrl = feature.path
         let featureFileUrl = featureUrl.appendingPathComponent("pod.html")
         loadFileURL(featureFileUrl, allowingReadAccessTo: featureUrl)
