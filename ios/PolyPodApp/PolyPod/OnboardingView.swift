@@ -47,9 +47,17 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(initialSlide: 0)
-        OnboardingView(initialSlide: 1)
-        OnboardingView(initialSlide: 2)
+        NavigationView {
+            OnboardingView(initialSlide: 0)
+        }
+
+        NavigationView {
+            OnboardingView(initialSlide: 1)
+        }
+
+        NavigationView {
+            OnboardingView(initialSlide: 2)
+        }
     }
 }
 

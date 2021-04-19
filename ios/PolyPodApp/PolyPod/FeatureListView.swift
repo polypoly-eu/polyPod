@@ -42,10 +42,12 @@ struct FeatureListView: View {
 
 struct FeatureListView_Previews: PreviewProvider {
     static var previews: some View {
-        FeatureListView([
-            createFeature(name: "Feature one"),
-            createFeature(name: "Feature two")
-        ])
+        NavigationView {
+            FeatureListView([
+                createFeature(name: "Feature one"),
+                createFeature(name: "Feature two")
+            ])
+        }
     }
 
     static private func createFeature(
