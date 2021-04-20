@@ -14,6 +14,7 @@ struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @State var activeSlide: Int = 0
+    var closeAction: () -> Void = {}
 
     var body: some View {
         VStack {
@@ -34,9 +35,7 @@ struct OnboardingView: View {
                     subHeadline: "onboarding_slide3_sub_headline",
                     bodyText: "onboarding_slide3_body_text",
                     buttonLabel: "onboarding_button_end",
-                    buttonAction: {
-                        presentationMode.wrappedValue.dismiss()
-                    }
+                    buttonAction: close
                 ).padding(28)
             )
 
@@ -48,10 +47,13 @@ struct OnboardingView: View {
         .background(Color.white)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(
-            leading: Button("app_bar_close_button_desc") {
-                presentationMode.wrappedValue.dismiss()
-            }
+            leading: Button("app_bar_close_button_desc", action: close)
         )
+    }
+
+    private func close() {
+        presentationMode.wrappedValue.dismiss()
+        closeAction()
     }
 }
 
