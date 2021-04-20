@@ -20,13 +20,14 @@
     will still receive it, even if the content has been changed.
 
     If the notification ID is set to 0, no notifications will be shown at all.
--->
+    -->
     <integer name="update_notification_id">59569961</integer>
+
+    <!-- Delay after which the push notification is shown, in seconds -->
+    <integer name="update_notification_push_delay">120</integer>
+
     <string name="update_notification_title">Test notification</string>
     <string name="update_notification_text">
         Just testing the notification system here, let @fhd know if it works :)
     </string>
-
-    <!-- Delay after which the push notification is shown, in seconds -->
-    <integer name="update_notification_push_delay">120</integer>
 </resources>

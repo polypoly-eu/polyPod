@@ -261,13 +261,13 @@ const CompanyBubbles = ({
             .style("line-height", "120%")
             .style("color", "#f7fafc")
             .html(explanation);
-        //  TO DO: The divHeight is not accurate. We still need to calculate the correct scaleFactor.
-        //   const scaleFactor =
-        //     containerRect.height /
-        //     container.node().getBoundingClientRect().height;
-        const scaleFactor = 100;
+
         const divHeight =
-            div.node().getBoundingClientRect().height + scaleFactor;
+            div.node().getBoundingClientRect().height /
+            utils.scaleFactor(
+                containerRect,
+                container.node().getBoundingClientRect()
+            );
         foreignObject
             .attr("y", topExplanation ? 0 : containerRect.height - divHeight)
             .attr("height", divHeight);

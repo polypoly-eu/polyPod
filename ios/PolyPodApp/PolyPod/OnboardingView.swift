@@ -11,8 +11,11 @@ import SwiftUI
 struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
 
+    var initialSlide: Int = 0
+
     var body: some View {
         PageViewController(
+            initialIndex: initialSlide,
             Slide(
                 headline: "onboarding_slide1_headline",
                 subHeadline: "onboarding_slide1_sub_headline",
@@ -42,6 +45,22 @@ struct OnboardingView: View {
     }
 }
 
+struct OnboardingView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            OnboardingView(initialSlide: 0)
+        }
+
+        NavigationView {
+            OnboardingView(initialSlide: 1)
+        }
+
+        NavigationView {
+            OnboardingView(initialSlide: 2)
+        }
+    }
+}
+
 private struct Slide: View {
     var headline: LocalizedStringKey
     var subHeadline: LocalizedStringKey
@@ -49,45 +68,66 @@ private struct Slide: View {
     var buttonLabel: LocalizedStringKey?
     var buttonAction: (() -> Void)?
 
+    private let indigo = Color(red: 0.059, green: 0.098, blue: 0.22)
+
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(headline)
-                    .font(.largeTitle)
+        VStack(alignment: .leading, spacing: 0) {
+            ParagraphView(
+                text: headline,
+                fontName: "Jost-Light",
+                fontSize: 34,
+                kerning: -0.38,
+                lineHeightMultiple: 0.83,
+                foregroundColor: indigo
+            )
 
-                Text(subHeadline)
-                    .font(.title)
-                    .padding(.bottom, 20)
+            ParagraphView(
+                text: subHeadline,
+                fontName: "polyDisplay-Semi1.0",
+                fontSize: 34,
+                kerning: -0.24,
+                lineHeightMultiple: 0.83,
+                foregroundColor: indigo
+            ).padding(.bottom, 24)
 
-                Text(bodyText)
-
-                Spacer()
-
-                if let buttonLabel = buttonLabel {
-                    Button(action: buttonAction ?? {}) {
-                        Text(buttonLabel)
-                            .frame(minWidth: 296, minHeight: 48)
-                            .background(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color(red: 0.984, green: 0.541, blue: 0.537))
-                            )
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .frame(maxWidth: .infinity, alignment: .center)
-                }
-            }
-            .padding(32)
+            ParagraphView(
+                text: bodyText,
+                fontName: "Jost-Regular",
+                fontSize: 20,
+                kerning: -0.24,
+                lineHeightMultiple: 0.83,
+                foregroundColor: indigo
+            )
 
             Spacer()
+
+            if let buttonLabel = buttonLabel {
+                Button(action: buttonAction ?? {}) {
+                    Text(buttonLabel)
+                        .font(.custom("Jost-Medium", size: 14))
+                        .kerning(-0.18)
+                        .foregroundColor(indigo)
+                        .frame(minWidth: 296, minHeight: 48)
+                        .background(
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(Color(red: 0.984, green: 0.541, blue: 0.537))
+                        )
+                }
+                .buttonStyle(PlainButtonStyle())
+                .frame(maxWidth: .infinity, alignment: .center)
+            }
         }
+        .padding(28)
         .background(Color.white)
     }
 }
 
 private struct PageViewController: UIViewControllerRepresentable {
+    private let initialIndex: Int
     private let viewControllers: [UIViewController]
 
-    init(_ slides: Slide...) {
+    init(initialIndex: Int = 0, _ slides: Slide...) {
+        self.initialIndex = initialIndex
         viewControllers = slides.map { UIHostingController(rootView: $0) }
     }
 
@@ -102,7 +142,7 @@ private struct PageViewController: UIViewControllerRepresentable {
         )
         pageViewController.dataSource = context.coordinator
         pageViewController.setViewControllers(
-            [viewControllers[0]],
+            [viewControllers[initialIndex]],
             direction: .forward,
             animated: false
         )

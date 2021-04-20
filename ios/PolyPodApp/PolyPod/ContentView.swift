@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            FeatureListView()
+            FeatureListView(FeatureStorage.shared.featuresList())
         }
     }
 }

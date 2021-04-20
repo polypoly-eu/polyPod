@@ -1,48 +1,46 @@
 {
     "intro.headline":
-        "We are developing<br>the polyPod -",
+        "We develop<br>the polyPod -",
     "intro.subHeadline":
         "together, as a<br>cooperative",
     "intro.bodyText":
-        "<p>With the help of our members, we keep developing the polyPod. Together we want to enforce what we are entitled to: Our right to privacy!</p><p>Anxious to see what happens next? The next steps:</p>",
+        "<p>With the support of our members, we continuously improve the polyPod. Together, we want to enforce what we are entitled to: Our right to privacy!</p><p>Curious to see where this goes? The next steps:</p>",
     "explore.headline":
         "Explore",
     "explore.subHeadline":
         "how data is distributed",
     "explore.bodyText":
-        "In step 1, you can explore data streams. Find out how companies handle data, what data they collect, and with whom it is shared.",
-    "explore.today":
-        "today",
+        "In step one, you can explore data streams. Find out how companies handle data, what they collect, and with whom it is shared.",
     "know.headline":
-        "you'll know",
+        "Know",
     "know.subHeadline":
-        "who has your data",
+        "who keeps your data",
     "know.bodyText":
-        "In step 2 you will see what data companies have from you. Get your data on your polyPod and start managing it there.",
+        "In step two, you will see what data companies keep about you. Take your data into your polyPod and start to manage it there.",
     "correct.headline":
-        "correct",
+        "Correct",
     "correct.subHeadline":
-        "if data is incorrect",
+        "your data",
     "correct.bodyText":
-        "In step 3, correct piece by piece your data at companies. Gradually delete data that is incorrect or that you do not want to share.",
+        "In step three, you can correct data companies keep about you. Gradually delete data that is incorrect, or that you don't want to share.",
     "control.headline":
-        "control",
+        "Control",
     "control.subHeadline":
-        "who is using your data",
+        "who gets your data",
     "control.bodyText":
-        "In step 4, use more and more applications without giving up control of your data. Determine who accesses your data at any time.",
+        "In step four, you can use more and more applications without surrendering your data. Decide who gets to access your data, at any time.",
     "earn.headline":
         "Rent out",
     "earn.subHeadline":
         "any data you want",
     "earn.bodyText":
-        "In step 5, start earning money with your data, if you want to. Rent out your data to whoever you want, for as long as you want.",
+        "In step five, you can begin to earn money with your data, if you want to. Rent out your data to whoever you want, for as long as you want.",
     "outro.headline":
-        "Help!<br>become",
+        "Help out!<br>Become a",
     "outro.subHeadline":
-        "Shareholder<br>at polypoly",
+        "shareholder<br>at polypoly",
     "outro.bodyText":
-        "<p>Help us to further develop the polyPod together. Become a shareholder:in of polypoly - The Cooperative - and thus co-owner:in at the polyPod.</p>",
+        "<p>Help us develop the polyPod further. Become a shareholder of polypoly - The Cooperative - and thus a co-owner of the polyPod.</p>",
     "outro.button.learnMore":
         "Learn more"
 }

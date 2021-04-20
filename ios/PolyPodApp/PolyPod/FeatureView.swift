@@ -92,3 +92,11 @@ struct FeatureView: View {
         queuedAction = (action, DispatchTime.now())
     }
 }
+
+struct FeatureView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            FeatureView(feature: createStubFeature(name: "Test"))
+        }
+    }
+}
