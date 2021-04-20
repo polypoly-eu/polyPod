@@ -17,31 +17,32 @@ struct OnboardingView: View {
     var closeAction: () -> Void = {}
 
     var body: some View {
-        VStack {
-            PageViewController(
-                activeIndex: $activeSlide,
-                Slide(
-                    headline: "onboarding_slide1_headline",
-                    subHeadline: "onboarding_slide1_sub_headline",
-                    bodyText: "onboarding_slide1_body_text"
-                ).padding(28),
-                Slide(
-                    headline: "onboarding_slide2_headline",
-                    subHeadline: "onboarding_slide2_sub_headline",
-                    bodyText: "onboarding_slide2_body_text"
-                ).padding(28),
-                Slide(
-                    headline: "onboarding_slide3_headline",
-                    subHeadline: "onboarding_slide3_sub_headline",
-                    bodyText: "onboarding_slide3_body_text",
-                    buttonLabel: "onboarding_button_end",
-                    buttonAction: close
-                ).padding(28)
-            )
+        let slides = [
+            Slide(
+                headline: "onboarding_slide1_headline",
+                subHeadline: "onboarding_slide1_sub_headline",
+                bodyText: "onboarding_slide1_body_text"
+            ).padding(28),
+            Slide(
+                headline: "onboarding_slide2_headline",
+                subHeadline: "onboarding_slide2_sub_headline",
+                bodyText: "onboarding_slide2_body_text"
+            ).padding(28),
+            Slide(
+                headline: "onboarding_slide3_headline",
+                subHeadline: "onboarding_slide3_sub_headline",
+                bodyText: "onboarding_slide3_body_text",
+                buttonLabel: "onboarding_button_end",
+                buttonAction: close
+            ).padding(28)
+        ]
+
+        return VStack {
+            PageViewController(activeIndex: $activeSlide, views: slides)
 
             Spacer()
 
-            Pagination(active: activeSlide)
+            Pagination(active: activeSlide, max: slides.count - 1)
                 .padding(.bottom, 36)
         }
         .background(Color.white)
@@ -59,16 +60,10 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            OnboardingView(activeSlide: 0)
-        }
-
-        NavigationView {
-            OnboardingView(activeSlide: 1)
-        }
-
-        NavigationView {
-            OnboardingView(activeSlide: 2)
+        ForEach((0...2), id: \.self) { index in
+            NavigationView {
+                OnboardingView(activeSlide: index)
+            }
         }
     }
 }
@@ -144,12 +139,13 @@ private struct Slide: View {
 
 private struct Pagination: View {
     var active: Int
+    var max: Int
 
     var body: some View {
         HStack(spacing: 12) {
-            Item(active: active == 0)
-            Item(active: active == 1)
-            Item(active: active == 2)
+            ForEach((0...max), id: \.self) { index in
+                Item(active: index == active)
+            }
         }
     }
 
@@ -170,7 +166,7 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
     private let activeIndex: Binding<Int>?
     private let viewControllers: [UIViewController]
 
-    init(activeIndex: Binding<Int>? = nil, _ views: Content...) {
+    init(activeIndex: Binding<Int>? = nil, views: [Content]) {
         self.activeIndex = activeIndex
         viewControllers = views.map { UIHostingController(rootView: $0) }
     }
