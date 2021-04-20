@@ -134,6 +134,7 @@ const PolyExplorer = () => {
     };
 
     function handleOnboardingPopupClose() {
+        updatePodNavigation();
         setFirstRun(false);
         writeFirstRun(false);
     }
@@ -175,8 +176,15 @@ const PolyExplorer = () => {
         );
     }
 
+    function disablePodNavigation() {
+        podNav.actions = {
+            info: () => {},
+            search: () => {},
+        };
+    }
+
     useEffect(() => {
-        updatePodNavigation();
+        firstRun ? disablePodNavigation() : updatePodNavigation();
         setTimeout(() => readFirstRun().then(setFirstRun), 300);
     });
 
