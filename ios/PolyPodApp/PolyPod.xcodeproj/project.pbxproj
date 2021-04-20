@@ -121,6 +121,10 @@
 		E9F370CB262DD92C006254C1 /* polydisplay_semi_1_0.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C7262DD92C006254C1 /* polydisplay_semi_1_0.otf */; };
 		E9F370CC262DD92C006254C1 /* jost_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C8262DD92C006254C1 /* jost_medium.ttf */; };
 		E9F370CD262DD92C006254C1 /* jost_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C9262DD92C006254C1 /* jost_regular.ttf */; };
+		E9F370D5262EABFF006254C1 /* LocalizedStringKey+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370D4262EABFF006254C1 /* LocalizedStringKey+Additions.swift */; };
+		E9F370DD262EE9EE006254C1 /* WidthReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370DC262EE9EE006254C1 /* WidthReader.swift */; };
+		E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E0262EEB2C006254C1 /* ParagraphView.swift */; };
+		E9F370E7262EEF13006254C1 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E6262EEF13006254C1 /* UIColor+Additions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +214,10 @@
 		E9F370C7262DD92C006254C1 /* polydisplay_semi_1_0.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = polydisplay_semi_1_0.otf; sourceTree = "<group>"; };
 		E9F370C8262DD92C006254C1 /* jost_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_medium.ttf; sourceTree = "<group>"; };
 		E9F370C9262DD92C006254C1 /* jost_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_regular.ttf; sourceTree = "<group>"; };
+		E9F370D4262EABFF006254C1 /* LocalizedStringKey+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalizedStringKey+Additions.swift"; sourceTree = "<group>"; };
+		E9F370DC262EE9EE006254C1 /* WidthReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthReader.swift; sourceTree = "<group>"; };
+		E9F370E0262EEB2C006254C1 /* ParagraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphView.swift; sourceTree = "<group>"; };
+		E9F370E6262EEF13006254C1 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +367,10 @@
 				E90F89E92629822400AD7D96 /* OnboardingView.swift */,
 				E90F89ED2629C0C000AD7D96 /* ContentView.swift */,
 				E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */,
+				E9F370D4262EABFF006254C1 /* LocalizedStringKey+Additions.swift */,
+				E9F370DC262EE9EE006254C1 /* WidthReader.swift */,
+				E9F370E0262EEB2C006254C1 /* ParagraphView.swift */,
+				E9F370E6262EEF13006254C1 /* UIColor+Additions.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -650,6 +662,7 @@
 				1A8F4886247E91E000089217 /* Unpack.swift in Sources */,
 				1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */,
 				E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */,
+				E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */,
 				1A8F488A247E91E000089217 /* MessagePack.swift in Sources */,
 				1A8F488B247E91E000089217 /* LiteralConvertibles.swift in Sources */,
 				1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */,
@@ -675,6 +688,8 @@
 				E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */,
 				1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
+				E9F370D5262EABFF006254C1 /* LocalizedStringKey+Additions.swift in Sources */,
+				E9F370E7262EEF13006254C1 /* UIColor+Additions.swift in Sources */,
 				1ABADBEC24EBD02C00369791 /* LocationTracker.swift in Sources */,
 				1ABADBF124EE6FB700369791 /* DataFactory.swift in Sources */,
 				1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */,
@@ -688,6 +703,7 @@
 				1ABADC0E24EFB9F300369791 /* Models.swift in Sources */,
 				1AF46893241FBA7200E51B6D /* JSONSerialization+Additions.swift in Sources */,
 				1A4C21F224A63E4C006CC1FD /* Quad+CoreDataClass.swift in Sources */,
+				E9F370DD262EE9EE006254C1 /* WidthReader.swift in Sources */,
 				1AF4689E2420D5F600E51B6D /* FeatureStorage.swift in Sources */,
 				1AF468DE24361D9D00E51B6D /* FileManager+Additions.swift in Sources */,
 				1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */,

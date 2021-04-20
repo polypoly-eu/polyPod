@@ -71,34 +71,41 @@ private struct Slide: View {
     private let indigo = Color(red: 0.059, green: 0.098, blue: 0.22)
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(headline)
-                .font(.custom("Jost Light", size: 34))
-                .kerning(-0.38)
-                .fontWeight(.light)
-                .foregroundColor(indigo)
+        VStack(alignment: .leading, spacing: 0) {
+            ParagraphView(
+                text: headline,
+                fontName: "Jost-Light",
+                fontSize: 34,
+                kerning: -0.38,
+                lineHeightMultiple: 0.83,
+                foregroundColor: indigo
+            )
 
-            Text(subHeadline)
-                .font(.custom("polyDisplay Semi 1.0", size: 34))
-                .kerning(-0.24)
-                .fontWeight(.semibold)
-                .foregroundColor(indigo)
-                .padding(.bottom, 20)
+            ParagraphView(
+                text: subHeadline,
+                fontName: "polyDisplay-Semi1.0",
+                fontSize: 34,
+                kerning: -0.24,
+                lineHeightMultiple: 0.83,
+                foregroundColor: indigo
+            ).padding(.bottom, 24)
 
-            Text(bodyText)
-                .font(.custom("Jost", size: 20))
-                .kerning(-0.24)
-                .fontWeight(.regular)
-                .foregroundColor(indigo)
+            ParagraphView(
+                text: bodyText,
+                fontName: "Jost-Regular",
+                fontSize: 20,
+                kerning: -0.24,
+                lineHeightMultiple: 0.83,
+                foregroundColor: indigo
+            )
 
             Spacer()
 
             if let buttonLabel = buttonLabel {
                 Button(action: buttonAction ?? {}) {
                     Text(buttonLabel)
-                        .font(Font.custom("Jost Medium", size: 14))
+                        .font(.custom("Jost-Medium", size: 14))
                         .kerning(-0.18)
-                        .fontWeight(.medium)
                         .foregroundColor(indigo)
                         .frame(minWidth: 296, minHeight: 48)
                         .background(
