@@ -8,18 +8,47 @@
 
 import SwiftUI
 
+enum Views {
+    case featureList
+    case feature
+    case onboarding
+}
+
 struct ContentView: View {
     @State private var firstRun = FirstRun.read()
+    @State private var activeView = Views.featureList
+    @State private var activeFeature: Feature? = nil
 
     var body: some View {
-        NavigationView {
-            if firstRun {
+        if firstRun {
+            OnboardingView(closeAction: {
+                firstRun = false
+                FirstRun.write(firstRun)
+            })
+        } else {
+            switch activeView {
+            case .featureList:
+                FeatureListView(
+                    features: FeatureStorage.shared.featuresList(),
+                    openFeatureAction: { feature in
+                        activeView = .feature
+                        activeFeature = feature
+                    },
+                    openOnboardingAction: {
+                        activeView = .onboarding
+                    }
+                )
+            case .feature:
+                FeatureView(
+                    feature: activeFeature!,
+                    closeAction: {
+                        activeView = .featureList
+                    }
+                )
+            case .onboarding:
                 OnboardingView(closeAction: {
-                    firstRun = false
-                    FirstRun.write(firstRun)
+                    activeView = .featureList
                 })
-            } else {
-                FeatureListView(FeatureStorage.shared.featuresList())
             }
         }
     }

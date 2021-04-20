@@ -33,11 +33,15 @@ struct OnboardingView: View {
                 subHeadline: "onboarding_slide3_sub_headline",
                 bodyText: "onboarding_slide3_body_text",
                 buttonLabel: "onboarding_button_end",
-                buttonAction: close
+                buttonAction: closeAction
             ).padding(28)
         ]
 
         return VStack {
+            Button("app_bar_close_button_desc", action: closeAction)
+                .padding(.horizontal, 8)
+                .frame(maxWidth: .infinity, maxHeight: 40, alignment: .bottomLeading)
+
             PageViewController(activeIndex: $activeSlide, views: slides)
 
             Spacer()
@@ -46,24 +50,13 @@ struct OnboardingView: View {
                 .padding(.bottom, 36)
         }
         .background(Color.white)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(
-            leading: Button("app_bar_close_button_desc", action: close)
-        )
-    }
-
-    private func close() {
-        presentationMode.wrappedValue.dismiss()
-        closeAction()
     }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach((0...2), id: \.self) { index in
-            NavigationView {
-                OnboardingView(activeSlide: index)
-            }
+            OnboardingView(activeSlide: index)
         }
     }
 }
