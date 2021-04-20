@@ -18,8 +18,8 @@ const PurposeInfo = ({ onClose }) => {
                     texts={{
                         bold1: i18n.t("infographic:purpose.bold1"),
                         bold2: i18n.t("infographic:purpose.bold2"),
-                        text1: i18n.t("infographic:category.text1"),
-                        text2: i18n.t("infographic:category.text2"),
+                        text1: i18n.t("infographic:purpose.text1"),
+                        text2: i18n.t("infographic:purpose.text2"),
                     }}
                 />
                 <div
