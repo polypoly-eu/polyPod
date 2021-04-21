@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./topShadow.css";
+import "./topSeparator.css";
 
 const TopShadow = () => <div className="top-shadow"></div>;
 
