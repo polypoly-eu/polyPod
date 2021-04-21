@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import i18n from "./i18n.js";
-import { pod, podNav } from "./fakePod.js";
 import { emptyFilters, removeFilter } from "./companyFilter.js";
 
 import MainScreen from "./screens/main/main.jsx";
@@ -26,8 +25,36 @@ import polyPediaGlobalData from "./data/global.json";
 
 const namespace = "http://polypoly.coop/schema/polyExplorer/#";
 
+let pod = null;
+
+window.addEventListener("message", (event) => {
+    if (event.data == "podLoad") {
+        pod = event.ports[0];
+
+        // Initialize feature here
+    }
+});
+
+const sendMessage = (message) =>
+    new Promise((resolve, reject) => {
+        const channel = new MessageChannel();
+
+        channel.port1.onmessage = ({ data }) => {
+            channel.port1.close();
+            if (data.error) {
+                reject(data.error);
+            } else {
+                resolve(data.result);
+            }
+        };
+
+        pod.postMessage(message, [channel.port2]);
+    });
+
 async function readFirstRun() {
-    const quads = await pod.polyIn.select({});
+    const quads = await sendMessage({
+        polyIn: { select: {} },
+    });
     return !quads.some(
         ({ subject, predicate, object }) =>
             subject.value === `${namespace}polyExplorer` &&
@@ -37,13 +64,15 @@ async function readFirstRun() {
 }
 
 async function writeFirstRun(firstRun) {
-    const { dataFactory, polyIn } = pod;
-    const quad = dataFactory.quad(
-        dataFactory.namedNode(`${namespace}polyExplorer`),
-        dataFactory.namedNode(`${namespace}firstRun`),
-        dataFactory.namedNode(`${namespace}${firstRun}`)
-    );
-    polyIn.add(quad);
+    await sendMessage({
+        polyIn: {
+            add: [
+                `${namespace}polyExplorer`,
+                `${namespace}firstRun`,
+                `${namespace}${firstRun}`,
+            ],
+        },
+    });
 }
 
 const PolyExplorer = () => {
@@ -164,17 +193,22 @@ const PolyExplorer = () => {
     }
 
     function updatePodNavigation() {
-        podNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
-        podNav.actions = firstRun
-            ? { info: () => {}, search: () => {} }
-            : {
-                  info: () => handleActiveScreenChange("info"),
-                  search: () => handleActiveScreenChange("companySearch"),
-                  back: handleBack,
-              };
-        podNav.setActiveActions(
-            backStack.length ? ["back"] : ["info", "search"]
-        );
+        sendMessage({
+            polyNav: {
+                setTitle: i18n.t(`common:screenTitle.${activeScreen}`),
+                actions: firstRun
+                    ? { info: () => {}, search: () => {} }
+                    : {
+                          info: () => handleActiveScreenChange("info"),
+                          search: () =>
+                              handleActiveScreenChange("companySearch"),
+                          back: handleBack,
+                      },
+                setActiveActions: backStack.length
+                    ? ["back"]
+                    : ["info", "search"],
+            },
+        });
     }
 
     useEffect(() => {

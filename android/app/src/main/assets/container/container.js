@@ -9,6 +9,7 @@ let outerPort;
 function initMessaging() {
     window.onmessage = event => {
         outerPort = event.ports[0];
+        // Set up pod connection
         outerPort.onmessage = event => {
             // console.log(`Data coming from Pod to the Feature`);
             // console.dir(event.data);
@@ -18,16 +19,55 @@ function initMessaging() {
     }
 }
 
+function onFeatureMessage(message) {
+
+    let response = null;
+
+    if (message.polyIn) {
+        if (message.polyIn.add) {
+            const { dataFactory, polyIn } = pod;
+            const quad = dataFactory.quad(
+                message.polyIn.add[0],
+                message.polyIn.add[1],
+                message.polyIn.add[2]
+            );
+            response = await polyIn.add(quad);
+        }
+        if (message.polyIn.select) {
+            response = await pod.polyIn.select();
+        }
+    }
+
+    if (message.polyNav) {
+        if (message.polyNav.setTitle) {
+            podNav.setTitle(message.polyNav.setTitle);
+        }
+        if (message.polyNav.actions) {
+            podNav.actions = message.polyNav.actions;
+        }
+        if (message.polyNav.setActiveActions) {
+            podNav.setActiveActions = message.polyNav.setActiveActions;
+        }
+    }
+
+    // Send the response back
+    message.ports[0].postMessage(response);
+}
+
 function initIframe(iFrame) {
     console.log("initializing iframe")
     port1.start();
+    // Set up feature connection
+    port1.onmessage = event => onFeatureMessage(event.data)
+
+
     port1.onmessage = event => {
         // console.log(`Data coming from the Feature to the Pod`);
         const base64 = btoa(String.fromCharCode(...new Uint8Array(event.data)));
         console.dir(base64);
         outerPort.postMessage(base64);
     };
-    iFrame.contentWindow.postMessage("", "*", [port2]);
+    iFrame.contentWindow.postMessage("podLoad", "*", [port2]);
 }
 
 function loadFeature() {
