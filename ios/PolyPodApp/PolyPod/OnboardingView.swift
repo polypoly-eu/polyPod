@@ -8,55 +8,55 @@
 
 import SwiftUI
 
+private let indigo = Color(red: 0.059, green: 0.098, blue: 0.22)
+
 struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
 
-    var initialSlide: Int = 0
+    @State var activeSlide: Int = 0
+    var closeAction: () -> Void = {}
 
     var body: some View {
-        PageViewController(
-            initialIndex: initialSlide,
+        let slides = [
             Slide(
                 headline: "onboarding_slide1_headline",
                 subHeadline: "onboarding_slide1_sub_headline",
                 bodyText: "onboarding_slide1_body_text"
-            ),
+            ).padding(28),
             Slide(
                 headline: "onboarding_slide2_headline",
                 subHeadline: "onboarding_slide2_sub_headline",
                 bodyText: "onboarding_slide2_body_text"
-            ),
+            ).padding(28),
             Slide(
                 headline: "onboarding_slide3_headline",
                 subHeadline: "onboarding_slide3_sub_headline",
                 bodyText: "onboarding_slide3_body_text",
                 buttonLabel: "onboarding_button_end",
-                buttonAction: {
-                    presentationMode.wrappedValue.dismiss()
-                }
-            )
-        )
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(
-                leading: Button("app_bar_close_button_desc") {
-                    presentationMode.wrappedValue.dismiss()
-                }
-            )
+                buttonAction: closeAction
+            ).padding(28)
+        ]
+
+        return VStack {
+            Button("app_bar_close_button_desc", action: closeAction)
+                .padding(.horizontal, 8)
+                .frame(maxWidth: .infinity, maxHeight: 40, alignment: .bottomLeading)
+
+            PageViewController(activeIndex: $activeSlide, views: slides)
+
+            Spacer()
+
+            Pagination(active: activeSlide, max: slides.count - 1)
+                .padding(.bottom, 36)
+        }
+        .background(Color.white)
     }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            OnboardingView(initialSlide: 0)
-        }
-
-        NavigationView {
-            OnboardingView(initialSlide: 1)
-        }
-
-        NavigationView {
-            OnboardingView(initialSlide: 2)
+        ForEach((0...2), id: \.self) { index in
+            OnboardingView(activeSlide: index)
         }
     }
 }
@@ -67,8 +67,6 @@ private struct Slide: View {
     var bodyText: LocalizedStringKey
     var buttonLabel: LocalizedStringKey?
     var buttonAction: (() -> Void)?
-
-    private let indigo = Color(red: 0.059, green: 0.098, blue: 0.22)
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -111,24 +109,59 @@ private struct Slide: View {
                         .background(
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(Color(red: 0.984, green: 0.541, blue: 0.537))
+                                .shadow(
+                                    color: Color.black.opacity(0.06),
+                                    radius: 2,
+                                    x: 0,
+                                    y: 1
+                                )
+                                .shadow(
+                                    color: Color.black.opacity(0.1),
+                                    radius: 3,
+                                    x: 0,
+                                    y: 1
+                                )
                         )
                 }
                 .buttonStyle(PlainButtonStyle())
                 .frame(maxWidth: .infinity, alignment: .center)
             }
         }
-        .padding(28)
-        .background(Color.white)
     }
 }
 
-private struct PageViewController: UIViewControllerRepresentable {
-    private let initialIndex: Int
+private struct Pagination: View {
+    var active: Int
+    var max: Int
+
+    var body: some View {
+        HStack(spacing: 12) {
+            ForEach((0...max), id: \.self) { index in
+                Item(active: index == active)
+            }
+        }
+    }
+
+    private struct Item: View {
+        var active: Bool
+        private let diameter = 12
+
+        var body: some View {
+            Circle()
+                .strokeBorder(indigo, lineWidth: 1.5)
+                .background(Circle().foregroundColor(active ? indigo : Color.clear))
+                .frame(width: CGFloat(diameter), height: CGFloat(diameter))
+        }
+    }
+}
+
+private struct PageViewController<Content: View>: UIViewControllerRepresentable {
+    private let activeIndex: Binding<Int>?
     private let viewControllers: [UIViewController]
 
-    init(initialIndex: Int = 0, _ slides: Slide...) {
-        self.initialIndex = initialIndex
-        viewControllers = slides.map { UIHostingController(rootView: $0) }
+    init(activeIndex: Binding<Int>? = nil, views: [Content]) {
+        self.activeIndex = activeIndex
+        viewControllers = views.map { UIHostingController(rootView: $0) }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -141,8 +174,9 @@ private struct PageViewController: UIViewControllerRepresentable {
             navigationOrientation: .horizontal
         )
         pageViewController.dataSource = context.coordinator
+        pageViewController.delegate = context.coordinator
         pageViewController.setViewControllers(
-            [viewControllers[initialIndex]],
+            [viewControllers[activeIndex?.wrappedValue ?? 0]],
             direction: .forward,
             animated: false
         )
@@ -152,7 +186,7 @@ private struct PageViewController: UIViewControllerRepresentable {
     func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
     }
 
-    class Coordinator: NSObject, UIPageViewControllerDataSource {
+    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         var parent: PageViewController
 
         init(_ parent: PageViewController) {
@@ -183,6 +217,18 @@ private struct PageViewController: UIViewControllerRepresentable {
                 return nil
             }
             return parent.viewControllers[index + 1]
+        }
+
+        func pageViewController(
+            _ pageViewController: UIPageViewController,
+            didFinishAnimating finished: Bool,
+            previousViewControllers: [UIViewController],
+            transitionCompleted completed: Bool
+        ) {
+            if let currentVC = pageViewController.viewControllers?.first,
+               let index = parent.viewControllers.firstIndex(of: currentVC) {
+                parent.activeIndex?.wrappedValue = index
+            }
         }
     }
 }

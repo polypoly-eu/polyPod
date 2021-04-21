@@ -12,43 +12,56 @@ struct FeatureView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     let feature: Feature
+    var closeAction: () -> Void = {}
+
     @State var title: String = ""
     @State var activeActions: [String] = []
     @State var queuedAction: (String, DispatchTime)? = nil
 
     var body: some View {
-        FeatureContainerView(
-            feature: feature,
-            title: $title,
-            activeActions: $activeActions,
-            queuedAction: queuedAction,
-            openUrlHandler: openUrl
-        )
-            .navigationBarTitle(Text(title), displayMode: .inline)
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(
-                leading: Button(
-                    activeActions.contains("back") ? "app_bar_back_button_desc" : "app_bar_close_button_desc"
+        VStack {
+            HStack {
+                Button(
+                    activeActions.contains("back")
+                        ? "app_bar_back_button_desc"
+                        : "app_bar_close_button_desc"
                 ) {
                     if activeActions.contains("back") {
-                        triggerAction("back")
+                        triggerFeatureAction("back")
                         return
                     }
-                    presentationMode.wrappedValue.dismiss()
-                },
-                trailing: HStack {
-                    if activeActions.contains("info") {
-                        Button("app_bar_info_button_desc") {
-                            triggerAction("info")
-                        }
-                    }
-                    if activeActions.contains("search") {
-                        Button("app_bar_search_button_desc") {
-                            triggerAction("search")
-                        }
+                    closeAction()
+                }
+
+                Spacer()
+
+                Text(title)
+
+                Spacer()
+
+                if activeActions.contains("info") {
+                    Button("app_bar_info_button_desc") {
+                        triggerFeatureAction("info")
                     }
                 }
+
+                if activeActions.contains("search") {
+                    Button("app_bar_search_button_desc") {
+                        triggerFeatureAction("search")
+                    }
+                }
+            }
+            .padding(.horizontal, 8)
+            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .bottom)
+
+            FeatureContainerView(
+                feature: feature,
+                title: $title,
+                activeActions: $activeActions,
+                queuedAction: queuedAction,
+                openUrlHandler: openUrl
             )
+        }
     }
 
     private func openUrl(target: String) {
@@ -88,15 +101,13 @@ struct FeatureView: View {
         viewController.present(alert, animated: true, completion: nil)
     }
 
-    private func triggerAction(_ action: String) {
+    private func triggerFeatureAction(_ action: String) {
         queuedAction = (action, DispatchTime.now())
     }
 }
 
 struct FeatureView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            FeatureView(feature: createStubFeature(name: "Test"))
-        }
+        FeatureView(feature: createStubFeature(name: "Test"))
     }
 }

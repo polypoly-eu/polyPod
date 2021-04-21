@@ -8,28 +8,36 @@
 import SwiftUI
 
 struct FeatureListView: View {
-    private let features: [Feature]
-
-    init(_ features: [Feature]) {
-        self.features = features
-    }
+    var features: [Feature]
+    var openFeatureAction: (Feature) -> Void = { _ in }
+    var openOnboardingAction: () -> Void = {}
 
     var body: some View {
-        List() {
-            Section(header: Text("Features:")) {
-                ForEach(features, id: \.name) { feature in
-                    NavigationLink(destination: FeatureView(feature: feature)) {
-                        Text(feature.name)
+        VStack {
+            HStack {
+                Button("app_bar_info_button_desc", action: openOnboardingAction)
+
+                Spacer()
+
+                Text("app_name")
+
+                Spacer()
+
+                Button("settings_title", action: handleOpenSettings)
+            }
+            .padding(.horizontal, 8)
+            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .bottom)
+
+            List() {
+                Section(header: Text("Features:")) {
+                    ForEach(features, id: \.name) { feature in
+                        Button(feature.name) {
+                            openFeatureAction(feature)
+                        }
                     }
                 }
             }
         }
-        .navigationBarTitle("app_name", displayMode: .inline)
-        .navigationBarItems(
-            leading: NavigationLink(destination: OnboardingView()) {
-                Text("app_bar_info_button_desc")
-            },
-            trailing: Button("settings_title", action: handleOpenSettings))
     }
 
     private func handleOpenSettings() {
@@ -42,11 +50,9 @@ struct FeatureListView: View {
 
 struct FeatureListView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            FeatureListView([
-                createStubFeature(name: "Feature one"),
-                createStubFeature(name: "Feature two")
-            ])
-        }
+        FeatureListView(features: [
+            createStubFeature(name: "Feature one"),
+            createStubFeature(name: "Feature two")
+        ])
     }
 }
