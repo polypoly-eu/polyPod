@@ -9,19 +9,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var state: (() -> AnyView)? = nil
+    typealias StateFunction = () -> AnyView
+
+    @State private var state: StateFunction? = nil
 
     var body: some View {
         if let state = state {
             state()
         } else {
             EmptyView().onAppear {
-                state = firstRunState
+                state = firstRunState()
             }
         }
     }
 
-    private func firstRunState() -> AnyView {
+    private func firstRunState() -> StateFunction {
         let defaults = UserDefaults.standard
         let firstRunKey = "firstRun"
         let firstRun = defaults.value(forKey: firstRunKey) as? Bool ?? true
@@ -29,44 +31,46 @@ struct ContentView: View {
             return featureListState()
         }
 
-        return AnyView(
-            OnboardingView(closeAction: {
-                UserDefaults.standard.set(false, forKey: firstRunKey)
-                state = featureListState
-            })
-        )
+        return {
+            AnyView(
+                OnboardingView(closeAction: {
+                    UserDefaults.standard.set(false, forKey: firstRunKey)
+                    state = featureListState()
+                })
+            )
+        }
     }
 
-    private func featureListState() -> AnyView {
+    private func featureListState() -> StateFunction {{
         AnyView(
             FeatureListView(
                 features: FeatureStorage.shared.featuresList(),
                 openFeatureAction: { feature in
-                    state = { featureState(feature) }
+                    state = featureState(feature)
                 },
                 openInfoAction: {
-                    state = infoState
+                    state = infoState()
                 }
             )
         )
-    }
+    }}
 
-    private func featureState(_ feature: Feature) -> AnyView {
+    private func featureState(_ feature: Feature) -> StateFunction {{
         AnyView(
             FeatureView(
                 feature: feature,
                 closeAction: {
-                    state = featureListState
+                    state = featureListState()
                 }
             )
         )
-    }
+    }}
 
-    private func infoState() -> AnyView {
+    private func infoState() -> StateFunction {{
         AnyView(
             OnboardingView(closeAction: {
-                state = featureListState
+                state = featureListState()
             })
         )
-    }
+    }}
 }
