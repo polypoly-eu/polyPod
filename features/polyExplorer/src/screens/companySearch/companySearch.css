@@ -3,13 +3,14 @@
     max-width: 460px;
     position: relative;
     display: flex;
+    flex: 0 0 auto;
     margin: 20px auto 0 auto;
 }
 
 .search-bar-container .search-bar {
     box-sizing: border-box;
     display: block;
-    background-color: transparent;
+    background-color: #0f1938;
     width: 95%;
     height: 40px;
     font-size: 18px;
