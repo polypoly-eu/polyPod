@@ -47,7 +47,7 @@ body,
 /** Safari */
 @media not all and (min-resolution: 0.001dpcm) {
     .swiper-container {
-        box-shadow: inset 0px 1px 1px #a9b6c6 !important;
+        box-shadow: inset 0px 1px #a9b6c6 !important;
     }
 }
 
