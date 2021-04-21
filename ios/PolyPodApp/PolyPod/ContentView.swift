@@ -8,60 +8,69 @@
 
 import SwiftUI
 
-enum Views {
-    case featureList
-    case feature
-    case onboarding
-}
-
 struct ContentView: View {
-    @State private var firstRun = FirstRun.read()
-    @State private var activeView = Views.featureList
-    @State private var activeFeature: Feature? = nil
+    typealias StateFunction = () -> AnyView
+
+    @State private var state: StateFunction? = nil
 
     var body: some View {
-        if firstRun {
-            OnboardingView(closeAction: {
-                firstRun = false
-                FirstRun.write(firstRun)
-            })
+        if let state = state {
+            state()
         } else {
-            switch activeView {
-            case .featureList:
-                FeatureListView(
-                    features: FeatureStorage.shared.featuresList(),
-                    openFeatureAction: { feature in
-                        activeView = .feature
-                        activeFeature = feature
-                    },
-                    openOnboardingAction: {
-                        activeView = .onboarding
-                    }
-                )
-            case .feature:
-                FeatureView(
-                    feature: activeFeature!,
-                    closeAction: {
-                        activeView = .featureList
-                    }
-                )
-            case .onboarding:
-                OnboardingView(closeAction: {
-                    activeView = .featureList
-                })
+            EmptyView().onAppear {
+                state = firstRunState()
             }
         }
     }
-}
 
-private struct FirstRun {
-    private static let key = "firstRun"
+    private func firstRunState() -> StateFunction {
+        let defaults = UserDefaults.standard
+        let firstRunKey = "firstRun"
+        let firstRun = defaults.value(forKey: firstRunKey) as? Bool ?? true
+        if !firstRun {
+            return featureListState()
+        }
 
-    static func read() -> Bool {
-        UserDefaults.standard.value(forKey: key) as? Bool ?? true
+        return {
+            AnyView(
+                OnboardingView(closeAction: {
+                    UserDefaults.standard.set(false, forKey: firstRunKey)
+                    state = featureListState()
+                })
+            )
+        }
     }
 
-    static func write(_ value: Bool) {
-        UserDefaults.standard.set(value, forKey: key)
-    }
+    private func featureListState() -> StateFunction {{
+        AnyView(
+            FeatureListView(
+                features: FeatureStorage.shared.featuresList(),
+                openFeatureAction: { feature in
+                    state = featureState(feature)
+                },
+                openInfoAction: {
+                    state = infoState()
+                }
+            )
+        )
+    }}
+
+    private func featureState(_ feature: Feature) -> StateFunction {{
+        AnyView(
+            FeatureView(
+                feature: feature,
+                closeAction: {
+                    state = featureListState()
+                }
+            )
+        )
+    }}
+
+    private func infoState() -> StateFunction {{
+        AnyView(
+            OnboardingView(closeAction: {
+                state = featureListState()
+            })
+        )
+    }}
 }

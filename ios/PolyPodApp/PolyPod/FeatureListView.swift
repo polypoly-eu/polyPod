@@ -10,12 +10,12 @@ import SwiftUI
 struct FeatureListView: View {
     var features: [Feature]
     var openFeatureAction: (Feature) -> Void = { _ in }
-    var openOnboardingAction: () -> Void = {}
+    var openInfoAction: () -> Void = {}
 
     var body: some View {
         VStack {
             HStack {
-                Button("app_bar_info_button_desc", action: openOnboardingAction)
+                Button("app_bar_info_button_desc", action: openInfoAction)
 
                 Spacer()
 
