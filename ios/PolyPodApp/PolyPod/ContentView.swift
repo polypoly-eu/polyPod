@@ -14,13 +14,7 @@ struct ContentView: View {
     @State private var state: StateFunction? = nil
 
     var body: some View {
-        if let state = state {
-            state()
-        } else {
-            EmptyView().onAppear {
-                state = firstRunState()
-            }
-        }
+        (state ?? firstRunState())()
     }
 
     private func firstRunState() -> StateFunction {
