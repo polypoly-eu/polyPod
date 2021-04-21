@@ -2,6 +2,6 @@ import React from "react";
 
 import "./topSeparator.css";
 
-const TopShadow = () => <div className="top-shadow"></div>;
+const TopSeparator = () => <div className="top-separator"></div>;
 
-export default TopShadow;
+export default TopSeparator;

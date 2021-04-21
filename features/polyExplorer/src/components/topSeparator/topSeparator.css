@@ -10,6 +10,6 @@
 /** Safari */
 @media not all and (min-resolution: 0.001dpcm) {
     .top-separator {
-        box-shadow: inset 0px 1px 1px #a9b6c6 !important;
+        box-shadow: inset 0px 1px #a9b6c6 !important;
     }
 }
