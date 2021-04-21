@@ -17,12 +17,19 @@ struct FeatureContainerView: UIViewRepresentable {
     let openUrlHandler: (String) -> Void
 
     func makeUIView(context: Context) -> FeatureWebView {
-        return FeatureWebView(
+        let featureWebView = FeatureWebView(
             feature: feature,
             title: $title,
             activeActions: $activeActions,
             openUrlHandler: openUrlHandler
         )
+
+        if let featureColor = feature.primaryColor {
+            featureWebView.backgroundColor = UIColor(featureColor)
+            featureWebView.isOpaque = false
+        }
+
+        return featureWebView
     }
 
     func updateUIView(_ uiView: FeatureWebView, context: Context) {

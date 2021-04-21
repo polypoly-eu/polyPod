@@ -6,15 +6,14 @@
 //  Copyright © 2021 polypoly. All rights reserved.
 //
 
-import Foundation
-import UIKit
+import SwiftUI
 
 class Feature {
     let path: URL
     let name: String
     let author: String?
     let description: String?
-    let primaryColor: UIColor?
+    let primaryColor: Color?
     let thumbnail: URL?
     private let links: [String: String]
 
@@ -85,7 +84,7 @@ class Feature {
     }
 }
 
-private func parseColor(hexValue: String?) -> UIColor? {
+private func parseColor(hexValue: String?) -> Color? {
     guard let hexValue = hexValue else {
         return nil
     }
@@ -100,15 +99,14 @@ private func parseColor(hexValue: String?) -> UIColor? {
 
     switch hexDigitCount {
     case 6:
-        return UIColor(red: CGFloat(rgbValue & 0xFF0000 >> 16) / 255,
-                       green: CGFloat(rgbValue & 0xFF00 >> 8) / 255,
-                       blue: CGFloat(rgbValue & 0xFF) / 255,
-                       alpha: 1)
+        return Color(red: Double(rgbValue >> 16 & 0xFF) / 255,
+                     green: Double(rgbValue >> 8 & 0xFF) / 255,
+                     blue: Double(rgbValue & 0xFF) / 255)
     case 8:
-        return UIColor(red: CGFloat(rgbValue & 0xFF000000 >> 24) / 255,
-                       green: CGFloat(rgbValue & 0xFF0000 >> 16) / 255,
-                       blue: CGFloat(rgbValue & 0xFF00 >> 8) / 255,
-                       alpha: CGFloat(rgbValue & 0xFF))
+        return Color(red: Double(rgbValue >> 24 & 0xFF) / 255,
+                     green: Double(rgbValue >> 16 & 0xFF) / 255,
+                     blue: Double(rgbValue >> 8 & 0xFF ) / 255,
+                     opacity: Double(rgbValue & 0xFF) / 255)
     default:
         print("Error: Unsupported color format in feature manifest: \(hexValue)")
         return nil
