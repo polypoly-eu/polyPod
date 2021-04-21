@@ -134,7 +134,6 @@ const PolyExplorer = () => {
     };
 
     function handleOnboardingPopupClose() {
-        updatePodNavigation();
         setFirstRun(false);
         writeFirstRun(false);
     }
@@ -166,25 +165,20 @@ const PolyExplorer = () => {
 
     function updatePodNavigation() {
         podNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
-        podNav.actions = {
-            info: () => handleActiveScreenChange("info"),
-            search: () => handleActiveScreenChange("companySearch"),
-            back: handleBack,
-        };
+        podNav.actions = firstRun
+            ? { info: () => {}, search: () => {} }
+            : {
+                  info: () => handleActiveScreenChange("info"),
+                  search: () => handleActiveScreenChange("companySearch"),
+                  back: handleBack,
+              };
         podNav.setActiveActions(
             backStack.length ? ["back"] : ["info", "search"]
         );
     }
 
-    function disablePodNavigation() {
-        podNav.actions = {
-            info: () => {},
-            search: () => {},
-        };
-    }
-
     useEffect(() => {
-        firstRun ? disablePodNavigation() : updatePodNavigation();
+        updatePodNavigation();
         setTimeout(() => readFirstRun().then(setFirstRun), 300);
     });
 
