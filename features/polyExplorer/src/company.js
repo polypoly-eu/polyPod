@@ -4,7 +4,7 @@ export function compare(a, b) {
     return a.localeCompare(b);
 }
 
-export function startsWithSpecialChar(aString) {
+function startsWithSpecialChar(aString) {
     var format = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
     return format.test(aString.charAt(0));
 }

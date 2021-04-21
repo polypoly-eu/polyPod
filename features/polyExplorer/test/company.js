@@ -1,18 +1,9 @@
 "use strict";
 
 import assert from "assert";
-import * as companies from "../src/companies.js";
+import * as company from "../src/company.js";
 
 describe("companies", function () {
-    it("Special char first letter detection works", function () {
-        const specialCharString = "#";
-        const numberCharString = "1";
-        const letterCharString = "a";
-        assert(companies.startsWithSpecialChar(specialCharString));
-        assert(!companies.startsWithSpecialChar(numberCharString));
-        assert(!companies.startsWithSpecialChar(letterCharString));
-    });
-
     it("String sort comparison works", function () {
         const strings = ["#*'§12", "%/$$ab", "abc", "%/{&/z", "z"];
         assert(companies.compare(strings[0], strings[1]) < 0);
