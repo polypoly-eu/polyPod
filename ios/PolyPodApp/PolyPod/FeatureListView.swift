@@ -11,6 +11,7 @@ struct FeatureListView: View {
     var features: [Feature]
     var openFeatureAction: (Feature) -> Void = { _ in }
     var openInfoAction: () -> Void = {}
+    var openSettingsAction: () -> Void = {}
 
     var body: some View {
         VStack(spacing: 0) {
@@ -25,7 +26,7 @@ struct FeatureListView: View {
 
                 Spacer()
 
-                Button(action: handleOpenSettings) {
+                Button(action: openSettingsAction) {
                     Image("NavIconSettingsDark")
                 }
             }
@@ -45,13 +46,6 @@ struct FeatureListView: View {
                 }
             }
         }
-    }
-
-    private func handleOpenSettings() {
-        UIApplication.shared.open(
-            URL(string: UIApplication.openSettingsURLString)!,
-            options: [:],
-            completionHandler: nil)
     }
 }
 

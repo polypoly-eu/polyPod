@@ -13,6 +13,7 @@ extension Color {
         static var lightForeground = Color(red: 0.969, green: 0.98, blue: 0.988)
         static var darkForeground = Color(red: 0.059, green: 0.098, blue: 0.22)
         static var lightBackground = Color.white
+        static var semiLightBackground = Color(red: 0.929, green: 0.949, blue: 0.969)
     }
 
     init(fromHex hexValue: String) {

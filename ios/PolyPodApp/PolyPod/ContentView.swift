@@ -44,6 +44,9 @@ struct ContentView: View {
                 },
                 openInfoAction: {
                     state = infoState()
+                },
+                openSettingsAction: {
+                    state = settingsState()
                 }
             )
         )
@@ -63,6 +66,14 @@ struct ContentView: View {
     private func infoState() -> StateFunction {{
         AnyView(
             OnboardingView(closeAction: {
+                state = featureListState()
+            })
+        )
+    }}
+
+    private func settingsState() -> StateFunction {{
+        AnyView(
+            SettingsView(closeAction: {
                 state = featureListState()
             })
         )
