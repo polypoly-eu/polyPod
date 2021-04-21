@@ -14,4 +14,33 @@ extension Color {
         static var darkForeground = Color(red: 0.059, green: 0.098, blue: 0.22)
         static var lightBackground = Color.white
     }
+
+    init(fromHex hexValue: String) {
+        let scanner = Scanner(string: hexValue)
+        if let hashIndex = hexValue.firstIndex(of: "#") {
+            scanner.currentIndex = hexValue.index(after: hashIndex)
+        }
+        let hexDigitCount = scanner.string.distance(from: scanner.currentIndex, to: scanner.string.endIndex)
+
+        var rgbValue: UInt64 = 0
+        scanner.scanHexInt64(&rgbValue)
+
+        switch hexDigitCount {
+        case 6:
+            self.init(
+                red: Double(rgbValue >> 16 & 0xFF) / 255,
+                green: Double(rgbValue >> 8 & 0xFF) / 255,
+                blue: Double(rgbValue & 0xFF) / 255
+            )
+        case 8:
+            self.init(
+                red: Double(rgbValue >> 24 & 0xFF) / 255,
+                green: Double(rgbValue >> 16 & 0xFF) / 255,
+                blue: Double(rgbValue >> 8 & 0xFF ) / 255,
+                opacity: Double(rgbValue & 0xFF) / 255
+            )
+        default:
+            self.init(red: 0, green: 0, blue: 0, opacity: 0)
+        }
+    }
 }

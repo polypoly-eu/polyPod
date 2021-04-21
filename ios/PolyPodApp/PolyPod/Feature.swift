@@ -88,29 +88,7 @@ private func parseColor(hexValue: String?) -> Color? {
     guard let hexValue = hexValue else {
         return nil
     }
-
-    var rgbValue: UInt64 = 0
-    let scanner = Scanner(string: hexValue)
-    if let hashIndex = hexValue.firstIndex(of: "#") {
-        scanner.currentIndex = hexValue.index(after: hashIndex)
-    }
-    let hexDigitCount = scanner.string.distance(from: scanner.currentIndex, to: scanner.string.endIndex)
-    scanner.scanHexInt64(&rgbValue)
-
-    switch hexDigitCount {
-    case 6:
-        return Color(red: Double(rgbValue >> 16 & 0xFF) / 255,
-                     green: Double(rgbValue >> 8 & 0xFF) / 255,
-                     blue: Double(rgbValue & 0xFF) / 255)
-    case 8:
-        return Color(red: Double(rgbValue >> 24 & 0xFF) / 255,
-                     green: Double(rgbValue >> 16 & 0xFF) / 255,
-                     blue: Double(rgbValue >> 8 & 0xFF ) / 255,
-                     opacity: Double(rgbValue & 0xFF) / 255)
-    default:
-        print("Error: Unsupported color format in feature manifest: \(hexValue)")
-        return nil
-    }
+    return Color(fromHex: hexValue)
 }
 
 private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
