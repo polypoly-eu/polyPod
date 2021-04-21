@@ -1,6 +1,6 @@
 import React from "react";
 
-import TopSeparator from "../topShadow/topSeparator.jsx";
+import TopSeparator from "../topSeparator/topSeparator.jsx";
 
 import "./screen.css";
 
