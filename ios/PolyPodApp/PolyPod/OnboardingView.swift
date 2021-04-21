@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-private let indigo = Color(red: 0.059, green: 0.098, blue: 0.22)
-
 struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
 
@@ -37,10 +35,16 @@ struct OnboardingView: View {
             ).padding(28)
         ]
 
-        return VStack {
-            Button("app_bar_close_button_desc", action: closeAction)
-                .padding(.horizontal, 8)
-                .frame(maxWidth: .infinity, maxHeight: 40, alignment: .bottomLeading)
+        return VStack(spacing: 0) {
+            Button(action: closeAction) {
+                Image("NavIconCloseDark")
+            }
+            .padding(.horizontal, 8)
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: 42,
+                alignment: Alignment(horizontal: .leading, vertical: .center)
+            )
 
             PageViewController(activeIndex: $activeSlide, views: slides)
 
@@ -49,7 +53,7 @@ struct OnboardingView: View {
             Pagination(active: activeSlide, max: slides.count - 1)
                 .padding(.bottom, 36)
         }
-        .background(Color.white)
+        .background(Color.PolyPod.lightBackground)
     }
 }
 
@@ -76,7 +80,7 @@ private struct Slide: View {
                 fontSize: 34,
                 kerning: -0.38,
                 lineHeightMultiple: 0.83,
-                foregroundColor: indigo
+                foregroundColor: Color.PolyPod.darkForeground
             )
 
             ParagraphView(
@@ -85,7 +89,7 @@ private struct Slide: View {
                 fontSize: 34,
                 kerning: -0.24,
                 lineHeightMultiple: 0.83,
-                foregroundColor: indigo
+                foregroundColor: Color.PolyPod.darkForeground
             ).padding(.bottom, 24)
 
             ParagraphView(
@@ -94,7 +98,7 @@ private struct Slide: View {
                 fontSize: 20,
                 kerning: -0.24,
                 lineHeightMultiple: 0.83,
-                foregroundColor: indigo
+                foregroundColor: Color.PolyPod.darkForeground
             )
 
             Spacer()
@@ -104,7 +108,7 @@ private struct Slide: View {
                     Text(buttonLabel)
                         .font(.custom("Jost-Medium", size: 14))
                         .kerning(-0.18)
-                        .foregroundColor(indigo)
+                        .foregroundColor(Color.PolyPod.darkForeground)
                         .frame(minWidth: 296, minHeight: 48)
                         .background(
                             RoundedRectangle(cornerRadius: 4)
@@ -148,8 +152,10 @@ private struct Pagination: View {
 
         var body: some View {
             Circle()
-                .strokeBorder(indigo, lineWidth: 1.5)
-                .background(Circle().foregroundColor(active ? indigo : Color.clear))
+                .strokeBorder(Color.PolyPod.darkForeground, lineWidth: 1.5)
+                .background(
+                    Circle().foregroundColor(active ? Color.PolyPod.darkForeground : Color.clear)
+                )
                 .frame(width: CGFloat(diameter), height: CGFloat(diameter))
         }
     }

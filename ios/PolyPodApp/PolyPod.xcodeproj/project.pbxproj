@@ -112,6 +112,7 @@
 		E92373BC26289FA900D2CFF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E92373BE26289FA900D2CFF3 /* Localizable.strings */; };
 		E923AAF7261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
 		E923AAF8261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
+		E97D325626307CE100A5A180 /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* Color+Additions.swift */; };
 		E9CF1B302625866800216B70 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 		E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
@@ -205,6 +206,7 @@
 		E92373BD26289FA900D2CFF3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E92373C126289FAC00D2CFF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E923AAF6261E155500E0A2A8 /* podNav.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = podNav.js; sourceTree = "<group>"; };
+		E97D325526307CE100A5A180 /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
 		E9CF1B2F2625866800216B70 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				E9F370DC262EE9EE006254C1 /* WidthReader.swift */,
 				E9F370E0262EEB2C006254C1 /* ParagraphView.swift */,
 				E9F370E6262EEF13006254C1 /* UIColor+Additions.swift */,
+				E97D325526307CE100A5A180 /* Color+Additions.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */,
 				1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */,
 				1A66F77D2493774100ED4308 /* NetworkSession.swift in Sources */,
+				E97D325626307CE100A5A180 /* Color+Additions.swift in Sources */,
 				1A6F4DF424C1A76E00874DF9 /* PolyIn+Select.swift in Sources */,
 				1A8F4886247E91E000089217 /* Unpack.swift in Sources */,
 				1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */,

@@ -19,40 +19,51 @@ struct FeatureView: View {
     @State var queuedAction: (String, DispatchTime)? = nil
 
     var body: some View {
-        VStack {
-            HStack {
-                Button(
-                    activeActions.contains("back")
-                        ? "app_bar_back_button_desc"
-                        : "app_bar_close_button_desc"
-                ) {
-                    if activeActions.contains("back") {
-                        triggerFeatureAction("back")
-                        return
+        // On Android, we calculate this based on the feature colour's luminance,
+        // we should do the same here.
+        let lightForeground = feature.name == "polyExplorer"
+        let iconVariantQualifier = lightForeground ? "Light" : "Dark"
+
+        VStack(spacing: 0) {
+            ZStack {
+                HStack {
+                    Button(
+                        action: {
+                            if activeActions.contains("back") {
+                                triggerFeatureAction("back")
+                                return
+                            }
+                            closeAction()
+                        }
+                    ) {
+                        let qualifier = activeActions.contains("back") ? "Back" : "Close"
+                        Image("NavIcon\(qualifier)\(iconVariantQualifier)")
                     }
-                    closeAction()
+
+                    Spacer()
+
+                    if activeActions.contains("info") {
+                        Button(action: { triggerFeatureAction("info") }) {
+                            Image("NavIconInfo\(iconVariantQualifier)")
+                        }
+                    }
+
+                    if activeActions.contains("search") {
+                        Button(action: { triggerFeatureAction("search") }) {
+                            Image("NavIconInfo\(iconVariantQualifier)")
+                        }
+                    }
                 }
 
-                Spacer()
-
-                Text(title)
-
-                Spacer()
-
-                if activeActions.contains("info") {
-                    Button("app_bar_info_button_desc") {
-                        triggerFeatureAction("info")
-                    }
-                }
-
-                if activeActions.contains("search") {
-                    Button("app_bar_search_button_desc") {
-                        triggerFeatureAction("search")
-                    }
-                }
+                Text(title != "" ? title : feature.name)
+                    .foregroundColor(lightForeground ? Color.PolyPod.lightForeground : Color.PolyPod.darkForeground)
+                    .font(.custom("Jost-Medium", size: 16))
+                    .kerning(-0.16)
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding(.horizontal, 8)
-            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .bottom)
+            .frame(maxWidth: .infinity, maxHeight: 42, alignment: .center)
+            .background(feature.primaryColor)
 
             FeatureContainerView(
                 feature: feature,
@@ -108,6 +119,7 @@ struct FeatureView: View {
 
 struct FeatureView_Previews: PreviewProvider {
     static var previews: some View {
-        FeatureView(feature: createStubFeature(name: "Test"))
+        FeatureView(feature: createStubFeature(name: "polyExplorer"))
+        FeatureView(feature: createStubFeature(name: "polyPreview"))
     }
 }

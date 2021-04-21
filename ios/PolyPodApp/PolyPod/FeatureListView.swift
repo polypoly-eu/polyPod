@@ -13,20 +13,27 @@ struct FeatureListView: View {
     var openInfoAction: () -> Void = {}
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
-                Button("app_bar_info_button_desc", action: openInfoAction)
+                Button(action: openInfoAction) {
+                    Image("NavIconInfoDark")
+                }
 
                 Spacer()
 
-                Text("app_name")
+                Image("NavIconPolyPodLogo")
 
                 Spacer()
 
-                Button("settings_title", action: handleOpenSettings)
+                Button(action: handleOpenSettings) {
+                    Image("NavIconSettingsDark")
+                }
             }
             .padding(.horizontal, 8)
-            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .bottom)
+            .frame(maxWidth: .infinity, maxHeight: 42, alignment: .center)
+            .background(Color.PolyPod.lightBackground)
+
+            Divider()
 
             List() {
                 Section(header: Text("Features:")) {
