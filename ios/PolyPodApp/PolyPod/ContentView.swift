@@ -8,53 +8,51 @@
 
 import SwiftUI
 
-enum Views {
-    case featureList
-    case feature
-    case onboarding
-}
-
 struct ContentView: View {
-    @State private var firstRun = FirstRun.read()
-    @State private var activeView = Views.featureList
+    @State private var state = FirstRunStore.read() ? States.firstRun : States.featureList
     @State private var activeFeature: Feature? = nil
 
     var body: some View {
-        if firstRun {
+        switch state {
+        case .firstRun:
             OnboardingView(closeAction: {
-                firstRun = false
-                FirstRun.write(firstRun)
+                FirstRunStore.write(false)
+                state = .featureList
             })
-        } else {
-            switch activeView {
-            case .featureList:
-                FeatureListView(
-                    features: FeatureStorage.shared.featuresList(),
-                    openFeatureAction: { feature in
-                        activeView = .feature
-                        activeFeature = feature
-                    },
-                    openOnboardingAction: {
-                        activeView = .onboarding
-                    }
-                )
-            case .feature:
-                FeatureView(
-                    feature: activeFeature!,
-                    closeAction: {
-                        activeView = .featureList
-                    }
-                )
-            case .onboarding:
-                OnboardingView(closeAction: {
-                    activeView = .featureList
-                })
-            }
+        case .featureList:
+            FeatureListView(
+                features: FeatureStorage.shared.featuresList(),
+                openFeatureAction: { feature in
+                    activeFeature = feature
+                    state = .feature
+                },
+                openInfoAction: {
+                    state = .info
+                }
+            )
+        case .feature:
+            FeatureView(
+                feature: activeFeature!,
+                closeAction: {
+                    state = .featureList
+                }
+            )
+        case .info:
+            OnboardingView(closeAction: {
+                state = .featureList
+            })
         }
+    }
+
+    private enum States {
+        case firstRun
+        case featureList
+        case feature
+        case info
     }
 }
 
-private struct FirstRun {
+private struct FirstRunStore {
     private static let key = "firstRun"
 
     static func read() -> Bool {
