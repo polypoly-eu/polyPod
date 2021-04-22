@@ -1,4 +1,3 @@
-//
 import SwiftUI
 
 class Feature {
@@ -9,7 +8,7 @@ class Feature {
     let primaryColor: Color?
     let thumbnail: URL?
     private let links: [String: String]
-
+    
     static func load(path: URL) -> Feature? {
         let manifestPath = path.appendingPathComponent("manifest.json")
         guard let manifest = FeatureManifest.load(path: manifestPath) else {
@@ -18,7 +17,7 @@ class Feature {
         }
         return Feature(path: path, manifest: manifest)
     }
-
+    
     init(path: URL, manifest: FeatureManifest) {
         self.path = path
         let userLanguage = Locale.current.languageCode ?? "en"
@@ -33,7 +32,7 @@ class Feature {
         )
         links = translations?.links ?? manifest.links ?? [:]
     }
-
+    
     func findUrl(target: String) -> String? {
         if let url = links[target] {
             return url

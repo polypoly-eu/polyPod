@@ -8,7 +8,7 @@ struct FeatureManifest: Decodable {
     let primaryColor: String?
     let links: [String: String]?
     let translations: [String: Override]?
-
+    
     static func load(path: URL) -> FeatureManifest? {
         guard let contents = try? String(contentsOf: path) else {
             return nil
@@ -21,7 +21,7 @@ struct FeatureManifest: Decodable {
         }
         return manifest
     }
-
+    
     struct Override: Decodable {
         let name: String?
         let author: String?

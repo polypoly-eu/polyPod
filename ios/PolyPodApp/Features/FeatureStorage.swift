@@ -2,7 +2,6 @@ import Foundation
 import Zip
 
 class FeatureStorage {
-
     static let shared = FeatureStorage()
     
     lazy var featuresFileUrl: URL = {
@@ -15,7 +14,7 @@ class FeatureStorage {
         }
         return URL(fileURLWithPath: "")
     }()
-
+    
     lazy private var featureDirUrl: URL =
         URL(string: featuresFileUrl.path) ?? URL(fileURLWithPath: "")
     
@@ -82,5 +81,4 @@ class FeatureStorage {
             }
         }
     }
-    
 }

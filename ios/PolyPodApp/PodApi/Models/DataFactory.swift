@@ -1,7 +1,6 @@
 import CoreData
 
 class DataFactory {
-
     static func namedNode(value: String, context moc: NSManagedObjectContext) -> NamedNode {
         let namedNode = NamedNode(context: moc)
         namedNode.termType = "NamedNode"
@@ -45,5 +44,4 @@ class DataFactory {
         quad.object = object
         return quad
     }
-
 }

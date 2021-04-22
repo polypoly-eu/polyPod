@@ -1,7 +1,6 @@
 import Foundation
 
 extension JSONSerialization {
-    
     static func loadJSON(withFilename filename: String) throws -> Any? {
         let fm = FileManager.default
         let urls = fm.urls(for: .documentDirectory, in: .userDomainMask)
@@ -25,7 +24,6 @@ extension JSONSerialization {
             try data.write(to: fileURL, options: [.atomicWrite])
             return true
         }
-        
         return false
     }
 }

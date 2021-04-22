@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     var closeAction: () -> Void = {}
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar(
@@ -17,15 +17,15 @@ struct SettingsView: View {
                 )
             )
             .background(Color.PolyPod.lightBackground)
-
+            
             Divider()
-
+            
             List() {
                 Section(header: SettingsHeader("settings_about_section")) {
                     SettingsButton(label: "settings_version", action: {})
                 }
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-
+                
                 Section(header: SettingsHeader("settings_legal_section")) {
                     SettingsButton(label: "settings_imprint_title", action: {})
                     SettingsButton(label: "settings_privacy_policy_title", action: {})
@@ -45,11 +45,11 @@ struct SettingsView_Previews: PreviewProvider {
 
 private struct SettingsHeader: View {
     private let text: LocalizedStringKey
-
+    
     init(_ text: LocalizedStringKey) {
         self.text = text
     }
-
+    
     var body: some View {
         Text(text)
             .foregroundColor(Color(red: 0.243, green: 0.286, blue: 0.357))
@@ -64,7 +64,7 @@ private struct SettingsHeader: View {
 private struct SettingsButton: View {
     let label: LocalizedStringKey
     let action: () -> Void
-
+    
     var body: some View {
         Button(action: action) {
             Text(label)

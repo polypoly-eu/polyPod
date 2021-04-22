@@ -1,18 +1,17 @@
 import Foundation
 
 extension PolyOut {
-    
     func fetch(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?, Error?) -> Void) {
         guard let url = URL(string: urlString) else {
             completionHandler(nil, PolyApiError.paramterMissing)
             return
         }
-
+        
         let method = requestInit.method ?? "GET"
         
         var request = URLRequest(url: url)
         request.httpMethod = method.uppercased()
-
+        
         if let headers = requestInit.headers {
             for (key, value) in headers {
                 request.setValue(value, forHTTPHeaderField: key)
@@ -39,5 +38,4 @@ extension PolyOut {
             completionHandler(fetchResponse, nil)
         })
     }
-    
 }

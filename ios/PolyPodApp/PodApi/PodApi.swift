@@ -1,7 +1,6 @@
 import Foundation
 
 class PodApi {
-
     static let  shared = PodApi()
     
     lazy var polyIn: PolyIn  = {

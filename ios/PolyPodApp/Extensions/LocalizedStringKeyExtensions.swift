@@ -7,7 +7,7 @@ extension LocalizedStringKey {
             .map { $0.components(separatedBy: "\",") }
         return components[1][0]
     }
-
+    
     func toLocalizedString() -> String {
         return NSLocalizedString(key, comment: "")
     }

@@ -5,7 +5,6 @@ var sessionPostData: Data?
 var sessionError: Error?
 
 class NetworkSessionMock: NetworkSession {
-
     func loadData(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: request.allHTTPHeaderFields)
         if request.httpMethod == "POST" {
@@ -21,22 +20,21 @@ class NetworkSessionMock: NetworkSession {
 }
 
 class PolyOutTests: XCTestCase {
-
     override func setUp() {
         sessionGetData = nil
         sessionPostData = nil
         sessionError = nil
     }
-
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
@@ -51,7 +49,7 @@ class PolyOutTests: XCTestCase {
         
         let responseText = "This is the get response"
         sessionGetData = responseText.data(using: .utf8)
-
+        
         let expectation = XCTestExpectation(description: "Test valid response")
         polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: [:]), completionHandler: { (fetchResponse, error) in
             XCTAssertNotNil(fetchResponse, "fetchResponse is nil")
@@ -78,7 +76,7 @@ class PolyOutTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Test error")
         polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: [:]), completionHandler: { (fetchResponse, error) in
             XCTAssertNil(fetchResponse, "fetchResponse is not nil")
-
+            
             expectation.fulfill()
         })
         
@@ -119,7 +117,7 @@ class PolyOutTests: XCTestCase {
         let responseText = "This is the post response"
         sessionPostData = responseText.data(using: .utf8)
         let requestInitData = ["method" : "post"]
-            
+        
         let expectation = XCTestExpectation(description: "Test valid response")
         polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: requestInitData), completionHandler: { (fetchResponse, error) in
             XCTAssertNil(fetchResponse, "fetchResponse is nil")
@@ -148,5 +146,4 @@ class PolyOutTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
     }
-
 }

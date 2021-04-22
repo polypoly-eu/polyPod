@@ -2,7 +2,7 @@ import SwiftUI
 
 /**
  Like SwiftUI.GeometryReader, but leaves the height alone
-
+ 
  SwiftUi.GeometryReader takes up all the available space, horizontally and vertically,
  which is problematic when its content should take up the available width, but not height.
  This is a somewhat hacky workaround.
@@ -10,7 +10,7 @@ import SwiftUI
 struct WidthReader<Content: View>: View {
     let content: (CGFloat) -> Content
     @State private var width: CGFloat = WidthKey.defaultValue
-
+    
     var body: some View {
         content(width)
             .frame(maxWidth: .infinity, maxHeight: nil, alignment: .leading)
@@ -21,12 +21,12 @@ struct WidthReader<Content: View>: View {
                 width = $0
             }
     }
-
+    
     private struct WidthKey: PreferenceKey {
         static var defaultValue: CGFloat {
             return 1
         }
-
+        
         static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
             value = max(value, nextValue())
         }

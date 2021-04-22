@@ -1,7 +1,6 @@
 import Foundation
 
 extension Literal {
-    
     override func matches(other: Term) -> Bool {
         guard let other = other as? Literal else {
             return false
@@ -11,5 +10,4 @@ extension Literal {
         }
         return self.language == other.language && self.datatype.matches(other: other.datatype)
     }
-    
 }

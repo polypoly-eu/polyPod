@@ -2,7 +2,6 @@ import UIKit
 import CoreData
 
 extension PolyIn {
-    
     func addQuads(quads: [ExtendedData], completionHandler: (Bool) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             completionHandler(false)
@@ -26,14 +25,14 @@ extension PolyIn {
     
     private func createNode(for extendedData: ExtendedData, in managedContext: NSManagedObjectContext) -> NSManagedObject? {
         let entityName = extendedData.classname.replacingOccurrences(of: "@polypoly-eu/rdf.", with: "")
-
+        
         guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: managedContext) else {
             assert(false)
             return nil
         }
         
         let node = NSManagedObject(entity: entity, insertInto: managedContext)
-         
+        
         for (key, value) in extendedData.properties {
             if let childExtendedData = value as? ExtendedData {
                 let childNode = createNode(for: childExtendedData, in: managedContext)
@@ -49,5 +48,4 @@ extension PolyIn {
         
         return node
     }
-    
 }

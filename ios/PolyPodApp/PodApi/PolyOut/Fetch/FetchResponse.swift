@@ -1,7 +1,6 @@
 import Foundation
 
 struct FetchResponse {
-
     let bufferedText: String
     let ok: Bool
     let redirected: Bool
@@ -27,7 +26,7 @@ struct FetchResponse {
     
     public var messagePackObject: MessagePackValue {
         var messagePackArray: [MessagePackValue] = []
-
+        
         messagePackArray.append(["bufferedText", .string(bufferedText)])
         messagePackArray.append(["ok", .bool(ok)])
         messagePackArray.append(["redirected", .bool(redirected)])
@@ -37,7 +36,6 @@ struct FetchResponse {
         messagePackArray.append(["url", .string(url)])
         
         let object = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", .array(messagePackArray)])
-            
         return object
     }
 }

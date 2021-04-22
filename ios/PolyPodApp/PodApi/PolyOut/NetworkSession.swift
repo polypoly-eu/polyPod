@@ -9,7 +9,6 @@ extension URLSession: NetworkSession {
         let task = dataTask(with: request) { (data, response, error) in
             completionHandler(data, response, error)
         }
-
         task.resume()
     }
 }

@@ -2,13 +2,13 @@ import SwiftUI
 
 struct ContentView: View {
     typealias StateFunction = () -> AnyView
-
+    
     @State private var state: StateFunction? = nil
-
+    
     var body: some View {
         (state ?? firstRunState())()
     }
-
+    
     private func firstRunState() -> StateFunction {
         let defaults = UserDefaults.standard
         let firstRunKey = "firstRun"
@@ -16,7 +16,7 @@ struct ContentView: View {
         if !firstRun {
             return featureListState()
         }
-
+        
         return {
             AnyView(
                 OnboardingView(closeAction: {
@@ -26,7 +26,7 @@ struct ContentView: View {
             )
         }
     }
-
+    
     private func featureListState() -> StateFunction {{
         AnyView(
             FeatureListView(
@@ -43,7 +43,7 @@ struct ContentView: View {
             )
         )
     }}
-
+    
     private func featureState(_ feature: Feature) -> StateFunction {{
         AnyView(
             FeatureView(
@@ -54,7 +54,7 @@ struct ContentView: View {
             )
         )
     }}
-
+    
     private func infoState() -> StateFunction {{
         AnyView(
             OnboardingView(closeAction: {
@@ -62,7 +62,7 @@ struct ContentView: View {
             })
         )
     }}
-
+    
     private func settingsState() -> StateFunction {{
         AnyView(
             SettingsView(closeAction: {

@@ -8,7 +8,6 @@ protocol PolyOutProtocol {
 }
 
 class PolyOut: PolyOutProtocol {
-    
     let session: NetworkSession
     let fileStoragePath: URL
     
@@ -18,5 +17,4 @@ class PolyOut: PolyOutProtocol {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         fileStoragePath = paths[0]
     }
-    
 }

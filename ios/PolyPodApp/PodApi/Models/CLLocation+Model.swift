@@ -1,7 +1,6 @@
 import CoreLocation
 
 extension CLLocation: LiftedEntity {
-    
     static func entityModel() -> EntityModel {
         var valueModels: [String: ValueModel] = [:]
         

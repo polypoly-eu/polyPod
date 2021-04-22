@@ -5,7 +5,7 @@ struct FeatureListView: View {
     var openFeatureAction: (Feature) -> Void = { _ in }
     var openInfoAction: () -> Void = {}
     var openSettingsAction: () -> Void = {}
-
+    
     var body: some View {
         VStack(spacing: 0) {
             NavigationBar(
@@ -18,9 +18,9 @@ struct FeatureListView: View {
                 })
             )
             .background(Color.PolyPod.lightBackground)
-
+            
             Divider()
-
+            
             List() {
                 Section(header: Text("Features:")) {
                     ForEach(features, id: \.name) { feature in

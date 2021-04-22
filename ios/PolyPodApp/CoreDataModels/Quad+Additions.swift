@@ -1,7 +1,6 @@
 import Foundation
 
 extension Quad {
-    
     func matches(other: Quad) -> Bool {
         if !self.graph.matches(other: other.graph) {
             return false
@@ -17,5 +16,4 @@ extension Quad {
         }
         return true
     }
-    
 }

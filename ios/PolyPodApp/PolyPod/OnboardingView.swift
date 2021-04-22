@@ -2,10 +2,10 @@ import SwiftUI
 
 struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
-
+    
     @State var activeSlide: Int = 0
     var closeAction: () -> Void = {}
-
+    
     var body: some View {
         let slides = [
             Slide(
@@ -26,18 +26,18 @@ struct OnboardingView: View {
                 buttonAction: closeAction
             ).padding(28)
         ]
-
+        
         return VStack(spacing: 0) {
             NavigationBar(
                 leading: Button(action: closeAction) {
                     Image("NavIconCloseDark").renderingMode(.original)
                 }
             )
-
+            
             PageViewController(activeIndex: $activeSlide, views: slides)
-
+            
             Spacer()
-
+            
             Pagination(active: activeSlide, max: slides.count - 1)
                 .padding(.bottom, 36)
         }
@@ -59,7 +59,7 @@ private struct Slide: View {
     var bodyText: LocalizedStringKey
     var buttonLabel: LocalizedStringKey?
     var buttonAction: (() -> Void)?
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ParagraphView(
@@ -70,7 +70,7 @@ private struct Slide: View {
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground
             )
-
+            
             ParagraphView(
                 text: subHeadline,
                 fontName: "polyDisplay-Semi1.0",
@@ -79,7 +79,7 @@ private struct Slide: View {
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground
             ).padding(.bottom, 24)
-
+            
             ParagraphView(
                 text: bodyText,
                 fontName: "Jost-Regular",
@@ -88,9 +88,9 @@ private struct Slide: View {
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground
             )
-
+            
             Spacer()
-
+            
             if let buttonLabel = buttonLabel {
                 Button(action: buttonAction ?? {}) {
                     Text(buttonLabel)
@@ -125,7 +125,7 @@ private struct Slide: View {
 private struct Pagination: View {
     var active: Int
     var max: Int
-
+    
     var body: some View {
         HStack(spacing: 12) {
             ForEach((0...max), id: \.self) { index in
@@ -133,11 +133,11 @@ private struct Pagination: View {
             }
         }
     }
-
+    
     private struct Item: View {
         var active: Bool
         private let diameter = 12
-
+        
         var body: some View {
             Circle()
                 .strokeBorder(Color.PolyPod.darkForeground, lineWidth: 1.5)
@@ -152,16 +152,16 @@ private struct Pagination: View {
 private struct PageViewController<Content: View>: UIViewControllerRepresentable {
     private let activeIndex: Binding<Int>?
     private let viewControllers: [UIViewController]
-
+    
     init(activeIndex: Binding<Int>? = nil, views: [Content]) {
         self.activeIndex = activeIndex
         viewControllers = views.map { UIHostingController(rootView: $0) }
     }
-
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-
+    
     func makeUIViewController(context: Context) -> UIPageViewController {
         let pageViewController = UIPageViewController(
             transitionStyle: .scroll,
@@ -176,17 +176,17 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
         )
         return pageViewController
     }
-
+    
     func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
     }
-
+    
     class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         var parent: PageViewController
-
+        
         init(_ parent: PageViewController) {
             self.parent = parent
         }
-
+        
         func pageViewController(
             _ pageViewController: UIPageViewController,
             viewControllerBefore viewController: UIViewController
@@ -199,7 +199,7 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
             }
             return parent.viewControllers[index - 1]
         }
-
+        
         func pageViewController(
             _ pageViewController: UIPageViewController,
             viewControllerAfter viewController: UIViewController
@@ -212,7 +212,7 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
             }
             return parent.viewControllers[index + 1]
         }
-
+        
         func pageViewController(
             _ pageViewController: UIPageViewController,
             didFinishAnimating finished: Bool,

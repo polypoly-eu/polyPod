@@ -54,7 +54,7 @@ class Bubblewrap {
             for (k, v) in dict {
                 newDict[k.stringValue!] = decode(messagePackValue: v)
             }
-           return newDict
+            return newDict
         case .extended( _, let data):
             let unpackedData = try! unpackFirst(data)
             guard let decodedData = decode(messagePackValue: unpackedData) as? [Any] else { break }

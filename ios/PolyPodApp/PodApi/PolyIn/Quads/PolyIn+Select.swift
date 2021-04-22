@@ -2,7 +2,6 @@ import UIKit
 import CoreData
 
 extension PolyIn {
-    
     func selectQuads(matcher: ExtendedData, completionHandler: ([ExtendedData]?, Error?) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             completionHandler(nil, PolyApiError.databaseError)
@@ -32,7 +31,7 @@ extension PolyIn {
     private func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate, ((Quad) -> Bool)?) {
         var formatItems: [String] = []
         var arguments: [Any] = []
-
+        
         if let subjectsMatcher = matcher.properties["subject"] as? ExtendedData {
             formatItems.append("subject.termType == %@ && subject.value == %@")
             arguments.append(subjectsMatcher.properties["termType"] as! String)
@@ -52,11 +51,11 @@ extension PolyIn {
                 let termType = datatype.properties["termType"] as! String
                 let value = datatype.properties["value"] as! String
                 filterOperation = { (quad: Quad) -> Bool in
-                        let literal = quad.object as! Literal
-                        if literal.language == language && literal.datatype.termType == termType && literal.datatype.value == value {
-                            return true
-                        }
-                        return false
+                    let literal = quad.object as! Literal
+                    if literal.language == language && literal.datatype.termType == termType && literal.datatype.value == value {
+                        return true
+                    }
+                    return false
                     
                 }
             }
@@ -64,7 +63,7 @@ extension PolyIn {
             arguments.append(termType)
             arguments.append(objectsMatcher.properties["value"] as! String)
         }
-            
+        
         var format:String = ""
         for (i, formatItem) in formatItems.enumerated() {
             if i != 0 {
@@ -77,7 +76,7 @@ extension PolyIn {
         if format == "" {
             return (NSPredicate(value: true), filterOperation)
         }
-
+        
         let predicate = NSPredicate(format: format, argumentArray: arguments)
         return (predicate, filterOperation)
     }
@@ -121,5 +120,4 @@ extension PolyIn {
         let extendedData = ExtendedData(classname: classname, properties: properties)
         return extendedData
     }
-    
 }

@@ -17,7 +17,7 @@ struct EntityModel {
         let subject = DataFactory.namedNode(value: uuid, context: moc)
         let predicate = DataFactory.variable(value: typeIRI, context: moc)
         let object = DataFactory.namedNode(value: schema + type, context: moc)
-
+        
         var quads: [Quad] = [DataFactory.quad(subject: subject, predicate: predicate, object: object, context: moc)]
         
         for (key, value) in valueModels {

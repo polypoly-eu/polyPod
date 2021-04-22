@@ -2,7 +2,6 @@ import UIKit
 import CoreLocation
 
 class LocationTracker: NSObject, CLLocationManagerDelegate {
-    
     static let shared = LocationTracker()
     
     private let LAST_LOCATION_DATE = "LAST_LOCATION_DATE"
@@ -42,7 +41,7 @@ class LocationTracker: NSObject, CLLocationManagerDelegate {
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-                
+        
         let timeInterval = location.timestamp.timeIntervalSince(lastLocationDate)
         if timeInterval >= SETTINGS_LAST_LOCATION_TIME_INTERVAL {
             print(location)
@@ -65,5 +64,3 @@ subject: "polyId:944d5581-afa6-4661-a719-44728dd12b56", predicate: "https://sche
 subject: "polyId:944d5581-afa6-4661-a719-44728dd12b56", predicate: "https://schema.org/startDate", object: "2020-08-19T12:24:21"
 subject: "polyId:944d5581-afa6-4661-a719-44728dd12b56", predicate: "https://schema.org/endDate", object: "2020-08-19T12:35:18"
 */
-
-

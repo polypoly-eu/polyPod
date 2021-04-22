@@ -7,17 +7,17 @@ extension Color {
         static var lightBackground = Color.white
         static var semiLightBackground = Color(red: 0.929, green: 0.949, blue: 0.969)
     }
-
+    
     init(fromHex hexValue: String) {
         let scanner = Scanner(string: hexValue)
         if let hashIndex = hexValue.firstIndex(of: "#") {
             scanner.currentIndex = hexValue.index(after: hashIndex)
         }
         let hexDigitCount = scanner.string.distance(from: scanner.currentIndex, to: scanner.string.endIndex)
-
+        
         var rgbValue: UInt64 = 0
         scanner.scanHexInt64(&rgbValue)
-
+        
         switch hexDigitCount {
         case 6:
             self.init(

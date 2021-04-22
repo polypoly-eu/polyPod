@@ -6,7 +6,7 @@ extension FileManager {
             let fileName = "\(name).\(ext)"
             let fullDestPath = dest.appendingPathComponent(fileName)
             let fullDestPathString = fullDestPath.path
-
+            
             try FileManager.default.copyItem(atPath: bundlePath, toPath: fullDestPathString)
         }
     }

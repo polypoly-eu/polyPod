@@ -2,20 +2,20 @@ import SwiftUI
 
 struct FeatureView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    
     let feature: Feature
     var closeAction: () -> Void = {}
-
+    
     @State var title: String = ""
     @State var activeActions: [String] = []
     @State var queuedAction: (String, DispatchTime)? = nil
-
+    
     var body: some View {
         // On Android, we calculate this based on the feature colour's luminance,
         // we should do the same here.
         let lightForeground = feature.name == "polyExplorer"
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
-
+        
         let closeButton = Button(
             action: {
                 if activeActions.contains("back") {
@@ -29,13 +29,13 @@ struct FeatureView: View {
             Image("NavIcon\(qualifier)\(iconVariantQualifier)")
                 .renderingMode(.original)
         }
-
+        
         let titleLabel = Text(title != "" ? title : feature.name)
             .foregroundColor(lightForeground ? Color.PolyPod.lightForeground : Color.PolyPod.darkForeground)
             .font(.custom("Jost-Medium", size: 16))
             .kerning(-0.16)
             .frame(maxWidth: .infinity, alignment: .center)
-
+        
         let actionButtons = HStack {
             if activeActions.contains("search") {
                 Button(action: { triggerFeatureAction("search") }) {
@@ -43,7 +43,7 @@ struct FeatureView: View {
                         .renderingMode(.original)
                 }
             }
-
+            
             if activeActions.contains("info") {
                 Button(action: { triggerFeatureAction("info") }) {
                     Image("NavIconInfo\(iconVariantQualifier)")
@@ -51,7 +51,7 @@ struct FeatureView: View {
                 }
             }
         }
-
+        
         VStack(spacing: 0) {
             NavigationBar(
                 leading: AnyView(closeButton),
@@ -59,7 +59,7 @@ struct FeatureView: View {
                 trailing: AnyView(actionButtons)
             )
             .background(feature.primaryColor)
-
+            
             FeatureContainerView(
                 feature: feature,
                 title: $title,
@@ -69,7 +69,7 @@ struct FeatureView: View {
             )
         }
     }
-
+    
     private func openUrl(target: String) {
         let viewController = UIApplication.shared.windows.first!.rootViewController!
         guard let urlString = feature.findUrl(target: target) else {
@@ -106,7 +106,7 @@ struct FeatureView: View {
                             style: .default))
         viewController.present(alert, animated: true, completion: nil)
     }
-
+    
     private func triggerFeatureAction(_ action: String) {
         queuedAction = (action, DispatchTime.now())
     }

@@ -4,5 +4,4 @@ protocol PolyInProtocol {
 }
 
 class PolyIn: PolyInProtocol {
-    
 }

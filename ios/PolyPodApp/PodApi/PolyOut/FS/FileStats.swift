@@ -1,7 +1,6 @@
 import Foundation
 
 struct FileStats {
-
     let file: Bool
     let directory: Bool
     
@@ -12,7 +11,7 @@ struct FileStats {
     
     public var messagePackObject: MessagePackValue {
         var messagePackArray: [MessagePackValue] = []
-
+        
         messagePackArray.append(["file", .bool(file)])
         messagePackArray.append(["directory", .bool(directory)])
         
