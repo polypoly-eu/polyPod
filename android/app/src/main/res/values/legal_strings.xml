@@ -3,7 +3,6 @@
     <!ENTITY nbsp "&#160;"><!-- non-breaking space, U+00A0 -->
 ]>
 <resources>
-    <string name="settings_imprint_heading">Imprint</string>
     <string name="settings_imprint_text">
 <![CDATA[
 <p>Details according to § 5 TMG</p>
@@ -542,8 +541,6 @@
     </div>
 ]]>
     </string>
-
-    <string name="settings_terms_of_use_heading">Terms and conditions</string>
 
     <string name="settings_terms_of_use_text">
 <![CDATA[
