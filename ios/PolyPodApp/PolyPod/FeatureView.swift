@@ -52,7 +52,7 @@ struct FeatureView: View {
 
             if activeActions.contains("search") {
                 Button(action: { triggerFeatureAction("search") }) {
-                    Image("NavIconInfo\(iconVariantQualifier)")
+                    Image("NavIconSearch\(iconVariantQualifier)")
                 }
             }
         }
