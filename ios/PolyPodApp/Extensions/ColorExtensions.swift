@@ -8,6 +8,21 @@ extension Color {
         static var semiLightBackground = Color(red: 0.929, green: 0.949, blue: 0.969)
     }
     
+    // iOS 13 support
+    var cgColor: CGColor { UIColor(self).cgColor }
+    
+    var luminance: Double {
+        guard let components = cgColor.components else {
+            return 0
+        }
+        let red = components[0]
+        let green = components[1]
+        let blue = components[2]
+        return Double(red * 0.2126 + green * 0.7152 + blue * 0.0722)
+    }
+    
+    var isLight: Bool { luminance * 255 <= 50 }
+    
     init(fromHex hexValue: String) {
         let scanner = Scanner(string: hexValue)
         if let hashIndex = hexValue.firstIndex(of: "#") {

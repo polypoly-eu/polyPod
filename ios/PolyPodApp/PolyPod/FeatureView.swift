@@ -11,9 +11,8 @@ struct FeatureView: View {
     @State var queuedAction: (String, DispatchTime)? = nil
     
     var body: some View {
-        // On Android, we calculate this based on the feature colour's luminance,
-        // we should do the same here.
-        let lightForeground = feature.name == "polyExplorer"
+        let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
+        let lightForeground = featureColor.isLight
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
         
         let closeButton = Button(
@@ -58,7 +57,7 @@ struct FeatureView: View {
                 center: AnyView(titleLabel),
                 trailing: AnyView(actionButtons)
             )
-            .background(feature.primaryColor)
+            .background(featureColor)
             
             FeatureContainerView(
                 feature: feature,
