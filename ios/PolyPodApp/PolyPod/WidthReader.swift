@@ -15,7 +15,10 @@ struct WidthReader<Content: View>: View {
         content(width)
             .frame(maxWidth: .infinity, maxHeight: nil, alignment: .leading)
             .background(GeometryReader { geometry in
-                Color.clear.preference(key: WidthKey.self, value: geometry.size.width)
+                Color.clear.preference(
+                    key: WidthKey.self,
+                    value: geometry.size.width
+                )
             })
             .onPreferenceChange(WidthKey.self) {
                 width = $0

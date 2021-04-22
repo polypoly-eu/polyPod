@@ -24,14 +24,24 @@ struct SettingsView: View {
                 Section(header: SettingsHeader("settings_about_section")) {
                     SettingsButton(label: "settings_version", action: {})
                 }
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .listRowInsets(
+                    EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+                )
                 
                 Section(header: SettingsHeader("settings_legal_section")) {
                     SettingsButton(label: "settings_imprint_title", action: {})
-                    SettingsButton(label: "settings_privacy_policy_title", action: {})
-                    SettingsButton(label: "settings_terms_of_use_title", action: {})
+                    SettingsButton(
+                        label: "settings_privacy_policy_title",
+                        action: {}
+                    )
+                    SettingsButton(
+                        label: "settings_terms_of_use_title",
+                        action: {}
+                    )
                 }
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .listRowInsets(
+                    EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+                )
             }
         }
     }
@@ -55,7 +65,11 @@ private struct SettingsHeader: View {
             .foregroundColor(Color(red: 0.243, green: 0.286, blue: 0.357))
             .font(.custom("Jost-Medium", size: 12))
             .kerning(-0.12)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: .infinity,
+                alignment: .leading
+            )
             .padding(.leading, 32)
             .background(Color.PolyPod.semiLightBackground)
     }

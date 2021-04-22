@@ -28,7 +28,10 @@ extension Color {
         if let hashIndex = hexValue.firstIndex(of: "#") {
             scanner.currentIndex = hexValue.index(after: hashIndex)
         }
-        let hexDigitCount = scanner.string.distance(from: scanner.currentIndex, to: scanner.string.endIndex)
+        let hexDigitCount = scanner.string.distance(
+            from: scanner.currentIndex,
+            to: scanner.string.endIndex
+        )
         
         var rgbValue: UInt64 = 0
         scanner.scanHexInt64(&rgbValue)

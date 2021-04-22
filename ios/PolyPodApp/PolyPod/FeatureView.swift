@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct FeatureView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.presentationMode)
+    var presentationMode: Binding<PresentationMode>
     
     let feature: Feature
     var closeAction: () -> Void = {}
@@ -30,7 +31,11 @@ struct FeatureView: View {
         }
         
         let titleLabel = Text(title != "" ? title : feature.name)
-            .foregroundColor(lightForeground ? Color.PolyPod.lightForeground : Color.PolyPod.darkForeground)
+            .foregroundColor(
+                lightForeground
+                    ? Color.PolyPod.lightForeground
+                    : Color.PolyPod.darkForeground
+            )
             .font(.custom("Jost-Medium", size: 16))
             .kerning(-0.16)
             .frame(maxWidth: .infinity, alignment: .center)
@@ -70,12 +75,16 @@ struct FeatureView: View {
     }
     
     private func openUrl(target: String) {
-        let viewController = UIApplication.shared.windows.first!.rootViewController!
+        let viewController =
+            UIApplication.shared.windows.first!.rootViewController!
         guard let urlString = feature.findUrl(target: target) else {
             let alert = UIAlertController(
                 title: "",
                 message: String.localizedStringWithFormat(
-                    NSLocalizedString("message_url_open_prevented %@ %@", comment: ""),
+                    NSLocalizedString(
+                        "message_url_open_prevented %@ %@",
+                        comment: ""
+                    ),
                     feature.name, target
                 ),
                 preferredStyle: UIAlertController.Style.alert)
@@ -90,18 +99,27 @@ struct FeatureView: View {
         let alert = UIAlertController(
             title: "",
             message: String.localizedStringWithFormat(
-                NSLocalizedString("message_url_open_requested %@ %@", comment: ""),
+                NSLocalizedString(
+                    "message_url_open_requested %@ %@",
+                    comment: ""
+                ),
                 feature.name, urlString
             ),
             preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(
-                            title: NSLocalizedString("button_url_open_confirm", comment: ""),
+                            title: NSLocalizedString(
+                                "button_url_open_confirm",
+                                comment: ""
+                            ),
                             style: .default,
                             handler: { (action: UIAlertAction!) in
                                 UIApplication.shared.open(url)
                             }))
         alert.addAction(UIAlertAction(
-                            title: NSLocalizedString("button_url_open_reject", comment: ""),
+                            title: NSLocalizedString(
+                                "button_url_open_reject",
+                                comment: ""
+                            ),
                             style: .default))
         viewController.present(alert, animated: true, completion: nil)
     }

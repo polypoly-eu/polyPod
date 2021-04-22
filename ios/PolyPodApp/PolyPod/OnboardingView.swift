@@ -142,14 +142,17 @@ private struct Pagination: View {
             Circle()
                 .strokeBorder(Color.PolyPod.darkForeground, lineWidth: 1.5)
                 .background(
-                    Circle().foregroundColor(active ? Color.PolyPod.darkForeground : Color.clear)
+                    Circle().foregroundColor(
+                        active ? Color.PolyPod.darkForeground : Color.clear
+                    )
                 )
                 .frame(width: CGFloat(diameter), height: CGFloat(diameter))
         }
     }
 }
 
-private struct PageViewController<Content: View>: UIViewControllerRepresentable {
+private struct PageViewController<Content: View>
+: UIViewControllerRepresentable {
     private let activeIndex: Binding<Int>?
     private let viewControllers: [UIViewController]
     
@@ -177,10 +180,14 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
         return pageViewController
     }
     
-    func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
+    func updateUIViewController(
+        _ pageViewController: UIPageViewController,
+        context: Context
+    ) {
     }
     
-    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    class Coordinator: NSObject, UIPageViewControllerDataSource,
+                       UIPageViewControllerDelegate {
         var parent: PageViewController
         
         init(_ parent: PageViewController) {
@@ -191,7 +198,8 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
             _ pageViewController: UIPageViewController,
             viewControllerBefore viewController: UIViewController
         ) -> UIViewController? {
-            guard let index = parent.viewControllers.firstIndex(of: viewController) else {
+            guard let index =
+                    parent.viewControllers.firstIndex(of: viewController) else {
                 return nil
             }
             if index == 0 {
@@ -204,7 +212,8 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
             _ pageViewController: UIPageViewController,
             viewControllerAfter viewController: UIViewController
         ) -> UIViewController? {
-            guard let index = parent.viewControllers.firstIndex(of: viewController) else {
+            guard let index =
+                    parent.viewControllers.firstIndex(of: viewController) else {
                 return nil
             }
             if index == parent.viewControllers.count - 1 {
