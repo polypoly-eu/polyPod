@@ -44,15 +44,15 @@ struct FeatureView: View {
             .frame(maxWidth: .infinity, alignment: .center)
 
         let actionButtons = HStack {
-            if activeActions.contains("info") {
-                Button(action: { triggerFeatureAction("info") }) {
-                    Image("NavIconInfo\(iconVariantQualifier)")
-                }
-            }
-
             if activeActions.contains("search") {
                 Button(action: { triggerFeatureAction("search") }) {
                     Image("NavIconSearch\(iconVariantQualifier)")
+                }
+            }
+
+            if activeActions.contains("info") {
+                Button(action: { triggerFeatureAction("info") }) {
+                    Image("NavIconInfo\(iconVariantQualifier)")
                 }
             }
         }
