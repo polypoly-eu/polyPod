@@ -1,11 +1,3 @@
-//
-//  PodApi.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 01.04.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import Foundation
 
 class PodApi {

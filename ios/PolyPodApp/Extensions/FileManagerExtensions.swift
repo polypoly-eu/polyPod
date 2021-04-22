@@ -1,11 +1,3 @@
-//
-//  FileManager+Additions.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 02.04.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import UIKit
 
 extension FileManager {

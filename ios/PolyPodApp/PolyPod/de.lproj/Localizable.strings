@@ -1,11 +1,3 @@
-/* 
-  Localizable.strings
-  PolyPod
-
-  Created by Felix Dahlke on 15.04.21.
-  Copyright © 2021 polypoly. All rights reserved.
-*/
-
 "app_name" = "polyPod";
 "app_bar_close_button_desc" = "Schliessen";
 "app_bar_back_button_desc" = "Zurück";

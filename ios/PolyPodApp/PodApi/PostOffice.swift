@@ -1,11 +1,3 @@
-//
-//  PostOffice.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 27.05.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import UIKit
 
 class PostOffice {

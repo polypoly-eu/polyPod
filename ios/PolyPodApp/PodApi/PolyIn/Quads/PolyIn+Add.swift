@@ -1,11 +1,3 @@
-//
-//  PolyIn+Add.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 17.07.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import UIKit
 import CoreData
 

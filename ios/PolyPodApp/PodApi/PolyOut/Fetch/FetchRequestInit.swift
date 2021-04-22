@@ -1,11 +1,3 @@
-//
-//  FetchRequestInit.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 10.06.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 struct FetchRequestInit {
 
     let body: String?

@@ -1,11 +1,3 @@
-//
-//  PolyOutTests.swift
-//  PolyPodTests
-//
-//  Created by Carmen Burmeister on 12.06.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import XCTest
 
 var sessionGetData: Data?

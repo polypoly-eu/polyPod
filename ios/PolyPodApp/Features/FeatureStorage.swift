@@ -1,11 +1,3 @@
-//
-//  FeaturesWallet.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 17.03.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import Foundation
 import Zip
 

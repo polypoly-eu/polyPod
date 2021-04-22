@@ -1,11 +1,3 @@
-//
-//  Color+Additions.swift
-//  PolyPod
-//
-//  Created by Felix Dahlke on 21.04.21.
-//  Copyright © 2021 polypoly. All rights reserved.
-//
-
 import SwiftUI
 
 extension Color {

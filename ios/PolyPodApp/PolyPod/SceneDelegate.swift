@@ -1,11 +1,3 @@
-//
-//  SceneDelegate.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 11.03.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import UIKit
 import SwiftUI
 
