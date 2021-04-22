@@ -100,7 +100,7 @@ private struct Slide: View {
                         .frame(minWidth: 296, minHeight: 48)
                         .background(
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color(red: 0.984, green: 0.541, blue: 0.537))
+                                .fill(Color(fromHex: "#FB8A89"))
                                 .shadow(
                                     color: Color.black.opacity(0.06),
                                     radius: 2,

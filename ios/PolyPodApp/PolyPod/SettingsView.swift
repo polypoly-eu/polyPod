@@ -62,7 +62,7 @@ private struct SettingsHeader: View {
     
     var body: some View {
         Text(text)
-            .foregroundColor(Color(red: 0.243, green: 0.286, blue: 0.357))
+            .foregroundColor(Color(fromHex: "#3E495B"))
             .font(.custom("Jost-Medium", size: 12))
             .kerning(-0.12)
             .frame(

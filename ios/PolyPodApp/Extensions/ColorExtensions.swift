@@ -2,10 +2,10 @@ import SwiftUI
 
 extension Color {
     struct PolyPod {
-        static var lightForeground = Color(red: 0.969, green: 0.98, blue: 0.988)
-        static var darkForeground = Color(red: 0.059, green: 0.098, blue: 0.22)
+        static var lightForeground = Color(fromHex: "#F7FAFC")
+        static var darkForeground = Color(fromHex: "#0F1938")
         static var lightBackground = Color.white
-        static var semiLightBackground = Color(red: 0.929, green: 0.949, blue: 0.969)
+        static var semiLightBackground = Color(fromHex: "#EDF2F7")
     }
     
     // iOS 13 support
