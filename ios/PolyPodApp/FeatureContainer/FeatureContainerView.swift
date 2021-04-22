@@ -73,6 +73,12 @@ class FeatureWebView: WKWebView {
         // we explicitly inject it, at least for now.
         installUserScript(contentController, "pod", forMainFrameOnly: false)
         
+        installUserScript(
+            contentController,
+            "disableUserSelect",
+            forMainFrameOnly: false
+        )
+        
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
         
