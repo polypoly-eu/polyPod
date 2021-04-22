@@ -330,6 +330,7 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
+				E97D3274263151BC00A5A180 /* Features */,
 				E97D326726308BC700A5A180 /* Extensions */,
 				1A57E65424A4C3FB0043E3AD /* Bubblewrap */,
 				1A6F4DF624C1B9BE00874DF9 /* CoreDataModels */,
@@ -358,12 +359,10 @@
 				1A4C21C324A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld */,
 				1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */,
 				1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */,
-				1AF4689D2420D5F600E51B6D /* FeatureStorage.swift */,
 				1AA6DE3B24191C96008DB1B2 /* Assets.xcassets */,
 				1AA6DE3D24191C96008DB1B2 /* LaunchScreen.storyboard */,
 				1AA6DE4024191C96008DB1B2 /* Info.plist */,
 				1AB4F37D2508D64600E66BCC /* Settings.bundle */,
-				E9CF1B2F2625866800216B70 /* Feature.swift */,
 				E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */,
 				E9CF1B632625EA3200216B70 /* FeatureView.swift */,
 				E92373BE26289FA900D2CFF3 /* Localizable.strings */,
@@ -444,6 +443,15 @@
 				E97D325526307CE100A5A180 /* ColorExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E97D3274263151BC00A5A180 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				E9CF1B2F2625866800216B70 /* Feature.swift */,
+				1AF4689D2420D5F600E51B6D /* FeatureStorage.swift */,
+			);
+			path = Features;
 			sourceTree = "<group>";
 		};
 		E9F370C5262DD8EF006254C1 /* fonts */ = {
