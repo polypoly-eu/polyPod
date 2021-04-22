@@ -1,28 +1,14 @@
-//
-//  ContentView.swift
-//  PolyPod
-//
-//  Created by Felix Dahlke on 16.04.21.
-//  Copyright © 2021 polypoly. All rights reserved.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     typealias StateFunction = () -> AnyView
-
+    
     @State private var state: StateFunction? = nil
-
+    
     var body: some View {
-        if let state = state {
-            state()
-        } else {
-            EmptyView().onAppear {
-                state = firstRunState()
-            }
-        }
+        (state ?? firstRunState())()
     }
-
+    
     private func firstRunState() -> StateFunction {
         let defaults = UserDefaults.standard
         let firstRunKey = "firstRun"
@@ -30,7 +16,7 @@ struct ContentView: View {
         if !firstRun {
             return featureListState()
         }
-
+        
         return {
             AnyView(
                 OnboardingView(closeAction: {
@@ -40,7 +26,7 @@ struct ContentView: View {
             )
         }
     }
-
+    
     private func featureListState() -> StateFunction {{
         AnyView(
             FeatureListView(
@@ -50,11 +36,14 @@ struct ContentView: View {
                 },
                 openInfoAction: {
                     state = infoState()
+                },
+                openSettingsAction: {
+                    state = settingsState()
                 }
             )
         )
     }}
-
+    
     private func featureState(_ feature: Feature) -> StateFunction {{
         AnyView(
             FeatureView(
@@ -65,10 +54,18 @@ struct ContentView: View {
             )
         )
     }}
-
+    
     private func infoState() -> StateFunction {{
         AnyView(
             OnboardingView(closeAction: {
+                state = featureListState()
+            })
+        )
+    }}
+    
+    private func settingsState() -> StateFunction {{
+        AnyView(
+            SettingsView(closeAction: {
                 state = featureListState()
             })
         )

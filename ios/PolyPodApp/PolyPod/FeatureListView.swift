@@ -1,33 +1,26 @@
-//
-//  FeatureListView.swift
-//  PolyPod
-//
-//  Created by Felix Dahlke on 13.04.21.
-//
-
 import SwiftUI
 
 struct FeatureListView: View {
     var features: [Feature]
     var openFeatureAction: (Feature) -> Void = { _ in }
     var openInfoAction: () -> Void = {}
-
+    var openSettingsAction: () -> Void = {}
+    
     var body: some View {
-        VStack {
-            HStack {
-                Button("app_bar_info_button_desc", action: openInfoAction)
-
-                Spacer()
-
-                Text("app_name")
-
-                Spacer()
-
-                Button("settings_title", action: handleOpenSettings)
-            }
-            .padding(.horizontal, 8)
-            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .bottom)
-
+        VStack(spacing: 0) {
+            NavigationBar(
+                leading: AnyView(Button(action: openInfoAction) {
+                    Image("NavIconInfoDark").renderingMode(.original)
+                }),
+                center: AnyView(Image("NavIconPolyPodLogo")),
+                trailing: AnyView(Button(action: openSettingsAction) {
+                    Image("NavIconSettingsDark").renderingMode(.original)
+                })
+            )
+            .background(Color.PolyPod.lightBackground)
+            
+            Divider()
+            
             List() {
                 Section(header: Text("Features:")) {
                     ForEach(features, id: \.name) { feature in
@@ -38,13 +31,6 @@ struct FeatureListView: View {
                 }
             }
         }
-    }
-
-    private func handleOpenSettings() {
-        UIApplication.shared.open(
-            URL(string: UIApplication.openSettingsURLString)!,
-            options: [:],
-            completionHandler: nil)
     }
 }
 

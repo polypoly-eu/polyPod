@@ -1,59 +1,69 @@
-//
-//  FeatureView.swift
-//  PolyPod
-//
-//  Created by Felix Dahlke on 13.04.21.
-//  Copyright © 2021 polypoly. All rights reserved.
-//
-
 import SwiftUI
 
 struct FeatureView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    @Environment(\.presentationMode)
+    var presentationMode: Binding<PresentationMode>
+    
     let feature: Feature
     var closeAction: () -> Void = {}
-
+    
     @State var title: String = ""
     @State var activeActions: [String] = []
     @State var queuedAction: (String, DispatchTime)? = nil
-
+    
     var body: some View {
-        VStack {
-            HStack {
-                Button(
-                    activeActions.contains("back")
-                        ? "app_bar_back_button_desc"
-                        : "app_bar_close_button_desc"
-                ) {
-                    if activeActions.contains("back") {
-                        triggerFeatureAction("back")
-                        return
-                    }
-                    closeAction()
+        let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
+        let lightForeground = featureColor.isLight
+        let iconVariantQualifier = lightForeground ? "Light" : "Dark"
+        
+        let closeButton = Button(
+            action: {
+                if activeActions.contains("back") {
+                    triggerFeatureAction("back")
+                    return
                 }
-
-                Spacer()
-
-                Text(title)
-
-                Spacer()
-
-                if activeActions.contains("info") {
-                    Button("app_bar_info_button_desc") {
-                        triggerFeatureAction("info")
-                    }
-                }
-
-                if activeActions.contains("search") {
-                    Button("app_bar_search_button_desc") {
-                        triggerFeatureAction("search")
-                    }
+                closeAction()
+            }
+        ) {
+            let qualifier = activeActions.contains("back") ? "Back" : "Close"
+            Image("NavIcon\(qualifier)\(iconVariantQualifier)")
+                .renderingMode(.original)
+        }
+        
+        let titleLabel = Text(title != "" ? title : feature.name)
+            .foregroundColor(
+                lightForeground
+                    ? Color.PolyPod.lightForeground
+                    : Color.PolyPod.darkForeground
+            )
+            .font(.custom("Jost-Medium", size: 16))
+            .kerning(-0.16)
+            .frame(maxWidth: .infinity, alignment: .center)
+        
+        let actionButtons = HStack {
+            if activeActions.contains("search") {
+                Button(action: { triggerFeatureAction("search") }) {
+                    Image("NavIconSearch\(iconVariantQualifier)")
+                        .renderingMode(.original)
                 }
             }
-            .padding(.horizontal, 8)
-            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .bottom)
-
+            
+            if activeActions.contains("info") {
+                Button(action: { triggerFeatureAction("info") }) {
+                    Image("NavIconInfo\(iconVariantQualifier)")
+                        .renderingMode(.original)
+                }
+            }
+        }
+        
+        VStack(spacing: 0) {
+            NavigationBar(
+                leading: AnyView(closeButton),
+                center: AnyView(titleLabel),
+                trailing: AnyView(actionButtons)
+            )
+            .background(featureColor)
+            
             FeatureContainerView(
                 feature: feature,
                 title: $title,
@@ -63,14 +73,18 @@ struct FeatureView: View {
             )
         }
     }
-
+    
     private func openUrl(target: String) {
-        let viewController = UIApplication.shared.windows.first!.rootViewController!
+        let viewController =
+            UIApplication.shared.windows.first!.rootViewController!
         guard let urlString = feature.findUrl(target: target) else {
             let alert = UIAlertController(
                 title: "",
                 message: String.localizedStringWithFormat(
-                    NSLocalizedString("message_url_open_prevented %@ %@", comment: ""),
+                    NSLocalizedString(
+                        "message_url_open_prevented %@ %@",
+                        comment: ""
+                    ),
                     feature.name, target
                 ),
                 preferredStyle: UIAlertController.Style.alert)
@@ -85,22 +99,31 @@ struct FeatureView: View {
         let alert = UIAlertController(
             title: "",
             message: String.localizedStringWithFormat(
-                NSLocalizedString("message_url_open_requested %@ %@", comment: ""),
+                NSLocalizedString(
+                    "message_url_open_requested %@ %@",
+                    comment: ""
+                ),
                 feature.name, urlString
             ),
             preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(
-                            title: NSLocalizedString("button_url_open_confirm", comment: ""),
+                            title: NSLocalizedString(
+                                "button_url_open_confirm",
+                                comment: ""
+                            ),
                             style: .default,
                             handler: { (action: UIAlertAction!) in
                                 UIApplication.shared.open(url)
                             }))
         alert.addAction(UIAlertAction(
-                            title: NSLocalizedString("button_url_open_reject", comment: ""),
+                            title: NSLocalizedString(
+                                "button_url_open_reject",
+                                comment: ""
+                            ),
                             style: .default))
         viewController.present(alert, animated: true, completion: nil)
     }
-
+    
     private func triggerFeatureAction(_ action: String) {
         queuedAction = (action, DispatchTime.now())
     }
@@ -108,6 +131,7 @@ struct FeatureView: View {
 
 struct FeatureView_Previews: PreviewProvider {
     static var previews: some View {
-        FeatureView(feature: createStubFeature(name: "Test"))
+        FeatureView(feature: createStubFeature(name: "polyExplorer"))
+        FeatureView(feature: createStubFeature(name: "polyPreview"))
     }
 }

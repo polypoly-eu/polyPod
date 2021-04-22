@@ -1,11 +1,3 @@
-//
-//  Models.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 21.08.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import Foundation
 import CoreData
 
@@ -25,7 +17,7 @@ struct EntityModel {
         let subject = DataFactory.namedNode(value: uuid, context: moc)
         let predicate = DataFactory.variable(value: typeIRI, context: moc)
         let object = DataFactory.namedNode(value: schema + type, context: moc)
-
+        
         var quads: [Quad] = [DataFactory.quad(subject: subject, predicate: predicate, object: object, context: moc)]
         
         for (key, value) in valueModels {
