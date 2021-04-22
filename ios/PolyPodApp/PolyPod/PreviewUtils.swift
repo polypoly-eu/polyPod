@@ -16,7 +16,7 @@ func createStubFeature(
     primaryColor: String? = nil,
     links: [String: String]? = nil
 ) -> Feature {
-    let manifest = Feature.Manifest(
+    let manifest = FeatureManifest(
         name: name,
         author: author,
         description: description,

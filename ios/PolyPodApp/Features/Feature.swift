@@ -19,14 +19,14 @@ class Feature {
 
     static func load(path: URL) -> Feature? {
         let manifestPath = path.appendingPathComponent("manifest.json")
-        guard let manifest = Manifest.load(path: manifestPath) else {
+        guard let manifest = FeatureManifest.load(path: manifestPath) else {
             print("Failed to load feature manifest from: \(manifestPath)")
             return nil
         }
         return Feature(path: path, manifest: manifest)
     }
 
-    init(path: URL, manifest: Manifest) {
+    init(path: URL, manifest: FeatureManifest) {
         self.path = path
         let userLanguage = Locale.current.languageCode ?? "en"
         let translations = manifest.translations?[userLanguage]
@@ -49,38 +49,6 @@ class Feature {
             return target
         }
         return nil
-    }
-
-    struct Manifest: Decodable {
-        let name: String?
-        let author: String?
-        let description: String?
-        let thumbnail: String?
-        let primaryColor: String?
-        let links: [String: String]?
-        let translations: [String: Override]?
-
-        static func load(path: URL) -> Manifest? {
-            guard let contents = try? String(contentsOf: path) else {
-                return nil
-            }
-            guard let data = contents.data(using: .utf8) else {
-                return nil
-            }
-            guard let manifest = try? JSONDecoder().decode(Manifest.self, from: data) else {
-                return nil
-            }
-            return manifest
-        }
-
-        struct Override: Decodable {
-            let name: String?
-            let author: String?
-            let description: String?
-            let thumbnail: String?
-            let primaryColor: String?
-            let links: [String: String]?
-        }
     }
 }
 
