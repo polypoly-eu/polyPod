@@ -8,12 +8,44 @@ import SwiftUI
  we transition to SwiftUI.Text once it properly supports these things.
  */
 struct ParagraphView: View {
-    var text: LocalizedStringKey
-    var fontName: String? = nil
-    var fontSize: CGFloat? = nil
-    var kerning: CGFloat? = nil
-    var lineHeightMultiple: CGFloat? = nil
-    var foregroundColor: Color? = nil
+    private let text: String
+    private let fontName: String?
+    private let fontSize: CGFloat?
+    private let kerning: CGFloat?
+    private let lineHeightMultiple: CGFloat?
+    private let foregroundColor: Color?
+    
+    init(
+        text: String,
+        fontName: String? = nil,
+        fontSize: CGFloat? = nil,
+        kerning: CGFloat? = nil,
+        lineHeightMultiple: CGFloat? = nil,
+        foregroundColor: Color? = nil
+    ) {
+        self.text = text
+        self.fontName = fontName
+        self.fontSize = fontSize
+        self.kerning = kerning
+        self.lineHeightMultiple = lineHeightMultiple
+        self.foregroundColor = foregroundColor
+    }
+    
+    init(
+        text: LocalizedStringKey,
+        fontName: String? = nil,
+        fontSize: CGFloat? = nil,
+        kerning: CGFloat? = nil,
+        lineHeightMultiple: CGFloat? = nil,
+        foregroundColor: Color? = nil
+    ) {
+        self.text = text.toLocalizedString()
+        self.fontName = fontName
+        self.fontSize = fontSize
+        self.kerning = kerning
+        self.lineHeightMultiple = lineHeightMultiple
+        self.foregroundColor = foregroundColor
+    }
     
     var body: some View {
         WidthReader { width in
@@ -31,7 +63,7 @@ struct ParagraphView: View {
 }
 
 private struct UILabelView: UIViewRepresentable {
-    var text: LocalizedStringKey
+    var text: String
     var preferredMaxLayoutWidth: CGFloat
     var fontName: String? = nil
     var fontSize: CGFloat? = nil
@@ -71,7 +103,7 @@ private struct UILabelView: UIViewRepresentable {
         }
         
         label.attributedText = NSMutableAttributedString(
-            string: text.toLocalizedString(),
+            string: text,
             attributes: attributes
         )
     }
