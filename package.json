@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@polypoly-eu/poly-api": "^0.6.1",
-    "@polypoly-eu/poly-look": "^0.1.1",
+    "@polypoly-eu/poly-look": "^0.2.1",
     "i18next": "^19.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
