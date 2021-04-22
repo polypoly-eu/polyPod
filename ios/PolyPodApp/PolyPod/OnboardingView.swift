@@ -38,7 +38,7 @@ struct OnboardingView: View {
         return VStack(spacing: 0) {
             NavigationBar(
                 leading: Button(action: closeAction) {
-                    Image("NavIconCloseDark")
+                    Image("NavIconCloseDark").renderingMode(.original)
                 }
             )
 

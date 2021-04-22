@@ -17,11 +17,11 @@ struct FeatureListView: View {
         VStack(spacing: 0) {
             NavigationBar(
                 leading: AnyView(Button(action: openInfoAction) {
-                    Image("NavIconInfoDark")
+                    Image("NavIconInfoDark").renderingMode(.original)
                 }),
                 center: AnyView(Image("NavIconPolyPodLogo")),
                 trailing: AnyView(Button(action: openSettingsAction) {
-                    Image("NavIconSettingsDark")
+                    Image("NavIconSettingsDark").renderingMode(.original)
                 })
             )
             .background(Color.PolyPod.lightBackground)

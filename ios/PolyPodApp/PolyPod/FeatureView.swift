@@ -35,6 +35,7 @@ struct FeatureView: View {
         ) {
             let qualifier = activeActions.contains("back") ? "Back" : "Close"
             Image("NavIcon\(qualifier)\(iconVariantQualifier)")
+                .renderingMode(.original)
         }
 
         let titleLabel = Text(title != "" ? title : feature.name)
@@ -47,12 +48,14 @@ struct FeatureView: View {
             if activeActions.contains("search") {
                 Button(action: { triggerFeatureAction("search") }) {
                     Image("NavIconSearch\(iconVariantQualifier)")
+                        .renderingMode(.original)
                 }
             }
 
             if activeActions.contains("info") {
                 Button(action: { triggerFeatureAction("info") }) {
                     Image("NavIconInfo\(iconVariantQualifier)")
+                        .renderingMode(.original)
                 }
             }
         }

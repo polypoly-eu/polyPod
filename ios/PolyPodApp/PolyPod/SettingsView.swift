@@ -15,7 +15,7 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar(
                 leading: AnyView(Button(action: closeAction) {
-                    Image("NavIconBackDark")
+                    Image("NavIconBackDark").renderingMode(.original)
                 }),
                 center: AnyView(
                     Text("Settings")
