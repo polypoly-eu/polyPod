@@ -15,23 +15,15 @@ struct FeatureListView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Button(action: openInfoAction) {
+            NavigationBar(
+                leading: AnyView(Button(action: openInfoAction) {
                     Image("NavIconInfoDark")
-                }
-
-                Spacer()
-
-                Image("NavIconPolyPodLogo")
-
-                Spacer()
-
-                Button(action: openSettingsAction) {
+                }),
+                center: AnyView(Image("NavIconPolyPodLogo")),
+                trailing: AnyView(Button(action: openSettingsAction) {
                     Image("NavIconSettingsDark")
-                }
-            }
-            .padding(.horizontal, 8)
-            .frame(maxWidth: .infinity, maxHeight: 42, alignment: .center)
+                })
+            )
             .background(Color.PolyPod.lightBackground)
 
             Divider()

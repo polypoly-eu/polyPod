@@ -36,14 +36,10 @@ struct OnboardingView: View {
         ]
 
         return VStack(spacing: 0) {
-            Button(action: closeAction) {
-                Image("NavIconCloseDark")
-            }
-            .padding(.horizontal, 8)
-            .frame(
-                maxWidth: .infinity,
-                maxHeight: 42,
-                alignment: Alignment(horizontal: .leading, vertical: .center)
+            NavigationBar(
+                leading: Button(action: closeAction) {
+                    Image("NavIconCloseDark")
+                }
             )
 
             PageViewController(activeIndex: $activeSlide, views: slides)

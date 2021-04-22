@@ -24,45 +24,45 @@ struct FeatureView: View {
         let lightForeground = feature.name == "polyExplorer"
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
 
-        VStack(spacing: 0) {
-            ZStack {
-                HStack {
-                    Button(
-                        action: {
-                            if activeActions.contains("back") {
-                                triggerFeatureAction("back")
-                                return
-                            }
-                            closeAction()
-                        }
-                    ) {
-                        let qualifier = activeActions.contains("back") ? "Back" : "Close"
-                        Image("NavIcon\(qualifier)\(iconVariantQualifier)")
-                    }
-
-                    Spacer()
-
-                    if activeActions.contains("info") {
-                        Button(action: { triggerFeatureAction("info") }) {
-                            Image("NavIconInfo\(iconVariantQualifier)")
-                        }
-                    }
-
-                    if activeActions.contains("search") {
-                        Button(action: { triggerFeatureAction("search") }) {
-                            Image("NavIconInfo\(iconVariantQualifier)")
-                        }
-                    }
+        let closeButton = Button(
+            action: {
+                if activeActions.contains("back") {
+                    triggerFeatureAction("back")
+                    return
                 }
-
-                Text(title != "" ? title : feature.name)
-                    .foregroundColor(lightForeground ? Color.PolyPod.lightForeground : Color.PolyPod.darkForeground)
-                    .font(.custom("Jost-Medium", size: 16))
-                    .kerning(-0.16)
-                    .frame(maxWidth: .infinity, alignment: .center)
+                closeAction()
             }
-            .padding(.horizontal, 8)
-            .frame(maxWidth: .infinity, maxHeight: 42, alignment: .center)
+        ) {
+            let qualifier = activeActions.contains("back") ? "Back" : "Close"
+            Image("NavIcon\(qualifier)\(iconVariantQualifier)")
+        }
+
+        let titleLabel = Text(title != "" ? title : feature.name)
+            .foregroundColor(lightForeground ? Color.PolyPod.lightForeground : Color.PolyPod.darkForeground)
+            .font(.custom("Jost-Medium", size: 16))
+            .kerning(-0.16)
+            .frame(maxWidth: .infinity, alignment: .center)
+
+        let actionButtons = HStack {
+            if activeActions.contains("info") {
+                Button(action: { triggerFeatureAction("info") }) {
+                    Image("NavIconInfo\(iconVariantQualifier)")
+                }
+            }
+
+            if activeActions.contains("search") {
+                Button(action: { triggerFeatureAction("search") }) {
+                    Image("NavIconInfo\(iconVariantQualifier)")
+                }
+            }
+        }
+
+        VStack(spacing: 0) {
+            NavigationBar(
+                leading: AnyView(closeButton),
+                center: AnyView(titleLabel),
+                trailing: AnyView(actionButtons)
+            )
             .background(feature.primaryColor)
 
             FeatureContainerView(

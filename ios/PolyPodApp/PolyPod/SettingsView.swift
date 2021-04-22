@@ -13,19 +13,17 @@ struct SettingsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ZStack {
-                Button(action: closeAction) {
+            NavigationBar(
+                leading: AnyView(Button(action: closeAction) {
                     Image("NavIconBackDark")
-                }.frame(maxWidth: .infinity, alignment: .leading)
-
-                Text("Settings")
-                    .foregroundColor(Color.PolyPod.darkForeground)
-                    .font(.custom("Jost-Medium", size: 16))
-                    .kerning(-0.16)
-                    .frame(maxWidth: .infinity, alignment: .center)
-            }
-            .padding(.horizontal, 8)
-            .frame(maxHeight: 42, alignment: .center)
+                }),
+                center: AnyView(
+                    Text("Settings")
+                        .foregroundColor(Color.PolyPod.darkForeground)
+                        .font(.custom("Jost-Medium", size: 16))
+                        .kerning(-0.16)
+                )
+            )
             .background(Color.PolyPod.lightBackground)
 
             Divider()
