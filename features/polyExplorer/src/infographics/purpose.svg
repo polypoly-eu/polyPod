@@ -3,12 +3,12 @@
 <g id="Purpose Bar 1">
 <rect id="Rectangle 789" x="10" y="74" width="265" height="12" fill="#3BA6FF"/>
 <text id="632" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="-0.02em"><tspan x="257.984" y="83.28">632</tspan></text>
-<text id="bold2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="12" font-weight="500" letter-spacing="-0.01em"><tspan x="10" y="66.67">Name of the purpose</tspan></text>
+<text id="bold2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="12" font-weight="500" letter-spacing="-0.01em"><tspan x="10" y="66.67">Name of the purpose                                                        </tspan></text>
 </g>
 <text id="text2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="238" y="124.17">Number of </tspan><tspan x="238" y="138.17">times this </tspan><tspan x="238" y="152.17">purpose is </tspan><tspan x="238" y="166.17">mentioned.</tspan></text>
 <text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="119" y="124.17">Representation </tspan><tspan x="119" y="138.17">of the number </tspan><tspan x="119" y="152.17">of times this </tspan><tspan x="119" y="166.17">purpose &#10;</tspan><tspan x="119" y="180.17">is mentioned.</tspan></text>
 <g id="Legend">
-<text id="bold1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="12" font-weight="500" letter-spacing="-0.01em"><tspan x="10" y="11.17">Number of mentions</tspan></text>
+<text id="bold1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="12" font-weight="500" letter-spacing="-0.01em"><tspan x="10" y="11.17">Number of mentions                                                       </tspan></text>
 <g id="Scale">
 <line id="Line 101" x1="11.5" y1="33" x2="11.5" y2="43" stroke="#0F1938"/>
 <line id="Line 105" x1="53.5" y1="33" x2="53.5" y2="43" stroke="#0F1938"/>
