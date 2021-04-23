@@ -18,10 +18,10 @@
     "purpose.text2": "Number of times this purpose is mentioned.",
     "companies.text1": "Each dot represents a single company.",
     "companies.text2": "The dots in the circle represent the companies that receive data.",
-    "companies.text3": "Later the same total amount of dots will be grouped by industries.",
+    "companies.text3": "Later the same total amount of dots are grouped by industries.",
     "companies.text4": "Industry 1",
-    "companies.text5": "Industry 1",
-    "companies.text6": "Industry 1",
-    "companies.text7": "Industry 1",
-    "companies.text8": "Here you can see if data from interactions with (featured company) will be shared with companies e.g. in (Advertising/ Marketing)."
+    "companies.text5": "Industry 2",
+    "companies.text6": "Industry 3",
+    "companies.text7": "Industry 4",
+    "companies.text8": "Here you can see if data from interactions with (featured company) will be shared with companies in a particular industry e.g. Advertising/ Marketing."
 }
