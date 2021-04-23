@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import i18n from "../../i18n.js";
 
 import "./purposeChart.css";
 
 const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
+    const [scrolledToBottom, setScrolledToBottom] = useState(false);
     const getHighestCount = () => {
         let highest = 0;
         purposes.forEach((e) => {
@@ -55,7 +56,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
     );
 
     const bars = (
-        <div className="bars">
+        <div>
             {purposes.map((p, index) => (
                 <div
                     key={index}
@@ -83,6 +84,16 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
         </div>
     );
 
+    const handleInfoTextScrollBottom = (e) => {
+        const reachedBottom =
+            e.target.scrollHeight - e.target.scrollTop - 2 <=
+            e.target.clientHeight;
+        console.log(e.target.clientHeight);
+        if (reachedBottom) {
+            setScrolledToBottom(true);
+        } else setScrolledToBottom(false);
+    };
+
     return (
         <div className="purpose-chart">
             <div className="scale-container">
@@ -93,14 +104,24 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                         )}
                     </div>
                     <div className="fill"></div>
-                    <div className="help" onClick={() => openPurposeInfo()}>
-                        <img src="./images/question-circle.svg" />
-                        <div>{i18n.t("common:how-to-read")}</div>
-                    </div>
                 </div>
                 {scale}
             </div>
-            {bars}
+            <div
+                className="bars"
+                onScroll={(e) => handleInfoTextScrollBottom(e)}
+            >
+                {bars}
+            </div>
+            <div
+                className={
+                    scrolledToBottom ? "gradient-box" : "gradient-box gradient"
+                }
+            ></div>
+            <div className="help" onClick={() => openPurposeInfo()}>
+                <img src="./images/question-circle.svg" />
+                <div>{i18n.t("common:how-to-read")}</div>
+            </div>
         </div>
     );
 };

@@ -36,9 +36,28 @@
     flex-grow: 1;
 }
 
-.data-exploration .purpose-chart .descriptions .help div {
-    transform: translateY(-4px);
+.data-exploration .purpose-chart .help {
+    display: flex;
+    flex: 0 0 auto;
+    width: 95%;
+    max-width: 414px;
+    margin: 0 auto;
+    height: 30px;
+    margin: 8px 2.5% 0 2.5%;
+    border: solid 1px #525e72;
+    border-left: none;
+    border-right: none;
+    line-height: 30px;
     color: #a9b6c6;
+    font-size: 10px;
+}
+
+.data-exploration .purpose-chart .help img {
+    position: relative;
+    top: 5px;
+    width: 15px;
+    height: 18px;
+    margin-right: 4px;
 }
 
 .data-exploration .purpose-chart .scale {
@@ -126,10 +145,36 @@
 }
 
 .data-exploration .purpose-chart .bar-box .above-bar img {
-    transform: translateY(6px);
+    transform: translateY(12px);
+    width: 15px;
+    height: 18px;
 }
 
 .data-exploration .purpose-chart .bar-box .bar {
     height: 12px;
     background-color: #3ba6ff;
+}
+
+.purpose-scroll-container {
+    flex: 1 1 auto;
+    padding: 0 2.5%;
+    overflow-y: scroll;
+    z-index: 2000;
+    margin-bottom: 18px;
+    width: 100%;
+    max-width: 412px;
+}
+
+.gradient-box {
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 0px auto -24px auto;
+    max-width: 474px;
+    height: 20px;
+    transform: translateY(-37px);
+}
+
+.gradient {
+    background-image: -moz-linear-gradient(transparent, #0f1938);
+    background-image: -webkit-linear-gradient(#0f193800, #0f1938);
 }
