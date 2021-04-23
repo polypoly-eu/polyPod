@@ -40,19 +40,21 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
     return (
         <Screen className="company-search-screen">
             <div className="search-bar-container">
-                <input
-                    type="text"
-                    ref={inputRef}
-                    autoFocus="autofocus"
-                    placeholder={i18n.t("companySearchScreen:typeHere")}
-                    className="search-bar"
-                    onChange={(e) => handleSearch(e.target.value)}
-                />
-                {searchString == "" ? null : (
-                    <button onClick={() => handleClear()}>
-                        <img src="./images/clear-search.svg" />
-                    </button>
-                )}
+                <div className="search-bar">
+                    <input
+                        type="text"
+                        ref={inputRef}
+                        autoFocus="autofocus"
+                        placeholder={i18n.t("companySearchScreen:typeHere")}
+                        className="search-bar-input"
+                        onChange={(e) => handleSearch(e.target.value)}
+                    />
+                    {searchString == "" ? null : (
+                        <button onClick={() => handleClear()}>
+                            <img src="./images/clear-search.svg" />
+                        </button>
+                    )}
+                </div>
             </div>
             <div className="company-search">
                 {searchString == "" ? (

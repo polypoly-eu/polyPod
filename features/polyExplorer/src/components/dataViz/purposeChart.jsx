@@ -93,14 +93,14 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                         )}
                     </div>
                     <div className="fill"></div>
-                    <div className="help" onClick={() => openPurposeInfo()}>
-                        <img src="./images/question-circle.svg" />
-                        <div>{i18n.t("common:how-to-read")}</div>
-                    </div>
                 </div>
                 {scale}
             </div>
             {bars}
+            <div className="help" onClick={() => openPurposeInfo()}>
+                <img src="./images/question-circle.svg" />
+                <div>{i18n.t("common:how-to-read")}</div>
+            </div>
         </div>
     );
 };
