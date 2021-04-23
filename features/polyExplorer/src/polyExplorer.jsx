@@ -23,57 +23,13 @@ import ConstructionPopup from "./components/constructionPopup/constructionPopup.
 import polyPediaCompanies from "./data/companies.json";
 import polyPediaGlobalData from "./data/global.json";
 
-const namespace = "http://polypoly.coop/schema/polyExplorer/#";
-
-let pod = null;
-
-window.addEventListener("message", (event) => {
-    if (event.data == "podLoad") {
-        pod = event.ports[0];
-
-        // Initialize feature here
-    }
-});
-
-const sendMessage = (message) =>
-    new Promise((resolve, reject) => {
-        const channel = new MessageChannel();
-
-        channel.port1.onmessage = ({ data }) => {
-            channel.port1.close();
-            if (data.error) {
-                reject(data.error);
-            } else {
-                resolve(data.result);
-            }
-        };
-
-        pod.postMessage(message, [channel.port2]);
-    });
-
-async function readFirstRun() {
-    const quads = await sendMessage({
-        polyIn: { select: {} },
-    });
-    return !quads.some(
-        ({ subject, predicate, object }) =>
-            subject.value === `${namespace}polyExplorer` &&
-            predicate.value === `${namespace}firstRun` &&
-            object.value === `${namespace}false`
-    );
-}
-
-async function writeFirstRun(firstRun) {
-    await sendMessage({
-        polyIn: {
-            add: [
-                `${namespace}polyExplorer`,
-                `${namespace}firstRun`,
-                `${namespace}${firstRun}`,
-            ],
-        },
-    });
-}
+import {
+    readValue,
+    writeValue,
+    updatePodActions,
+    updatePodActiveActions,
+    updatePodTitle,
+} from "./poliApiPolyfill.js";
 
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
@@ -164,7 +120,7 @@ const PolyExplorer = () => {
 
     function handleOnboardingPopupClose() {
         setFirstRun(false);
-        writeFirstRun(false);
+        writeValue("firstRun", false);
     }
 
     function handleOnboardingPopupMoreInfo() {
@@ -193,27 +149,24 @@ const PolyExplorer = () => {
     }
 
     function updatePodNavigation() {
-        sendMessage({
-            polyNav: {
-                setTitle: i18n.t(`common:screenTitle.${activeScreen}`),
-                actions: firstRun
-                    ? { info: () => {}, search: () => {} }
-                    : {
-                          info: () => handleActiveScreenChange("info"),
-                          search: () =>
-                              handleActiveScreenChange("companySearch"),
-                          back: handleBack,
-                      },
-                setActiveActions: backStack.length
-                    ? ["back"]
-                    : ["info", "search"],
-            },
-        });
+        updatePodTitle(i18n.t(`common:screenTitle.${activeScreen}`));
+        updatePodActions(
+            firstRun
+                ? { info: () => {}, search: () => {} }
+                : {
+                      info: () => handleActiveScreenChange("info"),
+                      search: () => handleActiveScreenChange("companySearch"),
+                      back: handleBack,
+                  }
+        );
+        updatePodActiveActions(
+            backStack.length ? ["back"] : ["info", "search"]
+        );
     }
 
     useEffect(() => {
         updatePodNavigation();
-        setTimeout(() => readFirstRun().then(setFirstRun), 300);
+        setTimeout(() => readValue("firstRun").then(setFirstRun), 300);
     });
 
     const screens = {
