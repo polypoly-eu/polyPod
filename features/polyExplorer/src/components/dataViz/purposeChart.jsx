@@ -88,7 +88,6 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
         const reachedBottom =
             e.target.scrollHeight - e.target.scrollTop - 2 <=
             e.target.clientHeight;
-        console.log(e.target.clientHeight);
         if (reachedBottom) {
             setScrolledToBottom(true);
         } else setScrolledToBottom(false);
