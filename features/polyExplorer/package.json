@@ -9,7 +9,7 @@
     "test": "mocha",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "polypedia:fetch": "node scripts/fetch-polypedia-data e687f1c",
+    "polypedia:fetch": "node scripts/fetch-polypedia-data a4d6e9a122f317dac093a19c86f2adbcdc9fd612",
     "polypedia:convert": "node scripts/convert-polypedia-data",
     "update-polypedia-data": "npm run polypedia:fetch && npm run polypedia:convert"
   },
