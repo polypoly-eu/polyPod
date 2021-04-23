@@ -14,12 +14,14 @@
     background-color: #0f1938;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 95%;
     height: 40px;
     font-size: 18px;
     border: 1px solid #8d9caf;
     border-radius: 20px;
     outline: none;
+    padding: 1px 12px 0 21px;
 }
 
 .search-bar-container .search-bar .search-bar-input {
@@ -28,7 +30,7 @@
     background-color: transparent;
     font-size: 18px;
     border: none;
-    margin-left: 18px;
+    padding: 0;
     outline: none;
 }
 
@@ -37,10 +39,12 @@
 }
 
 .search-bar-container .search-bar button {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
     background-color: transparent;
     border: none;
     outline: none;
-    margin-right: 5px;
 }
 
 .company-search {
