@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>jost_light.ttf</string>
-		<string>jost_medium.ttf</string>
-		<string>jost_regular.ttf</string>
-		<string>polydisplay_semi_1_0.otf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -38,6 +31,13 @@
 	<string>Needs location for life tracker</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Needs location for life tracker</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>jost_light.ttf</string>
+		<string>jost_medium.ttf</string>
+		<string>jost_regular.ttf</string>
+		<string>polydisplay_semi_1_0.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -63,8 +63,6 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -76,5 +74,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>
