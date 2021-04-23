@@ -1,6 +1,6 @@
 module.exports = {
     extends: [
-        "@polypoly-eu/eslint-config-polypoly"
+        "@polypoly-eu/eslint-config"
     ],
     plugins: [
         "react"

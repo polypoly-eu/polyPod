@@ -1,21 +1,23 @@
 {
-  "name": "@polypoly/questionnaire-feature",
+  "name": "poly-pinion-feature",
   "version": "0.0.1",
-  "description": "qapp as a feature",
   "scripts": {
     "build": "faucet",
     "watch": "faucet --watch",
-    "eslint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "check": "tsc",
     "serve": "orodruin serve -m"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config-polypoly": "0.0.2",
-    "@polypoly-eu/orodruin": "0.0.12",
+    "@polypoly-eu/eslint-config": "file:../../eslint-config",
+    "@polypoly-eu/orodruin": "file:../../core/orodruin",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^5.1.5",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
     "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "faucet-pipeline-core": "^1.5.0",
     "faucet-pipeline-essugar": "0.0.2",
@@ -30,8 +32,7 @@
     "root": "dist"
   },
   "dependencies": {
-    "@polypoly-eu/poly-api": "^0.6.1",
-    "@polypoly-eu/poly-look": "^0.1.1",
+    "@polypoly-eu/poly-api": "file:../../core/poly-api",
     "i18next": "^19.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

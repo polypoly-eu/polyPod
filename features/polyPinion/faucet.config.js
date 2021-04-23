@@ -32,18 +32,6 @@ module.exports = {
             target: "./dist/uuid.js",
         },
         {
-            source: "./node_modules/@polypoly-eu/poly-look/dist/bundle.css",
-            target: "./dist/bundle.css",
-        },
-        {
-            source: "./node_modules/@polypoly-eu/poly-look/dist/fonts",
-            target: "./dist/fonts",
-        },
-        {
-            source: "./node_modules/@polypoly-eu/poly-look/dist/icons",
-            target: "./dist/icons",
-        },
-        {
             source: "react-router-dom/umd/react-router-dom.min.js",
             target: "./dist/react-router-dom.js",
         },
