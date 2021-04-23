@@ -1,18 +1,9 @@
-//
-//  PolyOut+FS.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 17.07.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import Foundation
 
 extension PolyOut {
-    
     func stat(path: String, completionHandler: @escaping (FileStats?, Error?) -> Void) {
         let filePath = fileStoragePath.appendingPathComponent(path)
-            
+        
         var isDir : ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: filePath.path, isDirectory: &isDir)
         if exists {
@@ -42,11 +33,10 @@ extension PolyOut {
         let filePath = fileStoragePath.appendingPathComponent(path)
         
         do {
-           try data.write(to: filePath, atomically: false, encoding: String.Encoding.utf8)
-           completionHandler(nil)
+            try data.write(to: filePath, atomically: false, encoding: String.Encoding.utf8)
+            completionHandler(nil)
         } catch {
-           completionHandler(error)
+            completionHandler(error)
         }
     }
-    
 }

@@ -1,11 +1,3 @@
-//
-//  BubbleWrap.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 25.06.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import Foundation
 
 struct ExtendedData {
@@ -62,7 +54,7 @@ class Bubblewrap {
             for (k, v) in dict {
                 newDict[k.stringValue!] = decode(messagePackValue: v)
             }
-           return newDict
+            return newDict
         case .extended( _, let data):
             let unpackedData = try! unpackFirst(data)
             guard let decodedData = decode(messagePackValue: unpackedData) as? [Any] else { break }
