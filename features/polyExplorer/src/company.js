@@ -9,8 +9,8 @@ function startsWithSpecialChar(aString) {
     return format.test(aString.charAt(0));
 }
 
-export function getFirstNormalCharacter(aString) {
+export function getIndexCharacter(aString) {
     return startsWithSpecialChar(aString)
-        ? getFirstNormalCharacter(aString.slice(1))
+        ? getIndexCharacter(aString.slice(1))
         : aString[0];
 }

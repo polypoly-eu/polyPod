@@ -15,10 +15,10 @@ describe("company", function () {
     });
 
     it("String first character assessment works", function () {
-        assert(company.getFirstNormalCharacter(strings[0]) === "1");
-        assert(company.getFirstNormalCharacter(strings[1]) === "a");
-        assert(company.getFirstNormalCharacter(strings[2]) === "a");
-        assert(company.getFirstNormalCharacter(strings[3]) === "z");
-        assert(company.getFirstNormalCharacter(strings[4]) === "z");
+        assert(company.getIndexCharacter(strings[0]) === "1");
+        assert(company.getIndexCharacter(strings[1]) === "a");
+        assert(company.getIndexCharacter(strings[2]) === "a");
+        assert(company.getIndexCharacter(strings[3]) === "z");
+        assert(company.getIndexCharacter(strings[4]) === "z");
     });
 });
