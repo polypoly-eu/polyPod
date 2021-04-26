@@ -66,7 +66,7 @@ export const pod =
 if (window.parent.pod && isLocalStorageAvailable()) {
     console.log("Migrating old storage");
     JSON.parse(localStorage.getItem(fakeStorageKey) || "[]").forEach((quad) => {
-        console.log(quad);
+        console.log(JSON.stringify(quad));
         pod.polyIn.add(quad);
     });
     localStorage.removeItem(fakeStorageKey);
