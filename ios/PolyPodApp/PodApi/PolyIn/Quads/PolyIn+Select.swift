@@ -102,7 +102,10 @@ extension PolyIn {
         return result
     }
     
-    private func createExtendedData(for managedObject: NSManagedObject) -> ExtendedData {
+    private func createExtendedData(
+        for managedObject: NSManagedObject,
+        from sourceRelationship: NSManagedObject? = nil
+    ) -> ExtendedData {
         let classname = "@polypoly-eu/rdf." + String(describing: type(of: managedObject))
         let attributes = managedObject.entity.attributesByName
         let relationships = managedObject.entity.relationshipsByName
@@ -114,7 +117,12 @@ extension PolyIn {
         }
         for (relationship, _) in relationships {
             if let value = managedObject.value(forKey: relationship) as? NSManagedObject {
-                properties[relationship] = createExtendedData(for: value)
+                // Avoid infinite recursion for inverse relationships, this
+                // wouldn't work for transitive inverse relationships, however.
+                if value != sourceRelationship {
+                    properties[relationship] =
+                        createExtendedData(for: value, from: managedObject)
+                }
             }
         }
         let extendedData = ExtendedData(classname: classname, properties: properties)
