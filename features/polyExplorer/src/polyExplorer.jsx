@@ -29,7 +29,7 @@ import {
     updatePodActions,
     updatePodActiveActions,
     updatePodTitle,
-} from "./poliApiPolyfill.js";
+} from "./podApi.js";
 
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");

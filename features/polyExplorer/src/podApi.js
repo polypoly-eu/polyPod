@@ -40,9 +40,7 @@ async function readValue(key) {
         polyIn: { select: { key } },
     });
 
-    return !entries.some(
-        ({ value }) => value === `false`
-    );
+    return !entries.some(({ value }) => value === `false`);
 }
 
 async function writeValue(key, value) {
