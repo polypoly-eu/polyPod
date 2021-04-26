@@ -5,6 +5,12 @@ export function compare(a, b) {
 }
 
 function startsWithSpecialChar(aString) {
-    var format = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
+    var format = /[ `!@#$%^&*()_+\-=[\]{};':"\\|§,.<>/?~„]/;
     return format.test(aString.charAt(0));
+}
+
+export function getFirstNormalCharacter(aString) {
+    return startsWithSpecialChar(aString)
+        ? getFirstNormalCharacter(aString.slice(1))
+        : aString[0];
 }
