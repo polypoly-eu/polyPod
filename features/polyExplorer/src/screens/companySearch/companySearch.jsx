@@ -45,9 +45,9 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                         type="text"
                         ref={inputRef}
                         autoFocus="autofocus"
-                        autocomplete="off"
-                        autocorrect="off"
-                        spellcheck="off"
+                        autoComplete="off"
+                        autoCorrect="off"
+                        spellCheck="off"
                         placeholder={i18n.t("companySearchScreen:typeHere")}
                         className="search-bar-input"
                         onChange={(e) => handleSearch(e.target.value)}
