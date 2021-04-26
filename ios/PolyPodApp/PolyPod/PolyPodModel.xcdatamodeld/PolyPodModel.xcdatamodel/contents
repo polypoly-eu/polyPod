@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BlankNode" representedClassName=".BlankNode" parentEntity="Term" syncable="YES"/>
     <entity name="DefaultGraph" representedClassName=".DefaultGraph" parentEntity="Term" syncable="YES"/>
     <entity name="Literal" representedClassName=".Literal" parentEntity="Term" syncable="YES">
         <attribute name="language" attributeType="String"/>
-        <relationship name="datatype" maxCount="1" deletionRule="Nullify" destinationEntity="NamedNode"/>
+        <relationship name="datatype" maxCount="1" deletionRule="Nullify" destinationEntity="NamedNode" inverseName="datatypeOf" inverseEntity="NamedNode"/>
     </entity>
-    <entity name="NamedNode" representedClassName=".NamedNode" parentEntity="Term" syncable="YES"/>
+    <entity name="NamedNode" representedClassName=".NamedNode" parentEntity="Term" syncable="YES">
+        <relationship name="datatypeOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Literal" inverseName="datatype" inverseEntity="Literal"/>
+    </entity>
     <entity name="Quad" representedClassName=".Quad" syncable="YES">
-        <relationship name="graph" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
-        <relationship name="object" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
-        <relationship name="predicate" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
-        <relationship name="subject" maxCount="1" deletionRule="Nullify" destinationEntity="Term"/>
+        <relationship name="graph" maxCount="1" deletionRule="Nullify" destinationEntity="Term" inverseName="graphOf" inverseEntity="Term"/>
+        <relationship name="object" maxCount="1" deletionRule="Nullify" destinationEntity="Term" inverseName="objectOf" inverseEntity="Term"/>
+        <relationship name="predicate" maxCount="1" deletionRule="Nullify" destinationEntity="Term" inverseName="predicateOf" inverseEntity="Term"/>
+        <relationship name="subject" maxCount="1" deletionRule="Nullify" destinationEntity="Term" inverseName="subjectOf" inverseEntity="Term"/>
     </entity>
     <entity name="Term" representedClassName=".Term" isAbstract="YES" syncable="YES">
         <attribute name="termType" attributeType="String"/>
         <attribute name="value" attributeType="String"/>
+        <relationship name="graphOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quad" inverseName="graph" inverseEntity="Quad"/>
+        <relationship name="objectOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quad" inverseName="object" inverseEntity="Quad"/>
+        <relationship name="predicateOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quad" inverseName="predicate" inverseEntity="Quad"/>
+        <relationship name="subjectOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quad" inverseName="subject" inverseEntity="Quad"/>
     </entity>
     <entity name="Variable" representedClassName=".Variable" parentEntity="Term" syncable="YES"/>
     <elements>
@@ -24,7 +30,7 @@
         <element name="Literal" positionX="-408.89453125" positionY="54.0625" width="128" height="73"/>
         <element name="NamedNode" positionX="-576.578125" positionY="55.5859375" width="128" height="43"/>
         <element name="Quad" positionX="80.796875" positionY="-140.37890625" width="128" height="103"/>
-        <element name="Term" positionX="-371.05078125" positionY="-102.140625" width="128" height="73"/>
+        <element name="Term" positionX="-371.05078125" positionY="-102.140625" width="128" height="133"/>
         <element name="Variable" positionX="-97.15234375" positionY="54.35546875" width="128" height="43"/>
     </elements>
 </model>

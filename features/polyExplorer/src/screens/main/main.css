@@ -6,6 +6,12 @@
     z-index: 20;
 }
 
+@media not all and (min-resolution: 0.001dpcm) {
+    .nav-button-container {
+        box-shadow: 0px 1px #a9b6c6 !important;
+    }
+}
+
 .nav-button {
     box-sizing: border-box;
     background-color: #0f1938;

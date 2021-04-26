@@ -165,11 +165,13 @@ const PolyExplorer = () => {
 
     function updatePodNavigation() {
         podNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
-        podNav.actions = {
-            info: () => handleActiveScreenChange("info"),
-            search: () => handleActiveScreenChange("companySearch"),
-            back: handleBack,
-        };
+        podNav.actions = firstRun
+            ? { info: () => {}, search: () => {} }
+            : {
+                  info: () => handleActiveScreenChange("info"),
+                  search: () => handleActiveScreenChange("companySearch"),
+                  back: handleBack,
+              };
         podNav.setActiveActions(
             backStack.length ? ["back"] : ["info", "search"]
         );

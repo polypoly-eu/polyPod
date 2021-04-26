@@ -1,15 +1,6 @@
-//
-//  PostOffice.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 27.05.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import UIKit
 
 class PostOffice {
-
     static let shared = PostOffice()
     
     func handleIncomingEvent(eventData: [String: Any], completionHandler: @escaping ([UInt8]) -> Void) {
@@ -17,15 +8,15 @@ class PostOffice {
         
         let sortedBytes = bytes.sorted(by: { $0.0.compare($1.0, options: .numeric) == .orderedAscending })
         let bytesArray = Array(sortedBytes.map({ $0.value.uint8Value }))
-
+        
         let data = Data(bytes: bytesArray, count: bytesArray.count)
-
+        
         let unpacked = try! unpackFirst(data)
         guard let decoded = Bubblewrap.decode(messagePackValue: unpacked) as? [String: Any] else {
             completionHandler([])
             return
         }
-
+        
         let messageId = decoded["id"] as! UInt64
         let requestValue = decoded["request"]!
         let request = requestValue as! [[String: Any]]
@@ -44,7 +35,7 @@ class PostOffice {
             completionHandler([])
             return
         }
-
+        
         switch api {
         case "polyIn":
             handlePolyIn(method: method, args: args, completionHandler: { response, error in
@@ -71,7 +62,7 @@ class PostOffice {
         }
         
         let packedDict = pack(MessagePackValue.map(dict))
-
+        
         let byteArrayFromData: [UInt8] = [UInt8](packedDict)
         
         completionHandler(byteArrayFromData)
@@ -98,7 +89,7 @@ extension PostOffice {
                 completionHandler(nil, MessagePackValue("Bad data"))
                 return
             }
-
+            
             guard let graph = extendedData.properties["graph"] as? ExtendedData, graph.classname == "@polypoly-eu/rdf.DefaultGraph" else {
                 completionHandler(nil, MessagePackValue("/default/"))
                 return
@@ -140,7 +131,7 @@ extension PostOffice {
             completionHandler(.array(encodedQuads), nil)
         }
     }
-
+    
     private func extractMatcher(_ matcher: Any) -> ExtendedData? {
         // TODO: Originally, the code expected the matcher to already be of type
         //       ExtendedData. However, with the use cases so far - an empty
@@ -190,9 +181,9 @@ extension PostOffice {
             }
             
             let object = fetchResponse.messagePackObject
-                
+            
             let packedData = pack(object)
-                
+            
             completionHandler(MessagePackValue(type: 2, data: packedData), nil)
         }
     }
@@ -210,9 +201,9 @@ extension PostOffice {
                 return
             }
             let object = fileStats.messagePackObject
-                
+            
             let packedData = pack(object)
-                
+            
             completionHandler(MessagePackValue(type: 2, data: packedData), nil)
         }
     }

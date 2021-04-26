@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./infographic.css";
 import * as d3 from "d3";
+import utils from "../dataViz/utils.js";
 
 import infographics from "../../infographics/infographics.js";
 
@@ -17,15 +18,17 @@ const Infographic = ({ type, texts }) => {
     const infographic = infographics[type];
 
     useEffect(() => {
-        const svg = d3.select(`#${type}`);
+        const container = d3.select(`#${type}`);
         Object.keys(texts).forEach((key) => {
-            const textField = svg.select(`#${key}`);
+            const textField = container.select(`#${key}`);
             const box = textField.node().getBBox();
             textField.remove();
-            const foreignObject = svg
+            const svg = container.node().parentNode;
+            const viewbox = svg.viewBox.baseVal;
+            const foreignObject = container
                 .append("foreignObject")
                 .attr("x", box.x)
-                .attr("width", box.width + 20);
+                .attr("width", box.width);
             const div = foreignObject.append("xhtml:div").html(texts[key]);
             if (key.startsWith("highlighted"))
                 div.attr("class", "text-field highlighted");
@@ -36,11 +39,12 @@ const Infographic = ({ type, texts }) => {
             else if (key.startsWith("jurisdiction-blue"))
                 div.attr("class", "text-field jurisdiction-blue");
             else div.attr("class", "text-field");
-            const divHeight = div.node().getBoundingClientRect().height;
+            const divHeight =
+                div.node().getBoundingClientRect().height /
+                utils.scaleFactor(viewbox, svg.getBoundingClientRect());
             foreignObject
                 .attr("y", box.y + box.height / 2 - divHeight / 2)
                 .attr("height", divHeight);
-            // .style("overflow", "visible");
         });
     });
 

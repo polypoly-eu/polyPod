@@ -1,37 +1,50 @@
 .search-bar-container {
     width: 100%;
     max-width: 460px;
-    position: relative;
     display: flex;
+    justify-content: center;
     margin: 20px auto 0 auto;
+    /* Solution to fix problem in iOS Safari */
+    flex: 0 0 auto;
 }
 
 .search-bar-container .search-bar {
     box-sizing: border-box;
     display: block;
-    background-color: transparent;
+    background-color: #0f1938;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 95%;
     height: 40px;
     font-size: 18px;
     border: 1px solid #8d9caf;
     border-radius: 20px;
-    margin: 0 auto;
-    padding: 0 24px;
+    outline: none;
+    padding: 1px 12px 0 21px;
+}
+
+.search-bar-container .search-bar .search-bar-input {
+    box-sizing: border-box;
+    display: block;
+    background-color: transparent;
+    font-size: 18px;
+    border: none;
+    padding: 0;
     outline: none;
 }
 
-.search-bar-container .search-bar::placeholder {
+.search-bar-container .search-bar .search-bar-input::placeholder {
     color: #a9b6c6;
 }
 
-.search-bar-container button {
-    position: absolute;
-    top: -6px;
-    right: 24px;
+.search-bar-container .search-bar button {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
     background-color: transparent;
     border: none;
     outline: none;
-    font-size: 34px;
 }
 
 .company-search {

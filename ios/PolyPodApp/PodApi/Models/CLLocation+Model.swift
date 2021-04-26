@@ -1,15 +1,6 @@
-//
-//  Location+Model.swift
-//  PolyPod
-//
-//  Created by Carmen Burmeister on 21.08.20.
-//  Copyright © 2020 polypoly. All rights reserved.
-//
-
 import CoreLocation
 
 extension CLLocation: LiftedEntity {
-    
     static func entityModel() -> EntityModel {
         var valueModels: [String: ValueModel] = [:]
         

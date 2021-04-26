@@ -196,6 +196,13 @@ const DataExplorationScreen = ({
     );
 
     function makeSwiperContentScrollable(element) {
+        // This logic has an odd edge case on iOS: Since there's this overscroll
+        // effect, it can _seem_ like swiping doesn't work when you try to swipe
+        // _while_ it's bouncing back. We wanted to keep the overscroll effect
+        // in place cause it's common on iOS, and while we could fix this edge
+        // case by changing the logic here a bit, for now it didn't bother
+        // anyone testing it, so we might as well keep it simple.
+
         let startScroll, touchStart;
 
         element.addEventListener(

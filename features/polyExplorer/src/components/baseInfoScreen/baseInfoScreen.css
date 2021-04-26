@@ -1,5 +1,6 @@
 .base-info {
     max-width: 412px;
+    width: 100%;
     margin: 0 auto;
     overflow: hidden scroll;
     padding-top: 24px;

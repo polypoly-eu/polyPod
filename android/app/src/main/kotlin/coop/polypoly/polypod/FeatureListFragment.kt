@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 
 /**
@@ -43,7 +44,13 @@ class FeatureListFragment : Fragment() {
             findNavController().navigate(FeatureListFragmentDirections.actionFeatureListFragmentToSettingsActivity())
         }
 
-        val features = featureStorage.listFeatures(context).sortedBy { it.name }
+        val features = featureStorage.listFeatures(context).sortedWith { a, b ->
+            when {
+                a.name == "polyPreview" -> -1
+                b.name == "polyPreview" -> 1
+                else -> compareBy<Feature> { it.name }.compare(a, b)
+            }
+        }
 
         viewManager = LinearLayoutManager(context)
         viewAdapter = FeatureCardAdapter(this, features)

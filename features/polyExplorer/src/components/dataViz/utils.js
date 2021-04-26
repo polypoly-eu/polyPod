@@ -114,6 +114,10 @@ function calculateElementRect(element) {
     return rect;
 }
 
+function scaleFactor(viewBox, svg) {
+    return Math.min(svg.width / viewBox.width, svg.height / viewBox.height);
+}
+
 const detectRectCollision = (a, b) =>
     a.left < b.right &&
     a.right > b.left &&
@@ -126,4 +130,5 @@ export default {
     findNode,
     calculateElementRect,
     detectRectCollision,
+    scaleFactor,
 };
