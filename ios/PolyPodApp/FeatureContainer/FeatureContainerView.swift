@@ -88,6 +88,7 @@ class FeatureWebView: WKWebView {
         MessageName.allCases.forEach {
             contentController.add(self, name: $0.rawValue)
         }
+        removeInputAccessory()
         
         let featureUrl = feature.path
         let featureFileUrl = featureUrl.appendingPathComponent("pod.html")
@@ -96,6 +97,41 @@ class FeatureWebView: WKWebView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func removeInputAccessory() {
+        // WKWebView, as of April 2021, has an odd input accessory view for the
+        // keyboard that contains up and down buttons, as well as a "done"
+        // button. It looks like it's meant for find in page functionality.
+        // As a side effect, it also causes scary UI constraint errors when the
+        // keyboard pops up, that seem to be caused by a bug in iOS.
+        // Since we don't want the thing, nor the errors, we remove it.
+        // This is the best approach we could find :/
+        
+        guard let target = scrollView.subviews.first(where: {
+            String(describing: type(of: $0)).starts(with: "WKContent")
+        }) else { return }
+        
+        guard let noInputAccessoryClass = createNoInputAccessoryClass(target)
+        else { return }
+        
+        class NoInputAccessoryHelper: NSObject {
+            @objc var inputAccessoryView: AnyObject? { return nil }
+        }
+        
+        guard let original = class_getInstanceMethod(
+            NoInputAccessoryHelper.self,
+            #selector(getter: NoInputAccessoryHelper.inputAccessoryView)
+        ) else { return }
+        
+        class_addMethod(
+            noInputAccessoryClass.self,
+            #selector(getter: NoInputAccessoryHelper.inputAccessoryView),
+            method_getImplementation(original),
+            method_getTypeEncoding(original)
+        )
+        
+        object_setClass(target, noInputAccessoryClass)
     }
     
     func triggerAction(action: String, dispatchTime: DispatchTime) {
@@ -285,4 +321,23 @@ func installUserScript(
         forMainFrameOnly: forMainFrameOnly
     )
     contentController.addUserScript(userScript)
+}
+
+private func createNoInputAccessoryClass(_ target: UIView) -> AnyClass? {
+    guard let superclass = target.superclass else { return nil }
+    let className = "\(superclass)_NoInputAccessory"
+    let existingClass: AnyClass? = NSClassFromString(className)
+    if existingClass != nil {
+        return existingClass
+    }
+    
+    guard let targetClass = object_getClass(target) else { return nil }
+    guard let classNameCString = className.cString(using: .ascii) else {
+        return nil
+    }
+    guard let newClass =
+            objc_allocateClassPair(targetClass, classNameCString, 0)
+    else { return nil }
+    objc_registerClassPair(newClass)
+    return newClass
 }
