@@ -165,6 +165,7 @@ const DataExplorationScreen = ({
     const activeScreen = screens[activeIndex];
     const highestValueObject = getHighestValueObject();
     const jurisdictionTreeFormatData = getJurisdictionTreeFormat();
+    const translationKey = `Translation_${i18n.language.toUpperCase()}`;
 
     const progressBar = (
         <div className="progress-bar">
@@ -566,7 +567,7 @@ const DataExplorationScreen = ({
                                         name: company.name,
                                         sharingCount: getTotalTypesShared(),
                                         mostSharedType:
-                                            highestValueObject.Translation_DE,
+                                            highestValueObject[translationKey],
                                         mostSharedCount:
                                             highestValueObject.count,
                                     }
@@ -585,7 +586,7 @@ const DataExplorationScreen = ({
                             <SwiperSlide key={index}>
                                 <h2>
                                     {global.polypoly_parent_categories[group]?.[
-                                        `Translation_${i18n.language.toUpperCase()}`
+                                        translationKey
                                     ] ||
                                         i18n.t(
                                             "dataExplorationScreen:dataTypes.without-category"
