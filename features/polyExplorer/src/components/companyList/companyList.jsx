@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { compare, getFirstNormalCharacter } from "../../company.js";
 
 import i18n from "../../i18n.js";
 import {
@@ -13,10 +14,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import "./companyList.css";
 
 function groupCompanies(companies) {
-    const sorted = companies.sort((a, b) => a.name.localeCompare(b.name));
+    const sorted = companies.sort((a, b) => compare(a.name, b.name));
     const groups = {};
     sorted.forEach((company) => {
-        const key = company.name[0].toUpperCase();
+        const key = getFirstNormalCharacter(company.name).toUpperCase();
         groups[key] = groups[key] || [];
         groups[key].push(company);
     });
