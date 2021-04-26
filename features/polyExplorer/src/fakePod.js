@@ -62,8 +62,8 @@ export const pod =
         };
     })();
 
-// TODO: Migration code. Remove later
-if (window.parent.pod) {
+// TODO: Migration code. Remove later and also disable localStorage in Android
+if (window.parent.pod && isLocalStorageAvailable()) {
     console.log("Migrating old storage");
     JSON.parse(localStorage.getItem(fakeStorageKey) || "[]").forEach((quad) => {
         console.log(quad);
