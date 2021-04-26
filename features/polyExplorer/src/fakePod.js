@@ -40,9 +40,14 @@ function createFakeStorage() {
     };
 }
 
+// On Android, we currently expose the pod object in the container, but haven't
+// found a way yet to inject it into the feature with the right timing,
+// i.e. before any feature code is executed.
+if (navigator.userAgent.toLowerCase().includes("android"))
+    window.pod = window.parent.pod;
+
 export const pod =
     window.pod ||
-    window.parent.pod ||
     (() => {
         const fakeStorage = createFakeStorage();
         return {
@@ -63,10 +68,10 @@ export const pod =
     })();
 
 // TODO: Migration code. Remove later and also disable localStorage in Android
-if (window.parent.pod && isLocalStorageAvailable()) {
+if (window.pod && isLocalStorageAvailable()) {
     console.log("Migrating old storage");
     JSON.parse(localStorage.getItem(fakeStorageKey) || "[]").forEach((quad) => {
-        console.log(quad);
+        console.log(JSON.stringify(quad));
         pod.polyIn.add(quad);
     });
     localStorage.removeItem(fakeStorageKey);
