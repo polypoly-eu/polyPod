@@ -1,4 +1,5 @@
 "use strict";
+const fakeStorageKey = "fakePodStorage";
 
 function isLocalStorageAvailable() {
     try {
@@ -29,7 +30,6 @@ function createFakeStorage() {
     }
 
     console.log("polyIn not available - using localStorage storage backend");
-    const fakeStorageKey = "fakePodStorage";
     return {
         get quads() {
             return JSON.parse(localStorage.getItem(fakeStorageKey) || "[]");
@@ -42,6 +42,7 @@ function createFakeStorage() {
 
 export const pod =
     window.pod ||
+    window.parent.pod ||
     (() => {
         const fakeStorage = createFakeStorage();
         return {
@@ -60,6 +61,16 @@ export const pod =
             },
         };
     })();
+
+// TODO: Migration code. Remove later and also disable localStorage in Android
+if (window.parent.pod && isLocalStorageAvailable()) {
+    console.log("Migrating old storage");
+    JSON.parse(localStorage.getItem(fakeStorageKey) || "[]").forEach((quad) => {
+        console.log(quad);
+        pod.polyIn.add(quad);
+    });
+    localStorage.removeItem(fakeStorageKey);
+}
 
 let fakeNavigationListener;
 
