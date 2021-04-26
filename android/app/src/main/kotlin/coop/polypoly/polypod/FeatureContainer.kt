@@ -82,7 +82,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
 
-        // Enabling localStorage until window.pod.polyIn works
+        // Enabling localStorage to support polyExplorer data migration
         webView.settings.domStorageEnabled = true
 
         // Disable text selection
