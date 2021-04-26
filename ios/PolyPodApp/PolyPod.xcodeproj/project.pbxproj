@@ -126,6 +126,7 @@
 		E9B22043263314DC005E8881 /* LocalizedStringKeyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370D4262EABFF006254C1 /* LocalizedStringKeyExtensions.swift */; };
 		E9B22044263314DC005E8881 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */; };
 		E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
+		E9B2206B26372CA9005E8881 /* disableWindowParent.js in Resources */ = {isa = PBXBuildFile; fileRef = E9B2206A26372CA9005E8881 /* disableWindowParent.js */; };
 		E9CF1B302625866800216B70 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 		E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
@@ -225,6 +226,7 @@
 		E97D3279263153C200A5A180 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		E97D32A72631BF7700A5A180 /* HTMLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLView.swift; sourceTree = "<group>"; };
 		E97D32AF2631E68700A5A180 /* disableUserSelect.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = disableUserSelect.js; sourceTree = "<group>"; };
+		E9B2206A26372CA9005E8881 /* disableWindowParent.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = disableWindowParent.js; sourceTree = "<group>"; };
 		E9CF1B2F2625866800216B70 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				1A00DFF624569F3A0049F3F7 /* pod.html */,
 				1ABADBCA24E2E06600369791 /* initIframe.js */,
 				E97D32AF2631E68700A5A180 /* disableUserSelect.js */,
+				E9B2206A26372CA9005E8881 /* disableWindowParent.js */,
 			);
 			path = FeatureContainer;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				E9F370CD262DD92C006254C1 /* jost_regular.ttf in Resources */,
 				1A00DFF724569F3A0049F3F7 /* pod.html in Resources */,
 				E923AAF7261E155500E0A2A8 /* podNav.js in Resources */,
+				E9B2206B26372CA9005E8881 /* disableWindowParent.js in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
 				E92373BC26289FA900D2CFF3 /* Localizable.strings in Resources */,
 				1AB4F37E2508D64600E66BCC /* Settings.bundle in Resources */,

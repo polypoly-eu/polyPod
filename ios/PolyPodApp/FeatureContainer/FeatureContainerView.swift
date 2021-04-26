@@ -75,6 +75,11 @@ class FeatureWebView: WKWebView {
         
         installUserScript(
             contentController,
+            "disableWindowParent",
+            forMainFrameOnly: false
+        )
+        installUserScript(
+            contentController,
             "disableUserSelect",
             forMainFrameOnly: false
         )
