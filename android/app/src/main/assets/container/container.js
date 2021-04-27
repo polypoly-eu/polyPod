@@ -23,20 +23,38 @@ function initMessaging() {
     }
 }
 
-function quadFromKeyValue(input) {
+async function canAccessData(_namespace, _rights) {
+    return true;
+}
+
+async function getNamespace(requestedNamespace, rights) {
+    let ns = namespace;
+    if (requestedNamespace) {
+        if (!await canAccessData(requestedNamespace)) {
+            throw new Exception("Access rights error");
+        }
+        ns = requestedNamespace;
+    }
+    return ns;
+}
+
+async function quadFromKeyValue(input, requestedNamespace) {
     const { dataFactory } = pod;
+    let ns = getNamespace(requestedNamespace);
     return dataFactory.quad(
-        `${namespace}${featureName}`,
-        `${namespace}${input.key}`,
-        `${namespace}${input.value}`
+        `${ns}${featureName}`,
+        `${ns}${input.key}`,
+        `${ns}${input.value}`
     );
 }
 
-function quadFromKey(input) {
+async function quadFromKey(input, requestedNamespace) {
     const { dataFactory } = pod;
+
+    let ns = getNamespace(requestedNamespace);
     return dataFactory.quad(
-        `${namespace}${featureName}`,
-        `${namespace}${input.key}`
+        `${ns}${featureName}`,
+        `${ns}${input.key}`
     );
 }
 

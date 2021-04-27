@@ -32,22 +32,22 @@ async function sendMessage(message) {
     });
 }
 
-async function readValue(key) {
+async function readValue(key, namespace = null) {
     checkInit();
 
     // TODO: Should features be allowed to read/write from other features?
     const entries = await sendMessage({
-        polyIn: { select: { key } },
+        polyIn: { select: { key, namespace } },
     });
 
     return !entries.some(({ value }) => value === `false`);
 }
 
-async function writeValue(key, value) {
+async function writeValue(key, value, namespace = null) {
     checkInit();
     await sendMessage({
         polyIn: {
-            add: { key, value },
+            add: { key, value, namespace },
         },
     });
 }
