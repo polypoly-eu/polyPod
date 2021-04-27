@@ -5,7 +5,7 @@ import MultipleChoiceQuestion from "../../components/cards/MultipleChoiceQuestio
 import TextQuestion from "../../components/cards/TextQuestion";
 import RangeQuestion from "../../components/cards/RangeQuestion";
 import FooterNavigation from "../../components/basic/FooterNavigation";
-import { Layout } from "@polypoly-eu/poly-look/lib/layout";
+import { Layout } from "../../components/common/layout";
 
 export default function QuestionScreen() {
     const { currentQuestion } = useContext(QuestionnaireContext);

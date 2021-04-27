@@ -3,9 +3,9 @@ import React, { useContext } from "react";
 import { QuestionnaireContext } from "../../context/questionnaire-context";
 import StartSurveyButton from "../../components/buttons/StartSurveyButton";
 import { Link } from "react-router-dom";
-import { BigHeader } from "@polypoly-eu/poly-look/lib/header";
-import { CenteredFooter } from "@polypoly-eu/poly-look/lib/footer";
-import { Layout } from "@polypoly-eu/poly-look/lib/layout";
+import { BigHeader } from "../../components/common/header";
+import { CenteredFooter } from "../../components/common/footer";
+import { Layout } from "../../components/common/layout";
 
 function IntroHeader({ questionnaire }) {
     const { t, i18n } = useTranslation();
