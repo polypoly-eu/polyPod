@@ -29,7 +29,8 @@
     "polypoly": "^0.4.2"
   },
   "polypoly": {
-    "root": "dist"
+    "root": "dist",
+    "manifest": ""
   },
   "dependencies": {
     "@polypoly-eu/poly-api": "file:../../core/poly-api",
