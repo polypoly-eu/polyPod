@@ -4,8 +4,6 @@
     width: 88%;
     max-width: 350px;
     margin: 0 auto;
-    position: relative;
-    z-index: 200;
     flex: 1 1 auto;
     min-height: 0;
 }
@@ -36,15 +34,33 @@
     flex-grow: 1;
 }
 
-.data-exploration .purpose-chart .help {
+.data-exploration .purpose-chart .help-area::before {
+    content: "";
+    position: absolute;
+    top: -55px;
+    right: 0;
+    left: 0;
+    height: 57px;
+    pointer-events: none;
+    background: linear-gradient(#0f193800 0%, #0f1938);
+}
+
+.data-exploration .purpose-chart .help-area {
+    background-color: #0f1938;
+    position: relative;
+    padding-top: 5px;
+    z-index: 2001;
+}
+
+.data-exploration .purpose-chart .help-area .help {
     display: flex;
     flex: 0 0 auto;
     width: 95%;
     max-width: 414px;
-    margin: 0 auto;
     height: 30px;
     margin: 8px 2.5% 0 2.5%;
     border: solid 1px #525e72;
+    background-color: #0f1938;
     border-left: none;
     border-right: none;
     line-height: 30px;
@@ -52,7 +68,7 @@
     font-size: 10px;
 }
 
-.data-exploration .purpose-chart .help img {
+.data-exploration .purpose-chart .help-area .help img {
     position: relative;
     top: 5px;
     width: 15px;
@@ -124,7 +140,12 @@
     width: 100%;
     padding: 0 2.5%;
     overflow-y: scroll;
-    z-index: 2000;
+}
+
+.data-exploration .purpose-chart .bars::after {
+    content: "";
+    display: block;
+    height: 30px;
 }
 
 .data-exploration .purpose-chart .bar-box {
