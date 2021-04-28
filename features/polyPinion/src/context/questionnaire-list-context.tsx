@@ -8,6 +8,9 @@ import PpQuestionnaireLinkResult from "../questionnaire/PpQuestionnaireLinkResul
 
 import Questionnaire from "../questionnaire/PpQuestionnaire";
 
+import exampleQuestionnaire from "../demo-mode/exampleQuestionnaire.js";
+import demoMode from "../demo-mode/demoMode.js";
+
 import {
     downloadQuestionnaireData,
     downloadQuestionnaireResults,
@@ -120,29 +123,46 @@ export const QuestionnaireListProvider: React.FC = ({ children }) => {
     };
 
     const updateStoredQuestionnaires = async () => {
-        const questionnairesMetadata = await getNewActiveQuestionnairesMetadata();
-
         const downloadedQuestionnaires = [];
-        try {
-            for (const questionaireMetadata of questionnairesMetadata) {
-                const currentQuestionnaire = await downloadAndStoreQuestionnaire(
-                    questionaireMetadata
-                );
-                downloadedQuestionnaires.push(currentQuestionnaire);
-            }
 
-            const noResultsQuestionnaires = questionnaireList.filter(
-                (questionnaire) =>
-                    questionnaire.hasResult() === false &&
-                    (questionnaire.isSubmitted() || questionnaire.isExpired())
+        if (demoMode.activated) {
+            const currentQuestionnaire = buildQuestionnaireObject(
+                JSON.stringify(exampleQuestionnaire)
             );
-            for (const questionaire of noResultsQuestionnaires) {
-                await updateQuestionnaireResults(questionaire);
-            }
-        } catch (ex) {
-            console.log(ex);
-        } finally {
+
+            await storeQuestionnaireData(
+                currentQuestionnaire.id,
+                JSON.stringify(exampleQuestionnaire)
+            );
+            await appendQuestionnaireToIndex(currentQuestionnaire.id);
+            downloadedQuestionnaires.push(currentQuestionnaire);
+            // Set the current language as the language of the questionnaire after download.
+            await ensureLanguage(currentQuestionnaire);
             setQuestionnaireList([...questionnaireList, ...downloadedQuestionnaires]);
+        } else {
+            const questionnairesMetadata = await getNewActiveQuestionnairesMetadata();
+
+            try {
+                for (const questionaireMetadata of questionnairesMetadata) {
+                    const currentQuestionnaire = await downloadAndStoreQuestionnaire(
+                        questionaireMetadata
+                    );
+                    downloadedQuestionnaires.push(currentQuestionnaire);
+                }
+
+                const noResultsQuestionnaires = questionnaireList.filter(
+                    (questionnaire) =>
+                        questionnaire.hasResult() === false &&
+                        (questionnaire.isSubmitted() || questionnaire.isExpired())
+                );
+                for (const questionaire of noResultsQuestionnaires) {
+                    await updateQuestionnaireResults(questionaire);
+                }
+            } catch (ex) {
+                console.log(ex);
+            } finally {
+                setQuestionnaireList([...questionnaireList, ...downloadedQuestionnaires]);
+            }
         }
     };
 
