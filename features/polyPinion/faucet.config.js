@@ -24,6 +24,10 @@ module.exports = {
             target: "./dist/fonts",
         },
         {
+            source: "./src/icons",
+            target: "./dist/icons",
+        },
+        {
             source: "react/umd/react.development.js",
             target: "./dist/react.js",
         },
