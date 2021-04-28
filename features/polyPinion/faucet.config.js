@@ -20,11 +20,11 @@ module.exports = {
             target: "./dist/index.html",
         },
         {
-            source: "./src/fonts",
+            source: "./src/static/fonts",
             target: "./dist/fonts",
         },
         {
-            source: "./src/icons",
+            source: "./src/static/icons",
             target: "./dist/icons",
         },
         {
