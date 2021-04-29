@@ -10,8 +10,10 @@ export class Company {
     }
 
     //Getters
+
+    //This doesn't exist until the next dataImport, replace it with ppid then please
     get ppid() {
-        return this._data.ppid;
+        return this._data.name;
     }
 
     get name() {
