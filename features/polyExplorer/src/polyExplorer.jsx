@@ -63,13 +63,9 @@ const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
     const [showFeatured, setShowFeatured] = useState(true);
-    const [companyData] = useState(polyPediaCompanies);
     const [allCompanies] = useState(getCompanyInstances(polyPediaCompanies));
     const [featuredCompanies] = useState(getFeaturedCompanies(allCompanies));
     const [selectedCompany, setSelectedCompany] = useState(undefined);
-    const featuredCompanyData = companyData.filter(
-        (company) => company.featured == true
-    );
     const [
         featuredCompanyTabInitialSlide,
         setFeaturedCompanyTabInitialSlide,
@@ -91,19 +87,17 @@ const PolyExplorer = () => {
         return Math.round(10 * average) / 10;
     }
     const counts = {
-        dataTypes: featuredCompanyData.map(
-            (company) => company.dataTypesShared.length
+        dataTypes: featuredCompanies.map(
+            (company) => company.dataTypesSharedCount
         ),
-        purposes: featuredCompanyData.map(
-            (company) => company.dataSharingPurposes.length
+        purposes: featuredCompanies.map(
+            (company) => company.sharingPurposesCount
         ),
-        companies: featuredCompanyData.map(
-            (company) => company.dataRecipients.length
+        companies: featuredCompanies.map(
+            (company) => company.dataRecipientsCount
         ),
-        jurisdictions: featuredCompanyData.map((company) =>
-            company.jurisdictionsShared
-                ? company.jurisdictionsShared.children.length
-                : 0
+        jurisdictions: featuredCompanies.map(
+            (company) => company.jurisdictionsSharedCount
         ),
     };
     const featuredCompanyMaxValues = Object.fromEntries(
@@ -121,8 +115,9 @@ const PolyExplorer = () => {
         else backStack.push(activeScreen);
         setActiveScreen(screen);
         if (companyName)
+            //use ppid here
             setSelectedCompany(
-                companyData.filter((company) => companyName === company.name)[0]
+                allCompanies.find((company) => companyName === company.name)
             );
     };
 
@@ -274,7 +269,7 @@ const PolyExplorer = () => {
                 }
                 maxCompanies={featuredCompanyMaxValues.companies}
                 dataRecipients={selectedCompany?.dataRecipients?.map((name) =>
-                    companyData.find(
+                    allCompanies.find(
                         (company) =>
                             company.name.toLowerCase() === name.toLowerCase()
                     )
@@ -304,7 +299,7 @@ const PolyExplorer = () => {
         ),
         companyFilter: (
             <CompanyFilterScreen
-                companies={companyData}
+                allCompanies={allCompanies}
                 globalData={polyPediaGlobalData}
                 activeFilters={activeFilters}
                 onApply={handleFilterApply}
@@ -313,7 +308,7 @@ const PolyExplorer = () => {
         featuredCompanyInfo: <FeaturedCompanyInfoScreen onClose={handleBack} />,
         companySearch: (
             <CompanySearchScreen
-                companies={companyData}
+                allCompanies={allCompanies}
                 onOpenDetails={(companyName) =>
                     handleActiveScreenChange("companyDetails", companyName)
                 }

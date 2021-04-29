@@ -16,7 +16,7 @@ function groupCompanies(companies) {
     const sorted = companies.sort((a, b) => a.compareNames(b));
     const groups = {};
     sorted.forEach((company) => {
-        const key = company.firstNameChar().toUpperCase();
+        const key = company.firstNameChar.toUpperCase();
         groups[key] = groups[key] || [];
         groups[key].push(company);
     });
