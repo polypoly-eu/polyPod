@@ -66,7 +66,7 @@ function fixPolyPediaEntityData(entityData) {
 }
 
 function parseIndustryCategory(legalEntityData) {
-    const id = legalEntityData?.entity_details?.industry_category?.values?.[0];
+    const id = legalEntityData?.entity_details?.industry_category?.value?.[0];
     return id ? { id } : null;
 }
 
