@@ -10,7 +10,7 @@ function startsWithSpecialChar(aString) {
 }
 
 function withoutSpecialChars(aString) {
-    return aString.replace(/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/, "");
+    return aString.replace(/[ `!@#$%^&*„()_+\-=[\]{};':"\\|,.<>/?~]/, "");
 }
 
 export class Company {
@@ -74,5 +74,9 @@ export class Company {
         return withoutSpecialChars(this.name).localeCompare(
             withoutSpecialChars(withCompany.name)
         );
+    }
+
+    firstNameChar() {
+        return withoutSpecialChars(this.name)[0];
     }
 }
