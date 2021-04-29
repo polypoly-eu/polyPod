@@ -1,18 +1,3 @@
-export function compare(a, b) {
-    if (startsWithSpecialChar(a)) return compare(a.slice(1), b);
-    if (startsWithSpecialChar(b)) return compare(a, b.slice(1));
-    return a.localeCompare(b);
-}
-
-function startsWithSpecialChar(aString) {
-    var format = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
-    return format.test(aString.charAt(0));
-}
-
-function withoutSpecialChars(aString) {
-    return aString.replace(/[ `!@#$%^&*„()_+\-=[\]{};':"\\|,.<>/?~]/, "");
-}
-
 export class Company {
     constructor(companyJSONObject) {
         this._ppid = companyJSONObject.ppid;
@@ -24,6 +9,7 @@ export class Company {
         this._dataRecipients = companyJSONObject.dataRecipients;
         this._dataSharingPurposes = companyJSONObject.dataSharingPurposes;
         this._dataTypesShared = companyJSONObject.dataTypesShared;
+        this._jurisdictionsShared = companyJSONObject.jurisdictionsShared;
         this._description = companyJSONObject.description;
         this._industryCategory = companyJSONObject.industryCategory;
     }
@@ -45,6 +31,10 @@ export class Company {
         return this._jurisdiction;
     }
 
+    get location() {
+        return this._location;
+    }
+
     get annualRevenues() {
         return this._annualRevenues;
     }
@@ -61,6 +51,10 @@ export class Company {
         return this._dataTypesShared;
     }
 
+    get jurisdictionsShared() {
+        return this._jurisdictionsShared;
+    }
+
     get description() {
         return this._description;
     }
@@ -69,14 +63,34 @@ export class Company {
         return this._industryCategory;
     }
 
+    get firstNameChar() {
+        return withoutSpecialChars(this.name)[0];
+    }
+
+    get dataTypesSharedCount() {
+        return this.dataTypesShared?.length || 0;
+    }
+
+    get sharingPurposesCount() {
+        return this.dataSharingPurposes?.length || 0;
+    }
+
+    get dataRecipientsCount() {
+        return this.dataRecipients?.length || 0;
+    }
+
+    get jurisdictionsSharedCount() {
+        return this.jurisdictionsShared?.children.length || 0;
+    }
+
     //Methods
     compareNames(withCompany) {
         return withoutSpecialChars(this.name).localeCompare(
             withoutSpecialChars(withCompany.name)
         );
     }
+}
 
-    firstNameChar() {
-        return withoutSpecialChars(this.name)[0];
-    }
+function withoutSpecialChars(aString) {
+    return aString.replace(/[ `!@#$%^&*„()_+\-=[\]{};':"\\|,.<>/?~]/, "");
 }
