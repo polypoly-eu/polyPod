@@ -9,6 +9,10 @@ function startsWithSpecialChar(aString) {
     return format.test(aString.charAt(0));
 }
 
+function withoutSpecialChars(aString) {
+    return aString.replace(/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/, "");
+}
+
 export class Company {
     constructor(companyJSONObject) {
         this._ppid = companyJSONObject.ppid;
@@ -24,6 +28,7 @@ export class Company {
         this._industryCategory = companyJSONObject.industryCategory;
     }
 
+    //Getters
     get ppid() {
         return this._ppid;
     }
@@ -62,5 +67,12 @@ export class Company {
 
     get industryCategory() {
         return this._industryCategory;
+    }
+
+    //Methods
+    compareNames(withCompany) {
+        return withoutSpecialChars(this.name).localeCompare(
+            withoutSpecialChars(withCompany.name)
+        );
     }
 }
