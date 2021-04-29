@@ -47,7 +47,7 @@ async function writeFirstRun(firstRun) {
     polyIn.add(quad);
 }
 
-function getCompanyInstances(JSONData) {
+function loadCompanies(JSONData) {
     const companies = [];
     for (let obj of JSONData) {
         companies.push(new Company(obj));
@@ -63,7 +63,7 @@ const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
     const [showFeatured, setShowFeatured] = useState(true);
-    const [companies] = useState(getCompanyInstances(polyPediaCompanies));
+    const [companies] = useState(loadCompanies(polyPediaCompanies));
     const [featuredCompanies] = useState(getFeaturedCompanies(companies));
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [
