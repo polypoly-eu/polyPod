@@ -22,7 +22,6 @@ const FeaturedCompanyHolder = ({
     const sortedFeaturedCompanies = [...featuredCompanies].sort((a, b) =>
         a.compareNames(b)
     );
-    console.log(featuredCompanies);
     return (
         <div className="featured-company-holder">
             <Swiper
