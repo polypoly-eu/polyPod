@@ -88,16 +88,16 @@ const PolyExplorer = () => {
     }
     const counts = {
         dataTypes: featuredCompanies.map(
-            (company) => company.dataTypesSharedCount
+            (company) => company.dataTypesShared.length
         ),
         purposes: featuredCompanies.map(
-            (company) => company.sharingPurposesCount
+            (company) => company.dataSharingPurposes.length
         ),
         companies: featuredCompanies.map(
-            (company) => company.dataRecipientsCount
+            (company) => company.dataRecipients.length
         ),
         jurisdictions: featuredCompanies.map(
-            (company) => company.jurisdictionsSharedCount
+            (company) => company.jurisdictionsShared.length
         ),
     };
     const featuredCompanyMaxValues = Object.fromEntries(

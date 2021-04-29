@@ -35,19 +35,19 @@ export class Company {
     }
 
     get dataRecipients() {
-        return this._data.dataRecipients;
+        return this._data.dataRecipients || [];
     }
 
     get dataSharingPurposes() {
-        return this._data.dataSharingPurposes;
+        return this._data.dataSharingPurposes || [];
     }
 
     get dataTypesShared() {
-        return this._data.dataTypesShared;
+        return this._data.dataTypesShared || [];
     }
 
     get jurisdictionsShared() {
-        return this._data.jurisdictionsShared;
+        return this._data.jurisdictionsShared || [];
     }
 
     get description() {
@@ -60,22 +60,6 @@ export class Company {
 
     get firstNameChar() {
         return withoutSpecialChars(this.name)[0];
-    }
-
-    get dataTypesSharedCount() {
-        return this.dataTypesShared?.length || 0;
-    }
-
-    get sharingPurposesCount() {
-        return this.dataSharingPurposes?.length || 0;
-    }
-
-    get dataRecipientsCount() {
-        return this.dataRecipients?.length || 0;
-    }
-
-    get jurisdictionsSharedCount() {
-        return this.jurisdictionsShared?.children.length || 0;
     }
 
     //Methods
