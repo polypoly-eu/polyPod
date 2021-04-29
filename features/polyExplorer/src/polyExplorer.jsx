@@ -55,16 +55,16 @@ function getCompanyInstances(JSONData) {
     return companies;
 }
 
-function getFeaturedCompanies(allCompanies) {
-    return allCompanies.filter((company) => company.featured);
+function getFeaturedCompanies(companies) {
+    return companies.filter((company) => company.featured);
 }
 
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
     const [showFeatured, setShowFeatured] = useState(true);
-    const [allCompanies] = useState(getCompanyInstances(polyPediaCompanies));
-    const [featuredCompanies] = useState(getFeaturedCompanies(allCompanies));
+    const [companies] = useState(getCompanyInstances(polyPediaCompanies));
+    const [featuredCompanies] = useState(getFeaturedCompanies(companies));
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [
         featuredCompanyTabInitialSlide,
@@ -117,7 +117,7 @@ const PolyExplorer = () => {
         if (companyName)
             //use ppid here
             setSelectedCompany(
-                allCompanies.find((company) => companyName === company.name)
+                companies.find((company) => companyName === company.name)
             );
     };
 
@@ -197,7 +197,7 @@ const PolyExplorer = () => {
             <MainScreen
                 showFeatured={showFeatured}
                 featuredCompanies={featuredCompanies}
-                allCompanies={allCompanies}
+                companies={companies}
                 globalData={polyPediaGlobalData}
                 onOpenDetails={(company) =>
                     handleActiveScreenChange("companyDetails", company)
@@ -269,7 +269,7 @@ const PolyExplorer = () => {
                 }
                 maxCompanies={featuredCompanyMaxValues.companies}
                 dataRecipients={selectedCompany?.dataRecipients?.map((name) =>
-                    allCompanies.find(
+                    companies.find(
                         (company) =>
                             company.name.toLowerCase() === name.toLowerCase()
                     )
@@ -299,7 +299,7 @@ const PolyExplorer = () => {
         ),
         companyFilter: (
             <CompanyFilterScreen
-                allCompanies={allCompanies}
+                companies={companies}
                 globalData={polyPediaGlobalData}
                 activeFilters={activeFilters}
                 onApply={handleFilterApply}
@@ -308,7 +308,7 @@ const PolyExplorer = () => {
         featuredCompanyInfo: <FeaturedCompanyInfoScreen onClose={handleBack} />,
         companySearch: (
             <CompanySearchScreen
-                allCompanies={allCompanies}
+                companies={companies}
                 onOpenDetails={(companyName) =>
                     handleActiveScreenChange("companyDetails", companyName)
                 }

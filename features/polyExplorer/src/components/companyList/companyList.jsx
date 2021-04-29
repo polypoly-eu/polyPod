@@ -58,14 +58,14 @@ function getStartGroups(companyGroups) {
 }
 
 const CompanyList = ({
-    allCompanies,
+    companies,
     globalData,
     onOpenFilters,
     onOpenDetails,
     activeFilters,
     onRemoveFilter,
 }) => {
-    const filteredCompanies = applyFilters(activeFilters, allCompanies);
+    const filteredCompanies = applyFilters(activeFilters, companies);
     const companyGroups = groupCompanies(filteredCompanies);
     const allKeys = Object.keys(companyGroups);
     const [loadedCompanies, setLoadedCompanies] = useState({});
@@ -87,7 +87,7 @@ const CompanyList = ({
     const handleRemoveFilter = (field, value) => {
         onRemoveFilter(field, value);
         const newLoadedCompanies = {};
-        const filteredCompanies = applyFilters(activeFilters, allCompanies);
+        const filteredCompanies = applyFilters(activeFilters, companies);
         const newCompanyGroups = groupCompanies(filteredCompanies);
         const newKeys = Object.keys(newCompanyGroups);
         const newStartGroups = getStartGroups(newCompanyGroups);

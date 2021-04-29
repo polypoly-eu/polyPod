@@ -10,7 +10,7 @@ import "./main.css";
 const MainScreen = ({
     showFeatured,
     featuredCompanies,
-    allCompanies,
+    companies,
     globalData,
     onOpenDetails,
     onOpenFeaturedInfo,
@@ -49,7 +49,7 @@ const MainScreen = ({
                     }
                 >
                     {i18n.t("mainScreen:tab.allCompanies", {
-                        total: allCompanies.length,
+                        total: companies.length,
                     })}
                 </button>
             </div>
@@ -66,7 +66,7 @@ const MainScreen = ({
                 />
             ) : (
                 <CompanyList
-                    allCompanies={allCompanies}
+                    companies={companies}
                     globalData={globalData}
                     onOpenFilters={onOpenFilters}
                     onOpenDetails={onOpenDetails}
