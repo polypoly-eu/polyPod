@@ -1,7 +1,5 @@
-import globalData from "../src/data/global.json";
-
 export class Company {
-    constructor(companyJSONObject) {
+    constructor(companyJSONObject, globalData) {
         this._data = companyJSONObject;
         this._data.jurisdiction = getJurisdictionFromLocation(
             companyJSONObject.location,
