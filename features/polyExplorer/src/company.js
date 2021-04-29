@@ -2,70 +2,60 @@ import globalData from "../src/data/global.json";
 
 export class Company {
     constructor(companyJSONObject) {
-        this._ppid = companyJSONObject.ppid;
-        this._featured = companyJSONObject.featured;
-        this._name = companyJSONObject.name;
-        this._jurisdiction = getJurisdictionFromLocation(
+        this._data = companyJSONObject;
+        this._data.jurisdiction = getJurisdictionFromLocation(
             companyJSONObject.location,
             globalData
         );
-        this._location = companyJSONObject.location;
-        this._annualRevenues = companyJSONObject.annualRevenues;
-        this._dataRecipients = companyJSONObject.dataRecipients;
-        this._dataSharingPurposes = companyJSONObject.dataSharingPurposes;
-        this._dataTypesShared = companyJSONObject.dataTypesShared;
-        this._jurisdictionsShared = companyJSONObject.jurisdictionsShared;
-        this._description = companyJSONObject.description;
-        this._industryCategory = companyJSONObject.industryCategory;
     }
 
     //Getters
     get ppid() {
-        return this._ppid;
+        return this._data.ppid;
     }
 
     get name() {
-        return this._name;
+        return this._data.name;
     }
 
     get featured() {
-        return this._featured;
+        return this._data.featured;
     }
 
     get jurisdiction() {
-        return this._jurisdiction;
+        return this._data.jurisdiction;
     }
 
     get location() {
-        return this._location;
+        return this._data.location;
     }
 
     get annualRevenues() {
-        return this._annualRevenues;
+        return this._data.annualRevenues;
     }
 
     get dataRecipients() {
-        return this._dataRecipients;
+        return this._data.dataRecipients;
     }
 
     get dataSharingPurposes() {
-        return this._dataSharingPurposes;
+        return this._data.dataSharingPurposes;
     }
 
     get dataTypesShared() {
-        return this._dataTypesShared;
+        return this._data.dataTypesShared;
     }
 
     get jurisdictionsShared() {
-        return this._jurisdictionsShared;
+        return this._data.jurisdictionsShared;
     }
 
     get description() {
-        return this._description;
+        return this._data.description;
     }
 
     get industryCategory() {
-        return this._industryCategory;
+        return this._data.industryCategory;
     }
 
     get firstNameChar() {
