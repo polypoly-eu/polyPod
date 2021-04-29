@@ -55,16 +55,12 @@ function loadCompanies(JSONData) {
     return companies;
 }
 
-function getFeaturedCompanies(companies) {
-    return companies.filter((company) => company.featured);
-}
-
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
     const [showFeatured, setShowFeatured] = useState(true);
     const [companies] = useState(loadCompanies(polyPediaCompanies));
-    const [featuredCompanies] = useState(getFeaturedCompanies(companies));
+    const featuredCompanies = companies.filter((company) => company.featured);
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [
         featuredCompanyTabInitialSlide,
