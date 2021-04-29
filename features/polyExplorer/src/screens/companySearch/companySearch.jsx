@@ -5,21 +5,21 @@ import Screen from "../../components/screen/screen.jsx";
 
 import "./companySearch.css";
 
-const CompanySearchScreen = ({ allCompanies, onOpenDetails }) => {
+const CompanySearchScreen = ({ companies, onOpenDetails }) => {
     const [searchString, setSearchString] = useState("");
-    const featuredComanies = allCompanies
+    const featuredComanies = companies
         .filter((company) => company.featured)
         .sort((a, b) => a.compareNames(b));
 
     const shownCompaniesUnsorted =
         searchString.length > 3 ||
-        allCompanies.filter((company) =>
+        companies.filter((company) =>
             company.name.toLowerCase().startsWith(searchString)
         ).length == 0
-            ? allCompanies.filter((c) =>
+            ? companies.filter((c) =>
                   c.name.toLowerCase().includes(searchString)
               )
-            : allCompanies.filter((c) =>
+            : companies.filter((c) =>
                   c.name.toLowerCase().startsWith(searchString)
               );
 

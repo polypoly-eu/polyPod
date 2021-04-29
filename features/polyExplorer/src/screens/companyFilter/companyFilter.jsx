@@ -7,7 +7,7 @@ import Screen from "../../components/screen/screen.jsx";
 import "./companyFilter.css";
 
 const CompanyFilterScreen = ({
-    allCompanies,
+    companies,
     activeFilters,
     globalData,
     onApply,
@@ -19,7 +19,7 @@ const CompanyFilterScreen = ({
     const handleReset = () => setNewActiveFilters(companyFilter.emptyFilters());
 
     const allFilters = companyFilter.sortFilters(
-        companyFilter.extractFilters(allCompanies),
+        companyFilter.extractFilters(companies),
         i18n,
         globalData
     );
