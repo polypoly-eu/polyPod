@@ -13,10 +13,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import "./companyList.css";
 
 function groupCompanies(companies) {
-    const sorted = companies.sort((a, b) => a.name.localeCompare(b.name));
+    const sorted = companies.sort((a, b) => a.compareNames(b));
     const groups = {};
     sorted.forEach((company) => {
-        const key = company.name[0].toUpperCase();
+        const key = company.firstNameChar().toUpperCase();
         groups[key] = groups[key] || [];
         groups[key].push(company);
     });
@@ -58,14 +58,14 @@ function getStartGroups(companyGroups) {
 }
 
 const CompanyList = ({
-    companies,
+    allCompanies,
     globalData,
     onOpenFilters,
     onOpenDetails,
     activeFilters,
     onRemoveFilter,
 }) => {
-    const filteredCompanies = applyFilters(activeFilters, companies);
+    const filteredCompanies = applyFilters(activeFilters, allCompanies);
     const companyGroups = groupCompanies(filteredCompanies);
     const allKeys = Object.keys(companyGroups);
     const [loadedCompanies, setLoadedCompanies] = useState({});
@@ -87,7 +87,7 @@ const CompanyList = ({
     const handleRemoveFilter = (field, value) => {
         onRemoveFilter(field, value);
         const newLoadedCompanies = {};
-        const filteredCompanies = applyFilters(activeFilters, companies);
+        const filteredCompanies = applyFilters(activeFilters, allCompanies);
         const newCompanyGroups = groupCompanies(filteredCompanies);
         const newKeys = Object.keys(newCompanyGroups);
         const newStartGroups = getStartGroups(newCompanyGroups);

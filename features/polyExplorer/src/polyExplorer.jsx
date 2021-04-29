@@ -201,8 +201,8 @@ const PolyExplorer = () => {
         main: (
             <MainScreen
                 showFeatured={showFeatured}
-                featuredCompanyData={featuredCompanyData}
-                companyData={companyData}
+                featuredCompanies={featuredCompanies}
+                allCompanies={allCompanies}
                 globalData={polyPediaGlobalData}
                 onOpenDetails={(company) =>
                     handleActiveScreenChange("companyDetails", company)

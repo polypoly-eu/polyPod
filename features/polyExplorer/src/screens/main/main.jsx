@@ -9,8 +9,8 @@ import "./main.css";
 
 const MainScreen = ({
     showFeatured,
-    featuredCompanyData,
-    companyData,
+    featuredCompanies,
+    allCompanies,
     globalData,
     onOpenDetails,
     onOpenFeaturedInfo,
@@ -49,13 +49,13 @@ const MainScreen = ({
                     }
                 >
                     {i18n.t("mainScreen:tab.allCompanies", {
-                        total: companyData.length,
+                        total: allCompanies.length,
                     })}
                 </button>
             </div>
             {showFeatured ? (
                 <FeaturedCompanyHolder
-                    featuredCompanies={featuredCompanyData}
+                    featuredCompanies={featuredCompanies}
                     onOpenDetails={onOpenDetails}
                     onOpenInfo={onOpenFeaturedInfo}
                     initialSlide={featuredCompanyTabInitialSlide}
@@ -66,7 +66,7 @@ const MainScreen = ({
                 />
             ) : (
                 <CompanyList
-                    companies={companyData}
+                    allCompanies={allCompanies}
                     globalData={globalData}
                     onOpenFilters={onOpenFilters}
                     onOpenDetails={onOpenDetails}

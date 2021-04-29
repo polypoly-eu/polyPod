@@ -20,8 +20,9 @@ const FeaturedCompanyHolder = ({
     onOpenDataExplorationSection,
 }) => {
     const sortedFeaturedCompanies = [...featuredCompanies].sort((a, b) =>
-        a.name.localeCompare(b.name)
+        a.compareNames(b)
     );
+    console.log(featuredCompanies);
     return (
         <div className="featured-company-holder">
             <Swiper
