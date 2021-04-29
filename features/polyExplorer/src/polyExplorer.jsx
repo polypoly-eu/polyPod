@@ -26,10 +26,10 @@ import polyPediaGlobalData from "./data/global.json";
 import {
     readValue,
     writeValue,
-    updatePodActions,
+    onPodAction,
     updatePodActiveActions,
     updatePodTitle,
-} from "./podApi.js";
+} from "./polyApi.js";
 
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
@@ -150,15 +150,16 @@ const PolyExplorer = () => {
 
     function updatePodNavigation() {
         updatePodTitle(i18n.t(`common:screenTitle.${activeScreen}`));
-        updatePodActions(
-            firstRun
-                ? { info: () => {}, search: () => {} }
-                : {
-                      info: () => handleActiveScreenChange("info"),
-                      search: () => handleActiveScreenChange("companySearch"),
-                      back: handleBack,
-                  }
+        onPodAction(
+            "info",
+            firstRun ? () => {} : handleActiveScreenChange("info")
         );
+        onPodAction(
+            "search",
+            firstRun ? () => {} : handleActiveScreenChange("companySearch")
+        );
+        onPodAction("search", firstRun ? () => {} : handleBack);
+
         updatePodActiveActions(
             backStack.length ? ["back"] : ["info", "search"]
         );
