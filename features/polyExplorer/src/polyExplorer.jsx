@@ -97,7 +97,7 @@ const PolyExplorer = () => {
             (company) => company.dataRecipients.length
         ),
         jurisdictions: featuredCompanies.map(
-            (company) => company.jurisdictionsShared.length
+            (company) => company.jurisdictionsShared.children.length
         ),
     };
     const featuredCompanyMaxValues = Object.fromEntries(

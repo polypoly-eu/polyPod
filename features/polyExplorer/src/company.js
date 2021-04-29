@@ -47,7 +47,7 @@ export class Company {
     }
 
     get jurisdictionsShared() {
-        return this._data.jurisdictionsShared || [];
+        return this._data.jurisdictionsShared || { children: [] };
     }
 
     get description() {
