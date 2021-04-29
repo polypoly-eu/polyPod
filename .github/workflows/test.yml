@@ -1,7 +1,8 @@
-name: dev
+name: Test pushes and PRs
 on: [push, pull_request]
 jobs:
-  build:
+  test:
+    name: Run tests.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,9 +18,6 @@ jobs:
         run: ./build.js lint
       - name: Test core and features
         run: xvfb-run --auto-servernum ./build.js test
-      - name: Build android
-        working-directory: android
-        run: ./gradlew assemble
       - name: Test android
         working-directory: android
         run: ./gradlew test
