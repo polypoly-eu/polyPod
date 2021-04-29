@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import i18n from "./i18n.js";
 import { pod, podNav } from "./fakePod.js";
 import { emptyFilters, removeFilter } from "./companyFilter.js";
+import { Company } from "./company.js";
 
 import MainScreen from "./screens/main/main.jsx";
 import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
@@ -46,11 +47,20 @@ async function writeFirstRun(firstRun) {
     polyIn.add(quad);
 }
 
+function getCompanyInstances(JSONData) {
+    const companies = [];
+    for (let obj of JSONData) {
+        companies.push(new Company(obj));
+    }
+    return companies;
+}
+
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
     const [showFeatured, setShowFeatured] = useState(true);
     const [companyData] = useState(polyPediaCompanies);
+    const [allCompanies] = useState(getCompanyInstances(polyPediaCompanies));
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const featuredCompanyData = companyData.filter(
         (company) => company.featured == true
