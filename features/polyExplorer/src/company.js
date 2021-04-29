@@ -1,9 +1,14 @@
+import globalData from "../src/data/global.json";
+
 export class Company {
     constructor(companyJSONObject) {
         this._ppid = companyJSONObject.ppid;
         this._featured = companyJSONObject.featured;
         this._name = companyJSONObject.name;
-        this._jurisdiction = companyJSONObject.jurisdiction;
+        this._jurisdiction = getJurisdictionFromLocation(
+            companyJSONObject.location,
+            globalData
+        );
         this._location = companyJSONObject.location;
         this._annualRevenues = companyJSONObject.annualRevenues;
         this._dataRecipients = companyJSONObject.dataRecipients;
@@ -93,4 +98,14 @@ export class Company {
 
 function withoutSpecialChars(aString) {
     return aString.replace(/[ `!@#$%^&*„()_+\-=[\]{};':"\\|,.<>/?~]/, "");
+}
+
+function getJurisdictionFromLocation(location, globalData) {
+    return (
+        globalData.countries[
+            Object.keys(globalData.countries).find(
+                (country) => country === location.countryCode
+            )
+        ]?.dataRegion || "Sonstige"
+    );
 }
