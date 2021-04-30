@@ -38,7 +38,7 @@ export default [
         ]
     },
     {
-        input: "src/bootstrap.ts",
+        input: "src/container_bootstrap.ts",
         output: [
             {
                 file: "dist/bootstrap.js",
