@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import i18n from "../../i18n.js";
 import * as companyFilter from "../../companyFilter.js";
-import ScrollingFadeOut from "../../components/scrollingFadeOut/scrollingFadeOut.jsx";
+import Scrollable from "../../components/scrollable/scrollable.jsx";
 import Screen from "../../components/screen/screen.jsx";
 
 import "./companyFilter.css";
@@ -67,7 +67,7 @@ const CompanyFilterScreen = ({
     return (
         <Screen className="company-filter-screen">
             <button className="reset-button" onClick={handleReset}></button>
-            <ScrollingFadeOut>
+            <Scrollable>
                 <FilterSection
                     title={i18n.t("companyFilterScreen:industryCategories")}
                     field="industryCategory"
@@ -87,7 +87,7 @@ const CompanyFilterScreen = ({
                     title={i18n.t("companyFilterScreen:revenue")}
                     field="revenueRange"
                 />
-            </ScrollingFadeOut>
+            </Scrollable>
 
             <div className="button-area">
                 <button

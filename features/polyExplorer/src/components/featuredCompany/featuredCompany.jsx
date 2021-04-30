@@ -3,7 +3,7 @@ import i18n from "../../i18n.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import DataSharingGauge from "../dataSharingGauge/dataSharingGauge.jsx";
 import DataSharingLegend from "../dataSharingLegend/dataSharingLegend.jsx";
-import ScrollingFadeOut from "../scrollingFadeOut/scrollingFadeOut.jsx";
+import Scrollable from "../scrollable/scrollable.jsx";
 import "./featuredCompany.css";
 
 const DataSharingSection = ({
@@ -36,7 +36,7 @@ const FeaturedCompany = ({
     onOpenDataExplorationSection,
 }) => {
     return (
-        <ScrollingFadeOut>
+        <Scrollable>
             <div className="featured-company-card">
                 <div className="short-info-margin">
                     <CompanyShortInfo
@@ -100,7 +100,7 @@ const FeaturedCompany = ({
                     <DataSharingLegend onClick={onOpenInfo} />
                 </div>
             </div>
-        </ScrollingFadeOut>
+        </Scrollable>
     );
 };
 

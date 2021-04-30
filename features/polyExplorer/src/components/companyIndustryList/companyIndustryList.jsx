@@ -1,6 +1,6 @@
 import React from "react";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
-import ScrollingFadeOut from "../../components/scrollingFadeOut/scrollingFadeOut.jsx";
+import Scrollable from "../../components/scrollable/scrollable.jsx";
 
 import "./companyIndustryList.css";
 
@@ -17,7 +17,7 @@ const CompanyItem = ({ company, ecoMode }) =>
 class CompanyIndustryList extends React.PureComponent {
     render() {
         return (
-            <ScrollingFadeOut>
+            <Scrollable>
                 <div className="company-industry-list">
                     {Object.entries(this.props.companyIndustryMap).map(
                         ([industry, companies], index) => (
@@ -40,7 +40,7 @@ class CompanyIndustryList extends React.PureComponent {
                         )
                     )}
                 </div>
-            </ScrollingFadeOut>
+            </Scrollable>
         );
     }
 }

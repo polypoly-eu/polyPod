@@ -1,7 +1,7 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import ScrollingFadeOut from "../../components/scrollingFadeOut/scrollingFadeOut.jsx";
+import Scrollable from "../../components/scrollable/scrollable.jsx";
 
 import "./purposeChart.css";
 
@@ -97,7 +97,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                 </div>
                 {scale}
             </div>
-            <ScrollingFadeOut>{bars}</ScrollingFadeOut>
+            <Scrollable>{bars}</Scrollable>
             <div className="help" onClick={() => openPurposeInfo()}>
                 <img src="./images/question-circle.svg" />
                 <div>{i18n.t("common:how-to-read")}</div>

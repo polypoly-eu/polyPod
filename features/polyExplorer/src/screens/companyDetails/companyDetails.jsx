@@ -3,7 +3,7 @@ import i18n from "../../i18n.js";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
-import ScrollingFadeOut from "../../components/scrollingFadeOut/scrollingFadeOut.jsx";
+import Scrollable from "../../components/scrollable/scrollable.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
 
@@ -172,7 +172,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
             <div className="top-shadow"></div>
 
             <div className="screen-content company-details-screen">
-                <ScrollingFadeOut>
+                <Scrollable>
                     <div className="scroll-container">
                         <div className="company-short-info-container">
                             <CompanyShortInfo company={company} />
@@ -252,7 +252,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             </p>
                         ) : null}
                     </div>
-                </ScrollingFadeOut>
+                </Scrollable>
 
                 {company.featured ? (
                     <div className="explore-data-btn-area">

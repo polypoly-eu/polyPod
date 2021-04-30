@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./scrollingFadeOut.css";
+import "./scrollable.css";
 
-const ScrollingFadeOut = ({ children }) => {
+const Scrollable = ({ children }) => {
     return (
         <div className="scrolling-area">
             {children}
@@ -13,4 +13,4 @@ const ScrollingFadeOut = ({ children }) => {
     );
 };
 
-export default ScrollingFadeOut;
+export default Scrollable;
