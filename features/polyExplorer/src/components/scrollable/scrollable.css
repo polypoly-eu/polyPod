@@ -25,7 +25,3 @@
     display: block;
     height: 30px;
 }
-
-.scrolling-area .featured-company-card ~ .gradient-area {
-    bottom: 100px;
-}

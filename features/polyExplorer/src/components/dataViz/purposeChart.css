@@ -120,6 +120,7 @@
 .data-exploration .purpose-chart .bars {
     flex: 1 1 auto;
     width: 100%;
+    padding: 0 2.5%;
 }
 
 .data-exploration .purpose-chart .bar-box {
