@@ -18,6 +18,7 @@
         "eslint-config",
         "features/example",
         "features/polyExplorer",
+        "features/polyPinion",
         "features/polyPreview",
         "features/test"
     ]

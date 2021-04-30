@@ -1,17 +1,15 @@
 module.exports = {
-    extends: [
-        "eslint:recommended",
-        "plugin:prettier/recommended"
-    ],
+    extends: ["eslint:recommended", "plugin:prettier/recommended"],
     parserOptions: {
-        ecmaVersion: 6
+        ecmaVersion: 6,
+        sourceType: "module",
     },
     rules: {
-        semi: 2
+        semi: 2,
     },
     overrides: [
         {
-            files: ["*.ts"],
+            files: ["*.ts", "*.tsx"],
             extends: [
                 "plugin:@typescript-eslint/eslint-recommended",
                 "plugin:@typescript-eslint/recommended",
@@ -27,13 +25,13 @@ module.exports = {
                 "@typescript-eslint/explicit-function-return-type": [
                     "error",
                     {
-                        allowExpressions: true
-                    }
+                        allowExpressions: true,
+                    },
                 ],
                 "@typescript-eslint/no-this-alias": "off",
                 "no-unused-vars": "off",
                 "@typescript-eslint/no-unused-vars": ["warn"],
             },
-        }
-    ]
+        },
+    ],
 };

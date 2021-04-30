@@ -8,6 +8,7 @@ import createServer, { IncomingMessage, NextHandleFunction } from "connect";
 import serveStatic from "serve-static";
 import { promises as fs } from "fs";
 import { render } from "ejs";
+import cors from "cors";
 
 export async function serve(
     port: number,
@@ -19,6 +20,7 @@ export async function serve(
 
     if (pod) app.use("/rpc", await new RemoteServerPod(pod).listenOnMiddleware());
 
+    app.use(cors());
     app.use("/container.js", async (request: IncomingMessage, response: ServerResponse) => {
         const container = await fs.readFile(join(__dirname, "../dist/container.js"), "utf-8");
         response.setHeader("Content-Type", "text/javascript");
