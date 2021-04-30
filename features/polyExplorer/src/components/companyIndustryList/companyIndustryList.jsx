@@ -1,5 +1,6 @@
 import React from "react";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
+import ScrollingFadeOut from "../../components/scrollingFadeOut/scrollingFadeOut.jsx";
 
 import "./companyIndustryList.css";
 
@@ -16,28 +17,30 @@ const CompanyItem = ({ company, ecoMode }) =>
 class CompanyIndustryList extends React.PureComponent {
     render() {
         return (
-            <div className="company-industry-list">
-                {Object.entries(this.props.companyIndustryMap).map(
-                    ([industry, companies], index) => (
-                        <div
-                            key={index}
-                            className="company-industry-list-group"
-                        >
-                            <hr />
-                            <h1>
-                                {industry} ({companies.length})
-                            </h1>
-                            {companies.map((company, index) => (
-                                <CompanyItem
-                                    key={index}
-                                    company={company}
-                                    ecoMode={this.props.ecoItems}
-                                />
-                            ))}
-                        </div>
-                    )
-                )}
-            </div>
+            <ScrollingFadeOut>
+                <div className="company-industry-list">
+                    {Object.entries(this.props.companyIndustryMap).map(
+                        ([industry, companies], index) => (
+                            <div
+                                key={index}
+                                className="company-industry-list-group"
+                            >
+                                <hr />
+                                <h1>
+                                    {industry} ({companies.length})
+                                </h1>
+                                {companies.map((company, index) => (
+                                    <CompanyItem
+                                        key={index}
+                                        company={company}
+                                        ecoMode={this.props.ecoItems}
+                                    />
+                                ))}
+                            </div>
+                        )
+                    )}
+                </div>
+            </ScrollingFadeOut>
         );
     }
 }

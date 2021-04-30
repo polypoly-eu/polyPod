@@ -32,8 +32,6 @@
     flex: 1 1 auto;
     margin: auto;
     overflow-x: hidden;
-    overflow-y: auto;
-    margin-bottom: 18px;
     width: 100%;
     max-width: 412px;
 }
