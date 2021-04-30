@@ -13,7 +13,7 @@ struct FeatureView: View {
     
     var body: some View {
         let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
-        let lightForeground = featureColor.isLight
+        let lightForeground = !featureColor.isLight
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
         
         let closeButton = Button(
