@@ -5,6 +5,8 @@ extension UIColor {
      Convert a SwiftUI.Color to UIColor
      
      This constructor is coming in iOS 14, so to support iOS 13, we provide it.
+     Unfortunately, this implementation does not work with named colours, e.g.
+     Color.white.
      */
     convenience init(_ color: Color) {
         let scanner = Scanner(

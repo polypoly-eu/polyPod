@@ -1,15 +1,42 @@
 import SwiftUI
 
 struct ContentView: View {
-    typealias StateFunction = () -> AnyView
-    
-    @State private var state: StateFunction? = nil
-    
-    var body: some View {
-        (state ?? firstRunState())()
+    private struct ViewState {
+        let backgroundColor: Color
+        let view: AnyView
+        
+        init(backgroundColor: Color? = nil, _ view: AnyView) {
+            self.backgroundColor =
+                backgroundColor ?? Color.PolyPod.lightBackground
+            self.view = view
+        }
     }
     
-    private func firstRunState() -> StateFunction {
+    @State private var state: ViewState? = nil
+    var setStatusBarStyle: ((UIStatusBarStyle) -> Void)? = nil
+    
+    var body: some View {
+        let state = initState()
+        
+        VStack(spacing: 0) {
+            Rectangle()
+                .fill(state.backgroundColor)
+                .frame(maxWidth: .infinity, maxHeight: 20)
+            
+            state.view
+        }
+        .edgesIgnoringSafeArea(.top)
+    }
+    
+    private func initState() -> ViewState {
+        let state = self.state ?? firstRunState()
+        setStatusBarStyle?(
+            state.backgroundColor.isLight ? .darkContent : .lightContent
+        )
+        return state
+    }
+    
+    private func firstRunState() -> ViewState {
         let defaults = UserDefaults.standard
         let firstRunKey = "firstRun"
         let firstRun = defaults.value(forKey: firstRunKey) as? Bool ?? true
@@ -17,57 +44,66 @@ struct ContentView: View {
             return featureListState()
         }
         
-        return {
+        return ViewState(
             AnyView(
                 OnboardingView(closeAction: {
                     UserDefaults.standard.set(false, forKey: firstRunKey)
                     state = featureListState()
                 })
             )
-        }
+        )
     }
     
-    private func featureListState() -> StateFunction {{
-        AnyView(
-            FeatureListView(
-                features: FeatureStorage.shared.featuresList(),
-                openFeatureAction: { feature in
-                    state = featureState(feature)
-                },
-                openInfoAction: {
-                    state = infoState()
-                },
-                openSettingsAction: {
-                    state = settingsState()
-                }
+    private func featureListState() -> ViewState {
+        ViewState(
+            AnyView(
+                FeatureListView(
+                    features: FeatureStorage.shared.featuresList(),
+                    openFeatureAction: { feature in
+                        state = featureState(feature)
+                    },
+                    openInfoAction: {
+                        state = infoState()
+                    },
+                    openSettingsAction: {
+                        state = settingsState()
+                    }
+                )
             )
         )
-    }}
+    }
     
-    private func featureState(_ feature: Feature) -> StateFunction {{
-        AnyView(
-            FeatureView(
-                feature: feature,
-                closeAction: {
+    private func featureState(_ feature: Feature) -> ViewState {
+        ViewState(
+            backgroundColor: feature.primaryColor,
+            AnyView(
+                FeatureView(
+                    feature: feature,
+                    closeAction: {
+                        state = featureListState()
+                    }
+                )
+            )
+        )
+    }
+    
+    private func infoState() -> ViewState {
+        ViewState(
+            AnyView(
+                OnboardingView(closeAction: {
                     state = featureListState()
-                }
+                })
             )
         )
-    }}
+    }
     
-    private func infoState() -> StateFunction {{
-        AnyView(
-            OnboardingView(closeAction: {
-                state = featureListState()
-            })
+    private func settingsState() -> ViewState {
+        ViewState(
+            AnyView(
+                SettingsView(closeAction: {
+                    state = featureListState()
+                })
+            )
         )
-    }}
-    
-    private func settingsState() -> StateFunction {{
-        AnyView(
-            SettingsView(closeAction: {
-                state = featureListState()
-            })
-        )
-    }}
+    }
 }

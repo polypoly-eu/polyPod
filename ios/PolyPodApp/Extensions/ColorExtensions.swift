@@ -2,9 +2,11 @@ import SwiftUI
 
 extension Color {
     struct PolyPod {
+        // Do not use named colours, e.g. Color.white here, not while we
+        // have the iOS 13 polyfill in UIColorExtensions.swift at least.
         static var lightForeground = Color(fromHex: "#F7FAFC")
         static var darkForeground = Color(fromHex: "#0F1938")
-        static var lightBackground = Color.white
+        static var lightBackground = Color(fromHex: "#FFFFFF")
         static var semiLightBackground = Color(fromHex: "#EDF2F7")
     }
     
