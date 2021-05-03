@@ -19,9 +19,9 @@ const FeaturedCompanyHolder = ({
     averageValues,
     onOpenDataExplorationSection,
 }) => {
-    const sortedFeaturedCompanies = [...featuredCompanies].sort((a, b) =>
-        a.compareNames(b)
-    );
+    const sortedFeaturedCompanies = Object.values(
+        featuredCompanies
+    ).sort((a, b) => a.compareNames(b));
     return (
         <div className="featured-company-holder">
             <Swiper

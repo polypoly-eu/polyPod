@@ -95,16 +95,16 @@ const PolyExplorer = () => {
         return Math.round(10 * average) / 10;
     }
     const counts = {
-        dataTypes: featuredCompanies.map(
+        dataTypes: Object.values(featuredCompanies).map(
             (company) => company.dataTypesShared.length
         ),
-        purposes: featuredCompanies.map(
+        purposes: Object.values(featuredCompanies).map(
             (company) => company.dataSharingPurposes.length
         ),
-        companies: featuredCompanies.map(
+        companies: Object.values(featuredCompanies).map(
             (company) => company.dataRecipients.length
         ),
-        jurisdictions: featuredCompanies.map(
+        jurisdictions: Object.values(featuredCompanies).map(
             (company) => company.jurisdictionsShared.children.length
         ),
     };
