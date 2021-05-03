@@ -2,19 +2,23 @@ import SwiftUI
 
 extension Color {
     struct PolyPod {
-        // Do not use named colours, e.g. Color.white here, not while we
-        // have the iOS 13 polyfill in UIColorExtensions.swift at least.
+        // Do not use named colours, e.g. Color.white here, not while we use
+        // compatInit in UIColorExtensions.swift at least.
         static var lightForeground = Color(fromHex: "#F7FAFC")
         static var darkForeground = Color(fromHex: "#0F1938")
         static var lightBackground = Color(fromHex: "#FFFFFF")
         static var semiLightBackground = Color(fromHex: "#EDF2F7")
     }
     
-    // iOS 13 support
-    var cgColor: CGColor { UIColor(self).cgColor }
+    var compatCgColor: CGColor? {
+        if #available(iOS 14, *) {
+            return cgColor
+        }
+        return UIColor.compatInit(self).cgColor
+    }
     
     var luminance: Double {
-        guard let components = cgColor.components else {
+        guard let components = compatCgColor?.components else {
             return 0
         }
         let red = components[0]

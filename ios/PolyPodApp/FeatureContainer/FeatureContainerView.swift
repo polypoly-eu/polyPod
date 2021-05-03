@@ -17,7 +17,7 @@ struct FeatureContainerView: UIViewRepresentable {
         )
         
         if let featureColor = feature.primaryColor {
-            featureWebView.backgroundColor = UIColor(featureColor)
+            featureWebView.backgroundColor = UIColor.compatInit(featureColor)
             featureWebView.isOpaque = false
         }
         
