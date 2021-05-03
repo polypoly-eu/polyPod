@@ -48,11 +48,21 @@ async function writeFirstRun(firstRun) {
 }
 
 function loadCompanies(JSONData, globalData) {
-    const companies = [];
+    const companies = {};
     for (let obj of JSONData) {
-        companies.push(new Company(obj, globalData));
+        companies[obj.ppid] = new Company(obj, globalData);
     }
     return companies;
+}
+
+function loadFeaturedCompanies(companies) {
+    const featuredCompanies = {};
+    for (let key of Object.keys(companies)) {
+        companies[key].featured
+            ? (featuredCompanies[key] = companies[key])
+            : null;
+    }
+    return featuredCompanies;
 }
 
 const PolyExplorer = () => {
@@ -62,7 +72,7 @@ const PolyExplorer = () => {
     const [companies] = useState(
         loadCompanies(polyPediaCompanies, polyPediaGlobalData)
     );
-    const featuredCompanies = companies.filter((company) => company.featured);
+    const featuredCompanies = loadFeaturedCompanies(companies);
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [
         featuredCompanyTabInitialSlide,
