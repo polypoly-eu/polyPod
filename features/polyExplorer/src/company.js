@@ -11,7 +11,7 @@ export class Company {
 
     //This doesn't exist until the next dataImport, replace it with ppid then please
     get ppid() {
-        return this._data.name;
+        return this._data.ppid;
     }
 
     get name() {
