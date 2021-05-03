@@ -1,16 +1,17 @@
 const {port1, port2} = new MessageChannel();
 let outerPort;
-const namespace = "";
+const namespace = "http://polypoly.coop/schema/";
 
 function initMessaging() {
     window.onmessage = event => {
         outerPort = event.ports[0];
         outerPort.onmessage = event => {
-            console.log(`Data coming from Pod to the Feature`);
+            console.log(`Data coming from Pod to the Container`);
             console.dir(event.data);
             const bytes = Uint8Array.from(atob(event.data), c => c.charCodeAt(0));
             port1.postMessage(bytes);
         }
+
     }
 }
 
@@ -19,7 +20,7 @@ function initIframe(iFrame) {
     port1.start();
     port1.onmessage = event => {
         if (event.data.type == "manual") {
-            console.log(`Manual data from the Feature to the container: ${JSON.stringify(event.data)}`);
+            console.log(`Manual data from the Feature to the Container`);
             onFeatureMessage(event.data);
             return;
         }
@@ -60,10 +61,6 @@ async function quadFromKey(input) {
     );
 }
 
-function arrayFromQuads(quads) {
-    return quads.map((quad) => quad.value.substring(namespace.length()) )
-}
-
 async function onFeatureMessage(message) {
     let response = null;
 
@@ -75,12 +72,11 @@ async function onFeatureMessage(message) {
         const entries = await pod.polyIn.select(
             quadFromKey(message.polyIn.select)
         );
-        response = entries?.some(
+        response = entries?.filter(
             ({ subject, predicate }) =>
-                subject.value === `${namespace}${window.featureName}` &&
-                predicate.value === `${namespace}${key}`
+                subject.value === `${namespace}${window.featureName}/#${window.featureName}` &&
+                predicate.value === `${namespace}${window.featureName}/#${message.polyIn.select.key}`
         );
-        response = arrayFromQuads(response);
     }
 
     if (message.polyNav) {
@@ -97,7 +93,7 @@ async function onFeatureMessage(message) {
 
     // Send the response back
     if (response){
-        port2.postMessage(response);
+        port1.postMessage(JSON.stringify(response));
     }
 }
 

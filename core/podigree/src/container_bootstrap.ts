@@ -3,6 +3,15 @@ import { DataFactory } from "@polypoly-eu/rdf";
 import { RemoteClientPod } from "./remote";
 import { AsyncPod } from "./async";
 
+function b64Encode(data: any): string {
+    const base64 = btoa(String.fromCharCode(...data));
+    return base64;
+}
+
+function b64Decode(data: any): Uint8Array {
+    return Uint8Array.from(atob(data), (c) => c.charCodeAt(0));
+}
+
 // This is almost exactly the same implementation as in port-authority,
 // but without a check if "event.source !== window.parent" check
 export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
@@ -16,8 +25,8 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
                 resolve(
                     mapPort(
                         rawPort,
-                        (event) => event.data,
-                        (any) => any
+                        (evt) => b64Decode(evt.data),
+                        (any) => b64Encode(any)
                     )
                 );
             } else {

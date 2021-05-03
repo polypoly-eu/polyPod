@@ -3,7 +3,6 @@ const podPort = Promise.race([
         window.addEventListener("message", (event) => {
             if (event.data == "") {
                 console.log("Pod initialized");
-                event.ports[0].addEventListener("podAction", triggerPodAction);
                 resolve(event.ports[0]);
             }
         });
@@ -20,15 +19,19 @@ const podPort = Promise.race([
 async function sendMessage(message) {
     return podPort.then((pod) => {
         message.type = "manual";
-        pod.postMessage(message);
         return new Promise((resolve, reject) => {
-            podPort.onmessage = (event) => {
+            pod.onmessage = (event) => {
                 if (event.error) {
                     reject(event.error);
                 }
-                console.log(`Read value: ${event}`);
+                if (typeof event.data != "string") {
+                    // Ignore internal native messaging
+                    return;
+                }
+                console.log(`Read value: ${event.data}`);
                 resolve(event.data);
             };
+            pod.postMessage(message);
         });
     });
 }
@@ -62,9 +65,6 @@ function updatePodTitle(title) {
             setTitle: title,
         },
     });
-}
-function triggerPodAction(event) {
-
 }
 
 function onPodAction(action, callback) {
