@@ -274,7 +274,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                     <div className="explore-data-btn-area">
                         <button
                             className="explore-data-btn"
-                            onClick={() => onOpenExploration(company.name)}
+                            onClick={() => onOpenExploration(company.ppid)}
                         >
                             {i18n.t("companyDetailsScreen:button.exploreData")}
                         </button>

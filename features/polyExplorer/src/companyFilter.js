@@ -55,7 +55,7 @@ const extractValue = (company, field) =>
 
 export function extractFilters(companies) {
     const filters = emptyFilters();
-    for (let company of companies)
+    for (let company of Object.values(companies))
         for (let field of fields(filters))
             filters[field].add(extractValue(company, field));
     return filters;
@@ -140,7 +140,7 @@ const matches = (filters, company) =>
     });
 
 export const applyFilters = (filters, companies) =>
-    companies.filter((company) => matches(filters, company));
+    Object.values(companies).filter((company) => matches(filters, company));
 
 export const empty = (filters) =>
     !Object.values(filters).some((values) => ensureSet(values).size);

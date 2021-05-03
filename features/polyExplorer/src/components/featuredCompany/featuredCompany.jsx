@@ -49,7 +49,7 @@ const FeaturedCompany = ({
                     max={maxValues.dataTypes}
                     average={averageValues.dataTypes}
                     onOpenDetails={() =>
-                        onOpenDataExplorationSection("dataTypes", company.name)
+                        onOpenDataExplorationSection("dataTypes", company.ppid)
                     }
                 />
                 <DataSharingSection
@@ -58,7 +58,7 @@ const FeaturedCompany = ({
                     max={maxValues.purposes}
                     average={averageValues.purposes}
                     onOpenDetails={() =>
-                        onOpenDataExplorationSection("purposes", company.name)
+                        onOpenDataExplorationSection("purposes", company.ppid)
                     }
                 />
                 <DataSharingSection
@@ -67,7 +67,7 @@ const FeaturedCompany = ({
                     max={maxValues.companies}
                     average={averageValues.companies}
                     onOpenDetails={() =>
-                        onOpenDataExplorationSection("companies", company.name)
+                        onOpenDataExplorationSection("companies", company.ppid)
                     }
                 />
                 <DataSharingSection
@@ -82,7 +82,7 @@ const FeaturedCompany = ({
                     onOpenDetails={() =>
                         onOpenDataExplorationSection(
                             "jurisdictions",
-                            company.name
+                            company.ppid
                         )
                     }
                 />

@@ -118,15 +118,11 @@ const PolyExplorer = () => {
         ])
     );
 
-    const handleActiveScreenChange = (screen, companyName) => {
+    const handleActiveScreenChange = (screen, ppid) => {
         if (screen === "main") backStack.length = 0;
         else backStack.push(activeScreen);
         setActiveScreen(screen);
-        if (companyName)
-            //use ppid here
-            setSelectedCompany(
-                companies.find((company) => companyName === company.name)
-            );
+        if (ppid) setSelectedCompany(ppid);
     };
 
     const handleExplorationInfoScreen = (
@@ -228,7 +224,7 @@ const PolyExplorer = () => {
         ),
         dataExploration: (
             <DataExplorationScreen
-                company={selectedCompany}
+                company={companies[selectedCompany]}
                 startSection={dataExploringSection}
                 startIndex={activeExplorationIndex}
                 openMain={handleBack}
@@ -276,11 +272,8 @@ const PolyExplorer = () => {
                     )
                 }
                 maxCompanies={featuredCompanyMaxValues.companies}
-                dataRecipients={selectedCompany?.dataRecipients?.map((name) =>
-                    companies.find(
-                        (company) =>
-                            company.name.toLowerCase() === name.toLowerCase()
-                    )
+                dataRecipients={companies[selectedCompany]?.dataRecipients?.map(
+                    (ppid) => companies[ppid]
                 )}
                 onOpenRegionInfo={(activeIndex) =>
                     handleExplorationInfoScreen(
@@ -296,12 +289,12 @@ const PolyExplorer = () => {
         ),
         companyDetails: (
             <CompanyDetailsScreen
-                company={selectedCompany}
+                company={companies[selectedCompany]}
                 onOpenRegionInfo={() =>
                     handleActiveScreenChange("dataRegionInfo")
                 }
-                onOpenExploration={(companyName) =>
-                    handleActiveScreenChange("dataExploration", companyName)
+                onOpenExploration={(ppid) =>
+                    handleActiveScreenChange("dataExploration", ppid)
                 }
             />
         ),
@@ -316,9 +309,9 @@ const PolyExplorer = () => {
         featuredCompanyInfo: <FeaturedCompanyInfoScreen onClose={handleBack} />,
         companySearch: (
             <CompanySearchScreen
-                companies={companies}
-                onOpenDetails={(companyName) =>
-                    handleActiveScreenChange("companyDetails", companyName)
+                companies={Object.values(companies)}
+                onOpenDetails={(ppid) =>
+                    handleActiveScreenChange("companyDetails", ppid)
                 }
             />
         ),
@@ -328,13 +321,13 @@ const PolyExplorer = () => {
         explorationCategoryInfo: (
             <CategoryInfoScreen
                 category={activeCategory}
-                company={selectedCompany}
+                company={companies[selectedCompany]}
                 onClose={handleBack}
             />
         ),
         explorationCorrelationInfo: (
             <CorrelationInfoScreen
-                company={selectedCompany}
+                company={companies[selectedCompany]}
                 onClose={handleBack}
             />
         ),

@@ -64,7 +64,7 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                             {featuredComanies.map((company, index) => (
                                 <button
                                     key={index}
-                                    onClick={() => onOpenDetails(company.name)}
+                                    onClick={() => onOpenDetails(company.ppid)}
                                 >
                                     {company.name}
                                 </button>
@@ -91,7 +91,7 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                                                 <button
                                                     onClick={() =>
                                                         onOpenDetails(
-                                                            company.name
+                                                            company.ppid
                                                         )
                                                     }
                                                     key={index}
@@ -108,7 +108,7 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                                 {shownCompanies.map((company, index) => (
                                     <button
                                         onClick={() =>
-                                            onOpenDetails(company.name)
+                                            onOpenDetails(company.ppid)
                                         }
                                         key={index}
                                     >

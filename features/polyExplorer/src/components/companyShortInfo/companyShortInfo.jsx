@@ -5,7 +5,7 @@ import "./companyShortInfo.css";
 const CompanyShortInfo = ({ company, onOpenDetails = () => {} }) => {
     return (
         <button
-            onClick={() => onOpenDetails(company.name)}
+            onClick={() => onOpenDetails(company.ppid)}
             className="company-short-info"
         >
             {company.featured ? (
