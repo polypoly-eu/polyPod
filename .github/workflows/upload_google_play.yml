@@ -56,12 +56,13 @@ jobs:
         run: |
           echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
           echo "##[set-output name=sha_short;]$(echo ${GITHUB_SHA::7})"
-      - uses: r0adkll/upload-google-play@9745ef904e395471bca5696056a6ce8a60d18cf8
+#      - uses: r0adkll/upload-google-play@9745ef904e395471bca5696056a6ce8a60d18cf8
+      - uses: tstec-polypoly/upload-google-play@master
         with:
           serviceAccountJsonPlainText: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
           packageName: coop.polypoly.polypod
           releaseName: ${{ env.VERSION_CODE }} (${{ env.VERSION_NAME }}) - ${{ steps.vars.outputs.branch }}@${{ steps.vars.outputs.sha_short }}
           releaseFiles: ./android/app/build/outputs/apk/release/app-release.apk
-          track: internalsharing
+          track: internal
           # whatsNewDirectory: distribution/whatsnew
           # mappingFile:
