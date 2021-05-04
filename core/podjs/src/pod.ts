@@ -9,15 +9,14 @@ class LocalStoragePolyIn implements PolyIn {
     private store = JSON.parse(localStorage.getItem(LocalStoragePolyIn.storageKey) || "[]");
 
     async select(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
+        if (["subject", "predicate", "object"].some((key) => key in matcher))
+            throw "Not implemented: select with non-empty matcher";
         return this.store;
     }
 
     async add(...quads: RDF.Quad[]): Promise<void> {
         this.store.push(...quads);
-        localStorage.setItem(
-            LocalStoragePolyIn.storageKey,
-            JSON.stringify(this.store)
-        );
+        localStorage.setItem(LocalStoragePolyIn.storageKey, JSON.stringify(this.store));
     }
 }
 
