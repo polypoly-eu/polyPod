@@ -9,7 +9,6 @@
         "core/fetch-spec",
         "core/orodruin",
         "core/podigree",
-        "core/podjs",
         "core/poly-api",
         "core/port-authority",
         "core/postoffice",
@@ -21,6 +20,7 @@
         "features/polyExplorer",
         "features/polyPinion",
         "features/polyPreview",
-        "features/test"
+        "features/test",
+        "podjs"
     ]
 }
