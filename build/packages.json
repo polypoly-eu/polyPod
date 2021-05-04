@@ -9,6 +9,7 @@
         "core/fetch-spec",
         "core/orodruin",
         "core/podigree",
+        "core/podjs",
         "core/poly-api",
         "core/port-authority",
         "core/postoffice",
