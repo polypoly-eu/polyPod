@@ -184,10 +184,17 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 "FeaturesPathHandler, I'm supposed to handle path: '{}'",
                 path
             )
-            if (path == "pod.js") {
-                logger.debug("pod.js requested - returning container/pod.js")
+            val podApiFile = "pod.js"
+            if (path == podApiFile) {
+                val assetPath = "container/pod.js"
+                logger.debug("$podApiFile requested - returning $assetPath")
+                if (featureFile.getEntry(podApiFile) != null) {
+                    logger.warn(
+                        "Feature contains $podApiFile - ignoring in favour of $assetPath"
+                    )
+                }
                 return WebViewAssetLoader.AssetsPathHandler(context)
-                    .handle("container/pod.js")
+                    .handle(assetPath)
             }
 
             val entry = featureFile.getEntry(path)
