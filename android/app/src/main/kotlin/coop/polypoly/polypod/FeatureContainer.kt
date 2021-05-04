@@ -103,7 +103,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler(
                 "/features/${feature.name}/",
-                FeaturesPathHandler(feature.content)
+                FeaturesPathHandler(context, feature.content)
             )
             .addPathHandler("/", PodPathHandler(context))
             .build()
@@ -163,10 +163,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             WebViewAssetLoader.AssetsPathHandler(context)
 
         override fun handle(path: String): WebResourceResponse? {
-            val finalPath = when (path) {
-                "pod.js" -> "container/pod.js"
-                else -> path.replaceFirst(Regex("^assets/"), "")
-            }
+            val finalPath = path.replaceFirst(Regex("^assets/"), "")
             val response = assetsPathHandler.handle(finalPath)
             logger.debug(
                 "PodPathHandler, I'm supposed to handle path: '{}', finalPath: '{}', handling: '{}'",
@@ -178,13 +175,21 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    private class FeaturesPathHandler(val featureFile: ZipFile) :
-        WebViewAssetLoader.PathHandler {
+    private class FeaturesPathHandler(
+        private val context: Context,
+        private val featureFile: ZipFile
+    ) : WebViewAssetLoader.PathHandler {
         override fun handle(path: String): WebResourceResponse? {
             logger.debug(
                 "FeaturesPathHandler, I'm supposed to handle path: '{}'",
                 path
             )
+            if (path == "pod.js") {
+                logger.debug("pod.js requested - returning container/pod.js")
+                return WebViewAssetLoader.AssetsPathHandler(context)
+                    .handle("container/pod.js")
+            }
+
             val entry = featureFile.getEntry(path)
             if (entry == null) {
                 logger.debug(
