@@ -12,14 +12,16 @@
 .featured-company-card {
     height: 100%;
     padding: 24px 0 52px 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
+}
+
+.featured-company-holder .swiper-slide {
+    display: flex;
 }
 
 .swiper-pagination-bullets {
     bottom: 0 !important;
     padding: 8px 0 20px 0;
-    background: linear-gradient(#0f193800 0%, #0f1938 40%);
+    background-color: #0f1938;
     pointer-events: none;
 }
 

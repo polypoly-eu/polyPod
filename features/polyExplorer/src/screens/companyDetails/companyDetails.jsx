@@ -3,11 +3,11 @@ import i18n from "../../i18n.js";
 import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
+import Scrollable from "../../components/scrollable/scrollable.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
 
 const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
-    const [scrolledToBottom, setScrolledToBottom] = useState(false);
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
 
@@ -166,109 +166,93 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         },
     ];
 
-    const handleInfoTextScrollBottom = (e) => {
-        const reachedBottom =
-            e.target.scrollHeight - e.target.scrollTop - 2 <=
-            e.target.clientHeight;
-        if (reachedBottom) {
-            setScrolledToBottom(true);
-        } else setScrolledToBottom(false);
-    };
-
     // TODO: Use the Screen component
     return (
         <div className="explorer-container">
             <div className="top-shadow"></div>
 
             <div className="screen-content company-details-screen">
-                <div
-                    className="scroll-container"
-                    onScroll={(e) => handleInfoTextScrollBottom(e)}
-                >
-                    <div className="company-short-info-container">
-                        <CompanyShortInfo company={company} />
-                    </div>
-                    <div className="tab-button-container">
-                        {company.featured
-                            ? featuredTabContent.map((tab, index) => (
-                                  <button
-                                      key={index}
-                                      className={
-                                          initialTab === index
-                                              ? "tab-button active"
-                                              : "tab-button"
-                                      }
-                                      onClick={() => swiper.slideTo(index)}
-                                  >
-                                      {tabTranslation[tab.tabName]}
-                                  </button>
-                              ))
-                            : tabContent.map((tab, index) => (
-                                  <button
-                                      key={index}
-                                      className={
-                                          initialTab === index
-                                              ? "tab-button active"
-                                              : "tab-button"
-                                      }
-                                      onClick={() => swiper.slideTo(index)}
-                                  >
-                                      {tabTranslation[tab.tabName]}
-                                  </button>
-                              ))}
-                    </div>
-                    <div className="tab-content-container">
-                        <Swiper
-                            onSwiper={setSwiper}
-                            spaceBetween={1}
-                            slidesPerView={1}
-                            initialSlide={initialTab}
-                            onSlideChange={(swiper) =>
-                                setInitialTab(swiper.activeIndex)
-                            }
-                        >
+                <Scrollable>
+                    <div className="scroll-container">
+                        <div className="company-short-info-container">
+                            <CompanyShortInfo company={company} />
+                        </div>
+                        <div className="tab-button-container">
                             {company.featured
                                 ? featuredTabContent.map((tab, index) => (
-                                      <SwiperSlide key={index}>
-                                          {tab.content}
-                                      </SwiperSlide>
+                                      <button
+                                          key={index}
+                                          className={
+                                              initialTab === index
+                                                  ? "tab-button active"
+                                                  : "tab-button"
+                                          }
+                                          onClick={() => swiper.slideTo(index)}
+                                      >
+                                          {tabTranslation[tab.tabName]}
+                                      </button>
                                   ))
                                 : tabContent.map((tab, index) => (
-                                      <SwiperSlide key={index}>
-                                          {tab.content}
-                                      </SwiperSlide>
+                                      <button
+                                          key={index}
+                                          className={
+                                              initialTab === index
+                                                  ? "tab-button active"
+                                                  : "tab-button"
+                                          }
+                                          onClick={() => swiper.slideTo(index)}
+                                      >
+                                          {tabTranslation[tab.tabName]}
+                                      </button>
                                   ))}
-                        </Swiper>
-                    </div>
-                    <p
-                        className="company-details-text"
-                        dangerouslySetInnerHTML={{
-                            __html:
-                                (
-                                    (company.description?.value || {})[
-                                        i18n.language
-                                    ] || ""
-                                ).replace("\n", "<br/><br/>") ||
-                                i18n.t(
-                                    "companyDetailsScreen:description.fallback"
-                                ),
-                        }}
-                    ></p>
+                        </div>
+                        <div className="tab-content-container">
+                            <Swiper
+                                onSwiper={setSwiper}
+                                spaceBetween={1}
+                                slidesPerView={1}
+                                initialSlide={initialTab}
+                                onSlideChange={(swiper) =>
+                                    setInitialTab(swiper.activeIndex)
+                                }
+                            >
+                                {company.featured
+                                    ? featuredTabContent.map((tab, index) => (
+                                          <SwiperSlide key={index}>
+                                              {tab.content}
+                                          </SwiperSlide>
+                                      ))
+                                    : tabContent.map((tab, index) => (
+                                          <SwiperSlide key={index}>
+                                              {tab.content}
+                                          </SwiperSlide>
+                                      ))}
+                            </Swiper>
+                        </div>
 
-                    {company.description?.source ? (
-                        <p className="company-details-source">
-                            {i18n.t("companyDetailsScreen:source")}:{" "}
-                            {company.description.source}
-                        </p>
-                    ) : null}
-                </div>
-                <div
-                    className={
-                        scrolledToBottom
-                            ? "gradient-box"
-                            : "gradient-box gradient"
-                    }
-                ></div>
+                        <p
+                            className="company-details-text"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    (
+                                        (company.description?.value || {})[
+                                            i18n.language
+                                        ] || ""
+                                    ).replace("\n", "<br/><br/>") ||
+                                    i18n.t(
+                                        "companyDetailsScreen:description.fallback"
+                                    ),
+                            }}
+                        ></p>
+
+                        {company.description?.source ? (
+                            <p className="company-details-source">
+                                {i18n.t("companyDetailsScreen:source")}:{" "}
+                                {company.description.source}
+                            </p>
+                        ) : null}
+                    </div>
+                </Scrollable>
 
                 {company.featured ? (
                     <div className="explore-data-btn-area">

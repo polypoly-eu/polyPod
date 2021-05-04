@@ -1,0 +1,27 @@
+.scrolling-area {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex: 1 1 auto;
+}
+
+.scrolling-area .gradient-area {
+    position: absolute;
+    bottom: 63px;
+}
+
+.scrolling-area .gradient-area .gradient {
+    position: fixed;
+    right: 0;
+    left: 0;
+    height: 65px;
+    pointer-events: none;
+    background: linear-gradient(#0f193800 0%, #0f1938);
+    z-index: 2001;
+}
+
+.scrolling-area::after {
+    content: "";
+    display: block;
+    height: 30px;
+}

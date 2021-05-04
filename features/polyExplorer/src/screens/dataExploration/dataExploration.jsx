@@ -516,9 +516,7 @@ const DataExplorationScreen = ({
     useEffect(() => {
         if (!swiper) return;
 
-        const scrollableElements = document.querySelectorAll(
-            ".purpose-content .bars, .company-industry-list"
-        );
+        const scrollableElements = document.querySelectorAll(".scrolling-area");
         for (let element of scrollableElements)
             makeSwiperContentScrollable(element);
 
