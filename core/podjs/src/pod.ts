@@ -6,7 +6,9 @@ import * as RDF from "rdf-js";
 
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
-    private store = JSON.parse(localStorage.getItem(LocalStoragePolyIn.storageKey) || "[]");
+    private store = JSON.parse(
+        localStorage.getItem(LocalStoragePolyIn.storageKey) || "[]"
+    );
 
     async select(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
         if (["subject", "predicate", "object"].some((key) => key in matcher))
@@ -16,7 +18,10 @@ class LocalStoragePolyIn implements PolyIn {
 
     async add(...quads: RDF.Quad[]): Promise<void> {
         this.store.push(...quads);
-        localStorage.setItem(LocalStoragePolyIn.storageKey, JSON.stringify(this.store));
+        localStorage.setItem(
+            LocalStoragePolyIn.storageKey,
+            JSON.stringify(this.store)
+        );
     }
 }
 
@@ -28,7 +33,10 @@ class ThrowingPolyOut implements PolyOut {
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
-    readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
+    readFile(
+        path: string,
+        options?: EncodingOptions
+    ): Promise<string | Uint8Array> {
         throw "Not implemented: readFile";
     }
 
@@ -40,7 +48,11 @@ class ThrowingPolyOut implements PolyOut {
         throw "Not implemented: stat";
     }
 
-    writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+    writeFile(
+        path: string,
+        content: string,
+        options: EncodingOptions
+    ): Promise<void> {
         throw "Not implemented: writeFile";
     }
 }
