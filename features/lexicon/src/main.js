@@ -1,10 +1,11 @@
-import App from './App.svelte';
+import Lexicon from "./Lexicon.svelte";
+import lexiconData from "./data/lexicon.json";
 
-const app = new App({
-	target: document.body,
-	props: {
-		name: 'world'
-	}
+const lexicon = new Lexicon({
+    target: document.body,
+    props: {
+        data: lexiconData,
+    },
 });
 
-export default app;
+export default lexicon;
