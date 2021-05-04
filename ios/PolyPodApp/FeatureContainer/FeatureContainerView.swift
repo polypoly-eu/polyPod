@@ -68,11 +68,6 @@ class FeatureWebView: WKWebView {
         )
         installUserScript(contentController, "podNav", forMainFrameOnly: false)
         
-        // The original idea was that the feature explicitly loads pod.js, but
-        // in order to still support the polyfill-based development approach,
-        // we explicitly inject it, at least for now.
-        installUserScript(contentController, "pod", forMainFrameOnly: false)
-        
         installUserScript(
             contentController,
             "disableUserSelect",
