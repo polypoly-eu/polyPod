@@ -18,7 +18,7 @@ if (apiToken) {
                 const languageCode = translationData.lang.substring(0, 2);
                 lexicon[languageCode] = loadLanguage(groups);
             }
-            writeLexiconFile();
+            writeLexiconFile(lexicon);
         });
 } else {
     console.log(
@@ -53,7 +53,7 @@ function loadLanguage(groups) {
     return language;
 }
 
-function writeLexiconFile() {
+function writeLexiconFile(lexicon) {
     fs.writeFile(
         "src/data/lexicon.json",
         JSON.stringify(lexicon),
