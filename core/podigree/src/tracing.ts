@@ -6,7 +6,7 @@ import {
     nullInterceptor,
     intercept,
 } from "@polypoly-eu/aop-ts";
-import { PolyIn, PolyOut, Pod } from "@polypoly-eu/poly-api";
+import { PolyIn, PolyOut, PolyNav, Pod } from "@polypoly-eu/poly-api";
 import { DataFactory } from "rdf-js";
 
 export interface Logger {
@@ -53,14 +53,17 @@ export class TracingPod implements Pod {
     public readonly dataFactory: DataFactory;
     public readonly polyIn: PolyIn;
     public readonly polyOut: PolyOut;
+    public readonly polyNav: PolyNav;
 
     constructor(
         pod: Pod,
         interceptPolyIn: Interceptor<PolyIn> = nullInterceptor,
-        interceptPolyOut: Interceptor<PolyOut> = nullInterceptor
+        interceptPolyOut: Interceptor<PolyOut> = nullInterceptor,
+        interceptPolyNav: Interceptor<PolyNav> = nullInterceptor
     ) {
         this.dataFactory = pod.dataFactory;
         this.polyIn = intercept(pod.polyIn, interceptPolyIn);
         this.polyOut = intercept(pod.polyOut, interceptPolyOut);
+        this.polyNav = intercept(pod.polyNav, interceptPolyNav);
     }
 }

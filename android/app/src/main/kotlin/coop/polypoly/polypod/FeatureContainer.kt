@@ -1,14 +1,11 @@
 package coop.polypoly.polypod
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
 import android.webkit.*
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -17,6 +14,7 @@ import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.PolyIn
+import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import eu.polypoly.pod.android.polyOut.PolyOut
 import java.util.zip.ZipFile
@@ -31,12 +29,13 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
-    private val api = PodApi(PolyOut(), PolyIn("data.nt", context.filesDir))
-    private val navApi: PodNavApi = PodNavApi(
-        webView = webView,
-        onActionsChanged = { navActionsChangedHandler(it) },
-        onTitleChanged = { navTitleChangedHandler(it) },
-        onOpenUrlRequested = ::handleOpenUrl
+    val api = PodApi(
+        PolyOut(),
+        PolyIn("data.nt", context.filesDir),
+        PolyNav(
+            webView = webView,
+            context = context
+        )
     )
 
     var feature: Feature? = null
@@ -46,37 +45,9 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             loadFeature(value)
         }
 
-    var navActionsChangedHandler: (List<String>) -> Unit = {}
-    var navTitleChangedHandler: (String) -> Unit = {}
-
-    private fun handleOpenUrl(target: String) {
-        val featureName = feature?.name ?: return
-        val url = feature?.findUrl(target)
-        if (url == null) {
-            val message = context.getString(
-                R.string.message_url_open_prevented, featureName, target
-            )
-            Toast.makeText(webView.context, message, Toast.LENGTH_LONG).show()
-            return
-        }
-
-        val message = context.getString(
-            R.string.message_url_open_requested, featureName, url
-        )
-        val confirmLabel = context.getString(R.string.button_url_open_confirm)
-        val rejectLabel = context.getString(R.string.button_url_open_reject)
-        AlertDialog.Builder(context)
-            .setMessage(message)
-            .setPositiveButton(confirmLabel) { _, _ ->
-                context.startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                )
-            }
-            .setNegativeButton(rejectLabel) { _, _ -> }
-            .show()
-    }
-
     init {
+        WebView.setWebContentsDebuggingEnabled(true)
+
         webView.layoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
@@ -95,10 +66,11 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     override fun getLifecycle(): Lifecycle = registry
 
-    fun triggerNavAction(name: String): Boolean = navApi.triggerAction(name)
+    fun triggerNavAction(name: String): Boolean = api.polyNav.triggerAction(name)
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
+        api.polyNav.feature = feature
 
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler(
@@ -219,55 +191,6 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 "woff2" -> "font/woff2"
                 else -> "text/plain"
             }
-        }
-    }
-
-    // The podNav API is currently experimental and not part of the formal
-    // feature API yet - as soon as we know what it needs to look like,
-    // that should change.
-    private class PodNavApi(
-        private val webView: WebView,
-        onActionsChanged: (List<String>) -> Unit,
-        onTitleChanged: (String) -> Unit,
-        onOpenUrlRequested: (String) -> Unit
-    ) {
-        private val apiJsObject = "podNav"
-        private val registeredActions = HashSet<String>()
-
-        init {
-            webView.addJavascriptInterface(object {
-                @JavascriptInterface
-                @Suppress("unused")
-                fun setActiveActions(actions: Array<String>) {
-                    registeredActions.clear()
-                    registeredActions.addAll(actions)
-                    onActionsChanged(registeredActions.toList())
-                }
-
-                @JavascriptInterface
-                @Suppress("unused")
-                fun setTitle(title: String) {
-                    onTitleChanged(title)
-                }
-
-                @JavascriptInterface
-                @Suppress("unused")
-                fun openUrl(target: String) {
-                    onOpenUrlRequested(target)
-                }
-            }, apiJsObject)
-        }
-
-        fun triggerAction(action: String): Boolean {
-            if (!registeredActions.contains(action))
-                return false
-            // We are making too many assumptions about the code loaded into
-            // the WebView here, it would be nicer if the container would
-            // expose the actions some other way.
-            val featureWindow =
-                "document.getElementsByTagName('iframe')[0].contentWindow"
-            webView.evaluateJavascript("$featureWindow.$apiJsObject.actions['$action']()") {}
-            return true
         }
     }
 }

@@ -132,11 +132,11 @@ open class FeatureFragment : Fragment() {
                 override fun handleOnBackPressed() = navigateBack()
             })
 
-        featureContainer.navTitleChangedHandler = {
+        featureContainer.api.polyNav.onTitleChanged = {
             activity?.runOnUiThread { updateAppBarTitle(view, it) }
         }
 
-        featureContainer.navActionsChangedHandler = {
+        featureContainer.api.polyNav.onActionsChanged = {
             activity?.runOnUiThread { updateAppBarActions(view, it) }
         }
     }

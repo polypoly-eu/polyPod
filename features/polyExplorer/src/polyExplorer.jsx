@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import i18n from "./i18n.js";
-import { pod, podNav } from "./fakePod.js";
+import { pod } from "./fakePod.js";
 import { emptyFilters, removeFilter } from "./companyFilter.js";
 
 import MainScreen from "./screens/main/main.jsx";
@@ -164,15 +164,15 @@ const PolyExplorer = () => {
     }
 
     function updatePodNavigation() {
-        podNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
-        podNav.actions = firstRun
+        pod.polyNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
+        pod.polyNav.actions = firstRun
             ? { info: () => {}, search: () => {} }
             : {
                   info: () => handleActiveScreenChange("info"),
                   search: () => handleActiveScreenChange("companySearch"),
                   back: handleBack,
               };
-        podNav.setActiveActions(
+        pod.polyNav.setActiveActions(
             backStack.length ? ["back"] : ["info", "search"]
         );
     }

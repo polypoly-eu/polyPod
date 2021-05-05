@@ -3,6 +3,7 @@ import {
     PolyLifecycle,
     PolyIn,
     PolyOut,
+    PolyNav,
     EncodingOptions,
     Stats,
     Matcher,
@@ -52,10 +53,17 @@ type PolyLifecycleEndpoint = ObjectEndpointSpec<{
     startFeature(id: string, background: boolean): ValueEndpointSpec<void>;
 }>;
 
+type PolyNavEndpoint = ObjectEndpointSpec<{
+    openUrl(url: string): ValueEndpointSpec<void>;
+    setActiveActions(actions: string[]): ValueEndpointSpec<void>;
+    setTitle(title: string): ValueEndpointSpec<void>;
+}>;
+
 type PodEndpoint = ObjectEndpointSpec<{
     polyIn(): PolyInEndpoint;
     polyOut(): PolyOutEndpoint;
     polyLifecycle(): PolyLifecycleEndpoint;
+    polyNav(): PolyNavEndpoint;
 }>;
 
 class FetchResponse implements Response {
@@ -187,6 +195,15 @@ export class RemoteClientPod implements Pod {
                 this.rpcClient.polyLifecycle().startFeature(id, background)(),
         };
     }
+
+    get polyNav(): PolyNav {
+        return {
+            openUrl: (url: string) => this.rpcClient.polyNav().openUrl(url)(),
+            setActiveActions: (actions: string[]) =>
+                this.rpcClient.polyNav().setActiveActions(actions)(),
+            setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
+        }
+    }
 }
 
 // TODO move to poly-api?
@@ -255,4 +272,9 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
 
         return new DummyPolyLifecycle();
     }
+
+    polyNav(): ServerOf<PolyNavEndpoint> {
+        return this.pod.polyNav;
+    }
+
 }
