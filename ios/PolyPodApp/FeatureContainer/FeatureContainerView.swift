@@ -68,9 +68,9 @@ class FeatureWebView: WKWebView {
         )
         installUserScript(contentController, "podNav", forMainFrameOnly: false)
         
-        // The original idea was that the feature explicitly loads pod.js, but
-        // in order to still support the polyfill-based development approach,
-        // we explicitly inject it, at least for now.
+        // Requesting /pod.js from the feature does not appear to work, so
+        // in order to not break iOS in the fix for 1.1.1 on Android, we still
+        // inject pod.js here.
         installUserScript(contentController, "pod", forMainFrameOnly: false)
         
         installUserScript(

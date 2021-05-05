@@ -40,12 +40,6 @@ function createFakeStorage() {
     };
 }
 
-// On Android, we currently expose the pod object in the container, but haven't
-// found a way yet to inject it into the feature with the right timing,
-// i.e. before any feature code is executed.
-if (navigator.userAgent.toLowerCase().includes("android"))
-    window.pod = window.parent.pod;
-
 export const pod =
     window.pod ||
     (() => {
