@@ -2,25 +2,29 @@ const Prismic = require("@prismicio/client");
 const fs = require("fs");
 
 const apiEndpoint = "https://polypoly-coop.cdn.prismic.io/api/v2";
-const apiToken =
-    "MC5ZSkVmQ2hBQUFDRUFXQVpZ.77-977-977-9X--_ve-_vTzvv73vv70K77-9BgpieU3vv73vv70N77-9UO-_vQvvv73vv73vv73vv70P77-977-9K--_vQ";
+const apiToken = null; //enter valid token here
 
-const client = Prismic.client(apiEndpoint, { accessToken: apiToken });
-const lexicon = {};
+if (apiToken) {
+    const client = Prismic.client(apiEndpoint, { accessToken: apiToken });
+    const lexicon = {};
 
-client
-    .query(Prismic.Predicates.at("document.type", "lexicon_page"), {
-        lang: "*",
-    })
-    .then(function (response) {
-        for (let translationData of response.results) {
-            const groups = translationData.data.body;
-            const languageCode = translationData.lang.substring(0, 2);
-            lexicon[languageCode] = loadLanguage(groups);
-        }
-        writeLexiconFile();
-    });
-
+    client
+        .query(Prismic.Predicates.at("document.type", "lexicon_page"), {
+            lang: "*",
+        })
+        .then(function (response) {
+            for (let translationData of response.results) {
+                const groups = translationData.data.body;
+                const languageCode = translationData.lang.substring(0, 2);
+                lexicon[languageCode] = loadLanguage(groups);
+            }
+            writeLexiconFile();
+        });
+} else {
+    console.log(
+        "Warning: This script can only be run by polypoly staff! You can use the lexicon with the most recent data that's already there."
+    );
+}
 function loadTermExplanation(term) {
     let explanation = "";
     for (let textPart of term) {
