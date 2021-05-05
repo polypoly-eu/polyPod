@@ -2,7 +2,7 @@
     export let data;
 
     //this should depend on language setting
-    const groups = data.de
+    const groups = data.de;
 </script>
 
 <div class="list">

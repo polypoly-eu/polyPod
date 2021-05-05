@@ -1,5 +1,5 @@
 <script>
-    import List from "./screens/List.svelte"
+    import List from "./screens/List.svelte";
 	export let data;
 </script>
 
