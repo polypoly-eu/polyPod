@@ -1,10 +1,19 @@
 <script>
-    import List from "./screens/List.svelte";
-	export let data;
+	export let lexicon;
 </script>
 
 <main>
-    <List data={data}/>
+    <div class="lexicon">
+        <div class="list">
+            {#each lexicon.groups as group}
+                <h1>{group}</h1>
+                {#each lexicon.groupEntries(group) as entry}
+                    <h2>{entry}</h2>
+                    {@html lexicon.description(entry)}
+                {/each}
+            {/each}
+        </div>
+    </div>
 </main>
 
 <style>
