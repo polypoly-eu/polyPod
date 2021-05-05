@@ -8,7 +8,6 @@ const apiToken =
 const client = Prismic.client(apiEndpoint, { accessToken: apiToken });
 const lexicon = {};
 
-//german translation
 client
     .query(Prismic.Predicates.at("document.type", "lexicon_page"), {
         lang: "*",
@@ -45,10 +44,3 @@ client
             }
         );
     });
-
-/*
-client
-    .query(Prismic.Predicates.at("document.id", "YFHaTREAACEARMPn"))
-    .then(function (response) {
-        console.log(response);
-    });*/
