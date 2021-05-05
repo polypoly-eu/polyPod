@@ -99,19 +99,7 @@ open class PodApi(
         logger.debug("dispatch() -> polyNav.setActiveActions")
         return ValueFactory.newNil()
     }
-
-    fun triggerAction(action: String): Boolean {
-//        if (!registeredActions.contains(action))
-//            return false
-//        // We are making too many assumptions about the code loaded into
-//        // the WebView here, it would be nicer if the container would
-//        // expose the actions some other way.
-//        val featureWindow =
-//            "document.getElementsByTagName('iframe')[0].contentWindow"
-//        webView.evaluateJavascript("$featureWindow.$apiJsObject.actions['$action']()") {}
-        return true
-    }
-
+    
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {
         logger.debug("decodePolyOutFetchCallArgs(), args: '{}', args.type: '{}'", args, args.valueType)
         val argsMap = (args as MapValue).map()
