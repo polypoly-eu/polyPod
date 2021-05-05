@@ -10,6 +10,10 @@ export default class Lexicon {
         return Object.keys(this._data);
     }
 
+    get language() {
+        return this._language;
+    }
+
     group(aGroup) {
         return this._data[aGroup];
     }
@@ -26,13 +30,31 @@ export default class Lexicon {
         let results = [];
         const acceptedDistance = 3;
         for (let group of this.groups) {
-            results = [
-                ...results,
-                this.groupEntries(group).filter(
-                    (entry) =>
-                        levenshtein(entry, searchString) <= acceptedDistance
-                ),
-            ];
+            results =
+                searchString.length > 3
+                    ? [
+                          ...results.concat(
+                              this.groupEntries(group).filter(
+                                  (entry) =>
+                                      levenshtein(
+                                          entry.toLowerCase(),
+                                          searchString.toLowerCase()
+                                      ) <= acceptedDistance ||
+                                      entry
+                                          .toLowerCase()
+                                          .includes(searchString.toLowerCase())
+                              )
+                          ),
+                      ]
+                    : [
+                          ...results.concat(
+                              this.groupEntries(group).filter((entry) =>
+                                  entry
+                                      .toLowerCase()
+                                      .includes(searchString.toLowerCase())
+                              )
+                          ),
+                      ];
         }
         return results;
     }
