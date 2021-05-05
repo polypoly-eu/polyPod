@@ -109,6 +109,5 @@ class FeatureStorage {
             ofType: resourceType,
             toDestinationUrl: destinationUrl
         )
-
     }
 }
