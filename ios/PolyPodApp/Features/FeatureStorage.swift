@@ -71,7 +71,7 @@ class FeatureStorage {
                     try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     try FileManager.default.copyBundleFile(forResource: "initIframe", ofType: "js", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
-                    try FileManager.default.copyBundleFile(forResource: "pod", ofType: "js", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
+                    try importPodJs(toFeature: featureName, atUrl: featuresFileUrl)
                     print("Imported feature: ", featureName)
                 } else {
                     print("Feature for import not found: ", featureName)
@@ -80,5 +80,34 @@ class FeatureStorage {
                 print(error.localizedDescription);
             }
         }
+    }
+    
+    private func importPodJs(toFeature featureName: String, atUrl url: URL) throws {
+        let fileManager = FileManager.default
+        let resourceName = "pod"
+        let resourceType = "js"
+        let destinationUrl = featuresFileUrl.appendingPathComponent(featureName)
+        
+        if fileManager.hasBundleFile(
+            forResource: resourceName,
+            ofType: resourceType,
+            atDestinationUrl: destinationUrl
+        ) {
+            print("""
+                Ignoring \(resourceName).\(resourceType) provided by \
+                \(featureName)
+                """)
+            try fileManager.removeBundleFile(
+                forResource: resourceName,
+                ofType: resourceType,
+                atDestinationUrl: destinationUrl
+            )
+        }
+        
+        try fileManager.copyBundleFile(
+            forResource: resourceName,
+            ofType: resourceType,
+            toDestinationUrl: destinationUrl
+        )
     }
 }
