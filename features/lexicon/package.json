@@ -7,7 +7,8 @@
     "lint": "npm run eslint",
     "build": "rollup -c",
     "watch": "rollup -c -w",
-    "start": "sirv public --no-clear"
+    "start": "sirv public --no-clear",
+    "update-lexicon-data": "node ./scripts/update-lexicon-data.js"
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config": "file:../../eslint-config",
