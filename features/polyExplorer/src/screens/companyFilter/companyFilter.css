@@ -56,7 +56,7 @@
 
 .company-filter-screen .filter-section button.active {
     background: #cbd5e0;
-    color: #0f1938;
+    color: var(--color-text-dark);
 }
 
 .company-filter-screen .button-area {
@@ -69,7 +69,7 @@
     left: 0;
     box-sizing: border-box;
     height: 107px;
-    background: #0f1938;
+    background: var(--color-background-dark);
 }
 
 .company-filter-screen .button-area::before {
@@ -87,10 +87,10 @@
     width: 300px;
     height: 48px;
     border-radius: 4px;
-    color: #0f1938;
+    color: var(--color-text-dark);
     font-family: "Jost Medium";
     font-size: 18px;
-    background-color: #f7fafc;
+    background-color: var(--color-background-light);
 }
 
 .company-filter-screen .apply-button.disabled {

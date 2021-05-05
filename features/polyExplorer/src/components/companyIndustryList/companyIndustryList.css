@@ -12,7 +12,7 @@
 
 .company-industry-list-group > h1 {
     margin-bottom: 0;
-    color: #a9b6c6;
+    color: var(--color-medium);
     font-size: 16px;
     font-family: "Jost Medium";
     font-weight: 500;

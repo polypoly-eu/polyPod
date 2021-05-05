@@ -1,5 +1,5 @@
 .base-info {
-    max-width: 412px;
+    max-width: var(--max-width);
     width: 100%;
     margin: 0 auto;
     overflow: hidden scroll;
@@ -7,8 +7,8 @@
 }
 
 .base-info * {
-    color: #0f1938;
-    line-height: 120%;
+    color: var(--color-text-dark);
+    line-height: var(--line-height);
 }
 
 .base-info h1,
@@ -43,7 +43,7 @@
     height: 48px;
     margin: 30px 0;
     border-radius: 4px;
-    background: #0f1938;
+    background: var(--color-background-dark);
     color: white;
     font-size: 18px;
     font-family: "Jost Medium";
@@ -54,7 +54,7 @@
 .base-info img {
     box-sizing: border-box;
     width: 100%;
-    max-width: 412px;
+    max-width: var(--max-width);
     padding: 4px 0;
 }
 

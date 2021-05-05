@@ -12,7 +12,7 @@
     margin: 84px auto;
     width: 300px;
     height: 400px;
-    background-color: #f7fafc;
+    background-color: var(--color-background-light);
     border-radius: 8px;
 }
 
@@ -25,7 +25,7 @@
     height: 42px;
     margin: 24px auto;
     border-radius: 8px;
-    background-color: #0f1938;
+    background-color: var(--color-background-dark);
     color: #fff;
     font-size: 18px;
 }

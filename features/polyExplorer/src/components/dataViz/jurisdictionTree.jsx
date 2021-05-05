@@ -37,19 +37,19 @@ const JurisdictionTree = ({ data }) => {
             .attr("transform", (d) => `translate(${d.x0},${d.y0})`);
 
         const backgroundColors = {
-            "EU-GDPR": "#60E6DE",
-            "Five-Eyes": "#EC453D",
-            China: "#C5271E",
-            Russia: "#FE8988",
-            Other: "#A9B6C6",
+            "EU-GDPR": "var(--jurisdiction-EU-GDPR)",
+            "Five-Eyes": "var(--jurisdiction-five-eyes)",
+            China: "var(--jurisdiction-china)",
+            Russia: "var(--jurisdiction-russia)",
+            Other: "var(--jurisdiction-others)",
         };
 
         const fontColors = {
-            "EU-GDPR": "#0F1938",
+            "EU-GDPR": "var(--color-text-dark)",
             "Five-Eyes": "white",
             China: "white",
             Russia: "white",
-            Other: "#0F1938",
+            Other: "var(--color-text-dark)",
         };
 
         nodes

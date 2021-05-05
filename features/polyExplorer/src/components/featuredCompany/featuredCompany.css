@@ -22,7 +22,7 @@
 .data-sharing-section,
 .data-sharing-legend {
     width: 85%;
-    max-width: 414px;
+    max-width: var(--max-width);
     margin: 0 auto;
 }
 
@@ -44,7 +44,7 @@
     border-left: none;
     border-right: none;
     line-height: 30px;
-    color: #a9b6c6;
+    color: var(--color-medium);
     font-size: 10px;
 }
 

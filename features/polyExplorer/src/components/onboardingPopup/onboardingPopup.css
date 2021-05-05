@@ -15,7 +15,7 @@
     max-height: 628px;
     border-radius: 8px;
     margin: 8px auto;
-    background: #f7fafc;
+    background: var(--color-background-light);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.543846);
 }
 
@@ -35,7 +35,7 @@
     text-align: center;
     font-weight: 600;
     font-size: 24px;
-    color: #0f1938;
+    color: var(--color-text-dark);
     vertical-align: bottom;
 }
 
@@ -45,8 +45,8 @@
     text-align: left;
     font-weight: 500;
     font-size: 16px;
-    line-height: 120%;
-    color: #0f1938;
+    line-height: var(--line-height);
+    color: var(--color-text-dark);
 }
 
 .onboarding-popup-content .fade-out {
@@ -66,7 +66,7 @@
 }
 
 .onboarding-popup-container .button-container a {
-    color: #0f1938;
+    color: var(--color-text-dark);
     text-decoration: underline;
 }
 
@@ -76,7 +76,7 @@
     height: 42px;
     margin: 10px auto 0 auto;
     border-radius: 4px;
-    background: #0f1938;
+    background: var(--color-background-dark);
     color: #fff;
     font-size: 18px;
 }
