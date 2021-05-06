@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config": "file:../../eslint-config",
+    "@polypoly-eu/podjs": "file:../../podjs",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@typescript-eslint/eslint-plugin": "^4.1.0",

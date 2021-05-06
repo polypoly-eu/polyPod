@@ -35,7 +35,10 @@ export default {
         copyWatch({
             targets: [
                 {
-                    src: ["src/static/*"],
+                    src: [
+                        "src/static/*",
+                        "node_modules/@polypoly-eu/podjs/dist/pod.js"
+                    ],
                     dest: "dist",
                 },
             ],
