@@ -18,25 +18,28 @@ import org.msgpack.value.Value
 open class PolyNav(
     private val webView: WebView,
     private val context: Context,
+    var cfg: PolyNavConfig? = null
 ) {
     private val registeredActions = HashSet<String>()
-    lateinit var  feature : Feature
-    lateinit var onActionsChanged : ( (List<String>) -> Unit )
-    lateinit var onTitleChanged: ( (String) -> Unit )
+    lateinit var feature : Feature
 
     open fun setActiveActions(actions: Array<String>) {
         registeredActions.clear()
         registeredActions.addAll(actions)
-        onActionsChanged(registeredActions.toList())
+        cfg?.onActionsChanged?.invoke(registeredActions.toList())
     }
 
     open fun setTitle(title: String) {
-        onTitleChanged(title)
+        cfg?.onTitleChanged?.invoke(title)
+    }
+
+    open fun setConfig(newCfg: PolyNavConfig) {
+        cfg = newCfg
     }
 
     open fun openUrl(target: String) {
-        val featureName = feature?.name ?: return
-        val url = feature?.findUrl(target)
+        val featureName = cfg?.feature?.name ?: return
+        val url = cfg?.feature?.findUrl(target)
         if (url == null) {
             val message = context.getString(
                 R.string.message_url_open_prevented, featureName, target

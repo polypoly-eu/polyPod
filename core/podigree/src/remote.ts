@@ -202,7 +202,7 @@ export class RemoteClientPod implements Pod {
             setActiveActions: (actions: string[]) =>
                 this.rpcClient.polyNav().setActiveActions(actions)(),
             setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
-        }
+        };
     }
 }
 
