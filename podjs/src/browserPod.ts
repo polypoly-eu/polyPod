@@ -65,14 +65,38 @@ class ThrowingPolyOut implements PolyOut {
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 class BrowserPolyNav implements PolyNav {
-    openUrl(url: string): Promise<void> {
-        throw new Error("Method not implemented.");
+    actions?: { [key: string]: () => void };
+    private keyUpListener: any = null;
+
+    async openUrl(url: string): Promise<void> {
+        console.log(`polyNav: Attempt to open URL: ${url}`);
     }
-    setActiveActions(actions: string[]): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async setActiveActions(actions: string[]): Promise<void> {
+        const actionKeys: any = {
+            Escape: "back",
+            s: "search",
+            i: "info",
+        };
+        if (this.keyUpListener)
+            window.removeEventListener("keyup", this.keyUpListener);
+        else {
+            const actionUsage = Object.entries(actionKeys)
+                .map((pair) => `[${pair.join(" = ")}]`)
+                .join(", ");
+            console.log(
+                `polyNav: Keyboard navigation available: ${actionUsage}`
+            );
+        }
+        this.keyUpListener = ({ key }: any) => {
+            const action = actionKeys[key];
+            if (actions.includes(action)) (this as any).actions?.[action]?.();
+        };
+        window.addEventListener("keyup", this.keyUpListener);
     }
-    setTitle(title: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async setTitle(title: string): Promise<void> {
+        document.title = title;
     }
 }
 
