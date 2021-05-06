@@ -1,9 +1,8 @@
 "use strict";
 
 // We used to provide a fake implementation of the pod API here, for development
-// purposes, but in the meantimeswitched to pod.js for this. Once pod.js
-// supports the navigation API, and once the migration code isn't necessary
-// anymore, we can get rid of this file.
+// purposes, but in the meantimeswitched to pod.js for this. Once the migration
+// code isn't necessary anymore, we can get rid of this file.
 export const pod = window.pod;
 
 // TODO: Migration code. Remove later and also disable localStorage in Android
