@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { compare, getIndexCharacter } from "../../company.js";
 
 import i18n from "../../i18n.js";
 import {
@@ -17,7 +16,7 @@ function groupCompanies(companies) {
     const sorted = companies.sort((a, b) => a.compareNames(b));
     const groups = {};
     sorted.forEach((company) => {
-        const key = company.firstNameChar.toUpperCase();
+        const key = company.nameIndexCharacter.toUpperCase();
         groups[key] = groups[key] || [];
         groups[key].push(company);
     });

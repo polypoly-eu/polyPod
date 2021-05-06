@@ -42,10 +42,11 @@ describe("company", function () {
         );
         assert(testCompany.description === testCompanyJSON.description);
         assert(
-            specialCharacters.test(testCompany.firstNameChar) &&
-                testCompany.firstNameChar.length == 1
+            specialCharacters.test(testCompany.nameIndexCharacter) &&
+                testCompany.nameIndexCharacter.length == 1
         );
     });
     it("Company: compareNames() works", function () {
         assert(testCompany.compareNames(testCompany2) < 0);
+    });
 });

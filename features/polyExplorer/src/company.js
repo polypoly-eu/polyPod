@@ -58,7 +58,7 @@ export class Company {
         return this._data.industryCategory;
     }
 
-    get firstNameChar() {
+    get nameIndexCharacter() {
         return withoutSpecialChars(this.name)[0];
     }
 
@@ -82,4 +82,4 @@ function getJurisdictionFromLocation(location, globalData) {
             )
         ]?.dataRegion || "Sonstige"
     );
-
+}
