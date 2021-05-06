@@ -25,6 +25,7 @@
   "dependencies": {
     "@polypoly-eu/customs": "file:../customs",
     "@polypoly-eu/podigree": "file:../podigree",
+    "@polypoly-eu/podjs": "file:../../podjs",
     "@polypoly-eu/poly-api": "file:../poly-api",
     "@polypoly-eu/port-authority": "file:../port-authority",
     "@rdfjs/dataset": "^1.0.1",
