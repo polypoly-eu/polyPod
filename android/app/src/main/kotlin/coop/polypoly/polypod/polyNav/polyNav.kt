@@ -4,11 +4,16 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.webkit.JavascriptInterface
+import android.util.Base64
+import android.webkit.WebMessage
 import android.webkit.WebView
 import android.widget.Toast
 import coop.polypoly.polypod.R
 import coop.polypoly.polypod.features.Feature
+import eu.polypoly.bubblewrap.Bubblewrap
+import eu.polypoly.bubblewrap.Codec
+import org.msgpack.core.MessagePack
+import org.msgpack.value.Value
 
 open class PolyNav(
     private val webView: WebView,
@@ -59,7 +64,23 @@ open class PolyNav(
     fun triggerAction(action: String): Boolean {
         if (!registeredActions.contains(action))
             return false
-        // TODO: Implement this
+
+        val packer = MessagePack.newDefaultBufferPacker()
+        packer.packInt(0)
+        var codec = Codec.id.map()
+        val encoded = Bubblewrap.encode<Map<String, Value>>(
+            mapOf<String, Value>(
+                Pair(
+                    "request",
+                    Codec.string.encode(action)
+                ), Pair("id", MessagePack.newDefaultUnpacker(
+                        packer.toMessageBuffer().array()).unpackValue()
+                    )
+            ), codec
+        )
+        val raw = Base64.encodeToString(encoded, Base64.NO_WRAP)
+
+        webView.postWebMessage(WebMessage(raw), Uri.parse("*"))
 
 //        // We are making too many assumptions about the code loaded into
 //        // the WebView here, it would be nicer if the container would

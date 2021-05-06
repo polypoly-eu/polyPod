@@ -276,5 +276,4 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
     polyNav(): ServerOf<PolyNavEndpoint> {
         return this.pod.polyNav;
     }
-
 }

@@ -1,5 +1,11 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
-import type { Matcher, Pod, PolyIn, PolyOut } from "@polypoly-eu/poly-api";
+import type {
+    Matcher,
+    Pod,
+    PolyIn,
+    PolyOut,
+    PolyNav,
+} from "@polypoly-eu/poly-api";
 import { EncodingOptions, Stats } from "@polypoly-eu/poly-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
@@ -58,8 +64,21 @@ class ThrowingPolyOut implements PolyOut {
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
+class BrowserPolyNav implements PolyNav {
+    openUrl(url: string): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
+    setActiveActions(actions: string[]): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
+    setTitle(title: string): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
+}
+
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new LocalStoragePolyIn();
     public readonly polyOut = new ThrowingPolyOut();
+    public readonly polyNav = new BrowserPolyNav();
 }

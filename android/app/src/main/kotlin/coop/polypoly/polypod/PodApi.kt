@@ -12,10 +12,7 @@ import coop.polypoly.polypod.polyIn.rdf.Quad
 import coop.polypoly.polypod.polyNav.PolyNav
 import eu.polypoly.pod.android.polyOut.FetchInit
 import eu.polypoly.pod.android.polyOut.PolyOut
-import org.msgpack.value.MapValue
-import org.msgpack.value.StringValue
-import org.msgpack.value.Value
-import org.msgpack.value.ValueFactory
+import org.msgpack.value.*
 
 open class PodApi(
     open val polyOut: PolyOut,
@@ -92,14 +89,17 @@ open class PodApi(
 
     private fun handlePolyNavSetTitle(args: List<Value>): Value {
         logger.debug("dispatch() -> polyNav.setTitle")
+        polyNav.setTitle((args[0].asStringValue().toString()))
         return ValueFactory.newNil()
     }
 
     private fun handlePolyNavSetActiveActions(args: List<Value>): Value {
         logger.debug("dispatch() -> polyNav.setActiveActions")
+        val argsList = args[0].asArrayValue().map { it.asStringValue().toString() }
+        polyNav.setActiveActions(argsList.toTypedArray())
         return ValueFactory.newNil()
     }
-    
+
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {
         logger.debug("decodePolyOutFetchCallArgs(), args: '{}', args.type: '{}'", args, args.valueType)
         val argsMap = (args as MapValue).map()
