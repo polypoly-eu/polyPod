@@ -27,3 +27,4 @@ function migrateAndroidStorage() {
     });
     localStorage.removeItem(fakeStorageKey);
 }
+migrateAndroidStorage();
