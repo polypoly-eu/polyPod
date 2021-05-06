@@ -90,7 +90,7 @@ class BrowserPolyNav implements PolyNav {
         }
         this.keyUpListener = ({ key }: any) => {
             const action = actionKeys[key];
-            if (actions.includes(action)) (this as any).actions?.[action]?.();
+            if (actions.includes(action)) this.actions?.[action]?.();
         };
         window.addEventListener("keyup", this.keyUpListener);
     }
