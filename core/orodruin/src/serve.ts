@@ -26,7 +26,7 @@ export async function serve(
         response.setHeader("Content-Type", "text/javascript");
         response.end(container);
     });
-    app.use("/pod.js", async (request: IncomingMessage, response: ServerResponse) => {
+    app.use("/feature/pod.js", async (request: IncomingMessage, response: ServerResponse) => {
         const bootstrap = await fs.readFile(
             require.resolve("@polypoly-eu/podigree/dist/bootstrap.js"),
             "utf-8"

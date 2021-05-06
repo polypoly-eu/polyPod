@@ -16,6 +16,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.13",
     "@polypoly-eu/eslint-config": "file:../../eslint-config",
+    "@polypoly-eu/podjs": "file:../../podjs",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@rollup/plugin-sucrase": "^3.1.0",
@@ -40,6 +41,7 @@
   },
   "private": true,
   "dependencies": {
+    "@polypoly-eu/silly-i18n": "file:../../core/silly-i18n",
     "d3": "^6.5.0",
     "react-infinite-scroll-component": "^6.0.0",
     "rollup-plugin-css-only": "^3.1.0",

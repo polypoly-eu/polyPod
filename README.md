@@ -11,6 +11,8 @@ whitepaper].
 ## Components
 
 - [android](android): The polyPod app for Android
+- [ios](ios): The polyPod app for iOS
+- [podjs](podjs): A script that lets features run in a web browser
 - [features](features): polyPod features
 - [core](core): The polyPod core code
 - [build](build): The build logic
@@ -25,7 +27,7 @@ Just execute:
 
     $ ./build.js
 
-After this you can build [android](android), or try
+After this you can build [android](android), [ios](ios), or try
 [features/example](features/example).
 
 ### Wat
