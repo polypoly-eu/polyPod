@@ -8,10 +8,10 @@ let outerPort;
 
 function initMessaging() {
     window.onmessage = event => {
-        // Just forward action messages
+        // Action notifications have no port. Forward them to the feature
         if (event.ports.length == 0) {
-            const bytes = Uint8Array.from(atob(event.data), c => c.charCodeAt(0));
-            port1.postMessage(bytes);
+            let iFrame = document.getElementsByTagName("iframe")[0];
+            iFrame.contentWindow.pod.polyNav.actions[event.data]();
             return;
         }
         outerPort = event.ports[0];

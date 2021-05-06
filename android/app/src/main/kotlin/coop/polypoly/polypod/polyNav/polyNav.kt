@@ -65,29 +65,8 @@ open class PolyNav(
         if (!registeredActions.contains(action))
             return false
 
-        val packer = MessagePack.newDefaultBufferPacker()
-        packer.packInt(0)
-        var codec = Codec.id.map()
-        val encoded = Bubblewrap.encode<Map<String, Value>>(
-            mapOf<String, Value>(
-                Pair(
-                    "request",
-                    Codec.string.encode(action)
-                ), Pair("id", MessagePack.newDefaultUnpacker(
-                        packer.toMessageBuffer().array()).unpackValue()
-                    )
-            ), codec
-        )
-        val raw = Base64.encodeToString(encoded, Base64.NO_WRAP)
+        webView.postWebMessage(WebMessage(action), Uri.parse("*"))
 
-        webView.postWebMessage(WebMessage(raw), Uri.parse("*"))
-
-//        // We are making too many assumptions about the code loaded into
-//        // the WebView here, it would be nicer if the container would
-//        // expose the actions some other way.
-//        val featureWindow =
-//            "document.getElementsByTagName('iframe')[0].contentWindow"
-//        webView.evaluateJavascript("$featureWindow.$apiJsObject.actions['$action']()") {}
         return true
     }
 }
