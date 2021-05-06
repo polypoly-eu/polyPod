@@ -15,6 +15,7 @@
         "core/rdf",
         "core/rdf-convert",
         "core/rdf-spec",
+        "core/silly-i18n",
         "eslint-config",
         "features/example",
         "features/polyExplorer",
