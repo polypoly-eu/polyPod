@@ -107,6 +107,7 @@
 		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
+		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
 		E90F89EE2629C0C000AD7D96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89ED2629C0C000AD7D96 /* ContentView.swift */; };
 		E92373BC26289FA900D2CFF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E92373BE26289FA900D2CFF3 /* Localizable.strings */; };
@@ -214,6 +215,7 @@
 		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
+		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E90F89ED2629C0C000AD7D96 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E92373B526289EA300D2CFF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 		1AA6DE4624192079008DB1B2 /* PodApi */ = {
 			isa = PBXGroup;
 			children = (
+				5B8653002643FC1E0014208C /* PolyNav */,
 				1ABADC1024EFBCBF00369791 /* Models */,
 				1A66F76D2493719B00ED4308 /* PolyIn */,
 				1A66F76C2493715400ED4308 /* PolyOut */,
@@ -453,6 +456,14 @@
 				1AF1178524BE22D50063EE37 /* FileStats.swift */,
 			);
 			path = FS;
+			sourceTree = "<group>";
+		};
+		5B8653002643FC1E0014208C /* PolyNav */ = {
+			isa = PBXGroup;
+			children = (
+				5B8653012643FC310014208C /* PolyNav.swift */,
+			);
+			path = PolyNav;
 			sourceTree = "<group>";
 		};
 		E97D326726308BC700A5A180 /* Extensions */ = {
@@ -718,6 +729,7 @@
 				1A8F4886247E91E000089217 /* Unpack.swift in Sources */,
 				1A8F4887247E91E000089217 /* ConvenienceProperties.swift in Sources */,
 				E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */,
+				5B8653022643FC310014208C /* PolyNav.swift in Sources */,
 				E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */,
 				1A8F488A247E91E000089217 /* MessagePack.swift in Sources */,
 				1A8F488B247E91E000089217 /* LiteralConvertibles.swift in Sources */,

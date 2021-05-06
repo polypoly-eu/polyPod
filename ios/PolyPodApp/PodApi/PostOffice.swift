@@ -45,6 +45,10 @@ class PostOffice {
             handlePolyOut(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
+        case "polyNav":
+            handlePolyNav(method: method, args: args, completionHandler: { response, error in
+                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
+            })
         default:
             print("API unknown:", api)
         }
@@ -245,3 +249,40 @@ extension PostOffice {
         }
     }
 }
+
+extension PostOffice {
+    private func handlePolyNav(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        switch method {
+        case "setTitle":
+            handlePolyNavSetTitle(args: args, completionHandler: completionHandler)
+        case "setActiveAction":
+            handlePolyNavSetActiveAction(args: args, completionHandler: completionHandler)
+        case "openUrl":
+            handlePolyNavOpenUrl(args: args, completionHandler: completionHandler)
+        default:
+            print("PolyNav method unknown:", method)
+        }
+    }
+    
+    private func handlePolyNavSetTitle(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let title = args[0] as! String
+        PodApi.shared.polyNav.setTitle(title: title) { res, error in
+            // TODO: Implement callback
+        }
+    }
+
+    private func handlePolyNavSetActiveAction(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let actions = args[0] as! [String]
+        PodApi.shared.polyNav.setActiveActions(actions: actions) { res, error in
+            // TODO: Implement callback
+        }
+    }
+
+    private func handlePolyNavOpenUrl(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let target = args[0] as! String
+        PodApi.shared.polyNav.openUrl(target: target) { res, error in
+            // TODO: Implement callback
+        }
+    }
+}
+

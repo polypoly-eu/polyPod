@@ -66,7 +66,6 @@ class FeatureWebView: WKWebView {
             "domConsole",
             forMainFrameOnly: false
         )
-        installUserScript(contentController, "podNav", forMainFrameOnly: false)
 
         installUserScript(
             contentController,
