@@ -75,11 +75,5 @@ function withoutSpecialChars(aString) {
 }
 
 function getJurisdictionFromLocation(location, globalData) {
-    return (
-        globalData.countries[
-            Object.keys(globalData.countries).find(
-                (country) => country === location.countryCode
-            )
-        ]?.dataRegion || "Sonstige"
-    );
+    return globalData.countries[location.countryCode]?.dataRegion || "Sonstige";
 }
