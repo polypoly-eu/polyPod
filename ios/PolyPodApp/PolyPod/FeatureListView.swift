@@ -24,7 +24,13 @@ struct FeatureListView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     let sortedFeatures = features.sorted {
-                        $0.name < $1.name
+                        if $0.name == "polyPreview" {
+                            return true
+                        }
+                        if $1.name == "polyPreview" {
+                            return false
+                        }
+                        return $0.name < $1.name
                     }
                     ForEach(sortedFeatures, id: \.name) { feature in
                         FeatureCard(feature)
@@ -50,6 +56,16 @@ struct FeatureListView_Previews: PreviewProvider {
         FeatureListView(features: [
             createStubFeature(
                 name: "polyExplorer",
+                author: "polypoly Cooperative",
+                description: """
+                Have you ever wondered where your digital data goes and \
+                which companies know how much about you and what the \
+                implications are? polyExplorer is the feature that provides \
+                those answers.
+                """
+            ),
+            createStubFeature(
+                name: "polyPinion",
                 author: "polypoly Cooperative",
                 description: """
                 Have you ever wondered where your digital data goes and \

@@ -1,65 +1,33 @@
 "use strict";
 
-function isLocalStorageAvailable() {
-    try {
-        localStorage.setItem("test", "test");
-        localStorage.removeItem("test");
-        return true;
-    } catch {
-        return false;
-    }
-}
+// We used to provide a fake implementation of the pod API here, for development
+// purposes, but in the meantimeswitched to pod.js for this. Once pod.js
+// supports the navigation API, and once the migration code isn't necessary
+// anymore, we can get rid of this file.
+export const pod = window.pod;
 
-function createFakeStorage() {
-    if (!isLocalStorageAvailable()) {
-        console.log(
-            "Neither polyIn nor localStorage available - " +
-                "using in-memory storage backend"
-        );
-        const storage = [];
-        return {
-            get quads() {
-                return storage;
-            },
-            set quads(quads) {
-                storage.length = 0;
-                storage.push(...quads);
-            },
-        };
-    }
-
-    console.log("polyIn not available - using localStorage storage backend");
-    const fakeStorageKey = "fakePodStorage";
-    return {
-        get quads() {
-            return JSON.parse(localStorage.getItem(fakeStorageKey) || "[]");
-        },
-        set quads(quads) {
-            localStorage.setItem(fakeStorageKey, JSON.stringify(quads));
-        },
-    };
-}
-
-export const pod =
-    window.pod ||
-    (() => {
-        const fakeStorage = createFakeStorage();
-        return {
-            polyIn: {
-                select: async () => fakeStorage.quads,
-                add: async (quad) =>
-                    (fakeStorage.quads = [...fakeStorage.quads, quad]),
-            },
-            dataFactory: {
-                quad: (subject, predicate, object) => ({
-                    subject,
-                    predicate,
-                    object,
-                }),
-                namedNode: (value) => ({ value }),
-            },
-        };
+// TODO: Migration code. Remove later and also disable localStorage in Android
+function migrateAndroidStorage() {
+    const localStorageAvailable = (() => {
+        try {
+            localStorage.setItem("test", "test");
+            localStorage.removeItem("test");
+            return true;
+        } catch {
+            return false;
+        }
     })();
+    if (!localStorageAvailable) return;
+
+    console.log("Migrating old storage");
+    const fakeStorageKey = "fakePodStorage";
+    JSON.parse(localStorage.getItem(fakeStorageKey) || "[]").forEach((quad) => {
+        console.log(JSON.stringify(quad));
+        pod.polyIn.add(quad);
+    });
+    localStorage.removeItem(fakeStorageKey);
+}
+migrateAndroidStorage();
 
 let fakeNavigationListener;
 

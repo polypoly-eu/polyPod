@@ -16,10 +16,10 @@ const pod = createPod();
 
 export function hideDashboard(): void {
     const body = document.body;
-    body.querySelectorAll<HTMLElement>(".dashboard")[0].style.display = "none";
+    body.querySelectorAll<HTMLElement>(".dashboard")[0].className = "hidden";
     const headers = body.querySelectorAll<HTMLElement>("h1");
     for (let i = 0; i < headers.length; i++) {
-        headers[i].style.display = "none";
+        headers[i].className = "hidden";
     }
     body.querySelectorAll<HTMLElement>("#container")[0].style.border = "none";
 }

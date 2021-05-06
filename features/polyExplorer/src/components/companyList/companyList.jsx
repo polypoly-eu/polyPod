@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { compare, getIndexCharacter } from "../../company.js";
 
 import i18n from "../../i18n.js";
 import {

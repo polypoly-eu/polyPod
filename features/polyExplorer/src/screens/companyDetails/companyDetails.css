@@ -32,8 +32,6 @@
     flex: 1 1 auto;
     margin: auto;
     overflow-x: hidden;
-    overflow-y: auto;
-    margin-bottom: 18px;
     width: 100%;
     max-width: 412px;
 }
@@ -214,20 +212,6 @@
     width: 100%;
     padding: 0 30px;
     max-width: 474px;
-}
-
-.gradient-box {
-    flex: 0 0 auto;
-    width: 100%;
-    margin: 0px auto -24px auto;
-    max-width: 474px;
-    height: 20px;
-    transform: translateY(-37px);
-}
-
-.gradient {
-    background-image: -moz-linear-gradient(transparent, #0f1938);
-    background-image: -webkit-linear-gradient(#0f193800, #0f1938);
 }
 
 .explore-data-btn-area {

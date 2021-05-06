@@ -48,5 +48,4 @@ describe("company", function () {
     });
     it("Company: compareNames() works", function () {
         assert(testCompany.compareNames(testCompany2) < 0);
-    });
 });

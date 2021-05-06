@@ -23,18 +23,18 @@
 }
 
 .infographic .bold {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .infographic .jurisdiction-white {
     color: white;
     white-space: nowrap;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 6;
 }
 
 .infographic .jurisdiction-blue {
     white-space: nowrap;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 6;
 }

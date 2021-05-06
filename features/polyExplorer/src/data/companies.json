@@ -7033,7 +7033,7 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Explanation_DE": "Betrug erkennen und verhindern.",
-                "Explanation_EN": "Detect and prevent fraud."
+                "Explanation_EN": "Sometimes people deliberately deceive others for unfair gain. Companies share data about such cases to stop them from happening in the future."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
@@ -7057,7 +7057,7 @@
                 "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
                 "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
-                "Explanation_EN": "Optimise activities and services for the Controller."
+                "Explanation_EN": "Optimise activities and services for the controller - the company that controlls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
@@ -7073,7 +7073,7 @@
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "Register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for."
             },
             {
                 "dpv:Purpose": "dpv:RequestedServiceProvision",
@@ -7087,9 +7087,9 @@
                 "dpv:Purpose": "dpv:ServiceOptimization",
                 "count": 14,
                 "Translation_DE": "Service-Optimierung",
-                "Translation_EN": "Service Optimization,",
+                "Translation_EN": "Service Optimisation",
                 "Explanation_DE": "Service oder Aktivität optimieren.",
-                "Explanation_EN": "Optimise service or activity."
+                "Explanation_EN": "Data is shared in order to determine how the service could be improved."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
@@ -9144,7 +9144,7 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
-                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. for profit or of benefit to the controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
@@ -9158,9 +9158,9 @@
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 6,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
-                "Translation_EN": "Create Personalized Recommendations",
+                "Translation_EN": "Create Personalised Recommendations",
                 "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
-                "Explanation_EN": "Create and provide personalised recommendations."
+                "Explanation_EN": "Data is shared in order to make predictions about what a person might like and suggest these to the person. For example - 'People who enjoyed this also bought this'.."
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
@@ -9176,7 +9176,7 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Explanation_DE": "Betrug erkennen und verhindern.",
-                "Explanation_EN": "Detect and prevent fraud."
+                "Explanation_EN": "Sometimes people deliberately deceive others for unfair gain. Companies share data about such cases to stop them from happening in the future."
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
@@ -9200,7 +9200,7 @@
                 "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
                 "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
-                "Explanation_EN": "Optimise activities and services for the Controller."
+                "Explanation_EN": "Optimise activities and services for the controller - the company that controlls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
@@ -9240,7 +9240,7 @@
                 "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
-                "Explanation_EN": "Personalise interfaces presented to the user."
+                "Explanation_EN": "Data is shared to alter the presentation of interfaces that suit a particular user."
             }
         ],
         "dataTypesShared": [
@@ -14981,7 +14981,7 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
-                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. for profit or of benefit to the controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
@@ -15003,9 +15003,9 @@
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 1,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
-                "Translation_EN": "Create Personalized Recommendations",
+                "Translation_EN": "Create Personalised Recommendations",
                 "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
-                "Explanation_EN": "Create and provide personalised recommendations."
+                "Explanation_EN": "Data is shared in order to make predictions about what a person might like and suggest these to the person. For example - 'People who enjoyed this also bought this'.."
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
@@ -15021,7 +15021,7 @@
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
                 "Explanation_DE": "Waren und Dienstleistungen ausliefern.",
-                "Explanation_EN": "Deliver goods and services."
+                "Explanation_EN": "Data is shared so that purchased items can be brought to an address."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
@@ -15037,7 +15037,7 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Explanation_DE": "Betrug erkennen und verhindern.",
-                "Explanation_EN": "Detect and prevent fraud."
+                "Explanation_EN": "Sometimes people deliberately deceive others for unfair gain. Companies share data about such cases to stop them from happening in the future."
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
@@ -15045,7 +15045,7 @@
                 "Translation_DE": "Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
                 "Explanation_DE": "Identität verifizieren und autorisieren.",
-                "Explanation_EN": "Verify and authorise identity."
+                "Explanation_EN": "Data is shared in order to confirm a person's identity - that they are who they say they are."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
@@ -15093,7 +15093,7 @@
                 "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
                 "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
-                "Explanation_EN": "Optimise activities and services for the Controller."
+                "Explanation_EN": "Optimise activities and services for the controller - the company that controlls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
@@ -15109,7 +15109,7 @@
                 "Translation_DE": "Personalisierte Vorteile",
                 "Translation_EN": "Personalised Benefits",
                 "Explanation_DE": "Die von den Nutzenden erhaltenen Leistungen personalisieren.",
-                "Explanation_EN": "Personalise benefits received by the user."
+                "Explanation_EN": "Data about you is shared to tailor benefits to you personally."
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAuthentication",
@@ -15117,7 +15117,7 @@
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "Register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
@@ -15139,17 +15139,17 @@
                 "dpv:Purpose": "dpv:ServiceOptimization",
                 "count": 2,
                 "Translation_DE": "Service-Optimierung",
-                "Translation_EN": "Service Optimization,",
+                "Translation_EN": "Service Optimisation",
                 "Explanation_DE": "Service oder Aktivität optimieren.",
-                "Explanation_EN": "Optimise service or activity."
+                "Explanation_EN": "Data is shared in order to determine how the service could be improved."
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
                 "count": 2,
                 "Translation_DE": "Dienstpersonalisierung",
-                "Translation_EN": "Service Personalization",
+                "Translation_EN": "Service Personalisation",
                 "Explanation_DE": "Dienstleistung oder Aktivität personalisieren.",
-                "Explanation_EN": "Personalise service or activity."
+                "Explanation_EN": "Data is shared in order to change a service or activity to fit a person's tastes or choices."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
@@ -15173,7 +15173,7 @@
                 "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
-                "Explanation_EN": "Personalise interfaces presented to the user."
+                "Explanation_EN": "Data is shared to alter the presentation of interfaces that suit a particular user."
             },
             {
                 "dpv:Purpose": "unspecified",
@@ -15181,7 +15181,7 @@
                 "Translation_DE": "Unspezifiziert",
                 "Translation_EN": "Unspecified",
                 "Explanation_DE": "Zweck nicht spezifiziert.",
-                "Explanation_EN": "Purpose unspecified."
+                "Explanation_EN": "A reason for sharing this data was not given."
             }
         ],
         "dataTypesShared": [
@@ -20065,7 +20065,7 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
-                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. for profit or of benefit to the controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
@@ -20129,7 +20129,7 @@
                 "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
                 "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
-                "Explanation_EN": "Optimise activities and services for the Controller."
+                "Explanation_EN": "Optimise activities and services for the controller - the company that controlls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:OptimiseUserInterface",
@@ -20169,7 +20169,7 @@
                 "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
-                "Explanation_EN": "Personalise interfaces presented to the user."
+                "Explanation_EN": "Data is shared to alter the presentation of interfaces that suit a particular user."
             },
             {
                 "dpv:Purpose": "unspecified",
@@ -20177,7 +20177,7 @@
                 "Translation_DE": "Unspezifiziert",
                 "Translation_EN": "Unspecified",
                 "Explanation_DE": "Zweck nicht spezifiziert.",
-                "Explanation_EN": "Purpose unspecified."
+                "Explanation_EN": "A reason for sharing this data was not given."
             }
         ],
         "dataTypesShared": [
@@ -27637,7 +27637,7 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
-                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. for profit or of benefit to the controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
@@ -27661,7 +27661,7 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Explanation_DE": "Betrug erkennen und verhindern.",
-                "Explanation_EN": "Detect and prevent fraud."
+                "Explanation_EN": "Sometimes people deliberately deceive others for unfair gain. Companies share data about such cases to stop them from happening in the future."
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
@@ -27669,7 +27669,7 @@
                 "Translation_DE": "Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
                 "Explanation_DE": "Identität verifizieren und autorisieren.",
-                "Explanation_EN": "Verify and authorise identity."
+                "Explanation_EN": "Data is shared in order to confirm a person's identity - that they are who they say they are."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
@@ -27733,7 +27733,7 @@
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "Register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for."
             },
             {
                 "dpv:Purpose": "dpv:Security",
@@ -27755,17 +27755,17 @@
                 "dpv:Purpose": "dpv:ServiceOptimization",
                 "count": 1,
                 "Translation_DE": "Service-Optimierung",
-                "Translation_EN": "Service Optimization,",
+                "Translation_EN": "Service Optimisation",
                 "Explanation_DE": "Service oder Aktivität optimieren.",
-                "Explanation_EN": "Optimise service or activity."
+                "Explanation_EN": "Data is shared in order to determine how the service could be improved."
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
                 "count": 21,
                 "Translation_DE": "Dienstpersonalisierung",
-                "Translation_EN": "Service Personalization",
+                "Translation_EN": "Service Personalisation",
                 "Explanation_DE": "Dienstleistung oder Aktivität personalisieren.",
-                "Explanation_EN": "Personalise service or activity."
+                "Explanation_EN": "Data is shared in order to change a service or activity to fit a person's tastes or choices."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
@@ -27789,7 +27789,7 @@
                 "Translation_DE": "Unspezifiziert",
                 "Translation_EN": "Unspecified",
                 "Explanation_DE": "Zweck nicht spezifiziert.",
-                "Explanation_EN": "Purpose unspecified."
+                "Explanation_EN": "A reason for sharing this data was not given."
             }
         ],
         "dataTypesShared": [
@@ -34723,7 +34723,7 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
-                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. for profit or of benefit to the controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
@@ -34755,7 +34755,7 @@
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
                 "Explanation_DE": "Waren und Dienstleistungen ausliefern.",
-                "Explanation_EN": "Deliver goods and services."
+                "Explanation_EN": "Data is shared so that purchased items can be brought to an address."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
@@ -34771,7 +34771,7 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Explanation_DE": "Betrug erkennen und verhindern.",
-                "Explanation_EN": "Detect and prevent fraud."
+                "Explanation_EN": "Sometimes people deliberately deceive others for unfair gain. Companies share data about such cases to stop them from happening in the future."
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
@@ -34779,7 +34779,7 @@
                 "Translation_DE": "Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
                 "Explanation_DE": "Identität verifizieren und autorisieren.",
-                "Explanation_EN": "Verify and authorise identity."
+                "Explanation_EN": "Data is shared in order to confirm a person's identity - that they are who they say they are."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
@@ -34843,7 +34843,7 @@
                 "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
                 "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
-                "Explanation_EN": "Optimise activities and services for the Controller."
+                "Explanation_EN": "Optimise activities and services for the controller - the company that controlls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
@@ -34867,7 +34867,7 @@
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "Register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
@@ -34923,7 +34923,7 @@
                 "Translation_DE": "Unspezifiziert",
                 "Translation_EN": "Unspecified",
                 "Explanation_DE": "Zweck nicht spezifiziert.",
-                "Explanation_EN": "Purpose unspecified."
+                "Explanation_EN": "A reason for sharing this data was not given."
             }
         ],
         "dataTypesShared": [
@@ -40322,7 +40322,7 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
-                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. for profit or of benefit to the controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
@@ -40344,9 +40344,9 @@
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 8,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
-                "Translation_EN": "Create Personalized Recommendations",
+                "Translation_EN": "Create Personalised Recommendations",
                 "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
-                "Explanation_EN": "Create and provide personalised recommendations."
+                "Explanation_EN": "Data is shared in order to make predictions about what a person might like and suggest these to the person. For example - 'People who enjoyed this also bought this'.."
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
@@ -40362,7 +40362,7 @@
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
                 "Explanation_DE": "Waren und Dienstleistungen ausliefern.",
-                "Explanation_EN": "Deliver goods and services."
+                "Explanation_EN": "Data is shared so that purchased items can be brought to an address."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
@@ -40378,7 +40378,7 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Explanation_DE": "Betrug erkennen und verhindern.",
-                "Explanation_EN": "Detect and prevent fraud."
+                "Explanation_EN": "Sometimes people deliberately deceive others for unfair gain. Companies share data about such cases to stop them from happening in the future."
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
@@ -40386,7 +40386,7 @@
                 "Translation_DE": "Identitätsüberprüfung",
                 "Translation_EN": "Identity Verification",
                 "Explanation_DE": "Identität verifizieren und autorisieren.",
-                "Explanation_EN": "Verify and authorise identity."
+                "Explanation_EN": "Data is shared in order to confirm a person's identity - that they are who they say they are."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
@@ -40458,7 +40458,7 @@
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Sich registrieren, authentifizieren und im Zusammenhang mit einem Dienst identifizieren.",
-                "Explanation_EN": "Register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for."
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAuthentication",
@@ -40466,7 +40466,7 @@
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-                "Explanation_EN": "Register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
@@ -40504,9 +40504,9 @@
                 "dpv:Purpose": "dpv:ServicePersonalization",
                 "count": 22,
                 "Translation_DE": "Dienstpersonalisierung",
-                "Translation_EN": "Service Personalization",
+                "Translation_EN": "Service Personalisation",
                 "Explanation_DE": "Dienstleistung oder Aktivität personalisieren.",
-                "Explanation_EN": "Personalise service or activity."
+                "Explanation_EN": "Data is shared in order to change a service or activity to fit a person's tastes or choices."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
@@ -40530,7 +40530,7 @@
                 "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
-                "Explanation_EN": "Personalise interfaces presented to the user."
+                "Explanation_EN": "Data is shared to alter the presentation of interfaces that suit a particular user."
             },
             {
                 "dpv:Purpose": "unspecified",
@@ -40538,7 +40538,7 @@
                 "Translation_DE": "Unspezifiziert",
                 "Translation_EN": "Unspecified",
                 "Explanation_DE": "Zweck nicht spezifiziert.",
-                "Explanation_EN": "Purpose unspecified."
+                "Explanation_EN": "A reason for sharing this data was not given."
             }
         ],
         "dataTypesShared": [
@@ -42325,7 +42325,7 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
-                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. for profit or of benefit to the controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
@@ -42339,9 +42339,9 @@
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 19,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
-                "Translation_EN": "Create Personalized Recommendations",
+                "Translation_EN": "Create Personalised Recommendations",
                 "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
-                "Explanation_EN": "Create and provide personalised recommendations."
+                "Explanation_EN": "Data is shared in order to make predictions about what a person might like and suggest these to the person. For example - 'People who enjoyed this also bought this'.."
             },
             {
                 "dpv:Purpose": "dpv:DeliveryOfGoods",
@@ -42349,7 +42349,7 @@
                 "Translation_DE": "Lieferung von Waren",
                 "Translation_EN": "Delivery of Goods",
                 "Explanation_DE": "Waren und Dienstleistungen ausliefern.",
-                "Explanation_EN": "Deliver goods and services."
+                "Explanation_EN": "Data is shared so that purchased items can be brought to an address."
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
@@ -42357,7 +42357,7 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Explanation_DE": "Betrug erkennen und verhindern.",
-                "Explanation_EN": "Detect and prevent fraud."
+                "Explanation_EN": "Sometimes people deliberately deceive others for unfair gain. Companies share data about such cases to stop them from happening in the future."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
@@ -42389,7 +42389,7 @@
                 "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
                 "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
-                "Explanation_EN": "Optimise activities and services for the Controller."
+                "Explanation_EN": "Optimise activities and services for the controller - the company that controlls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
@@ -42437,7 +42437,7 @@
                 "Translation_DE": "Unspezifiziert",
                 "Translation_EN": "Unspecified",
                 "Explanation_DE": "Zweck nicht spezifiziert.",
-                "Explanation_EN": "Purpose unspecified."
+                "Explanation_EN": "A reason for sharing this data was not given."
             }
         ],
         "dataTypesShared": [
@@ -44019,7 +44019,7 @@
                 "Translation_DE": "Kommerzielles Interesse",
                 "Translation_EN": "Commercial Interest",
                 "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
-                "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
+                "Explanation_EN": "Carry out activities with a commercial interest i.e. for profit or of benefit to the controller."
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
@@ -44041,9 +44041,9 @@
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
                 "count": 3,
                 "Translation_DE": "Personalisierte Empfehlungen erstellen",
-                "Translation_EN": "Create Personalized Recommendations",
+                "Translation_EN": "Create Personalised Recommendations",
                 "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
-                "Explanation_EN": "Create and provide personalised recommendations."
+                "Explanation_EN": "Data is shared in order to make predictions about what a person might like and suggest these to the person. For example - 'People who enjoyed this also bought this'.."
             },
             {
                 "dpv:Purpose": "dpv:DirectMarketing",
@@ -44059,7 +44059,7 @@
                 "Translation_DE": "Betrugsprävention und -aufdeckung",
                 "Translation_EN": "Fraud Prevention and Detection",
                 "Explanation_DE": "Betrug erkennen und verhindern.",
-                "Explanation_EN": "Detect and prevent fraud."
+                "Explanation_EN": "Sometimes people deliberately deceive others for unfair gain. Companies share data about such cases to stop them from happening in the future."
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
@@ -44091,7 +44091,7 @@
                 "Translation_DE": "Optimierung für Kontrolleur:innen",
                 "Translation_EN": "Optimisation for Controller",
                 "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
-                "Explanation_EN": "Optimise activities and services for the Controller."
+                "Explanation_EN": "Optimise activities and services for the controller - the company that controlls the data handling."
             },
             {
                 "dpv:Purpose": "dpv:Payment",
@@ -44115,7 +44115,7 @@
                 "Translation_DE": "Registrierung und Authentifizierung",
                 "Translation_EN": "Registration and Authentication",
                 "Explanation_DE": "Sich registrieren, authentifizieren und im Zusammenhang mit einem Dienst identifizieren.",
-                "Explanation_EN": "Register, authenticate, and identify in context of a service."
+                "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for."
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
@@ -44153,17 +44153,17 @@
                 "dpv:Purpose": "dpv:ServiceOptimization",
                 "count": 30,
                 "Translation_DE": "Service-Optimierung",
-                "Translation_EN": "Service Optimization,",
+                "Translation_EN": "Service Optimisation",
                 "Explanation_DE": "Service oder Aktivität optimieren.",
-                "Explanation_EN": "Optimise service or activity."
+                "Explanation_EN": "Data is shared in order to determine how the service could be improved."
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
                 "count": 5,
                 "Translation_DE": "Dienstpersonalisierung",
-                "Translation_EN": "Service Personalization",
+                "Translation_EN": "Service Personalisation",
                 "Explanation_DE": "Dienstleistung oder Aktivität personalisieren.",
-                "Explanation_EN": "Personalise service or activity."
+                "Explanation_EN": "Data is shared in order to change a service or activity to fit a person's tastes or choices."
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
@@ -44187,7 +44187,7 @@
                 "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
                 "Translation_EN": "User Interface Personalisation",
                 "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
-                "Explanation_EN": "Personalise interfaces presented to the user."
+                "Explanation_EN": "Data is shared to alter the presentation of interfaces that suit a particular user."
             },
             {
                 "dpv:Purpose": "unspecified",
@@ -44195,7 +44195,7 @@
                 "Translation_DE": "Unspezifiziert",
                 "Translation_EN": "Unspecified",
                 "Explanation_DE": "Zweck nicht spezifiziert.",
-                "Explanation_EN": "Purpose unspecified."
+                "Explanation_EN": "A reason for sharing this data was not given."
             }
         ],
         "dataTypesShared": [

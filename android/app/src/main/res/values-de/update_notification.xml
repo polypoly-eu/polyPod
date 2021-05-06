@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="update_notification_title">Test-Benachrichtigung</string>
+    <string name="update_notification_title">Unerwartete Benachrichtigung</string>
     <string name="update_notification_text">
-        Nur ein Test des Benachrichtigungssystems - sag\' @fhd bescheid wenn es funktioniert :)
+        Wenn Sie diese Nachricht lesen, haben Sie fehlerhaftes Verhalten im polyPod entdeckt. Bitte berichten Sie uns darüber!
     </string>
 </resources>
