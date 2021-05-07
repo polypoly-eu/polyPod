@@ -6,7 +6,7 @@ import {
     displayString,
     empty,
     sortFilters,
-} from "../../companyFilter.js";
+} from "../../model/companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 

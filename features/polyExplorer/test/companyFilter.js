@@ -1,7 +1,7 @@
 "use strict";
 
 import assert from "assert";
-import * as companyFilter from "../src/companyFilter.js";
+import * as companyFilter from "../src/model/companyFilter.js";
 
 describe("companyFilter", function () {
     const companyData = [

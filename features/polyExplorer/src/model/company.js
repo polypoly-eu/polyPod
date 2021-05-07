@@ -1,17 +1,15 @@
 export class Company {
     constructor(companyJSONObject, globalData) {
         this._data = companyJSONObject;
-        this._data.jurisdiction = getJurisdictionFromLocation(
+        this._jurisdiction = determineJurisdictions(
             companyJSONObject.location,
             globalData
         );
     }
 
     //Getters
-
-    //This doesn't exist until the next dataImport, replace it with ppid then please
     get ppid() {
-        return this._data.name;
+        return this._data.ppid;
     }
 
     get name() {
@@ -23,7 +21,7 @@ export class Company {
     }
 
     get jurisdiction() {
-        return this._data.jurisdiction;
+        return this._jurisdiction;
     }
 
     get location() {
@@ -71,15 +69,9 @@ export class Company {
 }
 
 function withoutSpecialChars(aString) {
-    return aString.replace(/[ `!@#$%^&*„()_+\-=[\]{};':"\\|,.<>/?~]/, "");
+    return aString.replace(/[`!@#$%^&*„()_+\-=[\]{};':"\\|<>/?~]/g, "");
 }
 
-function getJurisdictionFromLocation(location, globalData) {
-    return (
-        globalData.countries[
-            Object.keys(globalData.countries).find(
-                (country) => country === location.countryCode
-            )
-        ]?.dataRegion || "Sonstige"
-    );
+function determineJurisdictions(location, globalData) {
+    return globalData.countries[location.countryCode]?.dataRegion || "Sonstige";
 }

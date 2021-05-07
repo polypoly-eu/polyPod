@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import i18n from "./i18n.js";
 import { pod, podNav } from "./fakePod.js";
-import { emptyFilters, removeFilter } from "./companyFilter.js";
-import { Company } from "./company.js";
+import { emptyFilters, removeFilter } from "./model/companyFilter.js";
+import { Company } from "./model/company.js";
 
 import MainScreen from "./screens/main/main.jsx";
 import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
