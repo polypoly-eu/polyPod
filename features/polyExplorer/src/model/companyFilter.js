@@ -1,12 +1,5 @@
 "use strict";
 
-export const emptyFilters = () => ({
-    industryCategory: new Set(),
-    jurisdiction: new Set(),
-    location: new Set(),
-    revenueRange: new Set(),
-});
-
 function mostRecentAnnualRevenue(company) {
     const annualRevenues = company.annualRevenues || [];
     if (!annualRevenues.length) return -1;
@@ -15,8 +8,6 @@ function mostRecentAnnualRevenue(company) {
         .pop();
     return lastAnnualRevenue.amount / 1000;
 }
-
-const industryCategoryNames = {};
 
 const allRevenueRanges = [
     -1,
@@ -31,42 +22,40 @@ const allRevenueRanges = [
     1000000,
 ];
 
-const extractValue = (company, field) =>
-    ({
-        industryCategory: (company) => {
+// TODO: Keeping global state for this isn't nice, maybe we can look these up
+// from globalData, or otherwise at least cache them on the CompanyFilter
+// instance.
+const industryCategoryNames = new Map();
+
+const fields = {
+    industryCategory: {
+        extractValue(company) {
             const category = company.industryCategory;
             const id = category?.id;
             if (!id) return "?";
-            if (!(id in industryCategoryNames))
-                industryCategoryNames[id] = category.name;
+            if (!industryCategoryNames.has(id))
+                industryCategoryNames.set(id, category.name);
             return id;
         },
-        jurisdiction: (company) => company.jurisdiction,
-        location: (company) => company.location.countryCode,
-        revenueRange: (company) => {
-            const revenue = mostRecentAnnualRevenue(company);
-            if (revenue === -1) return "-1";
-            const reversedRanges = allRevenueRanges.sort((a, b) => b - a);
-            for (let step of reversedRanges)
-                if (revenue > step) return `${step}`;
-            return "0";
-        },
-    }[field](company));
-
-export function extractFilters(companies) {
-    const filters = emptyFilters();
-    for (let company of companies)
-        for (let field of fields(filters))
-            filters[field].add(extractValue(company, field));
-    return filters;
-}
-
-export function displayString(field, value, i18n, globalData) {
-    const displayStrings = {
-        industryCategory: (value) =>
-            industryCategoryNames[value]?.[i18n.language] ||
+        displayString: (value, i18n) =>
+            industryCategoryNames.get(value)?.[i18n.language] ||
             i18n.t("common:category.undisclosed"),
-        jurisdiction: (value) => {
+        sortedValues(values, i18n, globalData) {
+            return [...values].sort((a, b) => {
+                const [aString, bString] = [a, b].map((value) =>
+                    fields.industryCategory.displayString(
+                        value,
+                        i18n,
+                        globalData
+                    )
+                );
+                return aString.localeCompare(bString);
+            });
+        },
+    },
+    jurisdiction: {
+        extractValue: (company) => company.jurisdiction,
+        displayString(value, i18n) {
             const key =
                 {
                     "EU-GDPR": "euGdpr",
@@ -76,147 +65,134 @@ export function displayString(field, value, i18n, globalData) {
                 }[value] || "undisclosed";
             return i18n.t(`common:jurisdiction.${key}`);
         },
-        revenueRange: (value) => {
+        sortedValues(values, i18n) {
+            return [...values].sort((a, b) => {
+                const [aString, bString] = [a, b].map((value) =>
+                    fields.jurisdiction.displayString(value, i18n)
+                );
+                return aString.localeCompare(bString);
+            });
+        },
+    },
+    revenueRange: {
+        extractValue(company) {
+            const revenue = mostRecentAnnualRevenue(company);
+            if (revenue === -1) return "-1";
+            const reversedRanges = allRevenueRanges.sort((a, b) => b - a);
+            for (let step of reversedRanges)
+                if (revenue > step) return `${step}`;
+            return "0";
+        },
+        displayString(value, i18n) {
             if (value === "-1") return i18n.t("common:companyFilter.missing");
             const key = allRevenueRanges.find(
                 (item) => item === parseInt(value, 10)
             );
             return i18n.t(`common:companyFilter.revenueRange.${key}`);
         },
-        location: (value) =>
-            (globalData.countries[value] || {})[
+        sortedValues: (values) => [...values].sort((a, b) => a - b),
+    },
+    location: {
+        extractValue: (company) => company.location.countryCode,
+        displayString(value, i18n, globalData) {
+            return (globalData.countries[value] || {})[
                 i18n.t("common:companyFilter.countryNameKey")
-            ],
-    };
-    return displayStrings[field](value) || value;
-}
-
-// This is a bit of a band aid, since sortFilters leads to the filters object
-// containing arrays instead of sets, pretty much all functions dealing with
-// filters need to be prepared for that. We should rather improve the design,
-// however.
-const ensureSet = (iterable) =>
-    iterable instanceof Set
-        ? iterable
-        : {
-              has: (element) => iterable.includes(element),
-              add: (element) => {
-                  if (!iterable.includes(element)) iterable.push(element);
-              },
-              delete: (element) => {
-                  const index = iterable.indexOf(element);
-                  if (index === -1) return false;
-                  iterable.splice(index, 1);
-                  return true;
-              },
-              get size() {
-                  return iterable.length;
-              },
-              [Symbol.iterator]: function* () {
-                  for (let element of iterable) yield element;
-              },
-          };
-
-export const hasFilter = (filters, field, value) =>
-    ensureSet(filters[field]).has(value);
-
-export const addFilter = (filters, field, value) =>
-    ensureSet(filters[field]).add(value);
-
-export const removeFilter = (filters, field, value) =>
-    ensureSet(filters[field]).delete(value);
-
-export const fields = (filters) => Object.keys(filters);
-
-export const values = (filters, field) =>
-    [...filters[field]].sort((a, b) =>
-        Number.isNaN(a) || Number.isNaN(b) ? a.localeCompare(b) : a - b
-    );
-
-const matches = (filters, company) =>
-    fields(filters).every((field) => {
-        const set = ensureSet(filters[field]);
-        return !set.size || set.has(extractValue(company, field));
-    });
-
-export const applyFilters = (filters, companies) =>
-    companies.filter((company) => matches(filters, company));
-
-export const empty = (filters) =>
-    !Object.values(filters).some((values) => ensureSet(values).size);
-
-export function copy(filters) {
-    const copiedFilters = emptyFilters();
-    for (let field of fields(filters))
-        for (let value of values(filters, field))
-            addFilter(copiedFilters, field, value);
-    return copiedFilters;
-}
-
-export function equal(filtersA, filtersB) {
-    const fieldsA = fields(filtersA);
-    const fieldsB = fields(filtersB);
-    if (fieldsA.length !== fieldsB.length) return false;
-    return fieldsA.every((field) => {
-        if (!fieldsB.includes(field)) return false;
-        const valuesA = values(filtersA, field);
-        const valuesB = values(filtersB, field);
-        if (valuesA.length !== valuesB.length) return false;
-        return valuesA.every((value) => valuesB.includes(value));
-    });
-}
-
-export function sortFilters(filters, i18n, globalData) {
-    const processField = {
-        industryCategory: (filters) => {
-            return [...filters].sort((a, b) =>
-                (
-                    industryCategoryNames[a]?.[i18n.language] ||
-                    i18n.t("common:category.undisclosed")
-                ).localeCompare(
-                    industryCategoryNames[b]?.[i18n.language] ||
-                        i18n.t("common:category.undisclosed")
-                )
-            );
+            ];
         },
-        jurisdiction: (filters) => {
-            const keys = {
-                "EU-GDPR": "euGdpr",
-                Russia: "russia",
-                "Five-Eyes": "fiveEyes",
-                China: "china",
-            }; //[value] || "undisclosed";
-            return [...filters].sort((a, b) =>
-                i18n
-                    .t(`common:jurisdiction.${keys[a] || "undisclosed"}`)
-                    .localeCompare(
-                        i18n.t(
-                            `common:jurisdiction.${keys[b] || "undisclosed"}`
-                        )
-                    )
-            );
+        sortedValues(values, i18n, globalData) {
+            // TODO: There's one company with a countryCode of `false` in the
+            // data - should be filtered elsewhere.
+            values.delete(false);
+            return [...values].sort((a, b) => {
+                const [aString, bString] = [a, b].map(
+                    (value) =>
+                        fields.location.displayString(
+                            value,
+                            i18n,
+                            globalData
+                        ) || "zz"
+                );
+                return aString.localeCompare(bString);
+            });
         },
-        location: (filters) => {
-            filters.delete(false);
-            return [...filters].sort((a, b) =>
-                (
-                    (globalData.countries[a] || {})[
-                        i18n.t("common:companyFilter.countryNameKey")
-                    ] || "zz"
-                ).localeCompare(
-                    (globalData.countries[b] || {})[
-                        i18n.t("common:companyFilter.countryNameKey")
-                    ] || "zz"
-                )
-            );
-        },
-        revenueRange: (filters) => {
-            return [...filters];
-        },
-    };
+    },
+};
 
-    for (let field in filters) {
-        filters[field] = processField[field](ensureSet(filters[field]));
+export class CompanyFilter {
+    static displayString(field, value, i18n, globalData) {
+        return fields[field].displayString(value, i18n, globalData) || value;
     }
-    return filters;
+
+    constructor(companies = []) {
+        this._filters = new Map();
+        for (let field of Object.keys(fields))
+            this._filters.set(field, new Set());
+        for (let company of companies)
+            for (let field of this.fields)
+                this.add(field, fields[field].extractValue(company));
+    }
+
+    add(field, value) {
+        if (!this._filters.has(field)) this._filters.set(field, new Set());
+        this._filters.get(field).add(value);
+    }
+
+    remove(field, value) {
+        this._filters.get(field)?.delete(value);
+    }
+
+    has(field, value) {
+        return this._filters.get(field)?.has(value);
+    }
+
+    get empty() {
+        return [...this._filters.values()].every((values) => !values.size);
+    }
+
+    get fields() {
+        return [...this._filters.keys()];
+    }
+
+    values(field) {
+        return [...this._filters.get(field)];
+    }
+
+    matches(company) {
+        return [...this._filters.entries()].every(
+            ([field, values]) =>
+                !values.size || values.has(fields[field].extractValue(company))
+        );
+    }
+
+    apply(companies) {
+        return companies.filter((company) => this.matches(company));
+    }
+
+    copy() {
+        const copy = new CompanyFilter();
+        for (let field of this.fields)
+            for (let value of this.values(field)) copy.add(field, value);
+        return copy;
+    }
+
+    equal(other) {
+        if (!(other instanceof CompanyFilter)) return false;
+        if (this.fields.length !== other.fields.length) return false;
+        return this.fields.every((field) => {
+            if (!other.fields.includes(field)) return false;
+            const values = this.values(field);
+            const otherValues = other.values(field);
+            if (values.length !== otherValues.length) return false;
+            return values.every((value) => otherValues.includes(value));
+        });
+    }
+
+    sortedMap(i18n, globalData) {
+        return Object.fromEntries(
+            [...this._filters.entries()].map(([field, values]) => [
+                field,
+                fields[field].sortedValues(values, i18n, globalData),
+            ])
+        );
+    }
 }

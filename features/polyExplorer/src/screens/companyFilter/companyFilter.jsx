@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import i18n from "../../i18n.js";
-import * as companyFilter from "../../model/companyFilter.js";
+import { CompanyFilter } from "../../model/companyFilter.js";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
 import Screen from "../../components/screen/screen.jsx";
 
@@ -14,38 +14,33 @@ const CompanyFilterScreen = ({
     onApply,
 }) => {
     const [newActiveFilters, setNewActiveFilters] = useState(
-        companyFilter.copy(activeFilters)
+        activeFilters.copy()
     );
 
-    const handleReset = () => setNewActiveFilters(companyFilter.emptyFilters());
+    const handleReset = () => setNewActiveFilters(new CompanyFilter());
 
-    const allFilters = companyFilter.sortFilters(
-        companyFilter.extractFilters(companies),
-        i18n,
-        globalData
-    );
+    const allFilters = new CompanyFilter(companies);
+    const sortedFilterMap = allFilters.sortedMap(i18n, globalData);
 
-    const isFilterActive = (field, value) =>
-        companyFilter.hasFilter(newActiveFilters, field, value);
+    const isFilterActive = (field, value) => newActiveFilters.has(field, value);
 
     function handleToggle(field, value) {
-        const { hasFilter, addFilter, removeFilter } = companyFilter;
-        if (hasFilter(newActiveFilters, field, value))
-            removeFilter(newActiveFilters, field, value);
-        else addFilter(newActiveFilters, field, value);
-        setNewActiveFilters({ ...newActiveFilters });
+        if (newActiveFilters.has(field, value))
+            newActiveFilters.remove(field, value);
+        else newActiveFilters.add(field, value);
+        setNewActiveFilters(newActiveFilters.copy());
     }
 
     const FilterSection = ({ title, field }) => (
         <div className={`filter-section ${field}`}>
             <h1>{title}</h1>
-            {companyFilter.values(allFilters, field).map((value, index) => (
+            {sortedFilterMap[field].map((value, index) => (
                 <button
                     key={index}
                     className={isFilterActive(field, value) ? "active" : ""}
                     onClick={() => handleToggle(field, value)}
                     dangerouslySetInnerHTML={{
-                        __html: companyFilter.displayString(
+                        __html: CompanyFilter.displayString(
                             field,
                             value,
                             i18n,
@@ -57,8 +52,7 @@ const CompanyFilterScreen = ({
         </div>
     );
 
-    const filtersChanged = () =>
-        !companyFilter.equal(activeFilters, newActiveFilters);
+    const filtersChanged = () => !activeFilters.equal(newActiveFilters);
 
     function handleApply({ target }) {
         if (!target.className.includes("disabled")) onApply(newActiveFilters);

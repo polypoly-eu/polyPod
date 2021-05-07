@@ -1,7 +1,8 @@
 "use strict";
 
 import assert from "assert";
-import * as companyFilter from "../src/model/companyFilter.js";
+import { I18n } from "@polypoly-eu/silly-i18n";
+import { CompanyFilter } from "../src/model/companyFilter.js";
 
 describe("companyFilter", function () {
     const companyData = [
@@ -39,93 +40,69 @@ describe("companyFilter", function () {
     const companyByName = (name) =>
         companyData.find((data) => data.name === name);
 
-    function assertHas(filters, field, value) {
+    function assertHas(companyFilter, field, value) {
         assert.ok(
-            companyFilter.hasFilter(filters, field, value),
+            companyFilter.has(field, value),
             `Filter ${field} = ${value} not present`
         );
     }
 
-    function assertHasNot(filters, field, value) {
+    function assertHasNot(companyFilter, field, value) {
         assert.ok(
-            !companyFilter.hasFilter(filters, field, value),
+            !companyFilter.has(field, value),
             `Filter ${field} = ${value} present`
         );
     }
 
-    before(function () {
-        this.add = (field, value) =>
-            companyFilter.addFilter(this.filters, field, value);
-    });
-
     beforeEach(function () {
-        this.filters = companyFilter.emptyFilters();
+        this.filter = new CompanyFilter();
     });
 
     it("Adding a filter works", function () {
         const field = "jurisdiction";
         const value = "EU-GDPR";
-        assertHasNot(this.filters, field, value);
-        this.add(field, value);
-        assertHas(this.filters, field, value);
+        assertHasNot(this.filter, field, value);
+        this.filter.add(field, value);
+        assertHas(this.filter, field, value);
     });
 
     it("Removing a filter works", function () {
         const field = "jurisdiction";
         const value = "EU-GDPR";
-        this.add(field, value);
-        companyFilter.removeFilter(this.filters, field, value);
-        assertHasNot(this.filters, field, value);
+        this.filter.add(field, value);
+        this.filter.remove(field, value);
+        assertHasNot(this.filter, field, value);
     });
 
     it("Display string for revenue range is correct", function () {
-        const i18nStub = {
-            t: (key) =>
-                key === "common:companyFilter.revenueRange.500"
-                    ? "&euro; 500k - 1M"
-                    : "",
-        };
-        const display = companyFilter.displayString(
+        const i18n = new I18n("en", {
+            en: {
+                common: {
+                    "companyFilter.revenueRange.500": "&euro; 500k - 1M",
+                },
+            },
+        });
+        const display = CompanyFilter.displayString(
             "revenueRange",
             500,
-            i18nStub,
+            i18n,
             {}
         );
         assert.equal(display, "&euro; 500k - 1M");
     });
 
     it("Reading fields and values works", function () {
-        this.add("jurisdiction", "EU-GDPR");
-        this.add("location", "DE");
-        const fields = companyFilter.fields(this.filters);
+        this.filter.add("jurisdiction", "EU-GDPR");
+        this.filter.add("location", "DE");
+        const fields = this.filter.fields;
         assert.ok(
             ["jurisdiction", "location"].every((field) =>
                 fields.includes(field)
-            )
+            ),
+            `${fields} does not include jurisdiction and location`
         );
-        assert.deepEqual(companyFilter.values(this.filters, "jurisdiction"), [
-            "EU-GDPR",
-        ]);
-        assert.deepEqual(companyFilter.values(this.filters, "location"), [
-            "DE",
-        ]);
-    });
-
-    it("Values are sorted", function () {
-        this.add("location", "DE");
-        this.add("location", "NL");
-        this.add("revenueRange", "-1");
-        this.add("revenueRange", "500");
-        this.add("revenueRange", "1000");
-        assert.deepEqual(companyFilter.values(this.filters, "location"), [
-            "DE",
-            "NL",
-        ]);
-        assert.deepEqual(companyFilter.values(this.filters, "revenueRange"), [
-            "-1",
-            "500",
-            "1000",
-        ]);
+        assert.deepEqual(this.filter.values("jurisdiction"), ["EU-GDPR"]);
+        assert.deepEqual(this.filter.values("location"), ["DE"]);
     });
 
     it("Extracting filters from company data works", function () {
@@ -136,72 +113,100 @@ describe("companyFilter", function () {
             ["revenueRange", "100"],
             ["revenueRange", "500"],
         ];
-        const extractedFilters = companyFilter.extractFilters(companyData);
+        this.filter = new CompanyFilter(companyData);
         for (let [field, value] of expectedFilters)
-            assertHas(extractedFilters, field, value);
+            assertHas(this.filter, field, value);
     });
 
     it("Applying no filters returns all", function () {
-        const filtered = companyFilter.applyFilters(this.filters, companyData);
+        const filtered = this.filter.apply(companyData);
         assert.deepEqual(filtered, companyData);
     });
 
     it("Applying two filters for one field matches either", function () {
-        this.add("location", "DE");
-        this.add("location", "NL");
-        const filtered = companyFilter.applyFilters(this.filters, companyData);
+        this.filter.add("location", "DE");
+        this.filter.add("location", "NL");
+        const filtered = this.filter.apply(companyData);
         assert.deepEqual(filtered, companyData);
     });
 
     it("Applying two filters for different fields matches both", function () {
-        this.add("jurisdiction", "EU-GDPR");
-        this.add("location", "NL");
-        const filtered = companyFilter.applyFilters(this.filters, companyData);
-        assert.deepEqual(filtered, [companyByName("genericNlCompany")]);
+        this.filter.add("jurisdiction", "EU-GDPR");
+        this.filter.add("location", "NL");
+        const filtered = this.filter.apply(companyData);
+        assert.equal(filtered.length, 1);
+        assert.deepEqual(filtered[0], companyByName("genericNlCompany"));
     });
 
     it("Unknown revenue is extracted correctly", function () {
         const emptyCompanyData = [{ location: { countryCode: "" } }];
-        const extractedFilters = companyFilter.extractFilters(emptyCompanyData);
-        assertHas(extractedFilters, "revenueRange", "-1");
+        this.filter = new CompanyFilter(emptyCompanyData);
+        assertHas(this.filter, "revenueRange", "-1");
     });
 
     it("Unknown revenue is matched correctly", function () {
         const emptyCompanyData = [{ location: { countryCode: "" } }];
-        this.add("revenueRange", "-1");
-        const filtered = companyFilter.applyFilters(
-            this.filters,
-            emptyCompanyData
-        );
+        this.filter.add("revenueRange", "-1");
+        const filtered = this.filter.apply(emptyCompanyData);
         assert.deepEqual(filtered, emptyCompanyData);
     });
 
     it("Empty filters are classified correctly", function () {
-        assert.ok(companyFilter.empty(this.filters));
-        this.add("jurisdiction", "GDPR-EU");
-        assert.ok(!companyFilter.empty(this.filters));
+        assert.ok(this.filter.empty);
+        this.filter.add("jurisdiction", "GDPR-EU");
+        assert.ok(!this.filter.empty);
     });
 
     it("Extracting filters does not modify company data", function () {
         const companyDataBackup = JSON.stringify(companyData);
-        companyFilter.extractFilters(companyData);
+        this.filter = new CompanyFilter(companyData);
         assert.equal(JSON.stringify(companyData), companyDataBackup);
     });
 
     it("Deep copying filters works", function () {
-        this.add("jurisdiction", "EU-GDPR");
-        const copied = companyFilter.copy(this.filters);
-        companyFilter.removeFilter(copied, "jurisdiction", "EU-GDPR");
-        assertHas(this.filters, "jurisdiction", "EU-GDPR");
+        this.filter.add("jurisdiction", "EU-GDPR");
+        const copied = this.filter.copy();
+        copied.remove("jurisdiction", "EU-GDPR");
+        assertHas(this.filter, "jurisdiction", "EU-GDPR");
     });
 
     it("Equals works", function () {
-        this.add("location", "NL");
-        this.add("location", "DE");
-        const comparable = companyFilter.emptyFilters();
-        companyFilter.addFilter(comparable, "location", "DE");
-        assert.ok(!companyFilter.equal(this.filters, comparable));
-        companyFilter.addFilter(comparable, "location", "NL");
-        assert.ok(companyFilter.equal(this.filters, comparable));
+        this.filter.add("location", "NL");
+        this.filter.add("location", "DE");
+        const comparable = new CompanyFilter();
+        comparable.add("location", "DE");
+        assert.ok(!this.filter.equal(comparable));
+        comparable.add("location", "NL");
+        assert.ok(this.filter.equal(comparable));
+    });
+
+    it("Sorted map sorts location by display string", function () {
+        const i18n = new I18n("en", {
+            en: {
+                common: {
+                    "companyFilter.countryNameKey": "translation",
+                },
+            },
+        });
+        const globalData = {
+            countries: {
+                DE: { translation: "Germany" },
+                FR: { translation: "France" },
+                NL: { translation: "Netherlands" },
+            },
+        };
+        this.filter.add("location", "NL");
+        this.filter.add("location", "FR");
+        this.filter.add("location", "DE");
+        const sortedMap = this.filter.sortedMap(i18n, globalData);
+        assert.deepEqual(sortedMap.location, ["FR", "DE", "NL"]);
+    });
+
+    it("Sorted map sorts revenue range numerically", function () {
+        this.filter.add("revenueRange", "500");
+        this.filter.add("revenueRange", "-1");
+        this.filter.add("revenueRange", "1000");
+        const sortedMap = this.filter.sortedMap({}, {});
+        assert.deepEqual(sortedMap["revenueRange"], ["-1", "500", "1000"]);
     });
 });
