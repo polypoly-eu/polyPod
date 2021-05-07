@@ -100,6 +100,25 @@ export interface PolyOut extends FS {
 }
 
 /**
+ * `PolyNav` specifies the interaction of the Feature with the host container. It is concerned with
+ * user interactions with the container.
+ */
+export interface PolyNav {
+    /**
+     * A way for features to display a contents of a web page
+     */
+    openUrl(url: string): Promise<void>;
+    /**
+     * Describe what actions are possible within the pod when a feature is loaded
+     */
+    setActiveActions(actions: string[]): Promise<void>;
+    /**
+     * Set a title in of a Pod
+     */
+    setTitle(title: string): Promise<void>;
+}
+
+/**
  * @hidden
  */
 export interface PolyLifecycle {
@@ -170,6 +189,11 @@ export interface Pod {
      * `polyOut` is the interface to interact with the outside world. Refer to [[PolyOut]] for its definition.
      */
     readonly polyOut: PolyOut;
+
+    /**
+     * `polyNav` is the interface to interact the container. Refer to [[PolyNav]] for its definition.
+     */
+    readonly polyNav: PolyNav;
 
     /**
      * @hidden

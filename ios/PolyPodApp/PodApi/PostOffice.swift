@@ -45,6 +45,8 @@ class PostOffice {
             handlePolyOut(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
+        case "polyNav":
+            handlePolyNav(method: method, args: args)
         default:
             print("API unknown:", api)
         }
@@ -245,3 +247,37 @@ extension PostOffice {
         }
     }
 }
+
+extension PostOffice {
+    private func handlePolyNav(method: String, args: [Any]) {
+        switch method {
+        case "setTitle":
+            handlePolyNavSetTitle(args: args)
+        case "setActiveActions":
+            handlePolyNavSetActiveAction(args: args)
+        case "openUrl":
+            handlePolyNavOpenUrl(args: args)
+        default:
+            print("PolyNav method unknown:", method)
+        }
+    }
+    
+    private func handlePolyNavSetTitle(args: [Any]) {
+        let title = args[0] as! String
+        PodApi.shared.polyNav.setTitle(title: title) { res, error in
+        }
+    }
+
+    private func handlePolyNavSetActiveAction(args: [Any]) {
+        let actions = args[0] as! [String]
+        PodApi.shared.polyNav.setActiveActions(actions: actions) { res, error in
+        }
+    }
+
+    private func handlePolyNavOpenUrl(args: [Any]) {
+        let target = args[0] as! String
+        PodApi.shared.polyNav.openUrl(target: target) { res, error in
+        }
+    }
+}
+

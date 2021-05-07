@@ -17,6 +17,8 @@ import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.PolyIn
+import coop.polypoly.polypod.polyNav.PolyNav
+import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import eu.polypoly.pod.android.polyOut.PolyOut
 import java.util.zip.ZipFile
@@ -31,12 +33,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
-    private val api = PodApi(PolyOut(), PolyIn("data.nt", context.filesDir))
-    private val navApi: PodNavApi = PodNavApi(
-        webView = webView,
-        onActionsChanged = { navActionsChangedHandler(it) },
-        onTitleChanged = { navTitleChangedHandler(it) },
-        onOpenUrlRequested = ::handleOpenUrl
+    val api = PodApi(
+        PolyOut(),
+        PolyIn("data.nt", context.filesDir),
+        PolyNav(
+            webView = webView
+        )
     )
 
     var feature: Feature? = null
@@ -46,10 +48,28 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             loadFeature(value)
         }
 
-    var navActionsChangedHandler: (List<String>) -> Unit = {}
-    var navTitleChangedHandler: (String) -> Unit = {}
+    init {
+        webView.layoutParams =
+            LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        webView.settings.textZoom = 100
+        webView.settings.javaScriptEnabled = true
 
-    private fun handleOpenUrl(target: String) {
+        // Enabling localStorage to support polyExplorer data migration
+        webView.settings.domStorageEnabled = true
+
+        // Disable text selection
+        webView.isLongClickable = false
+        webView.setOnLongClickListener { true }
+        webView.isHapticFeedbackEnabled = false
+
+        addView(webView)
+    }
+
+    override fun getLifecycle(): Lifecycle = registry
+
+    fun triggerNavAction(name: String): Boolean = api.polyNav.triggerAction(name)
+
+    fun openUrl(target: String) {
         val featureName = feature?.name ?: return
         val url = feature?.findUrl(target)
         if (url == null) {
@@ -76,29 +96,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             .show()
     }
 
-    init {
-        webView.layoutParams =
-            LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        webView.settings.textZoom = 100
-        webView.settings.javaScriptEnabled = true
-
-        // Enabling localStorage to support polyExplorer data migration
-        webView.settings.domStorageEnabled = true
-
-        // Disable text selection
-        webView.isLongClickable = false
-        webView.setOnLongClickListener { true }
-        webView.isHapticFeedbackEnabled = false
-
-        addView(webView)
-    }
-
-    override fun getLifecycle(): Lifecycle = registry
-
-    fun triggerNavAction(name: String): Boolean = navApi.triggerAction(name)
-
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
+        api.polyNav.setNavObserver(PolyNavObserver(
+            null, null, { url -> openUrl(url) }))
 
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler(
@@ -231,55 +232,6 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 "woff2" -> "font/woff2"
                 else -> "text/plain"
             }
-        }
-    }
-
-    // The podNav API is currently experimental and not part of the formal
-    // feature API yet - as soon as we know what it needs to look like,
-    // that should change.
-    private class PodNavApi(
-        private val webView: WebView,
-        onActionsChanged: (List<String>) -> Unit,
-        onTitleChanged: (String) -> Unit,
-        onOpenUrlRequested: (String) -> Unit
-    ) {
-        private val apiJsObject = "podNav"
-        private val registeredActions = HashSet<String>()
-
-        init {
-            webView.addJavascriptInterface(object {
-                @JavascriptInterface
-                @Suppress("unused")
-                fun setActiveActions(actions: Array<String>) {
-                    registeredActions.clear()
-                    registeredActions.addAll(actions)
-                    onActionsChanged(registeredActions.toList())
-                }
-
-                @JavascriptInterface
-                @Suppress("unused")
-                fun setTitle(title: String) {
-                    onTitleChanged(title)
-                }
-
-                @JavascriptInterface
-                @Suppress("unused")
-                fun openUrl(target: String) {
-                    onOpenUrlRequested(target)
-                }
-            }, apiJsObject)
-        }
-
-        fun triggerAction(action: String): Boolean {
-            if (!registeredActions.contains(action))
-                return false
-            // We are making too many assumptions about the code loaded into
-            // the WebView here, it would be nicer if the container would
-            // expose the actions some other way.
-            val featureWindow =
-                "document.getElementsByTagName('iframe')[0].contentWindow"
-            webView.evaluateJavascript("$featureWindow.$apiJsObject.actions['$action']()") {}
-            return true
         }
     }
 }

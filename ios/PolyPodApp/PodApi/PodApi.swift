@@ -10,4 +10,9 @@ class PodApi {
     lazy var polyOut: PolyOut  = {
         return PolyOut()
     }()
+    
+    lazy var polyNav: PolyNav  = {
+        return PolyNav()
+    }()
+
 }
