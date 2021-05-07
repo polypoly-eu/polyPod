@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import i18n from "./i18n.js";
 import { pod } from "./fakePod.js";
-import { emptyFilters, removeFilter } from "./companyFilter.js";
+import { emptyFilters, removeFilter } from "./model/companyFilter.js";
+import { Company } from "./model/company.js";
 
 import MainScreen from "./screens/main/main.jsx";
 import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
@@ -46,15 +47,23 @@ async function writeFirstRun(firstRun) {
     polyIn.add(quad);
 }
 
+function loadCompanies(JSONData, globalData) {
+    const companies = [];
+    for (let obj of JSONData) {
+        companies.push(new Company(obj, globalData));
+    }
+    return companies;
+}
+
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
     const [showFeatured, setShowFeatured] = useState(true);
-    const [companyData] = useState(polyPediaCompanies);
-    const [selectedCompany, setSelectedCompany] = useState(undefined);
-    const featuredCompanyData = companyData.filter(
-        (company) => company.featured == true
+    const [companies] = useState(
+        loadCompanies(polyPediaCompanies, polyPediaGlobalData)
     );
+    const featuredCompanies = companies.filter((company) => company.featured);
+    const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [
         featuredCompanyTabInitialSlide,
         setFeaturedCompanyTabInitialSlide,
@@ -76,19 +85,17 @@ const PolyExplorer = () => {
         return Math.round(10 * average) / 10;
     }
     const counts = {
-        dataTypes: featuredCompanyData.map(
+        dataTypes: featuredCompanies.map(
             (company) => company.dataTypesShared.length
         ),
-        purposes: featuredCompanyData.map(
+        purposes: featuredCompanies.map(
             (company) => company.dataSharingPurposes.length
         ),
-        companies: featuredCompanyData.map(
+        companies: featuredCompanies.map(
             (company) => company.dataRecipients.length
         ),
-        jurisdictions: featuredCompanyData.map((company) =>
-            company.jurisdictionsShared
-                ? company.jurisdictionsShared.children.length
-                : 0
+        jurisdictions: featuredCompanies.map(
+            (company) => company.jurisdictionsShared.children.length
         ),
     };
     const featuredCompanyMaxValues = Object.fromEntries(
@@ -106,8 +113,9 @@ const PolyExplorer = () => {
         else backStack.push(activeScreen);
         setActiveScreen(screen);
         if (companyName)
+            //use ppid here
             setSelectedCompany(
-                companyData.filter((company) => companyName === company.name)[0]
+                companies.find((company) => companyName === company.name)
             );
     };
 
@@ -186,8 +194,8 @@ const PolyExplorer = () => {
         main: (
             <MainScreen
                 showFeatured={showFeatured}
-                featuredCompanyData={featuredCompanyData}
-                companyData={companyData}
+                featuredCompanies={featuredCompanies}
+                companies={companies}
                 globalData={polyPediaGlobalData}
                 onOpenDetails={(company) =>
                     handleActiveScreenChange("companyDetails", company)
@@ -259,7 +267,7 @@ const PolyExplorer = () => {
                 }
                 maxCompanies={featuredCompanyMaxValues.companies}
                 dataRecipients={selectedCompany?.dataRecipients?.map((name) =>
-                    companyData.find(
+                    companies.find(
                         (company) =>
                             company.name.toLowerCase() === name.toLowerCase()
                     )
@@ -289,7 +297,7 @@ const PolyExplorer = () => {
         ),
         companyFilter: (
             <CompanyFilterScreen
-                companies={companyData}
+                companies={companies}
                 globalData={polyPediaGlobalData}
                 activeFilters={activeFilters}
                 onApply={handleFilterApply}
@@ -298,7 +306,7 @@ const PolyExplorer = () => {
         featuredCompanyInfo: <FeaturedCompanyInfoScreen onClose={handleBack} />,
         companySearch: (
             <CompanySearchScreen
-                companies={companyData}
+                companies={companies}
                 onOpenDetails={(companyName) =>
                     handleActiveScreenChange("companyDetails", companyName)
                 }

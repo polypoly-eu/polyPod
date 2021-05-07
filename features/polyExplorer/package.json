@@ -41,6 +41,7 @@
   },
   "private": true,
   "dependencies": {
+    "@polypoly-eu/silly-i18n": "file:../../core/silly-i18n",
     "d3": "^6.5.0",
     "react-infinite-scroll-component": "^6.0.0",
     "rollup-plugin-css-only": "^3.1.0",

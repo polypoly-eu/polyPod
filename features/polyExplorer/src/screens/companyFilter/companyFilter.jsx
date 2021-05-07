@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import i18n from "../../i18n.js";
-import * as companyFilter from "../../companyFilter.js";
+import * as companyFilter from "../../model/companyFilter.js";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
 import Screen from "../../components/screen/screen.jsx";
 
