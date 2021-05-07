@@ -55,16 +55,6 @@ function loadCompanies(JSONData, globalData) {
     return companies;
 }
 
-function loadFeaturedCompanies(companies) {
-    const featuredCompanies = {};
-    for (let key of Object.keys(companies)) {
-        companies[key].featured
-            ? (featuredCompanies[key] = companies[key])
-            : null;
-    }
-    return featuredCompanies;
-}
-
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
@@ -72,7 +62,9 @@ const PolyExplorer = () => {
     const [companies] = useState(
         loadCompanies(polyPediaCompanies, polyPediaGlobalData)
     );
-    const featuredCompanies = loadFeaturedCompanies(companies);
+    const featuredCompanies = Object.values(companies).filter(
+        (company) => company.featured
+    );
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [
         featuredCompanyTabInitialSlide,
