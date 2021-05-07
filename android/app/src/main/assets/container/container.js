@@ -8,7 +8,7 @@ let outerPort;
 
 function initMessaging() {
     window.onmessage = event => {
-        // Action notifications have no port. Forward them to the feature
+        // Action notifications have no port
         if (event.ports.length == 0) {
             let iFrame = document.getElementsByTagName("iframe")[0];
             iFrame.contentWindow.pod.polyNav.actions[event.data]();

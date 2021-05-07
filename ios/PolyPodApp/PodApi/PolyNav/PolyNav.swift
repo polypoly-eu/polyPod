@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 protocol PolyNavProtocol {
     func setTitle(title: String, completionHandler: ([ExtendedData]?, Error?) -> Void)
@@ -7,26 +8,23 @@ protocol PolyNavProtocol {
 }
 
 class PolyNav: PolyNavProtocol {
+
+    init() {
+        webView = nil
+    }
+    
+    var webView: FeatureWebView?
+    
     func setTitle(title: String, completionHandler: ([ExtendedData]?, Error?) -> Void) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            completionHandler(nil, PolyApiError.unknown)
-            return
-        }
-        
+        webView?.doHandleSetTitle(title: title)
     }
     
     func setActiveActions(actions: [String], completionHandler: ([ExtendedData]?, Error?) -> Void) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            completionHandler(nil, PolyApiError.unknown)
-            return
-        }
+        webView?.doHandleSetActiveActions(actions: actions)
     }
     
     func openUrl(target: String, completionHandler: ([ExtendedData]?, Error?) -> Void) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            completionHandler(nil, PolyApiError.unknown)
-            return
-        }
+        webView?.doHandleOpenUrl(url: target)
     }
     
 }

@@ -21,6 +21,8 @@ struct FeatureContainerView: UIViewRepresentable {
             featureWebView.isOpaque = false
         }
 
+        PodApi.shared.polyNav.webView = featureWebView
+
         return featureWebView
     }
 
@@ -34,7 +36,7 @@ struct FeatureContainerView: UIViewRepresentable {
         if !activeActions.contains(action) {
             return
         }
-
+        
         uiView.triggerAction(action: action, dispatchTime: dispatchTime)
     }
 }
@@ -67,6 +69,8 @@ class FeatureWebView: WKWebView {
             forMainFrameOnly: false
         )
 
+        installUserScript(contentController, "polyNav", forMainFrameOnly: false)
+        
         installUserScript(
             contentController,
             "disableUserSelect",
@@ -141,7 +145,7 @@ class FeatureWebView: WKWebView {
         // iframe, we should use that here instead of opening up a new channel.
         let script = """
         document.getElementById('harness').contentWindow.postMessage({
-            command: 'triggerPodNavAction',
+            command: 'triggerPolyNavAction',
             action: '\(action)'
         }, '*')
         """
@@ -149,7 +153,7 @@ class FeatureWebView: WKWebView {
             if error != nil {
                 print(
                     """
-                    Failed to trigger podNav action '\(action)': \
+                    Failed to trigger polyNav action '\(action)': \
                     \(String(describing: error))
                     """
                 )
@@ -176,10 +180,6 @@ extension FeatureWebView: WKScriptMessageHandler {
                 self.doLog(data: body)
             case .Event:
                 self.doHandleEvent(messageBody: body)
-            case .PodNav:
-                // We should probably use an event message for this instead,
-                // rather than a custom new one.
-                self.doHandlePodNavCommand(messageBody: body)
             }
         }
     }
@@ -216,86 +216,17 @@ extension FeatureWebView: WKScriptMessageHandler {
 
         print("WebView: " + text)
     }
+    
+    func doHandleSetTitle(title: String) {
+        featureTitle.wrappedValue = title
+    }
 
-    private func doHandlePodNavCommand(messageBody: [String: Any]) {
-        guard let messageText = messageBody["text"] as? String else {
-            print(
-                """
-                Error: Bad podNav message - \
-                missing/unexpected message text: \(messageBody)
-                """
-            )
-            return
-        }
-
-        let textData = messageText.data(using: .utf8)!
-        guard let jsonData =
-                try? JSONSerialization.jsonObject(with: textData, options: [])
-                as? [String: Any]
-        else {
-            print(
-                """
-                Error: Bad podNav command message - \
-                invalid JSON data: \(messageBody)
-                """
-            )
-            return
-        }
-
-        guard let commandName = jsonData["name"] as? String
-        else {
-            print(
-                """
-                Error: Bad podNav command message - \
-                missing/unexpected command name: \(jsonData)
-                """
-            )
-            return
-        }
-
-        let commandData = jsonData["data"]
-        switch (commandName) {
-        case "setTitle":
-            guard let title = commandData as? String else {
-                print(
-                    """
-                    Error: Bad podNav setTitle command data: \
-                    \(String(describing: commandData))
-                    """
-                )
-                break
-            }
-            featureTitle.wrappedValue = title
-        case "setActiveActions":
-            guard let actions = commandData as? [String] else {
-                print(
-                    """
-                    Error: Bad podNav setActiveActions command data: \
-                    \(String(describing: commandData))
-                    """
-                )
-                break
-            }
-            activeActions.wrappedValue = actions
-        case "openUrl":
-            guard let target = commandData as? String else {
-                print(
-                    """
-                    Error: Bad podNav openUrl command data: \
-                    \(String(describing: commandData))
-                    """
-                )
-                break
-            }
-            openUrlHandler(target)
-        default:
-            print(
-                """
-                Error: Bad podNav command message - \
-                unknown command '\(commandName)'
-                """
-            )
-        }
+    func doHandleSetActiveActions(actions: [String]) {
+        activeActions.wrappedValue = actions
+    }
+    
+    func doHandleOpenUrl(url: String) {
+        openUrlHandler(url)
     }
 }
 

@@ -111,8 +111,8 @@
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
 		E90F89EE2629C0C000AD7D96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89ED2629C0C000AD7D96 /* ContentView.swift */; };
 		E92373BC26289FA900D2CFF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E92373BE26289FA900D2CFF3 /* Localizable.strings */; };
-		E923AAF7261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
-		E923AAF8261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
+		E923AAF7261E155500E0A2A8 /* polyNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* polyNav.js */; };
+		E923AAF8261E155500E0A2A8 /* polyNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* polyNav.js */; };
 		E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E924F5C3263BF5F60014834B /* ContentViewHost.swift */; };
 		E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
 		E97D3260263084C500A5A180 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325F263084C500A5A180 /* SettingsView.swift */; };
@@ -221,7 +221,7 @@
 		E92373B526289EA300D2CFF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E92373BD26289FA900D2CFF3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E92373C126289FAC00D2CFF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E923AAF6261E155500E0A2A8 /* podNav.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = podNav.js; sourceTree = "<group>"; };
+		E923AAF6261E155500E0A2A8 /* polyNav.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = polyNav.js; sourceTree = "<group>"; };
 		E924F5C3263BF5F60014834B /* ContentViewHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewHost.swift; sourceTree = "<group>"; };
 		E97D325526307CE100A5A180 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		E97D325F263084C500A5A180 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -413,7 +413,7 @@
 				1A8F4874247E40C600089217 /* PostOffice.swift */,
 				1A183E9124AF1E860025F6BB /* PolyApiError.swift */,
 				1ABADBEB24EBD02C00369791 /* LocationTracker.swift */,
-				E923AAF6261E155500E0A2A8 /* podNav.js */,
+				E923AAF6261E155500E0A2A8 /* polyNav.js */,
 			);
 			path = PodApi;
 			sourceTree = "<group>";
@@ -589,7 +589,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E923AAF8261E155500E0A2A8 /* podNav.js in Resources */,
+				E923AAF8261E155500E0A2A8 /* polyNav.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +600,7 @@
 				1ABADBCB24E2E06600369791 /* initIframe.js in Resources */,
 				E9F370CD262DD92C006254C1 /* jost_regular.ttf in Resources */,
 				1A00DFF724569F3A0049F3F7 /* pod.html in Resources */,
-				E923AAF7261E155500E0A2A8 /* podNav.js in Resources */,
+				E923AAF7261E155500E0A2A8 /* polyNav.js in Resources */,
 				1AA6DE5A24192463008DB1B2 /* domConsole.js in Resources */,
 				E92373BC26289FA900D2CFF3 /* Localizable.strings in Resources */,
 				1AB4F37E2508D64600E66BCC /* Settings.bundle in Resources */,

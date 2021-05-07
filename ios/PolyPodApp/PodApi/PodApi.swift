@@ -12,7 +12,7 @@ class PodApi {
     }()
     
     lazy var polyNav: PolyNav  = {
-        return PolyNav()	
+        return PolyNav()
     }()
 
 }

@@ -255,7 +255,7 @@ extension PostOffice {
         switch method {
         case "setTitle":
             handlePolyNavSetTitle(args: args, completionHandler: completionHandler)
-        case "setActiveAction":
+        case "setActiveActions":
             handlePolyNavSetActiveAction(args: args, completionHandler: completionHandler)
         case "openUrl":
             handlePolyNavOpenUrl(args: args, completionHandler: completionHandler)
