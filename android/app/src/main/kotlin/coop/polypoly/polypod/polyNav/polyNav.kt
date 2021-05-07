@@ -4,21 +4,16 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Base64
 import android.webkit.WebMessage
 import android.webkit.WebView
 import android.widget.Toast
 import coop.polypoly.polypod.R
 import coop.polypoly.polypod.features.Feature
-import eu.polypoly.bubblewrap.Bubblewrap
-import eu.polypoly.bubblewrap.Codec
-import org.msgpack.core.MessagePack
-import org.msgpack.value.Value
 
 open class PolyNav(
     private val webView: WebView,
     private val context: Context,
-    var cfg: PolyNavConfig? = null
+    private var observer: PolyNavObserver? = null
 ) {
     private val registeredActions = HashSet<String>()
     lateinit var feature : Feature
@@ -26,20 +21,20 @@ open class PolyNav(
     open fun setActiveActions(actions: Array<String>) {
         registeredActions.clear()
         registeredActions.addAll(actions)
-        cfg?.onActionsChanged?.invoke(registeredActions.toList())
+        observer?.onActionsChanged?.invoke(registeredActions.toList())
     }
 
     open fun setTitle(title: String) {
-        cfg?.onTitleChanged?.invoke(title)
+        observer?.onTitleChanged?.invoke(title)
     }
 
-    open fun setConfig(newCfg: PolyNavConfig) {
-        cfg = newCfg
+    open fun setNavObserver(newObserver: PolyNavObserver) {
+        observer = newObserver
     }
 
     open fun openUrl(target: String) {
-        val featureName = cfg?.feature?.name ?: return
-        val url = cfg?.feature?.findUrl(target)
+        val featureName = observer?.feature?.name ?: return
+        val url = observer?.feature?.findUrl(target)
         if (url == null) {
             val message = context.getString(
                 R.string.message_url_open_prevented, featureName, target

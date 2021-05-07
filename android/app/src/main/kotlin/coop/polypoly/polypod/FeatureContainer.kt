@@ -15,7 +15,7 @@ import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyNav.PolyNav
-import coop.polypoly.polypod.polyNav.PolyNavConfig
+import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import eu.polypoly.pod.android.polyOut.PolyOut
 import java.util.zip.ZipFile
@@ -69,7 +69,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
-        api.polyNav.setConfig(PolyNavConfig(feature))
+        api.polyNav.setNavObserver(PolyNavObserver(feature))
 
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler(
