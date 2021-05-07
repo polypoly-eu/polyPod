@@ -75,7 +75,7 @@ function executeProcess(executable, args, env = process.env) {
     return new Promise((resolve, reject) => {
         spawnedProcess.on("exit", (code) => {
             if (code === 0) resolve();
-            else reject(`Process exited with {code}`);
+            else reject(`Process exited with ${code}`);
         });
     });
 }

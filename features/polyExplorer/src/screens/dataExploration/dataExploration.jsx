@@ -165,6 +165,7 @@ const DataExplorationScreen = ({
     const activeScreen = screens[activeIndex];
     const highestValueObject = getHighestValueObject();
     const jurisdictionTreeFormatData = getJurisdictionTreeFormat();
+    const translationKey = `Translation_${i18n.language.toUpperCase()}`;
 
     const progressBar = (
         <div className="progress-bar">
@@ -196,6 +197,13 @@ const DataExplorationScreen = ({
     );
 
     function makeSwiperContentScrollable(element) {
+        // This logic has an odd edge case on iOS: Since there's this overscroll
+        // effect, it can _seem_ like swiping doesn't work when you try to swipe
+        // _while_ it's bouncing back. We wanted to keep the overscroll effect
+        // in place cause it's common on iOS, and while we could fix this edge
+        // case by changing the logic here a bit, for now it didn't bother
+        // anyone testing it, so we might as well keep it simple.
+
         let startScroll, touchStart;
 
         element.addEventListener(
@@ -508,9 +516,7 @@ const DataExplorationScreen = ({
     useEffect(() => {
         if (!swiper) return;
 
-        const scrollableElements = document.querySelectorAll(
-            ".purpose-content .bars, .company-industry-list"
-        );
+        const scrollableElements = document.querySelectorAll(".scrolling-area");
         for (let element of scrollableElements)
             makeSwiperContentScrollable(element);
 
@@ -559,7 +565,7 @@ const DataExplorationScreen = ({
                                         name: company.name,
                                         sharingCount: getTotalTypesShared(),
                                         mostSharedType:
-                                            highestValueObject.Translation_DE,
+                                            highestValueObject[translationKey],
                                         mostSharedCount:
                                             highestValueObject.count,
                                     }
@@ -578,7 +584,7 @@ const DataExplorationScreen = ({
                             <SwiperSlide key={index}>
                                 <h2>
                                     {global.polypoly_parent_categories[group]?.[
-                                        `Translation_${i18n.language.toUpperCase()}`
+                                        translationKey
                                     ] ||
                                         i18n.t(
                                             "dataExplorationScreen:dataTypes.without-category"

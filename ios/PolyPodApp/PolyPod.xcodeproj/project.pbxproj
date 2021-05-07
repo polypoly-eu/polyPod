@@ -112,12 +112,21 @@
 		E92373BC26289FA900D2CFF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E92373BE26289FA900D2CFF3 /* Localizable.strings */; };
 		E923AAF7261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
 		E923AAF8261E155500E0A2A8 /* podNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* podNav.js */; };
+		E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E924F5C3263BF5F60014834B /* ContentViewHost.swift */; };
 		E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
 		E97D3260263084C500A5A180 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325F263084C500A5A180 /* SettingsView.swift */; };
 		E97D3276263152CE00A5A180 /* FeatureManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3275263152CE00A5A180 /* FeatureManifest.swift */; };
 		E97D327A263153C200A5A180 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3279263153C200A5A180 /* NavigationBar.swift */; };
 		E97D32A82631BF7700A5A180 /* HTMLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D32A72631BF7700A5A180 /* HTMLView.swift */; };
 		E97D32B02631E68700A5A180 /* disableUserSelect.js in Resources */ = {isa = PBXBuildFile; fileRef = E97D32AF2631E68700A5A180 /* disableUserSelect.js */; };
+		E9B2203C263314AD005E8881 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
+		E9B2203D263314AD005E8881 /* FeatureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689D2420D5F600E51B6D /* FeatureStorage.swift */; };
+		E9B2203E263314AD005E8881 /* FeatureManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3275263152CE00A5A180 /* FeatureManifest.swift */; };
+		E9B22041263314DC005E8881 /* JSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerializationExtensions.swift */; };
+		E9B22042263314DC005E8881 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
+		E9B22043263314DC005E8881 /* LocalizedStringKeyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370D4262EABFF006254C1 /* LocalizedStringKeyExtensions.swift */; };
+		E9B22044263314DC005E8881 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */; };
+		E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
 		E9CF1B302625866800216B70 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 		E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
@@ -211,6 +220,7 @@
 		E92373BD26289FA900D2CFF3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E92373C126289FAC00D2CFF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E923AAF6261E155500E0A2A8 /* podNav.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = podNav.js; sourceTree = "<group>"; };
+		E924F5C3263BF5F60014834B /* ContentViewHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewHost.swift; sourceTree = "<group>"; };
 		E97D325526307CE100A5A180 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		E97D325F263084C500A5A180 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E97D3275263152CE00A5A180 /* FeatureManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureManifest.swift; sourceTree = "<group>"; };
@@ -376,6 +386,7 @@
 				E92373BE26289FA900D2CFF3 /* Localizable.strings */,
 				E90F89E92629822400AD7D96 /* OnboardingView.swift */,
 				E90F89ED2629C0C000AD7D96 /* ContentView.swift */,
+				E924F5C3263BF5F60014834B /* ContentViewHost.swift */,
 				E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */,
 				E9F370DC262EE9EE006254C1 /* WidthReader.swift */,
 				E9F370E0262EEB2C006254C1 /* ParagraphView.swift */,
@@ -639,6 +650,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9B22041263314DC005E8881 /* JSONSerializationExtensions.swift in Sources */,
+				E9B22042263314DC005E8881 /* FileManagerExtensions.swift in Sources */,
+				E9B22043263314DC005E8881 /* LocalizedStringKeyExtensions.swift in Sources */,
+				E9B22044263314DC005E8881 /* UIColorExtensions.swift in Sources */,
+				E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */,
+				E9B2203C263314AD005E8881 /* Feature.swift in Sources */,
+				E9B2203D263314AD005E8881 /* FeatureStorage.swift in Sources */,
+				E9B2203E263314AD005E8881 /* FeatureManifest.swift in Sources */,
 				1ABADBD224EBC5D500369791 /* FetchRequestInit.swift in Sources */,
 				1ABADC0424EE710C00369791 /* Term+CoreDataProperties.swift in Sources */,
 				1ABADC0224EE710C00369791 /* Literal+Additions.swift in Sources */,
@@ -749,6 +768,7 @@
 				1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */,
 				1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */,
 				1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */,
+				E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */,
 				1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */,
@@ -960,7 +980,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4A6DFU3K82;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -974,6 +995,7 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "coop.polypoly.polypod - iOS App Store Distribution";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -984,7 +1006,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4A6DFU3K82;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -998,6 +1021,7 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "coop.polypoly.polypod - iOS App Store Distribution";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

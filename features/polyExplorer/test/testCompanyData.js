@@ -1,4 +1,5 @@
 export default {
+    ppid: "APPLE INC.",
     name: "%%APPLE INC.",
     featured: true,
     jurisdiction: "Five-Eyes",

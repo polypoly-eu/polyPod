@@ -1,11 +1,12 @@
-import { browserPod, RemoteClientPod, RemoteServerPod } from "@polypoly-eu/podigree";
+import { RemoteClientPod, RemoteServerPod } from "@polypoly-eu/podigree";
+import { BrowserPod } from "@polypoly-eu/podjs";
 import { iframeOuterPort } from "@polypoly-eu/port-authority";
 import type { Pod } from "@polypoly-eu/poly-api";
 
 function createPod(): Pod {
     if (document.currentScript && document.currentScript.dataset.pod === "browser") {
         console.log("Using in-browser pod");
-        return browserPod();
+        return new BrowserPod();
     }
 
     console.log("Using RPC pod");
@@ -16,10 +17,10 @@ const pod = createPod();
 
 export function hideDashboard(): void {
     const body = document.body;
-    body.querySelectorAll<HTMLElement>(".dashboard")[0].style.display = "none";
+    body.querySelectorAll<HTMLElement>(".dashboard")[0].className = "hidden";
     const headers = body.querySelectorAll<HTMLElement>("h1");
     for (let i = 0; i < headers.length; i++) {
-        headers[i].style.display = "none";
+        headers[i].className = "hidden";
     }
     body.querySelectorAll<HTMLElement>("#container")[0].style.border = "none";
 }

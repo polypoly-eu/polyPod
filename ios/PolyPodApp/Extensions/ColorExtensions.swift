@@ -2,17 +2,23 @@ import SwiftUI
 
 extension Color {
     struct PolyPod {
+        // Do not use named colours, e.g. Color.white here, not while we use
+        // compatInit in UIColorExtensions.swift at least.
         static var lightForeground = Color(fromHex: "#F7FAFC")
         static var darkForeground = Color(fromHex: "#0F1938")
-        static var lightBackground = Color.white
+        static var lightBackground = Color(fromHex: "#FFFFFF")
         static var semiLightBackground = Color(fromHex: "#EDF2F7")
     }
     
-    // iOS 13 support
-    var cgColor: CGColor { UIColor(self).cgColor }
+    var compatCgColor: CGColor? {
+        if #available(iOS 14, *) {
+            return cgColor
+        }
+        return UIColor.compatInit(self).cgColor
+    }
     
     var luminance: Double {
-        guard let components = cgColor.components else {
+        guard let components = compatCgColor?.components else {
             return 0
         }
         let red = components[0]
@@ -21,7 +27,7 @@ extension Color {
         return Double(red * 0.2126 + green * 0.7152 + blue * 0.0722)
     }
     
-    var isLight: Bool { luminance * 255 <= 50 }
+    var isLight: Bool { luminance * 255 > 50 }
     
     init(fromHex hexValue: String) {
         let scanner = Scanner(string: hexValue)

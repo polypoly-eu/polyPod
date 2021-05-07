@@ -6,7 +6,7 @@ import {
     displayString,
     empty,
     sortFilters,
-} from "../../companyFilter.js";
+} from "../../model/companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -16,7 +16,7 @@ function groupCompanies(companies) {
     const sorted = companies.sort((a, b) => a.compareNames(b));
     const groups = {};
     sorted.forEach((company) => {
-        const key = company.firstNameChar.toUpperCase();
+        const key = company.nameIndexCharacter.toUpperCase();
         groups[key] = groups[key] || [];
         groups[key].push(company);
     });
