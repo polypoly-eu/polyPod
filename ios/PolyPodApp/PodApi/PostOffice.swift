@@ -267,21 +267,18 @@ extension PostOffice {
     private func handlePolyNavSetTitle(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let title = args[0] as! String
         PodApi.shared.polyNav.setTitle(title: title) { res, error in
-            // TODO: Implement callback
         }
     }
 
     private func handlePolyNavSetActiveAction(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let actions = args[0] as! [String]
         PodApi.shared.polyNav.setActiveActions(actions: actions) { res, error in
-            // TODO: Implement callback
         }
     }
 
     private func handlePolyNavOpenUrl(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let target = args[0] as! String
         PodApi.shared.polyNav.openUrl(target: target) { res, error in
-            // TODO: Implement callback
         }
     }
 }
