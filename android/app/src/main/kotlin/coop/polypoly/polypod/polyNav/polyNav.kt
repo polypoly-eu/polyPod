@@ -12,7 +12,6 @@ import coop.polypoly.polypod.features.Feature
 
 open class PolyNav(
     private val webView: WebView,
-    private val context: Context,
     private var observer: PolyNavObserver? = null
 ) {
     private val registeredActions = HashSet<String>()

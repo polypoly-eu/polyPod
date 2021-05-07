@@ -37,8 +37,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         PolyOut(),
         PolyIn("data.nt", context.filesDir),
         PolyNav(
-            webView = webView,
-            context = context
+            webView = webView
         )
     )
 
