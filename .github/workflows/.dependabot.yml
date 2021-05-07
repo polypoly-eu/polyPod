@@ -1,0 +1,91 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/core/aop-ts"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/bubblewrap"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/customs"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/dummy-server"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/fetch-spec"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/orodruin"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/podigree"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/poly-api"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/port-authority"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/postoffice"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/rdf"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/rdf-convert"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/core/rdf-spec"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/features/polyExplorer"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/features/polyPreview"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/features/polyPinion"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/features/example"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gradle"
+    directory: "/android"
+    schedule:
+      interval: "daily"
