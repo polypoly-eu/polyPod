@@ -8,13 +8,14 @@ import "./companySearch.css";
 const CompanySearchScreen = ({ companies, onOpenDetails }) => {
     const [searchString, setSearchString] = useState("");
     const featuredComanies = companies
-        .filter((e) => e.featured == true)
-        .sort((a, b) => a.name.localeCompare(b.name));
+        .filter((company) => company.featured)
+        .sort((a, b) => a.compareNames(b));
 
     const shownCompaniesUnsorted =
         searchString.length > 3 ||
-        companies.filter((c) => c.name.toLowerCase().startsWith(searchString))
-            .length == 0
+        companies.filter((company) =>
+            company.name.toLowerCase().startsWith(searchString)
+        ).length == 0
             ? companies.filter((c) =>
                   c.name.toLowerCase().includes(searchString)
               )
@@ -23,7 +24,7 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
               );
 
     const shownCompanies = shownCompaniesUnsorted.sort((a, b) =>
-        a.name > b.name ? 1 : -1
+        a.compareNames(b)
     );
     const inputRef = useRef();
 
