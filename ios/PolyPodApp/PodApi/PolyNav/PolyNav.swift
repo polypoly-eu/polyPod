@@ -8,7 +8,6 @@ protocol PolyNavProtocol {
 }
 
 class PolyNav: PolyNavProtocol {
-
     init() {
         webView = nil
     }
