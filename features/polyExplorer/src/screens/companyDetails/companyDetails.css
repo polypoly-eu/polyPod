@@ -201,7 +201,7 @@
 .company-details-text {
     box-sizing: border-box;
     width: 100%;
-    max-width: 474px;
+    max-width: var(--max-width);
     padding: 4px 30px;
     margin-bottom: 4px;
 }
@@ -213,14 +213,14 @@
     margin: 0px auto;
     width: 100%;
     padding: 0 30px;
-    max-width: 474px;
+    max-width: var(--max-width);
 }
 
 .gradient-box {
     flex: 0 0 auto;
     width: 100%;
     margin: 0px auto -24px auto;
-    max-width: 474px;
+    max-width: var(--max-width);
     height: 20px;
     transform: translateY(-37px);
 }

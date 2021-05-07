@@ -1,6 +1,6 @@
 .search-bar-container {
     width: 100%;
-    max-width: 460px;
+    max-width: var(--max-width);
     display: flex;
     justify-content: center;
     margin: 20px auto 0 auto;
@@ -49,7 +49,7 @@
 
 .company-search {
     width: 100%;
-    max-width: 460px;
+    max-width: var(--max-width);
     margin: 0 auto;
     padding: 16px 0;
     overflow-y: scroll;
