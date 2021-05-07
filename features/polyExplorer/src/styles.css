@@ -11,7 +11,7 @@
     --color-background-light: var(--color-light);
     /* Text colors */
     --color-text-dark: var(--color-dark);
-    --color-text-light: var(--color-semi-light);
+    --color-text-light: var(--color-light);
 
     /* Data exploration colors */
     --data-exp-data-types: #fe8988;

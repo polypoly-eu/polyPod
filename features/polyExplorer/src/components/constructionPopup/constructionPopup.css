@@ -26,6 +26,6 @@
     margin: 24px auto;
     border-radius: 8px;
     background-color: var(--color-background-dark);
-    color: #fff;
+    color: var(--color-text-light);
     font-size: 18px;
 }

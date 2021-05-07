@@ -46,9 +46,9 @@ const JurisdictionTree = ({ data }) => {
 
         const fontColors = {
             "EU-GDPR": "var(--color-text-dark)",
-            "Five-Eyes": "white",
-            China: "white",
-            Russia: "white",
+            "Five-Eyes": "var(--color-text-light)",
+            China: "var(--color-text-light)",
+            Russia: "var(--color-text-light)",
             Other: "var(--color-text-dark)",
         };
 
@@ -72,7 +72,7 @@ const JurisdictionTree = ({ data }) => {
                         .call(wrapText)
                         .style(
                             "fill",
-                            fontColors[node.data.category] || "white"
+                            fontColors[node.data.category] || "#F7FAFC"
                         );
                 } else if (
                     getDistance(node.x0, node.x1) > 40 &&
@@ -86,7 +86,7 @@ const JurisdictionTree = ({ data }) => {
                         .attr("y", fontSize)
                         .style(
                             "fill",
-                            fontColors[node.data.category] || "white"
+                            fontColors[node.data.category] || "#F7FAFC"
                         );
                 }
             });

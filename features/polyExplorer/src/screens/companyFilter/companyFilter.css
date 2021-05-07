@@ -11,7 +11,7 @@
     width: 60px;
     height: 48px;
     background: url("../images/reset-filter-background.svg");
-    color: #fff;
+    color: var(--color-text-light);
 }
 
 .company-filter-screen .filter-section h1 {
