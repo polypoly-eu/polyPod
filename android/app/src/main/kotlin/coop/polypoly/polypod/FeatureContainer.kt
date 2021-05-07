@@ -1,11 +1,14 @@
 package coop.polypoly.polypod
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
 import android.webkit.*
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -67,9 +70,37 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     fun triggerNavAction(name: String): Boolean = api.polyNav.triggerAction(name)
 
+    fun openUrl(target: String) {
+        val featureName = feature?.name ?: return
+        val url = feature?.findUrl(target)
+        if (url == null) {
+            val message = context.getString(
+                R.string.message_url_open_prevented, featureName, target
+            )
+            Toast.makeText(webView.context, message, Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val message = context.getString(
+            R.string.message_url_open_requested, featureName, url
+        )
+        val confirmLabel = context.getString(R.string.button_url_open_confirm)
+        val rejectLabel = context.getString(R.string.button_url_open_reject)
+        AlertDialog.Builder(context)
+            .setMessage(message)
+            .setPositiveButton(confirmLabel) { _, _ ->
+                context.startActivity(
+                    Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                )
+            }
+            .setNegativeButton(rejectLabel) { _, _ -> }
+            .show()
+    }
+
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
-        api.polyNav.setNavObserver(PolyNavObserver(feature))
+        api.polyNav.setNavObserver(PolyNavObserver(
+            null, null, { url -> openUrl(url) }))
 
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler(

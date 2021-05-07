@@ -134,12 +134,14 @@ open class FeatureFragment : Fragment() {
             })
 
         featureContainer.api.polyNav.setNavObserver(PolyNavObserver(
-            feature,
             {
                 activity?.runOnUiThread { updateAppBarActions(view, it) }
             },
             {
                 activity?.runOnUiThread { updateAppBarTitle(view, it) }
+            },
+            {
+                activity?.runOnUiThread { featureContainer.openUrl(it) }
             }
         ))
     }

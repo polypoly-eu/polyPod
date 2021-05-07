@@ -16,7 +16,6 @@ open class PolyNav(
     private var observer: PolyNavObserver? = null
 ) {
     private val registeredActions = HashSet<String>()
-    lateinit var feature : Feature
 
     open fun setActiveActions(actions: Array<String>) {
         registeredActions.clear()
@@ -33,30 +32,7 @@ open class PolyNav(
     }
 
     open fun openUrl(target: String) {
-        val featureName = observer?.feature?.name ?: return
-        val url = observer?.feature?.findUrl(target)
-        if (url == null) {
-            val message = context.getString(
-                R.string.message_url_open_prevented, featureName, target
-            )
-            Toast.makeText(webView.context, message, Toast.LENGTH_LONG).show()
-            return
-        }
-
-        val message = context.getString(
-            R.string.message_url_open_requested, featureName, url
-        )
-        val confirmLabel = context.getString(R.string.button_url_open_confirm)
-        val rejectLabel = context.getString(R.string.button_url_open_reject)
-        AlertDialog.Builder(context)
-            .setMessage(message)
-            .setPositiveButton(confirmLabel) { _, _ ->
-                context.startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                )
-            }
-            .setNegativeButton(rejectLabel) { _, _ -> }
-            .show()
+        observer?.onOpenUrl?.invoke(target)
     }
 
     fun triggerAction(action: String): Boolean {
