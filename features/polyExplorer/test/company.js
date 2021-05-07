@@ -109,8 +109,6 @@ describe("company", function () {
     const stringPatterns = ["%$%AAA", "!%$&ABC", "T", "()zz", "[]ZZZ"];
 
     for (let i = 0; i < stringPatterns.length - 1; i++) {
-        console.log(createTestCompany(stringPatterns[i]).name);
-        console.log(createTestCompany(stringPatterns[i + 1]).name);
         it("CompareNames() works", function () {
             assert(
                 createTestCompany(stringPatterns[i]).compareNames(
