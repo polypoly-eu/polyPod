@@ -31,13 +31,13 @@ const CategoryInfo = ({ category, company, onClose }) => {
                         text3: i18n.t("infographic:category.text3"),
                     }}
                 />
-                {highlights[company.name].dataTypeCategories[category]
+                {highlights[company.ppid].dataTypeCategories[category]
                     .explanation ? (
                     <div>
                         <h2>{i18n.t("explorationCategoryInfoScreen")}</h2>
                         <p>
                             {
-                                highlights[company.name].dataTypeCategories[
+                                highlights[company.ppid].dataTypeCategories[
                                     category
                                 ].explanation[i18n.t("common:country.code")]
                             }
