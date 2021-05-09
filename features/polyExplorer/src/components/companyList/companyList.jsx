@@ -19,10 +19,10 @@ function groupCompanies(companies) {
 }
 
 const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
-    const sortedFilterMap = activeFilters.sortedMap(i18n, globalData);
     const filterList = [];
-    for (let [field, values] of Object.entries(sortedFilterMap))
-        for (let value of values) filterList.push([field, value]);
+    for (let field of activeFilters.fields)
+        for (let value of activeFilters.sortedValues(field, i18n, globalData))
+            filterList.push([field, value]);
     return (
         <div className="active-filters">
             {filterList.map(([field, value], index) => (

@@ -20,7 +20,6 @@ const CompanyFilterScreen = ({
     const handleReset = () => setNewActiveFilters(new CompanyFilter());
 
     const allFilters = new CompanyFilter(companies);
-    const sortedFilterMap = allFilters.sortedMap(i18n, globalData);
 
     const isFilterActive = (field, value) => newActiveFilters.has(field, value);
 
@@ -34,21 +33,23 @@ const CompanyFilterScreen = ({
     const FilterSection = ({ title, field }) => (
         <div className={`filter-section ${field}`}>
             <h1>{title}</h1>
-            {sortedFilterMap[field].map((value, index) => (
-                <button
-                    key={index}
-                    className={isFilterActive(field, value) ? "active" : ""}
-                    onClick={() => handleToggle(field, value)}
-                    dangerouslySetInnerHTML={{
-                        __html: CompanyFilter.displayString(
-                            field,
-                            value,
-                            i18n,
-                            globalData
-                        ),
-                    }}
-                ></button>
-            ))}
+            {allFilters
+                .sortedValues(field, i18n, globalData)
+                .map((value, index) => (
+                    <button
+                        key={index}
+                        className={isFilterActive(field, value) ? "active" : ""}
+                        onClick={() => handleToggle(field, value)}
+                        dangerouslySetInnerHTML={{
+                            __html: CompanyFilter.displayString(
+                                field,
+                                value,
+                                i18n,
+                                globalData
+                            ),
+                        }}
+                    ></button>
+                ))}
         </div>
     );
 

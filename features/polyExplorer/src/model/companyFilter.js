@@ -102,8 +102,8 @@ const fields = {
         sortedValues(values, i18n, globalData) {
             // TODO: There's one company with a countryCode of `false` in the
             // data - should be filtered elsewhere.
-            values.delete(false);
-            return [...values].sort((a, b) => {
+            const filteredValues = values.filter((value) => value !== false);
+            return filteredValues.sort((a, b) => {
                 const [aString, bString] = [a, b].map(
                     (value) =>
                         fields.location.displayString(
@@ -157,6 +157,10 @@ export class CompanyFilter {
         return [...this._filters.get(field)];
     }
 
+    sortedValues(field, i18n, globalData) {
+        return fields[field].sortedValues(this.values(field), i18n, globalData);
+    }
+
     matches(company) {
         return [...this._filters.entries()].every(
             ([field, values]) =>
@@ -185,14 +189,5 @@ export class CompanyFilter {
             if (values.length !== otherValues.length) return false;
             return values.every((value) => otherValues.includes(value));
         });
-    }
-
-    sortedMap(i18n, globalData) {
-        return Object.fromEntries(
-            [...this._filters.entries()].map(([field, values]) => [
-                field,
-                fields[field].sortedValues(values, i18n, globalData),
-            ])
-        );
     }
 }

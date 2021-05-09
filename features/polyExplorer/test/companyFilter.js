@@ -180,7 +180,7 @@ describe("companyFilter", function () {
         assert.ok(this.filter.equal(comparable));
     });
 
-    it("Sorted map sorts location by display string", function () {
+    it("Location values are sorted by display string", function () {
         const i18n = new I18n("en", {
             en: {
                 common: {
@@ -198,15 +198,15 @@ describe("companyFilter", function () {
         this.filter.add("location", "NL");
         this.filter.add("location", "FR");
         this.filter.add("location", "DE");
-        const sortedMap = this.filter.sortedMap(i18n, globalData);
-        assert.deepEqual(sortedMap.location, ["FR", "DE", "NL"]);
+        const sorted = this.filter.sortedValues("location", i18n, globalData);
+        assert.deepEqual(sorted, ["FR", "DE", "NL"]);
     });
 
-    it("Sorted map sorts revenue range numerically", function () {
+    it("Revenue range values are sorted numerically", function () {
         this.filter.add("revenueRange", "500");
         this.filter.add("revenueRange", "-1");
         this.filter.add("revenueRange", "1000");
-        const sortedMap = this.filter.sortedMap({}, {});
-        assert.deepEqual(sortedMap["revenueRange"], ["-1", "500", "1000"]);
+        const sorted = this.filter.sortedValues("revenueRange", {}, {});
+        assert.deepEqual(sorted, ["-1", "500", "1000"]);
     });
 });
