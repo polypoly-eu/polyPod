@@ -2,7 +2,7 @@ const Prismic = require("@prismicio/client");
 const fs = require("fs");
 
 const apiEndpoint = "https://polypoly-coop.cdn.prismic.io/api/v2";
-const apiToken = null; //enter valid token here
+const apiToken = process.argv[2];
 
 if (apiToken) {
     const client = Prismic.client(apiEndpoint, { accessToken: apiToken });
@@ -22,7 +22,7 @@ if (apiToken) {
         });
 } else {
     console.log(
-        "Warning: This script can only be run by polypoly staff! You can use the lexicon with the most recent data that's already there."
+        "Error: Missing API-Token. This script may only be used by polypoly staff!"
     );
 }
 function loadTermExplanation(term) {
@@ -54,6 +54,7 @@ function loadLanguage(groups) {
 }
 
 function writeLexiconFile(lexicon) {
+    fs.unlinkSync(filePath);
     fs.writeFile(
         "src/data/lexicon.json",
         JSON.stringify(lexicon),
