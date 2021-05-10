@@ -21,18 +21,10 @@ button {
     background: none;
 }
 
-main {
-    text-align: center;
-    /* padding: 0;
-    margin: 0; */
-}
-@media (min-width: 640px) {
-    main {
-        max-width: none;
-    }
-}
 .lexicon {
     width: 100%;
+    max-width: 412px;
+    margin: auto;
 }
 
 .search-bar-area {
@@ -74,6 +66,33 @@ main {
 .search-bar-area .search-bar button {
     margin: 0;
     padding: 0;
+}
+
+.list-container {
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.list-container .list {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin: 0 20px;
+}
+
+.list-container .list h1 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.list-container .list h2 {
+    margin: 0 0 17px 20px;
+    font-size: 20px;
+}
+
+.list-container .result h2 {
+    font-size: 20px;
+    margin: 0 20px 17px 50px;
 }
 </style>
 
@@ -121,21 +140,27 @@ function handleClear() {
                 </button>
             </div>
         </div>
-        <div class="list">
+        <div class="list-container">
             {#if searchString}
-                {#each lexicon.search(searchString) as entry}
-                    <h2 on:click="{() => handleClickTerm(entry)}">
-                        {entry}
-                    </h2>
-                {/each}
-            {:else}
-                {#each lexicon.groups as group}
-                    <h1>{group}</h1>
-                    {#each lexicon.groupEntries(group) as entry}
+                <div class="result">
+                    {#each lexicon.search(searchString) as entry}
                         <h2 on:click="{() => handleClickTerm(entry)}">
                             {entry}
                         </h2>
                     {/each}
+                </div>
+            {:else}
+                {#each lexicon.groups as group}
+                    <div class="list">
+                        <h1>{group}</h1>
+                        <div>
+                            {#each lexicon.groupEntries(group) as entry}
+                                <h2 on:click="{() => handleClickTerm(entry)}">
+                                    {entry}
+                                </h2>
+                            {/each}
+                        </div>
+                    </div>
                 {/each}
             {/if}
         </div>
