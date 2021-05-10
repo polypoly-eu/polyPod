@@ -41,7 +41,7 @@ const CompanyFilterScreen = ({
                         className={isFilterActive(field, value) ? "active" : ""}
                         onClick={() => handleToggle(field, value)}
                         dangerouslySetInnerHTML={{
-                            __html: CompanyFilter.displayString(
+                            __html: allFilters.displayString(
                                 field,
                                 value,
                                 i18n,

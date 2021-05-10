@@ -82,7 +82,7 @@ describe("companyFilter", function () {
                 },
             },
         });
-        const display = CompanyFilter.displayString(
+        const display = this.filter.displayString(
             "revenueRange",
             500,
             i18n,

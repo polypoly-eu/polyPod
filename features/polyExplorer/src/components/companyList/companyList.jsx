@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import i18n from "../../i18n.js";
-import { CompanyFilter } from "../../model/companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -31,7 +30,7 @@ const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
                     className={field}
                     onClick={() => onRemoveFilter(field, value)}
                     dangerouslySetInnerHTML={{
-                        __html: CompanyFilter.displayString(
+                        __html: activeFilters.displayString(
                             field,
                             value,
                             i18n,
