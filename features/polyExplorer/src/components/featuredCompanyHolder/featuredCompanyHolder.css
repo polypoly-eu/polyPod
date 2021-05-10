@@ -6,7 +6,7 @@
     margin: 0 auto;
     height: 100%;
     width: 100%;
-    max-width: 414px;
+    max-width: var(--max-width);
 }
 
 .featured-company-card {

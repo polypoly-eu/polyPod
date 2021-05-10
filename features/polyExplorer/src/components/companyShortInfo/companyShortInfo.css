@@ -4,7 +4,7 @@
     width: 100%;
     padding: 8px;
     border: none;
-    background-color: #0f1938;
+    background-color: var(--color-background-dark);
     outline: none;
     margin: 0;
 }
@@ -26,7 +26,7 @@
 .company-short-info .info-box {
     display: inline-block;
     width: 100%;
-    color: #edf2f7;
+    color: var(--color-text-light);
     text-align: left;
     margin-left: 6px;
 }
@@ -38,7 +38,7 @@
     font-weight: 500;
     font-size: 20px;
     margin: 0 0 6px 0;
-    line-height: 120%;
+    line-height: var(--line-height);
 }
 
 .info-box .company-location {
@@ -66,28 +66,28 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #a9b6c6;
+    background-color: var(--color-medium);
     margin-right: 4px;
 }
 
 .company-location .EU-GDPR {
-    background-color: #60e6de;
+    background-color: var(--jurisdiction-EU-GDPR);
 }
 
 .company-location .Russia {
-    background-color: #fe8988;
+    background-color: var(--jurisdiction-russia);
 }
 
 .company-location .Five-Eyes {
-    background-color: #ec453d;
+    background-color: var(--jurisdiction-five-eyes);
 }
 
 .company-location .China {
-    background-color: #c5271e;
+    background-color: var(--jurisdiction-china);
 }
 
 .company-location .Others {
-    background-color: #a9b6c6;
+    background-color: var(--jurisdiction-others);
 }
 
 .company-short-info .company-category {
@@ -100,7 +100,7 @@
 .company-category .category-name {
     display: inline-block;
     margin: 0;
-    color: #a9b6c6;
+    color: var(--color-medium);
 }
 
 .company-category .category-icon {

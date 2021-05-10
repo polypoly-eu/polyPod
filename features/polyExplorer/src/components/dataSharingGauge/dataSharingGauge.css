@@ -3,19 +3,19 @@
 }
 
 .data-sharing-gauge[data-sharing-type="dataTypes"] {
-    --highlight-color: #fe8988;
+    --highlight-color: var(--data-exp-data-types);
 }
 
 .data-sharing-gauge[data-sharing-type="purposes"] {
-    --highlight-color: #3ba6ff;
+    --highlight-color: var(--data-exp-purposes);
 }
 
 .data-sharing-gauge[data-sharing-type="companies"] {
-    --highlight-color: #7ee8a2;
+    --highlight-color: var(--data-exp-companies);
 }
 
 .data-sharing-gauge[data-sharing-type="jurisdictions"] {
-    --highlight-color: #edf2f7;
+    --highlight-color: var(--data-exp-data-regions);
 }
 
 .data-sharing-top-labels {
@@ -80,7 +80,7 @@
 .data-sharing-gauge-average-marker.dark {
     height: 14px;
     margin-top: -1px;
-    border-color: #0f1938;
+    border-color: var(--color-dark);
 }
 
 .data-sharing-gauge-average-marker.light {

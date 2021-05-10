@@ -253,7 +253,7 @@ const DataExplorationScreen = ({
                     <DataTypeBubbles
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
-                        textColor="#0f1938"
+                        textColor="var(--color-text-dark)"
                         width={visualizationWidth}
                         height={visualizationHeight}
                         highlight={
@@ -288,7 +288,7 @@ const DataExplorationScreen = ({
                     <DataTypeBubbles
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
-                        textColor="#0f1938"
+                        textColor="var(--color-text-dark)"
                         width={visualizationWidth}
                         height={visualizationHeight}
                         opacity={0.2}
@@ -308,7 +308,7 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         defaultColor="#FB8A89"
                         category={categories[activeIndex - 4]}
-                        textColor="#0f1938"
+                        textColor="var(--color-text-dark)"
                         width={visualizationWidth}
                         height={visualizationHeight}
                         highlightedType={
@@ -342,7 +342,7 @@ const DataExplorationScreen = ({
                     <DataTypeBubbles
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
-                        textColor="#0f1938"
+                        textColor="var(--color-text-dark)"
                         width={visualizationWidth}
                         height={visualizationHeight}
                         opacity={0.2}
@@ -399,7 +399,7 @@ const DataExplorationScreen = ({
                         companyIndustryMap={companyIndustryMap}
                         width={visualizationWidth}
                         height={visualizationHeight}
-                        bubbleColor="#7EE8A2"
+                        bubbleColor="var(--data-exp-companies)"
                         maxCompanies={maxCompanies}
                     />
                     <p className="bubble-source">
@@ -428,7 +428,7 @@ const DataExplorationScreen = ({
                         width={visualizationWidth}
                         height={visualizationHeight}
                         opacity={0.1}
-                        bubbleColor="#7EE8A2"
+                        bubbleColor="var(--data-exp-companies)"
                         maxCompanies={maxCompanies}
                     />
                     <p className="bubble-source">
@@ -467,7 +467,7 @@ const DataExplorationScreen = ({
                         }
                         width={visualizationWidth}
                         height={visualizationHeight}
-                        bubbleColor="#7EE8A2"
+                        bubbleColor="var(--data-exp-companies)"
                         maxCompanies={maxCompanies}
                         highlight={highlights[company.name]?.dataRecipient}
                     />

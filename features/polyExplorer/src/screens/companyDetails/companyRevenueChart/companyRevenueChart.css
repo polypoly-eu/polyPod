@@ -16,14 +16,14 @@
     left: 12%;
     width: 80%;
     height: 1px;
-    background-color: #8d9caf;
+    background-color: var(--color-semi-dark);
 }
 
 .revenue-chart-container .x-axis {
     position: absolute;
     font-size: 10px;
     top: 88%;
-    color: #8d9caf;
+    color: var(--color-semi-dark);
     transform: translateX(-4px);
 }
 
@@ -54,7 +54,7 @@
     margin-left: 10%;
     margin-top: 2px;
     font-size: 10px;
-    color: #8d9caf;
+    color: var(--color-semi-dark);
 }
 
 .revenue-chart-container .no-data-text {
@@ -70,7 +70,7 @@
 .revenue-chart-container .no-data-for-column-tag {
     transform: translateY(-46px);
     font-size: 12px;
-    color: #8d9caf;
+    color: var(--color-semi-dark);
     text-align: center;
 }
 
