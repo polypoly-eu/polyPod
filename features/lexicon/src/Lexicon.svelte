@@ -78,11 +78,10 @@ main {
 </style>
 
 <script>
-import allTranslations from "./translations/translations.js";
+import i18n from "./i18n.js"
 export let lexicon;
 let showTerm = null;
 let searchString = "";
-const translations = allTranslations[lexicon.language];
 
 function handleClickTerm(term) {
     showTerm = term;
@@ -106,7 +105,7 @@ function handleClear() {
         <div class="term-description">
             <h2>{showTerm}</h2>
             {@html lexicon.description(showTerm)}
-            <button on:click="{() => handleBack()}">{translations.back}</button>
+            <button on:click="{() => handleBack()}">{i18n.t("common:back")}</button>
         </div>
     {:else}
         <div class="search-bar-area">
@@ -115,7 +114,7 @@ function handleClear() {
                     class="search-bar-input"
                     type="text"
                     value="{searchString}"
-                    placeholder="{translations.search}"
+                    placeholder="{i18n.t("common:search")}"
                     on:input="{(e) => handleSearch(e.target.value)}" />
                 <button on:click="{() => handleClear()}">
                     <img alt="Clear search" src="./images/clear-search.svg" />

@@ -1,14 +1,12 @@
 import LexiconView from "./Lexicon.svelte";
 import lexiconData from "./data/lexicon.json";
 import Lexicon from "./Lexicon.js";
-
-//Take this from polyPod
-const language = "en";
+import { determineLanguage } from "@polypoly-eu/silly-i18n";
 
 const lexicon = new LexiconView({
     target: document.body,
     props: {
-        lexicon: new Lexicon(language, lexiconData),
+        lexicon: new Lexicon(determineLanguage(), lexiconData),
     },
 });
 
