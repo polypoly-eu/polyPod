@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import i18n from "./i18n.js";
 import { pod } from "./fakePod.js";
-import { emptyFilters, removeFilter } from "./model/companyFilter.js";
 import { Company } from "./model/company.js";
+import { CompanyFilter } from "./model/companyFilter.js";
 
 import MainScreen from "./screens/main/main.jsx";
 import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
@@ -69,7 +69,7 @@ const PolyExplorer = () => {
         setFeaturedCompanyTabInitialSlide,
     ] = useState(0);
 
-    const [activeFilters, setActiveFilters] = useState(emptyFilters());
+    const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
     const [firstRun, setFirstRun] = useState(false);
     const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
     const initialDataExplorationSection = "dataTypes";
@@ -132,8 +132,8 @@ const PolyExplorer = () => {
     };
 
     const handleRemoveFilter = (field, value) => {
-        removeFilter(activeFilters, field, value);
-        setActiveFilters({ ...activeFilters });
+        activeFilters.remove(field, value);
+        setActiveFilters(activeFilters.copy());
     };
 
     const handleFilterApply = (newActiveFilters) => {
