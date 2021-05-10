@@ -1,6 +1,5 @@
 .company-filter-screen {
     padding: 20px;
-    padding-bottom: calc(107px + 27px);
     overflow: hidden scroll;
 }
 
@@ -63,24 +62,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
     box-sizing: border-box;
     height: 107px;
+    margin-top: 20px;
     background: #0f1938;
-}
-
-.company-filter-screen .button-area::before {
-    content: "";
-    position: absolute;
-    top: -57px;
-    right: 0;
-    left: 0;
-    height: 57px;
-    pointer-events: none;
-    background: linear-gradient(#0f193800 0%, #0f1938);
 }
 
 .company-filter-screen .apply-button {

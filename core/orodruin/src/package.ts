@@ -12,14 +12,15 @@ export async function pkg(rootDir: string, manifest: Manifest, target: string): 
 
     await fs.writeFile(join(target, "index.html"), html, "utf-8");
 
-    await fs.copyFile(
-        require.resolve("@polypoly-eu/podigree/dist/bootstrap.js"),
-        join(target, "pod.js")
-    );
-
     await fs.copyFile(join(__dirname, "../dist/container.js"), join(target, "container.js"));
 
-    await fs.mkdir(join(target, "feature"));
+    const featureDir = join(target, "feature");
+    await fs.mkdir(featureDir);
 
-    await copy(join(rootDir, manifest.root), join(target, "feature"));
+    await copy(join(rootDir, manifest.root), featureDir);
+
+    await fs.copyFile(
+        require.resolve("@polypoly-eu/podigree/dist/bootstrap.js"),
+        join(featureDir, "pod.js")
+    );
 }
