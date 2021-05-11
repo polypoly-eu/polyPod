@@ -9,7 +9,7 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
-import { Pod, PolyIn, PolyOut } from "./api";
+import { Pod, PolyIn, PolyOut, PolyNav } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
 
@@ -92,5 +92,21 @@ export class DefaultPod implements Pod {
                 return fs.writeFile(path, content, options);
             }
         })();
+    }
+    /**
+     * The [[PolyNav]] interface. See [[PolyNav]] for the description.
+     */
+    get polyNav(): PolyNav {
+        return {
+            openUrl: async (url: string) => {
+                throw new Error("Not implemented");
+            },
+            setActiveActions: async (actions: string[]) => {
+                throw new Error("Not implemented");
+            },
+            setTitle: async (title: string) => {
+                throw new Error("Not implemented");
+            },
+        };
     }
 }

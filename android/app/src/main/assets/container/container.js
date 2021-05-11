@@ -8,6 +8,12 @@ let outerPort;
 
 function initMessaging() {
     window.onmessage = event => {
+        // Action notifications have no port
+        if (event.ports.length == 0) {
+            let iFrame = document.getElementsByTagName("iframe")[0];
+            iFrame.contentWindow.pod.polyNav.actions[event.data]();
+            return;
+        }
         outerPort = event.ports[0];
         outerPort.onmessage = event => {
             // console.log(`Data coming from Pod to the Feature`);

@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import i18n from "../../i18n.js";
-import {
-    applyFilters,
-    displayString,
-    empty,
-    sortFilters,
-} from "../../model/companyFilter.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -24,10 +18,10 @@ function groupCompanies(companies) {
 }
 
 const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
-    const sortedFilters = sortFilters(activeFilters, i18n, globalData);
     const filterList = [];
-    for (let [field, values] of Object.entries(sortedFilters))
-        for (let value of values) filterList.push([field, value]);
+    for (let field of activeFilters.fields)
+        for (let value of activeFilters.sortedValues(field, i18n, globalData))
+            filterList.push([field, value]);
     return (
         <div className="active-filters">
             {filterList.map(([field, value], index) => (
@@ -36,7 +30,12 @@ const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
                     className={field}
                     onClick={() => onRemoveFilter(field, value)}
                     dangerouslySetInnerHTML={{
-                        __html: displayString(field, value, i18n, globalData),
+                        __html: activeFilters.displayString(
+                            field,
+                            value,
+                            i18n,
+                            globalData
+                        ),
                     }}
                 ></button>
             ))}
@@ -65,7 +64,7 @@ const CompanyList = ({
     activeFilters,
     onRemoveFilter,
 }) => {
-    const filteredCompanies = applyFilters(activeFilters, companies);
+    const filteredCompanies = activeFilters.apply(companies);
     const companyGroups = groupCompanies(filteredCompanies);
     const allKeys = Object.keys(companyGroups);
     const [loadedCompanies, setLoadedCompanies] = useState({});
@@ -87,7 +86,7 @@ const CompanyList = ({
     const handleRemoveFilter = (field, value) => {
         onRemoveFilter(field, value);
         const newLoadedCompanies = {};
-        const filteredCompanies = applyFilters(activeFilters, companies);
+        const filteredCompanies = activeFilters.apply(companies);
         const newCompanyGroups = groupCompanies(filteredCompanies);
         const newKeys = Object.keys(newCompanyGroups);
         const newStartGroups = getStartGroups(newCompanyGroups);
@@ -127,7 +126,7 @@ const CompanyList = ({
             <div
                 className={
                     "companies" +
-                    (empty(activeFilters) ? "" : " filters-visible")
+                    (activeFilters.empty ? "" : " filters-visible")
                 }
             >
                 <button

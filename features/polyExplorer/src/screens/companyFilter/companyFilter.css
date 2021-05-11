@@ -10,7 +10,7 @@
     width: 60px;
     height: 48px;
     background: url("../images/reset-filter-background.svg");
-    color: #fff;
+    color: var(--color-text-light);
 }
 
 .company-filter-screen .filter-section h1 {
@@ -55,7 +55,7 @@
 
 .company-filter-screen .filter-section button.active {
     background: #cbd5e0;
-    color: #0f1938;
+    color: var(--color-text-dark);
 }
 
 .company-filter-screen .button-area {
@@ -65,17 +65,17 @@
     box-sizing: border-box;
     height: 107px;
     margin-top: 20px;
-    background: #0f1938;
+    background: var(--color-background-dark);
 }
 
 .company-filter-screen .apply-button {
     width: 300px;
     height: 48px;
     border-radius: 4px;
-    color: #0f1938;
+    color: var(--color-text-dark);
     font-family: "Jost Medium";
     font-size: 18px;
-    background-color: #f7fafc;
+    background-color: var(--color-background-light);
 }
 
 .company-filter-screen .apply-button.disabled {

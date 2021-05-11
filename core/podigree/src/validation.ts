@@ -1,4 +1,12 @@
-import type { Matcher, Pod, PolyIn, PolyOut, EncodingOptions, Stats } from "@polypoly-eu/poly-api";
+import type {
+    Matcher,
+    Pod,
+    PolyIn,
+    PolyOut,
+    PolyNav,
+    EncodingOptions,
+    Stats,
+} from "@polypoly-eu/poly-api";
 import type {
     Term,
     Quad,
@@ -254,5 +262,24 @@ export class ValidatingPod implements Pod {
         };
 
         return new Impl();
+    }
+
+    get polyNav(): PolyNav {
+        const pod = this;
+        const polyNav = this.pod.polyNav;
+
+        return {
+            async openUrl(url: string): Promise<void> {
+                throw new Error("Not implemented");
+            },
+
+            async setActiveActions(actions: string[]): Promise<void> {
+                throw new Error("Not implemented");
+            },
+
+            async setTitle(title: string): Promise<void> {
+                throw new Error("Not implemented");
+            },
+        };
     }
 }

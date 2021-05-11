@@ -19,7 +19,7 @@
     flex-direction: row;
     font-weight: 500;
     font-size: 12px;
-    line-height: 120%;
+    line-height: var(--line-height);
 }
 
 .data-exploration .purpose-chart .descriptions div {
@@ -38,15 +38,15 @@
     display: flex;
     flex: 0 0 auto;
     width: 95%;
-    max-width: 414px;
+    max-width: var(--max-width);
     height: 30px;
     margin: 12px 2.5% 0 2.5%;
     border: solid 1px #525e72;
-    background-color: #0f1938;
+    background-color: var(--color-background-dark);
     border-left: none;
     border-right: none;
     line-height: 30px;
-    color: #a9b6c6;
+    color: var(--color-medium);
     font-size: 10px;
 }
 
@@ -83,7 +83,7 @@
 .data-exploration .purpose-chart .scale .origin div {
     height: 10px;
     width: 1px;
-    background-color: #f7fafc;
+    background-color: var(--color-background-light);
 }
 
 .data-exploration .purpose-chart .scale .tick-box {
@@ -95,7 +95,7 @@
     position: absolute;
     height: 10px;
     width: 1px;
-    background-color: #f7fafc;
+    background-color: var(--color-background-light);
     right: 0;
     bottom: 0;
 }
@@ -104,7 +104,7 @@
     position: absolute;
     height: 4px;
     width: 1px;
-    background-color: #f7fafc;
+    background-color: var(--color-background-light);
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
@@ -148,5 +148,5 @@
 
 .data-exploration .purpose-chart .bar-box .bar {
     height: 12px;
-    background-color: #3ba6ff;
+    background-color: var(--data-exp-purposes);
 }

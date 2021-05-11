@@ -1,18 +1,24 @@
 package coop.polypoly.polypod
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 import coop.polypoly.polypod.bubblewrap.FetchResponseCodec
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyIn.rdf.Matcher
 import coop.polypoly.polypod.polyIn.rdf.Quad
+import coop.polypoly.polypod.polyNav.PolyNav
 import eu.polypoly.pod.android.polyOut.FetchInit
 import eu.polypoly.pod.android.polyOut.PolyOut
-import org.msgpack.value.MapValue
-import org.msgpack.value.StringValue
-import org.msgpack.value.Value
-import org.msgpack.value.ValueFactory
+import org.msgpack.value.*
 
-open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
+open class PodApi(
+    open val polyOut: PolyOut,
+    open val polyIn: PolyIn,
+    open val polyNav: PolyNav) {
+
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
@@ -44,6 +50,14 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
                     "select" -> return handlePolyInSelect(args)
                 }
             }
+            "polyNav" -> {
+                when (inner) {
+                    "setActiveActions" -> return handlePolyNavSetActiveActions(args)
+                    "setTitle" -> return handlePolyNavSetTitle(args)
+                    "openUrl" -> return handlePolyNavOpenUrl(args)
+                }
+            }
+
         }
         throw IllegalArgumentException("Unable to handle request, unsupported call target: '${outer}.${inner}()'")
     }
@@ -65,6 +79,25 @@ open class PodApi(open val polyOut: PolyOut, open val polyIn: PolyIn) {
         logger.debug("dispatch() -> polyIn.select")
         val result = polyIn.select(Matcher.codec.decode(args[0]))
         return ValueFactory.newArray(result.map { Quad.codec.encode(it) })
+    }
+
+    private fun handlePolyNavOpenUrl(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyNav.openUrl")
+        polyNav.openUrl(args[0].asStringValue().toString())
+        return ValueFactory.newNil()
+    }
+
+    private fun handlePolyNavSetTitle(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyNav.setTitle")
+        polyNav.setTitle((args[0].asStringValue().toString()))
+        return ValueFactory.newNil()
+    }
+
+    private fun handlePolyNavSetActiveActions(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyNav.setActiveActions")
+        val argsList = args[0].asArrayValue().map { it.asStringValue().toString() }
+        polyNav.setActiveActions(argsList.toTypedArray())
+        return ValueFactory.newNil()
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {

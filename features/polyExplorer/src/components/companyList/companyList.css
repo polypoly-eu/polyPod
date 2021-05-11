@@ -8,7 +8,7 @@
     z-index: 2;
     width: 100%;
     overflow-x: scroll;
-    background: #0f1938;
+    background: var(--color-background-dark);
     white-space: nowrap;
 }
 
@@ -24,8 +24,8 @@
     padding: 0 9px 0 9px;
     border-radius: 16px;
     line-height: 32px;
-    background: #a9b6c6;
-    color: #0f1938;
+    background: var(--color-medium);
+    color: var(--color-text-dark);
     font-size: 14px;
 }
 
@@ -105,7 +105,7 @@ button::after {
     font-family: "Jost Medium";
     font-weight: 500;
     font-size: 16px;
-    color: #a9b6c6;
+    color: var(--color-medium);
 }
 
 .company-group-companies {

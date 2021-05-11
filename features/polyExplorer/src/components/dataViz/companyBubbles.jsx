@@ -258,8 +258,8 @@ const CompanyBubbles = ({
             .style("font-family", "Jost Medium")
             .style("font-weight", "500")
             .style("font-size", "14px")
-            .style("line-height", "120%")
-            .style("color", "#f7fafc")
+            .style("line-height", "var(--line-height)")
+            .style("color", "var(--color-light)")
             .html(explanation);
 
         const divHeight =
