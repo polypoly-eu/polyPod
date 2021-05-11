@@ -3,7 +3,7 @@ import Foundation
 extension PolyOut {
     func fetch(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?, Error?) -> Void) {
         guard let url = URL(string: urlString) else {
-            completionHandler(nil, PolyApiError.paramterMissing)
+            completionHandler(nil, PodApiError.paramterMissing)
             return
         }
         
@@ -29,7 +29,7 @@ extension PolyOut {
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse else {
-                completionHandler(nil, PolyApiError.unknown)
+                completionHandler(nil, PodApiError.unknown)
                 return
             }
             

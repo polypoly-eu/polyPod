@@ -1,4 +1,4 @@
-enum PolyApiError: Error {
+enum PodApiError: Error {
     case unknown
     case databaseError
     case badSearchQuery
