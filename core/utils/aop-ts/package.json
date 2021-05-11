@@ -16,7 +16,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config": "file:../../eslint-config",
+    "@polypoly-eu/eslint-config": "file:../../../eslint-config",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^26.0.20",
     "@typescript-eslint/eslint-plugin": "^4.14.2",

@@ -26,7 +26,7 @@
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "dependencies": {
-    "@polypoly-eu/aop-ts": "file:../aop-ts",
+    "@polypoly-eu/aop-ts": "file:../utils/aop-ts",
     "@polypoly-eu/bubblewrap": "file:../bubblewrap",
     "@polypoly-eu/fetch-spec": "file:../fetch-spec",
     "@polypoly-eu/poly-api": "file:../poly-api",
@@ -41,7 +41,7 @@
     "memfs": "^3.2.0"
   },
   "devDependencies": {
-    "@polypoly-eu/dummy-server": "file:../dummy-server",
+    "@polypoly-eu/dummy-server": "file:../utils/dummy-server",
     "@polypoly-eu/eslint-config": "file:../../eslint-config",
     "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rollup/plugin-commonjs": "^17.0.0",
