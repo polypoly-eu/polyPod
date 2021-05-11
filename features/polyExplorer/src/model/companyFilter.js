@@ -3,7 +3,9 @@
 class FieldMatcher {
     constructor(companies = []) {
         this._values = new Set(
-            companies.map((company) => this.constructor.extractValue(company))
+            Object.values(companies).map((company) =>
+                this.constructor.extractValue(company)
+            )
         );
     }
 
@@ -208,7 +210,9 @@ export class CompanyFilter {
     }
 
     apply(companies) {
-        return companies.filter((company) => this.matches(company));
+        return Object.values(companies).filter((company) =>
+            this.matches(company)
+        );
     }
 
     copy() {
