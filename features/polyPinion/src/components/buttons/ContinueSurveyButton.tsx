@@ -5,9 +5,8 @@ import { useHistory } from "react-router-dom";
 
 export default function ContinueSurveyButton({ title = "generic.button.continue", questionnaire }) {
     const history = useHistory();
-    const { setQuestionnaire, setQuestionnaireAndSwitchToFirstUnansweredQuestion } = useContext(
-        QuestionnaireContext
-    );
+    const { setQuestionnaire, setQuestionnaireAndSwitchToFirstUnansweredQuestion } =
+        useContext(QuestionnaireContext);
 
     const answeredAmount = questionnaire.answeredQuestions().length;
     const totalAmount = questionnaire.activeQuestions().length;
