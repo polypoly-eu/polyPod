@@ -85,7 +85,7 @@ const npm = (...args) =>
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await npm("ci");
+    await npm("ci", "--no-update-notifier", "--no-fund");
 }
 
 async function npmRun(script, pkg) {
