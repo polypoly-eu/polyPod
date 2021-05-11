@@ -23,9 +23,9 @@
     "test": "rollup -c && jest"
   },
   "dependencies": {
-    "@polypoly-eu/customs": "file:../customs",
+    "@polypoly-eu/manifest-parser": "file:../api/manifest-parser",
+    "@polypoly-eu/pod-api": "file:../api/pod-api",
     "@polypoly-eu/podjs": "file:../../podjs",
-    "@polypoly-eu/poly-api": "file:../poly-api",
     "@polypoly-eu/port-authority": "file:../port-authority",
     "@polypoly-eu/remote-pod": "file:../remote-pod",
     "@rdfjs/dataset": "^1.0.1",

@@ -14,10 +14,10 @@
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
-    "@polypoly-eu/fetch-spec": "file:../core/fetch-spec",
-    "@polypoly-eu/poly-api": "file:../core/poly-api",
-    "@polypoly-eu/rdf": "file:../core/rdf",
-    "@polypoly-eu/rdf-convert": "file:../core/rdf-convert",
+    "@polypoly-eu/fetch-spec": "file:../core/api/fetch-spec",
+    "@polypoly-eu/pod-api": "file:../core/api/pod-api",
+    "@polypoly-eu/rdf": "file:../core/api/rdf",
+    "@polypoly-eu/rdf-convert": "file:../core/api/rdf-convert",
     "@rdfjs/dataset": "^1.0.1",
     "@types/rdf-js": "^4.0.0",
     "fp-ts": "^2.8.2",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config": "file:../eslint-config",
-    "@polypoly-eu/rdf-spec": "file:../core/rdf-spec",
+    "@polypoly-eu/rdf-spec": "file:../core/api/rdf-spec",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",

@@ -1,4 +1,4 @@
-import { Manifest } from "@polypoly-eu/customs";
+import { Manifest } from "@polypoly-eu/manifest-parser";
 import { promises as fs } from "fs";
 import { join } from "path";
 import { render } from "ejs";

@@ -6,7 +6,7 @@ import {
     nullInterceptor,
     intercept,
 } from "@polypoly-eu/aop-ts";
-import { PolyIn, PolyOut, PolyNav, Pod } from "@polypoly-eu/poly-api";
+import { PolyIn, PolyOut, PolyNav, Pod } from "@polypoly-eu/pod-api";
 import { DataFactory } from "rdf-js";
 
 export interface Logger {

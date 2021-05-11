@@ -1,4 +1,4 @@
-# poly-api
+# pod-api
 
 ![Node CI](https://github.com/polypoly-eu/poly-api/workflows/Node%20CI/badge.svg)
 

@@ -21,7 +21,7 @@ export default [
         ],
         external: [
             "@polypoly-eu/aop-ts",
-            "@polypoly-eu/poly-api",
+            "@polypoly-eu/pod-api",
             "@polypoly-eu/rdf",
             "@polypoly-eu/rdf-convert",
             "@rdfjs/dataset",

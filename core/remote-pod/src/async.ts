@@ -7,7 +7,7 @@ import {
     EncodingOptions,
     Matcher,
     Stats,
-} from "@polypoly-eu/poly-api";
+} from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 

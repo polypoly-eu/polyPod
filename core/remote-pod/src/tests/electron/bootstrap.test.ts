@@ -1,4 +1,4 @@
-import { DefaultPod } from "@polypoly-eu/poly-api";
+import { DefaultPod } from "@polypoly-eu/pod-api";
 import { IncomingMessage, ServerResponse, RequestListener, Server } from "http";
 import { once } from "events";
 import { dataset } from "@rdfjs/dataset";

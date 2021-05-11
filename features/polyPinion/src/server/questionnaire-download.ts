@@ -1,5 +1,5 @@
 import * as POD_ENV from "../env";
-import type {} from "@polypoly-eu/poly-api";
+import type {} from "@polypoly-eu/pod-api";
 import demoMode from "../demo-mode/demoMode.js";
 
 const { polyOut } = demoMode.activated ? null : window.pod;

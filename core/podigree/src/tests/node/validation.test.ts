@@ -1,9 +1,9 @@
-import { DefaultPod } from "@polypoly-eu/poly-api";
+import { DefaultPod } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
 import { ValidatingPod } from "../../validation";
 import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
-import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";

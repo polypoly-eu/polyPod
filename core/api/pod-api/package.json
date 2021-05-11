@@ -1,5 +1,5 @@
 {
-  "name": "@polypoly-eu/poly-api",
+  "name": "@polypoly-eu/pod-api",
   "version": "0.7.2",
   "description": "Definitions, spec, and dummy implementation for the API of a Pod",
   "files": [
@@ -28,8 +28,8 @@
     "@types/rdf-js": "^4.0.0"
   },
   "devDependencies": {
-    "@polypoly-eu/dummy-server": "file:../utils/dummy-server",
-    "@polypoly-eu/eslint-config": "file:../../eslint-config",
+    "@polypoly-eu/dummy-server": "file:../../utils/dummy-server",
+    "@polypoly-eu/eslint-config": "file:../../../eslint-config",
     "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.1.0",

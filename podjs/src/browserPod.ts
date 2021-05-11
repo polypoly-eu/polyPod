@@ -5,8 +5,8 @@ import type {
     PolyIn,
     PolyOut,
     PolyNav,
-} from "@polypoly-eu/poly-api";
-import { EncodingOptions, Stats } from "@polypoly-eu/poly-api";
+} from "@polypoly-eu/pod-api";
+import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 

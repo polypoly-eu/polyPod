@@ -1,4 +1,4 @@
-import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
 import chai from "chai";
 import chaiAsPromised from "chai-as-promised";

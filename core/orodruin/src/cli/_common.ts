@@ -1,5 +1,5 @@
 import { join } from "path";
-import { Manifest, readManifest } from "@polypoly-eu/customs";
+import { Manifest, readManifest } from "@polypoly-eu/manifest-parser";
 
 export interface Ops {
     dir?: string;
