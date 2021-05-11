@@ -16,102 +16,100 @@ describe("company", function () {
 
     const testCompany = new company.Company(testCompanyJSON, testGlobalJSON);
 
-    it("Company: ppid is parsed correctly", function () {
+    it("ppid is parsed correctly", function () {
         assert.strictEqual(testCompany.ppid, testCompanyJSON.ppid);
     });
 
-    it("Company: name is parsed correctly", function () {
+    it("Name is parsed correctly", function () {
         assert.strictEqual(testCompany.name, testCompanyJSON.name);
     });
 
-    it("Company: featured tag is parsed correctly", function () {
+    it("Featured tag is parsed correctly", function () {
         assert.strictEqual(testCompany.featured, testCompanyJSON.featured);
     });
 
-    it("Company: city is parsed correctly", function () {
+    it("City is parsed correctly", function () {
         assert.strictEqual(
             testCompany.location.city,
             testCompanyJSON.location.city
         );
     });
 
-    it("Company: countryCode is parsed correctly", function () {
+    it("CountryCode is parsed correctly", function () {
         assert.strictEqual(
             testCompany.location.countryCode,
             testCompanyJSON.location.countryCode
         );
     });
 
-    it("Company: jurisdiction is parsed correctly", function () {
+    it("Jurisdiction is parsed correctly", function () {
         assert.strictEqual(
             testCompany.jurisdiction,
             testCompanyJSON.jurisdiction
         );
     });
 
-    it("Company: annualRevenue is parsed correctly", function () {
+    it("AnnualRevenue is parsed correctly", function () {
         assert.strictEqual(
             testCompany.annualRevenues,
             testCompanyJSON.annualRevenues
         );
     });
 
-    it("Company: dataRecipients is parsed correctly", function () {
+    it("DataRecipients is parsed correctly", function () {
         assert.strictEqual(
             testCompany.dataRecipients,
             testCompanyJSON.dataRecipients
         );
     });
 
-    it("Company: datasharingPurposes is parsed correctly", function () {
+    it("DatasharingPurposes is parsed correctly", function () {
         assert.strictEqual(
             testCompany.dataSharingPurposes,
             testCompanyJSON.dataSharingPurposes
         );
     });
 
-    it("Company: dataTypesShared is parsed correctly", function () {
+    it("DataTypesShared is parsed correctly", function () {
         assert.strictEqual(
             testCompany.dataTypesShared,
             testCompanyJSON.dataTypesShared
         );
     });
 
-    it("Company: jurisdictionsShared is parsed correctly", function () {
+    it("JurisdictionsShared is parsed correctly", function () {
         assert.strictEqual(
             testCompany.jurisdictionsShared,
             testCompanyJSON.jurisdictionsShared
         );
     });
 
-    it("Company: industryCategory is parsed correctly", function () {
+    it("IndustryCategory is parsed correctly", function () {
         assert.strictEqual(
             testCompany.industryCategory,
             testCompanyJSON.industryCategory
         );
     });
 
-    it("Company: description is parsed correctly", function () {
+    it("Description is parsed correctly", function () {
         assert.strictEqual(
             testCompany.description,
             testCompanyJSON.description
         );
     });
 
-    it("Company: nameIndexCharacter only gives one character", function () {
+    it("NameIndexCharacter only gives one character", function () {
         assert.strictEqual(testCompany.nameIndexCharacter.length, 1);
     });
 
-    it("Company: nameIndexCharacter has no special characters", function () {
+    it("NameIndexCharacter has no special characters", function () {
         assert(!specialCharacters.test(testCompany.nameIndexCharacter));
     });
 
     const stringPatterns = ["%$%AAA", "!%$&ABC", "T", "()zz", "[]ZZZ"];
 
     for (let i = 0; i < stringPatterns.length - 1; i++) {
-        console.log(createTestCompany(stringPatterns[i]).name);
-        console.log(createTestCompany(stringPatterns[i + 1]).name);
-        it("Company: compareNames() works", function () {
+        it("CompareNames() works", function () {
             assert(
                 createTestCompany(stringPatterns[i]).compareNames(
                     createTestCompany(stringPatterns[i + 1])

@@ -53,7 +53,7 @@ const FeaturedCompany = ({
                         onOpenDetails={() =>
                             onOpenDataExplorationSection(
                                 "dataTypes",
-                                company.name
+                                company.ppid
                             )
                         }
                     />
@@ -65,7 +65,7 @@ const FeaturedCompany = ({
                         onOpenDetails={() =>
                             onOpenDataExplorationSection(
                                 "purposes",
-                                company.name
+                                company.ppid
                             )
                         }
                     />
@@ -77,7 +77,7 @@ const FeaturedCompany = ({
                         onOpenDetails={() =>
                             onOpenDataExplorationSection(
                                 "companies",
-                                company.name
+                                company.ppid
                             )
                         }
                     />
@@ -93,7 +93,7 @@ const FeaturedCompany = ({
                         onOpenDetails={() =>
                             onOpenDataExplorationSection(
                                 "jurisdictions",
-                                company.name
+                                company.ppid
                             )
                         }
                     />

@@ -49,7 +49,7 @@ const MainScreen = ({
                     }
                 >
                     {i18n.t("mainScreen:tab.allCompanies", {
-                        total: companies.length,
+                        total: Object.keys(companies).length,
                     })}
                 </button>
             </div>
