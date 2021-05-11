@@ -1,4 +1,4 @@
-import { PolyLifecycle, Pod, DefaultPod } from "@polypoly-eu/poly-api";
+import { PolyLifecycle, Pod, DefaultPod } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
 import { dataset } from "@rdfjs/dataset";
 import { RemoteClientPod, RemoteServerPod } from "../../remote";
@@ -8,7 +8,7 @@ import { fromNodeMessagePort } from "@polypoly-eu/port-authority/dist/node";
 import { createServer, Server } from "http";
 import fetch from "node-fetch";
 import { once } from "events";
-import { podSpec } from "@polypoly-eu/poly-api/dist/spec";
+import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";

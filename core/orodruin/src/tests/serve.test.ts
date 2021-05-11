@@ -1,6 +1,6 @@
 import { Server } from "http";
 import { serve } from "../serve";
-import { DefaultPod } from "@polypoly-eu/poly-api";
+import { DefaultPod } from "@polypoly-eu/pod-api";
 import { parse, Range } from "semver";
 import { once } from "events";
 import { dataset } from "@rdfjs/dataset";

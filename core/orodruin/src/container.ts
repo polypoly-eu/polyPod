@@ -1,7 +1,7 @@
 import { RemoteClientPod, RemoteServerPod } from "@polypoly-eu/podigree";
 import { BrowserPod } from "@polypoly-eu/podjs";
 import { iframeOuterPort } from "@polypoly-eu/port-authority";
-import type { Pod } from "@polypoly-eu/poly-api";
+import type { Pod } from "@polypoly-eu/pod-api";
 
 function createPod(): Pod {
     if (document.currentScript && document.currentScript.dataset.pod === "browser") {

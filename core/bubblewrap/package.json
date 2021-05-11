@@ -28,9 +28,9 @@
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config": "file:../../eslint-config",
-    "@polypoly-eu/rdf": "file:../rdf",
-    "@polypoly-eu/rdf-convert": "file:../rdf-convert",
-    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
+    "@polypoly-eu/rdf": "file:../api/rdf",
+    "@polypoly-eu/rdf-convert": "file:../api/rdf-convert",
+    "@polypoly-eu/rdf-spec": "file:../api/rdf-spec",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",

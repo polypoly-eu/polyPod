@@ -6,7 +6,7 @@ import type {
     PolyNav,
     EncodingOptions,
     Stats,
-} from "@polypoly-eu/poly-api";
+} from "@polypoly-eu/pod-api";
 import type {
     Term,
     Quad,

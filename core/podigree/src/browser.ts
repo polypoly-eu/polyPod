@@ -1,5 +1,5 @@
-import type { FS, Pod } from "@polypoly-eu/poly-api";
-import { DefaultPod } from "@polypoly-eu/poly-api";
+import type { FS, Pod } from "@polypoly-eu/pod-api";
+import { DefaultPod } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
 import { DatasetCore } from "rdf-js";
 import { dataset } from "@rdfjs/dataset";

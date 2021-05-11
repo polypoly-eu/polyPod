@@ -1,4 +1,4 @@
-# customs
+# manifest-parser
 
 ![Node CI](https://github.com/polypoly-eu/customs/workflows/Node%20CI/badge.svg)
 

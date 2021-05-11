@@ -4,7 +4,7 @@
     "build": "faucet"
   },
   "dependencies": {
-    "@polypoly-eu/poly-api": "file:../../core/poly-api",
+    "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
     "@rdfjs/data-model": "^1.2.0"
   },
   "devDependencies": {

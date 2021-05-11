@@ -1,6 +1,6 @@
 import { serve } from "../serve";
 import { detectFeature, Ops } from "./_common";
-import { DefaultPod, Pod } from "@polypoly-eu/poly-api";
+import { DefaultPod, Pod } from "@polypoly-eu/pod-api";
 import { promises as fs } from "fs";
 import open from "open";
 import { dataset } from "@rdfjs/dataset";

@@ -7,7 +7,7 @@ import {
     EncodingOptions,
     Stats,
     Matcher,
-} from "@polypoly-eu/poly-api";
+} from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 import {
@@ -206,7 +206,7 @@ export class RemoteClientPod implements Pod {
     }
 }
 
-// TODO move to poly-api?
+// TODO move to pod-api?
 // TODO should this throw instead?
 class DummyPolyLifecycle implements PolyLifecycle {
     async listFeatures(): Promise<Record<string, boolean>> {

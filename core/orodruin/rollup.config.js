@@ -19,8 +19,8 @@ export default [
             executable()
         ],
         external: [
-            "@polypoly-eu/customs",
-            "@polypoly-eu/poly-api",
+            "@polypoly-eu/manifest-parser",
+            "@polypoly-eu/pod-api",
             "@polypoly-eu/podigree",
             "@rdfjs/dataset",
             "connect",

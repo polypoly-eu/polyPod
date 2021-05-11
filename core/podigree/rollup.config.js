@@ -26,7 +26,7 @@ export default [
             "@polypoly-eu/bubblewrap",
             "@polypoly-eu/port-authority",
             "@polypoly-eu/port-authority/dist/node",
-            "@polypoly-eu/poly-api",
+            "@polypoly-eu/pod-api",
             "@polypoly-eu/postoffice",
             "@polypoly-eu/rdf",
             "@polypoly-eu/rdf-convert",

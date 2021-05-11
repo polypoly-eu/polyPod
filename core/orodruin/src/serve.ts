@@ -1,9 +1,9 @@
 import type { Server, ServerResponse } from "http";
 import { once } from "events";
-import type { Pod } from "@polypoly-eu/poly-api";
+import type { Pod } from "@polypoly-eu/pod-api";
 import { RemoteServerPod } from "@polypoly-eu/podigree";
 import { join } from "path";
-import type { Manifest } from "@polypoly-eu/customs";
+import type { Manifest } from "@polypoly-eu/manifest-parser";
 import createServer, { IncomingMessage, NextHandleFunction } from "connect";
 import serveStatic from "serve-static";
 import { promises as fs } from "fs";
