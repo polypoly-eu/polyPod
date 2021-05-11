@@ -143,8 +143,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.3.0'
 }
 
-task copyFeatureContainerBootstrap(type: Copy) {
-    from "../../core/podigree/dist/bootstrap.js"
+task copyRemotePod(type: Copy) {
+    from "../../core/remote-pod/dist/bootstrap.js"
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
 }
@@ -191,7 +191,7 @@ task copyTestFeatureOntoDevice {
 
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
-        task.dependsOn copyFeatureContainerBootstrap
+        task.dependsOn copyRemotePod
         task.dependsOn packageAndCopyBundledFeatures
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")

@@ -21,7 +21,7 @@ export default [
         external: [
             "@polypoly-eu/customs",
             "@polypoly-eu/poly-api",
-            "@polypoly-eu/podigree",
+            "@polypoly-eu/remote-pod",
             "@rdfjs/dataset",
             "connect",
             "ejs",

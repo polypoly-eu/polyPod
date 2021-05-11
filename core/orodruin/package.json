@@ -24,10 +24,10 @@
   },
   "dependencies": {
     "@polypoly-eu/customs": "file:../customs",
-    "@polypoly-eu/podigree": "file:../podigree",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@polypoly-eu/poly-api": "file:../poly-api",
     "@polypoly-eu/port-authority": "file:../port-authority",
+    "@polypoly-eu/remote-pod": "file:../remote-pod",
     "@rdfjs/dataset": "^1.0.1",
     "@types/node": "^14.6.4",
     "@types/puppeteer": "^3.0.2",

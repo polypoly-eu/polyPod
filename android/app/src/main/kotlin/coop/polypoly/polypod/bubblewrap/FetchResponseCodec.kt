@@ -7,7 +7,7 @@ import org.msgpack.value.ValueFactory
 
 class FetchResponseCodec : Codec<FetchResponse> {
     override fun encode(result: FetchResponse): Value {
-        val codec = Codec.kvArray(Codec.string, Codec.id).taggedClass("@polypoly-eu/podigree.FetchResponse")
+        val codec = Codec.kvArray(Codec.string, Codec.id).taggedClass("@polypoly-eu/remote-pod.FetchResponse")
         val response = HashMap<String, Value>()
         if (result.bodyContent != null)
             response["bufferedText"] = Codec.string.encode(result.bodyContent!!)

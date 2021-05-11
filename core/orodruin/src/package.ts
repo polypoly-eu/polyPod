@@ -20,7 +20,7 @@ export async function pkg(rootDir: string, manifest: Manifest, target: string): 
     await copy(join(rootDir, manifest.root), featureDir);
 
     await fs.copyFile(
-        require.resolve("@polypoly-eu/podigree/dist/bootstrap.js"),
+        require.resolve("@polypoly-eu/remote-pod/dist/bootstrap.js"),
         join(featureDir, "pod.js")
     );
 }

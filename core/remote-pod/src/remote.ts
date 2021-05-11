@@ -113,8 +113,8 @@ class FileStats implements Stats {
 }
 
 export const podBubblewrapClasses: Classes = {
-    "@polypoly-eu/podigree.FetchResponse": FetchResponse,
-    "@polypoly-eu/podigree.FileStats": FileStats,
+    "@polypoly-eu/remote-pod.FetchResponse": FetchResponse,
+    "@polypoly-eu/remote-pod.FileStats": FileStats,
     "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
     "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
     "@polypoly-eu/rdf.Literal": RDF.Literal,

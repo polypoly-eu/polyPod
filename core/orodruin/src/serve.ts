@@ -1,7 +1,7 @@
 import type { Server, ServerResponse } from "http";
 import { once } from "events";
 import type { Pod } from "@polypoly-eu/poly-api";
-import { RemoteServerPod } from "@polypoly-eu/podigree";
+import { RemoteServerPod } from "@polypoly-eu/remote-pod";
 import { join } from "path";
 import type { Manifest } from "@polypoly-eu/customs";
 import createServer, { IncomingMessage, NextHandleFunction } from "connect";
@@ -28,7 +28,7 @@ export async function serve(
     });
     app.use("/feature/pod.js", async (request: IncomingMessage, response: ServerResponse) => {
         const bootstrap = await fs.readFile(
-            require.resolve("@polypoly-eu/podigree/dist/bootstrap.js"),
+            require.resolve("@polypoly-eu/remote-pod/dist/bootstrap.js"),
             "utf-8"
         );
         response.setHeader("Content-Type", "text/javascript");

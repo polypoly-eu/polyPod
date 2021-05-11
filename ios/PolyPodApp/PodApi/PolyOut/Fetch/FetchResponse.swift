@@ -35,7 +35,7 @@ struct FetchResponse {
         messagePackArray.append(["type", .string(type)])
         messagePackArray.append(["url", .string(url)])
         
-        let object = MessagePackValue.array(["@polypoly-eu/podigree.FetchResponse", .array(messagePackArray)])
+        let object = MessagePackValue.array(["@polypoly-eu/remote-pod.FetchResponse", .array(messagePackArray)])
         return object
     }
 }

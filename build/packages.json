@@ -13,6 +13,7 @@
         "core/rdf",
         "core/rdf-convert",
         "core/rdf-spec",
+        "core/remote-pod",
         "core/utils/aop-ts",
         "core/utils/dummy-server",
         "core/utils/silly-i18n",
