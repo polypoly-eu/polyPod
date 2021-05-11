@@ -3,6 +3,7 @@ import copy from "rollup-plugin-copy";
 import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
+import sucrase from "@rollup/plugin-sucrase";
 
 // Trivial plugin to watch all copied files - there's a dedicated
 // rollup-plugin-copy-watch plugin that should do this, but it would actually
@@ -32,6 +33,7 @@ export default {
     plugins: [
         css({ output: "css/bundle.css" }),
         json(),
+        sucrase({ "transforms": [] }),
         copyWatch({
             targets: [
                 {
