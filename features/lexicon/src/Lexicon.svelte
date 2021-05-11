@@ -7,10 +7,12 @@
 :global(body) {
     background-color: #3749a9;
     padding: 0;
+    margin: 0;
+    border-top: 1px solid #f7fafc;
 }
 
 * {
-    color: white;
+    color: #f7fafc;
     box-sizing: border-box;
     font-family: Jost;
     font-weight: 500;
@@ -34,6 +36,7 @@ button {
     justify-content: center;
     margin: auto;
     padding: 23px 24px 29px 24px;
+    flex: 0 0 auto;
 }
 
 .search-bar-area .search-bar {
@@ -61,6 +64,7 @@ button {
 
 .search-bar-area .search-bar .search-bar-input::placeholder {
     color: #f7fafc;
+    font-weight: 400;
 }
 
 .search-bar-area .search-bar button {
@@ -189,7 +193,7 @@ function handleClear() {
                 </button>
             </div>
         </div>
-        <div class="list-container">
+        <div class="term-list-container">
             {#if searchString}
                 <div class="result">
                     {#each lexicon.search(searchString) as entry}
@@ -200,7 +204,7 @@ function handleClear() {
                 </div>
             {:else}
                 {#each lexicon.groups as group}
-                    <div class="list">
+                    <div class="term-list">
                         <h1>{group}</h1>
                         <div>
                             {#each lexicon.groupEntries(group) as entry}
