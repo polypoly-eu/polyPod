@@ -13,7 +13,7 @@
     font-weight: 500;
     font-size: 10px;
     line-height: 14px;
-    color: #a9b6c6;
+    color: var(--color-medium);
     margin: 0px 4px;
     height: 12px;
 }
@@ -49,23 +49,23 @@
 }
 
 .location-legend .EU-GDPR {
-    background-color: #60e6de;
+    background-color: var(--jurisdiction-EU-GDPR);
 }
 
 .location-legend .Russia {
-    background-color: #fe8988;
+    background-color: var(--jurisdiction-russia);
 }
 
 .location-legend .Five-Eyes {
-    background-color: #ec453d;
+    background-color: var(--jurisdiction-five-eyes);
 }
 
 .location-legend .China {
-    background-color: #c5271e;
+    background-color: var(--jurisdiction-china);
 }
 
 .location-legend .Others {
-    background-color: #a9b6c6;
+    background-color: var(--jurisdiction-others);
 }
 
 .location-legend .circle {

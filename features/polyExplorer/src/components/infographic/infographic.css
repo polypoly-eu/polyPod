@@ -11,9 +11,9 @@
 }
 
 .infographic .text-field {
-    color: #0f1938;
+    color: var(--color-text-dark);
     font-size: 12px;
-    line-height: 120%;
+    line-height: var(--line-height);
 }
 
 .infographic .highlighted {

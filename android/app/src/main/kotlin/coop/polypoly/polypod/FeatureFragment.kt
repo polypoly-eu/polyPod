@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
+import coop.polypoly.polypod.polyNav.PolyNavObserver
 
 private fun luminance(color: Int): Double =
     Color.red(color) * 0.2126 +
@@ -132,13 +133,17 @@ open class FeatureFragment : Fragment() {
                 override fun handleOnBackPressed() = navigateBack()
             })
 
-        featureContainer.navTitleChangedHandler = {
-            activity?.runOnUiThread { updateAppBarTitle(view, it) }
-        }
-
-        featureContainer.navActionsChangedHandler = {
-            activity?.runOnUiThread { updateAppBarActions(view, it) }
-        }
+        featureContainer.api.polyNav.setNavObserver(PolyNavObserver(
+            {
+                activity?.runOnUiThread { updateAppBarActions(view, it) }
+            },
+            {
+                activity?.runOnUiThread { updateAppBarTitle(view, it) }
+            },
+            {
+                activity?.runOnUiThread { featureContainer.openUrl(it) }
+            }
+        ))
     }
 
     private fun navigateBack() {

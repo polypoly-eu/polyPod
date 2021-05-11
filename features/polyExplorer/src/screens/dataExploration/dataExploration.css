@@ -4,7 +4,7 @@
 
 .data-exploration .company-short-info-container {
     width: 100%;
-    max-width: 412px;
+    max-width: var(--max-width);
     margin: 0 auto;
 }
 
@@ -39,22 +39,22 @@
 }
 
 .data-exploration .progress-bar .dataTypes {
-    background-color: #fb8a89;
+    background-color: var(--data-exp-data-types);
     opacity: 0.5;
 }
 
 .data-exploration .progress-bar .purposes {
-    background-color: #3ba6ff;
+    background-color: var(--data-exp-purposes);
     opacity: 0.5;
 }
 
 .data-exploration .progress-bar .companiesShared {
-    background-color: #7ee8a2;
+    background-color: var(--data-exp-companies);
     opacity: 0.5;
 }
 
 .data-exploration .progress-bar .jurisdictions {
-    background-color: #edf2f7;
+    background-color: var(--data-exp-data-regions);
     opacity: 0.5;
 }
 
@@ -77,7 +77,7 @@
     bottom: 0;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 412px;
+    max-width: var(--max-width);
     height: 100%;
     overflow: hidden;
 }
@@ -85,7 +85,7 @@
 .data-exploration .static-content .bubble-source {
     font-size: 10px;
     line-height: 14px;
-    color: #a9b6c6;
+    color: var(--color-medium);
     width: 84%;
     max-width: 350px;
     margin: 8px auto;
@@ -118,15 +118,15 @@
 }
 
 .data-exploration .highlight-data-type {
-    color: #fb8a89;
+    color: var(--data-exp-data-types);
 }
 
 .data-exploration .highlight-purpose {
-    color: #3ba6ff;
+    color: var(--data-exp-purposes);
 }
 
 .data-exploration .highlight-companies {
-    color: #7ee8a2;
+    color: var(--data-exp-companies);
 }
 
 .data-exploration .bubble-chart,
@@ -196,7 +196,7 @@
     margin: 0 auto;
     width: 80%;
     height: 90%;
-    max-width: 412px;
+    max-width: var(--max-width);
 }
 
 .data-exploration .construction-container img {
@@ -215,7 +215,7 @@
 
 .data-exploration .swiper-container {
     width: 100%;
-    max-width: 412px;
+    max-width: var(--max-width);
     height: 100%;
     pointer-events: none;
 }
@@ -251,7 +251,7 @@
 .data-exploration .on-bubble {
     font-family: "Jost Medium";
     font-weight: 500;
-    line-height: 120%;
+    line-height: var(--line-height);
     font-size: 16px;
     width: 220px;
     margin: 40% auto 0 auto;
@@ -287,10 +287,10 @@
     flex: 0 0 auto;
     box-sizing: border-box;
     width: 84%;
-    max-width: 412px;
+    max-width: var(--max-width);
     height: 48px;
-    background-color: #f7fafc;
-    color: #0f1938;
+    background-color: var(--color-background-light);
+    color: var(--color-text-dark);
     font-size: 18px;
     font-weight: 600;
     margin: 12px auto 20px auto;

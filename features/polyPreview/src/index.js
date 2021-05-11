@@ -4,10 +4,6 @@ import i18n from "./i18n.js";
 import "swiper/swiper-bundle.css";
 import "./styles.css";
 
-const podNav = window.podNav || {
-    openUrl: (url) => window.open(url, "_blank"),
-};
-
 function getStaticContent(progress) {
     const circle = document.getElementsByClassName("circle")[0];
 
@@ -103,7 +99,7 @@ function initLearnMoreButton() {
     // more' button, so we need to add the click handler to all.
     for (let button of document.getElementsByClassName("learn-more")) {
         button.addEventListener("click", function () {
-            podNav.openUrl(this.dataset.target);
+            window.pod.polyNav.openUrl(this.dataset.target);
         });
     }
 }

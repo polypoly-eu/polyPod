@@ -1,5 +1,11 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
-import type { Matcher, Pod, PolyIn, PolyOut } from "@polypoly-eu/poly-api";
+import type {
+    Matcher,
+    Pod,
+    PolyIn,
+    PolyOut,
+    PolyNav,
+} from "@polypoly-eu/poly-api";
 import { EncodingOptions, Stats } from "@polypoly-eu/poly-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
@@ -58,8 +64,45 @@ class ThrowingPolyOut implements PolyOut {
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
+class BrowserPolyNav implements PolyNav {
+    actions?: { [key: string]: () => void };
+    private keyUpListener: any = null;
+
+    async openUrl(url: string): Promise<void> {
+        console.log(`polyNav: Attempt to open URL: ${url}`);
+    }
+
+    async setActiveActions(actions: string[]): Promise<void> {
+        const actionKeys: any = {
+            Escape: "back",
+            s: "search",
+            i: "info",
+        };
+        if (this.keyUpListener)
+            window.removeEventListener("keyup", this.keyUpListener);
+        else {
+            const actionUsage = Object.entries(actionKeys)
+                .map((pair) => `[${pair.join(" = ")}]`)
+                .join(", ");
+            console.log(
+                `polyNav: Keyboard navigation available: ${actionUsage}`
+            );
+        }
+        this.keyUpListener = ({ key }: any) => {
+            const action = actionKeys[key];
+            if (actions.includes(action)) this.actions?.[action]?.();
+        };
+        window.addEventListener("keyup", this.keyUpListener);
+    }
+
+    async setTitle(title: string): Promise<void> {
+        document.title = title;
+    }
+}
+
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new LocalStoragePolyIn();
     public readonly polyOut = new ThrowingPolyOut();
+    public readonly polyNav = new BrowserPolyNav();
 }

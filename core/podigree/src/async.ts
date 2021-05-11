@@ -3,6 +3,7 @@ import {
     PolyOut,
     PolyLifecycle,
     PolyIn,
+    PolyNav,
     EncodingOptions,
     Matcher,
     Stats,
@@ -47,6 +48,22 @@ class AsyncPolyIn implements PolyIn {
     }
 }
 
+class AsyncPolyNav implements PolyNav {
+    constructor(private readonly promise: Promise<PolyNav>) {}
+
+    async openUrl(url: string): Promise<void> {
+        return (await this.promise).openUrl(url);
+    }
+
+    async setActiveActions(actions: string[]): Promise<void> {
+        return (await this.promise).setActiveActions(actions);
+    }
+
+    async setTitle(title: string): Promise<void> {
+        return (await this.promise).setTitle(title);
+    }
+}
+
 class AsyncPolyLifecycle implements PolyLifecycle {
     constructor(private readonly promise: Promise<PolyLifecycle | undefined>) {}
 
@@ -68,11 +85,13 @@ class AsyncPolyLifecycle implements PolyLifecycle {
 export class AsyncPod implements Pod {
     readonly polyOut: PolyOut;
     readonly polyIn: PolyIn;
+    readonly polyNav: PolyNav;
     readonly polyLifecycle: PolyLifecycle;
 
     constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
         this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
         this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
+        this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
         this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
     }
 }
