@@ -68,36 +68,79 @@ button {
     padding: 0;
 }
 
-.list-container {
+.term-list-container {
     width: 100%;
     overflow-y: scroll;
 }
 
-.list-container .list {
+.term-list-container .term-list {
     display: flex;
     flex-direction: row;
     justify-content: start;
     margin: 0 20px;
 }
 
-.list-container .list h1 {
+.term-list-container .term-list h1 {
     font-size: 16px;
     margin: 0;
 }
 
-.list-container .list h2 {
+.term-list-container .term-list h2 {
     margin: 0 0 17px 20px;
     font-size: 20px;
 }
 
-.list-container .result h2 {
-    font-size: 20px;
+.term-list-container .result h2 {
     margin: 0 20px 17px 50px;
+    font-size: 20px;
+}
+
+.term-description {
+    padding: 40px 22px 32px 26px;
+    font-size: 16px;
+    line-height: 19.2px;
+    font-weight: 400;
+}
+
+.term-description h2 {
+    margin: 0 0 39px 0;
+    font-size: 24px;
+    line-height: 28.8px;
+}
+
+.term-description .scroll-container {
+    display: flex;
+    flex-flow: column;
+    overflow: hidden scroll;
+    width: 100%;
+    max-width: 412px;
+    margin-bottom: 51px;
+}
+
+.term-description .button-area {
+    display: block;
+    background-color: #3749a9;
+    max-width: 412px;
+    margin: 0 auto;
+    padding: 0 29px 32px 31px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.term-description button {
+    width: 100%;
+    height: 51px;
+    background-color: #0f1938;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 16px;
 }
 </style>
 
 <script>
-import i18n from "./i18n.js"
+import i18n from "./i18n.js";
 export let lexicon;
 let showTerm = null;
 let searchString = "";
@@ -122,18 +165,24 @@ function handleClear() {
 <main class="lexicon">
     {#if showTerm}
         <div class="term-description">
-            <h2>{showTerm}</h2>
-            {@html lexicon.description(showTerm)}
-            <button on:click="{() => handleBack()}">{i18n.t("common:back")}</button>
+            <div class="scroll-container">
+                <h2>{showTerm}</h2>
+                {@html lexicon.description(showTerm)}
+            </div>
+            <div class="button-area">
+                <button on:click="{() => handleBack()}"
+                    >{i18n.t("common:back")}</button>
+            </div>
         </div>
     {:else}
+        <!-- <div class="search-screen"> -->
         <div class="search-bar-area">
             <div class="search-bar">
                 <input
                     class="search-bar-input"
                     type="text"
                     value="{searchString}"
-                    placeholder="{i18n.t("common:search")}"
+                    placeholder="{i18n.t('common:search')}"
                     on:input="{(e) => handleSearch(e.target.value)}" />
                 <button on:click="{() => handleClear()}">
                     <img alt="Clear search" src="./images/clear-search.svg" />
@@ -164,5 +213,6 @@ function handleClear() {
                 {/each}
             {/if}
         </div>
+        <!-- </div> -->
     {/if}
 </main>
