@@ -1,17 +1,13 @@
 import levenshtein from "js-levenshtein";
+import i18n from "./i18n.js";
 
 export default class Lexicon {
-    constructor(language, data) {
-        this._language = language;
-        this._data = data[language];
+    constructor(data) {
+        this._data = data[i18n.language];
     }
 
     get groups() {
         return Object.keys(this._data);
-    }
-
-    get language() {
-        return this._language;
     }
 
     group(aGroup) {
