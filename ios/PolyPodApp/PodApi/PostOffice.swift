@@ -1,4 +1,5 @@
 import UIKit
+import MessagePack
 
 class PostOffice {
     static let shared = PostOffice()

@@ -1,4 +1,5 @@
 import Foundation
+import MessagePack
 
 struct FetchResponse {
     let bufferedText: String
