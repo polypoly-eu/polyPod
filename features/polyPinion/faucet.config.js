@@ -28,6 +28,10 @@ module.exports = {
             target: "./dist/icons",
         },
         {
+            source: "./src/static/bundle.css",
+            target: "./dist/bundle.css",
+        },
+        {
             source: "react/umd/react.development.js",
             target: "./dist/react.js",
         },
