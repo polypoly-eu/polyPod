@@ -151,12 +151,16 @@ task copyRemotePod(type: Copy) {
 
 task packageAndCopyBundledFeatures
 
-["polyExplorer", "polyPreview"].each { featureName ->
+[
+    "polyExplorer": "dist",
+    "polyPreview": "dist",
+    "lexicon": "public"
+].each { featureName, featureOutputPath ->
     def taskName = "packageAndCopyFeature_$featureName"
     task "$taskName"(type: Zip) {
         archiveFileName = "${featureName}.zip"
         destinationDirectory = file("$buildDir/generated-assets/features")
-        from "$projectDir/../../features/$featureName/dist"
+        from "$projectDir/../../features/$featureName/$featureOutputPath"
     }
     packageAndCopyBundledFeatures.dependsOn "$taskName"
 }

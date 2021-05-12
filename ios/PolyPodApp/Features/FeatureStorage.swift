@@ -48,6 +48,7 @@ class FeatureStorage {
     
     func importFeatures() {
         createFeaturesFolder()
+        importFeature("lexicon")
         importFeature("polyExplorer")
         importFeature("polyPreview")
     }

@@ -601,7 +601,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SOURCE_PATH=\"$PROJECT_DIR/../..\"\nTARGET_PATH=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\n\ncp \"$SOURCE_PATH/core/communication/remote-pod/dist/bootstrap.js\" \"$TARGET_PATH/pod.js\"\n\nFEATURES=\"polyExplorer polyPreview\"\nfor FEATURE in $FEATURES; do\n    pushd \"$SOURCE_PATH/features/$FEATURE/dist\" >/dev/null\n    FEATURE_TARGET_PATH=\"$TARGET_PATH/$FEATURE.zip\"\n    rm -f \"$FEATURE_TARGET_PATH\"\n    zip -rq \"$FEATURE_TARGET_PATH\" .\n    popd >/dev/null\ndone\n";
+			shellScript = "SOURCE_PATH=\"$PROJECT_DIR/../..\"\nTARGET_PATH=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\n\ncp \"$SOURCE_PATH/core/communication/remote-pod/dist/bootstrap.js\" \"$TARGET_PATH/pod.js\"\n\nFEATURES=\"polyExplorer:dist polyPreview:dist lexicon:public\"\nfor FEATURE in $FEATURES; do\n    NAME=`echo \"$FEATURE\" | cut -d: -f1`\n    OUTPUT=`echo \"$FEATURE\" | cut -d: -f2`\n    pushd \"$SOURCE_PATH/features/$NAME/$OUTPUT\" >/dev/null\n    FEATURE_TARGET_PATH=\"$TARGET_PATH/$NAME.zip\"\n    rm -f \"$FEATURE_TARGET_PATH\"\n    zip -rq \"$FEATURE_TARGET_PATH\" .\n    popd >/dev/null\ndone\n";
 		};
 		E9CF1B7D2627365600216B70 /* Update Bundle Version */ = {
 			isa = PBXShellScriptBuildPhase;
