@@ -101,6 +101,11 @@ button {
     font-size: 20px;
 }
 
+.term-list-container .no-result p {
+    margin: 0 20px 17px 50px;
+    color: #a9b6c6;
+}
+
 .term-list-container .result h2 {
     margin: 0 20px 17px 50px;
     font-size: 20px;
@@ -196,19 +201,27 @@ function handleClear() {
                     placeholder="{i18n.t('common:search')}"
                     on:input="{(e) => handleSearch(e.target.value)}" />
                 <button on:click="{() => handleClear()}">
-                    <img alt="Clear search" src="./images/clear-search.svg" />
+                    <img
+                        alt="{i18n.t('common:clear')}"
+                        src="./images/clear-search.svg" />
                 </button>
             </div>
         </div>
         <div class="term-list-container">
             {#if searchString}
-                <div class="result">
-                    {#each lexicon.search(searchString) as entry}
-                        <h2 on:click="{() => handleClickTerm(entry)}">
-                            {entry}
-                        </h2>
-                    {/each}
-                </div>
+                {#if lexicon.search(searchString).length === 0}
+                    <div class="no-result">
+                        <p>{i18n.t("common:noMatch")}</p>
+                    </div>
+                {:else}
+                    <div class="result">
+                        {#each lexicon.search(searchString) as entry}
+                            <h2 on:click="{() => handleClickTerm(entry)}">
+                                {entry}
+                            </h2>
+                        {/each}
+                    </div>
+                {/if}
             {:else}
                 {#each lexicon.groups as group}
                     <div class="term-list">
