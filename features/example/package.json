@@ -8,7 +8,7 @@
     "test": "./test.sh"
   },
   "devDependencies": {
-    "@polypoly-eu/orodruin": "file:../../core/orodruin",
+    "@polypoly-eu/orodruin": "file:../../core/legacy/orodruin",
     "@rollup/plugin-sucrase": "^3.1.0",
     "connect": "^3.7.0",
     "puppeteer": "^5.5.0",

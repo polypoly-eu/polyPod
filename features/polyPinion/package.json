@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config": "file:../../eslint-config",
-    "@polypoly-eu/orodruin": "file:../../core/orodruin",
+    "@polypoly-eu/orodruin": "file:../../core/legacy/orodruin",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^5.1.5",

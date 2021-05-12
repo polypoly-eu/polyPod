@@ -26,11 +26,11 @@
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "dependencies": {
-    "@polypoly-eu/aop-ts": "file:../utils/aop-ts",
-    "@polypoly-eu/fetch-spec": "file:../api/fetch-spec",
-    "@polypoly-eu/pod-api": "file:../api/pod-api",
-    "@polypoly-eu/rdf": "file:../api/rdf",
-    "@polypoly-eu/rdf-convert": "file:../api/rdf-convert",
+    "@polypoly-eu/aop-ts": "file:../aop-ts",
+    "@polypoly-eu/fetch-spec": "file:../../api/fetch-spec",
+    "@polypoly-eu/pod-api": "file:../../api/pod-api",
+    "@polypoly-eu/rdf": "file:../../api/rdf",
+    "@polypoly-eu/rdf-convert": "file:../../api/rdf-convert",
     "@rdfjs/dataset": "^1.0.1",
     "@types/rdf-js": "^4.0.0",
     "fp-ts": "^2.8.2",
@@ -38,8 +38,8 @@
     "memfs": "^3.2.0"
   },
   "devDependencies": {
-    "@polypoly-eu/dummy-server": "file:../utils/dummy-server",
-    "@polypoly-eu/eslint-config": "file:../../eslint-config",
+    "@polypoly-eu/dummy-server": "file:../../utils/dummy-server",
+    "@polypoly-eu/eslint-config": "file:../../../eslint-config",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",
