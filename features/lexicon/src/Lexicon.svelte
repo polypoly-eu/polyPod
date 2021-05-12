@@ -107,7 +107,7 @@ button {
 }
 
 .term-description {
-    padding: 40px 22px 32px 26px;
+    padding: 40px 28px 32px 28px;
     font-size: 16px;
     line-height: 19.2px;
     font-weight: 400;
@@ -133,7 +133,7 @@ button {
     background-color: #3749a9;
     max-width: 412px;
     margin: 0 auto;
-    padding: 5px 32px 32px 32px;
+    padding: 5px 28px 32px 28px;
     position: fixed;
     bottom: 0;
     right: 0;
