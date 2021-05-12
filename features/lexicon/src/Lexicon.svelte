@@ -131,6 +131,27 @@ button {
     width: 100%;
     max-width: 412px;
     margin-bottom: 51px;
+    position: relative;
+}
+
+.term-description .scroll-container .gradient-area {
+    position: absolute;
+}
+
+.term-description .scroll-container .gradient-area .gradient {
+    position: fixed;
+    bottom: 68px;
+    right: 0;
+    left: 0;
+    height: 65px;
+    pointer-events: none;
+    background: linear-gradient(#3749a900 0%, #3749a9);
+}
+
+.term-description .scroll-container::after {
+    content: "";
+    display: block;
+    height: 30px;
 }
 
 .term-description .button-area {
@@ -184,6 +205,9 @@ function handleClear() {
             <div class="scroll-container">
                 <h2>{showTerm}</h2>
                 {@html lexicon.description(showTerm)}
+                <div class="gradient-area">
+                    <div class="gradient"></div>
+                </div>
             </div>
             <div class="button-area">
                 <button on:click="{() => handleBack()}"
