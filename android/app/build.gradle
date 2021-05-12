@@ -144,7 +144,7 @@ dependencies {
 }
 
 task copyRemotePod(type: Copy) {
-    from "../../core/remote-pod/dist/bootstrap.js"
+    from "../../core/communication/remote-pod/dist/bootstrap.js"
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
 }
