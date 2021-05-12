@@ -12,12 +12,14 @@ function parseCommandLine() {
     const command = parameters.length ? parameters[0] : "build";
     return {
         scriptPath,
-        command: ["build", "test", "lint"].includes(command) ? command : null,
+        command: ["build", "test", "lint", "list"].includes(command)
+            ? command
+            : null,
     };
 }
 
 function showUsage(scriptPath) {
-    console.error(`Usage: ${path.basename(scriptPath)} [lint | test]`);
+    console.error(`Usage: ${path.basename(scriptPath)} [lint | test | list]`);
     console.error("  Run without arguments to build all packages");
 }
 
@@ -120,17 +122,25 @@ async function processPackage(name, packageTree, command) {
     if (!(name in packageTree)) throw `Unable to find package ${name}`;
 
     const pkg = packageTree[name];
-    if (pkg.built) return;
+    if (pkg.processed) return;
 
     for (let dep of pkg.dependencies)
         await processPackage(dep, packageTree, command);
 
+    if (command === "list") {
+        if (!Object.values(packageTree).some((pkg) => pkg.processed))
+            logMain("Listing all packages in build order");
+        console.log(`${name} (${pkg.path})`);
+        pkg.processed = true;
+        return;
+    }
+
     const entries = Object.entries(packageTree);
     const total = entries.length;
-    const current = entries.filter(([, pkg]) => pkg.built).length + 1;
+    const current = entries.filter(([, pkg]) => pkg.processed).length + 1;
     logMain(`Executing ${command} for ${pkg.path} [${current}/${total}] ...`);
     await executeCommand(pkg, command);
-    pkg.built = true;
+    pkg.processed = true;
 }
 
 async function processAll(packageTree, command) {
@@ -160,10 +170,10 @@ async function main() {
     try {
         const packageTree = createPackageTree(metaManifest);
         await processAll(packageTree, command);
-        logMain("Build succeeded!");
+        logMain(`Command '${command}' succeeded!`);
         return 0;
     } catch (error) {
-        logMain(`Build failed: ${error}\n`);
+        logMain(`Command '${command}' failed: ${error}\n`);
         return 1;
     }
 }
