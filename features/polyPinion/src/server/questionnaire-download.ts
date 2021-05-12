@@ -2,7 +2,7 @@ import * as POD_ENV from "../env";
 import type {} from "@polypoly-eu/poly-api";
 import demoMode from "../demo-mode/demoMode.js";
 
-const { polyOut } = demoMode.activated ? null : window.pod;
+const { polyOut } = demoMode.activated ? { polyOut: null } : window.pod;
 
 export async function downloadQuestionnaireData(questionnaireId: string): Promise<string> {
     const statusCheckEndpoint = POD_ENV.API_HOME + "questionnaire/" + questionnaireId + "/content";
