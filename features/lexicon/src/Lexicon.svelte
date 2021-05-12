@@ -29,6 +29,13 @@ button {
     margin: auto;
 }
 
+/* .search-screen {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    overflow: hidden scroll;
+} */
+
 .search-bar-area {
     width: 100%;
     max-width: 412px;
@@ -126,7 +133,7 @@ button {
     background-color: #3749a9;
     max-width: 412px;
     margin: 0 auto;
-    padding: 0 29px 32px 31px;
+    padding: 5px 32px 32px 32px;
     position: fixed;
     bottom: 0;
     right: 0;
