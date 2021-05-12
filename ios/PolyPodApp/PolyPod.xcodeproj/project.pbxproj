@@ -12,7 +12,6 @@
 		1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */; };
 		1A183E9224AF1E860025F6BB /* PolyApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A183E9124AF1E860025F6BB /* PolyApiError.swift */; };
 		1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21C324A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld */; };
-		1A4C21DB24A63DAB006CC1FD /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 1A4C21DA24A63DAB006CC1FD /* Zip */; };
 		1A4C21DE24A63DD4006CC1FD /* Term+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */; };
 		1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21DD24A63DD4006CC1FD /* Term+CoreDataProperties.swift */; };
 		1A4C21EC24A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21E024A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift */; };
@@ -115,6 +114,7 @@
 		E9B22044263314DC005E8881 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */; };
 		E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
 		E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */ = {isa = PBXBuildFile; productRef = E9BE2905264BBAA0003EC8AE /* MessagePack */; };
+		E9BE2909264BBD67003EC8AE /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = E9BE2908264BBD67003EC8AE /* Zip */; };
 		E9CF1B302625866800216B70 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 		E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
@@ -236,7 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A4C21DB24A63DAB006CC1FD /* Zip in Frameworks */,
+				E9BE2909264BBD67003EC8AE /* Zip in Frameworks */,
 				E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,8 +502,8 @@
 			);
 			name = PolyPod;
 			packageProductDependencies = (
-				1A4C21DA24A63DAB006CC1FD /* Zip */,
 				E9BE2905264BBAA0003EC8AE /* MessagePack */,
+				E9BE2908264BBD67003EC8AE /* Zip */,
 			);
 			productName = PolyPod;
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
@@ -539,8 +539,8 @@
 			);
 			mainGroup = 1AA6DE2624191C94008DB1B2;
 			packageReferences = (
-				1A4C21D924A63DAB006CC1FD /* XCRemoteSwiftPackageReference "Zip" */,
 				E9BE2904264BBA9F003EC8AE /* XCRemoteSwiftPackageReference "MessagePack" */,
+				E9BE2907264BBD67003EC8AE /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 1AA6DE3024191C94008DB1B2 /* Products */;
 			projectDirPath = "";
@@ -1026,14 +1026,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1A4C21D924A63DAB006CC1FD /* XCRemoteSwiftPackageReference "Zip" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/marmelroy/Zip.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 		E9BE2904264BBA9F003EC8AE /* XCRemoteSwiftPackageReference "MessagePack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/polypoly-eu/MessagePack.swift";
@@ -1042,18 +1034,26 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		E9BE2907264BBD67003EC8AE /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/polypoly-eu/Zip";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1A4C21DA24A63DAB006CC1FD /* Zip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1A4C21D924A63DAB006CC1FD /* XCRemoteSwiftPackageReference "Zip" */;
-			productName = Zip;
-		};
 		E9BE2905264BBAA0003EC8AE /* MessagePack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E9BE2904264BBA9F003EC8AE /* XCRemoteSwiftPackageReference "MessagePack" */;
 			productName = MessagePack;
+		};
+		E9BE2908264BBD67003EC8AE /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9BE2907264BBD67003EC8AE /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
 
