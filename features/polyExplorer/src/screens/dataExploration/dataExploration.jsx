@@ -41,7 +41,7 @@ const DataExplorationScreen = ({
 }) => {
     //Methods
     const getCategories = () =>
-        Object.keys(highlights[company.name]?.dataTypeCategories || {});
+        Object.keys(highlights[company.ppid]?.dataTypeCategories || {});
 
     const getTotalTypesShared = () => {
         let total = 0;
@@ -312,7 +312,7 @@ const DataExplorationScreen = ({
                         width={visualizationWidth}
                         height={visualizationHeight}
                         highlightedType={
-                            highlights[company.name].dataTypeCategories[
+                            highlights[company.ppid].dataTypeCategories[
                                 activeScreen.split("_")[1]
                             ].category
                         }
@@ -366,7 +366,7 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         correlationColor="#FB8A89"
                         typeBundle={
-                            highlights[company.name]?.dataTypeCorrelation
+                            highlights[company.ppid]?.dataTypeCorrelation
                                 .types || []
                         }
                         width={visualizationWidth}
@@ -469,7 +469,7 @@ const DataExplorationScreen = ({
                         height={visualizationHeight}
                         bubbleColor="var(--data-exp-companies)"
                         maxCompanies={maxCompanies}
-                        highlight={highlights[company.name]?.dataRecipient}
+                        highlight={highlights[company.ppid]?.dataRecipient}
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia

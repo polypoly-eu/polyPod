@@ -20,7 +20,7 @@ const CorrelationInfo = ({ company, onClose }) => {
                 />
                 <p>
                     {
-                        highlights[company.name].dataTypeCorrelation
+                        highlights[company.ppid].dataTypeCorrelation
                             .explanation[i18n.t("common:country.code")]
                     }
                 </p>
