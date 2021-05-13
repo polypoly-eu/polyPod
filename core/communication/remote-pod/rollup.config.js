@@ -37,6 +37,7 @@ export default [
                 format: "iife"
             }
         ],
+        context: 'null',
         plugins: [
             resolve(),
             commonjs(),
