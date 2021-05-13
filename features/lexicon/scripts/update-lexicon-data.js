@@ -54,9 +54,10 @@ function loadLanguage(groups) {
 }
 
 function writeLexiconFile(lexicon) {
+    const filePath = "src/data/lexicon.json";
     fs.unlinkSync(filePath);
     fs.writeFile(
-        "src/data/lexicon.json",
+        filePath,
         JSON.stringify(lexicon),
         "utf8",
         (err) => {
