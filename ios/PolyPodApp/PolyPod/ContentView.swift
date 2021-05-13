@@ -25,7 +25,7 @@ struct ContentView: View {
             
             state.view
         }
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea([.top, .bottom])
     }
     
     private func initState() -> ViewState {
