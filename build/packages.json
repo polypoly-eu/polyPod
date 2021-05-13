@@ -19,6 +19,7 @@
         "core/utils/silly-i18n",
         "eslint-config",
         "features/example",
+        "features/lexicon",
         "features/polyExplorer",
         "features/polyPinion",
         "features/polyPreview",
