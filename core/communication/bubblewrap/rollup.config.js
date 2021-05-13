@@ -2,9 +2,10 @@ import sucrase from "@rollup/plugin-sucrase";
 import commonjs from "@rollup/plugin-commonjs";
 import {nodeResolve} from "@rollup/plugin-node-resolve";
 
+const fileName = "src/main/javascript/index.ts";
 export default [
     {
-        input: "src/main/javascript/index.ts",
+        input: fileName,
         output: [
             {
                 file: "dist/index.es.js",
@@ -24,7 +25,7 @@ export default [
         external: ["@msgpack/msgpack"]
     },
     {
-        input: "src/main/javascript/index.ts",
+        input: fileName,
         output: {
             file: "build/js/bubblewrap.js",
             format: "iife",
