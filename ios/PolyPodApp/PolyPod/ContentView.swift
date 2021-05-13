@@ -16,14 +16,19 @@ struct ContentView: View {
     var setStatusBarStyle: ((UIStatusBarStyle) -> Void)? = nil
     
     var body: some View {
-        let state = initState()
-        
         VStack(spacing: 0) {
+            let state = initState()
+            let safeAreaInsets = UIApplication.shared.windows[0].safeAreaInsets
+            
             Rectangle()
                 .fill(state.backgroundColor)
-                .frame(maxWidth: .infinity, maxHeight: 20)
+                .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.top)
             
             state.view
+            
+            Rectangle()
+                .fill(state.backgroundColor)
+                .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.bottom)
         }
         .edgesIgnoringSafeArea([.top, .bottom])
     }
