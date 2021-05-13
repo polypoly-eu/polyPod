@@ -28,7 +28,11 @@ export default [
         output: {
             file: "build/js/bubblewrap.js",
             format: "iife",
-            name: "bubblewrap"
+            name: "bubblewrap",
+            globals: {
+                '@msgpack/msgpack': 'msgpack'
+            }
+
         },
         plugins: [
             commonjs(),
@@ -37,6 +41,8 @@ export default [
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"]
             })
-        ]
+        ],
+        external: ["@msgpack/msgpack"]
+        
     }
 ];
