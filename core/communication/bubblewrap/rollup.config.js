@@ -32,6 +32,7 @@ export default [
             name: "bubblewrap"
 
         },
+        context: 'window',
         plugins: [
             commonjs(),
             nodeResolve(),
