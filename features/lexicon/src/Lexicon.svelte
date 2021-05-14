@@ -79,6 +79,7 @@ button {
 .term-list-container {
     width: 100%;
     overflow-y: scroll;
+    margin-top: 88px;
 }
 
 .term-list-container .term-list {
