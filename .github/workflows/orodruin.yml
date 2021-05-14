@@ -1,6 +1,12 @@
 name: Example Feature
 
-on: [push, pull_request]
+on:
+  push:
+    path:
+      - "core/legacy/orodruin/**"
+  pull_request:
+        path:
+      - "core/legacy/orodruin/**"
 
 jobs:
   build:
@@ -15,20 +21,9 @@ jobs:
         scope: '@polypoly-eu'
     - name: npm install (orodruin)
       run: |
-        npm ci --ignore-scripts
+        cd core/legacy/orodruin/ && npm ci --ignore-scripts
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     - name: npm build (orodruin)
       run: |
-        npm rebuild
-        npm run build
-    - name: npm install (feature)
-      run: |
-        cd example
-        npm install --ignore-scripts
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-    - name: npm test (feature)
-      run: |
-        cd example
-        npm run test:feature
+        cd core/legacy/orodruin/ && npm rebuild && npm run build
