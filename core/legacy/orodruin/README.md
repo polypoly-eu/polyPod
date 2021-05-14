@@ -18,4 +18,4 @@ $ orodruin --help
 ## Developing Features
 
 After building orodruin, you can use it to develop features. See
-[../features/example](../features/example) for an example.
+[the example feature](../../../features/example).
