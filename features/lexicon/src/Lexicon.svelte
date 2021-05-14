@@ -38,12 +38,15 @@ button {
 
 .search-bar-area {
     width: 100%;
+    background-color: #3749a9;
     max-width: 412px;
     display: flex;
     justify-content: center;
     margin: auto;
     padding: 23px 24px 29px 24px;
     flex: 0 0 auto;
+    position: fixed;
+    top: 0;
 }
 
 .search-bar-area .search-bar {
@@ -57,6 +60,7 @@ button {
     border: 1px solid #f7fafc;
     border-radius: 20px;
     padding: 1px 12px 0 21px;
+    position: relative;
 }
 
 .search-bar-area .search-bar .search-bar-input {
