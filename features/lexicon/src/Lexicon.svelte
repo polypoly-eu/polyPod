@@ -184,6 +184,18 @@ function handleClickTerm(term) {
     showTerm = term;
 }
 
+function handleCopytoClipboard(term) {
+    let termDescription = term + ": " + lexicon.description(term);
+    var div = document.createElement("div");
+    div.innerHTML = termDescription;
+    const termText = div.textContent || div.innerText || "";
+    copyText(termText);
+}
+
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+}
+
 function handleBack() {
     showTerm = null;
 }
@@ -207,6 +219,8 @@ function handleClear() {
                     <div class="gradient"></div>
                 </div>
             </div>
+            <button on:click="{handleCopytoClipboard(showTerm)}"
+                >Copy to clipboard</button>
             <div class="button-area">
                 <button on:click="{() => handleBack()}"
                     >{i18n.t("common:back")}</button>
