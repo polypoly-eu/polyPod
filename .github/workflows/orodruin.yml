@@ -5,7 +5,7 @@ on:
     path:
       - "core/legacy/orodruin/**"
   pull_request:
-        path:
+    path:
       - "core/legacy/orodruin/**"
 
 jobs:

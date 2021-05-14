@@ -1,6 +1,6 @@
 # orodruin
 
-CLI tool supporting the development lifecycle of Features
+CLI tool supporting the development lifecycle of polyPod Features
 
 ## Installing (optional)
 
