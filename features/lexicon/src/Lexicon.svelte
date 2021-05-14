@@ -29,13 +29,6 @@ button {
     margin: auto;
 }
 
-/* .search-screen {
-    height: 100%;
-    display: flex;
-    flex-flow: column;
-    overflow: hidden scroll;
-} */
-
 .search-bar-area {
     width: 100%;
     background-color: #3749a9;
@@ -219,7 +212,6 @@ function handleClear() {
             </div>
         </div>
     {:else}
-        <!-- <div class="search-screen"> -->
         <div class="search-bar-area">
             <div class="search-bar">
                 <input
@@ -265,6 +257,5 @@ function handleClear() {
                 {/each}
             {/if}
         </div>
-        <!-- </div> -->
     {/if}
 </main>
