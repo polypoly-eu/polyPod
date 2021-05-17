@@ -8,7 +8,6 @@
     background-color: #3749a9;
     padding: 0;
     margin: 0;
-    border-top: 1px solid #f7fafc;
 }
 
 * {
@@ -29,10 +28,17 @@ button {
     margin: auto;
 }
 
+.top-separator{
+    z-index: 200;
+    position: fixed;
+    top:0;
+    width: 100%;
+    border-top: 1px solid #f7fafc;
+}
+
 .search-bar-area {
     width: 100%;
     background-color: #3749a9;
-    border-top: 1px solid #f7fafc;
     max-width: 412px;
     display: flex;
     justify-content: center;
