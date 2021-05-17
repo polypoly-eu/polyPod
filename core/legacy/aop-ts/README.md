@@ -1,2 +1,3 @@
 # aop-ts
-Aspect-oriented programming without annotations
+
+Aspect-oriented programming in TypeScript without annotations
