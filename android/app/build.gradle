@@ -15,7 +15,7 @@ static def polyEpoch() {
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "coop.polypoly.polypod"
