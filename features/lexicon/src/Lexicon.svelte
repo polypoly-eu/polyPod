@@ -32,6 +32,7 @@ button {
 .search-bar-area {
     width: 100%;
     background-color: #3749a9;
+    border-top: 1px solid #f7fafc;
     max-width: 412px;
     display: flex;
     justify-content: center;
