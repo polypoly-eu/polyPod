@@ -188,7 +188,7 @@ function handleCopytoClipboard(term) {
     let termDescription = term + ": " + lexicon.description(term);
     var div = document.createElement("div");
     div.innerHTML = termDescription;
-    const termText = div.textContent || div.innerText || "";
+    const termText = div.innerText || "";
     copyText(termText);
 }
 
@@ -220,7 +220,7 @@ function handleClear() {
                 </div>
             </div>
             <button on:click="{handleCopytoClipboard(showTerm)}"
-                >Copy to clipboard</button>
+                >{i18n.t("common:copy")}</button>
             <div class="button-area">
                 <button on:click="{() => handleBack()}"
                     >{i18n.t("common:back")}</button>
