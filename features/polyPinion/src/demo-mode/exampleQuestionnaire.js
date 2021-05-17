@@ -10,8 +10,7 @@ export default {
             _link: "questionnaire-e0d11a9b-5b21-41b1-ae63-79359dc029b1:meta.author.link",
             _description:
                 "questionnaire-e0d11a9b-5b21-41b1-ae63-79359dc029b1:meta.author.description",
-            _logo:
-                '<svg viewBox="0 0 228 111" fill="none" xmlns="http://www.w3.org/2000/svg">\r\n<path d="M60.6506 13.6423H68.1919V16.0269C70.4978 14.1443 73.4271 13.0775 76.7303 13.0775C84.6454 13.0775 91.0025 19.7293 91.0025 28.3892C91.0025 32.4054 89.6313 35.9823 87.3254 38.6807C84.7701 41.6928 80.5944 43.6381 76.294 43.6381C73.3648 43.6381 70.8095 42.8224 68.5035 41.0025V57.5693H60.713V13.6423H60.6506ZM68.5035 32.7192C69.9993 34.9155 72.6169 36.3588 75.5461 36.3588C79.9088 36.3588 83.212 32.9702 83.212 28.3892C83.212 24.1848 80.2827 20.3568 75.6707 20.3568C72.6792 20.3568 70.0616 21.8002 68.4411 23.9965V32.7192H68.5035Z" />\r\n<path d="M111.32 13.0775C120.17 13.0775 126.839 19.9176 126.839 28.3892C126.839 36.8608 120.17 43.6381 111.32 43.6381C102.47 43.6381 95.8013 36.8608 95.8013 28.3892C95.8013 19.9176 102.532 13.0775 111.32 13.0775ZM111.32 36.3588C115.87 36.3588 118.986 32.7819 118.986 28.3892C118.986 23.9965 115.87 20.3568 111.32 20.3568C106.77 20.3568 103.654 23.9965 103.654 28.3892C103.654 32.7819 106.77 36.3588 111.32 36.3588Z" />\r\n<path d="M141.236 0.0249023H133.445V43.0106H141.236V0.0249023Z" />\r\n<path d="M151.332 57.5065L159.435 40.0612L146.346 13.6423H154.947L163.486 31.2759L171.401 13.6423H179.628L159.559 57.5065H151.332Z" />\r\n<path d="M141.298 96.7271H133.757V94.3425C131.451 96.2251 128.522 97.2919 125.219 97.2919C117.303 97.2919 110.946 90.6401 110.946 81.9802C110.946 77.964 112.317 74.3871 114.623 71.6887C117.179 68.6765 121.354 66.7312 125.655 66.7312C128.584 66.7312 131.139 67.6097 133.445 69.3668V52.8628H141.236V96.7271H141.298ZM133.445 77.6502C131.95 75.4539 129.332 74.0105 126.403 74.0105C122.04 74.0105 118.737 77.3992 118.737 81.9802C118.737 86.2474 121.666 90.0125 126.278 90.0125C129.27 90.0125 131.887 88.5692 133.508 86.3729V77.6502H133.445Z" />\r\n<path d="M90.6286 97.2918C81.7785 97.2918 75.1099 90.4518 75.1099 81.9801C75.1099 73.5085 81.7785 66.7312 90.6286 66.7312C99.4786 66.7312 106.147 73.5085 106.147 81.9801C106.147 90.4518 99.4786 97.2918 90.6286 97.2918ZM90.6286 74.0105C86.0789 74.0105 82.9627 77.5874 82.9627 81.9801C82.9627 86.3728 86.0789 90.0125 90.6286 90.0125C95.1782 90.0125 98.2944 86.3728 98.2944 81.9801C98.2944 77.5874 95.1782 74.0105 90.6286 74.0105Z" />\r\n<path d="M68.5032 67.3587H60.7126V110.344H68.5032V67.3587Z" />\r\n<path d="M50.6164 52.8628L42.5766 70.3081L55.6023 96.7271H47.0016L38.4632 79.0935L30.6103 96.7271H22.3835L42.4519 52.8628H50.6164Z" />\r\n<path d="M0.881836 23.7455V85.7453H8.98398H19.2675L23.0069 77.5247H8.98398V31.9034H52.2993V23.7455H0.881836Z" />\r\n<path d="M220.824 23.6827H183.118L179.378 31.9033H219.079L219.016 77.5247L191.469 77.5874L171.089 77.5247L181.497 67.2959H172.024L157.627 81.5408L172.024 96.0995L181.497 96.1622L171.089 85.6198L227.118 85.6825V23.6827H220.824Z" />\r\n</svg>\r\n',
+            _logo: '<svg viewBox="0 0 228 111" fill="none" xmlns="http://www.w3.org/2000/svg">\r\n<path d="M60.6506 13.6423H68.1919V16.0269C70.4978 14.1443 73.4271 13.0775 76.7303 13.0775C84.6454 13.0775 91.0025 19.7293 91.0025 28.3892C91.0025 32.4054 89.6313 35.9823 87.3254 38.6807C84.7701 41.6928 80.5944 43.6381 76.294 43.6381C73.3648 43.6381 70.8095 42.8224 68.5035 41.0025V57.5693H60.713V13.6423H60.6506ZM68.5035 32.7192C69.9993 34.9155 72.6169 36.3588 75.5461 36.3588C79.9088 36.3588 83.212 32.9702 83.212 28.3892C83.212 24.1848 80.2827 20.3568 75.6707 20.3568C72.6792 20.3568 70.0616 21.8002 68.4411 23.9965V32.7192H68.5035Z" />\r\n<path d="M111.32 13.0775C120.17 13.0775 126.839 19.9176 126.839 28.3892C126.839 36.8608 120.17 43.6381 111.32 43.6381C102.47 43.6381 95.8013 36.8608 95.8013 28.3892C95.8013 19.9176 102.532 13.0775 111.32 13.0775ZM111.32 36.3588C115.87 36.3588 118.986 32.7819 118.986 28.3892C118.986 23.9965 115.87 20.3568 111.32 20.3568C106.77 20.3568 103.654 23.9965 103.654 28.3892C103.654 32.7819 106.77 36.3588 111.32 36.3588Z" />\r\n<path d="M141.236 0.0249023H133.445V43.0106H141.236V0.0249023Z" />\r\n<path d="M151.332 57.5065L159.435 40.0612L146.346 13.6423H154.947L163.486 31.2759L171.401 13.6423H179.628L159.559 57.5065H151.332Z" />\r\n<path d="M141.298 96.7271H133.757V94.3425C131.451 96.2251 128.522 97.2919 125.219 97.2919C117.303 97.2919 110.946 90.6401 110.946 81.9802C110.946 77.964 112.317 74.3871 114.623 71.6887C117.179 68.6765 121.354 66.7312 125.655 66.7312C128.584 66.7312 131.139 67.6097 133.445 69.3668V52.8628H141.236V96.7271H141.298ZM133.445 77.6502C131.95 75.4539 129.332 74.0105 126.403 74.0105C122.04 74.0105 118.737 77.3992 118.737 81.9802C118.737 86.2474 121.666 90.0125 126.278 90.0125C129.27 90.0125 131.887 88.5692 133.508 86.3729V77.6502H133.445Z" />\r\n<path d="M90.6286 97.2918C81.7785 97.2918 75.1099 90.4518 75.1099 81.9801C75.1099 73.5085 81.7785 66.7312 90.6286 66.7312C99.4786 66.7312 106.147 73.5085 106.147 81.9801C106.147 90.4518 99.4786 97.2918 90.6286 97.2918ZM90.6286 74.0105C86.0789 74.0105 82.9627 77.5874 82.9627 81.9801C82.9627 86.3728 86.0789 90.0125 90.6286 90.0125C95.1782 90.0125 98.2944 86.3728 98.2944 81.9801C98.2944 77.5874 95.1782 74.0105 90.6286 74.0105Z" />\r\n<path d="M68.5032 67.3587H60.7126V110.344H68.5032V67.3587Z" />\r\n<path d="M50.6164 52.8628L42.5766 70.3081L55.6023 96.7271H47.0016L38.4632 79.0935L30.6103 96.7271H22.3835L42.4519 52.8628H50.6164Z" />\r\n<path d="M0.881836 23.7455V85.7453H8.98398H19.2675L23.0069 77.5247H8.98398V31.9034H52.2993V23.7455H0.881836Z" />\r\n<path d="M220.824 23.6827H183.118L179.378 31.9033H219.079L219.016 77.5247L191.469 77.5874L171.089 77.5247L181.497 67.2959H172.024L157.627 81.5408L172.024 96.0995L181.497 96.1622L171.089 85.6198L227.118 85.6825V23.6827H220.824Z" />\r\n</svg>\r\n',
             __class__: "PpAuthor",
         },
         _legal: {
@@ -1365,10 +1364,8 @@ export default {
                 o01: "Ich benutze es hauptsächlich für die Kommunikation auf der Arbeit",
                 o02: "Ich benutze es für meine tägliche Arbeit im Büro",
                 o03: "Ich benutze es für die tägliche Arbeit und zum Austausch mit Freunden",
-                o04:
-                    "Ich benutze es für die tägliche Arbeit, zum Austausch mit Freunden und fürs Shoppen",
-                o05:
-                    "Ich benutze es für die tägliche Arbeit, zum Austausch mit Freunden, fürs Shoppen und zur Unterhaltung",
+                o04: "Ich benutze es für die tägliche Arbeit, zum Austausch mit Freunden und fürs Shoppen",
+                o05: "Ich benutze es für die tägliche Arbeit, zum Austausch mit Freunden, fürs Shoppen und zur Unterhaltung",
             },
             "companies-01": {
                 q: "Welche der folgenden Dienste und Firmenseiten benutzt du für die Arbeit?",
@@ -1396,42 +1393,33 @@ export default {
                 o04: "Fast alle",
             },
             "trust-01": {
-                q:
-                    "Wie viel Vertrauen hast du in Facebook, deine personenbezogenen Daten zu schützen?",
+                q: "Wie viel Vertrauen hast du in Facebook, deine personenbezogenen Daten zu schützen?",
             },
             "trust-02": {
-                q:
-                    "Wie viel Vertrauen hast du in Google, deine personenbezogenen Daten zu schützen?",
+                q: "Wie viel Vertrauen hast du in Google, deine personenbezogenen Daten zu schützen?",
             },
             "trust-03": {
-                q:
-                    "Wie viel Vertrauen hast du in Apple, deine personenbezogenen Daten zu schützen?",
+                q: "Wie viel Vertrauen hast du in Apple, deine personenbezogenen Daten zu schützen?",
             },
             "trust-04": {
-                q:
-                    "Wie viel Vertrauen hast du in Amazon, deine personenbezogenen Daten zu schützen?",
+                q: "Wie viel Vertrauen hast du in Amazon, deine personenbezogenen Daten zu schützen?",
             },
             "uscomfort-01": {
-                q:
-                    "Alle oben erwähnten Firmen haben ihren Sitz in Amerika. Wie wohl fühlst du dich damit?",
+                q: "Alle oben erwähnten Firmen haben ihren Sitz in Amerika. Wie wohl fühlst du dich damit?",
             },
             "trust-05": {
-                q:
-                    "Wie sehr vertraust du einer Behörde, deine personenbezogenen Daten zu schützen?",
+                q: "Wie sehr vertraust du einer Behörde, deine personenbezogenen Daten zu schützen?",
             },
             "gdpr-01": {
-                q:
-                    "Die Europäische Union hat 2018 die Datenschutz-Grundverordnung (DSGVO) erlassen. Was macht diese Verordnung?",
+                q: "Die Europäische Union hat 2018 die Datenschutz-Grundverordnung (DSGVO) erlassen. Was macht diese Verordnung?",
                 o01: "Sie regelt, wie Firmen persönliche Daten benutzen dürfen.",
                 o02: "Sie schützt Firmen im Fall von Datenverlust davor, verklagt zu werden.",
                 o03: "Sie schützt Firmen vor Hackern.",
-                o04:
-                    "Sie schützt Hacker vor Strafverfolgung, wenn ihre Handlungen ein potentielles Datenrisiko offenlegen.",
+                o04: "Sie schützt Hacker vor Strafverfolgung, wenn ihre Handlungen ein potentielles Datenrisiko offenlegen.",
                 o05: "Sie stellt sicher, dass jeder den Cookies zustimmt.",
             },
             "gdpr-02": {
-                q:
-                    "Die DSGVO soll Personen mehr Kontrolle über ihre Daten geben. Sie gilt seit April 2018. Hast du seitdem den Eindruck, mehr oder weniger Kontrolle über deine personenbezogenen Daten zu haben?",
+                q: "Die DSGVO soll Personen mehr Kontrolle über ihre Daten geben. Sie gilt seit April 2018. Hast du seitdem den Eindruck, mehr oder weniger Kontrolle über deine personenbezogenen Daten zu haben?",
                 o01: "Mehr Kontrolle",
                 o02: "Weniger Kontrolle",
                 o03: "Ungefähr gleich",
@@ -1444,8 +1432,7 @@ export default {
                 o04: "Die Menschen selbst",
             },
             "empowered-14": {
-                q:
-                    "Wie einflussreich fühlst du dich im Hinblick darauf, deine digitalen Rechte einzufordern?",
+                q: "Wie einflussreich fühlst du dich im Hinblick darauf, deine digitalen Rechte einzufordern?",
             },
             "affected-15": {
                 q: "Warst du je von Datendiebstahl betroffen?",
@@ -1453,18 +1440,15 @@ export default {
             },
             "affected-16": { q: "Was für Probleme hat das für dich verursacht?" },
             "protected-17": {
-                q:
-                    "Mehr und mehr Menschen werden Opfer von Hackern und Datendiebstahl. Wie sicher fühlst du dich diesbezüglich?",
+                q: "Mehr und mehr Menschen werden Opfer von Hackern und Datendiebstahl. Wie sicher fühlst du dich diesbezüglich?",
             },
             "priority-18": {
-                q:
-                    "Wenn es eine einfache Methode gäbe, die Kontrolle über deine Daten zurückzuerhalten - wärst du daran interessiert?",
+                q: "Wenn es eine einfache Methode gäbe, die Kontrolle über deine Daten zurückzuerhalten - wärst du daran interessiert?",
                 o03: "Nicht sicher",
                 o04: "Ist mir egal",
             },
             "value-19": {
-                q:
-                    "Wenn du einschätzen solltest, wie wertoll deine Daten sind, welchen Wert würdest du ihnen geben?",
+                q: "Wenn du einschätzen solltest, wie wertoll deine Daten sind, welchen Wert würdest du ihnen geben?",
                 o01: "Kein Ahnung",
                 o02: "5€",
                 o03: "50€",
@@ -1472,8 +1456,7 @@ export default {
                 o05: "Mehr",
             },
             "share-20": {
-                q:
-                    "Große Tech-Firmen machen Profit mit den Daten der Menschen, die ihre Dienste nutzen. Findest du, dass dir ein Anteil davon zusteht?",
+                q: "Große Tech-Firmen machen Profit mit den Daten der Menschen, die ihre Dienste nutzen. Findest du, dass dir ein Anteil davon zusteht?",
                 o01: "Ja - ich habe diese Daten erschaffen.",
                 o02: "Nein - das ist das Resultat der Arbeit von anderen.",
                 o03: "Ich bin mir nicht sicher.",
@@ -1489,13 +1472,10 @@ export default {
             },
             "TaCs-22": {
                 q: "Wie oft liest du die Geschäftsbedingungen, bevor du zustimmst?",
-                o01:
-                    'Ich scrolle runter und klicke auf "Zustimmen". Sonst kann ich den Dienst nicht benutzen.',
+                o01: 'Ich scrolle runter und klicke auf "Zustimmen". Sonst kann ich den Dienst nicht benutzen.',
                 o02: 'Ich lese die Überschriften, bevor ich auf "Zustimmen" klicke.',
-                o03:
-                    'Ich lese alles durch und klicke auf "Zustimmen", selbst wenn ich mich mit dem Gelesenen nicht wohlfühle.',
-                o04:
-                    'Ich lese alles sorgfältig durch und denke darüber nach, bevor ich auf "Zustimmen" klicke.',
+                o03: 'Ich lese alles durch und klicke auf "Zustimmen", selbst wenn ich mich mit dem Gelesenen nicht wohlfühle.',
+                o04: 'Ich lese alles sorgfältig durch und denke darüber nach, bevor ich auf "Zustimmen" klicke.',
             },
             "familiar-23": {
                 q: "Mit welchen der folgenden Begrifflichkeiten bist du vertraut?",
@@ -1566,8 +1546,7 @@ export default {
                 o01: "I use it primarily to communicate at work.",
                 o02: "I use it to conduct my day-to-day work at the office.",
                 o03: "I use it to conduct my day-to-day work and for personal socialization.",
-                o04:
-                    "I use it to conduct my day-to-day work as well as use it to socialize and some shopping.",
+                o04: "I use it to conduct my day-to-day work as well as use it to socialize and some shopping.",
                 o05: "I use the Internet for work, socialization, shopping, and for entertainment.",
             },
             "companies-01": {
@@ -1600,26 +1579,21 @@ export default {
             "trust-03": { q: "How much do you trust Apple to keep your personal data secure?" },
             "trust-04": { q: "How much do you trust Amazon to keep your personal data secure?" },
             "uscomfort-01": {
-                q:
-                    "The previously named companies are all based out of the United States of America. How comfortable are you with that?",
+                q: "The previously named companies are all based out of the United States of America. How comfortable are you with that?",
             },
             "trust-05": {
-                q:
-                    "How much do you trust a government institution to keep your personal data secure?",
+                q: "How much do you trust a government institution to keep your personal data secure?",
             },
             "gdpr-01": {
-                q:
-                    "In 2018, the European Union put the General Data Protection Regulation. What does this law do?",
+                q: "In 2018, the European Union put the General Data Protection Regulation. What does this law do?",
                 o01: "Regulates how companies can use individual's data.",
                 o02: "Protects companies from lawsuits in case of data breech.",
                 o03: "Protects companies from hackers.",
-                o04:
-                    "Protects hackers from legal action if their actions expose a potential security risk.",
+                o04: "Protects hackers from legal action if their actions expose a potential security risk.",
                 o05: "Ensures that everyone agrees to cookies.",
             },
             "gdpr-02": {
-                q:
-                    "The GDPR is designed to give individuals more control over their personal data. Do you feel that you have more or less control over your personal data since it came into effect in April 2018?",
+                q: "The GDPR is designed to give individuals more control over their personal data. Do you feel that you have more or less control over your personal data since it came into effect in April 2018?",
                 o01: "More control",
                 o02: "Less control",
                 o03: "About the same",
@@ -1632,8 +1606,7 @@ export default {
                 o04: "Individuals themselves",
             },
             "empowered-14": {
-                q:
-                    "How empowered do you consider yourself when it comes to exercising your digital rights?",
+                q: "How empowered do you consider yourself when it comes to exercising your digital rights?",
             },
             "affected-15": {
                 q: "Have you ever been affected by a data breach?",
@@ -1641,12 +1614,10 @@ export default {
             },
             "affected-16": { q: "How did it affect you?" },
             "protected-17": {
-                q:
-                    "People are being increasingly targeted by hacks and data breaches. How protected do you feel?",
+                q: "People are being increasingly targeted by hacks and data breaches. How protected do you feel?",
             },
             "priority-18": {
-                q:
-                    "If it were simple and required little effort, would you be interested in regaining control of your data?",
+                q: "If it were simple and required little effort, would you be interested in regaining control of your data?",
                 o03: "Not sure",
                 o04: "I don't care",
             },
@@ -1659,8 +1630,7 @@ export default {
                 o05: "More",
             },
             "share-20": {
-                q:
-                    "Large tech companies profit from the data that is created from people using their services. Do you feel entitled to a percentage of that profit?",
+                q: "Large tech companies profit from the data that is created from people using their services. Do you feel entitled to a percentage of that profit?",
                 o01: "Yes – I created that data.",
                 o02: "No – it's the result of someone else's work.",
                 o03: "Not sure.",
@@ -1676,13 +1646,10 @@ export default {
             },
             "TaCs-22": {
                 q: "How often do you read the terms and conditions before agreeing to them?",
-                o01:
-                    'I scroll down and click "agree". I know this needs to happen if I want to use the service',
+                o01: 'I scroll down and click "agree". I know this needs to happen if I want to use the service',
                 o02: 'I read the headlines before clicking "agree".',
-                o03:
-                    "I read through everything and click \"agree\" even if I'm not comfortable with what I've read.",
-                o04:
-                    "I read through everything and thoughtfully consider agreeing before doing so.",
+                o03: "I read through everything and click \"agree\" even if I'm not comfortable with what I've read.",
+                o04: "I read through everything and thoughtfully consider agreeing before doing so.",
             },
             "familiar-23": {
                 q: "Which of the following terms are you familiar with?",

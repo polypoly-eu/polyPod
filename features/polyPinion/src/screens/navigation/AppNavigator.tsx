@@ -27,11 +27,8 @@ export default function AppNavigator() {
     const [onboardingShown, setOnboardingShown] = useState(null);
     const [languageInitialized, setLanguageInitialized] = useState(false);
     const { t, i18n, ready } = useTranslation(null, { useSuspense: false });
-    const {
-        questionaireInitializationStatus,
-        questionnaireList,
-        updateStoredQuestionnaires,
-    } = useContext(QuestionnaireListContext);
+    const { questionaireInitializationStatus, questionnaireList, updateStoredQuestionnaires } =
+        useContext(QuestionnaireListContext);
 
     /**
      * Effect to set the language in the app and set the app language in the questionnaire

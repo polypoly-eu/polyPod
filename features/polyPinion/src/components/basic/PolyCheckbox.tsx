@@ -15,11 +15,10 @@ export default function PolyCheckbox(props: any = {}) {
 
     const [isChecked, setIsChecked] = useState(checked);
 
-    const amChecked = React.useCallback(() => (grouped ? checked : isChecked), [
-        checked,
-        grouped,
-        isChecked,
-    ]);
+    const amChecked = React.useCallback(
+        () => (grouped ? checked : isChecked),
+        [checked, grouped, isChecked]
+    );
 
     const onPress = React.useCallback(() => {
         if (!disabled) {
