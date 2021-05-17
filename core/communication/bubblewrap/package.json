@@ -24,7 +24,7 @@
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
   },
   "dependencies": {
-    "@msgpack/msgpack": "^2.0.0"
+    "@msgpack/msgpack": "^2.6.0"
   },
   "devDependencies": {
     "@polypoly-eu/eslint-config": "file:../../../eslint-config",
