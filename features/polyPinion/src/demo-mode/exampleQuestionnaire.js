@@ -1335,7 +1335,7 @@ export default {
             },
         ],
         _available_translations: { english: "en", german: "de" },
-        _submission_deadline: "2020-06-15T21:59:59.000Z",
+        _submission_deadline: "2023-06-15T21:59:59.000Z",
         _encryption_public_key: "9j2SyrInwXWz4iqCQNid0VadFjDBDs4fGtZH+h1u71I=",
         _result: null,
         _schema: "v1",

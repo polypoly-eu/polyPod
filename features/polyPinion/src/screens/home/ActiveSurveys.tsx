@@ -2,30 +2,40 @@ import * as React from "react";
 import MainSurveyCard from "./MainSurveyCard";
 import { QuestionnaireListContext } from "../../context/questionnaire-list-context";
 import { Tabs, Tab } from "../../components/common/tabs";
+import PpQuestionnaire from "../../questionnaire/PpQuestionnaire";
 
 export default function ActiveSurveys() {
     const { questionnaireList } = React.useContext(QuestionnaireListContext);
+    const [openTab, setOpenTab] = React.useState("active");
 
-    const activeQuestionnaire = questionnaireList; //.filter(questionnaire =>
-    //questionnaire.isActive(),
-    //);
+    const filters = {
+        active: (e: PpQuestionnaire) => e.isActive(),
+        submitted: (e: PpQuestionnaire) => e.isSubmitted(),
+        expired: (e: PpQuestionnaire) => e.isExpired(),
+    };
 
-    // TODO: Adjust the link targets
-    // took the hrefs out for now as they were creating a new container inside the other one
+    const handleTabChange = (newTab: string) => {
+        setOpenTab(newTab);
+    };
+
+    const displayedQuestionnaires: Array<PpQuestionnaire> = questionnaireList.filter((e) =>
+        filters[openTab](e)
+    );
+
     return (
         <>
             <Tabs>
-                <Tab active={true}>
-                    <a>Featured</a>
+                <Tab active={openTab == "active" ? true : false}>
+                    <p onClick={() => handleTabChange("active")}>Featured</p>
                 </Tab>
-                <Tab>
-                    <a>Übermittelt</a>
+                <Tab active={openTab == "submitted" ? true : false}>
+                    <p onClick={() => handleTabChange("submitted")}>Übermittelt</p>
                 </Tab>
-                <Tab>
-                    <a>Abgelaufen</a>
+                <Tab active={openTab == "expired" ? true : false}>
+                    <p onClick={() => handleTabChange("expired")}>Abgelaufen</p>
                 </Tab>
             </Tabs>
-            {activeQuestionnaire.map((questionnaire) => (
+            {displayedQuestionnaires.map((questionnaire) => (
                 <MainSurveyCard key={questionnaire.id} questionnaire={questionnaire} />
             ))}
         </>
