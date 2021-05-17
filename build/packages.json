@@ -16,6 +16,7 @@
         "core/legacy/orodruin",
         "core/legacy/podigree",
         "core/utils/dummy-server",
+        "core/utils/rollup-plugin-copy-watch",
         "core/utils/silly-i18n",
         "eslint-config",
         "features/example",
