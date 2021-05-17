@@ -141,7 +141,7 @@ button {
     overflow: hidden scroll;
     width: 100%;
     max-width: 412px;
-    margin-bottom: 51px;
+    margin-bottom: 60px;
     position: relative;
 }
 
@@ -151,7 +151,7 @@ button {
 
 .term-description .scroll-container .gradient-area .gradient {
     position: fixed;
-    bottom: 68px;
+    bottom: 96px;
     right: 0;
     left: 0;
     height: 65px;
@@ -170,14 +170,14 @@ button {
     background-color: #3749a9;
     max-width: 412px;
     margin: 0 auto;
-    padding: 5px 28px 32px 28px;
+    padding: 20px 28px 32px 28px;
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
 }
 
-.term-description button {
+.term-description .back {
     width: 100%;
     height: 51px;
     background-color: #0f1938;
