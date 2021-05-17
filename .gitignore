@@ -1,4 +1,11 @@
+# Mac stuff
 .DS_Store
+
+# Usual place for secrets
 .env
+
+# default node modules directory
 node_modules/
+
+# emacs backup
 *~

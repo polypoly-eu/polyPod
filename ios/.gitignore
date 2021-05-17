@@ -1,6 +1,5 @@
 # Xcode
 #
-.DS_Store
 build/
 DerivedData/
 *.pbxuser
