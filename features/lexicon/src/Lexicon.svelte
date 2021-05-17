@@ -123,10 +123,16 @@ button {
     font-weight: 400;
 }
 
-.term-description h2 {
+.term-description .top{
+    display: flex;
+    justify-content: space-between;
     margin: 0 0 39px 0;
+}
+
+.term-description .top h2 {
     font-size: 24px;
     line-height: 28.8px;
+    margin: 0;
 }
 
 .term-description .scroll-container {
@@ -217,19 +223,23 @@ function handleClear() {
 </script>
 
 <main class="lexicon">
+    <div class="top-separator"></div>
     {#if showTerm}
         <div class="term-description">
             <div class="scroll-container">
+                <div class="top">
                 <h2>{showTerm}</h2>
+                <button on:click="{handleCopytoClipboard(showTerm)}">
+            <img src="./images/Copy.svg" alt="{i18n.t("common:copy")}" title="{i18n.t("common:copy")}">
+                </button>
+            </div>
                 {@html lexicon.description(showTerm)}
                 <div class="gradient-area">
                     <div class="gradient"></div>
                 </div>
             </div>
-            <button on:click="{handleCopytoClipboard(showTerm)}"
-                >{i18n.t("common:copy")}</button>
             <div class="button-area">
-                <button on:click="{() => handleBack()}"
+                <button class="back" on:click="{() => handleBack()}"
                     >{i18n.t("common:back")}</button>
             </div>
         </div>
