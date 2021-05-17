@@ -9,6 +9,7 @@ import type {
 import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
+import { FeatureManifest, parseFeatureManifest } from "@polypoly-eu/manifest-parser";
 
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
@@ -67,12 +68,15 @@ class ThrowingPolyOut implements PolyOut {
 class BrowserPolyNav implements PolyNav {
     actions?: { [key: string]: () => void };
     private keyUpListener: any = null;
+    private popStateListener: any = null;
 
     async openUrl(url: string): Promise<void> {
         console.log(`polyNav: Attempt to open URL: ${url}`);
     }
 
     async setActiveActions(actions: string[]): Promise<void> {
+        if (actions.includes("back"))
+            window.history.pushState(document.title, document.title, `?nav`);
         const actionKeys: any = {
             Escape: "back",
             s: "search",
@@ -93,6 +97,12 @@ class BrowserPolyNav implements PolyNav {
             if (actions.includes(action)) this.actions?.[action]?.();
         };
         window.addEventListener("keyup", this.keyUpListener);
+        this.popStateListener = (_event: any) => {
+            // NOTE: This triggers "back" action for both Back and Forward
+            // browser buttons
+            if (actions.includes("back")) this.actions?.["back"]?.();
+        };
+        window.onpopstate = this.popStateListener;
     }
 
     async setTitle(title: string): Promise<void> {
@@ -101,6 +111,27 @@ class BrowserPolyNav implements PolyNav {
 }
 
 export class BrowserPod implements Pod {
+    constructor() {
+        window.addEventListener("load", async () => {
+            const manifestJson = await (await fetch("manifest.json")).json();
+            const manifest = await parseFeatureManifest(manifestJson);
+
+            const injection = document.createElement("iframe");
+            injection.style.width = "100%";
+            injection.style.height = "50px";
+            const source = `
+            <html>
+                <body style="background-color: ${manifest.primaryColor}">
+                    <H1 id="title">${manifest.name}<H1>
+                </body>
+            </html>
+            `;
+            const blob = new Blob([source], { type: "text/html" });
+            injection.src = URL.createObjectURL(blob);
+            document.body.prepend(injection);
+        });
+    }
+
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new LocalStoragePolyIn();
     public readonly polyOut = new ThrowingPolyOut();

@@ -98,6 +98,10 @@ const featureDecoder = Decode.type({
     translations: Decode.UnknownArray,
 });
 
+export async function parseFeatureManifest(featureManifestJson: string): Promise<FeatureManifest> {
+    return expect(featureManifestJson, "Failed to parse Feature manifest", featureDecoder);
+}
+
 export async function readManifest(pkgPath: string): Promise<Manifest> {
     const packageManifest = await readPkg(pkgPath);
 

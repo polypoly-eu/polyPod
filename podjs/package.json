@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@polypoly-eu/fetch-spec": "file:../core/api/fetch-spec",
+    "@polypoly-eu/manifest-parser": "file:../core/api/manifest-parser",
     "@polypoly-eu/pod-api": "file:../core/api/pod-api",
     "@polypoly-eu/rdf": "file:../core/api/rdf",
     "@polypoly-eu/rdf-convert": "file:../core/api/rdf-convert",
