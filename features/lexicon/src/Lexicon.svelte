@@ -34,13 +34,12 @@ button {
     top:0;
     right: 0;
     width: 100%;
-    border-top: 1px solid #f7fafc;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .search-bar-area {
     width: 100%;
     background-color: #3749a9;
-    border-top: 1px solid #f7fafc;
     max-width: 412px;
     display: flex;
     justify-content: center;
