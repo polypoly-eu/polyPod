@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import * as d3 from "d3";
 import i18n from "../../i18n.js";
 import utils from "./utils.js";
+import DataBubbles from "./dataBubbles.jsx";
 
 /*
     Component to visualize data in a non-ordered bubble-diagram
@@ -17,44 +18,8 @@ const DataTypeBubbleCategory = ({
     defaultColor,
     highlightedType,
 }) => {
-    const bubbleRef = useRef(null);
-    const edgePadding = 5;
-
-    const clearSvg = () => {
-        d3.select(bubbleRef.current).selectAll("svg").remove();
-    };
-
-    const makeHierarchy = () => {
-        return d3.hierarchy({ children: data }).sum((d) => d.value);
-    };
-
-    const pack = () => {
-        return d3
-            .pack()
-            .size([width - edgePadding, height - edgePadding])
-            .padding(3);
-    };
-
-    const createBubbleContainer = () => {
-        return d3
-            .select(bubbleRef.current)
-            .append("svg")
-            .attr("viewBox", `0 0 ${width} ${height}`);
-    };
-
     // d3 svg bubble-diagram drawing function
-    const drawDataBubbles = (bubbleContainer) => {
-        let hierarchicalData = makeHierarchy(data);
-        let packLayout = pack();
-
-        const root = packLayout(hierarchicalData);
-        const leaf = bubbleContainer
-            .selectAll("g")
-            .data(root.leaves())
-            .enter()
-            .append("g")
-            .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`);
-
+    const drawBubblesLeafs = (leaf) => {
         leaf.append("circle")
             .attr("r", (d) => d.r)
             .attr("fill-opacity", (d) =>
@@ -92,15 +57,14 @@ const DataTypeBubbleCategory = ({
         leaf.select();
     };
 
-    useEffect(() => {
-        data.forEach((e) => {
-            e.value = e.count;
-        });
-        clearSvg();
-        drawDataBubbles(createBubbleContainer());
-    });
-
-    return <div className="bubble-chart" ref={bubbleRef}></div>;
+    return (
+        <DataBubbles
+            data={data}
+            width={width}
+            height={height}
+            drawLeafs={drawBubblesLeafs}
+        ></DataBubbles>
+    );
 };
 
 export default DataTypeBubbleCategory;

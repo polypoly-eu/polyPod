@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import * as d3 from "d3";
+import React from "react";
 import i18n from "../../i18n.js";
 import utils from "./utils.js";
 import "./dataViz.css";
+import DataBubbles from "./dataBubbles.jsx";
 //import { text } from "d3";
 
 /*
@@ -21,51 +21,14 @@ const DataTypeBubbles = ({
     showValues = true,
     highlight = null,
 }) => {
-    const bubbleRef = useRef();
-    const edgePadding = 5;
-
     //this is needed for the font-size calculations
     let highestValue = 0;
     //This is necessary because later d.count is a function
 
     //data.sort((a, b) => b.value - a.value);
 
-    const clearSvg = () => {
-        d3.select(bubbleRef.current).selectAll("svg").remove();
-    };
-
-    const makeHierarchy = () => {
-        return d3.hierarchy({ children: data }).sum((d) => d.value);
-    };
-
-    const pack = () => {
-        return d3
-            .pack()
-            .size([width - edgePadding, height - edgePadding])
-            .padding(3);
-    };
-
-    const createBubbleContainer = () => {
-        return d3
-            .select(bubbleRef.current)
-            .append("svg")
-            .attr("viewBox", `0 0 ${width} ${height}`);
-    };
-
     // d3 svg bubble-diagram drawing function
-    const drawDataBubbles = (bubbleContainer) => {
-        const hierarchicalData = makeHierarchy(data);
-        const packLayout = pack();
-
-        const root = packLayout(hierarchicalData);
-
-        const leaf = bubbleContainer
-            .selectAll("g")
-            .data(root.leaves())
-            .enter()
-            .append("g")
-            .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`);
-
+    const drawBubblesLeafs = (leaf, bubbleContainer) => {
         leaf.append("circle")
             .attr("r", (d) => d.r)
             .style("fill", bubbleColor)
@@ -112,16 +75,14 @@ const DataTypeBubbles = ({
         }
     };
 
-    useEffect(() => {
-        data.forEach((e) => {
-            e.value = e.count;
-            e.count > highestValue ? (highestValue = e.count) : null;
-        });
-        clearSvg();
-        drawDataBubbles(createBubbleContainer());
-    });
-
-    return <div className="bubble-chart" ref={bubbleRef}></div>;
+    return (
+        <DataBubbles
+            data={data}
+            width={width}
+            height={height}
+            drawLeafs={drawBubblesLeafs}
+        ></DataBubbles>
+    );
 };
 
 export default DataTypeBubbles;
