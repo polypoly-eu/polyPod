@@ -49,4 +49,13 @@ To run the linter:
 (Please note that this won't trigger tests or linting for non-JS code, for
 example [android](android).)
 
+## Branches
+
+Ongoing development is happening in the `main` branch. We aim to keep it stable
+at all times, but it is not as thoroughly tested as our releases. This is the
+branch to make contributions against.
+
+We prepare releases in the `release` branch. If no release is in motion, it
+reflects the state of the last release we made.
+
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
