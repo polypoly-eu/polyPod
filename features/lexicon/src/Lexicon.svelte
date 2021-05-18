@@ -32,6 +32,7 @@ button {
     z-index: 200;
     position: fixed;
     top:0;
+    right: 0;
     width: 100%;
     border-top: 1px solid #f7fafc;
 }
