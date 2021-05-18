@@ -1,4 +1,4 @@
-import DisplayedSurveys from "./DisplayedSurveys";
+import ActiveSurveys from "./ActiveSurveys";
 import React from "react";
 import { Link } from "react-router-dom";
 import { SmallHeader } from "../../components/common/header";
@@ -27,7 +27,7 @@ export default function HomeScreen() {
     return (
         <Layout header={<HomeHeader />} footer={<HomeFooter />}>
             <main>
-                <DisplayedSurveys />
+                <ActiveSurveys />
             </main>
         </Layout>
     );
