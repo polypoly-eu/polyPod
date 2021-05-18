@@ -1,16 +1,20 @@
 @charset "UTF-8";
 :root {
-    --core-nude: #f9f0d7;
-    --core-offwhite: #faf6f4;
-    --core-black: #000;
-    --core-olive: #b0991a;
-    --core-yellow: #fef230;
-    --academy-rose: #ffebe2;
+    /*background-colors*/
+    --light-background: #e5e5e5;
+
+    /*secondary colors*/
+    --dark-grey: #273040;
+    --medium-blue: #475abb;
+
+    /*question colors*/
     --academy-blue: #91daff;
     --academy-rustRed: #cd6f55;
     --grey-light: #e2e7ea;
     --grey-medium: #a9bcc8;
     --grey-grey: #8197a5;
+
+    /*signal-colors*/
     --signal-good: #00bfe3;
     --signal-noGood: #ffc60b;
     --signal-bad: #f47d20;
@@ -69,8 +73,8 @@ body {
     font-family: "Rubik", sans-serif;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    background-color: #faf6f4;
-    color: #000;
+    background-color: var(--light-background);
+    color: var(--dark-grey);
 }
 
 h1,
@@ -78,7 +82,6 @@ h2,
 h3 {
     margin-top: 0;
     margin-bottom: 1rem;
-    color: #000;
     font-weight: 700;
 }
 
