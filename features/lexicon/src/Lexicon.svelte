@@ -8,7 +8,6 @@
     background-color: #3749a9;
     padding: 0;
     margin: 0;
-    border-top: 1px solid #f7fafc;
 }
 
 * {
@@ -27,6 +26,15 @@ button {
     width: 100%;
     max-width: 412px;
     margin: auto;
+}
+
+.top-separator{
+    z-index: 200;
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 100%;
+    border-top: 1px solid #f7fafc;
 }
 
 .search-bar-area {
@@ -117,10 +125,16 @@ button {
     font-weight: 400;
 }
 
-.term-description h2 {
+.term-description .top{
+    display: flex;
+    justify-content: space-between;
     margin: 0 0 39px 0;
+}
+
+.term-description .top h2 {
     font-size: 24px;
     line-height: 28.8px;
+    margin: 0;
 }
 
 .term-description .scroll-container {
@@ -129,7 +143,7 @@ button {
     overflow: hidden scroll;
     width: 100%;
     max-width: 412px;
-    margin-bottom: 51px;
+    margin-bottom: 60px;
     position: relative;
 }
 
@@ -139,7 +153,7 @@ button {
 
 .term-description .scroll-container .gradient-area .gradient {
     position: fixed;
-    bottom: 68px;
+    bottom: 96px;
     right: 0;
     left: 0;
     height: 65px;
@@ -158,14 +172,14 @@ button {
     background-color: #3749a9;
     max-width: 412px;
     margin: 0 auto;
-    padding: 5px 28px 32px 28px;
+    padding: 20px 28px 32px 28px;
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
 }
 
-.term-description button {
+.term-description .back {
     width: 100%;
     height: 51px;
     background-color: #0f1938;
@@ -185,6 +199,18 @@ function handleClickTerm(term) {
     showTerm = term;
 }
 
+function handleCopytoClipboard(term) {
+    let termDescription = term + ": " + lexicon.description(term);
+    var div = document.createElement("div");
+    div.innerHTML = termDescription;
+    const termText = div.innerText || "";
+    copyText(termText);
+}
+
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+}
+
 function handleBack() {
     showTerm = null;
 }
@@ -199,17 +225,23 @@ function handleClear() {
 </script>
 
 <main class="lexicon">
+    <div class="top-separator"></div>
     {#if showTerm}
         <div class="term-description">
             <div class="scroll-container">
+                <div class="top">
                 <h2>{showTerm}</h2>
+                <button on:click="{handleCopytoClipboard(showTerm)}">
+            <img src="./images/Copy.svg" alt="{i18n.t("common:copy")}" title="{i18n.t("common:copy")}">
+                </button>
+            </div>
                 {@html lexicon.description(showTerm)}
                 <div class="gradient-area">
                     <div class="gradient"></div>
                 </div>
             </div>
             <div class="button-area">
-                <button on:click="{() => handleBack()}"
+                <button class="back" on:click="{() => handleBack()}"
                     >{i18n.t("common:back")}</button>
             </div>
         </div>

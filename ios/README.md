@@ -2,10 +2,7 @@
 
 The polyPod app for iOS devices
 
-While the user interface is of the polyPod itself is still fairly basic, it is
-already a full fledged polyPod implementation.
+## Building
 
-# Building
-
-1. Run `build.js` in the parent directory.
-3. Open the _PolyPodApp_ project in XCode and build it there.
+1. Build the core code and features (see [../README.md](../README.md)).
+2. Open the _PolyPodApp_ project in Xcode and build it there.

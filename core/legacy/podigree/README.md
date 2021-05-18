@@ -1,7 +1,5 @@
 # podigree
 
-![Node CI](https://github.com/polypoly-eu/podigree/workflows/Node%20CI/badge.svg)
-
 An assortment of Pod implementations of noble descent
 
 ## Overview
