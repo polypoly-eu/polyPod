@@ -19,6 +19,7 @@
         "core/utils/rollup-plugin-copy-watch",
         "core/utils/silly-i18n",
         "eslint-config",
+        "features/bundle",
         "features/example",
         "features/lexicon",
         "features/polyExplorer",

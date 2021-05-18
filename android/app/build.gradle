@@ -149,20 +149,9 @@ task copyRemotePod(type: Copy) {
     into "build/generated-assets/container/"
 }
 
-task packageAndCopyBundledFeatures
-
-[
-    "polyExplorer": "dist",
-    "polyPreview": "dist",
-    "lexicon": "public"
-].each { featureName, featureOutputPath ->
-    def taskName = "packageAndCopyFeature_$featureName"
-    task "$taskName"(type: Zip) {
-        archiveFileName = "${featureName}.zip"
-        destinationDirectory = file("$buildDir/generated-assets/features")
-        from "$projectDir/../../features/$featureName/$featureOutputPath"
-    }
-    packageAndCopyBundledFeatures.dependsOn "$taskName"
+task copyBundledFeatures(type: Copy) {
+    from "../../features/bundle/dist/*.zip"
+    into "build/generated-assets/features"
 }
 
 task packageTestFeature(type: Zip) {
@@ -196,7 +185,7 @@ task copyTestFeatureOntoDevice {
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
         task.dependsOn copyRemotePod
-        task.dependsOn packageAndCopyBundledFeatures
+        task.dependsOn copyBundledFeatures
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice

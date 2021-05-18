@@ -1,0 +1,29 @@
+{
+  "name": "feature-bundle",
+  "scripts": {
+    "build": "node index.js"
+  },
+  "devDependencies": {
+    "lexicon-feature": "file:../lexicon",
+    "poly-explorer-feature": "file:../polyExplorer",
+    "poly-preview-feature": "file:../polyPreview"
+  },
+  "private": true,
+  "polyPodFeatures": [
+    {
+      "archiveName": "polyPreview",
+      "moduleName": "poly-preview-feature",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "polyExplorer",
+      "moduleName": "poly-explorer-feature",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "lexicon",
+      "moduleName": "lexicon-feature",
+      "artifactPath": "public"
+    }
+  ]
+}
