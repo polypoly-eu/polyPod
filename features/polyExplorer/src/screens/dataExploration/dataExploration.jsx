@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
-import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
+import DataTypeBubbleAll from "../../components/dataViz/dataTypeBubbleAll.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
 import PurposeChart from "../../components/dataViz/purposeChart.jsx";
@@ -250,7 +250,7 @@ const DataExplorationScreen = ({
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
                     </h1>
-                    <DataTypeBubbles
+                    <DataTypeBubbleAll
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
@@ -285,7 +285,7 @@ const DataExplorationScreen = ({
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
                     </h1>
-                    <DataTypeBubbles
+                    <DataTypeBubbleAll
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
@@ -339,7 +339,7 @@ const DataExplorationScreen = ({
                             "dataExplorationScreen:dataTypes.heading.correlations"
                         )}
                     </h2>
-                    <DataTypeBubbles
+                    <DataTypeBubbleAll
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
