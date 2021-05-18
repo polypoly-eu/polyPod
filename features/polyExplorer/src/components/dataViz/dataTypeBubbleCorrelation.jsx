@@ -2,7 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import i18n from "../../i18n.js";
 import utils from "./utils.js";
-import DataTypeBubbles from "./dataTypeBubbles";
+import DataTypeBubbles from "./dataTypeBubbles.jsx";
 
 /*
     Component to visualize data in a non-ordered bubble-diagram
