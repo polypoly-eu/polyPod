@@ -150,7 +150,9 @@ task copyRemotePod(type: Copy) {
 }
 
 task copyBundledFeatures(type: Copy) {
-    from "../../features/bundle/dist/*.zip"
+    from ("../../features/bundle/dist") {
+        include "*.zip"
+    }
     into "build/generated-assets/features"
 }
 
