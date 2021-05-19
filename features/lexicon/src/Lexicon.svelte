@@ -5,13 +5,13 @@
 }
 
 :global(body) {
-    background-color: #3749a9;
+    background-color: #FFF5F5;
     padding: 0;
     margin: 0;
 }
 
 * {
-    color: #f7fafc;
+    color: #0F1938;
     box-sizing: border-box;
     font-family: Jost;
     font-weight: 500;
@@ -34,12 +34,13 @@ button {
     top:0;
     right: 0;
     width: 100%;
+    height: 4px;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .search-bar-area {
     width: 100%;
-    background-color: #3749a9;
+    background-color: #FFF5F5;
     max-width: 412px;
     display: flex;
     justify-content: center;
@@ -53,12 +54,12 @@ button {
 .search-bar-area .search-bar {
     width: 100%;
     height: 40px;
-    background-color: #3749a9;
+    background-color: #FFF5F5;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 18px;
-    border: 1px solid #f7fafc;
+    border: 1px solid #0F1938;
     border-radius: 20px;
     padding: 1px 12px 0 21px;
     position: relative;
@@ -75,7 +76,7 @@ button {
 }
 
 .search-bar-area .search-bar .search-bar-input::placeholder {
-    color: #f7fafc;
+    color: #0F1938;
     font-weight: 400;
 }
 
@@ -157,7 +158,7 @@ button {
     left: 0;
     height: 65px;
     pointer-events: none;
-    background: linear-gradient(#3749a900 0%, #3749a9);
+    background: linear-gradient(#FFF5F500 0%, #FFF5F5);
 }
 
 .term-description .scroll-container::after {
@@ -168,7 +169,7 @@ button {
 
 .term-description .button-area {
     display: block;
-    background-color: #3749a9;
+    background-color: #FFF5F5;
     max-width: 412px;
     margin: 0 auto;
     padding: 20px 28px 32px 28px;
@@ -182,6 +183,7 @@ button {
     width: 100%;
     height: 51px;
     background-color: #0f1938;
+    color: #f7fafc;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     font-size: 16px;
