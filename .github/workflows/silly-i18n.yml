@@ -16,4 +16,4 @@ jobs:
       - name: Install and test
         run: |
           npm i
-          npm test
+          npm run test
