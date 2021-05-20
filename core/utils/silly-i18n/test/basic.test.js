@@ -1,4 +1,4 @@
-import I18n from "../src/index.js";
+import {determineLanguage, I18n} from "../src/index.js";
 
 describe( "Test basic configuration", () => {
 
