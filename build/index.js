@@ -58,7 +58,7 @@ function createPackageData(path) {
         name: manifest.name,
         localDependencies,
         remoteDependencies,
-        scripts: Object.keys(manifest.scripts),
+        scripts: Object.keys(manifest.scripts || {}),
     };
 }
 

@@ -1,8 +1,6 @@
-# eslint-config-polypoly
+# eslint-config
 
-![Node CI](https://github.com/polypoly-eu/eslint-config-polypoly/workflows/Node%20CI/badge.svg)
+ESLint configuration for all polyPod JavaScript/TypeScript packages
 
-ESLint configuration for Polypoly projects
-
-* [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint)
-* [prettier](https://prettier.io/)
+For historical reasons, it's a package rather than a top level file, but we
+might want to change that.
