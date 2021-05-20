@@ -156,6 +156,7 @@ const CompanyBubbles = ({
     showIndustryLabels = [],
 }) => {
     const [diagrams, setDiagram] = useState({});
+    const [industryCircleLabel, setIndustryCircleLabel] = useState({});
     const [viewState, setViewState] = useState(null);
 
     const bubbleRef = useRef();
@@ -237,12 +238,29 @@ const CompanyBubbles = ({
         localDiagram.allIndustries.root
             .filter((d) => d.children)
             .style("fill", "transparent");
-        localDiagram.allIndustries.bubbles = localDiagram.allIndustries.root.filter(
+        localDiagram.allIndustries.industryBubbles = localDiagram.allIndustries.root.filter(
             (d) => d.parent && d.children
         );
-        localDiagram.allIndustries.bubbles.each((d) =>
-            appendIndustryLabel(localDiagram.allIndustries.svg, d)
+
+        localDiagram.allIndustries.industryBubbles.style("stroke", bubbleColor);
+        localDiagram.allIndustries.companyBubbles = localDiagram.allIndustries.root.filter(
+            (d) => !d.children
         );
+
+        localDiagram.allIndustries.companyBubbles
+            .style("fill", bubbleColor)
+            .style("fill-opacity", 0.15);
+        localDiagram.allIndustries.industryBubbles.each((d) => {
+            const industryLabel = appendIndustryLabel(
+                localDiagram.allIndustries.svg,
+                d
+            );
+            setIndustryCircleLabel((state) => ({
+                ...state,
+                [d.data.name]: industryLabel,
+            }));
+            return industryLabel;
+        });
 
         localDiagram.industryHighlight = {};
         localDiagram.industryHighlight.svg = root
@@ -321,10 +339,6 @@ const CompanyBubbles = ({
             localDiagram[diagram].svg.style("display", "none");
         }
 
-        localDiagram.allIndustries.bubbles
-            .selectAll(".label")
-            .style("opacity", 0);
-
         console.log("NNN save state");
         setDiagram({ ...localDiagram });
 
@@ -371,16 +385,13 @@ const CompanyBubbles = ({
 
             if (diagramType === "allIndustries") {
                 console.log("NNN showin labels for allIndustries");
-                diagramDom.allIndustries.bubbles
-                    .selectAll(".label")
-                    .style("opacity", 0)
-                    .filter(() =>
-                        showIndustryLabels.find(
-                            (label) =>
-                                d3.select(this).text().indexOf(label) > -1
-                        )
-                    )
-                    .style("opacity", 1);
+                for (const industryName in industryCircleLabel) {
+                    if (showIndustryLabels.includes(industryName)) {
+                        industryCircleLabel[industryName].style("opacity", 1);
+                    } else {
+                        industryCircleLabel[industryName].style("opacity", 0);
+                    }
+                }
             }
 
             setViewState(diagramType);
