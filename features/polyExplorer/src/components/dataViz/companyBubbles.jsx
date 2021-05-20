@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import i18n from "../../i18n.js";
 import utils from "./utils.js";
@@ -155,11 +155,11 @@ const CompanyBubbles = ({
     highlight = {},
     showIndustryLabels = [],
 }) => {
-    let viewState = null;
+    const [diagrams, setDiagram] = useState({});
+    const [viewState, setViewState] = useState(null);
 
     const bubbleRef = useRef();
     // const viewStates = Object.freeze({ flat: 1, industries: 2 });
-    const diagrams = {};
 
     const getRoot = () => d3.select(bubbleRef.current);
 
@@ -191,6 +191,7 @@ const CompanyBubbles = ({
 
     function createViewData() {
         const viewData = {};
+        const localDiagram = {};
         const root = getRoot();
         viewData.flat = {
             padding: calculateCompanyBubblePadding(
@@ -210,111 +211,124 @@ const CompanyBubbles = ({
             highlightTexts
         );
 
-        diagrams.flat = {};
-        diagrams.flat.svg = root
+        localDiagram.flat = {};
+        localDiagram.flat.svg = root
             .append("svg")
             .attr("viewBox", `0 0 ${width} ${height}`);
-        diagrams.flat.root = appendBubbles(diagrams.flat.svg, viewData.flat);
-        diagrams.flat.root
+        localDiagram.flat.root = appendBubbles(
+            localDiagram.flat.svg,
+            viewData.flat
+        );
+        localDiagram.flat.root
             .filter((d) => d.children)
             .style("fill", "transparent");
-        diagrams.flat.root
+        localDiagram.flat.root
             .filter((d) => !d.children)
             .style("fill", bubbleColor);
 
-        diagrams.allIndustries = {};
-        diagrams.allIndustries.svg = root
+        localDiagram.allIndustries = {};
+        localDiagram.allIndustries.svg = root
             .append("svg")
             .attr("viewBox", `0 0 ${width} ${height}`);
-        diagrams.allIndustries.root = appendBubbles(
-            diagrams.allIndustries.svg,
+        localDiagram.allIndustries.root = appendBubbles(
+            localDiagram.allIndustries.svg,
             viewData.industryCompanyHighlight
         );
-        diagrams.allIndustries.root
+        localDiagram.allIndustries.root
             .filter((d) => d.children)
             .style("fill", "transparent");
-        diagrams.allIndustries.bubbles = diagrams.allIndustries.root.filter(
+        localDiagram.allIndustries.bubbles = localDiagram.allIndustries.root.filter(
             (d) => d.parent && d.children
         );
-        diagrams.allIndustries.bubbles.each((d) =>
-            appendIndustryLabel(diagrams.allIndustries.svg, d)
+        localDiagram.allIndustries.bubbles.each((d) =>
+            appendIndustryLabel(localDiagram.allIndustries.svg, d)
         );
 
-        diagrams.industryHighlight = {};
-        diagrams.industryHighlight.svg = root
+        localDiagram.industryHighlight = {};
+        localDiagram.industryHighlight.svg = root
             .append("svg")
             .attr("viewBox", `0 0 ${width} ${height}`);
-        diagrams.industryHighlight.root = appendBubbles(
-            diagrams.industryHighlight.svg,
+        localDiagram.industryHighlight.root = appendBubbles(
+            localDiagram.industryHighlight.svg,
             viewData.industryCompanyHighlight
         );
 
-        diagrams.industryHighlight.root
+        localDiagram.industryHighlight.root
             .style("fill", (d) => (d.children ? "transparent" : bubbleColor))
             .style("fill-opacity", (d) =>
                 d.parent?.data.highlightedIndustry ? 1 : 0.15
             )
             .style("stroke", "transparent");
 
-        console.log("NNN industryHighlight: ", diagrams.industryHighlight.root);
-        diagrams.industryHighlight.bubbles = utils.findNode(
-            diagrams.industryHighlight.root,
+        console.log(
+            "NNN industryHighlight: ",
+            localDiagram.industryHighlight.root
+        );
+        localDiagram.industryHighlight.bubbles = utils.findNode(
+            localDiagram.industryHighlight.root,
             (d) => d.data.highlightedIndustry
         );
 
         console.log(
             "NNNN industryHighlight.bubbles: ",
-            diagrams.industryHighlight.bubbles
+            localDiagram.industryHighlight.bubbles
         );
 
         appendIndustryLabel(
-            diagrams.industryHighlight.svg,
-            diagrams.industryHighlight.bubbles
+            localDiagram.industryHighlight.svg,
+            localDiagram.industryHighlight.bubbles
         );
         appendExplanation(
-            diagrams.industryHighlight.svg,
-            diagrams.industryHighlight.bubbles,
+            localDiagram.industryHighlight.svg,
+            localDiagram.industryHighlight.bubbles,
             highlightTexts.industry.explanation
         );
 
-        diagrams.companyHighlight = {};
-        diagrams.companyHighlight.svg = root
+        localDiagram.companyHighlight = {};
+        localDiagram.companyHighlight.svg = root
             .append("svg")
             .attr("viewBox", `0 0 ${width} ${height}`);
-        diagrams.companyHighlight.root = appendBubbles(
-            diagrams.companyHighlight.svg,
+        localDiagram.companyHighlight.root = appendBubbles(
+            localDiagram.companyHighlight.svg,
             viewData.industryCompanyHighlight
         );
 
-        diagrams.companyHighlight.root
+        localDiagram.companyHighlight.root
             .style("fill", (d) => (d.children ? "transparent" : bubbleColor))
             .style("fill-opacity", (d) =>
                 d.data.highlightedCompany ? 1 : 0.15
             );
 
-        diagrams.companyHighlight.bubbles = utils.findNode(
-            diagrams.companyHighlight.root,
+        localDiagram.companyHighlight.bubbles = utils.findNode(
+            localDiagram.companyHighlight.root,
             (d) => d.data.highlightedCompany
         );
 
         appendBubbleLabel(
-            diagrams.companyHighlight.svg,
-            diagrams.companyHighlight.bubbles,
+            localDiagram.companyHighlight.svg,
+            localDiagram.companyHighlight.bubbles,
             highlightTexts.company.explanation
         );
 
         appendExplanation(
-            diagrams.companyHighlight.svg,
-            diagrams.companyHighlight.bubbles,
+            localDiagram.companyHighlight.svg,
+            localDiagram.companyHighlight.bubbles,
             highlightTexts.company.explanation
         );
 
-        for (const diagram in diagrams) {
-            diagrams[diagram].svg.select("svg").style("opacity", "0");
-            diagrams[diagram].svg.select("svg").style("display", "none");
+        for (const diagram in localDiagram) {
+            localDiagram[diagram].svg.style("opacity", "0");
+            localDiagram[diagram].svg.style("display", "none");
         }
 
-        diagrams.allIndustries.bubbles.selectAll(".label").style("opacity", 0);
+        localDiagram.allIndustries.bubbles
+            .selectAll(".label")
+            .style("opacity", 0);
+
+        console.log("NNN save state");
+        setDiagram({ ...localDiagram });
+
+        return localDiagram;
     }
 
     function appendBubbles(container, data) {
@@ -332,39 +346,32 @@ const CompanyBubbles = ({
 
     // const clearAll = () => getRoot().selectAll("svg > *").remove();
 
-    function showDiagram(diagramType) {
-        console.log("NNN diagramType: ", diagramType);
+    function showDiagram(diagramType, diagramDom) {
+        console.log("NNN diagramType: ", diagramDom);
         console.log("NNN viewState: ", viewState);
         if (viewState !== diagramType) {
             console.log("NNN Change graph");
             if (viewState) {
                 console.log("NNN hidding previous state");
-                diagrams[viewState].svg
-                    .select("svg")
-                    .transition()
-                    .duration(1000)
-                    .style("opacity", 0)
-                    .transition()
-                    .style("display", "none");
+                diagramDom[viewState].svg.style("display", "none");
 
-                diagrams[diagramType].svg
-                    .select("svg")
+                diagramDom[diagramType].svg
                     .style("display", "block")
                     .transition()
-                    .delay(1000)
+                    .duration(1000)
                     .style("opacity", opacity);
             } else {
                 console.log("NNN Only showing the graph");
-                diagrams[diagramType].root
-                    .select("svg")
+                diagramDom[diagramType].svg
                     .style("display", "block")
                     .transition()
+                    .duration(1000)
                     .style("opacity", opacity);
             }
 
             if (diagramType === "allIndustries") {
                 console.log("NNN showin labels for allIndustries");
-                diagrams.allIndustries.bubbles
+                diagramDom.allIndustries.bubbles
                     .selectAll(".label")
                     .style("opacity", 0)
                     .filter(() =>
@@ -376,7 +383,7 @@ const CompanyBubbles = ({
                     .style("opacity", 1);
             }
 
-            viewState = diagramType;
+            setViewState(diagramType);
         }
     }
 
@@ -518,12 +525,14 @@ const CompanyBubbles = ({
         console.log("NNN diagrams: ", diagrams);
         if (Object.keys(diagrams).length === 0) {
             console.log("NNN creating the diagrams object");
-            createViewData();
+            const diagramResult = createViewData();
+            showDiagram(view, diagramResult);
+        } else {
+            showDiagram(view, diagrams);
         }
-        showDiagram(view);
     }
 
-    useEffect(render);
+    useEffect(render, [view, showIndustryLabels]);
     return <div className="bubble-chart" ref={bubbleRef}></div>;
 };
 
