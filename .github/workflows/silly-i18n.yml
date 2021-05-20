@@ -1,0 +1,19 @@
+name: Tests silly-i18n
+on:
+  push:
+    path: "core/utils/silly-i18n/**"
+  pull_request:
+    path: "core/utils/silly-i18n/**"
+jobs:
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+  steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+      - name: Install
+        run: |
+          npm ci
+          npm test
