@@ -17,6 +17,11 @@ running:
 
     $ npm run watch
 
+## Run
+
+This is a web-based application. `npm run build` will create the SPA in the
+`dist` subdirectory. Just point your browser at `dist/index.html`.
+
 ## Updating company data
 
 polyExplorer takes its data from [the polyPedia database]. For development on
