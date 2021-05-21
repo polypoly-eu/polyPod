@@ -2,7 +2,7 @@
   "name": "@polypoly-eu/silly-i18n",
   "main": "src/index.js",
   "scripts": {
-    "lint": "eslint src",
+    "lint": "eslint src test",
     "test": "jest"
   },
   "devDependencies": {

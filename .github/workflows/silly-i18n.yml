@@ -17,4 +17,5 @@ jobs:
         run: |
           cd core/utils/silly-i18n/
           npm i
+          npm run lint
           npm run test
