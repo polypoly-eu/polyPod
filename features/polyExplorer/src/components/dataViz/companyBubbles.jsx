@@ -63,7 +63,6 @@ const appendBubbleLabel = (container, bubble, text) =>
     utils.appendCircleLabel(container, bubble, text);
 
 function appendIndustryLabel(container, bubble) {
-    console.log("NNN bubble: ", bubble);
     const industry = bubble.data.name;
     const count = bubble.data.children.length;
     return appendBubbleLabel(container, bubble, `${industry}: ${count}`);
@@ -158,10 +157,9 @@ const CompanyBubbles = ({
     const [diagrams, setDiagram] = useState({});
     const [industryCircleLabel, setIndustryCircleLabel] = useState({});
     const [viewState, setViewState] = useState(null);
+    const [companyCirclePosition, setCompanyCirclePosition] = useState({});
 
     const bubbleRef = useRef();
-    // const viewStates = Object.freeze({ flat: 1, industries: 2 });
-
     const getRoot = () => d3.select(bubbleRef.current);
 
     const getIndustryName = (industryCategory) =>
@@ -223,42 +221,68 @@ const CompanyBubbles = ({
         localDiagram.flat.root
             .filter((d) => d.children)
             .style("fill", "transparent");
-        localDiagram.flat.root
-            .filter((d) => !d.children)
-            .style("fill", bubbleColor);
-
-        localDiagram.allIndustries = {};
-        localDiagram.allIndustries.svg = root
-            .append("svg")
-            .attr("viewBox", `0 0 ${width} ${height}`);
-        localDiagram.allIndustries.root = appendBubbles(
-            localDiagram.allIndustries.svg,
-            viewData.industryCompanyHighlight
-        );
-        localDiagram.allIndustries.root
-            .filter((d) => d.children)
-            .style("fill", "transparent");
-        localDiagram.allIndustries.industryBubbles = localDiagram.allIndustries.root.filter(
-            (d) => d.parent && d.children
-        );
-
-        localDiagram.allIndustries.industryBubbles.style("stroke", bubbleColor);
-        localDiagram.allIndustries.companyBubbles = localDiagram.allIndustries.root.filter(
+        localDiagram.flat.bubbles = localDiagram.flat.root.filter(
             (d) => !d.children
         );
 
-        localDiagram.allIndustries.companyBubbles
-            .style("fill", bubbleColor)
-            .style("fill-opacity", 0.15);
-        localDiagram.allIndustries.industryBubbles.each((d) => {
-            const industryLabel = appendIndustryLabel(
-                localDiagram.allIndustries.svg,
-                d
-            );
+        localDiagram.flat.bubbles.style("fill", bubbleColor);
+
+        const pack = packIndustryViewData(
+            viewData.industryCompanyHighlight,
+            width,
+            height,
+            maxCompanies
+        );
+
+        setCompanyCirclePosition((state) => {
+            return {
+                ...state,
+                ...pack.children.reduce((acc, child) => {
+                    const result = child.children.reduce(
+                        (acc2, secondChild) => {
+                            return {
+                                ...acc2,
+                                [secondChild.data.name]: {
+                                    x: secondChild.x,
+                                    y: secondChild.y,
+                                },
+                            };
+                        },
+                        {}
+                    );
+
+                    return { ...acc, ...result };
+                }, {}),
+            };
+        });
+
+        for (const industryBubble of pack.children) {
+            if (industryBubble.children && industryBubble.children.length > 0) {
+                localDiagram.flat.svg
+                    .append("circle")
+                    .attr("class", "industry-bubble")
+                    .attr("cx", industryBubble.x)
+                    .attr("cy", industryBubble.y)
+                    .attr("r", industryBubble.r)
+                    .style("fill", "transparent")
+                    .style("stroke", bubbleColor)
+                    .style("opacity", 0);
+            }
+        }
+
+        localDiagram.flat.industriesBubbles = localDiagram.flat.svg.selectAll(
+            ".industry-bubble"
+        );
+
+        localDiagram.flat.industriesBubbles.each((elem, index) => {
+            const d = pack.children[index];
+            const industryLabel = appendIndustryLabel(localDiagram.flat.svg, d);
+            industryLabel.style("opacity", "0");
             setIndustryCircleLabel((state) => ({
                 ...state,
                 [d.data.name]: industryLabel,
             }));
+
             return industryLabel;
         });
 
@@ -278,18 +302,9 @@ const CompanyBubbles = ({
             )
             .style("stroke", "transparent");
 
-        console.log(
-            "NNN industryHighlight: ",
-            localDiagram.industryHighlight.root
-        );
         localDiagram.industryHighlight.bubbles = utils.findNode(
             localDiagram.industryHighlight.root,
             (d) => d.data.highlightedIndustry
-        );
-
-        console.log(
-            "NNNN industryHighlight.bubbles: ",
-            localDiagram.industryHighlight.bubbles
         );
 
         appendIndustryLabel(
@@ -339,7 +354,6 @@ const CompanyBubbles = ({
             localDiagram[diagram].svg.style("display", "none");
         }
 
-        console.log("NNN save state");
         setDiagram({ ...localDiagram });
 
         return localDiagram;
@@ -358,16 +372,47 @@ const CompanyBubbles = ({
             .attr("r", (d) => d.r);
     }
 
-    // const clearAll = () => getRoot().selectAll("svg > *").remove();
 
     function showDiagram(diagramType, diagramDom) {
-        console.log("NNN diagramType: ", diagramDom);
-        console.log("NNN viewState: ", viewState);
         if (viewState !== diagramType) {
-            console.log("NNN Change graph");
-            if (viewState) {
-                console.log("NNN hidding previous state");
-                diagramDom[viewState].svg.style("display", "none");
+            if (diagramType === "allIndustries") {
+                for (const industryName in companyCirclePosition) {
+                    let currentX = 0;
+                    let currentY = 0;
+
+                    const nextX = companyCirclePosition[industryName].x;
+                    const nextY = companyCirclePosition[industryName].y;
+
+                    const bubbleFound = diagramDom.flat.bubbles.filter(
+                        (bubble) => {
+                            return bubble.data.name.name === industryName;
+                        }
+                    );
+
+                    bubbleFound
+                        .each((bubble) => {
+                            currentX = bubble.x;
+                            currentY = bubble.y;
+                        })
+                        .transition()
+                        .duration(1000)
+                        .attr(
+                            "transform",
+                            `translate(${nextX - currentX}, ${
+                                nextY - currentY
+                            })`
+                        );
+                }
+
+                diagramDom.flat.industriesBubbles
+                    .transition()
+                    .delay(1000)
+                    .duration(500)
+                    .style("opacity", 1);
+            } else if (viewState) {
+                const pastState =
+                    viewState === "allIndustries" ? "flat" : viewState;
+                diagramDom[pastState].svg.style("display", "none");
 
                 diagramDom[diagramType].svg
                     .style("display", "block")
@@ -375,7 +420,6 @@ const CompanyBubbles = ({
                     .duration(1000)
                     .style("opacity", opacity);
             } else {
-                console.log("NNN Only showing the graph");
                 diagramDom[diagramType].svg
                     .style("display", "block")
                     .transition()
@@ -383,38 +427,26 @@ const CompanyBubbles = ({
                     .style("opacity", opacity);
             }
 
-            if (diagramType === "allIndustries") {
-                console.log("NNN showin labels for allIndustries");
-                for (const industryName in industryCircleLabel) {
-                    if (showIndustryLabels.includes(industryName)) {
-                        industryCircleLabel[industryName].style("opacity", 1);
-                    } else {
-                        industryCircleLabel[industryName].style("opacity", 0);
-                    }
-                }
-            }
-
             setViewState(diagramType);
         }
+
+        if (diagramType === "allIndustries") {
+            for (const industryName in industryCircleLabel) {
+                if (showIndustryLabels.includes(industryName)) {
+                    industryCircleLabel[industryName]
+                        .transition()
+                        .delay(1000)
+                        .duration(500)
+                        .style("opacity", 1);
+                } else {
+                    industryCircleLabel[industryName]
+                        .transition()
+                        .duration(1000)
+                        .style("opacity", 0);
+                }
+            }
+        }
     }
-
-    // function setUpIndustryView(container) {
-    //     const previousState = viewState.current;
-    //     viewState.current = viewStates.industries;
-    //     if (viewState.current === previousState) {
-    //         const root = getRoot();
-    //         root.selectAll(".circle-label, .explanation").remove();
-    //         return root.selectAll(".bubble");
-    //     }
-
-    //     clearAll();
-    //     const viewData = createIndustryViewData(
-    //         companyIndustryMap,
-    //         maxCompanies,
-    //         highlightTexts
-    //     );
-    //     return appendBubbles(container, viewData);
-    // }
 
     function appendExplanation(container, highlightedBubble, explanation) {
         const containerRect = container.node().viewBox.baseVal;
@@ -449,93 +481,8 @@ const CompanyBubbles = ({
             .attr("height", divHeight);
     }
 
-    // const renderFunctions = {
-    //     flat: () => {
-    //         setUpFlatView();
-    //     },
-    //     allIndustries: (container) => {
-    //         const bubbles = setUpIndustryView(container);
-    //         bubbles.filter((d) => d.children).style("fill", "transparent");
-
-    //         const industryBubbles = bubbles.filter(
-    //             (d) => d.parent && d.children
-    //         );
-    //         industryBubbles.style("stroke", bubbleColor);
-
-    //         const companyBubbles = bubbles.filter((d) => !d.children);
-    //         companyBubbles
-    //             .style("fill", bubbleColor)
-    //             .style("fill-opacity", 0.15);
-
-    //         industryBubbles
-    //             .filter((d) => showIndustryLabels.includes(d.data.name))
-    //             .each((e) => appendIndustryLabel(container, e));
-    //     },
-    //     industryHighlight: (container) => {
-    //         const bubbles = setUpIndustryView(container);
-
-    //         if (!highlightTexts.industry) {
-    //             appendExplanation(container, {}, "MISSING INDUSTRY HIGHLIGHT");
-    //             return;
-    //         }
-
-    //         bubbles
-    //             .style("fill", (d) =>
-    //                 d.children ? "transparent" : bubbleColor
-    //             )
-    //             .style("fill-opacity", (d) =>
-    //                 d.parent?.data.highlightedIndustry ? 1 : 0.15
-    //             )
-    //             .style("stroke", "transparent");
-
-    //         const highlightedBubble = utils.findNode(
-    //             bubbles,
-    //             (d) => d.data.highlightedIndustry
-    //         );
-    //         appendIndustryLabel(container, highlightedBubble);
-    //         appendExplanation(
-    //             container,
-    //             highlightedBubble,
-    //             highlightTexts.industry.explanation
-    //         );
-    //     },
-    //     companyHighlight: (container) => {
-    //         const bubbles = setUpIndustryView(container);
-
-    //         if (!highlightTexts.company) {
-    //             appendExplanation(container, {}, "MISSING COMPANY HIGHLIGHT");
-    //             return;
-    //         }
-
-    //         bubbles
-    //             .style("fill", (d) =>
-    //                 d.children ? "transparent" : bubbleColor
-    //             )
-    //             .style("fill-opacity", (d) =>
-    //                 d.data.highlightedCompany ? 1 : 0.15
-    //             );
-
-    //         const highlightedBubble = utils.findNode(
-    //             bubbles,
-    //             (d) => d.data.highlightedCompany
-    //         );
-    //         appendBubbleLabel(
-    //             container,
-    //             highlightedBubble,
-    //             highlightedBubble.data.name
-    //         );
-    //         appendExplanation(
-    //             container,
-    //             highlightedBubble,
-    //             highlightTexts.company.explanation
-    //         );
-    //     },
-    // };
-
     function render() {
-        console.log("NNN diagrams: ", diagrams);
         if (Object.keys(diagrams).length === 0) {
-            console.log("NNN creating the diagrams object");
             const diagramResult = createViewData();
             showDiagram(view, diagramResult);
         } else {
