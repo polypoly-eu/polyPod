@@ -16,11 +16,11 @@ jobs:
         with:
           node-version: 15.x
       - name: Install
-        working-directory: ${{env.working-directory}}
+        working-directory: ${{env.silly-i18n-dir}}
         run: npm i
       - name: Run linter
-        working-directory: ${{env.working-directory}}
+        working-directory: ${{env.silly-i18n-dir}}
         run: npm run lint
       - name: Run tests
-        working-directory: ${{env.working-directory}}
+        working-directory: ${{env.silly-i18n-dir}}
         run: npm run test
