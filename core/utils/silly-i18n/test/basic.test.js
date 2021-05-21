@@ -13,6 +13,10 @@ describe( "Test basic configuration", () => {
     })
 
     it( "Translates correctly", () => {
-        expect(i18n.t( "quux:bar")).toBe("baz")
+        expect(i18n.t("quux:bar")).toBe("baz")
+    })
+
+    it( "Throws when key not found", () => {
+        expect(() => { i18n.t("WAT") }).toThrow(Error)
     })
 });
