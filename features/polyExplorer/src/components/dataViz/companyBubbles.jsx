@@ -372,7 +372,6 @@ const CompanyBubbles = ({
             .attr("r", (d) => d.r);
     }
 
-
     function showDiagram(diagramType, diagramDom) {
         if (viewState !== diagramType) {
             if (diagramType === "allIndustries") {
