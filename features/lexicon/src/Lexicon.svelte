@@ -192,12 +192,24 @@ button {
 
 <script>
 import i18n from "./i18n.js";
+
 export let lexicon;
 let showTerm = null;
 let searchString = "";
+let pod = window.pod;
+let scrollingProgress = 0;
+let savedScrollingProgress;
+
+setUpPodNavigation()
+$: updatePodTitle()
+
+const onListLoad = () => {
+    if (savedScrollingProgress) window.scroll(0, savedScrollingProgress)
+}
 
 function handleClickTerm(term) {
     showTerm = term;
+    savedScrollingProgress = scrollingProgress;
 }
 
 function handleCopytoClipboard(term) {
@@ -223,7 +235,23 @@ function handleSearch(value) {
 function handleClear() {
     searchString = "";
 }
+
+function setUpPodNavigation() {
+        pod.polyNav.actions = {
+                  back: () => handleBack(),
+              };
+        pod.polyNav.setActiveActions(
+            ["back"]
+        );
+    }
+
+function updatePodTitle(){
+    pod.polyNav.setTitle(i18n.t(showTerm ? "title:details" : "title:lexicon"));
+}
+
 </script>
+
+<svelte:window bind:scrollY={scrollingProgress}/>
 
 <main class="lexicon">
     <div class="top-separator"></div>
@@ -262,7 +290,7 @@ function handleClear() {
                 </button>
             </div>
         </div>
-        <div class="term-list-container">
+        <div use:onListLoad class="term-list-container">
             {#if searchString}
                 {#if lexicon.search(searchString).length === 0}
                     <div class="no-result">
