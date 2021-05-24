@@ -7,3 +7,7 @@ that i18next seemed fairly heavy for our needs at the time we wrote this. We
 will presumably outgrow this package before too long and switch to a proper
 third party translation library. If this is still around after 2021, I will feel
 pretty silly.
+
+## Usage
+
+It includes very basic language capabilities based on the browser language feature. You will need to set language by hand in case it's outside the browser.
