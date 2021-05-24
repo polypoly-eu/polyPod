@@ -4,7 +4,10 @@ const jurisdictions = {
     CHINA: "China",
     EU_GDPR: "EU-GDPR",
     RUSSIA: "Russia"
-}
+};
+
+const dataProperties = ['ppid','name','featured','location','annualRevenues', 'description','industryCategory'];
+const dataArrayProperties = ['dataRecipients','dataSharingPurposes','dataTypesShared'];
 
 export class Company {
     constructor(companyJSONObject, globalData) {
@@ -14,69 +17,29 @@ export class Company {
             globalData
         );
         let self = this;
-        ['ppid','name','featured','location','annualRevenues', 'description','industryCategory'].forEach( function (item, index ) {
-            console.log( "Setting ", item);
+        dataProperties.forEach( function (item, index ) {
             Object.defineProperty(self, item, {
                 get: function() {
                     return self._data[item]
                 }
             });
         });
+        dataArrayProperties.forEach( function (item ) {
+            Object.defineProperty(self, item, {
+                get: function() {
+                    return self._data[item] || []
+                }
+            });
+        });
     }
-
-    /* / Getters
-    get ppid() {
-        return this._data.ppid;
-    }
-
-    get name() {
-        return this._data.name;
-    }
-
-    get featured() {
-        return this._data.featured;
-    }
-    */
 
     get jurisdiction() {
         return this._jurisdiction;
     }
 
-    /* 
-    get location() {
-        return this._data.location;
-    }
-
-    get annualRevenues() {
-        return this._data.annualRevenues;
-    }
-    */
-
-    get dataRecipients() {
-        return this._data.dataRecipients || [];
-    }
-
-    get dataSharingPurposes() {
-        return this._data.dataSharingPurposes || [];
-    }
-
-    get dataTypesShared() {
-        return this._data.dataTypesShared || [];
-    }
-
     get jurisdictionsShared() {
         return this._data.jurisdictionsShared || { children: [] };
     }
-
-    /* 
-    get description() {
-        return this._data.description;
-    }
-
-    get industryCategory() {
-        return this._data.industryCategory;
-    }
-    */
 
     get nameIndexCharacter() {
         return withoutSpecialChars(this.name)[0];
