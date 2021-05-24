@@ -58,3 +58,11 @@ When that is not possible, you can apply your modifications in
 `scripts/patch-data.js`, and re-run `npm run polypedia:convert`.
 
 [the polyPedia database]: https://github.com/polypoly-eu/polypedia-data
+
+### Working with data
+
+All data is in the [`src/data`](src/data) directory. It's in JSON, you can work with it using `jq`. For instance, to extract all the jurisdictions present in the data you can use:
+
+```sh
+cat src/data/companies.json| jq "[.[] | .jurisdiction ] | unique"
+```
