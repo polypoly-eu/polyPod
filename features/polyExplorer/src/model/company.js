@@ -1,3 +1,11 @@
+const jurisdictions = {
+    OTHER: "Other",
+    FIVE_EYES: "Five-Eyes",
+    CHINA: "China",
+    EU_GDPR: "EU-GDPR",
+    RUSSIA: "Russia"
+}
+
 export class Company {
     constructor(companyJSONObject, globalData) {
         this._data = companyJSONObject;
