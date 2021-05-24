@@ -1,5 +1,5 @@
 const jurisdictions = {
-    OTHER: "Sonstige",
+    OTHER: "Sonstigeq",
     FIVE_EYES: "Five-Eyes",
     CHINA: "China",
     EU_GDPR: "EU-GDPR",
@@ -13,9 +13,18 @@ export class Company {
             companyJSONObject.location,
             globalData
         );
+        let self = this;
+        ['ppid','name','featured','location','annualRevenues', 'description','industryCategory'].forEach( function (item, index ) {
+            console.log( "Setting ", item);
+            Object.defineProperty(self, item, {
+                get: function() {
+                    return self._data[item]
+                }
+            });
+        });
     }
 
-    //Getters
+    /* / Getters
     get ppid() {
         return this._data.ppid;
     }
@@ -27,11 +36,13 @@ export class Company {
     get featured() {
         return this._data.featured;
     }
+    */
 
     get jurisdiction() {
         return this._jurisdiction;
     }
 
+    /* 
     get location() {
         return this._data.location;
     }
@@ -39,6 +50,7 @@ export class Company {
     get annualRevenues() {
         return this._data.annualRevenues;
     }
+    */
 
     get dataRecipients() {
         return this._data.dataRecipients || [];
@@ -56,6 +68,7 @@ export class Company {
         return this._data.jurisdictionsShared || { children: [] };
     }
 
+    /* 
     get description() {
         return this._data.description;
     }
@@ -63,6 +76,7 @@ export class Company {
     get industryCategory() {
         return this._data.industryCategory;
     }
+    */
 
     get nameIndexCharacter() {
         return withoutSpecialChars(this.name)[0];
