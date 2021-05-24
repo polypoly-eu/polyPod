@@ -81,5 +81,5 @@ function withoutSpecialChars(aString) {
 }
 
 function determineJurisdictions(location, globalData) {
-    return globalData.countries[location.countryCode]?.dataRegion || "Sonstige";
+    return globalData.countries[location.countryCode]?.dataRegion || jurisdictions.OTHER;
 }
