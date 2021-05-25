@@ -112,3 +112,10 @@ build
 
 .jqwik-database
 out
+
+bin/main
+bin/test
+
+.classpath
+.project
+.settings/
