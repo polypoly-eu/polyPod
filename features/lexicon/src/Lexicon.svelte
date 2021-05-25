@@ -200,8 +200,7 @@ let pod = window.pod;
 let scrollingProgress = 0;
 let savedScrollingProgress;
 
-setUpPodNavigation()
-$: updatePodTitle()
+setUpListNavigation();
 
 const onListLoad = () => {
     if (savedScrollingProgress) window.scroll(0, savedScrollingProgress)
@@ -210,6 +209,7 @@ const onListLoad = () => {
 function handleClickTerm(term) {
     showTerm = term;
     savedScrollingProgress = scrollingProgress;
+    setUpTermNavigation();
 }
 
 function handleCopytoClipboard(term) {
@@ -226,6 +226,7 @@ function copyText(text) {
 
 function handleBack() {
     showTerm = null;
+    setUpListNavigation();
 }
 
 function handleSearch(value) {
@@ -236,7 +237,8 @@ function handleClear() {
     searchString = "";
 }
 
-function setUpPodNavigation() {
+function setUpTermNavigation() {
+        pod.polyNav.setTitle(i18n.t("title:details"));
         pod.polyNav.actions = {
                   back: () => handleBack(),
               };
@@ -245,8 +247,9 @@ function setUpPodNavigation() {
         );
     }
 
-function updatePodTitle(){
-    pod.polyNav.setTitle(i18n.t(showTerm ? "title:details" : "title:lexicon"));
+function setUpListNavigation(){
+    pod.polyNav.setTitle(i18n.t("title:lexicon"));
+    pod.polyNav.setActiveActions([""]);
 }
 
 </script>
