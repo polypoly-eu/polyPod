@@ -1,5 +1,5 @@
 const jurisdictions = {
-    OTHER: "Sonstigeq",
+    OTHER: "Sonstige",
     FIVE_EYES: "Five-Eyes",
     CHINA: "China",
     EU_GDPR: "EU-GDPR",
