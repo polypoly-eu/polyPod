@@ -1,4 +1,5 @@
-export const determineLanguage = () => Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
+export const determineLanguage = () =>
+    Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
 
 export class I18n {
     constructor(language, translations) {
