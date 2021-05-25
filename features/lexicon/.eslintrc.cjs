@@ -8,7 +8,7 @@ module.exports = {
         // Only needed for scripts/
         node: true,
     },
-    ignorePatterns: ["public/build/"],
+    ignorePatterns: ["/public/*"],
     plugins: ["svelte3"],
     overrides: [
         {
