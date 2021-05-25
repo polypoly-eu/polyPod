@@ -1,7 +1,8 @@
 {
-    "name": "lexicon",
+    "name": "Lexicon",
     "author": "polypoly Cooperative",
-    "primaryColor": "#3749a9",
+    "thumbnail": "images/thumbnail.png",
+    "primaryColor": "#FFF5F5",
     "links": {
         "membership": "https://polypoly.coop/en-de/membership"
     },
