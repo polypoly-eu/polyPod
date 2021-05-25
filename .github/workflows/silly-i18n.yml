@@ -1,9 +1,11 @@
 name: Tests silly-i18n
 on:
   push:
-    path: "core/utils/silly-i18n/**"
+    paths: 
+      - 'core/utils/silly-i18n/**'
   pull_request:
-    path: "core/utils/silly-i18n/**"
+    paths: 
+      - 'core/utils/silly-i18n/**'
 jobs:
   test:
     name: Unit tests and lint
