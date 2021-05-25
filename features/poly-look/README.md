@@ -2,6 +2,12 @@
 
 Poly-look is the visual component library for all features and applications included in poly pod. The library used to encode each of the different components is litElement. The reason for that choice is because litElement creates packages with standard code in js that does not need any other library or framework to work in the browser. It also makes the litElement component compatible with all kinds of front end applications no matter what framework it is encoded with. You can learn how to use litElement in the following [tutorials](https://lit.dev/docs/)
 
+## Quick guide:
+
+* **run storybook**: ```npm run storybook```
+* **run test**: ```npm test```
+* **run lint**: ```npm run lint```
+* **build library**: ```npm run build```
 ## Steps to code a new component poly-look
 
 1- Write the js file of the component inside the src folder. The name of the file must be written in pascal case.
