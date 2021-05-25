@@ -1,7 +1,7 @@
 "use strict";
 
 // We used to provide a fake implementation of the pod API here, for development
-// purposes, but in the meantimeswitched to pod.js for this. Once the migration
+// purposes, but in the meantime switched to pod.js for this. Once the migration
 // code isn't necessary anymore, we can get rid of this file.
 export const pod = window.pod;
 
