@@ -3,8 +3,11 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src test",
-    "test": "jest",
-    "coverage": "jest --coverage"
+    "test": "jest"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": ["json", "html"]
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
