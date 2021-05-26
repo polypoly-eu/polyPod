@@ -7,7 +7,7 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": ["json", "html"]
+    "coverageReporters": ["json", "html", "text"]
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
