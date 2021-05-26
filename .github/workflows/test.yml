@@ -17,6 +17,7 @@ jobs:
           pushd eslint-config
           npm ci --no-update-notifier --no-fund
           popd
+          npm install -g eslint
           ./build.js lint
       - name: Build core and features
         run: ./build.js
