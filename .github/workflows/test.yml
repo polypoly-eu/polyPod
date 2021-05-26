@@ -13,7 +13,12 @@ jobs:
         with:
           java-version: 8
       - name: Lint core and features
-        run: ./build.js lint
+        run: |
+          pushd eslint-config
+          npm ci
+          npm run build
+          popd
+          ./build.js lint
       - name: Build core and features
         run: ./build.js
       - name: Test core and features
