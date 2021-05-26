@@ -1,4 +1,4 @@
-export const defaultLanguage = "en"
+export const defaultLanguage = "en";
 export const determineLanguage = () =>
     Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
 
