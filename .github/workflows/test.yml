@@ -15,8 +15,7 @@ jobs:
       - name: Lint core and features
         run: |
           pushd eslint-config
-          npm ci
-          npm run build
+          npm ci --no-update-notifier --no-fund
           popd
           ./build.js lint
       - name: Build core and features
