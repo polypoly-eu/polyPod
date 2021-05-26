@@ -1,20 +1,20 @@
-import { html } from 'lit-html';
-import '../poly-look.js';
+import { html } from "lit-html";
+import "../poly-look.js";
 
 export default {
-  title: 'PolyLook',
-  component: 'poly-look',
+  title: "PolyLook",
+  component: "poly-look",
   argTypes: {
-    title: { control: 'text' },
-    counter: { control: 'number' },
-    textColor: { control: 'color' },
+    title: { control: "text" },
+    counter: { control: "number" },
+    textColor: { control: "color" },
   },
 };
 
-function Template({ title = 'Hello world', counter = 5, textColor, slot }) {
+function Template({ title = "Hello world", counter = 5, textColor, slot }) {
   return html`
     <poly-look
-      style="--poly-look-text-color: ${textColor || 'black'}"
+      style="--poly-look-text-color: ${textColor || "black"}"
       .title=${title}
       .counter=${counter}
     >
@@ -27,7 +27,7 @@ export const Regular = Template.bind({});
 
 export const CustomTitle = Template.bind({});
 CustomTitle.args = {
-  title: 'My title',
+  title: "My title",
 };
 
 export const CustomCounter = Template.bind({});

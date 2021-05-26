@@ -1,1 +1,1 @@
-export { PolyLook } from './src/PolyLook.js';
+export { PolyLook } from "./src/PolyLook.js";

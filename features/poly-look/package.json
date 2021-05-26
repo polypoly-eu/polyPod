@@ -7,7 +7,6 @@
   "main": "index.js",
   "module": "index.js",
   "scripts": {
-    "start": "web-dev-server",
     "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
     "test": "web-test-runner --coverage",
@@ -27,8 +26,10 @@
     "@web/dev-server": "^0.1.17",
     "@web/dev-server-storybook": "^0.3.5",
     "@web/test-runner": "^0.12.20",
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
@@ -40,12 +41,26 @@
   },
   "eslintConfig": {
     "extends": [
-      "@open-wc/eslint-config",
-      "eslint-config-prettier"
-    ]
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "globals": {
+      "window": true,
+      "console": true,
+      "describe": true,
+      "it": true
+    },
+    "rules": {
+      "semi": 2
+    }
   },
   "prettier": {
-    "singleQuote": true,
+    "singleQuote": false,
     "arrowParens": "avoid"
   },
   "husky": {
