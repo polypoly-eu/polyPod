@@ -1,9 +1,8 @@
 import * as Decode from "io-ts/lib/Decoder";
 import { fold } from "fp-ts/lib/Either";
-import readPkg from "@pnpm/read-package-json";
 import { pipe } from "fp-ts/lib/pipeable";
 import { parse as parseSemVer, SemVer, Range } from "semver";
-import { normalize, isAbsolute, join, dirname } from "path";
+//import { normalize, isAbsolute, join, dirname } from "path";
 import { promises as fs } from "fs";
 
 export interface EngineManifest {
@@ -27,7 +26,7 @@ export interface FeatureManifest {
     // TODO: Typecheck links object
     readonly links: unknown;
     // TODO: Typecheck translations object
-    readonly translations: unknown[];
+    readonly translations: unknown;
 }
 
 export interface Manifest extends EngineManifest, MainManifest, RootManifest, FeatureManifest {}
@@ -48,9 +47,9 @@ function expect<I, A>(input: I, msg: string, decoder: Decode.Decoder<I, A>): A {
 const relativeDecoder = pipe(
     Decode.string,
     Decode.parse((string) => {
-        const path = normalize(string);
+        const url = new URL(string, document.location.href);
 
-        if (isAbsolute(path) || path.startsWith("..")) return Decode.failure(string, "relative");
+        //if (isAbsolute(path) || path.startsWith("..")) return Decode.failure(string, "relative");
 
         return Decode.success(string);
     })
@@ -95,16 +94,31 @@ const featureDecoder = Decode.type({
     thumbnail: relativeDecoder,
     primaryColor: Decode.string,
     links: Decode.UnknownRecord,
-    translations: Decode.UnknownArray,
+    translations: Decode.UnknownRecord,
 });
 
 export async function parseFeatureManifest(featureManifestJson: string): Promise<FeatureManifest> {
     return expect(featureManifestJson, "Failed to parse Feature manifest", featureDecoder);
 }
+export async function parseMainManifest(
+    packageManifest: Record<string, unknown>
+): Promise<MainManifest> {
+    return expect(packageManifest, "Failed to parse main manifest", mainDecoder);
+}
 
-export async function readManifest(pkgPath: string): Promise<Manifest> {
-    const packageManifest = await readPkg(pkgPath);
+export async function parseEngineManifest(
+    packageManifest: Record<string, unknown>
+): Promise<EngineManifest> {
+    return expect(packageManifest.engines, "Failed to parse engines", engineDecoder);
+}
 
+export async function parseRootManifest(
+    packageManifest: Record<string, unknown>
+): Promise<RootManifest> {
+    return expect(packageManifest, "Failed to parse Feature spec", rootDecoder);
+}
+
+export async function combineManifest(packageManifest: Record<string, unknown>): Promise<Manifest> {
     const rawMain = expect(packageManifest, "Failed to parse main manifest", mainDecoder);
     const rawEngine = expect(packageManifest.engines, "Failed to parse engines", engineDecoder);
     const rawRoot = expect(packageManifest, "Failed to parse Feature spec", rootDecoder);
@@ -119,7 +133,8 @@ export async function readManifest(pkgPath: string): Promise<Manifest> {
     };
 
     if (rawRoot.polypoly.manifest) {
-        const manifestPath = join(dirname(pkgPath), rawRoot.polypoly.manifest);
+        const manifestPath = "";
+        //const manifestPath = join(dirname(pkgPath), rawRoot.polypoly.manifest);
         const featureManifestJson = JSON.parse(await fs.readFile(manifestPath, "utf8"));
 
         featureManifest = expect(

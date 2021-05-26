@@ -1,5 +1,6 @@
 import { join } from "path";
 import { Manifest, readManifest } from "@polypoly-eu/manifest-parser";
+import readPkg from "@pnpm/read-package-json";
 
 export interface Ops {
     dir?: string;
@@ -7,7 +8,8 @@ export interface Ops {
 
 export async function detectFeature(options: Ops): Promise<[string, Manifest]> {
     const dir = options.dir || process.cwd();
-    const packageJson = join(dir, "package.json");
+    const packagePath = join(dir, "package.json");
+    const packageJson = readPkg(packagePath);
     const manifest = await readManifest(packageJson);
     return [dir, manifest];
 }

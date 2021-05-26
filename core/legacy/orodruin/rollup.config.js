@@ -19,6 +19,7 @@ export default [
             executable()
         ],
         external: [
+            "@pnpm/read-package-json",
             "@polypoly-eu/manifest-parser",
             "@polypoly-eu/pod-api",
             "@polypoly-eu/remote-pod",

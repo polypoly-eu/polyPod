@@ -9,7 +9,10 @@ import type {
 import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
-import { FeatureManifest, parseFeatureManifest } from "@polypoly-eu/manifest-parser";
+import {
+    FeatureManifest,
+    parseFeatureManifest,
+} from "@polypoly-eu/manifest-parser";
 
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
@@ -72,6 +75,13 @@ class BrowserPolyNav implements PolyNav {
 
     async openUrl(url: string): Promise<void> {
         console.log(`polyNav: Attempt to open URL: ${url}`);
+        const targetLink = window.manifest?.links[url];
+        const permission = confirm(
+            `Feature ${window.manifest?.name} is trying to open URL ${targetLink}. Allow?`
+        );
+        if (permission) {
+            window.open(targetLink);
+        }
     }
 
     async setActiveActions(actions: string[]): Promise<void> {
@@ -106,29 +116,48 @@ class BrowserPolyNav implements PolyNav {
     }
 
     async setTitle(title: string): Promise<void> {
-        document.title = title;
+        window.currentTitle = title;
+        const injection = document.getElementById(
+            "polyNavFrame"
+        ) as HTMLIFrameElement;
+
+        injection?.contentWindow?.postMessage(title, "*");
     }
 }
-
+declare global {
+    interface Window {
+        manifestData: string;
+        manifest: FeatureManifest;
+        currentTitle: string;
+    }
+}
 export class BrowserPod implements Pod {
     constructor() {
         window.addEventListener("load", async () => {
-            const manifestJson = await (await fetch("manifest.json")).json();
-            const manifest = await parseFeatureManifest(manifestJson);
-
+            window.manifest = await parseFeatureManifest(window.manifestData);
+            window.parent.currentTitle =
+                window.parent.currentTitle || window.manifest.name;
             const injection = document.createElement("iframe");
             injection.style.width = "100%";
             injection.style.height = "50px";
+            injection.id = "polyNavFrame";
             const source = `
             <html>
-                <body style="background-color: ${manifest.primaryColor}">
-                    <H1 id="title">${manifest.name}<H1>
+                <body style="background-color: ${window.manifest.primaryColor}">
+                    <script>
+                        window.addEventListener("message", (event) => {
+                            document.getElementById("title").textContent = event.data;
+                        });
+                    </script>
+                    <h1 id="title" style="color: #AAAAAA">${window.parent.currentTitle}<h1>
                 </body>
             </html>
             `;
             const blob = new Blob([source], { type: "text/html" });
             injection.src = URL.createObjectURL(blob);
             document.body.prepend(injection);
+
+            document.title = window.manifest.name;
         });
     }
 
