@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit-element';
+import { html, css, LitElement } from "lit-element";
 
 export class PolyLook extends LitElement {
   static get styles() {
@@ -20,7 +20,7 @@ export class PolyLook extends LitElement {
 
   constructor() {
     super();
-    this.title = 'Hey there';
+    this.title = "Hey there";
     this.counter = 5;
   }
 
