@@ -12,10 +12,10 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 8
-      - name: Build core and features
-        run: ./build.js
       - name: Lint core and features
         run: ./build.js lint
+      - name: Build core and features
+        run: ./build.js
       - name: Test core and features
         run: xvfb-run --auto-servernum ./build.js test
       - name: Test android
