@@ -59,3 +59,7 @@ We prepare releases in the `release` branch. If no release is in motion, it
 reflects the state of the last release we made.
 
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
+
+## Issues
+
+For the time being, issues are disabled in this repo. If it's an easy fix (such as a typo) you can go and create a pull request. If it's any other kind of issue, such as a feature request, please email us at feedback@polypoly.eu. Please understand that this is a temporary solution, and issues will be enabled in due course.
