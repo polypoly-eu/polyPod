@@ -44,7 +44,11 @@ describe("Test basic configuration", () => {
         }
         expect(thrownError).toBeInstanceOf(TranslationKeyError);
         expect(thrownError.message).toEqual( expect.stringMatching( /does not exist/ ));
-    })     
+    })
+
+    it("Uses options correctly", () => {
+        expect(i18n.t("options:opt", { opt: "baz" })).toBe("baz");
+    })
 });
 
 describe("Test constructor with faulty translation hash", () => {
