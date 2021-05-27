@@ -2,9 +2,9 @@ export const determineLanguage = () =>
     Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
 
 export class LanguageError extends Error {
-    constructor( message ) {
+    constructor(message) {
         super(message);
-        this.name = "LanguageError"
+        this.name = "LanguageError";
     }
 }
 
@@ -14,7 +14,9 @@ export class I18n {
             this.language = language;
             this._translations = translations[this.language];
         } else {
-            throw new LanguageError( "${language} is not a key in the translations hash provided");
+            throw new LanguageError(
+                "${language} is not a key in the translations hash provided"
+            );
         }
     }
 
