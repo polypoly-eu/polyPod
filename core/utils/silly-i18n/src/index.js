@@ -8,6 +8,13 @@ export class LanguageError extends Error {
     }
 }
 
+export class TranslationKeyError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "TranslationKeyError";
+    }
+}
+
 export class I18n {
     constructor(language, translations) {
         if (language in translations) {
@@ -21,13 +28,16 @@ export class I18n {
     }
 
     t(key, options = {}) {
+        if (!key.search(/:/)) {
+            throw new TranslationKeyError( "${key} does not have the format «namespace:key»")
+        }
         const [namespace, keyInNamespace] = key.split(/:(.+)/);
-        let translation = this._translations[namespace]?.[keyInNamespace];
-        if (typeof translation !== "string")
-            throw new Error(
-                `'${keyInNamespace}' not in namespace '${namespace}' for ` +
-                    `language '${this.language}'`
-            );
+        if ( !keyInNamespace 
+            || !( namespace in this._translations)
+            || !( keyInNamespace in this._translations[namespace] )) {
+            throw new TranslationKeyError( "${namespace} does not exist or does not have a ${keyInNamespace} key for language ${this.language}")
+        }
+        let translation = this._translations[namespace][keyInNamespace];
         for (let [name, value] of Object.entries(options))
             translation = translation.replace(`{{${name}}}`, value);
         return translation;
