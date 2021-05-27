@@ -10,7 +10,7 @@ function questionnaireResultsStorageId(questionnaireId: string): string {
 }
 
 export async function loadQuestionnaireIndex() {
-    const questionairesIndexJson = await AsyncStorage.getItem(INDEX_KEY);
+    const questionairesIndexJson = await AsyncStorage.getIndex(INDEX_KEY);
     if (questionairesIndexJson == null) {
         return [];
     }
@@ -40,7 +40,7 @@ export async function loadQuestionnaireDataJson(questionnaireIndex: string) {
 export async function appendQuestionnaireToIndex(questionnaireId: string): Promise<void> {
     const questionairesIndex = await loadQuestionnaireIndex();
     questionairesIndex.push(questionnaireId);
-    await AsyncStorage.setItem(INDEX_KEY, JSON.stringify(questionairesIndex));
+    await AsyncStorage.setIndex(INDEX_KEY, JSON.stringify(questionairesIndex));
 }
 
 export async function storeQuestionnaireData(
