@@ -28,7 +28,7 @@ export class I18n {
     }
 
     t(key, options = {}) {
-        if (!key.search(/:/)) {
+        if ( key.search(/:/) == -1 ) {
             throw new TranslationKeyError( "${key} does not have the format «namespace:key»")
         }
         const [namespace, keyInNamespace] = key.split(/:(.+)/);

@@ -1,4 +1,4 @@
-import { determineLanguage, LanguageError, I18n } from "../src/index.js";
+import { determineLanguage, LanguageError, TranslationKeyError, I18n } from "../src/index.js";
 
 const LANGUAGE = "foo";
 let i18n;
@@ -22,14 +22,29 @@ describe("Test basic configuration", () => {
     it("Translates correctly", () => {
         expect(i18n.t("quux:bar")).toBe("baz");
     });
-    it("Throws when key not found", () => {
-        expect(() => {
+    it("Throws when key does not have the correct format", () => {
+        let thrownError;
+        try {
             i18n.t("WAT");
-        }).toThrow(Error);
+        }
+        catch( error ) {
+            thrownError = error;
+        }
+        expect(thrownError).toBeInstanceOf(TranslationKeyError);
+        expect(thrownError.message).toEqual( expect.stringMatching( /format/ ))
     });
-    it("Uses options correctly", () => {
-        expect(i18n.t("options:opt", { opt: "baz" })).toBe("baz");
-    });
+
+    it("Throws when key not found", () => {
+        let thrownError;
+        try {
+            i18n.t("quux:WAT");
+        }
+        catch( error ) {
+            thrownError = error;
+        }
+        expect(thrownError).toBeInstanceOf(TranslationKeyError);
+        expect(thrownError.message).toEqual( expect.stringMatching( /does not exist/ ));
+    })     
 });
 
 describe("Test constructor with faulty translation hash", () => {
