@@ -1,4 +1,4 @@
-import { defaultLanguage, determineLanguage, I18n } from "../src/index.js";
+import { determineLanguage, LanguageError, I18n } from "../src/index.js";
 
 const LANGUAGE = "foo";
 let i18n;
@@ -32,9 +32,10 @@ describe("Test basic configuration", () => {
     });
 });
 
-describe("Test default constructor", () => {
-    const i18nDefault = new I18n("LANGUAGE", {
-        [LANGUAGE]: { quux: { bar: "baz" } },
-    });
-    expect(i18nDefault.language).toBe(defaultLanguage);
+describe("Test constructor with faulty translation hash", () => {
+    expect( () => {
+        new I18n("esperanto", {
+            [LANGUAGE]: { quux: { bar: "baz" } },
+        });
+    }).toThrow(LanguageError)
 });

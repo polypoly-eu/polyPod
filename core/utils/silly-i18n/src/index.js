@@ -1,11 +1,21 @@
-export const defaultLanguage = "en";
 export const determineLanguage = () =>
     Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
 
+export class LanguageError extends Error {
+    constructor( message ) {
+        super(message);
+        this.name = "LanguageError"
+    }
+}
+
 export class I18n {
     constructor(language, translations) {
-        this.language = language in translations ? language : defaultLanguage;
-        this._translations = translations[this.language];
+        if (language in translations) {
+            this.language = language;
+            this._translations = translations[this.language];
+        } else {
+            throw new LanguageError( "${language} is not a key in the translations hash provided");
+        }
     }
 
     t(key, options = {}) {
