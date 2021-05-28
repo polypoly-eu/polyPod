@@ -20,12 +20,18 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.node}}
-      - name: Install
+      - name: Install <= v14
+        if: ${{ matrix.node <= 14 }}
         working-directory: ${{env.silly-i18n-dir}}
         run: |
           npm i
           npm install -g typescript
           npm link typescript
+      - name: Install > v14
+        if: ${{ matrix.node > 14 }}
+        working-directory: ${{env.silly-i18n-dir}}
+        run: |
+          npm i
       - name: Run linter
         working-directory: ${{env.silly-i18n-dir}}
         run: npm run lint

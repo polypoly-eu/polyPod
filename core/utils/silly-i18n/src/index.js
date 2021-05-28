@@ -33,6 +33,12 @@ export class TranslationKeyError extends Error {
 }
 
 export class I18n {
+    /**
+     * Simple class for performing string translations, includigng parameters
+     *
+     * @param language two-letter language code, which should be a key in the translation hash
+     * @param translations translation hash
+     */
     constructor(language, translations) {
         if (language in translations) {
             this.language = language;
