@@ -184,6 +184,13 @@ export default class PpQuestionnaire extends PpQObject {
     this._schema = schema;
   }
 
+  get completionProgress() {
+      return (
+          this.activeQuestions().filter(question => question.isAnswered()).length /
+          this.activeQuestions().length
+      )
+  }
+
   // Answer the active question prior to the supplied question.
   // If the supplied question is the first question, answer null.
   // If the question can't be found, throw an error.

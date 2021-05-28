@@ -11,8 +11,8 @@ const AsyncStorage = {
             quads.find(
                 ({ subject, predicate }) =>
                     subject.value === `${namespace}${key}` &&
-                    predicate.value === `${namespace}answers`
-            )?.object || null
+                    predicate.value === `${namespace}${questionnairePredicate}`
+            )?.object.value || null
         );
     },
 
@@ -20,7 +20,7 @@ const AsyncStorage = {
         const quad = dataFactory.quad(
             dataFactory.literal(`${namespace}${key}`),
             dataFactory.literal(`${namespace}${questionnairePredicate}`),
-            dataFactory.literal(`${namespace}${value}`)
+            dataFactory.literal(`${value}`)
         );
         polyIn.add(quad);
     },
@@ -32,7 +32,7 @@ const AsyncStorage = {
             quads.find(
                 ({ subject, predicate }) =>
                     subject.value === `${namespace}${key}` &&
-                    predicate.value === `${namespace}answers`
+                    predicate.value === `${namespace}${indexPredicate}`
             )?.object.value || null
         );
     },
@@ -41,7 +41,7 @@ const AsyncStorage = {
         const quad = dataFactory.quad(
             dataFactory.literal(`${namespace}${key}`),
             dataFactory.literal(`${namespace}${indexPredicate}`),
-            dataFactory.literal(`${namespace}${value}`)
+            dataFactory.literal(`${value}`)
         );
         polyIn.add(quad);
     },
