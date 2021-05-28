@@ -1,5 +1,35 @@
 .home{
-    background: var(--home-background);
     height: 100vh;
     padding: 0 16px;
+}
+
+.home .new-surveys-area {
+    background: var(--light-background);
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.home .new-surveys-area .new-surveys {
+    width: 100%;
+    height: 48px;
+    max-width: var(--max-width);
+    margin: 32px;
+    border-radius: 4px;
+    background-color: var(--color-semi-dark);
+    color: var(--light-text);
+}
+
+.home .new-surveys-area::before {
+    content: "";
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 108px;
+    height: 60px;
+    pointer-events: none;
+    background: linear-gradient(#f7fafc00, var(--light-background));
+    z-index: 2001;
 }

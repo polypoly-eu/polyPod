@@ -1,4 +1,5 @@
 .surveys-list{
     display: grid;
     grid-gap: 16px;
+    padding-bottom: 132px;
 }

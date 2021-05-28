@@ -8,7 +8,9 @@ export default function HomeScreen() {
     return (
         <main className="home">
             <ActiveSurveys />
-            <button>{t("home.notification.title")}</button>
+            <div className="new-surveys-area">
+                <button className="new-surveys" >{t("home.notification.title")}</button>
+            </div>
         </main>
     );
 }

@@ -26,11 +26,13 @@
 }
 
 .card main {
+    background-color: var(--dark-background);
     height: 176px;;
     padding: 12px 16px 16px 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-radius: 0 0 16px 16px;
 }
 /* .card .card-content {
     text-transform: none;
@@ -43,7 +45,6 @@
 .card .card-title {
     font-size: var(--text-xl);
     line-height: 36px;
-    /* text-transform: capitalize; */
 }
 
 .card .btn-container {
