@@ -15,6 +15,12 @@ export class LanguageError extends Error {
 }
 
 export class TranslationKeyError extends Error {
+    /**
+     * Exception class to use when there's some problem with the key used
+     * in the translation, either the format or its existence.
+     *
+     * @param message - Message to include in the error
+     */
     constructor(message) {
         super(message);
         this.name = "TranslationKeyError";
