@@ -1,3 +1,8 @@
+/**
+ * Determines the environment language
+ *
+ * @returns a two-character standard name for the language, such as 'en'
+ */
 export const determineLanguage = () =>
     Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
 
