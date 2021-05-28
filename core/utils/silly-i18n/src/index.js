@@ -2,6 +2,12 @@ export const determineLanguage = () =>
     Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
 
 export class LanguageError extends Error {
+    /**
+     * Exception class for errors related to the language that is
+     * requested for the translation object
+     * 
+     * @param message - Actual message included in the error
+     */
     constructor(message) {
         super(message);
         this.name = "LanguageError";

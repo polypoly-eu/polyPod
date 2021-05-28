@@ -7,7 +7,11 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": ["json", "html", "text"]
+    "coverageReporters": [
+      "json",
+      "html",
+      "text"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
@@ -19,7 +23,9 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.6.3",
-    "prettier": "^2.2.1"
+    "jsdoc": "^3.2.0",
+    "prettier": "^2.2.1",
+    "tsdoc": "^0.0.4"
   },
   "private": true,
   "type": "module"
