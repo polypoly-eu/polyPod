@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import StartSurveyButton from "../../components/buttons/StartSurveyButton";
 import Questionnaire from "../../questionnaire/PpQuestionnaire";
 
-//TODO implement questionnaire state
 export default function MainSurveyCard({ questionnaire }: { questionnaire: Questionnaire }) {
     const { t, i18n } = useTranslation();
 
@@ -18,6 +17,8 @@ export default function MainSurveyCard({ questionnaire }: { questionnaire: Quest
                     Der Einsendeschluss ist am
                     <br />
                     <strong>{questionnaire.submissionDeadlineString(i18n.language)}</strong>
+                    <br />
+                    Progress: {questionnaire.completionProgress}
                 </p>
             </main>
             <footer>
