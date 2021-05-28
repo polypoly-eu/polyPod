@@ -16,8 +16,8 @@
     "build": "rimraf *.bundled.js && rollup -c rollup.config.js"
   },
   "dependencies": {
-    "lit-html": "^1.4.1",
-    "lit-element": "^2.5.1"
+    "lit-element": "^2.5.1",
+    "lit-html": "^1.4.1"
   },
   "devDependencies": {
     "@open-wc/eslint-config": "^4.3.0",
@@ -53,7 +53,10 @@
       "window": true,
       "console": true,
       "describe": true,
-      "it": true
+      "it": true,
+      "CustomEvent": true,
+      "beforeEach": true,
+      "afterEach": true
     },
     "rules": {
       "semi": 2
