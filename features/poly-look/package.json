@@ -20,7 +20,7 @@
     "lit-html": "^1.4.1"
   },
   "devDependencies": {
-    "@open-wc/eslint-config": "^4.3.0",
+    "@polypoly-eu/eslint-config": "file:../../eslint-config",
     "@open-wc/testing": "^2.5.33",
     "@rollup/plugin-replace": "^2.4.2",
     "@web/dev-server": "^0.1.17",
@@ -38,29 +38,6 @@
     "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:prettier/recommended"
-    ],
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "ecmaVersion": 6,
-      "sourceType": "module"
-    },
-    "globals": {
-      "window": true,
-      "console": true,
-      "describe": true,
-      "it": true,
-      "CustomEvent": true,
-      "beforeEach": true,
-      "afterEach": true
-    },
-    "rules": {
-      "semi": 2
-    }
   },
   "prettier": {
     "singleQuote": false,
