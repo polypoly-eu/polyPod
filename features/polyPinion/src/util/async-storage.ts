@@ -25,6 +25,17 @@ const AsyncStorage = {
         polyIn.add(quad);
     },
 
+    //I really don't like this, needs some refactoring
+    async getRecentAnswers(key: string): Promise<string | null> {
+        // use non empty matcher when implemented in pod.js
+        const quads = (await polyIn.select({})).filter(
+            ({ subject, predicate }) =>
+                subject.value === `${namespace}${key}` &&
+                predicate.value === `${namespace}${questionnairePredicate}`
+        );
+        return quads[quads.length - 1]?.object.value;
+    },
+
     async getIndex(key: string): Promise<string | null> {
         // use non empty matcher when implemented in pod.js
         const quads = await polyIn.select({});

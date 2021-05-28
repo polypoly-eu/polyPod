@@ -14,7 +14,7 @@ export async function storeAnswers(questionnaire: Questionnaire) {
 
 export async function loadAnswers(questionnaire: Questionnaire) {
     const storageKey = questionnaireAnswersStorageId(questionnaire.id);
-    const answers = await SecureStorage.getItem(storageKey);
+    const answers = await SecureStorage.getRecentAnswers(storageKey);
     if (answers != null) {
         const content = JSON.parse(answers);
         questionnaire.loadAnswers(content);

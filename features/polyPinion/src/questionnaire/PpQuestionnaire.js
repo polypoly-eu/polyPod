@@ -191,6 +191,10 @@ export default class PpQuestionnaire extends PpQObject {
       )
   }
 
+  get completionProgressPercent() {
+      return Math.round(this.completionProgress * 100) + "%"
+  }
+
   // Answer the active question prior to the supplied question.
   // If the supplied question is the first question, answer null.
   // If the question can't be found, throw an error.
