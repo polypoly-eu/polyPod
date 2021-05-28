@@ -18,7 +18,8 @@ export default function MainSurveyCard({ questionnaire }: { questionnaire: Quest
                     <br />
                     <strong>{questionnaire.submissionDeadlineString(i18n.language)}</strong>
                     <br />
-                    Progress: {questionnaire.completionProgressPercent}
+                    {questionnaire.answeredQuestions().length} of {questionnaire.questions().length}{" "}
+                    answered
                 </p>
             </main>
             <footer>
