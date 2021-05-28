@@ -58,6 +58,13 @@ branch to make contributions against.
 We prepare releases in the `release` branch. If no release is in motion, it
 reflects the state of the last release we made.
 
+## Security
+
+Please read the [SECURITY](SECURITY.md) document on how to report potential
+security vulnerabilities in polyPod and where to find polypoly's Vulnerability
+Disclosure Policy.
+
+
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
 
 ## Issues
