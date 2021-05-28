@@ -1,0 +1,4 @@
+.surveys-list{
+    display: grid;
+    grid-gap: 16px;
+}

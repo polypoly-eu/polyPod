@@ -1,7 +1,20 @@
 @charset "UTF-8";
 :root {
+    /* primary colors */
+    --color-dark: #0F1938;
+    --color-semi-dark: #475ABB;
+    --color-medium: #CBD5E0;
+    --color-semi-light: #E2E8F0;
+    --color-light: #f7fafc;
+
     /*background-colors*/
-    --light-background: #e5e5e5;
+    --home-background: var(--color-light);
+    --main-background: var(--color-semi-light);
+
+    /* text-colors */
+    --dark-text: var(--color-dark);
+    --light-text: var(--color-light);
+
 
     /*secondary colors*/
     --dark-grey: #273040;
@@ -23,6 +36,11 @@
 }
 
 :root {
+/* Size */
+    --max-width: 412px;
+    --text-xs: 12px;
+    --text-xl: 30px;
+
     --spacing-0: 0;
     --spacing-1: 0.25rem;
     --spacing-2: 0.5rem;
@@ -41,7 +59,7 @@
     --spacing-48: 12rem;
     --spacing-56: 14rem;
     --spacing-64: 16rem;
-    --text-xs: 0.75rem;
+    /* --text-xs: 0.75rem;
     --text-sm: 0.875rem;
     --text-base: 1rem;
     --text-lg: 1.125rem;
@@ -50,13 +68,28 @@
     --text-3xl: 1.875rem;
     --text-4xl: 2.25rem;
     --text-5xl: 3rem;
-    --text-6xl: 4rem;
+    --text-6xl: 4rem; */
+}
+
+@font-face {
+    font-family: "Jost";
+    src: url("../fonts/jost_regular.ttf");
+}
+@font-face {
+    font-family: "Jost Medium";
+    font-weight: bold;
+    src: url("../fonts/jost_medium.ttf");
 }
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+* {
+    font-family: "Jost";
+    font-weight: 500;
 }
 
 html,
@@ -70,11 +103,10 @@ html {
 
 body {
     min-height: 100%;
-    font-family: "Rubik", sans-serif;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    background-color: var(--light-background);
-    color: var(--dark-grey);
+    background-color: var(--main-background);
+    color: var(--dark-text);
 }
 
 h1,
@@ -131,6 +163,8 @@ svg {
 
 button {
     border-radius: 0;
+    background: none;
+
 }
 
 input,
@@ -208,33 +242,29 @@ select {
     border-radius: 3px;
 }
 .tabs .tabs-active a {
-    color: #000;
+    color: var(--color-dark);
 }
 
 button,
 a.button {
-    background: transparent;
-    flex-grow: 1;
-    border: 2px solid black;
-    border-radius: 3px;
-    padding: 0.2rem 1rem;
+    border: none;
     text-decoration: none;
-    display: inline-block;
-    color: #000;
     text-align: center;
 }
+
 button.inverted,
 a.button.inverted {
-    background: #000;
-    color: #faf6f4;
+    background: var(--color-semi-dark);
+    color: var(--light-text);
 }
-button.alt,
+
+/* button.alt,
 a.button.alt {
     padding: 0.2rem;
     border: none;
     background-color: #fcf79e;
     flex-grow: 0;
-}
+} */
 
 /* hidden from view, but not from screen readers */
 .choice-input {
@@ -250,15 +280,6 @@ a.button.alt {
     visibility: hidden;
 }
 
-@font-face {
-    font-family: "Rubik";
-    src: url("./fonts/Rubik-Regular.woff2") format("woff2");
-}
-@font-face {
-    font-family: "Rubik";
-    font-weight: bold;
-    src: url("./fonts/Rubik-Medium.woff2") format("woff2");
-}
 .page-title,
 .page-title a {
     font-size: 1.2rem;
@@ -266,25 +287,12 @@ a.button.alt {
     color: #4a5568;
 }
 
-.card {
-    height: 300px;
-    border-radius: 25px;
-    padding: 1rem;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-}
-.card > * {
-    max-width: 75%;
-}
-.card > header * {
-    font-size: 1.2rem;
-    text-transform: uppercase;
-}
-.card button,
+
+/* .card button,
 .card .button {
-    background-color: #000;
-    color: #f9f0d7;
-}
+    background-color: var(--color-semi-dark);
+    color: var(--text-light);
+} */
 
 .call-out-section {
     display: flex;

@@ -1,0 +1,5 @@
+.home{
+    background: var(--home-background);
+    height: 100vh;
+    padding: 0 16px;
+}
