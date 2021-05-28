@@ -72,6 +72,10 @@ export default class PpQuestionnaire extends PpQObject {
     return this._questions;
   }
 
+  answeredQuestions() {
+    return this.activeQuestions().filter(question => question.isAnswered())
+  }
+
   firstActiveQuestion() {
     return this.activeQuestions()[0];
   }
@@ -182,17 +186,6 @@ export default class PpQuestionnaire extends PpQObject {
 
   set schema(schema) {
     this._schema = schema;
-  }
-
-  get completionProgress() {
-      return (
-          this.activeQuestions().filter(question => question.isAnswered()).length /
-          this.activeQuestions().length
-      )
-  }
-
-  get completionProgressPercent() {
-      return Math.round(this.completionProgress * 100) + "%"
   }
 
   // Answer the active question prior to the supplied question.
