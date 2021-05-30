@@ -86,9 +86,8 @@ class BrowserPolyNav implements PolyNav {
 
     async setActiveActions(actions: string[]): Promise<void> {
         if (actions.includes("back"))
-            window.history.pushState(document.title, document.title, `?nav`);
+            window.history.pushState(document.title, document.title);
         const actionKeys: any = {
-            Escape: "back",
             s: "search",
             i: "info",
         };
@@ -107,12 +106,15 @@ class BrowserPolyNav implements PolyNav {
             if (actions.includes(action)) this.actions?.[action]?.();
         };
         window.addEventListener("keyup", this.keyUpListener);
+        if (this.popStateListener)
+            window.removeEventListener("popstate", this.popStateListener);
+
         this.popStateListener = (_event: any) => {
             // NOTE: This triggers "back" action for both Back and Forward
             // browser buttons
             if (actions.includes("back")) this.actions?.["back"]?.();
         };
-        window.onpopstate = this.popStateListener;
+        window.addEventListener("popstate", this.popStateListener);
     }
 
     async setTitle(title: string): Promise<void> {
@@ -143,13 +145,13 @@ export class BrowserPod implements Pod {
             injection.id = "polyNavFrame";
             const source = `
             <html>
-                <body style="background-color: ${window.manifest.primaryColor}">
+                <body style="background-color: ${window.manifest.primaryColor || "white"}">
                     <script>
                         window.addEventListener("message", (event) => {
                             document.getElementById("title").textContent = event.data;
                         });
                     </script>
-                    <h1 id="title" style="color: #AAAAAA">${window.parent.currentTitle}<h1>
+                    <h1 id="title" style="color: khaki">${window.parent.currentTitle}<h1>
                 </body>
             </html>
             `;

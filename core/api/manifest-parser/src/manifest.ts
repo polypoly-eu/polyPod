@@ -2,7 +2,6 @@ import * as Decode from "io-ts/lib/Decoder";
 import { fold } from "fp-ts/lib/Either";
 import { pipe } from "fp-ts/lib/pipeable";
 import { parse as parseSemVer, SemVer, Range } from "semver";
-//import { normalize, isAbsolute, join, dirname } from "path";
 import { promises as fs } from "fs";
 
 export interface EngineManifest {
@@ -122,27 +121,11 @@ export async function combineManifest(packageManifest: Record<string, unknown>):
     const rawMain = expect(packageManifest, "Failed to parse main manifest", mainDecoder);
     const rawEngine = expect(packageManifest.engines, "Failed to parse engines", engineDecoder);
     const rawRoot = expect(packageManifest, "Failed to parse Feature spec", rootDecoder);
-
-    let featureManifest: FeatureManifest = {
-        name: rawMain.name,
-        description: "",
-        thumbnail: "",
-        primaryColor: "",
-        links: {},
-        translations: [],
-    };
-
-    if (rawRoot.polypoly.manifest) {
-        const manifestPath = "";
-        //const manifestPath = join(dirname(pkgPath), rawRoot.polypoly.manifest);
-        const featureManifestJson = JSON.parse(await fs.readFile(manifestPath, "utf8"));
-
-        featureManifest = expect(
-            featureManifestJson,
-            "Failed to parse Feature manifest",
-            featureDecoder
-        );
-    }
+    const featureManifest = expect(
+        packageManifest,
+        "Failed to parse Feature manifest",
+        featureDecoder
+    );
 
     return {
         api: rawEngine.polypoly,
