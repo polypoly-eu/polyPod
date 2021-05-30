@@ -9,10 +9,7 @@ import type {
 import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
-import {
-    FeatureManifest,
-    parseFeatureManifest,
-} from "@polypoly-eu/manifest-parser";
+import { Manifest, readManifest } from "@polypoly-eu/manifest-parser";
 
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
@@ -129,14 +126,23 @@ class BrowserPolyNav implements PolyNav {
 declare global {
     interface Window {
         manifestData: string;
-        manifest: FeatureManifest;
+        manifest: Manifest;
         currentTitle: string;
     }
 }
 export class BrowserPod implements Pod {
     constructor() {
         window.addEventListener("load", async () => {
-            window.manifest = await parseFeatureManifest(window.manifestData);
+            const manifestJson = window.manifestData || await (
+                await fetch("manifest.json")
+            ).json();
+            if (!manifestJson) {
+                console.log(
+                    `ERROR: Could not load the feature manifest. If you are
+                    loading the feature from a file:// URL please explose the
+                    manifest data in window.manifestData`);
+            }
+            window.manifest = await readManifest(manifestJson);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
             const injection = document.createElement("iframe");

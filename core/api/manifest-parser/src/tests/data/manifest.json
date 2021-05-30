@@ -4,17 +4,14 @@
   "thumbnail": "assets/thumbnail.png",
   "primaryColor": "#000000",
   "links": {
-      "link1": "https://example.com/1",
-      "link2": "https://example.com/2"
+    "link1": "https://polypoly.coop",
+    "link2": "https://polypoly.coop"
   },
-  "translations": [
-    {
-      "language": "de",
-      "description": "Das ist eine Beispiel-Feature",
-      "links": {
-          "link1": "https://example.com/1",
-          "link2": "https://example.com/2"
-      }
+  "translations": {
+    "de": {
+        "author": "polypoly - Die Genossenschaft",
+        "description": "Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel."
     }
-  ]
+  },
+  "version": "0.0.1"
 }

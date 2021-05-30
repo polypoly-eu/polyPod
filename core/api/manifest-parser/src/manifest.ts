@@ -2,23 +2,13 @@ import * as Decode from "io-ts/lib/Decoder";
 import { fold } from "fp-ts/lib/Either";
 import { pipe } from "fp-ts/lib/pipeable";
 import { parse as parseSemVer, SemVer, Range } from "semver";
-import { promises as fs } from "fs";
-
-export interface EngineManifest {
-    readonly api: Range;
-}
 
 export interface MainManifest {
     readonly name: string;
     readonly version: SemVer;
 }
 
-export interface RootManifest {
-    readonly root: string;
-}
-
 export interface FeatureManifest {
-    readonly name: string;
     readonly description: string;
     readonly thumbnail: string;
     readonly primaryColor: string;
@@ -28,7 +18,7 @@ export interface FeatureManifest {
     readonly translations: unknown;
 }
 
-export interface Manifest extends EngineManifest, MainManifest, RootManifest, FeatureManifest {}
+export interface Manifest extends MainManifest, FeatureManifest {}
 
 // TODO duplicated code with podigree, should be a library
 function expect<I, A>(input: I, msg: string, decoder: Decode.Decoder<I, A>): A {
@@ -47,8 +37,8 @@ const relativeDecoder = pipe(
     Decode.string,
     Decode.parse((string) => {
         const url = new URL(string, document.location.href);
-
-        //if (isAbsolute(path) || path.startsWith("..")) return Decode.failure(string, "relative");
+        console.log(url.toString());
+        if (url.toString() == "") return Decode.failure(string, "relative");
 
         return Decode.success(string);
     })
@@ -67,26 +57,6 @@ const mainDecoder = Decode.type({
     ),
 });
 
-const engineDecoder = Decode.type({
-    polypoly: pipe(
-        Decode.string,
-        Decode.parse((string) => {
-            try {
-                return Decode.success(new Range(string));
-            } catch (err) {
-                return Decode.failure(string, err.message);
-            }
-        })
-    ),
-});
-
-const rootDecoder = Decode.type({
-    polypoly: Decode.type({
-        root: relativeDecoder,
-        manifest: relativeDecoder,
-    }),
-});
-
 const featureDecoder = Decode.type({
     name: Decode.string,
     description: Decode.string,
@@ -96,31 +66,8 @@ const featureDecoder = Decode.type({
     translations: Decode.UnknownRecord,
 });
 
-export async function parseFeatureManifest(featureManifestJson: string): Promise<FeatureManifest> {
-    return expect(featureManifestJson, "Failed to parse Feature manifest", featureDecoder);
-}
-export async function parseMainManifest(
-    packageManifest: Record<string, unknown>
-): Promise<MainManifest> {
-    return expect(packageManifest, "Failed to parse main manifest", mainDecoder);
-}
-
-export async function parseEngineManifest(
-    packageManifest: Record<string, unknown>
-): Promise<EngineManifest> {
-    return expect(packageManifest.engines, "Failed to parse engines", engineDecoder);
-}
-
-export async function parseRootManifest(
-    packageManifest: Record<string, unknown>
-): Promise<RootManifest> {
-    return expect(packageManifest, "Failed to parse Feature spec", rootDecoder);
-}
-
-export async function combineManifest(packageManifest: Record<string, unknown>): Promise<Manifest> {
+export async function readManifest(packageManifest: Record<string, unknown>): Promise<Manifest> {
     const rawMain = expect(packageManifest, "Failed to parse main manifest", mainDecoder);
-    const rawEngine = expect(packageManifest.engines, "Failed to parse engines", engineDecoder);
-    const rawRoot = expect(packageManifest, "Failed to parse Feature spec", rootDecoder);
     const featureManifest = expect(
         packageManifest,
         "Failed to parse Feature manifest",
@@ -128,8 +75,6 @@ export async function combineManifest(packageManifest: Record<string, unknown>):
     );
 
     return {
-        api: rawEngine.polypoly,
-        root: rawRoot.polypoly.root,
         name: featureManifest.name,
         version: rawMain.version,
         description: featureManifest.description,

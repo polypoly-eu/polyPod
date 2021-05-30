@@ -28,6 +28,7 @@
     "@polypoly-eu/podjs": "file:../../../podjs",
     "@polypoly-eu/port-authority": "file:../../communication/port-authority",
     "@polypoly-eu/remote-pod": "file:../../communication/remote-pod",
+    "@pnpm/read-package-json": "^5.0.1",
     "@rdfjs/dataset": "^1.0.1",
     "@types/node": "^14.6.4",
     "@types/puppeteer": "^3.0.2",

@@ -8,7 +8,7 @@ export interface Ops {
 
 export async function detectFeature(options: Ops): Promise<[string, Manifest]> {
     const dir = options.dir || process.cwd();
-    const packagePath = join(dir, "package.json");
+    const packagePath = join(dir, "manifest.json");
     const packageJson = readPkg(packagePath);
     const manifest = await readManifest(packageJson);
     return [dir, manifest];
