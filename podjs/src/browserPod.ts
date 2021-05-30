@@ -72,7 +72,9 @@ class BrowserPolyNav implements PolyNav {
 
     async openUrl(url: string): Promise<void> {
         console.log(`polyNav: Attempt to open URL: ${url}`);
-        const targetLink = window.manifest?.links[url];
+        const targetLink = (window.manifest?.links as Record<string, string>)[
+            url
+        ];
         const permission = confirm(
             `Feature ${window.manifest?.name} is trying to open URL ${targetLink}. Allow?`
         );
@@ -133,14 +135,15 @@ declare global {
 export class BrowserPod implements Pod {
     constructor() {
         window.addEventListener("load", async () => {
-            const manifestJson = window.manifestData || await (
-                await fetch("manifest.json")
-            ).json();
+            const manifestJson =
+                window.manifestData ||
+                (await await (await fetch("manifest.json")).json());
             if (!manifestJson) {
                 console.log(
                     `ERROR: Could not load the feature manifest. If you are
                     loading the feature from a file:// URL please explose the
-                    manifest data in window.manifestData`);
+                    manifest data in window.manifestData`
+                );
             }
             window.manifest = await readManifest(manifestJson);
             window.parent.currentTitle =
@@ -151,13 +154,17 @@ export class BrowserPod implements Pod {
             injection.id = "polyNavFrame";
             const source = `
             <html>
-                <body style="background-color: ${window.manifest.primaryColor || "white"}">
+                <body style="background-color: ${
+                    window.manifest.primaryColor || "white"
+                }">
                     <script>
                         window.addEventListener("message", (event) => {
                             document.getElementById("title").textContent = event.data;
                         });
                     </script>
-                    <h1 id="title" style="color: khaki">${window.parent.currentTitle}<h1>
+                    <h1 id="title" style="color: khaki">${
+                        window.parent.currentTitle
+                    }<h1>
                 </body>
             </html>
             `;
