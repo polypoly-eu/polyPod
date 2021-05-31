@@ -1,6 +1,6 @@
 import { existsSync, lstatSync, readFileSync } from "fs";
-import { getAllFilePaths } from "cup-readdir"
-import { dirname, basename, sep } from "path"
+import { getAllFilePaths } from "cup-readdir";
+import { dirname, basename, sep } from "path";
 
 /**
  * Determines the environment language
@@ -130,24 +130,28 @@ export class I18n {
      */
     static async fromFiles(directory) {
         if (!existsSync(directory)) {
-            await Promise.reject( new FileNotFoundError("${directory} can't be found") );
+            await Promise.reject(
+                new FileNotFoundError(directory + " can't be found")
+            );
         }
-        if (!lstatSync(directory).isDirectory ) {
-            await Promise.reject( new FileNotFoundError("${directory} is not really a directory") );
+        console.log(lstatSync(directory));
+        if (!lstatSync(directory).isDirectory()) {
+            await Promise.reject(
+                new FileNotFoundError(directory + " is not really a directory")
+            );
         }
-        let files = await getAllFilePaths( directory );
+        let files = await getAllFilePaths(directory);
 
         let translations = {};
-        files.forEach( (f) => {
-            const language = dirname(f).split(sep).reverse()[0]
-            const ns = basename(f,".json");
-            console.log(JSON.parse( readFileSync(f)));
-            if ( !(language in translations) ) {
-                translations[language] = {}
+        files.forEach((f) => {
+            const language = dirname(f).split(sep).reverse()[0];
+            const ns = basename(f, ".json");
+            console.log(JSON.parse(readFileSync(f)));
+            if (!(language in translations)) {
+                translations[language] = {};
             }
-            translations[language][ns] = JSON.parse( readFileSync(f));
+            translations[language][ns] = JSON.parse(readFileSync(f));
         });
-        console.log(translations);
-        return new I18n( determineLanguage(), translations );
+        return new I18n(determineLanguage(), translations);
     }
 }

@@ -18,4 +18,11 @@ describe("Test possible errors", () => {
             expect(error.message).toEqual(expect.stringMatching(/found/));
         });
     });
+    it("Throws when the argument is not a directory", () => {
+        I18n.fromFiles("test/locales/es/common.json").catch( (error) => {
+            console.log(error);
+            expect(error).toBeInstanceOf(FileNotFoundError);
+            expect(error.message).toEqual(expect.stringMatching(/not really/));
+        });
+    });
 });
