@@ -29,16 +29,11 @@ const CategoryInfo = ({ category, company, onClose }) => {
                         text1: i18n.t("infographic:category.text1"),
                         text2: i18n.t("infographic:category.text2"),
                         text3: i18n.t("infographic:category.text3"),
-                    }}
-                />
+                    }}/>
                 {highlights[company.ppid].dataTypeCategories[category]
                     .explanation ? (
                     <div>
-<<<<<<< HEAD
                         <h2>{i18n.t("explorationCategoryInfoScreen:subheading")}</h2>
-=======
-                        <h2>{i18n.t("explorationCategoryInfoScreen")}</h2>
->>>>>>> 3ce1d1f8 (Revert previous commit)
                         <p>
                             {
                                 highlights[company.ppid].dataTypeCategories[
