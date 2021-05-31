@@ -4,7 +4,7 @@ import CoreData
 extension PolyIn {
     func selectQuads(matcher: ExtendedData, completionHandler: ([ExtendedData]?, Error?) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            completionHandler(nil, PolyApiError.databaseError)
+            completionHandler(nil, PodApiError.databaseError)
             return
         }
         

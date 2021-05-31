@@ -5,14 +5,13 @@
 }
 
 :global(body) {
-    background-color: #3749a9;
+    background-color: #FFF5F5;
     padding: 0;
     margin: 0;
-    border-top: 1px solid #f7fafc;
 }
 
 * {
-    color: #f7fafc;
+    color: #0F1938;
     box-sizing: border-box;
     font-family: Jost;
     font-weight: 500;
@@ -29,34 +28,41 @@ button {
     margin: auto;
 }
 
-/* .search-screen {
-    height: 100%;
-    display: flex;
-    flex-flow: column;
-    overflow: hidden scroll;
-} */
+.top-separator{
+    z-index: 200;
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
 .search-bar-area {
     width: 100%;
+    background-color: #FFF5F5;
     max-width: 412px;
     display: flex;
     justify-content: center;
     margin: auto;
     padding: 23px 24px 29px 24px;
     flex: 0 0 auto;
+    position: fixed;
+    top: 0;
 }
 
 .search-bar-area .search-bar {
     width: 100%;
     height: 40px;
-    background-color: #3749a9;
+    background-color: #FFF5F5;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 18px;
-    border: 1px solid #f7fafc;
+    border: 1px solid #0F1938;
     border-radius: 20px;
     padding: 1px 12px 0 21px;
+    position: relative;
 }
 
 .search-bar-area .search-bar .search-bar-input {
@@ -70,18 +76,19 @@ button {
 }
 
 .search-bar-area .search-bar .search-bar-input::placeholder {
-    color: #f7fafc;
+    color: #0F1938;
     font-weight: 400;
 }
 
 .search-bar-area .search-bar button {
-    margin: 0;
+    margin: 1px 0 0 0;
     padding: 0;
 }
 
 .term-list-container {
     width: 100%;
     overflow-y: scroll;
+    margin-top: 88px;
 }
 
 .term-list-container .term-list {
@@ -101,22 +108,33 @@ button {
     font-size: 20px;
 }
 
+.term-list-container .no-result p {
+    margin: 0 20px 17px 50px;
+    color: #a9b6c6;
+}
+
 .term-list-container .result h2 {
     margin: 0 20px 17px 50px;
     font-size: 20px;
 }
 
 .term-description {
-    padding: 40px 22px 32px 26px;
+    padding: 40px 28px 32px 28px;
     font-size: 16px;
     line-height: 19.2px;
     font-weight: 400;
 }
 
-.term-description h2 {
+.term-description .top{
+    display: flex;
+    justify-content: space-between;
     margin: 0 0 39px 0;
+}
+
+.term-description .top h2 {
     font-size: 24px;
     line-height: 28.8px;
+    margin: 0;
 }
 
 .term-description .scroll-container {
@@ -125,25 +143,47 @@ button {
     overflow: hidden scroll;
     width: 100%;
     max-width: 412px;
-    margin-bottom: 51px;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.term-description .scroll-container .gradient-area {
+    position: absolute;
+}
+
+.term-description .scroll-container .gradient-area .gradient {
+    position: fixed;
+    bottom: 96px;
+    right: 0;
+    left: 0;
+    height: 65px;
+    pointer-events: none;
+    background: linear-gradient(#FFF5F500 0%, #FFF5F5);
+}
+
+.term-description .scroll-container::after {
+    content: "";
+    display: block;
+    height: 30px;
 }
 
 .term-description .button-area {
     display: block;
-    background-color: #3749a9;
+    background-color: #FFF5F5;
     max-width: 412px;
     margin: 0 auto;
-    padding: 5px 32px 32px 32px;
+    padding: 20px 28px 32px 28px;
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
 }
 
-.term-description button {
+.term-description .back {
     width: 100%;
     height: 51px;
     background-color: #0f1938;
+    color: #f7fafc;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     font-size: 16px;
@@ -152,16 +192,41 @@ button {
 
 <script>
 import i18n from "./i18n.js";
+
 export let lexicon;
 let showTerm = null;
 let searchString = "";
+let pod = window.pod;
+let scrollingProgress = 0;
+let savedScrollingProgress;
+
+setUpListNavigation();
+
+const onListLoad = () => {
+    if (savedScrollingProgress) window.scroll(0, savedScrollingProgress)
+}
 
 function handleClickTerm(term) {
     showTerm = term;
+    savedScrollingProgress = scrollingProgress;
+    setUpTermNavigation();
+}
+
+function handleCopytoClipboard(term) {
+    let termDescription = term + ": " + lexicon.description(term);
+    var div = document.createElement("div");
+    div.innerHTML = termDescription;
+    const termText = div.innerText || "";
+    copyText(termText);
+}
+
+function copyText(text) {
+    navigator.clipboard.writeText(text);
 }
 
 function handleBack() {
     showTerm = null;
+    setUpListNavigation();
 }
 
 function handleSearch(value) {
@@ -171,22 +236,48 @@ function handleSearch(value) {
 function handleClear() {
     searchString = "";
 }
+
+function setUpTermNavigation() {
+        pod.polyNav.setTitle(i18n.t("title:details"));
+        pod.polyNav.actions = {
+                  back: () => handleBack(),
+              };
+        pod.polyNav.setActiveActions(
+            ["back"]
+        );
+    }
+
+function setUpListNavigation(){
+    pod.polyNav.setTitle(i18n.t("title:lexicon"));
+    pod.polyNav.setActiveActions([""]);
+}
+
 </script>
 
+<svelte:window bind:scrollY={scrollingProgress}/>
+
 <main class="lexicon">
+    <div class="top-separator"></div>
     {#if showTerm}
         <div class="term-description">
             <div class="scroll-container">
+                <div class="top">
                 <h2>{showTerm}</h2>
+                <button on:click="{handleCopytoClipboard(showTerm)}">
+            <img src="./images/Copy.svg" alt="{i18n.t("common:copy")}" title="{i18n.t("common:copy")}">
+                </button>
+            </div>
                 {@html lexicon.description(showTerm)}
+                <div class="gradient-area">
+                    <div class="gradient"></div>
+                </div>
             </div>
             <div class="button-area">
-                <button on:click="{() => handleBack()}"
+                <button class="back" on:click="{() => handleBack()}"
                     >{i18n.t("common:back")}</button>
             </div>
         </div>
     {:else}
-        <!-- <div class="search-screen"> -->
         <div class="search-bar-area">
             <div class="search-bar">
                 <input
@@ -196,19 +287,27 @@ function handleClear() {
                     placeholder="{i18n.t('common:search')}"
                     on:input="{(e) => handleSearch(e.target.value)}" />
                 <button on:click="{() => handleClear()}">
-                    <img alt="Clear search" src="./images/clear-search.svg" />
+                    <img
+                        alt="{i18n.t('common:clear')}"
+                        src="./images/clear-search.svg" />
                 </button>
             </div>
         </div>
-        <div class="term-list-container">
+        <div use:onListLoad class="term-list-container">
             {#if searchString}
-                <div class="result">
-                    {#each lexicon.search(searchString) as entry}
-                        <h2 on:click="{() => handleClickTerm(entry)}">
-                            {entry}
-                        </h2>
-                    {/each}
-                </div>
+                {#if lexicon.search(searchString).length === 0}
+                    <div class="no-result">
+                        <p>{i18n.t("common:noMatch")}</p>
+                    </div>
+                {:else}
+                    <div class="result">
+                        {#each lexicon.search(searchString) as entry}
+                            <h2 on:click="{() => handleClickTerm(entry)}">
+                                {entry}
+                            </h2>
+                        {/each}
+                    </div>
+                {/if}
             {:else}
                 {#each lexicon.groups as group}
                     <div class="term-list">
@@ -224,6 +323,5 @@ function handleClear() {
                 {/each}
             {/if}
         </div>
-        <!-- </div> -->
     {/if}
 </main>

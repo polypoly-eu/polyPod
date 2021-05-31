@@ -16,4 +16,8 @@ gradle-app.setting
 # Ignore Gradle build output directory
 build
 
-node_modules
+# VScode directories and files
+.project
+.settings
+bin
+.classpath

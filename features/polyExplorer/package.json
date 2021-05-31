@@ -9,7 +9,7 @@
     "test": "mocha",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "polypedia:fetch": "node scripts/fetch-polypedia-data e687f1c",
+    "polypedia:fetch": "node scripts/fetch-polypedia-data 9499b4c",
     "polypedia:convert": "node scripts/convert-polypedia-data",
     "update-polypedia-data": "npm run polypedia:fetch && npm run polypedia:convert"
   },
@@ -36,15 +36,15 @@
     "react-dom": "^16.13.1",
     "rollup": "^2.26.11",
     "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-svg": "^2.0.0",
     "typescript": "^4.1.3"
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/silly-i18n": "file:../../core/silly-i18n",
+    "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
     "d3": "^6.5.0",
     "react-infinite-scroll-component": "^6.0.0",
-    "rollup-plugin-css-only": "^3.1.0",
     "swiper": "^6.4.11"
   },
   "type": "module"

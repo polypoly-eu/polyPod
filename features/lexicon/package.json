@@ -1,5 +1,5 @@
 {
-  "name": "svelte-app",
+  "name": "lexicon-feature",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-sucrase": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.3.0",
@@ -36,7 +37,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "@polypoly-eu/silly-i18n": "file:../../core/silly-i18n",
+    "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
     "js-levenshtein": "^1.1.6",
     "sirv-cli": "^1.0.0"
   }

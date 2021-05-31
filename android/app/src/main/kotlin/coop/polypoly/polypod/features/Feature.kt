@@ -21,6 +21,7 @@ class Feature(
 
     val thumbnail: Bitmap?
         get() {
+            if (manifest.thumbnail == null) return null
             val entry = content.getEntry(manifest.thumbnail) ?: return null
             val options = BitmapFactory.Options()
             // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor

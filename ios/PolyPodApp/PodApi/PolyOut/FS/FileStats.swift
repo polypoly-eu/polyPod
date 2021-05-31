@@ -1,4 +1,5 @@
 import Foundation
+import MessagePack
 
 struct FileStats {
     let file: Bool
@@ -15,7 +16,7 @@ struct FileStats {
         messagePackArray.append(["file", .bool(file)])
         messagePackArray.append(["directory", .bool(directory)])
         
-        let object = MessagePackValue.array(["@polypoly-eu/podigree.FileStats", .array(messagePackArray)])
+        let object = MessagePackValue.array(["@polypoly-eu/remote-pod.FileStats", .array(messagePackArray)])
         
         return object
     }

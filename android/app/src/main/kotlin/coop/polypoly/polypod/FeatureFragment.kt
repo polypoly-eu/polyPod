@@ -53,7 +53,7 @@ private enum class ForegroundResources(
 
     companion object {
         fun fromBackgroundColor(color: Int): ForegroundResources =
-            if (luminance(color) > 50) DARK else LIGHT
+            if (luminance(color) > 80) DARK else LIGHT
     }
 }
 

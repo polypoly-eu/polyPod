@@ -9,7 +9,7 @@ extension PolyOut {
         if exists {
             completionHandler(FileStats(isDirectory: isDir.boolValue), nil)
         } else {
-            completionHandler(nil, PolyApiError.noSuchFile)
+            completionHandler(nil, PodApiError.noSuchFile)
         }
     }
     

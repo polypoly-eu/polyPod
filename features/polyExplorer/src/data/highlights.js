@@ -7,7 +7,7 @@ const parentCategories = {
 };
 
 export default {
-    "pc polypoly coop SCE mbH": {
+    "pc polypoly coop SCE mbH (DE)": {
         dataTypeCorrelation: {
             types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
             explanation: {
@@ -59,7 +59,7 @@ export default {
             },
         },
     },
-    "SCHUFA Holding AG": {
+    "Schufa (DE)": {
         dataTypeCorrelation: {
             types: [
                 "dpv:LifeHistory",
@@ -106,7 +106,7 @@ export default {
             },
         },
     },
-    "APPLE INC.": {
+    "Apple (US)": {
         dataTypeCorrelation: {
             types: [
                 "dpv:VoiceCommunicationRecording",
@@ -167,7 +167,7 @@ export default {
             },
         },
     },
-    "Bayerische Motoren Werke Aktiengesellschaft": {
+    "BMW AG (DE)": {
         dataTypeCorrelation: {
             types: ["dpv:IPAddress", "dpv:GPSCoordinate", "dpv:Interest"],
             explanation: {
@@ -222,7 +222,7 @@ export default {
             },
         },
     },
-    "GOOGLE LLC": {
+    "Google LLC (US)": {
         dataTypeCorrelation: {
             types: [
                 "dpv:GeneralReputation",
@@ -275,7 +275,7 @@ export default {
             },
         },
     },
-    "Amazon Europe Core SARL": {
+    "Amazon Europe Core SARL (LU)": {
         dataTypeCorrelation: {
             types: ["dpv:CreditRecord", "dpv:Language", "dpv:BrowsingBehavior"],
             explanation: {
@@ -324,7 +324,7 @@ export default {
             },
         },
     },
-    "FACEBOOK, INC": {
+    "Facebook (US)": {
         dataTypeCorrelation: {
             types: ["dpv:TelephoneNumber", "dpv:LifeHistory", "dpv:Biometric"],
             explanation: {
@@ -382,7 +382,7 @@ export default {
             },
         },
     },
-    "PayPal (Europe) S.à r.l. et Cie, S.C.A.": {
+    "PayPal Europe SARL Et Cie SCE (LU)": {
         dataTypeCorrelation: {
             types: [
                 "dpv:EmailAddress",
@@ -435,7 +435,7 @@ export default {
             },
         },
     },
-    "TikTok Technology Limited": {
+    "TikTok Technology Limited (IE)": {
         dataTypeCorrelation: {
             types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
             explanation: {

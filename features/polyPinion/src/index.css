@@ -164,7 +164,6 @@ svg {
 button {
     border-radius: 0;
     background: none;
-
 }
 
 input,
@@ -178,10 +177,10 @@ textarea {
     line-height: inherit;
 }
 
-button,
+/* button,
 input {
     overflow: visible;
-}
+} */
 
 button,
 select {

@@ -1,4 +1,5 @@
 import Foundation
+import MessagePack
 
 struct ExtendedData {
     let classname: String

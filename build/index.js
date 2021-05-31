@@ -9,15 +9,18 @@ function parseCommandLine() {
     if (parameters.includes("--help") || parameters.length > 1)
         return { scriptPath, command: null };
 
+    const validCommands = ["build", "test", "lint", "list", "list-deps"];
     const command = parameters.length ? parameters[0] : "build";
     return {
         scriptPath,
-        command: ["build", "test", "lint"].includes(command) ? command : null,
+        command: validCommands.includes(command) ? command : null,
     };
 }
 
 function showUsage(scriptPath) {
-    console.error(`Usage: ${path.basename(scriptPath)} [lint | test]`);
+    console.error(
+        `Usage: ${path.basename(scriptPath)} [lint | test | list | list-deps]`
+    );
     console.error("  Run without arguments to build all packages");
 }
 
@@ -29,23 +32,33 @@ function parseManifest(path) {
     }
 }
 
-function extractLocalDependencies(manifest) {
+function extractDependencies(manifest) {
     const allDependencies = {
         ...manifest.dependencies,
         ...manifest.devDependencies,
     };
-    return Object.keys(allDependencies).filter((key) =>
-        allDependencies[key].startsWith("file:")
-    );
+    const localDependencies = [];
+    const remoteDependencies = [];
+    for (let [name, url] of Object.entries(allDependencies)) {
+        const group = url.startsWith("file:")
+            ? localDependencies
+            : remoteDependencies;
+        group.push(name);
+    }
+    return { localDependencies, remoteDependencies };
 }
 
 function createPackageData(path) {
     const manifest = parseManifest(`${path}/package.json`);
+    const { localDependencies, remoteDependencies } = extractDependencies(
+        manifest
+    );
     return {
         path,
         name: manifest.name,
-        dependencies: extractLocalDependencies(manifest),
-        scripts: Object.keys(manifest.scripts),
+        localDependencies,
+        remoteDependencies,
+        scripts: Object.keys(manifest.scripts || {}),
     };
 }
 
@@ -60,6 +73,26 @@ function createPackageTree(metaManifest) {
 const logMain = (message) => console.log(`\n***** ${message}`);
 
 const logDetail = (message) => console.log(`\n*** ${message}`);
+
+function logDependencies(packageTree) {
+    const dependencyMap = {};
+    for (let pkg of Object.values(packageTree)) {
+        for (let dep of pkg.remoteDependencies) {
+            dependencyMap[dep] = dependencyMap[dep] || [];
+            dependencyMap[dep].push(pkg.name);
+        }
+    }
+
+    const sorted = Object.entries(dependencyMap).sort((a, b) =>
+        a[0].localeCompare(b[0])
+    );
+
+    logMain(`Listing dependencies of all packages ${sorted.length}`);
+    for (let [dependency, users] of sorted) {
+        logDetail(dependency);
+        console.log(`Used by: ${users.join(", ")}`);
+    }
+}
 
 function executeProcess(executable, args, env = process.env) {
     const spawnedProcess = spawn(executable, args, { env: env });
@@ -85,7 +118,7 @@ const npm = (...args) =>
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await npm("ci");
+    await npm("ci", "--no-update-notifier", "--no-fund");
 }
 
 async function npmRun(script, pkg) {
@@ -97,7 +130,10 @@ async function npmRun(script, pkg) {
 
 const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
-    lint: (pkg) => npmRun("lint", pkg),
+    lint: (pkg) =>
+        npmInstall("@polypoly-eu/eslint-config").then(() =>
+            npmRun("lint", pkg)
+        ),
     test: (pkg) => npmRun("test", pkg),
 };
 
@@ -120,20 +156,33 @@ async function processPackage(name, packageTree, command) {
     if (!(name in packageTree)) throw `Unable to find package ${name}`;
 
     const pkg = packageTree[name];
-    if (pkg.built) return;
+    if (pkg.processed) return;
 
-    for (let dep of pkg.dependencies)
+    for (let dep of pkg.localDependencies)
         await processPackage(dep, packageTree, command);
+
+    if (command === "list") {
+        if (!Object.values(packageTree).some((pkg) => pkg.processed))
+            logMain("Listing all packages in build order");
+        console.log(`${name} (${pkg.path})`);
+        pkg.processed = true;
+        return;
+    }
 
     const entries = Object.entries(packageTree);
     const total = entries.length;
-    const current = entries.filter(([, pkg]) => pkg.built).length + 1;
+    const current = entries.filter(([, pkg]) => pkg.processed).length + 1;
     logMain(`Executing ${command} for ${pkg.path} [${current}/${total}] ...`);
     await executeCommand(pkg, command);
-    pkg.built = true;
+    pkg.processed = true;
 }
 
 async function processAll(packageTree, command) {
+    if (command === "list-deps") {
+        logDependencies(packageTree);
+        return;
+    }
+
     for (let name of Object.keys(packageTree))
         await processPackage(name, packageTree, command);
 }
@@ -160,10 +209,10 @@ async function main() {
     try {
         const packageTree = createPackageTree(metaManifest);
         await processAll(packageTree, command);
-        logMain("Build succeeded!");
+        logMain(`Command '${command}' succeeded!`);
         return 0;
     } catch (error) {
-        logMain(`Build failed: ${error}\n`);
+        logMain(`Command '${command}' failed: ${error}\n`);
         return 1;
     }
 }

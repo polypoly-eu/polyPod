@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
-import DataTypeBubbles from "../../components/dataViz/dataTypeBubbles.jsx";
+import DataTypeBubbleAll from "../../components/dataViz/dataTypeBubbleAll.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";
 import DataTypeBubbleCorrelation from "../../components/dataViz/dataTypeBubbleCorrelation.jsx";
 import PurposeChart from "../../components/dataViz/purposeChart.jsx";
@@ -41,7 +41,7 @@ const DataExplorationScreen = ({
 }) => {
     //Methods
     const getCategories = () =>
-        Object.keys(highlights[company.name]?.dataTypeCategories || {});
+        Object.keys(highlights[company.ppid]?.dataTypeCategories || {});
 
     const getTotalTypesShared = () => {
         let total = 0;
@@ -250,7 +250,7 @@ const DataExplorationScreen = ({
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
                     </h1>
-                    <DataTypeBubbles
+                    <DataTypeBubbleAll
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
@@ -285,7 +285,7 @@ const DataExplorationScreen = ({
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
                     </h1>
-                    <DataTypeBubbles
+                    <DataTypeBubbleAll
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
@@ -312,7 +312,7 @@ const DataExplorationScreen = ({
                         width={visualizationWidth}
                         height={visualizationHeight}
                         highlightedType={
-                            highlights[company.name].dataTypeCategories[
+                            highlights[company.ppid].dataTypeCategories[
                                 activeScreen.split("_")[1]
                             ].category
                         }
@@ -339,7 +339,7 @@ const DataExplorationScreen = ({
                             "dataExplorationScreen:dataTypes.heading.correlations"
                         )}
                     </h2>
-                    <DataTypeBubbles
+                    <DataTypeBubbleAll
                         data={company.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
@@ -366,7 +366,7 @@ const DataExplorationScreen = ({
                         data={company.dataTypesShared}
                         correlationColor="#FB8A89"
                         typeBundle={
-                            highlights[company.name]?.dataTypeCorrelation
+                            highlights[company.ppid]?.dataTypeCorrelation
                                 .types || []
                         }
                         width={visualizationWidth}
@@ -400,6 +400,7 @@ const DataExplorationScreen = ({
                         width={visualizationWidth}
                         height={visualizationHeight}
                         bubbleColor="var(--data-exp-companies)"
+                        highlight={highlights[company.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
                     <p className="bubble-source">
@@ -429,6 +430,7 @@ const DataExplorationScreen = ({
                         height={visualizationHeight}
                         opacity={0.1}
                         bubbleColor="var(--data-exp-companies)"
+                        highlight={highlights[company.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
                     <p className="bubble-source">
@@ -469,7 +471,7 @@ const DataExplorationScreen = ({
                         height={visualizationHeight}
                         bubbleColor="var(--data-exp-companies)"
                         maxCompanies={maxCompanies}
-                        highlight={highlights[company.name]?.dataRecipient}
+                        highlight={highlights[company.ppid]?.dataRecipient}
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia

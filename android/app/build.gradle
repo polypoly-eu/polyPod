@@ -15,14 +15,14 @@ static def polyEpoch() {
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "coop.polypoly.polypod"
         minSdkVersion 24 // as long as we use the system WebView, going lower would mean a lot of limitations for feature developers
         targetSdkVersion 29 // cannot use 30 because of Robolectric's lack of support for that, see https://github.com/robolectric/robolectric/issues/5644
         versionCode polyEpoch()
-        versionName "1.1.1"
+        versionName "1.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -143,22 +143,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.3.0'
 }
 
-task copyFeatureContainerBootstrap(type: Copy) {
-    from "../../core/podigree/dist/bootstrap.js"
+task copyRemotePod(type: Copy) {
+    from "../../core/communication/remote-pod/dist/bootstrap.js"
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
 }
 
-task packageAndCopyBundledFeatures
-
-["polyExplorer", "polyPreview"].each { featureName ->
-    def taskName = "packageAndCopyFeature_$featureName"
-    task "$taskName"(type: Zip) {
-        archiveFileName = "${featureName}.zip"
-        destinationDirectory = file("$buildDir/generated-assets/features")
-        from "$projectDir/../../features/$featureName/dist"
+task copyBundledFeatures(type: Copy) {
+    from ("../../features/bundle/dist") {
+        include "*.zip"
     }
-    packageAndCopyBundledFeatures.dependsOn "$taskName"
+    into "build/generated-assets/features"
 }
 
 task packageTestFeature(type: Zip) {
@@ -191,8 +186,8 @@ task copyTestFeatureOntoDevice {
 
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
-        task.dependsOn copyFeatureContainerBootstrap
-        task.dependsOn packageAndCopyBundledFeatures
+        task.dependsOn copyRemotePod
+        task.dependsOn copyBundledFeatures
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice

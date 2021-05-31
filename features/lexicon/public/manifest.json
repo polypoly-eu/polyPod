@@ -1,0 +1,14 @@
+{
+    "name": "Lexicon",
+    "author": "polypoly Cooperative",
+    "thumbnail": "images/thumbnail.png",
+    "primaryColor": "#FFF5F5",
+    "links": {
+        "membership": "https://polypoly.coop/en-de/membership"
+    },
+    "translations": {
+        "de": {
+            "author": "polypoly - Die Genossenschaft"
+        }
+    }
+}

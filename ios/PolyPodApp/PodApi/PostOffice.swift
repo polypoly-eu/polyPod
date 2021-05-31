@@ -1,4 +1,5 @@
 import UIKit
+import MessagePack
 
 class PostOffice {
     static let shared = PostOffice()
@@ -121,7 +122,7 @@ extension PostOffice {
             }
             
             guard let quads = quads else {
-                completionHandler(nil, MessagePackValue(PolyApiError.unknown.localizedDescription))
+                completionHandler(nil, MessagePackValue(PodApiError.unknown.localizedDescription))
                 return
             }
             
@@ -178,7 +179,7 @@ extension PostOffice {
                 return
             }
             guard let fetchResponse = fetchResponse else {
-                completionHandler(nil, MessagePackValue(PolyApiError.unknown.localizedDescription))
+                completionHandler(nil, MessagePackValue(PodApiError.unknown.localizedDescription))
                 return
             }
             
@@ -199,7 +200,7 @@ extension PostOffice {
                 return
             }
             guard let fileStats = fileStats else {
-                completionHandler(nil, MessagePackValue(PolyApiError.unknown.localizedDescription))
+                completionHandler(nil, MessagePackValue(PodApiError.unknown.localizedDescription))
                 return
             }
             let object = fileStats.messagePackObject
@@ -230,7 +231,7 @@ extension PostOffice {
                 completionHandler(.binary(asBinary), nil)
                 return
             }
-            completionHandler(nil, MessagePackValue(PolyApiError.unknown.localizedDescription))
+            completionHandler(nil, MessagePackValue(PodApiError.unknown.localizedDescription))
         }
     }
     

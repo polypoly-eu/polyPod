@@ -1,12 +1,16 @@
 # The polyPod core code
 
-This is the platform independent core logic of the polyPod - all the inner
-workings such as feature runtime and data storage, as well as all APIs available
-to features.
+This is the platform independent, shared code of the polyPod.
 
-## Please note
+## Overview
 
-This code used to be spread across more than a dozen individual repositories,
-and it is not particularly coherent at the moment. We are working on improving
-the structure and documentation, as well as implementing missing functionality -
-a lot.
+- [api](api) - Specs, tests and reference implementations for all JavaScript
+  APIs between polyPod and features.
+- [communication](communication) - Communication layer between polyPod and
+  features.
+- [utils](utils) - Utility packages we felt the need to write. Nothing in there
+  is actually core logic, ideally we get rid of all of our own utilities in
+  favour of solid third party code.
+- [legacy](legacy) - Code we aim to remove, but keep on working for now, either
+  because it is still being used, or because we still want to retain parts of
+  it.

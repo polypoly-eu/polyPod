@@ -2,8 +2,11 @@
 **/.gradle
 /local.properties
 .idea
-.DS_Store
 **/build
 /captures
 .externalNativeBuild
 .cxx
+
+# VSCode files and directories
+.project
+.settings
