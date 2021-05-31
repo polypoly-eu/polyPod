@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '12','14','15','16' ]
+        node: [ '12','14','16' ]
     name: Unit tests and lint for silly-i18n and node version ${{matrix.node}}
     env:
       silly-i18n-dir: ./core/utils/silly-i18n/
