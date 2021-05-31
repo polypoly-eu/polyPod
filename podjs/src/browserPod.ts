@@ -11,6 +11,7 @@ import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import { Manifest, readManifest } from "@polypoly-eu/manifest-parser";
 
+const NAV_FRAME_ID = "polyNavFrame";
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
     private store = JSON.parse(
@@ -119,7 +120,7 @@ class BrowserPolyNav implements PolyNav {
     async setTitle(title: string): Promise<void> {
         window.currentTitle = title;
         const injection = document.getElementById(
-            "polyNavFrame"
+            NAV_FRAME_ID
         ) as HTMLIFrameElement;
 
         injection?.contentWindow?.postMessage(title, "*");
@@ -151,7 +152,7 @@ export class BrowserPod implements Pod {
             const injection = document.createElement("iframe");
             injection.style.width = "100%";
             injection.style.height = "50px";
-            injection.id = "polyNavFrame";
+            injection.id = NAV_FRAME_ID;
             const source = `
             <html>
                 <body style="background-color: ${

@@ -17,7 +17,7 @@ export async function pkg(rootDir: string, manifest: Manifest, target: string): 
     const featureDir = join(target, "feature");
     await fs.mkdir(featureDir);
 
-    await copy(join(rootDir, manifest.root), featureDir);
+    await copy(rootDir, featureDir);
 
     await fs.copyFile(
         require.resolve("@polypoly-eu/remote-pod/dist/bootstrap.js"),
