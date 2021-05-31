@@ -14,6 +14,7 @@ module.exports = {
     CustomEvent: true,
     beforeEach: true,
     afterEach: true,
+    document: true,
   },
   rules: {
     semi: 2,
