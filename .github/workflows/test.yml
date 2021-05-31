@@ -23,6 +23,15 @@ jobs:
         run: ./build.js
       - name: Test core and features
         run: xvfb-run --auto-servernum ./build.js test
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            android:
+            - 'android/**'
+            - 'core/api/fetch-spec/**'
+            - 'core/communication/bubblewrap/**'
       - name: Test android
+        if: steps.changes.outputs.android == 'true'
         working-directory: android
         run: ./gradlew test
