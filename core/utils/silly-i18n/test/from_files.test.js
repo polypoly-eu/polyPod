@@ -15,7 +15,7 @@ describe("Test possible errors", () => {
         I18n.fromFiles("WAT").catch( (error) => {
             console.log(error);
             expect(error).toBeInstanceOf(FileNotFoundError);
-//            expect(error).toEqual(expect.stringMatching(/found/));
+            expect(error.message).toEqual(expect.stringMatching(/found/));
         });
     });
 });
