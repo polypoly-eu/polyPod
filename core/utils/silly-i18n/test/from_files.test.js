@@ -4,19 +4,16 @@ import {
     I18n,
 } from "../src/index.js";
 
-beforeAll(() => {
-//    i18n = I18n.fromFiles("test/locales");
+beforeAll(async () => {
+    i18n = await I18n.fromFiles("test/locales");
 });
 
 describe("Test possible errors", () => {
     it("Throws when the directory does not exist", () => {
-        let thrownError;
-        try {
-            I18n.fromFiles("WAT");
-        } catch (error) {
-            thrownError = error;
-        }
-        expect(thrownError).toBeInstanceOf(FileNotFoundError);
-        expect(thrownError.message).toEqual(expect.stringMatching(/found/));
+        I18n.fromFiles("WAT").catch( (error) => {
+            console.log(error);
+            expect(error).toBeInstanceOf(FileNotFoundError);
+//            expect(error).toEqual(expect.stringMatching(/found/));
+        });
     });
 });

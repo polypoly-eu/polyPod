@@ -1,4 +1,6 @@
-import { existsSync } from "fs";
+import { existsSync, lstatSync, readFileSync } from "fs";
+import { getAllFilePaths } from "cup-readdir"
+import { dirname, basename, sep } from "path"
 
 /**
  * Determines the environment language
@@ -80,7 +82,7 @@ export class I18n {
             this._translations = translations[this.language];
         } else {
             throw new LanguageError(
-                "${language} is not a key in the translations hash provided"
+                language + " is not a key in the translations hash provided"
             );
         }
         Object.freeze(this);
@@ -126,9 +128,26 @@ export class I18n {
      
      * @returns an instance of a I18n object
      */
-    static fromFiles(directory) {
+    static async fromFiles(directory) {
         if (!existsSync(directory)) {
-            throw new FileNotFoundError("${directory} can't be found");
+            await Promise.reject( new FileNotFoundError("${directory} can't be found") );
         }
+        if (!lstatSync(directory).isDirectory ) {
+            await Promise.reject( new FileNotFoundError("${directory} is not really a directory") );
+        }
+        let files = await getAllFilePaths( directory );
+
+        let translations = {};
+        files.forEach( (f) => {
+            const language = dirname(f).split(sep).reverse()[0]
+            const ns = basename(f,".json");
+            console.log(JSON.parse( readFileSync(f)));
+            if ( !(language in translations) ) {
+                translations[language] = {}
+            }
+            translations[language][ns] = JSON.parse( readFileSync(f));
+        });
+        console.log(translations);
+        return new I18n( determineLanguage(), translations );
     }
 }
