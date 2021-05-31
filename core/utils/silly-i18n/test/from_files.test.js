@@ -8,7 +8,12 @@ beforeAll(async () => {
 
 describe("Test existing keys", () => {
     it("Has the right amount of keys", () => {
-        expect(Object.keys(i18n._translations).length ).toEqual(1);
+        expect(i18n.namespaces.length ).toEqual(1);
+    });
+
+    it("can be created the right amount of keys", async () => {
+        const i18nNew = await I18n.fromFiles("test/locales");
+        expect(i18nNew.namespaces.length ).toEqual(1);
     });
 });
 

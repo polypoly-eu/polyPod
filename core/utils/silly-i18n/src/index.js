@@ -152,4 +152,11 @@ export class I18n {
         });
         return new I18n(determineLanguage(), translations);
     }
+
+    /**
+     * @return the namespaces in the current translation dictionary
+     */
+    get namespaces() {
+        return Object.keys( this._translations );
+    }
 }
