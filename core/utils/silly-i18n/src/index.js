@@ -157,6 +157,6 @@ export class I18n {
      * @return the namespaces in the current translation dictionary
      */
     get namespaces() {
-        return Object.keys( this._translations );
+        return Object.keys(this._translations);
     }
 }
