@@ -12,7 +12,7 @@
 		"recurse"	:"true"
 	},
 	"templates" : {
-		"cleverLinks"     : false,
+		"cleverLinks"     : true,
 		"monospaceLinks"  : false
 	},
 	"source":

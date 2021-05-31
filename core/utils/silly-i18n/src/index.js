@@ -6,10 +6,14 @@
 export const determineLanguage = () =>
     Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
 
+/**
+* Exception class for errors related to the language that is
+* requested for the translation object
+* @class
+*/
 export class LanguageError extends Error {
     /**
-     * Exception class for errors related to the language that is
-     * requested for the translation object
+     * Class constructor
      *
      * @param message - Actual message included in the error
      */
@@ -19,10 +23,15 @@ export class LanguageError extends Error {
     }
 }
 
+/**
+ * Exception class to use when there's some problem with the key used
+ * in the translation, either the format or its existence.
+ * 
+ * @class
+ */
 export class TranslationKeyError extends Error {
     /**
-     * Exception class to use when there's some problem with the key used
-     * in the translation, either the format or its existence.
+     * Class constructor
      *
      * @param message - Message to include in the error
      */
@@ -32,12 +41,17 @@ export class TranslationKeyError extends Error {
     }
 }
 
+/**
+ * Simple class for performing string translations, with simple templating capabilities
+ * 
+ * @class
+ */
 export class I18n {
     /**
-     * Simple class for performing string translations, includigng parameters
+     * Class constructor
      *
      * @param language - two-letter language code, which should be a key in the translation hash
-     * @param translations - translations hash
+     * @param translations - translations hash. This is going to have the format `namespace ⇒ key ⇒ string`
      * @throws LanguageError - if the language key is not included in the translations hash
      */
     constructor(language, translations) {
@@ -52,7 +66,8 @@ export class I18n {
     }
 
     /**
-     * 
+     * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
+     *
      * @param key - the translation key in the `namespace:key` format
      * @param options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash
      * @throws TranslationKeyError - if the translation key does not have the correct format, or is missing the key part, or the key does not exist.
