@@ -36,8 +36,9 @@ export class I18n {
     /**
      * Simple class for performing string translations, includigng parameters
      *
-     * @param language two-letter language code, which should be a key in the translation hash
-     * @param translations translation hash
+     * @param language - two-letter language code, which should be a key in the translation hash
+     * @param translations - translations hash
+     * @throws LanguageError - if the language key is not included in the translations hash
      */
     constructor(language, translations) {
         if (language in translations) {
@@ -50,6 +51,13 @@ export class I18n {
         }
     }
 
+    /**
+     * 
+     * @param key - the translation key in the `namespace:key` format
+     * @param options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash
+     * @throws TranslationKeyError - if the translation key does not have the correct format, or is missing the key part, or the key does not exist.
+     * @returns The translated string.
+     */
     t(key, options = {}) {
         if (key.search(/:/) == -1) {
             throw new TranslationKeyError(
