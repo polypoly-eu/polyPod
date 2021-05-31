@@ -4,7 +4,8 @@
   "scripts": {
     "lint": "eslint src test",
     "lint:fix": "eslint --fix src/index.js test/basic.test.js",
-    "test": "jest"
+    "test": "jest",
+    "doc": "tsdoc"
   },
   "jest": {
     "collectCoverage": true,

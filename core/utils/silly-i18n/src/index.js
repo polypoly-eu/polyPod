@@ -7,10 +7,10 @@ export const determineLanguage = () =>
     Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
 
 /**
-* Exception class for errors related to the language that is
-* requested for the translation object
-* @class
-*/
+ * Exception class for errors related to the language that is
+ * requested for the translation object
+ * @class
+ */
 export class LanguageError extends Error {
     /**
      * Class constructor
@@ -26,7 +26,7 @@ export class LanguageError extends Error {
 /**
  * Exception class to use when there's some problem with the key used
  * in the translation, either the format or its existence.
- * 
+ *
  * @class
  */
 export class TranslationKeyError extends Error {
@@ -43,7 +43,7 @@ export class TranslationKeyError extends Error {
 
 /**
  * Simple class for performing string translations, with simple templating capabilities
- * 
+ *
  * @class
  */
 export class I18n {
