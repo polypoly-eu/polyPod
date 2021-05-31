@@ -30,5 +30,8 @@
     "tsdoc": "^0.0.4"
   },
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "cup-readdir": "^1.0.3"
+  }
 }
