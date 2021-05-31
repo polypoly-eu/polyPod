@@ -12,6 +12,8 @@ import * as RDF from "rdf-js";
 import { Manifest, readManifest } from "@polypoly-eu/manifest-parser";
 
 const NAV_FRAME_ID = "polyNavFrame";
+const NAV_DEFAULT_BACKGROUND_COLOR = "white";
+const NAV_DEFAULT_FOREGROUND_COLOR = "khaki";
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
     private store = JSON.parse(
@@ -156,16 +158,16 @@ export class BrowserPod implements Pod {
             const source = `
             <html>
                 <body style="background-color: ${
-                    window.manifest.primaryColor || "white"
+                    window.manifest.primaryColor || NAV_DEFAULT_BACKGROUND_COLOR
                 }">
                     <script>
                         window.addEventListener("message", (event) => {
                             document.getElementById("title").textContent = event.data;
                         });
                     </script>
-                    <h1 id="title" style="color: khaki">${
-                        window.parent.currentTitle
-                    }<h1>
+                    <h1 id="title" style="color: ${NAV_DEFAULT_FOREGROUND_COLOR}">
+                        ${window.parent.currentTitle}
+                    <h1>
                 </body>
             </html>
             `;
