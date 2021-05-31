@@ -35,30 +35,14 @@ const globalTheme = css`
 
     /* Font */
     --poly-font-family-regular-name: var(--font-family-regular-name, "Jost");
-    --poly-font-family-regular-url: var(
-      --font-family-regular-url,
-      url("public/fonts/jost_regular.ttf")
-    );
     --poly-font-family-light-name: var(--font-family-light-name, "Jost Light");
-    --poly-font-family-light-url: var(
-      --font-family-light-url,
-      url("public/fonts/jost_light.ttf")
-    );
     --poly-font-family-medium-name: var(
       --font-family-medium-name,
       "Jost Medium"
     );
-    --poly-font-family-medium-url: var(
-      --font-family-medium-url,
-      url("public/fonts/jost_medium.ttf")
-    );
     --poly-font-family-poly-display-name: var(
       --font-family-poly-display-name,
       "polyDisplay"
-    );
-    --poly-font-family-poly-display-url: var(
-      --font-family-poly-display-url,
-      url("public/fonts/polydisplay_semi_1_0.otf")
     );
 
     /* Font sizes */
@@ -70,33 +54,6 @@ const globalTheme = css`
     --poly-font-weight-regular: var(--font-weight-regular, 400);
     --poly-font-weight-irrelevant: var(--font-weight-irrelevant, 200);
     --poly-font-weight-important: var(--font-weight-important, 800);
-  }
-
-  @font-face {
-    font-family: var(--poly-font-family-regular-name);
-    src: var(--poly-font-family-regular-url);
-  }
-
-  @font-face {
-    font-family: var(--poly-font-family-light-name);
-    src: var(--poly-font-family-light-url);
-  }
-
-  @font-face {
-    font-family: var(--poly-font-family-medium-name);
-    src: var(--poly-font-family-medium-url);
-  }
-
-  @font-face {
-    font-family: var(--poly-font-family-poly-display-name);
-    src: var(--poly-font-family-poly-display-url);
-  }
-
-  * {
-    font-family: var(--poly-font-family-regular-name);
-    font-weight: var(--poly-font-weight-regular);
-    letter-spacing: var(--poly-letter-spacing);
-    color: var(--poly-color-text-light);
   }
 `;
 

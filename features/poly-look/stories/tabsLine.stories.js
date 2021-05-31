@@ -1,5 +1,6 @@
 import { html } from "lit-element";
 import "../poly-look.js";
+import { themeConfiguration } from "./themeConfiguration";
 
 export default {
   title: "Visuals/Molecule/Tabs",
@@ -17,6 +18,7 @@ function Template({
   ],
 }) {
   return html`
+    ${themeConfiguration()}
     <poly-tabs .tabs=${tabs}>
       <div slot="tab01" style="color: black;"><h1>This is the tab 01</h1></div slot="tab01">
       <div slot="tab02" style="color: black;"><h1>This is the tab 02</h1></div slot="tab01">
