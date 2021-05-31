@@ -24,6 +24,7 @@ import OnboardingScreenThree from "../onboarding/OnboardingScreenThree";
 import OnboardingScreenFour from "../onboarding/OnboardingScreenFour";
 
 export default function AppNavigator() {
+    //TODO: RDF triple store
     const [onboardingShown, setOnboardingShown] = useState(null);
     const [languageInitialized, setLanguageInitialized] = useState(false);
     const { t, i18n, ready } = useTranslation(null, { useSuspense: false });

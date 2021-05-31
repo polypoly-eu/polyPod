@@ -400,6 +400,7 @@ const DataExplorationScreen = ({
                         width={visualizationWidth}
                         height={visualizationHeight}
                         bubbleColor="var(--data-exp-companies)"
+                        highlight={highlights[company.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
                     <p className="bubble-source">
@@ -429,6 +430,7 @@ const DataExplorationScreen = ({
                         height={visualizationHeight}
                         opacity={0.1}
                         bubbleColor="var(--data-exp-companies)"
+                        highlight={highlights[company.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
                     <p className="bubble-source">
