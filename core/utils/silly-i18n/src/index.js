@@ -134,7 +134,6 @@ export class I18n {
                 new FileNotFoundError(directory + " can't be found")
             );
         }
-        console.log(lstatSync(directory));
         if (!lstatSync(directory).isDirectory()) {
             await Promise.reject(
                 new FileNotFoundError(directory + " is not really a directory")

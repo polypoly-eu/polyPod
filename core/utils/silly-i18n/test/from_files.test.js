@@ -8,7 +8,7 @@ beforeAll(async () => {
 
 describe("Test existing keys", () => {
     it("Has the right amount of keys", () => {
-        expect(Object.keys(i18n.translations)).toEqual(1);
+        expect(Object.keys(i18n._translations).length ).toEqual(1);
     });
 });
 
