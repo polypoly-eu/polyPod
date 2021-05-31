@@ -1,4 +1,4 @@
-import {existsSync} from 'fs'
+import { existsSync } from "fs";
 
 /**
  * Determines the environment language
@@ -44,6 +44,24 @@ export class TranslationKeyError extends Error {
 }
 
 /**
+ * Exception class to use when there's some problem with the key used
+ * in the translation, either the format or its existence.
+ *
+ * @class
+ */
+export class FileNotFoundError extends Error {
+    /**
+     * Class constructor
+     *
+     * @param message - Message to include in the error
+     */
+    constructor(message) {
+        super(message);
+        this.name = "FileNotFoundError";
+    }
+}
+
+/**
  * Simple class for performing string translations, with simple templating capabilities
  *
  * @class
@@ -65,7 +83,7 @@ export class I18n {
                 "${language} is not a key in the translations hash provided"
             );
         }
-        Object.freeze(this)
+        Object.freeze(this);
     }
 
     /**
@@ -108,9 +126,9 @@ export class I18n {
      
      * @returns an instance of a I18n object
      */
-    fromFiles( directory ){
-        if ( ! existsSync( directory )) {
-            throw new FileNotFoundException( "${directory} can't be found")
+    fromFiles(directory) {
+        if (!existsSync(directory)) {
+            throw new FileNotFoundError("${directory} can't be found");
         }
     }
 }
