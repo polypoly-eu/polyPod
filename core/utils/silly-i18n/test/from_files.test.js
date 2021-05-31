@@ -4,6 +4,8 @@ import {
     I18n,
 } from "../src/index.js";
 
+let i18n;
+
 beforeAll(async () => {
     i18n = await I18n.fromFiles("test/locales");
 });
