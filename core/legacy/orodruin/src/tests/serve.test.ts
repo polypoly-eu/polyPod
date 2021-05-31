@@ -18,8 +18,6 @@ describe("Serve", () => {
             {
                 name: "test",
                 version: parse("0.0.0")!,
-                api: new Range("0.0.0"),
-                root: "data",
                 description: "test",
                 thumbnail: "thumbnail_test",
                 primaryColor: "#000000",

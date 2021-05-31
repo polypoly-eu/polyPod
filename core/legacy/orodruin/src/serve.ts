@@ -34,7 +34,7 @@ export async function serve(
         response.setHeader("Content-Type", "text/javascript");
         response.end(bootstrap);
     });
-    app.use("/feature", serveStatic(join(rootDir, manifest.root)) as NextHandleFunction);
+    app.use("/feature", serveStatic(join(rootDir, "")) as NextHandleFunction);
     app.use("/", async (request: IncomingMessage, response: ServerResponse) => {
         if (request.url === "/") {
             const template = await fs.readFile(
