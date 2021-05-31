@@ -1,5 +1,6 @@
 import { html } from "lit-element";
 import "../poly-look.js";
+import { themeConfiguration } from "./themeConfiguration";
 
 export default {
   title: "Visuals/Atoms/Tab",
@@ -21,6 +22,7 @@ function Template({
   onPolyTabPressed,
 }) {
   return html`
+    ${themeConfiguration()}
     <poly-tab
       .label=${label}
       .value=${value}
