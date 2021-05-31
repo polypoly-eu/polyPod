@@ -126,7 +126,7 @@ export class I18n {
      
      * @returns an instance of a I18n object
      */
-    fromFiles(directory) {
+    static fromFiles(directory) {
         if (!existsSync(directory)) {
             throw new FileNotFoundError("${directory} can't be found");
         }
