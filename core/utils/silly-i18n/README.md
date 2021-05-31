@@ -10,4 +10,4 @@ pretty silly.
 
 ## Usage
 
-It includes very basic language capabilities based on the browser language feature. You will need to set language by hand in case it's outside the browser.
+It includes very basic language capabilities based on the browser language feature.
