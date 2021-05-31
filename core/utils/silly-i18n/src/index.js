@@ -146,7 +146,6 @@ export class I18n {
         files.forEach((f) => {
             const language = dirname(f).split(sep).reverse()[0];
             const ns = basename(f, ".json");
-            console.log(JSON.parse(readFileSync(f)));
             if (!(language in translations)) {
                 translations[language] = {};
             }
