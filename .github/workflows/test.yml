@@ -9,9 +9,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16.x
-      - uses: actions/setup-java@v1
-        with:
-          java-version: 8
       - name: Lint core and features
         run: |
           pushd eslint-config
@@ -31,6 +28,10 @@ jobs:
             - 'android/**'
             - 'core/api/fetch-spec/**'
             - 'core/communication/bubblewrap/**'
+      - uses: actions/setup-java@v1
+        if: steps.changes.outputs.android == 'true'
+        with:
+          java-version: 8
       - name: Test android
         if: steps.changes.outputs.android == 'true'
         working-directory: android
