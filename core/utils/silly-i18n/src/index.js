@@ -1,3 +1,5 @@
+import {existsSync} from 'fs'
+
 /**
  * Determines the environment language
  *
@@ -94,5 +96,21 @@ export class I18n {
         for (let [name, value] of Object.entries(options))
             translation = translation.replace(`{{${name}}}`, value);
         return translation;
+    }
+
+    /**
+     * Builds the translation hash from files in a directory with the structure
+     * languagekey
+     *      - namespace
+     *          - stringKeys
+     *
+     * @param directory - the directory files are in
+     
+     * @returns an instance of a I18n object
+     */
+    fromFiles( directory ){
+        if ( ! existsSync( directory )) {
+            throw new FileNotFoundException( "${directory} can't be found")
+        }
     }
 }
