@@ -3,9 +3,9 @@
 set -ex
 
 npm run build
-orodruin test
-orodruin test -b
+orodruin test -d dist
+orodruin test -b -d dist
 
-orodruin package ./static
+orodruin package ./static -d dist
 
 node test-package.js

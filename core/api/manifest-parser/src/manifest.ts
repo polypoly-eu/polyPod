@@ -36,6 +36,9 @@ function expect<I, A>(input: I, msg: string, decoder: Decode.Decoder<I, A>): A {
 const relativeDecoder = pipe(
     Decode.string,
     Decode.parse((string) => {
+        if (typeof document == "undefined") {
+            return Decode.success(string);
+        }
         const url = new URL(string, document.location.href);
         console.log(url.toString());
         if (url.toString() == "") return Decode.failure(string, "relative");

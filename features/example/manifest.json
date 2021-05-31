@@ -7,8 +7,8 @@
         "link1": "https://example.com/1",
         "link2": "https://example.com/2"
     },
-    "translations": [
-      {
+    "translations": {
+      "de": {
         "language": "de",
         "description": "Das ist eine Beispiel-Feature",
         "links": {
@@ -16,5 +16,6 @@
             "link2": "https://example.com/2"
         }
       }
-    ]
+    },
+    "version": "0.0.1"
   }
