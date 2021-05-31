@@ -63,6 +63,7 @@ export class I18n {
                 "${language} is not a key in the translations hash provided"
             );
         }
+        Object.freeze(this)
     }
 
     /**
