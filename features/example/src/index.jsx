@@ -2,33 +2,39 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 function Quad({ quad }) {
-    return <li>
-	       <table>
-		   <tbody>
-		       <tr>
-			   <th>Subject</th>
-			   <td>{JSON.stringify(quad.subject)}</td>
-		       </tr>
-		       <tr>
-			   <th>Predicate</th>
-			   <td>{JSON.stringify(quad.predicate)}</td>
-		       </tr>
-		       <tr>
-			   <th>Object</th>
-			   <td>{JSON.stringify(quad.object)}</td>
-		       </tr>
-		   </tbody>
-	       </table>
-	   </li>;
+    return (
+        <li>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Subject</th>
+                        <td>{JSON.stringify(quad.subject)}</td>
+                    </tr>
+                    <tr>
+                        <th>Predicate</th>
+                        <td>{JSON.stringify(quad.predicate)}</td>
+                    </tr>
+                    <tr>
+                        <th>Object</th>
+                        <td>{JSON.stringify(quad.object)}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </li>
+    );
 }
 
 function Quads({ quads }) {
-    return <ul>{
-        quads.map((quad, idx) => <Quad quad={quad} key={idx} />)
-    }</ul>;
+    return (
+        <ul>
+            {quads.map((quad, idx) => (
+                <Quad quad={quad} key={idx} />
+            ))}
+        </ul>
+    );
 }
 
-const {dataFactory, polyIn} = window.pod;
+const { dataFactory, polyIn } = window.pod;
 const quad = dataFactory.quad(
     dataFactory.namedNode("http://example.org/s"),
     dataFactory.namedNode("http://example.org/p"),
@@ -46,6 +52,6 @@ const quad = dataFactory.quad(
 
     if (window.testCompleted)
         window.testCompleted({
-            failures: selected.length === 1 ? 0 : 1
+            failures: selected.length === 1 ? 0 : 1,
         });
 })();

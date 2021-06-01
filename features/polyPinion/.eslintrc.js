@@ -1,6 +1,4 @@
 module.exports = {
-    extends: ["@polypoly-eu/eslint-config"],
-    plugins: ["react"],
     rules: {
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",

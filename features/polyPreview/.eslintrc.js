@@ -1,7 +1,4 @@
 module.exports = {
-    extends: [
-        "@polypoly-eu/eslint-config",
-    ],
     env: {
         browser: true,
         es6: true,
