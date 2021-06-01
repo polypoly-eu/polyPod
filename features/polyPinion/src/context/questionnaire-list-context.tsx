@@ -89,7 +89,6 @@ export const QuestionnaireListProvider: React.FC = ({ children }) => {
 
     const getNewActiveQuestionnairesMetadata = async () => {
         const resultValue = await downloadActiveQuestionnairesMetadata();
-        console.log(resultValue);
         const allActiveQuestionnairesMetadata = JSON.parse(resultValue);
         if (
             allActiveQuestionnairesMetadata === null ||
