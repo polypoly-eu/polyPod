@@ -114,6 +114,6 @@ export default class PpQuestion extends PpQObject {
 
     // Update the receiver based on the supplied answer (JSON object)
     loadAnswer(answer) {
-        throw Error("subclass responsibility");
+        throw Error("subclass responsibility, called with " + answer);
     }
 }
