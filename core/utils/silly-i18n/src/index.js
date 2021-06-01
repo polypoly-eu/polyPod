@@ -121,7 +121,10 @@ export class I18n {
     }
 
     /**
-     * This function is taken from cup-readdir, by blubitz, under the MIT license
+     * This function is taken from
+     * [cup-readdir, by blubitz](https://github.com/blubitz/cup-readdir/issues/1),
+     * under the MIT license
+     * 
      * @param dir - topmost directory
      * @returns - a list of the directories, with full paths
      */

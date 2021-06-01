@@ -6,6 +6,12 @@ beforeAll(async () => {
     i18n = await I18n.fromFiles("test/locales");
 });
 
+describe("Tests static file reading", () =>  {
+    it( "Gets all files", async () => {
+        expect((await I18n.getAllFilePaths("test/locales")).length).toEqual(3)
+    })
+})
+
 describe("Test existing keys", () => {
     it("Has the right amount of keys", () => {
         expect(i18n.namespaces.length).toEqual(1);
