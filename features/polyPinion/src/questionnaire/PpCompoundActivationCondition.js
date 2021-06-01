@@ -5,7 +5,7 @@
 import PpActivationCondition from "./PpActivationCondition.js";
 
 export default class PpCompoundActivationCondition extends PpActivationCondition {
-    constructor(question) {
+    constructor() {
         super();
         this._children = [];
     }
