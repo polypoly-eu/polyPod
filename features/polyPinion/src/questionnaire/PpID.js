@@ -1,7 +1,7 @@
 //
 // Global ID allocation for Questionnaire components
 //
-// Ideally, once the questionnaire goes public, any changes to 
+// Ideally, once the questionnaire goes public, any changes to
 // questions, e.g. different choices of words, emphasis, etc.,
 // should be tracked so that the impact from those changes
 // can be properly tracked and analysed.
@@ -13,7 +13,7 @@
 // properly provide IDs.
 //
 
-var nextGId = 1;
+let nextGId = 1;
 
 function nextGlobalId() {
     return nextGId++;
@@ -24,7 +24,7 @@ function currentGlobalId() {
 }
 
 function initializeGlobalId(an_integer) {
-    nextGid = an_integer
+    nextGId = an_integer;
 }
 
-export {nextGlobalId, currentGlobalId, initializeGlobalId};
+export { nextGlobalId, currentGlobalId, initializeGlobalId };

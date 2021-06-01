@@ -1,10 +1,10 @@
 //
-// PpAndActivationCondition is true if all its children are true. 
+// PpAndActivationCondition is true if all its children are true.
 //
-import PpCompoundActivationCondition from './PpCompoundActivationCondition.js';
+import PpCompoundActivationCondition from "./PpCompoundActivationCondition.js";
 
 export default class PpAndActivationCondition extends PpCompoundActivationCondition {
     isActive() {
-        return this.children.find((child) => !child.isActive()) == undefined
+        return this.children.find((child) => !child.isActive()) == undefined;
     }
 }

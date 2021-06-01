@@ -1,5 +1,5 @@
-import PpQuestion from './PpQuestion.js';
-import PpTextualChoice from './PpTextualChoice.js';
+import PpQuestion from "./PpQuestion.js";
+import PpTextualChoice from "./PpTextualChoice.js";
 
 export default class PpChoiceQuestion extends PpQuestion {
     constructor(description) {
@@ -21,8 +21,7 @@ export default class PpChoiceQuestion extends PpQuestion {
     // Update the other choices as required.
     // This will be overridden by subclasses if required.
     //
-    updateEnabled() {
-    }
+    updateEnabled() {}
 
     addTextualChoiceWithDescription(a_string) {
         let choice = new PpTextualChoice(a_string);
@@ -36,15 +35,15 @@ export default class PpChoiceQuestion extends PpQuestion {
 
     postJSONLoad(questionnaire) {
         super.postJSONLoad(questionnaire);
-        this._choices.forEach(choice => choice.question = this);
+        this._choices.forEach((choice) => (choice.question = this));
     }
 
     toString() {
-        var result = this.constructor.name + '(';
-        this.choices().forEach(choice => {
-            result += choice.index + ': ' + choice.isSelected() + ', ';
-        })
-        result += ')';
+        var result = this.constructor.name + "(";
+        this.choices().forEach((choice) => {
+            result += choice.index + ": " + choice.isSelected() + ", ";
+        });
+        result += ")";
         return result;
     }
 }

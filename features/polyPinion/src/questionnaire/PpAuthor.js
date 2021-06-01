@@ -1,21 +1,21 @@
-import PpQObject from './PpQObject.js';
+import PpQObject from "./PpQObject.js";
 
 //
 // PpAuthor - store details about the author of the questionnaire
 //
 // - _name: Author's name
 // - _link: URL to the author's home page
-// - _description: A description of the author.  This should be a key in to 
+// - _description: A description of the author.  This should be a key in to
 //   the questionnaire translation files.
 // - _logo: base64 encoded image
 //
 export default class PpAuthor extends PpQObject {
     constructor() {
-      super();
-      this._name = null;
-      this._link = null;
-      this._description = null;
-      this._logo = null;
+        super();
+        this._name = null;
+        this._link = null;
+        this._description = null;
+        this._logo = null;
     }
 
     get name() {
@@ -49,4 +49,4 @@ export default class PpAuthor extends PpQObject {
     set logo(base64String) {
         this._logo = base64String;
     }
-}  
+}

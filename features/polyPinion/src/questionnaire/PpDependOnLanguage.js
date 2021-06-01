@@ -1,8 +1,8 @@
-import PpActivationCondition from './PpActivationCondition.js';
+import PpActivationCondition from "./PpActivationCondition.js";
 
 //
 // PpDependOnLanguage is used to activate or deactivate questions
-// based on the question language of the questionnaire (which may 
+// based on the question language of the questionnaire (which may
 // be different from the language the questionnaire is displayed in).
 //
 // The language tag is assumed to be in the format:
@@ -11,9 +11,9 @@ import PpActivationCondition from './PpActivationCondition.js';
 // e.g.
 //      en_AU
 //
-// Comparisons are made by simply checking if the language 
+// Comparisons are made by simply checking if the language
 // string begins with the specified language string, so specifying
-// "en" will match all English language variants, while "en_AU" is 
+// "en" will match all English language variants, while "en_AU" is
 // specific to Australian English.
 //
 // String encoding, e.g. "en_AU.UTF-8", is ignored.
@@ -27,7 +27,7 @@ import PpActivationCondition from './PpActivationCondition.js';
 export default class PpDependOnLanguage extends PpActivationCondition {
     constructor(language_tags) {
         super();
-        this._language_tags = language_tags.map(x => x.toLowerCase());
+        this._language_tags = language_tags.map((x) => x.toLowerCase());
     }
 
     get language_tags() {
@@ -45,7 +45,6 @@ export default class PpDependOnLanguage extends PpActivationCondition {
 
     isActive() {
         let language = this.question_language.toLowerCase();
-        return this._language_tags
-            .find(tag => language.startsWith(tag)) != undefined;
+        return this._language_tags.find((tag) => language.startsWith(tag)) != undefined;
     }
 }
