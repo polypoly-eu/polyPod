@@ -72,10 +72,6 @@ export default class PpQuestionnaire extends PpQObject {
         return this._questions;
     }
 
-    answeredQuestions() {
-        return this.activeQuestions().filter((question) => question.isAnswered());
-    }
-
     firstActiveQuestion() {
         return this.activeQuestions()[0];
     }
