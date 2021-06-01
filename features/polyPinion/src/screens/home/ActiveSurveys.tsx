@@ -38,11 +38,11 @@ export default function ActiveSurveys() {
                 <Tab active={openTab == "expired" ? true : false}>
                     <p onClick={() => handleTabChange("expired")}>{t("home.tabs.expired")}</p>
                 </Tab>
-            </Tabs> 
+            </Tabs>
             <div className="surveys-list">
-            {displayedQuestionnaires.map((questionnaire) => (
-                <MainSurveyCard key={questionnaire.id} questionnaire={questionnaire} />
-            ))}
+                {displayedQuestionnaires.map((questionnaire) => (
+                    <MainSurveyCard key={questionnaire.id} questionnaire={questionnaire} />
+                ))}
             </div>
         </>
     );

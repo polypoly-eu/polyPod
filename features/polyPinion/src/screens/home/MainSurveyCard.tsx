@@ -23,7 +23,7 @@ const StatusHeader = ({ questionnaire }: { questionnaire: Questionnaire }) => {
     };
 
     //This needs test coverage
-    const calculateTimeStatus = (distance: number): String => {
+    const calculateTimeStatus = (distance: number): string => {
         if (distance < 0) return timeStatus.expired;
 
         const day = Math.floor(timeStatus.day(distance));
