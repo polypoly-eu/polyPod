@@ -1,7 +1,7 @@
 import { existsSync, lstatSync, readFileSync } from "fs";
 import { dirname, basename, sep } from "path";
-import fs from "fs"
-import path from "path"
+import fs from "fs";
+import path from "path";
 
 /**
  * Determines the environment language
@@ -14,7 +14,7 @@ export const determineLanguage = () =>
 /**
  * Exception class for errors related to the language that is
  * requested for the translation object
- * 
+ *
  * @class
  */
 export class LanguageError extends Error {
@@ -124,34 +124,36 @@ export class I18n {
      * This function is taken from
      * [cup-readdir, by blubitz](https://github.com/blubitz/cup-readdir/issues/1),
      * under the MIT license
-     * 
+     *
      * @param dir - topmost directory
      * @returns - a list of the directories, with full paths
      */
     static async getAllFilePaths(dir) {
-        let filePaths = []
+        let filePaths = [];
         async function recur(dir) {
             try {
-                let items = await fs.promises.readdir(dir, {withFileTypes: true})
-                let pendingDirs = []
+                let items = await fs.promises.readdir(dir, {
+                    withFileTypes: true,
+                });
+                let pendingDirs = [];
 
-                items.forEach( (item) => {
-                    let url = path.join(dir, item.name)
+                items.forEach((item) => {
+                    let url = path.join(dir, item.name);
                     if (item.isDirectory()) {
-                        pendingDirs.push( recur(url) )
+                        pendingDirs.push(recur(url));
                     } else if (item.isFile()) {
-                        filePaths.push(url)
+                        filePaths.push(url);
                     }
                 });
 
-                return Promise.all(pendingDirs)
+                return Promise.all(pendingDirs);
             } catch (err) {
-                console.log(err)
+                console.log(err);
             }
         }
 
-        await recur(dir)
-        return filePaths
+        await recur(dir);
+        return filePaths;
     }
 
     /**
@@ -194,5 +196,4 @@ export class I18n {
     get namespaces() {
         return Object.keys(this._translations);
     }
-
 }
