@@ -117,7 +117,15 @@ export default {
 			"select-all-apply" : "Bitte alles Zutreffende auswählen:",
 			"i-dont-know" : "Ich habe keine Ahnung",
 			"enter-answer-below" : "Bitte trage hier deine Antwort ein:",
-			"choose-up-to" : "Bitte bis zu {{max_selections}} Antworten aus der Liste auswählen:"
+			"choose-up-to" : "Bitte bis zu {{max_selections}} Antworten aus der Liste auswählen:",
+            "time": {
+                "minute" : {
+                    "one": "Minute",
+                    "many": "Minuten"
+                },
+                "hour": { "one": "Stunde", "many": "Stunden" },
+                "day": {"one": "Tag", "many": "Tage"}
+            }
 		},
 		"intro" : {
 			"author" : "Autor",

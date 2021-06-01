@@ -117,7 +117,15 @@ export default {
 			"select-all-apply" : "Please select all that apply:",
 			"i-dont-know" : "I don't know",
 			"enter-answer-below" : "Enter your answer below:",
-			"choose-up-to" : "Choose up to {{max_selections}} answers from the following list:"
+			"choose-up-to" : "Choose up to {{max_selections}} answers from the following list:",
+            "time": {
+                "minute" : {
+                    "one": "Minute",
+                    "many": "Minutes"
+                },
+                "hour": { "one": "Hour", "many": "Hours" },
+                "day": {"one": "Day", "many": "Days"}
+            }
 		},
 		"intro" : {
 			"author" : "Author",
