@@ -30,7 +30,6 @@ module.exports = {
         "data/",
         ".eslintrc.*",
         "build/",
-        "eslint-config/",
         "podApi/",
         "PolyPodApp/"],
     rules: {
