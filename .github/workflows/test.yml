@@ -14,11 +14,9 @@ jobs:
           java-version: 8
       - name: Lint core and features
         run: |
-          pushd eslint-config
-          npm ci --no-update-notifier --no-fund
-          popd
           npm install -g eslint
-          ./build.js lint
+          npm i
+          eslint --ext .ts,.js,.tsx,.jsx .
       - name: Build core and features
         run: ./build.js
       - name: Test core and features
