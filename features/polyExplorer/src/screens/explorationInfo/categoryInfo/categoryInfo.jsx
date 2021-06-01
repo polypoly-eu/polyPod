@@ -29,7 +29,8 @@ const CategoryInfo = ({ category, company, onClose }) => {
                         text1: i18n.t("infographic:category.text1"),
                         text2: i18n.t("infographic:category.text2"),
                         text3: i18n.t("infographic:category.text3"),
-                    }}/>
+                    }}
+                />
                 {highlights[company.ppid].dataTypeCategories[category]
                     .explanation ? (
                     <div>
