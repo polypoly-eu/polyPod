@@ -20,14 +20,12 @@ describe("Test existing keys", () => {
 describe("Test possible errors", () => {
     it("Throws when the directory does not exist", () => {
         I18n.fromFiles("WAT").catch((error) => {
-            console.log(error);
             expect(error).toBeInstanceOf(FileNotFoundError);
             expect(error.message).toEqual(expect.stringMatching(/found/));
         });
     });
     it("Throws when the argument is not a directory", () => {
         I18n.fromFiles("test/locales/es/common.json").catch((error) => {
-            console.log(error);
             expect(error).toBeInstanceOf(FileNotFoundError);
             expect(error.message).toEqual(expect.stringMatching(/not really/));
         });

@@ -1,6 +1,7 @@
 import { existsSync, lstatSync, readFileSync } from "fs";
-import { getAllFilePaths } from "cup-readdir";
 import { dirname, basename, sep } from "path";
+import fs from "fs"
+import path from "path"
 
 /**
  * Determines the environment language
@@ -13,6 +14,7 @@ export const determineLanguage = () =>
 /**
  * Exception class for errors related to the language that is
  * requested for the translation object
+ * 
  * @class
  */
 export class LanguageError extends Error {
@@ -119,6 +121,37 @@ export class I18n {
     }
 
     /**
+     * This function is taken from cup-readdir, by blubitz, under the MIT license
+     * @param dir - topmost directory
+     * @returns - a list of the directories, with full paths
+     */
+    static async getAllFilePaths(dir) {
+        let filePaths = []
+        async function recur(dir) {
+            try {
+                let items = await fs.promises.readdir(dir, {withFileTypes: true})
+                let pendingDirs = []
+
+                items.forEach( (item) => {
+                    let url = path.join(dir, item.name)
+                    if (item.isDirectory()) {
+                        pendingDirs.push( recur(url) )
+                    } else if (item.isFile()) {
+                        filePaths.push(url)
+                    }
+                });
+
+                return Promise.all(pendingDirs)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        await recur(dir)
+        return filePaths
+    }
+
+    /**
      * Builds the translation hash from files in a directory with the structure
      * languagekey
      *      - namespace
@@ -139,8 +172,7 @@ export class I18n {
                 new FileNotFoundError(directory + " is not really a directory")
             );
         }
-        let files = await getAllFilePaths(directory);
-
+        let files = await this.getAllFilePaths(directory);
         let translations = {};
         files.forEach((f) => {
             const language = dirname(f).split(sep).reverse()[0];
@@ -159,4 +191,5 @@ export class I18n {
     get namespaces() {
         return Object.keys(this._translations);
     }
+
 }
