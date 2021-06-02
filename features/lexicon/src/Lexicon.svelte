@@ -66,6 +66,8 @@ button {
 }
 
 .search-bar-area .search-bar .search-bar-input {
+    width: 100%;
+    height: 40px;
     display: block;
     background-color: transparent;
     font-size: 18px;
