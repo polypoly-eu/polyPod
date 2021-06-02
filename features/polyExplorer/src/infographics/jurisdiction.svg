@@ -9,10 +9,10 @@
 <rect id="EU-GDPR" width="221" height="180" fill="#60E6DE"/>
 <rect id="Five Eyes" y="186" width="221" height="56" fill="#EC453D"/>
 <rect id="text3" x="227" width="69" height="144" fill="#A9B6C6"/>
-<text id="jurisdiction-white2" fill="white" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="230" y="163.475">China          </tspan></text>
-<text id="jurisdiction-white3" fill="white" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="230" y="236.475">Russia          </tspan></text>
-<text id="jurisdiction-white1" fill="white" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="3" y="197.475">Five Eyes                                        </tspan></text>
-<text id="jurisdiction-blue2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="230" y="12.475">Others         </tspan></text>
-<text id="jurisdiction-blue1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0em"><tspan x="3" y="12.475">EU&#x2013;GDPR                                        </tspan></text>
+<rect id="jurisdiction-white1" x="2" y="187" width="212" height="14" fill="#C4C4C4"/>
+<rect id="jurisdiction-blue1" x="2" width="193" height="15" fill="#C4C4C4"/>
+<rect id="jurisdiction-blue2" x="229" y="2" width="64" height="13" fill="#C4C4C4"/>
+<rect id="jurisdiction-white2" x="229" y="152" width="61" height="16" fill="#C4C4C4"/>
+<rect id="jurisdiction-white3" x="229" y="225" width="66" height="16" fill="#C4C4C4"/>
 </g>
 </svg>
