@@ -1,4 +1,4 @@
-import { existsSync, lstatSync, readFileSync } from "fs";
+import { existsSync, lstatSync } from "fs";
 import { dirname, basename, sep } from "path";
 import fs from "fs";
 import path from "path";
@@ -185,7 +185,7 @@ export class I18n {
             if (!(language in translations)) {
                 translations[language] = {};
             }
-            translations[language][ns] = require( "../" + f );
+            translations[language][ns] = require("../" + f);
         });
         return new I18n(determineLanguage(), translations);
     }
