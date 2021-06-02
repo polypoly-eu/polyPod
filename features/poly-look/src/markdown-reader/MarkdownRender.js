@@ -1,4 +1,5 @@
 import { html, LitElement, css } from "lit-element";
+import { unsafeHTML } from "lit-html/directives/unsafe-html";
 import "@intcreator/markdown-element";
 import globalTheme from "../GlobalTheme";
 
@@ -33,6 +34,26 @@ export class MarkdownRender extends LitElement {
     this.backgroundImage = null;
   }
 
+  __renderMarkDown(text) {
+    return html`
+      <markdown-element class="mk-render" markdown=${text}></markdown-element>
+    `;
+  }
+
+  __renderPolyCustomTags(text) {
+    return html`${unsafeHTML(text)}`;
+  }
+
+  __renderArticle(text) {
+    return text
+      .split("@@")
+      .map((pieceText, index) =>
+        index % 2 === 0
+          ? this.__renderMarkDown(pieceText)
+          : this.__renderPolyCustomTags(pieceText)
+      );
+  }
+
   render() {
     return this.backgroundImage
       ? html`
@@ -40,17 +61,9 @@ export class MarkdownRender extends LitElement {
             class="decorator"
             style="background-image:url(${this.backgroundImage})"
           >
-            <markdown-element
-              class="mk-render"
-              markdown=${this.text}
-            ></markdown-element>
+            ${this.__renderArticle(this.text)}
           </div>
         `
-      : html`
-          <markdown-element
-            class="mk-render"
-            markdown=${this.text}
-          ></markdown-element>
-        `;
+      : html`${this.__renderArticle(this.text)}`;
   }
 }

@@ -1,5 +1,5 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import "../poly-look.js";
+import "../../poly-look.js";
 
 describe("TabsLine", () => {
   let tabs = [];
@@ -91,6 +91,7 @@ describe("TabsLine", () => {
   it(`
     must render three tabs with its content
   `, async () => {
+    const lengTabs = tabs.length;
     const tab01Content = "this is the tab01";
     const tab02Content = "this is the tab02";
     const tab03Content = "this is the tab03";
@@ -108,7 +109,7 @@ describe("TabsLine", () => {
     const renderTabs = el.shadowRoot.querySelectorAll("poly-tab");
     expect(renderTabs.length).to.equal(3);
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < lengTabs; i++) {
       expect(renderTabs[i].label).to.equal(tabs[i].label);
       expect(renderTabs[i].value).to.equal(tabs[i].id);
       expect(renderTabs[i].active).to.equal(tabs[i].active);

@@ -4,7 +4,7 @@ import { themeConfiguration } from "./themeConfiguration";
 
 export default {
   title: "Visuals/Atoms/MarkdownRender",
-  component: "poly-markdown-reader",
+  component: "poly-markdown-render",
   argTypes: {
     text: { control: "text" },
     backgroundImage: { control: "text" },
@@ -17,10 +17,10 @@ function Template({
 }) {
   return html`
     ${themeConfiguration()}
-    <poly-markdown-reader
+    <poly-markdown-render
       .text=${text}
       .backgroundImage=${backgroundImage}
-    ></poly-markdown-reader>
+    ></poly-markdown-render>
   `;
 }
 

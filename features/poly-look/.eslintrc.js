@@ -15,6 +15,8 @@ module.exports = {
     beforeEach: true,
     afterEach: true,
     document: true,
+    fetch: true,
+    Promise: true,
   },
   rules: {
     semi: 2,
