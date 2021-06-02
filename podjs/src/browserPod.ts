@@ -34,7 +34,7 @@ class LocalStoragePolyIn implements PolyIn {
 /* eslint-disable @typescript-eslint/no-unused-vars */
 class ThrowingPolyOut implements PolyOut {
     fetch(input: string, init?: RequestInit): Promise<Response> {
-        throw "Not implemented: fetch";
+        return window.fetch(input, init);
     }
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
