@@ -185,7 +185,7 @@ export class I18n {
             if (!(language in translations)) {
                 translations[language] = {};
             }
-            translations[language][ns] = JSON.parse(readFileSync(f));
+            translations[language][ns] = require( "../" + f );
         });
         return new I18n(determineLanguage(), translations);
     }
