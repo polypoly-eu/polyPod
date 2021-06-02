@@ -28,6 +28,9 @@ jobs:
             - 'android/**'
             - 'core/api/fetch-spec/**'
             - 'core/communication/bubblewrap/**'
+            - 'core/communication/remote-pod/**'
+            - 'features/bundle/**'
+            - 'features/test/**'
       - uses: actions/setup-java@v1
         if: steps.changes.outputs.android == 'true'
         with:
