@@ -5,9 +5,8 @@ module.exports = {
     rules: [
       {
         exclude: [
-          './docs/',
-          'coverage/',
-          'test/'
+          /docs/,
+          /coverage/
         ]
       }
     ]

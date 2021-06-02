@@ -2,5 +2,8 @@
     "video" : false,
     "pluginsFile": false,
     "supportFile": false,
-    "ignoreTestFiles": "*~"
+    "ignoreTestFiles": "*~",
+    "env": {
+        "webpackFilename": "webpack.config.js"
+    }
 }
