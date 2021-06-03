@@ -4,7 +4,7 @@ module.exports = {
   mode: 'development',
   plugins: [
     new IgnorePlugin( {
-      resourceRegExp: /docs/
+      resourceRegExp: /(docs|coverage)/
     })
   ],
 };
