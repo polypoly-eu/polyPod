@@ -7,6 +7,6 @@ import {
 
 describe("Test language determination", () => {
     it("finds a reasonable two-letter language", () => {
-        expect(determineLanguage()).toEqual(expect.stringMatching(/\w{2,}/));
+        expect(determineLanguage()).to.match(/\w{2,}/);
     });
 });
