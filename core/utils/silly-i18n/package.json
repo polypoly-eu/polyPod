@@ -27,7 +27,8 @@
     "jest": "^26.6.3",
     "jsdoc": "^3.2.0",
     "prettier": "^2.2.1",
-    "tsdoc": "^0.0.4"
+    "tsdoc": "^0.0.4",
+    "webpack-cli": "^4.7.0"
   },
   "private": true,
   "type": "module"
