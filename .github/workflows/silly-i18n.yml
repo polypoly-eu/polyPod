@@ -38,3 +38,6 @@ jobs:
       - name: Run tests
         working-directory: ${{env.silly-i18n-dir}}
         run: npm run test
+      - name: Run integration tests
+        working-directory: ${{env.silly-i18n-dir}}
+        run: npx cypress run
