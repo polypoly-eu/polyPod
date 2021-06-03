@@ -1,9 +1,6 @@
 {
     "video" : false,
-    "pluginsFile": false,
+    "pluginsFile": "cypress/plugins/index.cjs",
     "supportFile": false,
-    "ignoreTestFiles": "*~",
-    "env": {
-        "webpackFilename": "webpack.config.js"
-    }
+    "ignoreTestFiles": "~"
 }
