@@ -14,7 +14,7 @@
     color: #0F1938;
     box-sizing: border-box;
     font-family: Jost;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 button {
@@ -61,7 +61,7 @@ button {
     font-size: 18px;
     border: 1px solid #0F1938;
     border-radius: 20px;
-    padding: 1px 12px 0 21px;
+    padding: 1px 12px;
     position: relative;
 }
 
@@ -78,7 +78,7 @@ button {
 }
 
 .search-bar-area .search-bar .search-bar-input::placeholder {
-    color: #0F1938;
+    color: #6A798E;
     font-weight: 400;
 }
 
@@ -254,11 +254,7 @@ function handleBack() {
 }
 
 function handleSearch(value) {
-    console.log("NNN pre searchString: ", searchString);
-    console.log("NNN value: ", value);
     searchString = value;
-    console.log("NNN post searchString: ", searchString);
-    console.log(`NNN This is ${searchString ? "true": "false" }`);
 }
 
 function handleClear() {
