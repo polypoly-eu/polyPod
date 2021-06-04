@@ -19,8 +19,13 @@
 * {
     color: #0F1938;
     box-sizing: border-box;
+<<<<<<< HEAD
     font-family: "Jost Medium";
     font-weight: 500;
+=======
+    font-family: Jost;
+    font-weight: 600;
+>>>>>>> 7b86627f (fix(prod4pod-467): fix design styles)
 }
 
 button {
@@ -259,11 +264,7 @@ function handleBack() {
 }
 
 function handleSearch(value) {
-    console.log("NNN pre searchString: ", searchString);
-    console.log("NNN value: ", value);
     searchString = value;
-    console.log("NNN post searchString: ", searchString);
-    console.log(`NNN This is ${searchString ? "true": "false" }`);
 }
 
 function handleClear() {
