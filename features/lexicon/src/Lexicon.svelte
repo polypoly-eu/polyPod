@@ -254,11 +254,7 @@ function handleBack() {
 }
 
 function handleSearch(value) {
-    console.log("NNN pre searchString: ", searchString);
-    console.log("NNN value: ", value);
     searchString = value;
-    console.log("NNN post searchString: ", searchString);
-    console.log(`NNN This is ${searchString ? "true": "false" }`);
 }
 
 function handleClear() {
