@@ -9,7 +9,7 @@ function parseCommandLine() {
     if (parameters.includes("--help") || parameters.length > 1)
         return { scriptPath, command: null };
 
-    const validCommands = ["build", "test", "lint", "list", "list-deps"];
+    const validCommands = ["build", "test", "list", "list-deps"];
     const command = parameters.length ? parameters[0] : "build";
     return {
         scriptPath,
@@ -19,7 +19,7 @@ function parseCommandLine() {
 
 function showUsage(scriptPath) {
     console.error(
-        `Usage: ${path.basename(scriptPath)} [lint | test | list | list-deps]`
+        `Usage: ${path.basename(scriptPath)} [ test | list | list-deps]`
     );
     console.error("  Run without arguments to build all packages");
 }
@@ -130,10 +130,6 @@ async function npmRun(script, pkg) {
 
 const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
-    lint: (pkg) =>
-        npmInstall("@polypoly-eu/eslint-config").then(() =>
-            npmRun("lint", pkg)
-        ),
     test: (pkg) => npmRun("test", pkg),
 };
 
