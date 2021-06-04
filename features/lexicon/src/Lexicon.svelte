@@ -191,6 +191,27 @@ button {
     border-radius: 4px;
     font-size: 16px;
 }
+
+.clr {
+    opacity: 0;
+}
+
+@keyframes fadeInClrBtn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.clr.active {
+    opacity: 1;
+    animation-name: fadeInClrBtn;
+    animation-timing-function: ease-in;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}
 </style>
 
 <script>
@@ -233,7 +254,11 @@ function handleBack() {
 }
 
 function handleSearch(value) {
+    console.log("NNN pre searchString: ", searchString);
+    console.log("NNN value: ", value);
     searchString = value;
+    console.log("NNN post searchString: ", searchString);
+    console.log(`NNN This is ${searchString ? "true": "false" }`);
 }
 
 function handleClear() {
@@ -289,7 +314,7 @@ function setUpListNavigation(){
                     value="{searchString}"
                     placeholder="{i18n.t('common:search')}"
                     on:input="{(e) => handleSearch(e.target.value)}" />
-                <button on:click="{() => handleClear()}">
+                <button class="clr {searchString ? "active": ""}" name="bar" on:click="{() => handleClear()}">
                     <img
                         alt="{i18n.t('common:clear')}"
                         src="./images/clear-search.svg" />
