@@ -1,7 +1,4 @@
 {
-    "extends": [
-        "@polypoly-eu/eslint-config"
-    ],
     "parserOptions": {
         "ecmaVersion": 10
     },

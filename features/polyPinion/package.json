@@ -8,7 +8,6 @@
         "check": "tsc"
     },
     "devDependencies": {
-        "@polypoly-eu/eslint-config": "file:../../eslint-config",
         "@rollup/plugin-commonjs": "^19.0.0",
         "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^8.4.0",
