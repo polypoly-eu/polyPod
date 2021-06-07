@@ -182,7 +182,9 @@ export class I18n {
                 translations[language] = {};
             }
             console.log(`${directoryRelPath}/${directoryName}/${language}/${ns}.json`);
-            translations[language][ns] = import (`${directoryRelPath}/${directoryName}/${language}/${ns}.json`);
+            const strings = import(`${directoryRelPath}/${directoryName}/${language}/${ns}.json`);
+            console.log(strings);
+            translations[language][ns] = strings;
         });
         return new I18n(language, translations);
     }
