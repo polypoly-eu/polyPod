@@ -166,14 +166,14 @@ export class I18n {
      
      * @returns an instance of a I18n object
      */
-    static fromFiles(directory, language= determineLanguage()) {
-        if (!existsSync(directory)) {
-            throw new FileNotFoundError(directory + " can't be found");
+    static fromFiles(directoryName, directoryRelPath, language= determineLanguage()) {
+        if (!existsSync(directoryName)) {
+            throw new FileNotFoundError(directoryName + " can't be found");
         }
-        if (!lstatSync(directory).isDirectory()) {
-            throw new FileNotFoundError(directory + " is not really a directory");
+        if (!lstatSync(directoryName).isDirectory()) {
+            throw new FileNotFoundError(directoryName + " is not really a directory");
         }
-        let files = this.getAllFilePaths(directory);
+        let files = this.getAllFilePaths(directoryName);
         let translations = {};
         files.forEach((f) => {
             const language = dirname(f).split(sep).reverse()[0];
@@ -181,7 +181,8 @@ export class I18n {
             if (!(language in translations)) {
                 translations[language] = {};
             }
-            translations[language][ns] = import ("../" + f);
+            console.log(`${directoryRelPath}/${directoryName}/${language}/${ns}.json`);
+            translations[language][ns] = import (`${directoryRelPath}/${directoryName}/${language}/${ns}.json`);
         });
         return new I18n(language, translations);
     }
