@@ -20,12 +20,17 @@
     color: #0F1938;
     box-sizing: border-box;
 <<<<<<< HEAD
+<<<<<<< HEAD
     font-family: "Jost Medium";
     font-weight: 500;
 =======
     font-family: Jost;
     font-weight: 600;
 >>>>>>> 7b86627f (fix(prod4pod-467): fix design styles)
+=======
+    font-family: "Jost Medium";
+    font-weight: 500;
+>>>>>>> 322a3551 (fix(prod4pod-467): changes requested by PR commentaries)
 }
 
 button {
