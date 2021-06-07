@@ -128,31 +128,31 @@ export class I18n {
      * @param dir - topmost directory
      * @returns - a list of the directories, with full paths
      */
-    static async getAllFilePaths(dir) {
+    static getAllFilePaths(dir) {
         let filePaths = [];
-        async function recur(dir) {
+        function readDirRecursively(dir) {
             try {
-                let items = await fs.promises.readdir(dir, {
+                let items = fs.readdirSync(dir, {
                     withFileTypes: true,
                 });
                 let pendingDirs = [];
 
                 items.forEach((item) => {
-                    let url = path.join(dir, item.name);
+                    const newDir = path.join(dir, item.name);
                     if (item.isDirectory()) {
-                        pendingDirs.push(recur(url));
+                        pendingDirs.push(readDirRecursively(newDir));
                     } else if (item.isFile()) {
-                        filePaths.push(url);
+                        filePaths.push(newDir);
                     }
                 });
 
-                return Promise.all(pendingDirs);
+                return pendingDirs;
             } catch (err) {
                 console.log(err);
             }
         }
 
-        await recur(dir);
+        readDirRecursively(dir);
         return filePaths;
     }
 
@@ -166,18 +166,14 @@ export class I18n {
      
      * @returns an instance of a I18n object
      */
-    static async fromFiles(directory) {
+    static fromFiles(directory) {
         if (!existsSync(directory)) {
-            await Promise.reject(
-                new FileNotFoundError(directory + " can't be found")
-            );
+            throw new FileNotFoundError(directory + " can't be found");
         }
         if (!lstatSync(directory).isDirectory()) {
-            await Promise.reject(
-                new FileNotFoundError(directory + " is not really a directory")
-            );
+            throw new FileNotFoundError(directory + " is not really a directory");
         }
-        let files = await this.getAllFilePaths(directory);
+        let files = this.getAllFilePaths(directory);
         let translations = {};
         files.forEach((f) => {
             const language = dirname(f).split(sep).reverse()[0];
