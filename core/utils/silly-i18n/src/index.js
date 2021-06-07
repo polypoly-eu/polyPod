@@ -1,6 +1,3 @@
-import { existsSync, lstatSync, readFileSync } from "fs";
-import { dirname, basename, sep } from "path";
-
 /**
  * Determines the environment language
  *
