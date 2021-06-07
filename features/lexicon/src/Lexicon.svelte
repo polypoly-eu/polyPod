@@ -249,7 +249,6 @@ function copyText(text) {
   nativeAndroidClipboard?.copyToClipboard(text);
 }
 
-
 function handleBack() {
     showTerm = null;
     setUpListNavigation();
