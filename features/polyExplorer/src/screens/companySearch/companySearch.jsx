@@ -54,10 +54,14 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                         onChange={(e) => handleSearch(e.target.value)}
                     />
                     {searchString == "" ? null : (
+<<<<<<< HEAD
                         <button
                             className={searchString ? "clr active" : "clr"}
                             onClick={() => handleClear()}
                         >
+=======
+                        <button className={searchString ? "clr active" : "clr"} onClick={() => handleClear()}>
+>>>>>>> aef5ed13 (Unify clear button in search bars)
                             <img src="./images/clear-search.svg" />
                         </button>
                     )}
