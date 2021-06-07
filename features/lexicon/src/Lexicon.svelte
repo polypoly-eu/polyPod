@@ -245,8 +245,10 @@ function handleCopytoClipboard(term) {
 }
 
 function copyText(text) {
-    navigator.clipboard.writeText(text);
+  navigator.clipboard.writeText(text)
+  nativeAndroidClipboard?.copyToClipboard(text);
 }
+
 
 function handleBack() {
     showTerm = null;

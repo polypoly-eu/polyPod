@@ -2,6 +2,8 @@ package coop.polypoly.polypod
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -22,6 +24,7 @@ import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import eu.polypoly.pod.android.polyOut.PolyOut
 import java.util.zip.ZipFile
+
 
 @SuppressLint("SetJavaScriptEnabled")
 class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
@@ -53,6 +56,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
+        webView.addJavascriptInterface(ClipboardInterface(context), "nativeClipboard");
 
         // Enabling localStorage to support polyExplorer data migration
         webView.settings.domStorageEnabled = true
@@ -234,4 +238,21 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             }
         }
     }
+
+
+    class ClipboardInterface(aContext : Context) {
+        var context: Context
+        init {
+            context = aContext
+        }
+        @JavascriptInterface
+        fun copyToClipboard(text: String?) {
+            var clipboard: ClipboardManager =
+                context.getSystemService(ClipboardManager::class.java)
+            val clip = ClipData.newPlainText("nativeClipboardText", text);
+            clipboard.setPrimaryClip(clip);
+        }
+    }
+
+
 }
