@@ -4,6 +4,7 @@
   "scripts": {
     "eslint": "eslint src test scripts --ext .js --ext .jsx",
     "lint": "npm run eslint",
+    "lint:fix": "eslint --fix src test scripts --ext .js --ext .jsx",
     "build": "rollup -c",
     "watch": "rollup --watch -c",
     "test": "mocha",
