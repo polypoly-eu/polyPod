@@ -1,4 +1,6 @@
 import { FileNotFoundError, I18n } from "../src/index.js";
+import "./testI18n"
+import testI18n from "./testI18n";
 
 let i18n;
 const localesDir = "test/locales";
@@ -49,3 +51,9 @@ describe("Test possible errors", () => {
         };
     });
 });
+
+describe("Test default rel path with module", () => {
+    it( "Imports to a module correctly", () => {
+        expect(testI18n).toBeInstanceOf(I18n);
+    })
+})

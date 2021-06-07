@@ -166,7 +166,7 @@ export class I18n {
      
      * @returns an instance of a I18n object
      */
-    static fromFiles(directoryName, directoryRelPath, language= determineLanguage()) {
+    static fromFiles(directoryName, directoryRelPath = ".", language= determineLanguage()) {
         if (!existsSync(directoryName)) {
             throw new FileNotFoundError(directoryName + " can't be found");
         }
