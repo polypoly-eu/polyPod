@@ -4,17 +4,23 @@
     src: url("../fonts/jost_regular.ttf");
 }
 
+@font-face {
+    font-family: "Jost Medium";
+    src: url("../fonts/jost_medium.ttf");
+}
+
 :global(body) {
     background-color: #FFF5F5;
     padding: 0;
     margin: 0;
+    overflow: hidden;
 }
 
 * {
     color: #0F1938;
     box-sizing: border-box;
-    font-family: Jost;
-    font-weight: 600;
+    font-family: "Jost Medium";
+    font-weight: 500;
 }
 
 button {
@@ -44,15 +50,13 @@ button {
     max-width: 412px;
     display: flex;
     justify-content: center;
-    margin: auto;
-    padding: 23px 24px 29px 24px;
+    margin-top: 20px;
     flex: 0 0 auto;
-    position: fixed;
     top: 0;
 }
 
 .search-bar-area .search-bar {
-    width: 100%;
+    width: 95%;
     height: 40px;
     background-color: #FFF5F5;
     display: flex;
@@ -90,7 +94,8 @@ button {
 .term-list-container {
     width: 100%;
     overflow-y: scroll;
-    margin-top: 88px;
+    height: 100vh;
+    padding: 16px 0px;
 }
 
 .term-list-container .term-list {
