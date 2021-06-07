@@ -1,7 +1,5 @@
 import { existsSync, lstatSync, readFileSync } from "fs";
 import { dirname, basename, sep } from "path";
-import fs from "fs";
-import path from "path";
 
 /**
  * Determines the environment language
@@ -44,24 +42,6 @@ export class TranslationKeyError extends Error {
     constructor(message) {
         super(message);
         this.name = "TranslationKeyError";
-    }
-}
-
-/**
- * Exception class to use when there's some problem with the key used
- * in the translation, either the format or its existence.
- *
- * @class
- */
-export class FileNotFoundError extends Error {
-    /**
-     * Class constructor
-     *
-     * @param message - Message to include in the error
-     */
-    constructor(message) {
-        super(message);
-        this.name = "FileNotFoundError";
     }
 }
 
@@ -118,77 +98,6 @@ export class I18n {
         for (let [name, value] of Object.entries(options))
             translation = translation.replace(`{{${name}}}`, value);
         return translation;
-    }
-
-    /**
-     * This function is taken from
-     * [cup-readdir, by blubitz](https://github.com/blubitz/cup-readdir/issues/1),
-     * under the MIT license
-     *
-     * @param dir - topmost directory
-     * @returns - a list of the directories, with full paths
-     */
-    static getAllFilePaths(dir) {
-        let filePaths = [];
-        function readDirRecursively(dir) {
-            try {
-                let items = fs.readdirSync(dir, {
-                    withFileTypes: true,
-                });
-                let pendingDirs = [];
-
-                items.forEach((item) => {
-                    const newDir = path.join(dir, item.name);
-                    if (item.isDirectory()) {
-                        pendingDirs.push(readDirRecursively(newDir));
-                    } else if (item.isFile()) {
-                        filePaths.push(newDir);
-                    }
-                });
-
-                return pendingDirs;
-            } catch (err) {
-                console.log(err);
-            }
-        }
-
-        readDirRecursively(dir);
-        return filePaths;
-    }
-
-    /**
-     * Builds the translation hash from files in a directory with the structure
-     * languagekey
-     *      - namespace
-     *          - stringKeys
-     *
-     * @param directory - the directory files are in
-     
-     * @returns an instance of a I18n object
-     */
-    static fromFiles(directoryName, language = determineLanguage()) {
-        if (!existsSync(directoryName)) {
-            throw new FileNotFoundError(directoryName + " can't be found");
-        }
-        if (!lstatSync(directoryName).isDirectory()) {
-            throw new FileNotFoundError(
-                directoryName + " is not really a directory"
-            );
-        }
-        let files = this.getAllFilePaths(directoryName);
-        let translations = {};
-        files.forEach((f) => {
-            const language = dirname(f).split(sep).reverse()[0];
-            const ns = basename(f, ".json");
-            if (!(language in translations)) {
-                translations[language] = {};
-            }
-            const strings = JSON.parse(
-                readFileSync(`${directoryName}/${language}/${ns}.json`)
-            );
-            translations[language][ns] = strings;
-        });
-        return new I18n(language, translations);
     }
 
     /**
