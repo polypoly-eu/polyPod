@@ -6,12 +6,12 @@ let i18n;
 const localesDir = "test/locales";
 
 beforeAll(async () => {
-    i18n = I18n.fromFiles(localesDir, "..");
+    i18n = I18n.fromFiles(localesDir);
 });
 
 describe("Tests static file reading", () => {
     it("Gets all files", async () => {
-        expect((I18n.getAllFilePaths(localesDir,"..")).length).toEqual(3);
+        expect((I18n.getAllFilePaths(localesDir)).length).toEqual(3);
     });
 });
 
@@ -21,14 +21,14 @@ describe("Test existing keys", () => {
     });
 
     it("can be created the right amount of keys", () => {
-        const i18nNew = I18n.fromFiles(localesDir,"..");
+        const i18nNew = I18n.fromFiles(localesDir);
         expect(i18nNew.namespaces.length).toEqual(1);
     });
 });
 
 describe("Test existing keys with set language", () => {
     it("can be created the right amount of keys", () => {
-        const i18nNew = I18n.fromFiles(localesDir,"..","en");
+        const i18nNew = I18n.fromFiles(localesDir,"en");
         expect(i18nNew.namespaces.length).toEqual(1);
     });
 });

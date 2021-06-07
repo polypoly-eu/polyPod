@@ -1,4 +1,4 @@
-import { existsSync, lstatSync } from "fs";
+import { existsSync, lstatSync, readFileSync } from "fs";
 import { dirname, basename, sep } from "path";
 import fs from "fs";
 import path from "path";
@@ -166,7 +166,7 @@ export class I18n {
      
      * @returns an instance of a I18n object
      */
-    static fromFiles(directoryName, directoryRelPath = ".", language= determineLanguage()) {
+    static fromFiles(directoryName, language= determineLanguage()) {
         if (!existsSync(directoryName)) {
             throw new FileNotFoundError(directoryName + " can't be found");
         }
@@ -181,11 +181,11 @@ export class I18n {
             if (!(language in translations)) {
                 translations[language] = {};
             }
-            console.log(`${directoryRelPath}/${directoryName}/${language}/${ns}.json`);
-            const strings = import(`${directoryRelPath}/${directoryName}/${language}/${ns}.json`);
-            console.log(strings);
+            console.log(`${directoryName}/${language}/${ns}.json`);
+            const strings = JSON.parse( readFileSync( `${directoryName}/${language}/${ns}.json`) );
             translations[language][ns] = strings;
         });
+        console.log(translations);
         return new I18n(language, translations);
     }
 
