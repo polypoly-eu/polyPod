@@ -4,6 +4,11 @@
     src: url("../fonts/jost_medium.ttf");
 }
 
+@font-face {
+    font-family: "Jost Medium";
+    src: url("../fonts/jost_medium.ttf");
+}
+
 :global(body) {
     background-color: #FFF5F5;
     padding: 0;
