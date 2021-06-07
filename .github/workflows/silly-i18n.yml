@@ -24,7 +24,8 @@ jobs:
         if: ${{ matrix.node <= 14 }}
         working-directory: ${{env.silly-i18n-dir}}
         run: |
-          npm ci
+          rm package-lock.json
+          npm i
           npm install -g typescript
           npm link typescript
       - name: Install > v14
