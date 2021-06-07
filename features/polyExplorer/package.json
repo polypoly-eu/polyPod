@@ -4,7 +4,6 @@
   "scripts": {
     "eslint": "eslint src test scripts --ext .js --ext .jsx",
     "lint": "npm run eslint",
-    "lint:fix": "eslint --fix src test scripts --ext .js --ext .jsx",
     "build": "rollup -c",
     "watch": "rollup --watch -c",
     "test": "mocha",
@@ -38,10 +37,6 @@
     "rollup": "^2.26.11",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0",
-    "rollup-plugin-node-polyfills": "^0.2.1",
-    "rollup-plugin-polyfill-node": "^0.6.2",
     "rollup-plugin-svg": "^2.0.0",
     "typescript": "^4.1.3"
   },
