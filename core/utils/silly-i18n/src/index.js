@@ -101,7 +101,7 @@ export class I18n {
     t(key, options = {}) {
         if (key.search(/:/) == -1) {
             throw new TranslationKeyError(
-                "${key} does not have the format «namespace:key»"
+                `${key} does not have the format «namespace:key»`
             );
         }
         const [namespace, keyInNamespace] = key.split(/:(.+)/);
@@ -111,7 +111,7 @@ export class I18n {
             !(keyInNamespace in this._translations[namespace])
         ) {
             throw new TranslationKeyError(
-                "${namespace} does not exist or does not have a ${keyInNamespace} key for language ${this.language}"
+                `${namespace} does not exist or does not have a ${keyInNamespace} key for language ${this.language}`
             );
         }
         let translation = this._translations[namespace][keyInNamespace];
