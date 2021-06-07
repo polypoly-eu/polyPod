@@ -181,7 +181,7 @@ export class I18n {
             if (!(language in translations)) {
                 translations[language] = {};
             }
-            translations[language][ns] = require("../" + f);
+            translations[language][ns] = import ("../" + f);
         });
         return new I18n(determineLanguage(), translations);
     }
