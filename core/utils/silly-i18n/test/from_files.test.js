@@ -55,5 +55,6 @@ describe("Test possible errors", () => {
 describe("Test default rel path with module", () => {
     it( "Imports to a module correctly", () => {
         expect(testI18n).toBeInstanceOf(I18n);
+        expect(testI18n.namespaces.length).toEqual(1);
     })
 })
