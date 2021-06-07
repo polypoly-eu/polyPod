@@ -53,9 +53,11 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                         className="search-bar-input"
                         onChange={(e) => handleSearch(e.target.value)}
                     />
-                    <button onClick={() => handleClear()}>
-                        <img src="./images/clear-search.svg" />
-                    </button>
+                    {searchString == "" ? null : (
+                        <button className={searchString ? "clr active" : "clr"} onClick={() => handleClear()}>
+                            <img src="./images/clear-search.svg" />
+                        </button>
+                    )}
                 </div>
             </div>
             <div className="company-search">
