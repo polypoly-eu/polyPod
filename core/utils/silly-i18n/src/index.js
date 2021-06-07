@@ -183,13 +183,11 @@ export class I18n {
             if (!(language in translations)) {
                 translations[language] = {};
             }
-            console.log(`${directoryName}/${language}/${ns}.json`);
             const strings = JSON.parse(
                 readFileSync(`${directoryName}/${language}/${ns}.json`)
             );
             translations[language][ns] = strings;
         });
-        console.log(translations);
         return new I18n(language, translations);
     }
 
