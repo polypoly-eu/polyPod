@@ -117,7 +117,8 @@ button {
 
 .term-list-container .no-result p {
     margin: 0 20px 17px 50px;
-    color: #a9b6c6;
+    color: #6A798E;
+    font-size: 20px;
 }
 
 .term-list-container .result h2 {
