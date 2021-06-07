@@ -1,5 +1,5 @@
 import { FileNotFoundError, I18n } from "../src/index.js";
-import "./testI18n"
+import "./testI18n";
 import testI18n from "./testI18n";
 
 let i18n;
@@ -11,7 +11,7 @@ beforeAll(async () => {
 
 describe("Tests static file reading", () => {
     it("Gets all files", async () => {
-        expect((I18n.getAllFilePaths(localesDir)).length).toEqual(3);
+        expect(I18n.getAllFilePaths(localesDir).length).toEqual(3);
     });
 });
 
@@ -28,33 +28,33 @@ describe("Test existing keys", () => {
 
 describe("Test existing keys with set language", () => {
     it("can be created the right amount of keys", () => {
-        const i18nNew = I18n.fromFiles(localesDir,"en");
+        const i18nNew = I18n.fromFiles(localesDir, "en");
         expect(i18nNew.namespaces.length).toEqual(1);
     });
 });
 
 describe("Test possible errors", () => {
     it("Throws when the directory does not exist", () => {
-        try { 
-            I18n.fromFiles("WAT")
+        try {
+            I18n.fromFiles("WAT");
         } catch (error) {
             expect(error).toBeInstanceOf(FileNotFoundError);
             expect(error.message).toEqual(expect.stringMatching(/found/));
-        };
+        }
     });
     it("Throws when the argument is not a directory", () => {
         try {
-            I18n.fromFiles("test/locales/es/common.json")
+            I18n.fromFiles("test/locales/es/common.json");
         } catch (error) {
             expect(error).toBeInstanceOf(FileNotFoundError);
             expect(error.message).toEqual(expect.stringMatching(/not really/));
-        };
+        }
     });
 });
 
 describe("Test default rel path with module", () => {
-    it( "Imports to a module correctly", () => {
+    it("Imports to a module correctly", () => {
         expect(testI18n).toBeInstanceOf(I18n);
         expect(testI18n.namespaces.length).toEqual(1);
-    })
-})
+    });
+});

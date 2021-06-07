@@ -166,12 +166,14 @@ export class I18n {
      
      * @returns an instance of a I18n object
      */
-    static fromFiles(directoryName, language= determineLanguage()) {
+    static fromFiles(directoryName, language = determineLanguage()) {
         if (!existsSync(directoryName)) {
             throw new FileNotFoundError(directoryName + " can't be found");
         }
         if (!lstatSync(directoryName).isDirectory()) {
-            throw new FileNotFoundError(directoryName + " is not really a directory");
+            throw new FileNotFoundError(
+                directoryName + " is not really a directory"
+            );
         }
         let files = this.getAllFilePaths(directoryName);
         let translations = {};
@@ -182,7 +184,9 @@ export class I18n {
                 translations[language] = {};
             }
             console.log(`${directoryName}/${language}/${ns}.json`);
-            const strings = JSON.parse( readFileSync( `${directoryName}/${language}/${ns}.json`) );
+            const strings = JSON.parse(
+                readFileSync(`${directoryName}/${language}/${ns}.json`)
+            );
             translations[language][ns] = strings;
         });
         console.log(translations);
