@@ -56,7 +56,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
-        webView.addJavascriptInterface(ClipboardInterface(context), "nativeClipboard");
+        webView.addJavascriptInterface(ClipboardInterface(context), "nativeAndroidClipboard");
 
         // Enabling localStorage to support polyExplorer data migration
         webView.settings.domStorageEnabled = true
