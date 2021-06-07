@@ -1,6 +1,5 @@
 import fs from "fs";
 import { FileNotFoundError, I18n, determineLanguage } from "@polypoly-eu/silly-i18n";
-import { local } from "d3-selection";
 
 const localesDirName = "locales";
 let localesDir;
@@ -23,5 +22,5 @@ if ( localLanguage in knownLanguages ) {
     language = "en";
 }
 
-const i18n = I18n.fromFiles( localesDir, language );
+const i18n = I18n.fromFiles( localesDir, "..", language );
 export default i18n;
