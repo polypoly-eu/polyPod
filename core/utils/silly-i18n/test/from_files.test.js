@@ -23,6 +23,13 @@ describe("Test existing keys", () => {
     });
 });
 
+describe("Test existing keys with set language", () => {
+    it("can be created the right amount of keys", () => {
+        const i18nNew = I18n.fromFiles("test/locales","en");
+        expect(i18nNew.namespaces.length).toEqual(1);
+    });
+});
+
 describe("Test possible errors", () => {
     it("Throws when the directory does not exist", () => {
         try { 
