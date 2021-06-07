@@ -4,6 +4,7 @@ import json from "@rollup/plugin-json";
 import css from "rollup-plugin-css-only";
 import resolve from "@rollup/plugin-node-resolve";
 import svg from "rollup-plugin-svg";
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 export default {
     input: "src/index.jsx",
@@ -12,6 +13,8 @@ export default {
         format: "iife",
         globals: {
             react: "React",
+            fs: "fs",
+            path: "path",
             "react-dom": "ReactDOM",
         },
     },
@@ -24,6 +27,7 @@ export default {
         svg(),
         css({ output: "css/bundle.css" }),
         json(),
+        nodePolyfills(),
         sucrase({
             transforms: ["jsx"],
             production: true,
