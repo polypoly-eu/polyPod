@@ -22,5 +22,5 @@ if ( localLanguage in knownLanguages ) {
     language = "en";
 }
 
-const i18n = I18n.fromFiles( localesDir, "..", language );
+const i18n = I18n.fromFiles( localesDir, language );
 export default i18n;
