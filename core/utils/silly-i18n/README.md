@@ -2,6 +2,8 @@
 
 A simple i18n module, following the format and API of i18next. It takes a language and an hash with language as primary keys, namespaces as secondary keys, and string names as tertiary keys.
 
+It includes a function to detect the language, which should work on the browser as well as elsewhere.
+
 
 ## Usage
 

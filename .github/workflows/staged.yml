@@ -56,19 +56,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.node}}
-      - name: Install <= v14
-        if: ${{ matrix.node <= 14 }}
+      - name: Install
         working-directory: ${{env.polyExplorer-dir}}
-        run: |
-          rm package-lock.json
-          npm i
-          npm install -g typescript
-          npm link typescript
-      - name: Install > v14
-        if: ${{ matrix.node > 14 }}
-        working-directory: ${{env.polyExplorer-dir}}
-        run: |
-          npm ci
+        run: npm ci
       - name: Run tests
         working-directory: ${{env.polyExplorer-dir}}
         run: npm run test
