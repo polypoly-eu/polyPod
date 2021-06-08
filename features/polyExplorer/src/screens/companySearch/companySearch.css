@@ -25,6 +25,8 @@
 }
 
 .search-bar-container .search-bar .search-bar-input {
+    width: 100%;
+    height: 40px;
     box-sizing: border-box;
     display: block;
     background-color: transparent;

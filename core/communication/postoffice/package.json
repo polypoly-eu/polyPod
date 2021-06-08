@@ -29,7 +29,7 @@
     "prettier": "^2.1.2",
     "rollup": "^2.37.0",
     "ts-jest": "^25.5.1",
-    "typedoc": "^0.19.2",
+    "typedoc": "^0.20.36",
     "typescript": "^3.9.7"
   },
   "private": true
