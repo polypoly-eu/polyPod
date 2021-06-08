@@ -1,9 +1,8 @@
 const typescript = require("@rollup/plugin-typescript");
-const {nodeResolve} = require("@rollup/plugin-node-resolve");
+const { nodeResolve } = require("@rollup/plugin-node-resolve");
 const commonjs = require("@rollup/plugin-commonjs");
 
 process.env.CHROME_BIN = require("puppeteer").executablePath();
-process.env.FIREFOX_BIN = require("puppeteer-firefox").executablePath();
 
 module.exports = function (config) {
     config.set({
@@ -13,11 +12,11 @@ module.exports = function (config) {
         files: [
             { pattern: "src/tests/universal/**/*.test.ts", type: "module" },
             { pattern: "src/tests/browser/**/*.test.ts", type: "module" },
-            { pattern: "src/tests/data/**", included: false }
+            { pattern: "src/tests/data/**", included: false },
         ],
 
         preprocessors: {
-            "**/*.ts": ["rollup"]
+            "**/*.ts": ["rollup"],
         },
 
         rollupPreprocessor: {
@@ -25,16 +24,16 @@ module.exports = function (config) {
                 nodeResolve(),
                 commonjs(),
                 typescript({
-                    tsconfig: "./tsconfig.base.json"
-                })
+                    tsconfig: "./tsconfig.base.json",
+                }),
             ],
             output: {
                 format: "esm",
-                sourcemap: "inline"
-            }
+                sourcemap: "inline",
+            },
         },
 
-        browsers: ["ChromeHeadless", "FirefoxHeadless"],
+        browsers: ["ChromeHeadless"],
 
         reporters: ["spec"],
         port: 9876,
@@ -45,7 +44,7 @@ module.exports = function (config) {
         concurrency: Infinity,
 
         client: {
-            captureConsole: true
-        }
+            captureConsole: true,
+        },
     });
 };
