@@ -27,18 +27,13 @@ class LicensesFragment : Fragment() {
     }
 
     private fun loadLicenseText(): String {
-        val licenseDir = "3rd-party-licenses"
+        val licenseFiles = listOf("android-licenses.txt", "js-licenses.txt")
         val assetManager = context?.assets
-        var licenseText = ""
-        for (licenseFile in assetManager?.list(licenseDir).orEmpty()) {
-            val contents =
-                assetManager?.open("$licenseDir/$licenseFile")?.reader()
-                    ?.readText()?.trim()
-                    ?: continue
-            if (licenseText.isNotEmpty())
-                licenseText += "\n\n"
-            licenseText += contents
+        val licenseDir = "3rd-party-licenses"
+        val licenses = licenseFiles.map { file ->
+            assetManager?.open("$licenseDir/$file")?.reader()?.readText()
+                ?.trim()
         }
-        return licenseText
+        return licenses.joinToString("\n\n\n")
     }
 }
