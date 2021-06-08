@@ -19,6 +19,9 @@
         <Preference
             android:key="terms_of_use"
             android:title="@string/settings_terms_of_use_title" />
+        <Preference
+            android:key="licenses"
+            android:title="@string/settings_licenses_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>
