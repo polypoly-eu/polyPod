@@ -12,7 +12,7 @@ jobs:
       - name: Lint core and features
         run: |
           npm install -g eslint
-          npm i
+          npm ci --no-update-notifier --no-fund
           eslint --ext .ts,.js,.tsx,.jsx .
       - name: Build core and features
         run: ./build.js
