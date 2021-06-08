@@ -58,7 +58,7 @@ jobs:
           node-version: ${{matrix.node}}
       - name: Install <= v14
         if: ${{ matrix.node <= 14 }}
-        working-directory: ${{env.silly-i18n-dir}}
+        working-directory: ${{env.polyExplorer-dir}}
         run: |
           rm package-lock.json
           npm i
@@ -91,7 +91,7 @@ jobs:
           node-version: ${{matrix.node}}
       - name: Install <= v14
         if: ${{ matrix.node <= 14 }}
-        working-directory: ${{env.silly-i18n-dir}}
+        working-directory: ${{env.lexicon-dir}}
         run: |
           rm package-lock.json
           npm i

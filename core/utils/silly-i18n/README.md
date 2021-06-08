@@ -9,4 +9,4 @@ It includes very basic language capabilities based on the browser language featu
 
 ## Documentation
 
-You can run `npm run doc` to generate documentation.
+You can run `npm run doc` to generate documentation. Documentation will appear in the `doc` directory.
