@@ -7,6 +7,7 @@ module.exports = {
         mocha: true,
         // Only needed for scripts/
         node: true,
+        jest: true,
     },
     ignorePatterns: ["public/build/"],
     plugins: ["svelte3"],
