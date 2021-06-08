@@ -8,10 +8,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 15.x
-      - uses: actions/setup-java@v1
-        with:
-          java-version: 8
+          node-version: 16.x
       - name: Lint core and features
         run: |
           pushd eslint-config
@@ -23,6 +20,24 @@ jobs:
         run: ./build.js
       - name: Test core and features
         run: xvfb-run --auto-servernum ./build.js test
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            android:
+            - 'android/**'
+            - 'core/api/**'
+            - 'core/communication/**'
+            - 'core/utils/**'
+            - 'features/lexicon/**'
+            - 'features/polyExplorer/**'
+            - 'features/polyPreview/**'
+            - 'podjs/**'
+      - uses: actions/setup-java@v1
+        if: steps.changes.outputs.android == 'true'
+        with:
+          java-version: 8
       - name: Test android
+        if: steps.changes.outputs.android == 'true'
         working-directory: android
         run: ./gradlew test
