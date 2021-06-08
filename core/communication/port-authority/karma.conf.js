@@ -3,7 +3,6 @@ const {nodeResolve} = require("@rollup/plugin-node-resolve");
 const commonjs = require("@rollup/plugin-commonjs");
 
 process.env.CHROME_BIN = require("puppeteer").executablePath();
-process.env.FIREFOX_BIN = require("puppeteer-firefox").executablePath();
 
 module.exports = function (config) {
     config.set({
