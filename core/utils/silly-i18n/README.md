@@ -12,3 +12,5 @@ It includes very basic language capabilities based on the browser language featu
 ## Documentation
 
 You can run `npm run doc` to generate documentation. Documentation will appear in the `doc` directory.
+
+> Please bear in mind that you'll have to delete them by hand if you want to run the integration tests with cypress.
