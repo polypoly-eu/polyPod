@@ -26,11 +26,13 @@ jobs:
           filters: |
             android:
             - 'android/**'
-            - 'core/api/fetch-spec/**'
-            - 'core/communication/bubblewrap/**'
-            - 'core/communication/remote-pod/**'
-            - 'features/bundle/**'
-            - 'features/test/**'
+            - 'core/api/**'
+            - 'core/communication/**'
+            - 'core/utils/**'
+            - 'features/lexicon/**'
+            - 'features/polyExplorer/**'
+            - 'features/polyPreview/**'
+            - 'podjs/**'
       - uses: actions/setup-java@v1
         if: steps.changes.outputs.android == 'true'
         with:
