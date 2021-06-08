@@ -96,3 +96,22 @@
     margin-top: 4px;
     margin-bottom: 4px;
 }
+
+.clr {
+    opacity: 0;
+}
+@keyframes fadeInClrBtn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.clr.active {
+    opacity: 1;
+    animation-name: fadeInClrBtn;
+    animation-timing-function: ease-in;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}
