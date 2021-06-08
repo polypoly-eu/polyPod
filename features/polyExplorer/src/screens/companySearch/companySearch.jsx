@@ -55,13 +55,19 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                     />
                     {searchString == "" ? null : (
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 23d64359 (:rotating_light:)
                         <button
                             className={searchString ? "clr active" : "clr"}
                             onClick={() => handleClear()}
                         >
+<<<<<<< HEAD
 =======
                         <button className={searchString ? "clr active" : "clr"} onClick={() => handleClear()}>
 >>>>>>> aef5ed13 (Unify clear button in search bars)
+=======
+>>>>>>> 23d64359 (:rotating_light:)
                             <img src="./images/clear-search.svg" />
                         </button>
                     )}
