@@ -156,6 +156,11 @@ task copyBundledFeatures(type: Copy) {
     into "build/generated-assets/features"
 }
 
+task copyThirdPartyLicenses(type: Copy) {
+    from "../../3rd-party-licenses"
+    into "build/generated-assets/3rd-party-licenses"
+}
+
 task packageTestFeature(type: Zip) {
     archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
@@ -188,6 +193,7 @@ tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
         task.dependsOn copyRemotePod
         task.dependsOn copyBundledFeatures
+        task.dependsOn copyThirdPartyLicenses
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice

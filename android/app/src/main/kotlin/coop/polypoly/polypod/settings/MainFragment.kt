@@ -32,5 +32,10 @@ class MainFragment : PreferenceFragmentCompat() {
                 view?.findNavController()?.navigate(R.id.TermsOfUseFragment)
                 true
             }
+        findPreference<Preference>("licenses")?.onPreferenceClickListener =
+            Preference.OnPreferenceClickListener {
+                view?.findNavController()?.navigate(R.id.LicensesFragment)
+                true
+            }
     }
 }
