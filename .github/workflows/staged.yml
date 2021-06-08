@@ -51,7 +51,8 @@ jobs:
     name: Unit tests and lint for polyExplorer and node version ${{matrix.node}}
     env:
       polyExplorer-dir: ./features/polyExplorer
-          - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.node}}
@@ -83,7 +84,8 @@ jobs:
     name: Unit tests and lint for lexicon and node version ${{matrix.node}}
     env:
       lexicon-dir: ./features/lexicon
-          - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.node}}

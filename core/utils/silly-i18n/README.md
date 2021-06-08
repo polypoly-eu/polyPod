@@ -9,4 +9,4 @@ It includes very basic language capabilities based on the browser language featu
 
 ## Documentation
 
-After install, run `npm run doc` to generate documentation.
+You can run `npm run doc` to generate documentation.
