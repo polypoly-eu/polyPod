@@ -1,6 +1,6 @@
 # silly-i18n
 
-A simple i18n module, following the format and API of i18next.
+A simple i18n module, following the format and API of i18next. It takes a language and an hash with language as primary keys, namespaces as secondary keys, and string names as tertiary keys.
 
 
 ## Usage
