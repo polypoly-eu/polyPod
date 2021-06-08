@@ -25,7 +25,6 @@ import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import eu.polypoly.pod.android.polyOut.PolyOut
 import java.util.zip.ZipFile
 
-
 @SuppressLint("SetJavaScriptEnabled")
 class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     LinearLayout(context, attrs), LifecycleOwner {
@@ -239,12 +238,13 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-
     class ClipboardInterface(aContext : Context) {
         var context: Context
+
         init {
             context = aContext
         }
+
         @JavascriptInterface
         fun copyToClipboard(text: String?) {
             var clipboard: ClipboardManager =
@@ -253,6 +253,4 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             clipboard.setPrimaryClip(clip);
         }
     }
-
-
 }
