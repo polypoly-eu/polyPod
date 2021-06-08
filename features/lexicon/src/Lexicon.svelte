@@ -1,10 +1,5 @@
 <style>
 @font-face {
-    font-family: "Jost";
-    src: url("../fonts/jost_regular.ttf");
-}
-
-@font-face {
     font-family: "Jost Medium";
     src: url("../fonts/jost_medium.ttf");
 }
