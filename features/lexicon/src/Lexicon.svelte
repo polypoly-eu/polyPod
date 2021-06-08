@@ -224,8 +224,10 @@ function handleCopytoClipboard(term) {
 }
 
 function copyText(text) {
-  navigator.clipboard.writeText(text)
-  nativeAndroidClipboard?.copyToClipboard(text);
+    if (window.nativeAndroidClipboard)
+        window.nativeAndroidClipboard.copyToClipboard(text);
+    else
+        navigator.clipboard.writeText(text)
 }
 
 function handleBack() {
