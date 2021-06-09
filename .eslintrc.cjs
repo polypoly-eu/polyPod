@@ -37,7 +37,6 @@ module.exports = {
         semi: 2,
         "react/prop-types": "off",
         "react/jsx-key": "off",
-
     },
     overrides: [
         {
