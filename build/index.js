@@ -69,9 +69,9 @@ function createPackageTree(metaManifest) {
     );
 }
 
-const logMain = (message) => console.log(`\n🚧 ${message}`);
+const logMain = (message) => console.log(`\n 🚧 ${message}`);
 
-const logDetail = (message) => console.log(`\n🏗️ ${message}`);
+const logDetail = (message) => console.log(`\n 🏗️ ${message}`);
 
 function logDependencies(packageTree) {
     const dependencyMap = {};
@@ -195,12 +195,16 @@ async function main() {
     process.chdir(path.dirname(scriptPath));
 
     if (command === "lint") {
+        logDetail(`🧹 ...`);
+        await npm("install", "-g", "eslint");
+        await npm("ci", "--no-update-notifier", "--no-fund");
         await executeProcess("eslint", ["--ext", ".ts,.js,.tsx,.jsx", "."]);
         logSuccess(command);
         return 0;
     }
 
     if (command === "lintfix") {
+        logDetail(`🚨 ...`);
         await executeProcess("eslint", [
             "--fix",
             "--ext",
