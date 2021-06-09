@@ -5,7 +5,7 @@ module.exports = {
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/no-empty-function": "off",
     },
-    ignorePatterns: ["**/src/i18n/*.js"],
+    ignorePatterns: ["**/src/i18n/*.js", "**/src/questionnaire/*"],
     settings: {
         react: {
             version: "detect",
