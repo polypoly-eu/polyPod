@@ -4,6 +4,9 @@ A simple i18n module, following the format and API of i18next. It takes a langua
 
 It includes a function to detect the language, which should work on the browser as well as elsewhere.
 
+## Install and test
+
+Run `npm ci` for installing, `npm run test` for carrying out tests.
 
 ## Usage
 
