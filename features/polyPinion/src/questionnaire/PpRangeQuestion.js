@@ -11,14 +11,14 @@
 // - labels - an array of labels to be displayed under the slider.
 //      Initially this will only work with two values.
 //
-import assert from "../util/assert";
-import PpQuestion from "./PpQuestion.js";
-import { i18n } from "../i18n/i18n.js";
+import assert from '../util/assert';
+import PpQuestion from './PpQuestion.js';
+import { i18n } from '../i18n/i18n.js';
 
 export default class PpRangeQuestion extends PpQuestion {
-    constructor(description) {
+    constructor (description) {
         super(description);
-        this._explanation = "general.choose-seat";
+        this._explanation = 'general.choose-seat';
         this._min = 0;
         this._max = 0;
         this._steps = null;
@@ -27,7 +27,7 @@ export default class PpRangeQuestion extends PpQuestion {
     }
 
     screen() {
-        return "RangeQuestion";
+        return 'RangeQuestion';
     }
 
     get min() {
@@ -55,7 +55,7 @@ export default class PpRangeQuestion extends PpQuestion {
     }
 
     get labels() {
-        return this._labels.map((label) => i18n.t(label));
+        return this._labels.map(label => i18n.t(label));
     }
 
     set labels(labels) {
@@ -77,7 +77,7 @@ export default class PpRangeQuestion extends PpQuestion {
         while (current < this.max) {
             values.push(current);
             current += this.steps;
-        }
+        };
         values.push(this.max);
         return values;
     }
@@ -95,6 +95,7 @@ export default class PpRangeQuestion extends PpQuestion {
         assert(answer.questionId == this.id);
         this._value = answer.answer;
     }
+
 }
 
 //module.exports = PpRangeQuestion;

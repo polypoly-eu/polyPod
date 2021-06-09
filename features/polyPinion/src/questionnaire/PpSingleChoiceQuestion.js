@@ -1,14 +1,14 @@
-import assert from "../util/assert";
-import PpChoiceQuestion from "./PpChoiceQuestion.js";
+import assert from '../util/assert';
+import PpChoiceQuestion from './PpChoiceQuestion.js';
 
 export default class PpSingleChoiceQuestion extends PpChoiceQuestion {
     constructor(description) {
         super(description);
-        this._explanation = "general.choose-one";
+        this._explanation = 'general.choose-one';
     }
 
     selectedChoice() {
-        return this._choices.find((item) => item.isSelected());
+        return this._choices.find(item => item.isSelected());
     }
 
     isAnswered() {
@@ -20,7 +20,7 @@ export default class PpSingleChoiceQuestion extends PpChoiceQuestion {
     }
 
     screen() {
-        return "MultipleChoiceQuestion";
+        return 'MultipleChoiceQuestion';
     }
 
     // Answer the object to be stored in the answer json document.
@@ -38,7 +38,7 @@ export default class PpSingleChoiceQuestion extends PpChoiceQuestion {
     // Deselect all other choices
     //
     selectChoice(choice) {
-        this.choices().forEach((each) => {
+        this.choices().forEach(each => {
             if (each !== choice) {
                 each.beNotSelected();
             }
@@ -48,11 +48,13 @@ export default class PpSingleChoiceQuestion extends PpChoiceQuestion {
     // Update the receiver based on the supplied answer (JSON object)
     loadAnswer(answer) {
         assert(answer.questionId == this.id);
-        this._choices.forEach((choice) => choice.beNotSelected());
+        this._choices.forEach(choice => choice.beNotSelected());
         if (answer.answer != null) {
-            this._choices.find((choice) => choice.id == answer.answer).beSelected();
+            this._choices.find(choice => choice.id == answer.answer)
+                .beSelected();
         }
     }
+
 }
 
 //module.exports = PpSingleChoiceQuestion;

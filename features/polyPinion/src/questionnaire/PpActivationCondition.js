@@ -1,11 +1,11 @@
-import PpQObject from "./PpQObject.js";
+import PpQObject from './PpQObject.js';
 
 //
 // ActivationConditions are used to determine whether the current
 // question should be presented to the user.
 //
 // Typical criteria include:
-// - Do or don't present based on the value chosen in a
+// - Do or don't present based on the value chosen in a 
 //   previous question.
 // - Do or don't present based on the language
 //
@@ -29,7 +29,7 @@ export default class PpActivationCondition extends PpQObject {
     }
 
     isActive() {
-        throw Error("subclass responsibility");
+        throw Error('subclass responsibility');
     }
 
     toJSON() {

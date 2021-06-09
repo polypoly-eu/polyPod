@@ -1,4 +1,4 @@
-import PpDependOnAnotherQuestion from "./PpDependOnAnotherQuestion.js";
+import PpDependOnAnotherQuestion from './PpDependOnAnotherQuestion.js';
 
 export default class PpDependOnMultipleChoice extends PpDependOnAnotherQuestion {
     constructor(dependent_question, choices) {

@@ -1,4 +1,4 @@
-import PpQObject from "./PpQObject.js";
+import PpQObject from './PpQObject.js';
 
 //
 // PpTermsAndConditions - store details about the T&C of the questionnaire
@@ -8,9 +8,9 @@ import PpQObject from "./PpQObject.js";
 //
 export default class PpTermsAndConditions extends PpQObject {
     constructor() {
-        super();
-        this._link = null;
-        this._text = null;
+      super();
+      this._link = null;
+      this._text = null;
     }
 
     get link() {
@@ -28,4 +28,5 @@ export default class PpTermsAndConditions extends PpQObject {
     set text(text) {
         this._text = text;
     }
-}
+
+}  

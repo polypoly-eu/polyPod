@@ -1,12 +1,12 @@
-import assert from "../util/assert";
-import PpQuestion from "./PpQuestion.js";
-import { i18n } from "../i18n/i18n.js";
+import assert from '../util/assert';
+import PpQuestion from './PpQuestion.js';
+import { i18n } from '../i18n/i18n.js';
 
 export default class PpTextQuestion extends PpQuestion {
     constructor(description) {
         super(description);
         this._answer = null;
-        this._explanation = "general.enter-answer-below";
+        this._explanation = 'general.enter-answer-below';
         this._max_length = null;
         this._multiline = false;
         this._number_of_lines = 1;
@@ -58,7 +58,7 @@ export default class PpTextQuestion extends PpQuestion {
 
     setAnswer(value) {
         if (this.maxLength != null && value.length > this.maxLength) {
-            throw Error("Answer length too long: " + value.length + " > " + this.maxLength);
+            throw Error('Answer length too long: ' + value.length + ' > ' + this.maxLength);
         }
         this._answer = value;
         return this;
@@ -72,7 +72,7 @@ export default class PpTextQuestion extends PpQuestion {
     }
 
     screen() {
-        return "TextQuestion";
+        return 'TextQuestion';
     }
 
     // Update the receiver based on the supplied answer (JSON object)
@@ -80,6 +80,7 @@ export default class PpTextQuestion extends PpQuestion {
         assert(answer.questionId == this.id);
         this._answer = answer.answer;
     }
+
 }
 
 //module.exports = PpTextQuestion;

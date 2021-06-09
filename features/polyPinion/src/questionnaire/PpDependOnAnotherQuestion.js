@@ -1,4 +1,4 @@
-import PpActivationCondition from "./PpActivationCondition.js";
+import PpActivationCondition from './PpActivationCondition.js';
 
 //
 // PpDependOnAnotherQuestion is an abstract class that is activated
