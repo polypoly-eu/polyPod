@@ -3,7 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
-const validCommands = ["build", "test", "lint", "list", "list-deps"];
+const validCommands = ["build", "test", "lint", "lintfix", "list", "list-deps"];
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
@@ -50,9 +50,8 @@ function extractDependencies(manifest) {
 
 function createPackageData(path) {
     const manifest = parseManifest(`${path}/package.json`);
-    const { localDependencies, remoteDependencies } = extractDependencies(
-        manifest
-    );
+    const { localDependencies, remoteDependencies } =
+        extractDependencies(manifest);
     return {
         path,
         name: manifest.name,
@@ -70,9 +69,9 @@ function createPackageTree(metaManifest) {
     );
 }
 
-const logMain = (message) => console.log(`\n***** ${message}`);
+const logMain = (message) => console.log(`\n🚧 ${message}`);
 
-const logDetail = (message) => console.log(`\n*** ${message}`);
+const logDetail = (message) => console.log(`\n🏗️ ${message}`);
 
 function logDependencies(packageTree) {
     const dependencyMap = {};
@@ -182,7 +181,7 @@ async function processAll(packageTree, command) {
         await processPackage(name, packageTree, command);
 }
 
-function logSuccess( command ) {
+function logSuccess(command) {
     logMain(`✅ Command '${command}' succeeded!`);
 }
 
@@ -195,10 +194,21 @@ async function main() {
 
     process.chdir(path.dirname(scriptPath));
 
-    if ( command === 'lint') {
-        await executeProcess( "eslint", ["--ext", ".ts,.js,.tsx,.jsx", "."]);
-        logSuccess( command );
-        return(0);
+    if (command === "lint") {
+        await executeProcess("eslint", ["--ext", ".ts,.js,.tsx,.jsx", "."]);
+        logSuccess(command);
+        return 0;
+    }
+
+    if (command === "lintfix") {
+        await executeProcess("eslint", [
+            "--fix",
+            "--ext",
+            ".ts,.js,.tsx,.jsx",
+            ".",
+        ]);
+        logSuccess(command);
+        return 0;
     }
 
     const metaManifest = parseManifest("build/packages.json");

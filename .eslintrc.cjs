@@ -29,7 +29,8 @@ module.exports = {
         "**/coverage/*",
         "data/",
         ".eslintrc.*",
-        "build/",
+        "**/public/build/*",
+        "**/bubblewrap/build/*",
         "podApi/",
         "PolyPodApp/"],
     rules: {
