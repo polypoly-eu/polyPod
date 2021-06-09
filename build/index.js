@@ -181,8 +181,12 @@ async function processAll(packageTree, command) {
         await processPackage(name, packageTree, command);
 }
 
+function ANSIBold(string) {
+    return `\x1b[1m${string}\x1b[0m`;
+}
+
 function logSuccess(command) {
-    logMain(`✅ Command '${command}' succeeded!`);
+    logMain(`✅ Command «${ANSIBold(command)}» succeeded!`);
 }
 
 async function main() {
