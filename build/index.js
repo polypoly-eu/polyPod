@@ -166,7 +166,11 @@ async function processPackage(name, packageTree, command) {
     const entries = Object.entries(packageTree);
     const total = entries.length;
     const current = entries.filter(([, pkg]) => pkg.processed).length + 1;
-    logMain(`Executing ${command} for ${ANSIbold(pkg.path)} [${current}/${total}] ...`);
+    logMain(
+        `Executing ${command} for ${ANSIBold(
+            pkg.path
+        )} [${current}/${total}] ...`
+    );
     await executeCommand(pkg, command);
     pkg.processed = true;
 }
