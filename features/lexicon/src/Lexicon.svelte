@@ -198,10 +198,6 @@ button {
     opacity: 0;
 }
 
-.hidden {
-    display: none
-}
-
 @keyframes fadeInClrBtn {
     0% {
         opacity: 0;
