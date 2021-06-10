@@ -140,6 +140,11 @@ button {
     margin: 0;
 }
 
+.term-description .top button {
+    /* "Copy to clipboard" button is hidden until we add a notification to confirm that the text has been copied */
+    display: none;
+}
+
 .term-description .scroll-container {
     display: flex;
     flex-flow: column;
