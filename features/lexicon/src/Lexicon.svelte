@@ -145,9 +145,11 @@ button {
     flex-flow: column;
     overflow: hidden scroll;
     width: 100%;
+    height: 80vh;
     max-width: 412px;
     margin-bottom: 60px;
     position: relative;
+    padding-bottom: 48px;
 }
 
 .term-description .scroll-container .gradient-area {
@@ -221,13 +223,12 @@ export let lexicon;
 let showTerm = null;
 let searchString = "";
 let pod = window.pod;
-let scrollingProgress = 0;
+let scrollingProgress;
 let savedScrollingProgress;
-
 setUpListNavigation();
 
-const onListLoad = () => {
-    if (savedScrollingProgress) window.scroll(0, savedScrollingProgress)
+const onListLoad = (e) => {
+    if (savedScrollingProgress) e.scrollTop = savedScrollingProgress
 }
 
 function handleClickTerm(term) {
@@ -278,14 +279,11 @@ function setUpTermNavigation() {
         );
     }
 
-function setUpListNavigation(){
+function setUpListNavigation() {
     pod.polyNav.setTitle(i18n.t("title:lexicon"));
     pod.polyNav.setActiveActions([""]);
 }
-
 </script>
-
-<svelte:window bind:scrollY={scrollingProgress}/>
 
 <main class="lexicon">
     <div class="top-separator"></div>
@@ -293,11 +291,11 @@ function setUpListNavigation(){
         <div class="term-description">
             <div class="scroll-container">
                 <div class="top">
-                <h2>{showTerm}</h2>
-                <button on:click="{handleCopytoClipboard(showTerm)}">
-            <img src="./images/Copy.svg" alt="{i18n.t("common:copy")}" title="{i18n.t("common:copy")}">
-                </button>
-            </div>
+                    <h2>{showTerm}</h2>
+                    <button on:click="{handleCopytoClipboard(showTerm)}">
+                        <img src="./images/Copy.svg" alt="{i18n.t("common:copy")}" title="{i18n.t("common:copy")}">
+                    </button>
+                </div>
                 {@html lexicon.description(showTerm)}
                 <div class="gradient-area">
                     <div class="gradient"></div>
@@ -324,7 +322,7 @@ function setUpListNavigation(){
                 </button>
             </div>
         </div>
-        <div use:onListLoad class="term-list-container">
+        <div use:onListLoad on:scroll={(e) => scrollingProgress = e.target.scrollTop} class="term-list-container">
             {#if searchString}
                 {#if lexicon.search(searchString).length === 0}
                     <div class="no-result">
