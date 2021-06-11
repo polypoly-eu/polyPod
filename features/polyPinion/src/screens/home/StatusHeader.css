@@ -1,0 +1,18 @@
+.card header {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    text-transform: none;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.card .questionnaire-started {
+    background-color: var(--color-medium);
+}
+
+.card header p {
+    font-size: var(--text-xs);
+    margin: 0;
+}
