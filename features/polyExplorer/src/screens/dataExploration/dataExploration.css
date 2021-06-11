@@ -244,11 +244,11 @@
     position: absolute;
     top: 40px;
     right: 0;
-    height: 50vh;
+    height: 40vh;
     left: 0;
 }
 
-@media(min-width: 361px) {
+@media(min-height: 763px) {
     .data-exploration .slide-tap-target {
         height: 60vh;
     }
