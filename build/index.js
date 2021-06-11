@@ -19,7 +19,7 @@ function parseCommandLine() {
 
 function showUsage(scriptPath) {
     console.error(
-        `Usage: ${path.basename(scriptPath)} [ test | list | list-deps]`
+        `Usage: ${path.basename(scriptPath)} [ ${validCommands.join(" | ")} ]`
     );
     console.error("  Run without arguments to build all packages");
 }
