@@ -204,9 +204,13 @@ async function main() {
 
     if (command === "lint") {
         logDetail(`🧹 ...`);
-        await npm("install", "-g", "eslint");
         await npm("ci", "--no-update-notifier", "--no-fund");
-        await executeProcess("eslint", ["--ext", ".ts,.js,.tsx,.jsx", "."]);
+        await executeProcess("npx", [
+            "eslint",
+            "--ext",
+            ".ts,.js,.tsx,.jsx",
+            ".",
+        ]);
         logSuccess(command);
         return 0;
     }
