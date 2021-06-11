@@ -244,8 +244,14 @@
     position: absolute;
     top: 40px;
     right: 0;
-    bottom: 60px;
+    height: 50vh;
     left: 0;
+}
+
+@media(min-width: 361px) {
+    .data-exploration .slide-tap-target {
+        height: 60vh;
+    }
 }
 
 .data-exploration .on-bubble {
