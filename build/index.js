@@ -202,27 +202,19 @@ async function main() {
 
     process.chdir(path.dirname(scriptPath));
 
+    const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
+
     if (command === "lint") {
         logDetail(`🧹 ...`);
         await npm("ci", "--no-update-notifier", "--no-fund");
-        await executeProcess("npx", [
-            "eslint",
-            "--ext",
-            ".ts,.js,.tsx,.jsx",
-            ".",
-        ]);
+        await executeProcess("npx", ["eslint", ...eslintOptions]);
         logSuccess(command);
         return 0;
     }
 
     if (command === "lintfix") {
         logDetail(`🚨 ...`);
-        await executeProcess("eslint", [
-            "--fix",
-            "--ext",
-            ".ts,.js,.tsx,.jsx",
-            ".",
-        ]);
+        await executeProcess("npx", ["eslint", "--fix", ...eslintOptions]);
         logSuccess(command);
         return 0;
     }
