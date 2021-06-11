@@ -6,6 +6,7 @@
 .home .new-surveys-area {
     background: var(--light-background);
     text-align: center;
+    padding: 32px;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -16,7 +17,6 @@
     width: 100%;
     height: 48px;
     max-width: var(--max-width);
-    margin: 32px;
     border-radius: 4px;
     background-color: var(--color-semi-dark);
     color: var(--light-text);
