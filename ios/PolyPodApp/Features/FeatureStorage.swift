@@ -43,7 +43,25 @@ class FeatureStorage {
             print(error.localizedDescription)
         }
         
-        return featuresList
+        return sortFeatures(featuresList)
+    }
+    
+    private func sortFeatures(_ features: [Feature]) -> [Feature] {
+        // TODO: Instead of hard coding the order of features here, we should
+        //       read it from the bundle.
+        let order = ["polyPreview", "polyExplorer", "lexicon"]
+        var sorted: [Feature] = []
+        for name in order {
+            if let match = features.first(where: { $0.name == name }) {
+                sorted.append(match)
+            }
+        }
+        for feature in features {
+            if !order.contains(feature.name) {
+                sorted.append(feature)
+            }
+        }
+        return sorted
     }
     
     func importFeatures() {

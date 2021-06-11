@@ -44,14 +44,7 @@ class FeatureListFragment : Fragment() {
             findNavController().navigate(FeatureListFragmentDirections.actionFeatureListFragmentToSettingsActivity())
         }
 
-        val features = featureStorage.listFeatures(context).sortedWith { a, b ->
-            when {
-                a.name == "polyPreview" -> -1
-                b.name == "polyPreview" -> 1
-                else -> compareBy<Feature> { it.name }.compare(a, b)
-            }
-        }
-
+        val features = featureStorage.listFeatures(context)
         viewManager = LinearLayoutManager(context)
         viewAdapter = FeatureCardAdapter(this, features)
 

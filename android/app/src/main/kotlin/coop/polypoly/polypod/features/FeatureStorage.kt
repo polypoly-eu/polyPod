@@ -23,21 +23,22 @@ class FeatureStorage {
             logger.debug("Directory for Features already exists")
         }
         val filesList = featuresDir.listFiles()
-        return if (filesList != null) {
-            logger.debug("Found {} Features", filesList.size)
-            val features: MutableList<Feature> = ArrayList(filesList.size)
-            for (file in filesList) {
-                logger.debug("Found file: '${file.absolutePath}'")
-                features.add(loadFeature(context, file.name))
-            }
-            for (feature in features) {
-                logger.debug("Found Feature: '{}'", feature.name)
-            }
-            features
-        } else {
+        if (filesList == null) {
             logger.debug("No Features found")
-            emptyList()
+            return emptyList()
         }
+
+        logger.debug("Found {} Features", filesList.size)
+        val features: MutableList<Feature> = ArrayList(filesList.size)
+        for (file in filesList) {
+            logger.debug("Found file: '${file.absolutePath}'")
+            features.add(loadFeature(context, file.name))
+        }
+        val sorted = sortFeatures(features)
+        for (feature in sorted) {
+            logger.debug("Found Feature: '{}'", feature.name)
+        }
+        return sorted
     }
 
     fun loadFeature(context: Context, fileName: String): Feature {
@@ -56,6 +57,21 @@ class FeatureStorage {
             supportedLocales
         )
         return userLocale?.language ?: "en"
+    }
+
+    private fun sortFeatures(features: List<Feature>): List<Feature> {
+        // TODO: Instead of hard coding the order of features here, we should
+        //       read it from the bundle.
+        val order = listOf("polyPreview", "polyExplorer", "lexicon")
+        val sorted = mutableListOf<Feature>()
+        for (name in order)
+            features.find { it.name == name }?.let {
+                sorted.add(it)
+            }
+        for (feature in features)
+            if (!order.contains(feature.name))
+                sorted.add(feature)
+        return sorted
     }
 
     fun installBundledFeatures(context: Context) {
