@@ -22,7 +22,8 @@ class FeatureStorage {
         } else {
             logger.debug("Directory for Features already exists")
         }
-        val filesList = featuresDir.listFiles()
+        val filesList =
+            featuresDir.listFiles { _, name -> name.endsWith(".zip") }
         if (filesList == null) {
             logger.debug("No Features found")
             return emptyList()
@@ -34,7 +35,7 @@ class FeatureStorage {
             logger.debug("Found file: '${file.absolutePath}'")
             features.add(loadFeature(context, file.name))
         }
-        val sorted = sortFeatures(features)
+        val sorted = sortFeatures(context, features)
         for (feature in sorted) {
             logger.debug("Found Feature: '{}'", feature.name)
         }
@@ -59,10 +60,11 @@ class FeatureStorage {
         return userLocale?.language ?: "en"
     }
 
-    private fun sortFeatures(features: List<Feature>): List<Feature> {
-        // TODO: Instead of hard coding the order of features here, we should
-        //       read it from the bundle.
-        val order = listOf("polyPreview", "polyExplorer", "lexicon")
+    private fun sortFeatures(
+        context: Context,
+        features: List<Feature>
+    ): List<Feature> {
+        val order = readOrder(context)
         val sorted = mutableListOf<Feature>()
         for (name in order)
             features.find { it.name == name }?.let {
@@ -73,6 +75,10 @@ class FeatureStorage {
                 sorted.add(feature)
         return sorted
     }
+
+    private fun readOrder(context: Context) =
+        context.assets.open("features/order").bufferedReader()
+            .use { it.readLines() }
 
     fun installBundledFeatures(context: Context) {
         for (featureBundle in context.assets.list("features").orEmpty()) {
