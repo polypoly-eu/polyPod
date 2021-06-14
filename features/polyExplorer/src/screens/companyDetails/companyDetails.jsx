@@ -202,6 +202,9 @@ const CompanyDetails = ({
                         <JurisdictionLegend
                             onOpenRegionInfo={onOpenRegionInfo}
                         />
+                        <CompanyRevenueChart
+                            annualRevenues={company.annualRevenues}
+                        />
                     </div>
                 </div>
             ),
