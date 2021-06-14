@@ -264,9 +264,6 @@ const PolyExplorer = () => {
                         activeIndex
                     )
                 }
-                onOpenDetails={(company) =>
-                    handleActiveScreenChange("companyDetails", company)
-                }
             />
         ),
         companyDetails: (
