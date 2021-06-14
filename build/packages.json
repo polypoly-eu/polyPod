@@ -12,7 +12,6 @@
         "core/communication/port-authority",
         "core/communication/postoffice",
         "core/communication/remote-pod",
-        "core/legacy/orodruin",
         "core/utils/dummy-server",
         "core/utils/rollup-plugin-copy-watch",
         "core/utils/silly-i18n",
