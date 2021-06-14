@@ -1,10 +1,9 @@
 import React from "react";
-import i18n from "../../i18n.js";
+import "./dataSharingLegend.css";
 
-const DataSharingLegend = ({ onClick }) => (
-    <div className="data-sharing-legend" onClick={onClick}>
-        <img src="images/question-circle.svg"></img>
-        {i18n.t("featuredCompany:text.legend")}
+const DataSharingLegend = ({ light = false, onClick }) => (
+    <div className={light ? "data-sharing-legend-light" : "data-sharing-legend"} onClick={onClick}>
+        <img src={light ? "images/question-light.svg" : "images/question-dark.svg"}></img>
     </div>
 );
 
