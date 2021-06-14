@@ -10,7 +10,6 @@
     "@bahmutov/cy-rollup": "^2.0.0",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@rollup/plugin-sucrase": "^3.1.0",
-    "connect": "^3.7.0",
     "cypress": "^7.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
