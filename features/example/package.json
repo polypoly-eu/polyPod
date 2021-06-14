@@ -7,13 +7,15 @@
     "test": "./test.sh"
   },
   "devDependencies": {
+    "@bahmutov/cy-rollup": "^2.0.0",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@rollup/plugin-sucrase": "^3.1.0",
     "connect": "^3.7.0",
+    "cypress": "^7.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rollup": "^2.26.11",
-    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-copy": "^3.3.0"
   },
   "engines": {
     "polypoly": "^0.6.0"
