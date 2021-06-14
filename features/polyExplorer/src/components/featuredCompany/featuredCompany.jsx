@@ -1,7 +1,6 @@
 import React from "react";
 import i18n from "../../i18n.js";
 import DataSharingGauge from "../dataSharingGauge/dataSharingGauge.jsx";
-import Scrollable from "../scrollable/scrollable.jsx";
 import "./featuredCompany.css";
 
 const DataSharingSection = ({

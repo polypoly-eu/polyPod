@@ -166,7 +166,12 @@ const PolyExplorer = () => {
     }
 
     function updatePodNavigation() {
-        pod.polyNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
+        if (
+            activeScreen == "dataExploration" ||
+            activeScreen == "companyDetails"
+        )
+            pod.polyNav.setTitle(companies[selectedCompany].name);
+        else pod.polyNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
         pod.polyNav.actions = firstRun
             ? { info: () => {}, search: () => {} }
             : {
