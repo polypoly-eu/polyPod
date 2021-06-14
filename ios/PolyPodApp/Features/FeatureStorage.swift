@@ -91,8 +91,7 @@ class FeatureStorage {
         let featureUrl = featureDirUrl.appendingPathComponent(featureName)
         if !FileManager.default.fileExists(atPath: featureUrl.absoluteString) {
             do {
-                if let _ = Bundle.main.path(forResource: featureName, ofType: "zip") {
-                    let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip", subdirectory: "features")!
+                if let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip", subdirectory: "features") {
                     let unzipDirectory = try Zip.quickUnzipFile(filePath)
                     try FileManager.default.moveItem(at: unzipDirectory, to: featuresFileUrl.appendingPathComponent(featureName))
                     try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
