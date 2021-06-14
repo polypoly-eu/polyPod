@@ -7,10 +7,6 @@
     border-radius: 24px;
 }
 
-.featured-company-card ~ .gradient-area {
-    bottom: 100px;
-}
-
 .featured-company-card .short-info-margin {
     margin-left: 12px;
 }
