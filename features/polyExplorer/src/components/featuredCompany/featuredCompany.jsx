@@ -32,64 +32,53 @@ const FeaturedCompany = ({
     onOpenDataExplorationSection,
 }) => {
     return (
-        <Scrollable>
-            <div className="featured-company-card">
-                <div className="data-sharing-section-list">
-                    <DataSharingSection
-                        sharingType="dataTypes"
-                        count={company.dataTypesShared.length}
-                        max={maxValues.dataTypes}
-                        average={averageValues.dataTypes}
-                        onOpenDetails={() =>
-                            onOpenDataExplorationSection(
-                                "dataTypes",
-                                company.ppid
-                            )
-                        }
-                    />
-                    <DataSharingSection
-                        sharingType="purposes"
-                        count={company.dataSharingPurposes.length}
-                        max={maxValues.purposes}
-                        average={averageValues.purposes}
-                        onOpenDetails={() =>
-                            onOpenDataExplorationSection(
-                                "purposes",
-                                company.ppid
-                            )
-                        }
-                    />
-                    <DataSharingSection
-                        sharingType="companies"
-                        count={company.dataRecipients.length}
-                        max={maxValues.companies}
-                        average={averageValues.companies}
-                        onOpenDetails={() =>
-                            onOpenDataExplorationSection(
-                                "companies",
-                                company.ppid
-                            )
-                        }
-                    />
-                    <DataSharingSection
-                        sharingType="jurisdictions"
-                        count={
-                            company.jurisdictionsShared
-                                ? company.jurisdictionsShared.children.length
-                                : 0
-                        }
-                        max={maxValues.jurisdictions}
-                        average={averageValues.jurisdictions}
-                        onOpenDetails={() =>
-                            onOpenDataExplorationSection(
-                                "jurisdictions",
-                                company.ppid
-                            )
-                        }
-                    />
-                </div>
+        <div className="featured-company-card">
+            <div className="data-sharing-section-list">
+                <DataSharingSection
+                    sharingType="dataTypes"
+                    count={company.dataTypesShared.length}
+                    max={maxValues.dataTypes}
+                    average={averageValues.dataTypes}
+                    onOpenDetails={() =>
+                        onOpenDataExplorationSection("dataTypes", company.ppid)
+                    }
+                />
+                <DataSharingSection
+                    sharingType="purposes"
+                    count={company.dataSharingPurposes.length}
+                    max={maxValues.purposes}
+                    average={averageValues.purposes}
+                    onOpenDetails={() =>
+                        onOpenDataExplorationSection("purposes", company.ppid)
+                    }
+                />
+                <DataSharingSection
+                    sharingType="companies"
+                    count={company.dataRecipients.length}
+                    max={maxValues.companies}
+                    average={averageValues.companies}
+                    onOpenDetails={() =>
+                        onOpenDataExplorationSection("companies", company.ppid)
+                    }
+                />
+                <DataSharingSection
+                    sharingType="jurisdictions"
+                    count={
+                        company.jurisdictionsShared
+                            ? company.jurisdictionsShared.children.length
+                            : 0
+                    }
+                    max={maxValues.jurisdictions}
+                    average={averageValues.jurisdictions}
+                    onOpenDetails={() =>
+                        onOpenDataExplorationSection(
+                            "jurisdictions",
+                            company.ppid
+                        )
+                    }
+                />
             </div>
-        </Scrollable>
+        </div>
     );
 };
 

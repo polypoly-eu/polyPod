@@ -1,7 +1,10 @@
+.details {
+    height: 100%;
+}
+
 .tab-button-container {
     box-sizing: border-box;
     height: 35px;
-    margin: 0 auto;
 }
 
 .tab-button-container .tab-button {
@@ -32,24 +35,6 @@
     flex: 1 1 auto;
     margin: auto;
     overflow-x: hidden;
-    width: 100%;
-    max-width: var(--max-width);
-}
-
-.company-details-screen .company-short-info-container {
-    width: 100%;
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-.company-details-screen .company-short-info-container button {
-    margin: 24px 0 0 22px;
-}
-
-.tab-content-container {
-    position: relative;
-    height: 203px;
-    margin: 2px auto 0 auto;
     width: 100%;
     max-width: var(--max-width);
 }
