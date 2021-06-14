@@ -1,6 +1,4 @@
-# polyPod
-
-The polyPod
+# The polyPod
 
 At the moment, the polyPod is essentially a runtime for _features_; small,
 sandboxed JavaScript applications that can be launched from the polyPod app.
