@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
-    "test": "./test.sh"
+    "test": "npx cypress run"
   },
   "devDependencies": {
     "@bahmutov/cy-rollup": "^2.0.0",
