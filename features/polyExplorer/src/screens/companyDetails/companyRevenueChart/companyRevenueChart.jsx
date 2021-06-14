@@ -123,7 +123,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                     </div>
                 </div>
                 <div className="no-data-text">
-                    {i18n.t("companyDetailsScreen:tab.revenue.fallbackText")}
+                    {i18n.t("companyDetailsScreen:revenue.fallbackText")}
                 </div>
             </div>
         );

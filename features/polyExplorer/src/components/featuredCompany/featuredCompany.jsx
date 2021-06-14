@@ -31,19 +31,11 @@ const FeaturedCompany = ({
     company,
     maxValues,
     averageValues,
-    onOpenDetails,
-    onOpenInfo,
     onOpenDataExplorationSection,
 }) => {
     return (
         <Scrollable>
             <div className="featured-company-card">
-                <div className="short-info-margin">
-                    <CompanyShortInfo
-                        company={company}
-                        onOpenDetails={onOpenDetails}
-                    />
-                </div>
                 <div className="data-sharing-section-list">
                     <DataSharingSection
                         sharingType="dataTypes"
@@ -97,7 +89,6 @@ const FeaturedCompany = ({
                             )
                         }
                     />
-                    <DataSharingLegend onClick={onOpenInfo} />
                 </div>
             </div>
         </Scrollable>

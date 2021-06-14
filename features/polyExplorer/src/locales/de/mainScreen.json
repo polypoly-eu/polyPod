@@ -1,6 +1,6 @@
 {
-    "tab.featuredCompanies":
-        "Datenstories",
-    "tab.allCompanies":
-        "Alle Firmen ({{total}})"
+    "tab.discover":
+        "Entdecken",
+    "tab.explore":
+        "Erkunden"
 }

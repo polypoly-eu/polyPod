@@ -58,7 +58,7 @@ function loadCompanies(JSONData, globalData) {
 const PolyExplorer = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
-    const [showFeatured, setShowFeatured] = useState(true);
+    const [showClusters, setShowClusters] = useState(true);
     const [companies] = useState(
         loadCompanies(polyPediaCompanies, polyPediaGlobalData)
     );
@@ -66,10 +66,6 @@ const PolyExplorer = () => {
         (company) => company.featured
     );
     const [selectedCompany, setSelectedCompany] = useState(undefined);
-    const [
-        featuredCompanyTabInitialSlide,
-        setFeaturedCompanyTabInitialSlide,
-    ] = useState(0);
 
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
     const [firstRun, setFirstRun] = useState(false);
@@ -191,27 +187,16 @@ const PolyExplorer = () => {
     const screens = {
         main: (
             <MainScreen
-                showFeatured={showFeatured}
-                featuredCompanies={featuredCompanies}
+                showClusters={showClusters}
                 companies={companies}
                 globalData={polyPediaGlobalData}
                 onOpenDetails={(company) =>
                     handleActiveScreenChange("companyDetails", company)
                 }
-                onOpenFeaturedInfo={() =>
-                    handleActiveScreenChange("featuredCompanyInfo")
-                }
                 onOpenFilters={() => handleActiveScreenChange("companyFilter")}
-                onShowFeaturedChange={setShowFeatured}
-                featuredCompanyTabInitialSlide={featuredCompanyTabInitialSlide}
-                onFeaturedCompanyTabInitialSlideChange={
-                    setFeaturedCompanyTabInitialSlide
-                }
+                onShowClustersChange={setShowClusters}
                 activeFilters={activeFilters}
                 onRemoveFilter={handleRemoveFilter}
-                featuredCompanyMaxValues={featuredCompanyMaxValues}
-                featuredCompanyAverageValues={featuredCompanyAverageValues}
-                onOpenDataExplorationSection={handleOpenDataExplorationSection}
             />
         ),
         dataExploration: (
@@ -285,9 +270,9 @@ const PolyExplorer = () => {
                 onOpenRegionInfo={() =>
                     handleActiveScreenChange("dataRegionInfo")
                 }
-                onOpenExploration={(ppid) =>
-                    handleActiveScreenChange("dataExploration", ppid)
-                }
+                featuredCompanyMaxValues={featuredCompanyMaxValues}
+                featuredCompanyAverageValues={featuredCompanyAverageValues}
+                onOpenDataExplorationSection={handleOpenDataExplorationSection}
             />
         ),
         companyFilter: (

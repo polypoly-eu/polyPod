@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import i18n from "../../i18n.js";
-import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
+import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
+import FeaturedCompany from "../../components/featuredCompany/featuredCompany.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
 
-const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
+const CompanyDetails = ({
+    company,
+    onOpenRegionInfo,
+    featuredCompanyMaxValues,
+    featuredCompanyAverageValues,
+    onOpenDataExplorationSection,
+}) => {
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
 
@@ -26,248 +33,240 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
     };
 
     const tabTranslation = {
-        location: i18n.t("companyDetailsScreen:tab.location"),
-        structure: i18n.t("companyDetailsScreen:tab.structure"),
-        revenue: i18n.t("companyDetailsScreen:tab.revenue"),
+        dataStory: i18n.t("companyDetailsScreen:tab.dataStory"),
+        about: i18n.t("companyDetailsScreen:tab.about"),
+        parent: i18n.t("companyDetailsScreen:tab.parent"),
+        products: i18n.t("companyDetailsScreen:tab.products"),
     };
+
     const tabContent = [
         {
-            tabName: "location",
+            tabName: "about",
             content: (
-                <div className="location-map">
-                    {company.jurisdiction ? (
-                        <div
-                            className={`location-block ${company.jurisdiction}`}
-                        >
-                            {company.location ? (
-                                <div>
-                                    <img
-                                        src="./images/location-pin.svg"
-                                        alt="location-pin"
-                                        className="pin"
-                                    />
-                                    <p className={`location-text`}>
-                                        {company.location.city},{" "}
-                                        {company.location.countryCode},{" "}
-                                        {company.jurisdiction}
-                                    </p>
-                                </div>
-                            ) : (
-                                <div className="no-location">
-                                    {i18n.t(
-                                        "companyDetailsScreen:tab.location.fallbackText"
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    ) : (
-                        <div className="location-block Others">
-                            <div className="no-location">
-                                {i18n.t(
-                                    "companyDetailsScreen:tab.location.fallbackText"
+                <div className="about">
+                    <p
+                        className="company-details-text"
+                        dangerouslySetInnerHTML={{
+                            __html:
+                                (
+                                    (company.description?.value || {})[
+                                        i18n.language
+                                    ] || ""
+                                ).replace("\n", "<br/><br/>") ||
+                                i18n.t(
+                                    "companyDetailsScreen:description.fallback"
+                                ),
+                        }}
+                    ></p>
+                    {company.description?.source ? (
+                        <p className="company-details-source">
+                            {i18n.t("companyDetailsScreen:source")}:{" "}
+                            {company.description.source}
+                        </p>
+                    ) : null}
+                    <div className="location-map">
+                        {company.jurisdiction ? (
+                            <div
+                                className={`location-block ${company.jurisdiction}`}
+                            >
+                                {company.location ? (
+                                    <div>
+                                        <img
+                                            src="./images/location-pin.svg"
+                                            alt="location-pin"
+                                            className="pin"
+                                        />
+                                        <p className={`location-text`}>
+                                            {company.location.city},{" "}
+                                            {company.location.countryCode},{" "}
+                                            {company.jurisdiction}
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div className="no-location">
+                                        {i18n.t(
+                                            "companyDetailsScreen:location.fallbackText"
+                                        )}
+                                    </div>
                                 )}
                             </div>
-                        </div>
-                    )}
-                    <JurisdictionLegend onOpenRegionInfo={onOpenRegionInfo} />
-                </div>
-            ),
-        },
-        // We're hiding the structure tab until we have content for it
-        /*
-        {
-            tabName: "structure",
-            content: (
-                <div className="structure-tab">
-                    <img src="./images/structure_fallback.svg"></img>
-                    <div className="text">
-                        <p>
-                            {i18n.t(
-                                "companyDetailsScreen:tab.structure.fallbackText"
-                            )}
-                        </p>
+                        ) : (
+                            <div className="location-block Others">
+                                <div className="no-location">
+                                    {i18n.t(
+                                        "companyDetailsScreen:location.fallbackText"
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                        <JurisdictionLegend
+                            onOpenRegionInfo={onOpenRegionInfo}
+                        />
+
+                        <CompanyRevenueChart
+                            annualRevenues={company.annualRevenues}
+                        />
                     </div>
                 </div>
-            ),
-        },
-        */
-        {
-            tabName: "revenue",
-            content: (
-                <CompanyRevenueChart annualRevenues={company.annualRevenues} />
             ),
         },
     ];
 
     const featuredTabContent = [
         {
-            tabName: "location",
+            tabName: "dataStory",
             content: (
-                <div className="featured-map-container">
-                    {company.jurisdiction ? (
-                        <div className={`location-block`}>
-                            {company.location ? (
-                                <div className="featured-map">
-                                    <img
-                                        src={`./images/maps/cities/${
-                                            cityImageMap[company.location.city]
-                                        }.svg`}
-                                        className="map"
-                                    />
-                                    <img
-                                        src={`./images/location-pins/${company.jurisdiction}.svg`}
-                                        className="featured-pin"
-                                    />
-                                </div>
-                            ) : (
-                                <div className="no-location">
-                                    {i18n.t(
-                                        "companyDetailsScreen:tab.location.fallbackText"
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    ) : (
-                        <div className="location-block Others">
-                            <div className="no-location">
-                                {i18n.t(
-                                    "companyDetailsScreen:tab.location.fallbackText"
+                <FeaturedCompany
+                    company={company}
+                    maxValues={featuredCompanyMaxValues}
+                    averageValues={featuredCompanyAverageValues}
+                    onOpenDataExplorationSection={onOpenDataExplorationSection}
+                ></FeaturedCompany>
+            ),
+        },
+        {
+            tabName: "about",
+            content: (
+                <div className="about">
+                    <p
+                        className="company-details-text"
+                        dangerouslySetInnerHTML={{
+                            __html:
+                                (
+                                    (company.description?.value || {})[
+                                        i18n.language
+                                    ] || ""
+                                ).replace("\n", "<br/><br/>") ||
+                                i18n.t(
+                                    "companyDetailsScreen:description.fallback"
+                                ),
+                        }}
+                    ></p>
+                    {company.description?.source ? (
+                        <p className="company-details-source">
+                            {i18n.t("companyDetailsScreen:source")}:{" "}
+                            {company.description.source}
+                        </p>
+                    ) : null}
+                    <div className="featured-map-container">
+                        {company.jurisdiction ? (
+                            <div className={`location-block`}>
+                                {company.location ? (
+                                    <div className="featured-map">
+                                        <img
+                                            src={`./images/maps/cities/${
+                                                cityImageMap[
+                                                    company.location.city
+                                                ]
+                                            }.svg`}
+                                            className="map"
+                                        />
+                                        <img
+                                            src={`./images/location-pins/${company.jurisdiction}.svg`}
+                                            className="featured-pin"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="no-location">
+                                        {i18n.t(
+                                            "companyDetailsScreen:location.fallbackText"
+                                        )}
+                                    </div>
                                 )}
                             </div>
-                        </div>
-                    )}
-                    <JurisdictionLegend onOpenRegionInfo={onOpenRegionInfo} />
-                </div>
-            ),
-        },
-        // We're hiding the structure tab until we have content for it
-        /*
-        {
-            tabName: "structure",
-            content: (
-                <div className="structure-tab">
-                    <img src="./images/structure_fallback.svg" />
-                    <div className="text">
-                        <p>
-                            {i18n.t(
-                                "companyDetailsScreen:tab.structure.fallbackText"
-                            )}
-                        </p>
+                        ) : (
+                            <div className="location-block Others">
+                                <div className="no-location">
+                                    {i18n.t(
+                                        "companyDetailsScreen:location.fallbackText"
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                        <JurisdictionLegend
+                            onOpenRegionInfo={onOpenRegionInfo}
+                        />
                     </div>
                 </div>
-            ),
-        },
-        */
-        {
-            tabName: "revenue",
-            content: (
-                <CompanyRevenueChart annualRevenues={company.annualRevenues} />
             ),
         },
     ];
 
-    // TODO: Use the Screen component
     return (
-        <div className="explorer-container">
-            <div className="top-shadow"></div>
+        <Screen>
+            <Scrollable>
+                <div className="tab-button-container">
+                    {company.featured
+                        ? featuredTabContent.map((tab, index) => (
+                              <button
+                                  key={index}
+                                  className={
+                                      initialTab === index
+                                          ? "tab-button active"
+                                          : "tab-button"
+                                  }
+                                  onClick={() => swiper.slideTo(index)}
+                              >
+                                  {tabTranslation[tab.tabName]}
+                              </button>
+                          ))
+                        : tabContent.map((tab, index) => (
+                              <button
+                                  key={index}
+                                  className={
+                                      initialTab === index
+                                          ? "tab-button active"
+                                          : "tab-button"
+                                  }
+                                  onClick={() => swiper.slideTo(index)}
+                              >
+                                  {tabTranslation[tab.tabName]}
+                              </button>
+                          ))}
+                </div>
+                <div className="tab-content-container">
+                    <Swiper
+                        onSwiper={setSwiper}
+                        spaceBetween={1}
+                        slidesPerView={1}
+                        initialSlide={initialTab}
+                        onSlideChange={(swiper) =>
+                            setInitialTab(swiper.activeIndex)
+                        }
+                    >
+                        {company.featured
+                            ? featuredTabContent.map((tab, index) => (
+                                  <SwiperSlide key={index}>
+                                      {tab.content}
+                                  </SwiperSlide>
+                              ))
+                            : tabContent.map((tab, index) => (
+                                  <SwiperSlide key={index}>
+                                      {tab.content}
+                                  </SwiperSlide>
+                              ))}
+                    </Swiper>
+                </div>
+            </Scrollable>
 
-            <div className="screen-content company-details-screen">
-                <Scrollable>
-                    <div className="scroll-container">
-                        <div className="company-short-info-container">
-                            <CompanyShortInfo company={company} />
-                        </div>
-                        <div className="tab-button-container">
-                            {company.featured
-                                ? featuredTabContent.map((tab, index) => (
-                                      <button
-                                          key={index}
-                                          className={
-                                              initialTab === index
-                                                  ? "tab-button active"
-                                                  : "tab-button"
-                                          }
-                                          onClick={() => swiper.slideTo(index)}
-                                      >
-                                          {tabTranslation[tab.tabName]}
-                                      </button>
-                                  ))
-                                : tabContent.map((tab, index) => (
-                                      <button
-                                          key={index}
-                                          className={
-                                              initialTab === index
-                                                  ? "tab-button active"
-                                                  : "tab-button"
-                                          }
-                                          onClick={() => swiper.slideTo(index)}
-                                      >
-                                          {tabTranslation[tab.tabName]}
-                                      </button>
-                                  ))}
-                        </div>
-                        <div className="tab-content-container">
-                            <Swiper
-                                onSwiper={setSwiper}
-                                spaceBetween={1}
-                                slidesPerView={1}
-                                initialSlide={initialTab}
-                                onSlideChange={(swiper) =>
-                                    setInitialTab(swiper.activeIndex)
-                                }
-                            >
-                                {company.featured
-                                    ? featuredTabContent.map((tab, index) => (
-                                          <SwiperSlide key={index}>
-                                              {tab.content}
-                                          </SwiperSlide>
-                                      ))
-                                    : tabContent.map((tab, index) => (
-                                          <SwiperSlide key={index}>
-                                              {tab.content}
-                                          </SwiperSlide>
-                                      ))}
-                            </Swiper>
-                        </div>
-
-                        <p
-                            className="company-details-text"
-                            dangerouslySetInnerHTML={{
-                                __html:
-                                    (
-                                        (company.description?.value || {})[
-                                            i18n.language
-                                        ] || ""
-                                    ).replace("\n", "<br/><br/>") ||
-                                    i18n.t(
-                                        "companyDetailsScreen:description.fallback"
-                                    ),
-                            }}
-                        ></p>
-
-                        {company.description?.source ? (
-                            <p className="company-details-source">
-                                {i18n.t("companyDetailsScreen:source")}:{" "}
-                                {company.description.source}
-                            </p>
-                        ) : null}
-                    </div>
-                </Scrollable>
-
-                {company.featured ? (
-                    <div className="explore-data-btn-area">
-                        <button
-                            className="explore-data-btn"
-                            onClick={() => onOpenExploration(company.ppid)}
-                        >
-                            {i18n.t("companyDetailsScreen:button.exploreData")}
-                        </button>
-                    </div>
-                ) : (
-                    <div></div>
-                )}
-            </div>
-        </div>
+            {company.featured ? (
+                <div className="explore-data-btn-area">
+                    <button
+                        className="explore-data-btn"
+                        onClick={() =>
+                            onOpenDataExplorationSection(
+                                "dataTypes",
+                                company.ppid
+                            )
+                        }
+                    >
+                        {i18n.t("companyDetailsScreen:button.exploreData")}
+                    </button>
+                </div>
+            ) : (
+                <div></div>
+            )}
+        </Screen>
     );
 };
 
