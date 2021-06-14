@@ -23,8 +23,7 @@
     margin: 8px auto 0 auto;
 }
 
-.data-sharing-section,
-.data-sharing-legend {
+.data-sharing-section {
     width: 85%;
     max-width: var(--max-width);
     margin: 0 auto;
@@ -41,7 +40,7 @@
     font-size: 16px;
 }
 
-.data-sharing-legend {
+/* .data-sharing-legend {
     height: 30px;
     margin-top: 8px;
     border: solid 1px #525e72;
@@ -56,4 +55,4 @@
     position: relative;
     top: 3px;
     margin-right: 4px;
-}
+} */

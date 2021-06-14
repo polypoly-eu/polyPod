@@ -2,6 +2,7 @@ import React from "react";
 
 import i18n from "../../i18n.js";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
+import DataSharingLegend from "../dataSharingLegend/dataSharingLegend.jsx";
 
 import "./purposeChart.css";
 
@@ -98,10 +99,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                 {scale}
             </div>
             <Scrollable>{bars}</Scrollable>
-            <div className="help" onClick={() => openPurposeInfo()}>
-                <img src="./images/question-circle.svg" />
-                <div>{i18n.t("common:how-to-read")}</div>
-            </div>
+            <DataSharingLegend onClick={() => openPurposeInfo()} />
         </div>
     );
 };

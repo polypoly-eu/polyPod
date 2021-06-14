@@ -1,0 +1,30 @@
+.data-sharing-legend, .data-sharing-legend-light {
+    width: 64px;
+    height: 48px;
+    border-radius: 25px 0 0 25px;
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+}
+
+.data-sharing-legend img, .data-sharing-legend-light img {
+    margin: 12px 28px 12px 12px;
+}
+
+.data-sharing-legend {
+    background-color: #3E495B;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.06)), drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.data-sharing-legend img {
+    color: var(--color-text-light);
+}
+
+.data-sharing-legend-light {
+    background-color: var(--color-background-light);
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.06)), drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.data-sharing-legend-light img {
+    color: var(--color-text-dark);
+}
