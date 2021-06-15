@@ -1,6 +1,7 @@
 import React from "react";
 import i18n from "../../i18n.js";
 import DataSharingGauge from "../dataSharingGauge/dataSharingGauge.jsx";
+import PolyLink from "../polyLink/polyLink.jsx";
 import "./featuredCompany.css";
 
 const DataSharingSection = ({
@@ -10,17 +11,20 @@ const DataSharingSection = ({
     average,
     onOpenDetails,
 }) => (
-    <div
-        className={`data-sharing-section ${sharingType}-shared`}
-        onClick={onOpenDetails}
-    >
-        <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
-        <DataSharingGauge
-            sharingType={sharingType}
-            count={count}
-            max={max}
-            average={average}
-        />
+    <div className={`data-sharing-section ${sharingType}-shared`}>
+        <PolyLink
+            className={`data-sharing-section ${sharingType}-shared`}
+            onClick={onOpenDetails}
+            route="/data-exploration"
+        >
+            <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
+            <DataSharingGauge
+                sharingType={sharingType}
+                count={count}
+                max={max}
+                average={average}
+            />
+        </PolyLink>
     </div>
 );
 

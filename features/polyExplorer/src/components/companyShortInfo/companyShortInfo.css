@@ -14,9 +14,6 @@
     display: inline-block;
     margin-top: 4px;
     margin-right: 2px;
-}
-
-.company-short-info .non-featured-aligner {
     box-sizing: border-box;
     min-width: 19px;
     width: 19px;
