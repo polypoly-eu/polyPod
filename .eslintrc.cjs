@@ -1,11 +1,42 @@
 module.exports = {
-    extends: ["eslint:recommended", "plugin:prettier/recommended"],
+    extends: [
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "plugin:react/recommended"
+    ],
     parserOptions: {
-        ecmaVersion: 6,
+        ecmaVersion: 2020,
         sourceType: "module",
     },
+    env: {
+        browser : true,
+        es6: true,
+        mocha: true,
+        jest: true,
+        node: true
+    },
+    settings: {
+        react: {
+            version: "detect",
+        },
+    },
+    "ignorePatterns": [
+        "*.conf.*",
+        "*.config.*",
+        "**/dist/*",
+        "**/docs/*",
+        "**/locales/*",
+        "**/coverage/*",
+        "data/",
+        ".eslintrc.*",
+        "**/public/build/*",
+        "**/bubblewrap/build/*",
+        "podApi/",
+        "PolyPodApp/"],
     rules: {
         semi: 2,
+        "react/prop-types": "off",
+        "react/jsx-key": "off",
     },
     overrides: [
         {
@@ -19,6 +50,7 @@ module.exports = {
             rules: {
                 "@typescript-eslint/camelcase": "off",
                 "@typescript-eslint/no-explicit-any": "off",
+                "@typescript-eslint/no-unused-vars": "off",
                 "@typescript-eslint/no-non-null-assertion": "off",
                 "@typescript-eslint/ban-ts-comment": "off",
                 "@typescript-eslint/explicit-function-return-type": [
@@ -28,8 +60,14 @@ module.exports = {
                     },
                 ],
                 "@typescript-eslint/no-this-alias": "off",
-                "no-unused-vars": "off",
-                "@typescript-eslint/no-unused-vars": ["warn"],
+            },
+        },
+        {
+            files: ["*.jsx"],
+            parserOptions: {
+                ecmaFeatures: {
+                    jsx: true
+                }
             },
         },
     ],

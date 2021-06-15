@@ -66,10 +66,8 @@ const PolyExplorer = () => {
         (company) => company.featured
     );
     const [selectedCompany, setSelectedCompany] = useState(undefined);
-    const [
-        featuredCompanyTabInitialSlide,
-        setFeaturedCompanyTabInitialSlide,
-    ] = useState(0);
+    const [featuredCompanyTabInitialSlide, setFeaturedCompanyTabInitialSlide] =
+        useState(0);
 
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
     const [firstRun, setFirstRun] = useState(false);

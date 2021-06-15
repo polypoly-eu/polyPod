@@ -1,6 +1,4 @@
-# polyPod
-
-The polyPod
+# The polyPod
 
 At the moment, the polyPod is essentially a runtime for _features_; small,
 sandboxed JavaScript applications that can be launched from the polyPod app.
@@ -19,7 +17,7 @@ whitepaper].
 
 ## Requirements
 
-Just [Node.js](https://nodejs.org/) version 15.x.
+Just [Node.js](https://nodejs.org/) version 16.x or newer.
 
 ## Building
 
@@ -46,8 +44,12 @@ To run the linter:
 
     $ ./build.js lint
 
-(Please note that this won't trigger tests or linting for non-JS code, for
-example [android](android).)
+> Please note that this won't trigger tests or linting for non-JS code, for
+example [android](android).
+
+If linting reveals some error, they can be fixed with 
+
+    $ ./build.js lintfix
 
 ## Branches
 
@@ -75,6 +77,7 @@ issues will be enabled in due course.
 ## Links
 
 [the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
+
 
 ## Licensing
 
