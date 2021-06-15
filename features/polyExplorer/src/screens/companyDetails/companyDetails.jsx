@@ -5,7 +5,7 @@ import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
 import FeaturedCompany from "../../components/featuredCompany/featuredCompany.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
-import PolyLink from "../../components/polyLink/polyLink.jsx";
+import LinkButton from "../../components/linkButton/linkButton.jsx";
 import "./companyDetails.css";
 
 const CompanyDetails = ({
@@ -126,7 +126,7 @@ const CompanyDetails = ({
                         }
                     ></FeaturedCompany>
                     <div className="explore-data-btn-area">
-                        <PolyLink
+                        <LinkButton
                             className="explore-data-btn"
                             onClick={() =>
                                 onOpenDataExplorationSection(
@@ -137,7 +137,7 @@ const CompanyDetails = ({
                             route="data-exploration"
                         >
                             {i18n.t("companyDetailsScreen:button.exploreData")}
-                        </PolyLink>
+                        </LinkButton>
                     </div>
                 </>
             ),

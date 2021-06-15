@@ -1,7 +1,7 @@
 import React from "react";
 import i18n from "../../i18n.js";
 import DataSharingGauge from "../dataSharingGauge/dataSharingGauge.jsx";
-import PolyLink from "../polyLink/polyLink.jsx";
+import LinkButton from "../linkButton/linkButton.jsx";
 import "./featuredCompany.css";
 
 const DataSharingSection = ({
@@ -12,7 +12,7 @@ const DataSharingSection = ({
     onOpenDetails,
 }) => (
     <div className={`data-sharing-section ${sharingType}-shared`}>
-        <PolyLink
+        <LinkButton
             className={`data-sharing-section ${sharingType}-shared`}
             onClick={onOpenDetails}
             route="/data-exploration"
@@ -24,7 +24,7 @@ const DataSharingSection = ({
                 max={max}
                 average={average}
             />
-        </PolyLink>
+        </LinkButton>
     </div>
 );
 

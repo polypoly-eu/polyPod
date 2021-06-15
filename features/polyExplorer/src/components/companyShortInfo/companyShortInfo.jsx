@@ -1,11 +1,11 @@
 import React from "react";
 import i18n from "../../i18n.js";
 import "./companyShortInfo.css";
-import PolyLink from "../polyLink/polyLink.jsx";
+import LinkButton from "../linkButton/linkButton.jsx";
 
 const CompanyShortInfo = ({ company, onOpenDetails = () => {} }) => {
     return (
-        <PolyLink
+        <LinkButton
             onClick={() => onOpenDetails(company.ppid)}
             className="company-short-info"
             route="/company-details"
@@ -46,7 +46,7 @@ const CompanyShortInfo = ({ company, onOpenDetails = () => {} }) => {
                     </div>
                 </div>
             </>
-        </PolyLink>
+        </LinkButton>
     );
 };
 
