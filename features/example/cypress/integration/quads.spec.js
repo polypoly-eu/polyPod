@@ -5,8 +5,6 @@ describe("Example", () => {
         cy.get("#feature").should("be.visible", {
             timeout: 10000
         });
-        cy.get("table").should("be.visible");
-        cy.get("tbody").should("be.visible");
         cy.get("tr").should("be.visible");
         cy.get("tr").should("have.length",3).eq(0).should("contain.text", "Subject");
         for (let i = 0; i < ths.length; i++ ) {
