@@ -326,9 +326,18 @@ const PolyExplorer = () => {
                     <Route exact path="/data-region-info">
                         <DataRegionInfoScreen onClose={handleBack} />
                     </Route>
+                    <Route exact path="/data-types-info">
+                        <DataTypesInfoScreen onClose={handleBack} />
+                    </Route>
                     <Route exact path="/data-category-info">
                         <CategoryInfoScreen
                             category={activeCategory}
+                            company={companies[selectedCompany]}
+                            onClose={handleBack}
+                        />
+                    </Route>
+                    <Route exact path="/correlation-info">
+                        <CorrelationInfoScreen
                             company={companies[selectedCompany]}
                             onClose={handleBack}
                         />
