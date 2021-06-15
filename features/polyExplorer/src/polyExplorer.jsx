@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 
 import i18n from "./i18n.js";
 import { pod } from "./fakePod.js";
@@ -28,6 +28,11 @@ import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/compani
 import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/jurisdictionInfo.jsx";
 import FeaturedCompanyInfoScreen from "./screens/featuredCompanyInfo/featuredCompanyInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
+
+import {
+    ExplorerProvider,
+    ExplorerContext,
+} from "./context/explorer-context.jsx";
 
 import polyPediaCompanies from "./data/companies.json";
 import polyPediaGlobalData from "./data/global.json";
@@ -360,9 +365,11 @@ const PolyExplorerApp = () => {
 const PolyExplorer = () => {
     const history = useHistory();
     return (
-        <Router history={history}>
-            <PolyExplorerApp />
-        </Router>
+        <ExplorerProvider>
+            <Router history={history}>
+                <PolyExplorerApp />
+            </Router>
+        </ExplorerProvider>
     );
 };
 
