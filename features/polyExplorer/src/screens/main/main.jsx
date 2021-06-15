@@ -3,6 +3,7 @@ import React from "react";
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import CompanyList from "../../components/companyList/companyList.jsx";
+import LinkButton from "../../components/linkButton/linkButton.jsx";
 
 import "./main.css";
 
