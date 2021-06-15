@@ -302,7 +302,7 @@ const PolyExplorerApp = () => {
                         }
                     />
                 </Route>
-                <Route exact path="/company-filter">
+                <Route exact path="/company-filters">
                     <CompanyFilterScreen
                         companies={companies}
                         globalData={polyPediaGlobalData}

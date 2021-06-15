@@ -5,6 +5,7 @@ import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import "./companyList.css";
+import LinkButton from "../linkButton/linkButton.jsx";
 
 function groupCompanies(companies) {
     const sorted = companies.sort((a, b) => a.compareNames(b));
@@ -129,10 +130,11 @@ const CompanyList = ({
                     (activeFilters.empty ? "" : " filters-visible")
                 }
             >
-                <button
+                <LinkButton
+                    route="/company-filters"
                     className="filter-button"
                     onClick={onOpenFilters}
-                ></button>
+                ></LinkButton>
                 <InfiniteScroll
                     dataLength={allKeys.length - toLoadKeys.length}
                     next={handleLoadMoreData}
