@@ -15,6 +15,7 @@ import {
     Switch,
     Route,
     Redirect,
+    useHistory,
 } from "react-router-dom";
 import CompanyDetailsScreen from "./screens/companyDetails/companyDetails.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
@@ -75,13 +76,13 @@ const PolyExplorer = () => {
 
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
     const [firstRun, setFirstRun] = useState(false);
-    const [showConstructionPopup, setShowConstructionPopUp] = useState(false);
     const initialDataExplorationSection = "dataTypes";
     const [dataExploringSection, setDataExploringSection] = useState(
         initialDataExplorationSection
     );
     const [activeCategory, setActiveCategory] = useState(null);
     const [activeExplorationIndex, setActiveExplorationIndex] = useState(null);
+    const history = useHistory();
 
     //Get the max values of all featured companies
     function calculateAverage(values) {
@@ -197,7 +198,7 @@ const PolyExplorer = () => {
 
     return (
         <div className="poly-explorer">
-            <Router>
+            <Router history={history}>
                 <Switch>
                     <Route exact path="/">
                         <MainScreen
