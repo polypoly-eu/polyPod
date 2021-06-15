@@ -61,7 +61,7 @@ function loadCompanies(JSONData, globalData) {
     return companies;
 }
 
-const PolyExplorer = () => {
+const PolyExplorerApp = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
     const [showClusters, setShowClusters] = useState(true);
@@ -157,6 +157,7 @@ const PolyExplorer = () => {
     };
 
     function handleBack() {
+        history.goBack();
         if (activeScreen === "dataExploration") {
             setDataExploringSection(initialDataExplorationSection);
             setActiveCategory(null);
@@ -197,163 +198,167 @@ const PolyExplorer = () => {
 
     return (
         <div className="poly-explorer">
-            <Router history={history}>
-                <Switch>
-                    <Route exact path="/">
-                        <MainScreen
-                            showClusters={showClusters}
-                            companies={companies}
-                            globalData={polyPediaGlobalData}
-                            onOpenDetails={(company) =>
-                                handleActiveScreenChange(
-                                    "companyDetails",
-                                    company
-                                )
-                            }
-                            onOpenFilters={() =>
-                                handleActiveScreenChange("companyFilter")
-                            }
-                            onShowClustersChange={setShowClusters}
-                            activeFilters={activeFilters}
-                            onRemoveFilter={handleRemoveFilter}
+            <Switch>
+                <Route exact path="/">
+                    <MainScreen
+                        showClusters={showClusters}
+                        companies={companies}
+                        globalData={polyPediaGlobalData}
+                        onOpenDetails={(company) =>
+                            handleActiveScreenChange("companyDetails", company)
+                        }
+                        onOpenFilters={() =>
+                            handleActiveScreenChange("companyFilter")
+                        }
+                        onShowClustersChange={setShowClusters}
+                        activeFilters={activeFilters}
+                        onRemoveFilter={handleRemoveFilter}
+                    />
+                    {firstRun ? (
+                        <OnboardingPopup
+                            onClose={handleOnboardingPopupClose}
+                            onMoreInfo={handleOnboardingPopupMoreInfo}
                         />
-                        {firstRun ? (
-                            <OnboardingPopup
-                                onClose={handleOnboardingPopupClose}
-                                onMoreInfo={handleOnboardingPopupMoreInfo}
-                            />
-                        ) : null}
-                    </Route>
-                    <Route exact path="/company-details">
-                        <CompanyDetailsScreen
-                            company={companies[selectedCompany]}
-                            onOpenRegionInfo={() =>
-                                handleActiveScreenChange("dataRegionInfo")
-                            }
-                            featuredCompanyMaxValues={featuredCompanyMaxValues}
-                            featuredCompanyAverageValues={
-                                featuredCompanyAverageValues
-                            }
-                            onOpenDataExplorationSection={
-                                handleOpenDataExplorationSection
-                            }
-                        />
-                    </Route>
-                    <Route exact path="/data-exploration">
-                        <DataExplorationScreen
-                            company={companies[selectedCompany]}
-                            startSection={dataExploringSection}
-                            startIndex={activeExplorationIndex}
-                            openMain={handleBack}
-                            openDataTypesInfo={(activeIndex) =>
-                                handleExplorationInfoScreen(
-                                    "explorationDataTypesInfo",
-                                    "dataTypes",
-                                    activeIndex
-                                )
-                            }
-                            openCategoryInfo={(activeIndex, activeCategory) =>
-                                handleExplorationInfoScreen(
-                                    "explorationCategoryInfo",
-                                    "dataTypesCategory",
-                                    activeIndex,
-                                    activeCategory
-                                )
-                            }
-                            openCorrelationInfo={(activeIndex) =>
-                                handleExplorationInfoScreen(
-                                    "explorationCorrelationInfo",
-                                    "dataTypesCorrelation",
-                                    activeIndex
-                                )
-                            }
-                            openPurposeInfo={(activeIndex) =>
-                                handleExplorationInfoScreen(
-                                    "explorationPurposeInfo",
-                                    "purposes",
-                                    activeIndex
-                                )
-                            }
-                            openCompaniesInfo={(activeIndex) =>
-                                handleExplorationInfoScreen(
-                                    "explorationCompaniesInfo",
-                                    "companies",
-                                    activeIndex
-                                )
-                            }
-                            openJurisdictionInfo={(activeIndex) =>
-                                handleExplorationInfoScreen(
-                                    "explorationJurisdictionsInfo",
-                                    "jurisdictions",
-                                    activeIndex
-                                )
-                            }
-                            maxCompanies={featuredCompanyMaxValues.companies}
-                            dataRecipients={companies[
-                                selectedCompany
-                            ]?.dataRecipients?.map((ppid) => companies[ppid])}
-                            onOpenRegionInfo={(activeIndex) =>
-                                handleExplorationInfoScreen(
-                                    "explorationJurisdictionsInfo",
-                                    "jurisdictions",
-                                    activeIndex
-                                )
-                            }
-                        />
-                    </Route>
-                    <Route exact path="/company-filter">
-                        <CompanyFilterScreen
-                            companies={companies}
-                            globalData={polyPediaGlobalData}
-                            activeFilters={activeFilters}
-                            onApply={handleFilterApply}
-                        />
-                    </Route>
-                    <Route exact path="/search">
-                        <CompanySearchScreen
-                            companies={Object.values(companies)}
-                            onOpenDetails={(ppid) =>
-                                handleActiveScreenChange("companyDetails", ppid)
-                            }
-                        />
-                    </Route>
-                    <Route exact path="/featured-company-info">
-                        <FeaturedCompanyInfoScreen onClose={handleBack} />
-                    </Route>
-                    <Route exact path="/info">
-                        <InfoScreen onClose={handleBack} />
-                    </Route>
-                    <Route exact path="/data-region-info">
-                        <DataRegionInfoScreen onClose={handleBack} />
-                    </Route>
-                    <Route exact path="/data-types-info">
-                        <DataTypesInfoScreen onClose={handleBack} />
-                    </Route>
-                    <Route exact path="/data-category-info">
-                        <CategoryInfoScreen
-                            category={activeCategory}
-                            company={companies[selectedCompany]}
-                            onClose={handleBack}
-                        />
-                    </Route>
-                    <Route exact path="/correlation-info">
-                        <CorrelationInfoScreen
-                            company={companies[selectedCompany]}
-                            onClose={handleBack}
-                        />
-                    </Route>
-                    <Route exact path="/purpose-info">
-                        <PurposeInfoScreen onClose={handleBack} />
-                    </Route>
-                    <Route exact path="/companies-info">
-                        <CompaniesInfoScreen onClose={handleBack} />
-                    </Route>
-                    <Route exact path="/jurisdiction-info">
-                        <JurisdictionInfoScreen onClose={handleBack} />
-                    </Route>
-                </Switch>
-            </Router>
+                    ) : null}
+                </Route>
+                <Route exact path="/company-details">
+                    <CompanyDetailsScreen
+                        company={companies[selectedCompany]}
+                        onOpenRegionInfo={() =>
+                            handleActiveScreenChange("dataRegionInfo")
+                        }
+                        featuredCompanyMaxValues={featuredCompanyMaxValues}
+                        featuredCompanyAverageValues={
+                            featuredCompanyAverageValues
+                        }
+                        onOpenDataExplorationSection={
+                            handleOpenDataExplorationSection
+                        }
+                    />
+                </Route>
+                <Route exact path="/data-exploration">
+                    <DataExplorationScreen
+                        company={companies[selectedCompany]}
+                        startSection={dataExploringSection}
+                        startIndex={activeExplorationIndex}
+                        openMain={handleBack}
+                        openDataTypesInfo={(activeIndex) =>
+                            handleExplorationInfoScreen(
+                                "explorationDataTypesInfo",
+                                "dataTypes",
+                                activeIndex
+                            )
+                        }
+                        openCategoryInfo={(activeIndex, activeCategory) =>
+                            handleExplorationInfoScreen(
+                                "explorationCategoryInfo",
+                                "dataTypesCategory",
+                                activeIndex,
+                                activeCategory
+                            )
+                        }
+                        openCorrelationInfo={(activeIndex) =>
+                            handleExplorationInfoScreen(
+                                "explorationCorrelationInfo",
+                                "dataTypesCorrelation",
+                                activeIndex
+                            )
+                        }
+                        openPurposeInfo={(activeIndex) =>
+                            handleExplorationInfoScreen(
+                                "explorationPurposeInfo",
+                                "purposes",
+                                activeIndex
+                            )
+                        }
+                        openCompaniesInfo={(activeIndex) =>
+                            handleExplorationInfoScreen(
+                                "explorationCompaniesInfo",
+                                "companies",
+                                activeIndex
+                            )
+                        }
+                        openJurisdictionInfo={(activeIndex) =>
+                            handleExplorationInfoScreen(
+                                "explorationJurisdictionsInfo",
+                                "jurisdictions",
+                                activeIndex
+                            )
+                        }
+                        maxCompanies={featuredCompanyMaxValues.companies}
+                        dataRecipients={companies[
+                            selectedCompany
+                        ]?.dataRecipients?.map((ppid) => companies[ppid])}
+                        onOpenRegionInfo={(activeIndex) =>
+                            handleExplorationInfoScreen(
+                                "explorationJurisdictionsInfo",
+                                "jurisdictions",
+                                activeIndex
+                            )
+                        }
+                    />
+                </Route>
+                <Route exact path="/company-filter">
+                    <CompanyFilterScreen
+                        companies={companies}
+                        globalData={polyPediaGlobalData}
+                        activeFilters={activeFilters}
+                        onApply={handleFilterApply}
+                    />
+                </Route>
+                <Route exact path="/search">
+                    <CompanySearchScreen
+                        companies={Object.values(companies)}
+                        onOpenDetails={(ppid) =>
+                            handleActiveScreenChange("companyDetails", ppid)
+                        }
+                    />
+                </Route>
+                <Route exact path="/featured-company-info">
+                    <FeaturedCompanyInfoScreen onClose={handleBack} />
+                </Route>
+                <Route exact path="/info">
+                    <InfoScreen onClose={handleBack} />
+                </Route>
+                <Route exact path="/data-region-info">
+                    <DataRegionInfoScreen onClose={handleBack} />
+                </Route>
+                <Route exact path="/data-types-info">
+                    <DataTypesInfoScreen onClose={handleBack} />
+                </Route>
+                <Route exact path="/data-category-info">
+                    <CategoryInfoScreen
+                        category={activeCategory}
+                        company={companies[selectedCompany]}
+                        onClose={handleBack}
+                    />
+                </Route>
+                <Route exact path="/data-correlation-info">
+                    <CorrelationInfoScreen
+                        company={companies[selectedCompany]}
+                        onClose={handleBack}
+                    />
+                </Route>
+                <Route exact path="/purpose-info">
+                    <PurposeInfoScreen onClose={handleBack} />
+                </Route>
+                <Route exact path="/companies-info">
+                    <CompaniesInfoScreen onClose={handleBack} />
+                </Route>
+                <Route exact path="/jurisdiction-info">
+                    <JurisdictionInfoScreen onClose={handleBack} />
+                </Route>
+            </Switch>
         </div>
+    );
+};
+
+const PolyExplorer = () => {
+    const history = useHistory();
+    return (
+        <Router history={history}>
+            <PolyExplorerApp />
+        </Router>
     );
 };
 
