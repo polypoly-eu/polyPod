@@ -27,14 +27,14 @@ Just execute:
 
     $ ./build.js
 
-This will build the cross platform code base - mainly the core code
-and bundled features.
+This will build the cross platform code base - mainly the core code and bundled
+features.
 
-After this you can build [android](android), [ios](ios), or try one of
-the features, e.g. [features/example](features/example).
+After this you can build [android](android), [ios](ios), or try one of the
+features, e.g. [features/example](features/example).
 
-> (Yes, we have a custom build script, you can read more about why
-> [here](build) if you're curious.)
+> (Yes, we have a custom build script, you can read more about why [here](build)
+> if you're curious.)
 
 ## Testing
 
@@ -51,22 +51,26 @@ example [android](android).)
 
 ## Branches
 
-Ongoing development is happening in the `main` branch. We aim to keep
-it stable at all times, but it is not as thoroughly tested as our
-releases. This is the branch to make contributions against.
+Ongoing development is happening in the `main` branch. We aim to keep it stable
+at all times, but it is not as thoroughly tested as our releases. This is the
+branch to make contributions against.
 
-We prepare releases in the `release` branch. If no release is in
-progress, it reflects the state of the last release we made.
+We prepare releases in the `release` branch. If no release is in progress, it
+reflects the state of the last release we made.
 
 ## Security
 
-Please read the [SECURITY](SECURITY.md) document on how to report
-potential security vulnerabilities in polyPod and where to find
-polypoly's Vulnerability Disclosure Policy.
+Please read the [SECURITY](SECURITY.md) document on how to report potential
+security vulnerabilities in polyPod and where to find polypoly's Vulnerability
+Disclosure Policy.
 
 ## Issues
 
-For the time being, issues are disabled in this repo. If it's an easy fix (such as a typo) you can go and create a pull request. If it's any other kind of issue, such as a feature request, please email us at feedback@polypoly.eu. Please understand that this is a temporary solution, and issues will be enabled in due course.
+For the time being, issues are disabled in this repo. If it's an easy fix (such
+as a typo) you can go and create a pull request. If it's any other kind of
+issue, such as a feature request, please email us at
+feedback@polypoly.eu. Please understand that this is a temporary solution, and
+issues will be enabled in due course.
 
 ## Links
 
