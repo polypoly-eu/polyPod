@@ -1,19 +1,20 @@
 <style>
 @font-face {
-    font-family: "Jost";
-    src: url("../fonts/jost_regular.ttf");
+    font-family: "Jost Medium";
+    src: url("../fonts/jost_medium.ttf");
 }
 
 :global(body) {
     background-color: #FFF5F5;
     padding: 0;
     margin: 0;
+    overflow: hidden;
 }
 
 * {
     color: #0F1938;
     box-sizing: border-box;
-    font-family: Jost;
+    font-family: "Jost Medium";
     font-weight: 500;
 }
 
@@ -44,15 +45,13 @@ button {
     max-width: 412px;
     display: flex;
     justify-content: center;
-    margin: auto;
-    padding: 23px 24px 29px 24px;
+    margin-top: 20px;
     flex: 0 0 auto;
-    position: fixed;
     top: 0;
 }
 
 .search-bar-area .search-bar {
-    width: 100%;
+    width: 95%;
     height: 40px;
     background-color: #FFF5F5;
     display: flex;
@@ -61,7 +60,7 @@ button {
     font-size: 18px;
     border: 1px solid #0F1938;
     border-radius: 20px;
-    padding: 1px 12px 0 21px;
+    padding: 1px 12px;
     position: relative;
 }
 
@@ -78,19 +77,20 @@ button {
 }
 
 .search-bar-area .search-bar .search-bar-input::placeholder {
-    color: #0F1938;
+    color: #6A798E;
     font-weight: 400;
 }
 
 .search-bar-area .search-bar button {
-    margin: 1px 0 0 0;
+    margin: 2px 0 0 0;
     padding: 0;
 }
 
 .term-list-container {
     width: 100%;
     overflow-y: scroll;
-    margin-top: 88px;
+    height: 100vh;
+    padding: 16px 0px;
 }
 
 .term-list-container .term-list {
@@ -112,8 +112,8 @@ button {
 
 .term-list-container .no-result p {
     margin: 0 20px 17px 50px;
-    color: #757575;
-    font-size: 18px;
+    color: #6A798E;
+    font-size: 20px;
 }
 
 .term-list-container .result h2 {
@@ -191,6 +191,27 @@ button {
     border-radius: 4px;
     font-size: 16px;
 }
+
+.clr {
+    opacity: 0;
+}
+
+@keyframes fadeInClrBtn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.clr.active {
+    opacity: 1;
+    animation-name: fadeInClrBtn;
+    animation-timing-function: ease-in;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}
 </style>
 
 <script>
@@ -224,7 +245,14 @@ function handleCopytoClipboard(term) {
 }
 
 function copyText(text) {
-    navigator.clipboard.writeText(text);
+    // There is no polyPod API for interacting with the system clipboard yet,
+    // the following APIs were just temporarily exposed until that's the case.
+    // If you want to follow the process, see:
+    // https://jira.polypoly.eu/browse/PROD4POD-479 (internal at the moment)
+    if (window.nativeAndroidClipboard)
+        window.nativeAndroidClipboard.copyToClipboard(text);
+    else
+        navigator.clipboard.writeText(text)
 }
 
 function handleBack() {
@@ -289,7 +317,7 @@ function setUpListNavigation(){
                     value="{searchString}"
                     placeholder="{i18n.t('common:search')}"
                     on:input="{(e) => handleSearch(e.target.value)}" />
-                <button on:click="{() => handleClear()}">
+                <button class="clr {searchString ? "active": ""}" name="bar" on:click="{() => handleClear()}">
                     <img
                         alt="{i18n.t('common:clear')}"
                         src="./images/clear-search.svg" />
