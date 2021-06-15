@@ -16,6 +16,7 @@ import {
     Route,
     Redirect,
     useHistory,
+    useLocation,
 } from "react-router-dom";
 import CompanyDetailsScreen from "./screens/companyDetails/companyDetails.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
@@ -81,7 +82,10 @@ const PolyExplorerApp = () => {
     );
     const [activeCategory, setActiveCategory] = useState(null);
     const [activeExplorationIndex, setActiveExplorationIndex] = useState(null);
+
+    //Router hooks
     const history = useHistory();
+    const location = useLocation();
 
     //Get the max values of all featured companies
     function calculateAverage(values) {
@@ -174,16 +178,16 @@ const PolyExplorerApp = () => {
 
     function updatePodNavigation() {
         if (
-            activeScreen == "dataExploration" ||
-            activeScreen == "companyDetails"
+            location.pathname == "/data-exploration" ||
+            location.pathname == "/company-details"
         )
             pod.polyNav.setTitle(companies[selectedCompany].name);
         else pod.polyNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
         pod.polyNav.actions = firstRun
             ? { info: () => {}, search: () => {} }
             : {
-                  info: () => handleActiveScreenChange("info"),
-                  search: () => handleActiveScreenChange("companySearch"),
+                  info: () => history.push("/info"),
+                  search: () => history.push("/search"),
                   back: handleBack,
               };
         pod.polyNav.setActiveActions(
