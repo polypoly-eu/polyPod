@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
+import LinkButton from "../../components/linkButton/linkButton.jsx";
 
 import "./companySearch.css";
 
@@ -70,12 +71,13 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                         <div className="suggestions">
                             {" "}
                             {featuredComanies.map((company, index) => (
-                                <button
+                                <LinkButton
+                                    route="company-details"
                                     key={index}
                                     onClick={() => onOpenDetails(company.ppid)}
                                 >
                                     {company.name}
-                                </button>
+                                </LinkButton>
                             ))}{" "}
                         </div>
                     </div>
@@ -96,7 +98,8 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                                         {" "}
                                         {featuredComanies.map(
                                             (company, index) => (
-                                                <button
+                                                <LinkButton
+                                                    route="company-details"
                                                     onClick={() =>
                                                         onOpenDetails(
                                                             company.ppid
@@ -105,7 +108,7 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                                                     key={index}
                                                 >
                                                     {company.name}
-                                                </button>
+                                                </LinkButton>
                                             )
                                         )}{" "}
                                     </div>
@@ -114,14 +117,15 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                         ) : (
                             <div>
                                 {shownCompanies.map((company, index) => (
-                                    <button
+                                    <LinkButton
+                                        route="company-details"
                                         onClick={() =>
                                             onOpenDetails(company.ppid)
                                         }
                                         key={index}
                                     >
                                         {company.name}
-                                    </button>
+                                    </LinkButton>
                                 ))}
                             </div>
                         )}

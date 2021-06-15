@@ -11,21 +11,19 @@ const DataSharingSection = ({
     average,
     onOpenDetails,
 }) => (
-    <div className={`data-sharing-section ${sharingType}-shared`}>
-        <LinkButton
-            className={`data-sharing-section ${sharingType}-shared`}
-            onClick={onOpenDetails}
-            route="/data-exploration"
-        >
-            <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
-            <DataSharingGauge
-                sharingType={sharingType}
-                count={count}
-                max={max}
-                average={average}
-            />
-        </LinkButton>
-    </div>
+    <LinkButton
+        className={`data-sharing-section ${sharingType}-shared`}
+        onClick={onOpenDetails}
+        route="/data-exploration"
+    >
+        <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
+        <DataSharingGauge
+            sharingType={sharingType}
+            count={count}
+            max={max}
+            average={average}
+        />
+    </LinkButton>
 );
 
 const FeaturedCompany = ({
