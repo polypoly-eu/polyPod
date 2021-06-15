@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";
 import sucrase from "@rollup/plugin-sucrase";
+import copy from "rollup-plugin-copy";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -65,6 +66,14 @@ export default {
         commonjs(),
         json(),
         sucrase({ "transforms": [] }),
+        copy({
+            targets: [
+                {
+                    src: ["node_modules/@polypoly-eu/podjs/dist/pod.js"],
+                    dest: "public",
+                },
+            ],
+        }),
 
         // In dev mode, call `npm run start` once
         // the bundle has been generated

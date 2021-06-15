@@ -11,7 +11,7 @@
     "update-lexicon-data": "func(){ node ./scripts/update-lexicon-data.js \"$1\";}; func"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config": "file:../../eslint-config",
+    "@polypoly-eu/podjs": "file:../../podjs",
     "@prismicio/client": "^4.0.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
@@ -30,6 +30,7 @@
     "prettier-plugin-svelte": "^2.2.0",
     "prismic-dom": "^2.2.5",
     "rollup": "^2.3.4",
+    "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",

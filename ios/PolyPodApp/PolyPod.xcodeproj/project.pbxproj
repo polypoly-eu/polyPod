@@ -495,6 +495,7 @@
 				1AA6DE2D24191C94008DB1B2 /* Resources */,
 				E9CF1B7D2627365600216B70 /* Update Bundle Version */,
 				E923739E2628228F00D2CFF3 /* Copy polyPod Features */,
+				E98F3756266F32AE00874FB9 /* Copy licenses */,
 			);
 			buildRules = (
 			);
@@ -602,6 +603,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "SOURCE_PATH=\"$PROJECT_DIR/../..\"\nTARGET_PATH=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\n\ncp \"$SOURCE_PATH/core/communication/remote-pod/dist/bootstrap.js\" \"$TARGET_PATH/pod.js\"\ncp \"$SOURCE_PATH\"/features/bundle/dist/*.zip \"$TARGET_PATH\"\n";
+		};
+		E98F3756266F32AE00874FB9 /* Copy licenses */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy licenses";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SOURCE=\"$PROJECT_DIR/../../3rd-party-licenses\"\nTARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/3rd-party-licenses\"\nrm -rf \"$TARGET\"\ncp -r \"$SOURCE\" \"$TARGET\"\n";
 		};
 		E9CF1B7D2627365600216B70 /* Update Bundle Version */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -958,7 +977,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "coop.polypoly.polypod - iOS App Store Distribution";
@@ -984,7 +1003,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "coop.polypoly.polypod - iOS App Store Distribution";

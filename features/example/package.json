@@ -6,7 +6,7 @@
     "build": "rollup -c",
     "test": "./test.sh"
   },
-    "devDependencies": {
+  "devDependencies": {
     "@polypoly-eu/orodruin": "file:../../core/legacy/orodruin",
     "@rollup/plugin-sucrase": "^3.1.0",
     "connect": "^3.7.0",
