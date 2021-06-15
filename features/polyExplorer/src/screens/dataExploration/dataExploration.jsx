@@ -263,6 +263,7 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
+                        route="data-types-info"
                         onClick={() => {
                             openDataTypesInfo(activeIndex);
                         }}
@@ -319,6 +320,7 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
+                        route="data-category-info"
                         onClick={() => {
                             openCategoryInfo(
                                 activeIndex,
@@ -374,6 +376,7 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
+                        route="data-correlation-info"
                         onClick={() => {
                             openCorrelationInfo(activeIndex);
                         }}
@@ -405,6 +408,7 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
+                        route="company-info"
                         onClick={() => {
                             openCompaniesInfo(activeIndex);
                         }}
@@ -475,6 +479,7 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
+                        route="company-info"
                         onClick={() => {
                             openCompaniesInfo(activeIndex);
                         }}
@@ -667,6 +672,7 @@ const DataExplorationScreen = ({
                                     }
                                 />
                                 <DataSharingLegend
+                                    route="data-types-info"
                                     onClick={() =>
                                         openJurisdictionInfo(activeIndex)
                                     }

@@ -1,11 +1,12 @@
 import React from "react";
 import i18n from "../../i18n.js";
+import LinkButton from "../linkButton/linkButton.jsx";
 
-const DataSharingLegend = ({ onClick }) => (
-    <div className="data-sharing-legend" onClick={onClick}>
+const DataSharingLegend = ({ route, onClick }) => (
+    <LinkButton route={route} className="data-sharing-legend" onClick={onClick}>
         <img src="images/question-circle.svg"></img>
         {i18n.t("featuredCompany:text.legend")}
-    </div>
+    </LinkButton>
 );
 
 export default DataSharingLegend;

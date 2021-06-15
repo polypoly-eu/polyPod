@@ -10,9 +10,9 @@ const LinkButton = ({ route, onClick, className, children }) => {
     };
 
     return (
-        <button onClick={() => onClickButton()} className={className}>
+        <div onClick={() => onClickButton()} className={className}>
             <>{children}</>
-        </button>
+        </div>
     );
 };
 
