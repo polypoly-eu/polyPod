@@ -27,7 +27,6 @@
     "@msgpack/msgpack": "^2.6.0"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config": "file:../../../eslint-config",
     "@polypoly-eu/rdf": "file:../../api/rdf",
     "@polypoly-eu/rdf-convert": "file:../../api/rdf-convert",
     "@polypoly-eu/rdf-spec": "file:../../api/rdf-spec",

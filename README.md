@@ -17,7 +17,7 @@ whitepaper].
 
 ## Requirements
 
-Just [Node.js](https://nodejs.org/) version 15.x.
+Just [Node.js](https://nodejs.org/) version 16.x or newer.
 
 ## Building
 
@@ -44,8 +44,12 @@ To run the linter:
 
     $ ./build.js lint
 
-(Please note that this won't trigger tests or linting for non-JS code, for
-example [android](android).)
+> Please note that this won't trigger tests or linting for non-JS code, for
+example [android](android).
+
+If linting reveals some error, they can be fixed with 
+
+    $ ./build.js lintfix
 
 ## Branches
 
@@ -62,13 +66,15 @@ Please read the [SECURITY](SECURITY.md) document on how to report potential
 security vulnerabilities in polyPod and where to find polypoly's Vulnerability
 Disclosure Policy.
 
-
-[the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
-
 ## Issues
 
 For the time being, issues are disabled in this repo. If it's an easy fix (such as a typo) you can go and create a pull request. If it's any other kind of issue, such as a feature request, please email us at feedback@polypoly.eu. Please understand that this is a temporary solution, and issues will be enabled in due course.
 
+<<<<<<< HEAD
+## References
+
+[the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
+=======
 ## Licensing
 
 Copyright (c) 2021 pc polypoly coop SCE mbH
@@ -78,3 +84,4 @@ Licensed under the GNU General Public License, Version 3 with Additional Terms.
 Please see the [LICENSE](LICENSE) document for details and a copy of the
 license and additional terms.
 
+>>>>>>> main

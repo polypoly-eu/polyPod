@@ -350,9 +350,8 @@ const CompanyBubbles = ({
             }
         }
 
-        localDiagram[DIAGRAMS.FLAT].industriesBubbles = localDiagram[
-            DIAGRAMS.FLAT
-        ].svg.selectAll(".industry-bubble");
+        localDiagram[DIAGRAMS.FLAT].industriesBubbles =
+            localDiagram[DIAGRAMS.FLAT].svg.selectAll(".industry-bubble");
 
         localDiagram[DIAGRAMS.FLAT].industriesBubbles.each((elem, index) => {
             const d = pack.children[index];

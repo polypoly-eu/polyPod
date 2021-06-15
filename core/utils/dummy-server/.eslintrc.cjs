@@ -1,5 +1,4 @@
 module.exports = {
-    extends: ["@polypoly-eu/eslint-config"],
     globals: {
         process: true,
         console: true,

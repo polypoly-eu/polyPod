@@ -10,12 +10,7 @@ jobs:
         with:
           node-version: 16.x
       - name: Lint core and features
-        run: |
-          pushd eslint-config
-          npm ci --no-update-notifier --no-fund
-          popd
-          npm install -g eslint
-          ./build.js lint
+        run: ./build.js lint
       - name: Build core and features
         run: ./build.js
       - name: Test core and features
