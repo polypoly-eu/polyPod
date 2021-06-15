@@ -6,6 +6,7 @@ import Scrollable from "../../components/scrollable/scrollable.jsx";
 import Screen from "../../components/screen/screen.jsx";
 
 import "./companyFilter.css";
+import LinkButton from "../../components/linkButton/linkButton.jsx";
 
 const CompanyFilterScreen = ({
     companies,
@@ -85,14 +86,15 @@ const CompanyFilterScreen = ({
             </Scrollable>
 
             <div className="button-area">
-                <button
+                <LinkButton
+                    route="back"
                     className={
                         "apply-button" + (filtersChanged() ? "" : " disabled")
                     }
                     onClick={handleApply}
                 >
                     {i18n.t("companyFilterScreen:apply")}
-                </button>
+                </LinkButton>
             </div>
         </Screen>
     );
