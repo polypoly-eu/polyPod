@@ -29,7 +29,6 @@
   },
   "devDependencies": {
     "@polypoly-eu/dummy-server": "file:../../utils/dummy-server",
-    "@polypoly-eu/eslint-config": "file:../../../eslint-config",
     "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.1.0",

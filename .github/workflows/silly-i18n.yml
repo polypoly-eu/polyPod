@@ -17,7 +17,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 15.x
-      - name: Install
+      - name: Install linting stuff
+        run: npm i
+      - name: Install local stuff
         working-directory: ${{env.silly-i18n-dir}}
         run: npm i
       - name: Run linter

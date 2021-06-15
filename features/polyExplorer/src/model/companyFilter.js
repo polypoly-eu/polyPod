@@ -83,16 +83,7 @@ class JurisdictionMatcher extends FieldMatcher {
 }
 
 const revenueRangeValues = [
-    -1,
-    0,
-    100,
-    500,
-    1000,
-    5000,
-    20000,
-    50000,
-    100000,
-    1000000,
+    -1, 0, 100, 500, 1000, 5000, 20000, 50000, 100000, 1000000,
 ];
 
 class RevenueRangeMatcher extends FieldMatcher {
