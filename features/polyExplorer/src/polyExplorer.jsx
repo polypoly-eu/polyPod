@@ -27,7 +27,6 @@ import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/compani
 import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/jurisdictionInfo.jsx";
 import FeaturedCompanyInfoScreen from "./screens/featuredCompanyInfo/featuredCompanyInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
-import ConstructionPopup from "./components/constructionPopup/constructionPopup.jsx";
 
 import polyPediaCompanies from "./data/companies.json";
 import polyPediaGlobalData from "./data/global.json";
