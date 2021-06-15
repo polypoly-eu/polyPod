@@ -1,12 +1,14 @@
 import React from "react";
 import i18n from "../../i18n.js";
 import "./companyShortInfo.css";
+import { Link } from "react-router-dom";
 
 const CompanyShortInfo = ({ company, onOpenDetails = () => {} }) => {
     return (
-        <button
+        <Link
             onClick={() => onOpenDetails(company.ppid)}
             className="company-short-info"
+            to="/company-details"
         >
             {company.featured ? (
                 <img
@@ -42,7 +44,7 @@ const CompanyShortInfo = ({ company, onOpenDetails = () => {} }) => {
                     </p>
                 </div>
             </div>
-        </button>
+        </Link>
     );
 };
 
