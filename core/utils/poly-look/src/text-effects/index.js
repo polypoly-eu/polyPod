@@ -1,3 +1,3 @@
 import { FirstCapitalize } from "./FirstCapitalize";
 
-export { FirstCapitalize };
+window.customElements.define("poly-first-capitalize", FirstCapitalize);

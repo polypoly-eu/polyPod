@@ -15,7 +15,7 @@ export default {
 };
 
 function Template({
-  src = "public/markdownFiles/messagers-apps.md",
+  src = "public/markdownFiles/messenger-apps.md",
   backgroundImage = null,
   onPolyMarkdownError,
 }) {
@@ -33,7 +33,7 @@ export const Regular = Template.bind({});
 
 export const imageInBackground = Template.bind({});
 imageInBackground.args = {
-  src: "public/markdownFiles/messagers-apps-02.md",
+  src: "public/markdownFiles/messenger-apps-02.md",
   backgroundImage: "public/images/Frame77.png",
 };
 

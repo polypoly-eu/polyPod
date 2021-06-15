@@ -17,7 +17,7 @@ export default {
 };
 
 function Template({
-  src = "public/markdownFiles/messagers-apps.md",
+  src = "public/markdownFiles/messenger-apps.md",
   onPolyMarkdownSuccess,
   onPolyMarkdownError,
 }) {
