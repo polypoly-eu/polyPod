@@ -5,6 +5,7 @@ import i18n from "../i18n.js";
 
 //model
 import { Company } from "../model/company.js";
+import { CompanyFilter } from "../model/companyFilter.js";
 
 //local-data imports
 import polyPediaCompanies from "../data/companies.json";
@@ -53,6 +54,10 @@ export const ExplorerProvider = ({ children }) => {
         (company) => company.featured
     );
     const [selectedCompany, setSelectedCompany] = useState(undefined);
+    const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
+
+    //mainscreen tabs
+    const [showClusters, setShowClusters] = useState(true);
 
     //router hooks
     const history = useHistory();
@@ -126,6 +131,15 @@ export const ExplorerProvider = ({ children }) => {
         ])
     );
 
+    const handleRemoveFilter = (field, value) => {
+        activeFilters.remove(field, value);
+        setActiveFilters(activeFilters.copy());
+    };
+
+    const handleFilterApply = (newActiveFilters) => {
+        setActiveFilters(newActiveFilters);
+    };
+
     //on-startup
     useEffect(() => {
         setTimeout(() => readFirstRun().then(setFirstRun), 300);
@@ -149,6 +163,11 @@ export const ExplorerProvider = ({ children }) => {
                 setSelectedCompany,
                 featuredCompanyMaxValues,
                 featuredCompanyAverageValues,
+                activeFilters,
+                handleRemoveFilter,
+                handleFilterApply,
+                showClusters,
+                setShowClusters,
             }}
         >
             {children}

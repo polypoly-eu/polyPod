@@ -87,7 +87,7 @@ const CompanyFilterScreen = ({
 
             <div className="button-area">
                 <LinkButton
-                    route="back"
+                    route="/"
                     className={
                         "apply-button" + (filtersChanged() ? "" : " disabled")
                     }

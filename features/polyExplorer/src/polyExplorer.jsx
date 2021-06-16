@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 
-import { CompanyFilter } from "./model/companyFilter.js";
 import polyPediaGlobalData from "./data/global.json";
 
 import MainScreen from "./screens/main/main.jsx";
@@ -32,9 +31,6 @@ import {
 } from "./context/explorer-context.jsx";
 
 const PolyExplorerApp = () => {
-    const [showClusters, setShowClusters] = useState(true);
-
-    const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
     const initialDataExplorationSection = "dataTypes";
     const [dataExploringSection, setDataExploringSection] = useState(
         initialDataExplorationSection
@@ -53,6 +49,9 @@ const PolyExplorerApp = () => {
         setSelectedCompany,
         featuredCompanyMaxValues,
         featuredCompanyAverageValues,
+        activeFilters,
+        handleRemoveFilter,
+        handleFilterApply,
     } = useContext(ExplorerContext);
 
     const handleActiveScreenChange = (screen, ppid) => {
@@ -70,16 +69,6 @@ const PolyExplorerApp = () => {
         if (activeCategory) setActiveCategory(activeCategory);
     };
 
-    const handleRemoveFilter = (field, value) => {
-        activeFilters.remove(field, value);
-        setActiveFilters(activeFilters.copy());
-    };
-
-    const handleFilterApply = (newActiveFilters) => {
-        setActiveFilters(newActiveFilters);
-        handleBack();
-    };
-
     const handleOpenDataExplorationSection = (section, company) => {
         setDataExploringSection(section);
         handleActiveScreenChange("dataExploration", company);
@@ -90,7 +79,6 @@ const PolyExplorerApp = () => {
             <Switch>
                 <Route exact path="/">
                     <MainScreen
-                        showClusters={showClusters}
                         companies={companies}
                         globalData={polyPediaGlobalData}
                         onOpenDetails={(company) =>
@@ -99,7 +87,6 @@ const PolyExplorerApp = () => {
                         onOpenFilters={() =>
                             handleActiveScreenChange("companyFilter")
                         }
-                        onShowClustersChange={setShowClusters}
                         activeFilters={activeFilters}
                         onRemoveFilter={handleRemoveFilter}
                     />
