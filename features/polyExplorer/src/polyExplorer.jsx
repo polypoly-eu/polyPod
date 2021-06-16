@@ -32,8 +32,6 @@ import {
 } from "./context/explorer-context.jsx";
 
 const PolyExplorerApp = () => {
-    const [activeScreen, setActiveScreen] = useState("main");
-    const backStack = useRef([]).current;
     const [showClusters, setShowClusters] = useState(true);
 
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
@@ -58,9 +56,6 @@ const PolyExplorerApp = () => {
     } = useContext(ExplorerContext);
 
     const handleActiveScreenChange = (screen, ppid) => {
-        if (screen === "main") backStack.length = 0;
-        else backStack.push(activeScreen);
-        setActiveScreen(screen);
         if (ppid) setSelectedCompany(ppid);
     };
 
@@ -70,7 +65,6 @@ const PolyExplorerApp = () => {
         activeIndex,
         activeCategory
     ) => {
-        handleActiveScreenChange(screen);
         setDataExploringSection(activeSection);
         setActiveExplorationIndex(activeIndex);
         if (activeCategory) setActiveCategory(activeCategory);
@@ -109,12 +103,6 @@ const PolyExplorerApp = () => {
                         activeFilters={activeFilters}
                         onRemoveFilter={handleRemoveFilter}
                     />
-                    {firstRun ? (
-                        <OnboardingPopup
-                            onClose={handleOnboardingPopupClose}
-                            onMoreInfo={handleOnboardingPopupMoreInfo}
-                        />
-                    ) : null}
                 </Route>
                 <Route exact path="/company-details">
                     <CompanyDetailsScreen
@@ -244,6 +232,12 @@ const PolyExplorerApp = () => {
                     <JurisdictionInfoScreen onClose={handleBack} />
                 </Route>
             </Switch>
+            {firstRun ? (
+                <OnboardingPopup
+                    onClose={handleOnboardingPopupClose}
+                    onMoreInfo={handleOnboardingPopupMoreInfo}
+                />
+            ) : null}
         </div>
     );
 };

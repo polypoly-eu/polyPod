@@ -59,7 +59,7 @@ export const ExplorerProvider = ({ children }) => {
     const location = useLocation();
 
     function handleBack() {
-        history.goBack();
+        if (location.pathname != "/") history.goBack();
     }
 
     function handleOnboardingPopupClose() {
