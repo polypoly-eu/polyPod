@@ -39,26 +39,6 @@ import polyPediaGlobalData from "./data/global.json";
 
 const namespace = "http://polypoly.coop/schema/polyExplorer/#";
 
-async function readFirstRun() {
-    const quads = await pod.polyIn.select({});
-    return !quads.some(
-        ({ subject, predicate, object }) =>
-            subject.value === `${namespace}polyExplorer` &&
-            predicate.value === `${namespace}firstRun` &&
-            object.value === `${namespace}false`
-    );
-}
-
-async function writeFirstRun(firstRun) {
-    const { dataFactory, polyIn } = pod;
-    const quad = dataFactory.quad(
-        dataFactory.namedNode(`${namespace}polyExplorer`),
-        dataFactory.namedNode(`${namespace}firstRun`),
-        dataFactory.namedNode(`${namespace}${firstRun}`)
-    );
-    polyIn.add(quad);
-}
-
 function loadCompanies(JSONData, globalData) {
     const companies = {};
     for (let obj of JSONData) {
@@ -80,7 +60,6 @@ const PolyExplorerApp = () => {
     const [selectedCompany, setSelectedCompany] = useState(undefined);
 
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
-    const [firstRun, setFirstRun] = useState(false);
     const initialDataExplorationSection = "dataTypes";
     const [dataExploringSection, setDataExploringSection] = useState(
         initialDataExplorationSection
@@ -91,6 +70,12 @@ const PolyExplorerApp = () => {
     //Router hooks
     const history = useHistory();
     const location = useLocation();
+
+    const {
+        firstRun,
+        handleOnboardingPopupClose,
+        handleOnboardingPopupMoreInfo,
+    } = useContext(ExplorerContext);
 
     //Get the max values of all featured companies
     function calculateAverage(values) {
@@ -150,16 +135,6 @@ const PolyExplorerApp = () => {
         handleBack();
     };
 
-    function handleOnboardingPopupClose() {
-        setFirstRun(false);
-        writeFirstRun(false);
-    }
-
-    function handleOnboardingPopupMoreInfo() {
-        handleOnboardingPopupClose();
-        handleActiveScreenChange("info");
-    }
-
     const handleOpenDataExplorationSection = (section, company) => {
         setDataExploringSection(section);
         handleActiveScreenChange("dataExploration", company);
@@ -202,7 +177,6 @@ const PolyExplorerApp = () => {
 
     useEffect(() => {
         updatePodNavigation();
-        setTimeout(() => readFirstRun().then(setFirstRun), 300);
     });
 
     return (
