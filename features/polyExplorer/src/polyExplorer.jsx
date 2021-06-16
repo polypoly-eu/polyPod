@@ -52,10 +52,6 @@ const PolyExplorerApp = () => {
         handleOpenDataExplorationSection,
     } = useContext(ExplorerContext);
 
-    const handleActiveScreenChange = (screen, ppid) => {
-        if (ppid) setSelectedCompany(ppid);
-    };
-
     return (
         <div className="poly-explorer">
             <Switch>
@@ -63,19 +59,7 @@ const PolyExplorerApp = () => {
                     <MainScreen />
                 </Route>
                 <Route exact path="/company-details">
-                    <CompanyDetailsScreen
-                        company={companies[selectedCompany]}
-                        onOpenRegionInfo={() =>
-                            handleActiveScreenChange("dataRegionInfo")
-                        }
-                        featuredCompanyMaxValues={featuredCompanyMaxValues}
-                        featuredCompanyAverageValues={
-                            featuredCompanyAverageValues
-                        }
-                        onOpenDataExplorationSection={
-                            handleOpenDataExplorationSection
-                        }
-                    />
+                    <CompanyDetailsScreen />
                 </Route>
                 <Route exact path="/data-exploration">
                     <DataExplorationScreen />
@@ -92,38 +76,31 @@ const PolyExplorerApp = () => {
                     <CompanySearchScreen />
                 </Route>
                 <Route exact path="/featured-company-info">
-                    <FeaturedCompanyInfoScreen onClose={handleBack} />
+                    <FeaturedCompanyInfoScreen />
                 </Route>
                 <Route exact path="/info">
-                    <InfoScreen onClose={handleBack} />
+                    <InfoScreen />
                 </Route>
                 <Route exact path="/data-region-info">
-                    <DataRegionInfoScreen onClose={handleBack} />
+                    <DataRegionInfoScreen />
                 </Route>
                 <Route exact path="/data-types-info">
-                    <DataTypesInfoScreen onClose={handleBack} />
+                    <DataTypesInfoScreen />
                 </Route>
                 <Route exact path="/data-category-info">
-                    <CategoryInfoScreen
-                        category={activeCategory}
-                        company={companies[selectedCompany]}
-                        onClose={handleBack}
-                    />
+                    <CategoryInfoScreen />
                 </Route>
                 <Route exact path="/data-correlation-info">
-                    <CorrelationInfoScreen
-                        company={companies[selectedCompany]}
-                        onClose={handleBack}
-                    />
+                    <CorrelationInfoScreen />
                 </Route>
                 <Route exact path="/purpose-info">
-                    <PurposeInfoScreen onClose={handleBack} />
+                    <PurposeInfoScreen />
                 </Route>
                 <Route exact path="/companies-info">
-                    <CompaniesInfoScreen onClose={handleBack} />
+                    <CompaniesInfoScreen />
                 </Route>
                 <Route exact path="/jurisdiction-info">
-                    <JurisdictionInfoScreen onClose={handleBack} />
+                    <JurisdictionInfoScreen />
                 </Route>
             </Switch>
             {firstRun ? (
