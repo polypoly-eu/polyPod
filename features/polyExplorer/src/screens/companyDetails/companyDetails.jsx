@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
@@ -7,16 +7,20 @@ import FeaturedCompany from "../../components/featuredCompany/featuredCompany.js
 import { Swiper, SwiperSlide } from "swiper/react";
 import LinkButton from "../../components/linkButton/linkButton.jsx";
 import "./companyDetails.css";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const CompanyDetails = ({
-    company,
-    onOpenRegionInfo,
-    featuredCompanyMaxValues,
-    featuredCompanyAverageValues,
-    onOpenDataExplorationSection,
-}) => {
+const CompanyDetails = () => {
+    const {
+        selectedCompanyObject,
+        featuredCompanyMaxValues,
+        featuredCompanyAverageValues,
+        handleOpenDataExplorationSection,
+    } = useContext(ExplorerContext);
+    const company = selectedCompanyObject;
+    const onOpenDataExplorationSection = handleOpenDataExplorationSection;
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
+    console.log(company);
 
     const cityImageMap = {
         München: "munich",
@@ -99,10 +103,7 @@ const CompanyDetails = ({
                                 </div>
                             </div>
                         )}
-                        <JurisdictionLegend
-                            onOpenRegionInfo={onOpenRegionInfo}
-                        />
-
+                        <JurisdictionLegend />
                         <CompanyRevenueChart
                             annualRevenues={company.annualRevenues}
                         />
@@ -117,14 +118,7 @@ const CompanyDetails = ({
             tabName: "dataStory",
             content: (
                 <>
-                    <FeaturedCompany
-                        company={company}
-                        maxValues={featuredCompanyMaxValues}
-                        averageValues={featuredCompanyAverageValues}
-                        onOpenDataExplorationSection={
-                            onOpenDataExplorationSection
-                        }
-                    ></FeaturedCompany>
+                    <FeaturedCompany />
                     <div className="explore-data-btn-area">
                         <LinkButton
                             className="explore-data-btn"
@@ -201,9 +195,7 @@ const CompanyDetails = ({
                                 </div>
                             </div>
                         )}
-                        <JurisdictionLegend
-                            onOpenRegionInfo={onOpenRegionInfo}
-                        />
+                        <JurisdictionLegend />
                         <CompanyRevenueChart
                             annualRevenues={company.annualRevenues}
                         />

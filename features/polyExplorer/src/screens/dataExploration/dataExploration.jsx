@@ -33,7 +33,7 @@ const DataExplorationScreen = () => {
         featuredCompanyMaxValues,
         dataRecipients,
     } = useContext(ExplorerContext);
-    const company = selectedCompanyObject();
+    const company = selectedCompanyObject;
     const startSection = dataExploringSection;
     const startIndex = activeExplorationIndex;
     const maxCompanies = featuredCompanyMaxValues.companies;

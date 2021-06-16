@@ -53,6 +53,8 @@ export const ExplorerProvider = ({ children }) => {
         (company) => company.featured
     );
     const [selectedCompany, setSelectedCompany] = useState(undefined);
+    const selectedCompanyObject = companies[selectedCompany];
+
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
 
     //remember main screen tab state
@@ -73,10 +75,6 @@ export const ExplorerProvider = ({ children }) => {
     const dataRecipients = companies[selectedCompany]?.dataRecipients?.map(
         (ppid) => companies[ppid]
     );
-
-    function selectedCompanyObject() {
-        return companies[selectedCompany];
-    }
 
     function handleBack() {
         if (location.pathname != "/") history.goBack();
@@ -168,7 +166,7 @@ export const ExplorerProvider = ({ children }) => {
         if (activeCategory) setActiveCategory(activeCategory);
     };
 
-    const handleOpenDataExplorationSection = (section, company) => {
+    const handleOpenDataExplorationSection = (section) => {
         setDataExploringSection(section);
         history.push("/data-exploration");
     };
