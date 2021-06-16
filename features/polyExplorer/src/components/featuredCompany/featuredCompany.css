@@ -6,6 +6,9 @@
     width: 100%;
     margin: 0 auto;
     border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .featured-company-card .short-info-margin {
