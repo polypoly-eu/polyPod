@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { pod } from "../fakePod.js";
 import { useHistory, useLocation } from "react-router";
 import i18n from "../i18n.js";
@@ -77,6 +77,9 @@ export const ExplorerProvider = ({ children }) => {
     );
 
     function handleBack() {
+        if (location.pathname == "/data-exploration") {
+            setActiveExplorationIndex(null);
+        }
         if (location.pathname != "/") history.goBack();
     }
 
@@ -87,7 +90,7 @@ export const ExplorerProvider = ({ children }) => {
 
     function handleOnboardingPopupMoreInfo() {
         handleOnboardingPopupClose();
-        handleActiveScreenChange("info");
+        history.push("/info");
     }
 
     function updatePodNavigation() {

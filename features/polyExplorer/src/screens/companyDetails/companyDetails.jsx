@@ -12,15 +12,12 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 const CompanyDetails = () => {
     const {
         selectedCompanyObject,
-        featuredCompanyMaxValues,
-        featuredCompanyAverageValues,
         handleOpenDataExplorationSection,
     } = useContext(ExplorerContext);
     const company = selectedCompanyObject;
     const onOpenDataExplorationSection = handleOpenDataExplorationSection;
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
-    console.log(company);
 
     const cityImageMap = {
         München: "munich",
