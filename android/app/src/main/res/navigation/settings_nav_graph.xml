@@ -29,4 +29,10 @@
         android:label="@string/settings_terms_of_use_title">
     </fragment>
 
+    <fragment
+        android:id="@+id/LicensesFragment"
+        android:name="coop.polypoly.polypod.settings.LicensesFragment"
+        android:label="@string/settings_licenses_title">
+    </fragment>
+
 </navigation>

@@ -1,8 +1,4 @@
 module.exports = {
-    extends: [
-        "@polypoly-eu/eslint-config",
-        "plugin:react/recommended"
-    ],
     env: {
         browser: true,
         es6: true,

@@ -3,33 +3,19 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src test",
-    "lint:fix": "eslint --fix src/index.js test/*.js",
-    "test": "jest",
-    "doc": "tsdoc"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "coverageReporters": [
-      "json",
-      "html",
-      "text"
-    ]
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
-    "@cypress/webpack-preprocessor": "^5.9.0",
-    "@polypoly-eu/eslint-config": "file:../../../eslint-config",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "babel-jest": "^26.6.3",
-    "cypress": "^7.4.0",
     "eslint": "^7.19.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
     "jest": "^26.6.3",
-    "jsdoc": "^3.2.0",
-    "prettier": "^2.2.1",
-    "tsdoc": "^0.0.4"
+    "prettier": "^2.2.1"
   },
   "private": true,
   "type": "module"

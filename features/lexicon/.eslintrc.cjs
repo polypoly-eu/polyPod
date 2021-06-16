@@ -9,7 +9,7 @@ module.exports = {
         node: true,
         jest: true,
     },
-    ignorePatterns: ["public/build/"],
+    ignorePatterns: ["/public/*"],
     plugins: ["svelte3"],
     overrides: [
         {

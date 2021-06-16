@@ -4,6 +4,8 @@ import { QuestionnaireListProvider } from "./context/questionnaire-list-context"
 import { QuestionnaireProvider } from "./context/questionnaire-context";
 import AppNavigator from "./screens/navigation/AppNavigator";
 
+import "./index.css";
+
 const view = (
     <QuestionnaireListProvider>
         <QuestionnaireProvider>

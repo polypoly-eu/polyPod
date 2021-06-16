@@ -4,9 +4,23 @@ const localLanguage = determineLanguage();
 const language = localLanguage in ['en','de'] ? localLanguage: 'en';
 export default new I18n( language, {
     en: {
-        common: { back: "Back to list", search: "Search here", clear: "Clear search", copy: "Copy to clipboard" , noMatch: "No results for your search." },
+        common: {
+            back: "Back to list",
+            search: "Type here",
+            clear: "Clear search",
+            copy: "Copy to clipboard",
+            noMatch: "No results for your search",
+        },
+        title: { lexicon: "Lexicon", details: "Term details" },
     },
     de: {
-        common: { back: "Zurück zur Liste", search: "Suchen", clear: "Text löschen", copy: "In die Zwischenablage kopieren", noMatch: "Keine Ergebnisse für Ihre Suche." },
+        common: {
+            back: "Zurück zur Liste",
+            search: "Suchbegriff eingeben",
+            clear: "Text löschen",
+            copy: "In die Zwischenablage kopieren",
+            noMatch: "Keine Ergebnisse für Ihre Suche",
+        },
+        title: { lexicon: "Lexikon", details: "Details zum Eintrag" },
     },
 });

@@ -1,44 +1,47 @@
 {
-  "name": "poly-pinion-feature",
-  "version": "0.0.1",
-  "scripts": {
-    "build": "faucet",
-    "watch": "faucet --watch",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
-    "check": "tsc",
-    "serve": "orodruin serve -m"
-  },
-  "devDependencies": {
-    "@polypoly-eu/eslint-config": "file:../../eslint-config",
-    "@polypoly-eu/orodruin": "file:../../core/legacy/orodruin",
-    "@types/react": "^16.9.49",
-    "@types/react-dom": "^16.9.6",
-    "@types/react-router-dom": "^5.1.5",
-    "@typescript-eslint/eslint-plugin": "^4.1.0",
-    "eslint": "^7.8.1",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.20.6",
-    "faucet-pipeline-core": "^1.5.0",
-    "faucet-pipeline-essugar": "0.0.2",
-    "faucet-pipeline-static": "^1.2.0",
-    "prettier": "^2.1.1",
-    "typescript": "^3.9.7"
-  },
-  "engines": {
-    "polypoly": "^0.4.2"
-  },
-  "polypoly": {
-    "root": "dist",
-    "manifest": ""
-  },
-  "dependencies": {
-    "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
-    "i18next": "^19.7.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-i18next": "^11.7.2",
-    "react-router-dom": "5.2.0",
-    "uuid": "^8.2.0"
-  }
+    "name": "poly-pinion-feature",
+    "version": "0.0.1",
+    "scripts": {
+        "build": "rollup -c",
+        "watch": "rollup --watch -c",
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+        "check": "tsc"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^19.0.0",
+        "@rollup/plugin-json": "^4.1.0",
+        "@rollup/plugin-node-resolve": "^8.4.0",
+        "@rollup/plugin-sucrase": "^3.1.0",
+        "@types/react": "^16.9.49",
+        "@types/react-dom": "^16.9.6",
+        "@types/react-router-dom": "^5.1.5",
+        "@typescript-eslint/eslint-plugin": "^4.1.0",
+        "eslint": "^7.8.1",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-react": "^7.20.6",
+        "prettier": "^2.1.1",
+        "rollup": "^2.48.0",
+        "rollup-plugin-copy": "^3.4.0",
+        "rollup-plugin-css-only": "^3.1.0",
+        "rollup-plugin-replace": "^2.2.0",
+        "typescript": "^3.9.7"
+    },
+    "engines": {
+        "polypoly": "^0.4.2"
+    },
+    "polypoly": {
+        "root": "dist",
+        "manifest": ""
+    },
+    "dependencies": {
+        "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
+        "crypto": "^1.0.1",
+        "i18next": "^19.7.0",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-i18next": "^11.7.2",
+        "react-router-dom": "5.2.0",
+        "uuid": "^8.3.2"
+    }
 }
