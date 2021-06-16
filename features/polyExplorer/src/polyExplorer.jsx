@@ -53,36 +53,9 @@ const PolyExplorerApp = () => {
         featuredCompanies,
         selectedCompany,
         setSelectedCompany,
+        featuredCompanyMaxValues,
+        featuredCompanyAverageValues,
     } = useContext(ExplorerContext);
-
-    //Get the max values of all featured companies
-    function calculateAverage(values) {
-        const average = values.reduce((a, b) => a + b, 0) / values.length;
-        return Math.round(10 * average) / 10;
-    }
-    const counts = {
-        dataTypes: Object.values(featuredCompanies).map(
-            (company) => company.dataTypesShared.length
-        ),
-        purposes: Object.values(featuredCompanies).map(
-            (company) => company.dataSharingPurposes.length
-        ),
-        companies: Object.values(featuredCompanies).map(
-            (company) => company.dataRecipients.length
-        ),
-        jurisdictions: Object.values(featuredCompanies).map(
-            (company) => company.jurisdictionsShared.children.length
-        ),
-    };
-    const featuredCompanyMaxValues = Object.fromEntries(
-        Object.entries(counts).map(([key, value]) => [key, Math.max(...value)])
-    );
-    const featuredCompanyAverageValues = Object.fromEntries(
-        Object.entries(counts).map(([key, value]) => [
-            key,
-            calculateAverage(value),
-        ])
-    );
 
     const handleActiveScreenChange = (screen, ppid) => {
         if (screen === "main") backStack.length = 0;
