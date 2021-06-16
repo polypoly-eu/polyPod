@@ -72,6 +72,14 @@ export const ExplorerProvider = ({ children }) => {
     const history = useHistory();
     const location = useLocation();
 
+    const dataRecipients = companies[selectedCompany]?.dataRecipients?.map(
+        (ppid) => companies[ppid]
+    );
+
+    function selectedCompanyObject() {
+        return companies[selectedCompany];
+    }
+
     function handleBack() {
         if (location.pathname != "/") history.goBack();
     }
@@ -189,6 +197,8 @@ export const ExplorerProvider = ({ children }) => {
                 featuredCompanies,
                 selectedCompany,
                 setSelectedCompany,
+                selectedCompanyObject,
+                dataRecipients,
                 featuredCompanyMaxValues,
                 featuredCompanyAverageValues,
                 activeFilters,

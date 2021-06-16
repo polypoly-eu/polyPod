@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import i18n from "../../i18n.js";
@@ -14,6 +14,7 @@ import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
+import LinkButton from "../../components/linkButton/linkButton.jsx";
 
 import global from "../../data/global.json";
 import highlights from "../../data/highlights.js";
@@ -21,22 +22,22 @@ import highlights from "../../data/highlights.js";
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
 import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const DataExplorationScreen = ({
-    company,
-    startSection,
-    startIndex = null,
-    openMain,
-    openDataTypesInfo,
-    openCategoryInfo,
-    openCorrelationInfo,
-    openPurposeInfo,
-    openCompaniesInfo,
-    openJurisdictionInfo,
-    maxCompanies,
-    dataRecipients,
-    onOpenRegionInfo,
-}) => {
+const DataExplorationScreen = () => {
+    const {
+        handleExplorationInfoScreen,
+        selectedCompanyObject,
+        dataExploringSection,
+        activeExplorationIndex,
+        featuredCompanyMaxValues,
+        dataRecipients,
+    } = useContext(ExplorerContext);
+    const company = selectedCompanyObject();
+    const startSection = dataExploringSection;
+    const startIndex = activeExplorationIndex;
+    const maxCompanies = featuredCompanyMaxValues.companies;
+
     //Methods
     const getCategories = () =>
         Object.keys(highlights[company.ppid]?.dataTypeCategories || {});
@@ -265,7 +266,10 @@ const DataExplorationScreen = ({
                     <DataSharingLegend
                         route="data-types-info"
                         onClick={() => {
-                            openDataTypesInfo(activeIndex);
+                            handleExplorationInfoScreen(
+                                "dataTypes",
+                                activeIndex
+                            );
                         }}
                     />
                     {filler}
@@ -322,7 +326,8 @@ const DataExplorationScreen = ({
                     <DataSharingLegend
                         route="data-category-info"
                         onClick={() => {
-                            openCategoryInfo(
+                            handleExplorationInfoScreen(
+                                "dataTypesCategory",
                                 activeIndex,
                                 activeScreen.split("_")[1]
                             );
@@ -378,7 +383,10 @@ const DataExplorationScreen = ({
                     <DataSharingLegend
                         route="data-correlation-info"
                         onClick={() => {
-                            openCorrelationInfo(activeIndex);
+                            handleExplorationInfoScreen(
+                                "dataTypesCorrelation",
+                                activeIndex
+                            );
                         }}
                     />
                 </div>
@@ -408,9 +416,12 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
-                        route="company-info"
+                        route="companies-info"
                         onClick={() => {
-                            openCompaniesInfo(activeIndex);
+                            handleExplorationInfoScreen(
+                                "companies",
+                                activeIndex
+                            );
                         }}
                     />
                 </div>
@@ -479,9 +490,12 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <DataSharingLegend
-                        route="company-info"
+                        route="companies-info"
                         onClick={() => {
-                            openCompaniesInfo(activeIndex);
+                            handleExplorationInfoScreen(
+                                "companies",
+                                activeIndex
+                            );
                         }}
                     />
                 </div>
@@ -612,7 +626,10 @@ const DataExplorationScreen = ({
                                     purposes={company.dataSharingPurposes}
                                     openPopup={setPurposePopupContent}
                                     openPurposeInfo={() =>
-                                        openPurposeInfo(activeIndex)
+                                        handleExplorationInfoScreen(
+                                            "purposes",
+                                            activeIndex
+                                        )
                                     }
                                 />
                             </div>
@@ -668,23 +685,29 @@ const DataExplorationScreen = ({
                                 />
                                 <JurisdictionLegend
                                     onOpenRegionInfo={() =>
-                                        onOpenRegionInfo(activeIndex)
+                                        handleExplorationInfoScreen(
+                                            "jurisdictions",
+                                            activeIndex
+                                        )
                                     }
                                 />
                                 <DataSharingLegend
                                     route="data-types-info"
                                     onClick={() =>
-                                        openJurisdictionInfo(activeIndex)
+                                        handleExplorationInfoScreen(
+                                            "jurisdictions",
+                                            activeIndex
+                                        )
                                     }
                                 />
-                                <button
+                                <LinkButton
+                                    route="/company-details"
                                     className="explore-other"
-                                    onClick={openMain}
                                 >
                                     {i18n.t(
                                         "dataExplorationScreen:explore.other"
                                     )}
-                                </button>
+                                </LinkButton>
                             </div>
                         </SwiperSlide>
                     </Swiper>

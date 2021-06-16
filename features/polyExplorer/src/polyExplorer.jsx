@@ -89,66 +89,7 @@ const PolyExplorerApp = () => {
                     />
                 </Route>
                 <Route exact path="/data-exploration">
-                    <DataExplorationScreen
-                        company={companies[selectedCompany]}
-                        startSection={dataExploringSection}
-                        startIndex={activeExplorationIndex}
-                        openMain={handleBack}
-                        openDataTypesInfo={(activeIndex) =>
-                            handleExplorationInfoScreen(
-                                "explorationDataTypesInfo",
-                                "dataTypes",
-                                activeIndex
-                            )
-                        }
-                        openCategoryInfo={(activeIndex, activeCategory) =>
-                            handleExplorationInfoScreen(
-                                "explorationCategoryInfo",
-                                "dataTypesCategory",
-                                activeIndex,
-                                activeCategory
-                            )
-                        }
-                        openCorrelationInfo={(activeIndex) =>
-                            handleExplorationInfoScreen(
-                                "explorationCorrelationInfo",
-                                "dataTypesCorrelation",
-                                activeIndex
-                            )
-                        }
-                        openPurposeInfo={(activeIndex) =>
-                            handleExplorationInfoScreen(
-                                "explorationPurposeInfo",
-                                "purposes",
-                                activeIndex
-                            )
-                        }
-                        openCompaniesInfo={(activeIndex) =>
-                            handleExplorationInfoScreen(
-                                "explorationCompaniesInfo",
-                                "companies",
-                                activeIndex
-                            )
-                        }
-                        openJurisdictionInfo={(activeIndex) =>
-                            handleExplorationInfoScreen(
-                                "explorationJurisdictionsInfo",
-                                "jurisdictions",
-                                activeIndex
-                            )
-                        }
-                        maxCompanies={featuredCompanyMaxValues.companies}
-                        dataRecipients={companies[
-                            selectedCompany
-                        ]?.dataRecipients?.map((ppid) => companies[ppid])}
-                        onOpenRegionInfo={(activeIndex) =>
-                            handleExplorationInfoScreen(
-                                "explorationJurisdictionsInfo",
-                                "jurisdictions",
-                                activeIndex
-                            )
-                        }
-                    />
+                    <DataExplorationScreen />
                 </Route>
                 <Route exact path="/company-filters">
                     <CompanyFilterScreen
