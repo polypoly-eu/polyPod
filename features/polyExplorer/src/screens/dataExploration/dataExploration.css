@@ -283,7 +283,9 @@
 }
 
 .data-exploration .explore-other {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 0 0 auto;
     box-sizing: border-box;
     width: 84%;

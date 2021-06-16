@@ -75,7 +75,11 @@
     color: var(--color-text-dark);
     font-family: "Jost Medium";
     font-size: 18px;
+    font-weight: 600;
     background-color: var(--color-background-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .company-filter-screen .apply-button.disabled {
