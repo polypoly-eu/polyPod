@@ -20,8 +20,6 @@ const CompanyDetails = ({ company }) => {
         DUBLIN: "dublin",
     };
 
-    console.log(company);
-
     const tabContent = [
         {
             tabName: "location",

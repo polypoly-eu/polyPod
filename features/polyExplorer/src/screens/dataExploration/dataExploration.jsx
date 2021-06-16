@@ -36,7 +36,6 @@ const DataExplorationScreen = ({
     openJurisdictionInfo,
     maxCompanies,
     dataRecipients,
-    onOpenRegionInfo,
     onOpenDetails,
 }) => {
     //Methods
