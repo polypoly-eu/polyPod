@@ -668,11 +668,7 @@ const DataExplorationScreen = ({
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
                                 />
-                                <JurisdictionLegend
-                                    onOpenRegionInfo={() =>
-                                        onOpenRegionInfo(activeIndex)
-                                    }
-                                />
+                                <JurisdictionLegend />
                                 <DataSharingLegend
                                     onClick={() =>
                                         openJurisdictionInfo(activeIndex)
