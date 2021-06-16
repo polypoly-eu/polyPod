@@ -4,6 +4,9 @@ module.exports = {
         "plugin:prettier/recommended",
         "plugin:react/recommended"
     ],
+    "plugins": [
+        "cypress"
+    ],
     parserOptions: {
         ecmaVersion: 2020,
         sourceType: "module",
@@ -13,7 +16,8 @@ module.exports = {
         es6: true,
         mocha: true,
         jest: true,
-        node: true
+        node: true,
+        "cypress/globals": true
     },
     settings: {
         react: {

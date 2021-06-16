@@ -1,28 +1,25 @@
 {
   "name": "example-feature",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
-    "test": "./test.sh"
+    "test": "npm run build && npx cypress run"
   },
   "devDependencies": {
-    "@polypoly-eu/orodruin": "file:../../core/legacy/orodruin",
+    "@polypoly-eu/podjs": "file:../../podjs",
     "@rollup/plugin-sucrase": "^3.1.0",
-    "connect": "^3.7.0",
-    "puppeteer": "^5.5.0",
+    "cypress": "^7.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "rollup": "^2.26.11",
-    "rollup-plugin-copy": "^3.3.0",
-    "serve-static": "^1.14.1"
+    "rollup": "^2.51.2",
+    "rollup-plugin-copy": "^3.3.0"
   },
   "engines": {
     "polypoly": "^0.6.0"
   },
   "polypoly": {
-    "root": "dist",
-    "manifest": "manifest.json"
+    "root": "dist"
   },
   "private": true
 }

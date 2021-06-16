@@ -1,6 +1,6 @@
 # example feature
 
-A simple feature to demonstrate the usage of orodruin.
+A simple feature with basic level usage of the polyPod.
 
 ## Building
 

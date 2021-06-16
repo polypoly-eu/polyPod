@@ -1,2 +1,4 @@
 /dist
 /static
+cypress/support
+cypress/videos
