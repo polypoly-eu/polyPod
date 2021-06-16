@@ -43,7 +43,33 @@ class FeatureStorage {
             print(error.localizedDescription)
         }
         
-        return featuresList
+        return sortFeatures(featuresList)
+    }
+    
+    private func sortFeatures(_ features: [Feature]) -> [Feature] {
+        let order = readOrder()
+        var sorted: [Feature] = []
+        for name in order {
+            if let match = features.first(where: { $0.name == name }) {
+                sorted.append(match)
+            }
+        }
+        for feature in features {
+            if !order.contains(feature.name) {
+                sorted.append(feature)
+            }
+        }
+        return sorted
+    }
+    
+    private func readOrder() -> [String] {
+        guard let url = Bundle.main.url(
+            forResource: "order",
+            withExtension: nil,
+            subdirectory: "features"
+        ) else { return [] }
+        guard let content = try? String(contentsOf: url) else { return [] }
+        return content.components(separatedBy: .newlines)
     }
     
     func importFeatures() {
@@ -65,8 +91,7 @@ class FeatureStorage {
         let featureUrl = featureDirUrl.appendingPathComponent(featureName)
         if !FileManager.default.fileExists(atPath: featureUrl.absoluteString) {
             do {
-                if let _ = Bundle.main.path(forResource: featureName, ofType: "zip") {
-                    let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip")!
+                if let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip", subdirectory: "features") {
                     let unzipDirectory = try Zip.quickUnzipFile(filePath)
                     try FileManager.default.moveItem(at: unzipDirectory, to: featuresFileUrl.appendingPathComponent(featureName))
                     try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))

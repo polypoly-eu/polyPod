@@ -23,16 +23,7 @@ struct FeatureListView: View {
             
             ScrollView {
                 VStack(spacing: 20) {
-                    let sortedFeatures = features.sorted {
-                        if $0.name == "polyPreview" {
-                            return true
-                        }
-                        if $1.name == "polyPreview" {
-                            return false
-                        }
-                        return $0.name < $1.name
-                    }
-                    ForEach(sortedFeatures, id: \.name) { feature in
+                    ForEach(features, id: \.name) { feature in
                         FeatureCard(feature)
                             .onTapGesture {
                                 openFeatureAction(feature)
