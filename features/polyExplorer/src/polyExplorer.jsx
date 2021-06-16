@@ -1,19 +1,20 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
-
-import polyPediaGlobalData from "./data/global.json";
+import React, { useContext } from "react";
+import {
+    HashRouter as Router,
+    Switch,
+    Route,
+    useHistory,
+} from "react-router-dom";
+import {
+    ExplorerProvider,
+    ExplorerContext,
+} from "./context/explorer-context.jsx";
 
 import MainScreen from "./screens/main/main.jsx";
 import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
 import CompanyFilterScreen from "./screens/companyFilter/companyFilter.jsx";
 import CompanySearchScreen from "./screens/companySearch/companySearch.jsx";
 import InfoScreen from "./screens/info/info.jsx";
-import {
-    HashRouter as Router,
-    Switch,
-    Route,
-    Redirect,
-    useHistory,
-} from "react-router-dom";
 import CompanyDetailsScreen from "./screens/companyDetails/companyDetails.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
 import DataTypesInfoScreen from "./screens/explorationInfo/dataTypesInfo/dataTypesInfo.jsx";
@@ -25,31 +26,11 @@ import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/j
 import FeaturedCompanyInfoScreen from "./screens/featuredCompanyInfo/featuredCompanyInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 
-import {
-    ExplorerProvider,
-    ExplorerContext,
-} from "./context/explorer-context.jsx";
-
 const PolyExplorerApp = () => {
     const {
         firstRun,
         handleOnboardingPopupClose,
         handleOnboardingPopupMoreInfo,
-        handleBack,
-        companies,
-        featuredCompanies,
-        selectedCompany,
-        setSelectedCompany,
-        featuredCompanyMaxValues,
-        featuredCompanyAverageValues,
-        activeFilters,
-        handleRemoveFilter,
-        handleFilterApply,
-        dataExploringSection,
-        activeCategory,
-        activeExplorationIndex,
-        handleExplorationInfoScreen,
-        handleOpenDataExplorationSection,
     } = useContext(ExplorerContext);
 
     return (
@@ -65,12 +46,7 @@ const PolyExplorerApp = () => {
                     <DataExplorationScreen />
                 </Route>
                 <Route exact path="/company-filters">
-                    <CompanyFilterScreen
-                        companies={companies}
-                        globalData={polyPediaGlobalData}
-                        activeFilters={activeFilters}
-                        onApply={handleFilterApply}
-                    />
+                    <CompanyFilterScreen />
                 </Route>
                 <Route exact path="/search">
                     <CompanySearchScreen />
