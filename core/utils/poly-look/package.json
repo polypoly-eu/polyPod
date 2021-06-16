@@ -21,7 +21,6 @@
     "lit-html": "^1.4.1"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config": "file:../../eslint-config",
     "@open-wc/testing": "^2.5.33",
     "@rollup/plugin-replace": "^2.4.2",
     "@web/dev-server": "^0.1.17",
