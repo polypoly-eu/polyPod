@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 
-import i18n from "./i18n.js";
-import { pod } from "./fakePod.js";
-import { Company } from "./model/company.js";
 import { CompanyFilter } from "./model/companyFilter.js";
+import polyPediaGlobalData from "./data/global.json";
 
 import MainScreen from "./screens/main/main.jsx";
 import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
@@ -16,7 +14,6 @@ import {
     Route,
     Redirect,
     useHistory,
-    useLocation,
 } from "react-router-dom";
 import CompanyDetailsScreen from "./screens/companyDetails/companyDetails.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
@@ -34,30 +31,10 @@ import {
     ExplorerContext,
 } from "./context/explorer-context.jsx";
 
-import polyPediaCompanies from "./data/companies.json";
-import polyPediaGlobalData from "./data/global.json";
-
-const namespace = "http://polypoly.coop/schema/polyExplorer/#";
-
-function loadCompanies(JSONData, globalData) {
-    const companies = {};
-    for (let obj of JSONData) {
-        companies[obj.ppid] = new Company(obj, globalData);
-    }
-    return companies;
-}
-
 const PolyExplorerApp = () => {
     const [activeScreen, setActiveScreen] = useState("main");
     const backStack = useRef([]).current;
     const [showClusters, setShowClusters] = useState(true);
-    const [companies] = useState(
-        loadCompanies(polyPediaCompanies, polyPediaGlobalData)
-    );
-    const featuredCompanies = Object.values(companies).filter(
-        (company) => company.featured
-    );
-    const [selectedCompany, setSelectedCompany] = useState(undefined);
 
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
     const initialDataExplorationSection = "dataTypes";
@@ -67,14 +44,15 @@ const PolyExplorerApp = () => {
     const [activeCategory, setActiveCategory] = useState(null);
     const [activeExplorationIndex, setActiveExplorationIndex] = useState(null);
 
-    //Router hooks
-    const history = useHistory();
-    const location = useLocation();
-
     const {
         firstRun,
         handleOnboardingPopupClose,
         handleOnboardingPopupMoreInfo,
+        handleBack,
+        companies,
+        featuredCompanies,
+        selectedCompany,
+        setSelectedCompany,
     } = useContext(ExplorerContext);
 
     //Get the max values of all featured companies
@@ -139,45 +117,6 @@ const PolyExplorerApp = () => {
         setDataExploringSection(section);
         handleActiveScreenChange("dataExploration", company);
     };
-
-    function handleBack() {
-        history.goBack();
-        if (activeScreen === "dataExploration") {
-            setDataExploringSection(initialDataExplorationSection);
-            setActiveCategory(null);
-            setActiveExplorationIndex(null);
-        }
-
-        const previousScreen = backStack.pop();
-        if (previousScreen) {
-            setActiveScreen(previousScreen);
-            return;
-        }
-        setActiveScreen("main");
-    }
-
-    function updatePodNavigation() {
-        if (
-            location.pathname == "/data-exploration" ||
-            location.pathname == "/company-details"
-        )
-            pod.polyNav.setTitle(companies[selectedCompany].name);
-        else pod.polyNav.setTitle(i18n.t(`common:screenTitle.${activeScreen}`));
-        pod.polyNav.actions = firstRun
-            ? { info: () => {}, search: () => {} }
-            : {
-                  info: () => history.push("/info"),
-                  search: () => history.push("/search"),
-                  back: handleBack,
-              };
-        pod.polyNav.setActiveActions(
-            backStack.length ? ["back"] : ["info", "search"]
-        );
-    }
-
-    useEffect(() => {
-        updatePodNavigation();
-    });
 
     return (
         <div className="poly-explorer">
@@ -337,7 +276,9 @@ const PolyExplorerApp = () => {
 };
 
 const PolyExplorer = () => {
+    //global history object
     const history = useHistory();
+
     return (
         <Router history={history}>
             <ExplorerProvider>

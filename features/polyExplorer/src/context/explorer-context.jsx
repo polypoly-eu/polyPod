@@ -1,5 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { pod } from "../fakePod.js";
+import { useHistory, useLocation } from "react-router";
+import i18n from "../i18n.js";
+
+//model
+import { Company } from "../model/company.js";
+
+//local-data imports
+import polyPediaCompanies from "../data/companies.json";
+import polyPediaGlobalData from "../data/global.json";
 
 //constants
 const namespace = "http://polypoly.coop/schema/polyExplorer/#";
@@ -26,8 +35,32 @@ async function writeFirstRun(firstRun) {
     polyIn.add(quad);
 }
 
+function loadCompanies(JSONData, globalData) {
+    const companies = {};
+    for (let obj of JSONData) {
+        companies[obj.ppid] = new Company(obj, globalData);
+    }
+    return companies;
+}
+
 export const ExplorerProvider = ({ children }) => {
+    //state
     const [firstRun, setFirstRun] = useState(false);
+    const [companies] = useState(
+        loadCompanies(polyPediaCompanies, polyPediaGlobalData)
+    );
+    const featuredCompanies = Object.values(companies).filter(
+        (company) => company.featured
+    );
+    const [selectedCompany, setSelectedCompany] = useState(undefined);
+
+    //router hooks
+    const history = useHistory();
+    const location = useLocation();
+
+    function handleBack() {
+        history.goBack();
+    }
 
     function handleOnboardingPopupClose() {
         setFirstRun(false);
@@ -39,10 +72,37 @@ export const ExplorerProvider = ({ children }) => {
         handleActiveScreenChange("info");
     }
 
-    //firstRun use
+    function updatePodNavigation() {
+        if (
+            location.pathname == "/data-exploration" ||
+            location.pathname == "/company-details"
+        )
+            pod.polyNav.setTitle(companies[selectedCompany].name);
+        else
+            pod.polyNav.setTitle(
+                i18n.t(`common:screenTitle.${location.pathname}`)
+            );
+        pod.polyNav.actions = firstRun
+            ? { info: () => {}, search: () => {} }
+            : {
+                  info: () => history.push("/info"),
+                  search: () => history.push("/search"),
+                  back: handleBack,
+              };
+        pod.polyNav.setActiveActions(
+            history.length ? ["back"] : ["info", "search"]
+        );
+    }
+
+    //on-startup
     useEffect(() => {
         setTimeout(() => readFirstRun().then(setFirstRun), 300);
     }, []);
+
+    //on-change
+    useEffect(() => {
+        updatePodNavigation();
+    });
 
     return (
         <ExplorerContext.Provider
@@ -50,6 +110,11 @@ export const ExplorerProvider = ({ children }) => {
                 firstRun,
                 handleOnboardingPopupClose,
                 handleOnboardingPopupMoreInfo,
+                handleBack,
+                companies,
+                featuredCompanies,
+                selectedCompany,
+                setSelectedCompany,
             }}
         >
             {children}
