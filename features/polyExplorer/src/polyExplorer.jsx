@@ -365,11 +365,11 @@ const PolyExplorerApp = () => {
 const PolyExplorer = () => {
     const history = useHistory();
     return (
-        <ExplorerProvider>
-            <Router history={history}>
+        <Router history={history}>
+            <ExplorerProvider>
                 <PolyExplorerApp />
-            </Router>
-        </ExplorerProvider>
+            </ExplorerProvider>
+        </Router>
     );
 };
 
