@@ -161,6 +161,10 @@
     margin-bottom: -8px;
 }
 
+.data-exploration .jurisdiction-tree-container .data-sharing-legend {
+    bottom: 130px;
+}
+
 
 .data-exploration .static-content .data-sharing-legend-fill {
     box-sizing: border-box;
