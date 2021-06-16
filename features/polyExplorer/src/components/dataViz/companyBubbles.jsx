@@ -272,7 +272,7 @@ const CompanyBubbles = ({
         const viewData = {};
         const localDiagram = {};
         const root = getRoot();
-        
+
         let localIndustryCircleLabels = {};
 
         viewData.flat = {
@@ -320,18 +320,15 @@ const CompanyBubbles = ({
         const localCompanyCirclePosition = {
             ...companyCirclePosition,
             ...pack.children.reduce((acc, child) => {
-                const result = child.children.reduce(
-                    (acc2, secondChild) => {
-                        return {
-                            ...acc2,
-                            [secondChild.data.name]: {
-                                x: secondChild.x,
-                                y: secondChild.y,
-                            },
-                        };
-                    },
-                    {}
-                );
+                const result = child.children.reduce((acc2, secondChild) => {
+                    return {
+                        ...acc2,
+                        [secondChild.data.name]: {
+                            x: secondChild.x,
+                            y: secondChild.y,
+                        },
+                    };
+                }, {});
 
                 return { ...acc, ...result };
             }, {}),
@@ -363,7 +360,7 @@ const CompanyBubbles = ({
             localIndustryCircleLabels = {
                 ...localIndustryCircleLabels,
                 [d.data.name]: industryLabel,
-            }
+            };
 
             return industryLabel;
         });
@@ -440,7 +437,11 @@ const CompanyBubbles = ({
 
         setDiagram({ ...localDiagram });
 
-        return {localDiagram, localCompanyCirclePosition, localIndustryCircleLabels};
+        return {
+            localDiagram,
+            localCompanyCirclePosition,
+            localIndustryCircleLabels,
+        };
     }
 
     function appendBubbles(container, data) {
@@ -491,7 +492,11 @@ const CompanyBubbles = ({
 
     function render() {
         if (Object.keys(diagrams).length === 0) {
-            const { localDiagram, localCompanyCirclePosition, localIndustryCircleLabels } = createViewData();
+            const {
+                localDiagram,
+                localCompanyCirclePosition,
+                localIndustryCircleLabels,
+            } = createViewData();
             if (view === DIAGRAMS.ALL_INDUSTRIES) {
                 showDiagram(
                     DIAGRAMS.FLAT,
