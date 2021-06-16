@@ -1,12 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import LinkButton from "../../components/linkButton/linkButton.jsx";
 
 import "./companySearch.css";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const CompanySearchScreen = ({ companies, onOpenDetails }) => {
+const CompanySearchScreen = () => {
+    const { companiesList, setSelectedCompany } = useContext(ExplorerContext);
+    const companies = companiesList;
+
     const [searchString, setSearchString] = useState("");
     const featuredComanies = companies
         .filter((company) => company.featured)
@@ -74,7 +78,9 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                                 <LinkButton
                                     route="company-details"
                                     key={index}
-                                    onClick={() => onOpenDetails(company.ppid)}
+                                    onClick={() =>
+                                        setSelectedCompany(company.ppid)
+                                    }
                                 >
                                     {company.name}
                                 </LinkButton>
@@ -101,7 +107,7 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                                                 <LinkButton
                                                     route="company-details"
                                                     onClick={() =>
-                                                        onOpenDetails(
+                                                        setSelectedCompany(
                                                             company.ppid
                                                         )
                                                     }
@@ -120,7 +126,7 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                                     <LinkButton
                                         route="company-details"
                                         onClick={() =>
-                                            onOpenDetails(company.ppid)
+                                            setSelectedCompany(company.ppid)
                                         }
                                         key={index}
                                     >

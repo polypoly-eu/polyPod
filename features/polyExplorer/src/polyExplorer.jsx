@@ -31,13 +31,6 @@ import {
 } from "./context/explorer-context.jsx";
 
 const PolyExplorerApp = () => {
-    const initialDataExplorationSection = "dataTypes";
-    const [dataExploringSection, setDataExploringSection] = useState(
-        initialDataExplorationSection
-    );
-    const [activeCategory, setActiveCategory] = useState(null);
-    const [activeExplorationIndex, setActiveExplorationIndex] = useState(null);
-
     const {
         firstRun,
         handleOnboardingPopupClose,
@@ -52,26 +45,15 @@ const PolyExplorerApp = () => {
         activeFilters,
         handleRemoveFilter,
         handleFilterApply,
+        dataExploringSection,
+        activeCategory,
+        activeExplorationIndex,
+        handleExplorationInfoScreen,
+        handleOpenDataExplorationSection,
     } = useContext(ExplorerContext);
 
     const handleActiveScreenChange = (screen, ppid) => {
         if (ppid) setSelectedCompany(ppid);
-    };
-
-    const handleExplorationInfoScreen = (
-        screen,
-        activeSection,
-        activeIndex,
-        activeCategory
-    ) => {
-        setDataExploringSection(activeSection);
-        setActiveExplorationIndex(activeIndex);
-        if (activeCategory) setActiveCategory(activeCategory);
-    };
-
-    const handleOpenDataExplorationSection = (section, company) => {
-        setDataExploringSection(section);
-        handleActiveScreenChange("dataExploration", company);
     };
 
     return (
@@ -177,12 +159,7 @@ const PolyExplorerApp = () => {
                     />
                 </Route>
                 <Route exact path="/search">
-                    <CompanySearchScreen
-                        companies={Object.values(companies)}
-                        onOpenDetails={(ppid) =>
-                            handleActiveScreenChange("companyDetails", ppid)
-                        }
-                    />
+                    <CompanySearchScreen />
                 </Route>
                 <Route exact path="/featured-company-info">
                     <FeaturedCompanyInfoScreen onClose={handleBack} />

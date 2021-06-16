@@ -50,14 +50,23 @@ export const ExplorerProvider = ({ children }) => {
     const [companies] = useState(
         loadCompanies(polyPediaCompanies, polyPediaGlobalData)
     );
+    const companiesList = Object.values(companies);
     const featuredCompanies = Object.values(companies).filter(
         (company) => company.featured
     );
     const [selectedCompany, setSelectedCompany] = useState(undefined);
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
 
-    //mainscreen tabs
+    //remember main screen tab state
     const [showClusters, setShowClusters] = useState(true);
+
+    //remember data-exploration state
+    const initialDataExplorationSection = "dataTypes";
+    const [dataExploringSection, setDataExploringSection] = useState(
+        initialDataExplorationSection
+    );
+    const [activeCategory, setActiveCategory] = useState(null);
+    const [activeExplorationIndex, setActiveExplorationIndex] = useState(null);
 
     //router hooks
     const history = useHistory();
@@ -88,14 +97,17 @@ export const ExplorerProvider = ({ children }) => {
                 i18n.t(`common:screenTitle.${location.pathname}`)
             );
         pod.polyNav.actions = firstRun
-            ? { info: () => {}, search: () => {} }
+            ? {
+                  info: () => {},
+                  search: () => {},
+              }
             : {
                   info: () => history.push("/info"),
                   search: () => history.push("/search"),
                   back: handleBack,
               };
         pod.polyNav.setActiveActions(
-            history.length ? ["back"] : ["info", "search"]
+            location.pathname == "/" ? ["info", "search"] : ["back"]
         );
     }
 
@@ -140,6 +152,21 @@ export const ExplorerProvider = ({ children }) => {
         setActiveFilters(newActiveFilters);
     };
 
+    const handleExplorationInfoScreen = (
+        activeSection,
+        activeIndex,
+        activeCategory
+    ) => {
+        setDataExploringSection(activeSection);
+        setActiveExplorationIndex(activeIndex);
+        if (activeCategory) setActiveCategory(activeCategory);
+    };
+
+    const handleOpenDataExplorationSection = (section, company) => {
+        setDataExploringSection(section);
+        history.push("/data-exploration");
+    };
+
     //on-startup
     useEffect(() => {
         setTimeout(() => readFirstRun().then(setFirstRun), 300);
@@ -158,6 +185,7 @@ export const ExplorerProvider = ({ children }) => {
                 handleOnboardingPopupMoreInfo,
                 handleBack,
                 companies,
+                companiesList,
                 featuredCompanies,
                 selectedCompany,
                 setSelectedCompany,
@@ -168,6 +196,11 @@ export const ExplorerProvider = ({ children }) => {
                 handleFilterApply,
                 showClusters,
                 setShowClusters,
+                dataExploringSection,
+                activeCategory,
+                activeExplorationIndex,
+                handleExplorationInfoScreen,
+                handleOpenDataExplorationSection,
             }}
         >
             {children}
