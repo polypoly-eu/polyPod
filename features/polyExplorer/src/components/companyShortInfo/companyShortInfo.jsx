@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import i18n from "../../i18n.js";
 import "./companyShortInfo.css";
 import LinkButton from "../linkButton/linkButton.jsx";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const CompanyShortInfo = ({ company, onOpenDetails = () => {} }) => {
+const CompanyShortInfo = ({ company }) => {
+    const { setSelectedCompany } = useContext(ExplorerContext);
     return (
         <LinkButton
-            onClick={() => onOpenDetails(company.ppid)}
+            onClick={() => setSelectedCompany(company.ppid)}
             className="company-short-info"
             route="/company-details"
         >

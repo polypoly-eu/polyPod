@@ -9,7 +9,7 @@ import { CompanyFilter } from "../model/companyFilter.js";
 
 //local-data imports
 import polyPediaCompanies from "../data/companies.json";
-import polyPediaGlobalData from "../data/global.json";
+import globalData from "../data/global.json";
 
 //constants
 const namespace = "http://polypoly.coop/schema/polyExplorer/#";
@@ -47,9 +47,7 @@ function loadCompanies(JSONData, globalData) {
 export const ExplorerProvider = ({ children }) => {
     //state
     const [firstRun, setFirstRun] = useState(false);
-    const [companies] = useState(
-        loadCompanies(polyPediaCompanies, polyPediaGlobalData)
-    );
+    const [companies] = useState(loadCompanies(polyPediaCompanies, globalData));
     const companiesList = Object.values(companies);
     const featuredCompanies = Object.values(companies).filter(
         (company) => company.featured
@@ -199,6 +197,7 @@ export const ExplorerProvider = ({ children }) => {
                 setSelectedCompany,
                 selectedCompanyObject,
                 dataRecipients,
+                globalData,
                 featuredCompanyMaxValues,
                 featuredCompanyAverageValues,
                 activeFilters,

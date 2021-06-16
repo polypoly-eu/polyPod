@@ -7,15 +7,10 @@ import CompanyList from "../../components/companyList/companyList.jsx";
 import "./main.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const MainScreen = ({
-    companies,
-    globalData,
-    onOpenDetails,
-    onOpenFilters,
-    activeFilters,
-    onRemoveFilter,
-}) => {
-    const { showClusters, setShowClusters } = useContext(ExplorerContext);
+const MainScreen = () => {
+    const { showClusters, setShowClusters, companies } = useContext(
+        ExplorerContext
+    );
 
     return (
         <Screen className="main-screen" topShadow={false}>
@@ -39,18 +34,7 @@ const MainScreen = ({
                     })}
                 </button>
             </div>
-            {showClusters ? (
-                <div></div>
-            ) : (
-                <CompanyList
-                    companies={companies}
-                    globalData={globalData}
-                    onOpenFilters={onOpenFilters}
-                    onOpenDetails={onOpenDetails}
-                    activeFilters={activeFilters}
-                    onRemoveFilter={onRemoveFilter}
-                />
-            )}
+            {showClusters ? <div></div> : <CompanyList />}
         </Screen>
     );
 };

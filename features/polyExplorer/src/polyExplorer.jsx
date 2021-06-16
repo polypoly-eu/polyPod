@@ -60,18 +60,7 @@ const PolyExplorerApp = () => {
         <div className="poly-explorer">
             <Switch>
                 <Route exact path="/">
-                    <MainScreen
-                        companies={companies}
-                        globalData={polyPediaGlobalData}
-                        onOpenDetails={(company) =>
-                            handleActiveScreenChange("companyDetails", company)
-                        }
-                        onOpenFilters={() =>
-                            handleActiveScreenChange("companyFilter")
-                        }
-                        activeFilters={activeFilters}
-                        onRemoveFilter={handleRemoveFilter}
-                    />
+                    <MainScreen />
                 </Route>
                 <Route exact path="/company-details">
                     <CompanyDetailsScreen
