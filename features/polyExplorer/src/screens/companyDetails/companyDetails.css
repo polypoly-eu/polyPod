@@ -1,56 +1,17 @@
-.tab-button-container {
-    box-sizing: border-box;
-    height: 35px;
-    margin: 0 auto;
-}
-
-.tab-button-container .tab-button {
-    box-sizing: border-box;
-    background-color: var(--color-background-dark);
-    /*
-      We only have two tabs until we reenable the structure tab.  Once we
-      rewrite this to automatically adjust to the number of tabs, we wouldn't
-      need this change anymore.
-    */
-    /*width: 33.3%;*/
-    width: 50%;
-    height: 100%;
-    padding-bottom: 12px;
-    font-size: 16px;
-    line-height: 16px;
-    color: var(--color-medium);
-    border-color: transparent;
-    outline: none;
-}
-
-.tab-button-container .tab-button.active {
-    border-bottom: 4px solid var(--color-semi-light);
-    color: var(--color-text-light);
-}
-
-.scroll-container {
-    flex: 1 1 auto;
-    margin: auto;
-    overflow-x: hidden;
-    width: 100%;
-    max-width: var(--max-width);
-}
-
-.company-details-screen .company-short-info-container {
-    width: 100%;
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-.company-details-screen .company-short-info-container button {
-    margin: 24px 0 0 22px;
+.explorer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .tab-content-container {
+    text-align: center;
     position: relative;
     height: 203px;
-    margin: 2px auto 0 auto;
+    margin: 40px auto;
     width: 100%;
+    height: 100%;
     max-width: var(--max-width);
 }
 
@@ -75,6 +36,7 @@
 .tab-content-container .location-block {
     position: relative;
     height: 177px;
+    margin-bottom: 12px;
 }
 
 .EU-GDPR p {
@@ -134,39 +96,6 @@
     text-align: center;
 }
 
-.location-tooltip {
-    display: flex;
-    padding: 0 4px;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 0 0 24px;
-}
-
-.location-tooltip img {
-    margin: 4px auto;
-}
-
-.location-tooltip p {
-    color: var(--color-medium);
-    font-weight: 500;
-    font-size: 10px;
-    margin: 7px 6px 0px 2px;
-}
-
-.location-tooltip .circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    transform: translateY(8px);
-}
-
-.location-tooltip button {
-    border: transparent;
-    background-color: transparent;
-    outline: none;
-    padding: 0 2px;
-}
-
 .structure-tab {
     position: relative;
 }
@@ -201,7 +130,7 @@
     width: 100%;
     max-width: var(--max-width);
     padding: 4px 30px;
-    margin-bottom: 4px;
+    margin-bottom: 4px; 
 }
 
 .company-details-source {
@@ -214,23 +143,11 @@
     max-width: var(--max-width);
 }
 
-.explore-data-btn-area {
-    text-align: center;
-    padding: 12px 30px 0 30px;
+.revenue .separator {
+    border: 1px solid var(--color-medium);
+    margin: 38px 0 16px 0;
 }
 
-.explore-data-btn {
-    flex: 0 0 auto;
-    box-sizing: border-box;
-    width: 296px;
-    max-width: var(--max-width);
-    height: 48px;
-    background-color: var(--color-background-light);
-    color: var(--color-text-dark);
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 24px;
-    border-radius: 4px;
-    border: transparent;
-    outline: none;
+.featured-map-container h2, .location-map h2, .revenue h2 {
+    margin: 0 0 8px 0;
 }

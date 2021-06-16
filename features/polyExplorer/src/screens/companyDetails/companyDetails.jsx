@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import i18n from "../../i18n.js";
-import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
+import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
-import Scrollable from "../../components/scrollable/scrollable.jsx";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
 
-const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
-    const [initialTab, setInitialTab] = useState(0);
-    const [swiper, setSwiper] = useState(null);
-
+const CompanyDetails = ({ company }) => {
     const cityImageMap = {
         München: "munich",
         "Mountain View": "mountainview",
@@ -25,16 +20,14 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         DUBLIN: "dublin",
     };
 
-    const tabTranslation = {
-        location: i18n.t("companyDetailsScreen:tab.location"),
-        structure: i18n.t("companyDetailsScreen:tab.structure"),
-        revenue: i18n.t("companyDetailsScreen:tab.revenue"),
-    };
+    console.log(company);
+
     const tabContent = [
         {
             tabName: "location",
             content: (
                 <div className="location-map">
+                    <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
                     {company.jurisdiction ? (
                         <div
                             className={`location-block ${company.jurisdiction}`}
@@ -69,7 +62,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             </div>
                         </div>
                     )}
-                    <JurisdictionLegend onOpenRegionInfo={onOpenRegionInfo} />
+                    <JurisdictionLegend />
                 </div>
             ),
         },
@@ -94,7 +87,14 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         {
             tabName: "revenue",
             content: (
-                <CompanyRevenueChart annualRevenues={company.annualRevenues} />
+                <div className="revenue">
+                    <div className="separator"></div>
+                    <br />
+                    <h2>{i18n.t("companyDetailsScreen:tab.revenue")}</h2>
+                    <CompanyRevenueChart
+                        annualRevenues={company.annualRevenues}
+                    />
+                </div>
             ),
         },
     ];
@@ -104,6 +104,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
             tabName: "location",
             content: (
                 <div className="featured-map-container">
+                    <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
                     {company.jurisdiction ? (
                         <div className={`location-block`}>
                             {company.location ? (
@@ -136,7 +137,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                             </div>
                         </div>
                     )}
-                    <JurisdictionLegend onOpenRegionInfo={onOpenRegionInfo} />
+                    <JurisdictionLegend />
                 </div>
             ),
         },
@@ -161,111 +162,50 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
         {
             tabName: "revenue",
             content: (
-                <CompanyRevenueChart annualRevenues={company.annualRevenues} />
+                <div className="revenue">
+                    <div className="separator"></div>
+                    <br />
+                    <h2>{i18n.t("companyDetailsScreen:tab.revenue")}</h2>
+                    <CompanyRevenueChart
+                        annualRevenues={company.annualRevenues}
+                    />
+                </div>
             ),
         },
     ];
 
-    // TODO: Use the Screen component
     return (
         <div className="explorer-container">
             <div className="top-shadow"></div>
+            <Screen className="company-details-screen">
+                <p
+                    className="company-details-text"
+                    dangerouslySetInnerHTML={{
+                        __html:
+                            (
+                                (company.description?.value || {})[
+                                    i18n.language
+                                ] || ""
+                            ).replace("\n", "<br/><br/>") ||
+                            i18n.t("companyDetailsScreen:description.fallback"),
+                    }}
+                ></p>
 
-            <div className="screen-content company-details-screen">
-                <Scrollable>
-                    <div className="scroll-container">
-                        <div className="company-short-info-container">
-                            <CompanyShortInfo company={company} />
-                        </div>
-                        <div className="tab-button-container">
-                            {company.featured
-                                ? featuredTabContent.map((tab, index) => (
-                                      <button
-                                          key={index}
-                                          className={
-                                              initialTab === index
-                                                  ? "tab-button active"
-                                                  : "tab-button"
-                                          }
-                                          onClick={() => swiper.slideTo(index)}
-                                      >
-                                          {tabTranslation[tab.tabName]}
-                                      </button>
-                                  ))
-                                : tabContent.map((tab, index) => (
-                                      <button
-                                          key={index}
-                                          className={
-                                              initialTab === index
-                                                  ? "tab-button active"
-                                                  : "tab-button"
-                                          }
-                                          onClick={() => swiper.slideTo(index)}
-                                      >
-                                          {tabTranslation[tab.tabName]}
-                                      </button>
-                                  ))}
-                        </div>
-                        <div className="tab-content-container">
-                            <Swiper
-                                onSwiper={setSwiper}
-                                spaceBetween={1}
-                                slidesPerView={1}
-                                initialSlide={initialTab}
-                                onSlideChange={(swiper) =>
-                                    setInitialTab(swiper.activeIndex)
-                                }
-                            >
-                                {company.featured
-                                    ? featuredTabContent.map((tab, index) => (
-                                          <SwiperSlide key={index}>
-                                              {tab.content}
-                                          </SwiperSlide>
-                                      ))
-                                    : tabContent.map((tab, index) => (
-                                          <SwiperSlide key={index}>
-                                              {tab.content}
-                                          </SwiperSlide>
-                                      ))}
-                            </Swiper>
-                        </div>
-
-                        <p
-                            className="company-details-text"
-                            dangerouslySetInnerHTML={{
-                                __html:
-                                    (
-                                        (company.description?.value || {})[
-                                            i18n.language
-                                        ] || ""
-                                    ).replace("\n", "<br/><br/>") ||
-                                    i18n.t(
-                                        "companyDetailsScreen:description.fallback"
-                                    ),
-                            }}
-                        ></p>
-
-                        {company.description?.source ? (
-                            <p className="company-details-source">
-                                {i18n.t("companyDetailsScreen:source")}:{" "}
-                                {company.description.source}
-                            </p>
-                        ) : null}
-                    </div>
-                </Scrollable>
-
-                {company.featured ? (
-                    <div className="explore-data-btn-area">
-                        <button
-                            className="explore-data-btn"
-                            onClick={() => onOpenExploration(company.ppid)}
-                        >
-                            {i18n.t("companyDetailsScreen:button.exploreData")}
-                        </button>
-                    </div>
-                ) : (
-                    <div></div>
-                )}
+                {company.description?.source ? (
+                    <p className="company-details-source">
+                        {i18n.t("companyDetailsScreen:source")}:{" "}
+                        {company.description.source}
+                    </p>
+                ) : null}
+                <div className="tab-content-container">
+                    {company.featured
+                        ? featuredTabContent.map((tab, index) => (
+                              <div key={index}> {tab.content} </div>
+                          ))
+                        : tabContent.map((tab, index) => (
+                              <div key={index}> {tab.content} </div>
+                          ))}
+                </Screen>
             </div>
         </div>
     );
