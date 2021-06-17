@@ -12,6 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: If this is triggered, it should fail
-        run:
+        run: |
           echo "::error::You're trying to modify one of the fixed files in the repo. Please undo that change and try again"
           exit 1
