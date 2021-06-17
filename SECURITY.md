@@ -1,6 +1,6 @@
 # polyPod Security
 
-Security and privacy is not just important to polypoly, but at the core of our business.
+Security and privacy is not just important to polypoly, but at the core of our business. 
 polypoly appreciates your effort to help us build a new, secure and transparent data economy.
 
 If you believe you have discovered a vulnerability, privacy issue, exposed data, or other 
