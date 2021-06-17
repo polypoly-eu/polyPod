@@ -11,8 +11,7 @@ jobs:
       - name: Build iOS
         run: |
           cd ios/PolyPodApp
-          xcodebuild -list -workspace PolyPod.xcodeproj/project.xcworkspace
           xcodebuild -workspace PolyPod.xcodeproj/project.xcworkspace/ \
-                     -scheme polyPod
+                     -scheme PolyPod
                      -destination platform=iOS\ Simulator,OS=13.3,name=iPhone\ 11 \
                      clean test | xcpretty
