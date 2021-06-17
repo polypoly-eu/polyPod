@@ -1,4 +1,4 @@
-name: Fail when frozen files are changed
+name: Fail when frozen files are changed in a PR
 on:
   pull_request:
     paths:
