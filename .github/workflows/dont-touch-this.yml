@@ -13,5 +13,6 @@ jobs:
     steps:
       - name: If this is triggered, it should fail
         run: |
-          echo "::error::You're trying to modify one of the fixed files in the repo. Please undo that change and try again"
+          echo ::error::You're trying to modify one of the fixed files in the repo. Please undo that change and try again
+          echo ::set-output name=status::failure
           exit 1
