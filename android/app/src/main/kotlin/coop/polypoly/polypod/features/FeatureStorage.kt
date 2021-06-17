@@ -22,22 +22,24 @@ class FeatureStorage {
         } else {
             logger.debug("Directory for Features already exists")
         }
-        val filesList = featuresDir.listFiles()
-        return if (filesList != null) {
-            logger.debug("Found {} Features", filesList.size)
-            val features: MutableList<Feature> = ArrayList(filesList.size)
-            for (file in filesList) {
-                logger.debug("Found file: '${file.absolutePath}'")
-                features.add(loadFeature(context, file.name))
-            }
-            for (feature in features) {
-                logger.debug("Found Feature: '{}'", feature.name)
-            }
-            features
-        } else {
+        val filesList =
+            featuresDir.listFiles { _, name -> name.endsWith(".zip") }
+        if (filesList == null) {
             logger.debug("No Features found")
-            emptyList()
+            return emptyList()
         }
+
+        logger.debug("Found {} Features", filesList.size)
+        val features: MutableList<Feature> = ArrayList(filesList.size)
+        for (file in filesList) {
+            logger.debug("Found file: '${file.absolutePath}'")
+            features.add(loadFeature(context, file.name))
+        }
+        val sorted = sortFeatures(context, features)
+        for (feature in sorted) {
+            logger.debug("Found Feature: '{}'", feature.name)
+        }
+        return sorted
     }
 
     fun loadFeature(context: Context, fileName: String): Feature {
@@ -57,6 +59,26 @@ class FeatureStorage {
         )
         return userLocale?.language ?: "en"
     }
+
+    private fun sortFeatures(
+        context: Context,
+        features: List<Feature>
+    ): List<Feature> {
+        val order = readOrder(context)
+        val sorted = mutableListOf<Feature>()
+        for (name in order)
+            features.find { it.name == name }?.let {
+                sorted.add(it)
+            }
+        for (feature in features)
+            if (!order.contains(feature.name))
+                sorted.add(feature)
+        return sorted
+    }
+
+    private fun readOrder(context: Context) =
+        context.assets.open("features/order").bufferedReader()
+            .use { it.readLines() }
 
     fun installBundledFeatures(context: Context) {
         for (featureBundle in context.assets.list("features").orEmpty()) {

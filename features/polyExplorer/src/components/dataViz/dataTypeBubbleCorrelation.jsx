@@ -150,12 +150,11 @@ const DataTypeBubbleCategory = ({
                         x: d.x,
                         y: d.y,
                         r: d.r,
-                        name:
-                            d.data[
-                                i18n.t(
-                                    "dataExplorationScreen:from.polyPedia.translation"
-                                )
-                            ],
+                        name: d.data[
+                            i18n.t(
+                                "dataExplorationScreen:from.polyPedia.translation"
+                            )
+                        ],
                     });
                 }
             });

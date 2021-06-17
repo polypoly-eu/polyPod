@@ -1,5 +1,1 @@
-module.exports = {
-    extends: [
-        "@polypoly-eu/eslint-config"
-    ]
-};
+module.exports = {};

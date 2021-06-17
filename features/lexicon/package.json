@@ -11,7 +11,6 @@
     "update-lexicon-data": "func(){ node ./scripts/update-lexicon-data.js \"$1\";}; func"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config": "file:../../eslint-config",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@prismicio/client": "^4.0.0",
     "@rollup/plugin-commonjs": "^17.0.0",
