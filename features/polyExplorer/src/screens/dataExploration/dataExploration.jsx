@@ -692,7 +692,7 @@ const DataExplorationScreen = () => {
                                     }
                                 />
                                 <DataSharingLegend
-                                    route="data-types-info"
+                                    route="jurisdiction-info"
                                     onClick={() =>
                                         handleExplorationInfoScreen(
                                             "jurisdictions",
