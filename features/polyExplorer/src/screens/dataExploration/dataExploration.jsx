@@ -535,12 +535,6 @@ const DataExplorationScreen = ({
 
     return (
         <Screen className="data-exploration">
-            <div className="company-short-info-container">
-                <CompanyShortInfo
-                    company={company}
-                    onOpenDetails={onOpenDetails}
-                />
-            </div>
             {progressBar}
             <div className="exploration-content">
                 {getStaticContent()}
