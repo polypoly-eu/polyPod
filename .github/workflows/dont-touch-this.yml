@@ -1,0 +1,17 @@
+name: Fail when frozen files are changed
+on:
+  pull_request:
+    paths:
+    - 'LICENSE'
+    - 'package.json'
+    - 'SECURITY.md'
+    - '.eslintrc.cjs'
+
+jobs:
+  check_frozen_files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: If this is triggered, it should fail
+        run:
+          echo "::error::You're trying to modify one of the fixed files in the repo. Please undo that change and try again"
+          exit(1)
