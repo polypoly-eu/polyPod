@@ -14,4 +14,4 @@ jobs:
       - name: If this is triggered, it should fail
         run:
           echo "::error::You're trying to modify one of the fixed files in the repo. Please undo that change and try again"
-          exit(1)
+          exit 1
