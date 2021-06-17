@@ -7,14 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.biometric.BiometricManager.Authenticators.*
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.security.crypto.MasterKey
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
+import java.util.concurrent.Executor
 
 private fun luminance(color: Int): Double =
     Color.red(color) * 0.2126 +
@@ -78,6 +84,10 @@ open class FeatureFragment : Fragment() {
     private lateinit var foregroundResources: ForegroundResources
     private lateinit var featureContainer: FeatureContainer
 
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -93,6 +103,68 @@ open class FeatureFragment : Fragment() {
         )
         feature =
             FeatureStorage().loadFeature(requireContext(), args.featureFile)
+
+        // TODO: Expose a dedicated setting in the manifest instead
+        if (feature.name != "polyExplorer") {
+            return setupFeature(view)
+        }
+        // Trigger authentication
+        executor = ContextCompat.getMainExecutor(context)
+        biometricPrompt = BiometricPrompt(this, executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(
+                    errorCode: Int,
+                    errString: CharSequence
+                ) {
+                    super.onAuthenticationError(errorCode, errString)
+                    Toast.makeText(
+                        context,
+                        "Authentication error: $errString",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    findNavController().popBackStack()
+                }
+
+                override fun onAuthenticationSucceeded(
+                    result: BiometricPrompt.AuthenticationResult
+                ) {
+                    super.onAuthenticationSucceeded(result)
+                    Toast.makeText(
+                        context,
+                        "Authentication successful!", Toast.LENGTH_SHORT
+                    ).show()
+
+                    setupFeature(view)
+
+                    val mainKey = MasterKey.Builder(context!!)
+                        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                        .setUserAuthenticationRequired(true)
+                        .build()
+
+                    featureContainer.api.polyIn.setEncryptionKey(mainKey)
+                }
+
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    Toast.makeText(
+                        context, "Authentication failed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    findNavController().popBackStack()
+                }
+            })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Login to view your polyPod data")
+            .setSubtitle("Either use device credential or biometrics")
+            .setAllowedAuthenticators(BIOMETRIC_WEAK or DEVICE_CREDENTIAL)
+            .build()
+
+
+        biometricPrompt.authenticate(promptInfo)
+    }
+
+    private fun setupFeature(view: View) {
         foregroundResources =
             ForegroundResources.fromBackgroundColor(feature.primaryColor)
         activity?.window?.navigationBarColor = feature.primaryColor
@@ -101,7 +173,6 @@ open class FeatureFragment : Fragment() {
         featureContainer.feature = feature
         setupNavigation(view)
     }
-
     private fun setupAppBar(view: View) {
         view.findViewById<View>(R.id.app_bar)
             .setBackgroundColor(feature.primaryColor)

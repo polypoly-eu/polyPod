@@ -1,16 +1,24 @@
 package coop.polypoly.polypod.polyIn
 
+import android.content.Context
 import coop.polypoly.polypod.polyIn.rdf.*
 import org.apache.jena.rdf.model.*
 import java.io.File
+import androidx.security.crypto.*
 
 open class PolyIn(
     private val databaseName: String = "data.nt",
     private val databaseFolder: File? = null,
+    private val context: Context,
+    private var _encryptionKey: MasterKey?
 ) {
     val NS = "polypoly"
 
     private val model: Model = load()
+
+    open fun setEncryptionKey(value: MasterKey) {
+            _encryptionKey = value
+        }
 
     open suspend fun select(matcher: Matcher): List<Quad> {
         val retList: MutableList<Quad> = mutableListOf()
@@ -47,17 +55,39 @@ open class PolyIn(
         val model = ModelFactory.createDefaultModel()
 
         val database = File(databaseFolder, databaseName)
-        if (!database.exists()) {
-            database.createNewFile()
+        if (!database.exists() or (_encryptionKey == null)) {
+            return model
         }
-        database.inputStream().use { inputStream ->
-            model.read(inputStream, null, "N-TRIPLE")
+
+        val encryptedDatabase = EncryptedFile.Builder(
+            context,
+            database,
+            _encryptionKey!!,
+            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+        ).build()
+
+        encryptedDatabase.openFileInput().use { inputStream ->
+            try {
+                model.read(inputStream, null, "N-TRIPLE")
+            }
+            catch(e: Exception) {
+                // TODO: Cannot read the model from file. Try unencrypted file?
+            }
         }
         return model
     }
 
     private fun save() {
-        File(databaseFolder, databaseName).outputStream().use { out ->
+        val database = File(databaseFolder, databaseName)
+
+        val encryptedDatabase = EncryptedFile.Builder(
+            context,
+            database,
+            _encryptionKey!!,
+            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+        ).build()
+
+        encryptedDatabase.openFileOutput().use { out ->
             model.write(out, "N-TRIPLE")
         }
     }
