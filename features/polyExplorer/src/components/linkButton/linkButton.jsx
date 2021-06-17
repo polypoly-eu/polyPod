@@ -5,9 +5,9 @@ const LinkButton = ({ route, onClick, className, children }) => {
     const history = useHistory();
 
     const onClickButton = (e) => {
+        if (onClick) onClick(e);
         if (route == "back") history.goBack();
         else history.push(route);
-        if (onClick) onClick(e);
     };
 
     return (

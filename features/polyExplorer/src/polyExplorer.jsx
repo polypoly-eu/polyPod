@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import {
-    HashRouter as Router,
+    MemoryRouter as Router,
     Switch,
     Route,
     useHistory,
@@ -28,10 +28,11 @@ import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 
 const PolyExplorerApp = () => {
     const {
-        firstRun,
+        navigationState,
         handleOnboardingPopupClose,
         handleOnboardingPopupMoreInfo,
     } = useContext(ExplorerContext);
+    const { firstRun } = navigationState;
 
     return (
         <div className="poly-explorer">

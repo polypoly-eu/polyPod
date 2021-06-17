@@ -11,10 +11,10 @@ import { CompanyFilter } from "../model/companyFilter.js";
 import polyPediaCompanies from "../data/companies.json";
 import globalData from "../data/global.json";
 
-//constants
-const namespace = "http://polypoly.coop/schema/polyExplorer/#";
-
 export const ExplorerContext = React.createContext();
+
+//storage
+const namespace = "http://polypoly.coop/schema/polyExplorer/#";
 
 async function readFirstRun() {
     const quads = await pod.polyIn.select({});
@@ -45,14 +45,19 @@ function loadCompanies(JSONData, globalData) {
 }
 
 export const ExplorerProvider = ({ children }) => {
-    //state
-    const [firstRun, setFirstRun] = useState(false);
-    const [companies] = useState(loadCompanies(polyPediaCompanies, globalData));
+    const [navigationState, setNavigationState] = useState({
+        firstRun: false,
+    });
+
+    //constants
+    const companies = loadCompanies(polyPediaCompanies, globalData);
     const companiesList = Object.values(companies);
     const featuredCompanies = Object.values(companies).filter(
         (company) => company.featured
     );
-    const [selectedCompany, setSelectedCompany] = useState(undefined);
+
+    const [selectedCompany, setSelectedCompany] = useState(null);
+    const [storedCompanies, setStoredCompanies] = useState([]);
     const selectedCompanyObject = companies[selectedCompany];
 
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
@@ -61,7 +66,7 @@ export const ExplorerProvider = ({ children }) => {
     const [showClusters, setShowClusters] = useState(true);
 
     //remember data-exploration state
-    const initialDataExplorationSection = "dataTypes";
+    const initialDataExplorationSection = "dataTypes"; // to go
     const [dataExploringSection, setDataExploringSection] = useState(
         initialDataExplorationSection
     );
@@ -71,20 +76,33 @@ export const ExplorerProvider = ({ children }) => {
     //router hooks
     const history = useHistory();
     const location = useLocation();
+    const currentPath = location.pathname;
 
     const dataRecipients = companies[selectedCompany]?.dataRecipients?.map(
         (ppid) => companies[ppid]
     );
 
     function handleBack() {
-        if (location.pathname == "/data-exploration") {
-            setActiveExplorationIndex(null);
+        if (currentPath == "/data-exploration") setActiveExplorationIndex(null);
+        if (currentPath == "/company-details") {
+            const previousCompany = storedCompanies.pop();
+            setStoredCompanies(storedCompanies);
+            if (previousCompany) setSelectedCompany(previousCompany);
         }
-        if (location.pathname != "/") history.goBack();
+        if (currentPath != "/") history.goBack();
+    }
+
+    function handleSelectCompany(ppid, activeExplorationIndex) {
+        console.log(currentPath != "/" && selectedCompany);
+        if (currentPath != "/" && selectedCompany) {
+            storedCompanies.push(selectedCompany);
+            setStoredCompanies(storedCompanies);
+        }
+        setSelectedCompany(ppid);
     }
 
     function handleOnboardingPopupClose() {
-        setFirstRun(false);
+        setNavigationState({ ...navigationState, firstRun: false });
         writeFirstRun(false);
     }
 
@@ -95,15 +113,12 @@ export const ExplorerProvider = ({ children }) => {
 
     function updatePodNavigation() {
         if (
-            location.pathname == "/data-exploration" ||
-            location.pathname == "/company-details"
+            currentPath == "/data-exploration" ||
+            currentPath == "/company-details"
         )
             pod.polyNav.setTitle(companies[selectedCompany].name);
-        else
-            pod.polyNav.setTitle(
-                i18n.t(`common:screenTitle.${location.pathname}`)
-            );
-        pod.polyNav.actions = firstRun
+        else pod.polyNav.setTitle(i18n.t(`common:screenTitle.${currentPath}`));
+        pod.polyNav.actions = navigationState.firstRun
             ? {
                   info: () => {},
                   search: () => {},
@@ -114,7 +129,7 @@ export const ExplorerProvider = ({ children }) => {
                   back: handleBack,
               };
         pod.polyNav.setActiveActions(
-            location.pathname == "/" ? ["info", "search"] : ["back"]
+            currentPath == "/" ? ["info", "search"] : ["back"]
         );
     }
 
@@ -176,18 +191,29 @@ export const ExplorerProvider = ({ children }) => {
 
     //on-startup
     useEffect(() => {
-        setTimeout(() => readFirstRun().then(setFirstRun), 300);
+        setTimeout(
+            () =>
+                readFirstRun().then((firstRun) =>
+                    setNavigationState({
+                        ...navigationState,
+                        firstRun: firstRun,
+                    })
+                ),
+            300
+        );
     }, []);
 
     //on-change
     useEffect(() => {
         updatePodNavigation();
+        console.log(selectedCompany);
+        console.log(storedCompanies);
     });
 
     return (
         <ExplorerContext.Provider
             value={{
-                firstRun,
+                navigationState,
                 handleOnboardingPopupClose,
                 handleOnboardingPopupMoreInfo,
                 handleBack,
@@ -211,6 +237,7 @@ export const ExplorerProvider = ({ children }) => {
                 activeExplorationIndex,
                 handleExplorationInfoScreen,
                 handleOpenDataExplorationSection,
+                setActiveExplorationIndex,
             }}
         >
             {children}
