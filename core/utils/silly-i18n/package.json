@@ -3,7 +3,8 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src test",
-    "test": "jest & cypress run"
+    "test": "jest & cypress run",
+    "doc": "tsdoc"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
