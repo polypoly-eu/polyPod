@@ -203,8 +203,8 @@ const CompanyDetails = ({ company }) => {
                         : tabContent.map((tab, index) => (
                               <div key={index}> {tab.content} </div>
                           ))}
-                </Screen>
-            </div>
+                </div>
+            </Screen>
         </div>
     );
 };

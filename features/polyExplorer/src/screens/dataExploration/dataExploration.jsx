@@ -11,7 +11,6 @@ import CompanyBubbles, {
     buildIndustrySets,
 } from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
-import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
 import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
@@ -36,7 +35,6 @@ const DataExplorationScreen = ({
     openJurisdictionInfo,
     maxCompanies,
     dataRecipients,
-    onOpenDetails,
 }) => {
     //Methods
     const getCategories = () =>
