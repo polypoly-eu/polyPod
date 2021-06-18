@@ -1,8 +1,8 @@
 import { determineLanguage, I18n } from "@polypoly-eu/silly-i18n";
 
 const localLanguage = determineLanguage();
-const language = localLanguage in ['en','de'] ? localLanguage: 'en';
-export default new I18n( language, {
+const language = localLanguage in ["en", "de"] ? localLanguage : "en";
+export default new I18n(language, {
     en: {
         common: {
             back: "Back to list",
