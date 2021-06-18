@@ -28,6 +28,6 @@ export const Regular = Template.bind({});
 
 export const BackgroundImage = Template.bind({});
 BackgroundImage.args = {
-  text: "The polyPedia team and our associated researchers at future404 looked into everything the companies behind those apps below say about the topic (and even a little further)",
+  text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut sem lacinia erat vestibulum placerat ut id est. Phasellus maximus cursus nibh non commodo. Proin risus augue, volutpat sit amet imperdiet a, elementum tristique ipsum. Aenean condimentum dolor ac risus tincidunt, eu vehicula dolor ultricies. In id ullamcorper felis. Duis ultrices, nisi nec malesuada cursus, ex libero finibus ex, eget congue eros augue quis orci. Maecenas eget luctus leo. Donec feugiat elit nec mauris ullamcorper, nec feugiat nibh accumsan.",
   backgroundImage: "public/images/Frame77.png",
 };
