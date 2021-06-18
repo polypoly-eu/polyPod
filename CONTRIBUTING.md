@@ -37,14 +37,16 @@ in case, here are a few rules of thumb:
   used for bundles, `docs/` for docs, `coverage/` for coverage reports, and
   `locales/` for (possibly automatically generated) translation files.
 
-The golden rule is, however, *try to be consistent with surrounding code*, to
-the extent that's possible.
-
 In case you absolutely, totally, irremediably, need to override these settings,
 you can do so at the directory level via the usual mechanisms. `eslint` will
 respect directory-wide settings. We strongly discourage this for existing
 directories, you might want, however, to do this if you create a new directory
 (possibly for a feature).
+
+The linting check doesn't cover all possible stylistic choices and code
+conventions. So as a *rule of thumb*, try to be consistent with the surrounding
+code. We will point out any inconsistencies that we feel need addressing for
+maintainability's sake during code review.
 
 ## What we are looking for in a contribution
 
