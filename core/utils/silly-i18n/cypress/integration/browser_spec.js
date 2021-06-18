@@ -1,7 +1,4 @@
-import {
-    determineLanguage,
-    I18n,
-} from "../../src/index.js";
+import { determineLanguage, I18n } from "../../src/index.js";
 
 const LANGUAGE = "foo";
 
