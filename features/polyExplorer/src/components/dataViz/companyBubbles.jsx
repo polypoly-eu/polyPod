@@ -272,6 +272,9 @@ const CompanyBubbles = ({
         const viewData = {};
         const localDiagram = {};
         const root = getRoot();
+
+        let localIndustryCircleLabels = {};
+
         viewData.flat = {
             padding: calculateCompanyBubblePadding(
                 companyIndustryMap,
@@ -314,27 +317,24 @@ const CompanyBubbles = ({
             maxCompanies
         );
 
-        setCompanyCirclePosition((state) => {
-            return {
-                ...state,
-                ...pack.children.reduce((acc, child) => {
-                    const result = child.children.reduce(
-                        (acc2, secondChild) => {
-                            return {
-                                ...acc2,
-                                [secondChild.data.name]: {
-                                    x: secondChild.x,
-                                    y: secondChild.y,
-                                },
-                            };
+        const localCompanyCirclePosition = {
+            ...companyCirclePosition,
+            ...pack.children.reduce((acc, child) => {
+                const result = child.children.reduce((acc2, secondChild) => {
+                    return {
+                        ...acc2,
+                        [secondChild.data.name]: {
+                            x: secondChild.x,
+                            y: secondChild.y,
                         },
-                        {}
-                    );
+                    };
+                }, {});
 
-                    return { ...acc, ...result };
-                }, {}),
-            };
-        });
+                return { ...acc, ...result };
+            }, {}),
+        };
+
+        setCompanyCirclePosition(localCompanyCirclePosition);
 
         for (const industryBubble of pack.children) {
             if (industryBubble.children && industryBubble.children.length > 0) {
@@ -357,13 +357,15 @@ const CompanyBubbles = ({
             const d = pack.children[index];
             const industryLabel = appendIndustryLabel(localDiagram.flat.svg, d);
             industryLabel.style("opacity", "0");
-            setIndustryCircleLabel((state) => ({
-                ...state,
+            localIndustryCircleLabels = {
+                ...localIndustryCircleLabels,
                 [d.data.name]: industryLabel,
-            }));
+            };
 
             return industryLabel;
         });
+
+        setIndustryCircleLabel(localIndustryCircleLabels);
 
         localDiagram[DIAGRAMS.INDUSTRY_HIGHLIGHT] = {};
         localDiagram[DIAGRAMS.INDUSTRY_HIGHLIGHT].svg = root
@@ -435,7 +437,11 @@ const CompanyBubbles = ({
 
         setDiagram({ ...localDiagram });
 
-        return localDiagram;
+        return {
+            localDiagram,
+            localCompanyCirclePosition,
+            localIndustryCircleLabels,
+        };
     }
 
     function appendBubbles(container, data) {
@@ -486,17 +492,45 @@ const CompanyBubbles = ({
 
     function render() {
         if (Object.keys(diagrams).length === 0) {
-            const diagramResult = createViewData();
-            showDiagram(
-                view,
-                diagramResult,
-                opacity,
-                viewState,
-                companyCirclePosition,
-                industryCircleLabel,
-                showIndustryLabels,
-                setViewState
-            );
+            const {
+                localDiagram,
+                localCompanyCirclePosition,
+                localIndustryCircleLabels,
+            } = createViewData();
+            if (view === DIAGRAMS.ALL_INDUSTRIES) {
+                showDiagram(
+                    DIAGRAMS.FLAT,
+                    localDiagram,
+                    opacity,
+                    viewState,
+                    localCompanyCirclePosition,
+                    localIndustryCircleLabels,
+                    showIndustryLabels,
+                    setViewState
+                );
+
+                showDiagram(
+                    DIAGRAMS.ALL_INDUSTRIES,
+                    localDiagram,
+                    opacity,
+                    viewState,
+                    localCompanyCirclePosition,
+                    localIndustryCircleLabels,
+                    showIndustryLabels,
+                    setViewState
+                );
+            } else {
+                showDiagram(
+                    view,
+                    localDiagram,
+                    opacity,
+                    viewState,
+                    localCompanyCirclePosition,
+                    localIndustryCircleLabels,
+                    showIndustryLabels,
+                    setViewState
+                );
+            }
         } else {
             showDiagram(
                 view,
