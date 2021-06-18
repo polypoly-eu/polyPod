@@ -20,8 +20,7 @@
     "babel-jest": "^26.6.3",
     "cypress": "^7.5.0",
     "jest": "^26.6.3",
-    "jsdoc": "^3.6.7",
-    "tsdoc": "^0.0.4"
+    "jsdoc": "^3.6.7"
   },
   "private": true,
   "type": "module"
