@@ -16,7 +16,9 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "jest": "^26.6.3",
-    "prettier": "^2.2.1"
+    "jsdoc": "^3.6.7",
+    "prettier": "^2.2.1",
+    "tsdoc": "^0.0.4"
   },
   "private": true,
   "type": "module"
