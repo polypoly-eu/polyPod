@@ -26,11 +26,19 @@ class FeatureFragmentTest {
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    @Ignore("This test assumes some state of the device and thus is failing often - find something more meaningful to test")
+    @Ignore(
+        """
+        This test assumes some state of the device and thus is failing often
+        - find something more meaningful to test
+        """
+    )
     fun firstFragmentIsShown() {
-        onView(withText("testFeature"))    // FIXME - hardcoded feature name, find some other useful element or another way of testing this
+        // FIXME - hardcoded feature name,
+        // find some other useful element or another way of testing this
+        onView(withText("testFeature"))
             .check(matches(isDisplayed()))
     }
 
-    // Unfortunately, Robolectric doesn't seem to support WebView so testing anything Feature related is not really possible.
+    // Unfortunately, Robolectric doesn't seem to support WebView so
+    // testing anything Feature related is not really possible.
 }
