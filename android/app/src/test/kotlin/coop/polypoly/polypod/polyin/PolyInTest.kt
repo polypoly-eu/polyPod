@@ -3,7 +3,10 @@ package coop.polypoly.polypod.polyin
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import coop.polypoly.polypod.polyIn.PolyIn
+import coop.polypoly.polypod.polyIn.rdf.BlankNode
+import coop.polypoly.polypod.polyIn.rdf.IRI
 import coop.polypoly.polypod.polyIn.rdf.Matcher
+import coop.polypoly.polypod.polyIn.rdf.Quad
 import coop.polypoly.polypod.polyIn.rdf.QuadBuilder
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
