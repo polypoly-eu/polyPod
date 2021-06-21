@@ -17,6 +17,7 @@ import CompanyIndustryList from "../../components/companyIndustryList/companyInd
 
 import global from "../../data/global.json";
 import highlights from "../../data/highlights.js";
+import ScrollButton from "../../components/scrollButton/scrollButton.jsx";
 
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
@@ -679,15 +680,12 @@ const DataExplorationScreen = ({
                     </Swiper>
                 </div>
             </div>
-            <button
-                className={
-                    "down-button" +
-                    (activeIndex === screens.length - 1
-                        ? " down-button-hidden"
-                        : "")
-                }
+            <ScrollButton
+                light={true}
+                activeIndex={activeIndex}
+                screens={screens}
                 onClick={() => swiper.slideNext()}
-            ></button>
+            />
             {purposePopupContent ? (
                 <PurposeInfoPopup
                     purpose={purposePopupContent}

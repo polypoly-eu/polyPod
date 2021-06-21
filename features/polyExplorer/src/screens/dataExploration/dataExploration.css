@@ -175,20 +175,6 @@
     height: 32px;
 }
 
-.data-exploration .down-button {
-    display: block;
-    width: 24px;
-    height: 24px;
-    flex: 0 0 auto;
-    margin: 17px auto 17px auto;
-    background: url("../images/chevron-down.svg") no-repeat;
-}
-
-.data-exploration .down-button-hidden {
-    visibility: hidden;
-    display: none;
-}
-
 .data-exploration .static-content .construction-container {
     box-sizing: border-box;
     display: block;
