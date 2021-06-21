@@ -1,9 +1,5 @@
 package coop.polypoly.polypod
 
-import android.app.AlertDialog
-import android.content.Intent
-import android.net.Uri
-import android.widget.Toast
 import coop.polypoly.polypod.bubblewrap.FetchResponseCodec
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.PolyIn
@@ -12,7 +8,10 @@ import coop.polypoly.polypod.polyIn.rdf.Quad
 import coop.polypoly.polypod.polyNav.PolyNav
 import eu.polypoly.pod.android.polyOut.FetchInit
 import eu.polypoly.pod.android.polyOut.PolyOut
-import org.msgpack.value.*
+import org.msgpack.value.MapValue
+import org.msgpack.value.StringValue
+import org.msgpack.value.Value
+import org.msgpack.value.ValueFactory
 
 open class PodApi(
     open val polyOut: PolyOut,

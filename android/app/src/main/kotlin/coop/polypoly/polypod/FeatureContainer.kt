@@ -55,7 +55,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
-        webView.addJavascriptInterface(ClipboardInterface(context), "nativeAndroidClipboard");
+        webView.addJavascriptInterface(ClipboardInterface(context), "nativeAndroidClipboard")
 
         // Enabling localStorage to support polyExplorer data migration
         webView.settings.domStorageEnabled = true
@@ -245,12 +245,5 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             context = aContext
         }
 
-        @JavascriptInterface
-        fun copyToClipboard(text: String?) {
-            var clipboard: ClipboardManager =
-                context.getSystemService(ClipboardManager::class.java)
-            val clip = ClipData.newPlainText("nativeClipboardText", text);
-            clipboard.setPrimaryClip(clip);
-        }
     }
 }
