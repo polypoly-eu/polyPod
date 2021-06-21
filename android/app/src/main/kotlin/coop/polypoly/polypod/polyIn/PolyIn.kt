@@ -16,8 +16,12 @@ open class PolyIn(
         val retList: MutableList<Quad> = mutableListOf()
 
         val stmtsIterator = model.listStatements(
-            matcher.subject?.let { ResourceFactory.createResource(matcher.subject.iri) },
-            matcher.predicate?.let {ResourceFactory.createProperty(matcher.predicate.iri) },
+            matcher.subject?.let { ResourceFactory.createResource(
+                matcher.subject.iri
+            ) },
+            matcher.predicate?.let {ResourceFactory.createProperty(
+                matcher.predicate.iri
+            ) },
             matcher.`object`?.iri,
         )
         for (stmt in stmtsIterator) {
