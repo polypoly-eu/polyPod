@@ -1,6 +1,8 @@
+const INDEX_ROUTE = "dist/index.html"
+
 describe("Search", () => {
     beforeEach(() => {
-        cy.visit("/");
+        cy.visit(INDEX_ROUTE);
         cy.get(".button-container button")
             .click()
             .then(() => {

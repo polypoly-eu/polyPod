@@ -1,8 +1,10 @@
 import { navigation } from "../helpers";
 
+const INDEX_ROUTE = "dist/index.html"
+
 describe("Data types", () => {
     beforeEach(() => {
-        cy.visit("/");
+        cy.visit(INDEX_ROUTE);
         cy.get(".button-container button")
             .click()
             .then(() => {
