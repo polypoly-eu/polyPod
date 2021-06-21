@@ -1,6 +1,6 @@
 import { navigation } from "../helpers";
 
-const INDEX_ROUTE = "dist/index.html"
+const INDEX_ROUTE = "dist/index.html";
 
 describe("Companies", () => {
     beforeEach(() => {

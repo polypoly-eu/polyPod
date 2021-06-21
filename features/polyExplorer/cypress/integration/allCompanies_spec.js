@@ -1,4 +1,4 @@
-const INDEX_ROUTE = "dist/index.html"
+const INDEX_ROUTE = "dist/index.html";
 describe("All companies", () => {
     beforeEach(() => {
         cy.visit(INDEX_ROUTE);
