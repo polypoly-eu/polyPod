@@ -3,7 +3,8 @@ package coop.polypoly.polypod.polyin
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import coop.polypoly.polypod.polyIn.PolyIn
-import coop.polypoly.polypod.polyIn.rdf.*
+import coop.polypoly.polypod.polyIn.rdf.QuadBuilder
+import coop.polypoly.polypod.polyIn.rdf.Matcher
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
