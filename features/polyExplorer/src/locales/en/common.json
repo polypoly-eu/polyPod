@@ -96,5 +96,7 @@
     "country.code":
         "en",
     "button.ok":
-        "OK"
+        "OK",
+    "button.scroll":
+        "Scroll up for more"
 }
