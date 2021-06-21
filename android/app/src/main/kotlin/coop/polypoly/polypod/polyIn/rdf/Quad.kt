@@ -3,10 +3,10 @@ package coop.polypoly.polypod.polyIn.rdf
 import eu.polypoly.bubblewrap.Codec
 
 data class Quad(
-    val subject: QuadSubject,    // IRI or BlankNode
+    val subject: QuadSubject, // IRI or BlankNode
     val predicate: IRI,
-    val `object`: QuadObject,    // IRI or Literal or BlankNode
-    val graph: QuadGraph  // IRI or BlankNode or constant DefaultGraph
+    val `object`: QuadObject, // IRI or Literal or BlankNode
+    val graph: QuadGraph // IRI or BlankNode or constant DefaultGraph
 ) {
 
     companion object {
@@ -14,10 +14,18 @@ data class Quad(
             Codec.kvArray(Codec.string, Codec.id)
                 .xmap(
                     {
-                        val subject = it["subject"] ?: throw IllegalArgumentException("Expected subject")
-                        val predicate = it["predicate"] ?: throw IllegalArgumentException("Expected predicate")
-                        val `object` = it["object"] ?: throw IllegalArgumentException("Expected object")
-                        val graph = it["graph"] ?: throw IllegalArgumentException("Expected graph")
+                        val subject =
+                            it["subject"] ?: throw
+                            IllegalArgumentException("Expected subject")
+                        val predicate =
+                            it["predicate"] ?: throw
+                            IllegalArgumentException("Expected predicate")
+                        val `object` =
+                            it["object"] ?: throw
+                            IllegalArgumentException("Expected object")
+                        val graph =
+                            it["graph"] ?: throw
+                            IllegalArgumentException("Expected graph")
                         Quad(
                             QuadSubject.codec.decode(subject),
                             IRI.codec.decode(predicate),
@@ -27,9 +35,15 @@ data class Quad(
                     },
                     {
                         mapOf(
-                            Pair("subject", QuadSubject.codec.encode(it.subject)),
+                            Pair(
+                                "subject",
+                                QuadSubject.codec.encode(it.subject)
+                            ),
                             Pair("predicate", IRI.codec.encode(it.predicate)),
-                            Pair("object", QuadObject.codec.encode(it.`object`)),
+                            Pair(
+                                "object",
+                                QuadObject.codec.encode(it.`object`)
+                            ),
                             Pair("graph", QuadGraph.codec.encode(it.graph)),
                         )
                     }
@@ -38,7 +52,6 @@ data class Quad(
 
         val builder = QuadBuilder
     }
-
 }
 
 class QuadBuilder {
