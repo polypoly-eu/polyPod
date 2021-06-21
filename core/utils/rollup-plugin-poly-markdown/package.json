@@ -1,0 +1,20 @@
+{
+  "name": "rollup-plugin-poly-markdown",
+  "version": "0.0.1",
+  "description": "markdown transpiler + poly-look components",
+  "main": "dist/rollup-plugin-poly-markdown.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "marked": "^2.1.1",
+    "rollup": "^2.52.2",
+    "rollup-pluginutils": "^2.8.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "assert": "^2.0.0",
+    "mocha": "^9.0.1",
+    "source-map-support": "^0.5.19"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "markdown-extensions",
+  "version": "0.0.1",
+  "description": "Markdown transpiler for poly-look componentes",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "rollup": "^2.52.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-poly-markdown": "file:../rollup-plugin-poly-markdown"
+  }
+}
