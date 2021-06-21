@@ -4,17 +4,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyIn.rdf.*
-import eu.polypoly.bubblewrap.Codec
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.msgpack.value.ValueFactory
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.io.File
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
@@ -30,7 +25,7 @@ class PolyInTest {
     @Test
     fun storingStrings_works() {
 
-        val storageData: List<Quad>  = listOf(
+        val storageData: List<Quad> = listOf(
             QuadBuilder.new().withDefaultGraph()
                 .withObject(BlankNode("privateData"))
                 .withSubject(BlankNode("someCompany"))
@@ -46,7 +41,8 @@ class PolyInTest {
             )
         }
         Truth.assertThat(returnedData.size).isEqualTo(storageData.size)
-        Truth.assertThat(returnedData[0].predicate).isEqualTo(storageData[0].predicate)
+        Truth.assertThat(returnedData[0].predicate)
+            .isEqualTo(storageData[0].predicate)
     }
 
     @Test
@@ -54,7 +50,7 @@ class PolyInTest {
         val polyIn = PolyIn("test_database.nt")
         polyIn.clean()
 
-        val storageData: List<Quad>  = listOf(
+        val storageData: List<Quad> = listOf(
             QuadBuilder.new().withDefaultGraph()
                 .withObject(BlankNode("privateData"))
                 .withSubject(BlankNode("someCompany"))
@@ -86,6 +82,7 @@ class PolyInTest {
         }
 
         Truth.assertThat(returnedData.size).isEqualTo(1)
-        Truth.assertThat(returnedData[0].predicate).isEqualTo(storageData[2].predicate)
+        Truth.assertThat(returnedData[0].predicate)
+            .isEqualTo(storageData[2].predicate)
     }
 }
