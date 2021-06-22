@@ -119,13 +119,14 @@ const CompanyDetails = () => {
                     <div className="explore-data-btn-area">
                         <LinkButton
                             className="explore-data-btn"
-                            onClick={() =>
-                                onOpenDataExplorationSection(
-                                    "dataTypes",
-                                    company.ppid
-                                )
-                            }
-                            route="data-exploration"
+                            stateChange={{
+                                explorationState: {
+                                    section: "dataTypes",
+                                    index: null,
+                                    category: null,
+                                },
+                            }}
+                            route="/data-exploration"
                         >
                             {i18n.t("companyDetailsScreen:button.exploreData")}
                         </LinkButton>

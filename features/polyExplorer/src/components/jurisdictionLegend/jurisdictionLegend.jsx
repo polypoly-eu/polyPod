@@ -4,7 +4,7 @@ import "./jurisdictionLegend.css";
 import i18n from "../../i18n.js";
 import LinkButton from "../linkButton/linkButton.jsx";
 
-const JurisdictionLegend = ({ onOpenRegionInfo }) => {
+const JurisdictionLegend = ({ jurisdictionsState }) => {
     return (
         <div className="location-legend">
             <div className="source">
@@ -39,7 +39,7 @@ const JurisdictionLegend = ({ onOpenRegionInfo }) => {
             <LinkButton
                 route="/data-region-info"
                 className="info-button"
-                onClick={onOpenRegionInfo}
+                stateChange={jurisdictionsState}
             >
                 <img src="./images/question-circle.svg" />
             </LinkButton>

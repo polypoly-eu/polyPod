@@ -10,11 +10,11 @@ const DataSharingSection = ({
     count,
     max,
     average,
-    onOpenDetails,
+    stateChange,
 }) => (
     <LinkButton
         className={`data-sharing-section ${sharingType}-shared`}
-        onClick={onOpenDetails}
+        stateChange={stateChange}
         route="/data-exploration"
     >
         <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
@@ -32,10 +32,8 @@ const FeaturedCompany = () => {
         selectedCompanyObject,
         featuredCompanyMaxValues,
         featuredCompanyAverageValues,
-        handleOpenDataExplorationSection,
     } = useContext(ExplorerContext);
     const company = selectedCompanyObject;
-    const onOpenDataExplorationSection = handleOpenDataExplorationSection;
     return (
         <div className="featured-company-card">
             <div className="data-sharing-section-list">
@@ -44,27 +42,39 @@ const FeaturedCompany = () => {
                     count={company.dataTypesShared.length}
                     max={featuredCompanyMaxValues.dataTypes}
                     average={featuredCompanyAverageValues.dataTypes}
-                    onOpenDetails={() =>
-                        onOpenDataExplorationSection("dataTypes")
-                    }
+                    stateChange={{
+                        explorationState: {
+                            section: "dataTypes",
+                            index: null,
+                            category: null,
+                        },
+                    }}
                 />
                 <DataSharingSection
                     sharingType="purposes"
                     count={company.dataSharingPurposes.length}
                     max={featuredCompanyMaxValues.purposes}
                     average={featuredCompanyAverageValues.purposes}
-                    onOpenDetails={() =>
-                        onOpenDataExplorationSection("purposes")
-                    }
+                    stateChange={{
+                        explorationState: {
+                            section: "purposes",
+                            index: null,
+                            category: null,
+                        },
+                    }}
                 />
                 <DataSharingSection
                     sharingType="companies"
                     count={company.dataRecipients.length}
                     max={featuredCompanyMaxValues.companies}
                     average={featuredCompanyAverageValues.companies}
-                    onOpenDetails={() =>
-                        onOpenDataExplorationSection("companies")
-                    }
+                    stateChange={{
+                        explorationState: {
+                            section: "companies",
+                            index: null,
+                            category: null,
+                        },
+                    }}
                 />
                 <DataSharingSection
                     sharingType="jurisdictions"
@@ -75,9 +85,13 @@ const FeaturedCompany = () => {
                     }
                     max={featuredCompanyMaxValues.jurisdictions}
                     average={featuredCompanyAverageValues.jurisdictions}
-                    onOpenDetails={() =>
-                        onOpenDataExplorationSection("jurisdictions")
-                    }
+                    stateChange={{
+                        explorationState: {
+                            section: "jurisdictions",
+                            index: null,
+                            category: null,
+                        },
+                    }}
                 />
             </div>
         </div>

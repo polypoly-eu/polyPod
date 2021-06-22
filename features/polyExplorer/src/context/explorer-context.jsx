@@ -45,13 +45,28 @@ function loadCompanies(JSONData, globalData) {
 }
 
 export const ExplorerProvider = ({ children }) => {
+    //router hooks
+    const history = useHistory();
+    const location = useLocation();
+
+    //state
+    const navigationStates = [
+        "firstRun",
+        "showClusters",
+        "selectedCompany",
+        "explorationState",
+    ];
     const [navigationState, setNavigationState] = useState({
         firstRun: false,
         showClusters: true,
         selectedCompany: null,
+        explorationState: {
+            section: null,
+            index: null,
+            category: null,
+        },
     });
-
-    const navigationStates = ["firstRun", "showClusters", "selectedCompany"];
+    const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
 
     //constants
     const companies = loadCompanies(polyPediaCompanies, globalData);
@@ -61,25 +76,10 @@ export const ExplorerProvider = ({ children }) => {
     );
     const selectedCompany = navigationState.selectedCompany;
     const selectedCompanyObject = companies[selectedCompany];
-
-    const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
-
-    //remember data-exploration state
-    const initialDataExplorationSection = "dataTypes"; // to go
-    const [dataExploringSection, setDataExploringSection] = useState(
-        initialDataExplorationSection
-    );
-    const [activeCategory, setActiveCategory] = useState(null);
-    const [activeExplorationIndex, setActiveExplorationIndex] = useState(null);
-
-    //router hooks
-    const history = useHistory();
-    const location = useLocation();
-    const currentPath = location.pathname;
-
     const dataRecipients = companies[selectedCompany]?.dataRecipients?.map(
         (ppid) => companies[ppid]
     );
+    const currentPath = location.pathname;
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
     function changeNavigationState(changedState) {
@@ -93,16 +93,9 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function handleBack() {
-        if (currentPath == "/data-exploration") setActiveExplorationIndex(null);
-        if (currentPath != "/") history.goBack();
-    }
-
-    function handleSelectCompany(ppid, activeExplorationIndex) {
-        if (currentPath != "/" && selectedCompany) {
-            storedCompanies.push(selectedCompany);
-            setStoredCompanies(storedCompanies);
+        if (currentPath != "/") {
+            history.goBack();
         }
-        setSelectedCompany(ppid);
     }
 
     function handleOnboardingPopupClose() {
@@ -178,21 +171,6 @@ export const ExplorerProvider = ({ children }) => {
         setActiveFilters(newActiveFilters);
     };
 
-    const handleExplorationInfoScreen = (
-        activeSection,
-        activeIndex,
-        activeCategory
-    ) => {
-        setDataExploringSection(activeSection);
-        setActiveExplorationIndex(activeIndex);
-        if (activeCategory) setActiveCategory(activeCategory);
-    };
-
-    const handleOpenDataExplorationSection = (section) => {
-        setDataExploringSection(section);
-        history.push("/data-exploration");
-    };
-
     //on-startup
     useEffect(() => {
         setTimeout(
@@ -210,8 +188,6 @@ export const ExplorerProvider = ({ children }) => {
     //on-change
     useEffect(() => {
         updatePodNavigation();
-        console.log(navigationState);
-        console.log(history);
     });
 
     return (
@@ -233,12 +209,6 @@ export const ExplorerProvider = ({ children }) => {
                 activeFilters,
                 handleRemoveFilter,
                 handleFilterApply,
-                dataExploringSection,
-                activeCategory,
-                activeExplorationIndex,
-                handleExplorationInfoScreen,
-                handleOpenDataExplorationSection,
-                setActiveExplorationIndex,
             }}
         >
             {children}

@@ -33,7 +33,7 @@ class CompanyIndustryList extends React.PureComponent {
                                     <CompanyItem
                                         key={index}
                                         company={company}
-                                        ecoMode={this.props.ecoItems}
+                                        ecoMode={true}
                                     />
                                 ))}
                             </div>

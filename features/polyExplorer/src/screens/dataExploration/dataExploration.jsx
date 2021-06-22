@@ -26,17 +26,17 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const DataExplorationScreen = () => {
     const {
-        handleExplorationInfoScreen,
+        navigationState,
         selectedCompanyObject,
-        dataExploringSection,
-        activeExplorationIndex,
         featuredCompanyMaxValues,
         dataRecipients,
     } = useContext(ExplorerContext);
     const company = selectedCompanyObject;
-    const startSection = dataExploringSection;
-    const startIndex = activeExplorationIndex;
+    const startSection = navigationState.explorationState.section;
+    const startIndex = navigationState.explorationState.index;
     const maxCompanies = featuredCompanyMaxValues.companies;
+
+    if (company.dataRecipients.length == 0) return <Screen></Screen>;
 
     //Methods
     const getCategories = () =>
@@ -265,11 +265,12 @@ const DataExplorationScreen = () => {
                     </p>
                     <DataSharingLegend
                         route="data-types-info"
-                        onClick={() => {
-                            handleExplorationInfoScreen(
-                                "dataTypes",
-                                activeIndex
-                            );
+                        stateChange={{
+                            explorationState: {
+                                section: "dataTypes",
+                                index: activeIndex,
+                                category: null,
+                            },
                         }}
                     />
                     {filler}
@@ -325,12 +326,12 @@ const DataExplorationScreen = () => {
                     </p>
                     <DataSharingLegend
                         route="data-category-info"
-                        onClick={() => {
-                            handleExplorationInfoScreen(
-                                "dataTypesCategory",
-                                activeIndex,
-                                activeScreen.split("_")[1]
-                            );
+                        stateChange={{
+                            explorationState: {
+                                section: "dataTypes",
+                                index: activeIndex,
+                                category: activeScreen.split("_")[1],
+                            },
                         }}
                     />
                     {filler}
@@ -382,11 +383,12 @@ const DataExplorationScreen = () => {
                     </p>
                     <DataSharingLegend
                         route="data-correlation-info"
-                        onClick={() => {
-                            handleExplorationInfoScreen(
-                                "dataTypesCorrelation",
-                                activeIndex
-                            );
+                        stateChange={{
+                            explorationState: {
+                                section: "dataTypes",
+                                index: activeIndex,
+                                category: null,
+                            },
                         }}
                     />
                 </div>
@@ -417,11 +419,12 @@ const DataExplorationScreen = () => {
                     </p>
                     <DataSharingLegend
                         route="companies-info"
-                        onClick={() => {
-                            handleExplorationInfoScreen(
-                                "companies",
-                                activeIndex
-                            );
+                        stateChange={{
+                            explorationState: {
+                                section: "companies",
+                                index: activeIndex,
+                                category: null,
+                            },
                         }}
                     />
                 </div>
@@ -491,11 +494,12 @@ const DataExplorationScreen = () => {
                     </p>
                     <DataSharingLegend
                         route="companies-info"
-                        onClick={() => {
-                            handleExplorationInfoScreen(
-                                "companies",
-                                activeIndex
-                            );
+                        stateChange={{
+                            explorationState: {
+                                section: "dataTypes",
+                                index: activeIndex,
+                                category: null,
+                            },
                         }}
                     />
                 </div>
@@ -625,12 +629,13 @@ const DataExplorationScreen = () => {
                                 <PurposeChart
                                     purposes={company.dataSharingPurposes}
                                     openPopup={setPurposePopupContent}
-                                    openPurposeInfo={() =>
-                                        handleExplorationInfoScreen(
-                                            "purposes",
-                                            activeIndex
-                                        )
-                                    }
+                                    purposeState={{
+                                        explorationState: {
+                                            section: "purposes",
+                                            index: activeIndex,
+                                            category: null,
+                                        },
+                                    }}
                                 />
                             </div>
                         </SwiperSlide>
@@ -684,21 +689,23 @@ const DataExplorationScreen = () => {
                                     data={getJurisdictionTreeFormat()}
                                 />
                                 <JurisdictionLegend
-                                    onOpenRegionInfo={() =>
-                                        handleExplorationInfoScreen(
-                                            "jurisdictions",
-                                            activeIndex
-                                        )
-                                    }
+                                    stateChange={{
+                                        explorationState: {
+                                            section: "jurisdictions",
+                                            index: activeIndex,
+                                            category: null,
+                                        },
+                                    }}
                                 />
                                 <DataSharingLegend
                                     route="jurisdiction-info"
-                                    onClick={() =>
-                                        handleExplorationInfoScreen(
-                                            "jurisdictions",
-                                            activeIndex
-                                        )
-                                    }
+                                    stateChange={{
+                                        explorationState: {
+                                            section: "jurisdictions",
+                                            index: activeIndex,
+                                            category: null,
+                                        },
+                                    }}
                                 />
                                 <LinkButton
                                     route="/company-details"

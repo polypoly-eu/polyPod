@@ -6,7 +6,7 @@ import LinkButton from "../linkButton/linkButton.jsx";
 
 import "./purposeChart.css";
 
-const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
+const PurposeChart = ({ purposes, openPopup, purposeState }) => {
     const getHighestCount = () => {
         let highest = 0;
         purposes.forEach((e) => {
@@ -102,7 +102,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
             <LinkButton
                 route="/purpose-info"
                 className="help"
-                onClick={() => openPurposeInfo()}
+                stateChange={purposeState}
             >
                 <img src="./images/question-circle.svg" />
                 <div>{i18n.t("common:how-to-read")}</div>

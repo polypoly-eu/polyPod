@@ -8,10 +8,11 @@ import Infographic from "../../../components/infographic/infographic.jsx";
 import { ExplorerContext } from "../../../context/explorer-context.jsx";
 
 const CategoryInfo = () => {
-    const { selectedCompanyObject, activeCategory } = useContext(
+    const { selectedCompanyObject, navigationState } = useContext(
         ExplorerContext
     );
     const company = selectedCompanyObject;
+    const activeCategory = navigationState.explorationState.category;
 
     return (
         <BaseInfoScreen
