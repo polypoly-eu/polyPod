@@ -5,10 +5,9 @@ import LinkButton from "../linkButton/linkButton.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const CompanyShortInfo = ({ company }) => {
-    const { setSelectedCompany } = useContext(ExplorerContext);
     return (
         <LinkButton
-            onClick={() => setSelectedCompany(company.ppid)}
+            stateChange={{ selectedCompany: company.ppid }}
             className="company-short-info"
             route="/company-details"
         >

@@ -48,7 +48,10 @@ export const ExplorerProvider = ({ children }) => {
     const [navigationState, setNavigationState] = useState({
         firstRun: false,
         showClusters: true,
+        selectedCompany: null,
     });
+
+    const navigationStates = ["firstRun", "showClusters", "selectedCompany"];
 
     //constants
     const companies = loadCompanies(polyPediaCompanies, globalData);
@@ -56,9 +59,7 @@ export const ExplorerProvider = ({ children }) => {
     const featuredCompanies = Object.values(companies).filter(
         (company) => company.featured
     );
-
-    const [selectedCompany, setSelectedCompany] = useState(null);
-    const [storedCompanies, setStoredCompanies] = useState([]);
+    const selectedCompany = navigationState.selectedCompany;
     const selectedCompanyObject = companies[selectedCompany];
 
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
@@ -82,16 +83,17 @@ export const ExplorerProvider = ({ children }) => {
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
     function changeNavigationState(changedState) {
+        Object.keys(changedState).forEach((key) => {
+            if (!navigationStates.includes(key)) {
+                console.log(`NavigationStateError with key: ${key}`);
+                return;
+            }
+        });
         setNavigationState({ ...navigationState, ...changedState });
     }
 
     function handleBack() {
         if (currentPath == "/data-exploration") setActiveExplorationIndex(null);
-        if (currentPath == "/company-details") {
-            const previousCompany = storedCompanies.pop();
-            setStoredCompanies(storedCompanies);
-            if (previousCompany) setSelectedCompany(previousCompany);
-        }
         if (currentPath != "/") history.goBack();
     }
 
@@ -202,11 +204,14 @@ export const ExplorerProvider = ({ children }) => {
                 ),
             300
         );
+        history.push("/", navigationState);
     }, []);
 
     //on-change
     useEffect(() => {
         updatePodNavigation();
+        console.log(navigationState);
+        console.log(history);
     });
 
     return (
@@ -220,8 +225,6 @@ export const ExplorerProvider = ({ children }) => {
                 companies,
                 companiesList,
                 featuredCompanies,
-                selectedCompany,
-                setSelectedCompany,
                 selectedCompanyObject,
                 dataRecipients,
                 globalData,

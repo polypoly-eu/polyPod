@@ -8,7 +8,7 @@ import "./companySearch.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const CompanySearchScreen = () => {
-    const { companiesList, setSelectedCompany } = useContext(ExplorerContext);
+    const { companiesList } = useContext(ExplorerContext);
     const companies = companiesList;
 
     const [searchString, setSearchString] = useState("");
@@ -78,9 +78,9 @@ const CompanySearchScreen = () => {
                                 <LinkButton
                                     route="company-details"
                                     key={index}
-                                    onClick={() =>
-                                        setSelectedCompany(company.ppid)
-                                    }
+                                    stateChange={{
+                                        selectedCompany: company.ppid,
+                                    }}
                                 >
                                     {company.name}
                                 </LinkButton>
@@ -106,11 +106,10 @@ const CompanySearchScreen = () => {
                                             (company, index) => (
                                                 <LinkButton
                                                     route="company-details"
-                                                    onClick={() =>
-                                                        setSelectedCompany(
-                                                            company.ppid
-                                                        )
-                                                    }
+                                                    stateChange={{
+                                                        selectedCompany:
+                                                            company.ppid,
+                                                    }}
                                                     key={index}
                                                 >
                                                     {company.name}
@@ -125,9 +124,9 @@ const CompanySearchScreen = () => {
                                 {shownCompanies.map((company, index) => (
                                     <LinkButton
                                         route="company-details"
-                                        onClick={() =>
-                                            setSelectedCompany(company.ppid)
-                                        }
+                                        stateChange={{
+                                            selectedCompany: company.ppid,
+                                        }}
                                         key={index}
                                     >
                                         {company.name}
