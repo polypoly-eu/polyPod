@@ -104,12 +104,18 @@ class CommunicationThroughPodApiWorks {
         execute { canGetEmptyArrayFromPolyInSelect() }
         execute { canGetArrayWithSingleQuadFromPolyInSelect() }
         execute { canGetArrayWithSingleQuadWithIRISubjectFromPolyInSelect() }
-        execute { canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect() }
+        execute {
+            canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect()
+        }
         execute { canGetArrayWithSingleQuadWithIRIObjectFromPolyInSelect() }
-        execute { canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect() }
+        execute {
+            canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect()
+        }
         execute { canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect() }
         execute { canGetArrayWithSingleQuadWithIRIGraphFromPolyInSelect() }
-        execute { canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect() }
+        execute {
+            canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect()
+        }
         execute { canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect() }
         execute { canGetArrayWithMultipleQuadsFromPolyInSelect() }
     }
@@ -312,7 +318,8 @@ class CommunicationThroughPodApiWorks {
         })
         assertThat(polyIn.addWasCalled).isTrue()
         assertThat(polyIn.addParams).hasSize(2)
-        assertThat(polyIn.addParams).containsExactlyElementsIn(arrayOf(quad1, quad2))
+        assertThat(polyIn.addParams)
+            .containsExactlyElementsIn(arrayOf(quad1, quad2))
     }
 
     private fun addSupportsQuadsWithIRISubject() {
@@ -589,6 +596,7 @@ class CommunicationThroughPodApiWorks {
         polyIn.selectReturn = listOf(quad)
         addQuadToCollection(quad)
 
+        /* ktlint-disable max-line-length */
         clickButton("comm.polyIn.select.get_array_with_single_quad_with_named_node_subject")
 
         waitUntil({
@@ -607,6 +615,7 @@ class CommunicationThroughPodApiWorks {
         polyIn.selectReturn = listOf(quad)
         addQuadToCollection(quad)
 
+        /* ktlint-disable max-line-length */
         clickButton("comm.polyIn.select.get_array_with_single_quad_with_blank_node_subject")
 
         waitUntil({
@@ -804,7 +813,12 @@ class CommunicationThroughPodApiWorks {
         setInput(3, val3)
     }
 
-    private fun setInputs(val1: String, val2: String, val3: String, val4: String) {
+    private fun setInputs(
+        val1: String,
+        val2: String,
+        val3: String,
+        val4: String
+    ) {
         setInput(1, val1)
         setInput(2, val2)
         setInput(3, val3)
