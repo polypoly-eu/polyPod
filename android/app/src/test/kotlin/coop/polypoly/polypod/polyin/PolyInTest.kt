@@ -4,23 +4,20 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyIn.rdf.*
-import eu.polypoly.bubblewrap.Codec
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.msgpack.value.ValueFactory
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.io.File
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Config.OLDEST_SDK])
 class PolyInTest {
-    private val polyIn = PolyIn("test_database.nt")
+    private val polyIn = PolyIn("test_database.nt",
+        context = androidx.test.core.app.ApplicationProvider.getApplicationContext ()
+    )
 
     @Before
     fun setup() {
