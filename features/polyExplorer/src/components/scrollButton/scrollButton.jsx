@@ -7,12 +7,10 @@ const scrollButton = ({ light = false, activeIndex, screens, onClick }) => {
     return (
         <button
             className={
-                light
-                    ? "scroll-button-light"
-                    : "scroll-button" +
-                      (activeIndex === screens.length - 1
-                          ? " scroll-button-hidden"
-                          : "")
+                (light ? "scroll-button-light" : "scroll-button") +
+                (activeIndex === screens.length - 1
+                    ? " scroll-button-hidden"
+                    : "")
             }
             onClick={() => onClick()}
         >
