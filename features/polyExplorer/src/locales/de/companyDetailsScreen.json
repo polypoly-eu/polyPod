@@ -1,15 +1,23 @@
 {
-    "tab.location":
+    "tab.dataStory":
+        "Daten-Story",
+    "tab.about":
+        "Infos",
+    "tab.parent":
+        "Mutterunternehmen",
+    "tab.products":
+        "Produkte",
+    "location":
         "Adresse",
-    "tab.location.fallbackText":
+    "location.fallbackText":
         "Noch keine Adresse verfügbar.",
-    "tab.structure":
+    "structure":
         "Struktur",
-    "tab.structure.fallbackText":
+    "structure.fallbackText":
         "Noch keine Daten verfügbar.",
-    "tab.revenue":
+    "revenue":
         "Umsatz",
-    "tab.revenue.fallbackText":
+    "revenue.fallbackText":
         "Noch keine Daten verfügbar.",
     "jurisdiction":
         "Datenregion",

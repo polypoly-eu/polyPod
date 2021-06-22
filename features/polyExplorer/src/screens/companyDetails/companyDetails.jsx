@@ -22,7 +22,7 @@ const CompanyDetails = ({ company }) => {
 
     const tabContent = [
         {
-            tabName: "location",
+            tabName: "about",
             content: (
                 <div className="location-map">
                     <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
@@ -46,17 +46,9 @@ const CompanyDetails = ({ company }) => {
                             ) : (
                                 <div className="no-location">
                                     {i18n.t(
-                                        "companyDetailsScreen:tab.location.fallbackText"
+                                        "companyDetailsScreen:location.fallbackText"
                                     )}
                                 </div>
-                            )}
-                        </div>
-                    ) : (
-                        <div className="location-block Others">
-                            <div className="no-location">
-                                {i18n.t(
-                                    "companyDetailsScreen:tab.location.fallbackText"
-                                )}
                             </div>
                         </div>
                     )}
@@ -81,9 +73,11 @@ const CompanyDetails = ({ company }) => {
                 </div>
             ),
         },
-        */
+    ];
+
+    const featuredTabContent = [
         {
-            tabName: "revenue",
+            tabName: "dataStory",
             content: (
                 <div className="revenue">
                     <div className="separator"></div>
@@ -95,11 +89,8 @@ const CompanyDetails = ({ company }) => {
                 </div>
             ),
         },
-    ];
-
-    const featuredTabContent = [
         {
-            tabName: "location",
+            tabName: "about",
             content: (
                 <div className="featured-map-container">
                     <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
@@ -121,17 +112,9 @@ const CompanyDetails = ({ company }) => {
                             ) : (
                                 <div className="no-location">
                                     {i18n.t(
-                                        "companyDetailsScreen:tab.location.fallbackText"
+                                        "companyDetailsScreen:location.fallbackText"
                                     )}
                                 </div>
-                            )}
-                        </div>
-                    ) : (
-                        <div className="location-block Others">
-                            <div className="no-location">
-                                {i18n.t(
-                                    "companyDetailsScreen:tab.location.fallbackText"
-                                )}
                             </div>
                         </div>
                     )}

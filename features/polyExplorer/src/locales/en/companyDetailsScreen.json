@@ -1,15 +1,23 @@
 {
-    "tab.location":
+    "tab.dataStory":
+        "Data Story",
+    "tab.about":
+        "About",
+    "tab.parent":
+        "Parent",
+    "tab.products":
+        "Products",
+    "location":
         "Location",
-    "tab.location.fallbackText":
+    "location.fallbackText":
         "No location available yet.",
-    "tab.structure":
+    "structure":
         "Structure",
-    "tab.structure.fallbackText":
+    "structure.fallbackText":
         "No data available yet.",
-    "tab.revenue":
+    "revenue":
         "Revenue",
-    "tab.revenue.fallbackText":
+    "revenue.fallbackText":
         "No data available yet.",
     "jurisdiction":
         "Jurisdiction",
