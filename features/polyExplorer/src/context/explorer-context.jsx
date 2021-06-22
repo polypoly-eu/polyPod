@@ -47,6 +47,7 @@ function loadCompanies(JSONData, globalData) {
 export const ExplorerProvider = ({ children }) => {
     const [navigationState, setNavigationState] = useState({
         firstRun: false,
+        showClusters: true,
     });
 
     //constants
@@ -61,9 +62,6 @@ export const ExplorerProvider = ({ children }) => {
     const selectedCompanyObject = companies[selectedCompany];
 
     const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
-
-    //remember main screen tab state
-    const [showClusters, setShowClusters] = useState(true);
 
     //remember data-exploration state
     const initialDataExplorationSection = "dataTypes"; // to go
@@ -82,6 +80,11 @@ export const ExplorerProvider = ({ children }) => {
         (ppid) => companies[ppid]
     );
 
+    //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
+    function changeNavigationState(changedState) {
+        setNavigationState({ ...navigationState, ...changedState });
+    }
+
     function handleBack() {
         if (currentPath == "/data-exploration") setActiveExplorationIndex(null);
         if (currentPath == "/company-details") {
@@ -93,7 +96,6 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function handleSelectCompany(ppid, activeExplorationIndex) {
-        console.log(currentPath != "/" && selectedCompany);
         if (currentPath != "/" && selectedCompany) {
             storedCompanies.push(selectedCompany);
             setStoredCompanies(storedCompanies);
@@ -102,7 +104,7 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function handleOnboardingPopupClose() {
-        setNavigationState({ ...navigationState, firstRun: false });
+        changeNavigationState({ firstRun: false });
         writeFirstRun(false);
     }
 
@@ -194,8 +196,7 @@ export const ExplorerProvider = ({ children }) => {
         setTimeout(
             () =>
                 readFirstRun().then((firstRun) =>
-                    setNavigationState({
-                        ...navigationState,
+                    changeNavigationState({
                         firstRun: firstRun,
                     })
                 ),
@@ -206,14 +207,13 @@ export const ExplorerProvider = ({ children }) => {
     //on-change
     useEffect(() => {
         updatePodNavigation();
-        console.log(selectedCompany);
-        console.log(storedCompanies);
     });
 
     return (
         <ExplorerContext.Provider
             value={{
                 navigationState,
+                changeNavigationState,
                 handleOnboardingPopupClose,
                 handleOnboardingPopupMoreInfo,
                 handleBack,
@@ -230,8 +230,6 @@ export const ExplorerProvider = ({ children }) => {
                 activeFilters,
                 handleRemoveFilter,
                 handleFilterApply,
-                showClusters,
-                setShowClusters,
                 dataExploringSection,
                 activeCategory,
                 activeExplorationIndex,
