@@ -1,15 +1,15 @@
 const pkg = require("./package.json");
-const externals = pkg.dependencies;
+const externals = Object.keys(pkg.dependencies);
 
 export default {
     input: "src/index.js",
     output: [
         {
-			format: 'cjs',
+			format: "cjs",
 			file: pkg.main,
 			sourcemap: false,
 			exports: 'auto'
 		}
     ],
-    externals: externals
+    external: externals
 };
