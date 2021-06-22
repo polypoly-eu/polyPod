@@ -23,7 +23,12 @@ class MainActivity : AppCompatActivity() {
 
         if (Preferences.isFirstRun(this)) {
             notification.markInAppNotificationSeen()
-            startActivity(Intent(this, OnboardingActivity::class.java))
+            startActivity(
+                Intent(
+                    this,
+                    OnboardingActivity::class.java
+                )
+            )
             return
         }
 
@@ -31,7 +36,9 @@ class MainActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle(notification.title)
                 .setMessage(notification.text)
-                .setPositiveButton(R.string.button_update_notification_close) { _, _ ->
+                .setPositiveButton(
+                    R.string.button_update_notification_close
+                ) { _, _ ->
                     notification.markInAppNotificationSeen()
                 }
                 .show()
