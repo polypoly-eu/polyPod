@@ -4,20 +4,40 @@ import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.web.assertion.WebViewAssertions.webMatches
 import androidx.test.espresso.web.sugar.Web.onWebView
-import androidx.test.espresso.web.webdriver.DriverAtoms.*
+import androidx.test.espresso.web.webdriver.DriverAtoms.clearElement
+import androidx.test.espresso.web.webdriver.DriverAtoms.findElement
+import androidx.test.espresso.web.webdriver.DriverAtoms.getText
+import androidx.test.espresso.web.webdriver.DriverAtoms.selectFrameByIdOrName
+import androidx.test.espresso.web.webdriver.DriverAtoms.webClick
+import androidx.test.espresso.web.webdriver.DriverAtoms.webKeys
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.google.common.truth.Truth.assertThat
 import coop.polypoly.polypod.polyIn.PolyInTestDouble
-import coop.polypoly.polypod.polyIn.rdf.*
+import coop.polypoly.polypod.polyIn.rdf.BlankNode
+import coop.polypoly.polypod.polyIn.rdf.BlankNodeGraph
+import coop.polypoly.polypod.polyIn.rdf.BlankNodeObject
+import coop.polypoly.polypod.polyIn.rdf.BlankNodeSubject
+import coop.polypoly.polypod.polyIn.rdf.DefaultGraph
+import coop.polypoly.polypod.polyIn.rdf.IRI
+import coop.polypoly.polypod.polyIn.rdf.IRIGraph
+import coop.polypoly.polypod.polyIn.rdf.IRIObject
+import coop.polypoly.polypod.polyIn.rdf.IRISubject
+import coop.polypoly.polypod.polyIn.rdf.Literal
+import coop.polypoly.polypod.polyIn.rdf.LiteralObject
+import coop.polypoly.polypod.polyIn.rdf.Quad
+import coop.polypoly.polypod.polyIn.rdf.QuadBuilder
+import coop.polypoly.polypod.polyIn.rdf.QuadGraph
+import coop.polypoly.polypod.polyIn.rdf.QuadObject
+import coop.polypoly.polypod.polyIn.rdf.QuadSubject
 import coop.polypoly.polypod.polyOut.PolyOutTestDouble
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.*
+import java.util.Date
 
 /**
  * Idea - those tests verify that the communication between the Feature and the Pod works.
