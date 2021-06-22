@@ -16,7 +16,8 @@ import org.msgpack.value.ValueFactory
 open class PodApi(
     open val polyOut: PolyOut,
     open val polyIn: PolyIn,
-    open val polyNav: PolyNav) {
+    open val polyNav: PolyNav
+) {
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -51,19 +52,27 @@ open class PodApi(
             }
             "polyNav" -> {
                 when (inner) {
-                    "setActiveActions" -> return handlePolyNavSetActiveActions(args)
+                    "setActiveActions" ->
+                        return handlePolyNavSetActiveActions(args)
                     "setTitle" -> return handlePolyNavSetTitle(args)
                     "openUrl" -> return handlePolyNavOpenUrl(args)
                 }
             }
-
         }
-        throw IllegalArgumentException("Unable to handle request, unsupported call target: '${outer}.${inner}()'")
+        throw IllegalArgumentException(
+            """
+                Unable to handle request,
+                unsupported call target: '$outer.$inner()'
+            """
+        )
     }
 
     private suspend fun handlePolyOutFetch(args: List<Value>): Value {
         logger.debug("dispatch() -> polyOut.fetch")
-        val result = polyOut.fetch(args[0].asStringValue().toString(), decodePolyOutFetchCallArgs(args[1]))
+        val result = polyOut.fetch(
+            args[0].asStringValue().toString(),
+            decodePolyOutFetchCallArgs(args[1])
+        )
         return fetchResponseCodec.encode(result)
     }
 
@@ -71,7 +80,7 @@ open class PodApi(
         logger.debug("dispatch() -> polyIn.add")
         val quads = args.map { Quad.codec.decode(it) }
         polyIn.add(quads)
-        return ValueFactory.newNil()  // add() doesn't return anything
+        return ValueFactory.newNil() // add() doesn't return anything
     }
 
     private suspend fun handlePolyInSelect(args: List<Value>): Value {
@@ -94,31 +103,50 @@ open class PodApi(
 
     private fun handlePolyNavSetActiveActions(args: List<Value>): Value {
         logger.debug("dispatch() -> polyNav.setActiveActions")
-        val argsList = args[0].asArrayValue().map { it.asStringValue().toString() }
+        val argsList = args[0].asArrayValue().map {
+            it.asStringValue().toString()
+        }
         polyNav.setActiveActions(argsList.toTypedArray())
         return ValueFactory.newNil()
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {
-        logger.debug("decodePolyOutFetchCallArgs(), args: '{}', args.type: '{}'", args, args.valueType)
+        logger.debug(
+            "decodePolyOutFetchCallArgs(), args: '{}', args.type: '{}'",
+            args,
+            args.valueType
+        )
         val argsMap = (args as MapValue).map()
         val fetchInit = FetchInit()
         for (key in argsMap.keys) {
-            logger.debug("Args contain, key[{}]: '{}', value[{}]: '{}'", key.valueType, key, argsMap[key]!!.valueType, argsMap[key])
+            logger.debug(
+                "Args contain, key[{}]: '{}', value[{}]: '{}'",
+                key.valueType,
+                key,
+                argsMap[key]!!.valueType,
+                argsMap[key]
+            )
             when ((key as StringValue).toString()) {
                 "method" -> {
-                    fetchInit.method = argsMap[key]!!.toString()  // this has to be String
+                    // this has to be String
+                    fetchInit.method = argsMap[key]!!.toString()
                 }
                 "headers" -> {
                     val headers = HashMap<String, String>()
                     val value = argsMap[key]!! as MapValue
                     value.entrySet()
-                        .map { (k, v) -> Pair((k as StringValue).toString(), (v as StringValue).toString()) }
+                        .map { (k, v) ->
+                            Pair(
+                                (k as StringValue).toString(),
+                                (v as StringValue).toString()
+                            )
+                        }
                         .forEach { (k, v) -> headers[k] = v }
                     fetchInit.headers = headers
                 }
                 "body" -> {
-                    fetchInit.body = argsMap[key]!!.toString()  // this has to be a String
+                    // this has to be a String
+                    fetchInit.body = argsMap[key]!!.toString()
                 }
             }
         }
