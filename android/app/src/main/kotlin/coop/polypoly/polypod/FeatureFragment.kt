@@ -84,10 +84,6 @@ open class FeatureFragment : Fragment() {
     private lateinit var foregroundResources: ForegroundResources
     private lateinit var featureContainer: FeatureContainer
 
-    private lateinit var executor: Executor
-    private lateinit var biometricPrompt: BiometricPrompt
-    private lateinit var promptInfo: BiometricPrompt.PromptInfo
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -104,64 +100,7 @@ open class FeatureFragment : Fragment() {
         feature =
             FeatureStorage().loadFeature(requireContext(), args.featureFile)
 
-        // TODO: Expose a dedicated setting in the manifest instead
-        if (feature.name != "polyExplorer") {
-            return setupFeature(view)
-        }
-        // Trigger authentication
-        executor = ContextCompat.getMainExecutor(context)
-        biometricPrompt = BiometricPrompt(this, executor,
-            object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationError(
-                    errorCode: Int,
-                    errString: CharSequence
-                ) {
-                    super.onAuthenticationError(errorCode, errString)
-                    Toast.makeText(
-                        context,
-                        "Authentication error: $errString",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    findNavController().popBackStack()
-                }
-
-                override fun onAuthenticationSucceeded(
-                    result: BiometricPrompt.AuthenticationResult
-                ) {
-                    super.onAuthenticationSucceeded(result)
-                    Toast.makeText(
-                        context,
-                        "Authentication successful!", Toast.LENGTH_SHORT
-                    ).show()
-
-                    setupFeature(view)
-
-                    val mainKey = MasterKey.Builder(context!!)
-                        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                        .setUserAuthenticationRequired(true)
-                        .build()
-
-                    featureContainer.api.polyIn.setEncryptionKey(mainKey)
-                }
-
-                override fun onAuthenticationFailed() {
-                    super.onAuthenticationFailed()
-                    Toast.makeText(
-                        context, "Authentication failed",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    findNavController().popBackStack()
-                }
-            })
-
-        promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Login to view your polyPod data")
-            .setSubtitle("Either use device credential or biometrics")
-            .setAllowedAuthenticators(BIOMETRIC_WEAK or DEVICE_CREDENTIAL)
-            .build()
-
-
-        biometricPrompt.authenticate(promptInfo)
+        setupFeature(view)
     }
 
     private fun setupFeature(view: View) {

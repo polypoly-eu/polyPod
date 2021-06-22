@@ -10,15 +10,11 @@ open class PolyIn(
     private val databaseName: String = "data.nt",
     private val databaseFolder: File? = null,
     private val context: Context,
-    private var _encryptionKey: MasterKey?
 ) {
     val NS = "polypoly"
+    val LANG = "N-TRIPLE"
 
     private val model: Model = load()
-
-    open fun setEncryptionKey(value: MasterKey) {
-            _encryptionKey = value
-        }
 
     open suspend fun select(matcher: Matcher): List<Quad> {
         val retList: MutableList<Quad> = mutableListOf()
@@ -55,23 +51,30 @@ open class PolyIn(
         val model = ModelFactory.createDefaultModel()
 
         val database = File(databaseFolder, databaseName)
-        if (!database.exists() or (_encryptionKey == null)) {
+        if (!database.exists()) {
             return model
         }
+        val mainKey = MasterKey.Builder(context!!)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .setUserAuthenticationRequired(true)
+            .build()
 
         val encryptedDatabase = EncryptedFile.Builder(
             context,
             database,
-            _encryptionKey!!,
+            mainKey,
             EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
         ).build()
 
         encryptedDatabase.openFileInput().use { inputStream ->
             try {
-                model.read(inputStream, null, "N-TRIPLE")
+                model.read(inputStream, null, LANG)
             }
             catch(e: Exception) {
-                // TODO: Cannot read the model from file. Try unencrypted file?
+                // Migrate from unencrypted RDF store
+                database.inputStream().use { unencryptedInput ->
+                    model.read(unencryptedInput, null, LANG)
+                }
             }
         }
         return model
@@ -80,10 +83,15 @@ open class PolyIn(
     private fun save() {
         val database = File(databaseFolder, databaseName)
 
+        val mainKey = MasterKey.Builder(context!!)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .setUserAuthenticationRequired(true)
+            .build()
+
         val encryptedDatabase = EncryptedFile.Builder(
             context,
             database,
-            _encryptionKey!!,
+            mainKey,
             EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
         ).build()
 
