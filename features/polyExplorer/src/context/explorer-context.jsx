@@ -92,9 +92,22 @@ export const ExplorerProvider = ({ children }) => {
         setNavigationState({ ...navigationState, ...changedState });
     }
 
+    function routeTo(path, changedState) {
+        Object.keys(changedState).forEach((key) => {
+            if (!navigationStates.includes(key)) {
+                console.log(`NavigationStateError with key: ${key}`);
+                return;
+            }
+        });
+        const newNavState = { ...navigationState, ...changedState };
+        history.push(path, newNavState);
+        setNavigationState(newNavState);
+    }
+
     function handleBack() {
         if (currentPath != "/") {
             history.goBack();
+            changeNavigationState(history.location.state);
         }
     }
 
@@ -197,6 +210,7 @@ export const ExplorerProvider = ({ children }) => {
                 changeNavigationState,
                 handleOnboardingPopupClose,
                 handleOnboardingPopupMoreInfo,
+                routeTo,
                 handleBack,
                 companies,
                 companiesList,

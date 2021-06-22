@@ -8,18 +8,14 @@ import "./main.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const MainScreen = () => {
-    const { navigationState, changeNavigationState, companies } = useContext(
-        ExplorerContext
-    );
+    const { navigationState, routeTo, companies } = useContext(ExplorerContext);
     let showClusters = navigationState.showClusters;
 
     return (
         <Screen className="main-screen" topShadow={false}>
             <div className="nav-button-container">
                 <button
-                    onClick={() =>
-                        changeNavigationState({ showClusters: true })
-                    }
+                    onClick={() => routeTo("/", { showClusters: true })}
                     className={
                         showClusters ? "nav-button active" : "nav-button"
                     }
@@ -27,9 +23,7 @@ const MainScreen = () => {
                     {i18n.t("mainScreen:tab.discover")}
                 </button>
                 <button
-                    onClick={() =>
-                        changeNavigationState({ showClusters: false })
-                    }
+                    onClick={() => routeTo("/", { showClusters: false })}
                     className={
                         showClusters ? "nav-button" : "nav-button active"
                     }
