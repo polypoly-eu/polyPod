@@ -16,7 +16,8 @@ import org.robolectric.annotation.LooperMode
 @Config(sdk = [Config.OLDEST_SDK])
 class PolyInTest {
     private val polyIn = PolyIn("test_database.nt",
-        context = androidx.test.core.app.ApplicationProvider.getApplicationContext ()
+        context = androidx.test.core.app.ApplicationProvider
+            .getApplicationContext ()
     )
 
     @Before
@@ -48,7 +49,10 @@ class PolyInTest {
 
     @Test
     fun matcher_works() {
-        val polyIn = PolyIn("test_database.nt")
+        val polyIn = PolyIn("test_database.nt",
+            context = androidx.test.core.app.ApplicationProvider
+                .getApplicationContext()
+        )
         polyIn.clean()
 
         val storageData: List<Quad>  = listOf(
@@ -83,6 +87,7 @@ class PolyInTest {
         }
 
         Truth.assertThat(returnedData.size).isEqualTo(1)
-        Truth.assertThat(returnedData[0].predicate).isEqualTo(storageData[2].predicate)
+        Truth.assertThat(
+            returnedData[0].predicate).isEqualTo(storageData[2].predicate)
     }
 }
