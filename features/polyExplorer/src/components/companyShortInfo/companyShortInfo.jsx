@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import i18n from "../../i18n.js";
 import "./companyShortInfo.css";
 import LinkButton from "../linkButton/linkButton.jsx";

@@ -10,12 +10,8 @@ import "./companyDetails.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const CompanyDetails = () => {
-    const {
-        selectedCompanyObject,
-        handleOpenDataExplorationSection,
-    } = useContext(ExplorerContext);
+    const { selectedCompanyObject } = useContext(ExplorerContext);
     const company = selectedCompanyObject;
-    const onOpenDataExplorationSection = handleOpenDataExplorationSection;
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
 
