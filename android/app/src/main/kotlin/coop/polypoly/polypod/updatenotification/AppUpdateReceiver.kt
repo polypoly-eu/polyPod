@@ -18,7 +18,9 @@ class AppUpdateReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         if (context == null) {
-            logger.error("Failed to schedule push notification - invalid context")
+            logger.error(
+                "Failed to schedule push notification - invalid context"
+            )
             return
         }
         val delay = UpdateNotification(context).pushDelay.toLong()
