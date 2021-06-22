@@ -21,18 +21,19 @@ class OnboardingActivity : AppCompatActivity() {
             mapOf(
                 R.id.headline_main to R.string.onboarding_slide1_headline,
                 R.id.headline_sub to R.string.onboarding_slide1_sub_headline,
-                R.id.body_text to R.string.onboarding_slide1_body_text
+                R.id.body_text to R.string.onboarding_slide1_body_text,
             ),
             mapOf(
                 R.id.headline_main to R.string.onboarding_slide2_headline,
                 R.id.headline_sub to R.string.onboarding_slide2_sub_headline,
-                R.id.body_text to R.string.onboarding_slide2_body_text
+                R.id.body_text to R.string.onboarding_slide2_body_text,
             ),
             mapOf(
                 R.id.headline_main to R.string.onboarding_slide3_headline,
                 R.id.headline_sub to R.string.onboarding_slide3_sub_headline,
-                R.id.body_text to R.string.onboarding_slide3_body_text
-            ))
+                R.id.body_text to R.string.onboarding_slide3_body_text,
+            ),
+        )
 
         carousel.pageCount = strings.size
         carousel.setViewListener { position ->
@@ -41,7 +42,9 @@ class OnboardingActivity : AppCompatActivity() {
                 slide.findViewById<TextView>(viewId).text = getString(stringId)
             }
             if (position == strings.size - 1) {
-                val button = slide.findViewById<View>(R.id.end_onboarding_button)
+                val button = slide.findViewById<View>(
+                    R.id.end_onboarding_button
+                )
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
                     close()
