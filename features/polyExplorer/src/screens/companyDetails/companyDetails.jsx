@@ -9,7 +9,6 @@ import "./companyDetails.css";
 
 const CompanyDetails = ({
     company,
-    onOpenRegionInfo,
     featuredCompanyMaxValues,
     featuredCompanyAverageValues,
     onOpenDataExplorationSection,
@@ -64,6 +63,7 @@ const CompanyDetails = ({
                         </p>
                     ) : null}
                     <div className="location-map">
+                        <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
                         {company.jurisdiction ? (
                             <div
                                 className={`location-block ${company.jurisdiction}`}
@@ -98,13 +98,15 @@ const CompanyDetails = ({
                                 </div>
                             </div>
                         )}
-                        <JurisdictionLegend
-                            onOpenRegionInfo={onOpenRegionInfo}
-                        />
-
-                        <CompanyRevenueChart
-                            annualRevenues={company.annualRevenues}
-                        />
+                        <JurisdictionLegend />
+                        <div className="revenue">
+                            <div className="separator"></div>
+                            <br />
+                            <h2>{i18n.t("companyDetailsScreen:revenue")}</h2>
+                            <CompanyRevenueChart
+                                annualRevenues={company.annualRevenues}
+                            />
+                        </div>
                     </div>
                 </div>
             ),
@@ -165,6 +167,7 @@ const CompanyDetails = ({
                         </p>
                     ) : null}
                     <div className="featured-map-container">
+                        <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
                         {company.jurisdiction ? (
                             <div className={`location-block`}>
                                 {company.location ? (
@@ -199,12 +202,15 @@ const CompanyDetails = ({
                                 </div>
                             </div>
                         )}
-                        <JurisdictionLegend
-                            onOpenRegionInfo={onOpenRegionInfo}
-                        />
-                        <CompanyRevenueChart
-                            annualRevenues={company.annualRevenues}
-                        />
+                        <JurisdictionLegend />
+                        <div className="revenue">
+                            <div className="separator"></div>
+                            <br />
+                            <h2>{i18n.t("companyDetailsScreen:revenue")}</h2>
+                            <CompanyRevenueChart
+                                annualRevenues={company.annualRevenues}
+                            />
+                        </div>
                     </div>
                 </div>
             ),
@@ -212,7 +218,7 @@ const CompanyDetails = ({
     ];
 
     return (
-        <Screen>
+        <Screen className="company-details-screen">
             <div className="details">
                 <div className="tab-button-container">
                     {company.featured

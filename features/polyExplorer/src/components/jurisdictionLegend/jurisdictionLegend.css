@@ -1,30 +1,24 @@
 .location-legend {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    padding: 2px 30px 2px 30px;
-    width: 100%;
-    margin-top: 4px;
+    margin: 0 30px;
 }
 
 .location-legend p {
-    display: inline-block;
     flex: 0 0 auto;
     font-weight: 500;
     font-size: 10px;
     line-height: 14px;
     color: var(--color-medium);
-    margin: 0px 4px;
     height: 12px;
 }
 
 .location-legend .source {
-    flex: 1 1 auto;
-    justify-content: flex-start;
+    text-align: start;
+    display: block;
+    width: 100%;
+    margin: 0;
 }
 
 .location-legend .source p {
-    display: block;
     margin: 0;
 }
 
@@ -34,10 +28,14 @@
     height: 26px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+}
+
+.location-legend .legend p {
+    margin: 0px 4px 0 0;
 }
 
 .location-legend .legend div {
+    margin: 0px 4px 0 0;
     display: flex;
     flex-direction: row;
     flex: 0 0 auto;
