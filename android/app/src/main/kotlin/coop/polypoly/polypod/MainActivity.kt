@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             .setSubtitle(this.getString(
                 R.string.auth_subtitle
             ))
-            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
             .build()
 
         val context = this

@@ -9,12 +9,13 @@ import java.io.FileOutputStream
 import java.lang.Exception
 
 open class PolyIn(
-    private val databaseName: String = "data.nt",
+    private val databaseName: String = "data_enc.nt",
     private val databaseFolder: File? = null,
     private val context: Context,
 ) {
     val NS = "polypoly"
     val LANG = "N-TRIPLE"
+    private val databaseNameOld = "data.nt"
 
     private val model: Model = load()
     private var encryptedFileOut: FileOutputStream? = null
@@ -59,6 +60,18 @@ open class PolyIn(
         if (!database.exists()) {
             return model
         }
+
+        // Migrate old unencrypted database
+        // TODO: Remove this when migration is not needed anymore
+        val unencryptedDatabase = File(databaseFolder, databaseNameOld)
+        if (!unencryptedDatabase.exists()) {
+            unencryptedDatabase.inputStream().use { inputStream ->
+                model.read(inputStream, null, LANG)
+            }
+            unencryptedDatabase.delete()
+            return model
+        }
+
         if (encryptedDatabase == null) {
             val mainKey = MasterKey.Builder(context!!)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
