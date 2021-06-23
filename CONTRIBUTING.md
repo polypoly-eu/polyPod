@@ -61,6 +61,6 @@ maintainability's sake during code review.
 For the time being, issues are disabled in this repo. If it's an easy fix (such
 as a typo) you can go and create a pull request, possibly in *draft* mode, so
 that the dev team can interact with you. If it's any other kind of issue, such
-as a feature request, please email us at feedback@polypoly.eu. Please understand
+as a feature request, please email us at community@polypoly.coop. Please understand
 that this is a temporary solution, and issues will be enabled in due course.
 
