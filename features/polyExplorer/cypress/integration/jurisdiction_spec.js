@@ -1,6 +1,8 @@
-describe("Jurisdiction", () => {
+const INDEX_ROUTE = "dist/index.html";
+
+describe("Data region", () => {
     beforeEach(() => {
-        cy.visit("/");
+        cy.visit(INDEX_ROUTE);
         cy.get(".button-container button")
             .click()
             .then(() => {
