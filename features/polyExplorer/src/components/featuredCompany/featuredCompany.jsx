@@ -34,65 +34,42 @@ const FeaturedCompany = () => {
         featuredCompanyAverageValues,
     } = useContext(ExplorerContext);
     const company = selectedCompanyObject;
+
+    const count = {
+        dataTypes: company.dataTypesShared.length,
+        purposes: company.dataSharingPurposes.length,
+        companies: company.dataRecipients.length,
+        jurisdictions: company.jurisdictionsShared
+            ? company.jurisdictionsShared.children.length
+            : 0,
+    };
+
+    const dataSharingSections = [
+        "dataTypes",
+        "purposes",
+        "companies",
+        "jurisdictions",
+    ];
+
     return (
         <div className="featured-company-card">
             <div className="data-sharing-section-list">
-                <DataSharingSection
-                    sharingType="dataTypes"
-                    count={company.dataTypesShared.length}
-                    max={featuredCompanyMaxValues.dataTypes}
-                    average={featuredCompanyAverageValues.dataTypes}
-                    stateChange={{
-                        explorationState: {
-                            section: "dataTypes",
-                            index: null,
-                            category: null,
-                        },
-                    }}
-                />
-                <DataSharingSection
-                    sharingType="purposes"
-                    count={company.dataSharingPurposes.length}
-                    max={featuredCompanyMaxValues.purposes}
-                    average={featuredCompanyAverageValues.purposes}
-                    stateChange={{
-                        explorationState: {
-                            section: "purposes",
-                            index: null,
-                            category: null,
-                        },
-                    }}
-                />
-                <DataSharingSection
-                    sharingType="companies"
-                    count={company.dataRecipients.length}
-                    max={featuredCompanyMaxValues.companies}
-                    average={featuredCompanyAverageValues.companies}
-                    stateChange={{
-                        explorationState: {
-                            section: "companies",
-                            index: null,
-                            category: null,
-                        },
-                    }}
-                />
-                <DataSharingSection
-                    sharingType="jurisdictions"
-                    count={
-                        company.jurisdictionsShared
-                            ? company.jurisdictionsShared.children.length
-                            : 0
-                    }
-                    max={featuredCompanyMaxValues.jurisdictions}
-                    average={featuredCompanyAverageValues.jurisdictions}
-                    stateChange={{
-                        explorationState: {
-                            section: "jurisdictions",
-                            index: null,
-                            category: null,
-                        },
-                    }}
-                />
+                {dataSharingSections.map((section) => (
+                    <DataSharingSection
+                        key={section}
+                        sharingType={section}
+                        count={count[section]}
+                        max={featuredCompanyMaxValues[section]}
+                        average={featuredCompanyAverageValues[section]}
+                        stateChange={{
+                            explorationState: {
+                                section: section,
+                                index: null,
+                                category: null,
+                            },
+                        }}
+                    />
+                ))}
             </div>
         </div>
     );
