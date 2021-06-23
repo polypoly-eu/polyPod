@@ -7,9 +7,17 @@ You are very welcome to participate in this project. Please check the [`README`
 file](README.md) for general layout and organization, as well as general
 guidelines on how to work with it.
 
-## Prerrequisite
+## Code of conduct
 
-If you wish to contribute code, please send an email to feedback@polypoly.net,
+All members of the project community must abide by 
+[polypoly's Code of Conduct](https://polypoly.coop/en-de/codeofconduct). 
+Only by respecting each other we can develop a productive, collaborative community. 
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported
+by contacting community@polypoly.coop.
+
+## Contributor agreement
+
+If you wish to make a contribution, please send an email to community@polypoly.coop,
 and we will walk you through the process of signing our contributor license
 agreement. We will make this process easier over time.
 
