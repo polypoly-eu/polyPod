@@ -110,6 +110,8 @@ open class PolyIn(
 
             encryptedFileOut = encryptedDatabase!!.openFileOutput()
             model.write(encryptedFileOut, "N-TRIPLE")
+            encryptedFileOut?.flush()
+            encryptedFileOut?.close()
         } catch (e: Exception) {
             tempDatabase.renameTo(database)
         }

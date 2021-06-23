@@ -5,11 +5,13 @@ import com.google.common.truth.Truth
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyIn.rdf.*
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 import java.security.*
@@ -23,6 +25,7 @@ import javax.crypto.KeyGeneratorSpi
 @Config(sdk = [Config.OLDEST_SDK])
 class PolyInTest {
     val TEST_DB_NAME = "test_database.nt"
+    private var polyIn: PolyIn? = null
 
     init {
         Security.addProvider(object : Provider(
@@ -39,38 +42,11 @@ class PolyInTest {
                 )
             }
         })
-    }
-
-    private val polyIn = PolyIn("test_database.nt",
-        context = androidx.test.core.app.ApplicationProvider
-            .getApplicationContext ()
-    )
-
-    @Before
-    fun setup() {
-        polyIn.clean()
-    }
-
-    @Test
-    fun storingStrings_works() {
-
-        val storageData: List<Quad>  = listOf(
-            QuadBuilder.new().withDefaultGraph()
-                .withObject(BlankNode("privateData"))
-                .withSubject(BlankNode("someCompany"))
-                .withPredicate(IRI("https://polypoly.coop/storing"))
-                .build()
+        File(null as File?, TEST_DB_NAME).delete()
+        polyIn = PolyIn(TEST_DB_NAME,
+            context = androidx.test.core.app.ApplicationProvider
+                .getApplicationContext ()
         )
-        runBlocking {
-            polyIn.add(storageData)
-        }
-        val returnedData = runBlocking {
-            polyIn.select(
-                Matcher(null, null, null)
-            )
-        }
-        Truth.assertThat(returnedData.size).isEqualTo(storageData.size)
-        Truth.assertThat(returnedData[0].predicate).isEqualTo(storageData[0].predicate)
     }
 
     class MockKeyStore : KeyStoreSpi() {
@@ -153,10 +129,41 @@ class PolyInTest {
         override fun engineGenerateKey() =
             wrapped.generateKey()
     }
+
+    @Before
+    fun setup() {
+        File(null as File?, TEST_DB_NAME).delete()
+        polyIn?.clean()
+    }
+
+    @After
+    fun teardown(){
+        File(null as File?, TEST_DB_NAME).delete()
+    }
+    @Test
+    fun storingStrings_works() {
+
+        val storageData: List<Quad>  = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData"))
+                .withSubject(BlankNode("someCompany"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build()
+        )
+        runBlocking {
+            polyIn?.add(storageData)
+        }
+        val returnedData = runBlocking {
+            polyIn?.select(
+                Matcher(null, null, null)
+            )
+        }
+        Truth.assertThat(returnedData?.size).isEqualTo(storageData.size)
+        Truth.assertThat(returnedData!![0].predicate).isEqualTo(storageData[0].predicate)
+    }
+
     @Test
     fun matcher_works() {
-        polyIn.clean()
-
         val storageData: List<Quad>  = listOf(
             QuadBuilder.new().withDefaultGraph()
                 .withObject(BlankNode("privateData"))
@@ -176,10 +183,10 @@ class PolyInTest {
         )
 
         runBlocking {
-            polyIn.add(storageData)
+            polyIn?.add(storageData)
         }
         val returnedData = runBlocking {
-            polyIn.select(
+            polyIn?.select(
                 Matcher(
                     null,
                     IRI("https://polypoly.coop/justChecking"),
@@ -188,8 +195,8 @@ class PolyInTest {
             )
         }
 
-        Truth.assertThat(returnedData.size).isEqualTo(1)
+        Truth.assertThat(returnedData!!.size).isEqualTo(1)
         Truth.assertThat(
-            returnedData[0].predicate).isEqualTo(storageData[2].predicate)
+            returnedData!![0].predicate).isEqualTo(storageData[2].predicate)
     }
 }
