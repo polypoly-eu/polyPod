@@ -40,7 +40,6 @@ const relativeDecoder = pipe(
             return Decode.success(string);
         }
         const url = new URL(string, document.location.href);
-        console.log(url.toString());
         if (url.toString() == "") return Decode.failure(string, "relative");
 
         return Decode.success(string);
