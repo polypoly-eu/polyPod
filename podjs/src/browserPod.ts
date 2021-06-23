@@ -128,6 +128,7 @@ class BrowserPolyNav implements PolyNav {
         injection?.contentWindow?.postMessage(title, "*");
     }
 }
+
 declare global {
     interface Window {
         manifestData: string;
@@ -135,6 +136,7 @@ declare global {
         currentTitle: string;
     }
 }
+
 export class BrowserPod implements Pod {
     constructor() {
         window.addEventListener("load", async () => {
