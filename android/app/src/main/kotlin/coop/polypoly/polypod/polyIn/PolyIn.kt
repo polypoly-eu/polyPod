@@ -5,6 +5,8 @@ import coop.polypoly.polypod.polyIn.rdf.*
 import org.apache.jena.rdf.model.*
 import java.io.File
 import androidx.security.crypto.*
+import java.io.FileOutputStream
+import java.lang.Exception
 
 open class PolyIn(
     private val databaseName: String = "data.nt",
@@ -15,6 +17,8 @@ open class PolyIn(
     val LANG = "N-TRIPLE"
 
     private val model: Model = load()
+    private var encryptedFileOut: FileOutputStream? = null
+    private var encryptedDatabase: EncryptedFile? = null
 
     open suspend fun select(matcher: Matcher): List<Quad> {
         val retList: MutableList<Quad> = mutableListOf()
@@ -44,6 +48,7 @@ open class PolyIn(
                 quadObjectToResource(quad.`object`)
             )
         }
+        // TODO: Implement "isDirty" flag or expose save() to features
         save()
     }
 
@@ -54,50 +59,61 @@ open class PolyIn(
         if (!database.exists()) {
             return model
         }
-        val mainKey = MasterKey.Builder(context!!)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .setUserAuthenticationRequired(true)
-            .build()
+        if (encryptedDatabase == null) {
+            val mainKey = MasterKey.Builder(context!!)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .setUserAuthenticationRequired(true)
+                .build()
 
-        val encryptedDatabase = EncryptedFile.Builder(
-            context,
-            database,
-            mainKey,
-            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-        ).build()
+            encryptedDatabase = EncryptedFile.Builder(
+                context,
+                database,
+                mainKey,
+                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+            ).build()
+        }
 
-        encryptedDatabase.openFileInput().use { inputStream ->
-            try {
-                model.read(inputStream, null, LANG)
-            }
-            catch(e: Exception) {
-                // Migrate from unencrypted RDF store
-                database.inputStream().use { unencryptedInput ->
-                    model.read(unencryptedInput, null, LANG)
-                }
-            }
+        encryptedDatabase!!.openFileInput().use { inputStream ->
+            model.read(inputStream, null, LANG)
         }
         return model
     }
 
     private fun save() {
-        val database = File(databaseFolder, databaseName)
-
-        val mainKey = MasterKey.Builder(context!!)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .setUserAuthenticationRequired(true)
-            .build()
-
-        val encryptedDatabase = EncryptedFile.Builder(
-            context,
-            database,
-            mainKey,
-            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-        ).build()
-
-        encryptedDatabase.openFileOutput().use { out ->
-            model.write(out, "N-TRIPLE")
+        if (encryptedFileOut != null) {
+            model.write(encryptedFileOut, "N-TRIPLE")
+            return
         }
+
+        // We cannot append to encrypted files, so we make a copy of an old file
+        // and create a new encrypted one for writing
+        val tempFileName = "temp_" + databaseName
+        val database = File(databaseFolder, databaseName)
+        val tempDatabase = File(databaseFolder, tempFileName)
+        if (!database.exists()) {
+            database.createNewFile()
+        }
+        database.renameTo(tempDatabase)
+        try {
+
+            val mainKey = MasterKey.Builder(context!!)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .setUserAuthenticationRequired(true)
+                .build()
+
+            encryptedDatabase = EncryptedFile.Builder(
+                context,
+                database,
+                mainKey,
+                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+            ).build()
+
+            encryptedFileOut = encryptedDatabase!!.openFileOutput()
+            model.write(encryptedFileOut, "N-TRIPLE")
+        } catch (e: Exception) {
+            tempDatabase.renameTo(database)
+        }
+        File(databaseFolder, tempFileName).delete()
     }
 
     open fun clean() {
