@@ -672,6 +672,7 @@ const DataExplorationScreen = () => {
                                 <CompanyIndustryList
                                     companyIndustryMap={companyIndustryMap}
                                     ecoItems={dataRecipients.length > 100}
+                                    activeExplorationIndex={activeIndex}
                                 />
                             </div>
                         </SwiperSlide>

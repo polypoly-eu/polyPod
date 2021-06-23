@@ -1,6 +1,7 @@
 import React from "react";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
+import { useHistory } from "react-router";
 
 import "./companyIndustryList.css";
 
@@ -14,35 +15,43 @@ const CompanyItem = ({ company, ecoMode }) =>
         <CompanyShortInfo company={company} />
     );
 
-class CompanyIndustryList extends React.PureComponent {
-    render() {
-        return (
-            <Scrollable>
-                <div className="company-industry-list">
-                    {Object.entries(this.props.companyIndustryMap).map(
-                        ([industry, companies], index) => (
-                            <div
-                                key={index}
-                                className="company-industry-list-group"
-                            >
-                                <hr />
-                                <h1>
-                                    {industry} ({companies.length})
-                                </h1>
-                                {companies.map((company, index) => (
-                                    <CompanyItem
-                                        key={index}
-                                        company={company}
-                                        ecoMode={true}
-                                    />
-                                ))}
-                            </div>
-                        )
-                    )}
-                </div>
-            </Scrollable>
-        );
-    }
-}
+const CompanyIndustryList = ({
+    companyIndustryMap,
+    ecoItems,
+    activeExplorationIndex,
+}) => {
+    const history = useHistory();
+
+    const saveActiveIndex = () => {
+        history.location.state.explorationState.index = activeExplorationIndex;
+    };
+
+    return (
+        <Scrollable>
+            <div className="company-industry-list" onClick={saveActiveIndex}>
+                {Object.entries(companyIndustryMap).map(
+                    ([industry, companies], index) => (
+                        <div
+                            key={index}
+                            className="company-industry-list-group"
+                        >
+                            <hr />
+                            <h1>
+                                {industry} ({companies.length})
+                            </h1>
+                            {companies.map((company, index) => (
+                                <CompanyItem
+                                    key={index}
+                                    company={company}
+                                    ecoMode={ecoItems}
+                                />
+                            ))}
+                        </div>
+                    )
+                )}
+            </div>
+        </Scrollable>
+    );
+};
 
 export default CompanyIndustryList;
