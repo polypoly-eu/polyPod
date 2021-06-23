@@ -1,18 +1,18 @@
-<svg width="308" height="217" viewBox="0 0 308 217" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="308" height="219" viewBox="0 0 308 219" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="featuredCompany">
 <g id="Bar">
-<text id="115" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="260.128" y="112.17">115</tspan></text>
-<text id="30" opacity="0.7" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="89.567" y="112.17">30</tspan></text>
-<rect id="Rectangle 693" x="15.2207" y="88.5" width="264.88" height="11" rx="5.5" stroke="#3749A9"/>
-<path id="Rectangle 692" d="M14.7207 94C14.7207 90.6863 17.407 88 20.7207 88H81.8807V100H20.7207C17.407 100 14.7207 97.3137 14.7207 94Z" fill="#3749A9"/>
-<line id="Line 164" opacity="0.7" x1="96.5" y1="88" x2="96.5" y2="100" stroke="#3749A9"/>
-<text id="highlighted1" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="24" letter-spacing="-0.01em"><tspan x="14.7207" y="78.84">25 Dateneinträge</tspan></text>
+<text id="115" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="262.343" y="114.17">115</tspan></text>
+<text id="30" opacity="0.7" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="89.567" y="114.17">30</tspan></text>
+<rect id="Rectangle 693" x="15.2207" y="90.5" width="264.88" height="11" rx="5.5" stroke="#3749A9"/>
+<path id="Rectangle 692" d="M14.7207 96C14.7207 92.6863 17.407 90 20.7207 90H81.8807V102H20.7207C17.407 102 14.7207 99.3137 14.7207 96Z" fill="#3749A9"/>
+<line id="Line 164" opacity="0.7" x1="96.5" y1="90" x2="96.5" y2="102" stroke="#3749A9"/>
+<rect id="highlighted1" x="15" y="58" width="185.84" height="29" fill="#FF0000"/>
 </g>
-<text id="text2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="158.17">Durchschnittlicher Wert </tspan><tspan x="0" y="172.17">aller derzeit verf&#xfc;gbaren </tspan><tspan x="0" y="186.17">Firmeninformationen in </tspan><tspan x="0" y="200.17">dieser Kategorie.</tspan></text>
-<text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="15" y="11.17">Maximale Anzahl </tspan><tspan x="15" y="25.17">f&#xfc;r diese Firma.</tspan></text>
-<line id="Line 163" x1="96.5" y1="143" x2="96.5" y2="118" stroke="#0F1938"/>
-<line id="Line 166" x1="47.5" y1="56" x2="47.5" y2="31" stroke="#0F1938"/>
-<line id="Line 165" x1="271.5" y1="143" x2="271.5" y2="118" stroke="#0F1938"/>
-<text id="text3" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="166" y="158.17">Wert der Firma, die in </tspan><tspan x="166" y="172.17">dieser Kategorie von allen </tspan><tspan x="166" y="186.17">derzeit verf&#xfc;gbaren </tspan><tspan x="166" y="200.17">Firmeninformationen, den </tspan><tspan x="166" y="214.17">h&#xf6;chsten Wert aufweist. </tspan></text>
+<line id="Line 163" x1="96.5" y1="145" x2="96.5" y2="120" stroke="#0F1938"/>
+<line id="Line 166" x1="47.5" y1="58" x2="47.5" y2="33" stroke="#0F1938"/>
+<line id="Line 165" x1="271.5" y1="145" x2="271.5" y2="120" stroke="#0F1938"/>
+<rect id="text1" x="7" width="90" height="28" fill="#FF0000"/>
+<rect id="text2" y="150" width="131" height="56" fill="#FF0000"/>
+<rect id="text3" x="166" y="149" width="142" height="70" fill="#FF0000"/>
 </g>
 </svg>

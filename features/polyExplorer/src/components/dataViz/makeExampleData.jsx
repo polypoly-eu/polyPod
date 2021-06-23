@@ -209,12 +209,10 @@ export default function makeExampleData() {
         { purpose: "purpose6", value: 1 },
     ];
 
-    exampleCompanies[0].jurisdictionsShared = getCountryValues(
-        BMWjurisdictionData
-    );
-    exampleCompanies[1].jurisdictionsShared = getCountryValues(
-        IKEAjurisdictionData
-    );
+    exampleCompanies[0].jurisdictionsShared =
+        getCountryValues(BMWjurisdictionData);
+    exampleCompanies[1].jurisdictionsShared =
+        getCountryValues(IKEAjurisdictionData);
 
     exampleCompanies[0].dataTypesShared = getCompanyDataSharing("BMW**");
     exampleCompanies[1].dataTypesShared = getCompanyDataSharing("IKEA");

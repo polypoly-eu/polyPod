@@ -54,7 +54,10 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                         onChange={(e) => handleSearch(e.target.value)}
                     />
                     {searchString == "" ? null : (
-                        <button onClick={() => handleClear()}>
+                        <button
+                            className={searchString ? "clr active" : "clr"}
+                            onClick={() => handleClear()}
+                        >
                             <img src="./images/clear-search.svg" />
                         </button>
                     )}

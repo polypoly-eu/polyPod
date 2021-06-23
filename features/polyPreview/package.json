@@ -11,7 +11,6 @@
     "swiper": "^6.4.11"
   },
   "devDependencies": {
-    "@polypoly-eu/eslint-config": "file:../../eslint-config",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch",
     "@rollup/plugin-json": "^4.1.0",

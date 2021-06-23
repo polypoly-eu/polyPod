@@ -8,7 +8,8 @@ export default {
         format: "iife",
         globals: {
             "react": "React",
-            "react-dom": "ReactDOM"
+            "react-dom": "ReactDOM",
+            "pod": "pod"
         }
     },
     plugins: [
@@ -22,6 +23,7 @@ export default {
                     src: [
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
+                        "node_modules/@polypoly-eu/podjs/dist/pod.js",
                         "src/index.html",
                         "manifest.json"
                     ],
@@ -31,5 +33,5 @@ export default {
             verbose: true
         })
     ],
-    external: ["react", "react-dom"]
+    external: ["react", "react-dom", "pod"]
 };

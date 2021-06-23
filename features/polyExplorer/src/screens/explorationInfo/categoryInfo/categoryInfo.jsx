@@ -34,7 +34,9 @@ const CategoryInfo = ({ category, company, onClose }) => {
                 {highlights[company.ppid].dataTypeCategories[category]
                     .explanation ? (
                     <div>
-                        <h2>{i18n.t("explorationCategoryInfoScreen")}</h2>
+                        <h2>
+                            {i18n.t("explorationCategoryInfoScreen:subheading")}
+                        </h2>
                         <p>
                             {
                                 highlights[company.ppid].dataTypeCategories[

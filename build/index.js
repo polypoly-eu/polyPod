@@ -3,13 +3,13 @@
 const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
+const validCommands = ["build", "test", "lint", "lintfix", "list", "list-deps"];
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
     if (parameters.includes("--help") || parameters.length > 1)
         return { scriptPath, command: null };
 
-    const validCommands = ["build", "test", "lint", "list", "list-deps"];
     const command = parameters.length ? parameters[0] : "build";
     return {
         scriptPath,
@@ -19,7 +19,7 @@ function parseCommandLine() {
 
 function showUsage(scriptPath) {
     console.error(
-        `Usage: ${path.basename(scriptPath)} [lint | test | list | list-deps]`
+        `Usage: ${path.basename(scriptPath)} [ ${validCommands.join(" | ")} ]`
     );
     console.error("  Run without arguments to build all packages");
 }
@@ -50,9 +50,8 @@ function extractDependencies(manifest) {
 
 function createPackageData(path) {
     const manifest = parseManifest(`${path}/package.json`);
-    const { localDependencies, remoteDependencies } = extractDependencies(
-        manifest
-    );
+    const { localDependencies, remoteDependencies } =
+        extractDependencies(manifest);
     return {
         path,
         name: manifest.name,
@@ -70,9 +69,9 @@ function createPackageTree(metaManifest) {
     );
 }
 
-const logMain = (message) => console.log(`\n***** ${message}`);
+const logMain = (message) => console.log(`\n 🚧 ${message}`);
 
-const logDetail = (message) => console.log(`\n*** ${message}`);
+const logDetail = (message) => console.log(`\n 🏗️ ${message}`);
 
 function logDependencies(packageTree) {
     const dependencyMap = {};
@@ -96,7 +95,6 @@ function logDependencies(packageTree) {
 
 function executeProcess(executable, args, env = process.env) {
     const spawnedProcess = spawn(executable, args, { env: env });
-
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
     });
@@ -130,10 +128,6 @@ async function npmRun(script, pkg) {
 
 const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
-    lint: (pkg) =>
-        npmInstall("@polypoly-eu/eslint-config").then(() =>
-            npmRun("lint", pkg)
-        ),
     test: (pkg) => npmRun("test", pkg),
 };
 
@@ -172,7 +166,11 @@ async function processPackage(name, packageTree, command) {
     const entries = Object.entries(packageTree);
     const total = entries.length;
     const current = entries.filter(([, pkg]) => pkg.processed).length + 1;
-    logMain(`Executing ${command} for ${pkg.path} [${current}/${total}] ...`);
+    logMain(
+        `Executing ${command} for ${ANSIBold(
+            pkg.path
+        )} [${current}/${total}] ...`
+    );
     await executeCommand(pkg, command);
     pkg.processed = true;
 }
@@ -187,6 +185,14 @@ async function processAll(packageTree, command) {
         await processPackage(name, packageTree, command);
 }
 
+function ANSIBold(string) {
+    return `\x1b[1m${string}\x1b[0m`;
+}
+
+function logSuccess(command) {
+    logMain(`✅ Command «${ANSIBold(command)}» succeeded!`);
+}
+
 async function main() {
     const { scriptPath, command } = parseCommandLine();
     if (!command) {
@@ -195,6 +201,23 @@ async function main() {
     }
 
     process.chdir(path.dirname(scriptPath));
+
+    const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
+
+    if (command === "lint") {
+        logDetail(`🧹 ...`);
+        await npm("ci", "--no-update-notifier", "--no-fund");
+        await executeProcess("npx", ["eslint", ...eslintOptions]);
+        logSuccess(command);
+        return 0;
+    }
+
+    if (command === "lintfix") {
+        logDetail(`🚨 ...`);
+        await executeProcess("npx", ["eslint", "--fix", ...eslintOptions]);
+        logSuccess(command);
+        return 0;
+    }
 
     const metaManifest = parseManifest("build/packages.json");
     const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
@@ -209,7 +232,7 @@ async function main() {
     try {
         const packageTree = createPackageTree(metaManifest);
         await processAll(packageTree, command);
-        logMain(`Command '${command}' succeeded!`);
+        logSuccess(command);
         return 0;
     } catch (error) {
         logMain(`Command '${command}' failed: ${error}\n`);

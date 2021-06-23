@@ -21,6 +21,8 @@ struct SettingsView: View {
                             return "settings_privacy_policy_title"
                         case .termsOfUse:
                             return "settings_terms_of_use_title"
+                        case .licenses:
+                            return "settings_licenses_title"
                         }
                     }())
                     .foregroundColor(Color.PolyPod.darkForeground)
@@ -41,6 +43,8 @@ struct SettingsView: View {
                 HTMLView(text: "settings_privacy_policy_text")
             case .termsOfUse:
                 HTMLView(text: "settings_terms_of_use_text")
+            case .licenses:
+                LicensesView()
             }
         }
     }
@@ -55,7 +59,7 @@ struct SettingsView: View {
 }
 
 private enum Sections {
-    case main, imprint, privacyPolicy, termsOfUse
+    case main, imprint, privacyPolicy, termsOfUse, licenses
 }
 
 struct SettingsView_Previews: PreviewProvider {
@@ -108,6 +112,10 @@ private struct MainSection: View {
                     label: "settings_terms_of_use_title",
                     action: { activeSection = .termsOfUse }
                 )
+                SettingsButton(
+                    label: "settings_licenses_title",
+                    action: { activeSection = .licenses }
+                )
             }
             .listRowInsets(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
@@ -149,5 +157,32 @@ private struct SettingsButton: View {
                 .font(.custom("Jost-Regular", size: 18))
                 .kerning(-0.18)
         }.padding(.leading, 32)
+    }
+}
+
+private struct LicensesView: View {
+    var body: some View {
+        ScrollView {
+            Text(loadLicenseText())
+                .font(.system(size: 7, design: .monospaced))
+                .padding(10)
+        }
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .topLeading
+        )
+    }
+    
+    private func loadLicenseText() -> String {
+        let licenseFiles = ["ios-licenses.txt", "js-licenses.txt"]
+        let licensesUrl = Bundle.main.bundleURL
+            .appendingPathComponent("3rd-party-licenses")
+        let licenses = licenseFiles.map { (file: String) -> String in
+            let url = licensesUrl.appendingPathComponent(file)
+            let content = (try? String(contentsOf: url)) ?? ""
+            return content.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return licenses.joined(separator: "\n\n\n")
     }
 }
