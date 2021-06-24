@@ -47,6 +47,47 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    class polyAuthCallback(
+        val context: MainActivity,
+        val successfulAuth: () -> Unit
+    ): BiometricPrompt.AuthenticationCallback() {
+        override fun onAuthenticationError(
+            errorCode: Int,
+            errString: CharSequence
+        ) {
+            super.onAuthenticationError(errorCode, errString)
+            Toast.makeText(
+                context,
+                context.getString(R.string.auth_error, errString),
+                Toast.LENGTH_SHORT
+            ).show()
+            exitProcess(0)
+        }
+
+        override fun onAuthenticationSucceeded(
+            result: BiometricPrompt.AuthenticationResult
+        ) {
+            super.onAuthenticationSucceeded(result)
+            Toast.makeText(
+                context,
+                context.getString(R.string.auth_success),
+                Toast.LENGTH_SHORT
+            ).show()
+
+            successfulAuth()
+        }
+
+        override fun onAuthenticationFailed() {
+            super.onAuthenticationFailed()
+            Toast.makeText(
+                context,
+                context.getString(R.string.auth_error, "Canceled"),
+                Toast.LENGTH_SHORT
+            ).show()
+            exitProcess(0)
+        }
+    }
+
     fun authorize(successfulAuth: (() -> Unit)) {
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle(this.getString(
@@ -55,48 +96,14 @@ class MainActivity : AppCompatActivity() {
             .setSubtitle(this.getString(
                 R.string.auth_subtitle
             ))
-            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+            .setAllowedAuthenticators(
+                BiometricManager.Authenticators.BIOMETRIC_WEAK or
+                    BiometricManager.Authenticators.DEVICE_CREDENTIAL
+            )
             .build()
 
-        val context = this
         val executor = ContextCompat.getMainExecutor(this)
-        val callback = object : BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationError(
-                errorCode: Int,
-                errString: CharSequence
-            ) {
-                super.onAuthenticationError(errorCode, errString)
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.auth_error, errString),
-                    Toast.LENGTH_SHORT
-                ).show()
-                exitProcess(0)
-            }
-
-            override fun onAuthenticationSucceeded(
-                result: BiometricPrompt.AuthenticationResult
-            ) {
-                super.onAuthenticationSucceeded(result)
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.auth_success),
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                successfulAuth()
-            }
-
-            override fun onAuthenticationFailed() {
-                super.onAuthenticationFailed()
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.auth_error, "Canceled"),
-                    Toast.LENGTH_SHORT
-                ).show()
-                exitProcess(0)
-            }
-        }
+        val callback = polyAuthCallback(this, successfulAuth)
         BiometricPrompt(this, executor, callback).authenticate(promptInfo)
     }
 }
