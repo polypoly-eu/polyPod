@@ -6,7 +6,7 @@ import companyDetailsScreenEn from "./locales/en/companyDetailsScreen.json";
 import companySearchScreenEn from "./locales/en/companySearchScreen.json";
 import mainScreenEn from "./locales/en/mainScreen.json";
 import onboardingPopupEn from "./locales/en/onboardingPopup.json";
-import featuredCompanyEn from "./locales/en/featuredCompany.json";
+// import featuredCompanyEn from "./locales/en/featuredCompany.json";
 import dataSharingGaugeEn from "./locales/en/dataSharingGauge.json";
 import dataExplorationScreenEn from "./locales/en/dataExplorationScreen.json";
 import featuredCompanyInfoScreenEn from "./locales/en/featuredCompanyInfoScreen.json";
@@ -27,7 +27,7 @@ import companyDetailsScreenDe from "./locales/de/companyDetailsScreen.json";
 import companySearchScreenDe from "./locales/de/companySearchScreen.json";
 import mainScreenDe from "./locales/de/mainScreen.json";
 import onboardingPopupDe from "./locales/de/onboardingPopup.json";
-import featuredCompanyDe from "./locales/de/featuredCompany.json";
+// import featuredCompanyDe from "./locales/de/featuredCompany.json";
 import dataSharingGaugeDe from "./locales/de/dataSharingGauge.json";
 import dataExplorationScreenDe from "./locales/de/dataExplorationScreen.json";
 import featuredCompanyInfoScreenDe from "./locales/de/featuredCompanyInfoScreen.json";
@@ -50,7 +50,7 @@ export default new I18n(determineLanguage(), {
         companySearchScreen: companySearchScreenEn,
         mainScreen: mainScreenEn,
         onboardingPopup: onboardingPopupEn,
-        featuredCompany: featuredCompanyEn,
+        // featuredCompany: featuredCompanyEn,
         dataSharingGauge: dataSharingGaugeEn,
         dataExplorationScreen: dataExplorationScreenEn,
         featuredCompanyInfoScreen: featuredCompanyInfoScreenEn,
@@ -72,7 +72,7 @@ export default new I18n(determineLanguage(), {
         companySearchScreen: companySearchScreenDe,
         mainScreen: mainScreenDe,
         onboardingPopup: onboardingPopupDe,
-        featuredCompany: featuredCompanyDe,
+        // featuredCompany: featuredCompanyDe,
         dataSharingGauge: dataSharingGaugeDe,
         dataExplorationScreen: dataExplorationScreenDe,
         featuredCompanyInfoScreen: featuredCompanyInfoScreenDe,

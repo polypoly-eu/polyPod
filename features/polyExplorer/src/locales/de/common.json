@@ -87,8 +87,6 @@
         "Datenregionen",
     "source":
         "Quelle",
-    "how-to-read":
-        "Wie ist das zu verstehen?",
     "purpose.name.i18nkey":
         "Translation_DE",
     "purpose.description.i18nkey":
@@ -98,5 +96,5 @@
     "button.ok":
         "OK",
     "button.scroll":
-        "Scrolle nach oben für mehr"
+        "Scrolle hoch für mehr"
 }
