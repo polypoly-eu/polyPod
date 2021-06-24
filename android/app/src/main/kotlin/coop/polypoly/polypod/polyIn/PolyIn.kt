@@ -100,7 +100,7 @@ open class PolyIn(
         // Migrate old unencrypted database
         // TODO: Remove this when migration is not needed anymore
         val unencryptedDatabase = File(databaseFolder, databaseNameOld)
-        if (!unencryptedDatabase.exists()) {
+        if (unencryptedDatabase.exists()) {
             unencryptedDatabase.inputStream().use { inputStream ->
                 model.read(inputStream, null, RDF_FORMAT)
             }

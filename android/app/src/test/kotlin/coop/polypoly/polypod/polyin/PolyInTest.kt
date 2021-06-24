@@ -5,9 +5,7 @@ import com.google.common.truth.Truth
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyIn.rdf.*
 import kotlinx.coroutines.runBlocking
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -43,9 +41,10 @@ class PolyInTest {
             }
         })
         File(null as File?, TEST_DB_NAME).delete()
-        polyIn = PolyIn(TEST_DB_NAME,
+        polyIn = PolyIn(
+            TEST_DB_NAME,
             context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext ()
+                .getApplicationContext()
         )
     }
 
@@ -137,13 +136,13 @@ class PolyInTest {
     }
 
     @After
-    fun teardown(){
+    fun teardown() {
         File(null as File?, TEST_DB_NAME).delete()
     }
+
     @Test
     fun storingStrings_works() {
-
-        val storageData: List<Quad>  = listOf(
+        val storageData: List<Quad> = listOf(
             QuadBuilder.new().withDefaultGraph()
                 .withObject(BlankNode("privateData"))
                 .withSubject(BlankNode("someCompany"))
@@ -159,12 +158,13 @@ class PolyInTest {
             )
         }
         Truth.assertThat(returnedData?.size).isEqualTo(storageData.size)
-        Truth.assertThat(returnedData!![0].predicate).isEqualTo(storageData[0].predicate)
+        Truth.assertThat(returnedData!![0].predicate)
+            .isEqualTo(storageData[0].predicate)
     }
 
     @Test
     fun matcher_works() {
-        val storageData: List<Quad>  = listOf(
+        val storageData: List<Quad> = listOf(
             QuadBuilder.new().withDefaultGraph()
                 .withObject(BlankNode("privateData"))
                 .withSubject(BlankNode("someCompany"))
@@ -197,6 +197,85 @@ class PolyInTest {
 
         Truth.assertThat(returnedData!!.size).isEqualTo(1)
         Truth.assertThat(
-            returnedData!![0].predicate).isEqualTo(storageData[2].predicate)
+            returnedData!![0].predicate
+        ).isEqualTo(storageData[2].predicate)
+    }
+
+    @Test
+    fun coldStorage_works() {
+        val storageData: List<Quad> = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData"))
+                .withSubject(BlankNode("someCompany"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build()
+        )
+        val database = File(null as File?, TEST_DB_NAME)
+        if (database.exists()) {
+            database.delete()
+        }
+        PolyIn(
+            TEST_DB_NAME,
+            context = androidx.test.core.app.ApplicationProvider
+                .getApplicationContext()
+        ).let {
+            runBlocking {
+                it.add(storageData)
+            }
+        }
+
+        val returnedData = PolyIn(
+            TEST_DB_NAME,
+            context = androidx.test.core.app.ApplicationProvider
+                .getApplicationContext()
+        ).let {
+            runBlocking {
+                it.select(
+                    Matcher(null, null, null)
+                )
+            }
+        }
+        Truth.assertThat(returnedData?.size).isEqualTo(storageData.size)
+        Truth.assertThat(returnedData!![0].predicate)
+            .isEqualTo(storageData[0].predicate)
+    }
+
+    @Test
+    fun renaming_fails() {
+        val storageData: List<Quad> = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData"))
+                .withSubject(BlankNode("someCompany"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build()
+        )
+
+        val originalPath = "1" + TEST_DB_NAME
+        val originalDatabase = File(null as File?, originalPath)
+        if (originalDatabase.exists()) {
+            originalDatabase.delete()
+        }
+        PolyIn(
+            originalPath,
+            context = androidx.test.core.app.ApplicationProvider
+                .getApplicationContext()
+        ).let { runBlocking { it.add(storageData) } }
+
+        val movedPath = "2" + TEST_DB_NAME
+        val movedDatabase = File(null as File?, movedPath)
+        originalDatabase.copyTo(movedDatabase)
+        // Moving/renaming encrypted file invalidates encryption
+        Truth.assertThat(
+            kotlin.runCatching {
+                PolyIn(
+                    movedPath,
+                    context = androidx.test.core.app.ApplicationProvider
+                        .getApplicationContext()
+                )
+            }.isFailure
+        ).isTrue()
+
+        movedDatabase.delete()
+        originalDatabase.delete()
     }
 }
