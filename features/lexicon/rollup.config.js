@@ -72,6 +72,10 @@ export default {
                     src: ["node_modules/@polypoly-eu/podjs/dist/pod.js"],
                     dest: "public",
                 },
+                {
+                    src: ["../../android/app/src/main/res/font/jost_medium.ttf"],
+                    dest: "public/fonts",
+                }
             ],
         }),
 
