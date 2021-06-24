@@ -1,5 +1,5 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import "../../poly-look.js";
+import "../../src/markdown-reader";
 
 describe("MarkdownRender", () => {
   const text =

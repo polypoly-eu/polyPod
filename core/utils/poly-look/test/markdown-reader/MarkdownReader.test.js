@@ -1,5 +1,5 @@
 import { html, fixture, expect, waitUntil } from "@open-wc/testing";
-import "../../poly-look.js";
+import "../../src/markdown-reader";
 import sinon from "sinon";
 
 describe("MarkdownReader", () => {
