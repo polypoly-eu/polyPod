@@ -4,6 +4,7 @@ import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 import FeaturedCompany from "../../components/featuredCompany/featuredCompany.jsx";
+import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
 
@@ -12,6 +13,7 @@ const CompanyDetails = ({
     featuredCompanyMaxValues,
     featuredCompanyAverageValues,
     onOpenDataExplorationSection,
+    onOpenInfo,
 }) => {
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
@@ -126,6 +128,7 @@ const CompanyDetails = ({
                             onOpenDataExplorationSection
                         }
                     ></FeaturedCompany>
+                    <InfoButton onClick={onOpenInfo} />
                     <div className="explore-data-btn-area">
                         <button
                             className="explore-data-btn"

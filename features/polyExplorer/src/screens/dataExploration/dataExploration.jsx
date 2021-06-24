@@ -294,6 +294,11 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <InfoButton
+                        onClick={() => {
+                            openDataTypesInfo(activeIndex);
+                        }}
+                    />
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
                 </div>
@@ -349,6 +354,11 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <InfoButton
+                        onClick={() => {
+                            openDataTypesInfo(activeIndex);
+                        }}
+                    />
                     <div className="data-sharing-legend-fill"></div>
                 </div>
             );
@@ -434,6 +444,11 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <InfoButton
+                        onClick={() => {
+                            openCompaniesInfo(activeIndex);
+                        }}
+                    />
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
                 </div>
