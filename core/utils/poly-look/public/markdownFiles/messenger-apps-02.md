@@ -10,8 +10,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut sem lacinia er
 * **Lorem ipsum dolor sit amet,**
 * **Lorem ipsum dolor sit amet,**
 
-@@<poly-tabs tabs='[{"id": "tab01", "label": "Option 1", "active": true}, {"id": "tab02", "label": "Option 2", "active": false}, {"id": "tab03", "label": "Option 3", "active": false}]'>
+@@<poly-tabs-line tabs='[{"id": "tab01", "label": "Option 1", "active": true}, {"id": "tab02", "label": "Option 2", "active": false}, {"id": "tab03", "label": "Option 3", "active": false}]'>
   <div slot="tab01">This is inside tab 01</div>
   <div slot="tab02">This is inside tab 02</div>
   <div slot="tab03">This is inside tab 03</div>
-</poly-tabs>@@
+</poly-tabs-line>@@
