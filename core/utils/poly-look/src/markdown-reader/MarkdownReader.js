@@ -1,5 +1,5 @@
 import { LitElement, html } from "lit-element";
-import globalTheme from "../GlobalTheme";
+import globalTheme from "../globalTheme";
 
 export class MarkdownReader extends LitElement {
   static get styles() {

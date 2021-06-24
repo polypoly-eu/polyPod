@@ -1,7 +1,7 @@
 import { html, LitElement, css } from "lit-element";
 import { unsafeHTML } from "lit-html/directives/unsafe-html";
 import "@intcreator/markdown-element";
-import globalTheme from "../GlobalTheme";
+import globalTheme from "../globalTheme";
 
 export class MarkdownRender extends LitElement {
   static get styles() {
