@@ -2,7 +2,7 @@ import React from "react";
 
 import i18n from "../../i18n.js";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
-import InfoButton from "../infoButton/infoButton.jsx";
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import "./purposeChart.css";
 

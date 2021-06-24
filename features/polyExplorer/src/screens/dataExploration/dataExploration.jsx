@@ -11,13 +11,13 @@ import CompanyBubbles, {
     buildIndustrySets,
 } from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
-import InfoButton from "../../components/infoButton/infoButton.jsx";
+import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
 
 import global from "../../data/global.json";
 import highlights from "../../data/highlights.js";
-import ScrollButton from "../../components/scrollButton/scrollButton.jsx";
+import ScrollButton from "../../components/buttons/scrollButton/scrollButton.jsx";
 
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
