@@ -107,6 +107,7 @@ open class FeatureFragment : Fragment() {
         featureContainer.feature = feature
         setupNavigation(view)
     }
+
     private fun setupAppBar(view: View) {
         view.findViewById<View>(R.id.app_bar)
             .setBackgroundColor(feature.primaryColor)

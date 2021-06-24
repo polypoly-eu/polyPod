@@ -20,10 +20,11 @@ import org.apache.jena.rdf.model.Resource
 import java.io.File
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
+import coop.polypoly.polypod.logging.LoggerFactory
 import java.io.FileOutputStream
 import java.lang.Exception
 
-const val LANG = "N-TRIPLE"
+const val RDF_FORMAT = "N-TRIPLE"
 const val NS = "polypoly"
 
 open class PolyIn(
@@ -36,6 +37,11 @@ open class PolyIn(
     private val model: Model = load()
     private var encryptedFileOut: FileOutputStream? = null
     private var encryptedDatabase: EncryptedFile? = null
+
+    companion object {
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+    }
 
     open suspend fun select(matcher: Matcher): List<Quad> {
         val retList: MutableList<Quad> = mutableListOf()
@@ -69,6 +75,20 @@ open class PolyIn(
         save()
     }
 
+    private fun getDatabase(file: File): EncryptedFile {
+        val mainKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .setUserAuthenticationRequired(true)
+            .build()
+
+        return EncryptedFile.Builder(
+            context,
+            file,
+            mainKey,
+            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+        ).build()
+    }
+
     private fun load(): Model {
         val model = ModelFactory.createDefaultModel()
 
@@ -82,35 +102,25 @@ open class PolyIn(
         val unencryptedDatabase = File(databaseFolder, databaseNameOld)
         if (!unencryptedDatabase.exists()) {
             unencryptedDatabase.inputStream().use { inputStream ->
-                model.read(inputStream, null, LANG)
+                model.read(inputStream, null, RDF_FORMAT)
             }
             unencryptedDatabase.delete()
             return model
         }
 
         if (encryptedDatabase == null) {
-            val mainKey = MasterKey.Builder(context!!)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .setUserAuthenticationRequired(true)
-                .build()
-
-            encryptedDatabase = EncryptedFile.Builder(
-                context,
-                database,
-                mainKey,
-                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-            ).build()
+            encryptedDatabase = getDatabase(database)
         }
 
         encryptedDatabase!!.openFileInput().use { inputStream ->
-            model.read(inputStream, null, LANG)
+            model.read(inputStream, null, RDF_FORMAT)
         }
         return model
     }
 
     private fun save() {
         if (encryptedFileOut != null) {
-            model.write(encryptedFileOut, "N-TRIPLE")
+            model.write(encryptedFileOut, RDF_FORMAT)
             return
         }
 
@@ -124,24 +134,14 @@ open class PolyIn(
         }
         database.renameTo(tempDatabase)
         try {
-
-            val mainKey = MasterKey.Builder(context!!)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .setUserAuthenticationRequired(true)
-                .build()
-
-            encryptedDatabase = EncryptedFile.Builder(
-                context,
-                database,
-                mainKey,
-                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-            ).build()
+            encryptedDatabase = getDatabase(database)
 
             encryptedFileOut = encryptedDatabase!!.openFileOutput()
-            model.write(encryptedFileOut, "N-TRIPLE")
+            model.write(encryptedFileOut, RDF_FORMAT)
             encryptedFileOut?.flush()
             encryptedFileOut?.close()
         } catch (e: Exception) {
+            logger.error(e.message)
             tempDatabase.renameTo(database)
         }
         File(databaseFolder, tempFileName).delete()

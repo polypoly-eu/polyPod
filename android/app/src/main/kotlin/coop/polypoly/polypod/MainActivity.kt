@@ -26,18 +26,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val context = this
-        val notification = UpdateNotification(context)
+        val notification = UpdateNotification(this)
         notification.markPushNotificationSeen()
 
-        if (Preferences.isFirstRun(context)) {
+        if (Preferences.isFirstRun(this)) {
             notification.markInAppNotificationSeen()
-            startActivity(Intent(context, OnboardingActivity::class.java))
+            startActivity(Intent(this, OnboardingActivity::class.java))
             return
         }
 
         if (!notification.inAppNotificationSeen) {
-            AlertDialog.Builder(context)
+            AlertDialog.Builder(this)
                 .setTitle(notification.title)
                 .setMessage(notification.text)
                 .setPositiveButton(R.string.button_update_notification_close) { _, _ ->
@@ -84,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                 context.getString(R.string.auth_error, "Canceled"),
                 Toast.LENGTH_SHORT
             ).show()
-            exitProcess(0)
+            context.finish()
         }
     }
 
