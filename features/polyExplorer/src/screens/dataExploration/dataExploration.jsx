@@ -21,7 +21,7 @@ import ScrollButton from "../../components/scrollButton/scrollButton.jsx";
 
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
-import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
+import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 
 const DataExplorationScreen = ({
     company,
@@ -661,7 +661,7 @@ const DataExplorationScreen = ({
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
                                 />
-                                <JurisdictionLegend />
+                                <DataRegionsLegend />
                                 <InfoButton
                                     onClick={() =>
                                         openJurisdictionInfo(activeIndex)

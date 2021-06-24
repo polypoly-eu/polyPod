@@ -1,9 +1,9 @@
 import React from "react";
 
-import "./jurisdictionLegend.css";
+import "./dataRegionsLegend.css";
 import i18n from "../../i18n.js";
 
-const JurisdictionLegend = () => {
+const DataRegionsLegend = () => {
     return (
         <div className="location-legend">
             <div className="legend">
@@ -38,4 +38,4 @@ const JurisdictionLegend = () => {
     );
 };
 
-export default JurisdictionLegend;
+export default DataRegionsLegend;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
-import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
+import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 import FeaturedCompany from "../../components/featuredCompany/featuredCompany.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
@@ -98,7 +98,7 @@ const CompanyDetails = ({
                                 </div>
                             </div>
                         )}
-                        <JurisdictionLegend />
+                        <DataRegionsLegend />
                         <div className="revenue">
                             <div className="separator"></div>
                             <br />
@@ -202,7 +202,7 @@ const CompanyDetails = ({
                                 </div>
                             </div>
                         )}
-                        <JurisdictionLegend />
+                        <DataRegionsLegend />
                         <div className="revenue">
                             <div className="separator"></div>
                             <br />

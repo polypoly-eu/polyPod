@@ -42,10 +42,6 @@
     height: 12px;
 }
 
-.location-legend .info-button {
-    padding: 4px 0;
-}
-
 .location-legend .EU-GDPR {
     background-color: var(--jurisdiction-EU-GDPR);
 }
