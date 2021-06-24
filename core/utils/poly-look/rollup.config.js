@@ -4,7 +4,7 @@ import resolve from "rollup-plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 
 export default {
-  input: "poly-look.js",
+  input: "src/poly-look.js",
   output: {
     file: "poly-look.bundled.js",
     format: "esm",
