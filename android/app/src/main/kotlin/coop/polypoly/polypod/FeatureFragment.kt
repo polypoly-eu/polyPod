@@ -9,18 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.biometric.BiometricManager.Authenticators.*
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.security.crypto.MasterKey
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
-import java.util.concurrent.Executor
 
 private fun luminance(color: Int): Double =
     Color.red(color) * 0.2126 +

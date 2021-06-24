@@ -1,20 +1,36 @@
 package coop.polypoly.polypod.polyIn
 
 import android.content.Context
-import coop.polypoly.polypod.polyIn.rdf.*
-import org.apache.jena.rdf.model.*
+import coop.polypoly.polypod.polyIn.rdf.QuadBuilder
+import coop.polypoly.polypod.polyIn.rdf.IRI
+import coop.polypoly.polypod.polyIn.rdf.Matcher
+import coop.polypoly.polypod.polyIn.rdf.Quad
+import coop.polypoly.polypod.polyIn.rdf.IRIObject
+import coop.polypoly.polypod.polyIn.rdf.IRISubject
+import coop.polypoly.polypod.polyIn.rdf.BlankNodeObject
+import coop.polypoly.polypod.polyIn.rdf.BlankNodeSubject
+import coop.polypoly.polypod.polyIn.rdf.LiteralObject
+import coop.polypoly.polypod.polyIn.rdf.QuadObject
+import coop.polypoly.polypod.polyIn.rdf.QuadSubject
+import org.apache.jena.rdf.model.Model
+import org.apache.jena.rdf.model.ResourceFactory
+import org.apache.jena.rdf.model.ModelFactory
+import org.apache.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.Resource
 import java.io.File
-import androidx.security.crypto.*
+import androidx.security.crypto.EncryptedFile
+import androidx.security.crypto.MasterKey
 import java.io.FileOutputStream
 import java.lang.Exception
+
+const val LANG = "N-TRIPLE"
+const val NS = "polypoly"
 
 open class PolyIn(
     private val databaseName: String = "data_enc.nt",
     private val databaseFolder: File? = null,
     private val context: Context,
 ) {
-    val NS = "polypoly"
-    val LANG = "N-TRIPLE"
     private val databaseNameOld = "data.nt"
 
     private val model: Model = load()
