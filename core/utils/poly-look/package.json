@@ -13,7 +13,7 @@
     "test:watch": "web-test-runner --watch",
     "storybook": "web-dev-server -c .storybook/server.mjs",
     "storybook:build": "build-storybook",
-    "build": "rimraf *.bundled.js && rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js"
   },
   "dependencies": {
     "@intcreator/markdown-element": "^0.3.3",
@@ -29,7 +29,6 @@
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^7.2.0",
     "prettier": "^2.2.1",
-    "rimraf": "^3.0.2",
     "rollup": "^2.48.0",
     "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-node-resolve": "^5.2.0",
