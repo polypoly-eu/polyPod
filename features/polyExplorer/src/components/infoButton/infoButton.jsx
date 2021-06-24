@@ -3,7 +3,7 @@ import "./infoButton.css";
 
 const InfoButton = ({ light = false, onClick }) => (
     <div
-        className={light ? "data-sharing-legend-light" : "data-sharing-legend"}
+        className={light ? "info-button-light" : "info-button"}
         onClick={onClick}
     >
         <img

@@ -501,7 +501,7 @@ const DataExplorationScreen = ({
     function handleSwipableContentClick(event) {
         // Workaround for ensuring data sharing legend (which is covered by
         // swipable content) is clickable. There isprobably a more elegant way.
-        const sharingLegend = document.querySelector(".data-sharing-legend");
+        const sharingLegend = document.querySelector(".info-button");
         if (!sharingLegend) return;
         const bounds = sharingLegend.getBoundingClientRect();
         if (
