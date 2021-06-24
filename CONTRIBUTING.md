@@ -9,17 +9,17 @@ guidelines on how to work with it.
 
 ## Code of conduct
 
-All members of the project community must abide by 
-[polypoly's Code of Conduct](https://polypoly.coop/en-de/codeofconduct). 
-Only by respecting each other we can develop a productive, collaborative community. 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported
-by contacting community@polypoly.coop.
+All members of the project community must abide by [polypoly's Code of
+Conduct](https://polypoly.coop/en-de/codeofconduct).  Only by respecting each
+other we can develop a productive, collaborative community.  Instances of
+abusive, harassing, or otherwise unacceptable behavior may be reported by
+contacting community@polypoly.coop.
 
 ## Contributor agreement
 
-If you wish to make a contribution, please send an email to community@polypoly.coop,
-and we will walk you through the process of signing our contributor license
-agreement. We will make this process easier over time.
+If you wish to make a contribution, please send an email to
+community@polypoly.coop, and we will walk you through the process of signing our
+contributor license agreement. We will make this process easier over time.
 
 ## Coding style
 
@@ -61,6 +61,7 @@ maintainability's sake during code review.
 For the time being, issues are disabled in this repo. If it's an easy fix (such
 as a typo) you can go and create a pull request, possibly in *draft* mode, so
 that the dev team can interact with you. If it's any other kind of issue, such
-as a feature request, please email us at community@polypoly.coop. Please understand
-that this is a temporary solution, and issues will be enabled in due course.
+as a feature request, please email us at community@polypoly.coop. Please
+understand that this is a temporary solution, and issues will be enabled in due
+course.
 
