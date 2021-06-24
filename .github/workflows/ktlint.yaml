@@ -16,3 +16,7 @@ jobs:
       - name: run ktlint
         run: |
           cd android && ktlint --reporter=checkstyle,output=build/ktlint-report.xml
+      - name: Annotate source
+        uses: yutailang0119/action-ktlint@v1.0.0
+        with:
+          xml_path: build/android/*.xml
