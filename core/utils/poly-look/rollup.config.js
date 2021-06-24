@@ -15,7 +15,6 @@ export default {
     }
   },
   plugins: [
-    replace({ "Reflect.decorate": "undefined" }),
     resolve(),
     terser({
       module: true,
