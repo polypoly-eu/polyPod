@@ -39,6 +39,13 @@ export default {
                     ],
                     dest: "dist",
                 },
+                {
+                    src: [
+                        "../../android/app/src/main/res/font/jost_medium.ttf",
+                        "../../android/app/src/main/res/font/jost_regular.ttf"
+                    ],
+                    dest: "src/static/fonts",
+                },
             ],
             verbose: true,
         }),

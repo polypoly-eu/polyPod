@@ -1,3 +1,4 @@
 /dist
 /polypedia-data
 /scripts/convert-polypedia-data.log
+*.ttf
