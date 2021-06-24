@@ -2,7 +2,7 @@ import React from "react";
 
 import i18n from "../../i18n.js";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
-import DataSharingLegend from "../dataSharingLegend/dataSharingLegend.jsx";
+import InfoButton from "../infoButton/infoButton.jsx";
 
 import "./purposeChart.css";
 
@@ -99,7 +99,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                 {scale}
             </div>
             <Scrollable>{bars}</Scrollable>
-            <DataSharingLegend onClick={() => openPurposeInfo()} />
+            <InfoButton onClick={() => openPurposeInfo()} />
         </div>
     );
 };

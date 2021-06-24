@@ -1,7 +1,7 @@
 import React from "react";
-import "./dataSharingLegend.css";
+import "./infoButton.css";
 
-const DataSharingLegend = ({ light = false, onClick }) => (
+const InfoButton = ({ light = false, onClick }) => (
     <div
         className={light ? "data-sharing-legend-light" : "data-sharing-legend"}
         onClick={onClick}
@@ -14,4 +14,4 @@ const DataSharingLegend = ({ light = false, onClick }) => (
     </div>
 );
 
-export default DataSharingLegend;
+export default InfoButton;

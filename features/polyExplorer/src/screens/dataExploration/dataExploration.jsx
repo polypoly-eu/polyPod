@@ -11,7 +11,7 @@ import CompanyBubbles, {
     buildIndustrySets,
 } from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
-import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
+import InfoButton from "../../components/infoButton/infoButton.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
 
@@ -262,7 +262,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openDataTypesInfo(activeIndex);
                         }}
@@ -318,7 +318,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openCategoryInfo(
                                 activeIndex,
@@ -373,7 +373,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openCorrelationInfo(activeIndex);
                         }}
@@ -404,7 +404,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openCompaniesInfo(activeIndex);
                         }}
@@ -474,7 +474,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openCompaniesInfo(activeIndex);
                         }}
@@ -662,7 +662,7 @@ const DataExplorationScreen = ({
                                     data={getJurisdictionTreeFormat()}
                                 />
                                 <JurisdictionLegend />
-                                <DataSharingLegend
+                                <InfoButton
                                     onClick={() =>
                                         openJurisdictionInfo(activeIndex)
                                     }
