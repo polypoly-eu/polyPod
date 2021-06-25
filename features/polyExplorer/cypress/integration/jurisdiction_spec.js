@@ -15,7 +15,6 @@ describe("Data region", () => {
     });
 
     it("should throw an error if the jurisdiction info has changed", () => {
-        cy.get(".jurisdiction-tree-container .data-sharing-legend")
-            .click();
+        cy.get(".jurisdiction-tree-container .data-sharing-legend").click();
     });
 });

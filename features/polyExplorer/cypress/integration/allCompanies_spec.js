@@ -10,8 +10,9 @@ describe("All companies", () => {
     });
 
     it(`should arrive at the list of all companies`, () => {
-        cy.get(":nth-child(1) > .company-group-companies > :nth-child(1)")
-            .click();
+        cy.get(
+            ":nth-child(1) > .company-group-companies > :nth-child(1)"
+        ).click();
     });
 
     it(`should show the companies which match with the filters`, () => {

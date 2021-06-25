@@ -19,7 +19,7 @@ describe("Data stories", () => {
             cy.get(".featured-company-holder")
                 .trigger("pointerdown", { which: 1 })
                 .trigger("pointermove", "left")
-                .trigger("pointerup", { force: true })
+                .trigger("pointerup", { force: true });
         }
     });
 });
