@@ -5,7 +5,7 @@ import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import "./companyList.css";
-import LinkButton from "../linkButton/linkButton.jsx";
+import LinkButton from "../buttons/linkButton/linkButton.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 function groupCompanies(companies) {

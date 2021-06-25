@@ -1,7 +1,7 @@
 import React from "react";
 import i18n from "../../i18n.js";
 import "./companyShortInfo.css";
-import LinkButton from "../linkButton/linkButton.jsx";
+import LinkButton from "../buttons/linkButton/linkButton.jsx";
 
 const CompanyShortInfo = ({ company }) => {
     return (

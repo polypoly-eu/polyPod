@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
-import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
+import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 import FeaturedCompany from "../../components/featuredCompany/featuredCompany.jsx";
+import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
-import LinkButton from "../../components/linkButton/linkButton.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import "./companyDetails.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
@@ -62,6 +63,7 @@ const CompanyDetails = () => {
                         </p>
                     ) : null}
                     <div className="location-map">
+                        <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
                         {company.jurisdiction ? (
                             <div
                                 className={`location-block ${company.jurisdiction}`}
@@ -96,10 +98,15 @@ const CompanyDetails = () => {
                                 </div>
                             </div>
                         )}
-                        <JurisdictionLegend />
-                        <CompanyRevenueChart
-                            annualRevenues={company.annualRevenues}
-                        />
+                        <DataRegionsLegend />
+                        <div className="revenue">
+                            <div className="separator"></div>
+                            <br />
+                            <h2>{i18n.t("companyDetailsScreen:revenue")}</h2>
+                            <CompanyRevenueChart
+                                annualRevenues={company.annualRevenues}
+                            />
+                        </div>
                     </div>
                 </div>
             ),
@@ -112,21 +119,16 @@ const CompanyDetails = () => {
             content: (
                 <>
                     <FeaturedCompany />
-                    <div className="explore-data-btn-area">
-                        <LinkButton
-                            className="explore-data-btn"
-                            stateChange={{
-                                explorationState: {
-                                    section: "dataTypes",
-                                    index: null,
-                                    category: null,
-                                },
-                            }}
-                            route="/data-exploration"
-                        >
-                            {i18n.t("companyDetailsScreen:button.exploreData")}
-                        </LinkButton>
-                    </div>
+                    <InfoButton
+                        stateChange={{
+                            explorationState: {
+                                section: "dataTypes",
+                                index: null,
+                                category: null,
+                            },
+                        }}
+                        route="/data-exploration"
+                    />
                 </>
             ),
         },
@@ -155,6 +157,7 @@ const CompanyDetails = () => {
                         </p>
                     ) : null}
                     <div className="featured-map-container">
+                        <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
                         {company.jurisdiction ? (
                             <div className={`location-block`}>
                                 {company.location ? (
@@ -189,10 +192,15 @@ const CompanyDetails = () => {
                                 </div>
                             </div>
                         )}
-                        <JurisdictionLegend />
-                        <CompanyRevenueChart
-                            annualRevenues={company.annualRevenues}
-                        />
+                        <DataRegionsLegend />
+                        <div className="revenue">
+                            <div className="separator"></div>
+                            <br />
+                            <h2>{i18n.t("companyDetailsScreen:revenue")}</h2>
+                            <CompanyRevenueChart
+                                annualRevenues={company.annualRevenues}
+                            />
+                        </div>
                     </div>
                 </div>
             ),
@@ -200,7 +208,7 @@ const CompanyDetails = () => {
     ];
 
     return (
-        <Screen>
+        <Screen className="company-details-screen">
             <div className="details">
                 <div className="tab-button-container">
                     {company.featured

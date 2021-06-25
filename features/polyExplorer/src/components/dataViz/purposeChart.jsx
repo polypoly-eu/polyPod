@@ -2,7 +2,7 @@ import React from "react";
 
 import i18n from "../../i18n.js";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
-import LinkButton from "../linkButton/linkButton.jsx";
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import "./purposeChart.css";
 
@@ -99,14 +99,7 @@ const PurposeChart = ({ purposes, openPopup, purposeState }) => {
                 {scale}
             </div>
             <Scrollable>{bars}</Scrollable>
-            <LinkButton
-                route="/purpose-info"
-                className="help"
-                stateChange={purposeState}
-            >
-                <img src="./images/question-circle.svg" />
-                <div>{i18n.t("common:how-to-read")}</div>
-            </LinkButton>
+            <InfoButton route="/purpose-info" stateChange={purposeState} />
         </div>
     );
 };

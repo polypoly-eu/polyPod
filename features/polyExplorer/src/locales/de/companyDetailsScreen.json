@@ -19,6 +19,8 @@
         "Umsatz",
     "revenue.fallbackText":
         "Noch keine Daten verfügbar.",
+    "jurisdiction":
+        "Datenregion",
     "jurisdictions":
         "Datenregionen",
     "source":

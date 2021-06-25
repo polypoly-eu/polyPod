@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { ExplorerContext } from "../../context/explorer-context.jsx";
+import { ExplorerContext } from "../../../context/explorer-context.jsx";
 
 const LinkButton = ({ route, stateChange = null, className, children }) => {
     const { navigationState, changeNavigationState } = useContext(

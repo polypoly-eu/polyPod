@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import DataSharingGauge from "../dataSharingGauge/dataSharingGauge.jsx";
-import LinkButton from "../linkButton/linkButton.jsx";
+import LinkButton from "../buttons/linkButton/linkButton.jsx";
 import "./featuredCompany.css";
 
 const DataSharingSection = ({

@@ -42,7 +42,7 @@
 .tab-content-container .featured-map-container {
     width: 100%;
     max-width: var(--max-width);
-    margin: auto;
+    margin: 40px auto auto auto;
 }
 
 .tab-content-container .featured-map {
@@ -186,7 +186,7 @@
     width: 100%;
     max-width: var(--max-width);
     padding: 4px 30px;
-    margin-bottom: 4px;
+    margin: 32px auto 40px auto;
 }
 
 .company-details-source {
@@ -221,4 +221,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.revenue {
+    margin-bottom: 24px;
+}
+
+.revenue .separator {
+    border: 1px solid var(--color-medium);
+    margin: 38px 16px 0 16px;
+}
+
+.featured-map-container h2, .location-map h2, .revenue h2 {
+    text-align: center;
+    margin: 0 0 12px 0;
 }

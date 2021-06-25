@@ -6,7 +6,7 @@ import Scrollable from "../../components/scrollable/scrollable.jsx";
 import Screen from "../../components/screen/screen.jsx";
 
 import "./companyFilter.css";
-import LinkButton from "../../components/linkButton/linkButton.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const CompanyFilterScreen = () => {
