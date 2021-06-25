@@ -1,5 +1,9 @@
 name: Test pushes and PRs
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+    types: [assigned, opened, synchronize, ready_for_review]
+
 jobs:
   test:
     name: Run tests.
@@ -15,7 +19,8 @@ jobs:
         run: ./build.js
       - name: Test core and features
         run: xvfb-run --auto-servernum ./build.js test
-      - uses: dorny/paths-filter@v2
+      - name: Checks paths to rebuild Android
+        uses: dorny/paths-filter@v2
         id: changes
         with:
           filters: |
