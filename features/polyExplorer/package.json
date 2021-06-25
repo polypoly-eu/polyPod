@@ -34,7 +34,6 @@
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "babel-loader": "^8.2.2",
     "cypress": "^7.5.0",
-    "cypress-image-snapshot": "^4.0.1",
     "cypress-promise": "^1.1.0",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^6.11.0",
