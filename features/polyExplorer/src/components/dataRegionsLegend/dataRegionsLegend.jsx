@@ -1,15 +1,11 @@
 import React from "react";
 
-import "./jurisdictionLegend.css";
+import "./dataRegionsLegend.css";
 import i18n from "../../i18n.js";
 
-const JurisdictionLegend = ({ onOpenRegionInfo }) => {
+const DataRegionsLegend = () => {
     return (
         <div className="location-legend">
-            <div className="source">
-                <p>{i18n.t("common:source")}:</p>
-                <p>polyPedia</p>
-            </div>
             <div className="legend">
                 <p className="jurisdictions-label">
                     {i18n.t("companyDetailsScreen:jurisdictions")}:
@@ -35,11 +31,11 @@ const JurisdictionLegend = ({ onOpenRegionInfo }) => {
                     <p>{i18n.t("common:jurisdiction.undisclosed")}</p>
                 </div>
             </div>
-            <div className="info-button" onClick={onOpenRegionInfo}>
-                <img src="./images/question-circle.svg" />
+            <div className="source">
+                <p>{i18n.t("common:source")}: polyPedia</p>
             </div>
         </div>
     );
 };
 
-export default JurisdictionLegend;
+export default DataRegionsLegend;

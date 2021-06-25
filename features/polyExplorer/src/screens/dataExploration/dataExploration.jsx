@@ -11,16 +11,17 @@ import CompanyBubbles, {
     buildIndustrySets,
 } from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
-import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
+import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
 
 import global from "../../data/global.json";
 import highlights from "../../data/highlights.js";
+import ScrollButton from "../../components/buttons/scrollButton/scrollButton.jsx";
 
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
-import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
+import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 
 const DataExplorationScreen = ({
     company,
@@ -35,7 +36,6 @@ const DataExplorationScreen = ({
     openJurisdictionInfo,
     maxCompanies,
     dataRecipients,
-    onOpenRegionInfo,
 }) => {
     //Methods
     const getCategories = () =>
@@ -262,7 +262,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openDataTypesInfo(activeIndex);
                         }}
@@ -294,6 +294,11 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <InfoButton
+                        onClick={() => {
+                            openDataTypesInfo(activeIndex);
+                        }}
+                    />
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
                 </div>
@@ -318,7 +323,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openCategoryInfo(
                                 activeIndex,
@@ -349,6 +354,11 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <InfoButton
+                        onClick={() => {
+                            openDataTypesInfo(activeIndex);
+                        }}
+                    />
                     <div className="data-sharing-legend-fill"></div>
                 </div>
             );
@@ -373,7 +383,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openCorrelationInfo(activeIndex);
                         }}
@@ -404,7 +414,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openCompaniesInfo(activeIndex);
                         }}
@@ -434,6 +444,11 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+                    <InfoButton
+                        onClick={() => {
+                            openCompaniesInfo(activeIndex);
+                        }}
+                    />
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
                 </div>
@@ -474,7 +489,7 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <DataSharingLegend
+                    <InfoButton
                         onClick={() => {
                             openCompaniesInfo(activeIndex);
                         }}
@@ -501,7 +516,7 @@ const DataExplorationScreen = ({
     function handleSwipableContentClick(event) {
         // Workaround for ensuring data sharing legend (which is covered by
         // swipable content) is clickable. There isprobably a more elegant way.
-        const sharingLegend = document.querySelector(".data-sharing-legend");
+        const sharingLegend = document.querySelector(".info-button");
         if (!sharingLegend) return;
         const bounds = sharingLegend.getBoundingClientRect();
         if (
@@ -661,12 +676,8 @@ const DataExplorationScreen = ({
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
                                 />
-                                <JurisdictionLegend
-                                    onOpenRegionInfo={() =>
-                                        onOpenRegionInfo(activeIndex)
-                                    }
-                                />
-                                <DataSharingLegend
+                                <DataRegionsLegend />
+                                <InfoButton
                                     onClick={() =>
                                         openJurisdictionInfo(activeIndex)
                                     }
@@ -684,15 +695,12 @@ const DataExplorationScreen = ({
                     </Swiper>
                 </div>
             </div>
-            <button
-                className={
-                    "down-button" +
-                    (activeIndex === screens.length - 1
-                        ? " down-button-hidden"
-                        : "")
-                }
+            <ScrollButton
+                light={true}
+                activeIndex={activeIndex}
+                screens={screens}
                 onClick={() => swiper.slideNext()}
-            ></button>
+            />
             {purposePopupContent ? (
                 <PurposeInfoPopup
                     purpose={purposePopupContent}

@@ -87,8 +87,6 @@
         "jurisdictions",
     "source":
         "Source",
-    "how-to-read":
-        "How to read this?",
     "purpose.name.i18nkey":
         "Translation_EN",
     "purpose.description.i18nkey":
@@ -96,5 +94,7 @@
     "country.code":
         "en",
     "button.ok":
-        "OK"
+        "OK",
+    "button.scroll":
+        "Scroll up for more"
 }

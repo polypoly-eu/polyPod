@@ -161,11 +161,10 @@
     margin-bottom: -8px;
 }
 
-.data-exploration .data-sharing-legend {
-    width: 84%;
-    max-width: 350px;
-    margin: 8px auto;
+.data-exploration .jurisdiction-tree-container .info-button {
+    bottom: 130px;
 }
+
 
 .data-exploration .static-content .data-sharing-legend-fill {
     box-sizing: border-box;
@@ -174,20 +173,6 @@
     max-width: 350px;
     margin: 8px auto;
     height: 32px;
-}
-
-.data-exploration .down-button {
-    display: block;
-    width: 24px;
-    height: 24px;
-    flex: 0 0 auto;
-    margin: 17px auto 17px auto;
-    background: url("../images/chevron-down.svg") no-repeat;
-}
-
-.data-exploration .down-button-hidden {
-    visibility: hidden;
-    display: none;
 }
 
 .data-exploration .static-content .construction-container {
