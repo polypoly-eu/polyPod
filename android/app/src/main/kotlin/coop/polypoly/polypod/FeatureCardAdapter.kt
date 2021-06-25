@@ -54,7 +54,7 @@ class FeatureCardAdapter(
         updateTexts(view, feature)
         view.setOnClickListener {
             // FIXME - navigation assumes we're coming from FirstFragment,
-            //  which might not necessary be true
+            // which might not necessary be true
             val action =
                 FeatureListFragmentDirections
                     .actionFeatureListFragmentToFeatureFragment(
