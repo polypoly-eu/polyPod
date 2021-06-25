@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 import i18n from "../../i18n.js";
 import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import "./companyList.css";
+import LinkButton from "../buttons/linkButton/linkButton.jsx";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 function groupCompanies(companies) {
     const sorted = companies.sort((a, b) => a.compareNames(b));
@@ -56,14 +58,14 @@ function getStartGroups(companyGroups) {
     return keys.pop();
 }
 
-const CompanyList = ({
-    companies,
-    globalData,
-    onOpenFilters,
-    onOpenDetails,
-    activeFilters,
-    onRemoveFilter,
-}) => {
+const CompanyList = () => {
+    const {
+        companies,
+        globalData,
+        activeFilters,
+        handleRemoveFilter,
+    } = useContext(ExplorerContext);
+    const onRemoveFilter = handleRemoveFilter;
     const filteredCompanies = activeFilters.apply(companies);
     const companyGroups = groupCompanies(filteredCompanies);
     const allKeys = Object.keys(companyGroups);
@@ -83,7 +85,7 @@ const CompanyList = ({
         } else setHasMore(false);
     };
 
-    const handleRemoveFilter = (field, value) => {
+    const handleReloadCompanies = (field, value) => {
         onRemoveFilter(field, value);
         const newLoadedCompanies = {};
         const filteredCompanies = activeFilters.apply(companies);
@@ -121,7 +123,7 @@ const CompanyList = ({
             <ActiveFilters
                 activeFilters={activeFilters}
                 globalData={globalData}
-                onRemoveFilter={handleRemoveFilter}
+                onRemoveFilter={handleReloadCompanies}
             />
             <div
                 className={
@@ -129,10 +131,10 @@ const CompanyList = ({
                     (activeFilters.empty ? "" : " filters-visible")
                 }
             >
-                <button
+                <LinkButton
+                    route="/company-filters"
                     className="filter-button"
-                    onClick={onOpenFilters}
-                ></button>
+                ></LinkButton>
                 <InfiniteScroll
                     dataLength={allKeys.length - toLoadKeys.length}
                     next={handleLoadMoreData}
@@ -151,7 +153,6 @@ const CompanyList = ({
                                         <CompanyShortInfo
                                             key={index}
                                             company={company}
-                                            onOpenDetails={onOpenDetails}
                                         />
                                     ))}
                                 </div>

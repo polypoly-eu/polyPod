@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import i18n from "../../i18n.js";
 import { CompanyFilter } from "../../model/companyFilter.js";
@@ -6,13 +6,16 @@ import Scrollable from "../../components/scrollable/scrollable.jsx";
 import Screen from "../../components/screen/screen.jsx";
 
 import "./companyFilter.css";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const CompanyFilterScreen = ({
-    companies,
-    activeFilters,
-    globalData,
-    onApply,
-}) => {
+const CompanyFilterScreen = () => {
+    const {
+        companies,
+        activeFilters,
+        globalData,
+        handleFilterApply,
+    } = useContext(ExplorerContext);
     const [newActiveFilters, setNewActiveFilters] = useState(
         activeFilters.copy()
     );
@@ -56,7 +59,8 @@ const CompanyFilterScreen = ({
     const filtersChanged = () => !activeFilters.equal(newActiveFilters);
 
     function handleApply({ target }) {
-        if (!target.className.includes("disabled")) onApply(newActiveFilters);
+        if (!target.className.includes("disabled"))
+            handleFilterApply(newActiveFilters);
     }
 
     return (
@@ -85,14 +89,15 @@ const CompanyFilterScreen = ({
             </Scrollable>
 
             <div className="button-area">
-                <button
+                <LinkButton
+                    route="/"
                     className={
                         "apply-button" + (filtersChanged() ? "" : " disabled")
                     }
                     onClick={handleApply}
                 >
                     {i18n.t("companyFilterScreen:apply")}
-                </button>
+                </LinkButton>
             </div>
         </Screen>
     );

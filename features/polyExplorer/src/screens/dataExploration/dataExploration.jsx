@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import i18n from "../../i18n.js";
@@ -14,6 +14,7 @@ import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
 import global from "../../data/global.json";
 import highlights from "../../data/highlights.js";
@@ -22,21 +23,24 @@ import ScrollButton from "../../components/buttons/scrollButton/scrollButton.jsx
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
 import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
+import { useHistory } from "react-router-dom";
 
-const DataExplorationScreen = ({
-    company,
-    startSection,
-    startIndex = null,
-    openMain,
-    openDataTypesInfo,
-    openCategoryInfo,
-    openCorrelationInfo,
-    openPurposeInfo,
-    openCompaniesInfo,
-    openJurisdictionInfo,
-    maxCompanies,
-    dataRecipients,
-}) => {
+const DataExplorationScreen = () => {
+    const {
+        navigationState,
+        selectedCompanyObject,
+        featuredCompanyMaxValues,
+        dataRecipients,
+    } = useContext(ExplorerContext);
+    const company = selectedCompanyObject;
+    const startSection = navigationState.explorationState.section;
+    const startIndex = navigationState.explorationState.index;
+    const maxCompanies = featuredCompanyMaxValues.companies;
+    const history = useHistory();
+
+    if (company.dataRecipients.length == 0) return <Screen></Screen>;
+
     //Methods
     const getCategories = () =>
         Object.keys(highlights[company.ppid]?.dataTypeCategories || {});
@@ -47,6 +51,16 @@ const DataExplorationScreen = ({
             total += e.count;
         });
         return total;
+    };
+
+    //This is horrible but we need to put the activeIndex in the old state that gets reloaded
+    // but the routing is faster than this so we need to edit the old state here
+    // the -1 is because in the moment of click the activeindex is increased by swiper
+    // these problems will solve themselves when switching to scrollytelling
+    const saveActiveIndex = () => {
+        history.entries[
+            history.entries.length - 2
+        ].state.explorationState.index = activeIndex - 1;
     };
 
     const companyIndustryMap = useMemo(() => {
@@ -262,10 +276,10 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+
                     <InfoButton
-                        onClick={() => {
-                            openDataTypesInfo(activeIndex);
-                        }}
+                        route="data-types-info"
+                        saveActiveIndex={saveActiveIndex}
                     />
                     {filler}
                 </div>
@@ -295,9 +309,8 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        onClick={() => {
-                            openDataTypesInfo(activeIndex);
-                        }}
+                        route="data-types-info"
+                        saveActiveIndex={saveActiveIndex}
                     />
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
@@ -323,12 +336,16 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+
                     <InfoButton
-                        onClick={() => {
-                            openCategoryInfo(
-                                activeIndex,
-                                activeScreen.split("_")[1]
-                            );
+                        route="data-category-info"
+                        saveActiveIndex={saveActiveIndex}
+                        stateChange={{
+                            explorationState: {
+                                section: "dataTypes",
+                                index: activeIndex,
+                                category: activeScreen.split("_")[1],
+                            },
                         }}
                     />
                     {filler}
@@ -355,9 +372,8 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        onClick={() => {
-                            openDataTypesInfo(activeIndex);
-                        }}
+                        route="data-correlation-info"
+                        saveActiveIndex={saveActiveIndex}
                     />
                     <div className="data-sharing-legend-fill"></div>
                 </div>
@@ -383,10 +399,10 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+
                     <InfoButton
-                        onClick={() => {
-                            openCorrelationInfo(activeIndex);
-                        }}
+                        route="data-correlation-info"
+                        saveActiveIndex={saveActiveIndex}
                     />
                 </div>
             );
@@ -414,10 +430,10 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+
                     <InfoButton
-                        onClick={() => {
-                            openCompaniesInfo(activeIndex);
-                        }}
+                        route="companies-info"
+                        saveActiveIndex={saveActiveIndex}
                     />
                 </div>
             );
@@ -445,9 +461,8 @@ const DataExplorationScreen = ({
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        onClick={() => {
-                            openCompaniesInfo(activeIndex);
-                        }}
+                        route="companies-info"
+                        saveActiveIndex={saveActiveIndex}
                     />
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
@@ -489,10 +504,10 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
+
                     <InfoButton
-                        onClick={() => {
-                            openCompaniesInfo(activeIndex);
-                        }}
+                        route="companies-info"
+                        saveActiveIndex={saveActiveIndex}
                     />
                 </div>
             );
@@ -621,9 +636,7 @@ const DataExplorationScreen = ({
                                 <PurposeChart
                                     purposes={company.dataSharingPurposes}
                                     openPopup={setPurposePopupContent}
-                                    openPurposeInfo={() =>
-                                        openPurposeInfo(activeIndex)
-                                    }
+                                    saveActiveIndex={saveActiveIndex}
                                 />
                             </div>
                         </SwiperSlide>
@@ -660,6 +673,7 @@ const DataExplorationScreen = ({
                                 <CompanyIndustryList
                                     companyIndustryMap={companyIndustryMap}
                                     ecoItems={dataRecipients.length > 100}
+                                    saveActiveIndex={saveActiveIndex}
                                 />
                             </div>
                         </SwiperSlide>
@@ -676,20 +690,22 @@ const DataExplorationScreen = ({
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
                                 />
-                                <DataRegionsLegend />
-                                <InfoButton
-                                    onClick={() =>
-                                        openJurisdictionInfo(activeIndex)
-                                    }
+
+                                <DataRegionsLegend
+                                    saveActiveIndex={saveActiveIndex}
                                 />
-                                <button
+                                <InfoButton
+                                    route="jurisdiction-info"
+                                    saveActiveIndex={saveActiveIndex}
+                                />
+                                <LinkButton
+                                    route="/company-details"
                                     className="explore-other"
-                                    onClick={openMain}
                                 >
                                     {i18n.t(
                                         "dataExplorationScreen:explore.other"
                                     )}
-                                </button>
+                                </LinkButton>
                             </div>
                         </SwiperSlide>
                     </Swiper>

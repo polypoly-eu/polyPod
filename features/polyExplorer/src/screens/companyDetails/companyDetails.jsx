@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
@@ -7,14 +7,11 @@ import FeaturedCompany from "../../components/featuredCompany/featuredCompany.js
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const CompanyDetails = ({
-    company,
-    featuredCompanyMaxValues,
-    featuredCompanyAverageValues,
-    onOpenDataExplorationSection,
-    onOpenInfo,
-}) => {
+const CompanyDetails = () => {
+    const { selectedCompanyObject } = useContext(ExplorerContext);
+    const company = selectedCompanyObject;
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
 
@@ -120,28 +117,17 @@ const CompanyDetails = ({
             tabName: "dataStory",
             content: (
                 <>
-                    <FeaturedCompany
-                        company={company}
-                        maxValues={featuredCompanyMaxValues}
-                        averageValues={featuredCompanyAverageValues}
-                        onOpenDataExplorationSection={
-                            onOpenDataExplorationSection
-                        }
-                    ></FeaturedCompany>
-                    <InfoButton onClick={onOpenInfo} />
-                    <div className="explore-data-btn-area">
-                        <button
-                            className="explore-data-btn"
-                            onClick={() =>
-                                onOpenDataExplorationSection(
-                                    "dataTypes",
-                                    company.ppid
-                                )
-                            }
-                        >
-                            {i18n.t("companyDetailsScreen:button.exploreData")}
-                        </button>
-                    </div>
+                    <FeaturedCompany />
+                    <InfoButton
+                        stateChange={{
+                            explorationState: {
+                                section: "dataTypes",
+                                index: null,
+                                category: null,
+                            },
+                        }}
+                        route="/data-exploration"
+                    />
                 </>
             ),
         },

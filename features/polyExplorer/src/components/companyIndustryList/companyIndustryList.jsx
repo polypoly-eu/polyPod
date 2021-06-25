@@ -18,7 +18,10 @@ class CompanyIndustryList extends React.PureComponent {
     render() {
         return (
             <Scrollable>
-                <div className="company-industry-list">
+                <div
+                    className="company-industry-list"
+                    onClick={this.props.saveActiveIndex}
+                >
                     {Object.entries(this.props.companyIndustryMap).map(
                         ([industry, companies], index) => (
                             <div

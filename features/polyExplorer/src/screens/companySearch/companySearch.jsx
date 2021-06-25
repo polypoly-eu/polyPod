@@ -1,11 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
 import "./companySearch.css";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const CompanySearchScreen = ({ companies, onOpenDetails }) => {
+const CompanySearchScreen = () => {
+    const { companiesList } = useContext(ExplorerContext);
+    const companies = companiesList;
+
     const [searchString, setSearchString] = useState("");
     const featuredComanies = companies
         .filter((company) => company.featured)
@@ -70,12 +75,15 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                         <div className="suggestions">
                             {" "}
                             {featuredComanies.map((company, index) => (
-                                <button
+                                <LinkButton
+                                    route="company-details"
                                     key={index}
-                                    onClick={() => onOpenDetails(company.ppid)}
+                                    stateChange={{
+                                        selectedCompany: company.ppid,
+                                    }}
                                 >
                                     {company.name}
-                                </button>
+                                </LinkButton>
                             ))}{" "}
                         </div>
                     </div>
@@ -96,16 +104,16 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                                         {" "}
                                         {featuredComanies.map(
                                             (company, index) => (
-                                                <button
-                                                    onClick={() =>
-                                                        onOpenDetails(
-                                                            company.ppid
-                                                        )
-                                                    }
+                                                <LinkButton
+                                                    route="company-details"
+                                                    stateChange={{
+                                                        selectedCompany:
+                                                            company.ppid,
+                                                    }}
                                                     key={index}
                                                 >
                                                     {company.name}
-                                                </button>
+                                                </LinkButton>
                                             )
                                         )}{" "}
                                     </div>
@@ -114,14 +122,15 @@ const CompanySearchScreen = ({ companies, onOpenDetails }) => {
                         ) : (
                             <div>
                                 {shownCompanies.map((company, index) => (
-                                    <button
-                                        onClick={() =>
-                                            onOpenDetails(company.ppid)
-                                        }
+                                    <LinkButton
+                                        route="company-details"
+                                        stateChange={{
+                                            selectedCompany: company.ppid,
+                                        }}
                                         key={index}
                                     >
                                         {company.name}
-                                    </button>
+                                    </LinkButton>
                                 ))}
                             </div>
                         )}

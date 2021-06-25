@@ -1,29 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import CompanyList from "../../components/companyList/companyList.jsx";
 
 import "./main.css";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const MainScreen = ({
-    showClusters,
-    companies,
-    globalData,
-    onOpenDetails,
-    onOpenFilters,
-    onShowClustersChange,
-    activeFilters,
-    onRemoveFilter,
-}) => {
-    const handleShowClusters = () => onShowClustersChange(true);
-    const handleShowCompanyList = () => onShowClustersChange(false);
+const MainScreen = () => {
+    const { navigationState, routeTo, companies } = useContext(ExplorerContext);
+    let showClusters = navigationState.showClusters;
 
     return (
         <Screen className="main-screen" topShadow={false}>
             <div className="nav-button-container">
                 <button
-                    onClick={handleShowClusters}
+                    onClick={() => routeTo("main", { showClusters: true })}
                     className={
                         showClusters ? "nav-button active" : "nav-button"
                     }
@@ -31,7 +23,7 @@ const MainScreen = ({
                     {i18n.t("mainScreen:tab.discover")}
                 </button>
                 <button
-                    onClick={handleShowCompanyList}
+                    onClick={() => routeTo("main", { showClusters: false })}
                     className={
                         showClusters ? "nav-button" : "nav-button active"
                     }
@@ -41,18 +33,7 @@ const MainScreen = ({
                     })}
                 </button>
             </div>
-            {showClusters ? (
-                <div></div>
-            ) : (
-                <CompanyList
-                    companies={companies}
-                    globalData={globalData}
-                    onOpenFilters={onOpenFilters}
-                    onOpenDetails={onOpenDetails}
-                    activeFilters={activeFilters}
-                    onRemoveFilter={onRemoveFilter}
-                />
-            )}
+            {showClusters ? <div></div> : <CompanyList />}
         </Screen>
     );
 };

@@ -6,7 +6,7 @@ import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import "./purposeChart.css";
 
-const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
+const PurposeChart = ({ purposes, openPopup, purposeState }) => {
     const getHighestCount = () => {
         let highest = 0;
         purposes.forEach((e) => {
@@ -99,7 +99,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                 {scale}
             </div>
             <Scrollable>{bars}</Scrollable>
-            <InfoButton onClick={() => openPurposeInfo()} />
+            <InfoButton route="/purpose-info" stateChange={purposeState} />
         </div>
     );
 };

@@ -40,6 +40,7 @@
     color: var(--color-medium);
 }
 
+.search-bar-container .search-bar .link-button,
 .search-bar-container .search-bar button {
     flex: 0 0 auto;
     margin: 0;
@@ -64,6 +65,7 @@
 
 .company-search .no-answers,
 .suggestion-container p,
+.company-search .link-button,
 .company-search button {
     width: 80%;
     max-width: var(--max-width);
@@ -86,6 +88,7 @@
     color: var(--color-semi-dark);
 }
 
+.company-search .link-button,
 .company-search button {
     background-color: transparent;
     border: transparent;

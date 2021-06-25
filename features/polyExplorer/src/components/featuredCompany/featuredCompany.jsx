@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import DataSharingGauge from "../dataSharingGauge/dataSharingGauge.jsx";
+import LinkButton from "../buttons/linkButton/linkButton.jsx";
 import "./featuredCompany.css";
 
 const DataSharingSection = ({
@@ -8,11 +10,12 @@ const DataSharingSection = ({
     count,
     max,
     average,
-    onOpenDetails,
+    stateChange,
 }) => (
-    <div
+    <LinkButton
         className={`data-sharing-section ${sharingType}-shared`}
-        onClick={onOpenDetails}
+        stateChange={stateChange}
+        route="/data-exploration"
     >
         <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
         <DataSharingGauge
@@ -21,61 +24,52 @@ const DataSharingSection = ({
             max={max}
             average={average}
         />
-    </div>
+    </LinkButton>
 );
 
-const FeaturedCompany = ({
-    company,
-    maxValues,
-    averageValues,
-    onOpenDataExplorationSection,
-}) => {
+const FeaturedCompany = () => {
+    const {
+        selectedCompanyObject,
+        featuredCompanyMaxValues,
+        featuredCompanyAverageValues,
+    } = useContext(ExplorerContext);
+    const company = selectedCompanyObject;
+
+    const count = {
+        dataTypes: company.dataTypesShared.length,
+        purposes: company.dataSharingPurposes.length,
+        companies: company.dataRecipients.length,
+        jurisdictions: company.jurisdictionsShared
+            ? company.jurisdictionsShared.children.length
+            : 0,
+    };
+
+    const dataSharingSections = [
+        "dataTypes",
+        "purposes",
+        "companies",
+        "jurisdictions",
+    ];
+
     return (
         <div className="featured-company-card">
             <div className="data-sharing-section-list">
-                <DataSharingSection
-                    sharingType="dataTypes"
-                    count={company.dataTypesShared.length}
-                    max={maxValues.dataTypes}
-                    average={averageValues.dataTypes}
-                    onOpenDetails={() =>
-                        onOpenDataExplorationSection("dataTypes", company.ppid)
-                    }
-                />
-                <DataSharingSection
-                    sharingType="purposes"
-                    count={company.dataSharingPurposes.length}
-                    max={maxValues.purposes}
-                    average={averageValues.purposes}
-                    onOpenDetails={() =>
-                        onOpenDataExplorationSection("purposes", company.ppid)
-                    }
-                />
-                <DataSharingSection
-                    sharingType="companies"
-                    count={company.dataRecipients.length}
-                    max={maxValues.companies}
-                    average={averageValues.companies}
-                    onOpenDetails={() =>
-                        onOpenDataExplorationSection("companies", company.ppid)
-                    }
-                />
-                <DataSharingSection
-                    sharingType="jurisdictions"
-                    count={
-                        company.jurisdictionsShared
-                            ? company.jurisdictionsShared.children.length
-                            : 0
-                    }
-                    max={maxValues.jurisdictions}
-                    average={averageValues.jurisdictions}
-                    onOpenDetails={() =>
-                        onOpenDataExplorationSection(
-                            "jurisdictions",
-                            company.ppid
-                        )
-                    }
-                />
+                {dataSharingSections.map((section) => (
+                    <DataSharingSection
+                        key={section}
+                        sharingType={section}
+                        count={count[section]}
+                        max={featuredCompanyMaxValues[section]}
+                        average={featuredCompanyAverageValues[section]}
+                        stateChange={{
+                            explorationState: {
+                                section: section,
+                                index: null,
+                                category: null,
+                            },
+                        }}
+                    />
+                ))}
             </div>
         </div>
     );

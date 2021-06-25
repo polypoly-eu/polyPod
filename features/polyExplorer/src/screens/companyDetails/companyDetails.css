@@ -213,11 +213,14 @@
     background-color: var(--color-background-light);
     color: var(--color-text-dark);
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 24px;
     border-radius: 4px;
     border: transparent;
     outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .revenue {
