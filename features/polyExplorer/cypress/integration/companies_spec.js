@@ -23,7 +23,7 @@ describe("Companies", () => {
                 !slide.children(
                     ".swiper-slide.swiper-slide-active .slide-tap-target"
                 ).length,
-            (index) => {
+            () => {
                 return cy.wait(1000).then(() => {
                     return cy
                         .get(
@@ -39,7 +39,7 @@ describe("Companies", () => {
         navigation(
             0,
             (slide) => slide.children(".jurisdiction-tree-container").length,
-            (index) =>
+            () =>
                 cy.wait(1000).then(() => {
                     return cy.get(".down-button").click();
                 })
@@ -50,7 +50,7 @@ describe("Companies", () => {
         navigation(
             0,
             (slide) => slide.children(".jurisdiction-tree-container").length,
-            (index) =>
+            () =>
                 cy.wait(1000).then(() => {
                     return cy
                         .get(".swiper-slide.swiper-slide-active")
@@ -65,7 +65,7 @@ describe("Companies", () => {
         navigation(
             0,
             (slide) => slide.children(".jurisdiction-tree-container").length,
-            (index) =>
+            () =>
                 cy.get(".static-content").then(($staticContent) => {
                     if (
                         $staticContent.children(".data-sharing-legend").length
