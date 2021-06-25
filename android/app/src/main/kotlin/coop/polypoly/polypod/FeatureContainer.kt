@@ -2,10 +2,13 @@ package coop.polypoly.polypod
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
+import android.webkit.JavascriptInterface
 import android.webkit.WebMessage
 import android.webkit.WebMessagePort
 import android.webkit.WebResourceRequest
