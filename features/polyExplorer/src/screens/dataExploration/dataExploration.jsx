@@ -172,7 +172,7 @@ const DataExplorationScreen = () => {
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(getStartIndex());
     const [purposePopupContent, setPurposePopupContent] = useState(null);
-    console.log(activeIndex);
+
     //Constants
     const activeScreen = screens[activeIndex];
     const highestValueObject = getHighestValueObject();
