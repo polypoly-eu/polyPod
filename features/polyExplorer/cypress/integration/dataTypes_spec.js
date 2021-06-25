@@ -21,7 +21,6 @@ describe("Data types", () => {
             0,
             (slide) => !slide.children(".slide-tap-target").length,
             (index) => {
-                cy.matchImageSnapshot(`datatype${index}`);
                 return cy.get(".swiper-slide-active .slide-tap-target").click();
             }
         );
@@ -32,7 +31,6 @@ describe("Data types", () => {
             0,
             (slide) => !slide.children(".slide-tap-target").length,
             (index) => {
-                cy.matchImageSnapshot(`datatype${index}`);
                 return cy.get(".down-button").click();
             }
         );
@@ -43,7 +41,6 @@ describe("Data types", () => {
             0,
             (slide) => !slide.children(".slide-tap-target").length,
             (index) => {
-                cy.matchImageSnapshot(`datatype${index}`);
                 return cy
                     .get(".swiper-slide-active")
                     .trigger("pointerdown", "bottom", { which: 1 })
@@ -71,7 +68,6 @@ describe("Data types", () => {
                             .get(".static-content > .data-sharing-legend")
                             .click()
                             .then(() => {
-                                cy.matchImageSnapshot(`datatypeinfo${index}`);
                                 return cy.get("button").click();
                             })
                             .then(() => cy.get(".down-button").click());

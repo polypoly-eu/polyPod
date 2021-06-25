@@ -14,15 +14,8 @@ describe("Data region", () => {
             });
     });
 
-    it("should throw an error if the graph has changed", () => {
-        cy.matchImageSnapshot("jurisdictions0");
-    });
-
     it("should throw an error if the jurisdiction info has changed", () => {
         cy.get(".jurisdiction-tree-container .data-sharing-legend")
-            .click()
-            .then(() => {
-                cy.matchImageSnapshot("jurisdictionsinfo0");
-            });
+            .click();
     });
 });

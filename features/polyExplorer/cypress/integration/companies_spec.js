@@ -25,7 +25,6 @@ describe("Companies", () => {
                 ).length,
             (index) => {
                 return cy.wait(1000).then(() => {
-                    cy.matchImageSnapshot(`companies${index}`);
                     return cy
                         .get(
                             ".swiper-slide.swiper-slide-active .slide-tap-target"
@@ -42,7 +41,6 @@ describe("Companies", () => {
             (slide) => slide.children(".jurisdiction-tree-container").length,
             (index) =>
                 cy.wait(1000).then(() => {
-                    cy.matchImageSnapshot(`companies${index}`);
                     return cy.get(".down-button").click();
                 })
         );
@@ -54,7 +52,6 @@ describe("Companies", () => {
             (slide) => slide.children(".jurisdiction-tree-container").length,
             (index) =>
                 cy.wait(1000).then(() => {
-                    cy.matchImageSnapshot(`companies${index}`);
                     return cy
                         .get(".swiper-slide.swiper-slide-active")
                         .trigger("pointerdown", "bottom", { which: 1 })
@@ -82,7 +79,6 @@ describe("Companies", () => {
                             .get(".static-content .data-sharing-legend")
                             .click()
                             .then(() => {
-                                cy.matchImageSnapshot(`companiesinfo${index}`);
                                 return cy.get("button").click();
                             })
                             .then(() => {
