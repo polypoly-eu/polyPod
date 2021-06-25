@@ -19,11 +19,11 @@ function Template({
 }) {
   return html`
     ${themeConfiguration()}
-    <poly-tabs .tabs=${tabs}>
+    <poly-tabs-line .tabs=${tabs}>
       <div slot="tab01" style="color: black;"><h1>This is the tab 01</h1></div slot="tab01">
       <div slot="tab02" style="color: black;"><h1>This is the tab 02</h1></div slot="tab01">
       <div slot="tab03" style="color: black;"><h1>This is the tab 03</h1></div slot="tab01">
-    </poly-tabs>
+    </poly-tabs-line>
   `;
 }
 
