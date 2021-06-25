@@ -1,4 +1,4 @@
 {
-  "pluginsFile": "cypress/plugins/index.cjs",
+  "pluginsFile": false,
   "video": false
 }
