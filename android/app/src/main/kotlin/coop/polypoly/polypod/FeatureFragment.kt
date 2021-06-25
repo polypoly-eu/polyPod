@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -93,6 +94,11 @@ open class FeatureFragment : Fragment() {
         )
         feature =
             FeatureStorage().loadFeature(requireContext(), args.featureFile)
+
+        setupFeature(view)
+    }
+
+    private fun setupFeature(view: View) {
         foregroundResources =
             ForegroundResources.fromBackgroundColor(feature.primaryColor)
         activity?.window?.navigationBarColor = feature.primaryColor
