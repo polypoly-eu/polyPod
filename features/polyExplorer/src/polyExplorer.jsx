@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import {
     MemoryRouter as Router,
     Switch,
+    Redirect,
     Route,
     useHistory,
 } from "react-router-dom";
@@ -38,6 +39,11 @@ const PolyExplorerApp = () => {
         <div className="poly-explorer">
             <Switch>
                 <Route exact path="/">
+                    <Redirect
+                        to={{ pathname: "/main", state: navigationState }}
+                    />
+                </Route>
+                <Route exact path="/main">
                     <MainScreen />
                 </Route>
                 <Route exact path="/company-details">

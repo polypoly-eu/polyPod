@@ -122,12 +122,17 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function updatePodNavigation() {
-        if (
+        if (currentPath == "/")
+            pod.polyNav.setTitle(i18n.t(`common:screenTitle.main`));
+        else if (
             currentPath == "/data-exploration" ||
             currentPath == "/company-details"
         )
             pod.polyNav.setTitle(companies[selectedCompany].name);
-        else pod.polyNav.setTitle(i18n.t(`common:screenTitle.${currentPath}`));
+        else
+            pod.polyNav.setTitle(
+                i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
+            );
         pod.polyNav.actions = navigationState.firstRun
             ? {
                   info: () => {},
@@ -139,7 +144,7 @@ export const ExplorerProvider = ({ children }) => {
                   back: handleBack,
               };
         pod.polyNav.setActiveActions(
-            currentPath == "/" ? ["info", "search"] : ["back"]
+            currentPath == "/main" ? ["info", "search"] : ["back"]
         );
     }
 
@@ -195,7 +200,6 @@ export const ExplorerProvider = ({ children }) => {
                 ),
             300
         );
-        history.push("/", navigationState);
     }, []);
 
     //on-change

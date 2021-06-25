@@ -15,7 +15,7 @@ const MainScreen = () => {
         <Screen className="main-screen" topShadow={false}>
             <div className="nav-button-container">
                 <button
-                    onClick={() => routeTo("/", { showClusters: true })}
+                    onClick={() => routeTo("main", { showClusters: true })}
                     className={
                         showClusters ? "nav-button active" : "nav-button"
                     }
@@ -23,7 +23,7 @@ const MainScreen = () => {
                     {i18n.t("mainScreen:tab.discover")}
                 </button>
                 <button
-                    onClick={() => routeTo("/", { showClusters: false })}
+                    onClick={() => routeTo("main", { showClusters: false })}
                     className={
                         showClusters ? "nav-button" : "nav-button active"
                     }

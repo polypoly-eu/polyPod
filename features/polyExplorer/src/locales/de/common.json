@@ -1,29 +1,29 @@
 {
-    "screenTitle./":
+    "screenTitle.main":
         "polyExplorer",
-    "screenTitle./data-exploration":
+    "screenTitle.data-exploration":
         "Daten erkunden",
-    "screenTitle./company-filters":
+    "screenTitle.company-filters":
         "Filter",
-    "screenTitle./featured-company-info":
+    "screenTitle.featured-company-info":
         "Wie ist das zu verstehen?",
-    "screenTitle./data-region-info":
+    "screenTitle.data-region-info":
         "Wie ist das zu verstehen?",
-    "screenTitle./data-types-info":
+    "screenTitle.data-types-info":
         "Wie ist das zu verstehen?",
-    "screenTitle./data-category-info":
+    "screenTitle.data-category-info":
         "Wie ist das zu verstehen?",
-    "screenTitle./data-correlation-info":
+    "screenTitle.data-correlation-info":
         "Wie ist das zu verstehen?",
-    "screenTitle./purpose-info":
+    "screenTitle.purpose-info":
         "Wie ist das zu verstehen?",
-    "screenTitle./companies-info":
+    "screenTitle.companies-info":
         "Wie ist das zu verstehen?",
-    "screenTitle./jurisdiction-info":
+    "screenTitle.jurisdiction-info":
         "Wie ist das zu verstehen?",
-    "screenTitle./search":
+    "screenTitle.search":
         "Suche",
-    "screenTitle./info":
+    "screenTitle.info":
         "Information",
     "companyFilter.missing":
         "Unbekannt",
