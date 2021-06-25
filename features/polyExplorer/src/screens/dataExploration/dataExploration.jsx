@@ -53,8 +53,14 @@ const DataExplorationScreen = () => {
         return total;
     };
 
+    //This is horrible but we need to put the activeIndex in the old state that gets reloaded
+    // but the routing is faster than this so we need to edit the old state here
+    // the -1 is because in the moment of click the activeindex is increased by swiper
+    // these problems will solve themselves when switching to scrollytelling
     const saveActiveIndex = () => {
-        history.location.state.explorationState.index = activeIndex;
+        history.entries[
+            history.entries.length - 2
+        ].state.explorationState.index = activeIndex - 1;
     };
 
     const companyIndustryMap = useMemo(() => {
@@ -166,7 +172,7 @@ const DataExplorationScreen = () => {
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(getStartIndex());
     const [purposePopupContent, setPurposePopupContent] = useState(null);
-
+    console.log(activeIndex);
     //Constants
     const activeScreen = screens[activeIndex];
     const highestValueObject = getHighestValueObject();
@@ -273,13 +279,7 @@ const DataExplorationScreen = () => {
 
                     <InfoButton
                         route="data-types-info"
-                        stateChange={{
-                            explorationState: {
-                                section: "dataTypes",
-                                index: activeIndex,
-                                category: null,
-                            },
-                        }}
+                        saveActiveIndex={saveActiveIndex}
                     />
                     {filler}
                 </div>
@@ -309,14 +309,8 @@ const DataExplorationScreen = () => {
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        route="data-category-info"
-                        stateChange={{
-                            explorationState: {
-                                section: "dataTypes",
-                                index: activeIndex,
-                                category: null,
-                            },
-                        }}
+                        route="data-types-info"
+                        saveActiveIndex={saveActiveIndex}
                     />
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
@@ -345,6 +339,7 @@ const DataExplorationScreen = () => {
 
                     <InfoButton
                         route="data-category-info"
+                        saveActiveIndex={saveActiveIndex}
                         stateChange={{
                             explorationState: {
                                 section: "dataTypes",
@@ -378,13 +373,7 @@ const DataExplorationScreen = () => {
                     </p>
                     <InfoButton
                         route="data-correlation-info"
-                        stateChange={{
-                            explorationState: {
-                                section: "dataTypes",
-                                index: activeIndex,
-                                category: null,
-                            },
-                        }}
+                        saveActiveIndex={saveActiveIndex}
                     />
                     <div className="data-sharing-legend-fill"></div>
                 </div>
@@ -413,13 +402,7 @@ const DataExplorationScreen = () => {
 
                     <InfoButton
                         route="data-correlation-info"
-                        stateChange={{
-                            explorationState: {
-                                section: "dataTypes",
-                                index: activeIndex,
-                                category: null,
-                            },
-                        }}
+                        saveActiveIndex={saveActiveIndex}
                     />
                 </div>
             );
@@ -450,13 +433,7 @@ const DataExplorationScreen = () => {
 
                     <InfoButton
                         route="companies-info"
-                        stateChange={{
-                            explorationState: {
-                                section: "companies",
-                                index: activeIndex,
-                                category: null,
-                            },
-                        }}
+                        saveActiveIndex={saveActiveIndex}
                     />
                 </div>
             );
@@ -485,13 +462,7 @@ const DataExplorationScreen = () => {
                     </p>
                     <InfoButton
                         route="companies-info"
-                        stateChange={{
-                            explorationState: {
-                                section: "companies",
-                                index: activeIndex,
-                                category: null,
-                            },
-                        }}
+                        saveActiveIndex={saveActiveIndex}
                     />
                     <div className="data-sharing-legend-fill"></div>
                     {filler}
@@ -536,13 +507,7 @@ const DataExplorationScreen = () => {
 
                     <InfoButton
                         route="companies-info"
-                        stateChange={{
-                            explorationState: {
-                                section: "companies",
-                                index: activeIndex,
-                                category: null,
-                            },
-                        }}
+                        saveActiveIndex={saveActiveIndex}
                     />
                 </div>
             );
@@ -671,13 +636,7 @@ const DataExplorationScreen = () => {
                                 <PurposeChart
                                     purposes={company.dataSharingPurposes}
                                     openPopup={setPurposePopupContent}
-                                    purposeState={{
-                                        explorationState: {
-                                            section: "purposes",
-                                            index: activeIndex,
-                                            category: null,
-                                        },
-                                    }}
+                                    saveActiveIndex={saveActiveIndex}
                                 />
                             </div>
                         </SwiperSlide>
@@ -733,23 +692,11 @@ const DataExplorationScreen = () => {
                                 />
 
                                 <DataRegionsLegend
-                                    stateChange={{
-                                        explorationState: {
-                                            section: "jurisdictions",
-                                            index: activeIndex,
-                                            category: null,
-                                        },
-                                    }}
+                                    saveActiveIndex={saveActiveIndex}
                                 />
                                 <InfoButton
                                     route="jurisdiction-info"
-                                    stateChange={{
-                                        explorationState: {
-                                            section: "jurisdictions",
-                                            index: activeIndex,
-                                            category: null,
-                                        },
-                                    }}
+                                    saveActiveIndex={saveActiveIndex}
                                 />
                                 <LinkButton
                                     route="/company-details"
