@@ -309,8 +309,13 @@ const DataExplorationScreen = () => {
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        onClick={() => {
-                            openDataTypesInfo(activeIndex);
+                        route="data-category-info"
+                        stateChange={{
+                            explorationState: {
+                                section: "dataTypes",
+                                index: activeIndex,
+                                category: null,
+                            },
                         }}
                     />
                     <div className="data-sharing-legend-fill"></div>
@@ -372,8 +377,13 @@ const DataExplorationScreen = () => {
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        onClick={() => {
-                            openDataTypesInfo(activeIndex);
+                        route="data-correlation-info"
+                        stateChange={{
+                            explorationState: {
+                                section: "dataTypes",
+                                index: activeIndex,
+                                category: null,
+                            },
                         }}
                     />
                     <div className="data-sharing-legend-fill"></div>
@@ -474,8 +484,13 @@ const DataExplorationScreen = () => {
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        onClick={() => {
-                            openCompaniesInfo(activeIndex);
+                        route="companies-info"
+                        stateChange={{
+                            explorationState: {
+                                section: "companies",
+                                index: activeIndex,
+                                category: null,
+                            },
                         }}
                     />
                     <div className="data-sharing-legend-fill"></div>
@@ -523,7 +538,7 @@ const DataExplorationScreen = () => {
                         route="companies-info"
                         stateChange={{
                             explorationState: {
-                                section: "dataTypes",
+                                section: "companies",
                                 index: activeIndex,
                                 category: null,
                             },

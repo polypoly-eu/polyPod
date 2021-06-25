@@ -6,7 +6,6 @@ import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLeg
 import FeaturedCompany from "../../components/featuredCompany/featuredCompany.jsx";
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
-import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import "./companyDetails.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
