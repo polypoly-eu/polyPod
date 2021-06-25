@@ -110,7 +110,9 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.setBackgroundColor(feature.primaryColor)
         api.polyNav.setNavObserver(
             PolyNavObserver(
-                null, null, { url -> openUrl(url) }
+                null,
+                null,
+                { url -> openUrl(url) }
             )
         )
 
@@ -271,8 +273,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         fun copyToClipboard(text: String?) {
             var clipboard: ClipboardManager =
                 context.getSystemService(ClipboardManager::class.java)
-            val clip = ClipData.newPlainText("nativeClipboardText", text);
-            clipboard.setPrimaryClip(clip);
+            val clip = ClipData.newPlainText("nativeClipboardText", text)
+            clipboard.setPrimaryClip(clip)
         }
     }
 }
