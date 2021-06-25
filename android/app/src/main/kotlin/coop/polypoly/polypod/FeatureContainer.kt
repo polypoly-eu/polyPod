@@ -266,5 +266,13 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     class ClipboardInterface(aContext: Context) {
         var context: Context = aContext
+
+        @JavascriptInterface
+        fun copyToClipboard(text: String?) {
+            var clipboard: ClipboardManager =
+                context.getSystemService(ClipboardManager::class.java)
+            val clip = ClipData.newPlainText("nativeClipboardText", text);
+            clipboard.setPrimaryClip(clip);
+        }
     }
 }
