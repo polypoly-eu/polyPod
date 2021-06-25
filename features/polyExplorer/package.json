@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
-    "@polypoly-eu/dummy-server": "file:../../core/utils/dummy-server",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
