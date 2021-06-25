@@ -23,6 +23,7 @@ import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
 import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
+import { useHistory } from "react-router-dom";
 
 const DataExplorationScreen = () => {
     const {
@@ -35,6 +36,7 @@ const DataExplorationScreen = () => {
     const startSection = navigationState.explorationState.section;
     const startIndex = navigationState.explorationState.index;
     const maxCompanies = featuredCompanyMaxValues.companies;
+    const history = useHistory();
 
     if (company.dataRecipients.length == 0) return <Screen></Screen>;
 
@@ -48,6 +50,10 @@ const DataExplorationScreen = () => {
             total += e.count;
         });
         return total;
+    };
+
+    const saveActiveIndex = () => {
+        history.location.state.explorationState.index = activeIndex;
     };
 
     const companyIndustryMap = useMemo(() => {
@@ -672,7 +678,7 @@ const DataExplorationScreen = () => {
                                 <CompanyIndustryList
                                     companyIndustryMap={companyIndustryMap}
                                     ecoItems={dataRecipients.length > 100}
-                                    activeExplorationIndex={activeIndex}
+                                    saveActiveIndex={saveActiveIndex}
                                 />
                             </div>
                         </SwiperSlide>
