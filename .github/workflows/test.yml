@@ -33,9 +33,13 @@ jobs:
             - '**/*.ts'
             - '**/*.tsx'
             - '**/*.?js'
+            - '.editorconfig'
+            - '.eslintrc.cjs'
             polypod:
             - 'core/**'
             - 'features/**'
+            - 'podjs/**'
+            - 'build/**'
       - name: Lint core and features
         if: steps.changes.outputs.js == 'true'
         run: ./build.js lint
