@@ -44,7 +44,7 @@ jobs:
         if: steps.changes.outputs.js == 'true'
         run: ./build.js lint
       - name: Build core and features
-        if: steps.changes.outputs.polypod == 'true'
+        if: steps.changes.outputs.polypod == 'true' || steps.changes.outputs.android == 'true'
         run: ./build.js
       - name: Test core and features
         if: steps.changes.outputs.polypod == 'true'
