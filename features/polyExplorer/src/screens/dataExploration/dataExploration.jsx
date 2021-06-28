@@ -312,8 +312,6 @@ const DataExplorationScreen = () => {
                         route="data-types-info"
                         saveActiveIndex={saveActiveIndex}
                     />
-                    <div className="data-sharing-legend-fill"></div>
-                    {filler}
                 </div>
             );
         else if (activeScreen.startsWith("dataTypesCategory"))
@@ -375,7 +373,6 @@ const DataExplorationScreen = () => {
                         route="data-correlation-info"
                         saveActiveIndex={saveActiveIndex}
                     />
-                    <div className="data-sharing-legend-fill"></div>
                 </div>
             );
         else if (activeScreen === "dataTypesCorrelation")
@@ -472,8 +469,6 @@ const DataExplorationScreen = () => {
                         route="companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
-                    <div className="data-sharing-legend-fill"></div>
-                    {filler}
                 </div>
             );
         else if (
