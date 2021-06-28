@@ -19,7 +19,10 @@ class PolyOutTestDouble : PolyOut() {
         responseOk = false
     }
 
-    override suspend fun fetch(resource: String, init: FetchInit): FetchResponse {
+    override suspend fun fetch(
+        resource: String,
+        init: FetchInit
+    ): FetchResponse {
         fetchWasCalled = true
         fetchInit = init
         val response = FetchResponse()

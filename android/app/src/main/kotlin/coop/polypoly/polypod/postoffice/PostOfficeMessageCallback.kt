@@ -10,7 +10,11 @@ import eu.polypoly.bubblewrap.Codec
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class PostOfficeMessageCallback(private val coroutineScope: CoroutineScope, private val outerPort: WebMessagePort, private val api: PodApi) : WebMessagePort.WebMessageCallback() {
+class PostOfficeMessageCallback(
+    private val coroutineScope: CoroutineScope,
+    private val outerPort: WebMessagePort,
+    private val api: PodApi
+) : WebMessagePort.WebMessageCallback() {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
@@ -31,16 +35,29 @@ class PostOfficeMessageCallback(private val coroutineScope: CoroutineScope, priv
             val encoded = try {
                 val response = api.dispatch(request)
                 logger.debug("Got response from api.dispatch: '{}'", response)
-                Bubblewrap.encode(mapOf(Pair("response", response), Pair("id", id)), codec)
+                Bubblewrap.encode(
+                    mapOf(
+                        Pair("response", response),
+                        Pair("id", id)
+                    ),
+                    codec
+                )
             } catch (e: Exception) {
-                logger.error("Something went wrong with dispatching the request", e)
+                logger.error(
+                    "Something went wrong with dispatching the request",
+                    e
+                )
                 Bubblewrap.encode(
                     mapOf(
                         Pair(
                             "error",
-                            Codec.string.encode("Something went wrong: ${e.message}")
-                        ), Pair("id", id)
-                    ), codec
+                            Codec.string.encode(
+                                "Something went wrong: ${e.message}"
+                            )
+                        ),
+                        Pair("id", id)
+                    ),
+                    codec
                 )
             }
             val raw = Base64.encodeToString(encoded, Base64.NO_WRAP)

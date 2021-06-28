@@ -4,7 +4,6 @@ import android.content.Context
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
 import java.util.zip.ZipFile
 
 class FeatureStorage {

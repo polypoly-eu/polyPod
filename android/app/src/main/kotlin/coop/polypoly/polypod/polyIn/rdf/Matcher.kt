@@ -10,7 +10,9 @@ class Matcher(val subject: IRI?, val predicate: IRI?, val `object`: IRI?) {
 
         val codec: Codec<Matcher> = object : Codec<Matcher> {
             override fun encode(t: Matcher): Value {
-                throw UnsupportedOperationException("Matcher should never be sent from the Pod to the Feature")
+                throw UnsupportedOperationException(
+                    "Matcher should never be sent from the Pod to the Feature"
+                )
             }
 
             override fun decode(value: Value): Matcher {
@@ -20,7 +22,9 @@ class Matcher(val subject: IRI?, val predicate: IRI?, val `object`: IRI?) {
                 val `object` = map[ValueFactory.newString("object")]
                 return Matcher(
                     if (subject != null) IRI.codec.decode(subject) else null,
-                    if (predicate != null) IRI.codec.decode(predicate) else null,
+                    if (predicate != null)
+                        IRI.codec.decode(predicate)
+                    else null,
                     if (`object` != null) IRI.codec.decode(`object`) else null
                 )
             }
