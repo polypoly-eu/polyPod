@@ -1,0 +1,29 @@
+.testbutton {
+    height: 40px;
+    width: 80px;
+    background-color: tomato;
+}
+
+.story .content {
+    color: var(--color-text-dark);
+    padding: 0px 16px;
+    overflow: hidden scroll;
+    display: flex;
+    scroll-behavior: smooth;
+}
+
+.story .scroll-up-btn,
+.story .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.story .progress-bar {
+    height: 4px;
+}
+
+.story .scroll-up-btn {
+    width: 100%;
+    height: 10%;
+}

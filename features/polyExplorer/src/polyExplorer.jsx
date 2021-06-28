@@ -26,6 +26,7 @@ import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/compani
 import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/jurisdictionInfo.jsx";
 import FeaturedCompanyInfoScreen from "./screens/featuredCompanyInfo/featuredCompanyInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
+import DataStory from "./components/dataStory/dataStory.jsx";
 
 const PolyExplorerApp = () => {
     const {
@@ -45,6 +46,9 @@ const PolyExplorerApp = () => {
                 </Route>
                 <Route exact path="/main">
                     <MainScreen />
+                </Route>
+                <Route exact path="/data-story">
+                    <DataStory />
                 </Route>
                 <Route exact path="/company-details">
                     <CompanyDetailsScreen />

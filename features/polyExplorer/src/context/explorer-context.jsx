@@ -129,6 +129,8 @@ export const ExplorerProvider = ({ children }) => {
             currentPath == "/company-details"
         )
             pod.polyNav.setTitle(companies[selectedCompany].name);
+        else if (currentPath == "/data-story")
+            pod.polyNav.setTitle("data-story name goes here");
         else
             pod.polyNav.setTitle(
                 i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
