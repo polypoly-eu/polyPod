@@ -2,9 +2,8 @@ import React from "react";
 
 import "./dataRegionsLegend.css";
 import i18n from "../../i18n.js";
-import LinkButton from "../buttons/linkButton/linkButton.jsx";
 
-const DataRegionsLegend = ({ jurisdictionsState }) => {
+const DataRegionsLegend = () => {
     return (
         <div className="location-legend">
             <div className="legend">
