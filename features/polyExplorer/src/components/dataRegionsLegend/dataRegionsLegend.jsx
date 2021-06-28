@@ -34,7 +34,7 @@ const DataRegionsLegend = ({ jurisdictionsState }) => {
             </div>
             <LinkButton
                 route="/data-region-info"
-                className="info-button"
+                className=""
                 stateChange={jurisdictionsState}
             >
                 <img src="./images/question-circle.svg" />

@@ -60,7 +60,7 @@ const DataExplorationScreen = () => {
     const saveActiveIndex = () => {
         history.entries[
             history.entries.length - 2
-        ].state.explorationState.index = activeIndex - 1;
+        ].state.explorationState.index = activeIndex;
     };
 
     const companyIndustryMap = useMemo(() => {
@@ -407,7 +407,15 @@ const DataExplorationScreen = () => {
                 </div>
             );
         else if (activeScreen === "purposes")
-            return <div className="static-content">{filler}</div>;
+            return (
+                <div className="static-content">
+                    {filler}{" "}
+                    <InfoButton
+                        route="/purpose-info"
+                        saveActiveIndex={saveActiveIndex}
+                    />
+                </div>
+            );
         else if (activeScreen === "companies")
             return (
                 <div className="static-content">
@@ -525,7 +533,15 @@ const DataExplorationScreen = () => {
                 </div>
             );
         else if (activeScreen === "jurisdictions")
-            return <div className="static-content"></div>;
+            return (
+                <div className="static-content">
+                    {" "}
+                    <InfoButton
+                        route="/jurisdiction-info"
+                        saveActiveIndex={saveActiveIndex}
+                    />
+                </div>
+            );
     };
 
     function handleSwipableContentClick(event) {
@@ -690,12 +706,7 @@ const DataExplorationScreen = () => {
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
                                 />
-
                                 <DataRegionsLegend
-                                    saveActiveIndex={saveActiveIndex}
-                                />
-                                <InfoButton
-                                    route="jurisdiction-info"
                                     saveActiveIndex={saveActiveIndex}
                                 />
                                 <LinkButton

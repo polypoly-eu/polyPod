@@ -4,12 +4,11 @@ import i18n from "../../../i18n.js";
 import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
-const PurposeInfo = ({ onClose }) => {
+const PurposeInfo = () => {
     return (
         <BaseInfoScreen
             className="purpose-info"
             headline={i18n.t("explorationPurposeInfoScreen:headline")}
-            onClose={onClose}
         >
             <div className="base-info-padding">
                 <p>{i18n.t("explorationPurposeInfoScreen:text.1")}</p>

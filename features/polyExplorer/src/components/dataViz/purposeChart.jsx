@@ -2,11 +2,10 @@ import React from "react";
 
 import i18n from "../../i18n.js";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
-import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import "./purposeChart.css";
 
-const PurposeChart = ({ purposes, openPopup, purposeState }) => {
+const PurposeChart = ({ purposes, openPopup }) => {
     const getHighestCount = () => {
         let highest = 0;
         purposes.forEach((e) => {
@@ -99,7 +98,6 @@ const PurposeChart = ({ purposes, openPopup, purposeState }) => {
                 {scale}
             </div>
             <Scrollable>{bars}</Scrollable>
-            <InfoButton route="/purpose-info" stateChange={purposeState} />
         </div>
     );
 };

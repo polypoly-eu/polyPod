@@ -165,7 +165,6 @@
     bottom: 130px;
 }
 
-
 .data-exploration .static-content .data-sharing-legend-fill {
     box-sizing: border-box;
     flex: 0 0 auto;
@@ -227,6 +226,7 @@
 
 .data-exploration .slide-tap-target {
     position: absolute;
+    height: 50%;
     top: 40px;
     right: 0;
     bottom: 60px;
