@@ -534,7 +534,7 @@ const DataExplorationScreen = () => {
             );
         else if (activeScreen === "jurisdictions")
             return (
-                <div className="static-content">
+                <div className="static-content static-content-jurisdictions">
                     {" "}
                     <InfoButton
                         route="/jurisdiction-info"
