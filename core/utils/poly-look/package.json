@@ -13,7 +13,7 @@
     "test:watch": "web-test-runner --watch",
     "storybook": "web-dev-server -c .storybook/server.mjs",
     "storybook:build": "build-storybook",
-    "build": "rimraf *.bundled.js && rollup -c rollup.config.js"
+    "build": "rimraf *.bundled.js && rollup -c rollup.config.js && npm run storybook:build"
   },
   "dependencies": {
     "lit-element": "^2.5.1",
