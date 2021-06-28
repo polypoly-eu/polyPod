@@ -3,7 +3,7 @@ import { terser } from "rollup-plugin-terser";
 import resolve from "rollup-plugin-node-resolve";
 
 export default {
-  input: "poly-look.js",
+  input: "src/poly-look.js",
   output: {
     file: "dist/poly-look.bundled.js",
     format: "esm",
