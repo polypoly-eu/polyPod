@@ -14,7 +14,7 @@ describe("Purposes", () => {
             });
     });
 
-    it(`should throw an error if the "How to read this" content has change`, () => {
+    it("It checks if buttons can be clicked", () => {
         cy.get(".help").click();
         cy.get("button").click();
     });

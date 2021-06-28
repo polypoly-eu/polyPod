@@ -8,9 +8,7 @@ describe("Data stories", () => {
         });
     });
 
-    it(`
-        should throw an error if the screen of the bars of the companies has changes
-    `, () => {
+    it("should fail if swiping in the companies screen does not work", () => {
         const numberSwipes = 8;
         cy.visit(INDEX_ROUTE);
         cy.get(".button-container button").click();
