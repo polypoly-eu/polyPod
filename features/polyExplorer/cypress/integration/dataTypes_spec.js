@@ -36,7 +36,7 @@ describe("Data types", () => {
         );
     });
 
-    it(`should change slide each time we shipe up on the screen`, () => {
+    it(`should change slide each time we swipe up on the screen`, () => {
         navigation(
             0,
             (slide) => !slide.children(".slide-tap-target").length,
