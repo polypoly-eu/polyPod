@@ -66,13 +66,10 @@ Please read the [SECURITY](SECURITY.md) document on how to report potential
 security vulnerabilities in polyPod and where to find polypoly's Vulnerability
 Disclosure Policy.
 
-## Issues
+## Issues, contributions.
 
-For the time being, issues are disabled in this repo. If it's an easy fix (such
-as a typo) you can go and create a pull request. If it's any other kind of
-issue, such as a feature request, please email us at
-feedback@polypoly.eu. Please understand that this is a temporary solution, and
-issues will be enabled in due course.
+Please see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 
 ## Links
 
