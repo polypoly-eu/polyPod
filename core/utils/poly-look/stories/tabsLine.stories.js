@@ -1,5 +1,5 @@
 import { html } from "lit-element";
-import "../src/poly-look.js";
+import "../src/tabs";
 import { themeConfiguration } from "./themeConfiguration";
 
 export default {
