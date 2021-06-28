@@ -1,16 +1,47 @@
 package coop.polypoly.polypod.polyIn
 
-import coop.polypoly.polypod.polyIn.rdf.*
-import org.apache.jena.rdf.model.*
+import android.content.Context
+import coop.polypoly.polypod.polyIn.rdf.QuadBuilder
+import coop.polypoly.polypod.polyIn.rdf.IRI
+import coop.polypoly.polypod.polyIn.rdf.Matcher
+import coop.polypoly.polypod.polyIn.rdf.Quad
+import coop.polypoly.polypod.polyIn.rdf.IRIObject
+import coop.polypoly.polypod.polyIn.rdf.IRISubject
+import coop.polypoly.polypod.polyIn.rdf.BlankNodeObject
+import coop.polypoly.polypod.polyIn.rdf.BlankNodeSubject
+import coop.polypoly.polypod.polyIn.rdf.LiteralObject
+import coop.polypoly.polypod.polyIn.rdf.QuadObject
+import coop.polypoly.polypod.polyIn.rdf.QuadSubject
+import org.apache.jena.rdf.model.Model
+import org.apache.jena.rdf.model.ResourceFactory
+import org.apache.jena.rdf.model.ModelFactory
+import org.apache.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.Resource
 import java.io.File
+import androidx.security.crypto.EncryptedFile
+import androidx.security.crypto.MasterKey
+import coop.polypoly.polypod.logging.LoggerFactory
+import java.io.FileOutputStream
+import java.lang.Exception
+
+const val RDF_FORMAT = "N-TRIPLE"
+const val NS = "polypoly"
 
 open class PolyIn(
-    private val databaseName: String = "data.nt",
+    private val databaseName: String = "data_enc.nt",
     private val databaseFolder: File? = null,
+    private val context: Context,
 ) {
-    val NS = "polypoly"
+    private val databaseNameOld = "data.nt"
 
     private val model: Model = load()
+    private var encryptedFileOut: FileOutputStream? = null
+    private var encryptedDatabase: EncryptedFile? = null
+
+    companion object {
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+    }
 
     open suspend fun select(matcher: Matcher): List<Quad> {
         val retList: MutableList<Quad> = mutableListOf()
@@ -40,7 +71,22 @@ open class PolyIn(
                 quadObjectToResource(quad.`object`)
             )
         }
+        // TODO: Implement "isDirty" flag or expose save() to features
         save()
+    }
+
+    private fun getDatabase(file: File): EncryptedFile {
+        val mainKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .setUserAuthenticationRequired(true)
+            .build()
+
+        return EncryptedFile.Builder(
+            context,
+            file,
+            mainKey,
+            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+        ).build()
     }
 
     private fun load(): Model {
@@ -48,18 +94,57 @@ open class PolyIn(
 
         val database = File(databaseFolder, databaseName)
         if (!database.exists()) {
-            database.createNewFile()
+            return model
         }
-        database.inputStream().use { inputStream ->
-            model.read(inputStream, null, "N-TRIPLE")
+
+        // Migrate old unencrypted database
+        // TODO: Remove this when migration is not needed anymore
+        val unencryptedDatabase = File(databaseFolder, databaseNameOld)
+        if (unencryptedDatabase.exists()) {
+            unencryptedDatabase.inputStream().use { inputStream ->
+                model.read(inputStream, null, RDF_FORMAT)
+            }
+            unencryptedDatabase.delete()
+            return model
+        }
+
+        if (encryptedDatabase == null) {
+            encryptedDatabase = getDatabase(database)
+        }
+
+        encryptedDatabase!!.openFileInput().use { inputStream ->
+            model.read(inputStream, null, RDF_FORMAT)
         }
         return model
     }
 
     private fun save() {
-        File(databaseFolder, databaseName).outputStream().use { out ->
-            model.write(out, "N-TRIPLE")
+        if (encryptedFileOut != null) {
+            model.write(encryptedFileOut, RDF_FORMAT)
+            return
         }
+
+        // We cannot append to encrypted files, so we make a copy of an old file
+        // and create a new encrypted one for writing
+        val tempFileName = "temp_" + databaseName
+        val database = File(databaseFolder, databaseName)
+        val tempDatabase = File(databaseFolder, tempFileName)
+        if (!database.exists()) {
+            database.createNewFile()
+        }
+        database.renameTo(tempDatabase)
+        try {
+            encryptedDatabase = getDatabase(database)
+
+            encryptedFileOut = encryptedDatabase!!.openFileOutput()
+            model.write(encryptedFileOut, RDF_FORMAT)
+            encryptedFileOut?.flush()
+            encryptedFileOut?.close()
+        } catch (e: Exception) {
+            logger.error(e.message)
+            tempDatabase.renameTo(database)
+        }
+        File(databaseFolder, tempFileName).delete()
     }
 
     open fun clean() {
