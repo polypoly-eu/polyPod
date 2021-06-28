@@ -126,7 +126,7 @@ const CompanyDetails = () => {
                                 category: null,
                             },
                         }}
-                        route="/data-exploration"
+                        route="/featured-company-info"
                     />
                 </>
             ),
