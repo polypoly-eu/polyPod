@@ -16,7 +16,7 @@ describe("Data types", () => {
             });
     });
 
-    it(`should change of slide each time we click on the screen`, () => {
+    it(`should change slide each time we click on the screen`, () => {
         navigation(
             0,
             (slide) => !slide.children(".slide-tap-target").length,
@@ -26,7 +26,7 @@ describe("Data types", () => {
         );
     });
 
-    it(`should change of slide each time we click on the down-button`, () => {
+    it(`should change slide each time we click on the down-button`, () => {
         navigation(
             0,
             (slide) => !slide.children(".slide-tap-target").length,
@@ -36,7 +36,7 @@ describe("Data types", () => {
         );
     });
 
-    it(`should change of slide each time we shipe up on the screen`, () => {
+    it(`should change slide each time we shipe up on the screen`, () => {
         navigation(
             0,
             (slide) => !slide.children(".slide-tap-target").length,
