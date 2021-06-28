@@ -35,7 +35,7 @@ jobs:
             - '**/*.?js'
             - '.editorconfig'
             - '.eslintrc.cjs'
-            polypod:
+            coreAndFeatures:
             - 'core/**'
             - 'features/**'
             - 'podjs/**'
@@ -44,10 +44,10 @@ jobs:
         if: steps.changes.outputs.js == 'true'
         run: ./build.js lint
       - name: Build core and features
-        if: steps.changes.outputs.polypod == 'true' || steps.changes.outputs.android == 'true'
+        if: steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.android == 'true'
         run: ./build.js
       - name: Test core and features
-        if: steps.changes.outputs.polypod == 'true'
+        if: steps.changes.outputs.coreAndFeatures == 'true'
         run: xvfb-run --auto-servernum ./build.js test
       - uses: actions/setup-java@v1
         if: steps.changes.outputs.android == 'true'
