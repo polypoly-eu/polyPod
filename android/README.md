@@ -30,6 +30,18 @@ Then set `sdk.dir` in `local.properties` and finally run:
 With a device connected (real or emulated), execute the `connectedAndroidTest`
 task.
 
+### Linting
+
+We use [ktlint](https://github.com/pinterest/ktlint) for testing the source, and
+that it conforms to the usual standards. It will be run automatically when
+you push or create a pull request, but you can download it run it with
+
+```
+ktlint
+```
+
+in this directory after downloading it.
+
 ## Installing features at runtime
 
 The polyPod already bundles the features it ships with, but it will also load

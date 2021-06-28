@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -80,7 +79,8 @@ open class FeatureFragment : Fragment() {
     private lateinit var featureContainer: FeatureContainer
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_feature, container, false)
 
@@ -137,19 +137,22 @@ open class FeatureFragment : Fragment() {
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() = navigateBack()
-            })
-
-        featureContainer.api.polyNav.setNavObserver(PolyNavObserver(
-            {
-                activity?.runOnUiThread { updateAppBarActions(view, it) }
-            },
-            {
-                activity?.runOnUiThread { updateAppBarTitle(view, it) }
-            },
-            {
-                activity?.runOnUiThread { featureContainer.openUrl(it) }
             }
-        ))
+        )
+
+        featureContainer.api.polyNav.setNavObserver(
+            PolyNavObserver(
+                {
+                    activity?.runOnUiThread { updateAppBarActions(view, it) }
+                },
+                {
+                    activity?.runOnUiThread { updateAppBarTitle(view, it) }
+                },
+                {
+                    activity?.runOnUiThread { featureContainer.openUrl(it) }
+                }
+            )
+        )
     }
 
     private fun navigateBack() {
@@ -163,13 +166,15 @@ open class FeatureFragment : Fragment() {
             if (actionButton == ActionButton.CLOSE) {
                 buttonView.setImageResource(
                     foregroundResources.icons.getValue(
-                        if (Action.BACK.id in navActions) Action.BACK else Action.CLOSE
+                        if (Action.BACK.id in navActions) Action.BACK
+                        else Action.CLOSE
                     )
                 )
                 continue
             }
             buttonView.visibility =
-                if (actionButton.action.id in navActions) View.VISIBLE else View.GONE
+                if (actionButton.action.id in navActions) View.VISIBLE
+                else View.GONE
         }
     }
 

@@ -16,13 +16,6 @@ import org.slf4j.Logger
  * But using logback would anyway not be perfect, because it alone is >750kB and we're talking about mobile app.
  */
 object LoggerFactory {
-    fun getLogger(name: String): Logger {
-        return if (isAndroid())
-            AndroidLogger("polyPod")
-        else {
-            org.slf4j.LoggerFactory.getLogger(name)
-        }
-    }
 
     fun getLogger(clazz: Class<*>?): Logger {
         return if (isAndroid())

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 
 /**
@@ -21,27 +20,39 @@ class FeatureListFragment : Fragment() {
     private val featureStorage = FeatureStorage()
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_feature_list, container, false)
+        return inflater.inflate(
+            R.layout.fragment_feature_list,
+            container,
+            false
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.window?.navigationBarColor = resources.getColor(R.color.featureListBackground, context?.theme)
+        activity?.window?.navigationBarColor =
+            resources.getColor(R.color.featureListBackground, context?.theme)
 
         val context = requireContext()
 
         val infoButton: View = view.findViewById(R.id.info_button)
         infoButton.setOnClickListener {
-            findNavController().navigate(FeatureListFragmentDirections.actionFeatureListFragmentToOnboardingActivity())
+            findNavController().navigate(
+                FeatureListFragmentDirections
+                    .actionFeatureListFragmentToOnboardingActivity()
+            )
         }
 
         val settingsButton: View = view.findViewById(R.id.settings_button)
         settingsButton.setOnClickListener {
-            findNavController().navigate(FeatureListFragmentDirections.actionFeatureListFragmentToSettingsActivity())
+            findNavController().navigate(
+                FeatureListFragmentDirections
+                    .actionFeatureListFragmentToSettingsActivity()
+            )
         }
 
         val features = featureStorage.listFeatures(context)
@@ -55,7 +66,10 @@ class FeatureListFragment : Fragment() {
             adapter = viewAdapter
         }
 
-        (if (features.isEmpty()) recyclerView else view.findViewById(R.id.noFeaturesText) as View)
-            .visibility = View.GONE
+        (
+            if (features.isEmpty())
+                recyclerView
+            else view.findViewById(R.id.noFeaturesText) as View
+            ).visibility = View.GONE
     }
 }

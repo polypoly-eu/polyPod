@@ -31,7 +31,12 @@ class MainActivity : AppCompatActivity() {
 
         if (Preferences.isFirstRun(this)) {
             notification.markInAppNotificationSeen()
-            startActivity(Intent(this, OnboardingActivity::class.java))
+            startActivity(
+                Intent(
+                    this,
+                    OnboardingActivity::class.java
+                )
+            )
             return
         }
 
@@ -39,7 +44,9 @@ class MainActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle(notification.title)
                 .setMessage(notification.text)
-                .setPositiveButton(R.string.button_update_notification_close) { _, _ ->
+                .setPositiveButton(
+                    R.string.button_update_notification_close
+                ) { _, _ ->
                     notification.markInAppNotificationSeen()
                 }
                 .show()
@@ -49,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     class polyAuthCallback(
         val context: MainActivity,
         val successfulAuth: () -> Unit
-    ): BiometricPrompt.AuthenticationCallback() {
+    ) : BiometricPrompt.AuthenticationCallback() {
         override fun onAuthenticationError(
             errorCode: Int,
             errString: CharSequence
@@ -89,12 +96,16 @@ class MainActivity : AppCompatActivity() {
 
     fun authorize(successfulAuth: (() -> Unit)) {
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle(this.getString(
-                R.string.auth_title
-            ))
-            .setSubtitle(this.getString(
-                R.string.auth_subtitle
-            ))
+            .setTitle(
+                this.getString(
+                    R.string.auth_title
+                )
+            )
+            .setSubtitle(
+                this.getString(
+                    R.string.auth_subtitle
+                )
+            )
             .setAllowedAuthenticators(
                 BiometricManager.Authenticators.BIOMETRIC_WEAK or
                     BiometricManager.Authenticators.DEVICE_CREDENTIAL
