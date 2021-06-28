@@ -11,18 +11,7 @@
     "polypedia:fetch": "node scripts/fetch-polypedia-data 9499b4c",
     "polypedia:convert": "node scripts/convert-polypedia-data",
     "update-polypedia-data": "npm run polypedia:fetch && npm run polypedia:convert",
-    "precypress:open": "npm run serve:start &",
-    "cypress:open": "cypress open",
-    "postcypress:open": "npm run serve:stop",
-    "precypress:screenshots": "npm run serve:start &",
-    "cypress:screenshots": "cypress run --env updateSnapshots=true",
-    "postcypress:screenshots": "npm run serve:stop",
-    "precypress:run": "npm run serve:start &",
-    "cypress:run": "cypress run",
-    "postcypress:run": "npm run serve:stop",
-    "preserve:start": "npm run build",
-    "serve:start": "start-dummy-server -c dummy-server.config.json",
-    "serve:stop": "stop-dummy-server"
+    "cypress:run": "cypress run"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
