@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     class polyAuthCallback(
         val context: MainActivity,
         val successfulAuth: () -> Unit
-    ): BiometricPrompt.AuthenticationCallback() {
+    ) : BiometricPrompt.AuthenticationCallback() {
         override fun onAuthenticationError(
             errorCode: Int,
             errString: CharSequence
@@ -96,12 +96,16 @@ class MainActivity : AppCompatActivity() {
 
     fun authorize(successfulAuth: (() -> Unit)) {
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle(this.getString(
-                R.string.auth_title
-            ))
-            .setSubtitle(this.getString(
-                R.string.auth_subtitle
-            ))
+            .setTitle(
+                this.getString(
+                    R.string.auth_title
+                )
+            )
+            .setSubtitle(
+                this.getString(
+                    R.string.auth_subtitle
+                )
+            )
             .setAllowedAuthenticators(
                 BiometricManager.Authenticators.BIOMETRIC_WEAK or
                     BiometricManager.Authenticators.DEVICE_CREDENTIAL

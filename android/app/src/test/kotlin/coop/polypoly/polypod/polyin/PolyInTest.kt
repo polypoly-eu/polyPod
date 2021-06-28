@@ -3,16 +3,27 @@ package coop.polypoly.polypod.polyin
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import coop.polypoly.polypod.polyIn.PolyIn
-import coop.polypoly.polypod.polyIn.rdf.*
+import coop.polypoly.polypod.polyIn.rdf.BlankNode
+import coop.polypoly.polypod.polyIn.rdf.IRI
+import coop.polypoly.polypod.polyIn.rdf.Matcher
+import coop.polypoly.polypod.polyIn.rdf.Quad
+import coop.polypoly.polypod.polyIn.rdf.QuadBuilder
 import kotlinx.coroutines.runBlocking
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
-import java.security.*
+import java.security.Key
+import java.security.KeyStore
+import java.security.KeyStoreSpi
+import java.security.Provider
+import java.security.SecureRandom
+import java.security.Security
 import java.security.cert.Certificate
 import java.security.spec.AlgorithmParameterSpec
 import javax.crypto.KeyGenerator
@@ -29,17 +40,17 @@ class PolyInTest {
         Security.addProvider(object : Provider(
             "AndroidKeyStore", 1.0, ""
         ) {
-            init {
-                put(
-                    "KeyStore.AndroidKeyStore",
-                    MockKeyStore::class.java.name
-                )
-                put(
-                    "KeyGenerator.AES",
-                    MockAesKeyGenerator::class.java.name
-                )
-            }
-        })
+                init {
+                    put(
+                        "KeyStore.AndroidKeyStore",
+                        MockKeyStore::class.java.name
+                    )
+                    put(
+                        "KeyGenerator.AES",
+                        MockAesKeyGenerator::class.java.name
+                    )
+                }
+            })
         File(null as File?, TEST_DB_NAME).delete()
         polyIn = PolyIn(
             TEST_DB_NAME,
