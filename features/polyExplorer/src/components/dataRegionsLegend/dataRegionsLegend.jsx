@@ -32,13 +32,6 @@ const DataRegionsLegend = ({ jurisdictionsState }) => {
                     <p>{i18n.t("common:jurisdiction.undisclosed")}</p>
                 </div>
             </div>
-            <LinkButton
-                route="/data-region-info"
-                className=""
-                stateChange={jurisdictionsState}
-            >
-                <img src="./images/question-circle.svg" />
-            </LinkButton>
             <div className="source">
                 <p>{i18n.t("common:source")}: polyPedia</p>
             </div>
