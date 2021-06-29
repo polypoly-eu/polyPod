@@ -1,10 +1,21 @@
 .details {
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .tab-button-container {
     box-sizing: border-box;
     height: 35px;
+}
+
+.tab-content-container {
+    overflow: hidden;
+    flex: 1 1 auto;
+}
+
+.tab-button-container .swiper-container {
+    height: 100%;
 }
 
 .tab-button-container .tab-button {
@@ -232,7 +243,14 @@
     margin: 38px 16px 0 16px;
 }
 
-.featured-map-container h2, .location-map h2, .revenue h2 {
+.featured-map-container h2,
+.location-map h2,
+.revenue h2 {
     text-align: center;
     margin: 0 0 12px 0;
+}
+
+.about {
+    height: 100%;
+    overflow: hidden scroll;
 }
