@@ -5,6 +5,7 @@ import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 import FeaturedCompany from "../../components/featuredCompany/featuredCompany.jsx";
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
@@ -118,16 +119,22 @@ const CompanyDetails = () => {
             content: (
                 <>
                     <FeaturedCompany />
-                    <InfoButton
-                        stateChange={{
-                            explorationState: {
-                                section: "dataTypes",
-                                index: null,
-                                category: null,
-                            },
-                        }}
-                        route="/featured-company-info"
-                    />
+                    <InfoButton route="/featured-company-info" />
+                    <div className="explore-data-btn-area">
+                        <LinkButton
+                            className="explore-data-btn"
+                            route="/data-exploration"
+                            stateChange={{
+                                explorationState: {
+                                    section: "dataTypes",
+                                    index: null,
+                                    category: null,
+                                },
+                            }}
+                        >
+                            {i18n.t("companyDetailsScreen:button.exploreData")}
+                        </LinkButton>
+                    </div>
                 </>
             ),
         },
