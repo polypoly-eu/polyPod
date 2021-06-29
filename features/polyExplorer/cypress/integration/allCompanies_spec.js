@@ -16,7 +16,7 @@ describe("All companies", () => {
     });
 
     it(`should be able to access on the company short info`, () => {
-        cy.get( ".company-short-info > .info-box > .company-name" );
+        cy.get(".company-short-info > .info-box > .company-name");
     });
 
     it(`should show the companies which match with the filters`, () => {
