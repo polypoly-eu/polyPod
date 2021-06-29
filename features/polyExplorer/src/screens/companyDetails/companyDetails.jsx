@@ -6,6 +6,7 @@ import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLeg
 import FeaturedCompany from "../../components/featuredCompany/featuredCompany.jsx";
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
+import Scrollable from "../../components/scrollable/scrollable.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
@@ -135,33 +136,35 @@ const CompanyDetails = () => {
                             {i18n.t("companyDetailsScreen:button.exploreData")}
                         </LinkButton>
                     </div>
-                </>
+                </div>
             ),
         },
         {
             tabName: "about",
             content: (
                 <div className="about">
-                    <p
-                        className="company-details-text"
-                        dangerouslySetInnerHTML={{
-                            __html:
-                                (
-                                    (company.description?.value || {})[
-                                        i18n.language
-                                    ] || ""
-                                ).replace("\n", "<br/><br/>") ||
-                                i18n.t(
-                                    "companyDetailsScreen:description.fallback"
-                                ),
-                        }}
-                    ></p>
-                    {company.description?.source ? (
-                        <p className="company-details-source">
-                            {i18n.t("companyDetailsScreen:source")}:{" "}
-                            {company.description.source}
-                        </p>
-                    ) : null}
+                    <Scrollable>
+                        <p
+                            className="company-details-text"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    (
+                                        (company.description?.value || {})[
+                                            i18n.language
+                                        ] || ""
+                                    ).replace("\n", "<br/><br/>") ||
+                                    i18n.t(
+                                        "companyDetailsScreen:description.fallback"
+                                    ),
+                            }}
+                        ></p>
+                        {company.description?.source ? (
+                            <p className="company-details-source">
+                                {i18n.t("companyDetailsScreen:source")}:{" "}
+                                {company.description.source}
+                            </p>
+                        ) : null}
+                    </Scrollable>
                     <div className="featured-map-container">
                         <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
                         {company.jurisdiction ? (

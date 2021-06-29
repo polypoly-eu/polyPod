@@ -254,3 +254,13 @@
     height: 100%;
     overflow: hidden scroll;
 }
+
+.about .scrolling-area{
+    overflow-y: scroll;
+    height: 328px;
+}
+
+.about .scrolling-area .gradient-area {
+    position: fixed;
+    bottom: 450px;
+}
