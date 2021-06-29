@@ -118,8 +118,9 @@ const CompanyDetails = () => {
         {
             tabName: "dataStory",
             content: (
-                <>
+                <div className="tab-data-story">
                     <FeaturedCompany />
+                    <p>{i18n.t("companyDetailsScreen:source")}: polyPedia</p>
                     <InfoButton route="/featured-company-info" />
                     <div className="explore-data-btn-area">
                         <LinkButton

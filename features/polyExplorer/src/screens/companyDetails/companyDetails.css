@@ -14,7 +14,18 @@
     flex: 1 1 auto;
 }
 
-.tab-button-container .swiper-container {
+.tab-data-story p {
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 32px;
+    font-size: 10px;
+}
+
+.tab-data-story .info-button {
+    bottom: 100px;
+}
+
+.details .swiper-container {
     height: 100%;
 }
 
@@ -211,11 +222,15 @@
 }
 
 .explore-data-btn-area {
-    text-align: center;
+    margin: 0 auto;
     padding: 12px 30px 0 30px;
 }
 
 .explore-data-btn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
     flex: 0 0 auto;
     box-sizing: border-box;
     width: 296px;
@@ -225,7 +240,7 @@
     color: var(--color-text-dark);
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 24px;
+    margin: auto auto 24px auto;
     border-radius: 4px;
     border: transparent;
     outline: none;
