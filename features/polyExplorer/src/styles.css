@@ -6,7 +6,10 @@
     --color-semi-light: #edf2f7;
     --color-light: #f7fafc;
 
-    /* Background colors*/
+    /* Buttons colors */
+    --color-button-dark-grey: #3e495b;
+
+    /* Background colors */
     --color-background-dark: var(--color-dark);
     --color-background-light: var(--color-light);
     /* Text colors */
