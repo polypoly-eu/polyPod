@@ -1,7 +1,5 @@
 /dist
 /polypedia-data
 /scripts/convert-polypedia-data.log
-/cypress/snapshots/**/__*
-/cypress/snapshots/**/*(failed)*
 /cypress/screenshots/**/*(failed)*
 /cypress/videos
