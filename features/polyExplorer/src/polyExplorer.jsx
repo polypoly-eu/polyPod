@@ -50,9 +50,6 @@ const PolyExplorerApp = () => {
                 <Route exact path="/main">
                     <MainScreen />
                 </Route>
-                <Route exact path="/data-story">
-                    <DataStory />
-                </Route>
                 <Route exact path="/company-details">
                     <CompanyDetailsScreen />
                 </Route>
