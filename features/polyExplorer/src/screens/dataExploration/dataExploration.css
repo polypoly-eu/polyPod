@@ -187,7 +187,6 @@
 
 .data-exploration .down-button-hidden {
     visibility: hidden;
-    display: none;
 }
 
 .data-exploration .static-content .construction-container {
@@ -244,14 +243,8 @@
     position: absolute;
     top: 40px;
     right: 0;
-    height: 40vh;
+    bottom: 60px;
     left: 0;
-}
-
-@media(min-height: 763px) {
-    .data-exploration .slide-tap-target {
-        height: 60vh;
-    }
 }
 
 .data-exploration .on-bubble {
