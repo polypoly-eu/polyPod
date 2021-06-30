@@ -28,6 +28,9 @@ import FeaturedCompanyInfoScreen from "./screens/featuredCompanyInfo/featuredCom
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 import DataStory from "./components/dataStory/dataStory.jsx";
 
+//stories
+import ExampleStory from "./screens/stories/exampleStory.jsx";
+
 const PolyExplorerApp = () => {
     const {
         navigationState,
@@ -88,6 +91,9 @@ const PolyExplorerApp = () => {
                 </Route>
                 <Route exact path="/jurisdiction-info">
                     <JurisdictionInfoScreen />
+                </Route>
+                <Route exact path="/story/example-story">
+                    <ExampleStory />
                 </Route>
             </Switch>
             {firstRun ? (
