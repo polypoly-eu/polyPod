@@ -31,7 +31,7 @@ const DataStory = ({ children, progressBarColor = "#3BA6FF" }) => {
             <div
                 className="content"
                 ref={scrollRef}
-                onScroll={(e) => handleProgress()}
+                onScroll={() => handleProgress()}
             >
                 {children}
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
