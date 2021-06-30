@@ -1,5 +1,5 @@
 import { html } from "lit-element";
-import "../poly-look.js";
+import "../src/text-effects/";
 import { themeConfiguration } from "./themeConfiguration";
 
 export default {
@@ -11,7 +11,7 @@ export default {
 };
 
 function Template({
-  paragraph = `we all use messenger apps, all the time. We write about life, love, business and some of that is personal or even secret. So let's find out how safe the messengers are, how they make money, and how they treat our data privacy.`,
+  paragraph = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut sem lacinia erat vestibulum placerat ut id est. Phasellus maximus cursus nibh non commodo. Proin risus augue, volutpat sit amet imperdiet a, elementum tristique ipsum. Aenean condimentum dolor ac risus tincidunt, eu vehicula dolor ultricies. In id ullamcorper felis. Duis ultrices, nisi nec malesuada cursus, ex libero finibus ex, eget congue eros augue quis orci. Maecenas eget luctus leo. Donec feugiat elit nec mauris ullamcorper, nec feugiat nibh accumsan.`,
 }) {
   return html`
     ${themeConfiguration()}

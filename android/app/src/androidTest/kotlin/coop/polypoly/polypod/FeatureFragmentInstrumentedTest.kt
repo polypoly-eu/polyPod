@@ -11,7 +11,10 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.espresso.web.assertion.WebViewAssertions.webMatches
 import androidx.test.espresso.web.sugar.Web.onWebView
-import androidx.test.espresso.web.webdriver.DriverAtoms.*
+import androidx.test.espresso.web.webdriver.DriverAtoms.findElement
+import androidx.test.espresso.web.webdriver.DriverAtoms.getText
+import androidx.test.espresso.web.webdriver.DriverAtoms.selectFrameByIdOrName
+import androidx.test.espresso.web.webdriver.DriverAtoms.webClick
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -44,13 +47,13 @@ class FeatureFragmentInstrumentedTest {
     @Test
     fun canNavigateToFeatureFragment() {
         onView(withText("testFeature"))
-            .check(matches(isDisplayed()))  // verify I'm starting on first view
+            .check(matches(isDisplayed())) // verify I'm starting on first view
 
         onView(withText("testFeature"))
             .perform(click())
 
         onView(withText("testFeature"))
-            .check(doesNotExist())  // I'm not on the first fragment any more
+            .check(doesNotExist()) // I'm not on the first fragment any more
 
         onFeature()
             .withElement(findElement(Locator.ID, "status"))
@@ -99,11 +102,14 @@ class FeatureFragmentInstrumentedTest {
             .check(webMatches(getText(), `is`("All OK")))
     }
 
-    private fun launchTestFeature(): FragmentScenario<FeatureFragmentTestDouble> {
+    private fun launchTestFeature():
+        FragmentScenario<FeatureFragmentTestDouble> {
         val fragmentArgs = Bundle().apply {
             putString("featureName", "testFeature")
         }
-        return launchFragmentInContainer<FeatureFragmentTestDouble>(fragmentArgs)
+        return launchFragmentInContainer<FeatureFragmentTestDouble>(
+            fragmentArgs
+        )
     }
 
     private fun onFeature() =

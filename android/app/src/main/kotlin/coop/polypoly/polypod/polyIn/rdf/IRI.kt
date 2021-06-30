@@ -9,13 +9,16 @@ data class IRI(val iri: String) {
             Codec.kvArray(Codec.string, Codec.string)
                 .xmap(
                     {
-                        val iri = it["value"] ?: throw IllegalArgumentException("Expected value")
+                        val iri = it["value"]
+                            ?: throw IllegalArgumentException("Expected value")
                         IRI(iri)
                     },
-                    { mapOf(
-                        Pair("value", it.iri),
-                        Pair("termType", "NamedNode")
-                    ) }
+                    {
+                        mapOf(
+                            Pair("value", it.iri),
+                            Pair("termType", "NamedNode")
+                        )
+                    }
                 )
                 .taggedClass("@polypoly-eu/rdf.NamedNode")
     }

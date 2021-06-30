@@ -8,7 +8,13 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
-import android.webkit.*
+import android.webkit.JavascriptInterface
+import android.webkit.WebMessage
+import android.webkit.WebMessagePort
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
@@ -37,7 +43,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     private val registry = LifecycleRegistry(this)
     val api = PodApi(
         PolyOut(),
-        PolyIn("data.nt", context.filesDir),
+        PolyIn("data.nt", context.filesDir, context),
         PolyNav(
             webView = webView
         )
@@ -55,7 +61,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
-        webView.addJavascriptInterface(ClipboardInterface(context), "nativeAndroidClipboard");
+        webView.addJavascriptInterface(
+            ClipboardInterface(context),
+            "nativeAndroidClipboard"
+        )
 
         // Enabling localStorage to support polyExplorer data migration
         webView.settings.domStorageEnabled = true
@@ -70,7 +79,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     override fun getLifecycle(): Lifecycle = registry
 
-    fun triggerNavAction(name: String): Boolean = api.polyNav.triggerAction(name)
+    fun triggerNavAction(name: String): Boolean =
+        api.polyNav.triggerAction(name)
 
     fun openUrl(target: String) {
         val featureName = feature?.name ?: return
@@ -101,8 +111,13 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
-        api.polyNav.setNavObserver(PolyNavObserver(
-            null, null, { url -> openUrl(url) }))
+        api.polyNav.setNavObserver(
+            PolyNavObserver(
+                null,
+                null,
+                { url -> openUrl(url) }
+            )
+        )
 
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler(
@@ -117,13 +132,24 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 request: WebResourceRequest
             ): WebResourceResponse {
                 if (request.url.lastPathSegment == "favicon.ico")
-                    return WebResourceResponse(null, null, null)
+                    return WebResourceResponse(
+                        null,
+                        null,
+                        null
+                    )
                 val response = assetLoader.shouldInterceptRequest(request.url)
                 if (response == null) {
-                    logger.warn("Feature ${feature.name} tried to load forbidden URL: ${request.url}")
+                    logger.warn(
+                        """
+                            Feature ${feature.name} tried to load forbidden URL:
+                            ${request.url}
+                        """
+                    )
                     val statusCode = 403
                     val reasonPhrase =
-                        context.getString(R.string.dev_message_forbidden_resource_requested)
+                        context.getString(
+                            R.string.dev_message_forbidden_resource_requested
+                        )
                     val message = "$statusCode - $reasonPhrase"
                     val errorResponse = WebResourceResponse(
                         "text/plain",
@@ -143,7 +169,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 initPostOffice(view!!)
             }
         }
-
+        /* ktlint-disable max-line-length */
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=${feature.name}")
     }
 
@@ -158,7 +184,9 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 api
             )
         )
-        view.postWebMessage(WebMessage("", arrayOf(innerPort)), Uri.parse("*"))
+        view.postWebMessage(
+            WebMessage("", arrayOf(innerPort)), Uri.parse("*")
+        )
     }
 
     private class PodPathHandler(context: Context) :
@@ -167,7 +195,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             WebViewAssetLoader.AssetsPathHandler(context)
 
         override fun handle(path: String): WebResourceResponse? {
-            val finalPath = path.replaceFirst(Regex("^assets/"), "")
+            val finalPath = path.replaceFirst(
+                Regex("^assets/"),
+                ""
+            )
             val response = assetsPathHandler.handle(finalPath)
             logger.debug(
                 "PodPathHandler, I'm supposed to handle path: '{}', finalPath: '{}', handling: '{}'",
@@ -238,19 +269,15 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    class ClipboardInterface(aContext : Context) {
-        var context: Context
-
-        init {
-            context = aContext
-        }
+    class ClipboardInterface(aContext: Context) {
+        var context: Context = aContext
 
         @JavascriptInterface
         fun copyToClipboard(text: String?) {
             var clipboard: ClipboardManager =
                 context.getSystemService(ClipboardManager::class.java)
-            val clip = ClipData.newPlainText("nativeClipboardText", text);
-            clipboard.setPrimaryClip(clip);
+            val clip = ClipData.newPlainText("nativeClipboardText", text)
+            clipboard.setPrimaryClip(clip)
         }
     }
 }

@@ -3,7 +3,10 @@ package coop.polypoly.polypod.polyIn
 import coop.polypoly.polypod.polyIn.rdf.Matcher
 import coop.polypoly.polypod.polyIn.rdf.Quad
 
-class PolyInTestDouble : PolyIn() {
+class PolyInTestDouble : PolyIn(
+    context =
+    androidx.test.core.app.ApplicationProvider.getApplicationContext()
+) {
     var selectWasCalled = false
     var selectMatcher: Matcher? = null
     var selectReturn: List<Quad>? = null

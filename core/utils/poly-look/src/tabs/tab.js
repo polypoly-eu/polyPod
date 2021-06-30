@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import globalTheme from "../GlobalTheme";
+import globalTheme from "../globalTheme";
 
 export class Tab extends LitElement {
   static get styles() {

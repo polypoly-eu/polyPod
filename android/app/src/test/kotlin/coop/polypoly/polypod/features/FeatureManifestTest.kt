@@ -7,7 +7,6 @@ import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 
-
 private const val manifestString = """
     {
         "name": "testManifest",
@@ -56,7 +55,10 @@ class FeatureManifestTest {
 
     @Test
     fun `translated properties work`() {
-        val manifest = FeatureManifest.parse(manifestWithTranslationsString, "de")
+        val manifest = FeatureManifest.parse(
+            manifestWithTranslationsString,
+            "de"
+        )
         assertThat(manifest.name).isEqualTo("testManifest")
         assertThat(manifest.description).isEqualTo("testBeschreibung")
         assertThat(manifest.author).isEqualTo("testUrheber")
