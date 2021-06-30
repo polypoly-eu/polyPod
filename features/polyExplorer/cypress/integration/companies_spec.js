@@ -2,7 +2,7 @@ import { navigation } from "../helpers";
 
 const INDEX_ROUTE = "dist/index.html";
 
-describe("Companies", () => {
+describe("Data exploration", () => {
     beforeEach(() => {
         cy.visit(INDEX_ROUTE);
         cy.get(".button-container button")
