@@ -3,12 +3,15 @@ import React, { useContext } from "react";
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import CompanyList from "../../components/companyList/companyList.jsx";
+import StoriesPreview from "../../components/storiesPreview/storiesPreview.jsx";
 
 import "./main.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const MainScreen = () => {
-    const { navigationState, routeTo, companies } = useContext(ExplorerContext);
+    const { navigationState, routeTo, companies, storiesMetadata } = useContext(
+        ExplorerContext
+    );
     let showClusters = navigationState.showClusters;
 
     return (
@@ -33,7 +36,11 @@ const MainScreen = () => {
                     })}
                 </button>
             </div>
-            {showClusters ? <div></div> : <CompanyList />}
+            {showClusters ? (
+                <StoriesPreview storiesMetadata={storiesMetadata} />
+            ) : (
+                <CompanyList />
+            )}
         </Screen>
     );
 };
