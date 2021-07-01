@@ -1,4 +1,4 @@
-import { html, LitElement, css } from "lit-element";
+import { html, LitElement, css, unsafeCSS } from "lit-element";
 import { PREFIX, globalTheme } from "../globalTheme";
 
 export class Tab extends LitElement {
@@ -8,11 +8,11 @@ export class Tab extends LitElement {
       css`
         .tab {
           width: 100%;
-          color: var(--poly-color-medium);
-          font-size: var(--poly-button-font-size);
+          color: var(--${unsafeCSS(PREFIX)}-color-medium);
+          font-size: var(--${unsafeCSS(PREFIX)}-button-font-size);
           background-color: transparent;
           border: solid transparent 2px;
-          border-bottom: solid 1px var(--poly-color-dark);
+          border-bottom: solid 1px var(--${unsafeCSS(PREFIX)}-color-dark);
           text-align: center;
           cursor: pointer;
         }
@@ -22,8 +22,8 @@ export class Tab extends LitElement {
         }
 
         .tab.active {
-          color: var(--poly-color-dark);
-          border-bottom: solid 4px var(--poly-color-dark);
+          color: var(--${unsafeCSS(PREFIX)}-color-dark);
+          border-bottom: solid 4px var(--${unsafeCSS(PREFIX)}-color-dark);
         }
       `,
     ];
