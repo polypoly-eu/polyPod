@@ -216,7 +216,7 @@
     font-size: 12px;
     margin: 0px auto;
     width: 100%;
-    padding-top: 18px;
+    padding: 0 30px 30px 30px;
     max-width: var(--max-width);
 }
 
@@ -277,7 +277,7 @@
 }
 
 .about .gradient {
-    height: 50px;
+    height: 40px;
     background: linear-gradient(#0f193800 0%, #0f1938);
-    transform: translateY(-50px);
+    transform: translateY(-40px);
 }

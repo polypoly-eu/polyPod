@@ -158,14 +158,14 @@ const CompanyDetails = () => {
                                     ),
                             }}
                         ></p>
-                        {company.description?.source ? (
-                            <p className="company-details-source">
-                                {i18n.t("companyDetailsScreen:source")}:{" "}
-                                {company.description.source}
-                            </p>
-                        ) : null}
                     </div>
                     <div className="gradient"></div>
+                    {company.description?.source ? (
+                        <p className="company-details-source">
+                            {i18n.t("companyDetailsScreen:source")}:{" "}
+                            {company.description.source}
+                        </p>
+                    ) : null}
                     <div className="featured-map-container">
                         <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
                         {company.jurisdiction ? (
