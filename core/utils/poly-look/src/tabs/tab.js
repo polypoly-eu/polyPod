@@ -44,7 +44,7 @@ export class Tab extends LitElement {
   }
 
   __onClick() {
-    const tabEvent = new CustomEvent("poly-tab-selected", {
+    const tabEvent = new CustomEvent(`${PREFIX}-tab-selected`, {
       detail: { value: this.value },
       bubbles: true,
       composed: true,
