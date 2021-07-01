@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import globalTheme from "../globalTheme";
+import { globalTheme } from "../globalTheme";
 export class FirstCapitalize extends LitElement {
   static get styles() {
     return [

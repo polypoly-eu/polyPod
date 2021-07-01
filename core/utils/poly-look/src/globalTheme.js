@@ -1,8 +1,8 @@
 import { css, unsafeCSS } from "lit-element";
 
-const PREFIX = "poly";
+export const PREFIX = "poly";
 
-const globalTheme = css`
+export const globalTheme = css`
   :host {
     /* Primary colors */
     --${unsafeCSS(PREFIX)}-color-dark: var(--color-dark, #0f1938);
@@ -82,5 +82,3 @@ const globalTheme = css`
     )}-font-weight-important: var(--font-weight-important, 800);
   }
 `;
-
-export default globalTheme;
