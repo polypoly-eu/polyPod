@@ -9,7 +9,7 @@ import "./main.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const MainScreen = () => {
-    const { navigationState, routeTo, companies, stories } = useContext(
+    const { navigationState, routeTo, companies, storiesMetadata } = useContext(
         ExplorerContext
     );
     let showClusters = navigationState.showClusters;
@@ -37,7 +37,7 @@ const MainScreen = () => {
                 </button>
             </div>
             {showClusters ? (
-                <StoriesPreview stories={stories} />
+                <StoriesPreview storiesMetadata={storiesMetadata} />
             ) : (
                 <CompanyList />
             )}

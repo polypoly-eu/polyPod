@@ -48,7 +48,7 @@ function loadCompanies(JSONData, globalData) {
 //This needs to load the actual stories present
 //Also I don't like the navigation too much -> should include the path and content
 //Will be clearer when we know the content structure
-const loadStories = () => {
+const loadStoriesMetadata = () => {
     return {
         exampleStory: {
             title: "example",
@@ -95,7 +95,7 @@ export const ExplorerProvider = ({ children }) => {
         (ppid) => companies[ppid]
     );
     const currentPath = location.pathname;
-    const stories = loadStories();
+    const storiesMetadata = loadStoriesMetadata();
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
     function changeNavigationState(changedState) {
@@ -246,7 +246,7 @@ export const ExplorerProvider = ({ children }) => {
                 activeFilters,
                 handleRemoveFilter,
                 handleFilterApply,
-                stories,
+                storiesMetadata,
             }}
         >
             {children}

@@ -10,10 +10,10 @@ const Preview = ({ story }) => {
     );
 };
 
-const StoriesPreview = ({ stories }) => {
+const StoriesPreview = ({ storiesMetadata }) => {
     return (
         <div className="story-preview">
-            {Object.values(stories).map((story, index) => (
+            {Object.values(storiesMetadata).map((story, index) => (
                 <Preview key={index} story={story} />
             ))}
         </div>
