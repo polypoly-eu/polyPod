@@ -6,7 +6,6 @@ import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLeg
 import FeaturedCompany from "../../components/featuredCompany/featuredCompany.jsx";
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
-import Scrollable from "../../components/scrollable/scrollable.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./companyDetails.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
@@ -144,7 +143,7 @@ const CompanyDetails = () => {
             tabName: "about",
             content: (
                 <div className="about">
-                    <Scrollable>
+                    <div className="scroll-box">
                         <p
                             className="company-details-text"
                             dangerouslySetInnerHTML={{
@@ -165,7 +164,8 @@ const CompanyDetails = () => {
                                 {company.description.source}
                             </p>
                         ) : null}
-                    </Scrollable>
+                    </div>
+                    <div className="gradient"></div>
                     <div className="featured-map-container">
                         <h2>{i18n.t("companyDetailsScreen:jurisdiction")}</h2>
                         {company.jurisdiction ? (
