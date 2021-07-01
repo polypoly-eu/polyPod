@@ -211,12 +211,13 @@
 }
 
 .company-details-source {
+    transform: translateY(-20px);
     color: var(--color-medium);
     flex: 0 0 auto;
     font-size: 12px;
     margin: 0px auto;
     width: 100%;
-    padding: 0 30px 30px 30px;
+    padding: 0 30px 12px 30px;
     max-width: var(--max-width);
 }
 
