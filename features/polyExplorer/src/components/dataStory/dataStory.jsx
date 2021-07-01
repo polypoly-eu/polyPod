@@ -3,7 +3,13 @@ import Screen from "../screen/screen.jsx";
 
 import "./dataStory.css";
 
-const DataStory = ({ children, progressBarColor = "#3BA6FF", className }) => {
+const defaultProgressBarColor = "#3BA6FF";
+
+const DataStory = ({
+    children,
+    progressBarColor = defaultProgressBarColor,
+    className,
+}) => {
     const scrollRef = useRef();
     const progressRef = useRef();
 

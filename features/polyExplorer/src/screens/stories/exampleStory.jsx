@@ -3,7 +3,7 @@ import DataStory from "../../components/dataStory/dataStory.jsx";
 
 const ExampleStory = () => {
     return (
-        <DataStory>
+        <DataStory progressBarColor="#3BA6FF">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
