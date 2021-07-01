@@ -25,9 +25,7 @@ export function themeConfiguration() {
 
       * {
         font-family: var(--poly-font-family-regular-name);
-        font-weight: var(--poly-font-weight-regular);
         letter-spacing: var(--poly-letter-spacing);
-        color: var(--poly-color-text-dark);
       }
     </style>
   `;

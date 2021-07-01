@@ -49,6 +49,7 @@ const globalTheme = css`
     --poly-headline-font-size: var(--headline-font-size, 38px);
     --poly-body-text-font-size: var(--body-text-font-size, 20px);
     --poly-button-font-size: var(--button-font-size, 18px);
+    --poly-button-small-font-size: var(--button-small-font-size, 14px);
 
     /* Font weight */
     --poly-font-weight-regular: var(--font-weight-regular, 400);
