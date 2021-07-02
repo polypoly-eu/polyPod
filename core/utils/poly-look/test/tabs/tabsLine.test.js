@@ -1,8 +1,22 @@
-import { html, fixture, expect, assert } from "@open-wc/testing";
+import { html, fixture, expect } from "@open-wc/testing";
 import "../../src/tabs";
+const numberOfTabs = 3;
 
 describe("TabsLine", () => {
   let tabs = [];
+  let el;
+
+  before( async function() {
+    let divs = [];
+    for (let i = 0; i < numberOfTabs; i++) {
+      divs[i] = `<div class="tab-slot" slot="tab0${i}">this is the tab0${i}`;
+    }
+    el = await fixture( html`
+      <poly-tabs-line .tabs=${tabs}>
+        ${divs.join("\n")}
+      </poly-tabs-line>
+    `);
+  });
 
   beforeEach(() => {
     tabs = [
@@ -28,7 +42,7 @@ describe("TabsLine", () => {
     tabs = [];
   });
   it(`
-    must to throw an exception if the input data does not have
+    must throw an exception if the input data does not have
     the required info (less attributes)
   `, () => {
     delete tabs[2].label;
@@ -92,16 +106,6 @@ describe("TabsLine", () => {
     must render three tabs with its content
   `, async () => {
     const lengTabs = tabs.length;
-    let content = [];
-    const numberOfTabs = 3;
-    assert(numberOfTabs < 10);
-    for (let i = 0; i < numberOfTabs; i++) {
-      content[i] = `<div class="tab-slot" slot="tab0${i}">this is the tab0${i}`;
-    }
-
-    const el = await fixture(html`
-      <poly-tabs-line .tabs=${tabs}> ${content.join("\n")} </poly-tabs-line>
-    `);
 
     expect(tabs).to.eql(el.tabs);
 
@@ -122,23 +126,11 @@ describe("TabsLine", () => {
     expect(tabsContent.length).to.equal(3);
   });
 
-  it(`
-    must change the active content if a tab is clicked
-  `, async () => {
-    let content = [];
-    const numberOfTabs = 3;
-    assert(numberOfTabs < 10);
-    for (let i = 0; i < numberOfTabs; i++) {
-      content[i] = `<div class="tab-slot" slot="tab0${i}">this is the tab0${i}`;
-    }
-
-    const el = await fixture(html`
-      <poly-tabs-line .tabs=${tabs}> ${content.join("\n")} </poly-tabs-line>
-    `);
+  it("must change the active content if a tab is clicked", async () => {
 
     const renderTabs = el.shadowRoot.querySelectorAll("poly-tab");
+    console.log(renderTabs);
     renderTabs[1].shadowRoot.querySelector(".tab").click();
-
     expect(el.tabs[1].active).to.equal(true);
   });
 });
