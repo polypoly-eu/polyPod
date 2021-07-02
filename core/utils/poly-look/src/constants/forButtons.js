@@ -1,13 +1,13 @@
 export const types = {
-  DARK_BUTTON: "dark",
-  LIGHT_BUTTON: "light",
+  DARK: "dark",
+  LIGHT: "light",
 };
 
 export const sizes = {
-  BIG_BUTTON: "big",
-  MEDIUM_BUTTON: "medium",
-  SMALL_BUTTON: "small",
-  FIXED_SIZE_ROUND_BUTTON: "round",
+  BIG: "big",
+  MEDIUM: "medium",
+  SMALL: "small",
+  FIXED_SIZE_ROUND: "round",
 };
 
 export const states = {

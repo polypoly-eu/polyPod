@@ -50,8 +50,8 @@ describe("Button", () => {
       <poly-button><button type="button">Example</button></poly-button>
     `)
       .then(el => {
-        expect(el.type).to.be.equal(polyButton.types.DARK_BUTTON);
-        expect(el.size).to.be.equal(polyButton.sizes.MEDIUM_BUTTON);
+        expect(el.type).to.be.equal(polyButton.types.DARK);
+        expect(el.size).to.be.equal(polyButton.sizes.MEDIUM);
         expect(el.disabled).to.be.false;
         done();
       })
