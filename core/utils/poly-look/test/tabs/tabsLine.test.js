@@ -128,15 +128,13 @@ describe("TabsLine", () => {
   `, async () => {
     let content = [];
     const numberOfTabs = 3;
-    assert( numberOfTabs < 10);
-    for ( let i = 0; i < numberOfTabs; i ++ ) {
-      content[i] = `<div class="tab-slot" slot="tab0${i}">this is the tab0${i}`
+    assert(numberOfTabs < 10);
+    for (let i = 0; i < numberOfTabs; i++) {
+      content[i] = `<div class="tab-slot" slot="tab0${i}">this is the tab0${i}`;
     }
-    
+
     const el = await fixture(html`
-      <poly-tabs-line .tabs=${tabs}>
-        ${content.join("\n")}
-      </poly-tabs-line>
+      <poly-tabs-line .tabs=${tabs}> ${content.join("\n")} </poly-tabs-line>
     `);
 
     const renderTabs = el.shadowRoot.querySelectorAll("poly-tab");
