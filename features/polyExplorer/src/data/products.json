@@ -1,0 +1,2252 @@
+[
+    {
+        "ppid": "Signal",
+        "name": "Signal",
+        "featured": true,
+        "activeUsers": {
+            "values": [
+                {
+                    "user_count": 410000,
+                    "start_date": "2017-01-01",
+                    "end_date": "2017-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Reddit",
+                            "url": "https://www.reddit.com/r/signal/comments/aa8hiz/how_many_users_does_signal_have/",
+                            "archive_url": "https://web.archive.org/web/https://www.reddit.com/r/signal/comments/aa8hiz/how_many_users_does_signal_have/",
+                            "notes": "Start date from Wikipedia"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 500000,
+                    "start_date": "2019-12-01",
+                    "end_date": "2019-12-31",
+                    "research_sources": [
+                        {
+                            "dataset": "BusinessofApps",
+                            "url": "https://www.businessofapps.com/data/signal-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
+                            "notes": "They note Similarweb and TechCrunch as their sources"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 3500000,
+                    "start_date": "2020-07-01",
+                    "end_date": "2020-07-31",
+                    "research_sources": [
+                        {
+                            "dataset": "BusinessofApps",
+                            "url": "https://www.businessofapps.com/data/signal-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
+                            "notes": "They note Similarweb and TechCrunch as their sources"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 20000000,
+                    "start_date": "2020-12-01",
+                    "end_date": "2020-12-31",
+                    "research_sources": [
+                        {
+                            "dataset": "BusinessofApps",
+                            "url": "https://www.businessofapps.com/data/signal-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
+                            "notes": "They note Similarweb and TechCrunch as their sources"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 40000000,
+                    "start_date": "2021-01-01",
+                    "end_date": "2021-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "BusinessofApps",
+                            "url": "https://www.businessofapps.com/data/signal-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
+                            "notes": "They note Similarweb and TechCrunch as their sources"
+                        }
+                    ]
+                }
+            ]
+        },
+        "annualRevenues": [
+            {
+                "stream": "Donation",
+                "amount": 50000000,
+                "currency": "USD",
+                "start_date": "2018-02-01",
+                "end_date": "2018-12-31",
+                "research_sources": [
+                    {
+                        "dataset": "Company Website",
+                        "url": "https://signalfoundation.org/",
+                        "archive_url": "https://web.archive.org/web/20210428025938/https://signal.org/de/",
+                        "notes": "Brian Acton, founder of WhatsApp and current Signal Foundation Board Member"
+                    }
+                ]
+            }
+        ],
+        "dataRecipients": [
+            "Giphy, Inc. (US)",
+            "Signal Messenger LLC (US)",
+            "Signal Technology Foundation (US)",
+            "Spotify AB (SE)",
+            "YouTube, LLC (US)",
+            "dpv:ThirdParty (ZZ)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:CustomerCare",
+                "count": 8
+            },
+            {
+                "dpv:Purpose": "dpv:RegistrationAuthentication",
+                "count": 8
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceOptimization",
+                "count": 8
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 48
+            },
+            {
+                "dpv:Purpose": "unspecified",
+                "count": 8
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:Communication",
+                "count": 12
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Identifying",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:SocialMediaCommunication",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:SocialNetwork",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:Username",
+                "count": 8
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        }
+    },
+    {
+        "ppid": "Instagram",
+        "name": "Instagram",
+        "featured": true,
+        "activeUsers": {
+            "values": [
+                {
+                    "user_count": 100000000,
+                    "start_date": "2013-02-01",
+                    "end_date": "2013-02-28",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://backlinko.com/instagram-users",
+                            "archive_url": "https://web.archive.org/web/20210510082906/https://backlinko.com/instagram-users",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 500000000,
+                    "start_date": "2016-06-01",
+                    "end_date": "2016-06-30",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://backlinko.com/instagram-users",
+                            "archive_url": "https://web.archive.org/web/20210510082906/https://backlinko.com/instagram-users",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 1000000000,
+                    "start_date": "2021-01-01",
+                    "end_date": "2021-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://backlinko.com/instagram-users",
+                            "archive_url": "https://web.archive.org/web/20210510082906/https://backlinko.com/instagram-users",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 500000000,
+                    "start_date": "2021-01-01",
+                    "end_date": "2021-01-02",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://backlinko.com/instagram-users",
+                            "archive_url": "https://web.archive.org/web/20210510082906/https://backlinko.com/instagram-users",
+                            "notes": "Daily Active Users Globally"
+                        }
+                    ]
+                }
+            ]
+        },
+        "dataRecipients": [
+            "Instagram LLC (US)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:CommercialInterest",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:CommercialResearch",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:CreateProductRecommendations",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:Marketing",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForConsumer",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForController",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:OptimiseUserInterface",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:PersonalisedAdvertising",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:SellInsightsFromData",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:SellTargettedAdvertisements",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceOptimization",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:ServicePersonalization",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 78
+            },
+            {
+                "dpv:Purpose": "dpv:UsageAnalytics",
+                "count": 78
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:Authenticating",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Biometric",
+                "count": 48
+            },
+            {
+                "dpv:Category": "dpv:BrowsingBehavior",
+                "count": 48
+            },
+            {
+                "dpv:Category": "dpv:CommunicationsMetadata",
+                "count": 48
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 48
+            },
+            {
+                "dpv:Category": "dpv:CreditCardNumber",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:DerivedPersonalData",
+                "count": 32
+            },
+            {
+                "dpv:Category": "dpv:DeviceApplications",
+                "count": 48
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 80
+            },
+            {
+                "dpv:Category": "dpv:DeviceOperatingSystem",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:DeviceSoftware",
+                "count": 32
+            },
+            {
+                "dpv:Category": "dpv:FamilyStructure",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Favorite",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Gender",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Health",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Identifying",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Interaction",
+                "count": 32
+            },
+            {
+                "dpv:Category": "dpv:Interest",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Language",
+                "count": 32
+            },
+            {
+                "dpv:Category": "dpv:LifeHistory",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Like",
+                "count": 32
+            },
+            {
+                "dpv:Category": "dpv:LinkClicked",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Location",
+                "count": 48
+            },
+            {
+                "dpv:Category": "dpv:MaritalStatus",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Ownership",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:PhilosophicalBelief",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:PhysicalAddress",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 48
+            },
+            {
+                "dpv:Category": "dpv:Preference",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Professional",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Purchase",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:PurchasesAndSpendingHabit",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Race",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Relationship",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:ReligiousBelief",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "count": 32
+            },
+            {
+                "dpv:Category": "dpv:SexualPreference",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:SocialMediaCommunication",
+                "count": 64
+            },
+            {
+                "dpv:Category": "dpv:SocialNetwork",
+                "count": 32
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Tracking",
+                "count": 64
+            },
+            {
+                "dpv:Category": "dpv:Transactional",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:VoiceCommunicationRecording",
+                "count": 48
+            },
+            {
+                "dpv:Category": "dpv:WorkHistory",
+                "count": 16
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        }
+    },
+    {
+        "ppid": "TikTok",
+        "name": "TikTok",
+        "featured": true,
+        "activeUsers": {
+            "values": [
+                {
+                    "user_count": 54793729,
+                    "start_date": "2018-01-01",
+                    "end_date": "2018-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "CNBC",
+                            "url": "https://www.cnbc.com/2020/08/24/tiktok-reveals-us-global-user-growth-numbers-for-first-time.html",
+                            "archive_url": "https://web.archive.org/web/20210609222316/https://www.cnbc.com/2020/08/24/tiktok-reveals-us-global-user-growth-numbers-for-first-time.html",
+                            "notes": "Revealed by TikTok - unable to find primary source - includes Douyin users"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 271188301,
+                    "start_date": "2018-12-01",
+                    "end_date": "2018-12-31",
+                    "research_sources": [
+                        {
+                            "dataset": "CNBC",
+                            "url": "https://www.cnbc.com/2020/08/24/tiktok-reveals-us-global-user-growth-numbers-for-first-time.html",
+                            "archive_url": "https://web.archive.org/web/20210609222316/https://www.cnbc.com/2020/08/24/tiktok-reveals-us-global-user-growth-numbers-for-first-time.html",
+                            "notes": "Revealed by TikTok - unable to find primary source - includes Douyin users"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 507552660,
+                    "start_date": "2019-12-01",
+                    "end_date": "2019-12-31",
+                    "research_sources": [
+                        {
+                            "dataset": "CNBC",
+                            "url": "https://www.cnbc.com/2020/08/24/tiktok-reveals-us-global-user-growth-numbers-for-first-time.html",
+                            "archive_url": "https://web.archive.org/web/20210609222316/https://www.cnbc.com/2020/08/24/tiktok-reveals-us-global-user-growth-numbers-for-first-time.html",
+                            "notes": "Revealed by TikTok - unable to find primary source - includes Douyin users"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 689174209,
+                    "start_date": "2020-07-01",
+                    "end_date": "2020-07-31",
+                    "research_sources": [
+                        {
+                            "dataset": "CNBC",
+                            "url": "https://www.cnbc.com/2020/08/24/tiktok-reveals-us-global-user-growth-numbers-for-first-time.html",
+                            "archive_url": "https://web.archive.org/web/20210609222316/https://www.cnbc.com/2020/08/24/tiktok-reveals-us-global-user-growth-numbers-for-first-time.html",
+                            "notes": "Revealed by TikTok - unable to find primary source - includes Douyin users"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 800000000,
+                    "start_date": "2020-01-01",
+                    "end_date": "2020-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Hootsuite",
+                            "url": "https://datareportal.com/reports/digital-2020-global-digital-overview",
+                            "archive_url": "https://web.archive.org/web/20210530233021/https://datareportal.com/reports/digital-2020-global-digital-overview",
+                            "notes": "Supposedly leaked from a pitchdeck - includes Douyin users"
+                        }
+                    ]
+                }
+            ]
+        },
+        "annualRevenues": [
+            {
+                "stream": "Advertising",
+                "amount": 1000000000,
+                "currency": "USD",
+                "start_date": "2020-01-01",
+                "end_date": "2020-12-31",
+                "research_sources": [
+                    {
+                        "dataset": "Reuters",
+                        "url": "https://www.reuters.com/article/us-bytedance-tiktok-exclusive/exclusive-bytedance-investors-value-tiktok-at-50-billion-in-takeover-bid-sources-idUSKCN24U1M9",
+                        "archive_url": "https://web.archive.org/web/20210301041526/https://www.reuters.com/article/us-bytedance-tiktok-exclusive/exclusive-bytedance-investors-value-tiktok-at-50-billion-in-takeover-bid-sources-idUSKCN24U1M9",
+                        "notes": "Estimated 2020 revenue"
+                    }
+                ]
+            }
+        ],
+        "dataRecipients": [
+            "Akamai Technologies Inc (US)",
+            "AppsFlyer (IL)",
+            "ByteDance Ltd. (KY)",
+            "Facebook (US)",
+            "Google (US)",
+            "Instagram LLC (US)",
+            "LinkedIn Corporation (US)",
+            "LinkedIn Ireland Unlimited Company (IE)",
+            "LinkedIn Singapore Pte. Ltd. (SG)",
+            "TIKTOK INC. (US)",
+            "TikTok Technology Limited (IE)",
+            "Twitter (DE)",
+            "Twitter, Inc. (US)",
+            "dpv:ThirdParty (ZZ)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:CommercialInterest",
+                "count": 266
+            },
+            {
+                "dpv:Purpose": "dpv:CommercialResearch",
+                "count": 264
+            },
+            {
+                "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
+                "count": 266
+            },
+            {
+                "dpv:Purpose": "dpv:CreateProductRecommendations",
+                "count": 266
+            },
+            {
+                "dpv:Purpose": "dpv:IdentityVerification",
+                "count": 6
+            },
+            {
+                "dpv:Purpose": "dpv:LegalCompliance",
+                "count": 264
+            },
+            {
+                "dpv:Purpose": "dpv:Marketing",
+                "count": 266
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForConsumer",
+                "count": 265
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForController",
+                "count": 265
+            },
+            {
+                "dpv:Purpose": "dpv:OptimiseUserInterface",
+                "count": 264
+            },
+            {
+                "dpv:Purpose": "dpv:Payment",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:PersonalisedAdvertising",
+                "count": 266
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "count": 264
+            },
+            {
+                "dpv:Purpose": "dpv:SellInsightsFromData",
+                "count": 264
+            },
+            {
+                "dpv:Purpose": "dpv:SellTargettedAdvertisements",
+                "count": 266
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceOptimization",
+                "count": 266
+            },
+            {
+                "dpv:Purpose": "dpv:ServicePersonalization",
+                "count": 266
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 269
+            },
+            {
+                "dpv:Purpose": "dpv:UsageAnalytics",
+                "count": 266
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:Age",
+                "count": 207
+            },
+            {
+                "dpv:Category": "dpv:Authenticating",
+                "count": 17
+            },
+            {
+                "dpv:Category": "dpv:AuthenticationHistory",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:BrowsingBehavior",
+                "count": 170
+            },
+            {
+                "dpv:Category": "dpv:BrowsingReferral",
+                "count": 85
+            },
+            {
+                "dpv:Category": "dpv:Communication",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 102
+            },
+            {
+                "dpv:Category": "dpv:DerivedPersonalData",
+                "count": 476
+            },
+            {
+                "dpv:Category": "dpv:DeviceApplications",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 180
+            },
+            {
+                "dpv:Category": "dpv:DeviceOperatingSystem",
+                "count": 170
+            },
+            {
+                "dpv:Category": "dpv:DeviceSoftware",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:EmailAddress",
+                "count": 102
+            },
+            {
+                "dpv:Category": "dpv:Financial",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:GPSCoordinate",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "count": 119
+            },
+            {
+                "dpv:Category": "dpv:Identifying",
+                "count": 119
+            },
+            {
+                "dpv:Category": "dpv:Interest",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:Language",
+                "count": 102
+            },
+            {
+                "dpv:Category": "dpv:Like",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:LinkClicked",
+                "count": 153
+            },
+            {
+                "dpv:Category": "dpv:Location",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:Name",
+                "count": 153
+            },
+            {
+                "dpv:Category": "dpv:Password",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:PaymentCard",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 258
+            },
+            {
+                "dpv:Category": "dpv:Preference",
+                "count": 153
+            },
+            {
+                "dpv:Category": "dpv:Purchase",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "count": 221
+            },
+            {
+                "dpv:Category": "dpv:Social",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:SocialMediaCommunication",
+                "count": 207
+            },
+            {
+                "dpv:Category": "dpv:SocialNetwork",
+                "count": 238
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "count": 102
+            },
+            {
+                "dpv:Category": "dpv:Tracking",
+                "count": 182
+            },
+            {
+                "dpv:Category": "dpv:Transactional",
+                "count": 51
+            },
+            {
+                "dpv:Category": "dpv:Username",
+                "count": 238
+            },
+            {
+                "dpv:Category": "dpv:VoiceCommunicationRecording",
+                "count": 102
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        }
+    },
+    {
+        "ppid": "Threema",
+        "name": "Threema",
+        "featured": true,
+        "activeUsers": {
+            "values": [
+                {
+                    "user_count": 6000000,
+                    "start_date": "2019-11-01",
+                    "end_date": "2019-11-02",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.messengerpeople.com/global-messenger-usage-statistics/#Germany",
+                            "archive_url": "https://web.archive.org/web/20210430000603/https://www.messengerpeople.com/global-messenger-usage-statistics/#Germany",
+                            "notes": null
+                        }
+                    ]
+                },
+                {
+                    "user_count": 9000000,
+                    "start_date": "2021-01-01",
+                    "end_date": "2021-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Company Website",
+                            "url": "https://threema.ch/press-files/1_press_info/press_threema_portrait_en.pdf",
+                            "archive_url": "https://web.archive.org/web/20210506111839/https://threema.ch/press-files/1_press_info/press_threema_portrait_en.pdf",
+                            "notes": "Company said they have 9 million users, at time of research (May '21), but this later changed to \"more than 10 million users\""
+                        }
+                    ]
+                }
+            ]
+        },
+        "dataRecipients": [
+            "Threema GmbH (CH)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:CustomerCare",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 4
+            },
+            {
+                "dpv:Purpose": "unspecified",
+                "count": 2
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:EmailAddress",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:Name",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:PrivacyPreference",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:UID",
+                "count": 1
+            },
+            {
+                "dpv:Category": "unspecified",
+                "count": 2
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        }
+    },
+    {
+        "ppid": "WhatsApp",
+        "name": "WhatsApp",
+        "featured": true,
+        "activeUsers": {
+            "values": [
+                {
+                    "user_count": 200000000,
+                    "start_date": "2013-04-01",
+                    "end_date": "2013-04-30",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 250000000,
+                    "start_date": "2013-06-01",
+                    "end_date": "2013-06-30",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 300000000,
+                    "start_date": "2013-08-01",
+                    "end_date": "2013-08-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 350000000,
+                    "start_date": "2013-10-01",
+                    "end_date": "2013-10-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 400000000,
+                    "start_date": "2013-12-01",
+                    "end_date": "2013-12-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 430000000,
+                    "start_date": "2014-01-01",
+                    "end_date": "2014-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 465000000,
+                    "start_date": "2014-02-01",
+                    "end_date": "2014-02-28",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 500000000,
+                    "start_date": "2014-04-01",
+                    "end_date": "2014-04-30",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 600000000,
+                    "start_date": "2014-08-01",
+                    "end_date": "2014-08-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 700000000,
+                    "start_date": "2015-01-01",
+                    "end_date": "2015-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 800000000,
+                    "start_date": "2015-04-01",
+                    "end_date": "2015-04-30",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 900000000,
+                    "start_date": "2015-09-01",
+                    "end_date": "2015-09-30",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 1000000000,
+                    "start_date": "2016-02-01",
+                    "end_date": "2016-02-28",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 1200000000,
+                    "start_date": "2017-01-01",
+                    "end_date": "2017-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 1300000000,
+                    "start_date": "2017-07-01",
+                    "end_date": "2017-07-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 1500000000,
+                    "start_date": "2017-12-01",
+                    "end_date": "2017-12-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 2000000000,
+                    "start_date": "2020-03-01",
+                    "end_date": "2020-03-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://fortunly.com/statistics/whatsapp-statistics",
+                            "archive_url": "https://web.archive.org/web/20210511113220/https://fortunly.com/statistics/whatsapp-statistics",
+                            "notes": "Monthly Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 1000000000,
+                    "start_date": "2021-03-04",
+                    "end_date": "2021-03-05",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "Daily Active Users Globally"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 43900000,
+                    "start_date": "2019-09-01",
+                    "end_date": "2019-09-30",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210511114949/https://www.businessofapps.com/data/whatsapp-statistics/",
+                            "notes": "MAU for Germany September 2019"
+                        }
+                    ]
+                }
+            ]
+        },
+        "dataRecipients": [
+            "Apple (US)",
+            "Facebook (US)",
+            "Facebook Payments Inc. (US)",
+            "Facebook Payments International Limited (IE)",
+            "Google (US)",
+            "WhatsApp Ireland Limited (IE)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:Analytics",
+                "count": 8
+            },
+            {
+                "dpv:Purpose": "dpv:CommercialInterest",
+                "count": 16
+            },
+            {
+                "dpv:Purpose": "dpv:CommunicationForCustomerCare",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:CustomerCare",
+                "count": 55
+            },
+            {
+                "dpv:Purpose": "dpv:DirectMarketing",
+                "count": 39
+            },
+            {
+                "dpv:Purpose": "dpv:FraudPreventionAndDetection",
+                "count": 47
+            },
+            {
+                "dpv:Purpose": "dpv:IdentityVerification",
+                "count": 47
+            },
+            {
+                "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
+                "count": 85
+            },
+            {
+                "dpv:Purpose": "dpv:IncreaseServiceRobustness",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:LegalCompliance",
+                "count": 16
+            },
+            {
+                "dpv:Purpose": "dpv:Marketing",
+                "count": 45
+            },
+            {
+                "dpv:Purpose": "dpv:Payment",
+                "count": 4
+            },
+            {
+                "dpv:Purpose": "dpv:PersonalisedAdvertising",
+                "count": 9
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "count": 8
+            },
+            {
+                "dpv:Purpose": "dpv:Security",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:SellTargettedAdvertisements",
+                "count": 9
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 100
+            },
+            {
+                "dpv:Purpose": "dpv:UsageAnalytics",
+                "count": 17
+            },
+            {
+                "dpv:Purpose": "dpv:UserInterfacePersonalisation",
+                "count": 84
+            },
+            {
+                "dpv:Purpose": "unspecified",
+                "count": 16
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:BrowserFingerprint",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:BrowsingBehavior",
+                "count": 49
+            },
+            {
+                "dpv:Category": "dpv:CallLog",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Communication",
+                "count": 40
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:DeviceApplications",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:DeviceOperatingSystem",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:EmailAddress",
+                "count": 57
+            },
+            {
+                "dpv:Category": "dpv:FinancialAccount",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:GPSCoordinate",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "count": 10
+            },
+            {
+                "dpv:Category": "dpv:Language",
+                "count": 53
+            },
+            {
+                "dpv:Category": "dpv:Location",
+                "count": 10
+            },
+            {
+                "dpv:Category": "dpv:PaymentCardNumber",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 72
+            },
+            {
+                "dpv:Category": "dpv:PrivacyPreference",
+                "count": 60
+            },
+            {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "count": 63
+            },
+            {
+                "dpv:Category": "dpv:SocialMediaCommunication",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:SocialNetwork",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:UID",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Username",
+                "count": 66
+            },
+            {
+                "dpv:Category": "dpv:VoiceCommunicationRecording",
+                "count": 4
+            },
+            {
+                "dpv:Category": "unspecified",
+                "count": 20
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        }
+    },
+    {
+        "ppid": "Snapchat",
+        "name": "Snapchat",
+        "featured": true,
+        "activeUsers": {
+            "values": [
+                {
+                    "user_count": 310700000,
+                    "start_date": "2019-07-01",
+                    "end_date": "2019-07-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Article",
+                            "url": "https://appinventiv.com/blog/snapchat-app-statistics/",
+                            "archive_url": "https://web.archive.org/web/20210122161453/https://appinventiv.com/blog/snapchat-app-statistics/",
+                            "notes": "Snapchat has always preferred to publish DAU numbers not MAU"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 280000000,
+                    "start_date": "2021-03-30",
+                    "end_date": "2021-03-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Company Website",
+                            "url": "https://investor.snap.com/overview/default.aspx",
+                            "archive_url": "https://web.archive.org/web/20210304091607/https://investor.snap.com/financials/sec-filings/default.aspx",
+                            "notes": "80 million daily active users (DAUs) use Snapchat every day on average"
+                        }
+                    ]
+                }
+            ]
+        },
+        "annualRevenues": [
+            {
+                "stream": "Combined",
+                "amount": 1180446000,
+                "currency": "USD",
+                "start_date": "2018-01-01",
+                "end_date": "2018-12-31",
+                "research_sources": [
+                    {
+                        "dataset": "SEC",
+                        "url": "https://investor.snap.com/financials/sec-filings/default.aspx",
+                        "archive_url": "https://web.archive.org/web/20210304091607/https://investor.snap.com/financials/sec-filings/default.aspx",
+                        "notes": "See research documents for 10K PDF"
+                    }
+                ]
+            },
+            {
+                "stream": "Combined",
+                "amount": 1715534000,
+                "currency": "USD",
+                "start_date": "2019-01-01",
+                "end_date": "2019-12-31",
+                "research_sources": [
+                    {
+                        "dataset": "SEC",
+                        "url": "https://investor.snap.com/financials/sec-filings/default.aspx",
+                        "archive_url": "https://web.archive.org/web/20210304091607/https://investor.snap.com/financials/sec-filings/default.aspx",
+                        "notes": "See research documents for 10K PDF"
+                    }
+                ]
+            },
+            {
+                "stream": "Combined",
+                "amount": 2506626000,
+                "currency": "USD",
+                "start_date": "2020-01-01",
+                "end_date": "2020-12-31",
+                "research_sources": [
+                    {
+                        "dataset": "SEC",
+                        "url": "https://investor.snap.com/financials/sec-filings/default.aspx",
+                        "archive_url": "https://web.archive.org/web/20210304091607/https://investor.snap.com/financials/sec-filings/default.aspx",
+                        "notes": "See research documents for 10K PDF"
+                    }
+                ]
+            }
+        ],
+        "dataRecipients": [
+            "Bitstrips Inc. (CA)",
+            "Facebook (US)",
+            "LinkedIn Corporation (US)",
+            "LinkedIn Ireland Unlimited Company (IE)",
+            "LinkedIn Singapore Pte. Ltd. (SG)",
+            "MetaCDN Pty. Ltd. (AU)",
+            "Microsoft Corporation (US)",
+            "Optimizely Inc. (US)",
+            "Outbrain Inc. (US)",
+            "Pardot LLC (US)",
+            "Pinterest Inc. (US)",
+            "Q4 Inc. (CA)",
+            "Q4 Inc. (US)",
+            "Rokt Ltd (UK)",
+            "Rokt Pte Ltd (SG)",
+            "Salesforce.com Inc. (US)",
+            "Snap Inc. (US)",
+            "TWELVENYC (UK) LIMITED (GB)",
+            "Taboola Inc. (US)",
+            "Twitter, Inc. (US)",
+            "Zenly (FR)",
+            "dpv:Authority (ZZ)",
+            "dpv:ThirdParty (ZZ)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:Advertising",
+                "count": 8
+            },
+            {
+                "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
+                "count": 3
+            },
+            {
+                "dpv:Purpose": "dpv:CustomerCare",
+                "count": 9
+            },
+            {
+                "dpv:Purpose": "dpv:DirectMarketing",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:FraudPreventionAndDetection",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:IncreaseServiceRobustness",
+                "count": 15
+            },
+            {
+                "dpv:Purpose": "dpv:LegalCompliance",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:Marketing",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForConsumer",
+                "count": 14
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForController",
+                "count": 15
+            },
+            {
+                "dpv:Purpose": "dpv:OptimiseUserInterface",
+                "count": 3
+            },
+            {
+                "dpv:Purpose": "dpv:PersonalisedAdvertising",
+                "count": 23
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:Security",
+                "count": 20
+            },
+            {
+                "dpv:Purpose": "dpv:SellTargettedAdvertisements",
+                "count": 46
+            },
+            {
+                "dpv:Purpose": "dpv:ServicePersonalization",
+                "count": 4
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 16
+            },
+            {
+                "dpv:Purpose": "dpv:UsageAnalytics",
+                "count": 24
+            },
+            {
+                "dpv:Purpose": "unspecified",
+                "count": 23
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:Age",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:AuthenticationHistory",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:BrowserFingerprint",
+                "count": 9
+            },
+            {
+                "dpv:Category": "dpv:BrowsingBehavior",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:BrowsingReferral",
+                "count": 3
+            },
+            {
+                "dpv:Category": "dpv:Communication",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:CommunicationsMetadata",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Country",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 49
+            },
+            {
+                "dpv:Category": "dpv:DeviceOperatingSystem",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:DeviceSoftware",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:EmailAddress",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:Friend",
+                "count": 6
+            },
+            {
+                "dpv:Category": "dpv:GPSCoordinate",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:Interest",
+                "count": 6
+            },
+            {
+                "dpv:Category": "dpv:Language",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:LinkClicked",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:Location",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:Name",
+                "count": 3
+            },
+            {
+                "dpv:Category": "dpv:Password",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:PrivacyPreference",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "count": 35
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:UID",
+                "count": 53
+            },
+            {
+                "dpv:Category": "dpv:Username",
+                "count": 2
+            },
+            {
+                "dpv:Category": "unspecified",
+                "count": 2
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        }
+    },
+    {
+        "ppid": "Facebook Messenger",
+        "name": "Facebook Messenger",
+        "featured": true,
+        "activeUsers": {
+            "values": [
+                {
+                    "user_count": 1300000000,
+                    "start_date": "2021-02-16",
+                    "end_date": "2021-03-18",
+                    "research_sources": [
+                        {
+                            "dataset": "TechJury",
+                            "url": "https://techjury.net/blog/facebook-messenger-statistics/",
+                            "archive_url": "https://techjury.net/blog/facebook-messenger-statistics/",
+                            "notes": "1.3 Billion people use the app monthly"
+                        }
+                    ]
+                }
+            ]
+        },
+        "annualRevenues": [
+            {
+                "stream": "Google Play Store",
+                "amount": 116000,
+                "currency": "EUR",
+                "start_date": "2021-02-01",
+                "end_date": "2021-03-01",
+                "research_sources": [
+                    {
+                        "dataset": "Statista",
+                        "url": "https://www.statista.com/statistics/1143408/monthly-facebook-messenger-revenue-in-france/",
+                        "archive_url": "https://web.archive.org/web/20210504065414/https://www.statista.com/statistics/1143408/monthly-facebook-messenger-revenue-in-france/",
+                        "notes": "Revenue of Facebook messenger on the Google play store in France from January 2019 to February 2021, per month"
+                    }
+                ]
+            }
+        ],
+        "dataRecipients": [
+            "Facebook (US)",
+            "dpv:ThirdParty (ZZ)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:Analytics",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:CommercialInterest",
+                "count": 45
+            },
+            {
+                "dpv:Purpose": "dpv:LegalCompliance",
+                "count": 14
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "count": 18
+            },
+            {
+                "dpv:Purpose": "dpv:Security",
+                "count": 23
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceOptimization",
+                "count": 65
+            },
+            {
+                "dpv:Purpose": "dpv:ServicePersonalization",
+                "count": 80
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 93
+            },
+            {
+                "dpv:Purpose": "dpv:UsageAnalytics",
+                "count": 28
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:AccountIdentifier",
+                "count": 6
+            },
+            {
+                "dpv:Category": "dpv:AuthenticationHistory",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:BankAccount",
+                "count": 6
+            },
+            {
+                "dpv:Category": "dpv:Biometric",
+                "count": 11
+            },
+            {
+                "dpv:Category": "dpv:BrowserFingerprint",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:BrowsingBehavior",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:CommunicationsMetadata",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:Connection",
+                "count": 14
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 34
+            },
+            {
+                "dpv:Category": "dpv:DeviceApplications",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 17
+            },
+            {
+                "dpv:Category": "dpv:DeviceOperatingSystem",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:DeviceSoftware",
+                "count": 5
+            },
+            {
+                "dpv:Category": "dpv:Disability",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Dislike",
+                "count": 18
+            },
+            {
+                "dpv:Category": "dpv:EmailAddress",
+                "count": 6
+            },
+            {
+                "dpv:Category": "dpv:EthnicOrigin",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:GPSCoordinate",
+                "count": 11
+            },
+            {
+                "dpv:Category": "dpv:Geographic",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Interaction",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Interest",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:Language",
+                "count": 3
+            },
+            {
+                "dpv:Category": "dpv:Like",
+                "count": 18
+            },
+            {
+                "dpv:Category": "dpv:Location",
+                "count": 18
+            },
+            {
+                "dpv:Category": "dpv:MACAddress",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:MedicalHealth",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:MentalHealth",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Opinion",
+                "count": 10
+            },
+            {
+                "dpv:Category": "dpv:PaymentCardNumber",
+                "count": 6
+            },
+            {
+                "dpv:Category": "dpv:PhilosophicalBelief",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 13
+            },
+            {
+                "dpv:Category": "dpv:PoliticalAffiliation",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Preference",
+                "count": 10
+            },
+            {
+                "dpv:Category": "dpv:Race",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Religion",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:ReligiousBelief",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:Sexual",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:SocialMediaCommunication",
+                "count": 22
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "count": 6
+            },
+            {
+                "dpv:Category": "dpv:Tracking",
+                "count": 14
+            },
+            {
+                "dpv:Category": "dpv:Transaction",
+                "count": 6
+            },
+            {
+                "dpv:Category": "dpv:Username",
+                "count": 6
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        }
+    },
+    {
+        "ppid": "iMessage",
+        "name": "iMessage",
+        "featured": true,
+        "activeUsers": {
+            "values": [
+                {
+                    "user_count": 728000000,
+                    "start_date": "2017-04-01",
+                    "end_date": "2017-04-30",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.statista.com/statistics/755625/iphones-in-use-in-us-china-and-rest-of-the-world/",
+                            "archive_url": "https://web.archive.org/web/20210512123926/https://www.statista.com/statistics/755625/iphones-in-use-in-us-china-and-rest-of-the-world/",
+                            "notes": "Worldwide iPhones in use"
+                        }
+                    ]
+                }
+            ]
+        },
+        "annualRevenues": [
+            {
+                "stream": "Net Sales",
+                "amount": 137781000000,
+                "currency": "USD",
+                "start_date": "2020-01-01",
+                "end_date": "2020-12-31",
+                "research_sources": [
+                    {
+                        "dataset": "SEC10K",
+                        "url": "https://investor.apple.com/investor-relations/sec-filings/",
+                        "archive_url": "https://web.archive.org/web/20210117052133/https://investor.apple.com/investor-relations/sec-filings/",
+                        "notes": "SEC10K 2020 PDF in ResearchDocuments Folder"
+                    }
+                ]
+            },
+            {
+                "stream": "Net Sales",
+                "amount": 142381000000,
+                "currency": "USD",
+                "start_date": "2019-01-01",
+                "end_date": "2019-12-31",
+                "research_sources": [
+                    {
+                        "dataset": "SEC10K",
+                        "url": "https://investor.apple.com/investor-relations/sec-filings/",
+                        "archive_url": "https://web.archive.org/web/20210117052133/https://investor.apple.com/investor-relations/sec-filings/",
+                        "notes": "SEC10K 2020 PDF in ResearchDocuments Folder"
+                    }
+                ]
+            },
+            {
+                "stream": "Net Sales",
+                "amount": 164888000000,
+                "currency": "USD",
+                "start_date": "2018-01-01",
+                "end_date": "2018-12-31",
+                "research_sources": [
+                    {
+                        "dataset": "SEC10K",
+                        "url": "https://investor.apple.com/investor-relations/sec-filings/",
+                        "archive_url": "https://web.archive.org/web/20210117052133/https://investor.apple.com/investor-relations/sec-filings/",
+                        "notes": "SEC10K 2020 PDF in ResearchDocuments Folder"
+                    }
+                ]
+            }
+        ],
+        "dataRecipients": [
+            "Apple (US)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 11
+            },
+            {
+                "dpv:Purpose": "dpv:UsageAnalytics",
+                "count": 4
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:EmailAddress",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Location",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:Name",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "count": 3
+            },
+            {
+                "dpv:Category": "dpv:UID",
+                "count": 1
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        }
+    },
+    {
+        "ppid": "Telegram",
+        "name": "Telegram",
+        "featured": true,
+        "activeUsers": {
+            "values": [
+                {
+                    "user_count": 500000000,
+                    "start_date": "2021-01-01",
+                    "end_date": "2021-01-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "archive_url": "https://web.archive.org/web/20210427145540/https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "notes": "five hundred million monthly active users in January 2021"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 400000000,
+                    "start_date": "2020-04-01",
+                    "end_date": "2020-04-30",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "archive_url": "https://web.archive.org/web/20210427145540/https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "notes": "four hundred million monthly active users in April 2020"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 200000000,
+                    "start_date": "2018-03-01",
+                    "end_date": "2018-03-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "archive_url": "https://web.archive.org/web/20210427145540/https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "notes": "two hundred million monthly active users in March 2018"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 180000000,
+                    "start_date": "2017-12-01",
+                    "end_date": "2017-12-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "archive_url": "https://web.archive.org/web/20210427145540/https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "notes": "one hundred and eighty million monthly active users in December 2017"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 100000000,
+                    "start_date": "2016-02-01",
+                    "end_date": "2016-02-28",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "archive_url": "https://web.archive.org/web/20210427145540/https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "notes": "one hundred million monthly active users in Feb 2016"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 60000000,
+                    "start_date": "2015-09-01",
+                    "end_date": "2015-09-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "archive_url": "https://web.archive.org/web/20210427145540/https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "notes": "sixty million monthly active users in September 2015"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 50000000,
+                    "start_date": "2014-12-01",
+                    "end_date": "2014-12-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "archive_url": "https://web.archive.org/web/20210427145540/https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "notes": "fifty million monthly active users in December 2014"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 35000000,
+                    "start_date": "2014-03-01",
+                    "end_date": "2014-03-31",
+                    "research_sources": [
+                        {
+                            "dataset": "Statista",
+                            "url": "https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "archive_url": "https://web.archive.org/web/20210427145540/https://www.statista.com/statistics/234038/telegram-messenger-mau-users/",
+                            "notes": "thirty five million monthly active users in March 2014"
+                        }
+                    ]
+                },
+                {
+                    "user_count": 55200000,
+                    "start_date": "2021-02-01",
+                    "end_date": "2021-02-02",
+                    "research_sources": [
+                        {
+                            "dataset": "Backlinko.com",
+                            "url": "https://backlinko.com/telegram-users",
+                            "archive_url": "https://web.archive.org/web/20210612222659/https://backlinko.com/telegram-users",
+                            "notes": "fifty five point two million daily active users in February 2021"
+                        }
+                    ]
+                }
+            ]
+        },
+        "dataRecipients": [
+            "Telegram (AE)",
+            "Telegram Group Inc. (VG)",
+            "Telegram Messenger Inc. (VG)",
+            "dpv:Authority (ZZ)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:FraudPreventionAndDetection",
+                "count": 8
+            },
+            {
+                "dpv:Purpose": "dpv:LegalCompliance",
+                "count": 8
+            },
+            {
+                "dpv:Purpose": "dpv:Security",
+                "count": 10
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 50
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:CommunicationsMetadata",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:Connection",
+                "count": 6
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:EmailAddress",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "count": 8
+            },
+            {
+                "dpv:Category": "dpv:SocialMediaCommunication",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:UID",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:Username",
+                "count": 2
+            }
+        ],
+        "description": {
+            "value": null,
+            "source": null
+        }
+    }
+]
