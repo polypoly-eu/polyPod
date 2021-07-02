@@ -98,6 +98,10 @@ class BrowserPolyNav implements PolyNav {
     async setTitle(title: string): Promise<void> {
         document.title = title;
     }
+
+    async pickFile(): Promise<void> {
+        throw "Not implemented: pickFile";
+    }
 }
 
 export class BrowserPod implements Pod {

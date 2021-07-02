@@ -116,6 +116,10 @@ export interface PolyNav {
      * Set a title in of a Pod
      */
     setTitle(title: string): Promise<void>;
+    /**
+     * Ask the user to pick a file and load it
+     */
+    pickFile(): Promise<void>;
 }
 
 /**

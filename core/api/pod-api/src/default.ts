@@ -107,6 +107,9 @@ export class DefaultPod implements Pod {
             setTitle: async (title: string) => {
                 throw new Error("Not implemented");
             },
+            pickFile: async () => {
+                throw new Error("Not implemented");
+            },
         };
     }
 }

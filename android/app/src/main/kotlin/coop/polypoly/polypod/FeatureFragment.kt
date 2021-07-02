@@ -1,7 +1,12 @@
 package coop.polypoly.polypod
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.DocumentsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +20,7 @@ import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
+import kotlinx.coroutines.CompletableDeferred
 
 private fun luminance(color: Int): Double =
     Color.red(color) * 0.2126 +
@@ -77,6 +83,9 @@ open class FeatureFragment : Fragment() {
     private lateinit var feature: Feature
     private lateinit var foregroundResources: ForegroundResources
     private lateinit var featureContainer: FeatureContainer
+
+    private val pickFileRequestCode = 1
+    private var pickFileResult: CompletableDeferred<ByteArray?>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -150,7 +159,8 @@ open class FeatureFragment : Fragment() {
                 },
                 {
                     activity?.runOnUiThread { featureContainer.openUrl(it) }
-                }
+                },
+                ::pickFile
             )
         )
     }
@@ -180,5 +190,48 @@ open class FeatureFragment : Fragment() {
 
     private fun updateAppBarTitle(view: View, title: String) {
         view.findViewById<TextView>(R.id.feature_title).text = title
+    }
+
+    private suspend fun pickFile(): ByteArray? {
+        if (pickFileResult?.isActive == true)
+            return null
+
+        pickFileResult = CompletableDeferred()
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+            // TODO: Figure out how to preselect the downloads directory
+            //       on Android <26
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                putExtra(
+                    DocumentsContract.EXTRA_INITIAL_URI,
+                    Environment.DIRECTORY_DOWNLOADS
+                )
+            }
+        }
+        startActivityForResult(intent, pickFileRequestCode)
+        return pickFileResult?.await()
+    }
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == pickFileRequestCode)
+            handlePickFileResult(resultCode, data)
+    }
+
+    private fun handlePickFileResult(resultCode: Int, data: Intent?) {
+        if (resultCode != Activity.RESULT_OK || data?.data == null) {
+            pickFileResult?.complete(null)
+            return
+        }
+
+        val fileUri = data?.data!!
+        val result =
+            activity?.contentResolver?.openInputStream(fileUri)?.readBytes()
+        pickFileResult?.complete(result)
     }
 }

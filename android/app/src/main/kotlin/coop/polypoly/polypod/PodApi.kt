@@ -56,6 +56,7 @@ open class PodApi(
                         return handlePolyNavSetActiveActions(args)
                     "setTitle" -> return handlePolyNavSetTitle(args)
                     "openUrl" -> return handlePolyNavOpenUrl(args)
+                    "pickFile" -> return handlePolyNavPickFile()
                 }
             }
         }
@@ -107,6 +108,14 @@ open class PodApi(
             it.asStringValue().toString()
         }
         polyNav.setActiveActions(argsList.toTypedArray())
+        return ValueFactory.newNil()
+    }
+
+    private suspend fun handlePolyNavPickFile(): Value {
+        logger.debug("dispatch() -> polyNav.pickFile")
+        polyNav.pickFile()?.let {
+            return ValueFactory.newBinary(it)
+        }
         return ValueFactory.newNil()
     }
 
