@@ -282,3 +282,7 @@
     background: linear-gradient(#0f193800 0%, #0f1938);
     transform: translateY(-40px);
 }
+
+.about .scroll-box::-webkit-scrollbar {
+    display: none;
+}
