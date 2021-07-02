@@ -112,14 +112,16 @@ export class TabsLine extends LitElement {
   __renderTabsLine() {
     return this.tabs
       ? this.tabs.map(
-          tab =>
-            html `<poly-tab
+          tab => {
+            const entity = `<poly-tab
               class="single-tab"
               .label="${tab.label}"
               .value="${tab.id}"
               .active="${tab.active}"
               @poly-tab-selected=${this.__activeTab}
             ></poly-tab>`
+            return html([entity])
+          }
         )
       : html``;
   }
@@ -135,6 +137,8 @@ export class TabsLine extends LitElement {
   }
 
   render() {
+    console.log(this.__renderTabsLine())
+    console.log(this.__renderTabsContent())
     return html`
       <div class="tabs-line">${this.__renderTabsLine()}</div>
       ${this.__renderTabsContent()}
