@@ -1,6 +1,6 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import "../../src/buttons";
-import { buttons } from "../../src/constants";
+import { polyButton } from "../../src/constants";
 
 describe("Button", () => {
   it(`should throw an exception if the size value isn't valid`, done => {
@@ -50,8 +50,8 @@ describe("Button", () => {
       <poly-button><button type="button">Example</button></poly-button>
     `)
       .then(el => {
-        expect(el.type).to.be.equal(buttons.types.DARK_BUTTON);
-        expect(el.size).to.be.equal(buttons.sizes.MEDIUM_BUTTON);
+        expect(el.type).to.be.equal(polyButton.types.DARK_BUTTON);
+        expect(el.size).to.be.equal(polyButton.sizes.MEDIUM_BUTTON);
         expect(el.disabled).to.be.false;
         done();
       })

@@ -7,7 +7,7 @@ export const sizes = {
   BIG_BUTTON: "big",
   MEDIUM_BUTTON: "medium",
   SMALL_BUTTON: "small",
-  ROUND_BUTTON: "round",
+  FIXED_SIZE_ROUND_BUTTON: "round",
 };
 
 export const states = {

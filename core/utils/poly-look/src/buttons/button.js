@@ -1,6 +1,6 @@
 import { html, LitElement, css } from "lit-element";
 import globalTheme from "../globalTheme";
-import { buttons } from "../constants";
+import { polyButton } from "../constants";
 
 export class Button extends LitElement {
   static get styles() {
@@ -93,13 +93,13 @@ export class Button extends LitElement {
   }
 
   __validateButtonTypes(type) {
-    const listOfValidTypes = Object.values(buttons.types);
+    const listOfValidTypes = Object.values(polyButton.types);
 
     return listOfValidTypes.includes(type);
   }
 
   __validateButtonSizes(size) {
-    const listOfValidSizes = Object.values(buttons.sizes);
+    const listOfValidSizes = Object.values(polyButton.sizes);
 
     return listOfValidSizes.includes(size);
   }
@@ -115,8 +115,8 @@ export class Button extends LitElement {
   constructor() {
     super();
 
-    this.__type = buttons.types.DARK_BUTTON;
-    this.__size = buttons.sizes.MEDIUM_BUTTON;
+    this.__type = polyButton.types.DARK_BUTTON;
+    this.__size = polyButton.sizes.MEDIUM_BUTTON;
     this.disabled = false;
   }
 
@@ -124,7 +124,7 @@ export class Button extends LitElement {
     if (!this.__validateButtonTypes(value)) {
       throw new Error(
         `Wrong value in type property. Supported values are: ${Object.values(
-          buttons.types
+          polyButton.types
         ).reduce(this.__listToString, "")}`
       );
     }
@@ -141,7 +141,7 @@ export class Button extends LitElement {
     if (!this.__validateButtonSizes(value)) {
       throw new Error(
         `Wrong value in size property. Supported values are: ${Object.values(
-          buttons.sizes
+          polyButton.sizes
         ).reduce(this.__listToString, "")}`
       );
     }
@@ -157,7 +157,7 @@ export class Button extends LitElement {
   render() {
     return html`<span
       class="btn ${this.size} ${this.type} ${this.disabled
-        ? buttons.states.DISABLED
+        ? polyButton.states.DISABLED
         : ""}"
     >
       <slot></slot>
