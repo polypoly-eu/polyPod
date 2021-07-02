@@ -148,6 +148,8 @@ function parseProductEntity(entityData) {
               )
             : null,
         description: parseDescription(entityData.policies),
+        recipientInfo: entityData.recipient_info,
+        activities: product.activity.values,
     };
 }
 
