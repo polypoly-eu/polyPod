@@ -1,5 +1,5 @@
 import { html, LitElement, css, unsafeCSS } from "lit-element";
-import { PREFIX, globalTheme } from "../globalTheme";
+import { POLYPREFIX, globalTheme } from "../globalTheme";
 
 export class Tab extends LitElement {
   static get styles() {
@@ -8,11 +8,11 @@ export class Tab extends LitElement {
       css`
         .tab {
           width: 100%;
-          color: var(--${unsafeCSS(PREFIX)}-color-medium);
-          font-size: var(--${unsafeCSS(PREFIX)}-button-font-size);
+          color: var(--${unsafeCSS(POLYPREFIX)}-color-medium);
+          font-size: var(--${unsafeCSS(POLYPREFIX)}-button-font-size);
           background-color: transparent;
           border: solid transparent 2px;
-          border-bottom: solid 1px var(--${unsafeCSS(PREFIX)}-color-dark);
+          border-bottom: solid 1px var(--${unsafeCSS(POLYPREFIX)}-color-dark);
           text-align: center;
           cursor: pointer;
         }
@@ -22,8 +22,8 @@ export class Tab extends LitElement {
         }
 
         .tab.active {
-          color: var(--${unsafeCSS(PREFIX)}-color-dark);
-          border-bottom: solid 4px var(--${unsafeCSS(PREFIX)}-color-dark);
+          color: var(--${unsafeCSS(POLYPREFIX)}-color-dark);
+          border-bottom: solid 4px var(--${unsafeCSS(POLYPREFIX)}-color-dark);
         }
       `,
     ];
@@ -44,7 +44,7 @@ export class Tab extends LitElement {
   }
 
   __onClick() {
-    const tabEvent = new CustomEvent(`${PREFIX}-tab-selected`, {
+    const tabEvent = new CustomEvent(`${POLYPREFIX}-tab-selected`, {
       detail: { value: this.value },
       bubbles: true,
       composed: true,
