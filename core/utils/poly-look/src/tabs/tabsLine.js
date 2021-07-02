@@ -113,7 +113,7 @@ export class TabsLine extends LitElement {
     return this.tabs
       ? this.tabs.map(
           tab =>
-            html`<poly-tab
+            html `<poly-tab
               class="single-tab"
               .label=${tab.label}
               .value=${tab.id}
