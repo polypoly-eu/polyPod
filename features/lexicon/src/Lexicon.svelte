@@ -189,16 +189,6 @@ button {
     left: 0;
 }
 
-.term-description .back {
-    width: 100%;
-    height: 51px;
-    background-color: #0f1938;
-    color: #f7fafc;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    font-size: 16px;
-}
-
 .clr {
     opacity: 0;
 }
@@ -223,6 +213,7 @@ button {
 
 <script>
 import i18n from "./i18n.js";
+import { polyButton } from "poly-look/src/constants";
 
 export let lexicon;
 let showTerm = null;
@@ -307,8 +298,9 @@ function setUpListNavigation() {
                 </div>
             </div>
             <div class="button-area">
-                <button class="back" on:click="{() => handleBack()}"
-                    >{i18n.t("common:back")}</button>
+                <poly-button type="{polyButton.types.DARK_BUTTON}" size="{polyButton.sizes.MEDIUM_BUTTON}">
+                    <button on:click="{() => handleBack()}">{i18n.t("common:back")}</button>
+                </poly-button>
             </div>
         </div>
     {:else}

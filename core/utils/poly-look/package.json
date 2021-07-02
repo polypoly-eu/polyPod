@@ -4,8 +4,8 @@
   "description": "Webcomponent poly-look following open-wc recommendations",
   "author": "poly-look",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.js",
+  "main": "src/poly-look.js",
+  "module": "dist/poly-look.bundled.js",
   "scripts": {
     "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
