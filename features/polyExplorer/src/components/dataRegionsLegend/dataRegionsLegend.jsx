@@ -2,9 +2,8 @@ import React from "react";
 
 import "./dataRegionsLegend.css";
 import i18n from "../../i18n.js";
-import LinkButton from "../buttons/linkButton/linkButton.jsx";
 
-const DataRegionsLegend = ({ jurisdictionsState }) => {
+const DataRegionsLegend = () => {
     return (
         <div className="location-legend">
             <div className="legend">
@@ -32,13 +31,6 @@ const DataRegionsLegend = ({ jurisdictionsState }) => {
                     <p>{i18n.t("common:jurisdiction.undisclosed")}</p>
                 </div>
             </div>
-            <LinkButton
-                route="/data-region-info"
-                className=""
-                stateChange={jurisdictionsState}
-            >
-                <img src="./images/question-circle.svg" />
-            </LinkButton>
             <div className="source">
                 <p>{i18n.t("common:source")}: polyPedia</p>
             </div>

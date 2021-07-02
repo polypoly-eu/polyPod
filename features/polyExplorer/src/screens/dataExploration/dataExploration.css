@@ -156,8 +156,8 @@
     margin-bottom: -8px;
 }
 
-.data-exploration .jurisdiction-tree-container .info-button {
-    bottom: 130px;
+.static-content-jurisdictions .info-button {
+    bottom: 200px;
 }
 
 .data-exploration .static-content .data-sharing-legend-fill {
