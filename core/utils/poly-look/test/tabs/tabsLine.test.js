@@ -69,7 +69,7 @@ describe("TabsLine", () => {
         expect(true).to.equal(false);
       })
       .catch(error => {
-        expect(error.message).to.equal("One tab must be active but only one");
+        expect(error.message).to.equal("Just one tab should be active");
       });
   });
 
@@ -84,7 +84,7 @@ describe("TabsLine", () => {
         expect(true).to.equal(false);
       })
       .catch(error => {
-        expect(error.message).to.equal("One tab must be active but only one");
+        expect(error.message).to.equal("Just one tab should be active");
       });
   });
 

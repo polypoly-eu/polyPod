@@ -81,7 +81,7 @@ export class TabsLine extends LitElement {
     }
 
     if (!this.__validateOnlyOneActive(value)) {
-      throw new Error("One tab must be active but only one");
+      throw new Error("Just one tab should be active");
     }
 
     this._tabs = value.map(tab => ({ ...tab }));
