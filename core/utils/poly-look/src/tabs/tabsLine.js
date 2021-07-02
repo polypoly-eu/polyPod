@@ -108,31 +108,28 @@ export class TabsLine extends LitElement {
 
     this._tabs = [];
   }
-  
+
   render() {
     return this.tabs
-    ? html`
-      <div class="tabs-line">${
-        this.tabs.map( tab => {
-            return html`<poly-tab
-              class="single-tab"
-              .label="${tab.label}"
-              .value="${tab.id}"
-              .active="${tab.active}"
-              @poly-tab-selected=${this.__activeTab}
-            >
-            </poly-tab>`;
-          }
-        )
-      }</div>
-      ${
-        this.tabs.map(
-          tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
-            <slot name="${tab.id}"></slot>
-          </div>`
-        )
-      }
-    `
-    : html`<div class="tabs-line"></div>`
+      ? html`
+          <div class="tabs-line">
+            ${this.tabs.map(tab => {
+              return html`<poly-tab
+                class="single-tab"
+                .label="${tab.label}"
+                .value="${tab.id}"
+                .active="${tab.active}"
+                @poly-tab-selected=${this.__activeTab}
+              >
+              </poly-tab>`;
+            })}
+          </div>
+          ${this.tabs.map(
+            tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
+              <slot name="${tab.id}"></slot>
+            </div>`
+          )}
+        `
+      : html`<div class="tabs-line"></div>`;
   }
 }
