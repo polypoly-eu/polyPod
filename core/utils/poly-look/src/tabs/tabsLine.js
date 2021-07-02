@@ -110,9 +110,8 @@ export class TabsLine extends LitElement {
   }
 
   __renderTabsLine() {
-    return this.tabs
-      ? this.tabs.map(tab => {
-          return html` <poly-tab
+    return this.tabs.map( tab => {
+          return html`<poly-tab
             class="single-tab"
             .label="${tab.label}"
             .value="${tab.id}"
@@ -120,24 +119,23 @@ export class TabsLine extends LitElement {
             @poly-tab-selected=${this.__activeTab}
           >
           </poly-tab>`;
-        })
-      : html``;
+        });
   }
 
   __renderTabsContent() {
-    return this.tabs
-      ? this.tabs.map(
+    return this.tabs.map(
           tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
             <slot name="${tab.id}"></slot>
           </div>`
         )
-      : html``;
   }
 
   render() {
-    return html`
+    return this.tabs
+    ? html`
       <div class="tabs-line">${this.__renderTabsLine()}</div>
       ${this.__renderTabsContent()}
-    `;
+    `
+    : html`<div class="tabs-line"></div>`
   }
 }
