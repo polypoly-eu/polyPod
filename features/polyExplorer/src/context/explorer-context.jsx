@@ -123,7 +123,9 @@ export const ExplorerProvider = ({ children }) => {
     function handleBack() {
         if (currentPath != "/") {
             history.goBack();
-            changeNavigationState(history.location.state);
+            if (history.location.state) {
+                changeNavigationState(history.location.state);
+            }
         }
     }
 
