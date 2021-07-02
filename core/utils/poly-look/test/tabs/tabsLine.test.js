@@ -1,46 +1,41 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import "../../src/tabs";
-const numberOfTabs = 3;
+const TABS = [
+  {
+    id: "tab01",
+    label: "Tab 01",
+    active: true,
+  },
+  {
+    id: "tab02",
+    label: "Tab 03",
+    active: false,
+  },
+  {
+    id: "tab03",
+    label: "Tab 03",
+    active: false,
+  },
+];
 
 describe("TabsLine", () => {
-  let tabs = [];
+  let tabs;
   let el;
 
-  before( async function() {
+  before(async function () {
     let divs = [];
-    for (let i = 0; i < numberOfTabs; i++) {
+    for (let i = 0; i < TABS.length; i++) {
       divs[i] = `<div class="tab-slot" slot="tab0${i}">this is the tab0${i}`;
     }
-    el = await fixture( html`
-      <poly-tabs-line .tabs=${tabs}>
-        ${divs.join("\n")}
-      </poly-tabs-line>
+    el = await fixture(html`
+      <poly-tabs-line .tabs=${TABS}> ${divs.join("\n")} </poly-tabs-line>
     `);
   });
 
   beforeEach(() => {
-    tabs = [
-      {
-        id: "tab01",
-        label: "Tab 01",
-        active: true,
-      },
-      {
-        id: "tab02",
-        label: "Tab 03",
-        active: false,
-      },
-      {
-        id: "tab03",
-        label: "Tab 03",
-        active: false,
-      },
-    ];
+    tabs = JSON.parse(JSON.stringify(TABS));
   });
 
-  afterEach(() => {
-    tabs = [];
-  });
   it(`
     must throw an exception if the input data does not have
     the required info (less attributes)
@@ -106,7 +101,6 @@ describe("TabsLine", () => {
     must render three tabs with its content
   `, async () => {
     const lengTabs = tabs.length;
-
     expect(tabs).to.eql(el.tabs);
 
     const renderTabs = el.shadowRoot.querySelectorAll("poly-tab");
@@ -127,9 +121,7 @@ describe("TabsLine", () => {
   });
 
   it("must change the active content if a tab is clicked", async () => {
-
     const renderTabs = el.shadowRoot.querySelectorAll("poly-tab");
-    console.log(renderTabs);
     renderTabs[1].shadowRoot.querySelector(".tab").click();
     expect(el.tabs[1].active).to.equal(true);
   });
