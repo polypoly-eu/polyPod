@@ -115,9 +115,9 @@ export class TabsLine extends LitElement {
           tab =>
             html `<poly-tab
               class="single-tab"
-              .label=${tab.label}
-              .value=${tab.id}
-              .active=${tab.active}
+              .label="${tab.label}"
+              .value="${tab.id}"
+              .active="${tab.active}"
               @poly-tab-selected=${this.__activeTab}
             ></poly-tab>`
         )
