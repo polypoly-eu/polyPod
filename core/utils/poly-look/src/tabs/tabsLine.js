@@ -122,19 +122,17 @@ export class TabsLine extends LitElement {
         });
   }
 
-  __renderTabsContent() {
-    return this.tabs.map(
-          tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
-            <slot name="${tab.id}"></slot>
-          </div>`
-        )
-  }
-
   render() {
     return this.tabs
     ? html`
       <div class="tabs-line">${this.__renderTabsLine()}</div>
-      ${this.__renderTabsContent()}
+      ${
+        this.tabs.map(
+          tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
+            <slot name="${tab.id}"></slot>
+          </div>`
+        )
+      }
     `
     : html`<div class="tabs-line"></div>`
   }
