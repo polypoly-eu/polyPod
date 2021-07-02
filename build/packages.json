@@ -18,6 +18,7 @@
         "core/utils/poly-look",
         "features/bundle",
         "features/example",
+        "features/facebookImport",
         "features/lexicon",
         "features/polyExplorer",
         "features/polyPinion",

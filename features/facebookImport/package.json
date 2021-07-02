@@ -1,0 +1,10 @@
+{
+  "name": "facebook-import-feature",
+  "scripts": {
+    "build": "rm -rf dist && cp -r src dist && cp node_modules/@polypoly-eu/podjs/dist/pod.js dist"
+  },
+  "devDependencies": {
+    "@polypoly-eu/podjs": "file:../../podjs"
+  },
+  "private": true
+}
