@@ -36,7 +36,9 @@ export const globalTheme = css`
     --${unsafeCSS(
       POLYPREFIX
     )}-data-exp-data-types: var(--data-exp-data-types, #fe8988);
-    --${unsafeCSS(POLYPREFIX)}-data-exp-purposes: var(--data-exp-purposes, #3ba6ff);
+    --${unsafeCSS(
+      POLYPREFIX
+    )}-data-exp-purposes: var(--data-exp-purposes, #3ba6ff);
     --${unsafeCSS(
       POLYPREFIX
     )}-data-exp-companies: var(--data-exp-companies, #7ee8a2);
@@ -60,20 +62,26 @@ export const globalTheme = css`
       --font-family-medium-name,
       "Jost Medium"
     );
-    --${unsafeCSS(POLYPREFIX)}-font-family-${unsafeCSS(POLYPREFIX)}-display-name: var(
+    --${unsafeCSS(POLYPREFIX)}-font-family-${unsafeCSS(
+  POLYPREFIX
+)}-display-name: var(
       --font-family-${unsafeCSS(POLYPREFIX)}-display-name,
       "${unsafeCSS(POLYPREFIX)}Display"
     );
 
     /* Font sizes */
-    --${unsafeCSS(POLYPREFIX)}-headline-font-size: var(--headline-font-size, 38px);
+    --${unsafeCSS(
+      POLYPREFIX
+    )}-headline-font-size: var(--headline-font-size, 38px);
     --${unsafeCSS(
       POLYPREFIX
     )}-body-text-font-size: var(--body-text-font-size, 20px);
     --${unsafeCSS(POLYPREFIX)}-button-font-size: var(--button-font-size, 18px);
 
     /* Font weight */
-    --${unsafeCSS(POLYPREFIX)}-font-weight-regular: var(--font-weight-regular, 400);
+    --${unsafeCSS(
+      POLYPREFIX
+    )}-font-weight-regular: var(--font-weight-regular, 400);
     --${unsafeCSS(
       POLYPREFIX
     )}-font-weight-irrelevant: var(--font-weight-irrelevant, 200);
