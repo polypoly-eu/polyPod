@@ -92,15 +92,16 @@ describe("TabsLine", () => {
     must render three tabs with its content
   `, async () => {
     const lengTabs = tabs.length;
-    const tab01Content = "this is the tab01";
-    const tab02Content = "this is the tab02";
-    const tab03Content = "this is the tab03";
-
+    let content=[]
+    const numberOfTabs = 3;
+    assert(numberOfTabs < 10);
+    for (let i = 0; i < numberOfTabs; i++) {
+      content[i] = `<div class="tab-slot" slot="tab0${i}">this is the tab0${i}`;
+    }
+    
     const el = await fixture(html`
       <poly-tabs-line .tabs=${tabs}>
-        <div class="tab-slot" slot="tab01">${tab01Content}</div>
-        <div class="tab-slot" slot="tab02">${tab02Content}</div>
-        <div class="tab-slot" slot="tab03">${tab03Content}</div>
+        ${content.join("\n")}
       </poly-tabs-line>
     `);
 
