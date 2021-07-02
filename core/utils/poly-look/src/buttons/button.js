@@ -73,7 +73,7 @@ export class Button extends LitElement {
         }
 
         .btn.big ::slotted(button) {
-          width: var(--poly-button-big-width, 328px) !important;
+          width: var(--poly-button-big-width, 100%) !important;
           height: var(--poly-button-big-height, 56px) !important;
           font-size: var(
             --poly-button-big-font-size,
@@ -82,7 +82,7 @@ export class Button extends LitElement {
         }
 
         .btn.medium ::slotted(button) {
-          width: var(--poly-button-medium-width, 296px) !important;
+          width: var(--poly-button-medium-width, 100%) !important;
           height: var(--poly-button-medium-height, 48px) !important;
           font-size: var(
             --poly-button-medium-font-size,

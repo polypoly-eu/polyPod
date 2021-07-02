@@ -22,9 +22,20 @@ function Template({ type = "dark", size = "medium", disabled }) {
           }
         </style>`
       : ""}
-    <poly-button .type=${type} .size=${size} .disabled=${disabled}
-      ><button type="button">Example</button></poly-button
-    >
+    <style>
+      .button-area {
+        width: 80%;
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-bottom: 32px;
+        height: 200px;
+      }
+    </style>
+    <div class="button-area">
+      <poly-button .type=${type} .size=${size} .disabled=${disabled}
+        ><button type="button">Example</button></poly-button
+      >
+    </div>
   `;
 }
 
