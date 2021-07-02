@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import { PREFIX, globalTheme } from "../globalTheme";
+import { globalTheme } from "../globalTheme";
 
 const tabRequiredAttributes = ["id", "label", "active"];
 
@@ -111,18 +111,16 @@ export class TabsLine extends LitElement {
 
   __renderTabsLine() {
     return this.tabs
-      ? this.tabs.map(
-          tab => {
-            const entity = `<poly-tab
-              class="single-tab"
-              .label="${tab.label}"
-              .value="${tab.id}"
-              .active="${tab.active}"
-              @poly-tab-selected=${this.__activeTab}
-            ></poly-tab>`
-            return html([entity])
-          }
-        )
+      ? this.tabs.map(tab => {
+          return html` <poly-tab
+            class="single-tab"
+            .label="${tab.label}"
+            .value="${tab.id}"
+            .active="${tab.active}"
+            @poly-tab-selected=${this.__activeTab}
+          >
+          </poly-tab>`;
+        })
       : html``;
   }
 
@@ -137,8 +135,6 @@ export class TabsLine extends LitElement {
   }
 
   render() {
-    console.log(this.__renderTabsLine())
-    console.log(this.__renderTabsContent())
     return html`
       <div class="tabs-line">${this.__renderTabsLine()}</div>
       ${this.__renderTabsContent()}

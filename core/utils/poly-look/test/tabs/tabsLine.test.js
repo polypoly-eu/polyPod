@@ -108,7 +108,6 @@ describe("TabsLine", () => {
 
     const renderTabs = el.shadowRoot.querySelectorAll("poly-tab");
     expect(renderTabs.length).to.equal(3);
-
     for (let i = 0; i < lengTabs; i++) {
       expect(renderTabs[i].label).to.equal(tabs[i].label);
       expect(renderTabs[i].value).to.equal(tabs[i].id);
