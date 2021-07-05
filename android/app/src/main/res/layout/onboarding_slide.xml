@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/polydisplay_semi_1_0"
+            android:fontFamily="@font/jost_medium"
             android:textSize="@dimen/onboarding_headline_size"
             android:lineSpacingExtra="@dimen/onboarding_headline_extra_spacing" />
 
