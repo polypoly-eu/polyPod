@@ -73,7 +73,7 @@ export default {
                     dest: "public",
                 },
                 {
-                    src: ["../../android/app/src/main/res/font/jost_medium.ttf"],
+                    src: ["../../lib/fonts/jost_medium.ttf"],
                     dest: "public/fonts",
                 }
             ],
