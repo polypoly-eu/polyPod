@@ -1,5 +1,5 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import "../../poly-look.js";
+import "../../src/tabs";
 
 describe("TabsLine", () => {
   let tabs = [];
@@ -32,7 +32,7 @@ describe("TabsLine", () => {
     the required info (less attributes)
   `, () => {
     delete tabs[2].label;
-    fixture(html` <poly-tabs .tabs=${tabs}></poly-tabs> `)
+    fixture(html` <poly-tabs-line .tabs=${tabs}></poly-tabs-line> `)
       .then(() => {
         // If the exception is not fired we must make the test fail
         expect(true).to.equal(false);
@@ -48,7 +48,7 @@ describe("TabsLine", () => {
   `, () => {
     delete tabs[2].label;
     tabs[2].fake = "fake attribute";
-    fixture(html` <poly-tabs .tabs=${tabs}></poly-tabs> `)
+    fixture(html` <poly-tabs-line .tabs=${tabs}></poly-tabs-line> `)
       .then(() => {
         // If the exception is not fired we must make the test fail
         expect(true).to.equal(false);
@@ -63,7 +63,7 @@ describe("TabsLine", () => {
     at the same time
   `, () => {
     tabs[1].active = true;
-    fixture(html` <poly-tabs .tabs=${tabs}></poly-tabs> `)
+    fixture(html` <poly-tabs-line .tabs=${tabs}></poly-tabs-line> `)
       .then(() => {
         // If the exception is not fired we must make the test fail
         expect(true).to.equal(false);
@@ -78,7 +78,7 @@ describe("TabsLine", () => {
     by default
   `, () => {
     tabs[0].active = false;
-    fixture(html` <poly-tabs .tabs=${tabs}></poly-tabs> `)
+    fixture(html` <poly-tabs-line .tabs=${tabs}></poly-tabs-line> `)
       .then(() => {
         // If the exception is not fired we must make the test fail
         expect(true).to.equal(false);
@@ -97,11 +97,11 @@ describe("TabsLine", () => {
     const tab03Content = "this is the tab03";
 
     const el = await fixture(html`
-      <poly-tabs .tabs=${tabs}>
+      <poly-tabs-line .tabs=${tabs}>
         <div class="tab-slot" slot="tab01">${tab01Content}</div>
         <div class="tab-slot" slot="tab02">${tab02Content}</div>
         <div class="tab-slot" slot="tab03">${tab03Content}</div>
-      </poly-tabs>
+      </poly-tabs-line>
     `);
 
     expect(tabs).to.eql(el.tabs);
@@ -132,11 +132,11 @@ describe("TabsLine", () => {
     const tab03Content = "this is the tab03";
 
     const el = await fixture(html`
-      <poly-tabs .tabs=${tabs}>
+      <poly-tabs-line .tabs=${tabs}>
         <div class="tab-slot" slot="tab01">${tab01Content}</div>
         <div class="tab-slot" slot="tab02">${tab02Content}</div>
         <div class="tab-slot" slot="tab03">${tab03Content}</div>
-      </poly-tabs>
+      </poly-tabs-line>
     `);
 
     const renderTabs = el.shadowRoot.querySelectorAll("poly-tab");

@@ -1,14 +1,8 @@
 package coop.polypoly.polypod.polyNav
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.webkit.WebMessage
 import android.webkit.WebView
-import android.widget.Toast
-import coop.polypoly.polypod.R
-import coop.polypoly.polypod.features.Feature
 
 open class PolyNav(
     private val webView: WebView,

@@ -27,7 +27,8 @@ sealed class QuadGraph {
                     {
                         when (it) {
                             is IRIGraph -> IRI.codec.encode(it.graph)
-                            is BlankNodeGraph -> BlankNode.codec.encode(it.graph)
+                            is BlankNodeGraph ->
+                                BlankNode.codec.encode(it.graph)
                             DefaultGraph -> DefaultGraph.msgPackValue
                         }
                     }
@@ -37,7 +38,7 @@ sealed class QuadGraph {
 
 data class IRIGraph(val graph: IRI) : QuadGraph()
 data class BlankNodeGraph(val graph: BlankNode) : QuadGraph()
-object DefaultGraph: QuadGraph() {
+object DefaultGraph : QuadGraph() {
     val msgPackValue: Value = newMap(
         mapOf(
             Pair(newString("value"), newString("")),

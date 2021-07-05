@@ -1,5 +1,5 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import "../../poly-look.js";
+import "../../src/text-effects";
 
 describe("FirstCapitalize", () => {
   it(`

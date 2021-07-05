@@ -22,7 +22,8 @@ class MainFragment : PreferenceFragmentCompat() {
                 view?.findNavController()?.navigate(R.id.ImprintFragment)
                 true
             }
-        findPreference<Preference>("privacy_policy")?.onPreferenceClickListener =
+        findPreference<Preference>("privacy_policy")
+            ?.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
                 view?.findNavController()?.navigate(R.id.PrivacyPolicyFragment)
                 true

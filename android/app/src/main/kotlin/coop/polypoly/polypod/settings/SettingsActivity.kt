@@ -17,7 +17,9 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.settings_nav_host_fragment)
+            supportFragmentManager.findFragmentById(
+                R.id.settings_nav_host_fragment
+            )
         navHostFragment?.findNavController()?.let {
             appBarConfig = AppBarConfiguration(it.graph)
             // This shows the back button on the main fragment as well
