@@ -201,4 +201,7 @@ tasks.whenTaskAdded { task ->
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice
+
+    if (task.name == "processDebugResources")
+        task.dependsOn copyFontAssets
 }
