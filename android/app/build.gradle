@@ -205,5 +205,5 @@ tasks.whenTaskAdded { task ->
         task.dependsOn copyThirdPartyLicenses
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
-        task.dependsOn copyTestFeatureOntoDevice
+        task.dependsOn copyTestFeatureOntoDevicejuan
 }
