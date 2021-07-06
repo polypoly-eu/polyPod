@@ -15,7 +15,6 @@
         "core/utils/rollup-plugin-copy-watch",
         "core/utils/silly-i18n",
         "core/utils/poly-look",
-        "dev-utils/dummy-server",
         "features/bundle",
         "features/example",
         "features/lexicon",
