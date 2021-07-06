@@ -22,10 +22,7 @@ jobs:
           node-version: ${{matrix.node}}
       - name: Install stuff
         working-directory: ${{env.dummy-server-dir}}
-        run: npm i
-      - name: Run linter
-        working-directory: ${{env.dummy-server-dir}}
-        run: npm run eslint
+        run: npm ci
       - name: Run tests
         working-directory: ${{env.dummy-server-dir}}
         run: npm run test
