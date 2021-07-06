@@ -15,7 +15,7 @@ const MainScreen = () => {
     let showClusters = navigationState.showClusters;
 
     return (
-        <Screen className="main-screen" topShadow={false}>
+        <div className="main-screen">
             <div className="nav-button-container">
                 <button
                     onClick={() => routeTo("main", { showClusters: true })}
@@ -37,11 +37,15 @@ const MainScreen = () => {
                 </button>
             </div>
             {showClusters ? (
-                <StoriesPreview storiesMetadata={storiesMetadata} />
+                <Screen className="main-screen" light={true}>
+                    <StoriesPreview storiesMetadata={storiesMetadata} />
+                </Screen>
             ) : (
-                <CompanyList />
+                <Screen className="main-screen">
+                    <CompanyList />
+                </Screen>
             )}
-        </Screen>
+        </div>
     );
 };
 
