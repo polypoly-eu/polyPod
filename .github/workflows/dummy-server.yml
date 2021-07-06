@@ -21,11 +21,11 @@ jobs:
         with:
           node-version: ${{matrix.node}}
       - name: Install stuff
-        working-directory: ${{env.silly-i18n-dir}}
+        working-directory: ${{env.dummy-server-dir}}
         run: npm i
       - name: Run linter
-        working-directory: ${{env.silly-i18n-dir}}
-        run: npm run lint
+        working-directory: ${{env.dummy-server-dir}}
+        run: npm run eslint
       - name: Run tests
-        working-directory: ${{env.silly-i18n-dir}}
+        working-directory: ${{env.dummy-server-dir}}
         run: npm run test
