@@ -1,0 +1,31 @@
+name: Tests dummy-server
+on:
+  push:
+    paths:
+      - 'dev-utils/dummy-server/**'
+  pull_request:
+    paths:
+      - 'dev-utils/dummy-server/**'
+jobs:
+  test:
+    name: Unit tests and lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '12','14','16' ]
+    env:
+      dummy-server-dir: ./dev-utils/dummy-server/
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.node}}
+      - name: Install stuff
+        working-directory: ${{env.silly-i18n-dir}}
+        run: npm i
+      - name: Run linter
+        working-directory: ${{env.silly-i18n-dir}}
+        run: npm run lint
+      - name: Run tests
+        working-directory: ${{env.silly-i18n-dir}}
+        run: npm run test
