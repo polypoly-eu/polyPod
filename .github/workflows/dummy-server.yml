@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '16' ]
+        node: [ '12','14','16' ]
     env:
       dummy-server-dir: ./dev-utils/dummy-server/
     steps:
