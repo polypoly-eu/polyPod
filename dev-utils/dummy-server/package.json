@@ -5,17 +5,17 @@
     "files": [
         "*.js"
     ],
-    "main": "dummy-server.js",
-    "module": "dummy-server.js",
+    "main": "src/dummy-server.js",
+    "module": "src/dummy-server.js",
     "type": "module",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/polypoly-eu/polyPod.git"
     },
     "scripts": {
-        "start": "node server.start.js",
+        "start": "node bin/server.start.js",
         "build": "",
-        "stop": "node server.stop.js",
+        "stop": "node bin/server.stop.js",
         "eslint": "eslint . --ext .js",
         "lint": "npm run eslint"
     },
@@ -33,7 +33,7 @@
         "typescript": "^3.9.7"
     },
     "bin": {
-        "start-dummy-server": "server.start.js",
-        "stop-dummy-server": "server.stop.js"
+        "start-dummy-server": "bin/server.start.js",
+        "stop-dummy-server": "bin/server.stop.js"
     }
 }
