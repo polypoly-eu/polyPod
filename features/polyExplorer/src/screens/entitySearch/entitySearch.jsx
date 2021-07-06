@@ -4,31 +4,28 @@ import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
-import "./companySearch.css";
+import "./entitySearch.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const CompanySearchScreen = () => {
-    const { companiesList } = useContext(ExplorerContext);
-    const companies = companiesList;
+const EntitySearchScreen = () => {
+    const { entitiesList, featuredEntities } = useContext(ExplorerContext);
+    const entities = entitiesList;
 
     const [searchString, setSearchString] = useState("");
-    const featuredComanies = companies
-        .filter((company) => company.featured)
-        .sort((a, b) => a.compareNames(b));
 
-    const shownCompaniesUnsorted =
+    const shownEntitiesUnsorted =
         searchString.length > 3 ||
-        companies.filter((company) =>
-            company.name.toLowerCase().startsWith(searchString)
+        entities.filter((entity) =>
+            entity.name.toLowerCase().startsWith(searchString)
         ).length == 0
-            ? companies.filter((c) =>
+            ? entities.filter((c) =>
                   c.name.toLowerCase().includes(searchString)
               )
-            : companies.filter((c) =>
+            : entities.filter((c) =>
                   c.name.toLowerCase().startsWith(searchString)
               );
 
-    const shownCompanies = shownCompaniesUnsorted.sort((a, b) =>
+    const shownEntities = shownEntitiesUnsorted.sort((a, b) =>
         a.compareNames(b)
     );
     const inputRef = useRef();
@@ -44,7 +41,7 @@ const CompanySearchScreen = () => {
     };
 
     return (
-        <Screen className="company-search-screen">
+        <Screen className="entity-search-screen">
             <div className="search-bar-container">
                 <div className="search-bar">
                     <input
@@ -54,7 +51,7 @@ const CompanySearchScreen = () => {
                         autoComplete="off"
                         autoCorrect="off"
                         spellCheck="off"
-                        placeholder={i18n.t("companySearchScreen:typeHere")}
+                        placeholder={i18n.t("entitySearchScreen:typeHere")}
                         className="search-bar-input"
                         onChange={(e) => handleSearch(e.target.value)}
                     />
@@ -68,51 +65,51 @@ const CompanySearchScreen = () => {
                     )}
                 </div>
             </div>
-            <div className="company-search">
+            <div className="entity-search">
                 {searchString == "" ? (
                     <div className="suggestion-container">
-                        <p>{i18n.t("companySearchScreen:suggestions")}</p>
+                        <p>{i18n.t("entitySearchScreen:suggestions")}</p>
                         <div className="suggestions">
                             {" "}
-                            {featuredComanies.map((company, index) => (
+                            {featuredEntities.map((entity, index) => (
                                 <LinkButton
-                                    route="company-details"
+                                    route="entity-details"
                                     key={index}
                                     stateChange={{
-                                        selectedCompany: company.ppid,
+                                        selectedEntity: entity.ppid,
                                     }}
                                 >
-                                    {company.name}
+                                    {entity.name}
                                 </LinkButton>
                             ))}{" "}
                         </div>
                     </div>
                 ) : (
                     <div>
-                        {shownCompanies.length == 0 ? (
+                        {shownEntities.length == 0 ? (
                             <div>
                                 <p className="no-answers">
-                                    {i18n.t("companySearchScreen:noMatch")}
+                                    {i18n.t("entitySearchScreen:noMatch")}
                                 </p>
                                 <div className="suggestion-container">
                                     <p>
                                         {i18n.t(
-                                            "companySearchScreen:suggestions"
+                                            "entitySearchScreen:suggestions"
                                         )}
                                     </p>
                                     <div className="suggestions">
                                         {" "}
-                                        {featuredComanies.map(
-                                            (company, index) => (
+                                        {featuredEntities.map(
+                                            (entity, index) => (
                                                 <LinkButton
-                                                    route="company-details"
+                                                    route="entity-details"
                                                     stateChange={{
-                                                        selectedCompany:
-                                                            company.ppid,
+                                                        selectedEntity:
+                                                            entity.ppid,
                                                     }}
                                                     key={index}
                                                 >
-                                                    {company.name}
+                                                    {entity.name}
                                                 </LinkButton>
                                             )
                                         )}{" "}
@@ -121,15 +118,15 @@ const CompanySearchScreen = () => {
                             </div>
                         ) : (
                             <div>
-                                {shownCompanies.map((company, index) => (
+                                {shownEntities.map((entity, index) => (
                                     <LinkButton
-                                        route="company-details"
+                                        route="entity-details"
                                         stateChange={{
-                                            selectedCompany: company.ppid,
+                                            selectedEntity: entity.ppid,
                                         }}
                                         key={index}
                                     >
-                                        {company.name}
+                                        {entity.name}
                                     </LinkButton>
                                 ))}
                             </div>
@@ -141,4 +138,4 @@ const CompanySearchScreen = () => {
     );
 };
 
-export default CompanySearchScreen;
+export default EntitySearchScreen;

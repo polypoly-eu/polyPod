@@ -1,4 +1,4 @@
-.company-short-info {
+.entity-short-info {
     display: flex;
     box-sizing: border-box;
     width: 100%;
@@ -9,8 +9,8 @@
     margin: 0;
 }
 
-.company-short-info .featured-indicator,
-.company-short-info .non-featured-aligner {
+.entity-short-info .featured-indicator,
+.entity-short-info .non-featured-aligner {
     display: inline-block;
     margin-top: 4px;
     margin-right: 2px;
@@ -20,7 +20,7 @@
     height: 19px;
 }
 
-.company-short-info .info-box {
+.entity-short-info .info-box {
     display: inline-block;
     width: 100%;
     color: var(--color-text-light);
@@ -28,7 +28,7 @@
     margin-left: 6px;
 }
 
-.info-box .company-name {
+.info-box .entity-name {
     position: relative;
     width: 90%;
     font-family: "Jost Medium";
@@ -38,13 +38,13 @@
     line-height: var(--line-height);
 }
 
-.info-box .company-location {
+.info-box .entity-location {
     font-size: 14px;
     width: 60px;
     display: inline;
 }
 
-.company-location .location-icon {
+.entity-location .location-icon {
     display: inline-block;
     transform: translateX(-4px);
     width: 20px;
@@ -52,13 +52,13 @@
     background: url("../images/location-pin.svg");
 }
 
-.company-location .location-name {
+.entity-location .location-name {
     display: inline-block;
     transform: translateY(-4px);
     margin: 0;
 }
 
-.company-location .circle {
+.entity-location .circle {
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -67,40 +67,40 @@
     margin-right: 4px;
 }
 
-.company-location .EU-GDPR {
+.entity-location .EU-GDPR {
     background-color: var(--jurisdiction-EU-GDPR);
 }
 
-.company-location .Russia {
+.entity-location .Russia {
     background-color: var(--jurisdiction-russia);
 }
 
-.company-location .Five-Eyes {
+.entity-location .Five-Eyes {
     background-color: var(--jurisdiction-five-eyes);
 }
 
-.company-location .China {
+.entity-location .China {
     background-color: var(--jurisdiction-china);
 }
 
-.company-location .Others {
+.entity-location .Others {
     background-color: var(--jurisdiction-others);
 }
 
-.company-short-info .company-category {
+.entity-short-info .entity-category {
     font-size: 14px;
     transform: translateY(-4px);
     width: 90%;
     display: inline-block;
 }
 
-.company-category .category-name {
+.entity-category .category-name {
     display: inline-block;
     margin: 0;
     color: var(--color-medium);
 }
 
-.company-category .category-icon {
+.entity-category .category-icon {
     display: inline-block;
     transform: translateX(-4px);
     width: 20px;

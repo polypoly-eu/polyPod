@@ -1,4 +1,4 @@
-.company-list {
+.entity-list {
     flex: 1 1 auto;
     overflow-y: auto;
 }
@@ -68,11 +68,11 @@ button::after {
     margin-left: 4px;
 }
 
-.companies {
+.entities {
     margin: 24px auto 0 auto;
 }
 
-.companies.filters-visible {
+.entities.filters-visible {
     margin-top: 100px;
 }
 
@@ -91,13 +91,13 @@ button::after {
     outline: 0;
 }
 
-.company-group {
+.entity-group {
     display: flex;
     position: relative;
     padding-left: 28px;
 }
 
-.company-group-label {
+.entity-group-label {
     position: absolute;
     top: 12px;
     left: 16px;
@@ -108,7 +108,7 @@ button::after {
     color: var(--color-medium);
 }
 
-.company-group-companies {
+.entity-group-entities {
     width: 100%;
     margin-left: -4px;
 }

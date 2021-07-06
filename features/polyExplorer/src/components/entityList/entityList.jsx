@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
 import i18n from "../../i18n.js";
-import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
+import EntityShortInfo from "../entityShortInfo/entityShortInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import "./companyList.css";
+import "./entityList.css";
 import LinkButton from "../buttons/linkButton/linkButton.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-function groupCompanies(companies) {
-    const sorted = companies.sort((a, b) => a.compareNames(b));
+function groupEntities(entities) {
+    const sorted = entities.sort((a, b) => a.compareNames(b));
     const groups = {};
-    sorted.forEach((company) => {
-        const key = company.nameIndexCharacter.toUpperCase();
+    sorted.forEach((entity) => {
+        const key = entity.nameIndexCharacter.toUpperCase();
         groups[key] = groups[key] || [];
-        groups[key].push(company);
+        groups[key].push(entity);
     });
     return groups;
 }
@@ -46,60 +46,60 @@ const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
 };
 
 //number of groups needed to fill first screen
-function getStartGroups(companyGroups) {
+function getStartGroups(entityGroups) {
     let numberGroups = 0;
     let numberValues = 0;
-    const keys = Object.keys(companyGroups);
+    const keys = Object.keys(entityGroups);
     for (let e of keys) {
         numberGroups++;
-        numberValues += companyGroups[e].length;
+        numberValues += entityGroups[e].length;
         if (numberValues > 15) return keys[numberGroups];
     }
     return keys.pop();
 }
 
-const CompanyList = () => {
+const EntityList = () => {
     const {
-        companies,
+        entities,
         globalData,
         activeFilters,
         handleRemoveFilter,
     } = useContext(ExplorerContext);
     const onRemoveFilter = handleRemoveFilter;
-    const filteredCompanies = activeFilters.apply(companies);
-    const companyGroups = groupCompanies(filteredCompanies);
-    const allKeys = Object.keys(companyGroups);
-    const [loadedCompanies, setLoadedCompanies] = useState({});
+    const filteredEntities = activeFilters.apply(entities);
+    const entityGroups = groupEntities(filteredEntities);
+    const allKeys = Object.keys(entityGroups);
+    const [loadedEntities, setLoadedEntities] = useState({});
     const [toLoadKeys, setToLoadKeys] = useState(allKeys);
     const [hasMore, setHasMore] = useState(true);
     const listRef = useRef();
 
     const handleLoadMoreData = () => {
         if (toLoadKeys.length > 0) {
-            const moreCompanies = { ...loadedCompanies };
+            const moreEntities = { ...loadedEntities };
             const loadKeys = [...toLoadKeys];
             const newKey = loadKeys.shift();
-            moreCompanies[newKey] = companyGroups[newKey];
+            moreEntities[newKey] = entityGroups[newKey];
             setToLoadKeys(loadKeys);
-            setLoadedCompanies(moreCompanies);
+            setLoadedEntities(moreEntities);
         } else setHasMore(false);
     };
 
-    const handleReloadCompanies = (field, value) => {
+    const handleReloadEntities = (field, value) => {
         onRemoveFilter(field, value);
-        const newLoadedCompanies = {};
-        const filteredCompanies = activeFilters.apply(companies);
-        const newCompanyGroups = groupCompanies(filteredCompanies);
-        const newKeys = Object.keys(newCompanyGroups);
-        const newStartGroups = getStartGroups(newCompanyGroups);
+        const newLoadedEntities = {};
+        const filteredEntities = activeFilters.apply(entities);
+        const newEntityGroups = groupEntities(filteredEntities);
+        const newKeys = Object.keys(newEntityGroups);
+        const newStartGroups = getStartGroups(newEntityGroups);
         for (
             let i = 0;
-            i <= Object.keys(newCompanyGroups).indexOf(newStartGroups);
+            i <= Object.keys(newEntityGroups).indexOf(newStartGroups);
             i++
         ) {
-            newLoadedCompanies[newKeys[i]] = newCompanyGroups[newKeys[i]];
+            newLoadedEntities[newKeys[i]] = newEntityGroups[newKeys[i]];
         }
-        setLoadedCompanies(newLoadedCompanies);
+        setLoadedEntities(newLoadedEntities);
         const toLoadKeys = [...newKeys];
         toLoadKeys.splice(0, newKeys.indexOf(newStartGroups));
         setToLoadKeys(toLoadKeys);
@@ -107,32 +107,31 @@ const CompanyList = () => {
     };
 
     useEffect(() => {
-        const loadedCompanies = {};
-        const startGroups = getStartGroups(companyGroups);
+        const loadedEntities = {};
+        const startGroups = getStartGroups(entityGroups);
         for (let i = 0; i <= allKeys.indexOf(startGroups); i++) {
-            loadedCompanies[allKeys[i]] = companyGroups[allKeys[i]];
+            loadedEntities[allKeys[i]] = entityGroups[allKeys[i]];
         }
-        setLoadedCompanies(loadedCompanies);
+        setLoadedEntities(loadedEntities);
         const toLoadKeys = [...allKeys];
         toLoadKeys.splice(0, allKeys.indexOf(startGroups));
         setToLoadKeys(toLoadKeys);
     }, []);
 
     return (
-        <div id="company-list" className="company-list" ref={listRef}>
+        <div id="entity-list" className="entity-list" ref={listRef}>
             <ActiveFilters
                 activeFilters={activeFilters}
                 globalData={globalData}
-                onRemoveFilter={handleReloadCompanies}
+                onRemoveFilter={handleReloadEntities}
             />
             <div
                 className={
-                    "companies" +
-                    (activeFilters.empty ? "" : " filters-visible")
+                    "entities" + (activeFilters.empty ? "" : " filters-visible")
                 }
             >
                 <LinkButton
-                    route="/company-filters"
+                    route="/entity-filters"
                     className="filter-button"
                 ></LinkButton>
                 <InfiniteScroll
@@ -140,19 +139,19 @@ const CompanyList = () => {
                     next={handleLoadMoreData}
                     scrollThreshold="80%"
                     hasMore={hasMore}
-                    scrollableTarget="company-list"
+                    scrollableTarget="entity-list"
                 >
-                    {Object.entries(loadedCompanies).map(
-                        ([label, companies], index) => (
-                            <div key={index} className="company-group">
-                                <div className="company-group-label">
+                    {Object.entries(loadedEntities).map(
+                        ([label, entities], index) => (
+                            <div key={index} className="entity-group">
+                                <div className="entity-group-label">
                                     {label}
                                 </div>
-                                <div className="company-group-companies">
-                                    {companies.map((company, index) => (
-                                        <CompanyShortInfo
+                                <div className="entity-group-entities">
+                                    {entities.map((entity, index) => (
+                                        <EntityShortInfo
                                             key={index}
-                                            company={company}
+                                            entity={entity}
                                         />
                                     ))}
                                 </div>
@@ -165,4 +164,4 @@ const CompanyList = () => {
     );
 };
 
-export default CompanyList;
+export default EntityList;

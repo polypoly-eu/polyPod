@@ -50,7 +50,7 @@
     outline: none;
 }
 
-.company-search {
+.entity-search {
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
@@ -63,17 +63,17 @@
     flex-wrap: wrap;
 }
 
-.company-search .no-answers,
+.entity-search .no-answers,
 .suggestion-container p,
-.company-search .link-button,
-.company-search button {
+.entity-search .link-button,
+.entity-search button {
     width: 80%;
     max-width: var(--max-width);
     margin-left: 30px;
     margin-right: 30px;
 }
 
-.company-search .no-answers {
+.entity-search .no-answers {
     margin-top: 8px;
     margin-bottom: 8px;
     color: var(--color-semi-dark);
@@ -88,8 +88,8 @@
     color: var(--color-semi-dark);
 }
 
-.company-search .link-button,
-.company-search button {
+.entity-search .link-button,
+.entity-search button {
     background-color: transparent;
     border: transparent;
     outline: none;

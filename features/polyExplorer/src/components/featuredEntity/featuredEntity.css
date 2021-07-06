@@ -1,4 +1,4 @@
-.featured-company-card {
+.featured-entity-card {
     position: relative;
     flex: 1 1 auto;
     align-items: center;
@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-.featured-company-card .short-info-margin {
+.featured-entity-card .short-info-margin {
     margin-left: 12px;
 }
 

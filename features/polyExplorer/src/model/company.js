@@ -1,3 +1,5 @@
+import { Entity } from "./entity.js";
+
 const jurisdictions = {
     OTHER: "Sonstige",
     FIVE_EYES: "Five-Eyes",
@@ -6,28 +8,16 @@ const jurisdictions = {
     RUSSIA: "Russia",
 };
 
-const dataProperties = [
-    "ppid",
-    "name",
-    "featured",
-    "location",
-    "annualRevenues",
-    "description",
-    "industryCategory",
-];
-const dataArrayProperties = [
-    "dataRecipients",
-    "dataSharingPurposes",
-    "dataTypesShared",
-];
+const dataProperties = ["industryCategory"];
 
-export class Company {
+export class Company extends Entity {
     constructor(companyJSONObject, globalData) {
-        this._data = companyJSONObject;
+        super(companyJSONObject);
         this._jurisdiction = determineJurisdictions(
             companyJSONObject.location,
             globalData
         );
+        this._type = "company";
         let self = this;
         dataProperties.forEach(function (item) {
             Object.defineProperty(self, item, {
@@ -36,37 +26,11 @@ export class Company {
                 },
             });
         });
-        dataArrayProperties.forEach(function (item) {
-            Object.defineProperty(self, item, {
-                get: function () {
-                    return self._data[item] || [];
-                },
-            });
-        });
     }
 
     get jurisdiction() {
         return this._jurisdiction;
     }
-
-    get jurisdictionsShared() {
-        return this._data.jurisdictionsShared || { children: [] };
-    }
-
-    get nameIndexCharacter() {
-        return withoutSpecialChars(this.name)[0];
-    }
-
-    //Methods
-    compareNames(withCompany) {
-        return withoutSpecialChars(this.name).localeCompare(
-            withoutSpecialChars(withCompany.name)
-        );
-    }
-}
-
-function withoutSpecialChars(aString) {
-    return aString.replace(/[`!@#$%^&*„()_+\-=[\]{};':"\\|<>/?~]/g, "");
 }
 
 function determineJurisdictions(location, globalData) {

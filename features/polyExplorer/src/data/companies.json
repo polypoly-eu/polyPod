@@ -1003,6 +1003,7 @@
             "MailJet SAS (FR)",
             "Twitter, Inc. (US)",
             "elopage GmbH (DE)",
+            "pc polypoly coop SCE mbH (DE)",
             "polypoly GmbH (DE)",
             "sipgate GmbH (DE)"
         ],
@@ -1533,6 +1534,7 @@
         "jurisdictionsShared": {
             "children": [
                 "EU-GDPR",
+                "Sonstige",
                 "Five-Eyes"
             ]
         }
@@ -3387,7 +3389,7 @@
         "ppid": "Alphabet Fuhrparkmanagement (Schweiz) AG (CH)",
         "name": "Alphabet Fuhrparkmanagement (Schweiz) AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -3531,7 +3533,7 @@
         "ppid": "DIEM Networks S.à.r.l. (CH)",
         "name": "DIEM Networks S.à.r.l. (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -3756,7 +3758,7 @@
         "ppid": "Deltavista International AG (CH)",
         "name": "Deltavista International AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -3993,10 +3995,12 @@
             "Adform (DK)",
             "Adition (DE)",
             "Adobe Systems Software Ireland Limited (IE)",
+            "BMW AG (DE)",
             "BOSCH Service Solutions GmbH (DE)",
             "Baqend GmbH (DE)",
             "Criteo SA (FR)",
             "Facebook Ireland Limited (IE)",
+            "Google (US)",
             "Google Ireland Limited (IE)",
             "Google Ireland, Ltd. (IE)",
             "IDEOMEDIA SRL (RO)",
@@ -4974,7 +4978,7 @@
         "ppid": "AppsFlyer (IL)",
         "name": "AppsFlyer (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "Herzliya",
             "countryCode": "IL"
@@ -6660,6 +6664,7 @@
         "annualRevenues": [],
         "dataRecipients": [
             "Giphy, Inc. (US)",
+            "Signal Messenger LLC (US)",
             "Spotify AB (SE)",
             "YouTube, LLC (US)",
             "dpv:ThirdParty (ZZ)"
@@ -7180,7 +7185,7 @@
         "ppid": "2017-1 ABL (JP)",
         "name": "2017-1 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -9699,7 +9704,9 @@
             "countryCode": "US"
         },
         "annualRevenues": [],
-        "dataRecipients": [],
+        "dataRecipients": [
+            "Facebook (US)"
+        ],
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
@@ -9841,6 +9848,11 @@
                 "en": "Internet & Multimedia",
                 "de": "Internet & Multimedia"
             }
+        },
+        "jurisdictionsShared": {
+            "children": [
+                "Five-Eyes"
+            ]
         }
     },
     {
@@ -10159,7 +10171,7 @@
         "ppid": "2017-3 ABL (JP)",
         "name": "2017-3 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -11707,7 +11719,7 @@
         "ppid": "Swisscom Schweiz AG (CH)",
         "name": "Swisscom Schweiz AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -12208,7 +12220,7 @@
         "ppid": "Postini Switzerland GmbH (CH)",
         "name": "Postini Switzerland GmbH (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -12461,6 +12473,31 @@
         "location": {
             "city": "",
             "countryCode": "FI"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": {
+            "id": "ic:Service",
+            "name": {
+                "en": "Service",
+                "de": "Dienstleistung"
+            }
+        }
+    },
+    {
+        "ppid": "Treasure Data Inc (US)",
+        "name": "Treasure Data Inc (US)",
+        "featured": false,
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "",
+            "countryCode": "US"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -14119,7 +14156,7 @@
         "ppid": "Google Israel (IL)",
         "name": "Google Israel (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -15225,7 +15262,7 @@
         "ppid": "Mitto (CH)",
         "name": "Mitto (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -15896,6 +15933,7 @@
             "Evidon (DE)",
             "Evidon (US)",
             "Exactag GmbH (DE)",
+            "Facebook (US)",
             "Flashtalking, Inc. (US)",
             "Free Stream Media Corp. dba Samba TV (DE)",
             "Freewheel (US)",
@@ -15949,6 +15987,7 @@
             "Threedium (DE)",
             "Threedium (GB)",
             "Treasure Data (DE)",
+            "Treasure Data Inc (US)",
             "TripleLift, Inc. (US)",
             "TrustArc (US)",
             "Twitter (DE)",
@@ -16097,7 +16136,7 @@
             },
             {
                 "dpv:Purpose": "unspecified",
-                "count": 35,
+                "count": 36,
                 "Translation_DE": "Unspezifiziert",
                 "Translation_EN": "Unspecified",
                 "Explanation_DE": "Zweck nicht spezifiziert.",
@@ -16621,7 +16660,7 @@
             },
             {
                 "dpv:Category": "unspecified",
-                "count": 193,
+                "count": 194,
                 "dpv:Superclass": "",
                 "Translation_DE": "unspezifiziert",
                 "Translation_EN": "unspecified",
@@ -16651,7 +16690,7 @@
             "children": [
                 "EU-GDPR",
                 "Five-Eyes",
-                "Sonstige"
+                "EU Adequate"
             ]
         }
     },
@@ -17509,7 +17548,7 @@
         "ppid": "Fidelitas (AR)",
         "name": "Fidelitas (AR)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "AR"
@@ -17964,7 +18003,7 @@
         "ppid": "Scandit AG (CH)",
         "name": "Scandit AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -18757,7 +18796,7 @@
         "ppid": "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
         "name": "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -19133,7 +19172,7 @@
         "ppid": "BMW Japan Corp.  (JP)",
         "name": "BMW Japan Corp.  (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -19959,7 +19998,7 @@
         "ppid": "Envoy Services Limited a.k.a. Worldpay (CH)",
         "name": "Envoy Services Limited a.k.a. Worldpay (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -20671,7 +20710,7 @@
         "ppid": "Jersey Telecom (JE)",
         "name": "Jersey Telecom (JE)",
         "featured": false,
-        "jurisdiction": "Five-Eyes",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JE"
@@ -21851,7 +21890,7 @@
         "ppid": "Rakuten Inc. (JP)",
         "name": "Rakuten Inc. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -22232,7 +22271,7 @@
         "ppid": "Smaregi, Inc. (JP)",
         "name": "Smaregi, Inc. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -22833,7 +22872,7 @@
         "ppid": "Forrester Switzerland GmbH/Forrester Research BV (CH)",
         "name": "Forrester Switzerland GmbH/Forrester Research BV (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -23651,7 +23690,7 @@
         "ppid": "AFINUM Management AG (CH)",
         "name": "AFINUM Management AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -24284,7 +24323,7 @@
         "ppid": "BMW Tokio Corp. (JP)",
         "name": "BMW Tokio Corp. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -24564,7 +24603,7 @@
         "ppid": "Globe Dienstleistungs AG (CH)",
         "name": "Globe Dienstleistungs AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -25370,7 +25409,7 @@
         "ppid": "Science Arts, Inc. (JP)",
         "name": "Science Arts, Inc. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -25913,7 +25952,7 @@
         "ppid": "WAZE MOBILE LTD (IL)",
         "name": "WAZE MOBILE LTD (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -26958,7 +26997,7 @@
         "ppid": "Scanovate Ltd (IL)",
         "name": "Scanovate Ltd (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -29072,7 +29111,7 @@
         "ppid": "Taboola Ltd. (IL)",
         "name": "Taboola Ltd. (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -29354,7 +29393,7 @@
         "ppid": "CRIF Ltd (CH)",
         "name": "CRIF Ltd (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -32328,9 +32367,12 @@
         "dataRecipients": [
             "Akamai Technologies Inc (US)",
             "AppsFlyer (IL)",
+            "Facebook (US)",
+            "Google (US)",
             "LinkedIn Corporation (US)",
             "LinkedIn Ireland Unlimited Company (IE)",
             "LinkedIn Singapore Pte. Ltd. (SG)",
+            "TikTok Technology Limited (IE)",
             "Twitter (DE)",
             "Twitter, Inc. (US)"
         ],
@@ -33007,8 +33049,9 @@
         "jurisdictionsShared": {
             "children": [
                 "Five-Eyes",
-                "Sonstige",
-                "EU-GDPR"
+                "EU Adequate",
+                "EU-GDPR",
+                "Sonstige"
             ]
         }
     },
@@ -34051,7 +34094,7 @@
         "ppid": "Bancomer Transfer Services Inc. (UY)",
         "name": "Bancomer Transfer Services Inc. (UY)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "UY"
@@ -35966,7 +36009,7 @@
         "ppid": "2018-2 ABL (JP)",
         "name": "2018-2 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -36096,7 +36139,7 @@
         "ppid": "2019-2 ABL (JP)",
         "name": "2019-2 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -37253,7 +37296,7 @@
         "ppid": "BMW Japan Finance Corp. (JP)",
         "name": "BMW Japan Finance Corp. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -38283,7 +38326,7 @@
         "ppid": "CRIF AG (CH)",
         "name": "CRIF AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -38671,7 +38714,9 @@
             "countryCode": "IE"
         },
         "annualRevenues": [],
-        "dataRecipients": [],
+        "dataRecipients": [
+            "Facebook (US)"
+        ],
         "dataSharingPurposes": [],
         "dataTypesShared": [],
         "description": {
@@ -38684,6 +38729,11 @@
                 "en": "Internet & Multimedia",
                 "de": "Internet & Multimedia"
             }
+        },
+        "jurisdictionsShared": {
+            "children": [
+                "Five-Eyes"
+            ]
         }
     },
     {
@@ -39028,7 +39078,7 @@
         "ppid": "BMW de Argentina S.A. (AR)",
         "name": "BMW de Argentina S.A. (AR)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "AR"
@@ -41819,7 +41869,7 @@
         "ppid": "Total Media (IL)",
         "name": "Total Media (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "Ramat-Gan",
             "countryCode": "IL"
@@ -42586,7 +42636,7 @@
         "ppid": "Ultra Chile Sociedad Anonima (AR)",
         "name": "Ultra Chile Sociedad Anonima (AR)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "AR"
@@ -42661,7 +42711,7 @@
         "ppid": "More Money Transfer S.A. f.k.a. Gamerly S.A. (AR)",
         "name": "More Money Transfer S.A. f.k.a. Gamerly S.A. (AR)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "AR"
@@ -42693,6 +42743,7 @@
         },
         "annualRevenues": [],
         "dataRecipients": [
+            "Apple (US)",
             "Green Dot Bank (US)",
             "Green Dot Corporation (US)",
             "dpv:ThirdParty (ZZ)"
@@ -43618,7 +43669,7 @@
         "ppid": "video intelligence AG (CH)",
         "name": "video intelligence AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -44719,13 +44770,15 @@
         "ppid": "Threema GmbH (CH)",
         "name": "Threema GmbH",
         "featured": true,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "Pfäffikon SZ",
             "countryCode": "CH"
         },
         "annualRevenues": null,
-        "dataRecipients": [],
+        "dataRecipients": [
+            "Threema GmbH (CH)"
+        ],
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:CustomerCare",
@@ -44846,6 +44899,11 @@
                 "en": "Internet & Multimedia",
                 "de": "Internet & Multimedia"
             }
+        },
+        "jurisdictionsShared": {
+            "children": [
+                "EU Adequate"
+            ]
         }
     },
     {
@@ -44902,7 +44960,7 @@
         "ppid": "eBay International AG (CH)",
         "name": "eBay International AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -44996,7 +45054,7 @@
         "ppid": "BMW Finanzdienstleistungen (Schweiz) AG (CH)",
         "name": "BMW Finanzdienstleistungen (Schweiz) AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -45877,7 +45935,7 @@
         "ppid": "Edelman.ergo GmbH (CH)",
         "name": "Edelman.ergo GmbH (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -46245,7 +46303,7 @@
         "ppid": "Maple Team Limited (IL)",
         "name": "Maple Team Limited (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -49119,6 +49177,9 @@
         "dataRecipients": [
             "Akamai Technologies Inc (US)",
             "AppsFlyer (IL)",
+            "ByteDance Ltd. (KY)",
+            "Facebook (US)",
+            "Google (US)",
             "LinkedIn Corporation (US)",
             "LinkedIn Ireland Unlimited Company (IE)",
             "LinkedIn Singapore Pte. Ltd. (SG)",
@@ -49810,8 +49871,9 @@
         "jurisdictionsShared": {
             "children": [
                 "Five-Eyes",
-                "Sonstige",
-                "EU-GDPR"
+                "EU Adequate",
+                "EU-GDPR",
+                "Sonstige"
             ]
         }
     },
@@ -50261,7 +50323,7 @@
         "ppid": "More Money Transfer S.A. f.k.a. Gamerly S.A. (UY)",
         "name": "More Money Transfer S.A. f.k.a. Gamerly S.A. (UY)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "Montevideo",
             "countryCode": "UY"
@@ -50324,7 +50386,7 @@
         "ppid": "Torchlight Inc. (JP)",
         "name": "Torchlight Inc. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -51453,7 +51515,7 @@
         "ppid": "BMW (Schweiz) AG (CH)",
         "name": "BMW (Schweiz) AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "Dielsdorf",
             "countryCode": "CH"
@@ -51879,7 +51941,7 @@
         "ppid": "Queen Bee Capital Co., Ltd. (JP)",
         "name": "Queen Bee Capital Co., Ltd. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "Tokyo",
             "countryCode": "JP"
@@ -52042,7 +52104,7 @@
         "ppid": "Supersonic Ltd. (IL)",
         "name": "Supersonic Ltd. (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -52391,7 +52453,7 @@
         "ppid": "2020-1 ABL (JP)",
         "name": "2020-1 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -52516,7 +52578,7 @@
         "ppid": "FACEBOOK ISRAEL LTD (IL)",
         "name": "FACEBOOK ISRAEL LTD (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -52735,7 +52797,7 @@
         "ppid": "2016-2 ABL (JP)",
         "name": "2016-2 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -52760,7 +52822,7 @@
         "ppid": "2017-2 ABL (JP)",
         "name": "2017-2 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -53523,7 +53585,7 @@
         "ppid": "Softbank Group Corp. (JP)",
         "name": "Softbank Group Corp. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -53673,7 +53735,7 @@
         "ppid": "Nestlé SA (CH)",
         "name": "Nestlé SA (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -54373,7 +54435,7 @@
         "ppid": "Dentsu Inc. (JP)",
         "name": "Dentsu Inc. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -57008,7 +57070,7 @@
         "ppid": "CyberAgent Inc (JP)",
         "name": "CyberAgent Inc (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -57398,6 +57460,7 @@
             "Aplazame S.L. (ES)",
             "AppSignal (NL)",
             "Applause App Quality, Inc. (US)",
+            "Apple (US)",
             "Appnexus, Inc. (US)",
             "Appointed (GB)",
             "Apptimize, Inc. (US)",
@@ -57793,6 +57856,7 @@
             "Globalenvios S.A. (EC)",
             "GoCardless (GB)",
             "Golden Gate BBB (US)",
+            "Google (US)",
             "Google Asia Pacific Pte. Ltd. (SG)",
             "Google Cloud Platform (US)",
             "Google Inc. (US)",
@@ -59436,6 +59500,7 @@
                 "Five-Eyes",
                 "EU-GDPR",
                 "Sonstige",
+                "EU Adequate",
                 "China",
                 "Russia"
             ]
@@ -60270,7 +60335,7 @@
         "ppid": "Debby and Ron digital LTD (IL)",
         "name": "Debby and Ron digital LTD (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -60427,8 +60492,11 @@
         },
         "annualRevenues": [],
         "dataRecipients": [
+            "Apple (US)",
+            "Facebook (US)",
             "Facebook Technologies Ireland Limited (IE)",
             "Facebook Technologies, LLC (US)",
+            "Google (US)",
             "Microsoft Corporation (US)",
             "Microsoft Inc. (US)",
             "Microsoft Online Inc. (US)",
@@ -61424,8 +61492,8 @@
         },
         "jurisdictionsShared": {
             "children": [
-                "EU-GDPR",
-                "Five-Eyes"
+                "Five-Eyes",
+                "EU-GDPR"
             ]
         }
     },
@@ -62345,7 +62413,7 @@
         "ppid": "Threema Holding AG (CH)",
         "name": "Threema Holding AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -62597,7 +62665,7 @@
         "ppid": "2019-1 ABL (JP)",
         "name": "2019-1 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -62698,7 +62766,7 @@
         "ppid": "YSL Solution Co., Ltd. (JP)",
         "name": "YSL Solution Co., Ltd. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -62723,7 +62791,7 @@
         "ppid": "2018-1 ABL (JP)",
         "name": "2018-1 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -62892,7 +62960,7 @@
         "ppid": "Google Switzerland GmbH (CH)",
         "name": "Google Switzerland GmbH (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -67053,7 +67121,7 @@
         "ppid": "Kenshoo Limited (IL)",
         "name": "Kenshoo Limited (IL)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "IL"
@@ -67948,7 +68016,7 @@
         "ppid": "2019-3 ABL (JP)",
         "name": "2019-3 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -68048,7 +68116,7 @@
         "ppid": "2018-3 ABL (JP)",
         "name": "2018-3 ABL (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -68255,7 +68323,7 @@
         "ppid": "BIDSWITCH GmbH (CH)",
         "name": "BIDSWITCH GmbH (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "Zug",
             "countryCode": "CH"
@@ -69235,7 +69303,7 @@
         "ppid": "Apple Japan, Inc. (JP)",
         "name": "Apple Japan, Inc. (JP)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JP"
@@ -72022,7 +72090,7 @@
         "ppid": "Kayak Europe GmbH (CH)",
         "name": "Kayak Europe GmbH (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -73767,7 +73835,7 @@
         "ppid": "Mitto AG (CH)",
         "name": "Mitto AG (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -74198,7 +74266,7 @@
         "ppid": "Bitspin GmbH (CH)",
         "name": "Bitspin GmbH (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -74248,7 +74316,7 @@
         "ppid": "JT [Jersey] Limited (JE)",
         "name": "JT [Jersey] Limited (JE)",
         "featured": false,
-        "jurisdiction": "Five-Eyes",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "JE"
@@ -74292,7 +74360,7 @@
         "ppid": "Kasper Systems GmbH (CH)",
         "name": "Kasper Systems GmbH (CH)",
         "featured": false,
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "",
             "countryCode": "CH"
@@ -74333,6 +74401,7 @@
             "ExMarketPlace FZ LLC (AE)",
             "Ezoic (US)",
             "Freestar (US)",
+            "Google (US)",
             "JW Player (US)",
             "MSO Digital GmbH & Co. KG (DE)",
             "Marfeel (ES)",
@@ -75249,6 +75318,7 @@
                 "Five-Eyes",
                 "EU-GDPR",
                 "Sonstige",
+                "EU Adequate",
                 "China"
             ]
         }

@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
 
 import i18n from "../../i18n.js";
-import { CompanyFilter } from "../../model/companyFilter.js";
+import { EntityFilter } from "../../model/EntityFilter.js";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
 import Screen from "../../components/screen/screen.jsx";
 
-import "./companyFilter.css";
+import "./entityFilter.css";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const CompanyFilterScreen = () => {
+const EntityFilterScreen = () => {
     const {
-        companies,
+        entities,
         activeFilters,
         globalData,
         handleFilterApply,
@@ -19,10 +19,11 @@ const CompanyFilterScreen = () => {
     const [newActiveFilters, setNewActiveFilters] = useState(
         activeFilters.copy()
     );
+    console.log(newActiveFilters);
 
-    const handleReset = () => setNewActiveFilters(new CompanyFilter());
+    const handleReset = () => setNewActiveFilters(new EntityFilter());
 
-    const allFilters = new CompanyFilter(companies);
+    const allFilters = new EntityFilter(entities);
 
     const isFilterActive = (field, value) => newActiveFilters.has(field, value);
 
@@ -35,7 +36,7 @@ const CompanyFilterScreen = () => {
 
     const FilterSection = ({ title, field }) => (
         <div className={`filter-section ${field}`}>
-            <h1>{title}</h1>
+            {title ? <h1>{title}</h1> : null}
             {allFilters
                 .sortedValues(field, i18n, globalData)
                 .map((value, index) => (
@@ -64,43 +65,44 @@ const CompanyFilterScreen = () => {
     }
 
     return (
-        <Screen className="company-filter-screen">
+        <Screen className="entity-filter-screen">
             <button className="reset-button" onClick={handleReset}></button>
             <Scrollable>
+                <FilterSection title={null} field="type" />
+
                 <FilterSection
-                    title={i18n.t("companyFilterScreen:industryCategories")}
+                    title={i18n.t("entityFilterScreen:industryCategories")}
                     field="industryCategory"
                 />
 
                 <FilterSection
-                    title={i18n.t("companyFilterScreen:jurisdictions")}
+                    title={i18n.t("entityFilterScreen:jurisdictions")}
                     field="jurisdiction"
                 />
 
                 <FilterSection
-                    title={i18n.t("companyFilterScreen:locations")}
+                    title={i18n.t("entityFilterScreen:locations")}
                     field="location"
                 />
 
                 <FilterSection
-                    title={i18n.t("companyFilterScreen:revenue")}
+                    title={i18n.t("entityFilterScreen:revenue")}
                     field="revenueRange"
                 />
             </Scrollable>
 
-            <div className="button-area">
+            <div className="button-area" onClick={handleApply}>
                 <LinkButton
                     route="/"
                     className={
                         "apply-button" + (filtersChanged() ? "" : " disabled")
                     }
-                    onClick={handleApply}
                 >
-                    {i18n.t("companyFilterScreen:apply")}
+                    {i18n.t("entityFilterScreen:apply")}
                 </LinkButton>
             </div>
         </Screen>
     );
 };
 
-export default CompanyFilterScreen;
+export default EntityFilterScreen;

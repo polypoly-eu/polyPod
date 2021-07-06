@@ -1,5 +1,5 @@
 import React from "react";
-import FeaturedCompany from "./featuredCompany";
+import FeaturedCompany from "./featuredEntity";
 import makeExampleData from "../dataViz/makeExampleData";
 
 const companyData = makeExampleData();

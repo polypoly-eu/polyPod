@@ -1,10 +1,10 @@
 "use strict";
 
 class FieldMatcher {
-    constructor(companies = []) {
+    constructor(entities = []) {
         this._values = new Set(
-            Object.values(companies).map((company) =>
-                this.constructor.extractValue(company)
+            Object.values(entities).map((entity) =>
+                this.constructor.extractValue(entity)
             )
         );
     }
@@ -38,8 +38,8 @@ class FieldMatcher {
         return !this._values.size;
     }
 
-    matches(company) {
-        return this.empty || this.has(this.constructor.extractValue(company));
+    matches(entity) {
+        return this.empty || this.has(this.constructor.extractValue(entity));
     }
 }
 
@@ -48,8 +48,8 @@ class FieldMatcher {
 const industryCategoryNames = new Map();
 
 class IndustryCategoryMatcher extends FieldMatcher {
-    static extractValue(company) {
-        const category = company.industryCategory;
+    static extractValue(entity) {
+        const category = entity.industryCategory;
         const id = category?.id;
         if (!id) return "?";
         if (!industryCategoryNames.has(id))
@@ -66,8 +66,8 @@ class IndustryCategoryMatcher extends FieldMatcher {
 }
 
 class JurisdictionMatcher extends FieldMatcher {
-    static extractValue(company) {
-        return company.jurisdiction;
+    static extractValue(entity) {
+        return entity.jurisdiction;
     }
 
     static displayString(value, i18n) {
@@ -96,8 +96,8 @@ const revenueRangeValues = [
 ];
 
 class RevenueRangeMatcher extends FieldMatcher {
-    static _mostRecentAnnualRevenue(company) {
-        const annualRevenues = company.annualRevenues || [];
+    static _mostRecentAnnualRevenue(entity) {
+        const annualRevenues = entity.annualRevenues || [];
         if (!annualRevenues.length) return -1;
         const lastAnnualRevenue = [...annualRevenues]
             .sort((a, b) => a.year - b.year)
@@ -105,8 +105,8 @@ class RevenueRangeMatcher extends FieldMatcher {
         return lastAnnualRevenue.amount / 1000;
     }
 
-    static extractValue(company) {
-        const revenue = this._mostRecentAnnualRevenue(company);
+    static extractValue(entity) {
+        const revenue = this._mostRecentAnnualRevenue(entity);
         if (revenue === -1) return "-1";
         const reversedRanges = revenueRangeValues.sort((a, b) => b - a);
         for (let step of reversedRanges) if (revenue > step) return `${step}`;
@@ -114,11 +114,11 @@ class RevenueRangeMatcher extends FieldMatcher {
     }
 
     static displayString(value, i18n) {
-        if (value === "-1") return i18n.t("common:companyFilter.missing");
+        if (value === "-1") return i18n.t("common:entityFilter.missing");
         const key = revenueRangeValues.find(
             (item) => item === parseInt(value, 10)
         );
-        return i18n.t(`common:companyFilter.revenueRange.${key}`);
+        return i18n.t(`common:entityFilter.revenueRange.${key}`);
     }
 
     sortedValues() {
@@ -127,18 +127,18 @@ class RevenueRangeMatcher extends FieldMatcher {
 }
 
 class LocationMatcher extends FieldMatcher {
-    static extractValue(company) {
-        return company.location.countryCode;
+    static extractValue(entity) {
+        return entity.location?.countryCode;
     }
 
     static displayString(value, i18n, globalData) {
         return (globalData.countries[value] || {})[
-            i18n.t("common:companyFilter.countryNameKey")
+            i18n.t("common:entityFilter.countryNameKey")
         ];
     }
 
     sortedValues(i18n, globalData) {
-        // TODO: There's one company with a countryCode of `false` in the
+        // TODO: There's one entity with a countryCode of `false` in the
         // data - should be filtered elsewhere.
         const filteredValues = this.values.filter((value) => value !== false);
         return filteredValues.sort((a, b) => {
@@ -152,19 +152,34 @@ class LocationMatcher extends FieldMatcher {
     }
 }
 
+class TypeMatcher extends FieldMatcher {
+    static extractValue(entity) {
+        return entity.type;
+    }
+
+    static displayString(value, i18n) {
+        return i18n.t(`common:entityFilter.${value}`);
+    }
+
+    sortedValues() {
+        return this.values.sort((a, b) => a.localeCompare(b));
+    }
+}
+
 /**
- * Filters a list of {@link Company} objects based on their field values.
+ * Filters a list of {@link Entity} objects based on their field values.
  */
-export class CompanyFilter {
-    constructor(companies = []) {
+export class EntityFilter {
+    constructor(entities = []) {
         this._matchers = new Map();
         this._matchers.set(
             "industryCategory",
-            new IndustryCategoryMatcher(companies)
+            new IndustryCategoryMatcher(entities)
         );
-        this._matchers.set("jurisdiction", new JurisdictionMatcher(companies));
-        this._matchers.set("revenueRange", new RevenueRangeMatcher(companies));
-        this._matchers.set("location", new LocationMatcher(companies));
+        this._matchers.set("jurisdiction", new JurisdictionMatcher(entities));
+        this._matchers.set("revenueRange", new RevenueRangeMatcher(entities));
+        this._matchers.set("location", new LocationMatcher(entities));
+        this._matchers.set("type", new TypeMatcher(entities));
     }
 
     add(field, value) {
@@ -203,27 +218,25 @@ export class CompanyFilter {
         return this._matchers.get(field).sortedValues(i18n, globalData);
     }
 
-    matches(company) {
+    matches(entity) {
         return [...this._matchers.values()].every((matcher) =>
-            matcher.matches(company)
+            matcher.matches(entity)
         );
     }
 
-    apply(companies) {
-        return Object.values(companies).filter((company) =>
-            this.matches(company)
-        );
+    apply(entities) {
+        return Object.values(entities).filter((entity) => this.matches(entity));
     }
 
     copy() {
-        const copy = new CompanyFilter();
+        const copy = new EntityFilter();
         for (let field of this.fields)
             for (let value of this.values(field)) copy.add(field, value);
         return copy;
     }
 
     equal(other) {
-        if (!(other instanceof CompanyFilter)) return false;
+        if (!(other instanceof EntityFilter)) return false;
         if (this.fields.length !== other.fields.length) return false;
         return this.fields.every((field) => {
             if (!other.fields.includes(field)) return false;

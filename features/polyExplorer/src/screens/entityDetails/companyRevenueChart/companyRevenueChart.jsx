@@ -119,11 +119,11 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         {defaultScale[0]}
                     </div>
                     <div className="unit">
-                        {i18n.t(`companyDetailsScreen:${defaultUnit}`)} (EUR)
+                        {i18n.t(`entityDetailsScreen:${defaultUnit}`)} (EUR)
                     </div>
                 </div>
                 <div className="no-data-text">
-                    {i18n.t("companyDetailsScreen:revenue.fallbackText")}
+                    {i18n.t("entityDetailsScreen:revenue.fallbackText")}
                 </div>
             </div>
         );
@@ -171,11 +171,11 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         {scale[0]}
                     </div>
                     <div className="unit">
-                        {i18n.t(`companyDetailsScreen:${unit}`)} (EUR)
+                        {i18n.t(`entityDetailsScreen:${unit}`)} (EUR)
                     </div>
                 </div>
                 <p className="source">
-                    {i18n.t("companyDetailsScreen:source")}: polyPedia
+                    {i18n.t("entityDetailsScreen:source")}: polyPedia
                 </p>
                 <div
                     className="bar"
@@ -196,7 +196,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         )
                     ) : (
                         <p className="no-data-for-column-tag">
-                            {i18n.t("companyDetailsScreen:no-data")}
+                            {i18n.t("entityDetailsScreen:no-data")}
                         </p>
                     )}
                 </div>
@@ -219,7 +219,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         )
                     ) : (
                         <p className="no-data-for-column-tag">
-                            {i18n.t("companyDetailsScreen:no-data")}
+                            {i18n.t("entityDetailsScreen:no-data")}
                         </p>
                     )}
                 </div>
@@ -242,7 +242,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         )
                     ) : (
                         <p className="no-data-for-column-tag">
-                            {i18n.t("companyDetailsScreen:no-data")}
+                            {i18n.t("entityDetailsScreen:no-data")}
                         </p>
                     )}
                 </div>
@@ -265,7 +265,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         )
                     ) : (
                         <p className="no-data-for-column-tag">
-                            {i18n.t("companyDetailsScreen:no-data")}
+                            {i18n.t("entityDetailsScreen:no-data")}
                         </p>
                     )}
                 </div>
@@ -288,7 +288,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         )
                     ) : (
                         <p className="no-data-for-column-tag">
-                            {i18n.t("companyDetailsScreen:no-data")}
+                            {i18n.t("entityDetailsScreen:no-data")}
                         </p>
                     )}
                 </div>

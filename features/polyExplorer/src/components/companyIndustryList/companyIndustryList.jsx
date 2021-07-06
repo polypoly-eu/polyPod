@@ -1,5 +1,5 @@
 import React from "react";
-import CompanyShortInfo from "../companyShortInfo/companyShortInfo.jsx";
+import EntityShortInfo from "../entityShortInfo/entityShortInfo.jsx";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
 
 import "./companyIndustryList.css";
@@ -11,7 +11,7 @@ const CompanyItem = ({ company, ecoMode }) =>
     ecoMode ? (
         <div className="company-industry-list-eco-item">{company.name}</div>
     ) : (
-        <CompanyShortInfo company={company} />
+        <EntityShortInfo entity={company} />
     );
 
 class CompanyIndustryList extends React.PureComponent {

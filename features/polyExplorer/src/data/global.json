@@ -3,7 +3,7 @@
         "AD": {
             "Name_EN": "Andorra",
             "Name_DE": "Andorra",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "AE": {
             "Name_EN": "United Arab Emirates",
@@ -48,7 +48,7 @@
         "AR": {
             "Name_EN": "Argentina",
             "Name_DE": "Argentinien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "AS": {
             "Name_EN": "American Samoa",
@@ -208,7 +208,7 @@
         "CH": {
             "Name_EN": "Switzerland",
             "Name_DE": "Schweiz",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "CI": {
             "Name_EN": "Côte d'Ivoire",
@@ -363,7 +363,7 @@
         "FO": {
             "Name_EN": "Faroe Islands",
             "Name_DE": "Färöer Inseln",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "FR": {
             "Name_EN": "France",
@@ -398,7 +398,7 @@
         "GG": {
             "Name_EN": "Guernsey",
             "Name_DE": "Guernsey",
-            "dataRegion": "Five-Eyes"
+            "dataRegion": "EU Adequate"
         },
         "GH": {
             "Name_EN": "Ghana",
@@ -508,12 +508,12 @@
         "IL": {
             "Name_EN": "Israel",
             "Name_DE": "Israel",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "IM": {
             "Name_EN": "Isle of Man",
             "Name_DE": "Isle of Man",
-            "dataRegion": "Five-Eyes"
+            "dataRegion": "EU Adequate"
         },
         "IN": {
             "Name_EN": "India",
@@ -548,7 +548,7 @@
         "JE": {
             "Name_EN": "Jersey",
             "Name_DE": "Jersey",
-            "dataRegion": "Five-Eyes"
+            "dataRegion": "EU Adequate"
         },
         "JM": {
             "Name_EN": "Jamaica",
@@ -563,7 +563,7 @@
         "JP": {
             "Name_EN": "Japan",
             "Name_DE": "Japan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "KE": {
             "Name_EN": "Kenya",
@@ -1163,7 +1163,7 @@
         "UY": {
             "Name_EN": "Uruguay",
             "Name_DE": "Uruguay",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "UZ": {
             "Name_EN": "Uzbekistan",

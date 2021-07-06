@@ -3,7 +3,7 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import DataSharingGauge from "../dataSharingGauge/dataSharingGauge.jsx";
 import LinkButton from "../buttons/linkButton/linkButton.jsx";
-import "./featuredCompany.css";
+import "./featuredEntity.css";
 
 const DataSharingSection = ({
     sharingType,
@@ -27,20 +27,20 @@ const DataSharingSection = ({
     </LinkButton>
 );
 
-const FeaturedCompany = () => {
+const FeaturedEntity = () => {
     const {
-        selectedCompanyObject,
-        featuredCompanyMaxValues,
-        featuredCompanyAverageValues,
+        selectedEntityObject,
+        featuredEntityMaxValues,
+        featuredEntityAverageValues,
     } = useContext(ExplorerContext);
-    const company = selectedCompanyObject;
+    const entity = selectedEntityObject;
 
     const count = {
-        dataTypes: company.dataTypesShared.length,
-        purposes: company.dataSharingPurposes.length,
-        companies: company.dataRecipients.length,
-        jurisdictions: company.jurisdictionsShared
-            ? company.jurisdictionsShared.children.length
+        dataTypes: entity.dataTypesShared.length,
+        purposes: entity.dataSharingPurposes.length,
+        companies: entity.dataRecipients.length,
+        jurisdictions: entity.jurisdictionsShared
+            ? entity.jurisdictionsShared.children.length
             : 0,
     };
 
@@ -52,15 +52,15 @@ const FeaturedCompany = () => {
     ];
 
     return (
-        <div className="featured-company-card">
+        <div className="featured-entity-card">
             <div className="data-sharing-section-list">
                 {dataSharingSections.map((section) => (
                     <DataSharingSection
                         key={section}
                         sharingType={section}
                         count={count[section]}
-                        max={featuredCompanyMaxValues[section]}
-                        average={featuredCompanyAverageValues[section]}
+                        max={featuredEntityMaxValues[section]}
+                        average={featuredEntityAverageValues[section]}
                         stateChange={{
                             explorationState: {
                                 section: section,
@@ -75,4 +75,4 @@ const FeaturedCompany = () => {
     );
 };
 
-export default FeaturedCompany;
+export default FeaturedEntity;

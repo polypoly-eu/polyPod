@@ -5,11 +5,13 @@ import i18n from "../i18n.js";
 
 //model
 import { Company } from "../model/company.js";
-import { CompanyFilter } from "../model/companyFilter.js";
+import { Product } from "../model/product.js";
+import { EntityFilter } from "../model/entityFilter.js";
 
 //local-data imports
 import polyPediaCompanies from "../data/companies.json";
 import globalData from "../data/global.json";
+import polyPediaProducts from "../data/products.json";
 
 export const ExplorerContext = React.createContext();
 
@@ -44,6 +46,14 @@ function loadCompanies(JSONData, globalData) {
     return companies;
 }
 
+function loadProducts(JSONData) {
+    const products = {};
+    for (let obj of JSONData) {
+        products[obj.ppid] = new Product(obj, globalData);
+    }
+    return products;
+}
+
 export const ExplorerProvider = ({ children }) => {
     //router hooks
     const history = useHistory();
@@ -53,43 +63,47 @@ export const ExplorerProvider = ({ children }) => {
     const navigationStates = [
         "firstRun",
         "showClusters",
-        "selectedCompany",
+        "selectedEntity",
         "explorationState",
     ];
     const [navigationState, setNavigationState] = useState({
         firstRun: false,
         showClusters: true,
-        selectedCompany: null,
+        selectedEntity: null,
         explorationState: {
             section: null,
             index: null,
             category: null,
         },
     });
-    const [activeFilters, setActiveFilters] = useState(new CompanyFilter());
+    const [activeFilters, setActiveFilters] = useState(new EntityFilter());
 
     //constants
     const companies = loadCompanies(polyPediaCompanies, globalData);
-    const companiesList = Object.values(companies);
-    const featuredCompanies = Object.values(companies).filter(
-        (company) => company.featured
+    const products = loadProducts(polyPediaProducts);
+    const entities = { ...companies, ...products };
+    const entitiesList = Object.values(entities).sort((a, b) =>
+        a.compareNames(b)
     );
-    const selectedCompany = navigationState.selectedCompany;
-    const selectedCompanyObject = companies[selectedCompany];
-    const dataRecipients = companies[selectedCompany]?.dataRecipients?.map(
-        (ppid) => companies[ppid]
+    const featuredEntities = entitiesList.filter((company) => company.featured);
+    const selectedEntity = navigationState.selectedEntity;
+    const selectedEntityObject = entities[selectedEntity];
+    const dataRecipients = entities[selectedEntity]?.dataRecipients?.map(
+        (ppid) => entities[ppid]
     );
     const currentPath = location.pathname;
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
     function changeNavigationState(changedState) {
-        Object.keys(changedState).forEach((key) => {
-            if (!navigationStates.includes(key)) {
-                console.log(`NavigationStateError with key: ${key}`);
-                return;
-            }
-        });
-        setNavigationState({ ...navigationState, ...changedState });
+        if (changedState) {
+            Object.keys(changedState).forEach((key) => {
+                if (!navigationStates.includes(key)) {
+                    console.log(`NavigationStateError with key: ${key}`);
+                    return;
+                }
+            });
+            setNavigationState({ ...navigationState, ...changedState });
+        }
     }
 
     function routeTo(path, changedState) {
@@ -126,9 +140,9 @@ export const ExplorerProvider = ({ children }) => {
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.main`));
         else if (
             currentPath == "/data-exploration" ||
-            currentPath == "/company-details"
+            currentPath == "/entity-details"
         )
-            pod.polyNav.setTitle(companies[selectedCompany].name);
+            pod.polyNav.setTitle(selectedEntityObject.name);
         else
             pod.polyNav.setTitle(
                 i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
@@ -149,17 +163,17 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     const counts = {
-        dataTypes: Object.values(featuredCompanies).map(
-            (company) => company.dataTypesShared.length
+        dataTypes: Object.values(featuredEntities).map(
+            (entity) => entity.dataTypesShared.length
         ),
-        purposes: Object.values(featuredCompanies).map(
-            (company) => company.dataSharingPurposes.length
+        purposes: Object.values(featuredEntities).map(
+            (entity) => entity.dataSharingPurposes.length
         ),
-        companies: Object.values(featuredCompanies).map(
-            (company) => company.dataRecipients.length
+        companies: Object.values(featuredEntities).map(
+            (entity) => entity.dataRecipients.length
         ),
-        jurisdictions: Object.values(featuredCompanies).map(
-            (company) => company.jurisdictionsShared.children.length
+        jurisdictions: Object.values(featuredEntities).map(
+            (entity) => entity.jurisdictionsShared.children.length
         ),
     };
 
@@ -169,11 +183,11 @@ export const ExplorerProvider = ({ children }) => {
         return Math.round(10 * average) / 10;
     }
 
-    const featuredCompanyMaxValues = Object.fromEntries(
+    const featuredEntityMaxValues = Object.fromEntries(
         Object.entries(counts).map(([key, value]) => [key, Math.max(...value)])
     );
 
-    const featuredCompanyAverageValues = Object.fromEntries(
+    const featuredEntityAverageValues = Object.fromEntries(
         Object.entries(counts).map(([key, value]) => [
             key,
             calculateAverage(value),
@@ -216,14 +230,15 @@ export const ExplorerProvider = ({ children }) => {
                 handleOnboardingPopupMoreInfo,
                 routeTo,
                 handleBack,
+                entities,
                 companies,
-                companiesList,
-                featuredCompanies,
-                selectedCompanyObject,
+                entitiesList,
+                featuredEntities,
+                selectedEntityObject,
                 dataRecipients,
                 globalData,
-                featuredCompanyMaxValues,
-                featuredCompanyAverageValues,
+                featuredEntityMaxValues,
+                featuredEntityAverageValues,
                 activeFilters,
                 handleRemoveFilter,
                 handleFilterApply,
