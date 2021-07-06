@@ -64,5 +64,14 @@ describe("GET routes work", () => {
                 done();
             });
     });
+    it( "returns correct status", (done) => {
+        request(app)
+            .get("/status/201")
+            .then((response) => {
+                expect(response.statusCode).toBe(201);
+                expect(response.res.statusMessage).toBe("CREATED");
+                done();
+            });
+    });
 });
 
