@@ -54,6 +54,15 @@ describe("GET routes work", () => {
                 done();
             });
     });
+    it( "returns JSON", (done) => {
+        request(app)
+            .get("/json")
+            .then((response) => {
+                expect(response.statusCode).toBe(200);
+                expect(response.body).toStrictEqual( { slideshow: {}} );
+                done();
+            });
+    });
     it( "does redirect", (done) => {
         const redirectUrl = "https://polypoly.coop";
         request(app)
