@@ -43,7 +43,7 @@ describe("Post'ing works", () => {
 });
 
 describe("GET routes work", () => {
-    it( "returns correct robots.txt", (done) => {
+    it("returns correct robots.txt", (done) => {
         request(app)
             .get("/robots.txt")
             .then((response) => {
@@ -54,16 +54,16 @@ describe("GET routes work", () => {
                 done();
             });
     });
-    it( "returns JSON", (done) => {
+    it("returns JSON", (done) => {
         request(app)
             .get("/json")
             .then((response) => {
                 expect(response.statusCode).toBe(200);
-                expect(response.body).toStrictEqual( { slideshow: {}} );
+                expect(response.body).toStrictEqual({ slideshow: {} });
                 done();
             });
     });
-    it( "does redirect", (done) => {
+    it("does redirect", (done) => {
         const redirectUrl = "https://polypoly.coop";
         request(app)
             .get(`/redirect-to?url=${redirectUrl}`)
@@ -73,7 +73,7 @@ describe("GET routes work", () => {
                 done();
             });
     });
-    it( "returns correct status", (done) => {
+    it("returns correct status", (done) => {
         request(app)
             .get("/status/201")
             .then((response) => {
@@ -83,4 +83,3 @@ describe("GET routes work", () => {
             });
     });
 });
-

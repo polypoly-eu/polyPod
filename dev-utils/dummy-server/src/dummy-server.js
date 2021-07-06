@@ -15,7 +15,7 @@ app.get("/", (req, res) => res.send("Received a GET HTTP method"));
 app.get("/robots.txt", (req, res) =>
     res.send("User-agent: *\nDisallow: /deny\n")
 );
-app.get("/json", (req, res) => res.json( { slideshow: {} } ) );
+app.get("/json", (req, res) => res.json({ slideshow: {} }));
 app.get("/redirect-to", (req, res) => {
     res.redirect(req.query.url);
 });
