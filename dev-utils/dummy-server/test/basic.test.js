@@ -18,15 +18,25 @@ describe("Root route works", () => {
 });
 
 describe("Post'ing works", () => {
+    const body = "Foo";
+    const anObject = {};
+    anObject[body] = "";
     it("Should return posted body", (done) => {
-        const body = "Foo";
-        const anObject = {};
-        anObject[body] = "";
         request(app)
             .post("/")
             .send(body)
             .then((response) => {
                 expect(response.body).toStrictEqual(anObject);
+                done();
+            });
+    });
+    it("Should return posted body in object", (done) => {
+        const anotherObject = { method: "POST", data: anObject };
+        request(app)
+            .post("/anything")
+            .send(body)
+            .then((response) => {
+                expect(response.body).toStrictEqual(anotherObject);
                 done();
             });
     });
