@@ -7,6 +7,7 @@ describe( "Root route works", () => {
         .get("/")
         .then( response => {
             expect(response.statusCode).toBe(200);
+            expect(response.res.text).toEqual(expect.stringContaining("GET HTTP"));
             done();
         });
     } );
