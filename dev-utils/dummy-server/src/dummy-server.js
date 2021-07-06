@@ -7,6 +7,7 @@ const server = createServer(app);
 
 const io = new Server(server);
 
+app.use(express.urlencoded({extended: true}));
 app.use(express.text({ type: "*/*" }));
 app.use(express.json({ type: "*/*" }));
 
