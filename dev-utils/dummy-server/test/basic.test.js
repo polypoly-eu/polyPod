@@ -54,5 +54,15 @@ describe("GET routes work", () => {
                 done();
             });
     });
+    it( "does redirect", (done) => {
+        const redirectUrl = "https://polypoly.coop";
+        request(app)
+            .get(`/redirect-to?url=${redirectUrl}`)
+            .then((response) => {
+                expect(response.statusCode).toBe(302);
+                expect(response.header.location).toBe(redirectUrl);
+                done();
+            });
+    });
 });
 

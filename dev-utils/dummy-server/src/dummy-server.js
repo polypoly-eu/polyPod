@@ -16,7 +16,9 @@ app.get("/robots.txt", (req, res) =>
     res.send("User-agent: *\nDisallow: /deny\n")
 );
 app.get("/json", (req, res) => res.send(`{"slideshow": {}}`));
-app.get("/redirect-to", (req, res) => res.redirect(req.query.url));
+app.get("/redirect-to", (req, res) => {
+    res.redirect(req.query.url);
+});
 app.get("/status/201", (req, res) => {
     res.statusMessage = "CREATED";
     return res.status(201).send();
