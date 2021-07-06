@@ -41,3 +41,18 @@ describe("Post'ing works", () => {
             });
     });
 });
+
+describe("GET routes work", () => {
+    it( "returns correct robots.txt", (done) => {
+        request(app)
+            .get("/robots.txt")
+            .then((response) => {
+                expect(response.statusCode).toBe(200);
+                expect(response.res.text).toEqual(
+                    expect.stringContaining("Disallow")
+                );
+                done();
+            });
+    });
+});
+
