@@ -43,4 +43,4 @@ function startServer(port) {
     );
 }
 
-export { startServer };
+export { app, startServer };
