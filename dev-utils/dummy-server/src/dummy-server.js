@@ -1,15 +1,14 @@
 import { createServer } from "http";
 import { Server } from "socket.io";
 import express from "express";
-import bodyParser from "body-parser";
-const { text } = bodyParser;
 
 const app = express();
 const server = createServer(app);
 
 const io = new Server(server);
 
-app.use(text({ type: "*/*" }));
+app.use(express.text({ type: "*/*" }));
+app.use(express.json({ type: "*/*" }));
 
 app.get("/", (req, res) => res.send("Received a GET HTTP method"));
 app.get("/robots.txt", (req, res) =>
