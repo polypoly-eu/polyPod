@@ -1,6 +1,6 @@
 {
     "name": "@polypoly-eu/dummy-server",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Chivalrous and minimalistic mimicry of httpbin",
     "files": [
         "*.js"
