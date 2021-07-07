@@ -3,6 +3,9 @@
         "ppid": "Signal",
         "name": "Signal",
         "featured": true,
+        "productOwner": [
+            "Signal Messenger LLC (US)"
+        ],
         "activeUsers": {
             "values": [
                 {
@@ -383,6 +386,11 @@
         "ppid": "Instagram",
         "name": "Instagram",
         "featured": true,
+        "productOwner": [
+            "Instagram LLC (US)",
+            "Facebook Ireland Limited (IE)",
+            "Facebook (US)"
+        ],
         "activeUsers": {
             "values": [
                 {
@@ -440,7 +448,7 @@
             ]
         },
         "dataRecipients": [
-            "Instagram LLC (US)"
+            "Facebook Ireland Limited (IE)"
         ],
         "dataSharingPurposes": [
             {
@@ -695,7 +703,7 @@
             "source": null
         },
         "recipientInfo": {
-            "Instagram LLC (US)": {
+            "Facebook Ireland Limited (IE)": {
                 "categories": {
                     "dpv:Picture": {
                         "purposes": [
@@ -1632,7 +1640,7 @@
         ],
         "jurisdictionsShared": {
             "children": [
-                "Five-Eyes"
+                "EU-GDPR"
             ]
         }
     },
@@ -1640,6 +1648,10 @@
         "ppid": "TikTok",
         "name": "TikTok",
         "featured": true,
+        "productOwner": [
+            "TikTok Technology limited (IE)",
+            "TikTok Information Technologies UK Limited (GB)"
+        ],
         "activeUsers": {
             "values": [
                 {
@@ -1745,229 +1757,229 @@
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
-                "count": 266
+                "count": 532
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
-                "count": 264
+                "count": 528
             },
             {
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
-                "count": 266
+                "count": 532
             },
             {
                 "dpv:Purpose": "dpv:CreateProductRecommendations",
-                "count": 266
+                "count": 532
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
-                "count": 6
+                "count": 12
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
-                "count": 264
+                "count": 528
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
-                "count": 266
+                "count": 532
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForConsumer",
-                "count": 265
+                "count": 530
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForController",
-                "count": 265
+                "count": 530
             },
             {
                 "dpv:Purpose": "dpv:OptimiseUserInterface",
-                "count": 264
+                "count": 528
             },
             {
                 "dpv:Purpose": "dpv:Payment",
-                "count": 2
+                "count": 4
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedAdvertising",
-                "count": 266
+                "count": 532
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
-                "count": 264
+                "count": 528
             },
             {
                 "dpv:Purpose": "dpv:SellInsightsFromData",
-                "count": 264
+                "count": 528
             },
             {
                 "dpv:Purpose": "dpv:SellTargettedAdvertisements",
-                "count": 266
+                "count": 532
             },
             {
                 "dpv:Purpose": "dpv:ServiceOptimization",
-                "count": 266
+                "count": 532
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
-                "count": 266
+                "count": 532
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 269
+                "count": 538
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
-                "count": 266
+                "count": 532
             }
         ],
         "dataTypesShared": [
             {
                 "dpv:Category": "dpv:Age",
-                "count": 207
+                "count": 414
             },
             {
                 "dpv:Category": "dpv:Authenticating",
-                "count": 17
+                "count": 34
             },
             {
                 "dpv:Category": "dpv:AuthenticationHistory",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:BrowsingBehavior",
-                "count": 170
+                "count": 340
             },
             {
                 "dpv:Category": "dpv:BrowsingReferral",
-                "count": 85
-            },
-            {
-                "dpv:Category": "dpv:Communication",
-                "count": 51
-            },
-            {
-                "dpv:Category": "dpv:Contact",
-                "count": 102
-            },
-            {
-                "dpv:Category": "dpv:DerivedPersonalData",
-                "count": 476
-            },
-            {
-                "dpv:Category": "dpv:DeviceApplications",
-                "count": 51
-            },
-            {
-                "dpv:Category": "dpv:DeviceBased",
-                "count": 180
-            },
-            {
-                "dpv:Category": "dpv:DeviceOperatingSystem",
                 "count": 170
             },
             {
+                "dpv:Category": "dpv:Communication",
+                "count": 102
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 204
+            },
+            {
+                "dpv:Category": "dpv:DerivedPersonalData",
+                "count": 952
+            },
+            {
+                "dpv:Category": "dpv:DeviceApplications",
+                "count": 102
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 360
+            },
+            {
+                "dpv:Category": "dpv:DeviceOperatingSystem",
+                "count": 340
+            },
+            {
                 "dpv:Category": "dpv:DeviceSoftware",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:EmailAddress",
-                "count": 102
+                "count": 204
             },
             {
                 "dpv:Category": "dpv:Financial",
-                "count": 2
+                "count": 4
             },
             {
                 "dpv:Category": "dpv:GPSCoordinate",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:IPAddress",
-                "count": 119
+                "count": 238
             },
             {
                 "dpv:Category": "dpv:Identifying",
-                "count": 119
+                "count": 238
             },
             {
                 "dpv:Category": "dpv:Interest",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:Language",
-                "count": 102
+                "count": 204
             },
             {
                 "dpv:Category": "dpv:Like",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:LinkClicked",
-                "count": 153
+                "count": 306
             },
             {
                 "dpv:Category": "dpv:Location",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:Name",
-                "count": 153
+                "count": 306
             },
             {
                 "dpv:Category": "dpv:Password",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:PaymentCard",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:Picture",
-                "count": 258
+                "count": 516
             },
             {
                 "dpv:Category": "dpv:Preference",
-                "count": 153
+                "count": 306
             },
             {
                 "dpv:Category": "dpv:Purchase",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:ServiceConsumptionBehavior",
-                "count": 221
+                "count": 442
             },
             {
                 "dpv:Category": "dpv:Social",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:SocialMediaCommunication",
-                "count": 207
+                "count": 414
             },
             {
                 "dpv:Category": "dpv:SocialNetwork",
-                "count": 238
+                "count": 476
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 102
+                "count": 204
             },
             {
                 "dpv:Category": "dpv:Tracking",
-                "count": 182
+                "count": 364
             },
             {
                 "dpv:Category": "dpv:Transactional",
-                "count": 51
+                "count": 102
             },
             {
                 "dpv:Category": "dpv:Username",
-                "count": 238
+                "count": 476
             },
             {
                 "dpv:Category": "dpv:VoiceCommunicationRecording",
-                "count": 102
+                "count": 204
             }
         ],
         "description": {
@@ -5728,6 +5740,9 @@
         "ppid": "Threema",
         "name": "Threema",
         "featured": true,
+        "productOwner": [
+            "Threema GmbH (CH)"
+        ],
         "activeUsers": {
             "values": [
                 {
@@ -5862,6 +5877,10 @@
         "ppid": "WhatsApp",
         "name": "WhatsApp",
         "featured": true,
+        "productOwner": [
+            "Facebook (US)",
+            "Facebook Ireland Limited (IE)"
+        ],
         "activeUsers": {
             "values": [
                 {
@@ -6814,6 +6833,9 @@
         "ppid": "Snapchat",
         "name": "Snapchat",
         "featured": true,
+        "productOwner": [
+            "Snap Inc. (US)"
+        ],
         "activeUsers": {
             "values": [
                 {
@@ -7753,6 +7775,10 @@
         "ppid": "Facebook Messenger",
         "name": "Facebook Messenger",
         "featured": true,
+        "productOwner": [
+            "Facebook (US)",
+            "Facebook Ireland Limited (IE)"
+        ],
         "activeUsers": {
             "values": [
                 {
@@ -8651,6 +8677,9 @@
         "ppid": "iMessage",
         "name": "iMessage",
         "featured": true,
+        "productOwner": [
+            "Apple (US)"
+        ],
         "activeUsers": {
             "values": [
                 {
@@ -8825,6 +8854,10 @@
         "ppid": "Telegram",
         "name": "Telegram",
         "featured": true,
+        "productOwner": [
+            "Telegram Messenger Inc (VG)",
+            "Telegram FZ-LLC (AE)"
+        ],
         "activeUsers": {
             "values": [
                 {
@@ -9214,8 +9247,8 @@
         ],
         "jurisdictionsShared": {
             "children": [
-                "Five-Eyes",
-                "Sonstige"
+                "Sonstige",
+                "Five-Eyes"
             ]
         }
     }

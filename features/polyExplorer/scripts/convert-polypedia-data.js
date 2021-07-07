@@ -24,8 +24,6 @@ const dataIssueLog = {
 const extractYear = (date) =>
     parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
 
-const entityKey = (legalName) => legalName.toLowerCase();
-
 function extractAnnualRevenues(entry) {
     if (!entry.financial_data) return null;
     const all = entry.financial_data.map(({ data }) => data).flat();
@@ -128,6 +126,7 @@ function parseProductEntity(entityData) {
             entityData.derived_purpose_info &&
             entityData.derived_category_info
         ),
+        productOwner: product.product_owners,
         activeUsers: product.active_users,
         annualRevenues: product.revenue?.values,
         dataRecipients: entityData.data_recipients || null,
@@ -149,7 +148,7 @@ function parseProductEntity(entityData) {
             : null,
         description: parseDescription(entityData.policies),
         recipientInfo: entityData.recipient_info,
-        activities: product.activity.values,
+        activities: product.activity?.values,
     };
 }
 
@@ -167,13 +166,13 @@ function mergeEntities(oldEntity, newEntity) {
 }
 
 function enrichWithPatchData(entityMap) {
-    for (let [name, entity] of Object.entries(patchData)) {
-        const key = entityKey(name);
+    for (let [ppid, entity] of Object.entries(patchData)) {
+        const key = ppid;
         dataIssueLog[
             key in entityMap
                 ? "patchedCompaniesModified"
                 : "patchedCompaniesNew"
-        ].push(name);
+        ].push(ppid);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     }
 }
@@ -229,13 +228,24 @@ function enrichWithGlobalData(entityMap, globalData) {
     }
 }
 
-function enrichWithJurisdictionsShared(entityMap) {
+function enrichWithJurisdictionsShared(entityMap, companyMap) {
     for (let entity of Object.values(entityMap)) {
         for (let dataRecipient of entity.dataRecipients || []) {
-            const recipientKey = entityKey(dataRecipient);
-            if (!(recipientKey in entityMap)) continue;
+            const recipientKey = dataRecipient;
+            const productDataRecipient = companyMap?.find(
+                (company) => company.ppid == recipientKey
+            );
+            if (
+                (!companyMap && !(recipientKey in entityMap)) ||
+                (companyMap && !productDataRecipient)
+            )
+                continue;
 
-            const recipientJurisdiction = entityMap[recipientKey].jurisdiction;
+            let recipientJurisdiction;
+            companyMap
+                ? (recipientJurisdiction = productDataRecipient.jurisdiction)
+                : (recipientJurisdiction =
+                      entityMap[recipientKey].jurisdiction);
             if (!recipientJurisdiction) continue;
             entity.jurisdictionsShared = entity.jurisdictionsShared || {};
             entity.jurisdictionsShared.children =
@@ -263,16 +273,16 @@ function fixCompanyData(entityMap) {
         }
         const { dataRecipients } = entity;
         if (!dataRecipients) continue;
-        entity.dataRecipients = dataRecipients.filter((recipientName) => {
-            const recipientKey = entityKey(recipientName);
+        entity.dataRecipients = dataRecipients.filter((recipientPpid) => {
+            const recipientKey = recipientPpid;
             const keep =
                 entityMap[recipientKey] &&
                 entityMap[recipientKey].name &&
                 entityMap[recipientKey].industryCategory;
             if (!keep) {
-                dataIssueLog.missingDataRecipients[recipientName] =
-                    dataIssueLog.missingDataRecipients[recipientName] || [];
-                dataIssueLog.missingDataRecipients[recipientName].push(
+                dataIssueLog.missingDataRecipients[recipientPpid] =
+                    dataIssueLog.missingDataRecipients[recipientPpid] || [];
+                dataIssueLog.missingDataRecipients[recipientPpid].push(
                     entity.name
                 );
             }
@@ -287,7 +297,7 @@ function parsePolyPediaCompanyData(globalData) {
         const entity = parseCompanyEntity(entityData);
         if (!entity) return;
 
-        const key = entityKey(entity.name);
+        const key = entity.ppid;
         if (key in entityMap) dataIssueLog.duplicateKeys.push(key);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     });
@@ -299,16 +309,17 @@ function parsePolyPediaCompanyData(globalData) {
     return Object.values(entityMap);
 }
 
-function parsePolyPediaProductData() {
+function parsePolyPediaProductData(companyMap) {
     const entityMap = {};
     Object.values(polyPediaProductData).forEach((entityData) => {
         const entity = parseProductEntity(entityData);
         if (!entity) return;
 
-        const key = entityKey(entity.name);
+        const key = entity.ppid;
         if (key in entityMap) dataIssueLog.duplicateKeys.push(key);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     });
+    enrichWithJurisdictionsShared(entityMap, companyMap);
     return Object.values(entityMap);
 }
 
@@ -414,7 +425,7 @@ ${patchedCompaniesNew.map((s) => listPrefix + s).join("\n")}
 
 const globalData = parsePolyPediaGlobalData();
 const companyData = parsePolyPediaCompanyData(globalData);
-const productData = parsePolyPediaProductData();
+const productData = parsePolyPediaProductData(companyData);
 savePolyExplorerGlobalData(globalData);
 savePolyExplorerCompanyData(companyData);
 savePolyExplorerProductData(productData);
