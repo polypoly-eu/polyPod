@@ -78,13 +78,12 @@ describe("TabsLine", () => {
         expect(true).to.equal(false);
       })
       .catch(error => {
-        expect(error.message).to.equal("Just one tab should be active");
+        expect(error.message).to.equal("At most, one tab should be active");
       });
   });
 
   it(`
-    must to throw an exception if there is not one tab active
-    by default
+    must to throw an exception if one tab is not active by default
   `, () => {
     tabs[0].active = false;
     fixture(html` <poly-tabs-line .tabs=${tabs}></poly-tabs-line> `)
@@ -93,7 +92,7 @@ describe("TabsLine", () => {
         expect(true).to.equal(false);
       })
       .catch(error => {
-        expect(error.message).to.equal("Just one tab should be active");
+        expect(error.message).to.equal("At most, one tab should be active");
       });
   });
 
