@@ -16,12 +16,11 @@ const Preview = ({ story }) => {
 
 const StoriesPreview = ({ storiesMetadata }) => {
     return (
-        <div className="story-preview">
+        <div className="stories-preview">
             <div className="preview-scrollable">
                 {Object.values(storiesMetadata).map((story, index) => (
                     <Preview key={index} story={story} />
                 ))}
-                <div className="gradient"></div>
             </div>
             <div className="preview-btn-area">
                 <p>{i18n.t("storiesPreviewScreen:more.stories")}</p>
