@@ -19,11 +19,10 @@ const TABS = [
 ];
 
 describe("Empty tabslin throws", () => {
-  fixture(html `<poly-tabs-line></poly-tabs-line>`)
-      .catch(error => {
-        expect(error.message).to.equal("There are no tabs");
-      });
-})
+  fixture(html`<poly-tabs-line></poly-tabs-line>`).catch(error => {
+    expect(error.message).to.equal("There are no tabs");
+  });
+});
 
 describe("TabsLine", () => {
   let tabs;
@@ -32,7 +31,9 @@ describe("TabsLine", () => {
   before(async function () {
     let divs = [];
     for (let i = 0; i < TABS.length; i++) {
-      divs[i] = `<div class="tab-slot" slot="tab0${i}">this is the tab0${i}</div>`;
+      divs[
+        i
+      ] = `<div class="tab-slot" slot="tab0${i}">this is the tab0${i}</div>`;
     }
     el = await fixture(html`
       <poly-tabs-line .tabs=${TABS}> ${divs.join("\n")} </poly-tabs-line>

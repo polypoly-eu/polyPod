@@ -71,10 +71,10 @@ export class TabsLine extends LitElement {
   }
 
   set tabs(value) {
-    if ( value.length <= 0 ) {
+    if (value.length <= 0) {
       throw new Error("There are no tabs");
     }
-    
+
     if (!this.__validateTabsFields(value)) {
       throw new Error("Wrong tabs schema");
     }
@@ -110,23 +110,23 @@ export class TabsLine extends LitElement {
 
   render() {
     return html`
-          <div class="tabs-line">
-            ${this.tabs.map(tab => {
-              return html`<poly-tab
-                class="single-tab"
-                .label="${tab.label}"
-                .value="${tab.id}"
-                .active="${tab.active}"
-                @poly-tab-selected=${this.__activeTab}
-              >
-              </poly-tab>`;
-            })}
-          </div>
-          ${this.tabs.map(
-            tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
-              <slot name="${tab.id}"></slot>
-            </div>`
-          )}
-        `
+      <div class="tabs-line">
+        ${this.tabs.map(tab => {
+          return html`<poly-tab
+            class="single-tab"
+            .label="${tab.label}"
+            .value="${tab.id}"
+            .active="${tab.active}"
+            @poly-tab-selected=${this.__activeTab}
+          >
+          </poly-tab>`;
+        })}
+      </div>
+      ${this.tabs.map(
+        tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
+          <slot name="${tab.id}"></slot>
+        </div>`
+      )}
+    `;
   }
 }
