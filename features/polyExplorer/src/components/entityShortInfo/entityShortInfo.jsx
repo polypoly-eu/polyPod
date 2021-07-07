@@ -4,6 +4,26 @@ import "./entityShortInfo.css";
 import LinkButton from "../buttons/linkButton/linkButton.jsx";
 
 const EntityShortInfo = ({ entity }) => {
+    const entityIcon = () => {
+        if (entity.type == "product")
+            return (
+                <img
+                    src="./images/product-grey.svg"
+                    alt=""
+                    className="featured-indicator"
+                />
+            );
+        else if (entity.featured == true)
+            return (
+                <img
+                    src="./images/star.svg"
+                    alt=""
+                    className="featured-indicator"
+                />
+            );
+        else return <div className="non-featured-aligner" />;
+    };
+
     return (
         <LinkButton
             stateChange={{ selectedEntity: entity.ppid }}
@@ -11,15 +31,7 @@ const EntityShortInfo = ({ entity }) => {
             route="/entity-details"
         >
             <>
-                {entity.featured ? (
-                    <img
-                        src="./images/star.svg"
-                        alt=""
-                        className="featured-indicator"
-                    />
-                ) : (
-                    <div className="non-featured-aligner" />
-                )}
+                {entityIcon()}
                 <div className="info-box">
                     <p className="entity-name">{entity.name}</p>
                     {entity.type == "company" ? (
@@ -50,7 +62,11 @@ const EntityShortInfo = ({ entity }) => {
                             </div>
                         </>
                     ) : (
-                        <></>
+                        <>
+                            <div className="entity-owner">
+                                {entity.productOwnerEnumeration()}
+                            </div>
+                        </>
                     )}
                 </div>
             </>
