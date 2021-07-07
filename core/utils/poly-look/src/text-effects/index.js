@@ -1,3 +1,4 @@
 import { FirstCapitalize } from "./firstCapitalize";
+import { POLYPREFIX } from "../globalTheme";
 
-window.customElements.define("poly-first-capitalize", FirstCapitalize);
+window.customElements.define(`${POLYPREFIX}-first-capitalize", FirstCapitalize);
