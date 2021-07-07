@@ -1,24 +1,18 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import "../../src/tabs";
-const TABS = [
-  {
-    id: "tab01",
-    label: "Tab 01",
-    active: true,
-  },
-  {
-    id: "tab02",
-    label: "Tab 03",
-    active: false,
-  },
-  {
-    id: "tab03",
-    label: "Tab 03",
-    active: false,
-  },
-];
 
-describe("Empty tabslin throws", () => {
+const HOWMANYTABS = 3;
+let TABS = [];
+for (let i = 0; i < HOWMANYTABS; i++) {
+  TABS[i] = {
+    id: `tab0${i}`,
+    label: `Tab ${i}`,
+    active: false,
+  };
+}
+TABS[0].active = true;
+
+describe("Empty tabsline throws", () => {
   fixture(html`<poly-tabs-line></poly-tabs-line>`).catch(error => {
     expect(error.message).to.equal("There are no tabs");
   });
