@@ -52,7 +52,7 @@ describe("TabsLine", () => {
   });
 
   it(`
-    must to throw an exception if the input data does not have
+    must throw an exception if the input data does not have
     the required info (not required attribute)
   `, () => {
     delete tabs[2].label;
