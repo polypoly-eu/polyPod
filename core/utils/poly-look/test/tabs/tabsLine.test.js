@@ -75,7 +75,7 @@ describe("TabsLine", () => {
   });
 
   it(`
-    must to throw an exception if there is more than one tab active 
+    must throw an exception if there is more than one tab active 
     at the same time
   `, () => {
     tabs[1].active = true;
@@ -90,7 +90,7 @@ describe("TabsLine", () => {
   });
 
   it(`
-    must to throw an exception if one tab is not active by default
+    must throw an exception if one tab is not active by default
   `, () => {
     tabs[0].active = false;
     fixture(html` <poly-tabs-line .tabs=${tabs}></poly-tabs-line> `)
@@ -104,7 +104,7 @@ describe("TabsLine", () => {
   });
 
   it(`
-    must render three tabs with its content
+    must render all tabs with its content
   `, async () => {
     const lengTabs = tabs.length;
     expect(tabs).to.eql(el.tabs);
