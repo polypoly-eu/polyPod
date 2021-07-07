@@ -18,6 +18,13 @@ const TABS = [
   },
 ];
 
+describe("Empty tabslin throws", () => {
+  fixture(html `<poly-tabs-line></poly-tabs-line>`)
+      .catch(error => {
+        expect(error.message).to.equal("There are no tabs");
+      });
+})
+
 describe("TabsLine", () => {
   let tabs;
   let el;

@@ -67,15 +67,14 @@ export class TabsLine extends LitElement {
   }
 
   __validateOnlyOneActive(tabs) {
-    const actives =
-      tabs.length > 0
-        ? tabs.reduce((acc, tab) => (tab.active ? ++acc : acc), 0)
-        : 1;
-
-    return actives === 1;
+    return tabs.reduce((acc, tab) => (tab.active ? ++acc : acc), 0) === 1;
   }
 
   set tabs(value) {
+    if ( value.length <= 0 ) {
+      throw new Error("There are no tabs");
+    }
+    
     if (!this.__validateTabsFields(value)) {
       throw new Error("Wrong tabs schema");
     }
