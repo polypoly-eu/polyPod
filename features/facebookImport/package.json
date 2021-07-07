@@ -1,10 +1,11 @@
 {
   "name": "facebook-import-feature",
   "scripts": {
-    "build": "rm -rf dist && cp -r src dist && cp node_modules/@polypoly-eu/podjs/dist/pod.js dist"
+    "build": "rm -rf dist && cp -r src dist && cp node_modules/@polypoly-eu/podjs/dist/pod.js node_modules/@zip.js/zip.js/dist/zip.min.js dist"
   },
   "devDependencies": {
-    "@polypoly-eu/podjs": "file:../../podjs"
+    "@polypoly-eu/podjs": "file:../../podjs",
+    "@zip.js/zip.js": "2.3.7"
   },
   "private": true
 }

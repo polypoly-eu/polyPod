@@ -6,14 +6,25 @@ window.addEventListener("DOMContentLoaded", async () => {
     document.body.classList.remove("loading");
     const loadFileButton = document.getElementById("load-file");
     loadFileButton.addEventListener("click", async () => {
+        const fields = Object.fromEntries(
+            ["size", "data", "list"].map((name) => [
+                name,
+                document.getElementById(`file-info-${name}`),
+            ])
+        );
+
         const file = await pod.polyNav.pickFile();
-        const sizeField = document.getElementById("file-info-size");
-        const dataField = document.getElementById("file-info-data");
         if (!file) {
-            sizeField.textContent = dataField.textContent = "";
+            Object.values(fields).forEach((field) => (field.textContent = ""));
             return;
         }
-        sizeField.textContent = file.length;
-        dataField.textContent = hexdump(file);
+        fields.size.textContent = file.length;
+        fields.data.textContent = hexdump(file);
+
+        const reader = new zip.ZipReader(new zip.Uint8ArrayReader(file));
+        const entries = await reader.getEntries();
+        fields.list.textContent = entries
+            .map((entry) => entry.filename)
+            .join("\n");
     });
 });
