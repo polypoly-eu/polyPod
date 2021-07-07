@@ -19,7 +19,6 @@ const EntityFilterScreen = () => {
     const [newActiveFilters, setNewActiveFilters] = useState(
         activeFilters.copy()
     );
-    console.log(newActiveFilters);
 
     const handleReset = () => setNewActiveFilters(new EntityFilter());
 
