@@ -121,7 +121,6 @@
 		E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B712627304800216B70 /* FeatureContainerView.swift */; };
 		E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */; };
 		E9F370CA262DD92C006254C1 /* jost_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C6262DD92C006254C1 /* jost_light.ttf */; };
-		E9F370CB262DD92C006254C1 /* polydisplay_semi_1_0.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C7262DD92C006254C1 /* polydisplay_semi_1_0.otf */; };
 		E9F370CC262DD92C006254C1 /* jost_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C8262DD92C006254C1 /* jost_medium.ttf */; };
 		E9F370CD262DD92C006254C1 /* jost_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C9262DD92C006254C1 /* jost_regular.ttf */; };
 		E9F370D5262EABFF006254C1 /* LocalizedStringKeyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370D4262EABFF006254C1 /* LocalizedStringKeyExtensions.swift */; };
@@ -215,7 +214,6 @@
 		E9CF1B712627304800216B70 /* FeatureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureContainerView.swift; sourceTree = "<group>"; };
 		E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUtils.swift; sourceTree = "<group>"; };
 		E9F370C6262DD92C006254C1 /* jost_light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_light.ttf; sourceTree = "<group>"; };
-		E9F370C7262DD92C006254C1 /* polydisplay_semi_1_0.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = polydisplay_semi_1_0.otf; sourceTree = "<group>"; };
 		E9F370C8262DD92C006254C1 /* jost_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_medium.ttf; sourceTree = "<group>"; };
 		E9F370C9262DD92C006254C1 /* jost_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_regular.ttf; sourceTree = "<group>"; };
 		E9F370D4262EABFF006254C1 /* LocalizedStringKeyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringKeyExtensions.swift; sourceTree = "<group>"; };
@@ -460,7 +458,6 @@
 				E9F370C6262DD92C006254C1 /* jost_light.ttf */,
 				E9F370C8262DD92C006254C1 /* jost_medium.ttf */,
 				E9F370C9262DD92C006254C1 /* jost_regular.ttf */,
-				E9F370C7262DD92C006254C1 /* polydisplay_semi_1_0.otf */,
 			);
 			path = fonts;
 			sourceTree = "<group>";
@@ -579,7 +576,6 @@
 				E9F370CA262DD92C006254C1 /* jost_light.ttf in Resources */,
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
-				E9F370CB262DD92C006254C1 /* polydisplay_semi_1_0.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
