@@ -229,7 +229,7 @@ open class FeatureFragment : Fragment() {
             return
         }
 
-        val fileUri = data?.data!!
+        val fileUri = data.data!!
         val result =
             activity?.contentResolver?.openInputStream(fileUri)?.readBytes()
         pickFileResult?.complete(result)
