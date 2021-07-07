@@ -109,8 +109,7 @@ export class TabsLine extends LitElement {
   }
 
   render() {
-    return this.tabs
-      ? html`
+    return html`
           <div class="tabs-line">
             ${this.tabs.map(tab => {
               return html`<poly-tab
@@ -129,6 +128,5 @@ export class TabsLine extends LitElement {
             </div>`
           )}
         `
-      : html`<div class="tabs-line"></div>`;
   }
 }
