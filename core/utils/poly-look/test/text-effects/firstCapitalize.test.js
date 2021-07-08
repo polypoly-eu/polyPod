@@ -1,7 +1,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import "../../src/text-effects";
 
-describe("FirstCapitalize", () => {
+describe("FirstCapitalize renders", () => {
   it(`
     has to render all the text that gets on the attribute
     paragraph
@@ -11,8 +11,10 @@ describe("FirstCapitalize", () => {
     const el = await fixture(html`
       <poly-first-capitalize .paragraph=${text}></poly-first-capitalize>
     `);
-
-    const paragraph = el.shadowRoot.querySelector(".paragraph");
+    const paragraph = el.shadowRoot.querySelector(
+      `.${Object.keys(el.classes)}`
+    );
+    console.log(paragraph);
     expect(paragraph.textContent).to.equal(text);
   });
 });
