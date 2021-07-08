@@ -8,7 +8,6 @@ fs.readFile(fbZipLocation, function(err, data) {
     if (err) throw err;
     JSZip.loadAsync(data).then(function (zip) {
         let structure = {};
-        console.log(Object.keys(zip.files).sort());
         const files = Object.keys(zip.files).sort();
         for ( const f in files  ) {
             const key = files[f];
