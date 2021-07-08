@@ -111,7 +111,8 @@ function parseCompanyEntity(entityData) {
               )
             : null,
         description: parseDescription(legalEntityData),
-        industryCategory: parseIndustryCategory(legalEntityData),
+        industryCategory:
+            legalEntityData?.entity_details?.industry_category?.values?.[0],
     };
 }
 
@@ -181,21 +182,6 @@ function enrichWithTranslations(entity, globalData) {
     // In the future, we should read these from the global data at runtime to
     // keep the data small, but for now we keep this structure to keep the
     // entries from patch-data.js working.
-
-    if (entity.industryCategory) {
-        const industryData = globalData.industries[entity.industryCategory.id];
-        if (industryData) {
-            const namePrefix = "Name_";
-            entity.industryCategory.name = Object.fromEntries(
-                Object.entries(industryData)
-                    .filter(([key]) => key.startsWith(namePrefix))
-                    .map(([key, value]) => [
-                        key.slice(namePrefix.length).toLowerCase(),
-                        value,
-                    ])
-            );
-        }
-    }
 
     for (let purpose of entity.dataSharingPurposes || []) {
         const purposeData = globalData.data_purposes[purpose["dpv:Purpose"]];

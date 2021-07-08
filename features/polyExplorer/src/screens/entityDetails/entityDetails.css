@@ -232,7 +232,9 @@
     margin: 38px 16px 0 16px;
 }
 
-.featured-map-container h2, .location-map h2, .revenue h2 {
+.featured-map-container h2,
+.location-map h2,
+.revenue h2 {
     text-align: center;
     margin: 0 0 12px 0;
 }

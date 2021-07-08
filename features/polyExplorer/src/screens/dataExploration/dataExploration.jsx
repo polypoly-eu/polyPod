@@ -66,9 +66,7 @@ const DataExplorationScreen = () => {
     const companyIndustryMap = useMemo(() => {
         const map = {};
         for (let company of dataRecipients) {
-            const industry =
-                company.industryCategory?.name[i18n.language] ||
-                i18n.t("common:category.undisclosed");
+            const industry = company.industryCategoryName();
             if (!map[industry]) map[industry] = [];
             map[industry].push(company);
         }

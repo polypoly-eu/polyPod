@@ -53,11 +53,7 @@ const EntityShortInfo = ({ entity }) => {
                             </div>
                             <div className="entity-category">
                                 <p className="category-name">
-                                    {entity.industryCategory
-                                        ? entity.industryCategory.name[
-                                              i18n.language
-                                          ]
-                                        : i18n.t("common:category.undisclosed")}
+                                    {entity.industryCategoryName()}
                                 </p>
                             </div>
                         </>

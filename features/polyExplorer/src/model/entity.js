@@ -1,3 +1,7 @@
+import globalData from "../data/global.json";
+import { determineLanguage } from "@polypoly-eu/silly-i18n";
+import i18n from "../i18n.js";
+
 const dataProperties = [
     "ppid",
     "name",
