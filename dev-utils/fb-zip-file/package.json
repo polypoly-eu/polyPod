@@ -1,0 +1,9 @@
+{
+  "name": "facebook-zip-file-structure",
+  "scripts": {
+  },
+  "dependencies": {
+    "@zip.js/zip.js": "2.3.7"
+  },
+  "private": true
+}
