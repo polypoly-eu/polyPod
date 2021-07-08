@@ -13,7 +13,7 @@ for (let i = 0; i < HOWMANYTABS; i++) {
 TABS[0].active = true;
 
 describe("Empty tabsline throws", () => {
-  fixture(html`<poly-tabs-line></poly-tabs-line>`).catch(error => {
+  fixture(`<poly-tabs-line></poly-tabs-line>`).catch(error => {
     expect(error.message).to.equal("There are no tabs");
   });
 });

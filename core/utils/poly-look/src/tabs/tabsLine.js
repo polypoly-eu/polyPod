@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import { globalTheme } from "../globalTheme";
+import { POLYPREFIX, globalTheme } from "../globalTheme";
 
 const tabRequiredAttributes = ["id", "label", "active"];
 
