@@ -132,7 +132,10 @@ const EntityList = () => {
             >
                 <LinkButton
                     route="/entity-filters"
-                    className="filter-button"
+                    className={
+                        "filter-button" +
+                        (activeFilters.empty ? "" : " filter-button-active")
+                    }
                 ></LinkButton>
                 <InfiniteScroll
                     dataLength={allKeys.length - toLoadKeys.length}

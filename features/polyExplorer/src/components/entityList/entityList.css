@@ -19,7 +19,7 @@
 .active-filters button {
     margin-left: 4px;
     margin-top: 28px;
-    margin-bottom: 42px;
+    margin-bottom: 28px;
     height: 32px;
     padding: 0 9px 0 9px;
     border-radius: 16px;
@@ -80,7 +80,7 @@ button::after {
     position: fixed;
     right: 0;
     margin-top: -12px;
-    z-index: 1;
+    z-index: 2;
     width: 60px;
     height: 48px;
     border: none;
@@ -89,6 +89,10 @@ button::after {
 
 .filter-button:focus {
     outline: 0;
+}
+
+.filter-button-active {
+    margin-top: -28px; 
 }
 
 .entity-group {
