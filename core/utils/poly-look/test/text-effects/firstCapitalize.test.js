@@ -2,10 +2,7 @@ import { html, fixture, expect } from "@open-wc/testing";
 import "../../src/text-effects";
 
 describe("FirstCapitalize renders", () => {
-  it(`
-    has to render all the text that gets on the attribute
-    paragraph
-  `, async () => {
+  it(`has to render the text that gets on the attribute paragraph`, async () => {
     const text = "This is a text for a test";
 
     const el = await fixture(html`
@@ -14,7 +11,6 @@ describe("FirstCapitalize renders", () => {
     const paragraph = el.shadowRoot.querySelector(
       `.${Object.keys(el.classes)}`
     );
-    console.log(paragraph);
     expect(paragraph.textContent).to.equal(text);
   });
 });
