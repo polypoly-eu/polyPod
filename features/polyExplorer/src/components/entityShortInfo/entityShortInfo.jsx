@@ -1,5 +1,4 @@
 import React from "react";
-import i18n from "../../i18n.js";
 import "./entityShortInfo.css";
 import LinkButton from "../buttons/linkButton/linkButton.jsx";
 
