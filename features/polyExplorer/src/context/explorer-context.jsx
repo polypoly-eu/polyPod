@@ -40,7 +40,7 @@ async function writeFirstRun(firstRun) {
 
 function loadCompanies() {
     return Object.fromEntries(
-        Object.entries(polyPediaCompanies).map(([_, company]) => [
+        Object.values(polyPediaCompanies).map((company) => [
             company.ppid,
             new Company(company, globalData, i18n),
         ])
@@ -49,7 +49,7 @@ function loadCompanies() {
 
 function loadProducts() {
     return Object.fromEntries(
-        Object.entries(polyPediaProducts).map(([_, product]) => [
+        Object.values(polyPediaProducts).map((product) => [
             product.ppid,
             new Product(product, globalData, i18n),
         ])
@@ -83,7 +83,6 @@ export const ExplorerProvider = ({ children }) => {
     //constants
     const companies = loadCompanies();
     const products = loadProducts();
-    console.log(companies);
     const entities = { ...companies, ...products };
     const entitiesList = Object.values(entities).sort((a, b) =>
         a.compareNames(b)
