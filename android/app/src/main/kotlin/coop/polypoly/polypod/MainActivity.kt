@@ -4,10 +4,8 @@ import android.app.AlertDialog
 import android.app.admin.DevicePolicyManager
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.CheckBox
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
@@ -15,7 +13,6 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.updatenotification.UpdateNotification
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -130,7 +127,6 @@ class MainActivity : AppCompatActivity() {
             }
             .setOnCancelListener { this.finish() }
             .show()
-
     }
 
     class PolyAuthCallback(

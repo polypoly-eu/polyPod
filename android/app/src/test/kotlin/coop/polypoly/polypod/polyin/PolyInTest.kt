@@ -53,9 +53,9 @@ class PolyInTest {
             })
         File(null as File?, TEST_DB_NAME).delete()
         polyIn = PolyIn(
-            TEST_DB_NAME,
             context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
+                .getApplicationContext(),
+            databaseName = TEST_DB_NAME
         )
     }
 
@@ -226,9 +226,9 @@ class PolyInTest {
             database.delete()
         }
         PolyIn(
-            TEST_DB_NAME,
             context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
+                .getApplicationContext(),
+            databaseName = TEST_DB_NAME
         ).let {
             runBlocking {
                 it.add(storageData)
@@ -236,9 +236,9 @@ class PolyInTest {
         }
 
         val returnedData = PolyIn(
-            TEST_DB_NAME,
             context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
+                .getApplicationContext(),
+            databaseName = TEST_DB_NAME
         ).let {
             runBlocking {
                 it.select(
@@ -267,9 +267,9 @@ class PolyInTest {
             originalDatabase.delete()
         }
         PolyIn(
-            originalPath,
             context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
+                .getApplicationContext(),
+            databaseName = originalPath
         ).let { runBlocking { it.add(storageData) } }
 
         val movedPath = "2" + TEST_DB_NAME
@@ -279,9 +279,9 @@ class PolyInTest {
         Truth.assertThat(
             kotlin.runCatching {
                 PolyIn(
-                    movedPath,
                     context = androidx.test.core.app.ApplicationProvider
-                        .getApplicationContext()
+                        .getApplicationContext(),
+                    databaseName = movedPath
                 )
             }.isFailure
         ).isTrue()
@@ -289,4 +289,33 @@ class PolyInTest {
         movedDatabase.delete()
         originalDatabase.delete()
     }
+/*
+    @Test
+    fun migration_works() {
+        val migratedData = PolyIn(
+            databaseFolder = File("/data/local/tmp/unencrypted"),
+            context = androidx.test.core.app.ApplicationProvider
+                .getApplicationContext()
+        ).let { runBlocking {
+            it.select(Matcher(null, null, null))
+        } }
+
+        Truth.assertThat(migratedData!![0].predicate)
+            .isEqualTo("https://polypoly.coop/#firstrun")
+    }
+
+    @Test
+    fun encryption_works() {
+        val migratedData = PolyIn(
+            databaseFolder = File("/data/local/tmp/encrypted"),
+            context = androidx.test.core.app.ApplicationProvider
+                .getApplicationContext()
+        ).let { runBlocking {
+            it.select(Matcher(null, null, null))
+        } }
+
+        Truth.assertThat(migratedData!![0].predicate)
+            .isEqualTo("https://polypoly.coop/#firstrun")
+    }
+*/
 }
