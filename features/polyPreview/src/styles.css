@@ -191,8 +191,7 @@ button:active {
     z-index: 1;
 }
 
-@media (max-width: 359px),
-(max-height: 579px) {
+@media (max-width: 359px), (max-height: 579px) {
     :root {
         --scale-factor: 0.7;
     }
