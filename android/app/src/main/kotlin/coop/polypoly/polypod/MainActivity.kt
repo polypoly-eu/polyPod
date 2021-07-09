@@ -1,8 +1,13 @@
 package coop.polypoly.polypod
 
 import android.app.AlertDialog
+import android.app.admin.DevicePolicyManager
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.CheckBox
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
@@ -14,18 +19,23 @@ import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
+    var initialized = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val context = this
-        authorize {
-            FeatureStorage().installBundledFeatures(context)
-            setContentView(R.layout.activity_main)
-            setSupportActionBar(findViewById(R.id.toolbar))
-        }
     }
 
     override fun onResume() {
         super.onResume()
+        if (!initialized) {
+            authorize {
+                FeatureStorage().installBundledFeatures(this)
+                setContentView(R.layout.activity_main)
+                setSupportActionBar(findViewById(R.id.toolbar))
+                initialized = true
+            }
+        }
+
         val notification = UpdateNotification(this)
         notification.markPushNotificationSeen()
 
@@ -53,7 +63,77 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class polyAuthCallback(
+    fun authorize(successfulAuth: (() -> Unit)) {
+        enforceScreenLock(successfulAuth) {
+            val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle(this.getString(R.string.auth_title))
+                .setSubtitle(this.getString(R.string.auth_subtitle))
+                .setAllowedAuthenticators(
+                    BiometricManager.Authenticators.BIOMETRIC_WEAK or
+                        BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                )
+                .build()
+
+            val executor = ContextCompat.getMainExecutor(this)
+            val callback = PolyAuthCallback(this, successfulAuth)
+
+            BiometricPrompt(this, executor, callback).authenticate(promptInfo)
+        }
+    }
+
+    fun enforceScreenLock(
+        noScreenLock: (() -> Unit),
+        biometricAuth: (() -> Unit)
+    ) {
+        if (!Preferences.getBiometricCheck(this)) {
+            return noScreenLock()
+        }
+        val biometricManager = BiometricManager.from(this)
+        if (biometricManager.canAuthenticate(
+                BiometricManager.Authenticators.BIOMETRIC_WEAK or
+                    BiometricManager.Authenticators.DEVICE_CREDENTIAL
+            ) != BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED
+        ) {
+            return biometricAuth()
+        }
+
+        val checkBoxView = View.inflate(
+            this, R.layout.fragment_checkbox, null
+        )
+        val checkBox: CheckBox = checkBoxView.findViewById(
+            R.id.checkbox
+        )
+        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            Preferences.setBiometricCheck(
+                this, !isChecked
+            )
+        }
+        checkBox.setText(R.string.auth_enable_lock_do_not_ask)
+
+        AlertDialog.Builder(this)
+            .setTitle(R.string.auth_enable_lock_title)
+            .setView(checkBoxView)
+            .setMessage(R.string.auth_enable_lock_message)
+            .setPositiveButton(R.string.auth_enable_lock_yes) { dialog, _ ->
+                run {
+                    dialog.dismiss()
+                    startActivity(
+                        Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD)
+                    )
+                }
+            }
+            .setNegativeButton(R.string.auth_enable_lock_no) { dialog, _ ->
+                run {
+                    noScreenLock()
+                    dialog.dismiss()
+                }
+            }
+            .setOnCancelListener { this.finish() }
+            .show()
+
+    }
+
+    class PolyAuthCallback(
         val context: MainActivity,
         val successfulAuth: () -> Unit
     ) : BiometricPrompt.AuthenticationCallback() {
@@ -62,12 +142,7 @@ class MainActivity : AppCompatActivity() {
             errString: CharSequence
         ) {
             super.onAuthenticationError(errorCode, errString)
-            Toast.makeText(
-                context,
-                context.getString(R.string.auth_error, errString),
-                Toast.LENGTH_SHORT
-            ).show()
-            exitProcess(0)
+            context.finish()
         }
 
         override fun onAuthenticationSucceeded(
@@ -85,35 +160,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun onAuthenticationFailed() {
             super.onAuthenticationFailed()
-            Toast.makeText(
-                context,
-                context.getString(R.string.auth_error, "Canceled"),
-                Toast.LENGTH_SHORT
-            ).show()
             context.finish()
         }
-    }
-
-    fun authorize(successfulAuth: (() -> Unit)) {
-        val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle(
-                this.getString(
-                    R.string.auth_title
-                )
-            )
-            .setSubtitle(
-                this.getString(
-                    R.string.auth_subtitle
-                )
-            )
-            .setAllowedAuthenticators(
-                BiometricManager.Authenticators.BIOMETRIC_WEAK or
-                    BiometricManager.Authenticators.DEVICE_CREDENTIAL
-            )
-            .build()
-
-        val executor = ContextCompat.getMainExecutor(this)
-        val callback = polyAuthCallback(this, successfulAuth)
-        BiometricPrompt(this, executor, callback).authenticate(promptInfo)
     }
 }
