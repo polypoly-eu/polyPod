@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import i18n from "../../i18n.js";
-import { EntityFilter } from "../../model/EntityFilter.js";
+import { EntityFilter } from "../../model/entityFilter.js";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
 import Screen from "../../components/screen/screen.jsx";
 
