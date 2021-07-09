@@ -5,8 +5,8 @@ const dataProperties = [];
 const dataArrayProperties = ["productOwner", "activeUsers"];
 
 export class Product extends Entity {
-    constructor(productJSONObject) {
-        super(productJSONObject);
+    constructor(productJSONObject, globalData, i18n) {
+        super(productJSONObject, globalData, i18n);
         this._type = "product";
         let self = this;
         dataProperties.forEach(function (item) {

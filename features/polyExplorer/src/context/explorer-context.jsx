@@ -38,20 +38,22 @@ async function writeFirstRun(firstRun) {
     polyIn.add(quad);
 }
 
-function loadCompanies(JSONData, globalData) {
-    const companies = {};
-    for (let obj of JSONData) {
-        companies[obj.ppid] = new Company(obj, globalData);
-    }
-    return companies;
+function loadCompanies() {
+    return Object.fromEntries(
+        Object.entries(polyPediaCompanies).map(([_, company]) => [
+            company.ppid,
+            new Company(company, globalData, i18n),
+        ])
+    );
 }
 
-function loadProducts(JSONData) {
-    const products = {};
-    for (let obj of JSONData) {
-        products[obj.ppid] = new Product(obj, globalData);
-    }
-    return products;
+function loadProducts() {
+    return Object.fromEntries(
+        Object.entries(polyPediaProducts).map(([_, product]) => [
+            product.ppid,
+            new Product(product, globalData, i18n),
+        ])
+    );
 }
 
 export const ExplorerProvider = ({ children }) => {
@@ -79,8 +81,9 @@ export const ExplorerProvider = ({ children }) => {
     const [activeFilters, setActiveFilters] = useState(new EntityFilter());
 
     //constants
-    const companies = loadCompanies(polyPediaCompanies, globalData);
-    const products = loadProducts(polyPediaProducts);
+    const companies = loadCompanies();
+    const products = loadProducts();
+    console.log(companies);
     const entities = { ...companies, ...products };
     const entitiesList = Object.values(entities).sort((a, b) =>
         a.compareNames(b)

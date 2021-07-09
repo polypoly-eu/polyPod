@@ -1,6 +1,4 @@
 import { Entity } from "./entity.js";
-import globalData from "../data/global.json";
-import i18n from "../i18n.js";
 
 const jurisdictions = {
     OTHER: "Sonstige",
@@ -13,8 +11,8 @@ const jurisdictions = {
 const dataProperties = ["industryCategory"];
 
 export class Company extends Entity {
-    constructor(companyJSONObject, globalData) {
-        super(companyJSONObject);
+    constructor(companyJSONObject, globalData, i18n) {
+        super(companyJSONObject, globalData, i18n);
         this._jurisdiction = determineJurisdictions(
             companyJSONObject.location,
             globalData
@@ -36,15 +34,15 @@ export class Company extends Entity {
 
     industryCategoryName() {
         return (
-            globalData.industries?.[this.industryCategory]?.[
-                `Name_${i18n.language.toUpperCase()}`
-            ] || i18n.t("common:category.undisclosed")
+            this.globalData.industries?.[this.industryCategory]?.[
+                `Name_${this.language.toUpperCase()}`
+            ] || this.i18n.t("common:category.undisclosed")
         );
     }
 
     industryCategoryDefinition() {
-        return globalData.industries[this.industryCategory][
-            `Definition_${i18n.language.toUpperCase()}`
+        return this.globalData.industries[this.industryCategory][
+            `Definition_${this.language.toUpperCase()}`
         ];
     }
 }
