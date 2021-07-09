@@ -40,10 +40,15 @@ export class TabContent extends LitElement {
     };
   }
 
+  constructor() {
+    super();
+    this.active = false;
+  }
+
   render() {
     return html`
       <div
-        id="poly-${this.tabid}"
+        id="poly-${this.tabId}"
         class="tab-content ${this.active ? "active" : ""}"
       >
         <slot></slot>

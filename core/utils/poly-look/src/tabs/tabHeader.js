@@ -1,19 +1,20 @@
 import { html, LitElement, css } from "lit-element";
 import globalTheme from "../globalTheme";
 import { polyTabs } from "../constants";
-import { listToString } from "../helpers";
+import { listToStringReducer } from "../helpers";
 
-const listOfTheme = Object.values(polyTabs.themes);
+const validThemes = Object.values(polyTabs.themes);
 
-function validateTabTheme(value) {
-  return listOfTheme.includes(value);
-}
+const validateTabTheme = value => validThemes.includes(value);
 
 export class TabHeader extends LitElement {
   static get styles() {
     return [
       globalTheme,
       css`
+        :host {
+          width: 100%;
+        }
         .tab {
           width: 100%;
           color: var(--poly-tab-color-medium, var(--poly-color-medium));
@@ -78,8 +79,8 @@ export class TabHeader extends LitElement {
   set theme(value) {
     if (!validateTabTheme(value)) {
       throw new Error(
-        `Wrong value in type property. Supported values are: ${listOfTheme.reduce(
-          listToString,
+        `Wrong value in type property. Supported values are: ${validThemes.reduce(
+          listToStringReducer,
           ""
         )}`
       );

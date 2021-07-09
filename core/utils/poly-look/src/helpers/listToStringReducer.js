@@ -1,4 +1,4 @@
-export function listToString(acc, element, index, list) {
+export function listToStringReducer(acc, element, index, list) {
   return index === 0
     ? element
     : index === list.length - 1

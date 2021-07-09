@@ -2,13 +2,13 @@ import { html, LitElement, css } from "lit-element";
 import { unsafeHTML } from "lit-html/directives/unsafe-html";
 import globalTheme from "../globalTheme";
 import { polyTabs } from "../constants";
-import { listToString } from "../helpers";
+import { listToStringReducer } from "../helpers";
 
 const listOfTheme = Object.values(polyTabs.themes);
 
-function validateTabTheme(value) {
-  return listOfTheme.includes(value);
-}
+const validateTabTheme = value => listOfTheme.includes(value);
+
+let __getTabContentBinded = null;
 
 export class Tabs extends LitElement {
   static get styles() {
@@ -27,7 +27,7 @@ export class Tabs extends LitElement {
           width: 100%;
           display: flex;
           justify-content: center;
-          align_items: flex-end;
+          align-items: flex-end;
         }
       `,
     ];
@@ -46,6 +46,14 @@ export class Tabs extends LitElement {
     this.tabHeaders = [];
     this.tabContents = [];
     this.__theme = polyTabs.themes.DARK;
+
+    __getTabContentBinded = this.__getTabContent.bind(this);
+  }
+
+  __getTabContent(event) {
+    this.tabContents = this.tabContents.concat(
+      unsafeHTML(event.detail.innerContent)
+    );
   }
 
   connectedCallback() {
@@ -53,15 +61,21 @@ export class Tabs extends LitElement {
 
     for (const tab of this.children) {
       this.tabHeaders = this.tabHeaders.concat(tab);
-      this.tabContents = this.tabContents.concat(unsafeHTML(tab.innerContent));
     }
+
+    document.addEventListener("poly-tab-connected", __getTabContentBinded);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener("poly-tab-connected", __getTabContentBinded);
   }
 
   set theme(value) {
     if (!validateTabTheme(value)) {
       throw new Error(
         `Wrong value in type property. Supported values are: ${listOfTheme.reduce(
-          listToString,
+          listToStringReducer,
           ""
         )}`
       );
@@ -87,8 +101,31 @@ export class Tabs extends LitElement {
       `
     );
   }
+
+  __changeTab(event) {
+    this.tabHeaders = this.tabHeaders.map(tabHeader => {
+      tabHeader.active = tabHeader.tabId === event.detail.tabId;
+
+      return tabHeader;
+    });
+
+    const tabContents = this.shadowRoot.querySelectorAll("poly-tab-content");
+
+    for (const tabContent of tabContents) {
+      tabContent.removeAttribute("active");
+    }
+
+    const tabActive = Array.from(tabContents).find(tabContent => {
+      return tabContent.shadowRoot.querySelector(`#poly-${event.detail.tabId}`);
+    });
+
+    if (tabActive) {
+      tabActive.setAttribute("active", true);
+    }
+  }
+
   render() {
-    return html`<div class="tabs">
+    return html`<div class="tabs" @poly-tab-click=${this.__changeTab}>
       <div class="tabs-line">${this.__renderTabsLine()}</div>
       <div class="tabs-content">${this.tabContents}</div>
     </div>`;

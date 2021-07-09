@@ -5,7 +5,6 @@ export class Tab extends LitElement {
       label: { type: String },
       tabId: { type: String },
       active: { type: Boolean },
-      innerContent: { type: String },
     };
   }
 
@@ -16,7 +15,13 @@ export class Tab extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.innerContent = this.innerHTML.trim();
+    const connectedEvent = new CustomEvent("poly-tab-connected", {
+      detail: { innerContent: this.innerHTML.trim() },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(connectedEvent);
   }
 
   redner() {

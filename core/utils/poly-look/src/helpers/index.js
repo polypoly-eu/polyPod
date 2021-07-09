@@ -1,1 +1,1 @@
-export * from "./listToString";
+export * from "./listToStringReducer";
