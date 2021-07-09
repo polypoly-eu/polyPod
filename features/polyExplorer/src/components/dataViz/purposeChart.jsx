@@ -64,15 +64,7 @@ const PurposeChart = ({ purposes, openPopup }) => {
                     onClick={() => openPopup(p)}
                 >
                     <div className="above-bar">
-                        <p className="name">
-                            {
-                                p[
-                                    i18n.t(
-                                        "dataExplorationScreen:from.polyPedia.translation"
-                                    )
-                                ]
-                            }
-                        </p>
+                        <p className="name">{p.translation}</p>
                         <img src="./images/question-circle-light.svg" />
                     </div>
                     <div

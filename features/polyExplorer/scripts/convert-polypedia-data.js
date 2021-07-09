@@ -178,30 +178,6 @@ function enrichWithPatchData(entityMap) {
     }
 }
 
-function enrichWithTranslations(entity, globalData) {
-    // In the future, we should read these from the global data at runtime to
-    // keep the data small, but for now we keep this structure to keep the
-    // entries from patch-data.js working.
-
-    for (let purpose of entity.dataSharingPurposes || []) {
-        const purposeData = globalData.data_purposes[purpose["dpv:Purpose"]];
-        const translations = Object.fromEntries(
-            Object.entries(purposeData).filter(([key]) =>
-                ["Translation_", "Explanation_"].some((prefix) =>
-                    key.startsWith(prefix)
-                )
-            )
-        );
-        Object.assign(purpose, translations);
-    }
-
-    for (let category of entity.dataTypesShared || []) {
-        const categoryData =
-            globalData.personal_data_categories[category["dpv:Category"]];
-        Object.assign(category, categoryData);
-    }
-}
-
 function enrichWithGlobalData(entityMap, globalData) {
     for (let entity of Object.values(entityMap)) {
         entity.jurisdiction =
@@ -210,7 +186,6 @@ function enrichWithGlobalData(entityMap, globalData) {
             entity.jurisdiction = "Sonstige";
             dataIssueLog.unknownJurisdictions.push(entity.name);
         }
-        enrichWithTranslations(entity, globalData);
     }
 }
 

@@ -219,7 +219,6 @@ export const ExplorerProvider = ({ children }) => {
     //on-change
     useEffect(() => {
         updatePodNavigation();
-        console.log(history);
     });
 
     return (
