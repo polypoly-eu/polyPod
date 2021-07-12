@@ -21,12 +21,8 @@ export const globalTheme = css`
     );
 
     /* Text colors */
-    --poly-color-text-dark: var(--color-text-dark, var(--${unsafeCSS(
-  POLYPREFIX
-)}-color-dark));
-    --poly-color-text-light: var(--color-text-light, var(--${unsafeCSS(
-  POLYPREFIX
-)}-color-light));
+    --poly-color-text-dark: var(--color-text-dark, var(--poly-color-dark));
+    --poly-color-text-light: var(--color-text-light, var(--poly-color-light));
 
     /* Data exploration colors */
     --poly-data-exp-data-types: var(--data-exp-data-types, #fe8988);
