@@ -118,6 +118,8 @@ export interface PolyNav {
     setTitle(title: string): Promise<void>;
     /**
      * Ask the user to pick a file and load it
+     *
+     * @return a byte array containing the file the user selected, or `null` if none was selected.
      */
     pickFile(): Promise<Uint8Array | null>;
 }
