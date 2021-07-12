@@ -57,7 +57,7 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
-    pickFile(): ValueEndpointSpec<void>;
+    pickFile(): ValueEndpointSpec<Uint8Array | null>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{

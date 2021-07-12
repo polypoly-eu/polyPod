@@ -63,7 +63,7 @@ class AsyncPolyNav implements PolyNav {
         return (await this.promise).setTitle(title);
     }
 
-    async pickFile(): Promise<void> {
+    async pickFile(): Promise<Uint8Array | null> {
         return (await this.promise).pickFile();
     }
 }
