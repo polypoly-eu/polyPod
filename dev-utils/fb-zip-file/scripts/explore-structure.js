@@ -16,6 +16,7 @@ glob(`${localFolder}/*.json`, (error, files) => {
         let theseKeys = {};
         let thisData = JSON.parse(readFileSync(f));
         for (let key in thisData) {
+            console.log( "File ", f, " key ", key );
             allKeys[key] = true;
             theseKeys[key] = true;
         }
