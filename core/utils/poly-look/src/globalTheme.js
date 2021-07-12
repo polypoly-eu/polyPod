@@ -1,4 +1,4 @@
-import { css, unsafeCSS } from "lit-element";
+import { css } from "lit-element";
 
 export const POLYPREFIX = "poly";
 
