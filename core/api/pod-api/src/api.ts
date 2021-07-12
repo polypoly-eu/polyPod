@@ -119,7 +119,7 @@ export interface PolyNav {
     /**
      * Ask the user to pick a file and load it
      */
-    pickFile(): Promise<void>;
+    pickFile(): Promise<Uint8Array | null>;
 }
 
 /**
