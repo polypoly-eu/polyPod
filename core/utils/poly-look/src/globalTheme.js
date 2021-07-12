@@ -42,7 +42,7 @@ const globalTheme = css`
     );
     --poly-font-family-poly-display-name: var(
       --font-family-poly-display-name,
-      "polyDisplay"
+      "Jost Medium"
     );
 
     /* Font sizes */

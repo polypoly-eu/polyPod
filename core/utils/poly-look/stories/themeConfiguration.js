@@ -15,7 +15,7 @@ export function themeConfiguration() {
 
       @font-face {
         font-family: "polyDisplay";
-        src: url("public/fonts/polydisplay_semi_1_0.otf");
+        src: url("public/fonts/jost_medium.ttf");
       }
 
       @font-face {
