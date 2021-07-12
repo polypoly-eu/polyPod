@@ -1,9 +1,9 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import "../../src/tabs";
 
-const HOWMANYTABS = 3;
+const TABCOUNT = 3;
 let TABS = [];
-for (let i = 0; i < HOWMANYTABS; i++) {
+for (let i = 0; i < TABCOUNT; i++) {
   TABS[i] = {
     id: `tab0${i}`,
     label: `Tab ${i}`,
