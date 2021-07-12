@@ -43,25 +43,13 @@ class FieldMatcher {
     }
 }
 
-// TODO: Keeping global state for this isn't nice, maybe we can look these up
-//       from globalData, or otherwise at least cache them on the instance.
-const industryCategoryNames = new Map();
-
 class IndustryCategoryMatcher extends FieldMatcher {
     static extractValue(entity) {
-        const category = entity.industryCategory;
-        const id = category?.id;
-        if (!id) return "?";
-        if (!industryCategoryNames.has(id))
-            industryCategoryNames.set(id, category.name);
-        return id;
+        return entity.industryCategoryName();
     }
 
-    static displayString(value, i18n) {
-        return (
-            industryCategoryNames.get(value)?.[i18n.language] ||
-            i18n.t("common:category.undisclosed")
-        );
+    static displayString(value) {
+        return value;
     }
 }
 
@@ -174,7 +162,13 @@ export class EntityFilter {
         this._matchers = new Map();
         this._matchers.set(
             "industryCategory",
-            new IndustryCategoryMatcher(entities)
+            new IndustryCategoryMatcher(
+                Object.fromEntries(
+                    Object.entries(entities).filter(
+                        ([, value]) => value.type == "company"
+                    )
+                )
+            )
         );
         this._matchers.set("jurisdiction", new JurisdictionMatcher(entities));
         this._matchers.set("revenueRange", new RevenueRangeMatcher(entities));
@@ -207,6 +201,11 @@ export class EntityFilter {
     }
 
     displayString(field, value, i18n, globalData) {
+        console.log(
+            this._matchers
+                .get(field)
+                .constructor.displayString(value, i18n, globalData) || value
+        );
         return (
             this._matchers
                 .get(field)
