@@ -47,7 +47,9 @@ class PostOffice {
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         case "polyNav":
-            handlePolyNav(method: method, args: args)
+            handlePolyNav(method: method, args: args, completionHandler: { response, error in
+                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
+            })
         default:
             print("API unknown:", api)
         }
@@ -250,7 +252,7 @@ extension PostOffice {
 }
 
 extension PostOffice {
-    private func handlePolyNav(method: String, args: [Any]) {
+    private func handlePolyNav(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         switch method {
         case "setTitle":
             handlePolyNavSetTitle(args: args)
@@ -258,6 +260,8 @@ extension PostOffice {
             handlePolyNavSetActiveAction(args: args)
         case "openUrl":
             handlePolyNavOpenUrl(args: args)
+        case "pickFile":
+            handlePolyNavPickFile(completionHandler: completionHandler)
         default:
             print("PolyNav method unknown:", method)
         }
@@ -278,6 +282,16 @@ extension PostOffice {
     private func handlePolyNavOpenUrl(args: [Any]) {
         let target = args[0] as! String
         PodApi.shared.polyNav.openUrl(target: target) { res, error in
+        }
+    }
+    
+    private func handlePolyNavPickFile(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        PodApi.shared.polyNav.pickFile() { data in
+            if let data = data {
+                completionHandler(MessagePackValue(data), nil)
+                return
+            }
+            completionHandler(MessagePackValue(), nil)
         }
     }
 }

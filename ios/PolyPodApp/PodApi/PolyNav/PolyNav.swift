@@ -5,6 +5,7 @@ protocol PolyNavProtocol {
     func setTitle(title: String, completionHandler: ([ExtendedData]?, Error?) -> Void)
     func setActiveActions(actions: [String], completionHandler: ([ExtendedData]?, Error?) -> Void)
     func openUrl(target: String, completionHandler: ([ExtendedData]?, Error?) -> Void)
+    func pickFile(completionHandler: @escaping (Data?) -> Void)
 }
 
 class PolyNav: PolyNavProtocol {
@@ -26,4 +27,7 @@ class PolyNav: PolyNavProtocol {
         webView?.doHandleOpenUrl(url: target)
     }
     
+    func pickFile(completionHandler: @escaping (Data?) -> Void) {
+        webView?.doHandlePickFile(completion: completionHandler)
+    }
 }

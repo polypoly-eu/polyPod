@@ -74,6 +74,7 @@ class FeatureStorage {
     
     func importFeatures() {
         createFeaturesFolder()
+        importFeature("facebookImport")
         importFeature("lexicon")
         importFeature("polyExplorer")
         importFeature("polyPreview")

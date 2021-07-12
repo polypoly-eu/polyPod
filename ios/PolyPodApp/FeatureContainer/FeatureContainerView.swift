@@ -46,6 +46,7 @@ class FeatureWebView: WKWebView {
     private let activeActions: Binding<[String]>
     private let openUrlHandler: (String) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
+    private let filePicker = FilePicker()
 
     init(
         feature: Feature,
@@ -227,6 +228,10 @@ extension FeatureWebView: WKScriptMessageHandler {
     
     func doHandleOpenUrl(url: String) {
         openUrlHandler(url)
+    }
+    
+    func doHandlePickFile(completion: @escaping (Data?) -> Void) {
+        filePicker.pick(completion: completion)
     }
 }
 
