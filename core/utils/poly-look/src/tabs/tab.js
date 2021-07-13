@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import globalTheme from "../globalTheme";
+import { polyPrefix, globalTheme } from "../globalTheme";
 
 export class Tab extends LitElement {
   static get styles() {
@@ -8,11 +8,11 @@ export class Tab extends LitElement {
       css`
         .tab {
           width: 100%;
-          color: var(--poly-color-medium);
-          font-size: var(--poly-button-font-size);
+          color: var(--${polyPrefix}-color-medium);
+          font-size: var(--${polyPrefix}-button-font-size);
           background-color: transparent;
           border: solid transparent 2px;
-          border-bottom: solid 1px var(--poly-color-dark);
+          border-bottom: solid 1px var(--${polyPrefix}-color-dark);
           text-align: center;
           cursor: pointer;
         }
@@ -22,8 +22,8 @@ export class Tab extends LitElement {
         }
 
         .tab.active {
-          color: var(--poly-color-dark);
-          border-bottom: solid 4px var(--poly-color-dark);
+          color: var(--${polyPrefix}-color-dark);
+          border-bottom: solid 4px var(--${polyPrefix}-color-dark);
         }
       `,
     ];
@@ -44,7 +44,7 @@ export class Tab extends LitElement {
   }
 
   #onClick() {
-    const tabEvent = new CustomEvent("poly-tab-selected", {
+    const tabEvent = new CustomEvent(`${polyPrefix}-tab-selected`, {
       detail: { value: this.value },
       bubbles: true,
       composed: true,

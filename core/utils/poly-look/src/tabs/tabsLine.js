@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import globalTheme from "../globalTheme";
+import { globalTheme } from "../globalTheme";
 
 const tabRequiredAttributes = ["id", "label", "active"];
 
@@ -69,21 +69,20 @@ export class TabsLine extends LitElement {
   }
 
   #validateOnlyOneActive(tabs) {
-    const actives =
-      tabs.length > 0
-        ? tabs.reduce((acc, tab) => (tab.active ? ++acc : acc), 0)
-        : 1;
-
-    return actives === 1;
+    return tabs.reduce((acc, tab) => (tab.active ? ++acc : acc), 0) === 1;
   }
 
   set tabs(value) {
+    if (value.length <= 0) {
+      throw new Error("There are no tabs");
+    }
+
     if (!this.#validateTabsFields(value)) {
       throw new Error("Wrong tabs schema");
     }
 
     if (!this.#validateOnlyOneActive(value)) {
-      throw new Error("One tab must be active but only one");
+      throw new Error("At most, one tab should be active");
     }
 
     this.#tabs = value.map(tab => ({ ...tab }));
@@ -105,35 +104,25 @@ export class TabsLine extends LitElement {
     });
   }
 
-  #renderTabsLine() {
-    return this.tabs
-      ? this.tabs.map(
-          tab =>
-            html`<poly-tab
-              class="single-tab"
-              .label=${tab.label}
-              .value=${tab.id}
-              .active=${tab.active}
-              @poly-tab-selected=${this.#activeTab}
-            ></poly-tab>`
-        )
-      : html``;
-  }
-
-  #renderTabsContent() {
-    return this.tabs
-      ? this.tabs.map(
-          tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
-            <slot name="${tab.id}"></slot>
-          </div>`
-        )
-      : html``;
-  }
-
   render() {
     return html`
-      <div class="tabs-line">${this.#renderTabsLine()}</div>
-      ${this.#renderTabsContent()}
+      <div class="tabs-line">
+        ${this.tabs.map(tab => {
+          return html`<poly-tab
+            class="single-tab"
+            .label="${tab.label}"
+            .value="${tab.id}"
+            .active="${tab.active}"
+            @poly-tab-selected=${this.#activeTab}
+          >
+          </poly-tab>`;
+        })}
+      </div>
+      ${this.tabs.map(
+        tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
+          <slot name="${tab.id}"></slot>
+        </div>`
+      )}
     `;
   }
 }
