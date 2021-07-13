@@ -1,5 +1,5 @@
 {
-    "requiredNodeMajorVersion": 15,
+    "requiredNodeMajorVersion": 16,
     "packages": [
         "build",
         "dev-utils/dummy-server",
