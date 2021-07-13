@@ -4,6 +4,8 @@ import globalTheme from "../globalTheme";
 const tabRequiredAttributes = ["id", "label", "active"];
 
 export class TabsLine extends LitElement {
+  #tabs = [];
+
   static get styles() {
     return [
       globalTheme,
@@ -51,7 +53,7 @@ export class TabsLine extends LitElement {
     };
   }
 
-  __validateTabsFields(tabs) {
+  #validateTabsFields(tabs) {
     return tabs.reduce((acc, tab) => {
       const keys = Object.keys(tab);
 
@@ -66,7 +68,7 @@ export class TabsLine extends LitElement {
     }, true);
   }
 
-  __validateOnlyOneActive(tabs) {
+  #validateOnlyOneActive(tabs) {
     const actives =
       tabs.length > 0
         ? tabs.reduce((acc, tab) => (tab.active ? ++acc : acc), 0)
@@ -76,23 +78,23 @@ export class TabsLine extends LitElement {
   }
 
   set tabs(value) {
-    if (!this.__validateTabsFields(value)) {
+    if (!this.#validateTabsFields(value)) {
       throw new Error("Wrong tabs schema");
     }
 
-    if (!this.__validateOnlyOneActive(value)) {
+    if (!this.#validateOnlyOneActive(value)) {
       throw new Error("One tab must be active but only one");
     }
 
-    this._tabs = value.map(tab => ({ ...tab }));
+    this.#tabs = value.map(tab => ({ ...tab }));
     this.requestUpdate("tabs", value);
   }
 
   get tabs() {
-    return this._tabs;
+    return this.#tabs;
   }
 
-  __activeTab(event) {
+  #activeTab(event) {
     this.tabs = this.tabs.map(tab => {
       const copyTab = { ...tab, active: false };
       if (tab.id === event.detail.value) {
@@ -103,13 +105,7 @@ export class TabsLine extends LitElement {
     });
   }
 
-  constructor() {
-    super();
-
-    this._tabs = [];
-  }
-
-  __renderTabsLine() {
+  #renderTabsLine() {
     return this.tabs
       ? this.tabs.map(
           tab =>
@@ -118,13 +114,13 @@ export class TabsLine extends LitElement {
               .label=${tab.label}
               .value=${tab.id}
               .active=${tab.active}
-              @poly-tab-selected=${this.__activeTab}
+              @poly-tab-selected=${this.#activeTab}
             ></poly-tab>`
         )
       : html``;
   }
 
-  __renderTabsContent() {
+  #renderTabsContent() {
     return this.tabs
       ? this.tabs.map(
           tab => html`<div class="tab-content ${tab.active ? "active" : ""}">
@@ -136,8 +132,8 @@ export class TabsLine extends LitElement {
 
   render() {
     return html`
-      <div class="tabs-line">${this.__renderTabsLine()}</div>
-      ${this.__renderTabsContent()}
+      <div class="tabs-line">${this.#renderTabsLine()}</div>
+      ${this.#renderTabsContent()}
     `;
   }
 }

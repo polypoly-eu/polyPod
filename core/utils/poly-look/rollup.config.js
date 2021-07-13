@@ -1,6 +1,9 @@
 import filesize from "rollup-plugin-filesize";
 import { terser } from "rollup-plugin-terser";
 import resolve from "rollup-plugin-node-resolve";
+import { babel } from "@rollup/plugin-babel";
+
+const { presets, plugins } = require("./babel.config");
 
 export default {
   input: "src/poly-look.js",
@@ -15,6 +18,11 @@ export default {
   },
   plugins: [
     resolve(),
+    babel({
+      "babelHelpers": "bundled",
+      "presets": [...presets],
+      "plugins": [...plugins]
+    }),
     terser({
       module: true,
       warnings: true,
