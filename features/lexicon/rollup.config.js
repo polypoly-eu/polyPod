@@ -73,7 +73,7 @@ export default {
                     dest: "public",
                 },
                 {
-                    src: ["../../lib/fonts/jost_medium.ttf"],
+                    src: ["../../assets/fonts/jost_medium.ttf"],
                     dest: "public/fonts",
                 }
             ],

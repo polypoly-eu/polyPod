@@ -41,8 +41,8 @@ export default {
                 },
                 {
                     src: [
-                        "../../lib/fonts/jost_medium.ttf",
-                        "../../lib/fonts/jost_regular.ttf"
+                        "../../assets/fonts/jost_medium.ttf",
+                        "../../assets/fonts/jost_regular.ttf"
                     ],
                     dest: "src/static/fonts",
                 },
