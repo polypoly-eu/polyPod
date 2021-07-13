@@ -171,7 +171,7 @@ task copyThirdPartyLicenses(type: Copy) {
 }
 
 task copyFontAssets(type: Copy) {
-    from "../../lib/fonts"
+    from "../../assets/fonts"
     into "src/main/res/font"
 }
 
