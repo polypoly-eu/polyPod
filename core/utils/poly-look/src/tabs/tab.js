@@ -8,11 +8,11 @@ export class Tab extends LitElement {
       css`
         .tab {
           width: 100%;
-          color: var(--${polyPrefix}-color-medium);
-          font-size: var(--${polyPrefix}-button-font-size);
+          color: var(--poly-color-medium);
+          font-size: var(--poly-button-font-size);
           background-color: transparent;
           border: solid transparent 2px;
-          border-bottom: solid 1px var(--${polyPrefix}-color-dark);
+          border-bottom: solid 1px var(--poly-color-dark);
           text-align: center;
           cursor: pointer;
         }
@@ -22,8 +22,8 @@ export class Tab extends LitElement {
         }
 
         .tab.active {
-          color: var(--${polyPrefix}-color-dark);
-          border-bottom: solid 4px var(--${polyPrefix}-color-dark);
+          color: var(--poly-color-dark);
+          border-bottom: solid 4px var(--poly-color-dark);
         }
       `,
     ];
