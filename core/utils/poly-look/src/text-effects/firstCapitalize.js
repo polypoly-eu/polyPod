@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import { globalTheme, POLYPREFIX } from "../globalTheme";
+import { globalTheme, polyPrefix } from "../globalTheme";
 import { classMap } from "lit-html/directives/class-map";
 export class FirstCapitalize extends LitElement {
   static get styles() {
@@ -27,7 +27,7 @@ export class FirstCapitalize extends LitElement {
   constructor() {
     super();
     this.classes = {};
-    this.classes[`${POLYPREFIX}-${this.constructor.name}`] = true;
+    this.classes[`${polyPrefix}-${this.constructor.name}`] = true;
   }
 
   render() {

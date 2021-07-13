@@ -1,6 +1,6 @@
 import { css } from "lit-element";
 
-export const POLYPREFIX = "poly";
+export const polyPrefix = "poly";
 
 export const globalTheme = css`
   :host {
