@@ -18,6 +18,9 @@ function Template({ theme = "dark" }) {
           body {
             background-color: #0f1938;
           }
+          * {
+            color: #f7fafc;
+          }
         </style>`
       : ""}
     <poly-tabs .theme=${theme}>
@@ -113,3 +116,7 @@ function Template({ theme = "dark" }) {
 }
 
 export const Regular = Template.bind({});
+export const TabsLight = Template.bind({});
+TabsLight.args = {
+  theme: "light",
+};
