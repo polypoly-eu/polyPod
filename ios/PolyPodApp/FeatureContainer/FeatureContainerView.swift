@@ -21,7 +21,7 @@ struct FeatureContainerView: UIViewRepresentable {
             featureWebView.isOpaque = false
         }
 
-        PodApi.shared.polyNav.webView = featureWebView
+        PodApi.shared.polyNav.delegate  = featureWebView
 
         return featureWebView
     }
@@ -217,7 +217,9 @@ extension FeatureWebView: WKScriptMessageHandler {
 
         print("WebView: " + text)
     }
-    
+}
+
+extension FeatureWebView: PolyNavDelegate {
     func doHandleSetTitle(title: String) {
         featureTitle.wrappedValue = title
     }
