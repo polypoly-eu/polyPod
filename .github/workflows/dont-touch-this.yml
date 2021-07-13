@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
     - 'LICENSE'
+    - 'package.json'
     - 'SECURITY.md'
     - '.eslintrc.cjs'
 
