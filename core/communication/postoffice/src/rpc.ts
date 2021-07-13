@@ -14,7 +14,7 @@
  * This is a “loopback” connection where both client and server reside in the same context.
  *
  * In a real-world setting, client and server are located in different processes. This library integrates seamlessly
- * with [port-authority](https://github.com/polypoly-eu/port-authority/). Endpoint clients and servers can be
+ * with [port-authority](https://github.com/polypoly-eu/polyPod/tree/main/core/communication/port-authority). Endpoint clients and servers can be
  * constructed from any port:
  *
  * ```
