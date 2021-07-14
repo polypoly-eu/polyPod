@@ -7,7 +7,7 @@ RPC library for TypeScript
 This library allows transparent function calls on objects that may reside in a different process.
 This works by capturing these calls, translating them into a particular protocol, sending it over a wire, and finally executing it on the other side.
 The response is sent back similarly.
-Encoding and error handling is assumed to be dealt with by the transport layer, for example [port-authority](https://github.com/polypoly-eu/port-authority/).
+Encoding and error handling is assumed to be dealt with by the transport layer, for example [port-authority](../port-authority/).
 
 We leverage TypeScript's type system to enable type-safe remote calls.
 Client and server share a _specification_ of an API that can be called remotely.
