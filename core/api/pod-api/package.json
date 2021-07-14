@@ -28,7 +28,7 @@
     "@types/rdf-js": "^4.0.0"
   },
   "devDependencies": {
-    "@polypoly-eu/dummy-server": "file:../../../dev-utils/dummy-server",
+    "@polypoly-eu/dummy-server": "file:../../utils/dummy-server",
     "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.1.0",

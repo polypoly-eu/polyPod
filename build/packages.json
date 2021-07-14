@@ -2,7 +2,7 @@
     "requiredNodeMajorVersion": 16,
     "packages": [
         "build",
-        "dev-utils/dummy-server",
+        "core/utils/dummy-server",
         "core/api/fetch-spec",
         "core/api/manifest-parser",
         "core/api/pod-api",
