@@ -170,11 +170,6 @@ task copyThirdPartyLicenses(type: Copy) {
     into "build/generated-assets/3rd-party-licenses"
 }
 
-task copyFontAssets(type: Copy) {
-    from "../../assets/fonts"
-    into "src/main/res/font"
-}
-
 task packageTestFeature(type: Zip) {
     archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
@@ -208,11 +203,7 @@ tasks.whenTaskAdded { task ->
         task.dependsOn copyRemotePod
         task.dependsOn copyBundledFeatures
         task.dependsOn copyThirdPartyLicenses
-        task.dependsOn copyFontAssets
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice
-
-    if (task.name == "processDebugResources")
-        task.dependsOn copyFontAssets
 }
