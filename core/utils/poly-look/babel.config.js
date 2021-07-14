@@ -1,10 +1,16 @@
-const presets = [
-  "@babel/preset-env",
-];
+module.exports = function (api) {
+  if (api) {
+    api.cache(true);
+  }
 
-const plugins = [
-  "@babel/plugin-proposal-private-property-in-object",
-  "@babel/plugin-proposal-private-methods"
-]
+  const presets = [ "@babel/preset-env" ];
+  const plugins = [
+    "@babel/plugin-proposal-private-property-in-object",
+    "@babel/plugin-proposal-private-methods"
+  ];
 
-module.exports = { presets, plugins };
+  return {
+    presets,
+    plugins
+  };
+}
