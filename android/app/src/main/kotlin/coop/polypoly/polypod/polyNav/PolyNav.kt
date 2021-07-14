@@ -36,4 +36,6 @@ open class PolyNav(
 
         return true
     }
+
+    suspend fun pickFile() = observer?.onPickFile?.invoke()
 }

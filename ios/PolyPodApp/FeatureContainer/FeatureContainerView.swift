@@ -21,7 +21,7 @@ struct FeatureContainerView: UIViewRepresentable {
             featureWebView.isOpaque = false
         }
 
-        PodApi.shared.polyNav.webView = featureWebView
+        PodApi.shared.polyNav.delegate  = featureWebView
 
         return featureWebView
     }
@@ -46,6 +46,7 @@ class FeatureWebView: WKWebView {
     private let activeActions: Binding<[String]>
     private let openUrlHandler: (String) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
+    private let filePicker = FilePicker()
 
     init(
         feature: Feature,
@@ -216,7 +217,9 @@ extension FeatureWebView: WKScriptMessageHandler {
 
         print("WebView: " + text)
     }
-    
+}
+
+extension FeatureWebView: PolyNavDelegate {
     func doHandleSetTitle(title: String) {
         featureTitle.wrappedValue = title
     }
@@ -227,6 +230,10 @@ extension FeatureWebView: WKScriptMessageHandler {
     
     func doHandleOpenUrl(url: String) {
         openUrlHandler(url)
+    }
+    
+    func doHandlePickFile(completion: @escaping (Data?) -> Void) {
+        filePicker.pick(completion: completion)
     }
 }
 
