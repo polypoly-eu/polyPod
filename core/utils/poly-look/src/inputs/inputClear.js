@@ -1,5 +1,11 @@
 import { html, LitElement, css } from "lit-element";
 import globalTheme from "../globalTheme";
+import { polyInput } from "../constants";
+import { reduceListToString } from "../helpers";
+
+const listOfValidTypes = Object.values(polyInput.types);
+
+const validateInputTypes = type => listOfValidTypes.includes(type);
 
 export class InputClear extends LitElement {
   static get styles() {
