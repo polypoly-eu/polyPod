@@ -4,7 +4,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: "module",
-    requireConfigFile: true,
+    requireConfigFile: false,
   },
   globals: {
     window: true,

@@ -3,7 +3,7 @@ import { terser } from "rollup-plugin-terser";
 import resolve from "rollup-plugin-node-resolve";
 import { babel } from "@rollup/plugin-babel";
 
-const { presets, plugins } = require("./babel.config")();
+const { presets, plugins } = require("./babel.config");
 
 export default {
   input: "src/poly-look.js",
