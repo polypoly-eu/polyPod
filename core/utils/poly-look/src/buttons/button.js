@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import globalTheme from "../globalTheme";
+import { globalTheme } from "../globalTheme";
 import { polyButton } from "../constants";
 import { reduceListToString } from "../helpers";
 
@@ -11,6 +11,9 @@ const validateButtonTypes = type => listOfValidTypes.includes(type);
 const validateButtonSizes = size => listOfValidSizes.includes(size);
 
 export class Button extends LitElement {
+  #type = polyButton.types.DARK;
+  #size = polyButton.sizes.MEDIUM;
+
   static get styles() {
     return [
       globalTheme,
@@ -102,12 +105,10 @@ export class Button extends LitElement {
 
   constructor() {
     super();
-    this.__type = polyButton.types.DARK;
-    this.__size = polyButton.sizes.MEDIUM;
     this.disabled = false;
   }
 
-  __onClick() {
+  #onClick() {
     const buttonEvent = new CustomEvent("poly-button-clicked", {
       bubbles: true,
       composed: true,
@@ -125,12 +126,12 @@ export class Button extends LitElement {
       );
     }
 
-    this.__type = value;
+    this.#type = value;
     this.requestUpdate("type", value);
   }
 
   get type() {
-    return this.__type;
+    return this.#type;
   }
 
   set size(value) {
@@ -142,12 +143,12 @@ export class Button extends LitElement {
       );
     }
 
-    this.__size = value;
+    this.#size = value;
     this.requestUpdate("size", value);
   }
 
   get size() {
-    return this.__size;
+    return this.#size;
   }
 
   render() {
@@ -155,7 +156,7 @@ export class Button extends LitElement {
       type="button"
       class="btn ${this.size} ${this.type} ${this.disabled ? "disabled" : ""}"
       ?disabled=${!!this.disabled}
-      @click=${this.__onClick}
+      @click=${this.#onClick}
     >
       <slot></slot>
     </button>`;

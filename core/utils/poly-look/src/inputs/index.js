@@ -1,3 +1,4 @@
 import { InputClear } from "./inputClear";
+import { polyPrefix } from "../globalTheme";
 
-window.customElements.define("poly-input-clear", InputClear);
+window.customElements.define(`${polyPrefix}-input-clear`, InputClear);
