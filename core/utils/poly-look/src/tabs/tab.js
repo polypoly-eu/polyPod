@@ -43,7 +43,7 @@ export class Tab extends LitElement {
     this.active = false;
   }
 
-  __onClick() {
+  #onClick() {
     const tabEvent = new CustomEvent(`${polyPrefix}-tab-selected`, {
       detail: { value: this.value },
       bubbles: true,
@@ -56,7 +56,7 @@ export class Tab extends LitElement {
   render() {
     return html`<button
       class="tab ${this.active ? "active" : ""}"
-      @click=${this.__onClick}
+      @click=${this.#onClick}
     >
       ${this.label}
     </button> `;
