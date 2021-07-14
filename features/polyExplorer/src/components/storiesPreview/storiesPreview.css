@@ -1,6 +1,6 @@
 .stories-preview {
     padding: 0 16px 212px 16px;
-}
+} 
 
 .stories-preview .preview-scrollable {
     min-height: 350px;
@@ -35,18 +35,20 @@
 .stories-preview .preview-btn-area::before {
     content: "";
     width: 100%;
+    max-width: 338px;
     height: 48px;;
     background: linear-gradient(#f7fafc00 0%, #f7fafc);
     position:absolute;
-    bottom: 160px;
+    bottom: 138px;
     right: 0;
     left: 0;
+    z-index: 0;
+    margin: auto;
 
 }
 
 .stories-preview .preview-btn-area {
     display: block;
-    background-color: var(--color-background-light);
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 20px 16px 32px 16px;
@@ -56,7 +58,11 @@
     left: 0;
 }
 
-.stories-preview .preview-btn-area .preview-btn {
+.stories-preview .preview-btn-container {
+    background-color: var(--color-background-light);
+}
+
+.stories-preview .preview-btn-area .preview-btn-container .preview-btn {
     width: 100%;
     height: 48px;
     background-color: var(--color-background-dark);

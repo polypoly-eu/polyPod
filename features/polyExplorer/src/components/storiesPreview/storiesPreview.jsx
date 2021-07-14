@@ -23,10 +23,12 @@ const StoriesPreview = ({ storiesMetadata }) => {
                 ))}
             </div>
             <div className="preview-btn-area">
-                <p>{i18n.t("storiesPreviewScreen:more.stories")}</p>
-                <button className="preview-btn">
-                    {i18n.t("storiesPreviewScreen:button.notifications")}
-                </button>
+                <div className="preview-btn-container">
+                    <p>{i18n.t("storiesPreviewScreen:more.stories")}</p>
+                    <button className="preview-btn">
+                        {i18n.t("storiesPreviewScreen:button.notifications")}
+                    </button>
+                </div>
             </div>
         </div>
     );
