@@ -22,6 +22,8 @@ import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.CompletableDeferred
 
+private const val PICK_FILE_REQUEST_CODE = 1
+
 private fun luminance(color: Int): Double =
     Color.red(color) * 0.2126 +
         Color.green(color) * 0.7152 +
@@ -84,7 +86,6 @@ open class FeatureFragment : Fragment() {
     private lateinit var foregroundResources: ForegroundResources
     private lateinit var featureContainer: FeatureContainer
 
-    private val pickFileRequestCode = 1
     private var pickFileResult: CompletableDeferred<ByteArray?>? = null
 
     override fun onCreateView(
@@ -209,7 +210,7 @@ open class FeatureFragment : Fragment() {
                 )
             }
         }
-        startActivityForResult(intent, pickFileRequestCode)
+        startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
         return pickFileResult?.await()
     }
 
@@ -219,7 +220,7 @@ open class FeatureFragment : Fragment() {
         data: Intent?
     ) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == pickFileRequestCode)
+        if (requestCode == PICK_FILE_REQUEST_CODE)
             handlePickFileResult(resultCode, data)
     }
 
