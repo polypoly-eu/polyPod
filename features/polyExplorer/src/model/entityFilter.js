@@ -201,11 +201,8 @@ export class EntityFilter {
     }
 
     displayString(field, value, i18n, globalData) {
-        console.log(
-            this._matchers
-                .get(field)
-                .constructor.displayString(value, i18n, globalData) || value
-        );
+        // Here must be logic to add icons to the String -> See designs of product/ company filters
+        // Maybe change to displayHtml?
         return (
             this._matchers
                 .get(field)
