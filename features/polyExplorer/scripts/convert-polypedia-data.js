@@ -76,11 +76,9 @@ function parseCompanyEntity(entityData) {
     return {
         ppid: ppid,
         name: legalName,
-        featured: !!(
-            entityData.data_recipients &&
-            entityData.derived_purpose_info &&
-            entityData.derived_category_info
-        ),
+        featured: legalEntityData.editorial_content?.tags?.includes("Featured"),
+        clusters:
+            legalEntityData.editorial_content?.expanded_tags?.entityCluster,
         jurisdiction: null,
         location: {
             city: legalEntityData.basic_info.registered_address.value?.city,
@@ -108,6 +106,7 @@ function parseCompanyEntity(entityData) {
         description: parseDescription(legalEntityData),
         industryCategory:
             legalEntityData?.entity_details?.industry_category?.values?.[0],
+        productsOwned: entityData.entity_relations?.products_owned,
     };
 }
 
@@ -117,11 +116,8 @@ function parseProductEntity(entityData) {
     return {
         ppid: product.name,
         name: product.name,
-        featured: !!(
-            entityData.data_recipients &&
-            entityData.derived_purpose_info &&
-            entityData.derived_category_info
-        ),
+        featured: product.editorial_content?.tags?.includes("Featured"),
+        clusters: product.editorial_content?.expanded_tags?.productCluster,
         productOwner: product.product_owners,
         activeUsers: product.active_users,
         annualRevenues: product.revenue?.values,

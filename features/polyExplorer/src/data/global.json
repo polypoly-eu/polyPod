@@ -1249,6 +1249,11 @@
             "Name_EN": "Kosovo",
             "Name_DE": "Kosovo",
             "dataRegion": "Sonstige"
+        },
+        "ZZ": {
+            "Name_EN": "Placeholder",
+            "Name_DE": "Placeholder",
+            "dataRegion": ""
         }
     },
     "industries": {

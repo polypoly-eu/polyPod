@@ -2,7 +2,10 @@
     {
         "ppid": "Signal",
         "name": "Signal",
-        "featured": true,
+        "featured": false,
+        "clusters": [
+            "messenger"
+        ],
         "productOwner": [
             "Signal Messenger LLC (US)"
         ],
@@ -95,7 +98,6 @@
         "dataRecipients": [
             "Giphy, Inc. (US)",
             "Signal Messenger LLC (US)",
-            "Signal Technology Foundation (US)",
             "Spotify AB (SE)",
             "YouTube, LLC (US)",
             "dpv:ThirdParty (ZZ)"
@@ -103,61 +105,61 @@
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:CustomerCare",
-                "count": 8
+                "count": 2
             },
             {
                 "dpv:Purpose": "dpv:RegistrationAuthentication",
-                "count": 8
+                "count": 2
             },
             {
                 "dpv:Purpose": "dpv:ServiceOptimization",
-                "count": 8
+                "count": 2
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 48
+                "count": 14
             },
             {
                 "dpv:Purpose": "unspecified",
-                "count": 8
+                "count": 2
             }
         ],
         "dataTypesShared": [
             {
                 "dpv:Category": "dpv:Communication",
-                "count": 12
+                "count": 3
             },
             {
                 "dpv:Category": "dpv:Contact",
-                "count": 16
-            },
-            {
-                "dpv:Category": "dpv:Identifying",
-                "count": 8
-            },
-            {
-                "dpv:Category": "dpv:Picture",
-                "count": 8
-            },
-            {
-                "dpv:Category": "dpv:ServiceConsumptionBehavior",
-                "count": 8
-            },
-            {
-                "dpv:Category": "dpv:SocialMediaCommunication",
-                "count": 8
-            },
-            {
-                "dpv:Category": "dpv:SocialNetwork",
                 "count": 4
             },
             {
+                "dpv:Category": "dpv:Identifying",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:ServiceConsumptionBehavior",
+                "count": 4
+            },
+            {
+                "dpv:Category": "dpv:SocialMediaCommunication",
+                "count": 2
+            },
+            {
+                "dpv:Category": "dpv:SocialNetwork",
+                "count": 1
+            },
+            {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 8
+                "count": 2
             },
             {
                 "dpv:Category": "dpv:Username",
-                "count": 8
+                "count": 2
             }
         ],
         "description": {
@@ -166,56 +168,6 @@
         },
         "recipientInfo": {
             "Signal Messenger LLC (US)": {
-                "categories": {
-                    "dpv:Identifying": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:RegistrationAuthentication"
-                        ]
-                    },
-                    "dpv:TelephoneNumber": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:RegistrationAuthentication"
-                        ]
-                    },
-                    "dpv:Username": {
-                        "purposes": [
-                            "dpv:ServiceProvision"
-                        ]
-                    },
-                    "dpv:Picture": {
-                        "purposes": [
-                            "dpv:ServiceProvision"
-                        ]
-                    },
-                    "dpv:SocialMediaCommunication": {
-                        "purposes": [
-                            "dpv:ServiceProvision"
-                        ]
-                    },
-                    "dpv:Contact": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:CustomerCare"
-                        ]
-                    },
-                    "dpv:SocialNetwork": {
-                        "purposes": [
-                            "dpv:ServiceProvision"
-                        ]
-                    },
-                    "dpv:Communication": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:CustomerCare"
-                        ]
-                    }
-                }
-            },
-            "Signal Technology Foundation (US)": {
                 "categories": {
                     "dpv:Identifying": {
                         "purposes": [
@@ -385,7 +337,10 @@
     {
         "ppid": "Instagram",
         "name": "Instagram",
-        "featured": true,
+        "featured": false,
+        "clusters": [
+            "messenger"
+        ],
         "productOwner": [
             "Instagram LLC (US)",
             "Facebook Ireland Limited (IE)",
@@ -1640,14 +1595,17 @@
         ],
         "jurisdictionsShared": {
             "children": [
-                "EU-GDPR"
+                "Sonstige"
             ]
         }
     },
     {
         "ppid": "TikTok",
         "name": "TikTok",
-        "featured": true,
+        "featured": false,
+        "clusters": [
+            "messenger"
+        ],
         "productOwner": [
             "TikTok Technology limited (IE)",
             "TikTok Information Technologies UK Limited (GB)"
@@ -1746,30 +1704,27 @@
             "Google (US)",
             "Instagram LLC (US)",
             "LinkedIn Corporation (US)",
-            "LinkedIn Ireland Unlimited Company (IE)",
-            "LinkedIn Singapore Pte. Ltd. (SG)",
             "TIKTOK INC. (US)",
             "TikTok Technology Limited (IE)",
-            "Twitter (DE)",
-            "Twitter, Inc. (US)",
+            "Twitter (US)",
             "dpv:ThirdParty (ZZ)"
         ],
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
-                "count": 532
+                "count": 494
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
-                "count": 528
+                "count": 490
             },
             {
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
-                "count": 532
+                "count": 494
             },
             {
                 "dpv:Purpose": "dpv:CreateProductRecommendations",
-                "count": 532
+                "count": 494
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
@@ -1777,23 +1732,23 @@
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
-                "count": 528
+                "count": 490
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
-                "count": 532
+                "count": 494
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForConsumer",
-                "count": 530
+                "count": 492
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForController",
-                "count": 530
+                "count": 492
             },
             {
                 "dpv:Purpose": "dpv:OptimiseUserInterface",
-                "count": 528
+                "count": 490
             },
             {
                 "dpv:Purpose": "dpv:Payment",
@@ -1801,35 +1756,35 @@
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedAdvertising",
-                "count": 532
+                "count": 494
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
-                "count": 528
+                "count": 490
             },
             {
                 "dpv:Purpose": "dpv:SellInsightsFromData",
-                "count": 528
+                "count": 490
             },
             {
                 "dpv:Purpose": "dpv:SellTargettedAdvertisements",
-                "count": 532
+                "count": 494
             },
             {
                 "dpv:Purpose": "dpv:ServiceOptimization",
-                "count": 532
+                "count": 494
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
-                "count": 532
+                "count": 494
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 538
+                "count": 500
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
-                "count": 532
+                "count": 494
             }
         ],
         "dataTypesShared": [
@@ -1847,11 +1802,11 @@
             },
             {
                 "dpv:Category": "dpv:BrowsingBehavior",
-                "count": 340
+                "count": 272
             },
             {
                 "dpv:Category": "dpv:BrowsingReferral",
-                "count": 170
+                "count": 136
             },
             {
                 "dpv:Category": "dpv:Communication",
@@ -1863,7 +1818,7 @@
             },
             {
                 "dpv:Category": "dpv:DerivedPersonalData",
-                "count": 952
+                "count": 884
             },
             {
                 "dpv:Category": "dpv:DeviceApplications",
@@ -1871,11 +1826,11 @@
             },
             {
                 "dpv:Category": "dpv:DeviceBased",
-                "count": 360
+                "count": 292
             },
             {
                 "dpv:Category": "dpv:DeviceOperatingSystem",
-                "count": 340
+                "count": 272
             },
             {
                 "dpv:Category": "dpv:DeviceSoftware",
@@ -1899,7 +1854,7 @@
             },
             {
                 "dpv:Category": "dpv:Identifying",
-                "count": 238
+                "count": 170
             },
             {
                 "dpv:Category": "dpv:Interest",
@@ -1915,7 +1870,7 @@
             },
             {
                 "dpv:Category": "dpv:LinkClicked",
-                "count": 306
+                "count": 238
             },
             {
                 "dpv:Category": "dpv:Location",
@@ -1947,7 +1902,7 @@
             },
             {
                 "dpv:Category": "dpv:ServiceConsumptionBehavior",
-                "count": 442
+                "count": 374
             },
             {
                 "dpv:Category": "dpv:Social",
@@ -1959,7 +1914,7 @@
             },
             {
                 "dpv:Category": "dpv:SocialNetwork",
-                "count": 476
+                "count": 442
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
@@ -1967,7 +1922,7 @@
             },
             {
                 "dpv:Category": "dpv:Tracking",
-                "count": 364
+                "count": 296
             },
             {
                 "dpv:Category": "dpv:Transactional",
@@ -1975,7 +1930,7 @@
             },
             {
                 "dpv:Category": "dpv:Username",
-                "count": 476
+                "count": 442
             },
             {
                 "dpv:Category": "dpv:VoiceCommunicationRecording",
@@ -5091,418 +5046,7 @@
                     }
                 }
             },
-            "LinkedIn Ireland Unlimited Company (IE)": {
-                "categories": {
-                    "dpv:DeviceBased": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:Tracking": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:DeviceOperatingSystem": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:Identifying": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:LinkClicked": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:BrowsingBehavior": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:DerivedPersonalData": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:ServiceConsumptionBehavior": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    }
-                }
-            },
-            "LinkedIn Singapore Pte. Ltd. (SG)": {
-                "categories": {
-                    "dpv:DeviceBased": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:Tracking": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:DeviceOperatingSystem": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:Identifying": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:LinkClicked": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:BrowsingBehavior": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:DerivedPersonalData": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:ServiceConsumptionBehavior": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    }
-                }
-            },
-            "Twitter (DE)": {
-                "categories": {
-                    "dpv:BrowsingReferral": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:SocialNetwork": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    },
-                    "dpv:Username": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CommercialResearch",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController",
-                            "dpv:OptimiseUserInterface",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:ResearchAndDevelopment",
-                            "dpv:SellInsightsFromData",
-                            "dpv:UsageAnalytics",
-                            "dpv:LegalCompliance"
-                        ]
-                    }
-                }
-            },
-            "Twitter, Inc. (US)": {
+            "Twitter (US)": {
                 "categories": {
                     "dpv:BrowsingReferral": {
                         "purposes": [
@@ -5739,7 +5283,10 @@
     {
         "ppid": "Threema",
         "name": "Threema",
-        "featured": true,
+        "featured": false,
+        "clusters": [
+            "messenger"
+        ],
         "productOwner": [
             "Threema GmbH (CH)"
         ],
@@ -5876,7 +5423,10 @@
     {
         "ppid": "WhatsApp",
         "name": "WhatsApp",
-        "featured": true,
+        "featured": false,
+        "clusters": [
+            "messenger"
+        ],
         "productOwner": [
             "Facebook (US)",
             "Facebook Ireland Limited (IE)"
@@ -6207,7 +5757,7 @@
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 100
+                "count": 101
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
@@ -6237,7 +5787,7 @@
             },
             {
                 "dpv:Category": "dpv:Communication",
-                "count": 40
+                "count": 41
             },
             {
                 "dpv:Category": "dpv:Contact",
@@ -6730,6 +6280,11 @@
                             "dpv:IdentityVerification",
                             "dpv:DirectMarketing"
                         ]
+                    },
+                    "dpv:Communication": {
+                        "purposes": [
+                            "dpv:ServiceProvision"
+                        ]
                     }
                 }
             },
@@ -6832,7 +6387,10 @@
     {
         "ppid": "Snapchat",
         "name": "Snapchat",
-        "featured": true,
+        "featured": false,
+        "clusters": [
+            "messenger"
+        ],
         "productOwner": [
             "Snap Inc. (US)"
         ],
@@ -6916,24 +6474,22 @@
         "dataRecipients": [
             "Bitstrips Inc. (CA)",
             "Facebook (US)",
+            "Google (US)",
             "LinkedIn Corporation (US)",
-            "LinkedIn Ireland Unlimited Company (IE)",
-            "LinkedIn Singapore Pte. Ltd. (SG)",
             "MetaCDN Pty. Ltd. (AU)",
             "Microsoft Corporation (US)",
             "Optimizely Inc. (US)",
             "Outbrain Inc. (US)",
             "Pardot LLC (US)",
+            "PayPal, Inc. (US)",
             "Pinterest Inc. (US)",
             "Q4 Inc. (CA)",
-            "Q4 Inc. (US)",
             "Rokt Ltd (UK)",
             "Rokt Pte Ltd (SG)",
             "Salesforce.com Inc. (US)",
             "Snap Inc. (US)",
             "TWELVENYC (UK) LIMITED (GB)",
             "Taboola Inc. (US)",
-            "Twitter, Inc. (US)",
             "Zenly (FR)",
             "dpv:Authority (ZZ)",
             "dpv:ThirdParty (ZZ)"
@@ -6989,7 +6545,7 @@
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedAdvertising",
-                "count": 23
+                "count": 19
             },
             {
                 "dpv:Purpose": "dpv:ResearchAndDevelopment",
@@ -6997,11 +6553,11 @@
             },
             {
                 "dpv:Purpose": "dpv:Security",
-                "count": 20
+                "count": 18
             },
             {
                 "dpv:Purpose": "dpv:SellTargettedAdvertisements",
-                "count": 46
+                "count": 42
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
@@ -7009,11 +6565,11 @@
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 16
+                "count": 17
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
-                "count": 24
+                "count": 22
             },
             {
                 "dpv:Purpose": "unspecified",
@@ -7027,7 +6583,7 @@
             },
             {
                 "dpv:Category": "dpv:AuthenticationHistory",
-                "count": 4
+                "count": 2
             },
             {
                 "dpv:Category": "dpv:BrowserFingerprint",
@@ -7035,11 +6591,11 @@
             },
             {
                 "dpv:Category": "dpv:BrowsingBehavior",
-                "count": 5
+                "count": 7
             },
             {
                 "dpv:Category": "dpv:BrowsingReferral",
-                "count": 3
+                "count": 2
             },
             {
                 "dpv:Category": "dpv:Communication",
@@ -7059,7 +6615,7 @@
             },
             {
                 "dpv:Category": "dpv:DeviceBased",
-                "count": 49
+                "count": 43
             },
             {
                 "dpv:Category": "dpv:DeviceOperatingSystem",
@@ -7067,7 +6623,7 @@
             },
             {
                 "dpv:Category": "dpv:DeviceSoftware",
-                "count": 1
+                "count": 3
             },
             {
                 "dpv:Category": "dpv:EmailAddress",
@@ -7127,7 +6683,7 @@
             },
             {
                 "dpv:Category": "dpv:UID",
-                "count": 53
+                "count": 46
             },
             {
                 "dpv:Category": "dpv:Username",
@@ -7135,7 +6691,7 @@
             },
             {
                 "dpv:Category": "unspecified",
-                "count": 2
+                "count": 3
             }
         ],
         "description": {
@@ -7447,6 +7003,25 @@
                         "purposes": [
                             "dpv:SellTargettedAdvertisements",
                             "dpv:PersonalisedAdvertising",
+                            "dpv:UsageAnalytics",
+                            "dpv:Advertising"
+                        ]
+                    },
+                    "dpv:DeviceBased": {
+                        "purposes": [
+                            "dpv:SellTargettedAdvertisements",
+                            "dpv:PersonalisedAdvertising",
+                            "dpv:UsageAnalytics"
+                        ]
+                    }
+                }
+            },
+            "Google (US)": {
+                "categories": {
+                    "dpv:UID": {
+                        "purposes": [
+                            "dpv:SellTargettedAdvertisements",
+                            "dpv:PersonalisedAdvertising",
                             "dpv:UsageAnalytics"
                         ]
                     },
@@ -7455,6 +7030,18 @@
                             "dpv:SellTargettedAdvertisements",
                             "dpv:PersonalisedAdvertising",
                             "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:BrowsingBehavior": {
+                        "purposes": [
+                            "dpv:UsageAnalytics",
+                            "dpv:IncreaseServiceRobustness"
+                        ]
+                    },
+                    "dpv:DeviceSoftware": {
+                        "purposes": [
+                            "dpv:UsageAnalytics",
+                            "dpv:IncreaseServiceRobustness"
                         ]
                     }
                 }
@@ -7487,42 +7074,6 @@
                             "dpv:Advertising",
                             "dpv:Security",
                             "dpv:IncreaseServiceRobustness"
-                        ]
-                    }
-                }
-            },
-            "LinkedIn Ireland Unlimited Company (IE)": {
-                "categories": {
-                    "dpv:UID": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    },
-                    "dpv:DeviceBased": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    }
-                }
-            },
-            "LinkedIn Singapore Pte. Ltd. (SG)": {
-                "categories": {
-                    "dpv:UID": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    },
-                    "dpv:DeviceBased": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
                         ]
                     }
                 }
@@ -7591,46 +7142,7 @@
                     }
                 }
             },
-            "Twitter, Inc. (US)": {
-                "categories": {
-                    "dpv:UID": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    },
-                    "dpv:DeviceBased": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    },
-                    "dpv:BrowsingReferral": {
-                        "purposes": [
-                            "dpv:Advertising"
-                        ]
-                    }
-                }
-            },
             "Q4 Inc. (CA)": {
-                "categories": {
-                    "dpv:AuthenticationHistory": {
-                        "purposes": [
-                            "dpv:IncreaseServiceRobustness",
-                            "dpv:Security"
-                        ]
-                    },
-                    "dpv:UID": {
-                        "purposes": [
-                            "dpv:IncreaseServiceRobustness",
-                            "dpv:Security"
-                        ]
-                    }
-                }
-            },
-            "Q4 Inc. (US)": {
                 "categories": {
                     "dpv:AuthenticationHistory": {
                         "purposes": [
@@ -7766,15 +7278,18 @@
         "jurisdictionsShared": {
             "children": [
                 "Five-Eyes",
-                "EU-GDPR",
-                "Sonstige"
+                "Sonstige",
+                "EU-GDPR"
             ]
         }
     },
     {
         "ppid": "Facebook Messenger",
         "name": "Facebook Messenger",
-        "featured": true,
+        "featured": false,
+        "clusters": [
+            "messenger"
+        ],
         "productOwner": [
             "Facebook (US)",
             "Facebook Ireland Limited (IE)"
@@ -8676,7 +8191,10 @@
     {
         "ppid": "iMessage",
         "name": "iMessage",
-        "featured": true,
+        "featured": false,
+        "clusters": [
+            "messenger"
+        ],
         "productOwner": [
             "Apple (US)"
         ],
@@ -8853,7 +8371,10 @@
     {
         "ppid": "Telegram",
         "name": "Telegram",
-        "featured": true,
+        "featured": false,
+        "clusters": [
+            "messenger"
+        ],
         "productOwner": [
             "Telegram Messenger Inc (VG)",
             "Telegram FZ-LLC (AE)"
@@ -9000,7 +8521,7 @@
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 50
+                "count": 62
             }
         ],
         "dataTypesShared": [
@@ -9030,7 +8551,7 @@
             },
             {
                 "dpv:Category": "dpv:Picture",
-                "count": 4
+                "count": 8
             },
             {
                 "dpv:Category": "dpv:ServiceConsumptionBehavior",
@@ -9050,7 +8571,7 @@
             },
             {
                 "dpv:Category": "dpv:Username",
-                "count": 2
+                "count": 10
             }
         ],
         "description": {
@@ -9060,6 +8581,16 @@
         "recipientInfo": {
             "Telegram (AE)": {
                 "categories": {
+                    "dpv:Username": {
+                        "purposes": [
+                            "dpv:ServiceProvision"
+                        ]
+                    },
+                    "dpv:Picture": {
+                        "purposes": [
+                            "dpv:ServiceProvision"
+                        ]
+                    },
                     "dpv:EmailAddress": {
                         "purposes": [
                             "dpv:ServiceProvision"
@@ -9086,11 +8617,6 @@
                         ]
                     },
                     "dpv:Contact": {
-                        "purposes": [
-                            "dpv:ServiceProvision"
-                        ]
-                    },
-                    "dpv:Picture": {
                         "purposes": [
                             "dpv:ServiceProvision"
                         ]
@@ -9099,6 +8625,16 @@
             },
             "Telegram Messenger Inc. (VG)": {
                 "categories": {
+                    "dpv:Username": {
+                        "purposes": [
+                            "dpv:ServiceProvision"
+                        ]
+                    },
+                    "dpv:Picture": {
+                        "purposes": [
+                            "dpv:ServiceProvision"
+                        ]
+                    },
                     "dpv:EmailAddress": {
                         "purposes": [
                             "dpv:ServiceProvision"
@@ -9125,11 +8661,6 @@
                         ]
                     },
                     "dpv:Contact": {
-                        "purposes": [
-                            "dpv:ServiceProvision"
-                        ]
-                    },
-                    "dpv:Picture": {
                         "purposes": [
                             "dpv:ServiceProvision"
                         ]
