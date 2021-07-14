@@ -15,10 +15,7 @@ glob(`${localFolder}/*.json`, (error, files) => {
     files.forEach((f) => {
         let theseKeys = [];
         let thisData = JSON.parse(readFileSync(f));
-        for (let key in thisData) {
-            allKeys.add(key);
-            theseKeys.push(key);
-        }
+        extractKeys( thisData, theseKeys, allKeys );
         localKeys.push(theseKeys);
     });
     let commonKeys = localKeys[0].filter((key) => localKeys[1].includes(key));
@@ -28,3 +25,10 @@ glob(`${localFolder}/*.json`, (error, files) => {
     console.log("Common keys →\n", commonKeys.sort());
     console.log("All keys →\n", Array.from(allKeys).sort());
 });
+
+function extractKeys( data, theseKeys, allKeys ) {
+    for (let key in data) {
+        allKeys.add(key);
+        theseKeys.push(key);
+    }
+}
