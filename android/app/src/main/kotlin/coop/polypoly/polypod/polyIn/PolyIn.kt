@@ -28,8 +28,8 @@ const val RDF_FORMAT = "N-TRIPLE"
 const val NS = "polypoly"
 
 open class PolyIn(
-    private val databaseFolder: File? = null,
     private val context: Context,
+    private val databaseFolder: File? = null,
     private val databaseName: String = "data_enc.nt",
 ) {
     private val databaseNameOld = "data.nt"

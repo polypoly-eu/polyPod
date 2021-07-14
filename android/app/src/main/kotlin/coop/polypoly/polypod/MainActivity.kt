@@ -16,7 +16,9 @@ import coop.polypoly.polypod.updatenotification.UpdateNotification
 
 class MainActivity : AppCompatActivity() {
 
-    var initialized = false
+    private var initialized = false
+    val desiredLockSceenType = BiometricManager.Authenticators.BIOMETRIC_WEAK or
+        BiometricManager.Authenticators.DEVICE_CREDENTIAL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,14 +63,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun authorize(successfulAuth: (() -> Unit)) {
-        enforceScreenLock(successfulAuth) {
+        ensureLockScreen(successfulAuth) {
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                 .setTitle(this.getString(R.string.auth_title))
                 .setSubtitle(this.getString(R.string.auth_subtitle))
-                .setAllowedAuthenticators(
-                    BiometricManager.Authenticators.BIOMETRIC_WEAK or
-                        BiometricManager.Authenticators.DEVICE_CREDENTIAL
-                )
+                .setAllowedAuthenticators(desiredLockSceenType)
                 .build()
 
             val executor = ContextCompat.getMainExecutor(this)
@@ -78,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun enforceScreenLock(
+    fun ensureLockScreen(
         noScreenLock: (() -> Unit),
         biometricAuth: (() -> Unit)
     ) {
@@ -87,8 +86,7 @@ class MainActivity : AppCompatActivity() {
         }
         val biometricManager = BiometricManager.from(this)
         if (biometricManager.canAuthenticate(
-                BiometricManager.Authenticators.BIOMETRIC_WEAK or
-                    BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                desiredLockSceenType
             ) != BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED
         ) {
             return biometricAuth()

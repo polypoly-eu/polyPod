@@ -289,33 +289,4 @@ class PolyInTest {
         movedDatabase.delete()
         originalDatabase.delete()
     }
-/*
-    @Test
-    fun migration_works() {
-        val migratedData = PolyIn(
-            databaseFolder = File("/data/local/tmp/unencrypted"),
-            context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
-        ).let { runBlocking {
-            it.select(Matcher(null, null, null))
-        } }
-
-        Truth.assertThat(migratedData!![0].predicate)
-            .isEqualTo("https://polypoly.coop/#firstrun")
-    }
-
-    @Test
-    fun encryption_works() {
-        val migratedData = PolyIn(
-            databaseFolder = File("/data/local/tmp/encrypted"),
-            context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
-        ).let { runBlocking {
-            it.select(Matcher(null, null, null))
-        } }
-
-        Truth.assertThat(migratedData!![0].predicate)
-            .isEqualTo("https://polypoly.coop/#firstrun")
-    }
-*/
 }
