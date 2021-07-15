@@ -4,7 +4,7 @@
 
 import glob from "glob";
 import { readFileSync, writeFileSync } from "fs";
-const dataFileName = "data/commonKeys.json";
+import { dataFileName } from "../src/globals";
 
 // Files are included in a local .data folder
 const localFolder = ".data";
