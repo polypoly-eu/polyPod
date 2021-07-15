@@ -3,7 +3,7 @@
 // Explore the structure of existing JSON files representing the structure of the filesystem in (possibly edited) FB zip files
 
 import glob from "glob";
-import { readFileSync, write, writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 const dataFileName = "data/commonKeys.json";
 
 // Files are included in a local .data folder
@@ -24,7 +24,7 @@ glob(`${localFolder}/*.json`, (error, files) => {
     for (let i = 2; i < localKeys.length; i++) {
         commonKeys = commonKeys.filter((key) => localKeys[i].includes(key));
     }
-    writeFileSync( dataFileName, JSON.stringify(commonKeys.sort()));
+    writeFileSync(dataFileName, JSON.stringify(commonKeys.sort()));
     console.log("All keys →\n", Array.from(allKeys).sort());
 });
 
