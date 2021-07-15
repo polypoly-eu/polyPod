@@ -84,6 +84,8 @@ open class PolyIn(
     private fun getDatabase(file: File): EncryptedFile {
         val mainKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            // We only strongly recommend users to set up a lock screen, but do
+            // not require it
             .setUserAuthenticationRequired(false)
             .build()
 
