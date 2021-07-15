@@ -23,11 +23,11 @@ struct FeatureManifest: Decodable {
     }
     
     struct Override: Decodable {
-        let name: String?
-        let author: String?
-        let description: String?
-        let thumbnail: String?
-        let primaryColor: String?
-        let links: [String: String]?
+        var name: String? = nil
+        var author: String? = nil
+        var description: String? = nil
+        var thumbnail: String? = nil
+        var primaryColor: String? = nil
+        var links: [String: String]? = nil
     }
 }
