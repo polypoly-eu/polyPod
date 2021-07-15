@@ -34,7 +34,7 @@ function extractKeys(prefix, data, theseKeys, allKeys) {
             allKeys.add(`${prefix}${key}`);
             extractKeys(`${prefix}${key}/`, data[key], theseKeys, allKeys);
         } else {
-            data['leaves'].forEach((f) => {
+            data["leaves"].forEach((f) => {
                 theseKeys.push(`${prefix}${f}`);
             });
         }
