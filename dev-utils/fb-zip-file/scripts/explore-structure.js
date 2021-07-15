@@ -29,8 +29,8 @@ glob(`${localFolder}/*.json`, (error, files) => {
 
 function extractKeys(prefix, data, theseKeys, allKeys) {
     for (let key in data) {
-        theseKeys.push(`${prefix}${key}`);
         if (key != "leaves") {
+            theseKeys.push(`${prefix}${key}`);
             allKeys.add(`${prefix}${key}`);
             extractKeys(`${prefix}${key}/`, data[key], theseKeys, allKeys);
         }
