@@ -5,13 +5,9 @@ import { polyButton } from "../constants";
 const listOfValidTypes = Object.values(polyButton.types);
 const listOfValidSizes = Object.values(polyButton.sizes);
 
-function validateButtonTypes(type) {
-  return listOfValidTypes.includes(type);
-}
+const validateButtonTypes = type => listOfValidTypes.includes(type);
 
-function validateButtonSizes(size) {
-  return listOfValidSizes.includes(size);
-}
+const validateButtonSizes = size => listOfValidSizes.includes(size);
 
 function listToString(acc, value, index, list) {
   return index === list.length - 1
@@ -113,12 +109,12 @@ export class Button extends LitElement {
 
   constructor() {
     super();
-    this.__type = polyButton.types.DARK;
-    this.__size = polyButton.sizes.MEDIUM;
+    this._type = polyButton.types.DARK;
+    this._size = polyButton.sizes.MEDIUM;
     this.disabled = false;
   }
 
-  __onClick() {
+  _onClick() {
     const buttonEvent = new CustomEvent("poly-button-clicked", {
       bubbles: true,
       composed: true,
@@ -136,12 +132,12 @@ export class Button extends LitElement {
       );
     }
 
-    this.__type = value;
+    this._type = value;
     this.requestUpdate("type", value);
   }
 
   get type() {
-    return this.__type;
+    return this._type;
   }
 
   set size(value) {
@@ -153,12 +149,12 @@ export class Button extends LitElement {
       );
     }
 
-    this.__size = value;
+    this._size = value;
     this.requestUpdate("size", value);
   }
 
   get size() {
-    return this.__size;
+    return this._size;
   }
 
   render() {
@@ -166,7 +162,7 @@ export class Button extends LitElement {
       type="button"
       class="btn ${this.size} ${this.type} ${this.disabled ? "disabled" : ""}"
       ?disabled=${!!this.disabled}
-      @click=${this.__onClick}
+      @click=${this._onClick}
     >
       <slot></slot>
     </button>`;
