@@ -9,13 +9,13 @@ import { readFileSync } from "fs";
 const localFolder = ".data";
 
 glob(`${localFolder}/*.json`, (error, files) => {
-    if (error) throw Error("Some problem reading files in data folder");
+    if (error) throw Error(`Some problem reading files in data folder: ${error}`);
     let allKeys = new Set();
     let localKeys = [];
     files.forEach((f) => {
         let theseKeys = [];
         let thisData = JSON.parse(readFileSync(f));
-        extractKeys( thisData, theseKeys, allKeys );
+        extractKeys( "", thisData, theseKeys, allKeys );
         localKeys.push(theseKeys);
     });
     let commonKeys = localKeys[0].filter((key) => localKeys[1].includes(key));
@@ -26,9 +26,9 @@ glob(`${localFolder}/*.json`, (error, files) => {
     console.log("All keys →\n", Array.from(allKeys).sort());
 });
 
-function extractKeys( data, theseKeys, allKeys ) {
+function extractKeys( prefix, data, theseKeys, allKeys ) {
     for (let key in data) {
-        allKeys.add(key);
-        theseKeys.push(key);
+        allKeys.add(`${prefix}${key}`);
+        theseKeys.push(`${prefix}${key}`);
     }
 }
