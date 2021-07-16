@@ -46,7 +46,20 @@ class FeatureTests: XCTestCase {
         XCTAssertEqual(Color.clear, feature.primaryColor)
     }
     
-    private func createFeatureFixture(languageCode: String? = nil) -> Feature {
+    func testThumbnailUrlMissing() {
+        let feature = createFeatureFixture(withThumbnail: false)
+        XCTAssertNil(feature.thumbnail)
+    }
+    
+    func testThumbnailUrlValid() {
+        let feature = createFeatureFixture(withThumbnail: true)
+        XCTAssertEqual("thumbnail.png", feature.thumbnail?.lastPathComponent)
+    }
+    
+    private func createFeatureFixture(
+        languageCode: String? = nil,
+        withThumbnail: Bool = false
+    ) -> Feature {
         let fileManager = FileManager.default
         let featurePath = fileManager
             .temporaryDirectory
@@ -59,13 +72,20 @@ class FeatureTests: XCTestCase {
             withIntermediateDirectories: false
         )
         
+        let thumbnailFileName = "thumbnail.png"
+        if withThumbnail {
+            let thumbnailPath =
+                featurePath.appendingPathComponent(thumbnailFileName)
+            try! "".write(to: thumbnailPath, atomically: true, encoding: .utf8)
+        }
+        
         let manifestPath = featurePath.appendingPathComponent("manifest.json")
         let manifest = """
         {
             "name": "name",
             "author": "author",
             "description": "description",
-            "thumbnail": "",
+            "thumbnail": "\(withThumbnail ? thumbnailFileName : "")",
             "primaryColor": "#0000ff",
             "links": { "example": "https://example.com" },
             "translations": {

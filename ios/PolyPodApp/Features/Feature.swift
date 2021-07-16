@@ -59,6 +59,9 @@ private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
     guard let thumbnailPath = thumbnailPath else {
         return nil
     }
+    if thumbnailPath.isEmpty {
+        return nil
+    }
     let fullPath = featurePath.appendingPathComponent(thumbnailPath)
     if !FileManager.default.fileExists(atPath: fullPath.path) {
         print("Error: Feature thumbnail at \(thumbnailPath) does not exist")
