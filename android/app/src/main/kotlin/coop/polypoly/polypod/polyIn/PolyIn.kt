@@ -28,9 +28,9 @@ const val RDF_FORMAT = "N-TRIPLE"
 const val NS = "polypoly"
 
 open class PolyIn(
-    private val databaseName: String = "data_enc.nt",
-    private val databaseFolder: File? = null,
     private val context: Context,
+    private val databaseFolder: File? = null,
+    private val databaseName: String = "data_enc.nt",
 ) {
     private val databaseNameOld = "data.nt"
 
@@ -84,7 +84,9 @@ open class PolyIn(
     private fun getDatabase(file: File): EncryptedFile {
         val mainKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .setUserAuthenticationRequired(true)
+            // We only strongly recommend users to set up a lock screen, but do
+            // not require it
+            .setUserAuthenticationRequired(false)
             .build()
 
         return EncryptedFile.Builder(

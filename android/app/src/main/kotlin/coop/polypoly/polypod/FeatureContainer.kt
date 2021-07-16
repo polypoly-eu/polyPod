@@ -43,7 +43,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     private val registry = LifecycleRegistry(this)
     val api = PodApi(
         PolyOut(),
-        PolyIn("data.nt", context.filesDir, context),
+        PolyIn(context, context.filesDir),
         PolyNav(
             webView = webView
         )
