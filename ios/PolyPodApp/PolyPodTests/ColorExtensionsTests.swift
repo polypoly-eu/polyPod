@@ -26,12 +26,12 @@ class ColorExtensionsTest: XCTestCase {
         XCTAssertEqual(red, Color(fromHex: "#FF0000FF"))
         XCTAssertEqual(transparentRed, Color(fromHex: "#FF000000"))
     }
-
+    
     func testFromHexWithInvalidString() {
         XCTAssertEqual(Color.clear, Color(fromHex: ""))
         XCTAssertEqual(Color.clear, Color(fromHex: "#x"))
     }
-
+    
     func testFromHexOptimisticParsing() {
         // This isn't necessarily desired behaviour, but at the moment
         // the parser is implemented in such a way that it manages to deal
