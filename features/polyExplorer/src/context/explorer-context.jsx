@@ -50,10 +50,31 @@ function loadCompanies(JSONData, globalData) {
 //Will be clearer when we know the content structure
 const loadStoriesMetadata = () => {
     return {
-        exampleStory: {
-            title: "example",
-            previewText:
-                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+        messanger: {
+            title: "story.messanger.title",
+            previewText: "story.messanger.summarize",
+            image: {
+                src: "images/stories/messanger/card-image.svg",
+                alt: "story.messager.alt",
+            },
+            route: "/story/example-story",
+        },
+        digitalGigants: {
+            title: "story.digitalGigants.title",
+            previewText: "story.digitalGigants.summarize",
+            image: {
+                src: "images/stories/digital-gigants/card-image.svg",
+                alt: "story.digitalGigants.alt",
+            },
+            route: "/story/example-story",
+        },
+        trackers: {
+            title: "story.trackers.title",
+            previewText: "story.trackers.summarize",
+            image: {
+                src: "images/stories/trackers/card-image.svg",
+                alt: "story.trackers.alt",
+            },
             route: "/story/example-story",
         },
     };

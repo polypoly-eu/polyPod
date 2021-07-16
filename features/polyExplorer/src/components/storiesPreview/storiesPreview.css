@@ -1,0 +1,28 @@
+.story-preview {
+  background-color: var(--color-background-light, #f7fafc);
+  padding: 0px 16px;
+}
+
+.story-container {
+  width: 100%;
+  margin: 20px 0px;
+  border-bottom: 1px solid var(--color-medium, #A9B6C6);
+}
+
+.more-comming {
+  color: var(--color-dark, #0f1938);
+  margin: 18px 0px 20px 0px;
+}
+
+.btn-dark {
+  width: 100%;
+  background-color: var(--color-background-dark, #0f1938);
+  color: var(--color-light, #f7fafc);
+  height: 48px;
+  font-family: 'Jost';
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 120%;
+  border-radius: 4px;
+  margin-bottom: 33px;
+}
