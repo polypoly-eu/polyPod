@@ -29,7 +29,6 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^5.0.0",
     "eslint-plugin-svelte3": "^3.2.0",
-    "mocha": "^9.0.2",
     "prettier": "^2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
     "prismic-dom": "^2.2.5",
@@ -43,6 +42,7 @@
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
+    "jest": "^27.0.6",
     "js-levenshtein": "^1.1.6",
     "sirv-cli": "^1.0.0"
   }
