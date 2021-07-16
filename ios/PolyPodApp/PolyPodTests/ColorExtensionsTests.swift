@@ -40,4 +40,16 @@ class ColorExtensionsTest: XCTestCase {
         XCTAssertEqual(red, Color(fromHex: "x#ff0000"))
         XCTAssertEqual(red, Color(fromHex: "00ff00#ff0000"))
     }
+    
+    func testIsLight() {
+        XCTAssertTrue(Color.white.isLight)
+        XCTAssertFalse(Color.black.isLight)
+        XCTAssertFalse(Color.red.isLight)
+        XCTAssertTrue(Color(red: 0.9, green: 0.9, blue: 0.9).isLight)
+        XCTAssertTrue(Color(red: 0.4, green: 0.4, blue: 0.4).isLight)
+        XCTAssertFalse(Color(red: 0.3, green: 0.3, blue: 0.3).isLight)
+        // At the moment, the colour's opacity is ignored. This might not be
+        // the desired behaviour in the long run.
+        XCTAssertFalse(Color.black.opacity(0).isLight)
+    }
 }
