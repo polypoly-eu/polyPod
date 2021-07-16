@@ -56,6 +56,21 @@ function loadProducts() {
     );
 }
 
+//Stubbed function for now
+//This needs to load the actual stories present
+//Also I don't like the navigation too much -> should include the path and content
+//Will be clearer when we know the content structure
+const loadStoriesMetadata = () => {
+    return {
+        exampleStory: {
+            title: "example",
+            previewText:
+                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+            route: "/story/example-story",
+        },
+    };
+};
+
 export const ExplorerProvider = ({ children }) => {
     //router hooks
     const history = useHistory();
@@ -94,6 +109,7 @@ export const ExplorerProvider = ({ children }) => {
         (ppid) => entities[ppid]
     );
     const currentPath = location.pathname;
+    const storiesMetadata = loadStoriesMetadata();
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
     function changeNavigationState(changedState) {
@@ -145,10 +161,13 @@ export const ExplorerProvider = ({ children }) => {
             currentPath == "/entity-details"
         )
             pod.polyNav.setTitle(selectedEntityObject.name);
+        else if (currentPath.startsWith("/story/"))
+            pod.polyNav.setTitle("data-story name goes here");
         else
             pod.polyNav.setTitle(
                 i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
             );
+
         pod.polyNav.actions = navigationState.firstRun
             ? {
                   info: () => {},
@@ -244,6 +263,7 @@ export const ExplorerProvider = ({ children }) => {
                 activeFilters,
                 handleRemoveFilter,
                 handleFilterApply,
+                storiesMetadata,
             }}
         >
             {children}

@@ -116,3 +116,7 @@ button::after {
     width: 100%;
     margin-left: -4px;
 }
+
+::-webkit-scrollbar-track {
+    margin-top: 64px;
+}
