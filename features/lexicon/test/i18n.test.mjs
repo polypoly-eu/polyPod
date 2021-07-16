@@ -1,4 +1,4 @@
-import i18n from "../src/i18n";
+import i18n from "../src/i18n.js";
 
 describe("Test i18n object", () => {
     it("has been created correctly", () => {
