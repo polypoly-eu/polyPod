@@ -115,7 +115,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             PolyNavObserver(
                 null,
                 null,
-                { url -> openUrl(url) }
+                { url -> openUrl(url) },
+                null
             )
         )
 

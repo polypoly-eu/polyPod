@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import globalTheme from "../globalTheme";
+import { polyPrefix, globalTheme } from "../globalTheme";
 
 export class Tab extends LitElement {
   static get styles() {
@@ -43,8 +43,8 @@ export class Tab extends LitElement {
     this.active = false;
   }
 
-  __onClick() {
-    const tabEvent = new CustomEvent("poly-tab-selected", {
+  _onClick() {
+    const tabEvent = new CustomEvent(`${polyPrefix}-tab-selected`, {
       detail: { value: this.value },
       bubbles: true,
       composed: true,
@@ -56,7 +56,7 @@ export class Tab extends LitElement {
   render() {
     return html`<button
       class="tab ${this.active ? "active" : ""}"
-      @click=${this.__onClick}
+      @click=${this._onClick}
     >
       ${this.label}
     </button> `;
