@@ -82,25 +82,15 @@ export class I18n {
             );
         }
         const [namespace, keyInNamespace] = key.split(/:(.+)/);
-        if (
-            !keyInNamespace ||
-            !(namespace in this._translations) ||
-            !(keyInNamespace in this._translations[namespace])
-        ) {
+        let translation = this._translations?.[namespace]?.[keyInNamespace];
+        if ( !translation ) {
             throw new TranslationKeyError(
                 `${namespace} does not exist or does not have a ${keyInNamespace} key for language ${this.language}`
             );
         }
-        let translation = this._translations[namespace][keyInNamespace];
+
         for (let [name, value] of Object.entries(options))
             translation = translation.replace(`{{${name}}}`, value);
         return translation;
-    }
-
-    /**
-     * @return the namespaces in the current translation dictionary
-     */
-    get namespaces() {
-        return Object.keys(this._translations);
     }
 }
