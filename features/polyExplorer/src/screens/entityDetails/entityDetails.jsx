@@ -328,7 +328,9 @@ const EntityDetails = () => {
             <div className="details">
                 <div className="tab-button-container">
                     {tabContent[entity.type]
-                        .find((content) => !!content.featured == !!entity.featured)
+                        .find(
+                            (content) => !!content.featured == !!entity.featured
+                        )
                         .tabs.map((tab, index) => (
                             <button
                                 key={index}
@@ -355,7 +357,8 @@ const EntityDetails = () => {
                     >
                         {tabContent[entity.type]
                             .find(
-                                (content) => !!content.featured == !!entity.featured
+                                (content) =>
+                                    !!content.featured == !!entity.featured
                             )
                             .tabs.map((tab, index) => (
                                 <SwiperSlide key={index}>
