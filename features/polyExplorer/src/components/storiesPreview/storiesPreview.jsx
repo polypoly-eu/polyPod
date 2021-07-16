@@ -11,8 +11,12 @@ const StoriesPreview = ({ storiesMetadata }) => {
                     <DiscoverCard story={story} />
                 </div>
             ))}
-            <div className="more-comming">{i18n.t("clusterStories:story.moreStories")}</div>
-            <button type="button" className="btn-dark">{i18n.t("clusterStories:story.notificationsOn")}</button>
+            <div className="more-comming">
+                {i18n.t("clusterStories:story.moreStories")}
+            </div>
+            <button type="button" className="btn-dark">
+                {i18n.t("clusterStories:story.notificationsOn")}
+            </button>
         </div>
     );
 };
