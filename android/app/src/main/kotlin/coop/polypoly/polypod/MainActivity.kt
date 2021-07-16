@@ -17,8 +17,9 @@ import coop.polypoly.polypod.updatenotification.UpdateNotification
 class MainActivity : AppCompatActivity() {
 
     private var initialized = false
-    val desiredLockSceenType = BiometricManager.Authenticators.BIOMETRIC_WEAK or
-        BiometricManager.Authenticators.DEVICE_CREDENTIAL
+    val desiredLockScreenType =
+        BiometricManager.Authenticators.BIOMETRIC_WEAK or
+            BiometricManager.Authenticators.DEVICE_CREDENTIAL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                 .setTitle(this.getString(R.string.auth_title))
                 .setSubtitle(this.getString(R.string.auth_subtitle))
-                .setAllowedAuthenticators(desiredLockSceenType)
+                .setAllowedAuthenticators(desiredLockScreenType)
                 .build()
 
             val executor = ContextCompat.getMainExecutor(this)
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         }
         val biometricManager = BiometricManager.from(this)
         if (biometricManager.canAuthenticate(
-                desiredLockSceenType
+                desiredLockScreenType
             ) != BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED
         ) {
             return biometricAuth()
