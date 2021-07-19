@@ -13,4 +13,11 @@ describe("Test Lexicon object", () => {
         expect(lexicon).toBeDefined();
         expect(lexicon).toHaveProperty("_data");
     });
+
+    it("checks descriptive methods", () => {
+        const groups = lexicon.groups;
+        const aGroup = groups[0];
+        expect(lexicon.group(aGroup)).toBeDefined();
+        expect(lexicon.groupEntries(aGroup)).toBeDefined();
+    })
 });
