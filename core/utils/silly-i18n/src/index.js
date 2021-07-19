@@ -52,11 +52,14 @@ export class I18n {
      * Class constructor
      *
      * @param language - two-letter language code, which should be a key in the translation hash.
-     *     If this ley does not exist, `fallbackLanguage` will be used.
+     *     If this key does not exist, `fallbackLanguage` will be used.
      * @param translations - translations hash. This is going to have the format `namespace ⇒ key ⇒ string`
      *     within every language. Only the language that's detected will be used.
      * @param fallbackLanguage - "default" language to use in case the one in `language`
      *     is not a part of the `translations` hash.
+     *     It's an optional parameter, that defaults to the first key
+     *     in the `translations` hash, so you might want to use arrange it
+     *     bearing this in mind.
      * @throws LanguageError - if the `fallbackLanguage` key is not included in the translations hash
      */
     constructor(
