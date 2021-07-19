@@ -25,8 +25,4 @@ const TRANSLATION_DATA = {
     },
 };
 
-export default new I18n(
-    localLanguage,
-    TRANSLATION_DATA,
-    FALLBACK_LANGUAGE
-);
+export default new I18n(localLanguage, TRANSLATION_DATA, FALLBACK_LANGUAGE);
