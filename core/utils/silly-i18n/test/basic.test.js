@@ -6,12 +6,14 @@ import {
 } from "../src/index.js";
 
 const LANGUAGE = "foo";
+const FALLBACK_LANGUAGE = "en";
 let i18n;
 
 beforeAll(() => {
-    i18n = new I18n(LANGUAGE, {
-        [LANGUAGE]: { quux: { bar: "baz" }, options: { opt: "{{opt}}" } },
-    });
+    i18n = new I18n(
+        LANGUAGE, {
+            [LANGUAGE]: { quux: { bar: "baz" }, options: { opt: "{{opt}}" } },
+        });
 });
 
 describe("Test language determination", () => {
@@ -60,6 +62,6 @@ describe("Test constructor with faulty translation hash", () => {
     expect(() => {
         new I18n("esperanto", {
             [LANGUAGE]: { quux: { bar: "baz" } },
-        });
+        },"NoLang");
     }).toThrow(LanguageError);
 });

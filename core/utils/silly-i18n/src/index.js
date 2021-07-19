@@ -51,20 +51,22 @@ export class I18n {
     /**
      * Class constructor
      *
-     * @param language - two-letter language code, which should be a key in the translation hash
+     * @param language - two-letter language code, which should be a key in the translation hash.
+     *     If this ley does not exist, `fallbackLanguage` will be used.
      * @param translations - translations hash. This is going to have the format `namespace ⇒ key ⇒ string`
      *     within every language. Only the language that's detected will be used.
-     * @throws LanguageError - if the language key is not included in the translations hash
+     * @param fallbackLanguage - "default" language to use in case the one in `language`
+     *     is not a part of the `translations` hash.
+     * @throws LanguageError - if the `fallbackLanguage` key is not included in the translations hash
      */
-    constructor(language, translations) {
-        if (language in translations) {
-            this.language = language;
-            this._translations = translations[this.language];
-        } else {
+    constructor(language, translations, fallbackLanguage = Object.keys(translations)[0] ) {
+        if ( !fallbackLanguage in translations) {
             throw new LanguageError(
-                language + " is not a key in the translations hash provided"
+                fallbackLanguage + " is not a key in the translations hash provided"
             );
         }
+        this.language = language in translations ? language : fallbackLanguage;
+        this._translations = translations[this.language];
         Object.freeze(this);
     }
 
