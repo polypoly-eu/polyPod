@@ -62,6 +62,10 @@ class AsyncPolyNav implements PolyNav {
     async setTitle(title: string): Promise<void> {
         return (await this.promise).setTitle(title);
     }
+
+    async pickFile(): Promise<Uint8Array | null> {
+        return (await this.promise).pickFile();
+    }
 }
 
 class AsyncPolyLifecycle implements PolyLifecycle {

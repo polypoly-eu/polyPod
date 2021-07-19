@@ -73,9 +73,9 @@ private struct Slide: View {
             
             ParagraphView(
                 text: subHeadline,
-                fontName: "polyDisplay-Semi1.0",
+                fontName: "Jost-Medium",
                 fontSize: 34,
-                kerning: -0.24,
+                kerning: -0.38,
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground
             ).padding(.bottom, 24)

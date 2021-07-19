@@ -1,13 +1,23 @@
 import { html, LitElement } from "lit-element";
+import { polyPrefix } from "../globalTheme";
 
 const validateInnerHTML = innerDom =>
-  /^<poly-tab-content>.*<\/poly-tab-content>$/gms.test(innerDom);
+  RegExp(
+    `^<${polyPrefix}-tab-content>.*</${polyPrefix}-tab-content>$`,
+    "gms"
+  ).test(innerDom);
 
 const addTabId = (innerDom, tabId) =>
-  innerDom.replace(/<poly-tab-content/, `<poly-tab-content tabId="${tabId}"`);
+  innerDom.replace(
+    RegExp(`<${polyPrefix}-tab-content`),
+    `<poly-tab-content tabId="${tabId}"`
+  );
 
 const addAction = innerDom =>
-  innerDom.replace(/<poly-tab-content/, "<poly-tab-content active");
+  innerDom.replace(
+    RegExp(`<${polyPrefix}-tab-content`),
+    "<poly-tab-content active"
+  );
 
 export class Tab extends LitElement {
   static get properties() {
@@ -28,7 +38,7 @@ export class Tab extends LitElement {
     let innerConent = this.innerHTML.trim();
     if (!validateInnerHTML(innerConent)) {
       throw new Error(
-        "Only <poly-tab-content> only tags are allowed and without any attribute"
+        `Only <${polyPrefix}-tab-content> only tags are allowed and without any attribute`
       );
     }
 
@@ -37,7 +47,7 @@ export class Tab extends LitElement {
       innerConent = addAction(innerConent);
     }
 
-    const connectedEvent = new CustomEvent("poly-tab-connected", {
+    const connectedEvent = new CustomEvent(`${polyPrefix}-tab-connected`, {
       detail: { innerContent: innerConent },
       bubbles: true,
       composed: true,

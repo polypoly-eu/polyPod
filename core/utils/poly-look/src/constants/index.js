@@ -1,3 +1,2 @@
-import { themes } from "./forTabs";
-
-export const polyTabs = { themes };
+export * as polyTabs from "./forTabs";
+export * as polyButton from "./forButton";

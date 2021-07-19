@@ -1,6 +1,8 @@
 import { css } from "lit-element";
 
-const globalTheme = css`
+export const polyPrefix = "poly";
+
+export const globalTheme = css`
   :host {
     /* Primary colors */
     --poly-color-dark: var(--color-dark, #0f1938);
@@ -42,7 +44,7 @@ const globalTheme = css`
     );
     --poly-font-family-poly-display-name: var(
       --font-family-poly-display-name,
-      "polyDisplay"
+      "Jost Medium"
     );
 
     /* Font sizes */
@@ -56,5 +58,3 @@ const globalTheme = css`
     --poly-font-weight-important: var(--font-weight-important, 800);
   }
 `;
-
-export default globalTheme;
