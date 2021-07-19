@@ -1,30 +1,17 @@
 import { LitElement, html, css } from "lit";
-import * as zip from "@zip.js/zip.js";
 
-const hexdump = (data) =>
-    [...data].map((i) => i.toString(16).padStart(2, "0")).join(" ");
+import "./fi-analysis";
+import "./fi-file-management";
 
 class FacebookImport extends LitElement {
     static get styles() {
-        return css`
-            table {
-                margin-top: 10px;
-            }
-
-            th {
-                padding-right: 10px;
-            }
-
-            .code {
-                font-family: monospace;
-            }
-        `;
+        return css``;
     }
 
     static get properties() {
         return {
             _pod: { state: true },
-            _data: { state: true },
+            _files: { state: true },
         };
     }
 
@@ -35,59 +22,41 @@ class FacebookImport extends LitElement {
     constructor() {
         super();
         this._initPod().then((pod) => (this._pod = pod));
+        this._files = {};
     }
 
     _renderSplash() {
         return html`<p>Loading ...</p>`;
     }
 
-    async _loadFile() {
-        const file = await this._pod.polyNav.pickFile();
-        if (!file) {
-            this._data = null;
-            return;
-        }
-
-        const reader = new zip.ZipReader(new zip.Uint8ArrayReader(file));
-        const entries = await reader.getEntries();
-        this._data = {
-            fileSize: file.length,
-            hex: hexdump(file),
-            entries,
-        };
+    _handleAddFile(event) {
+        const file = event.detail;
+        const id = file.time.getTime();
+        this._files[id] = { ...file, id };
+        this._files = { ...this._files };
     }
 
-    _renderImporter() {
-        return html` <button @click="${this._loadFile}">Load file</button> `;
-    }
-
-    _renderAnalysis() {
-        if (!this._data) return "";
-        return html`
-            <table>
-                <tr>
-                    <th>Size</th>
-                    <td>${this._data.fileSize}</td>
-                </tr>
-                <tr>
-                    <th>Data</th>
-                    <td class="code">${this._data.hex}</td>
-                </tr>
-                <tr>
-                    <th>List</th>
-                    <td>
-                        ${this._data.entries
-                            .map((entry) => entry.filename)
-                            .join("\n")}
-                    </td>
-                </tr>
-            </table>
-        `;
+    _handleRemoveFile(event) {
+        const id = event.detail.id;
+        delete this._files[id];
+        this._files = { ...this._files };
     }
 
     render() {
         if (!this._pod) return this._renderSplash();
-        return html` ${this._renderImporter()} ${this._renderAnalysis()} `;
+        const files = Object.values(this._files);
+        return html`
+            <h1>File management</h1>
+            <fi-file-management
+                .pod="${this._pod}"
+                .files="${files}"
+                @add-file="${this._handleAddFile}"
+                @remove-file="${this._handleRemoveFile}"
+            ></fi-file-management>
+            <hr />
+            <h1>Analysis</h1>
+            <fi-analysis .files="${files}"></fi-analysis>
+        `;
     }
 }
 
