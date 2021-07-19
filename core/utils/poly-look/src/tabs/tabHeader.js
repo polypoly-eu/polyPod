@@ -1,5 +1,5 @@
 import { html, LitElement, css } from "lit-element";
-import globalTheme from "../globalTheme";
+import { globalTheme, polyPrefix } from "../globalTheme";
 import { polyTabs } from "../constants";
 import { listToStringReducer } from "../helpers";
 
@@ -95,7 +95,7 @@ export class TabHeader extends LitElement {
   }
 
   __onTabClick() {
-    const tabClickEvent = new CustomEvent("poly-tab-click", {
+    const tabClickEvent = new CustomEvent(`${polyPrefix}-tab-click`, {
       detail: { tabId: this.tabId },
       composed: true,
       bubbles: true,

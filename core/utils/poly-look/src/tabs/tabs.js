@@ -1,6 +1,6 @@
 import { html, LitElement, css } from "lit-element";
 import { unsafeHTML } from "lit-html/directives/unsafe-html";
-import globalTheme from "../globalTheme";
+import { globalTheme, polyPrefix } from "../globalTheme";
 import { polyTabs } from "../constants";
 import { listToStringReducer } from "../helpers";
 
@@ -63,12 +63,18 @@ export class Tabs extends LitElement {
       this.tabHeaders = this.tabHeaders.concat(tab);
     }
 
-    document.addEventListener("poly-tab-connected", __getTabContentBinded);
+    document.addEventListener(
+      `${polyPrefix}-tab-connected`,
+      __getTabContentBinded
+    );
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener("poly-tab-connected", __getTabContentBinded);
+    document.removeEventListener(
+      `${polyPrefix}-tab-connected`,
+      __getTabContentBinded
+    );
   }
 
   set theme(value) {

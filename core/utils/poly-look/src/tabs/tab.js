@@ -1,4 +1,4 @@
-import { html, LitElement } from "lit-element";
+import { LitElement } from "lit-element";
 import { polyPrefix } from "../globalTheme";
 
 const validateInnerHTML = innerDom =>
@@ -10,13 +10,13 @@ const validateInnerHTML = innerDom =>
 const addTabId = (innerDom, tabId) =>
   innerDom.replace(
     RegExp(`<${polyPrefix}-tab-content`),
-    `<poly-tab-content tabId="${tabId}"`
+    `<${polyPrefix}-tab-content tabId="${tabId}"`
   );
 
 const addAction = innerDom =>
   innerDom.replace(
     RegExp(`<${polyPrefix}-tab-content`),
-    "<poly-tab-content active"
+    `<${polyPrefix}-tab-content active`
   );
 
 export class Tab extends LitElement {
@@ -54,9 +54,5 @@ export class Tab extends LitElement {
     });
 
     this.dispatchEvent(connectedEvent);
-  }
-
-  redner() {
-    return html``;
   }
 }
