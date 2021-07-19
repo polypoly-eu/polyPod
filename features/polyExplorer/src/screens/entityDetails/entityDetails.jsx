@@ -5,6 +5,7 @@ import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 import FeaturedEntity from "../../components/featuredEntity/featuredEntity.jsx";
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./entityDetails.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
@@ -137,38 +138,51 @@ const EntityDetails = () => {
                         tabName: "dataStory",
                         type: "all",
                         content: (
-                            <>
+                            <div className="tab-data-story">
                                 <FeaturedEntity />
-                                <InfoButton
-                                    stateChange={{
-                                        explorationState: {
-                                            section: "dataTypes",
-                                            index: null,
-                                            category: null,
-                                        },
-                                    }}
-                                    route="/data-exploration"
-                                />
-                            </>
+                                <InfoButton route="featured-entity-info" />
+                                <div className="explore-data-btn-area">
+                                    <LinkButton
+                                        className="explore-data-btn"
+                                        route="/data-exploration"
+                                        stateChange={{
+                                            explorationState: {
+                                                section: "dataTypes",
+                                                index: null,
+                                                category: null,
+                                            },
+                                        }}
+                                    >
+                                        {i18n.t(
+                                            "entityDetailsScreen:button.exploreData"
+                                        )}
+                                    </LinkButton>
+                                </div>
+                            </div>
                         ),
                     },
                     {
                         tabName: "about",
                         content: (
                             <div className="about">
-                                <p
-                                    className="entity-details-text"
-                                    dangerouslySetInnerHTML={{
-                                        __html:
-                                            (
-                                                (entity.description?.value ||
-                                                    {})[i18n.language] || ""
-                                            ).replace("\n", "<br/><br/>") ||
-                                            i18n.t(
-                                                "entityDetailsScreen:description.fallback"
-                                            ),
-                                    }}
-                                ></p>
+                                <div className="scroll-box">
+                                    <p
+                                        className="entity-details-text"
+                                        dangerouslySetInnerHTML={{
+                                            __html:
+                                                (
+                                                    (entity.description
+                                                        ?.value || {})[
+                                                        i18n.language
+                                                    ] || ""
+                                                ).replace("\n", "<br/><br/>") ||
+                                                i18n.t(
+                                                    "entityDetailsScreen:description.fallback"
+                                                ),
+                                        }}
+                                    ></p>
+                                </div>
+                                <div className="gradient"></div>
                                 {entity.description?.source ? (
                                     <p className="entity-details-source">
                                         {i18n.t("entityDetailsScreen:source")}:{" "}
@@ -246,19 +260,24 @@ const EntityDetails = () => {
                         tabName: "about",
                         content: (
                             <div className="about">
-                                <p
-                                    className="entity-details-text"
-                                    dangerouslySetInnerHTML={{
-                                        __html:
-                                            (
-                                                (entity.description?.value ||
-                                                    {})[i18n.language] || ""
-                                            ).replace("\n", "<br/><br/>") ||
-                                            i18n.t(
-                                                "entityDetailsScreen:description.fallback"
-                                            ),
-                                    }}
-                                ></p>
+                                <div className="scroll-box">
+                                    <p
+                                        className="entity-details-text"
+                                        dangerouslySetInnerHTML={{
+                                            __html:
+                                                (
+                                                    (entity.description
+                                                        ?.value || {})[
+                                                        i18n.language
+                                                    ] || ""
+                                                ).replace("\n", "<br/><br/>") ||
+                                                i18n.t(
+                                                    "entityDetailsScreen:description.fallback"
+                                                ),
+                                        }}
+                                    ></p>
+                                </div>
+                                <div className="gradient"></div>
                                 {entity.description?.source ? (
                                     <p className="entity-details-source">
                                         {i18n.t("entityDetailsScreen:source")}:{" "}
@@ -277,19 +296,27 @@ const EntityDetails = () => {
                         tabName: "dataStory",
                         type: "all",
                         content: (
-                            <>
+                            <div className="tab-data-story">
                                 <FeaturedEntity />
-                                <InfoButton
-                                    stateChange={{
-                                        explorationState: {
-                                            section: "dataTypes",
-                                            index: null,
-                                            category: null,
-                                        },
-                                    }}
-                                    route="/data-exploration"
-                                />
-                            </>
+                                <InfoButton route="featured-entity-info" />
+                                <div className="explore-data-btn-area">
+                                    <LinkButton
+                                        className="explore-data-btn"
+                                        route="/data-exploration"
+                                        stateChange={{
+                                            explorationState: {
+                                                section: "dataTypes",
+                                                index: null,
+                                                category: null,
+                                            },
+                                        }}
+                                    >
+                                        {i18n.t(
+                                            "entityDetailsScreen:button.exploreData"
+                                        )}
+                                    </LinkButton>
+                                </div>
+                            </div>
                         ),
                     },
                     {
