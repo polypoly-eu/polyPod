@@ -15,7 +15,11 @@ const MainScreen = () => {
     let showClusters = navigationState.showClusters;
 
     return (
-        <Screen className="main-screen" topShadow={false}>
+        <Screen
+            className="main-screen"
+            topShadow={false}
+            light={showClusters ? true : false}
+        >
             <div className="nav-button-container">
                 <button
                     onClick={() => routeTo("main", { showClusters: true })}
