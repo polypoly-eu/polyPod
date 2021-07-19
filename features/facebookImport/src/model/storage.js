@@ -2,8 +2,10 @@
 // TODO: Load files from disk during initialisation
 
 export default class Storage {
-    changeListener = () => {};
-    _files = {};
+    constructor() {
+        this.changeListener = () => {};
+        this._files = {};
+    }
 
     get files() {
         return Object.values(this._files);
@@ -20,4 +22,4 @@ export default class Storage {
         delete this._files[id];
         this.changeListener();
     }
-};
+}

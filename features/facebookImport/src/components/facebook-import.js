@@ -1,14 +1,10 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html } from "lit";
 
 import Storage from "../model/storage.js";
 import "./fi-analysis";
 import "./fi-file-management";
 
 class FacebookImport extends LitElement {
-    static get styles() {
-        return css``;
-    }
-
     static get properties() {
         return {
             _pod: { state: true },
