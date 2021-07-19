@@ -203,14 +203,14 @@
     width: 200px;
 }
 
-.company-details-text {
+.entity-details-text {
     box-sizing: border-box;
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
 }
 
-.company-details-source {
+.entity-details-source {
     transform: translateY(-20px);
     color: var(--color-medium);
     flex: 0 0 auto;
