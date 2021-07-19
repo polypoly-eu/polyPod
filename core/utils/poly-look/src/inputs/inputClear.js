@@ -1,15 +1,16 @@
 import { html, LitElement, css } from "lit-element";
+import { unsafeHTML } from "lit-html/directives/unsafe-html";
 import { globalTheme, polyPrefix } from "../globalTheme";
 import { polyInput } from "../constants";
 import { reduceListToString } from "../helpers";
+import clearSearchDark from "../static/images/icons/clear-search-dark.svg";
+import clearSearchLight from "../static/images/icons/clear-search-light.svg";
 
 const listOfValidTypes = Object.values(polyInput.types);
 
 const validateInputTypes = type => listOfValidTypes.includes(type);
 
 export class InputClear extends LitElement {
-  #theme = polyInput.types.DARK;
-
   static get styles() {
     return [
       globalTheme,
@@ -22,7 +23,7 @@ export class InputClear extends LitElement {
           height: 40px;
           border-width: var(--poly-input-clear-border-width, 1px);
           border-style: var(--poly-input-clear-border-style, solid);
-          border-radius: var(--poly-input-clear-border-radious, 20px);
+          border-radius: var(--poly-input-clear-border-radius, 20px);
           background-color: transparent;
         }
 
@@ -111,6 +112,7 @@ export class InputClear extends LitElement {
   constructor() {
     super();
     this.activeClear = false;
+    this._theme = polyInput.types.DARK;
   }
 
   set theme(value) {
@@ -123,15 +125,15 @@ export class InputClear extends LitElement {
       );
     }
 
-    this.#theme = value;
+    this._theme = value;
     this.requestUpdate("theme", value);
   }
 
   get theme() {
-    return this.#theme;
+    return this._theme;
   }
 
-  #onInputChange(event) {
+  _onInputChange(event) {
     const value = event.target.value;
     const customInputEvent = new CustomEvent(`${polyPrefix}-input`, {
       detail: { inputValue: value },
@@ -143,10 +145,16 @@ export class InputClear extends LitElement {
     this.dispatchEvent(customInputEvent);
   }
 
-  #clearInput() {
+  _clearInput() {
     const input = this.shadowRoot.querySelector(".text-field");
     input.value = "";
     this.activeClear = false;
+  }
+
+  _getButtonImage(imageLigth, imageDark) {
+    return this.theme === polyInput.types.DARK
+      ? unsafeHTML(imageDark)
+      : unsafeHTML(imageLigth);
   }
 
   render() {
@@ -156,18 +164,15 @@ export class InputClear extends LitElement {
           type="text"
           class="text-field clear"
           placeholder=${this.placeHolder}
-          @input=${this.#onInputChange}
+          @input=${this._onInputChange}
         />
         <button
           type="button"
           class="btn clear ${this.activeClear ? "active" : ""}"
           ?disabled=${!this.activeClear}
-          @click=${this.#clearInput}
+          @click=${this._clearInput}
         >
-          <img
-            src="public/icons/clear-search-${this.theme}.svg"
-            alt="clear button"
-          />
+          ${this._getButtonImage(clearSearchLight, clearSearchDark)}
         </button>
       </div>
     `;

@@ -4,8 +4,6 @@ import { globalTheme } from "../globalTheme";
 const tabRequiredAttributes = ["id", "label", "active"];
 
 export class TabsLine extends LitElement {
-  #tabs = [];
-
   static get styles() {
     return [
       globalTheme,
@@ -53,7 +51,12 @@ export class TabsLine extends LitElement {
     };
   }
 
-  #validateTabsFields(tabs) {
+  constructor() {
+    super();
+    this._tabs = [];
+  }
+
+  _validateTabsFields(tabs) {
     return tabs.reduce((acc, tab) => {
       const keys = Object.keys(tab);
 
@@ -68,7 +71,7 @@ export class TabsLine extends LitElement {
     }, true);
   }
 
-  #validateOnlyOneActive(tabs) {
+  _validateOnlyOneActive(tabs) {
     return tabs.reduce((acc, tab) => (tab.active ? ++acc : acc), 0) === 1;
   }
 
@@ -77,23 +80,23 @@ export class TabsLine extends LitElement {
       throw new Error("There are no tabs");
     }
 
-    if (!this.#validateTabsFields(value)) {
+    if (!this._validateTabsFields(value)) {
       throw new Error("Wrong tabs schema");
     }
 
-    if (!this.#validateOnlyOneActive(value)) {
+    if (!this._validateOnlyOneActive(value)) {
       throw new Error("At most, one tab should be active");
     }
 
-    this.#tabs = value.map(tab => ({ ...tab }));
+    this._tabs = value.map(tab => ({ ...tab }));
     this.requestUpdate("tabs", value);
   }
 
   get tabs() {
-    return this.#tabs;
+    return this._tabs;
   }
 
-  #activeTab(event) {
+  _activeTab(event) {
     this.tabs = this.tabs.map(tab => {
       const copyTab = { ...tab, active: false };
       if (tab.id === event.detail.value) {
@@ -113,7 +116,7 @@ export class TabsLine extends LitElement {
             .label="${tab.label}"
             .value="${tab.id}"
             .active="${tab.active}"
-            @poly-tab-selected=${this.#activeTab}
+            @poly-tab-selected=${this._activeTab}
           >
           </poly-tab>`;
         })}
