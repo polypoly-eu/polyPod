@@ -52,7 +52,8 @@ export class I18n {
      * Class constructor
      *
      * @param language - two-letter language code, which should be a key in the translation hash
-     * @param translations - translations hash. This is going to have the format `namespace ⇒ key ⇒ string`
+     * @param translations - translations hash. This is going to have the format `namespace ⇒ key ⇒ string` 
+     *     within every language. Only the language that's detected will be used.
      * @throws LanguageError - if the language key is not included in the translations hash
      */
     constructor(language, translations) {
