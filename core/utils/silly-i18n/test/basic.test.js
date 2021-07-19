@@ -68,3 +68,14 @@ describe("Test constructor with faulty translation hash", () => {
         );
     }).toThrow(LanguageError);
 });
+
+describe("Uses default fallback language correctly", () => {
+    const testI18n = 
+        new I18n(
+            "esperanto",
+            {
+                [LANGUAGE]: { quux: { bar: "baz" } },
+            }
+        );
+    expect( testI18n.language ).toBe( LANGUAGE );
+});
