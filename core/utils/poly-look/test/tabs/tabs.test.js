@@ -10,7 +10,7 @@ describe("Tabs", () => {
     return tabs.map(
       tab => html`
         <poly-tab .label=${tab.label} .tabId=${tab.tabId} .active=${tab.active}>
-          <poly-tab-content .active=${tab.active} .tabId=${tab.tabId}>
+          <poly-tab-content>
             <div>This is the content of the tab ${tab.tabId}</div>
           </poly-tab-content>
         </poly-tab>

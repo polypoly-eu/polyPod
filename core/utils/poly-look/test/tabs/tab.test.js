@@ -1,20 +1,42 @@
-import { defineCE, expect, oneEvent } from "@open-wc/testing";
-import { Tab } from "../../src/tabs/tab";
+import { expect, oneEvent } from "@open-wc/testing";
+import "../../src/tabs";
 
 describe("Tab", () => {
-  it(`should fire an event with its content once it's connected`, async () => {
-    const tabCreated = defineCE(Tab);
+  it(`should throw an exceptio if the content of the tab is different than a single tag of <poly-tab-content>`, done => {
     const innerContent = document.createElement("div");
     const innerText = document.createTextNode("This is a test");
-    const tabComponent = document.createElement(`${tabCreated}`);
+    const tabComponent = document.createElement(`poly-tab`);
     innerContent.append(innerText);
     tabComponent.append(innerContent);
 
-    setTimeout(() => {
+    try {
       tabComponent.connectedCallback();
-    });
+      done.fail("This should fail");
+    } catch (error) {
+      expect(error.message).to.be.equal(
+        "Only <poly-tab-content> only tags are allowed and without any attribute"
+      );
+      done();
+    }
+  });
 
-    const event = await oneEvent(tabComponent, "poly-tab-connected");
-    expect(event.detail.innerContent).to.be.equal("<div>This is a test</div>");
+  it(`should fire and event with the innerContent of the tab`, async () => {
+    const tabId = "01";
+    let innerContent = document.createElement("poly-tab-content");
+    const innerText = document.createTextNode("This is a test");
+    const tabComponent = document.createElement(`poly-tab`);
+    tabComponent.tabId = tabId;
+    tabComponent.active = true;
+    innerContent.append(innerText);
+    tabComponent.append(innerContent);
+
+    const eventPromise = oneEvent(tabComponent, "poly-tab-connected");
+
+    tabComponent.connectedCallback();
+    const event = await eventPromise;
+
+    expect(event.detail.innerContent).to.be.equal(
+      `<poly-tab-content active tabId="${tabId}">This is a test</poly-tab-content>`
+    );
   });
 });

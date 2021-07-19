@@ -25,7 +25,7 @@ function Template({ theme = "dark" }) {
       : ""}
     <poly-tabs .theme=${theme}>
       <poly-tab label="Tab 01" tabId="01" active>
-        <poly-tab-content tabId="01" active>
+        <poly-tab-content>
           <h1>Tab 01</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet
@@ -54,7 +54,7 @@ function Template({ theme = "dark" }) {
         </poly-tab-content>
       </poly-tab>
       <poly-tab label="Tab 02" tabId="02">
-        <poly-tab-content tabId="02">
+        <poly-tab-content>
           <h1>Tab 02</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet
@@ -83,7 +83,7 @@ function Template({ theme = "dark" }) {
         </poly-tab-content>
       </poly-tab>
       <poly-tab label="Tab 03" tabId="03">
-        <poly-tab-content tabId="03">
+        <poly-tab-content>
           <h1>Tab 03</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet
