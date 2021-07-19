@@ -70,12 +70,20 @@ describe("Test constructor with faulty translation hash", () => {
 });
 
 describe("Uses default fallback language correctly", () => {
-    const testI18n = 
-        new I18n(
+    it("Picks up one of the keys by default", () => {
+        const testI18n = new I18n("esperanto", {
+            [LANGUAGE]: { quux: { bar: "baz" } },
+        });
+        expect(testI18n.language).toBe(LANGUAGE);
+    });
+    it("Uses fallback language", () => {
+        const testI18n = new I18n(
             "esperanto",
             {
-                [LANGUAGE]: { quux: { bar: "baz" } },
-            }
+                [FALLBACK_LANGUAGE]: { quux: { bar: "baz" } },
+            },
+            FALLBACK_LANGUAGE
         );
-    expect( testI18n.language ).toBe( LANGUAGE );
+        expect(testI18n.language).toBe(FALLBACK_LANGUAGE);
+    });
 });
