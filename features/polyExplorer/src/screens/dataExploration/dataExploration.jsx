@@ -29,25 +29,25 @@ import { useHistory } from "react-router-dom";
 const DataExplorationScreen = () => {
     const {
         navigationState,
-        selectedCompanyObject,
-        featuredCompanyMaxValues,
+        selectedEntityObject,
+        featuredEntityMaxValues,
         dataRecipients,
     } = useContext(ExplorerContext);
-    const company = selectedCompanyObject;
+    const entity = selectedEntityObject;
     const startSection = navigationState.explorationState.section;
     const startIndex = navigationState.explorationState.index;
-    const maxCompanies = featuredCompanyMaxValues.companies;
+    const maxCompanies = featuredEntityMaxValues.companies;
     const history = useHistory();
 
-    if (company.dataRecipients.length == 0) return <Screen></Screen>;
+    if (entity.dataRecipients.length == 0) return <Screen></Screen>;
 
     //Methods
     const getCategories = () =>
-        Object.keys(highlights[company.ppid]?.dataTypeCategories || {});
+        Object.keys(highlights[entity.ppid]?.dataTypeCategories || {});
 
     const getTotalTypesShared = () => {
         let total = 0;
-        company.dataTypesShared.forEach((e) => {
+        entity.dataTypesShared.forEach((e) => {
             total += e.count;
         });
         return total;
@@ -66,9 +66,7 @@ const DataExplorationScreen = () => {
     const companyIndustryMap = useMemo(() => {
         const map = {};
         for (let company of dataRecipients) {
-            const industry =
-                company.industryCategory?.name[i18n.language] ||
-                i18n.t("common:category.undisclosed");
+            const industry = company.industryCategoryName();
             if (!map[industry]) map[industry] = [];
             map[industry].push(company);
         }
@@ -153,7 +151,7 @@ const DataExplorationScreen = () => {
 
     const getHighestValueObject = () => {
         let highest = { count: 0 };
-        company.dataTypesShared.forEach((e) =>
+        entity.dataTypesShared.forEach((e) =>
             e.count > highest.count ? (highest = e) : null
         );
         return highest;
@@ -258,12 +256,12 @@ const DataExplorationScreen = () => {
                     <h1>
                         {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
                         <span className="highlight-data-type">
-                            {company.dataTypesShared.length}{" "}
+                            {entity.dataTypesShared.length}{" "}
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
                     </h1>
                     <DataTypeBubbleAll
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
                         width={visualizationWidth}
@@ -293,12 +291,12 @@ const DataExplorationScreen = () => {
                     <h1>
                         {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
                         <span className="highlight-data-type">
-                            {company.dataTypesShared.length}{" "}
+                            {entity.dataTypesShared.length}{" "}
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
                     </h1>
                     <DataTypeBubbleAll
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
                         width={visualizationWidth}
@@ -319,14 +317,14 @@ const DataExplorationScreen = () => {
                 <div className="static-content">
                     <h1></h1>
                     <DataTypeBubbleCategory
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         defaultColor="#FB8A89"
                         category={categories[activeIndex - 4]}
                         textColor="var(--color-text-dark)"
                         width={visualizationWidth}
                         height={visualizationHeight}
                         highlightedType={
-                            highlights[company.ppid].dataTypeCategories[
+                            highlights[entity.ppid].dataTypeCategories[
                                 activeScreen.split("_")[1]
                             ].category
                         }
@@ -358,7 +356,7 @@ const DataExplorationScreen = () => {
                         )}
                     </h2>
                     <DataTypeBubbleAll
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
                         width={visualizationWidth}
@@ -384,10 +382,10 @@ const DataExplorationScreen = () => {
                         )}
                     </h2>
                     <DataTypeBubbleCorrelation
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         correlationColor="#FB8A89"
                         typeBundle={
-                            highlights[company.ppid]?.dataTypeCorrelation
+                            highlights[entity.ppid]?.dataTypeCorrelation
                                 .types || []
                         }
                         width={visualizationWidth}
@@ -429,7 +427,7 @@ const DataExplorationScreen = () => {
                         width={visualizationWidth}
                         height={visualizationHeight}
                         bubbleColor="var(--data-exp-companies)"
-                        highlight={highlights[company.ppid]?.dataRecipient}
+                        highlight={highlights[entity.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
                     <p className="bubble-source">
@@ -459,7 +457,7 @@ const DataExplorationScreen = () => {
                         height={visualizationHeight}
                         opacity={0.1}
                         bubbleColor="var(--data-exp-companies)"
-                        highlight={highlights[company.ppid]?.dataRecipient}
+                        highlight={highlights[entity.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
                     <p className="bubble-source">
@@ -502,7 +500,7 @@ const DataExplorationScreen = () => {
                         height={visualizationHeight}
                         bubbleColor="var(--data-exp-companies)"
                         maxCompanies={maxCompanies}
-                        highlight={highlights[company.ppid]?.dataRecipient}
+                        highlight={highlights[entity.ppid]?.dataRecipient}
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
@@ -597,7 +595,7 @@ const DataExplorationScreen = () => {
                                 {i18n.t(
                                     "dataExplorationScreen:dataTypes.text.intro",
                                     {
-                                        name: company.name,
+                                        name: entity.name,
                                         sharingCount: getTotalTypesShared(),
                                         mostSharedType:
                                             highestValueObject[translationKey],
@@ -640,12 +638,12 @@ const DataExplorationScreen = () => {
                                 <h1>
                                     {i18n.t("common:sharing.prefix.purposes")}{" "}
                                     <span className="highlight-purpose">
-                                        {company.dataSharingPurposes.length}{" "}
+                                        {entity.dataSharingPurposes.length}{" "}
                                         {i18n.t("common:sharing.purposes")}
                                     </span>
                                 </h1>
                                 <PurposeChart
-                                    purposes={company.dataSharingPurposes}
+                                    purposes={entity.dataSharingPurposes}
                                     openPopup={setPurposePopupContent}
                                     saveActiveIndex={saveActiveIndex}
                                 />
@@ -678,7 +676,7 @@ const DataExplorationScreen = () => {
                                 <p>
                                     {i18n.t(
                                         "dataExplorationScreen:companies.text.list",
-                                        { name: company.name }
+                                        { name: entity.name }
                                     )}
                                 </p>
                                 <CompanyIndustryList
@@ -705,7 +703,7 @@ const DataExplorationScreen = () => {
                                     saveActiveIndex={saveActiveIndex}
                                 />
                                 <LinkButton
-                                    route="/company-details"
+                                    route="/entity-details"
                                     className="explore-other"
                                 >
                                     {i18n.t(

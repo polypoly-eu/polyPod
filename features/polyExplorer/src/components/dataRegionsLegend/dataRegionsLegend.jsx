@@ -8,7 +8,7 @@ const DataRegionsLegend = () => {
         <div className="location-legend">
             <div className="legend">
                 <p className="jurisdictions-label">
-                    {i18n.t("companyDetailsScreen:jurisdictions")}:
+                    {i18n.t("entityDetailsScreen:jurisdictions")}:
                 </p>
                 <div>
                     <div className="circle China"></div>

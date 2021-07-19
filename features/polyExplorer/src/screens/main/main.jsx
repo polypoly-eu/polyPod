@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
-import CompanyList from "../../components/companyList/companyList.jsx";
+import EntityList from "../../components/entityList/entityList.jsx";
 import StoriesPreview from "../../components/storiesPreview/storiesPreview.jsx";
 
 import "./main.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const MainScreen = () => {
-    const { navigationState, routeTo, companies, storiesMetadata } = useContext(
+    const { navigationState, routeTo, entities, storiesMetadata } = useContext(
         ExplorerContext
     );
     let showClusters = navigationState.showClusters;
@@ -36,14 +36,14 @@ const MainScreen = () => {
                     }
                 >
                     {i18n.t("mainScreen:tab.explore", {
-                        total: Object.keys(companies).length,
+                        total: Object.keys(entities).length,
                     })}
                 </button>
             </div>
             {showClusters ? (
                 <StoriesPreview storiesMetadata={storiesMetadata} />
             ) : (
-                <CompanyList />
+                <EntityList />
             )}
         </Screen>
     );

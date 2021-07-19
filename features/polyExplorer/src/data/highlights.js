@@ -493,4 +493,420 @@ export default {
             },
         },
     },
+    Signal: {
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de:
+                    "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en:
+                    "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:OfficialID",
+                explanation: {
+                    de:
+                        "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
+                    en:
+                        "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Language",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:DeviceSoftware",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "Signal Messenger LLC (US)",
+            companyExplanation: {
+                de:
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
+                en:
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+            },
+            industryExplanation: {
+                de:
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                en:
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+            },
+        },
+    },
+    Threema: {
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de:
+                    "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en:
+                    "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:OfficialID",
+                explanation: {
+                    de:
+                        "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
+                    en:
+                        "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Language",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:DeviceSoftware",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "elopage GmbH (DE)",
+            companyExplanation: {
+                de:
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
+                en:
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+            },
+            industryExplanation: {
+                de:
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                en:
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+            },
+        },
+    },
+    iMessage: {
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de:
+                    "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en:
+                    "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:OfficialID",
+                explanation: {
+                    de:
+                        "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
+                    en:
+                        "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Language",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:DeviceSoftware",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "elopage GmbH (DE)",
+            companyExplanation: {
+                de:
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
+                en:
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+            },
+            industryExplanation: {
+                de:
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                en:
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+            },
+        },
+    },
+    Instagram: {
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de:
+                    "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en:
+                    "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:OfficialID",
+                explanation: {
+                    de:
+                        "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
+                    en:
+                        "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Language",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:DeviceSoftware",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "elopage GmbH (DE)",
+            companyExplanation: {
+                de:
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
+                en:
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+            },
+            industryExplanation: {
+                de:
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                en:
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+            },
+        },
+    },
+    WhatsApp: {
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de:
+                    "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en:
+                    "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:OfficialID",
+                explanation: {
+                    de:
+                        "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
+                    en:
+                        "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Language",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:DeviceSoftware",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "elopage GmbH (DE)",
+            companyExplanation: {
+                de:
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
+                en:
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+            },
+            industryExplanation: {
+                de:
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                en:
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+            },
+        },
+    },
+    "Facebook Messenger": {
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de:
+                    "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en:
+                    "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:OfficialID",
+                explanation: {
+                    de:
+                        "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
+                    en:
+                        "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Language",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:DeviceSoftware",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "elopage GmbH (DE)",
+            companyExplanation: {
+                de:
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
+                en:
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+            },
+            industryExplanation: {
+                de:
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                en:
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+            },
+        },
+    },
+    Snapchat: {
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de:
+                    "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en:
+                    "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:OfficialID",
+                explanation: {
+                    de:
+                        "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
+                    en:
+                        "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Language",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:DeviceSoftware",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "elopage GmbH (DE)",
+            companyExplanation: {
+                de:
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
+                en:
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+            },
+            industryExplanation: {
+                de:
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                en:
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+            },
+        },
+    },
+    TikTok: {
+        dataTypeCorrelation: {
+            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            explanation: {
+                de:
+                    "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en:
+                    "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:OfficialID",
+                explanation: {
+                    de:
+                        "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
+                    en:
+                        "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Language",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:DeviceSoftware",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for polypoly
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "elopage GmbH (DE)",
+            companyExplanation: {
+                de:
+                    "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
+                en:
+                    "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+            },
+            industryExplanation: {
+                de:
+                    "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
+                en:
+                    "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+            },
+        },
+    },
 };

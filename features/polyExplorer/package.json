@@ -8,7 +8,7 @@
     "build": "rollup -c",
     "watch": "rollup --watch -c",
     "test": "mocha",
-    "polypedia:fetch": "node scripts/fetch-polypedia-data 9499b4c",
+    "polypedia:fetch": "node scripts/fetch-polypedia-data 162daa1",
     "polypedia:convert": "node scripts/convert-polypedia-data",
     "update-polypedia-data": "npm run polypedia:fetch && npm run polypedia:convert"
   },
@@ -33,6 +33,7 @@
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-svg": "^2.0.0",
+    "shelljs": "^0.8.4",
     "typescript": "^4.1.3"
   },
   "private": true,
