@@ -61,7 +61,7 @@ export type EndpointSpec = ValueEndpointSpec<any> | ObjectEndpointSpec<any>;
 /**
  * Wraps a type `T` into `Promise`, unless `T` is already a `Promise`.
  */
-export type ForcePromise<T> = T extends Promise<any> ? T : Promise<T>;
+export type ForcePromise<T> = [T] extends [Promise<any>] ? T : Promise<T>;
 
 /**
  * Type union of `T` and `Promise<T>`, unless `T` is already a `Promise`.

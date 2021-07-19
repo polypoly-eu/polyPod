@@ -98,6 +98,29 @@ class BrowserPolyNav implements PolyNav {
     async setTitle(title: string): Promise<void> {
         document.title = title;
     }
+
+    async pickFile(): Promise<Uint8Array | null> {
+        return new Promise((resolve) => {
+            const fileInput = document.createElement("input");
+            fileInput.setAttribute("type", "file");
+            fileInput.addEventListener("change", function () {
+                const selectedFile = this.files?.[0];
+                if (!selectedFile) {
+                    resolve(null);
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function () {
+                    const buffer = this.result as ArrayBuffer;
+                    const file = new Uint8Array(buffer);
+                    resolve(file);
+                };
+                reader.readAsArrayBuffer(selectedFile);
+            });
+            fileInput.click();
+        });
+    }
 }
 
 export class BrowserPod implements Pod {

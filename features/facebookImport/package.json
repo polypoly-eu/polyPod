@@ -1,0 +1,16 @@
+{
+  "name": "facebook-import-feature",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup --watch -c"
+  },
+  "devDependencies": {
+    "@polypoly-eu/podjs": "file:../../podjs",
+    "@rollup/plugin-node-resolve": "11.2.0",
+    "@zip.js/zip.js": "2.3.7",
+    "lit": "^2.0.0-rc.2",
+    "rollup": "2.26.11",
+    "rollup-plugin-copy": "3.3.0"
+  },
+  "private": true
+}

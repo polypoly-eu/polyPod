@@ -7,7 +7,6 @@ const listOfValidTypes = Object.values(polyButton.types);
 const listOfValidSizes = Object.values(polyButton.sizes);
 
 const validateButtonTypes = type => listOfValidTypes.includes(type);
-
 const validateButtonSizes = size => listOfValidSizes.includes(size);
 
 export class Button extends LitElement {
@@ -102,9 +101,9 @@ export class Button extends LitElement {
 
   constructor() {
     super();
+    this._type = polyButton.types.DARK;
+    this._size = polyButton.sizes.MEDIUM;
     this.disabled = false;
-    this.type = polyButton.types.DARK;
-    this.size = polyButton.sizes.MEDIUM;
   }
 
   _onClick() {

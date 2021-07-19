@@ -8,6 +8,7 @@ class Preferences {
         private const val firstRunKey = "firstRun"
         private const val seenInAppNotificationIdKey = "seenInAppNotificationId"
         private const val seenPushNotificationIdKey = "seenPushNotificationId"
+        private const val biometricCheckKey = "biometricCheck"
 
         private fun getPrefs(context: Context) =
             PreferenceManager.getDefaultSharedPreferences(context)
@@ -44,5 +45,14 @@ class Preferences {
             edit.putInt(seenPushNotificationIdKey, seenPushNotificationId)
             edit.commit()
         }
+
+        fun setBiometricCheck(context: Context, shouldCheck: Boolean) {
+            val edit = getPrefs(context).edit()
+            edit.putBoolean(biometricCheckKey, shouldCheck)
+            edit.commit()
+        }
+
+        fun getBiometricCheck(context: Context): Boolean =
+            getPrefs(context).getBoolean(biometricCheckKey, true)
     }
 }

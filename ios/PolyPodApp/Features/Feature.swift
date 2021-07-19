@@ -9,18 +9,22 @@ class Feature {
     let thumbnail: URL?
     private let links: [String: String]
     
-    static func load(path: URL) -> Feature? {
+    static func load(path: URL, languageCode: String?) -> Feature? {
         let manifestPath = path.appendingPathComponent("manifest.json")
         guard let manifest = FeatureManifest.load(path: manifestPath) else {
             print("Failed to load feature manifest from: \(manifestPath)")
             return nil
         }
-        return Feature(path: path, manifest: manifest)
+        return Feature(
+            path: path,
+            manifest: manifest,
+            languageCode: languageCode
+        )
     }
     
-    init(path: URL, manifest: FeatureManifest) {
+    init(path: URL, manifest: FeatureManifest, languageCode: String?) {
         self.path = path
-        let userLanguage = Locale.current.languageCode ?? "en"
+        let userLanguage = languageCode ?? "en"
         let translations = manifest.translations?[userLanguage]
         name = translations?.name ?? manifest.name ?? path.lastPathComponent
         author = translations?.author ?? manifest.author
@@ -53,6 +57,9 @@ private func parseColor(hexValue: String?) -> Color? {
 
 private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
     guard let thumbnailPath = thumbnailPath else {
+        return nil
+    }
+    if thumbnailPath.isEmpty {
         return nil
     }
     let fullPath = featurePath.appendingPathComponent(thumbnailPath)
