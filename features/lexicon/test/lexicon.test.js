@@ -19,5 +19,12 @@ describe("Test Lexicon object", () => {
         const aGroup = groups[0];
         expect(lexicon.group(aGroup)).toBeDefined();
         expect(lexicon.groupEntries(aGroup)).toBeDefined();
-    })
+    });
+
+    it("can search some terms", () => {
+        ["data","privacy","protection"].forEach( (term) => {
+            expect(lexicon.search(term)).toBeDefined();
+        });
+    });
+
 });
