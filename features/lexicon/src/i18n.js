@@ -26,4 +26,5 @@ export default new I18n(
             title: { lexicon: "Lexikon", details: "Details zum Eintrag" },
         },
     },
-    FALLBACK_LANGUAGE);
+    FALLBACK_LANGUAGE
+);

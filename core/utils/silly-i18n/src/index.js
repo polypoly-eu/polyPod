@@ -59,10 +59,15 @@ export class I18n {
      *     is not a part of the `translations` hash.
      * @throws LanguageError - if the `fallbackLanguage` key is not included in the translations hash
      */
-    constructor(language, translations, fallbackLanguage = Object.keys(translations)[0] ) {
-        if  ( !(fallbackLanguage in translations) ) {
+    constructor(
+        language,
+        translations,
+        fallbackLanguage = Object.keys(translations)[0]
+    ) {
+        if (!(fallbackLanguage in translations)) {
             throw new LanguageError(
-                fallbackLanguage + " is not a key in the translations hash provided"
+                fallbackLanguage +
+                    " is not a key in the translations hash provided"
             );
         }
         this.language = language in translations ? language : fallbackLanguage;
