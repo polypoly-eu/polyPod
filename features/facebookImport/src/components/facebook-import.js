@@ -1,5 +1,6 @@
 import { LitElement, html, css } from "lit";
 
+import Storage from "../model/storage.js";
 import "./fi-analysis";
 import "./fi-file-management";
 
@@ -22,7 +23,11 @@ class FacebookImport extends LitElement {
     constructor() {
         super();
         this._initPod().then((pod) => (this._pod = pod));
-        this._files = {};
+        this._files = [];
+        this._storage = new Storage();
+        this._storage.changeListener = () => {
+            this._files = Object.values(this._storage.files);
+        };
     }
 
     _renderSplash() {
@@ -30,32 +35,26 @@ class FacebookImport extends LitElement {
     }
 
     _handleAddFile(event) {
-        const file = event.detail;
-        const id = file.time.getTime();
-        this._files[id] = { ...file, id };
-        this._files = { ...this._files };
+        this._storage.addFile(event.detail);
     }
 
     _handleRemoveFile(event) {
-        const id = event.detail.id;
-        delete this._files[id];
-        this._files = { ...this._files };
+        this._storage.removeFile(event.detail);
     }
 
     render() {
         if (!this._pod) return this._renderSplash();
-        const files = Object.values(this._files);
         return html`
             <h1>File management</h1>
             <fi-file-management
                 .pod="${this._pod}"
-                .files="${files}"
+                .files="${this._files}"
                 @add-file="${this._handleAddFile}"
                 @remove-file="${this._handleRemoveFile}"
             ></fi-file-management>
             <hr />
             <h1>Analysis</h1>
-            <fi-analysis .files="${files}"></fi-analysis>
+            <fi-analysis .files="${this._files}"></fi-analysis>
         `;
     }
 }
