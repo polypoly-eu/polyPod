@@ -2,6 +2,7 @@ import { LitElement, html } from "lit";
 
 import Storage from "../model/storage.js";
 import "./fi-analysis";
+import "./fi-download";
 import "./fi-file-management";
 
 class FacebookImport extends LitElement {
@@ -41,6 +42,9 @@ class FacebookImport extends LitElement {
     render() {
         if (!this._pod) return this._renderSplash();
         return html`
+            <h1>Download</h1>
+            <fi-download .pod="${this._pod}"></fi-download>
+            <hr />
             <h1>File management</h1>
             <fi-file-management
                 .pod="${this._pod}"
