@@ -60,8 +60,11 @@ describe("Test basic configuration", () => {
 
 describe("Test constructor with faulty translation hash", () => {
     expect(() => {
-        new I18n("esperanto", {
-            [LANGUAGE]: { quux: { bar: "baz" } },
-        },"NoLang");
+        new I18n(
+            "esperanto",
+            {
+                [LANGUAGE]: { quux: { bar: "baz" } },
+            },
+            "NoLang");
     }).toThrow(LanguageError);
 });
