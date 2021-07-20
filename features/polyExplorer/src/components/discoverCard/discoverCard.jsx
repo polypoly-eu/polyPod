@@ -4,20 +4,16 @@ import i18n from "../../i18n";
 
 import "./discoverCard.css";
 
-const i18nHeader = "clusterStories";
+const i18nHeader = "clusterStoriesPreview";
 const DiscoverCard = ({ story }) => {
     return (
-        <LinkButton route={story.route} className="discover-card">
+        <LinkButton route={story.route} className="preview">
             <img
-                src={story.image.src}
-                alt={i18n.t(`${i18nHeader}:${story.image.alt}`)}
+                src={story.img.src}
+                alt={i18n.t(`${i18nHeader}:${story.img.alt}`)}
             />
-            <h2 className="card-title">
-                {i18n.t(`${i18nHeader}:${story.title}`)}
-            </h2>
-            <p className="card-summarize">
-                {i18n.t(`${i18nHeader}:${story.previewText}`)}
-            </p>
+            <h3>{i18n.t(`${i18nHeader}:${story.title}`)}</h3>
+            <p>{i18n.t(`${i18nHeader}:${story.previewText}`)}</p>
         </LinkButton>
     );
 };

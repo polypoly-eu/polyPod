@@ -63,36 +63,30 @@ function loadProducts() {
 const loadStoriesMetadata = () => {
     return {
         messanger: {
-            title: "story.messanger.title",
-            previewText: "story.messanger.summarize",
-            image: {
-                src: "images/stories/messanger/card-image.svg",
-                alt: "story.messager.alt",
+            title: "story.messenger.title",
+            previewText: "story.messenger.summarize",
+            img: {
+                src: "images/stories/messenger/card-image.svg",
+                alt: "story.messenger.alt",
             },
             route: "/story/example-story",
         },
-        digitalGigants: {
-            title: "story.digitalGigants.title",
-            previewText: "story.digitalGigants.summarize",
-            image: {
-                src: "images/stories/digital-gigants/card-image.svg",
-                alt: "story.digitalGigants.alt",
+        digitalGiants: {
+            title: "story.digitalGiants.title",
+            previewText: "story.digitalGiants.summarize",
+            img: {
+                src: "images/stories/digital-giants/card-image.svg",
+                alt: "story.digitalGiants.alt",
             },
             route: "/story/example-story",
         },
         trackers: {
             title: "story.trackers.title",
             previewText: "story.trackers.summarize",
-            image: {
+            img: {
                 src: "images/stories/trackers/card-image.svg",
                 alt: "story.trackers.alt",
             },
-        exampleStory: {
-            title: "example",
-            previewText:
-                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-            route: "/story/example-story",
-            img: "images/story-preview-example.png",
         },
     };
 };

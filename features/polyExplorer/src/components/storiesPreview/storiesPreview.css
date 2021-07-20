@@ -7,18 +7,6 @@
     position: relative;
 }
 
-.stories-preview .preview {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    background-color: var(--color-background-light);
-    width: 328px;
-    height: 320px;
-    margin: 20px auto 0 auto;
-    border-bottom: #BDBDBD solid 1px;
-}
-
 .stories-preview h3 {
     color: var(--color-text-dark);
     text-align: center;
@@ -45,6 +33,15 @@
     z-index: 0;
     margin: auto;
 
+}
+
+.stories-preview .preview-btn-area::after {
+    content: "";
+    width: 100%;
+    max-width: 338px;
+    height: 48px;
+    background-color: var(--color-background-light);
+    position: absolute;
 }
 
 .stories-preview .preview-btn-area {

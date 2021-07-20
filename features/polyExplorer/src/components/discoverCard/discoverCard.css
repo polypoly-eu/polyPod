@@ -1,28 +1,11 @@
-.discover-card {
-  width: 100%;
+.preview {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  background-color: var(--color-background-light, #F7FAFC);
-}
-
-.card-title {
-  margin: 0px 32px 10px 32px;
-  font-family: 'Jost';
-  color: var(--color-dark, #0F1938);
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 29px;
-  text-align: center;
-  letter-spacing: -0.01em;
-}
-
-.card-summarize {
-  margin-bottom: 10px;
-  font-family: 'Jost';
-  color: var(--color-dark, #0F1938);
-  font-size: 16px;
-  line-height: 120%;
-  letter-spacing: -0.01em;
+  background-color: var(--color-background-light);
+  width: 328px;
+  height: 320px;
+  margin: 20px auto 0 auto;
+  border-bottom: #BDBDBD solid 1px;
 }
