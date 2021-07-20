@@ -1,24 +1,6 @@
 import { LitElement } from "lit-element";
 import { polyPrefix } from "../globalTheme";
 
-const validateInnerHTML = innerDom =>
-  RegExp(
-    `^<${polyPrefix}-tab-content>.*</${polyPrefix}-tab-content>$`,
-    "gms"
-  ).test(innerDom);
-
-const addTabId = (innerDom, tabId) =>
-  innerDom.replace(
-    RegExp(`<${polyPrefix}-tab-content`),
-    `<${polyPrefix}-tab-content tabId="${tabId}"`
-  );
-
-const addAction = innerDom =>
-  innerDom.replace(
-    RegExp(`<${polyPrefix}-tab-content`),
-    `<${polyPrefix}-tab-content active`
-  );
-
 export class Tab extends LitElement {
   static get properties() {
     return {
@@ -33,26 +15,34 @@ export class Tab extends LitElement {
     this.active = false;
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    let innerConent = this.innerHTML.trim();
-    if (!validateInnerHTML(innerConent)) {
+  _findTabContent() {
+    const child = this.children.length === 1 ? this.children[0] : null;
+    if (
+      child?.nodeName?.toLowerCase() !== `${polyPrefix}-tab-content` ||
+      child.attributes.length > 0
+    ) {
       throw new Error(
-        `Only <${polyPrefix}-tab-content> only tags are allowed and without any attribute`
+        `Only <${polyPrefix}-tab-content> tags without any attributes are allowed`
       );
     }
+    return child;
+  }
 
-    innerConent = addTabId(innerConent, this.tabId);
+  connectedCallback() {
+    super.connectedCallback();
+
+    const tabContent = this._findTabContent();
+    // setAttributeNS retains character case in attribute names
+    tabContent.setAttributeNS(null, "tabId", this.tabId);
     if (this.active) {
-      innerConent = addAction(innerConent);
+      tabContent.setAttribute("active", "");
     }
 
     const connectedEvent = new CustomEvent(`${polyPrefix}-tab-connected`, {
-      detail: { innerContent: innerConent },
+      detail: { innerContent: this.innerHTML },
       bubbles: true,
       composed: true,
     });
-
     this.dispatchEvent(connectedEvent);
   }
 }

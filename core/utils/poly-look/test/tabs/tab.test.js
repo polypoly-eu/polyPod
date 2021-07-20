@@ -14,7 +14,7 @@ describe("Tab", () => {
       done.fail("This should fail");
     } catch (error) {
       expect(error.message).to.be.equal(
-        "Only <poly-tab-content> only tags are allowed and without any attribute"
+        "Only <poly-tab-content> tags without any attributes are allowed"
       );
       done();
     }
@@ -36,7 +36,7 @@ describe("Tab", () => {
     const event = await eventPromise;
 
     expect(event.detail.innerContent).to.be.equal(
-      `<poly-tab-content active tabId="${tabId}">This is a test</poly-tab-content>`
+      `<poly-tab-content tabId="${tabId}" active="">This is a test</poly-tab-content>`
     );
   });
 });
