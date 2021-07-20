@@ -47,10 +47,11 @@ function extractKeys(prefix, data, theseKeys, allKeys) {
             extractKeys(`${prefix}${key}/`, data[key], theseKeys, allKeys);
         } else {
             data["leaves"].forEach((f) => {
-                if ( prefix in theseKeys ) {
-                    theseKeys[prefix].push(f);
+                const sansSlash = prefix.slice(0,-1);
+                if ( sansSlash in theseKeys ) {
+                    theseKeys[sansSlash].push(f);
                 } else {
-                    theseKeys[prefix] = [f];
+                    theseKeys[sansSlash] = [f];
                 }
             });
         }
