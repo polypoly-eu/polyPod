@@ -13,10 +13,10 @@ import {
 
 import MainScreen from "./screens/main/main.jsx";
 import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
-import CompanyFilterScreen from "./screens/companyFilter/companyFilter.jsx";
-import CompanySearchScreen from "./screens/companySearch/companySearch.jsx";
+import EntityFilterScreen from "./screens/entityFilter/entityFilter.jsx";
+import EntitySearchScreen from "./screens/entitySearch/entitySearch.jsx";
 import InfoScreen from "./screens/info/info.jsx";
-import CompanyDetailsScreen from "./screens/companyDetails/companyDetails.jsx";
+import EntityDetailsScreen from "./screens/entityDetails/entityDetails.jsx";
 import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
 import DataTypesInfoScreen from "./screens/explorationInfo/dataTypesInfo/dataTypesInfo.jsx";
 import CategoryInfoScreen from "./screens/explorationInfo/categoryInfo/categoryInfo.jsx";
@@ -24,7 +24,7 @@ import CorrelationInfoScreen from "./screens/explorationInfo/correlationInfo/cor
 import PurposeInfoScreen from "./screens/explorationInfo/purposeInfo/purposeInfo.jsx";
 import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/companiesInfo.jsx";
 import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/jurisdictionInfo.jsx";
-import FeaturedCompanyInfoScreen from "./screens/featuredCompanyInfo/featuredCompanyInfo.jsx";
+import FeaturedEntityInfoScreen from "./screens/featuredEntityInfo/featuredEntityInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 
 //stories
@@ -49,20 +49,20 @@ const PolyExplorerApp = () => {
                 <Route exact path="/main">
                     <MainScreen />
                 </Route>
-                <Route exact path="/company-details">
-                    <CompanyDetailsScreen />
+                <Route exact path="/entity-details">
+                    <EntityDetailsScreen />
                 </Route>
                 <Route exact path="/data-exploration">
                     <DataExplorationScreen />
                 </Route>
-                <Route exact path="/company-filters">
-                    <CompanyFilterScreen />
+                <Route exact path="/entity-filters">
+                    <EntityFilterScreen />
                 </Route>
                 <Route exact path="/search">
-                    <CompanySearchScreen />
+                    <EntitySearchScreen />
                 </Route>
-                <Route exact path="/featured-company-info">
-                    <FeaturedCompanyInfoScreen />
+                <Route exact path="/featured-entity-info">
+                    <FeaturedEntityInfoScreen />
                 </Route>
                 <Route exact path="/info">
                     <InfoScreen />

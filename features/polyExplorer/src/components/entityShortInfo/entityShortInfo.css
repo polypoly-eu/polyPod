@@ -1,0 +1,109 @@
+.entity-short-info {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background-color: var(--color-background-dark);
+    outline: none;
+    margin: 0;
+}
+
+.entity-short-info .featured-indicator,
+.entity-short-info .non-featured-aligner {
+    display: inline-block;
+    margin-top: 4px;
+    margin-right: 2px;
+    box-sizing: border-box;
+    min-width: 19px;
+    width: 19px;
+    height: 19px;
+}
+
+.entity-short-info .info-box {
+    display: inline-block;
+    width: 100%;
+    color: var(--color-text-light);
+    text-align: left;
+    margin-left: 6px;
+}
+
+.info-box .entity-name {
+    position: relative;
+    width: 90%;
+    font-family: "Jost Medium";
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0 0 6px 0;
+    line-height: var(--line-height);
+}
+
+.info-box .entity-location {
+    font-size: 14px;
+    width: 60px;
+    display: inline;
+}
+
+.entity-location .location-icon {
+    display: inline-block;
+    transform: translateX(-4px);
+    width: 20px;
+    height: 20px;
+    background: url("../images/location-pin.svg");
+}
+
+.entity-location .location-name {
+    display: inline-block;
+    transform: translateY(-4px);
+    margin: 0;
+}
+
+.entity-location .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-medium);
+    margin-right: 4px;
+}
+
+.entity-location .EU-GDPR {
+    background-color: var(--jurisdiction-EU-GDPR);
+}
+
+.entity-location .Russia {
+    background-color: var(--jurisdiction-russia);
+}
+
+.entity-location .Five-Eyes {
+    background-color: var(--jurisdiction-five-eyes);
+}
+
+.entity-location .China {
+    background-color: var(--jurisdiction-china);
+}
+
+.entity-location .Others {
+    background-color: var(--jurisdiction-others);
+}
+
+.entity-short-info .entity-category {
+    font-size: 14px;
+    transform: translateY(-4px);
+    width: 90%;
+    display: inline-block;
+}
+
+.entity-category .category-name {
+    display: inline-block;
+    margin: 0;
+    color: var(--color-medium);
+}
+
+.entity-category .category-icon {
+    display: inline-block;
+    transform: translateX(-4px);
+    width: 20px;
+    height: 20px;
+    background: url("../images/unknown.svg");
+}

@@ -7,8 +7,8 @@ const PurposeInfoPopup = ({ purpose, onClose }) => {
     return (
         <div className="purpose-info-popup-container">
             <div className="purpose-info-popup">
-                <h1>{purpose[i18n.t("common:purpose.name.i18nkey")]}</h1>
-                <p>{purpose[i18n.t("common:purpose.description.i18nkey")]}</p>
+                <h1>{purpose.translation}</h1>
+                <p>{purpose.explanation}</p>
                 <div></div>
                 <button onClick={() => onClose()}>
                     {i18n.t("common:button.ok")}
