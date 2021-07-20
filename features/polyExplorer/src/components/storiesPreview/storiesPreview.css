@@ -41,6 +41,15 @@
     position: absolute;
 }
 
+.stories-preview .preview-btn-area::after {
+    content: "";
+    width: 100%;
+    max-width: 338px;
+    height: 48px;
+    background-color: var(--color-background-light);
+    position: absolute;
+}
+
 .stories-preview .preview-btn-area {
     display: block;
     max-width: var(--max-width);
