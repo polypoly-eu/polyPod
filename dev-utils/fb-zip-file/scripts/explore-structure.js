@@ -18,25 +18,29 @@ glob(`${localFolder}/*.json`, (error, files) => {
         let theseKeys = {};
         let thisData = JSON.parse(readFileSync(f));
         extractKeys("", thisData, theseKeys, allKeys);
-        localStructure.push( theseKeys );
+        localStructure.push(theseKeys);
     });
-    let commonKeys = Object.keys(localStructure[0]).filter(
-        (key) => Object.keys(localStructure[1]).includes(key)
+    let commonKeys = Object.keys(localStructure[0]).filter((key) =>
+        Object.keys(localStructure[1]).includes(key)
     );
     for (let i = 2; i < localStructure.length; i++) {
-        commonKeys = commonKeys.filter((key) => Object.keys(localStructure[i]).includes(key));
+        commonKeys = commonKeys.filter((key) =>
+            Object.keys(localStructure[i]).includes(key)
+        );
     }
     let commonStructure = {};
-    commonKeys.forEach( (key) => {
-        let commonFiles = localStructure[0][key].filter(
-            (s) => localStructure[1][key].includes( s )
+    commonKeys.forEach((key) => {
+        let commonFiles = localStructure[0][key].filter((s) =>
+            localStructure[1][key].includes(s)
         );
         for (let i = 2; i < localStructure.length; i++) {
-            commonFiles = commonFiles.filter((s) => localStructure[i][key].includes( s ) );
+            commonFiles = commonFiles.filter((s) =>
+                localStructure[i][key].includes(s)
+            );
         }
         commonStructure[key] = commonFiles;
-    })
-    writeFileSync(dataFileName, JSON.stringify( commonStructure ));
+    });
+    writeFileSync(dataFileName, JSON.stringify(commonStructure));
 });
 
 function extractKeys(prefix, data, theseKeys, allKeys) {
@@ -47,8 +51,8 @@ function extractKeys(prefix, data, theseKeys, allKeys) {
             extractKeys(`${prefix}${key}/`, data[key], theseKeys, allKeys);
         } else {
             data["leaves"].forEach((f) => {
-                const sansSlash = prefix.slice(0,-1);
-                if ( sansSlash in theseKeys ) {
+                const sansSlash = prefix.slice(0, -1);
+                if (sansSlash in theseKeys) {
                     theseKeys[sansSlash].push(f);
                 } else {
                     theseKeys[sansSlash] = [f];
