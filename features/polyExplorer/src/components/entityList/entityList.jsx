@@ -119,7 +119,13 @@ const EntityList = () => {
     }, []);
 
     return (
-        <div id="entity-list" className="entity-list" ref={listRef}>
+        <div
+            id="entity-list"
+            className={
+                activeFilters.empty ? "entity-list" : "entity-list-filters"
+            }
+            ref={listRef}
+        >
             <ActiveFilters
                 activeFilters={activeFilters}
                 globalData={globalData}

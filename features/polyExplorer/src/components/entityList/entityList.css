@@ -1,12 +1,16 @@
-.entity-list {
+.entity-list, .entity-list-filters {
     flex: 1 1 auto;
     overflow-y: auto;
+}
+
+.entity-list-filters::-webkit-scrollbar-track {
+    margin-top: 20px;
 }
 
 .active-filters {
     position: fixed;
     z-index: 2;
-    width: 100%;
+    width: 95%;
     overflow-x: scroll;
     background: var(--color-background-dark);
     white-space: nowrap;
@@ -115,8 +119,4 @@ button::after {
 .entity-group-entities {
     width: 100%;
     margin-left: -4px;
-}
-
-::-webkit-scrollbar-track {
-    margin-top: 64px;
 }
