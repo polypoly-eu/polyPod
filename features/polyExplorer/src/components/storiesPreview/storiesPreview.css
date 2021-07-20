@@ -43,8 +43,7 @@
 
 .stories-preview .preview-btn-area::after {
     content: "";
-    width: 100%;
-    max-width: 338px;
+    width: 97.5%;
     height: 48px;
     background-color: var(--color-background-light);
     position: absolute;
