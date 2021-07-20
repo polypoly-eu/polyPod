@@ -4,7 +4,7 @@
 
 import glob from "glob";
 import { readFileSync, writeFileSync } from "fs";
-import { dataFileName } from "../src/globals";
+import { dataFileName } from "../src/globals.js";
 
 // Files are included in a local .data folder
 const localFolder = ".data";
@@ -15,10 +15,10 @@ glob(`${localFolder}/*.json`, (error, files) => {
     let allKeys = new Set();
     let localKeys = [];
     files.forEach((f) => {
-        let theseKeys = [];
+        let theseKeys = {};
         let thisData = JSON.parse(readFileSync(f));
         extractKeys("", thisData, theseKeys, allKeys);
-        localKeys.push(theseKeys);
+        localKeys.push(Object.keys(theseKeys));
     });
     let commonKeys = localKeys[0].filter((key) => localKeys[1].includes(key));
     for (let i = 2; i < localKeys.length; i++) {
@@ -31,12 +31,12 @@ glob(`${localFolder}/*.json`, (error, files) => {
 function extractKeys(prefix, data, theseKeys, allKeys) {
     for (let key in data) {
         if (key != "leaves") {
-            theseKeys.push(`${prefix}${key}`);
+            theseKeys[`${prefix}${key}`] = [];
             allKeys.add(`${prefix}${key}`);
             extractKeys(`${prefix}${key}/`, data[key], theseKeys, allKeys);
         } else {
             data["leaves"].forEach((f) => {
-                theseKeys.push(`${prefix}${f}`);
+                theseKeys[prefix]?.push(f);
             });
         }
     }
