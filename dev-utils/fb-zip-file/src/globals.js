@@ -6,6 +6,4 @@ export function commonKeys() {
     return JSON.parse(readFileSync(dataFileName));
 }
 
-export function hasCommonKeys() {
-
-}
+export function hasCommonKeys() {}

@@ -4,7 +4,7 @@ import { FiFileChecker } from "../src/fi-file-checker";
 let fileChecker;
 
 beforeAll(() => {
-    fileChecker = new FiFileChecker( commonKeys() );
+    fileChecker = new FiFileChecker(commonKeys());
 });
 
 describe("Tautological test", () => {
