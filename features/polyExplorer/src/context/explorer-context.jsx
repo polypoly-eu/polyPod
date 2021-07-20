@@ -62,7 +62,7 @@ function loadProducts() {
 //Will be clearer when we know the content structure
 const loadStoriesMetadata = () => {
     return {
-        messanger: {
+        messenger: {
             title: "story.messenger.title",
             previewText: "story.messenger.summarize",
             img: {

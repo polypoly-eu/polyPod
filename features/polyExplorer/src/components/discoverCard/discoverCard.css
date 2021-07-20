@@ -4,8 +4,6 @@
   justify-content: flex-end;
   align-items: center;
   background-color: var(--color-background-light);
-  width: 328px;
-  height: 320px;
   margin: 20px auto 0 auto;
   border-bottom: #BDBDBD solid 1px;
 }
