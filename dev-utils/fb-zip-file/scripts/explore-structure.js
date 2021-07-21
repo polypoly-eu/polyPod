@@ -4,7 +4,7 @@
 
 import glob from "glob";
 import { readFileSync, writeFileSync } from "fs";
-import { dataFileName } from "../src/globals.js";
+import { allDataFileName, dataFileName } from "../src/globals.js";
 
 // Files are included in a local .data folder
 const localFolder = ".data";
@@ -41,11 +41,16 @@ glob(`${localFolder}/*.json`, (error, files) => {
         commonStructure[key] = commonFiles;
     });
     writeFileSync(dataFileName, JSON.stringify(commonStructure));
+    writeFileSync(allDataFileName, JSON.stringify([...allKeys.keys()]));
+
 });
 
 function extractKeys(prefix, data, theseKeys, allKeys) {
     for (let key in data) {
         if (key != "leaves") {
+            if ( prefix !== '' && /^[a-zA-Z0-9]+_[_a-zA-Z0-9\-]{9,12}$/.test( key ) ) {
+                key = "uniqueid_hash";
+            }
             theseKeys[`${prefix}${key}`] = [];
             allKeys.add(`${prefix}${key}`);
             extractKeys(`${prefix}${key}/`, data[key], theseKeys, allKeys);
