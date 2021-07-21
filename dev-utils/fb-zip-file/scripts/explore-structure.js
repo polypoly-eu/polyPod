@@ -42,13 +42,15 @@ glob(`${localFolder}/*.json`, (error, files) => {
     });
     writeFileSync(dataFileName, JSON.stringify(commonStructure));
     writeFileSync(allDataFileName, JSON.stringify([...allKeys.keys()]));
-
 });
 
 function extractKeys(prefix, data, theseKeys, allKeys) {
     for (let key in data) {
         if (key != "leaves") {
-            if ( prefix !== '' && /^[a-zA-Z0-9]+_[_a-zA-Z0-9\-]{9,12}$/.test( key ) ) {
+            if (
+                prefix !== "" &&
+                /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(key)
+            ) {
                 key = "uniqueid_hash";
             }
             theseKeys[`${prefix}${key}`] = [];
