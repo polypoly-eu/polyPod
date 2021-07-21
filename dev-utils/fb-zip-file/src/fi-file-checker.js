@@ -14,7 +14,6 @@ export class FiFileChecker {
         this._fileStructure = fileStructure;
     }
 
-
     /**
      * Check structure of an imported zip file
      *

@@ -9,6 +9,8 @@ beforeAll(() => {
 
 describe("Tautological test", () => {
     it("common keys should check", () => {
-        expect(fileChecker.checkStructure(Object.keys(commonStructure()))).toBe(true);
+        expect(fileChecker.checkStructure(Object.keys(commonStructure()))).toBe(
+            true
+        );
     });
 });
