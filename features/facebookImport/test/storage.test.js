@@ -1,7 +1,7 @@
 import JSZip from "jszip";
 import { readFileSync, createWriteStream } from "fs";
 
-const tempDir = "RUNNER_TEMP" in process.env ? process.env.RUNNER_TEMP : "/tmp";
+const tempDir = "RUNNER_TEMP" in process.env ? "." : "/tmp";
 import Storage from "../src/model/storage.js";
 import { expect } from "@jest/globals";
 const noDataFileName = "no-data.txt";
