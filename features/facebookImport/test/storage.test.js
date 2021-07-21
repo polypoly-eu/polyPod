@@ -2,6 +2,7 @@ import JSZip from "jszip";
 import { readFileSync, createWriteStream } from "fs";
 
 import Storage from "../src/model/storage.js";
+import { expect } from "@jest/globals";
 const dataFileName = "src/static/commonStructure.json";
 const testFileName = "/tmp/fi-test.zip";
 let storage;
@@ -19,7 +20,6 @@ beforeAll(() => {
             });
         }
     }
-    console.log(zipFile);
     zipFile
         .generateNodeStream({ type: "nodebuffer", streamFiles: true })
         .pipe(createWriteStream(testFileName));
@@ -27,9 +27,13 @@ beforeAll(() => {
 });
 
 describe("Tests file storage", () => {
-    it("Adds a file correctly", () => {
+    it("Adds and removes a file correctly", () => {
         const thisFile = readFileSync(testFileName);
-        console.log(thisFile);
-        storage.addFile(thisFile);
+        const thisDate = new Date();
+        storage.addFile({ data: thisFile, time: thisDate });
+        expect(storage.files.length).toBeGreaterThanOrEqual(1);
+        expect(storage.files[0].data).toStrictEqual(thisFile);
+        storage.removeFile({ id: thisDate.getTime() });
+        expect(storage.files.length).toBe(0);
     });
 });
