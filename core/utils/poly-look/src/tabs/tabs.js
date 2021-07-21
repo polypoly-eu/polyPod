@@ -8,7 +8,7 @@ const listOfTheme = Object.values(polyTabs.themes);
 
 const validateTabTheme = value => listOfTheme.includes(value);
 
-let __getTabContentBinded = null;
+let _getTabContentBound = null;
 
 export class Tabs extends LitElement {
   static get styles() {
@@ -47,10 +47,10 @@ export class Tabs extends LitElement {
     this.tabContents = [];
     this.__theme = polyTabs.themes.DARK;
 
-    __getTabContentBinded = this.__getTabContent.bind(this);
+    _getTabContentBound = this._getTabContent.bind(this);
   }
 
-  __getTabContent(event) {
+  _getTabContent(event) {
     this.tabContents = this.tabContents.concat(
       unsafeHTML(event.detail.innerContent)
     );
@@ -65,7 +65,7 @@ export class Tabs extends LitElement {
 
     document.addEventListener(
       `${polyPrefix}-tab-connected`,
-      __getTabContentBinded
+      _getTabContentBound
     );
   }
 
@@ -73,7 +73,7 @@ export class Tabs extends LitElement {
     super.disconnectedCallback();
     document.removeEventListener(
       `${polyPrefix}-tab-connected`,
-      __getTabContentBinded
+      _getTabContentBound
     );
   }
 
@@ -108,7 +108,7 @@ export class Tabs extends LitElement {
     );
   }
 
-  __changeTab(event) {
+  _changeTab(event) {
     this.tabHeaders = this.tabHeaders.map(tabHeader => {
       tabHeader.active = tabHeader.tabId === event.detail.tabId;
 
@@ -126,12 +126,12 @@ export class Tabs extends LitElement {
     });
 
     if (tabActive) {
-      tabActive.setAttribute("active", true);
+      tabActive.setAttribute("active", "");
     }
   }
 
   render() {
-    return html`<div class="tabs" @poly-tab-click=${this.__changeTab}>
+    return html`<div class="tabs" @poly-tab-click=${this._changeTab}>
       <div class="tabs-line">${this.__renderTabsLine()}</div>
       <div class="tabs-content">${this.tabContents}</div>
     </div>`;

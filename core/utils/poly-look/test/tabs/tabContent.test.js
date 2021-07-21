@@ -2,7 +2,7 @@ import { html, fixture, expect } from "@open-wc/testing";
 import "../../src/tabs";
 
 describe("TabContent", () => {
-  it(`should have the active attribute to false by default`, async () => {
+  it(`should have the active attribute set to false by default`, async () => {
     const el = await fixture(html`
       <poly-tab-content tabId="01">
         <h1>This is a test</h1>

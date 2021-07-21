@@ -67,7 +67,7 @@ describe("TabHeader", () => {
     expect(el.theme).to.be.equal(theme);
   });
 
-  it(`should fired the event "poly-tab-click" when the poly-tab-header is clicked`, async () => {
+  it(`should fire the event "poly-tab-click" when the poly-tab-header is clicked`, async () => {
     const el = await fixture(html`
       <poly-tab-header
         .label=${label}
