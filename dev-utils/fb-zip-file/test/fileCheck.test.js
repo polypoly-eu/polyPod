@@ -20,11 +20,11 @@ describe("Tautological test", () => {
 describe("Tests different route sets", () => {
     it("should pass with one route more", () => {
         let excessFileRoutes = zipFileRoutes.slice();
-        excessFileRoutes.push( "foo/bar/baz ");
-        expect(fileChecker.checkStructure(excessFileRoutes)).toBe( true );
+        excessFileRoutes.push("foo/bar/baz ");
+        expect(fileChecker.checkStructure(excessFileRoutes)).toBe(true);
     });
     it("should not pass with one route less", () => {
-        let defectFileRoutes = zipFileRoutes.slice(0,-1);
-        expect(fileChecker.checkStructure(defectFileRoutes)).toBe( false );
+        let defectFileRoutes = zipFileRoutes.slice(0, -1);
+        expect(fileChecker.checkStructure(defectFileRoutes)).toBe(false);
     });
 });
