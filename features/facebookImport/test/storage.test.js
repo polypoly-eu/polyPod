@@ -3,7 +3,7 @@ import { readFileSync, createWriteStream } from "fs";
 
 import Storage from "../src/model/storage.js";
 import { expect } from "@jest/globals";
-const dataFileName = "no-data.txt";
+const noDataFileName = "no-data.txt";
 const dataFileName = "src/static/commonStructure.json";
 const testFileName = "/tmp/fi-test.zip";
 let storage;
