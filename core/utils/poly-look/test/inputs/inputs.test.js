@@ -69,7 +69,7 @@ describe("Clear input", () => {
     expect(button.disabled).to.be.false;
   });
 
-  it(`should disabled the button if the input is empty and the event input is fired`, async () => {
+  it(`should disable the button if the input is empty and the event input is fired`, async () => {
     const theme = polyInput.types.LIGHT;
     const placeHolder = "This is a test";
 
@@ -99,7 +99,7 @@ describe("Clear input", () => {
     expect(button.disabled).to.be.true;
   });
 
-  it(`should clear the input value and disabled the button if the user click the button`, async () => {
+  it(`should clear the input value and disable the button if the user click the button`, async () => {
     const theme = polyInput.types.LIGHT;
     const placeHolder = "This is a test";
 
