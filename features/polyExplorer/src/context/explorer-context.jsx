@@ -62,12 +62,31 @@ function loadProducts() {
 //Will be clearer when we know the content structure
 const loadStoriesMetadata = () => {
     return {
-        exampleStory: {
-            title: "example",
-            previewText:
-                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        messenger: {
+            title: "story.messenger.title",
+            previewText: "story.messenger.summarize",
+            img: {
+                src: "images/stories/messenger/card-image.svg",
+                alt: "story.messenger.alt",
+            },
             route: "/story/example-story",
-            img: "images/story-preview-example.png",
+        },
+        digitalGiants: {
+            title: "story.digitalGiants.title",
+            previewText: "story.digitalGiants.summarize",
+            img: {
+                src: "images/stories/digital-giants/card-image.svg",
+                alt: "story.digitalGiants.alt",
+            },
+            route: "/story/example-story",
+        },
+        trackers: {
+            title: "story.trackers.title",
+            previewText: "story.trackers.summarize",
+            img: {
+                src: "images/stories/trackers/card-image.svg",
+                alt: "story.trackers.alt",
+            },
         },
     };
 };
