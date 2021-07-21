@@ -6,8 +6,10 @@ import glob from "glob";
 import { readFileSync, writeFileSync } from "fs";
 import { allDataFileName, dataFileName } from "../src/globals.js";
 
+
 // Files are included in a local .data folder
 const localFolder = ".data";
+const anonymizerRegex = /(?<=\/)[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}(?=\/)/;
 
 glob(`${localFolder}/*.json`, (error, files) => {
     if (error)
@@ -47,15 +49,22 @@ glob(`${localFolder}/*.json`, (error, files) => {
 function extractKeys(prefix, data, theseKeys, allKeys) {
     for (let key in data) {
         if (key != "leaves") {
+            let anonymizedKey = key;
+            let anonymizedPrefix = prefix;
             if (
                 (prefix !== "" &&
                     /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(key)) ||
                 (prefix.includes("messages") && /^[_a-zA-Z0-9-]{10}$/.test(key))
             ) {
-                key = "uniqueid_hash";
+                anonymizedKey = "uniqueid_hash";
+            }
+            if ( anonymizerRegex.test(prefix )) {
+                console.log( "Prefix", prefix);
+                anonymizedPrefix = anonymizedPrefix.replace( anonymizerRegex, 'uniqueid_hash');
+                console.log( "Anonymized", anonymizedPrefix);
             }
             theseKeys[`${prefix}${key}`] = [];
-            allKeys.add(`${prefix}${key}`);
+            allKeys.add(`${anonymizedPrefix}${anonymizedKey}`);
             extractKeys(`${prefix}${key}/`, data[key], theseKeys, allKeys);
         } else {
             data["leaves"].forEach((f) => {
