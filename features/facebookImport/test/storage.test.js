@@ -1,11 +1,12 @@
 import JSZip from "jszip";
 import { readFileSync, createWriteStream } from "fs";
 
+const tempDir = "RUNNER_TEMP" in process.env ? process.env.RUNNER_TEMP : "/tmp";
 import Storage from "../src/model/storage.js";
 import { expect } from "@jest/globals";
 const noDataFileName = "no-data.txt";
 const dataFileName = "src/static/commonStructure.json";
-const testFileName = "/tmp/fi-test.zip";
+const testFileName = `${tempDir}/fi-test.zip";
 let storage;
 
 beforeAll(() => {
