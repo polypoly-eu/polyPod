@@ -47,12 +47,14 @@ glob(`${localFolder}/*.json`, (error, files) => {
 
 function extractKeys(prefix, data, theseKeys, allKeys) {
     let anonymizedPrefix = prefix;
-    if (anonymizerRegex.test(prefix)) {
-        anonymizedPrefix = anonymizedPrefix.replace(
-            anonymizerRegex,
-            "uniqueid_hash"
-        );
-    }
+    anonymizedPrefix = anonymizedPrefix.replace(
+        anonymizerRegex,
+        "uniqueid_hash"
+    );
+    anonymizedPrefix = anonymizedPrefix.replace(
+        /(?<=\/)[_a-zA-Z0-9-]{10}(?=\/)/,
+        "uniqueid_hash"
+    );
     for (let key in data) {
         if (key != "leaves") {
             let anonymizedKey = key;
@@ -75,10 +77,13 @@ function extractKeys(prefix, data, theseKeys, allKeys) {
                 } else {
                     theseKeys[sansSlash] = [f];
                 }
-                let genericName = f.replace(
-                    /(\w+)(?=\.(jpg|docx|pdf|png|gif|md|epub|mobi|mp4))/,
-                    "a_file"
-                );
+                let genericName = f;
+                if (f !== "no-data.txt") {
+                    genericName = f.replace(
+                        /(\w+)(?=\.(jpg|docx|pdf|png|gif|md|epub|mobi|mp4|txt))/,
+                        "a_file"
+                    );
+                }
                 allKeys.add(`${anonymizedPrefix}${genericName}`);
             });
         }
