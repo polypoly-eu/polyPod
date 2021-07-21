@@ -6,7 +6,6 @@ import glob from "glob";
 import { readFileSync, writeFileSync } from "fs";
 import { allDataFileName, dataFileName } from "../src/globals.js";
 
-
 // Files are included in a local .data folder
 const localFolder = ".data";
 const anonymizerRegex = /(?<=\/)[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}(?=\/)/;
@@ -58,10 +57,13 @@ function extractKeys(prefix, data, theseKeys, allKeys) {
             ) {
                 anonymizedKey = "uniqueid_hash";
             }
-            if ( anonymizerRegex.test(prefix )) {
-                console.log( "Prefix", prefix);
-                anonymizedPrefix = anonymizedPrefix.replace( anonymizerRegex, 'uniqueid_hash');
-                console.log( "Anonymized", anonymizedPrefix);
+            if (anonymizerRegex.test(prefix)) {
+                console.log("Prefix", prefix);
+                anonymizedPrefix = anonymizedPrefix.replace(
+                    anonymizerRegex,
+                    "uniqueid_hash"
+                );
+                console.log("Anonymized", anonymizedPrefix);
             }
             theseKeys[`${prefix}${key}`] = [];
             allKeys.add(`${anonymizedPrefix}${anonymizedKey}`);
