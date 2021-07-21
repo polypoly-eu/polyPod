@@ -1,16 +1,16 @@
-import { commonKeys } from "../src/globals.js";
+import { commonStructure } from "../src/globals.js";
 
-let importedCommonKeys;
+let importedCommonStructure;
 
 beforeAll(() => {
-    importedCommonKeys = commonKeys();
+    importedCommonStructure = commonStructure();
 });
 
 describe("Test basic configuration", () => {
     it("includes expected keys", () => {
-        expect(importedCommonKeys).toBeDefined();
+        expect(importedCommonStructure).toBeDefined();
         ["events", "pages", "privacy_checkup"].forEach((key) => {
-            expect(importedCommonKeys).toContain(key);
+            expect(Object.keys(importedCommonStructure)).toContain(key);
         });
     });
 });
