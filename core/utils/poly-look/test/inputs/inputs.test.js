@@ -99,7 +99,7 @@ describe("Clear input", () => {
     expect(button.disabled).to.be.true;
   });
 
-  it(`should clear the input value and disable the button if the user click the button`, async () => {
+  it(`should clear the input value and disable the button if the user clicks the button`, async () => {
     const theme = polyInput.types.LIGHT;
     const placeHolder = "This is a test";
 
