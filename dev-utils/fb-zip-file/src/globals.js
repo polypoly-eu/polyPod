@@ -1,6 +1,7 @@
 import { readFileSync } from "fs";
 
 export const dataFileName = "data/commonStructure.json";
+export const allDataFileName = "data/allStructure.json";
 export const noDataFileName = "no-data.txt";
 
 export function commonStructure() {
