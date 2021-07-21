@@ -50,7 +50,7 @@ function extractKeys(prefix, data, theseKeys, allKeys) {
             if (
                 (prefix !== "" &&
                     /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(key)) ||
-                (prefix.includes("inbox") && /^[_a-zA-Z0-9-]{10}$/.test(key))
+                (prefix.includes("messages") && /^[_a-zA-Z0-9-]{10}$/.test(key))
             ) {
                 key = "uniqueid_hash";
             }
