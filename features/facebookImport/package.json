@@ -2,7 +2,8 @@
   "name": "facebook-import-feature",
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup --watch -c"
+    "watch": "rollup --watch -c",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.8",

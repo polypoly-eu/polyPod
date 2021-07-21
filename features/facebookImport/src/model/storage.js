@@ -19,7 +19,6 @@ export default class Storage {
     }
 
     removeFile({ id }) {
-        console.log("id ", id);
         delete this._files[id];
         this.changeListener();
     }
