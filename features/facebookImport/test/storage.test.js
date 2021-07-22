@@ -6,7 +6,7 @@ import Storage from "../src/model/storage.js";
 import { expect } from "@jest/globals";
 const noDataFileName = "no-data.txt";
 const dataFileName = "src/static/commonStructure.json";
-const testFileName = `${tempDir}/fi-test.zip`;
+let testBuffer;
 let storage;
 
 beforeAll(() => {
@@ -22,19 +22,20 @@ beforeAll(() => {
             });
         }
     }
-    zipFile
-        .generateNodeStream({ type: "nodebuffer", streamFiles: true })
-        .pipe(createWriteStream(testFileName));
+    testBuffer = zipFile.generateNodeStream({
+        type: "nodebuffer",
+        streamFiles: true,
+    });
+    console.log(testBuffer);
     storage = new Storage();
 });
 
 describe("Tests file storage", () => {
     it("Adds and removes a file correctly", () => {
-        const thisFile = readFileSync(testFileName);
         const thisDate = new Date();
-        storage.addFile({ data: thisFile, time: thisDate });
+        storage.addFile({ data: testBuffer, time: thisDate });
         expect(storage.files.length).toBeGreaterThanOrEqual(1);
-        expect(storage.files[0].data).toStrictEqual(thisFile);
+        expect(storage.files[0].data).toStrictEqual(testBuffer);
         storage.removeFile({ id: thisDate.getTime() });
         expect(storage.files.length).toBe(0);
     });
