@@ -56,7 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     try container.viewContext.save()
                 }
             } catch {
-                fatalError("Error enforcing encryption")
+                if let error = error as NSError? {
+                    fatalError("Encryption error \(error), \(error.userInfo)")
+                }
             }
             
             if let error = error as NSError? {
