@@ -4,10 +4,10 @@ class ContentViewHost: UIHostingController<ContentView> {
     private var statusBarStyle: UIStatusBarStyle = .default {
         didSet { setNeedsStatusBarAppearanceUpdate() }
     }
-    
+
     init() {
         super.init(rootView: ContentView())
-        self.rootView.setStatusBarStyle = { self.statusBarStyle = $0 }
+        self.rootView.setStatusBarStyle = { self.statusBarStyle = $0 }        
     }
     
     @objc required dynamic init?(coder aDecoder: NSCoder) {
