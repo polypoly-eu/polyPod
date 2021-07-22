@@ -9,8 +9,8 @@ let testBuffer;
 let storage;
 
 beforeAll(() => {
-    let zipFile = new JSZip();
-    let structure = JSON.parse(readFileSync(dataFileName));
+    const zipFile = new JSZip();
+    const structure = JSON.parse(readFileSync(dataFileName));
 
     for (let key in structure) {
         if (structure[key] === []) {
