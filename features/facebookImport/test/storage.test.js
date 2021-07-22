@@ -4,6 +4,7 @@ import { readFileSync, createWriteStream } from "fs";
 const tempDir = "RUNNER_TEMP" in process.env ? "." : "/tmp";
 import Storage from "../src/model/storage.js";
 import { expect } from "@jest/globals";
+import { doesNotMatch } from "assert";
 const noDataFileName = "no-data.txt";
 const dataFileName = "src/static/commonStructure.json";
 let testBuffer;
@@ -22,21 +23,23 @@ beforeAll(() => {
             });
         }
     }
-    testBuffer = zipFile.generateNodeStream({
-        type: "nodebuffer",
-        streamFiles: true,
-    });
-    console.log(testBuffer);
+    testBuffer = zipFile.generateNodeStream({ type: "nodebuffer" });
     storage = new Storage();
 });
 
 describe("Tests file storage", () => {
     it("Adds and removes a file correctly", () => {
-        const thisDate = new Date();
-        storage.addFile({ data: testBuffer, time: thisDate });
-        expect(storage.files.length).toBeGreaterThanOrEqual(1);
-        expect(storage.files[0].data).toStrictEqual(testBuffer);
-        storage.removeFile({ id: thisDate.getTime() });
-        expect(storage.files.length).toBe(0);
+        testBuffer
+            .on("data", (data) => {
+                const thisDate = new Date();
+                storage.addFile({ data: data, time: thisDate });
+                expect(storage.files.length).toBeGreaterThanOrEqual(1);
+                expect(storage.files[0].data).toStrictEqual(data);
+                storage.removeFile({ id: thisDate.getTime() });
+                expect(storage.files.length).toBe(0);
+            })
+            .on("finish", () => {
+                done();
+            });
     });
 });
