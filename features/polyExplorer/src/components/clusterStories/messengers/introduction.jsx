@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import i18n from "../../../i18n";
+import { INTRO_ANIMATIONS } from "../../../constants";
 
 import "./introduction.css";
 
@@ -85,10 +86,10 @@ const Introduction = ({ animation }) => {
 
     useEffect(() => {
         switch (animation) {
-            case "fordward":
+            case INTRO_ANIMATIONS.FORDWARD:
                 _animationForward();
                 break;
-            case "backward":
+            case INTRO_ANIMATIONS.BACKWARD:
                 _fullAnimationBackward();
                 break;
             default:

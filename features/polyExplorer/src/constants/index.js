@@ -15,3 +15,8 @@ export const DIAGRAMS = {
     COMPANY_HIGHLIGHT: "companyHighlight",
     ALL_INDUSTRIES: "allIndustries",
 };
+
+export const INTRO_ANIMATIONS = {
+    FORDWARD: "fordward",
+    BACKWARD: "backward",
+};
