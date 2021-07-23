@@ -66,7 +66,7 @@ const loadStoriesMetadata = () => {
             title: "example",
             previewText:
                 "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-            route: "/story/messanger-story",
+            route: "/story/messenger-story",
             img: "images/story-preview-example.png",
         },
     };
