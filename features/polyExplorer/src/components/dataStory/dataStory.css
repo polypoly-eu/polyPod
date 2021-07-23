@@ -21,3 +21,7 @@
     width: 100%;
     height: 10%;
 }
+
+.story.messenger {
+    background: linear-gradient(180deg, var(--color-primary-messenger-story) 0%, var(--color-secondary-messenger-story) 100%);
+}
