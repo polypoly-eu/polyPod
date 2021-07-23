@@ -42,20 +42,55 @@ class FacebookImport extends LitElement {
     render() {
         if (!this._pod) return this._renderSplash();
         return html`
-            <h1>Download</h1>
-            <fi-download .pod="${this._pod}"></fi-download>
-            <hr />
-            <h1>File management</h1>
-            <fi-file-management
-                .pod="${this._pod}"
-                .files="${this._files}"
-                @add-file="${this._handleAddFile}"
-                @remove-file="${this._handleRemoveFile}"
-            ></fi-file-management>
-            <hr />
-            <h1>Analysis</h1>
-            <fi-analysis .files="${this._files}"></fi-analysis>
+            <poly-tabs theme="dark">
+                <poly-tab tabId="download" label="Download" active>
+                    <poly-tab-content></poly-tab-content>
+                </poly-tab>
+                <poly-tab tabId="file-management" label="File management">
+                    <poly-tab-content></poly-tab-content>
+                </poly-tab>
+                <poly-tab tabId="analysis" label="Analysis">
+                    <poly-tab-content></poly-tab-content>
+                </poly-tab>
+            </poly-tabs>
+
+            <div class="tab-content" style="display: none">
+                <fi-download .pod="${this._pod}"></fi-download>
+
+                <fi-file-management
+                    .pod="${this._pod}"
+                    .files="${this._files}"
+                    @add-file="${this._handleAddFile}"
+                    @remove-file="${this._handleRemoveFile}"
+                ></fi-file-management>
+
+                <fi-analysis .files="${this._files}"></fi-analysis>
+            </div>
         `;
+    }
+
+    updated() {
+        // This is quite a bit of a hack - at the moment, <poly-tab-content>
+        // elements don't support nested LitElement-derived web components,
+        // hence this questionable workaround:
+        setTimeout(() => {
+            const tabIds = [
+                ...this.shadowRoot.querySelectorAll(".tab-content>*"),
+            ].map((element) =>
+                element.nodeName.toLowerCase().replace(/^fi-/, "")
+            );
+            const polyTabs = this.shadowRoot.querySelector("poly-tabs");
+            for (let tabId of tabIds) {
+                const polyTabContent = polyTabs.shadowRoot.querySelector(
+                    `poly-tab-content[tabId=${tabId}`
+                );
+                const tabTarget = polyTabContent.shadowRoot.querySelector(
+                    `#poly-${tabId}`
+                );
+                const tabSource = this.shadowRoot.querySelector(`fi-${tabId}`);
+                tabTarget.appendChild(tabSource);
+            }
+        }, 0);
     }
 }
 

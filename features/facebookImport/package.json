@@ -13,6 +13,7 @@
     "jest": "^27.0.6",
     "jszip": "^3.6.0",
     "lit": "^2.0.0-rc.2",
+    "poly-look": "file:../../core/utils/poly-look",
     "rollup": "2.26.11",
     "rollup-plugin-copy": "3.3.0"
   },

@@ -14,6 +14,7 @@ export default {
                     src: [
                         "src/static/*",
                         "node_modules/@polypoly-eu/podjs/dist/pod.js",
+                        "node_modules/poly-look/dist/poly-look.bundled.js",
                     ],
                     dest: "dist",
                 },
