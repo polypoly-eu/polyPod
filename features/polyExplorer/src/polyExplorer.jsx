@@ -88,7 +88,7 @@ const PolyExplorerApp = () => {
                 <Route exact path="/jurisdiction-info">
                     <JurisdictionInfoScreen />
                 </Route>
-                <Route exact path="/story/messanger-story">
+                <Route exact path="/story/messenger-story">
                     <MessengerStory />
                 </Route>
             </Switch>
