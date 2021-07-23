@@ -8,7 +8,7 @@ class FiFileManagement extends LitElement {
         };
     }
 
-    async _loadFile() {
+    async _importFile() {
         const file = await this.pod.polyNav.pickFile();
         if (!file) return;
 
@@ -47,10 +47,15 @@ class FiFileManagement extends LitElement {
 
     render() {
         return html`
-            <button @click="${this._loadFile}">Load file</button>
+            <p>
+                This is where the user can add previously downloaded Facebook
+                data exports, and manage the ones they had already imported.
+            </p>
+            <button @click="${this._importFile}">Import file</button>
+            <hr />
             ${Object.values(this.files).length
                 ? this._renderFileList()
-                : html``}
+                : html`<em>No files imported</em>`}
         `;
     }
 }

@@ -10,9 +10,13 @@ class FiDownload extends LitElement {
     }
 
     render() {
-        return html`<button @click=${this._openDataDownloadLink}>
-            Download your Facebook data
-        </button>`;
+        return html`<p>
+                This is where we will guide the user through the process of
+                downloading their data from Facebook.
+            </p>
+            <button @click=${this._openDataDownloadLink}>
+                Download your Facebook data
+            </button>`;
     }
 }
 

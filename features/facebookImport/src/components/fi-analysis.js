@@ -78,7 +78,13 @@ class FiAnalysis extends LitElement {
     }
 
     render() {
-        return html`${this._analysis.map(this._renderFileAnalysis)}`;
+        return html` <p>
+                This is where we will show more and more analysis based on the
+                files the user has imported.
+            </p>
+            ${this._analysis.length
+                ? this._analysis.map(this._renderFileAnalysis)
+                : html`<em>No files imported.</em>`}`;
     }
 }
 
