@@ -1,21 +1,13 @@
 import { html, LitElement, css } from "lit-element";
 import { globalTheme } from "../globalTheme";
 import { polyButton } from "../constants";
+import { reduceListToString } from "../helpers";
 
 const listOfValidTypes = Object.values(polyButton.types);
 const listOfValidSizes = Object.values(polyButton.sizes);
 
 const validateButtonTypes = type => listOfValidTypes.includes(type);
-
 const validateButtonSizes = size => listOfValidSizes.includes(size);
-
-function listToString(acc, value, index, list) {
-  return index === list.length - 1
-    ? `${acc} and ${value}`
-    : index === 0
-    ? value
-    : `${acc}, ${value}`;
-}
 
 export class Button extends LitElement {
   static get styles() {
@@ -128,7 +120,7 @@ export class Button extends LitElement {
       throw new Error(
         `Wrong value in type property. Supported values are: ${Object.values(
           polyButton.types
-        ).reduce(listToString, "")}`
+        ).reduce(reduceListToString, "")}`
       );
     }
 
@@ -145,7 +137,7 @@ export class Button extends LitElement {
       throw new Error(
         `Wrong value in size property. Supported values are: ${Object.values(
           polyButton.sizes
-        ).reduce(listToString, "")}`
+        ).reduce(reduceListToString, "")}`
       );
     }
 
