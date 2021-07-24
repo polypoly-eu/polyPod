@@ -12,7 +12,6 @@
     "test": "web-test-runner --coverage",
     "test:watch": "web-test-runner --watch",
     "storybook": "web-dev-server -c .storybook/server.mjs",
-    "storybook:build": "build-storybook",
     "build": "rollup -c rollup.config.js"
   },
   "dependencies": {
