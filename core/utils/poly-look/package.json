@@ -1,11 +1,11 @@
 {
   "name": "poly-look",
   "version": "0.0.0",
-  "description": "Webcomponent poly-look following open-wc recommendations",
+  "description": "polyLook web components following open-wc recommendations",
   "author": "poly-look",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.js",
+  "main": "src/poly-look.js",
+  "module": "src/poly-look.js",
   "scripts": {
     "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
@@ -33,9 +33,5 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svg": "^2.0.0",
     "rollup-plugin-terser": "^7.0.2"
-  },
-  "prettier": {
-    "singleQuote": false,
-    "arrowParens": "avoid"
   }
 }
