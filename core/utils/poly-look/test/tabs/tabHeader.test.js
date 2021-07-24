@@ -15,7 +15,7 @@ describe("TabHeader", () => {
     active = true;
   });
 
-  it(`should throw an exception if the value of the theme is not valid`, done => {
+  it(`should throw an exception if the value of the theme is not valid`, (done) => {
     theme = "test";
     fixture(html`
       <poly-tab-header
@@ -28,7 +28,7 @@ describe("TabHeader", () => {
       .then(() => {
         done.fail("It should fail");
       })
-      .catch(error => {
+      .catch((error) => {
         expect(error.message).to.be.equal(
           "Wrong value in type property. Supported values are: dark and light"
         );

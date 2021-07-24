@@ -3,7 +3,7 @@ import "../../src/inputs";
 import { polyInput } from "../../src/constants";
 
 describe("Clear input", () => {
-  it(`should throw an exception if the theme has an invalid value`, done => {
+  it(`should throw an exception if the theme has an invalid value`, (done) => {
     const theme = "This is a test";
     const placeHolder = "Test placeHolder";
 
@@ -16,7 +16,7 @@ describe("Clear input", () => {
       .then(() => {
         done.fail("It should fail");
       })
-      .catch(error => {
+      .catch((error) => {
         expect(error.message).to.be.equal(
           "Wrong value in type property. Supported values are: dark and light"
         );
