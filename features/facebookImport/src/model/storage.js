@@ -57,8 +57,10 @@ export default class Storage {
             dataFactory.namedNode(`${namespace}file/${id}`),
             null
         );
-        console.log(polyIn);
-        await polyIn.delete(quad);
+        (await polyIn.select(quad)).forEach(
+            (fileQuad) => polyIn.delete(fileQuad)
+        );
+
         await this._refreshFiles();
         console.log(polyIn);
         this.changeListener();
