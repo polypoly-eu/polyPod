@@ -38,7 +38,6 @@ export default class Storage {
     async addFile(file) {
         // TODO: Detect / handle duplicate files better
         const id = file.time.getTime();
-        this._files[id] = { ...file, id };
         const { dataFactory, polyIn } = await this._pod;
         const quad = dataFactory.quad(
             dataFactory.namedNode(`${namespace}zipFiles`),
