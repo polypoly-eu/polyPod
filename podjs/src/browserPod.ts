@@ -18,14 +18,14 @@ class LocalStoragePolyIn implements PolyIn {
 
     async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
         return this.store.filter((quad: RDF.Quad) => {
-            if (matcher.subject &&
-                quad.subject.value != matcher.subject.value)
+            if (matcher.subject && quad.subject.value != matcher.subject.value)
                 return false;
-            if (matcher.object &&
-                quad.object.value != matcher.object.value)
+            if (matcher.object && quad.object.value != matcher.object.value)
                 return false;
-            if (matcher.predicate &&
-                quad.predicate.value != matcher.predicate.value)
+            if (
+                matcher.predicate &&
+                quad.predicate.value != matcher.predicate.value
+            )
                 return false;
             return true;
         });
@@ -34,18 +34,17 @@ class LocalStoragePolyIn implements PolyIn {
     async select(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
         return this.store.filter((quad: RDF.Quad) => {
             if (!quad) return false;
-            if (matcher.subject &&
-                quad.subject.value != matcher.subject.value)
+            if (matcher.subject && quad.subject.value != matcher.subject.value)
                 return false;
-            if (matcher.object &&
-                quad.object.value != matcher.object.value)
+            if (matcher.object && quad.object.value != matcher.object.value)
                 return false;
-            if (matcher.predicate &&
-                quad.predicate.value != matcher.predicate.value)
+            if (
+                matcher.predicate &&
+                quad.predicate.value != matcher.predicate.value
+            )
                 return false;
             return true;
         });
-
     }
 
     async add(...quads: RDF.Quad[]): Promise<void> {
@@ -57,8 +56,8 @@ class LocalStoragePolyIn implements PolyIn {
     }
 
     async delete(...quads: RDF.Quad[]): Promise<void> {
-        quads.forEach(quad => {
-            delete this.store[this.store.indexOf(quad)]
+        quads.forEach((quad) => {
+            delete this.store[this.store.indexOf(quad)];
         });
         localStorage.setItem(
             LocalStoragePolyIn.storageKey,
