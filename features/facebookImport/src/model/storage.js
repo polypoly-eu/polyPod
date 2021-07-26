@@ -21,7 +21,7 @@ export default class Storage {
             null,
             null
         );
-
+        this._files = [];
         (await polyIn.select(quad)).forEach((fileQuad) => {
             // debugger;
             const id = fileQuad.predicate.value.slice(
@@ -57,12 +57,10 @@ export default class Storage {
             dataFactory.namedNode(`${namespace}file/${id}`),
             null
         );
-        (await polyIn.select(quad)).forEach(
-            (fileQuad) => polyIn.delete(fileQuad)
-        );
-
+        (await polyIn.select(quad)).forEach((fileQuad) => {
+            polyIn.delete(fileQuad);
+        });
         await this._refreshFiles();
-        console.log(polyIn);
         this.changeListener();
     }
 }
