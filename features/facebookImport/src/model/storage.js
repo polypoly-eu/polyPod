@@ -1,4 +1,3 @@
-// TODO: Load files from disk during initialisation
 import { base64EncArr, base64DecToArr } from "./base64utils";
 
 const namespace = "http://polypoly.coop/schema/facebook-import/";
@@ -14,7 +13,7 @@ export default class Storage {
         return Object.values(this._files);
     }
 
-    async _refreshFiles() {
+    async refreshFiles() {
         const { dataFactory, polyIn } = await this._pod;
         const quad = dataFactory.quad(
             dataFactory.namedNode(`${namespace}zipFiles`),
@@ -46,7 +45,7 @@ export default class Storage {
         );
 
         await polyIn.add(quad);
-        await this._refreshFiles();
+        await this.refreshFiles();
         this.changeListener();
     }
 
@@ -60,7 +59,7 @@ export default class Storage {
         (await polyIn.select(quad)).forEach((fileQuad) => {
             polyIn.delete(fileQuad);
         });
-        await this._refreshFiles();
+        await this.refreshFiles();
         this.changeListener();
     }
 }
