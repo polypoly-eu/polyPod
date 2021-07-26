@@ -19,9 +19,10 @@ class FacebookImport extends LitElement {
 
     constructor() {
         super();
-        this._initPod().then((pod) => (this._pod = pod));
+        let podInitializer = this._initPod();
+        podInitializer.then((pod) => (this._pod = pod));
+        this._storage = new Storage(podInitializer);
         this._files = [];
-        this._storage = new Storage();
         this._storage.changeListener = () => {
             this._files = Object.values(this._storage.files);
         };
