@@ -81,28 +81,39 @@ extension PostOffice {
             handlePolyInAdd(args: args, completionHandler: completionHandler)
         case "select":
             handlePolyInSelect(args: args, completionHandler: completionHandler)
+        case "match":
+            handlePolyInSelect(args: args, completionHandler: completionHandler)
+        case "delete":
+            handlePolyInDelete(args: args, completionHandler: completionHandler)
+        case "has":
+            handlePolyInHas(args: args, completionHandler: completionHandler)
         default:
             print("PolyIn method unknown:", method)
         }
     }
-    
-    private func handlePolyInAdd(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+
+    private func convertArgs(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) -> [ExtendedData] {
         var extendedDataSet: [ExtendedData] = []
         
         for arg in args {
             guard let extendedData = arg as? ExtendedData else {
                 completionHandler(nil, MessagePackValue("Bad data"))
-                return
+                return extendedDataSet
             }
             
             guard let graph = extendedData.properties["graph"] as? ExtendedData, graph.classname == "@polypoly-eu/rdf.DefaultGraph" else {
                 completionHandler(nil, MessagePackValue("/default/"))
-                return
+                return extendedDataSet
             }
             
             extendedDataSet.append(extendedData)
         }
-        
+        return extendedDataSet
+    }
+    
+    private func handlePolyInAdd(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let extendedDataSet = convertArgs(args: args, completionHandler: completionHandler)
+
         PodApi.shared.polyIn.addQuads(quads: extendedDataSet) { didSave in
             if didSave {
                 completionHandler(MessagePackValue(), nil)
@@ -137,6 +148,30 @@ extension PostOffice {
         }
     }
     
+    private func handlePolyInDelete(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let extendedDataSet = convertArgs(args: args, completionHandler: completionHandler)
+        
+        PodApi.shared.polyIn.deleteQuads(quads: extendedDataSet) { didDelete in
+            if didDelete {
+                completionHandler(MessagePackValue(), nil)
+            } else {
+                completionHandler(nil, MessagePackValue("Failed"))
+            }
+        }
+    }
+    
+    private func handlePolyInHas(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let extendedDataSet = convertArgs(args: args, completionHandler: completionHandler)
+        
+        PodApi.shared.polyIn.hasQuads(quads: extendedDataSet) { doesHave in
+            if doesHave {
+                completionHandler(MessagePackValue(), true)
+            } else {
+                completionHandler(false, MessagePackValue("Failed"))
+            }
+        }
+    }
+
     private func extractMatcher(_ matcher: Any) -> ExtendedData? {
         // TODO: Originally, the code expected the matcher to already be of type
         //       ExtendedData. However, with the use cases so far - an empty

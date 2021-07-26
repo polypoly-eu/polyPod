@@ -92,6 +92,8 @@
 		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
+		5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */; };
+		5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
 		E90F89EE2629C0C000AD7D96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89ED2629C0C000AD7D96 /* ContentView.swift */; };
@@ -200,6 +202,8 @@
 		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
+		5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Delete.swift"; sourceTree = "<group>"; };
+		5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Has.swift"; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E90F89ED2629C0C000AD7D96 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -299,6 +303,8 @@
 			children = (
 				1A6F4DF124C1A76200874DF9 /* PolyIn+Add.swift */,
 				1A6F4DF324C1A76E00874DF9 /* PolyIn+Select.swift */,
+				5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */,
+				5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */,
 			);
 			path = Quads;
 			sourceTree = "<group>";
@@ -750,7 +756,9 @@
 				E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */,
 				1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */,
 				E97D327A263153C200A5A180 /* NavigationBar.swift in Sources */,
+				5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
+				5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */,
 				E9F370D5262EABFF006254C1 /* LocalizedStringKeyExtensions.swift in Sources */,
 				E9F370E7262EEF13006254C1 /* UIColorExtensions.swift in Sources */,
 				1ABADBEC24EBD02C00369791 /* LocationTracker.swift in Sources */,

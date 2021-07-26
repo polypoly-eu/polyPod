@@ -15,11 +15,7 @@ import coop.polypoly.polypod.polyIn.rdf.Quad
 import coop.polypoly.polypod.polyIn.rdf.QuadBuilder
 import coop.polypoly.polypod.polyIn.rdf.QuadObject
 import coop.polypoly.polypod.polyIn.rdf.QuadSubject
-import org.apache.jena.rdf.model.Model
-import org.apache.jena.rdf.model.ModelFactory
-import org.apache.jena.rdf.model.RDFNode
-import org.apache.jena.rdf.model.Resource
-import org.apache.jena.rdf.model.ResourceFactory
+import org.apache.jena.rdf.model.*
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
@@ -79,6 +75,26 @@ open class PolyIn(
         }
         // TODO: Implement "isDirty" flag or expose save() to features
         save()
+    }
+
+    open suspend fun delete(quads: List<Quad>) {
+        quads.forEach { quad ->
+            model.remove(
+                quadSubjectToResource(quad.subject),
+                model.createProperty(quad.predicate.iri),
+                quadObjectToResource(quad.`object`)
+            )
+        }
+    }
+
+    open suspend fun has(quads: List<Quad>): Boolean {
+        return quads.any { quad ->
+            model.contains(
+                quadSubjectToResource(quad.subject),
+                model.createProperty(quad.predicate.iri),
+                quadObjectToResource(quad.`object`)
+            )
+        }
     }
 
     private fun getDatabase(file: File): EncryptedFile {
