@@ -7,7 +7,6 @@ import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import { Volume } from "memfs";
 import { DefaultPod } from "@polypoly-eu/pod-api";
-import { format } from "prettier";
 
 const noDataFileName = "no-data.txt";
 const dataFileName = "src/static/commonStructure.json";
@@ -52,6 +51,7 @@ describe("Tests file storage", () => {
                         storage
                             .removeFile({ id: thisDate.getTime() })
                             .then(() => {
+                                console.log(storage.files);
                                 expect(storage.files.length).toBe(0);
                             });
                     });

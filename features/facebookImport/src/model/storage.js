@@ -31,7 +31,7 @@ export default class Storage {
                 id,
                 data: base64DecToArr(fileQuad.object.value), // guessing here
             };
-            this._files[id] = file;
+            this._files[id] = file; // This seems to be re-adding the file even if deleted
         });
     }
 
