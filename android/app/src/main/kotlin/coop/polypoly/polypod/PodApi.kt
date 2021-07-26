@@ -8,7 +8,10 @@ import coop.polypoly.polypod.polyIn.rdf.Quad
 import coop.polypoly.polypod.polyNav.PolyNav
 import eu.polypoly.pod.android.polyOut.FetchInit
 import eu.polypoly.pod.android.polyOut.PolyOut
-import org.msgpack.value.*
+import org.msgpack.value.MapValue
+import org.msgpack.value.StringValue
+import org.msgpack.value.Value
+import org.msgpack.value.ValueFactory
 
 open class PodApi(
     open val polyOut: PolyOut,
