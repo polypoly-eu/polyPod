@@ -24,10 +24,12 @@ export default class Storage {
 
         (await polyIn.select(quad)).forEach((fileQuad) => {
             // debugger;
-            const id = fileQuad.predicate.slice(`${namespace}file/`.length);
+            const id = fileQuad.predicate.value.slice(
+                `${namespace}file/`.length
+            );
             const file = {
                 id,
-                data: base64DecToArr(fileQuad.object), // guessing here
+                data: base64DecToArr(fileQuad.object.value), // guessing here
             };
             this._files[id] = file;
         });
