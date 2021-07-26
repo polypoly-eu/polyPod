@@ -48,12 +48,6 @@ describe("Tests file storage", () => {
                         expect([...storage.files[0].data]).toEqual([
                             ...theseBytes.values(),
                         ]);
-                        storage
-                            .removeFile({ id: thisDate.getTime() })
-                            .then(() => {
-                                console.log(storage.files);
-                                expect(storage.files.length).toBe(0);
-                            });
                     });
             });
     });
