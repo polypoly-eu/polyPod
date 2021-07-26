@@ -25,7 +25,7 @@ function b64ToUint6(nChr) {
 }
 
 export function base64DecToArr(sBase64, nBlocksSize) {
-    var sB64Enc = sBase64.replace(/[^A-Za-z0-9\+\/]/g, ""),
+    var sB64Enc = sBase64.replace(/[^A-Za-z0-9+/]/g, ""),
         nInLen = sB64Enc.length,
         nOutLen = nBlocksSize
             ? Math.ceil(((nInLen * 3 + 1) >> 2) / nBlocksSize) * nBlocksSize
@@ -98,7 +98,7 @@ export function base64EncArr(aBytes) {
 }
 
 /* UTF-8 array to DOMString and vice versa */
-
+/* eslint-disable no-unused-vars */
 function UTF8ArrToStr(aBytes) {
     var sView = "";
 
@@ -144,6 +144,7 @@ function UTF8ArrToStr(aBytes) {
     return sView;
 }
 
+/* eslint-disable no-unused-vars */
 function strToUTF8Arr(sDOMStr) {
     var aBytes,
         nChr,
