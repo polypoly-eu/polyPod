@@ -67,12 +67,10 @@ export class DefaultPod implements Pod {
                         throw new Error("Only default graph allowed");
                     this.store.add(quad);
                 }),
-            delete: async (...quads) =>
-                quads.forEach((quad) => {
-                    if (!quad.graph.equals(dataFactory.defaultGraph()))
-                        throw new Error("Only default graph allowed");
-                    this.store.delete(quad);
-                }),
+            delete: async (quad) => {
+                console.log("Deleting ", quad);
+                this.store.delete(quad);
+            },
             has: async (...quads) =>
                 quads.some((quad) => {
                     if (!quad.graph.equals(dataFactory.defaultGraph()))

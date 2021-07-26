@@ -51,15 +51,16 @@ export default class Storage {
     }
 
     async removeFile({ id }) {
-        delete this._files[id];
         const { dataFactory, polyIn } = await this._pod;
         const quad = dataFactory.quad(
             dataFactory.namedNode(`${namespace}zipFiles`),
             dataFactory.namedNode(`${namespace}file/${id}`),
             null
         );
+        console.log(polyIn);
         await polyIn.delete(quad);
         await this._refreshFiles();
+        console.log(polyIn);
         this.changeListener();
     }
 }
