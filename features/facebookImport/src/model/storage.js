@@ -24,8 +24,6 @@ export default class Storage {
 
         (await polyIn.select(quad)).forEach((fileQuad) => {
             // debugger;
-            console.log(fileQuad);
-            console.log(fileQuad.predicate);
             const id = fileQuad.predicate.slice(`${namespace}file/`.length);
             const file = {
                 id,
@@ -38,6 +36,7 @@ export default class Storage {
     async addFile(file) {
         // TODO: Detect / handle duplicate files better
         const id = file.time.getTime();
+        this._files[id] = { ...file, id };
         const { dataFactory, polyIn } = await this._pod;
         const quad = dataFactory.quad(
             dataFactory.namedNode(`${namespace}zipFiles`),

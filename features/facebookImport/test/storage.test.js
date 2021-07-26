@@ -3,6 +3,11 @@ import { readFileSync } from "fs";
 
 import Storage from "../src/model/storage.js";
 import { expect } from "@jest/globals";
+import { dataset } from "@rdfjs/dataset";
+import fetch from "node-fetch";
+import { Volume } from "memfs";
+import { DefaultPod } from "@polypoly-eu/pod-api";
+
 const noDataFileName = "no-data.txt";
 const dataFileName = "src/static/commonStructure.json";
 let testBuffer;
@@ -22,7 +27,9 @@ beforeAll(() => {
         }
     }
     testBuffer = zipFile.generateNodeStream({ type: "nodebuffer" });
-    storage = new Storage();
+    storage = new Storage(
+        new DefaultPod(dataset(), new Volume().promises, fetch)
+    );
 });
 
 describe("Tests file storage", (done) => {
@@ -30,11 +37,13 @@ describe("Tests file storage", (done) => {
         testBuffer
             .on("data", (data) => {
                 const thisDate = new Date();
-                storage.addFile({ data: data, time: thisDate });
-                expect(storage.files.length).toBeGreaterThanOrEqual(1);
-                expect(storage.files[0].data).toStrictEqual(data);
-                storage.removeFile({ id: thisDate.getTime() });
-                expect(storage.files.length).toBe(0);
+                storage.addFile({ data: data, time: thisDate }).then(() => {
+                    expect(storage.files.length).toBeGreaterThanOrEqual(1);
+                    expect(storage.files[0].data).toStrictEqual(data);
+                });
+                storage.removeFile({ id: thisDate.getTime() }).then(() => {
+                    expect(storage.files.length).toBe(0);
+                });
             })
             .on("finish", () => {
                 done();
