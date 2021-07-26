@@ -17,15 +17,35 @@ class LocalStoragePolyIn implements PolyIn {
     );
 
     async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
-        if (["subject", "predicate", "object"].some((key) => key in matcher))
-            throw "Not implemented: select with non-empty matcher";
-        return this.store;
+        return this.store.filter((quad: RDF.Quad) => {
+            if (matcher.subject &&
+                quad.subject.value != matcher.subject.value)
+                return false;
+            if (matcher.object &&
+                quad.object.value != matcher.object.value)
+                return false;
+            if (matcher.predicate &&
+                quad.predicate.value != matcher.predicate.value)
+                return false;
+            return true;
+        });
     }
 
     async select(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
-        if (["subject", "predicate", "object"].some((key) => key in matcher))
-            throw "Not implemented: select with non-empty matcher";
-        return this.store;
+        return this.store.filter((quad: RDF.Quad) => {
+            if (!quad) return false;
+            if (matcher.subject &&
+                quad.subject.value != matcher.subject.value)
+                return false;
+            if (matcher.object &&
+                quad.object.value != matcher.object.value)
+                return false;
+            if (matcher.predicate &&
+                quad.predicate.value != matcher.predicate.value)
+                return false;
+            return true;
+        });
+
     }
 
     async add(...quads: RDF.Quad[]): Promise<void> {
@@ -37,7 +57,13 @@ class LocalStoragePolyIn implements PolyIn {
     }
 
     async delete(...quads: RDF.Quad[]): Promise<void> {
-        throw "Not implemented: delete";
+        quads.forEach(quad => {
+            delete this.store[this.store.indexOf(quad)]
+        });
+        localStorage.setItem(
+            LocalStoragePolyIn.storageKey,
+            JSON.stringify(this.store)
+        );
     }
 
     async has(...quads: RDF.Quad[]): Promise<boolean> {
