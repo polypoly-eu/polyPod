@@ -12,6 +12,7 @@
     "@rdfjs/dataset": "^1.1.1",
     "@rollup/plugin-node-resolve": "11.2.0",
     "@zip.js/zip.js": "2.3.7",
+    "cypress": "^8.0.0",
     "jest": "^27.0.6",
     "jszip": "^3.6.0",
     "lit": "^2.0.0-rc.2",
