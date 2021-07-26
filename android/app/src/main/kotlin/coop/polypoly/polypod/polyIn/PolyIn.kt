@@ -15,7 +15,11 @@ import coop.polypoly.polypod.polyIn.rdf.Quad
 import coop.polypoly.polypod.polyIn.rdf.QuadBuilder
 import coop.polypoly.polypod.polyIn.rdf.QuadObject
 import coop.polypoly.polypod.polyIn.rdf.QuadSubject
-import org.apache.jena.rdf.model.*
+import org.apache.jena.rdf.model.Model
+import org.apache.jena.rdf.model.ModelFactory
+import org.apache.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.ResourceFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
