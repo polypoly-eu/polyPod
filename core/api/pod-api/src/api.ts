@@ -100,7 +100,6 @@ export interface PolyIn {
      * @param quads the triples that should be removed from the Pod
      */
     has(...quads: RDF.Quad[]): Promise<boolean>;
-
 }
 
 /**

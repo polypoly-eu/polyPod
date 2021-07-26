@@ -22,7 +22,6 @@ class LocalStoragePolyIn implements PolyIn {
         return this.store;
     }
 
-
     async select(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
         if (["subject", "predicate", "object"].some((key) => key in matcher))
             throw "Not implemented: select with non-empty matcher";
@@ -44,7 +43,6 @@ class LocalStoragePolyIn implements PolyIn {
     async has(...quads: RDF.Quad[]): Promise<boolean> {
         throw "Not implemented: has";
     }
-
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
