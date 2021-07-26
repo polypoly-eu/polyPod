@@ -46,9 +46,9 @@ describe("Tests file storage", () => {
                     .addFile({ data: theseBytes, time: thisDate })
                     .then(() => {
                         expect(storage.files.length).toBeGreaterThanOrEqual(1);
-                        console.log(storage.files[0].data);
-                        console.log(theseBytes);
-                        expect(storage.files[0].data).toStrictEqual(theseBytes);
+                        expect([...storage.files[0].data]).toEqual([
+                            ...theseBytes.values(),
+                        ]);
                         /*                 storage.removeFile({ id: thisDate.getTime() }).then(() => {
                     expect(storage.files.length).toBe(0);
                 }); */
