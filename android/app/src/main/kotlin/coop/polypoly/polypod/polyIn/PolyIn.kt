@@ -3,6 +3,14 @@ package coop.polypoly.polypod.polyIn
 import android.content.Context
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
+import org.apache.jena.rdf.model.Model
+import org.apache.jena.rdf.model.ModelFactory
+import org.apache.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.ResourceFactory
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.rdf.BlankNodeObject
 import coop.polypoly.polypod.polyIn.rdf.BlankNodeSubject
@@ -15,14 +23,6 @@ import coop.polypoly.polypod.polyIn.rdf.Quad
 import coop.polypoly.polypod.polyIn.rdf.QuadBuilder
 import coop.polypoly.polypod.polyIn.rdf.QuadObject
 import coop.polypoly.polypod.polyIn.rdf.QuadSubject
-import java.io.File
-import java.io.FileOutputStream
-import java.lang.Exception
-import org.apache.jena.rdf.model.Model
-import org.apache.jena.rdf.model.ModelFactory
-import org.apache.jena.rdf.model.RDFNode
-import org.apache.jena.rdf.model.Resource
-import org.apache.jena.rdf.model.ResourceFactory
 
 const val RDF_FORMAT = "N-TRIPLE"
 const val NS = "polypoly"
