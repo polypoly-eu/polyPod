@@ -29,7 +29,7 @@ export default class Storage {
             const id = fileQuad.predicate.slice(`${namespace}file/`.length);
             const file = {
                 id,
-                data: base64DecToArr(fileQuad.data), // guessing here
+                data: base64DecToArr(fileQuad.object), // guessing here
             };
             this._files[id] = file;
         });
