@@ -37,7 +37,10 @@ import { Bubblewrap, Classes } from "@polypoly-eu/bubblewrap";
 
 type PolyInEndpoint = ObjectEndpointSpec<{
     select(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
+    match(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
     add(...quads: Quad[]): ValueEndpointSpec<void>;
+    delete(...quads: Quad[]): ValueEndpointSpec<void>;
+    has(...quads: Quad[]): ValueEndpointSpec<boolean>;
 }>;
 
 type PolyOutEndpoint = ObjectEndpointSpec<{
@@ -156,7 +159,10 @@ export class RemoteClientPod implements Pod {
     get polyIn(): PolyIn {
         return {
             add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
+            match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
             select: (matcher) => this.rpcClient.polyIn().select(matcher)(),
+            delete: (...quads) => this.rpcClient.polyIn().delete(...quads)(),
+            has: (...quads) => this.rpcClient.polyIn().has(...quads)(),
         };
     }
 

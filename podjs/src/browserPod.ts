@@ -16,6 +16,13 @@ class LocalStoragePolyIn implements PolyIn {
         localStorage.getItem(LocalStoragePolyIn.storageKey) || "[]"
     );
 
+    async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
+        if (["subject", "predicate", "object"].some((key) => key in matcher))
+            throw "Not implemented: select with non-empty matcher";
+        return this.store;
+    }
+
+
     async select(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
         if (["subject", "predicate", "object"].some((key) => key in matcher))
             throw "Not implemented: select with non-empty matcher";
@@ -29,6 +36,15 @@ class LocalStoragePolyIn implements PolyIn {
             JSON.stringify(this.store)
         );
     }
+
+    async delete(...quads: RDF.Quad[]): Promise<void> {
+        throw "Not implemented: delete";
+    }
+
+    async has(...quads: RDF.Quad[]): Promise<boolean> {
+        throw "Not implemented: has";
+    }
+
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
