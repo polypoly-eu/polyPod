@@ -15,11 +15,12 @@ other we can develop a productive, collaborative community.  Instances of
 abusive, harassing, or otherwise unacceptable behavior may be reported by
 contacting community@polypoly.coop.
 
-## Contributor agreement
+## Contributor agreement for external contributions
 
-If you wish to make a contribution, please send an email to
-community@polypoly.coop, and we will walk you through the process of signing our
-contributor license agreement. We will make this process easier over time.
+If you wish to make a contribution, please download, read and sign [contributor
+license agreement](https://polypoly.coop/en-de/contribute/cla/) and then email
+it to [`community@polypoly.coop`](mailto:community@polypoly.coop), which can
+also help if you have any doubt.  We will make this process easier over time.
 
 ## Coding style
 
