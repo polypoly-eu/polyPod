@@ -6,6 +6,12 @@ import { INTRO_ANIMATIONS } from "../../constants/index.js";
 
 import "./messengerStory.css";
 
+/*
+ * The scrollyTellingDebug variable is used to show in the screen
+ * how the scrollytelling marks are distributed. It is useful to
+ * understand where the scrollytelling events are fired.
+ * IT NEVER MUST BE PUSHED IN A PRODUCTION BRANCH WITH THE VALUE "TRUE"
+ */
 const scrollTellingDebug = false;
 const animationPause = "pause";
 
