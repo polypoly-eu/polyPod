@@ -57,9 +57,7 @@ describe("Test file storage", () => {
         const thisDate = new Date();
         storage.addFile({ data: blob, time: thisDate }).then(() => {
             expect(storage.files.length).to.equal(1);
-            expect([...storage.files[0].data]).to.equal([
-                ...theseBytes.values(),
-            ]);
+            expect([...storage.files[0].data]).to.equal([...blob]);
             storage.removeFile({ id: thisDate.getTime() }).then(() => {
                 expect(storage.files.length).to.equal(0);
             });
