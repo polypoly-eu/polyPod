@@ -1,11 +1,15 @@
 import "../../dist/pod";
 import commonStructure from "../../src/static/commonStructure";
 import { BlobWriter, ZipWriter, TextReader } from "@zip.js/zip.js";
+import Storage from "../../src/model/storage.js";
 
 const noDataFileName = "no-data.txt";
 let blob;
+let storage;
+let pod;
 
 before(async () => {
+    pod = await window.pod;
     const zipBlobWriter = new BlobWriter("application/zip");
     const zipWriter = new ZipWriter(zipBlobWriter);
     for (let key in commonStructure) {
@@ -25,11 +29,14 @@ before(async () => {
     }
     await zipWriter.close();
     blob = await zipBlobWriter.getData();
+
+    storage = new Storage(pod);
+    storage.changeListener();
 });
 
 describe("Simple tests", () => {
     it("finds window.pod", () => {
-        expect(window.pod).to.not.be.null;
+        expect(pod).to.not.be.null;
     });
     it("imports structure JSON", () => {
         expect(commonStructure).to.not.be.null;
@@ -42,5 +49,20 @@ describe("Simple tests", () => {
 
     it("creates a zipfile with that structure", () => {
         expect(blob).to.not.be.null;
+    });
+});
+
+describe("Test file storage", () => {
+    it("can add and (possibly) delete a file ", () => {
+        const thisDate = new Date();
+        storage.addFile({ data: blob, time: thisDate }).then(() => {
+            expect(storage.files.length).to.equal(1);
+            expect([...storage.files[0].data]).to.equal([
+                ...theseBytes.values(),
+            ]);
+            storage.removeFile({ id: thisDate.getTime() }).then(() => {
+                expect(storage.files.length).to.equal(0);
+            });
+        });
     });
 });
