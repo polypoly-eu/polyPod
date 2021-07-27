@@ -1,7 +1,4 @@
- GNU GENERAL PUBLIC LICENSE, Version 3 with ADDITIONAL TERMS defined below. 
-----------------------------------------------------------------------------
-
-                     GNU GENERAL PUBLIC LICENSE
+                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
@@ -675,77 +672,3 @@ may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
-
-----------------------------------------------------------------------------
-
-polyPod Core is Copyright (c) 2021 pc polypoly coop SCE mbH and licensed and
-relased under GNU General Public License, Version 3.0 with Additional Terms.
-
-                             ADDITIONAL TERMS
-
-As supplement to the GNU GPL V3 license the following Additional Terms shall
-apply with respect to the polyPod Core ("the Program") and any updates of
-the Program:
-
-a) The license under GNU GPL V3 does not imply a trademark license. 
-"polyPod" is a trademark of pc polypoly coop SCE mbH, Germany. "polypoly" 
-and "polySuite" are trademarks of polypoly Enterprise GmbH, Germany. 
-"polyPedia" and "polyVerse" are trademarks of polypoly Foundation gGmbH, 
-Germany. The use of trade names, trademarks or service marks ("signs") such 
-as "polyPod", "polyPedia", "polypoly" or any sign consisting of "poly" with
-respect to the release of any modified versions, adaptations or any 
-redistribution by the licensees is only permitted if 
-
-   (i) the source code of such version has been released by pc polypoly 
-   coop SCE mbH (unmodified copies) or 
-
-   (ii) the source code of such version has been examined and authorised 
-   for such signature release by polypoly coop SCE mbH or 
-
-   (iii) the use of aforesaid signs is expressly permitted in writing by
-   pc polypoly coop SCE mbH, polypoly Enterprise GmbH and/or polypoly 
-   Foundation gGmbH.
-
-b) By permission to use the signs licensees are granted a limited, 
-non-exclusive right only in connection to the respective versions of the 
-Program with no title warranty. 
-
-c) Unless permitted by pc polypoly coop SCE mbH for any release, 
-distribution of a modified version the licensee has to 
-
-   (i) replace/remove all terms, images, signs and files containing
-   "poly", "polyPod", "polypoly" and any logos of pc polypoly coop SCE mbH 
-   polypoly Enterprise GmbH or polypoly Foundation gGmbH, and 
-
-   (ii) remove any code which causes connection to or any kind of load of
-   servers managed by pc polypoly coop SCE mbH, polypoly Enterprise GmbH
-   or polypoly Foundation gGmbH, and
-
-   (iii) mark the modified version in reasonable way as different from the
-   original version and avoid any likelihood of confusion between such
-   name and the signs above.
-
-d) Unless authorised by pc polypoly coop SCE mbH a licensee conveying
-modified versions indemnifies polypoly coop SCE mbH against any claims of
-the recipient of those modified versions.
-
-e) However, the copyright notices within the source code files shall not 
-be removed and remain unaffected. Apart from the use of names of licensors
-or authors for publicity purposes require the expressive consent of pc 
-polypoly coop SCE mbH.
-
-f) Any other supplements of the terms by licensees according to section 7
-GNU GPL v3 requires expressive written authorisation by pc polypoly coop 
-SCE mbH.
-
-g) The program is provided “AS IT IS”. pc polypoly coop SCE mbH and/or the
-authors make NO WARRANTY or representation with respect to the program
-and/or any software and/or any rights granted either express or implied, 
-its quality, accuracy, merchantability or fitness for any particular 
-purpose and the user assume the entire risk as to its quality and accuracy.
-
-h) Any breach of the requirements above leads to the loss of the license. 
-
-                         END OF ADDITIONAL TERMS
-
----------------------------------------------------------------------------- 
