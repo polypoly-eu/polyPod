@@ -40,5 +40,7 @@ describe("Simple tests", () => {
         );
     });
 
-    it("creates a zipfile with that structure", () => {});
+    it("creates a zipfile with that structure", () => {
+        expect(blob).to.not.be.null;
+    });
 });
