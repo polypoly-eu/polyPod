@@ -1,30 +1,30 @@
 import "../../dist/pod";
 import commonStructure from "../../src/static/commonStructure";
-import { zip } from "@zip.js/zip.js";
+import { BlobWriter, ZipWriter, TextReader } from "@zip.js/zip.js";
 
 const noDataFileName = "no-data.txt";
 let blob;
 
 before(async () => {
-    const zipBlobWriter = new zip.BlobWriter("application/zip");
-    const zipWriter = new zip.ZipWriter(zipBlobWriter);
+    const zipBlobWriter = new BlobWriter("application/zip");
+    const zipWriter = new ZipWriter(zipBlobWriter);
     for (let key in commonStructure) {
         if (commonStructure[key] === []) {
             await zipWriter.add(
                 `${key}/${noDataFileName}`,
-                new zip.TextReader("\n")
+                new TextReader("\n")
             );
         } else {
             commonStructure[key].forEach(async (element) => {
                 await zipWriter.add(
                     `${key}/${element}`,
-                    new zip.TextReader("[ 'foo' ]\n")
+                    new TextReader("[ 'foo' ]\n")
                 );
             });
         }
     }
     await zipWriter.close();
-    blob = await blobWriter.getData();
+    blob = await zipBlobWriter.getData();
 });
 
 describe("Simple tests", () => {
