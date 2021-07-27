@@ -21,11 +21,12 @@ const phoneCorrectionX = 20;
 const pohneCorrectionY = 50;
 const circleRotateDeg = 40;
 
-const Introduction = ({ animation }) => {
+const Introduction = ({ animation, setHeight }) => {
     const [circleStyles, updateCircleStyles] = useState({});
     const guyImage = useRef();
     const messengerList = useRef();
     const circleImage = useRef();
+    const wholeIntroduction = useRef();
 
     function _getBulletsMessengerApps() {
         return listOfMessengerApps.map((messenger, index) => (
@@ -85,6 +86,8 @@ const Introduction = ({ animation }) => {
     }
 
     useEffect(() => {
+        const { height } = wholeIntroduction.current.getBoundingClientRect();
+        setHeight(height);
         switch (animation) {
             case INTRO_ANIMATIONS.FORDWARD:
                 _animationForward();
@@ -92,13 +95,11 @@ const Introduction = ({ animation }) => {
             case INTRO_ANIMATIONS.BACKWARD:
                 _fullAnimationBackward();
                 break;
-            default:
-                _animationBackward();
         }
-    }, []);
+    }, [animation]);
 
     return (
-        <div className="messenger-intro">
+        <div className="messenger-intro" ref={wholeIntroduction}>
             <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
             <p className="story-paragraph one">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
