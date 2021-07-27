@@ -4,7 +4,7 @@
 > willing to contribute code to this open source project.
 
 You are very welcome to participate in this project. Please check the [`README`
-file](README.md) for general layout and organization, as well as general
+file](README.md) for general layout and organisation, as well as general
 guidelines on how to work with it.
 
 ## Code of conduct
@@ -12,15 +12,16 @@ guidelines on how to work with it.
 All members of the project community must abide by [polypoly's Code of
 Conduct](https://polypoly.coop/en-de/codeofconduct).  Only by respecting each
 other we can develop a productive, collaborative community.  Instances of
-abusive, harassing, or otherwise unacceptable behavior may be reported by
+abusive, harassing, or otherwise unacceptable behaviour may be reported by
 contacting community@polypoly.coop.
 
 ## Contributor agreement for external contributions
 
-If you wish to make a contribution, please download, read and sign [contributor
-license agreement](https://polypoly.coop/en-de/contribute/cla/) and then email
-it to [`community@polypoly.coop`](mailto:community@polypoly.coop), which can
-also help if you have any doubt.  We will make this process easier over time.
+If you would like to contribute code or documentation please download, read and
+sign the [contributor license agreement](https://polypoly.coop/en-de/contribute/cla/)
+and then email it to [`community@polypoly.coop`](mailto:community@polypoly.coop),
+which can also help if you have any doubt.  We will make this process easier
+over time.
 
 ## Coding style
 
