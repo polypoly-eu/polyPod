@@ -31,7 +31,9 @@ const Introduction = ({ animation, setHeight }) => {
 
     function _getBulletsMessengerApps() {
         return listOfMessengerApps.map((messenger, index) => (
-            <li key={index} className="messenger-el">{messenger}</li>
+            <li key={index} className="messenger-el">
+                {messenger}
+            </li>
         ));
     }
 
