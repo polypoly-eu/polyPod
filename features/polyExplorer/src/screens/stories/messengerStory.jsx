@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 
 import DataStory from "../../components/dataStory/dataStory.jsx";
 import Introduction from "../../components/clusterStories/messengers/introduction.jsx";
+import Summary from "../../components/clusterStories/messengers/summary.jsx";
 import { INTRO_ANIMATIONS } from "../../constants/index.js";
 
 import "./messengerStory.css";
@@ -12,7 +13,7 @@ import "./messengerStory.css";
  * understand where the scrollytelling events are fired.
  * IT NEVER MUST BE PUSHED IN A PRODUCTION BRANCH WITH THE VALUE "TRUE"
  */
-const scrollTellingDebug = false;
+const scrollTellingDebug = true;
 const animationPause = "pause";
 
 function isInViewport(el) {
@@ -102,13 +103,16 @@ const MessengerStory = () => {
             scrollEvent={scrollStory}
         >
             <div className="messenger-story">
-                <div className="scrollytelling">
+                <div className="messenger-parts">
                     {buildScrollyTellingMarksIntroduction()}
                 </div>
-                <Introduction
-                    setHeight={getIntroductionHeight}
-                    animation={introductionAnimation}
-                ></Introduction>
+                <div className="messenger-parts">
+                    <Introduction
+                        setHeight={getIntroductionHeight}
+                        animation={introductionAnimation}
+                    ></Introduction>
+                    <Summary></Summary>
+                </div>
             </div>
         </DataStory>
     );
