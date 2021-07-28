@@ -1,9 +1,11 @@
 import React from "react";
+import OverviewTab from "../../components/clusterStories/messengers/overviewTab.jsx";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 
 const ExampleStory = () => {
     return (
         <DataStory progressBarColor="#3BA6FF">
+            <OverviewTab />
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores

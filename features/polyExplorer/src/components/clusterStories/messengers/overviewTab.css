@@ -1,0 +1,17 @@
+.overview-tab {
+    display: flex;
+    width: 328px;
+    height: 40px;
+    border-bottom: 1px solid #757575;
+}
+
+.overview-button {
+    width: 33.33%;
+    background-color: var(--color-background-light);
+    color: #757575;
+    font-size: 14px;
+}
+
+.overview-button.active {
+    color: var(--color-text-dark);
+}

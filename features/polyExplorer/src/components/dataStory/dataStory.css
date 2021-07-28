@@ -2,7 +2,6 @@
     color: var(--color-text-dark);
     padding: 0px 16px;
     overflow: hidden scroll;
-    display: flex;
     scroll-behavior: smooth;
 }
 
