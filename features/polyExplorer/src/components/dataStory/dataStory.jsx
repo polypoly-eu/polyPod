@@ -9,7 +9,6 @@ const DataStory = ({
     children,
     progressBarColor = defaultProgressBarColor,
     className,
-    scrollEvent,
 }) => {
     const scrollRef = useRef();
     const progressRef = useRef();
@@ -19,7 +18,6 @@ const DataStory = ({
     };
 
     const handleProgress = () => {
-        scrollEvent();
         progressRef.current.style.width = `${
             (scrollRef.current.scrollTop /
                 (scrollRef.current.scrollHeight -
