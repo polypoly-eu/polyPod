@@ -5,6 +5,7 @@ const dataProperties = [
     "location",
     "annualRevenues",
     "description",
+    "clusters",
 ];
 const dataArrayProperties = ["dataRecipients"];
 
