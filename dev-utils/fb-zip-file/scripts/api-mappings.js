@@ -1,6 +1,8 @@
 import JSZip from "jszip";
 import fs from "fs";
 
+import { anonymizerRegex, anonymizerPrefixRegex } from "../src/globals.js";
+
 const fbZipLocation = process.env.FB_ZIP_LOCATION;
 
 let mapping = {};
@@ -23,6 +25,22 @@ fs.readFile(fbZipLocation, function (err, data) {
                 } else {
                     mapping[thisFile.name] = api;
                 }
+            } else {
+                let anonymizedFileName = thisFile.name.replace(
+                    anonymizerPrefixRegex,
+                    "uniqueid"
+                );
+                anonymizedFileName = anonymizedFileName.replace(
+                    anonymizerRegex,
+                    "uniqueid_hash"
+                );
+                anonymizedFileName = anonymizedFileName.replace(
+                    /\d+(?=\.json$)/,
+                    "#"
+                );
+                mapping[
+                    anonymizedFileName
+                ] = `dataStructure:${data.constructor.name}`;
             }
         }
         console.log(JSON.stringify(mapping));
