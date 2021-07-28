@@ -4,7 +4,7 @@
   align-items: flex-start;
 }
 
-.scrollytelling {
+.messenger-parts {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
