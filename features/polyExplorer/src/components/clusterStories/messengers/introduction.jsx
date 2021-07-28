@@ -20,6 +20,7 @@ const listOfMessengerApps = [
 const phoneCorrectionX = 20;
 const pohneCorrectionY = 50;
 const circleRotateDeg = 40;
+const circleScale = 2.5;
 
 const Introduction = ({ animation, setHeight }) => {
     const [circleStyles, updateCircleStyles] = useState({});
@@ -30,7 +31,7 @@ const Introduction = ({ animation, setHeight }) => {
 
     function _getBulletsMessengerApps() {
         return listOfMessengerApps.map((messenger, index) => (
-            <li key={index}>{messenger}</li>
+            <li key={index} className="messenger-el">{messenger}</li>
         ));
     }
 
@@ -81,7 +82,7 @@ const Introduction = ({ animation, setHeight }) => {
         updateCircleStyles({
             ...circleStyles,
             transition: "transform 1s ease-in",
-            transform: `translate(${moveOnX}px, ${moveOnY}px) rotate(-90deg) scale(2)`,
+            transform: `translate(${moveOnX}px, ${moveOnY}px) rotate(-90deg) scale(${circleScale})`,
         });
     }
 

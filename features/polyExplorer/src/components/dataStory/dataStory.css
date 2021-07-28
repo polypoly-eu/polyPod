@@ -26,5 +26,5 @@
     margin-top: 8px;
 }
 .story.messenger {
-    background: linear-gradient(180deg, var(--color-primary-messenger-story) 0%, var(--color-secondary-messenger-story) 100%);
+    background: linear-gradient(180deg, var(--color-primary-messenger-story) 0%, var(--color-secondary-messenger-story) 50%);
 }
