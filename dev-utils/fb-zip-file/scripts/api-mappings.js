@@ -38,9 +38,13 @@ fs.readFile(fbZipLocation, function (err, data) {
                     /\d+(?=\.json$)/,
                     "#"
                 );
-                mapping[
-                    anonymizedFileName
-                ] = `dataStructure:${data.constructor.name}`;
+                let description;
+                if (data.constructor.name === "Object") {
+                    description = { object: Object.keys(data) };
+                } else {
+                    description = "Array";
+                }
+                mapping[anonymizedFileName] = description;
             }
         }
         console.log(JSON.stringify(mapping));
