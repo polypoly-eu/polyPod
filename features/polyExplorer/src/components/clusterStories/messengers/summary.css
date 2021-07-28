@@ -1,0 +1,7 @@
+.messenger-summary {
+  width: 100%;
+}
+
+.messenger-summary * {
+  color: var(--color-dark);
+}
