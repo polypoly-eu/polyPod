@@ -40,9 +40,7 @@ const Introduction = () => {
             <StoryParagraph as="p" className="two upper">
                 {i18n.t(`${i18nHeader}:intro.paragraph.two`)}
             </StoryParagraph>
-            <StoryParagraph as="ul"
-                className="messenger-list upper"
-            >
+            <StoryParagraph as="ul" className="messenger-list upper">
                 {_getBulletsMessengerApps()}
             </StoryParagraph>
         </div>
