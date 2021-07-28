@@ -5,3 +5,19 @@
 .messenger-summary * {
   color: var(--color-dark);
 }
+
+.title-summary {
+  font-weight: bold;
+  font-size: 45px;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+  color: var(--color-primary-messenger-story);
+}
+
+.section-summary {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
