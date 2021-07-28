@@ -16,9 +16,16 @@
 }
 
 .story-paragraph {
+  width: 85%;
   font-size: 16px;
   line-height: 120%;
   letter-spacing: -0.01em;
+}
+
+@media(min-width: 321px) {
+  .story-paragraph {
+    width: 95%;
+  }
 }
 
 .one::first-letter {
@@ -49,4 +56,8 @@
 .upper {
   position: sticky;
   z-index: 100;
+}
+
+.messenger-el {
+  font-weight: 600;
 }
