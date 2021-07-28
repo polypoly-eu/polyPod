@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 
-class FiFileManagement extends LitElement {
+class OverviewView extends LitElement {
     static get properties() {
         return {
             pod: {},
@@ -62,4 +62,4 @@ class FiFileManagement extends LitElement {
     }
 }
 
-customElements.define("fi-file-management", FiFileManagement);
+customElements.define("overview-view", OverviewView);

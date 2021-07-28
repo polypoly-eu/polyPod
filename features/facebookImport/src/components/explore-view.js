@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit";
 import * as zip from "@zip.js/zip.js";
 
-class FiAnalysis extends LitElement {
+class ExploreView extends LitElement {
     static get styles() {
         return css`
             table {
@@ -86,4 +86,4 @@ class FiAnalysis extends LitElement {
     }
 }
 
-customElements.define("fi-analysis", FiAnalysis);
+customElements.define("explore-view", ExploreView);

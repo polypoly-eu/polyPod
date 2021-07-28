@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 
-class FiDownload extends LitElement {
+class ImportView extends LitElement {
     static get properties() {
         return { pod: {} };
     }
@@ -46,4 +46,4 @@ class FiDownload extends LitElement {
     }
 }
 
-customElements.define("fi-download", FiDownload);
+customElements.define("import-view", ImportView);
