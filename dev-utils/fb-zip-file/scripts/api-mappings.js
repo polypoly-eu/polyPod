@@ -15,15 +15,17 @@ fs.readFile(fbZipLocation, function (err, data) {
             const data = JSON.parse(str);
             if (Object.keys(data).length == 1) {
                 const api = Object.keys(data)[0];
+                mapping[thisFile.name] = {};
                 if (
                     data[api].constructor !== Array &&
                     Object.keys(data[api]).length == 1
                 ) {
-                    mapping[thisFile.name] = `${api}/${
-                        Object.keys(data[api])[0]
-                    }`;
+                    const thisKey = Object.keys(data)[0];
+                    const mappingKey = `${api}/${thisKey}`;
+                    const mappedKeys = mapKeys(data[api]);
+                    mapping[thisFile.name][mappingKey] = mappedKeys;
                 } else {
-                    mapping[thisFile.name] = api;
+                    mapping[thisFile.name][api] = mapKeys(data);
                 }
             } else {
                 let anonymizedFileName = thisFile.name.replace(
@@ -50,3 +52,14 @@ fs.readFile(fbZipLocation, function (err, data) {
         console.log(JSON.stringify(mapping));
     });
 });
+
+function mapKeys(data) {
+    const thisKey = Object.keys(data)[0];
+    return [
+        ...new Set(
+            Object.keys(data[thisKey]).map((aKey) => {
+                return aKey.replace(/\d+$/, "#");
+            })
+        ),
+    ];
+}
