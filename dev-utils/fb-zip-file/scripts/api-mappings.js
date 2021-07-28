@@ -1,6 +1,3 @@
-import JSZip from "jszip";
-import fs from "fs";
-
 import {
     anonymizerRegex,
     anonymizerPrefixRegex,
