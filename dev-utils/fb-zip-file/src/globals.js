@@ -1,4 +1,5 @@
-import { readFileSync } from "fs";
+import { readFileSync, createReadStream } from "fs";
+import JSZip from "jszip";
 
 export const dataFileName = "data/commonStructure.json";
 export const allDataFileName = "data/allStructure.json";
@@ -13,3 +14,19 @@ export function commonStructure() {
 }
 
 export function hasCommonKeys() {}
+
+export function readAndProcessZipFile(
+    callback,
+    path = process.env.FB_ZIP_LOCATION
+) {
+    let data = "";
+    let readStream = createReadStream(path);
+    readStream.setEncoding("binary");
+    readStream.on("data", (chunk) => {
+        data += chunk;
+    });
+    readStream.on("end", () => {
+        console.log("Ending ");
+        JSZip.loadAsync(data).then(callback);
+    });
+}
