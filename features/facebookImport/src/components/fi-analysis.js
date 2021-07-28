@@ -1,9 +1,6 @@
 import { LitElement, html, css } from "lit";
 import * as zip from "@zip.js/zip.js";
 
-const hexdump = (data) =>
-    [...data].map((i) => i.toString(16).padStart(2, "0")).join(" ");
-
 class FiAnalysis extends LitElement {
     static get styles() {
         return css`
@@ -13,6 +10,7 @@ class FiAnalysis extends LitElement {
 
             th {
                 padding-right: 10px;
+                white-space: nowrap;
             }
 
             .code {
@@ -23,52 +21,54 @@ class FiAnalysis extends LitElement {
 
     static get properties() {
         return {
-            files: {},
+            file: {},
             _analysis: { state: true },
         };
     }
 
-    constructor() {
-        super();
-        this.files = [];
-        this._analysis = [];
-    }
-
     async _analyzeFile({ id, data }) {
+        const hex = [...data]
+            .map((i) => i.toString(16).padStart(2, "0"))
+            .join(" ");
         const reader = new zip.ZipReader(new zip.Uint8ArrayReader(data));
         const entries = await reader.getEntries();
         return {
             fileId: id,
             fileSize: data.length,
-            hex: hexdump(data),
+            hex,
             entries,
         };
     }
 
-    async _updateAnalysis() {
-        this._analysis = await Promise.all(this.files.map(this._analyzeFile));
+    async updated(updatedProperties) {
+        if (updatedProperties.has("file"))
+            this._analysis = await this._analyzeFile(this.file);
     }
 
-    updated(changedProperties) {
-        if (changedProperties.has("files")) this._updateAnalysis();
+    _handleBack() {
+        this.dispatchEvent(new CustomEvent("close"));
     }
 
-    _renderFileAnalysis(fileAnalysis) {
+    _renderFileAnalysis() {
+        if (!this._analysis) return html`<p>Error: No file found</p>`;
         return html`
-            <h2>${fileAnalysis.fileId}</h2>
             <table>
                 <tr>
-                    <th>Size</th>
-                    <td>${fileAnalysis.fileSize}</td>
+                    <th>File ID</th>
+                    <td>${this._analysis.fileId}</td>
+                </tr>
+                <tr>
+                    <th>File Size</th>
+                    <td>${this._analysis.fileSize}</td>
                 </tr>
                 <tr>
                     <th>Data</th>
-                    <td class="code">${fileAnalysis.hex}</td>
+                    <td class="code">${this._analysis.hex}</td>
                 </tr>
                 <tr>
                     <th>List</th>
                     <td>
-                        ${fileAnalysis.entries
+                        ${this._analysis.entries
                             .map((entry) => entry.filename)
                             .join("\n")}
                     </td>
@@ -78,13 +78,11 @@ class FiAnalysis extends LitElement {
     }
 
     render() {
-        return html` <p>
-                This is where we will show more and more analysis based on the
-                files the user has imported.
-            </p>
-            ${this._analysis.length
-                ? this._analysis.map(this._renderFileAnalysis)
-                : html`<em>No files imported.</em>`}`;
+        return html`
+            <h1>Explore your data</h1>
+            <button @click="${this._handleBack}">Back</button>
+            ${this._renderFileAnalysis()}
+        `;
     }
 }
 

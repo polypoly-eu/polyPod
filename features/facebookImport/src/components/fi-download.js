@@ -1,22 +1,48 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, css } from "lit";
 
 class FiDownload extends LitElement {
     static get properties() {
         return { pod: {} };
     }
 
-    _openDataDownloadLink() {
+    static get styles() {
+        return css`
+            button {
+                display: block;
+                margin-bottom: 16px;
+            }
+        `;
+    }
+
+    _handleDownload() {
         this.pod.polyNav.openUrl("data-download");
     }
 
+    async _handleImport() {
+        const file = await this.pod.polyNav.pickFile();
+        if (!file) return;
+
+        this.dispatchEvent(
+            new CustomEvent("add-file", {
+                detail: { time: new Date(), data: file },
+            })
+        );
+        this._handleBack();
+    }
+
+    _handleBack() {
+        this.dispatchEvent(new CustomEvent("close"));
+    }
+
     render() {
-        return html`<p>
-                This is where we will guide the user through the process of
-                downloading their data from Facebook.
-            </p>
-            <button @click=${this._openDataDownloadLink}>
-                Download your Facebook data
-            </button>`;
+        return html`<h1>File import</h1>
+            <button @click=${this._handleDownload}>
+                Step 1: Download your Facebook data archive
+            </button>
+            <button @click=${this._handleImport}>
+                Step 2: Import your Facebook data archive
+            </button>
+            <button @click=${this._handleBack}>Back</button>`;
     }
 }
 

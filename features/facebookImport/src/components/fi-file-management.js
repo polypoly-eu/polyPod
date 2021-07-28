@@ -8,15 +8,8 @@ class FiFileManagement extends LitElement {
         };
     }
 
-    async _importFile() {
-        const file = await this.pod.polyNav.pickFile();
-        if (!file) return;
-
-        this.dispatchEvent(
-            new CustomEvent("add-file", {
-                detail: { time: new Date(), data: file },
-            })
-        );
+    _importFile() {
+        this.dispatchEvent(new CustomEvent("import-file"));
     }
 
     _removeFile(id) {
@@ -27,8 +20,16 @@ class FiFileManagement extends LitElement {
         );
     }
 
+    _exploreFile(id) {
+        this.dispatchEvent(
+            new CustomEvent("explore-file", {
+                detail: { id },
+            })
+        );
+    }
+
     _renderFileList() {
-        return html`<h2>Loaded files</h2>
+        return html`<h2>Imported files</h2>
             <ul>
                 ${Object.values(this.files).map(
                     (file) =>
@@ -40,6 +41,11 @@ class FiFileManagement extends LitElement {
                             <button @click="${() => this._removeFile(file.id)}">
                                 Remove
                             </button>
+                            <button
+                                @click="${() => this._exploreFile(file.id)}"
+                            >
+                                Explore
+                            </button>
                         </li>`
                 )}
             </ul>`;
@@ -47,12 +53,8 @@ class FiFileManagement extends LitElement {
 
     render() {
         return html`
-            <p>
-                This is where the user can add previously downloaded Facebook
-                data exports, and manage the ones they had already imported.
-            </p>
-            <button @click="${this._importFile}">Import file</button>
-            <hr />
+            <h1>File overview</h1>
+            <button @click="${this._importFile}">Import (another) file</button>
             ${Object.values(this.files).length
                 ? this._renderFileList()
                 : html`<em>No files imported</em>`}

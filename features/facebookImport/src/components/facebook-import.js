@@ -9,6 +9,7 @@ class FacebookImport extends LitElement {
     static get properties() {
         return {
             _pod: { state: true },
+            _currentView: { state: true },
             _files: { state: true },
         };
     }
@@ -36,66 +37,58 @@ class FacebookImport extends LitElement {
         return html`<p>Loading ...</p>`;
     }
 
-    _handleAddFile(event) {
-        this._storage.addFile(event.detail);
+    _handleImportFile() {
+        this._currentView = "download";
     }
 
     _handleRemoveFile(event) {
         this._storage.removeFile(event.detail);
     }
 
-    render() {
-        if (!this._pod) return this._renderSplash();
-        return html`
-            <poly-tabs theme="dark">
-                <poly-tab tabId="download" label="Download" active>
-                    <poly-tab-content></poly-tab-content>
-                </poly-tab>
-                <poly-tab tabId="file-management" label="File management">
-                    <poly-tab-content></poly-tab-content>
-                </poly-tab>
-                <poly-tab tabId="analysis" label="Analysis">
-                    <poly-tab-content></poly-tab-content>
-                </poly-tab>
-            </poly-tabs>
-
-            <div class="tab-content" style="display: none">
-                <fi-download .pod="${this._pod}"></fi-download>
-
-                <fi-file-management
-                    .pod="${this._pod}"
-                    .files="${this._files}"
-                    @add-file="${this._handleAddFile}"
-                    @remove-file="${this._handleRemoveFile}"
-                ></fi-file-management>
-
-                <fi-analysis .files="${this._files}"></fi-analysis>
-            </div>
-        `;
+    _handleExploreFile(event) {
+        const id = event.detail.id;
+        this._selectedFile = this._files.find((file) => file.id === id);
+        this._currentView = "analysis";
     }
 
-    updated() {
-        // This is quite a bit of a hack - at the moment, <poly-tab-content>
-        // elements don't support nested LitElement-derived web components,
-        // hence this questionable workaround:
-        setTimeout(() => {
-            const tabIds = [
-                ...this.shadowRoot.querySelectorAll(".tab-content>*"),
-            ].map((element) =>
-                element.nodeName.toLowerCase().replace(/^fi-/, "")
-            );
-            const polyTabs = this.shadowRoot.querySelector("poly-tabs");
-            for (let tabId of tabIds) {
-                const polyTabContent = polyTabs.shadowRoot.querySelector(
-                    `poly-tab-content[tabId=${tabId}`
-                );
-                const tabTarget = polyTabContent.shadowRoot.querySelector(
-                    `#poly-${tabId}`
-                );
-                const tabSource = this.shadowRoot.querySelector(`fi-${tabId}`);
-                tabTarget.appendChild(tabSource);
-            }
-        }, 0);
+    _renderFileManagement() {
+        return html` <fi-file-management
+            .pod="${this._pod}"
+            .files="${this._files}"
+            @import-file="${this._handleImportFile}"
+            @remove-file="${this._handleRemoveFile}"
+            @explore-file="${this._handleExploreFile}"
+        ></fi-file-management>`;
+    }
+
+    _handleAddFile(event) {
+        this._storage.addFile(event.detail);
+    }
+
+    _handleClose() {
+        this._currentView = null;
+    }
+
+    _renderDownload() {
+        return html`<fi-download
+            .pod="${this._pod}"
+            @add-file="${this._handleAddFile}"
+            @close="${this._handleClose}"
+        ></fi-download>`;
+    }
+
+    _renderAnalysis() {
+        return html`<fi-analysis
+            .file="${this._selectedFile}"
+            @close="${this._handleClose}"
+        ></fi-analysis>`;
+    }
+
+    render() {
+        if (!this._pod) return this._renderSplash();
+        if (this._currentView === "download") return this._renderDownload();
+        if (this._currentView === "analysis") return this._renderAnalysis();
+        return this._renderFileManagement();
     }
 }
 
