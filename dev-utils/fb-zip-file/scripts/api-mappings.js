@@ -25,7 +25,11 @@ fs.readFile(fbZipLocation, function (err, data) {
                     const mappedKeys = mapKeys(data[api]);
                     mapping[thisFile.name][mappingKey] = mappedKeys;
                 } else {
-                    mapping[thisFile.name][api] = mapKeys(data);
+                    if (api === "group_badges_v2") {
+                        mapping[thisFile.name][api] = ["🔤"];
+                    } else {
+                        mapping[thisFile.name][api] = mapKeys(data);
+                    }
                 }
             } else {
                 let anonymizedFileName = thisFile.name.replace(
@@ -58,7 +62,9 @@ function mapKeys(data) {
     return [
         ...new Set(
             Object.keys(data[thisKey]).map((aKey) => {
-                return aKey.replace(/\d+$/, "#");
+                return aKey
+                    .replace(/\d+$/, "🔢")
+                    .replace(/^[-A-Za-z0-9]{4}\*{20}/, "🍪");
             })
         ),
     ];
