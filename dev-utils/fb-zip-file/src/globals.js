@@ -26,7 +26,6 @@ export function readAndProcessZipFile(
         data += chunk;
     });
     readStream.on("end", () => {
-        console.log("Ending ");
         JSZip.loadAsync(data).then(callback);
     });
 }
