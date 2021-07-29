@@ -21,11 +21,6 @@ export const INTRO_ANIMATIONS = {
     BACKWARD: "backward",
 };
 
-export const SUMARY_ANIMATIONS = {
-    SHOW_ONE: "show one",
-    SHOW_TWO: "show two",
-    SHOW_THREE: "show three",
-    HIDE_ONE: "hide one",
-    HIDE_TWO: "hide two",
-    HIDE_THREE: "hide three",
+export const SUMMARY_ANIMATIONS = {
+    ANIMATE_BULLET: "animate bullet",
 };
