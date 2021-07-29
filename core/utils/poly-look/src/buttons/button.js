@@ -6,8 +6,8 @@ import { reduceListToString } from "../helpers";
 const listOfValidTypes = Object.values(polyButton.types);
 const listOfValidSizes = Object.values(polyButton.sizes);
 
-const validateButtonTypes = type => listOfValidTypes.includes(type);
-const validateButtonSizes = size => listOfValidSizes.includes(size);
+const validateButtonTypes = (type) => listOfValidTypes.includes(type);
+const validateButtonSizes = (size) => listOfValidSizes.includes(size);
 
 export class Button extends LitElement {
   static get styles() {

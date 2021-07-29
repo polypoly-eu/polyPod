@@ -6,7 +6,7 @@ import { listToStringReducer } from "../helpers";
 
 const listOfTheme = Object.values(polyTabs.themes);
 
-const validateTabTheme = value => listOfTheme.includes(value);
+const validateTabTheme = (value) => listOfTheme.includes(value);
 
 let _getTabContentBound = null;
 
@@ -97,7 +97,7 @@ export class Tabs extends LitElement {
 
   __renderTabsLine() {
     return this.tabHeaders.map(
-      tab => html`
+      (tab) => html`
         <poly-tab-header
           .label=${tab.label}
           .tabId=${tab.tabId}
@@ -109,7 +109,7 @@ export class Tabs extends LitElement {
   }
 
   _changeTab(event) {
-    this.tabHeaders = this.tabHeaders.map(tabHeader => {
+    this.tabHeaders = this.tabHeaders.map((tabHeader) => {
       tabHeader.active = tabHeader.tabId === event.detail.tabId;
 
       return tabHeader;
@@ -121,7 +121,7 @@ export class Tabs extends LitElement {
       tabContent.removeAttribute("active");
     }
 
-    const tabActive = Array.from(tabContents).find(tabContent => {
+    const tabActive = Array.from(tabContents).find((tabContent) => {
       return tabContent.shadowRoot.querySelector(`#poly-${event.detail.tabId}`);
     });
 

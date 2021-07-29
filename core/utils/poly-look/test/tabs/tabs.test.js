@@ -8,7 +8,7 @@ describe("Tabs", () => {
 
   function createTabs(tabs) {
     return tabs.map(
-      tab => html`
+      (tab) => html`
         <poly-tab .label=${tab.label} .tabId=${tab.tabId} .active=${tab.active}>
           <poly-tab-content>
             <div>This is the content of the tab ${tab.tabId}</div>
@@ -67,7 +67,7 @@ describe("Tabs", () => {
       el.shadowRoot.querySelector("poly-tab-header")
     );
 
-    expect(tabHeaders.find(tabHeader => tabHeader.theme !== theme)).to.be
+    expect(tabHeaders.find((tabHeader) => tabHeader.theme !== theme)).to.be
       .undefined;
   });
 
@@ -76,11 +76,11 @@ describe("Tabs", () => {
     const tabHeaders = Array.from(
       el.shadowRoot.querySelectorAll("poly-tab-header")
     );
-    const tabHeaderNotSelected = tabHeaders.find(tab => !tab.active);
+    const tabHeaderNotSelected = tabHeaders.find((tab) => !tab.active);
 
     tabHeaderNotSelected.shadowRoot.querySelector("button").click();
     await waitUntil(() => tabHeaderNotSelected.active);
-    const tabsSelected = tabHeaders.filter(tab => tab.active);
+    const tabsSelected = tabHeaders.filter((tab) => tab.active);
 
     expect(tabsSelected.length).to.be.equal(1);
     expect(tabHeaderNotSelected.active).to.be.true;
