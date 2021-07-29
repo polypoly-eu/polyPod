@@ -12,6 +12,7 @@
     font-size: 14px;
 }
 
-.overview-button.active {
+.overview-tab .active {
     color: var(--color-text-dark);
+    border-bottom: 3px solid blue;
 }
