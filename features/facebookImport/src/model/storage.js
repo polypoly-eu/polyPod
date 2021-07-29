@@ -1,3 +1,5 @@
+import {base64DecToArr, base64EncArr} from './base64utils';
+const namespace = "http://polypoly.coop/schema/fbImport/";
 export default class Storage {
     constructor(pod) {
         this.changeListener = () => {};
@@ -18,7 +20,6 @@ export default class Storage {
         );
         this._files = [];
         (await polyIn.select(quad)).forEach((fileQuad) => {
-            // debugger;
             const id = fileQuad.predicate.value.slice(
                 `${namespace}file/`.length
             );
