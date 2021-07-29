@@ -1,7 +1,7 @@
 export default class FacebookChecks {
     constructor(filesInZip) {
         this._entries = filesInZip;
-        this._files = filesInZip.map((f) => f.name);
+        this._files = filesInZip.map((f) => f.filename);
     }
 
     get files() {

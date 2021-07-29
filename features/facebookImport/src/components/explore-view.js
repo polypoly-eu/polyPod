@@ -28,7 +28,7 @@ class ExploreView extends LitElement {
     }
 
     async _analyzeFile({ id, data }) {
-        const hex = [...data]
+        let hex = [...data]
             .map((i) => i.toString(16).padStart(2, "0"))
             .join(" ");
         const reader = new zip.ZipReader(new zip.Uint8ArrayReader(data));

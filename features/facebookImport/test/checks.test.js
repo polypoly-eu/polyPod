@@ -1,9 +1,7 @@
-import JSZip from "jszip";
 import { readFileSync } from "fs";
 
-import Checks from "../src/model/facebook-checks.js";
-import { expect } from "@jest/globals";
 import FacebookChecks from "../src/model/facebook-checks.js";
+import { expect } from "@jest/globals";
 
 const noDataFileName = "no-data.txt";
 const dataFileName = "src/static/commonStructure.json";
@@ -14,11 +12,11 @@ beforeAll(() => {
     const structure = JSON.parse(readFileSync(dataFileName));
     for (let key in structure) {
         if (structure[key] === []) {
-            zipFileMock.push({ name: `${key}/${noDataFileName}` });
+            zipFileMock.push({ filename: `${key}/${noDataFileName}` });
         } else {
             structure[key].forEach((element) => {
                 zipFileMock.push({
-                    name: `${key}/${element.replace("json", "html")}`,
+                    filename: `${key}/${element.replace("json", "html")}`,
                 });
             });
         }
