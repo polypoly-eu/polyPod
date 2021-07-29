@@ -112,7 +112,8 @@ export class DefaultPod implements Pod {
             writeFile(
                 path: string,
                 content: string | Uint8Array,
-                options: EncodingOptions): Promise<void> {
+                options: EncodingOptions
+            ): Promise<void> {
                 return fs.writeFile(path, content, options);
             }
 

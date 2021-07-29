@@ -122,7 +122,7 @@ class LocalStoragePolyOut implements PolyOut {
         options: EncodingOptions
     ): Promise<void> {
         return new Promise((resolve, _reject) => {
-            this.store.push({path, content});
+            this.store.push({ path, content });
             localStorage.setItem(
                 LocalStoragePolyOut.storageKey,
                 JSON.stringify(this.store)

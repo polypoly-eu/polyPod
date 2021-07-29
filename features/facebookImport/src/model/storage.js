@@ -1,7 +1,3 @@
-import { base64EncArr, base64DecToArr } from "./base64utils";
-
-const namespace = "http://polypoly.coop/schema/facebook-import/";
-
 export default class Storage {
     constructor(pod) {
         this.changeListener = () => {};
@@ -21,7 +17,7 @@ export default class Storage {
             this._files.push({
                 id: fileName,
                 data: await polyOut.readFile(`fb/${fileName}`),
-                time: fileName
+                time: fileName,
             });
         }
     }
