@@ -28,6 +28,6 @@ beforeAll(() => {
 
 describe("Tests zip file structure checks", () => {
     it("passes basic tests", () => {
-        expect(checks.files.length).toHaveLength(zipFileMock.length);
+        expect(checks.files).toHaveLength(zipFileMock.length);
     });
 });
