@@ -109,8 +109,15 @@ export class DefaultPod implements Pod {
                 return fs.stat(path);
             }
 
-            writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+            writeFile(
+                path: string,
+                content: string | Uint8Array,
+                options: EncodingOptions): Promise<void> {
                 return fs.writeFile(path, content, options);
+            }
+
+            deleteFile(path: string): Promise<void> {
+                return fs.deleteFile(path);
             }
         })();
     }

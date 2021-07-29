@@ -71,7 +71,12 @@ class LocalStoragePolyIn implements PolyIn {
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-class ThrowingPolyOut implements PolyOut {
+class LocalStoragePolyOut implements PolyOut {
+    private static readonly storageKey = "polyOutStore";
+    private store = JSON.parse(
+        localStorage.getItem(LocalStoragePolyOut.storageKey) || "[]"
+    );
+
     fetch(input: string, init?: RequestInit): Promise<Response> {
         return window.fetch(input, init);
     }
@@ -82,11 +87,29 @@ class ThrowingPolyOut implements PolyOut {
         path: string,
         options?: EncodingOptions
     ): Promise<string | Uint8Array> {
-        throw "Not implemented: readFile";
+        return new Promise((resolve, reject) => {
+            if (options)
+                throw new Error("Not implemented: readFile with options");
+            for (const file of this.store) {
+                if (file.path == path) {
+                    resolve(file.content);
+                    return;
+                }
+            }
+            reject(new Error("File not found"));
+        });
     }
 
     readdir(path: string): Promise<string[]> {
-        throw "Not implemented: readdir";
+        return new Promise((resolve, reject) => {
+            const files = [];
+            for (const file of this.store) {
+                if (file.path.startsWith(path)) {
+                    files.push(file.path.substr(path.length));
+                }
+            }
+            resolve(files);
+        });
     }
 
     stat(path: string): Promise<Stats> {
@@ -98,7 +121,25 @@ class ThrowingPolyOut implements PolyOut {
         content: string,
         options: EncodingOptions
     ): Promise<void> {
-        throw "Not implemented: writeFile";
+        return new Promise((resolve, _reject) => {
+            this.store.push({path, content});
+            localStorage.setItem(
+                LocalStoragePolyOut.storageKey,
+                JSON.stringify(this.store)
+            );
+            resolve();
+        });
+    }
+
+    deleteFile(path: string): Promise<void> {
+        return new Promise((resolve, _reject) => {
+            this.store.splice(this.store.indexOf(path), 1);
+            localStorage.setItem(
+                LocalStoragePolyOut.storageKey,
+                JSON.stringify(this.store)
+            );
+            resolve();
+        });
     }
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
@@ -165,6 +206,6 @@ class BrowserPolyNav implements PolyNav {
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new LocalStoragePolyIn();
-    public readonly polyOut = new ThrowingPolyOut();
+    public readonly polyOut = new LocalStoragePolyOut();
     public readonly polyNav = new BrowserPolyNav();
 }

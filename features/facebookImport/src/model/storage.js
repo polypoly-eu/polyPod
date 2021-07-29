@@ -14,51 +14,35 @@ export default class Storage {
     }
 
     async refreshFiles() {
-        const { dataFactory, polyIn } = await this._pod;
-        const quad = dataFactory.quad(
-            dataFactory.namedNode(`${namespace}zipFiles`),
-            null,
-            null
-        );
+        const { polyOut } = await this._pod;
+        const fileList = await polyOut.readdir("fb/");
         this._files = [];
-        (await polyIn.select(quad)).forEach((fileQuad) => {
-            // debugger;
-            const id = fileQuad.predicate.value.slice(
-                `${namespace}file/`.length
-            );
-            const file = {
-                id,
-                data: base64DecToArr(fileQuad.object.value), // guessing here
-            };
-            this._files[id] = file; // This seems to be re-adding the file even if deleted
-        });
+        for (const fileName of fileList) {
+            this._files.push({
+                id: fileName,
+                data: await polyOut.readFile(`fb/${fileName}`),
+                time: fileName
+            });
+        }
     }
 
     async addFile(file) {
         // TODO: Detect / handle duplicate files better
         const id = file.time.getTime();
-        const { dataFactory, polyIn } = await this._pod;
-        const quad = dataFactory.quad(
-            dataFactory.namedNode(`${namespace}zipFiles`),
-            dataFactory.namedNode(`${namespace}file/${id}`),
-            dataFactory.namedNode(base64EncArr(file.data))
-        );
-
-        await polyIn.add(quad);
+        const { polyOut } = await this._pod;
+        const p0 = performance.now();
+        await polyOut.writeFile(`fb/${id}`, file.data);
+        const p1 = performance.now();
+        console.log(`writeFile took: ${p1 - p0}`);
+        const p2 = performance.now();
         await this.refreshFiles();
+        console.log(`refreshFiles took: ${p2 - p1}`);
         this.changeListener();
     }
 
     async removeFile({ id }) {
-        const { dataFactory, polyIn } = await this._pod;
-        const quad = dataFactory.quad(
-            dataFactory.namedNode(`${namespace}zipFiles`),
-            dataFactory.namedNode(`${namespace}file/${id}`),
-            null
-        );
-        (await polyIn.select(quad)).forEach((fileQuad) => {
-            polyIn.delete(fileQuad);
-        });
+        const { polyOut } = await this._pod;
+        polyOut.deleteFile(`fb/${id}`);
         await this.refreshFiles();
         this.changeListener();
     }

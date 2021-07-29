@@ -199,6 +199,10 @@ extension PostOffice {
             handlePolyOutReadFile(args: args, completionHandler: completionHandler)
         case "writeFile":
             handlePolyOutWriteFile(args: args, completionHandler: completionHandler)
+        case "readdir":
+            handlePolyOutReadDir(args: args, completionHandler: completionHandler)
+        case "deleteFile":
+            handlePolyOutDeleteFile(args: args, completionHandler: completionHandler)
         default:
             print("PolyOut method unknown:", method)
         }
@@ -274,7 +278,7 @@ extension PostOffice {
     
     private func handlePolyOutWriteFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
-        let data = args[1] as! String
+        let data = args[1] as! Data
         
         PodApi.shared.polyOut.fileWrite(path: path, data: data) { error in
             if let error = error {
@@ -282,6 +286,36 @@ extension PostOffice {
             } else {
                 completionHandler(MessagePackValue(), nil)
             }
+        }
+    }
+
+    private func handlePolyOutDeleteFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let path = args[0] as! String
+        
+        PodApi.shared.polyOut.fileDelete(path: path) { error in
+            if let error = error {
+                completionHandler(nil, MessagePackValue(error.localizedDescription))
+            } else {
+                completionHandler(MessagePackValue(), nil)
+            }
+        }
+    }
+
+    private func handlePolyOutReadDir(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let path = args[0] as! String
+        
+        PodApi.shared.polyOut.readDir(path: path) { fileList, error in
+            if let error = error {
+                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                return
+            }
+            
+            guard let fileList = fileList else {
+                completionHandler(nil, MessagePackValue(PodApiError.unknown.localizedDescription))
+                return
+            }
+            let packedFileList = fileList.map { MessagePackValue($0) }
+            completionHandler(MessagePackValue(packedFileList), nil)
         }
     }
 }

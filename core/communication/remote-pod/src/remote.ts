@@ -47,6 +47,7 @@ type PolyOutEndpoint = ObjectEndpointSpec<{
     readdir(path: string): ValueEndpointSpec<string[]>;
     readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
+    deleteFile(path: string): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
     fetch(input: string, init: RequestInit): ValueEndpointSpec<Response>;
 }>;
@@ -192,6 +193,10 @@ export class RemoteClientPod implements Pod {
             writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
                 return rpcClient.polyOut().writeFile(path, content, options)();
             }
+
+            deleteFile(path: string): Promise<void> {
+                return rpcClient.polyOut().deleteFile(path)();
+            }
         })();
     }
 
@@ -268,6 +273,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
                 return FileStats.of(stats);
             },
             writeFile: (path, content, options) => polyOut.writeFile(path, content, options),
+            deleteFile: (path) => polyOut.deleteFile(path),
         };
     }
 
