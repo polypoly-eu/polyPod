@@ -81,6 +81,26 @@ open class PolyIn(
         save()
     }
 
+    open suspend fun delete(quads: List<Quad>) {
+        quads.forEach { quad ->
+            model.remove(
+                quadSubjectToResource(quad.subject),
+                model.createProperty(quad.predicate.iri),
+                quadObjectToResource(quad.`object`)
+            )
+        }
+    }
+
+    open suspend fun has(quads: List<Quad>): Boolean {
+        return quads.any { quad ->
+            model.contains(
+                quadSubjectToResource(quad.subject),
+                model.createProperty(quad.predicate.iri),
+                quadObjectToResource(quad.`object`)
+            )
+        }
+    }
+
     private fun getDatabase(file: File): EncryptedFile {
         val mainKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)

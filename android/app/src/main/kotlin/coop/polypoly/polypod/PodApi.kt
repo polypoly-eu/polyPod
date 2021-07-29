@@ -48,6 +48,9 @@ open class PodApi(
                 when (inner) {
                     "add" -> return handlePolyInAdd(args)
                     "select" -> return handlePolyInSelect(args)
+                    "match" -> return handlePolyInSelect(args)
+                    "delete" -> return handlePolyInDelete(args)
+                    "has" -> return handlePolyInHas(args)
                 }
             }
             "polyNav" -> {
@@ -88,6 +91,22 @@ open class PodApi(
         logger.debug("dispatch() -> polyIn.select")
         val result = polyIn.select(Matcher.codec.decode(args[0]))
         return ValueFactory.newArray(result.map { Quad.codec.encode(it) })
+    }
+
+    private suspend fun handlePolyInDelete(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyIn.delete")
+        val quads = args.map { Quad.codec.decode(it) }
+        val result = polyIn.delete(quads)
+        return ValueFactory.newNil()
+    }
+
+    private suspend fun handlePolyInHas(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyIn.has")
+        val quads = args.map { Quad.codec.decode(it) }
+        if (polyIn.has(quads))
+            return ValueFactory.newBoolean(true)
+        else
+            return ValueFactory.newBoolean(false)
     }
 
     private fun handlePolyNavOpenUrl(args: List<Value>): Value {
