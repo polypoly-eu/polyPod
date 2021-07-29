@@ -45,30 +45,30 @@ struct ContentView: View {
         if !skipSecurity && !devicePasscodeSet() {
             let alert = UIAlertController(
                 title: NSLocalizedString(
-                        "message_security_warning_title",
-                        comment: ""
-                    ),
+                    "message_security_warning_title",
+                    comment: ""
+                ),
                 message: NSLocalizedString(
-                        "message_security_warning_text",
-                        comment: ""
-                    ),
+                    "message_security_warning_text",
+                    comment: ""
+                ),
                 preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString(
-                    "button_security_reject",
-                    comment: ""
+                "button_security_reject",
+                comment: ""
             ), style: .default, handler: { (action: UIAlertAction!) in
                 UserDefaults.standard.set(true, forKey: skipSecurityKey)
             })
             )
             
             alert.addAction(UIAlertAction(title: NSLocalizedString(
-                    "button_security_setup",
-                    comment: ""
-                ), style: .default, handler: { (action: UIAlertAction!) in
-                    if let url = URL(string: "App-Prefs:root=TOUCHID_PASSCODE") {
-                        UIApplication.shared.open(url)
-                    }
-                })
+                "button_security_setup",
+                comment: ""
+            ), style: .default, handler: { (action: UIAlertAction!) in
+                if let url = URL(string: "App-Prefs:root=TOUCHID_PASSCODE") {
+                    UIApplication.shared.open(url)
+                }
+            })
             )
             UIApplication.shared.windows.first!.rootViewController!.present(alert, animated: true, completion:nil)
         }
