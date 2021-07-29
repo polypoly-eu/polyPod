@@ -27,7 +27,7 @@ class ReportView extends LitElement {
     }
 
     render() {
-        return html`<h1>Unregognized data report</h1>
+        return html`<h1>Unrecognized data report</h1>
             <button @click=${this._handleBack}>Back</button>
             <code>${this.report}</code>
             <button @click=${this._handleSendReport}>Send report</button>`;
