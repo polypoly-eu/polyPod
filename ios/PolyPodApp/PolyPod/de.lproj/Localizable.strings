@@ -23,10 +23,6 @@
 "settings_licenses_title" = "Lizenzen";
 "message_url_open_prevented %@ %@" = "Ich habe %@ davon abgehalten, eine URL zu öffnen:\n%@";
 "message_url_open_requested %@ %@" = "%@s möchte eine URL in Ihrem Browser öffnen:\n\n%@s\n\nZulassen?";
-"message_security_warning_title" = "Sicherheitswarnung";
-"message_security_warning_text" = "Um sicherzustellen, dass Ihre Daten verschlüsselt sind, empfehlen wir, eine Passcode-Sperre auf Ihrem Gerät einzurichten";
-"button_security_reject" = "Überspringen";
-"button_security_setup" = "Passcode-Einrichtung";
 "button_url_open_confirm" = "Ja";
 "button_url_open_reject" = "Nein";
 "button_update_notification_close" = "OK";
