@@ -30,4 +30,8 @@ describe("Tests zip file structure checks", () => {
     it("passes basic tests", () => {
         expect(checks.files).toHaveLength(zipFileMock.length);
     });
+
+    it("detects it's got HTML files in it", () => {
+        expect(checks.isItHTMLExport()).toBe(true);
+    });
 });
