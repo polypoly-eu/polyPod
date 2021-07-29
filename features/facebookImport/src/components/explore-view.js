@@ -1,4 +1,5 @@
 import { LitElement, html, css } from "lit";
+import { FacebookChecks } from "../model/facebook-checks.js";
 import * as zip from "@zip.js/zip.js";
 
 class ExploreView extends LitElement {
@@ -32,6 +33,10 @@ class ExploreView extends LitElement {
             .join(" ");
         const reader = new zip.ZipReader(new zip.Uint8ArrayReader(data));
         const entries = await reader.getEntries();
+        const checks = FacebookChecks(entries);
+        if (checks.isHTMLExport()) {
+            hex = "DEADBEEF";
+        }
         return {
             fileId: id,
             fileSize: data.length,
