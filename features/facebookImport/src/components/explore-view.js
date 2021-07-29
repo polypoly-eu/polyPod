@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { FacebookChecks } from "../model/facebook-checks.js";
+import FacebookChecks from "../model/facebook-checks.js";
 import * as zip from "@zip.js/zip.js";
 
 class ExploreView extends LitElement {
