@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import i18n from "../../../i18n";
 import { StoryParagraph } from "./storyParagraph";
-import { SUMARY_ANIMATIONS } from "../../../constants";
 import "./summary.css";
 
 const i18nHeader = "clusterMessengerStory";
 
-const Summary = ({ animation }) => {
+const Summary = ({ animation, heightEvent }) => {
+    const wholeSummary = useRef();
     const [bulletsAnimation, fireBulletsAnimation] = useState([
         "hidden",
         "hidden",
@@ -30,7 +30,7 @@ const Summary = ({ animation }) => {
         },
     ];
 
-    function renderBullets() {
+    function _renderBullets() {
         return bullets.map((bullet, index) => {
             const copyBullet = { ...bullet };
 
@@ -50,44 +50,29 @@ const Summary = ({ animation }) => {
         });
     }
 
-    function showBullet(index) {
+    function _showBullet(numBullets) {
         const copyBulletsAnimation = [...bulletsAnimation];
-        copyBulletsAnimation[index] = "visible";
+        const leng = copyBulletsAnimation.length;
 
-        fireBulletsAnimation(copyBulletsAnimation);
-    }
+        for (let i = 0; i < leng; i++) {
+            if (i < numBullets) {
+                copyBulletsAnimation[i] = "visible";
+            } else {
+                copyBulletsAnimation[i] = "hidden";
+            }
+        }
 
-    function hideBullet(index) {
-        const copyBulletsAnimation = [...bulletsAnimation];
-        copyBulletsAnimation[index] = "hidden";
         fireBulletsAnimation(copyBulletsAnimation);
     }
 
     useEffect(() => {
-        switch (animation) {
-            case SUMARY_ANIMATIONS.HIDE_ONE:
-                hideBullet(0);
-                break;
-            case SUMARY_ANIMATIONS.HIDE_TWO:
-                hideBullet(1);
-                break;
-            case SUMARY_ANIMATIONS.HIDE_THREE:
-                hideBullet(2);
-                break;
-            case SUMARY_ANIMATIONS.SHOW_ONE:
-                showBullet(0);
-                break;
-            case SUMARY_ANIMATIONS.SHOW_TWO:
-                showBullet(1);
-                break;
-            case SUMARY_ANIMATIONS.SHOW_THREE:
-                showBullet(2);
-                break;
-        }
+        const { height } = wholeSummary.current.getBoundingClientRect();
+        heightEvent(height);
+        _showBullet(animation);
     }, [animation]);
 
     return (
-        <div className="messenger-summary">
+        <div className="messenger-summary" ref={wholeSummary}>
             <h1 className="title-summary">
                 {i18n.t(`${i18nHeader}:summary.title`)}
             </h1>
@@ -101,7 +86,7 @@ const Summary = ({ animation }) => {
             <StoryParagraph as="div" className="introduction-summary">
                 {i18n.t(`${i18nHeader}:summary.paragraph.one`)}
             </StoryParagraph>
-            <ol className="things-to-be-aware">{renderBullets()}</ol>
+            <ol className="things-to-be-aware">{_renderBullets()}</ol>
         </div>
     );
 };
