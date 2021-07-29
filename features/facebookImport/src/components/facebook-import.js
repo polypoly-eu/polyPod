@@ -3,6 +3,7 @@ import { LitElement, html } from "lit";
 import Storage from "../model/storage.js";
 import "./explore-view";
 import "./import-view";
+import "./report-view";
 import "./overview-view";
 
 class FacebookImport extends LitElement {
@@ -53,10 +54,16 @@ class FacebookImport extends LitElement {
         ></import-view>`;
     }
 
+    _handleReviewReport({ detail }) {
+        this._report = detail.report;
+        this._currentView = "report";
+    }
+
     _renderExplore() {
         return html`<explore-view
             .file="${this._selectedFile}"
             @close="${this._handleClose}"
+            @review-report="${this._handleReviewReport}"
         ></explore-view>`;
     }
 
@@ -74,6 +81,18 @@ class FacebookImport extends LitElement {
         this._currentView = "explore";
     }
 
+    _handleCloseReport() {
+        this._currentView = "explore";
+    }
+
+    _renderReport() {
+        return html` <report-view
+            .pod="${this._pod}"
+            .report="${this._report}"
+            @close="${this._handleCloseReport}"
+        ></overview-view>`;
+    }
+
     _renderOverview() {
         return html` <overview-view
             .pod="${this._pod}"
@@ -88,6 +107,7 @@ class FacebookImport extends LitElement {
         if (!this._pod) return this._renderSplash();
         if (this._currentView === "import") return this._renderImport();
         if (this._currentView === "explore") return this._renderExplore();
+        if (this._currentView === "report") return this._renderReport();
         return this._renderOverview();
     }
 }

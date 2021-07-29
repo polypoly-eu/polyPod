@@ -68,6 +68,16 @@ const subAnalyses = [
     },
 ];
 
+class UnrecognizedData {
+    get isUnrecognized() {
+        return true;
+    }
+
+    get report() {
+        return "Data goes here!!!";
+    }
+}
+
 export async function analyzeFile(file) {
     const reader = new zip.ZipReader(new zip.Uint8ArrayReader(file.data));
     const enrichedFile = { ...file, reader };
@@ -78,5 +88,9 @@ export async function analyzeFile(file) {
             return subAnalysis;
         })
     );
-    return parsedAnalyses.filter((analysis) => analysis.active);
+    const activeAnalyses = parsedAnalyses.filter((analysis) => analysis.active);
+    return {
+        analyses: activeAnalyses,
+        unrecognizedData: new UnrecognizedData(),
+    };
 }

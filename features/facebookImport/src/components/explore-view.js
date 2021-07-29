@@ -18,23 +18,46 @@ class ExploreView extends LitElement {
             .analysis-card > h1 {
                 font-size: 16px;
             }
+
+            .unrecognized-analysis-card {
+                border-color: red;
+            }
         `;
     }
 
     static get properties() {
         return {
             file: {},
-            _analyses: { state: true },
+            _fileAnalysis: { state: true },
         };
     }
 
     async updated(updatedProperties) {
         if (updatedProperties.has("file"))
-            this._analyses = await analyzeFile(this.file);
+            this._fileAnalysis = await analyzeFile(this.file);
     }
 
     _handleBack() {
         this.dispatchEvent(new CustomEvent("close"));
+    }
+
+    _handleReviewReport(report) {
+        this.dispatchEvent(
+            new CustomEvent("review-report", { detail: { report } })
+        );
+    }
+
+    _renderUnrecognizedCard(unrecognizedData) {
+        return html`<div class="analysis-card unrecognized-analysis-card">
+            <h1>Unrecognised Data</h1>
+
+            <button
+                @click="${() =>
+                    this._handleReviewReport(unrecognizedData.report)}"
+            >
+                Send Report
+            </button>
+        </div>`;
     }
 
     _renderAnalysisCard(analysis) {
@@ -45,8 +68,13 @@ class ExploreView extends LitElement {
     }
 
     _renderFileAnalyses() {
-        if (!this._analyses) return html`<p>Error: No file found</p>`;
-        return html`<div>${this._analyses.map(this._renderAnalysisCard)}</div>`;
+        if (!this._fileAnalysis) {
+            return "";
+        }
+        return html`<div>
+            ${this._renderUnrecognizedCard(this._fileAnalysis.unrecognizedData)}
+            ${this._fileAnalysis.analyses.map(this._renderAnalysisCard)}
+        </div>`;
     }
 
     render() {
