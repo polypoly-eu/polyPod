@@ -136,7 +136,12 @@ const EntityList = () => {
                         "filter-button" +
                         (activeFilters.empty ? "" : " filter-button-active")
                     }
-                ></LinkButton>
+                >
+                    <img
+                        src="./images/filter-background.svg"
+                        alt="Filter button"
+                    />
+                </LinkButton>
                 <InfiniteScroll
                     dataLength={allKeys.length - toLoadKeys.length}
                     next={handleLoadMoreData}
