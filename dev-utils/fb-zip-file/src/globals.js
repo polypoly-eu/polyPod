@@ -21,7 +21,6 @@ export function readAndProcessZipFile(
 ) {
     let data = Buffer.from([]);
     let readStream = createReadStream(path);
-    readStream.setEncoding("binary");
     readStream.on("data", (chunk) => {
         data = Buffer.concat([data, chunk]);
     });
