@@ -20,7 +20,7 @@ export function readAndProcessZipFile(
     path = process.env.FB_ZIP_LOCATION
 ) {
     let data = Buffer.from([]);
-    let readStream = createReadStream(path, { highWaterMark: 128 * 1024 });
+    let readStream = createReadStream(path);
     readStream.setEncoding("binary");
     readStream.on("data", (chunk) => {
         data = Buffer.concat([data, chunk]);
