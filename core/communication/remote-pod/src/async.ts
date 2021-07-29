@@ -34,9 +34,6 @@ class AsyncPolyOut implements PolyOut {
     async readdir(path: string): Promise<string[]> {
         return (await this.promise).readdir(path);
     }
-    async deleteFile(path: string): Promise<void> {
-        return (await this.promise).deleteFile(path);
-    }
 }
 
 class AsyncPolyIn implements PolyIn {

@@ -24,8 +24,7 @@ export interface Stats {
 export interface FS {
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
-    writeFile(path: string, content: string | Uint8Array, options: EncodingOptions): Promise<void>;
+    writeFile(path: string, content: string, options: EncodingOptions): Promise<void>;
     stat(path: string): Promise<Stats>;
     readdir(path: string): Promise<string[]>;
-    deleteFile(path: string): Promise<void>;
 }
