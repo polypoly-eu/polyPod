@@ -19,11 +19,11 @@ export function readAndProcessZipFile(
     callback,
     path = process.env.FB_ZIP_LOCATION
 ) {
-    let data = "";
+    let data = Buffer.from([]);
     let readStream = createReadStream(path, { highWaterMark: 128 * 1024 });
     readStream.setEncoding("binary");
     readStream.on("data", (chunk) => {
-        data += chunk;
+        data = Buffer.concat([data, chunk]);
     });
     readStream.on("end", () => {
         JSZip.loadAsync(data).then(callback);
