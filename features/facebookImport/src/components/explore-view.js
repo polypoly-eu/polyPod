@@ -1,87 +1,59 @@
 import { LitElement, html, css } from "lit";
-import * as zip from "@zip.js/zip.js";
+import { analyzeFile } from "../model/analysis.js";
 
 class ExploreView extends LitElement {
     static get styles() {
         return css`
-            table {
-                margin-top: 10px;
+            .analysis-card:first-child {
+                margin-top: 20px;
             }
 
-            th {
-                padding-right: 10px;
-                white-space: nowrap;
+            .analysis-card {
+                margin: 0 8px 8px 8px;
+                padding: 4px;
+                border: 1px solid black;
+                border-radius: 8px;
             }
 
-            .code {
-                font-family: monospace;
-            }
+.analysis-card>h1 {
+font-size: 16px;
+}
         `;
     }
 
     static get properties() {
         return {
             file: {},
-            _analysis: { state: true },
-        };
-    }
-
-    async _analyzeFile({ id, data }) {
-        const hex = [...data]
-            .map((i) => i.toString(16).padStart(2, "0"))
-            .join(" ");
-        const reader = new zip.ZipReader(new zip.Uint8ArrayReader(data));
-        const entries = await reader.getEntries();
-        return {
-            fileId: id,
-            fileSize: data.length,
-            hex,
-            entries,
+            _analyses: { state: true },
         };
     }
 
     async updated(updatedProperties) {
         if (updatedProperties.has("file"))
-            this._analysis = await this._analyzeFile(this.file);
+            this._analyses = await analyzeFile(this.file);
     }
 
     _handleBack() {
         this.dispatchEvent(new CustomEvent("close"));
     }
 
-    _renderFileAnalysis() {
-        if (!this._analysis) return html`<p>Error: No file found</p>`;
-        return html`
-            <table>
-                <tr>
-                    <th>File ID</th>
-                    <td>${this._analysis.fileId}</td>
-                </tr>
-                <tr>
-                    <th>File Size</th>
-                    <td>${this._analysis.fileSize}</td>
-                </tr>
-                <tr>
-                    <th>Data</th>
-                    <td class="code">${this._analysis.hex}</td>
-                </tr>
-                <tr>
-                    <th>List</th>
-                    <td>
-                        ${this._analysis.entries
-                            .map((entry) => entry.filename)
-                            .join("\n")}
-                    </td>
-                </tr>
-            </table>
-        `;
+    _renderAnalysisCard(analysis) {
+        return html`<div class="analysis-card">
+            <h1>${analysis.title}</h1>
+            <p>${analysis.render()}</p>
+        </div>`;
+    }
+
+    _renderFileAnalyses() {
+        if (!this._analyses) return html`<p>Error: No file found</p>`;
+        return html`<div>${this._analyses.map(this._renderAnalysisCard)}</div>`;
     }
 
     render() {
         return html`
             <h1>Explore your data</h1>
             <button @click="${this._handleBack}">Back</button>
-            ${this._renderFileAnalysis()}
+            ${this._renderFileAnalyses()}
         `;
     }
 }
