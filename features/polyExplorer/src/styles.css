@@ -78,3 +78,7 @@ a {
     z-index: 2;
     height: 38px;
 }
+
+::-webkit-scrollbar-track {
+    margin-top: 64px;
+}
