@@ -1,4 +1,4 @@
-import {base64DecToArr, base64EncArr} from "./base64utils";
+import { base64DecToArr, base64EncArr } from "./base64utils";
 const namespace = "http://polypoly.coop/schema/fbImport/";
 export default class Storage {
     constructor(pod) {
