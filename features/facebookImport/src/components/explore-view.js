@@ -15,9 +15,9 @@ class ExploreView extends LitElement {
                 border-radius: 8px;
             }
 
-.analysis-card>h1 {
-font-size: 16px;
-}
+            .analysis-card > h1 {
+                font-size: 16px;
+            }
         `;
     }
 
