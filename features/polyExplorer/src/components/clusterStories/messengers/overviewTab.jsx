@@ -3,34 +3,42 @@ import React from "react";
 import "./overviewTab.css";
 
 const overviewTab = () => {
-    // const handleOverviewTab = (idTab) => {
-    //     const idTab = idTab.useRef();
-    //     console.log("click " + idTab + " tab");
-    // };
+    const tabOverview = [
+        {
+            tabName: "install",
+            tabContent: <div>1</div>,
+        },
+        {
+            tabName: "users",
+            tabContent: <div>2</div>,
+        },
+        {
+            tabName: "partof",
+            tabContent: <div>3</div>,
+        },
+    ];
+
+    const onClickTab = () => {
+        console.log("click tab");
+    };
 
     return (
         <nav className="overview-tab">
             <button
-                // onTabClick={handleOverviewTab()}
-                className="overview-button"
-                id="installs"
-                // ref={idTab}
+                onClick={onClickTab}
+                className="overview-button active"
             >
                 Installs
             </button>
             <button
-                // onTabClick={handleOverviewTab()}
+                onClick={onClickTab}
                 className="overview-button"
-                id="users"
-                // ref={idTab}
             >
                 Users
             </button>
             <button
-                // onTabClick={handleOverviewTab()}
+                onClick={onClickTab}
                 className="overview-button"
-                id="partof"
-                // ref={idTab}
             >
                 Part of
             </button>
