@@ -2,5 +2,8 @@
     "name": "facebookImport",
     "author": "polypoly Cooperative",
     "description": "Import your data from Facebook",
-    "primaryColor": "#ffffff"
+    "primaryColor": "#ffffff",
+    "links": {
+        "data-download": "https://www.facebook.com/dyi"
+    }
 }

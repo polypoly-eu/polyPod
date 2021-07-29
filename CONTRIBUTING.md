@@ -17,9 +17,10 @@ contacting community@polypoly.coop.
 
 ## Contributor agreement
 
-If you wish to make a contribution, please send an email to
-community@polypoly.coop, and we will walk you through the process of signing our
-contributor license agreement. We will make this process easier over time.
+If you would like contribute code or documentation, please sign our 
+[Contributor License Agreement](https://polypoly.coop/en-de/contribute/cla).
+Please refer to the FAQ for further information or contact us at 
+community@polypoly.coop.
 
 ## Coding style
 

@@ -2,7 +2,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import copy from "rollup-plugin-copy";
 
 export default {
-    input: "src/facebook-import.js",
+    input: "src/components/facebook-import.js",
     output: {
         file: "dist/facebook-import.js",
         format: "iife",
@@ -14,6 +14,7 @@ export default {
                     src: [
                         "src/static/*",
                         "node_modules/@polypoly-eu/podjs/dist/pod.js",
+                        "node_modules/poly-look/dist/poly-look.bundled.js",
                     ],
                     dest: "dist",
                 },

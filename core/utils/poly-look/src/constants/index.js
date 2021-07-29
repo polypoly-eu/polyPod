@@ -1,3 +1,3 @@
-import { types, sizes, states } from "./forButton";
-
-export const polyButton = { types, sizes, states };
+export * as polyTabs from "./forTabs";
+export * as polyButton from "./forButton";
+export * as polyInput from "./forInput";

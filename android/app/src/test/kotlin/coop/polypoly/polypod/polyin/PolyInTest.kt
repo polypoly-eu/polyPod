@@ -289,4 +289,66 @@ class PolyInTest {
         movedDatabase.delete()
         originalDatabase.delete()
     }
+
+    @Test
+    fun delete_works() {
+        matcher_works()
+        val firstElement: List<Quad> = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData"))
+                .withSubject(BlankNode("someCompany"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build()
+        )
+
+        runBlocking {
+            polyIn?.delete(firstElement)
+        }
+        val returnedData = runBlocking {
+            polyIn?.select(
+                Matcher(
+                    null,
+                    null,
+                    null
+                )
+            )
+        }
+
+        Truth.assertThat(returnedData!!.size).isEqualTo(2)
+        val deleted = returnedData!!.any { res ->
+            res.`object`.equals(BlankNode("privateData"))
+        }
+        Truth.assertThat(deleted).isFalse()
+    }
+
+    @Test
+    fun has_works() {
+        matcher_works()
+        val existingElement: List<Quad> = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData"))
+                .withSubject(BlankNode("someCompany"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build()
+        )
+        val nonExistingElement: List<Quad> = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("nonexisting"))
+                .withSubject(BlankNode("nonexisting"))
+                .withPredicate(IRI("https://polypoly.coop/nonexisting"))
+                .build()
+        )
+
+        Truth.assertThat(
+            runBlocking {
+                polyIn?.has(existingElement)
+            }
+        ).isTrue()
+
+        Truth.assertThat(
+            runBlocking {
+                polyIn?.has(nonExistingElement)
+            }
+        ).isFalse()
+    }
 }

@@ -41,6 +41,8 @@ export interface Matcher {
  */
 export interface PolyIn {
     /**
+     * DEPRECATED: use `match()` instead.
+     *
      * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
      * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
      * contain triples that match the property exactly.
@@ -65,6 +67,12 @@ export interface PolyIn {
     select(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
 
     /**
+     * Queries the Pod for triples matching the given filter.
+     * @param matcher a [[Matcher]] where any property may be left unspecified
+     */
+    match(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
+
+    /**
      * Instructs the Pod to add triples to the store. Successful storage is not guaranteed, as that may be contingent
      * on other constraints, e.g. access restrictions or synchronization across multiple machines.
      *
@@ -82,6 +90,16 @@ export interface PolyIn {
      * @param quads the triples that should be stored in the Pod
      */
     add(...quads: RDF.Quad[]): Promise<void>;
+
+    /**
+     * @param quads the triples that should be removed from the Pod
+     */
+    delete(...quads: RDF.Quad[]): Promise<void>;
+
+    /**
+     * @param quads the triples that should be removed from the Pod
+     */
+    has(...quads: RDF.Quad[]): Promise<boolean>;
 }
 
 /**

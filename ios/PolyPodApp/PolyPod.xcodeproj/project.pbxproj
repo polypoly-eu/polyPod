@@ -92,6 +92,8 @@
 		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
+		5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */; };
+		5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
 		E90F89EE2629C0C000AD7D96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89ED2629C0C000AD7D96 /* ContentView.swift */; };
@@ -122,6 +124,9 @@
 		E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
 		E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B712627304800216B70 /* FeatureContainerView.swift */; };
+		E9CFFA4A269F4CCE00F7BE65 /* FeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */; };
+		E9CFFA4C26A0240300F7BE65 /* ColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CFFA4B26A0240300F7BE65 /* ColorExtensionsTests.swift */; };
+		E9CFFA4F26A1983700F7BE65 /* UIColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CFFA4E26A1983700F7BE65 /* UIColorExtensionsTest.swift */; };
 		E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */; };
 		E9F370CA262DD92C006254C1 /* jost_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C6262DD92C006254C1 /* jost_light.ttf */; };
 		E9F370CC262DD92C006254C1 /* jost_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F370C8262DD92C006254C1 /* jost_medium.ttf */; };
@@ -198,6 +203,8 @@
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
+		5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Delete.swift"; sourceTree = "<group>"; };
+		5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Has.swift"; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E90F89ED2629C0C000AD7D96 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -218,6 +225,9 @@
 		E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		E9CF1B712627304800216B70 /* FeatureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureContainerView.swift; sourceTree = "<group>"; };
+		E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureTests.swift; sourceTree = "<group>"; };
+		E9CFFA4B26A0240300F7BE65 /* ColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensionsTests.swift; sourceTree = "<group>"; };
+		E9CFFA4E26A1983700F7BE65 /* UIColorExtensionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionsTest.swift; sourceTree = "<group>"; };
 		E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUtils.swift; sourceTree = "<group>"; };
 		E9F370C6262DD92C006254C1 /* jost_light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_light.ttf; sourceTree = "<group>"; };
 		E9F370C8262DD92C006254C1 /* jost_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jost_medium.ttf; sourceTree = "<group>"; };
@@ -279,9 +289,12 @@
 		1A66F7732493743D00ED4308 /* PolyPodTests */ = {
 			isa = PBXGroup;
 			children = (
+				E9CFFA4E26A1983700F7BE65 /* UIColorExtensionsTest.swift */,
 				1A66F77E249378E400ED4308 /* PolyOutTests.swift */,
 				1A66F7762493743D00ED4308 /* Info.plist */,
 				E989B352269DDC9E000EE977 /* PolyNavTests.swift */,
+				E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */,
+				E9CFFA4B26A0240300F7BE65 /* ColorExtensionsTests.swift */,
 			);
 			path = PolyPodTests;
 			sourceTree = "<group>";
@@ -291,6 +304,8 @@
 			children = (
 				1A6F4DF124C1A76200874DF9 /* PolyIn+Add.swift */,
 				1A6F4DF324C1A76E00874DF9 /* PolyIn+Select.swift */,
+				5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */,
+				5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */,
 			);
 			path = Quads;
 			sourceTree = "<group>";
@@ -656,6 +671,7 @@
 				E9B22041263314DC005E8881 /* JSONSerializationExtensions.swift in Sources */,
 				E9B22042263314DC005E8881 /* FileManagerExtensions.swift in Sources */,
 				E9B22043263314DC005E8881 /* LocalizedStringKeyExtensions.swift in Sources */,
+				E9CFFA4C26A0240300F7BE65 /* ColorExtensionsTests.swift in Sources */,
 				E9B22044263314DC005E8881 /* UIColorExtensions.swift in Sources */,
 				E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */,
 				E9B2203C263314AD005E8881 /* Feature.swift in Sources */,
@@ -672,6 +688,7 @@
 				1ABADC0624EE712F00369791 /* PolyPodModel.xcdatamodeld in Sources */,
 				1A66F7802493793D00ED4308 /* PolyOut.swift in Sources */,
 				1ABADBD824EBC5F900369791 /* FileStats.swift in Sources */,
+				E9CFFA4F26A1983700F7BE65 /* UIColorExtensionsTest.swift in Sources */,
 				1ABADBF224EE70B500369791 /* DataFactory.swift in Sources */,
 				1ABADBFC24EE710B00369791 /* Quad+CoreDataProperties.swift in Sources */,
 				1ABADBF424EE70E700369791 /* LocationTracker.swift in Sources */,
@@ -679,6 +696,7 @@
 				1ABADC0724EE717000369791 /* Bubblewrap.swift in Sources */,
 				1ABADBF824EE710B00369791 /* NamedNode+CoreDataProperties.swift in Sources */,
 				1ABADC0524EE710C00369791 /* Term+Additions.swift in Sources */,
+				E9CFFA4A269F4CCE00F7BE65 /* FeatureTests.swift in Sources */,
 				1ABADBF624EE710B00369791 /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1ABADC0024EE710B00369791 /* Literal+CoreDataClass.swift in Sources */,
 				1ABADBFB24EE710B00369791 /* Quad+CoreDataClass.swift in Sources */,
@@ -740,7 +758,9 @@
 				E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */,
 				1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */,
 				E97D327A263153C200A5A180 /* NavigationBar.swift in Sources */,
+				5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
+				5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */,
 				E9F370D5262EABFF006254C1 /* LocalizedStringKeyExtensions.swift in Sources */,
 				E9F370E7262EEF13006254C1 /* UIColorExtensions.swift in Sources */,
 				1ABADBEC24EBD02C00369791 /* LocationTracker.swift in Sources */,

@@ -28,11 +28,11 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (!initialized) {
+            initialized = true
             authorize {
                 FeatureStorage().installBundledFeatures(this)
                 setContentView(R.layout.activity_main)
                 setSupportActionBar(findViewById(R.id.toolbar))
-                initialized = true
             }
         }
 
