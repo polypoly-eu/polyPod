@@ -5,7 +5,7 @@ import { listToStringReducer } from "../helpers";
 
 const validThemes = Object.values(polyTabs.themes);
 
-const validateTabTheme = value => validThemes.includes(value);
+const validateTabTheme = (value) => validThemes.includes(value);
 
 export class TabHeader extends LitElement {
   static get styles() {

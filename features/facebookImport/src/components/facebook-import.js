@@ -1,14 +1,16 @@
 import { LitElement, html } from "lit";
 
 import Storage from "../model/storage.js";
-import "./fi-analysis";
-import "./fi-download";
-import "./fi-file-management";
+import "./explore-view";
+import "./import-view";
+import "./report-view";
+import "./overview-view";
 
 class FacebookImport extends LitElement {
     static get properties() {
         return {
             _pod: { state: true },
+            _currentView: { state: true },
             _files: { state: true },
         };
     }
@@ -40,62 +42,73 @@ class FacebookImport extends LitElement {
         this._storage.addFile(event.detail);
     }
 
+    _handleClose() {
+        this._currentView = null;
+    }
+
+    _renderImport() {
+        return html`<import-view
+            .pod="${this._pod}"
+            @add-file="${this._handleAddFile}"
+            @close="${this._handleClose}"
+        ></import-view>`;
+    }
+
+    _handleReviewReport({ detail }) {
+        this._report = detail.report;
+        this._currentView = "report";
+    }
+
+    _renderExplore() {
+        return html`<explore-view
+            .file="${this._selectedFile}"
+            @close="${this._handleClose}"
+            @review-report="${this._handleReviewReport}"
+        ></explore-view>`;
+    }
+
+    _handleImportFile() {
+        this._currentView = "import";
+    }
+
     _handleRemoveFile(event) {
         this._storage.removeFile(event.detail);
     }
 
-    render() {
-        if (!this._pod) return this._renderSplash();
-        return html`
-            <poly-tabs theme="dark">
-                <poly-tab tabId="download" label="Download" active>
-                    <poly-tab-content></poly-tab-content>
-                </poly-tab>
-                <poly-tab tabId="file-management" label="File management">
-                    <poly-tab-content></poly-tab-content>
-                </poly-tab>
-                <poly-tab tabId="analysis" label="Analysis">
-                    <poly-tab-content></poly-tab-content>
-                </poly-tab>
-            </poly-tabs>
-
-            <div class="tab-content" style="display: none">
-                <fi-download .pod="${this._pod}"></fi-download>
-
-                <fi-file-management
-                    .pod="${this._pod}"
-                    .files="${this._files}"
-                    @add-file="${this._handleAddFile}"
-                    @remove-file="${this._handleRemoveFile}"
-                ></fi-file-management>
-
-                <fi-analysis .files="${this._files}"></fi-analysis>
-            </div>
-        `;
+    _handleExploreFile(event) {
+        const id = event.detail.id;
+        this._selectedFile = this._files.find((file) => file.id === id);
+        this._currentView = "explore";
     }
 
-    updated() {
-        // This is quite a bit of a hack - at the moment, <poly-tab-content>
-        // elements don't support nested LitElement-derived web components,
-        // hence this questionable workaround:
-        setTimeout(() => {
-            const tabIds = [
-                ...this.shadowRoot.querySelectorAll(".tab-content>*"),
-            ].map((element) =>
-                element.nodeName.toLowerCase().replace(/^fi-/, "")
-            );
-            const polyTabs = this.shadowRoot.querySelector("poly-tabs");
-            for (let tabId of tabIds) {
-                const polyTabContent = polyTabs.shadowRoot.querySelector(
-                    `poly-tab-content[tabId=${tabId}`
-                );
-                const tabTarget = polyTabContent.shadowRoot.querySelector(
-                    `#poly-${tabId}`
-                );
-                const tabSource = this.shadowRoot.querySelector(`fi-${tabId}`);
-                tabTarget.appendChild(tabSource);
-            }
-        }, 0);
+    _handleCloseReport() {
+        this._currentView = "explore";
+    }
+
+    _renderReport() {
+        return html` <report-view
+            .pod="${this._pod}"
+            .report="${this._report}"
+            @close="${this._handleCloseReport}"
+        ></overview-view>`;
+    }
+
+    _renderOverview() {
+        return html` <overview-view
+            .pod="${this._pod}"
+            .files="${this._files}"
+            @import-file="${this._handleImportFile}"
+            @remove-file="${this._handleRemoveFile}"
+            @explore-file="${this._handleExploreFile}"
+        ></overview-view>`;
+    }
+
+    render() {
+        if (!this._pod) return this._renderSplash();
+        if (this._currentView === "import") return this._renderImport();
+        if (this._currentView === "explore") return this._renderExplore();
+        if (this._currentView === "report") return this._renderReport();
+        return this._renderOverview();
     }
 }
 

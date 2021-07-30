@@ -3,7 +3,7 @@ import "../src/tabs";
 import { themeConfiguration } from "./themeConfiguration";
 
 export default {
-  title: "Visuals/Atoms/TabConent",
+  title: "Visuals/Atoms/TabContent",
   component: "poly-tab-content",
   argTypes: {
     active: { control: "boolean" },
