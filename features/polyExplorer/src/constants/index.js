@@ -17,7 +17,7 @@ export const DIAGRAMS = {
 };
 
 export const INTRO_ANIMATIONS = {
-    FORDWARD: "fordward",
+    FORWARD: "forward",
     BACKWARD: "backward",
 };
 
