@@ -36,13 +36,35 @@ const Summary = ({ animation, heightEvent }) => {
 
             return (
                 <li
-                    className={`bullet-summary ${bulletsAnimation[index]}`}
+                    className={`bullet-summary ${
+                        index === 0
+                            ? "bullet-one"
+                            : index === 1
+                            ? "bullet-two"
+                            : "bullet-three"
+                    } ${bulletsAnimation[index]}`}
                     key={index}
                 >
-                    <span className={`strong-text ${bulletsAnimation[index]}`}>
+                    <span
+                        className={`strong-text ${
+                            index === 0
+                                ? "bullet-one"
+                                : index === 1
+                                ? "bullet-two"
+                                : "bullet-three"
+                        } ${bulletsAnimation[index]}`}
+                    >
                         {i18n.t(`${i18nHeader}:${copyBullet.strongText}`)}
                     </span>
-                    <span className={`light-text ${bulletsAnimation[index]}`}>
+                    <span
+                        className={`light-text ${
+                            index === 0
+                                ? "bullet-one"
+                                : index === 1
+                                ? "bullet-two"
+                                : "bullet-three"
+                        } ${bulletsAnimation[index]}`}
+                    >
                         {i18n.t(`${i18nHeader}:${copyBullet.lightText}`)}
                     </span>
                 </li>
