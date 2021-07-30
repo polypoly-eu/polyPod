@@ -13,7 +13,7 @@ import "./messengerStory.css";
  * understand where the scrollytelling events are fired.
  * IT NEVER MUST BE PUSHED IN A PRODUCTION BRANCH WITH THE VALUE "TRUE"
  */
-const scrollTellingDebug = false;
+const scrollTellingDebug = true;
 const animationPause = "pause";
 
 function isInViewport(el) {
