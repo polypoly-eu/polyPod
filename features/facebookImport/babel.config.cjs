@@ -1,5 +1,4 @@
 module.exports = {
-<<<<<<< HEAD
     presets: [["@babel/preset-env", { targets: { node: "current" } }]],
     plugins: [
         [
@@ -10,7 +9,3 @@ module.exports = {
         ],
     ],
 };
-=======
-  presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
-};
->>>>>>> main
