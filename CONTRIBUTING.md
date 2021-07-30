@@ -18,10 +18,10 @@ contacting community@polypoly.coop.
 ## Contributor agreement for external contributions
 
 If you would like to contribute code or documentation please download, read and
-sign the [contributor license agreement](https://polypoly.coop/en-de/contribute/cla/)
-and then email it to [`community@polypoly.coop`](mailto:community@polypoly.coop),
-which can also help if you have any doubt.  We will make this process easier
-over time.
+sign the [polypoly's Contributor License Agreement](https://polypoly.coop/en-de/contribute/cla/)
+and then send it to [`community@polypoly.coop`](mailto:community@polypoly.coop).
+Please refer to the FAQ for further information or contact us via email if you
+have any questions.
 
 ## Coding style
 
