@@ -1,0 +1,10 @@
+.donut-message {
+  color: black;
+  text-align: center;
+  position: relative;
+  top: 25%;
+  font-size: 20px;
+  font-family: 'Jost';
+  line-height: 120%;
+  font-weight: 600;
+}
