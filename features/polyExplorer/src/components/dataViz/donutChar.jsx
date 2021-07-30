@@ -54,6 +54,33 @@ const DonutChart = ({ size, data, message }) => {
             .innerRadius(labelOffset)
             .outerRadius(labelOffset);
 
+        plotArea
+            .selectAll("line")
+            .data(arcs)
+            .enter()
+            .append("line")
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("x1", (d) => {
+                const point = labelsArc.centroid(d);
+
+                return point[0];
+            })
+            .attr("y1", (d) => {
+                const point = labelsArc.centroid(d);
+                return point[1];
+            })
+            .attr("x2", (d) => {
+                const point = arc.centroid(d);
+
+                return point[0] * 1.2;
+            })
+            .attr("y2", (d) => {
+                const point = arc.centroid(d);
+
+                return point[1] * 1.2;
+            });
+
         const labelsGroup = plotArea
             .selectAll(".groupLabels")
             .data(arcs)
@@ -72,11 +99,22 @@ const DonutChart = ({ size, data, message }) => {
             .selectAll(".labels")
             .data(arcs)
             .enter()
-            .append("text")
-            .style("text-anchor", "middle")
-            .style("alignment-baseline", "middle")
-            .style("font-size", "20px")
-            .attr("transform", (d) => `translate(${labelsArc.centroid(d)})`);
+            .append("foreignObject")
+            .style("width", 100)
+            .style("height", 50)
+            .attr("transform", (d) => {
+                const point = labelsArc.centroid(d);
+                if (point[0] > 0) {
+                    point[0] = point[0] * 0.75;
+                } else {
+                    point[0] = point[0] * 1.4;
+                }
+
+                if (point[1] < 0) {
+                    point[1] = point[1] * 1.2;
+                }
+                return `translate(${point})`;
+            });
 
         const messageArea = plotArea
             .append("foreignObject")
@@ -95,13 +133,15 @@ const DonutChart = ({ size, data, message }) => {
             .attr("d", arc);
 
         labels
-            .append("tspan")
-            .attr("y", "-0.6em")
-            .attr("x", 0)
+            .append("xhtml:div")
+            .style("color", "black")
+            .style("text-align", "center")
+            .style("font-size", "20px")
+            .style("font-family", "'Jost'")
             .style("line-height", "120%")
-            .style("letter-spacing", "-0.01em")
-            .style("font-weight", "600")
-            .text((d) => `${d.data.name}:${d.data.value}`);
+            .style("font-weight", 600)
+            .style("background-color", "white")
+            .text((d) => `${d.data.name}: ${d.data.value}`);
 
         labelsGroup
             .append("tspan")
@@ -115,42 +155,6 @@ const DonutChart = ({ size, data, message }) => {
                     ? d.data.group
                     : ""
             );
-
-        plotArea
-            .selectAll("line")
-            .data(arcs)
-            .enter()
-            .append("line")
-            .attr("stroke", "black")
-            .attr("stroke-width", 1)
-            .attr("x1", (d) => {
-                const point = labelsArc.centroid(d);
-                let result = point[0];
-
-                if (point[1] > 0) {
-                    result = result * 0.8;
-                }
-
-                return result;
-            })
-            .attr("y1", (d) => {
-                const point = labelsArc.centroid(d);
-                let result = point[1];
-                if (point[1] > 0) {
-                    result = result * 0.8;
-                }
-                return result;
-            })
-            .attr("x2", (d) => {
-                const point = arc.centroid(d);
-
-                return point[0] * 1.2;
-            })
-            .attr("y2", (d) => {
-                const point = arc.centroid(d);
-
-                return point[1] * 1.2;
-            });
 
         messageArea
             .append("xhtml:div")
