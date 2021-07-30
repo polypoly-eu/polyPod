@@ -50,14 +50,34 @@
   position: relative;
 }
 
-.things-to-be-aware .hidden {
+.things-to-be-aware .bullet-one.hidden {
+  opacity: 0;
+  animation: fadeout 1.5s ease-in;
+}
+
+.things-to-be-aware .bullet-one.visible {
+  opacity: 1;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.things-to-be-aware .bullet-two.hidden {
   opacity: 0;
   animation: fadeout 1s ease-in;
 }
 
-.things-to-be-aware .visible {
+.things-to-be-aware .bullet-two.visible {
   opacity: 1;
   animation: fadeIn 1s ease-in;
+}
+
+.things-to-be-aware .bullet-three.hidden {
+  opacity: 0;
+  animation: fadeout 0.5s ease-in;
+}
+
+.things-to-be-aware .bullet-three.visible {
+  opacity: 1;
+  animation: fadeIn 1.5s ease-in;
 }
 
 .strong-text {
