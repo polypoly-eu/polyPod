@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-import "./donutChar.css";
 const DonutChart = ({ size, data, message }) => {
     const svgCanvas = useRef();
 
@@ -13,35 +12,30 @@ const DonutChart = ({ size, data, message }) => {
         const forth = size / 4;
         const eighth = size / 6;
         const half = size / 2;
-        // const chartData = data.reduce((acc, group) => {
-        //     const info = Object.keys(group.attributes).map((key) => ({
-        //         name: key,
-        //         value: group.attributes[key],
-        //     }));
+        const chartData = data.reduce((acc, group) => {
+            const info = Object.keys(group.attributes).map((key) => ({
+                group: group.groupName,
+                name: key,
+                value: group.attributes[key],
+                groupLabel: false,
+            }));
+            const indexGroupLabel = Math.ceil(info.length / 2) - 1;
+            info[indexGroupLabel].groupLabel = true;
 
-        //     return [...acc, ...info];
-        // }, []);
-        const chartData = data.map((group) => {
-            const name = group.groupName;
-            const value = Object.values(group.attributes).reduce(
-                (acc, value) => acc + value,
-                0
-            );
+            return [...acc, ...info];
+        }, []);
+        const groupsName = data.map((group) => group.groupName);
 
-            return {
-                name,
-                value,
-            };
-        });
         const colors = d3
             .scaleOrdinal()
-            .domain(chartData.map((d) => d.name))
+            .domain(groupsName)
             .range(["#3BA6FF", "#3749A9"]);
-        const labelOffset = forth * 1.6;
+        const labelOffset = forth * 1.5;
         const root = getRootSvg();
         const char = root
             .append("svg")
             .style("width", "100%")
+            .style("height", 400)
             .attr("xmlns", "http://www.w3.org/2000/svg")
             .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
             .attr("xmlns:xhtml", "http://www.w3.org/1999/xhtml")
@@ -60,8 +54,22 @@ const DonutChart = ({ size, data, message }) => {
             .innerRadius(labelOffset)
             .outerRadius(labelOffset);
 
+        const labelsGroup = plotArea
+            .selectAll(".groupLabels")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .style("text-anchor", "middle")
+            .style("alignment-baseline", "middle")
+            .style("font-size", "20px")
+            .attr("transform", (d) => {
+                const point = labelsArc.centroid(d);
+                point[1] = point[1] * 2;
+                return `translate(${point})`;
+            });
+
         const labels = plotArea
-            .selectAll("text")
+            .selectAll(".labels")
             .data(arcs)
             .enter()
             .append("text")
@@ -82,7 +90,7 @@ const DonutChart = ({ size, data, message }) => {
             .data(arcs)
             .enter()
             .append("path")
-            .attr("fill", (d) => colors(d.data.name))
+            .attr("fill", (d) => colors(d.data.group))
             .attr("stroke", "white")
             .attr("d", arc);
 
@@ -94,6 +102,19 @@ const DonutChart = ({ size, data, message }) => {
             .style("letter-spacing", "-0.01em")
             .style("font-weight", "600")
             .text((d) => `${d.data.name}:${d.data.value}`);
+
+        labelsGroup
+            .append("tspan")
+            .attr("y", "-0.6em")
+            .attr("x", 0)
+            .style("line-height", "120%")
+            .style("letter-spacing", "-0.01em")
+            .style("font-weight", "600")
+            .text((d) =>
+                d.data.groupLabel && d.data.group !== "default"
+                    ? d.data.group
+                    : ""
+            );
 
         plotArea
             .selectAll("line")
@@ -133,7 +154,14 @@ const DonutChart = ({ size, data, message }) => {
 
         messageArea
             .append("xhtml:div")
-            .attr("class", "donut-message")
+            .style("color", "black")
+            .style("text-align", "center")
+            .style("position", "relative")
+            .style("top", "25%")
+            .style("font-size", "20px")
+            .style("font-family", "'Jost'")
+            .style("line-height", "120%")
+            .style("font-weight", 600)
             .text(message);
     }
 
