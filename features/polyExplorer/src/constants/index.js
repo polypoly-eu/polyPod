@@ -24,3 +24,7 @@ export const INTRO_ANIMATIONS = {
 export const SUMMARY_ANIMATIONS = {
     ANIMATE_BULLET: "animate bullet",
 };
+
+export const DONUT_CHART = {
+    DEFAULT_GROUP: "default",
+};

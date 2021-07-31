@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { DONUT_CHART } from "../../constants";
 import * as d3 from "d3";
 
 const DonutChart = ({ size, data, message }) => {
@@ -9,6 +10,13 @@ const DonutChart = ({ size, data, message }) => {
     }
 
     function buildPieChart() {
+        const messageConfig = {
+            x: -85,
+            y: -85,
+            width: 170,
+            height: 200,
+        };
+
         const forth = size / 4;
         const eighth = size / 6;
         const half = size / 2;
@@ -98,7 +106,11 @@ const DonutChart = ({ size, data, message }) => {
 
         plotArea
             .selectAll(".lineGroup")
-            .data(groupArcs.filter((d) => d.data.name !== "default"))
+            .data(
+                groupArcs.filter(
+                    (d) => d.data.name !== DONUT_CHART.DEFAULT_GROUP
+                )
+            )
             .enter()
             .append("line")
             .attr("stroke", "black")
@@ -116,7 +128,11 @@ const DonutChart = ({ size, data, message }) => {
 
         const labelsGroup = plotArea
             .selectAll(".groupLabels")
-            .data(groupArcs.filter((d) => d.data.name !== "default"))
+            .data(
+                groupArcs.filter(
+                    (d) => d.data.name !== DONUT_CHART.DEFAULT_GROUP
+                )
+            )
             .enter()
             .append("foreignObject")
             .style("width", 100)
@@ -152,10 +168,10 @@ const DonutChart = ({ size, data, message }) => {
 
         const messageArea = plotArea
             .append("foreignObject")
-            .attr("x", -85)
-            .attr("y", -85)
-            .attr("width", 170)
-            .attr("height", 200);
+            .attr("x", messageConfig.x)
+            .attr("y", messageConfig.y)
+            .attr("width", messageConfig.width)
+            .attr("height", messageConfig.height);
 
         plotArea
             .selectAll("path")
