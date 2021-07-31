@@ -15,3 +15,7 @@ export const DIAGRAMS = {
     COMPANY_HIGHLIGHT: "companyHighlight",
     ALL_INDUSTRIES: "allIndustries",
 };
+
+export const DONUT_CHART = {
+    DEFAULT_GROUP: "default",
+};
