@@ -17,20 +17,30 @@ const DonutChart = ({ size, data, message }) => {
                 group: group.groupName,
                 name: key,
                 value: group.attributes[key],
-                groupLabel: false,
             }));
-            const indexGroupLabel = Math.ceil(info.length / 2) - 1;
-            info[indexGroupLabel].groupLabel = true;
 
             return [...acc, ...info];
         }, []);
-        const groupsName = data.map((group) => group.groupName);
+        const groupsInfo = data.map((group) => {
+            const totalValue = Object.values(group.attributes).reduce(
+                (acc, current) => acc + current,
+                0
+            );
+
+            return {
+                name: group.groupName,
+                value: totalValue,
+                color: group.color,
+                labelCorrection: group.groupLabelCorrection,
+            };
+        });
 
         const colors = d3
             .scaleOrdinal()
-            .domain(groupsName)
-            .range(["#3BA6FF", "#3749A9"]);
-        const labelOffset = forth * 1.5;
+            .domain(groupsInfo.map(({ name }) => name))
+            .range(groupsInfo.map(({ color }) => color));
+        const labelOffset = forth * 1.3;
+        const groupLabelsOffset = labelOffset * 1.2;
         const root = getRootSvg();
         const char = root
             .append("svg")
@@ -48,14 +58,19 @@ const DonutChart = ({ size, data, message }) => {
             .sort(null)
             .value((d) => d.value);
         const arcs = pie(chartData);
+        const groupArcs = pie(groupsInfo);
         const arc = d3.arc().innerRadius(eighth).outerRadius(forth);
         const labelsArc = d3
             .arc()
             .innerRadius(labelOffset)
             .outerRadius(labelOffset);
+        const groupLabelsArc = d3
+            .arc()
+            .innerRadius(groupLabelsOffset)
+            .outerRadius(groupLabelsOffset);
 
         plotArea
-            .selectAll("line")
+            .selectAll(".lineLabel")
             .data(arcs)
             .enter()
             .append("line")
@@ -81,17 +96,36 @@ const DonutChart = ({ size, data, message }) => {
                 return point[1] * 1.2;
             });
 
+        plotArea
+            .selectAll(".lineGroup")
+            .data(groupArcs.filter((d) => d.data.name !== "default"))
+            .enter()
+            .append("line")
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("x1", (d) => {
+                const point = groupLabelsArc.centroid(d);
+                return point[0] * d.data.labelCorrection.x;
+            })
+            .attr("y1", (d) => {
+                const point = groupLabelsArc.centroid(d);
+                return point[1] * d.data.labelCorrection.y;
+            })
+            .attr("x2", "0")
+            .attr("y2", "0");
+
         const labelsGroup = plotArea
             .selectAll(".groupLabels")
-            .data(arcs)
+            .data(groupArcs.filter((d) => d.data.name !== "default"))
             .enter()
-            .append("text")
-            .style("text-anchor", "middle")
-            .style("alignment-baseline", "middle")
-            .style("font-size", "20px")
+            .append("foreignObject")
+            .style("width", 100)
+            .style("height", 50)
             .attr("transform", (d) => {
-                const point = labelsArc.centroid(d);
-                point[1] = point[1] * 2;
+                const point = groupLabelsArc.centroid(d);
+                point[0] = point[0] * d.data.labelCorrection.x;
+                point[1] = point[1] * d.data.labelCorrection.y;
+
                 return `translate(${point})`;
             });
 
@@ -118,10 +152,10 @@ const DonutChart = ({ size, data, message }) => {
 
         const messageArea = plotArea
             .append("foreignObject")
-            .attr("x", -75)
-            .attr("y", -75)
-            .attr("width", 150)
-            .attr("height", 150);
+            .attr("x", -85)
+            .attr("y", -85)
+            .attr("width", 170)
+            .attr("height", 200);
 
         plotArea
             .selectAll("path")
@@ -144,23 +178,23 @@ const DonutChart = ({ size, data, message }) => {
             .text((d) => `${d.data.name}: ${d.data.value}`);
 
         labelsGroup
-            .append("tspan")
-            .attr("y", "-0.6em")
-            .attr("x", 0)
+            .append("xhtml:div")
+            .style("color", "white")
+            .style("text-align", "center")
+            .style("font-size", "20px")
+            .style("font-family", "'Jost'")
             .style("line-height", "120%")
-            .style("letter-spacing", "-0.01em")
-            .style("font-weight", "600")
-            .text((d) =>
-                d.data.groupLabel && d.data.group !== "default"
-                    ? d.data.group
-                    : ""
-            );
+            .style("font-weight", 600)
+            .style("background-color", (d) => d.data.color)
+            .text((d) => `${d.data.name}: ${d.data.value}`);
 
         messageArea
             .append("xhtml:div")
             .style("color", "black")
             .style("text-align", "center")
             .style("position", "relative")
+            .style("background-color", "white")
+            .style("padding", "0px 10px")
             .style("top", "25%")
             .style("font-size", "20px")
             .style("font-family", "'Jost'")
