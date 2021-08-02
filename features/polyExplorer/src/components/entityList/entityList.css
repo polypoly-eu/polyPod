@@ -3,6 +3,10 @@
     overflow-y: auto;
 }
 
+.entity-list::-webkit-scrollbar-track {
+    margin-top: 0;
+}
+
 .active-filters {
     position: fixed;
     z-index: 2;
@@ -77,14 +81,15 @@ button::after {
 }
 
 .filter-button {
+    background-color: var(--color-background-dark);
+    padding: 16px 0;
     position: fixed;
     right: 0;
-    margin-top: -12px;
+    margin-top: -22px;
     z-index: 2;
     width: 60px;
     height: 48px;
     border: none;
-    background: url("../images/filter-background.svg");
 }
 
 .filter-button:focus {
@@ -115,8 +120,4 @@ button::after {
 .entity-group-entities {
     width: 100%;
     margin-left: -4px;
-}
-
-::-webkit-scrollbar-track {
-    margin-top: 64px;
 }

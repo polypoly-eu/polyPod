@@ -19,3 +19,12 @@ export const DIAGRAMS = {
 export const DONUT_CHART = {
     DEFAULT_GROUP: "default",
 };
+
+export const INTRO_ANIMATIONS = {
+    FORWARD: "forward",
+    BACKWARD: "backward",
+};
+
+export const SUMMARY_ANIMATIONS = {
+    ANIMATE_BULLET: "animate bullet",
+};

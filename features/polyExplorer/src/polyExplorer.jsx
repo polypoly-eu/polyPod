@@ -28,7 +28,7 @@ import FeaturedEntityInfoScreen from "./screens/featuredEntityInfo/featuredEntit
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 
 //stories
-import ExampleStory from "./screens/stories/exampleStory.jsx";
+import MessengerStory from "./screens/stories/messengerStory.jsx";
 
 const PolyExplorerApp = () => {
     const {
@@ -88,8 +88,8 @@ const PolyExplorerApp = () => {
                 <Route exact path="/jurisdiction-info">
                     <JurisdictionInfoScreen />
                 </Route>
-                <Route exact path="/story/example-story">
-                    <ExampleStory />
+                <Route exact path="/story/messenger-story">
+                    <MessengerStory />
                 </Route>
             </Switch>
             {firstRun ? (

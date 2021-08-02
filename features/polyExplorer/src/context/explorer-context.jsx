@@ -69,7 +69,7 @@ const loadStoriesMetadata = () => {
                 src: "images/stories/messenger/card-image.svg",
                 alt: "story.messenger.alt",
             },
-            route: "/story/example-story",
+            route: "/story/messenger-story",
         },
         digitalGiants: {
             title: "story.digitalGiants.title",
