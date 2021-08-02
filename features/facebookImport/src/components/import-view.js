@@ -19,12 +19,12 @@ class ImportView extends LitElement {
     }
 
     async _handleImport() {
-        const file = await this.pod.polyNav.pickFile();
-        if (!file) return;
+        const importResult = await this.pod.polyNav.importFile("facebook-data.zip");
+        if (!importResult) return;
 
         this.dispatchEvent(
             new CustomEvent("add-file", {
-                detail: { time: new Date(), data: file },
+                detail: { time: new Date() },
             })
         );
         this._handleBack();

@@ -6,7 +6,7 @@ import type {
     PolyOut,
     PolyNav,
 } from "@polypoly-eu/pod-api";
-import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
+import { EncodingOptions, Stats, PolyFile } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 
@@ -71,7 +71,7 @@ class LocalStoragePolyIn implements PolyIn {
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-class ThrowingPolyOut implements PolyOut {
+class LocalStoragePolyOut implements PolyOut {
     fetch(input: string, init?: RequestInit): Promise<Response> {
         return window.fetch(input, init);
     }
@@ -81,12 +81,37 @@ class ThrowingPolyOut implements PolyOut {
     readFile(
         path: string,
         options?: EncodingOptions
-    ): Promise<string | Uint8Array> {
-        throw "Not implemented: readFile";
+    ): Promise<string | Uint8Array | undefined> {
+        if (options) {
+            throw new Error("Not implemented: readFile with options");
+        }
+        files = new Map<string, PolyFile>(JSON.parse(
+            localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
+            ));
+        return new Promise(async (resolve, reject) => {
+            if (!files.has(path)) {
+                reject(new Error(`File not found: ${path}`));
+                return;
+            }
+            let response = await fetch(files.get(path)?.path || "");
+            const arrayBuf = await response.arrayBuffer();
+            resolve(new Uint8Array(arrayBuf));
+        });
     }
 
-    readdir(path: string): Promise<string[]> {
-        throw "Not implemented: readdir";
+    readdir(path: string): Promise<PolyFile[]> {
+        files = new Map<string, PolyFile>(JSON.parse(
+            localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
+            ));
+        return new Promise(resolve => resolve(
+            Array.from(files).filter(file => file[0].startsWith(path)).map(k => {
+                return {
+                    path: ((k[1] as unknown) as PolyFile).path as string,
+                    name: k[0],
+                    time: k[1].time
+                }
+            })
+        ));
     }
 
     stat(path: string): Promise<Stats> {
@@ -103,7 +128,9 @@ class ThrowingPolyOut implements PolyOut {
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
+let files = new Map<string, PolyFile>();
 class BrowserPolyNav implements PolyNav {
+    static readonly filesKey = "files";
     actions?: { [key: string]: () => void };
     private keyUpListener: any = null;
 
@@ -138,24 +165,36 @@ class BrowserPolyNav implements PolyNav {
         document.title = title;
     }
 
-    async pickFile(): Promise<Uint8Array | null> {
+    async importFile(saveAs: string): Promise<boolean> {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
             fileInput.setAttribute("type", "file");
             fileInput.addEventListener("change", function () {
                 const selectedFile = this.files?.[0];
                 if (!selectedFile) {
-                    resolve(null);
+                    resolve(false);
                     return;
                 }
 
                 const reader = new FileReader();
                 reader.onload = function () {
-                    const buffer = this.result as ArrayBuffer;
-                    const file = new Uint8Array(buffer);
-                    resolve(file);
+                    const dataUrl = this.result as string;
+                    if (saveAs) {
+                        let filesInDir = new Map(JSON.parse(
+                            localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
+                            ));
+                        filesInDir.set(selectedFile.name, {
+                            path: dataUrl,
+                            time: new Date().getTime(),
+                            name: selectedFile.name
+                        });
+                        localStorage.setItem(BrowserPolyNav.filesKey,
+                            JSON.stringify(Array.from(filesInDir))
+                        );
+                    }
+                    resolve(true);
                 };
-                reader.readAsArrayBuffer(selectedFile);
+                reader.readAsDataURL(selectedFile);
             });
             fileInput.click();
         });
@@ -165,6 +204,6 @@ class BrowserPolyNav implements PolyNav {
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new LocalStoragePolyIn();
-    public readonly polyOut = new ThrowingPolyOut();
+    public readonly polyOut = new LocalStoragePolyOut();
     public readonly polyNav = new BrowserPolyNav();
 }

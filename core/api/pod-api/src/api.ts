@@ -139,7 +139,7 @@ export interface PolyNav {
      *
      * @return a byte array containing the file the user selected, or `null` if none was selected.
      */
-    pickFile(): Promise<Uint8Array | null>;
+    importFile(saveAs: string): Promise<boolean>;
 }
 
 /**
