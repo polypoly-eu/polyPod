@@ -350,7 +350,6 @@ const EntityDetails = () => {
                 tabs.push(companyTabs.dataStory);
                 tabs.push(companyTabs.featuredAbout);
             } else tabs.push(companyTabs.basicAbout);
-            console.log(entity);
             if (entity.productsOwned) tabs.push(companyTabs.productsOwned);
         }
         return tabs;
