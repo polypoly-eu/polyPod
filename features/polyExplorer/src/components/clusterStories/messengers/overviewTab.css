@@ -1,18 +1,25 @@
 .overview-tab {
+    margin: 100px auto 0 auto;
     display: flex;
     width: 328px;
     height: 40px;
-    border-bottom: 1px solid #757575;
 }
 
 .overview-button {
     width: 33.33%;
     background-color: var(--color-background-light);
+    border-bottom: 1px solid #757575;
     color: #757575;
     font-size: 14px;
+    font-weight: 500;
 }
 
 .overview-tab .active {
     color: var(--color-text-dark);
-    border-bottom: 3px solid blue;
+    border-bottom: 4px solid var(--color-dark);
+}
+
+/* delete when adding content */
+.overview-content {
+    background-color: lightcoral; 
 }
