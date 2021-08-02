@@ -7,9 +7,41 @@ const DonutChart = ({ size, data, message }) => {
     const forth = size / 4;
     const eighth = size / 6;
     const half = size / 2;
+    const messageConfig = {
+        x: -76,
+        y: -85,
+        width: 152,
+        height: 200,
+        id: "donut-msg",
+    };
+    const darkColor = "#0f1938";
+    const lightColor = "#f7fafc";
+    const classNameLabels = "labels";
+    const labelsSelector = `.${classNameLabels}`;
+    const classNameGroupLabels = "groupLabels";
+    const groupLabelsSelector = `.${classNameGroupLabels}`;
+    const classNameLineLabels = "lineLabel";
+    const lineLabelsSelector = `.${classNameLineLabels}`;
+    const classNameLineGroups = "lineGroup";
+    const lineGroupsSelector = `.${classNameLineGroups}`;
+    const pathSelector = "path";
+    const fontConfig = {
+        fontFamily: "'Jost'",
+        fontSize: "20px",
+        fontWeight: 600,
+        lineHeight: "120%",
+        textAlign: "center",
+    };
+    const labelsConfig = {
+        width: 100,
+        height: 50,
+    };
+    const groupLabelsConfig = {
+        width: 100,
+        height: 50,
+    };
 
     function getRootSvg() {
-        debugger;
         let root = d3.select(svgCanvas.current).select("svg").select("g");
 
         if (root.empty()) {
@@ -29,16 +61,7 @@ const DonutChart = ({ size, data, message }) => {
         return root;
     }
 
-    function buildPieChart() {
-        debugger;
-        const messageConfig = {
-            x: -76,
-            y: -85,
-            width: 152,
-            height: 200,
-            id: "donut-msg",
-        };
-
+    function _processData() {
         const chartData = data.reduce((acc, group) => {
             const info = Object.keys(group.attributes).map((key) => ({
                 group: group.groupName,
@@ -62,13 +85,12 @@ const DonutChart = ({ size, data, message }) => {
             };
         });
 
-        const colors = d3
-            .scaleOrdinal()
-            .domain(groupsInfo.map(({ name }) => name))
-            .range(groupsInfo.map(({ color }) => color));
+        return { chartData, groupsInfo };
+    }
+
+    function _calculateArcsArea(chartData, groupsInfo) {
         const labelOffset = forth * 1.35;
         const groupLabelsOffset = labelOffset * 1.15;
-        const plotArea = getRootSvg();
         const pie = d3
             .pie()
             .sort(null)
@@ -85,26 +107,80 @@ const DonutChart = ({ size, data, message }) => {
             .innerRadius(groupLabelsOffset)
             .outerRadius(groupLabelsOffset);
 
-        d3.selectAll(".groupLabels").remove();
-        d3.selectAll(".labels").remove();
+        return {
+            arcs,
+            groupArcs,
+            arc,
+            labelsArc,
+            groupLabelsArc,
+        };
+    }
 
-        const mapGraphParts = plotArea.selectAll("path").data(arcs);
-        const mapLineLabel = plotArea.selectAll(".lineLabel").data(arcs);
+    function _cleanLabels() {
+        d3.selectAll(groupLabelsSelector).remove();
+        d3.selectAll(labelsSelector).remove();
+    }
+
+    function _calculateDataMaps(plotArea, arcs, groupArcs) {
+        const mapGraphParts = plotArea.selectAll(pathSelector).data(arcs);
+        const mapLineLabel = plotArea.selectAll(lineLabelsSelector).data(arcs);
         const mapLineGroup = plotArea
-            .selectAll(".lineGroup")
+            .selectAll(lineGroupsSelector)
             .data(
                 groupArcs.filter(
                     (d) => d.data.name !== DONUT_CHART.DEFAULT_GROUP
                 )
             );
         const mapLabelsGroup = plotArea
-            .selectAll(".groupLabels")
+            .selectAll(groupLabelsSelector)
             .data(
                 groupArcs.filter(
                     (d) => d.data.name !== DONUT_CHART.DEFAULT_GROUP
                 )
             );
-        const mapLabels = plotArea.selectAll(".labels").data(arcs);
+        const mapLabels = plotArea.selectAll(labelsSelector).data(arcs);
+
+        return {
+            mapGraphParts,
+            mapLineLabel,
+            mapLineGroup,
+            mapLabelsGroup,
+            mapLabels,
+            exitAndClean: () => {
+                mapGraphParts.exit().remove();
+                mapLineLabel.exit().remove();
+                mapLineGroup.exit().remove();
+                mapLabelsGroup.exit().remove();
+                mapLabels.exit().remove();
+            },
+        };
+    }
+
+    function buildPieChart() {
+        const { chartData, groupsInfo } = _processData();
+
+        const colors = d3
+            .scaleOrdinal()
+            .domain(groupsInfo.map(({ name }) => name))
+            .range(groupsInfo.map(({ color }) => color));
+        const plotArea = getRootSvg();
+        const {
+            arcs,
+            groupArcs,
+            arc,
+            labelsArc,
+            groupLabelsArc,
+        } = _calculateArcsArea(chartData, groupsInfo);
+
+        _cleanLabels();
+        const {
+            mapGraphParts,
+            mapLineLabel,
+            mapLineGroup,
+            mapLabelsGroup,
+            mapLabels,
+            exitAndClean,
+        } = _calculateDataMaps(plotArea, arcs, groupArcs);
 
         mapLineLabel
             .enter()
@@ -112,8 +188,8 @@ const DonutChart = ({ size, data, message }) => {
             .merge(mapLineLabel)
             .transition()
             .duration(1000)
-            .attr("class", "lineLabel")
-            .attr("stroke", "black")
+            .attr("class", classNameLineLabels)
+            .attr("stroke", darkColor)
             .attr("stroke-width", 1)
             .attr("x1", (d) => {
                 const point = labelsArc.centroid(d);
@@ -141,8 +217,8 @@ const DonutChart = ({ size, data, message }) => {
             .merge(mapLineGroup)
             .transition()
             .duration(1000)
-            .attr("class", "lineGroup")
-            .attr("stroke", "black")
+            .attr("class", classNameLineGroups)
+            .attr("stroke", darkColor)
             .attr("stroke-width", 1)
             .attr("x1", (d) => {
                 const point = groupLabelsArc.centroid(d);
@@ -158,9 +234,9 @@ const DonutChart = ({ size, data, message }) => {
         const labelsGroup = mapLabelsGroup
             .enter()
             .append("foreignObject")
-            .style("width", 100)
-            .style("height", 50)
-            .attr("class", "groupLabels")
+            .style("width", groupLabelsConfig.width)
+            .style("height", groupLabelsConfig.height)
+            .attr("class", classNameGroupLabels)
             .attr("transform", (d) => {
                 const point = groupLabelsArc.centroid(d);
                 point[0] = point[0] * d.data.labelCorrection.x;
@@ -172,9 +248,9 @@ const DonutChart = ({ size, data, message }) => {
         const labels = mapLabels
             .enter()
             .append("foreignObject")
-            .style("width", 100)
-            .style("height", 50)
-            .attr("class", "labels")
+            .style("width", labelsConfig.width)
+            .style("height", labelsConfig.height)
+            .attr("class", classNameLabels)
             .attr("transform", (d) => {
                 const point = labelsArc.centroid(d);
                 if (point[0] > 0) {
@@ -204,7 +280,7 @@ const DonutChart = ({ size, data, message }) => {
             .transition()
             .duration(1000)
             .attr("fill", (d) => colors(d.data.group))
-            .attr("stroke", "white")
+            .attr("stroke", lightColor)
             .attr("d", arc);
 
         labels
@@ -212,13 +288,13 @@ const DonutChart = ({ size, data, message }) => {
             .merge(labels)
             .transition()
             .duration(1000)
-            .style("color", "black")
-            .style("text-align", "center")
-            .style("font-size", "20px")
-            .style("font-family", "'Jost'")
-            .style("line-height", "120%")
-            .style("font-weight", 600)
-            .style("background-color", "white")
+            .style("color", darkColor)
+            .style("text-align", fontConfig.textAlign)
+            .style("font-size", fontConfig.fontSize)
+            .style("font-family", fontConfig.fontFamily)
+            .style("line-height", fontConfig.lineHeight)
+            .style("font-weight", fontConfig.fontWeight)
+            .style("background-color", lightColor)
             .text((d) => `${d.data.name}: ${d.data.value}`);
 
         labelsGroup
@@ -226,32 +302,30 @@ const DonutChart = ({ size, data, message }) => {
             .merge(labelsGroup)
             .transition()
             .duration(1000)
-            .style("color", "white")
-            .style("text-align", "center")
-            .style("font-size", "20px")
-            .style("font-family", "'Jost'")
-            .style("line-height", "120%")
-            .style("font-weight", 600)
+            .style("color", lightColor)
+            .style("text-align", fontConfig.textAlign)
+            .style("font-size", fontConfig.fontSize)
+            .style("font-family", fontConfig.fontFamily)
+            .style("line-height", fontConfig.lineHeight)
+            .style("font-weight", fontConfig.fontWeight)
             .style("background-color", (d) => d.data.color)
             .text((d) => `${d.data.name}: ${d.data.value}`);
 
         messageArea
             .append("xhtml:div")
-            .style("color", "black")
-            .style("text-align", "center")
+            .style("color", darkColor)
+            .style("text-align", fontConfig.textAlign)
             .style("position", "relative")
-            .style("background-color", "white")
+            .style("background-color", lightColor)
             .style("padding", "0px 10px")
             .style("top", "25%")
-            .style("font-size", "20px")
-            .style("font-family", "'Jost'")
-            .style("line-height", "120%")
-            .style("font-weight", 600)
+            .style("font-size", fontConfig.fontSize)
+            .style("font-family", fontConfig.fontFamily)
+            .style("line-height", fontConfig.lineHeight)
+            .style("font-weight", fontConfig.fontWeight)
             .text(message);
 
-        mapGraphParts.exit().remove();
-        mapLineLabel.exit().remove();
-        mapLineGroup.exit().remove();
+        exitAndClean();
     }
 
     useEffect(buildPieChart, [data]);
