@@ -67,10 +67,6 @@ a {
     text-decoration: none;
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-}
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #6a798e;

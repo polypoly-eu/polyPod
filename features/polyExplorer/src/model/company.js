@@ -8,7 +8,7 @@ const jurisdictions = {
     RUSSIA: "Russia",
 };
 
-const dataProperties = ["industryCategory"];
+const dataProperties = ["industryCategory", "productsOwned"];
 
 export class Company extends Entity {
     constructor(companyJSONObject, globalData, i18n) {

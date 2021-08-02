@@ -6,12 +6,15 @@ import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLeg
 import FeaturedEntity from "../../components/featuredEntity/featuredEntity.jsx";
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
+import EntityShortInfo from "../../components/entityShortInfo/entityShortInfo.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./entityDetails.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const EntityDetails = () => {
-    const { selectedEntityObject } = useContext(ExplorerContext);
+    const { selectedEntityObject, entityObjectByPpid } = useContext(
+        ExplorerContext
+    );
     const entity = selectedEntityObject;
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
@@ -218,6 +221,19 @@ const EntityDetails = () => {
                     </div>
                 ),
             },
+            productsOwned: {
+                name: tabTranslation.products,
+                content: entity.productsOwned ? (
+                    <div className="owned-products-tab">
+                        {entity.productsOwned.map((productPpid, index) => (
+                            <EntityShortInfo
+                                key={index}
+                                entity={entityObjectByPpid(productPpid)}
+                            />
+                        ))}
+                    </div>
+                ) : null,
+            },
         },
         product: {
             basicAbout: {
@@ -303,6 +319,19 @@ const EntityDetails = () => {
                     </div>
                 ),
             },
+            productOwner: {
+                name: tabTranslation.parent,
+                content: entity.productOwner ? (
+                    <div className="owned-products-tab">
+                        {entity.productOwner.map((companyPpid, index) => (
+                            <EntityShortInfo
+                                key={index}
+                                entity={entityObjectByPpid(companyPpid)}
+                            />
+                        ))}
+                    </div>
+                ) : null,
+            },
         },
     };
 
@@ -314,14 +343,15 @@ const EntityDetails = () => {
                 tabs.push(productTabs.dataStory);
                 tabs.push(productTabs.featuredAbout);
             } else tabs.push(productTabs.basicAbout);
-            //if (entity.productOwner)
+            if (entity.productOwner) tabs.push(productTabs.productOwner);
         } else if (entity.type == "company") {
-            const companytabs = availableTabs.company;
+            const companyTabs = availableTabs.company;
             if (entity.featured) {
-                tabs.push(companytabs.dataStory);
-                tabs.push(companytabs.featuredAbout);
-            } else tabs.push(companytabs.basicAbout);
-            //if (entity.productOwner)
+                tabs.push(companyTabs.dataStory);
+                tabs.push(companyTabs.featuredAbout);
+            } else tabs.push(companyTabs.basicAbout);
+            console.log(entity);
+            if (entity.productsOwned) tabs.push(companyTabs.productsOwned);
         }
         return tabs;
     };

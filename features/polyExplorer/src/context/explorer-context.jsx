@@ -165,6 +165,10 @@ export const ExplorerProvider = ({ children }) => {
         }
     }
 
+    function entityObjectByPpid(ppid) {
+        return entities[ppid];
+    }
+
     function handleOnboardingPopupClose() {
         changeNavigationState({ firstRun: false });
         writeFirstRun(false);
@@ -278,6 +282,7 @@ export const ExplorerProvider = ({ children }) => {
                 entitiesList,
                 featuredEntities,
                 selectedEntityObject,
+                entityObjectByPpid,
                 dataRecipients,
                 globalData,
                 featuredEntityMaxValues,
