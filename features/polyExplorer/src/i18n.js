@@ -21,6 +21,7 @@ import explorationJurisdictionInfoScreenEn from "./locales/en/explorationJurisdi
 import infographicEn from "./locales/en/infographic.json";
 import storiesPreviewScreenEn from "./locales/en/storiesPreviewScreen.json";
 import clusterStoriesPreviewEn from "./locales/en/clusterStoriesPreview.json";
+import clusterStoriesMessengersEn from "./locales/en/clusterStoriesMessengers.json";
 
 import commonDe from "./locales/de/common.json";
 import entityFilterScreenDe from "./locales/de/entityFilterScreen.json";
@@ -43,6 +44,7 @@ import explorationJurisdictionInfoScreenDe from "./locales/de/explorationJurisdi
 import infographicDe from "./locales/de/infographic.json";
 import storiesPreviewScreenDe from "./locales/de/storiesPreviewScreen.json";
 import clusterStoriesPreviewDe from "./locales/de/clusterStoriesPreview.json";
+import clusterStoriesMessengersDe from "./locales/de/clusterStoriesMessengers.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -67,6 +69,7 @@ export default new I18n(determineLanguage(), {
         infographic: infographicEn,
         storiesPreviewScreen: storiesPreviewScreenEn,
         clusterStoriesPreview: clusterStoriesPreviewEn,
+        clusterStoriesMessengers: clusterStoriesMessengersEn,
     },
     de: {
         common: commonDe,
@@ -90,5 +93,6 @@ export default new I18n(determineLanguage(), {
         infographic: infographicDe,
         storiesPreviewScreen: storiesPreviewScreenDe,
         clusterStoriesPreview: clusterStoriesPreviewDe,
+        clusterStoriesMessengers: clusterStoriesMessengersDe,
     },
 });
