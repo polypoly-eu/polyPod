@@ -30,6 +30,65 @@ const subAnalyses = [
             return "" + this._size;
         }
     },
+
+    class {
+        get title() {
+            return "Off-Facebook events";
+        }
+
+        async _readOffFacebooEvents(archiveReader) {
+            const entries = await archiveReader.getEntries();
+            const offFacebookEventsFile = entries.find((each) =>
+                each.filename.includes(
+                    "apps_and_websites_off_of_facebook/your_off-facebook_activity.json"
+                )
+            );
+            if (!offFacebookEventsFile) {
+                return;
+            }
+            const fileContent = await offFacebookEventsFile.getData(
+                new zip.TextWriter()
+            );
+            if (!fileContent) {
+                return;
+            }
+            return JSON.parse(fileContent);
+        }
+
+        async parse({ reader }) {
+            this._eventsCount = 0;
+            this._companiesCount = 0;
+            this.active = false;
+            if (!reader) return;
+
+            const offFacebookEvents = await this._readOffFacebooEvents(reader);
+            const activityV2 = offFacebookEvents?.off_facebook_activity_v2;
+            if (!activityV2) {
+                return;
+            }
+            this._companiesCount = activityV2.length;
+            this._eventsCount = activityV2.reduce((total, companyEvents) => {
+                if (companyEvents?.events) {
+                    return total + companyEvents.events.length;
+                }
+                return total;
+            }, 0);
+            this.active = this._companiesCount > 0;
+        }
+
+        render() {
+            if (this._companiesCount <= 0) {
+                return "No events!";
+            }
+            return (
+                "Found " +
+                this._eventsCount +
+                " events from " +
+                this._companiesCount +
+                " companies"
+            );
+        }
+    },
     class {
         get title() {
             return "Hexdump of compressed data";
