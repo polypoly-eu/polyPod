@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 import "./fakeTab.css";
 
-const FakeTab = ({ children, tabTranslations, onClickedOverviewTab }) => {
+const FakeTab = ({ children, tabTranslations, onClickedTab }) => {
     const [clickedTab, setClickedTab] = useState(children[0].props.tabId);
 
     const onClickTab = (ev, newClickedTab) => {
         ev.preventDefault();
         setClickedTab(newClickedTab);
-        onClickedOverviewTab(newClickedTab);
+        onClickedTab(newClickedTab);
     };
 
     return (
