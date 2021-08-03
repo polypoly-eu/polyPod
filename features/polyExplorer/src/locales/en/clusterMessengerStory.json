@@ -14,5 +14,7 @@
   "summary.paragraph.four": "The apps only share user data with a maximum of (5) companies, but the parent company might share that same data with up to  (5000) companies.",
   "overview.tab.installs": "Installs",
   "overview.tab.users": "Users",
-  "overview.tab.partof": "Part of"
+  "overview.tab.partof": "Part of",
+  "overview.donut.installs.message": "Android app installs",
+  "overview.donut.users.message": "Monthly active users in millions"
 }
