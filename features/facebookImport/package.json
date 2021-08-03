@@ -1,6 +1,8 @@
 {
   "name": "facebook-import-feature",
   "scripts": {
+    "eslint": "eslint src --ext .js --ext .jsx",
+    "lint": "npm run eslint",
     "build": "rollup -c",
     "watch": "rollup --watch -c",
     "test": "jest"
@@ -15,6 +17,10 @@
     "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@zip.js/zip.js": "2.3.7",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.22.0",
     "jest": "^27.0.6",
     "jszip": "^3.6.0",
     "lit": "^2.0.0-rc.2",
