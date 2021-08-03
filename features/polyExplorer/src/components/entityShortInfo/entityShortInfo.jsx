@@ -4,7 +4,15 @@ import LinkButton from "../buttons/linkButton/linkButton.jsx";
 
 const EntityShortInfo = ({ entity }) => {
     const entityIcon = () => {
-        if (entity.type == "product")
+        if (entity.clusters?.includes("messenger"))
+            return (
+                <img
+                    src="./images/messenger-grey.svg"
+                    alt=""
+                    className="featured-indicator"
+                />
+            );
+        else if (entity.clusters?.includes("product"))
             return (
                 <img
                     src="./images/product-grey.svg"
