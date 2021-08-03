@@ -62,6 +62,7 @@ const DonutChart = ({ size, data, message }) => {
     }
 
     function _processData() {
+        debugger;
         const chartData = data.reduce((acc, group) => {
             const info = Object.keys(group.attributes).map((key) => ({
                 group: group.groupName,
@@ -157,6 +158,7 @@ const DonutChart = ({ size, data, message }) => {
     }
 
     function buildPieChart() {
+        debugger;
         const { chartData, groupsInfo } = _processData();
 
         const colors = d3
@@ -294,7 +296,7 @@ const DonutChart = ({ size, data, message }) => {
             .style("font-family", fontConfig.fontFamily)
             .style("line-height", fontConfig.lineHeight)
             .style("font-weight", fontConfig.fontWeight)
-            .style("background-color", lightColor)
+            .style("background-color", "transparent")
             .text((d) => `${d.data.name}: ${d.data.value}`);
 
         labelsGroup
