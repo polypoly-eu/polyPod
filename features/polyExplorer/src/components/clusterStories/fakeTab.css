@@ -1,12 +1,12 @@
-.overview-tab {
-    margin: 100px auto 0 auto;
+.faketab {
+    margin: 0 auto;
     display: flex;
-    width: 328px;
+    width: 100%;
     height: 40px;
 }
 
-.overview-button {
-    width: 33.33%;
+.faketab-button {
+    flex: 1 1 0px;
     background-color: var(--color-background-light);
     border-bottom: 1px solid #757575;
     color: #757575;
@@ -14,12 +14,12 @@
     font-weight: 500;
 }
 
-.overview-tab .active {
+.faketab .active {
     color: var(--color-text-dark);
     border-bottom: 4px solid var(--color-dark);
 }
 
 /* delete when adding content */
-.overview-content {
+.faketab-content {
     background-color: lightcoral; 
 }
