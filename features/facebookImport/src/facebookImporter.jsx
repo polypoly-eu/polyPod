@@ -21,6 +21,7 @@ import {
 
 const FacebookImporter = () => {
     const { pod, files } = useContext(ImporterContext);
+    console.log(pod, files);
 
     const handleImportFile = () => {
         console.log("import");
@@ -34,22 +35,57 @@ const FacebookImporter = () => {
         console.log("explore");
     };
 
+    const renderSplash = () => {
+        return <p>Loading ...</p>;
+    };
+
     return (
         <div className="facebook-importer">
-            <Switch>
-                <Route exact path="/">
-                    <Redirect to={{ pathname: "/main" }} />
-                </Route>
-                <Route exact path="/main">
-                    <overview-view
-                        pod={pod}
-                        files={files}
-                        import-file={handleImportFile}
-                        remove-file={handleRemoveFile}
-                        explore-file={handleExploreFile}
-                    ></overview-view>
-                </Route>
-            </Switch>
+            {pod ? (
+                <Switch>
+                    <Route exact path="/">
+                        <Redirect to={{ pathname: "/main" }} />
+                    </Route>
+                    <Route exact path="/main">
+                        <overview-view
+                            pod={pod}
+                            files={files}
+                            import-file={handleImportFile}
+                            remove-file={handleRemoveFile}
+                            explore-file={handleExploreFile}
+                        ></overview-view>
+                    </Route>
+                    <Route exact path="/import">
+                        <overview-view
+                            pod={pod}
+                            files={files}
+                            import-file={handleImportFile}
+                            remove-file={handleRemoveFile}
+                            explore-file={handleExploreFile}
+                        ></overview-view>
+                    </Route>
+                    <Route exact path="/remove">
+                        <overview-view
+                            pod={pod}
+                            files={files}
+                            import-file={handleImportFile}
+                            remove-file={handleRemoveFile}
+                            explore-file={handleExploreFile}
+                        ></overview-view>
+                    </Route>
+                    <Route exact path="/explore">
+                        <overview-view
+                            pod={pod}
+                            files={files}
+                            import-file={handleImportFile}
+                            remove-file={handleRemoveFile}
+                            explore-file={handleExploreFile}
+                        ></overview-view>
+                    </Route>
+                </Switch>
+            ) : (
+                renderSplash()
+            )}
         </div>
     );
 };
