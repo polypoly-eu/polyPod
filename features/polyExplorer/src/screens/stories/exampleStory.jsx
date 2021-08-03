@@ -12,7 +12,7 @@ const ExampleStory = () => {
         partof: i18n.t("clusterStoriesMessengers:overview.tab.partof"),
     };
 
-    const [overviewClickedTab, setOverviewClickedTab] = useState("1");
+    const [overviewClickedTab, setOverviewClickedTab] = useState();
 
     const onClickedOverviewTab = (id) => {
         overviewClickedTab === id;
@@ -31,7 +31,7 @@ const ExampleStory = () => {
         <DataStory progressBarColor="#3BA6FF" className="example-story">
             <FakeTab
                 tabTranslations={overviewTabTranslations}
-                onClickedOverviewTab={onClickedOverviewTab}
+                onClickedTab={onClickedOverviewTab}
             >
                 <div label="installs" tabId="1">
                     1
