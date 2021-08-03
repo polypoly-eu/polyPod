@@ -1,15 +1,48 @@
-import React from "react";
-import OverviewTab from "../../components/clusterStories/messengers/overviewTab.jsx";
+import React, { useState } from "react";
+import i18n from "../../i18n.js";
+import FakeTab from "../../components/clusterStories/fakeTab.jsx";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 
+import "./ExampleStory.css";
+
 const ExampleStory = () => {
+    const overviewTabTranslations = {
+        installs: i18n.t("clusterStoriesMessengers:overview.tab.installs"),
+        users: i18n.t("clusterStoriesMessengers:overview.tab.users"),
+        partof: i18n.t("clusterStoriesMessengers:overview.tab.partof"),
+    };
+
+    const [overviewClickedTab, setOverviewClickedTab] = useState("1");
+
+    const onClickedOverviewTab = (id) => {
+        overviewClickedTab === id;
+        if (overviewClickedTab === "1") {
+            setOverviewClickedTab("1");
+        }
+        if (overviewClickedTab === "2") {
+            setOverviewClickedTab("2");
+        }
+        if (overviewClickedTab === "3") {
+            setOverviewClickedTab("3");
+        }
+    };
+
     return (
-        <DataStory progressBarColor="#3BA6FF">
-            <OverviewTab>
-                <div label="installs">1</div>
-                <div label="users">2</div>
-                <div label="partof">3</div>
-            </OverviewTab>
+        <DataStory progressBarColor="#3BA6FF" className="example-story">
+            <FakeTab
+                tabTranslations={overviewTabTranslations}
+                onClickedOverviewTab={onClickedOverviewTab}
+            >
+                <div label="installs" tabId="1">
+                    1
+                </div>
+                <div label="users" tabId="2">
+                    2
+                </div>
+                <div label="partof" tabId="3">
+                    3
+                </div>
+            </FakeTab>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
