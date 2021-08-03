@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as ReactDOM from "react-dom";
 import {
     MemoryRouter as Router,
@@ -20,6 +20,8 @@ import {
 } from "./context/importer-context.jsx";
 
 const FacebookImporter = () => {
+    const { pod, files } = useContext(ImporterContext);
+
     const handleImportFile = () => {
         console.log("import");
     };
@@ -36,9 +38,7 @@ const FacebookImporter = () => {
         <div className="facebook-importer">
             <Switch>
                 <Route exact path="/">
-                    <Redirect
-                        to={{ pathname: "/main", state: navigationState }}
-                    />
+                    <Redirect to={{ pathname: "/main" }} />
                 </Route>
                 <Route exact path="/main">
                     <overview-view

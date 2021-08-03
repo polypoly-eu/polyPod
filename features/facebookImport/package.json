@@ -12,6 +12,7 @@
     "@rdfjs/dataset": "^1.1.1",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "11.2.0",
+    "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@zip.js/zip.js": "2.3.7",
     "jest": "^27.0.6",
