@@ -14,6 +14,8 @@ import "./components/import-view.js";
 import "./components/report-view.js";
 import "./components/overview-view.js";
 
+import Overview from "./views/overview.jsx";
+
 import {
     ImporterProvider,
     ImporterContext,
@@ -21,23 +23,16 @@ import {
 
 const FacebookImporter = () => {
     const { pod, files } = useContext(ImporterContext);
-    console.log(pod, files);
-
-    const handleImportFile = () => {
-        console.log("import");
-    };
-
-    const handleRemoveFile = () => {
-        console.log("remove");
-    };
-
-    const handleExploreFile = () => {
-        console.log("explore");
-    };
 
     const renderSplash = () => {
         return <p>Loading ...</p>;
     };
+
+    const handleImportFile = () => {};
+
+    const handleExploreFile = () => {};
+
+    const handleRemoveFile = () => {};
 
     return (
         <div className="facebook-importer">
@@ -47,22 +42,14 @@ const FacebookImporter = () => {
                         <Redirect to={{ pathname: "/main" }} />
                     </Route>
                     <Route exact path="/main">
-                        <overview-view
-                            pod={pod}
-                            files={files}
-                            import-file={handleImportFile}
-                            remove-file={handleRemoveFile}
-                            explore-file={handleExploreFile}
-                        ></overview-view>
+                        <Overview />
                     </Route>
                     <Route exact path="/import">
-                        <overview-view
-                            pod={pod}
-                            files={files}
-                            import-file={handleImportFile}
-                            remove-file={handleRemoveFile}
-                            explore-file={handleExploreFile}
-                        ></overview-view>
+                        <import-view
+                            pod="${this._pod}"
+                            add-file="${this._handleAddFile}"
+                            close="${this._handleClose}"
+                        ></import-view>
                     </Route>
                     <Route exact path="/remove">
                         <overview-view
