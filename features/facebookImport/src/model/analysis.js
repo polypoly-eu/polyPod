@@ -36,8 +36,8 @@ const subAnalyses = [
             return "Off-Facebook events";
         }
 
-        async _readOffFacebooEvents(archiveReader) {
-            const entries = await archiveReader.getEntries();
+        async _readOffFacebooEvents(reader) {
+            const entries = await reader.getEntries();
             const offFacebookEventsFile = entries.find((each) =>
                 each.filename.includes(
                     "apps_and_websites_off_of_facebook/your_off-facebook_activity.json"
@@ -121,6 +121,43 @@ const subAnalyses = [
             return html`<ul>
                 ${this._entries.map(
                     (entry) => html`<li>${entry.filename}</li>`
+                )}
+            </ul>`;
+        }
+    },
+];
+
+const reportAnalyses = [
+    class {
+        get title() {
+            return "NoData Files";
+        }
+
+        async parse({ reader }) {
+            this._noDataFolderNames = [];
+            this.active = false;
+            if (!reader) return;
+
+            const entries = await reader.getEntries();
+            const extractedFolderNames = entries.map((entry) => {
+                const fileName = entry.filename;
+                const nameParts = fileName.split("/");
+                if (nameParts.length >= 3 && nameParts[2] === "no-data.txt") {
+                    return nameParts[1];
+                }
+                return;
+            });
+
+            this._noDataFolderNames = extractedFolderNames.filter(
+                (each) => each != null
+            );
+            this.active = this._noDataFolderNames.length > 0;
+        }
+
+        render() {
+            return html`<ul>
+                ${this._noDataFolderNames.map(
+                    (entry) => html`<li>${entry}</li>`
                 )}
             </ul>`;
         }
