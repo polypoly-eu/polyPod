@@ -7,7 +7,7 @@ import { useHistory, useLocation } from "react-router-dom";
 export const ImporterContext = React.createContext();
 
 //constants
-const importStatus = {
+const importSteps = {
     request: "request",
     download: "download",
     import: "import",
@@ -59,7 +59,7 @@ async function readImportStatus() {
 
 //logically
 function determineImportStatus() {
-    return readImportStatus() || importStatus.request;
+    return readImportStatus() || importSteps.request;
 }
 
 async function writeImportStatus(status) {
@@ -136,6 +136,7 @@ export const ImporterProvider = ({ children }) => {
                 navigationState,
                 changeNavigationState,
                 handleBack,
+                importSteps,
             }}
         >
             {children}

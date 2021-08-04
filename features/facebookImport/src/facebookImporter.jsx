@@ -23,48 +23,29 @@ import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 
 const FacebookImporter = () => {
-    const { pod, files } = useContext(ImporterContext);
+    const { pod, navigationState, importSteps } = useContext(ImporterContext);
+    const importStatus = navigationState.importStatus;
 
     const renderSplash = () => {
         return <p>Loading ...</p>;
     };
-
-    const handleImportFile = () => {};
-
-    const handleExploreFile = () => {};
-
-    const handleRemoveFile = () => {};
 
     return (
         <div className="facebook-importer">
             {pod ? (
                 <Switch>
                     <Route exact path="/">
-                        <Redirect to={{ pathname: "/overview" }} />
+                        {importStatus == importSteps.finished ? (
+                            <Redirect to={{ pathname: "/overview" }} />
+                        ) : (
+                            <Redirect to={{ pathname: "/import" }} />
+                        )}
                     </Route>
                     <Route exact path="/overview">
                         <Overview />
                     </Route>
                     <Route exact path="/import">
                         <ImportView />
-                    </Route>
-                    <Route exact path="/remove">
-                        <overview-view
-                            pod={pod}
-                            files={files}
-                            import-file={handleImportFile}
-                            remove-file={handleRemoveFile}
-                            explore-file={handleExploreFile}
-                        ></overview-view>
-                    </Route>
-                    <Route exact path="/explore">
-                        <overview-view
-                            pod={pod}
-                            files={files}
-                            import-file={handleImportFile}
-                            remove-file={handleRemoveFile}
-                            explore-file={handleExploreFile}
-                        ></overview-view>
                     </Route>
                 </Switch>
             ) : (
