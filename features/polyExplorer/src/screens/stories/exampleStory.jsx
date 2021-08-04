@@ -21,11 +21,14 @@ const ExampleStory = () => {
         }
     };
 
-    const fakeEvent = () => {
-    };
+    const fakeEvent = () => {};
 
     return (
-        <DataStory progressBarColor="#3BA6FF" className="example-story" scrollEvent={fakeEvent}>
+        <DataStory
+            progressBarColor="#3BA6FF"
+            className="example-story"
+            scrollEvent={fakeEvent}
+        >
             <FakeTab onClickedTab={onClickedOverviewTab}>
                 <div
                     label={i18n.t(
@@ -36,17 +39,13 @@ const ExampleStory = () => {
                     1
                 </div>
                 <div
-                    label={i18n.t(
-                        "clusterMessengerStory:overview.tab.users"
-                    )}
+                    label={i18n.t("clusterMessengerStory:overview.tab.users")}
                     tabId="2"
                 >
                     2
                 </div>
                 <div
-                    label={i18n.t(
-                        "clusterMessengerStory:overview.tab.partof"
-                    )}
+                    label={i18n.t("clusterMessengerStory:overview.tab.partof")}
                     tabId="3"
                 >
                     3
