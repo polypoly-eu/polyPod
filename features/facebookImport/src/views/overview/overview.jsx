@@ -18,9 +18,7 @@ const Overview = () => {
                         <button click={() => handleRemoveFile(file.id)}>
                             Remove
                         </button>
-                        <button click={() => exploreFile(file.id)}>
-                            Explore
-                        </button>
+                        <button>Explore</button>
                     </li>
                 ))}
             </ul>

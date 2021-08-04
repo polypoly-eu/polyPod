@@ -60,7 +60,7 @@ export const ImporterProvider = ({ children }) => {
     function changeNavigationState(changedState) {
         if (changedState) {
             Object.keys(changedState).forEach((key) => {
-                if (!navigationStates.includes(key)) {
+                if (!navigationState.includes(key)) {
                     console.log(`NavigationStateError with key: ${key}`);
                     return;
                 }
