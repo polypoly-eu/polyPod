@@ -2,6 +2,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import copy from "rollup-plugin-copy";
 import sucrase from "@rollup/plugin-sucrase";
 import css from "rollup-plugin-css-only";
+import json from "@rollup/plugin-json";
 import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 
@@ -17,6 +18,7 @@ export default {
     },
     plugins: [
         css({ output: "css/bundle.css" }),
+        json(),
         sucrase({
             transforms: ["jsx"],
             production: true,
