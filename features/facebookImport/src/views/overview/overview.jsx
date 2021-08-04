@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import RouteButton from "../components/routeButton.jsx";
-import { ImporterContext } from "../context/importer-context.jsx";
+import RouteButton from "../../components/routeButton.jsx";
+import { ImporterContext } from "../../context/importer-context.jsx";
 
 const Overview = () => {
     const { files, handleRemoveFile } = useContext(ImporterContext);
