@@ -29,7 +29,7 @@ const ExampleStory = () => {
             <FakeTab onClickedTab={onClickedOverviewTab}>
                 <div
                     label={i18n.t(
-                        "clusterStoriesMessengers:overview.tab.installs"
+                        "clusterMessengerStory:overview.tab.installs"
                     )}
                     tabId="1"
                 >
@@ -37,7 +37,7 @@ const ExampleStory = () => {
                 </div>
                 <div
                     label={i18n.t(
-                        "clusterStoriesMessengers:overview.tab.users"
+                        "clusterMessengerStory:overview.tab.users"
                     )}
                     tabId="2"
                 >
@@ -45,7 +45,7 @@ const ExampleStory = () => {
                 </div>
                 <div
                     label={i18n.t(
-                        "clusterStoriesMessengers:overview.tab.partof"
+                        "clusterMessengerStory:overview.tab.partof"
                     )}
                     tabId="3"
                 >
