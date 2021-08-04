@@ -3,15 +3,9 @@ import i18n from "../../i18n.js";
 import FakeTab from "../../components/clusterStories/fakeTab.jsx";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 
-import "./ExampleStory.css";
+import "./exampleStory.css";
 
 const ExampleStory = () => {
-    const overviewTabTranslations = {
-        installs: i18n.t("clusterStoriesMessengers:overview.tab.installs"),
-        users: i18n.t("clusterStoriesMessengers:overview.tab.users"),
-        partof: i18n.t("clusterStoriesMessengers:overview.tab.partof"),
-    };
-
     const [overviewClickedTab, setOverviewClickedTab] = useState();
 
     const onClickedOverviewTab = (id) => {
@@ -29,17 +23,29 @@ const ExampleStory = () => {
 
     return (
         <DataStory progressBarColor="#3BA6FF" className="example-story">
-            <FakeTab
-                tabTranslations={overviewTabTranslations}
-                onClickedTab={onClickedOverviewTab}
-            >
-                <div label="installs" tabId="1">
+            <FakeTab onClickedTab={onClickedOverviewTab}>
+                <div
+                    label={i18n.t(
+                        "clusterStoriesMessengers:overview.tab.installs"
+                    )}
+                    tabId="1"
+                >
                     1
                 </div>
-                <div label="users" tabId="2">
+                <div
+                    label={i18n.t(
+                        "clusterStoriesMessengers:overview.tab.users"
+                    )}
+                    tabId="2"
+                >
                     2
                 </div>
-                <div label="partof" tabId="3">
+                <div
+                    label={i18n.t(
+                        "clusterStoriesMessengers:overview.tab.partof"
+                    )}
+                    tabId="3"
+                >
                     3
                 </div>
             </FakeTab>
