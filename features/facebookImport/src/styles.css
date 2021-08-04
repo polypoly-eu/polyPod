@@ -1,0 +1,55 @@
+:root {
+    --color-dark: #0f1938;
+    --color-white: #ffffff;
+    --color-contrast-white: #f7fafc;
+
+    --background-dark: var(--color-dark)
+    --background-white: var(--color-white)
+
+    --color-indigo-50: #f0f1fe;
+    --color-indigo-100: #d8dcf9;
+    --color-indigo-200: #b9c0f2;
+    --color-indigo-400: #737fdb;
+    --color-indigo-500: #5664cd;
+    --color-indigo-700: #3749a9;
+
+    /* Size */
+    --max-width: 412px;
+    --line-height: 120%;
+}
+
+.facebook-importer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-dark);
+}
+
+@font-face {
+    font-family: "Jost";
+    src: url("../fonts/jost_regular.ttf");
+}
+
+@font-face {
+    font-family: "Jost Medium";
+    src: url("../fonts/jost_medium.ttf");
+}
+
+* {
+    font-family: "Jost";
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--color-text-light);
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    border: none;
+}
+
+button:focus {
+    outline: 0;
+}

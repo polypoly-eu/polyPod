@@ -22,6 +22,8 @@ import "./components/overview-view.js";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 
+import "./styles.css";
+
 const FacebookImporter = () => {
     const { pod, navigationState, importSteps } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
