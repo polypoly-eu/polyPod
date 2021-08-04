@@ -7,7 +7,7 @@ const RouteButton = ({ route, stateChange, className, children, onClick }) => {
     function handleClick() {
         if (onClick) onClick();
         if (route == "back") history.goBack();
-        history.push(route, stateChange);
+        else history.push(route, stateChange);
     }
 
     return (

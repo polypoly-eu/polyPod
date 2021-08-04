@@ -8,18 +8,19 @@ import {
     useHistory,
 } from "react-router-dom";
 
+import {
+    ImporterProvider,
+    ImporterContext,
+} from "./context/importer-context.jsx";
+
 import "./components/facebook-import.js";
 import "./components/explore-view.js";
 import "./components/import-view.js";
 import "./components/report-view.js";
 import "./components/overview-view.js";
 
-import Overview from "./views/overview.jsx";
-
-import {
-    ImporterProvider,
-    ImporterContext,
-} from "./context/importer-context.jsx";
+import Overview from "./views/overview/overview.jsx";
+import ImportView from "./views/import/import.jsx";
 
 const FacebookImporter = () => {
     const { pod, files } = useContext(ImporterContext);
@@ -39,17 +40,13 @@ const FacebookImporter = () => {
             {pod ? (
                 <Switch>
                     <Route exact path="/">
-                        <Redirect to={{ pathname: "/main" }} />
+                        <Redirect to={{ pathname: "/overview" }} />
                     </Route>
-                    <Route exact path="/main">
+                    <Route exact path="/overview">
                         <Overview />
                     </Route>
                     <Route exact path="/import">
-                        <import-view
-                            pod="${this._pod}"
-                            add-file="${this._handleAddFile}"
-                            close="${this._handleClose}"
-                        ></import-view>
+                        <ImportView />
                     </Route>
                     <Route exact path="/remove">
                         <overview-view
@@ -77,6 +74,7 @@ const FacebookImporter = () => {
     );
 };
 
+//Router and context
 const FacebookImporterApp = () => {
     //global history object
     const history = useHistory();
@@ -90,7 +88,5 @@ const FacebookImporterApp = () => {
     );
 };
 
-ReactDOM.render(
-    <FacebookImporterApp />,
-    document.getElementById("facebook-import")
-);
+//render to html
+ReactDOM.render(<FacebookImporterApp />, document.getElementById("feature"));
