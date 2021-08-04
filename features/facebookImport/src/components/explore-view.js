@@ -41,9 +41,9 @@ class ExploreView extends LitElement {
         this.dispatchEvent(new CustomEvent("close"));
     }
 
-    _handleReviewReport(report) {
+    _handleReviewReport(unrecognizedData) {
         this.dispatchEvent(
-            new CustomEvent("review-report", { detail: { report } })
+            new CustomEvent("review-report", { detail: { unrecognizedData } })
         );
     }
 
@@ -52,8 +52,7 @@ class ExploreView extends LitElement {
             <h1>Unrecognised Data</h1>
 
             <button
-                @click="${() =>
-                    this._handleReviewReport(unrecognizedData.report)}"
+                @click="${() => this._handleReviewReport(unrecognizedData)}"
             >
                 Send Report
             </button>

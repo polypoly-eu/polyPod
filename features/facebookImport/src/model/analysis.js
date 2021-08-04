@@ -127,7 +127,7 @@ const subAnalyses = [
     },
     class {
         get title() {
-            return "NoData Files";
+            return "NoData Folders";
         }
 
         get isForDataReport() {
@@ -166,6 +166,10 @@ const subAnalyses = [
 ];
 
 class UnrecognizedData {
+    constructor(reportAnalyses) {
+        this.reportAnalyses = reportAnalyses;
+    }
+
     get isUnrecognized() {
         return true;
     }
@@ -197,7 +201,6 @@ export async function analyzeFile(file) {
 
     return {
         analyses: activeAnalyses,
-        reportAnalyses: reportAnalyses,
-        unrecognizedData: new UnrecognizedData(),
+        unrecognizedData: new UnrecognizedData(reportAnalyses),
     };
 }
