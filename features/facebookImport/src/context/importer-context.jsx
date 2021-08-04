@@ -6,11 +6,20 @@ import { useHistory, useLocation } from "react-router-dom";
 
 export const ImporterContext = React.createContext();
 
+//constants
+const importStatus = {
+    request: "request",
+    download: "download",
+    import: "import",
+    finished: "finished",
+};
+const namespace = "http://polypoly.coop/schema/facebookImporter/#";
+
 async function initPod() {
     return await window.pod;
 }
 
-async function initStorage(setPod, setFiles, setStorage) {
+function initStorage(setPod, setFiles, setStorage) {
     initPod().then((pod) => {
         setPod(pod);
         const storage = new Storage(pod);
@@ -37,6 +46,32 @@ function updateTitle(pod) {
     if (pod) pod.polyNav.setTitle(i18n.t(`common:title`));
 }
 
+//from storage
+async function readImportStatus() {
+    const quads = await pod.polyIn.select({});
+    const status = quads.some(
+        ({ subject, predicate }) =>
+            subject.value === `${namespace}facebookImporter` &&
+            predicate.value === `${namespace}firstRun`
+    );
+    return status || null;
+}
+
+//logically
+function determineImportStatus() {
+    return readImportStatus() || importStatus.request;
+}
+
+async function writeImportStatus(status) {
+    const { dataFactory, polyIn } = pod;
+    const quad = dataFactory.quad(
+        dataFactory.namedNode(`${namespace}facebookImporter`),
+        dataFactory.namedNode(`${namespace}importStatus`),
+        dataFactory.namedNode(`${namespace}${status}`)
+    );
+    polyIn.add(quad);
+}
+
 export const ImporterProvider = ({ children }) => {
     //state
     const [pod, setPod] = useState(null);
@@ -46,7 +81,9 @@ export const ImporterProvider = ({ children }) => {
     // Adding an empty navigationState here since routing-changes alone don't rerender the components, which we need for title updates etc
     // Also I'm sure navigationStates will soon come up in further development (delete this comment then)
     // See how this works with navigationStates in the polyExplorer-features for reference
-    const [navigationState, setNavigationState] = useState({});
+    const [navigationState, setNavigationState] = useState({
+        importStatus: determineImportStatus(),
+    });
 
     const history = useHistory();
     const location = useLocation();
@@ -59,7 +96,7 @@ export const ImporterProvider = ({ children }) => {
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
     function changeNavigationState(changedState) {
         if (changedState) {
-            Object.keys(changedState).forEach((key) => {
+            Object.keys(changedState)?.forEach((key) => {
                 if (!navigationState.includes(key)) {
                     console.log(`NavigationStateError with key: ${key}`);
                     return;
@@ -81,6 +118,7 @@ export const ImporterProvider = ({ children }) => {
     //on startup
     useEffect(() => {
         initStorage(setPod, setFiles, setStorage);
+        determineImportStatus(pod);
     }, []);
 
     //on history change
