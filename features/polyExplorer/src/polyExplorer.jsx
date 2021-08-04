@@ -29,6 +29,7 @@ import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";
+import ExampleStory from "./screens/stories/exampleStory.jsx";
 
 const PolyExplorerApp = () => {
     const {
@@ -90,6 +91,9 @@ const PolyExplorerApp = () => {
                 </Route>
                 <Route exact path="/story/messenger-story">
                     <MessengerStory />
+                </Route>
+                <Route exact path="/story/example-story">
+                    <ExampleStory />
                 </Route>
             </Switch>
             {firstRun ? (
