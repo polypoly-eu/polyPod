@@ -11,5 +11,8 @@
   "summary.paragraph.three.strong": "Messenger-Apps bitten um umfassende Erlaubnis, auf Ihre Daten zuzugreifen, sie zu sammeln, zu ändern und zu teilen.",
   "summary.paragraph.three": "Aber mit (5) bis (50) Datentypen pro Benutzer sammeln sie noch mehr als sie benötigen.",
   "summary.paragraph.four.strong": "Drei beliebte Messenger-Apps gehören zu Facebook.",
-  "summary.paragraph.four": "Die Apps teilen Benutzerdaten nur mit maximal (5) Unternehmen, aber die Muttergesellschaft kann dieselben Daten mit bis zu (5000) Unternehmen teilen."
+  "summary.paragraph.four": "Die Apps teilen Benutzerdaten nur mit maximal (5) Unternehmen, aber die Muttergesellschaft kann dieselben Daten mit bis zu (5000) Unternehmen teilen.",
+  "overview.tab.installs": "Installationen",
+  "overview.tab.users": "Benutzer",
+  "overview.tab.partof": "Teil von"
 }

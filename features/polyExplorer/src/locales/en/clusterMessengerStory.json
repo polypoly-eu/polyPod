@@ -11,5 +11,8 @@
   "summary.paragraph.three.strong": "Messenger apps ask for extensive permission to access, gather, change and share your data. ",
   "summary.paragraph.three": "But with (5) to (50) data types per user, they gather even more than they need.",
   "summary.paragraph.four.strong": "Three popular messenger apps belong to Facebook.",
-  "summary.paragraph.four": "The apps only share user data with a maximum of (5) companies, but the parent company might share that same data with up to  (5000) companies."
+  "summary.paragraph.four": "The apps only share user data with a maximum of (5) companies, but the parent company might share that same data with up to  (5000) companies.",
+  "overview.tab.installs": "Installs",
+  "overview.tab.users": "Users",
+  "overview.tab.partof": "Part of"
 }
