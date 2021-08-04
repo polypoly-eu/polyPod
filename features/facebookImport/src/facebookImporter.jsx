@@ -6,6 +6,7 @@ import {
     Redirect,
     Route,
     useHistory,
+    withRouter,
 } from "react-router-dom";
 
 import {

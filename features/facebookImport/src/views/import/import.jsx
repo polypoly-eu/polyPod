@@ -1,10 +1,7 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/routeButton.jsx";
 
 const Import = () => {
-    const history = useHistory();
-    console.log(history);
     return (
         <div className="import-view">
             <h1>File import</h1>
