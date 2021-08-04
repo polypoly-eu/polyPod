@@ -21,8 +21,11 @@ const ExampleStory = () => {
         }
     };
 
+    const fakeEvent = () => {
+    };
+
     return (
-        <DataStory progressBarColor="#3BA6FF" className="example-story">
+        <DataStory progressBarColor="#3BA6FF" className="example-story" scrollEvent={fakeEvent}>
             <FakeTab onClickedTab={onClickedOverviewTab}>
                 <div
                     label={i18n.t(
