@@ -77,8 +77,8 @@ const subAnalyses = [
         }
 
         render() {
-            if (this._companiesCount <= 0) {
-                return "No events!";
+            if (!this.active) {
+                return "No off-facebook events detected in your export!";
             }
             return (
                 "Found " +
@@ -125,12 +125,13 @@ const subAnalyses = [
             </ul>`;
         }
     },
-];
-
-const reportAnalyses = [
     class {
         get title() {
             return "NoData Files";
+        }
+
+        get isForDataReport() {
+            return true;
         }
 
         async parse({ reader }) {
@@ -184,9 +185,19 @@ export async function analyzeFile(file) {
             return subAnalysis;
         })
     );
-    const activeAnalyses = parsedAnalyses.filter((analysis) => analysis.active);
+
+    const activeAnalyses = parsedAnalyses.filter(
+        (analysis) => !analysis.isForDataReport && analysis.active
+    );
+    const reportAnalyses = parsedAnalyses.filter(
+        (analysis) =>
+            (analysis.isForDataReport && analysis.active) ||
+            (!analysis.isForDataReport && !analysis.active)
+    );
+
     return {
         analyses: activeAnalyses,
+        reportAnalyses: reportAnalyses,
         unrecognizedData: new UnrecognizedData(),
     };
 }
