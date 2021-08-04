@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./fakeTab.css";
 
-const FakeTab = ({ children, tabTranslations, onClickedTab }) => {
+const FakeTab = ({ children, onClickedTab }) => {
     const [clickedTab, setClickedTab] = useState(children[0].props.tabId);
 
     const onClickTab = (ev, newClickedTab) => {
@@ -24,7 +24,7 @@ const FakeTab = ({ children, tabTranslations, onClickedTab }) => {
                                 : "faketab-button"
                         }
                     >
-                        {tabTranslations[tab.props.label]}
+                        {tab.props.label}
                     </button>
                 ))}
             </div>
