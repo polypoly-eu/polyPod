@@ -52,7 +52,13 @@ const subAnalyses = [
             if (!fileContent) {
                 return;
             }
-            return JSON.parse(fileContent);
+            try {
+                return JSON.parse(fileContent);
+            } catch (exception) {
+                //TODO: better error handling + error reporting
+                console.log(exception);
+                return;
+            }
         }
 
         async parse({ reader }) {
@@ -168,14 +174,14 @@ const subAnalyses = [
 class UnrecognizedData {
     constructor(reportAnalyses) {
         this.reportAnalyses = reportAnalyses;
-    }
-
-    get isUnrecognized() {
-        return true;
+        this.active = this.reportAnalyses && this.reportAnalyses.length > 0;
     }
 
     get report() {
-        return "Data goes here!!!";
+        if (!this.active) {
+            return "No data to report!";
+        }
+        return this.reportAnalyses.length + " analyses included in the report";
     }
 }
 
