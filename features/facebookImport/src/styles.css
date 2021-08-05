@@ -4,14 +4,23 @@
     --color-contrast-white: #f7fafc;
 
     --background-dark: var(--color-dark);
-    --background-white: var(--color-white);
+    --background-light: var(--color-red-50);
+
+    --text-white: var(--color-white);
+    --text-dark: var(--color-indigo-950);
 
     --color-indigo-50: #f0f1fe;
     --color-indigo-100: #d8dcf9;
     --color-indigo-200: #b9c0f2;
+    --color-indigo-300: #8f9be7;
     --color-indigo-400: #737fdb;
     --color-indigo-500: #5664cd;
     --color-indigo-700: #3749a9;
+    --color-indigo-950: #0f1938;
+
+    --color-red-50: #fff5f5;
+
+    --color-grey-400: #a9b6c6;
 
     /* Size */
     --max-width: 412px;

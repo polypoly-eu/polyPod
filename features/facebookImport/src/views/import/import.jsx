@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
+import i18n from "../../i18n.js";
 
 import "./import.css";
 
@@ -7,7 +8,9 @@ const ProgressBar = ({ sections }) => {
     return (
         <div className="progress-bar">
             {Object.values(sections).map((section, index) => (
-                <div key={index} className={`section ${section}`}></div>
+                <div key={index} className={`section`}>
+                    <div className={`line ${section}-progress`}></div>
+                </div>
             ))}
         </div>
     );
@@ -16,14 +19,15 @@ const ProgressBar = ({ sections }) => {
 const ImportExplanationExpandable = ({ sections, openedAtStart }) => {
     const [openedSection, setOpenedSection] = useState(openedAtStart);
     return (
-        <div className="explanation-dropdown">
+        <div className="explanation-expandable">
             {Object.values(sections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
                     <div
                         onClick={() => setOpenedSection(section)}
                         className="head"
                     >
-                        {index + 1}
+                        <div className="number">{index + 1}</div>
+                        <div className="heading"></div>
                     </div>
                     {section == openedSection ? (
                         <div className="body"></div>
