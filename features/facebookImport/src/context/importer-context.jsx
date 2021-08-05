@@ -7,11 +7,21 @@ import { useHistory, useLocation } from "react-router-dom";
 export const ImporterContext = React.createContext();
 
 //constants
+const pod = window.pod;
+let files = [];
+const storage = new Storage(pod);
+storage.refreshFiles();
+storage.changeListener = () => {
+    files = Object.values(storage.files);
+};
+
+//all nav-states for checking purposes
+const navigationStates = ["importStatus"];
 const importSteps = {
     request: "request",
     download: "download",
     import: "import",
-    finished: "finished",
+    explore: "explore",
 };
 const namespace = "http://polypoly.coop/schema/facebookImporter/#";
 
@@ -36,12 +46,7 @@ async function readImportStatus() {
             subject.value === `${namespace}facebookImporter` &&
             predicate.value === `${namespace}firstRun`
     );
-    return status || null;
-}
-
-//logically
-function determineImportStatus() {
-    return readImportStatus() || importSteps.request;
+    return status || importSteps.request;
 }
 
 async function writeImportStatus(status) {
@@ -55,24 +60,12 @@ async function writeImportStatus(status) {
 }
 
 export const ImporterProvider = ({ children }) => {
-    const pod = window.pod;
-    let files = [];
-    const storage = new Storage(pod);
-    storage.refreshFiles();
-    storage.changeListener = () => {
-        files = Object.values(storage.files);
-    };
-
-    // Adding an empty navigationState here since routing-changes alone don't rerender the components, which we need for title updates etc
-    // Also I'm sure navigationStates will soon come up in further development (delete this comment then)
-    // See how this works with navigationStates in the polyExplorer-features for reference
     const [navigationState, setNavigationState] = useState({
-        importStatus: determineImportStatus(),
+        importStatus:
+            files.length > 0 ? importSteps.explore : importSteps.request,
     });
 
     const history = useHistory();
-    const location = useLocation();
-    const currentPath = location.pathname;
 
     const handleRemoveFile = (fileID) => {
         storage.removeFile(fileID);
@@ -82,7 +75,7 @@ export const ImporterProvider = ({ children }) => {
     function changeNavigationState(changedState) {
         if (changedState) {
             Object.keys(changedState)?.forEach((key) => {
-                if (!navigationState.includes(key)) {
+                if (!navigationStates.includes(key)) {
                     console.log(`NavigationStateError with key: ${key}`);
                     return;
                 }
@@ -100,9 +93,21 @@ export const ImporterProvider = ({ children }) => {
         }
     }
 
+    function updateImportStatus(newStatus) {
+        changeNavigationState({ importStatus: newStatus });
+        writeImportStatus(newStatus);
+    }
+
     //on startup
     useEffect(() => {
-        determineImportStatus(pod);
+        setTimeout(
+            () =>
+                readImportStatus().then((status) => {
+                    if (!navigationState.importStatus == importSteps.explore)
+                        changeNavigationState({ importStatus: status });
+                }),
+            300
+        );
     }, []);
 
     //on history change
@@ -121,6 +126,7 @@ export const ImporterProvider = ({ children }) => {
                 changeNavigationState,
                 handleBack,
                 importSteps,
+                updateImportStatus,
             }}
         >
             {children}

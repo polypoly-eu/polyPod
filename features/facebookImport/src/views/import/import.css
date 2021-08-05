@@ -1,2 +1,37 @@
+.import-view {
+    display: flex;
+    flex-direction: column;
+}
+
 .import-view .progress-bar {
+    margin: 28px 0;
+    padding: 0 16px;
+    width: 100%;
+    max-width: var(--max-width);
+    height: 4px;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.import-view .progress-bar .section {
+    flex: 1 1 0px;
+    height: 100%;
+    margin-right: 1px;
+}
+
+.import-view .progress-bar .request {
+    background-color: var(--color-indigo-50);
+}
+
+.import-view .progress-bar .download {
+    background-color: var(--color-indigo-200);
+}
+
+.import-view .progress-bar .import {
+    background-color: var(--color-indigo-400);
+}
+
+.import-view .progress-bar .explore {
+    background-color: var(--color-indigo-500);
 }
