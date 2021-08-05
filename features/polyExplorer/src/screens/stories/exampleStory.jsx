@@ -9,14 +9,13 @@ const ExampleStory = () => {
     const [overviewClickedTab, setOverviewClickedTab] = useState();
 
     const onClickedOverviewTab = (id) => {
-        overviewClickedTab === id;
-        if (overviewClickedTab === "1") {
+        if (id === "1") {
             setOverviewClickedTab("1");
         }
-        if (overviewClickedTab === "2") {
+        if (id === "2") {
             setOverviewClickedTab("2");
         }
-        if (overviewClickedTab === "3") {
+        if (id === "3") {
             setOverviewClickedTab("3");
         }
     };
@@ -29,6 +28,7 @@ const ExampleStory = () => {
             className="example-story"
             scrollEvent={fakeEvent}
         >
+            <h3>Tab clicked: {overviewClickedTab}</h3>
             <FakeTab onClickedTab={onClickedOverviewTab}>
                 <div
                     label={i18n.t(
