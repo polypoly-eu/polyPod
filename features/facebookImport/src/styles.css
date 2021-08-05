@@ -7,6 +7,7 @@
     --background-light: var(--color-red-50);
 
     --text-white: var(--color-white);
+    --text-light: var(--color-red-50);
     --text-dark: var(--color-indigo-950);
 
     --color-indigo-50: #f0f1fe;

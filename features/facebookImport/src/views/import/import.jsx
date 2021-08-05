@@ -26,7 +26,7 @@ const ImportExplanationExpandable = ({ sections, openedAtStart }) => {
                         onClick={() => setOpenedSection(section)}
                         className="head"
                     >
-                        <div className="number">{index + 1}</div>
+                        <div className={`number ${section}`}>{index + 1}</div>
                         <div className="heading"></div>
                     </div>
                     {section == openedSection ? (
