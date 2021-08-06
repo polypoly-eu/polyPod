@@ -55,7 +55,7 @@ class FacebookImport extends LitElement {
     }
 
     _handleReviewReport({ detail }) {
-        this._report = detail.report;
+        this._unrecognizedData = detail.unrecognizedData;
         this._currentView = "report";
     }
 
@@ -88,7 +88,7 @@ class FacebookImport extends LitElement {
     _renderReport() {
         return html` <report-view
             .pod="${this._pod}"
-            .report="${this._report}"
+            .unrecognizedData="${this._unrecognizedData}"
             @close="${this._handleCloseReport}"
         ></overview-view>`;
     }
