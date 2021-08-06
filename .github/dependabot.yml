@@ -1,91 +1,200 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/core/aop-ts"
+
+  # Check dependencies for GitHub Actions.
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "npm"
-    directory: "/core/bubblewrap"
+  # Check gradle dependencies.
+  - package-ecosystem: "gradle"
+    directory: "/android"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "npm"
-    directory: "/core/customs"
+  # Check gradle dependencies.
+  - package-ecosystem: "gradle"
+    directory: "/android/app"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "npm"
-    directory: "/core/dummy-server"
+  # Check gradle dependencies.
+  - package-ecosystem: "gradle"
+    directory: "/android/java-fetch"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "npm"
-    directory: "/core/fetch-spec"
+  # Check gradle dependencies.
+  - package-ecosystem: "gradle"
+    directory: "/android/polyOut"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "npm"
-    directory: "/core/orodruin"
+  # Check gradle dependencies.
+  - package-ecosystem: "gradle"
+    directory: "/core/communication/bubblewrap"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/core/podigree"
+    directory: "/"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/core/poly-api"
+    directory: "/android/java-fetch"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/core/port-authority"
+    directory: "/build"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/core/postoffice"
+    directory: "/core/api/fetch-spec"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/core/rdf"
+    directory: "/core/api/manifest-parser"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/core/rdf-convert"
+    directory: "/core/api/pod-api"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/core/rdf-spec"
+    directory: "/core/api/rdf"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/features/polyExplorer"
+    directory: "/core/api/rdf-convert"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/features/polyPreview"
+    directory: "/core/api/rdf-spec"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
   - package-ecosystem: "npm"
-    directory: "/features/polyPinion"
+    directory: "/core/communication/bubblewrap"
     schedule:
       interval: "daily"
 
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/core/communication/port-authority"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/core/communication/postoffice"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/core/communication/remote-pod"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/core/utils/dummy-server"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/core/utils/poly-look"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/core/utils/rollup-plugin-copy-watch"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/core/utils/silly-i18n"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/features/bundle"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
   - package-ecosystem: "npm"
     directory: "/features/example"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "gradle"
-    directory: "/android"
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/features/facebookImport"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/features/lexicon"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/features/polyExplorer"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/features/polyExplorer/node_modules/babel-code-frame"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/features/polyPinion"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/features/polyPreview"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/features/test"
+    schedule:
+      interval: "daily"
+
+  # Check npm dependencies.
+  - package-ecosystem: "npm"
+    directory: "/podjs"
     schedule:
       interval: "daily"
