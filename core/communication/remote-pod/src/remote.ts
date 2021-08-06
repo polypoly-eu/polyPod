@@ -7,6 +7,7 @@ import {
     EncodingOptions,
     Stats,
     Matcher,
+    PolyFile
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -44,7 +45,7 @@ type PolyInEndpoint = ObjectEndpointSpec<{
 }>;
 
 type PolyOutEndpoint = ObjectEndpointSpec<{
-    readdir(path: string): ValueEndpointSpec<string[]>;
+    readdir(path: string): ValueEndpointSpec<PolyFile[]>;
     readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
@@ -60,7 +61,8 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
-    pickFile(): ValueEndpointSpec<Uint8Array | null>;
+    importFile(targetFolder: string): ValueEndpointSpec<PolyFile>;
+    removeFile(file: PolyFile): ValueEndpointSpec<void>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
@@ -181,7 +183,7 @@ export class RemoteClientPod implements Pod {
                 else return rpcClient.polyOut().readFile(path, options)();
             }
 
-            readdir(path: string): Promise<string[]> {
+            readdir(path: string): Promise<PolyFile[]> {
                 return rpcClient.polyOut().readdir(path)();
             }
 
@@ -209,7 +211,10 @@ export class RemoteClientPod implements Pod {
             setActiveActions: (actions: string[]) =>
                 this.rpcClient.polyNav().setActiveActions(actions)(),
             setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
-            pickFile: () => this.rpcClient.polyNav().pickFile()(),
+            importFile: (targetFolder: string) =>
+                this.rpcClient.polyNav().importFile(targetFolder)(),
+            removeFile: (file: PolyFile) =>
+                this.rpcClient.polyNav().removeFile(file)(),
         };
     }
 }

@@ -16,6 +16,12 @@ export interface Stats {
     isDirectory(): boolean;
 }
 
+export interface PolyFile {
+    readonly path: string,
+    readonly time: string,
+    readonly size: number
+}
+
 /**
  * A stripped-down version of the Promise-based filesystem API from Node.js.
  *
@@ -26,5 +32,5 @@ export interface FS {
     readFile(path: string): Promise<Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): Promise<void>;
     stat(path: string): Promise<Stats>;
-    readdir(path: string): Promise<string[]>;
+    readdir(path: string): Promise<PolyFile[]>;
 }

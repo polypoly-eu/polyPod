@@ -1,19 +1,20 @@
 import { html } from "lit";
 import * as zip from "@zip.js/zip.js";
+import Storage from "../model/storage.js";
 
 const subAnalyses = [
     class {
         get title() {
-            return "File ID";
+            return "File name";
         }
 
-        parse({ id }) {
+        parse({ name }) {
             this.active = true;
-            this._id = id;
+            this._name = name;
         }
 
         render() {
-            return "" + this._id;
+            return "" + this._name;
         }
     },
     class {

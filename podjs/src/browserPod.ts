@@ -5,8 +5,9 @@ import type {
     PolyIn,
     PolyOut,
     PolyNav,
+    PolyFile
 } from "@polypoly-eu/pod-api";
-import { EncodingOptions, Stats, PolyFile } from "@polypoly-eu/pod-api";
+import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 
@@ -79,7 +80,7 @@ class LocalStoragePolyOut implements PolyOut {
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
     readFile(
-        path: string,
+        name: string,
         options?: EncodingOptions
     ): Promise<string | Uint8Array | undefined> {
         if (options) {
@@ -89,11 +90,11 @@ class LocalStoragePolyOut implements PolyOut {
             localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
             ));
         return new Promise(async (resolve, reject) => {
-            if (!files.has(path)) {
-                reject(new Error(`File not found: ${path}`));
+            if (!files.has(name)) {
+                reject(new Error(`File not found: ${name}`));
                 return;
             }
-            let response = await fetch(files.get(path)?.path || "");
+            let response = await fetch(files.get(name)?.path || "");
             const arrayBuf = await response.arrayBuffer();
             resolve(new Uint8Array(arrayBuf));
         });
@@ -103,15 +104,20 @@ class LocalStoragePolyOut implements PolyOut {
         files = new Map<string, PolyFile>(JSON.parse(
             localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
             ));
-        return new Promise(resolve => resolve(
-            Array.from(files).filter(file => file[0].startsWith(path)).map(k => {
-                return {
-                    path: ((k[1] as unknown) as PolyFile).path as string,
-                    name: k[0],
-                    time: k[1].time
-                }
-            })
-        ));
+        return new Promise(async resolve => {
+            const filteredFiles = Array.from(files).filter(file => file[0].startsWith(path));
+            const response = [];
+            for (const f of filteredFiles) {
+                const filePath = ((f[1] as unknown) as PolyFile).path;
+                response.push({
+                    path: filePath,
+                    name: f[0],
+                    time: f[1].time,
+                    size: (await this.readFile(f[0])).length
+                });
+            }
+            resolve(response);
+        });
     }
 
     stat(path: string): Promise<Stats> {
@@ -124,6 +130,20 @@ class LocalStoragePolyOut implements PolyOut {
         options: EncodingOptions
     ): Promise<void> {
         throw "Not implemented: writeFile";
+    }
+
+    removeFile(file: PolyFile): Promise<void> | void {
+        return new Promise(resolve => {
+            files = new Map<string, PolyFile>(JSON.parse(
+                localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
+                ));
+            files.delete(file.name);
+            localStorage.setItem(
+                BrowserPolyNav.filesKey,
+                JSON.stringify(Array.from(files))
+            );
+            resolve();
+        });
     }
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
@@ -165,39 +185,49 @@ class BrowserPolyNav implements PolyNav {
         document.title = title;
     }
 
-    async importFile(saveAs: string): Promise<boolean> {
+    async importFile(targetDir: string): Promise<PolyFile> {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
             fileInput.setAttribute("type", "file");
             fileInput.addEventListener("change", function () {
                 const selectedFile = this.files?.[0];
                 if (!selectedFile) {
-                    resolve(false);
+                    resolve({path: "", name: "", time: ""});
                     return;
                 }
 
                 const reader = new FileReader();
                 reader.onload = function () {
                     const dataUrl = this.result as string;
-                    if (saveAs) {
-                        let filesInDir = new Map(JSON.parse(
-                            localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
-                            ));
-                        filesInDir.set(selectedFile.name, {
-                            path: dataUrl,
-                            time: new Date().getTime(),
-                            name: selectedFile.name
-                        });
-                        localStorage.setItem(BrowserPolyNav.filesKey,
-                            JSON.stringify(Array.from(filesInDir))
-                        );
+                    if (!targetDir) {
+                        targetDir = ".";
                     }
-                    resolve(true);
+                    let filesInDir = new Map(JSON.parse(
+                        localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
+                        ));
+                    const importedFile = {
+                        path: dataUrl,
+                        time: new Date().getTime().toString(),
+                        name: selectedFile.name
+                    };
+
+                    filesInDir.set(
+                        `${targetDir}/${selectedFile.name}`,
+                        importedFile
+                    );
+                    localStorage.setItem(BrowserPolyNav.filesKey,
+                        JSON.stringify(Array.from(filesInDir))
+                    );
+                    resolve(importedFile);
                 };
                 reader.readAsDataURL(selectedFile);
             });
             fileInput.click();
         });
+    }
+
+    async removeFile(file: PolyFile): Promise<void> {
+        throw new Error("not implemented");
     }
 }
 

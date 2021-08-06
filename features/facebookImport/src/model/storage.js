@@ -16,24 +16,34 @@ export default class Storage {
             const files = await polyOut.readdir("");
             for (const file of files) {
                 this._files[file.name] = {
-                    id: file.name,
+                    name: file.name,
                     time: file.time,
-                    data: await polyOut.readFile(file.name)
+                    size: (await polyOut.readFile(file.name)).length
                 };
-            };
+            }
             resolve(files);
         });
     }
 
-    async addFile(file) {
-        // TODO: Detect / handle duplicate files better
-        await this.refreshFiles();
-        this.changeListener();
+    async readFile(path) {
+        const { polyOut } = await this._pod;
+        return polyOut.readFile(path);
     }
 
-    async removeFile({ id }) {
-        await this.refreshFiles();
-        const { polyOut } = await this._pod;
-        this.changeListener();
+    async addFile(file) {
+        return new Promise(async resolve => {
+            // File is already added by importFile, just refresh
+            await this.refreshFiles();
+            this.changeListener();
+        });
+    }
+
+    async removeFile(file) {
+        return new Promise(async resolve => {
+            const { polyOut } = await this._pod;
+            await polyOut.removeFile(file);
+            await this.refreshFiles();
+            this.changeListener();
+        });
     }
 }
