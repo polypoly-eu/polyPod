@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 
@@ -33,6 +33,20 @@ const ImportExplanationExpandable = ({
     importStatus,
     updateImportStatus,
 }) => {
+    const importRefs = {
+        request: useRef(),
+        download: useRef(),
+        import: useRef(),
+        explore: useRef(),
+    };
+
+    const refPoint = importRefs[importStatus]?.current;
+    if (refPoint)
+        refPoint.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+
     return (
         <div className="explanation-expandable">
             {importStatus == importSteps.beginning ? (
@@ -48,7 +62,11 @@ const ImportExplanationExpandable = ({
                 </div>
             ) : null}
             {Object.values(importSections).map((section, index) => (
-                <div key={index} className={`section ${section}`}>
+                <div
+                    key={index}
+                    className={`section ${section}`}
+                    ref={importRefs[section]}
+                >
                     <div
                         onClick={() => updateImportStatus(section)}
                         className="head"
