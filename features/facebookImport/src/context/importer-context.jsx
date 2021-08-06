@@ -40,17 +40,23 @@ function updateTitle(pod) {
 
 //from storage
 async function readImportStatus() {
-    const quads = await pod.polyIn.select({});
-    const status = quads.some(
-        ({ subject, predicate }) =>
-            subject.value === `${namespace}facebookImporter` &&
-            predicate.value === `${namespace}firstRun`
-    );
+    const statusQuads = await pod.polyIn.select({
+        subject: { value: `${namespace}facebookImporter` },
+        predicate: { value: `${namespace}importStatus` },
+    });
+    let status = statusQuads[0]?.object?.value?.split("#")[1];
     return status || importSteps.request;
 }
 
 async function writeImportStatus(status) {
     const { dataFactory, polyIn } = pod;
+    const existingQuad = (
+        await pod.polyIn.select({
+            subject: { value: `${namespace}facebookImporter` },
+            predicate: { value: `${namespace}importStatus` },
+        })
+    )[0];
+    polyIn.delete(existingQuad);
     const quad = dataFactory.quad(
         dataFactory.namedNode(`${namespace}facebookImporter`),
         dataFactory.namedNode(`${namespace}importStatus`),
@@ -100,14 +106,13 @@ export const ImporterProvider = ({ children }) => {
 
     //on startup
     useEffect(() => {
-        setTimeout(
-            () =>
-                readImportStatus().then((status) => {
-                    if (!navigationState.importStatus == importSteps.explore)
-                        changeNavigationState({ importStatus: status });
-                }),
-            300
-        );
+        readImportStatus().then((status) => {
+            if (
+                status &&
+                !(navigationState.importStatus == importSteps.explore)
+            )
+                changeNavigationState({ importStatus: status });
+        });
     }, []);
 
     //on history change

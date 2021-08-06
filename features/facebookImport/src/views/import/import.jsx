@@ -16,14 +16,17 @@ const ProgressBar = ({ sections }) => {
     );
 };
 
-const ImportExplanationExpandable = ({ sections, openedAtStart }) => {
-    const [openedSection, setOpenedSection] = useState(openedAtStart);
+const ImportExplanationExpandable = ({
+    sections,
+    openedSection,
+    updateImportStatus,
+}) => {
     return (
         <div className="explanation-expandable">
             {Object.values(sections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
                     <div
-                        onClick={() => setOpenedSection(section)}
+                        onClick={() => updateImportStatus(section)}
                         className="head"
                     >
                         <div className={`number ${section}`}>{index + 1}</div>
@@ -59,7 +62,7 @@ const Import = () => {
             <ProgressBar sections={importSteps} />
             <ImportExplanationExpandable
                 sections={importSteps}
-                openedAtStart={importStatus}
+                openedSection={importStatus}
                 updateImportStatus={updateImportStatus}
             />
         </div>
