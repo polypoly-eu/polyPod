@@ -60,9 +60,8 @@
 .import-view .explanation-expandable .head {
     width: 100%;
     max-width: var(--max-width);
-    height: 119px;
+    height: 112px;
     position: relative;
-    margin-bottom: 32px;
     border-top: 2px solid var(--color-grey-400);
     overflow: hidden;
 }
@@ -96,4 +95,19 @@
 
 .import-view .explanation-expandable .head .explore {
     background-color: var(--color-indigo-950);
+}
+
+.import-view .explanation-expandable .body {
+    padding: 0 16px 16px 16px;
+    width: 100%;
+    max-width: var(--max-width);
+    box-sizing: border-box;
+}
+
+.import-view .explanation-expandable .body .separator {
+    height: 1px;
+    width: 100%;
+    max-width: var(--max-width);
+    background-color: var(--color-grey-400);
+    margin-bottom: 26px;
 }
