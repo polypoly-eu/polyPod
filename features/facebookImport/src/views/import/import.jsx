@@ -4,6 +4,8 @@ import i18n from "../../i18n.js";
 
 import "./import.css";
 
+const importSections = ["request", "download", "import", "explore"];
+
 const ProgressBar = ({ sections }) => {
     return (
         <div className="progress-bar">
@@ -16,14 +18,36 @@ const ProgressBar = ({ sections }) => {
     );
 };
 
+const isSectionOpened = (section, importStatus, importSteps) => {
+    return {
+        request:
+            section == importStatus || importStatus == importSteps.beginning,
+        download: section == importStatus,
+        import: section == importStatus,
+        explore: section == importStatus,
+    }[section];
+};
+
 const ImportExplanationExpandable = ({
-    sections,
-    openedSection,
+    importSteps,
+    importStatus,
     updateImportStatus,
 }) => {
     return (
         <div className="explanation-expandable">
-            {Object.values(sections).map((section, index) => (
+            {importStatus == importSteps.beginning ? (
+                <div className="intro">
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                    diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                    nonumy eirmod tempor invidunt ut labore et dolore magna
+                    aliquyam erat, sed diam voluptua.
+                </div>
+            ) : null}
+            {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
                     <div
                         onClick={() => updateImportStatus(section)}
@@ -32,7 +56,7 @@ const ImportExplanationExpandable = ({
                         <div className={`number ${section}`}>{index + 1}</div>
                         <div className="heading"></div>
                     </div>
-                    {section == openedSection ? (
+                    {isSectionOpened(section, importStatus, importSteps) ? (
                         <div className="body">
                             <div className="separator" />
                             Lorem ipsum dolor sit amet, consetetur sadipscing
@@ -61,8 +85,8 @@ const Import = () => {
         <div className="import-view">
             <ProgressBar sections={importSteps} />
             <ImportExplanationExpandable
-                sections={importSteps}
-                openedSection={importStatus}
+                importSteps={importSteps}
+                importStatus={importStatus}
                 updateImportStatus={updateImportStatus}
             />
         </div>

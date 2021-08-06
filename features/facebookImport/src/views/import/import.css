@@ -57,6 +57,13 @@
     color: var(--text-dark);
 }
 
+.import-view .explanation-expandable .intro {
+    width: 100%;
+    max-width: var(--max-width);
+    padding: 16px;
+    box-sizing: border-box;
+}
+
 .import-view .explanation-expandable .head {
     width: 100%;
     max-width: var(--max-width);

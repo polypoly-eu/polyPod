@@ -18,10 +18,12 @@ storage.changeListener = () => {
 //all nav-states for checking purposes
 const navigationStates = ["importStatus"];
 const importSteps = {
+    beginning: "beginning",
     request: "request",
     download: "download",
     import: "import",
     explore: "explore",
+    finished: "finished",
 };
 const namespace = "http://polypoly.coop/schema/facebookImporter/#";
 
@@ -45,7 +47,7 @@ async function readImportStatus() {
         predicate: { value: `${namespace}importStatus` },
     });
     let status = statusQuads[0]?.object?.value?.split("#")[1];
-    return status || importSteps.request;
+    return status || importSteps.beginning;
 }
 
 async function writeImportStatus(status) {
