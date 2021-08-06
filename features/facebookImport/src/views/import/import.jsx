@@ -18,6 +18,15 @@ const ProgressBar = ({ sections }) => {
     );
 };
 
+const InfoBox = ({ textContent }) => {
+    return (
+        <div className="infobox">
+            <div className="icon"></div>
+            <div className="text-content">{textContent}</div>
+        </div>
+    );
+};
+
 const isSectionOpened = (section, importStatus, importSteps) => {
     return {
         request:
@@ -51,14 +60,9 @@ const ImportExplanationExpandable = ({
         <div className="explanation-expandable">
             {importStatus == importSteps.beginning ? (
                 <div className="intro">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua.
+                    <p>{Hi}</p>
+                    <p className="bold">Hi</p>
+                    <InfoBox textContent={i18n.t("import:info.1")} />
                 </div>
             ) : null}
             {Object.values(importSections).map((section, index) => (

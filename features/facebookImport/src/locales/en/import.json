@@ -2,5 +2,10 @@
     "request": "Request your data",
     "download": "Download your data",
     "import": "Import your data",
-    "explore": "Explore your data"
+    "explore": "Explore your data",
+    "info.1": "Only a copy of your data will be created. Your Facebook account remains unchanged!",
+    "info.2": "For this you need your log-in data",
+    "info.3": "IMPORTANT: Now you have to wait for your data to be ready for download. You will be notified by e-mail. This process can take up to 24 hours.",
+    "info.4": "It can take up to 24 hours until your data is ready!",
+    "info.5": "The file you import contains your Facebook information up to the present time. To update your data in the future, simply request a new version."
 }
