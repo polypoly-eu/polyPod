@@ -8,7 +8,7 @@ const i18nHeader = "clusterMessengerStory";
 
 const Overview = ({ donutData, heightEvent }) => {
     const wholeOverview = useRef();
-    const chartSize = 500;
+    const chartSize = 730;
     const messageInstalls = "overview.donut.installs.message";
     const messageUsers = "overview.donut.users.message";
     const typeDonutsChar = {
