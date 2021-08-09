@@ -8,7 +8,6 @@ const i18nHeader = "clusterMessengerStory";
 
 const Overview = ({ donutData, heightEvent }) => {
     const wholeOverview = useRef();
-    const chartSize = 730;
     const messageInstalls = "overview.donut.installs.message";
     const messageUsers = "overview.donut.users.message";
     const typeDonutsChar = {
@@ -31,11 +30,11 @@ const Overview = ({ donutData, heightEvent }) => {
                 updateCurrentDonutMessage(messageInstalls);
                 break;
             case typeDonutsChar.donutUsers:
-                updateCurrentDataDonut(donutData.users);
+                updateCurrentDataDonut(donutData.activeUsers);
                 updateCurrentDonutMessage(messageUsers);
                 break;
             case typeDonutsChar.donutPartOf:
-                updateCurrentDataDonut(donutData.partOF);
+                updateCurrentDataDonut(donutData.partOf);
                 updateCurrentDonutMessage(messageUsers);
                 break;
         }
@@ -50,7 +49,6 @@ const Overview = ({ donutData, heightEvent }) => {
         <div className="messenger-overview" ref={wholeOverview}>
             <div className="chart-container">
                 <DonutChart
-                    size={chartSize}
                     data={currentDonutData}
                     message={i18n.t(`${i18nHeader}:${currentDonutMessage}`)}
                 ></DonutChart>

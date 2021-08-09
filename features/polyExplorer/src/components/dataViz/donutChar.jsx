@@ -2,19 +2,34 @@ import React, { useRef, useEffect } from "react";
 import { DONUT_CHART } from "../../constants";
 import * as d3 from "d3";
 
-// const DonutChart = ({ size, data, message }) => {
-const DonutChart = ({ size, data }) => {
+const DonutChart = ({ data, message }) => {
     const svgCanvas = useRef();
-    const forth = size / 5;
-    const eighth = size / 8;
-    const half = size / 2;
-    // const messageConfig = {
-    //     x: -76,
-    //     y: -85,
-    //     width: 152,
-    //     height: 200,
-    //     id: "donut-msg",
-    // };
+    const screenSizes = {
+        smallScreen: "smallScreen",
+        normalScreen: "normalScreen",
+        bigScreen: "bigScreen",
+    };
+    const messageConfig = {
+        x: -76,
+        y: -100,
+        width: 152,
+        height: 200,
+    };
+    const canvasConfig = {
+        [screenSizes.smallScreen]: {
+            resolution: 730,
+            rightMargin: 65,
+        },
+        [screenSizes.normalScreen]: {
+            resolution: 650,
+            rightMargin: 16,
+        },
+        [screenSizes.bigScreen]: {
+            resolution: 650,
+            rightMargin: 5,
+        },
+    };
+
     const darkColor = "#0f1938";
     const lightColor = "#f7fafc";
     const classNameLabels = "labels";
@@ -37,6 +52,8 @@ const DonutChart = ({ size, data }) => {
     const lineLabelsLeftSelector = `.${classNameLineLabels} .${classNameLabelsLeft}`;
     const classNameLineGroups = "lineGroup";
     const lineGroupsSelector = `.${classNameLineGroups}`;
+    const classNameMessage = "centralMessage";
+    const messageSelector = `.${classNameMessage}`;
     const pathSelector = "path";
     const fontConfig = {
         fontFamily: "'Jost'",
@@ -49,10 +66,10 @@ const DonutChart = ({ size, data }) => {
         width: 100,
         height: 70,
     };
-    // const groupLabelsConfig = {
-    //     width: 100,
-    //     height: 50,
-    // };
+    const groupLabelsConfig = {
+        width: 100,
+        height: 50,
+    };
 
     const sections = {
         up: "up",
@@ -60,8 +77,10 @@ const DonutChart = ({ size, data }) => {
         down: "down",
         left: "left",
     };
+    const lineCorrection = 1.2;
 
-    function _distrubuteLabels(arcs, labelsArc) {
+    function _distrubuteLabels(arcs, labelsArc, screenSize) {
+        const { outerRadius } = _getMesures(screenSize);
         const up = [];
         const right = [];
         const down = [];
@@ -82,13 +101,13 @@ const DonutChart = ({ size, data }) => {
         for (const data of arcs) {
             const coord = labelsArc.centroid(data);
 
-            if (coord[1] < forth * -1) {
+            if (coord[1] < outerRadius * -1) {
                 up.push(data);
-            } else if (coord[1] > forth) {
+            } else if (coord[1] > outerRadius) {
                 down.push(data);
-            } else if (coord[0] > forth) {
+            } else if (coord[0] > outerRadius) {
                 right.push(data);
-            } else if (coord[0] < forth * -1) {
+            } else {
                 left.push(data);
             }
         }
@@ -101,7 +120,9 @@ const DonutChart = ({ size, data }) => {
         return { up, right, down, left };
     }
 
-    function _getRootSvg() {
+    function _getRootSvg(screenSize) {
+        const { half } = _getMesures(screenSize);
+        const { resolution, rightMargin } = canvasConfig[screenSize];
         let root = d3.select(svgCanvas.current).select("svg").select("g");
 
         if (root.empty()) {
@@ -113,12 +134,20 @@ const DonutChart = ({ size, data }) => {
                 .attr("xmlns", "http://www.w3.org/2000/svg")
                 .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
                 .attr("xmlns:xhtml", "http://www.w3.org/1999/xhtml")
-                .attr("viewBox", `0 0 ${size} ${size}`)
+                .attr("viewBox", `0 0 ${resolution} ${resolution}`)
                 .append("g")
-                .attr("transform", `translate(${half - 65}, ${half})`);
+                .attr("transform", `translate(${half - rightMargin}, ${half})`);
         }
 
         return root;
+    }
+
+    function _getMesures(screenSize) {
+        return {
+            outerRadius: canvasConfig[screenSize].resolution / 5,
+            innerRadius: canvasConfig[screenSize].resolution / 8,
+            half: canvasConfig[screenSize].resolution / 2,
+        };
     }
 
     function _processData() {
@@ -148,16 +177,17 @@ const DonutChart = ({ size, data }) => {
         return { chartData, groupsInfo };
     }
 
-    function _calculateArcsArea(chartData, groupsInfo) {
-        const labelOffset = forth * 1.35;
-        const groupLabelsOffset = labelOffset * 1.15;
+    function _calculateArcsArea(chartData, groupsInfo, screenSize) {
+        const { outerRadius, innerRadius } = _getMesures(screenSize);
+        const labelOffset = outerRadius * 1.35;
+        const groupLabelsOffset = labelOffset * 1.45;
         const pie = d3
             .pie()
             .sort(null)
             .value((d) => d.value);
         const arcs = pie(chartData);
         const groupArcs = pie(groupsInfo);
-        const arc = d3.arc().innerRadius(eighth).outerRadius(forth);
+        const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
         const labelsArc = d3
             .arc()
             .innerRadius(labelOffset)
@@ -180,10 +210,21 @@ const DonutChart = ({ size, data }) => {
         d3.selectAll(groupLabelsSelector).remove();
         d3.selectAll(labelsSelector).remove();
         d3.selectAll(lineLabelsSelector).remove();
+        d3.select(messageSelector).remove();
     }
 
-    function _calculateDataMaps(plotArea, arcs, groupArcs, labelsArc) {
-        const { up, right, down, left } = _distrubuteLabels(arcs, labelsArc);
+    function _calculateDataMaps(
+        plotArea,
+        arcs,
+        groupArcs,
+        labelsArc,
+        screenSize
+    ) {
+        const { up, right, down, left } = _distrubuteLabels(
+            arcs,
+            labelsArc,
+            screenSize
+        );
         const mapGraphParts = plotArea.selectAll(pathSelector).data(arcs);
         const mapLineGroup = plotArea
             .selectAll(lineGroupsSelector)
@@ -293,7 +334,9 @@ const DonutChart = ({ size, data }) => {
             .style("fill", "none")
             .attr("stroke-width", 1)
             .attr("points", (d) => {
-                const pointA = arc.centroid(d).map((coord) => coord * 1.2);
+                const pointA = arc
+                    .centroid(d)
+                    .map((coord) => coord * lineCorrection);
                 const pointB = labelsArc.centroid(d);
                 const pointC = _getsCoordTransfrom(
                     d3.select(`#${_getsIdName(d)}`).attr("transform")
@@ -321,11 +364,11 @@ const DonutChart = ({ size, data }) => {
             .attr("stroke-width", 1)
             .attr("x1", (d) => {
                 const point = arc.centroid(d);
-                return point[0] * 1.2;
+                return point[0] * lineCorrection;
             })
             .attr("y1", (d) => {
                 const point = arc.centroid(d);
-                return point[1] * 1.2;
+                return point[1] * lineCorrection;
             })
             .attr("x2", (d) => {
                 const point = _getsCoordTransfrom(
@@ -345,21 +388,32 @@ const DonutChart = ({ size, data }) => {
             });
     }
 
-    function buildPieChart() {
+    function calculateScreenSize(screenWidth) {
+        if (screenWidth <= 320) {
+            return screenSizes.smallScreen;
+        } else if (screenWidth <= 413) {
+            return screenSizes.normalScreen;
+        } else {
+            return screenSizes.bigScreen;
+        }
+    }
+
+    function buildPieChart(screenSize) {
         const { chartData, groupsInfo } = _processData();
+        const { half } = _getMesures(screenSize);
 
         const colors = d3
             .scaleOrdinal()
             .domain(groupsInfo.map(({ name }) => name))
             .range(groupsInfo.map(({ color }) => color));
-        const plotArea = _getRootSvg();
+        const plotArea = _getRootSvg(screenSize);
         const {
             arcs,
             groupArcs,
             arc,
             labelsArc,
-            // groupLabelsArc,
-        } = _calculateArcsArea(chartData, groupsInfo);
+            groupLabelsArc,
+        } = _calculateArcsArea(chartData, groupsInfo, screenSize);
 
         _cleanLabels();
         const {
@@ -368,77 +422,64 @@ const DonutChart = ({ size, data }) => {
             mapLineLabelsRight,
             mapLineLabelsDown,
             mapLineLabelsLeft,
-            // mapLineGroup,
-            // mapLabelsGroup,
+            mapLineGroup,
+            mapLabelsGroup,
             mapLabelsUp,
             mapLabelsRight,
             mapLabelsDown,
             mapLabelsLeft,
             exitAndClean,
-        } = _calculateDataMaps(plotArea, arcs, groupArcs, labelsArc);
+        } = _calculateDataMaps(
+            plotArea,
+            arcs,
+            groupArcs,
+            labelsArc,
+            screenSize
+        );
 
-        // mapLineLabel
-        //     .enter()
-        //     .append("line")
-        //     .merge(mapLineLabel)
-        //     .transition()
-        //     .duration(1000)
-        //     .attr("class", classNameLineLabels)
-        //     .attr("stroke", darkColor)
-        //     .attr("stroke-width", 1)
-        //     .attr("x1", (d) => {
-        //         const point = labelsArc.centroid(d);
+        mapLineGroup
+            .enter()
+            .append("line")
+            .merge(mapLineGroup)
+            .transition()
+            .duration(1000)
+            .attr("class", classNameLineGroups)
+            .attr("stroke", darkColor)
+            .attr("stroke-width", 1)
+            .attr("x1", (d) => {
+                const point = groupLabelsArc.centroid(d);
+                return point[0] > 0
+                    ? point[0] - groupLabelsConfig.width / 2
+                    : point[0] + groupLabelsConfig.width / 2;
+            })
+            .attr("y1", (d) => {
+                const point = groupLabelsArc.centroid(d);
+                return point[1];
+            })
+            .attr("x2", (d) => {
+                const point = arc.centroid(d);
 
-        //         return point[0];
-        //     })
-        //     .attr("y1", (d) => {
-        //         const point = labelsArc.centroid(d);
-        //         return point[1];
-        //     })
-        //     .attr("x2", (d) => {
-        //         const point = arc.centroid(d);
+                return point[0] * lineCorrection;
+            })
+            .attr("y2", (d) => {
+                const point = arc.centroid(d);
 
-        //         return point[0] * 1.2;
-        //     })
-        //     .attr("y2", (d) => {
-        //         const point = arc.centroid(d);
+                return point[1] * lineCorrection;
+            });
 
-        //         return point[1] * 1.2;
-        //     });
+        const labelsGroup = mapLabelsGroup
+            .enter()
+            .append("foreignObject")
+            .style("width", groupLabelsConfig.width)
+            .style("height", groupLabelsConfig.height)
+            .attr("class", classNameGroupLabels)
+            .attr("transform", (d) => {
+                const point = groupLabelsArc.centroid(d);
+                point[0] = point[0] * d.data.labelCorrection.x;
+                point[1] = point[1] * d.data.labelCorrection.y;
 
-        // mapLineGroup
-        //     .enter()
-        //     .append("line")
-        //     .merge(mapLineGroup)
-        //     .transition()
-        //     .duration(1000)
-        //     .attr("class", classNameLineGroups)
-        //     .attr("stroke", darkColor)
-        //     .attr("stroke-width", 1)
-        //     .attr("x1", (d) => {
-        //         const point = groupLabelsArc.centroid(d);
-        //         return point[0] * d.data.labelCorrection.x;
-        //     })
-        //     .attr("y1", (d) => {
-        //         const point = groupLabelsArc.centroid(d);
-        //         return point[1] * d.data.labelCorrection.y;
-        //     })
-        //     .attr("x2", "0")
-        //     .attr("y2", "0");
-
-        // const labelsGroup = mapLabelsGroup
-        //     .enter()
-        //     .append("foreignObject")
-        //     .style("width", groupLabelsConfig.width)
-        //     .style("height", groupLabelsConfig.height)
-        //     .attr("class", classNameGroupLabels)
-        //     .attr("transform", (d) => {
-        //         const point = groupLabelsArc.centroid(d);
-        //         point[0] = point[0] * d.data.labelCorrection.x;
-        //         point[1] = point[1] * d.data.labelCorrection.y;
-
-        //         return `translate(${point})`;
-        //     });
+                return `translate(${point})`;
+            });
 
         const labelsUp = mapLabelsUp
             .enter()
@@ -449,7 +490,10 @@ const DonutChart = ({ size, data }) => {
             .attr("class", `${classNameLabels} ${classNameLabelsUp}`)
             .attr("transform", (d, index, list) => {
                 const halfPoint = Math.ceil(list.length / 2);
-                const coordY = -half + labelsConfig.height;
+                const coordY =
+                    screenSize === screenSizes.smallScreen
+                        ? -half + labelsConfig.height
+                        : -half;
                 const coordX = labelsConfig.width * (index - halfPoint);
                 return `translate(${coordX}, ${coordY})`;
             });
@@ -463,7 +507,10 @@ const DonutChart = ({ size, data }) => {
             .attr("class", `${classNameLabels} ${classNameLabelsRight}`)
             .attr("transform", (d, index, list) => {
                 const halfPoint = Math.ceil(list.length / 2);
-                const coordX = half - labelsConfig.width * 2;
+                const coordX =
+                    screenSize === screenSizes.smallScreen
+                        ? half - labelsConfig.width * 2
+                        : half - labelsConfig.width * 1.5;
                 const coordY = labelsConfig.height * (index - halfPoint);
                 return `translate(${coordX}, ${coordY})`;
             });
@@ -477,7 +524,10 @@ const DonutChart = ({ size, data }) => {
             .attr("class", `${classNameLabels} ${classNameLabelsRight}`)
             .attr("transform", (d, index, list) => {
                 const halfPoint = Math.ceil(list.length / 2);
-                const coordY = half - labelsConfig.height * 2;
+                const coordY =
+                    screenSize === screenSizes.smallScreen
+                        ? half - labelsConfig.height * 2
+                        : half - labelsConfig.height;
                 const coordX = labelsConfig.width * (index - halfPoint);
 
                 return `translate(${coordX}, ${coordY})`;
@@ -492,18 +542,21 @@ const DonutChart = ({ size, data }) => {
             .attr("class", `${classNameLabels} ${classNameLabelsLeft}`)
             .attr("transform", (d, index, list) => {
                 const halfPoint = Math.ceil(list.length / 2);
-                const coordX = -half + labelsConfig.width;
+                const coordX =
+                    screenSize === screenSizes.smallScreen
+                        ? -half + labelsConfig.width
+                        : -half + labelsConfig.width / 2;
                 const coordY = labelsConfig.height * (index - halfPoint);
 
                 return `translate(${coordX}, ${coordY})`;
             });
-        // const messageArea = plotArea
-        //     .append("foreignObject")
-        //     .attr("x", messageConfig.x)
-        //     .attr("y", messageConfig.y)
-        //     .attr("width", messageConfig.width)
-        //     .attr("height", messageConfig.height)
-        //     .attr("id", messageConfig.id);
+        const messageArea = plotArea
+            .append("foreignObject")
+            .attr("class", classNameMessage)
+            .attr("x", messageConfig.x)
+            .attr("y", messageConfig.y)
+            .attr("width", messageConfig.width)
+            .attr("height", messageConfig.height);
 
         mapGraphParts
             .enter()
@@ -530,38 +583,46 @@ const DonutChart = ({ size, data }) => {
         _drawLinesLabelsOnXAxis(mapLineLabelsRight, arc, sections.right);
         _drawLinesLabelsOnXAxis(mapLineLabelsLeft, arc, sections.left);
 
-        // labelsGroup
-        //     .append("xhtml:div")
-        //     .merge(labelsGroup)
-        //     .transition()
-        //     .duration(1000)
-        //     .style("color", lightColor)
-        //     .style("text-align", fontConfig.textAlign)
-        //     .style("font-size", fontConfig.fontSize)
-        //     .style("font-family", fontConfig.fontFamily)
-        //     .style("line-height", fontConfig.lineHeight)
-        //     .style("font-weight", fontConfig.fontWeight)
-        //     .style("background-color", (d) => d.data.color)
-        //     .text((d) => `${d.data.name}: ${d.data.value}`);
+        labelsGroup
+            .append("xhtml:div")
+            .merge(labelsGroup)
+            .transition()
+            .duration(1000)
+            .style("color", lightColor)
+            .style("text-align", fontConfig.textAlign)
+            .style("font-size", fontConfig.fontSize)
+            .style("font-family", fontConfig.fontFamily)
+            .style("line-height", fontConfig.lineHeight)
+            .style("font-weight", fontConfig.fontWeight)
+            .style("background-color", (d) => d.data.color)
+            .text((d) => `${d.data.name}: ${d.data.value}`);
 
-        // messageArea
-        //     .append("xhtml:div")
-        //     .style("color", darkColor)
-        //     .style("text-align", fontConfig.textAlign)
-        //     .style("position", "relative")
-        //     .style("background-color", lightColor)
-        //     .style("padding", "0px 10px")
-        //     .style("top", "25%")
-        //     .style("font-size", fontConfig.fontSize)
-        //     .style("font-family", fontConfig.fontFamily)
-        //     .style("line-height", fontConfig.lineHeight)
-        //     .style("font-weight", fontConfig.fontWeight)
-        //     .text(message);
+        messageArea
+            .append("xhtml:div")
+            .style("display", "flex")
+            .style("justify-content", "center")
+            .style("align-items", "center")
+            .style("width", `${messageConfig.width}px`)
+            .style("height", `${messageConfig.height}px`)
+            .append("xhtml:span")
+            .transition()
+            .duration(1000)
+            .style("color", darkColor)
+            .style("text-align", fontConfig.textAlign)
+            .style("background-color", "transparent")
+            .style("font-size", fontConfig.fontSize)
+            .style("font-family", fontConfig.fontFamily)
+            .style("line-height", fontConfig.lineHeight)
+            .style("font-weight", fontConfig.fontWeight)
+            .text(message);
 
         exitAndClean();
     }
 
-    useEffect(buildPieChart, [data]);
+    useEffect(() => {
+        const screenWidth = window.innerWidth;
+        buildPieChart(calculateScreenSize(screenWidth));
+    }, [data]);
     return <div ref={svgCanvas}></div>;
 };
 

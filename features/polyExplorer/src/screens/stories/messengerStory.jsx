@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext } from "react";
 
 import DataStory from "../../components/dataStory/dataStory.jsx";
 import Introduction from "../../components/clusterStories/messengers/introduction.jsx";
@@ -157,7 +157,7 @@ const MessengerStory = () => {
     }
 
     function _calculateOverviewData() {
-        const ownerFacebookTest = /.*{F,f}acebook.*/g;
+        const ownerFacebookTest = /.*[F,f]acebook.*/g;
         const installs = [
             {
                 groupName: DONUT_CHART.DEFAULT_GROUP,
@@ -169,7 +169,10 @@ const MessengerStory = () => {
                 attributes: Object.keys(products).reduce(
                     (acc, key) => ({
                         ...acc,
-                        [key]: products[key].totalInstalls / 1000000,
+                        [key]:
+                            Math.round(
+                                (products[key].totalInstalls / 1000000) * 100
+                            ) / 100,
                     }),
                     {}
                 ),
@@ -187,7 +190,11 @@ const MessengerStory = () => {
                 attributes: Object.keys(products).reduce(
                     (acc, key) => ({
                         ...acc,
-                        [key]: products[key].currentActiveUsers / 1000000,
+                        [key]:
+                            Math.round(
+                                (products[key].currentActiveUsers / 1000000) *
+                                    100
+                            ) / 100,
                     }),
                     {}
                 ),
@@ -225,7 +232,11 @@ const MessengerStory = () => {
                 attributes: Object.keys(noFacebookProducts).reduce(
                     (acc, key) => ({
                         ...acc,
-                        [key]: products[key].currentActiveUsers / 1000000,
+                        [key]:
+                            Math.round(
+                                (products[key].currentActiveUsers / 1000000) *
+                                    100
+                            ) / 100,
                     }),
                     {}
                 ),
@@ -240,7 +251,11 @@ const MessengerStory = () => {
                 attributes: Object.keys(facebookProducts).reduce(
                     (acc, key) => ({
                         ...acc,
-                        [key]: products[key].currentActiveUsers / 1000000,
+                        [key]:
+                            Math.round(
+                                (products[key].currentActiveUsers / 1000000) *
+                                    100
+                            ) / 100,
                     }),
                     {}
                 ),
