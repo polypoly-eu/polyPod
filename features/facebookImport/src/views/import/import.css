@@ -4,10 +4,8 @@
     height: 100%;
     overflow: hidden scroll;
     background-color: var(--background-light);
-    border-top: 4px solid var(--color-red-50);
     border-radius: 12px 12px 0px 0px;
     box-sizing: border-box;
-    line-height: var(--line-height);
 }
 
 .import-view .progress-bar {
@@ -55,6 +53,7 @@
     display: flex;
     flex-direction: column;
     color: var(--text-dark);
+    overflow: hidden scroll;
 }
 
 .import-view .explanation-expandable .intro {
@@ -62,6 +61,44 @@
     max-width: var(--max-width);
     padding: 16px;
     box-sizing: border-box;
+    margin-bottom: 72px;
+}
+
+.import-view .explanation-expandable .intro p {
+    font-weight: 300;
+    font-size: 42px;
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.import-view .explanation-expandable .intro .bold {
+    font-weight: 600 !important;
+}
+
+.import-view .explanation-expandable .scroll-button {
+    height: 32px;
+    background: var(--color-indigo-950);
+    color: var(--color-gray-50);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06), 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    padding: 7.5px 12px;
+    box-sizing: border-box;
+}
+
+.import-view .explanation-expandable .scroll-button p {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.import-view .explanation-expandable .scroll-button img {
+    margin-right: 6px;
 }
 
 .import-view .explanation-expandable .head {
@@ -69,8 +106,10 @@
     max-width: var(--max-width);
     height: 112px;
     position: relative;
-    border-top: 2px solid var(--color-grey-400);
+    border-top: 2px solid var(--color-gray-400);
     overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .import-view .explanation-expandable .head .number {
@@ -86,6 +125,16 @@
     align-items: center;
     justify-content: center;
     color: var(--text-light);
+}
+
+.import-view .explanation-expandable .head .heading {
+    margin-left: 30%;
+    width: 100px;
+    font-size: 24px;
+}
+
+.import-view .explanation-expandable .head strong {
+    font-weight: 600;
 }
 
 .import-view .explanation-expandable .head .request {
@@ -115,7 +164,7 @@
     height: 1px;
     width: 100%;
     max-width: var(--max-width);
-    background-color: var(--color-grey-400);
+    background-color: var(--color-gray-400);
     margin-bottom: 26px;
 }
 
@@ -139,4 +188,7 @@
 
 .import-view .infobox .text-content {
     flex: 1 1 auto;
+    font-size: 20px;
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
 }

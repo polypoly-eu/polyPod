@@ -6,11 +6,15 @@ import "./import.css";
 
 const importSections = ["request", "download", "import", "explore"];
 
-const ProgressBar = ({ sections }) => {
+const ProgressBar = ({ onUpdateImportStatus }) => {
     return (
         <div className="progress-bar">
-            {Object.values(sections).map((section, index) => (
-                <div key={index} className={`section`}>
+            {importSections.map((section, index) => (
+                <div
+                    onClick={() => onUpdateImportStatus(section)}
+                    key={index}
+                    className={`section`}
+                >
                     <div className={`line ${section}-progress`}></div>
                 </div>
             ))}
@@ -25,6 +29,16 @@ const InfoBox = ({ textContent }) => {
             <div className="text-content">{textContent}</div>
         </div>
     );
+};
+
+const ScrollButton = () => {
+    const scrollingPosition = 20;
+    return scrollingPosition < 100 ? (
+        <div className="scroll-button">
+            <img src="./images/scroll-down.svg" />{" "}
+            <p>{i18n.t("import:scroll.button")}</p>
+        </div>
+    ) : null;
 };
 
 const isSectionOpened = (section, importStatus, importSteps) => {
@@ -58,13 +72,12 @@ const ImportExplanationExpandable = ({
 
     return (
         <div className="explanation-expandable">
-            {importStatus == importSteps.beginning ? (
-                <div className="intro">
-                    <p>{Hi}</p>
-                    <p className="bold">Hi</p>
-                    <InfoBox textContent={i18n.t("import:info.1")} />
-                </div>
-            ) : null}
+            <div className="intro">
+                <p>{i18n.t("import:intro.text.1")}</p>
+                <p className="bold">{i18n.t("import:intro.text.2")}</p>
+                <InfoBox textContent={i18n.t("import:info.1")} />
+            </div>
+            <ScrollButton />
             {Object.values(importSections).map((section, index) => (
                 <div
                     key={index}
@@ -76,7 +89,12 @@ const ImportExplanationExpandable = ({
                         className="head"
                     >
                         <div className={`number ${section}`}>{index + 1}</div>
-                        <div className="heading"></div>
+                        <div
+                            className="heading"
+                            dangerouslySetInnerHTML={{
+                                __html: i18n.t(`import:heading.${section}`),
+                            }}
+                        />
                     </div>
                     {isSectionOpened(section, importStatus, importSteps) ? (
                         <div className="body">
@@ -105,7 +123,7 @@ const Import = () => {
     const importStatus = navigationState.importStatus;
     return (
         <div className="import-view">
-            <ProgressBar sections={importSteps} />
+            <ProgressBar onUpdateImportStatus={updateImportStatus} />
             <ImportExplanationExpandable
                 importSteps={importSteps}
                 importStatus={importStatus}
