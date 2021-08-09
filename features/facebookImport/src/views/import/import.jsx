@@ -25,7 +25,7 @@ const ProgressBar = ({ onUpdateImportStatus }) => {
 const InfoBox = ({ textContent }) => {
     return (
         <div className="infobox">
-            <div className="icon"></div>
+            <img src="./images/info-circle.svg" alt="" className="icon" />
             <div className="text-content">{textContent}</div>
         </div>
     );
@@ -37,14 +37,10 @@ const ScrollButton = ({ scrollRef }) => {
         scrollRef.current.addEventListener("scroll", (e) =>
             setScrollingPosition(e.target.scrollTop)
         );
-    else
-        throw TypeError(
-            "ScrollButton: Bad input ref. Has no Attribute current"
-        );
     return scrollingPosition < 100 ? (
         <div className="scroll-button">
             <img src="./images/scroll-down.svg" />{" "}
-            <p>{i18n.t("import:scroll.button")}</p>
+            <p>{i18n.t("import:scroll.down")}</p>
         </div>
     ) : null;
 };
@@ -81,7 +77,28 @@ const ImportExplanationExpandable = ({
         });
 
     const bodyContent = {
-        request: "Lorem ipsum dolor sit amet, consetetur sadipscing",
+        request: (
+            <>
+                <p>{i18n.t("import:request.1")}</p>
+                <InfoBox textContent={i18n.t("import:request.info.1")} />
+                <div className="separator"></div>
+                <h4>{i18n.t("import:how.it.works")}</h4>
+                <img src="./images/facebook.svg" alt="facebook" />
+                <p>{i18n.t("import:request.2")}</p>
+                <p>{i18n.t("import:request.3")}</p>
+                <img src="./images/document.svg" alt="document" />
+                <p>{i18n.t("import:request.4")}</p>
+                <img
+                    src="./images/json.svg"
+                    className="translucent-sides"
+                    alt="select-json"
+                />
+                <InfoBox textContent={i18n.t("import:request.info.2")} />
+                <button className="btn-highlighted">
+                    {i18n.t("import:request.button")}
+                </button>
+            </>
+        ),
         download: "",
         import: "",
         explore: "",
@@ -92,7 +109,7 @@ const ImportExplanationExpandable = ({
             <div className="intro">
                 <p>{i18n.t("import:intro.text.1")}</p>
                 <p className="bold">{i18n.t("import:intro.text.2")}</p>
-                <InfoBox textContent={i18n.t("import:info.1")} />
+                <InfoBox textContent={i18n.t("import:intro.info")} />
             </div>
             <ScrollButton scrollRef={expandableRef} />
             {Object.values(importSections).map((section, index) => (

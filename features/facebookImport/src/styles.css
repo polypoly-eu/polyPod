@@ -16,10 +16,12 @@
     --color-indigo-300: #8f9be7;
     --color-indigo-400: #737fdb;
     --color-indigo-500: #5664cd;
+    --color-indigo-600: #475abb;
     --color-indigo-700: #3749a9;
     --color-indigo-950: #0f1938;
 
     --color-red-50: #fff5f5;
+    --color-red-300: #fb8a89;
 
     --color-gray-50: #f7fafc;
     --color-gray-400: #a9b6c6;
@@ -64,4 +66,29 @@ button {
 
 button:focus {
     outline: 0;
+}
+
+.btn-highlighted,
+.btn-secondary {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 32px;
+    width: 100%;
+    height: 48px;
+    color: var(--color-indigo-950);
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.btn-highlighted {
+    background-color: var(--color-red-300);
+}
+
+.btn-secondary {
+    border: 1px solid var(--color-indigo-950);
+    box-sizing: border-box;
+    background-color: transparent;
 }

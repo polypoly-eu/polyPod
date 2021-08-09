@@ -9,8 +9,9 @@
     "scroll.down": "Scroll down",
     "how.it.works": "So geht's",
     "request.1": "To import your data into your polyPod, you must first request it from Facebook.",
-    "request.2": "Go to facebook.com/dyi.\n\nYour browser will ask you if you want to continue with the browser version or use your app. Please continue with the browser.",
-    "request.3": "Scroll down the Facebook page, change the file type to 'JSON' and request the file. You will receive a confirmation of your request.",
+    "request.2": "Go to facebook.com/dyi.",
+    "request.3": "Your browser will ask you if you want to continue with the browser version or use your app. Please continue with the browser.",
+    "request.4": "Scroll down the Facebook page, change the file type to 'JSON' and request the file. You will receive a confirmation of your request.",
     "request.info.1": "For this you need your log-in data",
     "request.info.2": "IMPORTANT: Now you have to wait for your data to be ready for download. You will be notified by e-mail. This process can take up to 24 hours.",
     "request.button": "Start request",
@@ -24,5 +25,6 @@
     "import.info": "The file you import contains your Facebook information up to the present time. To update your data in the future, simply request a new version.",
     "import.chosen": "Chosen file",
     "import.delete": "Delete",
-    "explore": "Congratulations! You have successfully taken the first step in taking back control of your data!\n\nYour Facebook data has been imported into your polyPod. Now you can explore it and see what Facebook really knows about you."
+    "explore.1": "Congratulations! You have successfully taken the first step in taking back control of your data!",
+    "explore.2": "Your Facebook data has been imported into your polyPod. Now you can explore it and see what Facebook really knows about you."
 }
