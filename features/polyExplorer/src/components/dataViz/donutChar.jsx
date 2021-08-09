@@ -59,12 +59,12 @@ const DonutChart = ({ data, message }) => {
         fontFamily: "'Jost'",
         fontSize: "20px",
         fontWeight: 600,
-        lineHeight: "120%",
+        lineHeight: "normal",
         textAlign: "center",
     };
     const labelsConfig = {
         width: 100,
-        height: 70,
+        height: 90,
     };
     const groupLabelsConfig = {
         width: 100,
@@ -151,30 +151,34 @@ const DonutChart = ({ data, message }) => {
     }
 
     function _processData() {
-        const chartData = data.reduce((acc, group) => {
-            const info = Object.keys(group.attributes).map((key) => ({
-                group: group.groupName,
-                name: key,
-                value: group.attributes[key],
-            }));
+        if (data) {
+            const chartData = data.reduce((acc, group) => {
+                const info = Object.keys(group.attributes).map((key) => ({
+                    group: group.groupName,
+                    name: key,
+                    value: group.attributes[key],
+                }));
 
-            return [...acc, ...info];
-        }, []);
-        const groupsInfo = data.map((group) => {
-            const totalValue = Object.values(group.attributes).reduce(
-                (acc, current) => acc + current,
-                0
-            );
+                return [...acc, ...info];
+            }, []);
+            const groupsInfo = data.map((group) => {
+                const totalValue = Object.values(group.attributes).reduce(
+                    (acc, current) => acc + current,
+                    0
+                );
 
-            return {
-                name: group.groupName,
-                value: totalValue,
-                color: group.color,
-                labelCorrection: group.groupLabelCorrection,
-            };
-        });
+                return {
+                    name: group.groupName,
+                    value: totalValue,
+                    color: group.color,
+                    labelCorrection: group.groupLabelCorrection,
+                };
+            });
 
-        return { chartData, groupsInfo };
+            return { chartData, groupsInfo };
+        } else {
+            return { chartData: [], groupsInfo: [] };
+        }
     }
 
     function _calculateArcsArea(chartData, groupsInfo, screenSize) {
@@ -289,7 +293,7 @@ const DonutChart = ({ data, message }) => {
     }
 
     function _drawLabels(labels) {
-        labels
+        const textSpaces = labels
             .append("xhtml:div")
             .style("display", "flex")
             .style("justify-content", "center")
@@ -298,16 +302,27 @@ const DonutChart = ({ data, message }) => {
             .style("height", `${labelsConfig.height}px`)
             .append("xhtml:span")
             .merge(labels)
-            .transition()
-            .duration(1000)
+            .style("background-color", "transparent");
+
+        textSpaces
+            .append("xhtml:p")
             .style("color", darkColor)
             .style("text-align", fontConfig.textAlign)
             .style("font-size", fontConfig.fontSize)
             .style("font-family", fontConfig.fontFamily)
             .style("line-height", fontConfig.lineHeight)
             .style("font-weight", fontConfig.fontWeight)
-            .style("background-color", "transparent")
-            .text((d) => `${d.data.name}: ${d.data.value}`);
+            .text((d) => `${d.data.name}:`);
+        textSpaces
+            .append("xhtml:p")
+            .style("color", darkColor)
+            .style("text-align", fontConfig.textAlign)
+            .style("font-size", fontConfig.fontSize)
+            .style("font-family", fontConfig.fontFamily)
+            .style("line-height", fontConfig.lineHeight)
+            .style("font-weight", fontConfig.fontWeight)
+            .style("line-height", "0px")
+            .text((d) => d.data.value);
     }
 
     function _getsIdName(d) {
@@ -492,7 +507,7 @@ const DonutChart = ({ data, message }) => {
                 const halfPoint = Math.ceil(list.length / 2);
                 const coordY =
                     screenSize === screenSizes.smallScreen
-                        ? -half + labelsConfig.height
+                        ? -half + (labelsConfig.height - 30)
                         : -half;
                 const coordX = labelsConfig.width * (index - halfPoint);
                 return `translate(${coordX}, ${coordY})`;
@@ -526,7 +541,7 @@ const DonutChart = ({ data, message }) => {
                 const halfPoint = Math.ceil(list.length / 2);
                 const coordY =
                     screenSize === screenSizes.smallScreen
-                        ? half - labelsConfig.height * 2
+                        ? half - labelsConfig.height * 2 + 30
                         : half - labelsConfig.height;
                 const coordX = labelsConfig.width * (index - halfPoint);
 

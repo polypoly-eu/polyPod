@@ -4,9 +4,8 @@ import DataStory from "../../components/dataStory/dataStory.jsx";
 import Introduction from "../../components/clusterStories/messengers/introduction.jsx";
 import Summary from "../../components/clusterStories/messengers/summary.jsx";
 import Overview from "../../components/clusterStories/messengers/overview.jsx";
-import { SUMMARY_ANIMATIONS, DONUT_CHART } from "../../constants";
+import { SUMMARY_ANIMATIONS } from "../../constants";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
-import * as _ from "lodash";
 
 import "./messengerStory.css";
 
@@ -156,115 +155,6 @@ const MessengerStory = () => {
         }
     }
 
-    function _calculateOverviewData() {
-        const ownerFacebookTest = /.*[F,f]acebook.*/g;
-        const installs = [
-            {
-                groupName: DONUT_CHART.DEFAULT_GROUP,
-                color: DONUT_CHART.DEFAULT_COLOR,
-                groupLabelCorrection: {
-                    x: 1,
-                    y: 1,
-                },
-                attributes: Object.keys(products).reduce(
-                    (acc, key) => ({
-                        ...acc,
-                        [key]:
-                            Math.round(
-                                (products[key].totalInstalls / 1000000) * 100
-                            ) / 100,
-                    }),
-                    {}
-                ),
-            },
-        ];
-
-        const activeUsers = [
-            {
-                groupName: DONUT_CHART.DEFAULT_GROUP,
-                color: DONUT_CHART.DEFAULT_COLOR,
-                groupLabelCorrection: {
-                    x: 1,
-                    y: 1,
-                },
-                attributes: Object.keys(products).reduce(
-                    (acc, key) => ({
-                        ...acc,
-                        [key]:
-                            Math.round(
-                                (products[key].currentActiveUsers / 1000000) *
-                                    100
-                            ) / 100,
-                    }),
-                    {}
-                ),
-            },
-        ];
-
-        const [facebookProducts, noFacebookProducts] = Object.keys(
-            products
-        ).reduce(
-            (acc, key) => {
-                let [accFacebook, accNoFacebook] = acc;
-                if (
-                    products[key].productOwner.find((owner) =>
-                        ownerFacebookTest.test(owner)
-                    )
-                ) {
-                    accFacebook[key] = _.cloneDeep(products[key]);
-                } else {
-                    accNoFacebook[key] = _.cloneDeep(products[key]);
-                }
-
-                return [accFacebook, accNoFacebook];
-            },
-            [{}, {}]
-        );
-
-        const partOf = [
-            {
-                groupName: DONUT_CHART.DEFAULT_GROUP,
-                color: DONUT_CHART.DEFAULT_COLOR,
-                groupLabelCorrection: {
-                    x: 1,
-                    y: 1,
-                },
-                attributes: Object.keys(noFacebookProducts).reduce(
-                    (acc, key) => ({
-                        ...acc,
-                        [key]:
-                            Math.round(
-                                (products[key].currentActiveUsers / 1000000) *
-                                    100
-                            ) / 100,
-                    }),
-                    {}
-                ),
-            },
-            {
-                groupName: DONUT_CHART.FACEBOOK_GROUP,
-                color: DONUT_CHART.FACEBOOK_COLOR,
-                groupLabelCorrection: {
-                    x: 1,
-                    y: 1,
-                },
-                attributes: Object.keys(facebookProducts).reduce(
-                    (acc, key) => ({
-                        ...acc,
-                        [key]:
-                            Math.round(
-                                (products[key].currentActiveUsers / 1000000) *
-                                    100
-                            ) / 100,
-                    }),
-                    {}
-                ),
-            },
-        ];
-
-        return { installs, activeUsers, partOf };
-    }
-
     return (
         <DataStory
             progressBarColor="black"
@@ -286,7 +176,7 @@ const MessengerStory = () => {
                         animation={summaryAnimations}
                     ></Summary>
                     <Overview
-                        donutData={_calculateOverviewData()}
+                        products={products}
                         heightEvent={updateOverviewHeight}
                     ></Overview>
                 </div>
