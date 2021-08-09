@@ -101,6 +101,10 @@ export const ImporterProvider = ({ children }) => {
         }
     }
 
+    function addFile(file) {
+        storage.addFile(file);
+    }
+
     function updateImportStatus(newStatus) {
         changeNavigationState({ importStatus: newStatus });
         writeImportStatus(newStatus);
@@ -134,6 +138,7 @@ export const ImporterProvider = ({ children }) => {
                 handleBack,
                 importSteps,
                 updateImportStatus,
+                addFile,
             }}
         >
             {children}

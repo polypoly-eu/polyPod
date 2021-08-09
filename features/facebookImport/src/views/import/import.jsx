@@ -58,8 +58,10 @@ const isSectionOpened = (section, importStatus, importSteps) => {
 const ImportExplanationExpandable = ({
     importSteps,
     importStatus,
-    updateImportStatus,
-    handleImportFile,
+    onUpdateImportStatus,
+    selectedFile,
+    selectFile,
+    onImportFile,
 }) => {
     const importRefs = {
         request: useRef(),
@@ -69,6 +71,7 @@ const ImportExplanationExpandable = ({
     };
 
     const expandableRef = useRef();
+    const fileInputRef = useRef();
 
     const refPoint = importRefs[importStatus]?.current;
     if (refPoint)
@@ -76,6 +79,10 @@ const ImportExplanationExpandable = ({
             behavior: "smooth",
             block: "start",
         });
+
+    const handleFileSelected = (e) => {
+        selectFile(e.target.files[0]);
+    };
 
     const bodyContent = {
         request: (
@@ -95,7 +102,10 @@ const ImportExplanationExpandable = ({
                     alt="select-json"
                 />
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
-                <button className="btn-highlighted">
+                <button
+                    className="btn-highlighted"
+                    onClick={() => onUpdateImportStatus("download")}
+                >
                     {i18n.t("import:request.button")}
                 </button>
             </>
@@ -113,7 +123,10 @@ const ImportExplanationExpandable = ({
                 <button className="btn-highlighted">
                     {i18n.t("import:download.button.1")}
                 </button>
-                <button className="btn-secondary">
+                <button
+                    className="btn-secondary"
+                    onClick={() => onUpdateImportStatus("import")}
+                >
                     {i18n.t("import:download.button.2")}
                 </button>
             </>
@@ -122,12 +135,37 @@ const ImportExplanationExpandable = ({
             <>
                 <p>{i18n.t("import:import")}</p>
                 <div className="separator"></div>
-                {importedFile ? (
-                    <h5>facebook-[user-name].zip</h5>
+                {selectedFile ? (
+                    <h5>{selectedFile.name}</h5>
                 ) : (
                     <h5>{i18n.t("import:import.none.chosen")}</h5>
                 )}
                 <InfoBox textContent={i18n.t("import:import.info")} />
+                <button
+                    className={`btn-secondary ${
+                        selectedFile ? "deactivated" : ""
+                    }`}
+                    onClick={(e) => {
+                        fileInputRef.current.click();
+                    }}
+                >
+                    {i18n.t("import:import.button.1")}
+                </button>
+                <button
+                    className={`btn-highlighted ${
+                        selectedFile ? "" : "deactivated"
+                    }`}
+                    onClick={onImportFile}
+                >
+                    {i18n.t("import:import.button.2")}
+                </button>
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    id="thefile"
+                    onChange={handleFileSelected}
+                />
             </>
         ),
         explore: (
@@ -150,14 +188,11 @@ const ImportExplanationExpandable = ({
             </div>
             <ScrollButton scrollRef={expandableRef} />
             {Object.values(importSections).map((section, index) => (
-                <div
-                    key={index}
-                    className={`section ${section}`}
-                    ref={importRefs[section]}
-                >
+                <div key={index} className={`section ${section}`}>
                     <div
-                        onClick={() => updateImportStatus(section)}
+                        onClick={() => onUpdateImportStatus(section)}
                         className="head"
+                        ref={importRefs[section]}
                     >
                         <div className={`number ${section}`}>{index + 1}</div>
                         <div
@@ -180,16 +215,26 @@ const ImportExplanationExpandable = ({
 };
 
 const Import = () => {
-    const { importSteps, navigationState, updateImportStatus } =
+    const { importSteps, navigationState, updateImportStatus, addFile } =
         useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
+
+    const [selectedFile, selectFile] = useState(null);
+
+    const handleImportFile = () => {
+        addFile(selectedFile);
+    };
+
     return (
         <div className="import-view">
             <ProgressBar onUpdateImportStatus={updateImportStatus} />
             <ImportExplanationExpandable
                 importSteps={importSteps}
                 importStatus={importStatus}
-                updateImportStatus={updateImportStatus}
+                selectedFile={selectedFile}
+                selectFile={selectFile}
+                onImportFile={handleImportFile}
+                onUpdateImportStatus={updateImportStatus}
             />
         </div>
     );

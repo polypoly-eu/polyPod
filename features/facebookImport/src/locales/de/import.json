@@ -25,6 +25,8 @@
     "import.info": "Die Datei die Sie importieren beinhaltet Ihre Facebook-Informationen bis zum jetzigen Zeitpunkt. Um Ihre Daten in der Zukunft zu aktualisieren, fordern Sie einfach eine neue Version an.",
     "import.none.chosen": "Keine Datei ausgewählt",
     "import.delete": "Entfernen",
+    "import.button.1": "Datei auswählen",
+    "import.button.2": "Importieren",
     "explore.1": "Glückwunsch! Sie haben erfolgreich den ersten Schritt getan, sich die Kontrolle über Ihre Daten zurückzuholen!",
     "explore.2": "Ihre Facebook-Daten wurden in Ihren polyPod importiert. Jetzt können Sie diese erkunden und sehen, was Facebook wirklich über Sie weiß.",
     "explore.button": "Entdecke deine Daten"
