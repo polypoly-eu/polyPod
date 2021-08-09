@@ -59,6 +59,7 @@ const ImportExplanationExpandable = ({
     importSteps,
     importStatus,
     updateImportStatus,
+    handleImportFile,
 }) => {
     const importRefs = {
         request: useRef(),
@@ -99,9 +100,45 @@ const ImportExplanationExpandable = ({
                 </button>
             </>
         ),
-        download: "",
-        import: "",
-        explore: "",
+        download: (
+            <>
+                <p>{i18n.t("import:download.1")}</p>
+                <InfoBox textContent={i18n.t("import:download.info")} />
+                <div className="separator"></div>
+                <h4>{i18n.t("import:how.it.works")}</h4>
+                <img src="./images/letter.svg" alt="facebook" />
+                <p>{i18n.t("import:download.2")}</p>
+                <img src="./images/download.svg" alt="document" />
+                <p>{i18n.t("import:download.3")}</p>
+                <button className="btn-highlighted">
+                    {i18n.t("import:download.button.1")}
+                </button>
+                <button className="btn-secondary">
+                    {i18n.t("import:download.button.2")}
+                </button>
+            </>
+        ),
+        import: (
+            <>
+                <p>{i18n.t("import:import")}</p>
+                <div className="separator"></div>
+                {importedFile ? (
+                    <h5>facebook-[user-name].zip</h5>
+                ) : (
+                    <h5>{i18n.t("import:import.none.chosen")}</h5>
+                )}
+                <InfoBox textContent={i18n.t("import:import.info")} />
+            </>
+        ),
+        explore: (
+            <>
+                <p>{i18n.t("import:explore.1")}</p>
+                <p>{i18n.t("import:explore.2")}</p>
+                <button className="btn-highlighted">
+                    {i18n.t("import:explore.button")}
+                </button>
+            </>
+        ),
     };
 
     return (

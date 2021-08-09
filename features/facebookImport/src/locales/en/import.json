@@ -23,8 +23,9 @@
     "download.button.2": "Already done?",
     "import": "After you have downloaded the file with your data to your phone, you can import it into your polyPod.",
     "import.info": "The file you import contains your Facebook information up to the present time. To update your data in the future, simply request a new version.",
-    "import.chosen": "Chosen file",
+    "import.none.chosen": "No chosen file",
     "import.delete": "Delete",
     "explore.1": "Congratulations! You have successfully taken the first step in taking back control of your data!",
-    "explore.2": "Your Facebook data has been imported into your polyPod. Now you can explore it and see what Facebook really knows about you."
+    "explore.2": "Your Facebook data has been imported into your polyPod. Now you can explore it and see what Facebook really knows about you.",
+    "explore.button": "Explore your data"
 }

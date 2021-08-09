@@ -92,3 +92,7 @@ button:focus {
     box-sizing: border-box;
     background-color: transparent;
 }
+
+.deactivated {
+    opacity: 0.5;
+}
