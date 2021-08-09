@@ -23,7 +23,7 @@
 .stories-preview .preview-btn-area {
     display: block;
     max-width: var(--max-width);
-    margin: 0 8px auto auto;
+    margin: 0 0 auto auto;
     padding: 20px 8px 32px 0px;
     position: fixed;
     bottom: 0;
