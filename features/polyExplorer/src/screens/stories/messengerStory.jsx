@@ -145,11 +145,11 @@ const MessengerStory = () => {
             scrollEvent={scrollStory}
         >
             <div className="messenger-story">
-                <div className="messenger-parts">
+                <div className="messenger-parts scrollytelling-marks">
                     {buildScrollyTellingMarksIntroduction()}
                     {buildScrollyTellingMarksSummary()}
                 </div>
-                <div className="messenger-parts">
+                <div className="messenger-parts story-content">
                     <Introduction
                         heightEvent={updateIntroHeight}
                     ></Introduction>
