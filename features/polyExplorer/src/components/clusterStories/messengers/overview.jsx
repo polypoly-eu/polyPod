@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import i18n from "../../../i18n";
 import DonutChart from "../../dataViz/donutChar.jsx";
+import { DONUT_CHART } from "../../../constants";
+import * as _ from "lodash";
 
 import "./overview.css";
 
 const i18nHeader = "clusterMessengerStory";
 
-const Overview = ({ donutData, heightEvent }) => {
+const Overview = ({ products, heightEvent }) => {
     const wholeOverview = useRef();
     const messageInstalls = "overview.donut.installs.message";
     const messageUsers = "overview.donut.users.message";
@@ -16,34 +18,198 @@ const Overview = ({ donutData, heightEvent }) => {
         donutPartOf: "donutPartOf",
     };
 
-    const [currentDonutData, updateCurrentDataDonut] = useState(
-        donutData.installs
-    );
+    const [donutData, updateDonutData] = useState();
+    const [currentDonutData, updateCurrentDataDonut] = useState();
     const [currentDonutMessage, updateCurrentDonutMessage] = useState(
         messageInstalls
     );
 
-    function _changeDonutData(donutType) {
+    const graphMagnitud = 1000000;
+    const decimalsNumber = 2;
+
+    function _changeDonutData(donutType, donutInfo) {
         switch (donutType) {
             case typeDonutsChar.donutInstalls:
-                updateCurrentDataDonut(donutData.installs);
+                updateCurrentDataDonut(donutInfo.installs);
                 updateCurrentDonutMessage(messageInstalls);
                 break;
             case typeDonutsChar.donutUsers:
-                updateCurrentDataDonut(donutData.activeUsers);
+                updateCurrentDataDonut(donutInfo.activeUsers);
                 updateCurrentDonutMessage(messageUsers);
                 break;
             case typeDonutsChar.donutPartOf:
-                updateCurrentDataDonut(donutData.partOf);
+                updateCurrentDataDonut(donutInfo.partOf);
                 updateCurrentDonutMessage(messageUsers);
                 break;
         }
     }
 
+    function buildDonutData() {
+        const ownerFacebookTest = /.*[F,f]acebook.*/g;
+        const [facebookProducts, noFacebookProducts] = Object.keys(
+            products
+        ).reduce(
+            (acc, key) => {
+                let [accFacebook, accNoFacebook] = acc;
+                if (
+                    products[key].productOwner.find((owner) =>
+                        ownerFacebookTest.test(owner)
+                    )
+                ) {
+                    accFacebook[key] = _.cloneDeep(products[key]);
+                } else {
+                    accNoFacebook[key] = _.cloneDeep(products[key]);
+                }
+
+                return [accFacebook, accNoFacebook];
+            },
+            [{}, {}]
+        );
+
+        const installs = [
+            {
+                groupName: DONUT_CHART.DEFAULT_GROUP,
+                color: DONUT_CHART.DEFAULT_COLOR,
+                groupLabelCorrection: {
+                    x: 1,
+                    y: 1,
+                },
+                attributes: Object.keys(noFacebookProducts).reduce(
+                    (acc, key) => ({
+                        ...acc,
+                        [key]:
+                            Math.round(
+                                (products[key].totalInstalls / graphMagnitud) *
+                                    Math.pow(10, decimalsNumber)
+                            ) / Math.pow(10, decimalsNumber),
+                    }),
+                    {}
+                ),
+            },
+            {
+                groupName: DONUT_CHART.DEFAULT_GROUP,
+                color: DONUT_CHART.DEFAULT_COLOR,
+                groupLabelCorrection: {
+                    x: 1,
+                    y: 1,
+                },
+                attributes: Object.keys(facebookProducts).reduce(
+                    (acc, key) => ({
+                        ...acc,
+                        [key]:
+                            Math.round(
+                                (products[key].totalInstalls / graphMagnitud) *
+                                    Math.pow(10, decimalsNumber)
+                            ) / Math.pow(10, decimalsNumber),
+                    }),
+                    {}
+                ),
+            },
+        ];
+
+        const activeUsers = [
+            {
+                groupName: DONUT_CHART.DEFAULT_GROUP,
+                color: DONUT_CHART.DEFAULT_COLOR,
+                groupLabelCorrection: {
+                    x: 1,
+                    y: 1,
+                },
+                attributes: Object.keys(noFacebookProducts).reduce(
+                    (acc, key) => ({
+                        ...acc,
+                        [key]:
+                            Math.round(
+                                (products[key].currentActiveUsers /
+                                    graphMagnitud) *
+                                    Math.pow(10, decimalsNumber)
+                            ) / Math.pow(10, decimalsNumber),
+                    }),
+                    {}
+                ),
+            },
+            {
+                groupName: DONUT_CHART.DEFAULT_GROUP,
+                color: DONUT_CHART.DEFAULT_COLOR,
+                groupLabelCorrection: {
+                    x: 1,
+                    y: 1,
+                },
+                attributes: Object.keys(facebookProducts).reduce(
+                    (acc, key) => ({
+                        ...acc,
+                        [key]:
+                            Math.round(
+                                (products[key].currentActiveUsers /
+                                    graphMagnitud) *
+                                    Math.pow(10, decimalsNumber)
+                            ) / Math.pow(10, decimalsNumber),
+                    }),
+                    {}
+                ),
+            },
+        ];
+
+        const partOf = [
+            {
+                groupName: DONUT_CHART.DEFAULT_GROUP,
+                color: DONUT_CHART.DEFAULT_COLOR,
+                groupLabelCorrection: {
+                    x: 1,
+                    y: 1,
+                },
+                attributes: Object.keys(noFacebookProducts).reduce(
+                    (acc, key) => ({
+                        ...acc,
+                        [key]:
+                            Math.round(
+                                (products[key].currentActiveUsers /
+                                    graphMagnitud) *
+                                    Math.pow(10, decimalsNumber)
+                            ) / Math.pow(10, decimalsNumber),
+                    }),
+                    {}
+                ),
+            },
+            {
+                groupName: DONUT_CHART.FACEBOOK_GROUP,
+                color: DONUT_CHART.FACEBOOK_COLOR,
+                groupLabelCorrection: {
+                    x: 1,
+                    y: 1,
+                },
+                attributes: Object.keys(facebookProducts).reduce(
+                    (acc, key) => ({
+                        ...acc,
+                        [key]:
+                            Math.round(
+                                (products[key].currentActiveUsers /
+                                    graphMagnitud) *
+                                    Math.pow(10, decimalsNumber)
+                            ) / Math.pow(10, decimalsNumber),
+                    }),
+                    {}
+                ),
+            },
+        ];
+
+        return { installs, activeUsers, partOf };
+    }
+
     useEffect(() => {
         const { height } = wholeOverview.current.getBoundingClientRect();
+        let donutGraphData;
+
         heightEvent(height);
-    }, [donutData]);
+        if (!donutData) {
+            donutGraphData = buildDonutData();
+            updateDonutData(donutGraphData);
+        } else {
+            donutGraphData = donutData;
+        }
+
+        _changeDonutData(typeDonutsChar.donutInstalls, donutGraphData);
+    }, [products]);
 
     return (
         <div className="messenger-overview" ref={wholeOverview}>
@@ -57,7 +223,10 @@ const Overview = ({ donutData, heightEvent }) => {
                 <button
                     type="button"
                     onClick={() => {
-                        _changeDonutData(typeDonutsChar.donutInstalls);
+                        _changeDonutData(
+                            typeDonutsChar.donutInstalls,
+                            donutData
+                        );
                     }}
                 >
                     Installs
@@ -65,7 +234,7 @@ const Overview = ({ donutData, heightEvent }) => {
                 <button
                     type="button"
                     onClick={() => {
-                        _changeDonutData(typeDonutsChar.donutUsers);
+                        _changeDonutData(typeDonutsChar.donutUsers, donutData);
                     }}
                 >
                     Users
@@ -73,7 +242,7 @@ const Overview = ({ donutData, heightEvent }) => {
                 <button
                     type="button"
                     onClick={() => {
-                        _changeDonutData(typeDonutsChar.donutPartOf);
+                        _changeDonutData(typeDonutsChar.donutPartOf, donutData);
                     }}
                 >
                     Part of
