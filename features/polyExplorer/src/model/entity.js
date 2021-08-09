@@ -5,6 +5,7 @@ const dataProperties = [
     "location",
     "annualRevenues",
     "description",
+    "clusters",
 ];
 const dataArrayProperties = ["dataRecipients"];
 
@@ -33,6 +34,11 @@ export class Entity {
                 },
             });
         });
+    }
+
+    //Overwritten in Company, yet all entities need this for the matcher-comparison in the apply-function
+    industryCategoryName() {
+        return null;
     }
 
     get i18n() {

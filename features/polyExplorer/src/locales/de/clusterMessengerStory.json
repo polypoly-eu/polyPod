@@ -13,5 +13,8 @@
   "summary.paragraph.four.strong": "Drei beliebte Messenger-Apps gehören zu Facebook.",
   "summary.paragraph.four": "Die Apps teilen Benutzerdaten nur mit maximal (5) Unternehmen, aber die Muttergesellschaft kann dieselben Daten mit bis zu (5000) Unternehmen teilen.",
   "overview.donut.installs.message": "Android-App-Installationen",
-  "overview.donut.users.message": "Monatlich aktive Nutzer in Millionen"
+  "overview.donut.users.message": "Monatlich aktive Nutzer in Millionen",
+  "overview.tab.installs": "Installationen",
+  "overview.tab.users": "Benutzer",
+  "overview.tab.partof": "Teil von"
 }
