@@ -31,8 +31,16 @@ const InfoBox = ({ textContent }) => {
     );
 };
 
-const ScrollButton = () => {
-    const scrollingPosition = 20;
+const ScrollButton = ({ scrollRef }) => {
+    const [scrollingPosition, setScrollingPosition] = useState(0);
+    if (scrollRef.current)
+        scrollRef.current.addEventListener("scroll", (e) =>
+            setScrollingPosition(e.target.scrollTop)
+        );
+    else
+        throw TypeError(
+            "ScrollButton: Bad input ref. Has no Attribute current"
+        );
     return scrollingPosition < 100 ? (
         <div className="scroll-button">
             <img src="./images/scroll-down.svg" />{" "}
@@ -63,6 +71,8 @@ const ImportExplanationExpandable = ({
         explore: useRef(),
     };
 
+    const expandableRef = useRef();
+
     const refPoint = importRefs[importStatus]?.current;
     if (refPoint)
         refPoint.scrollIntoView({
@@ -70,14 +80,21 @@ const ImportExplanationExpandable = ({
             block: "start",
         });
 
+    const bodyContent = {
+        request: "Lorem ipsum dolor sit amet, consetetur sadipscing",
+        download: "",
+        import: "",
+        explore: "",
+    };
+
     return (
-        <div className="explanation-expandable">
+        <div ref={expandableRef} className="explanation-expandable">
             <div className="intro">
                 <p>{i18n.t("import:intro.text.1")}</p>
                 <p className="bold">{i18n.t("import:intro.text.2")}</p>
                 <InfoBox textContent={i18n.t("import:info.1")} />
             </div>
-            <ScrollButton />
+            <ScrollButton scrollRef={expandableRef} />
             {Object.values(importSections).map((section, index) => (
                 <div
                     key={index}
@@ -99,16 +116,7 @@ const ImportExplanationExpandable = ({
                     {isSectionOpened(section, importStatus, importSteps) ? (
                         <div className="body">
                             <div className="separator" />
-                            Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed diam nonumy eirmod tempor invidunt ut
-                            labore et dolore magna aliquyam erat, sed diam
-                            voluptua. At vero eos et accusam et justo duo
-                            dolores et ea rebum. Stet clita kasd gubergren, no
-                            sea takimata sanctus est Lorem ipsum dolor sit amet.
-                            Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed diam nonumy eirmod tempor invidunt ut
-                            labore et dolore magna aliquyam erat, sed diam
-                            voluptua.
+                            {bodyContent[section]}
                         </div>
                     ) : null}
                 </div>
