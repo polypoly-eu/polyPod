@@ -6,7 +6,15 @@ import "./import.css";
 
 const importSections = ["request", "download", "import", "explore"];
 
-const ProgressBar = ({ onUpdateImportStatus }) => {
+const ProgressBar = ({ onUpdateImportStatus, importStatus }) => {
+    function checkForIcon(section) {
+        if (
+            importSections.indexOf(importStatus) >
+            importSections.indexOf(section)
+        )
+            return <img src={`./images/${section}-done.svg`} />;
+    }
+
     return (
         <div className="progress-bar">
             {importSections.map((section, index) => (
@@ -15,7 +23,9 @@ const ProgressBar = ({ onUpdateImportStatus }) => {
                     key={index}
                     className={`section`}
                 >
-                    <div className={`line ${section}-progress`}></div>
+                    <div className={`line ${section}-progress`}>
+                        {checkForIcon(section)}
+                    </div>
                 </div>
             ))}
         </div>
@@ -227,7 +237,10 @@ const Import = () => {
 
     return (
         <div className="import-view">
-            <ProgressBar onUpdateImportStatus={updateImportStatus} />
+            <ProgressBar
+                onUpdateImportStatus={updateImportStatus}
+                importStatus={importStatus}
+            />
             <ImportExplanationExpandable
                 importSteps={importSteps}
                 importStatus={importStatus}

@@ -8,6 +8,9 @@
     box-sizing: border-box;
 }
 
+.import-view .progress-bar .section .line img {
+}
+
 .import-view .progress-bar {
     width: 100%;
     max-width: var(--max-width);
@@ -30,22 +33,25 @@
 .import-view .progress-bar .section .line {
     width: 100%;
     height: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .import-view .progress-bar .request-progress {
-    background-color: var(--color-indigo-50);
+    background-color: var(--color-indigo-300);
 }
 
 .import-view .progress-bar .download-progress {
-    background-color: var(--color-indigo-200);
+    background-color: var(--color-indigo-500);
 }
 
 .import-view .progress-bar .import-progress {
-    background-color: var(--color-indigo-400);
+    background-color: var(--color-indigo-700);
 }
 
 .import-view .progress-bar .explore-progress {
-    background-color: var(--color-indigo-500);
+    background-color: var(--color-indigo-950);
 }
 
 .import-view .explanation-expandable {
