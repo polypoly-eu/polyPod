@@ -1,6 +1,5 @@
 .story .content {
     color: var(--color-text-dark);
-    padding: 0px 16px;
     overflow: hidden scroll;
     scroll-behavior: smooth;
 }
@@ -23,7 +22,4 @@
 
 .story .content::-webkit-scrollbar-track {
     margin-top: 8px;
-}
-.story.messenger {
-    background: linear-gradient(180deg, var(--color-primary-messenger-story) 0%, var(--color-secondary-messenger-story) 50%);
 }

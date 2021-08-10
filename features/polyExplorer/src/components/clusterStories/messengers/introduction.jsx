@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import i18n from "../../../i18n";
 import { StoryParagraph } from "./storyParagraph";
+import { ClusterSections } from "../clusterSections";
 
 import "./introduction.css";
 
@@ -33,7 +34,7 @@ const Introduction = ({ heightEvent }) => {
         heightEvent(height);
     }, []);
     return (
-        <div className="messenger-intro" ref={wholeIntro}>
+        <ClusterSections as="div" className="messenger-intro" ref={wholeIntro}>
             <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
             <StoryParagraph as="p" className="one">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
@@ -49,7 +50,7 @@ const Introduction = ({ heightEvent }) => {
             <StoryParagraph as="ul" className="messenger-list upper">
                 {_getBulletsMessengerApps()}
             </StoryParagraph>
-        </div>
+        </ClusterSections>
     );
 };
 
