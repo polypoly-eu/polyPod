@@ -3,6 +3,7 @@ import { DONUT_CHART } from "../../constants";
 import * as d3 from "d3";
 
 const DonutChart = ({ data, message }) => {
+    // Beginning of the constants section
     const svgCanvas = useRef();
     const screenSizes = {
         smallScreen: "smallScreen",
@@ -68,7 +69,7 @@ const DonutChart = ({ data, message }) => {
     };
     const groupLabelsConfig = {
         width: 100,
-        height: 50,
+        height: 90,
     };
 
     const sections = {
@@ -78,6 +79,7 @@ const DonutChart = ({ data, message }) => {
         left: "left",
     };
     const lineCorrection = 1.2;
+    // End of the constants section
 
     function _distrubuteLabels(arcs, labelsArc, screenSize) {
         const { outerRadius } = _getMesures(screenSize);

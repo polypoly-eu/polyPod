@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import i18n from "../../../i18n";
-import DonutChart from "../../dataViz/donutChar.jsx";
+import DonutChart from "../../dataViz/donutChart.jsx";
 import { DONUT_CHART } from "../../../constants";
 import * as _ from "lodash";
 
@@ -24,7 +24,7 @@ const Overview = ({ products, heightEvent }) => {
         messageInstalls
     );
 
-    const graphMagnitud = 1000000;
+    const graphMagnitude = 1000000;
     const decimalsNumber = 2;
 
     function _changeDonutData(donutType, donutInfo) {
@@ -79,7 +79,7 @@ const Overview = ({ products, heightEvent }) => {
                         ...acc,
                         [key]:
                             Math.round(
-                                (products[key].totalInstalls / graphMagnitud) *
+                                (products[key].totalInstalls / graphMagnitude) *
                                     Math.pow(10, decimalsNumber)
                             ) / Math.pow(10, decimalsNumber),
                     }),
@@ -98,7 +98,7 @@ const Overview = ({ products, heightEvent }) => {
                         ...acc,
                         [key]:
                             Math.round(
-                                (products[key].totalInstalls / graphMagnitud) *
+                                (products[key].totalInstalls / graphMagnitude) *
                                     Math.pow(10, decimalsNumber)
                             ) / Math.pow(10, decimalsNumber),
                     }),
@@ -121,7 +121,7 @@ const Overview = ({ products, heightEvent }) => {
                         [key]:
                             Math.round(
                                 (products[key].currentActiveUsers /
-                                    graphMagnitud) *
+                                    graphMagnitude) *
                                     Math.pow(10, decimalsNumber)
                             ) / Math.pow(10, decimalsNumber),
                     }),
@@ -141,7 +141,7 @@ const Overview = ({ products, heightEvent }) => {
                         [key]:
                             Math.round(
                                 (products[key].currentActiveUsers /
-                                    graphMagnitud) *
+                                    graphMagnitude) *
                                     Math.pow(10, decimalsNumber)
                             ) / Math.pow(10, decimalsNumber),
                     }),
@@ -164,7 +164,7 @@ const Overview = ({ products, heightEvent }) => {
                         [key]:
                             Math.round(
                                 (products[key].currentActiveUsers /
-                                    graphMagnitud) *
+                                    graphMagnitude) *
                                     Math.pow(10, decimalsNumber)
                             ) / Math.pow(10, decimalsNumber),
                     }),
@@ -184,7 +184,7 @@ const Overview = ({ products, heightEvent }) => {
                         [key]:
                             Math.round(
                                 (products[key].currentActiveUsers /
-                                    graphMagnitud) *
+                                    graphMagnitude) *
                                     Math.pow(10, decimalsNumber)
                             ) / Math.pow(10, decimalsNumber),
                     }),
