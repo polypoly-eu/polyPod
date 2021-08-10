@@ -1,25 +1,13 @@
-import React, { useState } from "react";
-import i18n from "../../i18n.js";
-import FakeTab from "../../components/clusterStories/fakeTab.jsx";
+import React from "react";
 import DataStory from "../../components/dataStory/dataStory.jsx";
+import LinesChart from "../../components/dataViz/linesChart.jsx";
 
 import "./exampleStory.css";
 
 const ExampleStory = () => {
-    const [overviewClickedTab, setOverviewClickedTab] = useState();
-
-    const onClickedOverviewTab = (id) => {
-        if (id === "1") {
-            setOverviewClickedTab("1");
-        }
-        if (id === "2") {
-            setOverviewClickedTab("2");
-        }
-        if (id === "3") {
-            setOverviewClickedTab("3");
-        }
+    const mockData = {
+        rangeDates: ["2015-01-01", "2021-01-01"],
     };
-
     const fakeEvent = () => {};
 
     return (
@@ -28,29 +16,7 @@ const ExampleStory = () => {
             className="example-story"
             scrollEvent={fakeEvent}
         >
-            <h3>Tab clicked: {overviewClickedTab}</h3>
-            <FakeTab onClickedTab={onClickedOverviewTab}>
-                <div
-                    label={i18n.t(
-                        "clusterMessengerStory:overview.tab.installs"
-                    )}
-                    tabId="1"
-                >
-                    1
-                </div>
-                <div
-                    label={i18n.t("clusterMessengerStory:overview.tab.users")}
-                    tabId="2"
-                >
-                    2
-                </div>
-                <div
-                    label={i18n.t("clusterMessengerStory:overview.tab.partof")}
-                    tabId="3"
-                >
-                    3
-                </div>
-            </FakeTab>
+            <LinesChart data={mockData}></LinesChart>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
