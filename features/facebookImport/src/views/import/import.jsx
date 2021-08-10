@@ -175,7 +175,7 @@ const ImportExplanationExpandable = ({
                     className={`btn-secondary ${
                         selectedFile ? "deactivated" : ""
                     }`}
-                    onClick={(e) => {
+                    onClick={() => {
                         fileInputRef.current.click();
                     }}
                 >
