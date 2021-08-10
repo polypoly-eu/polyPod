@@ -5,16 +5,21 @@ import "./linesChart.css";
 
 const LinesChart = ({ data }) => {
     const svgCanvas = useRef();
+    const semiDarkColor = "#8d9caf";
+    const yLabelsPosition = "-0.40em";
+    const correctionYAxisSize = 10;
+    const correctionYAxisLabels = 20;
     const screenSizes = {
         smallScreen: "smallScreen",
         normalScreen: "normalScreen",
         bigScreen: "bigScreen",
     };
+
     const canvasConfig = {
         [screenSizes.smallScreen]: {
             resolution: 300,
             rightMargin: 16,
-            leftMargin: 16,
+            leftMargin: 35,
             topMargin: 16,
             bottomMargin: 16,
         },
@@ -127,10 +132,70 @@ const LinesChart = ({ data }) => {
             .style("stroke-width", "1");
     }
 
+    function calculateYAxis(screenSize) {
+        const { resolution, topMargin, leftMargin, rightMargin } = canvasConfig[
+            screenSize
+        ];
+        const root = _getRoot(screenSize);
+        const listYTicks = [1];
+
+        let index = 1;
+        while (listYTicks[listYTicks.length - 1] < data.rangeY[1]) {
+            listYTicks.push(Math.pow(10, index++));
+        }
+
+        const y = d3
+            .scaleLinear()
+            .domain(data.rangeY)
+            .range([resolution - topMargin, 0]);
+
+        const yAxis = root
+            .append("g")
+            .attr("id", "y-axis")
+            .attr(
+                "transform",
+                `translate(${resolution - rightMargin}, ${topMargin})`
+            )
+            .call(
+                d3
+                    .axisLeft(y)
+                    .ticks(2)
+                    .tickSizeOuter(0)
+                    .tickSize(
+                        resolution -
+                            leftMargin -
+                            rightMargin +
+                            correctionYAxisSize
+                    )
+            );
+
+        yAxis
+            .selectAll(".tick")
+            .selectAll("line")
+            .attr("stroke", semiDarkColor);
+
+        yAxis
+            .selectAll(".tick")
+            .selectAll("text")
+            .attr("dy", yLabelsPosition)
+            .attr("x", function xCorrection() {
+                const currentX = Number(d3.select(this).attr("x"));
+                return currentX + correctionYAxisLabels;
+            });
+
+        d3.select(yAxis.selectAll(".tick").node()).style(
+            "visibility",
+            "hidden"
+        );
+
+        yAxis.select(".domain").style("visibility", "hidden");
+    }
+
     useEffect(() => {
         const innerWidth = window.innerWidth;
         const screenSize = calculateScreenSize(innerWidth);
         calculateXAxis(screenSize);
+        calculateYAxis(screenSize);
     }, []);
     return <div className="line-chart" ref={svgCanvas}></div>;
 };

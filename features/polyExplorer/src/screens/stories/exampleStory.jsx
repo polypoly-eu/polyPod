@@ -7,6 +7,7 @@ import "./exampleStory.css";
 const ExampleStory = () => {
     const mockData = {
         rangeDates: ["2015-01-01", "2021-01-01"],
+        rangeY: [0, 1000],
     };
     const fakeEvent = () => {};
 
