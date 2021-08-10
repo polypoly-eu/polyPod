@@ -1,5 +1,6 @@
 import { html } from "lit";
 import * as zip from "@zip.js/zip.js";
+import allStructure from "../static/allStructure";
 
 const subAnalyses = [
     class {
@@ -166,6 +167,72 @@ const subAnalyses = [
                 ${this._noDataFolderNames.map(
                     (entry) => html`<li>${entry}</li>`
                 )}
+            </ul>`;
+        }
+    },
+    class {
+        get title() {
+            return "Uknown JSON files";
+        }
+
+        get isForDataReport() {
+            return true;
+        }
+
+        async _relevantEntities(reader) {
+            const entries = await reader.getEntries();
+            const relevantEntries = entries.filter(
+                (each) =>
+                    !each.filename.includes(".DS_Store") &&
+                    !each.filename.includes("__MACOSX") &&
+                    !each.filename.includes("/files/") && // Remove user files
+                    each.filename.endsWith(".json")
+            );
+            return relevantEntries;
+        }
+
+        _anonymisePathSegment(pathSegment, isFileName, fullPath) {
+            let anonymizedSegment = pathSegment;
+
+            if (
+                fullPath.includes("messages") &&
+                /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(anonymizedSegment)
+            ) {
+                anonymizedSegment = "uniqueid_hash";
+            }
+
+            return anonymizedSegment;
+        }
+
+        _anonymiseEntityPath(entity) {
+            const fileName = entity.filename;
+            const nameParts = fileName.split("/").slice(1);
+
+            const anonymisedParts = nameParts.map((each) =>
+                this._anonymisePathSegment(each, false, fileName)
+            );
+            return anonymisedParts.join("/");
+        }
+
+        async parse({ reader }) {
+            this._missingEntryNames = [];
+            this.active = true;
+            if (!reader) return;
+
+            const relevantEntries = await this._relevantEntities(reader);
+            const anonymizedPaths = relevantEntries.map((each) =>
+                this._anonymiseEntityPath(each)
+            );
+
+            this._unknownFiles = anonymizedPaths.filter(
+                (each) => !allStructure.includes(each)
+            );
+            this.active = this._unknownFiles.length > 0;
+        }
+
+        render() {
+            return html`<ul>
+                ${this._unknownFiles.map((entry) => html`<li>${entry}</li>`)}
             </ul>`;
         }
     },
