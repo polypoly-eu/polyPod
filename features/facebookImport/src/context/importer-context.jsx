@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export const ImporterContext = React.createContext();
 
@@ -70,7 +70,7 @@ async function writeImportStatus(status) {
 export const ImporterProvider = ({ children }) => {
     const [navigationState, setNavigationState] = useState({
         importStatus:
-            files.length > 0 ? importSteps.explore : importSteps.request,
+            files.length > 0 ? importSteps.finished : importSteps.request,
     });
 
     const history = useHistory();

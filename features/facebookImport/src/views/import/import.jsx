@@ -72,6 +72,7 @@ const ImportExplanationExpandable = ({
     selectedFile,
     selectFile,
     onImportFile,
+    isFiles,
 }) => {
     const importRefs = {
         request: useRef(),
@@ -83,15 +84,22 @@ const ImportExplanationExpandable = ({
     const expandableRef = useRef();
     const fileInputRef = useRef();
 
-    const refPoint = importRefs[importStatus]?.current;
-    if (refPoint)
-        refPoint.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-        });
+    const handleScrollToSection = () => {
+        const refPoint = importRefs[importStatus]?.current;
+        if (refPoint)
+            refPoint.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+    };
 
     const handleFileSelected = (e) => {
         selectFile(e.target.files[0]);
+    };
+
+    const handleClearFile = () => {
+        selectFile(null);
+        fileInputRef.current.value = null;
     };
 
     const bodyContent = {
@@ -114,7 +122,7 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <button
                     className="btn-highlighted"
-                    onClick={() => onUpdateImportStatus("download")}
+                    onClick={() => onUpdateImportStatus(importSteps.download)}
                 >
                     {i18n.t("import:request.button")}
                 </button>
@@ -135,7 +143,7 @@ const ImportExplanationExpandable = ({
                 </button>
                 <button
                     className="btn-secondary"
-                    onClick={() => onUpdateImportStatus("import")}
+                    onClick={() => onUpdateImportStatus(importSteps.import)}
                 >
                     {i18n.t("import:download.button.2")}
                 </button>
@@ -145,11 +153,23 @@ const ImportExplanationExpandable = ({
             <>
                 <p>{i18n.t("import:import")}</p>
                 <div className="separator"></div>
-                {selectedFile ? (
-                    <h5>{selectedFile.name}</h5>
-                ) : (
-                    <h5>{i18n.t("import:import.none.chosen")}</h5>
-                )}
+                <div className="x-divider">
+                    {selectedFile ? (
+                        <>
+                            <h5>{selectedFile.name}</h5>
+                            <div className="align-right">
+                                <button
+                                    onClick={handleClearFile}
+                                    className="delete-button"
+                                >
+                                    {i18n.t("import:import.delete")}
+                                </button>
+                            </div>
+                        </>
+                    ) : (
+                        <h5>{i18n.t("import:import.none.chosen")}</h5>
+                    )}
+                </div>
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
                     className={`btn-secondary ${
@@ -182,7 +202,16 @@ const ImportExplanationExpandable = ({
             <>
                 <p>{i18n.t("import:explore.1")}</p>
                 <p>{i18n.t("import:explore.2")}</p>
-                <button className="btn-highlighted">
+                <button
+                    className={`btn-highlighted ${
+                        isFiles() ? null : "deactivated"
+                    }`}
+                    onClick={
+                        isFiles
+                            ? () => onUpdateImportStatus(importSteps.finished)
+                            : null
+                    }
+                >
                     {i18n.t("import:explore.button")}
                 </button>
             </>
@@ -190,7 +219,11 @@ const ImportExplanationExpandable = ({
     };
 
     return (
-        <div ref={expandableRef} className="explanation-expandable">
+        <div
+            ref={expandableRef}
+            onLoad={handleScrollToSection}
+            className="explanation-expandable"
+        >
             <div className="intro">
                 <p>{i18n.t("import:intro.text.1")}</p>
                 <p className="bold">{i18n.t("import:intro.text.2")}</p>
@@ -225,7 +258,7 @@ const ImportExplanationExpandable = ({
 };
 
 const Import = () => {
-    const { importSteps, navigationState, updateImportStatus, addFile } =
+    const { importSteps, navigationState, updateImportStatus, addFile, files } =
         useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
 
@@ -233,6 +266,11 @@ const Import = () => {
 
     const handleImportFile = () => {
         addFile(selectedFile);
+        updateImportStatus(importSteps.explore);
+    };
+
+    const isFiles = () => {
+        return files.length > 0 ? true : false;
     };
 
     return (
@@ -248,6 +286,7 @@ const Import = () => {
                 selectFile={selectFile}
                 onImportFile={handleImportFile}
                 onUpdateImportStatus={updateImportStatus}
+                isFiles={isFiles}
             />
         </div>
     );
