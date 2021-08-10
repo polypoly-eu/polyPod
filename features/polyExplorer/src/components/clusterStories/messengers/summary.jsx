@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import i18n from "../../../i18n";
 import { StoryParagraph } from "./storyParagraph";
 import { ClusterSections } from "../clusterSections";
+import SectionTitle from "../sectionTitle.jsx";
 import "./summary.css";
 
 const i18nHeader = "clusterMessengerStory";
@@ -103,13 +104,9 @@ const Summary = ({ animation, heightEvent }) => {
             <h1 className="title-summary">
                 {i18n.t(`${i18nHeader}:summary.title`)}
             </h1>
-            <div className="section-summary">
-                <div className="line"></div>
-                <h3 className="section-title">
-                    {i18n.t(`${i18nHeader}:summary.section`)}
-                </h3>
-                <div className="line"></div>
-            </div>
+            <SectionTitle
+                title={i18n.t(`${i18nHeader}:summary.section`)}
+            ></SectionTitle>
             <StoryParagraph as="div" className="introduction-summary">
                 {i18n.t(`${i18nHeader}:summary.paragraph.one`)}
             </StoryParagraph>
