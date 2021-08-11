@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import BarChart from "../../components/dataViz/barChart.jsx";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 import LinesChart from "../../components/dataViz/linesChart.jsx";
 import { BUBBLES_SPEECH_SIZES } from "../../constants";
@@ -322,6 +323,7 @@ const ExampleStory = () => {
             marks={allMarks}
         >
             <LinesChart data={mockData}></LinesChart>
+            <BarChart />
             <svg ref={svgCanvas}>
                 <OneMessagerBubblesChart
                     data={currentData}
@@ -391,6 +393,7 @@ const ExampleStory = () => {
                 invidunt ut labore et dolore magna aliquyam erat, sed diam
                 voluptua.
             </p>
+
         </DataStory>
     );
 };
