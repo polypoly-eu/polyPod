@@ -48,6 +48,10 @@ const LinesChart = ({ data }) => {
     //     };
     // }
 
+    function _getIdName(id) {
+        return id.replace(/\s/g, "_");
+    }
+
     function _calculateScaleX(screenSize) {
         const { resolution, leftMargin, rightMargin } = canvasConfig[
             screenSize
@@ -219,11 +223,11 @@ const LinesChart = ({ data }) => {
         const root = _getRoot(screenSize);
         const gradient = root
             .append("linearGradient")
-            .attr("id", groupName)
+            .attr("id", _getIdName(groupName))
             .attr("x1", "0%")
-            .attr("y1", "100%")
+            .attr("y1", "0%")
             .attr("x2", "0%")
-            .attr("y2", "0%");
+            .attr("y2", "100%");
 
         gradient
             .append("stop")
@@ -237,17 +241,19 @@ const LinesChart = ({ data }) => {
             .style("stop-opacity", 0);
     }
 
-    function drawLine(points, color, screenSize) {
+    function drawLine(points, color, groupName, screenSize) {
         const { leftMargin } = canvasConfig[screenSize];
         const root = _getRoot(screenSize);
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
 
-        root.append("path")
+        const path = root
+            .append("path")
             .datum(points)
             .attr("fill", "none")
             .attr("stroke", color)
             .attr("stroke-width", 2)
+            .attr("group", _getIdName(groupName))
             .attr(
                 "d",
                 d3
@@ -267,15 +273,37 @@ const LinesChart = ({ data }) => {
                         return point;
                     })
             );
+
+        path.node().addEventListener("click", onClickPath);
     }
 
     function drawLines(screenSize) {
         for (const group of data.groups) {
             createLinearGradient(group.color, group.groupName, screenSize);
             for (const line of group.lines) {
-                drawLine(line.points, group.color, screenSize);
+                drawLine(line.points, group.color, group.groupName, screenSize);
             }
         }
+    }
+
+    function deactivatePaths() {
+        const root = d3.select(svgCanvas.current).select("svg");
+        if (!root.empty()) {
+            root.selectAll("path").attr("fill", "none");
+        }
+    }
+
+    function deactivateOnClick(event) {
+        if (event.target.tagName !== "path") {
+            deactivatePaths();
+        }
+    }
+
+    function onClickPath(event) {
+        deactivatePaths();
+        const path = d3.select(event.target);
+        const gradientId = path.attr("group");
+        path.attr("fill", `url(#${gradientId})`);
     }
 
     useEffect(() => {
@@ -284,6 +312,15 @@ const LinesChart = ({ data }) => {
         calculateXAxis(screenSize);
         calculateYAxis(screenSize);
         drawLines(screenSize);
+        document.addEventListener("click", deactivateOnClick);
+
+        return () => {
+            const root = _getRoot(screenSize);
+            root.selectAll("path").each(function cleanEvents() {
+                this.removeEventListener("click", onClickPath);
+            });
+            document.removeEventListener("click", deactivateOnClick);
+        };
     }, []);
     return <div className="line-chart" ref={svgCanvas}></div>;
 };
