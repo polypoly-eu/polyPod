@@ -23,6 +23,12 @@ const ExampleStory = () => {
 
     const fakeEvent = () => {};
 
+    const data = [
+        { title: "Option A", value: 107 },
+        { title: "Option B", value: 31 },
+        { title: "Option C", value: 635 },
+    ];
+
     return (
         <DataStory
             progressBarColor="#3BA6FF"
@@ -52,7 +58,7 @@ const ExampleStory = () => {
                     3
                 </div>
             </FakeTab>
-            <BarChart />
+            <BarChart data={data} />
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
