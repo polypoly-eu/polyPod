@@ -7,7 +7,7 @@
 
 import * as RDF from "rdf-js";
 import type { Fetch } from "@polypoly-eu/fetch-spec";
-import { FS, PolyFile } from "./fs";
+import { FS } from "./fs";
 
 /**
  * A _matcher_ specifies a filter for querying the Pod store.
@@ -137,13 +137,13 @@ export interface PolyNav {
     /**
      * Ask the user to pick a file and import it
      *
-     * @return a PolyFile object.
+     * @return an ID of an imported file.
      */
-    importFile(targetFolder: string): Promise<PolyFile>;
+    importFile(): Promise<string>;
     /**
      * Remove a previously imported file
      */
-     removeFile(file: PolyFile): Promise<void>;
+     removeFile(fileId: string): Promise<void>;
 
 
 }

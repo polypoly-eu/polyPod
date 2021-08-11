@@ -19,7 +19,7 @@ class ImportView extends LitElement {
     }
 
     async _handleImport() {
-        const importResult = await this.pod.polyNav.importFile("fb_import");
+        const importResult = await this.pod.polyNav.importFile();
         if (!importResult) return;
 
         this.dispatchEvent(

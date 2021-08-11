@@ -11,7 +11,7 @@ import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
 import { Pod, PolyIn, PolyOut, PolyNav } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
-import { EncodingOptions, FS, Stats, PolyFile } from "./fs";
+import { EncodingOptions, FS, Stats } from "./fs";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -101,7 +101,7 @@ export class DefaultPod implements Pod {
                 else return fs.readFile(path, options);
             }
 
-            readdir(path: string): Promise<PolyFile[]> {
+            readdir(path: string): Promise<string[]> {
                 return fs.readdir(path);
             }
 
@@ -128,10 +128,10 @@ export class DefaultPod implements Pod {
             setTitle: async (title: string) => {
                 throw new Error("Not implemented");
             },
-            importFile: async (targetFolder: string) => {
+            importFile: async () => {
                 throw new Error("Not implemented");
             },
-            removeFile: async (file: PolyFile) => {
+            removeFile: async (fileId: string) => {
                 throw new Error("Not implemented");
             }
         };

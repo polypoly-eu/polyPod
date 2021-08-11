@@ -6,8 +6,7 @@ import {
     PolyNav,
     EncodingOptions,
     Stats,
-    Matcher,
-    PolyFile
+    Matcher
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -45,7 +44,7 @@ type PolyInEndpoint = ObjectEndpointSpec<{
 }>;
 
 type PolyOutEndpoint = ObjectEndpointSpec<{
-    readdir(path: string): ValueEndpointSpec<PolyFile[]>;
+    readdir(path: string): ValueEndpointSpec<string[]>;
     readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
@@ -61,8 +60,8 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
-    importFile(targetFolder: string): ValueEndpointSpec<PolyFile>;
-    removeFile(file: PolyFile): ValueEndpointSpec<void>;
+    importFile(): ValueEndpointSpec<string>;
+    removeFile(fileId: string): ValueEndpointSpec<void>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
@@ -105,16 +104,41 @@ class FetchResponse implements Response {
 
 class FileStats implements Stats {
     static of(stats: Stats): FileStats {
-        return new FileStats(stats.isFile(), stats.isDirectory());
+        return new FileStats(
+            stats.isFile(),
+            stats.isDirectory(),
+            stats.getCreationTime(),
+            stats.getSize(),
+            stats.getName(),
+            stats.getId()
+            );
     }
 
-    constructor(readonly file: boolean, readonly directory: boolean) {}
-
+    constructor(
+        readonly file: boolean,
+        readonly directory: boolean,
+        readonly time: string,
+        readonly size: number,
+        readonly name: string,
+        readonly id: string
+        ) {}
     isFile(): boolean {
         return this.file;
     }
     isDirectory(): boolean {
         return this.directory;
+    }
+    getCreationTime(): string {
+        return this.time;
+    }
+    getSize(): number {
+        return this.size;
+    }
+    getName(): string {
+        return this.name;
+    }
+    getId(): string {
+        return this.id;
     }
 }
 
@@ -126,7 +150,7 @@ export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/rdf.Literal": RDF.Literal,
     "@polypoly-eu/rdf.Variable": RDF.Variable,
     "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph,
-    "@polypoly-eu/rdf.Quad": RDF.Quad,
+    "@polypoly-eu/rdf.Quad": RDF.Quad
 };
 
 function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<any, any> {
@@ -183,7 +207,7 @@ export class RemoteClientPod implements Pod {
                 else return rpcClient.polyOut().readFile(path, options)();
             }
 
-            readdir(path: string): Promise<PolyFile[]> {
+            readdir(path: string): Promise<string[]> {
                 return rpcClient.polyOut().readdir(path)();
             }
 
@@ -211,10 +235,10 @@ export class RemoteClientPod implements Pod {
             setActiveActions: (actions: string[]) =>
                 this.rpcClient.polyNav().setActiveActions(actions)(),
             setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
-            importFile: (targetFolder: string) =>
-                this.rpcClient.polyNav().importFile(targetFolder)(),
-            removeFile: (file: PolyFile) =>
-                this.rpcClient.polyNav().removeFile(file)(),
+            importFile: () =>
+                this.rpcClient.polyNav().importFile()(),
+            removeFile: (fileId: string) =>
+                this.rpcClient.polyNav().removeFile(fileId)(),
         };
     }
 }

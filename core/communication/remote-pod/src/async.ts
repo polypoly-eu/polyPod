@@ -7,7 +7,6 @@ import {
     EncodingOptions,
     Matcher,
     Stats,
-    PolyFile
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -32,7 +31,7 @@ class AsyncPolyOut implements PolyOut {
     async stat(path: string): Promise<Stats> {
         return (await this.promise).stat(path);
     }
-    async readdir(path: string): Promise<PolyFile[]> {
+    async readdir(path: string): Promise<string[]> {
         return (await this.promise).readdir(path);
     }
 }
@@ -76,12 +75,12 @@ class AsyncPolyNav implements PolyNav {
         return (await this.promise).setTitle(title);
     }
 
-    async importFile(targetFolder: string): Promise<PolyFile> {
-        return (await this.promise).importFile(targetFolder);
+    async importFile(): Promise<string> {
+        return (await this.promise).importFile();
     }
 
-    async removeFile(file: PolyFile): Promise<void> {
-        return (await this.promise).removeFile(file);
+    async removeFile(fileId: string): Promise<void> {
+        return (await this.promise).removeFile(fileId);
     }
 }
 

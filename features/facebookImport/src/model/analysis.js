@@ -1,6 +1,5 @@
 import { html } from "lit";
-import * as zip from "@zip.js/zip.js";
-import Storage from "../model/storage.js";
+import { ZipFile } from "../model/storage.js";
 
 const subAnalyses = [
     class {
@@ -22,9 +21,9 @@ const subAnalyses = [
             return "File size";
         }
 
-        parse({ data }) {
+        parse({ size }) {
             this.active = true;
-            this._size = data.length;
+            this._size = size;
         }
 
         render() {
@@ -37,19 +36,20 @@ const subAnalyses = [
             return "Off-Facebook events";
         }
 
-        async _readOffFacebooEvents(reader) {
-            const entries = await reader.getEntries();
-            const offFacebookEventsFile = entries.find((each) =>
-                each.filename.includes(
+        async _readOffFacebooEvents(zipFile) {
+            const entries = await zipFile.getEntries();
+            const offFacebookEventsFile = entries.find((fileName) =>
+            fileName.includes(
                     "apps_and_websites_off_of_facebook/your_off-facebook_activity.json"
                 )
             );
             if (!offFacebookEventsFile) {
                 return;
             }
-            const fileContent = await offFacebookEventsFile.getData(
-                new zip.TextWriter()
+            const fileContent = new TextDecoder("utf-8").decode(
+                await zipFile.getContent(offFacebookEventsFile)
             );
+
             if (!fileContent) {
                 return;
             }
@@ -62,13 +62,13 @@ const subAnalyses = [
             }
         }
 
-        async parse({ reader }) {
+        async parse({ zipFile }) {
             this._eventsCount = 0;
             this._companiesCount = 0;
             this.active = false;
-            if (!reader) return;
+            if (!zipFile) return;
 
-            const offFacebookEvents = await this._readOffFacebooEvents(reader);
+            const offFacebookEvents = await this._readOffFacebooEvents(zipFile);
             const activityV2 = offFacebookEvents?.off_facebook_activity_v2;
             if (!activityV2) {
                 return;
@@ -96,42 +96,7 @@ const subAnalyses = [
             );
         }
     },
-    class {
-        get title() {
-            return "Hexdump of compressed data";
-        }
 
-        parse({ data }) {
-            this.active = !!data.length;
-            if (!this.active) return;
-            this._hex = [...data]
-                .map((i) => i.toString(16).padStart(2, "0"))
-                .join(" ");
-        }
-
-        render() {
-            return html`<code>${this._hex}</code>`;
-        }
-    },
-    class {
-        get title() {
-            return "List of contents";
-        }
-
-        async parse({ reader }) {
-            this.active = !!reader;
-            if (!this.active) return;
-            this._entries = await reader.getEntries();
-        }
-
-        render() {
-            return html`<ul>
-                ${this._entries.map(
-                    (entry) => html`<li>${entry.filename}</li>`
-                )}
-            </ul>`;
-        }
-    },
     class {
         get title() {
             return "NoData Folders";
@@ -141,16 +106,20 @@ const subAnalyses = [
             return true;
         }
 
-        async parse({ reader }) {
+        async parse({ id, zipFile }) {
             this._noDataFolderNames = [];
             this.active = false;
-            if (!reader) return;
+            if (!zipFile) return;
 
-            const entries = await reader.getEntries();
-            const extractedFolderNames = entries.map((entry) => {
-                const fileName = entry.filename;
-                const nameParts = fileName.split("/");
-                if (nameParts.length >= 3 && nameParts[2] === "no-data.txt") {
+            const entries = await zipFile.getEntries();
+            const extractedFolderNames = entries.map((fileName) => {
+                const nameParts = fileName.replace(`${id}/` , "").split("/");
+                if (nameParts.length >= 2) {
+                    for (const [part, i] of nameParts) {
+                        if (part === "no-data.txt") {
+                            return nameParts[i - 1];
+                        }
+                    }
                     return nameParts[1];
                 }
                 return;
@@ -187,8 +156,8 @@ class UnrecognizedData {
 }
 
 export async function analyzeFile(file) {
-    const reader = new zip.ZipReader(new zip.Uint8ArrayReader(file.data));
-    const enrichedFile = { ...file, reader };
+    const zipFile = new ZipFile(file, window.pod);
+    const enrichedFile = { ...file, zipFile };
     const parsedAnalyses = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
             const subAnalysis = new subAnalysisClass();

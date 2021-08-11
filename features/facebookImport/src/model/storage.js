@@ -15,11 +15,12 @@ export default class Storage {
             this._files = [];
             const files = await polyOut.readdir("");
             for (const file of files) {
-                this._files[file.name] = {
-                    name: file.name,
-                    time: file.time,
-                    size: (await polyOut.readFile(file.name)).length
-                };
+                try {
+                    this._files[file] = await polyOut.stat(file);
+                }
+                catch (e) {
+                    console.log(e);
+                }
             }
             resolve(files);
         });
@@ -40,10 +41,42 @@ export default class Storage {
 
     async removeFile(file) {
         return new Promise(async resolve => {
-            const { polyOut } = await this._pod;
-            await polyOut.removeFile(file);
+            const { polyNav } = await this._pod;
+            await polyNav.removeFile(file);
             await this.refreshFiles();
             this.changeListener();
         });
     }
+}
+
+export class ZipFile {
+    constructor(file, pod) {
+        this._pod = pod;
+        this._file = file;
+    }
+
+    getEntries() {
+        return new Promise(async resolve => {
+            const { polyOut } = await this._pod;
+            const entries = await polyOut.readdir(this._file.id);
+            resolve(entries);
+        });
+    }
+
+    data() {
+        return new Promise(async resolve => {
+            const { polyOut } = await this._pod;
+            const entries = await polyOut.readFile(this._file.id);
+            resolve(entries);
+        });
+    }
+
+    getContent(entry) {
+        return new Promise(async resolve => {
+            const { polyOut } = await this._pod;
+            const content = await polyOut.readFile(entry);
+            resolve(content);
+        });
+    }
+
 }

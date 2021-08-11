@@ -72,12 +72,11 @@ class FacebookImport extends LitElement {
     }
 
     _handleRemoveFile(event) {
-        this._storage.removeFile(event.detail.file);
+        this._storage.removeFile(event.detail.file.id);
     }
 
     async _handleExploreFile(event) {
         this._selectedFile = event.detail.file;
-        this._selectedFile.data = await this._storage.readFile(this._selectedFile.name);
         this._currentView = "explore";
     }
 
