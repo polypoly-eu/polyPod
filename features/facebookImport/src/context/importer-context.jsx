@@ -6,18 +6,10 @@ import { useHistory } from "react-router-dom";
 
 export const ImporterContext = React.createContext();
 
-//constants
-const pod = window.pod;
-let files = [];
-const storage = new Storage(pod);
-storage.refreshFiles();
-storage.changeListener = () => {
-    files = Object.values(storage.files);
-};
-
 //all nav-states for checking purposes
 const navigationStates = ["importStatus"];
 const importSteps = {
+    loading: "loading",
     beginning: "beginning",
     request: "request",
     download: "download",
@@ -68,9 +60,17 @@ async function writeImportStatus(status) {
 }
 
 export const ImporterProvider = ({ children }) => {
+    //storage
+    const pod = window.pod;
+    const storage = new Storage(pod);
+    const [files, setFiles] = useState([]);
+    storage.changeListener = () => {
+        setFiles(Object.values(storage.files));
+    };
+    storage.refreshFiles();
+
     const [navigationState, setNavigationState] = useState({
-        importStatus:
-            files.length > 0 ? importSteps.finished : importSteps.request,
+        importStatus: importSteps.loading,
     });
 
     const history = useHistory();
@@ -102,7 +102,7 @@ export const ImporterProvider = ({ children }) => {
     }
 
     function addFile(file) {
-        storage.addFile(file);
+        storage.addFile({ data: file.size, time: new Date() });
     }
 
     function updateImportStatus(newStatus) {

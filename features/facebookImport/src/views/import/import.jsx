@@ -1,4 +1,5 @@
 import React, { useState, useContext, useRef } from "react";
+import RouteButton from "../../components/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 
@@ -43,16 +44,22 @@ const InfoBox = ({ textContent }) => {
 
 const ScrollButton = ({ scrollRef }) => {
     const [scrollingPosition, setScrollingPosition] = useState(0);
-    if (scrollRef.current)
-        scrollRef.current.addEventListener("scroll", (e) =>
-            setScrollingPosition(e.target.scrollTop)
-        );
+
+    const setUpScrollingListener = () => {
+        if (scrollRef.current)
+            scrollRef.current.addEventListener("scroll", (e) =>
+                setScrollingPosition(e.target.scrollTop)
+            );
+    };
+
     return scrollingPosition < 100 ? (
-        <div className="scroll-button">
+        <div className="scroll-button" onLoad={setUpScrollingListener}>
             <img src="./images/scroll-down.svg" />{" "}
             <p>{i18n.t("import:scroll.down")}</p>
         </div>
-    ) : null;
+    ) : (
+        <div style={{ display: "none" }} className="scroll-button"></div>
+    );
 };
 
 const isSectionOpened = (section, importStatus, importSteps) => {
@@ -202,18 +209,15 @@ const ImportExplanationExpandable = ({
             <>
                 <p>{i18n.t("import:explore.1")}</p>
                 <p>{i18n.t("import:explore.2")}</p>
-                <button
+                <RouteButton
                     className={`btn-highlighted ${
                         isFiles() ? null : "deactivated"
                     }`}
-                    onClick={
-                        isFiles
-                            ? () => onUpdateImportStatus(importSteps.finished)
-                            : null
-                    }
+                    stateChange={{ importStatus: importSteps.finished }}
+                    route="/"
                 >
                     {i18n.t("import:explore.button")}
-                </button>
+                </RouteButton>
             </>
         ),
     };

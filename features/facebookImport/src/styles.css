@@ -81,6 +81,7 @@ button:focus {
     border-radius: 4px;
     font-weight: 600;
     font-size: 18px;
+    box-sizing: border-box;
 }
 
 .btn-highlighted {

@@ -32,16 +32,19 @@ const FacebookImporter = () => {
         return <p>Loading ...</p>;
     };
 
+    function determineRoute() {
+        if (importStatus == importSteps.loading) return renderSplash();
+        if (importStatus == importSteps.finished)
+            return <Redirect to={{ pathname: "/overview" }} />;
+        else return <Redirect to={{ pathname: "/import" }} />;
+    }
+
     return (
         <div className="facebook-importer">
             {pod ? (
                 <Switch>
                     <Route exact path="/">
-                        {importStatus == importSteps.finished ? (
-                            <Redirect to={{ pathname: "/overview" }} />
-                        ) : (
-                            <Redirect to={{ pathname: "/import" }} />
-                        )}
+                        {determineRoute()}
                     </Route>
                     <Route exact path="/overview">
                         <Overview />
