@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import i18n from "../../i18n.js";
 import FakeTab from "../../components/clusterStories/fakeTab.jsx";
+import BarChart from "../../components/dataViz/barChart.jsx";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 
 import "./exampleStory.css";
@@ -51,6 +52,7 @@ const ExampleStory = () => {
                     3
                 </div>
             </FakeTab>
+            <BarChart />
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
