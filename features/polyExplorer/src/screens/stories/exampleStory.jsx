@@ -6,8 +6,239 @@ import "./exampleStory.css";
 
 const ExampleStory = () => {
     const mockData = {
-        rangeDates: ["2015-01-01", "2021-01-01"],
+        rangeDates: [new Date("2015-01-01"), new Date("2021-01-01")],
         rangeY: [0, 1000],
+        groups: [
+            {
+                groupName: "Owned by Facebook",
+                color: "#3749A9",
+                lines: [
+                    {
+                        points: [
+                            {
+                                x: new Date("2015-01-01"),
+                                y: 50,
+                            },
+                            {
+                                x: new Date("2016-01-01"),
+                                y: 100,
+                            },
+                            {
+                                x: new Date("2017-01-01"),
+                                y: 300,
+                            },
+                            {
+                                x: new Date("2018-01-01"),
+                                y: 400,
+                            },
+                            {
+                                x: new Date("2019-01-01"),
+                                y: 500,
+                            },
+                        ],
+                        messages: [
+                            {
+                                x: new Date("2017-01-01"),
+                                y: 300,
+                                text: "We ride the dolar",
+                            },
+                            {
+                                x: new Date("2019-01-01"),
+                                y: 500,
+                                text: "Messanger FB: 500",
+                            },
+                        ],
+                    },
+                    {
+                        points: [
+                            {
+                                x: new Date("2015-01-01"),
+                                y: 100,
+                            },
+                            {
+                                x: new Date("2015-06-01"),
+                                y: 50,
+                            },
+                            {
+                                x: new Date("2016-01-01"),
+                                y: 150,
+                            },
+                            {
+                                x: new Date("2016-06-01"),
+                                y: 100,
+                            },
+                            {
+                                x: new Date("2017-01-01"),
+                                y: 200,
+                            },
+                        ],
+                        messages: [
+                            {
+                                x: new Date("2016-06-01"),
+                                y: 100,
+                                text: "I think that I don't feel good",
+                            },
+                            {
+                                x: new Date("2017-01-01"),
+                                y: 200,
+                                text: "WhatsApp: 200",
+                            },
+                        ],
+                    },
+                    {
+                        points: [
+                            {
+                                x: new Date("2018-01-01"),
+                                y: 500,
+                            },
+                            {
+                                x: new Date("2019-01-01"),
+                                y: 490,
+                            },
+                            {
+                                x: new Date("2020-01-01"),
+                                y: 450,
+                            },
+                            {
+                                x: new Date("2020-06-01"),
+                                y: 420,
+                            },
+                            {
+                                x: new Date("2021-01-01"),
+                                y: 400,
+                            },
+                        ],
+                        messages: [
+                            {
+                                x: new Date("2020-06-01"),
+                                y: 420,
+                                text: "I think we are going down...",
+                            },
+                            {
+                                x: new Date("2021-01-01"),
+                                y: 400,
+                                text: "Instagram: 400",
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                groupName: "Others",
+                color: "#3BA6FF",
+                lines: [
+                    {
+                        points: [
+                            {
+                                x: new Date("2015-01-01"),
+                                y: 500,
+                            },
+                            {
+                                x: new Date("2016-01-01"),
+                                y: 500,
+                            },
+                            {
+                                x: new Date("2017-01-01"),
+                                y: 500,
+                            },
+                            {
+                                x: new Date("2018-01-01"),
+                                y: 500,
+                            },
+                            {
+                                x: new Date("2019-01-01"),
+                                y: 500,
+                            },
+                        ],
+                        messages: [
+                            {
+                                x: new Date("2017-01-01"),
+                                y: 500,
+                                text:
+                                    "I like the stablity... no hearth attacks",
+                            },
+                            {
+                                x: new Date("2019-01-01"),
+                                y: 500,
+                                text: "Signarl: 500",
+                            },
+                        ],
+                    },
+                    {
+                        points: [
+                            {
+                                x: new Date("2015-01-01"),
+                                y: 10,
+                            },
+                            {
+                                x: new Date("2015-06-01"),
+                                y: 100,
+                            },
+                            {
+                                x: new Date("2016-01-01"),
+                                y: 1000,
+                            },
+                            {
+                                x: new Date("2016-06-01"),
+                                y: 10000,
+                            },
+                            {
+                                x: new Date("2017-01-01"),
+                                y: 100000,
+                            },
+                        ],
+                        messages: [
+                            {
+                                x: new Date("2015-06-01"),
+                                y: 100,
+                                text: "I'm like a rocket",
+                            },
+                            {
+                                x: new Date("2017-01-01"),
+                                y: 100000,
+                                text: "Telegram: 100000",
+                            },
+                        ],
+                    },
+                    {
+                        points: [
+                            {
+                                x: new Date("2018-01-01"),
+                                y: 1000,
+                            },
+                            {
+                                x: new Date("2019-01-01"),
+                                y: 100,
+                            },
+                            {
+                                x: new Date("2020-01-01"),
+                                y: 10,
+                            },
+                            {
+                                x: new Date("2020-06-01"),
+                                y: 1,
+                            },
+                            {
+                                x: new Date("2021-01-01"),
+                                y: -10,
+                            },
+                        ],
+                        messages: [
+                            {
+                                x: new Date("2020-01-01"),
+                                y: 10,
+                                text: "щ（ﾟДﾟщ）",
+                            },
+                            {
+                                x: new Date("2021-01-01"),
+                                y: -10,
+                                text: "Threema",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
     };
     const fakeEvent = () => {};
 
