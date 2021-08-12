@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 
 export const ImporterContext = React.createContext();
 
+const pod = window.pod;
+
 //all nav-states for checking purposes
 const navigationStates = ["importStatus"];
 const importSteps = {
@@ -61,7 +63,6 @@ async function writeImportStatus(status) {
 
 export const ImporterProvider = ({ children }) => {
     //storage
-    const pod = window.pod;
     const storage = new Storage(pod);
     const [files, setFiles] = useState([]);
     storage.changeListener = () => {
