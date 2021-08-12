@@ -19,8 +19,10 @@ const RouteButton = ({
         onClick();
         if (stateChange)
             changedNavigationState = { ...navigationState, ...stateChange };
-        if (route == "back") handleBack();
-        else history.push(route, changedNavigationState);
+        if (route) {
+            if (route == "back") handleBack();
+            else history.push(route, changedNavigationState);
+        }
         changeNavigationState(changedNavigationState);
     };
 

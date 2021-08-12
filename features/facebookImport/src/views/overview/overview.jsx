@@ -9,13 +9,13 @@ const Overview = () => {
         <>
             <h2>Imported files</h2>
             <ul>
-                {Object.values(files).map((file) => (
-                    <li>
+                {Object.values(files).map((file, index) => (
+                    <li key={index}>
                         <span>
                             ID: {file.id}. Imported: {file.time}. Size:
-                            {file.data.length} bytes
+                            {file.data.size} bytes
                         </span>
-                        <button click={() => handleRemoveFile(file.id)}>
+                        <button onClick={() => handleRemoveFile(file.id)}>
                             Remove
                         </button>
                         <button>Explore</button>
@@ -30,7 +30,7 @@ const Overview = () => {
             <h1>File overview</h1>
             <RouteButton route="/import">Import (another) file</RouteButton>
             {Object.values(files).length ? (
-                { fileList }
+                fileList
             ) : (
                 <em>No files imported</em>
             )}

@@ -17,7 +17,7 @@ const importSteps = {
     explore: "explore",
     finished: "finished",
 };
-const namespace = "http://polypoly.coop/schema/facebookImporter/#";
+const namespace = "http://polypoly.coop/schema/fbImport/";
 
 function updatePodNavigation(pod, history) {
     pod.polyNav.actions = {
@@ -38,7 +38,7 @@ async function readImportStatus() {
         subject: { value: `${namespace}facebookImporter` },
         predicate: { value: `${namespace}importStatus` },
     });
-    let status = statusQuads[0]?.object?.value?.split("#")[1];
+    let status = statusQuads[0]?.object?.value?.split(namespace)[1];
     return status || importSteps.beginning;
 }
 
@@ -67,7 +67,6 @@ export const ImporterProvider = ({ children }) => {
     storage.changeListener = () => {
         setFiles(Object.values(storage.files));
     };
-    storage.refreshFiles();
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
@@ -76,7 +75,7 @@ export const ImporterProvider = ({ children }) => {
     const history = useHistory();
 
     const handleRemoveFile = (fileID) => {
-        storage.removeFile(fileID);
+        storage.removeFile({ id: fileID });
     };
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
@@ -101,8 +100,12 @@ export const ImporterProvider = ({ children }) => {
         }
     }
 
+    function refreshFiles() {
+        storage.refreshFiles().then(() => setFiles(storage.files));
+    }
+
     function addFile(file) {
-        storage.addFile({ data: file.size, time: new Date() });
+        storage.addFile({ data: file.size, time: new Date(), id: 1 });
     }
 
     function updateImportStatus(newStatus) {
@@ -119,12 +122,14 @@ export const ImporterProvider = ({ children }) => {
             )
                 changeNavigationState({ importStatus: status });
         });
+        refreshFiles();
     }, []);
 
     //on history change
     useEffect(() => {
         updatePodNavigation(pod, history);
         updateTitle(pod);
+        console.log(files);
     });
 
     return (

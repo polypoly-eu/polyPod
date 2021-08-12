@@ -209,15 +209,22 @@ const ImportExplanationExpandable = ({
             <>
                 <p>{i18n.t("import:explore.1")}</p>
                 <p>{i18n.t("import:explore.2")}</p>
-                <RouteButton
-                    className={`btn-highlighted ${
-                        isFiles() ? null : "deactivated"
-                    }`}
-                    stateChange={{ importStatus: importSteps.finished }}
-                    route="/"
-                >
-                    {i18n.t("import:explore.button")}
-                </RouteButton>
+                {isFiles() ? (
+                    <RouteButton
+                        className="btn-highlighted"
+                        onClick={() =>
+                            onUpdateImportStatus(importSteps.finished)
+                        }
+                        stateChange={{ importStatus: importSteps.finished }}
+                        route="/"
+                    >
+                        {i18n.t("import:explore.button")}
+                    </RouteButton>
+                ) : (
+                    <button className="btn-highlighted deactivated">
+                        {i18n.t("import:explore.button")}
+                    </button>
+                )}
             </>
         ),
     };
