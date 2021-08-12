@@ -13,7 +13,8 @@ const BarChart = ({ data }) => {
     const margin = { top: 30, right: 30, bottom: 1, left: 0 };
     const labelContainerMargin = { top: 8, right: 12, bottom: 8, left: 12 };
     const barHeight = gHeight - margin.top;
-    const maxValue = d3.max([d3.max(data, (d) => d.value)]);
+    const maxValue = d3.max(data, (d) => d.value);
+    const averageValue = d3.mean(data, (d) => d.value);
 
     function render() {
         const svgChart = d3
@@ -93,11 +94,31 @@ const BarChart = ({ data }) => {
         maxValueLine
             .append("text")
             .text(maxValue + " Maximum")
-            .attr("x", width - margin.right)
+            .attr("x", xScale(maxValue) - margin.right)
+            .attr("y", 0)
+            .style("font-size", "12px")
+            .attr("fill", "var(--color-text-dark)");
+        const averageValueLine = svgChart
+            .append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+        averageValueLine
+            .append("line")
+            .attr("x1", xScale(averageValue))
+            .attr("y1", labelContainerMargin.top)
+            .attr("x2", xScale(averageValue))
+            .attr("y2", height - margin.bottom)
+            .style("stroke", "var(--data-exp-purposes)")
+            .style("stroke-width", 2)
+            .style("stroke-dasharray", "5, 5");
+        averageValueLine
+            .append("text")
+            .text(Math.round(averageValue) + " Average")
+            .attr("x", xScale(averageValue) - margin.right)
             .attr("y", 0)
             .attr("width", "10")
             .attr("height", "100")
-            .style("font-size", "12px");
+            .style("font-size", "12px")
+            .attr("fill", "var(--color-text-dark)");
     }
 
     useEffect(render, [data]);
