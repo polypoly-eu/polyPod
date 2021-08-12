@@ -11,8 +11,9 @@ const BarChart = ({ data }) => {
     const width = 500;
     const height = data.length * (gHeight * 2);
     const margin = { top: 30, right: 30, bottom: 1, left: 0 };
-    const labelContainermargin = { top: 8, right: 12, bottom: 8, left: 12 };
+    const labelContainerMargin = { top: 8, right: 12, bottom: 8, left: 12 };
     const barHeight = gHeight - margin.top;
+    const maxValue = d3.max([d3.max(data, (d) => d.value)]);
 
     function render() {
         const svgChart = d3
@@ -57,7 +58,7 @@ const BarChart = ({ data }) => {
             .append("text")
             .attr("class", "label-title")
             .text((d) => d.title)
-            .attr("x", margin.left + labelContainermargin.left)
+            .attr("x", margin.left + labelContainerMargin.left)
             .attr("y", (d) => yScale(d.title) + margin.top)
             .style("font", "14px")
             .attr("fill", "var(--color-text-dark)");
@@ -65,19 +66,38 @@ const BarChart = ({ data }) => {
         bars.append("rect")
             .attr("class", "label-title-container")
             .attr("x", margin.left)
-            .attr("y", (d) => yScale(d.title) + labelContainermargin.bottom)
+            .attr("y", (d) => yScale(d.title) + labelContainerMargin.bottom)
             .attr(
                 "width",
-                200 + labelContainermargin.left + labelContainermargin.right
+                200 + labelContainerMargin.left + labelContainerMargin.right
             )
             .attr(
                 "height",
-                14 + labelContainermargin.top + labelContainermargin.bottom
+                14 + labelContainerMargin.top + labelContainerMargin.bottom
             )
             .attr("rx", "16")
             .attr("ry", "16")
             .attr("fill", "transparent")
             .attr("stroke", "var(--color-dark)");
+        const maxValueLine = svgChart
+            .append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+        maxValueLine
+            .append("line")
+            .attr("x1", xScale(maxValue))
+            .attr("y1", labelContainerMargin.top)
+            .attr("x2", xScale(maxValue))
+            .attr("y2", height - margin.bottom)
+            .style("stroke", "var(--data-exp-purposes)")
+            .style("stroke-width", 2);
+        maxValueLine
+            .append("text")
+            .text(maxValue + " Maximum")
+            .attr("x", width - margin.right)
+            .attr("y", 0)
+            .attr("width", "10")
+            .attr("height", "100")
+            .style("font-size", "12px");
     }
 
     useEffect(render, [data]);
