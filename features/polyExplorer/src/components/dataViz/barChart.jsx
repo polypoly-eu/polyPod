@@ -7,11 +7,12 @@ const BarChart = ({ data }) => {
     });
 
     const svgBarRef = useRef();
-    const barHeight = 46;
+    const gHeight = 46;
     const width = 500;
-    const height = data.length * (barHeight * 2);
+    const height = data.length * (gHeight * 2);
     const margin = { top: 30, right: 30, bottom: 1, left: 0 };
     const labelContainermargin = { top: 8, right: 12, bottom: 8, left: 12 };
+    const barHeight = gHeight - margin.top;
 
     function render() {
         const svgChart = d3
@@ -35,10 +36,10 @@ const BarChart = ({ data }) => {
             .attr("transform", `translate(${margin.left}, ${margin.top})`);
         bars.append("rect")
             .attr("class", "bar")
-            .attr("height", barHeight - margin.top)
+            .attr("height", barHeight)
             .attr("width", (d) => xScale(d.value))
             .attr("x", margin.left)
-            .attr("y", (d) => yScale(d.title) + barHeight)
+            .attr("y", (d) => yScale(d.title) + gHeight)
             .attr("rx", "8")
             .attr("ry", "8")
             .attr("fill", "var(--data-exp-purposes)")
@@ -46,7 +47,7 @@ const BarChart = ({ data }) => {
         bars.append("text")
             .attr("class", "label-value")
             .attr("x", (d) => xScale(d.value) + margin.left + 4)
-            .attr("y", (d) => yScale(d.title) + barHeight + 8)
+            .attr("y", (d) => yScale(d.title) + gHeight + 8)
             .attr("dy", ".35em")
             .style("font-size", "12px")
             .attr("fill", "var(--data-exp-purposes)")
@@ -57,19 +58,18 @@ const BarChart = ({ data }) => {
             .attr("class", "label-title")
             .text((d) => d.title)
             .attr("x", margin.left + labelContainermargin.left)
-            .attr(
-                "y",
-                (d) =>
-                    yScale(d.title) + margin.top - labelContainermargin.bottom
-            )
+            .attr("y", (d) => yScale(d.title) + margin.top)
             .style("font", "14px")
             .attr("fill", "var(--color-text-dark)");
 
         bars.append("rect")
             .attr("class", "label-title-container")
             .attr("x", margin.left)
-            .attr("y", (d) => yScale(d.title))
-            .attr("width", 200 + margin.top + margin.bottom)
+            .attr("y", (d) => yScale(d.title) + labelContainermargin.bottom)
+            .attr(
+                "width",
+                200 + labelContainermargin.left + labelContainermargin.right
+            )
             .attr(
                 "height",
                 14 + labelContainermargin.top + labelContainermargin.bottom
