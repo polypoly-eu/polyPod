@@ -51,21 +51,33 @@ const BarChart = ({ data }) => {
             .style("font-size", "12px")
             .attr("fill", "var(--data-exp-purposes)")
             .text((d) => d.value);
+
+        const labelTitle = bars
+            .append("text")
+            .attr("class", "label-title")
+            .text((d) => d.title)
+            .attr("x", margin.left + labelContainermargin.left)
+            .attr(
+                "y",
+                (d) =>
+                    yScale(d.title) + margin.top - labelContainermargin.bottom
+            )
+            .style("font", "14px")
+            .attr("fill", "var(--color-text-dark)");
+
         bars.append("rect")
             .attr("class", "label-title-container")
             .attr("x", margin.left)
-            .attr("y", (d) => yScale(d.title) + margin.top)
-            .attr("width", margin.top + margin.bottom)
-            .attr("height", 14 + labelContainermargin.top + labelContainermargin.bottom)
-            // .attr("fill", "red");
-
-        bars.append("text")
-            .attr("class", "label-title")
-            .text((d) => d.title)
-            .attr("x", margin.left)
-            .attr("y", (d) => yScale(d.title) + margin.top)
-            .style("font", "14px")
-            .attr("fill", "var(--color-text-dark)");
+            .attr("y", (d) => yScale(d.title))
+            .attr("width", 200 + margin.top + margin.bottom)
+            .attr(
+                "height",
+                14 + labelContainermargin.top + labelContainermargin.bottom
+            )
+            .attr("rx", "16")
+            .attr("ry", "16")
+            .attr("fill", "transparent")
+            .attr("stroke", "var(--color-dark)");
     }
 
     useEffect(render, [data]);
