@@ -38,6 +38,9 @@ const Overview = () => {
                         <RouteButton
                             className="btn secondary"
                             route="/import"
+                            stateChange={{
+                                importStatus: importSteps.import,
+                            }}
                             onClick={() => handleRemoveFile(file.id)}
                         >
                             {i18n.t("overview:new.import")}
@@ -58,6 +61,9 @@ const Overview = () => {
                     <RouteButton
                         route="/import"
                         className="btn primary"
+                        stateChange={{
+                            importStatus: importSteps.beginning,
+                        }}
                         onClick={() =>
                             updateImportStatus(importSteps.beginning)
                         }
