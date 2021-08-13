@@ -107,7 +107,7 @@ class FileStats implements Stats {
         return new FileStats(
             stats.isFile(),
             stats.isDirectory(),
-            stats.getCreationTime(),
+            stats.getTime(),
             stats.getSize(),
             stats.getName(),
             stats.getId()
@@ -128,7 +128,7 @@ class FileStats implements Stats {
     isDirectory(): boolean {
         return this.directory;
     }
-    getCreationTime(): string {
+    getTime(): string {
         return this.time;
     }
     getSize(): number {

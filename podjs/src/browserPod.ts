@@ -71,46 +71,6 @@ class LocalStoragePolyIn implements PolyIn {
     }
 }
 
-class LocalStorageStats implements Stats {
-    static of(stats: Stats): LocalStorageStats {
-        return new LocalStorageStats(
-            stats.isFile(),
-            stats.isDirectory(),
-            stats.getCreationTime(),
-            stats.getSize(),
-            stats.getName(),
-            stats.getId()
-        );
-    }
-
-    constructor(
-        readonly file: boolean,
-        readonly directory: boolean,
-        readonly time: string,
-        readonly size: number,
-        readonly name: string,
-        readonly id: string
-    ) {}
-    isFile(): boolean {
-        return this.file;
-    }
-    isDirectory(): boolean {
-        return this.directory;
-    }
-    getCreationTime(): string {
-        return this.time;
-    }
-    getSize(): number {
-        return this.size;
-    }
-    getName(): string {
-        return this.name;
-    }
-    getId(): string {
-        return this.id;
-    }
-}
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
 class LocalStoragePolyOut implements PolyOut {
     fetch(input: string, init?: RequestInit): Promise<Response> {
