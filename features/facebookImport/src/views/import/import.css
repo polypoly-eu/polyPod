@@ -76,7 +76,7 @@
 }
 
 .import-view .explanation-expandable .intro .bold {
-    font-weight: 600 !important;
+    font-weight: 600;
 }
 
 .import-view .explanation-expandable .scroll-button {
@@ -166,7 +166,7 @@
 .import-view .explanation-expandable .body .x-divider {
     display: flex;
     flex-direction: row;
-    margin: 0 !important;
+    margin: 0;
     height: 48px;
 }
 
@@ -175,7 +175,7 @@
     flex: 1 1 auto;
     flex-direction: row;
     justify-content: flex-end;
-    margin-bottom: 0 !important;
+    margin-bottom: 0;
 }
 
 .import-view .explanation-expandable .body .delete-button {
