@@ -8,9 +8,6 @@
     box-sizing: border-box;
 }
 
-.import-view .progress-bar .section .line img {
-}
-
 .import-view .progress-bar {
     width: 100%;
     max-width: var(--max-width);
