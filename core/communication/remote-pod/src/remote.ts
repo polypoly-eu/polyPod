@@ -104,14 +104,23 @@ class FetchResponse implements Response {
 
 class FileStats implements Stats {
     static of(stats: Stats): FileStats {
-        return new FileStats(
-            stats.isFile(),
-            stats.isDirectory(),
-            stats.getTime(),
-            stats.getSize(),
-            stats.getName(),
-            stats.getId()
-        );
+        if (
+            stats.getSize !== undefined &&
+            stats.getName !== undefined &&
+            stats.getTime !== undefined &&
+            stats.getId !== undefined
+        ) {
+            return new FileStats(
+                stats.isFile(),
+                stats.isDirectory(),
+                stats.getTime(),
+                stats.getSize(),
+                stats.getName(),
+                stats.getId()
+            );
+        } else {
+            return new FileStats(stats.isFile(), stats.isDirectory(), "", 0, "", "");
+        }
     }
 
     constructor(
