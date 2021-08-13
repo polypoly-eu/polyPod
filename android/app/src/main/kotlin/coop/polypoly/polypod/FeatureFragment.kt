@@ -3,6 +3,7 @@ package coop.polypoly.polypod
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -86,7 +87,7 @@ open class FeatureFragment : Fragment() {
     private lateinit var foregroundResources: ForegroundResources
     private lateinit var featureContainer: FeatureContainer
 
-    private var pickFileResult: CompletableDeferred<ByteArray?>? = null
+    private var pickFileResult: CompletableDeferred<Uri?>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -193,7 +194,7 @@ open class FeatureFragment : Fragment() {
         view.findViewById<TextView>(R.id.feature_title).text = title
     }
 
-    private suspend fun pickFile(): ByteArray? {
+    private suspend fun pickFile(): Uri? {
         if (pickFileResult?.isActive == true)
             return null
 
@@ -229,10 +230,7 @@ open class FeatureFragment : Fragment() {
             pickFileResult?.complete(null)
             return
         }
-
         val fileUri = data.data!!
-        val result =
-            activity?.contentResolver?.openInputStream(fileUri)?.readBytes()
-        pickFileResult?.complete(result)
+        pickFileResult?.complete(fileUri)
     }
 }
