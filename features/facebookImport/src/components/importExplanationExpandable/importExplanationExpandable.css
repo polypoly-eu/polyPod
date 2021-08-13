@@ -1,0 +1,169 @@
+.import-view .explanation-expandable {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-dark);
+    overflow: hidden scroll;
+}
+
+.import-view .explanation-expandable .intro {
+    width: 100%;
+    max-width: var(--max-width);
+    padding: 0 16px 16px 16px;
+    box-sizing: border-box;
+    margin-bottom: 72px;
+}
+
+.import-view .explanation-expandable .intro p {
+    font-weight: 300;
+    font-size: 42px;
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    margin: 0 0 16px 0;
+}
+
+.import-view .explanation-expandable .intro .bold {
+    font-weight: 600;
+}
+
+.import-view .explanation-expandable .head {
+    width: 100%;
+    max-width: var(--max-width);
+    height: 112px;
+    position: relative;
+    border-top: 2px solid var(--color-gray-400);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.import-view .explanation-expandable .head .number {
+    width: 100px;
+    height: 100px;
+    top: -12px;
+    left: -20px;
+    border-radius: 50%;
+    position: absolute;
+    font-size: 28px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+}
+
+.import-view .explanation-expandable .head .heading {
+    margin-left: 30%;
+    width: 100px;
+    font-size: 24px;
+}
+
+.import-view .explanation-expandable .head strong {
+    font-weight: 600;
+}
+
+.import-view .explanation-expandable .head .request {
+    background-color: var(--color-indigo-300);
+}
+
+.import-view .explanation-expandable .head .download {
+    background-color: var(--color-indigo-500);
+}
+
+.import-view .explanation-expandable .head .import {
+    background-color: var(--color-indigo-700);
+}
+
+.import-view .explanation-expandable .head .explore {
+    background-color: var(--color-indigo-950);
+}
+
+.import-view .explanation-expandable .body {
+    padding: 0 16px 16px 16px;
+    width: 100%;
+    max-width: var(--max-width);
+    box-sizing: border-box;
+}
+
+.import-view .explanation-expandable .body .x-divider {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    height: 48px;
+}
+
+.import-view .explanation-expandable .align-right {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 0;
+}
+
+.import-view .explanation-expandable .body .delete-button {
+    background-color: #ffffff;
+    color: var(--color-indigo-600);
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid var(--color-indigo-600);
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 4px 16px;
+    width: 112px;
+    height: 32px;
+}
+
+.import-view .explanation-expandable .separator {
+    height: 1px;
+    width: 100%;
+    max-width: var(--max-width);
+    background-color: var(--color-gray-400);
+    margin-bottom: 26px;
+}
+
+.import-view .explanation-expandable .translucent-sides {
+    mask-image: linear-gradient(
+        to top,
+        transparent,
+        transparent,
+        rgba(0, 0, 0, 1),
+        transparent,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to top,
+        transparent,
+        transparent,
+        rgba(0, 0, 0, 1),
+        transparent,
+        transparent
+    );
+}
+
+.import-view .explanation-expandable .body * {
+    margin-bottom: 16px;
+}
+
+.import-view .explanation-expandable .body p {
+    margin-top: 0;
+}
+
+.import-view .explanation-expandable .body {
+    line-height: 120%;
+    letter-spacing: -0.01em;
+    font-size: 20px;
+}
+
+.import-view .explanation-expandable .body h4,
+h5 {
+    color: var(--color-indigo-600);
+    margin-top: 0;
+}
+
+.import-view .explanation-expandable .body h4 {
+    font-size: 24px;
+}
+
+.import-view .explanation-expandable .body h5 {
+    font-weight: 500;
+}

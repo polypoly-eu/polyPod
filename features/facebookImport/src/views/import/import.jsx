@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
-import ProgressBarComponent from "./../../components/progressBar.jsx";
-import ImportExplanationExpandable from "../../components/importExplanationExpandable.jsx";
+import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
+import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
 
 import "./import.css";
 

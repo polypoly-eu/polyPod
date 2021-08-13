@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
-import i18n from "../i18n.js";
-import RouteButton from "./routeButton.jsx";
-import InfoBox from "./infoBox.jsx";
-import ScrollButton from "./scrollButton.jsx";
+import i18n from "../../i18n.js";
+import RouteButton from "../buttons/routeButton.jsx";
+import InfoBox from "../infoBox/infoBox.jsx";
+import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
+
+import "./importExplanationExpandable.css";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
     return {
