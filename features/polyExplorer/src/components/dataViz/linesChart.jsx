@@ -1,12 +1,17 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 
+import { BUBBLES_SPEECH_SIZES } from "../../constants";
+
 import "./linesChart.css";
 
 const LinesChart = ({ data }) => {
     const svgCanvas = useRef();
     const semiDarkColor = "#8d9caf";
+    const darkColor = "#0f1938";
+    const bubblesSpeachBackground = "rgba(255,255,255,0.75)";
     const yLabelsPosition = "-0.40em";
+    const heightPicBubbleSpeech = 5;
     const correctionYAxisSize = 10;
     const correctionYAxisLabels = 20;
     const screenSizes = {
@@ -39,6 +44,48 @@ const LinesChart = ({ data }) => {
         },
     };
 
+    const bubblesSpeechSmall = {
+        [screenSizes.smallScreen]: {
+            width: 110,
+            height: 32,
+            fontSize: 14,
+            fontWeight: 800,
+        },
+        [screenSizes.normalScreen]: {
+            width: 87,
+            height: 32,
+            fontSize: 14,
+            fontWeight: 800,
+        },
+        [screenSizes.bigScreen]: {
+            width: 87,
+            height: 32,
+            fontSize: 14,
+            fontWeight: 800,
+        },
+    };
+
+    const bubblesSpeechBig = {
+        [screenSizes.smallScreen]: {
+            width: 204,
+            height: 89,
+            fontSize: 14,
+            fontWeight: 500,
+        },
+        [screenSizes.normalScreen]: {
+            width: 204,
+            height: 89,
+            fontSize: 14,
+            fontWeight: 500,
+        },
+        [screenSizes.bigScreen]: {
+            width: 204,
+            height: 89,
+            fontSize: 14,
+            fontWeight: 500,
+        },
+    };
+
     const [scaleX, updateScaleX] = useState(null);
     const [scaleY, updateScaleY] = useState(null);
 
@@ -47,6 +94,14 @@ const LinesChart = ({ data }) => {
     //         half: canvasConfig[screenSize].resolution / 2,
     //     };
     // }
+
+    function jsDateTo3dDate(jsDate) {
+        const date = `${jsDate.getFullYear()}-${
+            jsDate.getMonth() + 1
+        }-${jsDate.getDate()}`;
+
+        return d3.timeParse("%Y-%m-%d")(date);
+    }
 
     function _getIdName(id) {
         return id.replace(/\s/g, "_");
@@ -72,15 +127,7 @@ const LinesChart = ({ data }) => {
 
         return d3
             .scaleTime()
-            .domain(
-                d3.extent(listOfDates, (jsDate) =>
-                    d3.timeParse("%Y-%m-%d")(
-                        `${jsDate.getFullYear()}-${
-                            jsDate.getMonth() + 1
-                        }-${jsDate.getDate()}`
-                    )
-                )
-            )
+            .domain(d3.extent(listOfDates, (jsDate) => jsDateTo3dDate(jsDate)))
             .range([0, resolution - leftMargin - rightMargin]);
     }
 
@@ -255,10 +302,7 @@ const LinesChart = ({ data }) => {
         const area = d3
             .area()
             .x((d) => {
-                const date = `${d.x.getFullYear()}-${d.x.getMonth()}-${d.x.getDate()}`;
-                const d3Date = d3.timeParse("%Y-%m-%d")(date);
-                const point = x(d3Date);
-
+                const point = x(jsDateTo3dDate(d.x));
                 return point + leftMargin + 3;
             })
             .y0(resolution)
@@ -298,11 +342,7 @@ const LinesChart = ({ data }) => {
                 d3
                     .line()
                     .x((d) => {
-                        const date = `${d.x.getFullYear()}-${
-                            d.x.getMonth() + 1
-                        }-${d.x.getDate()}`;
-                        const d3Date = d3.timeParse("%Y-%m-%d")(date);
-                        const point = x(d3Date);
+                        const point = x(jsDateTo3dDate(d.x));
 
                         return point + leftMargin;
                     })
@@ -333,8 +373,7 @@ const LinesChart = ({ data }) => {
         }
     }
 
-    function deactivatePaths(origin) {
-        console.log("NNN Origin: ", origin);
+    function deactivatePaths() {
         const root = d3.select(svgCanvas.current).select("svg");
         if (!root.empty()) {
             root.selectAll(".gradient-area").remove();
@@ -343,18 +382,424 @@ const LinesChart = ({ data }) => {
 
     function deactivateOnClick(event) {
         if (event.target.tagName !== "path") {
-            deactivatePaths("deactivateOnClick");
+            deactivatePaths();
         }
     }
 
     function onClickPath(event) {
-        deactivatePaths("OnClickPath");
+        deactivatePaths();
         const path = d3.select(event.target);
         const gradientId = path.attr("group");
         const lineIndex = Number(path.attr("line-index"));
         const screenSize = calculateScreenSize();
 
         drawArea(lineIndex, gradientId, screenSize);
+        drawBubblesSpeech(lineIndex, gradientId, screenSize);
+    }
+
+    function _getBubbleStartingPoint(bubbleData, screenSize) {
+        const { leftMargin } = canvasConfig[screenSize];
+        const x = _getScaleX(screenSize);
+        const y = _getScaleY(screenSize);
+
+        return [x(jsDateTo3dDate(bubbleData.x)) + leftMargin, y(bubbleData.y)];
+    }
+
+    function _drawBubbleInCanvas(
+        commands,
+        labelInitialPoint,
+        bubbleConfig,
+        text,
+        screenSize
+    ) {
+        const root = _getRoot(screenSize);
+
+        root.append("path")
+            .attr("stroke", darkColor)
+            .attr("stroke-width", 2)
+            .attr("fill", bubblesSpeachBackground)
+            .attr("class", "bubble-speech")
+            .attr("d", commands);
+
+        root.append("foreignObject")
+            .style("width", bubbleConfig.width)
+            .style("height", bubbleConfig.height)
+            .attr(
+                "transform",
+                `translate(${labelInitialPoint[0]},${labelInitialPoint[1]})`
+            )
+            .append("xhtml:div")
+            .style("display", "flex")
+            .style("justify-content", "center")
+            .style("align-items", "center")
+            .style("background-color", "transparent")
+            .style("width", bubbleConfig.width)
+            .style("height", bubbleConfig.height)
+            .style("padding", "0px 10px")
+            .append("xhtml:span")
+            .style("color", darkColor)
+            .style("font-size", bubbleConfig.fontSize)
+            .style("font-weight", bubbleConfig.fontWeight)
+            .text(text);
+    }
+
+    function drawBubbleTopMiddle(bubbleConfig, bubbleData, screenSize) {
+        const startPoint = _getBubbleStartingPoint(bubbleData, screenSize);
+        const speechLine = [
+            startPoint[0] + heightPicBubbleSpeech,
+            startPoint[1] + heightPicBubbleSpeech,
+        ];
+
+        const firstCorner = [
+            speechLine[0] + bubbleConfig.width / 2 - heightPicBubbleSpeech,
+            speechLine[1],
+        ];
+        const secondCorner = [
+            firstCorner[0],
+            firstCorner[1] + bubbleConfig.height,
+        ];
+        const thirdCorner = [
+            secondCorner[0] - bubbleConfig.width,
+            secondCorner[1],
+        ];
+        const forthCorner = [
+            thirdCorner[0],
+            thirdCorner[1] - bubbleConfig.height,
+        ];
+        const speechPoint = [
+            forthCorner[0] + bubbleConfig.width / 2 - heightPicBubbleSpeech,
+            forthCorner[1],
+        ];
+        const commands = `
+            M ${startPoint[0]} ${startPoint[1]}
+            L ${speechLine[0]} ${speechLine[1]}
+            L ${firstCorner[0]} ${firstCorner[1]}
+            L ${secondCorner[0]} ${secondCorner[1]}
+            L ${thirdCorner[0]} ${thirdCorner[1]}
+            L ${forthCorner[0]} ${forthCorner[1]}
+            L ${speechPoint[0]} ${speechPoint[1]}
+            Z
+        `;
+
+        _drawBubbleInCanvas(
+            commands,
+            forthCorner,
+            bubbleConfig,
+            bubbleData.text,
+            screenSize
+        );
+    }
+
+    function drawBubbleRightTop(bubbleConfig, bubbleData, screenSize) {
+        const startPoint = _getBubbleStartingPoint(bubbleData, screenSize);
+        const firstCorner = [
+            startPoint[0] - bubbleConfig.width - heightPicBubbleSpeech,
+            startPoint[1],
+        ];
+        const secondCorner = [
+            firstCorner[0],
+            firstCorner[1] + bubbleConfig.height,
+        ];
+        const thirdCorner = [
+            secondCorner[0] + bubbleConfig.width,
+            secondCorner[1],
+        ];
+        const forthCorner = [
+            thirdCorner[0],
+            thirdCorner[1] - bubbleConfig.height + heightPicBubbleSpeech,
+        ];
+        const commands = `
+            M ${startPoint[0]} ${startPoint[1]}
+            L ${firstCorner[0]} ${firstCorner[1]}
+            L ${secondCorner[0]} ${secondCorner[1]}
+            L ${thirdCorner[0]} ${thirdCorner[1]}
+            L ${forthCorner[0]} ${forthCorner[1]}
+            Z
+        `;
+
+        _drawBubbleInCanvas(
+            commands,
+            firstCorner,
+            bubbleConfig,
+            bubbleData.text,
+            screenSize
+        );
+    }
+
+    function drawBubbleRightMiddle(bubbleConfig, bubbleData, screenSize) {
+        const startPoint = _getBubbleStartingPoint(bubbleData, screenSize);
+        const speechLine = [
+            startPoint[0] - heightPicBubbleSpeech,
+            startPoint[1] + heightPicBubbleSpeech,
+        ];
+        const firstCorner = [
+            speechLine[0],
+            speechLine[1] + (bubbleConfig.height / 2 - heightPicBubbleSpeech),
+        ];
+
+        const secondCorner = [
+            firstCorner[0] - bubbleConfig.width,
+            firstCorner[1],
+        ];
+        const thirdCorner = [
+            secondCorner[0],
+            secondCorner[1] - bubbleConfig.height,
+        ];
+        const forthCorner = [
+            thirdCorner[0] + bubbleConfig.width,
+            thirdCorner[1],
+        ];
+        const speechPoint = [
+            forthCorner[0],
+            forthCorner[1] + bubbleConfig.height / 2 - heightPicBubbleSpeech,
+        ];
+
+        const commands = `
+            M ${startPoint[0]} ${startPoint[1]}
+            L ${speechLine[0]} ${speechLine[1]}
+            L ${firstCorner[0]} ${firstCorner[1]}
+            L ${secondCorner[0]} ${secondCorner[1]}
+            L ${thirdCorner[0]} ${thirdCorner[1]}
+            L ${forthCorner[0]} ${forthCorner[1]}
+            L ${speechPoint[0]} ${speechPoint[1]}
+            Z
+        `;
+
+        _drawBubbleInCanvas(
+            commands,
+            thirdCorner,
+            bubbleConfig,
+            bubbleData.text,
+            screenSize
+        );
+    }
+
+    function drawBubbleRightBottom(bubbleConfig, bubbleData, screenSize) {
+        const startPoint = _getBubbleStartingPoint(bubbleData, screenSize);
+        const firstCorner = [
+            startPoint[0] - bubbleConfig.width - heightPicBubbleSpeech,
+            startPoint[1],
+        ];
+        const secondCorner = [
+            firstCorner[0],
+            firstCorner[1] - bubbleConfig.height,
+        ];
+        const thirdCorner = [
+            secondCorner[0] + bubbleConfig.width,
+            secondCorner[1],
+        ];
+        const forthCorner = [
+            thirdCorner[0],
+            thirdCorner[1] + bubbleConfig.height - heightPicBubbleSpeech,
+        ];
+
+        const commands = `
+            M ${startPoint[0]} ${startPoint[1]}
+            L ${firstCorner[0]} ${firstCorner[1]}
+            L ${secondCorner[0]} ${secondCorner[1]}
+            L ${thirdCorner[0]} ${thirdCorner[1]}
+            L ${forthCorner[0]} ${forthCorner[1]}
+            Z
+        `;
+
+        _drawBubbleInCanvas(
+            commands,
+            secondCorner,
+            bubbleConfig,
+            bubbleData.text,
+            screenSize
+        );
+    }
+
+    function drawBubbleMiddleBottom(bubbleConfig, bubbleData, screenSize) {
+        const startPoint = _getBubbleStartingPoint(bubbleData, screenSize);
+        const speechLine = [
+            startPoint[0] - heightPicBubbleSpeech,
+            startPoint[1] - heightPicBubbleSpeech,
+        ];
+        const firstCorner = [
+            speechLine[0] - bubbleConfig.width / 2 + heightPicBubbleSpeech,
+            speechLine[1],
+        ];
+        const secondCorner = [
+            firstCorner[0],
+            firstCorner[1] - bubbleConfig.height,
+        ];
+        const thirdCorner = [
+            secondCorner[0] + bubbleConfig.width,
+            secondCorner[1],
+        ];
+        const forthCorner = [
+            thirdCorner[0],
+            thirdCorner[1] + bubbleConfig.height,
+        ];
+        const speechPoint = [
+            forthCorner[0] - bubbleConfig.width / 2 + heightPicBubbleSpeech,
+            forthCorner[1],
+        ];
+
+        const commands = `
+            M ${startPoint[0]} ${startPoint[1]}
+            L ${speechLine[0]} ${speechLine[1]}
+            L ${firstCorner[0]} ${firstCorner[1]}
+            L ${secondCorner[0]} ${secondCorner[1]}
+            L ${thirdCorner[0]} ${thirdCorner[1]}
+            L ${forthCorner[0]} ${forthCorner[1]}
+            L ${speechPoint[0]} ${speechPoint[1]}
+            Z
+        `;
+
+        _drawBubbleInCanvas(
+            commands,
+            secondCorner,
+            bubbleConfig,
+            bubbleData.text,
+            screenSize
+        );
+    }
+
+    function drawBubbleLeftBottom(bubbleConfig, bubbleData, screenSize) {
+        const startPoint = _getBubbleStartingPoint(bubbleData, screenSize);
+        const firstCorner = [
+            startPoint[0] + bubbleConfig.width + heightPicBubbleSpeech,
+            startPoint[1],
+        ];
+        const secondCorner = [
+            firstCorner[0],
+            firstCorner[1] - bubbleConfig.height,
+        ];
+        const thirdCorner = [
+            secondCorner[0] - bubbleConfig.width,
+            secondCorner[1],
+        ];
+        const forthCorner = [
+            thirdCorner[0],
+            thirdCorner[1] + bubbleConfig.height - heightPicBubbleSpeech,
+        ];
+
+        const commands = `
+            M ${startPoint[0]} ${startPoint[1]}
+            L ${firstCorner[0]} ${firstCorner[1]}
+            L ${secondCorner[0]} ${secondCorner[1]}
+            L ${thirdCorner[0]} ${thirdCorner[1]}
+            L ${forthCorner[0]} ${forthCorner[1]}
+            Z
+        `;
+
+        _drawBubbleInCanvas(
+            commands,
+            thirdCorner,
+            bubbleConfig,
+            bubbleData.text,
+            screenSize
+        );
+    }
+
+    function drawBubbleLeftMiddle(bubbleConfig, bubbleData, screenSize) {
+        const startPoint = _getBubbleStartingPoint(bubbleData, screenSize);
+        const speecheLine = [
+            startPoint[0] + heightPicBubbleSpeech,
+            startPoint[1] - heightPicBubbleSpeech,
+        ];
+        const firstCorner = [
+            speecheLine[0],
+            speecheLine[1] - bubbleConfig.height / 2 + heightPicBubbleSpeech,
+        ];
+        const secondCorner = [
+            firstCorner[0] + bubbleConfig.width,
+            firstCorner[1],
+        ];
+        const thirdCorner = [
+            secondCorner[0],
+            secondCorner[1] + bubbleConfig.height,
+        ];
+        const forthCorner = [
+            thirdCorner[0] - bubbleConfig.width,
+            thirdCorner[1],
+        ];
+        const speechPoint = [
+            forthCorner[0],
+            forthCorner[1] - bubbleConfig.height / 2 + heightPicBubbleSpeech,
+        ];
+
+        const commands = `
+            M ${startPoint[0]} ${startPoint[1]}
+            L ${speecheLine[0]} ${speecheLine[1]}
+            L ${firstCorner[0]} ${firstCorner[1]}
+            L ${secondCorner[0]} ${secondCorner[1]}
+            L ${thirdCorner[0]} ${thirdCorner[1]}
+            L ${forthCorner[0]} ${forthCorner[1]}
+            L ${speechPoint[0]} ${speechPoint[1]}
+            Z
+        `;
+
+        _drawBubbleInCanvas(
+            commands,
+            firstCorner,
+            bubbleConfig,
+            bubbleData.text,
+            screenSize
+        );
+    }
+
+    function drawBubbleLeftTop(bubbleConfig, bubbleData, screenSize) {
+        const startPoint = _getBubbleStartingPoint(bubbleData, screenSize);
+        const firstCorner = [
+            startPoint[0] + bubbleConfig.width + heightPicBubbleSpeech,
+            startPoint[1],
+        ];
+        const secondCorner = [
+            firstCorner[0],
+            firstCorner[1] + bubbleConfig.height,
+        ];
+        const thirdCorner = [
+            secondCorner[0] - bubbleConfig.width,
+            secondCorner[1],
+        ];
+        const forthCorner = [
+            thirdCorner[0],
+            thirdCorner[1] - bubbleConfig.height + heightPicBubbleSpeech,
+        ];
+
+        const commands = `
+            M ${startPoint[0]} ${startPoint[1]}
+            L ${firstCorner[0]} ${firstCorner[1]}
+            L ${secondCorner[0]} ${secondCorner[1]}
+            L ${thirdCorner[0]} ${thirdCorner[1]}
+            L ${forthCorner[0]} ${forthCorner[1]}
+            Z
+        `;
+
+        _drawBubbleInCanvas(
+            commands,
+            [startPoint[0] + heightPicBubbleSpeech, startPoint[1]],
+            bubbleConfig,
+            bubbleData.text,
+            screenSize
+        );
+    }
+
+    function drawBubblesSpeech(lineIndex, groupName, screenSize) {
+        const groupData = data.groups.find(
+            (group) => _getIdName(group.groupName) === groupName
+        );
+        const bubblesData = groupData.lines[lineIndex].messages;
+
+        for (const bubbleData of bubblesData) {
+            const bubbleConfig =
+                BUBBLES_SPEECH_SIZES.SMALL === bubbleData.size
+                    ? bubblesSpeechSmall[screenSize]
+                    : bubblesSpeechBig[screenSize];
+
+            // drawBubbleTopMiddle(bubbleConfig, bubbleData, screenSize);
+            //  drawBubbleRightTop(bubbleConfig, bubbleData, screenSize);
+            // drawBubbleRightMiddle(bubbleConfig, bubbleData, screenSize);
+            // drawBubbleRightBottom(bubbleConfig, bubbleData, screenSize);
+            // drawBubbleMiddleBottom(bubbleConfig, bubbleData, screenSize);
+            // drawBubbleLeftBottom(bubbleConfig, bubbleData, screenSize);
+            // drawBubbleLeftMiddle(bubbleConfig, bubbleData, screenSize);
+            drawBubbleLeftTop(bubbleConfig, bubbleData, screenSize);
+        }
     }
 
     useEffect(() => {
