@@ -39,7 +39,7 @@ const subAnalyses = [
         async _readOffFacebooEvents(zipFile) {
             const entries = await zipFile.getEntries();
             const offFacebookEventsFile = entries.find((fileName) =>
-            fileName.includes(
+                fileName.includes(
                     "apps_and_websites_off_of_facebook/your_off-facebook_activity.json"
                 )
             );
@@ -113,7 +113,7 @@ const subAnalyses = [
 
             const entries = await zipFile.getEntries();
             const extractedFolderNames = entries.map((fileName) => {
-                const nameParts = fileName.replace(`${id}/` , "").split("/");
+                const nameParts = fileName.replace(`${id}/`, "").split("/");
                 if (nameParts.length >= 2) {
                     for (const [part, i] of nameParts) {
                         if (part === "no-data.txt") {

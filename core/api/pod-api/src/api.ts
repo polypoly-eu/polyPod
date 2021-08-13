@@ -143,9 +143,7 @@ export interface PolyNav {
     /**
      * Remove a previously imported file
      */
-     removeFile(fileId: string): Promise<void>;
-
-
+    removeFile(fileId: string): Promise<void>;
 }
 
 /**

@@ -41,9 +41,7 @@ class OverviewView extends LitElement {
                             <button @click="${() => this._removeFile(file)}">
                                 Remove
                             </button>
-                            <button
-                                @click="${() => this._exploreFile(file)}"
-                            >
+                            <button @click="${() => this._exploreFile(file)}">
                                 Explore
                             </button>
                         </li>`

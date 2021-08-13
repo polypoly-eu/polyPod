@@ -4,12 +4,12 @@ import type {
     Pod,
     PolyIn,
     PolyOut,
-    PolyNav
+    PolyNav,
 } from "@polypoly-eu/pod-api";
 import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
-import * as zip from "@zip.js/zip.js"
+import * as zip from "@zip.js/zip.js";
 
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
@@ -80,7 +80,7 @@ class LocalStorageStats implements Stats {
             stats.getSize(),
             stats.getName(),
             stats.getId()
-            );
+        );
     }
 
     constructor(
@@ -90,7 +90,7 @@ class LocalStorageStats implements Stats {
         readonly size: number,
         readonly name: string,
         readonly id: string
-        ) {}
+    ) {}
     isFile(): boolean {
         return this.file;
     }
@@ -126,78 +126,87 @@ class LocalStoragePolyOut implements PolyOut {
         if (options) {
             throw new Error("Not implemented: readFile with options");
         }
-        return new Promise(async (resolve, reject) => {
-            let parts = id.split("/");
+        return new Promise((resolve, reject) => {
+            const parts = id.split("/");
             if (parts.length > 3) {
-                let zipId = `${parts[0]}//${parts[2]}`;
-                let dataUrl = localStorage.getItem(zipId);
+                const zipId = `${parts[0]}//${parts[2]}`;
+                const dataUrl = localStorage.getItem(zipId);
                 if (!dataUrl) {
                     reject(new Error(`File not found: ${zipId}`));
                     return;
                 }
-                let reader = new zip.ZipReader(new zip.Data64URIReader(dataUrl));
-                let entryPath = id.substring(zipId.length + 1);
-                let zipEntry = (await reader.getEntries()).find(
-                    entry => entry.filename == entryPath
+                const reader = new zip.ZipReader(
+                    new zip.Data64URIReader(dataUrl)
                 );
-                if (!zipEntry) {
-                    reject(new Error(`Zip entry not found: ${entryPath}`));
-                    return;
-                }
-                const data = await zipEntry.getData!(new zip.TextWriter());
-                resolve(new TextEncoder().encode(data));
+                const entryPath = id.substring(zipId.length + 1);
+                reader.getEntries().then((entries) => {
+                    const zipEntry = entries.find(
+                        (entry) => entry.filename == entryPath
+                    );
+                    if (!zipEntry) {
+                        reject(new Error(`Zip entry not found: ${entryPath}`));
+                        return;
+                    }
+                    zipEntry.getData!(new zip.TextWriter()).then((data) => {
+                        resolve(new TextEncoder().encode(data));
+                    });
+                });
                 return;
             }
             if (!files.has(id)) {
                 reject(new Error(`File not found: ${id}`));
                 return;
             }
-            let dataUrl = localStorage.getItem(id);
+            const dataUrl = localStorage.getItem(id);
             if (!dataUrl) {
                 reject(new Error(`File not found: ${id}`));
             }
-            let response = await fetch(dataUrl || "");
-            const arrayBuf = await response.arrayBuffer();
-            resolve(new Uint8Array(arrayBuf));
+            fetch(dataUrl || "").then((response) => {
+                response.arrayBuffer().then((arrayBuf) => {
+                    resolve(new Uint8Array(arrayBuf));
+                });
+            });
         });
     }
 
     readdir(path: string): Promise<string[]> {
-        files = new Map<string, Stats>(JSON.parse(
-            localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
-            ));
-        return new Promise(async (resolve, reject)  => {
-            const filteredFiles = Array.from(
-                files
-            ).filter(
-                file => file[0].startsWith(path)
-            ).map(file => file[0]);
+        files = new Map<string, Stats>(
+            JSON.parse(localStorage.getItem(BrowserPolyNav.filesKey) || "[]")
+        );
+        return new Promise((resolve, reject) => {
+            const filteredFiles = Array.from(files)
+                .filter((file) => file[0].startsWith(path))
+                .map((file) => file[0]);
 
             if (path == "") {
                 resolve(filteredFiles);
                 return;
             }
-            let dataUrl = localStorage.getItem(path);
+            const dataUrl = localStorage.getItem(path);
             if (!dataUrl) {
                 reject(new Error(`File not found: ${path}`));
                 return;
             }
-            let reader = new zip.ZipReader(new zip.Data64URIReader(dataUrl));
-            resolve((await reader.getEntries()).map(
-                entry => `${path}/${entry.filename}`)
-            );
+            const reader = new zip.ZipReader(new zip.Data64URIReader(dataUrl));
+            reader
+                .getEntries()
+                .then((entries) =>
+                    resolve(entries.map((entry) => `${path}/${entry.filename}`))
+                );
         });
     }
 
     stat(id: string): Promise<Stats> {
-        return new Promise(async resolve => {
-            files = new Map<string, Stats>(JSON.parse(
-                localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
-                ));
+        return new Promise((resolve) => {
+            files = new Map<string, Stats>(
+                JSON.parse(
+                    localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
+                )
+            );
             if (!files.has(id)) {
                 throw new Error(`File not found: ${id}`);
             }
-            resolve(files.get(id)!!);
+            resolve(files.get(id) || ({} as Stats));
         });
     }
 
@@ -211,12 +220,16 @@ class LocalStoragePolyOut implements PolyOut {
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-function createUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-       return v.toString(16);
-    });
- }
+function createUUID(): string {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+        /[xy]/g,
+        function (c) {
+            const r = (Math.random() * 16) | 0,
+                v = c == "x" ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+        }
+    );
+}
 
 let files = new Map<string, Stats>();
 class BrowserPolyNav implements PolyNav {
@@ -269,18 +282,22 @@ class BrowserPolyNav implements PolyNav {
                 const reader = new FileReader();
                 reader.onload = async function () {
                     const dataUrl = this.result as string;
-                    let filesInDir = new Map(JSON.parse(
-                        localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
-                        ));
+                    const filesInDir = new Map(
+                        JSON.parse(
+                            localStorage.getItem(BrowserPolyNav.filesKey) ||
+                                "[]"
+                        )
+                    );
 
-                    let fileId = "polypod://" + createUUID();
+                    const fileId = "polypod://" + createUUID();
                     filesInDir.set(fileId, {
                         id: fileId,
                         name: selectedFile.name,
                         time: new Date().toISOString(),
-                        size: dataUrl.length
+                        size: dataUrl.length,
                     });
-                    localStorage.setItem(BrowserPolyNav.filesKey,
+                    localStorage.setItem(
+                        BrowserPolyNav.filesKey,
                         JSON.stringify(Array.from(filesInDir))
                     );
                     localStorage.setItem(fileId, dataUrl);
@@ -293,17 +310,20 @@ class BrowserPolyNav implements PolyNav {
     }
 
     async removeFile(fileId: string): Promise<void> {
-        return new Promise(resolve => {
-            let filesInDir = new Map(JSON.parse(
-                localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
-                ));
+        return new Promise((resolve) => {
+            const filesInDir = new Map(
+                JSON.parse(
+                    localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
+                )
+            );
             filesInDir.delete(fileId);
-            localStorage.setItem(BrowserPolyNav.filesKey,
+            localStorage.setItem(
+                BrowserPolyNav.filesKey,
                 JSON.stringify(Array.from(filesInDir))
             );
             localStorage.removeItem(fileId);
-            resolve()
-        })
+            resolve();
+        });
     }
 }
 

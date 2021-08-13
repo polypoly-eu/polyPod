@@ -133,7 +133,7 @@ export class DefaultPod implements Pod {
             },
             removeFile: async (fileId: string) => {
                 throw new Error("Not implemented");
-            }
+            },
         };
     }
 }

@@ -10,40 +10,43 @@ export default class Storage {
     }
 
     async refreshFiles() {
-        return new Promise(async resolve => {
-            const { polyOut } = await this._pod;
+        return new Promise((resolve) => {
+            const { polyOut } = this._pod;
             this._files = [];
-            const files = await polyOut.readdir("");
-            for (const file of files) {
-                try {
-                    this._files[file] = await polyOut.stat(file);
+            polyOut.readdir("").then((files) => {
+                for (const file of files) {
+                    try {
+                        this._files[file] = polyOut.stat(file);
+                    } catch (e) {
+                        console.log(e);
+                    }
                 }
-                catch (e) {
-                    console.log(e);
-                }
-            }
-            resolve(files);
+                resolve(files);
+            });
         });
     }
 
     async readFile(path) {
-        const { polyOut } = await this._pod;
+        const { polyOut } = this._pod;
         return polyOut.readFile(path);
     }
 
-    async addFile(file) {
-        return new Promise(async resolve => {
+    async addFile() {
+        return new Promise((resolve) => {
             // File is already added by importFile, just refresh
-            await this.refreshFiles();
-            this.changeListener();
+            this.refreshFiles().then(() => {
+                this.changeListener();
+                resolve();
+            });
         });
     }
 
     async removeFile(file) {
-        return new Promise(async resolve => {
-            const { polyNav } = await this._pod;
-            await polyNav.removeFile(file);
-            await this.refreshFiles();
+        return new Promise((resolve) => {
+            const { polyNav } = this._pod;
+            polyNav.removeFile(file).then(() => {
+                this.refreshFiles().then(() => resolve());
+            });
             this.changeListener();
         });
     }
@@ -56,27 +59,23 @@ export class ZipFile {
     }
 
     getEntries() {
-        return new Promise(async resolve => {
-            const { polyOut } = await this._pod;
-            const entries = await polyOut.readdir(this._file.id);
-            resolve(entries);
+        return new Promise((resolve) => {
+            const { polyOut } = this._pod;
+            polyOut.readdir(this._file.id).then((entries) => resolve(entries));
         });
     }
 
     data() {
-        return new Promise(async resolve => {
-            const { polyOut } = await this._pod;
-            const entries = await polyOut.readFile(this._file.id);
-            resolve(entries);
+        return new Promise((resolve) => {
+            const { polyOut } = this._pod;
+            polyOut.readFile(this._file.id).then((entries) => resolve(entries));
         });
     }
 
     getContent(entry) {
-        return new Promise(async resolve => {
-            const { polyOut } = await this._pod;
-            const content = await polyOut.readFile(entry);
-            resolve(content);
+        return new Promise((resolve) => {
+            const { polyOut } = this._pod;
+            polyOut.readFile(entry).then((content) => resolve(content));
         });
     }
-
 }

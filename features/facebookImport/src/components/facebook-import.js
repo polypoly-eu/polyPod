@@ -29,8 +29,12 @@ class FacebookImport extends LitElement {
         });
         this._storage = new Storage(podInitializer);
         this._files = [];
-        this._storage.changeListener = () => {
-            this._files = Object.values(this._storage.files);
+        this._storage.changeListener = async () => {
+            const resolvedFiles = [];
+            for (const file of this._storage.files) {
+                resolvedFiles.push(await file);
+            }
+            this._files = Object.values(resolvedFiles);
         };
     }
 

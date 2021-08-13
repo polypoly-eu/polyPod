@@ -6,7 +6,7 @@ import {
     PolyNav,
     EncodingOptions,
     Stats,
-    Matcher
+    Matcher,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -111,7 +111,7 @@ class FileStats implements Stats {
             stats.getSize(),
             stats.getName(),
             stats.getId()
-            );
+        );
     }
 
     constructor(
@@ -121,7 +121,7 @@ class FileStats implements Stats {
         readonly size: number,
         readonly name: string,
         readonly id: string
-        ) {}
+    ) {}
     isFile(): boolean {
         return this.file;
     }
@@ -150,7 +150,7 @@ export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/rdf.Literal": RDF.Literal,
     "@polypoly-eu/rdf.Variable": RDF.Variable,
     "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph,
-    "@polypoly-eu/rdf.Quad": RDF.Quad
+    "@polypoly-eu/rdf.Quad": RDF.Quad,
 };
 
 function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<any, any> {
@@ -235,10 +235,8 @@ export class RemoteClientPod implements Pod {
             setActiveActions: (actions: string[]) =>
                 this.rpcClient.polyNav().setActiveActions(actions)(),
             setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
-            importFile: () =>
-                this.rpcClient.polyNav().importFile()(),
-            removeFile: (fileId: string) =>
-                this.rpcClient.polyNav().removeFile(fileId)(),
+            importFile: () => this.rpcClient.polyNav().importFile()(),
+            removeFile: (fileId: string) => this.rpcClient.polyNav().removeFile(fileId)(),
         };
     }
 }
