@@ -24,3 +24,8 @@ export const INTRO_ANIMATIONS = {
 export const SUMMARY_ANIMATIONS = {
     ANIMATE_BULLET: "animate bullet",
 };
+
+export const BUBBLES_SPEECH_SIZES = {
+    BIG: "big",
+    SMALL: "small",
+};
