@@ -1,6 +1,7 @@
 import React from "react";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 import LinesChart from "../../components/dataViz/linesChart.jsx";
+import { BUBBLES_SPEECH_SIZES } from "../../constants";
 
 import "./exampleStory.css";
 
@@ -41,11 +42,13 @@ const ExampleStory = () => {
                                 x: new Date("2017-01-01"),
                                 y: 300,
                                 text: "We ride the dolar",
+                                size: BUBBLES_SPEECH_SIZES.BIG,
                             },
                             {
                                 x: new Date("2019-01-01"),
                                 y: 500,
                                 text: "Messanger FB: 500",
+                                size: BUBBLES_SPEECH_SIZES.SMALL,
                             },
                         ],
                     },
@@ -77,11 +80,13 @@ const ExampleStory = () => {
                                 x: new Date("2016-06-01"),
                                 y: 100,
                                 text: "I think that I don't feel good",
+                                size: BUBBLES_SPEECH_SIZES.BIG,
                             },
                             {
                                 x: new Date("2017-01-01"),
                                 y: 200,
                                 text: "WhatsApp: 200",
+                                size: BUBBLES_SPEECH_SIZES.SMALL,
                             },
                         ],
                     },
@@ -113,11 +118,13 @@ const ExampleStory = () => {
                                 x: new Date("2020-06-01"),
                                 y: 420,
                                 text: "I think we are going down...",
+                                size: BUBBLES_SPEECH_SIZES.BIG,
                             },
                             {
                                 x: new Date("2021-01-01"),
                                 y: 400,
                                 text: "Instagram: 400",
+                                size: BUBBLES_SPEECH_SIZES.SMALL,
                             },
                         ],
                     },
@@ -156,11 +163,13 @@ const ExampleStory = () => {
                                 y: 500,
                                 text:
                                     "I like the stablity... no hearth attacks",
+                                size: BUBBLES_SPEECH_SIZES.BIG,
                             },
                             {
                                 x: new Date("2019-01-01"),
                                 y: 500,
                                 text: "Signarl: 500",
+                                size: BUBBLES_SPEECH_SIZES.SMALL,
                             },
                         ],
                     },
@@ -192,11 +201,13 @@ const ExampleStory = () => {
                                 x: new Date("2015-06-01"),
                                 y: 100,
                                 text: "I'm like a rocket",
+                                size: BUBBLES_SPEECH_SIZES.BIG,
                             },
                             {
                                 x: new Date("2017-01-01"),
                                 y: 100000,
                                 text: "Telegram: 100000",
+                                size: BUBBLES_SPEECH_SIZES.SMALL,
                             },
                         ],
                     },
@@ -228,11 +239,13 @@ const ExampleStory = () => {
                                 x: new Date("2020-01-01"),
                                 y: 10,
                                 text: "щ（ﾟДﾟщ）",
+                                size: BUBBLES_SPEECH_SIZES.BIG,
                             },
                             {
                                 x: new Date("2021-01-01"),
                                 y: -10,
                                 text: "Threema",
+                                size: BUBBLES_SPEECH_SIZES.SMALL,
                             },
                         ],
                     },

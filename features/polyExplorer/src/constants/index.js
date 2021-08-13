@@ -31,3 +31,8 @@ export const DONUT_CHART = {
     FACEBOOK_GROUP: "Facebook",
     FACEBOOK_COLOR: "#3749A9",
 };
+
+export const BUBBLES_SPEECH_SIZES = {
+    BIG: "big",
+    SMALL: "small",
+};
