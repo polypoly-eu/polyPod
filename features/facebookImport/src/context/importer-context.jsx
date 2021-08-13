@@ -130,7 +130,6 @@ export const ImporterProvider = ({ children }) => {
     useEffect(() => {
         updatePodNavigation(pod, history);
         updateTitle(pod);
-        console.log(files);
     });
 
     return (
