@@ -132,7 +132,8 @@ const LinesChart = ({ data }) => {
         return root;
     }
 
-    function calculateScreenSize(screenWidth) {
+    function calculateScreenSize() {
+        const screenWidth = window.innerWidth;
         if (screenWidth <= 320) {
             return screenSizes.smallScreen;
         } else if (screenWidth <= 413) {
@@ -241,7 +242,44 @@ const LinesChart = ({ data }) => {
             .style("stop-opacity", 0);
     }
 
-    function drawLine(points, color, groupName, screenSize) {
+    function drawArea(lineIndex, groupName, screenSize) {
+        const { resolution, leftMargin } = canvasConfig[screenSize];
+        const root = _getRoot(screenSize);
+        const x = _getScaleX(screenSize);
+        const y = _getScaleY(screenSize);
+        const groupData = data.groups.find(
+            (group) => _getIdName(group.groupName) === groupName
+        );
+        const points = groupData.lines[lineIndex].points;
+
+        const area = d3
+            .area()
+            .x((d) => {
+                const date = `${d.x.getFullYear()}-${d.x.getMonth()}-${d.x.getDate()}`;
+                const d3Date = d3.timeParse("%Y-%m-%d")(date);
+                const point = x(d3Date);
+
+                return point + leftMargin + 3;
+            })
+            .y0(resolution)
+            .y1((d) => {
+                const point = y(d.y);
+                return point;
+            });
+
+        const path = root
+            .append("path")
+            .datum(points)
+            .attr("class", "gradient-area")
+            .attr("fill", `url(#${groupName})`)
+            .attr("stroke", "none")
+            .attr("group", _getIdName(groupName))
+            .attr("d", area);
+
+        path.node().addEventListener("click", onClickPath);
+    }
+
+    function drawLine(points, color, groupName, lineIndex, screenSize) {
         const { leftMargin } = canvasConfig[screenSize];
         const root = _getRoot(screenSize);
         const x = _getScaleX(screenSize);
@@ -254,6 +292,7 @@ const LinesChart = ({ data }) => {
             .attr("stroke", color)
             .attr("stroke-width", 2)
             .attr("group", _getIdName(groupName))
+            .attr("line-index", lineIndex)
             .attr(
                 "d",
                 d3
@@ -280,35 +319,46 @@ const LinesChart = ({ data }) => {
     function drawLines(screenSize) {
         for (const group of data.groups) {
             createLinearGradient(group.color, group.groupName, screenSize);
-            for (const line of group.lines) {
-                drawLine(line.points, group.color, group.groupName, screenSize);
+            const leng = group.lines.length;
+
+            for (let i = 0; i < leng; i++) {
+                drawLine(
+                    group.lines[i].points,
+                    group.color,
+                    group.groupName,
+                    i,
+                    screenSize
+                );
             }
         }
     }
 
-    function deactivatePaths() {
+    function deactivatePaths(origin) {
+        console.log("NNN Origin: ", origin);
         const root = d3.select(svgCanvas.current).select("svg");
         if (!root.empty()) {
-            root.selectAll("path").attr("fill", "none");
+            root.selectAll(".gradient-area").remove();
         }
     }
 
     function deactivateOnClick(event) {
         if (event.target.tagName !== "path") {
-            deactivatePaths();
+            deactivatePaths("deactivateOnClick");
         }
     }
 
     function onClickPath(event) {
-        deactivatePaths();
+        deactivatePaths("OnClickPath");
         const path = d3.select(event.target);
         const gradientId = path.attr("group");
-        path.attr("fill", `url(#${gradientId})`);
+        const lineIndex = Number(path.attr("line-index"));
+        const screenSize = calculateScreenSize();
+
+        drawArea(lineIndex, gradientId, screenSize);
     }
 
     useEffect(() => {
-        const innerWidth = window.innerWidth;
-        const screenSize = calculateScreenSize(innerWidth);
+        const screenSize = calculateScreenSize();
         calculateXAxis(screenSize);
         calculateYAxis(screenSize);
         drawLines(screenSize);
