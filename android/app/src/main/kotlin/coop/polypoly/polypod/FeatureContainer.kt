@@ -69,8 +69,6 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         // Enabling localStorage to support polyExplorer data migration
         webView.settings.domStorageEnabled = true
 
-        WebView.setWebContentsDebuggingEnabled(true)
-
         // Disable text selection
         webView.isLongClickable = false
         webView.setOnLongClickListener { true }
