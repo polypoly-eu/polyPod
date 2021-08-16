@@ -24,3 +24,10 @@ export const INTRO_ANIMATIONS = {
 export const SUMMARY_ANIMATIONS = {
     ANIMATE_BULLET: "animate bullet",
 };
+
+export const DONUT_CHART = {
+    DEFAULT_GROUP: "default",
+    DEFAULT_COLOR: "#3BA6FF",
+    FACEBOOK_GROUP: "Facebook",
+    FACEBOOK_COLOR: "#3749A9",
+};

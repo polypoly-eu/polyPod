@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 
 import DataStory from "../../components/dataStory/dataStory.jsx";
 import Introduction from "../../components/clusterStories/messengers/introduction.jsx";
 import Summary from "../../components/clusterStories/messengers/summary.jsx";
+import Overview from "../../components/clusterStories/messengers/overview.jsx";
 import { SUMMARY_ANIMATIONS } from "../../constants";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 import "./messengerStory.css";
 
@@ -29,9 +31,11 @@ function isInViewport(el) {
 }
 
 const MessengerStory = () => {
+    const { products } = useContext(ExplorerContext);
     const [introductionHeight, updateIntroHeight] = useState(0);
     const [summaryHeight, updateSummaryHeight] = useState(0);
     const [summaryAnimations, fireSummaryAnimation] = useState(0);
+    const [overviewHeight, updateOverviewHeight] = useState(0);
 
     const introMarks = [
         {
@@ -87,6 +91,15 @@ const MessengerStory = () => {
         },
     ];
 
+    const overviewMarks = [
+        {
+            ref: useRef(),
+            animation: animationPause,
+            heightPercentage: 100,
+            debugColor: "red",
+        },
+    ];
+
     function buildScrollyTellingMark(marks, totalHeight) {
         return marks.map((mark, index) => {
             const markHeight = Math.ceil(
@@ -124,6 +137,10 @@ const MessengerStory = () => {
         return buildScrollyTellingMark(summaryMarks, summaryHeight);
     }
 
+    function buildScrollyTellingMarksOverview() {
+        return buildScrollyTellingMark(overviewMarks, overviewHeight);
+    }
+
     function animateSummary() {
         const animationSummary = Object.values(SUMMARY_ANIMATIONS);
         const visibleMarks = summaryMarks.filter(
@@ -145,11 +162,12 @@ const MessengerStory = () => {
             scrollEvent={scrollStory}
         >
             <div className="messenger-story">
-                <div className="messenger-parts">
+                <div className="messenger-parts scrollytelling-marks">
                     {buildScrollyTellingMarksIntroduction()}
                     {buildScrollyTellingMarksSummary()}
+                    {buildScrollyTellingMarksOverview()}
                 </div>
-                <div className="messenger-parts">
+                <div className="messenger-parts story-content">
                     <Introduction
                         heightEvent={updateIntroHeight}
                     ></Introduction>
@@ -157,6 +175,10 @@ const MessengerStory = () => {
                         heightEvent={updateSummaryHeight}
                         animation={summaryAnimations}
                     ></Summary>
+                    <Overview
+                        products={products}
+                        heightEvent={updateOverviewHeight}
+                    ></Overview>
                 </div>
             </div>
         </DataStory>
