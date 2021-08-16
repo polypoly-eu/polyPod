@@ -89,7 +89,6 @@ const ImportExplanationExpandable = ({
     };
 
     const expandableRef = useRef();
-    const fileInputRef = useRef();
 
     const handleScrollToSection = () => {
         const refPoint = importRefs[importStatus]?.current;
@@ -100,13 +99,8 @@ const ImportExplanationExpandable = ({
             });
     };
 
-    const handleFileSelected = (e) => {
-        selectFile(e.target.files[0]);
-    };
-
     const handleClearFile = () => {
         selectFile(null);
-        fileInputRef.current.value = null;
     };
 
     const bodyContent = {
@@ -183,26 +177,24 @@ const ImportExplanationExpandable = ({
                         selectedFile ? "deactivated" : ""
                     }`}
                     onClick={() => {
-                        fileInputRef.current.click();
+                        onImportFile();
                     }}
                 >
                     {i18n.t("import:import.button.1")}
                 </button>
+                {/*
                 <button
                     className={`btn-highlighted ${
                         selectedFile ? "" : "deactivated"
                     }`}
-                    onClick={onImportFile}
+                    onClick={
+                        // TODO: implement separate importing step
+                        console.log("Import file is a noop for now");
+                    }
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
-                <input
-                    type="file"
-                    ref={fileInputRef}
-                    style={{ display: "none" }}
-                    id="thefile"
-                    onChange={handleFileSelected}
-                />
+                */}
             </>
         ),
         explore: (
@@ -269,14 +261,20 @@ const ImportExplanationExpandable = ({
 };
 
 const Import = () => {
-    const { importSteps, navigationState, updateImportStatus, addFile, files } =
-        useContext(ImporterContext);
+    const {
+        importSteps,
+        navigationState,
+        updateImportStatus,
+        importFile,
+        files,
+    } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
 
     const [selectedFile, selectFile] = useState(null);
 
     const handleImportFile = () => {
-        addFile(selectedFile);
+        const { polyNav } = window.pod;
+        selectFile(polyNav.importFile());
         updateImportStatus(importSteps.explore);
     };
 

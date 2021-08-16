@@ -115,8 +115,8 @@ export const ImporterProvider = ({ children }) => {
         });
     }
 
-    function addFile(file) {
-        storage.addFile({ data: file.size, time: new Date(), id: 1 });
+    function importFile() {
+        return storage.importFile();
     }
 
     function updateImportStatus(newStatus) {
@@ -154,7 +154,7 @@ export const ImporterProvider = ({ children }) => {
                 handleBack,
                 importSteps,
                 updateImportStatus,
-                addFile,
+                importFile,
             }}
         >
             {children}
