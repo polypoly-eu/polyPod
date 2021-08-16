@@ -85,6 +85,8 @@ const LinesChart = ({ data }) => {
             fontWeight: 500,
         },
     };
+    const bubblesClass = "bubble-speech";
+    const bubblesSelector = `.${bubblesClass}`;
 
     const [scaleX, updateScaleX] = useState(null);
     const [scaleY, updateScaleY] = useState(null);
@@ -410,7 +412,8 @@ const LinesChart = ({ data }) => {
         labelInitialPoint,
         bubbleConfig,
         text,
-        screenSize
+        screenSize,
+        diagonal
     ) {
         const root = _getRoot(screenSize);
 
@@ -418,7 +421,8 @@ const LinesChart = ({ data }) => {
             .attr("stroke", darkColor)
             .attr("stroke-width", 2)
             .attr("fill", bubblesSpeachBackground)
-            .attr("class", "bubble-speech")
+            .attr("class", bubblesClass)
+            .attr("diagonal", JSON.stringify(diagonal))
             .attr("d", commands);
 
         root.append("foreignObject")
@@ -481,13 +485,36 @@ const LinesChart = ({ data }) => {
             Z
         `;
 
-        _drawBubbleInCanvas(
-            commands,
-            forthCorner,
-            bubbleConfig,
-            bubbleData.text,
-            screenSize
-        );
+        const root = _getRoot(screenSize);
+
+        root.append("circle")
+            .attr("r", 10)
+            .attr("transform", `translate(${forthCorner})`)
+            .attr("fill", "red");
+
+        root.append("circle")
+            .attr("r", 10)
+            .attr("transform", `translate(${secondCorner})`)
+            .attr("fill", "blue");
+
+        if (
+            !_bubblesOverLaping(
+                [[...forthCorner], [...secondCorner]],
+                screenSize
+            )
+        ) {
+            _drawBubbleInCanvas(
+                commands,
+                forthCorner,
+                bubbleConfig,
+                bubbleData.text,
+                screenSize,
+                [[...forthCorner], [...secondCorner]]
+            );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function drawBubbleRightTop(bubbleConfig, bubbleData, screenSize) {
@@ -517,13 +544,24 @@ const LinesChart = ({ data }) => {
             Z
         `;
 
-        _drawBubbleInCanvas(
-            commands,
-            firstCorner,
-            bubbleConfig,
-            bubbleData.text,
-            screenSize
-        );
+        if (
+            !_bubblesOverLaping(
+                [[...firstCorner], [...thirdCorner]],
+                screenSize
+            )
+        ) {
+            _drawBubbleInCanvas(
+                commands,
+                firstCorner,
+                bubbleConfig,
+                bubbleData.text,
+                screenSize,
+                [[...firstCorner], [...thirdCorner]]
+            );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function drawBubbleRightMiddle(bubbleConfig, bubbleData, screenSize) {
@@ -565,13 +603,24 @@ const LinesChart = ({ data }) => {
             Z
         `;
 
-        _drawBubbleInCanvas(
-            commands,
-            thirdCorner,
-            bubbleConfig,
-            bubbleData.text,
-            screenSize
-        );
+        if (
+            !_bubblesOverLaping(
+                [[...thirdCorner], [...firstCorner]],
+                screenSize
+            )
+        ) {
+            _drawBubbleInCanvas(
+                commands,
+                thirdCorner,
+                bubbleConfig,
+                bubbleData.text,
+                screenSize,
+                [[...thirdCorner], [...firstCorner]]
+            );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function drawBubbleRightBottom(bubbleConfig, bubbleData, screenSize) {
@@ -602,13 +651,30 @@ const LinesChart = ({ data }) => {
             Z
         `;
 
-        _drawBubbleInCanvas(
-            commands,
-            secondCorner,
-            bubbleConfig,
-            bubbleData.text,
-            screenSize
-        );
+        if (
+            !_bubblesOverLaping(
+                [
+                    [...secondCorner],
+                    [firstCorner[0] + heightPicBubbleSpeech, firstCorner[1]],
+                ],
+                screenSize
+            )
+        ) {
+            _drawBubbleInCanvas(
+                commands,
+                secondCorner,
+                bubbleConfig,
+                bubbleData.text,
+                screenSize,
+                [
+                    [...secondCorner],
+                    [firstCorner[0] + heightPicBubbleSpeech, firstCorner[1]],
+                ]
+            );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function drawBubbleMiddleBottom(bubbleConfig, bubbleData, screenSize) {
@@ -649,13 +715,24 @@ const LinesChart = ({ data }) => {
             Z
         `;
 
-        _drawBubbleInCanvas(
-            commands,
-            secondCorner,
-            bubbleConfig,
-            bubbleData.text,
-            screenSize
-        );
+        if (
+            !_bubblesOverLaping(
+                [[...secondCorner], [...forthCorner]],
+                screenSize
+            )
+        ) {
+            _drawBubbleInCanvas(
+                commands,
+                secondCorner,
+                bubbleConfig,
+                bubbleData.text,
+                screenSize,
+                [[...secondCorner], [...forthCorner]]
+            );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function drawBubbleLeftBottom(bubbleConfig, bubbleData, screenSize) {
@@ -686,13 +763,24 @@ const LinesChart = ({ data }) => {
             Z
         `;
 
-        _drawBubbleInCanvas(
-            commands,
-            thirdCorner,
-            bubbleConfig,
-            bubbleData.text,
-            screenSize
-        );
+        if (
+            !_bubblesOverLaping(
+                [[...thirdCorner], [...firstCorner]],
+                screenSize
+            )
+        ) {
+            _drawBubbleInCanvas(
+                commands,
+                thirdCorner,
+                bubbleConfig,
+                bubbleData.text,
+                screenSize,
+                [[...thirdCorner], [...firstCorner]]
+            );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function drawBubbleLeftMiddle(bubbleConfig, bubbleData, screenSize) {
@@ -733,13 +821,24 @@ const LinesChart = ({ data }) => {
             Z
         `;
 
-        _drawBubbleInCanvas(
-            commands,
-            firstCorner,
-            bubbleConfig,
-            bubbleData.text,
-            screenSize
-        );
+        if (
+            !_bubblesOverLaping(
+                [[...firstCorner], [...thirdCorner]],
+                screenSize
+            )
+        ) {
+            _drawBubbleInCanvas(
+                commands,
+                firstCorner,
+                bubbleConfig,
+                bubbleData.text,
+                screenSize,
+                [[...firstCorner], [...thirdCorner]]
+            );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function drawBubbleLeftTop(bubbleConfig, bubbleData, screenSize) {
@@ -770,13 +869,41 @@ const LinesChart = ({ data }) => {
             Z
         `;
 
-        _drawBubbleInCanvas(
-            commands,
-            [startPoint[0] + heightPicBubbleSpeech, startPoint[1]],
-            bubbleConfig,
-            bubbleData.text,
-            screenSize
-        );
+        if (
+            !_bubblesOverLaping(
+                [
+                    [startPoint[0] + heightPicBubbleSpeech, startPoint[1]],
+                    [...secondCorner],
+                ],
+                screenSize
+            )
+        ) {
+            _drawBubbleInCanvas(
+                commands,
+                [startPoint[0] + heightPicBubbleSpeech, startPoint[1]],
+                bubbleConfig,
+                bubbleData.text,
+                screenSize,
+                [
+                    [startPoint[0] + heightPicBubbleSpeech, startPoint[1]],
+                    [...secondCorner],
+                ]
+            );
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function _drawBubble(bubbleConfig, bubbleData, screenSize) {
+        drawBubbleTopMiddle(bubbleConfig, bubbleData, screenSize) ||
+            drawBubbleRightTop(bubbleConfig, bubbleData, screenSize) ||
+            drawBubbleRightMiddle(bubbleConfig, bubbleData, screenSize) ||
+            drawBubbleRightBottom(bubbleConfig, bubbleData, screenSize) ||
+            drawBubbleMiddleBottom(bubbleConfig, bubbleData, screenSize) ||
+            drawBubbleLeftBottom(bubbleConfig, bubbleData, screenSize) ||
+            drawBubbleLeftMiddle(bubbleConfig, bubbleData, screenSize) ||
+            drawBubbleLeftTop(bubbleConfig, bubbleData, screenSize);
     }
 
     function drawBubblesSpeech(lineIndex, groupName, screenSize) {
@@ -791,15 +918,47 @@ const LinesChart = ({ data }) => {
                     ? bubblesSpeechSmall[screenSize]
                     : bubblesSpeechBig[screenSize];
 
-            // drawBubbleTopMiddle(bubbleConfig, bubbleData, screenSize);
-            //  drawBubbleRightTop(bubbleConfig, bubbleData, screenSize);
-            // drawBubbleRightMiddle(bubbleConfig, bubbleData, screenSize);
-            // drawBubbleRightBottom(bubbleConfig, bubbleData, screenSize);
-            // drawBubbleMiddleBottom(bubbleConfig, bubbleData, screenSize);
-            // drawBubbleLeftBottom(bubbleConfig, bubbleData, screenSize);
-            // drawBubbleLeftMiddle(bubbleConfig, bubbleData, screenSize);
-            drawBubbleLeftTop(bubbleConfig, bubbleData, screenSize);
+            _drawBubble(bubbleConfig, bubbleData, screenSize);
         }
+    }
+
+    function _bubblesOverLaping(diagonal, screenSize) {
+        debugger;
+        const pointA = diagonal[0];
+        const pointB = diagonal[1];
+        const root = _getRoot(screenSize);
+
+        const bubbles = root.selectAll(bubblesSelector);
+
+        let result = false;
+
+        if (!bubbles.empty()) {
+            debugger;
+            bubbles.each(function checkOverLaping() {
+                const bubble = d3.select(this);
+                const bubbleDiagonal = JSON.parse(bubble.attr("diagonal"));
+                const bubblePointA = bubbleDiagonal[0];
+                const bubblePointB = bubbleDiagonal[1];
+
+                const firstCond =
+                    pointA[0] <= bubblePointB[0] &&
+                    pointB[0] >= bubblePointB[0] &&
+                    pointA[1] <= bubblePointB[1] &&
+                    pointB[1] >= bubblePointB[1];
+
+                const secondCond =
+                    pointA[0] <= bubblePointA[0] &&
+                    pointB[0] >= bubblePointA[0] &&
+                    pointA[1] <= bubblePointA[1] &&
+                    pointB[1] >= bubblePointA[1];
+
+                result = result || firstCond || secondCond;
+            });
+        }
+
+        debugger;
+
+        return result;
     }
 
     useEffect(() => {
