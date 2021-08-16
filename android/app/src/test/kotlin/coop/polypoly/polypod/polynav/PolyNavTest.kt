@@ -11,6 +11,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import android.content.Context
+import android.net.Uri
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
@@ -19,22 +21,23 @@ class PolyNavTest {
     private val polyNav: PolyNav
 
     init {
-        val webView = WebView(ApplicationProvider.getApplicationContext())
-        polyNav = PolyNav(webView)
+        val context: Context = ApplicationProvider.getApplicationContext()
+        val webView = WebView(context)
+        polyNav = PolyNav(webView, context = context)
     }
 
     @Test
-    fun `pickFile returns file selected by the user`() = runBlocking {
-        val fileData = byteArrayOf(0x01, 0x03, 0x03, 0x07)
+    fun `importFile returns file selected by the user`() = runBlocking {
+        val fileData = Uri.parse("*")
         polyNav.setNavObserver(PolyNavObserver(onPickFile = { fileData }))
-        val result = polyNav.pickFile()
+        val result = polyNav.importFile()
         assertThat(result).isEqualTo(fileData)
     }
 
     @Test
-    fun `pickFile returns null if user cancelled`() = runBlocking {
+    fun `importFile returns null if user cancelled`() = runBlocking {
         polyNav.setNavObserver(PolyNavObserver(onPickFile = { null }))
-        val result = polyNav.pickFile()
+        val result = polyNav.importFile()
         assertThat(result).isNull()
     }
 }

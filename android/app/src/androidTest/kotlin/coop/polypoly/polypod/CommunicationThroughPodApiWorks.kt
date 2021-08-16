@@ -2,6 +2,7 @@ package coop.polypoly.polypod
 
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.web.assertion.WebViewAssertions.webMatches
 import androidx.test.espresso.web.sugar.Web.onWebView
 import androidx.test.espresso.web.webdriver.DriverAtoms.clearElement
@@ -770,7 +771,9 @@ class CommunicationThroughPodApiWorks {
             putString("featureName", "testFeature")
         }
         val fragmentScenario = launchFragmentInContainer<FeatureFragmentTestDouble>(fragmentArgs)
-        val polyOut = PolyOutTestDouble()
+        val polyOut = PolyOutTestDouble(
+            ApplicationProvider.getApplicationContext()
+        )
         val polyIn = PolyInTestDouble()
         val podApi = PodApiTestDouble(polyOut, polyIn)
         fragmentScenario.onFragment { fragment ->
