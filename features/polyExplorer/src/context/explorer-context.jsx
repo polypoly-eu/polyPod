@@ -291,6 +291,7 @@ export const ExplorerProvider = ({ children }) => {
                 handleRemoveFilter,
                 handleFilterApply,
                 storiesMetadata,
+                products,
             }}
         >
             {children}
