@@ -1,19 +1,19 @@
 import { html } from "lit";
-import * as zip from "@zip.js/zip.js";
+import { ZipFile } from "../model/storage.js";
 
 const subAnalyses = [
     class {
         get title() {
-            return "File ID";
+            return "File name";
         }
 
-        parse({ id }) {
+        parse({ name }) {
             this.active = true;
-            this._id = id;
+            this._name = name;
         }
 
         render() {
-            return "" + this._id;
+            return "" + this._name;
         }
     },
     class {
@@ -21,47 +21,120 @@ const subAnalyses = [
             return "File size";
         }
 
-        parse({ data }) {
+        parse({ size }) {
             this.active = true;
-            this._size = data.length;
+            this._size = size;
         }
 
         render() {
             return "" + this._size;
         }
     },
+
     class {
         get title() {
-            return "Hexdump of compressed data";
+            return "Off-Facebook events";
         }
 
-        parse({ data }) {
-            this.active = !!data.length;
-            if (!this.active) return;
-            this._hex = [...data]
-                .map((i) => i.toString(16).padStart(2, "0"))
-                .join(" ");
+        async _readOffFacebooEvents(zipFile) {
+            const entries = await zipFile.getEntries();
+            const offFacebookEventsFile = entries.find((fileName) =>
+                fileName.includes(
+                    "apps_and_websites_off_of_facebook/your_off-facebook_activity.json"
+                )
+            );
+            if (!offFacebookEventsFile) {
+                return;
+            }
+            const fileContent = new TextDecoder("utf-8").decode(
+                await zipFile.getContent(offFacebookEventsFile)
+            );
+
+            if (!fileContent) {
+                return;
+            }
+            try {
+                return JSON.parse(fileContent);
+            } catch (exception) {
+                //TODO: better error handling + error reporting
+                console.log(exception);
+                return;
+            }
+        }
+
+        async parse({ zipFile }) {
+            this._eventsCount = 0;
+            this._companiesCount = 0;
+            this.active = false;
+            if (!zipFile) return;
+
+            const offFacebookEvents = await this._readOffFacebooEvents(zipFile);
+            const activityV2 = offFacebookEvents?.off_facebook_activity_v2;
+            if (!activityV2) {
+                return;
+            }
+            this._companiesCount = activityV2.length;
+            this._eventsCount = activityV2.reduce((total, companyEvents) => {
+                if (companyEvents?.events) {
+                    return total + companyEvents.events.length;
+                }
+                return total;
+            }, 0);
+            this.active = this._companiesCount > 0;
         }
 
         render() {
-            return html`<code>${this._hex}</code>`;
+            if (!this.active) {
+                return "No off-facebook events detected in your export!";
+            }
+            return (
+                "Found " +
+                this._eventsCount +
+                " events from " +
+                this._companiesCount +
+                " companies"
+            );
         }
     },
+
     class {
         get title() {
-            return "List of contents";
+            return "NoData Folders";
         }
 
-        async parse({ reader }) {
-            this.active = !!reader;
-            if (!this.active) return;
-            this._entries = await reader.getEntries();
+        get isForDataReport() {
+            return true;
+        }
+
+        async parse({ id, zipFile }) {
+            this._noDataFolderNames = [];
+            this.active = false;
+            if (!zipFile) return;
+
+            const entries = await zipFile.getEntries();
+            const extractedFolderNames = entries.map((fileName) => {
+                const nameParts = fileName.replace(`${id}/`, "").split("/");
+                if (nameParts.length >= 2) {
+                    for (const [part, i] of nameParts) {
+                        if (part === "no-data.txt") {
+                            return nameParts[i - 1];
+                        }
+                    }
+                    return nameParts[1];
+                }
+                return;
+            });
+
+            this._noDataFolderNames = extractedFolderNames.filter(
+                (each) => each != null
+            );
+            this.active = this._noDataFolderNames.length > 0;
         }
 
         render() {
             return html`<ul>
-                ${this._entries.map(
-                    (entry) => html`<li>${entry.filename}</li>`
+                ${this._noDataFolderNames.map(
+                    (entry) => html`<li>${entry}</li>`
                 )}
             </ul>`;
         }
@@ -69,18 +142,22 @@ const subAnalyses = [
 ];
 
 class UnrecognizedData {
-    get isUnrecognized() {
-        return true;
+    constructor(reportAnalyses) {
+        this.reportAnalyses = reportAnalyses;
+        this.active = this.reportAnalyses && this.reportAnalyses.length > 0;
     }
 
     get report() {
-        return "Data goes here!!!";
+        if (!this.active) {
+            return "No data to report!";
+        }
+        return this.reportAnalyses.length + " analyses included in the report";
     }
 }
 
 export async function analyzeFile(file) {
-    const reader = new zip.ZipReader(new zip.Uint8ArrayReader(file.data));
-    const enrichedFile = { ...file, reader };
+    const zipFile = new ZipFile(file, window.pod);
+    const enrichedFile = { ...file, zipFile };
     const parsedAnalyses = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
             const subAnalysis = new subAnalysisClass();
@@ -88,9 +165,18 @@ export async function analyzeFile(file) {
             return subAnalysis;
         })
     );
-    const activeAnalyses = parsedAnalyses.filter((analysis) => analysis.active);
+
+    const activeAnalyses = parsedAnalyses.filter(
+        (analysis) => !analysis.isForDataReport && analysis.active
+    );
+    const reportAnalyses = parsedAnalyses.filter(
+        (analysis) =>
+            (analysis.isForDataReport && analysis.active) ||
+            (!analysis.isForDataReport && !analysis.active)
+    );
+
     return {
         analyses: activeAnalyses,
-        unrecognizedData: new UnrecognizedData(),
+        unrecognizedData: new UnrecognizedData(reportAnalyses),
     };
 }

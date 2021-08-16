@@ -65,8 +65,12 @@ export const ImporterProvider = ({ children }) => {
     //storage
     const storage = new Storage(pod);
     const [files, setFiles] = useState([]);
-    storage.changeListener = () => {
-        setFiles(Object.values(storage.files));
+    storage.changeListener = async () => {
+        const resolvedFiles = [];
+        for (const file of storage.files) {
+            resolvedFiles.push(await file);
+        }
+        setFiles(Object.values(resolvedFiles));
     };
 
     const [navigationState, setNavigationState] = useState({
@@ -102,11 +106,17 @@ export const ImporterProvider = ({ children }) => {
     }
 
     function refreshFiles() {
-        storage.refreshFiles().then(() => setFiles(storage.files));
+        storage.refreshFiles().then(async () => {
+            const resolvedFiles = [];
+            for (const file of storage.files) {
+                resolvedFiles.push(await file);
+            }
+            setFiles(resolvedFiles);
+        });
     }
 
-    function addFile(file) {
-        storage.addFile({ data: file.size, time: new Date(), id: 1 });
+    function importFile() {
+        return storage.importFile();
     }
 
     function updateImportStatus(newStatus) {
@@ -143,7 +153,7 @@ export const ImporterProvider = ({ children }) => {
                 handleBack,
                 importSteps,
                 updateImportStatus,
-                addFile,
+                importFile,
             }}
         >
             {children}

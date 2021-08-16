@@ -199,6 +199,8 @@ extension PostOffice {
             handlePolyOutReadFile(args: args, completionHandler: completionHandler)
         case "writeFile":
             handlePolyOutWriteFile(args: args, completionHandler: completionHandler)
+        case "readdir":
+            handlePolyOutReadDir(args: args, completionHandler: completionHandler)
         default:
             print("PolyOut method unknown:", method)
         }
@@ -231,7 +233,7 @@ extension PostOffice {
     private func handlePolyOutStat(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.stat(path: path) { fileStats, error in
+        PodApi.shared.polyOut.stat(pathOrId: path) { fileStats, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
                 return
@@ -249,13 +251,13 @@ extension PostOffice {
     }
     
     private func handlePolyOutReadFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let path = args[0] as! String
+        let path = args[0] as? String ?? ""
         
         var options: [String: Any] = [:]
         if args.count > 1 {
             options = args[1] as! [String: Any]
         }
-        PodApi.shared.polyOut.fileRead(path: path, options: options) { data, error in
+        PodApi.shared.polyOut.fileRead(pathOrId: path, options: options) { data, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
                 return
@@ -276,11 +278,27 @@ extension PostOffice {
         let path = args[0] as! String
         let data = args[1] as! String
         
-        PodApi.shared.polyOut.fileWrite(path: path, data: data) { error in
+        PodApi.shared.polyOut.fileWrite(pathOrId: path, data: data) { error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
             } else {
                 completionHandler(MessagePackValue(), nil)
+            }
+        }
+    }
+    
+    private func handlePolyOutReadDir(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let path = args[0] as! String
+        
+        PodApi.shared.polyOut.readdir(dir: path) { fileList, error in
+            if let error = error {
+                completionHandler(nil, MessagePackValue(error.localizedDescription))
+            } else {
+                var encodedList: [MessagePackValue] = [];
+                for file in fileList ?? [] {
+                    encodedList.append(MessagePackValue(file));
+                }
+                completionHandler(MessagePackValue(encodedList), nil)
             }
         }
     }
@@ -295,8 +313,10 @@ extension PostOffice {
             handlePolyNavSetActiveAction(args: args)
         case "openUrl":
             handlePolyNavOpenUrl(args: args)
-        case "pickFile":
-            handlePolyNavPickFile(completionHandler: completionHandler)
+        case "importFile":
+            handlePolyNavImportFile(completionHandler: completionHandler)
+        case "removeFile":
+            handlePolyNavRemoveFile(args: args, completionHandler: completionHandler)
         default:
             print("PolyNav method unknown:", method)
         }
@@ -320,12 +340,19 @@ extension PostOffice {
         }
     }
     
-    private func handlePolyNavPickFile(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        PodApi.shared.polyNav.pickFile() { data in
-            if let data = data {
-                completionHandler(MessagePackValue(data), nil)
+    private func handlePolyNavImportFile(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        PodApi.shared.polyNav.importFile() { fileId in
+            if let fileId = fileId {
+                completionHandler(MessagePackValue(fileId), nil)
                 return
             }
+            completionHandler(MessagePackValue(), nil)
+        }
+    }
+    
+    private func handlePolyNavRemoveFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let fileId = args[0] as! String
+        PodApi.shared.polyNav.removeFile(fileId: fileId) { error in
             completionHandler(MessagePackValue(), nil)
         }
     }

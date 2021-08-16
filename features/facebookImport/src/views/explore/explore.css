@@ -1,0 +1,18 @@
+.analysis-card:first-child {
+    margin-top: 20px;
+}
+
+.analysis-card {
+    margin: 0 8px 8px 8px;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.analysis-card > h1 {
+    font-size: 16px;
+}
+
+.unrecognized-analysis-card {
+    border-color: red;
+}

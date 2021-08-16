@@ -1,13 +1,12 @@
 import XCTest
 
 private class PolyNavDelegateStub: PolyNavDelegate {
-    var pickFileResult: Data?
-    
+    var importFileResult: String?
     func doHandleOpenUrl(url: String) {
     }
     
-    func doHandlePickFile(completion: @escaping (Data?) -> Void) {
-        completion(pickFileResult)
+    func doHandleImportFile(completion: @escaping (URL?) -> Void) {
+        completion(URL.init(fileURLWithPath: "/test/file"))
     }
     
     func doHandleSetTitle(title: String) {
@@ -20,24 +19,24 @@ private class PolyNavDelegateStub: PolyNavDelegate {
 class PolyNavTests: XCTestCase {
     let polyNav = PolyNav()
     
-    func testPickFileReturnsFileSelectedByUser() {
-        let testData = Data([0x01, 0x03, 0x03, 0x07])
+    func testImportFileReturnsFileSelectedByUser() {
+        let testData = "/test/file"
         let delegateStub = PolyNavDelegateStub()
-        delegateStub.pickFileResult = testData
+        delegateStub.importFileResult = testData
         polyNav.delegate = delegateStub
-        expectPickFileResult(testData)
+        expectImportFileResult(testData)
     }
     
-    func testPickFileReturnsNullIfUserCancelled() {
+    func testImportFileReturnsNullIfUserCancelled() {
         let delegateStub = PolyNavDelegateStub()
-        delegateStub.pickFileResult = nil
+        delegateStub.importFileResult = nil
         polyNav.delegate = delegateStub
-        expectPickFileResult(nil)
+        expectImportFileResult(nil)
     }
     
-    private func expectPickFileResult(_ expected: Data?) {
+    private func expectImportFileResult(_ expected: String?) {
         let expectation = XCTestExpectation()
-        polyNav.pickFile() { actual in
+        polyNav.importFile() { actual in
             expectation.fulfill()
             XCTAssertEqual(expected, actual)
         }

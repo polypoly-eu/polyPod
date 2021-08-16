@@ -18,7 +18,8 @@ const Import = () => {
     const [selectedFile, selectFile] = useState(null);
 
     const handleImportFile = () => {
-        addFile(selectedFile);
+        const { polyNav } = window.pod;
+        selectFile(polyNav.importFile());
         updateImportStatus(importSteps.explore);
     };
 

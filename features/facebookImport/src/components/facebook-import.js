@@ -29,8 +29,12 @@ class FacebookImport extends LitElement {
         });
         this._storage = new Storage(podInitializer);
         this._files = [];
-        this._storage.changeListener = () => {
-            this._files = Object.values(this._storage.files);
+        this._storage.changeListener = async () => {
+            const resolvedFiles = [];
+            for (const file of this._storage.files) {
+                resolvedFiles.push(await file);
+            }
+            this._files = Object.values(resolvedFiles);
         };
     }
 
@@ -55,7 +59,7 @@ class FacebookImport extends LitElement {
     }
 
     _handleReviewReport({ detail }) {
-        this._report = detail.report;
+        this._unrecognizedData = detail.unrecognizedData;
         this._currentView = "report";
     }
 
@@ -72,12 +76,11 @@ class FacebookImport extends LitElement {
     }
 
     _handleRemoveFile(event) {
-        this._storage.removeFile(event.detail);
+        this._storage.removeFile(event.detail.file.id);
     }
 
-    _handleExploreFile(event) {
-        const id = event.detail.id;
-        this._selectedFile = this._files.find((file) => file.id === id);
+    async _handleExploreFile(event) {
+        this._selectedFile = event.detail.file;
         this._currentView = "explore";
     }
 
@@ -88,7 +91,7 @@ class FacebookImport extends LitElement {
     _renderReport() {
         return html` <report-view
             .pod="${this._pod}"
-            .report="${this._report}"
+            .unrecognizedData="${this._unrecognizedData}"
             @close="${this._handleCloseReport}"
         ></overview-view>`;
     }

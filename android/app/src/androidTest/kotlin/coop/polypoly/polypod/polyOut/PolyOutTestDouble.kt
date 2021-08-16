@@ -1,10 +1,10 @@
 package coop.polypoly.polypod.polyOut
 
+import android.content.Context
 import eu.polypoly.pod.android.polyOut.FetchInit
 import eu.polypoly.pod.android.polyOut.FetchResponse
-import eu.polypoly.pod.android.polyOut.PolyOut
 
-class PolyOutTestDouble : PolyOut() {
+class PolyOutTestDouble(context: Context) : PolyOut(context) {
     var fetchWasCalled: Boolean = false
     var fetchInit: FetchInit = FetchInit()
     var responseBody: String? = null
@@ -19,7 +19,7 @@ class PolyOutTestDouble : PolyOut() {
         responseOk = false
     }
 
-    override suspend fun fetch(
+    suspend fun fetch(
         resource: String,
         init: FetchInit
     ): FetchResponse {
