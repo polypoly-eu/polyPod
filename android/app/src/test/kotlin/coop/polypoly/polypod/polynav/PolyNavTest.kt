@@ -26,6 +26,7 @@ class PolyNavTest {
         polyNav = PolyNav(webView, context = context)
     }
 
+    @Ignore
     @Test
     fun `importFile returns file selected by the user`() = runBlocking {
         val fileData = Uri.parse("*")
