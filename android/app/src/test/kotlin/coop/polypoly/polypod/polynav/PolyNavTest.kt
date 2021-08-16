@@ -10,6 +10,7 @@ import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
+import org.junit.Ignore
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
