@@ -13,7 +13,8 @@ class PodApiTestDouble(
     polyOut,
     polyIn,
     PolyNav(
-        WebView(ApplicationProvider.getApplicationContext())
+        WebView(ApplicationProvider.getApplicationContext()),
+        context = ApplicationProvider.getApplicationContext()
     )
 ) {
     fun reset() {

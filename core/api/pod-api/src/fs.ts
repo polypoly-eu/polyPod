@@ -14,8 +14,11 @@ export interface EncodingOptions {
 export interface Stats {
     isFile(): boolean;
     isDirectory(): boolean;
+    getTime(): string;
+    getSize(): number;
+    getName(): string;
+    getId(): string;
 }
-
 /**
  * A stripped-down version of the Promise-based filesystem API from Node.js.
  *

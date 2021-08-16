@@ -29,7 +29,7 @@ const Overview = () => {
                         {i18n.t("overview:imported.time")} {file.time}
                     </p>
                     <p>
-                        {i18n.t("overview:size")} {file.data.size} bytes
+                        {i18n.t("overview:size")} {file.size} bytes
                     </p>
                     <div className="btn-holder">
                         <RouteButton className="btn primary" route="/explore">

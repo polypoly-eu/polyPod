@@ -5,7 +5,7 @@
     "lint": "npm run eslint",
     "build": "rollup -c",
     "watch": "rollup --watch -c",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.8",
@@ -17,7 +17,6 @@
     "@rollup/plugin-node-resolve": "11.2.0",
     "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
-    "@zip.js/zip.js": "2.3.7",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",

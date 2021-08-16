@@ -135,11 +135,15 @@ export interface PolyNav {
      */
     setTitle(title: string): Promise<void>;
     /**
-     * Ask the user to pick a file and load it
+     * Ask the user to pick a file and import it
      *
-     * @return a byte array containing the file the user selected, or `null` if none was selected.
+     * @return an ID of an imported file.
      */
-    pickFile(): Promise<Uint8Array | null>;
+    importFile(): Promise<string>;
+    /**
+     * Remove a previously imported file
+     */
+    removeFile(fileId: string): Promise<void>;
 }
 
 /**
