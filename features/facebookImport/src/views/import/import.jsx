@@ -261,13 +261,8 @@ const ImportExplanationExpandable = ({
 };
 
 const Import = () => {
-    const {
-        importSteps,
-        navigationState,
-        updateImportStatus,
-        importFile,
-        files,
-    } = useContext(ImporterContext);
+    const { importSteps, navigationState, updateImportStatus, files } =
+        useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
 
     const [selectedFile, selectFile] = useState(null);
