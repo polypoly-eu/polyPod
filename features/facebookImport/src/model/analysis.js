@@ -2,8 +2,8 @@ import { html } from "lit";
 import { ZipFile } from "../model/storage.js";
 import allStructure from "../static/allStructure";
 
-async function jsonDataEntities(reader) {
-    const entries = await reader.getEntries();
+async function jsonDataEntities(zipFile) {
+    const entries = await zipFile.getEntries();
     const relevantEntries = entries.filter(
         (each) =>
             !each.filename.includes(".DS_Store") &&
@@ -182,12 +182,12 @@ const subAnalyses = [
             return true;
         }
 
-        async parse({ reader }) {
+        async parse({ zipFile }) {
             this._missingEntryNames = [];
             this.active = true;
-            if (!reader) return;
+            if (!zipFile) return;
 
-            const relevantEntries = await jsonDataEntities(reader);
+            const relevantEntries = await jsonDataEntities(zipFile);
             const anonymizedPaths = relevantEntries.map((each) =>
                 anonymiseJsonEntityPath(each)
             );
@@ -228,12 +228,12 @@ const subAnalyses = [
             );
         }
 
-        async parse({ reader }) {
+        async parse({ zipFile }) {
             this._expectedMissingFiles = [];
             this.active = true;
-            if (!reader) return;
+            if (!zipFile) return;
 
-            const relevantEntries = await jsonDataEntities(reader);
+            const relevantEntries = await jsonDataEntities(zipFile);
             const anonymizedPaths = relevantEntries.map((each) =>
                 anonymiseJsonEntityPath(each)
             );
