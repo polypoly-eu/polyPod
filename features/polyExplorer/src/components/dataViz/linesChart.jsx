@@ -27,6 +27,8 @@ const LinesChart = ({ data }) => {
             leftMargin: 35,
             topMargin: 16,
             bottomMargin: 16,
+            limitMarginX: 50,
+            limitMarginY: 50,
         },
         [screenSizes.normalScreen]: {
             resolution: 650,
@@ -34,6 +36,8 @@ const LinesChart = ({ data }) => {
             leftMargin: 16,
             topMargin: 16,
             bottomMargin: 16,
+            limitMarginX: 50,
+            limitMarginY: 50,
         },
         [screenSizes.bigScreen]: {
             resolution: 650,
@@ -41,6 +45,8 @@ const LinesChart = ({ data }) => {
             leftMargin: 16,
             topMargin: 16,
             bottomMargin: 16,
+            limitMarginX: 50,
+            limitMarginY: 50,
         },
     };
 
@@ -1159,15 +1165,17 @@ const LinesChart = ({ data }) => {
     }
 
     function _isBubbleOut(diagonal, screenSize) {
-        const { leftMargin } = canvasConfig[screenSize];
+        const { leftMargin, limitMarginX, limitMarginY } = canvasConfig[
+            screenSize
+        ];
         const { rangeX, rangeY } = _getRangesFromDiagonal(diagonal);
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
         const limitsX = [
             x(jsDateTo3dDate(data.rangeDates[0])),
-            x(jsDateTo3dDate(data.rangeDates[1])) + leftMargin,
+            x(jsDateTo3dDate(data.rangeDates[1])) + leftMargin + limitMarginX,
         ];
-        const limitsY = [y(data.rangeY[1]), y(data.rangeY[0])];
+        const limitsY = [y(data.rangeY[1]), y(data.rangeY[0]) + limitMarginY];
 
         const isOutLimitsOfX = rangeX[0] < limitsX[0] || rangeX[1] > limitsX[1];
         const isOutLimitsY = rangeY[0] < limitsY[0] || rangeY[1] > limitsY[1];
