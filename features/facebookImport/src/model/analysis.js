@@ -21,10 +21,8 @@ function anonymisePathSegment(pathSegment, isFileName, fullPath) {
         fullPath.includes("messages") &&
         /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(anonymizedSegment)
     ) {
-        anonymizedSegment = "uniqueid_hash";
+        return "uniqueid_hash";
     }
-
-    return anonymizedSegment;
 }
 
 function anonymiseJsonEntityPath(entity) {
