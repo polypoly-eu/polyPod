@@ -14,15 +14,14 @@ async function jsonDataEntities(zipFile) {
     return relevantEntries;
 }
 
-function anonymisePathSegment(pathSegment, isFileName, fullPath) {
-    let anonymizedSegment = pathSegment;
-
+function anonymisePathSegment(pathSegment, fullPath) {
     if (
         fullPath.includes("messages") &&
-        /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(anonymizedSegment)
+        /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(pathSegment)
     ) {
         return "uniqueid_hash";
     }
+    return pathSegment;
 }
 
 function anonymiseJsonEntityPath(entity) {
@@ -30,7 +29,7 @@ function anonymiseJsonEntityPath(entity) {
     const nameParts = fileName.split("/").slice(1);
 
     const anonymisedParts = nameParts.map((each) =>
-        anonymisePathSegment(each, false, fileName)
+        anonymisePathSegment(each, fileName)
     );
     return anonymisedParts.join("/");
 }
