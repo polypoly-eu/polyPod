@@ -7,12 +7,15 @@ const BarChart = ({ data }) => {
     });
 
     const svgBarRef = useRef();
-    const gHeight = 46;
+    const gHeight = 52;
     const width = 500;
     const height = data.length * (gHeight * 2);
-    const margin = { top: 30, right: 30, bottom: 1, left: 0 };
-    const labelContainerMargin = { top: 8, right: 12, bottom: 8, left: 12 };
+    const margin = { top: 36, right: 30, bottom: 1, left: 1 };
     const barHeight = gHeight - margin.top;
+    const legendWidth = 120;
+    const legendHeight = 40;
+    const fontSize = "14px";
+    const labelTitlePadding = { top: 8, right: 12, bottom: 8, left: 12 };
     const maxValue = d3.max(data, (d) => d.value);
     const averageValue = d3.mean(data, (d) => d.value);
 
@@ -30,12 +33,13 @@ const BarChart = ({ data }) => {
             .scaleBand()
             .range([0, height - margin.top - margin.bottom])
             .domain(data.map((d) => d.title));
+
         const bars = svgChart
             .selectAll("g")
             .data(data)
             .enter()
             .append("g")
-            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+            .attr("transform", `translate(${margin.left}, ${gHeight})`);
         bars.append("rect")
             .attr("class", "bar")
             .attr("height", barHeight)
@@ -48,77 +52,147 @@ const BarChart = ({ data }) => {
             .style("margin-top", margin.top);
         bars.append("text")
             .attr("class", "label-value")
-            .attr("x", (d) => xScale(d.value) + margin.left + 4)
+            .attr("x", (d) => xScale(d.value) + margin.left + 2)
             .attr("y", (d) => yScale(d.title) + gHeight + 8)
             .attr("dy", ".35em")
             .style("font-size", "12px")
+            .style("font-weight", "500")
             .attr("fill", "var(--data-exp-purposes)")
-            .text((d) => d.value);
+            .text((d) =>
+                d.value >= 1000000
+                    ? Math.trunc(d.value / 1000000) + "M"
+                    : d.value
+            );
 
-        const labelTitle = bars
-            .append("text")
-            .attr("class", "label-title")
+        const labelTitle = svgChart
+            .selectAll("foreignObject")
+            .data(data)
+            .enter()
+            .append("foreignObject")
+            .attr("x", 0)
+            .attr("y", (d) => yScale(d.title) + gHeight)
+            .attr("width", width)
+            .attr("height", 42);
+        const labelTitleDiv = labelTitle.append("xhtml:div");
+        const labelTitleP = labelTitleDiv
+            .append("p")
             .text((d) => d.title)
-            .attr("x", margin.left + labelContainerMargin.left)
-            .attr("y", (d) => yScale(d.title) + margin.top)
-            .style("font", "14px")
-            .attr("fill", "var(--color-text-dark)");
+            .attr("height", "32px")
+            .style("margin", "0")
+            .style("display", "inline-block")
+            .style("font-size", fontSize)
+            .style(
+                "padding",
+                labelTitlePadding.top + "px " + labelTitlePadding.left + "px"
+            )
+            .style("color", "var(--color-dark)")
+            .style("border-radius", "16px")
+            .style("border", "solid 1px var(--color-dark)")
+            .style("background-color", "var(--color-background-light)");
+        const labelTitleWidth = labelTitleP.node().getBoundingClientRect()
+            .width;
+        labelTitleDiv.attr("width", labelTitleWidth).attr("height", "32px");
 
-        bars.append("rect")
-            .attr("class", "label-title-container")
-            .attr("x", margin.left)
-            .attr("y", (d) => yScale(d.title) + labelContainerMargin.bottom)
-            .attr(
-                "width",
-                200 + labelContainerMargin.left + labelContainerMargin.right
-            )
-            .attr(
-                "height",
-                14 + labelContainerMargin.top + labelContainerMargin.bottom
-            )
-            .attr("rx", "16")
-            .attr("ry", "16")
-            .attr("fill", "transparent")
-            .attr("stroke", "var(--color-dark)");
-        const maxValueLine = svgChart
+        const valueLines = svgChart
             .append("g")
             .attr("transform", `translate(${margin.left}, ${margin.top})`);
-        maxValueLine
+        valueLines
             .append("line")
             .attr("x1", xScale(maxValue))
-            .attr("y1", labelContainerMargin.top)
+            .attr("y1", margin.top / 2)
             .attr("x2", xScale(maxValue))
             .attr("y2", height - margin.bottom)
             .style("stroke", "var(--data-exp-purposes)")
             .style("stroke-width", 2);
-        maxValueLine
-            .append("text")
-            .text(maxValue + " Maximum")
-            .attr("x", xScale(maxValue) - margin.right)
-            .attr("y", 0)
-            .style("font-size", "12px")
-            .attr("fill", "var(--color-text-dark)");
-        const averageValueLine = svgChart
-            .append("g")
-            .attr("transform", `translate(${margin.left}, ${margin.top})`);
-        averageValueLine
+        valueLines
             .append("line")
             .attr("x1", xScale(averageValue))
-            .attr("y1", labelContainerMargin.top)
+            .attr("y1", margin.top / 2)
             .attr("x2", xScale(averageValue))
             .attr("y2", height - margin.bottom)
             .style("stroke", "var(--data-exp-purposes)")
             .style("stroke-width", 2)
             .style("stroke-dasharray", "5, 5");
-        averageValueLine
-            .append("text")
-            .text(Math.round(averageValue) + " Average")
-            .attr("x", xScale(averageValue) - margin.right)
+        const legendTitle = svgChart
+            .append("foreignObject")
+            .attr("x", 0)
             .attr("y", 0)
-            .attr("width", "10")
-            .attr("height", "100")
+            .attr("width", legendWidth)
+            .attr("height", legendHeight);
+        legendTitle
+            .append("xhtml:div")
+            .attr("x", 0)
+            .attr("y", 0)
+            .html("Number of mentions")
             .style("font-size", "12px")
-            .attr("fill", "var(--color-text-dark)");
+            .style("color", "var(--color-text-dark)")
+            .style("font-weight", "500");
+
+        const averageValueLegend = svgChart
+            .append("foreignObject")
+            .attr("x", xScale(averageValue) - legendWidth / 2)
+            .attr("y", 20)
+            .attr("width", legendWidth)
+            .attr("height", legendHeight)
+            .append("xhtml:div")
+            .style("display", "flex")
+            .style("flex-direction", "column")
+            .style("justify-content", "center");
+        averageValueLegend
+            .append("p")
+            .text(
+                averageValue >= 1000000
+                    ? Math.trunc(averageValue / 1000000) + "M"
+                    : Math.trunc(averageValue)
+            )
+            .style("font-size", "12px")
+            .style("color", "var(--color-text-dark)")
+            .style("margin", 0)
+            .style("text-align", "center")
+            .style("font-weight", "500")
+            .style("line-height", "14.4px");
+        averageValueLegend
+            .append("p")
+            .html("Average")
+            .style("font-size", "12px")
+            .style("color", "var(--color-text-dark)")
+            .style("margin", 0)
+            .style("text-align", "center")
+            .style("font-weight", "400")
+            .style("line-height", "14.4px");
+
+        const maxValueLegend = svgChart
+            .append("foreignObject")
+            .attr("x", xScale(maxValue) - legendWidth / 2)
+            .attr("y", 20)
+            .attr("width", legendWidth)
+            .attr("height", legendHeight)
+            .append("xhtml:div")
+            .style("display", "flex")
+            .style("flex-direction", "column")
+            .style("justify-content", "center");
+        maxValueLegend
+            .append("p")
+            .text(
+                maxValue >= 1000000
+                    ? Math.trunc(maxValue / 1000000) + "M"
+                    : maxValue
+            )
+            .style("font-size", "12px")
+            .style("color", "var(--color-text-dark)")
+            .style("margin", 0)
+            .style("text-align", "center")
+            .style("font-weight", "400")
+            .style("line-height", "14.4px");
+        maxValueLegend
+            .append("p")
+            .html("Maximum")
+            .style("font-size", "12px")
+            .style("color", "var(--color-text-dark)")
+            .style("margin", 0)
+            .style("text-align", "center")
+            .style("font-weight", "500")
+            .style("line-height", "14.4px");
     }
 
     useEffect(render, [data]);

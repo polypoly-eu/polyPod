@@ -316,9 +316,10 @@ const ExampleStory = () => {
     }, []);
 
     const data = [
-        { title: "Option A", value: 107 },
-        { title: "Option B", value: 31 },
-        { title: "Option C", value: 635 },
+        { title: "Example A", value: 1079999 },
+        { title: "Example B", value: 31 },
+        { title: "Example C", value: 63588 },
+        { title: "Example for a Longer Label", value: 6400000 },
     ];
 
     return (
