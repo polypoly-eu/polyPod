@@ -21,8 +21,6 @@ const ImportExplanationExpandable = ({
     importSections,
     importStatus,
     onUpdateImportStatus,
-    selectedFile,
-    selectFile,
     onImportFile,
     isFiles,
 }) => {
@@ -34,7 +32,6 @@ const ImportExplanationExpandable = ({
     };
 
     const expandableRef = useRef();
-    const fileInputRef = useRef();
 
     const handleScrollToSection = () => {
         const refPoint = importRefs[importStatus]?.current;
@@ -43,15 +40,6 @@ const ImportExplanationExpandable = ({
                 behavior: "smooth",
                 block: "start",
             });
-    };
-
-    const handleFileSelected = (e) => {
-        selectFile(e.target.files[0]);
-    };
-
-    const handleClearFile = () => {
-        selectFile(null);
-        fileInputRef.current.value = null;
     };
 
     const bodyContent = {
@@ -105,49 +93,15 @@ const ImportExplanationExpandable = ({
             <>
                 <p>{i18n.t("import:import")}</p>
                 <div className="separator"></div>
-                <div className="x-divider">
-                    {selectedFile ? (
-                        <>
-                            <h5>{selectedFile.name}</h5>
-                            <div className="align-right">
-                                <button
-                                    onClick={handleClearFile}
-                                    className="delete-button"
-                                >
-                                    {i18n.t("import:import.delete")}
-                                </button>
-                            </div>
-                        </>
-                    ) : (
-                        <h5>{i18n.t("import:import.none.chosen")}</h5>
-                    )}
-                </div>
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
-                    className={`btn-secondary ${
-                        selectedFile ? "deactivated" : ""
-                    }`}
+                    className="btn-secondary"
                     onClick={() => {
-                        fileInputRef.current.click();
+                        onImportFile();
                     }}
                 >
                     {i18n.t("import:import.button.1")}
                 </button>
-                <button
-                    className={`btn-highlighted ${
-                        selectedFile ? "" : "deactivated"
-                    }`}
-                    onClick={onImportFile}
-                >
-                    {i18n.t("import:import.button.2")}
-                </button>
-                <input
-                    type="file"
-                    ref={fileInputRef}
-                    style={{ display: "none" }}
-                    id="thefile"
-                    onChange={handleFileSelected}
-                />
             </>
         ),
         explore: (
