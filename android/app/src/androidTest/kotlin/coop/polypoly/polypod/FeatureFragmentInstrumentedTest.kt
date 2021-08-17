@@ -3,6 +3,7 @@ package coop.polypoly.polypod
 import android.os.Bundle
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
@@ -84,7 +85,9 @@ class FeatureFragmentInstrumentedTest {
     @Test
     fun afterStartingAFeature_podObjectEventuallyResolves() {
         val fragmentScenario = launchTestFeature()
-        val polyOut = PolyOutTestDouble()
+        val polyOut = PolyOutTestDouble(
+            ApplicationProvider.getApplicationContext()
+        )
         val polyIn = PolyInTestDouble()
         val podApi: PodApi = PodApiTestDouble(polyOut, polyIn)
         fragmentScenario.onFragment { fragment ->
