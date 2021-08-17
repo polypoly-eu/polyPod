@@ -1,9 +1,5 @@
 import React, { useContext } from "react";
-<<<<<<< HEAD
 import RouteButton from "../../components/buttons/routeButton.jsx";
-=======
-import RouteButton from "../../components/routeButton.jsx";
->>>>>>> main
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import i18n from "../../i18n.js";
@@ -33,11 +29,7 @@ const Overview = () => {
                         {i18n.t("overview:imported.time")} {file.time}
                     </p>
                     <p>
-<<<<<<< HEAD
-                        {i18n.t("overview:size")} {file.data.size} bytes
-=======
                         {i18n.t("overview:size")} {file.size} bytes
->>>>>>> main
                     </p>
                     <div className="btn-holder">
                         <RouteButton className="btn primary" route="/explore">

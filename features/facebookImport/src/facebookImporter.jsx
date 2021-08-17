@@ -21,6 +21,8 @@ import "./components/overview-view.js";
 
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
+import ExploreView from "./views/explore/explore.jsx";
+import ReportView from "./views/report/report.jsx";
 
 import "./styles.css";
 
@@ -51,6 +53,12 @@ const FacebookImporter = () => {
                     </Route>
                     <Route exact path="/import">
                         <ImportView />
+                    </Route>
+                    <Route exact path="/explore">
+                        <ExploreView />
+                    </Route>
+                    <Route exact path="/report">
+                        <ReportView />
                     </Route>
                 </Switch>
             ) : (
