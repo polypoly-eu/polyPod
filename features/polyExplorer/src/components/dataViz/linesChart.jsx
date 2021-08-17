@@ -47,7 +47,7 @@ const LinesChart = ({ data }) => {
     const bubblesSpeechSmall = {
         [screenSizes.smallScreen]: {
             width: 110,
-            height: 32,
+            height: 52,
             fontSize: 14,
             fontWeight: 800,
         },
@@ -68,7 +68,7 @@ const LinesChart = ({ data }) => {
     const bubblesSpeechBig = {
         [screenSizes.smallScreen]: {
             width: 204,
-            height: 89,
+            height: 59,
             fontSize: 14,
             fontWeight: 500,
         },
@@ -86,7 +86,11 @@ const LinesChart = ({ data }) => {
         },
     };
     const bubblesClass = "bubble-speech";
+    const areasClass = "gradient-area";
+    const textClass = "bubble-text";
     const bubblesSelector = `.${bubblesClass}`;
+    const areasSelector = `.${areasClass}`;
+    const textSelector = `.${textClass}`;
 
     const [scaleX, updateScaleX] = useState(null);
     const [scaleY, updateScaleY] = useState(null);
@@ -316,7 +320,7 @@ const LinesChart = ({ data }) => {
         const path = root
             .append("path")
             .datum(points)
-            .attr("class", "gradient-area")
+            .attr("class", areasClass)
             .attr("fill", `url(#${groupName})`)
             .attr("stroke", "none")
             .attr("group", _getIdName(groupName))
@@ -378,7 +382,9 @@ const LinesChart = ({ data }) => {
     function deactivatePaths() {
         const root = d3.select(svgCanvas.current).select("svg");
         if (!root.empty()) {
-            root.selectAll(".gradient-area").remove();
+            root.selectAll(areasSelector).remove();
+            root.selectAll(bubblesSelector).remove();
+            root.selectAll(textSelector).remove();
         }
     }
 
@@ -432,15 +438,18 @@ const LinesChart = ({ data }) => {
                 "transform",
                 `translate(${labelInitialPoint[0]},${labelInitialPoint[1]})`
             )
+            .attr("class", textClass)
             .append("xhtml:div")
             .style("display", "flex")
             .style("justify-content", "center")
             .style("align-items", "center")
             .style("background-color", "transparent")
-            .style("width", bubbleConfig.width)
-            .style("height", bubbleConfig.height)
-            .style("padding", "0px 10px")
-            .append("xhtml:span")
+            .style("width", `${bubbleConfig.width}px`)
+            .style("height", `${bubbleConfig.height}px`)
+            .append("xhtml:div")
+            .style("width", "95%")
+            .style("height", `${bubbleConfig.height}px`)
+            .style("text-align", "center")
             .style("color", darkColor)
             .style("font-size", bubbleConfig.fontSize)
             .style("font-weight", bubbleConfig.fontWeight)
@@ -496,7 +505,12 @@ const LinesChart = ({ data }) => {
                 screenSize
             );
 
-        if (!isOverLaping) {
+        const isBubbleOut = _isBubbleOut(
+            [[...forthCorner], [...secondCorner]],
+            screenSize
+        );
+
+        if (!isOverLaping && !isBubbleOut) {
             _drawBubbleInCanvas(
                 commands,
                 forthCorner,
@@ -549,7 +563,12 @@ const LinesChart = ({ data }) => {
                 screenSize
             );
 
-        if (!isOverlaping) {
+        const isBubbleOut = _isBubbleOut(
+            [[...firstCorner], [...thirdCorner]],
+            screenSize
+        );
+
+        if (!isOverlaping && !isBubbleOut) {
             _drawBubbleInCanvas(
                 commands,
                 firstCorner,
@@ -614,7 +633,12 @@ const LinesChart = ({ data }) => {
                 screenSize
             );
 
-        if (!isOverLaping) {
+        const isBubbleOut = _isBubbleOut(
+            [[...thirdCorner], [...firstCorner]],
+            screenSize
+        );
+
+        if (!isOverLaping && !isBubbleOut) {
             _drawBubbleInCanvas(
                 commands,
                 thirdCorner,
@@ -661,7 +685,7 @@ const LinesChart = ({ data }) => {
             _bubblesOverLaping(
                 [
                     [...secondCorner],
-                    [firstCorner[0] + heightPicBubbleSpeech, firstCorner[1]],
+                    [startPoint[0] - heightPicBubbleSpeech, startPoint[1]],
                 ],
                 screenSize
             ) ||
@@ -669,12 +693,20 @@ const LinesChart = ({ data }) => {
                 path,
                 [
                     [...secondCorner],
-                    [firstCorner[0] + heightPicBubbleSpeech, firstCorner[1]],
+                    [startPoint[0] - heightPicBubbleSpeech, startPoint[1]],
                 ],
                 screenSize
             );
 
-        if (!isOverLaping) {
+        const isBubbleOut = _isBubbleOut(
+            [
+                [...secondCorner],
+                [firstCorner[0] + heightPicBubbleSpeech, firstCorner[1]],
+            ],
+            screenSize
+        );
+
+        if (!isOverLaping && !isBubbleOut) {
             _drawBubbleInCanvas(
                 commands,
                 secondCorner,
@@ -683,7 +715,7 @@ const LinesChart = ({ data }) => {
                 screenSize,
                 [
                     [...secondCorner],
-                    [firstCorner[0] + heightPicBubbleSpeech, firstCorner[1]],
+                    [startPoint[0] - heightPicBubbleSpeech, startPoint[1]],
                 ]
             );
             return true;
@@ -734,6 +766,7 @@ const LinesChart = ({ data }) => {
             L ${speechPoint[0]} ${speechPoint[1]}
             Z
         `;
+
         const isOverLaping =
             _bubblesOverLaping(
                 [[...secondCorner], [...forthCorner]],
@@ -745,7 +778,12 @@ const LinesChart = ({ data }) => {
                 screenSize
             );
 
-        if (!isOverLaping) {
+        const isBubbleOut = _isBubbleOut(
+            [[...secondCorner], [...forthCorner]],
+            screenSize
+        );
+
+        if (!isOverLaping && !isBubbleOut) {
             _drawBubbleInCanvas(
                 commands,
                 secondCorner,
@@ -799,7 +837,12 @@ const LinesChart = ({ data }) => {
                 screenSize
             );
 
-        if (!isOverLaping) {
+        const isBubbleOut = _isBubbleOut(
+            [[...thirdCorner], [...firstCorner]],
+            screenSize
+        );
+
+        if (!isOverLaping && !isBubbleOut) {
             _drawBubbleInCanvas(
                 commands,
                 thirdCorner,
@@ -863,7 +906,12 @@ const LinesChart = ({ data }) => {
                 screenSize
             );
 
-        if (!isOverLaping) {
+        const isBubbleOut = _isBubbleOut(
+            [[...firstCorner], [...thirdCorner]],
+            screenSize
+        );
+
+        if (!isOverLaping && !isBubbleOut) {
             _drawBubbleInCanvas(
                 commands,
                 firstCorner,
@@ -905,6 +953,7 @@ const LinesChart = ({ data }) => {
             L ${forthCorner[0]} ${forthCorner[1]}
             Z
         `;
+
         const isOverLaping =
             _bubblesOverLaping(
                 [
@@ -922,7 +971,15 @@ const LinesChart = ({ data }) => {
                 screenSize
             );
 
-        if (!isOverLaping) {
+        const isBubbleOut = _isBubbleOut(
+            [
+                [startPoint[0] + heightPicBubbleSpeech, startPoint[1]],
+                [...secondCorner],
+            ],
+            screenSize
+        );
+
+        if (!isOverLaping && !isBubbleOut) {
             _drawBubbleInCanvas(
                 commands,
                 [startPoint[0] + heightPicBubbleSpeech, startPoint[1]],
@@ -941,16 +998,17 @@ const LinesChart = ({ data }) => {
     }
 
     function _drawBubble(bubbleConfig, bubbleData, screenSize, path) {
+        debugger;
         drawBubbleTopMiddle(bubbleConfig, bubbleData, screenSize, path) ||
-            drawBubbleRightTop(bubbleConfig, bubbleData, screenSize, path) ||
-            drawBubbleRightMiddle(bubbleConfig, bubbleData, screenSize, path) ||
-            drawBubbleRightBottom(bubbleConfig, bubbleData, screenSize, path) ||
             drawBubbleMiddleBottom(
                 bubbleConfig,
                 bubbleData,
                 screenSize,
                 path
             ) ||
+            drawBubbleRightTop(bubbleConfig, bubbleData, screenSize, path) ||
+            drawBubbleRightMiddle(bubbleConfig, bubbleData, screenSize, path) ||
+            drawBubbleRightBottom(bubbleConfig, bubbleData, screenSize, path) ||
             drawBubbleLeftBottom(bubbleConfig, bubbleData, screenSize, path) ||
             drawBubbleLeftMiddle(bubbleConfig, bubbleData, screenSize, path) ||
             drawBubbleLeftTop(bubbleConfig, bubbleData, screenSize, path);
@@ -981,8 +1039,7 @@ const LinesChart = ({ data }) => {
     }
 
     function _bubblesOverLaping(diagonal, screenSize) {
-        const rangeX = [diagonal[0][0], diagonal[1][0]];
-        const rangeY = [diagonal[0][1], diagonal[1][1]];
+        const { rangeX, rangeY } = _getRangesFromDiagonal(diagonal);
         const root = _getRoot(screenSize);
         const bubbles = root.selectAll(bubblesSelector);
 
@@ -1012,55 +1069,110 @@ const LinesChart = ({ data }) => {
         return result;
     }
 
-    function _getRangesFromCommands(command, screenSize) {
-        debugger;
-        const listOfPoints = command
+    function _getListOfPoints(command) {
+        return command
             .replace(/[A-Z]/g, "#")
             .split("#")
             .map((pointText) => pointText.split(",").map((num) => Number(num)))
             .filter((point) => point.length === 2);
-        const x = _getScaleX(screenSize);
-        const y = _getScaleY(screenSize);
-        const minX = x(jsDateTo3dDate(data.rangeDates[0]));
-        const maxX = x(jsDateTo3dDate(data.rangeDates[1]));
-        const minY = y(data.rangeY[0]);
-        const maxY = y(data.rangeY[1]);
-
-        return [
-            [
-                listOfPoints.reduce(
-                    (acc, point) => Math.min(acc, point[0]),
-                    minX
-                ),
-                listOfPoints.reduce(
-                    (acc, point) => Math.max(acc, point[0]),
-                    maxX
-                ),
-            ],
-            [
-                listOfPoints.reduce(
-                    (acc, point) => Math.max(acc, point[1]),
-                    maxY
-                ),
-                listOfPoints.reduce(
-                    (acc, point) => Math.min(acc, point[1]),
-                    minY
-                ),
-            ],
-        ];
     }
 
-    function _pathOverLaping(path, diagonal, screenSize) {
-        debugger;
+    function isPathInsideBubble(listOfPoints, rangeX, rangeY) {
+        const xPointsInsideBubble = listOfPoints.filter(
+            (point) => point[0] >= rangeX[0] && point[0] <= rangeX[1]
+        );
+
+        return xPointsInsideBubble.find(
+            (point) => point[1] >= rangeY[0] && point[1] <= rangeY[1]
+        );
+    }
+
+    function isPathCrossingHorizontalBubble(listOfPoints, rangeX, rangeY) {
+        const leng = listOfPoints.length;
+
+        let index = 0;
+        let result = false;
+
+        do {
+            const next = index + 1;
+            const pointsCrossBubble =
+                (listOfPoints[index][0] <= rangeX[0] &&
+                    listOfPoints[next][0] >= rangeX[1]) ||
+                (listOfPoints[next][0] <= rangeX[0] &&
+                    listOfPoints[index][0] >= rangeX[1]);
+
+            if (pointsCrossBubble) {
+                result =
+                    listOfPoints[index][1] >= rangeY[0] &&
+                    listOfPoints[index][1] <= rangeY[1] &&
+                    listOfPoints[next][1] >= rangeY[0] &&
+                    listOfPoints[next][1] <= rangeY[1];
+            }
+        } while (!result && ++index < leng - 1);
+
+        return result;
+    }
+
+    function isPathCrossingVerticalBubble(listOfPoints, rangeX, rangeY) {
+        const leng = listOfPoints.length;
+
+        let index = 0;
+        let result = false;
+
+        do {
+            const next = index + 1;
+            const pontsCrossBubble =
+                (listOfPoints[index][1] <= rangeY[0] &&
+                    listOfPoints[next][1] >= rangeY[1]) ||
+                (listOfPoints[next][1] <= rangeY[0] &&
+                    listOfPoints[index][1] >= rangeY[1]);
+
+            if (pontsCrossBubble) {
+                result =
+                    listOfPoints[index][0] >= rangeX[0] &&
+                    listOfPoints[index][0] <= rangeX[1] &&
+                    listOfPoints[next][0] >= rangeX[0] &&
+                    listOfPoints[next][0] <= rangeX[1];
+            }
+        } while (!result && ++index < leng - 1);
+
+        return result;
+    }
+
+    function _pathOverLaping(path, diagonal) {
         const commands = path.attr("d");
-        const rangeX = [diagonal[0][0], diagonal[1][0]];
-        const rangeY = [diagonal[0][1], diagonal[1][1]];
-        const rangesPath = _getRangesFromCommands(commands, screenSize);
+        const { rangeX, rangeY } = _getRangesFromDiagonal(diagonal);
+        const listOfPoints = _getListOfPoints(commands);
 
         return (
-            _rangesOverlaping(rangeX, rangesPath[0]) &&
-            _rangesOverlaping(rangeY, rangesPath[1])
+            isPathInsideBubble(listOfPoints, rangeX, rangeY) ||
+            isPathCrossingHorizontalBubble(listOfPoints, rangeX, rangeY) ||
+            isPathCrossingVerticalBubble(listOfPoints, rangeX, rangeY)
         );
+    }
+
+    function _getRangesFromDiagonal(diagonal) {
+        const rangeX = [diagonal[0][0], diagonal[1][0]];
+        const rangeY = [diagonal[0][1], diagonal[1][1]];
+
+        return { rangeX, rangeY };
+    }
+
+    function _isBubbleOut(diagonal, screenSize) {
+        const { leftMargin } = canvasConfig[screenSize];
+        const { rangeX, rangeY } = _getRangesFromDiagonal(diagonal);
+        const x = _getScaleX(screenSize);
+        const y = _getScaleY(screenSize);
+        const limitsX = [
+            x(jsDateTo3dDate(data.rangeDates[0])),
+            x(jsDateTo3dDate(data.rangeDates[1])) + leftMargin,
+        ];
+        const limitsY = [y(data.rangeY[1]), y(data.rangeY[0])];
+
+        const isOutLimitsOfX = rangeX[0] < limitsX[0] || rangeX[1] > limitsX[1];
+        const isOutLimitsY = rangeY[0] < limitsY[0] || rangeY[1] > limitsY[1];
+
+        return isOutLimitsOfX || isOutLimitsY;
     }
 
     useEffect(() => {
