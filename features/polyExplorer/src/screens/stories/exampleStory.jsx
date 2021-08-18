@@ -9,6 +9,7 @@ const ExampleStory = () => {
     const mockData = {
         rangeDates: [new Date("2015-01-01"), new Date("2021-01-01")],
         rangeY: [0, 1000],
+        yAxisLabel: "MAU",
         groups: [
             {
                 groupName: "Owned by Facebook",
@@ -186,14 +187,6 @@ const ExampleStory = () => {
                             {
                                 x: new Date("2016-01-01"),
                                 y: 1000,
-                            },
-                            {
-                                x: new Date("2016-06-01"),
-                                y: 10000,
-                            },
-                            {
-                                x: new Date("2017-01-01"),
-                                y: 100000,
                             },
                         ],
                         messages: [
