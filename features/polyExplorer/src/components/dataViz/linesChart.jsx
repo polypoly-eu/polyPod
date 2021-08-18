@@ -1031,7 +1031,6 @@ const LinesChart = ({ data }) => {
     }
 
     function _drawBubble(bubbleConfig, bubbleData, screenSize) {
-        debugger;
         drawBubbleTopMiddle(bubbleConfig, bubbleData, screenSize) ||
             drawBubbleMiddleBottom(bubbleConfig, bubbleData, screenSize) ||
             drawBubbleRightTop(bubbleConfig, bubbleData, screenSize) ||
@@ -1105,9 +1104,12 @@ const LinesChart = ({ data }) => {
     }
 
     function _isBubbleOut(diagonal, screenSize) {
-        const { leftMargin, limitMarginX, limitMarginY } = canvasConfig[
-            screenSize
-        ];
+        const {
+            leftMargin,
+            limitMarginX,
+            limitMarginY,
+            topMargin,
+        } = canvasConfig[screenSize];
         const { rangeX, rangeY } = _getRangesFromDiagonal(diagonal);
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
@@ -1115,7 +1117,10 @@ const LinesChart = ({ data }) => {
             x(jsDateTo3dDate(data.rangeDates[0])),
             x(jsDateTo3dDate(data.rangeDates[1])) + leftMargin + limitMarginX,
         ];
-        const limitsY = [y(data.rangeY[1]), y(data.rangeY[0]) + limitMarginY];
+        const limitsY = [
+            y(data.rangeY[1]),
+            y(data.rangeY[0]) + limitMarginY + topMargin,
+        ];
 
         const isOutLimitsOfX = rangeX[0] < limitsX[0] || rangeX[1] > limitsX[1];
         const isOutLimitsY = rangeY[0] < limitsY[0] || rangeY[1] > limitsY[1];
