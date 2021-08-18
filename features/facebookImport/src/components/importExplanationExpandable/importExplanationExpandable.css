@@ -85,11 +85,16 @@
     box-sizing: border-box;
 }
 
+.import-view .explanation-expandable .body .file-info p {
+    font-size: 14px;
+    color: var(--color-indigo-600);
+    margin: 0 0 2px 0;
+}
+
 .import-view .explanation-expandable .body .x-divider {
     display: flex;
     flex-direction: row;
     margin: 0;
-    height: 48px;
 }
 
 .import-view .explanation-expandable .align-right {

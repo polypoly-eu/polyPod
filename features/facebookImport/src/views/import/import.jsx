@@ -17,14 +17,19 @@ const Import = () => {
         updateImportStatus,
         files,
         refreshFiles,
+        handleRemoveFile,
     } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
+    const file = files[0];
 
     const handleImportFile = async () => {
         const { polyNav } = window.pod;
         await polyNav.importFile();
         refreshFiles();
-        updateImportStatus(importSteps.explore);
+    };
+
+    const onRemoveFile = () => {
+        handleRemoveFile(file);
     };
 
     const isFiles = () => {
@@ -45,6 +50,8 @@ const Import = () => {
                 onImportFile={handleImportFile}
                 onUpdateImportStatus={updateImportStatus}
                 isFiles={isFiles}
+                file={file}
+                onRemoveFile={onRemoveFile}
             />
         </div>
     );
