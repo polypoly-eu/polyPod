@@ -52,7 +52,7 @@ const BarChart = ({ data }) => {
         bars.append("rect")
             .attr("class", "bar")
             .attr("height", barHeight)
-            .attr("width", (d) => xScale(d.value))
+            .attr("width", (d) => (xScale(d.value) < 1 ? "1" : xScale(d.value)))
             .attr("x", margin.left)
             .attr("y", (d) => yScale(d.title) + gHeight)
             .attr("rx", "8")
@@ -72,6 +72,27 @@ const BarChart = ({ data }) => {
                     ? Math.trunc(d.value / 1000000) + "M"
                     : d.value
             );
+
+        const valueLines = svgChart
+            .append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+        valueLines
+            .append("line")
+            .attr("x1", xScale(maxValue))
+            .attr("y1", 12)
+            .attr("x2", xScale(maxValue))
+            .attr("y2", height - margin.bottom)
+            .style("stroke", "var(--data-exp-purposes)")
+            .style("stroke-width", 2);
+        valueLines
+            .append("line")
+            .attr("x1", xScale(averageValue))
+            .attr("y1", 12)
+            .attr("x2", xScale(averageValue))
+            .attr("y2", height - margin.bottom)
+            .style("stroke", "var(--data-exp-purposes)")
+            .style("stroke-width", 2)
+            .style("stroke-dasharray", "5, 5");
 
         const labelTitle = svgChart
             .selectAll("foreignObject")
