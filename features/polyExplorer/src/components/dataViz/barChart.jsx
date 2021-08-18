@@ -16,7 +16,7 @@ const BarChart = ({ data }) => {
     const legendHeight = 40;
     const legendMargin = 0;
     const labelTitlePadding = { top: 8, right: 12, bottom: 8, left: 12 };
-    const fontConfing = {
+    const fontConfig = {
         color: "var(--color-text-dark)",
         fontSize: "12px",
         fontSizeTitle: "14px",
@@ -64,8 +64,8 @@ const BarChart = ({ data }) => {
             .attr("x", (d) => xScale(d.value) + margin.left + 2)
             .attr("y", (d) => yScale(d.title) + gHeight + 8)
             .attr("dy", ".35em")
-            .style("font-size", fontConfing.fontSize)
-            .style("font-weight", fontConfing.fontWeightBold)
+            .style("font-size", fontConfig.fontSize)
+            .style("font-weight", fontConfig.fontWeightBold)
             .attr("fill", "var(--data-exp-purposes)")
             .text((d) =>
                 d.value >= 1000000
@@ -110,12 +110,12 @@ const BarChart = ({ data }) => {
             .attr("height", "32px")
             .style("margin", legendMargin)
             .style("display", "inline-block")
-            .style("font-size", fontConfing.fontSizeTitle)
+            .style("font-size", fontConfig.fontSizeTitle)
             .style(
                 "padding",
                 labelTitlePadding.top + "px " + labelTitlePadding.left + "px"
             )
-            .style("color", fontConfing.color)
+            .style("color", fontConfig.color)
             .style("border-radius", "16px")
             .style("border", "solid 1px var(--color-dark)")
             .style("background-color", "#F7FAFC80");
@@ -134,9 +134,9 @@ const BarChart = ({ data }) => {
             .attr("x", 0)
             .attr("y", 0)
             .html("Number of mentions")
-            .style("font-size", fontConfing.fontSize)
-            .style("color", fontConfing.color)
-            .style("font-weight", fontConfing.fontWeightBold);
+            .style("font-size", fontConfig.fontSize)
+            .style("color", fontConfig.color)
+            .style("font-weight", fontConfig.fontWeightBold);
 
         const averageValueLegend = svgChart
             .append("foreignObject")
@@ -155,21 +155,21 @@ const BarChart = ({ data }) => {
                     ? Math.trunc(averageValue / 1000000) + "M"
                     : Math.trunc(averageValue)
             )
-            .style("font-size", fontConfing.fontSize)
-            .style("color", fontConfing.color)
+            .style("font-size", fontConfig.fontSize)
+            .style("color", fontConfig.color)
             .style("margin", legendMargin)
-            .style("text-align", fontConfing.textAlign)
-            .style("font-weight", fontConfing.fontWeightBold)
-            .style("line-height", fontConfing.lineHeight);
+            .style("text-align", fontConfig.textAlign)
+            .style("font-weight", fontConfig.fontWeightBold)
+            .style("line-height", fontConfig.lineHeight);
         averageValueLegend
             .append("p")
             .html("Average")
-            .style("font-size", fontConfing.fontSize)
-            .style("color", fontConfing.color)
+            .style("font-size", fontConfig.fontSize)
+            .style("color", fontConfig.color)
             .style("margin", legendMargin)
-            .style("text-align", fontConfing.textAlign)
-            .style("font-weight", fontConfing.fontWeight)
-            .style("line-height", fontConfing.lineHeight);
+            .style("text-align", fontConfig.textAlign)
+            .style("font-weight", fontConfig.fontWeight)
+            .style("line-height", fontConfig.lineHeight);
 
         const maxValueLegend = svgChart
             .append("foreignObject")
@@ -188,21 +188,21 @@ const BarChart = ({ data }) => {
                     ? Math.trunc(maxValue / 1000000) + "M"
                     : maxValue
             )
-            .style("font-size", fontConfing.fontSize)
-            .style("color", fontConfing.color)
+            .style("font-size", fontConfig.fontSize)
+            .style("color", fontConfig.color)
             .style("margin", legendMargin)
-            .style("text-align", fontConfing.textAlign)
-            .style("font-weight", fontConfing.fontWeight)
-            .style("line-height", fontConfing.lineHeight);
+            .style("text-align", fontConfig.textAlign)
+            .style("font-weight", fontConfig.fontWeight)
+            .style("line-height", fontConfig.lineHeight);
         maxValueLegend
             .append("p")
             .html("Maximum")
-            .style("font-size", fontConfing.fontSize)
-            .style("color", fontConfing.color)
+            .style("font-size", fontConfig.fontSize)
+            .style("color", fontConfig.color)
             .style("margin", legendMargin)
-            .style("text-align", fontConfing.textAlign)
-            .style("font-weight", fontConfing.fontWeightBold)
-            .style("line-height", fontConfing.lineHeight);
+            .style("text-align", fontConfig.textAlign)
+            .style("font-weight", fontConfig.fontWeightBold)
+            .style("line-height", fontConfig.lineHeight);
     }
 
     useEffect(render, [data]);
