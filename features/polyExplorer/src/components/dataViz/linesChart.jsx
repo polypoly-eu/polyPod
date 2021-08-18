@@ -26,27 +26,27 @@ const LinesChart = ({ data }) => {
             rightMargin: 16,
             leftMargin: 35,
             topMargin: 146,
-            bottomMargin: 16,
+            bottomMargin: 0,
             limitMarginX: 50,
             limitMarginY: 50,
         },
         [screenSizes.normalScreen]: {
-            resolution: 650,
+            resolution: 500,
             rightMargin: 16,
-            leftMargin: 16,
-            topMargin: 16,
-            bottomMargin: 16,
+            leftMargin: 35,
+            topMargin: 146,
+            bottomMargin: 0,
             limitMarginX: 50,
-            limitMarginY: 50,
+            limitMarginY: 20,
         },
         [screenSizes.bigScreen]: {
-            resolution: 650,
+            resolution: 500,
             rightMargin: 16,
-            leftMargin: 16,
-            topMargin: 16,
+            leftMargin: 35,
+            topMargin: 146,
             bottomMargin: 16,
             limitMarginX: 50,
-            limitMarginY: 50,
+            limitMarginY: 20,
         },
     };
 
@@ -58,14 +58,14 @@ const LinesChart = ({ data }) => {
             fontWeight: 800,
         },
         [screenSizes.normalScreen]: {
-            width: 87,
-            height: 32,
+            width: 110,
+            height: 52,
             fontSize: 14,
             fontWeight: 800,
         },
         [screenSizes.bigScreen]: {
-            width: 87,
-            height: 32,
+            width: 110,
+            height: 52,
             fontSize: 14,
             fontWeight: 800,
         },
@@ -80,7 +80,7 @@ const LinesChart = ({ data }) => {
         },
         [screenSizes.normalScreen]: {
             width: 204,
-            height: 89,
+            height: 59,
             fontSize: 14,
             fontWeight: 500,
         },
@@ -99,11 +99,11 @@ const LinesChart = ({ data }) => {
         },
         [screenSizes.normalScreen]: {
             left: 20,
-            top: 0,
+            top: 120,
         },
         [screenSizes.bigScreen]: {
             left: 20,
-            top: 0,
+            top: 120,
         },
     };
 
@@ -118,16 +118,16 @@ const LinesChart = ({ data }) => {
         },
         [screenSizes.normalScreen]: {
             left: 20,
-            top: 0,
-            width: 140,
+            top: 50,
+            width: 180,
             height: 40,
             fontSize: 14,
             letterSpacing: "-0.01em",
         },
         [screenSizes.bigScreen]: {
             left: 20,
-            top: 0,
-            width: 140,
+            top: 50,
+            width: 180,
             height: 40,
             fontSize: 14,
             letterSpacing: "-0.01em",
@@ -143,15 +143,15 @@ const LinesChart = ({ data }) => {
             letterSpacing: "-0.01em",
         },
         [screenSizes.normalScreen]: {
-            top: 0,
-            width: 140,
+            top: 50,
+            width: 180,
             height: 40,
             fontSize: 14,
             letterSpacing: "-0.01em",
         },
         [screenSizes.bigScreen]: {
-            top: 0,
-            width: 140,
+            top: 50,
+            width: 180,
             height: 40,
             fontSize: 14,
             letterSpacing: "-0.01em",
@@ -282,7 +282,7 @@ const LinesChart = ({ data }) => {
         const screenWidth = window.innerWidth;
         if (screenWidth <= 320) {
             return screenSizes.smallScreen;
-        } else if (screenWidth <= 413) {
+        } else if (screenWidth <= 410) {
             return screenSizes.normalScreen;
         } else {
             return screenSizes.bigScreen;
@@ -290,12 +290,17 @@ const LinesChart = ({ data }) => {
     }
 
     function calculateXAxis(screenSize) {
-        const { resolution, leftMargin } = canvasConfig[screenSize];
+        const { resolution, leftMargin, bottomMargin } = canvasConfig[
+            screenSize
+        ];
         const root = _getRoot(screenSize);
         const x = _getScaleX(screenSize);
 
         root.append("g")
-            .attr("transform", `translate(${leftMargin}, ${resolution})`)
+            .attr(
+                "transform",
+                `translate(${leftMargin}, ${resolution - bottomMargin})`
+            )
             .attr("id", "x-axis")
             .call(
                 d3
@@ -389,7 +394,12 @@ const LinesChart = ({ data }) => {
     }
 
     function drawArea(lineIndex, groupName, screenSize) {
-        const { resolution, leftMargin, topMargin } = canvasConfig[screenSize];
+        const {
+            resolution,
+            leftMargin,
+            topMargin,
+            bottomMargin,
+        } = canvasConfig[screenSize];
         const root = _getRoot(screenSize);
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
@@ -407,7 +417,7 @@ const LinesChart = ({ data }) => {
             .y0(resolution)
             .y1((d) => {
                 const point = y(d.y);
-                return point + topMargin;
+                return point + topMargin - bottomMargin;
             });
 
         root.append("path")
@@ -420,7 +430,9 @@ const LinesChart = ({ data }) => {
     }
 
     function drawLine(points, color, groupName, lineIndex, screenSize) {
-        const { leftMargin, topMargin } = canvasConfig[screenSize];
+        const { leftMargin, topMargin, bottomMargin } = canvasConfig[
+            screenSize
+        ];
         const root = _getRoot(screenSize);
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
@@ -445,7 +457,7 @@ const LinesChart = ({ data }) => {
                     .y((d) => {
                         const point = y(d.y);
 
-                        return point + topMargin;
+                        return point + topMargin - bottomMargin;
                     })
             );
 
@@ -496,13 +508,15 @@ const LinesChart = ({ data }) => {
     }
 
     function _getBubbleStartingPoint(bubbleData, screenSize) {
-        const { leftMargin, topMargin } = canvasConfig[screenSize];
+        const { leftMargin, topMargin, bottomMargin } = canvasConfig[
+            screenSize
+        ];
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
 
         return [
             x(jsDateTo3dDate(bubbleData.x)) + leftMargin,
-            y(bubbleData.y) + topMargin,
+            y(bubbleData.y) + topMargin - bottomMargin,
         ];
     }
 
