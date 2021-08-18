@@ -2,6 +2,12 @@ import { html } from "lit";
 import { ZipFile } from "../model/storage.js";
 import allStructure from "../static/allStructure";
 
+function isJsonMessageFile(fileName) {
+    return /^messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/uniqueid_hash\/message_[2-9][0-9]?.json$/.test(
+        fileName
+    );
+}
+
 async function jsonDataEntities(zipFile) {
     const entries = await zipFile.getEntries();
     const relevantEntries = entries.filter(
@@ -61,6 +67,61 @@ const subAnalyses = [
 
         render() {
             return "" + this._size;
+        }
+    },
+
+    class {
+        get title() {
+            return "Messages";
+        }
+
+        async _messagesCountFromFile(zipFile, messagesFile) {
+            const fileContent = new TextDecoder("utf-8").decode(
+                await zipFile.getContent(messagesFile)
+            );
+
+            if (!fileContent) {
+                return 0;
+            }
+            try {
+                const messagesData = JSON.parse(fileContent);
+                const messagesList = messagesData?.messages;
+                return messagesList ? messagesList.length : 0;
+            } catch (exception) {
+                //TODO: better error handling + error reporting
+                console.log(exception);
+                return 0;
+            }
+        }
+
+        async parse({ zipFile }) {
+            this._messageThreadsCount = 0;
+            this._messagesCount = 0;
+            this.active = false;
+            if (!zipFile) return;
+
+            const entries = await zipFile.getEntries();
+            const messageFiles = entries.find((fileName) =>
+                isJsonMessageFile(fileName)
+            );
+            this._messageThreadsCount = messageFiles.length;
+            this._messagesCount = entries.reduce((total, messageFile) => {
+                return total + this._messagesCountFromFile(messageFile);
+            }, 0);
+            this.active = this._companiesCount > 0;
+        }
+
+        render() {
+            if (!this.active) {
+                return "No messages detected in your export!";
+            }
+            return (
+                "Found " +
+                this._messagesCount +
+                " events from " +
+                this._messageThreadsCount +
+                " threads"
+            );
         }
     },
 
@@ -213,17 +274,14 @@ const subAnalyses = [
         }
 
         _knownJsonFiles() {
-            const knowsJsonFiles = allStructure.filter((each) =>
+            const knowsJsonFileNames = allStructure.filter((each) =>
                 each.endsWith(".json")
             );
-            return knowsJsonFiles.filter(
+            return knowsJsonFileNames.filter(
                 (each) =>
                     !/^(posts|photos_and_videos)\/album\/[1-9][0-9]?.json$/.test(
                         each
-                    ) &&
-                    !/^messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/uniqueid_hash\/message_[2-9][0-9]?.json$/.test(
-                        each
-                    )
+                    ) && !isJsonMessageFile(each)
             );
         }
 
