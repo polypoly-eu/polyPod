@@ -12,10 +12,19 @@ const BarChart = ({ data }) => {
     const height = data.length * (gHeight * 2);
     const margin = { top: 36, right: 30, bottom: 1, left: 1 };
     const barHeight = gHeight - margin.top;
-    const legendWidth = 120;
+    const legendWidth = 150;
     const legendHeight = 40;
-    const fontSize = "14px";
+    const legendMargin = 0;
     const labelTitlePadding = { top: 8, right: 12, bottom: 8, left: 12 };
+    const fontConfing = {
+        color: "var(--color-text-dark)",
+        fontSize: "12px",
+        fontSizeTitle: "14px",
+        lineHeight: "14.4px",
+        fontWeight: "400",
+        fontWeightBold: "500",
+        textAlign: "center",
+    };
     const maxValue = d3.max(data, (d) => d.value);
     const averageValue = d3.mean(data, (d) => d.value);
 
@@ -55,8 +64,8 @@ const BarChart = ({ data }) => {
             .attr("x", (d) => xScale(d.value) + margin.left + 2)
             .attr("y", (d) => yScale(d.title) + gHeight + 8)
             .attr("dy", ".35em")
-            .style("font-size", "12px")
-            .style("font-weight", "500")
+            .style("font-size", fontConfing.fontSize)
+            .style("font-weight", fontConfing.fontWeightBold)
             .attr("fill", "var(--data-exp-purposes)")
             .text((d) =>
                 d.value >= 1000000
@@ -78,41 +87,21 @@ const BarChart = ({ data }) => {
             .append("p")
             .text((d) => d.title)
             .attr("height", "32px")
-            .style("margin", "0")
+            .style("margin", legendMargin)
             .style("display", "inline-block")
-            .style("font-size", fontSize)
+            .style("font-size", fontConfing.fontSizeTitle)
             .style(
                 "padding",
                 labelTitlePadding.top + "px " + labelTitlePadding.left + "px"
             )
-            .style("color", "var(--color-dark)")
+            .style("color", fontConfing.color)
             .style("border-radius", "16px")
             .style("border", "solid 1px var(--color-dark)")
-            .style("background-color", "var(--color-background-light)");
+            .style("background-color", "#F7FAFC80");
         const labelTitleWidth = labelTitleP.node().getBoundingClientRect()
             .width;
         labelTitleDiv.attr("width", labelTitleWidth).attr("height", "32px");
 
-        const valueLines = svgChart
-            .append("g")
-            .attr("transform", `translate(${margin.left}, ${margin.top})`);
-        valueLines
-            .append("line")
-            .attr("x1", xScale(maxValue))
-            .attr("y1", margin.top / 2)
-            .attr("x2", xScale(maxValue))
-            .attr("y2", height - margin.bottom)
-            .style("stroke", "var(--data-exp-purposes)")
-            .style("stroke-width", 2);
-        valueLines
-            .append("line")
-            .attr("x1", xScale(averageValue))
-            .attr("y1", margin.top / 2)
-            .attr("x2", xScale(averageValue))
-            .attr("y2", height - margin.bottom)
-            .style("stroke", "var(--data-exp-purposes)")
-            .style("stroke-width", 2)
-            .style("stroke-dasharray", "5, 5");
         const legendTitle = svgChart
             .append("foreignObject")
             .attr("x", 0)
@@ -124,14 +113,14 @@ const BarChart = ({ data }) => {
             .attr("x", 0)
             .attr("y", 0)
             .html("Number of mentions")
-            .style("font-size", "12px")
-            .style("color", "var(--color-text-dark)")
-            .style("font-weight", "500");
+            .style("font-size", fontConfing.fontSize)
+            .style("color", fontConfing.color)
+            .style("font-weight", fontConfing.fontWeightBold);
 
         const averageValueLegend = svgChart
             .append("foreignObject")
             .attr("x", xScale(averageValue) - legendWidth / 2)
-            .attr("y", 20)
+            .attr("y", legendHeight / 2)
             .attr("width", legendWidth)
             .attr("height", legendHeight)
             .append("xhtml:div")
@@ -145,26 +134,26 @@ const BarChart = ({ data }) => {
                     ? Math.trunc(averageValue / 1000000) + "M"
                     : Math.trunc(averageValue)
             )
-            .style("font-size", "12px")
-            .style("color", "var(--color-text-dark)")
-            .style("margin", 0)
-            .style("text-align", "center")
-            .style("font-weight", "500")
-            .style("line-height", "14.4px");
+            .style("font-size", fontConfing.fontSize)
+            .style("color", fontConfing.color)
+            .style("margin", legendMargin)
+            .style("text-align", fontConfing.textAlign)
+            .style("font-weight", fontConfing.fontWeightBold)
+            .style("line-height", fontConfing.lineHeight);
         averageValueLegend
             .append("p")
             .html("Average")
-            .style("font-size", "12px")
-            .style("color", "var(--color-text-dark)")
-            .style("margin", 0)
-            .style("text-align", "center")
-            .style("font-weight", "400")
-            .style("line-height", "14.4px");
+            .style("font-size", fontConfing.fontSize)
+            .style("color", fontConfing.color)
+            .style("margin", legendMargin)
+            .style("text-align", fontConfing.textAlign)
+            .style("font-weight", fontConfing.fontWeight)
+            .style("line-height", fontConfing.lineHeight);
 
         const maxValueLegend = svgChart
             .append("foreignObject")
             .attr("x", xScale(maxValue) - legendWidth / 2)
-            .attr("y", 20)
+            .attr("y", legendHeight / 2)
             .attr("width", legendWidth)
             .attr("height", legendHeight)
             .append("xhtml:div")
@@ -178,21 +167,21 @@ const BarChart = ({ data }) => {
                     ? Math.trunc(maxValue / 1000000) + "M"
                     : maxValue
             )
-            .style("font-size", "12px")
-            .style("color", "var(--color-text-dark)")
-            .style("margin", 0)
-            .style("text-align", "center")
-            .style("font-weight", "400")
-            .style("line-height", "14.4px");
+            .style("font-size", fontConfing.fontSize)
+            .style("color", fontConfing.color)
+            .style("margin", legendMargin)
+            .style("text-align", fontConfing.textAlign)
+            .style("font-weight", fontConfing.fontWeight)
+            .style("line-height", fontConfing.lineHeight);
         maxValueLegend
             .append("p")
             .html("Maximum")
-            .style("font-size", "12px")
-            .style("color", "var(--color-text-dark)")
-            .style("margin", 0)
-            .style("text-align", "center")
-            .style("font-weight", "500")
-            .style("line-height", "14.4px");
+            .style("font-size", fontConfing.fontSize)
+            .style("color", fontConfing.color)
+            .style("margin", legendMargin)
+            .style("text-align", fontConfing.textAlign)
+            .style("font-weight", fontConfing.fontWeightBold)
+            .style("line-height", fontConfing.lineHeight);
     }
 
     useEffect(render, [data]);
