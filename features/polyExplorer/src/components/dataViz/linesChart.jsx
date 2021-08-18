@@ -22,10 +22,10 @@ const LinesChart = ({ data }) => {
 
     const canvasConfig = {
         [screenSizes.smallScreen]: {
-            resolution: 300,
+            resolution: 800,
             rightMargin: 16,
             leftMargin: 35,
-            topMargin: 16,
+            topMargin: 106,
             bottomMargin: 16,
             limitMarginX: 50,
             limitMarginY: 50,
@@ -89,6 +89,48 @@ const LinesChart = ({ data }) => {
             height: 89,
             fontSize: 14,
             fontWeight: 500,
+        },
+    };
+
+    const labelYAxisPosition = {
+        [screenSizes.smallScreen]: {
+            left: 20,
+            top: 80,
+        },
+        [screenSizes.normalScreen]: {
+            left: 20,
+            top: 0,
+        },
+        [screenSizes.bigScreen]: {
+            left: 20,
+            top: 0,
+        },
+    };
+
+    const legendsConfiguration = {
+        [screenSizes.smallScreen]: {
+            left: 20,
+            top: 0,
+            width: 180,
+            height: 40,
+            fontSize: 14,
+            letterSpacing: "-0.01em",
+        },
+        [screenSizes.normalScreen]: {
+            left: 20,
+            top: 0,
+            width: 140,
+            height: 40,
+            fontSize: 14,
+            letterSpacing: "-0.01em",
+        },
+        [screenSizes.bigScreen]: {
+            left: 20,
+            top: 0,
+            width: 140,
+            height: 40,
+            fontSize: 14,
+            letterSpacing: "-0.01em",
         },
     };
     const bubblesClass = "bubble-speech";
@@ -241,8 +283,8 @@ const LinesChart = ({ data }) => {
             .call(
                 d3
                     .axisLeft(y)
-                    .ticks(2)
                     .tickSizeOuter(0)
+                    .tickFormat((d, index) => (index % 2 === 0 ? d : ""))
                     .tickSize(
                         resolution -
                             leftMargin -
@@ -425,7 +467,7 @@ const LinesChart = ({ data }) => {
 
         root.append("path")
             .attr("stroke", darkColor)
-            .attr("stroke-width", 2)
+            .attr("stroke-width", 1)
             .attr("fill", bubblesSpeachBackground)
             .attr("class", bubblesClass)
             .attr("diagonal", JSON.stringify(diagonal))
@@ -1030,10 +1072,70 @@ const LinesChart = ({ data }) => {
         return isOutLimitsOfX || isOutLimitsY;
     }
 
+    function yAxisLabel(screenSize) {
+        const root = _getRoot(screenSize);
+        const { left, top } = labelYAxisPosition[screenSize];
+        root.append("text")
+            .attr("text-anchor", "center")
+            .style("font-size", "12px")
+            .style("font-weight", "500")
+            .style("letter-spacing", "-0.01em")
+            .attr("transform", `translate(${left}, ${top})`)
+            .text(data.yAxisLabel);
+    }
+
+    function graphLegend(screenSize) {
+        const legendConfig = legendsConfiguration[screenSize];
+        const root = _getRoot(screenSize);
+
+        const legendSpace = root
+            .append("foreignObject")
+            .style("width", legendConfig.width)
+            .style("height", legendConfig.height)
+            .attr(
+                "transform",
+                `translate(${legendConfig.top}, ${legendConfig.left})`
+            )
+            .append("xhtml:div")
+            .style("display", "grid")
+            .style("grid-template-rows", "1fr 1fr")
+            .style("justify-content", "stretch")
+            .style("align-content", "stretch")
+            .style("width", `${legendConfig.width}px`)
+            .style("height", `${legendConfig.height}px`);
+
+        for (const group of data.groups) {
+            const groupContent = legendSpace
+                .append("xhtml:div")
+                .style("display", "grid")
+                .style("grid-template-columns", "1fr 2fr")
+                .style("justify-content", "stretch")
+                .style("align-content", "stretch")
+                .style("align-items", "center")
+                .style("width", "100%");
+
+            groupContent
+                .append("xhtml:div")
+                .style("width", "15px")
+                .style("height", "0px")
+                .style("justify-self", "center")
+                .style("border-bottom", `solid 1px ${group.color}`);
+            groupContent
+                .append("xhtml:div")
+                .style("color", darkColor)
+                .style("justify-self", "start")
+                .style("font-size", `${legendConfig.fontSize}px`)
+                .style("letter-spacing", legendConfig.letterSpacing)
+                .text(group.groupName);
+        }
+    }
+
     useEffect(() => {
         const screenSize = calculateScreenSize();
         calculateXAxis(screenSize);
         calculateYAxis(screenSize);
+        yAxisLabel(screenSize);
+        graphLegend(screenSize);
         drawLines(screenSize);
         document.addEventListener("click", deactivateOnClick);
 
