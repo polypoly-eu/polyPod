@@ -22,7 +22,6 @@ const ImportExplanationExpandable = ({
     importStatus,
     onUpdateImportStatus,
     onImportFile,
-    isFiles,
     file,
     onRemoveFile,
 }) => {
@@ -137,7 +136,7 @@ const ImportExplanationExpandable = ({
             <>
                 <p>{i18n.t("import:explore.1")}</p>
                 <p>{i18n.t("import:explore.2")}</p>
-                {isFiles() ? (
+                {file ? (
                     <RouteButton
                         className="btn-highlighted"
                         onClick={() =>

@@ -32,10 +32,6 @@ const Import = () => {
         handleRemoveFile(file.id);
     };
 
-    const isFiles = () => {
-        return files.length > 0 ? true : false;
-    };
-
     return (
         <div className="import-view">
             <ProgressBarComponent
