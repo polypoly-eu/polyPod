@@ -25,7 +25,7 @@ const LinesChart = ({ data }) => {
             resolution: 450,
             rightMargin: 16,
             leftMargin: 35,
-            topMargin: 106,
+            topMargin: 146,
             bottomMargin: 16,
             limitMarginX: 50,
             limitMarginY: 50,
@@ -95,7 +95,7 @@ const LinesChart = ({ data }) => {
     const labelYAxisPosition = {
         [screenSizes.smallScreen]: {
             left: 20,
-            top: 80,
+            top: 120,
         },
         [screenSizes.normalScreen]: {
             left: 20,
@@ -110,7 +110,7 @@ const LinesChart = ({ data }) => {
     const legendsConfiguration = {
         [screenSizes.smallScreen]: {
             left: 20,
-            top: 0,
+            top: 50,
             width: 180,
             height: 40,
             fontSize: 14,
@@ -136,7 +136,7 @@ const LinesChart = ({ data }) => {
 
     const instructionsConfiguration = {
         [screenSizes.smallScreen]: {
-            top: 0,
+            top: 50,
             width: 180,
             height: 40,
             fontSize: 14,
@@ -155,6 +155,33 @@ const LinesChart = ({ data }) => {
             height: 40,
             fontSize: 14,
             letterSpacing: "-0.01em",
+        },
+    };
+
+    const descriptionConfiguration = {
+        [screenSizes.smallScreen]: {
+            top: 0,
+            height: 40,
+            fontSize: 14,
+            letterSpacing: "-0.01em",
+            lineHeight: "120%",
+            fontWeight: 500,
+        },
+        [screenSizes.normalScreen]: {
+            top: 0,
+            height: 40,
+            fontSize: 14,
+            letterSpacing: "-0.01em",
+            lineHeight: "120%",
+            fontWeight: 500,
+        },
+        [screenSizes.bigScreen]: {
+            top: 0,
+            height: 40,
+            fontSize: 14,
+            letterSpacing: "-0.01em",
+            lineHeight: "120%",
+            fontWeight: 500,
         },
     };
     const bubblesClass = "bubble-speech";
@@ -1190,6 +1217,26 @@ const LinesChart = ({ data }) => {
             .text(data.instructionText);
     }
 
+    function graphDescription(screenSize) {
+        const { resolution, leftMargin, rightMargin } = canvasConfig[
+            screenSize
+        ];
+        const descriptionConfig = descriptionConfiguration[screenSize];
+        const root = _getRoot(screenSize);
+
+        root.append("foreignObject")
+            .style("width", resolution - leftMargin - rightMargin)
+            .style("height", descriptionConfig.height)
+            .attr("transform", `translate(${leftMargin}, 0)`)
+            .append("xhtml:div")
+            .style("color", darkColor)
+            .style("font-size", descriptionConfig.fontSize)
+            .style("letter-spacing", descriptionConfig.letterSpacing)
+            .style("line-height", descriptionConfig.lineHeight)
+            .style("font-weight", descriptionConfig.fontWeight)
+            .text(data.graphDescription);
+    }
+
     useEffect(() => {
         const screenSize = calculateScreenSize();
         calculateXAxis(screenSize);
@@ -1197,6 +1244,7 @@ const LinesChart = ({ data }) => {
         yAxisLabel(screenSize);
         graphLegend(screenSize);
         graphInstructions(screenSize);
+        graphDescription(screenSize);
         drawLines(screenSize);
         document.addEventListener("click", deactivateOnClick);
 
