@@ -1,5 +1,38 @@
 import { html } from "lit";
 import { ZipFile } from "../model/storage.js";
+import allStructure from "../static/allStructure";
+
+async function jsonDataEntities(zipFile) {
+    const entries = await zipFile.getEntries();
+    const relevantEntries = entries.filter(
+        (each) =>
+            !each.filename.includes(".DS_Store") &&
+            !each.filename.includes("__MACOSX") &&
+            !each.filename.includes("/files/") && // Remove user files
+            each.filename.endsWith(".json")
+    );
+    return relevantEntries;
+}
+
+function anonymizePathSegment(pathSegment, fullPath) {
+    if (
+        fullPath.includes("messages") &&
+        /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(pathSegment)
+    ) {
+        return "uniqueid_hash";
+    }
+    return pathSegment;
+}
+
+function anonymizeJsonEntityPath(entity) {
+    const fileName = entity.filename;
+    const nameParts = fileName.split("/").slice(1);
+
+    const anonymizedParts = nameParts.map((each) =>
+        anonymizePathSegment(each, fileName)
+    );
+    return anonymizedParts.join("/");
+}
 
 const subAnalyses = [
     class {
@@ -134,6 +167,86 @@ const subAnalyses = [
         render() {
             return html`<ul>
                 ${this._noDataFolderNames.map(
+                    (entry) => html`<li>${entry}</li>`
+                )}
+            </ul>`;
+        }
+    },
+    class {
+        get title() {
+            return "Uknown JSON files";
+        }
+
+        get isForDataReport() {
+            return true;
+        }
+
+        async parse({ zipFile }) {
+            this._missingEntryNames = [];
+            this.active = true;
+            if (!zipFile) return;
+
+            const relevantEntries = await jsonDataEntities(zipFile);
+            const anonymizedPaths = relevantEntries.map((each) =>
+                anonymizeJsonEntityPath(each)
+            );
+
+            this._unknownFiles = anonymizedPaths.filter(
+                (each) => !allStructure.includes(each)
+            );
+            this.active = this._unknownFiles.length > 0;
+        }
+
+        render() {
+            return html`<ul>
+                ${this._unknownFiles.map((entry) => html`<li>${entry}</li>`)}
+            </ul>`;
+        }
+    },
+    class {
+        get title() {
+            return "Missing expected JSON files";
+        }
+
+        get isForDataReport() {
+            return true;
+        }
+
+        _knownJsonFiles() {
+            const knowsJsonFiles = allStructure.filter((each) =>
+                each.endsWith(".json")
+            );
+            return knowsJsonFiles.filter(
+                (each) =>
+                    !/^(posts|photos_and_videos)\/album\/[1-9][0-9]?.json$/.test(
+                        each
+                    ) &&
+                    !/^messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/uniqueid_hash\/message_[2-9][0-9]?.json$/.test(
+                        each
+                    )
+            );
+        }
+
+        async parse({ zipFile }) {
+            this._expectedMissingFiles = [];
+            this.active = true;
+            if (!zipFile) return;
+
+            const relevantEntries = await jsonDataEntities(zipFile);
+            const anonymizedPaths = relevantEntries.map((each) =>
+                anonymizeJsonEntityPath(each)
+            );
+
+            const knowsJsonFiles = this._knownJsonFiles();
+            this._expectedMissingFiles = knowsJsonFiles.filter(
+                (each) => !anonymizedPaths.includes(each)
+            );
+            this.active = this._expectedMissingFiles.length > 0;
+        }
+
+        render() {
+            return html`<ul>
+                ${this._expectedMissingFiles.map(
                     (entry) => html`<li>${entry}</li>`
                 )}
             </ul>`;
