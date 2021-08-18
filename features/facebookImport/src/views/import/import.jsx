@@ -45,7 +45,6 @@ const Import = () => {
                 importStatus={importStatus}
                 onImportFile={handleImportFile}
                 onUpdateImportStatus={updateImportStatus}
-                isFiles={isFiles}
                 file={file}
                 onRemoveFile={onRemoveFile}
             />
