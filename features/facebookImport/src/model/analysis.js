@@ -14,7 +14,7 @@ async function jsonDataEntities(zipFile) {
     return relevantEntries;
 }
 
-function anonymisePathSegment(pathSegment, fullPath) {
+function anonymizePathSegment(pathSegment, fullPath) {
     if (
         fullPath.includes("messages") &&
         /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(pathSegment)
@@ -24,14 +24,14 @@ function anonymisePathSegment(pathSegment, fullPath) {
     return pathSegment;
 }
 
-function anonymiseJsonEntityPath(entity) {
+function anonymizeJsonEntityPath(entity) {
     const fileName = entity.filename;
     const nameParts = fileName.split("/").slice(1);
 
-    const anonymisedParts = nameParts.map((each) =>
-        anonymisePathSegment(each, fileName)
+    const anonymizedParts = nameParts.map((each) =>
+        anonymizePathSegment(each, fileName)
     );
-    return anonymisedParts.join("/");
+    return anonymizedParts.join("/");
 }
 
 const subAnalyses = [
@@ -188,7 +188,7 @@ const subAnalyses = [
 
             const relevantEntries = await jsonDataEntities(zipFile);
             const anonymizedPaths = relevantEntries.map((each) =>
-                anonymiseJsonEntityPath(each)
+                anonymizeJsonEntityPath(each)
             );
 
             this._unknownFiles = anonymizedPaths.filter(
@@ -234,7 +234,7 @@ const subAnalyses = [
 
             const relevantEntries = await jsonDataEntities(zipFile);
             const anonymizedPaths = relevantEntries.map((each) =>
-                anonymiseJsonEntityPath(each)
+                anonymizeJsonEntityPath(each)
             );
 
             const knowsJsonFiles = this._knownJsonFiles();
