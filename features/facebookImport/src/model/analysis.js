@@ -1,4 +1,4 @@
-import { html } from "lit";
+import React from "react";
 import { ZipFile } from "../model/storage.js";
 import allStructure from "../static/allStructure";
 
@@ -226,11 +226,13 @@ const subAnalyses = [
         }
 
         render() {
-            return html`<ul>
-                ${this._noDataFolderNames.map(
-                    (entry) => html`<li>${entry}</li>`
-                )}
-            </ul>`;
+            return (
+                <ul>
+                    {this._noDataFolderNames.map((entry, index) => (
+                        <li key={index}>{entry}</li>
+                    ))}
+                </ul>
+            );
         }
     },
     class {

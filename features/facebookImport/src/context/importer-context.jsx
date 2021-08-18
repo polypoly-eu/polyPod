@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
 import { useHistory } from "react-router-dom";
+import { analyzeFile } from "../model/analysis.js";
 
 export const ImporterContext = React.createContext();
 
@@ -65,6 +66,8 @@ export const ImporterProvider = ({ children }) => {
     //storage
     const storage = new Storage(pod);
     const [files, setFiles] = useState([]);
+    const [fileAnalysis, setFileAnalysis] = useState(null);
+
     storage.changeListener = async () => {
         const resolvedFiles = [];
         for (const file of storage.files) {
@@ -80,7 +83,7 @@ export const ImporterProvider = ({ children }) => {
     const history = useHistory();
 
     const handleRemoveFile = (fileID) => {
-        storage.removeFile({ id: fileID });
+        storage.removeFile(fileID);
     };
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
@@ -136,11 +139,18 @@ export const ImporterProvider = ({ children }) => {
         refreshFiles();
     }, []);
 
+    //on file change
+    useEffect(() => {
+        if (files[0])
+            analyzeFile(files[0]).then((fileAnalysis) =>
+                setFileAnalysis(fileAnalysis)
+            );
+    }, [files]);
+
     //on history change
     useEffect(() => {
         updatePodNavigation(pod, history);
         updateTitle(pod);
-        console.log(files);
     });
 
     return (
@@ -155,6 +165,8 @@ export const ImporterProvider = ({ children }) => {
                 importSteps,
                 updateImportStatus,
                 importFile,
+                fileAnalysis,
+                refreshFiles,
             }}
         >
             {children}

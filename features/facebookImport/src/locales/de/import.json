@@ -24,6 +24,7 @@
     "import": "Nachdem Sie die Datei mit Ihren Daten auf Ihr Telefon heruntergeladen haben, können Sie diese in Ihren polyPod importieren.",
     "import.info": "Die Datei die Sie importieren beinhaltet Ihre Facebook-Informationen bis zum jetzigen Zeitpunkt. Um Ihre Daten in der Zukunft zu aktualisieren, fordern Sie einfach eine neue Version an.",
     "import.none.chosen": "Keine Datei ausgewählt",
+    "import.chosen": "Ausgewählte Datei",
     "import.delete": "Entfernen",
     "import.button.1": "Datei auswählen",
     "import.button.2": "Importieren",

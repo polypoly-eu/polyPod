@@ -1,0 +1,35 @@
+.report-view {
+    color: var(--color-gray-50);
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 24px;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    overflow: hidden scroll;
+}
+
+.report-view button,
+code {
+    display: block;
+    margin: 8px;
+}
+
+.report-view .analysis-card:first-child {
+    margin-top: 20px;
+}
+
+.report-view .analysis-card {
+    margin: 0 8px 8px 8px;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.report-view .analysis-card > h1 {
+    font-size: 16px;
+}

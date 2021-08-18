@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import RouteButton from "../../components/routeButton.jsx";
+import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import i18n from "../../i18n.js";
