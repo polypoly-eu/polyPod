@@ -22,7 +22,7 @@ const LinesChart = ({ data }) => {
 
     const canvasConfig = {
         [screenSizes.smallScreen]: {
-            resolution: 800,
+            resolution: 450,
             rightMargin: 16,
             leftMargin: 35,
             topMargin: 106,
@@ -126,6 +126,30 @@ const LinesChart = ({ data }) => {
         },
         [screenSizes.bigScreen]: {
             left: 20,
+            top: 0,
+            width: 140,
+            height: 40,
+            fontSize: 14,
+            letterSpacing: "-0.01em",
+        },
+    };
+
+    const instructionsConfiguration = {
+        [screenSizes.smallScreen]: {
+            top: 0,
+            width: 180,
+            height: 40,
+            fontSize: 14,
+            letterSpacing: "-0.01em",
+        },
+        [screenSizes.normalScreen]: {
+            top: 0,
+            width: 140,
+            height: 40,
+            fontSize: 14,
+            letterSpacing: "-0.01em",
+        },
+        [screenSizes.bigScreen]: {
             top: 0,
             width: 140,
             height: 40,
@@ -1094,7 +1118,7 @@ const LinesChart = ({ data }) => {
             .style("height", legendConfig.height)
             .attr(
                 "transform",
-                `translate(${legendConfig.top}, ${legendConfig.left})`
+                `translate(${legendConfig.left}, ${legendConfig.top})`
             )
             .append("xhtml:div")
             .style("display", "grid")
@@ -1130,12 +1154,49 @@ const LinesChart = ({ data }) => {
         }
     }
 
+    function graphInstructions(screenSize) {
+        const instructionsConfig = instructionsConfiguration[screenSize];
+        const { resolution, rightMargin } = canvasConfig[screenSize];
+        const root = _getRoot(screenSize);
+
+        const instructionsContainer = root
+            .append("foreignObject")
+            .style("width", instructionsConfig.width)
+            .style("height", instructionsConfig.height)
+            .attr(
+                "transform",
+                `translate(${
+                    resolution - instructionsConfig.width - rightMargin
+                }, ${instructionsConfig.top})`
+            )
+            .append("xhtml:div")
+            .style("display", "flex")
+            .style("justify-content", "center")
+            .style("align-items", "flex-start")
+            .style("width", `${instructionsConfig.width}px`)
+            .style("height", `${instructionsConfig.height}px`);
+
+        instructionsContainer
+            .append("xhtml:img")
+            .style("margin-top", "5px")
+            .attr("src", "./images/hand-pointer.svg");
+        instructionsContainer
+            .append("xhtml:div")
+            .style("width", "95%")
+            .style("padding", "0px 10px")
+            .style("color", darkColor)
+            .style("font-size", `${instructionsConfig.fontSize}`)
+            .style("letter-spacing", instructionsConfig.letterSpacing)
+            .text(data.instructionText);
+    }
+
     useEffect(() => {
         const screenSize = calculateScreenSize();
         calculateXAxis(screenSize);
         calculateYAxis(screenSize);
         yAxisLabel(screenSize);
         graphLegend(screenSize);
+        graphInstructions(screenSize);
         drawLines(screenSize);
         document.addEventListener("click", deactivateOnClick);
 
