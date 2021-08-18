@@ -82,8 +82,8 @@ export const ImporterProvider = ({ children }) => {
 
     const history = useHistory();
 
-    const handleRemoveFile = (file) => {
-        storage.removeFile(file);
+    const handleRemoveFile = (fileID) => {
+        storage.removeFile(fileID);
     };
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
