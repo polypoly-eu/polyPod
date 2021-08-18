@@ -10,6 +10,9 @@ const ExampleStory = () => {
         rangeDates: [new Date("2015-01-01"), new Date("2021-01-01")],
         rangeY: [0, 1000],
         yAxisLabel: "MAU",
+        instructionText: "Explore by tapping on the lines",
+        graphDescription:
+            "Development of monthly active users (MAU) per messenger over recent years in millions",
         groups: [
             {
                 groupName: "Owned by Facebook",
