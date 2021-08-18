@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import i18n from "../../../i18n";
 import DonutChart from "../../dataViz/donutChart.jsx";
 import { DONUT_CHART } from "../../../constants";
+import SectionTitle from "../sectionTitle.jsx";
+import { ClusterSections } from "../clusterSections";
+import { StoryParagraph } from "./storyParagraph";
+import FakeTab from "../fakeTab.jsx";
 import * as _ from "lodash";
 
 import "./overview.css";
@@ -196,6 +200,10 @@ const Overview = ({ products, heightEvent }) => {
         return { installs, activeUsers, partOf };
     }
 
+    function onTabChanges(tabId) {
+        _changeDonutData(tabId, donutData);
+    }
+
     useEffect(() => {
         const { height } = wholeOverview.current.getBoundingClientRect();
         let donutGraphData;
@@ -212,43 +220,41 @@ const Overview = ({ products, heightEvent }) => {
     }, [products]);
 
     return (
-        <div className="messenger-overview" ref={wholeOverview}>
+        <ClusterSections
+            as="div"
+            className="messenger-overview"
+            ref={wholeOverview}
+        >
+            <SectionTitle
+                title={i18n.t(`${i18nHeader}:overview.section`)}
+            ></SectionTitle>
+            <StoryParagraph as="div">
+                {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
+            </StoryParagraph>
+            <FakeTab onClickedTab={onTabChanges}>
+                <div
+                    label={i18n.t(`${i18nHeader}:overview.tab.installs`)}
+                    tabId={typeDonutsChar.donutInstalls}
+                ></div>
+                <div
+                    label={i18n.t(`${i18nHeader}:overview.tab.users`)}
+                    tabId={typeDonutsChar.donutUsers}
+                ></div>
+                <div
+                    label={i18n.t(`${i18nHeader}:overview.tab.partof`)}
+                    tabId={typeDonutsChar.donutPartOf}
+                ></div>
+            </FakeTab>
             <div className="chart-container">
                 <DonutChart
                     data={currentDonutData}
                     message={i18n.t(`${i18nHeader}:${currentDonutMessage}`)}
                 ></DonutChart>
             </div>
-            <div className="test-btn">
-                <button
-                    type="button"
-                    onClick={() => {
-                        _changeDonutData(
-                            typeDonutsChar.donutInstalls,
-                            donutData
-                        );
-                    }}
-                >
-                    Installs
-                </button>
-                <button
-                    type="button"
-                    onClick={() => {
-                        _changeDonutData(typeDonutsChar.donutUsers, donutData);
-                    }}
-                >
-                    Users
-                </button>
-                <button
-                    type="button"
-                    onClick={() => {
-                        _changeDonutData(typeDonutsChar.donutPartOf, donutData);
-                    }}
-                >
-                    Part of
-                </button>
-            </div>
-        </div>
+            <StoryParagraph as="div">
+                {i18n.t(`${i18nHeader}:overview.paragraph.two`)}
+            </StoryParagraph>
+        </ClusterSections>
     );
 };
 
