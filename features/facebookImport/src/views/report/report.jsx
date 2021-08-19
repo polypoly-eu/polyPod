@@ -18,7 +18,7 @@ const ReportView = () => {
 
     //Todo
     const handleSendReport = () => {
-        console.log("ToDo");
+        console.log(unrecognizedData.jsonReport);
     };
 
     function renderReportAnalyses() {
