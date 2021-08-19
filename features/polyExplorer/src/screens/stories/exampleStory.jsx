@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 import LinesChart from "../../components/dataViz/linesChart.jsx";
 import { BUBBLES_SPEECH_SIZES } from "../../constants";
@@ -257,7 +257,22 @@ const ExampleStory = () => {
         color: "#FB8A89",
         bubbles: [5, 5, 5, 5, 5, 5, 5, 5],
     };
+
+    const mockData2 = {
+        title: "Facebook Messenger",
+        color: "#FB8A89",
+        bubbles: [10, 5, 15, 20, 35, 30, 45, 40],
+    };
     const svgCanvas = useRef();
+    const [currentData, changeCurrentData] = useState(mockData2);
+
+    function changeToMockData2() {
+        changeCurrentData(mockData2);
+    }
+
+    function changeToMockData1() {
+        changeCurrentData(mockData1);
+    }
 
     useEffect(() => {
         d3.select(svgCanvas.current)
@@ -278,12 +293,28 @@ const ExampleStory = () => {
             <LinesChart data={mockData}></LinesChart>
             <svg ref={svgCanvas}>
                 <OneMessagerBubblesChart
-                    data={mockData1}
+                    data={currentData}
                     width={65}
                     height={65}
                     coord={[0, 0]}
                 ></OneMessagerBubblesChart>
             </svg>
+            <button
+                type="button"
+                onClick={() => {
+                    changeToMockData1();
+                }}
+            >
+                Mock data 1
+            </button>
+            <button
+                type="button"
+                onClick={() => {
+                    changeToMockData2();
+                }}
+            >
+                Mock data 2
+            </button>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
