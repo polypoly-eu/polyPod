@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 import LinesChart from "../../components/dataViz/linesChart.jsx";
 import { BUBBLES_SPEECH_SIZES } from "../../constants";
+import OneMessagerBubblesChart from "../../components/clusterStories/messengers/oneMessagerBubblesChart.jsx";
+import * as d3 from "d3";
 
 import "./exampleStory.css";
 
@@ -250,6 +252,22 @@ const ExampleStory = () => {
         ],
     };
     const fakeEvent = () => {};
+    const mockData1 = {
+        title: "Facebook Messenger",
+        color: "#FB8A89",
+        bubbles: [5, 5, 5, 5, 5, 5, 5, 5],
+    };
+    const svgCanvas = useRef();
+
+    useEffect(() => {
+        d3.select(svgCanvas.current)
+            .attr("xmlns", "http://www.w3.org/2000/svg")
+            .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+            .attr("xmlns:xhtml", "http://www.w3.org/1999/xhtml")
+            .attr("viewBox", "0 0 300 300")
+            .style("width", "100%")
+            .style("height", "400px");
+    }, []);
 
     return (
         <DataStory
@@ -258,6 +276,14 @@ const ExampleStory = () => {
             scrollEvent={fakeEvent}
         >
             <LinesChart data={mockData}></LinesChart>
+            <svg ref={svgCanvas}>
+                <OneMessagerBubblesChart
+                    data={mockData1}
+                    width={65}
+                    height={65}
+                    coord={[0, 0]}
+                ></OneMessagerBubblesChart>
+            </svg>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
