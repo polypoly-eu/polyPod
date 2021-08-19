@@ -2,10 +2,6 @@ import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
 const BarChart = ({ data }) => {
-    data.sort(function (x, y) {
-        return d3.descending(x.value, y.value);
-    });
-
     const svgBarRef = useRef();
     const gHeight = 52;
     const width = 500;
@@ -28,8 +24,12 @@ const BarChart = ({ data }) => {
     const maxValue = d3.max(data, (d) => d.value);
     const averageValue = d3.mean(data, (d) => d.value);
 
+    data.sort(function (x, y) {
+        return d3.descending(x.value, y.value);
+    });
+
     function render() {
-        const svgChart = d3
+        let svgChart = d3
             .select(svgBarRef.current)
             .append("svg")
             .style("width", "100%")
@@ -52,7 +52,7 @@ const BarChart = ({ data }) => {
         bars.append("rect")
             .attr("class", "bar")
             .attr("height", barHeight)
-            .attr("width", (d) => (xScale(d.value) < 1 ? "1" : xScale(d.value)))
+            .attr("width", 0)
             .attr("x", margin.left)
             .attr("y", (d) => yScale(d.title) + gHeight)
             .attr("rx", "8")
@@ -61,7 +61,7 @@ const BarChart = ({ data }) => {
             .style("margin-top", margin.top);
         bars.append("text")
             .attr("class", "label-value")
-            .attr("x", (d) => xScale(d.value) + margin.left + 2)
+            .attr("x", 2)
             .attr("y", (d) => yScale(d.title) + gHeight + 8)
             .attr("dy", ".35em")
             .style("font-size", fontConfig.fontSize)
@@ -203,6 +203,19 @@ const BarChart = ({ data }) => {
             .style("text-align", fontConfig.textAlign)
             .style("font-weight", fontConfig.fontWeightBold)
             .style("line-height", fontConfig.lineHeight);
+
+        svgChart
+            .selectAll(".bar")
+            .transition()
+            .duration(2000)
+            .attr("width", (d) =>
+                xScale(d.value) < 1 ? "1" : xScale(d.value)
+            );
+        svgChart
+            .selectAll(".label-value")
+            .transition()
+            .duration(2000)
+            .attr("x", (d) => xScale(d.value) + margin.left + 2);
     }
 
     useEffect(render, [data]);
