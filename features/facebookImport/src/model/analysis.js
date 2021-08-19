@@ -48,6 +48,10 @@ const subAnalyses = [
             return "File name";
         }
 
+        get id() {
+            return "file-name";
+        }
+
         parse({ name }) {
             this.active = true;
             this._name = name;
@@ -60,6 +64,10 @@ const subAnalyses = [
     class {
         get title() {
             return "File size";
+        }
+
+        get id() {
+            return "file-size";
         }
 
         parse({ size }) {
@@ -75,6 +83,10 @@ const subAnalyses = [
     class {
         get title() {
             return "Messages";
+        }
+
+        get id() {
+            return "messsages";
         }
 
         async _messagesCountFromFile(zipFile, messagesFile) {
@@ -133,6 +145,10 @@ const subAnalyses = [
     class {
         get title() {
             return "Off-Facebook events";
+        }
+
+        get id() {
+            return "off-Facebook-events";
         }
 
         async _readOffFacebooEvents(id, zipFile) {
@@ -204,8 +220,19 @@ const subAnalyses = [
             return "NoData Folders";
         }
 
+        get id() {
+            return "no-data-Folders";
+        }
+
         get isForDataReport() {
             return true;
+        }
+
+        get jsonReport() {
+            return {
+                id: this.id,
+                noDataFolderNames: this._noDataFolderNames,
+            };
         }
 
         async parse({ id, zipFile }) {
@@ -246,8 +273,19 @@ const subAnalyses = [
             return "Uknown JSON files";
         }
 
+        get id() {
+            return "uknown-json-files";
+        }
+
         get isForDataReport() {
             return true;
+        }
+
+        get jsonReport() {
+            return {
+                id: this.id,
+                unknownFiles: this._unknownFiles,
+            };
         }
 
         async parse({ id, zipFile }) {
@@ -281,8 +319,19 @@ const subAnalyses = [
             return "Missing expected JSON files";
         }
 
+        get id() {
+            return "missing-expected-json-files";
+        }
+
         get isForDataReport() {
             return true;
+        }
+
+        get jsonReport() {
+            return {
+                id: this.id,
+                expectedMissingFiles: this._expectedMissingFiles,
+            };
         }
 
         _knownJsonFiles() {
@@ -339,6 +388,20 @@ class UnrecognizedData {
             return "No data to report!";
         }
         return this.reportAnalyses.length + " analyses included in the report";
+    }
+
+    get jsonReport() {
+        if (!this.active) {
+            return {};
+        }
+        const reportAnalyses = this.reportAnalyses
+            .filter((analysis) => analysis.isForDataReport)
+            .map((analysis) => analysis.jsonReport);
+        const inactiveAnalyses = this.reportAnalyses
+            .filter((analysis) => !analysis.isForDataReport)
+            .map((analysis) => analysis.id);
+
+        return { reportAnalyses, inactiveAnalyses };
     }
 }
 
