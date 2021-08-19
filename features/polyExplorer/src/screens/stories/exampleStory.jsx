@@ -30,6 +30,10 @@ const ExampleStory = () => {
         { title: "Example for a Longer Label", value: 6400000 },
     ];
 
+    const fakeAnimationEvent = () => {
+        return true;
+    }
+
     return (
         <DataStory
             progressBarColor="#3BA6FF"
@@ -59,7 +63,7 @@ const ExampleStory = () => {
                     3
                 </div>
             </FakeTab>
-            <BarChart data={data} />
+            <BarChart data={data} animation={fakeAnimationEvent()} />
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
