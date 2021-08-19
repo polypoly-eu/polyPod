@@ -32,7 +32,7 @@ const ExampleStory = () => {
 
     const fakeAnimationEvent = () => {
         return true;
-    }
+    };
 
     return (
         <DataStory
