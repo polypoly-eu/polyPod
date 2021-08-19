@@ -50,7 +50,7 @@ const OneMessagerBubblesChart = ({ data, width, height, coord }) => {
     useEffect(() => {
         setContainer();
         setTitle();
-    }, []);
+    }, [data]);
 
     return (
         <g ref={chartRef}>

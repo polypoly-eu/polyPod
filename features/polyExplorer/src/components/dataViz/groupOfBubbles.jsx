@@ -7,6 +7,10 @@ const GroupOfBubbles = ({ data, width, height, color }) => {
     const bubblesClass = "bubble-group";
     const bubblesSelector = `.${bubblesClass}`;
 
+    function cleanBubbles() {
+        d3.select(bubbleRef.current).selectAll(bubblesSelector).remove();
+    }
+
     function makeHierarchy(children) {
         return d3.hierarchy({ children }).sum((d) => d.value);
     }
@@ -49,8 +53,9 @@ const GroupOfBubbles = ({ data, width, height, color }) => {
 
     useEffect(() => {
         const bubblesData = data.map((value) => ({ value }));
+        cleanBubbles();
         drawDataBubbles(createBubbleContainer(), bubblesData);
-    }, []);
+    }, [data]);
 
     return <g ref={bubbleRef}></g>;
 };
