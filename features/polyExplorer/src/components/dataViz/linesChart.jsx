@@ -9,11 +9,12 @@ const LinesChart = ({ data }) => {
     const svgCanvas = useRef();
     const semiDarkColor = "#8d9caf";
     const darkColor = "#0f1938";
-    const bubblesSpeachBackground = "rgba(255,255,255,0.75)";
+    const bubbleSpeechBackground = "rgba(255,255,255,0.75)";
     const yLabelsPosition = "-0.40em";
     const heightPicBubbleSpeech = 5;
     const correctionYAxisSize = 10;
     const correctionYAxisLabels = 20;
+    const invisiblePathSeparation = 3;
     const screenSizes = {
         smallScreen: "smallScreen",
         normalScreen: "normalScreen",
@@ -461,7 +462,67 @@ const LinesChart = ({ data }) => {
                     })
             );
 
+        const invisiblePathDown = root
+            .append("path")
+            .datum(points)
+            .attr("fill", "none")
+            .attr("stroke", "transparent")
+            .attr("stroke-width", 2)
+            .attr("group", _getIdName(groupName))
+            .attr("line-index", lineIndex)
+            .attr(
+                "d",
+                d3
+                    .line()
+                    .x((d) => {
+                        const point = x(jsDateTo3dDate(d.x));
+
+                        return point + leftMargin + invisiblePathSeparation;
+                    })
+                    .y((d) => {
+                        const point = y(d.y);
+
+                        return (
+                            point +
+                            topMargin -
+                            bottomMargin +
+                            invisiblePathSeparation
+                        );
+                    })
+            );
+
+        const invisiblePathUp = root
+            .append("path")
+            .datum(points)
+            .attr("fill", "none")
+            .attr("stroke", "transparent")
+            .attr("stroke-width", 2)
+            .attr("group", _getIdName(groupName))
+            .attr("line-index", lineIndex)
+            .attr(
+                "d",
+                d3
+                    .line()
+                    .x((d) => {
+                        const point = x(jsDateTo3dDate(d.x));
+
+                        return point + leftMargin - invisiblePathSeparation;
+                    })
+                    .y((d) => {
+                        const point = y(d.y);
+
+                        return (
+                            point +
+                            topMargin -
+                            bottomMargin -
+                            invisiblePathSeparation
+                        );
+                    })
+            );
+
         path.node().addEventListener("click", onClickPath);
+        invisiblePathDown.node().addEventListener("click", onClickPath);
+        invisiblePathUp.node().addEventListener("click", onClickPath);
     }
 
     function drawLines(screenSize) {
@@ -533,7 +594,7 @@ const LinesChart = ({ data }) => {
         root.append("path")
             .attr("stroke", darkColor)
             .attr("stroke-width", 1)
-            .attr("fill", bubblesSpeachBackground)
+            .attr("fill", bubbleSpeechBackground)
             .attr("class", bubblesClass)
             .attr("diagonal", JSON.stringify(diagonal))
             .attr("d", commands);
