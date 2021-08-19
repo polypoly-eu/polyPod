@@ -18,8 +18,8 @@ const DonutChart = ({ data, message }) => {
     };
     const canvasConfig = {
         [screenSizes.smallScreen]: {
-            resolution: 730,
-            rightMargin: 65,
+            resolution: 600,
+            rightMargin: 16,
         },
         [screenSizes.normalScreen]: {
             resolution: 650,
@@ -146,8 +146,8 @@ const DonutChart = ({ data, message }) => {
 
     function _getMesures(screenSize) {
         return {
-            outerRadius: canvasConfig[screenSize].resolution / 5,
-            innerRadius: canvasConfig[screenSize].resolution / 8,
+            outerRadius: canvasConfig[screenSize].resolution / 4.5,
+            innerRadius: canvasConfig[screenSize].resolution / 7,
             half: canvasConfig[screenSize].resolution / 2,
         };
     }
@@ -507,10 +507,7 @@ const DonutChart = ({ data, message }) => {
             .attr("class", `${classNameLabels} ${classNameLabelsUp}`)
             .attr("transform", (d, index, list) => {
                 const halfPoint = Math.ceil(list.length / 2);
-                const coordY =
-                    screenSize === screenSizes.smallScreen
-                        ? -half + (labelsConfig.height - 30)
-                        : -half;
+                const coordY = -half;
                 const coordX = labelsConfig.width * (index - halfPoint);
                 return `translate(${coordX}, ${coordY})`;
             });
@@ -524,10 +521,7 @@ const DonutChart = ({ data, message }) => {
             .attr("class", `${classNameLabels} ${classNameLabelsRight}`)
             .attr("transform", (d, index, list) => {
                 const halfPoint = Math.ceil(list.length / 2);
-                const coordX =
-                    screenSize === screenSizes.smallScreen
-                        ? half - labelsConfig.width * 2
-                        : half - labelsConfig.width * 1.5;
+                const coordX = half - labelsConfig.width * 1.5;
                 const coordY = labelsConfig.height * (index - halfPoint);
                 return `translate(${coordX}, ${coordY})`;
             });
@@ -541,10 +535,7 @@ const DonutChart = ({ data, message }) => {
             .attr("class", `${classNameLabels} ${classNameLabelsRight}`)
             .attr("transform", (d, index, list) => {
                 const halfPoint = Math.ceil(list.length / 2);
-                const coordY =
-                    screenSize === screenSizes.smallScreen
-                        ? half - labelsConfig.height * 2 + 30
-                        : half - labelsConfig.height;
+                const coordY = half - labelsConfig.height;
                 const coordX = labelsConfig.width * (index - halfPoint);
 
                 return `translate(${coordX}, ${coordY})`;
@@ -559,10 +550,7 @@ const DonutChart = ({ data, message }) => {
             .attr("class", `${classNameLabels} ${classNameLabelsLeft}`)
             .attr("transform", (d, index, list) => {
                 const halfPoint = Math.ceil(list.length / 2);
-                const coordX =
-                    screenSize === screenSizes.smallScreen
-                        ? -half + labelsConfig.width
-                        : -half + labelsConfig.width / 2;
+                const coordX = -half + labelsConfig.width / 2;
                 const coordY = labelsConfig.height * (index - halfPoint);
 
                 return `translate(${coordX}, ${coordY})`;
