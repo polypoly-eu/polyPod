@@ -322,6 +322,10 @@ const ExampleStory = () => {
         { title: "Example for a Longer Label", value: 6400000 },
     ];
 
+    const fakeAnimationEvent = () => {
+        return true;
+    }
+
     return (
         <DataStory
             progressBarColor="#3BA6FF"
@@ -330,7 +334,7 @@ const ExampleStory = () => {
             marks={allMarks}
         >
             <LinesChart data={mockData}></LinesChart>
-            <BarChart data={data} />
+            <BarChart data={data} animation={fakeAnimationEvent()} />
             <svg ref={svgCanvas}>
                 <OneMessagerBubblesChart
                     data={currentData}

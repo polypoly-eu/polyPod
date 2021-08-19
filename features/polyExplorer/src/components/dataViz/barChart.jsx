@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 
-const BarChart = ({ data }) => {
+const BarChart = ({ data, animation }) => {
     const svgBarRef = useRef();
     const gHeight = 52;
     const width = 500;
@@ -37,6 +37,9 @@ const BarChart = ({ data }) => {
         .range([0, height - margin.top - margin.bottom])
         .domain(data.map((d) => d.title));
 
+    const [barWidth, setBarWidth] = useState(0);
+    const [labelXPosition, setLabelXPosition] = useState(0);
+
     function render() {
         let svgChart = d3.select(svgBarRef.current).select("svg");
         if (svgChart.empty()) {
@@ -58,7 +61,7 @@ const BarChart = ({ data }) => {
             bars.append("rect")
                 .attr("class", "bar")
                 .attr("height", barHeight)
-                .attr("width", 0)
+                .attr("width", barWidth)
                 .attr("x", margin.left)
                 .attr("y", (d) => yScale(d.title) + gHeight)
                 .attr("rx", "8")
@@ -105,7 +108,7 @@ const BarChart = ({ data }) => {
                 .data(data)
                 .enter()
                 .append("foreignObject")
-                .attr("x", 0)
+                .attr("x", labelXPosition)
                 .attr("y", (d) => yScale(d.title) + gHeight)
                 .attr("width", width)
                 .attr("height", 42);
@@ -214,21 +217,33 @@ const BarChart = ({ data }) => {
                 .style("line-height", fontConfig.lineHeight);
         }
 
-        svgChart
-            .selectAll(".bar")
-            .transition()
-            .duration(2000)
-            .attr("width", (d) =>
-                xScale(d.value) < 1 ? "1" : xScale(d.value)
-            );
-        svgChart
-            .selectAll(".label-value")
-            .transition()
-            .duration(2000)
-            .attr("x", (d) => xScale(d.value) + margin.left + 2);
+        return svgChart;
     }
 
-    useEffect(render, [data]);
+    function animateChart(animation) {
+        if (animation) {
+            const svgChart = render();
+            const barTransition = svgChart
+                .selectAll(".bar")
+                .transition()
+                .duration(2000)
+                .attr("width", (d) =>
+                    xScale(d.value) < 1 ? "1" : xScale(d.value)
+                );
+            const labelTransition = svgChart
+                .selectAll(".label-value")
+                .transition()
+                .duration(2000)
+                .attr("x", (d) => xScale(d.value) + margin.left + 2);
+            setBarWidth(barTransition);
+            setLabelXPosition(labelTransition);
+        }
+    }
+
+    useEffect(() => {
+        render();
+        animateChart(animation);
+    }, [data, animation]);
 
     return <div ref={svgBarRef}></div>;
 };
