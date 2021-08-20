@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import i18n from "../../i18n.js";
 import BarChart from "../../components/dataViz/barChart.jsx";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 import LinesChart from "../../components/dataViz/linesChart.jsx";
@@ -326,6 +327,10 @@ const ExampleStory = () => {
         return true;
     };
 
+    const purposesChartTranslation = i18n.t(
+        "clusterMessengerStory:purposes.chart.legend"
+    );
+
     return (
         <DataStory
             progressBarColor="#3BA6FF"
@@ -334,7 +339,11 @@ const ExampleStory = () => {
             marks={allMarks}
         >
             <LinesChart data={mockData}></LinesChart>
-            <BarChart data={data} animation={fakeAnimationEvent()} />
+            <BarChart
+                data={data}
+                animation={fakeAnimationEvent()}
+                legendTitle={purposesChartTranslation}
+            />
             <svg ref={svgCanvas}>
                 <OneMessagerBubblesChart
                     data={currentData}
