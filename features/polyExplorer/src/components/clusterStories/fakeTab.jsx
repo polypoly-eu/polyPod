@@ -12,7 +12,7 @@ const FakeTab = ({ children, onClickedTab }) => {
     };
 
     return (
-        <div>
+        <>
             <div className="faketab">
                 {children.map((tab, index) => (
                     <button
@@ -38,7 +38,7 @@ const FakeTab = ({ children, onClickedTab }) => {
                         );
                 })}
             </div>
-        </div>
+        </>
     );
 };
 
