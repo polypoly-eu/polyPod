@@ -1,8 +1,11 @@
+import React from "react";
 import ConnectedAdvertisersAnalysis from "./connected-advertisers.js";
 import InteractedWithAdvertisersAnalysis from "./interacted-advertisers.js";
 import AdInterestsAnalysis from "./ad-interests.js";
 import OffFacebookEventsAnalysis from "./off-facebook-events.js";
 import MessagesAnalysis from "./messages.js";
+
+import DataBubblesAll from "../../components/dataViz/dataBubblesAll.jsx";
 
 class DataBubblesAnalysis {
     get title() {
@@ -41,9 +44,11 @@ class DataBubblesAnalysis {
             })
         );
 
-        this._bubblesData = parsedAnalyses.map(({ analysis, title }) => {
-            return { count: analysis.dataEntitiesCount, title: title };
-        });
+        this._bubblesData = parsedAnalyses
+            .map(({ analysis, title }) => {
+                return { count: analysis.dataEntitiesCount, title: title };
+            })
+            .filter(({ count }) => count > 0);
 
         this.active = true;
     }
@@ -52,7 +57,15 @@ class DataBubblesAnalysis {
         if (!this.active) {
             return "No Data!";
         }
-        return `There are ${this._advertisersCount} advertisers whose ads you've clicked on Facebook`;
+        return (
+            <DataBubblesAll
+                data={this._bubblesData}
+                width={400}
+                height={400}
+                bubbleColor="#fef230"
+                textColor="black"
+            />
+        );
     }
 }
 
