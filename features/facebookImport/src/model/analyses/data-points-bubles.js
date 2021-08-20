@@ -46,9 +46,24 @@ class DataBubblesAnalysis {
 
         this._bubblesData = parsedAnalyses
             .map(({ analysis, title }) => {
-                return { count: analysis.dataEntitiesCount, title: title };
+                return {
+                    count: analysis.dataEntitiesCount,
+                    title: title,
+                };
             })
             .filter(({ count }) => count > 0);
+
+        let maximumSize = Math.max(
+            ...this._bubblesData.map(({ count }) => count)
+        );
+        if (maximumSize < 100) maximumSize = 100;
+        let currentFactor = 1;
+        while (!(maximumSize / currentFactor < 100)) {
+            currentFactor = currentFactor + 10;
+        }
+        this._bubblesData = this._bubblesData.map(({ count, title }) => {
+            return { count: count / currentFactor, title };
+        });
 
         this.active = true;
     }
