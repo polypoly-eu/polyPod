@@ -2,16 +2,43 @@ import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 
 const BarChart = ({ data, animation }) => {
+    data.sort(function (x, y) {
+        return d3.descending(x.value, y.value);
+    });
+
     const svgBarRef = useRef();
     const gHeight = 52;
     const width = 500;
     const height = data.length * (gHeight * 2);
     const margin = { top: 36, right: 30, bottom: 1, left: 1 };
     const barHeight = gHeight - margin.top;
+    const minBarWidth = 1;
+    const barRadius = 8;
+    const barColor = "var(--data-exp-purposes)";
+    const labelValueColor = "var(--data-exp-purposes)";
+    const labelValuePositionAdjust = {
+        x: 2,
+        yAdj: 8,
+        dy: ".35em",
+    };
     const legendWidth = 150;
     const legendHeight = 40;
     const legendMargin = 0;
+    const valueLinesConfig = {
+        y1: 12,
+        strokeColor: "var(--data-exp-purposes)",
+        strokeWidth: 2,
+        strokeDasharray: "5, 5",
+    };
     const labelTitlePadding = { top: 8, right: 12, bottom: 8, left: 12 };
+    const labelTitleHeight = {
+        fo: 42,
+        div: 32,
+        p: 32,
+    };
+    const labelTitleRadius = "16px";
+    const labelTitleBorder = "solid 1px var(--color-dark)";
+    const labelTitleBackground = "#F7FAFC80";
     const fontConfig = {
         color: "var(--color-text-dark)",
         fontSize: "12px",
@@ -23,10 +50,6 @@ const BarChart = ({ data, animation }) => {
     };
     const maxValue = d3.max(data, (d) => d.value);
     const averageValue = d3.mean(data, (d) => d.value);
-
-    data.sort(function (x, y) {
-        return d3.descending(x.value, y.value);
-    });
 
     const xScale = d3
         .scaleLinear()
@@ -64,18 +87,24 @@ const BarChart = ({ data, animation }) => {
                 .attr("width", barWidth)
                 .attr("x", margin.left)
                 .attr("y", (d) => yScale(d.title) + gHeight)
-                .attr("rx", "8")
-                .attr("ry", "8")
-                .attr("fill", "var(--data-exp-purposes)")
+                .attr("rx", barRadius)
+                .attr("ry", barRadius)
+                .attr("fill", barColor)
                 .style("margin-top", margin.top);
             bars.append("text")
                 .attr("class", "label-value")
-                .attr("x", 2)
-                .attr("y", (d) => yScale(d.title) + gHeight + 8)
-                .attr("dy", ".35em")
+                .attr("x", labelValuePositionAdjust.x)
+                .attr(
+                    "y",
+                    (d) =>
+                        yScale(d.title) +
+                        gHeight +
+                        labelValuePositionAdjust.yAdj
+                )
+                .attr("dy", labelValuePositionAdjust.dy)
                 .style("font-size", fontConfig.fontSize)
                 .style("font-weight", fontConfig.fontWeightBold)
-                .attr("fill", "var(--data-exp-purposes)")
+                .attr("fill", labelValueColor)
                 .text((d) =>
                     d.value >= 1000000
                         ? Math.trunc(d.value / 1000000) + "M"
@@ -88,20 +117,20 @@ const BarChart = ({ data, animation }) => {
             valueLines
                 .append("line")
                 .attr("x1", xScale(maxValue))
-                .attr("y1", 12)
+                .attr("y1", valueLinesConfig.y1)
                 .attr("x2", xScale(maxValue))
                 .attr("y2", height - margin.bottom)
-                .style("stroke", "var(--data-exp-purposes)")
-                .style("stroke-width", 2);
+                .style("stroke", valueLinesConfig.strokeColor)
+                .style("stroke-width", valueLinesConfig.strokeWidth);
             valueLines
                 .append("line")
                 .attr("x1", xScale(averageValue))
-                .attr("y1", 12)
+                .attr("y1", valueLinesConfig.y1)
                 .attr("x2", xScale(averageValue))
                 .attr("y2", height - margin.bottom)
-                .style("stroke", "var(--data-exp-purposes)")
-                .style("stroke-width", 2)
-                .style("stroke-dasharray", "5, 5");
+                .style("stroke", valueLinesConfig.strokeColor)
+                .style("stroke-width", valueLinesConfig.strokeWidth)
+                .style("stroke-dasharray", valueLinesConfig.strokeDasharray);
 
             const labelTitle = svgChart
                 .selectAll("foreignObject")
@@ -111,12 +140,12 @@ const BarChart = ({ data, animation }) => {
                 .attr("x", labelXPosition)
                 .attr("y", (d) => yScale(d.title) + gHeight)
                 .attr("width", width)
-                .attr("height", 42);
+                .attr("height", labelTitleHeight.fo);
             const labelTitleDiv = labelTitle.append("xhtml:div");
             const labelTitleP = labelTitleDiv
                 .append("p")
                 .text((d) => d.title)
-                .attr("height", "32px")
+                .attr("height", labelTitleHeight.p)
                 .style("margin", legendMargin)
                 .style("display", "inline-block")
                 .style("font-size", fontConfig.fontSizeTitle)
@@ -128,12 +157,14 @@ const BarChart = ({ data, animation }) => {
                         "px"
                 )
                 .style("color", fontConfig.color)
-                .style("border-radius", "16px")
-                .style("border", "solid 1px var(--color-dark)")
-                .style("background-color", "#F7FAFC80");
+                .style("border", labelTitleBorder)
+                .style("border-radius", labelTitleRadius)
+                .style("background-color", labelTitleBackground);
             const labelTitleWidth = labelTitleP.node().getBoundingClientRect()
                 .width;
-            labelTitleDiv.attr("width", labelTitleWidth).attr("height", "32px");
+            labelTitleDiv
+                .attr("width", labelTitleWidth)
+                .attr("height", labelTitleHeight.div);
 
             const legendTitle = svgChart
                 .append("foreignObject")
@@ -228,13 +259,21 @@ const BarChart = ({ data, animation }) => {
                 .transition()
                 .duration(2000)
                 .attr("width", (d) =>
-                    xScale(d.value) < 1 ? "1" : xScale(d.value)
+                    xScale(d.value) < minBarWidth
+                        ? minBarWidth
+                        : xScale(d.value)
                 );
             const labelTransition = svgChart
                 .selectAll(".label-value")
                 .transition()
                 .duration(2000)
-                .attr("x", (d) => xScale(d.value) + margin.left + 2);
+                .attr(
+                    "x",
+                    (d) =>
+                        xScale(d.value) +
+                        margin.left +
+                        labelValuePositionAdjust.x
+                );
             setBarWidth(barTransition);
             setLabelXPosition(labelTransition);
         }
