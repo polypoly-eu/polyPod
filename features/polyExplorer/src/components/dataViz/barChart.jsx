@@ -78,8 +78,8 @@ const BarChart = ({ data, animation }) => {
                 .attr("fill", "var(--data-exp-purposes)")
                 .text((d) =>
                     d.value >= 1000000
-                        ? Math.trunc(d.value / 1000000) + "M"
-                        : d.value
+                        ? parseFloat((d.value / 1000000).toFixed(1)) + "M"
+                        : parseFloat(d.value.toFixed(1))
                 );
 
             const valueLines = svgChart
@@ -164,8 +164,8 @@ const BarChart = ({ data, animation }) => {
                 .append("p")
                 .text(
                     averageValue >= 1000000
-                        ? Math.trunc(averageValue / 1000000) + "M"
-                        : Math.trunc(averageValue)
+                        ? parseFloat((averageValue / 1000000).toFixed(1)) + "M"
+                        : parseFloat(averageValue.toFixed(2))
                 )
                 .style("font-size", fontConfig.fontSize)
                 .style("color", fontConfig.color)
@@ -197,8 +197,8 @@ const BarChart = ({ data, animation }) => {
                 .append("p")
                 .text(
                     maxValue >= 1000000
-                        ? Math.trunc(maxValue / 1000000) + "M"
-                        : maxValue
+                        ? parseFloat((maxValue / 1000000).toFixed(1)) + "M"
+                        : parseFloat(maxValue.toFixed(1))
                 )
                 .style("font-size", fontConfig.fontSize)
                 .style("color", fontConfig.color)
