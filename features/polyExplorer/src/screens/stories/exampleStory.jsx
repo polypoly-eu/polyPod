@@ -34,6 +34,10 @@ const ExampleStory = () => {
         return true;
     };
 
+    const purposesChartTranslation = i18n.t(
+        "clusterMessengerStory:purposes.chart.legend"
+    );
+
     return (
         <DataStory
             progressBarColor="#3BA6FF"
@@ -63,7 +67,11 @@ const ExampleStory = () => {
                     3
                 </div>
             </FakeTab>
-            <BarChart data={data} animation={fakeAnimationEvent()} />
+            <BarChart
+                data={data}
+                animation={fakeAnimationEvent()}
+                legendTitle={purposesChartTranslation}
+            />
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores

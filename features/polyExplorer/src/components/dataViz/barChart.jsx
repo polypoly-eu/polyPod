@@ -1,10 +1,16 @@
 import React, { useRef, useEffect, useState } from "react";
+import i18n from "../../i18n.js";
 import * as d3 from "d3";
 
-const BarChart = ({ data, animation }) => {
-    data.sort(function (x, y) {
-        return d3.descending(x.value, y.value);
-    });
+const BarChart = ({ data, animation, legendTitle }) => {
+    const [barWidth, setBarWidth] = useState(0);
+    const [labelXPosition, setLabelXPosition] = useState(0);
+
+    const legendTranslations = {
+        title: legendTitle,
+        max: i18n.t("barChart:max"),
+        average: i18n.t("barChart:average"),
+    };
 
     const svgBarRef = useRef();
     const gHeight = 52;
@@ -51,6 +57,10 @@ const BarChart = ({ data, animation }) => {
     const maxValue = d3.max(data, (d) => d.value);
     const averageValue = d3.mean(data, (d) => d.value);
 
+    data.sort(function (x, y) {
+        return d3.descending(x.value, y.value);
+    });
+
     const xScale = d3
         .scaleLinear()
         .range([0, width - margin.left - margin.right])
@@ -59,9 +69,6 @@ const BarChart = ({ data, animation }) => {
         .scaleBand()
         .range([0, height - margin.top - margin.bottom])
         .domain(data.map((d) => d.title));
-
-    const [barWidth, setBarWidth] = useState(0);
-    const [labelXPosition, setLabelXPosition] = useState(0);
 
     function render() {
         let svgChart = d3.select(svgBarRef.current).select("svg");
@@ -176,7 +183,7 @@ const BarChart = ({ data, animation }) => {
                 .append("xhtml:div")
                 .attr("x", 0)
                 .attr("y", 0)
-                .html("Number of mentions")
+                .html(legendTranslations.title)
                 .style("font-size", fontConfig.fontSize)
                 .style("color", fontConfig.color)
                 .style("font-weight", fontConfig.fontWeightBold);
@@ -206,7 +213,7 @@ const BarChart = ({ data, animation }) => {
                 .style("line-height", fontConfig.lineHeight);
             averageValueLegend
                 .append("p")
-                .html("Average")
+                .html(legendTranslations.average)
                 .style("font-size", fontConfig.fontSize)
                 .style("color", fontConfig.color)
                 .style("margin", legendMargin)
@@ -239,7 +246,7 @@ const BarChart = ({ data, animation }) => {
                 .style("line-height", fontConfig.lineHeight);
             maxValueLegend
                 .append("p")
-                .html("Maximum")
+                .html(legendTranslations.max)
                 .style("font-size", fontConfig.fontSize)
                 .style("color", fontConfig.color)
                 .style("margin", legendMargin)
