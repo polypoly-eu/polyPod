@@ -1,12 +1,19 @@
 import { ZipFile } from "../model/storage.js";
 
 import DataBubblesAnalysis from "./analyses/data-points-bubles.js";
-import JsonFilesBubblesAnalysis from "./analyses/json-files-bubbles.js";
+import DataGroupsAnalysis from "./analyses/data-groups.js";
 import ConnectedAdvertisersAnalysis from "./analyses/connected-advertisers.js";
 import InteractedWithAdvertisersAnalysis from "./analyses/interacted-advertisers.js";
 import AdInterestsAnalysis from "./analyses/ad-interests.js";
 import OffFacebookEventsAnalysis from "./analyses/off-facebook-events.js";
 import MessagesAnalysis from "./analyses/messages.js";
+import SearchesAnalysis from "./analyses/searches.js";
+import FriendsAnalysis from "./analyses/friends.js";
+import LikedPagesAnalysis from "./analyses/pages-liked.js";
+import FollowedPagesAnalysis from "./analyses/pages-followed.js";
+import RecommendedPagesAnalysis from "./analyses/pages-recommended.js";
+import UnfollowedPagesAnalysis from "./analyses/pages-unfollowed.js";
+import ReceivedFriendRequestsAnalysis from "./analyses/friend-requests-received.js";
 
 import ReportMetadataAnalysis from "./analyses-report/report-metadata.js";
 import NoDataFoldersAnalysis from "./analyses-report/no-data-folders.js";
@@ -52,12 +59,20 @@ const subAnalyses = [
     },
 
     DataBubblesAnalysis,
-    JsonFilesBubblesAnalysis,
+    DataGroupsAnalysis,
+    //JsonFilesBubblesAnalysis,
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
     OffFacebookEventsAnalysis,
     MessagesAnalysis,
+    SearchesAnalysis,
+    FriendsAnalysis,
+    LikedPagesAnalysis,
+    FollowedPagesAnalysis,
+    RecommendedPagesAnalysis,
+    UnfollowedPagesAnalysis,
+    ReceivedFriendRequestsAnalysis,
 
     ReportMetadataAnalysis,
     NoDataFoldersAnalysis,
