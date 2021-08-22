@@ -31,13 +31,27 @@ const dataImporters = [
 export async function importData(file) {
     const zipFile = new ZipFile(file, window.pod);
     const facebookAccount = new FacebookAccount(window.pod);
-    const enrichedData = { ...file, zipFile, facebookAccount };
+    const enrichedData = { ...file, zipFile };
 
-    const executedImporters = await Promise.all(
+    const importingResults = await Promise.all(
         dataImporters.map(async (importerClass) => {
             const importer = new importerClass();
-            await importer.import(enrichedData, window.pod);
-            return importer;
+            const importStatus = await importer
+                .import(enrichedData, facebookAccount, window.pod)
+                .then((status) =>
+                    status
+                        ? status
+                        : {
+                              status: "successfull",
+                          }
+                )
+                .catch((error) => {
+                    return {
+                        status: "error",
+                        error,
+                    };
+                });
+            return importStatus;
         })
     );
 

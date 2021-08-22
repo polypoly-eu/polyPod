@@ -1,42 +1,46 @@
+import {
+    InvalidContentImportException,
+    MissingContentImportException,
+    MissingFileImportException,
+} from "./failed-import-exception";
+
 async function readJSONFile(dataFileName, zipFile) {
     const entries = await zipFile.getEntries();
     const offFacebookEventsFile = entries.find((entryName) =>
         entryName.includes(dataFileName)
     );
     if (!offFacebookEventsFile) {
-        return { status: "Missing File" };
+        throw new MissingFileImportException(dataFileName);
     }
     const fileContent = new TextDecoder("utf-8").decode(
         await zipFile.getContent(offFacebookEventsFile)
     );
 
     if (!fileContent) {
-        return { status: "Missing Content" };
+        throw new MissingContentImportException(dataFileName);
     }
-    try {
-        return { status: "ok", data: JSON.parse(fileContent) };
-    } catch (exception) {
-        //TODO: better error handling + error reporting
-        console.log(exception);
-        return { status: "JSON parsing error" };
-    }
+
+    return JSON.parse(fileContent);
 }
 
 async function readJSONDataArray(dataFileName, dataKey, zipFile) {
     const rawData = await readJSONFile(dataFileName, zipFile);
-    if (!(rawData.status === "ok")) {
-        return rawData;
-    }
-    const readData = rawData.data;
-    if (!(dataKey in readData)) {
-        return { status: `Missing ${dataKey} key` };
+
+    if (!(dataKey in rawData)) {
+        throw new InvalidContentImportException(
+            dataFileName,
+            `Missing ${dataKey} key`
+        );
     }
 
-    const arrayData = readData[dataKey];
+    const arrayData = rawData[dataKey];
     if (!Array.isArray(arrayData)) {
-        return { status: `Wrong data format for ${dataKey} key` };
+        throw new InvalidContentImportException(
+            dataFileName,
+            `Wrong data format for ${dataKey} key`
+        );
     }
-    return { status: "ok", data: arrayData };
+    return arrayData;
 }
 
 function anonymizePathSegment(pathSegment, fullPath) {

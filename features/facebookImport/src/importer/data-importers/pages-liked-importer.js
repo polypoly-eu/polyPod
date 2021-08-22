@@ -1,14 +1,11 @@
 import { readJSONDataArray } from "../importer-util.js";
 
 export default class LikedPagesImporter {
-    async import({ zipFile, facebookAccount }) {
-        const likedPages = await readJSONDataArray(
+    async import({ zipFile }, facebookAccount) {
+        facebookAccount.likedPages = await readJSONDataArray(
             "pages/pages_you've_liked.json",
             "page_likes_v2",
             zipFile
         );
-        if (likedPages.status === "ok") {
-            facebookAccount.likedPages = likedPages.data;
-        }
     }
 }

@@ -6,7 +6,7 @@ import {
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
 
-class MissingExpectedJSONFilesAnalysis {
+export default class MissingExpectedJSONFilesAnalysis {
     get title() {
         return "Missing expected JSON files";
     }
@@ -67,5 +67,3 @@ class MissingExpectedJSONFilesAnalysis {
         );
     }
 }
-
-export default MissingExpectedJSONFilesAnalysis;

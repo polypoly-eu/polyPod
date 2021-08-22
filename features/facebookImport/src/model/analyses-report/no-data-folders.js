@@ -1,6 +1,6 @@
 import React from "react";
 
-class NoDataFoldersAnalysis {
+export default class NoDataFoldersAnalysis {
     get title() {
         return "NoData Folders";
     }
@@ -53,5 +53,3 @@ class NoDataFoldersAnalysis {
         );
     }
 }
-
-export default NoDataFoldersAnalysis;

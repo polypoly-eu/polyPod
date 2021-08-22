@@ -1,6 +1,6 @@
 import React from "react";
 
-class ReportMetadataAnalysis {
+export default class ReportMetadataAnalysis {
     get title() {
         return "Report Metadata";
     }
@@ -46,5 +46,3 @@ class ReportMetadataAnalysis {
         );
     }
 }
-
-export default ReportMetadataAnalysis;

@@ -6,7 +6,7 @@ import {
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
 
-class UknownJSONFilesAnalysis {
+export default class UknownJSONFilesAnalysis {
     get title() {
         return "Uknown JSON files";
     }
@@ -52,5 +52,3 @@ class UknownJSONFilesAnalysis {
         );
     }
 }
-
-export default UknownJSONFilesAnalysis;

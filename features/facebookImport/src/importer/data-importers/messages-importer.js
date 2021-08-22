@@ -7,21 +7,34 @@ function isJsonMessageFile(entryName, id) {
     );
 }
 
+async function readJSONFileWithStatus(messageFile, zipFile) {
+    return readJSONFile(messageFile, zipFile)
+        .then((data) => {
+            return { data, status: "successfull" };
+        })
+        .catch((error) => {
+            return {
+                status: "error",
+                error,
+            };
+        });
+}
+
 export default class MessagesImporter {
-    async import({ id, zipFile, facebookAccount }) {
+    async import({ id, zipFile }, facebookAccount) {
         const entries = await zipFile.getEntries();
         const messageThreadFiles = entries.filter((fileName) =>
             isJsonMessageFile(fileName, id)
         );
 
         // TODO: The same message thread can be in multiple files
-        const messageThreads = await Promise.all(
+        const result = await Promise.all(
             messageThreadFiles.map((messageFile) =>
-                readJSONFile(messageFile, zipFile)
+                readJSONFileWithStatus(messageFile, zipFile)
             )
         );
-        facebookAccount.messageThreads = messageThreads
-            .filter((each) => each.status === "ok")
-            .map((each) => each.data);
+        facebookAccount.messageThreads = result
+            .filter((result) => result.status === "successfull")
+            .map((result) => result.data);
     }
 }
