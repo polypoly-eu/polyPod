@@ -5,7 +5,7 @@ export default class RecommendedPagesAnalysis extends RootAnalysis {
         return "Pages you've recommended";
     }
 
-    async parse({ facebookAccount }) {
+    async analyze({ facebookAccount }) {
         this._recommendedPagesCount = facebookAccount.recommendedPages.length;
         this.active = this._recommendedPagesCount > 0;
     }

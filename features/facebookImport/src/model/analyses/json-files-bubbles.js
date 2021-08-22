@@ -20,7 +20,7 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
         return { zipFile, linesCount };
     }
 
-    async parse({ zipFile }) {
+    async analyze({ zipFile }) {
         this._advertisersCount = {};
         this.active = false;
         if (!zipFile) return;

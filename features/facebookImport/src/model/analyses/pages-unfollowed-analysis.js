@@ -5,7 +5,7 @@ export default class UnfollowedPagesAnalysis extends RootAnalysis {
         return "Pages you've unfollowed";
     }
 
-    async parse({ facebookAccount }) {
+    async analyze({ facebookAccount }) {
         this._unfollowedPagesCount = facebookAccount.unfollowedPages.length;
         this.active = this._unfollowedPagesCount > 0;
     }

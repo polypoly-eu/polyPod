@@ -5,7 +5,7 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
         return "Off-Facebook Activity";
     }
 
-    async parse({ facebookAccount }) {
+    async analyze({ facebookAccount }) {
         this._companiesCount = facebookAccount.offFacebookCompaniesCount;
         this._eventsCount = facebookAccount.offFacebookEventsCount;
         this.active = this._companiesCount > 0;

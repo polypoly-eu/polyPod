@@ -26,7 +26,7 @@ export default class UknownJSONFilesAnalysis {
         };
     }
 
-    async parse({ id, zipFile }) {
+    async analyze({ id, zipFile }) {
         this._missingEntryNames = [];
         this.active = true;
         if (!zipFile) return;

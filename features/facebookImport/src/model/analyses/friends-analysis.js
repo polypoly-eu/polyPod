@@ -5,7 +5,7 @@ export default class FriendsAnalysis extends RootAnalysis {
         return "Friends";
     }
 
-    async parse({ facebookAccount }) {
+    async analyze({ facebookAccount }) {
         this._friendsCount = facebookAccount.friends.length;
         this.active = this._friendsCount > 0;
     }

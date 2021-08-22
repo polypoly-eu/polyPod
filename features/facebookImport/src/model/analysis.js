@@ -30,7 +30,7 @@ const subAnalyses = [
             return "file-name";
         }
 
-        parse({ name }) {
+        analyze({ name }) {
             this.active = true;
             this._name = name;
         }
@@ -48,7 +48,7 @@ const subAnalyses = [
             return "file-size";
         }
 
-        parse({ size }) {
+        analyze({ size }) {
             this.active = true;
             this._size = size;
         }
@@ -114,7 +114,7 @@ export async function analyzeFile(file, facebookAccount) {
     const parsedAnalyses = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
             const subAnalysis = new subAnalysisClass();
-            await subAnalysis.parse(enrichedData);
+            await subAnalysis.analyze(enrichedData);
             return subAnalysis;
         })
     );

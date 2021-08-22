@@ -24,7 +24,7 @@ export default class ReportMetadataAnalysis {
         };
     }
 
-    async parse({ size, zipFile }) {
+    async analyze({ size, zipFile }) {
         this.active = true;
         this._size = size;
 

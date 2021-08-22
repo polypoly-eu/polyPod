@@ -5,7 +5,7 @@ export default class LikedPagesAnalysis extends RootAnalysis {
         return "Liked Pages";
     }
 
-    async parse({ facebookAccount }) {
+    async analyze({ facebookAccount }) {
         this._likedPagesCount = facebookAccount.likedPages.length;
         this.active = this._likedPagesCount > 0;
     }

@@ -41,7 +41,7 @@ export default class MissingExpectedJSONFilesAnalysis {
         );
     }
 
-    async parse({ id, zipFile }) {
+    async analyze({ id, zipFile }) {
         this._expectedMissingFiles = [];
         this.active = true;
         if (!zipFile) return;

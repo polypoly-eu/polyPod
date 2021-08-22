@@ -5,7 +5,7 @@ export default class SearchesAnalysis extends RootAnalysis {
         return "Search History";
     }
 
-    async parse({ facebookAccount }) {
+    async analyze({ facebookAccount }) {
         this._searchesCount = facebookAccount.searches.length;
         this.active = this._searchesCount > 0;
     }

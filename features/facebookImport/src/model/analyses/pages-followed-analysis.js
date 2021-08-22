@@ -5,7 +5,7 @@ export default class FollowedPagesAnalysis extends RootAnalysis {
         return "Followed Pages";
     }
 
-    async parse({ facebookAccount }) {
+    async analyze({ facebookAccount }) {
         this._followedPagesCount = facebookAccount._followedPages.length;
         this.active = this._followedPagesCount > 0;
     }

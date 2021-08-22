@@ -5,7 +5,7 @@ export default class AdInterestsAnalysis extends RootAnalysis {
         return "Ads Interests";
     }
 
-    async parse({ facebookAccount }) {
+    async analyze({ facebookAccount }) {
         this._adInterestsCount = facebookAccount.adInterests.length;
         this.active = this._adInterestsCount > 0;
     }

@@ -20,7 +20,7 @@ export default class NoDataFoldersAnalysis {
         };
     }
 
-    async parse({ id, zipFile }) {
+    async analyze({ id, zipFile }) {
         this._noDataFolderNames = [];
         this.active = false;
         if (!zipFile) return;

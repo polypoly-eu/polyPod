@@ -6,7 +6,7 @@ export default class DataGroupsAnalysis extends RootAnalysis {
         return "Data Groups";
     }
 
-    async parse({ facebookAccount }) {
+    async analyze({ facebookAccount }) {
         this._bubblesData = facebookAccount.dataGroups.filter(
             ({ count }) => count > 0
         );
