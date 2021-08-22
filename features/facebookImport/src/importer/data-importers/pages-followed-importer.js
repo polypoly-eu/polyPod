@@ -1,4 +1,4 @@
-import { readJSONDataArray } from "./../../model/analysis-util.js";
+import { readJSONDataArray } from "../importer-util.js";
 
 export default class FollowedPagesImporter {
     async import({ zipFile, facebookAccount }) {

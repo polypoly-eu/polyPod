@@ -1,6 +1,9 @@
 import React from "react";
 
-import { anonymizeJsonEntityPath, jsonDataEntities } from "../analysis-util.js";
+import {
+    anonymizeJsonEntityPath,
+    jsonDataEntities,
+} from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
 
 class UknownJSONFilesAnalysis {

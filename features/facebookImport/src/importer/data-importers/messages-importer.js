@@ -1,4 +1,4 @@
-import { readJSONFile } from "./../../model/analysis-util.js";
+import { readJSONFile } from "../importer-util.js";
 
 function isJsonMessageFile(entryName, id) {
     const formattedEntryName = entryName.replace(`${id}/`, "");
