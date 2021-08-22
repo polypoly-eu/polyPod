@@ -1,12 +1,9 @@
 import { jsonDataEntities } from "./../analysis-util.js";
+import RootAnalysis from "./root-analysis.js";
 
-class JsonFilesBubblesAnalysis {
+export default class JsonFilesBubblesAnalysis extends RootAnalysis {
     get title() {
         return "Files Bubbles";
-    }
-
-    get id() {
-        return "files-bubbles";
     }
 
     async _contentLinesForEntry(id, zipFile, jsonEntry) {
@@ -44,5 +41,3 @@ class JsonFilesBubblesAnalysis {
         return `There are ${this._advertisersCount} advertisers whose ads you've clicked on Facebook`;
     }
 }
-
-export default JsonFilesBubblesAnalysis;

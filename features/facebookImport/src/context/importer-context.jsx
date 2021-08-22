@@ -4,6 +4,7 @@ import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
 import { useHistory } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
+import { importData } from "../importer/importer.js";
 
 export const ImporterContext = React.createContext();
 
@@ -66,6 +67,7 @@ export const ImporterProvider = ({ children }) => {
     //storage
     const storage = new Storage(pod);
     const [files, setFiles] = useState([]);
+    const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
 
     storage.changeListener = async () => {
@@ -139,13 +141,24 @@ export const ImporterProvider = ({ children }) => {
         refreshFiles();
     }, []);
 
-    //on file change
+    // On file change
+    // When files changed run the importer first and create an account model first.
+    // After there is an account the analyses are triggered.
     useEffect(() => {
         if (files[0])
-            analyzeFile(files[0]).then((fileAnalysis) =>
-                setFileAnalysis(fileAnalysis)
+            importData(files[0]).then((newFacebookAccount) =>
+                setFacebookAccount(newFacebookAccount)
             );
     }, [files]);
+
+    // On account changed
+    // When the account changes run the analises
+    useEffect(() => {
+        if (facebookAccount && files)
+            analyzeFile(files[0], facebookAccount).then((fileAnalysis) =>
+                setFileAnalysis(fileAnalysis)
+            );
+    }, [facebookAccount, files]);
 
     //on history change
     useEffect(() => {

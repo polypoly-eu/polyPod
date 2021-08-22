@@ -1,19 +1,19 @@
 import { ZipFile } from "../model/storage.js";
 
-import DataBubblesAnalysis from "./analyses/data-points-bubles.js";
-import DataGroupsAnalysis from "./analyses/data-groups.js";
-import ConnectedAdvertisersAnalysis from "./analyses/connected-advertisers.js";
-import InteractedWithAdvertisersAnalysis from "./analyses/interacted-advertisers.js";
-import AdInterestsAnalysis from "./analyses/ad-interests.js";
-import OffFacebookEventsAnalysis from "./analyses/off-facebook-events.js";
-import MessagesAnalysis from "./analyses/messages.js";
-import SearchesAnalysis from "./analyses/searches.js";
-import FriendsAnalysis from "./analyses/friends.js";
-import LikedPagesAnalysis from "./analyses/pages-liked.js";
-import FollowedPagesAnalysis from "./analyses/pages-followed.js";
-import RecommendedPagesAnalysis from "./analyses/pages-recommended.js";
-import UnfollowedPagesAnalysis from "./analyses/pages-unfollowed.js";
-import ReceivedFriendRequestsAnalysis from "./analyses/friend-requests-received.js";
+import DataBubblesAnalysis from "./analyses/data-points-bubles-analysis.js";
+import DataGroupsAnalysis from "./analyses/data-groups-analysis.js";
+import ConnectedAdvertisersAnalysis from "./analyses/connected-advertisers-analysis.js";
+import InteractedWithAdvertisersAnalysis from "./analyses/interacted-advertisers-analysis.js";
+import AdInterestsAnalysis from "./analyses/ad-interests-analysis.js";
+import OffFacebookEventsSymmaryAnalysis from "./analyses/off-facebook-events-analysis.js";
+import MessagesAnalysis from "./analyses/messages-analysis.js";
+import SearchesAnalysis from "./analyses/searches-analysis.js";
+import FriendsAnalysis from "./analyses/friends-analysis.js";
+import LikedPagesAnalysis from "./analyses/pages-liked-analysis";
+import FollowedPagesAnalysis from "./analyses/pages-followed-analysis.js";
+import RecommendedPagesAnalysis from "./analyses/pages-recommended-analysis.js";
+import UnfollowedPagesAnalysis from "./analyses/pages-unfollowed-analysis.js";
+import ReceivedFriendRequestsAnalysis from "./analyses/friend-requests-received-analysis.js";
 
 import ReportMetadataAnalysis from "./analyses-report/report-metadata.js";
 import NoDataFoldersAnalysis from "./analyses-report/no-data-folders.js";
@@ -64,7 +64,7 @@ const subAnalyses = [
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
-    OffFacebookEventsAnalysis,
+    OffFacebookEventsSymmaryAnalysis,
     MessagesAnalysis,
     SearchesAnalysis,
     FriendsAnalysis,
@@ -108,13 +108,13 @@ class UnrecognizedData {
     }
 }
 
-export async function analyzeFile(file) {
+export async function analyzeFile(file, facebookAccount) {
     const zipFile = new ZipFile(file, window.pod);
-    const enrichedFile = { ...file, zipFile };
+    const enrichedData = { ...file, zipFile, facebookAccount };
     const parsedAnalyses = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
             const subAnalysis = new subAnalysisClass();
-            await subAnalysis.parse(enrichedFile);
+            await subAnalysis.parse(enrichedData);
             return subAnalysis;
         })
     );
