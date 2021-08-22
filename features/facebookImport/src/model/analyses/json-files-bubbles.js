@@ -6,9 +6,9 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
         return "Files Bubbles";
     }
 
-    async _contentLinesForEntry(id, zipFile, jsonEntry) {
+    async _contentLinesForEntry(zipFile, jsonEntry) {
         const fileContent = new TextDecoder("utf-8").decode(
-            await zipFile.getContent(`${id}/${jsonEntry}`)
+            await zipFile.getContent(jsonEntry)
         );
         const linesCount = fileContent
             .split("\n")
@@ -20,15 +20,15 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
         return { zipFile, linesCount };
     }
 
-    async parse({ id, zipFile }) {
+    async parse({ zipFile }) {
         this._advertisersCount = {};
         this.active = false;
         if (!zipFile) return;
 
-        const relevantEntries = await jsonDataEntities(id, zipFile);
+        const relevantEntries = await jsonDataEntities(zipFile);
         this._filesMessagesCount = await Promise.all(
             relevantEntries.map((jsonEntry) =>
-                this._contentLinesForEntry(id, zipFile, jsonEntry)
+                this._contentLinesForEntry(zipFile, jsonEntry)
             )
         );
         this.active = true;

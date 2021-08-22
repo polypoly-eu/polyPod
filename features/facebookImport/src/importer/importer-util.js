@@ -62,17 +62,15 @@ function anonymizeJsonEntityPath(fileName) {
     return anonymizedParts.join("/");
 }
 
-async function jsonDataEntities(id, zipFile) {
+async function jsonDataEntities(zipFile) {
     const entries = await zipFile.getEntries();
-    const relevantEntries = entries
-        .map((each) => each.replace(`${id}/`, ""))
-        .filter(
-            (each) =>
-                !each.includes(".DS_Store") &&
-                !each.includes("__MACOSX") &&
-                !each.includes("/files/") && // Remove user files
-                each.endsWith(".json")
-        );
+    const relevantEntries = entries.filter(
+        (each) =>
+            !each.includes(".DS_Store") &&
+            !each.includes("__MACOSX") &&
+            !each.includes("/files/") && // Remove user files
+            each.endsWith(".json")
+    );
     return relevantEntries;
 }
 

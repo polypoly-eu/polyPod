@@ -31,9 +31,9 @@ export default class UknownJSONFilesAnalysis {
         this.active = true;
         if (!zipFile) return;
 
-        const relevantEntries = await jsonDataEntities(id, zipFile);
+        const relevantEntries = await jsonDataEntities(zipFile);
         const anonymizedPaths = relevantEntries.map((each) =>
-            anonymizeJsonEntityPath(each)
+            anonymizeJsonEntityPath(each.replace(`${id}/`, ""))
         );
 
         this._unknownFiles = anonymizedPaths.filter(

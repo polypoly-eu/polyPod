@@ -46,9 +46,9 @@ export default class MissingExpectedJSONFilesAnalysis {
         this.active = true;
         if (!zipFile) return;
 
-        const relevantEntries = await jsonDataEntities(id, zipFile);
+        const relevantEntries = await jsonDataEntities(zipFile);
         const anonymizedPaths = relevantEntries.map((each) =>
-            anonymizeJsonEntityPath(each)
+            anonymizeJsonEntityPath(each.replace(`${id}/`, ""))
         );
         const knowsJsonFiles = this._knownJsonFiles();
         this._expectedMissingFiles = knowsJsonFiles.filter(
