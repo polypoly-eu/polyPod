@@ -1,10 +1,11 @@
 import React from "react";
+import BarChart from "../../components/dataViz/barChart.jsx";
 import RootAnalysis from "./root-analysis.js";
 import { groupOffFacebookEventsByType } from "./utils/off-facebook-events-utils.js";
 
-export default class OffFacebookEventsTypesAnalysis extends RootAnalysis {
+export default class OffFacebookEventsTypesChartAnalysis extends RootAnalysis {
     get title() {
-        return "Off-Facebook Events by Type";
+        return "Off-Facebook Events by By Type Chart";
     }
 
     async analyze({ facebookAccount }) {
@@ -22,19 +23,6 @@ export default class OffFacebookEventsTypesAnalysis extends RootAnalysis {
         if (!this.active) {
             return "No off-facebook events detected in your export!";
         }
-        return (
-            <table>
-                <tbody>
-                    {this._eventsTypeCountPairs.map(
-                        ({ type, count }, index) => (
-                            <tr key={index}>
-                                <td>{type}</td>
-                                <td>{count}</td>
-                            </tr>
-                        )
-                    )}
-                </tbody>
-            </table>
-        );
+        return <BarChart data={this._eventsTypeCountPairs} names="type" />;
     }
 }

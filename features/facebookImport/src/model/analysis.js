@@ -21,6 +21,8 @@ import MissingExpectedJSONFilesAnalysis from "./analyses-report/missing-expected
 import UknownJSONFilesAnalysis from "./analyses-report/unknown-json-files.js";
 import MessagesDetailsAnalysis from "./analyses/messages-details-analysis.js";
 import OffFacebookEventsTypesAnalysis from "./analyses/off-facebook-events-types-analysys.js";
+import DataChartsAnalysis from "./analyses/data-points-charts-analysis.js";
+import OffFacebookEventsTypesChartAnalysis from "./analyses/off-facebook-events-types-charts-analysis.js";
 
 const subAnalyses = [
     class {
@@ -61,12 +63,14 @@ const subAnalyses = [
     },
 
     DataBubblesAnalysis,
+    DataChartsAnalysis,
     DataGroupsAnalysis,
     //JsonFilesBubblesAnalysis,
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
     OffFacebookEventsAnalysis,
+    OffFacebookEventsTypesChartAnalysis,
     OffFacebookEventsTypesAnalysis,
     MessagesAnalysis,
     MessagesDetailsAnalysis,
