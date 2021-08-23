@@ -24,7 +24,7 @@ export default class DataBubblesAnalysis extends RootAnalysis {
         );
 
         const scaleFactor = this._computeScaleFactor(this._bubblesData);
-        this._bubblesData = this._bubblesData.map(({ count, title }) => {
+        this._bubblesDataScaled = this._bubblesData.map(({ count, title }) => {
             return { title, count: count / scaleFactor };
         });
 
@@ -38,7 +38,7 @@ export default class DataBubblesAnalysis extends RootAnalysis {
         return (
             <>
                 <DataBubblesAll
-                    data={this._bubblesData}
+                    data={this._bubblesDataScaled}
                     width={400}
                     height={400}
                     bubbleColor="#fef230"

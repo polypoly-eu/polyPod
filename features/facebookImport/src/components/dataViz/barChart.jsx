@@ -39,7 +39,7 @@ const BarChart = ({ data, onClickBar = () => {} }) => {
         else return fillScale(highest, 1000000);*/
 
         // unpretty scale but good enough for now
-        return fillScale(highest, parseInt((highest % 10) * 1.1));
+        return fillScale(highest, parseInt((highest / 10) * 1.1));
     };
     const highestCount = getHighestCount();
     const scaleValues = calculateScaleValues(highestCount);
