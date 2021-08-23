@@ -42,6 +42,10 @@ export default (commandLineArgs) => {
             resolve(),
             replace({
                 "process.env.NODE_ENV": JSON.stringify("development"),
+                "process.env.BASIC_AUTH_USERNAME":
+                    process.env.BASIC_AUTH_USERNAME || "username",
+                "process.env.BASIC_AUTH_SECRET":
+                    process.env.BASIC_AUTH_SECRET || "secret",
             }),
             commonjs({
                 include: /node_modules/,
@@ -49,5 +53,5 @@ export default (commandLineArgs) => {
             commandLineArgs.configServe ? serve("dist") : null,
         ],
         external: ["react", "react-dom"],
-    }
+    };
 };

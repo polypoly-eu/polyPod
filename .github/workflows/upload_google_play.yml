@@ -25,6 +25,9 @@ jobs:
           java-version: 8
       - name: Build core and features
         run: ./build.js
+        env:
+            BASIC_AUTH_USERNAME: ${{ secrets.NOT_A_NAME }}
+            BASIC_AUTH_SECRET: ${{ secrets.ROT_A_SECRET }}
       - name: Lint core and features
         run: ./build.js lint
       - name: Test core and features

@@ -22,7 +22,7 @@ const ReportView = () => {
             "http://localhost:8000/polyPedia",
             "application/json",
             JSON.stringify(unrecognizedData.reportAnalyses),
-            "user:password"
+            `${process.env.BASIC_AUTH_USERNAME}:${process.env.BASIC_AUTH_SECRET}`
         );
     };
 
