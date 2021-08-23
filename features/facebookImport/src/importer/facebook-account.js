@@ -40,6 +40,14 @@ class FacebookAccount {
         }, 0);
     }
 
+    forEachMessage(callback) {
+        for (const messageThread of this.messageThreads) {
+            for (const message of messageThread?.messages) {
+                callback(message);
+            }
+        }
+    }
+
     // Basic accessors
 
     get offFacebookCompanies() {
