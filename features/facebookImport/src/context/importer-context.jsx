@@ -85,6 +85,7 @@ export const ImporterProvider = ({ children }) => {
     const history = useHistory();
 
     const handleRemoveFile = (fileID) => {
+        setFacebookAccount(null);
         storage.removeFile(fileID);
     };
 

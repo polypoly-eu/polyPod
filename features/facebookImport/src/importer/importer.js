@@ -33,7 +33,8 @@ export async function importData(file) {
     const facebookAccount = new FacebookAccount(window.pod);
     const enrichedData = { ...file, zipFile };
 
-    const importingResults = await Promise.all(
+    //const importingResults =
+    await Promise.all(
         dataImporters.map(async (importerClass) => {
             const importer = new importerClass();
             const importStatus = await importer
