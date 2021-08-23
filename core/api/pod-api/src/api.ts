@@ -147,6 +147,16 @@ export interface PolyNav {
 }
 
 /**
+ * `Network` specifies how features can communicate with other devices or servers.
+ */
+export interface Network {
+    /**
+     * A way for features to send HTTP POST requests
+     */
+    httpPost(url: string, body: string): Promise<void>;
+}
+
+/**
  * @hidden
  */
 export interface PolyLifecycle {

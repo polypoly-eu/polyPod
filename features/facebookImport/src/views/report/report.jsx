@@ -16,9 +16,11 @@ const ReportView = () => {
     const { fileAnalysis } = useContext(ImporterContext);
     const unrecognizedData = fileAnalysis.unrecognizedData;
 
-    //Todo
     const handleSendReport = () => {
-        console.log("ToDo");
+        pod.network.httpPost(
+            "http://localhost:8000/polyPedia",
+            JSON.stringify(unrecognizedData.reportAnalyses)
+        );
     };
 
     function renderReportAnalyses() {

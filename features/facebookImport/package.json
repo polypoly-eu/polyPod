@@ -5,6 +5,8 @@
     "lint": "npm run eslint",
     "build": "rollup -c",
     "watch": "rollup --watch -c",
+    "serve": "rollup --watch --configServe -c",
+    "serve-polypedia-stub": "node scripts/serve-polypedia-stub.js",
     "test": "jest --passWithNoTests"
   },
   "devDependencies": {
@@ -29,7 +31,8 @@
     "poly-look": "file:../../core/utils/poly-look",
     "rollup": "^2.55.1",
     "rollup-plugin-copy": "3.3.0",
-    "rollup-plugin-css-only": "^3.1.0"
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-serve": "1.1.0"
   },
   "private": true,
   "dependencies": {
