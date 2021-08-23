@@ -136,6 +136,6 @@
     color: var(--color-indigo-950);
     top: 50%;
     transform: translateY(-50%);
-    left: 24px;
+    left: 4px;
     font-size: 12px;
 }
