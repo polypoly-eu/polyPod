@@ -58,7 +58,9 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
                 <p>
                     You made {this._callsCount} calls lasting{" "}
                     {Math.floor(this._callsDuration / (24 * 3600))} days{" "}
-                    {Math.floor(this._callsDuration / 3600)} hours.
+                    {Math.floor(this._callsDuration / 3600) -
+                        24 * Math.floor(this._callsDuration / (24 * 3600))}{" "}
+                    hours.
                 </p>
             </div>
         );
