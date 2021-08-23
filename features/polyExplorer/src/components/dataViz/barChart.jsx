@@ -1,13 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-const BarChart = () => {
-    const data = [
-        { title: "Option A", value: 107 },
-        { title: "Option B", value: 31 },
-        { title: "Option C", value: 635 },
-    ];
-
+const BarChart = ({ data }) => {
     data.sort(function (x, y) {
         return d3.descending(x.value, y.value);
     });

@@ -315,6 +315,12 @@ const ExampleStory = () => {
             .style("height", "400px");
     }, []);
 
+    const data = [
+        { title: "Option A", value: 107 },
+        { title: "Option B", value: 31 },
+        { title: "Option C", value: 635 },
+    ];
+
     return (
         <DataStory
             progressBarColor="#3BA6FF"
@@ -323,7 +329,7 @@ const ExampleStory = () => {
             marks={allMarks}
         >
             <LinesChart data={mockData}></LinesChart>
-            <BarChart />
+            <BarChart data={data} />
             <svg ref={svgCanvas}>
                 <OneMessagerBubblesChart
                     data={currentData}
@@ -393,7 +399,6 @@ const ExampleStory = () => {
                 invidunt ut labore et dolore magna aliquyam erat, sed diam
                 voluptua.
             </p>
-
         </DataStory>
     );
 };
