@@ -26,7 +26,8 @@ const BarChart = ({ data, onClickBar = () => {} }) => {
     };
 
     const calculateScaleValues = (highest) => {
-        if (highest < 35) return fillScale(highest, 5);
+        //TODO: make this a clever algorithm to determine a pretty scale
+        /*if (highest < 35) return fillScale(highest, 5);
         else if (highest <= 70) return fillScale(highest, 10);
         else if (highest <= 140) return fillScale(highest, 20);
         else if (highest <= 200) return fillScale(highest, 25);
@@ -35,7 +36,10 @@ const BarChart = ({ data, onClickBar = () => {} }) => {
         else if (highest <= 10000) return fillScale(highest, 1000);
         else if (highest <= 100000) return fillScale(highest, 10000);
         else if (highest <= 1000000) return fillScale(highest, 100000);
-        else return fillScale(highest, 1000000);
+        else return fillScale(highest, 1000000);*/
+
+        // unpretty scale but good enough for now
+        return fillScale(highest, parseInt((highest % 10) * 1.1));
     };
     const highestCount = getHighestCount();
     const scaleValues = calculateScaleValues(highestCount);
@@ -59,7 +63,7 @@ const BarChart = ({ data, onClickBar = () => {} }) => {
 
     const bars = (
         <div className="bars">
-            {data.map(({ title, count, index }) => (
+            {data.map(({ title, count }, index) => (
                 <div key={index} className="bar-box" onClick={onClickBar}>
                     <div className="above-bar">
                         <p className="name">{title}</p>
