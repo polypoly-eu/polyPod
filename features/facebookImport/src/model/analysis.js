@@ -1,16 +1,25 @@
-import { html } from "lit";
+import React from "react";
 import { ZipFile } from "../model/storage.js";
 import allStructure from "../static/allStructure";
 
-async function jsonDataEntities(zipFile) {
-    const entries = await zipFile.getEntries();
-    const relevantEntries = entries.filter(
-        (each) =>
-            !each.filename.includes(".DS_Store") &&
-            !each.filename.includes("__MACOSX") &&
-            !each.filename.includes("/files/") && // Remove user files
-            each.filename.endsWith(".json")
+function isJsonMessageFile(entryName, id) {
+    const formattedEntryName = entryName.replace(`${id}/`, "");
+    return /messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/[0-9_a-z]+\/message_[1-9][0-9]?.json$/.test(
+        formattedEntryName
     );
+}
+
+async function jsonDataEntities(id, zipFile) {
+    const entries = await zipFile.getEntries();
+    const relevantEntries = entries
+        .map((each) => each.replace(`${id}/`, ""))
+        .filter(
+            (each) =>
+                !each.includes(".DS_Store") &&
+                !each.includes("__MACOSX") &&
+                !each.includes("/files/") && // Remove user files
+                each.endsWith(".json")
+        );
     return relevantEntries;
 }
 
@@ -24,8 +33,7 @@ function anonymizePathSegment(pathSegment, fullPath) {
     return pathSegment;
 }
 
-function anonymizeJsonEntityPath(entity) {
-    const fileName = entity.filename;
+function anonymizeJsonEntityPath(fileName) {
     const nameParts = fileName.split("/").slice(1);
 
     const anonymizedParts = nameParts.map((each) =>
@@ -66,10 +74,68 @@ const subAnalyses = [
 
     class {
         get title() {
+            return "Messages";
+        }
+
+        async _messagesCountFromFile(zipFile, messagesFile) {
+            const fileContent = new TextDecoder("utf-8").decode(
+                await zipFile.getContent(messagesFile)
+            );
+            if (!fileContent) {
+                return 0;
+            }
+            try {
+                const messagesData = JSON.parse(fileContent);
+                const messagesList = messagesData?.messages;
+                return messagesList ? messagesList.length : 0;
+            } catch (exception) {
+                //TODO: better error handling + error reporting
+                console.log(exception);
+                return 0;
+            }
+        }
+
+        async parse({ id, zipFile }) {
+            this._messageThreadsCount = 0;
+            this._messagesCount = 0;
+            this.active = false;
+            if (!zipFile) return;
+            const entries = await zipFile.getEntries();
+            const messagesFiles = entries.filter((fileName) =>
+                isJsonMessageFile(fileName, id)
+            );
+            this._messageThreadsCount = messagesFiles.length;
+            const filesMessagesCount = await Promise.all(
+                messagesFiles.map((messageFile) =>
+                    this._messagesCountFromFile(zipFile, messageFile)
+                )
+            );
+            this._messagesCount = filesMessagesCount.reduce((total, each) => {
+                return total + each;
+            }, 0);
+            this.active = this._messagesCount > 0;
+        }
+
+        render() {
+            if (!this.active) {
+                return "No messages detected in your export!";
+            }
+            return (
+                "Found " +
+                this._messagesCount +
+                " messages from " +
+                this._messageThreadsCount +
+                " threads"
+            );
+        }
+    },
+
+    class {
+        get title() {
             return "Off-Facebook events";
         }
 
-        async _readOffFacebooEvents(zipFile) {
+        async _readOffFacebooEvents(id, zipFile) {
             const entries = await zipFile.getEntries();
             const offFacebookEventsFile = entries.find((fileName) =>
                 fileName.includes(
@@ -95,13 +161,16 @@ const subAnalyses = [
             }
         }
 
-        async parse({ zipFile }) {
+        async parse({ id, zipFile }) {
             this._eventsCount = 0;
             this._companiesCount = 0;
             this.active = false;
             if (!zipFile) return;
 
-            const offFacebookEvents = await this._readOffFacebooEvents(zipFile);
+            const offFacebookEvents = await this._readOffFacebooEvents(
+                id,
+                zipFile
+            );
             const activityV2 = offFacebookEvents?.off_facebook_activity_v2;
             if (!activityV2) {
                 return;
@@ -143,17 +212,15 @@ const subAnalyses = [
             this._noDataFolderNames = [];
             this.active = false;
             if (!zipFile) return;
-
             const entries = await zipFile.getEntries();
             const extractedFolderNames = entries.map((fileName) => {
                 const nameParts = fileName.replace(`${id}/`, "").split("/");
                 if (nameParts.length >= 2) {
-                    for (const [part, i] of nameParts) {
+                    for (const [i, part] of Object.entries(nameParts)) {
                         if (part === "no-data.txt") {
                             return nameParts[i - 1];
                         }
                     }
-                    return nameParts[1];
                 }
                 return;
             });
@@ -165,11 +232,13 @@ const subAnalyses = [
         }
 
         render() {
-            return html`<ul>
-                ${this._noDataFolderNames.map(
-                    (entry) => html`<li>${entry}</li>`
-                )}
-            </ul>`;
+            return (
+                <ul>
+                    {this._noDataFolderNames.map((entry, index) => (
+                        <li key={index}>{entry}</li>
+                    ))}
+                </ul>
+            );
         }
     },
     class {
@@ -181,12 +250,12 @@ const subAnalyses = [
             return true;
         }
 
-        async parse({ zipFile }) {
+        async parse({ id, zipFile }) {
             this._missingEntryNames = [];
             this.active = true;
             if (!zipFile) return;
 
-            const relevantEntries = await jsonDataEntities(zipFile);
+            const relevantEntries = await jsonDataEntities(id, zipFile);
             const anonymizedPaths = relevantEntries.map((each) =>
                 anonymizeJsonEntityPath(each)
             );
@@ -198,9 +267,13 @@ const subAnalyses = [
         }
 
         render() {
-            return html`<ul>
-                ${this._unknownFiles.map((entry) => html`<li>${entry}</li>`)}
-            </ul>`;
+            return (
+                <ul>
+                    {this._unknownFiles.map((entry, index) => (
+                        <li key={index}>{entry}</li>
+                    ))}
+                </ul>
+            );
         }
     },
     class {
@@ -213,10 +286,10 @@ const subAnalyses = [
         }
 
         _knownJsonFiles() {
-            const knowsJsonFiles = allStructure.filter((each) =>
+            const knowsJsonFileNames = allStructure.filter((each) =>
                 each.endsWith(".json")
             );
-            return knowsJsonFiles.filter(
+            return knowsJsonFileNames.filter(
                 (each) =>
                     !/^(posts|photos_and_videos)\/album\/[1-9][0-9]?.json$/.test(
                         each
@@ -227,16 +300,15 @@ const subAnalyses = [
             );
         }
 
-        async parse({ zipFile }) {
+        async parse({ id, zipFile }) {
             this._expectedMissingFiles = [];
             this.active = true;
             if (!zipFile) return;
 
-            const relevantEntries = await jsonDataEntities(zipFile);
+            const relevantEntries = await jsonDataEntities(id, zipFile);
             const anonymizedPaths = relevantEntries.map((each) =>
                 anonymizeJsonEntityPath(each)
             );
-
             const knowsJsonFiles = this._knownJsonFiles();
             this._expectedMissingFiles = knowsJsonFiles.filter(
                 (each) => !anonymizedPaths.includes(each)
@@ -245,11 +317,13 @@ const subAnalyses = [
         }
 
         render() {
-            return html`<ul>
-                ${this._expectedMissingFiles.map(
-                    (entry) => html`<li>${entry}</li>`
-                )}
-            </ul>`;
+            return (
+                <ul>
+                    {this._expectedMissingFiles.map((entry, index) => (
+                        <li key={index}>{entry}</li>
+                    ))}
+                </ul>
+            );
         }
     },
 ];
