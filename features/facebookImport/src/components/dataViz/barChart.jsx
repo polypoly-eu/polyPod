@@ -2,7 +2,8 @@ import React from "react";
 
 import "./barChart.css";
 
-const BarChart = ({ data, onClickBar = () => {} }) => {
+const BarChart = ({ data, names, onClickBar = () => {} }) => {
+    if (names) data.map((data) => (data.title = data[names]));
     const getHighestCount = () => {
         let highest = 0;
         data.forEach((e) => {
@@ -25,24 +26,15 @@ const BarChart = ({ data, onClickBar = () => {} }) => {
         return scale;
     };
 
+    /*
     const calculateScaleValues = (highest) => {
         //TODO: make this a clever algorithm to determine a pretty scale
-        /*if (highest < 35) return fillScale(highest, 5);
-        else if (highest <= 70) return fillScale(highest, 10);
-        else if (highest <= 140) return fillScale(highest, 20);
-        else if (highest <= 200) return fillScale(highest, 25);
-        else if (highest <= 400) return fillScale(highest, 50);
-        else if (highest <= 1000) return fillScale(highest, 100);
-        else if (highest <= 10000) return fillScale(highest, 1000);
-        else if (highest <= 100000) return fillScale(highest, 10000);
-        else if (highest <= 1000000) return fillScale(highest, 100000);
-        else return fillScale(highest, 1000000);*/
-
-        // unpretty scale but good enough for now
         return fillScale(highest, parseInt((highest / 10) * 1.1));
-    };
+    };*/
+
     const highestCount = getHighestCount();
-    const scaleValues = calculateScaleValues(highestCount);
+    const scaleMultiple = parseInt((highestCount / 10) * 1.1);
+    const scaleValues = fillScale(highestCount, scaleMultiple);
     const scale = (
         <div className="scale-container">
             <div className="scale">
@@ -70,7 +62,12 @@ const BarChart = ({ data, onClickBar = () => {} }) => {
                     </div>
                     <div
                         className="bar"
-                        style={{ width: (count / highestCount) * 95 + "%" }}
+                        style={{
+                            width:
+                                (count / scaleValues[scaleValues.length - 1]) *
+                                    100 +
+                                "%",
+                        }}
                     >
                         <p>{count / highestCount > 0.1 ? count : ""}</p>
                     </div>
