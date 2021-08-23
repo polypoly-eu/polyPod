@@ -7,7 +7,30 @@ import * as d3 from "d3";
 
 import "./exampleStory.css";
 
+const animationPause = "pause";
+
 const ExampleStory = () => {
+    const [allMarks, updateAllMarks] = useState([]);
+
+    const sections = {
+        introduction: "introduction",
+        summary: "summary",
+        overview: "overview",
+    };
+    const marks = [
+        {
+            sectionName: sections,
+            totalHeight: 0,
+            marks: [
+                {
+                    animation: animationPause,
+                    heightPercentage: 30,
+                    debugColor: "red",
+                },
+            ],
+        },
+    ];
+
     const mockData = {
         rangeDates: [new Date("2015-01-01"), new Date("2021-01-01")],
         rangeY: [0, 1000],
@@ -274,7 +297,14 @@ const ExampleStory = () => {
         changeCurrentData(mockData1);
     }
 
+    function updateMarks() {
+        if (!marks.find((section) => section.totalHeight === 0)) {
+            updateAllMarks(marks);
+        }
+    }
+
     useEffect(() => {
+        updateMarks(marks);
         d3.select(svgCanvas.current)
             .attr("xmlns", "http://www.w3.org/2000/svg")
             .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
@@ -289,6 +319,7 @@ const ExampleStory = () => {
             progressBarColor="#3BA6FF"
             className="example-story"
             scrollEvent={fakeEvent}
+            marks={allMarks}
         >
             <LinesChart data={mockData}></LinesChart>
             <svg ref={svgCanvas}>
@@ -315,97 +346,51 @@ const ExampleStory = () => {
             >
                 Mock data 2
             </button>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-            dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-            voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-            dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in
-            vulputate velit esse molestie consequat, vel illum dolore eu feugiat
-            nulla facilisis at vero eros et accumsan et iusto odio dignissim qui
-            blandit praesent luptatum zzril delenit augue duis dolore te feugait
-            nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing
-            elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-            magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-            nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
-            ex ea commodo consequat. Duis autem vel eum iriure dolor in
-            hendrerit in vulputate velit esse molestie consequat, vel illum
-            dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-            odio dignissim qui blandit praesent luptatum zzril delenit augue
-            duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta
-            nobis eleifend option congue nihil imperdiet doming id quod mazim
-            placerat facer possim assum. Lorem ipsum dolor sit amet,
-            consectetuer adipiscing elit, sed diam nonummy nibh euismod
-            tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
-            enim ad minim veniam, quis nostrud exerci tation ullamcorper
-            suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis
-            autem vel eum iriure dolor in hendrerit in vulputate velit esse
-            molestie consequat, vel illum dolore eu feugiat nulla facilisis. At
-            vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-            kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-            amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, At accusam aliquyam diam diam dolore
-            dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt
-            justo labore Stet clita ea et gubergren, kasd magna no rebum.
-            sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit
-            amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat. Consetetur sadipscing elitr, sed diam nonumy eirmod
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-            voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-            dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-            elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-            magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-            justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-            takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
-            sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-            At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-            kasd gubergren, no sea takimata sanctus. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-            ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-            gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem
-            vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-            consequat, vel illum dolore eu feugiat nulla facilisis at vero eros
-            et accumsan et iusto odio dignissim qui blandit praesent luptatum
-            zzril delenit augue duis dolore te feugait nulla facilisi. Lorem
-            ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-            nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-            volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-            consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
-            velit esse molestie consequat, vel illum dolore eu feugiat nulla
-            facilisis at vero eros et accumsan et iusto odio dignissim qui
-            blandit praesent luptatum zzril delenit augue duis dolore te feugait
-            nulla facilisi. Nam liber tempor cum soluta nobis eleifend option
-            congue nihil imperdiet doming id quod mazim placerat facer possim
-            assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-            diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-            tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+            <p className="text-example">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+                est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+                consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                invidunt ut labore et dolore magna aliquyam erat, sed diam
+                voluptua.
+            </p>
+            <p className="text-example">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+                est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+                consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                invidunt ut labore et dolore magna aliquyam erat, sed diam
+                voluptua.
+            </p>
+            <p className="text-example">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+                est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+                consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                invidunt ut labore et dolore magna aliquyam erat, sed diam
+                voluptua.
+            </p>
         </DataStory>
     );
 };

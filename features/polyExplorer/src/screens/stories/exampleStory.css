@@ -9,3 +9,7 @@
 button {
     color: black;
 }
+
+.text-example {
+    background-color: var(--color-background-dark);
+}
