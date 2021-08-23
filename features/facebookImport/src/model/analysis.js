@@ -5,7 +5,7 @@ import DataGroupsAnalysis from "./analyses/data-groups-analysis.js";
 import ConnectedAdvertisersAnalysis from "./analyses/connected-advertisers-analysis.js";
 import InteractedWithAdvertisersAnalysis from "./analyses/interacted-advertisers-analysis.js";
 import AdInterestsAnalysis from "./analyses/ad-interests-analysis.js";
-import OffFacebookEventsSymmaryAnalysis from "./analyses/off-facebook-events-analysis.js";
+import OffFacebookEventsAnalysis from "./analyses/off-facebook-events-analysis.js";
 import MessagesAnalysis from "./analyses/messages-analysis.js";
 import SearchesAnalysis from "./analyses/searches-analysis.js";
 import FriendsAnalysis from "./analyses/friends-analysis.js";
@@ -19,6 +19,8 @@ import ReportMetadataAnalysis from "./analyses-report/report-metadata.js";
 import NoDataFoldersAnalysis from "./analyses-report/no-data-folders.js";
 import MissingExpectedJSONFilesAnalysis from "./analyses-report/missing-expected-json-files.js";
 import UknownJSONFilesAnalysis from "./analyses-report/unknown-json-files.js";
+import MessagesDetailsAnalysis from "./analyses/messages-details-analysis.js";
+import OffFacebookEventsTypesAnalysis from "./analyses/off-facebook-events-types-analysys.js";
 
 const subAnalyses = [
     class {
@@ -64,8 +66,10 @@ const subAnalyses = [
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
-    OffFacebookEventsSymmaryAnalysis,
+    OffFacebookEventsAnalysis,
+    OffFacebookEventsTypesAnalysis,
     MessagesAnalysis,
+    MessagesDetailsAnalysis,
     SearchesAnalysis,
     FriendsAnalysis,
     LikedPagesAnalysis,

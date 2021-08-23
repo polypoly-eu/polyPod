@@ -19,13 +19,16 @@ export default class DataGroupsAnalysis extends RootAnalysis {
         }
 
         return (
-            <ul>
-                {this._bubblesData.map(({ title, count }, index) => (
-                    <li key={index}>
-                        {title}: {count}
-                    </li>
-                ))}
-            </ul>
+            <table>
+                <tbody>
+                    {this._bubblesData.map(({ title, count }, index) => (
+                        <tr key={index}>
+                            <td>{title}</td>
+                            <td>{count}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         );
     }
 }
