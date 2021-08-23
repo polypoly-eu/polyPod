@@ -113,8 +113,7 @@
 .bar-chart .bar-box .above-bar p {
     font-size: 12px;
     line-height: 150%;
-    margin-right: 4px;
-    margin-bottom: 0;
+    margin: 4px 4px 0 0;
 }
 
 .bar-chart .bar-box .above-bar img {
@@ -124,6 +123,19 @@
 }
 
 .bar-chart .bar-box .bar {
-    height: 30px;
+    height: 20px;
     background-color: rgb(254, 242, 48);
+    position: relative;
+}
+
+.bar-chart .bar-box .bar p {
+    height: 20px;
+    background-color: rgb(254, 242, 48);
+    position: absolute;
+    margin: 0;
+    color: var(--color-indigo-950);
+    top: 50%;
+    transform: translateY(-50%);
+    left: 24px;
+    font-size: 12px;
 }

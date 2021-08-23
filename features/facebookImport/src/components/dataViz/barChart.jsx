@@ -71,7 +71,9 @@ const BarChart = ({ data, onClickBar = () => {} }) => {
                     <div
                         className="bar"
                         style={{ width: (count / highestCount) * 95 + "%" }}
-                    ></div>
+                    >
+                        <p>{count / highestCount > 0.1 ? count : ""}</p>
+                    </div>
                 </div>
             ))}
         </div>
