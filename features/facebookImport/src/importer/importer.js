@@ -1,4 +1,5 @@
 import { ZipFile } from "../model/storage.js";
+
 import FacebookAccount from "./facebook-account.js";
 import OffFacebookEventsImporter from "./data-importers/off-facebook-events-importer.js";
 import AdInterestsImporter from "./data-importers/ad-interests-importer.js";
@@ -12,6 +13,8 @@ import RecommendedPagesImporter from "./data-importers/pages-recommended-importe
 import SearchesImporter from "./data-importers/searches-importer.js";
 import UnfollowedPagesImporter from "./data-importers/pages-unfollowed-importer.js";
 import MessagesImporter from "./data-importers/messages-importer.js";
+
+import { IMPORT_SUCCESS, IMPORT_ERROR } from "./importer-status.js";
 
 const dataImporters = [
     AdInterestsImporter,
@@ -33,28 +36,31 @@ export async function importData(file) {
     const facebookAccount = new FacebookAccount(window.pod);
     const enrichedData = { ...file, zipFile };
 
-    //const importingResults =
-    await Promise.all(
+    const importingResults = await Promise.all(
         dataImporters.map(async (importerClass) => {
             const importer = new importerClass();
             const importStatus = await importer
                 .import(enrichedData, facebookAccount, window.pod)
                 .then((status) =>
                     status
-                        ? status
+                        ? { ...status, importerClass }
                         : {
-                              status: "successfull",
+                              status: IMPORT_SUCCESS,
+                              importerClass,
                           }
                 )
                 .catch((error) => {
                     return {
-                        status: "error",
+                        status: IMPORT_ERROR,
+                        importerClass,
                         error,
+                        message: error.message,
                     };
                 });
             return importStatus;
         })
     );
+    facebookAccount.importingResults = importingResults;
 
     return facebookAccount;
 }

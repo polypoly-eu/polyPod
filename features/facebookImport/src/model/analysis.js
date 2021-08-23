@@ -23,6 +23,7 @@ import MessagesDetailsAnalysis from "./analyses/messages-details-analysis.js";
 import OffFacebookEventsTypesAnalysis from "./analyses/off-facebook-events-types-analysys.js";
 import DataChartsAnalysis from "./analyses/data-points-charts-analysis.js";
 import OffFacebookEventsTypesChartAnalysis from "./analyses/off-facebook-events-types-charts-analysis.js";
+import DataImportingStatusAnalysis from "./analyses-report/importing-status-analysys.js";
 
 const subAnalyses = [
     class {
@@ -83,6 +84,7 @@ const subAnalyses = [
     ReceivedFriendRequestsAnalysis,
 
     ReportMetadataAnalysis,
+    DataImportingStatusAnalysis,
     NoDataFoldersAnalysis,
     UknownJSONFilesAnalysis,
     MissingExpectedJSONFilesAnalysis,

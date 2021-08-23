@@ -1,5 +1,7 @@
 class FacebookAccount {
     constructor() {
+        this._importingResults = [];
+
         this._offFacebookCompanies = [];
         this._adInterests = [];
         this._connectedAdvertisers = [];
@@ -152,6 +154,14 @@ class FacebookAccount {
 
     set messageThreads(messageThreads) {
         this._messageThreads = messageThreads;
+    }
+
+    get importingResults() {
+        return this._importingResults;
+    }
+
+    set importingResults(importingResults) {
+        this._importingResults = importingResults;
     }
 
     get dataGroups() {
