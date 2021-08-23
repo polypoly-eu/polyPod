@@ -17,11 +17,12 @@ const ReportView = () => {
     const unrecognizedData = fileAnalysis.unrecognizedData;
 
     const handleSendReport = () => {
-        // TODO: Don't hard code polyPedia URL
+        // TODO: Don't hard code polyPedia URL and credentials
         window.pod.network.httpPost(
             "http://localhost:8000/polyPedia",
             "application/json",
-            JSON.stringify(unrecognizedData.reportAnalyses)
+            JSON.stringify(unrecognizedData.reportAnalyses),
+            "user:password"
         );
     };
 

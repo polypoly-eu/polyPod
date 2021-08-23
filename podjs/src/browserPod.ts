@@ -185,7 +185,8 @@ class BrowserNetwork implements Network {
     async httpPost(
         url: string,
         contentType: string,
-        body: string
+        body: string,
+        authorization?: string
     ): Promise<void> {
         const request = new XMLHttpRequest();
         request.onreadystatechange = function () {
@@ -195,6 +196,11 @@ class BrowserNetwork implements Network {
         };
         request.open("POST", url);
         request.setRequestHeader("Content-Type", contentType);
+        if (authorization)
+            request.setRequestHeader(
+                "Authorization",
+                "Basic " + btoa(authorization)
+            );
         request.send(body);
     }
 }

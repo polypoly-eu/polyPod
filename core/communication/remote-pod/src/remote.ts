@@ -66,7 +66,12 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
 }>;
 
 type NetworkEndpoint = ObjectEndpointSpec<{
-    httpPost(url: string, contentType: string, body: string): ValueEndpointSpec<void>;
+    httpPost(
+        url: string,
+        contentType: string,
+        body: string,
+        authorization?: string
+    ): ValueEndpointSpec<void>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
@@ -257,8 +262,8 @@ export class RemoteClientPod implements Pod {
 
     get network(): Network {
         return {
-            httpPost: (url: string, contentType: string, body: string) =>
-                this.rpcClient.network().httpPost(url, contentType, body)(),
+            httpPost: (url: string, contentType: string, body: string, authorization?: string) =>
+                this.rpcClient.network().httpPost(url, contentType, body, authorization)(),
         };
     }
 }

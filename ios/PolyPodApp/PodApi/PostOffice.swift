@@ -376,6 +376,7 @@ extension PostOffice {
         let url = args[0] as! String
         let contentType = args[1] as! String
         let body = args[2] as! String
-        PodApi.shared.network.httpPost(url: url, contentType: contentType, body: body)
+        let authorization = args[3] as? String
+        PodApi.shared.network.httpPost(url: url, contentType: contentType, body: body, authorization: authorization)
     }
 }

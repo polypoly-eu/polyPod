@@ -15,12 +15,17 @@ async function readPostBody(request) {
 
 const server = http.createServer((req, res) => {
     readPostBody(req).then((body) => {
-        if (body) console.log(body);
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Access-Control-Allow-Headers", "*");
         res.setHeader("Content-Type", "text/plain");
         res.statusCode = 200;
         res.end("OK\n");
+
+        const output = {};
+        output.timestamp = new Date();
+        output.body = body;
+        output.authorization = req.headers?.authorization;
+        console.log(JSON.stringify(output, null, 2));
     });
 });
 

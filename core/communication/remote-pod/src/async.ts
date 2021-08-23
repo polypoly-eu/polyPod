@@ -88,8 +88,13 @@ class AsyncPolyNav implements PolyNav {
 class AsyncNetwork implements Network {
     constructor(private readonly promise: Promise<Network>) {}
 
-    async httpPost(url: string, contentType: string, body: string): Promise<void> {
-        return (await this.promise).httpPost(url, contentType, body);
+    async httpPost(
+        url: string,
+        contentType: string,
+        body: string,
+        authorization?: string
+    ): Promise<void> {
+        return (await this.promise).httpPost(url, contentType, body, authorization);
     }
 }
 
