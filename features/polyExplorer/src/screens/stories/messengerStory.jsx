@@ -18,168 +18,156 @@ import "./messengerStory.css";
 const scrollTellingDebug = false;
 const animationPause = "pause";
 
-function isInViewport(el) {
-    const rect = el.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <=
-            (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <=
-            (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
 const MessengerStory = () => {
     const { products } = useContext(ExplorerContext);
-    const [introductionHeight, updateIntroHeight] = useState(0);
-    const [summaryHeight, updateSummaryHeight] = useState(0);
     const [summaryAnimations, fireSummaryAnimation] = useState(0);
-    const [overviewHeight, updateOverviewHeight] = useState(0);
+    const [allMarks, updateAllMarks] = useState([]);
 
-    const introMarks = [
+    const sections = {
+        introduction: "introduction",
+        summary: "summary",
+        overview: "overview",
+    };
+
+    const marks = [
         {
-            ref: useRef(),
-            animation: animationPause,
-            heightPercentage: 100,
-            debugColor: "red",
+            sectionName: sections.introduction,
+            totalHeight: 0,
+            marks: [
+                {
+                    animation: animationPause,
+                    heightPercentage: 100,
+                    debugColor: "red",
+                },
+            ],
+        },
+        {
+            sectionName: sections.summary,
+            totalHeight: 0,
+            marks: [
+                {
+                    animation: animationPause,
+                    heightPercentage: 40,
+                    debugColor: "green",
+                },
+                {
+                    animation: SUMMARY_ANIMATIONS.ANIMATE_BULLET_ONE,
+                    heightPercentage: 5,
+                    debugColor: "pink",
+                },
+                {
+                    animation: animationPause,
+                    heightPercentage: 15,
+                    debugColor: "green",
+                },
+                {
+                    animation: SUMMARY_ANIMATIONS.ANIMETE_BULLET_TWO,
+                    heightPercentage: 5,
+                    debugColor: "pink",
+                },
+                {
+                    animation: animationPause,
+                    heightPercentage: 15,
+                    debugColor: "green",
+                },
+                {
+                    animation: SUMMARY_ANIMATIONS.ANIMATE_BULLET_THREE,
+                    heightPercentage: 5,
+                    debugColor: "pink",
+                },
+                {
+                    animation: animationPause,
+                    heightPercentage: 15,
+                    debugColor: "green",
+                },
+            ],
+        },
+        {
+            sectionName: sections.overview,
+            totalHeight: 0,
+            marks: [
+                {
+                    ref: useRef(),
+                    animation: animationPause,
+                    heightPercentage: 100,
+                    debugColor: "red",
+                },
+            ],
         },
     ];
 
-    const summaryMarks = [
-        {
-            ref: useRef(),
-            animation: animationPause,
-            heightPercentage: 40,
-            debugColor: "green",
-        },
-        {
-            ref: useRef(),
-            animation: SUMMARY_ANIMATIONS.ANIMATE_BULLET,
-            heightPercentage: 5,
-            debugColor: "pink",
-        },
-        {
-            ref: useRef(),
-            animation: animationPause,
-            heightPercentage: 15,
-            debugColor: "green",
-        },
-        {
-            ref: useRef(),
-            animation: SUMMARY_ANIMATIONS.ANIMATE_BULLET,
-            heightPercentage: 5,
-            debugColor: "pink",
-        },
-        {
-            ref: useRef(),
-            animation: SUMMARY_ANIMATIONS.ANIMATE_BULLET,
-            heightPercentage: 15,
-            debugColor: "green",
-        },
-        {
-            ref: useRef(),
-            animation: SUMMARY_ANIMATIONS.ANIMATE_BULLET,
-            heightPercentage: 5,
-            debugColor: "pink",
-        },
-        {
-            ref: useRef(),
-            animation: SUMMARY_ANIMATIONS.ANIMATE_BULLET,
-            heightPercentage: 15,
-            debugColor: "green",
-        },
-    ];
-
-    const overviewMarks = [
-        {
-            ref: useRef(),
-            animation: animationPause,
-            heightPercentage: 100,
-            debugColor: "red",
-        },
-    ];
-
-    function buildScrollyTellingMark(marks, totalHeight) {
-        return marks.map((mark, index) => {
-            const markHeight = Math.ceil(
-                totalHeight * (mark.heightPercentage / 100)
-            );
-
-            const markStyle = {
-                width: "1px",
-                height: `${markHeight}px`,
-                backgroundColor: scrollTellingDebug
-                    ? mark.debugColor
-                    : "transparent",
-            };
-
-            return (
-                <div
-                    key={index}
-                    style={markStyle}
-                    className="scrollytelling-mark"
-                    ref={mark.ref}
-                ></div>
-            );
-        });
-    }
-
-    function scrollStory() {
-        animateSummary();
-    }
-
-    function buildScrollyTellingMarksIntroduction() {
-        return buildScrollyTellingMark(introMarks, introductionHeight);
-    }
-
-    function buildScrollyTellingMarksSummary() {
-        return buildScrollyTellingMark(summaryMarks, summaryHeight);
-    }
-
-    function buildScrollyTellingMarksOverview() {
-        return buildScrollyTellingMark(overviewMarks, overviewHeight);
-    }
-
-    function animateSummary() {
-        const animationSummary = Object.values(SUMMARY_ANIMATIONS);
-        const visibleMarks = summaryMarks.filter(
-            (mark) => (
-                animationSummary.includes(mark.animation),
-                isInViewport(mark.ref.current)
-            )
-        );
-
-        if (visibleMarks.length !== summaryAnimations) {
-            fireSummaryAnimation(visibleMarks.length);
+    function handleSummaryAnimation(animation) {
+        switch (animation) {
+            case SUMMARY_ANIMATIONS.ANIMATE_BULLET_ONE:
+                fireSummaryAnimation(1);
+                break;
+            case SUMMARY_ANIMATIONS.ANIMETE_BULLET_TWO:
+                fireSummaryAnimation(2);
+                break;
+            case SUMMARY_ANIMATIONS.ANIMATE_BULLET_THREE:
+                fireSummaryAnimation(3);
+                break;
         }
+    }
+
+    function scrollStory(section, animation) {
+        switch (section) {
+            case sections.summary:
+                handleSummaryAnimation(animation);
+        }
+    }
+
+    function updateMarks() {
+        if (!marks.find((section) => section.totalHeight === 0)) {
+            updateAllMarks(marks);
+        }
+    }
+
+    function updateHeight(height, sectionName) {
+        const leng = marks.length;
+
+        let index = 0;
+
+        while (index < leng && marks[index].sectionName !== sectionName) {
+            index++;
+        }
+
+        if (index < leng) {
+            marks[index].totalHeight = height;
+            updateMarks(marks);
+        }
+    }
+
+    function updateIntroHeight(height) {
+        updateHeight(height, sections.introduction);
+    }
+
+    function updateSummaryHeight(height) {
+        updateHeight(height, sections.summary);
+    }
+
+    function updateOverviewHeight(height) {
+        updateHeight(height, sections.overview);
     }
 
     return (
         <DataStory
             progressBarColor="black"
             className="messenger"
-            scrollEvent={scrollStory}
+            marks={allMarks}
+            animationEvent={scrollStory}
+            debugMode={scrollTellingDebug}
         >
-            <div className="messenger-story">
-                <div className="messenger-parts scrollytelling-marks">
-                    {buildScrollyTellingMarksIntroduction()}
-                    {buildScrollyTellingMarksSummary()}
-                    {buildScrollyTellingMarksOverview()}
-                </div>
-                <div className="messenger-parts story-content">
-                    <Introduction
-                        heightEvent={updateIntroHeight}
-                    ></Introduction>
-                    <Summary
-                        heightEvent={updateSummaryHeight}
-                        animation={summaryAnimations}
-                    ></Summary>
-                    <Overview
-                        products={products}
-                        heightEvent={updateOverviewHeight}
-                    ></Overview>
-                </div>
+            <div className="messenger-parts">
+                <Introduction heightEvent={updateIntroHeight}></Introduction>
+                <Summary
+                    heightEvent={updateSummaryHeight}
+                    animation={summaryAnimations}
+                ></Summary>
+                <Overview
+                    products={products}
+                    heightEvent={updateOverviewHeight}
+                ></Overview>
             </div>
         </DataStory>
     );

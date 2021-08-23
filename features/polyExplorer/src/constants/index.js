@@ -22,7 +22,9 @@ export const INTRO_ANIMATIONS = {
 };
 
 export const SUMMARY_ANIMATIONS = {
-    ANIMATE_BULLET: "animate bullet",
+    ANIMATE_BULLET_ONE: "ONE",
+    ANIMETE_BULLET_TWO: "TWO",
+    ANIMATE_BULLET_THREE: "THREE",
 };
 
 export const DONUT_CHART = {

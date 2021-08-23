@@ -1,21 +1,7 @@
-.messenger-story {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background: linear-gradient(180deg, var(--color-primary-messenger-story) 0%, var(--color-secondary-messenger-story) 50%);
-}
-
-.scrollytelling-marks {
-  width: 1px;
-}
-
-.story-content {
-  width: 99%;
-}
-
 .messenger-parts {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  background: linear-gradient(180deg, var(--color-primary-messenger-story) 0%, var(--color-secondary-messenger-story) 50%);
 }
