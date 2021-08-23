@@ -1,5 +1,6 @@
 import React from "react";
 import DataBubblesAll from "../../components/dataViz/dataBubblesAll.jsx";
+import BarChart from "../../components/dataViz/barChart.jsx";
 import RootAnalysis from "./root-analysis.js";
 
 export default class DataBubblesAnalysis extends RootAnalysis {
@@ -35,13 +36,16 @@ export default class DataBubblesAnalysis extends RootAnalysis {
             return "No Data!";
         }
         return (
-            <DataBubblesAll
-                data={this._bubblesData}
-                width={400}
-                height={400}
-                bubbleColor="#fef230"
-                textColor="black"
-            />
+            <>
+                <DataBubblesAll
+                    data={this._bubblesData}
+                    width={400}
+                    height={400}
+                    bubbleColor="#fef230"
+                    textColor="black"
+                />
+                <BarChart data={this._bubblesData} />
+            </>
         );
     }
 }
