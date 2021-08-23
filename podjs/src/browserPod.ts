@@ -182,13 +182,18 @@ class LocalStoragePolyOut implements PolyOut {
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 class BrowserNetwork implements Network {
-    async httpPost(url: string, body: string): Promise<void> {
+    async httpPost(
+        url: string,
+        contentType: string,
+        body: string
+    ): Promise<void> {
         const request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             if (request.readyState !== XMLHttpRequest.DONE) return;
             console.log(this);
         };
         request.open("POST", url);
+        request.setRequestHeader("Content-Type", contentType);
         request.send(body);
     }
 }

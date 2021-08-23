@@ -153,7 +153,7 @@ export interface Network {
     /**
      * A way for features to send HTTP POST requests
      */
-    httpPost(url: string, body: string): Promise<void>;
+    httpPost(url: string, contentType: string, body: string): Promise<void>;
 }
 
 /**

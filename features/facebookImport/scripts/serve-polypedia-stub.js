@@ -15,14 +15,10 @@ async function readPostBody(request) {
 
 const server = http.createServer((req, res) => {
     readPostBody(req).then((body) => {
+        if (body) console.log(body);
         res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Headers", "*");
         res.setHeader("Content-Type", "text/plain");
-        if (!body) {
-            res.statusCode = 404;
-            res.end("Not found\n");
-            return;
-        }
-        console.log(body);
         res.statusCode = 200;
         res.end("OK\n");
     });

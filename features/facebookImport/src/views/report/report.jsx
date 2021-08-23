@@ -19,6 +19,7 @@ const ReportView = () => {
     const handleSendReport = () => {
         pod.network.httpPost(
             "http://localhost:8000/polyPedia",
+            "application/json",
             JSON.stringify(unrecognizedData.reportAnalyses)
         );
     };
