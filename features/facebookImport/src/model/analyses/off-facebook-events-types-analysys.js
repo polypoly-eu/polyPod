@@ -1,4 +1,5 @@
 import React from "react";
+import BarChart from "../../components/dataViz/barChart.jsx";
 import RootAnalysis from "./root-analysis.js";
 
 export default class OffFacebookEventsTypesAnalysis extends RootAnalysis {
@@ -38,18 +39,21 @@ export default class OffFacebookEventsTypesAnalysis extends RootAnalysis {
             return "No off-facebook events detected in your export!";
         }
         return (
-            <table>
-                <tbody>
-                    {this._eventsTypeCountPairs.map(
-                        ({ type, count }, index) => (
-                            <tr key={index}>
-                                <td>{type}</td>
-                                <td>{count}</td>
-                            </tr>
-                        )
-                    )}
-                </tbody>
-            </table>
+            <>
+                <table>
+                    <tbody>
+                        {this._eventsTypeCountPairs.map(
+                            ({ type, count }, index) => (
+                                <tr key={index}>
+                                    <td>{type}</td>
+                                    <td>{count}</td>
+                                </tr>
+                            )
+                        )}
+                    </tbody>
+                </table>
+                <BarChart data={this._eventsTypeCountPairs} names="type" />
+            </>
         );
     }
 }
