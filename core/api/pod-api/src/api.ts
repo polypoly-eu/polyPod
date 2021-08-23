@@ -234,6 +234,12 @@ export interface Pod {
     readonly polyNav: PolyNav;
 
     /**
+     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
+     * definition.
+     */
+    readonly network: Network;
+
+    /**
      * @hidden
      */
     readonly polyLifecycle?: PolyLifecycle;
