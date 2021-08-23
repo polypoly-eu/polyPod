@@ -17,7 +17,7 @@ const ReportView = () => {
     const unrecognizedData = fileAnalysis.unrecognizedData;
 
     const handleSendReport = () => {
-        pod.network.httpPost(
+        window.pod.network.httpPost(
             "http://localhost:8000/polyPedia",
             "application/json",
             JSON.stringify(unrecognizedData.reportAnalyses)
