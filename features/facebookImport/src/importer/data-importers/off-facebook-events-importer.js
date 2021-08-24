@@ -31,6 +31,7 @@ export default class OffFacebookEventsImporter {
         if (uknonwnKeys.size > 0) {
             return {
                 status: IMPORT_WARNING,
+                importerClass: OffFacebookEventsImporter,
                 message: `Unexpected keys: ${Array.from(uknonwnKeys).join(
                     " "
                 )}`,
