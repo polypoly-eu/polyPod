@@ -34,8 +34,10 @@ function initIframe(iFrame) {
         const base64 = btoa(String.fromCharCode(...new Uint8Array(event.data)));
         console.dir(base64);
         if (!outerPort) {
-            console.error("Fatal error: pod received a message before being " +
-                          "fully initialised");
+            console.error(
+                "Fatal error: pod received a message before being " +
+                    "fully initialised"
+            );
             return;
         }
         outerPort.postMessage(base64);
