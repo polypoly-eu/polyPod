@@ -1,6 +1,6 @@
 import RootAnalysis from "./root-analysis.js";
 
-export default class ReceivedFriendRequestsAnalysisextends extends RootAnalysis {
+export default class ReceivedFriendRequestsAnalysis extends RootAnalysis {
     get title() {
         return "Received Friend Requests";
     }
