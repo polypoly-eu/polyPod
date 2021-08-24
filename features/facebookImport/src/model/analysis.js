@@ -27,44 +27,12 @@ import OffFacebookEventsTypesChartAnalysis from "./analyses/off-facebook-events-
 import DataImportingStatusAnalysis from "./analyses-report/importing-status-analysys.js";
 import JsonFilesBubblesAnalysis from "./analyses/json-files-bubbles.js";
 import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.js";
+import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
+import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
 
 const subAnalyses = [
-    class {
-        get title() {
-            return "File name";
-        }
-
-        get id() {
-            return "file-name";
-        }
-
-        analyze({ name }) {
-            this.active = true;
-            this._name = name;
-        }
-
-        render() {
-            return "" + this._name;
-        }
-    },
-    class {
-        get title() {
-            return "File size";
-        }
-
-        get id() {
-            return "file-size";
-        }
-
-        analyze({ size }) {
-            this.active = true;
-            this._size = size;
-        }
-
-        render() {
-            return "" + this._size;
-        }
-    },
+    ExportTitleAnalysis,
+    ExportSizeAnalysis,
 
     DataBubblesAnalysis,
     DataChartsAnalysis,
