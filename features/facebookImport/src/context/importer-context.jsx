@@ -8,8 +8,6 @@ import { importData } from "../importer/importer.js";
 
 export const ImporterContext = React.createContext();
 
-const pod = window.pod;
-
 //all nav-states for checking purposes
 const navigationStates = ["importStatus"];
 const importSteps = {
@@ -37,21 +35,22 @@ function updateTitle(pod) {
 }
 
 //from storage
-async function readImportStatus() {
+async function readImportStatus(pod) {
+    const { dataFactory } = pod;
     const statusQuads = await pod.polyIn.select({
-        subject: { value: `${namespace}facebookImporter` },
-        predicate: { value: `${namespace}importStatus` },
+        subject: dataFactory.namedNode(`${namespace}facebookImporter`),
+        predicate: dataFactory.namedNode(`${namespace}importStatus`),
     });
     let status = statusQuads[0]?.object?.value?.split(namespace)[1];
     return status || importSteps.beginning;
 }
 
-async function writeImportStatus(status) {
+async function writeImportStatus(pod, status) {
     const { dataFactory, polyIn } = pod;
     const existingQuad = (
         await pod.polyIn.select({
-            subject: { value: `${namespace}facebookImporter` },
-            predicate: { value: `${namespace}importStatus` },
+            subject: dataFactory.namedNode(`${namespace}facebookImporter`),
+            predicate: dataFactory.namedNode(`${namespace}importStatus`),
         })
     )[0];
     polyIn.delete(existingQuad);
@@ -64,8 +63,17 @@ async function writeImportStatus(status) {
 }
 
 export const ImporterProvider = ({ children }) => {
+    const [pod, setPod] = useState(null);
+
     //storage
-    const storage = new Storage(pod);
+    const storage = pod
+        ? new Storage(pod)
+        : {
+              files: [],
+              refreshFiles: async () => [],
+              readFile: async () => null,
+              removeFile: async () => {},
+          };
     const [files, setFiles] = useState([]);
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
@@ -127,19 +135,34 @@ export const ImporterProvider = ({ children }) => {
 
     function updateImportStatus(newStatus) {
         changeNavigationState({ importStatus: newStatus });
-        writeImportStatus(newStatus);
+        writeImportStatus(pod, newStatus);
+    }
+
+    async function initPod() {
+        const pod = await window.pod;
+        // TODO: This is a workaround for a race condition on Android, where
+        //       messages were being sent to the pod before it was fully
+        //       initialised. We have to solve the root cause of this.
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(pod);
+            }, 100);
+        });
     }
 
     //on startup
     useEffect(() => {
-        readImportStatus().then((status) => {
-            if (
-                status &&
-                !(navigationState.importStatus == importSteps.explore)
-            )
-                changeNavigationState({ importStatus: status });
+        initPod().then((newPod) => {
+            setPod(newPod);
+            readImportStatus(newPod).then((status) => {
+                if (
+                    status &&
+                    !(navigationState.importStatus == importSteps.explore)
+                )
+                    changeNavigationState({ importStatus: status });
+            });
+            refreshFiles();
         });
-        refreshFiles();
     }, []);
 
     // On file change
@@ -163,6 +186,7 @@ export const ImporterProvider = ({ children }) => {
 
     //on history change
     useEffect(() => {
+        if (!pod) return;
         updatePodNavigation(pod, history);
         updateTitle(pod);
     });
