@@ -54,7 +54,7 @@ export async function importData(file) {
                         status: IMPORT_ERROR,
                         importerClass,
                         error,
-                        message: error.message,
+                        message: error.name,
                     };
                 });
             return importStatus;
