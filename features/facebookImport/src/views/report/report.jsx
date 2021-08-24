@@ -31,6 +31,10 @@ const ReportView = () => {
                 {unrecognizedData.reportAnalyses.map((analysis, index) => (
                     <ReportCard analysis={analysis} key={index} />
                 ))}
+                <ReportCard
+                    analysis={unrecognizedData.inactiveAnalysis}
+                    key={unrecognizedData.reportAnalyses.length + 1}
+                />
             </div>
         );
     }

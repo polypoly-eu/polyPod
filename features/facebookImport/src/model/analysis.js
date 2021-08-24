@@ -1,3 +1,4 @@
+import React from "react";
 import { ZipFile } from "../model/storage.js";
 
 import DataBubblesAnalysis from "./analyses/data-points-bubles-analysis.js";
@@ -90,38 +91,80 @@ const subAnalyses = [
     MissingExpectedJSONFilesAnalysis,
 ];
 
+class InactiveAnalysis {
+    constructor(inactiveAnalyses) {
+        this._inactiveAnalyses = inactiveAnalyses;
+    }
+
+    get title() {
+        return "Inactive Analyses";
+    }
+
+    get id() {
+        return InactiveAnalysis.name;
+    }
+
+    render() {
+        return (
+            <ul>
+                {this._inactiveAnalyses.map((analysis, index) => (
+                    <li key={index}>{analysis.id}</li>
+                ))}
+            </ul>
+        );
+    }
+}
+
 class UnrecognizedData {
-    constructor(reportAnalyses) {
-        this.reportAnalyses = reportAnalyses;
-        this.active = this.reportAnalyses && this.reportAnalyses.length > 0;
+    constructor(executedAnalyses) {
+        this._activeReportAnalyses = executedAnalyses.filter(
+            (analysis) => analysis.isForDataReport && analysis.active
+        );
+        this._inactiveAnalyses = executedAnalyses.filter(
+            (analysis) => !analysis.active
+        );
+        this.active =
+            this._activeReportAnalyses.length > 0 ||
+            this._inactiveAnalyses.length > 0;
+    }
+
+    get reportAnalyses() {
+        return this._activeReportAnalyses;
+    }
+
+    get inactiveAnalysis() {
+        return new InactiveAnalysis(this._inactiveAnalyses);
     }
 
     get report() {
         if (!this.active) {
             return "No data to report!";
         }
-        return this.reportAnalyses.length + " analyses included in the report";
+        return (
+            this._activeReportAnalyses.length +
+            " analyses included in the report"
+        );
     }
 
     get jsonReport() {
         if (!this.active) {
             return {};
         }
-        const reportAnalyses = this.reportAnalyses
-            .filter((analysis) => analysis.isForDataReport)
-            .map((analysis) => analysis.jsonReport);
-        const inactiveAnalyses = this.reportAnalyses
-            .filter((analysis) => !analysis.isForDataReport)
-            .map((analysis) => analysis.id);
+        const reportAnalyses = this._activeReportAnalyses.map(
+            (analysis) => analysis.jsonReport
+        );
+        const inactiveAnalysesIds = this._inactiveAnalyses.map(
+            (analysis) => analysis.id
+        );
 
-        return { reportAnalyses, inactiveAnalyses };
+        return { reportAnalyses, inactiveAnalysesIds };
     }
 }
 
 export async function analyzeFile(file, facebookAccount) {
     const zipFile = new ZipFile(file, window.pod);
     const enrichedData = { ...file, zipFile, facebookAccount };
-    const parsedAnalyses = await Promise.all(
+    const executedAnalyses = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
             const subAnalysis = new subAnalysisClass();
             await subAnalysis.analyze(enrichedData);
@@ -129,17 +172,12 @@ export async function analyzeFile(file, facebookAccount) {
         })
     );
 
-    const activeAnalyses = parsedAnalyses.filter(
+    const activeGlobalAnalyses = executedAnalyses.filter(
         (analysis) => !analysis.isForDataReport && analysis.active
-    );
-    const reportAnalyses = parsedAnalyses.filter(
-        (analysis) =>
-            (analysis.isForDataReport && analysis.active) ||
-            (!analysis.isForDataReport && !analysis.active)
     );
 
     return {
-        analyses: activeAnalyses,
-        unrecognizedData: new UnrecognizedData(reportAnalyses),
+        analyses: activeGlobalAnalyses,
+        unrecognizedData: new UnrecognizedData(executedAnalyses),
     };
 }
