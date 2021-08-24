@@ -18,10 +18,10 @@ const ReportView = () => {
 
     const handleSendReport = () => {
         window.pod.network.httpPost(
-            `${process.env.POLYPOD_POLYPEDIA_REPORT_URL},
+            process.env.POLYPOD_POLYPEDIA_REPORT_URL,
             "application/json",
             JSON.stringify(unrecognizedData.reportAnalyses),
-            ${process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION}`
+            process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
         );
     };
 
