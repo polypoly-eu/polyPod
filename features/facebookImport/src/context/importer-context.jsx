@@ -37,9 +37,10 @@ function updateTitle(pod) {
 
 //from storage
 async function readImportStatus() {
+    const { dataFactory } = pod;
     const statusQuads = await pod.polyIn.select({
-        subject: { value: `${namespace}facebookImporter` },
-        predicate: { value: `${namespace}importStatus` },
+        subject: dataFactory.namedNode(`${namespace}facebookImporter`),
+        predicate: dataFactory.namedNode(`${namespace}importStatus`),
     });
     let status = statusQuads[0]?.object?.value?.split(namespace)[1];
     return status || importSteps.beginning;
@@ -49,8 +50,8 @@ async function writeImportStatus(status) {
     const { dataFactory, polyIn } = pod;
     const existingQuad = (
         await pod.polyIn.select({
-            subject: { value: `${namespace}facebookImporter` },
-            predicate: { value: `${namespace}importStatus` },
+            subject: dataFactory.namedNode(`${namespace}facebookImporter`),
+            predicate: dataFactory.namedNode(`${namespace}importStatus`),
         })
     )[0];
     polyIn.delete(existingQuad);
