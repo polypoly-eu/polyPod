@@ -1,6 +1,7 @@
 class FacebookAccount {
     constructor() {
         this._importingResults = [];
+        this._importedFileNames = [];
 
         this._offFacebookCompanies = [];
         this._adInterests = [];
@@ -19,6 +20,24 @@ class FacebookAccount {
     get pod() {
         return this._pod;
     }
+
+    get importedFileNames() {
+        return this._importedFileNames;
+    }
+
+    addImportedFileName(fileName) {
+        this._importedFileNames.push(fileName);
+    }
+
+    get importingResults() {
+        return this._importingResults;
+    }
+
+    set importingResults(importingResults) {
+        this._importingResults = importingResults;
+    }
+
+    /////
 
     get offFacebookCompaniesCount() {
         return this._offFacebookCompanies.length;
@@ -158,14 +177,6 @@ class FacebookAccount {
 
     set messageThreads(messageThreads) {
         this._messageThreads = messageThreads;
-    }
-
-    get importingResults() {
-        return this._importingResults;
-    }
-
-    set importingResults(importingResults) {
-        this._importingResults = importingResults;
     }
 
     get dataGroups() {

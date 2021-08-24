@@ -20,7 +20,7 @@ const DataTypeBubbleAll = ({
     const drawBubblesLeafs = (leaf) => {
         leaf.append("circle")
             .attr("r", (d) => d.r)
-            .style("fill", bubbleColor)
+            .style("fill", (d) => bubbleColor(d))
             .style("vertical-align", "center")
             .attr("fill-opacity", opacity);
 

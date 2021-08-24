@@ -25,6 +25,8 @@ import OffFacebookEventsTypesAnalysis from "./analyses/off-facebook-events-types
 import DataChartsAnalysis from "./analyses/data-points-charts-analysis.js";
 import OffFacebookEventsTypesChartAnalysis from "./analyses/off-facebook-events-types-charts-analysis.js";
 import DataImportingStatusAnalysis from "./analyses-report/importing-status-analysys.js";
+import JsonFilesBubblesAnalysis from "./analyses/json-files-bubbles.js";
+import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.js";
 
 const subAnalyses = [
     class {
@@ -67,7 +69,8 @@ const subAnalyses = [
     DataBubblesAnalysis,
     DataChartsAnalysis,
     DataGroupsAnalysis,
-    //JsonFilesBubblesAnalysis,
+    JsonFilesBubblesAnalysis,
+    ImportedJsonFilesAnalysis,
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,

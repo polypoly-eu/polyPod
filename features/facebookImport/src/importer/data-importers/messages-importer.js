@@ -10,7 +10,7 @@ function isJsonMessageFile(entryName, id) {
 async function readJSONFileWithStatus(messageFile, zipFile) {
     return readJSONFile(messageFile, zipFile)
         .then((data) => {
-            return { data, status: "successfull" };
+            return { messageFile, data, status: "successfull" };
         })
         .catch((error) => {
             return {
@@ -33,8 +33,18 @@ export default class MessagesImporter {
                 readJSONFileWithStatus(messageFile, zipFile)
             )
         );
-        facebookAccount.messageThreads = result
-            .filter((result) => result.status === "successfull")
-            .map((result) => result.data);
+        const successfullResult = result.filter(
+            (result) => result.status === "successfull"
+        );
+        for (const each of successfullResult) {
+            const fileNameParts = each.messageFile
+                .replace(`${id}/`, "")
+                .split("/");
+            const fileName = fileNameParts.slice(1).join("/");
+            facebookAccount.addImportedFileName(fileName);
+        }
+        facebookAccount.messageThreads = successfullResult.map(
+            (result) => result.data
+        );
     }
 }

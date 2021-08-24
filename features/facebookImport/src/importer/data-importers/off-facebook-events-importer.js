@@ -5,11 +5,14 @@ const OffFacebookEventFields = ["id", "type", "timestamp"];
 
 export default class OffFacebookEventsImporter {
     async import({ zipFile }, facebookAccount) {
+        const fileName =
+            "apps_and_websites_off_of_facebook/your_off-facebook_activity.json";
         const rawData = await readJSONDataArray(
-            "apps_and_websites_off_of_facebook/your_off-facebook_activity.json",
+            fileName,
             "off_facebook_activity_v2",
             zipFile
         );
+        facebookAccount.addImportedFileName(fileName);
 
         let uknonwnKeys = new Set();
         // TODO: expand this check; The current one is just a toy example
