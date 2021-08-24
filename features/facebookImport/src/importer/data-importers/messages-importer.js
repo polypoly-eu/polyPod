@@ -1,4 +1,4 @@
-import { IMPORT_ERROR, IMPORT_SUCCESS } from "../importer-status.js";
+import { createErrorResult, IMPORT_SUCCESS } from "../importer-status.js";
 import { readJSONFile } from "../importer-util.js";
 
 export default class MessagesImporter {
@@ -22,12 +22,7 @@ export default class MessagesImporter {
                 return { status: IMPORT_SUCCESS, messageFile, data };
             })
             .catch((error) => {
-                return {
-                    status: IMPORT_ERROR,
-                    importerClass: MessagesImporter,
-                    error,
-                    message: error.name,
-                };
+                return createErrorResult(MessagesImporter, error);
             });
     }
 

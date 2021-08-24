@@ -14,7 +14,11 @@ import SearchesImporter from "./data-importers/searches-importer.js";
 import UnfollowedPagesImporter from "./data-importers/pages-unfollowed-importer.js";
 import MessagesImporter from "./data-importers/messages-importer.js";
 
-import { IMPORT_SUCCESS, IMPORT_ERROR } from "./importer-status.js";
+import {
+    IMPORT_SUCCESS,
+    IMPORT_ERROR,
+    createErrorResult,
+} from "./importer-status.js";
 
 const dataImporters = [
     AdInterestsImporter,
@@ -49,12 +53,7 @@ export async function importData(file) {
                         }
                 )
                 .catch((error) => {
-                    return {
-                        status: IMPORT_ERROR,
-                        importerClass,
-                        error,
-                        message: error.name,
-                    };
+                    return createErrorResult(importerClass, error);
                 });
             return Array.isArray(importResult) ? importResult : [importResult];
         })
