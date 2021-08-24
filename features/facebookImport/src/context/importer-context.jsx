@@ -67,11 +67,10 @@ export const ImporterProvider = ({ children }) => {
     //storage
     const storage = pod
         ? new Storage(pod)
-          : {
-              files: [],
-              refreshFiles: async () => [],
-              readFile: async () => null,
-              removeFile: async () => {},
+        : {
+              refreshFiles: () => [],
+              readFile: () => null,
+              removeFile: () => {},
           };
     const [files, setFiles] = useState([]);
     const [fileAnalysis, setFileAnalysis] = useState(null);
