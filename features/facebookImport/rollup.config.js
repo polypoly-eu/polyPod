@@ -42,12 +42,15 @@ export default (commandLineArgs) => {
             resolve(),
             replace({
                 "process.env.NODE_ENV": JSON.stringify("development"),
-                "process.env.POLYPOD_POLYPEDIA_REPORT_URL":
+                "process.env.POLYPOD_POLYPEDIA_REPORT_URL": JSON.stringify(
                     process.env.POLYPOD_POLYPEDIA_REPORT_URL ||
-                    JSON.stringify("http://localhost:8000"),
+                        "http://localhost:8000"
+                ),
                 "process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION":
-                    process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION ||
-                    JSON.stringify("username:password"),
+                    JSON.stringify(
+                        process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION ||
+                            "username:password"
+                    ),
             }),
             commonjs({
                 include: /node_modules/,
