@@ -7,7 +7,7 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
     }
 
     async analyze({ facebookAccount }) {
-        this.active = facebookAccount.messagesCount > 0;
+        this.active = facebookAccount.hasMessages;
         this._wordCount = 0;
         this._callsCount = 0;
         this._messageThreadsCount = 0;

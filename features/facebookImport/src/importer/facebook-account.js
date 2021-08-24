@@ -42,6 +42,10 @@ class FacebookAccount {
         }, 0);
     }
 
+    get hasMessages() {
+        return this.messagesCount > 0;
+    }
+
     forEachMessage(callback) {
         for (const messageThread of this.messageThreads) {
             for (const message of messageThread?.messages) {
