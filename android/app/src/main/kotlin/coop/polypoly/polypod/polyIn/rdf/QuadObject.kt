@@ -25,11 +25,19 @@ sealed class QuadObject {
                                     BlankNodeObject(blankNode)
                                 } catch (e: Exception) {
                                     // not a blank node
-                                    // TODO - a lot of assumptions about structure - throw a meaningful exception when it doesn't match
-                                    val unpacker = MessagePack.newDefaultUnpacker(it.asExtensionValue().data)
-                                    val arr = unpacker.unpackValue().asArrayValue()
+                                    // TODO - a lot of assumptions about
+                                    //  structure - throw a meaningful
+                                    //  exception when it doesn't match
+                                    val unpacker = MessagePack
+                                        .newDefaultUnpacker(
+                                            it.asExtensionValue().data
+                                        )
+                                    val arr = unpacker
+                                        .unpackValue().asArrayValue()
                                     val type = arr[0].asStringValue().toString()
-                                    throw IllegalArgumentException("Unsupported type for object: $type")
+                                    throw IllegalArgumentException(
+                                        "Unsupported type for object: $type"
+                                    )
                                 }
                             }
                         }
@@ -37,13 +45,14 @@ sealed class QuadObject {
                     {
                         when (it) {
                             is IRIObject -> IRI.codec.encode(it.`object`)
-                            is BlankNodeObject -> BlankNode.codec.encode(it.`object`)
-                            is LiteralObject -> Literal.codec.encode(it.`object`)
+                            is BlankNodeObject
+                            -> BlankNode.codec.encode(it.`object`)
+                            is LiteralObject
+                            -> Literal.codec.encode(it.`object`)
                         }
                     }
                 )
     }
-
 }
 
 data class IRIObject(val `object`: IRI) : QuadObject()

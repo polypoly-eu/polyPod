@@ -21,21 +21,25 @@ module.exports = {
     },
     settings: {
         react: {
-            version: "detect",
+            version: "latest",
         },
     },
     "ignorePatterns": [
         "*.conf.*",
         "*.config.*",
+        "*.bundled.*",
         "**/dist/*",
         "**/docs/*",
         "**/locales/*",
         "**/coverage/*",
+        "**/node_modules/*",
         "data/",
         ".eslintrc.*",
         "**/public/build/*",
         "**/bubblewrap/build/*",
+        "**/storybook-static/*",
         "podApi/",
+        "**/build/*",
         "PolyPodApp/"],
     rules: {
         semi: 2,

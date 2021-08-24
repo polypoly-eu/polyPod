@@ -1,12 +1,12 @@
 import filesize from "rollup-plugin-filesize";
 import { terser } from "rollup-plugin-terser";
 import resolve from "rollup-plugin-node-resolve";
-import replace from "@rollup/plugin-replace";
+import svg from "rollup-plugin-svg";
 
 export default {
-  input: "poly-look.js",
+  input: "src/poly-look.js",
   output: {
-    file: "poly-look.bundled.js",
+    file: "dist/poly-look.bundled.js",
     format: "esm",
   },
   onwarn(warning) {
@@ -15,7 +15,7 @@ export default {
     }
   },
   plugins: [
-    replace({ "Reflect.decorate": "undefined" }),
+    svg(),
     resolve(),
     terser({
       module: true,

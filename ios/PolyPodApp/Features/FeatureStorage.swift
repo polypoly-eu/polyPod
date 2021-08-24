@@ -35,7 +35,10 @@ class FeatureStorage {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: featuresFileUrl, includingPropertiesForKeys: nil)
             let subDirs = directoryContents.filter{ $0.hasDirectoryPath }
             for featureDir in subDirs {
-                if let feature = Feature.load(path: featureDir) {
+                if let feature = Feature.load(
+                    path: featureDir,
+                    languageCode: Locale.current.languageCode
+                ) {
                     featuresList.append(feature)
                 }
             }
@@ -74,6 +77,7 @@ class FeatureStorage {
     
     func importFeatures() {
         createFeaturesFolder()
+        importFeature("facebookImport")
         importFeature("lexicon")
         importFeature("polyExplorer")
         importFeature("polyPreview")

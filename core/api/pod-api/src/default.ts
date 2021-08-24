@@ -43,6 +43,15 @@ export class DefaultPod implements Pod {
      */
     get polyIn(): PolyIn {
         return {
+            match: async (matcher) =>
+                Array.from(
+                    this.store.match(
+                        matcher.subject,
+                        matcher.predicate,
+                        matcher.object,
+                        dataFactory.defaultGraph()
+                    )
+                ),
             select: async (matcher) =>
                 Array.from(
                     this.store.match(
@@ -57,6 +66,18 @@ export class DefaultPod implements Pod {
                     if (!quad.graph.equals(dataFactory.defaultGraph()))
                         throw new Error("Only default graph allowed");
                     this.store.add(quad);
+                }),
+            delete: async (...quads) =>
+                quads.forEach((quad) => {
+                    if (!quad.graph.equals(dataFactory.defaultGraph()))
+                        throw new Error("Only default graph allowed");
+                    this.store.delete(quad);
+                }),
+            has: async (...quads) =>
+                quads.some((quad) => {
+                    if (!quad.graph.equals(dataFactory.defaultGraph()))
+                        throw new Error("Only default graph allowed");
+                    return this.store.has(quad);
                 }),
         };
     }
@@ -105,6 +126,12 @@ export class DefaultPod implements Pod {
                 throw new Error("Not implemented");
             },
             setTitle: async (title: string) => {
+                throw new Error("Not implemented");
+            },
+            importFile: async () => {
+                throw new Error("Not implemented");
+            },
+            removeFile: async (fileId: string) => {
                 throw new Error("Not implemented");
             },
         };

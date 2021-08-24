@@ -1,10 +1,10 @@
-# The polyPod
+# The polyPod®
 
-At the moment, the polyPod is essentially a runtime for _features_; small,
+At the moment, the polyPod® is essentially a runtime for _features_; small,
 sandboxed JavaScript applications that can be launched from the polyPod app.
 
-But it will be much more than that, for more information read [the polyPod
-whitepaper].
+But it will be much more than that. For more information please read the
+[polyPod whitepaper](https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf).
 
 ## Components
 
@@ -66,25 +66,23 @@ Please read the [SECURITY](SECURITY.md) document on how to report potential
 security vulnerabilities in polyPod and where to find polypoly's Vulnerability
 Disclosure Policy.
 
-## Issues
+## Issues and contributions
 
-For the time being, issues are disabled in this repo. If it's an easy fix (such
-as a typo) you can go and create a pull request. If it's any other kind of
-issue, such as a feature request, please email us at
-feedback@polypoly.eu. Please understand that this is a temporary solution, and
-issues will be enabled in due course.
-
-## Links
-
-[the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
-
+Please see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Licensing
 
-Copyright (c) 2021 pc polypoly coop SCE mbH
+Copyright © 2021 pc polypoly coop SCE mbH
 
-Licensed under the GNU General Public License, Version 3 with Additional Terms.
+Licensed under the GNU General Public License, Version 3.
+Please see the [LICENSE](LICENSE) document for details and a copy of the license.
 
-Please see the [LICENSE](LICENSE) document for details and a copy of the
-license and additional terms.
+License information of 3rd party components is available in the
+[3rd-party-licenses/](3rd-party-licenses) folder.
+
+## Trademarks
+
+- polyPod® is a registered trademark of pc polypoly coop SCE mbH
+- polypoly® is a registered trademark of polypoly Enterprise GmbH
+- polyPedia® is a registered trademark of polypoly Foundation gGmbH
 

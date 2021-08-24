@@ -39,12 +39,24 @@ class AsyncPolyOut implements PolyOut {
 class AsyncPolyIn implements PolyIn {
     constructor(private readonly promise: Promise<PolyIn>) {}
 
+    async match(matcher: Partial<Matcher>): Promise<Quad[]> {
+        return (await this.promise).match(matcher);
+    }
+
     async select(matcher: Partial<Matcher>): Promise<Quad[]> {
         return (await this.promise).select(matcher);
     }
 
     async add(...quads: Quad[]): Promise<void> {
         return (await this.promise).add(...quads);
+    }
+
+    async delete(...quads: Quad[]): Promise<void> {
+        return (await this.promise).delete(...quads);
+    }
+
+    async has(...quads: Quad[]): Promise<boolean> {
+        return (await this.promise).has(...quads);
     }
 }
 
@@ -61,6 +73,14 @@ class AsyncPolyNav implements PolyNav {
 
     async setTitle(title: string): Promise<void> {
         return (await this.promise).setTitle(title);
+    }
+
+    async importFile(): Promise<string> {
+        return (await this.promise).importFile();
+    }
+
+    async removeFile(fileId: string): Promise<void> {
+        return (await this.promise).removeFile(fileId);
     }
 }
 

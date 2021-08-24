@@ -47,7 +47,9 @@ class PostOffice {
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         case "polyNav":
-            handlePolyNav(method: method, args: args)
+            handlePolyNav(method: method, args: args, completionHandler: { response, error in
+                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
+            })
         default:
             print("API unknown:", api)
         }
@@ -79,28 +81,39 @@ extension PostOffice {
             handlePolyInAdd(args: args, completionHandler: completionHandler)
         case "select":
             handlePolyInSelect(args: args, completionHandler: completionHandler)
+        case "match":
+            handlePolyInSelect(args: args, completionHandler: completionHandler)
+        case "delete":
+            handlePolyInDelete(args: args, completionHandler: completionHandler)
+        case "has":
+            handlePolyInHas(args: args, completionHandler: completionHandler)
         default:
             print("PolyIn method unknown:", method)
         }
     }
-    
-    private func handlePolyInAdd(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+
+    private func convertArgs(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) -> [ExtendedData] {
         var extendedDataSet: [ExtendedData] = []
         
         for arg in args {
             guard let extendedData = arg as? ExtendedData else {
                 completionHandler(nil, MessagePackValue("Bad data"))
-                return
+                return extendedDataSet
             }
             
             guard let graph = extendedData.properties["graph"] as? ExtendedData, graph.classname == "@polypoly-eu/rdf.DefaultGraph" else {
                 completionHandler(nil, MessagePackValue("/default/"))
-                return
+                return extendedDataSet
             }
             
             extendedDataSet.append(extendedData)
         }
-        
+        return extendedDataSet
+    }
+    
+    private func handlePolyInAdd(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let extendedDataSet = convertArgs(args: args, completionHandler: completionHandler)
+
         PodApi.shared.polyIn.addQuads(quads: extendedDataSet) { didSave in
             if didSave {
                 completionHandler(MessagePackValue(), nil)
@@ -135,6 +148,30 @@ extension PostOffice {
         }
     }
     
+    private func handlePolyInDelete(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let extendedDataSet = convertArgs(args: args, completionHandler: completionHandler)
+        
+        PodApi.shared.polyIn.deleteQuads(quads: extendedDataSet) { didDelete in
+            if didDelete {
+                completionHandler(MessagePackValue(), nil)
+            } else {
+                completionHandler(nil, MessagePackValue("Failed"))
+            }
+        }
+    }
+    
+    private func handlePolyInHas(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let extendedDataSet = convertArgs(args: args, completionHandler: completionHandler)
+        
+        PodApi.shared.polyIn.hasQuads(quads: extendedDataSet) { doesHave in
+            if doesHave {
+                completionHandler(MessagePackValue(), true)
+            } else {
+                completionHandler(false, MessagePackValue("Failed"))
+            }
+        }
+    }
+
     private func extractMatcher(_ matcher: Any) -> ExtendedData? {
         // TODO: Originally, the code expected the matcher to already be of type
         //       ExtendedData. However, with the use cases so far - an empty
@@ -162,6 +199,8 @@ extension PostOffice {
             handlePolyOutReadFile(args: args, completionHandler: completionHandler)
         case "writeFile":
             handlePolyOutWriteFile(args: args, completionHandler: completionHandler)
+        case "readdir":
+            handlePolyOutReadDir(args: args, completionHandler: completionHandler)
         default:
             print("PolyOut method unknown:", method)
         }
@@ -194,7 +233,7 @@ extension PostOffice {
     private func handlePolyOutStat(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.stat(path: path) { fileStats, error in
+        PodApi.shared.polyOut.stat(pathOrId: path) { fileStats, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
                 return
@@ -212,13 +251,13 @@ extension PostOffice {
     }
     
     private func handlePolyOutReadFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let path = args[0] as! String
+        let path = args[0] as? String ?? ""
         
         var options: [String: Any] = [:]
         if args.count > 1 {
             options = args[1] as! [String: Any]
         }
-        PodApi.shared.polyOut.fileRead(path: path, options: options) { data, error in
+        PodApi.shared.polyOut.fileRead(pathOrId: path, options: options) { data, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
                 return
@@ -239,7 +278,7 @@ extension PostOffice {
         let path = args[0] as! String
         let data = args[1] as! String
         
-        PodApi.shared.polyOut.fileWrite(path: path, data: data) { error in
+        PodApi.shared.polyOut.fileWrite(pathOrId: path, data: data) { error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
             } else {
@@ -247,10 +286,26 @@ extension PostOffice {
             }
         }
     }
+    
+    private func handlePolyOutReadDir(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let path = args[0] as! String
+        
+        PodApi.shared.polyOut.readdir(dir: path) { fileList, error in
+            if let error = error {
+                completionHandler(nil, MessagePackValue(error.localizedDescription))
+            } else {
+                var encodedList: [MessagePackValue] = [];
+                for file in fileList ?? [] {
+                    encodedList.append(MessagePackValue(file));
+                }
+                completionHandler(MessagePackValue(encodedList), nil)
+            }
+        }
+    }
 }
 
 extension PostOffice {
-    private func handlePolyNav(method: String, args: [Any]) {
+    private func handlePolyNav(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         switch method {
         case "setTitle":
             handlePolyNavSetTitle(args: args)
@@ -258,6 +313,10 @@ extension PostOffice {
             handlePolyNavSetActiveAction(args: args)
         case "openUrl":
             handlePolyNavOpenUrl(args: args)
+        case "importFile":
+            handlePolyNavImportFile(completionHandler: completionHandler)
+        case "removeFile":
+            handlePolyNavRemoveFile(args: args, completionHandler: completionHandler)
         default:
             print("PolyNav method unknown:", method)
         }
@@ -278,6 +337,23 @@ extension PostOffice {
     private func handlePolyNavOpenUrl(args: [Any]) {
         let target = args[0] as! String
         PodApi.shared.polyNav.openUrl(target: target) { res, error in
+        }
+    }
+    
+    private func handlePolyNavImportFile(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        PodApi.shared.polyNav.importFile() { fileId in
+            if let fileId = fileId {
+                completionHandler(MessagePackValue(fileId), nil)
+                return
+            }
+            completionHandler(MessagePackValue(), nil)
+        }
+    }
+    
+    private func handlePolyNavRemoveFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let fileId = args[0] as! String
+        PodApi.shared.polyNav.removeFile(fileId: fileId) { error in
+            completionHandler(MessagePackValue(), nil)
         }
     }
 }

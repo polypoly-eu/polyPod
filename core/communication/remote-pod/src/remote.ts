@@ -37,7 +37,10 @@ import { Bubblewrap, Classes } from "@polypoly-eu/bubblewrap";
 
 type PolyInEndpoint = ObjectEndpointSpec<{
     select(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
+    match(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
     add(...quads: Quad[]): ValueEndpointSpec<void>;
+    delete(...quads: Quad[]): ValueEndpointSpec<void>;
+    has(...quads: Quad[]): ValueEndpointSpec<boolean>;
 }>;
 
 type PolyOutEndpoint = ObjectEndpointSpec<{
@@ -57,6 +60,8 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
+    importFile(): ValueEndpointSpec<string>;
+    removeFile(fileId: string): ValueEndpointSpec<void>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
@@ -99,16 +104,50 @@ class FetchResponse implements Response {
 
 class FileStats implements Stats {
     static of(stats: Stats): FileStats {
-        return new FileStats(stats.isFile(), stats.isDirectory());
+        if (
+            stats.getSize !== undefined &&
+            stats.getName !== undefined &&
+            stats.getTime !== undefined &&
+            stats.getId !== undefined
+        ) {
+            return new FileStats(
+                stats.isFile(),
+                stats.isDirectory(),
+                stats.getTime(),
+                stats.getSize(),
+                stats.getName(),
+                stats.getId()
+            );
+        } else {
+            return new FileStats(stats.isFile(), stats.isDirectory(), "", 0, "", "");
+        }
     }
 
-    constructor(readonly file: boolean, readonly directory: boolean) {}
-
+    constructor(
+        readonly file: boolean,
+        readonly directory: boolean,
+        readonly time: string,
+        readonly size: number,
+        readonly name: string,
+        readonly id: string
+    ) {}
     isFile(): boolean {
         return this.file;
     }
     isDirectory(): boolean {
         return this.directory;
+    }
+    getTime(): string {
+        return this.time;
+    }
+    getSize(): number {
+        return this.size;
+    }
+    getName(): string {
+        return this.name;
+    }
+    getId(): string {
+        return this.id;
     }
 }
 
@@ -155,7 +194,10 @@ export class RemoteClientPod implements Pod {
     get polyIn(): PolyIn {
         return {
             add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
+            match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
             select: (matcher) => this.rpcClient.polyIn().select(matcher)(),
+            delete: (...quads) => this.rpcClient.polyIn().delete(...quads)(),
+            has: (...quads) => this.rpcClient.polyIn().has(...quads)(),
         };
     }
 
@@ -202,6 +244,8 @@ export class RemoteClientPod implements Pod {
             setActiveActions: (actions: string[]) =>
                 this.rpcClient.polyNav().setActiveActions(actions)(),
             setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
+            importFile: () => this.rpcClient.polyNav().importFile()(),
+            removeFile: (fileId: string) => this.rpcClient.polyNav().removeFile(fileId)(),
         };
     }
 }
