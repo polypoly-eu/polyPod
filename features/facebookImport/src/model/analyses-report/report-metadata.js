@@ -39,9 +39,6 @@ export default class ReportMetadataAnalysis {
             <ul>
                 <li key={1}>{`File size: ${this._size}`}</li>
                 <li key={2}>{`Files count: ${this._filesCount}`}</li>
-                <li
-                    key={3}
-                >{`Preferred language: ${this._preferedLanguage}`}</li>
             </ul>
         );
     }
