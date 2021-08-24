@@ -7,8 +7,6 @@ import { analyzeFile } from "../model/analysis.js";
 
 export const ImporterContext = React.createContext();
 
-const pod = window.pod;
-
 //all nav-states for checking purposes
 const navigationStates = ["importStatus"];
 const importSteps = {
@@ -36,7 +34,7 @@ function updateTitle(pod) {
 }
 
 //from storage
-async function readImportStatus() {
+async function readImportStatus(pod) {
     const { dataFactory } = pod;
     const statusQuads = await pod.polyIn.select({
         subject: dataFactory.namedNode(`${namespace}facebookImporter`),
@@ -46,7 +44,7 @@ async function readImportStatus() {
     return status || importSteps.beginning;
 }
 
-async function writeImportStatus(status) {
+async function writeImportStatus(pod, status) {
     const { dataFactory, polyIn } = pod;
     const existingQuad = (
         await pod.polyIn.select({
@@ -64,8 +62,16 @@ async function writeImportStatus(status) {
 }
 
 export const ImporterProvider = ({ children }) => {
+    const [pod, setPod] = useState(null);
+
     //storage
-    const storage = new Storage(pod);
+    const storage = pod
+        ? new Storage(pod)
+        : {
+              refreshFiles: () => [],
+              readFile: () => null,
+              removeFile: () => {},
+          };
     const [files, setFiles] = useState([]);
     const [fileAnalysis, setFileAnalysis] = useState(null);
 
@@ -125,19 +131,34 @@ export const ImporterProvider = ({ children }) => {
 
     function updateImportStatus(newStatus) {
         changeNavigationState({ importStatus: newStatus });
-        writeImportStatus(newStatus);
+        writeImportStatus(pod, newStatus);
+    }
+
+    async function initPod() {
+        const pod = await window.pod;
+        // TODO: This is a workaround for a race condition on Android, where
+        //       messages were being sent to the pod before it was fully
+        //       initialised. We have to solve the root cause of this.
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(pod);
+            }, 100);
+        });
     }
 
     //on startup
     useEffect(() => {
-        readImportStatus().then((status) => {
-            if (
-                status &&
-                !(navigationState.importStatus == importSteps.explore)
-            )
-                changeNavigationState({ importStatus: status });
+        initPod().then((newPod) => {
+            setPod(newPod);
+            readImportStatus(newPod).then((status) => {
+                if (
+                    status &&
+                    !(navigationState.importStatus == importSteps.explore)
+                )
+                    changeNavigationState({ importStatus: status });
+            });
+            refreshFiles();
         });
-        refreshFiles();
     }, []);
 
     //on file change
@@ -150,6 +171,7 @@ export const ImporterProvider = ({ children }) => {
 
     //on history change
     useEffect(() => {
+        if (!pod) return;
         updatePodNavigation(pod, history);
         updateTitle(pod);
     });
