@@ -16,10 +16,13 @@ const AnalysisCard = ({ analysis }) => {
 const UnrecognizedCard = ({ unrecognizedData }) => {
     return (
         <div className="analysis-card unrecognized-analysis-card">
-            <h1>Unrecognised and Missing Data</h1>
+            <div className="unrecognized-analysis-title">
+                <div className="alert-fake-icon">!</div>
+                <h1>Unrecognised and Missing Data</h1>
+            </div>
             <p>{unrecognizedData.report}</p>
             <RouteButton route="/report" className="report-button">
-                View&Send Report
+                View and send report
             </RouteButton>
         </div>
     );
@@ -46,7 +49,7 @@ const ExploreView = () => {
 
     return (
         <div className="explore-view">
-            <h1>Explore your data</h1>
+            <h1 className="explore-view-title">Explore your data</h1>
             {renderFileAnalyses()}
         </div>
     );
