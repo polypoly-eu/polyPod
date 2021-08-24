@@ -6,14 +6,14 @@ import {
 
 async function readJSONFile(dataFileName, zipFile) {
     const entries = await zipFile.getEntries();
-    const offFacebookEventsFile = entries.find((entryName) =>
+    const dataZipEntry = entries.find((entryName) =>
         entryName.includes(dataFileName)
     );
-    if (!offFacebookEventsFile) {
+    if (!dataZipEntry) {
         throw new MissingFileImportException(dataFileName);
     }
     const fileContent = new TextDecoder("utf-8").decode(
-        await zipFile.getContent(offFacebookEventsFile)
+        await zipFile.getContent(dataZipEntry)
     );
 
     if (!fileContent) {
