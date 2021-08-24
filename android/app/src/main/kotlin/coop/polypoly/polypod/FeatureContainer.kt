@@ -28,6 +28,7 @@ import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
+import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import java.util.zip.ZipFile
 
@@ -46,7 +47,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         PolyIn(context, context.filesDir),
         PolyNav(
             webView = webView, context = context
-        )
+        ),
+        Network(context)
     )
 
     var feature: Feature? = null
