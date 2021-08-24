@@ -8,7 +8,7 @@ const AnalysisCard = ({ analysis }) => {
     return (
         <div className="analysis-card">
             <h1>{analysis.title}</h1>
-            <p>{analysis.render()}</p>
+            <div>{analysis.render()}</div>
         </div>
     );
 };
