@@ -1,3 +1,4 @@
+import { IMPORT_ERROR, IMPORT_SUCCESS } from "../importer-status.js";
 import { readJSONFile } from "../importer-util.js";
 
 function isJsonMessageFile(entryName, id) {
@@ -10,11 +11,11 @@ function isJsonMessageFile(entryName, id) {
 async function readJSONFileWithStatus(messageFile, zipFile) {
     return readJSONFile(messageFile, zipFile)
         .then((data) => {
-            return { messageFile, data, status: "successfull" };
+            return { status: IMPORT_SUCCESS, messageFile, data };
         })
         .catch((error) => {
             return {
-                status: "error",
+                status: IMPORT_ERROR,
                 error,
             };
         });
@@ -34,7 +35,7 @@ export default class MessagesImporter {
             )
         );
         const successfullResult = result.filter(
-            (result) => result.status === "successfull"
+            (result) => result.status === IMPORT_SUCCESS
         );
         for (const each of successfullResult) {
             const fileNameParts = each.messageFile
