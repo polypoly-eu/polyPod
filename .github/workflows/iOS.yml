@@ -10,8 +10,5 @@ jobs:
         uses: actions/checkout@v2
       - name: Build iOS
         run: |
-          cd ios/PolyPodApp
-          xcodebuild -workspace PolyPod.xcodeproj/project.xcworkspace/ \
-                     -scheme PolyPod
-                     -destination platform=iOS\ Simulator,OS=13.3,name=iPhone\ 11 \
-                     clean test | xcpretty
+          cd ios
+          make test | xcpretty
