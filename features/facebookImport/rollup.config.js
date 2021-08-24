@@ -43,9 +43,10 @@ export default (commandLineArgs) => {
             replace({
                 "process.env.NODE_ENV": JSON.stringify("development"),
                 "process.env.BASIC_AUTH_USERNAME":
-                    process.env.BASIC_AUTH_USERNAME || "username",
+                    process.env.BASIC_AUTH_USERNAME ||
+                    JSON.stringify("username"),
                 "process.env.BASIC_AUTH_SECRET":
-                    process.env.BASIC_AUTH_SECRET || "secret",
+                    process.env.BASIC_AUTH_SECRET || JSON.stringify("secret"),
             }),
             commonjs({
                 include: /node_modules/,
