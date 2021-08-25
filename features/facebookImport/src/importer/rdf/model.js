@@ -58,11 +58,26 @@ class ModelEntity {
         polyIn.add(this._zipFileIdQuad(dataFactory));
         polyIn.add(this._resourceTypeQuad(dataFactory));
     }
+
+    _findTripleValue(type, triples) {
+        const triple = triples.find(
+            (triple) => triple.predicate.value === type
+        );
+        return triple ? triple.object.value : null;
+    }
+
+    importFromTriples(triples) {
+        this.uuid = this._findTripleValue(
+            "http://schema.org/identifier",
+            triples
+        );
+    }
 }
 
 class OffFacebookEntity extends ModelEntity {
     set name(entityName) {
         this._name = entityName;
+        this._events = [];
     }
 
     get name() {
@@ -75,6 +90,10 @@ class OffFacebookEntity extends ModelEntity {
 
     set events(events) {
         this._events = events;
+    }
+
+    addOffFacebookEvent(event) {
+        this._events.push(event);
     }
 
     _nameQuad(dataFactory) {
@@ -95,6 +114,11 @@ class OffFacebookEntity extends ModelEntity {
         for (const event of this.events) {
             event.exportRDFTriples(pod);
         }
+    }
+
+    importFromTriples(triples) {
+        super.importFromTriples(triples);
+        this.name = this._findTripleValue(`${namespace}name`, triples);
     }
 }
 
@@ -176,21 +200,35 @@ class OffFacebookEvent extends ModelEntity {
         if (this.timestamp) {
             polyIn.add(this._timestampQuad(dataFactory));
         }
-        if (this.eventId) {
-            polyIn.add(this._eventIdQuad(dataFactory));
+        if (this.offFacebookEntity) {
+            polyIn.add(this._offFacebookEntityQuad(dataFactory));
         }
+    }
+
+    importFromTriples(triples) {
+        super.importFromTriples(triples);
+        this.eventId = this._findTripleValue(`${namespace}eventId`, triples);
+        this.timestamp = this._findTripleValue(
+            `${namespace}timestamp`,
+            triples
+        );
+        this.type = this._findTripleValue(`${namespace}type`, triples);
     }
 }
 
+/*
 class FacebookAccount extends ModelEntity {
     constructor(pod) {
         super();
         this._pod = pod;
+
+        this._offFacebookCompanies = [];
     }
 
     get pod() {
         return this._pod;
     }
 }
+*/
 
-export { FacebookAccount, OffFacebookEvent, OffFacebookEntity };
+export { OffFacebookEvent, OffFacebookEntity };
