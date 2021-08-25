@@ -7,6 +7,9 @@ import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import serve from "rollup-plugin-serve";
 
+const fallbackURL = "http://localhost:8000";
+const fallbackAuthorization = "username:password";
+
 export default (commandLineArgs) => {
     return {
         input: "src/facebookImporter.jsx",
@@ -43,13 +46,12 @@ export default (commandLineArgs) => {
             replace({
                 "process.env.NODE_ENV": JSON.stringify("development"),
                 "process.env.POLYPOD_POLYPEDIA_REPORT_URL": JSON.stringify(
-                    process.env.POLYPOD_POLYPEDIA_REPORT_URL ||
-                        "http://localhost:8000"
+                    process.env.POLYPOD_POLYPEDIA_REPORT_URL || fallbackURL
                 ),
                 "process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION":
                     JSON.stringify(
                         process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION ||
-                            "username:password"
+                            fallbackAuthorization
                     ),
             }),
             commonjs({
