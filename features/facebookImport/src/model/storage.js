@@ -44,10 +44,12 @@ export default class Storage {
     async removeFile(file) {
         return new Promise((resolve) => {
             const { polyNav } = this._pod;
-            polyNav.removeFile(file).then(() => {
-                this.refreshFiles().then(() => resolve());
-            });
-            this.changeListener();
+            polyNav
+                .removeFile(file)
+                .then(() => {
+                    this.refreshFiles().then(() => resolve());
+                })
+                .then(() => this.changeListener());
         });
     }
 }
