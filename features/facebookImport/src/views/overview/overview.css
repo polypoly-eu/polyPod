@@ -1,8 +1,8 @@
 .overview {
+    background-color: var(--background-dark);
     color: var(--color-gray-50);
     line-height: var(--line-height);
     letter-spacing: -0.01em;
-    height: 100%;
     width: 100%;
     position: absolute;
     padding: 24px 32px 24px 60px;
