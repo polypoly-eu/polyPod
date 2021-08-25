@@ -39,6 +39,7 @@ const ReportView = () => {
             <h1 className="report-view-title">Unrecognized data report</h1>
             {renderReportAnalyses()}
             <div className="button-area">
+                {/* <div className={... ? "" : "hidden-message"}>Report sent successfully.</div> */}
                 <button className="send" onClick={handleSendReport}>Send report</button>
             </div>
         </div>
