@@ -86,14 +86,16 @@ export const ImporterProvider = ({ children }) => {
         setFiles(Object.values(resolvedFiles));
     };
 
-    const [navigationState, setNavigationState] = useState({
-        importStatus: importSteps.loading,
-    });
-
     const history = useHistory();
 
     const handleRemoveFile = (fileID) => {
         storage.removeFile(fileID);
+    };
+
+    const handleImportFile = async () => {
+        const { polyNav } = pod;
+        await polyNav.importFile();
+        refreshFiles();
     };
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
@@ -127,12 +129,6 @@ export const ImporterProvider = ({ children }) => {
             setFiles(resolvedFiles);
         });
     }
-
-    const handleImportFile = async () => {
-        const { polyNav } = window.pod;
-        await polyNav.importFile();
-        refreshFiles();
-    };
 
     function updateImportStatus(newStatus) {
         changeNavigationState({ importStatus: newStatus });
