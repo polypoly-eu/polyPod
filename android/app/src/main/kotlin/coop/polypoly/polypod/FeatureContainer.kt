@@ -24,11 +24,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.logging.LoggerFactory
+import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
-import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import java.util.zip.ZipFile
 

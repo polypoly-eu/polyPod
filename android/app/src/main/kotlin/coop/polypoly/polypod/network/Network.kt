@@ -7,15 +7,18 @@ import java.net.URL
 import java.nio.charset.StandardCharsets
 
 
-class Network (
-    val context: Context
-    ){
-    open suspend fun httpPost(serverURL: String, contentType: String, body: String, authorization: String?) {
-
+class Network(val context: Context) {
+    open suspend fun httpPost(
+        serverURL: String,
+        contentType: String,
+        body: String,
+        authorization: String?
+    ) {
         val url = URL(serverURL)
         val connection = url.openConnection() as HttpURLConnection
         val encodedBody: ByteArray = body.toByteArray(StandardCharsets.UTF_8)
-        val encodedAuthorization: ByteArray? = authorization?.toByteArray(StandardCharsets.UTF_8)
+        val encodedAuthorization: ByteArray? =
+            authorization?.toByteArray(StandardCharsets.UTF_8)
 
         connection.requestMethod = "POST"
         connection.setRequestProperty("charset", "utf-8")
@@ -24,7 +27,8 @@ class Network (
             encodedBody.size.toString()
         )
         connection.setRequestProperty("Content-Type", contentType)
-        if (encodedAuthorization != null) connection.setRequestProperty("Authorization",
+        if (encodedAuthorization != null) connection.setRequestProperty(
+            "Authorization",
             "Basic $encodedAuthorization"
         )
 
