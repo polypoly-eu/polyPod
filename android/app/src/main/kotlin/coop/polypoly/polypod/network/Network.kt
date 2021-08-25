@@ -6,7 +6,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
 
-
 class Network(val context: Context) {
     open suspend fun httpPost(
         serverURL: String,
@@ -38,8 +37,6 @@ class Network(val context: Context) {
             outputStream.write(encodedBody)
             outputStream.flush()
         } catch (exception: Exception) {
-
         }
-
     }
 }
