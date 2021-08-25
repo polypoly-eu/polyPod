@@ -191,8 +191,7 @@ class BrowserNetwork implements Network {
         const request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             if (request.readyState !== XMLHttpRequest.DONE) return;
-            // TODO: Return some response object
-            console.log(this);
+            console.log("network.httpPost: Received response:", this);
         };
         request.open("POST", url);
         request.setRequestHeader("Content-Type", contentType);
