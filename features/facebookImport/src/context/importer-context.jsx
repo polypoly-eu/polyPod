@@ -20,6 +20,13 @@ const importSteps = {
     finished: "finished",
 };
 const namespace = "http://polypoly.coop/schema/fbImport/";
+//used until real storage is loaded
+const fakeStorage = {
+    files: [],
+    refreshFiles: async () => [],
+    readFile: async () => null,
+    removeFile: async () => {},
+};
 
 function updatePodNavigation(pod, history) {
     pod.polyNav.actions = {
@@ -64,19 +71,14 @@ async function writeImportStatus(pod, status) {
 
 export const ImporterProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
-
-    //storage
-    const storage = pod
-        ? new Storage(pod)
-        : {
-              files: [],
-              refreshFiles: async () => [],
-              readFile: async () => null,
-              removeFile: async () => {},
-          };
+    const [storage, setStorage] = useState(fakeStorage);
     const [files, setFiles] = useState([]);
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
+
+    const [navigationState, setNavigationState] = useState({
+        importStatus: importSteps.loading,
+    });
 
     storage.changeListener = async () => {
         const resolvedFiles = [];
@@ -86,15 +88,17 @@ export const ImporterProvider = ({ children }) => {
         setFiles(Object.values(resolvedFiles));
     };
 
-    const [navigationState, setNavigationState] = useState({
-        importStatus: importSteps.loading,
-    });
-
     const history = useHistory();
 
     const handleRemoveFile = (fileID) => {
         setFacebookAccount(null);
         storage.removeFile(fileID);
+    };
+
+    const handleImportFile = async () => {
+        const { polyNav } = pod;
+        await polyNav.importFile();
+        refreshFiles();
     };
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
@@ -129,10 +133,6 @@ export const ImporterProvider = ({ children }) => {
         });
     }
 
-    function importFile() {
-        return storage.importFile();
-    }
-
     function updateImportStatus(newStatus) {
         changeNavigationState({ importStatus: newStatus });
         writeImportStatus(pod, newStatus);
@@ -161,13 +161,18 @@ export const ImporterProvider = ({ children }) => {
                 )
                     changeNavigationState({ importStatus: status });
             });
-            refreshFiles();
+            setStorage(new Storage(newPod));
         });
     }, []);
 
-    // On file change
-    // When files changed run the importer first and create an account model first.
-    // After there is an account the analyses are triggered.
+    //on storage change
+    useEffect(() => {
+        refreshFiles();
+    }, [storage]);
+
+    //on file change
+    //when files changed run the importer first and create an account model first.
+    //after there is an account the analyses are triggered.
     useEffect(() => {
         if (files[0])
             importData(files[0]).then((newFacebookAccount) =>
@@ -200,9 +205,9 @@ export const ImporterProvider = ({ children }) => {
                 navigationState,
                 changeNavigationState,
                 handleBack,
+                handleImportFile,
                 importSteps,
                 updateImportStatus,
-                importFile,
                 fileAnalysis,
                 refreshFiles,
             }}
