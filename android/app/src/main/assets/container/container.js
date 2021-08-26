@@ -26,7 +26,7 @@ function initMessaging() {
             port1.postMessage(bytes);
         };
         if (queuedMessages.length) {
-            console.warn("Warnings: replaying queued messages");
+            console.warn("Warning: replaying queued messages");
             while (queuedMessages.length) {
                 const message = queuedMessages.shift();
                 outerPort.postMessage(message);
