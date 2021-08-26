@@ -46,7 +46,8 @@ async function readJSONDataArray(dataFileName, dataKey, zipFile) {
 function anonymizePathSegment(pathSegment, fullPath) {
     if (
         fullPath.includes("messages") &&
-        /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(pathSegment)
+        (/^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(pathSegment) ||
+            /^[_a-zA-Z0-9-]{9,12}$/.test(pathSegment))
     ) {
         return "uniqueid_hash";
     }
