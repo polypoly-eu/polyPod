@@ -1,13 +1,11 @@
-import { readJSONDataArray } from "../importer-util.js";
+import DirectKeyDataImporter from "./direct-key-data-importer.js";
 
-export default class RecommendedPagesImporter {
-    async import({ zipFile }, facebookAccount) {
-        const fileName = "pages/pages_you've_recommended.json";
-        facebookAccount.recommendedPages = await readJSONDataArray(
-            fileName,
+export default class RecommendedPagesImporter extends DirectKeyDataImporter {
+    constructor() {
+        super(
+            "pages/pages_you've_recommended.json",
             "recommended_pages_v2",
-            zipFile
+            "recommendedPages"
         );
-        facebookAccount.addImportedFileName(fileName);
     }
 }

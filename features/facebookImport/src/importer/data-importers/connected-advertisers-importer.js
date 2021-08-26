@@ -1,14 +1,11 @@
-import { readJSONDataArray } from "../importer-util.js";
+import DirectKeyDataImporter from "./direct-key-data-importer.js";
 
-export default class ConnectedAdvertisersImporter {
-    async import({ zipFile }, facebookAccount) {
-        const fileName =
-            "ads_information/advertisers_who_uploaded_a_contact_list_with_your_information.json";
-        facebookAccount.connectedAdvertisers = await readJSONDataArray(
-            fileName,
+export default class ConnectedAdvertisersImporter extends DirectKeyDataImporter {
+    constructor() {
+        super(
+            "ads_information/advertisers_who_uploaded_a_contact_list_with_your_information.json",
             "custom_audiences_v2",
-            zipFile
+            "connectedAdvertisers"
         );
-        facebookAccount.addImportedFileName(fileName);
     }
 }

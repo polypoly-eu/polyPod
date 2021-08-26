@@ -1,13 +1,7 @@
-import { readJSONDataArray } from "../importer-util.js";
+import DirectKeyDataImporter from "./direct-key-data-importer.js";
 
-export default class SearchesImporter {
-    async import({ zipFile }, facebookAccount) {
-        const fileName = "search/your_search_history.json";
-        facebookAccount.searches = await readJSONDataArray(
-            fileName,
-            "searches_v2",
-            zipFile
-        );
-        facebookAccount.addImportedFileName(fileName);
+export default class SearchesImporter extends DirectKeyDataImporter {
+    constructor() {
+        super("search/your_search_history.json", "searches_v2", "searches");
     }
 }

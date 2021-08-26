@@ -1,13 +1,11 @@
-import { readJSONDataArray } from "../importer-util.js";
+import DirectKeyDataImporter from "./direct-key-data-importer.js";
 
-export default class UnfollowedPagesImporter {
-    async import({ zipFile }, facebookAccount) {
-        const fileName = "pages/pages_you've_unfollowed.json";
-        facebookAccount.unfollowedPages = await readJSONDataArray(
-            fileName,
+export default class UnfollowedPagesImporter extends DirectKeyDataImporter {
+    constructor() {
+        super(
+            "pages/pages_you've_unfollowed.json",
             "pages_unfollowed_v2",
-            zipFile
+            "unfollowedPages"
         );
-        facebookAccount.addImportedFileName(fileName);
     }
 }

@@ -1,13 +1,11 @@
-import { readJSONDataArray } from "../importer-util.js";
+import DirectKeyDataImporter from "./direct-key-data-importer.js";
 
-export default class AdInterestsImporter {
-    async import({ zipFile }, facebookAccount) {
-        const fileName = "other_logged_information/ads_interests.json";
-        facebookAccount.adInterests = await readJSONDataArray(
-            fileName,
+export default class AdInterestsImporter extends DirectKeyDataImporter {
+    constructor() {
+        super(
+            "other_logged_information/ads_interests.json",
             "topics_v2",
-            zipFile
+            "adInterests"
         );
-        facebookAccount.addImportedFileName(fileName);
     }
 }

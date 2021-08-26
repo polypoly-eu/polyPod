@@ -1,13 +1,7 @@
-import { readJSONDataArray } from "../importer-util.js";
+import DirectKeyDataImporter from "./direct-key-data-importer.js";
 
-export default class FriendsImporter {
-    async import({ zipFile }, facebookAccount) {
-        const fileName = "friends_and_followers/friends.json";
-        facebookAccount.friends = await readJSONDataArray(
-            fileName,
-            "friends_v2",
-            zipFile
-        );
-        facebookAccount.addImportedFileName(fileName);
+export default class FriendsImporter extends DirectKeyDataImporter {
+    constructor() {
+        super("friends_and_followers/friends.json", "friends_v2", "friends");
     }
 }
