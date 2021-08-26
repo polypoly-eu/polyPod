@@ -18,7 +18,7 @@ import ReceivedFriendRequestsAnalysis from "./analyses/friend-requests-received-
 
 import ReportMetadataAnalysis from "./analyses-report/report-metadata.js";
 import NoDataFoldersAnalysis from "./analyses-report/no-data-folders.js";
-import MissingExpectedJSONFilesAnalysis from "./analyses-report/missing-expected-json-files.js";
+import MissingKnownJSONFilesAnalysis from "./analyses-report/missing-known-json-files.js";
 import UknownJSONFilesAnalysis from "./analyses-report/unknown-json-files.js";
 import MessagesDetailsAnalysis from "./analyses/messages-details-analysis.js";
 import OffFacebookEventsTypesAnalysis from "./analyses/off-facebook-events-types-analysys.js";
@@ -59,7 +59,7 @@ const subAnalyses = [
     DataImportingStatusAnalysis,
     NoDataFoldersAnalysis,
     UknownJSONFilesAnalysis,
-    MissingExpectedJSONFilesAnalysis,
+    MissingKnownJSONFilesAnalysis,
 ];
 
 class InactiveAnalysis {

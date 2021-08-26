@@ -5,14 +5,11 @@ import {
     jsonDataEntities,
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
+import RootAnalysis from "../analyses/root-analysis.js";
 
-export default class MissingExpectedJSONFilesAnalysis {
+export default class MissingKnownJSONFilesAnalysis extends RootAnalysis {
     get title() {
-        return "Missing expected JSON files";
-    }
-
-    get id() {
-        return "missing-expected-json-files";
+        return "Missing known JSON files";
     }
 
     get isForDataReport() {
@@ -22,7 +19,7 @@ export default class MissingExpectedJSONFilesAnalysis {
     get jsonReport() {
         return {
             id: this.id,
-            expectedMissingFiles: this._expectedMissingFiles,
+            missingKnownFileNames: this._missingKnownFileNames,
         };
     }
 
@@ -42,7 +39,7 @@ export default class MissingExpectedJSONFilesAnalysis {
     }
 
     async analyze({ id, zipFile }) {
-        this._expectedMissingFiles = [];
+        this._missingKnownFileNames = [];
         this.active = true;
         if (!zipFile) return;
 
@@ -51,16 +48,16 @@ export default class MissingExpectedJSONFilesAnalysis {
             anonymizeJsonEntityPath(each.replace(`${id}/`, ""))
         );
         const knowsJsonFiles = this._knownJsonFiles();
-        this._expectedMissingFiles = knowsJsonFiles.filter(
+        this._missingKnownFileNames = knowsJsonFiles.filter(
             (each) => !anonymizedPaths.includes(each)
         );
-        this.active = this._expectedMissingFiles.length > 0;
+        this.active = this._missingKnownFileNames.length > 0;
     }
 
     render() {
         return (
             <ul>
-                {this._expectedMissingFiles.map((entry, index) => (
+                {this._missingKnownFileNames.map((entry, index) => (
                     <li key={index}>{entry}</li>
                 ))}
             </ul>
