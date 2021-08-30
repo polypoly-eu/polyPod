@@ -5,31 +5,79 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    padding: 24px;
+    padding: 24px 24px 132px 24px;
     border-top: 1px inset #a9b6c6;
     box-sizing: border-box;
     overflow: hidden scroll;
 }
 
-.report-view button,
-code {
-    display: block;
-    margin: 8px;
+.report-view .report-view-title {
+    text-align: center;
+    font-weight: 500;
+    margin: 8px 0 20px 0;
+    font-size: 24px;
 }
 
-.report-view .analysis-card:first-child {
+.report-view .button-area::before {
+    content: "";
+    height: 60px;
+    position: absolute;
+    top: -60px;
+    right: 0;
+    left: 0;
+    background: linear-gradient(#0f193800 0%, #0f1938);
+}
+
+.report-view .button-area {
+    display: block;
+    background-color: var(--background-dark);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 20px 28px 32px 28px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.report-view .button-area .hidden-message {
+    display: none;
+}
+
+.report-view .send {
+    width: 100%;
+    height: 51px;
+    background-color: var(--color-red-300);
+    color: var(--text-dark);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+.report-view .report-card:first-child {
     margin-top: 20px;
 }
 
-.report-view .analysis-card {
-    margin: 0 8px 8px 8px;
-    padding: 4px;
-    border: 1px solid black;
+.report-view .report-card {
+    max-width: var(--max-width);
+    margin: 0 auto 12px auto;
+    padding: 12px 20px;
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
+    background-color: var(--background-light);
+    color: var(--text-dark);
 }
 
-.report-view .analysis-card > h1 {
-    font-size: 16px;
+.report-view .report-card > h1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.report-view .report-card .list ul {
+    padding: 0 20px;
+}
+
+.report-view .report-card .list li {
+    text-align: justify;
+    text-justify: distribute-all-lines;
 }
