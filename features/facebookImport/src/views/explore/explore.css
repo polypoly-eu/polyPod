@@ -8,6 +8,7 @@
     padding: 24px;
     border-top: 1px inset #a9b6c6;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 .explore-view .report-button {
