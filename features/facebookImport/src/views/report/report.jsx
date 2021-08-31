@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./report.css";
@@ -15,11 +15,13 @@ const ReportCard = ({ analysis }) => {
 const ReportView = () => {
     const { fileAnalysis } = useContext(ImporterContext);
     const unrecognizedData = fileAnalysis.unrecognizedData;
+    const [fakeReportSent, setFakeReportSent] = useState(false);
 
     //Todo
     const handleSendReport = () => {
         console.log("ToDo");
         console.log(unrecognizedData.jsonReport);
+        setFakeReportSent(true);
     };
 
     function renderReportAnalyses() {
@@ -44,7 +46,9 @@ const ReportView = () => {
             <h1 className="report-view-title">Unrecognized data report</h1>
             {renderReportAnalyses()}
             <div className="button-area">
-                {/* <div className={... ? "" : "hidden-message"}>Report sent successfully.</div> */}
+                <div className={fakeReportSent ? "" : "hidden-message"}>
+                    Report sent successfully.
+                </div>
                 <button className="send" onClick={handleSendReport}>
                     Send report
                 </button>
