@@ -4,6 +4,7 @@ import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
 import { useHistory } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
+import { importData } from "../importer/importer.js";
 
 export const ImporterContext = React.createContext();
 
@@ -19,6 +20,13 @@ const importSteps = {
     finished: "finished",
 };
 const namespace = "http://polypoly.coop/schema/fbImport/";
+//used until real storage is loaded
+const fakeStorage = {
+    files: [],
+    refreshFiles: async () => [],
+    readFile: async () => null,
+    removeFile: async () => {},
+};
 
 function updatePodNavigation(pod, history) {
     pod.polyNav.actions = {
@@ -63,18 +71,14 @@ async function writeImportStatus(pod, status) {
 
 export const ImporterProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
-
-    //storage
-    const storage = pod
-        ? new Storage(pod)
-        : {
-              files: [],
-              refreshFiles: async () => [],
-              readFile: async () => null,
-              removeFile: async () => {},
-          };
+    const [storage, setStorage] = useState(fakeStorage);
     const [files, setFiles] = useState([]);
+    const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
+
+    const [navigationState, setNavigationState] = useState({
+        importStatus: importSteps.loading,
+    });
 
     storage.changeListener = async () => {
         const resolvedFiles = [];
@@ -84,14 +88,17 @@ export const ImporterProvider = ({ children }) => {
         setFiles(Object.values(resolvedFiles));
     };
 
-    const [navigationState, setNavigationState] = useState({
-        importStatus: importSteps.loading,
-    });
-
     const history = useHistory();
 
     const handleRemoveFile = (fileID) => {
+        setFacebookAccount(null);
         storage.removeFile(fileID);
+    };
+
+    const handleImportFile = async () => {
+        const { polyNav } = pod;
+        await polyNav.importFile();
+        refreshFiles();
     };
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
@@ -126,10 +133,6 @@ export const ImporterProvider = ({ children }) => {
         });
     }
 
-    function importFile() {
-        return storage.importFile();
-    }
-
     function updateImportStatus(newStatus) {
         changeNavigationState({ importStatus: newStatus });
         writeImportStatus(pod, newStatus);
@@ -158,17 +161,33 @@ export const ImporterProvider = ({ children }) => {
                 )
                     changeNavigationState({ importStatus: status });
             });
-            refreshFiles();
+            setStorage(new Storage(newPod));
         });
     }, []);
 
+    //on storage change
+    useEffect(() => {
+        refreshFiles();
+    }, [storage]);
+
     //on file change
+    //when files changed run the importer first and create an account model first.
+    //after there is an account the analyses are triggered.
     useEffect(() => {
         if (files[0])
-            analyzeFile(files[0]).then((fileAnalysis) =>
-                setFileAnalysis(fileAnalysis)
+            importData(files[0]).then((newFacebookAccount) =>
+                setFacebookAccount(newFacebookAccount)
             );
     }, [files]);
+
+    // On account changed
+    // When the account changes run the analises
+    useEffect(() => {
+        if (facebookAccount && files)
+            analyzeFile(files[0], facebookAccount).then((fileAnalysis) =>
+                setFileAnalysis(fileAnalysis)
+            );
+    }, [facebookAccount, files]);
 
     //on history change
     useEffect(() => {
@@ -186,9 +205,9 @@ export const ImporterProvider = ({ children }) => {
                 navigationState,
                 changeNavigationState,
                 handleBack,
+                handleImportFile,
                 importSteps,
                 updateImportStatus,
-                importFile,
                 fileAnalysis,
                 refreshFiles,
             }}

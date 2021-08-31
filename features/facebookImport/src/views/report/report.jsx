@@ -5,7 +5,7 @@ import "./report.css";
 
 const ReportCard = ({ analysis }) => {
     return (
-        <div className="analysis-card">
+        <div className="report-card">
             <h1>{analysis.title}</h1>
             <div className="list">{analysis.render()}</div>
         </div>
@@ -20,7 +20,7 @@ const ReportView = () => {
         window.pod.network.httpPost(
             process.env.POLYPOD_POLYPEDIA_REPORT_URL,
             "application/json",
-            JSON.stringify(unrecognizedData.reportAnalyses),
+            JSON.stringify(unrecognizedData.jsonReport),
             process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
         );
     };
@@ -34,15 +34,24 @@ const ReportView = () => {
                 {unrecognizedData.reportAnalyses.map((analysis, index) => (
                     <ReportCard analysis={analysis} key={index} />
                 ))}
+                <ReportCard
+                    analysis={unrecognizedData.inactiveAnalysis}
+                    key={unrecognizedData.reportAnalyses.length + 1}
+                />
             </div>
         );
     }
 
     return (
         <div className="report-view">
-            <h1>Unrecognized data report</h1>
+            <h1 className="report-view-title">Unrecognized data report</h1>
             {renderReportAnalyses()}
-            <button onClick={handleSendReport}>Send report</button>
+            <div className="button-area">
+                {/* <div className={... ? "" : "hidden-message"}>Report sent successfully.</div> */}
+                <button className="send" onClick={handleSendReport}>
+                    Send report
+                </button>
+            </div>
         </div>
     );
 };
