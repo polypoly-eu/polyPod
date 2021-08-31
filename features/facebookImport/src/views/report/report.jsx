@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
+import { sendReport } from "../../model/polypedia-client.js";
 
 import "./report.css";
 
@@ -16,14 +17,7 @@ const ReportView = () => {
     const { fileAnalysis } = useContext(ImporterContext);
     const unrecognizedData = fileAnalysis.unrecognizedData;
 
-    const handleSendReport = () => {
-        window.pod.network.httpPost(
-            process.env.POLYPOD_POLYPEDIA_REPORT_URL,
-            JSON.stringify(unrecognizedData.jsonReport),
-            "application/json",
-            process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
-        );
-    };
+    const handleSendReport = () => sendReport(unrecognizedData.jsonReport);
 
     function renderReportAnalyses() {
         if (!unrecognizedData) {
