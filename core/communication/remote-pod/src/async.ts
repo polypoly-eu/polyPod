@@ -90,11 +90,11 @@ class AsyncNetwork implements Network {
 
     async httpPost(
         url: string,
-        contentType: string,
         body: string,
+        contentType?: string,
         authorization?: string
     ): Promise<void> {
-        return (await this.promise).httpPost(url, contentType, body, authorization);
+        return (await this.promise).httpPost(url, body, contentType, authorization);
     }
 }
 

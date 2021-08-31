@@ -9,8 +9,8 @@ import java.nio.charset.StandardCharsets
 class Network(val context: Context) {
     open suspend fun httpPost(
         serverURL: String,
-        contentType: String,
         body: String,
+        contentType: String?,
         authorization: String?
     ) {
         val url = URL(serverURL)
@@ -25,7 +25,10 @@ class Network(val context: Context) {
             "Content-length",
             encodedBody.size.toString()
         )
-        connection.setRequestProperty("Content-Type", contentType)
+
+        if (contentType != null)
+            connection.setRequestProperty("Content-Type", contentType)
+
         if (encodedAuthorization != null) connection.setRequestProperty(
             "Authorization",
             "Basic $encodedAuthorization"

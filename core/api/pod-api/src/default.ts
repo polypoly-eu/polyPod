@@ -142,7 +142,7 @@ export class DefaultPod implements Pod {
 
     get network(): Network {
         return {
-            httpPost(url: string, contentType: string, body: string, authorization?: string) {
+            httpPost(url: string, body: string, contentType?: string, authorization?: string) {
                 throw new Error("Not implemented");
             },
         };

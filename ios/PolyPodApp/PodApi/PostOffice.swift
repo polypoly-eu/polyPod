@@ -374,9 +374,9 @@ extension PostOffice {
     
     private func handleNetworkHttpPost(args: [Any]) {
         let url = args[0] as! String
-        let contentType = args[1] as! String
-        let body = args[2] as! String
+        let body = args[1] as! String
+        let contentType = args[2] as? String
         let authorization = args[3] as? String
-        PodApi.shared.network.httpPost(url: url, contentType: contentType, body: body, authorization: authorization)
+        PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
     }
 }

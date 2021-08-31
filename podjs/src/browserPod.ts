@@ -184,8 +184,8 @@ class LocalStoragePolyOut implements PolyOut {
 class BrowserNetwork implements Network {
     async httpPost(
         url: string,
-        contentType: string,
         body: string,
+        contentType?: string,
         authorization?: string
     ): Promise<void> {
         const request = new XMLHttpRequest();
@@ -194,7 +194,7 @@ class BrowserNetwork implements Network {
             console.log("network.httpPost: Received response:", this);
         };
         request.open("POST", url);
-        request.setRequestHeader("Content-Type", contentType);
+        if (contentType) request.setRequestHeader("Content-Type", contentType);
         if (authorization)
             request.setRequestHeader(
                 "Authorization",
