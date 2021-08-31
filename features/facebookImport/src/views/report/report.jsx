@@ -5,10 +5,13 @@ import "./report.css";
 
 const ReportCard = ({ analysis }) => {
     return (
-        <div className="report-card">
-            <h1>{analysis.title}</h1>
-            <div className="list">{analysis.render()}</div>
-        </div>
+        <>
+            <div className="report-card">
+                <h1>{analysis.title}</h1>
+                <div className="list">{analysis.render()}</div>
+            </div>
+            <div className="report-card-scrolling"></div>
+        </>
     );
 };
 

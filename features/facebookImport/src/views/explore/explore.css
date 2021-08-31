@@ -45,6 +45,7 @@
     border-radius: 8px;
     background-color: var(--background-light);
     color: var(--text-dark);
+    overflow-x: scroll;
 }
 
 .analysis-card > h1 {
@@ -61,7 +62,11 @@
 }
 
 .analysis-card ul{
-    padding: 0 0 0 20px;
+    padding: 0 20px;
+}
+
+.analysis-card li {
+    margin-right: 20px;
 }
 
 .unrecognized-analysis-card {
