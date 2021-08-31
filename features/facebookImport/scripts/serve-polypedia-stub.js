@@ -13,20 +13,28 @@ async function readPostBody(request) {
     });
 }
 
-const server = http.createServer((req, res) => {
-    readPostBody(req).then((body) => {
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Allow-Headers", "*");
-        res.setHeader("Content-Type", "text/plain");
-        res.statusCode = 200;
-        res.end("OK\n");
+async function sendResponse(response) {
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Headers", "*");
+    response.setHeader("Content-Type", "text/plain");
+    response.statusCode = 200;
+    response.end("OK\n");
+}
 
-        const output = {};
-        output.timestamp = new Date();
-        output.body = body;
-        output.authorization = req.headers?.authorization;
-        console.log(JSON.stringify(output, null, 2));
-    });
+function logRequest(request, body) {
+    if (!body) return;
+    console.log("----- Received request -----");
+    console.log("Timestamp: ", new Date());
+    console.log("Authorizaton: ", request.headers?.authorization);
+    console.log("[body start]");
+    console.log(body);
+    console.log("[body end]\n");
+}
+
+const server = http.createServer(async (request, response) => {
+    const body = await readPostBody(request);
+    await sendResponse(response);
+    logRequest(request, body);
 });
 
 server.listen(8000);
