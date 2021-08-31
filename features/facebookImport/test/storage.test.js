@@ -33,7 +33,7 @@ beforeAll(() => {
 });
 
 describe("Tests file storage", () => {
-    it("Adds and removes a file correctly", () => {
+    it("Adds and removes a file correctly", done => {
         let theseBytes = Buffer.from([]);
         testStream
             .on("data", (data) => {
@@ -44,6 +44,7 @@ describe("Tests file storage", () => {
                 storage
                     .addFile({ data: theseBytes, time: thisDate })
                     .then(() => {
+                        console.log( storage );
                         expect(storage.files.length).toBeGreaterThanOrEqual(1);
                         expect([...storage.files[0].data]).toEqual([
                             ...theseBytes.values(),
@@ -52,6 +53,7 @@ describe("Tests file storage", () => {
                             .removeFile({ id: thisDate.getTime() })
                             .then(() => {
                                 expect(storage.files.length).toBe(0);
+                                done();
                             });
                     });
             });
