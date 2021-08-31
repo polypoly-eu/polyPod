@@ -42,9 +42,9 @@ class ColorExtensionsTest: XCTestCase {
     }
     
     func testIsLight() {
-        XCTAssertTrue(Color.white.isLight)
-        XCTAssertFalse(Color.black.isLight)
-        XCTAssertFalse(Color.red.isLight)
+        XCTAssertTrue(Color(red: 1.0, green: 1.0, blue: 1.0).isLight)
+        XCTAssertFalse(Color(red: 0, green: 0, blue: 0).isLight)
+        XCTAssertFalse(red.isLight)
         XCTAssertTrue(Color(red: 0.9, green: 0.9, blue: 0.9).isLight)
         XCTAssertTrue(Color(red: 0.4, green: 0.4, blue: 0.4).isLight)
         XCTAssertFalse(Color(red: 0.3, green: 0.3, blue: 0.3).isLight)

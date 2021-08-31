@@ -1,96 +1,154 @@
-import { html } from "lit";
-import * as zip from "@zip.js/zip.js";
+import React from "react";
+import { ZipFile } from "../model/storage.js";
+
+import DataBubblesAnalysis from "./analyses/data-points-bubles-analysis.js";
+import DataGroupsAnalysis from "./analyses/data-groups-analysis.js";
+import ConnectedAdvertisersAnalysis from "./analyses/connected-advertisers-analysis.js";
+import InteractedWithAdvertisersAnalysis from "./analyses/interacted-advertisers-analysis.js";
+import AdInterestsAnalysis from "./analyses/ad-interests-analysis.js";
+import OffFacebookEventsAnalysis from "./analyses/off-facebook-events-analysis.js";
+import MessagesAnalysis from "./analyses/messages-analysis.js";
+import SearchesAnalysis from "./analyses/searches-analysis.js";
+import FriendsAnalysis from "./analyses/friends-analysis.js";
+import LikedPagesAnalysis from "./analyses/pages-liked-analysis";
+import FollowedPagesAnalysis from "./analyses/pages-followed-analysis.js";
+import RecommendedPagesAnalysis from "./analyses/pages-recommended-analysis.js";
+import UnfollowedPagesAnalysis from "./analyses/pages-unfollowed-analysis.js";
+import ReceivedFriendRequestsAnalysis from "./analyses/friend-requests-received-analysis.js";
+
+import ReportMetadataAnalysis from "./analyses-report/report-metadata.js";
+import NoDataFoldersAnalysis from "./analyses-report/no-data-folders.js";
+import MissingKnownJSONFilesAnalysis from "./analyses-report/missing-known-json-files.js";
+import UknownJSONFilesAnalysis from "./analyses-report/unknown-json-files.js";
+import MessagesDetailsAnalysis from "./analyses/messages-details-analysis.js";
+import OffFacebookEventsTypesAnalysis from "./analyses/off-facebook-events-types-analysys.js";
+import DataChartsAnalysis from "./analyses/data-points-charts-analysis.js";
+import OffFacebookEventsTypesChartAnalysis from "./analyses/off-facebook-events-types-charts-analysis.js";
+import DataImportingStatusAnalysis from "./analyses-report/importing-status-analysys.js";
+import JsonFilesBubblesAnalysis from "./analyses/json-files-bubbles.js";
+import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.js";
+import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
+import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
 
 const subAnalyses = [
-    class {
-        get title() {
-            return "File ID";
-        }
+    ExportTitleAnalysis,
+    ExportSizeAnalysis,
 
-        parse({ id }) {
-            this.active = true;
-            this._id = id;
-        }
+    DataBubblesAnalysis,
+    DataChartsAnalysis,
+    DataGroupsAnalysis,
+    JsonFilesBubblesAnalysis,
+    ImportedJsonFilesAnalysis,
+    ConnectedAdvertisersAnalysis,
+    InteractedWithAdvertisersAnalysis,
+    AdInterestsAnalysis,
+    OffFacebookEventsAnalysis,
+    OffFacebookEventsTypesChartAnalysis,
+    OffFacebookEventsTypesAnalysis,
+    MessagesAnalysis,
+    MessagesDetailsAnalysis,
+    SearchesAnalysis,
+    FriendsAnalysis,
+    LikedPagesAnalysis,
+    FollowedPagesAnalysis,
+    RecommendedPagesAnalysis,
+    UnfollowedPagesAnalysis,
+    ReceivedFriendRequestsAnalysis,
 
-        render() {
-            return "" + this._id;
-        }
-    },
-    class {
-        get title() {
-            return "File size";
-        }
-
-        parse({ data }) {
-            this.active = true;
-            this._size = data.length;
-        }
-
-        render() {
-            return "" + this._size;
-        }
-    },
-    class {
-        get title() {
-            return "Hexdump of compressed data";
-        }
-
-        parse({ data }) {
-            this.active = !!data.length;
-            if (!this.active) return;
-            this._hex = [...data]
-                .map((i) => i.toString(16).padStart(2, "0"))
-                .join(" ");
-        }
-
-        render() {
-            return html`<code>${this._hex}</code>`;
-        }
-    },
-    class {
-        get title() {
-            return "List of contents";
-        }
-
-        async parse({ reader }) {
-            this.active = !!reader;
-            if (!this.active) return;
-            this._entries = await reader.getEntries();
-        }
-
-        render() {
-            return html`<ul>
-                ${this._entries.map(
-                    (entry) => html`<li>${entry.filename}</li>`
-                )}
-            </ul>`;
-        }
-    },
+    ReportMetadataAnalysis,
+    DataImportingStatusAnalysis,
+    NoDataFoldersAnalysis,
+    UknownJSONFilesAnalysis,
+    MissingKnownJSONFilesAnalysis,
 ];
 
-class UnrecognizedData {
-    get isUnrecognized() {
-        return true;
+class InactiveAnalysis {
+    constructor(inactiveAnalyses) {
+        this._inactiveAnalyses = inactiveAnalyses;
     }
 
-    get report() {
-        return "Data goes here!!!";
+    get title() {
+        return "Inactive Analyses";
+    }
+
+    get id() {
+        return InactiveAnalysis.name;
+    }
+
+    render() {
+        return (
+            <ul>
+                {this._inactiveAnalyses.map((analysis, index) => (
+                    <li key={index}>{analysis.id}</li>
+                ))}
+            </ul>
+        );
     }
 }
 
-export async function analyzeFile(file) {
-    const reader = new zip.ZipReader(new zip.Uint8ArrayReader(file.data));
-    const enrichedFile = { ...file, reader };
-    const parsedAnalyses = await Promise.all(
+class UnrecognizedData {
+    constructor(executedAnalyses) {
+        this._activeReportAnalyses = executedAnalyses.filter(
+            (analysis) => analysis.isForDataReport && analysis.active
+        );
+        this._inactiveAnalyses = executedAnalyses.filter(
+            (analysis) => !analysis.active
+        );
+        this.active =
+            this._activeReportAnalyses.length > 0 ||
+            this._inactiveAnalyses.length > 0;
+    }
+
+    get reportAnalyses() {
+        return this._activeReportAnalyses;
+    }
+
+    get inactiveAnalysis() {
+        return new InactiveAnalysis(this._inactiveAnalyses);
+    }
+
+    get report() {
+        if (!this.active) {
+            return "No data to report!";
+        }
+        return (
+            this._activeReportAnalyses.length +
+            " analyses included in the report"
+        );
+    }
+
+    get jsonReport() {
+        if (!this.active) {
+            return {};
+        }
+        const reportAnalyses = this._activeReportAnalyses.map(
+            (analysis) => analysis.jsonReport
+        );
+        const inactiveAnalysesIds = this._inactiveAnalyses.map(
+            (analysis) => analysis.id
+        );
+
+        return { reportAnalyses, inactiveAnalysesIds };
+    }
+}
+
+export async function analyzeFile(file, facebookAccount) {
+    const zipFile = new ZipFile(file, window.pod);
+    const enrichedData = { ...file, zipFile, facebookAccount };
+    const executedAnalyses = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
             const subAnalysis = new subAnalysisClass();
-            await subAnalysis.parse(enrichedFile);
+            await subAnalysis.analyze(enrichedData);
             return subAnalysis;
         })
     );
-    const activeAnalyses = parsedAnalyses.filter((analysis) => analysis.active);
+
+    const activeGlobalAnalyses = executedAnalyses.filter(
+        (analysis) => !analysis.isForDataReport && analysis.active
+    );
+
     return {
-        analyses: activeAnalyses,
-        unrecognizedData: new UnrecognizedData(),
+        analyses: activeGlobalAnalyses,
+        unrecognizedData: new UnrecognizedData(executedAnalyses),
     };
 }

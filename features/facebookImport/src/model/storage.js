@@ -1,5 +1,3 @@
-import { base64DecToArr, base64EncArr } from "./base64utils";
-const namespace = "http://polypoly.coop/schema/fbImport/";
 export default class Storage {
     constructor(pod) {
         this.changeListener = () => {};
@@ -12,51 +10,74 @@ export default class Storage {
     }
 
     async refreshFiles() {
-        const { dataFactory, polyIn } = await this._pod;
-        const quad = dataFactory.quad(
-            dataFactory.namedNode(`${namespace}zipFiles`),
-            null,
-            null
-        );
-        this._files = [];
-        (await polyIn.select(quad)).forEach((fileQuad) => {
-            const id = fileQuad.predicate.value.slice(
-                `${namespace}file/`.length
-            );
-            const file = {
-                id,
-                data: base64DecToArr(fileQuad.object.value), // guessing here
-            };
-            this._files[id] = file; // This seems to be re-adding the file even if deleted
+        return new Promise((resolve) => {
+            const { polyOut } = this._pod;
+            this._files = [];
+            polyOut.readdir("").then((files) => {
+                for (const file of files) {
+                    try {
+                        this._files[file] = polyOut.stat(file);
+                    } catch (e) {
+                        console.log(e);
+                    }
+                }
+                resolve(files);
+            });
         });
     }
 
-    async addFile(file) {
-        // TODO: Detect / handle duplicate files better
-        const id = file.time.getTime();
-        const { dataFactory, polyIn } = await this._pod;
-        const quad = dataFactory.quad(
-            dataFactory.namedNode(`${namespace}zipFiles`),
-            dataFactory.namedNode(`${namespace}file/${id}`),
-            dataFactory.namedNode(base64EncArr(file.data))
-        );
-
-        await polyIn.add(quad);
-        await this.refreshFiles();
-        this.changeListener();
+    async readFile(path) {
+        const { polyOut } = this._pod;
+        return polyOut.readFile(path);
     }
 
-    async removeFile({ id }) {
-        const { dataFactory, polyIn } = await this._pod;
-        const quad = dataFactory.quad(
-            dataFactory.namedNode(`${namespace}zipFiles`),
-            dataFactory.namedNode(`${namespace}file/${id}`),
-            null
-        );
-        (await polyIn.select(quad)).forEach((fileQuad) => {
-            polyIn.delete(fileQuad);
+    async addFile() {
+        return new Promise((resolve) => {
+            // File is already added by importFile, just refresh
+            this.refreshFiles().then(() => {
+                this.changeListener();
+                resolve();
+            });
         });
-        await this.refreshFiles();
-        this.changeListener();
+    }
+
+    async removeFile(file) {
+        return new Promise((resolve) => {
+            const { polyNav } = this._pod;
+            polyNav
+                .removeFile(file)
+                .then(() => {
+                    this.refreshFiles().then(() => resolve());
+                })
+                .then(() => this.changeListener());
+        });
+    }
+}
+
+export class ZipFile {
+    constructor(file, pod) {
+        this._pod = pod;
+        this._file = file;
+    }
+
+    getEntries() {
+        return new Promise((resolve) => {
+            const { polyOut } = this._pod;
+            polyOut.readdir(this._file.id).then((entries) => resolve(entries));
+        });
+    }
+
+    data() {
+        return new Promise((resolve) => {
+            const { polyOut } = this._pod;
+            polyOut.readFile(this._file.id).then((entries) => resolve(entries));
+        });
+    }
+
+    getContent(entry) {
+        return new Promise((resolve) => {
+            const { polyOut } = this._pod;
+            polyOut.readFile(entry).then((content) => resolve(content));
+        });
     }
 }

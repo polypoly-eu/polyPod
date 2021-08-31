@@ -1,0 +1,75 @@
+.overview {
+    background-color: var(--background-dark);
+    color: var(--color-gray-50);
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    width: 100%;
+    position: absolute;
+    padding: 24px 32px 24px 60px;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+}
+
+.overview h3,
+h4 {
+    font-weight: 600;
+    line-height: 29px;
+    margin: 4px 0px;
+}
+
+.overview h3 {
+    font-size: 20px;
+}
+
+.overview h4 {
+    font-size: 16px;
+}
+
+.overview p {
+    margin: 0px;
+    font-size: 14;
+}
+
+.overview .header .separator {
+    width: 100%;
+    height: 1px;
+    box-sizing: border-box;
+    background-color: var(--color-gray-400);
+    margin: 12px 0px;
+}
+
+.overview .header .gray {
+    color: var(--color-gray-400);
+}
+
+.overview .btn-holder {
+    margin: 16px 0px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.overview .btn-holder .btn {
+    height: 36px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.overview .btn-holder .primary {
+    background-color: var(--color-red-300);
+    color: var(--color-indigo-950);
+    margin-right: 16px;
+}
+
+.overview .btn-holder .secondary {
+    border: 1px solid var(--color-gray-50);
+    box-sizing: border-box;
+    color: var(--color-gray-50);
+}

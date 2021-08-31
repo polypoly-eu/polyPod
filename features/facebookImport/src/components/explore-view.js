@@ -41,21 +41,20 @@ class ExploreView extends LitElement {
         this.dispatchEvent(new CustomEvent("close"));
     }
 
-    _handleReviewReport(report) {
+    _handleReviewReport(unrecognizedData) {
         this.dispatchEvent(
-            new CustomEvent("review-report", { detail: { report } })
+            new CustomEvent("review-report", { detail: { unrecognizedData } })
         );
     }
 
     _renderUnrecognizedCard(unrecognizedData) {
         return html`<div class="analysis-card unrecognized-analysis-card">
-            <h1>Unrecognised Data</h1>
-
+            <h1>Unrecognised and Missing Data</h1>
+            <p>${unrecognizedData.report}</p>
             <button
-                @click="${() =>
-                    this._handleReviewReport(unrecognizedData.report)}"
+                @click="${() => this._handleReviewReport(unrecognizedData)}"
             >
-                Send Report
+                View&Send Report
             </button>
         </div>`;
     }
