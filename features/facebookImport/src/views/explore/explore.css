@@ -9,6 +9,7 @@
     border-top: 1px inset #a9b6c6;
     box-sizing: border-box;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .explore-view .explore-view-title {
@@ -44,7 +45,6 @@
     border-radius: 8px;
     background-color: var(--background-light);
     color: var(--text-dark);
-
 }
 
 .analysis-card > h1 {
@@ -58,6 +58,10 @@
     font-weight: 400;
     color: var(--color-gray-400);
     margin: 0;
+}
+
+.analysis-card ul{
+    padding: 0 0 0 20px;
 }
 
 .unrecognized-analysis-card {
