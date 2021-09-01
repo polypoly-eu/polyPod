@@ -2,6 +2,7 @@ package coop.polypoly.polypod
 
 import coop.polypoly.polypod.bubblewrap.FetchResponseCodec
 import coop.polypoly.polypod.logging.LoggerFactory
+import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyIn.rdf.Matcher
 import coop.polypoly.polypod.polyIn.rdf.Quad
@@ -16,7 +17,8 @@ import org.msgpack.value.ValueFactory
 open class PodApi(
     open val polyOut: PolyOut,
     open val polyIn: PolyIn,
-    open val polyNav: PolyNav
+    open val polyNav: PolyNav,
+    open val network: Network
 ) {
 
     companion object {
@@ -65,6 +67,11 @@ open class PodApi(
                     "openUrl" -> return handlePolyNavOpenUrl(args)
                     "importFile" -> return handlePolyNavImportFile()
                     "removeFile" -> return handlePolyNavRemoveFile(args)
+                }
+            }
+            "network" -> {
+                when (inner) {
+                    "httpPost" -> return handleNetworkHttpPost(args)
                 }
             }
         }
@@ -183,6 +190,16 @@ open class PodApi(
         logger.debug("dispatch() -> polyNav.removeFile")
         val fileId = args[0].asStringValue().toString()
         polyNav.removeFile(fileId)
+        return ValueFactory.newNil()
+    }
+
+    private suspend fun handleNetworkHttpPost(args: List<Value>): Value {
+        logger.debug("dispatch() -> network.httpPost")
+        val url = args[0].asStringValue().toString()
+        val contentType = args[1].asStringValue().toString()
+        val body = args[2].asStringValue().toString()
+        val authorization: String? = args[3]?.asStringValue().toString()
+        network.httpPost(url, contentType, body, authorization)
         return ValueFactory.newNil()
     }
 

@@ -13,6 +13,15 @@ const ProgressBar = ({
             importSections.indexOf(section)
         )
             return <img src={`./images/${section}-done.svg`} />;
+        if (
+            importSections.indexOf(importStatus) ===
+            importSections.indexOf(section)
+        )
+            return (
+                <div className={`number ${section}-number`}>
+                    {importSections.indexOf(importStatus) + 1}
+                </div>
+            );
     }
 
     return (

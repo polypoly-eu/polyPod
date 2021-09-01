@@ -6,6 +6,7 @@ import {
     PolyNav,
     EncodingOptions,
     Matcher,
+    Network,
     Stats,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
@@ -84,6 +85,19 @@ class AsyncPolyNav implements PolyNav {
     }
 }
 
+class AsyncNetwork implements Network {
+    constructor(private readonly promise: Promise<Network>) {}
+
+    async httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<void> {
+        return (await this.promise).httpPost(url, body, contentType, authorization);
+    }
+}
+
 class AsyncPolyLifecycle implements PolyLifecycle {
     constructor(private readonly promise: Promise<PolyLifecycle | undefined>) {}
 
@@ -106,12 +120,14 @@ export class AsyncPod implements Pod {
     readonly polyOut: PolyOut;
     readonly polyIn: PolyIn;
     readonly polyNav: PolyNav;
+    readonly network: Network;
     readonly polyLifecycle: PolyLifecycle;
 
     constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
         this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
         this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
         this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
+        this.network = new AsyncNetwork(promise.then((pod) => pod.network));
         this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
     }
 }
