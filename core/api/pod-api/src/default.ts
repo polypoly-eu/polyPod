@@ -25,8 +25,9 @@ import { EncodingOptions, FS, Stats } from "./fs";
  * 3. a [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) implementation
  *
  * Depending on the platform (Node.js or browser), there are various implementations of these that may be used.
+ * These are found in other core components, such as AsyncPod.
  *
- * This Pod exposes all the underlying implementations to the Feature, which may pose security risks in production
+ * *Note*:  This DefaultPod exposes all the underlying implementations to the Feature, which may pose security risks in production
  * systems, unless the underlying implementations implement their own access control logic.
  */
 export class DefaultPod implements Pod {
