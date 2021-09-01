@@ -39,10 +39,25 @@
     right: 0;
     left: 0;
 }
-
-.report-view .button-area .hidden-message {
-    display: none;
+.report-view  .pop-up {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
+
+.report-view .pop-up .close-icon {
+    background: var(--background-light);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    line-height: 20px;
+    text-align: center;
+    color: var(--text-dark);
+  }
+
+  .report-view .pop-up .unsuccessfully {
+      color: red;
+  }
 
 .report-view .send {
     width: 100%;
