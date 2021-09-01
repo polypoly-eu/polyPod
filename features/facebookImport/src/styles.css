@@ -89,6 +89,13 @@ button:focus {
     background-color: var(--color-red-300);
 }
 
+.btn-highlighted a {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+    margin: 0 !important;
+}
+
 .btn-secondary {
     border: 1px solid var(--color-indigo-950);
     box-sizing: border-box;

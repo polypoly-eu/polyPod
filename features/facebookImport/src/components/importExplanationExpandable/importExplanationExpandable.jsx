@@ -65,7 +65,13 @@ const ImportExplanationExpandable = ({
                     className="btn-highlighted"
                     onClick={() => onUpdateImportStatus(importSteps.download)}
                 >
-                    {i18n.t("import:request.button")}
+                    <a
+                        href="https://www.facebook.com/dyi"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        {i18n.t("import:request.button")}
+                    </a>
                 </button>
             </>
         ),
