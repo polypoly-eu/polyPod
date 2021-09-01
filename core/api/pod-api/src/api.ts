@@ -158,7 +158,7 @@ export interface Network {
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<void>;
+    ): Promise<boolean>;
 }
 
 /**
