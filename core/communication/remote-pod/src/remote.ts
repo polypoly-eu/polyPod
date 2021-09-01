@@ -7,6 +7,7 @@ import {
     EncodingOptions,
     Stats,
     Matcher,
+    Network,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -64,11 +65,21 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     removeFile(fileId: string): ValueEndpointSpec<void>;
 }>;
 
+type NetworkEndpoint = ObjectEndpointSpec<{
+    httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): ValueEndpointSpec<void>;
+}>;
+
 type PodEndpoint = ObjectEndpointSpec<{
     polyIn(): PolyInEndpoint;
     polyOut(): PolyOutEndpoint;
     polyLifecycle(): PolyLifecycleEndpoint;
     polyNav(): PolyNavEndpoint;
+    network(): NetworkEndpoint;
 }>;
 
 class FetchResponse implements Response {
@@ -248,6 +259,13 @@ export class RemoteClientPod implements Pod {
             removeFile: (fileId: string) => this.rpcClient.polyNav().removeFile(fileId)(),
         };
     }
+
+    get network(): Network {
+        return {
+            httpPost: (url: string, body: string, contentType?: string, authorization?: string) =>
+                this.rpcClient.network().httpPost(url, body, contentType, authorization)(),
+        };
+    }
 }
 
 // TODO move to pod-api?
@@ -319,5 +337,9 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
 
     polyNav(): ServerOf<PolyNavEndpoint> {
         return this.pod.polyNav;
+    }
+
+    network(): ServerOf<NetworkEndpoint> {
+        return this.pod.network;
     }
 }

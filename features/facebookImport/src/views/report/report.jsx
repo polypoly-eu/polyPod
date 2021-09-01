@@ -16,10 +16,13 @@ const ReportView = () => {
     const { fileAnalysis } = useContext(ImporterContext);
     const unrecognizedData = fileAnalysis.unrecognizedData;
 
-    //Todo
     const handleSendReport = () => {
-        console.log("ToDo");
-        console.log(unrecognizedData.jsonReport);
+        window.pod.network.httpPost(
+            process.env.POLYPOD_POLYPEDIA_REPORT_URL,
+            JSON.stringify(unrecognizedData.jsonReport),
+            "application/json",
+            process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
+        );
     };
 
     function renderReportAnalyses() {
