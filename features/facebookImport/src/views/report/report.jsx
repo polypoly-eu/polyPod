@@ -19,13 +19,14 @@ const ReportView = () => {
     const { fileAnalysis } = useContext(ImporterContext);
     const unrecognizedData = fileAnalysis.unrecognizedData;
 
-    const handleSendReport = () => {
-        window.pod.network.httpPost(
+    const handleSendReport = async () => {
+        const success = await window.pod.network.httpPost(
             process.env.POLYPOD_POLYPEDIA_REPORT_URL,
             JSON.stringify(unrecognizedData.jsonReport),
             "application/json",
             process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
         );
+        console.log(`Report sent ${success ? "" : "un"}successfully`);
     };
 
     function renderReportAnalyses() {

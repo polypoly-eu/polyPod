@@ -1,18 +1,24 @@
 package coop.polypoly.polypod.network
 
 import android.content.Context
+import coop.polypoly.polypod.logging.LoggerFactory
 import java.io.DataOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
 
 class Network(val context: Context) {
+    companion object {
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+    }
+
     open suspend fun httpPost(
         serverURL: String,
         body: String,
         contentType: String?,
         authorization: String?
-    ) {
+    ): Boolean {
         val url = URL(serverURL)
         val connection = url.openConnection() as HttpURLConnection
         val encodedBody: ByteArray = body.toByteArray(StandardCharsets.UTF_8)
@@ -40,6 +46,12 @@ class Network(val context: Context) {
             outputStream.write(encodedBody)
             outputStream.flush()
         } catch (exception: Exception) {
+            logger.error("network.httpPost failed: $exception")
+            return false
         }
+
+        // TODO: Wait for response and read response code
+
+        return true
     }
 }

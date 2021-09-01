@@ -366,17 +366,18 @@ extension PostOffice {
     private func handleNetwork(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         switch method {
         case "httpPost":
-            handleNetworkHttpPost(args: args)
+            handleNetworkHttpPost(args: args, completionHandler: completionHandler)
         default:
             print("PolyNav method unknown:", method)
         }
     }
     
-    private func handleNetworkHttpPost(args: [Any]) {
+    private func handleNetworkHttpPost(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let url = args[0] as! String
         let body = args[1] as! String
         let contentType = args[2] as? String
         let authorization = args[3] as? String
-        PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
+        let success = PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
+        completionHandler(.bool(success), nil)
     }
 }

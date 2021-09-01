@@ -187,20 +187,38 @@ class BrowserNetwork implements Network {
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<void> {
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function () {
-            if (request.readyState !== XMLHttpRequest.DONE) return;
-            console.log("network.httpPost: Received response:", this);
-        };
-        request.open("POST", url);
-        if (contentType) request.setRequestHeader("Content-Type", contentType);
-        if (authorization)
-            request.setRequestHeader(
-                "Authorization",
-                "Basic " + btoa(authorization)
-            );
-        request.send(body);
+    ): Promise<boolean> {
+        return new Promise((resolve) => {
+            const request = new XMLHttpRequest();
+
+            request.onreadystatechange = function () {
+                if (request.readyState !== XMLHttpRequest.DONE) return;
+                const status = request.status;
+                if (status < 200 || status > 299) {
+                    console.error(
+                        `httpPost: Unexpected response status: ${status}`
+                    );
+                    resolve(false);
+                    return;
+                }
+                resolve(true);
+            };
+
+            request.onerror = function () {
+                console.error("httpPost: Network error");
+                resolve(false);
+            };
+
+            request.open("POST", url);
+            if (contentType)
+                request.setRequestHeader("Content-Type", contentType);
+            if (authorization)
+                request.setRequestHeader(
+                    "Authorization",
+                    "Basic " + btoa(authorization)
+                );
+            request.send(body);
+        });
     }
 }
 
