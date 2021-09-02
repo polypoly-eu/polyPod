@@ -1,9 +1,15 @@
 {
     "name": "Facebook Data Importer",
     "author": "polypoly Cooperative",
-    "description": "Import your data from Facebook",
-    "primaryColor": "#ffffff",
+    "description": "Import and explore the data Facebook keeps about you.",
+    "thumbnail": "images/thumbnail.png",
+    "primaryColor": "#0f1938",
     "links": {
         "data-download": "https://www.facebook.com/dyi"
+    },
+    "translations": {
+        "de": {
+            "author": "polypoly - Die Genossenschaft"
+        }
     }
 }
