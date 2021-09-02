@@ -2,6 +2,8 @@ package coop.polypoly.polypod.network
 
 import android.content.Context
 import coop.polypoly.polypod.logging.LoggerFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.DataOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -14,30 +16,30 @@ class Network(val context: Context) {
     }
 
     open suspend fun httpPost(
-        serverURL: String,
+        url: String,
         body: String,
         contentType: String?,
         authorization: String?
-    ): Boolean {
-        val url = URL(serverURL)
-        val connection = url.openConnection() as HttpURLConnection
-        val encodedBody: ByteArray = body.toByteArray(StandardCharsets.UTF_8)
-        val encodedAuthorization: ByteArray? =
-            authorization?.toByteArray(StandardCharsets.UTF_8)
-
+    ): Boolean = withContext(Dispatchers.IO) {
+        val connection = URL(url).openConnection() as HttpURLConnection
         connection.requestMethod = "POST"
+        connection.doOutput = true
         connection.setRequestProperty("charset", "utf-8")
-        connection.setRequestProperty(
-            "Content-length",
-            encodedBody.size.toString()
-        )
 
         if (contentType != null)
             connection.setRequestProperty("Content-Type", contentType)
 
+        val encodedAuthorization: ByteArray? =
+            authorization?.toByteArray(StandardCharsets.UTF_8)
         if (encodedAuthorization != null) connection.setRequestProperty(
             "Authorization",
             "Basic $encodedAuthorization"
+        )
+
+        val encodedBody: ByteArray = body.toByteArray(StandardCharsets.UTF_8)
+        connection.setRequestProperty(
+            "Content-Length",
+            encodedBody.size.toString()
         )
 
         try {
@@ -47,11 +49,15 @@ class Network(val context: Context) {
             outputStream.flush()
         } catch (exception: Exception) {
             logger.error("network.httpPost failed: $exception")
-            return false
+            return@withContext false
         }
 
-        // TODO: Wait for response and read response code
+        val responseCode = connection.responseCode
+        if (responseCode < 200 || responseCode > 299) {
+            logger.error("network.httpPost: Bad response code: $responseCode")
+            return@withContext false
+        }
 
-        return true
+        return@withContext true
     }
 }

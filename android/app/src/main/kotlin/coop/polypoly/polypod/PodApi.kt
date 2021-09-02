@@ -199,8 +199,8 @@ open class PodApi(
         val contentType = args[1].asStringValue().toString()
         val body = args[2].asStringValue().toString()
         val authorization: String? = args[3]?.asStringValue().toString()
-        network.httpPost(url, contentType, body, authorization)
-        return ValueFactory.newNil()
+        val success = network.httpPost(url, contentType, body, authorization)
+        return ValueFactory.newBoolean(success)
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {
