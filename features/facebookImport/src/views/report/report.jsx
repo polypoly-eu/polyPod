@@ -47,7 +47,6 @@ const ReportView = () => {
         handleClosePopUp();
 
         if (success) setReportSent(true);
-        console.log(`Report sent ${success ? "" : "un"}successfully`);
     };
 
     function renderReportAnalyses() {
