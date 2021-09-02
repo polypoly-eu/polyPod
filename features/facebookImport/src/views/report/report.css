@@ -33,15 +33,37 @@
     background-color: var(--background-dark);
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 20px 28px 32px 28px;
+    padding: 12px 28px 32px 28px;
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
 }
+.report-view  .pop-up {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff5f540;
+    padding: 4px 0;
+}
 
-.report-view .button-area .hidden-message {
-    display: none;
+.report-view  .pop-up .pop-up-message {
+    margin-left: 4px;
+}
+
+.report-view .pop-up .close-icon {
+    background: var(--background-light);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    line-height: 18px;
+    text-align: center;
+    color: var(--text-dark);
+    margin-right: 4px;
+}
+
+.report-view .pop-up .unsuccessfully {
+      color: var(--color-red-300);
 }
 
 .report-view .send {
@@ -61,11 +83,31 @@
 
 .report-view .report-card {
     max-width: var(--max-width);
+    max-height: 440px;
     margin: 0 auto 12px auto;
-    padding: 12px 20px;
+    padding: 12px 20px 20px 20px;
     border-radius: 8px;
     background-color: var(--background-light);
     color: var(--text-dark);
+    overflow: scroll;
+}
+
+.report-view .report-card-scrolling {
+    max-width: var(--max-width);
+    position:relative;
+    margin: auto;
+}
+
+.report-view .report-card-scrolling::after {
+    content: "";
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(#fff5f500 0%, #fff5f5);
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    border-radius: 8px;
+
 }
 
 .report-view .report-card > h1 {
@@ -75,6 +117,7 @@
 
 .report-view .report-card .list ul {
     padding: 0 20px;
+    margin: 0;
 }
 
 .report-view .report-card .list li {

@@ -40,9 +40,9 @@ export default class DataBubblesAnalysis extends RootAnalysis {
                 width={400}
                 height={400}
                 bubbleColor={() => {
-                    return "#fef230";
+                    return "#8f9be7";
                 }}
-                textColor="black"
+                textColor="#0f1938"
             />
         );
     }

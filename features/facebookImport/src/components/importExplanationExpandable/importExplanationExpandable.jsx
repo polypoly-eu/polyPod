@@ -34,13 +34,19 @@ const ImportExplanationExpandable = ({
 
     const expandableRef = useRef();
 
-    const handleScrollToSection = () => {
-        const refPoint = importRefs[importStatus]?.current;
-        if (refPoint)
-            refPoint.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
+    // The scrollIntoView() method is not sopported by Safari and makes an strage scrolling behaviaur. This is temporary commented until we find a solution.
+    // const handleScrollToSection = () => {
+    //     const refPoint = importRefs[importStatus]?.current;
+    //     if (refPoint)
+    //         refPoint.scrollIntoView({
+    //             behavior: "smooth",
+    //             block: "start",
+    //         });
+    // };
+
+    const handleRequestStatus = () => {
+        onUpdateImportStatus(importSteps.download);
+        window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
     };
 
     const bodyContent = {
@@ -63,7 +69,7 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <button
                     className="btn-highlighted"
-                    onClick={() => onUpdateImportStatus(importSteps.download)}
+                    onClick={() => handleRequestStatus()}
                 >
                     {i18n.t("import:request.button")}
                 </button>
@@ -159,7 +165,7 @@ const ImportExplanationExpandable = ({
     return (
         <div
             ref={expandableRef}
-            onLoad={handleScrollToSection}
+            // onLoad={handleScrollToSection}
             className="explanation-expandable"
         >
             <div className="intro">
