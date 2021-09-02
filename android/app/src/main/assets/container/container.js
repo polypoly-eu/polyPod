@@ -47,8 +47,7 @@ function initIframe(iFrame) {
 
 function loadFeature() {
     const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const featureName = urlParams.get("featureName");
+    const featureName = RegExp("[?&]featureName=([^&]*)").exec(queryString)[1];
     console.log(`Loading Feature: "${featureName}"`);
     const iFrame = document.getElementById("harness");
     iFrame.onload = (ev) => initIframe(ev.target);

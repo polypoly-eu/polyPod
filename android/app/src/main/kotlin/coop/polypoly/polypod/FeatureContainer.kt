@@ -188,7 +188,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             )
         )
         view.postWebMessage(
-            WebMessage("", arrayOf(innerPort)), Uri.parse("*")
+            WebMessage("", arrayOf(innerPort)),
+            Uri.parse("https://appassets.androidplatform.net/")
         )
     }
 
