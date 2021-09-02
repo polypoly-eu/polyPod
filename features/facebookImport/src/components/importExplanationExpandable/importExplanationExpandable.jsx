@@ -43,6 +43,11 @@ const ImportExplanationExpandable = ({
             });
     };
 
+    const handleRequestStatus = () => {
+        onUpdateImportStatus(importSteps.download);
+        window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
+    };
+
     const bodyContent = {
         request: (
             <>
@@ -63,15 +68,9 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <button
                     className="btn-highlighted"
-                    onClick={() => onUpdateImportStatus(importSteps.download)}
+                    onClick={() => handleRequestStatus()}
                 >
-                    <a
-                        href="https://www.facebook.com/dyi"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        {i18n.t("import:request.button")}
-                    </a>
+                    {i18n.t("import:request.button")}
                 </button>
             </>
         ),
