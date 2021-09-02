@@ -1,6 +1,7 @@
 package coop.polypoly.polypod.network
 
 import android.content.Context
+import android.util.Base64
 import coop.polypoly.polypod.logging.LoggerFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -29,12 +30,16 @@ class Network(val context: Context) {
         if (contentType != null)
             connection.setRequestProperty("Content-Type", contentType)
 
-        val encodedAuthorization: ByteArray? =
-            authorization?.toByteArray(StandardCharsets.UTF_8)
-        if (encodedAuthorization != null) connection.setRequestProperty(
-            "Authorization",
-            "Basic $encodedAuthorization"
-        )
+        if (authorization != null) {
+            val encodedAuthorization = Base64.encodeToString(
+                authorization.toByteArray(StandardCharsets.UTF_8),
+                Base64.DEFAULT
+            )
+            connection.setRequestProperty(
+                "Authorization",
+                "Basic $encodedAuthorization"
+            )
+        }
 
         val encodedBody: ByteArray = body.toByteArray(StandardCharsets.UTF_8)
         connection.setRequestProperty(
