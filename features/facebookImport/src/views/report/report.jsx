@@ -19,7 +19,9 @@ const PopUpMessage = ({ children, handleClosePopUp }) => {
     return (
         <div className="pop-up">
             <div className="pop-up-message">{children}</div>
-            <div className="close-icon" onClick={handleClosePopUp}>x</div>
+            <div className="close-icon" onClick={handleClosePopUp}>
+                x
+            </div>
         </div>
     );
 };

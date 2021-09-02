@@ -33,7 +33,7 @@
     background-color: var(--background-dark);
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 20px 28px 32px 28px;
+    padding: 12px 28px 32px 28px;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -43,6 +43,12 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    background-color: #fff5f540;
+    padding: 4px 0;
+}
+
+.report-view  .pop-up .pop-up-message {
+    margin-left: 4px;
 }
 
 .report-view .pop-up .close-icon {
@@ -50,14 +56,15 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    line-height: 20px;
+    line-height: 18px;
     text-align: center;
     color: var(--text-dark);
-  }
+    margin-right: 4px;
+}
 
-  .report-view .pop-up .unsuccessfully {
-      color: red;
-  }
+.report-view .pop-up .unsuccessfully {
+      color: var(--color-red-300);
+}
 
 .report-view .send {
     width: 100%;
