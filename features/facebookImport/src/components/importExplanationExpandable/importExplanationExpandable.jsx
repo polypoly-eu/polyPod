@@ -34,14 +34,15 @@ const ImportExplanationExpandable = ({
 
     const expandableRef = useRef();
 
-    const handleScrollToSection = () => {
-        const refPoint = importRefs[importStatus]?.current;
-        if (refPoint)
-            refPoint.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-    };
+    // The scrollIntoView() method is not sopported by Safari and makes an strage scrolling behaviaur. This is temporary commented until we find a solution.
+    // const handleScrollToSection = () => {
+    //     const refPoint = importRefs[importStatus]?.current;
+    //     if (refPoint)
+    //         refPoint.scrollIntoView({
+    //             behavior: "smooth",
+    //             block: "start",
+    //         });
+    // };
 
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
@@ -164,7 +165,7 @@ const ImportExplanationExpandable = ({
     return (
         <div
             ref={expandableRef}
-            onLoad={handleScrollToSection}
+            // onLoad={handleScrollToSection}
             className="explanation-expandable"
         >
             <div className="intro">
