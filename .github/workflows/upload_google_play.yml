@@ -26,8 +26,8 @@ jobs:
       - name: Build core and features
         run: ./build.js
         env:
-            POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.NOT_A_NAME }}
-            POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.ROT_A_SECRET }}
+            POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
+            POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
       - name: Lint core and features
         run: ./build.js lint
       - name: Test core and features
