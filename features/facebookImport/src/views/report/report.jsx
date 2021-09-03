@@ -31,6 +31,7 @@ const ReportView = () => {
     const unrecognizedData = fileAnalysis.unrecognizedData;
     const [reportSent, setReportSent] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [error, setError] = useState();
 
     const handleClosePopUp = () => {
         setIsOpen(!isOpen);
@@ -47,16 +48,9 @@ const ReportView = () => {
         handleClosePopUp();
 
         if (error) {
-            // TODO: Show this in the UI instead
-            console.error(`\
-Error while sending report
-
-Message: ${error}
-URL: ${process.env.POLYPOD_POLYPEDIA_REPORT_URL}
-`);
+            setError(error);
             return;
         }
-
         setReportSent(true);
     };
 
@@ -84,9 +78,18 @@ URL: ${process.env.POLYPOD_POLYPEDIA_REPORT_URL}
             <div className="button-area">
                 {isOpen && (
                     <PopUpMessage handleClosePopUp={handleClosePopUp}>
-                        <div className={reportSent ? "" : "unsuccessfully"}>
-                            Report sent {reportSent ? "" : "un"}successfully
-                        </div>
+                        {reportSent ? (
+                            "Report sent successfully"
+                        ) : (
+                            <div>
+                                <span className="unsuccessfully">
+                                    Error while sending report.
+                                </span>
+                                <br />
+                                Message: {error} <br />
+                                URL: {process.env.POLYPOD_POLYPEDIA_REPORT_URL}
+                            </div>
+                        )}
                     </PopUpMessage>
                 )}
                 <button className="send" onClick={handleSendReport}>
