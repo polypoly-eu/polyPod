@@ -21,7 +21,7 @@ class Network(val context: Context) {
         body: String,
         contentType: String?,
         authorization: String?
-    ): Boolean = withContext(Dispatchers.IO) {
+    ): String? = withContext(Dispatchers.IO) {
         val connection = URL(url).openConnection() as HttpURLConnection
         connection.requestMethod = "POST"
         connection.doOutput = true
@@ -54,15 +54,16 @@ class Network(val context: Context) {
             outputStream.flush()
         } catch (exception: Exception) {
             logger.error("network.httpPost failed: $exception")
-            return@withContext false
+            return@withContext exception.toString()
         }
 
         val responseCode = connection.responseCode
         if (responseCode < 200 || responseCode > 299) {
-            logger.error("network.httpPost: Bad response code: $responseCode")
-            return@withContext false
+            val message = "Bad response code: $responseCode"
+            logger.error("network.httpPost failed: $message")
+            return@withContext message
         }
 
-        return@withContext true
+        return@withContext null
     }
 }

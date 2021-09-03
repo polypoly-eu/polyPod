@@ -37,7 +37,7 @@ const ReportView = () => {
     };
 
     const handleSendReport = async () => {
-        const success = await window.pod.network.httpPost(
+        const error = await window.pod.network.httpPost(
             process.env.POLYPOD_POLYPEDIA_REPORT_URL,
             JSON.stringify(unrecognizedData.jsonReport),
             "application/json",
@@ -46,7 +46,18 @@ const ReportView = () => {
 
         handleClosePopUp();
 
-        if (success) setReportSent(true);
+        if (error) {
+            // TODO: Show this in the UI instead
+            console.error(`\
+Error while sending report
+
+Message: ${error}
+URL: ${process.env.POLYPOD_POLYPEDIA_REPORT_URL}
+`);
+            return;
+        }
+
+        setReportSent(true);
     };
 
     function renderReportAnalyses() {

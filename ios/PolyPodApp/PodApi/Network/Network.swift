@@ -6,7 +6,7 @@ protocol NetworkProtocol {
         body: String,
         contentType: String?,
         authorization: String?
-    ) -> Bool
+    ) -> String?
 }
 
 class Network: NetworkProtocol {
@@ -15,7 +15,7 @@ class Network: NetworkProtocol {
         body: String,
         contentType: String?,
         authorization: String?
-    ) -> Bool {
+    ) -> String? {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "POST"
         request.httpBody = body.data(using: .utf8)
@@ -33,27 +33,30 @@ class Network: NetworkProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        var success = false
+        var errorMessage: String? = nil
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
                   error == nil else {
-                print("error", error ?? "httpPost: Unknown error")
+                errorMessage = error?.localizedDescription ?? "Unknown error"
                 semaphore.signal()
                 return
             }
             
             guard (200 ... 299) ~= response.statusCode else {
-                print("Non-OK status code: \(response.statusCode)")
+                errorMessage = "Bad response code: \(response.statusCode)"
                 semaphore.signal()
                 return
             }
             
-            success = true
             semaphore.signal()
         }
         task.resume()
         semaphore.wait()
-        return success
+        
+        if let errorMessage = errorMessage {
+            print("network.httpPost failed: \(errorMessage)")
+        }
+        return errorMessage
     }
 }

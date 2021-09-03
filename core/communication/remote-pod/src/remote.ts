@@ -71,7 +71,7 @@ type NetworkEndpoint = ObjectEndpointSpec<{
         body: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<boolean>;
+    ): ValueEndpointSpec<string | undefined>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
