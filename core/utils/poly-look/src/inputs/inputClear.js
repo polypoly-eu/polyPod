@@ -8,7 +8,7 @@ import clearSearchLight from "../static/images/icons/clear-search-light.svg";
 
 const listOfValidTypes = Object.values(polyInput.types);
 
-const validateInputTypes = type => listOfValidTypes.includes(type);
+const validateInputTypes = (type) => listOfValidTypes.includes(type);
 
 export class InputClear extends LitElement {
   static get styles() {

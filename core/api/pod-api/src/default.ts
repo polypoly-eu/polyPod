@@ -9,7 +9,7 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
-import { Pod, PolyIn, PolyOut, PolyNav } from "./api";
+import { Pod, PolyIn, PolyOut, PolyNav, Network } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
 
@@ -136,7 +136,21 @@ export class DefaultPod implements Pod {
             setTitle: async (title: string) => {
                 throw new Error("Not implemented");
             },
-            pickFile: async () => {
+            importFile: async () => {
+                throw new Error("Not implemented");
+            },
+            removeFile: async (fileId: string) => {
+                throw new Error("Not implemented");
+            },
+        };
+    }
+    /**
+     * The [[Network]] interface. See [[Network]] for the description.
+     */
+
+    get network(): Network {
+        return {
+            httpPost(url: string, body: string, contentType?: string, authorization?: string) {
                 throw new Error("Not implemented");
             },
         };

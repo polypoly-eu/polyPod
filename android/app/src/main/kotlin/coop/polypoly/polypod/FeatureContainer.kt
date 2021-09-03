@@ -24,11 +24,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.logging.LoggerFactory
+import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
+import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
-import eu.polypoly.pod.android.polyOut.PolyOut
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -42,11 +43,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     private val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
     val api = PodApi(
-        PolyOut(),
+        PolyOut(context),
         PolyIn(context, context.filesDir),
         PolyNav(
-            webView = webView
-        )
+            webView = webView, context = context
+        ),
+        Network(context)
     )
 
     var feature: Feature? = null

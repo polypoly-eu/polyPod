@@ -3,7 +3,7 @@ import "../../src/buttons";
 import { polyButton } from "../../src/constants";
 
 describe("Button", () => {
-  it(`should throw an exception if the size value isn't valid`, done => {
+  it(`should throw an exception if the size value isn't valid`, (done) => {
     const type = "dark";
     const disabled = false;
     const size = "test value";
@@ -16,7 +16,7 @@ describe("Button", () => {
       .then(() => {
         done.fail("It should fail");
       })
-      .catch(error => {
+      .catch((error) => {
         expect(error.message).to.be.equal(
           "Wrong value in size property. Supported values are: big, medium, small and round"
         );
@@ -24,7 +24,7 @@ describe("Button", () => {
       });
   });
 
-  it(`should throw an exception if the type value isn't valid`, done => {
+  it(`should throw an exception if the type value isn't valid`, (done) => {
     const type = "test value";
     const disabled = false;
     const size = "small";
@@ -37,7 +37,7 @@ describe("Button", () => {
       .then(() => {
         done.fail("It should fail");
       })
-      .catch(error => {
+      .catch((error) => {
         expect(error.message).to.be.equal(
           "Wrong value in type property. Supported values are: dark and light"
         );
@@ -45,9 +45,9 @@ describe("Button", () => {
       });
   });
 
-  it(`should configure a button with the default values if there is not any input parameter`, done => {
+  it(`should configure a button with the default values if there is not any input parameter`, (done) => {
     fixture(html`<poly-button>Example</poly-button>`)
-      .then(el => {
+      .then((el) => {
         expect(el.type).to.be.equal(polyButton.types.DARK);
         expect(el.size).to.be.equal(polyButton.sizes.MEDIUM);
         expect(el.disabled).to.be.false;
@@ -58,7 +58,7 @@ describe("Button", () => {
       });
   });
 
-  it(`should update the configuration parameters if their values are valid`, done => {
+  it(`should update the configuration parameters if their values are valid`, (done) => {
     const type = "light";
     const disabled = true;
     const size = "small";
@@ -68,7 +68,7 @@ describe("Button", () => {
         Example
       </poly-button>
     `)
-      .then(el => {
+      .then((el) => {
         expect(el.type).to.be.equal(type);
         expect(el.size).to.be.equal(size);
         expect(el.disabled).to.be.true;

@@ -2,7 +2,7 @@ import { expect, oneEvent } from "@open-wc/testing";
 import "../../src/tabs";
 
 describe("Tab", () => {
-  it(`should throw an exception if the content of the tab is different than a single tag of <poly-tab-content>`, done => {
+  it(`should throw an exception if the content of the tab is different than a single tag of <poly-tab-content>`, (done) => {
     const innerContent = document.createElement("div");
     const innerText = document.createTextNode("This is a test");
     const tabComponent = document.createElement(`poly-tab`);

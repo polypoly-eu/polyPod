@@ -19,12 +19,21 @@ class ImportView extends LitElement {
     }
 
     async _handleImport() {
+<<<<<<< HEAD
         const file = await this.pod.polyNav.pickFile();
         if (!file) return;
 
         this.dispatchEvent(
             new CustomEvent("add-file", {
                 detail: { time: new Date(), data: file },
+=======
+        const importResult = await this.pod.polyNav.importFile();
+        if (!importResult) return;
+
+        this.dispatchEvent(
+            new CustomEvent("add-file", {
+                detail: { time: new Date(), file: importResult },
+>>>>>>> main
             })
         );
         this._handleBack();

@@ -135,11 +135,30 @@ export interface PolyNav {
      */
     setTitle(title: string): Promise<void>;
     /**
-     * Ask the user to pick a file and load it
+     * Ask the user to pick a file and import it
      *
-     * @return a byte array containing the file the user selected, or `null` if none was selected.
+     * @return an ID of an imported file.
      */
-    pickFile(): Promise<Uint8Array | null>;
+    importFile(): Promise<string>;
+    /**
+     * Remove a previously imported file
+     */
+    removeFile(fileId: string): Promise<void>;
+}
+
+/**
+ * `Network` specifies how features can communicate with other devices or servers.
+ */
+export interface Network {
+    /**
+     * A way for features to send HTTP POST requests
+     */
+    httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<boolean>;
 }
 
 /**
@@ -218,6 +237,12 @@ export interface Pod {
      * `polyNav` is the interface to interact the container. Refer to [[PolyNav]] for its definition.
      */
     readonly polyNav: PolyNav;
+
+    /**
+     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
+     * definition.
+     */
+    readonly network: Network;
 
     /**
      * @hidden

@@ -1,9 +1,18 @@
 "use strict";
 
 const fs = require("fs");
+const fsPromises = require("fs/promises");
 const path = require("path");
 const { spawn } = require("child_process");
-const validCommands = ["build", "test", "lint", "lintfix", "list", "list-deps"];
+const validCommands = [
+    "build",
+    "clean",
+    "test",
+    "lint",
+    "lintfix",
+    "list",
+    "list-deps",
+];
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
@@ -120,15 +129,28 @@ async function npmInstall(name) {
 }
 
 async function npmRun(script, pkg) {
-    if (!pkg.scripts.includes(script)) return;
+    if (!pkg.scripts.includes(script)) return false;
 
     logDetail(`${pkg.name}: Executing ${script} script ...`);
     await npm("run", script);
+    return true;
+}
+
+async function cleanPackage(pkg) {
+    if (await npmRun("clean", pkg)) return;
+
+    // Just so that we don't have to add a 'clean' script to every single
+    // package, we cover the conventional case as a fallback - but it's
+    // arguably a bit dangerous.
+    logDetail(`${pkg.name}: Executing fallback clean logic ...`);
+    for (let path of ["node_modules", "dist", "build"])
+        await fsPromises.rm(path, { recursive: true, force: true });
 }
 
 const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
     test: (pkg) => npmRun("test", pkg),
+    clean: (pkg) => cleanPackage(pkg),
 };
 
 async function executeCommand(pkg, command) {

@@ -1,9 +1,9 @@
 import UIKit
 
 class FilePicker: NSObject, UIDocumentPickerDelegate {
-    private var currentCompletion: ((Data?) -> Void)?
+    private var currentCompletion: ((URL?) -> Void)?
     
-    func pick(completion: @escaping (Data?) -> Void) {
+    func pick(completion: @escaping (URL?) -> Void) {
         if currentCompletion != nil {
             completion(nil)
             return
@@ -29,19 +29,17 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         _ controller: UIDocumentPickerViewController,
         didPickDocumentsAt urls: [URL]
     ) {
-        let url = urls.first!
-        let contents = try? Data(contentsOf: url)
-        complete(contents)
+        complete(url: urls.first!)
     }
     
     func documentPickerWasCancelled(
         _ controller: UIDocumentPickerViewController
     ) {
-        complete(nil)
+        complete(url: nil)
     }
     
-    private func complete(_ data: Data?) {
-        currentCompletion?(data)
+    private func complete(url: URL?) {
+        currentCompletion?(url)
         currentCompletion = nil
     }
 }

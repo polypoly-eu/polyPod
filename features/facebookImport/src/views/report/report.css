@@ -1,0 +1,126 @@
+.report-view {
+    color: var(--color-gray-50);
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 24px 24px 132px 24px;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    overflow: hidden scroll;
+}
+
+.report-view .report-view-title {
+    text-align: center;
+    font-weight: 500;
+    margin: 8px 0 20px 0;
+    font-size: 24px;
+}
+
+.report-view .button-area::before {
+    content: "";
+    height: 60px;
+    position: absolute;
+    top: -60px;
+    right: 0;
+    left: 0;
+    background: linear-gradient(#0f193800 0%, #0f1938);
+}
+
+.report-view .button-area {
+    display: block;
+    background-color: var(--background-dark);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 12px 28px 32px 28px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.report-view  .pop-up {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff5f540;
+    padding: 4px 0;
+}
+
+.report-view  .pop-up .pop-up-message {
+    margin-left: 4px;
+}
+
+.report-view .pop-up .close-icon {
+    background: var(--background-light);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    line-height: 18px;
+    text-align: center;
+    color: var(--text-dark);
+    margin-right: 4px;
+}
+
+.report-view .pop-up .unsuccessfully {
+      color: var(--color-red-300);
+}
+
+.report-view .send {
+    width: 100%;
+    height: 51px;
+    background-color: var(--color-red-300);
+    color: var(--text-dark);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+.report-view .report-card:first-child {
+    margin-top: 20px;
+}
+
+.report-view .report-card {
+    max-width: var(--max-width);
+    max-height: 440px;
+    margin: 0 auto 12px auto;
+    padding: 12px 20px 20px 20px;
+    border-radius: 8px;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    overflow: scroll;
+}
+
+.report-view .report-card-scrolling {
+    max-width: var(--max-width);
+    position:relative;
+    margin: auto;
+}
+
+.report-view .report-card-scrolling::after {
+    content: "";
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(#fff5f500 0%, #fff5f5);
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    border-radius: 8px;
+
+}
+
+.report-view .report-card > h1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.report-view .report-card .list ul {
+    padding: 0 20px;
+    margin: 0;
+}
+
+.report-view .report-card .list li {
+    text-align: justify;
+    text-justify: distribute-all-lines;
+}

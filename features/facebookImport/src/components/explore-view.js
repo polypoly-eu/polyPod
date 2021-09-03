@@ -1,10 +1,15 @@
 import { LitElement, html, css } from "lit";
+<<<<<<< HEAD
 import FacebookChecks from "../model/facebook-checks.js";
 import * as zip from "@zip.js/zip.js";
+=======
+import { analyzeFile } from "../model/analysis.js";
+>>>>>>> main
 
 class ExploreView extends LitElement {
     static get styles() {
         return css`
+<<<<<<< HEAD
             table {
                 margin-top: 10px;
             }
@@ -16,6 +21,25 @@ class ExploreView extends LitElement {
 
             .code {
                 font-family: monospace;
+=======
+            .analysis-card:first-child {
+                margin-top: 20px;
+            }
+
+            .analysis-card {
+                margin: 0 8px 8px 8px;
+                padding: 4px;
+                border: 1px solid black;
+                border-radius: 8px;
+            }
+
+            .analysis-card > h1 {
+                font-size: 16px;
+            }
+
+            .unrecognized-analysis-card {
+                border-color: red;
+>>>>>>> main
             }
         `;
     }
@@ -23,6 +47,7 @@ class ExploreView extends LitElement {
     static get properties() {
         return {
             file: {},
+<<<<<<< HEAD
             _analysis: { state: true },
         };
     }
@@ -42,18 +67,26 @@ class ExploreView extends LitElement {
             fileSize: data.length,
             hex,
             entries,
+=======
+            _fileAnalysis: { state: true },
+>>>>>>> main
         };
     }
 
     async updated(updatedProperties) {
         if (updatedProperties.has("file"))
+<<<<<<< HEAD
             this._analysis = await this._analyzeFile(this.file);
+=======
+            this._fileAnalysis = await analyzeFile(this.file);
+>>>>>>> main
     }
 
     _handleBack() {
         this.dispatchEvent(new CustomEvent("close"));
     }
 
+<<<<<<< HEAD
     _renderFileAnalysis() {
         if (!this._analysis) return html`<p>Error: No file found</p>`;
         return html`
@@ -80,13 +113,52 @@ class ExploreView extends LitElement {
                 </tr>
             </table>
         `;
+=======
+    _handleReviewReport(unrecognizedData) {
+        this.dispatchEvent(
+            new CustomEvent("review-report", { detail: { unrecognizedData } })
+        );
+    }
+
+    _renderUnrecognizedCard(unrecognizedData) {
+        return html`<div class="analysis-card unrecognized-analysis-card">
+            <h1>Unrecognised and Missing Data</h1>
+            <p>${unrecognizedData.report}</p>
+            <button
+                @click="${() => this._handleReviewReport(unrecognizedData)}"
+            >
+                View&Send Report
+            </button>
+        </div>`;
+    }
+
+    _renderAnalysisCard(analysis) {
+        return html`<div class="analysis-card">
+            <h1>${analysis.title}</h1>
+            <p>${analysis.render()}</p>
+        </div>`;
+    }
+
+    _renderFileAnalyses() {
+        if (!this._fileAnalysis) {
+            return "";
+        }
+        return html`<div>
+            ${this._renderUnrecognizedCard(this._fileAnalysis.unrecognizedData)}
+            ${this._fileAnalysis.analyses.map(this._renderAnalysisCard)}
+        </div>`;
+>>>>>>> main
     }
 
     render() {
         return html`
             <h1>Explore your data</h1>
             <button @click="${this._handleBack}">Back</button>
+<<<<<<< HEAD
             ${this._renderFileAnalysis()}
+=======
+            ${this._renderFileAnalyses()}
+>>>>>>> main
         `;
     }
 }

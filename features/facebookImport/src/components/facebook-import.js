@@ -3,6 +3,10 @@ import { LitElement, html } from "lit";
 import Storage from "../model/storage.js";
 import "./explore-view";
 import "./import-view";
+<<<<<<< HEAD
+=======
+import "./report-view";
+>>>>>>> main
 import "./overview-view";
 
 class FacebookImport extends LitElement {
@@ -28,8 +32,17 @@ class FacebookImport extends LitElement {
         });
         this._storage = new Storage(podInitializer);
         this._files = [];
+<<<<<<< HEAD
         this._storage.changeListener = () => {
             this._files = Object.values(this._storage.files);
+=======
+        this._storage.changeListener = async () => {
+            const resolvedFiles = [];
+            for (const file of this._storage.files) {
+                resolvedFiles.push(await file);
+            }
+            this._files = Object.values(resolvedFiles);
+>>>>>>> main
         };
     }
 
@@ -53,10 +66,22 @@ class FacebookImport extends LitElement {
         ></import-view>`;
     }
 
+<<<<<<< HEAD
+=======
+    _handleReviewReport({ detail }) {
+        this._unrecognizedData = detail.unrecognizedData;
+        this._currentView = "report";
+    }
+
+>>>>>>> main
     _renderExplore() {
         return html`<explore-view
             .file="${this._selectedFile}"
             @close="${this._handleClose}"
+<<<<<<< HEAD
+=======
+            @review-report="${this._handleReviewReport}"
+>>>>>>> main
         ></explore-view>`;
     }
 
@@ -65,6 +90,7 @@ class FacebookImport extends LitElement {
     }
 
     _handleRemoveFile(event) {
+<<<<<<< HEAD
         this._storage.removeFile(event.detail);
     }
 
@@ -74,6 +100,28 @@ class FacebookImport extends LitElement {
         this._currentView = "explore";
     }
 
+=======
+        this._storage.removeFile(event.detail.file.id);
+    }
+
+    async _handleExploreFile(event) {
+        this._selectedFile = event.detail.file;
+        this._currentView = "explore";
+    }
+
+    _handleCloseReport() {
+        this._currentView = "explore";
+    }
+
+    _renderReport() {
+        return html` <report-view
+            .pod="${this._pod}"
+            .unrecognizedData="${this._unrecognizedData}"
+            @close="${this._handleCloseReport}"
+        ></overview-view>`;
+    }
+
+>>>>>>> main
     _renderOverview() {
         return html` <overview-view
             .pod="${this._pod}"
@@ -88,6 +136,10 @@ class FacebookImport extends LitElement {
         if (!this._pod) return this._renderSplash();
         if (this._currentView === "import") return this._renderImport();
         if (this._currentView === "explore") return this._renderExplore();
+<<<<<<< HEAD
+=======
+        if (this._currentView === "report") return this._renderReport();
+>>>>>>> main
         return this._renderOverview();
     }
 }

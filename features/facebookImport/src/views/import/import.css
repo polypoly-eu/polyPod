@@ -1,0 +1,10 @@
+.import-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: var(--background-light);
+    border-radius: 12px 12px 0px 0px;
+    box-sizing: border-box;
+}

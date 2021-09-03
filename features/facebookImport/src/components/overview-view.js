@@ -12,18 +12,32 @@ class OverviewView extends LitElement {
         this.dispatchEvent(new CustomEvent("import-file"));
     }
 
+<<<<<<< HEAD
     _removeFile(id) {
         this.dispatchEvent(
             new CustomEvent("remove-file", {
                 detail: { id },
+=======
+    _removeFile(file) {
+        this.dispatchEvent(
+            new CustomEvent("remove-file", {
+                detail: { file },
+>>>>>>> main
             })
         );
     }
 
+<<<<<<< HEAD
     _exploreFile(id) {
         this.dispatchEvent(
             new CustomEvent("explore-file", {
                 detail: { id },
+=======
+    _exploreFile(file) {
+        this.dispatchEvent(
+            new CustomEvent("explore-file", {
+                detail: { file },
+>>>>>>> main
             })
         );
     }
@@ -35,6 +49,7 @@ class OverviewView extends LitElement {
                     (file) =>
                         html`<li>
                             <span>
+<<<<<<< HEAD
                                 ID: ${file.id}. Imported: ${file.time}. Size:
                                 ${file.data.length} bytes
                             </span>
@@ -44,6 +59,15 @@ class OverviewView extends LitElement {
                             <button
                                 @click="${() => this._exploreFile(file.id)}"
                             >
+=======
+                                ID: ${file.name}. Imported: ${file.time}. Size:
+                                ${file.size} bytes
+                            </span>
+                            <button @click="${() => this._removeFile(file)}">
+                                Remove
+                            </button>
+                            <button @click="${() => this._exploreFile(file)}">
+>>>>>>> main
                                 Explore
                             </button>
                         </li>`
