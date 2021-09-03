@@ -92,7 +92,7 @@ extension PolyOut {
                 var entries = [String]()
                 if let enumerator = FileManager.default.enumerator(at: targetUrl, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
                     for case let fileURL as URL in enumerator {
-                        let filePath = fileURL.absoluteString.replacingOccurrences(of: targetUrl.absoluteString, with: dir)
+                        let filePath = fileURL.resolvingSymlinksInPath().absoluteString.replacingOccurrences(of: targetUrl.absoluteString, with: dir)
                         entries.append(filePath)
                     }
                 }
