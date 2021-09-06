@@ -118,6 +118,17 @@ export class PodSpec {
 
                 it("readdir", async () => {
                     assert.isFulfilled(polyOut.readdir(this.path));
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
+                            await skipIfExists(path);
+
+                            await polyOut.writeFile(path, content, { encoding: "utf-8" });
+                            const filesWithPath = (await polyOut.readdir(this.path)).map(
+                                (path) => this.path + "/" + path
+                            );
+                            assert.include(filesWithPath, path);
+                        })
+                    );
                 });
 
                 it("stat/read", async () => {
