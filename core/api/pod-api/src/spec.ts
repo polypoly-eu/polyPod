@@ -69,11 +69,9 @@ export class PodSpec {
                     fc.asyncProperty(fc.array(triple), async (quads) => {
                         await polyIn.add(...quads);
                         for (const quad of quads) {
-                            const selected = await polyIn.select(quad);
+                            const selected = await polyIn.match(quad);
                             assert.lengthOf(selected, 1);
                             assert.ok(quad.equals(selected[0]));
-                            const selectedAgain = await polyIn.match(quad);
-                            assert.ok(selected[0].equals(selectedAgain[0]));
                             assert.ok(await polyIn.has(quad));
                         }
                     })
