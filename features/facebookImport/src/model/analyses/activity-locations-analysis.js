@@ -45,6 +45,10 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
                 log-out.
                 <table>
                     <tbody>
+                        <tr>
+                            <th>Location</th>
+                            <th>Activities count</th>
+                        </tr>
                         {this._locationsData.map(({ title, count }, index) => (
                             <tr key={index}>
                                 <td>{title}</td>
