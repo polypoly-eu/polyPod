@@ -8,7 +8,7 @@ const AnalysisCard = ({ analysis }) => {
     return (
         <div className="analysis-card">
             <h1>{analysis.title}</h1>
-            <p>{analysis.render()}</p>
+            <div>{analysis.render()}</div>
         </div>
     );
 };
@@ -16,10 +16,13 @@ const AnalysisCard = ({ analysis }) => {
 const UnrecognizedCard = ({ unrecognizedData }) => {
     return (
         <div className="analysis-card unrecognized-analysis-card">
-            <h1>Unrecognised and Missing Data</h1>
+            <div className="unrecognized-analysis-title">
+                <div className="alert-fake-icon">!</div>
+                <h1>Unrecognised and Missing Data</h1>
+            </div>
             <p>{unrecognizedData.report}</p>
             <RouteButton route="/report" className="report-button">
-                View&Send Report
+                View and send report
             </RouteButton>
         </div>
     );
@@ -30,7 +33,16 @@ const ExploreView = () => {
 
     const renderFileAnalyses = () => {
         if (!fileAnalysis) {
-            return "";
+            return (
+                <div>
+                    <p>Analyzing your data ...</p>
+                    <p>
+                        If this takes more than a few seconds - or for large
+                        data sets maybe minutes - please report this as an issue
+                        - there was likely an error.
+                    </p>
+                </div>
+            );
         }
         return (
             <div>
@@ -46,7 +58,7 @@ const ExploreView = () => {
 
     return (
         <div className="explore-view">
-            <h1>Explore your data</h1>
+            <h1 className="explore-view-title">Explore your data</h1>
             {renderFileAnalyses()}
         </div>
     );

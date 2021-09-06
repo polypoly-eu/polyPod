@@ -1,6 +1,7 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     Matcher,
+    Network,
     Pod,
     PolyIn,
     PolyOut,
@@ -180,6 +181,43 @@ class LocalStoragePolyOut implements PolyOut {
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
+class BrowserNetwork implements Network {
+    async httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<string | undefined> {
+        return new Promise((resolve) => {
+            const request = new XMLHttpRequest();
+
+            request.onreadystatechange = function () {
+                if (request.readyState !== XMLHttpRequest.DONE) return;
+                const status = request.status;
+                if (status < 200 || status > 299) {
+                    resolve(`Unexpected response status: ${status}`);
+                    return;
+                }
+                resolve();
+            };
+
+            request.onerror = function () {
+                resolve("Network error");
+            };
+
+            request.open("POST", url);
+            if (contentType)
+                request.setRequestHeader("Content-Type", contentType);
+            if (authorization)
+                request.setRequestHeader(
+                    "Authorization",
+                    "Basic " + btoa(authorization)
+                );
+            request.send(body);
+        });
+    }
+}
+
 function createUUID(): string {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
         /[xy]/g,
@@ -292,4 +330,5 @@ export class BrowserPod implements Pod {
     public readonly polyIn = new LocalStoragePolyIn();
     public readonly polyOut = new LocalStoragePolyOut();
     public readonly polyNav = new BrowserPolyNav();
+    public readonly network = new BrowserNetwork();
 }
