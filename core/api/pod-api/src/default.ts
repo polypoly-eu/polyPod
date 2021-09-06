@@ -22,7 +22,7 @@ import { EncodingOptions, FS, Stats } from "./fs";
  *
  * 1. an [RDFJS dataset](https://rdf.js.org/dataset-spec/)
  * 2. a file system that adheres to the [async FS interface of Node.js](https://nodejs.org/api/fs.html)
- * 3. a [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) implementation
+ * 3. a [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) implementation. This feature is deprecated and will be eliminated in the near future.
  *
  * Depending on the platform (Node.js or browser), there are various implementations of these that may be used.
  * These are found in other core components, such as AsyncPod.
