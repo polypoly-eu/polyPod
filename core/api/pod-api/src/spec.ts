@@ -116,6 +116,10 @@ export class PodSpec {
                     );
                 });
 
+                it("readdir", async () => {
+                    assert.isFulfilled(polyOut.readdir(this.path));
+                });
+
                 it("stat/read", async () => {
                     await fc.assert(
                         fc.asyncProperty(pathGen, async (path) => {
