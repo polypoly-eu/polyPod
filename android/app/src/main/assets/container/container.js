@@ -6,6 +6,11 @@
 const { port1, port2 } = new MessageChannel();
 let outerPort;
 
+/*
+For reasons we don't fully understand yet, we've seen the situation where the
+feature is sending messages before the pod is actually fully initialised. As
+a workaround, we queue messages received before initialisation.
+*/
 const queuedMessages = [];
 
 function initMessaging() {
