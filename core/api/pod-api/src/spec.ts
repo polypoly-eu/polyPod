@@ -60,6 +60,7 @@ export class PodSpec {
                 );
                 await assert.isRejected(polyIn.add(quad), /default/);
                 await assert.isRejected(polyIn.has(quad), /default/);
+                await assert.isRejected(polyIn.delete(quad), /default/);
             });
 
             it("add/select", async () => {
@@ -74,6 +75,19 @@ export class PodSpec {
                             const selectedAgain = await polyIn.match(quad);
                             assert.ok(selected[0].equals(selectedAgain[0]));
                             assert.eventually.ok(polyIn.has(quad));
+                        }
+                    })
+                );
+            });
+
+            it("add/delete", async () => {
+                const { triple } = gens(dataFactory);
+                await fc.assert(
+                    fc.asyncProperty(fc.array(triple), async (quads) => {
+                        await polyIn.add(...quads);
+                        for (const quad of quads) {
+                            await polyIn.delete(quad);
+                            assert.eventually.notOk(polyIn.has(quad));
                         }
                     })
                 );
