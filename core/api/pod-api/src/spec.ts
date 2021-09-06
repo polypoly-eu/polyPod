@@ -59,6 +59,7 @@ export class PodSpec {
                     dataFactory.namedNode("http://example.org/g")
                 );
                 await assert.isRejected(polyIn.add(quad), /default/);
+                await assert.isRejected(polyIn.has(quad), /default/);
             });
 
             it("add/select", async () => {
