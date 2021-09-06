@@ -112,7 +112,8 @@ export interface PolyIn {
  */
 export interface PolyOut extends FS {
     /**
-     * A standard-compliant implementation of [[Fetch]]. This feature is deprecated in favor of the [[Network]] interface
+     * @deprecated Use [[Network]] and its facilities instead.
+     * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
      */
     readonly fetch: Fetch;
 }
