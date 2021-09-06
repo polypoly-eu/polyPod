@@ -41,7 +41,7 @@ export interface Matcher {
  */
 export interface PolyIn {
     /**
-     * DEPRECATED: use `match()` instead.
+     * @deprecated use `match()` instead.
      *
      * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
      * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
