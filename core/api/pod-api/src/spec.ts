@@ -82,7 +82,9 @@ export class PodSpec {
 
         describe("polyOut", () => {
             describe("Filesystem", () => {
-                const pathGen = fc.hexaString(1, 30).map((path) => this.path + "/" + path);
+                const pathGen = fc
+                    .hexaString({ minLength: 1, maxLength: 30 })
+                    .map((path) => this.path + "/" + path);
 
                 async function skipIfExists(path: string): Promise<void> {
                     let cont = true;
