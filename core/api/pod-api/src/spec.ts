@@ -74,7 +74,7 @@ export class PodSpec {
                             assert.ok(quad.equals(selected[0]));
                             const selectedAgain = await polyIn.match(quad);
                             assert.ok(selected[0].equals(selectedAgain[0]));
-                            assert.eventually.ok(polyIn.has(quad));
+                            await assert.eventually.ok(polyIn.has(quad));
                         }
                     })
                 );
@@ -87,7 +87,7 @@ export class PodSpec {
                         await polyIn.add(...quads);
                         for (const quad of quads) {
                             await polyIn.delete(quad);
-                            assert.eventually.notOk(polyIn.has(quad));
+                            await assert.eventually.notOk(polyIn.has(quad));
                         }
                     })
                 );
