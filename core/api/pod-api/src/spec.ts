@@ -71,6 +71,8 @@ export class PodSpec {
                             const selected = await polyIn.select(quad);
                             assert.lengthOf(selected, 1);
                             assert.ok(quad.equals(selected[0]));
+                            const selectedAgain = await polyIn.match(quad);
+                            assert.ok(selected[0].equals(selectedAgain[0]));
                             assert.eventually.ok(polyIn.has(quad));
                         }
                     })
