@@ -7,10 +7,10 @@ import { readFileSync, writeFileSync } from "fs";
 import { allDataFileName, dataFileName } from "../src/globals.js";
 
 // Files are included in a local .data folder
-const localFolder = ".data";
+const localFolder = process.argv[2] || ".data";
 const anonymizerRegex = /(?<=\/)[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}(?=\/)/;
-
 glob(`${localFolder}/*.json`, (error, files) => {
+    console.log(files);
     if (error)
         throw Error(`Some problem reading files in data folder: ${error}`);
     let allKeys = new Set();
