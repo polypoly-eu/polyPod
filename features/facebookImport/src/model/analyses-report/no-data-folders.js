@@ -1,16 +1,9 @@
 import React from "react";
+import ReportAnalysis from "./repost-analysis";
 
-export default class NoDataFoldersAnalysis {
+export default class NoDataFoldersAnalysis extends ReportAnalysis {
     get title() {
         return "NoData Folders";
-    }
-
-    get id() {
-        return "no-data-Folders";
-    }
-
-    get isForDataReport() {
-        return true;
     }
 
     get jsonReport() {

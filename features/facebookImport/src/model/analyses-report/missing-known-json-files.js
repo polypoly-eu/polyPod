@@ -5,15 +5,11 @@ import {
     jsonDataEntities,
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
-import RootAnalysis from "../analyses/root-analysis.js";
+import ReportAnalysis from "./repost-analysis.js";
 
-export default class MissingKnownJSONFilesAnalysis extends RootAnalysis {
+export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
     get title() {
         return "Missing known JSON files";
-    }
-
-    get isForDataReport() {
-        return true;
     }
 
     get jsonReport() {

@@ -1,16 +1,9 @@
 import React from "react";
+import ReportAnalysis from "./repost-analysis";
 
-export default class ReportMetadataAnalysis {
+export default class ReportMetadataAnalysis extends ReportAnalysis {
     get title() {
         return "Report Metadata";
-    }
-
-    get id() {
-        return "report-metadata";
-    }
-
-    get isForDataReport() {
-        return true;
     }
 
     get jsonReport() {
