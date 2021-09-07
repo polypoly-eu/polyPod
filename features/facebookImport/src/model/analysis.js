@@ -34,7 +34,6 @@ const subAnalyses = [
     DataChartsAnalysis,
     DataGroupsAnalysis,
     JsonFilesBubblesAnalysis,
-    ImportedJsonFilesAnalysis,
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
@@ -47,6 +46,7 @@ const subAnalyses = [
     FriendsAnalysis,
     ReceivedFriendRequestsAnalysis,
     PagesOverviewAnalysis,
+    ImportedJsonFilesAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
