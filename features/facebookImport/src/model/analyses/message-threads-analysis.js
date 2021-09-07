@@ -48,7 +48,7 @@ export default class MessageThreadsAnalysis extends RootAnalysis {
                 lastChatTimestamp !== 0 ? new Date(lastChatTimestamp) : null;
 
             this._messagesThreadsData.push({
-                title: "messageThread.title",
+                title: messageThread.title,
                 count: messageThread.messages.length,
                 extraData: {
                     wordCount,
