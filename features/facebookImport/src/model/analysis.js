@@ -29,6 +29,7 @@ import JsonFilesBubblesAnalysis from "./analyses/json-files-bubbles.js";
 import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.js";
 import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
 import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
+import UnknownMessageTypesAnalysis from "./analyses-report/unkown-message-types-analysis.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -57,6 +58,7 @@ const subAnalyses = [
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
+    UnknownMessageTypesAnalysis,
     NoDataFoldersAnalysis,
     UnknownJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
