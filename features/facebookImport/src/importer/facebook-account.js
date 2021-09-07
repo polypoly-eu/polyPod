@@ -15,6 +15,7 @@ class FacebookAccount {
         this._unfollowedPages = [];
         this._searches = [];
         this._messageThreads = [];
+        this._adminRecords = [];
     }
 
     get pod() {
@@ -179,6 +180,14 @@ class FacebookAccount {
         this._messageThreads = messageThreads;
     }
 
+    get adminRecords() {
+        return this._adminRecords;
+    }
+
+    set adminRecords(adminRecords) {
+        this._adminRecords = adminRecords;
+    }
+
     get dataGroups() {
         return [
             {
@@ -238,6 +247,11 @@ class FacebookAccount {
             {
                 title: "Messages",
                 count: this.messagesCount,
+            },
+
+            {
+                title: "Admin Records",
+                count: this.adminRecords,
             },
         ];
     }
