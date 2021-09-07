@@ -122,21 +122,15 @@
     height: 18px;
 }
 
-.bar-chart .bar-box .below-bar {
+.bar-chart .bar-box .bottom-bar {
     display: flex;
     flex-direction: row;
 }
 
-.bar-chart .bar-box .below-bar p {
+.bar-chart .bar-box .bottom-bar p {
     font-size: 12px;
     line-height: 150%;
     margin: 4px 4px 0 0;
-}
-
-.bar-chart .bar-box .below-bar img {
-    transform: translateY(12px);
-    width: 15px;
-    height: 18px;
 }
 
 .bar-chart .bar-box .bar {

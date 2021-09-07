@@ -73,7 +73,7 @@ const BarChart = ({ data, names, onClickBar = () => {}, footerContent }) => {
                     </div>
 
                     {footerContent ? (
-                        <div className="below-bar">
+                        <div className="bottom-bar">
                             {footerContent({ title, count, extraData })}
                         </div>
                     ) : (
