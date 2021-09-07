@@ -10,12 +10,8 @@ import OffFacebookEventsAnalysis from "./analyses/off-facebook-events-analysis.j
 import MessagesAnalysis from "./analyses/messages-analysis.js";
 import SearchesAnalysis from "./analyses/searches-analysis.js";
 import FriendsAnalysis from "./analyses/friends-analysis.js";
-import LikedPagesAnalysis from "./analyses/pages-liked-analysis";
-import FollowedPagesAnalysis from "./analyses/pages-followed-analysis.js";
-import RecommendedPagesAnalysis from "./analyses/pages-recommended-analysis.js";
-import UnfollowedPagesAnalysis from "./analyses/pages-unfollowed-analysis.js";
 import ReceivedFriendRequestsAnalysis from "./analyses/friend-requests-received-analysis.js";
-
+import PagesOverviewAnalysis from "./analyses/pages-overview-activity.js";
 import ReportMetadataAnalysis from "./analyses-report/report-metadata.js";
 import NoDataFoldersAnalysis from "./analyses-report/no-data-folders.js";
 import MissingKnownJSONFilesAnalysis from "./analyses-report/missing-known-json-files.js";
@@ -49,11 +45,8 @@ const subAnalyses = [
     MessagesDetailsAnalysis,
     SearchesAnalysis,
     FriendsAnalysis,
-    LikedPagesAnalysis,
-    FollowedPagesAnalysis,
-    RecommendedPagesAnalysis,
-    UnfollowedPagesAnalysis,
     ReceivedFriendRequestsAnalysis,
+    PagesOverviewAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
