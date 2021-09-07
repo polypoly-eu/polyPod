@@ -76,11 +76,11 @@ class FacebookAccount {
     }
 
     forEachMessage(callback) {
-        for (const messageThread of this.messageThreads) {
+        this.forEachMessageThread((messageThread) => {
             for (const message of messageThread?.messages) {
                 callback(message);
             }
-        }
+        });
     }
 
     forEachOffFacebookEvent(callback) {
