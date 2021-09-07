@@ -2,7 +2,12 @@ import React from "react";
 
 import "./barChart.css";
 
-const BarChart = ({ data, names, onClickBar = () => {} }) => {
+const BarChart = ({
+    data,
+    names,
+    shouldSort = true,
+    onClickBar = () => {},
+}) => {
     if (names) data.map((data) => (data.title = data[names]));
     const getHighestCount = () => {
         let highest = 0;
@@ -12,7 +17,9 @@ const BarChart = ({ data, names, onClickBar = () => {} }) => {
         return highest;
     };
 
-    data.sort((a, b) => b.count - a.count);
+    if (shouldSort) {
+        data.sort((a, b) => b.count - a.count);
+    }
 
     const fillScale = (highest, multiple) => {
         const scale = [];

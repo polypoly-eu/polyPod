@@ -314,4 +314,7 @@ export default [
     "messages/inbox/uniqueid_hash/files/a_file.mp4",
     "polls/polls_you_voted_on.json",
     "profile_information/your_music.json",
+    "news_feed",
+    "news_feed/no-data.txt",
+    "your_places/no-data.txt",
 ];
