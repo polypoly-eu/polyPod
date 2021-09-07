@@ -30,6 +30,7 @@ import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.j
 import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
 import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
 import UnknownMessageTypesAnalysis from "./analyses-report/unkown-message-types-analysis.js";
+import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -48,6 +49,7 @@ const subAnalyses = [
     OffFacebookEventsTypesAnalysis,
     MessagesAnalysis,
     MessagesDetailsAnalysis,
+    MessagesActivityAnalysis,
     SearchesAnalysis,
     FriendsAnalysis,
     LikedPagesAnalysis,
