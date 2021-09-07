@@ -78,8 +78,8 @@ export default class MessageThreadsAnalysis extends RootAnalysis {
                     footerContent={({ count, extraData }) => (
                         <>
                             <div className="bar-extra-info">
-                                {count} messages having {extraData.wordCount}{" "}
-                                words
+                                {count === 1 ? "message" : "messages"} having{" "}
+                                {extraData.wordCount} words
                             </div>
                             <div className="bar-extra-info">
                                 First chat:{" "}
