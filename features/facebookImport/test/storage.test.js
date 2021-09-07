@@ -6,11 +6,11 @@ import { expect } from "@jest/globals";
 
 const noDataFileName = "no-data.txt";
 const dataFileName = "src/static/commonStructure.json";
-const zipFileName = `/tmp/test-${process.pid}.zip`
+const zipFileName = `/tmp/test-${process.pid}.zip`;
 let testStream;
 let storage;
 
-beforeAll( done => {
+beforeAll((done) => {
     const zipFile = new JSZip();
     const structure = JSON.parse(readFileSync(dataFileName));
 
@@ -25,14 +25,14 @@ beforeAll( done => {
     }
     testStream = zipFile
         .generateNodeStream({ type: "nodebuffer" })
-        .pipe( createWriteStream( zipFileName ) )
-        .on('finish', () => {
+        .pipe(createWriteStream(zipFileName))
+        .on("finish", () => {
             done();
-        })
+        });
 });
 
 describe("Tests file storage", () => {
-    it("Adds and removes a file correctly", done => {
-        console.log("Fake test")
+    it("Adds and removes a file correctly", (done) => {
+        console.log("Fake test");
     });
 });
