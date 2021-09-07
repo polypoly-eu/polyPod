@@ -2,7 +2,7 @@ import React from "react";
 import BarChart from "../../components/dataViz/barChart.jsx";
 import RootAnalysis from "./root-analysis";
 
-export default class MessagesChatsAnalysis extends RootAnalysis {
+export default class MessageThreadsAnalysis extends RootAnalysis {
     get title() {
         return "Message threads";
     }
@@ -48,7 +48,7 @@ export default class MessagesChatsAnalysis extends RootAnalysis {
                 lastChatTimestamp !== 0 ? new Date(lastChatTimestamp) : null;
 
             this._messagesThreadsData.push({
-                title: messageThread.title,
+                title: "messageThread.title",
                 count: messageThread.messages.length,
                 extraData: {
                     wordCount,
@@ -70,13 +70,13 @@ export default class MessagesChatsAnalysis extends RootAnalysis {
             <>
                 <p>
                     Your Facebook data also contains all your chats from
-                    messenger: {this._messagesCount} messages. Here is the list
-                    of your top 10 chats by the number of messages.
+                    Facebook Messenger: {this._messagesCount} messages. Here is
+                    the list of your top 10 chats by the number of messages.
                 </p>
                 <BarChart
                     data={this._messagesThreadsData}
                     footerContent={({ count, extraData }) => (
-                        <div>
+                        <>
                             <div className="bar-extra-info">
                                 {count} messages having {extraData.wordCount}{" "}
                                 words
@@ -93,7 +93,7 @@ export default class MessagesChatsAnalysis extends RootAnalysis {
                                     ? extraData.lastChatDate.toDateString()
                                     : "unknown"}
                             </div>
-                        </div>
+                        </>
                     )}
                 />
             </>
