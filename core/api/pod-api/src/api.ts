@@ -147,6 +147,23 @@ export interface PolyNav {
 }
 
 /**
+ * `Network` specifies how features can communicate with other devices or servers.
+ */
+export interface Network {
+    /**
+     * A way for features to send HTTP POST requests
+     *
+     * @returns an error message if something went wrong, `undefined` upon success.
+     */
+    httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<string | undefined>;
+}
+
+/**
  * @hidden
  */
 export interface PolyLifecycle {
@@ -222,6 +239,12 @@ export interface Pod {
      * `polyNav` is the interface to interact the container. Refer to [[PolyNav]] for its definition.
      */
     readonly polyNav: PolyNav;
+
+    /**
+     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
+     * definition.
+     */
+    readonly network: Network;
 
     /**
      * @hidden

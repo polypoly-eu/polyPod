@@ -1,7 +1,7 @@
 import React from "react";
 import { ZipFile } from "../model/storage.js";
 
-import DataBubblesAnalysis from "./analyses/data-points-bubles-analysis.js";
+import DataBubblesAnalysis from "./analyses/data-points-bubbles-analysis.js";
 import DataGroupsAnalysis from "./analyses/data-groups-analysis.js";
 import ConnectedAdvertisersAnalysis from "./analyses/connected-advertisers-analysis.js";
 import InteractedWithAdvertisersAnalysis from "./analyses/interacted-advertisers-analysis.js";

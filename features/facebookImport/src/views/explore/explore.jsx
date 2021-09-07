@@ -33,7 +33,16 @@ const ExploreView = () => {
 
     const renderFileAnalyses = () => {
         if (!fileAnalysis) {
-            return "";
+            return (
+                <div>
+                    <p>Analyzing your data ...</p>
+                    <p>
+                        If this takes more than a few seconds - or for large
+                        data sets maybe minutes - please report this as an issue
+                        - there was likely an error.
+                    </p>
+                </div>
+            );
         }
         return (
             <div>

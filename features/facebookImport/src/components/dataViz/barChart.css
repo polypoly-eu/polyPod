@@ -124,13 +124,13 @@
 
 .bar-chart .bar-box .bar {
     height: 20px;
-    background-color: rgb(254, 242, 48);
+    background-color: var(--color-indigo-200);
     position: relative;
 }
 
 .bar-chart .bar-box .bar p {
     height: 20px;
-    background-color: rgb(254, 242, 48);
+    background-color: var(--color-indigo-200);
     position: absolute;
     margin: 0;
     color: var(--color-indigo-950);

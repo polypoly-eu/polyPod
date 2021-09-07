@@ -5,20 +5,18 @@
     "lint": "npm run eslint",
     "build": "rollup -c",
     "watch": "rollup --watch -c",
-    "test": "jest && cypress run"
+    "serve": "rollup --watch --configServe -c",
+    "serve-polypedia-stub": "node scripts/serve-polypedia-stub.js",
+    "test": "jest --passWithNoTests"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.14.8",
-    "@cypress/webpack-preprocessor": "^5.9.1",
     "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@rdfjs/dataset": "^1.1.1",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "11.2.0",
-    "@zip.js/zip.js": "2.3.7",
-    "cypress": "^8.0.0",
     "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "eslint": "^7.19.0",
@@ -33,7 +31,8 @@
     "poly-look": "file:../../core/utils/poly-look",
     "rollup": "^2.55.1",
     "rollup-plugin-copy": "3.3.0",
-    "rollup-plugin-css-only": "^3.1.0"
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-serve": "1.1.0"
   },
   "private": true,
   "dependencies": {
