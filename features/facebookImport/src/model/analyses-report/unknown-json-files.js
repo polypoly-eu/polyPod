@@ -8,11 +8,11 @@ import allStructure from "../../static/allStructure";
 
 export default class UknownJSONFilesAnalysis {
     get title() {
-        return "Uknown JSON files";
+        return "Unknown JSON files";
     }
 
     get id() {
-        return "uknown-json-files";
+        return "unknown-json-files";
     }
 
     get isForDataReport() {
