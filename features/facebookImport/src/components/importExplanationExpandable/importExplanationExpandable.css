@@ -4,6 +4,7 @@
     flex-direction: column;
     color: var(--text-dark);
     overflow: hidden scroll;
+    scroll-behavior: smooth;
 }
 
 .import-view .explanation-expandable .intro {

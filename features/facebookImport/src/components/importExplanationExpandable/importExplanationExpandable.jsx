@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
@@ -34,15 +34,15 @@ const ImportExplanationExpandable = ({
 
     const expandableRef = useRef();
 
-    // The scrollIntoView() method is not sopported by Safari and makes an strage scrolling behaviaur. This is temporary commented until we find a solution.
-    // const handleScrollToSection = () => {
-    //     const refPoint = importRefs[importStatus]?.current;
-    //     if (refPoint)
-    //         refPoint.scrollIntoView({
-    //             behavior: "smooth",
-    //             block: "start",
-    //         });
-    // };
+    useEffect(() => {
+        const refPoint = importRefs[importStatus]?.current;
+        if (refPoint)
+            expandableRef.current.scrollTo(
+                0,
+                refPoint.offsetTop -
+                    document.querySelector(".progress-bar").offsetHeight
+            );
+    });
 
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
@@ -163,11 +163,7 @@ const ImportExplanationExpandable = ({
     };
 
     return (
-        <div
-            ref={expandableRef}
-            // onLoad={handleScrollToSection}
-            className="explanation-expandable"
-        >
+        <div ref={expandableRef} className="explanation-expandable">
             <div className="intro">
                 <p>{i18n.t("import:intro.text.1")}</p>
                 <p className="bold">{i18n.t("import:intro.text.2")}</p>
