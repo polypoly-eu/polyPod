@@ -46,6 +46,7 @@ export default [
     "groups/your_group_membership_activity.json",
     "groups/your_groups.json",
     "groups/your_posts_in_groups.json",
+    "help_community/help_community_user_profile.json",
     "location",
     "location/device_location.json",
     "location/last_location.json",
