@@ -30,6 +30,7 @@ import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.j
 import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
 import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
 import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
+import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-types-analysis.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -62,6 +63,7 @@ const subAnalyses = [
     NoDataFoldersAnalysis,
     UnknownJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
+    OffFacebookEventTypesAnalysis,
 ];
 
 class InactiveAnalysis {
