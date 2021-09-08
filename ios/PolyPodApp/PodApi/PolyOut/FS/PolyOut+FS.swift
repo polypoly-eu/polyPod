@@ -85,10 +85,10 @@ extension PolyOut {
         // List entries of a zip file
         if (dir != "") {
             do {
+                // Access all directory contents early to catch potential errors
+                try FileManager.default.contentsOfDirectory(at: fileStoragePath, includingPropertiesForKeys: nil)
+                
                 let targetUrl = fileStoragePath.appendingPathComponent(fileStore[dir]!!).deletingPathExtension()
-    
-                let allContents = try FileManager.default.contentsOfDirectory(at: fileStoragePath, includingPropertiesForKeys: nil)
-                                
                 var entries = [String]()
                 if let enumerator = FileManager.default.enumerator(at: targetUrl, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
                     for case let fileURL as URL in enumerator {
@@ -97,7 +97,7 @@ extension PolyOut {
                     }
                 }
                 
-                try completionHandler(entries, nil)
+                completionHandler(entries, nil)
                 return
             }
             catch {
