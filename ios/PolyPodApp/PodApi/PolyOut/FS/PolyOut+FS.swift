@@ -84,26 +84,17 @@ extension PolyOut {
         ) as? [String:String?] ?? [:]
         // List entries of a zip file
         if (dir != "") {
-            do {
-                let targetUrl = fileStoragePath.appendingPathComponent(fileStore[dir]!!).deletingPathExtension()
-    
-                let allContents = try FileManager.default.contentsOfDirectory(at: fileStoragePath, includingPropertiesForKeys: nil)
-                                
-                var entries = [String]()
-                if let enumerator = FileManager.default.enumerator(at: targetUrl, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
-                    for case let fileURL as URL in enumerator {
-                        let filePath = fileURL.resolvingSymlinksInPath().absoluteString.replacingOccurrences(of: targetUrl.absoluteString, with: dir)
-                        entries.append(filePath)
-                    }
+            let targetUrl = fileStoragePath.appendingPathComponent(fileStore[dir]!!).deletingPathExtension()
+            var entries = [String]()
+            if let enumerator = FileManager.default.enumerator(at: targetUrl, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+                for case let fileURL as URL in enumerator {
+                    let filePath = fileURL.resolvingSymlinksInPath().absoluteString.replacingOccurrences(of: targetUrl.absoluteString, with: dir)
+                    entries.append(filePath)
                 }
-                
-                try completionHandler(entries, nil)
-                return
             }
-            catch {
-                print(error)
-                completionHandler(nil, PodApiError.databaseError)
-            }
+            
+            completionHandler(entries, nil)
+            return
         }
         completionHandler(Array(fileStore.keys), nil)
     }
