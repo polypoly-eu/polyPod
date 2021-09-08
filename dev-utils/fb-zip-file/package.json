@@ -1,7 +1,8 @@
 {
   "name": "facebook-zip-file-structure",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "zip": "node scripts/generate-test-file.js"
   },
   "private": true,
   "type": "module",
