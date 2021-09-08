@@ -15,7 +15,7 @@ export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
 
     async analyze({ facebookAccount }) {
         this.active = facebookAccount.offFacebookEventsCount > 0;
-        this._offFacebookEventTypes = new Set();
+        this._offFacebookEventTypes = [];
 
         if (!this.active) {
             return;
