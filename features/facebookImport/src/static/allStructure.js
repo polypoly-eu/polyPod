@@ -169,6 +169,7 @@ export default [
     "your_interactions_on_facebook/recently_visited.json",
     "your_places",
     "your_places/places_you've_created.json",
+    "your_places/no-data.txt",
     "your_problem_reports",
     "your_problem_reports/no-data.txt",
     "your_topics",
@@ -325,5 +326,4 @@ export default [
     "profile_information/your_music.json",
     "news_feed",
     "news_feed/no-data.txt",
-    "your_places/no-data.txt",
 ];
