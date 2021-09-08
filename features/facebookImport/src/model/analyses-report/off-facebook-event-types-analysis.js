@@ -1,9 +1,16 @@
 import React from "react";
-import RootAnalysis from "./root-analysis.js";
+import ReportAnalysis from "./report-analysis.js";
 
-export default class OffFacebookEventTypesAnalysis extends RootAnalysis {
+export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
     get title() {
         return "Off-Facebook Event Types";
+    }
+
+    get jsonReport() {
+        return {
+            id: this.id,
+            offFacebookEventTypes: this._offFacebookEventTypes,
+        };
     }
 
     async analyze({ facebookAccount }) {
