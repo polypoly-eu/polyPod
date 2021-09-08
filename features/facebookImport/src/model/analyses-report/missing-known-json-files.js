@@ -5,7 +5,7 @@ import {
     jsonDataEntities,
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
-import ReportAnalysis from "./repost-analysis.js";
+import ReportAnalysis from "./report-analysis.js";
 
 export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
     get title() {
