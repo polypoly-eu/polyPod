@@ -1,4 +1,5 @@
 import React from "react";
+import BasicDataCountTable from "../../components/basicDataCountTable/basicDataCountTable.jsx";
 import RootAnalysis from "./root-analysis.js";
 
 export default class PagesOverviewAnalysis extends RootAnalysis {
@@ -35,17 +36,6 @@ export default class PagesOverviewAnalysis extends RootAnalysis {
         if (!this.active) {
             return "No Pages Information!";
         }
-        return (
-            <table>
-                <tbody>
-                    {this._pagesData.map(({ title, count }, index) => (
-                        <tr key={index}>
-                            <td>{title}</td>
-                            <td>{count}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        );
+        return <BasicDataCountTable items={this._pagesData} />;
     }
 }
