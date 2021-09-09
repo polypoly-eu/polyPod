@@ -30,6 +30,7 @@ import JsonFilesBubblesAnalysis from "./analyses/json-files-bubbles.js";
 import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.js";
 import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
 import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
+import SesssionActivityLocationsAnalysis from "./analyses/activity-locations-analysis.js";
 import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
 
 const subAnalyses = [
@@ -58,6 +59,7 @@ const subAnalyses = [
     RecommendedPagesAnalysis,
     UnfollowedPagesAnalysis,
     ReceivedFriendRequestsAnalysis,
+    SesssionActivityLocationsAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,

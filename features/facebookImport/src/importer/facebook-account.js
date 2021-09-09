@@ -15,6 +15,7 @@ class FacebookAccount {
         this._unfollowedPages = [];
         this._searches = [];
         this._messageThreads = [];
+        this._accountSessionActivities = [];
     }
 
     get pod() {
@@ -189,6 +190,14 @@ class FacebookAccount {
         this._messageThreads = messageThreads;
     }
 
+    get accountSessionActivities() {
+        return this._accountSessionActivities;
+    }
+
+    set accountSessionActivities(accountSessionActivities) {
+        this._accountSessionActivities = accountSessionActivities;
+    }
+
     get dataGroups() {
         return [
             {
@@ -248,6 +257,11 @@ class FacebookAccount {
             {
                 title: "Messages",
                 count: this.messagesCount,
+            },
+
+            {
+                title: "Session activities",
+                count: this.accountSessionActivities.length,
             },
         ];
     }
