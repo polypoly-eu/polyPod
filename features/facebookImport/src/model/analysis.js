@@ -68,7 +68,7 @@ const subAnalyses = [
     MissingKnownJSONFilesAnalysis,
 ];
 
-class InactiveAnalysis {
+class InactiveCardsSummary {
     constructor(inactiveAnalyses) {
         this._inactiveAnalyses = inactiveAnalyses;
         this.active = this._inactiveAnalyses.length > 0;
@@ -79,7 +79,7 @@ class InactiveAnalysis {
     }
 
     get id() {
-        return InactiveAnalysis.name;
+        return InactiveCardsSummary.name;
     }
 
     get jsonReport() {
@@ -106,12 +106,12 @@ class UnrecognizedData {
             (analysis) => analysis.isForDataReport && analysis.active
         );
 
-        const inactiveDataAnalyses = executedAnalyses.filter(
+        const inactiveAnalyses = executedAnalyses.filter(
             (analysis) => !analysis.active
         );
-        const inactiveAnalysis = new InactiveAnalysis(inactiveDataAnalyses);
-        if (inactiveAnalysis.active) {
-            this._activeReportAnalyses.push(inactiveAnalysis);
+        const inactiveCardsSummary = new InactiveCardsSummary(inactiveAnalyses);
+        if (inactiveCardsSummary.active) {
+            this._activeReportAnalyses.push(inactiveCardsSummary);
         }
 
         this.active = this._activeReportAnalyses.length > 0;
@@ -125,7 +125,12 @@ class UnrecognizedData {
         if (!this.active) {
             return "No data to report!";
         }
-        return this.reportAnalyses.length + " analyses included in the report";
+        return (
+            this.reportAnalyses.length +
+            " " +
+            (this.reportAnalyses.length > 0 ? "analyses" : "analysis") +
+            "  included in the report"
+        );
     }
 
     get jsonReport() {
