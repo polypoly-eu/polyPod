@@ -124,15 +124,23 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
                     className={`btn-secondary ${file ? "deactivated" : ""}`}
-                    onClick={() => {
-                        onImportFile();
-                    }}
+                    onClick={
+                        file
+                            ? () => {}
+                            : () => {
+                                  onImportFile();
+                              }
+                    }
                 >
                     {i18n.t("import:import.button.1")}
                 </button>
                 <button
                     className={`btn-highlighted ${file ? "" : "deactivated"}`}
-                    onClick={() => onUpdateImportStatus(importSteps.explore)}
+                    onClick={
+                        file
+                            ? () => onUpdateImportStatus(importSteps.explore)
+                            : () => {}
+                    }
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
