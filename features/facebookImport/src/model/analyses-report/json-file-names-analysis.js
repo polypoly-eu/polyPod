@@ -4,15 +4,11 @@ import {
     anonymizeJsonEntityPath,
     jsonDataEntities,
 } from "../../importer/importer-util.js";
-import RootAnalysis from "../analyses/root-analysis.js";
+import ReportAnalysis from "./report-analysis.js";
 
-export default class JSONFileNamesAnalysis extends RootAnalysis {
+export default class JSONFileNamesAnalysis extends ReportAnalysis {
     get title() {
         return "JSON file names";
-    }
-
-    get isForDataReport() {
-        return true;
     }
 
     get jsonReport() {
