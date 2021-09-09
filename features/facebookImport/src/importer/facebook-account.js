@@ -52,6 +52,10 @@ class FacebookAccount {
         }, 0);
     }
 
+    get messageThreadsCount() {
+        return this.messageThreads.length;
+    }
+
     get messagesCount() {
         return this.messageThreads.reduce((total, messageThread) => {
             if (messageThread?.messages) {
@@ -65,12 +69,18 @@ class FacebookAccount {
         return this.messagesCount > 0;
     }
 
-    forEachMessage(callback) {
+    forEachMessageThread(callback) {
         for (const messageThread of this.messageThreads) {
+            callback(messageThread);
+        }
+    }
+
+    forEachMessage(callback) {
+        this.forEachMessageThread((messageThread) => {
             for (const message of messageThread?.messages) {
                 callback(message);
             }
-        }
+        });
     }
 
     forEachOffFacebookEvent(callback) {
