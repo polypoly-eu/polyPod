@@ -33,6 +33,7 @@ import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
 import UnknownMessageTypesAnalysis from "./analyses-report/unkown-message-types-analysis.js";
 import SesssionActivityLocationsAnalysis from "./analyses/activity-locations-analysis.js";
 import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
+import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-types-analysis.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -68,6 +69,7 @@ const subAnalyses = [
     NoDataFoldersAnalysis,
     UnknownJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
+    OffFacebookEventTypesAnalysis,
 ];
 
 class InactiveCardsSummary {
