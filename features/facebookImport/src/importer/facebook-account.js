@@ -15,6 +15,7 @@ class FacebookAccount {
         this._unfollowedPages = [];
         this._searches = [];
         this._messageThreads = [];
+        this._accountSessionActivities = [];
     }
 
     get pod() {
@@ -52,6 +53,10 @@ class FacebookAccount {
         }, 0);
     }
 
+    get messageThreadsCount() {
+        return this.messageThreads.length;
+    }
+
     get messagesCount() {
         return this.messageThreads.reduce((total, messageThread) => {
             if (messageThread?.messages) {
@@ -65,12 +70,18 @@ class FacebookAccount {
         return this.messagesCount > 0;
     }
 
-    forEachMessage(callback) {
+    forEachMessageThread(callback) {
         for (const messageThread of this.messageThreads) {
+            callback(messageThread);
+        }
+    }
+
+    forEachMessage(callback) {
+        this.forEachMessageThread((messageThread) => {
             for (const message of messageThread?.messages) {
                 callback(message);
             }
-        }
+        });
     }
 
     forEachOffFacebookEvent(callback) {
@@ -179,6 +190,14 @@ class FacebookAccount {
         this._messageThreads = messageThreads;
     }
 
+    get accountSessionActivities() {
+        return this._accountSessionActivities;
+    }
+
+    set accountSessionActivities(accountSessionActivities) {
+        this._accountSessionActivities = accountSessionActivities;
+    }
+
     get dataGroups() {
         return [
             {
@@ -238,6 +257,11 @@ class FacebookAccount {
             {
                 title: "Messages",
                 count: this.messagesCount,
+            },
+
+            {
+                title: "Session activities",
+                count: this.accountSessionActivities.length,
             },
         ];
     }

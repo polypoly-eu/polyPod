@@ -7,6 +7,7 @@ const BarChart = ({
     names,
     shouldSort = true,
     onClickBar = () => {},
+    footerContent,
 }) => {
     if (names) data.map((data) => (data.title = data[names]));
     const getHighestCount = () => {
@@ -62,7 +63,7 @@ const BarChart = ({
 
     const bars = (
         <div className="bars">
-            {data.map(({ title, count }, index) => (
+            {data.map(({ title, count, extraData }, index) => (
                 <div key={index} className="bar-box" onClick={onClickBar}>
                     <div className="above-bar">
                         <p className="name">{title}</p>
@@ -78,6 +79,14 @@ const BarChart = ({
                     >
                         <p>{count / highestCount > 0.1 ? count : ""}</p>
                     </div>
+
+                    {footerContent ? (
+                        <div className="bottom-bar">
+                            {footerContent({ title, count, extraData })}
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             ))}
         </div>
