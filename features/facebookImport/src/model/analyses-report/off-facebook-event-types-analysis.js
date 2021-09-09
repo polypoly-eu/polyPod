@@ -31,9 +31,6 @@ export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No off-facebook events detected in your export!";
-        }
         return (
             <BasicList
                 title="Types of activities done off-Facebook!"

@@ -36,9 +36,6 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No Session Activities!";
-        }
         return (
             <>
                 Locations contained in session activities, like log-in or

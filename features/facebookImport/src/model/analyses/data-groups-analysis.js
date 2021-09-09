@@ -14,10 +14,6 @@ export default class DataGroupsAnalysis extends RootAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No Data!";
-        }
-
         return (
             <table>
                 <tbody>

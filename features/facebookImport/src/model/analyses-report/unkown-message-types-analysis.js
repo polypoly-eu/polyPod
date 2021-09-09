@@ -43,9 +43,6 @@ export default class UnknownMessageTypesAnalysis extends ReportAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No unknown message types!";
-        }
         return (
             <ul>
                 {[...this._unknownMessageTypes].map((entry, index) => (

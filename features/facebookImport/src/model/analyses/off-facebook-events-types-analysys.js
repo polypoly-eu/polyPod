@@ -19,9 +19,6 @@ export default class OffFacebookEventsTypesAnalysis extends RootAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No off-facebook events detected in your export!";
-        }
         return (
             <table>
                 <tbody>

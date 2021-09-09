@@ -31,9 +31,6 @@ export default class DataBubblesAnalysis extends RootAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No Data!";
-        }
         return (
             <DataBubblesAll
                 data={this._bubblesDataScaled}

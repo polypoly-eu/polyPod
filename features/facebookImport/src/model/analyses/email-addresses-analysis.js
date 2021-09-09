@@ -29,9 +29,6 @@ export default class EmailAddressesAnalysis extends RootAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No Email Addresses!";
-        }
         return (
             <>
                 Email addresses found in your export:
