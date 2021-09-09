@@ -1,5 +1,5 @@
 import React from "react";
-import BasicList from "../../components/basicList/basicList";
+import BasicList from "../../components/basicList/basicList.jsx";
 import ReportAnalysis from "./report-analysis";
 
 export default class NoDataFoldersAnalysis extends ReportAnalysis {
