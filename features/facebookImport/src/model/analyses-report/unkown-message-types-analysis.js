@@ -23,7 +23,7 @@ export default class UnknownMessageTypesAnalysis extends ReportAnalysis {
 
     async analyze({ facebookAccount }) {
         this.active = facebookAccount.messagesCount > 0;
-        this._unknownMessageTypes = [];
+        this._unknownMessageTypes = new Set();
         if (!this.active) {
             return;
         }
@@ -36,11 +36,10 @@ export default class UnknownMessageTypesAnalysis extends ReportAnalysis {
             if (knownMessageTypes.includes(messageType)) {
                 return;
             }
-            if (!this._unknownMessageTypes.includes(messageType)) {
-                this._unknownMessageTypes.push(messageType);
-            }
+
+            this._unknownMessageTypes.add(messageType);
         });
-        this.active = this._unknownMessageTypes.length > 0;
+        this.active = this._unknownMessageTypes.size > 0;
     }
 
     render() {
@@ -49,7 +48,7 @@ export default class UnknownMessageTypesAnalysis extends ReportAnalysis {
         }
         return (
             <ul>
-                {this._unknownMessageTypes.map((entry, index) => (
+                {[...this._unknownMessageTypes].map((entry, index) => (
                     <li key={index}>{entry}</li>
                 ))}
             </ul>
