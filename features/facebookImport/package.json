@@ -7,12 +7,10 @@
     "watch": "rollup --watch -c",
     "serve": "rollup --watch --configServe -c",
     "serve-polypedia-stub": "node scripts/serve-polypedia-stub.js",
-    "test": "mocha && jest --passWithNoTests"
+    "test": "jest --passWithNoTests"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.14.8",
-    "@babel/register": "^7.15.3",
     "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@rdfjs/dataset": "^1.1.1",
@@ -29,7 +27,6 @@
     "jszip": "^3.6.0",
     "lit": "^2.0.0-rc.2",
     "memfs": "^3.2.2",
-    "mocha": "^8.3.0",
     "node-fetch": "^2.6.1",
     "poly-look": "file:../../core/utils/poly-look",
     "rollup": "^2.55.1",
