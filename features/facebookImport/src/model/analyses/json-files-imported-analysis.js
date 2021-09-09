@@ -12,9 +12,10 @@ export default class ImportedJsonFilesAnalysis extends RootAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No Imported Files!";
-        }
+        return `We imported ${this._importedFileNames.length} files.`;
+    }
+
+    renderDetails() {
         return (
             <ul>
                 {this._importedFileNames.map((entry, index) => (

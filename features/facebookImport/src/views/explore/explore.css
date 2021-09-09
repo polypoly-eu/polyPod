@@ -19,7 +19,7 @@
     font-size: 24px;
 }
 
-.explore-view .report-button {
+.explore-view .report-button,.explore-view .details-button  {
     background-color: var(--color-red-300);
     padding: 4px 12px;
     margin: 0 auto;

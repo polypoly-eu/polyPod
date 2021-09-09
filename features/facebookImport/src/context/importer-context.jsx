@@ -77,6 +77,7 @@ export const ImporterProvider = ({ children }) => {
     const [files, setFiles] = useState([]);
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
+    const [activeDetails, setActiveDetails] = useState(null);
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
@@ -204,6 +205,8 @@ export const ImporterProvider = ({ children }) => {
                 updateImportStatus,
                 fileAnalysis,
                 refreshFiles,
+                activeDetails,
+                setActiveDetails,
             }}
         >
             {children}
