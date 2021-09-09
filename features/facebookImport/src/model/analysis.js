@@ -30,6 +30,7 @@ import JsonFilesBubblesAnalysis from "./analyses/json-files-bubbles.js";
 import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.js";
 import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
 import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
+import EmailAddressesAnalysis from "./analyses/email-addresses-analysis.js";
 import UnknownMessageTypesAnalysis from "./analyses-report/unkown-message-types-analysis.js";
 import SesssionActivityLocationsAnalysis from "./analyses/activity-locations-analysis.js";
 import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
@@ -52,6 +53,7 @@ const subAnalyses = [
     OffFacebookEventsTypesAnalysis,
     MessagesAnalysis,
     MessagesDetailsAnalysis,
+    EmailAddressesAnalysis,
     MessageThreadsAnalysis,
     MessagesActivityAnalysis,
     SearchesAnalysis,
