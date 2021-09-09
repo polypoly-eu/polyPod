@@ -142,17 +142,7 @@ export const ImporterProvider = ({ children }) => {
         writeImportStatus(pod, newStatus);
     }
 
-    async function initPod() {
-        const pod = await window.pod;
-        // TODO: This is a workaround for a race condition on Android, where
-        //       messages were being sent to the pod before it was fully
-        //       initialised. We have to solve the root cause of this.
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(pod);
-            }, 100);
-        });
-    }
+    const initPod = async () => await window.pod;
 
     //on startup
     useEffect(() => {

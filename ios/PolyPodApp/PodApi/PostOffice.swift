@@ -377,7 +377,7 @@ extension PostOffice {
         let body = args[1] as! String
         let contentType = args[2] as? String
         let authorization = args[3] as? String
-        let success = PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
-        completionHandler(.bool(success), nil)
+        let error = PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
+        completionHandler(error != nil ? .string(error!) : .nil, nil)
     }
 }

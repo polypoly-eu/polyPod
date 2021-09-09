@@ -1,6 +1,7 @@
 package coop.polypoly.polypod.network
 
 import android.content.Context
+import android.util.Base64
 import coop.polypoly.polypod.logging.LoggerFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -20,7 +21,7 @@ class Network(val context: Context) {
         body: String,
         contentType: String?,
         authorization: String?
-    ): Boolean = withContext(Dispatchers.IO) {
+    ): String? = withContext(Dispatchers.IO) {
         val connection = URL(url).openConnection() as HttpURLConnection
         connection.requestMethod = "POST"
         connection.doOutput = true
@@ -29,12 +30,16 @@ class Network(val context: Context) {
         if (contentType != null)
             connection.setRequestProperty("Content-Type", contentType)
 
-        val encodedAuthorization: ByteArray? =
-            authorization?.toByteArray(StandardCharsets.UTF_8)
-        if (encodedAuthorization != null) connection.setRequestProperty(
-            "Authorization",
-            "Basic $encodedAuthorization"
-        )
+        if (authorization != null) {
+            val encodedAuthorization = Base64.encodeToString(
+                authorization.toByteArray(StandardCharsets.UTF_8),
+                Base64.DEFAULT
+            )
+            connection.setRequestProperty(
+                "Authorization",
+                "Basic $encodedAuthorization"
+            )
+        }
 
         val encodedBody: ByteArray = body.toByteArray(StandardCharsets.UTF_8)
         connection.setRequestProperty(
@@ -49,15 +54,16 @@ class Network(val context: Context) {
             outputStream.flush()
         } catch (exception: Exception) {
             logger.error("network.httpPost failed: $exception")
-            return@withContext false
+            return@withContext exception.toString()
         }
 
         val responseCode = connection.responseCode
         if (responseCode < 200 || responseCode > 299) {
-            logger.error("network.httpPost: Bad response code: $responseCode")
-            return@withContext false
+            val message = "Bad response code: $responseCode"
+            logger.error("network.httpPost failed: $message")
+            return@withContext message
         }
 
-        return@withContext true
+        return@withContext null
     }
 }

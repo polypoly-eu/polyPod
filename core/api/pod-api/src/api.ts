@@ -152,13 +152,15 @@ export interface PolyNav {
 export interface Network {
     /**
      * A way for features to send HTTP POST requests
+     *
+     * @returns an error message if something went wrong, `undefined` upon success.
      */
     httpPost(
         url: string,
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<boolean>;
+    ): Promise<string | undefined>;
 }
 
 /**

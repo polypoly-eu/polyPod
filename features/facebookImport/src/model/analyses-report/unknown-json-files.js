@@ -5,18 +5,11 @@ import {
     jsonDataEntities,
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
+import ReportAnalysis from "./report-analysis.js";
 
-export default class UknownJSONFilesAnalysis {
+export default class UknownJSONFilesAnalysis extends ReportAnalysis {
     get title() {
-        return "Uknown JSON files";
-    }
-
-    get id() {
-        return "uknown-json-files";
-    }
-
-    get isForDataReport() {
-        return true;
+        return "Unknown JSON files";
     }
 
     get jsonReport() {

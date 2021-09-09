@@ -31,13 +31,14 @@ const ReportView = () => {
     const unrecognizedData = fileAnalysis.unrecognizedData;
     const [reportSent, setReportSent] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [error, setError] = useState();
 
     const handleClosePopUp = () => {
         setIsOpen(!isOpen);
     };
 
     const handleSendReport = async () => {
-        const success = await window.pod.network.httpPost(
+        const error = await window.pod.network.httpPost(
             process.env.POLYPOD_POLYPEDIA_REPORT_URL,
             JSON.stringify(unrecognizedData.jsonReport),
             "application/json",
@@ -46,7 +47,11 @@ const ReportView = () => {
 
         handleClosePopUp();
 
-        if (success) setReportSent(true);
+        if (error) {
+            setError(error);
+            return;
+        }
+        setReportSent(true);
     };
 
     function renderReportAnalyses() {
@@ -73,9 +78,18 @@ const ReportView = () => {
             <div className="button-area">
                 {isOpen && (
                     <PopUpMessage handleClosePopUp={handleClosePopUp}>
-                        <div className={reportSent ? "" : "unsuccessfully"}>
-                            Report sent {reportSent ? "" : "un"}successfully
-                        </div>
+                        {reportSent ? (
+                            "Report sent successfully"
+                        ) : (
+                            <div>
+                                <span className="unsuccessfully">
+                                    Error while sending report.
+                                </span>
+                                <br />
+                                Message: {error} <br />
+                                URL: {process.env.POLYPOD_POLYPEDIA_REPORT_URL}
+                            </div>
+                        )}
                     </PopUpMessage>
                 )}
                 <button className="send" onClick={handleSendReport}>

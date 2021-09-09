@@ -187,7 +187,7 @@ class BrowserNetwork implements Network {
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<boolean> {
+    ): Promise<string | undefined> {
         return new Promise((resolve) => {
             const request = new XMLHttpRequest();
 
@@ -195,18 +195,14 @@ class BrowserNetwork implements Network {
                 if (request.readyState !== XMLHttpRequest.DONE) return;
                 const status = request.status;
                 if (status < 200 || status > 299) {
-                    console.error(
-                        `httpPost: Unexpected response status: ${status}`
-                    );
-                    resolve(false);
+                    resolve(`Unexpected response status: ${status}`);
                     return;
                 }
-                resolve(true);
+                resolve();
             };
 
             request.onerror = function () {
-                console.error("httpPost: Network error");
-                resolve(false);
+                resolve("Network error");
             };
 
             request.open("POST", url);
