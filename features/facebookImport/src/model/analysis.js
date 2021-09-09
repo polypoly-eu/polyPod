@@ -32,7 +32,6 @@ import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
 const subAnalyses = [
     ExportTitleAnalysis,
     ExportSizeAnalysis,
-
     DataBubblesAnalysis,
     DataChartsAnalysis,
     DataGroupsAnalysis,
@@ -51,8 +50,9 @@ const subAnalyses = [
     FriendsAnalysis,
     ReceivedFriendRequestsAnalysis,
     PagesOverviewAnalysis,
-    ImportedJsonFilesAnalysis,
     SesssionActivityLocationsAnalysis,
+    ImportedJsonFilesAnalysis,
+
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
     NoDataFoldersAnalysis,
