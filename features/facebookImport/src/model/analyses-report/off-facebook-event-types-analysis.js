@@ -1,4 +1,5 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
 import ReportAnalysis from "./report-analysis.js";
 
 export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
@@ -34,14 +35,10 @@ export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
             return "No off-facebook events detected in your export!";
         }
         return (
-            <>
-                Types of activities done off-Facebook!
-                <ul>
-                    {[...this._offFacebookEventTypes].map((entry, index) => (
-                        <li key={index}>{entry}</li>
-                    ))}
-                </ul>
-            </>
+            <BasicList
+                title="Types of activities done off-Facebook!"
+                items={[...this._offFacebookEventTypes]}
+            />
         );
     }
 }
