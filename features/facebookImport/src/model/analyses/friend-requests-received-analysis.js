@@ -11,7 +11,7 @@ export default class ReceivedFriendRequestsAnalysis extends RootAnalysis {
         this.active = this._receivedFriendRequestsCount > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Received Friend Requests!";
         }

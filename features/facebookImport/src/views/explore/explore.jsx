@@ -10,11 +10,11 @@ const AnalysisCard = ({ analysis, setActiveDetails }) => {
     return (
         <div className="analysis-card">
             <h1>{analysis.title}</h1>
-            <div>{analysis.render()}</div>
+            <div>{analysis.renderSummary()}</div>
             {details ? (
                 <RouteButton
                     route="/explore/details"
-                    className="report-button"
+                    className="details-button"
                     onClick={() => setActiveDetails(details)}
                 >
                     View details

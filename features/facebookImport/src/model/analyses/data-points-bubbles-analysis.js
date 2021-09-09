@@ -30,7 +30,7 @@ export default class DataBubblesAnalysis extends RootAnalysis {
         this.active = this._bubblesData.length > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Data!";
         }

@@ -10,7 +10,7 @@ export default class AdInterestsAnalysis extends RootAnalysis {
         this.active = this._adInterestsCount > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Ad Interests!";
         }

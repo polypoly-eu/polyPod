@@ -10,7 +10,7 @@ export default class SearchesAnalysis extends RootAnalysis {
         this.active = this._searchesCount > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Searches!";
         }

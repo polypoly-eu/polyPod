@@ -11,7 +11,7 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
         this.active = this._connectedAdvertisersCount > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Connected Advertisers!";
         }

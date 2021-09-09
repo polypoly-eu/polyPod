@@ -10,7 +10,7 @@ export default class FriendsAnalysis extends RootAnalysis {
         this.active = this._friendsCount > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Friends!";
         }

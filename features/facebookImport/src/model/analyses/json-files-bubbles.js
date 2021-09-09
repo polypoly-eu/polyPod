@@ -38,7 +38,7 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
         this.active = true;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Data!";
         }
