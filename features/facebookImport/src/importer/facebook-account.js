@@ -270,8 +270,9 @@ class FacebookAccount {
 
             {
                 title: "Admin Records",
-                count: this.adminRecords,
+                count: this.adminRecords.length,
             },
+
             {
                 title: "Session activities",
                 count: this.accountSessionActivities.length,
