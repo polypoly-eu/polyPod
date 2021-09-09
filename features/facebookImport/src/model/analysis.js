@@ -30,6 +30,7 @@ import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.j
 import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
 import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
 import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
+import JSONFileNamesAnalysis from "./analyses-report/json-file-names-analysis.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -61,6 +62,7 @@ const subAnalyses = [
     DataImportingStatusAnalysis,
     NoDataFoldersAnalysis,
     UnknownJSONFilesAnalysis,
+    JSONFileNamesAnalysis,
     MissingKnownJSONFilesAnalysis,
 ];
 
