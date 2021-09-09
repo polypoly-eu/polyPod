@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
 import { importData } from "../importer/importer.js";
 
@@ -28,11 +28,13 @@ const fakeStorage = {
     removeFile: async () => {},
 };
 
-function updatePodNavigation(pod, history) {
+function updatePodNavigation(pod, history, handleBack, location) {
     pod.polyNav.actions = {
-        back: () => history.goBack(),
+        back: () => handleBack(),
     };
-    history.length > 1
+    history.length > 1 &&
+    location.pathname !== "/overview" &&
+    location.pathname !== "/import"
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
 }
@@ -79,6 +81,8 @@ export const ImporterProvider = ({ children }) => {
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
     });
+
+    const location = useLocation();
 
     storage.changeListener = async () => {
         const resolvedFiles = [];
@@ -182,7 +186,7 @@ export const ImporterProvider = ({ children }) => {
     //on history change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, history);
+        updatePodNavigation(pod, history, handleBack, location);
         updateTitle(pod);
     });
 
