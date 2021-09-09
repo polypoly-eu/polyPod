@@ -15,21 +15,18 @@ export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
 
     async analyze({ facebookAccount }) {
         this.active = facebookAccount.offFacebookEventsCount > 0;
-        this._offFacebookEventTypes = [];
+        this._offFacebookEventTypes = new Set();
 
         if (!this.active) {
             return;
         }
 
         facebookAccount.forEachOffFacebookEvent((event) => {
-            if (!event.type) {
-                return;
-            }
-            const eventType = event.type.toLowerCase();
-            if (!this._offFacebookEventTypes.includes(eventType)) {
-                this._offFacebookEventTypes.push(eventType);
+            if (event.type) {
+                this._offFacebookEventTypes.add(event.type);
             }
         });
+        this.active = this._offFacebookEventTypes.size > 0;
     }
 
     render() {
@@ -40,7 +37,7 @@ export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
             <>
                 Types of activities done off-Facebook!
                 <ul>
-                    {this._offFacebookEventTypes.map((entry, index) => (
+                    {[...this._offFacebookEventTypes].map((entry, index) => (
                         <li key={index}>{entry}</li>
                     ))}
                 </ul>
