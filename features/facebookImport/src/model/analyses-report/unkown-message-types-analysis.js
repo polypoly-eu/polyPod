@@ -1,5 +1,5 @@
 import React from "react";
-import RootAnalysis from "../analyses/root-analysis";
+import ReportAnalysis from "./report-analysis";
 
 const knownMessageTypes = [
     "generic",
@@ -9,13 +9,9 @@ const knownMessageTypes = [
     "unsubscribe",
 ];
 
-export default class UnknownMessageTypesAnalysis extends RootAnalysis {
+export default class UnknownMessageTypesAnalysis extends ReportAnalysis {
     get title() {
         return "Unknown Message Types";
-    }
-
-    get isForDataReport() {
-        return true;
     }
 
     get jsonReport() {
