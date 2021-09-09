@@ -33,7 +33,6 @@ export default class PagesOverviewAnalysis extends RootAnalysis {
     }
 
     render() {
-        
         return <BasicDataCountTable items={this._pagesData} />;
     }
 }
