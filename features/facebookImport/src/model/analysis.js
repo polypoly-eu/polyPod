@@ -70,9 +70,10 @@ const subAnalyses = [
     MissingKnownJSONFilesAnalysis,
 ];
 
-class InactiveAnalysis {
+class InactiveCardsSummary {
     constructor(inactiveAnalyses) {
         this._inactiveAnalyses = inactiveAnalyses;
+        this.active = this._inactiveAnalyses.length > 0;
     }
 
     get title() {
@@ -80,7 +81,14 @@ class InactiveAnalysis {
     }
 
     get id() {
-        return InactiveAnalysis.name;
+        return InactiveCardsSummary.name;
+    }
+
+    get jsonReport() {
+        return {
+            id: this.id,
+            inactiveAnalyses: this._inactiveAnalyses,
+        };
     }
 
     render() {
@@ -99,20 +107,20 @@ class UnrecognizedData {
         this._activeReportAnalyses = executedAnalyses.filter(
             (analysis) => analysis.isForDataReport && analysis.active
         );
-        this._inactiveAnalyses = executedAnalyses.filter(
+
+        const inactiveAnalyses = executedAnalyses.filter(
             (analysis) => !analysis.active
         );
-        this.active =
-            this._activeReportAnalyses.length > 0 ||
-            this._inactiveAnalyses.length > 0;
+        const inactiveCardsSummary = new InactiveCardsSummary(inactiveAnalyses);
+        if (inactiveCardsSummary.active) {
+            this._activeReportAnalyses.push(inactiveCardsSummary);
+        }
+
+        this.active = this._activeReportAnalyses.length > 0;
     }
 
     get reportAnalyses() {
         return this._activeReportAnalyses;
-    }
-
-    get inactiveAnalysis() {
-        return new InactiveAnalysis(this._inactiveAnalyses);
     }
 
     get report() {
@@ -120,8 +128,10 @@ class UnrecognizedData {
             return "No data to report!";
         }
         return (
-            this._activeReportAnalyses.length +
-            " analyses included in the report"
+            this.reportAnalyses.length +
+            " " +
+            (this.reportAnalyses.length > 0 ? "analyses" : "analysis") +
+            "  included in the report"
         );
     }
 
@@ -129,14 +139,11 @@ class UnrecognizedData {
         if (!this.active) {
             return {};
         }
-        const reportAnalyses = this._activeReportAnalyses.map(
+        const reportAnalyses = this.reportAnalyses.map(
             (analysis) => analysis.jsonReport
         );
-        const inactiveAnalysesIds = this._inactiveAnalyses.map(
-            (analysis) => analysis.id
-        );
 
-        return { reportAnalyses, inactiveAnalysesIds };
+        return reportAnalyses;
     }
 }
 
