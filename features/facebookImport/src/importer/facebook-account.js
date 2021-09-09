@@ -15,6 +15,7 @@ class FacebookAccount {
         this._unfollowedPages = [];
         this._searches = [];
         this._messageThreads = [];
+        this._adminRecords = [];
         this._accountSessionActivities = [];
     }
 
@@ -190,6 +191,14 @@ class FacebookAccount {
         this._messageThreads = messageThreads;
     }
 
+    get adminRecords() {
+        return this._adminRecords;
+    }
+
+    set adminRecords(adminRecords) {
+        this._adminRecords = adminRecords;
+    }
+
     get accountSessionActivities() {
         return this._accountSessionActivities;
     }
@@ -257,6 +266,11 @@ class FacebookAccount {
             {
                 title: "Messages",
                 count: this.messagesCount,
+            },
+
+            {
+                title: "Admin Records",
+                count: this.adminRecords.length,
             },
 
             {
