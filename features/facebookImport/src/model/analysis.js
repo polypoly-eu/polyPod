@@ -21,6 +21,7 @@ import NoDataFoldersAnalysis from "./analyses-report/no-data-folders.js";
 import MissingKnownJSONFilesAnalysis from "./analyses-report/missing-known-json-files.js";
 import UnknownJSONFilesAnalysis from "./analyses-report/unknown-json-files.js";
 import MessagesDetailsAnalysis from "./analyses/messages-details-analysis.js";
+import MessageThreadsAnalysis from "./analyses/message-threads-analysis.js";
 import OffFacebookEventsTypesAnalysis from "./analyses/off-facebook-events-types-analysys.js";
 import DataChartsAnalysis from "./analyses/data-points-charts-analysis.js";
 import OffFacebookEventsTypesChartAnalysis from "./analyses/off-facebook-events-types-charts-analysis.js";
@@ -30,6 +31,8 @@ import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.j
 import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
 import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
 import EmailAddressesAnalysis from "./analyses/email-addresses-analysis.js";
+import SesssionActivityLocationsAnalysis from "./analyses/activity-locations-analysis.js";
+import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -49,6 +52,8 @@ const subAnalyses = [
     MessagesAnalysis,
     MessagesDetailsAnalysis,
     EmailAddressesAnalysis,
+    MessageThreadsAnalysis,
+    MessagesActivityAnalysis,
     SearchesAnalysis,
     FriendsAnalysis,
     LikedPagesAnalysis,
@@ -56,6 +61,7 @@ const subAnalyses = [
     RecommendedPagesAnalysis,
     UnfollowedPagesAnalysis,
     ReceivedFriendRequestsAnalysis,
+    SesssionActivityLocationsAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,

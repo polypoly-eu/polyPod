@@ -1,13 +1,9 @@
 import React from "react";
-import RootAnalysis from "../analyses/root-analysis.js";
+import ReportAnalysis from "./report-analysis.js";
 
-export default class DataImportingStatusAnalysis extends RootAnalysis {
+export default class DataImportingStatusAnalysis extends ReportAnalysis {
     get title() {
         return "Importing status";
-    }
-
-    get isForDataReport() {
-        return true;
     }
 
     get jsonReport() {

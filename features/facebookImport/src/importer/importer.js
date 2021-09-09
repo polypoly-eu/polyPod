@@ -14,6 +14,7 @@ import SearchesImporter from "./data-importers/searches-importer.js";
 import UnfollowedPagesImporter from "./data-importers/pages-unfollowed-importer.js";
 import MessagesImporter from "./data-importers/messages-importer.js";
 import AdminRecordsImporter from "./data-importers/admin-records-importer.js";
+import AccountSessionActivitiesImporter from "./data-importers/account-session-activities-importer.js";
 
 import { IMPORT_SUCCESS, createErrorResult } from "./importer-status.js";
 
@@ -31,6 +32,7 @@ const dataImporters = [
     UnfollowedPagesImporter,
     MessagesImporter,
     AdminRecordsImporter,
+    AccountSessionActivitiesImporter,
 ];
 
 export async function importData(file) {
