@@ -6,19 +6,16 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
         return "Importing status";
     }
 
-    get jsonReport() {
-        return {
-            id: this.id,
-            importingResults: this._importingResults.map(
-                ({ status, importerClass, message }) => {
-                    return {
-                        status,
-                        importerName: importerClass.name,
-                        message,
-                    };
-                }
-            ),
-        };
+    get reportData() {
+        return this._importingResults.map(
+            ({ status, importerClass, message }) => {
+                return {
+                    status,
+                    importerName: importerClass.name,
+                    message,
+                };
+            }
+        );
     }
 
     async analyze({ facebookAccount }) {

@@ -12,11 +12,8 @@ export default class JSONFileNamesAnalysis extends ReportAnalysis {
         return "JSON file names";
     }
 
-    get jsonReport() {
-        return {
-            id: this.id,
-            jsonFileNames: this._jsonFileNames,
-        };
+    get reportData() {
+        return this._jsonFileNames;
     }
 
     async analyze({ id, zipFile }) {

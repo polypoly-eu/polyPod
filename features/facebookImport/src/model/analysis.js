@@ -141,7 +141,7 @@ class UnrecognizedData {
             (analysis) => analysis.jsonReport
         );
 
-        return reportAnalyses;
+        return { reportAnalyses };
     }
 }
 

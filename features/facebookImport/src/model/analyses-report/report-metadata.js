@@ -6,14 +6,11 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
         return "Report Metadata";
     }
 
-    get jsonReport() {
+    get reportData() {
         return {
-            id: this.id,
-            metadata: {
-                fileSize: this._size,
-                filesCount: this._filesCount,
-                preferedLanguage: this._preferedLanguage,
-            },
+            fileSize: this._size,
+            filesCount: this._filesCount,
+            preferedLanguage: this._preferedLanguage,
         };
     }
 
