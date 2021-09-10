@@ -1,16 +1,4 @@
-const stepBasis = [
-    0,
-    0.2,
-    0.5,
-    "next",
-    1,
-    1,
-    1,
-    "next",
-    2,
-    "nextPow",
-    "nextPow",
-];
+const stepBasis = [0, 0.2, 0.5, "next", 1, 1, 1, "next", 2, "nextPow"];
 
 /**
  * Generate a scale with decent step number values from any number
