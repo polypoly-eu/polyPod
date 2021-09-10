@@ -201,7 +201,11 @@ const ImportExplanationExpandable = ({
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
                     <div
-                        onClick={() => onUpdateImportStatus(section)}
+                        onClick={
+                            section === "explore"
+                                ? () => {}
+                                : () => onUpdateImportStatus(section)
+                        }
                         className="head"
                         id={importIds[section]}
                     >
