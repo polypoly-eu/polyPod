@@ -1,4 +1,5 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
 import ReportAnalysis from "./report-analysis";
 
 export default class NoDataFoldersAnalysis extends ReportAnalysis {
@@ -37,12 +38,6 @@ export default class NoDataFoldersAnalysis extends ReportAnalysis {
     }
 
     render() {
-        return (
-            <ul>
-                {this._noDataFolderNames.map((entry, index) => (
-                    <li key={index}>{entry}</li>
-                ))}
-            </ul>
-        );
+        return <BasicList items={this._noDataFolderNames} />;
     }
 }

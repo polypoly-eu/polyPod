@@ -1,4 +1,5 @@
 import React from "react";
+import BasicDataCountTable from "../../components/basicDataCountTable/basicDataCountTable.jsx";
 import RootAnalysis from "./root-analysis.js";
 
 export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
@@ -40,24 +41,12 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
             return "No Session Activities!";
         }
         return (
-            <>
-                Locations contained in session activities, like log-in or
-                log-out.
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Location</th>
-                            <th>Activities count</th>
-                        </tr>
-                        {this._locationsData.map(({ title, count }, index) => (
-                            <tr key={index}>
-                                <td>{title}</td>
-                                <td>{count}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </>
+            <BasicDataCountTable
+                title={
+                    "Locations contained in session activities, like log-in or log-out."
+                }
+                items={this._locationsData}
+            />
         );
     }
 }

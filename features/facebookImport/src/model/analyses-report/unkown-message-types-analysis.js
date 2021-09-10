@@ -1,4 +1,5 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
 import ReportAnalysis from "./report-analysis";
 
 const knownMessageTypes = [
@@ -46,12 +47,7 @@ export default class UnknownMessageTypesAnalysis extends ReportAnalysis {
         if (!this.active) {
             return "No unknown message types!";
         }
-        return (
-            <ul>
-                {[...this._unknownMessageTypes].map((entry, index) => (
-                    <li key={index}>{entry}</li>
-                ))}
-            </ul>
-        );
+
+        return <BasicList items={[...this._unknownMessageTypes]} />;
     }
 }
