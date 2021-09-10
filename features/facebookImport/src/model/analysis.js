@@ -137,11 +137,13 @@ class UnrecognizedData {
         if (!this.active) {
             return {};
         }
+
         const reportAnalyses = this.reportAnalyses.map(
             (analysis) => analysis.jsonReport
         );
 
-        return { reportAnalyses };
+        // Add inactive analises to not break the validation on the backend.
+        return { reportAnalyses, inactiveAnalysesIds: [] };
     }
 }
 
