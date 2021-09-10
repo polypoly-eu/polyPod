@@ -1,7 +1,6 @@
 import generateScale from "../src/model/generate-scale";
 
 describe("Scale generator", function () {
-    console.log(generateScale(1));
     it("Returns the correct scales", function () {
         expect(generateScale(1)).toStrictEqual([0, 0.2, 0.4, 0.6, 0.8, 1]);
         expect(generateScale(1.1)).toStrictEqual([0, 0.5, 1, 1.5]);
