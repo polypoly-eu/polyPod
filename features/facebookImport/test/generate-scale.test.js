@@ -15,5 +15,8 @@ describe("Scale generator", function () {
         expect(generateScale(9000)).toStrictEqual([
             0, 2000, 4000, 6000, 8000, 10000,
         ]);
+        expect(generateScale(0.0002)).toStrictEqual([
+            0, 0.00005, 0.0001, 0.00015, 0.0002,
+        ]);
     });
 });
