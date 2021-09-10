@@ -34,6 +34,10 @@
     box-sizing: border-box;
 }
 
+.explore-view .details-button {
+    margin-top: 12px;
+}
+
 .analysis-card:first-child {
     margin-top: 20px;
 }
