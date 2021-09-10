@@ -20,9 +20,6 @@ export default class OffFacebookEventsTypesChartAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No off-facebook events detected in your export!";
-        }
         return <BarChart data={this._eventsTypeCountPairs} names="type" />;
     }
 }

@@ -63,9 +63,6 @@ export default class MessageThreadsAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No Data!";
-        }
         return (
             <>
                 <p>

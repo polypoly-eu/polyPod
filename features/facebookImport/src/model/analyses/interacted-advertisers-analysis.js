@@ -11,9 +11,6 @@ export default class InteractedWithAdvertisersAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No Interacted with Advertisers!";
-        }
         return `There are ${this._advertisersCount} advertisers whose ads you've clicked on Facebook`;
     }
 }

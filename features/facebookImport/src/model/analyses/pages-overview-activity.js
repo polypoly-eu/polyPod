@@ -33,9 +33,6 @@ export default class PagesOverviewAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No Pages Information!";
-        }
         return <BasicDataCountTable items={this._pagesData} />;
     }
 }

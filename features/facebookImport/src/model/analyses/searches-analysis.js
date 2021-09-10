@@ -11,9 +11,6 @@ export default class SearchesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No Searches!";
-        }
         return `There are ${this._searchesCount} words, phrases and names you've searched for`;
     }
 }

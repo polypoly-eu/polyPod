@@ -45,9 +45,6 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No messages detected in your export!";
-        }
         return (
             <div>
                 <p>

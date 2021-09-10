@@ -34,9 +34,6 @@ export default class MessagesActivityAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No messages detected in your export!";
-        }
         return (
             <>
                 Sent and received messages grouped by the hour of the day:

@@ -13,12 +13,7 @@ export default class DataGroupsAnalysis extends RootAnalysis {
         );
         this.active = this._bubblesData.length > 0;
     }
-
     renderSummary() {
-        if (!this.active) {
-            return "No Data!";
-        }
-
         <BasicDataCountTable items={this._bubblesData} />;
     }
 }

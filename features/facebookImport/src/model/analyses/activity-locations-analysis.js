@@ -37,9 +37,6 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No Session Activities!";
-        }
         return (
             <BasicDataCountTable
                 title={

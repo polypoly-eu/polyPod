@@ -30,9 +30,6 @@ export default class EmailAddressesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No Email Addresses!";
-        }
         return (
             <BasicList
                 title={"Email addresses found in your export."}

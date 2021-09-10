@@ -11,9 +11,6 @@ export default class FriendsAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No Friends!";
-        }
         return `You are currently connected to ${this._friendsCount} people.`;
     }
 }

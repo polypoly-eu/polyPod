@@ -27,9 +27,6 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No importers were run!";
-        }
         return (
             <>
                 <p>

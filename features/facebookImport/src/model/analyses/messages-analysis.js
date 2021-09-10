@@ -21,9 +21,6 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        if (!this.active) {
-            return "No messages detected in your export!";
-        }
         return (
             <p>
                 In your export there are {this._messagesCount} messages in{" "}
