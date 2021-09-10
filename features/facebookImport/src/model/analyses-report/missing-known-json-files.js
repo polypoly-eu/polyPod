@@ -1,4 +1,5 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
 
 import {
     anonymizeJsonEntityPath,
@@ -51,12 +52,6 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
     }
 
     render() {
-        return (
-            <ul>
-                {this._missingKnownFileNames.map((entry, index) => (
-                    <li key={index}>{entry}</li>
-                ))}
-            </ul>
-        );
+        return <BasicList items={this._missingKnownFileNames} />;
     }
 }

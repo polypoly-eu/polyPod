@@ -1,4 +1,5 @@
 import React from "react";
+import BasicDataCountTable from "../../components/basicDataCountTable/basicDataCountTable.jsx";
 import RootAnalysis from "./root-analysis";
 
 export default class DataGroupsAnalysis extends RootAnalysis {
@@ -14,17 +15,6 @@ export default class DataGroupsAnalysis extends RootAnalysis {
     }
 
     render() {
-        return (
-            <table>
-                <tbody>
-                    {this._bubblesData.map(({ title, count }, index) => (
-                        <tr key={index}>
-                            <td>{title}</td>
-                            <td>{count}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        );
+        <BasicDataCountTable items={this._bubblesData} />;
     }
 }

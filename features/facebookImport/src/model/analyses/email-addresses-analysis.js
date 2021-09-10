@@ -1,4 +1,5 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
 import RootAnalysis from "./root-analysis.js";
 
 export default class EmailAddressesAnalysis extends RootAnalysis {
@@ -30,14 +31,10 @@ export default class EmailAddressesAnalysis extends RootAnalysis {
 
     render() {
         return (
-            <>
-                Email addresses found in your export:
-                <ul>
-                    {[...this._emailAddresses].map((entry, index) => (
-                        <li key={index}>{entry}</li>
-                    ))}
-                </ul>
-            </>
+            <BasicList
+                title={"Email addresses found in your export."}
+                items={[...this._emailAddresses]}
+            />
         );
     }
 }
