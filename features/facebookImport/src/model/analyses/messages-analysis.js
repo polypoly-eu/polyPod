@@ -20,7 +20,7 @@ export default class MessagesAnalysis extends RootAnalysis {
         this.active = this._messagesCount > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No messages detected in your export!";
         }

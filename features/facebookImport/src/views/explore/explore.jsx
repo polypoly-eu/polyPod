@@ -5,17 +5,15 @@ import { ImporterContext } from "../../context/importer-context.jsx";
 import "./explore.css";
 
 const AnalysisCard = ({ analysis, setActiveDetails }) => {
-    const details = analysis.renderDetails();
-
     return (
         <div className="analysis-card">
             <h1>{analysis.title}</h1>
-            <div>{analysis.render()}</div>
-            {details ? (
+            <div>{analysis.renderSummary()}</div>
+            {analysis.renderDetails ? (
                 <RouteButton
                     route="/explore/details"
-                    className="report-button"
-                    onClick={() => setActiveDetails(details)}
+                    className="details-button"
+                    onClick={() => setActiveDetails(analysis)}
                 >
                     View details
                 </RouteButton>

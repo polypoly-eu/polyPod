@@ -1,0 +1,19 @@
+.details-view {
+    height: 100%;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    background-color: var(--background-dark);
+    padding: 24px;
+    border-top: 1px inset #a9b6c6;
+}
+
+.details-view .details-view-title {
+    text-align: center;
+    font-weight: 500;
+    margin: 8px 0 20px 0;
+    font-size: 24px;
+}
+
+.details-view ul {
+    padding: 0 20px;
+}
