@@ -2,7 +2,7 @@ const stepBasis = [0, 0.2, 0.5, "next", 1, 1, 1, "next", 2, "nextPow"];
 
 /**
  * Generate a scale with decent step number values from any number
- * Limted to 10 decimal places and only positive numbers
+ * Limted to positive numbers
  * @param {Number} aNumber - Any number
  * @returns {Number[]} - Scale where this number fits in
  */
