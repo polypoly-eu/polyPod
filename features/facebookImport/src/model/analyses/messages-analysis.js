@@ -20,7 +20,7 @@ export default class MessagesAnalysis extends RootAnalysis {
         this.active = this._messagesCount > 0;
     }
 
-    render() {
+    renderSummary() {
         return (
             <p>
                 In your export there are {this._messagesCount} messages in{" "}

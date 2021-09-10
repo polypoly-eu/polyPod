@@ -10,7 +10,7 @@ export default class SearchesAnalysis extends RootAnalysis {
         this.active = this._searchesCount > 0;
     }
 
-    render() {
+    renderSummary() {
         return `There are ${this._searchesCount} words, phrases and names you've searched for`;
     }
 }

@@ -33,7 +33,7 @@ export default class MessagesActivityAnalysis extends RootAnalysis {
         });
     }
 
-    render() {
+    renderSummary() {
         return (
             <>
                 Sent and received messages grouped by the hour of the day:

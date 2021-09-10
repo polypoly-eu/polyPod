@@ -44,7 +44,7 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
         this._totalNumberOfBookPages = Math.round(this._wordCount / 500);
     }
 
-    render() {
+    renderSummary() {
         return (
             <div>
                 <p>

@@ -12,7 +12,7 @@ export default class ImportedJsonFilesAnalysis extends RootAnalysis {
         this.active = this._importedFileNames.length > 0;
     }
 
-    render() {
+    renderSummary() {
         return `We imported ${this._importedFileNames.length} files.`;
     }
 

@@ -32,7 +32,7 @@ export default class PagesOverviewAnalysis extends RootAnalysis {
         this.active = this._pagesData.some((data) => data.count > 0);
     }
 
-    render() {
+    renderSummary() {
         return <BasicDataCountTable items={this._pagesData} />;
     }
 }

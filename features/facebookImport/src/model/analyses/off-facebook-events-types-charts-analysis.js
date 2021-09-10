@@ -19,7 +19,7 @@ export default class OffFacebookEventsTypesChartAnalysis extends RootAnalysis {
             groupOffFacebookEventsByType(facebookAccount);
     }
 
-    render() {
+    renderSummary() {
         return <BarChart data={this._eventsTypeCountPairs} names="type" />;
     }
 }

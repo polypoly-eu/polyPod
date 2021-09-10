@@ -38,7 +38,7 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
         this.active = true;
     }
 
-    render() {
+    renderSummary() {
         return (
             <DataBubblesAll
                 data={this._filesMessagesCount}

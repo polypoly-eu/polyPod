@@ -19,7 +19,7 @@ export default class OffFacebookEventsTypesAnalysis extends RootAnalysis {
             groupOffFacebookEventsByType(facebookAccount);
     }
 
-    render() {
+    renderSummary() {
         <BasicDataCountTable items={this._eventsTypeCountPairs} />;
     }
 }

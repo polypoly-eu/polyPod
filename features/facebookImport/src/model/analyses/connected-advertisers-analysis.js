@@ -11,7 +11,7 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
         this.active = this._connectedAdvertisersCount > 0;
     }
 
-    render() {
+    renderSummary() {
         return `There are ${this._connectedAdvertisersCount} advertisers who run
                 ads using a contact list they uploaded that includes contact
                 info you shared with them or with one of their data partners`;

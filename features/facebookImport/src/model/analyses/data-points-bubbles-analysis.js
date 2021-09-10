@@ -30,7 +30,7 @@ export default class DataBubblesAnalysis extends RootAnalysis {
         this.active = this._bubblesData.length > 0;
     }
 
-    render() {
+    renderSummary() {
         return (
             <DataBubblesAll
                 data={this._bubblesDataScaled}

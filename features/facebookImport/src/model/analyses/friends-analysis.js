@@ -10,7 +10,7 @@ export default class FriendsAnalysis extends RootAnalysis {
         this.active = this._friendsCount > 0;
     }
 
-    render() {
+    renderSummary() {
         return `You are currently connected to ${this._friendsCount} people.`;
     }
 }

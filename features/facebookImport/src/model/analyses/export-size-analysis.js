@@ -10,7 +10,7 @@ export default class ExportSizeAnalysis extends RootAnalysis {
         this._size = size;
     }
 
-    render() {
+    renderSummary() {
         return "" + this._size;
     }
 }

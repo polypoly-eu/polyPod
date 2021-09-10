@@ -29,7 +29,7 @@ export default class EmailAddressesAnalysis extends RootAnalysis {
         this.active = this._emailAddresses.size > 0;
     }
 
-    render() {
+    renderSummary() {
         return (
             <BasicList
                 title={"Email addresses found in your export."}

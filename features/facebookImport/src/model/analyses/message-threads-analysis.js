@@ -62,7 +62,7 @@ export default class MessageThreadsAnalysis extends RootAnalysis {
         });
     }
 
-    render() {
+    renderSummary() {
         return (
             <>
                 <p>
