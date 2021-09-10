@@ -19,7 +19,7 @@ export default class OffFacebookEventsTypesChartAnalysis extends RootAnalysis {
             groupOffFacebookEventsByType(facebookAccount);
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No off-facebook events detected in your export!";
         }

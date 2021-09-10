@@ -44,7 +44,7 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
         this._totalNumberOfBookPages = Math.round(this._wordCount / 500);
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No messages detected in your export!";
         }

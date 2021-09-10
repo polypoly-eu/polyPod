@@ -33,7 +33,7 @@ export default class MessagesActivityAnalysis extends RootAnalysis {
         });
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No messages detected in your export!";
         }

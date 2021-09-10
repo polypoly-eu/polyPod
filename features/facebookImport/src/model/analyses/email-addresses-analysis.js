@@ -29,7 +29,7 @@ export default class EmailAddressesAnalysis extends RootAnalysis {
         this.active = this._emailAddresses.size > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Email Addresses!";
         }

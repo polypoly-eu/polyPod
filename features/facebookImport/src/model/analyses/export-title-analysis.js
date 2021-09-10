@@ -10,7 +10,7 @@ export default class ExportTitleAnalysis extends RootAnalysis {
         this._name = name;
     }
 
-    render() {
+    renderSummary() {
         return "" + this._name;
     }
 }

@@ -10,7 +10,7 @@ export default class InteractedWithAdvertisersAnalysis extends RootAnalysis {
         this.active = this._advertisersCount > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Interacted with Advertisers!";
         }

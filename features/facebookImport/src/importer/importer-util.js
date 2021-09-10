@@ -12,15 +12,19 @@ async function readJSONFile(dataFileName, zipFile) {
     if (!dataZipEntry) {
         throw new MissingFileImportException(dataFileName);
     }
-    const fileContent = new TextDecoder("utf-8").decode(
-        await zipFile.getContent(dataZipEntry)
-    );
+    const rawContent = await zipFile.getContent(dataZipEntry);
+    const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
         throw new MissingContentImportException(dataFileName);
     }
 
-    return JSON.parse(fileContent);
+    return JSON.parse(fileContent, (key, value) => {
+        if (typeof value === "string") {
+            return decodeURIComponent(escape(value));
+        }
+        return value;
+    });
 }
 
 async function readJSONDataArray(dataFileName, dataKey, zipFile) {

@@ -36,7 +36,7 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
         this.active = this._locationsData.length > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No Session Activities!";
         }

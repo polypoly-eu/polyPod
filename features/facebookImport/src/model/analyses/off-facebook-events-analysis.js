@@ -11,7 +11,7 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
         this.active = this._companiesCount > 0;
     }
 
-    render() {
+    renderSummary() {
         if (!this.active) {
             return "No off-facebook events detected in your export!";
         }
