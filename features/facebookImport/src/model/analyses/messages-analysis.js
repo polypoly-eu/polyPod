@@ -1,4 +1,5 @@
 import React from "react";
+import i18n from "../../i18n";
 import RootAnalysis from "./root-analysis";
 
 export default class MessagesAnalysis extends RootAnalysis {
@@ -54,5 +55,11 @@ export default class MessagesAnalysis extends RootAnalysis {
         );
     }
 
-    renderDetails() {}
+    renderDetails() {
+        return (
+            <>
+                <p>{i18n.t("messengesMinistory:number.chats")}</p>
+            </>
+        );
+    }
 }
