@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
 import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
+import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./importExplanationExpandable.css";
 
@@ -33,6 +34,7 @@ const ImportExplanationExpandable = ({
     };
 
     const expandableRef = useRef();
+    const { isClicked } = useContext(ImporterContext);
 
     // The scrollIntoView() method is not sopported by Safari and makes an strage scrolling behaviaur. This is temporary commented until we find a solution.
     // const handleScrollToSection = () => {
@@ -47,6 +49,7 @@ const ImportExplanationExpandable = ({
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
         window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
+        isClicked(true);
     };
 
     const bodyContent = {
