@@ -15,11 +15,8 @@ export default class UnknownMessageTypesAnalysis extends ReportAnalysis {
         return "Unknown Message Types";
     }
 
-    get jsonReport() {
-        return {
-            id: this.id,
-            unknownMessageTypes: this._unknownMessageTypes,
-        };
+    get reportData() {
+        return this._unknownMessageTypes;
     }
 
     async analyze({ facebookAccount }) {

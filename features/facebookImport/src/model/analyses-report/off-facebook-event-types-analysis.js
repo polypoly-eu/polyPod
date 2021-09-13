@@ -7,11 +7,8 @@ export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
         return "Off-Facebook Event Types";
     }
 
-    get jsonReport() {
-        return {
-            id: this.id,
-            offFacebookEventTypes: this._offFacebookEventTypes,
-        };
+    get reportData() {
+        return this._offFacebookEventTypes;
     }
 
     async analyze({ facebookAccount }) {

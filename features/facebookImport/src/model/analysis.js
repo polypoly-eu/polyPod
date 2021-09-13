@@ -137,11 +137,12 @@ class UnrecognizedData {
         if (!this.active) {
             return {};
         }
+
         const reportAnalyses = this.reportAnalyses.map(
             (analysis) => analysis.jsonReport
         );
 
-        return reportAnalyses;
+        return { reportAnalyses_v1: reportAnalyses };
     }
 }
 

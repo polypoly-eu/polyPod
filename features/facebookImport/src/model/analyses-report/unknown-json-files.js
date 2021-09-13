@@ -13,11 +13,8 @@ export default class UknownJSONFilesAnalysis extends ReportAnalysis {
         return "Unknown JSON files";
     }
 
-    get jsonReport() {
-        return {
-            id: this.id,
-            unknownFiles: this._unknownFiles,
-        };
+    get reportData() {
+        return this._unknownFiles;
     }
 
     async analyze({ id, zipFile }) {

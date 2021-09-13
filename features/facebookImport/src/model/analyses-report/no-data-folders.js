@@ -7,11 +7,8 @@ export default class NoDataFoldersAnalysis extends ReportAnalysis {
         return "NoData Folders";
     }
 
-    get jsonReport() {
-        return {
-            id: this.id,
-            noDataFolderNames: this._noDataFolderNames,
-        };
+    get reportData() {
+        return this._noDataFolderNames;
     }
 
     async analyze({ id, zipFile }) {

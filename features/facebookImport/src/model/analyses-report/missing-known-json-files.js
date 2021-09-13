@@ -13,11 +13,8 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
         return "Missing known JSON files";
     }
 
-    get jsonReport() {
-        return {
-            id: this.id,
-            missingKnownFileNames: this._missingKnownFileNames,
-        };
+    get reportData() {
+        return this._missingKnownFileNames;
     }
 
     _knownJsonFiles() {
