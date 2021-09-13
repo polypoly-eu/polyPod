@@ -1,4 +1,3 @@
-import React from "react";
 import { ZipFile } from "../model/storage.js";
 
 import DataBubblesAnalysis from "./analyses/data-points-bubbles-analysis.js";
@@ -32,6 +31,8 @@ import SesssionActivityLocationsAnalysis from "./analyses/activity-locations-ana
 import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
 import JSONFileNamesAnalysis from "./analyses-report/json-file-names-analysis.js";
 import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-types-analysis.js";
+import { createErrorStatus, createSuccessStatus } from "./analysis-status.js";
+import InactiveCardsSummary from "./analyses-report/inactive-cards-summary.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -68,48 +69,18 @@ const subAnalyses = [
     OffFacebookEventTypesAnalysis,
 ];
 
-class InactiveCardsSummary {
-    constructor(inactiveAnalyses) {
-        this._inactiveAnalyses = inactiveAnalyses;
-        this.active = this._inactiveAnalyses.length > 0;
-    }
-
-    get title() {
-        return "Inactive Analyses";
-    }
-
-    get id() {
-        return InactiveCardsSummary.name;
-    }
-
-    get jsonReport() {
-        return {
-            id: this.id,
-            inactiveAnalyses: this._inactiveAnalyses,
-        };
-    }
-
-    render() {
-        return (
-            <ul>
-                {this._inactiveAnalyses.map((analysis, index) => (
-                    <li key={index}>{analysis.id}</li>
-                ))}
-            </ul>
-        );
-    }
-}
-
 class UnrecognizedData {
-    constructor(executedAnalyses) {
-        this._activeReportAnalyses = executedAnalyses.filter(
-            (analysis) => analysis.isForDataReport && analysis.active
-        );
+    constructor(analysesResults) {
+        this._activeReportAnalyses = analysesResults
+            .filter(
+                ({ analysis, status }) =>
+                    status.isSuccess &&
+                    analysis.isForDataReport &&
+                    analysis.active
+            )
+            .map(({ analysis }) => analysis);
 
-        const inactiveAnalyses = executedAnalyses.filter(
-            (analysis) => !analysis.active
-        );
-        const inactiveCardsSummary = new InactiveCardsSummary(inactiveAnalyses);
+        const inactiveCardsSummary = new InactiveCardsSummary(analysesResults);
         if (inactiveCardsSummary.active) {
             this._activeReportAnalyses.push(inactiveCardsSummary);
         }
@@ -146,23 +117,44 @@ class UnrecognizedData {
     }
 }
 
+async function runAnalysis(analysisClass, enrichedData) {
+    const subAnalysis = new analysisClass();
+
+    return subAnalysis
+        .analyze(enrichedData)
+        .then((status) => {
+            const runStatus = status || createSuccessStatus(analysisClass);
+            return {
+                analysis: subAnalysis,
+                status: runStatus,
+            };
+        })
+        .catch((error) => {
+            return {
+                analysis: subAnalysis,
+                status: createErrorStatus(analysisClass, error),
+            };
+        });
+}
+
 export async function analyzeFile(file, facebookAccount) {
     const zipFile = new ZipFile(file, window.pod);
     const enrichedData = { ...file, zipFile, facebookAccount };
-    const executedAnalyses = await Promise.all(
+    const analysesResults = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
-            const subAnalysis = new subAnalysisClass();
-            await subAnalysis.analyze(enrichedData);
-            return subAnalysis;
+            return runAnalysis(subAnalysisClass, enrichedData);
         })
     );
 
-    const activeGlobalAnalyses = executedAnalyses.filter(
+    const successfullyExecutedAnalyses = analysesResults
+        .filter(({ status }) => status.isSuccess)
+        .map(({ analysis }) => analysis);
+    const activeGlobalAnalyses = successfullyExecutedAnalyses.filter(
         (analysis) => !analysis.isForDataReport && analysis.active
     );
 
     return {
         analyses: activeGlobalAnalyses,
-        unrecognizedData: new UnrecognizedData(executedAnalyses),
+        unrecognizedData: new UnrecognizedData(analysesResults),
     };
 }
