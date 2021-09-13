@@ -1,7 +1,7 @@
 import React from "react";
 import BasicList from "../../components/basicList/basicList.jsx";
 import ReportAnalysis from "./report-analysis.js";
-import allStructure from "../../static/allStructure";
+import topFolderNames from "../../static/topFolders.js";
 import { relevantZipEntries } from "../../importer/importer-util.js";
 
 async function extractTopLevelFolderNamesFromZip(id, zipFile) {
@@ -15,17 +15,6 @@ async function extractTopLevelFolderNamesFromZip(id, zipFile) {
         }
     });
 
-    return [...topLevelFolderNames];
-}
-
-function extractKnownTopLevelFolderNames() {
-    const topLevelFolderNames = new Set();
-    allStructure.forEach((fileName) => {
-        const nameParts = fileName.split("/");
-        if (nameParts.length >= 0) {
-            topLevelFolderNames.add(nameParts[0]);
-        }
-    });
     return [...topLevelFolderNames];
 }
 
@@ -43,10 +32,9 @@ export default class UknownTopLevelFoldersAnalysis extends ReportAnalysis {
             id,
             zipFile
         );
-        const knownTopLevelFolderNames = extractKnownTopLevelFolderNames();
 
         this._uknownFolderNames = topLevelFolderNames.filter(
-            (each) => !knownTopLevelFolderNames.includes(each)
+            (each) => !topFolderNames.includes(each)
         );
         this.active = this._uknownFolderNames.length > 0;
     }
