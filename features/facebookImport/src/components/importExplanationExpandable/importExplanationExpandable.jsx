@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
 import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
+import scrollSmoothly from "../../utils/smoothScroll.js";
 
 import "./importExplanationExpandable.css";
 
@@ -25,22 +26,23 @@ const ImportExplanationExpandable = ({
     file,
     onRemoveFile,
 }) => {
-    const importRefs = {
-        request: useRef(),
-        download: useRef(),
-        import: useRef(),
-        explore: useRef(),
+    const importIds = {
+        request: "request",
+        download: "download",
+        import: "import",
+        explore: "explore",
     };
 
     const expandableRef = useRef();
+    const expandableId = "expandable";
 
-    const handleScrollToSection = () => {
-        const refPoint = importRefs[importStatus]?.current;
-        if (refPoint)
-            refPoint.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
+    useEffect(() => {
+        scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
+    }, [importStatus]);
+
+    const handleRequestStatus = () => {
+        onUpdateImportStatus(importSteps.download);
+        window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
     };
 
     const bodyContent = {
@@ -63,7 +65,7 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <button
                     className="btn-highlighted"
-                    onClick={() => onUpdateImportStatus(importSteps.download)}
+                    onClick={() => handleRequestStatus()}
                 >
                     {i18n.t("import:request.button")}
                 </button>
@@ -118,15 +120,23 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
                     className={`btn-secondary ${file ? "deactivated" : ""}`}
-                    onClick={() => {
-                        onImportFile();
-                    }}
+                    onClick={
+                        file
+                            ? () => {}
+                            : () => {
+                                  onImportFile();
+                              }
+                    }
                 >
                     {i18n.t("import:import.button.1")}
                 </button>
                 <button
                     className={`btn-highlighted ${file ? "" : "deactivated"}`}
-                    onClick={() => onUpdateImportStatus(importSteps.explore)}
+                    onClick={
+                        file
+                            ? () => onUpdateImportStatus(importSteps.explore)
+                            : () => {}
+                    }
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
@@ -159,7 +169,7 @@ const ImportExplanationExpandable = ({
     return (
         <div
             ref={expandableRef}
-            onLoad={handleScrollToSection}
+            id={expandableId}
             className="explanation-expandable"
         >
             <div className="intro">
@@ -173,7 +183,7 @@ const ImportExplanationExpandable = ({
                     <div
                         onClick={() => onUpdateImportStatus(section)}
                         className="head"
-                        ref={importRefs[section]}
+                        id={importIds[section]}
                     >
                         <div className={`number ${section}`}>{index + 1}</div>
                         <div

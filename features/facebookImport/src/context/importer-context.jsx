@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
+import { importData } from "../importer/importer.js";
 
 export const ImporterContext = React.createContext();
-
-const pod = window.pod;
 
 //all nav-states for checking purposes
 const navigationStates = ["importStatus"];
@@ -21,12 +20,21 @@ const importSteps = {
     finished: "finished",
 };
 const namespace = "http://polypoly.coop/schema/fbImport/";
+//used until real storage is loaded
+const fakeStorage = {
+    files: [],
+    refreshFiles: async () => [],
+    readFile: async () => null,
+    removeFile: async () => {},
+};
 
-function updatePodNavigation(pod, history) {
+function updatePodNavigation(pod, history, handleBack, location) {
     pod.polyNav.actions = {
-        back: () => history.goBack(),
+        back: () => handleBack(),
     };
-    history.length > 1
+    history.length > 1 &&
+    location.pathname !== "/overview" &&
+    location.pathname !== "/import"
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
 }
@@ -36,21 +44,22 @@ function updateTitle(pod) {
 }
 
 //from storage
-async function readImportStatus() {
+async function readImportStatus(pod) {
+    const { dataFactory } = pod;
     const statusQuads = await pod.polyIn.select({
-        subject: { value: `${namespace}facebookImporter` },
-        predicate: { value: `${namespace}importStatus` },
+        subject: dataFactory.namedNode(`${namespace}facebookImporter`),
+        predicate: dataFactory.namedNode(`${namespace}importStatus`),
     });
     let status = statusQuads[0]?.object?.value?.split(namespace)[1];
     return status || importSteps.beginning;
 }
 
-async function writeImportStatus(status) {
+async function writeImportStatus(pod, status) {
     const { dataFactory, polyIn } = pod;
     const existingQuad = (
         await pod.polyIn.select({
-            subject: { value: `${namespace}facebookImporter` },
-            predicate: { value: `${namespace}importStatus` },
+            subject: dataFactory.namedNode(`${namespace}facebookImporter`),
+            predicate: dataFactory.namedNode(`${namespace}importStatus`),
         })
     )[0];
     polyIn.delete(existingQuad);
@@ -63,10 +72,18 @@ async function writeImportStatus(status) {
 }
 
 export const ImporterProvider = ({ children }) => {
-    //storage
-    const storage = new Storage(pod);
+    const [pod, setPod] = useState(null);
+    const [storage, setStorage] = useState(fakeStorage);
     const [files, setFiles] = useState([]);
+    const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
+    const [activeDetails, setActiveDetails] = useState(null);
+
+    const [navigationState, setNavigationState] = useState({
+        importStatus: importSteps.loading,
+    });
+
+    const location = useLocation();
 
     storage.changeListener = async () => {
         const resolvedFiles = [];
@@ -76,14 +93,17 @@ export const ImporterProvider = ({ children }) => {
         setFiles(Object.values(resolvedFiles));
     };
 
-    const [navigationState, setNavigationState] = useState({
-        importStatus: importSteps.loading,
-    });
-
     const history = useHistory();
 
     const handleRemoveFile = (fileID) => {
+        setFacebookAccount(null);
         storage.removeFile(fileID);
+    };
+
+    const handleImportFile = async () => {
+        const { polyNav } = pod;
+        await polyNav.importFile();
+        refreshFiles();
     };
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
@@ -118,38 +138,56 @@ export const ImporterProvider = ({ children }) => {
         });
     }
 
-    function importFile() {
-        return storage.importFile();
-    }
-
     function updateImportStatus(newStatus) {
         changeNavigationState({ importStatus: newStatus });
-        writeImportStatus(newStatus);
+        writeImportStatus(pod, newStatus);
     }
+
+    const initPod = async () => await window.pod;
 
     //on startup
     useEffect(() => {
-        readImportStatus().then((status) => {
-            if (
-                status &&
-                !(navigationState.importStatus == importSteps.explore)
-            )
-                changeNavigationState({ importStatus: status });
+        initPod().then((newPod) => {
+            setPod(newPod);
+            readImportStatus(newPod).then((status) => {
+                if (
+                    status &&
+                    !(navigationState.importStatus == importSteps.explore)
+                )
+                    changeNavigationState({ importStatus: status });
+            });
+            setStorage(new Storage(newPod));
         });
-        refreshFiles();
     }, []);
 
+    //on storage change
+    useEffect(() => {
+        refreshFiles();
+    }, [storage]);
+
     //on file change
+    //when files changed run the importer first and create an account model first.
+    //after there is an account the analyses are triggered.
     useEffect(() => {
         if (files[0])
-            analyzeFile(files[0]).then((fileAnalysis) =>
-                setFileAnalysis(fileAnalysis)
+            importData(files[0]).then((newFacebookAccount) =>
+                setFacebookAccount(newFacebookAccount)
             );
     }, [files]);
 
+    // On account changed
+    // When the account changes run the analises
+    useEffect(() => {
+        if (facebookAccount && files)
+            analyzeFile(files[0], facebookAccount).then((fileAnalysis) =>
+                setFileAnalysis(fileAnalysis)
+            );
+    }, [facebookAccount, files]);
+
     //on history change
     useEffect(() => {
-        updatePodNavigation(pod, history);
+        if (!pod) return;
+        updatePodNavigation(pod, history, handleBack, location);
         updateTitle(pod);
     });
 
@@ -162,11 +200,13 @@ export const ImporterProvider = ({ children }) => {
                 navigationState,
                 changeNavigationState,
                 handleBack,
+                handleImportFile,
                 importSteps,
                 updateImportStatus,
-                importFile,
                 fileAnalysis,
                 refreshFiles,
+                activeDetails,
+                setActiveDetails,
             }}
         >
             {children}

@@ -15,4 +15,7 @@ class PodApi {
         return PolyNav()
     }()
 
+    lazy var network: Network = {
+        return Network()
+    }()
 }
