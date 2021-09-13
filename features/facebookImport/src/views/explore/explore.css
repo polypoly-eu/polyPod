@@ -20,8 +20,7 @@
     font-size: 24px;
 }
 
-.explore-view .report-button,
-.explore-view .details-button {
+.explore-view .report-button,.explore-view .details-button {
     background-color: var(--color-red-300);
     padding: 4px 12px;
     margin: 0 auto;
@@ -44,7 +43,7 @@
     margin-top: 20px;
 }
 
-.analysis-card {
+.analysis-card{
     max-width: var(--max-width);
     margin: 0 auto 12px auto;
     padding: 12px 20px;
@@ -82,7 +81,7 @@
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title {
-    display: flex;
+    display:flex;
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title .alert-fake-icon {

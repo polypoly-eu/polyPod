@@ -187,7 +187,6 @@ export const ImporterProvider = ({ children }) => {
 
     //on history change
     useEffect(() => {
-        console.log(history);
         if (!pod) return;
         updatePodNavigation(pod, history, handleBack, location);
         updateTitle(pod);
