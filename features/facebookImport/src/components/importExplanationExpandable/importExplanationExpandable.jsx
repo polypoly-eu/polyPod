@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
 import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
+import scrollSmoothly from "../../utils/smoothScroll.js";
 
 import "./importExplanationExpandable.css";
 
@@ -25,24 +26,19 @@ const ImportExplanationExpandable = ({
     file,
     onRemoveFile,
 }) => {
-    const importRefs = {
-        request: useRef(),
-        download: useRef(),
-        import: useRef(),
-        explore: useRef(),
+    const importIds = {
+        request: "request",
+        download: "download",
+        import: "import",
+        explore: "explore",
     };
 
     const expandableRef = useRef();
+    const expandableId = "expandable";
 
-    // The scrollIntoView() method is not sopported by Safari and makes an strage scrolling behaviaur. This is temporary commented until we find a solution.
-    // const handleScrollToSection = () => {
-    //     const refPoint = importRefs[importStatus]?.current;
-    //     if (refPoint)
-    //         refPoint.scrollIntoView({
-    //             behavior: "smooth",
-    //             block: "start",
-    //         });
-    // };
+    useEffect(() => {
+        scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
+    }, [importStatus]);
 
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
@@ -173,7 +169,7 @@ const ImportExplanationExpandable = ({
     return (
         <div
             ref={expandableRef}
-            // onLoad={handleScrollToSection}
+            id={expandableId}
             className="explanation-expandable"
         >
             <div className="intro">
@@ -187,7 +183,7 @@ const ImportExplanationExpandable = ({
                     <div
                         onClick={() => onUpdateImportStatus(section)}
                         className="head"
-                        ref={importRefs[section]}
+                        id={importIds[section]}
                     >
                         <div className={`number ${section}`}>{index + 1}</div>
                         <div
