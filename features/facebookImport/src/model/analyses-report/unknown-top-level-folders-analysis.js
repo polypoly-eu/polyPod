@@ -29,7 +29,7 @@ function extractKnownTopLevelFolderNames() {
     return [...topLevelFolderNames];
 }
 
-export default class UknownTopLelFoldersAnalysis extends ReportAnalysis {
+export default class UknownTopLevelFoldersAnalysis extends ReportAnalysis {
     get title() {
         return "Unknown top-level folders";
     }
