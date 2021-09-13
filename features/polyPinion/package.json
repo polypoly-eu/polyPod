@@ -11,7 +11,7 @@
         "@rollup/plugin-commonjs": "^19.0.0",
         "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^8.4.0",
-        "@rollup/plugin-sucrase": "^3.1.0",
+        "@rollup/plugin-sucrase": "^4.0.0",
         "@types/react": "^17.0.18",
         "@types/react-dom": "^16.9.6",
         "@types/react-router-dom": "^5.1.5",
