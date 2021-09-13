@@ -94,7 +94,3 @@ check(() => {
         >
     >(server6);
 });
-
-it("It compiled", () => {
-    expect(true).toBeTruthy();
-});
