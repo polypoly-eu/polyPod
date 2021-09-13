@@ -7,17 +7,41 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     async analyze({ facebookAccount }) {
+        this.active = facebookAccount.hasMessages;
+        this._wordCount = 0;
+        this._callsCount = 0;
+        this._messageThreadsCount = 0;
+        this._messagesCount = 0;
+        this._totalNumberOfBookPages = 0;
+        this._callsDuration = 0;
+        if (!this.active) {
+            return;
+        }
+
         this._messageThreadsCount = facebookAccount.messageThreads.length;
         this._messagesCount = facebookAccount.messagesCount;
 
         const usernames = new Set();
         facebookAccount.forEachMessage((message) => {
+            if (!message?.content) {
+                return;
+            }
             if (message?.sender_name) {
                 usernames.add(message.sender_name);
             }
+            if (message?.type === "Call") {
+                //debugger;
+                this._callsCount++;
+                this._callsDuration += message.call_duration;
+            }
+
+            const content = message.content;
+            const words = content.match(/\b(\w+)\b/g);
+            this._wordCount += words ? words.length : 1;
+            return message;
         });
-        this._totalUsernamesCount = usernames.size;
-        this.active = this._messagesCount > 0;
+
+        this._totalNumberOfBookPages = Math.round(this._wordCount / 500);
     }
 
     renderSummary() {
@@ -29,4 +53,6 @@ export default class MessagesAnalysis extends RootAnalysis {
             </p>
         );
     }
+
+    renderDetails() {}
 }
