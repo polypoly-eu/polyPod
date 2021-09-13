@@ -142,8 +142,7 @@ class UnrecognizedData {
             (analysis) => analysis.jsonReport
         );
 
-        // Add inactive analises to not break the validation on the backend.
-        return { reportAnalyses, inactiveAnalysesIds: [] };
+        return { reportAnalyses_v1: reportAnalyses };
     }
 }
 
