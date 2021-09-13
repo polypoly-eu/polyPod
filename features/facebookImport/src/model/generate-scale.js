@@ -1,4 +1,16 @@
-const stepBasis = [0, 0.2, 0.5, "next", 1, 1, 1, "next", 2, "nextPow"];
+const stepBasis = [
+    0,
+    0.2,
+    0.5,
+    "next",
+    1,
+    1,
+    1,
+    "next",
+    2,
+    "nextPowerOfTen",
+    "nextPowerOfTen",
+];
 
 /**
  * Generate a scale with decent step number values from any number
@@ -11,13 +23,13 @@ export default function generateScale(aNumber) {
     const decimalNumber = +(aNumber / Math.pow(10, log10)).toPrecision(10);
     let nextHigherInteger = Math.ceil(decimalNumber);
     if (stepBasis[nextHigherInteger] == "next") nextHigherInteger++;
-    if (stepBasis[nextHigherInteger] == "nextPow") {
+    if (stepBasis[nextHigherInteger] == "nextPowerOfTen") {
         nextHigherInteger = 1;
         log10++;
     }
     const scale = [];
     for (
-        let step = 0;
+        let step = stepBasis[nextHigherInteger];
         step <= nextHigherInteger;
         step += stepBasis[nextHigherInteger]
     ) {

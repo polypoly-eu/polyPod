@@ -29,7 +29,7 @@ const BarChart = ({
         <div className="scale-container">
             <div className="scale">
                 <div className="origin">
-                    <p>{scaleValues.shift()}</p>
+                    <p>0</p>
                     <div></div>
                 </div>
                 {scaleValues.map((value, index) => (
