@@ -18,10 +18,10 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
     }
 
     _knownJsonFiles() {
-        const knowsJsonFileNames = allStructure.filter((each) =>
+        const knownJsonFileNames = allStructure.filter((each) =>
             each.endsWith(".json")
         );
-        return knowsJsonFileNames.filter(
+        return knownJsonFileNames.filter(
             (each) =>
                 !/^(posts|photos_and_videos)\/album\/[1-9][0-9]?.json$/.test(
                     each
@@ -41,8 +41,8 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
         const anonymizedPaths = relevantEntries.map((each) =>
             anonymizeJsonEntityPath(each.replace(`${id}/`, ""))
         );
-        const knowsJsonFiles = this._knownJsonFiles();
-        this._missingKnownFileNames = knowsJsonFiles.filter(
+        const knownJsonFiles = this._knownJsonFiles();
+        this._missingKnownFileNames = knownJsonFiles.filter(
             (each) => !anonymizedPaths.includes(each)
         );
         this.active = this._missingKnownFileNames.length > 0;
