@@ -8,6 +8,7 @@
     padding: 24px;
     border-top: 1px inset #a9b6c6;
     box-sizing: border-box;
+    height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -19,7 +20,8 @@
     font-size: 24px;
 }
 
-.explore-view .report-button,.explore-view .details-button  {
+.explore-view .report-button,
+.explore-view .details-button {
     background-color: var(--color-red-300);
     padding: 4px 12px;
     margin: 0 auto;
@@ -65,7 +67,7 @@
     margin: 0;
 }
 
-.analysis-card ul{
+.analysis-card ul {
     padding: 0 20px;
 }
 
@@ -80,7 +82,7 @@
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title {
-    display:flex;
+    display: flex;
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title .alert-fake-icon {
