@@ -32,6 +32,7 @@ import SesssionActivityLocationsAnalysis from "./analyses/activity-locations-ana
 import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
 import JSONFileNamesAnalysis from "./analyses-report/json-file-names-analysis.js";
 import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-types-analysis.js";
+import UknownTopLelFoldersAnalysis from "./analyses-report/unknown-top-level-folders-analysis.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -62,6 +63,7 @@ const subAnalyses = [
     DataImportingStatusAnalysis,
     UnknownMessageTypesAnalysis,
     NoDataFoldersAnalysis,
+    UknownTopLelFoldersAnalysis,
     UnknownJSONFilesAnalysis,
     JSONFileNamesAnalysis,
     MissingKnownJSONFilesAnalysis,
