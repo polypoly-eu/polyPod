@@ -69,7 +69,6 @@ export default class MessagesAnalysis extends RootAnalysis {
 
             this._totalUsernamesCount = usernames.size;
         });
-
     }
 
     renderSummary() {
@@ -85,7 +84,11 @@ export default class MessagesAnalysis extends RootAnalysis {
     renderDetails() {
         return (
             <>
-                <p>{i18n.t("messagesMinistory:number.chats", {number_chats: this._totalUsernamesCount})}</p>
+                <p>
+                    {i18n.t("messagesMinistory:number.chats", {
+                        number_chats: this._totalUsernamesCount,
+                    })}
+                </p>
                 <BarChart
                     data={this._messagesThreadsData}
                     screenPadding={48}
