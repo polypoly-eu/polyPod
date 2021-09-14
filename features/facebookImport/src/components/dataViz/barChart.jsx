@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import generateScale from "../../model/generate-scale";
 
@@ -10,6 +10,7 @@ const BarChart = ({
     shouldSort = true,
     onClickBar = () => {},
     footerContent,
+    screenPadding = 0,
 }) => {
     if (names) data.map((data) => (data.title = data[names]));
     const getHighestCount = () => {
@@ -26,6 +27,9 @@ const BarChart = ({
 
     const highestCount = getHighestCount();
     const scaleValues = generateScale(highestCount);
+
+    const pixelPerChar = 7;
+
     const scale = (
         <div className="scale-container">
             <div className="scale">
@@ -60,7 +64,32 @@ const BarChart = ({
                                 "%",
                         }}
                     >
-                        <p>{count / highestCount > 0.1 ? count : ""}</p>
+                        <p
+                            style={
+                                (document.body.scrollWidth - screenPadding) *
+                                    (count /
+                                        scaleValues[scaleValues.length - 1]) <
+                                pixelPerChar * count.toString().length
+                                    ? {
+                                          transform: "translate(20px, -50%)",
+                                          color: "var(--color-grey-50)",
+                                      }
+                                    : null
+                            }
+                        >
+                            {count}
+                            {(() => {
+                                console.log(
+                                    (document.body.scrollWidth -
+                                        screenPadding) *
+                                        (count /
+                                            scaleValues[
+                                                scaleValues.length - 1
+                                            ]) <
+                                        pixelPerChar * count.toString().length
+                                );
+                            })()}
+                        </p>
                     </div>
 
                     {footerContent ? (

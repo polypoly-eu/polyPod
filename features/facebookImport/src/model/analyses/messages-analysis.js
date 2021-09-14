@@ -19,11 +19,17 @@ export default class MessagesAnalysis extends RootAnalysis {
 
         this._messagesCount = facebookAccount.messagesCount;
         this._messagesThreadsData = [];
+        const usernames = new Set();
         facebookAccount.forEachMessageThread((messageThread) => {
             var wordCount = 0;
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
+
             messageThread.messages.forEach((message) => {
+                if (message?.sender_name) {
+                    usernames.add(message.sender_name);
+                }
+
                 if (!message?.content) {
                     return;
                 }
@@ -60,15 +66,17 @@ export default class MessagesAnalysis extends RootAnalysis {
             });
 
             this._messagesThreadsData.sort((a, b) => b.count - a.count);
-            this._messagesThreadsData = this._messagesThreadsData.slice(0, 10);
+
+            this._totalUsernamesCount = usernames.size;
         });
+
     }
 
     renderSummary() {
         return (
             <p>
                 In your export there are {this._messagesCount} messages in{" "}
-                {this._messageThreadsCount} threads by{" "}
+                {this._messagesThreadsData.length} threads by{" "}
                 {this._totalUsernamesCount} people.
             </p>
         );
@@ -77,9 +85,10 @@ export default class MessagesAnalysis extends RootAnalysis {
     renderDetails() {
         return (
             <>
-                <p>{i18n.t("messagesMinistory:number.chats")}</p>
+                <p>{i18n.t("messagesMinistory:number.chats", {number_chats: this._totalUsernamesCount})}</p>
                 <BarChart
                     data={this._messagesThreadsData}
+                    screenPadding={48}
                     footerContent={({ extraData }) => (
                         <>
                             <div className="bar-extra-info">

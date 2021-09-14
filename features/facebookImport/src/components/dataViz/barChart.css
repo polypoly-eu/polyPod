@@ -1,7 +1,6 @@
 .bar-chart {
     display: flex;
     flex-direction: column;
-    width: 88%;
     max-width: 350px;
     margin: 0 auto;
     flex: 1 1 auto;
@@ -139,7 +138,7 @@
     color: var(--color-indigo-950);
     top: 50%;
     transform: translateY(-50%);
-    left: 4px;
+    right: 6px;
     font-size: 12px;
 }
 
