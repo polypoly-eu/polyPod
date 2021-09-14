@@ -32,7 +32,7 @@ export default class InactiveCardsSummary {
     }
 
     get id() {
-        return InactiveCardsSummary.name;
+        return this.constructor.name;
     }
 
     get jsonReport() {
