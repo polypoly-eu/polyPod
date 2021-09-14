@@ -13,6 +13,7 @@ import ReceivedFriendRequestsAnalysis from "./analyses/friend-requests-received-
 import PagesOverviewAnalysis from "./analyses/pages-overview-activity.js";
 import ReportMetadataAnalysis from "./analyses-report/report-metadata.js";
 import NoDataFoldersAnalysis from "./analyses-report/no-data-folders.js";
+import MissingCommonJSONFilesAnalysis from "./analyses-report/missing-common-json-files.js";
 import MissingKnownJSONFilesAnalysis from "./analyses-report/missing-known-json-files.js";
 import UnknownJSONFilesAnalysis from "./analyses-report/unknown-json-files.js";
 import MessagesDetailsAnalysis from "./analyses/messages-details-analysis.js";
@@ -65,6 +66,7 @@ const subAnalyses = [
     NoDataFoldersAnalysis,
     UnknownJSONFilesAnalysis,
     JSONFileNamesAnalysis,
+    MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
 ];
