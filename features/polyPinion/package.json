@@ -8,7 +8,7 @@
         "check": "tsc"
     },
     "devDependencies": {
-        "@rollup/plugin-commonjs": "^19.0.0",
+        "@rollup/plugin-commonjs": "^20.0.0",
         "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^8.4.0",
         "@rollup/plugin-sucrase": "^3.1.0",
