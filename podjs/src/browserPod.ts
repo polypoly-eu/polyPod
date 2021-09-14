@@ -1,5 +1,6 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
+    Info,
     Matcher,
     Network,
     Pod,
@@ -181,6 +182,16 @@ class LocalStoragePolyOut implements PolyOut {
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
+class PodJsInfo implements Info {
+    async getRuntime(): string {
+        return "podjs";
+    }
+
+    async getVersion(): string {
+        return "-";
+    }
+}
+
 class BrowserNetwork implements Network {
     async httpPost(
         url: string,
@@ -330,5 +341,6 @@ export class BrowserPod implements Pod {
     public readonly polyIn = new LocalStoragePolyIn();
     public readonly polyOut = new LocalStoragePolyOut();
     public readonly polyNav = new BrowserPolyNav();
+    public readonly info = new PodJsInfo();
     public readonly network = new BrowserNetwork();
 }

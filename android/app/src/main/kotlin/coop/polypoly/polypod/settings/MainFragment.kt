@@ -6,6 +6,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import coop.polypoly.polypod.BuildConfig
 import coop.polypoly.polypod.R
+import coop.polypoly.polypod.RuntimeInfo
 
 class MainFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(
@@ -13,9 +14,7 @@ class MainFragment : PreferenceFragmentCompat() {
         rootKey: String?
     ) {
         setPreferencesFromResource(R.xml.settings, rootKey)
-        val version =
-            "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
-        findPreference<Preference>("version")?.summary = version
+        findPreference<Preference>("version")?.summary = RuntimeInfo.VERSION
 
         findPreference<Preference>("imprint")?.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {

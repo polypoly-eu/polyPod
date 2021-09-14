@@ -147,6 +147,21 @@ export interface PolyNav {
 }
 
 /**
+ * `Info` allows the Feature to read information about the polyPod instance it is being executed in.
+ */
+export interface Info {
+    /**
+     * A way for features to read the polyPod runtime identification
+     */
+    getRuntime(): Promise<string>;
+
+    /**
+     * A way for features to read the user visible polyPod version
+     */
+    getVersion(): Promise<string>;
+}
+
+/**
  * `Network` specifies how features can communicate with other devices or servers.
  */
 export interface Network {
@@ -239,6 +254,11 @@ export interface Pod {
      * `polyNav` is the interface to interact the container. Refer to [[PolyNav]] for its definition.
      */
     readonly polyNav: PolyNav;
+
+    /**
+     * `info` is the interface to read information about the polyPod instance.
+     */
+    readonly info: Info;
 
     /**
      * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
