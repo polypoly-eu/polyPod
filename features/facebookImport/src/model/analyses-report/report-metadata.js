@@ -26,7 +26,7 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
                   name: facebookAccount.preferredLanguage.name,
                   code: facebookAccount.preferredLanguage.code,
               }
-            : {};
+            : null;
     }
 
     render() {
@@ -34,7 +34,7 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
             <ul>
                 <li key={1}>{`File size: ${this._size}`}</li>
                 <li key={2}>{`Files count: ${this._filesCount}`}</li>
-                {this._preferedLanguage.name ? (
+                {this._preferedLanguage ? (
                     <>
                         <li key={3}>{`Language:`}</li>
                         <ul>
