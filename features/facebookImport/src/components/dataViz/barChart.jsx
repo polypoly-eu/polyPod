@@ -71,7 +71,9 @@ const BarChart = ({
                                         scaleValues[scaleValues.length - 1]) <
                                 pixelPerChar * count.toString().length
                                     ? {
-                                          transform: "translate(20px, -50%)",
+                                          transform: `translate(${
+                                              13 + count.toString().length * 7
+                                          }px, -50%)`,
                                           color: "var(--color-grey-50)",
                                       }
                                     : null

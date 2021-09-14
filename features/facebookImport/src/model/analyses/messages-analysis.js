@@ -109,6 +109,9 @@ export default class MessagesAnalysis extends RootAnalysis {
                         </>
                     )}
                 />
+                <p className="source">
+                    {i18n.t("common:source.your.facebook.data")}
+                </p>
             </>
         );
     }
