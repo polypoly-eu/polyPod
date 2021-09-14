@@ -46,9 +46,6 @@ const ReportView = () => {
             process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
         );
         setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
         handleClosePopUp();
 
         if (error) {
