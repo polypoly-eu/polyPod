@@ -7,14 +7,18 @@ import { relevantZipEntries } from "../../importer/importer-util.js";
 async function extractTopLevelFolderNamesFromZip(id, zipFile) {
     const relevantEntries = await relevantZipEntries(zipFile);
     const topLevelFolderNames = new Set();
+
     relevantEntries.forEach((filename) => {
         const noIdFileName = filename.replace(`${id}/`, "");
-        const nameParts = noIdFileName.split("/");
-        if (nameParts.length >= 1 && nameParts[1].length > 0) {
-            topLevelFolderNames.add(nameParts[1]);
+        const folderNameMatch = noIdFileName.match(/^[^/]+\/([^/]+)\/.*$/);
+        if (
+            folderNameMatch &&
+            folderNameMatch.length === 2 &&
+            folderNameMatch[1]
+        ) {
+            topLevelFolderNames.add(folderNameMatch[1]);
         }
     });
-
     return [...topLevelFolderNames];
 }
 
