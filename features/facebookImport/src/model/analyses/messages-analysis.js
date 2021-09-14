@@ -2,47 +2,66 @@ import React from "react";
 import i18n from "../../i18n";
 import RootAnalysis from "./root-analysis";
 
+import BarChart from "../../components/dataViz/barChart.jsx";
+
 export default class MessagesAnalysis extends RootAnalysis {
     get title() {
         return "Messages Summary";
     }
 
     async analyze({ facebookAccount }) {
-        this.active = facebookAccount.hasMessages;
-        this._wordCount = 0;
-        this._callsCount = 0;
-        this._messageThreadsCount = 0;
+        this._messagesThreadsData = [];
         this._messagesCount = 0;
-        this._totalNumberOfBookPages = 0;
-        this._callsDuration = 0;
+        this.active = facebookAccount.messageThreadsCount > 0;
         if (!this.active) {
             return;
         }
 
-        this._messageThreadsCount = facebookAccount.messageThreads.length;
         this._messagesCount = facebookAccount.messagesCount;
+        this._messagesThreadsData = [];
+        facebookAccount.forEachMessageThread((messageThread) => {
+            var wordCount = 0;
+            var firstChatTimestamp = 0;
+            var lastChatTimestamp = 0;
+            messageThread.messages.forEach((message) => {
+                if (!message?.content) {
+                    return;
+                }
 
-        const usernames = new Set();
-        facebookAccount.forEachMessage((message) => {
-            if (!message?.content) {
-                return;
-            }
-            if (message?.sender_name) {
-                usernames.add(message.sender_name);
-            }
-            if (message?.type === "Call") {
-                //debugger;
-                this._callsCount++;
-                this._callsDuration += message.call_duration;
-            }
+                const content = message.content;
+                const words = content.match(/\b(\w+)\b/g);
+                wordCount += words ? words.length : 1;
 
-            const content = message.content;
-            const words = content.match(/\b(\w+)\b/g);
-            this._wordCount += words ? words.length : 1;
-            return message;
+                if (
+                    firstChatTimestamp === 0 ||
+                    (firstChatTimestamp !== 0 &&
+                        message.timestamp_ms < firstChatTimestamp)
+                ) {
+                    firstChatTimestamp = message.timestamp_ms;
+                }
+                if (message.timestamp_ms > lastChatTimestamp) {
+                    lastChatTimestamp = message.timestamp_ms;
+                }
+            });
+
+            const firstChatDate =
+                firstChatTimestamp !== 0 ? new Date(firstChatTimestamp) : null;
+            const lastChatDate =
+                lastChatTimestamp !== 0 ? new Date(lastChatTimestamp) : null;
+
+            this._messagesThreadsData.push({
+                title: messageThread.title,
+                count: messageThread.messages.length,
+                extraData: {
+                    wordCount,
+                    firstChatDate,
+                    lastChatDate,
+                },
+            });
+
+            this._messagesThreadsData.sort((a, b) => b.count - a.count);
+            this._messagesThreadsData = this._messagesThreadsData.slice(0, 10);
         });
-
-        this._totalNumberOfBookPages = Math.round(this._wordCount / 500);
     }
 
     renderSummary() {
@@ -58,7 +77,26 @@ export default class MessagesAnalysis extends RootAnalysis {
     renderDetails() {
         return (
             <>
-                <p>{i18n.t("messengesMinistory:number.chats")}</p>
+                <p>{i18n.t("messagesMinistory:number.chats")}</p>
+                <BarChart
+                    data={this._messagesThreadsData}
+                    footerContent={({ extraData }) => (
+                        <>
+                            <div className="bar-extra-info">
+                                {i18n.t("messagesMinistory:first.chat")}
+                                {extraData.firstChatDate
+                                    ? extraData.firstChatDate.toDateString()
+                                    : "unknown"}
+                            </div>
+                            <div className="bar-extra-info">
+                                {i18n.t("messagesMinistory:last.interaction")}
+                                {extraData.lastChatDate
+                                    ? extraData.lastChatDate.toDateString()
+                                    : "unknown"}
+                            </div>
+                        </>
+                    )}
+                />
             </>
         );
     }

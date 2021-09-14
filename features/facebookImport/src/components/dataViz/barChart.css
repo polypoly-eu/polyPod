@@ -10,7 +10,6 @@
 
 .bar-chart .scale-container {
     width: 100%;
-    padding: 0 2.5%;
     margin-bottom: 4px;
 }
 
@@ -59,7 +58,7 @@
 .bar-chart .scale .origin div {
     height: 10px;
     width: 1px;
-    background-color: var(--color-background-light);
+    background-color: var(--color-gray-50);
 }
 
 .bar-chart .scale .tick-box {
@@ -96,7 +95,6 @@
 .bar-chart .bars {
     flex: 1 1 auto;
     width: 100%;
-    padding: 0 2.5%;
     overflow-y: scroll;
 }
 
@@ -130,13 +128,12 @@
 
 .bar-chart .bar-box .bar {
     height: 20px;
-    background-color: var(--color-indigo-200);
+    background-color: var(--color-gray-50);
     position: relative;
 }
 
 .bar-chart .bar-box .bar p {
     height: 20px;
-    background-color: var(--color-indigo-200);
     position: absolute;
     margin: 0;
     color: var(--color-indigo-950);

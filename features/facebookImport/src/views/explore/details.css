@@ -5,6 +5,7 @@
     background-color: var(--background-dark);
     padding: 24px;
     border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
 }
 
 .details-view .details-view-title {
