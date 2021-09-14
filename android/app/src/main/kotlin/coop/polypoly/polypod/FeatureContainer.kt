@@ -23,6 +23,7 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.features.Feature
+import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
@@ -48,6 +49,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         PolyNav(
             webView = webView, context = context
         ),
+        Info(),
         Network(context)
     )
 

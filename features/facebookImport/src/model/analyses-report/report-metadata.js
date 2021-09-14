@@ -16,6 +16,11 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
 
     async analyze({ size, zipFile }) {
         this.active = true;
+
+        const info = await window.pod.info;
+        this._polyPodRuntime = await info.getRuntime();
+        this._polyPodVersion = await info.getVersion();
+
         this._size = size;
 
         const entries = await zipFile.getEntries();
@@ -27,8 +32,10 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
     render() {
         return (
             <ul>
-                <li key={1}>{`File size: ${this._size}`}</li>
-                <li key={2}>{`Files count: ${this._filesCount}`}</li>
+                <li key={1}>polyPod runtime: {this._polyPodRuntime}</li>
+                <li key={2}>polyPod version: {this._polyPodVersion}</li>
+                <li key={3}>{`File size: ${this._size}`}</li>
+                <li key={4}>{`Files count: ${this._filesCount}`}</li>
             </ul>
         );
     }
