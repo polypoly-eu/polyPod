@@ -183,11 +183,11 @@ class LocalStoragePolyOut implements PolyOut {
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 class PodJsInfo implements Info {
-    async getRuntime(): string {
+    async getRuntime(): Promise<string> {
         return "podjs";
     }
 
-    async getVersion(): string {
+    async getVersion(): Promise<string> {
         return "-";
     }
 }
