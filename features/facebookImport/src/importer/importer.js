@@ -18,6 +18,7 @@ import AccountSessionActivitiesImporter from "./data-importers/account-session-a
 import NameImporter from "./data-importers/name-importer.js";
 
 import { IMPORT_SUCCESS, createErrorResult } from "./importer-status.js";
+import LanguageAndLocaleImporter from "./data-importers/language-and-locale-importer.js";
 
 const dataImporters = [
     AdInterestsImporter,
@@ -35,6 +36,7 @@ const dataImporters = [
     AdminRecordsImporter,
     AccountSessionActivitiesImporter,
     NameImporter,
+    LanguageAndLocaleImporter,
 ];
 
 export async function importData(file) {

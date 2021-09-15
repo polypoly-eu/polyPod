@@ -11,10 +11,10 @@ open class PolyOut(
 ) {
     private val fsPrefix = "polypod://"
     open suspend fun readFile(path: String): ByteArray {
-        val fs = Preferences.getFileSystem(context)
         if (path == "") {
-            throw Error("Not found")
+            throw Error("Empty path in PolyOut.readFile")
         }
+        val fs = Preferences.getFileSystem(context)
         val entryPathStart = path.indexOf('/', fsPrefix.length)
         val zipId = path.substring(0, entryPathStart)
         val entryPath = path.substring(entryPathStart + 1)
