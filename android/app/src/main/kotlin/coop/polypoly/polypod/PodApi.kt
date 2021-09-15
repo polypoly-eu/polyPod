@@ -1,6 +1,7 @@
 package coop.polypoly.polypod
 
 import coop.polypoly.polypod.bubblewrap.FetchResponseCodec
+import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
@@ -18,6 +19,7 @@ open class PodApi(
     open val polyOut: PolyOut,
     open val polyIn: PolyIn,
     open val polyNav: PolyNav,
+    open val info: Info,
     open val network: Network
 ) {
 
@@ -67,6 +69,12 @@ open class PodApi(
                     "openUrl" -> return handlePolyNavOpenUrl(args)
                     "importFile" -> return handlePolyNavImportFile()
                     "removeFile" -> return handlePolyNavRemoveFile(args)
+                }
+            }
+            "info" -> {
+                when (inner) {
+                    "getRuntime" -> return handleInfoGetRuntime()
+                    "getVersion" -> return handleInfoGetVersion()
                 }
             }
             "network" -> {
@@ -191,6 +199,16 @@ open class PodApi(
         val fileId = args[0].asStringValue().toString()
         polyNav.removeFile(fileId)
         return ValueFactory.newNil()
+    }
+
+    private fun handleInfoGetRuntime(): Value {
+        logger.debug("dispatch() -> info.getRuntime")
+        return ValueFactory.newString(info.getRuntime())
+    }
+
+    private fun handleInfoGetVersion(): Value {
+        logger.debug("dispatch() -> info.getVersion")
+        return ValueFactory.newString(info.getVersion())
     }
 
     private suspend fun handleNetworkHttpPost(args: List<Value>): Value {

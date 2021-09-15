@@ -95,6 +95,8 @@
 		5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */; };
 		5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
+		E9040D4726F0A30E00A88593 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4626F0A30E00A88593 /* Info.swift */; };
+		E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
 		E90F89EE2629C0C000AD7D96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89ED2629C0C000AD7D96 /* ContentView.swift */; };
 		E92373BC26289FA900D2CFF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E92373BE26289FA900D2CFF3 /* Localizable.strings */; };
@@ -210,6 +212,8 @@
 		5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Delete.swift"; sourceTree = "<group>"; };
 		5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Has.swift"; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
+		E9040D4626F0A30E00A88593 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeInfo.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E90F89ED2629C0C000AD7D96 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E92373B526289EA300D2CFF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -387,6 +391,7 @@
 				E97D325F263084C500A5A180 /* SettingsView.swift */,
 				E97D3279263153C200A5A180 /* NavigationBar.swift */,
 				E97D32A72631BF7700A5A180 /* HTMLView.swift */,
+				E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -394,6 +399,7 @@
 		1AA6DE4624192079008DB1B2 /* PodApi */ = {
 			isa = PBXGroup;
 			children = (
+				E9040D4526F0A2FB00A88593 /* Info */,
 				E98BA80126D3CA400039E41E /* Network */,
 				5B8653002643FC1E0014208C /* PolyNav */,
 				1ABADC1024EFBCBF00369791 /* Models */,
@@ -458,6 +464,14 @@
 				5B8653012643FC310014208C /* PolyNav.swift */,
 			);
 			path = PolyNav;
+			sourceTree = "<group>";
+		};
+		E9040D4526F0A2FB00A88593 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				E9040D4626F0A30E00A88593 /* Info.swift */,
+			);
+			path = Info;
 			sourceTree = "<group>";
 		};
 		E97D326726308BC700A5A180 /* Extensions */ = {
@@ -744,6 +758,7 @@
 				1A4C21EC24A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift in Sources */,
 				E90F89EE2629C0C000AD7D96 /* ContentView.swift in Sources */,
 				1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */,
+				E9040D4726F0A30E00A88593 /* Info.swift in Sources */,
 				1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */,
 				1A66F77D2493774100ED4308 /* NetworkSession.swift in Sources */,
 				E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */,
@@ -784,6 +799,7 @@
 				1ABADBEC24EBD02C00369791 /* LocationTracker.swift in Sources */,
 				1ABADBF124EE6FB700369791 /* DataFactory.swift in Sources */,
 				1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */,
+				E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */,
 				1AF1179224C1A20E0063EE37 /* PolyOut+Fetch.swift in Sources */,
 				1A4C21ED24A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1A4C21F524A63E4C006CC1FD /* Variable+CoreDataProperties.swift in Sources */,
