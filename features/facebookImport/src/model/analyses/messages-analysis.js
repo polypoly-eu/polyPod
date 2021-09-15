@@ -75,7 +75,7 @@ export default class MessagesAnalysis extends RootAnalysis {
             <p>
                 {i18n.t("explore:messages.summary", {
                     messages: this._messagesCount,
-                    threads: this._messagesCountmessagesThreadsData.length,
+                    threads: this._messagesThreadsData.length,
                     people: this._totalUsernamesCount,
                 })}
             </p>
