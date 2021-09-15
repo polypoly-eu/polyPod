@@ -1,4 +1,5 @@
 import React from "react";
+import Tabs from "../../components/tabs/tabs.jsx";
 import i18n from "../../i18n.js";
 import RootAnalysis from "./root-analysis.js";
 
@@ -59,5 +60,25 @@ export default class ActivitiesAnalysis extends RootAnalysis {
         return i18n.t("explore:activities.summary", {
             number_activities: this._totalEvents.total,
         });
+    }
+
+    renderDetails() {
+        return (
+            <Tabs
+                tabs={[
+                    {
+                        id: "total",
+                        translation: i18n.t("explore:tab.total"),
+                        content: null,
+                    },
+                    {
+                        id: "yearly",
+                        translation: i18n.t("explore:tab.year"),
+                        content: null,
+                    },
+                ]}
+                initialActiveTabId="yearly"
+            />
+        );
     }
 }
