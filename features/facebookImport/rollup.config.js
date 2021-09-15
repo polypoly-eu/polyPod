@@ -44,6 +44,7 @@ export default (commandLineArgs) => {
             }),
             resolve(),
             replace({
+                preventAssignment: true,
                 "process.env.NODE_ENV": JSON.stringify("development"),
                 "process.env.POLYPOD_POLYPEDIA_REPORT_URL": JSON.stringify(
                     process.env.POLYPOD_POLYPEDIA_REPORT_URL || fallbackURL
