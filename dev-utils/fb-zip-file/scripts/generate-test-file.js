@@ -8,7 +8,7 @@ const dataFileName = "fi-test.zip";
 let structure = commonStructure();
 
 for (let key in structure) {
-    if (structure[key] === []) {
+    if (!structure[key].length) {
         zipFile.file(`${key}/${noDataFileName}`, "\n");
     } else {
         structure[key].forEach((element) => {

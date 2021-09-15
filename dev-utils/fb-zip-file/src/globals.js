@@ -13,8 +13,6 @@ export function commonStructure() {
     return JSON.parse(readFileSync(dataFileName));
 }
 
-export function hasCommonKeys() {}
-
 export function readAndProcessZipFile(
     callback,
     path = process.env.FB_ZIP_LOCATION
