@@ -1,6 +1,7 @@
 .bar-chart {
     display: flex;
     flex-direction: column;
+    width: 100%;
     max-width: 350px;
     margin: 0 auto;
     flex: 1 1 auto;
@@ -91,10 +92,16 @@
     transform: translateX(4px);
 }
 
+.bar-chart .scrollable-wrapper {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex: 1 1 auto;
+}
+
 .bar-chart .bars {
     flex: 1 1 auto;
     width: 100%;
-    overflow-y: scroll;
 }
 
 .bar-chart .bar-box {

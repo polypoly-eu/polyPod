@@ -28,7 +28,7 @@ const BarChart = ({
     const highestCount = getHighestCount();
     const scaleValues = generateScale(highestCount);
 
-    const pixelPerChar = 7;
+    const pixelPerChar = 10;
 
     const scale = (
         <div className="scale-container">
@@ -72,7 +72,9 @@ const BarChart = ({
                                 pixelPerChar * count.toString().length
                                     ? {
                                           transform: `translate(${
-                                              13 + count.toString().length * 7
+                                              4 +
+                                              count.toString().length *
+                                                  pixelPerChar
                                           }px, -50%)`,
                                           color: "var(--color-grey-50)",
                                       }
@@ -80,17 +82,6 @@ const BarChart = ({
                             }
                         >
                             {count}
-                            {(() => {
-                                console.log(
-                                    (document.body.scrollWidth -
-                                        screenPadding) *
-                                        (count /
-                                            scaleValues[
-                                                scaleValues.length - 1
-                                            ]) <
-                                        pixelPerChar * count.toString().length
-                                );
-                            })()}
                         </p>
                     </div>
 
@@ -109,7 +100,7 @@ const BarChart = ({
     return (
         <div className="bar-chart">
             {scale}
-            {bars}
+            <div className="scrollable-wrapper">{bars}</div>
         </div>
     );
 };
