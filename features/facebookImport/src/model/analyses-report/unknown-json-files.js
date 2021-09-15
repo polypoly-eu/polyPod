@@ -1,29 +1,20 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
 
 import {
     anonymizeJsonEntityPath,
     jsonDataEntities,
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
+import ReportAnalysis from "./report-analysis.js";
 
-export default class UknownJSONFilesAnalysis {
+export default class UknownJSONFilesAnalysis extends ReportAnalysis {
     get title() {
         return "Unknown JSON files";
     }
 
-    get id() {
-        return "unknown-json-files";
-    }
-
-    get isForDataReport() {
-        return true;
-    }
-
-    get jsonReport() {
-        return {
-            id: this.id,
-            unknownFiles: this._unknownFiles,
-        };
+    get reportData() {
+        return this._unknownFiles;
     }
 
     async analyze({ id, zipFile }) {
@@ -43,12 +34,6 @@ export default class UknownJSONFilesAnalysis {
     }
 
     render() {
-        return (
-            <ul>
-                {this._unknownFiles.map((entry, index) => (
-                    <li key={index}>{entry}</li>
-                ))}
-            </ul>
-        );
+        return <BasicList items={this._unknownFiles} />;
     }
 }

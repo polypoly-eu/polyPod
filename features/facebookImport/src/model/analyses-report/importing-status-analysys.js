@@ -1,28 +1,21 @@
 import React from "react";
-import RootAnalysis from "../analyses/root-analysis.js";
+import ReportAnalysis from "./report-analysis.js";
 
-export default class DataImportingStatusAnalysis extends RootAnalysis {
+export default class DataImportingStatusAnalysis extends ReportAnalysis {
     get title() {
         return "Importing status";
     }
 
-    get isForDataReport() {
-        return true;
-    }
-
-    get jsonReport() {
-        return {
-            id: this.id,
-            importingResults: this._importingResults.map(
-                ({ status, importerClass, message }) => {
-                    return {
-                        status,
-                        importerName: importerClass.name,
-                        message,
-                    };
-                }
-            ),
-        };
+    get reportData() {
+        return this._importingResults.map(
+            ({ status, importerClass, message }) => {
+                return {
+                    status,
+                    importerName: importerClass.name,
+                    message,
+                };
+            }
+        );
     }
 
     async analyze({ facebookAccount }) {
@@ -31,9 +24,6 @@ export default class DataImportingStatusAnalysis extends RootAnalysis {
     }
 
     render() {
-        if (!this.active) {
-            return "No importers were run!";
-        }
         return (
             <>
                 <p>

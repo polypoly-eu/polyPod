@@ -1,23 +1,14 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
+import ReportAnalysis from "./report-analysis";
 
-export default class NoDataFoldersAnalysis {
+export default class NoDataFoldersAnalysis extends ReportAnalysis {
     get title() {
         return "NoData Folders";
     }
 
-    get id() {
-        return "no-data-Folders";
-    }
-
-    get isForDataReport() {
-        return true;
-    }
-
-    get jsonReport() {
-        return {
-            id: this.id,
-            noDataFolderNames: this._noDataFolderNames,
-        };
+    get reportData() {
+        return this._noDataFolderNames;
     }
 
     async analyze({ id, zipFile }) {
@@ -44,12 +35,6 @@ export default class NoDataFoldersAnalysis {
     }
 
     render() {
-        return (
-            <ul>
-                {this._noDataFolderNames.map((entry, index) => (
-                    <li key={index}>{entry}</li>
-                ))}
-            </ul>
-        );
+        return <BasicList items={this._noDataFolderNames} />;
     }
 }

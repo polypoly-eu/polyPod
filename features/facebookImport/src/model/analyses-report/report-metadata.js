@@ -1,26 +1,16 @@
 import React from "react";
+import ReportAnalysis from "./report-analysis";
 
-export default class ReportMetadataAnalysis {
+export default class ReportMetadataAnalysis extends ReportAnalysis {
     get title() {
         return "Report Metadata";
     }
 
-    get id() {
-        return "report-metadata";
-    }
-
-    get isForDataReport() {
-        return true;
-    }
-
-    get jsonReport() {
+    get reportData() {
         return {
-            id: this.id,
-            metadata: {
-                fileSize: this._size,
-                filesCount: this._filesCount,
-                preferedLanguage: this._preferedLanguage,
-            },
+            fileSize: this._size,
+            filesCount: this._filesCount,
+            preferedLanguage: this._preferedLanguage,
         };
     }
 

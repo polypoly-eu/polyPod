@@ -1,33 +1,27 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
 
 import {
     anonymizeJsonEntityPath,
     jsonDataEntities,
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
-import RootAnalysis from "../analyses/root-analysis.js";
+import ReportAnalysis from "./report-analysis.js";
 
-export default class MissingKnownJSONFilesAnalysis extends RootAnalysis {
+export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
     get title() {
         return "Missing known JSON files";
     }
 
-    get isForDataReport() {
-        return true;
-    }
-
-    get jsonReport() {
-        return {
-            id: this.id,
-            missingKnownFileNames: this._missingKnownFileNames,
-        };
+    get reportData() {
+        return this._missingKnownFileNames;
     }
 
     _knownJsonFiles() {
-        const knowsJsonFileNames = allStructure.filter((each) =>
+        const knownJsonFileNames = allStructure.filter((each) =>
             each.endsWith(".json")
         );
-        return knowsJsonFileNames.filter(
+        return knownJsonFileNames.filter(
             (each) =>
                 !/^(posts|photos_and_videos)\/album\/[1-9][0-9]?.json$/.test(
                     each
@@ -47,20 +41,14 @@ export default class MissingKnownJSONFilesAnalysis extends RootAnalysis {
         const anonymizedPaths = relevantEntries.map((each) =>
             anonymizeJsonEntityPath(each.replace(`${id}/`, ""))
         );
-        const knowsJsonFiles = this._knownJsonFiles();
-        this._missingKnownFileNames = knowsJsonFiles.filter(
+        const knownJsonFiles = this._knownJsonFiles();
+        this._missingKnownFileNames = knownJsonFiles.filter(
             (each) => !anonymizedPaths.includes(each)
         );
         this.active = this._missingKnownFileNames.length > 0;
     }
 
     render() {
-        return (
-            <ul>
-                {this._missingKnownFileNames.map((entry, index) => (
-                    <li key={index}>{entry}</li>
-                ))}
-            </ul>
-        );
+        return <BasicList items={this._missingKnownFileNames} />;
     }
 }

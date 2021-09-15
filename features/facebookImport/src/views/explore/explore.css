@@ -19,7 +19,7 @@
     font-size: 24px;
 }
 
-.explore-view .report-button {
+.explore-view .report-button,.explore-view .details-button  {
     background-color: var(--color-red-300);
     padding: 4px 12px;
     margin: 0 auto;
@@ -32,6 +32,10 @@
     border-radius: 4px;
     font-weight: 600;
     box-sizing: border-box;
+}
+
+.explore-view .details-button {
+    margin-top: 12px;
 }
 
 .analysis-card:first-child {

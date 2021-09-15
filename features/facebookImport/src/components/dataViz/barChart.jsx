@@ -1,5 +1,7 @@
 import React from "react";
 
+import generateScale from "../../model/generate-scale";
+
 import "./barChart.css";
 
 const BarChart = ({
@@ -7,6 +9,7 @@ const BarChart = ({
     names,
     shouldSort = true,
     onClickBar = () => {},
+    footerContent,
 }) => {
     if (names) data.map((data) => (data.title = data[names]));
     const getHighestCount = () => {
@@ -21,27 +24,8 @@ const BarChart = ({
         data.sort((a, b) => b.count - a.count);
     }
 
-    const fillScale = (highest, multiple) => {
-        const scale = [];
-        for (
-            let i = multiple;
-            i <= Math.ceil(highest / multiple) * multiple;
-            i += multiple
-        ) {
-            scale.push(i);
-        }
-        return scale;
-    };
-
-    /*
-    const calculateScaleValues = (highest) => {
-        //TODO: make this a clever algorithm to determine a pretty scale
-        return fillScale(highest, parseInt((highest / 10) * 1.1));
-    };*/
-
     const highestCount = getHighestCount();
-    const scaleMultiple = parseInt((highestCount / 10) * 1.1);
-    const scaleValues = fillScale(highestCount, scaleMultiple);
+    const scaleValues = generateScale(highestCount);
     const scale = (
         <div className="scale-container">
             <div className="scale">
@@ -62,7 +46,7 @@ const BarChart = ({
 
     const bars = (
         <div className="bars">
-            {data.map(({ title, count }, index) => (
+            {data.map(({ title, count, extraData }, index) => (
                 <div key={index} className="bar-box" onClick={onClickBar}>
                     <div className="above-bar">
                         <p className="name">{title}</p>
@@ -78,6 +62,14 @@ const BarChart = ({
                     >
                         <p>{count / highestCount > 0.1 ? count : ""}</p>
                     </div>
+
+                    {footerContent ? (
+                        <div className="bottom-bar">
+                            {footerContent({ title, count, extraData })}
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             ))}
         </div>

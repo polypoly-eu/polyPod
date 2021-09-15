@@ -4,11 +4,20 @@ import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./explore.css";
 
-const AnalysisCard = ({ analysis }) => {
+const AnalysisCard = ({ analysis, setActiveDetails }) => {
     return (
         <div className="analysis-card">
             <h1>{analysis.title}</h1>
-            <div>{analysis.render()}</div>
+            <div>{analysis.renderSummary()}</div>
+            {analysis.renderDetails ? (
+                <RouteButton
+                    route="/explore/details"
+                    className="details-button"
+                    onClick={() => setActiveDetails(analysis)}
+                >
+                    View details
+                </RouteButton>
+            ) : null}
         </div>
     );
 };
@@ -29,7 +38,7 @@ const UnrecognizedCard = ({ unrecognizedData }) => {
 };
 
 const ExploreView = () => {
-    const { fileAnalysis } = useContext(ImporterContext);
+    const { fileAnalysis, setActiveDetails } = useContext(ImporterContext);
 
     const renderFileAnalyses = () => {
         if (!fileAnalysis) {
@@ -50,7 +59,11 @@ const ExploreView = () => {
                     unrecognizedData={fileAnalysis.unrecognizedData}
                 />
                 {fileAnalysis.analyses.map((analysis, index) => (
-                    <AnalysisCard analysis={analysis} key={index} />
+                    <AnalysisCard
+                        analysis={analysis}
+                        key={index}
+                        setActiveDetails={setActiveDetails}
+                    />
                 ))}
             </div>
         );
