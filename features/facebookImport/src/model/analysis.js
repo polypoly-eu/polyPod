@@ -1,4 +1,5 @@
 import { ZipFile } from "../model/storage.js";
+import { createErrorStatus, createSuccessStatus } from "./analysis-status.js";
 
 import DataBubblesAnalysis from "./analyses/data-points-bubbles-analysis.js";
 import DataGroupsAnalysis from "./analyses/data-groups-analysis.js";
@@ -32,7 +33,7 @@ import SesssionActivityLocationsAnalysis from "./analyses/activity-locations-ana
 import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
 import JSONFileNamesAnalysis from "./analyses-report/json-file-names-analysis.js";
 import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-types-analysis.js";
-import { createErrorStatus, createSuccessStatus } from "./analysis-status.js";
+import UknownTopLevelFoldersAnalysis from "./analyses-report/unknown-top-level-folders-analysis.js";
 import InactiveCardsSummary from "./analyses-report/inactive-cards-summary.js";
 
 const subAnalyses = [
@@ -64,6 +65,7 @@ const subAnalyses = [
     DataImportingStatusAnalysis,
     UnknownMessageTypesAnalysis,
     NoDataFoldersAnalysis,
+    UknownTopLevelFoldersAnalysis,
     UnknownJSONFilesAnalysis,
     JSONFileNamesAnalysis,
     MissingCommonJSONFilesAnalysis,
