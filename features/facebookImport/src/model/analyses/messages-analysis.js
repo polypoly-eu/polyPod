@@ -34,7 +34,7 @@ export default class MessagesAnalysis extends RootAnalysis {
                     return;
                 }
 
-                const words = messages.content.match(/\b(\w+)\b/g);
+                const words = message.content.match(/\b(\w+)\b/g);
                 wordCount += words ? words.length : 1;
 
                 if (
