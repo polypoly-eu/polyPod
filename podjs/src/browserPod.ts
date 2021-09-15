@@ -188,7 +188,7 @@ class PodJsInfo implements Info {
     }
 
     async getVersion(): Promise<string> {
-        return "¯\_(ツ)_/¯";
+        return "¯\\_(ツ)_/¯";
     }
 }
 
