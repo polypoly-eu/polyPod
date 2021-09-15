@@ -1,6 +1,6 @@
-# The polyPod®
+# The polyPod™
 
-At the moment, the polyPod® is essentially a runtime for _features_; small,
+At the moment, the polyPod™ is essentially a runtime for _features_; small,
 sandboxed JavaScript applications that can be launched from the polyPod app.
 
 But it will be much more than that. For more information please read the
@@ -82,7 +82,7 @@ License information of 3rd party components is available in the
 
 ## Trademarks
 
-- polyPod® is a registered trademark of pc polypoly coop SCE mbH
-- polypoly® is a registered trademark of polypoly Enterprise GmbH
-- polyPedia® is a registered trademark of polypoly Foundation gGmbH
+- polypoly® is a registered trademark of polypoly Enterprise GmbH and pc polypoly coop SCE mbH
+- polyPod™ is a trademark of pc polypoly coop SCE mbH
+- polyPedia™ is a trademark of polypoly Foundation gGmbH
 
