@@ -1,0 +1,4 @@
+{
+    "messages.title": "Nachrichten Zusammenfassung",
+    "messages.summary": "In deinem export sind {{this._messagesCount}} Nachrichten in {{this._messagesThreadsData.length}} Threads von {{this._totalUsernamesCount}} Personen."
+}
