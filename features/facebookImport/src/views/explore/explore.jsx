@@ -10,20 +10,23 @@ const AnalysisCard = ({
     exploreScrollingProgress,
 }) => {
     return (
-        <div className="analysis-card">
-            <h1>{analysis.title}</h1>
-            <div>{analysis.renderSummary()}</div>
-            {analysis.renderDetails ? (
-                <RouteButton
-                    route="/explore/details"
-                    className="details-button"
-                    onClick={() => setActiveDetails(analysis)}
-                    stateChange={{ exploreScrollingProgress }}
-                >
-                    View details
-                </RouteButton>
-            ) : null}
-        </div>
+        <>
+            <div className="analysis-card">
+                <h1>{analysis.title}</h1>
+                <p>{analysis.renderSummary()}</p>
+                {analysis.renderDetails ? (
+                    <RouteButton
+                        route="/explore/details"
+                        className="details-button"
+                        onClick={() => setActiveDetails(analysis)}
+                        stateChange={{ exploreScrollingProgress }}
+                    >
+                        View details
+                    </RouteButton>
+                ) : null}
+            </div>
+            <div className="card-separator"></div>
+        </>
     );
 };
 
@@ -95,7 +98,6 @@ const ExploreView = () => {
             className="explore-view"
             onScroll={saveScrollingProgress}
         >
-            <h1 className="explore-view-title">Explore your data</h1>
             {renderFileAnalyses()}
         </div>
     );
