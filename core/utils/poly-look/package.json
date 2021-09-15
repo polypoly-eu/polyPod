@@ -20,10 +20,10 @@
   },
   "devDependencies": {
     "@open-wc/testing": "^2.5.33",
-    "@web/dev-server": "^0.1.17",
+    "@web/dev-server": "^0.1.22",
     "@web/dev-server-rollup": "^0.3.5",
     "@web/dev-server-storybook": "^0.0.2",
-    "@web/test-runner": "^0.12.20",
+    "@web/test-runner": "^0.13.16",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^7.2.0",
     "prettier": "^2.2.1",

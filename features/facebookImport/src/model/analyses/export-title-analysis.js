@@ -5,7 +5,7 @@ export default class ExportTitleAnalysis extends RootAnalysis {
         return "File name";
     }
 
-    analyze({ name }) {
+    async analyze({ name }) {
         this.active = true;
         this._name = name;
     }
