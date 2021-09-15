@@ -1,19 +1,17 @@
 import JSZip from "jszip";
 import fs from "fs";
 
-import { commonStructure, noDataFileName } from "../src/globals.js";
+import structure from "../src/static/commonStructure.js";
+import { noDataFileName } from "../src/globals/index.js";
 
 let zipFile = new JSZip();
 const dataFileName = "fi-test.zip";
-let structure = commonStructure();
 
-for (let key in structure) {
-    if (!structure[key].length) {
-        zipFile.file(`${key}/${noDataFileName}`, "\n");
+for (let item of structure) {
+    if (!item.match(/\.json$/)) {
+        zipFile.file(`${item}/${noDataFileName}`, "\n");
     } else {
-        structure[key].forEach((element) => {
-            zipFile.file(`${key}/${element}`, "[ 'foo' ]\n");
-        });
+        zipFile.file(item, "[ 'foo' ]\n");
     }
 }
 
