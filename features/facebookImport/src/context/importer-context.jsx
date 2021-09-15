@@ -9,7 +9,7 @@ import { importData } from "../importer/importer.js";
 export const ImporterContext = React.createContext();
 
 //all nav-states for checking purposes
-const navigationStates = ["importStatus"];
+const navigationStates = ["importStatus", "exploreScrollingProgress"];
 const importSteps = {
     loading: "loading",
     beginning: "beginning",
@@ -81,6 +81,7 @@ export const ImporterProvider = ({ children }) => {
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
+        exploreScrollingProgress: 0,
     });
 
     const location = useLocation();
