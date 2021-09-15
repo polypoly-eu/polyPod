@@ -9,7 +9,6 @@ import serve from "rollup-plugin-serve";
 
 const fallbackURL = "http://localhost:8000";
 const fallbackAuthorization = "username:password";
-const warnFilter = /node_modules.d3-selection/;
 export default (commandLineArgs) => {
     return {
         input: "src/facebookImporter.jsx",
