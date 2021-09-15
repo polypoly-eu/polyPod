@@ -6,7 +6,7 @@ import BarChart from "../../components/dataViz/barChart.jsx";
 
 export default class MessagesAnalysis extends RootAnalysis {
     get title() {
-        return "Messages Summary";
+        return i18n.t("explore:messages.title");
     }
 
     async analyze({ facebookAccount }) {
@@ -34,8 +34,7 @@ export default class MessagesAnalysis extends RootAnalysis {
                     return;
                 }
 
-                const content = message.content;
-                const words = content.match(/\b(\w+)\b/g);
+                const words = messages.content.match(/\b(\w+)\b/g);
                 wordCount += words ? words.length : 1;
 
                 if (
@@ -74,9 +73,11 @@ export default class MessagesAnalysis extends RootAnalysis {
     renderSummary() {
         return (
             <p>
-                In your export there are {this._messagesCount} messages in{" "}
-                {this._messagesThreadsData.length} threads by{" "}
-                {this._totalUsernamesCount} people.
+                {i18n.t("explore:messages.summary", {
+                    messages: this._messagesCount,
+                    threads: this._messagesCountmessagesThreadsData.length,
+                    people: this._totalUsernamesCount,
+                })}
             </p>
         );
     }
