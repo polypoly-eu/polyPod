@@ -10,20 +10,13 @@ export default class Storage {
     }
 
     async refreshFiles() {
-        return new Promise((resolve) => {
-            const { polyOut } = this._pod;
-            this._files = [];
-            polyOut.readdir("").then((files) => {
-                for (const file of files) {
-                    try {
-                        this._files[file] = polyOut.stat(file);
-                    } catch (e) {
-                        console.log(e);
-                    }
-                }
-                resolve(files);
-            });
-        });
+        const { polyOut } = this._pod;
+        this._files = [];
+        const files = await polyOut.readdir("");
+        for (let file of files) {
+            this._files[file] = await polyOut.stat(file);
+        }
+        return files;
     }
 
     async readFile(path) {
@@ -60,11 +53,9 @@ export class ZipFile {
         this._file = file;
     }
 
-    getEntries() {
-        return new Promise((resolve) => {
-            const { polyOut } = this._pod;
-            polyOut.readdir(this._file.id).then((entries) => resolve(entries));
-        });
+    async getEntries() {
+        const { polyOut } = this._pod;
+        return polyOut.readdir(this._file.id);
     }
 
     data() {
