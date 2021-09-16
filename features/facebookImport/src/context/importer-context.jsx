@@ -208,6 +208,7 @@ export const ImporterProvider = ({ children }) => {
                 refreshFiles,
                 activeDetails,
                 setActiveDetails,
+                facebookAccount,
             }}
         >
             {children}
