@@ -1,6 +1,7 @@
 import React from "react";
 import BasicList from "../../components/basicList/basicList.jsx";
 import ReportAnalysis from "./report-analysis";
+import { noDataFileName } from "../../globals/index";
 
 export default class NoDataFoldersAnalysis extends ReportAnalysis {
     get title() {
@@ -20,7 +21,7 @@ export default class NoDataFoldersAnalysis extends ReportAnalysis {
             const nameParts = fileName.replace(`${id}/`, "").split("/");
             if (nameParts.length >= 2) {
                 for (const [i, part] of Object.entries(nameParts)) {
-                    if (part === "no-data.txt") {
+                    if (part === noDataFileName) {
                         return nameParts[i - 1];
                     }
                 }

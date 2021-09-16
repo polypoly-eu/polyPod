@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
+import { readFileSync } from "fs";
+import { noDataFileName } from "../src/globals/index.js";
 
-const commonStructureStr = fs.readFileSync("commonStructure.json");
+const commonStructureStr = readFileSync("commonStructure.json");
 const structure = JSON.parse(commonStructureStr);
 
 let paths = [];
@@ -12,4 +13,4 @@ for (let dir of Object.keys(structure)) {
         paths.push(`/${dir}/${file}`);
     }
 }
-console.log(paths.map((p) => p.replace("/no-data.txt", "")));
+console.log(paths.map((p) => p.replace(`/${noDataFileName}`, "")));

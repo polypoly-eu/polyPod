@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./report.css";
@@ -32,19 +32,20 @@ const ReportView = () => {
     const [reportSent, setReportSent] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState();
+    const [loading, setLoading] = useState(false);
 
     const handleClosePopUp = () => {
         setIsOpen(!isOpen);
     };
 
     const handleSendReport = async () => {
+        setLoading(true);
         const error = await window.pod.network.httpPost(
             process.env.POLYPOD_POLYPEDIA_REPORT_URL,
             JSON.stringify(unrecognizedData.jsonReport),
             "application/json",
             process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
         );
-
         handleClosePopUp();
 
         if (error) {
@@ -67,6 +68,10 @@ const ReportView = () => {
         );
     }
 
+    useEffect(() => {
+        if (reportSent || error) setLoading(false);
+    }, [reportSent, error]);
+
     return (
         <div className="report-view">
             <h1 className="report-view-title">Unrecognized data report</h1>
@@ -88,9 +93,13 @@ const ReportView = () => {
                         )}
                     </PopUpMessage>
                 )}
-                <button className="send" onClick={handleSendReport}>
-                    Send report
-                </button>
+                {loading ? (
+                    <button className="send disabled">Send report</button>
+                ) : (
+                    <button className="send" onClick={handleSendReport}>
+                        Send report
+                    </button>
+                )}
             </div>
         </div>
     );
