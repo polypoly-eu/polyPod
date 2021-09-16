@@ -1,8 +1,8 @@
 import React from "react";
-import BarChartHorizontal from "../../components/dataViz/barChartHorizontal.jsx";
-import Tabs from "../../components/tabs/tabs.jsx";
 import i18n from "../../i18n.js";
 import RootAnalysis from "./root-analysis.js";
+
+import ActivitiesMinistory from "../../components/activitiesMinistory/activitiesMinistory.jsx";
 
 export default class ActivitiesAnalysis extends RootAnalysis {
     get title() {
@@ -39,11 +39,8 @@ export default class ActivitiesAnalysis extends RootAnalysis {
         )) {
             for (let activity of activitiesValues) {
                 const timeOfActivity = new Date(activity[timestampKey]);
-                const activityYear = timeOfActivity
-                    .getFullYear()
-                    .toString()
-                    .substring(2, 4);
-                if (activityYear < 21) {
+                const activityYear = timeOfActivity.getFullYear();
+                if (activityYear >= 2006) {
                     const activityMonth = timeOfActivity.getMonth();
                     if (total[activityYear]?.[activityMonth]) {
                         total[activityYear][activityMonth]++;
@@ -62,14 +59,6 @@ export default class ActivitiesAnalysis extends RootAnalysis {
         this.active = total.total > 0;
     }
 
-    yearlyTotals() {
-        return Object.fromEntries(
-            Object.entries(this._totalEvents)
-                .map(([year, { total }]) => (total ? [year, total] : null))
-                .filter((entry) => entry)
-        );
-    }
-
     renderSummary() {
         return i18n.t("explore:activities.summary", {
             number_activities: this._totalEvents.total,
@@ -78,23 +67,10 @@ export default class ActivitiesAnalysis extends RootAnalysis {
 
     renderDetails() {
         return (
-            <Tabs
-                tabs={[
-                    {
-                        id: "total",
-                        translation: i18n.t("explore:tab.total"),
-                        content: (
-                            <BarChartHorizontal data={this.yearlyTotals()} />
-                        ),
-                    },
-                    {
-                        id: "yearly",
-                        translation: i18n.t("explore:tab.year"),
-                        content: null,
-                    },
-                ]}
-                initialActiveTabId="total"
-            />
+            <>
+                <p>{this.renderSummary()}</p>
+                <ActivitiesMinistory totalEvents={this._totalEvents} />
+            </>
         );
     }
 }
