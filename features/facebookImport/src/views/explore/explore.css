@@ -45,11 +45,9 @@
 
 .analysis-card {
     max-width: var(--max-width);
-    margin: 0 auto 12px auto;
-    padding: 12px 20px;
-    border-radius: 8px;
-    background-color: var(--background-light);
-    color: var(--text-dark);
+    border-top: 1px solid var(--color-gray-50);
+    margin-bottom: 12px;
+    padding: 20px 8px 12px 8px;
     overflow-x: scroll;
 }
 
