@@ -73,7 +73,7 @@
     margin: 0 0 24px 0;
 }
 
-.analysis-card > p {
+.analysis-card .summary-text {
     font-size: 16px;
     font-weight: 400;
     color: var(--text-light);

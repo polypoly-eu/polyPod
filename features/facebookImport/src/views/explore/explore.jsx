@@ -13,7 +13,7 @@ const AnalysisCard = ({
         <>
             <div className="analysis-card">
                 <h1>{analysis.title}</h1>
-                <p>{analysis.renderSummary()}</p>
+                <div className="summary-text">{analysis.renderSummary()}</div>
                 {analysis.renderDetails ? (
                     <RouteButton
                         route="/explore/details"
