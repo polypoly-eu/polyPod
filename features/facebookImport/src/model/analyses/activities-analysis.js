@@ -1,4 +1,5 @@
 import React from "react";
+import BarChartHorizontal from "../../components/dataViz/barChartHorizontal.jsx";
 import Tabs from "../../components/tabs/tabs.jsx";
 import i18n from "../../i18n.js";
 import RootAnalysis from "./root-analysis.js";
@@ -38,22 +39,35 @@ export default class ActivitiesAnalysis extends RootAnalysis {
         )) {
             for (let activity of activitiesValues) {
                 const timeOfActivity = new Date(activity[timestampKey]);
-                const activityYear = timeOfActivity.getFullYear();
-                const activityMonth = timeOfActivity.getMonth();
-                if (total[activityYear]?.[activityMonth]) {
-                    total[activityYear][activityMonth]++;
-                    total[activityYear].total++;
-                } else {
-                    if (!total[activityYear])
-                        total[activityYear] = { total: 1 };
-                    else total[activityYear].total++;
-                    total[activityYear][activityMonth] = 1;
+                const activityYear = timeOfActivity
+                    .getFullYear()
+                    .toString()
+                    .substring(2, 4);
+                if (activityYear < 21) {
+                    const activityMonth = timeOfActivity.getMonth();
+                    if (total[activityYear]?.[activityMonth]) {
+                        total[activityYear][activityMonth]++;
+                        total[activityYear].total++;
+                    } else {
+                        if (!total[activityYear])
+                            total[activityYear] = { total: 1 };
+                        else total[activityYear].total++;
+                        total[activityYear][activityMonth] = 1;
+                    }
+                    total.total++;
                 }
-                total.total++;
             }
         }
         this._totalEvents = total;
         this.active = total.total > 0;
+    }
+
+    yearlyTotals() {
+        return Object.fromEntries(
+            Object.entries(this._totalEvents)
+                .map(([year, { total }]) => (total ? [year, total] : null))
+                .filter((entry) => entry)
+        );
     }
 
     renderSummary() {
@@ -69,7 +83,9 @@ export default class ActivitiesAnalysis extends RootAnalysis {
                     {
                         id: "total",
                         translation: i18n.t("explore:tab.total"),
-                        content: null,
+                        content: (
+                            <BarChartHorizontal data={this.yearlyTotals()} />
+                        ),
                     },
                     {
                         id: "yearly",
@@ -77,7 +93,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
                         content: null,
                     },
                 ]}
-                initialActiveTabId="yearly"
+                initialActiveTabId="total"
             />
         );
     }
