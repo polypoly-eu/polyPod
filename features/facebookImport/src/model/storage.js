@@ -58,17 +58,12 @@ export class ZipFile {
         return polyOut.readdir(this._file.id);
     }
 
-    data() {
-        return new Promise((resolve) => {
-            const { polyOut } = this._pod;
-            polyOut.readFile(this._file.id).then((entries) => resolve(entries));
-        });
+    async data() {
+        return this.getContent(this._file.id);
     }
 
-    getContent(entry) {
-        return new Promise((resolve) => {
-            const { polyOut } = this._pod;
-            polyOut.readFile(entry).then((content) => resolve(content));
-        });
+    async getContent(entry) {
+        const { polyOut } = this._pod;
+        return polyOut.readFile(entry);
     }
 }
