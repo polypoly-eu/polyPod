@@ -105,8 +105,3 @@ button:focus {
 .deactivated {
     opacity: 0.5;
 }
-
-.source {
-    color: var(--color-gray-400);
-    font-size: 12px;
-}

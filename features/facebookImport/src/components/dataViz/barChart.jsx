@@ -10,7 +10,6 @@ const BarChart = ({
     shouldSort = true,
     onClickBar = () => {},
     footerContent,
-    screenPadding = 0,
 }) => {
     if (names) data.map((data) => (data.title = data[names]));
     const getHighestCount = () => {
@@ -27,9 +26,6 @@ const BarChart = ({
 
     const highestCount = getHighestCount();
     const scaleValues = generateScale(highestCount);
-
-    const pixelPerChar = 10;
-
     const scale = (
         <div className="scale-container">
             <div className="scale">
@@ -64,25 +60,7 @@ const BarChart = ({
                                 "%",
                         }}
                     >
-                        <p
-                            style={
-                                (document.body.scrollWidth - screenPadding) *
-                                    (count /
-                                        scaleValues[scaleValues.length - 1]) <
-                                pixelPerChar * count.toString().length
-                                    ? {
-                                          transform: `translate(${
-                                              4 +
-                                              count.toString().length *
-                                                  pixelPerChar
-                                          }px, -50%)`,
-                                          color: "var(--color-grey-50)",
-                                      }
-                                    : null
-                            }
-                        >
-                            {count}
-                        </p>
+                        <p>{count / highestCount > 0.1 ? count : ""}</p>
                     </div>
 
                     {footerContent ? (
@@ -100,7 +78,7 @@ const BarChart = ({
     return (
         <div className="bar-chart">
             {scale}
-            <div className="scrollable-wrapper">{bars}</div>
+            {bars}
         </div>
     );
 };

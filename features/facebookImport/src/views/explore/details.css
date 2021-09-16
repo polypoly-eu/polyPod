@@ -1,12 +1,10 @@
 .details-view {
     height: 100%;
+    overflow-x: scroll;
+    overflow-y: scroll;
     background-color: var(--background-dark);
     padding: 24px;
     border-top: 1px inset #a9b6c6;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
 }
 
 .details-view .details-view-title {
