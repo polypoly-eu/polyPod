@@ -4,7 +4,7 @@ At the moment, the polyPod™ is essentially a runtime for _features_; small,
 sandboxed JavaScript applications that can be launched from the polyPod app.
 
 But it will be much more than that. For more information please read the
-[polyPod whitepaper](https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf).
+[polyPod whitepaper](https://polypoly.coop/en/polypoly_tech_Whitepaper_polyPod_2021_EN.pdf).
 
 ## Components
 
