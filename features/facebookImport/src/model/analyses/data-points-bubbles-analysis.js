@@ -4,7 +4,7 @@ import RootAnalysis from "./root-analysis.js";
 
 export default class DataBubblesAnalysis extends RootAnalysis {
     get title() {
-        return "Data Bubbles";
+        return "Structure of your data";
     }
 
     _computeScaleFactor(bubblesData) {
@@ -31,6 +31,16 @@ export default class DataBubblesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        return <DataOverview data={this._bubblesDataScaled} />;
+        let filesNumber = 0;
+        this._bubblesData.forEach((a) => (filesNumber += a.count));
+        return (
+            <>
+                <p>
+                    Your Facebook data import contains{" "}
+                    {this._bubblesData.length} folders and {filesNumber} files.
+                </p>
+                <DataOverview data={this._bubblesData} />
+            </>
+        );
     }
 }
