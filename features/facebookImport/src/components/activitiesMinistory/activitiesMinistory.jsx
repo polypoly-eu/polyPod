@@ -56,14 +56,12 @@ const Datepicker = ({ year, yearRange, onYearChange }) => {
 };
 
 const ActivitiesMinistory = ({ totalEvents }) => {
-    const yearRange = fillArray(
-        Object.keys(totalEvents).filter((key) => key != "total")
-    );
+    const yearRange = fillArray(Object.keys(totalEvents.values));
 
     const yearlyTotals = Object.fromEntries(
         yearRange.map((year) => [
             year.toString().substring(2, 4),
-            totalEvents[year]?.total || 0,
+            totalEvents.values[year]?.total || 0,
         ])
     );
 
@@ -76,7 +74,7 @@ const ActivitiesMinistory = ({ totalEvents }) => {
             .fill(undefined)
             .map((_, index) => [
                 monthsAbbreviation[index],
-                totalEvents[selectedYear]?.[index] || 0,
+                totalEvents.values[selectedYear]?.values[index] || 0,
             ])
     );
 
