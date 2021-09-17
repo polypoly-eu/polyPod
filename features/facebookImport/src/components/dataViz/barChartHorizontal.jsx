@@ -4,14 +4,7 @@ import generateScale from "../../model/generate-scale";
 
 import "./barChartHorizontal.css";
 
-const BarChartHorizontal = ({ data, barSize = "small" }) => {
-    //TODO: Calculate this depending on how many bars there are and the input
-    const barWidth =
-        {
-            small: "6px",
-            big: "22px",
-        }[barSize] || "6px";
-
+const BarChartHorizontal = ({ data, barWidth = "10px" }) => {
     const xValues = Object.keys(data);
     const scale = generateScale(Math.max(...Object.values(data)));
     const scaleRefNumber = scale[scale.length - 1];
