@@ -28,6 +28,22 @@ const fakeStorage = {
     removeFile: async () => {},
 };
 
+class FileImportError extends Error {
+    constructor(cause) {
+        super("Failed to import file");
+        this.name = "FileImportError";
+        this.cause = cause;
+    }
+}
+
+class RefreshFilesError extends Error {
+    constructor(cause) {
+        super("Failed to refresh files");
+        this.name = "RefreshFilesError";
+        this.cause = cause;
+    }
+}
+
 function updatePodNavigation(pod, history, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
@@ -78,6 +94,7 @@ export const ImporterProvider = ({ children }) => {
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
     const [activeDetails, setActiveDetails] = useState(null);
+    const [globalError, setGlobalError] = useState(null);
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
@@ -103,7 +120,11 @@ export const ImporterProvider = ({ children }) => {
 
     const handleImportFile = async () => {
         const { polyNav } = pod;
-        await polyNav.importFile();
+        try {
+            await polyNav.importFile();
+        } catch (error) {
+            setGlobalError(new FileImportError(error));
+        }
         refreshFiles();
     };
 
@@ -130,13 +151,16 @@ export const ImporterProvider = ({ children }) => {
     }
 
     function refreshFiles() {
-        storage.refreshFiles().then(async () => {
-            const resolvedFiles = [];
-            for (const file of storage.files) {
-                resolvedFiles.push(await file);
-            }
-            setFiles(resolvedFiles);
-        });
+        storage
+            .refreshFiles()
+            .then(async () => {
+                const resolvedFiles = [];
+                for (const file of storage.files) {
+                    resolvedFiles.push(await file);
+                }
+                setFiles(resolvedFiles);
+            })
+            .catch((error) => setGlobalError(new RefreshFilesError(error)));
     }
 
     function updateImportStatus(newStatus) {
@@ -208,6 +232,8 @@ export const ImporterProvider = ({ children }) => {
                 refreshFiles,
                 activeDetails,
                 setActiveDetails,
+                globalError,
+                setGlobalError,
                 facebookAccount,
             }}
         >

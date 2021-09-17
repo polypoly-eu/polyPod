@@ -1,11 +1,23 @@
 import Foundation
 import Zip
 
-extension PolyOut {
-    enum FSError: Error {
-        case failedToParsePath
+enum PolyOutError: Error {
+    case failedToParsePath(_ path: String)
+    case platform(_ error: Error)
+}
+
+extension PolyOutError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .failedToParsePath(let path):
+            return "Failed to parse path '\(path)'"
+        case .platform(let error):
+            return "Platform error: \(error)"
+        }
     }
-    
+}
+
+extension PolyOut {
     private func pathFromPathOrId(pathOrId: String) -> URL {
         var path = pathOrId
         if (pathOrId.starts(with: PolyNav.fsPrefix)) {
@@ -47,7 +59,7 @@ extension PolyOut {
             var filePath = pathFromPathOrId(pathOrId: pathOrId)
             if (pathOrId.starts(with: PolyNav.fsPrefix)) {
                 guard var testString = pathOrId.removingPercentEncoding else {
-                    throw FSError.failedToParsePath
+                    throw PolyOutError.failedToParsePath(pathOrId)
                 }
                 testString.removeSubrange(testString.startIndex...PolyNav.fsPrefix.index(before: PolyNav.fsPrefix.endIndex))
                 let parts = testString.split(separator: "/")
@@ -70,7 +82,7 @@ extension PolyOut {
             }
         } catch {
             print(error)
-            completionHandler(nil, error)
+            completionHandler(nil, PolyOutError.platform(error))
         }
     }
     
@@ -81,7 +93,7 @@ extension PolyOut {
             try data.write(to: filePath, atomically: false, encoding: String.Encoding.utf8)
             completionHandler(nil)
         } catch {
-            completionHandler(error)
+            completionHandler(PolyOutError.platform(error))
         }
     }
     func readdir(dir: String, completionHandler: @escaping ([String]?, Error?) -> Void) {
