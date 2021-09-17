@@ -10,20 +10,7 @@ import "./activitiesMinistory.css";
 import "./datePicker.css";
 import "../tabs/tabs.css";
 
-const monthsAbbreviation = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "Mai",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-];
+const monthsAbbreviation = i18n.t("common:months.abbreviation").split(" ");
 
 //TODO let this support actual dates not only years
 const Datepicker = ({ year, yearRange, onYearChange }) => {
