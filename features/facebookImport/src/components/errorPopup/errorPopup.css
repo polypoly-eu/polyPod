@@ -1,0 +1,20 @@
+.error-popup {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    padding: 8px;
+    background: red;
+}
+
+.error-popup pre {
+    border: 1px solid white;
+    padding: 8px;
+    overflow: scroll;
+    font-family: monospace;
+}
+
+.error-popup button {
+    background: black;
+}

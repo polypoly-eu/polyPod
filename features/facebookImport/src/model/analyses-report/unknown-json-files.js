@@ -18,10 +18,6 @@ export default class UknownJSONFilesAnalysis extends ReportAnalysis {
     }
 
     async analyze({ id, zipFile }) {
-        this._missingEntryNames = [];
-        this.active = true;
-        if (!zipFile) return;
-
         const relevantEntries = await jsonDataEntities(zipFile);
         const anonymizedPaths = relevantEntries.map((each) =>
             anonymizeJsonEntityPath(each.replace(`${id}/`, ""))

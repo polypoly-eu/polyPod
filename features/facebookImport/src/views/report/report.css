@@ -125,3 +125,7 @@
     text-align: justify;
     text-justify: distribute-all-lines;
 }
+
+.disabled {
+    opacity: 0.5;
+}

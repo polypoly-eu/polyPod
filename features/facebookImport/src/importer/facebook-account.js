@@ -3,6 +3,8 @@ class FacebookAccount {
         this._importingResults = [];
         this._importedFileNames = [];
 
+        this._preferredLanguage = [];
+
         this._offFacebookCompanies = [];
         this._adInterests = [];
         this._connectedAdvertisers = [];
@@ -94,6 +96,14 @@ class FacebookAccount {
     }
 
     // Basic accessors
+
+    get preferredLanguage() {
+        return this._preferredLanguage;
+    }
+
+    set preferredLanguage(preferredLanguage) {
+        this._preferredLanguage = preferredLanguage;
+    }
 
     get offFacebookCompanies() {
         return this._offFacebookCompanies;

@@ -50,6 +50,10 @@ class PostOffice {
             handlePolyNav(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
+        case "info":
+            handleInfo(method: method, completionHandler: { response, error in
+                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
+            })
         case "network":
             handleNetwork(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
@@ -359,6 +363,27 @@ extension PostOffice {
         PodApi.shared.polyNav.removeFile(fileId: fileId) { error in
             completionHandler(MessagePackValue(), nil)
         }
+    }
+}
+
+extension PostOffice {
+    private func handleInfo(method: String, completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        switch method {
+        case "getRuntime":
+            handleInfoGetRuntime(completionHandler: completionHandler)
+        case "getVersion":
+            handleInfoGetVersion(completionHandler: completionHandler)
+        default:
+            print("Info method unknown:", method)
+        }
+    }
+    
+    private func handleInfoGetRuntime(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        completionHandler(.string(PodApi.shared.info.getRuntime()), nil)
+    }
+    
+    private func handleInfoGetVersion(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        completionHandler(.string(PodApi.shared.info.getVersion()), nil)
     }
 }
 

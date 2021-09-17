@@ -1,5 +1,7 @@
 import React from "react";
 
+import generateScale from "../../model/generate-scale";
+
 import "./barChart.css";
 
 const BarChart = ({
@@ -8,6 +10,7 @@ const BarChart = ({
     shouldSort = true,
     onClickBar = () => {},
     footerContent,
+    screenPadding = 0,
 }) => {
     if (names) data.map((data) => (data.title = data[names]));
     const getHighestCount = () => {
@@ -22,27 +25,11 @@ const BarChart = ({
         data.sort((a, b) => b.count - a.count);
     }
 
-    const fillScale = (highest, multiple) => {
-        const scale = [];
-        for (
-            let i = multiple;
-            i <= Math.ceil(highest / multiple) * multiple;
-            i += multiple
-        ) {
-            scale.push(i);
-        }
-        return scale;
-    };
-
-    /*
-    const calculateScaleValues = (highest) => {
-        //TODO: make this a clever algorithm to determine a pretty scale
-        return fillScale(highest, parseInt((highest / 10) * 1.1));
-    };*/
-
     const highestCount = getHighestCount();
-    const scaleMultiple = parseInt((highestCount / 10) * 1.1);
-    const scaleValues = fillScale(highestCount, scaleMultiple);
+    const scaleValues = generateScale(highestCount);
+
+    const pixelPerChar = 10;
+
     const scale = (
         <div className="scale-container">
             <div className="scale">
@@ -77,7 +64,25 @@ const BarChart = ({
                                 "%",
                         }}
                     >
-                        <p>{count / highestCount > 0.1 ? count : ""}</p>
+                        <p
+                            style={
+                                (document.body.scrollWidth - screenPadding) *
+                                    (count /
+                                        scaleValues[scaleValues.length - 1]) <
+                                pixelPerChar * count.toString().length
+                                    ? {
+                                          transform: `translate(${
+                                              4 +
+                                              count.toString().length *
+                                                  pixelPerChar
+                                          }px, -50%)`,
+                                          color: "var(--color-grey-50)",
+                                      }
+                                    : null
+                            }
+                        >
+                            {count}
+                        </p>
                     </div>
 
                     {footerContent ? (
@@ -95,7 +100,7 @@ const BarChart = ({
     return (
         <div className="bar-chart">
             {scale}
-            {bars}
+            <div className="scrollable-wrapper">{bars}</div>
         </div>
     );
 };
