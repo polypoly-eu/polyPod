@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 import i18n from "../../i18n";
 
-import BarChartHorizontal, {
-    fillArray,
-} from "../dataViz/barChartHorizontal.jsx";
+import BarChartHorizontal from "../dataViz/barChartHorizontal.jsx";
+
+import { fillArray } from "../dataViz/utils.jsx";
 
 import "./activitiesMinistory.css";
 import "./datePicker.css";
@@ -12,7 +12,7 @@ import "../tabs/tabs.css";
 
 //TODO let this support actual dates not only years
 const Datepicker = ({ year, yearRange, onYearChange }) => {
-    const rangeIndex = yearRange.indexOf(+year);
+    const rangeIndex = yearRange.indexOf(year);
     return (
         <div className="datepicker">
             {rangeIndex != 0 ? (
@@ -41,25 +41,26 @@ const Datepicker = ({ year, yearRange, onYearChange }) => {
 };
 
 const ActivitiesMinistory = ({ totalEvents }) => {
-    const yearlyTotals = Object.fromEntries(
-        Object.entries(totalEvents)
-            .map(([year, { total }]) =>
-                total ? [year.toString().substring(2, 4), total] : null
-            )
-            .filter((entry) => entry)
+    const yearRange = fillArray(
+        Object.keys(totalEvents).filter((key) => key != "total")
     );
-    const yearRange = Object.keys(totalEvents).filter((e) => e != "total");
 
-    const [selectedYear, setSelectedYear] = useState(yearRange.at(-1));
+    const yearlyTotals = Object.fromEntries(
+        yearRange.map((year) => [
+            year.toString().substring(2, 4),
+            totalEvents[year]?.total || 0,
+        ])
+    );
 
-    const monthlyTotals = {
-        ...{ 0: 0, 11: 0 },
-        ...Object.fromEntries(
-            Object.entries(totalEvents[selectedYear] || {}).filter(
-                ([month, _]) => month != "total"
-            )
-        ),
-    };
+    const [selectedYear, setSelectedYear] = useState(
+        yearRange[yearRange.length - 1]
+    );
+
+    const monthlyTotals = Object.fromEntries(
+        new Array(12)
+            .fill(undefined)
+            .map((_, index) => [index, totalEvents[selectedYear]?.[index] || 0])
+    );
 
     const tabs = [
         {
@@ -99,7 +100,7 @@ const ActivitiesMinistory = ({ totalEvents }) => {
             {activeTab.id == "yearly" ? (
                 <Datepicker
                     year={selectedYear}
-                    yearRange={fillArray(yearRange)}
+                    yearRange={yearRange}
                     onYearChange={setSelectedYear}
                 />
             ) : (

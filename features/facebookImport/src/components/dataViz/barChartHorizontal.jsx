@@ -4,15 +4,6 @@ import generateScale from "../../model/generate-scale";
 
 import "./barChartHorizontal.css";
 
-//array -> sorted filled sorted array
-export const fillArray = (arr) => {
-    const sortedArr = arr.sort((a, b) => a - b);
-    let filled = [];
-    for (let i = Math.min(...sortedArr); i <= Math.max(...sortedArr); i++)
-        filled.push(i);
-    return filled;
-};
-
 const BarChartHorizontal = ({ data, barSize = "small" }) => {
     //TODO: Calculate this depending on how many bars there are and the input
     const barWidth =
@@ -22,7 +13,6 @@ const BarChartHorizontal = ({ data, barSize = "small" }) => {
         }[barSize] || "6px";
 
     const xValues = Object.keys(data);
-    const xValuesFilled = fillArray(xValues);
     const scale = generateScale(Math.max(...Object.values(data)));
     const scaleRefNumber = scale[scale.length - 1];
 
@@ -32,7 +22,7 @@ const BarChartHorizontal = ({ data, barSize = "small" }) => {
     };
 
     const xPosition = (index) => {
-        return 12.5 + 80 * (index / (xValuesFilled.length - 1));
+        return 12.5 + 80 * (index / (xValues.length - 1));
     };
 
     const barHeight = (barValue) => {
@@ -61,7 +51,7 @@ const BarChartHorizontal = ({ data, barSize = "small" }) => {
                     </div>
                 ))}
 
-                {xValuesFilled.map((xValue, index) => (
+                {xValues.map((xValue, index) => (
                     <div key={index}>
                         <div
                             className="x-axis"
