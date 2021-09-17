@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-import ExploreDataButtons from "../../components/buttons/exploreDataButtons/exploreDataButtons.jsx";
-=======
 import DataOverview from "../../components/ministories/dataOverview/dataOverview.jsx";
->>>>>>> 346cc915 (PROD4POD-799/Create component to handle the data overview bubbles)
 import RootAnalysis from "./root-analysis.js";
 
 export default class DataBubblesAnalysis extends RootAnalysis {
@@ -35,14 +31,6 @@ export default class DataBubblesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-<<<<<<< HEAD
-        return (
-            <>
-                <ExploreDataButtons data={this._bubblesDataScaled} />
-            </>
-        );
-=======
         return <DataOverview data={this._bubblesDataScaled} />;
->>>>>>> 346cc915 (PROD4POD-799/Create component to handle the data overview bubbles)
     }
 }
