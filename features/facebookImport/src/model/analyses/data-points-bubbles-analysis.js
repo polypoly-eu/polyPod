@@ -1,5 +1,5 @@
 import React from "react";
-import DataBubblesAll from "../../components/dataViz/dataBubblesAll.jsx";
+import ExploreDataButtons from "../../components/buttons/exploreDataButtons/exploreDataButtons.jsx";
 import RootAnalysis from "./root-analysis.js";
 
 export default class DataBubblesAnalysis extends RootAnalysis {
@@ -32,15 +32,9 @@ export default class DataBubblesAnalysis extends RootAnalysis {
 
     renderSummary() {
         return (
-            <DataBubblesAll
-                data={this._bubblesDataScaled}
-                width={400}
-                height={400}
-                bubbleColor={() => {
-                    return "#f7fafc";
-                }}
-                textColor="#0f1938"
-            />
+            <>
+                <ExploreDataButtons data={this._bubblesDataScaled} />
+            </>
         );
     }
 }

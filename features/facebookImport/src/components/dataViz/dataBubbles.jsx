@@ -45,7 +45,8 @@ const DataBubbles = ({ data, width, height, drawLeafs }) => {
     }
 
     useEffect(() => {
-        data.forEach((e) => {
+        data.forEach((e, index) => {
+            e.bubbleId = index;
             e.value = e.count;
         });
         clearSvg();

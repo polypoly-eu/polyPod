@@ -20,7 +20,8 @@ const DataTypeBubbleAll = ({
     const drawBubblesLeafs = (leaf) => {
         leaf.append("circle")
             .attr("r", (d) => d.r)
-            .style("fill", (d) => bubbleColor(d))
+            .style("fill", bubbleColor)
+            .style("stroke", "white")
             .style("vertical-align", "center")
             .attr("fill-opacity", opacity);
 
@@ -28,14 +29,12 @@ const DataTypeBubbleAll = ({
             ? leaf
                   .append("text")
                   .text((d) => {
-                      return d.value > 5 ? d.data.title : "";
+                      return d.r > 30 ? Math.round(d.value) : "";
                   })
                   .attr("text-anchor", "middle")
                   .attr("y", ".3em")
                   .style("fill", textColor)
-                  .style("font-size", (d) => {
-                      return (8 + d.value / 5).toString() + "px";
-                  })
+                  .style("font-size", "16px")
                   .style("font-family", "Jost Medium")
                   .style("font-weight", "500")
             : null;
