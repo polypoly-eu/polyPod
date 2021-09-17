@@ -23,9 +23,19 @@ const DataOverview = ({ data }) => {
         }
     };
 
+    let fileNumber = data[0].count;
+    data.map((bubble) => {
+        bubble.title === clickedButton
+            ? (fileNumber = bubble.count)
+            : fileNumber;
+    });
+
     return (
         <>
             <div>
+                <p>
+                    {clickedButton} folder: {fileNumber} files
+                </p>
                 <DataBubblesAll
                     data={data}
                     width={400}
