@@ -29,12 +29,14 @@ const DataTypeBubbleAll = ({
             ? leaf
                   .append("text")
                   .text((d) => {
-                      return d.r > 30 ? Math.round(d.value) : "";
+                      return d.r > 20 ? Math.round(d.value) : "";
                   })
                   .attr("text-anchor", "middle")
                   .attr("y", ".3em")
                   .style("fill", textColor)
-                  .style("font-size", "16px")
+                  .style("font-size", (d) => {
+                      return d.r > 50 ? "20px" : "16px";
+                  })
                   .style("font-family", "Jost Medium")
                   .style("font-weight", "500")
             : null;

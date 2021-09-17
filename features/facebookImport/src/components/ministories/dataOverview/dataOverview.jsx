@@ -4,6 +4,10 @@ import DataBubblesAll from "../../dataViz/dataBubblesAll.jsx";
 import "./dataOverview.css";
 
 const DataOverview = ({ data }) => {
+    data.sort(function (a, b) {
+        return b.count - a.count;
+    });
+
     const [clickedButton, setClickedButton] = useState(data[0].title);
 
     const onClickButton = (ev, newClickedButton) => {
@@ -19,14 +23,6 @@ const DataOverview = ({ data }) => {
         }
     };
 
-    const textColor = (bubbles) => {
-        if (bubbles.data.title === clickedButton) {
-            return "#0f1938";
-        } else {
-            return "#f7fafc";
-        }
-    };
-
     return (
         <>
             <div>
@@ -35,7 +31,7 @@ const DataOverview = ({ data }) => {
                     width={400}
                     height={400}
                     bubbleColor={bubbleColor}
-                    textColor={textColor}
+                    textColor={"#0f1938"}
                 />
             </div>
             <div className="explore-data">
