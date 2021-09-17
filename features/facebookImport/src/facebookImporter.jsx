@@ -25,6 +25,7 @@ import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
 import ReportView from "./views/report/report.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
+import ReportDetails from "./views/report/details.jsx";
 
 import "./styles.css";
 
@@ -65,6 +66,9 @@ const FacebookImporter = () => {
                     </Route>
                     <Route exact path="/report">
                         <ReportView />
+                    </Route>
+                    <Route exact path="/report/details">
+                        <ReportDetails />
                     </Route>
                 </Switch>
             ) : (
