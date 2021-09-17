@@ -100,7 +100,7 @@ const ActivitiesMinistory = ({ totalEvents }) => {
         },
         yearly: {
             barData: monthlyTotals,
-            barWidth: "22px",
+            barWidth: "18px",
             barChartLegendText: i18n.t(
                 "activitiesMinistory:tab.events.yearly",
                 {
