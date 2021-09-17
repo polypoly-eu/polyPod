@@ -34,7 +34,6 @@ export default class ActivitiesAnalysis extends RootAnalysis {
         );
 
         let groupedActivities = { total: 0, values: {} };
-        console.log(groupedActivities);
         for (let [timestampKey, activitiesValues] of Object.entries(
             activities
         )) {
