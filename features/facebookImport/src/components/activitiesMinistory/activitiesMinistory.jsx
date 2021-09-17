@@ -104,7 +104,7 @@ const ActivitiesMinistory = ({ totalEvents }) => {
             barChartLegendText: i18n.t(
                 "activitiesMinistory:tab.events.yearly",
                 {
-                    number_events: totalEvents[selectedYear]?.total || 0,
+                    number_events: totalEvents.values[selectedYear]?.total || 0,
                 }
             ),
         },
