@@ -57,12 +57,10 @@ const ActivitiesMinistory = ({ totalEvents }) => {
     );
 
     const monthlyTotals = Object.fromEntries(
-        new Array(12)
-            .fill(undefined)
-            .map((_, index) => [
-                monthsAbbreviation[index],
-                totalEvents.values[selectedYear]?.values[index] || 0,
-            ])
+        monthsAbbreviation.map((month, index) => [
+            month,
+            totalEvents.values[selectedYear]?.values[index] || 0,
+        ])
     );
 
     const tabs = [
