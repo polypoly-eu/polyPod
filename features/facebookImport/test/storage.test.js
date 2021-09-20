@@ -12,11 +12,12 @@ beforeAll(() => {
     const aDataset = dataset();
     const volume = new Volume().promises;
     pod = new DefaultPod(aDataset, volume, fetch);
-    storage = new Storage( pod );
+    storage = new Storage(pod);
 });
 
 describe("Tests file storage", () => {
-    it("Adds and removes a file correctly", () => {
+    it("Checks for correct definitions", () => {
         expect(pod).toBeDefined();
+        expect(storage).toBeDefined();
     });
 });
