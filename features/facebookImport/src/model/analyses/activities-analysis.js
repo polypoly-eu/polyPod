@@ -2,7 +2,7 @@ import React from "react";
 import i18n from "../../i18n.js";
 import RootAnalysis from "./root-analysis.js";
 
-import ActivitiesMiniStory from "../../components/activitiesMinistory/activitiesMiniStory.jsx";
+import ActivitiesMiniStory from "../../components/activitiesMiniStory/activitiesMiniStory.jsx";
 
 export default class ActivitiesAnalysis extends RootAnalysis {
     get title() {
