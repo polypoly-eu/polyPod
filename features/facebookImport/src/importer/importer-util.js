@@ -4,6 +4,13 @@ import {
     MissingFileImportException,
 } from "./failed-import-exception";
 
+async function relevantZipEntries(zipFile) {
+    const entries = await zipFile.getEntries();
+    return entries.filter(
+        (each) => !each.includes(".DS_Store") && !each.includes("__MACOSX")
+    );
+}
+
 async function readJSONFile(dataFileName, zipFile, zipId) {
     const fullEntryName = zipId + "/" + dataFileName;
     const entries = await zipFile.getEntries();
@@ -61,19 +68,12 @@ function anonymizePathSegment(pathSegment, fullPath) {
 }
 
 function anonymizeJsonEntityPath(fileName) {
-    const nameParts = fileName.split("/").slice(1);
+    const nameParts = fileName.split("/");
 
     const anonymizedParts = nameParts.map((each) =>
         anonymizePathSegment(each, fileName)
     );
     return anonymizedParts.join("/");
-}
-
-async function relevantZipEntries(zipFile) {
-    const entries = await zipFile.getEntries();
-    return entries.filter(
-        (each) => !each.includes(".DS_Store") && !each.includes("__MACOSX")
-    );
 }
 
 async function jsonDataEntities(zipFile) {
@@ -86,10 +86,15 @@ async function jsonDataEntities(zipFile) {
     return relevantJsonEntries;
 }
 
+function removeEntryPrefix(id, entryName) {
+    return entryName.replace(`${id}/`, "");
+}
+
 export {
     readJSONFile,
     readJSONDataArray,
     anonymizeJsonEntityPath,
     relevantZipEntries,
     jsonDataEntities,
+    removeEntryPrefix,
 };

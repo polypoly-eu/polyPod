@@ -4,6 +4,7 @@ import BasicList from "../../components/basicList/basicList.jsx";
 import {
     anonymizeJsonEntityPath,
     jsonDataEntities,
+    removeEntryPrefix,
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
 import ReportAnalysis from "./report-analysis.js";
@@ -39,7 +40,7 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
 
         const relevantEntries = await jsonDataEntities(zipFile);
         const anonymizedPaths = relevantEntries.map((each) =>
-            anonymizeJsonEntityPath(each.replace(`${id}/`, ""))
+            anonymizeJsonEntityPath(removeEntryPrefix(id, each))
         );
         const knownJsonFiles = this._knownJsonFiles();
         this._missingKnownFileNames = knownJsonFiles.filter(
