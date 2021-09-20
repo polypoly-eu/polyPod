@@ -9,24 +9,38 @@ const BarChartHorizontal = ({ data, barWidth = "10px" }) => {
     const scale = generateScale(Math.max(...Object.values(data)));
     const scaleRefNumber = scale[scale.length - 1];
 
+    //in percent
+    const diagramHeight = 90;
+    const diagramWidth = 80;
+    const marginBarEdge = 12.5;
+    const diagramBottomMargin = 10;
+
     //returns scale value bottom percent value
     const scaleHeight = (index) => {
-        return 10 + 90 * ((index + 1) / scale.length);
+        return (
+            diagramBottomMargin + diagramHeight * ((index + 1) / scale.length)
+        );
     };
 
     const xPosition = (index) => {
-        return 12.5 + 80 * (index / (xValues.length - 1));
+        return marginBarEdge + diagramWidth * (index / (xValues.length - 1));
     };
 
     const barHeight = (barValue) => {
-        return barValue ? 90 * (barValue / scaleRefNumber) : 1;
+        return barValue ? diagramHeight * (barValue / scaleRefNumber) : 1;
     };
 
     return (
         <div className="bar-chart-horizontal-container">
             <div className="bar-chart-horizontal">
-                <div className="gridline" style={{ bottom: "10%" }}></div>
-                <div className="y-axis" style={{ bottom: "10%" }}>
+                <div
+                    className="gridline"
+                    style={{ bottom: diagramBottomMargin + "%" }}
+                ></div>
+                <div
+                    className="y-axis"
+                    style={{ bottom: diagramBottomMargin + "%" }}
+                >
                     0
                 </div>
                 {scale.map((scaleValue, index) => (
