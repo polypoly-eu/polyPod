@@ -74,7 +74,7 @@ const subAnalyses = [
     NoDataFoldersAnalysis,
     UnknownMessageTypesAnalysis,
 ].filter((analysis) => {
-    // Some analysis are disabled because because we don't want to include them
+    // Some analysis are disabled because we don't want to include them
     // in the current build, but it seems likely that we want to reintegrate
     // them before too long - or show them behind some kind of flag, or
     // developer mode.
