@@ -1,0 +1,5 @@
+{
+    "title": "Struktur Ihrer Daten",
+    "summary": "Ihr Facebook-Datenimport enthält {{number_folders}} Ordner und {{number_files}} Dateien.",
+    "folder.info": "{{clicked_folder}} Ordner: {{number_files}} Dateien."
+}

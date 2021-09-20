@@ -1,10 +1,11 @@
 import React from "react";
 import DataOverview from "../../components/ministories/dataOverview/dataOverview.jsx";
 import RootAnalysis from "./root-analysis.js";
+import i18n from "../../i18n.js";
 
 export default class DataBubblesAnalysis extends RootAnalysis {
     get title() {
-        return "Structure of your data";
+        return i18n.t("dataOverviewMiniStory:title");
     }
 
     _computeScaleFactor(bubblesData) {
@@ -36,8 +37,10 @@ export default class DataBubblesAnalysis extends RootAnalysis {
         return (
             <>
                 <p>
-                    Your Facebook data import contains{" "}
-                    {this._bubblesData.length} folders and {filesNumber} files.
+                    {i18n.t("dataOverviewMiniStory:summary", {
+                        number_folders: this._bubblesData.length,
+                        number_files: filesNumber,
+                    })}
                 </p>
                 <DataOverview data={this._bubblesData} />
             </>

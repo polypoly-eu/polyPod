@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import DataBubblesAll from "../../dataViz/dataBubblesAll.jsx";
 
+import i18n from "../../../i18n.js";
+
 import "./dataOverview.css";
 
 const DataOverview = ({ data }) => {
@@ -34,7 +36,10 @@ const DataOverview = ({ data }) => {
         <>
             <div>
                 <p>
-                    {clickedButton} folder: {fileNumber} files
+                    {i18n.t("dataOverviewMiniStory:folder.info", {
+                        clicked_folder: clickedButton,
+                        number_files: fileNumber,
+                    })}
                 </p>
                 <DataBubblesAll
                     data={data}
@@ -60,7 +65,9 @@ const DataOverview = ({ data }) => {
                         </button>
                     );
                 })}
-                <p className="source">Source: Your Facebook Data</p>
+                <p className="source">
+                    {i18n.t("common:source.your.facebook.data")}
+                </p>
             </div>
         </>
     );
