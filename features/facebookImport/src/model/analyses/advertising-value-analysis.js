@@ -12,8 +12,9 @@ export default class AdvertisingValueAnalysis extends RootAnalysis {
     async analyze({ facebookAccount }) {
         const randomAdInterests = [];
         const numberInterests = facebookAccount.adInterests.length;
-        if (numberInterests > 0)
-            for (let i = 0; i < 3; i++) {
+        this.active = false;
+        if (numberInterests > 0) {
+            for (let i = 0; i < Math.min(3, numberInterests); i++) {
                 const randomIndex = parseInt(
                     Math.random() * facebookAccount.adInterests.length
                 );
@@ -21,7 +22,8 @@ export default class AdvertisingValueAnalysis extends RootAnalysis {
                     facebookAccount.adInterests[randomIndex]
                 );
             }
-        this.active = randomAdInterests.length > 0;
+            this.active = true;
+        }
         this._randomAdInterests = randomAdInterests;
         this._numberInterests = numberInterests;
     }
