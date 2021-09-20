@@ -1,6 +1,7 @@
 .explore-data .explore-data-button {
+    height: 32px;
     margin: 4px;
-    padding: 8px 12px;
+    padding: 0 12px;
     border: solid 1px var(--color-contrast-white);
     border-radius: 16px;
     background-color: var(--background-dark);
@@ -11,4 +12,10 @@
 .explore-data .selected-data {
     background-color: var(--background-light);
     color: var(--text-dark);
+}
+
+.explore-data .source {
+    margin: 28px 0 0 0;
+    font-size: 12px;
+    color: var(--color-gray-400);
 }

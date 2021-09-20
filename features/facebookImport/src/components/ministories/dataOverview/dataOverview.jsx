@@ -60,6 +60,7 @@ const DataOverview = ({ data }) => {
                         </button>
                     );
                 })}
+                <p className="source">Source: Your Facebook Data</p>
             </div>
         </>
     );
