@@ -1,8 +1,17 @@
 import React from "react";
 
+import generateScale from "../../model/generate-scale";
+
 import "./barChart.css";
 
-const BarChart = ({ data, names, onClickBar = () => {} }) => {
+const BarChart = ({
+    data,
+    names,
+    shouldSort = true,
+    onClickBar = () => {},
+    footerContent,
+    screenPadding = 0,
+}) => {
     if (names) data.map((data) => (data.title = data[names]));
     const getHighestCount = () => {
         let highest = 0;
@@ -12,29 +21,15 @@ const BarChart = ({ data, names, onClickBar = () => {} }) => {
         return highest;
     };
 
-    data.sort((a, b) => b.count - a.count);
-
-    const fillScale = (highest, multiple) => {
-        const scale = [];
-        for (
-            let i = multiple;
-            i <= Math.ceil(highest / multiple) * multiple;
-            i += multiple
-        ) {
-            scale.push(i);
-        }
-        return scale;
-    };
-
-    /*
-    const calculateScaleValues = (highest) => {
-        //TODO: make this a clever algorithm to determine a pretty scale
-        return fillScale(highest, parseInt((highest / 10) * 1.1));
-    };*/
+    if (shouldSort) {
+        data.sort((a, b) => b.count - a.count);
+    }
 
     const highestCount = getHighestCount();
-    const scaleMultiple = parseInt((highestCount / 10) * 1.1);
-    const scaleValues = fillScale(highestCount, scaleMultiple);
+    const scaleValues = generateScale(highestCount);
+
+    const pixelPerChar = 10;
+
     const scale = (
         <div className="scale-container">
             <div className="scale">
@@ -55,7 +50,7 @@ const BarChart = ({ data, names, onClickBar = () => {} }) => {
 
     const bars = (
         <div className="bars">
-            {data.map(({ title, count }, index) => (
+            {data.map(({ title, count, extraData }, index) => (
                 <div key={index} className="bar-box" onClick={onClickBar}>
                     <div className="above-bar">
                         <p className="name">{title}</p>
@@ -69,8 +64,34 @@ const BarChart = ({ data, names, onClickBar = () => {} }) => {
                                 "%",
                         }}
                     >
-                        <p>{count / highestCount > 0.1 ? count : ""}</p>
+                        <p
+                            style={
+                                (document.body.scrollWidth - screenPadding) *
+                                    (count /
+                                        scaleValues[scaleValues.length - 1]) <
+                                pixelPerChar * count.toString().length
+                                    ? {
+                                          transform: `translate(${
+                                              4 +
+                                              count.toString().length *
+                                                  pixelPerChar
+                                          }px, -50%)`,
+                                          color: "var(--color-grey-50)",
+                                      }
+                                    : null
+                            }
+                        >
+                            {count}
+                        </p>
                     </div>
+
+                    {footerContent ? (
+                        <div className="bottom-bar">
+                            {footerContent({ title, count, extraData })}
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             ))}
         </div>
@@ -79,7 +100,7 @@ const BarChart = ({ data, names, onClickBar = () => {} }) => {
     return (
         <div className="bar-chart">
             {scale}
-            {bars}
+            <div className="scrollable-wrapper">{bars}</div>
         </div>
     );
 };

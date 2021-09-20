@@ -12,9 +12,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 16.x
+          node-version: 16.8
       - name: Checks paths to rebuild Android
-        uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
         id: changes
         with:
           filters: |

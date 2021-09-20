@@ -10,10 +10,7 @@ export default class AdInterestsAnalysis extends RootAnalysis {
         this.active = this._adInterestsCount > 0;
     }
 
-    render() {
-        if (!this.active) {
-            return "No Ad Interests!";
-        }
+    renderSummary() {
         return `There are ${this._adInterestsCount} interests infered based on your Facebook activity and other actions that help Facebook show you relevant ads`;
     }
 }

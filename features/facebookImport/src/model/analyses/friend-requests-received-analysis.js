@@ -11,10 +11,7 @@ export default class ReceivedFriendRequestsAnalysis extends RootAnalysis {
         this.active = this._receivedFriendRequestsCount > 0;
     }
 
-    render() {
-        if (!this.active) {
-            return "No Received Friend Requests!";
-        }
+    renderSummary() {
         return `You received ${this._receivedFriendRequestsCount} ${
             this._receivedFriendRequestsCount === 1 ? "request" : "requests"
         }. from others asking you to be friends on Facebook`;

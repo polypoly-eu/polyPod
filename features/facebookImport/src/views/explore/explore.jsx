@@ -1,14 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./explore.css";
 
-const AnalysisCard = ({ analysis }) => {
+const AnalysisCard = ({
+    analysis,
+    setActiveDetails,
+    exploreScrollingProgress,
+}) => {
     return (
         <div className="analysis-card">
             <h1>{analysis.title}</h1>
-            <div>{analysis.render()}</div>
+            <div>{analysis.renderSummary()}</div>
+            {analysis.renderDetails ? (
+                <RouteButton
+                    route="/explore/details"
+                    className="details-button"
+                    onClick={() => setActiveDetails(analysis)}
+                    stateChange={{ exploreScrollingProgress }}
+                >
+                    View details
+                </RouteButton>
+            ) : null}
         </div>
     );
 };
@@ -29,7 +43,13 @@ const UnrecognizedCard = ({ unrecognizedData }) => {
 };
 
 const ExploreView = () => {
-    const { fileAnalysis } = useContext(ImporterContext);
+    const { navigationState, fileAnalysis, setActiveDetails } =
+        useContext(ImporterContext);
+
+    const [scrollingProgress, setScrollingProgress] = useState(
+        navigationState.exploreScrollingProgress
+    );
+    const exploreRef = useRef();
 
     const renderFileAnalyses = () => {
         if (!fileAnalysis) {
@@ -50,14 +70,31 @@ const ExploreView = () => {
                     unrecognizedData={fileAnalysis.unrecognizedData}
                 />
                 {fileAnalysis.analyses.map((analysis, index) => (
-                    <AnalysisCard analysis={analysis} key={index} />
+                    <AnalysisCard
+                        analysis={analysis}
+                        key={index}
+                        setActiveDetails={setActiveDetails}
+                        exploreScrollingProgress={scrollingProgress}
+                    />
                 ))}
             </div>
         );
     };
 
+    const saveScrollingProgress = (e) => {
+        setScrollingProgress(e.target.scrollTop);
+    };
+
+    useEffect(() => {
+        exploreRef.current.scrollTo(0, scrollingProgress);
+    }, []);
+
     return (
-        <div className="explore-view">
+        <div
+            ref={exploreRef}
+            className="explore-view"
+            onScroll={saveScrollingProgress}
+        >
             <h1 className="explore-view-title">Explore your data</h1>
             {renderFileAnalyses()}
         </div>

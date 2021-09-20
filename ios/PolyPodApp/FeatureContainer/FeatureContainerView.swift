@@ -77,6 +77,12 @@ class FeatureWebView: WKWebView {
             "disableUserSelect",
             forMainFrameOnly: false
         )
+        
+        installUserScript(
+            contentController,
+            "handleErrors",
+            forMainFrameOnly: false
+        )
 
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
@@ -181,6 +187,8 @@ extension FeatureWebView: WKScriptMessageHandler {
                 self.doLog(data: body)
             case .Event:
                 self.doHandleEvent(messageBody: body)
+            case .Error:
+                self.doLogError(body)
             }
         }
     }
@@ -216,6 +224,14 @@ extension FeatureWebView: WKScriptMessageHandler {
         }
 
         print("WebView: " + text)
+    }
+    
+    private func doLogError(_ error: Any) {
+        // TODO: All errors are currently being logged as "Script Error".
+        //       While that is better than nothing, we apparently need to load
+        //       the feature via loadHTMLString, and set baseURL to
+        //       "http://localhost/".
+        print("Error from FeatureContainer: \(error)")
     }
 }
 

@@ -14,10 +14,7 @@ export default class DataChartsAnalysis extends RootAnalysis {
         this.active = this._bubblesData.length > 0;
     }
 
-    render() {
-        if (!this.active) {
-            return "No Data!";
-        }
+    renderSummary() {
         return <BarChart data={this._bubblesData} />;
     }
 }

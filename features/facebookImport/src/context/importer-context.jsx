@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
 import { importData } from "../importer/importer.js";
 
 export const ImporterContext = React.createContext();
 
 //all nav-states for checking purposes
-const navigationStates = ["importStatus"];
+const navigationStates = ["importStatus", "exploreScrollingProgress"];
 const importSteps = {
     loading: "loading",
     beginning: "beginning",
@@ -28,11 +28,29 @@ const fakeStorage = {
     removeFile: async () => {},
 };
 
-function updatePodNavigation(pod, history) {
+class FileImportError extends Error {
+    constructor(cause) {
+        super("Failed to import file");
+        this.name = "FileImportError";
+        this.cause = cause;
+    }
+}
+
+class RefreshFilesError extends Error {
+    constructor(cause) {
+        super("Failed to refresh files");
+        this.name = "RefreshFilesError";
+        this.cause = cause;
+    }
+}
+
+function updatePodNavigation(pod, history, handleBack, location) {
     pod.polyNav.actions = {
-        back: () => history.goBack(),
+        back: () => handleBack(),
     };
-    history.length > 1
+    history.length > 1 &&
+    location.pathname !== "/overview" &&
+    location.pathname !== "/import"
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
 }
@@ -75,10 +93,15 @@ export const ImporterProvider = ({ children }) => {
     const [files, setFiles] = useState([]);
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
+    const [activeDetails, setActiveDetails] = useState(null);
+    const [globalError, setGlobalError] = useState(null);
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
+        exploreScrollingProgress: 0,
     });
+
+    const location = useLocation();
 
     storage.changeListener = async () => {
         const resolvedFiles = [];
@@ -97,7 +120,11 @@ export const ImporterProvider = ({ children }) => {
 
     const handleImportFile = async () => {
         const { polyNav } = pod;
-        await polyNav.importFile();
+        try {
+            await polyNav.importFile();
+        } catch (error) {
+            setGlobalError(new FileImportError(error));
+        }
         refreshFiles();
     };
 
@@ -124,13 +151,16 @@ export const ImporterProvider = ({ children }) => {
     }
 
     function refreshFiles() {
-        storage.refreshFiles().then(async () => {
-            const resolvedFiles = [];
-            for (const file of storage.files) {
-                resolvedFiles.push(await file);
-            }
-            setFiles(resolvedFiles);
-        });
+        storage
+            .refreshFiles()
+            .then(async () => {
+                const resolvedFiles = [];
+                for (const file of storage.files) {
+                    resolvedFiles.push(await file);
+                }
+                setFiles(resolvedFiles);
+            })
+            .catch((error) => setGlobalError(new RefreshFilesError(error)));
     }
 
     function updateImportStatus(newStatus) {
@@ -182,7 +212,7 @@ export const ImporterProvider = ({ children }) => {
     //on history change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, history);
+        updatePodNavigation(pod, history, handleBack, location);
         updateTitle(pod);
     });
 
@@ -200,6 +230,11 @@ export const ImporterProvider = ({ children }) => {
                 updateImportStatus,
                 fileAnalysis,
                 refreshFiles,
+                activeDetails,
+                setActiveDetails,
+                globalError,
+                setGlobalError,
+                facebookAccount,
             }}
         >
             {children}

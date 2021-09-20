@@ -5,12 +5,12 @@ export default class ExportSizeAnalysis extends RootAnalysis {
         return "File size";
     }
 
-    analyze({ size }) {
+    async analyze({ size }) {
         this.active = true;
         this._size = size;
     }
 
-    render() {
+    renderSummary() {
         return "" + this._size;
     }
 }

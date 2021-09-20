@@ -12,15 +12,19 @@ async function readJSONFile(dataFileName, zipFile) {
     if (!dataZipEntry) {
         throw new MissingFileImportException(dataFileName);
     }
-    const fileContent = new TextDecoder("utf-8").decode(
-        await zipFile.getContent(dataZipEntry)
-    );
+    const rawContent = await zipFile.getContent(dataZipEntry);
+    const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
         throw new MissingContentImportException(dataFileName);
     }
 
-    return JSON.parse(fileContent);
+    return JSON.parse(fileContent, (key, value) => {
+        if (typeof value === "string") {
+            return decodeURIComponent(escape(value));
+        }
+        return value;
+    });
 }
 
 async function readJSONDataArray(dataFileName, dataKey, zipFile) {
@@ -63,21 +67,27 @@ function anonymizeJsonEntityPath(fileName) {
     return anonymizedParts.join("/");
 }
 
-async function jsonDataEntities(zipFile) {
+async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
-    const relevantEntries = entries.filter(
+    return entries.filter(
+        (each) => !each.includes(".DS_Store") && !each.includes("__MACOSX")
+    );
+}
+
+async function jsonDataEntities(zipFile) {
+    const entries = await relevantZipEntries(zipFile);
+    const relevantJsonEntries = entries.filter(
         (each) =>
-            !each.includes(".DS_Store") &&
-            !each.includes("__MACOSX") &&
             !each.includes("/files/") && // Remove user files
             each.endsWith(".json")
     );
-    return relevantEntries;
+    return relevantJsonEntries;
 }
 
 export {
     readJSONFile,
     readJSONDataArray,
     anonymizeJsonEntityPath,
+    relevantZipEntries,
     jsonDataEntities,
 };
