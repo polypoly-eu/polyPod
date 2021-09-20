@@ -13,7 +13,7 @@ import "../tabs/tabs.css";
 const monthsAbbreviation = i18n.t("common:months.abbreviation").split(" ");
 
 //TODO let this support actual dates not only years
-const Datepicker = ({ year, yearRange, onYearChange }) => {
+const DatePicker = ({ year, yearRange, onYearChange }) => {
     const rangeIndex = yearRange.indexOf(year);
     return (
         <div className="datepicker">
@@ -42,7 +42,7 @@ const Datepicker = ({ year, yearRange, onYearChange }) => {
     );
 };
 
-const ActivitiesMinistory = ({ totalEvents }) => {
+const ActivitiesMiniStory = ({ totalEvents }) => {
     const yearRange = fillArray(Object.keys(totalEvents.values));
 
     const yearlyTotals = Object.fromEntries(
@@ -135,7 +135,7 @@ const ActivitiesMinistory = ({ totalEvents }) => {
                     ))}
                 </div>
                 {activeTab.id == "yearly" ? (
-                    <Datepicker
+                    <DatePicker
                         year={selectedYear}
                         yearRange={yearRange}
                         onYearChange={setSelectedYear}
@@ -162,4 +162,4 @@ const ActivitiesMinistory = ({ totalEvents }) => {
     );
 };
 
-export default ActivitiesMinistory;
+export default ActivitiesMiniStory;

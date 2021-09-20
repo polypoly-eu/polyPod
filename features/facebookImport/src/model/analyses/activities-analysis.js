@@ -2,7 +2,7 @@ import React from "react";
 import i18n from "../../i18n.js";
 import RootAnalysis from "./root-analysis.js";
 
-import ActivitiesMinistory from "../../components/activitiesMinistory/activitiesMinistory.jsx";
+import ActivitiesMiniStory from "../../components/activitiesMinistory/activitiesMiniStory.jsx";
 
 export default class ActivitiesAnalysis extends RootAnalysis {
     get title() {
@@ -80,7 +80,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
         return (
             <>
                 <p>{this.renderSummary()}</p>
-                <ActivitiesMinistory totalEvents={this._totalEvents} />
+                <ActivitiesMiniStory totalEvents={this._totalEvents} />
             </>
         );
     }
