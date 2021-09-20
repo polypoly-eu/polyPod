@@ -97,8 +97,8 @@ const ActivitiesMinistory = ({ totalEvents }) => {
         },
     }[activeTab.id];
 
-    //Adapt to oder of magnitude
-    const orderOfMagintude = (() => {
+    //Adapt to order of magnitude
+    const orderOfMagnitude = (() => {
         const highest = Math.max(...Object.values(constantTabData.barData));
         if (highest >= 1000) {
             constantTabData.barData = Object.fromEntries(
@@ -114,7 +114,7 @@ const ActivitiesMinistory = ({ totalEvents }) => {
 
     const numberOfEventsString = i18n.t(
         `activitiesMinistory:number.events${
-            orderOfMagintude > 1 ? ".thousands" : ""
+            orderOfMagnitude > 1 ? ".thousands" : ""
         }`
     );
 
