@@ -4,11 +4,13 @@ import {
     MissingFileImportException,
 } from "./failed-import-exception";
 
-async function readJSONFile(dataFileName, zipFile) {
+async function readJSONFile(dataFileName, zipFile, zipId) {
+    const fullEntryName = zipId + "/" + dataFileName;
     const entries = await zipFile.getEntries();
-    const dataZipEntry = entries.find((entryName) =>
-        entryName.includes(dataFileName)
+    const dataZipEntry = entries.find(
+        (entryName) => entryName === fullEntryName
     );
+
     if (!dataZipEntry) {
         throw new MissingFileImportException(dataFileName);
     }
@@ -27,8 +29,8 @@ async function readJSONFile(dataFileName, zipFile) {
     });
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile) {
-    const rawData = await readJSONFile(dataFileName, zipFile);
+async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId) {
+    const rawData = await readJSONFile(dataFileName, zipFile, zipId);
 
     if (!(dataKey in rawData)) {
         throw new InvalidContentImportException(
