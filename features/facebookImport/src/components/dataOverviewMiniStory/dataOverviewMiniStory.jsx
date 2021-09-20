@@ -10,6 +10,10 @@ const DataOverviewMiniStory = ({ data }) => {
         return b.count - a.count;
     });
 
+    const dataBubblesWidth = 400;
+    const dataBubblesHeight = 400;
+    const dataBubblesDarkColor = "#0f1938";
+    const dataBubblesLightColor = "#f7fafc";
     const [clickedButton, setClickedButton] = useState(data[0].title);
 
     const onClickButton = (ev, newClickedButton) => {
@@ -19,9 +23,9 @@ const DataOverviewMiniStory = ({ data }) => {
 
     const bubbleColor = (bubbles) => {
         if (bubbles.data.title === clickedButton) {
-            return "#f7fafc";
+            return dataBubblesLightColor;
         } else {
-            return "#0f1938";
+            return dataBubblesDarkColor;
         }
     };
 
@@ -43,10 +47,10 @@ const DataOverviewMiniStory = ({ data }) => {
                 </p>
                 <DataBubblesAll
                     data={data}
-                    width={400}
-                    height={400}
+                    width={dataBubblesWidth}
+                    height={dataBubblesHeight}
                     bubbleColor={bubbleColor}
-                    textColor={"#0f1938"}
+                    textColor={dataBubblesDarkColor}
                 />
             </div>
             <div className="data-overview">
