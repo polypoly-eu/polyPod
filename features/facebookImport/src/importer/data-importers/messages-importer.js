@@ -1,9 +1,9 @@
 import { createErrorResult, IMPORT_SUCCESS } from "../importer-status.js";
-import { readJSONFile } from "../importer-util.js";
+import { readJSONFile, removeEntryPrefix } from "../importer-util.js";
 
 export default class MessagesImporter {
     _isJsonMessageFile(entryName, id) {
-        const formattedEntryName = entryName.replace(`${id}/`, "");
+        const formattedEntryName = removeEntryPrefix(id, entryName);
         return /messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/[0-9_a-z]+\/message_[1-9][0-9]?.json$/.test(
             formattedEntryName
         );
@@ -32,9 +32,8 @@ export default class MessagesImporter {
         );
 
         for (const each of successfullResults) {
-            const fileNameParts = each.messageFile
-                .replace(`${id}/`, "")
-                .split("/");
+            const fileNameWithoutId = removeEntryPrefix(id, each.messageFile);
+            const fileNameParts = fileNameWithoutId.split("/");
             const fileName = fileNameParts.join("/");
             facebookAccount.addImportedFileName(fileName);
         }

@@ -84,10 +84,15 @@ async function jsonDataEntities(zipFile) {
     return relevantJsonEntries;
 }
 
+function removeEntryPrefix(id, entryName) {
+    return entryName.replace(`${id}/`, "");
+}
+
 export {
     readJSONFile,
     readJSONDataArray,
     anonymizeJsonEntityPath,
     relevantZipEntries,
     jsonDataEntities,
+    removeEntryPrefix,
 };
