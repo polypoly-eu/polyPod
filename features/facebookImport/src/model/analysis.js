@@ -63,14 +63,14 @@ const subAnalyses = [
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
-    UnknownMessageTypesAnalysis,
-    NoDataFoldersAnalysis,
     UknownTopLevelFoldersAnalysis,
-    UnknownJSONFilesAnalysis,
-    JSONFileNamesAnalysis,
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
+    UnknownJSONFilesAnalysis,
+    JSONFileNamesAnalysis,
+    NoDataFoldersAnalysis,
+    UnknownMessageTypesAnalysis,
 ].filter((analysis) => {
     // Some analysis are disabled because because we don't want to include them
     // in the current build, but it seems likely that we want to reintegrate
@@ -83,6 +83,11 @@ const subAnalyses = [
         DataChartsAnalysis,
         DataGroupsAnalysis,
         JsonFilesBubblesAnalysis,
+
+        NoDataFoldersAnalysis,
+        UnknownMessageTypesAnalysis,
+        JSONFileNamesAnalysis,
+        UnknownJSONFilesAnalysis,
     ].includes(analysis);
 });
 
