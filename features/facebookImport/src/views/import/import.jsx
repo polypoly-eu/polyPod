@@ -20,7 +20,7 @@ const Import = () => {
         handleImportFile,
     } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
-    const file = files[0];
+    const file = files?.[0];
 
     const onRemoveFile = () => {
         handleRemoveFile(file.id);
@@ -42,6 +42,7 @@ const Import = () => {
                 file={file}
                 onRemoveFile={onRemoveFile}
             />
+            {files === null && <div className="overlay"></div>}
         </div>
     );
 };

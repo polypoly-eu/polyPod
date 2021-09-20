@@ -90,7 +90,7 @@ async function writeImportStatus(pod, status) {
 export const ImporterProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [storage, setStorage] = useState(fakeStorage);
-    const [files, setFiles] = useState([]);
+    const [files, setFiles] = useState(null);
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
     const [activeDetails, setActiveDetails] = useState(null);
@@ -120,6 +120,7 @@ export const ImporterProvider = ({ children }) => {
 
     const handleImportFile = async () => {
         const { polyNav } = pod;
+        setFiles(null); // To show the loading overlay
         try {
             await polyNav.importFile();
         } catch (error) {
@@ -151,6 +152,7 @@ export const ImporterProvider = ({ children }) => {
     }
 
     function refreshFiles() {
+        setFiles(null);
         storage
             .refreshFiles()
             .then(async () => {
@@ -194,7 +196,7 @@ export const ImporterProvider = ({ children }) => {
     //when files changed run the importer first and create an account model first.
     //after there is an account the analyses are triggered.
     useEffect(() => {
-        if (files[0])
+        if (files?.[0])
             importData(files[0]).then((newFacebookAccount) =>
                 setFacebookAccount(newFacebookAccount)
             );
