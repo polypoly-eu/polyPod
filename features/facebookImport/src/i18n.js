@@ -6,6 +6,8 @@ import overviewEn from "./locales/en/overview.json";
 import exploreEn from "./locales/en/explore.json";
 import activitiesMiniStoryEn from "./locales/en/miniStories/activities.json";
 import messagesMiniStoryEn from "./locales/en/miniStories/messages.json";
+import advertisingValueMiniStoryEn from "./locales/en/miniStories/advertisingValue.json";
+import OffFacebookEventsMiniStoryEn from "./locales/en/miniStories/offFacebookEvents.json";
 import reportEn from "./locales/en/report.json";
 
 import commonDe from "./locales/de/common.json";
@@ -14,6 +16,8 @@ import overviewDe from "./locales/de/overview.json";
 import exploreDe from "./locales/de/explore.json";
 import activitiesMiniStoryDe from "./locales/de/miniStories/activities.json";
 import messagesMiniStoryDe from "./locales/de/miniStories/messages.json";
+import advertisingValueMiniStoryDe from "./locales/de/miniStories/advertisingValue.json";
+import OffFacebookEventsMiniStoryDe from "./locales/de/miniStories/offFacebookEvents.json";
 import reportDe from "./locales/de/report.json";
 
 export default new I18n(determineLanguage(), {
@@ -24,6 +28,8 @@ export default new I18n(determineLanguage(), {
         explore: exploreEn,
         activitiesMiniStory: activitiesMiniStoryEn,
         messagesMiniStory: messagesMiniStoryEn,
+        advertisingValueMiniStory: advertisingValueMiniStoryEn,
+        offFacebookEventsMiniStory: OffFacebookEventsMiniStoryEn,
         report: reportEn,
     },
     de: {
@@ -33,6 +39,8 @@ export default new I18n(determineLanguage(), {
         explore: exploreDe,
         activitiesMiniStory: activitiesMiniStoryDe,
         messagesMiniStory: messagesMiniStoryDe,
+        advertisingValueMiniStory: advertisingValueMiniStoryDe,
+        offFacebookEventsMiniStory: OffFacebookEventsMiniStoryDe,
         report: reportDe,
     },
 });
