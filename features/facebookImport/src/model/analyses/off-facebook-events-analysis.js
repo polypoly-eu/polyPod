@@ -19,9 +19,10 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
             return;
         }
 
-        this._purchasesCount = groupOffFacebookEventsByType(
-            facebookAccount
-        ).find((e) => e.type == "PURCHASE")?.count;
+        this._purchasesCount =
+            groupOffFacebookEventsByType(facebookAccount).find(
+                (e) => e.type == "PURCHASE"
+            )?.count || 0;
     }
 
     renderSummary() {
