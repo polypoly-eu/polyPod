@@ -11,7 +11,7 @@
     max-width: var(--max-width);
     padding: 0 16px 16px 16px;
     box-sizing: border-box;
-    margin-bottom: 72px;
+    margin: 4px auto 72px auto;
 }
 
 .import-view .explanation-expandable .intro p {
