@@ -4,7 +4,7 @@ import RootAnalysis from "./root-analysis.js";
 import i18n from "../../i18n.js";
 import { groupOffFacebookEventsByType } from "./utils/off-facebook-events-utils.js";
 
-import OffFacebookMiniStory from "../../components/offFacebookMinistory/offFacebookMinistory.jsx";
+import OffFacebookMiniStory from "../../components/offFacebookMiniStory/offFacebookMiniStory.jsx";
 
 export default class OffFacebookEventsAnalysis extends RootAnalysis {
     get title() {
