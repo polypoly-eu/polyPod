@@ -1,5 +1,5 @@
 {
     "title": "Struktur Ihrer Daten",
-    "summary": "Ihr Facebook-Datenimport enthält {{number_folders}} Ordner und {{number_files}} Dateien.",
-    "folder.info": "{{clicked_folder}} Ordner: {{number_files}} Dateien."
+    "summary": "Von deinen gesamten Facebook-Daten analysieren wir derzeit nur die folgenden {{number_folders}} Kategorien und {{number_files}} zugehörige Dateneinträge.",
+    "folder.info": "{{clicked_folder}} Kategorie: {{number_files}} Dateneinträge."
 }
