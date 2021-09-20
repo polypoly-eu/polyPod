@@ -1,9 +1,8 @@
 import { readJSONDataObject } from "../importer-util.js";
-import DirectKeyDataImporter from "./direct-key-data-importer.js";
 
 const fileName = "profile_information/profile_information.json";
 
-export default class NameImporter extends DirectKeyDataImporter {
+export default class NameImporter {
     async _readLanguageData(zipFile) {
         return await readJSONDataObject(fileName, "profile_v2", zipFile);
     }
