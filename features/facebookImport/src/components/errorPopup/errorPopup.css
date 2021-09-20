@@ -8,10 +8,15 @@
     background: red;
 }
 
+.error-popup a {
+    text-decoration: underline;
+}
+
 .error-popup pre {
     border: 1px solid white;
     padding: 8px;
-    overflow: scroll;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
     font-family: monospace;
 }
 

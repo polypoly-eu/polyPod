@@ -2,19 +2,31 @@ import React from "react";
 
 import "./errorPopup.css";
 
+function handleSendEmail() {
+    window.pod.polyNav.openUrl("support-email");
+}
+
 export default function ErrorPopup({ error, onClose }) {
     return (
         <div className="error-popup">
             <h1>An error occurred!</h1>
-            <p>
-                If you want to help us, please report it to
-                feedback@polypoly.coop. While it is helpful for us if you
-                include the concrete error message below, please ensure that it
-                does not contain any of your personal data before sharing it
-                with anyone. When in doubt, just save it, e.g. in a screenshot,
-                and reach out to us without including it first.
-            </p>
             <pre>{`${error.name}: ${error.message}\n\nCause:\n${error.cause}`}</pre>
+            <p>If you want to help us solve this problem, please:</p>
+            <ol>
+                <li>Take a screenshot that includes the error message above</li>
+                <li>
+                    Verify that it doesn&apos;t contain any private information
+                </li>
+                <li>
+                    Send us an email to{" "}
+                    <a onClick={handleSendEmail}>
+                        polypod-feedback@polypoly.coop
+                    </a>
+                    , with the screenshot, and a brief explanation of what you
+                    did before this error showed up
+                </li>
+            </ol>
+            <p>Thank you!</p>
             <button onClick={onClose}>Close</button>
         </div>
     );

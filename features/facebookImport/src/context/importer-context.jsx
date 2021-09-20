@@ -234,6 +234,7 @@ export const ImporterProvider = ({ children }) => {
                 setActiveDetails,
                 globalError,
                 setGlobalError,
+                facebookAccount,
             }}
         >
             {children}

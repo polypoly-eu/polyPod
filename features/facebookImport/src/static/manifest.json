@@ -5,7 +5,8 @@
     "thumbnail": "images/thumbnail.png",
     "primaryColor": "#0f1938",
     "links": {
-        "data-download": "https://www.facebook.com/dyi"
+        "data-download": "https://www.facebook.com/dyi",
+        "support-email": "mailto:polypod-feedback@polypoly.coop"
     },
     "translations": {
         "de": {
