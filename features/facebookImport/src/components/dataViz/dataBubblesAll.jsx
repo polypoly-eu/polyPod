@@ -26,7 +26,7 @@ const DataTypeBubbleAll = ({
         leaf.append("circle")
             .attr("r", (d) => d.r)
             .style("fill", bubbleColor)
-            .style("stroke", "white")
+            .style("stroke", "#f7fafc")
             .style("vertical-align", "center")
             .attr("fill-opacity", opacity);
 
