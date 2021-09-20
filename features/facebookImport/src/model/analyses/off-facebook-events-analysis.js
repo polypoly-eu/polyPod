@@ -1,3 +1,5 @@
+import React from "react";
+
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../i18n.js";
 import { groupOffFacebookEventsByType } from "./utils/off-facebook-events-utils.js";
