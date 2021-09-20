@@ -22,7 +22,7 @@ const ReportView = () => {
             process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
         );
         if (error) console.error("Failed to send report:", error);
-        setReportResult(!!error);
+        setReportResult(!error);
         handleBack();
     };
 
