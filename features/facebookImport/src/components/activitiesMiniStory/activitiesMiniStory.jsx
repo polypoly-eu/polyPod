@@ -6,7 +6,7 @@ import BarChartHorizontal from "../dataViz/barChartHorizontal.jsx";
 
 import { fillArray } from "../dataViz/utils.jsx";
 
-import "./activitiesMinistory.css";
+import "./activitiesMiniStory.css";
 import "./datePicker.css";
 import "../tabs/tabs.css";
 
