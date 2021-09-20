@@ -1,4 +1,5 @@
 {
     "messages.title": "Nachrichten Zusammenfassung",
-    "messages.summary": "In deinem export sind {{messages}} Nachrichten in {{threads}} Threads von {{people}} Personen."
+    "messages.summary": "In deinem export sind {{messages}} Nachrichten in {{threads}} Threads von {{people}} Personen.",
+    "loading": "Deine Daten werden analysiert"
 }

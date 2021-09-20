@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
+import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
+
+import i18n from "../../i18n.js";
 
 import "./explore.css";
 
@@ -52,17 +55,8 @@ const ExploreView = () => {
     const exploreRef = useRef();
 
     const renderFileAnalyses = () => {
-        if (!fileAnalysis) {
-            return (
-                <div>
-                    <p>Analyzing your data ...</p>
-                    <p>
-                        If this takes more than a few seconds - or for large
-                        data sets maybe minutes - please report this as an issue
-                        - there was likely an error.
-                    </p>
-                </div>
-            );
+        if (true || !fileAnalysis) {
+            return <Loading message={i18n.t("explore:loading")} />;
         }
         return (
             <div>
