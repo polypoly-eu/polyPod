@@ -38,32 +38,36 @@ export default class ActivitiesAnalysis extends RootAnalysis {
             activities
         )) {
             for (let activity of activitiesValues) {
-                const timeOfActivity = new Date(activity[timestampKey]);
+                const timeStamp = activity[timestampKey];
+
+                const timeOfActivity = new Date(
+                    timeStamp.toString().length == 10
+                        ? timeStamp * 1000
+                        : timeStamp
+                );
                 const activityYear = timeOfActivity.getFullYear();
-                if (activityYear >= 2006) {
-                    const activityMonth = timeOfActivity.getMonth();
-                    if (
-                        groupedActivities?.values?.[activityYear]?.values?.[
-                            activityMonth
-                        ]
-                    ) {
-                        groupedActivities.values[activityYear].values[
-                            activityMonth
-                        ]++;
-                        groupedActivities.values[activityYear].total++;
-                    } else {
-                        if (!groupedActivities.values?.[activityYear]) {
-                            groupedActivities.values[activityYear] = {
-                                total: 1,
-                                values: {},
-                            };
-                        } else groupedActivities.values[activityYear].total++;
-                        groupedActivities.values[activityYear].values[
-                            activityMonth
-                        ] = 1;
-                    }
-                    groupedActivities.total++;
+                const activityMonth = timeOfActivity.getMonth();
+                if (
+                    groupedActivities?.values?.[activityYear]?.values?.[
+                        activityMonth
+                    ]
+                ) {
+                    groupedActivities.values[activityYear].values[
+                        activityMonth
+                    ]++;
+                    groupedActivities.values[activityYear].total++;
+                } else {
+                    if (!groupedActivities.values?.[activityYear]) {
+                        groupedActivities.values[activityYear] = {
+                            total: 1,
+                            values: {},
+                        };
+                    } else groupedActivities.values[activityYear].total++;
+                    groupedActivities.values[activityYear].values[
+                        activityMonth
+                    ] = 1;
                 }
+                groupedActivities.total++;
             }
         }
         this._totalEvents = groupedActivities;
