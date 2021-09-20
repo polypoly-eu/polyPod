@@ -13,7 +13,6 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
 
     async analyze({ facebookAccount }) {
         this._companiesCount = facebookAccount.offFacebookCompanies.length;
-        this._eventsCount = facebookAccount.offFacebookEventsCount;
         this.active = this._companiesCount > 0;
         this._purchasesCount = 0;
         if (!this.active) {
