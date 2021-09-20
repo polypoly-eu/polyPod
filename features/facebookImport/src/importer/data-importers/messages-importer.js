@@ -20,8 +20,8 @@ export default class MessagesImporter {
         );
     }
 
-    async _readJSONFileWithStatus(messageFile, zipFile, zipId) {
-        return readJSONFile(messageFile, zipFile, zipId)
+    async _readJSONFileWithStatus(messageFile, zipFile) {
+        return readJSONFile(messageFile, zipFile)
             .then((data) => {
                 return { status: IMPORT_SUCCESS, messageFile, data };
             })
@@ -52,7 +52,7 @@ export default class MessagesImporter {
         // TODO: The same message thread can be in multiple files
         const messageThreadResults = await Promise.all(
             messageThreadFiles.map((messageFile) =>
-                this._readJSONFileWithStatus(messageFile, zipFile, id)
+                this._readJSONFileWithStatus(messageFile, zipFile)
             )
         );
         this._importMessageThread(id, facebookAccount, messageThreadResults);

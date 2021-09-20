@@ -11,8 +11,8 @@ async function relevantZipEntries(zipFile) {
     );
 }
 
-async function readJSONFile(dataFileName, zipFile, zipId) {
-    const fullEntryName = zipId + "/" + dataFileName;
+async function readJSONFile(dataFileName, zipFile, zipId = null) {
+    const fullEntryName = zipId ? zipId + "/" + dataFileName : dataFileName;
     const entries = await zipFile.getEntries();
     const dataZipEntry = entries.find(
         (entryName) => entryName === fullEntryName
@@ -36,7 +36,7 @@ async function readJSONFile(dataFileName, zipFile, zipId) {
     });
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId) {
+async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
     const rawData = await readJSONFile(dataFileName, zipFile, zipId);
 
     if (!(dataKey in rawData)) {
