@@ -1,0 +1,27 @@
+.datepicker {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.datepicker button {
+    background-color: transparent;
+    border: none;
+}
+
+.datepicker .arrow {
+    width: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.datepicker .year {
+    display: flex;
+    height: 100%;
+    flex: 1 1 auto;
+    justify-content: center;
+    align-items: center;
+}

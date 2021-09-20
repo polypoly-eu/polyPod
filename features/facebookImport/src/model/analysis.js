@@ -35,6 +35,7 @@ import JSONFileNamesAnalysis from "./analyses-report/json-file-names-analysis.js
 import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-types-analysis.js";
 import UknownTopLevelFoldersAnalysis from "./analyses-report/unknown-top-level-folders-analysis.js";
 import InactiveCardsSummary from "./analyses-report/inactive-cards-summary.js";
+import ActivitiesAnalysis from "./analyses/activities-analysis.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -71,6 +72,7 @@ const subAnalyses = [
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
+    ActivitiesAnalysis,
 ].filter((analysis) => {
     // Some analysis are disabled because because we don't want to include them
     // in the current build, but it seems likely that we want to reintegrate
