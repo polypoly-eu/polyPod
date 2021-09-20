@@ -55,9 +55,8 @@ const ExploreView = () => {
     const exploreRef = useRef();
 
     const renderFileAnalyses = () => {
-        if (true || !fileAnalysis) {
+        if (!fileAnalysis)
             return <Loading message={i18n.t("explore:loading")} />;
-        }
         return (
             <div>
                 <UnrecognizedCard
