@@ -12,22 +12,17 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
     }
 
     async analyze({ facebookAccount }) {
-        console.log(facebookAccount);
         this._companiesCount = facebookAccount.offFacebookCompanies.length;
-        try {
-            this._eventsCount = facebookAccount.offFacebookEventsCount;
-            this.active = this._companiesCount > 0;
-            this._purchasesCount = 0;
-            if (!this.active) {
-                return;
-            }
-
-            this._purchasesCount = groupOffFacebookEventsByType(
-                facebookAccount
-            ).find((e) => e.type == "PURCHASE")?.count;
-        } catch (err) {
-            console.log(err);
+        this._eventsCount = facebookAccount.offFacebookEventsCount;
+        this.active = this._companiesCount > 0;
+        this._purchasesCount = 0;
+        if (!this.active) {
+            return;
         }
+
+        this._purchasesCount = groupOffFacebookEventsByType(
+            facebookAccount
+        ).find((e) => e.type == "PURCHASE")?.count;
     }
 
     renderSummary() {
