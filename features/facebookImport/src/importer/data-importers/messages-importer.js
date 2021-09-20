@@ -1,5 +1,9 @@
 import { createErrorResult, IMPORT_SUCCESS } from "../importer-status.js";
-import { readJSONFile, removeEntryPrefix } from "../importer-util.js";
+import {
+    readJSONFile,
+    relevantZipEntries,
+    removeEntryPrefix,
+} from "../importer-util.js";
 
 export default class MessagesImporter {
     _isJsonMessageFile(entryName, id) {
@@ -10,7 +14,7 @@ export default class MessagesImporter {
     }
 
     async _extractJsonEntries(id, zipFile) {
-        const entries = await zipFile.getEntries();
+        const entries = await relevantZipEntries(zipFile);
         return entries.filter((fileName) =>
             this._isJsonMessageFile(fileName, id)
         );

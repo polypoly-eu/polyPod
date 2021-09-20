@@ -4,8 +4,15 @@ import {
     MissingFileImportException,
 } from "./failed-import-exception";
 
-async function readJSONFile(dataFileName, zipFile) {
+async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
+    return entries.filter(
+        (each) => !each.includes(".DS_Store") && !each.includes("__MACOSX")
+    );
+}
+
+async function readJSONFile(dataFileName, zipFile) {
+    const entries = await relevantZipEntries(zipFile);
     const dataZipEntry = entries.find((entryName) =>
         entryName.includes(dataFileName)
     );
@@ -65,13 +72,6 @@ function anonymizeJsonEntityPath(fileName) {
         anonymizePathSegment(each, fileName)
     );
     return anonymizedParts.join("/");
-}
-
-async function relevantZipEntries(zipFile) {
-    const entries = await zipFile.getEntries();
-    return entries.filter(
-        (each) => !each.includes(".DS_Store") && !each.includes("__MACOSX")
-    );
 }
 
 async function jsonDataEntities(zipFile) {
