@@ -12,9 +12,5 @@
     "explanation.sendLater":
         "Send later",
     "explanation.send":
-        "Send",
-    "success":
-        "Report sent successfully",
-    "error":
-        "Error while sending report."
+        "Send"
 }

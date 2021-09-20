@@ -1,4 +1,6 @@
 {
     "messages.title": "Messages Summary",
-    "messages.summary": "In your export there are {{messages}} messages in {{threads}} threads by {{people}} people."
+    "messages.summary": "In your export there are {{messages}} messages in {{threads}} threads by {{people}} people.",
+    "report.success": "Report sent successfully",
+    "report.error": "Error while sending report"
 }

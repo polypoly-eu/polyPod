@@ -2,7 +2,20 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
+import i18n from "../../i18n.js";
+
 import "./explore.css";
+
+const PopUpMessage = ({ children, handleClosePopUp }) => {
+    return (
+        <div className="pop-up">
+            <div className="pop-up-message">{children}</div>
+            <div className="close-icon" onClick={handleClosePopUp}>
+                x
+            </div>
+        </div>
+    );
+};
 
 const AnalysisCard = ({
     analysis,
@@ -43,13 +56,35 @@ const UnrecognizedCard = ({ unrecognizedData }) => {
 };
 
 const ExploreView = () => {
-    const { navigationState, fileAnalysis, setActiveDetails } =
-        useContext(ImporterContext);
+    const {
+        navigationState,
+        fileAnalysis,
+        setActiveDetails,
+        reportResult,
+        setReportResult,
+    } = useContext(ImporterContext);
 
     const [scrollingProgress, setScrollingProgress] = useState(
         navigationState.exploreScrollingProgress
     );
     const exploreRef = useRef();
+
+    const handleCloseReportResult = () => {
+        setReportResult(null);
+    };
+
+    const renderReportResult = () =>
+        reportResult !== null && (
+            <PopUpMessage handleClosePopUp={handleCloseReportResult}>
+                {reportResult ? (
+                    i18n.t("explore:report.success")
+                ) : (
+                    <span className="unsuccessfully">
+                        {i18n.t("explore:report.error")}
+                    </span>
+                )}
+            </PopUpMessage>
+        );
 
     const renderFileAnalyses = () => {
         if (!fileAnalysis) {
@@ -96,6 +131,7 @@ const ExploreView = () => {
             onScroll={saveScrollingProgress}
         >
             <h1 className="explore-view-title">Explore your data</h1>
+            {renderReportResult()}
             {renderFileAnalyses()}
         </div>
     );
