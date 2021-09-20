@@ -35,7 +35,7 @@ export default class MessagesImporter {
             const fileNameParts = each.messageFile
                 .replace(`${id}/`, "")
                 .split("/");
-            const fileName = fileNameParts.slice(1).join("/");
+            const fileName = fileNameParts.join("/");
             facebookAccount.addImportedFileName(fileName);
         }
         facebookAccount.messageThreads = successfullResults.map(

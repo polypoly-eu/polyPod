@@ -10,7 +10,7 @@ async function extractTopLevelFolderNamesFromZip(id, zipFile) {
 
     relevantEntries.forEach((filename) => {
         const noIdFileName = filename.replace(`${id}/`, "");
-        const folderNameMatch = noIdFileName.match(/^[^/]+\/([^/]+)\/.*$/);
+        const folderNameMatch = noIdFileName.match(/^([^/]+)\/.*$/);
         if (
             folderNameMatch &&
             folderNameMatch.length === 2 &&

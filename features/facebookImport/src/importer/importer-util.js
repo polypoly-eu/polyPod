@@ -59,7 +59,7 @@ function anonymizePathSegment(pathSegment, fullPath) {
 }
 
 function anonymizeJsonEntityPath(fileName) {
-    const nameParts = fileName.split("/").slice(1);
+    const nameParts = fileName.split("/");
 
     const anonymizedParts = nameParts.map((each) =>
         anonymizePathSegment(each, fileName)
