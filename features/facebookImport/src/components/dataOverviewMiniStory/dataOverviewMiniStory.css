@@ -1,4 +1,4 @@
-.explore-data .explore-data-button {
+.data-overview .data-overview-button {
     height: 32px;
     margin: 4px;
     padding: 0 12px;
@@ -9,12 +9,12 @@
     font-size: 14px;
 }
 
-.explore-data .selected-data {
+.data-overview .selected-data {
     background-color: var(--background-light);
     color: var(--text-dark);
 }
 
-.explore-data .source {
+.data-overview .source {
     margin: 28px 0 0 0;
     font-size: 12px;
     color: var(--color-gray-400);

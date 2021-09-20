@@ -1,5 +1,5 @@
 import React from "react";
-import DataOverview from "../../components/ministories/dataOverview/dataOverview.jsx";
+import DataOverviewMiniStory from "../../components/dataOverviewMiniStory/dataOverviewMiniStory.jsx";
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../i18n.js";
 
@@ -42,7 +42,7 @@ export default class DataBubblesAnalysis extends RootAnalysis {
                         number_files: filesNumber,
                     })}
                 </p>
-                <DataOverview data={this._bubblesData} />
+                <DataOverviewMiniStory data={this._bubblesData} />
             </>
         );
     }

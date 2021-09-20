@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import DataBubblesAll from "../../dataViz/dataBubblesAll.jsx";
+import DataBubblesAll from "../dataViz/dataBubblesAll.jsx";
 
-import i18n from "../../../i18n.js";
+import i18n from "../../i18n.js";
 
-import "./dataOverview.css";
+import "./dataOverviewMiniStory.css";
 
-const DataOverview = ({ data }) => {
+const DataOverviewMiniStory = ({ data }) => {
     data.sort(function (a, b) {
         return b.count - a.count;
     });
@@ -49,14 +49,14 @@ const DataOverview = ({ data }) => {
                     textColor={"#0f1938"}
                 />
             </div>
-            <div className="explore-data">
+            <div className="data-overview">
                 {data.map((bubble, index) => {
                     return (
                         <button
                             className={
                                 bubble.title === clickedButton
-                                    ? "explore-data-button selected-data"
-                                    : "explore-data-button"
+                                    ? "data-overview-button selected-data"
+                                    : "data-overview-button"
                             }
                             onClick={(ev) => onClickButton(ev, bubble.title)}
                             key={index}
@@ -73,4 +73,4 @@ const DataOverview = ({ data }) => {
     );
 };
 
-export default DataOverview;
+export default DataOverviewMiniStory;
