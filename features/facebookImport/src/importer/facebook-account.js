@@ -3,6 +3,7 @@ class FacebookAccount {
         this._importingResults = [];
         this._importedFileNames = [];
 
+        this._name = null;
         this._preferredLanguage = [];
 
         this._offFacebookCompanies = [];
@@ -96,6 +97,14 @@ class FacebookAccount {
     }
 
     // Basic accessors
+
+    get name() {
+        return this._name;
+    }
+
+    set name(name) {
+        this._name = name;
+    }
 
     get preferredLanguage() {
         return this._preferredLanguage;
