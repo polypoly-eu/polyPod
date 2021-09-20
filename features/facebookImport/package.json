@@ -18,6 +18,7 @@
     "@rollup/plugin-node-resolve": "11.2.0",
     "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
+    "cypress": "^8.4.1",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
