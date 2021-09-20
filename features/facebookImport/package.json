@@ -10,9 +10,11 @@
     "test": "jest --passWithNoTests"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.14.8",
     "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
     "@polypoly-eu/podjs": "file:../../podjs",
+    "@rdfjs/dataset": "^1.1.1",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "11.2.0",
@@ -26,8 +28,8 @@
     "jest": "^27.0.6",
     "jszip": "^3.6.0",
     "lit": "^2.0.0-rc.2",
-    "memfs": "^3.2.2",
-    "node-fetch": "^2.6.1",
+    "memfs": "^3.3.0",
+    "node-fetch": "^2.6.2",
     "poly-look": "file:../../core/utils/poly-look",
     "rollup": "^2.55.1",
     "rollup-plugin-copy": "3.3.0",
