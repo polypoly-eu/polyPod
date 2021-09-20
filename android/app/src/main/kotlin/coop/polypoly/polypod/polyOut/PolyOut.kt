@@ -1,47 +1,31 @@
 package coop.polypoly.polypod.polyOut
 
 import android.content.Context
-import androidx.security.crypto.EncryptedFile
-import androidx.security.crypto.MasterKey
 import coop.polypoly.polypod.Preferences
+import coop.polypoly.polypod.polyNav.ZipTools
 import java.io.File
 import java.nio.ByteBuffer
-import java.util.zip.ZipInputStream
 
 open class PolyOut(
     val context: Context
 ) {
     private val fsPrefix = "polypod://"
-    private val mainKey = MasterKey.Builder(context)
-        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-        .setUserAuthenticationRequired(false)
-        .build()
 
     open suspend fun readFile(path: String): ByteArray {
         if (path == "") {
             throw Error("Empty path in PolyOut.readFile")
         }
         val fs = Preferences.getFileSystem(context)
-        val entryPathStart = path.indexOf('/', fsPrefix.length)
-        val zipId = path.substring(0, entryPathStart)
-        val entryPath = path.substring(entryPathStart + 1)
 
-        val encryptedZip = EncryptedFile.Builder(
-            context,
-            File(fs[zipId]),
-            mainKey,
-            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-        ).build()
-        ZipInputStream(encryptedZip.openFileInput()).use {
-            do {
-                val zipEntry = it.nextEntry
-                if (zipEntry?.name == entryPath) {
-                    return it.readBytes()
-                }
-            } while (zipEntry != null)
+        val filePath = context.filesDir.absolutePath + "/" + path.replace(
+            "://", ":/"
+        )
+        val encryptedFile = ZipTools.getEncryptedFile(context, filePath)
+        encryptedFile.openFileInput().use {
+            return it.readBytes()
         }
 
-        throw Error("Not found")
+        return ByteArray(0)
     }
 
     open suspend fun writeFile(path: String, data: ByteBuffer): Boolean {
@@ -50,11 +34,11 @@ open class PolyOut(
 
     open suspend fun stat(path: String): MutableMap<String, String> {
         val fs = Preferences.getFileSystem(context)
-        var result = mutableMapOf<String, String>()
+        val result = mutableMapOf<String, String>()
         if (path == "") {
             return result
         }
-        val file = File(fs[path])
+        val file = File(context.filesDir.absolutePath.plus("/$path"))
         result["name"] = file.name
         result["time"] = file.lastModified().toString()
         result["size"] = file.length().toString()
@@ -67,21 +51,16 @@ open class PolyOut(
         if (path == "") {
             return fs.keys.toTypedArray()
         }
-        val encryptedZip = EncryptedFile.Builder(
-            context,
-            File(fs[path]),
-            mainKey,
-            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-        ).build()
-        var zipEntryNames = mutableListOf<String>()
-        ZipInputStream(encryptedZip.openFileInput()).use {
-            do {
-                zipEntryNames.add(it.nextEntry.name)
-            } while (it.available() != 0)
+        val retList = mutableListOf<String>()
+        File(
+            context.filesDir.absolutePath.plus("/$path")
+        ).walkTopDown().forEach {
+            retList.add(
+                it.relativeTo(context.filesDir).path.replace(
+                    ":/", "://"
+                )
+            )
         }
-
-        return zipEntryNames.toList().map {
-            path + "/" + it
-        }.toTypedArray()
+        return retList.toTypedArray()
     }
 }

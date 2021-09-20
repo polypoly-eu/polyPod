@@ -6,8 +6,6 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import android.webkit.WebMessage
 import android.webkit.WebView
-import androidx.security.crypto.EncryptedFile
-import androidx.security.crypto.MasterKey
 import coop.polypoly.polypod.Preferences
 import java.io.File
 import java.util.UUID
@@ -71,36 +69,18 @@ open class PolyNav(
             if (inputStream == null) {
                 throw Error("File copy error")
             }
-
-            val mainKey = MasterKey.Builder(context)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .setUserAuthenticationRequired(false)
-                .build()
-
-            val encryptedZipPath = context.filesDir.absolutePath.plus(
-                "/$fileName"
-            )
-            val encryptedZip = EncryptedFile.Builder(
-                context,
-                File(encryptedZipPath),
-                mainKey,
-                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-            ).build()
-
-            encryptedZip.openFileOutput().use {
-                inputStream.copyTo(it)
-            }
+            val newId = fsPrefix + UUID.randomUUID().toString()
+            ZipTools.unzipAndEncrypt(inputStream, context, newId)
+            val fs = Preferences.getFileSystem(context).toMutableMap()
+            fs[newId] = fileName
+            Preferences.setFileSystem(context, fs)
         }
-        val fs = Preferences.getFileSystem(context).toMutableMap()
-        val newId = fsPrefix + UUID.randomUUID().toString()
-        fs[newId] = context.filesDir.path + "/" + fileName
-        Preferences.setFileSystem(context, fs)
         return importedUrl
     }
 
     fun removeFile(id: String) {
         val fs = Preferences.getFileSystem(context).toMutableMap()
-        context.deleteFile(File(fs[id]).name)
+        File(context.filesDir.absolutePath.plus("/$id")).deleteRecursively()
         fs.remove(id)
         Preferences.setFileSystem(context, fs)
     }
