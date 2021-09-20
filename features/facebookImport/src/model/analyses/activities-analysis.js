@@ -6,7 +6,7 @@ import ActivitiesMiniStory from "../../components/activitiesMiniStory/activities
 
 export default class ActivitiesAnalysis extends RootAnalysis {
     get title() {
-        return i18n.t("activitiesMinistory:title");
+        return i18n.t("activitiesMiniStory:title");
     }
 
     async analyze({ facebookAccount }) {
@@ -71,7 +71,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        return i18n.t("activitiesMinistory:summary", {
+        return i18n.t("activitiesMiniStory:summary", {
             number_activities: this._totalEvents.total,
         });
     }

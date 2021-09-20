@@ -66,11 +66,11 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
     const tabs = [
         {
             id: "total",
-            translation: i18n.t("activitiesMinistory:tab.total"),
+            translation: i18n.t("activitiesMiniStory:tab.total"),
         },
         {
             id: "yearly",
-            translation: i18n.t("activitiesMinistory:tab.year"),
+            translation: i18n.t("activitiesMiniStory:tab.year"),
         },
     ];
 
@@ -79,7 +79,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
         total: {
             barData: yearlyTotals,
             barWidth: "10px",
-            barChartLegendText: i18n.t("activitiesMinistory:tab.events.total", {
+            barChartLegendText: i18n.t("activitiesMiniStory:tab.events.total", {
                 number_events: totalEvents.total,
             }),
         },
@@ -87,7 +87,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
             barData: monthlyTotals,
             barWidth: "18px",
             barChartLegendText: i18n.t(
-                "activitiesMinistory:tab.events.yearly",
+                "activitiesMiniStory:tab.events.yearly",
                 {
                     number_events: totalEvents.values[selectedYear]?.total || 0,
                 }
@@ -111,7 +111,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
     })();
 
     const numberOfEventsString = i18n.t(
-        `activitiesMinistory:number.events${
+        `activitiesMiniStory:number.events${
             orderOfMagnitude > 1 ? ".thousands" : ""
         }`
     );
