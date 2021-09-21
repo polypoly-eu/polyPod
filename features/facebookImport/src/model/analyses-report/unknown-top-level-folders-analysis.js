@@ -7,12 +7,12 @@ import {
     removeEntryPrefix,
 } from "../../importer/importer-util.js";
 
-async function extractTopLevelFolderNamesFromZip(id, zipFile) {
+async function extractTopLevelFolderNamesFromZip(zipFile) {
     const relevantEntries = await relevantZipEntries(zipFile);
     const topLevelFolderNames = new Set();
 
     relevantEntries.forEach((filename) => {
-        const noIdFileName = removeEntryPrefix(id, filename);
+        const noIdFileName = removeEntryPrefix(filename);
         const folderNameMatch = noIdFileName.match(/^([^/]+)\/.*$/);
         if (
             folderNameMatch &&
@@ -34,9 +34,8 @@ export default class UknownTopLevelFoldersAnalysis extends ReportAnalysis {
         return this._uknownFolderNames;
     }
 
-    async analyze({ id, zipFile }) {
+    async analyze({ zipFile }) {
         const topLevelFolderNames = await extractTopLevelFolderNamesFromZip(
-            id,
             zipFile
         );
 

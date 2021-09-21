@@ -86,8 +86,21 @@ async function jsonDataEntities(zipFile) {
     return relevantJsonEntries;
 }
 
-function removeEntryPrefix(id, entryName) {
-    return entryName.replace(`${id}/`, "");
+function removeEntryPrefix(entryName) {
+    if (
+        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/$/.test(
+            entryName
+        )
+    ) {
+        return "";
+    }
+    const entryNameMatch = entryName.match(
+        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/(.*)$/
+    );
+    if (entryNameMatch && entryNameMatch.length === 2 && entryNameMatch[1]) {
+        return entryNameMatch[1];
+    }
+    return entryName;
 }
 
 export {

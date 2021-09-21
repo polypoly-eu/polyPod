@@ -33,14 +33,14 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
         );
     }
 
-    async analyze({ id, zipFile }) {
+    async analyze({ zipFile }) {
         this._missingKnownFileNames = [];
         this.active = true;
         if (!zipFile) return;
 
         const relevantEntries = await jsonDataEntities(zipFile);
         const anonymizedPaths = relevantEntries.map((each) =>
-            anonymizeJsonEntityPath(removeEntryPrefix(id, each))
+            anonymizeJsonEntityPath(removeEntryPrefix(each))
         );
         const knownJsonFiles = this._knownJsonFiles();
         this._missingKnownFileNames = knownJsonFiles.filter(
