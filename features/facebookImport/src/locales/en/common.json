@@ -1,5 +1,6 @@
 {
     "title": "Importer",
     "source.your.facebook.data": "Source: Your facebook data",
-    "months.abbreviation": "Jan Feb Mar Apr Mai Jun Jul Aug Sep Oct Nov Dec"
+    "months.abbreviation": "Jan Feb Mar Apr Mai Jun Jul Aug Sep Oct Nov Dec",
+    "loading.closing": "Thank you for your patience!"
 }
