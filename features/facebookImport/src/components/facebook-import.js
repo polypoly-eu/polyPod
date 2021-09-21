@@ -42,7 +42,7 @@ class FacebookImport extends LitElement {
         return html`<p>Loading ...</p>`;
     }
 
-    _handleAddFile(event) {
+    _handleAddFile() {
         this._storage.addFile();
     }
 
