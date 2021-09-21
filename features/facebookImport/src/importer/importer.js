@@ -39,32 +39,48 @@ const dataImporters = [
     LanguageAndLocaleImporter,
 ];
 
+export async function runImporter(
+    importerClass,
+    enrichedData,
+    facebookAccount,
+    pod
+) {
+    const importer = new importerClass();
+    return importer
+        .import(enrichedData, facebookAccount, pod)
+        .then(
+            (status) =>
+                status || {
+                    status: IMPORT_SUCCESS,
+                    importerClass,
+                }
+        )
+        .catch((error) => {
+            return createErrorResult(importerClass, error);
+        });
+}
+
 export async function importData(file) {
     const zipFile = new ZipFile(file, window.pod);
-    const facebookAccount = new FacebookAccount(window.pod);
+    const facebookAccount = new FacebookAccount();
     const enrichedData = { ...file, zipFile };
-
+    debugger;
     const importingResultsPerImporter = await Promise.all(
         dataImporters.map(async (importerClass) => {
-            const importer = new importerClass();
-            const importResult = await importer
-                .import(enrichedData, facebookAccount, window.pod)
-                .then(
-                    (status) =>
-                        status || {
-                            status: IMPORT_SUCCESS,
-                            importerClass,
-                        }
-                )
-                .catch((error) => {
-                    return createErrorResult(importerClass, error);
-                });
-            return Array.isArray(importResult) ? importResult : [importResult];
+            return runImporter(
+                importerClass,
+                enrichedData,
+                facebookAccount,
+                window.pod
+            );
         })
     );
 
     const importingResults = importingResultsPerImporter.reduce(
-        (result, each) => result.concat(each),
+        (results, importResult) =>
+            results.concat(
+                Array.isArray(importResult) ? importResult : [importResult]
+            ),
         []
     );
     facebookAccount.importingResults = importingResults;

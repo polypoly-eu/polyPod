@@ -22,10 +22,6 @@ class FacebookAccount {
         this._accountSessionActivities = [];
     }
 
-    get pod() {
-        return this._pod;
-    }
-
     get importedFileNames() {
         return this._importedFileNames;
     }
