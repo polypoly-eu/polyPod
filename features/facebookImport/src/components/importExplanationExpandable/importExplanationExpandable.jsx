@@ -58,8 +58,8 @@ const ImportExplanationExpandable = ({
                 <img src="./images/document.svg" alt="document" />
                 <p>{i18n.t("import:request.4")}</p>
                 <img
-                    src="./images/import-settings.png"
-                    className="import-settings"
+                    src="./images/json.svg"
+                    className="translucent-sides"
                     alt="select-json"
                 />
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
