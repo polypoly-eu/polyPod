@@ -42,7 +42,7 @@ const ReportView = () => {
                 </RouteButton>
                 <button className="send-later" onClick={handleBack}>
                     {i18n.t("report:explanation.sendLater")}
-                </RouteButton>
+                </button>
                 <button className="send" onClick={handleSendReport}>
                     {i18n.t("report:explanation.send")}
                 </button>
