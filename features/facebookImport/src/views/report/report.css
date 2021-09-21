@@ -65,6 +65,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid var(--color-red-300) !important;
+    background: transparent;
     color: var(--color-red-300) !important;
 }
 
