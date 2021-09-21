@@ -39,6 +39,10 @@ import ActivitiesAnalysis from "./analyses/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/advertising-value-analysis.js";
 
 const subAnalyses = [
+    ActivitiesAnalysis,
+    MessagesAnalysis,
+    OffFacebookEventsAnalysis,
+
     ExportTitleAnalysis,
     ExportSizeAnalysis,
     DataBubblesAnalysis,
@@ -48,10 +52,8 @@ const subAnalyses = [
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
-    OffFacebookEventsAnalysis,
     OffFacebookEventsTypesChartAnalysis,
     OffFacebookEventsTypesAnalysis,
-    MessagesAnalysis,
     MessagesDetailsAnalysis,
     EmailAddressesAnalysis,
     MessageThreadsAnalysis,
@@ -62,7 +64,6 @@ const subAnalyses = [
     PagesOverviewAnalysis,
     SesssionActivityLocationsAnalysis,
     ImportedJsonFilesAnalysis,
-    ActivitiesAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
@@ -70,7 +71,6 @@ const subAnalyses = [
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
-    ActivitiesAnalysis,
     AdvertisingValueAnalysis,
     UnknownJSONFilesAnalysis,
     JSONFileNamesAnalysis,
@@ -88,11 +88,32 @@ const subAnalyses = [
         DataChartsAnalysis,
         DataGroupsAnalysis,
         JsonFilesBubblesAnalysis,
+        ConnectedAdvertisersAnalysis,
+        InteractedWithAdvertisersAnalysis,
+        AdInterestsAnalysis,
+        OffFacebookEventsTypesChartAnalysis,
+        OffFacebookEventsTypesAnalysis,
+        MessagesDetailsAnalysis,
+        EmailAddressesAnalysis,
+        MessageThreadsAnalysis,
+        MessagesActivityAnalysis,
+        SearchesAnalysis,
+        FriendsAnalysis,
+        ReceivedFriendRequestsAnalysis,
+        PagesOverviewAnalysis,
+        SesssionActivityLocationsAnalysis,
+        ImportedJsonFilesAnalysis,
 
+        ReportMetadataAnalysis,
+        DataImportingStatusAnalysis,
+        UknownTopLevelFoldersAnalysis,
+        MissingCommonJSONFilesAnalysis,
+        MissingKnownJSONFilesAnalysis,
+        OffFacebookEventTypesAnalysis,
+        UnknownJSONFilesAnalysis,
+        JSONFileNamesAnalysis,
         NoDataFoldersAnalysis,
         UnknownMessageTypesAnalysis,
-        JSONFileNamesAnalysis,
-        UnknownJSONFilesAnalysis,
     ].includes(analysis);
 });
 
