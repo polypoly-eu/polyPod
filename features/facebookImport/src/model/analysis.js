@@ -104,12 +104,6 @@ const subAnalyses = [
         SesssionActivityLocationsAnalysis,
         ImportedJsonFilesAnalysis,
 
-        ReportMetadataAnalysis,
-        DataImportingStatusAnalysis,
-        UknownTopLevelFoldersAnalysis,
-        MissingCommonJSONFilesAnalysis,
-        MissingKnownJSONFilesAnalysis,
-        OffFacebookEventTypesAnalysis,
         UnknownJSONFilesAnalysis,
         JSONFileNamesAnalysis,
         NoDataFoldersAnalysis,
