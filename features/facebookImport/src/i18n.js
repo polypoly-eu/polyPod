@@ -9,6 +9,7 @@ import messagesMiniStoryEn from "./locales/en/miniStories/messages.json";
 import offFacebookEventsMiniStoryEn from "./locales/en/miniStories/offFacebookEvents.json";
 import advertisingValueMiniStoryEn from "./locales/en/miniStories/advertisingValue.json";
 import reportEn from "./locales/en/report.json";
+import errorPopupEn from "./locales/en/errorPopup.json";
 
 import commonDe from "./locales/de/common.json";
 import importDe from "./locales/de/import.json";
@@ -19,6 +20,7 @@ import messagesMiniStoryDe from "./locales/de/miniStories/messages.json";
 import offFacebookEventsMiniStoryDe from "./locales/de/miniStories/offFacebookEvents.json";
 import advertisingValueMiniStoryDe from "./locales/de/miniStories/advertisingValue.json";
 import reportDe from "./locales/de/report.json";
+import errorPopupDe from "./locales/de/errorPopup.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -31,6 +33,7 @@ export default new I18n(determineLanguage(), {
         offFacebookEventsMiniStory: offFacebookEventsMiniStoryEn,
         advertisingValueMiniStory: advertisingValueMiniStoryEn,
         report: reportEn,
+        errorPopup: errorPopupEn,
     },
     de: {
         common: commonDe,
@@ -42,5 +45,6 @@ export default new I18n(determineLanguage(), {
         offFacebookEventsMiniStory: offFacebookEventsMiniStoryDe,
         advertisingValueMiniStory: advertisingValueMiniStoryDe,
         report: reportDe,
+        errorPopup: errorPopupDe,
     },
 });
