@@ -36,6 +36,7 @@ import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-
 import UknownTopLevelFoldersAnalysis from "./analyses-report/unknown-top-level-folders-analysis.js";
 import InactiveCardsSummary from "./analyses-report/inactive-cards-summary.js";
 import ActivitiesAnalysis from "./analyses/activities-analysis.js";
+import AdvertisingValueAnalysis from "./analyses/advertising-value-analysis.js";
 
 const subAnalyses = [
     ExportTitleAnalysis,
@@ -69,6 +70,8 @@ const subAnalyses = [
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
+    ActivitiesAnalysis,
+    AdvertisingValueAnalysis,
     UnknownJSONFilesAnalysis,
     JSONFileNamesAnalysis,
     NoDataFoldersAnalysis,
