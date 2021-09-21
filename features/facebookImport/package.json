@@ -7,7 +7,7 @@
     "watch": "rollup --watch -c",
     "serve": "rollup --watch --configServe -c",
     "serve-polypedia-stub": "node scripts/serve-polypedia-stub.js",
-    "test": "jest --passWithNoTests"
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.15.0",
