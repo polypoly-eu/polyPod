@@ -1,4 +1,4 @@
-.report-view {
+.report-view, .report-details {
     color: var(--color-gray-50);
     line-height: var(--line-height);
     letter-spacing: -0.01em;
@@ -11,11 +11,12 @@
     overflow: hidden scroll;
 }
 
-.report-view .report-view-title {
+.report-view .report-view-title, .report-details h1 {
     text-align: center;
     font-weight: 500;
     margin: 8px 0 20px 0;
     font-size: 24px;
+    line-height: 120%;
 }
 
 .report-view .button-area::before {
@@ -39,43 +40,38 @@
     right: 0;
     left: 0;
 }
-.report-view  .pop-up {
+
+.report-view .view-details,
+.report-view .send-later,
+.report-view .send {
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+.report-view .view-details {
+    color: var(--color-red-300);
+    text-decoration: underline;
+}
+
+.report-view .send-later, .report-view .send {
     width: 100%;
+    height: 51px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.report-view .send-later {
     display: flex;
-    justify-content: space-between;
-    background-color: #fff5f540;
-    padding: 4px 0;
-}
-
-.report-view  .pop-up .pop-up-message {
-    margin-left: 4px;
-    width: 90%;
-}
-
-.report-view .pop-up .close-icon {
-    background: var(--background-light);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    line-height: 18px;
-    text-align: center;
-    color: var(--text-dark);
-    margin-right: 4px;
-}
-
-.report-view .pop-up .unsuccessfully {
-      color: var(--color-red-300);
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-red-300) !important;
+    background: transparent;
+    color: var(--color-red-300) !important;
 }
 
 .report-view .send {
-    width: 100%;
-    height: 51px;
     background-color: var(--color-red-300);
     color: var(--text-dark);
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    font-size: 16px;
-    margin-top: 12px;
 }
 
 .report-view .report-card:first-child {
@@ -124,4 +120,10 @@
 .report-view .report-card .list li {
     text-align: justify;
     text-justify: distribute-all-lines;
+}
+
+.disabled > button,
+.disabled > div {
+    opacity: 0.5;
+    pointer-events: none;
 }

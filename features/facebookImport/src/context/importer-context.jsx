@@ -28,6 +28,22 @@ const fakeStorage = {
     removeFile: async () => {},
 };
 
+class FileImportError extends Error {
+    constructor(cause) {
+        super("Failed to import file");
+        this.name = "FileImportError";
+        this.cause = cause;
+    }
+}
+
+class RefreshFilesError extends Error {
+    constructor(cause) {
+        super("Failed to refresh files");
+        this.name = "RefreshFilesError";
+        this.cause = cause;
+    }
+}
+
 function updatePodNavigation(pod, history, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
@@ -74,10 +90,12 @@ async function writeImportStatus(pod, status) {
 export const ImporterProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [storage, setStorage] = useState(fakeStorage);
-    const [files, setFiles] = useState([]);
+    const [files, setFiles] = useState(null);
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
     const [activeDetails, setActiveDetails] = useState(null);
+    const [globalError, setGlobalError] = useState(null);
+    const [reportResult, setReportResult] = useState(null);
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
@@ -103,7 +121,12 @@ export const ImporterProvider = ({ children }) => {
 
     const handleImportFile = async () => {
         const { polyNav } = pod;
-        await polyNav.importFile();
+        setFiles(null); // To show the loading overlay
+        try {
+            await polyNav.importFile();
+        } catch (error) {
+            setGlobalError(new FileImportError(error));
+        }
         refreshFiles();
     };
 
@@ -130,13 +153,17 @@ export const ImporterProvider = ({ children }) => {
     }
 
     function refreshFiles() {
-        storage.refreshFiles().then(async () => {
-            const resolvedFiles = [];
-            for (const file of storage.files) {
-                resolvedFiles.push(await file);
-            }
-            setFiles(resolvedFiles);
-        });
+        setFiles(null);
+        storage
+            .refreshFiles()
+            .then(async () => {
+                const resolvedFiles = [];
+                for (const file of storage.files) {
+                    resolvedFiles.push(await file);
+                }
+                setFiles(resolvedFiles);
+            })
+            .catch((error) => setGlobalError(new RefreshFilesError(error)));
     }
 
     function updateImportStatus(newStatus) {
@@ -170,7 +197,7 @@ export const ImporterProvider = ({ children }) => {
     //when files changed run the importer first and create an account model first.
     //after there is an account the analyses are triggered.
     useEffect(() => {
-        if (files[0])
+        if (files?.[0])
             importData(files[0]).then((newFacebookAccount) =>
                 setFacebookAccount(newFacebookAccount)
             );
@@ -208,6 +235,11 @@ export const ImporterProvider = ({ children }) => {
                 refreshFiles,
                 activeDetails,
                 setActiveDetails,
+                globalError,
+                setGlobalError,
+                facebookAccount,
+                reportResult,
+                setReportResult,
             }}
         >
             {children}

@@ -24,13 +24,14 @@
     padding: 4px 12px;
     margin: 0 auto;
     width: 100%;
+    max-width: var(--max-width);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: var(--text-light);
-    border-radius: 4px;
     font-weight: 600;
+    color: var(--text-dark);
+    border-radius: 4px;
     box-sizing: border-box;
 }
 
@@ -52,6 +53,34 @@
 
 .card-separator {
     border-bottom: solid 1px var(--color-gray-400);
+}
+
+.explore-view  .pop-up {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff5f540;
+    padding: 4px 0;
+}
+
+.explore-view  .pop-up .pop-up-message {
+    margin-left: 4px;
+    width: 90%;
+}
+
+.explore-view .pop-up .close-icon {
+    background: var(--background-light);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    line-height: 18px;
+    text-align: center;
+    color: var(--text-dark);
+    margin-right: 4px;
+}
+
+.explore-view .pop-up .unsuccessfully {
+      color: var(--color-red-300);
 }
 
 .analysis-card {
@@ -96,19 +125,7 @@
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title {
-    display:flex;
-}
-
-.unrecognized-analysis-card .unrecognized-analysis-title .alert-fake-icon {
-    width: 20px;
-    height: 20px;
-    background-color: var(--color-red-300);
-    font-weight: 600;
-    text-align: center;
-    border-radius: 50%;
-    font-size: 16px;
-    color: var(--color-red-50);
-    margin-right: 8px;
+    display: flex;
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title h1 {
