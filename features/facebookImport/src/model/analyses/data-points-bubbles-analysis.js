@@ -1,11 +1,11 @@
 import React from "react";
-import DataOverviewMiniStory from "../../components/dataOverviewMiniStory/dataOverviewMiniStory.jsx";
+import DataStructureMiniStory from "../../components/dataStructureMiniStory/dataStructureMiniStory.jsx";
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../i18n.js";
 
 export default class DataBubblesAnalysis extends RootAnalysis {
     get title() {
-        return i18n.t("dataOverviewMiniStory:title");
+        return i18n.t("dataStructureMiniStory:title");
     }
 
     _computeScaleFactor(bubblesData) {
@@ -37,12 +37,12 @@ export default class DataBubblesAnalysis extends RootAnalysis {
         return (
             <>
                 <p>
-                    {i18n.t("dataOverviewMiniStory:summary", {
+                    {i18n.t("dataStructureMiniStory:summary", {
                         number_folders: this._bubblesData.length,
                         number_files: filesNumber,
                     })}
                 </p>
-                <DataOverviewMiniStory data={this._bubblesData} />
+                <DataStructureMiniStory data={this._bubblesData} />
             </>
         );
     }

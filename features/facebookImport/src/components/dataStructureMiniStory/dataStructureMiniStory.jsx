@@ -3,9 +3,9 @@ import DataBubblesAll from "../dataViz/dataBubblesAll.jsx";
 
 import i18n from "../../i18n.js";
 
-import "./dataOverviewMiniStory.css";
+import "./dataStructureMiniStory.css";
 
-const DataOverviewMiniStory = ({ data }) => {
+const DataStructureMiniStory = ({ data }) => {
     data.sort(function (a, b) {
         return b.count - a.count;
     });
@@ -40,7 +40,7 @@ const DataOverviewMiniStory = ({ data }) => {
         <>
             <div>
                 <p>
-                    {i18n.t("dataOverviewMiniStory:folder.info", {
+                    {i18n.t("dataStructureMiniStory:folder.info", {
                         clicked_folder: clickedButton,
                         number_files: fileNumber,
                     })}
@@ -53,14 +53,14 @@ const DataOverviewMiniStory = ({ data }) => {
                     textColor={dataBubblesDarkColor}
                 />
             </div>
-            <div className="data-overview">
+            <div className="data-structure">
                 {data.map((bubble, index) => {
                     return (
                         <button
                             className={
                                 bubble.title === clickedButton
-                                    ? "data-overview-button selected-data"
-                                    : "data-overview-button"
+                                    ? "data-structure-button selected-data"
+                                    : "data-structure-button"
                             }
                             onClick={(ev) => onClickButton(ev, bubble.title)}
                             key={index}
@@ -77,4 +77,4 @@ const DataOverviewMiniStory = ({ data }) => {
     );
 };
 
-export default DataOverviewMiniStory;
+export default DataStructureMiniStory;
