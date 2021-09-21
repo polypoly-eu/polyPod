@@ -3,7 +3,7 @@ import DataStructureMiniStory from "../../components/dataStructureMiniStory/data
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../i18n.js";
 
-export default class DataBubblesAnalysis extends RootAnalysis {
+export default class DataStructureBubblesAnalysis extends RootAnalysis {
     get title() {
         return i18n.t("dataStructureMiniStory:title");
     }
@@ -32,14 +32,14 @@ export default class DataBubblesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        let filesNumber = 0;
-        this._bubblesData.forEach((a) => (filesNumber += a.count));
+        let totalFiles = 0;
+        this._bubblesData.forEach((a) => (totalFiles += a.count));
         return (
             <>
                 <p>
                     {i18n.t("dataStructureMiniStory:summary", {
-                        number_folders: this._bubblesData.length,
-                        number_files: filesNumber,
+                        amount_of_folders: this._bubblesData.length,
+                        amount_of_files: totalFiles,
                     })}
                 </p>
                 <DataStructureMiniStory data={this._bubblesData} />

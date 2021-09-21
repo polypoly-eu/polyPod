@@ -1,7 +1,7 @@
 import { ZipFile } from "../model/storage.js";
 import { createErrorStatus, createSuccessStatus } from "./analysis-status.js";
 
-import DataBubblesAnalysis from "./analyses/data-points-bubbles-analysis.js";
+import DataStructureBubblesAnalysis from "./analyses/data-structure-bubbles-analysis.js";
 import DataGroupsAnalysis from "./analyses/data-groups-analysis.js";
 import ConnectedAdvertisersAnalysis from "./analyses/connected-advertisers-analysis.js";
 import InteractedWithAdvertisersAnalysis from "./analyses/interacted-advertisers-analysis.js";
@@ -39,7 +39,7 @@ import InactiveCardsSummary from "./analyses-report/inactive-cards-summary.js";
 const subAnalyses = [
     ExportTitleAnalysis,
     ExportSizeAnalysis,
-    DataBubblesAnalysis,
+    DataStructureBubblesAnalysis,
     DataChartsAnalysis,
     DataGroupsAnalysis,
     JsonFilesBubblesAnalysis,

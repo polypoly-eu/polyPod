@@ -10,30 +10,30 @@ const DataStructureMiniStory = ({ data }) => {
         return b.count - a.count;
     });
 
-    const dataBubblesWidth = 400;
-    const dataBubblesHeight = 400;
+    const bubbleVizWidth = 400;
+    const bubbleVizHeight = 400;
     const dataBubblesDarkColor = "#0f1938";
     const dataBubblesLightColor = "#f7fafc";
-    const [clickedButton, setClickedButton] = useState(data[0].title);
+    const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
-    const onClickButton = (ev, newClickedButton) => {
+    const handleSelectedFolder = (ev, newSelectedFolder) => {
         ev.preventDefault();
-        setClickedButton(newClickedButton);
+        setSelectedFolder(newSelectedFolder);
     };
 
     const bubbleColor = (bubbles) => {
-        if (bubbles.data.title === clickedButton) {
+        if (bubbles.data.title === selectedFolder) {
             return dataBubblesLightColor;
         } else {
             return dataBubblesDarkColor;
         }
     };
 
-    let fileNumber = data[0].count;
+    let amountOfFiles = data[0].count;
     data.map((bubble) => {
-        bubble.title === clickedButton
-            ? (fileNumber = bubble.count)
-            : fileNumber;
+        bubble.title === selectedFolder
+            ? (amountOfFiles = bubble.count)
+            : amountOfFiles;
     });
 
     return (
@@ -41,14 +41,14 @@ const DataStructureMiniStory = ({ data }) => {
             <div>
                 <p>
                     {i18n.t("dataStructureMiniStory:folder.info", {
-                        clicked_folder: clickedButton,
-                        number_files: fileNumber,
+                        selected_folder: selectedFolder,
+                        amount_of_files: amountOfFiles,
                     })}
                 </p>
                 <DataBubblesAll
                     data={data}
-                    width={dataBubblesWidth}
-                    height={dataBubblesHeight}
+                    width={bubbleVizWidth}
+                    height={bubbleVizHeight}
                     bubbleColor={bubbleColor}
                     textColor={dataBubblesDarkColor}
                 />
@@ -58,11 +58,13 @@ const DataStructureMiniStory = ({ data }) => {
                     return (
                         <button
                             className={
-                                bubble.title === clickedButton
+                                bubble.title === selectedFolder
                                     ? "data-structure-button selected-data"
                                     : "data-structure-button"
                             }
-                            onClick={(ev) => onClickButton(ev, bubble.title)}
+                            onClick={(ev) =>
+                                handleSelectedFolder(ev, bubble.title)
+                            }
                             key={index}
                         >
                             {bubble.title}
