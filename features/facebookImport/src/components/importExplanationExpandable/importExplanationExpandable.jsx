@@ -165,7 +165,6 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                 />
                 <p>{i18n.t("import:explore.1")}</p>
-                <p>{i18n.t("import:explore.2")}</p>
                 {file ? (
                     <RouteButton
                         className="btn-highlighted"
