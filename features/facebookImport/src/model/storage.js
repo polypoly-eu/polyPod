@@ -26,7 +26,7 @@ export default class Storage {
 
     async addFile() {
         return new Promise((resolve) => {
-            // File is already added by readFile, just refresh
+            // File is already added by refreshFiles, just refresh
             this.refreshFiles().then(() => {
                 this.changeListener();
                 resolve();
