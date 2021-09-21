@@ -69,10 +69,10 @@ open class PolyNav(
             if (inputStream == null) {
                 throw Error("File copy error")
             }
-            val newId = fsPrefix + UUID.randomUUID().toString()
+            val newId = UUID.randomUUID().toString()
             ZipTools.unzipAndEncrypt(inputStream, context, newId)
             val fs = Preferences.getFileSystem(context).toMutableMap()
-            fs[newId] = fileName
+            fs[fsPrefix + newId] = fileName
             Preferences.setFileSystem(context, fs)
         }
         return importedUrl

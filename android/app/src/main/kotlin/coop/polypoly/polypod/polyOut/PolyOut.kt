@@ -17,8 +17,8 @@ open class PolyOut(
         }
         val fs = Preferences.getFileSystem(context)
 
-        val filePath = context.filesDir.absolutePath + "/" + path.replace(
-            "://", ":/"
+        val filePath = context.filesDir.absolutePath + "/" + path.removePrefix(
+            fsPrefix
         )
         val encryptedFile = ZipTools.getEncryptedFile(context, filePath)
         encryptedFile.openFileInput().use {
@@ -38,7 +38,8 @@ open class PolyOut(
         if (path == "") {
             return result
         }
-        val file = File(context.filesDir.absolutePath.plus("/$path"))
+        val filePath = path.removePrefix(fsPrefix)
+        val file = File(context.filesDir.absolutePath.plus("/$filePath"))
         result["name"] = file.name
         result["time"] = file.lastModified().toString()
         result["size"] = file.length().toString()
@@ -52,13 +53,12 @@ open class PolyOut(
             return fs.keys.toTypedArray()
         }
         val retList = mutableListOf<String>()
+        val filePath = path.removePrefix(fsPrefix)
         File(
-            context.filesDir.absolutePath.plus("/$path")
+            context.filesDir.absolutePath.plus("/$filePath")
         ).walkTopDown().forEach {
             retList.add(
-                it.relativeTo(context.filesDir).path.replace(
-                    ":/", "://"
-                )
+                it.relativeTo(context.filesDir).path
             )
         }
         return retList.toTypedArray()
