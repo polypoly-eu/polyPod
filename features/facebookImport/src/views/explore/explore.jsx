@@ -1,8 +1,22 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
+import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
+import i18n from "../../i18n.js";
+
 import "./explore.css";
+
+const PopUpMessage = ({ children, handleClosePopUp }) => {
+    return (
+        <div className="pop-up">
+            <div className="pop-up-message">{children}</div>
+            <div className="close-icon" onClick={handleClosePopUp}>
+                x
+            </div>
+        </div>
+    );
+};
 
 const AnalysisCard = ({
     analysis,
@@ -10,65 +24,91 @@ const AnalysisCard = ({
     exploreScrollingProgress,
 }) => {
     return (
-        <div className="analysis-card">
-            <h1>{analysis.title}</h1>
-            <div>{analysis.renderSummary()}</div>
-            {analysis.renderDetails ? (
-                <RouteButton
-                    route="/explore/details"
-                    className="details-button"
-                    onClick={() => setActiveDetails(analysis)}
-                    stateChange={{ exploreScrollingProgress }}
-                >
-                    View details
-                </RouteButton>
-            ) : null}
-        </div>
+        <>
+            <div className="analysis-card">
+                <h1>{analysis.title}</h1>
+                <div className="summary-text">{analysis.renderSummary()}</div>
+                {analysis.renderDetails ? (
+                    <RouteButton
+                        route="/explore/details"
+                        className="details-button"
+                        onClick={() => setActiveDetails(analysis)}
+                        stateChange={{ exploreScrollingProgress }}
+                    >
+                        {i18n.t("explore:details.button")}
+                    </RouteButton>
+                ) : null}
+            </div>
+            <div className="card-separator"></div>
+        </>
+        // <div className="analysis-card">
+        //     <h1>{analysis.title}</h1>
+        //     <div>{analysis.renderSummary()}</div>
+        //     {analysis.renderDetails ? (
+        //         <RouteButton
+        //             route="/explore/details"
+        //             className="details-button"
+        //             onClick={() => setActiveDetails(analysis)}
+        //             stateChange={{ exploreScrollingProgress }}
+        //         >
+        //             {i18n.t("explore:details.button")}
+        //         </RouteButton>
+        //     ) : null}
+        // </div>
     );
 };
 
-const UnrecognizedCard = ({ unrecognizedData }) => {
+const UnrecognizedCard = () => {
     return (
         <div className="analysis-card unrecognized-analysis-card">
             <div className="unrecognized-analysis-title">
-                <div className="alert-fake-icon">!</div>
-                <h1>Unrecognised and Missing Data</h1>
+                <h1>{i18n.t("explore:unrecognizedCard.headline")}</h1>
             </div>
-            <p>{unrecognizedData.report}</p>
+            <p>{i18n.t("explore:unrecognizedCard.text")}</p>
             <RouteButton route="/report" className="report-button">
-                View and send report
+                {i18n.t("explore:unrecognizedCard.button")}
             </RouteButton>
         </div>
     );
 };
 
 const ExploreView = () => {
-    const { navigationState, fileAnalysis, setActiveDetails } =
-        useContext(ImporterContext);
+    const {
+        navigationState,
+        fileAnalysis,
+        setActiveDetails,
+        reportResult,
+        setReportResult,
+    } = useContext(ImporterContext);
 
     const [scrollingProgress, setScrollingProgress] = useState(
         navigationState.exploreScrollingProgress
     );
     const exploreRef = useRef();
 
+    const handleCloseReportResult = () => {
+        setReportResult(null);
+    };
+
+    const renderReportResult = () =>
+        reportResult !== null && (
+            <PopUpMessage handleClosePopUp={handleCloseReportResult}>
+                {reportResult ? (
+                    i18n.t("explore:report.success")
+                ) : (
+                    <span className="unsuccessfully">
+                        {i18n.t("explore:report.error")}
+                    </span>
+                )}
+            </PopUpMessage>
+        );
+
     const renderFileAnalyses = () => {
-        if (!fileAnalysis) {
-            return (
-                <div>
-                    <p>Analyzing your data ...</p>
-                    <p>
-                        If this takes more than a few seconds - or for large
-                        data sets maybe minutes - please report this as an issue
-                        - there was likely an error.
-                    </p>
-                </div>
-            );
-        }
+        if (!fileAnalysis)
+            return <Loading message={i18n.t("explore:loading")} />;
         return (
             <div>
-                <UnrecognizedCard
-                    unrecognizedData={fileAnalysis.unrecognizedData}
-                />
+                <UnrecognizedCard />
                 {fileAnalysis.analyses.map((analysis, index) => (
                     <AnalysisCard
                         analysis={analysis}
@@ -95,7 +135,7 @@ const ExploreView = () => {
             className="explore-view"
             onScroll={saveScrollingProgress}
         >
-            <h1 className="explore-view-title">Explore your data</h1>
+            {renderReportResult()}
             {renderFileAnalyses()}
         </div>
     );

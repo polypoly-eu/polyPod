@@ -1,11 +1,10 @@
 {
-    "fb.product": "Produkt von Facebook Inc.",
-    "internet": "Internet & Multimedia",
     "import.data": "Daten importieren",
     "imported.data": "Importierte Daten",
-    "imported.files": "Importierte Dateien",
-    "imported.time": "Importiert am:",
+    "imported.files": "Importierte Dateien:",
+    "imported.time": "Importiert:",
     "size": "Größe",
     "explore": "Erkunden",
-    "new.import": "Neuer Import"
+    "new.import": "Neuer Import",
+    "loading.data": "Deine Daten werden geladen"
 }

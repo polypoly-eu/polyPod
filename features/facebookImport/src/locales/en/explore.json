@@ -1,4 +1,11 @@
 {
     "messages.title": "Messages Summary",
-    "messages.summary": "In your export there are {{messages}} messages in {{threads}} threads by {{people}} people."
+    "messages.summary": "In your export there are {{messages}} messages in {{threads}} threads by {{people}} people.",
+    "report.success": "Report sent successfully",
+    "report.error": "Error while sending report",
+    "loading": "Your data is being analyzed",
+    "unrecognizedCard.headline": "We need your help!",
+    "unrecognizedCard.text": "The structure of your data contains something we are curious about. Please send us an - obviously anonymous - report, so we can make more sense of Facebook's data schema.",
+    "unrecognizedCard.button": "Learn more",
+    "details.button": "View details"
 }
