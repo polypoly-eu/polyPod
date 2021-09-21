@@ -48,6 +48,11 @@ const ImportExplanationExpandable = ({
     const bodyContent = {
         request: (
             <>
+                <img
+                    src="./images/request-illustration.svg"
+                    alt="request-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:request.1")}</p>
                 <InfoBox textContent={i18n.t("import:request.info.1")} />
                 <div className="separator"></div>
@@ -58,8 +63,8 @@ const ImportExplanationExpandable = ({
                 <img src="./images/document.svg" alt="document" />
                 <p>{i18n.t("import:request.4")}</p>
                 <img
-                    src="./images/json.svg"
-                    className="translucent-sides"
+                    src="./images/import-settings.png"
+                    className="full-screen"
                     alt="select-json"
                 />
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
@@ -73,6 +78,11 @@ const ImportExplanationExpandable = ({
         ),
         download: (
             <>
+                <img
+                    src="./images/download-illustration.svg"
+                    alt="download-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:download.1")}</p>
                 <InfoBox textContent={i18n.t("import:download.info")} />
                 <div className="separator"></div>
@@ -94,6 +104,11 @@ const ImportExplanationExpandable = ({
         ),
         import: (
             <>
+                <img
+                    src="./images/import-illustration.svg"
+                    alt="import-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:import")}</p>
                 <div className="separator"></div>
                 <div className="x-divider">
@@ -144,8 +159,12 @@ const ImportExplanationExpandable = ({
         ),
         explore: (
             <>
+                <img
+                    src="./images/explore-illustration.svg"
+                    alt="explore-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:explore.1")}</p>
-                <p>{i18n.t("import:explore.2")}</p>
                 {file ? (
                     <RouteButton
                         className="btn-highlighted"
@@ -181,7 +200,11 @@ const ImportExplanationExpandable = ({
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
                     <div
-                        onClick={() => onUpdateImportStatus(section)}
+                        onClick={
+                            section === "explore"
+                                ? () => {}
+                                : () => onUpdateImportStatus(section)
+                        }
                         className="head"
                         id={importIds[section]}
                     >

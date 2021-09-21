@@ -4,10 +4,10 @@
     --color-contrast-white: #f7fafc;
 
     --background-dark: var(--color-dark);
-    --background-light: var(--color-contrast-white);
+    --background-light: var(--color-white);
 
     --text-white: var(--color-white);
-    --text-light: var(--color-contrast-white);
+    --text-light: var(--color-white);
     --text-dark: var(--color-indigo-950);
 
     --color-indigo-50: #f0f1fe;
