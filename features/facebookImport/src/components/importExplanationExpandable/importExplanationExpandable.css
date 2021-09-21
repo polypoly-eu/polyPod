@@ -126,23 +126,9 @@
     margin-bottom: 26px;
 }
 
-.import-view .explanation-expandable .translucent-sides {
-    mask-image: linear-gradient(
-        to top,
-        transparent,
-        transparent,
-        rgba(0, 0, 0, 1),
-        transparent,
-        transparent
-    );
-    -webkit-mask-image: linear-gradient(
-        to top,
-        transparent,
-        transparent,
-        rgba(0, 0, 0, 1),
-        transparent,
-        transparent
-    );
+.import-view .explanation-expandable .import-settings {
+    width: 100%;
+    max-width: var(--max-width);
 }
 
 .import-view .explanation-expandable .body * {
