@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
+import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import i18n from "../../i18n.js";
@@ -23,6 +24,9 @@ const Overview = () => {
             <div className="separator"></div>
         </div>
     );
+
+    if (files === null)
+        return <Loading message={i18n.t("overview:loading.data")} />;
 
     return (
         <div className="overview">

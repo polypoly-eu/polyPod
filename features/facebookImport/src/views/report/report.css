@@ -40,33 +40,6 @@
     right: 0;
     left: 0;
 }
-.report-view  .pop-up {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    background-color: #fff5f540;
-    padding: 4px 0;
-}
-
-.report-view  .pop-up .pop-up-message {
-    margin-left: 4px;
-    width: 90%;
-}
-
-.report-view .pop-up .close-icon {
-    background: var(--background-light);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    line-height: 18px;
-    text-align: center;
-    color: var(--text-dark);
-    margin-right: 4px;
-}
-
-.report-view .pop-up .unsuccessfully {
-      color: var(--color-red-300);
-}
 
 .report-view .view-details,
 .report-view .send-later,
@@ -92,6 +65,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid var(--color-red-300) !important;
+    background: transparent;
     color: var(--color-red-300) !important;
 }
 
@@ -148,6 +122,8 @@
     text-justify: distribute-all-lines;
 }
 
-.disabled {
+.disabled > button,
+.disabled > div {
     opacity: 0.5;
+    pointer-events: none;
 }

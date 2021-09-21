@@ -1,4 +1,7 @@
 {
     "messages.title": "Nachrichten Zusammenfassung",
-    "messages.summary": "In deinem export sind {{messages}} Nachrichten in {{threads}} Threads von {{people}} Personen."
+    "messages.summary": "In deinem export sind {{messages}} Nachrichten in {{threads}} Threads von {{people}} Personen.",
+    "report.success": "Bericht erfolgreich gesendet",
+    "report.error": "Fehler beim senden des Berichts",
+    "loading": "Deine Daten werden analysiert"
 }

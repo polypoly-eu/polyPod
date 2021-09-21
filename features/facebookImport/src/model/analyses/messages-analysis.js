@@ -86,7 +86,7 @@ export default class MessagesAnalysis extends RootAnalysis {
         return (
             <>
                 <p>
-                    {i18n.t("messagesMinistory:number.chats", {
+                    {i18n.t("messagesMiniStory:number.chats", {
                         number_chats: this._totalUsernamesCount,
                     })}
                 </p>
@@ -96,13 +96,13 @@ export default class MessagesAnalysis extends RootAnalysis {
                     footerContent={({ extraData }) => (
                         <>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMinistory:first.chat")}
+                                {i18n.t("messagesMiniStory:first.chat")}
                                 {extraData.firstChatDate
                                     ? extraData.firstChatDate.toDateString()
                                     : "unknown"}
                             </div>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMinistory:last.interaction")}
+                                {i18n.t("messagesMiniStory:last.interaction")}
                                 {extraData.lastChatDate
                                     ? extraData.lastChatDate.toDateString()
                                     : "unknown"}
