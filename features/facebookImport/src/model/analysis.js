@@ -39,12 +39,12 @@ import ActivitiesAnalysis from "./analyses/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/advertising-value-analysis.js";
 
 const subAnalyses = [
+    DataStructureBubblesAnalysis,
     ActivitiesAnalysis,
     MessagesAnalysis,
     OffFacebookEventsAnalysis,
     ExportTitleAnalysis,
     ExportSizeAnalysis,
-    DataStructureBubblesAnalysis,
     DataChartsAnalysis,
     DataGroupsAnalysis,
     JsonFilesBubblesAnalysis,
@@ -83,7 +83,6 @@ const subAnalyses = [
     return ![
         ExportTitleAnalysis,
         ExportSizeAnalysis,
-        DataStructureBubblesAnalysis,
         DataChartsAnalysis,
         DataGroupsAnalysis,
         JsonFilesBubblesAnalysis,
