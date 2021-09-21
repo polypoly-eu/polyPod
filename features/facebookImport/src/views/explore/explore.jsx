@@ -24,20 +24,37 @@ const AnalysisCard = ({
     exploreScrollingProgress,
 }) => {
     return (
-        <div className="analysis-card">
-            <h1>{analysis.title}</h1>
-            <div>{analysis.renderSummary()}</div>
-            {analysis.renderDetails ? (
-                <RouteButton
-                    route="/explore/details"
-                    className="details-button"
-                    onClick={() => setActiveDetails(analysis)}
-                    stateChange={{ exploreScrollingProgress }}
-                >
-                    {i18n.t("explore:details.button")}
-                </RouteButton>
-            ) : null}
-        </div>
+        <>
+            <div className="analysis-card">
+                <h1>{analysis.title}</h1>
+                <div className="summary-text">{analysis.renderSummary()}</div>
+                {analysis.renderDetails ? (
+                    <RouteButton
+                        route="/explore/details"
+                        className="details-button"
+                        onClick={() => setActiveDetails(analysis)}
+                        stateChange={{ exploreScrollingProgress }}
+                    >
+                        {i18n.t("explore:details.button")}
+                    </RouteButton>
+                ) : null}
+            </div>
+            <div className="card-separator"></div>
+        </>
+        // <div className="analysis-card">
+        //     <h1>{analysis.title}</h1>
+        //     <div>{analysis.renderSummary()}</div>
+        //     {analysis.renderDetails ? (
+        //         <RouteButton
+        //             route="/explore/details"
+        //             className="details-button"
+        //             onClick={() => setActiveDetails(analysis)}
+        //             stateChange={{ exploreScrollingProgress }}
+        //         >
+        //             {i18n.t("explore:details.button")}
+        //         </RouteButton>
+        //     ) : null}
+        // </div>
     );
 };
 
@@ -118,7 +135,6 @@ const ExploreView = () => {
             className="explore-view"
             onScroll={saveScrollingProgress}
         >
-            <h1 className="explore-view-title">Explore your data</h1>
             {renderReportResult()}
             {renderFileAnalyses()}
         </div>
