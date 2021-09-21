@@ -110,3 +110,7 @@ button:focus {
     color: var(--color-gray-400);
     font-size: 12px;
 }
+
+strong {
+    font-weight: 600;
+}
