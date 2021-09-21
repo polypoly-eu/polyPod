@@ -33,12 +33,12 @@ import { readJSONDataArray } from "../importer-util";
  * @class
  */
 export default class LanguageAndLocaleImporter {
-    async readLanguageData(zipFile, zipId) {
+    async readLanguageData(id, zipFile) {
         return await readJSONDataArray(
             "preferences/language_and_locale.json",
             "language_and_locale_v2",
             zipFile,
-            zipId
+            id
         );
     }
 
@@ -60,7 +60,7 @@ export default class LanguageAndLocaleImporter {
     }
 
     async import({ id, zipFile }, facebookAccount) {
-        const languageData = await this.readLanguageData(zipFile, id);
+        const languageData = await this.readLanguageData(id, zipFile);
         facebookAccount.preferredLanguage =
             this.extractPreferredLanguge(languageData);
 
