@@ -20,6 +20,34 @@
     font-size: 24px;
 }
 
+.explore-view  .pop-up {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff5f540;
+    padding: 4px 0;
+}
+
+.explore-view  .pop-up .pop-up-message {
+    margin-left: 4px;
+    width: 90%;
+}
+
+.explore-view .pop-up .close-icon {
+    background: var(--background-light);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    line-height: 18px;
+    text-align: center;
+    color: var(--text-dark);
+    margin-right: 4px;
+}
+
+.explore-view .pop-up .unsuccessfully {
+      color: var(--color-red-300);
+}
+
 .explore-view .report-button,
 .explore-view .details-button {
     background-color: var(--color-gray-50);
