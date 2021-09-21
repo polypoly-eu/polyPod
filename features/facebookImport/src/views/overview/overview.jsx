@@ -16,25 +16,15 @@ const Overview = () => {
         importSteps,
     } = useContext(ImporterContext);
 
-    const facebookHeader = (
-        <div className="header">
-            <h3>Facebook</h3>
-            <p>{i18n.t("overview:fb.product")}</p>
-            <p className="gray">{i18n.t("overview:internet")}</p>
-            <div className="separator"></div>
-        </div>
-    );
-
     if (files === null)
         return <Loading message={i18n.t("overview:loading.data")} />;
 
     return (
         <div className="overview">
-            {facebookHeader}
             {Object.values(files).length ? (
                 <>
                     <div className="details">
-                        <p>Name: {files[0].name}</p>
+                        <h1>{files[0].name}</h1>
                         <p>
                             {i18n.t("overview:imported.time")} {files[0].time}
                         </p>

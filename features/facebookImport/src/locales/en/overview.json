@@ -1,10 +1,8 @@
 {
-    "fb.product": "Product owned by Facebook Inc.",
-    "internet": "Internet & Multimedia",
     "import.data": "Import data",
     "imported.data": "Imported data",
-    "imported.files": "Imported files",
-    "imported.time": "Imported at:",
+    "imported.files": "Imported files:",
+    "imported.time": "Imported:",
     "size": "Size",
     "explore": "Explore",
     "new.import": "New import",
