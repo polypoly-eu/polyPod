@@ -5,9 +5,11 @@
     letter-spacing: -0.01em;
     width: 100%;
     position: absolute;
-    padding: 24px 32px 24px 60px;
+    padding: 30px 16px 30px 16px;
     border-top: 1px inset #a9b6c6;
     box-sizing: border-box;
+    overflow-y: clip;
+    height: 100%;
 }
 
 .overview h3,
@@ -30,7 +32,8 @@ h4 {
     font-size: 14;
 }
 
-.overview .header .separator {
+.overview .header .separator,
+.overview .details .separator {
     width: 100%;
     height: 1px;
     box-sizing: border-box;
@@ -42,14 +45,46 @@ h4 {
     color: var(--color-gray-400);
 }
 
-.overview .btn-holder {
-    margin: 16px 0px;
+.overview .imported-files {
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.overview .imported-files .file-list {
+    margin-bottom: 250px;
+}
+
+.overview .imported-files .file-list .file-button {
+    font-size: 14px;
+    line-height: 200%;
+    letter-spacing: -0.01em;
+    color: var(--color-gray-50);
+    font-family: "Jost*";
+    font-style: normal;
+    font-weight: normal;
+}
+
+.overview .footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.overview .footer .overlay {
+    background: linear-gradient(180deg, #0f1938 0%, rgba(15, 25, 56, 0) 100%);
+    transform: rotate(-180deg);
+    height: 93px;
+}
+
+.overview .footer .btn-holder {
+    padding: 16px 0px;
     display: flex;
     flex-direction: row;
     width: 100%;
+    background-color: var(--background-dark);
 }
 
-.overview .btn-holder .btn {
+.overview .footer .btn-holder .btn {
     height: 36px;
     display: flex;
     flex-direction: row;
@@ -62,13 +97,13 @@ h4 {
     box-sizing: border-box;
 }
 
-.overview .btn-holder .primary {
+.overview .footer .btn-holder .primary {
     background-color: var(--color-red-300);
     color: var(--color-indigo-950);
     margin-right: 16px;
 }
 
-.overview .btn-holder .secondary {
+.overview .footer .btn-holder .secondary {
     border: 1px solid var(--color-gray-50);
     box-sizing: border-box;
     color: var(--color-gray-50);

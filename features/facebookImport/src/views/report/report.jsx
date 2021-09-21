@@ -1,19 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
-import "./report.css";
+import i18n from "../../i18n.js";
 
-const ReportCard = ({ analysis }) => {
-    return (
-        <>
-            <div className="report-card">
-                <h1>{analysis.title}</h1>
-                <div className="list">{analysis.render()}</div>
-            </div>
-            <div className="report-card-scrolling"></div>
-        </>
-    );
-};
+import "./report.css";
 
 const PopUpMessage = ({ children, handleClosePopUp }) => {
     return (
@@ -32,19 +23,20 @@ const ReportView = () => {
     const [reportSent, setReportSent] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState();
+    const [loading, setLoading] = useState(false);
 
     const handleClosePopUp = () => {
         setIsOpen(!isOpen);
     };
 
     const handleSendReport = async () => {
+        setLoading(true);
         const error = await window.pod.network.httpPost(
             process.env.POLYPOD_POLYPEDIA_REPORT_URL,
             JSON.stringify(unrecognizedData.jsonReport),
             "application/json",
             process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
         );
-
         handleClosePopUp();
 
         if (error) {
@@ -54,32 +46,35 @@ const ReportView = () => {
         setReportSent(true);
     };
 
-    function renderReportAnalyses() {
-        if (!unrecognizedData) {
-            return "";
-        }
-        return (
-            <div>
-                {unrecognizedData.reportAnalyses.map((analysis, index) => (
-                    <ReportCard analysis={analysis} key={index} />
-                ))}
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (reportSent || error) setLoading(false);
+    }, [reportSent, error]);
 
     return (
         <div className="report-view">
-            <h1 className="report-view-title">Unrecognized data report</h1>
-            {renderReportAnalyses()}
+            <h1 className="report-view-title">
+                {i18n.t("report:intro.headline")}
+            </h1>
+            <p>{i18n.t("report:intro.text")}</p>
+            <h1 className="report-view-title">
+                {i18n.t("report:explanation.headline")}
+            </h1>
+            <p>{i18n.t("report:explanation.text")}</p>
             <div className="button-area">
+                <RouteButton className="view-details" route="/report/details">
+                    {i18n.t("report:explanation.viewDetails")}
+                </RouteButton>
+                <RouteButton className="send-later" route="/explore">
+                    {i18n.t("report:explanation.sendLater")}
+                </RouteButton>
                 {isOpen && (
                     <PopUpMessage handleClosePopUp={handleClosePopUp}>
                         {reportSent ? (
-                            "Report sent successfully"
+                            i18n.t("report:success")
                         ) : (
                             <div>
                                 <span className="unsuccessfully">
-                                    Error while sending report.
+                                    {i18n.t("report:error")}
                                 </span>
                                 <br />
                                 Message: {error} <br />
@@ -88,9 +83,16 @@ const ReportView = () => {
                         )}
                     </PopUpMessage>
                 )}
-                <button className="send" onClick={handleSendReport}>
-                    Send report
-                </button>
+                {loading ? (
+                    <button className="send disabled">
+                        {" "}
+                        {i18n.t("report:explanation.send")}
+                    </button>
+                ) : (
+                    <button className="send" onClick={handleSendReport}>
+                        {i18n.t("report:explanation.send")}
+                    </button>
+                )}
             </div>
         </div>
     );

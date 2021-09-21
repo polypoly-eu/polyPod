@@ -1,4 +1,5 @@
 import { ZipFile } from "../model/storage.js";
+import { createErrorStatus, createSuccessStatus } from "./analysis-status.js";
 
 import DataBubblesAnalysis from "./analyses/data-points-bubbles-analysis.js";
 import DataGroupsAnalysis from "./analyses/data-groups-analysis.js";
@@ -32,10 +33,16 @@ import SesssionActivityLocationsAnalysis from "./analyses/activity-locations-ana
 import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
 import JSONFileNamesAnalysis from "./analyses-report/json-file-names-analysis.js";
 import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-types-analysis.js";
-import { createErrorStatus, createSuccessStatus } from "./analysis-status.js";
+import UknownTopLevelFoldersAnalysis from "./analyses-report/unknown-top-level-folders-analysis.js";
 import InactiveCardsSummary from "./analyses-report/inactive-cards-summary.js";
+import ActivitiesAnalysis from "./analyses/activities-analysis.js";
+import AdvertisingValueAnalysis from "./analyses/advertising-value-analysis.js";
 
 const subAnalyses = [
+    ActivitiesAnalysis,
+    MessagesAnalysis,
+    OffFacebookEventsAnalysis,
+
     ExportTitleAnalysis,
     ExportSizeAnalysis,
     DataBubblesAnalysis,
@@ -45,10 +52,8 @@ const subAnalyses = [
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
-    OffFacebookEventsAnalysis,
     OffFacebookEventsTypesChartAnalysis,
     OffFacebookEventsTypesAnalysis,
-    MessagesAnalysis,
     MessagesDetailsAnalysis,
     EmailAddressesAnalysis,
     MessageThreadsAnalysis,
@@ -62,14 +67,55 @@ const subAnalyses = [
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
-    UnknownMessageTypesAnalysis,
-    NoDataFoldersAnalysis,
-    UnknownJSONFilesAnalysis,
-    JSONFileNamesAnalysis,
+    UknownTopLevelFoldersAnalysis,
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
-];
+    AdvertisingValueAnalysis,
+    UnknownJSONFilesAnalysis,
+    JSONFileNamesAnalysis,
+    NoDataFoldersAnalysis,
+    UnknownMessageTypesAnalysis,
+].filter((analysis) => {
+    // Some analysis are disabled because we don't want to include them
+    // in the current build, but it seems likely that we want to reintegrate
+    // them before too long - or show them behind some kind of flag, or
+    // developer mode.
+    return ![
+        ExportTitleAnalysis,
+        ExportSizeAnalysis,
+        DataBubblesAnalysis,
+        DataChartsAnalysis,
+        DataGroupsAnalysis,
+        JsonFilesBubblesAnalysis,
+        ConnectedAdvertisersAnalysis,
+        InteractedWithAdvertisersAnalysis,
+        AdInterestsAnalysis,
+        OffFacebookEventsTypesChartAnalysis,
+        OffFacebookEventsTypesAnalysis,
+        MessagesDetailsAnalysis,
+        EmailAddressesAnalysis,
+        MessageThreadsAnalysis,
+        MessagesActivityAnalysis,
+        SearchesAnalysis,
+        FriendsAnalysis,
+        ReceivedFriendRequestsAnalysis,
+        PagesOverviewAnalysis,
+        SesssionActivityLocationsAnalysis,
+        ImportedJsonFilesAnalysis,
+
+        ReportMetadataAnalysis,
+        DataImportingStatusAnalysis,
+        UknownTopLevelFoldersAnalysis,
+        MissingCommonJSONFilesAnalysis,
+        MissingKnownJSONFilesAnalysis,
+        OffFacebookEventTypesAnalysis,
+        UnknownJSONFilesAnalysis,
+        JSONFileNamesAnalysis,
+        NoDataFoldersAnalysis,
+        UnknownMessageTypesAnalysis,
+    ].includes(analysis);
+});
 
 class UnrecognizedData {
     constructor(analysesResults) {
