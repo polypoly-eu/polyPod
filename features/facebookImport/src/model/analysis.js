@@ -36,8 +36,13 @@ import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-
 import UknownTopLevelFoldersAnalysis from "./analyses-report/unknown-top-level-folders-analysis.js";
 import InactiveCardsSummary from "./analyses-report/inactive-cards-summary.js";
 import ActivitiesAnalysis from "./analyses/activities-analysis.js";
+import AdvertisingValueAnalysis from "./analyses/advertising-value-analysis.js";
 
 const subAnalyses = [
+    ActivitiesAnalysis,
+    MessagesAnalysis,
+    OffFacebookEventsAnalysis,
+
     ExportTitleAnalysis,
     ExportSizeAnalysis,
     DataBubblesAnalysis,
@@ -47,10 +52,8 @@ const subAnalyses = [
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
-    OffFacebookEventsAnalysis,
     OffFacebookEventsTypesChartAnalysis,
     OffFacebookEventsTypesAnalysis,
-    MessagesAnalysis,
     MessagesDetailsAnalysis,
     EmailAddressesAnalysis,
     MessageThreadsAnalysis,
@@ -64,17 +67,17 @@ const subAnalyses = [
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
-    UnknownMessageTypesAnalysis,
-    NoDataFoldersAnalysis,
     UknownTopLevelFoldersAnalysis,
-    UnknownJSONFilesAnalysis,
-    JSONFileNamesAnalysis,
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
-    ActivitiesAnalysis,
+    AdvertisingValueAnalysis,
+    UnknownJSONFilesAnalysis,
+    JSONFileNamesAnalysis,
+    NoDataFoldersAnalysis,
+    UnknownMessageTypesAnalysis,
 ].filter((analysis) => {
-    // Some analysis are disabled because because we don't want to include them
+    // Some analysis are disabled because we don't want to include them
     // in the current build, but it seems likely that we want to reintegrate
     // them before too long - or show them behind some kind of flag, or
     // developer mode.
@@ -85,6 +88,32 @@ const subAnalyses = [
         DataChartsAnalysis,
         DataGroupsAnalysis,
         JsonFilesBubblesAnalysis,
+        ConnectedAdvertisersAnalysis,
+        InteractedWithAdvertisersAnalysis,
+        AdInterestsAnalysis,
+        OffFacebookEventsTypesChartAnalysis,
+        OffFacebookEventsTypesAnalysis,
+        MessagesDetailsAnalysis,
+        EmailAddressesAnalysis,
+        MessageThreadsAnalysis,
+        MessagesActivityAnalysis,
+        SearchesAnalysis,
+        FriendsAnalysis,
+        ReceivedFriendRequestsAnalysis,
+        PagesOverviewAnalysis,
+        SesssionActivityLocationsAnalysis,
+        ImportedJsonFilesAnalysis,
+
+        ReportMetadataAnalysis,
+        DataImportingStatusAnalysis,
+        UknownTopLevelFoldersAnalysis,
+        MissingCommonJSONFilesAnalysis,
+        MissingKnownJSONFilesAnalysis,
+        OffFacebookEventTypesAnalysis,
+        UnknownJSONFilesAnalysis,
+        JSONFileNamesAnalysis,
+        NoDataFoldersAnalysis,
+        UnknownMessageTypesAnalysis,
     ].includes(analysis);
 });
 
