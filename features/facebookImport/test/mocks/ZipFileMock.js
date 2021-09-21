@@ -8,11 +8,11 @@ export class ZipFileMock {
     }
 
     async getEntries() {
-        return Object.keys(this._entriesMap);
+        return Object.keys(this._entries);
     }
 
     async getContent(entry) {
-        return this._entriesMap[entry];
+        return this._entries[entry];
     }
 
     enrichedData() {
@@ -21,6 +21,11 @@ export class ZipFileMock {
             time: this.time,
             name: this.name,
             size: this.size,
+            zipFile: this,
         };
+    }
+
+    addNamedEntry(fileName, stringContent) {
+        this._entries[this.id + "/" + fileName] = stringContent;
     }
 }
