@@ -32,19 +32,15 @@ const ReportView = () => {
                 {i18n.t("report:intro.headline")}
             </h1>
             <p>{i18n.t("report:intro.text")}</p>
-            <h1 className="report-view-title">
-                {i18n.t("report:explanation.headline")}
-            </h1>
-            <p>{i18n.t("report:explanation.text")}</p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
                 <RouteButton className="view-details" route="/report/details">
-                    {i18n.t("report:explanation.viewDetails")}
+                    {i18n.t("report:viewDetails")}
                 </RouteButton>
                 <button className="send-later" onClick={handleBack}>
-                    {i18n.t("report:explanation.sendLater")}
+                    {i18n.t("report:sendLater")}
                 </button>
                 <button className="send" onClick={handleSendReport}>
-                    {i18n.t("report:explanation.send")}
+                    {i18n.t("report:send")}
                 </button>
             </div>
         </div>
