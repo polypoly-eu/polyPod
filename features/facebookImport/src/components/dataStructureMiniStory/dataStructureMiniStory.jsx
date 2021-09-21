@@ -29,12 +29,9 @@ const DataStructureMiniStory = ({ data }) => {
         }
     };
 
-    let amountOfFiles = data[0].count;
-    data.map((bubble) => {
-        bubble.title === selectedFolder
-            ? (amountOfFiles = bubble.count)
-            : amountOfFiles;
-    });
+    const amountOfFiles = data.find(
+        (bubble) => bubble.title === selectedFolder
+    )?.count;
 
     return (
         <>
