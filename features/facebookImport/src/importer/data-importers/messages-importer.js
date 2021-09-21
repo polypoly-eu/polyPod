@@ -1,19 +1,21 @@
 import { createErrorResult, IMPORT_SUCCESS } from "../importer-status.js";
-import { readJSONFile } from "../importer-util.js";
+import {
+    readJSONFile,
+    relevantZipEntries,
+    removeEntryPrefix,
+} from "../importer-util.js";
 
 export default class MessagesImporter {
-    _isJsonMessageFile(entryName, id) {
-        const formattedEntryName = entryName.replace(`${id}/`, "");
+    _isJsonMessageFile(entryName) {
+        const formattedEntryName = removeEntryPrefix(entryName);
         return /messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/[0-9_a-z]+\/message_[1-9][0-9]?.json$/.test(
             formattedEntryName
         );
     }
 
-    async _extractJsonEntries(id, zipFile) {
-        const entries = await zipFile.getEntries();
-        return entries.filter((fileName) =>
-            this._isJsonMessageFile(fileName, id)
-        );
+    async _extractJsonEntries(zipFile) {
+        const entries = await relevantZipEntries(zipFile);
+        return entries.filter((fileName) => this._isJsonMessageFile(fileName));
     }
 
     async _readJSONFileWithStatus(messageFile, zipFile) {
@@ -26,16 +28,13 @@ export default class MessagesImporter {
             });
     }
 
-    _importMessageThread(id, facebookAccount, messageThreadResults) {
+    _importMessageThread(facebookAccount, messageThreadResults) {
         const successfullResults = messageThreadResults.filter(
             (result) => result.status === IMPORT_SUCCESS
         );
 
         for (const each of successfullResults) {
-            const fileNameParts = each.messageFile
-                .replace(`${id}/`, "")
-                .split("/");
-            const fileName = fileNameParts.slice(1).join("/");
+            const fileName = removeEntryPrefix(each.messageFile);
             facebookAccount.addImportedFileName(fileName);
         }
         facebookAccount.messageThreads = successfullResults.map(
@@ -43,8 +42,8 @@ export default class MessagesImporter {
         );
     }
 
-    async import({ id, zipFile }, facebookAccount) {
-        const messageThreadFiles = await this._extractJsonEntries(id, zipFile);
+    async import({ zipFile }, facebookAccount) {
+        const messageThreadFiles = await this._extractJsonEntries(zipFile);
 
         // TODO: The same message thread can be in multiple files
         const messageThreadResults = await Promise.all(
@@ -52,7 +51,7 @@ export default class MessagesImporter {
                 this._readJSONFileWithStatus(messageFile, zipFile)
             )
         );
-        this._importMessageThread(id, facebookAccount, messageThreadResults);
+        this._importMessageThread(facebookAccount, messageThreadResults);
 
         const failedResults = messageThreadResults.filter(
             (result) => !(result.status === IMPORT_SUCCESS)

@@ -16,11 +16,17 @@ const DataTypeBubbleAll = ({
     opacity = 1,
     showValues = true,
 }) => {
+    const smallBubblesRadius = 20;
+    const bigBubblesRadius = 50;
+    const bigBubblesFont = "20px";
+    const mediumBubblesFont = "16px";
+
     // d3 svg bubble-diagram drawing function
     const drawBubblesLeafs = (leaf) => {
         leaf.append("circle")
             .attr("r", (d) => d.r)
-            .style("fill", (d) => bubbleColor(d))
+            .style("fill", bubbleColor)
+            .style("stroke", "#f7fafc")
             .style("vertical-align", "center")
             .attr("fill-opacity", opacity);
 
@@ -28,13 +34,17 @@ const DataTypeBubbleAll = ({
             ? leaf
                   .append("text")
                   .text((d) => {
-                      return d.value > 5 ? d.data.title : "";
+                      return d.r > smallBubblesRadius
+                          ? Math.round(d.value)
+                          : "";
                   })
                   .attr("text-anchor", "middle")
                   .attr("y", ".3em")
                   .style("fill", textColor)
                   .style("font-size", (d) => {
-                      return (8 + d.value / 5).toString() + "px";
+                      return d.r > bigBubblesRadius
+                          ? bigBubblesFont
+                          : mediumBubblesFont;
                   })
                   .style("font-family", "Jost Medium")
                   .style("font-weight", "500")

@@ -1,13 +1,13 @@
 {
-    "heading.request": "<strong>Request</strong> your data",
-    "heading.download": "<strong>Download</strong> your data",
-    "heading.import": "<strong>Import</strong> your data",
-    "heading.explore": "<strong>Explore</strong> your data",
+    "heading.request": "<strong>Request</strong>",
+    "heading.download": "<strong>Download</strong>",
+    "heading.import": "<strong>Import</strong>",
+    "heading.explore": "<strong>Explore</strong>",
     "intro.text.1": "Find out what Facebook knows about you!",
     "intro.text.2": "How to upload your Facebook data to your polyPod",
     "intro.info": "Only a copy of your data will be created. Your Facebook account remains unchanged!",
-    "scroll.down": "Scroll down",
-    "how.it.works": "So geht's",
+    "scroll.down": "Scroll down to learn how",
+    "how.it.works": "How it works",
     "request.1": "To import your data into your polyPod, you must first request it from Facebook.",
     "request.2": "Go to facebook.com/dyi.",
     "request.3": "Your browser will ask you if you want to continue with the browser version or use your app. Please continue with the browser.",
@@ -28,7 +28,6 @@
     "import.delete": "Delete",
     "import.button.1": "Select file",
     "import.button.2": "Import",
-    "explore.1": "Congratulations! You have successfully taken the first step in taking back control of your data!",
-    "explore.2": "Your Facebook data has been imported into your polyPod. Now you can explore it and see what Facebook really knows about you.",
+    "explore.1": "After you have imported your Facebook data to your polyPod you can explore it and see what Facebook really knows about you.",
     "explore.button": "Explore your data"
 }
