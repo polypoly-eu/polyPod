@@ -10,7 +10,6 @@ polypod-feedback@polypoly.coop\
 </a>`;
 
 export default function ErrorPopup({ error, onClose }) {
-    error = { name: "foo", cause: "bar" };
     return (
         <div className="error-popup">
             <h1>{i18n.t("errorPopup:title")}</h1>
