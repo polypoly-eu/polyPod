@@ -112,18 +112,6 @@
     display: flex;
 }
 
-.unrecognized-analysis-card .unrecognized-analysis-title .alert-fake-icon {
-    width: 20px;
-    height: 20px;
-    background-color: var(--color-red-300);
-    font-weight: 600;
-    text-align: center;
-    border-radius: 50%;
-    font-size: 16px;
-    color: var(--color-red-50);
-    margin-right: 8px;
-}
-
 .unrecognized-analysis-card .unrecognized-analysis-title h1 {
     font-size: 16px;
     margin: 0;

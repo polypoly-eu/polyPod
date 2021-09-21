@@ -34,23 +34,22 @@ const AnalysisCard = ({
                     onClick={() => setActiveDetails(analysis)}
                     stateChange={{ exploreScrollingProgress }}
                 >
-                    View details
+                    {i18n.t("explore:details.button")}
                 </RouteButton>
             ) : null}
         </div>
     );
 };
 
-const UnrecognizedCard = ({ unrecognizedData }) => {
+const UnrecognizedCard = () => {
     return (
         <div className="analysis-card unrecognized-analysis-card">
             <div className="unrecognized-analysis-title">
-                <div className="alert-fake-icon">!</div>
-                <h1>Unrecognised and Missing Data</h1>
+                <h1>{i18n.t("explore:unrecognizedCard.headline")}</h1>
             </div>
-            <p>{unrecognizedData.report}</p>
+            <p>{i18n.t("explore:unrecognizedCard.text")}</p>
             <RouteButton route="/report" className="report-button">
-                View and send report
+                {i18n.t("explore:unrecognizedCard.button")}
             </RouteButton>
         </div>
     );
@@ -92,9 +91,7 @@ const ExploreView = () => {
             return <Loading message={i18n.t("explore:loading")} />;
         return (
             <div>
-                <UnrecognizedCard
-                    unrecognizedData={fileAnalysis.unrecognizedData}
-                />
+                <UnrecognizedCard />
                 {fileAnalysis.analyses.map((analysis, index) => (
                     <AnalysisCard
                         analysis={analysis}
