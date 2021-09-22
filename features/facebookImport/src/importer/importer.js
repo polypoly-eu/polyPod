@@ -64,7 +64,7 @@ export async function importData(file) {
     const zipFile = new ZipFile(file, window.pod);
     const facebookAccount = new FacebookAccount();
     const enrichedData = { ...file, zipFile };
-    debugger;
+
     const importingResultsPerImporter = await Promise.all(
         dataImporters.map(async (importerClass) => {
             return runImporter(
