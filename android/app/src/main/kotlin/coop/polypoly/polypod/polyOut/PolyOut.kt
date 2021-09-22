@@ -13,16 +13,20 @@ open class PolyOut(
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
 
-    open suspend fun readFile(
-        path: String
-    ): ByteArray {
-        if (path == "") {
-            throw Error("Empty path in PolyOut.readFile")
-        }
-        val filePath = context.filesDir.absolutePath + "/" + path.removePrefix(
+    private fun idToPath(id: String, context: Context): String {
+        return context.filesDir.absolutePath + "/" + id.removePrefix(
             fsPrefix
         )
-        ZipTools.getEncryptedFile(context, filePath).let {
+    }
+
+    open suspend fun readFile(
+        id: String
+    ): ByteArray {
+        if (id == "") {
+            throw Error("Empty path in PolyOut.readFile")
+        }
+
+        ZipTools.getEncryptedFile(context, idToPath(id, context)).let {
             it.openFileInput().use {
                 return it.readBytes()
             }
@@ -36,46 +40,42 @@ open class PolyOut(
     }
 
     open suspend fun stat(
-        path: String
+        id: String
     ): MutableMap<String, String> {
         val fs = Preferences.getFileSystem(context)
         val result = mutableMapOf<String, String>()
-        if (path == "") {
+        if (id == "") {
             return result
         }
-        if (statCache.contains(path)) {
-            return statCache.get(path)!!
+        if (statCache.contains(id)) {
+            return statCache.get(id)!!
         }
-        val filePath = path.removePrefix(fsPrefix)
-        val file = File(context.filesDir.absolutePath.plus("/$filePath"))
-        result["name"] = fs.get(path) ?: file.name
+        val file = File(idToPath(id, context))
+        result["name"] = fs.get(id) ?: file.name
         result["time"] = file.lastModified().toString()
         result["size"] = file.length().toString()
-        result["id"] = path
-        statCache[path] = result
+        result["id"] = id
+        statCache[id] = result
         return result
     }
     open suspend fun readdir(
-        path: String
+        id: String
     ): Array<String> {
 
         val fs = Preferences.getFileSystem(context)
-        if (path == "") {
+        if (id == "") {
             return fs.keys.toTypedArray()
         }
-        if (readdirCache.contains(path)) {
-            return readdirCache.get(path)!!
+        if (readdirCache.contains(id)) {
+            return readdirCache.get(id)!!
         }
         val retList = mutableListOf<String>()
-        val filePath = path.removePrefix(fsPrefix)
-        File(
-            context.filesDir.absolutePath.plus("/$filePath")
-        ).walkTopDown().forEach {
+        File(idToPath(id, context)).walkTopDown().forEach {
             retList.add(
                 fsPrefix + it.relativeTo(context.filesDir).path
             )
         }
-        readdirCache[path] = retList.toTypedArray()
+        readdirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
     }
 }
