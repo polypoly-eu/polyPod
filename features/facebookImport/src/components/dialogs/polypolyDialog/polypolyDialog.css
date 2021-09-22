@@ -50,6 +50,7 @@
 .polypoly-dialog .polypoly-dialog-window .btn.back {
     border: 1px solid var(--color-indigo-950);
     color: var(--color-indigo-950);
+    background-color: transparent;
 }
 
 .polypoly-dialog .polypoly-dialog-window .btn.proceed {

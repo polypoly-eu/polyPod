@@ -74,6 +74,9 @@ h4 {
     width: 100%;
     position: absolute;
     bottom: 0;
+    left: 0;
+    padding: 0 16px 24px 16px;
+    box-sizing: border-box;
 }
 
 .overview .footer .overlay {
@@ -83,34 +86,35 @@ h4 {
 }
 
 .overview .footer .btn-holder {
-    padding: 16px 0px;
     display: flex;
     flex-direction: row;
     width: 100%;
     background-color: var(--background-dark);
+    box-sizing: border-box;
 }
 
 .overview .footer .btn-holder .btn {
-    height: 36px;
+    height: 48px;
     display: flex;
-    flex-direction: row;
+    flex: 1 1 0;
     justify-content: center;
     align-items: center;
     padding: 4px 16px;
     border-radius: 4px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 18px;
     box-sizing: border-box;
 }
 
-.overview .footer .btn-holder .primary {
-    background-color: var(--color-red-300);
+.overview .footer .btn-holder .btn.primary {
+    background-color: var(--color-gray-50);
     color: var(--color-indigo-950);
     margin-right: 16px;
 }
 
-.overview .footer .btn-holder .secondary {
+.overview .footer .btn-holder .btn.secondary {
     border: 1px solid var(--color-gray-50);
     box-sizing: border-box;
     color: var(--color-gray-50);
+    background-color: transparent;
 }
