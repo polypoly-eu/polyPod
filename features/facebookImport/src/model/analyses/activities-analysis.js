@@ -5,6 +5,10 @@ import RootAnalysis from "./root-analysis.js";
 import ActivitiesMiniStory from "../../components/activitiesMiniStory/activitiesMiniStory.jsx";
 
 export default class ActivitiesAnalysis extends RootAnalysis {
+    get label() {
+        return RootAnalysis.Labels.NONE;
+    }
+
     get title() {
         return i18n.t("activitiesMiniStory:title");
     }
