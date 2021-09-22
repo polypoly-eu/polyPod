@@ -1,10 +1,7 @@
 {
   "version": "0.0.1",
   "devDependencies": {
-    "@polypoly-eu/fetch-spec": "file:../../core/api/fetch-spec",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "mocha": "^8.0.1"
+    "@polypoly-eu/fetch-spec": "file:../../core/api/fetch-spec"
   },
   "private": true
 }
