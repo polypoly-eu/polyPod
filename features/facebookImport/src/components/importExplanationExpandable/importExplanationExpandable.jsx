@@ -200,11 +200,7 @@ const ImportExplanationExpandable = ({
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
                     <div
-                        onClick={
-                            section === "explore"
-                                ? () => {}
-                                : () => onUpdateImportStatus(section)
-                        }
+                        onClick={() => onUpdateImportStatus(section)}
                         className="head"
                         id={importIds[section]}
                     >
@@ -215,10 +211,22 @@ const ImportExplanationExpandable = ({
                                 __html: i18n.t(`import:heading.${section}`),
                             }}
                         />
+                        <img
+                            src="./images/angle-up.svg"
+                            alt="arrow-up"
+                            className={
+                                isSectionOpened(
+                                    section,
+                                    importStatus,
+                                    importSteps
+                                )
+                                    ? ""
+                                    : "rotate-180"
+                            }
+                        />
                     </div>
                     {isSectionOpened(section, importStatus, importSteps) ? (
-                        <div className="body">
-                            <div className="separator" />
+                        <div className="section-body">
                             {bodyContent[section]}
                         </div>
                     ) : null}
