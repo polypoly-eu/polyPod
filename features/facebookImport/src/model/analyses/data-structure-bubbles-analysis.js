@@ -4,6 +4,10 @@ import RootAnalysis from "./root-analysis.js";
 import i18n from "../../i18n.js";
 
 export default class DataStructureBubblesAnalysis extends RootAnalysis {
+    get label() {
+        return RootAnalysis.Labels.NONE;
+    }
+
     get title() {
         return i18n.t("dataStructureMiniStory:title");
     }

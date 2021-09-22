@@ -22,7 +22,6 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
         this._messagesCount = facebookAccount.messagesCount;
 
         const usernames = new Set();
-
         facebookAccount.forEachMessageThread((messageThread) => {
             for (let participant of messageThread.participants) {
                 usernames.add(participant);
