@@ -11,7 +11,7 @@
     "request.1": "To import your data into your polyPod, you must first request it from Facebook.",
     "request.2": "Go to facebook.com/dyi.",
     "request.3": "Your browser will ask you if you want to continue with the browser version or use your app. Please continue with the browser.",
-    "request.4": "Scroll down the Facebook page, change the file type to 'JSON' and request the file. You will receive a confirmation of your request.",
+    "request.4": "On the Facebook page scroll down and change the file format to ‘JSON' and the media quality to ‘Low’, then request the file. You will get an email confirmation of your request.",
     "request.info.1": "For this you need your log-in data",
     "request.info.2": "IMPORTANT: Now you have to wait for your data to be ready for download. You will be notified by e-mail. This process can take up to 24 hours.",
     "request.button": "Start request",
