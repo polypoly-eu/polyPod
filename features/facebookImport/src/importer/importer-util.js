@@ -4,27 +4,40 @@ import {
     MissingFileImportException,
 } from "./failed-import-exception";
 
-async function readJSONFile(dataFileName, zipFile) {
+async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
-    const dataZipEntry = entries.find((entryName) =>
-        entryName.includes(dataFileName)
+    return entries.filter(
+        (each) => !each.includes(".DS_Store") && !each.includes("__MACOSX")
     );
+}
+
+async function readJSONFile(dataFileName, zipFile, zipId = null) {
+    const fullEntryName = zipId ? zipId + "/" + dataFileName : dataFileName;
+    const entries = await zipFile.getEntries();
+    const dataZipEntry = entries.find(
+        (entryName) => entryName === fullEntryName
+    );
+
     if (!dataZipEntry) {
         throw new MissingFileImportException(dataFileName);
     }
-    const fileContent = new TextDecoder("utf-8").decode(
-        await zipFile.getContent(dataZipEntry)
-    );
+    const rawContent = await zipFile.getContent(dataZipEntry);
+    const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
         throw new MissingContentImportException(dataFileName);
     }
 
-    return JSON.parse(fileContent);
+    return JSON.parse(fileContent, (key, value) => {
+        if (typeof value === "string") {
+            return decodeURIComponent(escape(value));
+        }
+        return value;
+    });
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile) {
-    const rawData = await readJSONFile(dataFileName, zipFile);
+async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
+    const rawData = await readJSONFile(dataFileName, zipFile, zipId);
 
     if (!(dataKey in rawData)) {
         throw new InvalidContentImportException(
@@ -55,7 +68,7 @@ function anonymizePathSegment(pathSegment, fullPath) {
 }
 
 function anonymizeJsonEntityPath(fileName) {
-    const nameParts = fileName.split("/").slice(1);
+    const nameParts = fileName.split("/");
 
     const anonymizedParts = nameParts.map((each) =>
         anonymizePathSegment(each, fileName)
@@ -64,20 +77,37 @@ function anonymizeJsonEntityPath(fileName) {
 }
 
 async function jsonDataEntities(zipFile) {
-    const entries = await zipFile.getEntries();
-    const relevantEntries = entries.filter(
+    const entries = await relevantZipEntries(zipFile);
+    const relevantJsonEntries = entries.filter(
         (each) =>
-            !each.includes(".DS_Store") &&
-            !each.includes("__MACOSX") &&
             !each.includes("/files/") && // Remove user files
             each.endsWith(".json")
     );
-    return relevantEntries;
+    return relevantJsonEntries;
+}
+
+function removeEntryPrefix(entryName) {
+    if (
+        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/$/.test(
+            entryName
+        )
+    ) {
+        return "";
+    }
+    const entryNameMatch = entryName.match(
+        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/(.*)$/
+    );
+    if (entryNameMatch && entryNameMatch.length === 2 && entryNameMatch[1]) {
+        return entryNameMatch[1];
+    }
+    return entryName;
 }
 
 export {
     readJSONFile,
     readJSONDataArray,
     anonymizeJsonEntityPath,
+    relevantZipEntries,
     jsonDataEntities,
+    removeEntryPrefix,
 };

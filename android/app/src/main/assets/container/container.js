@@ -6,6 +6,13 @@
 const { port1, port2 } = new MessageChannel();
 let outerPort;
 
+/*
+For reasons we don't fully understand yet, we've seen the situation where the
+feature is sending messages before the pod is actually fully initialised. As
+a workaround, we queue messages received before initialisation.
+*/
+const queuedMessages = [];
+
 function initMessaging() {
     window.onmessage = (event) => {
         // Action notifications have no port
@@ -23,6 +30,13 @@ function initMessaging() {
             );
             port1.postMessage(bytes);
         };
+        if (queuedMessages.length) {
+            console.warn("Warning: replaying queued messages");
+            while (queuedMessages.length) {
+                const message = queuedMessages.shift();
+                outerPort.postMessage(message);
+            }
+        }
     };
 }
 
@@ -34,10 +48,11 @@ function initIframe(iFrame) {
         const base64 = btoa(String.fromCharCode(...new Uint8Array(event.data)));
         console.dir(base64);
         if (!outerPort) {
-            console.error(
-                "Fatal error: pod received a message before being " +
-                    "fully initialised"
+            console.warn(
+                "Warning: pod received a message before being " +
+                    "fully initialised, queing message"
             );
+            queuedMessages.push(base64);
             return;
         }
         outerPort.postMessage(base64);

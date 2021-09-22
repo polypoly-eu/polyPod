@@ -1,4 +1,5 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
 import RootAnalysis from "./root-analysis.js";
 
 export default class ImportedJsonFilesAnalysis extends RootAnalysis {
@@ -11,16 +12,11 @@ export default class ImportedJsonFilesAnalysis extends RootAnalysis {
         this.active = this._importedFileNames.length > 0;
     }
 
-    render() {
-        if (!this.active) {
-            return "No Imported Files!";
-        }
-        return (
-            <ul>
-                {this._importedFileNames.map((entry, index) => (
-                    <li key={index}>{entry}</li>
-                ))}
-            </ul>
-        );
+    renderSummary() {
+        return `We imported ${this._importedFileNames.length} files.`;
+    }
+
+    renderDetails() {
+        return <BasicList items={this._importedFileNames} />;
     }
 }

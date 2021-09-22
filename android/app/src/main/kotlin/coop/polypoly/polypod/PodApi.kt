@@ -1,6 +1,7 @@
 package coop.polypoly.polypod
 
 import coop.polypoly.polypod.bubblewrap.FetchResponseCodec
+import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
@@ -18,6 +19,7 @@ open class PodApi(
     open val polyOut: PolyOut,
     open val polyIn: PolyIn,
     open val polyNav: PolyNav,
+    open val info: Info,
     open val network: Network
 ) {
 
@@ -67,6 +69,12 @@ open class PodApi(
                     "openUrl" -> return handlePolyNavOpenUrl(args)
                     "importFile" -> return handlePolyNavImportFile()
                     "removeFile" -> return handlePolyNavRemoveFile(args)
+                }
+            }
+            "info" -> {
+                when (inner) {
+                    "getRuntime" -> return handleInfoGetRuntime()
+                    "getVersion" -> return handleInfoGetVersion()
                 }
             }
             "network" -> {
@@ -193,14 +201,25 @@ open class PodApi(
         return ValueFactory.newNil()
     }
 
+    private fun handleInfoGetRuntime(): Value {
+        logger.debug("dispatch() -> info.getRuntime")
+        return ValueFactory.newString(info.getRuntime())
+    }
+
+    private fun handleInfoGetVersion(): Value {
+        logger.debug("dispatch() -> info.getVersion")
+        return ValueFactory.newString(info.getVersion())
+    }
+
     private suspend fun handleNetworkHttpPost(args: List<Value>): Value {
         logger.debug("dispatch() -> network.httpPost")
         val url = args[0].asStringValue().toString()
         val contentType = args[1].asStringValue().toString()
         val body = args[2].asStringValue().toString()
         val authorization: String? = args[3]?.asStringValue().toString()
-        network.httpPost(url, contentType, body, authorization)
-        return ValueFactory.newNil()
+        val error = network.httpPost(url, contentType, body, authorization)
+        return if (error == null) ValueFactory.newNil()
+        else ValueFactory.newString(error)
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {

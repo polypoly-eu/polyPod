@@ -2,24 +2,30 @@ package coop.polypoly.polypod.polyOut
 
 import android.content.Context
 import coop.polypoly.polypod.Preferences
+import coop.polypoly.polypod.polyNav.ZipTools
 import java.io.File
 import java.nio.ByteBuffer
-import java.util.zip.ZipFile
 
 open class PolyOut(
     val context: Context
 ) {
     private val fsPrefix = "polypod://"
+
     open suspend fun readFile(path: String): ByteArray {
-        val fs = Preferences.getFileSystem(context)
         if (path == "") {
-            throw Error("Not found")
+            throw Error("Empty path in PolyOut.readFile")
         }
-        val entryPathStart = path.indexOf('/', fsPrefix.length)
-        val zipId = path.substring(0, entryPathStart)
-        val entryPath = path.substring(entryPathStart + 1)
-        val zip = ZipFile(File(fs[zipId]))
-        return zip.getInputStream(zip.getEntry(entryPath)).readBytes()
+        val fs = Preferences.getFileSystem(context)
+
+        val filePath = context.filesDir.absolutePath + "/" + path.removePrefix(
+            fsPrefix
+        )
+        val encryptedFile = ZipTools.getEncryptedFile(context, filePath)
+        encryptedFile.openFileInput().use {
+            return it.readBytes()
+        }
+
+        return ByteArray(0)
     }
 
     open suspend fun writeFile(path: String, data: ByteBuffer): Boolean {
@@ -28,11 +34,12 @@ open class PolyOut(
 
     open suspend fun stat(path: String): MutableMap<String, String> {
         val fs = Preferences.getFileSystem(context)
-        var result = mutableMapOf<String, String>()
+        val result = mutableMapOf<String, String>()
         if (path == "") {
             return result
         }
-        val file = File(fs[path])
+        val filePath = path.removePrefix(fsPrefix)
+        val file = File(context.filesDir.absolutePath.plus("/$filePath"))
         result["name"] = file.name
         result["time"] = file.lastModified().toString()
         result["size"] = file.length().toString()
@@ -45,9 +52,15 @@ open class PolyOut(
         if (path == "") {
             return fs.keys.toTypedArray()
         }
-        val zip = ZipFile(File(fs[path]))
-        return zip.entries().toList().map {
-            path + "/" + it.name
-        }.toTypedArray()
+        val retList = mutableListOf<String>()
+        val filePath = path.removePrefix(fsPrefix)
+        File(
+            context.filesDir.absolutePath.plus("/$filePath")
+        ).walkTopDown().forEach {
+            retList.add(
+                it.relativeTo(context.filesDir).path
+            )
+        }
+        return retList.toTypedArray()
     }
 }

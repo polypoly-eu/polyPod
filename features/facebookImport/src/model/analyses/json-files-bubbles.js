@@ -38,10 +38,7 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
         this.active = true;
     }
 
-    render() {
-        if (!this.active) {
-            return "No Data!";
-        }
+    renderSummary() {
         return (
             <DataBubblesAll
                 data={this._filesMessagesCount}
@@ -53,9 +50,9 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
                             return d.data.zipEntry.endsWith(fileName);
                         }
                     );
-                    return importedFileIndex > -1 ? "#eb0000" : "#808080";
+                    return importedFileIndex > -1 ? "#fb8a89" : "#808080";
                 }}
-                textColor="black"
+                textColor="#0f1938"
             />
         );
     }

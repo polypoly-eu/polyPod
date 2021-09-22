@@ -1,39 +1,27 @@
 import React from "react";
+import BasicList from "../../components/basicList/basicList.jsx";
 
 import {
     anonymizeJsonEntityPath,
     jsonDataEntities,
+    removeEntryPrefix,
 } from "../../importer/importer-util.js";
 import allStructure from "../../static/allStructure";
+import ReportAnalysis from "./report-analysis.js";
 
-export default class UknownJSONFilesAnalysis {
+export default class UknownJSONFilesAnalysis extends ReportAnalysis {
     get title() {
-        return "Uknown JSON files";
+        return "Unknown JSON files";
     }
 
-    get id() {
-        return "uknown-json-files";
+    get reportData() {
+        return this._unknownFiles;
     }
 
-    get isForDataReport() {
-        return true;
-    }
-
-    get jsonReport() {
-        return {
-            id: this.id,
-            unknownFiles: this._unknownFiles,
-        };
-    }
-
-    async analyze({ id, zipFile }) {
-        this._missingEntryNames = [];
-        this.active = true;
-        if (!zipFile) return;
-
+    async analyze({ zipFile }) {
         const relevantEntries = await jsonDataEntities(zipFile);
         const anonymizedPaths = relevantEntries.map((each) =>
-            anonymizeJsonEntityPath(each.replace(`${id}/`, ""))
+            anonymizeJsonEntityPath(removeEntryPrefix(each))
         );
 
         this._unknownFiles = anonymizedPaths.filter(
@@ -43,12 +31,6 @@ export default class UknownJSONFilesAnalysis {
     }
 
     render() {
-        return (
-            <ul>
-                {this._unknownFiles.map((entry, index) => (
-                    <li key={index}>{entry}</li>
-                ))}
-            </ul>
-        );
+        return <BasicList items={this._unknownFiles} />;
     }
 }

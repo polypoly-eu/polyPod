@@ -9,7 +9,7 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
-import { Pod, PolyIn, PolyOut, PolyNav, Network } from "./api";
+import { Pod, PolyIn, PolyOut, PolyNav, Info, Network } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
 
@@ -133,6 +133,19 @@ export class DefaultPod implements Pod {
                 throw new Error("Not implemented");
             },
             removeFile: async (fileId: string) => {
+                throw new Error("Not implemented");
+            },
+        };
+    }
+    /**
+     * The [[Info]] interface. See [[Info]] for the description.
+     */
+    get info(): Info {
+        return {
+            getRuntime() {
+                throw new Error("Not implemented");
+            },
+            getVersion() {
                 throw new Error("Not implemented");
             },
         };

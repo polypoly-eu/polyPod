@@ -1,5 +1,6 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
+    Info,
     Matcher,
     Network,
     Pod,
@@ -181,26 +182,50 @@ class LocalStoragePolyOut implements PolyOut {
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
+class PodJsInfo implements Info {
+    async getRuntime(): Promise<string> {
+        return "podjs";
+    }
+
+    async getVersion(): Promise<string> {
+        return "¯\\_(ツ)_/¯";
+    }
+}
+
 class BrowserNetwork implements Network {
     async httpPost(
         url: string,
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<void> {
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function () {
-            if (request.readyState !== XMLHttpRequest.DONE) return;
-            console.log("network.httpPost: Received response:", this);
-        };
-        request.open("POST", url);
-        if (contentType) request.setRequestHeader("Content-Type", contentType);
-        if (authorization)
-            request.setRequestHeader(
-                "Authorization",
-                "Basic " + btoa(authorization)
-            );
-        request.send(body);
+    ): Promise<string | undefined> {
+        return new Promise((resolve) => {
+            const request = new XMLHttpRequest();
+
+            request.onreadystatechange = function () {
+                if (request.readyState !== XMLHttpRequest.DONE) return;
+                const status = request.status;
+                if (status < 200 || status > 299) {
+                    resolve(`Unexpected response status: ${status}`);
+                    return;
+                }
+                resolve();
+            };
+
+            request.onerror = function () {
+                resolve("Network error");
+            };
+
+            request.open("POST", url);
+            if (contentType)
+                request.setRequestHeader("Content-Type", contentType);
+            if (authorization)
+                request.setRequestHeader(
+                    "Authorization",
+                    "Basic " + btoa(authorization)
+                );
+            request.send(body);
+        });
     }
 }
 
@@ -316,5 +341,6 @@ export class BrowserPod implements Pod {
     public readonly polyIn = new LocalStoragePolyIn();
     public readonly polyOut = new LocalStoragePolyOut();
     public readonly polyNav = new BrowserPolyNav();
+    public readonly info = new PodJsInfo();
     public readonly network = new BrowserNetwork();
 }

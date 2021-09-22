@@ -4,10 +4,10 @@
     --color-contrast-white: #f7fafc;
 
     --background-dark: var(--color-dark);
-    --background-light: var(--color-red-50);
+    --background-light: var(--color-white);
 
     --text-white: var(--color-white);
-    --text-light: var(--color-red-50);
+    --text-light: var(--color-white);
     --text-dark: var(--color-indigo-950);
 
     --color-indigo-50: #f0f1fe;
@@ -89,6 +89,13 @@ button:focus {
     background-color: var(--color-red-300);
 }
 
+.btn-highlighted a {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+    margin: 0 !important;
+}
+
 .btn-secondary {
     border: 1px solid var(--color-indigo-950);
     box-sizing: border-box;
@@ -97,4 +104,13 @@ button:focus {
 
 .deactivated {
     opacity: 0.5;
+}
+
+.source {
+    color: var(--color-gray-400);
+    font-size: 12px;
+}
+
+strong {
+    font-weight: 600;
 }

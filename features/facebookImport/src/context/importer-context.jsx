@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
 import { importData } from "../importer/importer.js";
 
 export const ImporterContext = React.createContext();
 
 //all nav-states for checking purposes
-const navigationStates = ["importStatus"];
+const navigationStates = ["importStatus", "exploreScrollingProgress"];
 const importSteps = {
     loading: "loading",
     beginning: "beginning",
@@ -28,11 +28,29 @@ const fakeStorage = {
     removeFile: async () => {},
 };
 
-function updatePodNavigation(pod, history) {
+class FileImportError extends Error {
+    constructor(cause) {
+        super("Failed to import file");
+        this.name = "FileImportError";
+        this.cause = cause;
+    }
+}
+
+class RefreshFilesError extends Error {
+    constructor(cause) {
+        super("Failed to refresh files");
+        this.name = "RefreshFilesError";
+        this.cause = cause;
+    }
+}
+
+function updatePodNavigation(pod, history, handleBack, location) {
     pod.polyNav.actions = {
-        back: () => history.goBack(),
+        back: () => handleBack(),
     };
-    history.length > 1
+    history.length > 1 &&
+    location.pathname !== "/overview" &&
+    location.pathname !== "/import"
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
 }
@@ -72,13 +90,19 @@ async function writeImportStatus(pod, status) {
 export const ImporterProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [storage, setStorage] = useState(fakeStorage);
-    const [files, setFiles] = useState([]);
+    const [files, setFiles] = useState(null);
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
+    const [activeDetails, setActiveDetails] = useState(null);
+    const [globalError, setGlobalError] = useState(null);
+    const [reportResult, setReportResult] = useState(null);
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
+        exploreScrollingProgress: 0,
     });
+
+    const location = useLocation();
 
     storage.changeListener = async () => {
         const resolvedFiles = [];
@@ -97,7 +121,12 @@ export const ImporterProvider = ({ children }) => {
 
     const handleImportFile = async () => {
         const { polyNav } = pod;
-        await polyNav.importFile();
+        setFiles(null); // To show the loading overlay
+        try {
+            await polyNav.importFile();
+        } catch (error) {
+            setGlobalError(new FileImportError(error));
+        }
         refreshFiles();
     };
 
@@ -124,13 +153,17 @@ export const ImporterProvider = ({ children }) => {
     }
 
     function refreshFiles() {
-        storage.refreshFiles().then(async () => {
-            const resolvedFiles = [];
-            for (const file of storage.files) {
-                resolvedFiles.push(await file);
-            }
-            setFiles(resolvedFiles);
-        });
+        setFiles(null);
+        storage
+            .refreshFiles()
+            .then(async () => {
+                const resolvedFiles = [];
+                for (const file of storage.files) {
+                    resolvedFiles.push(await file);
+                }
+                setFiles(resolvedFiles);
+            })
+            .catch((error) => setGlobalError(new RefreshFilesError(error)));
     }
 
     function updateImportStatus(newStatus) {
@@ -138,17 +171,7 @@ export const ImporterProvider = ({ children }) => {
         writeImportStatus(pod, newStatus);
     }
 
-    async function initPod() {
-        const pod = await window.pod;
-        // TODO: This is a workaround for a race condition on Android, where
-        //       messages were being sent to the pod before it was fully
-        //       initialised. We have to solve the root cause of this.
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(pod);
-            }, 100);
-        });
-    }
+    const initPod = async () => await window.pod;
 
     //on startup
     useEffect(() => {
@@ -174,7 +197,7 @@ export const ImporterProvider = ({ children }) => {
     //when files changed run the importer first and create an account model first.
     //after there is an account the analyses are triggered.
     useEffect(() => {
-        if (files[0])
+        if (files?.[0])
             importData(files[0]).then((newFacebookAccount) =>
                 setFacebookAccount(newFacebookAccount)
             );
@@ -192,7 +215,7 @@ export const ImporterProvider = ({ children }) => {
     //on history change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, history);
+        updatePodNavigation(pod, history, handleBack, location);
         updateTitle(pod);
     });
 
@@ -210,6 +233,13 @@ export const ImporterProvider = ({ children }) => {
                 updateImportStatus,
                 fileAnalysis,
                 refreshFiles,
+                activeDetails,
+                setActiveDetails,
+                globalError,
+                setGlobalError,
+                facebookAccount,
+                reportResult,
+                setReportResult,
             }}
         >
             {children}

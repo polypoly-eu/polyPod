@@ -50,6 +50,10 @@ class PostOffice {
             handlePolyNav(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
+        case "info":
+            handleInfo(method: method, completionHandler: { response, error in
+                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
+            })
         case "network":
             handleNetwork(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
@@ -363,20 +367,42 @@ extension PostOffice {
 }
 
 extension PostOffice {
+    private func handleInfo(method: String, completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        switch method {
+        case "getRuntime":
+            handleInfoGetRuntime(completionHandler: completionHandler)
+        case "getVersion":
+            handleInfoGetVersion(completionHandler: completionHandler)
+        default:
+            print("Info method unknown:", method)
+        }
+    }
+    
+    private func handleInfoGetRuntime(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        completionHandler(.string(PodApi.shared.info.getRuntime()), nil)
+    }
+    
+    private func handleInfoGetVersion(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        completionHandler(.string(PodApi.shared.info.getVersion()), nil)
+    }
+}
+
+extension PostOffice {
     private func handleNetwork(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         switch method {
         case "httpPost":
-            handleNetworkHttpPost(args: args)
+            handleNetworkHttpPost(args: args, completionHandler: completionHandler)
         default:
             print("PolyNav method unknown:", method)
         }
     }
     
-    private func handleNetworkHttpPost(args: [Any]) {
+    private func handleNetworkHttpPost(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let url = args[0] as! String
         let body = args[1] as! String
         let contentType = args[2] as? String
         let authorization = args[3] as? String
-        PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
+        let error = PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
+        completionHandler(error != nil ? .string(error!) : .nil, nil)
     }
 }
