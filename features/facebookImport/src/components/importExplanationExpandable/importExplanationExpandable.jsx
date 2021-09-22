@@ -211,6 +211,19 @@ const ImportExplanationExpandable = ({
                                 __html: i18n.t(`import:heading.${section}`),
                             }}
                         />
+                        <img
+                            src="./images/angle-up.svg"
+                            alt="arrow-up"
+                            className={
+                                isSectionOpened(
+                                    section,
+                                    importStatus,
+                                    importSteps
+                                )
+                                    ? ""
+                                    : "rotate-180"
+                            }
+                        />
                     </div>
                     {isSectionOpened(section, importStatus, importSteps) ? (
                         <div className="section-body">

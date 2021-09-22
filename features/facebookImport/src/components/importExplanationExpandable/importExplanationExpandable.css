@@ -53,12 +53,16 @@
 
 .import-view .explanation-expandable .head .heading {
     margin-left: 18px;
-    width: 100px;
     font-size: 24px;
+    flex: 1 1 auto;
 }
 
 .import-view .explanation-expandable .head strong {
     font-weight: 600;
+}
+
+.import-view .explanation-expandable .head .rotate-180 {
+    transform: rotate(180deg);
 }
 
 .import-view .explanation-expandable .section-body {
