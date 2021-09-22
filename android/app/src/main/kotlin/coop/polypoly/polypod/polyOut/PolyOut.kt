@@ -2,10 +2,7 @@ package coop.polypoly.polypod.polyOut
 
 import android.content.Context
 import coop.polypoly.polypod.Preferences
-import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.ZipTools
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.io.File
 import java.nio.ByteBuffer
 
@@ -16,11 +13,9 @@ open class PolyOut(
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
 
-    private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
-
     open suspend fun readFile(
         path: String
-    ): ByteArray = withContext(Dispatchers.IO) {
+    ): ByteArray {
         if (path == "") {
             throw Error("Empty path in PolyOut.readFile")
         }
@@ -29,11 +24,11 @@ open class PolyOut(
         )
         ZipTools.getEncryptedFile(context, filePath).let {
             it.openFileInput().use {
-                return@withContext it.readBytes()
+                return it.readBytes()
             }
         }
 
-        return@withContext ByteArray(0)
+        return ByteArray(0)
     }
 
     open suspend fun writeFile(path: String, data: ByteBuffer): Boolean {
