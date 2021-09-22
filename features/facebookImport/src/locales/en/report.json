@@ -3,6 +3,12 @@
         "We are interested in how your data is structured!",
     "intro.text":
         "Your data schema may contain data types that even we don't know of yet. To shed more and more light on what Facebook knows about all of us, it would be awesome if you could share this schema with us. Of course, you only send the data schema, not the data itself.",
+    "learnMore":
+        "Learn more",
+    "learnMore.headline":
+        "What does unrecognized and missing data mean?",
+    "learnMore.text":
+        "Whenever Facebook captures a new type of data or restructures data, a new data schema is created. There exist a lot of them and yours is one we haven't explored yet. It would be awesome if you share your data schema with us. By doing so, you help to make transparent what Facebook knows about all of us. Of course, you only send the data schema, not the data itself.",
     "viewDetails":
         "View data report details",
     "sendLater":

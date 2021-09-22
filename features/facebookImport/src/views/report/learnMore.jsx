@@ -6,7 +6,7 @@ import i18n from "../../i18n.js";
 
 import "./report.css";
 
-const ReportView = () => {
+const ReportLearnMore = () => {
     const { fileAnalysis, setReportResult, handleBack } =
         useContext(ImporterContext);
     const unrecognizedData = fileAnalysis.unrecognizedData;
@@ -29,12 +29,15 @@ const ReportView = () => {
     return (
         <div className="report-view">
             <h1 className="report-view-title">
-                {i18n.t("report:intro.headline")}
+                {i18n.t("report:learnMore.headline")}
             </h1>
-            <p>{i18n.t("report:intro.text")}</p>
+            <p>{i18n.t("report:learnMore.text")}</p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
-                <RouteButton className="view-details" route="/report/learnmore">
-                    {i18n.t("report:learnMore")}
+                <RouteButton
+                    className="view-details"
+                    route="/report/learnmore/details"
+                >
+                    {i18n.t("report:viewDetails")}
                 </RouteButton>
                 <button className="send-later" onClick={handleBack}>
                     {i18n.t("report:sendLater")}
@@ -47,4 +50,4 @@ const ReportView = () => {
     );
 };
 
-export default ReportView;
+export default ReportLearnMore;
