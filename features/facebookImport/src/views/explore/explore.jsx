@@ -26,12 +26,14 @@ const AnalysisCard = ({
     return (
         <>
             <div className="analysis-card">
-                <h1>{analysis.title}</h1>
-                {analysis.label !== null && (
-                    <label>
-                        {i18n.t(`explore:analysis.label.${analysis.label}`)}
-                    </label>
-                )}
+                <div className="card-container">
+                    <h1>{analysis.title}</h1>
+                    {analysis.label !== null && (
+                        <label className="tech-demo">
+                            {i18n.t(`explore:analysis.label.${analysis.label}`)}
+                        </label>
+                    )}
+                </div>
                 <div className="summary-text">{analysis.renderSummary()}</div>
                 {analysis.renderDetails ? (
                     <RouteButton
