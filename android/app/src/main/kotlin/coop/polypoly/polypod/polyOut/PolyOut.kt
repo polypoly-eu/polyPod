@@ -3,6 +3,7 @@ package coop.polypoly.polypod.polyOut
 import android.content.Context
 import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.polyNav.ZipTools
+import org.apache.commons.io.FileUtils
 import java.io.File
 import java.nio.ByteBuffer
 
@@ -17,6 +18,10 @@ open class PolyOut(
         return context.filesDir.absolutePath + "/" + id.removePrefix(
             fsPrefix
         )
+    }
+
+    private fun pathToId(path: File, context: Context): String {
+        return fsPrefix + path.relativeTo(context.filesDir).path
     }
 
     open suspend fun readFile(
@@ -51,9 +56,13 @@ open class PolyOut(
             return statCache.get(id)!!
         }
         val file = File(idToPath(id, context))
+        if (file.isDirectory()) {
+            result["size"] = FileUtils.sizeOfDirectory(file).toString()
+        } else {
+            result["size"] = file.length().toString()
+        }
         result["name"] = fs.get(id) ?: file.name
         result["time"] = file.lastModified().toString()
-        result["size"] = file.length().toString()
         result["id"] = id
         statCache[id] = result
         return result
@@ -71,9 +80,7 @@ open class PolyOut(
         }
         val retList = mutableListOf<String>()
         File(idToPath(id, context)).walkTopDown().forEach {
-            retList.add(
-                fsPrefix + it.relativeTo(context.filesDir).path
-            )
+            retList.add(pathToId(it, context))
         }
         readdirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
