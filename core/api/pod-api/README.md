@@ -11,8 +11,8 @@ as reasonably possible, we try to stick to existing APIs, for example
 Features run in a sandboxed browsing context, which means they have access to a
 lot of the usual browser APIs, but things such as data storage and external
 communication need to go through the polyPod API, i.e. an implementation of the
-`Pod` interface as specified here. The concrete polyPod implementations, e.g. the
-polyPod for Android, exposes an object that implements the `Pod` interface to
+`Pod` interface as specified here. The concrete polyPod implementations, such as the
+polyPod for Android, expose objects that implement the `Pod` interface to
 the feature.
 
 ## Structure
