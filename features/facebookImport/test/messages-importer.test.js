@@ -119,7 +119,6 @@ describe("Import inbox messages", () => {
         const importingResult = await runMessagesImporter(zipFile);
         result = importingResult.result;
         facebookAccount = importingResult.facebookAccount;
-        console.log(result);
     });
 
     it("returns success status", () => expectImportSuccess(result));
@@ -129,4 +128,33 @@ describe("Import inbox messages", () => {
 
     it("has seven message", () =>
         expect(facebookAccount.messagesCount).toBe(7));
+
+    it("has correct message threads title", () => {
+        expect(
+            facebookAccount.messageThreadsGroup.messagesThreads[0].title
+        ).toBe("Duffy Duck");
+        expect(
+            facebookAccount.messageThreadsGroup.messagesThreads[1].title
+        ).toBe("Jane Doe");
+    });
+
+    it("has correct message count in threads", () => {
+        expect(
+            facebookAccount.messageThreadsGroup.messagesThreads[0].messagesCount
+        ).toBe(4);
+        expect(
+            facebookAccount.messageThreadsGroup.messagesThreads[1].messagesCount
+        ).toBe(3);
+    });
+
+    it("has correct word count in threads", () => {
+        expect(
+            facebookAccount.messageThreadsGroup.messagesThreads[0]
+                .totalWordCount
+        ).toBe(8);
+        expect(
+            facebookAccount.messageThreadsGroup.messagesThreads[1]
+                .totalWordCount
+        ).toBe(7);
+    });
 });

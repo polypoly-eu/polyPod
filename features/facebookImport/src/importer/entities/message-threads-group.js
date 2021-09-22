@@ -5,6 +5,10 @@ export default class MessageThreadsGroup {
         this._messagesThreads = [];
     }
 
+    get messagesThreads() {
+        return this._messagesThreads;
+    }
+
     get messageThreadsCount() {
         return this._messagesThreads.length;
     }
