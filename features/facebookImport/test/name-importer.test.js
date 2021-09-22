@@ -26,15 +26,18 @@ function createProfileNameData(firstName, middleName, lastName) {
     };
 }
 
+let zipFile = null;
+beforeEach(() => {
+    zipFile = new ZipFileMock();
+});
+
 test("Name importer - missing file", async () => {
-    const zipFile = new ZipFileMock();
     const { result } = await runNameImporter(zipFile);
 
     expectMissingFileError(result);
 });
 
 test("Name importer - wrong data key", async () => {
-    const zipFile = new ZipFileMock();
     const profileData = { profile_v1: { name: "Name" } };
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
@@ -44,7 +47,6 @@ test("Name importer - wrong data key", async () => {
 });
 
 test("Name importer - name with no special characters", async () => {
-    const zipFile = new ZipFileMock();
     const profileData = createProfileNameData("John", "", "Doe");
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
@@ -55,7 +57,6 @@ test("Name importer - name with no special characters", async () => {
 });
 
 test("Name importer - name with special characters", async () => {
-    const zipFile = new ZipFileMock();
     const profileData = createProfileNameData("John🦊", "", "Döe");
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
