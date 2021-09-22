@@ -104,6 +104,8 @@ describe("Import inbox messages", () => {
     let zipFile = null;
     let result = null;
     let facebookAccount = null;
+    let firstMessageThread = null;
+    let secondMessageThread = null;
 
     beforeAll(async () => {
         zipFile = new ZipFileMock();
@@ -119,6 +121,8 @@ describe("Import inbox messages", () => {
         const importingResult = await runMessagesImporter(zipFile);
         result = importingResult.result;
         facebookAccount = importingResult.facebookAccount;
+        [firstMessageThread, secondMessageThread] =
+            facebookAccount?.messageThreadsGroup?.messagesThreads;
     });
 
     it("returns success status", () => expectImportSuccess(result));
@@ -130,31 +134,55 @@ describe("Import inbox messages", () => {
         expect(facebookAccount.messagesCount).toBe(7));
 
     it("has correct message threads title", () => {
-        expect(
-            facebookAccount.messageThreadsGroup.messagesThreads[0].title
-        ).toBe("Duffy Duck");
-        expect(
-            facebookAccount.messageThreadsGroup.messagesThreads[1].title
-        ).toBe("Jane Doe");
+        expect(firstMessageThread.title).toBe("Duffy Duck");
+        expect(secondMessageThread.title).toBe("Jane Doe");
+    });
+
+    it("has correct message threads participants", () => {
+        expect(firstMessageThread.participants).toStrictEqual([
+            "Duffy Duck",
+            "John Doe",
+        ]);
+        expect(secondMessageThread.participants).toStrictEqual([
+            "Jane Doe",
+            "John Doe",
+        ]);
     });
 
     it("has correct message count in threads", () => {
-        expect(
-            facebookAccount.messageThreadsGroup.messagesThreads[0].messagesCount
-        ).toBe(4);
-        expect(
-            facebookAccount.messageThreadsGroup.messagesThreads[1].messagesCount
-        ).toBe(3);
+        expect(firstMessageThread.messagesCount).toBe(4);
+        expect(secondMessageThread.messagesCount).toBe(3);
     });
 
     it("has correct word count in threads", () => {
-        expect(
-            facebookAccount.messageThreadsGroup.messagesThreads[0]
-                .totalWordCount
-        ).toBe(8);
-        expect(
-            facebookAccount.messageThreadsGroup.messagesThreads[1]
-                .totalWordCount
-        ).toBe(7);
+        expect(firstMessageThread.totalWordCount).toBe(8);
+        expect(secondMessageThread.totalWordCount).toBe(7);
+    });
+
+    it("has correct calls count in threads", () => {
+        expect(firstMessageThread.callsCount).toBe(0);
+        expect(secondMessageThread.callsCount).toBe(1);
+    });
+
+    it("has correct calls duration in threads", () => {
+        expect(firstMessageThread.callsDuration).toBe(0);
+        expect(secondMessageThread.callsDuration).toBe(2877);
+    });
+
+    it("has correct message types in threads", () => {
+        expect(firstMessageThread.messageTypes).toStrictEqual(["Generic"]);
+        expect(secondMessageThread.messageTypes).toStrictEqual([
+            "Generic",
+            "Call",
+        ]);
+    });
+
+    it("has correct message timestamps in threads", () => {
+        expect(firstMessageThread.messageTimestamps).toStrictEqual([
+            1464365061323, 1462615596454, 1462031878036, 1462029860538,
+        ]);
+        expect(secondMessageThread.messageTimestamps).toStrictEqual([
+            1564365061323, 1562613246454, 1562331878036,
+        ]);
     });
 });
