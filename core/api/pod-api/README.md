@@ -12,7 +12,7 @@ Features run in a sandboxed browsing context, which means they have access to a
 lot of the usual browser APIs, but things such as data storage and external
 communication need to go through the polyPod API, i.e. an implementation of the
 `Pod` interface as specified here. The concrete polyPod implementations, e.g. the
-polyPod for Android, expose an objects that implements the `Pod` interface to
+polyPod for Android, exposes an object that implements the `Pod` interface to
 the feature.
 
 ## Structure
