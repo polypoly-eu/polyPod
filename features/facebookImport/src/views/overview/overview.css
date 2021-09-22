@@ -64,6 +64,7 @@ h4 {
     font-size: 14px;
     line-height: 200%;
     letter-spacing: -0.01em;
+    overflow-wrap: break-word;
     color: var(--color-gray-50);
     font-family: "Jost*";
     font-style: normal;

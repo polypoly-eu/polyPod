@@ -113,37 +113,32 @@ const ImportExplanationExpandable = ({
                 <div className="separator"></div>
                 <div className="x-divider">
                     {file ? (
-                        <>
-                            <div className="file-info">
-                                <h5>{i18n.t("import:import.chosen")}</h5>
-                                <p>ID {file.id}</p>
-                                <p>Size {file.size} Bytes</p>
-                            </div>
-                            <div className="align-right">
-                                <button
-                                    onClick={onRemoveFile}
-                                    className="delete-button"
-                                >
-                                    {i18n.t("import:import.delete")}
-                                </button>
-                            </div>
-                        </>
+                        <div className="file-info">
+                            <h5>{i18n.t("import:import.chosen")}</h5>
+                            <p>ID {file.id}</p>
+                            <p>Size {file.size} Bytes</p>
+                        </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
                     )}
                 </div>
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
-                    className={`btn-secondary ${file ? "deactivated" : ""}`}
+                    className={"btn-secondary"}
                     onClick={
                         file
-                            ? () => {}
+                            ? () => {
+                                  onRemoveFile();
+                                  onImportFile();
+                              }
                             : () => {
                                   onImportFile();
                               }
                     }
                 >
-                    {i18n.t("import:import.button.1")}
+                    {file
+                        ? i18n.t("import:import.button.1.different")
+                        : i18n.t("import:import.button.1")}
                 </button>
                 <button
                     className={`btn-highlighted ${file ? "" : "deactivated"}`}

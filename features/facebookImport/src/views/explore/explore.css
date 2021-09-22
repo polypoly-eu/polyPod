@@ -94,19 +94,32 @@
 .analysis-card:last-child {
     border-bottom: none;
 }
-
-.analysis-card > h1 {
+.analysis-card .card-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.analysis-card .card-container > h1 {
+    max-width: 320px;
     font-size: 25px;
     font-weight: 500;
     line-height: 28.8px;
     margin: 0 0 24px 0;
 }
 
-.analysis-card > label {
-    display: block;
-    text-align: right;
-    margin-top: -8px;
-    margin-bottom: 20px;
+.analysis-card .card-container > label {
+    width: 90px;
+    min-width: 82px;
+    height: 32px;
+    border-radius: 25px 0 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3E495B;
+    padding: 0px 12px;
+    margin-left: 12px;
+    margin-right: -20px;
+    font-size: 14px;
 }
 
 .analysis-card .summary-text {
