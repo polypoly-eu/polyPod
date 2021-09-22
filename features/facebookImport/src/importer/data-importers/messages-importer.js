@@ -1,3 +1,4 @@
+import { MissingMessagesFilesException } from "../failed-import-exception.js";
 import { createErrorResult, IMPORT_SUCCESS } from "../importer-status.js";
 import {
     readJSONFile,
@@ -44,6 +45,9 @@ export default class MessagesImporter {
 
     async import({ zipFile }, facebookAccount) {
         const messageThreadFiles = await this._extractJsonEntries(zipFile);
+        if (messageThreadFiles.length === 0) {
+            throw new MissingMessagesFilesException();
+        }
 
         // TODO: The same message thread can be in multiple files
         const messageThreadResults = await Promise.all(
