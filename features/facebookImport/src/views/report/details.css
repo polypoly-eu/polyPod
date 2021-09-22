@@ -1,12 +1,29 @@
-.report-details .report-card:first-child {
-    margin-top: 20px;
+.report-details {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 24px 24px 152px 24px;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    overflow: hidden scroll;
+}
+
+.report-details h1 {
+    text-align: center;
+    font-weight: 500;
+    margin: 8px auto 20px auto;
+    font-size: 24px;
+    line-height: 120%;
 }
 
 .report-details .report-card {
     max-width: var(--max-width);
     max-height: 440px;
     margin: 0 auto 12px auto;
-    padding: 12px 20px 20px 20px;
     border-radius: 8px;
     background-color: var(--background-light);
     color: var(--text-dark);
@@ -32,8 +49,9 @@
 }
 
 .report-details .report-card > h1 {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
+    text-align: left;
 }
 
 .report-details .report-card .list ul {
