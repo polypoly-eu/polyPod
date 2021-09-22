@@ -2,7 +2,10 @@ package coop.polypoly.polypod.polyOut
 
 import android.content.Context
 import coop.polypoly.polypod.Preferences
+import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.ZipTools
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.nio.ByteBuffer
 
@@ -10,47 +13,63 @@ open class PolyOut(
     val context: Context
 ) {
     private val fsPrefix = "polypod://"
+    private var readdirCache = mutableMapOf<String, Array<String>>()
+    private var statCache = mutableMapOf<String, MutableMap<String, String>>()
 
-    open suspend fun readFile(path: String): ByteArray {
+    private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+
+    open suspend fun readFile(
+        path: String
+    ): ByteArray = withContext(Dispatchers.IO) {
         if (path == "") {
             throw Error("Empty path in PolyOut.readFile")
         }
-        val fs = Preferences.getFileSystem(context)
-
         val filePath = context.filesDir.absolutePath + "/" + path.removePrefix(
             fsPrefix
         )
-        val encryptedFile = ZipTools.getEncryptedFile(context, filePath)
-        encryptedFile.openFileInput().use {
-            return it.readBytes()
+        ZipTools.getEncryptedFile(context, filePath).let {
+            it.openFileInput().use {
+                return@withContext it.readBytes()
+            }
         }
 
-        return ByteArray(0)
+        return@withContext ByteArray(0)
     }
 
     open suspend fun writeFile(path: String, data: ByteBuffer): Boolean {
         return true
     }
 
-    open suspend fun stat(path: String): MutableMap<String, String> {
+    open suspend fun stat(
+        path: String
+    ): MutableMap<String, String> {
         val fs = Preferences.getFileSystem(context)
         val result = mutableMapOf<String, String>()
         if (path == "") {
             return result
         }
+        if (statCache.contains(path)) {
+            return statCache.get(path)!!
+        }
         val filePath = path.removePrefix(fsPrefix)
         val file = File(context.filesDir.absolutePath.plus("/$filePath"))
-        result["name"] = file.name
+        result["name"] = fs.get(path) ?: file.name
         result["time"] = file.lastModified().toString()
         result["size"] = file.length().toString()
         result["id"] = path
+        statCache[path] = result
         return result
     }
+    open suspend fun readdir(
+        path: String
+    ): Array<String> {
 
-    open suspend fun readdir(path: String): Array<String> {
         val fs = Preferences.getFileSystem(context)
         if (path == "") {
             return fs.keys.toTypedArray()
+        }
+        if (readdirCache.contains(path)) {
+            return readdirCache.get(path)!!
         }
         val retList = mutableListOf<String>()
         val filePath = path.removePrefix(fsPrefix)
@@ -58,9 +77,10 @@ open class PolyOut(
             context.filesDir.absolutePath.plus("/$filePath")
         ).walkTopDown().forEach {
             retList.add(
-                it.relativeTo(context.filesDir).path
+                fsPrefix + it.relativeTo(context.filesDir).path
             )
         }
+        readdirCache[path] = retList.toTypedArray()
         return retList.toTypedArray()
     }
 }
