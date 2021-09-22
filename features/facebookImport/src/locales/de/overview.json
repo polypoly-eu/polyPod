@@ -6,5 +6,8 @@
     "size": "Größe",
     "explore": "Erkunden",
     "new.import": "Neuer Import",
-    "loading.data": "Deine Daten werden geladen"
+    "loading.data": "Deine Daten werden geladen",
+    "new.import.dialog": "Möchtest du wirklich die alte Datei mit einer neuen ersetzen?",
+    "new.import.dialog.back": "Zurück",
+    "new.import.dialog.continue": "Weiter"
 }
