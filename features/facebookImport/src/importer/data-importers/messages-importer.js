@@ -38,8 +38,8 @@ export default class MessagesImporter {
             const fileName = removeEntryPrefix(each.messageFile);
             facebookAccount.addImportedFileName(fileName);
         }
-        facebookAccount.messageThreads = successfullResults.map(
-            (result) => result.data
+        facebookAccount.messageThreadsGroup.addMessageThreadsFromData(
+            successfullResults.map((result) => result.data)
         );
     }
 

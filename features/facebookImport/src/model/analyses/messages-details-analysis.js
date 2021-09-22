@@ -18,26 +18,20 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
             return;
         }
 
-        this._messageThreadsCount = facebookAccount.messageThreads.length;
+        this._messageThreadsCount = facebookAccount.messageThreadsCount;
         this._messagesCount = facebookAccount.messagesCount;
 
         const usernames = new Set();
-        facebookAccount.forEachMessage((message) => {
-            if (!message?.content) {
-                return;
-            }
-            if (message?.sender_name) {
-                usernames.add(message.sender_name);
-            }
-            if (message?.type === "Call") {
-                this._callsCount++;
-                this._callsDuration += message.call_duration;
+
+        facebookAccount.forEachMessageThread((messageThread) => {
+            for (let participant of messageThread.participants) {
+                usernames.add(participant);
             }
 
-            const content = message.content;
-            const words = content.match(/\b(\w+)\b/g);
-            this._wordCount += words ? words.length : 1;
-            return message;
+            this._callsCount += messageThread.callsCount;
+            this._callsDuration += messageThread.callsDuration;
+
+            this._wordCount += messageThread.totalWordCount;
         });
 
         this._totalNumberOfBookPages = Math.round(this._wordCount / 500);
