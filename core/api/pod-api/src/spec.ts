@@ -59,6 +59,8 @@ export class PodSpec {
                     dataFactory.namedNode("http://example.org/g")
                 );
                 await assert.isRejected(polyIn.add(quad), /default/);
+                await assert.isRejected(polyIn.has(quad), /default/);
+                await assert.isRejected(polyIn.delete(quad), /default/);
             });
 
             it("add/select", async () => {
@@ -67,9 +69,23 @@ export class PodSpec {
                     fc.asyncProperty(fc.array(triple), async (quads) => {
                         await polyIn.add(...quads);
                         for (const quad of quads) {
-                            const selected = await polyIn.select(quad);
+                            const selected = await polyIn.match(quad);
                             assert.lengthOf(selected, 1);
                             assert.ok(quad.equals(selected[0]));
+                            assert.ok(await polyIn.has(quad));
+                        }
+                    })
+                );
+            });
+
+            it("add/delete", async () => {
+                const { triple } = gens(dataFactory);
+                await fc.assert(
+                    fc.asyncProperty(fc.array(triple), async (quads) => {
+                        await polyIn.add(...quads);
+                        for (const quad of quads) {
+                            await polyIn.delete(quad);
+                            assert.notOk(await polyIn.has(quad));
                         }
                     })
                 );
@@ -82,7 +98,9 @@ export class PodSpec {
 
         describe("polyOut", () => {
             describe("Filesystem", () => {
-                const pathGen = fc.hexaString(1, 30).map((path) => this.path + "/" + path);
+                const pathGen = fc
+                    .hexaString({ minLength: 1, maxLength: 30 })
+                    .map((path) => this.path + "/" + path);
 
                 async function skipIfExists(path: string): Promise<void> {
                     let cont = true;
@@ -110,6 +128,21 @@ export class PodSpec {
                                 polyOut.readFile(path),
                                 encodeUtf8(content)
                             );
+                        })
+                    );
+                });
+
+                it("readdir", async () => {
+                    assert.isFulfilled(polyOut.readdir(this.path));
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
+                            await skipIfExists(path);
+
+                            await polyOut.writeFile(path, content, { encoding: "utf-8" });
+                            const filesWithPath = (await polyOut.readdir(this.path)).map(
+                                (path) => this.path + "/" + path
+                            );
+                            assert.include(filesWithPath, path);
                         })
                     );
                 });

@@ -1,12 +1,12 @@
 {
-    "heading.request": "Daten <strong>anfordern</strong>",
-    "heading.download": "Daten <strong>herunterladen</strong>",
-    "heading.import": "Daten <strong>importieren</strong>",
-    "heading.explore": "Daten <strong>erkunden</strong>",
+    "heading.request": "<strong>Anfordern</strong>",
+    "heading.download": "<strong>Herunterladen</strong>",
+    "heading.import": "<strong>Importieren</strong>",
+    "heading.explore": "<strong>Erkunden</strong>",
     "intro.text.1": "Finden Sie heraus, was Facebook über Sie weiß!",
     "intro.text.2": "So laden Sie Ihre Facebook Daten in Ihren polyPod",
     "intro.info": "Es wird nur eine Kopie Ihrer Daten erstellt. Ihr Facebook Account bleibt unverändert!",
-    "scroll.down": "Scrollen Sie nach unten",
+    "scroll.down": "Scrollen Sie nach unten um zu lernen wie",
     "how.it.works": "So geht's",
     "request.1": "Um Ihre Daten in Ihren polyPod zu importieren, müssen Sie diese zuerst von Facebook anfordern.",
     "request.2": "Gehen Sie zu facebook.com/dyi.",
@@ -28,7 +28,6 @@
     "import.delete": "Entfernen",
     "import.button.1": "Datei auswählen",
     "import.button.2": "Importieren",
-    "explore.1": "Glückwunsch! Sie haben erfolgreich den ersten Schritt getan, sich die Kontrolle über Ihre Daten zurückzuholen!",
-    "explore.2": "Ihre Facebook-Daten wurden in Ihren polyPod importiert. Jetzt können Sie diese erkunden und sehen, was Facebook wirklich über Sie weiß.",
+    "explore.1": "Nachdem Sie Ihre Facebook-Daten  in Ihren polyPod importiert haben können Sie diese erkunden und sehen, was Facebook wirklich über Sie weiß.",
     "explore.button": "Entdecke deine Daten"
 }

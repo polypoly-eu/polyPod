@@ -1,7 +1,7 @@
 import { ZipFile } from "../model/storage.js";
 import { createErrorStatus, createSuccessStatus } from "./analysis-status.js";
 
-import DataBubblesAnalysis from "./analyses/data-points-bubbles-analysis.js";
+import DataStructureBubblesAnalysis from "./analyses/data-structure-bubbles-analysis.js";
 import DataGroupsAnalysis from "./analyses/data-groups-analysis.js";
 import ConnectedAdvertisersAnalysis from "./analyses/connected-advertisers-analysis.js";
 import InteractedWithAdvertisersAnalysis from "./analyses/interacted-advertisers-analysis.js";
@@ -39,19 +39,22 @@ import ActivitiesAnalysis from "./analyses/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/advertising-value-analysis.js";
 
 const subAnalyses = [
+    DataStructureBubblesAnalysis,
+    ActivitiesAnalysis,
+    MessagesAnalysis,
+    OffFacebookEventsAnalysis,
+    AdvertisingValueAnalysis,
+
     ExportTitleAnalysis,
     ExportSizeAnalysis,
-    DataBubblesAnalysis,
     DataChartsAnalysis,
     DataGroupsAnalysis,
     JsonFilesBubblesAnalysis,
     ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
-    OffFacebookEventsAnalysis,
     OffFacebookEventsTypesChartAnalysis,
     OffFacebookEventsTypesAnalysis,
-    MessagesAnalysis,
     MessagesDetailsAnalysis,
     EmailAddressesAnalysis,
     MessageThreadsAnalysis,
@@ -62,7 +65,6 @@ const subAnalyses = [
     PagesOverviewAnalysis,
     SesssionActivityLocationsAnalysis,
     ImportedJsonFilesAnalysis,
-    ActivitiesAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
@@ -70,8 +72,6 @@ const subAnalyses = [
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
-    ActivitiesAnalysis,
-    AdvertisingValueAnalysis,
     UnknownJSONFilesAnalysis,
     JSONFileNamesAnalysis,
     NoDataFoldersAnalysis,
@@ -84,15 +84,18 @@ const subAnalyses = [
     return ![
         ExportTitleAnalysis,
         ExportSizeAnalysis,
-        DataBubblesAnalysis,
-        DataChartsAnalysis,
         DataGroupsAnalysis,
         JsonFilesBubblesAnalysis,
+        AdInterestsAnalysis,
+        OffFacebookEventsTypesAnalysis,
+        MessageThreadsAnalysis,
+        MessagesActivityAnalysis,
 
+        ImportedJsonFilesAnalysis,
+        UnknownJSONFilesAnalysis,
+        JSONFileNamesAnalysis,
         NoDataFoldersAnalysis,
         UnknownMessageTypesAnalysis,
-        JSONFileNamesAnalysis,
-        UnknownJSONFilesAnalysis,
     ].includes(analysis);
 });
 

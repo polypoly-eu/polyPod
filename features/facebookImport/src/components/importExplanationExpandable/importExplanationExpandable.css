@@ -11,7 +11,7 @@
     max-width: var(--max-width);
     padding: 0 16px 16px 16px;
     box-sizing: border-box;
-    margin-bottom: 72px;
+    margin: 4px auto 72px auto;
 }
 
 .import-view .explanation-expandable .intro p {
@@ -30,30 +30,29 @@
     width: 100%;
     max-width: var(--max-width);
     height: 112px;
-    position: relative;
     border-top: 2px solid var(--color-gray-400);
     overflow: hidden;
     display: flex;
     align-items: center;
+    padding: 24px;
+    box-sizing: border-box;
 }
 
 .import-view .explanation-expandable .head .number {
-    width: 100px;
-    height: 100px;
-    top: -12px;
-    left: -20px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    position: absolute;
     font-size: 28px;
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--color-indigo-950);
     color: var(--text-light);
 }
 
 .import-view .explanation-expandable .head .heading {
-    margin-left: 30%;
+    margin-left: 18px;
     width: 100px;
     font-size: 24px;
 }
@@ -62,27 +61,16 @@
     font-weight: 600;
 }
 
-.import-view .explanation-expandable .head .request {
-    background-color: var(--color-indigo-300);
-}
-
-.import-view .explanation-expandable .head .download {
-    background-color: var(--color-indigo-500);
-}
-
-.import-view .explanation-expandable .head .import {
-    background-color: var(--color-indigo-700);
-}
-
-.import-view .explanation-expandable .head .explore {
-    background-color: var(--color-indigo-950);
-}
-
 .import-view .explanation-expandable .body {
     padding: 0 16px 16px 16px;
     width: 100%;
     max-width: var(--max-width);
     box-sizing: border-box;
+}
+
+.import-view .explanation-expandable .body .full-screen {
+    width: 100%;
+    max-width: var(--max-width);
 }
 
 .import-view .explanation-expandable .body .file-info p {

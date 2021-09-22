@@ -69,21 +69,18 @@ open class PolyNav(
             if (inputStream == null) {
                 throw Error("File copy error")
             }
-            context.openFileOutput(fileName, Context.MODE_PRIVATE).use {
-                // TODO: Encrypt file
-                inputStream.copyTo(it)
-            }
+            val newId = UUID.randomUUID().toString()
+            ZipTools.unzipAndEncrypt(inputStream, context, newId)
+            val fs = Preferences.getFileSystem(context).toMutableMap()
+            fs[fsPrefix + newId] = fileName
+            Preferences.setFileSystem(context, fs)
         }
-        val fs = Preferences.getFileSystem(context).toMutableMap()
-        val newId = fsPrefix + UUID.randomUUID().toString()
-        fs[newId] = context.filesDir.path + "/" + fileName
-        Preferences.setFileSystem(context, fs)
         return importedUrl
     }
 
     fun removeFile(id: String) {
         val fs = Preferences.getFileSystem(context).toMutableMap()
-        context.deleteFile(File(fs[id]).name)
+        File(context.filesDir.absolutePath.plus("/$id")).deleteRecursively()
         fs.remove(id)
         Preferences.setFileSystem(context, fs)
     }

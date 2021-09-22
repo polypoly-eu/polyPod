@@ -1,0 +1,10 @@
+{
+    "title":
+        "An error occurred",
+    "instructions.intro":
+        "If you want to help us solve this problem, please:",
+    "instructions.steps":
+        "Take a screenshot that includes the error message above\nVerify that it doesn't contain any private information\nSend us an email to {{emailAddress}}, with the screenshot, and a brief explanation of what you did before this error showed up",
+    "instructions.closing":
+        "Thank you!"
+}

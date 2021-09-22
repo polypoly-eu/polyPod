@@ -64,8 +64,6 @@ class Bubblewrap {
             return ExtendedData(classname: classname, propertyList: propertyList)
         case .nil:
             return nil
-        default:
-            break
         }
         assert(false)
         return nil

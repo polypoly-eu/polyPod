@@ -1,20 +1,12 @@
 {
     "intro.headline":
-        "We found something unusual in your data!",
+        "Wir sind an der Struktur Ihrer Daten interessiert!",
     "intro.text":
-        "Your data scheme contains data types that even us do not know yet existed. To shed more and more light on what Facebook knows about all of us, it would be awesome if you could share this discovery with us. Of course, you only send the data schema, not the data itself.",
-    "explanation.headline":
-        "What does unrecognized and missing data mean?",
-    "explanation.text":
-        "Whenever Facebook captures a new type of data or restructures data, a new data schema is created. There exist a lot of them and yours is one we haven't explored yet. It would be awesome if you share your data schema with us. By doing so, you help to make transparent what Facebook knows about all of us. Of course, you only send the data schema, not the data itself.",
-    "explanation.viewDetails":
-        "View data report details",
-    "explanation.sendLater":
-        "Send later",
-    "explanation.send":
-        "Send",
-    "success":
-        "Report sent successfully",
-    "error":
-        "Error while sending report."
+        "Ihr Datenschema beinhaltet möglicherweise Daten-Typen, die selbst wir noch nicht kennen. Damit wir immer transparenter machen können, was Facebook über uns alle weiß, wäre es großartig, wenn Sie Ihr Datenschema mit uns teilen. Selbstverständlich senden Sie nur das Datenschema, nicht die Daten selbst.",
+    "viewDetails":
+        "Details anschauen",
+    "sendLater":
+        "Nicht senden",
+    "send":
+        "Helfen und senden"
 }
