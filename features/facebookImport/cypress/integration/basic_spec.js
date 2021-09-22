@@ -13,7 +13,7 @@ before(async () => {
     const zipBlobWriter = new BlobWriter("application/zip");
     const zipWriter = new ZipWriter(zipBlobWriter);
     for (let [key, value] of commonStructure) {
-        if (!vakue.length) {
+        if (!value.length) {
             await zipWriter.add(
                 `${key}/${noDataFileName}`,
                 new TextReader("\n")
