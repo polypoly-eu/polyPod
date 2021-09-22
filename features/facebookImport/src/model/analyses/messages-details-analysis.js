@@ -30,7 +30,6 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
                 usernames.add(message.sender_name);
             }
             if (message?.type === "Call") {
-                //debugger;
                 this._callsCount++;
                 this._callsDuration += message.call_duration;
             }
