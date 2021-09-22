@@ -12,14 +12,14 @@ before(async () => {
     pod = await window.pod;
     const zipBlobWriter = new BlobWriter("application/zip");
     const zipWriter = new ZipWriter(zipBlobWriter);
-    for (let key in commonStructure) {
-        if (!commonStructure[key].length) {
+    for (let [key, value] of commonStructure) {
+        if (!vakue.length) {
             await zipWriter.add(
                 `${key}/${noDataFileName}`,
                 new TextReader("\n")
             );
         } else {
-            commonStructure[key].forEach(async (element) => {
+            value.forEach(async (element) => {
                 await zipWriter.add(
                     `${key}/${element}`,
                     new TextReader("[ 'foo' ]\n")
