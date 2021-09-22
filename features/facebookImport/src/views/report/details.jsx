@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
-import "./report.css";
+import "./details.css";
 
 export const ReportCard = ({ analysis }) => {
     return (

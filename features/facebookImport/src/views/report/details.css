@@ -1,0 +1,53 @@
+.report-details .report-card:first-child {
+    margin-top: 20px;
+}
+
+.report-details .report-card {
+    max-width: var(--max-width);
+    max-height: 440px;
+    margin: 0 auto 12px auto;
+    padding: 12px 20px 20px 20px;
+    border-radius: 8px;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    overflow: scroll;
+}
+
+.report-details .report-card-scrolling {
+    max-width: var(--max-width);
+    position:relative;
+    margin: auto;
+}
+
+.report-details .report-card-scrolling::after {
+    content: "";
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(#ffffff00 0%, #ffffff);
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    border-radius: 8px;
+
+}
+
+.report-details .report-card > h1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.report-details .report-card .list ul {
+    padding: 0 20px;
+    margin: 0;
+}
+
+.report-details .report-card .list li {
+    text-align: justify;
+    text-justify: distribute-all-lines;
+}
+
+.disabled > button,
+.disabled > div {
+    opacity: 0.5;
+    pointer-events: none;
+}
