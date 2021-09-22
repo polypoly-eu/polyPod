@@ -3,7 +3,7 @@ class FacebookAccount {
         this._importingResults = [];
         this._importedFileNames = [];
 
-        this._name = null;
+        this._name = "";
         this._preferredLanguage = [];
 
         this._offFacebookCompanies = [];
