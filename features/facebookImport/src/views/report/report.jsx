@@ -33,8 +33,8 @@ const ReportView = () => {
             </h1>
             <p>{i18n.t("report:intro.text")}</p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
-                <RouteButton className="view-details" route="/report/learnmore">
-                    {i18n.t("report:learnMore")}
+                <RouteButton className="view-details" route="/report/details">
+                    {i18n.t("report:viewDetails")}
                 </RouteButton>
                 <button className="send-later" onClick={handleBack}>
                     {i18n.t("report:sendLater")}
