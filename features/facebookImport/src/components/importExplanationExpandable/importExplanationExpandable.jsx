@@ -213,8 +213,7 @@ const ImportExplanationExpandable = ({
                         />
                     </div>
                     {isSectionOpened(section, importStatus, importSteps) ? (
-                        <div className="body">
-                            <div className="separator" />
+                        <div className="section-body">
                             {bodyContent[section]}
                         </div>
                     ) : null}
