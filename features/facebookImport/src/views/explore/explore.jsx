@@ -29,7 +29,7 @@ const AnalysisCard = ({
                 <div className="card-container">
                     <h1>{analysis.title}</h1>
                     {analysis.label !== null && (
-                        <label className="tech-demo">
+                        <label>
                             {i18n.t(`explore:analysis.label.${analysis.label}`)}
                         </label>
                     )}
