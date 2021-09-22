@@ -25,31 +25,23 @@ export default class MessagesAnalysis extends RootAnalysis {
         this._messagesThreadsData = [];
         const usernames = new Set();
         facebookAccount.forEachMessageThread((messageThread) => {
-            var wordCount = 0;
+            var wordCount = messageThread.totalWordCount;
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
 
-            messageThread.messages.forEach((message) => {
-                if (message?.sender_name) {
-                    usernames.add(message.sender_name);
-                }
-
-                if (!message?.content) {
-                    return;
-                }
-
-                const words = message.content.match(/\b(\w+)\b/g);
-                wordCount += words ? words.length : 1;
-
+            for (let participant of messageThread.participants) {
+                usernames.add(participant);
+            }
+            messageThread.forEachMessageTimestamp((messageTimestamp_ms) => {
                 if (
                     firstChatTimestamp === 0 ||
                     (firstChatTimestamp !== 0 &&
-                        message.timestamp_ms < firstChatTimestamp)
+                        messageTimestamp_ms < firstChatTimestamp)
                 ) {
-                    firstChatTimestamp = message.timestamp_ms;
+                    firstChatTimestamp = messageTimestamp_ms;
                 }
-                if (message.timestamp_ms > lastChatTimestamp) {
-                    lastChatTimestamp = message.timestamp_ms;
+                if (messageTimestamp_ms > lastChatTimestamp) {
+                    lastChatTimestamp = messageTimestamp_ms;
                 }
             });
 
@@ -60,7 +52,7 @@ export default class MessagesAnalysis extends RootAnalysis {
 
             this._messagesThreadsData.push({
                 title: messageThread.title,
-                count: messageThread.messages.length,
+                count: messageThread.messagesCount,
                 extraData: {
                     wordCount,
                     firstChatDate,

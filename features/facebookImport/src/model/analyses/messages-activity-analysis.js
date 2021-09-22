@@ -19,13 +19,12 @@ export default class MessagesActivityAnalysis extends RootAnalysis {
         for (let index = 0; index <= 23; index++) {
             messagesCountByHour[index] = 0;
         }
-
-        facebookAccount.forEachMessage((message) => {
-            if (message?.timestamp_ms) {
-                const creationDate = new Date(message.timestamp_ms);
+        facebookAccount.forEachMessageThread((messageThread) => {
+            messageThread.forEachMessageTimestamp((messageTimestamp_ms) => {
+                const creationDate = new Date(messageTimestamp_ms);
                 const hour = creationDate.getHours();
                 messagesCountByHour[hour]++;
-            }
+            });
         });
 
         this._messageByHourData = messagesCountByHour.map((count, index) => {

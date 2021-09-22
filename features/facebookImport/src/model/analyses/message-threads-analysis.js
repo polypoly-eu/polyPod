@@ -18,27 +18,20 @@ export default class MessageThreadsAnalysis extends RootAnalysis {
         this._messagesCount = facebookAccount.messagesCount;
         this._messagesThreadsData = [];
         facebookAccount.forEachMessageThread((messageThread) => {
-            var wordCount = 0;
+            var wordCount = messageThread.totalWordCount;
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
-            messageThread.messages.forEach((message) => {
-                if (!message?.content) {
-                    return;
-                }
 
-                const content = message.content;
-                const words = content.match(/\b(\w+)\b/g);
-                wordCount += words ? words.length : 1;
-
+            messageThread.forEachMessageTimestamp((messageTimestamp_ms) => {
                 if (
                     firstChatTimestamp === 0 ||
                     (firstChatTimestamp !== 0 &&
-                        message.timestamp_ms < firstChatTimestamp)
+                        messageTimestamp_ms < firstChatTimestamp)
                 ) {
-                    firstChatTimestamp = message.timestamp_ms;
+                    firstChatTimestamp = messageTimestamp_ms;
                 }
-                if (message.timestamp_ms > lastChatTimestamp) {
-                    lastChatTimestamp = message.timestamp_ms;
+                if (messageTimestamp_ms > lastChatTimestamp) {
+                    lastChatTimestamp = messageTimestamp_ms;
                 }
             });
 
@@ -49,7 +42,7 @@ export default class MessageThreadsAnalysis extends RootAnalysis {
 
             this._messagesThreadsData.push({
                 title: messageThread.title,
-                count: messageThread.messages.length,
+                count: messageThread.messagesCount,
                 extraData: {
                     wordCount,
                     firstChatDate,

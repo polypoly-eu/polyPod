@@ -14,66 +14,58 @@ export default class ActivitiesAnalysis extends RootAnalysis {
     }
 
     async analyze({ facebookAccount }) {
-        const activities = {
-            timestamp: [
-                ...facebookAccount.followedPages,
-                ...facebookAccount.friends,
-                ...facebookAccount.interactedAdvertisers,
-                ...facebookAccount.likedPages,
-                ...facebookAccount.receivedFriendRequests,
-                ...facebookAccount.recommendedPages,
-                ...facebookAccount.searches,
-                ...facebookAccount.unfollowedPages,
-            ],
-            timestamp_ms: [],
-        };
+        const activityDates = [
+            ...facebookAccount.followedPages,
+            ...facebookAccount.friends,
+            ...facebookAccount.interactedAdvertisers,
+            ...facebookAccount.likedPages,
+            ...facebookAccount.receivedFriendRequests,
+            ...facebookAccount.recommendedPages,
+            ...facebookAccount.searches,
+            ...facebookAccount.unfollowedPages,
+        ].map((each) => new Date(each.timestamp * 1000));
 
         //for nested structures
         facebookAccount.offFacebookCompanies.forEach((company) =>
-            activities.timestamp.push(...company.events)
+            activityDates.push(
+                ...company.events.map((each) => new Date(each.timestamp * 1000))
+            )
         );
 
-        facebookAccount.messageThreads.forEach((thread) =>
-            activities.timestamp_ms.push(...thread.messages)
+        facebookAccount.forEachMessageThread((thread) =>
+            activityDates.push(
+                ...thread.messageTimestamps.map(
+                    (timestamp_ms) => new Date(timestamp_ms)
+                )
+            )
         );
 
         let groupedActivities = { total: 0, values: {} };
-        for (let [timestampKey, activitiesValues] of Object.entries(
-            activities
-        )) {
-            for (let activity of activitiesValues) {
-                const timeStamp = activity[timestampKey];
 
-                const timeOfActivity = new Date(
-                    timeStamp.toString().length == 10
-                        ? timeStamp * 1000
-                        : timeStamp
-                );
-                const activityYear = timeOfActivity.getFullYear();
-                const activityMonth = timeOfActivity.getMonth();
-                if (
-                    groupedActivities?.values?.[activityYear]?.values?.[
-                        activityMonth
-                    ]
-                ) {
-                    groupedActivities.values[activityYear].values[
-                        activityMonth
-                    ]++;
-                    groupedActivities.values[activityYear].total++;
-                } else {
-                    if (!groupedActivities.values?.[activityYear]) {
-                        groupedActivities.values[activityYear] = {
-                            total: 1,
-                            values: {},
-                        };
-                    } else groupedActivities.values[activityYear].total++;
-                    groupedActivities.values[activityYear].values[
-                        activityMonth
-                    ] = 1;
-                }
-                groupedActivities.total++;
+        activityDates.forEach((date) => {
+            const activityYear = date.getFullYear();
+            const activityMonth = date.getMonth();
+            if (
+                groupedActivities?.values?.[activityYear]?.values?.[
+                    activityMonth
+                ]
+            ) {
+                groupedActivities.values[activityYear].values[activityMonth]++;
+                groupedActivities.values[activityYear].total++;
+            } else {
+                if (!groupedActivities.values?.[activityYear]) {
+                    groupedActivities.values[activityYear] = {
+                        total: 1,
+                        values: {},
+                    };
+                } else groupedActivities.values[activityYear].total++;
+                groupedActivities.values[activityYear].values[
+                    activityMonth
+                ] = 1;
             }
-        }
+            groupedActivities.total++;
+        });
+
         this._totalEvents = groupedActivities;
         this.active = groupedActivities.total > 0;
     }

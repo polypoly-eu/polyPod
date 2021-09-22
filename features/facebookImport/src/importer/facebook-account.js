@@ -1,3 +1,5 @@
+import MessageThreadsGroup from "./entities/message-threads-group.js";
+
 class FacebookAccount {
     constructor() {
         this._importingResults = [];
@@ -17,9 +19,10 @@ class FacebookAccount {
         this._recommendedPages = [];
         this._unfollowedPages = [];
         this._searches = [];
-        this._messageThreads = [];
         this._adminRecords = [];
         this._accountSessionActivities = [];
+
+        this._messageThreadsGroup = new MessageThreadsGroup();
     }
 
     get importedFileNames() {
@@ -53,35 +56,24 @@ class FacebookAccount {
         }, 0);
     }
 
+    get messageThreadsGroup() {
+        return this._messageThreadsGroup;
+    }
+
     get messageThreadsCount() {
-        return this.messageThreads.length;
+        return this._messageThreadsGroup.messageThreadsCount;
     }
 
     get messagesCount() {
-        return this.messageThreads.reduce((total, messageThread) => {
-            if (messageThread?.messages) {
-                return total + messageThread.messages.length;
-            }
-            return total;
-        }, 0);
+        return this._messageThreadsGroup.messagesCount;
     }
 
     get hasMessages() {
-        return this.messagesCount > 0;
+        return this._messageThreadsGroup.hasMessages;
     }
 
     forEachMessageThread(callback) {
-        for (const messageThread of this.messageThreads) {
-            callback(messageThread);
-        }
-    }
-
-    forEachMessage(callback) {
-        this.forEachMessageThread((messageThread) => {
-            for (const message of messageThread?.messages) {
-                callback(message);
-            }
-        });
+        this._messageThreadsGroup.forEachMessageThread(callback);
     }
 
     forEachOffFacebookEvent(callback) {
@@ -196,14 +188,6 @@ class FacebookAccount {
 
     set searches(searches) {
         this._searches = searches;
-    }
-
-    get messageThreads() {
-        return this._messageThreads;
-    }
-
-    set messageThreads(messageThreads) {
-        this._messageThreads = messageThreads;
     }
 
     get adminRecords() {
