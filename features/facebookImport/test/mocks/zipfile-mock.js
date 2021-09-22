@@ -1,3 +1,5 @@
+import { jsonStringifyWithUtfEscape } from "../../src/importer/json-encoding";
+
 export class ZipFileMock {
     constructor() {
         this.id = "polypod://de71f571-d90a-45e0-b007-d8f059e0541b";
@@ -27,5 +29,11 @@ export class ZipFileMock {
 
     addNamedEntry(fileName, stringContent) {
         this._entries[this.id + "/" + fileName] = stringContent;
+    }
+
+    addJsonEntry(fileName, jsonData) {
+        const escapedString = jsonStringifyWithUtfEscape(jsonData);
+        const encoded = new TextEncoder("utf-8").encode(escapedString);
+        this.addNamedEntry(fileName, encoded);
     }
 }

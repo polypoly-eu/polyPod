@@ -1,65 +1,66 @@
 "use strict";
 
-import NameImporter from "../src/importer/data-importers/name-importer";
-import FacebookAccount from "../src/importer/facebook-account";
-import { MissingFileImportException } from "../src/importer/failed-import-exception";
-import { runImporter } from "../src/importer/importer";
-import { IMPORT_ERROR, IMPORT_SUCCESS } from "../src/importer/importer-status";
-import { ZipFileMock } from "./mocks/ZipFileMock";
+import { ZipFileMock } from "./mocks/zipfile-mock";
+import { runNameImporter } from "./utils/data-importing";
+import {
+    expectImportSuccess,
+    expectInvalidContentError,
+    expectMissingFileError,
+} from "./utils/importer-assertions.js";
 
 const profileInformationFileName =
     "profile_information/profile_information.json";
 
-function expectMissingFileError(result) {
-    expect(result.status).toBe(IMPORT_ERROR);
-    expect(result.message).toBe(MissingFileImportException.name);
-    expect(result.error.name).toBe(MissingFileImportException.name);
-}
-
-function expectImportSuccess(result) {
-    expect(result.status).toBe(IMPORT_SUCCESS);
-}
-
-function addProfileData(profileData, zipFile) {
-    const serialized = JSON.stringify(profileData);
-    const encoded = new TextEncoder("utf-8").encode(serialized);
-    zipFile.addNamedEntry(profileInformationFileName, encoded);
+function createProfileNameData(firstName, middleName, lastName) {
+    return {
+        profile_v2: {
+            name: {
+                full_name: [firstName, middleName, lastName]
+                    .filter((each) => each.length !== 0)
+                    .join(" "),
+                first_name: firstName,
+                middle_name: middleName,
+                last_name: lastName,
+            },
+        },
+    };
 }
 
 test("Name importer - missing file", async () => {
     const zipFile = new ZipFileMock();
-    const facebookAccount = new FacebookAccount();
-
-    const result = await runImporter(
-        NameImporter,
-        zipFile.enrichedData(),
-        facebookAccount
-    );
+    const { result } = await runNameImporter(zipFile);
 
     expectMissingFileError(result);
 });
 
+test("Name importer - wrong data key", async () => {
+    const zipFile = new ZipFileMock();
+    const profileData = { profile_v1: { name: "Name" } };
+    zipFile.addJsonEntry(profileInformationFileName, profileData);
+
+    const { result } = await runNameImporter(zipFile);
+
+    expectInvalidContentError(result);
+});
+
 test("Name importer - name with no special characters", async () => {
     const zipFile = new ZipFileMock();
-    const facebookAccount = new FacebookAccount();
-    const profileData = {
-        profile_v2: {
-            name: {
-                full_name: "John Doe",
-                first_name: "John",
-                middle_name: "",
-                last_name: "Doe",
-            },
-        },
-    };
-    addProfileData(profileData, zipFile);
+    const profileData = createProfileNameData("John", "", "Doe");
+    zipFile.addJsonEntry(profileInformationFileName, profileData);
 
-    const result = await runImporter(
-        NameImporter,
-        zipFile.enrichedData(),
-        facebookAccount
-    );
+    const { result, facebookAccount } = await runNameImporter(zipFile);
 
     expectImportSuccess(result);
     expect(facebookAccount.name).toBe("John Doe");
+});
+
+test("Name importer - name with special characters", async () => {
+    const zipFile = new ZipFileMock();
+    const profileData = createProfileNameData("John🦊", "", "Döe");
+    zipFile.addJsonEntry(profileInformationFileName, profileData);
+
+    const { result, facebookAccount } = await runNameImporter(zipFile);
+
+    expectImportSuccess(result);
+    expect(facebookAccount.name).toBe("John🦊 Döe");
 });
