@@ -28,7 +28,7 @@ const ReportLearnMore = () => {
 
     return (
         <div className="report-view">
-            <h1 className="learn-more-title">
+            <h1 className="report-view-title">
                 {i18n.t("report:learnMore.headline")}
             </h1>
             <p>{i18n.t("report:learnMore.text")}</p>

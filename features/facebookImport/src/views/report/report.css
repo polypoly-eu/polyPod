@@ -12,7 +12,7 @@
     overflow: hidden scroll;
 }
 
-.report-view .report-view-title, .report-view .learn-more-title, .report-details h1 {
+.report-view .report-view-title, .report-details h1 {
     text-align: center;
     font-weight: 500;
     margin: 8px auto 20px auto;
@@ -26,15 +26,9 @@
     line-height: 28.8px;
 }
 
-.report-view .learn-more-title {
-    text-align: left;
-    margin-top: 8px;
-}
-
 .report-view p {
     margin: auto;
     max-width: var(--max-width);
-    font-size: 18px;
 }
 
 .report-view .button-area::before {
