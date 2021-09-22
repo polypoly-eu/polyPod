@@ -149,6 +149,9 @@ export const ImporterProvider = ({ children }) => {
             if (history.location.state) {
                 changeNavigationState(history.location.state);
             }
+            if (location.pathname === "/report/learnmore") {
+                history.goBack();
+            }
         }
     }
 
