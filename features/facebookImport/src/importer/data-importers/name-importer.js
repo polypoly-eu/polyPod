@@ -9,6 +9,6 @@ export default class NameImporter {
 
     async import({ id, zipFile }, facebookAccount) {
         const profileData = await this._readLanguageData(id, zipFile);
-        facebookAccount.name = profileData?.name?.full_name;
+        facebookAccount.name = profileData.name.full_name;
     }
 }

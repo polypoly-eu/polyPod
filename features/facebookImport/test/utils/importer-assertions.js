@@ -7,16 +7,18 @@ import {
     IMPORT_SUCCESS,
 } from "../../src/importer/importer-status";
 
-export function expectMissingFileError(result) {
+export function expectError(result, errorClass) {
     expect(result.status).toBe(IMPORT_ERROR);
-    expect(result.message).toBe(MissingFileImportException.name);
-    expect(result.error.name).toBe(MissingFileImportException.name);
+    expect(result.message).toBe(errorClass.name);
+    expect(result.error.name).toBe(errorClass.name);
+}
+
+export function expectMissingFileError(result) {
+    expectError(result, MissingFileImportException);
 }
 
 export function expectInvalidContentError(result) {
-    expect(result.status).toBe(IMPORT_ERROR);
-    expect(result.message).toBe(InvalidContentImportException.name);
-    expect(result.error.name).toBe(InvalidContentImportException.name);
+    expectError(result, InvalidContentImportException);
 }
 
 export function expectImportSuccess(result) {

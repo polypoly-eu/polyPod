@@ -3,6 +3,7 @@
 import { ZipFileMock } from "./mocks/zipfile-mock";
 import { runNameImporter } from "./utils/data-importing";
 import {
+    expectError,
     expectImportSuccess,
     expectInvalidContentError,
     expectMissingFileError,
@@ -44,6 +45,15 @@ test("Name importer - wrong data key", async () => {
     const { result } = await runNameImporter(zipFile);
 
     expectInvalidContentError(result);
+});
+
+test("Name importer - correct data key without correct data", async () => {
+    const profileData = { profile_v2: { name2: "Name" } };
+    zipFile.addJsonEntry(profileInformationFileName, profileData);
+
+    const { result } = await runNameImporter(zipFile);
+
+    expectError(result, TypeError);
 });
 
 test("Name importer - name with no special characters", async () => {
