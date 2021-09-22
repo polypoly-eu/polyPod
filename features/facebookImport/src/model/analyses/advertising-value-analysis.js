@@ -5,6 +5,10 @@ import i18n from "../../i18n.js";
 import AdvertisingValueMiniStory from "../../components/advertisingValueMiniStory/advertisingValueMiniStory.jsx";
 
 export default class AdvertisingValueAnalysis extends RootAnalysis {
+    get label() {
+        return RootAnalysis.Labels.NONE;
+    }
+
     get title() {
         return i18n.t("advertisingValueMiniStory:title");
     }

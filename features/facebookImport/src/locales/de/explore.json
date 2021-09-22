@@ -7,5 +7,6 @@
     "unrecognizedCard.headline": "Wir brauchen Ihre Hilfe!",
     "unrecognizedCard.text": "Ihre Datenstruktur enthält etwas, das uns interessiert. Bitte senden Sie uns einen - selbstverständlich annonymen - Bericht, damit wir Facebooks Datenschema besser verstehen können.",
     "unrecognizedCard.button": "Mehr erfahren",
-    "details.button": "Details ansehen"
+    "details.button": "Details ansehen",
+    "analysis.label.techDemo": "Tech Demo"
 }

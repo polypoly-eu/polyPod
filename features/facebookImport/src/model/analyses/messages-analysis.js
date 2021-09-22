@@ -5,6 +5,10 @@ import RootAnalysis from "./root-analysis";
 import BarChart from "../../components/dataViz/barChart.jsx";
 
 export default class MessagesAnalysis extends RootAnalysis {
+    get label() {
+        return RootAnalysis.Labels.NONE;
+    }
+
     get title() {
         return i18n.t("explore:messages.title");
     }

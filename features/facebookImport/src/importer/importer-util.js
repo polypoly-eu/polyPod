@@ -36,7 +36,12 @@ async function readJSONFile(dataFileName, zipFile, zipId = null) {
     });
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
+async function readJSONDataObject(
+    dataFileName,
+    dataKey,
+    zipFile,
+    zipId = null
+) {
     const rawData = await readJSONFile(dataFileName, zipFile, zipId);
 
     if (!(dataKey in rawData)) {
@@ -46,7 +51,17 @@ async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
         );
     }
 
-    const arrayData = rawData[dataKey];
+    return rawData[dataKey];
+}
+
+async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
+    const arrayData = await readJSONDataObject(
+        dataFileName,
+        dataKey,
+        zipFile,
+        zipId
+    );
+
     if (!Array.isArray(arrayData)) {
         throw new InvalidContentImportException(
             dataFileName,
@@ -105,6 +120,7 @@ function removeEntryPrefix(entryName) {
 
 export {
     readJSONFile,
+    readJSONDataObject,
     readJSONDataArray,
     anonymizeJsonEntityPath,
     relevantZipEntries,
