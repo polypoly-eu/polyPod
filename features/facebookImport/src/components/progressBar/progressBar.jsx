@@ -28,11 +28,7 @@ const ProgressBar = ({
         <div className="progress-bar" id="progress-bar">
             {importSections.map((section, index) => (
                 <div
-                    onClick={
-                        section === "explore"
-                            ? () => {}
-                            : () => onUpdateImportStatus(section)
-                    }
+                    onClick={() => onUpdateImportStatus(section)}
                     key={index}
                     className={`section`}
                 >
