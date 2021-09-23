@@ -16,6 +16,17 @@ export class ZipFileMock {
     async getContent(entry) {
         return this._entries[entry];
     }
+    async stat(entry) {
+        const entryContent = this._entries[entry];
+        return {
+            getId: () => entry,
+            getTime: () => "",
+            getName: () => entry.substr(this.id.length),
+            getSize: () => entryContent.length,
+            isFile: () => true,
+            isDirectory: () => false,
+        };
+    }
 
     enrichedData() {
         return {
