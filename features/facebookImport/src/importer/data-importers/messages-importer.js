@@ -76,16 +76,19 @@ export default class MessagesImporter {
 
         // TODO: The same message thread can be in multiple files
         const fileChunks = this._sliceIntoChunks(messageThreadFiles, 5);
-        const resultChunks = await Promise.all(
-            fileChunks.map(
-                async (files) =>
-                    await this._importMessageThreadsFromFiles(
-                        files,
+        const resultChunks = [];
+        for (let currentChunk of fileChunks) {
+            const resultChunk = await Promise.all(
+                fileChunks.map(
+                    this._importMessageThreadsFromFiles(
+                        currentChunk,
                         zipFile,
                         facebookAccount
                     )
-            )
-        );
+                )
+            );
+            resultChunks.push(resultChunk);
+        }
         const failedResults = resultChunks.flat();
 
         return failedResults.length > 0 ? failedResults : null;
