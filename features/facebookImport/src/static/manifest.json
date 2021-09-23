@@ -1,7 +1,7 @@
 {
     "name": "Facebook Data Importer",
     "author": "polypoly Cooperative",
-    "description": "Import and explore the data Facebook keeps about you.",
+    "description": "Facebook knows a lot about you. With the Facebook Importer you can load your data in three steps from Facebook into your polyPod and finally get an overview yourself.",
     "thumbnail": "images/thumbnail.png",
     "primaryColor": "#0f1938",
     "links": {
@@ -10,7 +10,8 @@
     },
     "translations": {
         "de": {
-            "author": "polypoly - Die Genossenschaft"
+            "author": "polypoly - Die Genossenschaft",
+            "description": "Facebook weiß viel über Sie. Mit dem Facebook Importer können Sie Ihre Daten in drei Schritten von Facebook in Ihren polyPod laden, damit auch Sie selbst endlich einen Überblick bekommen."
         }
     }
 }
