@@ -16,6 +16,7 @@ export class ZipFileMock {
     async getContent(entry) {
         return this._entries[entry];
     }
+
     async stat(entry) {
         const entryContent = this._entries[entry];
         return {
