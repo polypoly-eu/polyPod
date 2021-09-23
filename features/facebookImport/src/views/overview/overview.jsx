@@ -101,7 +101,10 @@ const Overview = () => {
                     }}
                     proceedButton={{
                         text: i18n.t("overview:new.import.dialog.continue"),
-                        onClick: () => handleRemoveFile(files[0].id),
+                        onClick: () => {
+                            updateImportStatus(importSteps.import);
+                            handleRemoveFile(files[0].id);
+                        },
                         route: "/import",
                         stateChange: { importStatus: importSteps.import },
                     }}
