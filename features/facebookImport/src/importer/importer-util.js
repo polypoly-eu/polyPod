@@ -26,6 +26,7 @@ async function readJSONFile(dataFileName, zipFile, zipId = null) {
     }
     const firstStat = await zipFile.stat(dataZipEntry);
 
+    // TODO: Figure out why we can't use only getSize()
     const fileSize =
         "size" in firstStat ? parseInt(firstStat.size) : firstStat.getSize();
     if (fileSize > FILE_SIZE_LIMIT) {
