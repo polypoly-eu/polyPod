@@ -1,5 +1,5 @@
 import {
-    FileToLargerException,
+    FileTooLargeException,
     InvalidContentImportException,
     MissingContentImportException,
     MissingFileImportException,
@@ -29,7 +29,7 @@ async function readJSONFile(dataFileName, zipFile, zipId = null) {
     const fileSize =
         "size" in firstStat ? parseInt(firstStat.size) : firstStat.getSize();
     if (fileSize > FILE_SIZE_LIMIT) {
-        throw new FileToLargerException(dataFileName);
+        throw new FileTooLargeException(dataFileName);
     }
 
     const rawContent = await zipFile.getContent(dataZipEntry);
