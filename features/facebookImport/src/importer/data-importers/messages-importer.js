@@ -4,6 +4,7 @@ import {
     readJSONFile,
     relevantZipEntries,
     removeEntryPrefix,
+    sliceIntoChunks,
 } from "../importer-util.js";
 
 export default class MessagesImporter {
@@ -64,20 +65,16 @@ export default class MessagesImporter {
         if (messageThreadFiles.length === 0) {
             throw new MissingMessagesFilesException();
         }
-
         // TODO: The same message thread can be in multiple files
         const fileChunks = sliceIntoChunks(messageThreadFiles, 5);
         const resultChunks = [];
         for (let currentChunk of fileChunks) {
-            const resultChunk = await Promise.all(
-                fileChunks.map(
-                    this._importMessageThreadsFromFiles(
-                        currentChunk,
-                        zipFile,
-                        facebookAccount
-                    )
-                )
+            const resultChunk = await this._importMessageThreadsFromFiles(
+                currentChunk,
+                zipFile,
+                facebookAccount
             );
+
             resultChunks.push(resultChunk);
         }
         const failedResults = resultChunks.flat();
