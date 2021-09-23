@@ -2,9 +2,9 @@
     "title":
         "Ein Fehler ist aufgetreten",
     "instructions.intro":
-        "Wenn du uns helfen willst, das Problem zu lösen, bitte:",
+        "Wenn Sie uns helfen möchten, das Problem zu lösen, bitte:",
     "instructions.steps":
-        "Mach' einen Screenshot auf dem die Meldung oben erkennbar ist\nStelle sicher, dass keine privaten Informationen darin vorkommen\nSende uns eine E-Mail an {{emailAddress}}, mit dem Screenshot, und einer kurzen Erklären, was passiert ist bevor diese Fehlermeldung erschien",
+        "Machen Sie einen Screenshot auf dem die Meldung oben erkennbar ist\nStellen Sie sicher, dass keine privaten Informationen darin vorkommen\nSenden Sie uns eine E-Mail an {{emailAddress}}, mit dem Screenshot, und einer kurzen Erklären, was passiert ist bevor diese Fehlermeldung erschien",
     "instructions.closing":
         "Danke!"
 }

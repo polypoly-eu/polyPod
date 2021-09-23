@@ -33,3 +33,10 @@ export class FileToLargerException extends FailedFileImportException {
         this.name = "FileToLargerException";
     }
 }
+
+export class MissingMessagesFilesException extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "MissingMessagesFilesException";
+    }
+}

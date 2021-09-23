@@ -4,7 +4,7 @@ import RootAnalysis from "./root-analysis.js";
 
 export default class EmailAddressesAnalysis extends RootAnalysis {
     get title() {
-        return "Email addresses";
+        return "Email addresses and phone numbers";
     }
 
     async analyze({ facebookAccount }) {
@@ -32,7 +32,9 @@ export default class EmailAddressesAnalysis extends RootAnalysis {
     renderSummary() {
         return (
             <BasicList
-                title={"Email addresses found in your export."}
+                title={
+                    "Email addresses and phone numbers found in your export."
+                }
                 items={[...this._emailAddresses]}
             />
         );
