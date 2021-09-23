@@ -1,6 +1,7 @@
-import NameImporter from "../../src/importer/data-importers/name-importer";
-import FacebookAccount from "../../src/importer/facebook-account";
-import { runImporter } from "../../src/importer/importer";
+import MessagesImporter from "../../src/importer/data-importers/messages-importer.js";
+import NameImporter from "../../src/importer/data-importers/name-importer.js";
+import FacebookAccount from "../../src/importer/facebook-account.js";
+import { runImporter } from "../../src/importer/importer.js";
 
 export async function runSingleImporter(importerClass, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -14,4 +15,8 @@ export async function runSingleImporter(importerClass, zipFile) {
 
 export async function runNameImporter(zipFile) {
     return runSingleImporter(NameImporter, zipFile);
+}
+
+export async function runMessagesImporter(zipFile) {
+    return runSingleImporter(MessagesImporter, zipFile);
 }
