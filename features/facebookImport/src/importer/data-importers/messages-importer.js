@@ -7,6 +7,15 @@ import {
 } from "../importer-util.js";
 
 export default class MessagesImporter {
+    _sliceIntoChunks(array, chunkSize) {
+        const chunks = [];
+        for (let i = 0; i < array.length; i += chunkSize) {
+            const chunk = array.slice(i, i + chunkSize);
+            chunks.push(chunk);
+        }
+        return chunks;
+    }
+
     _isJsonMessageFile(entryName) {
         const formattedEntryName = removeEntryPrefix(entryName);
         return /messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/[0-9_a-z]+\/message_[1-9][0-9]?.json$/.test(
@@ -43,6 +52,22 @@ export default class MessagesImporter {
         );
     }
 
+    async _importMessageThreadsFromFiles(
+        messageThreadFiles,
+        zipFile,
+        facebookAccount
+    ) {
+        const messageThreadResults = await Promise.all(
+            messageThreadFiles.map((messageFile) =>
+                this._readJSONFileWithStatus(messageFile, zipFile)
+            )
+        );
+        this._importMessageThread(facebookAccount, messageThreadResults);
+        return messageThreadResults.filter(
+            (result) => !(result.status === IMPORT_SUCCESS)
+        );
+    }
+
     async import({ zipFile }, facebookAccount) {
         const messageThreadFiles = await this._extractJsonEntries(zipFile);
         if (messageThreadFiles.length === 0) {
@@ -50,16 +75,19 @@ export default class MessagesImporter {
         }
 
         // TODO: The same message thread can be in multiple files
-        const messageThreadResults = await Promise.all(
-            messageThreadFiles.map((messageFile) =>
-                this._readJSONFileWithStatus(messageFile, zipFile)
+        const fileChunks = this._sliceIntoChunks(messageThreadFiles, 5);
+        const resultChunks = await Promise.all(
+            fileChunks.map(
+                async (files) =>
+                    await this._importMessageThreadsFromFiles(
+                        files,
+                        zipFile,
+                        facebookAccount
+                    )
             )
         );
-        this._importMessageThread(facebookAccount, messageThreadResults);
+        const failedResults = resultChunks.flat();
 
-        const failedResults = messageThreadResults.filter(
-            (result) => !(result.status === IMPORT_SUCCESS)
-        );
         return failedResults.length > 0 ? failedResults : null;
     }
 }
