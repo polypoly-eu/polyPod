@@ -26,3 +26,10 @@ export class InvalidContentImportException extends FailedFileImportException {
         this.name = "InvalidContentImportException";
     }
 }
+
+export class FileToLargerException extends FailedFileImportException {
+    constructor(dataFile, message) {
+        super(dataFile, message);
+        this.name = "FileToLargerException";
+    }
+}
