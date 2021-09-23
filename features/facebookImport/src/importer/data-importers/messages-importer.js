@@ -7,15 +7,6 @@ import {
 } from "../importer-util.js";
 
 export default class MessagesImporter {
-    _sliceIntoChunks(array, chunkSize) {
-        const chunks = [];
-        for (let i = 0; i < array.length; i += chunkSize) {
-            const chunk = array.slice(i, i + chunkSize);
-            chunks.push(chunk);
-        }
-        return chunks;
-    }
-
     _isJsonMessageFile(entryName) {
         const formattedEntryName = removeEntryPrefix(entryName);
         return /messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/[0-9_a-z]+\/message_[1-9][0-9]?.json$/.test(
@@ -75,7 +66,7 @@ export default class MessagesImporter {
         }
 
         // TODO: The same message thread can be in multiple files
-        const fileChunks = this._sliceIntoChunks(messageThreadFiles, 5);
+        const fileChunks = sliceIntoChunks(messageThreadFiles, 5);
         const resultChunks = [];
         for (let currentChunk of fileChunks) {
             const resultChunk = await Promise.all(
