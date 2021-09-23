@@ -5,7 +5,7 @@ import {
     MissingFileImportException,
 } from "./failed-import-exception";
 
-const FILE_SIZE_LIMIT = 5 * 1048576;
+const FILE_SIZE_LIMIT = 5 * 1024 * 1024;
 
 async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
