@@ -6,7 +6,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    padding: 24px 24px 152px 24px;
+    padding: 24px;
     border-top: 1px inset #a9b6c6;
     box-sizing: border-box;
     overflow: hidden scroll;
