@@ -14,7 +14,6 @@
 .report-details .report-card table {
     display: block;
     overflow-x: scroll;
-    overflow-y: hidden;
 }
 
 .report-details .report-card > h1 {
