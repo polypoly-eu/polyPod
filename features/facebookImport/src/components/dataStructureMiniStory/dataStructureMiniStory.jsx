@@ -21,6 +21,10 @@ const DataStructureMiniStory = ({ data }) => {
         setSelectedFolder(newSelectedFolder);
     };
 
+    const handleBubbleClick = (_, node) => {
+        setSelectedFolder(node.data.title);
+    };
+
     const bubbleColor = (bubbles) => {
         if (bubbles.data.title === selectedFolder) {
             return dataBubblesLightColor;
@@ -48,6 +52,7 @@ const DataStructureMiniStory = ({ data }) => {
                     height={bubbleVizHeight}
                     bubbleColor={bubbleColor}
                     textColor={dataBubblesDarkColor}
+                    onBubbleClick={handleBubbleClick}
                 />
             </div>
             <div className="data-structure">
