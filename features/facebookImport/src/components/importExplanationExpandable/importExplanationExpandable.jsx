@@ -161,14 +161,7 @@ const ImportExplanationExpandable = ({
                 />
                 <p>{i18n.t("import:explore.1")}</p>
                 {file ? (
-                    <RouteButton
-                        className="btn-highlighted"
-                        onClick={() =>
-                            onUpdateImportStatus(importSteps.finished)
-                        }
-                        stateChange={{ importStatus: importSteps.finished }}
-                        route="/"
-                    >
+                    <RouteButton className="btn-highlighted" route="/">
                         {i18n.t("import:explore.button")}
                     </RouteButton>
                 ) : (
