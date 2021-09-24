@@ -7,15 +7,8 @@ import i18n from "../../i18n.js";
 
 import "./explore.css";
 
-const PopUpMessage = ({ children, handleClosePopUp }) => {
-    return (
-        <div className="pop-up">
-            <div className="pop-up-message">{children}</div>
-            <div className="close-icon" onClick={handleClosePopUp}>
-                x
-            </div>
-        </div>
-    );
+const PopUpMessage = ({ children, reportResultAnswer }) => {
+    return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
 };
 
 const AnalysisCard = ({
@@ -80,32 +73,37 @@ const UnrecognizedCard = () => {
 };
 
 const ExploreView = () => {
-    const {
-        navigationState,
-        fileAnalysis,
-        setActiveDetails,
-        reportResult,
-        setReportResult,
-    } = useContext(ImporterContext);
+    const { navigationState, fileAnalysis, setActiveDetails, reportResult } =
+        useContext(ImporterContext);
 
     const [scrollingProgress, setScrollingProgress] = useState(
         navigationState.exploreScrollingProgress
     );
     const exploreRef = useRef();
 
-    const handleCloseReportResult = () => {
-        setReportResult(null);
-    };
-
     const renderReportResult = () =>
         reportResult !== null && (
-            <PopUpMessage handleClosePopUp={handleCloseReportResult}>
+            <PopUpMessage
+                reportResultAnswer={
+                    reportResult ? " successfully" : " unsuccessfully"
+                }
+            >
                 {reportResult ? (
-                    i18n.t("explore:report.success")
+                    <>
+                        <img
+                            src="./images/check-circle.svg"
+                            alt="check circle"
+                        />
+                        <div>{i18n.t("explore:report.success")}</div>
+                    </>
                 ) : (
-                    <span className="unsuccessfully">
-                        {i18n.t("explore:report.error")}
-                    </span>
+                    <>
+                        <img
+                            src="./images/times-circle.svg"
+                            alt="check circle"
+                        />
+                        <div>{i18n.t("explore:report.error")}</div>
+                    </>
                 )}
             </PopUpMessage>
         );
@@ -115,7 +113,7 @@ const ExploreView = () => {
             return <Loading message={i18n.t("explore:loading")} />;
         return (
             <div>
-                <UnrecognizedCard />
+                {reportResult ? "" : <UnrecognizedCard />}
                 {fileAnalysis.analyses.map((analysis, index) => (
                     <AnalysisCard
                         analysis={analysis}

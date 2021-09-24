@@ -58,30 +58,25 @@
 
 .explore-view  .pop-up {
     width: 100%;
+    height: 56px;
     display: flex;
-    justify-content: space-between;
-    background-color: #fff5f540;
-    padding: 4px 0;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.explore-view  .pop-up .pop-up-message {
-    margin-left: 4px;
-    width: 90%;
+.explore-view  .pop-up img {
+    margin-right: 8px;
 }
 
-.explore-view .pop-up .close-icon {
-    background: var(--background-light);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    line-height: 18px;
-    text-align: center;
-    color: var(--text-dark);
-    margin-right: 4px;
+.explore-view .unsuccessfully {
+    background-color: var(--color-red-200);
+      color: var(--color-red-900);
 }
 
-.explore-view .pop-up .unsuccessfully {
-      color: var(--color-red-300);
+.explore-view .successfully {
+    background-color: var(--color-green-200);
+      color: var(--color-green-800);
 }
 
 .analysis-card {
