@@ -9,7 +9,6 @@ import serve from "rollup-plugin-serve";
 
 const fallbackURL = "http://localhost:8000";
 const fallbackAuthorization = "username:password";
-
 export default (commandLineArgs) => {
     return {
         input: "src/facebookImporter.jsx",
@@ -44,6 +43,7 @@ export default (commandLineArgs) => {
             }),
             resolve(),
             replace({
+                preventAssignment: true,
                 "process.env.NODE_ENV": JSON.stringify("development"),
                 "process.env.POLYPOD_POLYPEDIA_REPORT_URL": JSON.stringify(
                     process.env.POLYPOD_POLYPEDIA_REPORT_URL || fallbackURL
@@ -60,5 +60,16 @@ export default (commandLineArgs) => {
             commandLineArgs.configServe ? serve("dist") : null,
         ],
         external: ["react", "react-dom"],
+        onwarn: (warning) => {
+            // overwite the default warning function
+            if (
+                warning.code === "CIRCULAR_DEPENDENCY" &&
+                warning.cycle[0].match(/d3-/)
+            ) {
+                return;
+            } else {
+                console.warn(warning);
+            }
+        },
     };
 };
