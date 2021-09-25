@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
+import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
+import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import i18n from "../../i18n.js";
@@ -15,22 +17,17 @@ const Overview = () => {
         importSteps,
     } = useContext(ImporterContext);
 
-    const facebookHeader = (
-        <div className="header">
-            <h3>Facebook</h3>
-            <p>{i18n.t("overview:fb.product")}</p>
-            <p className="gray">{i18n.t("overview:internet")}</p>
-            <div className="separator"></div>
-        </div>
-    );
+    const [showNewImportDialog, setShowNewImportDialog] = useState(false);
+
+    if (files === null)
+        return <Loading message={i18n.t("overview:loading.data")} />;
 
     return (
         <div className="overview">
-            {facebookHeader}
             {Object.values(files).length ? (
                 <>
                     <div className="details">
-                        <p>Name: {files[0].name}</p>
+                        <h1>{files[0].name}</h1>
                         <p>
                             {i18n.t("overview:imported.time")} {files[0].time}
                         </p>
@@ -70,16 +67,12 @@ const Overview = () => {
                             >
                                 {i18n.t("overview:explore")}
                             </RouteButton>
-                            <RouteButton
+                            <button
                                 className="btn secondary"
-                                route="/import"
-                                stateChange={{
-                                    importStatus: importSteps.import,
-                                }}
-                                onClick={() => handleRemoveFile(files[0].id)}
+                                onClick={() => setShowNewImportDialog(true)}
                             >
                                 {i18n.t("overview:new.import")}
-                            </RouteButton>
+                            </button>
                         </div>
                     </div>
                 </>
@@ -99,6 +92,24 @@ const Overview = () => {
                     </RouteButton>
                 </div>
             )}
+            {showNewImportDialog ? (
+                <PolypolyDialog
+                    message={i18n.t("overview:new.import.dialog")}
+                    backButton={{
+                        text: i18n.t("overview:new.import.dialog.back"),
+                        onClick: () => setShowNewImportDialog(false),
+                    }}
+                    proceedButton={{
+                        text: i18n.t("overview:new.import.dialog.continue"),
+                        onClick: () => {
+                            updateImportStatus(importSteps.import);
+                            handleRemoveFile(files[0].id);
+                        },
+                        route: "/import",
+                        stateChange: { importStatus: importSteps.import },
+                    }}
+                />
+            ) : null}
         </div>
     );
 };

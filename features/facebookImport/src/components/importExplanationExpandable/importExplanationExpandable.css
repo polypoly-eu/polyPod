@@ -11,7 +11,7 @@
     max-width: var(--max-width);
     padding: 0 16px 16px 16px;
     box-sizing: border-box;
-    margin-bottom: 72px;
+    margin: 4px auto 72px auto;
 }
 
 .import-view .explanation-expandable .intro p {
@@ -29,93 +29,65 @@
 .import-view .explanation-expandable .head {
     width: 100%;
     max-width: var(--max-width);
-    height: 112px;
-    position: relative;
-    border-top: 2px solid var(--color-gray-400);
+    height: 96px;
+    border-top: 1px solid var(--color-gray-400);
     overflow: hidden;
     display: flex;
     align-items: center;
+    padding: 24px;
+    box-sizing: border-box;
 }
 
 .import-view .explanation-expandable .head .number {
-    width: 100px;
-    height: 100px;
-    top: -12px;
-    left: -20px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    position: absolute;
     font-size: 28px;
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--color-indigo-950);
     color: var(--text-light);
 }
 
 .import-view .explanation-expandable .head .heading {
-    margin-left: 30%;
-    width: 100px;
+    margin-left: 18px;
     font-size: 24px;
+    flex: 1 1 auto;
 }
 
 .import-view .explanation-expandable .head strong {
     font-weight: 600;
 }
 
-.import-view .explanation-expandable .head .request {
-    background-color: var(--color-indigo-300);
+.import-view .explanation-expandable .head .rotate-180 {
+    transform: rotate(180deg);
 }
 
-.import-view .explanation-expandable .head .download {
-    background-color: var(--color-indigo-500);
-}
-
-.import-view .explanation-expandable .head .import {
-    background-color: var(--color-indigo-700);
-}
-
-.import-view .explanation-expandable .head .explore {
-    background-color: var(--color-indigo-950);
-}
-
-.import-view .explanation-expandable .body {
-    padding: 0 16px 16px 16px;
+.import-view .explanation-expandable .section-body {
+    padding: 26px 16px 16px 16px;
     width: 100%;
     max-width: var(--max-width);
     box-sizing: border-box;
+    border-top: 1px solid var(--color-gray-400);
 }
 
-.import-view .explanation-expandable .body .file-info p {
+.import-view .explanation-expandable .section-body .full-screen {
+    width: 100%;
+    max-width: var(--max-width);
+}
+
+.import-view .explanation-expandable .section-body .file-info p {
     font-size: 14px;
     color: var(--color-indigo-600);
     margin: 0 0 2px 0;
 }
 
-.import-view .explanation-expandable .body .x-divider {
+.import-view .explanation-expandable .section-body .x-divider {
     display: flex;
     flex-direction: row;
     margin: 0;
-}
-
-.import-view .explanation-expandable .align-right {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-bottom: 0;
-}
-
-.import-view .explanation-expandable .body .delete-button {
-    background-color: #ffffff;
-    color: var(--color-indigo-600);
-    font-weight: 600;
-    font-size: 14px;
-    border: 1px solid var(--color-indigo-600);
-    box-sizing: border-box;
-    border-radius: 4px;
-    padding: 4px 16px;
-    width: 112px;
-    height: 32px;
 }
 
 .import-view .explanation-expandable .separator {
@@ -145,30 +117,30 @@
     );
 }
 
-.import-view .explanation-expandable .body * {
+.import-view .explanation-expandable .section-body * {
     margin-bottom: 16px;
 }
 
-.import-view .explanation-expandable .body p {
+.import-view .explanation-expandable .section-body p {
     margin-top: 0;
 }
 
-.import-view .explanation-expandable .body {
+.import-view .explanation-expandable .section-body {
     line-height: 120%;
     letter-spacing: -0.01em;
     font-size: 20px;
 }
 
-.import-view .explanation-expandable .body h4,
+.import-view .explanation-expandable .section-body h4,
 h5 {
     color: var(--color-indigo-600);
     margin-top: 0;
 }
 
-.import-view .explanation-expandable .body h4 {
+.import-view .explanation-expandable .section-body h4 {
     font-size: 24px;
 }
 
-.import-view .explanation-expandable .body h5 {
+.import-view .explanation-expandable .section-body h5 {
     font-weight: 500;
 }

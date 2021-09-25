@@ -48,6 +48,11 @@ const ImportExplanationExpandable = ({
     const bodyContent = {
         request: (
             <>
+                <img
+                    src="./images/request-illustration.svg"
+                    alt="request-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:request.1")}</p>
                 <InfoBox textContent={i18n.t("import:request.info.1")} />
                 <div className="separator"></div>
@@ -58,8 +63,8 @@ const ImportExplanationExpandable = ({
                 <img src="./images/document.svg" alt="document" />
                 <p>{i18n.t("import:request.4")}</p>
                 <img
-                    src="./images/json.svg"
-                    className="translucent-sides"
+                    src="./images/import-settings.png"
+                    className="full-screen"
                     alt="select-json"
                 />
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
@@ -73,6 +78,11 @@ const ImportExplanationExpandable = ({
         ),
         download: (
             <>
+                <img
+                    src="./images/download-illustration.svg"
+                    alt="download-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:download.1")}</p>
                 <InfoBox textContent={i18n.t("import:download.info")} />
                 <div className="separator"></div>
@@ -94,41 +104,41 @@ const ImportExplanationExpandable = ({
         ),
         import: (
             <>
+                <img
+                    src="./images/import-illustration.svg"
+                    alt="import-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:import")}</p>
                 <div className="separator"></div>
                 <div className="x-divider">
                     {file ? (
-                        <>
-                            <div className="file-info">
-                                <h5>{i18n.t("import:import.chosen")}</h5>
-                                <p>ID {file.id}</p>
-                                <p>Size {file.size} Bytes</p>
-                            </div>
-                            <div className="align-right">
-                                <button
-                                    onClick={onRemoveFile}
-                                    className="delete-button"
-                                >
-                                    {i18n.t("import:import.delete")}
-                                </button>
-                            </div>
-                        </>
+                        <div className="file-info">
+                            <h5>{i18n.t("import:import.chosen")}</h5>
+                            <p>ID {file.id}</p>
+                            <p>Size {file.size} Bytes</p>
+                        </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
                     )}
                 </div>
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
-                    className={`btn-secondary ${file ? "deactivated" : ""}`}
+                    className={"btn-secondary"}
                     onClick={
                         file
-                            ? () => {}
+                            ? () => {
+                                  onRemoveFile();
+                                  onImportFile();
+                              }
                             : () => {
                                   onImportFile();
                               }
                     }
                 >
-                    {i18n.t("import:import.button.1")}
+                    {file
+                        ? i18n.t("import:import.button.1.different")
+                        : i18n.t("import:import.button.1")}
                 </button>
                 <button
                     className={`btn-highlighted ${file ? "" : "deactivated"}`}
@@ -144,17 +154,14 @@ const ImportExplanationExpandable = ({
         ),
         explore: (
             <>
+                <img
+                    src="./images/explore-illustration.svg"
+                    alt="explore-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:explore.1")}</p>
-                <p>{i18n.t("import:explore.2")}</p>
                 {file ? (
-                    <RouteButton
-                        className="btn-highlighted"
-                        onClick={() =>
-                            onUpdateImportStatus(importSteps.finished)
-                        }
-                        stateChange={{ importStatus: importSteps.finished }}
-                        route="/"
-                    >
+                    <RouteButton className="btn-highlighted" route="/">
                         {i18n.t("import:explore.button")}
                     </RouteButton>
                 ) : (
@@ -192,10 +199,22 @@ const ImportExplanationExpandable = ({
                                 __html: i18n.t(`import:heading.${section}`),
                             }}
                         />
+                        <img
+                            src="./images/angle-up.svg"
+                            alt="arrow-up"
+                            className={
+                                isSectionOpened(
+                                    section,
+                                    importStatus,
+                                    importSteps
+                                )
+                                    ? ""
+                                    : "rotate-180"
+                            }
+                        />
                     </div>
                     {isSectionOpened(section, importStatus, importSteps) ? (
-                        <div className="body">
-                            <div className="separator" />
+                        <div className="section-body">
                             {bodyContent[section]}
                         </div>
                     ) : null}

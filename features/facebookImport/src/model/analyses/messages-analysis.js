@@ -5,6 +5,10 @@ import RootAnalysis from "./root-analysis";
 import BarChart from "../../components/dataViz/barChart.jsx";
 
 export default class MessagesAnalysis extends RootAnalysis {
+    get label() {
+        return RootAnalysis.Labels.NONE;
+    }
+
     get title() {
         return i18n.t("explore:messages.title");
     }
@@ -21,31 +25,23 @@ export default class MessagesAnalysis extends RootAnalysis {
         this._messagesThreadsData = [];
         const usernames = new Set();
         facebookAccount.forEachMessageThread((messageThread) => {
-            var wordCount = 0;
+            var wordCount = messageThread.totalWordCount;
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
 
-            messageThread.messages.forEach((message) => {
-                if (message?.sender_name) {
-                    usernames.add(message.sender_name);
-                }
-
-                if (!message?.content) {
-                    return;
-                }
-
-                const words = message.content.match(/\b(\w+)\b/g);
-                wordCount += words ? words.length : 1;
-
+            for (let participant of messageThread.participants) {
+                usernames.add(participant);
+            }
+            messageThread.forEachMessageTimestamp((messageTimestamp_ms) => {
                 if (
                     firstChatTimestamp === 0 ||
                     (firstChatTimestamp !== 0 &&
-                        message.timestamp_ms < firstChatTimestamp)
+                        messageTimestamp_ms < firstChatTimestamp)
                 ) {
-                    firstChatTimestamp = message.timestamp_ms;
+                    firstChatTimestamp = messageTimestamp_ms;
                 }
-                if (message.timestamp_ms > lastChatTimestamp) {
-                    lastChatTimestamp = message.timestamp_ms;
+                if (messageTimestamp_ms > lastChatTimestamp) {
+                    lastChatTimestamp = messageTimestamp_ms;
                 }
             });
 
@@ -56,7 +52,7 @@ export default class MessagesAnalysis extends RootAnalysis {
 
             this._messagesThreadsData.push({
                 title: messageThread.title,
-                count: messageThread.messages.length,
+                count: messageThread.messagesCount,
                 extraData: {
                     wordCount,
                     firstChatDate,
@@ -86,7 +82,7 @@ export default class MessagesAnalysis extends RootAnalysis {
         return (
             <>
                 <p>
-                    {i18n.t("messagesMinistory:number.chats", {
+                    {i18n.t("messagesMiniStory:number.chats", {
                         number_chats: this._totalUsernamesCount,
                     })}
                 </p>
@@ -96,13 +92,13 @@ export default class MessagesAnalysis extends RootAnalysis {
                     footerContent={({ extraData }) => (
                         <>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMinistory:first.chat")}
+                                {i18n.t("messagesMiniStory:first.chat")}
                                 {extraData.firstChatDate
                                     ? extraData.firstChatDate.toDateString()
                                     : "unknown"}
                             </div>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMinistory:last.interaction")}
+                                {i18n.t("messagesMiniStory:last.interaction")}
                                 {extraData.lastChatDate
                                     ? extraData.lastChatDate.toDateString()
                                     : "unknown"}

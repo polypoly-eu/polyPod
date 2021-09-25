@@ -1,7 +1,13 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-const DataBubbles = ({ data, width, height, drawLeafs }) => {
+const DataBubbles = ({
+    data,
+    width,
+    height,
+    drawLeafs,
+    onBubbleClick = () => {},
+}) => {
     const bubbleRef = useRef();
     const edgePadding = 5;
 
@@ -37,7 +43,8 @@ const DataBubbles = ({ data, width, height, drawLeafs }) => {
             .data(root.leaves())
             .enter()
             .append("g")
-            .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`);
+            .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`)
+            .on("click", onBubbleClick);
 
         if (drawLeafs) {
             drawLeafs(leaf, bubbleContainer);

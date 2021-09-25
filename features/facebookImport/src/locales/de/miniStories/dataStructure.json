@@ -1,0 +1,5 @@
+{
+    "title": "Struktur Ihrer Daten",
+    "summary": "Von deinen gesamten Facebook-Daten analysieren wir derzeit nur die folgenden {{amount_of_folders}} Kategorien und {{amount_of_files}} zugehörige Dateneinträge.",
+    "folder.info": "{{selected_folder}} Kategorie: {{amount_of_files}} Dateneinträge."
+}

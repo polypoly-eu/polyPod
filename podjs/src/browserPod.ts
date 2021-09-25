@@ -159,7 +159,41 @@ class LocalStoragePolyOut implements PolyOut {
     }
 
     stat(id: string): Promise<Stats> {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
+            const parts = id.split("/");
+            if (parts.length > 3) {
+                const zipId = `${parts[0]}//${parts[2]}`;
+                const dataUrl = localStorage.getItem(zipId);
+                if (!dataUrl) {
+                    reject(new Error(`File not found: ${zipId}`));
+                    return;
+                }
+                const reader = new zip.ZipReader(
+                    new zip.Data64URIReader(dataUrl)
+                );
+                const entryPath = id.substring(zipId.length + 1);
+                reader.getEntries().then((entries) => {
+                    const zipEntry = entries.find(
+                        (entry) => entry.filename == entryPath
+                    );
+                    if (!zipEntry) {
+                        reject(new Error(`Zip entry not found: ${entryPath}`));
+                        return;
+                    }
+                    const modal: Stats = {
+                        getId: () => id,
+                        getSize: () => zipEntry.uncompressedSize,
+                        getTime: () => "",
+                        getName: () => zipEntry.filename,
+                        isFile: () => !zipEntry.directory,
+                        isDirectory: () => zipEntry.directory,
+                    };
+
+                    resolve(modal);
+                });
+                return;
+            }
+
             files = new Map<string, Stats>(
                 JSON.parse(
                     localStorage.getItem(BrowserPolyNav.filesKey) || "[]"

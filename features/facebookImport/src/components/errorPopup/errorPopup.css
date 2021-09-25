@@ -2,10 +2,15 @@
     display: block;
     position: absolute;
     top: 16px;
-    left: 0;
-    right: 0;
-    padding: 8px;
-    background: red;
+    left: 16px;
+    right: 16px;
+    padding: 20px;
+    background: #FFB2B3; /* TODO: use var */
+    color: #0F1938; /* TODO: use var */
+}
+
+.error-popup h1 {
+    text-align: center;
 }
 
 .error-popup a {
@@ -13,7 +18,7 @@
 }
 
 .error-popup pre {
-    border: 1px solid white;
+    border: 1px solid #0f1938;
     padding: 8px;
     overflow-wrap: break-word;
     white-space: pre-wrap;
@@ -21,5 +26,12 @@
 }
 
 .error-popup button {
-    background: black;
+    display: block;
+    width: 265px;
+    height: 40px;
+    margin: 12px auto 0 auto;
+    border-radius: 4px;
+    background: #0f1938;
+    color: white;
+    font-size: 16px;
 }
