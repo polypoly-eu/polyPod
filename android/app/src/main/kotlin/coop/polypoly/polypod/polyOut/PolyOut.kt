@@ -13,11 +13,13 @@ open class PolyOut(
     private val fsPrefix = "polypod://"
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
-
-    private fun idToPath(id: String, context: Context): String {
-        return context.filesDir.absolutePath + "/" + id.removePrefix(
-            fsPrefix
-        )
+    companion object {
+        private val fsPrefix = "polypod://"
+        fun idToPath(id: String, context: Context): String {
+            return context.filesDir.absolutePath + "/" + id.removePrefix(
+                fsPrefix
+            )
+        }
     }
 
     private fun pathToId(path: File, context: Context): String {

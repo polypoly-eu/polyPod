@@ -7,6 +7,7 @@ import android.provider.OpenableColumns
 import android.webkit.WebMessage
 import android.webkit.WebView
 import coop.polypoly.polypod.Preferences
+import coop.polypoly.polypod.polyOut.PolyOut
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import java.io.File
@@ -86,7 +87,7 @@ open class PolyNav(
 
     fun removeFile(id: String) {
         val fs = Preferences.getFileSystem(context).toMutableMap()
-        File(context.filesDir.absolutePath.plus("/$id")).deleteRecursively()
+        File(PolyOut.idToPath(id, context)).deleteRecursively()
         fs.remove(id)
         Preferences.setFileSystem(context, fs)
     }
