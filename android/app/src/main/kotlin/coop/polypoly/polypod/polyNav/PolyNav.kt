@@ -8,7 +8,7 @@ import android.webkit.WebMessage
 import android.webkit.WebView
 import coop.polypoly.polypod.Preferences
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.async
 import java.io.File
 import java.util.UUID
 import kotlin.collections.HashSet
@@ -69,7 +69,7 @@ open class PolyNav(
                     )
             }
         }
-        coroutineScope.launch {
+        coroutineScope.async {
             contentResolver?.openInputStream(importedUrl).use { inputStream ->
                 if (inputStream == null) {
                     throw Error("File import error")
@@ -80,7 +80,7 @@ open class PolyNav(
                 Preferences.setFileSystem(context, fs)
                 ZipTools.unzipAndEncrypt(inputStream, context, newId)
             }
-        }
+        }.await()
         return importedUrl
     }
 
