@@ -7,10 +7,11 @@ import { expect } from "@jest/globals";
 
 let storage;
 let pod;
+const filePath = "/poly";
 
 beforeAll(() => {
     const aDataset = dataset();
-    const volume = new Volume().promises;
+    const volume = Volume.fromJSON({ filePath: "pod" }).promises;
     pod = new DefaultPod(aDataset, volume, fetch);
     storage = new Storage(pod);
 });
