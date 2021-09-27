@@ -116,7 +116,6 @@ const ImportExplanationExpandable = ({
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
                             <p>ID {file.id}</p>
-                            <p>Size {file.size} Bytes</p>
                         </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
