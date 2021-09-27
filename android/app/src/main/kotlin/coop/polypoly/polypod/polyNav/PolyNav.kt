@@ -7,9 +7,12 @@ import android.provider.OpenableColumns
 import android.webkit.WebMessage
 import android.webkit.WebView
 import coop.polypoly.polypod.Preferences
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import java.io.File
 import java.util.UUID
 import kotlin.collections.HashSet
+import kotlin.coroutines.EmptyCoroutineContext
 
 open class PolyNav(
     private val webView: WebView,
@@ -18,6 +21,7 @@ open class PolyNav(
 ) {
     private val registeredActions = HashSet<String>()
     private val fsPrefix = "polypod://"
+    private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
 
     open fun setActiveActions(actions: Array<String>) {
         registeredActions.clear()
@@ -65,15 +69,17 @@ open class PolyNav(
                     )
             }
         }
-        contentResolver?.openInputStream(importedUrl).use { inputStream ->
-            if (inputStream == null) {
-                throw Error("File copy error")
+        coroutineScope.launch {
+            contentResolver?.openInputStream(importedUrl).use { inputStream ->
+                if (inputStream == null) {
+                    throw Error("File copy error")
+                }
+                val newId = UUID.randomUUID().toString()
+                val fs = Preferences.getFileSystem(context).toMutableMap()
+                fs[fsPrefix + newId] = fileName
+                Preferences.setFileSystem(context, fs)
+                ZipTools.unzipAndEncrypt(inputStream, context, newId)
             }
-            val newId = UUID.randomUUID().toString()
-            ZipTools.unzipAndEncrypt(inputStream, context, newId)
-            val fs = Preferences.getFileSystem(context).toMutableMap()
-            fs[fsPrefix + newId] = fileName
-            Preferences.setFileSystem(context, fs)
         }
         return importedUrl
     }
