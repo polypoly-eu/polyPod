@@ -8,12 +8,20 @@ import { expect } from "@jest/globals";
 let storage;
 let pod;
 const filePath = "/poly";
+let volume;
 
 beforeAll(() => {
     const aDataset = dataset();
-    const volume = Volume.fromJSON({ filePath: "pod" }).promises;
+    volume = Volume.fromJSON({ filePath: "pod" }).promises;
     pod = new DefaultPod(aDataset, volume, fetch);
     storage = new Storage(pod);
+});
+
+describe("Tests underlying storage", () => {
+    it("Can retrieve mock file", async () => {
+        console.log(await volume.readFile("poly"));
+        expect(await volume.readFile(filePath)).toBeDefined();
+    });
 });
 
 describe("Tests file storage", () => {
