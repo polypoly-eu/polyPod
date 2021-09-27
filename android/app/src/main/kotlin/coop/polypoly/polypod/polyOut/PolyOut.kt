@@ -16,14 +16,25 @@ open class PolyOut(
     companion object {
         private val fsPrefix = "polypod://"
         fun idToPath(id: String, context: Context): String {
-            return context.filesDir.absolutePath + "/" + id.removePrefix(
+            if (Preferences.currentFeatureName == null) {
+                throw Error("Cannot execute without a feature")
+            }
+            val pureId = id.removePrefix(
                 fsPrefix
-            )
+            ).removePrefix(Preferences.currentFeatureName!!).removePrefix("/")
+
+            return context.filesDir.absolutePath + "/" +
+                Preferences.currentFeatureName + "/" + pureId
         }
     }
 
     private fun pathToId(path: File, context: Context): String {
-        return fsPrefix + path.relativeTo(context.filesDir).path
+        return fsPrefix + path.relativeTo(
+            File(
+                context.filesDir.absolutePath + "/" +
+                    Preferences.currentFeatureName
+            )
+        ).path
     }
 
     open suspend fun readFile(

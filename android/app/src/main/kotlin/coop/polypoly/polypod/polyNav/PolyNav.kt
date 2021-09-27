@@ -79,7 +79,10 @@ open class PolyNav(
                 val fs = Preferences.getFileSystem(context).toMutableMap()
                 fs[fsPrefix + newId] = fileName
                 Preferences.setFileSystem(context, fs)
-                ZipTools.unzipAndEncrypt(inputStream, context, newId)
+                val featureName = Preferences.currentFeatureName
+                    ?: throw Error("Cannot import for unknown feature")
+                val targetPath = "$featureName/$newId"
+                ZipTools.unzipAndEncrypt(inputStream, context, targetPath)
             }
         }.await()
         return importedUrl
