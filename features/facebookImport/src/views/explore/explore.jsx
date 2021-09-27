@@ -73,13 +73,22 @@ const UnrecognizedCard = () => {
 };
 
 const ExploreView = () => {
-    const { navigationState, fileAnalysis, setActiveDetails, reportResult } =
-        useContext(ImporterContext);
+    const {
+        navigationState,
+        fileAnalysis,
+        setActiveDetails,
+        reportResult,
+        setReportResult,
+    } = useContext(ImporterContext);
 
     const [scrollingProgress, setScrollingProgress] = useState(
         navigationState.exploreScrollingProgress
     );
     const exploreRef = useRef();
+
+    const handleCloseReportResult = () => {
+        setReportResult(null);
+    };
 
     const renderReportResult = () =>
         reportResult !== null && (
@@ -90,19 +99,21 @@ const ExploreView = () => {
             >
                 {reportResult ? (
                     <>
-                        <img
-                            src="./images/check-circle.svg"
-                            alt="check circle"
-                        />
                         <div>{i18n.t("explore:report.success")}</div>
+                        <img
+                            src="./images/close_green.svg"
+                            alt="close"
+                            onClick={handleCloseReportResult}
+                        />
                     </>
                 ) : (
                     <>
-                        <img
-                            src="./images/times-circle.svg"
-                            alt="check circle"
-                        />
                         <div>{i18n.t("explore:report.error")}</div>
+                        <img
+                            src="./images/close_red.svg"
+                            alt="close"
+                            onClick={handleCloseReportResult}
+                        />
                     </>
                 )}
             </PopUpMessage>
@@ -113,7 +124,7 @@ const ExploreView = () => {
             return <Loading message={i18n.t("explore:loading")} />;
         return (
             <div>
-                {reportResult ? "" : <UnrecognizedCard />}
+                <UnrecognizedCard />
                 {fileAnalysis.analyses.map((analysis, index) => (
                     <AnalysisCard
                         analysis={analysis}
