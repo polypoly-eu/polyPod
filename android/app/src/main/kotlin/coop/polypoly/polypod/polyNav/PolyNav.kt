@@ -72,7 +72,7 @@ open class PolyNav(
         coroutineScope.launch {
             contentResolver?.openInputStream(importedUrl).use { inputStream ->
                 if (inputStream == null) {
-                    throw Error("File copy error")
+                    throw Error("File import error")
                 }
                 val newId = UUID.randomUUID().toString()
                 val fs = Preferences.getFileSystem(context).toMutableMap()
