@@ -71,7 +71,12 @@ open class PolyNav(
                 throw Error("File copy error")
             }
             val newId = UUID.randomUUID().toString()
-            ZipTools.unzipAndEncrypt(inputStream, context, newId)
+            var targetPath = newId
+            val featureName = Preferences.currentFeatureName
+            if (featureName != "") {
+                targetPath = "$featureName/$newId"
+            }
+            ZipTools.unzipAndEncrypt(inputStream, context, targetPath)
             val fs = Preferences.getFileSystem(context).toMutableMap()
             fs[fsPrefix + newId] = fileName
             Preferences.setFileSystem(context, fs)
