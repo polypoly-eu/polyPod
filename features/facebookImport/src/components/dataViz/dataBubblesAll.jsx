@@ -15,6 +15,7 @@ const DataTypeBubbleAll = ({
     textColor,
     opacity = 1,
     showValues = true,
+    onBubbleClick = () => {},
 }) => {
     const smallBubblesRadius = 20;
     const bigBubblesRadius = 50;
@@ -57,6 +58,7 @@ const DataTypeBubbleAll = ({
             width={width}
             height={height}
             drawLeafs={drawBubblesLeafs}
+            onBubbleClick={onBubbleClick}
         ></DataBubbles>
     );
 };

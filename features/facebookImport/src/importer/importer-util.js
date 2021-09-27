@@ -1,8 +1,11 @@
 import {
+    FileTooLargeException,
     InvalidContentImportException,
     MissingContentImportException,
     MissingFileImportException,
 } from "./failed-import-exception";
+
+const FILE_SIZE_LIMIT = 5 * 1024 * 1024;
 
 async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
@@ -21,6 +24,15 @@ async function readJSONFile(dataFileName, zipFile, zipId = null) {
     if (!dataZipEntry) {
         throw new MissingFileImportException(dataFileName);
     }
+    const firstStat = await zipFile.stat(dataZipEntry);
+
+    // TODO: Figure out why we can't use only getSize()
+    const fileSize =
+        "size" in firstStat ? parseInt(firstStat.size) : firstStat.getSize();
+    if (fileSize > FILE_SIZE_LIMIT) {
+        throw new FileTooLargeException(dataFileName);
+    }
+
     const rawContent = await zipFile.getContent(dataZipEntry);
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
@@ -36,7 +48,12 @@ async function readJSONFile(dataFileName, zipFile, zipId = null) {
     });
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
+async function readJSONDataObject(
+    dataFileName,
+    dataKey,
+    zipFile,
+    zipId = null
+) {
     const rawData = await readJSONFile(dataFileName, zipFile, zipId);
 
     if (!(dataKey in rawData)) {
@@ -46,7 +63,17 @@ async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
         );
     }
 
-    const arrayData = rawData[dataKey];
+    return rawData[dataKey];
+}
+
+async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
+    const arrayData = await readJSONDataObject(
+        dataFileName,
+        dataKey,
+        zipFile,
+        zipId
+    );
+
     if (!Array.isArray(arrayData)) {
         throw new InvalidContentImportException(
             dataFileName,
@@ -103,11 +130,22 @@ function removeEntryPrefix(entryName) {
     return entryName;
 }
 
+function sliceIntoChunks(array, chunkSize) {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+        const chunk = array.slice(i, i + chunkSize);
+        chunks.push(chunk);
+    }
+    return chunks;
+}
+
 export {
     readJSONFile,
+    readJSONDataObject,
     readJSONDataArray,
     anonymizeJsonEntityPath,
     relevantZipEntries,
     jsonDataEntities,
     removeEntryPrefix,
+    sliceIntoChunks,
 };

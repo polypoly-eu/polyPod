@@ -17,13 +17,12 @@ const importSteps = {
     download: "download",
     import: "import",
     explore: "explore",
-    finished: "finished",
 };
 const namespace = "http://polypoly.coop/schema/fbImport/";
 //used until real storage is loaded
 const fakeStorage = {
-    files: [],
-    refreshFiles: async () => [],
+    files: null,
+    refreshFiles: async () => null,
     readFile: async () => null,
     removeFile: async () => {},
 };
@@ -158,6 +157,10 @@ export const ImporterProvider = ({ children }) => {
             .refreshFiles()
             .then(async () => {
                 const resolvedFiles = [];
+                if (!storage.files) {
+                    setFiles(null);
+                    return;
+                }
                 for (const file of storage.files) {
                     resolvedFiles.push(await file);
                 }

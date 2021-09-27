@@ -21,16 +21,12 @@ export default class UnknownMessageTypesAnalysis extends ReportAnalysis {
 
     async analyze({ facebookAccount }) {
         const unknownMessageTypes = new Set();
-        facebookAccount.forEachMessage((message) => {
-            if (!message.type) {
-                return;
+        facebookAccount.forEachMessageThread((messageThread) => {
+            for (let messageType of messageThread.messageTypes) {
+                if (!knownMessageTypes.includes(messageType.toLowerCase())) {
+                    unknownMessageTypes.add(messageType);
+                }
             }
-            const messageType = message.type.toLowerCase();
-            if (knownMessageTypes.includes(messageType)) {
-                return;
-            }
-
-            unknownMessageTypes.add(messageType);
         });
         this._unknownMessageTypes = [...unknownMessageTypes];
         this.active = this._unknownMessageTypes.length > 0;

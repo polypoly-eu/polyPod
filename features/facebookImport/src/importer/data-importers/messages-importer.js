@@ -1,8 +1,10 @@
+import { MissingMessagesFilesException } from "../failed-import-exception.js";
 import { createErrorResult, IMPORT_SUCCESS } from "../importer-status.js";
 import {
     readJSONFile,
     relevantZipEntries,
     removeEntryPrefix,
+    sliceIntoChunks,
 } from "../importer-util.js";
 
 export default class MessagesImporter {
@@ -37,25 +39,46 @@ export default class MessagesImporter {
             const fileName = removeEntryPrefix(each.messageFile);
             facebookAccount.addImportedFileName(fileName);
         }
-        facebookAccount.messageThreads = successfullResults.map(
-            (result) => result.data
+        facebookAccount.messageThreadsGroup.addMessageThreadsFromData(
+            successfullResults.map((result) => result.data)
         );
     }
 
-    async import({ zipFile }, facebookAccount) {
-        const messageThreadFiles = await this._extractJsonEntries(zipFile);
-
-        // TODO: The same message thread can be in multiple files
+    async _importMessageThreadsFromFiles(
+        messageThreadFiles,
+        zipFile,
+        facebookAccount
+    ) {
         const messageThreadResults = await Promise.all(
             messageThreadFiles.map((messageFile) =>
                 this._readJSONFileWithStatus(messageFile, zipFile)
             )
         );
         this._importMessageThread(facebookAccount, messageThreadResults);
-
-        const failedResults = messageThreadResults.filter(
+        return messageThreadResults.filter(
             (result) => !(result.status === IMPORT_SUCCESS)
         );
+    }
+
+    async import({ zipFile }, facebookAccount) {
+        const messageThreadFiles = await this._extractJsonEntries(zipFile);
+        if (messageThreadFiles.length === 0) {
+            throw new MissingMessagesFilesException();
+        }
+        // TODO: The same message thread can be in multiple files
+        const fileChunks = sliceIntoChunks(messageThreadFiles, 5);
+        const resultChunks = [];
+        for (let currentChunk of fileChunks) {
+            const resultChunk = await this._importMessageThreadsFromFiles(
+                currentChunk,
+                zipFile,
+                facebookAccount
+            );
+
+            resultChunks.push(resultChunk);
+        }
+        const failedResults = resultChunks.flat();
+
         return failedResults.length > 0 ? failedResults : null;
     }
 }

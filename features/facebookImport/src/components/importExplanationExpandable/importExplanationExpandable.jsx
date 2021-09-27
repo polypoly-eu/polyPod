@@ -113,37 +113,32 @@ const ImportExplanationExpandable = ({
                 <div className="separator"></div>
                 <div className="x-divider">
                     {file ? (
-                        <>
-                            <div className="file-info">
-                                <h5>{i18n.t("import:import.chosen")}</h5>
-                                <p>ID {file.id}</p>
-                                <p>Size {file.size} Bytes</p>
-                            </div>
-                            <div className="align-right">
-                                <button
-                                    onClick={onRemoveFile}
-                                    className="delete-button"
-                                >
-                                    {i18n.t("import:import.delete")}
-                                </button>
-                            </div>
-                        </>
+                        <div className="file-info">
+                            <h5>{i18n.t("import:import.chosen")}</h5>
+                            <p>ID {file.id}</p>
+                            <p>Size {file.size} Bytes</p>
+                        </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
                     )}
                 </div>
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
-                    className={`btn-secondary ${file ? "deactivated" : ""}`}
+                    className={"btn-secondary"}
                     onClick={
                         file
-                            ? () => {}
+                            ? () => {
+                                  onRemoveFile();
+                                  onImportFile();
+                              }
                             : () => {
                                   onImportFile();
                               }
                     }
                 >
-                    {i18n.t("import:import.button.1")}
+                    {file
+                        ? i18n.t("import:import.button.1.different")
+                        : i18n.t("import:import.button.1")}
                 </button>
                 <button
                     className={`btn-highlighted ${file ? "" : "deactivated"}`}
@@ -166,14 +161,7 @@ const ImportExplanationExpandable = ({
                 />
                 <p>{i18n.t("import:explore.1")}</p>
                 {file ? (
-                    <RouteButton
-                        className="btn-highlighted"
-                        onClick={() =>
-                            onUpdateImportStatus(importSteps.finished)
-                        }
-                        stateChange={{ importStatus: importSteps.finished }}
-                        route="/"
-                    >
+                    <RouteButton className="btn-highlighted" route="/">
                         {i18n.t("import:explore.button")}
                     </RouteButton>
                 ) : (
@@ -200,11 +188,7 @@ const ImportExplanationExpandable = ({
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
                     <div
-                        onClick={
-                            section === "explore"
-                                ? () => {}
-                                : () => onUpdateImportStatus(section)
-                        }
+                        onClick={() => onUpdateImportStatus(section)}
                         className="head"
                         id={importIds[section]}
                     >
@@ -215,10 +199,22 @@ const ImportExplanationExpandable = ({
                                 __html: i18n.t(`import:heading.${section}`),
                             }}
                         />
+                        <img
+                            src="./images/angle-up.svg"
+                            alt="arrow-up"
+                            className={
+                                isSectionOpened(
+                                    section,
+                                    importStatus,
+                                    importSteps
+                                )
+                                    ? ""
+                                    : "rotate-180"
+                            }
+                        />
                     </div>
                     {isSectionOpened(section, importStatus, importSteps) ? (
-                        <div className="body">
-                            <div className="separator" />
+                        <div className="section-body">
                             {bodyContent[section]}
                         </div>
                     ) : null}

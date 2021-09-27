@@ -30,8 +30,14 @@ import ReportDetails from "./views/report/details.jsx";
 import "./styles.css";
 
 const FacebookImporter = () => {
-    const { pod, navigationState, importSteps, globalError, setGlobalError } =
-        useContext(ImporterContext);
+    const {
+        pod,
+        files,
+        navigationState,
+        importSteps,
+        globalError,
+        setGlobalError,
+    } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
 
     const renderSplash = () => {
@@ -39,8 +45,9 @@ const FacebookImporter = () => {
     };
 
     function determineRoute() {
-        if (importStatus == importSteps.loading) return renderSplash();
-        if (importStatus == importSteps.finished)
+        if (importStatus == importSteps.loading || !files)
+            return renderSplash();
+        if (files.length > 0)
             return <Redirect to={{ pathname: "/overview" }} />;
         else return <Redirect to={{ pathname: "/import" }} />;
     }

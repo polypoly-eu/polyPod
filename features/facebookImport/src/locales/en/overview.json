@@ -6,5 +6,8 @@
     "size": "Size",
     "explore": "Explore",
     "new.import": "New import",
-    "loading.data": "Loading your data"
+    "loading.data": "Loading your data",
+    "new.import.dialog": "Do you really want to replace your current file with a new one?",
+    "new.import.dialog.back": "Back",
+    "new.import.dialog.continue": "Continue"
 }

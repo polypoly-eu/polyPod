@@ -1,21 +1,22 @@
 export default class Storage {
     constructor(pod) {
         this.changeListener = () => {};
-        this._files = {};
+        this._files = null;
         this._pod = pod;
     }
 
     get files() {
-        return Object.values(this._files);
+        return !this._files ? this._files : Object.values(this._files);
     }
 
     async refreshFiles() {
         const { polyOut } = this._pod;
-        this._files = [];
         const files = await polyOut.readdir("");
+        const statResults = {};
         for (let file of files) {
-            this._files[file] = await polyOut.stat(file);
+            statResults[file] = await polyOut.stat(file);
         }
+        this._files = statResults;
         return files;
     }
 
@@ -60,6 +61,11 @@ export class ZipFile {
 
     async data() {
         return this.getContent(this._file.id);
+    }
+
+    async stat(entry) {
+        const { polyOut } = this._pod;
+        return polyOut.stat(entry);
     }
 
     async getContent(entry) {
