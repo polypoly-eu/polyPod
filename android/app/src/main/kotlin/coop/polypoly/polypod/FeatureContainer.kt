@@ -115,7 +115,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
-        Preferences.currentFeatureName = feature.fileName.dropLast(4)
+        Preferences.currentFeatureName = feature.id
         api.polyNav.setNavObserver(
             PolyNavObserver(
                 null,
