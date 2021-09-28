@@ -114,15 +114,19 @@ async function jsonDataEntities(zipFile) {
 }
 
 function removeEntryPrefix(entryName) {
+    // TODO: Making assumptions about the exact URL format used internally by the polyPod is risky,
+    //       we already have the case where iOS URLs contain both upper and lower case characters,
+    //       while Android URLs don't. A better approach would be to get the archive's root path from
+    //       the polyPod, then remove this from the beginning of all URLs.
     if (
-        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/$/.test(
+        /^poly[pP]od:\/\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/$/.test(
             entryName
         )
     ) {
         return "";
     }
     const entryNameMatch = entryName.match(
-        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/(.*)$/
+        /^poly[pP]od:\/\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/(.*)$/
     );
     if (entryNameMatch && entryNameMatch.length === 2 && entryNameMatch[1]) {
         return entryNameMatch[1];
