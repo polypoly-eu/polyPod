@@ -23,7 +23,7 @@ const Import = () => {
     const file = files?.[0];
 
     const onRemoveFile = () => {
-        handleRemoveFile(file.id);
+        return handleRemoveFile(file.id);
     };
 
     return (

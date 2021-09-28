@@ -115,7 +115,7 @@ export const ImporterProvider = ({ children }) => {
 
     const handleRemoveFile = (fileID) => {
         setFacebookAccount(null);
-        storage.removeFile(fileID);
+        return storage.removeFile(fileID);
     };
 
     const handleImportFile = async () => {
