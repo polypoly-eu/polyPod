@@ -24,7 +24,7 @@ function writeOrder(features, targetDir) {
 const features = require("./package.json").polyPodFeatures;
 
 const targetDir = path.join(__dirname, "dist");
-if (fs.existsSync(targetDir)) fs.rmdirSync(targetDir, { recursive: true });
+if (fs.existsSync(targetDir)) fs.rmSync(targetDir, { recursive: true });
 fs.mkdirSync(targetDir);
 
 for (let feature of features) packageFeature(feature, targetDir);
