@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
-import SvgBarChart from "../../components/dataViz/svgBarChart.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
