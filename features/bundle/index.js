@@ -13,7 +13,8 @@ function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
         moduleName,
         artifactPath
     );
-    child_process.execSync(`zip -r ${targetArchive} *`, { cwd: sourceDir });
+    const args = ["-r", targetArchive, "*"];
+    child_process.execFileSync("zip", args, { cwd: sourceDir, shell: true });
 }
 
 function writeOrder(features, targetDir) {
