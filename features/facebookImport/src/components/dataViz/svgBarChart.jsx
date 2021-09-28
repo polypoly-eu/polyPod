@@ -8,7 +8,7 @@ const SvgBarChart = ({ data, barColor }) => {
     //constants
     const margin = {
             top: 10,
-            right: 20,
+            right: 0,
             bottom: 20,
             left: 40,
         },
@@ -33,29 +33,6 @@ const SvgBarChart = ({ data, barColor }) => {
             .attr("viewBox", `0 0 ${width} ${height}`);
     }
 
-    function addAxis(barChart) {
-        barChart
-            .append("g")
-            .call(
-                d3
-                    .axisLeft(yScale)
-                    .tickFormat((d) => d)
-                    .ticks(10)
-            )
-            .append("text")
-            .attr("y", 6)
-            .attr("dy", "0.71em")
-            .attr("text-anchor", "end")
-            .text("value")
-            .attr("class", "y-axis");
-
-        barChart
-            .append("g")
-            .attr("class", "x-axis")
-            .call(d3.axisBottom(xScale))
-            .attr("transform", `translate(0, ${chartHeight})`);
-    }
-
     function addChart(svg) {
         return svg
             .append("g")
@@ -65,16 +42,74 @@ const SvgBarChart = ({ data, barColor }) => {
             .attr("class", "chart");
     }
 
-    function addBars(barChart) {
-        const bars = barChart.selectAll(".bars").data(data, function (d) {
-            return d.title;
-        });
-        console.log(bars);
+    function addAxis(barChart) {
+        barChart
+            .append("g")
+            .call(
+                d3
+                    .axisLeft(yScale)
+                    .tickFormat((d) => d)
+                    .ticks(5)
+            )
+            .attr("class", "y-axis")
+            .append("text")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .text("value");
 
+        barChart
+            .append("g")
+            .attr("class", "x-axis")
+            .call(d3.axisBottom(xScale))
+            .attr("transform", `translate(0, ${chartHeight})`);
+    }
+
+    function transitionAxis(barChart) {
+        barChart.selectAll(".y-axis").remove();
+        barChart
+            .append("g")
+            .call(
+                d3
+                    .axisLeft(yScale)
+                    .tickFormat((d) => d)
+                    .ticks(5)
+            )
+            .attr("class", "y-axis")
+            .append("text")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .text("value");
+
+        barChart
+            .transition()
+            .selectAll(".x-axis")
+            .call(d3.axisBottom(xScale))
+            .attr("transform", `translate(0, ${chartHeight})`);
+    }
+
+    function addBars(barChart) {
+        const bars = barChart.selectAll(".bar").data(data, (d) => d.title);
+
+        //exit
         bars.exit().remove();
 
-        bars.remove();
+        //update
+        bars.transition()
+            .duration(750)
+            .attr("y", chartHeight - initializingBarHeight)
+            .attr("height", initializingBarHeight)
+            .attr("x", (d) => xScale(d.title))
+            .attr("width", xScale.bandwidth())
+            .attr("fill", barColor)
+            .attr("class", "bar")
+            .transition()
+            .duration(750)
+            .attr("y", (d) => yScale(d.value))
+            .attr("height", (d) => chartHeight - yScale(d.value));
 
+        //enter
         bars.enter()
             .append("rect")
             .attr("y", chartHeight - initializingBarHeight)
@@ -84,39 +119,20 @@ const SvgBarChart = ({ data, barColor }) => {
             .attr("fill", barColor)
             .attr("class", "bar")
             .transition()
-            .duration(1000)
-
+            .duration(750)
+            .delay((_, i) => i * 50)
             .attr("y", (d) => yScale(d.value))
             .attr("height", (d) => chartHeight - yScale(d.value));
     }
 
-    function transformAxis() {
-        barChart
-            .selectAll(".y-axis")
-            .transition()
-            .call(
-                d3
-                    .axisLeft(yScale)
-                    .tickFormat((d) => d)
-                    .ticks(10)
-            );
-
-        barChart
-            .transition()
-            .selectAll(".x-axis")
-            .call(d3.axisBottom(xScale))
-            .attr("transform", `translate(0, ${chartHeight})`);
-    }
-
     useEffect(() => {
         adaptScalesToData();
-        let barChart = d3.select(barChartRef.current).select(".chart");
 
-        if (barChart.empty()) {
-            let svg = createSVG();
-            barChart = addChart(svg);
-        }
-        addAxis(barChart);
+        let barChart = d3.select(barChartRef.current).select(".chart");
+        if (barChart.empty()) barChart = addChart(createSVG());
+
+        if (barChart.select(".x-axis").empty()) addAxis(barChart);
+        else transitionAxis(barChart);
         addBars(barChart);
     });
 
