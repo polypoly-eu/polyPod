@@ -73,7 +73,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
         },
     ];
 
-    const [activeTab, setActiveTab] = useState(tabs[1]);
+    const [activeTab, setActiveTab] = useState(tabs[0]);
     const constantTabData = {
         total: {
             barData: yearlyTotals,
