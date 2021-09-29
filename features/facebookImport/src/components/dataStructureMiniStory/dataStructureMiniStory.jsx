@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DataBubblesAll from "../dataViz/dataBubblesAll.jsx";
+import DataBubbles from "../dataViz/dataBubbles.jsx";
 
 import i18n from "../../i18n.js";
 
@@ -46,7 +46,7 @@ const DataStructureMiniStory = ({ data }) => {
                         amount_of_files: amountOfFiles,
                     })}
                 </p>
-                <DataBubblesAll
+                <DataBubbles
                     data={data}
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}
