@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DataBubbles from "../dataViz/dataBubbles.jsx";
+import { ClusteredBubbles } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
@@ -46,7 +46,7 @@ const DataStructureMiniStory = ({ data }) => {
                         amount_of_files: amountOfFiles,
                     })}
                 </p>
-                <DataBubbles
+                <ClusteredBubbles
                     data={data}
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}
