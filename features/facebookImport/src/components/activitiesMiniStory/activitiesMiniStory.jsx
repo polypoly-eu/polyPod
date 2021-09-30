@@ -7,7 +7,7 @@ import { fillArray } from "../dataViz/utils.jsx";
 import "./activitiesMiniStory.css";
 import "./datePicker.css";
 import "../tabs/tabs.css";
-import SvgBarChart from "../dataViz/svgBarChart.jsx";
+import { VerticalBarChart } from "@polypoly-eu/poly-look";
 
 const monthsAbbreviation = i18n.t("common:months.abbreviation").split(" ");
 
@@ -152,7 +152,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     <p>{constantTabData.barChartLegendText}</p>
                 </div>
                 <p className="above-chart">{numberOfEventsString}</p>
-                <SvgBarChart
+                <VerticalBarChart
                     data={constantTabData.barData}
                     barColor={"white"}
                 />
