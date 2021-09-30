@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./progressBar.css";
 
@@ -6,13 +7,26 @@ const ProgressBar = ({
     onUpdateImportStatus,
     importStatus,
     importSections,
+    file,
 }) => {
+    const { clicked } = useContext(ImporterContext);
+
+    function requestCheckIcon() {
+        if (clicked || file) {
+            return <img src={`./images/request-done.svg`} />;
+        } else {
+            return <div className={`number request-number`}>1</div>;
+        }
+    }
+
     function checkForIcon(section) {
         if (
+            section !== "request" &&
             importSections.indexOf(importStatus) >
-            importSections.indexOf(section)
-        )
+                importSections.indexOf(section)
+        ) {
             return <img src={`./images/${section}-done.svg`} />;
+        }
         if (
             importSections.indexOf(importStatus) ===
             importSections.indexOf(section)
@@ -22,6 +36,20 @@ const ProgressBar = ({
                     {importSections.indexOf(importStatus) + 1}
                 </div>
             );
+        // if (
+        //     importSections.indexOf(importStatus) >
+        //     importSections.indexOf(section)
+        // )
+        //     return <img src={`./images/${section}-done.svg`} />;
+        // if (
+        //     importSections.indexOf(importStatus) ===
+        //     importSections.indexOf(section)
+        // )
+        //     return (
+        //         <div className={`number ${section}-number`}>
+        //             {importSections.indexOf(importStatus) + 1}
+        //         </div>
+        //     );
     }
 
     return (
@@ -33,7 +61,9 @@ const ProgressBar = ({
                     className={`section`}
                 >
                     <div className={`line ${section}-progress`}>
-                        {checkForIcon(section)}
+                        {section === "request"
+                            ? requestCheckIcon()
+                            : checkForIcon(section)}
                     </div>
                 </div>
             ))}

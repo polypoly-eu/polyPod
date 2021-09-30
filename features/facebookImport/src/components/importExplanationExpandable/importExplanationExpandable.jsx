@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
 import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
 import scrollSmoothly from "../../utils/smoothScroll.js";
+import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./importExplanationExpandable.css";
 
@@ -35,6 +36,7 @@ const ImportExplanationExpandable = ({
 
     const expandableRef = useRef();
     const expandableId = "expandable";
+    const { isClicked } = useContext(ImporterContext);
 
     useEffect(() => {
         scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
@@ -43,6 +45,7 @@ const ImportExplanationExpandable = ({
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
         window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
+        isClicked(true);
     };
 
     const bodyContent = {
