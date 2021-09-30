@@ -48,6 +48,11 @@ const ImportExplanationExpandable = ({
         isClicked(true);
     };
 
+    const handleImportStatus = () => {
+        onUpdateImportStatus(importSteps.explore);
+        isClicked(true);
+    };
+
     const bodyContent = {
         request: (
             <>
@@ -139,11 +144,7 @@ const ImportExplanationExpandable = ({
                 </button>
                 <button
                     className={`btn-highlighted ${file ? "" : "deactivated"}`}
-                    onClick={
-                        file
-                            ? () => onUpdateImportStatus(importSteps.explore)
-                            : () => {}
-                    }
+                    onClick={file ? () => handleImportStatus() : () => {}}
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
