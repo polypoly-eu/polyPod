@@ -1,2 +1,3 @@
 import { BubbleCluster } from "./visualisations/BubbleCluster.jsx";
-export { BubbleCluster };
+import { VerticalBarChart } from "./visualisations/VerticalBarChart.jsx";
+export { BubbleCluster, VerticalBarChart };
