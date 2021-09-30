@@ -6,7 +6,7 @@ import "./loading.css";
 
 const Loading = ({ message }) => (
     <div className="loading">
-        <img src="./images/ajax-loader.gif" />
+        <img src="./images/loading.gif" />
         <p>{message} ...</p>
         <p>{i18n.t("common:loading.closing")}</p>
     </div>
