@@ -19,15 +19,25 @@ import "./components/import-view.js";
 import "./components/report-view.js";
 import "./components/overview-view.js";
 
+import ErrorPopup from "./components/errorPopup/errorPopup.jsx";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
 import ReportView from "./views/report/report.jsx";
+import ExploreDetails from "./views/explore/details.jsx";
+import ReportDetails from "./views/report/details.jsx";
 
 import "./styles.css";
 
 const FacebookImporter = () => {
-    const { pod, navigationState, importSteps } = useContext(ImporterContext);
+    const {
+        pod,
+        files,
+        navigationState,
+        importSteps,
+        globalError,
+        setGlobalError,
+    } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
 
     const renderSplash = () => {
@@ -35,8 +45,9 @@ const FacebookImporter = () => {
     };
 
     function determineRoute() {
-        if (importStatus == importSteps.loading) return renderSplash();
-        if (importStatus == importSteps.finished)
+        if (importStatus == importSteps.loading || !files)
+            return renderSplash();
+        if (files.length > 0)
             return <Redirect to={{ pathname: "/overview" }} />;
         else return <Redirect to={{ pathname: "/import" }} />;
     }
@@ -57,12 +68,24 @@ const FacebookImporter = () => {
                     <Route exact path="/explore">
                         <ExploreView />
                     </Route>
+                    <Route exact path="/explore/details">
+                        <ExploreDetails />
+                    </Route>
                     <Route exact path="/report">
                         <ReportView />
+                    </Route>
+                    <Route exact path="/report/details">
+                        <ReportDetails />
                     </Route>
                 </Switch>
             ) : (
                 renderSplash()
+            )}
+            {globalError && (
+                <ErrorPopup
+                    error={globalError}
+                    onClose={() => setGlobalError(null)}
+                />
             )}
         </div>
     );

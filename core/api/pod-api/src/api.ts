@@ -41,7 +41,7 @@ export interface Matcher {
  */
 export interface PolyIn {
     /**
-     * DEPRECATED: use `match()` instead.
+     * @deprecated use `match()` instead.
      *
      * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
      * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
@@ -112,7 +112,8 @@ export interface PolyIn {
  */
 export interface PolyOut extends FS {
     /**
-     * A standard-compliant implementation of [[Fetch]].
+     * @deprecated Use [[Network]] and its facilities instead.
+     * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
      */
     readonly fetch: Fetch;
 }
@@ -144,6 +145,38 @@ export interface PolyNav {
      * Remove a previously imported file
      */
     removeFile(fileId: string): Promise<void>;
+}
+
+/**
+ * `Info` allows the Feature to read information about the polyPod instance it is being executed in.
+ */
+export interface Info {
+    /**
+     * A way for features to read the polyPod runtime identification
+     */
+    getRuntime(): Promise<string>;
+
+    /**
+     * A way for features to read the user visible polyPod version
+     */
+    getVersion(): Promise<string>;
+}
+
+/**
+ * `Network` specifies how features can communicate with other devices or servers.
+ */
+export interface Network {
+    /**
+     * A way for features to send HTTP POST requests
+     *
+     * @returns an error message if something went wrong, `undefined` upon success.
+     */
+    httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<string | undefined>;
 }
 
 /**
@@ -222,6 +255,17 @@ export interface Pod {
      * `polyNav` is the interface to interact the container. Refer to [[PolyNav]] for its definition.
      */
     readonly polyNav: PolyNav;
+
+    /**
+     * `info` is the interface to read information about the polyPod instance.
+     */
+    readonly info: Info;
+
+    /**
+     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
+     * definition.
+     */
+    readonly network: Network;
 
     /**
      * @hidden

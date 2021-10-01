@@ -11,7 +11,8 @@ class Feature(
     val content: ZipFile,
     private val manifest: FeatureManifest
 ) {
-    val name: String get() = manifest.name ?: fileName.replace(".zip", "")
+    val id: String get() = fileName.replace(".zip", "")
+    val name: String get() = manifest.name ?: id
     val author: String get() = manifest.author ?: ""
     val description: String get() = manifest.description ?: ""
 

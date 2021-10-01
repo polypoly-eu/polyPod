@@ -2,52 +2,100 @@ package coop.polypoly.polypod.polyOut
 
 import android.content.Context
 import coop.polypoly.polypod.Preferences
+import coop.polypoly.polypod.polyNav.ZipTools
+import org.apache.commons.io.FileUtils
 import java.io.File
 import java.nio.ByteBuffer
-import java.util.zip.ZipFile
 
 open class PolyOut(
     val context: Context
 ) {
     private val fsPrefix = "polypod://"
-    open suspend fun readFile(path: String): ByteArray {
-        val fs = Preferences.getFileSystem(context)
-        if (path == "") {
-            throw Error("Not found")
+    private var readdirCache = mutableMapOf<String, Array<String>>()
+    private var statCache = mutableMapOf<String, MutableMap<String, String>>()
+    companion object {
+        private val fsPrefix = "polypod://"
+        fun idToPath(id: String, context: Context): String {
+            if (Preferences.currentFeatureName == null) {
+                throw Error("Cannot execute without a feature")
+            }
+            val pureId = id.removePrefix(
+                fsPrefix
+            ).removePrefix(Preferences.currentFeatureName!!).removePrefix("/")
+
+            return context.filesDir.absolutePath + "/" +
+                Preferences.currentFeatureName + "/" + pureId
         }
-        val entryPathStart = path.indexOf('/', fsPrefix.length)
-        val zipId = path.substring(0, entryPathStart)
-        val entryPath = path.substring(entryPathStart + 1)
-        val zip = ZipFile(File(fs[zipId]))
-        return zip.getInputStream(zip.getEntry(entryPath)).readBytes()
+    }
+
+    private fun pathToId(path: File, context: Context): String {
+        return fsPrefix + path.relativeTo(
+            File(
+                context.filesDir.absolutePath + "/" +
+                    Preferences.currentFeatureName
+            )
+        ).path
+    }
+
+    open suspend fun readFile(
+        id: String
+    ): ByteArray {
+        if (id == "") {
+            throw Error("Empty path in PolyOut.readFile")
+        }
+
+        ZipTools.getEncryptedFile(context, idToPath(id, context)).let {
+            it.openFileInput().use {
+                return it.readBytes()
+            }
+        }
+
+        return ByteArray(0)
     }
 
     open suspend fun writeFile(path: String, data: ByteBuffer): Boolean {
         return true
     }
 
-    open suspend fun stat(path: String): MutableMap<String, String> {
+    open suspend fun stat(
+        id: String
+    ): MutableMap<String, String> {
         val fs = Preferences.getFileSystem(context)
-        var result = mutableMapOf<String, String>()
-        if (path == "") {
+        val result = mutableMapOf<String, String>()
+        if (id == "") {
             return result
         }
-        val file = File(fs[path])
-        result["name"] = file.name
+        if (statCache.contains(id)) {
+            return statCache.get(id)!!
+        }
+        val file = File(idToPath(id, context))
+        if (file.isDirectory()) {
+            result["size"] = FileUtils.sizeOfDirectory(file).toString()
+        } else {
+            result["size"] = file.length().toString()
+        }
+        result["name"] = fs.get(id) ?: file.name
         result["time"] = file.lastModified().toString()
-        result["size"] = file.length().toString()
-        result["id"] = path
+        result["id"] = id
+        statCache[id] = result
         return result
     }
+    open suspend fun readdir(
+        id: String
+    ): Array<String> {
 
-    open suspend fun readdir(path: String): Array<String> {
         val fs = Preferences.getFileSystem(context)
-        if (path == "") {
+        if (id == "") {
             return fs.keys.toTypedArray()
         }
-        val zip = ZipFile(File(fs[path]))
-        return zip.entries().toList().map {
-            path + "/" + it.name
-        }.toTypedArray()
+        if (readdirCache.contains(id)) {
+            return readdirCache.get(id)!!
+        }
+        val retList = mutableListOf<String>()
+        File(idToPath(id, context)).walkTopDown().forEach {
+            retList.add(pathToId(it, context))
+        }
+        readdirCache[id] = retList.toTypedArray()
+        return retList.toTypedArray()
     }
 }

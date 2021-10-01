@@ -20,6 +20,7 @@ protocol PolyNavDelegate {
 class PolyNav: PolyNavProtocol {
     static let fsKey = "fileStoreDict"
     static let fsPrefix = "polyPod://"
+    static let fsFilesRoot = "Files"
     
     init() {
         delegate = nil
@@ -44,7 +45,14 @@ class PolyNav: PolyNavProtocol {
             if let url = url {
                 do {
                     let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                    let newUrl = documentDirectory.appendingPathComponent(url.lastPathComponent)
+                    // TODO: Hard coded for the sake of speed, but we need to determine the active feature's ID here
+                    let featureId = "facebookImport"
+                    let featureFilesPath = documentDirectory.appendingPathComponent(PolyNav.fsFilesRoot).appendingPathComponent(featureId)
+                    if !FileManager.default.fileExists(atPath: featureFilesPath.path) {
+                        try FileManager.default.createDirectory(at: featureFilesPath, withIntermediateDirectories: true)
+                    }
+
+                    let newUrl = featureFilesPath.appendingPathComponent(url.lastPathComponent)
                     if (FileManager.default.fileExists(atPath: newUrl.standardizedFileURL.path)) {
                         // TODO: Ask the user for a rewrite
                         try FileManager.default.removeItem(at: newUrl)
@@ -59,7 +67,7 @@ class PolyNav: PolyNavProtocol {
                         forKey: PolyNav.fsKey
                     ) as? [String:String?] ?? [:]
                     let newUuid = PolyNav.fsPrefix + UUID().uuidString
-                    fileStore[newUuid] = newUrl.lastPathComponent
+                    fileStore[newUuid] = "\(PolyNav.fsFilesRoot)/\(featureId)/\(newUrl.lastPathComponent)"
                     UserDefaults.standard.set(fileStore, forKey: PolyNav.fsKey)
                     
                     completionHandler(newUuid)

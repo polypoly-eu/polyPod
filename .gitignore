@@ -9,3 +9,6 @@ node_modules/
 
 # emacs backup
 *~
+
+# (possibly private) data
+.data

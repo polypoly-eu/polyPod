@@ -1,369 +1,190 @@
-import React from "react";
 import { ZipFile } from "../model/storage.js";
-import allStructure from "../static/allStructure";
+import { createErrorStatus, createSuccessStatus } from "./analysis-status.js";
 
-function isJsonMessageFile(entryName, id) {
-    const formattedEntryName = entryName.replace(`${id}/`, "");
-    return /messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/[0-9_a-z]+\/message_[1-9][0-9]?.json$/.test(
-        formattedEntryName
-    );
-}
-
-async function jsonDataEntities(id, zipFile) {
-    const entries = await zipFile.getEntries();
-    const relevantEntries = entries
-        .map((each) => each.replace(`${id}/`, ""))
-        .filter(
-            (each) =>
-                !each.includes(".DS_Store") &&
-                !each.includes("__MACOSX") &&
-                !each.includes("/files/") && // Remove user files
-                each.endsWith(".json")
-        );
-    return relevantEntries;
-}
-
-function anonymizePathSegment(pathSegment, fullPath) {
-    if (
-        fullPath.includes("messages") &&
-        /^[a-zA-Z0-9]+_[_a-zA-Z0-9-]{9,12}$/.test(pathSegment)
-    ) {
-        return "uniqueid_hash";
-    }
-    return pathSegment;
-}
-
-function anonymizeJsonEntityPath(fileName) {
-    const nameParts = fileName.split("/").slice(1);
-
-    const anonymizedParts = nameParts.map((each) =>
-        anonymizePathSegment(each, fileName)
-    );
-    return anonymizedParts.join("/");
-}
+import DataStructureBubblesAnalysis from "./analyses/data-structure-bubbles-analysis.js";
+import DataGroupsAnalysis from "./analyses/data-groups-analysis.js";
+import ConnectedAdvertisersAnalysis from "./analyses/connected-advertisers-analysis.js";
+import InteractedWithAdvertisersAnalysis from "./analyses/interacted-advertisers-analysis.js";
+import AdInterestsAnalysis from "./analyses/ad-interests-analysis.js";
+import OffFacebookEventsAnalysis from "./analyses/off-facebook-events-analysis.js";
+import MessagesAnalysis from "./analyses/messages-analysis.js";
+import SearchesAnalysis from "./analyses/searches-analysis.js";
+import FriendsAnalysis from "./analyses/friends-analysis.js";
+import ReceivedFriendRequestsAnalysis from "./analyses/friend-requests-received-analysis.js";
+import PagesOverviewAnalysis from "./analyses/pages-overview-activity.js";
+import ReportMetadataAnalysis from "./analyses-report/report-metadata.js";
+import NoDataFoldersAnalysis from "./analyses-report/no-data-folders.js";
+import MissingCommonJSONFilesAnalysis from "./analyses-report/missing-common-json-files.js";
+import MissingKnownJSONFilesAnalysis from "./analyses-report/missing-known-json-files.js";
+import UnknownJSONFilesAnalysis from "./analyses-report/unknown-json-files.js";
+import MessagesDetailsAnalysis from "./analyses/messages-details-analysis.js";
+import MessageThreadsAnalysis from "./analyses/message-threads-analysis.js";
+import OffFacebookEventsTypesAnalysis from "./analyses/off-facebook-events-types-analysys.js";
+import DataChartsAnalysis from "./analyses/data-points-charts-analysis.js";
+import OffFacebookEventsTypesChartAnalysis from "./analyses/off-facebook-events-types-charts-analysis.js";
+import DataImportingStatusAnalysis from "./analyses-report/importing-status-analysys.js";
+import JsonFilesBubblesAnalysis from "./analyses/json-files-bubbles.js";
+import ImportedJsonFilesAnalysis from "./analyses/json-files-imported-analysis.js";
+import ExportTitleAnalysis from "./analyses/export-title-analysis.js";
+import ExportSizeAnalysis from "./analyses/export-size-analysis.js";
+import EmailAddressesAnalysis from "./analyses/email-addresses-analysis.js";
+import UnknownMessageTypesAnalysis from "./analyses-report/unkown-message-types-analysis.js";
+import SesssionActivityLocationsAnalysis from "./analyses/activity-locations-analysis.js";
+import MessagesActivityAnalysis from "./analyses/messages-activity-analysis.js";
+import JSONFileNamesAnalysis from "./analyses-report/json-file-names-analysis.js";
+import OffFacebookEventTypesAnalysis from "./analyses-report/off-facebook-event-types-analysis.js";
+import UknownTopLevelFoldersAnalysis from "./analyses-report/unknown-top-level-folders-analysis.js";
+import InactiveCardsSummary from "./analyses-report/inactive-cards-summary.js";
+import ActivitiesAnalysis from "./analyses/activities-analysis.js";
+import AdvertisingValueAnalysis from "./analyses/advertising-value-analysis.js";
 
 const subAnalyses = [
-    class {
-        get title() {
-            return "File name";
-        }
+    DataStructureBubblesAnalysis,
+    ActivitiesAnalysis,
+    MessagesAnalysis,
+    OffFacebookEventsAnalysis,
+    AdvertisingValueAnalysis,
 
-        parse({ name }) {
-            this.active = true;
-            this._name = name;
-        }
+    ExportTitleAnalysis,
+    ExportSizeAnalysis,
+    DataChartsAnalysis,
+    DataGroupsAnalysis,
+    JsonFilesBubblesAnalysis,
+    ConnectedAdvertisersAnalysis,
+    InteractedWithAdvertisersAnalysis,
+    AdInterestsAnalysis,
+    OffFacebookEventsTypesChartAnalysis,
+    OffFacebookEventsTypesAnalysis,
+    MessagesDetailsAnalysis,
+    EmailAddressesAnalysis,
+    MessageThreadsAnalysis,
+    MessagesActivityAnalysis,
+    SearchesAnalysis,
+    FriendsAnalysis,
+    ReceivedFriendRequestsAnalysis,
+    PagesOverviewAnalysis,
+    SesssionActivityLocationsAnalysis,
+    ImportedJsonFilesAnalysis,
 
-        render() {
-            return "" + this._name;
-        }
-    },
-    class {
-        get title() {
-            return "File size";
-        }
+    ReportMetadataAnalysis,
+    DataImportingStatusAnalysis,
+    UknownTopLevelFoldersAnalysis,
+    MissingCommonJSONFilesAnalysis,
+    MissingKnownJSONFilesAnalysis,
+    OffFacebookEventTypesAnalysis,
+    UnknownJSONFilesAnalysis,
+    JSONFileNamesAnalysis,
+    NoDataFoldersAnalysis,
+    UnknownMessageTypesAnalysis,
+].filter((analysis) => {
+    // Some analysis are disabled because we don't want to include them
+    // in the current build, but it seems likely that we want to reintegrate
+    // them before too long - or show them behind some kind of flag, or
+    // developer mode.
+    return ![
+        ExportTitleAnalysis,
+        ExportSizeAnalysis,
+        DataGroupsAnalysis,
+        JsonFilesBubblesAnalysis,
+        AdInterestsAnalysis,
+        OffFacebookEventsTypesAnalysis,
+        MessageThreadsAnalysis,
+        MessagesActivityAnalysis,
 
-        parse({ size }) {
-            this.active = true;
-            this._size = size;
-        }
-
-        render() {
-            return "" + this._size;
-        }
-    },
-
-    class {
-        get title() {
-            return "Messages";
-        }
-
-        async _messagesCountFromFile(zipFile, messagesFile) {
-            const fileContent = new TextDecoder("utf-8").decode(
-                await zipFile.getContent(messagesFile)
-            );
-            if (!fileContent) {
-                return 0;
-            }
-            try {
-                const messagesData = JSON.parse(fileContent);
-                const messagesList = messagesData?.messages;
-                return messagesList ? messagesList.length : 0;
-            } catch (exception) {
-                //TODO: better error handling + error reporting
-                console.log(exception);
-                return 0;
-            }
-        }
-
-        async parse({ id, zipFile }) {
-            this._messageThreadsCount = 0;
-            this._messagesCount = 0;
-            this.active = false;
-            if (!zipFile) return;
-            const entries = await zipFile.getEntries();
-            const messagesFiles = entries.filter((fileName) =>
-                isJsonMessageFile(fileName, id)
-            );
-            this._messageThreadsCount = messagesFiles.length;
-            const filesMessagesCount = await Promise.all(
-                messagesFiles.map((messageFile) =>
-                    this._messagesCountFromFile(zipFile, messageFile)
-                )
-            );
-            this._messagesCount = filesMessagesCount.reduce((total, each) => {
-                return total + each;
-            }, 0);
-            this.active = this._messagesCount > 0;
-        }
-
-        render() {
-            if (!this.active) {
-                return "No messages detected in your export!";
-            }
-            return (
-                "Found " +
-                this._messagesCount +
-                " messages from " +
-                this._messageThreadsCount +
-                " threads"
-            );
-        }
-    },
-
-    class {
-        get title() {
-            return "Off-Facebook events";
-        }
-
-        async _readOffFacebooEvents(id, zipFile) {
-            const entries = await zipFile.getEntries();
-            const offFacebookEventsFile = entries.find((fileName) =>
-                fileName.includes(
-                    "apps_and_websites_off_of_facebook/your_off-facebook_activity.json"
-                )
-            );
-            if (!offFacebookEventsFile) {
-                return;
-            }
-            const fileContent = new TextDecoder("utf-8").decode(
-                await zipFile.getContent(offFacebookEventsFile)
-            );
-
-            if (!fileContent) {
-                return;
-            }
-            try {
-                return JSON.parse(fileContent);
-            } catch (exception) {
-                //TODO: better error handling + error reporting
-                console.log(exception);
-                return;
-            }
-        }
-
-        async parse({ id, zipFile }) {
-            this._eventsCount = 0;
-            this._companiesCount = 0;
-            this.active = false;
-            if (!zipFile) return;
-
-            const offFacebookEvents = await this._readOffFacebooEvents(
-                id,
-                zipFile
-            );
-            const activityV2 = offFacebookEvents?.off_facebook_activity_v2;
-            if (!activityV2) {
-                return;
-            }
-            this._companiesCount = activityV2.length;
-            this._eventsCount = activityV2.reduce((total, companyEvents) => {
-                if (companyEvents?.events) {
-                    return total + companyEvents.events.length;
-                }
-                return total;
-            }, 0);
-            this.active = this._companiesCount > 0;
-        }
-
-        render() {
-            if (!this.active) {
-                return "No off-facebook events detected in your export!";
-            }
-            return (
-                "Found " +
-                this._eventsCount +
-                " events from " +
-                this._companiesCount +
-                " companies"
-            );
-        }
-    },
-
-    class {
-        get title() {
-            return "NoData Folders";
-        }
-
-        get isForDataReport() {
-            return true;
-        }
-
-        async parse({ id, zipFile }) {
-            this._noDataFolderNames = [];
-            this.active = false;
-            if (!zipFile) return;
-            const entries = await zipFile.getEntries();
-            const extractedFolderNames = entries.map((fileName) => {
-                const nameParts = fileName.replace(`${id}/`, "").split("/");
-                if (nameParts.length >= 2) {
-                    for (const [i, part] of Object.entries(nameParts)) {
-                        if (part === "no-data.txt") {
-                            return nameParts[i - 1];
-                        }
-                    }
-                }
-                return;
-            });
-
-            this._noDataFolderNames = extractedFolderNames.filter(
-                (each) => each != null
-            );
-            this.active = this._noDataFolderNames.length > 0;
-        }
-
-        render() {
-            return (
-                <ul>
-                    {this._noDataFolderNames.map((entry, index) => (
-                        <li key={index}>{entry}</li>
-                    ))}
-                </ul>
-            );
-        }
-    },
-    class {
-        get title() {
-            return "Uknown JSON files";
-        }
-
-        get isForDataReport() {
-            return true;
-        }
-
-        async parse({ id, zipFile }) {
-            this._missingEntryNames = [];
-            this.active = true;
-            if (!zipFile) return;
-
-            const relevantEntries = await jsonDataEntities(id, zipFile);
-            const anonymizedPaths = relevantEntries.map((each) =>
-                anonymizeJsonEntityPath(each)
-            );
-
-            this._unknownFiles = anonymizedPaths.filter(
-                (each) => !allStructure.includes(each)
-            );
-            this.active = this._unknownFiles.length > 0;
-        }
-
-        render() {
-            return (
-                <ul>
-                    {this._unknownFiles.map((entry, index) => (
-                        <li key={index}>{entry}</li>
-                    ))}
-                </ul>
-            );
-        }
-    },
-    class {
-        get title() {
-            return "Missing expected JSON files";
-        }
-
-        get isForDataReport() {
-            return true;
-        }
-
-        _knownJsonFiles() {
-            const knowsJsonFileNames = allStructure.filter((each) =>
-                each.endsWith(".json")
-            );
-            return knowsJsonFileNames.filter(
-                (each) =>
-                    !/^(posts|photos_and_videos)\/album\/[1-9][0-9]?.json$/.test(
-                        each
-                    ) &&
-                    !/^messages\/(inbox|legacy_threads|message_requests|filtered_threads|archived_threads)\/uniqueid_hash\/message_[2-9][0-9]?.json$/.test(
-                        each
-                    )
-            );
-        }
-
-        async parse({ id, zipFile }) {
-            this._expectedMissingFiles = [];
-            this.active = true;
-            if (!zipFile) return;
-
-            const relevantEntries = await jsonDataEntities(id, zipFile);
-            const anonymizedPaths = relevantEntries.map((each) =>
-                anonymizeJsonEntityPath(each)
-            );
-            const knowsJsonFiles = this._knownJsonFiles();
-            this._expectedMissingFiles = knowsJsonFiles.filter(
-                (each) => !anonymizedPaths.includes(each)
-            );
-            this.active = this._expectedMissingFiles.length > 0;
-        }
-
-        render() {
-            return (
-                <ul>
-                    {this._expectedMissingFiles.map((entry, index) => (
-                        <li key={index}>{entry}</li>
-                    ))}
-                </ul>
-            );
-        }
-    },
-];
+        ImportedJsonFilesAnalysis,
+        UnknownJSONFilesAnalysis,
+        JSONFileNamesAnalysis,
+        NoDataFoldersAnalysis,
+        UnknownMessageTypesAnalysis,
+    ].includes(analysis);
+});
 
 class UnrecognizedData {
-    constructor(reportAnalyses) {
-        this.reportAnalyses = reportAnalyses;
-        this.active = this.reportAnalyses && this.reportAnalyses.length > 0;
+    constructor(analysesResults) {
+        this._activeReportAnalyses = analysesResults
+            .filter(
+                ({ analysis, status }) =>
+                    status.isSuccess &&
+                    analysis.isForDataReport &&
+                    analysis.active
+            )
+            .map(({ analysis }) => analysis);
+
+        const inactiveCardsSummary = new InactiveCardsSummary(analysesResults);
+        if (inactiveCardsSummary.active) {
+            this._activeReportAnalyses.push(inactiveCardsSummary);
+        }
+
+        this.active = this._activeReportAnalyses.length > 0;
+    }
+
+    get reportAnalyses() {
+        return this._activeReportAnalyses;
     }
 
     get report() {
         if (!this.active) {
             return "No data to report!";
         }
-        return this.reportAnalyses.length + " analyses included in the report";
+        return (
+            this.reportAnalyses.length +
+            " " +
+            (this.reportAnalyses.length > 0 ? "analyses" : "analysis") +
+            "  included in the report"
+        );
+    }
+
+    get jsonReport() {
+        if (!this.active) {
+            return {};
+        }
+
+        const reportAnalyses = this.reportAnalyses.map(
+            (analysis) => analysis.jsonReport
+        );
+
+        return { reportAnalyses_v1: reportAnalyses };
     }
 }
 
-export async function analyzeFile(file) {
+async function runAnalysis(analysisClass, enrichedData) {
+    const subAnalysis = new analysisClass();
+
+    return subAnalysis
+        .analyze(enrichedData)
+        .then((status) => {
+            const runStatus = status || createSuccessStatus(analysisClass);
+            return {
+                analysis: subAnalysis,
+                status: runStatus,
+            };
+        })
+        .catch((error) => {
+            return {
+                analysis: subAnalysis,
+                status: createErrorStatus(analysisClass, error),
+            };
+        });
+}
+
+export async function analyzeFile(file, facebookAccount) {
     const zipFile = new ZipFile(file, window.pod);
-    const enrichedFile = { ...file, zipFile };
-    const parsedAnalyses = await Promise.all(
+    const enrichedData = { ...file, zipFile, facebookAccount };
+    const analysesResults = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
-            const subAnalysis = new subAnalysisClass();
-            await subAnalysis.parse(enrichedFile);
-            return subAnalysis;
+            return runAnalysis(subAnalysisClass, enrichedData);
         })
     );
 
-    const activeAnalyses = parsedAnalyses.filter(
+    const successfullyExecutedAnalyses = analysesResults
+        .filter(({ status }) => status.isSuccess)
+        .map(({ analysis }) => analysis);
+    const activeGlobalAnalyses = successfullyExecutedAnalyses.filter(
         (analysis) => !analysis.isForDataReport && analysis.active
-    );
-    const reportAnalyses = parsedAnalyses.filter(
-        (analysis) =>
-            (analysis.isForDataReport && analysis.active) ||
-            (!analysis.isForDataReport && !analysis.active)
     );
 
     return {
-        analyses: activeAnalyses,
-        unrecognizedData: new UnrecognizedData(reportAnalyses),
+        analyses: activeGlobalAnalyses,
+        unrecognizedData: new UnrecognizedData(analysesResults),
     };
 }

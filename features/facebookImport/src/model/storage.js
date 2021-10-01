@@ -1,29 +1,23 @@
 export default class Storage {
     constructor(pod) {
         this.changeListener = () => {};
-        this._files = {};
+        this._files = null;
         this._pod = pod;
     }
 
     get files() {
-        return Object.values(this._files);
+        return !this._files ? this._files : Object.values(this._files);
     }
 
     async refreshFiles() {
-        return new Promise((resolve) => {
-            const { polyOut } = this._pod;
-            this._files = [];
-            polyOut.readdir("").then((files) => {
-                for (const file of files) {
-                    try {
-                        this._files[file] = polyOut.stat(file);
-                    } catch (e) {
-                        console.log(e);
-                    }
-                }
-                resolve(files);
-            });
-        });
+        const { polyOut } = this._pod;
+        const files = await polyOut.readdir("");
+        const statResults = {};
+        for (let file of files) {
+            statResults[file] = await polyOut.stat(file);
+        }
+        this._files = statResults;
+        return files;
     }
 
     async readFile(path) {
@@ -44,10 +38,12 @@ export default class Storage {
     async removeFile(file) {
         return new Promise((resolve) => {
             const { polyNav } = this._pod;
-            polyNav.removeFile(file).then(() => {
-                this.refreshFiles().then(() => resolve());
-            });
-            this.changeListener();
+            polyNav
+                .removeFile(file)
+                .then(() => {
+                    this.refreshFiles().then(() => resolve());
+                })
+                .then(() => this.changeListener());
         });
     }
 }
@@ -58,24 +54,22 @@ export class ZipFile {
         this._file = file;
     }
 
-    getEntries() {
-        return new Promise((resolve) => {
-            const { polyOut } = this._pod;
-            polyOut.readdir(this._file.id).then((entries) => resolve(entries));
-        });
+    async getEntries() {
+        const { polyOut } = this._pod;
+        return polyOut.readdir(this._file.id);
     }
 
-    data() {
-        return new Promise((resolve) => {
-            const { polyOut } = this._pod;
-            polyOut.readFile(this._file.id).then((entries) => resolve(entries));
-        });
+    async data() {
+        return this.getContent(this._file.id);
     }
 
-    getContent(entry) {
-        return new Promise((resolve) => {
-            const { polyOut } = this._pod;
-            polyOut.readFile(entry).then((content) => resolve(content));
-        });
+    async stat(entry) {
+        const { polyOut } = this._pod;
+        return polyOut.stat(entry);
+    }
+
+    async getContent(entry) {
+        const { polyOut } = this._pod;
+        return polyOut.readFile(entry);
     }
 }

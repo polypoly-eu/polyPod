@@ -1,44 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
+
+import i18n from "../../i18n.js";
 
 import "./report.css";
 
-const ReportCard = ({ analysis }) => {
-    return (
-        <div className="analysis-card">
-            <h1>{analysis.title}</h1>
-            <div className="list">{analysis.render()}</div>
-        </div>
-    );
-};
-
 const ReportView = () => {
-    const { fileAnalysis } = useContext(ImporterContext);
+    const { fileAnalysis, setReportResult, handleBack } =
+        useContext(ImporterContext);
     const unrecognizedData = fileAnalysis.unrecognizedData;
+    const [loading, setLoading] = useState(false);
 
-    //Todo
-    const handleSendReport = () => {
-        console.log("ToDo");
-    };
+    const handleSendReport = async () => {
+        setLoading(true);
 
-    function renderReportAnalyses() {
-        if (!unrecognizedData) {
-            return "";
-        }
-        return (
-            <div>
-                {unrecognizedData.reportAnalyses.map((analysis, index) => (
-                    <ReportCard analysis={analysis} key={index} />
-                ))}
-            </div>
+        const error = await window.pod.network.httpPost(
+            process.env.POLYPOD_POLYPEDIA_REPORT_URL,
+            JSON.stringify(unrecognizedData.jsonReport),
+            "application/json",
+            process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
         );
-    }
+        if (error) console.error("Failed to send report:", error);
+        setReportResult(!error);
+        handleBack();
+    };
 
     return (
         <div className="report-view">
-            <h1>Unrecognized data report</h1>
-            {renderReportAnalyses()}
-            <button onClick={handleSendReport}>Send report</button>
+            <h1 className="report-view-title">
+                {i18n.t("report:intro.headline")}
+            </h1>
+            <p>{i18n.t("report:intro.text")}</p>
+            <div className={"button-area" + (loading ? " disabled" : "")}>
+                <RouteButton className="view-details" route="/report/details">
+                    {i18n.t("report:viewDetails")}
+                </RouteButton>
+                <button className="send-later" onClick={handleBack}>
+                    {i18n.t("report:sendLater")}
+                </button>
+                <button className="send" onClick={handleSendReport}>
+                    {i18n.t("report:send")}
+                </button>
+            </div>
         </div>
     );
 };

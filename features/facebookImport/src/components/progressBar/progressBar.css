@@ -7,6 +7,7 @@
     flex-direction: row;
     box-sizing: border-box;
     padding: 0 16px;
+    margin: auto;
 }
 
 .import-view .progress-bar .section {
@@ -38,5 +39,30 @@
 }
 
 .progress-bar .explore-progress {
+    background-color: var(--color-indigo-950);
+}
+
+.progress-bar .section .number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.progress-bar .section .request-number {
+    background-color: var(--color-indigo-300);
+}
+
+.progress-bar .section .download-number {
+    background-color: var(--color-indigo-500);
+}
+
+.progress-bar .section .import-number {
+    background-color: var(--color-indigo-700);
+}
+
+.progress-bar .section .explore-number {
     background-color: var(--color-indigo-950);
 }

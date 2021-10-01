@@ -1,6 +1,8 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
+    Info,
     Matcher,
+    Network,
     Pod,
     PolyIn,
     PolyOut,
@@ -157,7 +159,41 @@ class LocalStoragePolyOut implements PolyOut {
     }
 
     stat(id: string): Promise<Stats> {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
+            const parts = id.split("/");
+            if (parts.length > 3) {
+                const zipId = `${parts[0]}//${parts[2]}`;
+                const dataUrl = localStorage.getItem(zipId);
+                if (!dataUrl) {
+                    reject(new Error(`File not found: ${zipId}`));
+                    return;
+                }
+                const reader = new zip.ZipReader(
+                    new zip.Data64URIReader(dataUrl)
+                );
+                const entryPath = id.substring(zipId.length + 1);
+                reader.getEntries().then((entries) => {
+                    const zipEntry = entries.find(
+                        (entry) => entry.filename == entryPath
+                    );
+                    if (!zipEntry) {
+                        reject(new Error(`Zip entry not found: ${entryPath}`));
+                        return;
+                    }
+                    const modal: Stats = {
+                        getId: () => id,
+                        getSize: () => zipEntry.uncompressedSize,
+                        getTime: () => "",
+                        getName: () => zipEntry.filename,
+                        isFile: () => !zipEntry.directory,
+                        isDirectory: () => zipEntry.directory,
+                    };
+
+                    resolve(modal);
+                });
+                return;
+            }
+
             files = new Map<string, Stats>(
                 JSON.parse(
                     localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
@@ -179,6 +215,53 @@ class LocalStoragePolyOut implements PolyOut {
     }
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
+
+class PodJsInfo implements Info {
+    async getRuntime(): Promise<string> {
+        return "podjs";
+    }
+
+    async getVersion(): Promise<string> {
+        return "¯\\_(ツ)_/¯";
+    }
+}
+
+class BrowserNetwork implements Network {
+    async httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<string | undefined> {
+        return new Promise((resolve) => {
+            const request = new XMLHttpRequest();
+
+            request.onreadystatechange = function () {
+                if (request.readyState !== XMLHttpRequest.DONE) return;
+                const status = request.status;
+                if (status < 200 || status > 299) {
+                    resolve(`Unexpected response status: ${status}`);
+                    return;
+                }
+                resolve();
+            };
+
+            request.onerror = function () {
+                resolve("Network error");
+            };
+
+            request.open("POST", url);
+            if (contentType)
+                request.setRequestHeader("Content-Type", contentType);
+            if (authorization)
+                request.setRequestHeader(
+                    "Authorization",
+                    "Basic " + btoa(authorization)
+                );
+            request.send(body);
+        });
+    }
+}
 
 function createUUID(): string {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
@@ -292,4 +375,6 @@ export class BrowserPod implements Pod {
     public readonly polyIn = new LocalStoragePolyIn();
     public readonly polyOut = new LocalStoragePolyOut();
     public readonly polyNav = new BrowserPolyNav();
+    public readonly info = new PodJsInfo();
+    public readonly network = new BrowserNetwork();
 }

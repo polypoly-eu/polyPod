@@ -6,7 +6,9 @@ import {
     PolyNav,
     EncodingOptions,
     Matcher,
+    Network,
     Stats,
+    Info,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -84,6 +86,31 @@ class AsyncPolyNav implements PolyNav {
     }
 }
 
+class AsyncInfo implements Info {
+    constructor(private readonly promise: Promise<Info>) {}
+
+    async getRuntime(): Promise<string> {
+        return (await this.promise).getRuntime();
+    }
+
+    async getVersion(): Promise<string> {
+        return (await this.promise).getVersion();
+    }
+}
+
+class AsyncNetwork implements Network {
+    constructor(private readonly promise: Promise<Network>) {}
+
+    async httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<string | undefined> {
+        return (await this.promise).httpPost(url, body, contentType, authorization);
+    }
+}
+
 class AsyncPolyLifecycle implements PolyLifecycle {
     constructor(private readonly promise: Promise<PolyLifecycle | undefined>) {}
 
@@ -106,12 +133,16 @@ export class AsyncPod implements Pod {
     readonly polyOut: PolyOut;
     readonly polyIn: PolyIn;
     readonly polyNav: PolyNav;
+    readonly info: Info;
+    readonly network: Network;
     readonly polyLifecycle: PolyLifecycle;
 
     constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
         this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
         this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
         this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
+        this.info = new AsyncInfo(promise.then((pod) => pod.info));
+        this.network = new AsyncNetwork(promise.then((pod) => pod.network));
         this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
     }
 }

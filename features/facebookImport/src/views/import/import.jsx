@@ -16,20 +16,14 @@ const Import = () => {
         navigationState,
         updateImportStatus,
         files,
-        refreshFiles,
         handleRemoveFile,
+        handleImportFile,
     } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
-    const file = files[0];
-
-    const handleImportFile = async () => {
-        const { polyNav } = window.pod;
-        await polyNav.importFile();
-        refreshFiles();
-    };
+    const file = files?.[0];
 
     const onRemoveFile = () => {
-        handleRemoveFile(file.id);
+        return handleRemoveFile(file.id);
     };
 
     return (
@@ -48,6 +42,7 @@ const Import = () => {
                 file={file}
                 onRemoveFile={onRemoveFile}
             />
+            {files === null && <div className="overlay"></div>}
         </div>
     );
 };

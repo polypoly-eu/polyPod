@@ -16,6 +16,6 @@ class PolyOut: PolyOutProtocol {
         self.session = session
         
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        fileStoragePath = paths[0]
+        fileStoragePath = paths[0].resolvingSymlinksInPath()
     }
 }

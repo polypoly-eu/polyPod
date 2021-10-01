@@ -23,7 +23,9 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.features.Feature
+import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
+import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
@@ -46,7 +48,9 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         PolyIn(context, context.filesDir),
         PolyNav(
             webView = webView, context = context
-        )
+        ),
+        Info(),
+        Network(context)
     )
 
     var feature: Feature? = null
@@ -111,6 +115,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
+        Preferences.currentFeatureName = feature.id
         api.polyNav.setNavObserver(
             PolyNavObserver(
                 null,

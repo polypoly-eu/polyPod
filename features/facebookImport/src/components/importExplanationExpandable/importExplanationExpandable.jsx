@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
 import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
+import scrollSmoothly from "../../utils/smoothScroll.js";
 
 import "./importExplanationExpandable.css";
 
@@ -25,27 +26,33 @@ const ImportExplanationExpandable = ({
     file,
     onRemoveFile,
 }) => {
-    const importRefs = {
-        request: useRef(),
-        download: useRef(),
-        import: useRef(),
-        explore: useRef(),
+    const importIds = {
+        request: "request",
+        download: "download",
+        import: "import",
+        explore: "explore",
     };
 
     const expandableRef = useRef();
+    const expandableId = "expandable";
 
-    const handleScrollToSection = () => {
-        const refPoint = importRefs[importStatus]?.current;
-        if (refPoint)
-            refPoint.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
+    useEffect(() => {
+        scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
+    }, [importStatus]);
+
+    const handleRequestStatus = () => {
+        onUpdateImportStatus(importSteps.download);
+        window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
     };
 
     const bodyContent = {
         request: (
             <>
+                <img
+                    src="./images/request-illustration.svg"
+                    alt="request-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:request.1")}</p>
                 <InfoBox textContent={i18n.t("import:request.info.1")} />
                 <div className="separator"></div>
@@ -56,14 +63,14 @@ const ImportExplanationExpandable = ({
                 <img src="./images/document.svg" alt="document" />
                 <p>{i18n.t("import:request.4")}</p>
                 <img
-                    src="./images/json.svg"
-                    className="translucent-sides"
+                    src="./images/import-settings.png"
+                    className="full-screen"
                     alt="select-json"
                 />
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <button
                     className="btn-highlighted"
-                    onClick={() => onUpdateImportStatus(importSteps.download)}
+                    onClick={() => handleRequestStatus()}
                 >
                     {i18n.t("import:request.button")}
                 </button>
@@ -71,6 +78,11 @@ const ImportExplanationExpandable = ({
         ),
         download: (
             <>
+                <img
+                    src="./images/download-illustration.svg"
+                    alt="download-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:download.1")}</p>
                 <InfoBox textContent={i18n.t("import:download.info")} />
                 <div className="separator"></div>
@@ -92,41 +104,43 @@ const ImportExplanationExpandable = ({
         ),
         import: (
             <>
+                <img
+                    src="./images/import-illustration.svg"
+                    alt="import-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:import")}</p>
                 <div className="separator"></div>
                 <div className="x-divider">
                     {file ? (
-                        <>
-                            <div className="file-info">
-                                <h5>{i18n.t("import:import.chosen")}</h5>
-                                <p>ID {file.id}</p>
-                                <p>Size {file.size} Bytes</p>
-                            </div>
-                            <div className="align-right">
-                                <button
-                                    onClick={onRemoveFile}
-                                    className="delete-button"
-                                >
-                                    {i18n.t("import:import.delete")}
-                                </button>
-                            </div>
-                        </>
+                        <div className="file-info">
+                            <h5>{i18n.t("import:import.chosen")}</h5>
+                            <p>ID {file.id}</p>
+                            <p>Size {file.size} Bytes</p>
+                        </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
                     )}
                 </div>
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
-                    className={`btn-secondary ${file ? "deactivated" : ""}`}
-                    onClick={() => {
+                    className={"btn-secondary"}
+                    onClick={async () => {
+                        if (file) await onRemoveFile();
                         onImportFile();
                     }}
                 >
-                    {i18n.t("import:import.button.1")}
+                    {file
+                        ? i18n.t("import:import.button.1.different")
+                        : i18n.t("import:import.button.1")}
                 </button>
                 <button
                     className={`btn-highlighted ${file ? "" : "deactivated"}`}
-                    onClick={() => onUpdateImportStatus(importSteps.explore)}
+                    onClick={
+                        file
+                            ? () => onUpdateImportStatus(importSteps.explore)
+                            : () => {}
+                    }
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
@@ -134,17 +148,14 @@ const ImportExplanationExpandable = ({
         ),
         explore: (
             <>
+                <img
+                    src="./images/explore-illustration.svg"
+                    alt="explore-illustration"
+                    className="full-screen"
+                />
                 <p>{i18n.t("import:explore.1")}</p>
-                <p>{i18n.t("import:explore.2")}</p>
                 {file ? (
-                    <RouteButton
-                        className="btn-highlighted"
-                        onClick={() =>
-                            onUpdateImportStatus(importSteps.finished)
-                        }
-                        stateChange={{ importStatus: importSteps.finished }}
-                        route="/"
-                    >
+                    <RouteButton className="btn-highlighted" route="/">
                         {i18n.t("import:explore.button")}
                     </RouteButton>
                 ) : (
@@ -159,7 +170,7 @@ const ImportExplanationExpandable = ({
     return (
         <div
             ref={expandableRef}
-            onLoad={handleScrollToSection}
+            id={expandableId}
             className="explanation-expandable"
         >
             <div className="intro">
@@ -173,7 +184,7 @@ const ImportExplanationExpandable = ({
                     <div
                         onClick={() => onUpdateImportStatus(section)}
                         className="head"
-                        ref={importRefs[section]}
+                        id={importIds[section]}
                     >
                         <div className={`number ${section}`}>{index + 1}</div>
                         <div
@@ -182,10 +193,22 @@ const ImportExplanationExpandable = ({
                                 __html: i18n.t(`import:heading.${section}`),
                             }}
                         />
+                        <img
+                            src="./images/angle-up.svg"
+                            alt="arrow-up"
+                            className={
+                                isSectionOpened(
+                                    section,
+                                    importStatus,
+                                    importSteps
+                                )
+                                    ? ""
+                                    : "rotate-180"
+                            }
+                        />
                     </div>
                     {isSectionOpened(section, importStatus, importSteps) ? (
-                        <div className="body">
-                            <div className="separator" />
+                        <div className="section-body">
                             {bodyContent[section]}
                         </div>
                     ) : null}
