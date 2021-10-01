@@ -56,8 +56,8 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
     renderSummary() {
         return `There  ${
             this._picturesCount === 1
-                ? `are ${this._picturesCount} pictures`
-                : `is one picture`
+                ? `is one picture`
+                : `are ${this._picturesCount} pictures`
         } in your export.`;
     }
 }
