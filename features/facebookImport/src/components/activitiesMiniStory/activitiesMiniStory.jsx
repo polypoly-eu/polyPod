@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import i18n from "../../i18n";
 
 import BarChartHorizontal from "../dataViz/barChartHorizontal.jsx";
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import { fillArray } from "../dataViz/utils.jsx";
 
@@ -158,6 +159,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     barWidth={constantTabData.barWidth}
                 />
             </div>
+            <InfoButton />
         </div>
     );
 };

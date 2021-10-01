@@ -1,6 +1,7 @@
 import React from "react";
 import i18n from "../../i18n";
 import RootAnalysis from "./root-analysis";
+import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 
 import BarChart from "../../components/dataViz/barChart.jsx";
 
@@ -106,6 +107,7 @@ export default class MessagesAnalysis extends RootAnalysis {
                         </>
                     )}
                 />
+                <InfoButton />
                 <p className="source">
                     {i18n.t("common:source.your.facebook.data")}
                 </p>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DataBubblesAll from "../dataViz/dataBubblesAll.jsx";
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import i18n from "../../i18n.js";
 
@@ -73,6 +74,7 @@ const DataStructureMiniStory = ({ data }) => {
                         </button>
                     );
                 })}
+                <InfoButton />
                 <p className="source">
                     {i18n.t("common:source.your.facebook.data")}
                 </p>
