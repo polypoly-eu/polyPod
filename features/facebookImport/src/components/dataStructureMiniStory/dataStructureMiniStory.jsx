@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import DataBubblesAll from "../dataViz/dataBubblesAll.jsx";
+import { BubbleCluster } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
 import "./dataStructureMiniStory.css";
 
 const DataStructureMiniStory = ({ data }) => {
+    data.forEach((d) => {
+        d.value = d.count;
+    });
     data.sort(function (a, b) {
-        return b.count - a.count;
+        return b.value - a.value;
     });
 
     const bubbleVizWidth = 400;
@@ -25,8 +28,8 @@ const DataStructureMiniStory = ({ data }) => {
         setSelectedFolder(node.data.title);
     };
 
-    const bubbleColor = (bubbles) => {
-        if (bubbles.data.title === selectedFolder) {
+    const bubbleColor = (bubble) => {
+        if (bubble.data.title === selectedFolder) {
             return dataBubblesLightColor;
         } else {
             return dataBubblesDarkColor;
@@ -46,7 +49,7 @@ const DataStructureMiniStory = ({ data }) => {
                         amount_of_files: amountOfFiles,
                     })}
                 </p>
-                <DataBubblesAll
+                <BubbleCluster
                     data={data}
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}
