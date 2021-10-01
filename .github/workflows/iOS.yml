@@ -1,0 +1,14 @@
+name: Testing polyPod in iOS
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Testing polyPod app
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build iOS
+        run: |
+          cd ios
+          make test | xcpretty
