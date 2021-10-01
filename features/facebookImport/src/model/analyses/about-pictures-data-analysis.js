@@ -39,12 +39,11 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
      */
     async _userPicturesFromExport(zipFile) {
         const relevantEntries = await relevantZipEntries(zipFile);
-        return relevantEntries.filter((zipEntry) => {
-            const noPrefixEntry = removeEntryPrefix(zipEntry);
-            return /^photos_and_videos\/(.+)\.(png|jpg|jpeg|gif)$/.test(
-                noPrefixEntry
-            );
-        });
+        return relevantEntries.filter((zipEntry) =>
+            /^photos_and_videos\/(.+)\.(png|jpg|jpeg|gif)$/.test(
+                removeEntryPrefix(zipEntry)
+            )
+        );
     }
 
     async analyze({ zipFile }) {
