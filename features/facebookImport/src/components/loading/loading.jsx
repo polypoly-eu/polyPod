@@ -6,10 +6,9 @@ import "./loading.css";
 
 const Loading = ({ message }) => (
     <div className="loading">
-        <div>
-            <p>{message} ...</p>
-            <p>{i18n.t("common:loading.closing")}</p>
-        </div>
+        <img src="./images/loading.gif" />
+        <p>{message} ...</p>
+        <p>{i18n.t("common:loading.closing")}</p>
     </div>
 );
 
