@@ -27,7 +27,6 @@
     "lit": "^2.0.0-rc.2",
     "memfs": "^3.2.2",
     "node-fetch": "^2.6.1",
-    "poly-look": "file:../../core/utils/poly-look",
     "rollup": "^2.55.1",
     "rollup-plugin-copy": "3.3.0",
     "rollup-plugin-css-only": "^3.1.0",
