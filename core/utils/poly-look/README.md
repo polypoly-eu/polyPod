@@ -9,9 +9,11 @@ polyLook is the visual component library for all features and applications inclu
 - **run lint**: `npm run lint`
 - **build library**: `npm run build`
 
-## polyLook in-between react and lit component libary
+## State of polyLook
 
-polyLook is momentary even though there are many usable lit-elements primarily used as a react component libary. This means it is not included in the html but imported through bundling with rollup. In the future lit-components can receive a react wrapper and be used like a react component. React components, which are currently used are waiting in `src/incubate` to be translated into lit-elements with react wrappers.
+polyLook aims to be a framework agnostic component library for polyPod features. At the moment, however, it mainly contains prototypes for a potential approach, based on LitElement.
+
+`src/incubate`, on the other hand, contains React components we actually (re)use in existing features. Over time, we aim to turn these React components into mere wrappers for framework agnostic components.
 
 ## Steps to code a new polyLook component
 
