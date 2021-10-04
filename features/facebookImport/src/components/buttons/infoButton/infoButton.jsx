@@ -3,7 +3,7 @@ import RouteButton from "../routeButton.jsx";
 import "./infoButton.css";
 
 const InfoButton = ({
-    // route,
+    route,
     // saveActiveIndex,
     stateChange = null,
 }) => (
@@ -12,7 +12,7 @@ const InfoButton = ({
     >
         <RouteButton
             className="info-button"
-            // route={route}
+            route={route}
             stateChange={stateChange}
         >
             <img src="./images/question.svg"></img>
