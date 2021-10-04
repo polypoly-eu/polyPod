@@ -31,6 +31,7 @@ import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
+import java.io.ByteArrayInputStream
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -78,6 +79,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
 
+        WebView.setWebContentsDebuggingEnabled(true)
         addView(webView)
     }
 
@@ -137,12 +139,25 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 view: WebView,
                 request: WebResourceRequest
             ): WebResourceResponse {
-                if (request.url.lastPathSegment == "favicon.ico")
+                if (request.url.lastPathSegment == "favicon.ico") {
                     return WebResourceResponse(
                         null,
                         null,
                         null
                     )
+                }
+                val rawPath = request.url.path?.removePrefix(PolyOut.fsPrefix)!!
+                if (!rawPath.startsWith("/features/") &&
+                    !rawPath.startsWith("/assets/") &&
+                    !rawPath.startsWith("/container/")
+                ) {
+                    return WebResourceResponse(
+                        null, null,
+                        ByteArrayInputStream(
+                            api.polyOut.readFile(request.url.toString())
+                        )
+                    )
+                }
                 val response = assetLoader.shouldInterceptRequest(request.url)
                 if (response == null) {
                     logger.warn(

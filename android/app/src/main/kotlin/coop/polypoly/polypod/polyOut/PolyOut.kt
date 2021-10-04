@@ -10,11 +10,10 @@ import java.nio.ByteBuffer
 open class PolyOut(
     val context: Context
 ) {
-    private val fsPrefix = "polypod://"
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
     companion object {
-        private val fsPrefix = "polypod://"
+        val fsPrefix = "https://appassets.androidplatform.net/"
         fun idToPath(id: String, context: Context): String {
             if (Preferences.currentFeatureName == null) {
                 throw Error("Cannot execute without a feature")
@@ -37,7 +36,7 @@ open class PolyOut(
         ).path
     }
 
-    open suspend fun readFile(
+    open fun readFile(
         id: String
     ): ByteArray {
         if (id == "") {
