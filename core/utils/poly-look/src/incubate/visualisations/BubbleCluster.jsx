@@ -36,32 +36,25 @@ export const BubbleCluster = ({
       .attr("viewBox", `0 0 ${width} ${height}`);
   }
 
-  function drawClusteredBubbles(svg) {
-    const hierarchicalData = makeHierarchy(data);
-    const packLayout = pack();
-
-    const root = packLayout(hierarchicalData);
-
-    const leafs = svg.selectAll("g").data(root.leaves());
-
-    //exit
-    leafs.exit().remove();
-
-    //update
+  function updateBubbles(leafs) {
     leafs
       .selectAll(".bubble")
       .style("fill", bubbleColor)
       .style("stroke", "#f7fafc")
       .style("vertical-align", "center")
       .attr("fill-opacity", opacity);
+  }
 
-    //enter
-    const newBubbles = leafs
+  function addNewBubbleGroups(leafs) {
+    leafs
       .enter()
       .append("g")
       .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`)
       .on("click", onBubbleClick);
-    newBubbles
+  }
+
+  function addBubbles(bubbleGroups) {
+    bubbleGroups
       .append("circle")
       .attr("class", "bubble")
       .attr("r", (d) => d.r)
@@ -69,35 +62,52 @@ export const BubbleCluster = ({
       .style("stroke", "#f7fafc")
       .style("vertical-align", "center")
       .attr("fill-opacity", opacity);
+  }
+
+  function addTextToBubbleGroup(newBubbleGroups) {
+    newBubbleGroups
+      .append("text")
+      .attr("class", "bubble-value")
+      .text((d) => {
+        return d.r > smallBubblesRadius ? Math.round(d.value) : "";
+      })
+      .attr("text-anchor", "middle")
+      .attr("y", ".3em")
+      .attr("fill", textColor)
+      .style("font-size", (d) => {
+        return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
+      })
+      .style("font-family", "Jost Medium")
+      .style("font-weight", "500")
+      .attr("fill", textColor);
+  }
+
+  function updateBubbleValueTexts(leafs) {
+    leafs
+      .selectAll(".bubble-value")
+      .text((d) => {
+        return d.r > smallBubblesRadius ? Math.round(d.value) : "";
+      })
+      .attr("fill", textColor)
+      .style("font-size", (d) => {
+        return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
+      });
+  }
+
+  function drawClusteredBubbles(svg) {
+    const hierarchicalData = makeHierarchy(data);
+    const packLayout = pack();
+    const root = packLayout(hierarchicalData);
+    const leafs = svg.selectAll("g").data(root.leaves());
+
+    leafs.exit().remove();
+    updateBubbles(leafs);
+    const newBubbleGroups = addNewBubbleGroups(leafsGroups);
+    addBubbles(newBubbleGroups);
 
     if (showValues) {
-      //add texts to new bubbles
-      newBubbles
-        .append("text")
-        .attr("class", "bubble-value")
-        .text((d) => {
-          return d.r > smallBubblesRadius ? Math.round(d.value) : "";
-        })
-        .attr("text-anchor", "middle")
-        .attr("y", ".3em")
-        .attr("fill", textColor)
-        .style("font-size", (d) => {
-          return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
-        })
-        .style("font-family", "Jost Medium")
-        .style("font-weight", "500")
-        .attr("fill", textColor);
-
-      //update texts on current ones
-      leafs
-        .selectAll(".bubble-value")
-        .text((d) => {
-          return d.r > smallBubblesRadius ? Math.round(d.value) : "";
-        })
-        .attr("fill", textColor)
-        .style("font-size", (d) => {
-          return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
-        });
+      addTextToBubbleGroup(newBubbleGroups);
+      updateBubbleValueTexts(leafs);
     }
   }
 
