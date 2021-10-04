@@ -40,7 +40,7 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
     async _userPicturesFromExport(zipFile) {
         const relevantEntries = await relevantZipEntries(zipFile);
         return relevantEntries.filter((zipEntry) =>
-            /^photos_and_videos\/(.+)\.(png|jpg|jpeg|gif)$/.test(
+            /^photos_and_videos\/(.+)\.(jpg|jpeg)$/.test(
                 removeEntryPrefix(zipEntry)
             )
         );
