@@ -11,6 +11,9 @@ import offFacebookEventsMiniStoryEn from "./locales/en/miniStories/offFacebookEv
 import advertisingValueMiniStoryEn from "./locales/en/miniStories/advertisingValue.json";
 import reportEn from "./locales/en/report.json";
 import errorPopupEn from "./locales/en/errorPopup.json";
+import activitiesInfoScreenEn from "./locales/en/infoScreens/activitiesInfoScreen.json";
+import dataStructureInfoScreenEn from "./locales/en/infoScreens/dataStructureInfoScreen.json";
+import messagesInfoScreenEn from "./locales/en/infoScreens/messagesInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import importDe from "./locales/de/import.json";
@@ -23,6 +26,9 @@ import offFacebookEventsMiniStoryDe from "./locales/de/miniStories/offFacebookEv
 import advertisingValueMiniStoryDe from "./locales/de/miniStories/advertisingValue.json";
 import reportDe from "./locales/de/report.json";
 import errorPopupDe from "./locales/de/errorPopup.json";
+import activitiesInfoScreenDe from "./locales/de/infoScreens/activitiesInfoScreen.json";
+import dataStructureInfoScreenDe from "./locales/de/infoScreens/dataStructureInfoScreen.json";
+import messagesInfoScreenDe from "./locales/de/infoScreens/messagesInfoScreen.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -37,6 +43,9 @@ export default new I18n(determineLanguage(), {
         advertisingValueMiniStory: advertisingValueMiniStoryEn,
         report: reportEn,
         errorPopup: errorPopupEn,
+        activitiesInfoScreen: activitiesInfoScreenEn,
+        dataStructureInfoScreen: dataStructureInfoScreenEn,
+        messagesInfoScreen: messagesInfoScreenEn,
     },
     de: {
         common: commonDe,
@@ -50,5 +59,8 @@ export default new I18n(determineLanguage(), {
         advertisingValueMiniStory: advertisingValueMiniStoryDe,
         report: reportDe,
         errorPopup: errorPopupDe,
+        activitiesInfoScreen: activitiesInfoScreenDe,
+        dataStructureInfoScreen: dataStructureInfoScreenDe,
+        messagesInfoScreen: messagesInfoScreenDe,
     },
 });
