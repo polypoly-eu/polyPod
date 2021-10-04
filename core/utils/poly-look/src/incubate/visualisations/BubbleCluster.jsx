@@ -1,6 +1,24 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
+/**
+ * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
+ *
+ * The bubbles are being added in a spiral starting in the center of the cluster meaning sorted data will lead to all small bubbles in the middle or outside.
+ *
+ * @function
+ * @param {Object[]} data - The data to be visualized as a bubble cluster
+ * @param {string} data[].title - The title/name the bubble has
+ * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
+ * @param {number} width - The width of the svg
+ * @param {number} height - The height of the svg
+ * @param {string|callback = "blue"} bubbleColor - The color of the bubble (callbacks receive event and data)
+ * @param {string|callback = "white"} textColor - The color of the bubble text (callbacks receive event and data)
+ * @param {number|callback = 1} bubbleColor - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
+ * @param {boolean} showValues - Whether texts displaying the value of the bubble are added
+ * @param {callback} onBubbleClick - Bubble onclick function
+ * @returns {jsx-div with svg attached}
+ */
 export const BubbleCluster = ({
   data,
   width,
@@ -17,6 +35,8 @@ export const BubbleCluster = ({
   const bigBubblesRadius = 50;
   const bigBubblesFont = "20px";
   const mediumBubblesFont = "16px";
+
+  console.log(data);
 
   function makeHierarchy(children) {
     return d3.hierarchy({ children }).sum((d) => d.value);
@@ -46,7 +66,7 @@ export const BubbleCluster = ({
   }
 
   function addNewBubbleGroups(leafs) {
-    leafs
+    return leafs
       .enter()
       .append("g")
       .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`)
