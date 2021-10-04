@@ -86,7 +86,6 @@ export const BubbleCluster = ({
     leafs
       .selectAll(".bubble-value")
       .text((d) => {
-        k;
         return d.r > smallBubblesRadius ? Math.round(d.value) : "";
       })
       .attr("fill", textColor)
