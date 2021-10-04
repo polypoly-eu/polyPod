@@ -82,6 +82,7 @@ export const VerticalBarChart = ({
       .attr("transform", `translate(0, ${chartHeight})`);
   }
 
+  //TODO: transition of y-axis
   function transitionAxis(barChart) {
     barChart.selectAll(".y-axis").remove();
     barChart
@@ -106,13 +107,7 @@ export const VerticalBarChart = ({
       .attr("transform", `translate(0, ${chartHeight})`);
   }
 
-  function addBars(barChart) {
-    const bars = barChart.selectAll(".bar").data(data, (d) => d.title);
-
-    //exit
-    bars.exit().remove();
-
-    //update
+  function updateExistingBars(bars) {
     bars
       .transition()
       .duration(750)
@@ -126,8 +121,9 @@ export const VerticalBarChart = ({
       .duration(750)
       .attr("y", (d) => yScale(d.value))
       .attr("height", (d) => chartHeight - yScale(d.value));
+  }
 
-    //enter
+  function addEnteringBars(bars) {
     bars
       .enter()
       .append("rect")
@@ -144,6 +140,13 @@ export const VerticalBarChart = ({
       .attr("height", (d) => chartHeight - yScale(d.value));
   }
 
+  function displayBars(barChart) {
+    const bars = barChart.selectAll(".bar").data(data, (d) => d.title);
+    bars.exit().remove();
+    updateExistingBars(bars);
+    addEnteringBars(bars);
+  }
+
   useEffect(() => {
     adaptScalesToData();
 
@@ -152,7 +155,7 @@ export const VerticalBarChart = ({
 
     if (barChart.select(".x-axis").empty()) addAxis(barChart);
     else transitionAxis(barChart);
-    addBars(barChart);
+    displayBars(barChart);
   });
 
   return <div className="bar-chart" ref={barChartRef}></div>;
