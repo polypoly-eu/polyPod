@@ -11,13 +11,13 @@ const InfoScreen = ({ child1, child2 }) => {
         <div className="base-info">
             <div className="info-title">
                 <img src="./images/line-title.svg" />
-                <h1>How to read this?</h1>
+                <h1>{i18n.t("baseInfoScreen:title1")}</h1>
                 <img src="./images/line-title.svg" />
             </div>
             {child1}
             <div className="info-title">
                 <img src="./images/line-title.svg" />
-                <h1>About the data</h1>
+                <h1>{i18n.t("baseInfoScreen:title2")}</h1>
                 <img src="./images/line-title.svg" />
             </div>
             {child2}

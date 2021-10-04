@@ -11,6 +11,7 @@ import offFacebookEventsMiniStoryEn from "./locales/en/miniStories/offFacebookEv
 import advertisingValueMiniStoryEn from "./locales/en/miniStories/advertisingValue.json";
 import reportEn from "./locales/en/report.json";
 import errorPopupEn from "./locales/en/errorPopup.json";
+import baseInfoScreenEn from "./locales/en/infoScreens/baseInfoScreen.json";
 import activitiesInfoScreenEn from "./locales/en/infoScreens/activitiesInfoScreen.json";
 import dataStructureInfoScreenEn from "./locales/en/infoScreens/dataStructureInfoScreen.json";
 import messagesInfoScreenEn from "./locales/en/infoScreens/messagesInfoScreen.json";
@@ -26,6 +27,7 @@ import offFacebookEventsMiniStoryDe from "./locales/de/miniStories/offFacebookEv
 import advertisingValueMiniStoryDe from "./locales/de/miniStories/advertisingValue.json";
 import reportDe from "./locales/de/report.json";
 import errorPopupDe from "./locales/de/errorPopup.json";
+import baseInfoScreenDe from "./locales/de/infoScreens/baseInfoScreen.json";
 import activitiesInfoScreenDe from "./locales/de/infoScreens/activitiesInfoScreen.json";
 import dataStructureInfoScreenDe from "./locales/de/infoScreens/dataStructureInfoScreen.json";
 import messagesInfoScreenDe from "./locales/de/infoScreens/messagesInfoScreen.json";
@@ -43,6 +45,7 @@ export default new I18n(determineLanguage(), {
         advertisingValueMiniStory: advertisingValueMiniStoryEn,
         report: reportEn,
         errorPopup: errorPopupEn,
+        baseInfoScreen: baseInfoScreenEn,
         activitiesInfoScreen: activitiesInfoScreenEn,
         dataStructureInfoScreen: dataStructureInfoScreenEn,
         messagesInfoScreen: messagesInfoScreenEn,
@@ -59,6 +62,7 @@ export default new I18n(determineLanguage(), {
         advertisingValueMiniStory: advertisingValueMiniStoryDe,
         report: reportDe,
         errorPopup: errorPopupDe,
+        baseInfoScreen: baseInfoScreenDe,
         activitiesInfoScreen: activitiesInfoScreenDe,
         dataStructureInfoScreen: dataStructureInfoScreenDe,
         messagesInfoScreen: messagesInfoScreenDe,
