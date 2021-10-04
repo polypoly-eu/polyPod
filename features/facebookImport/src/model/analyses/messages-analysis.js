@@ -107,7 +107,7 @@ export default class MessagesAnalysis extends RootAnalysis {
                         </>
                     )}
                 />
-                <InfoButton />
+                <InfoButton route="/report/details/messages-info" />
                 <p className="source">
                     {i18n.t("common:source.your.facebook.data")}
                 </p>

@@ -26,6 +26,9 @@ import ExploreView from "./views/explore/explore.jsx";
 import ReportView from "./views/report/report.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
 import ReportDetails from "./views/report/details.jsx";
+import DataStructureInfoScreen from "./views/infoScreens/dataStructureInfoScreen/dataStructureInfoScreen.jsx";
+import ActivitiesInfoScreen from "./views/infoScreens/activitiesInfoScreen/activitiesInfoScreen.jsx";
+import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesInfoScreen.jsx";
 
 import "./styles.css";
 
@@ -74,8 +77,17 @@ const FacebookImporter = () => {
                     <Route exact path="/report">
                         <ReportView />
                     </Route>
+                    <Route exact path="/report/data-structure-info">
+                        <DataStructureInfoScreen />
+                    </Route>
                     <Route exact path="/report/details">
                         <ReportDetails />
+                    </Route>
+                    <Route exact path="/report/details/activities-info">
+                        <ActivitiesInfoScreen />
+                    </Route>
+                    <Route exact path="/report/details/messages-info">
+                        <MessagesInfoScreen />
                     </Route>
                 </Switch>
             ) : (

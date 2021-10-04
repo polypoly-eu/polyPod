@@ -159,7 +159,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     barWidth={constantTabData.barWidth}
                 />
             </div>
-            <InfoButton />
+            <InfoButton route="/report/details/activities-info" />
         </div>
     );
 };

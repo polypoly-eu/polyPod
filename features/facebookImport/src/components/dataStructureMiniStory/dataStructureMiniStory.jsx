@@ -74,7 +74,7 @@ const DataStructureMiniStory = ({ data }) => {
                         </button>
                     );
                 })}
-                <InfoButton />
+                <InfoButton route="/report/data-structure-info" />
                 <p className="source">
                     {i18n.t("common:source.your.facebook.data")}
                 </p>
