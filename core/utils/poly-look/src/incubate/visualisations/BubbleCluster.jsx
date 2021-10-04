@@ -86,6 +86,7 @@ export const BubbleCluster = ({
     leafs
       .selectAll(".bubble-value")
       .text((d) => {
+        k;
         return d.r > smallBubblesRadius ? Math.round(d.value) : "";
       })
       .attr("fill", textColor)
@@ -97,12 +98,14 @@ export const BubbleCluster = ({
   function drawClusteredBubbles(svg) {
     const hierarchicalData = makeHierarchy(data);
     const packLayout = pack();
+
     const root = packLayout(hierarchicalData);
+
     const leafs = svg.selectAll("g").data(root.leaves());
 
     leafs.exit().remove();
     updateBubbles(leafs);
-    const newBubbleGroups = addNewBubbleGroups(leafsGroups);
+    const newBubbleGroups = addNewBubbleGroups(leafs);
     addBubbles(newBubbleGroups);
 
     if (showValues) {
