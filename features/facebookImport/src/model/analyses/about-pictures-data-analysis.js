@@ -8,7 +8,7 @@ import RootAnalysis from "./root-analysis";
  * Minimum number of picutures that should be present in
  * the export in order for this analysis to be active.
  */
-const PICTURES_THRESHOLD = 3;
+const PICTURES_THRESHOLD = 1;
 
 export default class AboutPicturesDataAnalysis extends RootAnalysis {
     get label() {
