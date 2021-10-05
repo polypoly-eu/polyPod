@@ -37,6 +37,7 @@ import UknownTopLevelFoldersAnalysis from "./analyses-report/unknown-top-level-f
 import InactiveCardsSummary from "./analyses-report/inactive-cards-summary.js";
 import ActivitiesAnalysis from "./analyses/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/advertising-value-analysis.js";
+import AboutPicturesDataAnalysis from "./analyses/about-pictures-data-analysis.js";
 
 const subAnalyses = [
     DataStructureBubblesAnalysis,
@@ -65,6 +66,7 @@ const subAnalyses = [
     PagesOverviewAnalysis,
     SesssionActivityLocationsAnalysis,
     ImportedJsonFilesAnalysis,
+    AboutPicturesDataAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,

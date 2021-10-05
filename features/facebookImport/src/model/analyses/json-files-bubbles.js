@@ -1,6 +1,6 @@
 import React from "react";
 
-import DataBubblesAll from "../../components/dataViz/dataBubblesAll.jsx";
+import { BubbleCluster } from "@polypoly-eu/poly-look";
 import { jsonDataEntities } from "../../importer/importer-util.js";
 import RootAnalysis from "./root-analysis.js";
 
@@ -40,7 +40,7 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
 
     renderSummary() {
         return (
-            <DataBubblesAll
+            <BubbleCluster
                 data={this._filesMessagesCount}
                 width={400}
                 height={400}
