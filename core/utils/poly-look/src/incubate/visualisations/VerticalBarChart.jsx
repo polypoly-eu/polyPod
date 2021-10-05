@@ -2,7 +2,26 @@ import React, { useEffect, useRef } from "react";
 
 import * as d3 from "d3";
 
-export const VerticalBarChart = ({ data, barColor }) => {
+/**
+ * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
+ *
+ * The bubbles are being added in a spiral starting in the center of the cluster meaning sorted data will lead to all small bubbles in the middle or outside.
+ *
+ * @function
+ * @param {Object[]} data - The data to be visualized as a bubble cluster
+ * @param {string} data[].title - The title/name the bubble has
+ * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
+ * @param {number = 400} [width] - The width of the svg
+ * @param {number = 300} [height] - The height of the svg
+ * @param {string|callback = "blue"} [barColor] - The color of the bar (callbacks receive event and data)
+ * @returns {jsx-div with svg attached}
+ */
+export const VerticalBarChart = ({
+  data,
+  barColor = "blue",
+  width = 400,
+  height = 300,
+}) => {
   const barChartRef = useRef();
 
   //constants
@@ -12,8 +31,6 @@ export const VerticalBarChart = ({ data, barColor }) => {
       bottom: 20,
       left: 40,
     },
-    width = 400,
-    height = 300,
     chartHeight = height - margin.bottom - margin.top,
     chartWidth = width - margin.left - margin.right,
     initializingBarHeight = 2;
@@ -65,6 +82,7 @@ export const VerticalBarChart = ({ data, barColor }) => {
       .attr("transform", `translate(0, ${chartHeight})`);
   }
 
+  //TODO: transition of y-axis
   function transitionAxis(barChart) {
     barChart.selectAll(".y-axis").remove();
     barChart
@@ -89,13 +107,7 @@ export const VerticalBarChart = ({ data, barColor }) => {
       .attr("transform", `translate(0, ${chartHeight})`);
   }
 
-  function addBars(barChart) {
-    const bars = barChart.selectAll(".bar").data(data, (d) => d.title);
-
-    //exit
-    bars.exit().remove();
-
-    //update
+  function updateExistingBars(bars) {
     bars
       .transition()
       .duration(750)
@@ -109,8 +121,9 @@ export const VerticalBarChart = ({ data, barColor }) => {
       .duration(750)
       .attr("y", (d) => yScale(d.value))
       .attr("height", (d) => chartHeight - yScale(d.value));
+  }
 
-    //enter
+  function addEnteringBars(bars) {
     bars
       .enter()
       .append("rect")
@@ -127,6 +140,13 @@ export const VerticalBarChart = ({ data, barColor }) => {
       .attr("height", (d) => chartHeight - yScale(d.value));
   }
 
+  function displayBars(barChart) {
+    const bars = barChart.selectAll(".bar").data(data, (d) => d.title);
+    bars.exit().remove();
+    updateExistingBars(bars);
+    addEnteringBars(bars);
+  }
+
   useEffect(() => {
     adaptScalesToData();
 
@@ -135,7 +155,7 @@ export const VerticalBarChart = ({ data, barColor }) => {
 
     if (barChart.select(".x-axis").empty()) addAxis(barChart);
     else transitionAxis(barChart);
-    addBars(barChart);
+    displayBars(barChart);
   });
 
   return <div className="bar-chart" ref={barChartRef}></div>;
