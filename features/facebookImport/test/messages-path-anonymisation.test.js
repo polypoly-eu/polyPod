@@ -1,6 +1,6 @@
 "use strict";
 
-import { anonymizeJsonEntityPath } from "../src/importer/importer-util";
+import { anonymizeJsonEntityPath } from "../src/model/importers/utils/importer-util";
 
 test("anonymize archived thread message", () => {
     const fileName =
