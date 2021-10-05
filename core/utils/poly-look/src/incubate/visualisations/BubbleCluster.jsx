@@ -12,11 +12,11 @@ import * as d3 from "d3";
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
  * @param {number} width - The width of the svg
  * @param {number} height - The height of the svg
- * @param {string|callback = "blue"} bubbleColor - The color of the bubble (callbacks receive event and data)
- * @param {string|callback = "white"} textColor - The color of the bubble text (callbacks receive event and data)
- * @param {number|callback = 1} bubbleColor - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
- * @param {boolean} showValues - Whether texts displaying the value of the bubble are added
- * @param {callback} onBubbleClick - Bubble onclick function
+ * @param {string|callback = "blue"} [bubbleColor] - The color of the bubble (callbacks receive event and data)
+ * @param {string|callback = "white"} [textColor] - The color of the bubble text (callbacks receive event and data)
+ * @param {number|callback = 1} [bubbleColor] - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
+ * @param {boolean = true} [showValues] - Whether texts displaying the value of the bubble are added
+ * @param {callback = () => {}} [onBubbleClick] - Bubble onclick function
  * @returns {jsx-div with svg attached}
  */
 export const BubbleCluster = ({
