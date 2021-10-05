@@ -4,22 +4,16 @@ jobs:
   test:
     strategy:
       matrix:
-        runner: [macOS-10.15,macOS-11]
-    name: Testing polyPod iOS app for ${{matrix.runner}}
-    runs-on: ${{matrix.runner}}
+        simDestination: [13.3,14.4]
+    name: Testing polyPod iOS app for destination ${{matrix.simDestination}}
+    runs-on: macOS-11
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Force xcode 11 for older runner
-        if: ${{ contains(matrix.runner, 'macOS-10.15') }}
-        run: |
-          echo "simDestination=13.3" >> $GITHUB_ENV
-          sudo xcode-select -switch /Applications/Xcode_11.2.app
-      - name: Set latest destination for newer runner
-        if: ${{ contains(matrix.runner, 'macOS-11') }}
-        run: |
-          echo "simDestination=14.4" >> $GITHUB_ENV
       - name: Build iOS
+        with:
+          env:
+            simDestination: ${{matrix.simDestination}}
         run: |
           cd ios
           set -o pipefail
