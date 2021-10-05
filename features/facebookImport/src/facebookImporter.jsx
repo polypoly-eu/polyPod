@@ -13,12 +13,6 @@ import {
     ImporterContext,
 } from "./context/importer-context.jsx";
 
-import "./components/facebook-import.js";
-import "./components/explore-view.js";
-import "./components/import-view.js";
-import "./components/report-view.js";
-import "./components/overview-view.js";
-
 import ErrorPopup from "./components/errorPopup/errorPopup.jsx";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
