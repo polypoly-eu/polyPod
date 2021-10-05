@@ -7,6 +7,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: List Applications
+        run: ls /Applications/Xcode*
       - name: Lock xcode version
         run: sudo xcode-select -switch /Applications/Xcode_13.0.app
       - name: Build iOS
