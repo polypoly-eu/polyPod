@@ -3,11 +3,15 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: Testing polyPod app
+    name: Testing polyPod iOS app
     runs-on: macOS-10.15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Testing....display available Xcodes on the Server
+        run: ls /Applications | grep Xcode
+      - name: Force xcode 11
+        run: sudo xcode-select -switch /Applications/Xcode_11.1.app
       - name: Build iOS
         run: |
           cd ios
