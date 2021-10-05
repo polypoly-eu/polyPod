@@ -12,7 +12,7 @@ test:
 	xcodebuild clean test \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
-		-destination "platform=iOS Simulator,name=iPhone 11,OS=14.4"
+		-destination "platform=iOS Simulator,name=iPhone 11,OS=13.3"
 
 archive:
 	rm -rf $(archive_path)
