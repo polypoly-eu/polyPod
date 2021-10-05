@@ -36,8 +36,6 @@ export const BubbleCluster = ({
   const bigBubblesFont = "20px";
   const mediumBubblesFont = "16px";
 
-  console.log(data);
-
   function makeHierarchy(children) {
     return d3.hierarchy({ children }).sum((d) => d.value);
   }
@@ -56,8 +54,8 @@ export const BubbleCluster = ({
       .attr("viewBox", `0 0 ${width} ${height}`);
   }
 
-  function updateBubbles(leafs) {
-    leafs
+  function updateBubbles(leaves) {
+    leaves
       .selectAll(".bubble")
       .style("fill", bubbleColor)
       .style("stroke", "#f7fafc")
@@ -65,8 +63,8 @@ export const BubbleCluster = ({
       .attr("fill-opacity", opacity);
   }
 
-  function addNewBubbleGroups(leafs) {
-    return leafs
+  function addNewBubbleGroups(leaves) {
+    return leaves
       .enter()
       .append("g")
       .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`)
@@ -102,8 +100,8 @@ export const BubbleCluster = ({
       .attr("fill", textColor);
   }
 
-  function updateBubbleValueTexts(leafs) {
-    leafs
+  function updateBubbleValueTexts(leaves) {
+    leaves
       .selectAll(".bubble-value")
       .text((d) => {
         return d.r > smallBubblesRadius ? Math.round(d.value) : "";
@@ -120,16 +118,16 @@ export const BubbleCluster = ({
 
     const root = packLayout(hierarchicalData);
 
-    const leafs = svg.selectAll("g").data(root.leaves());
+    const leaves = svg.selectAll("g").data(root.leaves());
 
-    leafs.exit().remove();
-    updateBubbles(leafs);
-    const newBubbleGroups = addNewBubbleGroups(leafs);
+    leaves.exit().remove();
+    updateBubbles(leaves);
+    const newBubbleGroups = addNewBubbleGroups(leaves);
     addBubbles(newBubbleGroups);
 
     if (showValues) {
       addTextToBubbleGroup(newBubbleGroups);
-      updateBubbleValueTexts(leafs);
+      updateBubbleValueTexts(leaves);
     }
   }
 
