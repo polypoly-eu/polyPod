@@ -21,6 +21,7 @@
 "settings_privacy_policy_title" = "Datenschutzerklärung";
 "settings_terms_of_use_title" = "Nutzungsbedingungen";
 "settings_licenses_title" = "Lizenzen";
+"message_feature_error %@ %@" = "Leider gab es einen Fehler in '%@':\n\n%@\n\nIch beende es.";
 "message_url_open_prevented %@ %@" = "Ich habe %@ davon abgehalten, eine URL zu öffnen:\n%@";
 "message_url_open_requested %@ %@" = "%@s möchte eine URL in Ihrem Browser öffnen:\n\n%@s\n\nZulassen?";
 "message_security_warning_title" = "Sicherheitswarnung";
