@@ -2,7 +2,7 @@ archive_path = PolyPod.xcarchive
 project_path = PolyPodApp/PolyPod.xcodeproj
 scheme_name = PolyPod
 export_options_plist = exportOptions.plist
-destination = 15.0
+destination = 14.4
 
 build:
 	xcodebuild clean build \
