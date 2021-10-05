@@ -5,10 +5,12 @@ import i18n from "../../i18n.js";
 import "./loading.css";
 
 const Loading = ({ message }) => (
-    <div className="loading">
-        <img src="./images/loading.gif" />
-        <p>{message} ...</p>
-        <p>{i18n.t("common:loading.closing")}</p>
+    <div className="loading-overlay">
+        <div className="loading">
+            <img src="./images/loading.gif" />
+            <p>{message} ...</p>
+            <p>{i18n.t("common:loading.closing")}</p>
+        </div>
     </div>
 );
 

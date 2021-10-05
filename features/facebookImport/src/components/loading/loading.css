@@ -1,9 +1,18 @@
+.loading-overlay {
+    display: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: transparent;
+}
+
 .loading {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
+    pointer-events: all;
 }
 
 .loading p {
