@@ -11,9 +11,9 @@ import * as d3 from "d3";
  * @param {Object[]} data - The data to be visualized as a bubble cluster
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
- * @param {number = 400} width - The width of the svg
- * @param {number = 300} height - The height of the svg
- * @param {string|callback = "blue"} barColor - The color of the bar (callbacks receive event and data)
+ * @param {number = 400} [width] - The width of the svg
+ * @param {number = 300} [height] - The height of the svg
+ * @param {string|callback = "blue"} [barColor] - The color of the bar (callbacks receive event and data)
  * @returns {jsx-div with svg attached}
  */
 export const VerticalBarChart = ({
