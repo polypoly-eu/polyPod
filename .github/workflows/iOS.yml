@@ -1,9 +1,9 @@
 name: Testing polyPod in iOS
 on: [push, pull_request]
-strategy:
+jobs:
+  strategy:
   matrix:
     runner: [macOS-10.15,macOS-11]
-jobs:
   test:
     name: Testing polyPod iOS app for ${{matrix.runner}}
     runs-on: ${{matrix.runner}}
