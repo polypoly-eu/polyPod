@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
@@ -31,6 +31,14 @@ const ImportExplanationExpandable = ({
         download: "download",
         import: "import",
         explore: "explore",
+    };
+
+    const [fileUploadActive, setFileUploadActive] = useState(false);
+
+    const importFile = async () => {
+        setFileUploadActive(true);
+        await onImportFile();
+        setFileUploadActive(false);
     };
 
     const expandableRef = useRef();
@@ -125,10 +133,14 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
                     className={"btn-secondary"}
-                    onClick={async () => {
-                        if (file) await onRemoveFile();
-                        onImportFile();
-                    }}
+                    onClick={
+                        fileUploadActive
+                            ? () => {}
+                            : async () => {
+                                  if (file) await onRemoveFile();
+                                  importFile();
+                              }
+                    }
                 >
                     {file
                         ? i18n.t("import:import.button.1.different")
@@ -137,7 +149,7 @@ const ImportExplanationExpandable = ({
                 <button
                     className={`btn-highlighted ${file ? "" : "deactivated"}`}
                     onClick={
-                        file
+                        file && !fileUploadActive
                             ? () => onUpdateImportStatus(importSteps.explore)
                             : () => {}
                     }
