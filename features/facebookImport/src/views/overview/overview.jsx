@@ -102,7 +102,6 @@ const Overview = () => {
                     proceedButton={{
                         text: i18n.t("overview:new.import.dialog.continue"),
                         onClick: async () => {
-                            console.log(JSON.stringify(files));
                             await handleRemoveFile(files[0].id);
                             updateImportStatus(importSteps.import);
                         },
