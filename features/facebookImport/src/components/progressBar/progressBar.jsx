@@ -9,10 +9,10 @@ const ProgressBar = ({
     importSections,
     file,
 }) => {
-    const { clicked } = useContext(ImporterContext);
+    const { startRequest } = useContext(ImporterContext);
 
     function requestCheckIcon() {
-        if (clicked || file) {
+        if (startRequest || file) {
             return <img src={`./images/request-done.svg`} />;
         } else {
             return <div className={`number request-number`}>1</div>;
