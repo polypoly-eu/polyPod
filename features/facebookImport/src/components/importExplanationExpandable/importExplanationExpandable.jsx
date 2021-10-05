@@ -36,7 +36,7 @@ const ImportExplanationExpandable = ({
 
     const expandableRef = useRef();
     const expandableId = "expandable";
-    const { isClicked } = useContext(ImporterContext);
+    const { setStartRequest } = useContext(ImporterContext);
 
     useEffect(() => {
         scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
@@ -45,12 +45,12 @@ const ImportExplanationExpandable = ({
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
         window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
-        isClicked(true);
+        setStartRequest(true);
     };
 
     const handleImportStatus = () => {
         onUpdateImportStatus(importSteps.explore);
-        isClicked(true);
+        setStartRequest(true);
     };
 
     const bodyContent = {
