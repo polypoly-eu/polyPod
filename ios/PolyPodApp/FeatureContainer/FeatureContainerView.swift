@@ -46,7 +46,7 @@ class FeatureWebView: WKWebView {
     private let activeActions: Binding<[String]>
     private let openUrlHandler: (String) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
-    private let filePicker = FilePicker()
+    @State private var filePicker = State(initialValue: FilePicker())
 
     init(
         feature: Feature,
@@ -249,7 +249,7 @@ extension FeatureWebView: PolyNavDelegate {
     }
     
     func doHandleImportFile(completion: @escaping (URL?) -> Void) {
-        filePicker.pick(completion: completion)
+        filePicker.wrappedValue.pick(completion: completion)
     }
 }
 
