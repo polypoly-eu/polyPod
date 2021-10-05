@@ -7,6 +7,13 @@ const ActivitiesInfoScreen = () => {
     const activitiesInfoText = [
         <>
             <p>{i18n.t("activitiesInfoScreen:text1")}</p>
+            <p>
+                <strong>{i18n.t("activitiesInfoScreen:legend")}</strong>
+            </p>
+            <img
+                className="infographic"
+                src="./images/infographics/activities.svg"
+            />
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t(`activitiesInfoScreen:text2`),

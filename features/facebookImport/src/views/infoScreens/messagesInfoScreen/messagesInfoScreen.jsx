@@ -7,6 +7,10 @@ const MessagesScreen = () => {
     const messagesInfoText = [
         <>
             <p>{i18n.t("messagesInfoScreen:text1")}</p>
+            <img
+                className="infographic"
+                src="./images/infographics/messages.svg"
+            />
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t(`messagesInfoScreen:text2`),

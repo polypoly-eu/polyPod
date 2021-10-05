@@ -7,6 +7,13 @@ const DataStructureInfoScreen = () => {
     const dataStructureInfoText = [
         <>
             <p>{i18n.t("dataStructureInfoScreen:text1")}</p>
+            <p>
+                <strong>{i18n.t("dataStructureInfoScreen:legend")}</strong>
+            </p>
+            <img
+                className="infographic"
+                src="./images/infographics/dataStructure.svg"
+            />
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t(`dataStructureInfoScreen:text2`),
