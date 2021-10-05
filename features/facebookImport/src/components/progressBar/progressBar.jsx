@@ -7,11 +7,12 @@ const ProgressBar = ({
     onUpdateImportStatus,
     importStatus,
     importSections,
+    file,
 }) => {
     const { clicked } = useContext(ImporterContext);
 
     function requestCheckIcon() {
-        if (clicked) {
+        if (clicked || file) {
             return <img src={`./images/request-done.svg`} />;
         } else {
             return <div className={`number request-number`}>1</div>;
