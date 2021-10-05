@@ -1,6 +1,7 @@
 archive_path = PolyPod.xcarchive
 project_path = PolyPodApp/PolyPod.xcodeproj
 scheme_name = PolyPod
+export_options_plist = exportOptions.plist
 
 build:
 	xcodebuild clean build \
@@ -19,3 +20,10 @@ archive:
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		-archivePath $(archive_path)
+
+upload:
+	xcodebuild \
+		-exportArchive \
+		-archivePath $(archive_path) \
+		-exportOptionsPlist exportOptions.plist \
+		-allowProvisioningUpdates

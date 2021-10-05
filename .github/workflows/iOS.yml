@@ -1,5 +1,5 @@
 name: Testing polyPod in iOS
-on: [push, pull_request]
+#on: [push, pull_request]
 
 jobs:
   test:
@@ -11,4 +11,5 @@ jobs:
       - name: Build iOS
         run: |
           cd ios
+          set -o pipefail
           make test | xcpretty
