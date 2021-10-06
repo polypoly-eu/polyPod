@@ -4,10 +4,16 @@ polyLook is the visual component library for all features and applications inclu
 
 ## Quick guide:
 
-* **run storybook**: `npm run storybook`
-* **run test**: `npm test`
-* **run lint**: `npm run lint`
-* **build library**: `npm run build`
+- **run storybook**: `npm run storybook`
+- **run test**: `npm test`
+- **run lint**: `npm run lint`
+- **build library**: `npm run build`
+
+## State of polyLook
+
+polyLook aims to be a framework agnostic component library for polyPod features. At the moment, however, it mainly contains prototypes for a potential approach, based on LitElement.
+
+`src/incubate`, on the other hand, contains React components we actually (re)use in existing features. Over time, we aim to turn these React components into mere wrappers for framework agnostic components.
 
 ## Steps to code a new polyLook component
 
@@ -19,14 +25,11 @@ polyLook is the visual component library for all features and applications inclu
 
 4- To make the component public through the bundle file, the component must be imported into the polyLook.js file and create a custom label with the name of the component in kebab-case.
 
- Example:
-   If we have a component called PolyButton.js inside the polyLook.js we must add the next lines:
-   ```javascript
-   import PolyButton from './src/PolyButton'
+Example:
+If we have a component called PolyButton.js inside the polyLook.js we must add the next lines:
 
+```javascript
+import PolyButton from "./src/PolyButton";
 
-   window.customElements.define('poly-button', PolyButton);
-
-   ```
-
-
+window.customElements.define("poly-button", PolyButton);
+```

@@ -4,6 +4,7 @@ import Zip
 enum PolyOutError: Error {
     case failedToParsePath(_ path: String)
     case platform(_ error: Error)
+    case noEntryForArchive(_ archive: String)
 }
 
 extension PolyOutError: LocalizedError {
@@ -13,6 +14,8 @@ extension PolyOutError: LocalizedError {
             return "Failed to parse path '\(path)'"
         case .platform(let error):
             return "Platform error: \(error)"
+        case .noEntryForArchive(let archive):
+            return "No entry found for archive `\(archive)'"
         }
     }
 }
@@ -102,7 +105,12 @@ extension PolyOut {
         ) as? [String:String?] ?? [:]
         // List entries of a zip file
         if (dir != "") {
-            let targetUrl = fileStoragePath.appendingPathComponent(fileStore[dir]!!).deletingPathExtension()
+            guard let archivePath = fileStore[dir] as? String else {
+                print("No entry for archive: \(dir)")
+                completionHandler(nil, PolyOutError.noEntryForArchive(dir))
+                return
+            }
+            let targetUrl = fileStoragePath.appendingPathComponent(archivePath).deletingPathExtension()
             var entries = [String]()
             if let enumerator = FileManager.default.enumerator(at: targetUrl, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
                 for case let fileURL as URL in enumerator {

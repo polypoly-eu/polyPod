@@ -44,9 +44,7 @@ function initIframe(iFrame) {
     console.log("initializing iframe");
     port1.start();
     port1.onmessage = (event) => {
-        // console.log(`Data coming from the Feature to the Pod`);
         const base64 = btoa(String.fromCharCode(...new Uint8Array(event.data)));
-        console.dir(base64);
         if (!outerPort) {
             console.warn(
                 "Warning: pod received a message before being " +

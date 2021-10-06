@@ -125,16 +125,10 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
                     className={"btn-secondary"}
-                    onClick={
-                        file
-                            ? () => {
-                                  onRemoveFile();
-                                  onImportFile();
-                              }
-                            : () => {
-                                  onImportFile();
-                              }
-                    }
+                    onClick={async () => {
+                        if (file) await onRemoveFile();
+                        onImportFile();
+                    }}
                 >
                     {file
                         ? i18n.t("import:import.button.1.different")

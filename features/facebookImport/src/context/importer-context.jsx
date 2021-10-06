@@ -4,7 +4,7 @@ import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
-import { importData } from "../importer/importer.js";
+import { importData } from "../model/importer.js";
 
 export const ImporterContext = React.createContext();
 
@@ -115,7 +115,7 @@ export const ImporterProvider = ({ children }) => {
 
     const handleRemoveFile = (fileID) => {
         setFacebookAccount(null);
-        storage.removeFile(fileID);
+        return storage.removeFile(fileID);
     };
 
     const handleImportFile = async () => {

@@ -13,15 +13,28 @@ open class PolyOut(
     private val fsPrefix = "polypod://"
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
+    companion object {
+        private val fsPrefix = "polypod://"
+        fun idToPath(id: String, context: Context): String {
+            if (Preferences.currentFeatureName == null) {
+                throw Error("Cannot execute without a feature")
+            }
+            val pureId = id.removePrefix(
+                fsPrefix
+            ).removePrefix(Preferences.currentFeatureName!!).removePrefix("/")
 
-    private fun idToPath(id: String, context: Context): String {
-        return context.filesDir.absolutePath + "/" + id.removePrefix(
-            fsPrefix
-        )
+            return context.filesDir.absolutePath + "/" +
+                Preferences.currentFeatureName + "/" + pureId
+        }
     }
 
     private fun pathToId(path: File, context: Context): String {
-        return fsPrefix + path.relativeTo(context.filesDir).path
+        return fsPrefix + path.relativeTo(
+            File(
+                context.filesDir.absolutePath + "/" +
+                    Preferences.currentFeatureName
+            )
+        ).path
     }
 
     open suspend fun readFile(
