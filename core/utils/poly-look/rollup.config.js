@@ -2,7 +2,7 @@ import filesize from "rollup-plugin-filesize";
 import { terser } from "rollup-plugin-terser";
 import resolve from "rollup-plugin-node-resolve";
 import svg from "rollup-plugin-svg";
-import sucrase from "rollup-plugin-sucrase";
+import sucrase from "@rollup/plugin-sucrase";
 
 export default {
   input: "src/poly-look.js",
