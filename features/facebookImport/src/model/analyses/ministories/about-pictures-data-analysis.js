@@ -1,8 +1,13 @@
+import React from "react";
 import {
     relevantZipEntries,
     removeEntryPrefix,
 } from "../../importers/utils/importer-util";
 import RootAnalysis from "./root-analysis";
+
+import PicturesMiniStory from "../../../components/picturesMiniStory/picturesMiniStory.jsx";
+
+import i18n from "../../../i18n";
 
 /**
  * Minimum number of picutures that should be present in
@@ -16,7 +21,7 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
     }
 
     get title() {
-        return "About Pictures Story";
+        return i18n.t("picturesMiniStory:title");
     }
 
     /**
@@ -50,13 +55,10 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
         const pictureEntries = await this._userPicturesFromExport(zipFile);
         this._picturesCount = pictureEntries.length;
         this.active = this._picturesCount >= PICTURES_THRESHOLD;
+        this.active = true;
     }
 
     renderSummary() {
-        return `There  ${
-            this._picturesCount === 1
-                ? `is one picture`
-                : `are ${this._picturesCount} pictures`
-        } in your export.`;
+        return <PicturesMiniStory />;
     }
 }
