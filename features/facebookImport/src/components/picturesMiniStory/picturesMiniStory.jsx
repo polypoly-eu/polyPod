@@ -14,7 +14,6 @@ const parts = {
 };
 //color-grey-50
 const inactiveBackgroundColor = "#F7FAFC";
-const inactiveStrokeDasharray = 4.4;
 
 const PicturesMiniStory = () => {
     const [activePart, setActivePart] = useState(parts.person);
