@@ -1,6 +1,6 @@
 "use strict";
 
-import { removeEntryPrefix } from "../src/importer/importer-util";
+import { removeEntryPrefix } from "../src/model/importers/utils/importer-util";
 
 function expectNameForEntry(expectedName, entryName) {
     expect(removeEntryPrefix(entryName)).toBe(expectedName);
