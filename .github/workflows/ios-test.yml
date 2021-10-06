@@ -9,6 +9,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Lock xcode version
         run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+      - name: Build core and features
+        run: ./build.js
       - name: Build iOS
         run: |
           cd ios
