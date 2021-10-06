@@ -1,4 +1,9 @@
-const AD_LOCALE = {
+/**
+ * Current solution for detecting the locate of ads.
+ * We use the title of the ads category to detect the locale
+ * by comparing it to a list of knows titles.
+ */
+export const AD_LOCALE = {
     de: {
         category: "Werbeanzeigen",
         nameRegex: /^Werbeanzeige von (.+)$/,
@@ -9,6 +14,9 @@ const AD_LOCALE = {
     },
 };
 
+/**
+ * Attempt to detect the locale in which the given category name is written.
+ */
 export function localeForCategoyName(categoryName) {
     return Object.values(AD_LOCALE).find(
         (each) => each.category === categoryName
