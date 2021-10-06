@@ -62,7 +62,7 @@ extension PolyOut {
             }
         } else {
             print("stat: No such file: \(filePath.path)")
-            completionHandler(nil, PodApiError.noSuchFile)
+            completionHandler(nil, PodApiError.noSuchFile(filePath.path))
         }
     }
     
