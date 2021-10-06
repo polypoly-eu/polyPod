@@ -1,4 +1,5 @@
 import MessageThreadsGroup from "./message-threads-group.js";
+import RelatedAccountsGroup from "./related-accounts-group.js";
 
 class FacebookAccount {
     constructor() {
@@ -23,6 +24,7 @@ class FacebookAccount {
         this._accountSessionActivities = [];
 
         this._messageThreadsGroup = new MessageThreadsGroup();
+        this._relatedAccounts = new RelatedAccountsGroup();
     }
 
     get importedFileNames() {
@@ -204,6 +206,14 @@ class FacebookAccount {
 
     set accountSessionActivities(accountSessionActivities) {
         this._accountSessionActivities = accountSessionActivities;
+    }
+
+    get relatedAccounts() {
+        return this._relatedAccounts;
+    }
+
+    addRelatedAccounts(relatedAccounts) {
+        this._relatedAccounts.addAll(relatedAccounts);
     }
 
     get dataGroups() {
