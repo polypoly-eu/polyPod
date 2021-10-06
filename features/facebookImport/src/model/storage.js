@@ -25,16 +25,6 @@ export default class Storage {
         return polyOut.readFile(path);
     }
 
-    async addFile() {
-        return new Promise((resolve) => {
-            // File is already added by refreshFiles, just refresh
-            this.refreshFiles().then(() => {
-                this.changeListener();
-                resolve();
-            });
-        });
-    }
-
     async removeFile(file) {
         const { polyNav } = this._pod;
         await polyNav.removeFile(file);
