@@ -1,5 +1,5 @@
 name: Testing polyPod in iOS
-#on: [push, pull_request]
+on: release
 
 jobs:
   test:

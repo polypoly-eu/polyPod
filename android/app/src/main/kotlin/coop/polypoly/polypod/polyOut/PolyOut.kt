@@ -13,6 +13,7 @@ open class PolyOut(
     private val fsPrefix = "polypod://"
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
+
     companion object {
         private val fsPrefix = "polypod://"
         fun idToPath(id: String, context: Context): String {
@@ -80,6 +81,7 @@ open class PolyOut(
         statCache[id] = result
         return result
     }
+
     open suspend fun readdir(
         id: String
     ): Array<String> {

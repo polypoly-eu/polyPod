@@ -1,7 +1,7 @@
-import MessagesImporter from "../../src/importer/data-importers/messages-importer.js";
-import NameImporter from "../../src/importer/data-importers/name-importer.js";
-import FacebookAccount from "../../src/importer/facebook-account.js";
-import { runImporter } from "../../src/importer/importer.js";
+import MessagesImporter from "../../src/model/importers/messages-importer.js";
+import NameImporter from "../../src/model/importers/name-importer.js";
+import FacebookAccount from "../../src/model/entities/facebook-account.js";
+import { runImporter } from "../../src/model/importer.js";
 
 export async function runSingleImporter(importerClass, zipFile) {
     const facebookAccount = new FacebookAccount();
