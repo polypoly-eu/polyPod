@@ -3,6 +3,10 @@
     height: 50px;
 }
 
+.activities-ministory {
+    position: relative;
+}
+
 .activities-ministory .legend {
     display: flex;
     flex-direction: row;
@@ -24,3 +28,13 @@
     font-size: 12px;
     color: var(--color-gray-400);
 }
+
+.activities-ministory .info-button {
+    right: -24px;
+    bottom: 24px;
+}
+
+.activities-ministory .source {
+    margin-top: 40px;
+}
+
