@@ -1,4 +1,3 @@
-import filesize from "rollup-plugin-filesize";
 import { terser } from "rollup-plugin-terser";
 import resolve from "@rollup/plugin-node-resolve";
 import svg from "rollup-plugin-svg";
@@ -25,9 +24,6 @@ export default {
           regex: /^__/,
         },
       },
-    }),
-    filesize({
-      showBrotliSize: true,
     }),
   ],
   external: ["react", "react-dom"],
