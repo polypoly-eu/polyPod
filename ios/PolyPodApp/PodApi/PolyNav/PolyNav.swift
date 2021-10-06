@@ -18,10 +18,6 @@ protocol PolyNavDelegate {
 }
 
 class PolyNav: PolyNavProtocol {
-    static let fsKey = "fileStoreDict"
-    static let fsPrefix = "polyPod://"
-    static let fsFilesRoot = "Files"
-    
     init() {
         delegate = nil
     }
@@ -44,33 +40,23 @@ class PolyNav: PolyNavProtocol {
         delegate?.doHandleImportFile() { url in
             if let url = url {
                 do {
-                    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                    // TODO: Hard coded for the sake of speed, but we need to determine the active feature's ID here
-                    let featureId = "facebookImport"
-                    let featureFilesPath = documentDirectory.appendingPathComponent(PolyNav.fsFilesRoot).appendingPathComponent(featureId)
+                    let featureFilesPath = PolyOut.featureFilesPath()
                     if !FileManager.default.fileExists(atPath: featureFilesPath.path) {
                         try FileManager.default.createDirectory(at: featureFilesPath, withIntermediateDirectories: true)
                     }
-
-                    let newUrl = featureFilesPath.appendingPathComponent(url.lastPathComponent)
-                    if (FileManager.default.fileExists(atPath: newUrl.standardizedFileURL.path)) {
-                        // TODO: Ask the user for a rewrite
-                        try FileManager.default.removeItem(at: newUrl)
-                    }
                     
-                    try FileManager.default.moveItem(
-                        at: url.standardizedFileURL,
-                        to: newUrl)
-                    try Zip.unzipFile(newUrl, destination: newUrl.deletingPathExtension(), overwrite: true, password: nil)
-
+                    let newId = UUID().uuidString
+                    let targetUrl = featureFilesPath.appendingPathComponent(newId)
+                    try Zip.unzipFile(url, destination: targetUrl, overwrite: true, password: nil)
+                    
+                    let newUrl = PolyOut.fsPrefix + newId
                     var fileStore = UserDefaults.standard.value(
-                        forKey: PolyNav.fsKey
+                        forKey: PolyOut.fsKey
                     ) as? [String:String?] ?? [:]
-                    let newUuid = PolyNav.fsPrefix + UUID().uuidString
-                    fileStore[newUuid] = "\(PolyNav.fsFilesRoot)/\(featureId)/\(newUrl.lastPathComponent)"
-                    UserDefaults.standard.set(fileStore, forKey: PolyNav.fsKey)
+                    fileStore[newUrl] = url.lastPathComponent
+                    UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
                     
-                    completionHandler(newUuid)
+                    completionHandler(newUrl)
                 }
                 catch {
                     print(error)
@@ -84,7 +70,7 @@ class PolyNav: PolyNavProtocol {
     
     func removeFile(fileId: String, completionHandler: (Error?) -> Void) {
         var fileStore = UserDefaults.standard.value(
-            forKey: PolyNav.fsKey
+            forKey: PolyOut.fsKey
         ) as? [String:String?] ?? [:]
         do {
             if (fileStore[fileId] != nil) {
@@ -94,7 +80,7 @@ class PolyNav: PolyNavProtocol {
         catch {
         }
         fileStore.removeValue(forKey: fileId)
-        UserDefaults.standard.set(fileStore, forKey: PolyNav.fsKey)
+        UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
         completionHandler(nil)
 
     }

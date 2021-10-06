@@ -12,7 +12,7 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         
         let documentPickerController = UIDocumentPickerViewController(
             documentTypes: ["public.item"],
-            in: .import
+            in: .open
         )
         documentPickerController.delegate = self
         
