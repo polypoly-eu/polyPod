@@ -22,6 +22,7 @@ import {
     createErrorResult,
 } from "./importers/utils/importer-status.js";
 import LanguageAndLocaleImporter from "./importers/language-and-locale-importer.js";
+import RecentlyViewedAdsImporter from "./importers/recently-viewed-ads-importer.js";
 
 const dataImporters = [
     AdInterestsImporter,
@@ -40,6 +41,7 @@ const dataImporters = [
     AccountSessionActivitiesImporter,
     NameImporter,
     LanguageAndLocaleImporter,
+    RecentlyViewedAdsImporter,
 ];
 
 export async function runImporter(
