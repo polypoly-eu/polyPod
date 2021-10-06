@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import i18n from "../../i18n";
 
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
+
 import { fillArray } from "../dataViz/utils.jsx";
 
 import "./activitiesMiniStory.css";
@@ -157,6 +159,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     barColor={"white"}
                 />
             </div>
+            <InfoButton route="/report/details/activities-info" />
         </div>
     );
 };
