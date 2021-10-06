@@ -38,33 +38,36 @@ class PolyNav: PolyNavProtocol {
     
     func importFile(completionHandler: @escaping (String?) -> Void) {
         delegate?.doHandleImportFile() { url in
-            if let url = url {
-                do {
-                    let featureFilesPath = PolyOut.featureFilesPath()
-                    if !FileManager.default.fileExists(atPath: featureFilesPath.path) {
-                        try FileManager.default.createDirectory(at: featureFilesPath, withIntermediateDirectories: true)
-                    }
-                    
-                    let newId = UUID().uuidString
-                    let targetUrl = featureFilesPath.appendingPathComponent(newId)
-                    try Zip.unzipFile(url, destination: targetUrl, overwrite: true, password: nil)
-                    
-                    let newUrl = PolyOut.fsPrefix + newId
-                    var fileStore = UserDefaults.standard.value(
-                        forKey: PolyOut.fsKey
-                    ) as? [String:String?] ?? [:]
-                    fileStore[newUrl] = url.lastPathComponent
-                    UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
-                    
-                    completionHandler(newUrl)
-                }
-                catch {
-                    print(error)
-                    completionHandler(nil)
-                }
+            guard let url = url else {
+                completionHandler(nil)
                 return
             }
-            completionHandler(nil)
+            
+            
+            do {
+                let featureFilesPath = PolyOut.featureFilesPath()
+                if !FileManager.default.fileExists(atPath: featureFilesPath.path) {
+                    try FileManager.default.createDirectory(at: featureFilesPath, withIntermediateDirectories: true)
+                }
+                
+                let newId = UUID().uuidString
+                let targetUrl = featureFilesPath.appendingPathComponent(newId)
+                try Zip.unzipFile(url, destination: targetUrl, overwrite: true, password: nil)
+                try FileManager.default.removeItem(at: url)
+                
+                let newUrl = PolyOut.fsPrefix + newId
+                var fileStore = UserDefaults.standard.value(
+                    forKey: PolyOut.fsKey
+                ) as? [String:String?] ?? [:]
+                fileStore[newUrl] = url.lastPathComponent
+                UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
+                
+                completionHandler(newUrl)
+            }
+            catch {
+                print("importFile for '\(url)' failed: \(error)")
+                completionHandler(nil)
+            }
         }
     }
     
