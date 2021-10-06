@@ -66,7 +66,7 @@ class PolyNav: PolyNavProtocol {
                     var fileStore = UserDefaults.standard.value(
                         forKey: PolyNav.fsKey
                     ) as? [String:String?] ?? [:]
-                    let newUuid = PolyNav.fsPrefix + UUID().uuidString
+                    let newUuid = PolyNav.fsPrefix + "/" + PolyNav.fsFilesRoot + "/" + UUID().uuidString
                     fileStore[newUuid] = "\(PolyNav.fsFilesRoot)/\(featureId)/\(newUrl.lastPathComponent)"
                     UserDefaults.standard.set(fileStore, forKey: PolyNav.fsKey)
                     

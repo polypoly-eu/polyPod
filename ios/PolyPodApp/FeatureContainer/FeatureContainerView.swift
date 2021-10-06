@@ -76,20 +76,35 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
         let index = urlString.index(urlString.startIndex, offsetBy: PolyNav.fsPrefix.count)
         let file = String(urlString[index..<urlString.endIndex])
         let ext = (file as NSString).pathExtension
-        
-        var targetUrl = feature?.path
-        targetUrl = targetUrl?.appendingPathComponent(file)
-        
+                        
         do {
-            let data = try Data(contentsOf: targetUrl!)
+            var fileData: Data? = nil
+            if (file.starts(with: "/" + PolyNav.fsFilesRoot))
+            {
+                let options: [String: Any] = [:]
+                PodApi.shared.polyOut.fileRead(
+                    pathOrId: urlString,
+                    options: options,
+                    completionHandler: { data, error in
+                        fileData = data as? Data
+                    }
+                )
+            }
+            else {
+                var targetUrl = feature?.path
+                targetUrl = targetUrl?.appendingPathComponent(file)
+
+                fileData = try Data(contentsOf: targetUrl!)
+            }
+            
             let response = URLResponse(url: url,
                                        mimeType: mimeTypeFromExt(ext: ext),
-                                       expectedContentLength: data.count,
+                                       expectedContentLength: fileData?.count ?? 0,
                                        textEncodingName: nil)
             
             // Fulfill the task.
             urlSchemeTask.didReceive(response)
-            urlSchemeTask.didReceive(data)
+            urlSchemeTask.didReceive(fileData ?? Data())
             urlSchemeTask.didFinish()
         } catch {
             urlSchemeTask.didFailWithError(error)
