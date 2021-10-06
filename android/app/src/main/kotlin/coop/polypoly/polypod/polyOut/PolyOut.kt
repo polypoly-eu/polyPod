@@ -13,8 +13,13 @@ open class PolyOut(
     private val fsPrefix = "polypod://"
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
+
     companion object {
         private val fsPrefix = "polypod://"
+
+        fun filesPath(context: Context) =
+            context.filesDir.absolutePath + "/featureFiles"
+
         fun idToPath(id: String, context: Context): String {
             if (Preferences.currentFeatureName == null) {
                 throw Error("Cannot execute without a feature")
@@ -23,17 +28,14 @@ open class PolyOut(
                 fsPrefix
             ).removePrefix(Preferences.currentFeatureName!!).removePrefix("/")
 
-            return context.filesDir.absolutePath + "/" +
-                Preferences.currentFeatureName + "/" + pureId
+            return filesPath(context) + "/" + Preferences.currentFeatureName +
+                "/" + pureId
         }
     }
 
     private fun pathToId(path: File, context: Context): String {
         return fsPrefix + path.relativeTo(
-            File(
-                context.filesDir.absolutePath + "/" +
-                    Preferences.currentFeatureName
-            )
+            File(filesPath(context) + "/" + Preferences.currentFeatureName)
         ).path
     }
 
@@ -80,6 +82,7 @@ open class PolyOut(
         statCache[id] = result
         return result
     }
+
     open suspend fun readdir(
         id: String
     ): Array<String> {
