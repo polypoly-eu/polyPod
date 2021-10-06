@@ -20,7 +20,7 @@ protocol PolyNavDelegate {
 class PolyNav: PolyNavProtocol {
     static let fsKey = "fileStoreDict"
     static let fsPrefix = "polyPod://"
-    static let fsFilesRoot = "Files"
+    static let fsFilesRoot = "FeatureFiles"
     
     init() {
         delegate = nil
