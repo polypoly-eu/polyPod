@@ -7,6 +7,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: latest
       - name: Lock xcode version
         run: sudo xcode-select -switch /Applications/Xcode_12.4.app
       - name: Build core and features
