@@ -95,6 +95,7 @@ export const ImporterProvider = ({ children }) => {
     const [activeDetails, setActiveDetails] = useState(null);
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
+    const [startRequest, setStartRequest] = useState(false);
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
@@ -243,6 +244,8 @@ export const ImporterProvider = ({ children }) => {
                 facebookAccount,
                 reportResult,
                 setReportResult,
+                startRequest,
+                setStartRequest,
             }}
         >
             {children}

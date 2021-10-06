@@ -32,6 +32,7 @@ const Import = () => {
                 onUpdateImportStatus={updateImportStatus}
                 importStatus={importStatus}
                 importSections={importSections}
+                file={file}
             />
             <ImportExplanationExpandable
                 importSteps={importSteps}

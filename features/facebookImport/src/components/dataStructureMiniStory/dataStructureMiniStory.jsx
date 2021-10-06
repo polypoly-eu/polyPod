@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
 import { BubbleCluster } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
@@ -76,6 +77,7 @@ const DataStructureMiniStory = ({ data }) => {
                         </button>
                     );
                 })}
+                <InfoButton route="/report/data-structure-info" />
                 <p className="source">
                     {i18n.t("common:source.your.facebook.data")}
                 </p>
