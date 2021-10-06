@@ -1,4 +1,4 @@
-import { jsonStringifyWithUtfEscape } from "../../src/importer/json-encoding";
+import { jsonStringifyWithUtfEscape } from "../../src/model/importers/utils/json-encoding";
 
 export class ZipFileMock {
     constructor() {

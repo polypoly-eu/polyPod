@@ -48,7 +48,7 @@ function initIframe(iFrame) {
         if (!outerPort) {
             console.warn(
                 "Warning: pod received a message before being " +
-                    "fully initialised, queing message"
+                    "fully initialised, queuing message"
             );
             queuedMessages.push(base64);
             return;

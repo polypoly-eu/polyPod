@@ -69,9 +69,36 @@ struct FeatureView: View {
                 title: $title,
                 activeActions: $activeActions,
                 queuedAction: queuedAction,
+                errorHandler: handleError,
                 openUrlHandler: openUrl
             )
         }
+    }
+    
+    private func handleError(_ error: FeatureError) {
+        let alert = UIAlertController(
+            title: "",
+            message: String.localizedStringWithFormat(
+                NSLocalizedString(
+                    "message_feature_error %@ %@",
+                    comment: ""
+                ),
+                feature.name, error
+            ),
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: { (action: UIAlertAction!) in
+                closeAction()
+            }
+        ))
+        UIApplication.shared.windows.first!.rootViewController!.present(
+            alert,
+            animated: true,
+            completion: nil
+        )
     }
     
     private func openUrl(target: String) {

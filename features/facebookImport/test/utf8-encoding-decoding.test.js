@@ -1,6 +1,6 @@
 "use strict";
 
-import { jsonStringifyWithUtfEscape } from "../src/importer/json-encoding";
+import { jsonStringifyWithUtfEscape } from "../src/model/importers/utils/json-encoding";
 
 const jsonData1 = "🦊";
 const jsonData2 = "🦊🤗😍";
