@@ -132,7 +132,7 @@ export const BubbleCluster = ({
   }
 
   useEffect(() => {
-    let svg = d3.select("svg");
+    let svg = d3.select(bubbleRef.current).select("svg");
     if (svg.empty()) {
       svg = createSvg();
     }
