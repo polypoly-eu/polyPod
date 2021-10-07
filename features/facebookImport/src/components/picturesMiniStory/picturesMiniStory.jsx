@@ -27,14 +27,15 @@ const PicturesMiniStory = () => {
     function styleHighlightedPart(part) {
         part.attr("fill", "transparent")
             .attr("stroke-width", 2)
+            .style("stroke-dasharray", null)
             .attr("stroke-opacity", 1);
     }
 
     function stylePart(part) {
         part.attr("fill", inactiveBackgroundColor)
-            .attr("fill-opacity", 0.25)
-            .attr("stroke-width", 1)
-            .style("stroke-dasharray", "3, 3")
+            .attr("fill-opacity", 0.5)
+            .attr("stroke-width", 2)
+            .style("stroke-dasharray", "4, 4")
             .attr("stroke-opacity", 1);
     }
 
