@@ -1,20 +1,7 @@
-function latestTimestamp(timestamps) {
-    return timestamps.reduce(
-        (maxim, current) => (current > maxim ? current : maxim),
-        0
-    );
-}
-
-const MILISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
-function filterForDurationInDays(timestamps, referenceTimestamp, daysCount) {
-    const referenceDate = new Date(referenceTimestamp * 1000);
-    return timestamps.filter((timestamp) => {
-        const date = new Date(timestamp * 1000);
-        const diffTime = Math.abs(referenceDate - date);
-        const diffDays = Math.ceil(diffTime / MILISECONDS_IN_DAY);
-        return diffDays < daysCount;
-    });
-}
+import {
+    filterForDurationInDays,
+    latestTimestamp,
+} from "../importers/utils/timestamps";
 
 export default class ConsolidatedCompany {
     constructor(relatedFacebookAccount, offFacebookCompanies) {
@@ -51,7 +38,7 @@ export default class ConsolidatedCompany {
     get last90DaysSummary() {
         const onFacebookTimestamps = this.onFacebookEventTimestamps;
         const offFacebookTimestamps = this.offFacebookEventTimestamps;
-        const latestEvent = latestTimestamp([
+        const referenceTimestamp = latestTimestamp([
             ...onFacebookTimestamps,
             ...offFacebookTimestamps,
         ]);
@@ -59,12 +46,12 @@ export default class ConsolidatedCompany {
             name: this.displayName,
             onFacebookTimestamps: filterForDurationInDays(
                 this.onFacebookEventTimestamps,
-                latestEvent,
+                referenceTimestamp,
                 90
             ),
             offFacebookTimestamps: filterForDurationInDays(
                 this.offFacebookEventTimestamps,
-                latestEvent,
+                referenceTimestamp,
                 90
             ),
         };
