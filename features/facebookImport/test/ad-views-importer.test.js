@@ -4,6 +4,7 @@ import { ZipFileMock } from "./mocks/zipfile-mock";
 import { runRecentlyViewedAdsImporter } from "./utils/data-importing";
 import {
     expectImportSuccess,
+    expectInvalidContentError,
     expectMissingFileError,
 } from "./utils/importer-assertions";
 
@@ -93,6 +94,71 @@ function createGermanAdViewsData() {
     ]);
 }
 
+function createIncompleteEnglishAdViewsData() {
+    return wrapViewsData([
+        {
+            name: "Ads",
+            description: "Ads you've recently viewed",
+            entries: [
+                {
+                    //timestamp: 1630875618,
+                    data: {
+                        name: "Ad by Company X",
+                        uri: "https://www.facebook.com/companyx.com/posts/1112223344556677",
+                    },
+                },
+                {
+                    timestamp: 1631975618,
+                    data: {
+                        //name: "Ad by Company X",
+                        uri: "https://www.facebook.com/companyx.com/posts/1112223344556677",
+                    },
+                },
+                {
+                    timestamp: 1671975618,
+                    data: {
+                        name: "Ad by Company X",
+                        //uri: "https://www.facebook.com/companyx.com/posts/2233445566678",
+                    },
+                },
+                {
+                    timestamp: 1671975618,
+                    data: {},
+                },
+                {
+                    timestamp: 1693455618,
+                },
+            ],
+        },
+    ]);
+}
+
+function createEnglishDatasetWithMissingAdsCategory() {
+    return wrapViewsData([
+        {
+            name: "Facebook Watch Videos and Shows",
+            description:
+                "Videos and shows you've recently visited or viewed from Facebook Watch and time you've spent watching shows",
+            children: [],
+        },
+        {
+            name: "Posts that have been shown to you in your News Feed",
+            description:
+                "Posts that have been shown to you in your News Feed in the last 90 days.",
+            entries: [],
+        },
+        {
+            name: "Marketplace Items",
+            description: "Items you've viewed in Marketplace",
+            entries: [],
+        },
+    ]);
+}
+
+function datasetWithWrondDataKey() {
+    return { recently_viewed_wrong: [] };
+}
+
 describe("Import ad views from empty export", () => {
     let zipFile = null;
     beforeAll(() => {
@@ -104,6 +170,82 @@ describe("Import ad views from empty export", () => {
 
         expectMissingFileError(result);
     });
+});
+
+describe("Import ad views from export with wrong data key", () => {
+    let zipFile = null;
+
+    beforeAll(async () => {
+        zipFile = new ZipFileMock();
+        zipFile.addJsonEntry(
+            "your_interactions_on_facebook/recently_viewed.json",
+            datasetWithWrondDataKey()
+        );
+    });
+
+    it("triggers missing data key error", async () => {
+        const { result } = await runRecentlyViewedAdsImporter(zipFile);
+        expectInvalidContentError(result);
+    });
+});
+
+describe("Import ad views from export with missing ads category", () => {
+    let zipFile = null;
+    let result = null;
+    let facebookAccount = null;
+    let relatedAccounts = null;
+
+    beforeAll(async () => {
+        zipFile = new ZipFileMock();
+        zipFile.addJsonEntry(
+            "your_interactions_on_facebook/recently_viewed.json",
+            createEnglishDatasetWithMissingAdsCategory()
+        );
+
+        const importingResult = await runRecentlyViewedAdsImporter(zipFile);
+        result = importingResult.result;
+        facebookAccount = importingResult.facebookAccount;
+        relatedAccounts = facebookAccount.relatedAccounts;
+    });
+
+    it("returns success status", () => expectImportSuccess(result));
+
+    it("has zero related accounts", () =>
+        expect(relatedAccounts.count).toBe(0));
+});
+
+describe("Import incomplete ad views from export", () => {
+    let zipFile = null;
+    let result = null;
+    let facebookAccount = null;
+    let relatedAccounts = null;
+
+    beforeAll(async () => {
+        zipFile = new ZipFileMock();
+        zipFile.addJsonEntry(
+            "your_interactions_on_facebook/recently_viewed.json",
+            createIncompleteEnglishAdViewsData()
+        );
+
+        const importingResult = await runRecentlyViewedAdsImporter(zipFile);
+        result = importingResult.result;
+        facebookAccount = importingResult.facebookAccount;
+        relatedAccounts = facebookAccount.relatedAccounts;
+    });
+
+    it("returns success status", () => expectImportSuccess(result));
+
+    it("has zero related accounts", () =>
+        expect(relatedAccounts.count).toBe(1));
+
+    it("has one ads", () => expect(relatedAccounts.adsCount).toBe(1));
+
+    it("has one ad views", () => expect(relatedAccounts.adViewsCount).toBe(1));
+
+    it("has ad with one view", () =>
+        expect(
+            relatedAccounts.items[0].relatedPosts[0].viewedTimestamps
+        ).toStrictEqual([1631975618]));
 });
 
 describe("Import ad views from English dataset", () => {

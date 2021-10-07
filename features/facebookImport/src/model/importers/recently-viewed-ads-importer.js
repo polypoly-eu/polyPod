@@ -91,12 +91,15 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
                 adViewData.data,
                 currentLocale
             );
-            if (relatedAccount) {
-                const ad = this._ensureAd(
-                    adViewData,
-                    relatedAccount,
-                    currentLocale
-                );
+            if (!relatedAccount) {
+                return;
+            }
+            const ad = this._ensureAd(
+                adViewData,
+                relatedAccount,
+                currentLocale
+            );
+            if (adViewData.timestamp) {
                 ad.addViewTimestamp(adViewData.timestamp);
             }
         });
