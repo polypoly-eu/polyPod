@@ -1,6 +1,6 @@
 /**
  * Extract data from an url of the form:
- * "https://www.facebook.com/<id>/post/<somethig-else>".
+ * "https://www.facebook.com/<id>/posts/<somethig-else>".
  *
  * Return this account data:
  *  {
