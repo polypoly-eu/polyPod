@@ -1,6 +1,7 @@
 /**
- * Current solution for detecting the locate of ads.
- * We use the title of the ads category to detect the locale
+ * Current solution for detecting the language of an ad description.
+ *
+ * We use the title of the ads category to detect the language
  * by comparing it to a list of knows titles.
  */
 export const AD_LOCALE = {
