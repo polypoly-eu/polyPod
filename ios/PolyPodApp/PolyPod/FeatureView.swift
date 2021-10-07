@@ -10,6 +10,7 @@ struct FeatureView: View {
     @State var title: String = ""
     @State var activeActions: [String] = []
     @State var queuedAction: (String, DispatchTime)? = nil
+    @State var filePicker = FilePicker()
     
     var body: some View {
         let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
@@ -70,7 +71,8 @@ struct FeatureView: View {
                 activeActions: $activeActions,
                 queuedAction: queuedAction,
                 errorHandler: handleError,
-                openUrlHandler: openUrl
+                openUrlHandler: openUrl,
+                pickFileHandler: pickFile
             )
         }
     }
@@ -149,6 +151,10 @@ struct FeatureView: View {
                             ),
                             style: .default))
         viewController.present(alert, animated: true, completion: nil)
+    }
+    
+    private func pickFile(completion: @escaping (URL?) -> Void) {
+        filePicker.pick(completion: completion)
     }
     
     private func triggerFeatureAction(_ action: String) {
