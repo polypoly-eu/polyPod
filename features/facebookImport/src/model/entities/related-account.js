@@ -26,6 +26,10 @@ export default class RelatedAccount {
         this._displayName = displayName;
     }
 
+    get relatedPosts() {
+        return this._relatedPosts;
+    }
+
     get hasAds() {
         return this.adsCount > 0;
     }

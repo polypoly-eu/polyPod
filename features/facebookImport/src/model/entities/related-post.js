@@ -13,6 +13,10 @@ export default class RelatedPost {
         return this._isAd;
     }
 
+    get viewedTimestamps() {
+        return this._viewedTimestamps;
+    }
+
     get viewsCount() {
         return this._viewedTimestamps.length;
     }

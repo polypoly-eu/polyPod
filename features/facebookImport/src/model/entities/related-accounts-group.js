@@ -3,6 +3,14 @@ export default class RelatedAccountsGroup {
         this._relatedAccounts = [];
     }
 
+    get count() {
+        return this._relatedAccounts.length;
+    }
+
+    get items() {
+        return this._relatedAccounts;
+    }
+
     get adsCount() {
         return this._relatedAccounts.reduce(
             (total, relatedAccount) => total + relatedAccount.adsCount,

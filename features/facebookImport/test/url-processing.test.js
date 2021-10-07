@@ -1,3 +1,5 @@
+"use strict";
+
 import { extractAccountDataFromUrl } from "../src/model/importers/utils/url-processing";
 
 test("Extract account data from post url", () => {

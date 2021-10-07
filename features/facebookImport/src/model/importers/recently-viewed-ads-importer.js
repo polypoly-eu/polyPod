@@ -8,6 +8,32 @@ import {
 import { readJSONDataArray } from "./utils/importer-util";
 import { extractAccountDataFromUrl } from "./utils/url-processing";
 
+/**
+ * Extract ad views from the export.
+ *
+ * To find the ad views we look for an entry with the attribute name
+ * matching a known name. For example:
+ * {
+ *   name: "Ads"
+ *   entries: [ ... ]
+ * }
+ *
+ * An entry should have this format:
+ * {
+ *    "timestamp": 1630875618,
+ *    "data": {
+ *      "name": "Ad by Company X",
+ *       "uri": <url>
+ *    }
+ * }
+ *
+ * The handling of the name is language dependent.
+ * Two types of URLs are currently supported:
+ *   - https://www.facebook.com/CompanyX/posts/57352627288888
+ *   - https://www.facebook.com/permalink.php?story_fbid=1111222334&id=99988877766
+ *
+ * From this we extract a model consisting in an account that has ads that have views.
+ */
 export default class RecentlyViewedAdsImporter extends RootAnalysis {
     constructor() {
         super();
@@ -15,7 +41,7 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
     }
 
     async _readRecentlyViewedData(id, zipFile) {
-        return await readJSONDataArray(
+        return readJSONDataArray(
             "your_interactions_on_facebook/recently_viewed.json",
             "recently_viewed",
             zipFile,
@@ -24,7 +50,7 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
     }
 
     _ensureAd(adViewData, relatedAccount) {
-        const adUrl = adViewData.data?.uri;
+        const adUrl = adViewData.data.uri;
         const post = relatedAccount.postWithUrl(adUrl);
         if (post) {
             post.markAsAd();
@@ -37,6 +63,9 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
     }
 
     _ensureRelatedAccount(adData, currentLocale) {
+        if (!adData?.uri) {
+            return;
+        }
         const accountData = extractAccountDataFromUrl(adData.uri);
         if (!accountData) {
             return;
@@ -46,11 +75,12 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
             return this._accountsByUrl.get(accountData.url);
         }
         const relatedAccount = new RelatedAccount(accountData);
-        relatedAccount.displayName = extractNameFromAdDescription(
-            adData.name,
-            currentLocale
-        );
-
+        if (adData?.name) {
+            relatedAccount.displayName = extractNameFromAdDescription(
+                adData.name,
+                currentLocale
+            );
+        }
         this._accountsByUrl.set(relatedAccount.url, relatedAccount);
         return relatedAccount;
     }
@@ -78,6 +108,7 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
             (eachCategory) =>
                 localeForCategoyName(eachCategory.name) !== undefined
         );
+
         if (adsViewsData) {
             const currentLocale = localeForCategoyName(adsViewsData.name);
             this._extractViewedAds(adsViewsData, currentLocale);
