@@ -54,7 +54,7 @@ const PicturesMiniStory = () => {
     return (
         <div className="pictures-mini-story">
             <p>{i18n.t("picturesMiniStory:text.1")}</p>
-            <p>{i18n.t("picturesMiniStory:text.1")}</p>
+            <p>{i18n.t("picturesMiniStory:text.2")}</p>
             <div
                 className="svg-container"
                 ref={svgContainerRef}
