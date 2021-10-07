@@ -383,6 +383,7 @@
 				1AB4F37D2508D64600E66BCC /* Settings.bundle */,
 				E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */,
 				E9CF1B632625EA3200216B70 /* FeatureView.swift */,
+				E989B350269CA6B7000EE977 /* FilePicker.swift */,
 				E92373BE26289FA900D2CFF3 /* Localizable.strings */,
 				E90F89E92629822400AD7D96 /* OnboardingView.swift */,
 				E90F89ED2629C0C000AD7D96 /* ContentView.swift */,
@@ -426,7 +427,6 @@
 				1A00DFF624569F3A0049F3F7 /* pod.html */,
 				1ABADBCA24E2E06600369791 /* initIframe.js */,
 				E97D32AF2631E68700A5A180 /* disableUserSelect.js */,
-				E989B350269CA6B7000EE977 /* FilePicker.swift */,
 				E98D506926F3741100C3FCF4 /* handleErrors.js */,
 			);
 			path = FeatureContainer;
