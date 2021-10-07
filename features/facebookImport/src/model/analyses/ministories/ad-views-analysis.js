@@ -29,8 +29,14 @@ export default class AdViewsAnalysis extends RootAnalysis {
         return (
             <>
                 <p>
-                    On you timeline {this._numerOfAdvertisers} advertisers shown{" "}
-                    {this._numberOfAds} ads {this._numberOfAdViews} times
+                    On you timeline {this._numerOfAdvertisers}{" "}
+                    {this._numerOfAdvertisers === 1
+                        ? "advertiser"
+                        : "advertisers"}{" "}
+                    shown {this._numberOfAds}{" "}
+                    {this._numberOfAds === 1 ? "ad" : "ads"}{" "}
+                    {this._numberOfAdViews}{" "}
+                    {this._numberOfAdViews === 1 ? "time" : "times"}
                 </p>
                 <p>
                     The list below shows the advertisers from which ads where
