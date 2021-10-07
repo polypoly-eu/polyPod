@@ -17,7 +17,7 @@ const PICTURES_THRESHOLD = 1;
 
 export default class AboutPicturesDataAnalysis extends RootAnalysis {
     get label() {
-        return RootAnalysis.Labels.TECH_DEMO;
+        return RootAnalysis.Labels.NONE;
     }
 
     get title() {
@@ -55,7 +55,6 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
         const pictureEntries = await this._userPicturesFromExport(zipFile);
         this._picturesCount = pictureEntries.length;
         this.active = this._picturesCount >= PICTURES_THRESHOLD;
-        this.active = true;
     }
 
     renderSummary() {
