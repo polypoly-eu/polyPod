@@ -2,6 +2,7 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import Infographic from "../../../components/infographic/infographic.jsx";
 
 const DataStructureInfoScreen = () => {
     const dataStructureInfoText = [
@@ -10,9 +11,12 @@ const DataStructureInfoScreen = () => {
             <p>
                 <strong>{i18n.t("dataStructureInfoScreen:legend")}</strong>
             </p>
-            <img
-                className="infographic"
-                src="./images/infographics/dataStructure.svg"
+            <Infographic
+                type="dataStructureBubbles"
+                texts={{
+                    label1: i18n.t("infographics:dataStructureBubbles.label1"),
+                    label2: i18n.t("infographics:dataStructureBubbles.label2"),
+                }}
             />
             <p
                 dangerouslySetInnerHTML={{

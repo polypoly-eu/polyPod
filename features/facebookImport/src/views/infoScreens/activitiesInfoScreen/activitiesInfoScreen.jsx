@@ -2,6 +2,7 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import Infographic from "../../../components/infographic/infographic.jsx";
 
 const ActivitiesInfoScreen = () => {
     const activitiesInfoText = [
@@ -10,10 +11,31 @@ const ActivitiesInfoScreen = () => {
             <p>
                 <strong>{i18n.t("activitiesInfoScreen:legend")}</strong>
             </p>
-            <img
+            <Infographic
+                type="activitiesBarChart"
+                texts={{
+                    label1: i18n.t("infographics:activitiesBarChart.label1"),
+                    label2: i18n.t("infographics:activitiesBarChart.label2"),
+                    bold1: i18n.t("infographics:activitiesBarChart.bold1"),
+                    bold2: i18n.t("infographics:activitiesBarChart.bold2"),
+                    boldJan: i18n.t("infographics:activitiesBarChart.boldJan"),
+                    boldFeb: i18n.t("infographics:activitiesBarChart.boldFeb"),
+                    boldMar: i18n.t("infographics:activitiesBarChart.boldMar"),
+                    boldApr: i18n.t("infographics:activitiesBarChart.boldApr"),
+                    boldMay: i18n.t("infographics:activitiesBarChart.boldMay"),
+                    boldJun: i18n.t("infographics:activitiesBarChart.boldJun"),
+                    boldJul: i18n.t("infographics:activitiesBarChart.boldJul"),
+                    boldAug: i18n.t("infographics:activitiesBarChart.boldAug"),
+                    boldSep: i18n.t("infographics:activitiesBarChart.boldSep"),
+                    boldOct: i18n.t("infographics:activitiesBarChart.boldOct"),
+                    boldNov: i18n.t("infographics:activitiesBarChart.boldNov"),
+                    boldDec: i18n.t("infographics:activitiesBarChart.boldDec"),
+                }}
+            />
+            {/* <img
                 className="infographic"
                 src="./images/infographics/activities.svg"
-            />
+            /> */}
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t(`activitiesInfoScreen:text2`),
