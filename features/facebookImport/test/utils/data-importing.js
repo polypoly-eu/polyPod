@@ -3,6 +3,7 @@ import NameImporter from "../../src/model/importers/name-importer.js";
 import FacebookAccount from "../../src/model/entities/facebook-account.js";
 import { runImporter } from "../../src/model/importer.js";
 import RecentlyViewedAdsImporter from "../../src/model/importers/recently-viewed-ads-importer.js";
+import OffFacebookEventsImporter from "../../src/model/importers/off-facebook-events-importer.js";
 
 export async function runSingleImporter(importerClass, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -24,4 +25,8 @@ export async function runMessagesImporter(zipFile) {
 
 export async function runRecentlyViewedAdsImporter(zipFile) {
     return runSingleImporter(RecentlyViewedAdsImporter, zipFile);
+}
+
+export async function runOffFacebookEventsImporter(zipFile) {
+    return runSingleImporter(OffFacebookEventsImporter, zipFile);
 }
