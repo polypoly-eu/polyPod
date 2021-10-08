@@ -1,3 +1,5 @@
+"use strict";
+
 import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../src/model/importers/off-facebook-events-importer";
 import { createOffFacebookEventsSimpleData } from "./datasets/off-facebook-events-data";
 import { ZipFileMock } from "./mocks/zipfile-mock";
