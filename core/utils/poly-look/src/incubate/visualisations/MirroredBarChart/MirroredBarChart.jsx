@@ -195,7 +195,7 @@ export const MirroredBarChart = ({ data, colors, width, height }) => {
       .attr("width", (barSpace - totalBarPadding) / data.length)
       .attr("fill", lowerBarColor)
       .attr("class", "upper-bar")
-      .attr("y", (d) => chartHeight / 2)
+      .attr("y", chartHeight / 2)
       .attr("height", (d) => lowerYScale(d.lower));
   }
 
@@ -204,7 +204,7 @@ export const MirroredBarChart = ({ data, colors, width, height }) => {
       .attr("x", (d) => xScale(d.time))
       .attr("width", (barSpace - totalBarPadding) / data.length)
       .attr("fill", lowerBarColor)
-      .attr("y", (d) => chartHeight / 2)
+      .attr("y", chartHeight / 2)
       .attr("height", (d) => lowerYScale(d.lower));
   }
 
