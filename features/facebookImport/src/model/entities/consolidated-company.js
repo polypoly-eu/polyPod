@@ -27,6 +27,13 @@ export default class ConsolidatedCompany {
             .flat();
     }
 
+    get latestEventTimestamp() {
+        return latestTimestamp([
+            ...this.onFacebookEventTimestamps,
+            ...this.offFacebookEventTimestamps,
+        ]);
+    }
+
     get fullSummary() {
         return {
             name: this.displayName,
@@ -35,13 +42,7 @@ export default class ConsolidatedCompany {
         };
     }
 
-    get last90DaysSummary() {
-        const onFacebookTimestamps = this.onFacebookEventTimestamps;
-        const offFacebookTimestamps = this.offFacebookEventTimestamps;
-        const referenceTimestamp = latestTimestamp([
-            ...onFacebookTimestamps,
-            ...offFacebookTimestamps,
-        ]);
+    last90DaysSummary(referenceTimestamp) {
         return {
             name: this.displayName,
             onFacebookTimestamps: filterForDurationInDays(

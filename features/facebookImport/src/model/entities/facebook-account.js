@@ -212,6 +212,10 @@ class FacebookAccount {
         return this._relatedAccounts;
     }
 
+    get relatedAccountsCount() {
+        return this._relatedAccounts.count;
+    }
+
     addRelatedAccounts(relatedAccounts) {
         this._relatedAccounts.addAll(relatedAccounts);
     }

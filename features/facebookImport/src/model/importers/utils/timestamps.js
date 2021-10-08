@@ -1,4 +1,5 @@
 export function latestTimestamp(timestamps) {
+    debugger;
     return timestamps.reduce(
         (maxim, current) => (current > maxim ? current : maxim),
         0
@@ -18,4 +19,8 @@ export function filterForDurationInDays(
         const diffDays = Math.ceil(diffTime / MILISECONDS_IN_DAY);
         return diffDays < daysCount;
     });
+}
+
+export function toUnixTimestamp(dateString) {
+    return Math.round(new Date(dateString).getTime() / 1000);
 }
