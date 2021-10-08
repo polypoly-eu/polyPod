@@ -37,7 +37,7 @@ describe("Import off-facebook events from export with wrong data key", () => {
     });
 });
 
-describe("Import ad views from export with missing ads category", () => {
+describe("Import ad views from export with ads category", () => {
     let zipFile = null;
     let result = null;
     let facebookAccount = null;
