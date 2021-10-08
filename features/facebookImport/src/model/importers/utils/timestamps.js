@@ -1,5 +1,4 @@
 export function latestTimestamp(timestamps) {
-    debugger;
     return timestamps.reduce(
         (maxim, current) => (current > maxim ? current : maxim),
         0
