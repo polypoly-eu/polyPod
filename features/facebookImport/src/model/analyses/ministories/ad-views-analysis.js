@@ -19,20 +19,20 @@ export default class AdViewsAnalysis extends RootAnalysis {
             })
             .sort((a, b) => b.count - a.count);
 
-        this._numerOfAdvertisers = this._advertisersData.length;
+        this._numberOfAdvertisers = this._advertisersData.length;
         this._numberOfAds = relatedAccounts.adsCount;
         this._numberOfAdViews = relatedAccounts.adViewsCount;
-        this.active = this._numerOfAdvertisers > 0;
+        this.active = this._numberOfAdvertisers > 0;
     }
 
     renderSummary() {
         return (
             <>
                 <p>
-                    On you timeline {this._numerOfAdvertisers}{" "}
-                    {this._numerOfAdvertisers === 1
-                        ? "advertiser"
-                        : "advertisers"}{" "}
+                    On your timeline {this._numberOfAdvertisers}{" "}
+                    {this._numberOfAdvertisers === 1
+                        ? "advertiser has"
+                        : "advertisers have"}{" "}
                     shown {this._numberOfAds}{" "}
                     {this._numberOfAds === 1 ? "ad" : "ads"}{" "}
                     {this._numberOfAdViews}{" "}
