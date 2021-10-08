@@ -41,6 +41,7 @@ import InactiveCardsSummary from "./analyses/report/inactive-cards-summary.js";
 import ActivitiesAnalysis from "./analyses/ministories/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/ministories/advertising-value-analysis.js";
 import AboutPicturesDataAnalysis from "./analyses/ministories/about-pictures-data-analysis.js";
+import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
 
 const subAnalyses = [
     DataStructureBubblesAnalysis,
@@ -70,6 +71,7 @@ const subAnalyses = [
     PagesOverviewAnalysis,
     SesssionActivityLocationsAnalysis,
     ImportedJsonFilesAnalysis,
+    AdViewsAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,

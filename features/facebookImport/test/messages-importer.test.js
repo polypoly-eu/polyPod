@@ -1,3 +1,5 @@
+"use strict";
+
 import { MissingMessagesFilesException } from "../src/model/importers/utils/failed-import-exception.js";
 import { ZipFileMock } from "./mocks/zipfile-mock.js";
 import { runMessagesImporter } from "./utils/data-importing.js";
