@@ -47,6 +47,7 @@ const subAnalyses = [
     ActivitiesAnalysis,
     MessagesAnalysis,
     OffFacebookEventsAnalysis,
+    AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
 
     ExportTitleAnalysis,
@@ -69,7 +70,6 @@ const subAnalyses = [
     PagesOverviewAnalysis,
     SesssionActivityLocationsAnalysis,
     ImportedJsonFilesAnalysis,
-    AboutPicturesDataAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
