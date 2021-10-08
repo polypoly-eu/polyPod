@@ -1,7 +1,4 @@
-import {
-    filterForDurationInDays,
-    latestTimestamp,
-} from "../importers/utils/timestamps";
+import { filterForDurationInDays } from "../importers/utils/timestamps";
 
 export default class ConsolidatedCompany {
     constructor(relatedFacebookAccount, offFacebookCompanies) {
@@ -25,13 +22,6 @@ export default class ConsolidatedCompany {
                 offFacebookCompany.events.map((event) => event.timestamp)
             )
             .flat();
-    }
-
-    get latestEventTimestamp() {
-        return latestTimestamp([
-            ...this.onFacebookEventTimestamps,
-            ...this.offFacebookEventTimestamps,
-        ]);
     }
 
     get fullSummary() {

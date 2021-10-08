@@ -58,6 +58,20 @@ class FacebookAccount {
         }, 0);
     }
 
+    get offFacebookEventsLatestTimestamp() {
+        let latestTimestamp = 0;
+        this.forEachOffFacebookEvent((event) => {
+            if (event.timestamp > latestTimestamp) {
+                latestTimestamp = event.timestamp;
+            }
+        });
+        return latestTimestamp;
+    }
+
+    get relatedAccountEventLatestTimestamp() {
+        return this.relatedAccounts.latestEventTimestamp;
+    }
+
     get messageThreadsGroup() {
         return this._messageThreadsGroup;
     }
@@ -84,6 +98,10 @@ class FacebookAccount {
                 callback(offFacebookEvent);
             }
         }
+    }
+
+    addRelatedAccounts(relatedAccounts) {
+        this._relatedAccounts.addAll(relatedAccounts);
     }
 
     // Basic accessors
@@ -214,10 +232,6 @@ class FacebookAccount {
 
     get relatedAccountsCount() {
         return this._relatedAccounts.count;
-    }
-
-    addRelatedAccounts(relatedAccounts) {
-        this._relatedAccounts.addAll(relatedAccounts);
     }
 
     get dataGroups() {

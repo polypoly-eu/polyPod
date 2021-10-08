@@ -5,10 +5,7 @@ import OffFacebookEventsImporter, {
 import RecentlyViewedAdsImporter, {
     RECENTLY_VIEWED_FILE_PATH,
 } from "../src/model/importers/recently-viewed-ads-importer";
-import {
-    latestTimestamp,
-    toUnixTimestamp,
-} from "../src/model/importers/utils/timestamps";
+import { toUnixTimestamp } from "../src/model/importers/utils/timestamps";
 import {
     createAdViewsForComparisonData,
     createOffFacebookEventsForComparisonData,
@@ -96,12 +93,13 @@ describe("Matching on and off facebook event data", () => {
                 ).length
         ).toBe(4));
 
-    it("has correct latest event timestamp", () =>
-        expect(
-            latestTimestamp(
-                matchedCompanies.map((each) => {
-                    return each.latestEventTimestamp;
-                })
-            )
-        ).toBe(toUnixTimestamp("29 August 2021 16:55:00 GMT+00:00")));
+    it("has correct latest off-facebook event timestamp", () =>
+        expect(facebookAccount.offFacebookEventsLatestTimestamp).toBe(
+            toUnixTimestamp("29 August 2021 16:55:00 GMT+00:00")
+        ));
+
+    it("has correct latest ad-view event timestamp", () =>
+        expect(facebookAccount.relatedAccountEventLatestTimestamp).toBe(
+            toUnixTimestamp("29 August 2021 16:50:00 GMT+00:00")
+        ));
 });

@@ -1,10 +1,3 @@
-export function latestTimestamp(timestamps) {
-    return timestamps.reduce(
-        (maxim, current) => (current > maxim ? current : maxim),
-        0
-    );
-}
-
 const MILISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 export function filterForDurationInDays(
     timestamps,

@@ -28,4 +28,14 @@ export default class RelatedPost {
     addViewTimestamp(timestamp) {
         this._viewedTimestamps.push(timestamp);
     }
+
+    get latestEventTimestamp() {
+        return this._viewedTimestamps.reduce(
+            (latestTimestamp, currentTimestamp) =>
+                currentTimestamp > latestTimestamp
+                    ? currentTimestamp
+                    : latestTimestamp,
+            0
+        );
+    }
 }
