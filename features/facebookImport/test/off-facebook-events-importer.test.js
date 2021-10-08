@@ -73,8 +73,8 @@ describe("Import ad views from export with missing ads category", () => {
     });
 
     it("has correct event count for off-Facebook companies", () => {
-        expect(companyOne.events.length).toBe("companyx.com");
-        expect(companyTwo.events.length).toBe("Company Y");
+        expect(companyOne.events.length).toBe(3);
+        expect(companyTwo.events.length).toBe(2);
     });
 
     it("has correct event timestamps", () => {
