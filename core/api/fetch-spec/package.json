@@ -20,7 +20,7 @@
     "pretest": "start-dummy-server &",
     "test": "jest",
     "posttest": "stop-dummy-server",
-    "docs": "typedoc",
+    "docs": "typedoc"
   },
   "devDependencies": {
     "@polypoly-eu/dummy-server": "file:../../utils/dummy-server",
