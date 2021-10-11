@@ -90,6 +90,6 @@ describe("Test accont matching by name", () => {
                 },
                 { name: "Company Y" }
             )
-        ).toBe(true);
+        ).toBe(false);
     });
 });
