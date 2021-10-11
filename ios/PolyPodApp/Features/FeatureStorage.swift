@@ -106,7 +106,7 @@ class FeatureStorage {
                     print("Feature for import not found: ", featureName)
                 }
             } catch {
-                print(error.localizedDescription);
+                print("Failed to import feature \(featureName): \(error.localizedDescription)");
             }
         }
     }
