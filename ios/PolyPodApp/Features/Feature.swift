@@ -11,11 +11,7 @@ class Feature {
     private let links: [String: String]
     
     static func load(path: URL, languageCode: String?) -> Feature? {
-        let manifestPath = path.appendingPathComponent("manifest.json")
-        guard let manifest = FeatureManifest.load(path: manifestPath) else {
-            print("Failed to load feature manifest from: \(manifestPath)")
-            return nil
-        }
+        let manifest = readManifest(path)
         return Feature(
             path: path,
             manifest: manifest,
@@ -48,6 +44,23 @@ class Feature {
         }
         return nil
     }
+}
+
+private func readManifest(_ basePath: URL) -> FeatureManifest {
+    let manifestPath = basePath.appendingPathComponent("manifest.json")
+    if let manifest = FeatureManifest.load(path: manifestPath) {
+        return manifest
+    }
+    print("Failed to load feature manifest from: \(manifestPath)")
+    return FeatureManifest(
+        name: nil,
+        author: nil,
+        description: nil,
+        thumbnail: nil,
+        primaryColor: nil,
+        links: nil,
+        translations: nil
+    )
 }
 
 private func parseColor(hexValue: String?) -> Color? {
