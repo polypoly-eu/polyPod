@@ -14,7 +14,7 @@ export const AD_LOCALE = {
         nameRegex: /^Ad by (.+)$/,
     },
     // Danish
-    da: {
+    da_DK: {
         category: "Annoncer",
         nameRegex: /^Annonce af (.+)$/,
     },

@@ -39,7 +39,7 @@ export const RECENTLY_VIEWED_LOCALE = {
             namePrefix: "Ad by ",
         },
     },
-    da: {
+    da_DK: {
         watched: {
             categoryName: "Videoer og serier p\u00c3\u00a5 Facebook Watch",
             categoryDescription:
@@ -117,7 +117,7 @@ export function createGermanAdViewsData() {
 }
 
 export function createDanishAdViewsData() {
-    return createAdViewsData("da");
+    return createAdViewsData("da_DK");
 }
 
 export function createIncompleteEnglishAdViewsData() {
