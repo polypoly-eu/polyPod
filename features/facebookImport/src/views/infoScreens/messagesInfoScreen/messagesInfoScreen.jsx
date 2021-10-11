@@ -13,10 +13,8 @@ const MessagesScreen = () => {
                 texts={{
                     text1: i18n.t("infographics:messagesBarChart.text1"),
                     text2: i18n.t("infographics:messagesBarChart.text2"),
-                    bold1: i18n.t("infographics:messagesBarChart.bold1"),
-                    smallbold2: i18n.t(
-                        "infographics:messagesBarChart.smallbold2"
-                    ),
+                    bigbold1: i18n.t("infographics:messagesBarChart.bigbold1"),
+                    bold2: i18n.t("infographics:messagesBarChart.bold2"),
                     highlighted: i18n.t(
                         "infographics:messagesBarChart.highlighted"
                     ),

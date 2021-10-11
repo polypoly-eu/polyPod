@@ -27,10 +27,10 @@
 
 .infographic .bold {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 12px;
 }
 
-.infographic .small-bold {
+.infographic .big-bold {
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
 }

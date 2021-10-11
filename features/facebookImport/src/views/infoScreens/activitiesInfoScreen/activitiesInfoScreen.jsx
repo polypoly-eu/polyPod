@@ -15,49 +15,23 @@ const ActivitiesInfoScreen = () => {
                 type="activitiesBarChart"
                 texts={{
                     text1: i18n.t("infographics:activitiesBarChart.text1"),
+                    bigbold1: i18n.t(
+                        "infographics:activitiesBarChart.bigbold1"
+                    ),
                     bold1: i18n.t("infographics:activitiesBarChart.bold1"),
-                    smallbold1: i18n.t(
-                        "infographics:activitiesBarChart.smallbold1"
-                    ),
-                    smallbold2: i18n.t(
-                        "infographics:activitiesBarChart.smallbold2"
-                    ),
-                    smallboldJan: i18n.t(
-                        "infographics:activitiesBarChart.smallboldJan"
-                    ),
-                    smallboldFeb: i18n.t(
-                        "infographics:activitiesBarChart.smallboldFeb"
-                    ),
-                    smallboldMar: i18n.t(
-                        "infographics:activitiesBarChart.smallboldMar"
-                    ),
-                    smallboldApr: i18n.t(
-                        "infographics:activitiesBarChart.smallboldApr"
-                    ),
-                    smallboldMay: i18n.t(
-                        "infographics:activitiesBarChart.smallboldMay"
-                    ),
-                    smallboldJun: i18n.t(
-                        "infographics:activitiesBarChart.smallboldJun"
-                    ),
-                    smallboldJul: i18n.t(
-                        "infographics:activitiesBarChart.smallboldJul"
-                    ),
-                    smallboldAug: i18n.t(
-                        "infographics:activitiesBarChart.smallboldAug"
-                    ),
-                    smallboldSep: i18n.t(
-                        "infographics:activitiesBarChart.smallboldSep"
-                    ),
-                    smallboldOct: i18n.t(
-                        "infographics:activitiesBarChart.smallboldOct"
-                    ),
-                    smallboldNov: i18n.t(
-                        "infographics:activitiesBarChart.smallboldNov"
-                    ),
-                    smallboldDec: i18n.t(
-                        "infographics:activitiesBarChart.smallboldDec"
-                    ),
+                    bold2: i18n.t("infographics:activitiesBarChart.bold2"),
+                    boldJan: i18n.t("infographics:activitiesBarChart.boldJan"),
+                    boldFeb: i18n.t("infographics:activitiesBarChart.boldFeb"),
+                    boldMar: i18n.t("infographics:activitiesBarChart.boldMar"),
+                    boldApr: i18n.t("infographics:activitiesBarChart.boldApr"),
+                    boldMay: i18n.t("infographics:activitiesBarChart.boldMay"),
+                    boldJun: i18n.t("infographics:activitiesBarChart.boldJun"),
+                    boldJul: i18n.t("infographics:activitiesBarChart.boldJul"),
+                    boldAug: i18n.t("infographics:activitiesBarChart.boldAug"),
+                    boldSep: i18n.t("infographics:activitiesBarChart.boldSep"),
+                    boldOct: i18n.t("infographics:activitiesBarChart.boldOct"),
+                    boldNov: i18n.t("infographics:activitiesBarChart.boldNov"),
+                    boldDec: i18n.t("infographics:activitiesBarChart.boldDec"),
                 }}
             />
             <p
