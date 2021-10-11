@@ -23,7 +23,8 @@ class Feature {
         self.path = path
         let userLanguage = languageCode ?? "en"
         let translations = manifest.translations?[userLanguage]
-        id = path.lastPathComponent
+        let id = path.lastPathComponent
+        self.id = id
         name = translations?.name ?? manifest.name ?? id
         author = translations?.author ?? manifest.author
         description = translations?.description ?? manifest.description
