@@ -1,11 +1,14 @@
 import ConsolidatedCompany from "../../entities/consolidated-company";
 
+export function normalizeForComparison(string) {
+    return string.replace(/\s+/g, "")?.toLowerCase();
+}
+
 export function noSpaceLowercaseMatch(stringOne, stringTwo) {
     return (
         typeof stringOne === "string" &&
         typeof stringTwo === "string" &&
-        stringOne.replace(/\s+/g, "")?.toLowerCase() ===
-            stringTwo.replace(/\s+/g, "")?.toLowerCase()
+        normalizeForComparison(stringOne) === normalizeForComparison(stringTwo)
     );
 }
 
