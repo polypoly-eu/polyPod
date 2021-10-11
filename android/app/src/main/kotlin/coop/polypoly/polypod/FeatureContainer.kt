@@ -146,15 +146,18 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                         null
                     )
                 }
-                val rawPath = request.url.path?.removePrefix(PolyOut.fsPrefix)!!
-                if (!rawPath.startsWith("/features/") &&
-                    !rawPath.startsWith("/assets/") &&
-                    !rawPath.startsWith("/container/")
-                ) {
+                var rawPath = request.url.path?.removePrefix(PolyOut.fsPrefix)!!
+
+                val firstSlash = rawPath.indexOf('/', 1) + 1
+                val endIndex = rawPath.indexOf('/', firstSlash)
+                if (endIndex > 0) {
+                    rawPath = rawPath.removeRange(0, endIndex + 1)
+                }
+                if (rawPath.startsWith(PolyOut.fsFilesRoot)) {
                     return WebResourceResponse(
                         null, null,
                         ByteArrayInputStream(
-                            api.polyOut.readFile(request.url.toString())
+                            api.polyOut.readFile(rawPath)
                         )
                     )
                 }

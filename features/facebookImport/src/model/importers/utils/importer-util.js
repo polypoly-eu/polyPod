@@ -1,11 +1,10 @@
 import {
-    FileTooLargeException,
     InvalidContentImportException,
     MissingContentImportException,
     MissingFileImportException,
 } from "./failed-import-exception";
 
-const FILE_SIZE_LIMIT = 5 * 1024 * 1024;
+const FEATURE_FILES = "FeatureFiles";
 
 async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
@@ -15,7 +14,9 @@ async function relevantZipEntries(zipFile) {
 }
 
 async function readJSONFile(dataFileName, zipFile, zipId = null) {
-    const fullEntryName = zipId ? zipId + "/" + dataFileName : dataFileName;
+    const fullEntryName = zipId
+        ? `${FEATURE_FILES}/${zipId}/${dataFileName}`
+        : dataFileName;
     const entries = await zipFile.getEntries();
     const dataZipEntry = entries.find(
         (entryName) => entryName === fullEntryName
@@ -23,14 +24,6 @@ async function readJSONFile(dataFileName, zipFile, zipId = null) {
 
     if (!dataZipEntry) {
         throw new MissingFileImportException(dataFileName);
-    }
-    const firstStat = await zipFile.stat(dataZipEntry);
-
-    // TODO: Figure out why we can't use only getSize()
-    const fileSize =
-        "size" in firstStat ? parseInt(firstStat.size) : firstStat.getSize();
-    if (fileSize > FILE_SIZE_LIMIT) {
-        throw new FileTooLargeException(dataFileName);
     }
 
     const rawContent = await zipFile.getContent(dataZipEntry);

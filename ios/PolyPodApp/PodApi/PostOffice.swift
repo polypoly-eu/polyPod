@@ -241,7 +241,7 @@ extension PostOffice {
     private func handlePolyOutStat(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.stat(pathOrId: path) { fileStats, error in
+        PodApi.shared.polyOut.stat(url: path) { fileStats, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
                 return
@@ -265,7 +265,7 @@ extension PostOffice {
         if args.count > 1 {
             options = args[1] as! [String: Any]
         }
-        PodApi.shared.polyOut.fileRead(pathOrId: path, options: options) { data, error in
+        PodApi.shared.polyOut.fileRead(url: path, options: options) { data, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
                 return
@@ -286,7 +286,7 @@ extension PostOffice {
         let path = args[0] as! String
         let data = args[1] as! String
         
-        PodApi.shared.polyOut.fileWrite(pathOrId: path, data: data) { error in
+        PodApi.shared.polyOut.fileWrite(url: path, data: data) { error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
             } else {
@@ -298,7 +298,7 @@ extension PostOffice {
     private func handlePolyOutReadDir(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.readdir(dir: path) { fileList, error in
+        PodApi.shared.polyOut.readdir(url: path) { fileList, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
             } else {

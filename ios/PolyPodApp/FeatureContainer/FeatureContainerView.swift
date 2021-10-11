@@ -73,23 +73,23 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
         guard let url = urlSchemeTask.request.url,
             let scheme = url.scheme,
-            scheme == PolyNav.fsPrefix.replacingOccurrences(of: "://", with: "").lowercased() else {
-            urlSchemeTask.didFailWithError(CustomSchemeHandlerError.wrongProtocol(protocol: ""))
+            scheme == PolyOut.fsPrefix.replacingOccurrences(of: "://", with: "").lowercased() else {
+            urlSchemeTask.didFailWithError(PolyNavError.protocolError(""))
                 return
         }
         
         let urlString = url.absoluteString
-        let index = urlString.index(urlString.startIndex, offsetBy: PolyNav.fsPrefix.count)
-        let file = String(urlString[index..<urlString.endIndex])
+        let index = urlString.index(urlString.startIndex, offsetBy: PolyOut.fsPrefix.count)
+        let file = String(urlString[index..<urlString.endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         let ext = (file as NSString).pathExtension
                         
         do {
             var fileData: Data? = nil
-            if (file.starts(with: "/" + PolyNav.fsFilesRoot))
+            if (file.starts(with: PolyOut.fsFilesRoot))
             {
                 let options: [String: Any] = [:]
                 PodApi.shared.polyOut.fileRead(
-                    pathOrId: urlString,
+                    url: urlString,
                     options: options,
                     completionHandler: { data, error in
                         fileData = data as? Data
@@ -102,14 +102,18 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
 
                 fileData = try Data(contentsOf: targetUrl!)
             }
+            let headers: [String : String] = [
+                "Access-Control-Allow-Origin": "polypod://",
+                "Access-Control-Allow-Methods": "GET",
+                "Access-Control-Allow-Headers": "*",
+                "Content-Length": String(fileData?.count ?? 0),
+                "Content-Type": mimeTypeFromExt(ext: ext)
+            ]
             
-            let response = URLResponse(url: url,
-                                       mimeType: mimeTypeFromExt(ext: ext),
-                                       expectedContentLength: fileData?.count ?? 0,
-                                       textEncodingName: nil)
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP 1.0", headerFields: headers)
             
             // Fulfill the task.
-            urlSchemeTask.didReceive(response)
+            urlSchemeTask.didReceive(response!)
             urlSchemeTask.didReceive(fileData ?? Data())
             urlSchemeTask.didFinish()
         } catch {
@@ -173,7 +177,7 @@ class FeatureWebView: WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
 
-        let scheme = PolyNav.fsPrefix.replacingOccurrences(of: "://", with: "")
+        let scheme = PolyOut.fsPrefix.replacingOccurrences(of: "://", with: "")
         let fileHandler = FeatureFileHandler()
         fileHandler.setFeature(feature: feature)
         configuration.setURLSchemeHandler(fileHandler, forURLScheme: scheme)

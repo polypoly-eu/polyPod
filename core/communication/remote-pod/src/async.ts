@@ -23,8 +23,8 @@ class AsyncPolyOut implements PolyOut {
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
     async readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
-        if (options) return (await this.promise).readFile(path, options);
-        else return (await this.promise).readFile(path);
+        if (options) throw new Error("AsyncPolyOut.readFile: options not supported");
+        else return new Uint8Array(await (await fetch(path)).arrayBuffer());
     }
 
     async writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {

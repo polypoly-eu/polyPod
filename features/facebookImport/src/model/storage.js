@@ -64,6 +64,7 @@ export class ZipFile {
     }
 
     async getContent(entry) {
-        return (await fetch(entry)).arrayBuffer();
+        const { polyOut } = this._pod;
+        return polyOut.readFile(entry);
     }
 }

@@ -14,7 +14,8 @@ open class PolyOut(
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
 
     companion object {
-        private val fsPrefix = "https://appassets.androidplatform.net/"
+        val fsPrefix = "https://appassets.androidplatform.net/"
+        val fsFilesRoot = "FeatureFiles"
 
         fun filesPath(context: Context) =
             context.filesDir.absolutePath + "/featureFiles"
@@ -23,9 +24,14 @@ open class PolyOut(
             if (Preferences.currentFeatureName == null) {
                 throw Error("Cannot execute without a feature")
             }
+            val currentFeatureName = Preferences.currentFeatureName!!
             val pureId = id.removePrefix(
                 fsPrefix
-            ).removePrefix(Preferences.currentFeatureName!!).removePrefix("/")
+            ).removePrefix(
+                "$fsFilesRoot/"
+            ).removePrefix(
+                "$currentFeatureName/"
+            )
 
             return filesPath(context) + "/" + Preferences.currentFeatureName +
                 "/" + pureId
@@ -77,7 +83,9 @@ open class PolyOut(
         }
         result["name"] = fs.get(id) ?: file.name
         result["time"] = file.lastModified().toString()
-        result["id"] = id
+        result["id"] = id.removePrefix(fsPrefix).removePrefix(
+            fsFilesRoot
+        ).trimStart('/')
         statCache[id] = result
         return result
     }
@@ -95,7 +103,9 @@ open class PolyOut(
         }
         val retList = mutableListOf<String>()
         File(idToPath(id, context)).walkTopDown().forEach {
-            retList.add(pathToId(it, context))
+            retList.add(
+                "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
+            )
         }
         readdirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
