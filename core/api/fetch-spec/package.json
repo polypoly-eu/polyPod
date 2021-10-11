@@ -18,9 +18,7 @@
     "eslint": "eslint src --ext .ts",
     "lint": "npm run eslint",
     "pretest": "start-dummy-server &",
-    "test": "npm-run-all test:jest test:electron",
-    "test:electron": "electron-mocha --renderer --require ts-node/register src/tests/browser/*.test.ts",
-    "test:jest": "jest",
+    "test": "jest",
     "posttest": "stop-dummy-server",
     "docs": "typedoc",
     "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
@@ -37,7 +35,6 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chokidar-cli": "^2.1.0",
-    "electron": "^11.2.0",
     "electron-mocha": "^10.0.0",
     "eslint": "^7.18.0",
     "eslint-plugin-prettier": "^3.1.4",
