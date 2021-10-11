@@ -228,7 +228,6 @@ async function main() {
 
     if (command === "lint") {
         logDetail(`🧹 ...`);
-        await npm("ci", "--no-update-notifier", "--no-fund");
         await executeProcess("npx", ["eslint", ...eslintOptions]);
         logSuccess(command);
         return 0;
