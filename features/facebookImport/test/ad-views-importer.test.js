@@ -2,6 +2,7 @@
 
 import { RECENTLY_VIEWED_FILE_PATH } from "../src/model/importers/recently-viewed-ads-importer";
 import {
+    createDanishAdViewsData,
     createEnglishAdViewsData,
     createEnglishDatasetWithMissingAdsCategory,
     createGermanAdViewsData,
@@ -205,7 +206,8 @@ describe("Import ad views from German dataset", () => {
     let result = null;
     let facebookAccount = null;
     let relatedAccounts = null;
-    let relatedAccount = null;
+    let firstRelatedAccount = null;
+    let secondRelatedAccount = null;
 
     beforeAll(async () => {
         zipFile = new ZipFileMock();
@@ -218,36 +220,65 @@ describe("Import ad views from German dataset", () => {
         result = importingResult.result;
         facebookAccount = importingResult.facebookAccount;
         relatedAccounts = facebookAccount.relatedAccounts;
-        [relatedAccount] = relatedAccounts.items;
+        [firstRelatedAccount, secondRelatedAccount] = relatedAccounts.items;
     });
 
     it("returns success status", () => expectImportSuccess(result));
 
-    it("has one related accounts", () => expect(relatedAccounts.count).toBe(1));
+    it("has two related accounts", () => expect(relatedAccounts.count).toBe(2));
 
-    it("has one ad", () => expect(relatedAccounts.adsCount).toBe(1));
+    it("has three ads", () => expect(relatedAccounts.adsCount).toBe(3));
 
-    it("has one ad view", () => expect(relatedAccounts.adViewsCount).toBe(1));
+    it("has four ad views", () => expect(relatedAccounts.adViewsCount).toBe(4));
 
-    it("has correct related account id", () => {
-        expect(relatedAccount.urlId).toBe("companyx.com");
-    });
-
-    it("has correct related accourl URL", () => {
-        expect(relatedAccount.url).toBe(
-            "https://www.facebook.com/companyx.com"
-        );
+    it("has correct related account names", () => {
+        expect(firstRelatedAccount.displayName).toBe("Company X");
+        expect(secondRelatedAccount.displayName).toBe("Company Y");
     });
 
     it("has correct related account names", () => {
-        expect(relatedAccount.displayName).toBe("Company X");
+        expect(firstRelatedAccount.displayName).toBe("Company X");
+        expect(secondRelatedAccount.displayName).toBe("Company Y");
+    });
+});
+
+describe("Import ad views from Danish dataset", () => {
+    let zipFile = null;
+    let result = null;
+    let facebookAccount = null;
+    let relatedAccounts = null;
+    let firstRelatedAccount = null;
+    let secondRelatedAccount = null;
+
+    beforeAll(async () => {
+        zipFile = new ZipFileMock();
+        zipFile.addJsonEntry(
+            RECENTLY_VIEWED_FILE_PATH,
+            createDanishAdViewsData()
+        );
+
+        const importingResult = await runRecentlyViewedAdsImporter(zipFile);
+        result = importingResult.result;
+        facebookAccount = importingResult.facebookAccount;
+        relatedAccounts = facebookAccount.relatedAccounts;
+        [firstRelatedAccount, secondRelatedAccount] = relatedAccounts.items;
     });
 
-    it("has correct ad count in account", () => {
-        expect(relatedAccount.adsCount).toBe(1);
+    it("returns success status", () => expectImportSuccess(result));
+
+    it("has two related accounts", () => expect(relatedAccounts.count).toBe(2));
+
+    it("has three ads", () => expect(relatedAccounts.adsCount).toBe(3));
+
+    it("has four ad views", () => expect(relatedAccounts.adViewsCount).toBe(4));
+
+    it("has correct related account names", () => {
+        expect(firstRelatedAccount.displayName).toBe("Company X");
+        expect(secondRelatedAccount.displayName).toBe("Company Y");
     });
 
-    it("has correct ad views count in account", () => {
-        expect(relatedAccount.adViewsCount).toBe(1);
+    it("has correct related account names", () => {
+        expect(firstRelatedAccount.displayName).toBe("Company X");
+        expect(secondRelatedAccount.displayName).toBe("Company Y");
     });
 });
