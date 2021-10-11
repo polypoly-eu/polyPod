@@ -43,12 +43,19 @@ class FeatureStorage {
 
     fun loadFeature(context: Context, fileName: String): Feature {
         val content = ZipFile(File(getFeaturesDir(context), fileName))
-        val manifestString: String = content.getInputStream(
-            content.getEntry("manifest.json")
-        ).reader().readText()
-        val manifest =
-            FeatureManifest.parse(manifestString, determineLanguage(context))
+        val manifest = readManifest(context, content)
         return Feature(fileName, content, manifest)
+    }
+
+    private fun readManifest(context: Context, content: ZipFile): FeatureManifest {
+        val manifestEntry = content.getEntry("manifest.json")
+        if (manifestEntry == null) {
+            logger.warn("Missing manifest for '${content.name}'")
+            return FeatureManifest(null, null, null, null, null, null, null)
+        }
+        val manifestString =
+            content.getInputStream(manifestEntry).reader().readText()
+        return FeatureManifest.parse(manifestString, determineLanguage(context))
     }
 
     private fun determineLanguage(context: Context): String {
