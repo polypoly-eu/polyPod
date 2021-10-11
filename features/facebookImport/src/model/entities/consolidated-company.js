@@ -4,6 +4,9 @@ export default class ConsolidatedCompany {
     constructor(relatedFacebookAccount, offFacebookCompanies) {
         this._relatedFacebookAccount = relatedFacebookAccount;
         this._offFacebookCompanies = offFacebookCompanies;
+
+        this._cachedOnFacebookEventTimestamps = null;
+        this._cachedOffFacebookEventTimestamps = null;
     }
 
     get displayName() {
@@ -11,17 +14,26 @@ export default class ConsolidatedCompany {
     }
 
     get onFacebookEventTimestamps() {
-        return this._relatedFacebookAccount.relatedPosts
-            .map((relatedPost) => relatedPost.viewedTimestamps)
-            .flat();
+        if (this._cachedOnFacebookEventTimestamps) {
+            return this._cachedOnFacebookEventTimestamps;
+        }
+        this._cachedOnFacebookEventTimestamps =
+            this._relatedFacebookAccount.relatedPosts
+                .map((relatedPost) => relatedPost.viewedTimestamps)
+                .flat();
+        return this._cachedOnFacebookEventTimestamps;
     }
 
     get offFacebookEventTimestamps() {
-        return this._offFacebookCompanies
+        if (this._cachedOffFacebookEventTimestamps) {
+            return this._cachedOffFacebookEventTimestamps;
+        }
+        this._cachedOffFacebookEventTimestamps = this._offFacebookCompanies
             .map((offFacebookCompany) =>
                 offFacebookCompany.events.map((event) => event.timestamp)
             )
             .flat();
+        return this._cachedOffFacebookEventTimestamps;
     }
 
     get fullSummary() {
