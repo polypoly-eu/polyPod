@@ -1,11 +1,11 @@
 import {
     InvalidContentImportException,
     MissingFileImportException,
-} from "../../src/importer/failed-import-exception";
+} from "../../src/model/importers/utils/failed-import-exception";
 import {
     IMPORT_ERROR,
     IMPORT_SUCCESS,
-} from "../../src/importer/importer-status";
+} from "../../src/model/importers/utils/importer-status";
 
 export function expectError(result, errorClass) {
     expect(result.status).toBe(IMPORT_ERROR);

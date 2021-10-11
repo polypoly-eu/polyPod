@@ -10,12 +10,8 @@ protocol PolyOutProtocol {
 
 class PolyOut: PolyOutProtocol {
     let session: NetworkSession
-    let fileStoragePath: URL
     
     init(session: NetworkSession = URLSession.shared) {
         self.session = session
-        
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        fileStoragePath = paths[0].resolvingSymlinksInPath()
     }
 }

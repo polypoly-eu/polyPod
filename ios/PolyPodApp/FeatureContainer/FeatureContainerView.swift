@@ -1,19 +1,25 @@
 import SwiftUI
 import WebKit
 
+typealias FeatureError = [String: Any]
+
 struct FeatureContainerView: UIViewRepresentable {
     let feature: Feature
     @Binding var title: String
     @Binding var activeActions: [String]
     var queuedAction: (String, DispatchTime)?
+    let errorHandler: (FeatureError) -> Void
     let openUrlHandler: (String) -> Void
+    let pickFileHandler: (@escaping (URL?) -> Void) -> Void
 
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(
             feature: feature,
             title: $title,
             activeActions: $activeActions,
-            openUrlHandler: openUrlHandler
+            errorHandler: errorHandler,
+            openUrlHandler: openUrlHandler,
+            pickFileHandler: pickFileHandler
         )
 
         if let featureColor = feature.primaryColor {
@@ -119,19 +125,24 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
 class FeatureWebView: WKWebView {
     private let featureTitle: Binding<String>
     private let activeActions: Binding<[String]>
+    private let errorHandler: (FeatureError) -> Void
     private let openUrlHandler: (String) -> Void
+    private let pickFileHandler: (@escaping (URL?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
-    private let filePicker = FilePicker()
 
     init(
         feature: Feature,
         title: Binding<String>,
         activeActions: Binding<[String]>,
-        openUrlHandler: @escaping (String) -> Void
+        errorHandler: @escaping (FeatureError) -> Void,
+        openUrlHandler: @escaping (String) -> Void,
+        pickFileHandler: @escaping (@escaping (URL?) -> Void) -> Void
     ) {
         self.featureTitle = title
         self.activeActions = activeActions
+        self.errorHandler = errorHandler
         self.openUrlHandler = openUrlHandler
+        self.pickFileHandler = pickFileHandler
 
         let contentController = WKUserContentController();
         installUserScript(
@@ -263,7 +274,7 @@ extension FeatureWebView: WKScriptMessageHandler {
 
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            guard let body = message.body as? [String: Any] else { return }
+            guard let body = message.body as? FeatureError else { return }
 
             switch messageName {
             case .Log:
@@ -306,15 +317,16 @@ extension FeatureWebView: WKScriptMessageHandler {
             return
         }
 
-        print("WebView: " + text)
+        print("Message from FeatureContainer: \(text)")
     }
     
-    private func doLogError(_ error: Any) {
+    private func doLogError(_ error: FeatureError) {
         // TODO: All errors are currently being logged as "Script Error".
         //       While that is better than nothing, we apparently need to load
         //       the feature via loadHTMLString, and set baseURL to
         //       "http://localhost/".
         print("Error from FeatureContainer: \(error)")
+        errorHandler(error)
     }
 }
 
@@ -332,7 +344,7 @@ extension FeatureWebView: PolyNavDelegate {
     }
     
     func doHandleImportFile(completion: @escaping (URL?) -> Void) {
-        filePicker.pick(completion: completion)
+        pickFileHandler(completion)
     }
 }
 
