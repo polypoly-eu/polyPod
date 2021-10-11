@@ -1,15 +1,9 @@
 import ConsolidatedCompany from "../../entities/consolidated-company";
 
 export function normalizeForComparison(string) {
-    return string.replace(/\s+/g, "")?.toLowerCase();
-}
-
-export function noSpaceLowercaseMatch(stringOne, stringTwo) {
-    return (
-        typeof stringOne === "string" &&
-        typeof stringTwo === "string" &&
-        normalizeForComparison(stringOne) === normalizeForComparison(stringTwo)
-    );
+    return typeof string === "string"
+        ? string.replace(/\s+/g, "")?.toLowerCase()
+        : string;
 }
 
 export function removeDomainExtension(stringValue) {
@@ -23,16 +17,21 @@ export function removeDomainExtension(stringValue) {
     return stringValue;
 }
 
+export function normalizeWithoutDomain(string) {
+    return normalizeForComparison(removeDomainExtension(string));
+}
+
 export function onOffFacebookAccountNamesMatching(
     onFacebookName,
     offFacebookName
 ) {
     return (
-        noSpaceLowercaseMatch(onFacebookName, offFacebookName) ||
-        noSpaceLowercaseMatch(
-            removeDomainExtension(onFacebookName),
-            removeDomainExtension(offFacebookName)
-        )
+        typeof onFacebookName === "string" &&
+        typeof offFacebookName === "string" &&
+        (normalizeForComparison(onFacebookName) ===
+            normalizeForComparison(offFacebookName) ||
+            normalizeWithoutDomain(onFacebookName) ===
+                normalizeWithoutDomain(offFacebookName))
     );
 }
 
