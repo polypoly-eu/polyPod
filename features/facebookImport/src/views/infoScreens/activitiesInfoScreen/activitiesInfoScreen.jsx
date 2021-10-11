@@ -8,7 +8,7 @@ const ActivitiesInfoScreen = () => {
     const activitiesInfoText = [
         <>
             <p>{i18n.t("activitiesInfoScreen:text1")}</p>
-            <p>
+            <p className="legend">
                 <strong>{i18n.t("activitiesInfoScreen:legend")}</strong>
             </p>
             <Infographic
