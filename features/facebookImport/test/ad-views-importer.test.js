@@ -2,6 +2,7 @@
 
 import { RECENTLY_VIEWED_FILE_PATH } from "../src/model/importers/recently-viewed-ads-importer";
 import {
+    creatAdViewsWithCompanyWithUnicodeCharactersData,
     createDanishAdViewsData,
     createEnglishAdViewsData,
     createEnglishDatasetWithMissingAdsCategory,
@@ -68,6 +69,43 @@ describe("Import ad views from export with missing ads category", () => {
 
     it("has zero related accounts", () =>
         expect(relatedAccounts.count).toBe(0));
+});
+
+describe("Import ad view with company name with multi-byte unicode characters", () => {
+    let result = null;
+    let relatedAccounts = null;
+    let relatedAccount = null;
+
+    beforeAll(async () => {
+        const zipFile = new ZipFileMock();
+        zipFile.addJsonEntry(
+            RECENTLY_VIEWED_FILE_PATH,
+            creatAdViewsWithCompanyWithUnicodeCharactersData()
+        );
+
+        const importingResult = await runRecentlyViewedAdsImporter(zipFile);
+        result = importingResult.result;
+        const facebookAccount = importingResult.facebookAccount;
+        relatedAccounts = facebookAccount.relatedAccounts;
+        relatedAccount = relatedAccounts.items[0];
+    });
+
+    it("returns success status", () => expectImportSuccess(result));
+
+    it("has one related accounts", () => expect(relatedAccounts.count).toBe(1));
+
+    it("has one ads", () => expect(relatedAccounts.adsCount).toBe(1));
+
+    it("has one ad views", () => expect(relatedAccounts.adViewsCount).toBe(1));
+
+    it("has correct related account ids", () => {
+        expect(relatedAccount.rawId).toBeUndefined();
+        expect(relatedAccount.urlId).toBe("ü🦊å");
+    });
+
+    it("has correct related account display name", () => {
+        expect(relatedAccount.displayName).toBe("å🦊ü");
+    });
 });
 
 describe("Import incomplete ad views from export", () => {

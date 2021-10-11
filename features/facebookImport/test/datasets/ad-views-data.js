@@ -160,6 +160,25 @@ export function createIncompleteEnglishAdViewsData() {
     ]);
 }
 
+export function creatAdViewsWithCompanyWithUnicodeCharactersData() {
+    const languageData = RECENTLY_VIEWED_LOCALE["en"];
+    return wrapViewsData([
+        {
+            name: languageData.ad.categoryName,
+            description: languageData.ad.categoryDescription,
+            entries: [
+                {
+                    timestamp: 1631975618,
+                    data: {
+                        name: "Ad by å🦊ü",
+                        uri: "https://www.facebook.com/ü🦊å/posts/1112223344556677",
+                    },
+                },
+            ],
+        },
+    ]);
+}
+
 export function createEnglishDatasetWithMissingAdsCategory() {
     const languageData = RECENTLY_VIEWED_LOCALE["en"];
     return wrapViewsData([
