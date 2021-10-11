@@ -22,7 +22,6 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.22.0",
-    "jest": "27.2",
     "jszip": "^3.6.0",
     "memfs": "^3.2.2",
     "node-fetch": "^2.6.1",
