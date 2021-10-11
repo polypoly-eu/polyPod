@@ -1,7 +1,7 @@
 package coop.polypoly.polypod.features
 
 import android.content.Context
-import org.slf4j.LoggerFactory
+import coop.polypoly.polypod.logging.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.util.zip.ZipFile
