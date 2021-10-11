@@ -44,19 +44,23 @@ export default class ConsolidatedCompany {
         };
     }
 
-    last90DaysSummary(referenceTimestamp) {
+    summaryUpToDurationInDays(referenceTimestamp, daysCount) {
         return {
             name: this.displayName,
             onFacebookTimestamps: filterForDurationInDays(
                 this.onFacebookEventTimestamps,
                 referenceTimestamp,
-                90
+                daysCount
             ),
             offFacebookTimestamps: filterForDurationInDays(
                 this.offFacebookEventTimestamps,
                 referenceTimestamp,
-                90
+                daysCount
             ),
         };
+    }
+
+    last90DaysSummary(referenceTimestamp) {
+        return this.summaryUpToDurationInDays(referenceTimestamp, 90);
     }
 }
