@@ -7,18 +7,17 @@ export const RECENTLY_VIEWED_LOCALE = {
         watched: {
             categoryName: "Videos und Shows auf Facebook Watch",
             categoryDescription:
-                "Videos und Shows, die du dir k\u00c3\u00bcrzlich auf Facebook Watch angesehen hast, und die Zeit, die du mit dem Ansehen verbracht hast.",
+                "Videos und Shows, die du dir kürzlich auf Facebook Watch angesehen hast, und die Zeit, die du mit dem Ansehen verbracht hast.",
         },
         post: {
-            categoryName:
-                "Beitr\u00c3\u00a4ge, die dir im News Feed angezeigt wurden",
+            categoryName: "Beiträge, die dir im News Feed angezeigt wurden",
             categoryDescription:
-                "Beitr\u00c3\u00a4ge, die dir in den letzten 90 Tagen in deinem News Feed angezeigt wurden.",
+                "Beiträge, die dir in den letzten 90 Tagen in deinem News Feed angezeigt wurden.",
         },
         ad: {
             categoryName: "Werbeanzeigen",
             categoryDescription:
-                "Werbeanzeigen, die du dir k\u00c3\u00bcrzlich angesehen hast",
+                "Werbeanzeigen, die du dir kürzlich angesehen hast",
             namePrefix: "Werbeanzeige von ",
         },
     },
@@ -41,9 +40,9 @@ export const RECENTLY_VIEWED_LOCALE = {
     },
     da_DK: {
         watched: {
-            categoryName: "Videoer og serier p\u00c3\u00a5 Facebook Watch",
+            categoryName: "Videoer og serier på Facebook Watch",
             categoryDescription:
-                "Videoer og serier, du for nylig har bes\u00c3\u00b8gt eller set fra Facebook Watch, og den tid du har brugt p\u00c3\u00a5 at se serier",
+                "Videoer og serier, du for nylig har besøgt eller set fra Facebook Watch, og den tid du har brugt på at se serier",
         },
         post: {
             categoryName: "Opslag, som er blevet vist til dig i dine nyheder",
