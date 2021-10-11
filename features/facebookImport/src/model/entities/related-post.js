@@ -1,3 +1,5 @@
+import { findLatestTimestamp } from "../importers/utils/timestamps";
+
 export default class RelatedPost {
     constructor({ url }) {
         this._url = url;
@@ -30,12 +32,6 @@ export default class RelatedPost {
     }
 
     get latestEventTimestamp() {
-        return this._viewedTimestamps.reduce(
-            (latestTimestamp, currentTimestamp) =>
-                currentTimestamp > latestTimestamp
-                    ? currentTimestamp
-                    : latestTimestamp,
-            0
-        );
+        return findLatestTimestamp(this._viewedTimestamps);
     }
 }
