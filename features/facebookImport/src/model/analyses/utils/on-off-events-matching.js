@@ -13,7 +13,7 @@ export function noSpaceLowercaseMatch(stringOne, stringTwo) {
 }
 
 export function removeDomainExtension(stringValue) {
-    if (!(typeof stringValue === "string")) {
+    if (typeof stringValue !== "string") {
         return stringValue;
     }
     const indexOfDot = stringValue.indexOf(".");
