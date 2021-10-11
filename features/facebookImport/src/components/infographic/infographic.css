@@ -2,12 +2,14 @@
     display: block;
     margin: 0 auto;
     width: 100%;
+    max-width: var(--max-width);
 }
 
 .infographic svg {
-    /* display: block; */
+    display: block;
     width: 100%;
-    /* margin: 12px auto; */
+    height: 100%;
+    margin: 12px auto;
 }
 
 .infographic .text-field {

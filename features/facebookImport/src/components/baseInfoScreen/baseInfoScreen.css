@@ -19,12 +19,6 @@
     font-weight: 400;
     text-transform: capitalize;
 }
-.base-info .infographic {
-    display: block;
-    max-width: var(--max-width);
-    width: 100%;
-    margin: auto;
-}
 
 .base-info p {
     font-size: 16px;
