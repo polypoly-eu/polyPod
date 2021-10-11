@@ -72,12 +72,12 @@ class FeatureStorage {
     ): List<Feature> {
         val order = readOrder(context)
         val sorted = mutableListOf<Feature>()
-        for (name in order)
-            features.find { it.name == name }?.let {
+        for (id in order)
+            features.find { it.id == id }?.let {
                 sorted.add(it)
             }
         for (feature in features)
-            if (!order.contains(feature.name))
+            if (!order.contains(feature.id))
                 sorted.add(feature)
         return sorted
     }

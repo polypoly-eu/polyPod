@@ -52,13 +52,13 @@ class FeatureStorage {
     private func sortFeatures(_ features: [Feature]) -> [Feature] {
         let order = readOrder()
         var sorted: [Feature] = []
-        for name in order {
-            if let match = features.first(where: { $0.name == name }) {
+        for id in order {
+            if let match = features.first(where: { $0.id == id }) {
                 sorted.append(match)
             }
         }
         for feature in features {
-            if !order.contains(feature.name) {
+            if !order.contains(feature.id) {
                 sorted.append(feature)
             }
         }

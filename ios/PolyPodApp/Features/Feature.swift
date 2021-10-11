@@ -2,6 +2,7 @@ import SwiftUI
 
 class Feature {
     let path: URL
+    let id: String
     let name: String
     let author: String?
     let description: String?
@@ -26,7 +27,8 @@ class Feature {
         self.path = path
         let userLanguage = languageCode ?? "en"
         let translations = manifest.translations?[userLanguage]
-        name = translations?.name ?? manifest.name ?? path.lastPathComponent
+        id = path.lastPathComponent
+        name = translations?.name ?? manifest.name ?? id
         author = translations?.author ?? manifest.author
         description = translations?.description ?? manifest.description
         primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
