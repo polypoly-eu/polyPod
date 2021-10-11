@@ -40,14 +40,26 @@ describe("Test matching names", () => {
         ).toBe(true);
     });
 
-    it("does not match differeent nameY", () => {
+    it("matches two equal company names with sub domains", () => {
+        expect(
+            onOffFacebookAccountNamesMatching("companyx.co.uk", "companyx.com")
+        ).toBe(true);
+    });
+
+    it("does not match different names", () => {
         expect(
             onOffFacebookAccountNamesMatching("Company X", "Company Y")
         ).toBe(false);
     });
+
+    it("does not match different names with same domain", () => {
+        expect(
+            onOffFacebookAccountNamesMatching("companyx.com", "companyy.com")
+        ).toBe(false);
+    });
 });
 
-describe("Test accont matching by name", () => {
+describe("Test account matching by name", () => {
     it("matches two equal company names", () => {
         expect(
             matchAccountsByName(
@@ -81,7 +93,31 @@ describe("Test accont matching by name", () => {
         ).toBe(true);
     });
 
-    it("does not match companies with diffrent names", () => {
+    it("matches on-Facebook account by url without domain in name ", () => {
+        expect(
+            matchAccountsByName(
+                {
+                    displayName: "Company",
+                    urlId: "companyx",
+                },
+                { name: "companyx.org" }
+            )
+        ).toBe(true);
+    });
+
+    it("matches on-Facebook account between name with domain and display name", () => {
+        expect(
+            matchAccountsByName(
+                {
+                    displayName: "Company X",
+                    urlId: "companylocal",
+                },
+                { name: "companyx.org" }
+            )
+        ).toBe(true);
+    });
+
+    it("does not match companies with different names", () => {
         expect(
             matchAccountsByName(
                 {
