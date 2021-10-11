@@ -11,7 +11,7 @@
     padding: 30px 16px 30px 16px;
     border-top: 1px inset #a9b6c6;
     box-sizing: border-box;
-    overflow: clip;
+    overflow: hidden;
     height: 100%;
 }
 

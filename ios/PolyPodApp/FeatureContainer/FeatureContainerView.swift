@@ -10,6 +10,7 @@ struct FeatureContainerView: UIViewRepresentable {
     var queuedAction: (String, DispatchTime)?
     let errorHandler: (FeatureError) -> Void
     let openUrlHandler: (String) -> Void
+    let pickFileHandler: (@escaping (URL?) -> Void) -> Void
 
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(
@@ -17,7 +18,8 @@ struct FeatureContainerView: UIViewRepresentable {
             title: $title,
             activeActions: $activeActions,
             errorHandler: errorHandler,
-            openUrlHandler: openUrlHandler
+            openUrlHandler: openUrlHandler,
+            pickFileHandler: pickFileHandler
         )
 
         if let featureColor = feature.primaryColor {
@@ -50,20 +52,22 @@ class FeatureWebView: WKWebView {
     private let activeActions: Binding<[String]>
     private let errorHandler: (FeatureError) -> Void
     private let openUrlHandler: (String) -> Void
+    private let pickFileHandler: (@escaping (URL?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
-    private let filePicker = FilePicker()
 
     init(
         feature: Feature,
         title: Binding<String>,
         activeActions: Binding<[String]>,
         errorHandler: @escaping (FeatureError) -> Void,
-        openUrlHandler: @escaping (String) -> Void
+        openUrlHandler: @escaping (String) -> Void,
+        pickFileHandler: @escaping (@escaping (URL?) -> Void) -> Void
     ) {
         self.featureTitle = title
         self.activeActions = activeActions
         self.errorHandler = errorHandler
         self.openUrlHandler = openUrlHandler
+        self.pickFileHandler = pickFileHandler
 
         let contentController = WKUserContentController();
         installUserScript(
@@ -257,7 +261,7 @@ extension FeatureWebView: PolyNavDelegate {
     }
     
     func doHandleImportFile(completion: @escaping (URL?) -> Void) {
-        filePicker.pick(completion: completion)
+        pickFileHandler(completion)
     }
 }
 

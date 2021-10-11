@@ -1,8 +1,13 @@
+import React from "react";
 import {
     relevantZipEntries,
     removeEntryPrefix,
 } from "../../importers/utils/importer-util";
 import RootAnalysis from "./root-analysis";
+
+import PicturesMiniStory from "../../../components/picturesMiniStory/picturesMiniStory.jsx";
+
+import i18n from "../../../i18n";
 
 /**
  * Minimum number of picutures that should be present in
@@ -12,11 +17,11 @@ const PICTURES_THRESHOLD = 1;
 
 export default class AboutPicturesDataAnalysis extends RootAnalysis {
     get label() {
-        return RootAnalysis.Labels.TECH_DEMO;
+        return RootAnalysis.Labels.NONE;
     }
 
     get title() {
-        return "About Pictures Story";
+        return i18n.t("picturesMiniStory:title");
     }
 
     /**
@@ -53,10 +58,6 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        return `There  ${
-            this._picturesCount === 1
-                ? `is one picture`
-                : `are ${this._picturesCount} pictures`
-        } in your export.`;
+        return <PicturesMiniStory />;
     }
 }

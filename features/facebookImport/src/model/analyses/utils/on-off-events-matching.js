@@ -20,37 +20,45 @@ export function removeDomainExtension(stringValue) {
     return stringValue;
 }
 
-export function displayNameFullMatcher(
-    relatedFacebookAccount,
-    offFacebookCompany
+export function onOffFacebookAccountNamesMatching(
+    onFacebookName,
+    offFacebookName
 ) {
     return (
+        noSpaceLowercaseMatch(onFacebookName, offFacebookName) ||
         noSpaceLowercaseMatch(
-            relatedFacebookAccount.displayName,
-            offFacebookCompany.name
-        ) ||
-        noSpaceLowercaseMatch(
-            removeDomainExtension(relatedFacebookAccount.displayName),
-            removeDomainExtension(offFacebookCompany.name)
+            removeDomainExtension(onFacebookName),
+            removeDomainExtension(offFacebookName)
         )
     );
 }
 
-export function urlIdFullMatcher(relatedFacebookAccount, offFacebookCompany) {
-    return (
-        noSpaceLowercaseMatch(
-            relatedFacebookAccount.urlId,
-            offFacebookCompany.name
-        ) ||
-        noSpaceLowercaseMatch(
-            removeDomainExtension(relatedFacebookAccount.urlId),
-            removeDomainExtension(offFacebookCompany.name)
-        )
+function displayNameFullMatcher(relatedFacebookAccount, offFacebookCompany) {
+    return onOffFacebookAccountNamesMatching(
+        relatedFacebookAccount.displayName,
+        offFacebookCompany.name
+    );
+}
+
+function urlIdFullMatcher(relatedFacebookAccount, offFacebookCompany) {
+    return onOffFacebookAccountNamesMatching(
+        relatedFacebookAccount.urlId,
+        offFacebookCompany.name
     );
 }
 
 const ON_OFF_COMPANIES_MATCHERS = [displayNameFullMatcher, urlIdFullMatcher];
 
+/**
+ * Match related Facebook accounts with off-Facebook companies.
+ * For each related Facebook account look for all off-Facebook companies that match it.
+ *
+ * Matching is done using this data:
+ * - from a related account we use the displayName and urlId.
+ * - from the off-Facebook company we use the name.
+ *
+ * We compare those values directly and also by removing a url domain, if present.
+ */
 export function linkRelatedAccountsWithOffFacebookCompanies(facebookAccount) {
     const matches = [];
     const onFacebookAdvertisers = facebookAccount.relatedAccounts.advertisers();
