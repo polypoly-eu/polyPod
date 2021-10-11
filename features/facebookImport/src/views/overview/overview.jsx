@@ -19,15 +19,13 @@ const Overview = () => {
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
 
-    if (facebookAccount === null)
+    if (facebookAccount === null || files === null)
         return (
             <Loading
                 message={i18n.t("overview:loading.data")}
                 loadingGif="./images/loading.gif"
             />
         );
-    if (files === null)
-        return <Loading message={i18n.t("overview:loading.data")} />;
 
     return (
         <div className="overview">
