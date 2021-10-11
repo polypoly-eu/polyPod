@@ -18,10 +18,17 @@
 
 .infographic .highlighted {
     font-size: 12px;
+    font-weight: 600;
     color: var(--color-indigo-700);
     white-space: nowrap;
 }
 
 .infographic .bold {
     font-weight: 600;
+    font-size: 16px;
+}
+
+.infographic .small-bold {
+    font-weight: 600;
+    font-size: 12px;
 }

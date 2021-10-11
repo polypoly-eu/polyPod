@@ -1,6 +1,6 @@
 <svg width="255" height="223" viewBox="0 0 255 223" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="dataStructureBubbles">
-<g id="label2">
+<g id="text2">
 <rect x="155" width="54" height="16" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
 <text id="Category" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="159.316" y="12.17">Category</tspan></text>
 </g>
@@ -17,7 +17,7 @@
 </g>
 <line id="Line 273" x1="76.5" y1="190" x2="76.5" y2="106" stroke="#0F1938"/>
 <path id="Line 303" d="M184.5 40.5L184.5 18" stroke="#0F1938"/>
-<g id="label1">
+<g id="text1">
 <rect x="37" y="194" width="91" height="29" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
 <text id="Total value for this category.     " fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="41" y="206.17">Total value for </tspan><tspan x="41" y="220.17">this category</tspan></text>
 </g>

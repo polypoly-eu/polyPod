@@ -14,8 +14,8 @@ const DataStructureInfoScreen = () => {
             <Infographic
                 type="dataStructureBubbles"
                 texts={{
-                    label1: i18n.t("infographics:dataStructureBubbles.label1"),
-                    label2: i18n.t("infographics:dataStructureBubbles.label2"),
+                    text1: i18n.t("infographics:dataStructureBubbles.text1"),
+                    text2: i18n.t("infographics:dataStructureBubbles.text2"),
                 }}
             />
             <p

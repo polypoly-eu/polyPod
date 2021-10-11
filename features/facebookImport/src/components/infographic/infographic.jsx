@@ -37,6 +37,8 @@ const Infographic = ({ type, texts }) => {
                 div.attr("class", "text-field highlighted");
             else if (key.startsWith("bold"))
                 div.attr("class", "text-field bold");
+            else if (key.startsWith("smallbold"))
+                div.attr("class", "text-field small-bold");
             else div.attr("class", "text-field");
             const divHeight =
                 div.node().getBoundingClientRect().height /
