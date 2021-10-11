@@ -8,13 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
-import android.webkit.JavascriptInterface
-import android.webkit.WebMessage
-import android.webkit.WebMessagePort
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
@@ -132,6 +126,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             )
             .addPathHandler("/", PodPathHandler(context))
             .build()
+
         webView.webViewClient = object : WebViewClient() {
             override fun shouldInterceptRequest(
                 view: WebView,
@@ -175,6 +170,30 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 initPostOffice(view!!)
             }
         }
+
+        webView.webChromeClient = object : WebChromeClient() {
+            override fun onConsoleMessage(
+                consoleMessage: ConsoleMessage?
+            ): Boolean {
+                if (consoleMessage == null) {
+                    logger.warn("Unknown message from " +
+                        Preferences.currentFeatureName)
+                    return true
+                }
+                val message = "Message from " +
+                    Preferences.currentFeatureName + ": " +
+                    consoleMessage.messageLevel() + ": " +
+                    consoleMessage.message()
+                when (consoleMessage?.messageLevel()) {
+                    ConsoleMessage.MessageLevel.ERROR,
+                    ConsoleMessage.MessageLevel.WARNING ->
+                        logger.warn(message)
+                    else -> logger.info(message)
+                }
+                return true
+            }
+        }
+
         /* ktlint-disable max-line-length */
         webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=${feature.name}")
     }
