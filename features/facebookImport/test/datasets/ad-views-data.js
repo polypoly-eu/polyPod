@@ -60,7 +60,6 @@ export const RECENTLY_VIEWED_LOCALE = {
 
 export function createAdViewsData(languageCode) {
     const languageData = RECENTLY_VIEWED_LOCALE[languageCode];
-    debugger;
     return wrapViewsData([
         {
             name: languageData.watched.categoryName,
