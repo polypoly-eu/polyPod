@@ -60,10 +60,6 @@ const ActivitiesInfoScreen = () => {
                     ),
                 }}
             />
-            {/* <img
-                className="infographic"
-                src="./images/infographics/activities.svg"
-            /> */}
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t(`activitiesInfoScreen:text2`),
