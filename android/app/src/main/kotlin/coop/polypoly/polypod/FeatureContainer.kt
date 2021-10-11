@@ -54,11 +54,19 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             loadFeature(value)
         }
 
+    var errorHandler: ((String) -> Unit)? = null
+
     init {
         webView.layoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
+        webView.addJavascriptInterface(
+            PodErrorInterface { error: String ->
+                errorHandler?.invoke(error)
+            },
+            "podError"
+        )
         webView.addJavascriptInterface(
             ClipboardInterface(context),
             "nativeAndroidClipboard"
@@ -291,6 +299,16 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 "woff2" -> "font/woff2"
                 else -> "text/plain"
             }
+        }
+    }
+
+    @Suppress("unused")
+    class PodErrorInterface(val errorHandler: (String) -> Unit) {
+        @JavascriptInterface
+        fun report(error: String) {
+            logger.warn("Uncaught error from " +
+                Preferences.currentFeatureName + ": " + error)
+            errorHandler(error)
         }
     }
 
