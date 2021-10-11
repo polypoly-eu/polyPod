@@ -51,6 +51,17 @@ function urlIdFullMatcher(relatedFacebookAccount, offFacebookCompany) {
 
 const ON_OFF_COMPANIES_MATCHERS = [displayNameFullMatcher, urlIdFullMatcher];
 
+export function matchAccountsByName(
+    relatedFacebookAccount,
+    offFacebookCompany
+) {
+    return (
+        ON_OFF_COMPANIES_MATCHERS.find((matcher) =>
+            matcher(relatedFacebookAccount, offFacebookCompany)
+        ) !== undefined
+    );
+}
+
 /**
  * Match related Facebook accounts with off-Facebook companies.
  * For each related Facebook account look for all off-Facebook companies that match it.
@@ -69,9 +80,7 @@ export function linkRelatedAccountsWithOffFacebookCompanies(facebookAccount) {
     onFacebookAdvertisers.forEach((onFacebookAdvertiser) => {
         const matchingOffFacebookCompanies = offFacebookCompanies.filter(
             (offFacebookCompany) =>
-                ON_OFF_COMPANIES_MATCHERS.find((matcher) =>
-                    matcher(onFacebookAdvertiser, offFacebookCompany)
-                )
+                matchAccountsByName(onFacebookAdvertiser, offFacebookCompany)
         );
         if (matchingOffFacebookCompanies.length > 0) {
             matches.push(

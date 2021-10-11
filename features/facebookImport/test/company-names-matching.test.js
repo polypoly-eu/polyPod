@@ -1,4 +1,7 @@
-import { onOffFacebookAccountNamesMatching } from "../src/model/analyses/utils/on-off-events-matching";
+import {
+    matchAccountsByName,
+    onOffFacebookAccountNamesMatching,
+} from "../src/model/analyses/utils/on-off-events-matching";
 
 describe("Test matching names", () => {
     it("matches two equal company names", () => {
@@ -41,5 +44,52 @@ describe("Test matching names", () => {
         expect(
             onOffFacebookAccountNamesMatching("Company X", "Company Y")
         ).toBe(false);
+    });
+});
+
+describe("Test accont matching by name", () => {
+    it("matches two equal company names", () => {
+        expect(
+            matchAccountsByName(
+                { displayName: "Company X" },
+                { name: "Company X" }
+            )
+        ).toBe(true);
+    });
+
+    it("matches on-Facebook account by url id", () => {
+        expect(
+            matchAccountsByName(
+                {
+                    displayName: "Company NoX",
+                    urlId: "companyx",
+                },
+                { name: "companyx" }
+            )
+        ).toBe(true);
+    });
+
+    it("matches on-Facebook account by url without domain ", () => {
+        expect(
+            matchAccountsByName(
+                {
+                    displayName: "Company",
+                    urlId: "companyx.com",
+                },
+                { name: "companyx.org" }
+            )
+        ).toBe(true);
+    });
+
+    it("does not match companies with diffrent names", () => {
+        expect(
+            matchAccountsByName(
+                {
+                    displayName: "Company X",
+                    urlId: "companyx",
+                },
+                { name: "Company Y" }
+            )
+        ).toBe(true);
     });
 });
