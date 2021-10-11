@@ -47,13 +47,11 @@ describe("Import ad views from export with wrong data key", () => {
 });
 
 describe("Import ad views from export with missing ads category", () => {
-    let zipFile = null;
     let result = null;
-    let facebookAccount = null;
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
+        const zipFile = new ZipFileMock();
         zipFile.addJsonEntry(
             RECENTLY_VIEWED_FILE_PATH,
             createEnglishDatasetWithMissingAdsCategory()
@@ -61,7 +59,7 @@ describe("Import ad views from export with missing ads category", () => {
 
         const importingResult = await runRecentlyViewedAdsImporter(zipFile);
         result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
+        const facebookAccount = importingResult.facebookAccount;
         relatedAccounts = facebookAccount.relatedAccounts;
     });
 
@@ -109,13 +107,11 @@ describe("Import ad view with company name with multi-byte unicode characters", 
 });
 
 describe("Import incomplete ad views from export", () => {
-    let zipFile = null;
     let result = null;
-    let facebookAccount = null;
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
+        const zipFile = new ZipFileMock();
         zipFile.addJsonEntry(
             RECENTLY_VIEWED_FILE_PATH,
             createIncompleteEnglishAdViewsData()
@@ -123,7 +119,7 @@ describe("Import incomplete ad views from export", () => {
 
         const importingResult = await runRecentlyViewedAdsImporter(zipFile);
         result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
+        const facebookAccount = importingResult.facebookAccount;
         relatedAccounts = facebookAccount.relatedAccounts;
     });
 
@@ -143,15 +139,13 @@ describe("Import incomplete ad views from export", () => {
 });
 
 describe("Import ad views from English dataset", () => {
-    let zipFile = null;
     let result = null;
-    let facebookAccount = null;
     let relatedAccounts = null;
     let firstRelatedAccount = null;
     let secondRelatedAccount = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
+        const zipFile = new ZipFileMock();
         zipFile.addJsonEntry(
             RECENTLY_VIEWED_FILE_PATH,
             createEnglishAdViewsData()
@@ -159,7 +153,7 @@ describe("Import ad views from English dataset", () => {
 
         const importingResult = await runRecentlyViewedAdsImporter(zipFile);
         result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
+        const facebookAccount = importingResult.facebookAccount;
         relatedAccounts = facebookAccount.relatedAccounts;
         [firstRelatedAccount, secondRelatedAccount] = relatedAccounts.items;
     });
@@ -240,15 +234,13 @@ describe("Import ad views from English dataset", () => {
 });
 
 describe("Import ad views from German dataset", () => {
-    let zipFile = null;
     let result = null;
-    let facebookAccount = null;
     let relatedAccounts = null;
     let firstRelatedAccount = null;
     let secondRelatedAccount = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
+        const zipFile = new ZipFileMock();
         zipFile.addJsonEntry(
             RECENTLY_VIEWED_FILE_PATH,
             createGermanAdViewsData()
@@ -256,7 +248,7 @@ describe("Import ad views from German dataset", () => {
 
         const importingResult = await runRecentlyViewedAdsImporter(zipFile);
         result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
+        const facebookAccount = importingResult.facebookAccount;
         relatedAccounts = facebookAccount.relatedAccounts;
         [firstRelatedAccount, secondRelatedAccount] = relatedAccounts.items;
     });
@@ -281,15 +273,13 @@ describe("Import ad views from German dataset", () => {
 });
 
 describe("Import ad views from Danish dataset", () => {
-    let zipFile = null;
     let result = null;
-    let facebookAccount = null;
     let relatedAccounts = null;
     let firstRelatedAccount = null;
     let secondRelatedAccount = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
+        const zipFile = new ZipFileMock();
         zipFile.addJsonEntry(
             RECENTLY_VIEWED_FILE_PATH,
             createDanishAdViewsData()
@@ -297,7 +287,7 @@ describe("Import ad views from Danish dataset", () => {
 
         const importingResult = await runRecentlyViewedAdsImporter(zipFile);
         result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
+        const facebookAccount = importingResult.facebookAccount;
         relatedAccounts = facebookAccount.relatedAccounts;
         [firstRelatedAccount, secondRelatedAccount] = relatedAccounts.items;
     });
