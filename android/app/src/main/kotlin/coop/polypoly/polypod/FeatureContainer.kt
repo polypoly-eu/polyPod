@@ -62,14 +62,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
         webView.addJavascriptInterface(
-            PodErrorInterface { error: String ->
+            PodInternalInterface(context) { error: String ->
                 errorHandler?.invoke(error)
             },
-            "podError"
-        )
-        webView.addJavascriptInterface(
-            ClipboardInterface(context),
-            "nativeAndroidClipboard"
+            "podInternal"
         )
 
         // Enabling localStorage to support polyExplorer data migration
@@ -302,19 +298,19 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    @Suppress("unused")
-    class PodErrorInterface(val errorHandler: (String) -> Unit) {
+    class PodInternalInterface(
+        val context: Context,
+        val errorHandler: (String) -> Unit
+    ) {
+        @Suppress("unused")
         @JavascriptInterface
-        fun report(error: String) {
+        fun reportError(error: String) {
             logger.warn("Uncaught error from " +
                 Preferences.currentFeatureName + ": " + error)
             errorHandler(error)
         }
-    }
 
-    class ClipboardInterface(aContext: Context) {
-        var context: Context = aContext
-
+        @Suppress("unused")
         @JavascriptInterface
         fun copyToClipboard(text: String?) {
             var clipboard: ClipboardManager =

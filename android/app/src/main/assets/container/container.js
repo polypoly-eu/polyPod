@@ -44,7 +44,9 @@ function initIframe(iFrame) {
     console.log("initializing iframe");
 
     iFrame.contentWindow.addEventListener("error", ({ error }) => {
-        window.podError.report(`${error.stack}\nCause: ${error.cause.stack}`);
+        window.podInternal.reportError(
+            `${error.stack}\nCause: ${error.cause.stack}`
+        );
     });
 
     port1.start();
