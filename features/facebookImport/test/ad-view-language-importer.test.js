@@ -11,7 +11,7 @@ import { expectImportSuccess } from "./utils/importer-assertions";
 
 let testInputs = null;
 
-beforeAll(async () => {
+beforeAll( () => {
     const datasets = [
         { language: "English", dataset: createEnglishAdViewsData() },
         { language: "German", dataset: createGermanAdViewsData() },
