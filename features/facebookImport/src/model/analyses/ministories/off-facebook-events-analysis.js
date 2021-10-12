@@ -63,7 +63,6 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
                 b.onFacebookTimestamps.length -
                 b.offFacebookTimestamps.length
         );
-
         selectedCompanies.push(allCompanies.pop());
 
         //More on than off
@@ -73,7 +72,6 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
                 a.offFacebookTimestamps.length -
                 (b.onFacebookTimestamps.length - b.offFacebookTimestamps.length)
         );
-
         selectedCompanies.push(allCompanies.pop());
 
         //More off than on
@@ -83,10 +81,7 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
                 a.onFacebookTimestamps.length -
                 (b.offFacebookTimestamps.length - b.onFacebookTimestamps.length)
         );
-
         selectedCompanies.push(allCompanies.pop());
-
-        console.log(selectedCompanies);
 
         selectedCompanies.forEach((company) => {
             displayData[company.name] = generate90DaysObject();
