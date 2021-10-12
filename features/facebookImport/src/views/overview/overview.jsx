@@ -3,7 +3,6 @@ import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
-
 import i18n from "../../i18n.js";
 
 import "./overview.css";
@@ -26,7 +25,21 @@ const Overview = () => {
                 loadingGif="./images/loading.gif"
             />
         );
-
+    const getTimeFormat = () => {
+        return files[0].time.slice(0, 10).replaceAll("-", "/");
+    };
+    function updateByteFormat(size, decimals = 2) {
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const format = ["Bytes", "KB", "MB", "GB"];
+        if (size == 0) return "0 Byte";
+        const i = Math.floor(Math.log(size) / Math.log(k));
+        // var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)));
+        return (
+            Math.round(size / Math.pow(k, i), dm) + " " + format[i]
+            // parseFloat((size / Math.pow(k, i)).toFixed(dm)) + " " + format[i]
+        );
+    }
     return (
         <div className="overview">
             {Object.values(files).length ? (
@@ -34,16 +47,27 @@ const Overview = () => {
                     <div className="details">
                         <h1>{files[0].name}</h1>
                         <p>
-                            {i18n.t("overview:imported.time")} {files[0].time}
+                            {i18n.t("overview:imported.time")} {getTimeFormat()}
                         </p>
                         <p>
-                            {i18n.t("overview:size")} {files[0].size} bytes
+                            <span className="size">
+                                {" "}
+                                {i18n.t("overview:size")}{" "}
+                                {updateByteFormat(files[0].size)}
+                            </span>
                         </p>
                         <div className="separator"></div>
                     </div>
 
                     <div className="imported-files">
-                        <h4>{i18n.t("overview:imported.files")}</h4>
+                        <div className="align-illustration">
+                            {" "}
+                            <img
+                                src="./images/fileupload.svg"
+                                alt="file-upload"
+                            ></img>{" "}
+                            <h4>{i18n.t("overview:imported.files")}</h4>
+                        </div>
                         {facebookAccount &&
                         facebookAccount.importedFileNames.length ? (
                             <div className="file-list">
