@@ -7,20 +7,21 @@ name: Lint kotlin
 #
 # Once these issues are resolved we should reenable the job.
 #
-#on:
-#  pull_request:
-#    paths:
-#      - .github/workflows/ktlint.yaml
-#      - 'android/**/*.kt'
-on: deployment
+on:
+  push:
+    paths:
+      - .github/workflows/ktlint.yaml
+      - 'android/**/*.kt'
 
 jobs:
   ktlint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.41.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
-      - name: run ktlint
-        run: |
-          cd android && ktlint
+      - name: Qodana - Code Inspection
+        uses: JetBrains/qodana-action@v2.2-eap
+        with:
+          project-dir: ${{ github.workspace }}/android
+          results-dir: ${{ github.workspace }}/qodana
+          cache-dir: /home/runner/work/_temp/_github_home/qodana-cache
+
