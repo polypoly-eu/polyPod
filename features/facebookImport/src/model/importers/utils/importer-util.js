@@ -103,24 +103,17 @@ async function jsonDataEntities(zipFile) {
 }
 
 function removeEntryPrefix(entryName) {
-    // TODO: Making assumptions about the exact URL format used internally by the polyPod is risky,
-    //       we already have the case where iOS URLs contain both upper and lower case characters,
-    //       while Android URLs don't. A better approach would be to get the archive's root path from
-    //       the polyPod, then remove this from the beginning of all URLs.
-    if (
-        /^poly[pP]od:\/\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/$/.test(
-            entryName
-        )
-    ) {
-        return "";
-    }
-    const entryNameMatch = entryName.match(
-        /^poly[pP]od:\/\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/(.*)$/
-    );
-    if (entryNameMatch && entryNameMatch.length === 2 && entryNameMatch[1]) {
-        return entryNameMatch[1];
-    }
-    return entryName;
+    // There is no polyPod API at this time that gives us the relative paths we
+    // want to show, so we have to make assumptions about the URL formats used
+    // by the polyPod.
+    const removalPatterns = [
+        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\//i,
+        /^FeatureFiles\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\//i,
+    ];
+    let cleanedEntry = entryName;
+    for (let pattern of removalPatterns)
+        cleanedEntry = cleanedEntry.replace(pattern, "");
+    return cleanedEntry;
 }
 
 function sliceIntoChunks(array, chunkSize) {
