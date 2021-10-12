@@ -19,7 +19,7 @@ export const MirroredBarChart = ({ data, colors, width, height }) => {
     numberTicksX = 4,
     yGridMarginLeft = 18,
     yGridMarginRight = 24,
-    barPadding = 10;
+    barPadding = 1;
 
   //derived constants
   const chartHeight = height - margin.bottom - margin.top,
@@ -34,7 +34,7 @@ export const MirroredBarChart = ({ data, colors, width, height }) => {
     lowerYScale = d3.scaleLinear().range([0, chartHeight / 2]);
 
   function adaptScalesToData() {
-    xScale.domain([d3.max(data, (d) => d.time), 0]);
+    xScale.domain([d3.max(data, (d) => d.key), 0]);
     lowerYScale
       .domain([0, d3.max(data, (d) => Math.max(d.upper, d.lower))])
       .nice(numberTicksY);
@@ -170,7 +170,7 @@ export const MirroredBarChart = ({ data, colors, width, height }) => {
     upperBars
       .enter()
       .append("rect")
-      .attr("x", (d) => xScale(d.time))
+      .attr("x", (d) => xScale(d.key))
       .attr("width", (barSpace - totalBarPadding) / data.length)
       .attr("fill", upperBarColor)
       .attr("class", "upper-bar")
@@ -180,7 +180,7 @@ export const MirroredBarChart = ({ data, colors, width, height }) => {
 
   function updateExistingUpperBars(upperBars) {
     upperBars
-      .attr("x", (d) => xScale(d.time))
+      .attr("x", (d) => xScale(d.key))
       .attr("width", (barSpace - totalBarPadding) / data.length)
       .attr("fill", upperBarColor)
       .attr("y", (d) => upperYScale(d.upper))
@@ -191,7 +191,7 @@ export const MirroredBarChart = ({ data, colors, width, height }) => {
     lowerBars
       .enter()
       .append("rect")
-      .attr("x", (d) => xScale(d.time))
+      .attr("x", (d) => xScale(d.key))
       .attr("width", (barSpace - totalBarPadding) / data.length)
       .attr("fill", lowerBarColor)
       .attr("class", "upper-bar")
@@ -201,7 +201,7 @@ export const MirroredBarChart = ({ data, colors, width, height }) => {
 
   function updateExistingLowerBars(lowerBars) {
     lowerBars
-      .attr("x", (d) => xScale(d.time))
+      .attr("x", (d) => xScale(d.key))
       .attr("width", (barSpace - totalBarPadding) / data.length)
       .attr("fill", lowerBarColor)
       .attr("y", chartHeight / 2)
@@ -209,18 +209,14 @@ export const MirroredBarChart = ({ data, colors, width, height }) => {
   }
 
   function displayUpperBars(barChart) {
-    const upperBars = barChart
-      .selectAll(".upper-bar")
-      .data(data, (d) => d.time);
+    const upperBars = barChart.selectAll(".upper-bar").data(data, (d) => d.key);
     upperBars.exit().remove();
     updateExistingUpperBars(upperBars);
     addEnteringUpperBars(upperBars);
   }
 
   function displayLowerBars(barChart) {
-    const lowerBars = barChart
-      .selectAll(".lower-bar")
-      .data(data, (d) => d.time);
+    const lowerBars = barChart.selectAll(".lower-bar").data(data, (d) => d.key);
     lowerBars.exit().remove();
     updateExistingLowerBars(lowerBars);
     addEnteringLowerBars(lowerBars);

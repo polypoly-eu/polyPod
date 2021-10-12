@@ -11,9 +11,15 @@ export default class OnOffFacebookComparisonAnalysis extends RootAnalysis {
     async analyze({ facebookAccount }) {
         const advertiserMatches =
             linkRelatedAccountsWithOffFacebookCompanies(facebookAccount);
-        this._commonAdvertisersData = advertiserMatches.map(
-            (consolidatedAdvertiser) => consolidatedAdvertiser.last90DaysSummary
+        const max = Math.max(
+            facebookAccount.offFacebookEventsLatestTimestamp,
+            facebookAccount.relatedAccountEventLatestTimestamp
         );
+        this._commonAdvertisersData = advertiserMatches.map(
+            (consolidatedAdvertiser) =>
+                consolidatedAdvertiser.last90DaysSummary(max)
+        );
+
         this.active = advertiserMatches.length > 0;
         this.active = true;
 
