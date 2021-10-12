@@ -21,7 +21,8 @@ var readDirCache = Dictionary<String, [String]>()
 
 extension PolyOut {
     static let fsKey = "fileStoreDict"
-    static let fsPrefix = "polypod://"
+    static let fsProtocol = "polypod"
+    static let fsPrefix = fsProtocol + "://"
     static let fsFilesRoot = "FeatureFiles"
     
     static func featureFilesPath() -> URL {

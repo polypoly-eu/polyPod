@@ -65,15 +65,17 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             return "image/svg+xml"
         case "json":
             return "application/json"
+        case "woff2":
+            return "font/woff2"
         default:
-            return "text/plain"
+            return "application/octet-stream"
         }
     }
     
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
         guard let url = urlSchemeTask.request.url,
             let scheme = url.scheme,
-            scheme == PolyOut.fsPrefix.replacingOccurrences(of: "://", with: "").lowercased() else {
+            scheme == PolyOut.fsProtocol.lowercased() else {
             urlSchemeTask.didFailWithError(PolyNavError.protocolError(""))
                 return
         }
@@ -85,8 +87,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
                         
         do {
             var fileData: Data? = nil
-            if (file.starts(with: PolyOut.fsFilesRoot))
-            {
+            if (file.starts(with: PolyOut.fsFilesRoot)) {
                 let options: [String: Any] = [:]
                 PodApi.shared.polyOut.fileRead(
                     url: urlString,
@@ -103,7 +104,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
                 fileData = try Data(contentsOf: targetUrl!)
             }
             let headers: [String : String] = [
-                "Access-Control-Allow-Origin": "polypod://",
+                "Access-Control-Allow-Origin": PolyOut.fsPrefix,
                 "Access-Control-Allow-Methods": "GET",
                 "Access-Control-Allow-Headers": "*",
                 "Content-Length": String(fileData?.count ?? 0),
@@ -177,7 +178,7 @@ class FeatureWebView: WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
 
-        let scheme = PolyOut.fsPrefix.replacingOccurrences(of: "://", with: "")
+        let scheme = PolyOut.fsProtocol
         let fileHandler = FeatureFileHandler()
         fileHandler.setFeature(feature: feature)
         configuration.setURLSchemeHandler(fileHandler, forURLScheme: scheme)

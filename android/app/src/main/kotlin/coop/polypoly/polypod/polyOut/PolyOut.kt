@@ -14,7 +14,8 @@ open class PolyOut(
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
 
     companion object {
-        val fsPrefix = "https://appassets.androidplatform.net/"
+        val fsDomain = "polypod-assets.local"
+        val fsPrefix = "https://$fsDomain/"
         val fsFilesRoot = "FeatureFiles"
 
         fun filesPath(context: Context) =

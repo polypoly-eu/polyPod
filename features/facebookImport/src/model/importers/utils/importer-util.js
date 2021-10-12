@@ -4,8 +4,6 @@ import {
     MissingFileImportException,
 } from "./failed-import-exception";
 
-const FEATURE_FILES = "FeatureFiles";
-
 async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
     return entries.filter(
@@ -14,12 +12,10 @@ async function relevantZipEntries(zipFile) {
 }
 
 async function readJSONFile(dataFileName, zipFile, zipId = null) {
-    const fullEntryName = zipId
-        ? `${FEATURE_FILES}/${zipId}/${dataFileName}`
-        : dataFileName;
+    const fullEntryName = zipId ? `${zipId}/${dataFileName}` : dataFileName;
     const entries = await zipFile.getEntries();
-    const dataZipEntry = entries.find(
-        (entryName) => entryName === fullEntryName
+    const dataZipEntry = entries.find((entryName) =>
+        entryName.endsWith(fullEntryName)
     );
 
     if (!dataZipEntry) {

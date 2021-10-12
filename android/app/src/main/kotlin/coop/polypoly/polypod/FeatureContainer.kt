@@ -128,6 +128,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         )
 
         val assetLoader = WebViewAssetLoader.Builder()
+            .setDomain(PolyOut.fsDomain)
             .addPathHandler(
                 "/features/${feature.name}/",
                 FeaturesPathHandler(context, feature.content)
@@ -194,7 +195,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             }
         }
         /* ktlint-disable max-line-length */
-        webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=${feature.name}")
+        webView.loadUrl("${PolyOut.fsPrefix}assets/container/container.html?featureName=${feature.name}")
     }
 
     private fun initPostOffice(view: WebView) {
