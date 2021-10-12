@@ -71,6 +71,9 @@ export const OffFacebookMiniStoryDetails = ({ displayData }) => {
                 </div>
             ))}
             <p>{i18n.t("offFacebookEventsMiniStory:details.text.2")}</p>
+            <p className="source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p>
         </div>
     );
 };
