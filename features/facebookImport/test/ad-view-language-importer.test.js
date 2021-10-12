@@ -1,7 +1,10 @@
 "use strict";
 
 import { RECENTLY_VIEWED_FILE_PATH } from "../src/model/importers/recently-viewed-ads-importer";
-import { createEnglishAdViewsData,createGermanAdViewsData } from "./datasets/ad-views-data";
+import {
+    createEnglishAdViewsData,
+    createGermanAdViewsData,
+} from "./datasets/ad-views-data";
 import { ZipFileMock } from "./mocks/zipfile-mock";
 import { runRecentlyViewedAdsImporter } from "./utils/data-importing";
 import { expectImportSuccess } from "./utils/importer-assertions";
@@ -22,25 +25,25 @@ beforeAll(async () => {
 
             return { language, importingResult };
         })
-    ).then( importingResults => {
+    ).then((importingResults) => {
         testInputs = importingResults.map(({ language, importingResult }) => {
-        const result = importingResult.result;
-        const facebookAccount = importingResult.facebookAccount;
-        const relatedAccounts = facebookAccount.relatedAccounts;
-        const [firstRelatedAccount, secondRelatedAccount] =
-            relatedAccounts.items;
-        return [
-            language,
-            [
-                result,
-                facebookAccount,
-                relatedAccounts,
-                firstRelatedAccount,
-                secondRelatedAccount,
-            ],
-        ];
+            const result = importingResult.result;
+            const facebookAccount = importingResult.facebookAccount;
+            const relatedAccounts = facebookAccount.relatedAccounts;
+            const [firstRelatedAccount, secondRelatedAccount] =
+                relatedAccounts.items;
+            return [
+                language,
+                [
+                    result,
+                    facebookAccount,
+                    relatedAccounts,
+                    firstRelatedAccount,
+                    secondRelatedAccount,
+                ],
+            ];
+        });
     });
-});
 });
 
 describe("Import ad views", () => {
