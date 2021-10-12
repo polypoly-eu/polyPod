@@ -26,8 +26,8 @@ export default class Storage {
     }
 
     async removeFile(file) {
-        const { polyNav } = this._pod;
-        await polyNav.removeFile(file);
+        const { polyOut } = this._pod;
+        await polyOut.removeArchive(file);
         await this.refreshFiles();
         this.changeListener();
     }

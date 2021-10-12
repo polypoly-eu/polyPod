@@ -113,6 +113,14 @@ export class DefaultPod implements Pod {
             writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
                 return fs.writeFile(path, content, options);
             }
+
+            importArchive(url: string): Promise<string> {
+                throw new Error("Not implemented");
+            }
+
+            removeArchive(fileId: string): Promise<void> {
+                throw new Error("Not implemented");
+            }
         })();
     }
     /**
@@ -129,10 +137,7 @@ export class DefaultPod implements Pod {
             setTitle: async (title: string) => {
                 throw new Error("Not implemented");
             },
-            importFile: async () => {
-                throw new Error("Not implemented");
-            },
-            removeFile: async (fileId: string) => {
+            pickFile: async () => {
                 throw new Error("Not implemented");
             },
         };
