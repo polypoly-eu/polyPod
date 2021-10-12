@@ -52,18 +52,43 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
 
         const displayData = {};
 
-        const selectedCompanies = this._commonAdvertisersData;
-        const numberCompaniesShown = 3;
+        const allCompanies = this._commonAdvertisersData;
+        const selectedCompanies = [];
 
-        selectedCompanies.sort(
+        //Most events in total
+        allCompanies.sort(
             (a, b) =>
-                b.onFacebookTimestamps.length +
-                b.offFacebookTimestamps.length -
-                a.onFacebookTimestamps.length -
-                a.offFacebookTimestamps.length
+                a.onFacebookTimestamps.length +
+                a.offFacebookTimestamps.length -
+                b.onFacebookTimestamps.length -
+                b.offFacebookTimestamps.length
         );
 
-        selectedCompanies.slice(0, numberCompaniesShown).forEach((company) => {
+        selectedCompanies.push(allCompanies.pop());
+
+        //More on than off
+        allCompanies.sort(
+            (a, b) =>
+                a.onFacebookTimestamps.length -
+                a.offFacebookTimestamps.length -
+                (b.onFacebookTimestamps.length - b.offFacebookTimestamps.length)
+        );
+
+        selectedCompanies.push(allCompanies.pop());
+
+        //More off than on
+        allCompanies.sort(
+            (a, b) =>
+                a.offFacebookTimestamps.length -
+                a.onFacebookTimestamps.length -
+                (b.offFacebookTimestamps.length - b.onFacebookTimestamps.length)
+        );
+
+        selectedCompanies.push(allCompanies.pop());
+
+        console.log(selectedCompanies);
+
+        selectedCompanies.forEach((company) => {
             displayData[company.name] = generate90DaysObject();
             for (let offTimestamp of company.offFacebookTimestamps)
                 displayData[company.name][
