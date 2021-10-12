@@ -10,7 +10,10 @@ import {
     createIncompleteEnglishAdViewsData,
 } from "./datasets/ad-views-data";
 import { ZipFileMock } from "./mocks/zipfile-mock";
-import { runRecentlyViewedAdsImporter } from "./utils/data-importing";
+import {
+    runAdsImportForDataset,
+    runRecentlyViewedAdsImporter,
+} from "./utils/data-importing";
 import {
     expectImportSuccess,
     expectInvalidContentError,
@@ -46,23 +49,12 @@ describe("Import ad views from export with wrong data key", () => {
     });
 });
 
-async function runImportForDataset(dataset) {
-    const zipFile = new ZipFileMock();
-    zipFile.addJsonEntry(RECENTLY_VIEWED_FILE_PATH, dataset);
-
-    const importingResult = await runRecentlyViewedAdsImporter(zipFile);
-    const result = importingResult.result;
-    const facebookAccount = importingResult.facebookAccount;
-    const relatedAccounts = facebookAccount.relatedAccounts;
-    return { result, relatedAccounts };
-}
-
 describe("Import ad views from export with missing ads category", () => {
     let result = null;
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        const importingResult = await runImportForDataset(
+        const importingResult = await runAdsImportForDataset(
             createEnglishDatasetWithMissingAdsCategory()
         );
         result = importingResult.result;
@@ -81,7 +73,7 @@ describe("Import ad view with company name with multi-byte unicode characters", 
     let relatedAccount = null;
 
     beforeAll(async () => {
-        const importingResult = await runImportForDataset(
+        const importingResult = await runAdsImportForDataset(
             creatAdViewsWithCompanyWithUnicodeCharactersData()
         );
         result = importingResult.result;
@@ -112,7 +104,7 @@ describe("Import incomplete ad views from export", () => {
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        const importingResult = await runImportForDataset(
+        const importingResult = await runAdsImportForDataset(
             createIncompleteEnglishAdViewsData()
         );
         result = importingResult.result;
@@ -141,7 +133,7 @@ describe("Import ad views from English dataset", () => {
     let secondRelatedAccount = null;
 
     beforeAll(async () => {
-        const importingResult = await runImportForDataset(
+        const importingResult = await runAdsImportForDataset(
             createEnglishAdViewsData()
         );
         result = importingResult.result;
@@ -231,7 +223,7 @@ describe("Import ad views from German dataset", () => {
     let secondRelatedAccount = null;
 
     beforeAll(async () => {
-        const importingResult = await runImportForDataset(
+        const importingResult = await runAdsImportForDataset(
             createGermanAdViewsData()
         );
         result = importingResult.result;
@@ -265,7 +257,7 @@ describe("Import ad views from Danish dataset", () => {
     let secondRelatedAccount = null;
 
     beforeAll(async () => {
-        const importingResult = await runImportForDataset(
+        const importingResult = await runAdsImportForDataset(
             createDanishAdViewsData()
         );
         result = importingResult.result;
