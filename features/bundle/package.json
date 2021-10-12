@@ -4,6 +4,7 @@
     "build": "node index.js"
   },
   "devDependencies": {
+    "demo-feature": "file:../demo",
     "facebook-import-feature": "file:../facebookImport",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
@@ -30,6 +31,11 @@
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
+    },
+    {
+      "archiveName": "demo",
+      "moduleName": "demo-feature",
+      "artifactPath": "dist"
     }
   ]
 }

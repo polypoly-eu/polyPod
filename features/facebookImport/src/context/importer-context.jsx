@@ -135,7 +135,7 @@ export const ImporterProvider = ({ children }) => {
         if (changedState) {
             Object.keys(changedState)?.forEach((key) => {
                 if (!navigationStates.includes(key)) {
-                    console.log(`NavigationStateError with key: ${key}`);
+                    console.error(`NavigationStateError with key: ${key}`);
                     return;
                 }
             });

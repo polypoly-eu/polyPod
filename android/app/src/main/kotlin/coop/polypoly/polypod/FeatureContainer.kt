@@ -8,13 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
-import android.webkit.JavascriptInterface
-import android.webkit.WebMessage
-import android.webkit.WebMessagePort
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
@@ -61,14 +55,18 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             loadFeature(value)
         }
 
+    var errorHandler: ((String) -> Unit)? = null
+
     init {
         webView.layoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
         webView.addJavascriptInterface(
-            ClipboardInterface(context),
-            "nativeAndroidClipboard"
+            PodInternalInterface(context) { error: String ->
+                errorHandler?.invoke(error)
+            },
+            "podInternal"
         )
 
         // Enabling localStorage to support polyExplorer data migration
@@ -135,6 +133,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             )
             .addPathHandler("/", PodPathHandler(context))
             .build()
+
         webView.webViewClient = object : WebViewClient() {
             override fun shouldInterceptRequest(
                 view: WebView,
@@ -194,6 +193,30 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 initPostOffice(view!!)
             }
         }
+
+        webView.webChromeClient = object : WebChromeClient() {
+            override fun onConsoleMessage(
+                consoleMessage: ConsoleMessage?
+            ): Boolean {
+                if (consoleMessage == null) {
+                    logger.warn("Unknown message from " +
+                        Preferences.currentFeatureName)
+                    return true
+                }
+                val message = "Message from " +
+                    Preferences.currentFeatureName + ": " +
+                    consoleMessage.messageLevel() + ": " +
+                    consoleMessage.message()
+                when (consoleMessage?.messageLevel()) {
+                    ConsoleMessage.MessageLevel.ERROR,
+                    ConsoleMessage.MessageLevel.WARNING ->
+                        logger.warn(message)
+                    else -> logger.info(message)
+                }
+                return true
+            }
+        }
+
         /* ktlint-disable max-line-length */
         webView.loadUrl("${PolyOut.fsPrefix}assets/container/container.html?featureName=${feature.name}")
     }
@@ -294,9 +317,19 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    class ClipboardInterface(aContext: Context) {
-        var context: Context = aContext
+    class PodInternalInterface(
+        val context: Context,
+        val errorHandler: (String) -> Unit
+    ) {
+        @Suppress("unused")
+        @JavascriptInterface
+        fun reportError(error: String) {
+            logger.warn("Uncaught error from " +
+                Preferences.currentFeatureName + ": " + error)
+            errorHandler(error)
+        }
 
+        @Suppress("unused")
         @JavascriptInterface
         fun copyToClipboard(text: String?) {
             var clipboard: ClipboardManager =
