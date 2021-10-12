@@ -230,7 +230,8 @@ export class RemoteClientPod implements Pod {
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
             readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
-                if (options) throw new Error("AsyncPolyOut.readFile: options not supported");
+                if (options) return rpcClient.polyOut().readFile(path, options)();
+                else if (fetch === undefined) return rpcClient.polyOut().readFile(path)();
                 else
                     return new Promise<Uint8Array>((resolve, reject) => {
                         fetch(path)
