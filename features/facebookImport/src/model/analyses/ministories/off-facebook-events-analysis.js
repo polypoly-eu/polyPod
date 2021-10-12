@@ -53,7 +53,7 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
         const displayData = {};
 
         const companyData = this._commonAdvertisersData.slice(5, 8);
-        companyData.forEach((company, i) => {
+        companyData.forEach((company) => {
             displayData[company.name] = generate90DaysObject();
             for (let offTimestamp of company.offFacebookTimestamps)
                 displayData[company.name][
