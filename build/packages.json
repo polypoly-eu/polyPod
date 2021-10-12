@@ -17,6 +17,7 @@
         "core/utils/rollup-plugin-copy-watch",
         "core/utils/silly-i18n",
         "features/bundle",
+        "features/demo",
         "features/example",
         "features/facebookImport",
         "features/lexicon",

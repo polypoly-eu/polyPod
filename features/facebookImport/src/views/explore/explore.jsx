@@ -121,7 +121,12 @@ const ExploreView = () => {
 
     const renderFileAnalyses = () => {
         if (!fileAnalysis)
-            return <Loading message={i18n.t("explore:loading")} />;
+            return (
+                <Loading
+                    loadingGif="./images/loading.gif"
+                    message={i18n.t("explore:loading")}
+                />
+            );
         return (
             <div>
                 <UnrecognizedCard />

@@ -52,13 +52,13 @@ class FeatureStorage {
     private func sortFeatures(_ features: [Feature]) -> [Feature] {
         let order = readOrder()
         var sorted: [Feature] = []
-        for name in order {
-            if let match = features.first(where: { $0.name == name }) {
+        for id in order {
+            if let match = features.first(where: { $0.id == id }) {
                 sorted.append(match)
             }
         }
         for feature in features {
-            if !order.contains(feature.name) {
+            if !order.contains(feature.id) {
                 sorted.append(feature)
             }
         }
@@ -77,10 +77,10 @@ class FeatureStorage {
     
     func importFeatures() {
         createFeaturesFolder()
-        importFeature("facebookImport")
-        importFeature("lexicon")
-        importFeature("polyExplorer")
-        importFeature("polyPreview")
+        let order = readOrder()
+        for id in order {
+            importFeature(id)
+        }
     }
     
     private func createFeaturesFolder() {
@@ -99,7 +99,6 @@ class FeatureStorage {
                     let unzipDirectory = try Zip.quickUnzipFile(filePath)
                     try FileManager.default.moveItem(at: unzipDirectory, to: featuresFileUrl.appendingPathComponent(featureName))
                     try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
-                    try FileManager.default.copyBundleFile(forResource: "polyLook", ofType: "css", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     try FileManager.default.copyBundleFile(forResource: "initIframe", ofType: "js", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     try importPodJs(toFeature: featureName, atUrl: featuresFileUrl)
                     print("Imported feature: ", featureName)
@@ -107,7 +106,7 @@ class FeatureStorage {
                     print("Feature for import not found: ", featureName)
                 }
             } catch {
-                print(error.localizedDescription);
+                print("Failed to import feature \(featureName): \(error.localizedDescription)");
             }
         }
     }

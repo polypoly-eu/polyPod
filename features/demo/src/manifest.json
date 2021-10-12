@@ -1,0 +1,11 @@
+{
+    "author": "polypoly Cooperative",
+    "description": "Demonstrates some polyPod capabilities for testing purposes - please ignore",
+    "primaryColor": "#000000",
+    "translations": {
+        "de": {
+            "author": "polypoly - Die Genossenschaft",
+            "description": "Demonstriert ein paar polyPod-Fähigkeiten für Testzwecke - bitte ignorieren"
+        }
+    }
+}

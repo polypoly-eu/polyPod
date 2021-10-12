@@ -2,6 +2,7 @@ import SwiftUI
 
 class Feature {
     let path: URL
+    let id: String
     let name: String
     let author: String?
     let description: String?
@@ -10,11 +11,7 @@ class Feature {
     private let links: [String: String]
     
     static func load(path: URL, languageCode: String?) -> Feature? {
-        let manifestPath = path.appendingPathComponent("manifest.json")
-        guard let manifest = FeatureManifest.load(path: manifestPath) else {
-            print("Failed to load feature manifest from: \(manifestPath)")
-            return nil
-        }
+        let manifest = readManifest(path)
         return Feature(
             path: path,
             manifest: manifest,
@@ -26,7 +23,9 @@ class Feature {
         self.path = path
         let userLanguage = languageCode ?? "en"
         let translations = manifest.translations?[userLanguage]
-        name = translations?.name ?? manifest.name ?? path.lastPathComponent
+        let id = path.lastPathComponent
+        self.id = id
+        name = translations?.name ?? manifest.name ?? id
         author = translations?.author ?? manifest.author
         description = translations?.description ?? manifest.description
         primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
@@ -46,6 +45,23 @@ class Feature {
         }
         return nil
     }
+}
+
+private func readManifest(_ basePath: URL) -> FeatureManifest {
+    let manifestPath = basePath.appendingPathComponent("manifest.json")
+    if let manifest = FeatureManifest.load(path: manifestPath) {
+        return manifest
+    }
+    print("Failed to load feature manifest from: \(manifestPath)")
+    return FeatureManifest(
+        name: nil,
+        author: nil,
+        description: nil,
+        thumbnail: nil,
+        primaryColor: nil,
+        links: nil,
+        translations: nil
+    )
 }
 
 private func parseColor(hexValue: String?) -> Color? {

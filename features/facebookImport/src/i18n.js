@@ -16,6 +16,7 @@ import baseInfoScreenEn from "./locales/en/infoScreens/baseInfoScreen.json";
 import activitiesInfoScreenEn from "./locales/en/infoScreens/activitiesInfoScreen.json";
 import dataStructureInfoScreenEn from "./locales/en/infoScreens/dataStructureInfoScreen.json";
 import messagesInfoScreenEn from "./locales/en/infoScreens/messagesInfoScreen.json";
+import infographicsEn from "./locales/en/infographics.json";
 
 import commonDe from "./locales/de/common.json";
 import importDe from "./locales/de/import.json";
@@ -33,6 +34,7 @@ import baseInfoScreenDe from "./locales/de/infoScreens/baseInfoScreen.json";
 import activitiesInfoScreenDe from "./locales/de/infoScreens/activitiesInfoScreen.json";
 import dataStructureInfoScreenDe from "./locales/de/infoScreens/dataStructureInfoScreen.json";
 import messagesInfoScreenDe from "./locales/de/infoScreens/messagesInfoScreen.json";
+import infographicsDe from "./locales/de/infographics.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -52,6 +54,7 @@ export default new I18n(determineLanguage(), {
         activitiesInfoScreen: activitiesInfoScreenEn,
         dataStructureInfoScreen: dataStructureInfoScreenEn,
         messagesInfoScreen: messagesInfoScreenEn,
+        infographics: infographicsEn,
     },
     de: {
         common: commonDe,
@@ -70,5 +73,6 @@ export default new I18n(determineLanguage(), {
         activitiesInfoScreen: activitiesInfoScreenDe,
         dataStructureInfoScreen: dataStructureInfoScreenDe,
         messagesInfoScreen: messagesInfoScreenDe,
+        infographics: infographicsDe,
     },
 });

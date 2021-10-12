@@ -1,16 +1,13 @@
 import ConsolidatedCompany from "../../entities/consolidated-company";
 
-export function noSpaceLowercaseMatch(stringOne, stringTwo) {
-    return (
-        typeof stringOne === "string" &&
-        typeof stringTwo === "string" &&
-        stringOne.replace(/\s+/g, "")?.toLowerCase() ===
-            stringTwo.replace(/\s+/g, "")?.toLowerCase()
-    );
+export function normalizeForComparison(string) {
+    return typeof string === "string"
+        ? string.replace(/\s+/g, "")?.toLowerCase()
+        : string;
 }
 
 export function removeDomainExtension(stringValue) {
-    if (!(typeof stringValue === "string")) {
+    if (typeof stringValue !== "string") {
         return stringValue;
     }
     const indexOfDot = stringValue.indexOf(".");
@@ -20,16 +17,21 @@ export function removeDomainExtension(stringValue) {
     return stringValue;
 }
 
+export function normalizeWithoutDomain(string) {
+    return normalizeForComparison(removeDomainExtension(string));
+}
+
 export function onOffFacebookAccountNamesMatching(
     onFacebookName,
     offFacebookName
 ) {
     return (
-        noSpaceLowercaseMatch(onFacebookName, offFacebookName) ||
-        noSpaceLowercaseMatch(
-            removeDomainExtension(onFacebookName),
-            removeDomainExtension(offFacebookName)
-        )
+        typeof onFacebookName === "string" &&
+        typeof offFacebookName === "string" &&
+        (normalizeForComparison(onFacebookName) ===
+            normalizeForComparison(offFacebookName) ||
+            normalizeWithoutDomain(onFacebookName) ===
+                normalizeWithoutDomain(offFacebookName))
     );
 }
 
@@ -49,6 +51,17 @@ function urlIdFullMatcher(relatedFacebookAccount, offFacebookCompany) {
 
 const ON_OFF_COMPANIES_MATCHERS = [displayNameFullMatcher, urlIdFullMatcher];
 
+export function matchAccountsByName(
+    relatedFacebookAccount,
+    offFacebookCompany
+) {
+    return (
+        ON_OFF_COMPANIES_MATCHERS.find((matcher) =>
+            matcher(relatedFacebookAccount, offFacebookCompany)
+        ) !== undefined
+    );
+}
+
 /**
  * Match related Facebook accounts with off-Facebook companies.
  * For each related Facebook account look for all off-Facebook companies that match it.
@@ -67,9 +80,7 @@ export function linkRelatedAccountsWithOffFacebookCompanies(facebookAccount) {
     onFacebookAdvertisers.forEach((onFacebookAdvertiser) => {
         const matchingOffFacebookCompanies = offFacebookCompanies.filter(
             (offFacebookCompany) =>
-                ON_OFF_COMPANIES_MATCHERS.find((matcher) =>
-                    matcher(onFacebookAdvertiser, offFacebookCompany)
-                )
+                matchAccountsByName(onFacebookAdvertiser, offFacebookCompany)
         );
         if (matchingOffFacebookCompanies.length > 0) {
             matches.push(

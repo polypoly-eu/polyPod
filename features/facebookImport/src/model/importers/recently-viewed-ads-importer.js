@@ -44,13 +44,15 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
         this._accountsByUrl = new Map();
     }
 
-    async _readRecentlyViewedData(id, zipFile) {
-        return readJSONDataArray(
+    async _readRecentlyViewedData(id, zipFile, facebookAccount) {
+        const rawData = readJSONDataArray(
             RECENTLY_VIEWED_FILE_PATH,
             RECENTLY_VIEWED_DATA_KEY,
             zipFile,
             id
         );
+        facebookAccount.addImportedFileName(RECENTLY_VIEWED_FILE_PATH);
+        return rawData;
     }
 
     _ensureAd(adViewData, relatedAccount) {
@@ -110,7 +112,11 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
     }
 
     async import({ id, zipFile }, facebookAccount) {
-        const rawData = await this._readRecentlyViewedData(id, zipFile);
+        const rawData = await this._readRecentlyViewedData(
+            id,
+            zipFile,
+            facebookAccount
+        );
         const adsViewsData = rawData.find(
             (eachCategory) =>
                 localeForCategoyName(eachCategory.name) !== undefined

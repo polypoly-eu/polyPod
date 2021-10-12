@@ -1,4 +1,15 @@
 const MILISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
+
+export function findLatestTimestamp(timestamps) {
+    return timestamps.reduce(
+        (latestTimestamp, currentTimestamp) =>
+            currentTimestamp > latestTimestamp
+                ? currentTimestamp
+                : latestTimestamp,
+        0
+    );
+}
+
 export function filterForDurationInDays(
     timestamps,
     referenceTimestamp,

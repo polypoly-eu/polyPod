@@ -24,15 +24,16 @@ export default class OnOffFacebookAdvertisersAnalysis extends RootAnalysis {
         return (
             <>
                 <p>
-                    Advertisers for which we detected events both on and off
-                    Facebook
+                    Advertisers for which we detected events both on and
+                    off-Facebook. The list below shows the number of on and
+                    off-Facebook events for each advertiser.
                 </p>
                 <table>
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>On-Facebook</th>
-                            <th>Off-Facebook</th>
+                            <th>On-Facebook Events</th>
+                            <th>Off-Facebook Events</th>
                         </tr>
                     </thead>
                     <tbody>
