@@ -11,7 +11,7 @@ import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Network } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
-import { EncodingOptions, FS, Stats } from "./fs";
+import { EncodingOptions, ExternalFile, FS, Stats } from "./fs";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -114,7 +114,7 @@ export class DefaultPod implements Pod {
                 return fs.writeFile(path, content, options);
             }
 
-            importArchive(url: string): Promise<string> {
+            importArchive(file: ExternalFile): Promise<string> {
                 throw new Error("Not implemented");
             }
 

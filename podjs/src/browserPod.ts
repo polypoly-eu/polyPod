@@ -1,5 +1,6 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
+    ExternalFile,
     Info,
     Matcher,
     Network,
@@ -214,20 +215,19 @@ class LocalStoragePolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
-        async importArchive(url: string): Promise<string> {
+    async importArchive(file: ExternalFile): Promise<string> {
         return new Promise((resolve) => {
             const filesInDir = new Map(
                 JSON.parse(
-                    localStorage.getItem(BrowserPolyNav.filesKey) ||
-                        "[]"
+                    localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
                 )
             );
 
             const fileId = "polypod://" + createUUID();
-            const [fileName, dataUrl] = url.split("|");
+            const dataUrl = file.data;
             filesInDir.set(fileId, {
                 id: fileId,
-                name: fileName,
+                name: file.name,
                 time: new Date().toISOString(),
                 size: dataUrl.length,
             });
@@ -256,7 +256,6 @@ class LocalStoragePolyOut implements PolyOut {
             resolve();
         });
     }
-
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
@@ -355,21 +354,24 @@ class BrowserPolyNav implements PolyNav {
         document.title = title;
     }
 
-    async pickFile(): Promise<string> {
+    async pickFile(): Promise<ExternalFile | null> {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
             fileInput.setAttribute("type", "file");
             fileInput.addEventListener("change", function () {
                 const selectedFile = this.files?.[0];
                 if (!selectedFile) {
-                    resolve("");
+                    resolve(null);
                     return;
                 }
 
                 const reader = new FileReader();
                 reader.onload = async function () {
                     const dataUrl = this.result as string;
-                    resolve(selectedFile.name + "|" + dataUrl);
+                    resolve({
+                        name: selectedFile.name,
+                        data: dataUrl,
+                    });
                 };
                 reader.readAsDataURL(selectedFile);
             });

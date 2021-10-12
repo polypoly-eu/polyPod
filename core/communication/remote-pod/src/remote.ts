@@ -4,6 +4,7 @@ import {
     PolyIn,
     PolyOut,
     PolyNav,
+    ExternalFile,
     EncodingOptions,
     Stats,
     Matcher,
@@ -51,7 +52,7 @@ type PolyOutEndpoint = ObjectEndpointSpec<{
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
     fetch(input: string, init: RequestInit): ValueEndpointSpec<Response>;
-    importArchive(url: string): ValueEndpointSpec<string>;
+    importArchive(file: ExternalFile): ValueEndpointSpec<string>;
     removeArchive(fileId: string): ValueEndpointSpec<void>;
 }>;
 
@@ -64,7 +65,7 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
-    pickFile(): ValueEndpointSpec<string>;
+    pickFile(): ValueEndpointSpec<ExternalFile | null>;
 }>;
 
 type InfoEndpoint = ObjectEndpointSpec<{
@@ -247,8 +248,8 @@ export class RemoteClientPod implements Pod {
                 return rpcClient.polyOut().writeFile(path, content, options)();
             }
 
-            importArchive(url: string): Promise<string> {
-                return rpcClient.polyOut().importArchive(url)();
+            importArchive(file: ExternalFile): Promise<string> {
+                return rpcClient.polyOut().importArchive(file)();
             }
 
             removeArchive(fileId: string): Promise<void> {
@@ -344,7 +345,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
                 return FileStats.of(stats);
             },
             writeFile: (path, content, options) => polyOut.writeFile(path, content, options),
-            importArchive: (url) => polyOut.importArchive(url),
+            importArchive: (file) => polyOut.importArchive(file),
             removeArchive: (fileId) => polyOut.removeArchive(fileId),
         };
     }

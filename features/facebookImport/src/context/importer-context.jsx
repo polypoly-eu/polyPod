@@ -123,8 +123,8 @@ export const ImporterProvider = ({ children }) => {
         const { polyNav, polyOut } = pod;
         setFiles(null); // To show the loading overlay
         try {
-            const url =  await polyNav.pickFile();
-            await polyOut.importArchive(url);
+            const url = await polyNav.pickFile();
+            if (url) await polyOut.importArchive(url);
         } catch (error) {
             setGlobalError(new FileImportError(error));
         }
