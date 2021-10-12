@@ -27,6 +27,8 @@ import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
 
+import i18n from "./i18n.js";
+
 const FacebookImporter = () => {
     const {
         pod,
@@ -42,7 +44,7 @@ const FacebookImporter = () => {
         return (
             <Loading
                 loadingGif="./images/loading.gif"
-                message="Loading"
+                message={i18n.t("common:loading")}
             ></Loading>
         );
     };
