@@ -12,7 +12,7 @@ name: Lint kotlin
 #    paths:
 #      - .github/workflows/ktlint.yaml
 #      - 'android/**/*.kt'
-on: []
+on: deployment
 
 jobs:
   ktlint:
