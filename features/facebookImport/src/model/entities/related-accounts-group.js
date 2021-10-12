@@ -36,4 +36,16 @@ export default class RelatedAccountsGroup {
             (relatedAccount) => relatedAccount.hasAds
         );
     }
+
+    get latestEventTimestamp() {
+        return this._relatedAccounts.reduce(
+            (latestTimestamp, relatedAccount) => {
+                const currentTimestamp = relatedAccount.latestEventTimestamp;
+                return currentTimestamp > latestTimestamp
+                    ? currentTimestamp
+                    : latestTimestamp;
+            },
+            0
+        );
+    }
 }

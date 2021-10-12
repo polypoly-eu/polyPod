@@ -1,163 +1,24 @@
 "use strict";
 
+import { RECENTLY_VIEWED_FILE_PATH } from "../src/model/importers/recently-viewed-ads-importer";
+import {
+    creatAdViewsWithCompanyWithUnicodeCharactersData,
+    createDanishAdViewsData,
+    createEnglishAdViewsData,
+    createEnglishDatasetWithMissingAdsCategory,
+    createGermanAdViewsData,
+    createIncompleteEnglishAdViewsData,
+} from "./datasets/ad-views-data";
 import { ZipFileMock } from "./mocks/zipfile-mock";
-import { runRecentlyViewedAdsImporter } from "./utils/data-importing";
+import {
+    runAdsImportForDataset,
+    runRecentlyViewedAdsImporter,
+} from "./utils/data-importing";
 import {
     expectImportSuccess,
     expectInvalidContentError,
     expectMissingFileError,
 } from "./utils/importer-assertions";
-
-function wrapViewsData(data) {
-    return { recently_viewed: data };
-}
-
-function createEnglishAdViewsData() {
-    return wrapViewsData([
-        {
-            name: "Facebook Watch Videos and Shows",
-            description:
-                "Videos and shows you've recently visited or viewed from Facebook Watch and time you've spent watching shows",
-            children: [],
-        },
-        {
-            name: "Posts that have been shown to you in your News Feed",
-            description:
-                "Posts that have been shown to you in your News Feed in the last 90 days.",
-            entries: [],
-        },
-        {
-            name: "Ads",
-            description: "Ads you've recently viewed",
-            entries: [
-                {
-                    timestamp: 1630875618,
-                    data: {
-                        name: "Ad by Company X",
-                        uri: "https://www.facebook.com/companyx.com/posts/1112223344556677",
-                    },
-                },
-                {
-                    timestamp: 1631975618,
-                    data: {
-                        name: "Ad by Company X",
-                        uri: "https://www.facebook.com/companyx.com/posts/1112223344556677",
-                    },
-                },
-                {
-                    timestamp: 1671975618,
-                    data: {
-                        name: "Ad by Company X",
-                        uri: "https://www.facebook.com/companyx.com/posts/2233445566678",
-                    },
-                },
-                {
-                    timestamp: 1693455618,
-                    data: {
-                        name: "Ad by Company Y",
-                        uri: "https://www.facebook.com/permalink.php?story_fbid=12345678889&id=99888776543223",
-                    },
-                },
-            ],
-        },
-    ]);
-}
-
-function createGermanAdViewsData() {
-    return wrapViewsData([
-        {
-            name: "Videos und Shows auf Facebook Watch",
-            description:
-                "Videos und Shows, die du dir k\u00c3\u00bcrzlich auf Facebook Watch angesehen hast, und die Zeit, die du mit dem Ansehen verbracht hast.",
-            children: [],
-        },
-        {
-            name: "Beitr\u00c3\u00a4ge, die dir im News Feed angezeigt wurden",
-            description:
-                "Beitr\u00c3\u00a4ge, die dir in den letzten 90 Tagen in deinem News Feed angezeigt wurden.",
-            entries: [],
-        },
-        {
-            name: "Werbeanzeigen",
-            description:
-                "Werbeanzeigen, die du dir k\u00c3\u00bcrzlich angesehen hast",
-            entries: [
-                {
-                    timestamp: 1630875618,
-                    data: {
-                        name: "Werbeanzeige von Company X",
-                        uri: "https://www.facebook.com/companyx.com/posts/1112223344556677",
-                    },
-                },
-            ],
-        },
-    ]);
-}
-
-function createIncompleteEnglishAdViewsData() {
-    return wrapViewsData([
-        {
-            name: "Ads",
-            description: "Ads you've recently viewed",
-            entries: [
-                {
-                    //timestamp: 1630875618,
-                    data: {
-                        name: "Ad by Company X",
-                        uri: "https://www.facebook.com/companyx.com/posts/1112223344556677",
-                    },
-                },
-                {
-                    timestamp: 1631975618,
-                    data: {
-                        //name: "Ad by Company X",
-                        uri: "https://www.facebook.com/companyx.com/posts/1112223344556677",
-                    },
-                },
-                {
-                    timestamp: 1671975618,
-                    data: {
-                        name: "Ad by Company X",
-                        //uri: "https://www.facebook.com/companyx.com/posts/2233445566678",
-                    },
-                },
-                {
-                    timestamp: 1671975618,
-                    data: {},
-                },
-                {
-                    timestamp: 1693455618,
-                },
-            ],
-        },
-    ]);
-}
-
-function createEnglishDatasetWithMissingAdsCategory() {
-    return wrapViewsData([
-        {
-            name: "Facebook Watch Videos and Shows",
-            description:
-                "Videos and shows you've recently visited or viewed from Facebook Watch and time you've spent watching shows",
-            children: [],
-        },
-        {
-            name: "Posts that have been shown to you in your News Feed",
-            description:
-                "Posts that have been shown to you in your News Feed in the last 90 days.",
-            entries: [],
-        },
-        {
-            name: "Marketplace Items",
-            description: "Items you've viewed in Marketplace",
-            entries: [],
-        },
-    ]);
-}
-
-function datasetWithWrondDataKey() {
-    return { recently_viewed_wrong: [] };
-}
 
 describe("Import ad views from empty export", () => {
     let zipFile = null;
@@ -177,10 +38,9 @@ describe("Import ad views from export with wrong data key", () => {
 
     beforeAll(async () => {
         zipFile = new ZipFileMock();
-        zipFile.addJsonEntry(
-            "your_interactions_on_facebook/recently_viewed.json",
-            datasetWithWrondDataKey()
-        );
+        zipFile.addJsonEntry(RECENTLY_VIEWED_FILE_PATH, {
+            recently_viewed_wrong: [],
+        });
     });
 
     it("triggers missing data key error", async () => {
@@ -190,22 +50,15 @@ describe("Import ad views from export with wrong data key", () => {
 });
 
 describe("Import ad views from export with missing ads category", () => {
-    let zipFile = null;
     let result = null;
-    let facebookAccount = null;
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
-        zipFile.addJsonEntry(
-            "your_interactions_on_facebook/recently_viewed.json",
+        const importingResult = await runAdsImportForDataset(
             createEnglishDatasetWithMissingAdsCategory()
         );
-
-        const importingResult = await runRecentlyViewedAdsImporter(zipFile);
         result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
-        relatedAccounts = facebookAccount.relatedAccounts;
+        relatedAccounts = importingResult.relatedAccounts;
     });
 
     it("returns success status", () => expectImportSuccess(result));
@@ -214,23 +67,48 @@ describe("Import ad views from export with missing ads category", () => {
         expect(relatedAccounts.count).toBe(0));
 });
 
-describe("Import incomplete ad views from export", () => {
-    let zipFile = null;
+describe("Import ad view with company name with multi-byte unicode characters", () => {
     let result = null;
-    let facebookAccount = null;
+    let relatedAccounts = null;
+    let relatedAccount = null;
+
+    beforeAll(async () => {
+        const importingResult = await runAdsImportForDataset(
+            creatAdViewsWithCompanyWithUnicodeCharactersData()
+        );
+        result = importingResult.result;
+        relatedAccounts = importingResult.relatedAccounts;
+        relatedAccount = relatedAccounts.items[0];
+    });
+
+    it("returns success status", () => expectImportSuccess(result));
+
+    it("has one related account", () => expect(relatedAccounts.count).toBe(1));
+
+    it("has one ad", () => expect(relatedAccounts.adsCount).toBe(1));
+
+    it("has one ad view", () => expect(relatedAccounts.adViewsCount).toBe(1));
+
+    it("has correct related account ids", () => {
+        expect(relatedAccount.rawId).toBeUndefined();
+        expect(relatedAccount.urlId).toBe("ü🦊å");
+    });
+
+    it("has correct related account display name", () => {
+        expect(relatedAccount.displayName).toBe("å🦊ü");
+    });
+});
+
+describe("Import incomplete ad views from export", () => {
+    let result = null;
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
-        zipFile.addJsonEntry(
-            "your_interactions_on_facebook/recently_viewed.json",
+        const importingResult = await runAdsImportForDataset(
             createIncompleteEnglishAdViewsData()
         );
-
-        const importingResult = await runRecentlyViewedAdsImporter(zipFile);
         result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
-        relatedAccounts = facebookAccount.relatedAccounts;
+        relatedAccounts = importingResult.relatedAccounts;
     });
 
     it("returns success status", () => expectImportSuccess(result));
@@ -238,9 +116,9 @@ describe("Import incomplete ad views from export", () => {
     it("has zero related accounts", () =>
         expect(relatedAccounts.count).toBe(1));
 
-    it("has one ads", () => expect(relatedAccounts.adsCount).toBe(1));
+    it("has one ad", () => expect(relatedAccounts.adsCount).toBe(1));
 
-    it("has one ad views", () => expect(relatedAccounts.adViewsCount).toBe(1));
+    it("has one ad view", () => expect(relatedAccounts.adViewsCount).toBe(1));
 
     it("has ad with one view", () =>
         expect(
@@ -249,24 +127,17 @@ describe("Import incomplete ad views from export", () => {
 });
 
 describe("Import ad views from English dataset", () => {
-    let zipFile = null;
     let result = null;
-    let facebookAccount = null;
     let relatedAccounts = null;
     let firstRelatedAccount = null;
     let secondRelatedAccount = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
-        zipFile.addJsonEntry(
-            "your_interactions_on_facebook/recently_viewed.json",
+        const importingResult = await runAdsImportForDataset(
             createEnglishAdViewsData()
         );
-
-        const importingResult = await runRecentlyViewedAdsImporter(zipFile);
         result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
-        relatedAccounts = facebookAccount.relatedAccounts;
+        relatedAccounts = importingResult.relatedAccounts;
         [firstRelatedAccount, secondRelatedAccount] = relatedAccounts.items;
     });
 
@@ -346,53 +217,69 @@ describe("Import ad views from English dataset", () => {
 });
 
 describe("Import ad views from German dataset", () => {
-    let zipFile = null;
     let result = null;
-    let facebookAccount = null;
     let relatedAccounts = null;
-    let relatedAccount = null;
+    let firstRelatedAccount = null;
+    let secondRelatedAccount = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
-        zipFile.addJsonEntry(
-            "your_interactions_on_facebook/recently_viewed.json",
+        const importingResult = await runAdsImportForDataset(
             createGermanAdViewsData()
         );
-
-        const importingResult = await runRecentlyViewedAdsImporter(zipFile);
         result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
-        relatedAccounts = facebookAccount.relatedAccounts;
-        [relatedAccount] = relatedAccounts.items;
+        relatedAccounts = importingResult.relatedAccounts;
+        [firstRelatedAccount, secondRelatedAccount] = relatedAccounts.items;
     });
 
     it("returns success status", () => expectImportSuccess(result));
 
-    it("has one related accounts", () => expect(relatedAccounts.count).toBe(1));
+    it("has two related accounts", () => expect(relatedAccounts.count).toBe(2));
 
-    it("has one ad", () => expect(relatedAccounts.adsCount).toBe(1));
+    it("has three ads", () => expect(relatedAccounts.adsCount).toBe(3));
 
-    it("has one ad view", () => expect(relatedAccounts.adViewsCount).toBe(1));
+    it("has four ad views", () => expect(relatedAccounts.adViewsCount).toBe(4));
 
-    it("has correct related account id", () => {
-        expect(relatedAccount.urlId).toBe("companyx.com");
-    });
-
-    it("has correct related accourl URL", () => {
-        expect(relatedAccount.url).toBe(
-            "https://www.facebook.com/companyx.com"
-        );
+    it("has correct related account names", () => {
+        expect(firstRelatedAccount.displayName).toBe("Company X");
+        expect(secondRelatedAccount.displayName).toBe("Company Y");
     });
 
     it("has correct related account names", () => {
-        expect(relatedAccount.displayName).toBe("Company X");
+        expect(firstRelatedAccount.displayName).toBe("Company X");
+        expect(secondRelatedAccount.displayName).toBe("Company Y");
+    });
+});
+
+describe("Import ad views from Danish dataset", () => {
+    let result = null;
+    let relatedAccounts = null;
+    let firstRelatedAccount = null;
+    let secondRelatedAccount = null;
+
+    beforeAll(async () => {
+        const importingResult = await runAdsImportForDataset(
+            createDanishAdViewsData()
+        );
+        result = importingResult.result;
+        relatedAccounts = importingResult.relatedAccounts;
+        [firstRelatedAccount, secondRelatedAccount] = relatedAccounts.items;
     });
 
-    it("has correct ad count in account", () => {
-        expect(relatedAccount.adsCount).toBe(1);
+    it("returns success status", () => expectImportSuccess(result));
+
+    it("has two related accounts", () => expect(relatedAccounts.count).toBe(2));
+
+    it("has three ads", () => expect(relatedAccounts.adsCount).toBe(3));
+
+    it("has four ad views", () => expect(relatedAccounts.adViewsCount).toBe(4));
+
+    it("has correct related account names", () => {
+        expect(firstRelatedAccount.displayName).toBe("Company X");
+        expect(secondRelatedAccount.displayName).toBe("Company Y");
     });
 
-    it("has correct ad views count in account", () => {
-        expect(relatedAccount.adViewsCount).toBe(1);
+    it("has correct related account names", () => {
+        expect(firstRelatedAccount.displayName).toBe("Company X");
+        expect(secondRelatedAccount.displayName).toBe("Company Y");
     });
 });

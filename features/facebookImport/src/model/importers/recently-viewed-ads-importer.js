@@ -8,6 +8,10 @@ import {
 import { readJSONDataArray } from "./utils/importer-util";
 import { extractAccountDataFromUrl } from "./utils/url-processing";
 
+export const RECENTLY_VIEWED_FILE_PATH =
+    "your_interactions_on_facebook/recently_viewed.json";
+export const RECENTLY_VIEWED_DATA_KEY = "recently_viewed";
+
 /**
  * Extract ad views from the export.
  *
@@ -40,13 +44,15 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
         this._accountsByUrl = new Map();
     }
 
-    async _readRecentlyViewedData(id, zipFile) {
-        return readJSONDataArray(
-            "your_interactions_on_facebook/recently_viewed.json",
-            "recently_viewed",
+    async _readRecentlyViewedData(id, zipFile, facebookAccount) {
+        const rawData = readJSONDataArray(
+            RECENTLY_VIEWED_FILE_PATH,
+            RECENTLY_VIEWED_DATA_KEY,
             zipFile,
             id
         );
+        facebookAccount.addImportedFileName(RECENTLY_VIEWED_FILE_PATH);
+        return rawData;
     }
 
     _ensureAd(adViewData, relatedAccount) {
@@ -106,7 +112,11 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
     }
 
     async import({ id, zipFile }, facebookAccount) {
-        const rawData = await this._readRecentlyViewedData(id, zipFile);
+        const rawData = await this._readRecentlyViewedData(
+            id,
+            zipFile,
+            facebookAccount
+        );
         const adsViewsData = rawData.find(
             (eachCategory) =>
                 localeForCategoyName(eachCategory.name) !== undefined
