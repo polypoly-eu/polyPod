@@ -13,10 +13,9 @@
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "lint": "npm run eslint",
-    "test": "npm run test:jest && npm run test:mocha && npm run test:jasmine",
+    "test": "npm run test:jest && npm run test:mocha",
     "test:jest": "jest",
     "test:mocha": "ts-mocha src/tests/**.test.ts",
-    "test:jasmine": "ts-node node_modules/.bin/jasmine --config=jasmine.json",
     "docs": "typedoc"
   },
   "dependencies": {
@@ -35,7 +34,6 @@
     "@types/node": "^14.17.9",
     "@types/rdfjs__dataset": "^1.0.4",
     "eslint": "^7.18.0",
-    "jasmine": "^3.6.4",
     "jest": "^27.0.6",
     "mocha": "^8.2.1",
     "n3": "^1.8.0",
