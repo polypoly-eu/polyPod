@@ -90,11 +90,11 @@ describe("Import ad view with company name with multi-byte unicode characters", 
 
     it("returns success status", () => expectImportSuccess(result));
 
-    it("has one related accounts", () => expect(relatedAccounts.count).toBe(1));
+    it("has one related account", () => expect(relatedAccounts.count).toBe(1));
 
-    it("has one ads", () => expect(relatedAccounts.adsCount).toBe(1));
+    it("has one ad", () => expect(relatedAccounts.adsCount).toBe(1));
 
-    it("has one ad views", () => expect(relatedAccounts.adViewsCount).toBe(1));
+    it("has one ad view", () => expect(relatedAccounts.adViewsCount).toBe(1));
 
     it("has correct related account ids", () => {
         expect(relatedAccount.rawId).toBeUndefined();
@@ -128,9 +128,9 @@ describe("Import incomplete ad views from export", () => {
     it("has zero related accounts", () =>
         expect(relatedAccounts.count).toBe(1));
 
-    it("has one ads", () => expect(relatedAccounts.adsCount).toBe(1));
+    it("has one ad", () => expect(relatedAccounts.adsCount).toBe(1));
 
-    it("has one ad views", () => expect(relatedAccounts.adViewsCount).toBe(1));
+    it("has one ad view", () => expect(relatedAccounts.adViewsCount).toBe(1));
 
     it("has ad with one view", () =>
         expect(
