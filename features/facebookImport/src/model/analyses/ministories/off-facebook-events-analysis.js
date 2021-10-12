@@ -52,8 +52,18 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
 
         const displayData = {};
 
-        const companyData = this._commonAdvertisersData.slice(5, 8);
-        companyData.forEach((company) => {
+        const selectedCompanies = this._commonAdvertisersData;
+        const numberCompaniesShown = 3;
+
+        selectedCompanies.sort(
+            (a, b) =>
+                b.onFacebookTimestamps.length +
+                b.offFacebookTimestamps.length -
+                a.onFacebookTimestamps.length -
+                a.offFacebookTimestamps.length
+        );
+
+        selectedCompanies.slice(0, numberCompaniesShown).forEach((company) => {
             displayData[company.name] = generate90DaysObject();
             for (let offTimestamp of company.offFacebookTimestamps)
                 displayData[company.name][
@@ -80,7 +90,6 @@ export default class OffFacebookEventsAnalysis extends RootAnalysis {
                 }
             );
         });
-        console.log(this._displayData);
         this.active = this._companiesCount > 0 && advertiserMatches.length > 0;
         this.active = true;
     }
