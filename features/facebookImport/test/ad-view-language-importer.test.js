@@ -1,7 +1,7 @@
 "use strict";
 
 import { RECENTLY_VIEWED_FILE_PATH } from "../src/model/importers/recently-viewed-ads-importer";
-import { createEnglishAdViewsData } from "./datasets/ad-views-data";
+import { createEnglishAdViewsData,createGermanAdViewsData } from "./datasets/ad-views-data";
 import { ZipFileMock } from "./mocks/zipfile-mock";
 import { runRecentlyViewedAdsImporter } from "./utils/data-importing";
 import { expectImportSuccess } from "./utils/importer-assertions";
@@ -11,10 +11,10 @@ let testInputs = null;
 beforeAll(async () => {
     const datasets = [
         { language: "English", dataset: createEnglishAdViewsData() },
-        { language: "English", dataset: createEnglishAdViewsData() },
+        { language: "German", dataset: createGermanAdViewsData() },
     ];
 
-    const importingResults = await Promise.all(
+    return Promise.all(
         datasets.map(async ({ language, dataset }) => {
             const zipFile = new ZipFileMock();
             zipFile.addJsonEntry(RECENTLY_VIEWED_FILE_PATH, dataset);
@@ -22,9 +22,8 @@ beforeAll(async () => {
 
             return { language, importingResult };
         })
-    );
-
-    testInputs = importingResults.map(({ language, importingResult }) => {
+    ).then( importingResults => {
+        testInputs = importingResults.map(({ language, importingResult }) => {
         const result = importingResult.result;
         const facebookAccount = importingResult.facebookAccount;
         const relatedAccounts = facebookAccount.relatedAccounts;
@@ -42,8 +41,10 @@ beforeAll(async () => {
         ];
     });
 });
+});
 
 describe("Import ad views", () => {
+    console.log(testInputs);
     test.each(testInputs)(
         "returns success status for %s dataset.",
         (language, result) => {
