@@ -26,13 +26,12 @@ open class PolyOut(
                 throw Error("Cannot execute without a feature")
             }
             val currentFeatureName = Preferences.currentFeatureName!!
-            val pureId = id.removePrefix(
-                fsPrefix
-            ).removePrefix(
-                "$fsFilesRoot/"
-            ).removePrefix(
-                "$currentFeatureName/"
-            )
+            val pureId = id
+                // Previous polyPod builds used polypod:// URLs for files
+                .removePrefix("polypod://")
+                .removePrefix(fsPrefix)
+                .removePrefix("$fsFilesRoot/")
+                .removePrefix("$currentFeatureName/")
 
             return filesPath(context) + "/" + Preferences.currentFeatureName +
                 "/" + pureId
