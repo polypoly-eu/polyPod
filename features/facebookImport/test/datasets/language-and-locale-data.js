@@ -114,9 +114,9 @@ export function createLocaleData(
     languageCode
 ) {
     const languageData = LANGUAGE_SETTINGS_LOCALE[languageCode];
-    const localeData = [];
+    let localeData = [];
     if (selectedLanguage) {
-        const children = [
+        let children = [
             {
                 name: languageData.selectedLanguage.selected.name,
                 description:
