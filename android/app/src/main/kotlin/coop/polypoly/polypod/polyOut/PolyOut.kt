@@ -76,6 +76,9 @@ open class PolyOut(
             return statCache.get(id)!!
         }
         val file = File(idToPath(id, context))
+        if (!file.exists())
+            throw Exception("stat: No such file '$id'")
+
         if (file.isDirectory()) {
             result["size"] = FileUtils.sizeOfDirectory(file).toString()
         } else {
