@@ -23,7 +23,7 @@ open class PolyOut(
 
         fun idToPath(id: String, context: Context): String {
             if (Preferences.currentFeatureName == null) {
-                throw Error("Cannot execute without a feature")
+                throw Exception("Cannot execute without a feature")
             }
             val currentFeatureName = Preferences.currentFeatureName!!
             val pureId = id
@@ -48,7 +48,7 @@ open class PolyOut(
         id: String
     ): ByteArray {
         if (id == "") {
-            throw Error("Empty path in PolyOut.readFile")
+            throw Exception("Empty path in PolyOut.readFile")
         }
 
         ZipTools.getEncryptedFile(context, idToPath(id, context)).let {
