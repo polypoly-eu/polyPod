@@ -7,6 +7,7 @@ import RecentlyViewedAdsImporter, {
 } from "../../src/model/importers/recently-viewed-ads-importer.js";
 import OffFacebookEventsImporter from "../../src/model/importers/off-facebook-events-importer.js";
 import { ZipFileMock } from "../mocks/zipfile-mock.js";
+import LanguageAndLocaleImporter from "../../src/model/importers/language-and-locale-importer.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -26,6 +27,10 @@ export async function runSingleImporter(importerClass, zipFile) {
         facebookAccount
     );
     return { facebookAccount, result };
+}
+
+export async function runLanguageAndLocaleImporter(zipFile) {
+    return runSingleImporter(LanguageAndLocaleImporter, zipFile);
 }
 
 export async function runNameImporter(zipFile) {
