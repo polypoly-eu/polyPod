@@ -47,7 +47,11 @@ extension PolyOut {
             return nil
         }
         
-        let id = url.replacingOccurrences(of: PolyOut.fsPrefix, with: "").replacingOccurrences(of: PolyOut.fsFilesRoot, with: "").trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        // Previous polyPod builds used mixed case ("polyPod:") as the protocol
+        let id = url
+            .replacingOccurrences(of: PolyOut.fsPrefix, with: "", options: .caseInsensitive)
+            .replacingOccurrences(of: PolyOut.fsFilesRoot, with: "")
+            .trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         
         return id.removingPercentEncoding
     }
