@@ -1,6 +1,6 @@
 import { LANGUAGE_AND_LOCALE_DATA_KEY } from "../../src/model/importers/language-and-locale-importer";
 
-export const RECENTLY_VIEWED_LOCALE = {
+export const LANGUAGE_SETTINGS_LOCALE = {
     en: {
         selectedLanguage: {
             generic: {
@@ -113,10 +113,10 @@ export function createLocaleData(
     },
     languageCode
 ) {
-    const languageData = RECENTLY_VIEWED_LOCALE[languageCode];
-    const localeData = [];
+    const languageData = LANGUAGE_SETTINGS_LOCALE[languageCode];
+    let localeData = [];
     if (selectedLanguage) {
-        const children = [
+        let children = [
             {
                 name: languageData.selectedLanguage.selected.name,
                 description:
