@@ -69,13 +69,16 @@ export default class MessagesAnalysis extends RootAnalysis {
 
     renderSummary() {
         return (
-            <p>
-                {i18n.t("explore:messages.summary", {
-                    messages: this._messagesCount,
-                    threads: this._messagesThreadsData.length,
-                    people: this._totalUsernamesCount,
-                })}
-            </p>
+            <>
+                <h2>{this._messagesCount}</h2>
+                <p>
+                    {i18n.t("explore:messages.summary", {
+                        messages: this._messagesCount,
+                        threads: this._messagesThreadsData.length,
+                        people: this._totalUsernamesCount,
+                    })}
+                </p>
+            </>
         );
     }
 
