@@ -26,6 +26,7 @@
     <string name="button_url_open_confirm">Ja</string>
     <string name="button_url_open_reject">Nein</string>
     <string name="button_update_notification_close">OK</string>
+    <string name="button_acknowledge">OK</string>
     <string name="auth_title">Einloggen in polyPod</string>
     <string name="auth_subtitle">Entweder Geräteberechtigung oder Biometrie verwenden</string>
     <string name="auth_success">Authentifizierung erfolgreich</string>
@@ -34,4 +35,5 @@
     <string name="auth_enable_lock_no">Auslassen</string>
     <string name="auth_enable_lock_do_not_ask">Nicht mehr fragen</string>
     <string name="auth_enable_lock_title">Kein Sperrbildschirm?</string>
+    <string name="feature_error">Leider gab es einen Fehler in \'%1$s\':\n\n%2$s\n\nIch beende es.</string>
 </resources>

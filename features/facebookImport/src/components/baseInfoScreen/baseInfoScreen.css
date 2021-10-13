@@ -19,11 +19,9 @@
     font-weight: 400;
     text-transform: capitalize;
 }
-.base-info .infographic {
-    display: block;
-    max-width: var(--max-width);
-    width: 100%;
+.base-info .legend {
     margin: auto;
+    max-width: var(--max-width);
 }
 
 .base-info p {

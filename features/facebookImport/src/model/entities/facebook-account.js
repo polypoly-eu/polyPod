@@ -1,4 +1,5 @@
 import MessageThreadsGroup from "./message-threads-group.js";
+import RelatedAccountsGroup from "./related-accounts-group.js";
 
 class FacebookAccount {
     constructor() {
@@ -23,6 +24,7 @@ class FacebookAccount {
         this._accountSessionActivities = [];
 
         this._messageThreadsGroup = new MessageThreadsGroup();
+        this._relatedAccounts = new RelatedAccountsGroup();
     }
 
     get importedFileNames() {
@@ -56,6 +58,20 @@ class FacebookAccount {
         }, 0);
     }
 
+    get offFacebookEventsLatestTimestamp() {
+        let latestTimestamp = 0;
+        this.forEachOffFacebookEvent((event) => {
+            if (event.timestamp > latestTimestamp) {
+                latestTimestamp = event.timestamp;
+            }
+        });
+        return latestTimestamp;
+    }
+
+    get relatedAccountEventLatestTimestamp() {
+        return this.relatedAccounts.latestEventTimestamp;
+    }
+
     get messageThreadsGroup() {
         return this._messageThreadsGroup;
     }
@@ -82,6 +98,10 @@ class FacebookAccount {
                 callback(offFacebookEvent);
             }
         }
+    }
+
+    addRelatedAccounts(relatedAccounts) {
+        this._relatedAccounts.addAll(relatedAccounts);
     }
 
     // Basic accessors
@@ -204,6 +224,14 @@ class FacebookAccount {
 
     set accountSessionActivities(accountSessionActivities) {
         this._accountSessionActivities = accountSessionActivities;
+    }
+
+    get relatedAccounts() {
+        return this._relatedAccounts;
+    }
+
+    get relatedAccountsCount() {
+        return this._relatedAccounts.count;
     }
 
     get dataGroups() {

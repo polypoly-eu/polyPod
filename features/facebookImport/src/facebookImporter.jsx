@@ -23,6 +23,7 @@ import ReportDetails from "./views/report/details.jsx";
 import DataStructureInfoScreen from "./views/infoScreens/dataStructureInfoScreen/dataStructureInfoScreen.jsx";
 import ActivitiesInfoScreen from "./views/infoScreens/activitiesInfoScreen/activitiesInfoScreen.jsx";
 import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesInfoScreen.jsx";
+import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
 
@@ -38,7 +39,12 @@ const FacebookImporter = () => {
     const importStatus = navigationState.importStatus;
 
     const renderSplash = () => {
-        return <p>Loading ...</p>;
+        return (
+            <Loading
+                loadingGif="./images/loading.gif"
+                message="Loading"
+            ></Loading>
+        );
     };
 
     function determineRoute() {

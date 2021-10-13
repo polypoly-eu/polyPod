@@ -10,35 +10,41 @@ import java.nio.ByteBuffer
 open class PolyOut(
     val context: Context
 ) {
-    private val fsPrefix = "polypod://"
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
 
     companion object {
-        private val fsPrefix = "polypod://"
+        val fsDomain = "polypod-assets.local"
+        val fsPrefix = "https://$fsDomain/"
+        val fsFilesRoot = "FeatureFiles"
+
+        fun filesPath(context: Context) =
+            context.filesDir.absolutePath + "/featureFiles"
+
         fun idToPath(id: String, context: Context): String {
             if (Preferences.currentFeatureName == null) {
                 throw Error("Cannot execute without a feature")
             }
-            val pureId = id.removePrefix(
-                fsPrefix
-            ).removePrefix(Preferences.currentFeatureName!!).removePrefix("/")
+            val currentFeatureName = Preferences.currentFeatureName!!
+            val pureId = id
+                // Previous polyPod builds used polypod:// URLs for files
+                .removePrefix("polypod://")
+                .removePrefix(fsPrefix)
+                .removePrefix("$fsFilesRoot/")
+                .removePrefix("$currentFeatureName/")
 
-            return context.filesDir.absolutePath + "/" +
-                Preferences.currentFeatureName + "/" + pureId
+            return filesPath(context) + "/" + Preferences.currentFeatureName +
+                "/" + pureId
         }
     }
 
     private fun pathToId(path: File, context: Context): String {
         return fsPrefix + path.relativeTo(
-            File(
-                context.filesDir.absolutePath + "/" +
-                    Preferences.currentFeatureName
-            )
+            File(filesPath(context) + "/" + Preferences.currentFeatureName)
         ).path
     }
 
-    open suspend fun readFile(
+    open fun readFile(
         id: String
     ): ByteArray {
         if (id == "") {
@@ -77,7 +83,9 @@ open class PolyOut(
         }
         result["name"] = fs.get(id) ?: file.name
         result["time"] = file.lastModified().toString()
-        result["id"] = id
+        result["id"] = id.removePrefix(fsPrefix).removePrefix(
+            fsFilesRoot
+        ).trimStart('/')
         statCache[id] = result
         return result
     }
@@ -95,7 +103,9 @@ open class PolyOut(
         }
         val retList = mutableListOf<String>()
         File(idToPath(id, context)).walkTopDown().forEach {
-            retList.add(pathToId(it, context))
+            retList.add(
+                "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
+            )
         }
         readdirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()

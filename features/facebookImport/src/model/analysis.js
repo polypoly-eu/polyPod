@@ -41,12 +41,15 @@ import InactiveCardsSummary from "./analyses/report/inactive-cards-summary.js";
 import ActivitiesAnalysis from "./analyses/ministories/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/ministories/advertising-value-analysis.js";
 import AboutPicturesDataAnalysis from "./analyses/ministories/about-pictures-data-analysis.js";
+import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
+import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-facebook-advertisers-analysis.js";
 
 const subAnalyses = [
     DataStructureBubblesAnalysis,
     ActivitiesAnalysis,
     MessagesAnalysis,
     OffFacebookEventsAnalysis,
+    AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
 
     ExportTitleAnalysis,
@@ -69,7 +72,8 @@ const subAnalyses = [
     PagesOverviewAnalysis,
     SesssionActivityLocationsAnalysis,
     ImportedJsonFilesAnalysis,
-    AboutPicturesDataAnalysis,
+    AdViewsAnalysis,
+    OnOffFacebookAdvertisersAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,

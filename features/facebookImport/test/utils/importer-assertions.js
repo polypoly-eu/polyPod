@@ -24,3 +24,8 @@ export function expectInvalidContentError(result) {
 export function expectImportSuccess(result) {
     expect(result.status).toBe(IMPORT_SUCCESS);
 }
+
+export function expectAllResultsSuccess(results) {
+    expect(results.length).toBeGreaterThan(0);
+    results.forEach((result) => expect(result.status).toBe(IMPORT_SUCCESS));
+}

@@ -160,6 +160,9 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                 />
             </div>
             <InfoButton route="/report/details/activities-info" />
+            <p className="source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p>
         </div>
     );
 };

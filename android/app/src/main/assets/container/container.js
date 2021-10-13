@@ -42,6 +42,13 @@ function initMessaging() {
 
 function initIframe(iFrame) {
     console.log("initializing iframe");
+
+    iFrame.contentWindow.addEventListener("error", ({ error }) => {
+        window.podInternal.reportError(
+            `${error.stack}\nCause: ${error.cause.stack}`
+        );
+    });
+
     port1.start();
     port1.onmessage = (event) => {
         const base64 = btoa(String.fromCharCode(...new Uint8Array(event.data)));
