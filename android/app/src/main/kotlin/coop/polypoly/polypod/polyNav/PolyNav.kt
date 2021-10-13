@@ -21,7 +21,6 @@ open class PolyNav(
     private val context: Context
 ) {
     private val registeredActions = HashSet<String>()
-    private val fsPrefix = "polypod://"
     private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
 
     open fun setActiveActions(actions: Array<String>) {
@@ -77,7 +76,7 @@ open class PolyNav(
                 }
                 val newId = UUID.randomUUID().toString()
                 val fs = Preferences.getFileSystem(context).toMutableMap()
-                fs[fsPrefix + newId] = fileName
+                fs[PolyOut.fsPrefix + newId] = fileName
                 Preferences.setFileSystem(context, fs)
                 val featureName = Preferences.currentFeatureName
                     ?: throw Error("Cannot import for unknown feature")

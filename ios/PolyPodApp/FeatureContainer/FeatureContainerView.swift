@@ -47,6 +47,86 @@ struct FeatureContainerView: UIViewRepresentable {
     }
 }
 
+class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
+    private var feature: Feature? = nil
+    func setFeature(feature: Feature) {
+        self.feature = feature
+    }
+    
+    func mimeTypeFromExt(ext: String) -> String {
+        switch ext {
+        case "html":
+            return "text/html"
+        case "js":
+            return "application/javascript"
+        case "css":
+            return "text/css"
+        case "svg":
+            return "image/svg+xml"
+        case "json":
+            return "application/json"
+        case "woff2":
+            return "font/woff2"
+        default:
+            return "application/octet-stream"
+        }
+    }
+    
+    func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
+        guard let url = urlSchemeTask.request.url,
+            let scheme = url.scheme,
+            scheme == PolyOut.fsProtocol.lowercased() else {
+            urlSchemeTask.didFailWithError(PolyNavError.protocolError(""))
+                return
+        }
+        
+        let urlString = url.absoluteString
+        let index = urlString.index(urlString.startIndex, offsetBy: PolyOut.fsPrefix.count)
+        let file = String(urlString[index..<urlString.endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        let ext = (file as NSString).pathExtension
+                        
+        do {
+            var fileData: Data? = nil
+            if (file.starts(with: PolyOut.fsFilesRoot)) {
+                let options: [String: Any] = [:]
+                PodApi.shared.polyOut.fileRead(
+                    url: urlString,
+                    options: options,
+                    completionHandler: { data, error in
+                        fileData = data as? Data
+                    }
+                )
+            }
+            else {
+                var targetUrl = feature?.path
+                targetUrl = targetUrl?.appendingPathComponent(file)
+
+                fileData = try Data(contentsOf: targetUrl!)
+            }
+            let headers: [String : String] = [
+                "Access-Control-Allow-Origin": PolyOut.fsPrefix,
+                "Access-Control-Allow-Methods": "GET",
+                "Access-Control-Allow-Headers": "*",
+                "Content-Length": String(fileData?.count ?? 0),
+                "Content-Type": mimeTypeFromExt(ext: ext)
+            ]
+            
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP 1.0", headerFields: headers)
+            
+            // Fulfill the task.
+            urlSchemeTask.didReceive(response!)
+            urlSchemeTask.didReceive(fileData ?? Data())
+            urlSchemeTask.didFinish()
+        } catch {
+            urlSchemeTask.didFailWithError(error)
+        }
+    }
+    
+    func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
+        
+    }
+}
+
 class FeatureWebView: WKWebView {
     private let featureTitle: Binding<String>
     private let activeActions: Binding<[String]>
@@ -98,7 +178,13 @@ class FeatureWebView: WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
 
+        let scheme = PolyOut.fsProtocol
+        let fileHandler = FeatureFileHandler()
+        fileHandler.setFeature(feature: feature)
+        configuration.setURLSchemeHandler(fileHandler, forURLScheme: scheme)
+
         super.init(frame: .zero, configuration: configuration)
+
         scrollView.isScrollEnabled = false
         translatesAutoresizingMaskIntoConstraints = false
         MessageName.allCases.forEach {
@@ -106,9 +192,11 @@ class FeatureWebView: WKWebView {
         }
         removeInputAccessory()
 
-        let featureUrl = feature.path
-        let featureFileUrl = featureUrl.appendingPathComponent("pod.html")
-        loadFileURL(featureFileUrl, allowingReadAccessTo: featureUrl)
+        var components = URLComponents()
+        components.scheme = scheme
+        components.path = "/pod.html"
+        components.host = ""
+        load(URLRequest(url: components.url!))
     }
 
     required init?(coder: NSCoder) {
