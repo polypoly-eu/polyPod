@@ -3,10 +3,8 @@
 import { RECENTLY_VIEWED_FILE_PATH } from "../src/model/importers/recently-viewed-ads-importer";
 import {
     creatAdViewsWithCompanyWithUnicodeCharactersData,
-    createDanishAdViewsData,
-    createEnglishAdViewsData,
+    createEnglishDatasetWithEmptyAdsCategory,
     createEnglishDatasetWithMissingAdsCategory,
-    createGermanAdViewsData,
     createIncompleteEnglishAdViewsData,
 } from "./datasets/ad-views-data";
 import { ZipFileMock } from "./mocks/zipfile-mock";
@@ -16,6 +14,7 @@ import {
 } from "./utils/data-importing";
 import {
     expectImportSuccess,
+    expectImportWarning,
     expectInvalidContentError,
     expectMissingFileError,
 } from "./utils/importer-assertions";
@@ -56,6 +55,25 @@ describe("Import ad views from export with missing ads category", () => {
     beforeAll(async () => {
         const importingResult = await runAdsImportForDataset(
             createEnglishDatasetWithMissingAdsCategory()
+        );
+        result = importingResult.result;
+        relatedAccounts = importingResult.relatedAccounts;
+    });
+
+    it("returns warning status", () =>
+        expectImportWarning(result, "Could locate ads category"));
+
+    it("has zero related accounts", () =>
+        expect(relatedAccounts.count).toBe(0));
+});
+
+describe("Import ad views from export with empty ads category", () => {
+    let result = null;
+    let relatedAccounts = null;
+
+    beforeAll(async () => {
+        const importingResult = await runAdsImportForDataset(
+            createEnglishDatasetWithEmptyAdsCategory()
         );
         result = importingResult.result;
         relatedAccounts = importingResult.relatedAccounts;

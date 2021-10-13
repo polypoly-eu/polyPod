@@ -1,11 +1,11 @@
 import RootAnalysis from "../analyses/ministories/root-analysis";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
-import { IMPORT_WARNING } from "../importer/importer-status";
 import {
     extractNameFromAdDescription,
     localeForCategoyName,
 } from "./utils/ads-locale";
+import { IMPORT_WARNING } from "./utils/importer-status.js";
 import { readJSONDataArray } from "./utils/importer-util";
 import { extractAccountDataFromUrl } from "./utils/url-processing";
 
@@ -123,17 +123,17 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
                 localeForCategoyName(eachCategory.name) !== undefined
         );
 
-        if (adsViewsData) {
-            const currentLocale = localeForCategoyName(adsViewsData.name);
-            this._extractViewedAds(adsViewsData, currentLocale);
-
-            facebookAccount.addRelatedAccounts(this._accountsByUrl.values());
-        } else {
+        if (!adsViewsData) {
             return {
                 status: IMPORT_WARNING,
                 importerClass: this.constructor.name,
                 message: "Could locate ads category",
             };
         }
+
+        const currentLocale = localeForCategoyName(adsViewsData.name);
+        this._extractViewedAds(adsViewsData, currentLocale);
+
+        facebookAccount.addRelatedAccounts(this._accountsByUrl.values());
     }
 }
