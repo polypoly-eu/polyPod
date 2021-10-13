@@ -324,10 +324,6 @@ extension FeatureWebView: WKScriptMessageHandler {
     }
     
     private func doLogError(_ error: [String: Any]) {
-        // TODO: All errors are currently being logged as "Script Error".
-        //       While that is better than nothing, we apparently need to load
-        //       the feature via loadHTMLString, and set baseURL to
-        //       "http://localhost/".
         let message = error["message"] as? String ?? "Unknown"
         print("Error from FeatureContainer: \(message)")
         errorHandler(message)
