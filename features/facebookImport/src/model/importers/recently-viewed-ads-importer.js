@@ -1,6 +1,7 @@
 import RootAnalysis from "../analyses/ministories/root-analysis";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
+import { IMPORT_WARNING } from "../importer/importer-status";
 import {
     extractNameFromAdDescription,
     localeForCategoyName,
@@ -127,6 +128,12 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
             this._extractViewedAds(adsViewsData, currentLocale);
 
             facebookAccount.addRelatedAccounts(this._accountsByUrl.values());
+        } else {
+            return {
+                status: IMPORT_WARNING,
+                importerClass: this.constructor.name,
+                message: "Could locate ads category",
+            };
         }
     }
 }
