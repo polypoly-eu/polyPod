@@ -40,14 +40,27 @@ function initMessaging() {
     };
 }
 
+function errorToString(error) {
+    if (typeof error === "object") {
+        let message = error.stack || "Unknown error";
+        if (error.cause) message += `\n\nCause:\n${errorToString(error.cause)}`;
+        return message;
+    }
+    return error;
+}
+
 function initErrorHandling(window) {
     window.addEventListener("error", ({ error }) => {
         window.podInternal.reportError(
-            `${error.stack}\nCause: ${error.cause.stack}`
+            "Unhandled error:\n\n" + errorToString(error)
         );
+        return true;
     });
-    window.addEventListener("unhandledrejection", ({ reason }) => {
-        window.podInternal.reportError(reason);
+    window.addEventListener("unhandledrejection", (event) => {
+        window.podInternal.reportError(
+            "Unhandled rejection:\n\n" + errorToString(event.reason)
+        );
+        event.preventDefault();
     });
 }
 
