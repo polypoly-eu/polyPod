@@ -77,7 +77,7 @@ struct FeatureView: View {
         }
     }
     
-    private func handleError(_ error: FeatureError) {
+    private func handleError(_ error: String) {
         let alert = UIAlertController(
             title: "",
             message: String.localizedStringWithFormat(
