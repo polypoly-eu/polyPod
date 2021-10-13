@@ -40,15 +40,20 @@ function initMessaging() {
     };
 }
 
-function initIframe(iFrame) {
-    console.log("initializing iframe");
-
-    iFrame.contentWindow.addEventListener("error", ({ error }) => {
+function initErrorHandling(window) {
+    window.addEventListener("error", ({ error }) => {
         window.podInternal.reportError(
             `${error.stack}\nCause: ${error.cause.stack}`
         );
     });
+    window.addEventListener("unhandledrejection", ({ reason }) => {
+        window.podInternal.reportError(reason);
+    });
+}
 
+function initIframe(iFrame) {
+    console.log("initializing iframe");
+    initErrorHandling(iFrame.contentWindow);
     port1.start();
     port1.onmessage = (event) => {
         const base64 = btoa(String.fromCharCode(...new Uint8Array(event.data)));
