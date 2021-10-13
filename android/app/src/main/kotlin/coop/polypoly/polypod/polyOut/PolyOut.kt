@@ -85,7 +85,7 @@ open class PolyOut(
             result["size"] = file.length().toString()
         }
         result["name"] = fs.get(id) ?: file.name
-        result["time"] = file.lastModified().toString()
+        result["time"] = (file.lastModified() / 1000).toString()
         result["id"] = id.removePrefix(fsPrefix).removePrefix(
             fsFilesRoot
         ).trimStart('/')
