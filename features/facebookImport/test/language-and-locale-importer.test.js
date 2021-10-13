@@ -37,8 +37,12 @@ describe("Import language from", () => {
         const languageData = createLocaleData({});
         zipFile.addJsonEntry(LANGUAGE_AND_LOCALE_FILE_PATH, languageData);
 
-        const { result } = await runLanguageAndLocaleImporter(zipFile);
+        const { result, facebookAccount } = await runLanguageAndLocaleImporter(
+            zipFile
+        );
         expectImportWarning(result, "Could not extract preferredLanguage");
+
+        expect(facebookAccount.preferredLanguage).toBeUndefined();
     });
 });
 
