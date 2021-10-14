@@ -26,6 +26,22 @@ const Overview = () => {
             />
         );
 
+    const getFormattedTime = (time) => {
+        // 'time' is a string with milliseconds from January 1st 1970
+        let t = new Date(1970, 0, 1);
+        t.setUTCSeconds(+time);
+
+        // for testing in browser, where 'time' is a real date, use instead of the above this one:
+        // const t = new Date(time);
+
+        const options = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        };
+        return t.toLocaleDateString(i18n.t("overview:time.format"), options);
+    };
+
     const formatSize = (size) => {
         const k = 1024;
         const decimals = 2;
@@ -46,7 +62,8 @@ const Overview = () => {
                     <div className="details">
                         <h1>{files[0].name}</h1>
                         <p>
-                            {i18n.t("overview:imported.time")} {files[0].time}
+                            {i18n.t("overview:imported.time")}{" "}
+                            {getFormattedTime(files[0].time)}
                         </p>
                         <p>
                             <span className="size">
