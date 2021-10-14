@@ -67,10 +67,33 @@ export default class MessagesAnalysis extends RootAnalysis {
         });
     }
 
+    _measureText(text, fontSize) {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        context.font = `${fontSize}px Jost`;
+        return context.measureText(text).width;
+    }
+
+    _calculateFontSize(text, maxWidth, minFontSize, maxFontSize) {
+        for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
+            if (this._measureText(text, fontSize) <= maxWidth) return fontSize;
+        }
+        return minFontSize;
+    }
+
     renderSummary() {
+        const fontSize = this._calculateFontSize(
+            this._messagesCount,
+            324,
+            10,
+            80
+        );
+
         return (
             <>
-                <h2>{this._messagesCount}</h2>
+                <h2 className="messages-count" style={{ fontSize: fontSize }}>
+                    {this._messagesCount}
+                </h2>
                 <p>
                     {i18n.t("explore:messages.summary", {
                         messages: this._messagesCount,

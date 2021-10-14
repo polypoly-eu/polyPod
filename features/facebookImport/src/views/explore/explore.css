@@ -100,12 +100,6 @@
     margin: 0 0 24px 0;
 }
 
-.analysis-card h2 {
-    white-space: nowrap;
-    font-size: clamp(30px, 22.2vw, 80px);
-    font-weight: bold;
-}
-
 .analysis-card .card-container > label {
     width: 90px;
     min-width: 82px;
