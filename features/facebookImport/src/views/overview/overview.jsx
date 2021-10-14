@@ -25,21 +25,20 @@ const Overview = () => {
                 loadingGif="./images/loading.gif"
             />
         );
-    const getTimeFormat = () => {
-        return files[0].time.slice(0, 10).replaceAll("-", "/");
-    };
-    function updateByteFormat(size, decimals = 2) {
+
+    const formatSize = (size) => {
         const k = 1024;
-        const dm = decimals < 0 ? 0 : decimals;
-        const format = ["Bytes", "KB", "MB", "GB"];
-        if (size == 0) return "0 Byte";
+        const decimals = 2;
+        if (size === 1) return i18n.t("common:format.byte");
+        if (size < k) return `${size} ${i18n.t("common:format.bytes")}`;
+        const units = [
+            i18n.t("common:format.KB"),
+            i18n.t("common:format.MB"),
+            i18n.t("common:format.GB"),
+        ];
         const i = Math.floor(Math.log(size) / Math.log(k));
-        // var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)));
-        return (
-            Math.round(size / Math.pow(k, i), dm) + " " + format[i]
-            // parseFloat((size / Math.pow(k, i)).toFixed(dm)) + " " + format[i]
-        );
-    }
+        return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
+    };
     return (
         <div className="overview">
             {Object.values(files).length ? (
@@ -47,13 +46,13 @@ const Overview = () => {
                     <div className="details">
                         <h1>{files[0].name}</h1>
                         <p>
-                            {i18n.t("overview:imported.time")} {getTimeFormat()}
+                            {i18n.t("overview:imported.time")} {files[0].time}
                         </p>
                         <p>
                             <span className="size">
                                 {" "}
                                 {i18n.t("overview:size")}{" "}
-                                {updateByteFormat(files[0].size)}
+                                {formatSize(files[0].size)}
                             </span>
                         </p>
                         <div className="separator"></div>
