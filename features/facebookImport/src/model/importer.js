@@ -93,18 +93,23 @@ export async function runImporters(
     return importingResults;
 }
 
-export async function importData(file) {
-    const zipFile = new ZipFile(file, window.pod);
+export async function importZip(zipFile, zipData, pod) {
     const facebookAccount = new FacebookAccount();
-    const enrichedData = { ...file, zipFile };
+    const enrichedData = { ...zipData, zipFile };
 
     const importingResults = await runImporters(
         dataImporters,
         enrichedData,
         facebookAccount,
-        window.pod
+        pod
     );
+
     facebookAccount.importingResults = importingResults;
 
     return facebookAccount;
+}
+
+export async function importData(file) {
+    const zipFile = new ZipFile(file, window.pod);
+    return importZip(zipFile, file, window.pod);
 }
