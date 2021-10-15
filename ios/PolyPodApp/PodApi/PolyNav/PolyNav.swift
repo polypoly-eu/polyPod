@@ -2,6 +2,19 @@ import UIKit
 import SwiftUI
 import Zip
 
+enum PolyNavError: Error {
+    case protocolError(_ protocol: String)
+}
+
+extension PolyNavError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .protocolError(let providedProtocol):
+            return "Bad protocol '\(providedProtocol)'"
+        }
+    }
+}
+
 protocol PolyNavProtocol {
     func setTitle(title: String, completionHandler: ([ExtendedData]?, Error?) -> Void)
     func setActiveActions(actions: [String], completionHandler: ([ExtendedData]?, Error?) -> Void)
@@ -43,7 +56,6 @@ class PolyNav: PolyNavProtocol {
                 return
             }
             
-            
             do {
                 let featureFilesPath = PolyOut.featureFilesPath()
                 if !FileManager.default.fileExists(atPath: featureFilesPath.path) {
@@ -55,7 +67,7 @@ class PolyNav: PolyNavProtocol {
                 try Zip.unzipFile(url, destination: targetUrl, overwrite: true, password: nil)
                 try FileManager.default.removeItem(at: url)
                 
-                let newUrl = PolyOut.fsPrefix + newId
+                let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + newId
                 var fileStore = UserDefaults.standard.value(
                     forKey: PolyOut.fsKey
                 ) as? [String:String?] ?? [:]
@@ -85,6 +97,6 @@ class PolyNav: PolyNavProtocol {
         fileStore.removeValue(forKey: fileId)
         UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
         completionHandler(nil)
-
+        
     }
 }

@@ -25,6 +25,7 @@ import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
+import java.io.ByteArrayInputStream
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -76,6 +77,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
 
+        WebView.setWebContentsDebuggingEnabled(true)
         addView(webView)
     }
 
@@ -124,6 +126,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         )
 
         val assetLoader = WebViewAssetLoader.Builder()
+            .setDomain(PolyOut.fsDomain)
             .addPathHandler(
                 "/features/${feature.name}/",
                 FeaturesPathHandler(context, feature.content)
@@ -136,12 +139,28 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 view: WebView,
                 request: WebResourceRequest
             ): WebResourceResponse {
-                if (request.url.lastPathSegment == "favicon.ico")
+                if (request.url.lastPathSegment == "favicon.ico") {
                     return WebResourceResponse(
                         null,
                         null,
                         null
                     )
+                }
+                var rawPath = request.url.path?.removePrefix(PolyOut.fsPrefix)!!
+
+                val firstSlash = rawPath.indexOf('/', 1) + 1
+                val endIndex = rawPath.indexOf('/', firstSlash)
+                if (endIndex > 0) {
+                    rawPath = rawPath.removeRange(0, endIndex + 1)
+                }
+                if (rawPath.startsWith(PolyOut.fsFilesRoot)) {
+                    return WebResourceResponse(
+                        null, null,
+                        ByteArrayInputStream(
+                            api.polyOut.readFile(rawPath)
+                        )
+                    )
+                }
                 val response = assetLoader.shouldInterceptRequest(request.url)
                 if (response == null) {
                     logger.warn(
@@ -199,7 +218,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
 
         /* ktlint-disable max-line-length */
-        webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=${feature.name}")
+        webView.loadUrl("${PolyOut.fsPrefix}assets/container/container.html?featureName=${feature.name}")
     }
 
     private fun initPostOffice(view: WebView) {
