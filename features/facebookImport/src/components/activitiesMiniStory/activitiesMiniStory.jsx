@@ -96,9 +96,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
         },
     }[activeTab.id];
 
-    const chartId = "activities-chart";
     const verticalBarChart = new VerticalBarChart({
-        id: chartId,
         data: constantTabData.barData,
         barColor: "white",
     });
@@ -165,7 +163,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     <p>{constantTabData.barChartLegendText}</p>
                 </div>
                 <p className="above-chart">{numberOfEventsString}</p>
-                <div id={chartId}></div>
+                <div id={verticalBarChart.id}></div>
             </div>
             <InfoButton route="/report/details/activities-info" />
             <p className="source">

@@ -1,6 +1,14 @@
 import * as d3 from "d3";
 
+import { Chart } from "../chart";
+
 const initializingBarHeight = 2;
+const margin = {
+  top: 10,
+  right: 0,
+  bottom: 20,
+  left: 40,
+};
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
@@ -16,53 +24,19 @@ const initializingBarHeight = 2;
  * @param {number = 300} [height] - The height of the svg
  * @param {string|callback = "blue"} [barColor] - The color of the bar (callbacks receive event and data)
  */
-
-export class VerticalBarChart {
-  constructor({ id, data, barColor = "blue", width = 400, height = 300 }) {
-    this.id = id;
-    this.data = data;
+export class VerticalBarChart extends Chart {
+  constructor({ data, barColor = "blue", width = 400, height = 300 }) {
+    super({ data, width, height, margin });
     this.barColor = barColor || "blue";
-    this.width = width || 400;
-    this.height = height || 300;
-    //constants
-    this.margin = {
-      top: 10,
-      right: 0,
-      bottom: 20,
-      left: 40,
-    };
-    this.chartHeight = height - this.margin.bottom - this.margin.top;
-    this.chartWidth = width - this.margin.left - this.margin.right;
     this.xScale = d3.scaleBand().range([0, this.chartWidth]).padding(0.2);
     this.yScale = d3
       .scaleLinear()
       .range([this.chartHeight, this.margin.bottom]);
   }
 
-  get chart() {
-    const chart = d3.select("#" + this.id).select(".chart");
-    return chart.empty() ? this.generateChart() : chart;
-  }
-
   adaptScalesToData() {
     this.xScale.domain(this.data.map((d) => d.title));
     this.yScale.domain([0, d3.max(this.data, (d) => d.value)]);
-  }
-
-  createSVG() {
-    return d3
-      .select("#" + this.id)
-      .append("svg")
-      .attr("viewBox", `0 0 ${this.width} ${this.height}`);
-  }
-
-  generateChart() {
-    return this.createSVG()
-      .append("g")
-      .attr("width", this.chartWidth)
-      .attr("height", this.chartHeight)
-      .attr("transform", `translate(${this.margin.left}, ${this.margin.top})`)
-      .attr("class", "chart");
   }
 
   addAxis() {
