@@ -1,3 +1,3 @@
-import { BubbleCluster, MirroredBarChart } from "./incubate";
-import { VerticalBarChart } from "./visualisations/barCharts/VerticalBarChart";
+import { BubbleCluster } from "./incubate";
+import { VerticalBarChart, MirroredBarChart } from "./visualisations/index";
 export { BubbleCluster, VerticalBarChart, MirroredBarChart };

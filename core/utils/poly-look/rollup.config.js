@@ -1,7 +1,6 @@
 import { terser } from "rollup-plugin-terser";
 import resolve from "@rollup/plugin-node-resolve";
 import svg from "rollup-plugin-svg";
-import sucrase from "@rollup/plugin-sucrase";
 import css from "rollup-plugin-css-only";
 
 export default {
@@ -13,10 +12,6 @@ export default {
   plugins: [
     svg(),
     css({ output: "css/bundle.css" }),
-    sucrase({
-      transforms: ["jsx"],
-      production: true,
-    }),
     resolve(),
     terser({
       module: true,
