@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import i18n from "../../../i18n";
 import RootAnalysis from "./root-analysis";
 import InfoButton from "../../../components/buttons/infoButton/infoButton.jsx";
@@ -82,16 +82,29 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
+        const [width, setWidth] = useState(0);
+        const refWidth = useRef(null);
+        const minFontSize = 10;
+        const maxFontSize = 80;
+
+        useEffect(() => {
+            setWidth(refWidth.current.clientWidth);
+        }, []);
+
         const fontSize = this._calculateFontSize(
             this._messagesCount,
-            324,
-            10,
-            80
+            width,
+            minFontSize,
+            maxFontSize
         );
 
         return (
             <>
-                <h2 className="messages-count" style={{ fontSize: fontSize }}>
+                <h2
+                    className="messages-count"
+                    style={{ fontSize: fontSize }}
+                    ref={refWidth}
+                >
                     {this._messagesCount}
                 </h2>
                 <p>
