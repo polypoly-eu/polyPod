@@ -64,6 +64,7 @@ export const OffFacebookMiniStoryDetails = ({ displayData }) => {
                         colors={{ upperBar: "#EB6561", lowerBar: "#F7FAFC" }}
                         width="400"
                         height="200"
+                        numberTicks={{ x: 9, y: 3 }}
                     />
                     <p className="source">
                         {i18n.t("offFacebookEventsMiniStory:last.90.days")}

@@ -3,23 +3,50 @@ import * as d3 from "d3";
 
 import "./mirroredBarChart.css";
 
-export const MirroredBarChart = ({ data, colors, width, height }) => {
+/**
+ * Visualizes data as two bar charts mirrored on the x-axis.
+ *
+ * The y-scale is also mirrored and a x/y-grid is added.
+ *
+ * @function
+ * @param {Object[]} data - The data to be visualized as a as two bar charts
+ * @param {number} data[].key - The key x value for both charts
+ * @param {number} data[].lower - The y value for the lower bar chart at key x value
+ * @param {number} data[].upper - The y value for the lower bar chart at key x value
+ * @param {number = 400} [width] - The width of the svg
+ * @param {number = 200} [height] - The height of the svg
+ * @param {Object} [barColor] - The color of the bars
+ * @param {string} [barColor.upperBarColor = "red"] - The color of the upper bars
+ * @param {string} [barColor.lowerBarColor = "blue"] - The color of the lower bars
+ * @param {number} [barPadding = 1] - The padding between the bars
+ * @param {Object} [numberTicks] - The number of ticks for the axis
+ * @param {number} [numberTicks.y = 4] - The number of ticks for the y axis scale
+ * @param {number} [numberTicks.x = 5] - The number of ticks for the x axis scale
+ * @returns {jsx-div with svg attached}
+ */
+export const MirroredBarChart = ({
+  data,
+  colors,
+  width = 400,
+  height = 200,
+  barPadding = 1,
+  numberTicks,
+}) => {
   const mirrorBarRef = useRef();
 
   //constants
-  const upperBarColor = colors.upperBar,
-    lowerBarColor = colors.lowerBar,
+  const upperBarColor = colors?.upperBar || "red",
+    lowerBarColor = colors?.lowerBar || "blue",
     margin = {
       top: 10,
       right: 40,
       bottom: 20,
       left: 0,
     },
-    numberTicksY = 3,
-    numberTicksX = 9,
+    numberTicksY = numberTicks?.y || 4,
+    numberTicksX = numberTicks?.x || 5,
     yGridMarginLeft = 18,
-    yGridMarginRight = 24,
-    barPadding = 1;
+    yGridMarginRight = 24;
 
   //derived constants
   const chartHeight = height - margin.bottom - margin.top,
