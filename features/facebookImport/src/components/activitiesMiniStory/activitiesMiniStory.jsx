@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import i18n from "../../i18n";
 
@@ -96,6 +96,13 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
         },
     }[activeTab.id];
 
+    const chartId = "activities-chart";
+    const verticalBarChart = new VerticalBarChart({
+        id: chartId,
+        data: constantTabData.barData,
+        barColor: "white",
+    });
+
     //Adapt to order of magnitude
     const orderOfMagnitude = (() => {
         const highest = Math.max(...Object.values(constantTabData.barData));
@@ -116,6 +123,10 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
             orderOfMagnitude > 1 ? ".thousands" : ""
         }`
     );
+
+    useEffect(() => {
+        verticalBarChart.render();
+    });
 
     return (
         <div className="activities-ministory">
@@ -154,10 +165,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     <p>{constantTabData.barChartLegendText}</p>
                 </div>
                 <p className="above-chart">{numberOfEventsString}</p>
-                <VerticalBarChart
-                    data={constantTabData.barData}
-                    barColor={"white"}
-                />
+                <div id={chartId}></div>
             </div>
             <InfoButton route="/report/details/activities-info" />
             <p className="source">
