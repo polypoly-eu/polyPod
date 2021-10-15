@@ -1,3 +1,6 @@
+import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../../src/model/importers/off-facebook-events-importer";
+import { ZipFileMock } from "../mocks/zipfile-mock";
+
 export function createOffFacebookEventsSimpleData() {
     return {
         off_facebook_activity_v2: [
@@ -11,7 +14,7 @@ export function createOffFacebookEventsSimpleData() {
                     },
                     {
                         id: 127359960673139,
-                        type: "VIEW_CONTENT",
+                        type: "PURCHASE",
                         timestamp: 1623919120,
                     },
                     {
@@ -38,4 +41,13 @@ export function createOffFacebookEventsSimpleData() {
             },
         ],
     };
+}
+
+export function zipFileWithOffFacebookEvents() {
+    let zipFile = new ZipFileMock();
+    zipFile.addJsonEntry(
+        OFF_FACEBOOK_EVENTS_FILE_PATH,
+        createOffFacebookEventsSimpleData()
+    );
+    return zipFile;
 }

@@ -1,7 +1,7 @@
 "use strict";
 
 import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../src/model/importers/off-facebook-events-importer";
-import { createOffFacebookEventsSimpleData } from "./datasets/off-facebook-events-data";
+import { zipFileWithOffFacebookEvents } from "./datasets/off-facebook-events-data";
 import { ZipFileMock } from "./mocks/zipfile-mock";
 import { runOffFacebookEventsImporter } from "./utils/data-importing";
 import {
@@ -38,7 +38,6 @@ describe("Import off-facebook events from export with wrong data key", () => {
 });
 
 describe("Import off-facebook events", () => {
-    let zipFile = null;
     let result = null;
     let facebookAccount = null;
     let offFacebookCompanies = null;
@@ -46,15 +45,10 @@ describe("Import off-facebook events", () => {
     let companyTwo = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
-        zipFile.addJsonEntry(
-            OFF_FACEBOOK_EVENTS_FILE_PATH,
-            createOffFacebookEventsSimpleData()
-        );
-
-        const importingResult = await runOffFacebookEventsImporter(zipFile);
-        result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
+        const zipFile = zipFileWithOffFacebookEvents();
+        ({ facebookAccount, result } = await runOffFacebookEventsImporter(
+            zipFile
+        ));
         offFacebookCompanies = facebookAccount.offFacebookCompanies;
         [companyOne, companyTwo] = offFacebookCompanies;
     });
