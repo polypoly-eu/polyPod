@@ -38,5 +38,5 @@ export function createFriendsDataset() {
 }
 
 export function zipFileWithFriends() {
-    return createMockedZip([FRIENDS_FILE_PATH, createFriendsDataset()]);
+    return createMockedZip([[FRIENDS_FILE_PATH, createFriendsDataset()]]);
 }

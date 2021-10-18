@@ -50,7 +50,6 @@ export function createOffFacebookEventsSimpleData() {
 
 export function zipFileWithOffFacebookEvents() {
     return createMockedZip([
-        OFF_FACEBOOK_EVENTS_FILE_PATH,
-        createOffFacebookEventsSimpleData(),
+        [OFF_FACEBOOK_EVENTS_FILE_PATH, createOffFacebookEventsSimpleData()],
     ]);
 }
