@@ -9,6 +9,7 @@ import OffFacebookEventsImporter from "../../src/model/importers/off-facebook-ev
 import { ZipFileMock } from "../mocks/zipfile-mock.js";
 import LanguageAndLocaleImporter from "../../src/model/importers/language-and-locale-importer.js";
 import FriendsImporter from "../../src/model/importers/friends-importer.js";
+import LikedPagesImporter from "../../src/model/importers/pages-liked-importer.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -54,6 +55,10 @@ export async function runFriendsImporter(zipFile) {
     return runSingleImporter(FriendsImporter, zipFile);
 }
 
+export async function runLikedPagesImporter(zipFile) {
+    return runSingleImporter(LikedPagesImporter, zipFile);
+}
+
 export async function runImportForDataset(importerClass, filePath, dataset) {
     const zipFile = new ZipFileMock();
     zipFile.addJsonEntry(filePath, dataset);
@@ -62,7 +67,7 @@ export async function runImportForDataset(importerClass, filePath, dataset) {
 }
 
 export async function runAdsImportForDataset(dataset) {
-    const { result, facebookAccount } = runImportForDataset(
+    const { result, facebookAccount } = await runImportForDataset(
         RecentlyViewedAdsImporter,
         RECENTLY_VIEWED_FILE_PATH,
         dataset
