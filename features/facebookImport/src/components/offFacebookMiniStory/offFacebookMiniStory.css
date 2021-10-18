@@ -1,4 +1,38 @@
-.off-facebook-events-mini-story h2 {
+.off-facebook-events-mini-story-summary h2 {
     font-size: 80px;
     font-weight: bold;
+}
+
+.off-facebook-events-ministory-details .legend {
+    display: flex;
+    flex-direction: row;
+}
+
+.off-facebook-events-ministory-details .legend div {
+    display: flex;
+    flex-direction: row;
+    margin-right: 8px;
+}
+
+.off-facebook-events-ministory-details .legend div img {
+    margin-right: 2px;
+}
+
+.off-facebook-events-ministory-details .legend .on-bars {
+    transform: translateY(12px);
+}
+
+.off-facebook-events-ministory-details .divide-y {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.off-facebook-events-ministory-details .divide-y p {
+    flex: 1 1 auto;
+    font-size: 12px;
+}
+
+.off-facebook-events-ministory-details .divide-y .source {
+    flex: 0 0 auto;
 }
