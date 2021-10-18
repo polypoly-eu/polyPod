@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 import { BubbleCluster } from "@polypoly-eu/poly-look";
 
@@ -41,6 +41,19 @@ const DataStructureMiniStory = ({ data }) => {
         (bubble) => bubble.title === selectedFolder
     )?.count;
 
+    const bubbleCluster = new BubbleCluster({
+        data: data,
+        width: bubbleVizWidth,
+        height: bubbleVizHeight,
+        bubbleColor: bubbleColor,
+        textColor: dataBubblesDarkColor,
+        onBubbleClick: handleBubbleClick,
+    });
+
+    useEffect(() => {
+        bubbleCluster.render();
+    });
+
     return (
         <>
             <div>
@@ -50,14 +63,7 @@ const DataStructureMiniStory = ({ data }) => {
                         amount_of_files: amountOfFiles,
                     })}
                 </p>
-                <BubbleCluster
-                    data={data}
-                    width={bubbleVizWidth}
-                    height={bubbleVizHeight}
-                    bubbleColor={bubbleColor}
-                    textColor={dataBubblesDarkColor}
-                    onBubbleClick={handleBubbleClick}
-                />
+                <div id={bubbleCluster.id}></div>
             </div>
             <div className="data-structure">
                 {data.map((bubble, index) => {

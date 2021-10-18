@@ -1,13 +1,20 @@
 import * as d3 from "d3";
 import { v4 as uuidv4 } from "uuid";
 
+const noMargin = {
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+};
+
 export class Chart {
   constructor({ data, width, height, margin }) {
     this._id = uuidv4();
     this._data = data;
     this._width = width;
     this._height = height;
-    this._margin = margin;
+    this._margin = margin || noMargin;
     this._chartHeight = height - this.margin.bottom - this.margin.top;
     this._chartWidth = width - this.margin.left - this.margin.right;
   }
