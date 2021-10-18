@@ -8,6 +8,7 @@ import {
     createIncompleteEnglishAdViewsData,
 } from "../datasets/ad-views-data";
 import { ZipFileMock } from "../mocks/zipfile-mock";
+import { zipWithWrongDatasetKey } from "../utils/data-creation";
 import {
     runAdsImportForDataset,
     runRecentlyViewedAdsImporter,
@@ -34,12 +35,8 @@ describe("Import ad views from empty export", () => {
 
 describe("Import ad views from export with wrong data key", () => {
     let zipFile = null;
-
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
-        zipFile.addJsonEntry(RECENTLY_VIEWED_FILE_PATH, {
-            recently_viewed_wrong: [],
-        });
+        zipFile = zipWithWrongDatasetKey(RECENTLY_VIEWED_FILE_PATH);
     });
 
     it("triggers missing data key error", async () => {
