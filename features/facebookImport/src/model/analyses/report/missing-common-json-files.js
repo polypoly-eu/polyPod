@@ -2,7 +2,6 @@ import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
 
 import {
-    anonymizeJsonEntityPath,
     jsonDataEntities,
     removeEntryPrefix,
 } from "../../importers/utils/importer-util.js";
