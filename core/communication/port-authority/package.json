@@ -39,7 +39,6 @@
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chokidar-cli": "^2.1.0",
     "connect": "^3.7.0",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^6.11.0",
