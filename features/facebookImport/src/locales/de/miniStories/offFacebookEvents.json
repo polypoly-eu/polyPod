@@ -1,10 +1,4 @@
 {
     "title": "Facebook weiß, was Sie woanders gemacht haben",
-    "total": "Insgesamt <strong>{{number_companies}}</strong> Apps und Websites, die Sie außerhalb von Facebook verwenden, senden Informationen darüber an Facebook zurück. <strong>{{number_purchases}}</strong> davon senden Infos über Ihre Einkäufe.",
-    "details.text.1": "Looking at on and off Facebook events over time different patterns might emerge. Off events seem to be followed by on events or vice versa. The data does not prove causality, but this is an interesting starting point for further exploration.",
-    "details.text.2": "We are showing the last 90 days because Facebook only stores on events that long. Maybe you remember some of your activities in the last 3 months? Or you will be more conscious from now on.",
-    "on.fb.events": "On Facebook events",
-    "off.fb.events": "Off Facebook events",
-    "last.90.days": "Last 90 days",
-    "number.events": "Number of events"
+    "total": "Insgesamt <strong>{{number_companies}}</strong> Apps und Websites, die Sie außerhalb von Facebook verwenden, senden Informationen darüber an Facebook zurück. <strong>{{number_purchases}}</strong> davon senden Infos über Ihre Einkäufe."
 }

@@ -4,7 +4,7 @@
     padding: 24px;
     border-top: 1px inset #a9b6c6;
     box-sizing: border-box;
-    overflow: hidden scroll;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
