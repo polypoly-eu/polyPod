@@ -1,7 +1,10 @@
 "use strict";
 
 import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../src/model/importers/off-facebook-events-importer";
-import { zipFileWithOffFacebookEvents } from "./datasets/off-facebook-events-data";
+import {
+    DATASET_EXPECTED_VALUES,
+    zipFileWithOffFacebookEvents,
+} from "./datasets/off-facebook-events-data";
 import { ZipFileMock } from "./mocks/zipfile-mock";
 import { runOffFacebookEventsImporter } from "./utils/data-importing";
 import {
@@ -56,10 +59,14 @@ describe("Import off-facebook events", () => {
     it("returns success status", () => expectImportSuccess(result));
 
     it("has two off-facebook companies", () =>
-        expect(facebookAccount.offFacebookCompaniesCount).toBe(2));
+        expect(facebookAccount.offFacebookCompaniesCount).toBe(
+            DATASET_EXPECTED_VALUES.totalCompaniesCount
+        ));
 
     it("has five off-facebook events", () =>
-        expect(facebookAccount.offFacebookEventsCount).toBe(5));
+        expect(facebookAccount.offFacebookEventsCount).toBe(
+            DATASET_EXPECTED_VALUES.totalEventsCount
+        ));
 
     it("has correct names for off-Facebook companies", () => {
         expect(companyOne.name).toBe("companyx.com");

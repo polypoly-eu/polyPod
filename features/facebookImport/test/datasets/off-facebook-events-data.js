@@ -1,6 +1,11 @@
 import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../../src/model/importers/off-facebook-events-importer";
 import { ZipFileMock } from "../mocks/zipfile-mock";
 
+export const DATASET_EXPECTED_VALUES = {
+    totalCompaniesCount: 2,
+    totalEventsCount: 5,
+};
+
 export function createOffFacebookEventsSimpleData() {
     return {
         off_facebook_activity_v2: [
