@@ -5,6 +5,7 @@ import {
     extractNameFromAdDescription,
     localeForCategoyName,
 } from "./utils/ads-locale";
+import { IMPORT_WARNING } from "./utils/importer-status.js";
 import { readJSONDataArray } from "./utils/importer-util";
 import { extractAccountDataFromUrl } from "./utils/url-processing";
 
@@ -120,11 +121,17 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
                 localeForCategoyName(eachCategory.name) !== undefined
         );
 
-        if (adsViewsData) {
-            const currentLocale = localeForCategoyName(adsViewsData.name);
-            this._extractViewedAds(adsViewsData, currentLocale);
-
-            facebookAccount.addRelatedAccounts(this._accountsByUrl.values());
+        if (!adsViewsData) {
+            return {
+                status: IMPORT_WARNING,
+                importerClass: this.constructor.name,
+                message: "Could not locate ads category",
+            };
         }
+
+        const currentLocale = localeForCategoyName(adsViewsData.name);
+        this._extractViewedAds(adsViewsData, currentLocale);
+
+        facebookAccount.addRelatedAccounts(this._accountsByUrl.values());
     }
 }
