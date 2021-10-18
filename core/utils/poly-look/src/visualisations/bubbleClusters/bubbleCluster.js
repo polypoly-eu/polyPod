@@ -13,7 +13,7 @@ const mediumBubblesFont = "16px";
  *
  * The bubbles are being added in a spiral starting in the center of the cluster meaning sorted data will lead to all small bubbles in the middle or outside.
  *
- * @function
+ * @class
  * @param {Object[]} data - The data to be visualized as a bubble cluster
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
