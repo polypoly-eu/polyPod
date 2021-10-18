@@ -1,5 +1,13 @@
 export function expectActiveAnalysis(analysis) {
-    expect(analysis.active).toBe(true);
+    expectAnalysisActivation(analysis, true);
+}
+
+export function expectInactiveAnalysis(analysis) {
+    expectAnalysisActivation(analysis, false);
+}
+
+function expectAnalysisActivation(analysis, activeStatus) {
+    expect(analysis.active).toBe(activeStatus);
 }
 
 export function expectAnalysisSuccessStatus(status) {
