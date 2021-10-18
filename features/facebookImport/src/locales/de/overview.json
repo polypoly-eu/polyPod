@@ -3,12 +3,13 @@
     "imported.data": "Importierte Daten",
     "imported.files": "Importierte Dateien:",
     "imported.time": "Importiert:",
-    "size": "Größe",
-    "explore": "Erkunden",
+    "size": "Größe:",
+    "explore": "Daten erkunden",
     "new.import": "Neuer Import",
     "loading.data": "Ihre Daten werden geladen",
     "analyzing.data": "Ihre Daten werden analysiert",
     "new.import.dialog": "Möchten Sie wirklich die alte Datei mit einer neuen ersetzen?",
     "new.import.dialog.back": "Zurück",
-    "new.import.dialog.continue": "Weiter"
+    "new.import.dialog.continue": "Weiter",
+    "time.format": "de-DE"
 }

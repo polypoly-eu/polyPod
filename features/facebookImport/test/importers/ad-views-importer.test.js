@@ -1,23 +1,23 @@
 "use strict";
 
-import { RECENTLY_VIEWED_FILE_PATH } from "../src/model/importers/recently-viewed-ads-importer";
+import { RECENTLY_VIEWED_FILE_PATH } from "../../src/model/importers/recently-viewed-ads-importer";
 import {
     creatAdViewsWithCompanyWithUnicodeCharactersData,
     createEnglishDatasetWithEmptyAdsCategory,
     createEnglishDatasetWithMissingAdsCategory,
     createIncompleteEnglishAdViewsData,
-} from "./datasets/ad-views-data";
-import { ZipFileMock } from "./mocks/zipfile-mock";
+} from "../datasets/ad-views-data";
+import { ZipFileMock } from "../mocks/zipfile-mock";
 import {
     runAdsImportForDataset,
     runRecentlyViewedAdsImporter,
-} from "./utils/data-importing";
+} from "../utils/data-importing";
 import {
     expectImportSuccess,
     expectImportWarning,
     expectInvalidContentError,
     expectMissingFileError,
-} from "./utils/importer-assertions";
+} from "../utils/importer-assertions";
 
 describe("Import ad views from empty export", () => {
     let zipFile = null;

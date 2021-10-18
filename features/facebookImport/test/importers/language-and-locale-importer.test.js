@@ -1,16 +1,16 @@
-import { LANGUAGE_AND_LOCALE_FILE_PATH } from "../src/model/importers/language-and-locale-importer";
+import { LANGUAGE_AND_LOCALE_FILE_PATH } from "../../src/model/importers/language-and-locale-importer";
 import {
     createLanguageSettingsData,
     createLocaleData,
-} from "./datasets/language-and-locale-data";
-import { ZipFileMock } from "./mocks/zipfile-mock";
-import { runLanguageAndLocaleImporter } from "./utils/data-importing";
+} from "../datasets/language-and-locale-data";
+import { ZipFileMock } from "../mocks/zipfile-mock";
+import { runLanguageAndLocaleImporter } from "../utils/data-importing";
 import {
     expectImportSuccess,
     expectImportWarning,
     expectInvalidContentError,
     expectMissingFileError,
-} from "./utils/importer-assertions";
+} from "../utils/importer-assertions";
 
 describe("Import language from", () => {
     let zipFile = null;

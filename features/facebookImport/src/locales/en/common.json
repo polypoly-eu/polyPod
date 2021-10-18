@@ -2,6 +2,12 @@
     "title": "Importer",
     "source.your.facebook.data": "Source: Your facebook data",
     "months.abbreviation": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec",
+    "loading": "Loading",
     "loading.closing": "Thank you for your patience!",
-    "button.ok": "OK"
+    "button.ok": "OK",
+    "format.byte": "1 byte",
+    "format.bytes": "bytes",
+    "format.KB": "KB",
+    "format.MB": "MB",
+    "format.GB": "GB"
 }
