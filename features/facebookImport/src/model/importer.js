@@ -109,7 +109,7 @@ export async function importZip(zipFile, zipData, pod) {
     return facebookAccount;
 }
 
-export async function importData(file) {
-    const zipFile = new ZipFile(file, window.pod);
-    return importZip(zipFile, file, window.pod);
+export async function importData(zipData) {
+    const zipFile = new ZipFile(zipData, window.pod);
+    return importZip(zipFile, zipData, window.pod);
 }
