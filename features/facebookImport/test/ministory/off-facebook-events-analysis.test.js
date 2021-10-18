@@ -1,6 +1,9 @@
 import OffFacebookEventsAnalysis from "../../src/model/analyses/ministories/off-facebook-events-analysis";
 import FacebookAccount from "../../src/model/entities/facebook-account";
-import { zipFileWithOffFacebookEvents } from "../datasets/off-facebook-events-data";
+import {
+    DATASET_EXPECTED_VALUES,
+    zipFileWithOffFacebookEvents,
+} from "../datasets/off-facebook-events-data";
 import {
     runAnalysisForAccount,
     runAnalysisForExport,
@@ -93,7 +96,9 @@ describe("Off-Facebook events analysis from export data", () => {
     });
 
     it("has correct companies count", async () => {
-        expect(analysis._companiesCount).toBe(2);
+        expect(analysis._companiesCount).toBe(
+            DATASET_EXPECTED_VALUES.totalCompaniesCount
+        );
     });
 
     it("has correct purchases Count", async () => {
