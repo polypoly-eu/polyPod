@@ -41,8 +41,7 @@ export default class LanguageAndLocaleImporter {
         return await readJSONDataArray(
             LANGUAGE_AND_LOCALE_FILE_PATH,
             LANGUAGE_AND_LOCALE_DATA_KEY,
-            zipFile,
-            zipFile.id
+            zipFile
         );
     }
 

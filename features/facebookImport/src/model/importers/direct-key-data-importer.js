@@ -11,8 +11,7 @@ export default class DirectKeyDataImporter {
         facebookAccount[this._dataStorageKey] = await readJSONDataArray(
             this._dataFileName,
             this._dataKey,
-            zipFile,
-            zipFile.id
+            zipFile
         );
         facebookAccount.addImportedFileName(this._dataFileName);
     }

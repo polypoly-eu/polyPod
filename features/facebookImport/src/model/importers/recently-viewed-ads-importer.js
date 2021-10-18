@@ -48,8 +48,7 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
         const rawData = readJSONDataArray(
             RECENTLY_VIEWED_FILE_PATH,
             RECENTLY_VIEWED_DATA_KEY,
-            zipFile,
-            zipFile.id
+            zipFile
         );
         facebookAccount.addImportedFileName(RECENTLY_VIEWED_FILE_PATH);
         return rawData;

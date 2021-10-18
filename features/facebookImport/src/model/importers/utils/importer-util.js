@@ -11,8 +11,8 @@ async function relevantZipEntries(zipFile) {
     );
 }
 
-async function readJSONFile(dataFileName, zipFile, zipId) {
-    const fullEntryName = `${zipId}/${dataFileName}`;
+async function readJSONFile(relativeFileName, zipFile) {
+    const fullEntryName = `${zipFile.id}/${relativeFileName}`;
     return readFullPathJSONFile(fullEntryName, zipFile);
 }
 
@@ -41,13 +41,8 @@ async function readFullPathJSONFile(fullEntryName, zipFile) {
     });
 }
 
-async function readJSONDataObject(
-    dataFileName,
-    dataKey,
-    zipFile,
-    zipId = null
-) {
-    const rawData = await readJSONFile(dataFileName, zipFile, zipId);
+async function readJSONDataObject(dataFileName, dataKey, zipFile) {
+    const rawData = await readJSONFile(dataFileName, zipFile);
 
     if (!(dataKey in rawData)) {
         throw new InvalidContentImportException(
@@ -59,13 +54,8 @@ async function readJSONDataObject(
     return rawData[dataKey];
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
-    const arrayData = await readJSONDataObject(
-        dataFileName,
-        dataKey,
-        zipFile,
-        zipId
-    );
+async function readJSONDataArray(dataFileName, dataKey, zipFile) {
+    const arrayData = await readJSONDataObject(dataFileName, dataKey, zipFile);
 
     if (!Array.isArray(arrayData)) {
         throw new InvalidContentImportException(
