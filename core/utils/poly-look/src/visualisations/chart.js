@@ -1,6 +1,8 @@
 import * as d3 from "d3";
 import { v4 as uuidv4 } from "uuid";
 
+const idPrefix = "chart:";
+
 const noMargin = {
   top: 0,
   bottom: 0,
@@ -25,7 +27,7 @@ const noMargin = {
  */
 export class Chart {
   constructor({ data, width, height, margin, type }) {
-    this._id = uuidv4();
+    this._id = idPrefix + uuidv4();
     this._data = data;
     this._width = width;
     this._height = height;

@@ -57,7 +57,6 @@ export const OffFacebookMiniStoryDetails = ({ displayData }) => {
             numberTicks: { x: 9, y: 3 },
         });
     });
-    console.log(visualisationData);
     useEffect(() => {
         Object.values(visualisationData).forEach((chart) => chart.render());
     });
