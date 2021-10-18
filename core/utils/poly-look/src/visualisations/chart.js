@@ -8,6 +8,21 @@ const noMargin = {
   right: 0,
 };
 
+/**
+ * Creates a svg and a chart group inside
+ *
+ * @class
+ * @param Object[] data - The data to be visualized as a bubble cluster
+ * @param {string} data[].title - The title/name the bubble has
+ * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
+ * @param {number = 400} [width] - The width of the svg
+ * @param {number = 300} [height] - The height of the svg
+ * @param {Object} margin - The margin the chart has to the svg sides
+ * @param {number = 0} margin.top - Top margin
+ * @param {number = 0} margin.right - Right margin
+ * @param {number = 0} margin.bottom - Bottom margin
+ * @param {number = 0} margin.left - Left left
+ */
 export class Chart {
   constructor({ data, width, height, margin, type }) {
     this._id = uuidv4();
