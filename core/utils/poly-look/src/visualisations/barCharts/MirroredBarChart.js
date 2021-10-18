@@ -2,7 +2,7 @@ import * as d3 from "d3";
 
 import { Chart } from "../chart";
 
-import "mirroredBarChart.css";
+import "./mirroredBarChart.css";
 
 const margin = {
   top: 10,
@@ -12,6 +12,7 @@ const margin = {
 };
 const yGridMarginLeft = 18;
 const yGridMarginRight = 24;
+const type = "mirrored-bar-chart";
 
 /**
  * Visualizes data as two bar charts mirrored on the x-axis.
@@ -42,7 +43,7 @@ export class MirroredBarChart extends Chart {
     barPadding = 1,
     numberTicks,
   }) {
-    super({ data, width, height, margin });
+    super({ data, width, height, margin, type });
     this.upperBarColor = colors?.upperBar || "red";
     this.lowerBarColor = colors?.lowerBar || "blue";
     this.numberTicksY = numberTicks?.y || 4;

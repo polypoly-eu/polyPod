@@ -11,7 +11,7 @@ export default {
   },
   plugins: [
     svg(),
-    css({ output: "css/bundle.css" }),
+    css({ output: "css/poly-look.bundled.css" }),
     resolve(),
     terser({
       module: true,

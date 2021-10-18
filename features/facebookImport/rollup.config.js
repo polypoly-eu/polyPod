@@ -37,9 +37,15 @@ export default (commandLineArgs) => {
                             "node_modules/react/umd/react.development.js",
                             "node_modules/react-dom/umd/react-dom.development.js",
                             "node_modules/@polypoly-eu/podjs/dist/pod.js",
-                            //"node_modules/poly-look/dist/poly-look.bundled.js",
+                            "node_modules/@polypoly-eu/poly-look/dist/poly-look.bundled.js",
                         ],
                         dest: "dist",
+                    },
+                    {
+                        src: [
+                            "node_modules/@polypoly-eu/poly-look/dist/css/poly-look.bundled.css",
+                        ],
+                        dest: "dist/css",
                     },
                 ],
             }),

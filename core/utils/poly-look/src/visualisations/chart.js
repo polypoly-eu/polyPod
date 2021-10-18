@@ -9,7 +9,7 @@ const noMargin = {
 };
 
 export class Chart {
-  constructor({ data, width, height, margin }) {
+  constructor({ data, width, height, margin, type }) {
     this._id = uuidv4();
     this._data = data;
     this._width = width;
@@ -17,6 +17,7 @@ export class Chart {
     this._margin = margin || noMargin;
     this._chartHeight = height - this.margin.bottom - this.margin.top;
     this._chartWidth = width - this.margin.left - this.margin.right;
+    this.type = type || "";
   }
 
   get id() {
@@ -69,6 +70,6 @@ export class Chart {
       .attr("width", this.chartWidth)
       .attr("height", this.chartHeight)
       .attr("transform", `translate(${this.margin.left}, ${this.margin.top})`)
-      .attr("class", "chart");
+      .attr("class", `chart ${this.type}`);
   }
 }
