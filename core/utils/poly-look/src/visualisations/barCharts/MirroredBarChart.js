@@ -234,7 +234,7 @@ export class MirroredBarChart extends Chart {
       .attr(
         "x",
         (d) =>
-          xScale(d.key) -
+          this.xScale(d.key) -
           (this.barSpace - this.totalBarPadding) / this.data.length
       )
       .attr("width", (this.barSpace - this.totalBarPadding) / this.data.length)
