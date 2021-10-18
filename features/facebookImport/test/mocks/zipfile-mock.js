@@ -30,12 +30,15 @@ export class ZipFileMock {
     }
 
     enrichedData() {
+        return { ...this.enrichedFileData(), zipFile: this };
+    }
+
+    enrichedFileData() {
         return {
             id: this.id,
             time: this.time,
             name: this.name,
             size: this.size,
-            zipFile: this,
         };
     }
 
