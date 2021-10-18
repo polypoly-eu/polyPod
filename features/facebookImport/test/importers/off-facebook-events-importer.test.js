@@ -1,17 +1,17 @@
 "use strict";
 
-import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../src/model/importers/off-facebook-events-importer";
+import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../../src/model/importers/off-facebook-events-importer";
 import {
-    DATASET_EXPECTED_VALUES,
     zipFileWithOffFacebookEvents,
-} from "./datasets/off-facebook-events-data";
-import { ZipFileMock } from "./mocks/zipfile-mock";
-import { runOffFacebookEventsImporter } from "./utils/data-importing";
+    DATASET_EXPECTED_VALUES,
+} from "../datasets/off-facebook-events-data";
+import { ZipFileMock } from "../mocks/zipfile-mock";
+import { runOffFacebookEventsImporter } from "../utils/data-importing";
 import {
     expectImportSuccess,
     expectInvalidContentError,
     expectMissingFileError,
-} from "./utils/importer-assertions";
+} from "../utils/importer-assertions";
 
 describe("Import off-facebook events from empty export", () => {
     let zipFile = null;

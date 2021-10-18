@@ -1,13 +1,13 @@
 "use strict";
 
-import { ZipFileMock } from "./mocks/zipfile-mock";
-import { runNameImporter } from "./utils/data-importing";
+import { ZipFileMock } from "../mocks/zipfile-mock";
+import { runNameImporter } from "../utils/data-importing";
 import {
     expectError,
     expectImportSuccess,
     expectInvalidContentError,
     expectMissingFileError,
-} from "./utils/importer-assertions.js";
+} from "../utils/importer-assertions.js";
 
 const profileInformationFileName =
     "profile_information/profile_information.json";
