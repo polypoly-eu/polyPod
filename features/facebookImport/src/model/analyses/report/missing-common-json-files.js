@@ -21,12 +21,12 @@ export default class MissingCommonJSONFilesAnalysis extends ReportAnalysis {
 
     async analyze({ zipFile }) {
         const relevantEntries = await jsonDataEntities(zipFile);
-        const anonymizedPaths = relevantEntries
-            .map((each) => anonymizeJsonEntityPath(removeEntryPrefix(each)))
-            .map((each) => "/" + each);
+        const formattedPaths = relevantEntries.map(
+            (each) => "/" + removeEntryPrefix(each)
+        );
         this._missingCommonFileNames = commonStructure
             .filter((each) => each.endsWith(".json"))
-            .filter((each) => !anonymizedPaths.includes(each));
+            .filter((each) => !formattedPaths.includes(each));
         this.active = this._missingCommonFileNames.length > 0;
     }
 

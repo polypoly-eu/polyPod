@@ -8,7 +8,7 @@ import {
     expectInactiveAnalysis,
 } from "../utils/analysis-assertions";
 
-describe("Missing common json files analysis for empty zip", () => {
+describe("Missing common JSON files analysis for empty zip", () => {
     let analysis = null;
     let status = null;
 
@@ -29,7 +29,7 @@ describe("Missing common json files analysis for empty zip", () => {
     });
 });
 
-describe("Missing common json files analysis for zip with no missing common files", () => {
+describe("Missing common JSON files analysis for zip with no missing common files", () => {
     let analysis = null;
     let status = null;
 
