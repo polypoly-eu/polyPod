@@ -60,7 +60,7 @@ export default class MessagesImporter {
         );
     }
 
-    async import({ zipFile }, facebookAccount) {
+    async import(zipFile, facebookAccount) {
         const messageThreadFiles = await this._extractJsonEntries(zipFile);
         if (messageThreadFiles.length === 0) {
             throw new MissingMessagesFilesException();

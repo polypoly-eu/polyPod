@@ -13,7 +13,7 @@ export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
     const results = await runImporters(
         importerClasses,
-        zipFile.enrichedData(),
+        zipFile,
         facebookAccount
     );
     return { facebookAccount, results };
@@ -21,11 +21,7 @@ export async function runMultipleImporters(importerClasses, zipFile) {
 
 export async function runSingleImporter(importerClass, zipFile) {
     const facebookAccount = new FacebookAccount();
-    const result = await runImporter(
-        importerClass,
-        zipFile.enrichedData(),
-        facebookAccount
-    );
+    const result = await runImporter(importerClass, zipFile, facebookAccount);
     return { facebookAccount, result };
 }
 
