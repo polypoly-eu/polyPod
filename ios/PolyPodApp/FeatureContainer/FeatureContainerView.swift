@@ -1,14 +1,12 @@
 import SwiftUI
 import WebKit
 
-typealias FeatureError = [String: Any]
-
 struct FeatureContainerView: UIViewRepresentable {
     let feature: Feature
     @Binding var title: String
     @Binding var activeActions: [String]
     var queuedAction: (String, DispatchTime)?
-    let errorHandler: (FeatureError) -> Void
+    let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
     let pickFileHandler: (@escaping (URL?) -> Void) -> Void
 
@@ -47,10 +45,90 @@ struct FeatureContainerView: UIViewRepresentable {
     }
 }
 
+class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
+    private var feature: Feature? = nil
+    func setFeature(feature: Feature) {
+        self.feature = feature
+    }
+    
+    func mimeTypeFromExt(ext: String) -> String {
+        switch ext {
+        case "html":
+            return "text/html"
+        case "js":
+            return "application/javascript"
+        case "css":
+            return "text/css"
+        case "svg":
+            return "image/svg+xml"
+        case "json":
+            return "application/json"
+        case "woff2":
+            return "font/woff2"
+        default:
+            return "application/octet-stream"
+        }
+    }
+    
+    func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
+        guard let url = urlSchemeTask.request.url,
+            let scheme = url.scheme,
+            scheme == PolyOut.fsProtocol.lowercased() else {
+            urlSchemeTask.didFailWithError(PolyNavError.protocolError(""))
+                return
+        }
+        
+        let urlString = url.absoluteString
+        let index = urlString.index(urlString.startIndex, offsetBy: PolyOut.fsPrefix.count)
+        let file = String(urlString[index..<urlString.endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        let ext = (file as NSString).pathExtension
+                        
+        do {
+            var fileData: Data? = nil
+            if (file.starts(with: PolyOut.fsFilesRoot)) {
+                let options: [String: Any] = [:]
+                PodApi.shared.polyOut.fileRead(
+                    url: urlString,
+                    options: options,
+                    completionHandler: { data, error in
+                        fileData = data as? Data
+                    }
+                )
+            }
+            else {
+                var targetUrl = feature?.path
+                targetUrl = targetUrl?.appendingPathComponent(file)
+
+                fileData = try Data(contentsOf: targetUrl!)
+            }
+            let headers: [String : String] = [
+                "Access-Control-Allow-Origin": PolyOut.fsPrefix,
+                "Access-Control-Allow-Methods": "GET",
+                "Access-Control-Allow-Headers": "*",
+                "Content-Length": String(fileData?.count ?? 0),
+                "Content-Type": mimeTypeFromExt(ext: ext)
+            ]
+            
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP 1.0", headerFields: headers)
+            
+            // Fulfill the task.
+            urlSchemeTask.didReceive(response!)
+            urlSchemeTask.didReceive(fileData ?? Data())
+            urlSchemeTask.didFinish()
+        } catch {
+            urlSchemeTask.didFailWithError(error)
+        }
+    }
+    
+    func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
+        
+    }
+}
+
 class FeatureWebView: WKWebView {
     private let featureTitle: Binding<String>
     private let activeActions: Binding<[String]>
-    private let errorHandler: (FeatureError) -> Void
+    private let errorHandler: (String) -> Void
     private let openUrlHandler: (String) -> Void
     private let pickFileHandler: (@escaping (URL?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
@@ -59,7 +137,7 @@ class FeatureWebView: WKWebView {
         feature: Feature,
         title: Binding<String>,
         activeActions: Binding<[String]>,
-        errorHandler: @escaping (FeatureError) -> Void,
+        errorHandler: @escaping (String) -> Void,
         openUrlHandler: @escaping (String) -> Void,
         pickFileHandler: @escaping (@escaping (URL?) -> Void) -> Void
     ) {
@@ -98,7 +176,13 @@ class FeatureWebView: WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
 
+        let scheme = PolyOut.fsProtocol
+        let fileHandler = FeatureFileHandler()
+        fileHandler.setFeature(feature: feature)
+        configuration.setURLSchemeHandler(fileHandler, forURLScheme: scheme)
+
         super.init(frame: .zero, configuration: configuration)
+
         scrollView.isScrollEnabled = false
         translatesAutoresizingMaskIntoConstraints = false
         MessageName.allCases.forEach {
@@ -106,9 +190,11 @@ class FeatureWebView: WKWebView {
         }
         removeInputAccessory()
 
-        let featureUrl = feature.path
-        let featureFileUrl = featureUrl.appendingPathComponent("pod.html")
-        loadFileURL(featureFileUrl, allowingReadAccessTo: featureUrl)
+        var components = URLComponents()
+        components.scheme = scheme
+        components.path = "/pod.html"
+        components.host = ""
+        load(URLRequest(url: components.url!))
     }
 
     required init?(coder: NSCoder) {
@@ -191,7 +277,7 @@ extension FeatureWebView: WKScriptMessageHandler {
 
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            guard let body = message.body as? FeatureError else { return }
+            guard let body = message.body as? [String: Any] else { return }
 
             switch messageName {
             case .Log:
@@ -237,13 +323,10 @@ extension FeatureWebView: WKScriptMessageHandler {
         print("Message from FeatureContainer: \(text)")
     }
     
-    private func doLogError(_ error: FeatureError) {
-        // TODO: All errors are currently being logged as "Script Error".
-        //       While that is better than nothing, we apparently need to load
-        //       the feature via loadHTMLString, and set baseURL to
-        //       "http://localhost/".
-        print("Error from FeatureContainer: \(error)")
-        errorHandler(error)
+    private func doLogError(_ error: [String: Any]) {
+        let message = error["message"] as? String ?? "Unknown"
+        print("Error from FeatureContainer: \(message)")
+        errorHandler(message)
     }
 }
 

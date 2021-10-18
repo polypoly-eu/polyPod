@@ -10,23 +10,28 @@ import java.nio.ByteBuffer
 open class PolyOut(
     val context: Context
 ) {
-    private val fsPrefix = "polypod://"
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
 
     companion object {
-        private val fsPrefix = "polypod://"
+        val fsDomain = "polypod-assets.local"
+        val fsPrefix = "https://$fsDomain/"
+        val fsFilesRoot = "FeatureFiles"
 
         fun filesPath(context: Context) =
             context.filesDir.absolutePath + "/featureFiles"
 
         fun idToPath(id: String, context: Context): String {
             if (Preferences.currentFeatureName == null) {
-                throw Error("Cannot execute without a feature")
+                throw Exception("Cannot execute without a feature")
             }
-            val pureId = id.removePrefix(
-                fsPrefix
-            ).removePrefix(Preferences.currentFeatureName!!).removePrefix("/")
+            val currentFeatureName = Preferences.currentFeatureName!!
+            val pureId = id
+                // Previous polyPod builds used polypod:// URLs for files
+                .removePrefix("polypod://")
+                .removePrefix(fsPrefix)
+                .removePrefix("$fsFilesRoot/")
+                .removePrefix("$currentFeatureName/")
 
             return filesPath(context) + "/" + Preferences.currentFeatureName +
                 "/" + pureId
@@ -39,11 +44,11 @@ open class PolyOut(
         ).path
     }
 
-    open suspend fun readFile(
+    open fun readFile(
         id: String
     ): ByteArray {
         if (id == "") {
-            throw Error("Empty path in PolyOut.readFile")
+            throw Exception("Empty path in PolyOut.readFile")
         }
 
         ZipTools.getEncryptedFile(context, idToPath(id, context)).let {
@@ -71,14 +76,19 @@ open class PolyOut(
             return statCache.get(id)!!
         }
         val file = File(idToPath(id, context))
+        if (!file.exists())
+            throw Exception("stat: No such file '$id'")
+
         if (file.isDirectory()) {
             result["size"] = FileUtils.sizeOfDirectory(file).toString()
         } else {
             result["size"] = file.length().toString()
         }
         result["name"] = fs.get(id) ?: file.name
-        result["time"] = file.lastModified().toString()
-        result["id"] = id
+        result["time"] = (file.lastModified() / 1000).toString()
+        result["id"] = id.removePrefix(fsPrefix).removePrefix(
+            fsFilesRoot
+        ).trimStart('/')
         statCache[id] = result
         return result
     }
@@ -96,7 +106,9 @@ open class PolyOut(
         }
         val retList = mutableListOf<String>()
         File(idToPath(id, context)).walkTopDown().forEach {
-            retList.add(pathToId(it, context))
+            retList.add(
+                "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
+            )
         }
         readdirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
