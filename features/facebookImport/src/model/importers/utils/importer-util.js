@@ -11,22 +11,26 @@ async function relevantZipEntries(zipFile) {
     );
 }
 
-async function readJSONFile(dataFileName, zipFile, zipId = null) {
-    const fullEntryName = zipId ? `${zipId}/${dataFileName}` : dataFileName;
+async function readJSONFile(dataFileName, zipFile, zipId) {
+    const fullEntryName = `${zipId}/${dataFileName}`;
+    return readFullPathJSONFile(fullEntryName, zipFile);
+}
+
+async function readFullPathJSONFile(fullEntryName, zipFile) {
     const entries = await zipFile.getEntries();
     const dataZipEntry = entries.find((entryName) =>
         entryName.endsWith(fullEntryName)
     );
 
     if (!dataZipEntry) {
-        throw new MissingFileImportException(dataFileName);
+        throw new MissingFileImportException(fullEntryName);
     }
 
     const rawContent = await zipFile.getContent(dataZipEntry);
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
-        throw new MissingContentImportException(dataFileName);
+        throw new MissingContentImportException(fullEntryName);
     }
 
     return JSON.parse(fileContent, (key, value) => {
@@ -127,6 +131,7 @@ function sliceIntoChunks(array, chunkSize) {
 
 export {
     readJSONFile,
+    readFullPathJSONFile,
     readJSONDataObject,
     readJSONDataArray,
     anonymizeJsonEntityPath,

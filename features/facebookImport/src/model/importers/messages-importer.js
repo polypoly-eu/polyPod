@@ -1,7 +1,7 @@
 import { MissingMessagesFilesException } from "./utils/failed-import-exception.js";
 import { createErrorResult, IMPORT_SUCCESS } from "./utils/importer-status.js";
 import {
-    readJSONFile,
+    readFullPathJSONFile,
     relevantZipEntries,
     removeEntryPrefix,
     sliceIntoChunks,
@@ -21,7 +21,7 @@ export default class MessagesImporter {
     }
 
     async _readJSONFileWithStatus(messageFile, zipFile) {
-        return readJSONFile(messageFile, zipFile)
+        return readFullPathJSONFile(messageFile, zipFile)
             .then((data) => {
                 return { status: IMPORT_SUCCESS, messageFile, data };
             })
