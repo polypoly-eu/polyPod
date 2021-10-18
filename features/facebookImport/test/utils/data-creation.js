@@ -7,5 +7,5 @@ export function createMockedZip(datasets) {
 }
 
 export function zipWithWrongDatasetKey(filePath) {
-    return createMockedZip([filePath, []]);
+    return createMockedZip([[filePath, { wrong_key: [] }]]);
 }
