@@ -34,24 +34,26 @@ describe("Off-Facebook events analysis from empty account", () => {
     });
 });
 
-describe("Off-Facebook events analysis from account with data", () => {
+describe("Off-Facebook events analysis from account with no purchaces", () => {
+    const expectedCompaniesCount = 1;
+    const offFacebookCompanies = [
+        {
+            name: "CompanyX",
+            events: [
+                {
+                    id: 1234868903343911,
+                    type: "PAGE_VIEW",
+                    timestamp: 1620541680,
+                },
+            ],
+        },
+    ];
     let analysis = null;
     let status = null;
 
     beforeAll(async () => {
         let facebookAccount = new FacebookAccount();
-        facebookAccount.offFacebookCompanies = [
-            {
-                name: "CompanyX",
-                events: [
-                    {
-                        id: 1234868903343911,
-                        type: "PAGE_VIEW",
-                        timestamp: 1620541680,
-                    },
-                ],
-            },
-        ];
+        facebookAccount.offFacebookCompanies = offFacebookCompanies;
         ({ analysis, status } = await runAnalysisForAccount(
             OffFacebookEventsAnalysis,
             facebookAccount
@@ -67,7 +69,7 @@ describe("Off-Facebook events analysis from account with data", () => {
     });
 
     it("has correct companies count", async () => {
-        expect(analysis._companiesCount).toBe(1);
+        expect(analysis._companiesCount).toBe(expectedCompaniesCount);
     });
 
     it("has correct purchases Count", async () => {
