@@ -16,8 +16,7 @@
     "test": "npm run test:browser && npm run test:node",
     "test:browser": "karma start",
     "test:node": "ts-mocha src/tests/{node,universal}/**.test.ts",
-    "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
+    "docs": "typedoc"
   },
   "dependencies": {
     "@polypoly-eu/bubblewrap": "file:../bubblewrap",
