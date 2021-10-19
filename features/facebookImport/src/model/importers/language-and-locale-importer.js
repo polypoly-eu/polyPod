@@ -62,7 +62,7 @@ export default class LanguageAndLocaleImporter {
         };
     }
 
-    async import(zipFile, facebookAccount) {
+    async import({ zipFile, facebookAccount }) {
         const languageData = await this.readLanguageData(zipFile);
         facebookAccount.preferredLanguage =
             this.extractPreferredLanguge(languageData);

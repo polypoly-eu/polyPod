@@ -52,7 +52,7 @@ export async function runImporter(
 ) {
     const importer = new importerClass();
     return importer
-        .import(zipFile, facebookAccount, pod)
+        .import({ zipFile, facebookAccount, pod })
         .then(
             (status) =>
                 status || {

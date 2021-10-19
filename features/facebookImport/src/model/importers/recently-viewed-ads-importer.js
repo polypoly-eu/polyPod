@@ -111,7 +111,7 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
         });
     }
 
-    async import(zipFile, facebookAccount) {
+    async import({ zipFile, facebookAccount }) {
         const rawData = await this._readRecentlyViewedData(
             zipFile,
             facebookAccount

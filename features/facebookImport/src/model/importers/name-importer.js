@@ -7,7 +7,7 @@ export default class NameImporter {
         return readJSONDataObject(fileName, "profile_v2", zipFile);
     }
 
-    async import(zipFile, facebookAccount) {
+    async import({ zipFile, facebookAccount }) {
         const profileData = await this._readLanguageData(zipFile);
         facebookAccount.name = profileData.name.full_name;
     }

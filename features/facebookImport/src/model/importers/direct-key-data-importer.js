@@ -7,7 +7,7 @@ export default class DirectKeyDataImporter {
         this._dataStorageKey = dataStorageKey;
     }
 
-    async import(zipFile, facebookAccount) {
+    async import({ zipFile, facebookAccount }) {
         facebookAccount[this._dataStorageKey] = await readJSONDataArray(
             this._dataFileName,
             this._dataKey,
