@@ -23,8 +23,8 @@ private func calculateFileSize(_ path: String) throws -> Int64 {
         return attributes[.size] as! Int64
     }
     var totalSize: Int64 = 0
-    let dirEnumerator = FileManager.default.enumerator(atPath: path)
-    while let file = dirEnumerator?.nextObject() as? String {
+    let contents = try FileManager.default.contentsOfDirectory(atPath: path)
+    for file in contents {
         totalSize += try calculateFileSize("\(path)/\(file)")
     }
     return totalSize
