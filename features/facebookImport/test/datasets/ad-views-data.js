@@ -1,5 +1,7 @@
+import { RECENTLY_VIEWED_DATA_KEY } from "../../src/model/importers/recently-viewed-ads-importer";
+
 export function wrapViewsData(data) {
-    return { recently_viewed: data };
+    return { [RECENTLY_VIEWED_DATA_KEY]: data };
 }
 
 export const RECENTLY_VIEWED_LOCALE = {
@@ -179,6 +181,22 @@ export function creatAdViewsWithCompanyWithUnicodeCharactersData() {
 }
 
 export function createEnglishDatasetWithMissingAdsCategory() {
+    const languageData = RECENTLY_VIEWED_LOCALE["en"];
+    return wrapViewsData([
+        {
+            name: languageData.watched.categoryName,
+            description: languageData.watched.categoryDescription,
+            children: [],
+        },
+        {
+            name: languageData.post.categoryName,
+            description: languageData.post.categoryDescription,
+            entries: [],
+        },
+    ]);
+}
+
+export function createEnglishDatasetWithEmptyAdsCategory() {
     const languageData = RECENTLY_VIEWED_LOCALE["en"];
     return wrapViewsData([
         {

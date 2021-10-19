@@ -17,9 +17,8 @@
 
 .overview h3,
 h4 {
-    font-weight: 600;
-    line-height: 29px;
-    margin: 4px 0px;
+    font-weight: 500;
+    margin: 0px 0px 10px;
 }
 
 .overview h3 {
@@ -37,10 +36,15 @@ h4 {
 
 .overview .details h1 {
     font-size: 20px;
+    margin: 4px 0px !important;
 }
 
 .overview .details p {
     font-size: 14px;
+}
+
+.overview .details .size {
+    color: var(--color-gray-400);
 }
 
 .overview .details .separator {
@@ -48,7 +52,7 @@ h4 {
     height: 1px;
     box-sizing: border-box;
     background-color: var(--color-gray-400);
-    margin: 12px 0px;
+    margin: 20px 0px 16px;
 }
 
 .overview .imported-files {
@@ -56,17 +60,29 @@ h4 {
     height: 100%;
 }
 
+.overview .imported-files .align-illustration {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 4px;
+}
+
+.overview .imported-files .align-illustration h4 {
+    padding-left: 12px;
+}
+
 .overview .imported-files .file-list {
     margin-bottom: 250px;
 }
 
 .overview .imported-files .file-list .file-button {
-    font-size: 14px;
-    line-height: 200%;
+    font-size: 12px;
     letter-spacing: -0.01em;
+    border-top: 1px var(--color-gray-700) solid;
+    padding-top: 6px;
+    margin-top: 6px;
     overflow-wrap: break-word;
-    color: var(--color-gray-50);
-    font-family: "Jost*";
+    color: var(--color-gray-400);
+    font-family: "Jost";
     font-style: normal;
     font-weight: normal;
 }
