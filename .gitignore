@@ -12,3 +12,9 @@ node_modules/
 
 # (possibly private) data
 .data
+
+# VS Code local config for debugging
+launch.json
+
+# Andoid specific local config
+local.properties
