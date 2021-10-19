@@ -27,7 +27,6 @@ const Overview = () => {
         );
 
     const getFormattedTime = (time) => {
-        // 'time' is a string with milliseconds from January 1st 1970
         let t = new Date(1970, 0, 1);
         t.setUTCSeconds(+time);
 

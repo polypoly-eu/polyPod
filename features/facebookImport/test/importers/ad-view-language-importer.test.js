@@ -4,9 +4,9 @@ import {
     createDanishAdViewsData,
     createEnglishAdViewsData,
     createGermanAdViewsData,
-} from "./datasets/ad-views-data";
-import { runAdsImportForDataset } from "./utils/data-importing";
-import { expectImportSuccess } from "./utils/importer-assertions";
+} from "../datasets/ad-views-data";
+import { runAdsImportForDataset } from "../utils/data-importing";
+import { expectImportSuccess } from "../utils/importer-assertions";
 
 const datasets = [
     ["English", createEnglishAdViewsData()],

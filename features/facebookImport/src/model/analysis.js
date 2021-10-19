@@ -156,7 +156,7 @@ class UnrecognizedData {
     }
 }
 
-async function runAnalysis(analysisClass, enrichedData) {
+export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
 
     return subAnalysis
