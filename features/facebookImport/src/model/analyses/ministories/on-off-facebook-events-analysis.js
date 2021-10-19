@@ -5,9 +5,9 @@ import RootAnalysis from "./root-analysis.js";
 import i18n from "../../../i18n.js";
 
 import {
-    OffFacebookMiniStorySummary,
-    OffFacebookMiniStoryDetails,
-} from "../../../components/offFacebookMiniStory/offFacebookMiniStory.jsx";
+    OnOffFacebookMiniStorySummary,
+    OnOffFacebookMiniStoryDetails,
+} from "../../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
 
 const secondsPerDay = 86400;
 
@@ -24,7 +24,7 @@ function generate90DaysObject() {
     );
 }
 
-export default class OffFacebookEventsAnalysis extends RootAnalysis {
+export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     get label() {
         return RootAnalysis.Labels.NONE;
     }

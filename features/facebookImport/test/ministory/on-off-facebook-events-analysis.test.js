@@ -1,4 +1,4 @@
-import OffFacebookEventsAnalysis from "../../src/model/analyses/ministories/off-facebook-events-analysis";
+import OnOffFacebookEventsAnalysis from "../../src/model/analyses/ministories/off-facebook-events-analysis";
 import FacebookAccount from "../../src/model/entities/facebook-account";
 import {
     DATASET_EXPECTED_VALUES,
@@ -20,7 +20,7 @@ describe("Off-Facebook events analysis from empty account", () => {
     beforeAll(async () => {
         const facebookAccount = new FacebookAccount();
         ({ analysis, status } = await runAnalysisForAccount(
-            OffFacebookEventsAnalysis,
+            OnOffFacebookEventsAnalysis,
             facebookAccount
         ));
     });
@@ -55,7 +55,7 @@ describe("Off-Facebook events analysis from account with no purchaces", () => {
         let facebookAccount = new FacebookAccount();
         facebookAccount.offFacebookCompanies = offFacebookCompanies;
         ({ analysis, status } = await runAnalysisForAccount(
-            OffFacebookEventsAnalysis,
+            OnOffFacebookEventsAnalysis,
             facebookAccount
         ));
     });
@@ -84,7 +84,7 @@ describe("Off-Facebook events analysis from export data", () => {
     beforeAll(async () => {
         const zipFile = zipFileWithOffFacebookEvents();
         ({ analysis, status } = await runAnalysisForExport(
-            OffFacebookEventsAnalysis,
+            OnOffFacebookEventsAnalysis,
             zipFile
         ));
     });

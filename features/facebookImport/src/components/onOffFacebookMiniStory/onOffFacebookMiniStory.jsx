@@ -2,7 +2,7 @@ import React from "react";
 import { MirroredBarChart } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n";
 
-import "./offFacebookMiniStory.css";
+import "./onOffFacebookMiniStory.css";
 
 const legend = (
     <div className="legend">
@@ -24,7 +24,7 @@ const legend = (
     </div>
 );
 
-export const OffFacebookMiniStorySummary = ({
+export const OnOffFacebookMiniStorySummary = ({
     companiesCount,
     purchasesCount,
 }) => {
@@ -46,7 +46,7 @@ export const OffFacebookMiniStorySummary = ({
     );
 };
 
-export const OffFacebookMiniStoryDetails = ({ displayData }) => {
+export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
     return (
         <div className="off-facebook-events-ministory-details">
             <p>{i18n.t("offFacebookEventsMiniStory:details.text.1")}</p>
