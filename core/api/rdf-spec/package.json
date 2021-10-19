@@ -13,12 +13,8 @@
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "lint": "npm run eslint",
-    "test": "npm run test:jest && npm run test:mocha && npm run test:jasmine",
-    "test:jest": "jest",
-    "test:mocha": "ts-mocha src/tests/**.test.ts",
-    "test:jasmine": "ts-node node_modules/.bin/jasmine --config=jasmine.json",
-    "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
+    "test": "jest",
+    "docs": "typedoc"
   },
   "dependencies": {
     "chai": "^4.2.0",
@@ -35,17 +31,12 @@
     "@types/n3": "^1.10.3",
     "@types/node": "^14.17.9",
     "@types/rdfjs__dataset": "^1.0.4",
-    "chokidar-cli": "^2.1.0",
     "eslint": "^7.18.0",
-    "jasmine": "^3.6.4",
     "jest": "^27.0.6",
-    "mocha": "^8.2.1",
     "n3": "^1.8.0",
     "rdf-data-factory": "^1.0.4",
     "rollup": "^2.56.2",
     "ts-jest": "^27.0.4",
-    "ts-mocha": "^8.0.0",
-    "ts-node": "^9.1.1",
     "typedoc": "^0.21.5",
     "typescript": "^4.0.5"
   },
