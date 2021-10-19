@@ -151,4 +151,52 @@ extension PolyOut {
         }
         completionHandler(Array(fileStore.keys), nil)
     }
+    
+    func importArchive(url: String, completionHandler: @escaping (String?) -> Void) {
+        guard let url = URL(string: url) else {
+            completionHandler(nil)
+            return
+        }
+        
+        do {
+            let featureFilesPath = PolyOut.featureFilesPath()
+            if !FileManager.default.fileExists(atPath: featureFilesPath.path) {
+                try FileManager.default.createDirectory(at: featureFilesPath, withIntermediateDirectories: true)
+            }
+            
+            let newId = UUID().uuidString
+            let targetUrl = featureFilesPath.appendingPathComponent(newId)
+            try Zip.unzipFile(url, destination: targetUrl, overwrite: true, password: nil)
+            try FileManager.default.removeItem(at: url)
+            
+            let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + newId
+            var fileStore = UserDefaults.standard.value(
+                forKey: PolyOut.fsKey
+            ) as? [String:String?] ?? [:]
+            fileStore[newUrl] = url.lastPathComponent
+            UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
+            
+            completionHandler(newUrl)
+        }
+        catch {
+            print("importArchive for '\(url)' failed: \(error)")
+            completionHandler(nil)
+        }
+    }
+    
+    func removeArchive(fileId: String, completionHandler: (Error?) -> Void) {
+        var fileStore = UserDefaults.standard.value(
+            forKey: PolyOut.fsKey
+        ) as? [String:String?] ?? [:]
+        do {
+            if (fileStore[fileId] != nil) {
+                try FileManager.default.removeItem(atPath: fileStore[fileId]!!)
+            }
+        }
+        catch {
+        }
+        fileStore.removeValue(forKey: fileId)
+        UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
+        completionHandler(nil)
+    }
 }
