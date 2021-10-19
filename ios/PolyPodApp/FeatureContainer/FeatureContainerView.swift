@@ -1,14 +1,12 @@
 import SwiftUI
 import WebKit
 
-typealias FeatureError = [String: Any]
-
 struct FeatureContainerView: UIViewRepresentable {
     let feature: Feature
     @Binding var title: String
     @Binding var activeActions: [String]
     var queuedAction: (String, DispatchTime)?
-    let errorHandler: (FeatureError) -> Void
+    let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
     let pickFileHandler: (@escaping (URL?) -> Void) -> Void
 
@@ -130,7 +128,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
 class FeatureWebView: WKWebView {
     private let featureTitle: Binding<String>
     private let activeActions: Binding<[String]>
-    private let errorHandler: (FeatureError) -> Void
+    private let errorHandler: (String) -> Void
     private let openUrlHandler: (String) -> Void
     private let pickFileHandler: (@escaping (URL?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
@@ -139,7 +137,7 @@ class FeatureWebView: WKWebView {
         feature: Feature,
         title: Binding<String>,
         activeActions: Binding<[String]>,
-        errorHandler: @escaping (FeatureError) -> Void,
+        errorHandler: @escaping (String) -> Void,
         openUrlHandler: @escaping (String) -> Void,
         pickFileHandler: @escaping (@escaping (URL?) -> Void) -> Void
     ) {
@@ -279,7 +277,7 @@ extension FeatureWebView: WKScriptMessageHandler {
 
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            guard let body = message.body as? FeatureError else { return }
+            guard let body = message.body as? [String: Any] else { return }
 
             switch messageName {
             case .Log:
@@ -325,13 +323,10 @@ extension FeatureWebView: WKScriptMessageHandler {
         print("Message from FeatureContainer: \(text)")
     }
     
-    private func doLogError(_ error: FeatureError) {
-        // TODO: All errors are currently being logged as "Script Error".
-        //       While that is better than nothing, we apparently need to load
-        //       the feature via loadHTMLString, and set baseURL to
-        //       "http://localhost/".
-        print("Error from FeatureContainer: \(error)")
-        errorHandler(error)
+    private func doLogError(_ error: [String: Any]) {
+        let message = error["message"] as? String ?? "Unknown"
+        print("Error from FeatureContainer: \(message)")
+        errorHandler(message)
     }
 }
 

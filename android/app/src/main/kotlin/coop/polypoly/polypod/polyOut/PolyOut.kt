@@ -23,7 +23,7 @@ open class PolyOut(
 
         fun idToPath(id: String, context: Context): String {
             if (Preferences.currentFeatureName == null) {
-                throw Error("Cannot execute without a feature")
+                throw Exception("Cannot execute without a feature")
             }
             val currentFeatureName = Preferences.currentFeatureName!!
             val pureId = id
@@ -48,7 +48,7 @@ open class PolyOut(
         id: String
     ): ByteArray {
         if (id == "") {
-            throw Error("Empty path in PolyOut.readFile")
+            throw Exception("Empty path in PolyOut.readFile")
         }
 
         ZipTools.getEncryptedFile(context, idToPath(id, context)).let {
@@ -76,13 +76,16 @@ open class PolyOut(
             return statCache.get(id)!!
         }
         val file = File(idToPath(id, context))
+        if (!file.exists())
+            throw Exception("stat: No such file '$id'")
+
         if (file.isDirectory()) {
             result["size"] = FileUtils.sizeOfDirectory(file).toString()
         } else {
             result["size"] = file.length().toString()
         }
         result["name"] = fs.get(id) ?: file.name
-        result["time"] = file.lastModified().toString()
+        result["time"] = (file.lastModified() / 1000).toString()
         result["id"] = id.removePrefix(fsPrefix).removePrefix(
             fsFilesRoot
         ).trimStart('/')

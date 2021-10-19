@@ -72,10 +72,11 @@ extension PolyOut {
                 let fileStore = UserDefaults.standard.value(
                     forKey: PolyOut.fsKey
                 ) as? [String:String?] ?? [:]
+                let time = attributes[.modificationDate] as! Date
                 completionHandler(FileStats(
                     isDirectory: isDir.boolValue,
                     size: attributes[.size] as! Int64,
-                    time: format.string(from: attributes[.creationDate] as! Date),
+                    time: "\(Int(floor(time.timeIntervalSince1970)))",
                     name: fileStore[url] as? String ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
                     id: PolyOut.idFromUrl(url: url) ?? ""
                 ), nil)
