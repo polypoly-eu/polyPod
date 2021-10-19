@@ -1,13 +1,17 @@
 import { IMPORT_WARNING } from "./utils/importer-status.js";
 import DirectKeyDataImporter from "./direct-key-data-importer.js";
 
+export const OFF_FACEBOOK_EVENTS_FILE_PATH =
+    "apps_and_websites_off_of_facebook/your_off-facebook_activity.json";
+export const OFF_FACEBOOK_EVENTS_DATA_KEY = "off_facebook_activity_v2";
+
 const OffFacebookEventFields = ["id", "type", "timestamp"];
 
 export default class OffFacebookEventsImporter extends DirectKeyDataImporter {
     constructor() {
         super(
-            "apps_and_websites_off_of_facebook/your_off-facebook_activity.json",
-            "off_facebook_activity_v2",
+            OFF_FACEBOOK_EVENTS_FILE_PATH,
+            OFF_FACEBOOK_EVENTS_DATA_KEY,
             "offFacebookCompanies"
         );
     }

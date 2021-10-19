@@ -56,7 +56,7 @@ class PolyNavTests: XCTestCase {
         let delegateStub = PolyNavDelegateStub()
         delegateStub.importFileResult = testZipFilePath
         polyNav.delegate = delegateStub
-        expectImportFileResult("polyPod://")
+        expectImportFileResult("polypod://")
     }
     
     func testImportFileReturnsNullIfUserCancelled() {

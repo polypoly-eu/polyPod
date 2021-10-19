@@ -232,8 +232,15 @@ export class RemoteClientPod implements Pod {
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
             readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
-                if (options === undefined) return rpcClient.polyOut().readFile(path)();
-                else return rpcClient.polyOut().readFile(path, options)();
+                if (options) return rpcClient.polyOut().readFile(path, options)();
+                else if (typeof fetch === "undefined") return rpcClient.polyOut().readFile(path)();
+                else
+                    return new Promise<Uint8Array>((resolve, reject) => {
+                        fetch(path)
+                            .then((res) => res.arrayBuffer())
+                            .then((arrBuf) => resolve(new Uint8Array(arrBuf)))
+                            .catch((err) => reject(err));
+                    });
             }
 
             readdir(path: string): Promise<string[]> {

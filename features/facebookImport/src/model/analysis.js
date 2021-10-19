@@ -42,6 +42,7 @@ import ActivitiesAnalysis from "./analyses/ministories/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/ministories/advertising-value-analysis.js";
 import AboutPicturesDataAnalysis from "./analyses/ministories/about-pictures-data-analysis.js";
 import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
+import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-facebook-advertisers-analysis.js";
 
 const subAnalyses = [
     DataStructureBubblesAnalysis,
@@ -72,6 +73,7 @@ const subAnalyses = [
     SesssionActivityLocationsAnalysis,
     ImportedJsonFilesAnalysis,
     AdViewsAnalysis,
+    OnOffFacebookAdvertisersAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
@@ -154,7 +156,7 @@ class UnrecognizedData {
     }
 }
 
-async function runAnalysis(analysisClass, enrichedData) {
+export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
 
     return subAnalysis
