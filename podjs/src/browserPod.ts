@@ -243,7 +243,7 @@ class BrowserNetwork implements Network {
                     resolve(`Unexpected response status: ${status}`);
                     return;
                 }
-                resolve();
+                resolve(void);
             };
 
             request.onerror = function () {
