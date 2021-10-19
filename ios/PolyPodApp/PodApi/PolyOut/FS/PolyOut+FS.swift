@@ -17,6 +17,19 @@ extension PolyOutError: LocalizedError {
     }
 }
 
+private func calculateFileSize(_ path: String) throws -> Int64 {
+    let attributes = try FileManager.default.attributesOfItem(atPath: path)
+    if attributes[.type] as! FileAttributeType != .typeDirectory {
+        return attributes[.size] as! Int64
+    }
+    var totalSize: Int64 = 0
+    let contents = try FileManager.default.contentsOfDirectory(atPath: path)
+    for file in contents {
+        totalSize += try calculateFileSize("\(path)/\(file)")
+    }
+    return totalSize
+}
+
 var readDirCache = Dictionary<String, [String]>()
 
 extension PolyOut {
@@ -75,7 +88,7 @@ extension PolyOut {
                 let time = attributes[.modificationDate] as! Date
                 completionHandler(FileStats(
                     isDirectory: isDir.boolValue,
-                    size: attributes[.size] as! Int64,
+                    size: try calculateFileSize(filePath.path),
                     time: "\(Int(floor(time.timeIntervalSince1970)))",
                     name: fileStore[url] as? String ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
                     id: PolyOut.idFromUrl(url: url) ?? ""
