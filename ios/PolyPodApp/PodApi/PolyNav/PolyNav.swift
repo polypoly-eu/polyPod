@@ -57,14 +57,21 @@ class PolyNav: PolyNavProtocol {
             }
             
             do {
-                let featureFilesPath = PolyOut.featureFilesPath()
-                if !FileManager.default.fileExists(atPath: featureFilesPath.path) {
-                    try FileManager.default.createDirectory(at: featureFilesPath, withIntermediateDirectories: true)
-                }
-                
                 let newId = UUID().uuidString
-                let targetUrl = featureFilesPath.appendingPathComponent(newId)
-                try Zip.unzipFile(url, destination: targetUrl, overwrite: true, password: nil)
+                let targetUrl = PolyOut.urlFromId(id: newId)
+                let baseUrl = targetUrl.deletingLastPathComponent()
+                if !FileManager.default.fileExists(atPath: baseUrl.path) {
+                    try FileManager.default.createDirectory(
+                        at: baseUrl,
+                        withIntermediateDirectories: true
+                    )
+                }
+                try Zip.unzipFile(
+                    url,
+                    destination: targetUrl,
+                    overwrite: true,
+                    password: nil
+                )
                 try FileManager.default.removeItem(at: url)
                 
                 let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + newId
@@ -84,19 +91,19 @@ class PolyNav: PolyNavProtocol {
     }
     
     func removeFile(fileId: String, completionHandler: (Error?) -> Void) {
-        var fileStore = UserDefaults.standard.value(
-            forKey: PolyOut.fsKey
-        ) as? [String:String?] ?? [:]
         do {
-            if (fileStore[fileId] != nil) {
-                try FileManager.default.removeItem(atPath: fileStore[fileId]!!)
+            let path = PolyOut.pathFromId(id: fileId).path
+            if FileManager.default.fileExists(atPath: path) {
+                try FileManager.default.removeItem(atPath: path)
             }
         }
         catch {
         }
-        fileStore.removeValue(forKey: fileId)
+        var fileStore = UserDefaults.standard.value(
+            forKey: PolyOut.fsKey
+        ) as? [String:String?] ?? [:]
+        fileStore.removeValue(forKey: PolyOut.urlFromId(id: fileId).path)
         UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
         completionHandler(nil)
-        
     }
 }
