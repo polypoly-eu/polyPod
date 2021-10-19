@@ -169,6 +169,7 @@ export async function runAnalysis(analysisClass, enrichedData) {
             };
         })
         .catch((error) => {
+            console.log(error);
             return {
                 analysis: subAnalysis,
                 status: createErrorStatus(analysisClass, error),
