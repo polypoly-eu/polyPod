@@ -50,6 +50,8 @@ open class PodApi(
                     "writeFile" -> return handlePolyOutWriteFile(args)
                     "stat" -> return handlePolyOutStat(args)
                     "readdir" -> return handlePolyOutReadDir(args)
+                    "importArchive" -> return handlePolyOutImportArchive(args)
+                    "removeArchive" -> return handlePolyOutRemoveArchive(args)
                 }
             }
             "polyIn" -> {
@@ -67,8 +69,7 @@ open class PodApi(
                         return handlePolyNavSetActiveActions(args)
                     "setTitle" -> return handlePolyNavSetTitle(args)
                     "openUrl" -> return handlePolyNavOpenUrl(args)
-                    "importFile" -> return handlePolyNavImportFile()
-                    "removeFile" -> return handlePolyNavRemoveFile(args)
+                    "pickFile" -> return handlePolyNavPickFile()
                 }
             }
             "info" -> {
@@ -136,6 +137,22 @@ open class PodApi(
         return ValueFactory.newArray(result.map { ValueFactory.newString(it) })
     }
 
+    private suspend fun handlePolyOutImportArchive(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyOut.importArchive")
+        val url = args[0].asStringValue().toString()
+        polyOut.importArchive(url)?.let {
+            return ValueFactory.newString(it.path.toString())
+        }
+        return ValueFactory.newNil()
+    }
+
+    private suspend fun handlePolyOutRemoveArchive(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyOut.removeArchive")
+        val fileId = args[0].asStringValue().toString()
+        polyOut.removeArchive(fileId)
+        return ValueFactory.newNil()
+    }
+
     private suspend fun handlePolyInAdd(args: List<Value>): Value {
         logger.debug("dispatch() -> polyIn.add")
         val quads = args.map { Quad.codec.decode(it) }
@@ -186,18 +203,11 @@ open class PodApi(
         return ValueFactory.newNil()
     }
 
-    private suspend fun handlePolyNavImportFile(): Value {
-        logger.debug("dispatch() -> polyNav.importFile")
-        polyNav.importFile()?.let {
-            return ValueFactory.newString(it.path.toString())
+    private suspend fun handlePolyNavPickFile(): Value {
+        logger.debug("dispatch() -> polyNav.pickFile")
+        polyNav.pickFile()?.let {
+            return ValueFactory.newString(it.toString())
         }
-        return ValueFactory.newNil()
-    }
-
-    private suspend fun handlePolyNavRemoveFile(args: List<Value>): Value {
-        logger.debug("dispatch() -> polyNav.removeFile")
-        val fileId = args[0].asStringValue().toString()
-        polyNav.removeFile(fileId)
         return ValueFactory.newNil()
     }
 
