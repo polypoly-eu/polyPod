@@ -33,7 +33,6 @@
     "@types/node": "^14.14.21",
     "@types/node-fetch": "^2.5.8",
     "@types/rdfjs__dataset": "^1.0.4",
-    "@typescript-eslint/eslint-plugin": "^4.1.0",
     "body-parser": "^1.19.0",
     "fast-check": "^2.11.0",
     "prettier": "^2.2.1",
