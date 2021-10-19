@@ -21,9 +21,7 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        external: [
-            "@polypoly-eu/rdf",
-        ],
+        external: ["@polypoly-eu/rdf", "@zip.js/zip.js"],
     },
     {
         input: "src/pod.ts",
