@@ -26,7 +26,7 @@ protocol PolyNavDelegate {
     func doHandleSetTitle(title: String)
     func doHandleSetActiveActions(actions: [String])
     func doHandleOpenUrl(url: String)
-    func doHandleImportFile(completion: @escaping (URL?) -> Void)
+    func doHandlePickFile(completion: @escaping (URL?) -> Void)
 }
 
 class PolyNav: PolyNavProtocol {
@@ -49,7 +49,7 @@ class PolyNav: PolyNavProtocol {
     }
     
     func pickFile(completionHandler: @escaping (String?) -> Void) {
-        delegate?.doHandleImportFile { url in
+        delegate?.doHandlePickFile { url in
             completionHandler(url?.absoluteString)
         }
     }
