@@ -1,5 +1,6 @@
 import React from "react";
 import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-events-matching.js";
+import { daysBetween } from "../utils/on-off-facebook-data-restructuring.js";
 
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../../i18n.js";
@@ -8,12 +9,6 @@ import {
     OnOffFacebookMiniStorySummary,
     OnOffFacebookMiniStoryDetails,
 } from "../../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
-
-const secondsPerDay = 86400;
-
-function daysBetween(timestampA, timestampB) {
-    return Math.abs(Math.round((timestampA - timestampB) / secondsPerDay));
-}
 
 function generate90DaysObject() {
     return Object.fromEntries(
@@ -119,7 +114,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
 
     renderSummary() {
         return (
-            <OffFacebookMiniStorySummary
+            <OnOffFacebookMiniStorySummary
                 companiesCount={this._companiesCount}
                 purchasesCount={this._purchasesCount}
             />
@@ -127,6 +122,8 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     }
 
     renderDetails() {
-        return <OffFacebookMiniStoryDetails displayData={this._displayData} />;
+        return (
+            <OnOffFacebookMiniStoryDetails displayData={this._displayData} />
+        );
     }
 }
