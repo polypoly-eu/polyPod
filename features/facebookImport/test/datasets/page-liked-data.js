@@ -5,15 +5,15 @@ import {
 import { createMockedZip } from "../utils/data-creation";
 
 export const DATASET_EXPECTED_VALUES = {
-    totalLikedPagesCount: 4,
+    totalEventsCount: 4,
 };
 
-export function wrapFriendsData(data) {
+export function wrapLikedPagesData(data) {
     return { [LIKED_PAGES_DATA_KEY]: data };
 }
 
 export function createLikedPagesDataset() {
-    return wrapFriendsData([
+    return wrapLikedPagesData([
         {
             name: "Company One",
             timestamp: 1620186694,
@@ -37,4 +37,11 @@ export function zipFileWithLikedPages() {
     return createMockedZip([
         [LIKED_PAGES_FILE_PATH, createLikedPagesDataset()],
     ]);
+}
+
+export function zipFileWithLikedPagesAndExpectedValues() {
+    return {
+        zipFile: zipFileWithLikedPages(),
+        expectedValues: DATASET_EXPECTED_VALUES,
+    };
 }
