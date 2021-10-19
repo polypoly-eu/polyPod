@@ -1,4 +1,4 @@
-import OnOffFacebookEventsAnalysis from "../../src/model/analyses/ministories/off-facebook-events-analysis";
+import OnOffFacebookEventsAnalysis from "../../src/model/analyses/ministories/on-off-facebook-events-analysis";
 import FacebookAccount from "../../src/model/entities/facebook-account";
 import {
     DATASET_EXPECTED_VALUES,
@@ -12,6 +12,11 @@ import {
     expectActiveAnalysis,
     expectAnalysisSuccessStatus,
 } from "../utils/analysis-assertions";
+import {
+    daysBetween,
+    generate90DaysObject,
+} from "../../src/model/analyses/utils/on-off-facebook-data-restructuring";
+import { toUnixTimestamp } from "../../src/model/importers/utils/timestamps";
 
 describe("Off-Facebook events analysis from empty account", () => {
     let analysis = null;
@@ -105,5 +110,28 @@ describe("Off-Facebook events analysis from export data", () => {
 
     it("has correct purchases Count", async () => {
         expect(analysis._purchasesCount).toBe(1);
+    });
+});
+
+describe("On-Off facebook data restructuring", () => {
+    it("calculates the correct number of days between two timestamps", async () => {
+        expect(
+            daysBetween(
+                toUnixTimestamp("30 August 2021 16:55:00 GMT+00:00"),
+                toUnixTimestamp("28 August 2021 16:55:00 GMT+00:00")
+            )
+        ).toBe(2);
+        expect(
+            daysBetween(
+                toUnixTimestamp("30 August 2021 16:55:00 GMT+00:00"),
+                toUnixTimestamp("30 August 2021 16:55:00 GMT+00:00")
+            )
+        ).toBe(0);
+    });
+    it("creates an empty 90-days object to be filled with on and off facebook event values", async () => {
+        const ninetyDaysObj = generate90DaysObject();
+        //Last ninety days includes day 0 (today) -> 91
+        expect(ninetyDaysObj.length).toBe(91);
+        expect(ninetyDaysObj[0]).toStrictEqual({ on: 0, off: 0 });
     });
 });

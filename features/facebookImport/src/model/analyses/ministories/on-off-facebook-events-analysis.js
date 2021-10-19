@@ -1,6 +1,9 @@
 import React from "react";
 import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-events-matching.js";
-import { daysBetween } from "../utils/on-off-facebook-data-restructuring.js";
+import {
+    daysBetween,
+    generate90DaysObject,
+} from "../utils/on-off-facebook-data-restructuring.js";
 
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../../i18n.js";
@@ -9,15 +12,6 @@ import {
     OnOffFacebookMiniStorySummary,
     OnOffFacebookMiniStoryDetails,
 } from "../../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
-
-function generate90DaysObject() {
-    return Object.fromEntries(
-        Array.from({ length: 91 }, (_, i) => i).map((e) => [
-            e,
-            { on: 0, off: 0 },
-        ])
-    );
-}
 
 export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     get label() {
@@ -102,11 +96,9 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
 
             this._displayData = {};
             Object.keys(displayData).forEach((key) => {
-                this._displayData[key] = Object.entries(displayData[key]).map(
-                    (e) => {
-                        return { key: e[0], lower: e[1].on, upper: e[1].off };
-                    }
-                );
+                this._displayData[key] = displayData[key].map((e, i) => {
+                    return { key: i, lower: e.on, upper: e.off };
+                });
             });
         }
         this.active = this._companiesCount > 0;
