@@ -17,12 +17,8 @@
     "@polypoly-eu/fetch-spec": "file:../core/api/fetch-spec",
     "@polypoly-eu/pod-api": "file:../core/api/pod-api",
     "@polypoly-eu/rdf": "file:../core/api/rdf",
-    "@polypoly-eu/rdf-convert": "file:../core/api/rdf-convert",
-    "@types/rdf-js": "^4.0.0",
-    "@zip.js/zip.js": "2.3.7",
-    "fp-ts": "^2.8.2",
-    "io-ts": "2.2.10",
-    "memfs": "^3.2.0"
+    "@types/rdf-js": "^4.0.2",
+    "@zip.js/zip.js": "2.3.7"
   },
   "devDependencies": {
     "@polypoly-eu/rdf-spec": "file:../core/api/rdf-spec",
