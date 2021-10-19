@@ -1,5 +1,5 @@
 import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../../src/model/importers/off-facebook-events-importer";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { createMockedZip } from "../utils/data-creation";
 
 export const DATASET_EXPECTED_VALUES = {
     totalCompaniesCount: 2,
@@ -49,10 +49,7 @@ export function createOffFacebookEventsSimpleData() {
 }
 
 export function zipFileWithOffFacebookEvents() {
-    let zipFile = new ZipFileMock();
-    zipFile.addJsonEntry(
-        OFF_FACEBOOK_EVENTS_FILE_PATH,
-        createOffFacebookEventsSimpleData()
-    );
-    return zipFile;
+    return createMockedZip([
+        [OFF_FACEBOOK_EVENTS_FILE_PATH, createOffFacebookEventsSimpleData()],
+    ]);
 }
