@@ -158,6 +158,11 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     data={constantTabData.barData}
                     barColor={"white"}
                 />
+                <p className="below-chart">
+                    {activeTab.id == "total"
+                        ? "Years since you joined Facebook"
+                        : selectedYear}
+                </p>
             </div>
             <InfoButton route="/report/details/activities-info" />
             <p className="source">
