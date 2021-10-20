@@ -5,7 +5,7 @@ export function daysBetween(timestampA, timestampB) {
 }
 
 export function generate90DaysObject() {
-    return Array.from({ length: 91 }, (_, i) => i).map((e) => {
+    return Array.from({ length: 91 }, (_, i) => i).map(() => {
         return { on: 0, off: 0 };
     });
 }
