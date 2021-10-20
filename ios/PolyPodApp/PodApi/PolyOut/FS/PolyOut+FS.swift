@@ -51,7 +51,7 @@ extension PolyOut {
         return id != nil ? featureFilesPath().appendingPathComponent(id!) : nil
     }
     
-    private static func pathFromId(id: String) -> URL {
+    static func pathFromId(id: String) -> URL {
         return featureFilesPath().appendingPathComponent(id)
     }
     
@@ -67,6 +67,10 @@ extension PolyOut {
             .trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         
         return id.removingPercentEncoding
+    }
+    
+    static func urlFromId(id: String) -> URL {
+        return featureFilesPath().appendingPathComponent(id)
     }
     
     func stat(url: String, completionHandler: @escaping (FileStats?, Error?) -> Void) {
@@ -162,6 +166,16 @@ extension PolyOut {
             completionHandler(entries, nil)
             return
         }
-        completionHandler(Array(fileStore.keys), nil)
+        
+        // Under certain circumstances, fileStore contained files that don't
+        // actually exist - for now we just ignore them in readdir, but it
+        // might be smarter to clean fileStore automatically at some point.
+        let storedFiles = fileStore.keys.filter { key in
+            guard let path = PolyOut.pathFromUrl(url: key)?.path else {
+                return false
+            }
+            return FileManager.default.fileExists(atPath: path)
+        }
+        completionHandler(Array(storedFiles), nil)
     }
 }
