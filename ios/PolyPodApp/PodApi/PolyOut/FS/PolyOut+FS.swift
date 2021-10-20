@@ -166,6 +166,10 @@ extension PolyOut {
             completionHandler(entries, nil)
             return
         }
+        
+        // Under certain circumstances, fileStore contained files that don't
+        // actually exist - for now we just ignore them in readdir, but it
+        // might be smarter to clean fileStore automatically at some point.
         let storedFiles = fileStore.keys.filter { key in
             guard let path = PolyOut.pathFromUrl(url: key)?.path else {
                 return false
