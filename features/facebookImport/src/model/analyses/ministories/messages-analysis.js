@@ -73,6 +73,7 @@ export default class MessagesAnalysis extends RootAnalysis {
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
         for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
+            //TO DO: Get also the rest of relevant font properties (font-weight, font-family, kerning).
             context.font = `${fontSize}px Jost`;
             if (context.measureText(text).width <= maxWidth) return fontSize;
         }
