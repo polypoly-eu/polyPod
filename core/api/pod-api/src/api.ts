@@ -7,7 +7,7 @@
 
 import * as RDF from "rdf-js";
 import type { Fetch } from "@polypoly-eu/fetch-spec";
-import { ExternalFile, FS } from "./fs";
+import { FS } from "./fs";
 
 /**
  * A _matcher_ specifies a filter for querying the Pod store.
@@ -137,8 +137,9 @@ export interface PolyNav {
     setTitle(title: string): Promise<void>;
     /**
      * Ask the user to pick a file
+     * @return a string representation of a URL or path to the selected file, or `null` if the user cancelled.
      */
-    pickFile(): Promise<ExternalFile | null>;
+    pickFile(): Promise<string | null>;
 }
 
 /**

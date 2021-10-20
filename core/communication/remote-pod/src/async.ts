@@ -5,7 +5,6 @@ import {
     PolyIn,
     PolyNav,
     EncodingOptions,
-    ExternalFile,
     Matcher,
     Network,
     Stats,
@@ -38,8 +37,8 @@ class AsyncPolyOut implements PolyOut {
         return (await this.promise).readdir(path);
     }
 
-    async importArchive(file: ExternalFile): Promise<string> {
-        return (await this.promise).importArchive(file);
+    async importArchive(url: string): Promise<string> {
+        return (await this.promise).importArchive(url);
     }
 
     async removeArchive(fileId: string): Promise<void> {
@@ -86,7 +85,7 @@ class AsyncPolyNav implements PolyNav {
         return (await this.promise).setTitle(title);
     }
 
-    async pickFile(): Promise<ExternalFile | null> {
+    async pickFile(): Promise<string | null> {
         return (await this.promise).pickFile();
     }
 }

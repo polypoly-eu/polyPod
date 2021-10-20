@@ -1,6 +1,5 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
-    ExternalFile,
     Info,
     Matcher,
     Network,
@@ -72,6 +71,29 @@ class LocalStoragePolyIn implements PolyIn {
     async has(...quads: RDF.Quad[]): Promise<boolean> {
         throw "Not implemented: has";
     }
+}
+
+// Since pickFile and importArchive work with local URLs that have the actual
+// archive file name as their last component, and since the current BrowserPod
+// implementation works with data URLs which don't, we employ a little workaround.
+class FileUrl {
+    private static readonly separator = "|";
+
+    static fromUrl(url: string): FileUrl {
+        const [data, fileName] = url.split(FileUrl.separator);
+        return new FileUrl(url, data, fileName);
+    }
+
+    static fromParts(data: string, fileName: string): FileUrl {
+        const url = data + FileUrl.separator + fileName;
+        return new FileUrl(url, data, fileName);
+    }
+
+    constructor(
+        readonly url: string,
+        readonly data: string,
+        readonly fileName: string
+    ) {}
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -215,7 +237,7 @@ class LocalStoragePolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
-    async importArchive(file: ExternalFile): Promise<string> {
+    async importArchive(url: string): Promise<string> {
         return new Promise((resolve) => {
             const filesInDir = new Map(
                 JSON.parse(
@@ -224,10 +246,10 @@ class LocalStoragePolyOut implements PolyOut {
             );
 
             const fileId = "polypod://" + createUUID();
-            const dataUrl = file.data;
+            const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
             filesInDir.set(fileId, {
                 id: fileId,
-                name: file.name,
+                name: fileName,
                 time: new Date().toISOString(),
                 size: dataUrl.length,
             });
@@ -354,7 +376,7 @@ class BrowserPolyNav implements PolyNav {
         document.title = title;
     }
 
-    async pickFile(): Promise<ExternalFile | null> {
+    async pickFile(): Promise<string | null> {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
             fileInput.setAttribute("type", "file");
@@ -368,10 +390,7 @@ class BrowserPolyNav implements PolyNav {
                 const reader = new FileReader();
                 reader.onload = async function () {
                     const dataUrl = this.result as string;
-                    resolve({
-                        name: selectedFile.name,
-                        data: dataUrl,
-                    });
+                    resolve(FileUrl.fromParts(dataUrl, selectedFile.name).url);
                 };
                 reader.readAsDataURL(selectedFile);
             });
