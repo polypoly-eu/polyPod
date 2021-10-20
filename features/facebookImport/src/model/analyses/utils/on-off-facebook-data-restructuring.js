@@ -11,37 +11,74 @@ export function generate90DaysObject() {
 }
 
 export function selectMeaningfulCompanies(allCompanies) {
-    const selectedCompanies = [];
-    if (allCompanies.length > 0) {
-        //Most events in total
-        allCompanies.sort(
-            (a, b) =>
-                a.onFacebookTimestamps.length +
-                a.offFacebookTimestamps.length -
-                b.onFacebookTimestamps.length -
-                b.offFacebookTimestamps.length
-        );
-        selectedCompanies.push(allCompanies.pop());
+    if (allCompanies.length < 1) return [];
+    const inititializingName = "$init$";
+    const emptyInitialCompany = {
+        name: inititializingName,
+        onFacebookTimestamps: [],
+        offFacebookTimestamps: [],
+    };
+    //Company with the:
+    let mostEventsTotal = emptyInitialCompany;
+    let highestDifferenceOnOff = emptyInitialCompany;
+    let highestDifferenceOffOn = emptyInitialCompany;
 
-        //More on than off
-        allCompanies.sort(
-            (a, b) =>
-                a.onFacebookTimestamps.length -
-                a.offFacebookTimestamps.length -
-                (b.onFacebookTimestamps.length - b.offFacebookTimestamps.length)
-        );
-        selectedCompanies.push(allCompanies.pop());
+    const on = (company) => company.onFacebookTimestamps.length;
+    const off = (company) => company.offFacebookTimestamps.length;
 
-        //More off than on
-        allCompanies.sort(
-            (a, b) =>
-                a.offFacebookTimestamps.length -
-                a.onFacebookTimestamps.length -
-                (b.offFacebookTimestamps.length - b.onFacebookTimestamps.length)
+    function isNameInUse(name) {
+        return (
+            mostEventsTotal.name == name ||
+            highestDifferenceOnOff.name == name ||
+            highestDifferenceOffOn.name == name
         );
-        selectedCompanies.push(allCompanies.pop());
     }
-    return selectedCompanies;
+
+    for (let company of allCompanies) {
+        if (!isNameInUse(company.name)) {
+            if (
+                on(company) + off(company) >
+                on(mostEventsTotal) + off(mostEventsTotal)
+            ) {
+                mostEventsTotal = company;
+                continue;
+            }
+            if (
+                on(company) - off(company) >
+                on(highestDifferenceOnOff) - off(highestDifferenceOnOff)
+            ) {
+                highestDifferenceOnOff = company;
+                continue;
+            }
+            if (
+                off(company) - on(company) >
+                off(highestDifferenceOffOn) - on(highestDifferenceOffOn)
+            ) {
+                highestDifferenceOffOn = company;
+                continue;
+            }
+        }
+    }
+    //Check if none is init, and if so use first unused company with most events in total
+    [mostEventsTotal, highestDifferenceOnOff, highestDifferenceOffOn].forEach(
+        (e) => {
+            if (e.name == inititializingName) {
+                let secondHighest = emptyInitialCompany;
+                for (let company of allCompanies) {
+                    if (!isNameInUse(company.name)) {
+                        if (
+                            on(company) + off(company) >
+                            on(secondHighest) + off(secondHighest)
+                        ) {
+                            secondHighest = company;
+                        }
+                    }
+                }
+            }
+        }
+    );
+
+    return [mostEventsTotal, highestDifferenceOnOff, highestDifferenceOffOn];
 }
 
 function getIntoChartStructure(displayData) {
