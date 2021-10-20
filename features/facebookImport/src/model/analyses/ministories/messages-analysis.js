@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import i18n from "../../../i18n";
 import RootAnalysis from "./root-analysis";
 import InfoButton from "../../../components/buttons/infoButton/infoButton.jsx";
@@ -80,14 +80,14 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        const [width, setWidth] = useState(0);
-        const refWidth = useRef(null);
+        const refWidth = useRef(0);
 
-        useEffect(() => {
-            setWidth(refWidth.current.clientWidth);
-        }, []);
+        console.log(refWidth.current.clientWidth);
 
-        const fontSize = this._calculateFontSize(this._messagesCount, width);
+        const fontSize = this._calculateFontSize(
+            this._messagesCount,
+            refWidth.current.clientWidth
+        );
 
         return (
             <>
