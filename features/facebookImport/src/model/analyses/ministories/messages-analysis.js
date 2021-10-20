@@ -72,8 +72,8 @@ export default class MessagesAnalysis extends RootAnalysis {
         const maxFontSize = 80;
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
-        context.font = `${maxFontSize}px Jost`;
         for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
+            context.font = `${fontSize}px Jost`;
             if (context.measureText(text).width <= maxWidth) return fontSize;
         }
         return minFontSize;
@@ -81,8 +81,6 @@ export default class MessagesAnalysis extends RootAnalysis {
 
     renderSummary() {
         const refWidth = useRef(0);
-
-        console.log(refWidth.current.clientWidth);
 
         const fontSize = this._calculateFontSize(
             this._messagesCount,
