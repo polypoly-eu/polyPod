@@ -1,8 +1,10 @@
 import React from "react";
 import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-events-matching.js";
 import {
+    buildDisplayData,
     daysBetween,
     generate90DaysObject,
+    selectInterestingCompanies,
 } from "../utils/on-off-facebook-data-restructuring.js";
 
 import RootAnalysis from "./root-analysis.js";
@@ -39,68 +41,12 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
                 consolidatedAdvertiser.last90DaysSummary(max)
         );
 
-        const displayData = {};
+        const selectedCompanies = selectInterestingCompanies(
+            this._commonAdvertisersData
+        );
 
-        const allCompanies = this._commonAdvertisersData;
-        const selectedCompanies = [];
+        this._displayData = buildDisplayData(selectedCompanies);
 
-        if (allCompanies.length > 0) {
-            //Most events in total
-            allCompanies.sort(
-                (a, b) =>
-                    a.onFacebookTimestamps.length +
-                    a.offFacebookTimestamps.length -
-                    b.onFacebookTimestamps.length -
-                    b.offFacebookTimestamps.length
-            );
-            selectedCompanies.push(allCompanies.pop());
-
-            //More on than off
-            allCompanies.sort(
-                (a, b) =>
-                    a.onFacebookTimestamps.length -
-                    a.offFacebookTimestamps.length -
-                    (b.onFacebookTimestamps.length -
-                        b.offFacebookTimestamps.length)
-            );
-            selectedCompanies.push(allCompanies.pop());
-
-            //More off than on
-            allCompanies.sort(
-                (a, b) =>
-                    a.offFacebookTimestamps.length -
-                    a.onFacebookTimestamps.length -
-                    (b.offFacebookTimestamps.length -
-                        b.onFacebookTimestamps.length)
-            );
-            selectedCompanies.push(allCompanies.pop());
-            if (selectedCompanies)
-                selectedCompanies.forEach((company) => {
-                    displayData[company.name] = generate90DaysObject();
-                    for (let offTimestamp of company.offFacebookTimestamps)
-                        displayData[company.name][
-                            daysBetween(
-                                facebookAccount.offFacebookEventsLatestTimestamp,
-                                offTimestamp
-                            )
-                        ].off++;
-
-                    for (let onTimestamp of company.onFacebookTimestamps)
-                        displayData[company.name][
-                            daysBetween(
-                                facebookAccount.offFacebookEventsLatestTimestamp,
-                                onTimestamp
-                            )
-                        ].on++;
-                });
-
-            this._displayData = {};
-            Object.keys(displayData).forEach((key) => {
-                this._displayData[key] = displayData[key].map((e, i) => {
-                    return { key: i, lower: e.on, upper: e.off };
-                });
-            });
-        }
         this.active = this._companiesCount > 0;
     }
 
