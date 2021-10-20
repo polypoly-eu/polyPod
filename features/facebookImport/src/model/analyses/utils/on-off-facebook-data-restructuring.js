@@ -59,26 +59,33 @@ export function selectMeaningfulCompanies(allCompanies) {
             }
         }
     }
+
     //Check if none is init, and if so use first unused company with most events in total
-    [mostEventsTotal, highestDifferenceOnOff, highestDifferenceOffOn].forEach(
-        (e) => {
-            if (e.name == inititializingName) {
-                let secondHighest = emptyInitialCompany;
-                for (let company of allCompanies) {
-                    if (!isNameInUse(company.name)) {
-                        if (
-                            on(company) + off(company) >
-                            on(secondHighest) + off(secondHighest)
-                        ) {
-                            secondHighest = company;
-                        }
+    const selectedCompanies = [
+        mostEventsTotal,
+        highestDifferenceOnOff,
+        highestDifferenceOffOn,
+    ];
+    selectedCompanies.forEach((e, i) => {
+        if (e.name == inititializingName) {
+            let secondHighest = emptyInitialCompany;
+            for (let company of allCompanies) {
+                if (!isNameInUse(company.name)) {
+                    if (
+                        on(company) + off(company) >
+                        on(secondHighest) + off(secondHighest)
+                    ) {
+                        secondHighest = company;
                     }
                 }
             }
+            console.log(e, secondHighest);
+            selectedCompanies[i] = secondHighest;
+            console.log(e);
         }
-    );
+    });
 
-    return [mostEventsTotal, highestDifferenceOnOff, highestDifferenceOffOn];
+    return selectedCompanies;
 }
 
 function getIntoChartStructure(displayData) {
