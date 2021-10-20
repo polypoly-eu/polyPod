@@ -1,7 +1,6 @@
 import { toUnixTimestamp } from "../../src/model/importers/utils/timestamps";
 
 export function createMappedOnOffEventsData() {
-    const aTimestamp = toUnixTimestamp("30 August 2021 16:55:00 GMT+00:00");
     return [
         {
             name: "Ernser LLC",
