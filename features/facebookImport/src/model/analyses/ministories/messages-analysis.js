@@ -67,16 +67,14 @@ export default class MessagesAnalysis extends RootAnalysis {
         });
     }
 
-    _measureText(text, fontSize) {
+    _calculateFontSize(text, maxWidth) {
+        const minFontSize = 10;
+        const maxFontSize = 80;
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
-        context.font = `${fontSize}px Jost`;
-        return context.measureText(text).width;
-    }
-
-    _calculateFontSize(text, maxWidth, minFontSize, maxFontSize) {
+        context.font = `${maxFontSize}px Jost`;
         for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
-            if (this._measureText(text, fontSize) <= maxWidth) return fontSize;
+            if (context.measureText(text).width <= maxWidth) return fontSize;
         }
         return minFontSize;
     }
@@ -84,19 +82,12 @@ export default class MessagesAnalysis extends RootAnalysis {
     renderSummary() {
         const [width, setWidth] = useState(0);
         const refWidth = useRef(null);
-        const minFontSize = 10;
-        const maxFontSize = 80;
 
         useEffect(() => {
             setWidth(refWidth.current.clientWidth);
         }, []);
 
-        const fontSize = this._calculateFontSize(
-            this._messagesCount,
-            width,
-            minFontSize,
-            maxFontSize
-        );
+        const fontSize = this._calculateFontSize(this._messagesCount, width);
 
         return (
             <>
