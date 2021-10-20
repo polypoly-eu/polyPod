@@ -358,6 +358,7 @@ class BrowserPolyNav implements PolyNav {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
             fileInput.setAttribute("type", "file");
+            fileInput.setAttribute("accept", ".zip");
             fileInput.addEventListener("change", function () {
                 const selectedFile = this.files?.[0];
                 if (!selectedFile) {
