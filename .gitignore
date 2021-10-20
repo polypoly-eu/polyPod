@@ -14,7 +14,7 @@ node_modules/
 .data
 
 # VS Code local config for debugging
-launch.json
+.vscode/launch.json
 
 # Andoid specific local config
-local.properties
+android/app/local.properties
