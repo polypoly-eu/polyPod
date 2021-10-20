@@ -10,8 +10,8 @@ export function generate90DaysObject() {
     });
 }
 
-export function selectInterestingCompanies(allCompanies) {
-    selectedCompanies = [];
+export function selectMeaningfulCompanies(allCompanies) {
+    const selectedCompanies = [];
     if (allCompanies.length > 0) {
         //Most events in total
         allCompanies.sort(
@@ -54,24 +54,21 @@ function getIntoChartStructure(displayData) {
     return restructuredDisplayData;
 }
 
-export function buildDisplayData(selectedCompanies) {
+export function buildDisplayData(
+    selectedCompanies,
+    offFacebookEventsLatestTimestamp
+) {
     const displayData = {};
     selectedCompanies.forEach((company) => {
         displayData[company.name] = generate90DaysObject();
         for (let offTimestamp of company.offFacebookTimestamps)
             displayData[company.name][
-                daysBetween(
-                    facebookAccount.offFacebookEventsLatestTimestamp,
-                    offTimestamp
-                )
+                daysBetween(offFacebookEventsLatestTimestamp, offTimestamp)
             ].off++;
 
         for (let onTimestamp of company.onFacebookTimestamps)
             displayData[company.name][
-                daysBetween(
-                    facebookAccount.offFacebookEventsLatestTimestamp,
-                    onTimestamp
-                )
+                daysBetween(offFacebookEventsLatestTimestamp, onTimestamp)
             ].on++;
     });
 

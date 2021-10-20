@@ -2,9 +2,7 @@ import React from "react";
 import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-events-matching.js";
 import {
     buildDisplayData,
-    daysBetween,
-    generate90DaysObject,
-    selectInterestingCompanies,
+    selectMeaningfulCompanies,
 } from "../utils/on-off-facebook-data-restructuring.js";
 
 import RootAnalysis from "./root-analysis.js";
@@ -41,11 +39,14 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
                 consolidatedAdvertiser.last90DaysSummary(max)
         );
 
-        const selectedCompanies = selectInterestingCompanies(
+        const selectedCompanies = selectMeaningfulCompanies(
             this._commonAdvertisersData
         );
 
-        this._displayData = buildDisplayData(selectedCompanies);
+        this._displayData = buildDisplayData(
+            selectedCompanies,
+            facebookAccount.offFacebookEventsLatestTimestamp
+        );
 
         this.active = this._companiesCount > 0;
     }

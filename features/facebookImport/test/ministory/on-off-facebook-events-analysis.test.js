@@ -13,10 +13,13 @@ import {
     expectAnalysisSuccessStatus,
 } from "../utils/analysis-assertions";
 import {
+    buildDisplayData,
     daysBetween,
     generate90DaysObject,
+    selectMeaningfulCompanies,
 } from "../../src/model/analyses/utils/on-off-facebook-data-restructuring";
 import { toUnixTimestamp } from "../../src/model/importers/utils/timestamps";
+import { createMappedOnOffEventsData } from "../datasets/on-off-facebook-events-data";
 
 describe("Off-Facebook events analysis from empty account", () => {
     let analysis = null;
@@ -114,6 +117,10 @@ describe("Off-Facebook events analysis from export data", () => {
 });
 
 describe("On-Off facebook data restructuring", () => {
+    const mappedOnOffCompanyTestData = createMappedOnOffEventsData();
+    const selectedCompanies = selectMeaningfulCompanies(
+        mappedOnOffCompanyTestData
+    );
     it("calculates the correct number of days between two timestamps", async () => {
         expect(
             daysBetween(
@@ -128,10 +135,29 @@ describe("On-Off facebook data restructuring", () => {
             )
         ).toBe(0);
     });
+
     it("creates an empty 90-days object to be filled with on and off facebook event values", async () => {
         const ninetyDaysObj = generate90DaysObject();
         //Last ninety days includes day 0 (today) -> 91
         expect(ninetyDaysObj.length).toBe(91);
         expect(ninetyDaysObj[0]).toStrictEqual({ on: 0, off: 0 });
+    });
+
+    it("selects the correct companies", async () => {
+        expect(selectedCompanies[0].name).toBe("Schaden LLC");
+        expect(selectedCompanies[1].name).toBe("Ova-Cronin");
+        expect(selectedCompanies[2].name).toBe("Bailey Murphy and Stokes");
+    });
+
+    it("builds the correct display object structure", async () => {
+        const displayData = buildDisplayData(
+            selectedCompanies,
+            toUnixTimestamp("31 August 2021 16:55:00 GMT+00:00")
+        );
+        expect(displayData["Schaden LLC"].map((e) => e.key)).toStrictEqual(
+            Array.from({ length: 91 }, (_, i) => i)
+        );
+        expect(displayData["Schaden LLC"][1].upper).toBe(7);
+        expect(displayData["Schaden LLC"][1].lower).toBe(7);
     });
 });
