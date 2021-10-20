@@ -79,9 +79,7 @@ export function selectMeaningfulCompanies(allCompanies) {
                     }
                 }
             }
-            console.log(e, secondHighest);
             selectedCompanies[i] = secondHighest;
-            console.log(e);
         }
     });
 
