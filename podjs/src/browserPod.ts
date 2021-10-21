@@ -384,7 +384,10 @@ class BrowserPolyNav implements PolyNav {
             fileInput.addEventListener("change", function () {
                 const selectedFile = this.files?.[0];
                 if (!selectedFile) {
-                    resolve(null);
+                    // The change listener doesn't seem to be invoked when the
+                    // user cancels the file dialog, but if, for some reason,
+                    // there is no file anyway, we treat it like cancel.
+                    resolve();
                     return;
                 }
 
@@ -395,6 +398,20 @@ class BrowserPolyNav implements PolyNav {
                 };
                 reader.readAsDataURL(selectedFile);
             });
+
+            // This is quite the workaround - but the best approach we could
+            // find so far to react to the user cancelling the native file
+            // picking dialog. It would be more robust to add an additional,
+            // non-native popup where the user can select a file using the
+            // native mechanism - that way we wouldn't need to react directly to
+            // them interacting with the native dialog.
+            window.addEventListener("focus", function focusListener() {
+                this.removeEventListener("focus", focusListener);
+                setTimeout(() => {
+                    if (!fileInput.files?.[0]) resolve();
+                }, 1000);
+            });
+
             fileInput.click();
         });
     }
