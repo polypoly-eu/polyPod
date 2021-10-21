@@ -137,9 +137,10 @@ export interface PolyNav {
     setTitle(title: string): Promise<void>;
     /**
      * Ask the user to pick a file
+     * @param type A MIME-type
      * @return a string representation of a URL or path to the selected file, or `null` if the user cancelled.
      */
-    pickFile(): Promise<string | null>;
+    pickFile(type?: string): Promise<string | null>;
 }
 
 /**
