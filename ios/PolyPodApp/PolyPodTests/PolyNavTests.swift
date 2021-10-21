@@ -6,7 +6,7 @@ private class PolyNavDelegateStub: PolyNavDelegate {
     func doHandleOpenUrl(url: String) {
     }
     
-    func doHandlePickFile(completion: @escaping (URL?) -> Void) {
+    func doHandlePickFile(type: String?, completion: @escaping (URL?) -> Void) {
         completion(pickFileResult)
     }
     
