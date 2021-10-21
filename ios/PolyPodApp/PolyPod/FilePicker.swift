@@ -3,7 +3,6 @@ import UIKit
 class FilePicker: NSObject, UIDocumentPickerDelegate {
     private var currentCompletion: ((URL?) -> Void)?
     
-    // only .zip is supported right now
     func mimeToUti(_ mime: String?) -> String {
         guard let mime = mime else { return "public.item" }
         if mime == "application/zip" { return "com.pkware.zip-archive" }
