@@ -178,4 +178,60 @@ extension PolyOut {
         }
         completionHandler(Array(storedFiles), nil)
     }
+    
+    func importArchive(url: String, completionHandler: @escaping (String?) -> Void) {
+        guard let url = URL(string: url) else {
+            completionHandler(nil)
+            return
+        }
+        
+        do {
+            let newId = UUID().uuidString
+            let targetUrl = PolyOut.urlFromId(id: newId)
+            let baseUrl = targetUrl.deletingLastPathComponent()
+            if !FileManager.default.fileExists(atPath: baseUrl.path) {
+                try FileManager.default.createDirectory(
+                    at: baseUrl,
+                    withIntermediateDirectories: true
+                )
+            }
+            try Zip.unzipFile(
+                url,
+                destination: targetUrl,
+                overwrite: true,
+                password: nil
+            )
+            try FileManager.default.removeItem(at: url)
+            
+            let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + newId
+            var fileStore = UserDefaults.standard.value(
+                forKey: PolyOut.fsKey
+            ) as? [String:String?] ?? [:]
+            fileStore[newUrl] = url.lastPathComponent
+            UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
+            
+            completionHandler(newUrl)
+        }
+        catch {
+            print("importArchive for '\(url)' failed: \(error)")
+            completionHandler(nil)
+        }
+    }
+    
+    func removeArchive(fileId: String, completionHandler: (Error?) -> Void) {
+        do {
+            let path = PolyOut.pathFromId(id: fileId).path
+            if FileManager.default.fileExists(atPath: path) {
+                try FileManager.default.removeItem(atPath: path)
+            }
+        }
+        catch {
+        }
+        var fileStore = UserDefaults.standard.value(
+            forKey: PolyOut.fsKey
+        ) as? [String:String?] ?? [:]
+        fileStore.removeValue(forKey: PolyOut.urlFromId(id: fileId).path)
+        UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
+        completionHandler(nil)
+    }
 }

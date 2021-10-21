@@ -73,6 +73,29 @@ class LocalStoragePolyIn implements PolyIn {
     }
 }
 
+// Since pickFile and importArchive work with local URLs that have the actual
+// archive file name as their last component, and since the current BrowserPod
+// implementation works with data URLs which don't, we employ a little workaround.
+class FileUrl {
+    private static readonly separator = "|";
+
+    static fromUrl(url: string): FileUrl {
+        const [data, fileName] = url.split(FileUrl.separator);
+        return new FileUrl(url, data, fileName);
+    }
+
+    static fromParts(data: string, fileName: string): FileUrl {
+        const url = data + FileUrl.separator + fileName;
+        return new FileUrl(url, data, fileName);
+    }
+
+    constructor(
+        readonly url: string,
+        readonly data: string,
+        readonly fileName: string
+    ) {}
+}
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 class LocalStoragePolyOut implements PolyOut {
     fetch(input: string, init?: RequestInit): Promise<Response> {
@@ -213,6 +236,48 @@ class LocalStoragePolyOut implements PolyOut {
     ): Promise<void> {
         throw "Not implemented: writeFile";
     }
+
+    async importArchive(url: string): Promise<string> {
+        return new Promise((resolve) => {
+            const filesInDir = new Map(
+                JSON.parse(
+                    localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
+                )
+            );
+
+            const fileId = "polypod://" + createUUID();
+            const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
+            filesInDir.set(fileId, {
+                id: fileId,
+                name: fileName,
+                time: new Date().toISOString(),
+                size: dataUrl.length,
+            });
+            localStorage.setItem(
+                BrowserPolyNav.filesKey,
+                JSON.stringify(Array.from(filesInDir))
+            );
+            localStorage.setItem(fileId, dataUrl);
+            resolve(fileId);
+        });
+    }
+
+    async removeArchive(fileId: string): Promise<void> {
+        return new Promise((resolve) => {
+            const filesInDir = new Map(
+                JSON.parse(
+                    localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
+                )
+            );
+            filesInDir.delete(fileId);
+            localStorage.setItem(
+                BrowserPolyNav.filesKey,
+                JSON.stringify(Array.from(filesInDir))
+            );
+            localStorage.removeItem(fileId);
+            resolve();
+        });
+    }
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
@@ -311,7 +376,7 @@ class BrowserPolyNav implements PolyNav {
         document.title = title;
     }
 
-    async importFile(): Promise<string> {
+    async pickFile(): Promise<string | null> {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
             fileInput.setAttribute("type", "file");
@@ -329,26 +394,7 @@ class BrowserPolyNav implements PolyNav {
                 const reader = new FileReader();
                 reader.onload = async function () {
                     const dataUrl = this.result as string;
-                    const filesInDir = new Map(
-                        JSON.parse(
-                            localStorage.getItem(BrowserPolyNav.filesKey) ||
-                                "[]"
-                        )
-                    );
-
-                    const fileId = "polypod://" + createUUID();
-                    filesInDir.set(fileId, {
-                        id: fileId,
-                        name: selectedFile.name,
-                        time: new Date().toISOString(),
-                        size: dataUrl.length,
-                    });
-                    localStorage.setItem(
-                        BrowserPolyNav.filesKey,
-                        JSON.stringify(Array.from(filesInDir))
-                    );
-                    localStorage.setItem(fileId, dataUrl);
-                    resolve(dataUrl);
+                    resolve(FileUrl.fromParts(dataUrl, selectedFile.name).url);
                 };
                 reader.readAsDataURL(selectedFile);
             });
@@ -367,23 +413,6 @@ class BrowserPolyNav implements PolyNav {
             });
 
             fileInput.click();
-        });
-    }
-
-    async removeFile(fileId: string): Promise<void> {
-        return new Promise((resolve) => {
-            const filesInDir = new Map(
-                JSON.parse(
-                    localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
-                )
-            );
-            filesInDir.delete(fileId);
-            localStorage.setItem(
-                BrowserPolyNav.filesKey,
-                JSON.stringify(Array.from(filesInDir))
-            );
-            localStorage.removeItem(fileId);
-            resolve();
         });
     }
 }
