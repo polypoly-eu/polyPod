@@ -68,6 +68,7 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     _calculateFontSize(text, maxWidth) {
+        // TODO: Extract text size affecting styles from target element
         const minFontSize = 10;
         const maxFontSize = 80;
         const canvas = document.createElement("canvas");
