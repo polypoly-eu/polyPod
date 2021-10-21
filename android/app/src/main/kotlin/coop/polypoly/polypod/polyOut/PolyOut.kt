@@ -1,17 +1,25 @@
 package coop.polypoly.polypod.polyOut
 
 import android.content.Context
+import android.database.Cursor
+import android.net.Uri
+import android.provider.OpenableColumns
 import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.polyNav.ZipTools
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.nio.ByteBuffer
+import java.util.*
+import kotlin.coroutines.EmptyCoroutineContext
 
 open class PolyOut(
     val context: Context
 ) {
     private var readdirCache = mutableMapOf<String, Array<String>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
+    private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
 
     companion object {
         val fsDomain = "polypod-assets.local"
@@ -112,5 +120,45 @@ open class PolyOut(
         }
         readdirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
+    }
+
+    open suspend fun importArchive(url: String): Uri? {
+        val uri = Uri.parse(url)
+        val contentResolver = context.contentResolver
+        val cursor: Cursor? = contentResolver.query(
+            uri, null, null, null, null, null
+        )
+        var fileName = ""
+        cursor?.use {
+            if (it.moveToFirst()) {
+                fileName =
+                    it.getString(
+                        it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    )
+            }
+        }
+        coroutineScope.async {
+            contentResolver?.openInputStream(uri).use { inputStream ->
+                if (inputStream == null) {
+                    throw Error("File import error")
+                }
+                val newId = UUID.randomUUID().toString()
+                val fs = Preferences.getFileSystem(context).toMutableMap()
+                fs[fsPrefix + newId] = fileName
+                Preferences.setFileSystem(context, fs)
+                val featureName = Preferences.currentFeatureName
+                    ?: throw Error("Cannot import for unknown feature")
+                val targetPath = "$featureName/$newId"
+                ZipTools.unzipAndEncrypt(inputStream, context, targetPath)
+            }
+        }.await()
+        return null // TODO: Return the expected value
+    }
+
+    open suspend fun removeArchive(id: String) {
+        val fs = Preferences.getFileSystem(context).toMutableMap()
+        File(idToPath(id, context)).deleteRecursively()
+        fs.remove(id)
+        Preferences.setFileSystem(context, fs)
     }
 }

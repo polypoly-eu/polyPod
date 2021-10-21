@@ -19,15 +19,14 @@ protocol PolyNavProtocol {
     func setTitle(title: String, completionHandler: ([ExtendedData]?, Error?) -> Void)
     func setActiveActions(actions: [String], completionHandler: ([ExtendedData]?, Error?) -> Void)
     func openUrl(target: String, completionHandler: ([ExtendedData]?, Error?) -> Void)
-    func importFile(completionHandler: @escaping (String?) -> Void)
-    func removeFile(fileId: String, completionHandler: (Error?) -> Void)
+    func pickFile(completionHandler: @escaping (String?) -> Void)
 }
 
 protocol PolyNavDelegate {
     func doHandleSetTitle(title: String)
     func doHandleSetActiveActions(actions: [String])
     func doHandleOpenUrl(url: String)
-    func doHandleImportFile(completion: @escaping (URL?) -> Void)
+    func doHandlePickFile(completion: @escaping (URL?) -> Void)
 }
 
 class PolyNav: PolyNavProtocol {
@@ -49,61 +48,9 @@ class PolyNav: PolyNavProtocol {
         delegate?.doHandleOpenUrl(url: target)
     }
     
-    func importFile(completionHandler: @escaping (String?) -> Void) {
-        delegate?.doHandleImportFile() { url in
-            guard let url = url else {
-                completionHandler(nil)
-                return
-            }
-            
-            do {
-                let newId = UUID().uuidString
-                let targetUrl = PolyOut.urlFromId(id: newId)
-                let baseUrl = targetUrl.deletingLastPathComponent()
-                if !FileManager.default.fileExists(atPath: baseUrl.path) {
-                    try FileManager.default.createDirectory(
-                        at: baseUrl,
-                        withIntermediateDirectories: true
-                    )
-                }
-                try Zip.unzipFile(
-                    url,
-                    destination: targetUrl,
-                    overwrite: true,
-                    password: nil
-                )
-                try FileManager.default.removeItem(at: url)
-                
-                let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + newId
-                var fileStore = UserDefaults.standard.value(
-                    forKey: PolyOut.fsKey
-                ) as? [String:String?] ?? [:]
-                fileStore[newUrl] = url.lastPathComponent
-                UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
-                
-                completionHandler(newUrl)
-            }
-            catch {
-                print("importFile for '\(url)' failed: \(error)")
-                completionHandler(nil)
-            }
+    func pickFile(completionHandler: @escaping (String?) -> Void) {
+        delegate?.doHandlePickFile { url in
+            completionHandler(url?.absoluteString)
         }
-    }
-    
-    func removeFile(fileId: String, completionHandler: (Error?) -> Void) {
-        do {
-            let path = PolyOut.pathFromId(id: fileId).path
-            if FileManager.default.fileExists(atPath: path) {
-                try FileManager.default.removeItem(atPath: path)
-            }
-        }
-        catch {
-        }
-        var fileStore = UserDefaults.standard.value(
-            forKey: PolyOut.fsKey
-        ) as? [String:String?] ?? [:]
-        fileStore.removeValue(forKey: PolyOut.urlFromId(id: fileId).path)
-        UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
-        completionHandler(nil)
     }
 }

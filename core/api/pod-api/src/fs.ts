@@ -19,6 +19,7 @@ export interface Stats {
     getName(): string;
     getId(): string;
 }
+
 /**
  * A stripped-down version of the Promise-based filesystem API from Node.js.
  *
@@ -30,4 +31,6 @@ export interface FS {
     writeFile(path: string, content: string, options: EncodingOptions): Promise<void>;
     stat(path: string): Promise<Stats>;
     readdir(path: string): Promise<string[]>;
+    importArchive(url: string): Promise<string>;
+    removeArchive(fileId: string): Promise<void>;
 }
