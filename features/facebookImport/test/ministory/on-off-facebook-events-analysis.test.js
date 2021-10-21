@@ -42,7 +42,7 @@ describe("Off-Facebook events analysis from empty account", () => {
     });
 });
 
-describe("Off-Facebook events analysis from account with no purchaces", () => {
+describe("Off-Facebook events analysis from account with no purchases", () => {
     const expectedCompaniesCount = 1;
     const offFacebookCompanies = [
         {
