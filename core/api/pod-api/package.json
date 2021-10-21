@@ -19,8 +19,7 @@
     "pretest": "start-dummy-server &",
     "test": "jest",
     "posttest": "stop-dummy-server",
-    "docs": "typedoc",
-    "dev:docs": "chokidar 'src/**/*' -c 'npm run docs'"
+    "docs": "typedoc"
   },
   "dependencies": {
     "@polypoly-eu/fetch-spec": "file:../fetch-spec",
@@ -39,8 +38,6 @@
     "@types/rdfjs__dataset": "^1.0.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chokidar-cli": "^2.1.0",
-    "eslint": "^7.18.0",
     "fast-check": "^2.11.0",
     "jest": "27.2",
     "memfs": "^3.2.0",
