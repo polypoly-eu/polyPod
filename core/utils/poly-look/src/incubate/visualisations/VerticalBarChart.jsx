@@ -80,6 +80,9 @@ export const VerticalBarChart = ({
       .attr("class", "x-axis")
       .call(d3.axisBottom(xScale))
       .attr("transform", `translate(0, ${chartHeight})`);
+
+    barChart.selectAll(".domain").style("visibility", "hidden");
+    barChart.selectAll("line").style("visibility", "hidden");
   }
 
   //TODO: transition of y-axis
@@ -105,6 +108,9 @@ export const VerticalBarChart = ({
       .selectAll(".x-axis")
       .call(d3.axisBottom(xScale))
       .attr("transform", `translate(0, ${chartHeight})`);
+
+    barChart.selectAll(".domain").style("visibility", "hidden");
+    barChart.selectAll("line").style("visibility", "hidden");
   }
 
   function updateExistingBars(bars) {
