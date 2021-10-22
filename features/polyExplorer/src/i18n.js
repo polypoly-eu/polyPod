@@ -22,6 +22,7 @@ import infographicEn from "./locales/en/infographic.json";
 import storiesPreviewScreenEn from "./locales/en/storiesPreviewScreen.json";
 import clusterStoriesPreviewEn from "./locales/en/clusterStoriesPreview.json";
 import clusterMessengerStoryEn from "./locales/en/clusterMessengerStory.json";
+import barChartEn from "./locales/en/barChart.json";
 
 import commonDe from "./locales/de/common.json";
 import entityFilterScreenDe from "./locales/de/entityFilterScreen.json";
@@ -45,6 +46,7 @@ import infographicDe from "./locales/de/infographic.json";
 import storiesPreviewScreenDe from "./locales/de/storiesPreviewScreen.json";
 import clusterStoriesPreviewDe from "./locales/de/clusterStoriesPreview.json";
 import clusterMessengerStoryDe from "./locales/de/clusterMessengerStory.json";
+import barChartDe from "./locales/de/barChart.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -70,6 +72,7 @@ export default new I18n(determineLanguage(), {
         storiesPreviewScreen: storiesPreviewScreenEn,
         clusterStoriesPreview: clusterStoriesPreviewEn,
         clusterMessengerStory: clusterMessengerStoryEn,
+        barChart: barChartEn,
     },
     de: {
         common: commonDe,
@@ -94,5 +97,6 @@ export default new I18n(determineLanguage(), {
         storiesPreviewScreen: storiesPreviewScreenDe,
         clusterStoriesPreview: clusterStoriesPreviewDe,
         clusterMessengerStory: clusterMessengerStoryDe,
+        barChart: barChartDe,
     },
 });

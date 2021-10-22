@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import i18n from "../../i18n.js";
+import BarChart from "../../components/dataViz/barChart.jsx";
 import DataStory from "../../components/dataStory/dataStory.jsx";
 import LinesChart from "../../components/dataViz/linesChart.jsx";
 import { BUBBLES_SPEECH_SIZES } from "../../constants";
@@ -314,6 +316,21 @@ const ExampleStory = () => {
             .style("height", "400px");
     }, []);
 
+    const data = [
+        { title: "Example A", value: 1079999 },
+        { title: "Example B", value: 31 },
+        { title: "Example C", value: 63588 },
+        { title: "Example for a Longer Label", value: 6400000 },
+    ];
+
+    const fakeAnimationEvent = () => {
+        return true;
+    };
+
+    const purposesChartTranslation = i18n.t(
+        "clusterMessengerStory:purposes.chart.legend"
+    );
+
     return (
         <DataStory
             progressBarColor="#3BA6FF"
@@ -322,6 +339,11 @@ const ExampleStory = () => {
             marks={allMarks}
         >
             <LinesChart data={mockData}></LinesChart>
+            <BarChart
+                data={data}
+                animation={fakeAnimationEvent()}
+                legendTitle={purposesChartTranslation}
+            />
             <svg ref={svgCanvas}>
                 <OneMessagerBubblesChart
                     data={currentData}

@@ -19,5 +19,6 @@
   "overview.tab.users": "Users",
   "overview.tab.partof": "Part of",
   "overview.donut.installs.message": "Android app installs in millions",
-  "overview.donut.users.message": "Monthly active users in millions"
+  "overview.donut.users.message": "Monthly active users in millions",
+  "purposes.chart.legend": "Number of mentions"
 }
