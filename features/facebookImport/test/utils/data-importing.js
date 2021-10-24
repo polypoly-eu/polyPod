@@ -8,12 +8,14 @@ import RecentlyViewedAdsImporter, {
 import OffFacebookEventsImporter from "../../src/model/importers/off-facebook-events-importer.js";
 import { ZipFileMock } from "../mocks/zipfile-mock.js";
 import LanguageAndLocaleImporter from "../../src/model/importers/language-and-locale-importer.js";
+import FriendsImporter from "../../src/model/importers/friends-importer.js";
+import LikedPagesImporter from "../../src/model/importers/pages-liked-importer.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
     const results = await runImporters(
         importerClasses,
-        zipFile.enrichedData(),
+        zipFile,
         facebookAccount
     );
     return { facebookAccount, results };
@@ -21,11 +23,7 @@ export async function runMultipleImporters(importerClasses, zipFile) {
 
 export async function runSingleImporter(importerClass, zipFile) {
     const facebookAccount = new FacebookAccount();
-    const result = await runImporter(
-        importerClass,
-        zipFile.enrichedData(),
-        facebookAccount
-    );
+    const result = await runImporter(importerClass, zipFile, facebookAccount);
     return { facebookAccount, result };
 }
 
@@ -49,13 +47,26 @@ export async function runOffFacebookEventsImporter(zipFile) {
     return runSingleImporter(OffFacebookEventsImporter, zipFile);
 }
 
-export async function runAdsImportForDataset(dataset) {
-    const zipFile = new ZipFileMock();
-    zipFile.addJsonEntry(RECENTLY_VIEWED_FILE_PATH, dataset);
+export async function runFriendsImporter(zipFile) {
+    return runSingleImporter(FriendsImporter, zipFile);
+}
 
-    const importingResult = await runRecentlyViewedAdsImporter(zipFile);
-    const result = importingResult.result;
-    const facebookAccount = importingResult.facebookAccount;
-    const relatedAccounts = facebookAccount.relatedAccounts;
-    return { result, relatedAccounts };
+export async function runLikedPagesImporter(zipFile) {
+    return runSingleImporter(LikedPagesImporter, zipFile);
+}
+
+export async function runImportForDataset(importerClass, filePath, dataset) {
+    const zipFile = new ZipFileMock();
+    zipFile.addJsonEntry(filePath, dataset);
+
+    return await runSingleImporter(importerClass, zipFile);
+}
+
+export async function runAdsImportForDataset(dataset) {
+    const { result, facebookAccount } = await runImportForDataset(
+        RecentlyViewedAdsImporter,
+        RECENTLY_VIEWED_FILE_PATH,
+        dataset
+    );
+    return { result, relatedAccounts: facebookAccount.relatedAccounts };
 }

@@ -6,6 +6,7 @@ import {
     DATASET_EXPECTED_VALUES,
 } from "../datasets/off-facebook-events-data";
 import { ZipFileMock } from "../mocks/zipfile-mock";
+import { zipWithWrongDatasetKey } from "../utils/data-creation";
 import { runOffFacebookEventsImporter } from "../utils/data-importing";
 import {
     expectImportSuccess,
@@ -30,8 +31,7 @@ describe("Import off-facebook events from export with wrong data key", () => {
     let zipFile = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
-        zipFile.addJsonEntry(OFF_FACEBOOK_EVENTS_FILE_PATH, { wrong_key: [] });
+        zipFile = zipWithWrongDatasetKey(OFF_FACEBOOK_EVENTS_FILE_PATH);
     });
 
     it("triggers missing data key error", async () => {
