@@ -60,9 +60,10 @@ export const VerticalBarChart = ({
   }
 
   function styleAxis(barChart) {
-    barChart.selectAll(".domain").style("visibility", "hidden");
-    barChart.selectAll("line").style("visibility", "hidden");
-    barChart
+    const axis = barChart.selectAll(".axis");
+    axis.selectAll(".domain").style("visibility", "hidden");
+    axis.selectAll("line").style("visibility", "hidden");
+    axis
       .selectAll(".tick")
       .selectAll("text")
       .attr("fill", "#a9b6c6")
@@ -78,7 +79,7 @@ export const VerticalBarChart = ({
           .tickFormat((d) => d)
           .ticks(5)
       )
-      .attr("class", "y-axis")
+      .attr("class", "y-axis axis")
       .append("text")
       .attr("y", 6)
       .attr("dy", "0.71em")
@@ -87,7 +88,7 @@ export const VerticalBarChart = ({
 
     barChart
       .append("g")
-      .attr("class", "x-axis")
+      .attr("class", "x-axis axis")
       .call(d3.axisBottom(xScale))
       .attr("transform", `translate(0, ${chartHeight})`);
 
@@ -105,7 +106,7 @@ export const VerticalBarChart = ({
           .tickFormat((d) => d)
           .ticks(5)
       )
-      .attr("class", "y-axis")
+      .attr("class", "y-axis axis")
       .append("text")
       .attr("y", 6)
       .attr("dy", "0.71em")
