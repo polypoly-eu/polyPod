@@ -16,8 +16,8 @@ export default class OffFacebookEventsImporter extends DirectKeyDataImporter {
         );
     }
 
-    async import({ id, zipFile }, facebookAccount) {
-        await super.import({ id, zipFile }, facebookAccount);
+    async import({ zipFile, facebookAccount }) {
+        await super.import({ zipFile, facebookAccount });
 
         const rawData = facebookAccount.offFacebookCompanies;
         let uknonwnKeys = new Set();

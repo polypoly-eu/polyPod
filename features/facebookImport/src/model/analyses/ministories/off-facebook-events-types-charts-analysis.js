@@ -1,7 +1,7 @@
 import React from "react";
 import BarChart from "../../../components/dataViz/barChart.jsx";
 import RootAnalysis from "./root-analysis.js";
-import { groupOffFacebookEventsByType } from "../utils/off-facebook-events-utils.js";
+import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
 
 export default class OffFacebookEventsTypesChartAnalysis extends RootAnalysis {
     get title() {

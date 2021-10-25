@@ -37,12 +37,11 @@ export const LANGUAGE_AND_LOCALE_DATA_KEY = "language_and_locale_v2";
  * @class
  */
 export default class LanguageAndLocaleImporter {
-    async readLanguageData(id, zipFile) {
+    async readLanguageData(zipFile) {
         return await readJSONDataArray(
             LANGUAGE_AND_LOCALE_FILE_PATH,
             LANGUAGE_AND_LOCALE_DATA_KEY,
-            zipFile,
-            id
+            zipFile
         );
     }
 
@@ -63,8 +62,8 @@ export default class LanguageAndLocaleImporter {
         };
     }
 
-    async import({ id, zipFile }, facebookAccount) {
-        const languageData = await this.readLanguageData(id, zipFile);
+    async import({ zipFile, facebookAccount }) {
+        const languageData = await this.readLanguageData(zipFile);
         facebookAccount.preferredLanguage =
             this.extractPreferredLanguge(languageData);
 
