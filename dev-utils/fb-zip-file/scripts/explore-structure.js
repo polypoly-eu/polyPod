@@ -4,7 +4,7 @@
 
 import glob from "glob";
 import { readFileSync, writeFileSync } from "fs";
-import { allDataFileName, dataFileName } from "../src/globals.js";
+import { allDataFileNameJs, dataFileName } from "../src/globals.js";
 
 // Files are included in a local .data folder
 const localFolder = process.argv[2] || ".data";
@@ -43,8 +43,10 @@ glob(`${localFolder}/*.json`, (error, files) => {
     });
     writeFileSync(dataFileName, JSON.stringify(commonStructure, null, 2));
     writeFileSync(
-        allDataFileName,
-        JSON.stringify([...allKeys.keys()].sort(), null, 2)
+        allDataFileNameJs,
+        "export default " +
+            JSON.stringify([...allKeys.keys()].sort(), null, 2) +
+            ";"
     );
 });
 
