@@ -40,7 +40,7 @@ class PolyNavTest {
     @Test
     fun `pickFile returns null if user cancelled`() = runBlocking {
         polyNav.setNavObserver(PolyNavObserver(onPickFile = { null }))
-        val result = polyNav.pickFile()
+        val result = polyNav.pickFile(mimeType)
         assertThat(result).isNull()
     }
 }
