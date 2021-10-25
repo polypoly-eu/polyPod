@@ -13,6 +13,7 @@ import * as d3 from "d3";
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
  * @param {number = 400} [width] - The width of the svg
  * @param {number = 300} [height] - The height of the svg
+ * @param {number = adaptive} [barWidth] - The width of the bars
  * @param {string|callback = "blue"} [barColor] - The color of the bar (callbacks receive event and data)
  * @returns {jsx-div with svg attached}
  */
@@ -21,6 +22,7 @@ export const VerticalBarChart = ({
   barColor = "blue",
   width = 400,
   height = 300,
+  barWidth,
 }) => {
   const barChartRef = useRef();
 
@@ -128,14 +130,24 @@ export const VerticalBarChart = ({
       .duration(750)
       .attr("y", chartHeight - initializingBarHeight)
       .attr("height", initializingBarHeight)
-      .attr("x", (d) => xScale(d.title))
-      .attr("width", xScale.bandwidth())
+      .attr("x", (d) =>
+        barWidth
+          ? xScale(d.title) + (xScale.bandwidth() - barWidth) / 2
+          : xScale(d.title)
+      )
+      .attr("width", barWidth || xScale.bandwidth())
       .attr("fill", barColor)
       .attr("class", "bar")
       .transition()
       .duration(750)
       .attr("y", (d) => yScale(d.value))
       .attr("height", (d) => chartHeight - yScale(d.value));
+    // bars
+    //   .append("text")
+    //   .attr("x", xScale.bandwidth() / 2)
+    //   .attr("y", (d) => d.value * yScale)
+    //   .attr("dy", ".35em")
+    //   .text((d) => d.value);
   }
 
   function addEnteringBars(bars) {
@@ -144,8 +156,12 @@ export const VerticalBarChart = ({
       .append("rect")
       .attr("y", chartHeight - initializingBarHeight)
       .attr("height", initializingBarHeight)
-      .attr("x", (d) => xScale(d.title))
-      .attr("width", xScale.bandwidth())
+      .attr("x", (d) =>
+        barWidth
+          ? xScale(d.title) + (xScale.bandwidth() - barWidth) / 2
+          : xScale(d.title)
+      )
+      .attr("width", barWidth || xScale.bandwidth())
       .attr("fill", barColor)
       .attr("class", "bar")
       .transition()
