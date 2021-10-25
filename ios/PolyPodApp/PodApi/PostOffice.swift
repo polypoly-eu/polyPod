@@ -209,6 +209,10 @@ extension PostOffice {
             handlePolyOutWriteFile(args: args, completionHandler: completionHandler)
         case "readdir":
             handlePolyOutReadDir(args: args, completionHandler: completionHandler)
+        case "importArchive":
+            handlePolyOutImportArchive(args: args, completionHandler: completionHandler)
+        case "removeArchive":
+            handlePolyOutRemoveArchive(args: args, completionHandler: completionHandler)
         default:
             print("PolyOut method unknown:", method)
         }
@@ -310,6 +314,24 @@ extension PostOffice {
             }
         }
     }
+    
+    private func handlePolyOutImportArchive(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let url = args[0] as! String
+        PodApi.shared.polyOut.importArchive(url: url) { fileId in
+            if let fileId = fileId {
+                completionHandler(MessagePackValue(fileId), nil)
+                return
+            }
+            completionHandler(MessagePackValue(), nil)
+        }
+    }
+    
+    private func handlePolyOutRemoveArchive(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let fileId = args[0] as! String
+        PodApi.shared.polyOut.removeArchive(fileId: fileId) { error in
+            completionHandler(MessagePackValue(), nil)
+        }
+    }
 }
 
 extension PostOffice {
@@ -321,10 +343,8 @@ extension PostOffice {
             handlePolyNavSetActiveAction(args: args)
         case "openUrl":
             handlePolyNavOpenUrl(args: args)
-        case "importFile":
-            handlePolyNavImportFile(completionHandler: completionHandler)
-        case "removeFile":
-            handlePolyNavRemoveFile(args: args, completionHandler: completionHandler)
+        case "pickFile":
+            handlePolyNavPickFile(completionHandler: completionHandler)
         default:
             print("PolyNav method unknown:", method)
         }
@@ -348,20 +368,9 @@ extension PostOffice {
         }
     }
     
-    private func handlePolyNavImportFile(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        PodApi.shared.polyNav.importFile() { fileId in
-            if let fileId = fileId {
-                completionHandler(MessagePackValue(fileId), nil)
-                return
-            }
-            completionHandler(MessagePackValue(), nil)
-        }
-    }
-    
-    private func handlePolyNavRemoveFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let fileId = args[0] as! String
-        PodApi.shared.polyNav.removeFile(fileId: fileId) { error in
-            completionHandler(MessagePackValue(), nil)
+    private func handlePolyNavPickFile(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        PodApi.shared.polyNav.pickFile() { url in
+            completionHandler(url == nil ? nil : .string(url!), nil)
         }
     }
 }

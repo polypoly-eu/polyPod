@@ -343,7 +343,7 @@ extension FeatureWebView: PolyNavDelegate {
         openUrlHandler(url)
     }
     
-    func doHandleImportFile(completion: @escaping (URL?) -> Void) {
+    func doHandlePickFile(completion: @escaping (URL?) -> Void) {
         pickFileHandler(completion)
     }
 }

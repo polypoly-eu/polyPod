@@ -11,22 +11,26 @@ async function relevantZipEntries(zipFile) {
     );
 }
 
-async function readJSONFile(dataFileName, zipFile, zipId = null) {
-    const fullEntryName = zipId ? `${zipId}/${dataFileName}` : dataFileName;
+async function readJSONFile(relativeFileName, zipFile) {
+    const fullEntryName = `${zipFile.id}/${relativeFileName}`;
+    return readFullPathJSONFile(fullEntryName, zipFile);
+}
+
+async function readFullPathJSONFile(fullEntryName, zipFile) {
     const entries = await zipFile.getEntries();
     const dataZipEntry = entries.find((entryName) =>
         entryName.endsWith(fullEntryName)
     );
 
     if (!dataZipEntry) {
-        throw new MissingFileImportException(dataFileName);
+        throw new MissingFileImportException(fullEntryName);
     }
 
     const rawContent = await zipFile.getContent(dataZipEntry);
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
-        throw new MissingContentImportException(dataFileName);
+        throw new MissingContentImportException(fullEntryName);
     }
 
     return JSON.parse(fileContent, (key, value) => {
@@ -37,13 +41,8 @@ async function readJSONFile(dataFileName, zipFile, zipId = null) {
     });
 }
 
-async function readJSONDataObject(
-    dataFileName,
-    dataKey,
-    zipFile,
-    zipId = null
-) {
-    const rawData = await readJSONFile(dataFileName, zipFile, zipId);
+async function readJSONDataObject(dataFileName, dataKey, zipFile) {
+    const rawData = await readJSONFile(dataFileName, zipFile);
 
     if (!(dataKey in rawData)) {
         throw new InvalidContentImportException(
@@ -55,13 +54,8 @@ async function readJSONDataObject(
     return rawData[dataKey];
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
-    const arrayData = await readJSONDataObject(
-        dataFileName,
-        dataKey,
-        zipFile,
-        zipId
-    );
+async function readJSONDataArray(dataFileName, dataKey, zipFile) {
+    const arrayData = await readJSONDataObject(dataFileName, dataKey, zipFile);
 
     if (!Array.isArray(arrayData)) {
         throw new InvalidContentImportException(
@@ -127,6 +121,7 @@ function sliceIntoChunks(array, chunkSize) {
 
 export {
     readJSONFile,
+    readFullPathJSONFile,
     readJSONDataObject,
     readJSONDataArray,
     anonymizeJsonEntityPath,
