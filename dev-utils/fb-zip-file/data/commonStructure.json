@@ -1,1 +1,38 @@
-{"events":["event_invitations.json"],"facebook_gaming":[],"groups":["your_group_membership_activity.json"],"location":["primary_location.json","timezone.json"],"music_recommendations":["no-data.txt"],"other_activity":[],"pages":[],"posts":["your_posts_1.json"],"privacy_checkup":[],"profile_information":["profile_information.json","profile_update_history.json"],"saved_items_and_collections":[],"security_and_login_information":["account_activity.json","logins_and_logouts.json","where_you're_logged_in.json"],"short_videos":["no-data.txt"],"stories":[],"your_places":[],"your_topics":[]}
+{
+  "events": [
+    "event_invitations.json"
+  ],
+  "facebook_gaming": [],
+  "groups": [
+    "your_group_membership_activity.json"
+  ],
+  "location": [
+    "primary_location.json",
+    "timezone.json"
+  ],
+  "music_recommendations": [
+    "no-data.txt"
+  ],
+  "other_activity": [],
+  "pages": [],
+  "posts": [
+    "your_posts_1.json"
+  ],
+  "privacy_checkup": [],
+  "profile_information": [
+    "profile_information.json",
+    "profile_update_history.json"
+  ],
+  "saved_items_and_collections": [],
+  "security_and_login_information": [
+    "account_activity.json",
+    "logins_and_logouts.json",
+    "where_you're_logged_in.json"
+  ],
+  "short_videos": [
+    "no-data.txt"
+  ],
+  "stories": [],
+  "your_places": [],
+  "your_topics": []
+}

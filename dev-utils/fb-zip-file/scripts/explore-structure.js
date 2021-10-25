@@ -41,8 +41,11 @@ glob(`${localFolder}/*.json`, (error, files) => {
         }
         commonStructure[key] = commonFiles;
     });
-    writeFileSync(dataFileName, JSON.stringify(commonStructure));
-    writeFileSync(allDataFileName, JSON.stringify([...allKeys.keys()]));
+    writeFileSync(dataFileName, JSON.stringify(commonStructure, null, 2));
+    writeFileSync(
+        allDataFileName,
+        JSON.stringify([...allKeys.keys()].sort(), null, 2)
+    );
 });
 
 function extractKeys(prefix, data, theseKeys, allKeys) {
@@ -80,7 +83,7 @@ function extractKeys(prefix, data, theseKeys, allKeys) {
                 let genericName = f;
                 if (f !== "no-data.txt") {
                     genericName = f.replace(
-                        /(\w+)(?=\.(jpg|docx|pdf|png|gif|md|epub|mobi|mp4|txt))/,
+                        /(\w+)(?=\.(jpg|docx|pdf|png|gif|md|epub|mobi|mp4|txt|diff))/,
                         "a_file"
                     );
                 }
