@@ -2,6 +2,7 @@
  * Extract data from an url of the form:
  * "https://www.facebook.com/<id>/posts/<somethig-else>"
  * "https://www.facebook.com/<id>/photos/<somethig-else>".
+ * "https://www.facebook.com/<id>/videos/<somethig-else>".
  *
  * Return this account data:
  *  {
@@ -11,7 +12,7 @@
  */
 export function extractAccountDataFromStandardUrl(urlString) {
     const postUrlMatch = urlString.match(
-        /^(https:\/\/www\.facebook\.com\/([^/]+))\/(?:posts|photos)\/.*$/
+        /^(https:\/\/www\.facebook\.com\/([^/]+))\/(?:posts|photos|videos)\/.*$/
     );
     if (postUrlMatch && postUrlMatch.length === 3) {
         return { url: postUrlMatch[1], urlId: postUrlMatch[2] };
