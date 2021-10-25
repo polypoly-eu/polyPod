@@ -15,6 +15,7 @@ import * as d3 from "d3";
  * @param {number = 300} [height] - The height of the svg
  * @param {number = adaptive} [barWidth] - The width of the bars
  * @param {string|callback = "blue"} [barColor] - The color of the bar (callbacks receive event and data)
+ * @param {boolean = false} [barValue] - The values of the bars are displayed above
  * @returns {jsx-div with svg attached}
  */
 export const VerticalBarChart = ({
@@ -23,6 +24,7 @@ export const VerticalBarChart = ({
   width = 400,
   height = 300,
   barWidth,
+  barValue = false,
 }) => {
   const barChartRef = useRef();
 
@@ -35,7 +37,8 @@ export const VerticalBarChart = ({
     },
     chartHeight = height - margin.bottom - margin.top,
     chartWidth = width - margin.left - margin.right,
-    initializingBarHeight = 2;
+    initializingBarHeight = 2,
+    barValueMargin = 4;
 
   const xScale = d3.scaleBand().range([0, chartWidth]).padding(0.2),
     yScale = d3.scaleLinear().range([chartHeight, margin.bottom]);
@@ -169,6 +172,17 @@ export const VerticalBarChart = ({
       .delay((_, i) => i * 50)
       .attr("y", (d) => yScale(d.value))
       .attr("height", (d) => chartHeight - yScale(d.value));
+    if (barValue)
+      bars
+        .append("text")
+        .attr("x", (d) =>
+          barWidth
+            ? xScale(d.title) + (xScale.bandwidth() - barWidth) / 2
+            : xScale(d.title)
+        )
+        .attr("y", (d) => chartHeight - yScale(d.value) + barValueMargin)
+        .attr("dy", ".35em")
+        .text((d) => d.value);
   }
 
   function displayBars(barChart) {
