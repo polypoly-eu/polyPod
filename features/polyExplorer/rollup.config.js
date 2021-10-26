@@ -15,6 +15,7 @@ export default {
         globals: {
             react: "React",
             "react-dom": "ReactDOM",
+            "react-router-dom": "reactRouterDOM",
         },
     },
     //This is meant to suppress the warning for d3-selection circular dependencies (https://github.com/d3/d3-selection/issues/168)
