@@ -2,6 +2,7 @@ import { createMockedZip } from "../utils/data-creation";
 export const DATASET_EXPECTED_VALUES = {
     numberOfMessageThreads: 2,
     numberOfMessages: 7,
+    numberOfUsernames: 3,
 };
 
 export function createMessageThreadOneData() {
