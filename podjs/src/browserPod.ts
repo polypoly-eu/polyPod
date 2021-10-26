@@ -77,11 +77,15 @@ class LocalStoragePolyIn implements PolyIn {
 // archive file name as their last component, and since the current BrowserPod
 // implementation works with data URLs which don't, we employ a little workaround.
 class FileUrl {
-    private static readonly separator = "|";
+    private static readonly separator = "/";
 
     static fromUrl(url: string): FileUrl {
-        const [data, fileName] = url.split(FileUrl.separator);
-        return new FileUrl(url, data, fileName);
+        const [lastComponent, ...rest] = url.split(FileUrl.separator).reverse();
+        return new FileUrl(
+            url,
+            rest.reverse().join(FileUrl.separator),
+            lastComponent
+        );
     }
 
     static fromParts(data: string, fileName: string): FileUrl {
@@ -376,11 +380,11 @@ class BrowserPolyNav implements PolyNav {
         document.title = title;
     }
 
-    async pickFile(): Promise<string | null> {
+    async pickFile(type?: string): Promise<string | null> {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
             fileInput.setAttribute("type", "file");
-
+            if (type) fileInput.setAttribute("accept", type);
             fileInput.addEventListener("change", function () {
                 const selectedFile = this.files?.[0];
                 if (!selectedFile) {

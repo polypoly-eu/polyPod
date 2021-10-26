@@ -344,7 +344,7 @@ extension PostOffice {
         case "openUrl":
             handlePolyNavOpenUrl(args: args)
         case "pickFile":
-            handlePolyNavPickFile(completionHandler: completionHandler)
+            handlePolyNavPickFile(args: args, completionHandler: completionHandler)
         default:
             print("PolyNav method unknown:", method)
         }
@@ -368,8 +368,9 @@ extension PostOffice {
         }
     }
     
-    private func handlePolyNavPickFile(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        PodApi.shared.polyNav.pickFile() { url in
+    private func handlePolyNavPickFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let type = args[0] as? String
+        PodApi.shared.polyNav.pickFile(type: type) { url in
             completionHandler(url == nil ? nil : .string(url!), nil)
         }
     }

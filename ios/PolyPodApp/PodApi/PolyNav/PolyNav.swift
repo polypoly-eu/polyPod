@@ -19,14 +19,14 @@ protocol PolyNavProtocol {
     func setTitle(title: String, completionHandler: ([ExtendedData]?, Error?) -> Void)
     func setActiveActions(actions: [String], completionHandler: ([ExtendedData]?, Error?) -> Void)
     func openUrl(target: String, completionHandler: ([ExtendedData]?, Error?) -> Void)
-    func pickFile(completionHandler: @escaping (String?) -> Void)
+    func pickFile(type: String?, completionHandler: @escaping (String?) -> Void)
 }
 
 protocol PolyNavDelegate {
     func doHandleSetTitle(title: String)
     func doHandleSetActiveActions(actions: [String])
     func doHandleOpenUrl(url: String)
-    func doHandlePickFile(completion: @escaping (URL?) -> Void)
+    func doHandlePickFile(type: String?, completion: @escaping (URL?) -> Void)
 }
 
 class PolyNav: PolyNavProtocol {
@@ -48,8 +48,8 @@ class PolyNav: PolyNavProtocol {
         delegate?.doHandleOpenUrl(url: target)
     }
     
-    func pickFile(completionHandler: @escaping (String?) -> Void) {
-        delegate?.doHandlePickFile { url in
+    func pickFile(type: String?, completionHandler: @escaping (String?) -> Void) {
+        delegate?.doHandlePickFile(type: type) { url in
             completionHandler(url?.absoluteString)
         }
     }

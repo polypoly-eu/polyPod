@@ -21,19 +21,32 @@ test("Extract account data permanent link url", () => {
     expect(extractAccountDataFromUrl(url)).toStrictEqual(extractedData);
 });
 
+test("Extract account data from photo url", () => {
+    const url =
+        "https://www.facebook.com/companyx/photos/a.11111222333444/999888777655/?type=3";
+    const extractedData = {
+        url: "https://www.facebook.com/companyx",
+        urlId: "companyx",
+    };
+    expect(extractAccountDataFromUrl(url)).toStrictEqual(extractedData);
+});
+
+test("Extract account data from video url", () => {
+    const url = "https://www.facebook.com/companyx/videos/11111222333444/";
+    const extractedData = {
+        url: "https://www.facebook.com/companyx",
+        urlId: "companyx",
+    };
+    expect(extractAccountDataFromUrl(url)).toStrictEqual(extractedData);
+});
+
 test("Group urls are not supported", () => {
     const url =
         "https://www.facebook.com/groups/999888777655/permalink/11111222333444/";
     expect(extractAccountDataFromUrl(url)).toBe(null);
 });
 
-test("Video urls are not supported", () => {
-    const url = "https://www.facebook.com/companyx/videos/11111222333444//";
-    expect(extractAccountDataFromUrl(url)).toBe(null);
-});
-
-test("Photo urls are not supported", () => {
-    const url =
-        "https://www.facebook.com/companyx/photos/a.11111222333444/999888777655/?type=3";
+test("Urls for unknown data types not supported", () => {
+    const url = "https://www.facebook.com/companyx/something/11111222333444/";
     expect(extractAccountDataFromUrl(url)).toBe(null);
 });

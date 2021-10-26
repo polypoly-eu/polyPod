@@ -1,0 +1,9 @@
+.preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: var(--color-background-light);
+  margin: 20px auto 0 auto;
+  border-bottom: #BDBDBD solid 1px;
+} 

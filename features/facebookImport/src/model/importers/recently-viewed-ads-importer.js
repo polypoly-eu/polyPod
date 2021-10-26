@@ -45,12 +45,11 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
         this._accountsByUrl = new Map();
     }
 
-    async _readRecentlyViewedData(id, zipFile, facebookAccount) {
+    async _readRecentlyViewedData(zipFile, facebookAccount) {
         const rawData = readJSONDataArray(
             RECENTLY_VIEWED_FILE_PATH,
             RECENTLY_VIEWED_DATA_KEY,
-            zipFile,
-            id
+            zipFile
         );
         facebookAccount.addImportedFileName(RECENTLY_VIEWED_FILE_PATH);
         return rawData;
@@ -112,9 +111,8 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
         });
     }
 
-    async import({ id, zipFile }, facebookAccount) {
+    async import({ zipFile, facebookAccount }) {
         const rawData = await this._readRecentlyViewedData(
-            id,
             zipFile,
             facebookAccount
         );

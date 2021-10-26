@@ -29,10 +29,6 @@
         "All companies receiving data from {{name}}:",
     "construction.text":
         "This part is currently under construction, but you can go through it if you're curious.",
-    "from.polyPedia.translation":
-        "Translation_EN",
-    "from.polyPedia.description":
-        "Description_EN",
     "explore.other":
-        "Explore other companies"
+        "Explore further"
 }
