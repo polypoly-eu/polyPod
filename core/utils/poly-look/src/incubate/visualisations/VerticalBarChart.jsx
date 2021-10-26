@@ -181,7 +181,8 @@ export const VerticalBarChart = ({
       .attr("fill", "transparent")
       .style("font-size", "10px")
       .transition()
-      .duration(1000)
+      .delay(1000)
+      .duration(500)
       .attr("fill", barValues);
   }
 
@@ -193,7 +194,8 @@ export const VerticalBarChart = ({
       .attr("y", (d) => yScale(d.value) - barValueMargin)
       .text((d) => d.value)
       .transition()
-      .duration(2000)
+      .delay(1500)
+      .duration(500)
       .attr("fill", barValues);
   }
 
