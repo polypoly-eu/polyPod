@@ -40,9 +40,7 @@ extension PolyOut {
     
     static func featureFilesPath() -> URL {
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.resolvingSymlinksInPath()
-        // TODO: Hard coded for the sake of speed, but we need to determine the active feature's ID here
-        let featureId = "facebookImport"
-        return documentDirectory.appendingPathComponent(PolyOut.fsFilesRoot).appendingPathComponent(featureId)
+        return documentDirectory.appendingPathComponent(PolyOut.fsFilesRoot).appendingPathComponent(FeatureStorage.shared.activeFeature!.id)
     }
     
     private static func pathFromUrl(url: String) -> URL? {
