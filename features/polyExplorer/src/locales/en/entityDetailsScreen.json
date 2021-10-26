@@ -1,0 +1,40 @@
+{
+    "tab.dataStory":
+        "Data Story",
+    "tab.about":
+        "About",
+    "tab.parent":
+        "Parent",
+    "tab.products":
+        "Products",
+    "location":
+        "Location",
+    "location.fallbackText":
+        "No location available yet.",
+    "structure":
+        "Structure",
+    "structure.fallbackText":
+        "No data available yet.",
+    "revenue":
+        "Revenue",
+    "revenue.fallbackText":
+        "No data available yet.",
+    "jurisdiction":
+        "Jurisdiction",
+    "jurisdictions":
+        "Data regions",
+    "source":
+        "Source",
+    "button.exploreData":
+        "Explore data",
+    "K":
+        "K",
+    "M":
+        "M",
+    "B":
+        "B",
+        "no-data":
+        "No data",
+    "description.fallback":
+        "We don't have a description for this company yet, but we are adding new ones every day!"
+}

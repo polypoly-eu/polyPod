@@ -1,0 +1,43 @@
+.featured-entity-card {
+    position: relative;
+    flex: 1 1 auto;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 32px auto 0 auto;
+    border-radius: 24px;
+    /* TODO: Test if padding-bottom is still - was fix for PROD4POD-492 */
+    padding-bottom: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featured-entity-card .short-info-margin {
+    margin-left: 12px;
+}
+
+.data-sharing-section-list {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 8px auto 0 auto;
+}
+
+.data-sharing-section {
+    width: 85%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.data-sharing-section {
+    background: transparent;
+    font-size: 20px;
+    text-align: left;
+}
+
+.data-sharing-section h1 {
+    margin: 0 0 -7px 0;
+    font-size: 16px;
+}

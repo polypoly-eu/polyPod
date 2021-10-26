@@ -1,6 +1,5 @@
 import React from "react";
 import * as d3 from "d3";
-import i18n from "../../i18n.js";
 import utils from "./utils.js";
 import DataTypeBubbles from "./dataTypeBubbles.jsx";
 
@@ -150,11 +149,7 @@ const DataTypeBubbleCategory = ({
                         x: d.x,
                         y: d.y,
                         r: d.r,
-                        name: d.data[
-                            i18n.t(
-                                "dataExplorationScreen:from.polyPedia.translation"
-                            )
-                        ],
+                        name: d.data.translation,
                     });
                 }
             });
