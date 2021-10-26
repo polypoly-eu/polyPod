@@ -44,12 +44,12 @@ describe("Import inbox messages", () => {
 
     it("returns success status", () => expectImportSuccess(result));
 
-    it("has two message threads", () =>
+    it("has correct number of message threads", () =>
         expect(facebookAccount.messageThreadsCount).toBe(
             DATASET_EXPECTED_VALUES.numberOfMessageThreads
         ));
 
-    it("has seven message", () =>
+    it("has correct number of message", () =>
         expect(facebookAccount.messagesCount).toBe(
             DATASET_EXPECTED_VALUES.numberOfMessages
         ));
