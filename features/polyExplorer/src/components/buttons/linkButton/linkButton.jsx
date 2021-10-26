@@ -9,9 +9,8 @@ const LinkButton = ({
     children,
     onClick = () => {},
 }) => {
-    const { navigationState, changeNavigationState } = useContext(
-        ExplorerContext
-    );
+    const { navigationState, changeNavigationState } =
+        useContext(ExplorerContext);
     const history = useHistory();
     let changedNavigationState = navigationState;
 
