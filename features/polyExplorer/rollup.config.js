@@ -15,7 +15,6 @@ export default {
         globals: {
             react: "React",
             "react-dom": "ReactDOM",
-            "react-router-dom": "reactRouterDOM",
         },
     },
     //This is meant to suppress the warning for d3-selection circular dependencies (https://github.com/d3/d3-selection/issues/168)
@@ -37,7 +36,6 @@ export default {
                     src: [
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
-                        "node_modules/react-router-dom/umd/react-router-dom.js",
                         "node_modules/@polypoly-eu/podjs/dist/pod.js",
                         "src/static/*",
                     ],
@@ -54,5 +52,5 @@ export default {
             include: /node_modules/,
         }),
     ],
-    external: ["react", "react-dom", "react-router-dom"],
+    external: ["react", "react-dom"],
 };
