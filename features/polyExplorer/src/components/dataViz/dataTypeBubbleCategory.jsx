@@ -1,6 +1,5 @@
 import React from "react";
 import * as d3 from "d3";
-import i18n from "../../i18n.js";
 import utils from "./utils.js";
 import DataTypeBubbles from "./dataTypeBubbles.jsx";
 
@@ -23,19 +22,14 @@ const DataTypeBubbleCategory = ({
         leaf.append("circle")
             .attr("r", (d) => d.r)
             .attr("fill-opacity", (d) =>
-                d.data.Polypoly_Parent_Category.indexOf(category) >= 0 ? 1 : 0.2
+                d.data.parentCategory.indexOf(category) >= 0 ? 1 : 0.2
             )
             .attr("fill", defaultColor)
             .style("vertical-align", "center")
             .each(function (d) {
                 if (d.data["dpv:Category"] === highlightedType) {
                     const diagram = d3.select(this.parentNode.parentNode);
-                    const labelText =
-                        d.data[
-                            i18n.t(
-                                "dataExplorationScreen:from.polyPedia.translation"
-                            )
-                        ];
+                    const labelText = d.data.translation;
                     utils.appendCircleLabel(diagram, d, labelText);
                 }
             });

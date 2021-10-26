@@ -242,15 +242,12 @@ const CompanyBubbles = ({
     const bubbleRef = useRef();
     const getRoot = () => d3.select(bubbleRef.current);
 
-    const getIndustryName = (industryCategory) =>
-        industryCategory?.name?.[i18n.language] ||
-        i18n.t("common:category.undisclosed");
     const highlightTexts = (() => {
         if (!highlight.name) return {};
         const company = (() => {
             for (let companies of Object.values(companyIndustryMap)) {
                 const match = companies.find(
-                    (company) => company.name === highlight.name
+                    (company) => company.ppid === highlight.name
                 );
                 if (match) return match;
             }
@@ -258,7 +255,7 @@ const CompanyBubbles = ({
         if (!company) return {};
         return {
             industry: {
-                name: getIndustryName(company.industryCategory),
+                name: company.industryCategoryName(),
                 explanation: highlight.industryExplanation[i18n.language],
             },
             company: {

@@ -5,7 +5,7 @@ import Scrollable from "../../components/scrollable/scrollable.jsx";
 
 import "./purposeChart.css";
 
-const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
+const PurposeChart = ({ purposes, openPopup }) => {
     const getHighestCount = () => {
         let highest = 0;
         purposes.forEach((e) => {
@@ -64,15 +64,7 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                     onClick={() => openPopup(p)}
                 >
                     <div className="above-bar">
-                        <p className="name">
-                            {
-                                p[
-                                    i18n.t(
-                                        "dataExplorationScreen:from.polyPedia.translation"
-                                    )
-                                ]
-                            }
-                        </p>
+                        <p className="name">{p.translation}</p>
                         <img src="./images/question-circle-light.svg" />
                     </div>
                     <div
@@ -98,10 +90,6 @@ const PurposeChart = ({ purposes, openPopup, openPurposeInfo }) => {
                 {scale}
             </div>
             <Scrollable>{bars}</Scrollable>
-            <div className="help" onClick={() => openPurposeInfo()}>
-                <img src="./images/question-circle.svg" />
-                <div>{i18n.t("common:how-to-read")}</div>
-            </div>
         </div>
     );
 };

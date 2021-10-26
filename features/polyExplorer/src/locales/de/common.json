@@ -1,53 +1,55 @@
 {
     "screenTitle.main":
         "polyExplorer",
-    "screenTitle.dataExploration":
+    "screenTitle.data-exploration":
         "Daten erkunden",
-    "screenTitle.companyDetails":
-        "Firmenprofil",
-    "screenTitle.companyFilter":
+    "screenTitle.entity-filters":
         "Filter",
-    "screenTitle.featuredCompanyInfo":
+    "screenTitle.featured-entity-info":
         "Wie ist das zu verstehen?",
-    "screenTitle.dataRegionInfo":
+    "screenTitle.data-region-info":
         "Wie ist das zu verstehen?",
-    "screenTitle.explorationDataTypesInfo":
+    "screenTitle.data-types-info":
         "Wie ist das zu verstehen?",
-    "screenTitle.explorationCategoryInfo":
+    "screenTitle.data-category-info":
         "Wie ist das zu verstehen?",
-    "screenTitle.explorationCorrelationInfo":
+    "screenTitle.data-correlation-info":
         "Wie ist das zu verstehen?",
-    "screenTitle.explorationPurposeInfo":
+    "screenTitle.purpose-info":
         "Wie ist das zu verstehen?",
-    "screenTitle.explorationCompaniesInfo":
+    "screenTitle.companies-info":
         "Wie ist das zu verstehen?",
-    "screenTitle.explorationJurisdictionsInfo":
+    "screenTitle.jurisdiction-info":
         "Wie ist das zu verstehen?",
-    "screenTitle.companySearch":
+    "screenTitle.search":
         "Suche",
     "screenTitle.info":
         "Information",
-    "companyFilter.missing":
+    "entityFilter.company":
+        "Unternehmen",
+    "entityFilter.product":
+        "Produkt",
+    "entityFilter.missing":
         "Unbekannt",
-    "companyFilter.countryNameKey":
+    "entityFilter.countryNameKey":
         "Name_DE",
-    "companyFilter.revenueRange.0":
+    "entityFilter.revenueRange.0":
         "€ 0 - 100tsnd",
-    "companyFilter.revenueRange.100":
+    "entityFilter.revenueRange.100":
         "€ 100tsnd - 500tsnd",
-    "companyFilter.revenueRange.500":
+    "entityFilter.revenueRange.500":
         "€ 500tsnd - 1mio",
-    "companyFilter.revenueRange.1000":
+    "entityFilter.revenueRange.1000":
         "€ 1mio - 5mio",
-    "companyFilter.revenueRange.5000":
+    "entityFilter.revenueRange.5000":
         "€ 5mio - 20mio",
-    "companyFilter.revenueRange.20000":
+    "entityFilter.revenueRange.20000":
         "€ 20mio - 50mio",
-    "companyFilter.revenueRange.50000":
+    "entityFilter.revenueRange.50000":
         "€ 50mio - 100mio",
-    "companyFilter.revenueRange.100000":
+    "entityFilter.revenueRange.100000":
         "€ 100mio - 1mrd",
-    "companyFilter.revenueRange.1000000":
+    "entityFilter.revenueRange.1000000":
         "€ 1mrd ≥",
     "jurisdiction.euGdpr":
         "DSGVO",
@@ -87,8 +89,6 @@
         "Datenregionen",
     "source":
         "Quelle",
-    "how-to-read":
-        "Wie ist das zu verstehen?",
     "purpose.name.i18nkey":
         "Translation_DE",
     "purpose.description.i18nkey":
@@ -96,5 +96,7 @@
     "country.code":
         "de",
     "button.ok":
-        "OK"
+        "OK",
+    "button.scroll":
+        "Scrolle hoch für mehr"
 }

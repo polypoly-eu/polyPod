@@ -1,0 +1,40 @@
+{
+    "tab.dataStory":
+        "Daten-Story",
+    "tab.about":
+        "Infos",
+    "tab.parent":
+        "Mutterunternehmen",
+    "tab.products":
+        "Produkte",
+    "location":
+        "Adresse",
+    "location.fallbackText":
+        "Noch keine Adresse verfügbar.",
+    "structure":
+        "Struktur",
+    "structure.fallbackText":
+        "Noch keine Daten verfügbar.",
+    "revenue":
+        "Umsatz",
+    "revenue.fallbackText":
+        "Noch keine Daten verfügbar.",
+    "jurisdiction":
+        "Datenregion",
+    "jurisdictions":
+        "Datenregionen",
+    "source":
+        "Quelle",
+    "button.exploreData":
+        "Daten erkunden",
+    "K":
+        "Tsd",
+    "M":
+        "Mio",
+    "B":
+        "Mrd",
+    "no-data":
+        "Keine Daten",
+    "description.fallback":
+        "Für dieses Unternehmen haben wir noch keine Beschreibung, es kommen aber täglich neue dazu!"
+}

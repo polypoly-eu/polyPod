@@ -1,0 +1,40 @@
+.story .content {
+    width: 100%;
+    color: var(--color-text-dark);
+    overflow: hidden scroll;
+    scroll-behavior: smooth;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.story .content .story-sections {
+    width: 99%;
+}
+
+.story .content .scrollytelling-marks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.story .scroll-up-btn,
+.story .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.story .progress-bar {
+    height: 4px;
+}
+
+.story .scroll-up-btn {
+    width: 100%;
+    height: 10%;
+}
+
+.story .content::-webkit-scrollbar-track {
+    margin-top: 8px;
+}

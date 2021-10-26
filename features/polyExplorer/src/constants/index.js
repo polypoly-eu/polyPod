@@ -15,3 +15,26 @@ export const DIAGRAMS = {
     COMPANY_HIGHLIGHT: "companyHighlight",
     ALL_INDUSTRIES: "allIndustries",
 };
+
+export const INTRO_ANIMATIONS = {
+    FORWARD: "forward",
+    BACKWARD: "backward",
+};
+
+export const SUMMARY_ANIMATIONS = {
+    ANIMATE_BULLET_ONE: "ONE",
+    ANIMETE_BULLET_TWO: "TWO",
+    ANIMATE_BULLET_THREE: "THREE",
+};
+
+export const DONUT_CHART = {
+    DEFAULT_GROUP: "default",
+    DEFAULT_COLOR: "#3BA6FF",
+    FACEBOOK_GROUP: "Facebook",
+    FACEBOOK_COLOR: "#3749A9",
+};
+
+export const BUBBLES_SPEECH_SIZES = {
+    BIG: "big",
+    SMALL: "small",
+};
