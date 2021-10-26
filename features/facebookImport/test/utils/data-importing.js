@@ -10,6 +10,7 @@ import { ZipFileMock } from "../mocks/zipfile-mock.js";
 import LanguageAndLocaleImporter from "../../src/model/importers/language-and-locale-importer.js";
 import FriendsImporter from "../../src/model/importers/friends-importer.js";
 import LikedPagesImporter from "../../src/model/importers/pages-liked-importer.js";
+import AdInterestsImporter from "../../src/model/importers/ad-interests-importer.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -25,6 +26,10 @@ export async function runSingleImporter(importerClass, zipFile) {
     const facebookAccount = new FacebookAccount();
     const result = await runImporter(importerClass, zipFile, facebookAccount);
     return { facebookAccount, result };
+}
+
+export async function runAdInterestsImporter(zipFile) {
+    return runSingleImporter(AdInterestsImporter, zipFile);
 }
 
 export async function runLanguageAndLocaleImporter(zipFile) {
