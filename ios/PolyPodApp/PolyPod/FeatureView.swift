@@ -153,8 +153,8 @@ struct FeatureView: View {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-    private func pickFile(completion: @escaping (URL?) -> Void) {
-        filePicker.pick(completion: completion)
+    private func pickFile(type: String?, completion: @escaping (URL?) -> Void) {
+        filePicker.pick(type: type, completion: completion)
     }
     
     private func triggerFeatureAction(_ action: String) {

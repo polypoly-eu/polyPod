@@ -212,14 +212,13 @@ open class FeatureFragment : Fragment() {
         view.findViewById<TextView>(R.id.feature_title).text = title
     }
 
-    private suspend fun pickFile(): Uri? {
+    private suspend fun pickFile(type: String?): Uri? {
         if (pickFileResult?.isActive == true)
             return null
-
         pickFileResult = CompletableDeferred()
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*"
+            setTypeAndNormalize(type ?: "*/*")
             // TODO: Figure out how to preselect the downloads directory
             //       on Android <26
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
