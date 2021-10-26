@@ -42,5 +42,5 @@ open class PolyNav(
         return true
     }
 
-    suspend fun pickFile() = observer?.onPickFile?.invoke()
+    suspend fun pickFile(type: String?) = observer?.onPickFile?.invoke(type)
 }

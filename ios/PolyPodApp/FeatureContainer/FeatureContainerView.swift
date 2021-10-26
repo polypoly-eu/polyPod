@@ -8,7 +8,7 @@ struct FeatureContainerView: UIViewRepresentable {
     var queuedAction: (String, DispatchTime)?
     let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
-    let pickFileHandler: (@escaping (URL?) -> Void) -> Void
+    let pickFileHandler: (String?, @escaping (URL?) -> Void) -> Void
 
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(
@@ -130,7 +130,7 @@ class FeatureWebView: WKWebView {
     private let activeActions: Binding<[String]>
     private let errorHandler: (String) -> Void
     private let openUrlHandler: (String) -> Void
-    private let pickFileHandler: (@escaping (URL?) -> Void) -> Void
+    private let pickFileHandler: (String?, @escaping (URL?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
 
     init(
@@ -139,7 +139,7 @@ class FeatureWebView: WKWebView {
         activeActions: Binding<[String]>,
         errorHandler: @escaping (String) -> Void,
         openUrlHandler: @escaping (String) -> Void,
-        pickFileHandler: @escaping (@escaping (URL?) -> Void) -> Void
+        pickFileHandler: @escaping (String?, @escaping (URL?) -> Void) -> Void
     ) {
         self.featureTitle = title
         self.activeActions = activeActions
@@ -343,8 +343,8 @@ extension FeatureWebView: PolyNavDelegate {
         openUrlHandler(url)
     }
     
-    func doHandlePickFile(completion: @escaping (URL?) -> Void) {
-        pickFileHandler(completion)
+    func doHandlePickFile(type: String?, completion: @escaping (URL?) -> Void) {
+        pickFileHandler(type, completion)
     }
 }
 
