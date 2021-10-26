@@ -5,7 +5,7 @@
     "report.error": "Your report could not be sent. Please try again!",
     "loading": "Your data is being analyzed",
     "unrecognizedCard.headline": "We need your help!",
-    "unrecognizedCard.text": "The structure of your data contains something we are curious about. Please send us an - obviously anonymous - report, so we can make more sense of Facebook's data schema.",
+    "unrecognizedCard.text": "If you send us an anonymised report about the structure of your Facebook data, it would help us improve Facebook Import so that it can show you even more insights.",
     "unrecognizedCard.button": "Learn more",
     "details.button": "View details",
     "analysis.label.techDemo": "Tech Demo"
