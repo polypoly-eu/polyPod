@@ -12,6 +12,7 @@ import FriendsImporter from "../../src/model/importers/friends-importer.js";
 import LikedPagesImporter from "../../src/model/importers/pages-liked-importer.js";
 import AdInterestsImporter from "../../src/model/importers/ad-interests-importer.js";
 import ConnectedAdvertisersImporter from "../../src/model/importers/connected-advertisers-importer.js";
+import SearchesImporter from "../../src/model/importers/searches-importer.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -63,6 +64,10 @@ export async function runFriendsImporter(zipFile) {
 
 export async function runLikedPagesImporter(zipFile) {
     return runSingleImporter(LikedPagesImporter, zipFile);
+}
+
+export async function runSearchesImporter(zipFile) {
+    return runSingleImporter(SearchesImporter, zipFile);
 }
 
 export async function runImportForDataset(importerClass, filePath, dataset) {
