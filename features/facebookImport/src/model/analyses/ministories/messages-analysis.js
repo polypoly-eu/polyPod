@@ -26,7 +26,6 @@ export default class MessagesAnalysis extends RootAnalysis {
         this._messagesThreadsData = [];
         const usernames = new Set();
         facebookAccount.forEachMessageThread((messageThread) => {
-            var wordCount = messageThread.totalWordCount;
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
 
@@ -55,7 +54,6 @@ export default class MessagesAnalysis extends RootAnalysis {
                 title: messageThread.title,
                 count: messageThread.messagesCount,
                 extraData: {
-                    wordCount,
                     firstChatDate,
                     lastChatDate,
                 },
