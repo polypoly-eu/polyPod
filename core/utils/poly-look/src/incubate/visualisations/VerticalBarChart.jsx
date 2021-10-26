@@ -127,9 +127,10 @@ export const VerticalBarChart = ({
     styleAxis(barChart);
   }
 
-  function updateExistingBars(barGroups) {
-    barGroups
-      .selectAll("rect")
+  function updateExistingBars(barChart) {
+    barChart
+      .selectAll(".bar-group")
+      .select(".bar")
       .transition()
       .duration(750)
       .attr("y", chartHeight - initializingBarHeight)
@@ -141,22 +142,18 @@ export const VerticalBarChart = ({
       )
       .attr("width", barWidth || xScale.bandwidth())
       .attr("fill", barColor)
-      .attr("class", "bar")
       .transition()
       .duration(750)
       .attr("y", (d) => yScale(d.value))
       .attr("height", (d) => chartHeight - yScale(d.value));
   }
 
-  function addEnteringBars(barGroups) {
-    const enteringBarGroups = barGroups
-      .enter()
-      .append("g")
-      .attr("class", "bar-group");
+  function addEnteringBars(enteringBarGroups) {
     enteringBarGroups
       .append("rect")
       .attr("y", chartHeight - initializingBarHeight)
       .attr("height", initializingBarHeight)
+      .attr("class", "bar")
       .attr("x", (d) =>
         barWidth
           ? xScale(d.title) + (xScale.bandwidth() - barWidth) / 2
@@ -171,9 +168,8 @@ export const VerticalBarChart = ({
       .attr("height", (d) => chartHeight - yScale(d.value));
   }
 
-  function addBarValues(barGroups) {
-    barGroups
-      .enter()
+  function addEnteringBarValues(enteringBarGroups) {
+    enteringBarGroups
       .append("text")
       .attr("x", (d) =>
         barWidth ? xScale(d.title) + xScale.bandwidth() / 2 : xScale(d.title)
@@ -184,10 +180,21 @@ export const VerticalBarChart = ({
       .text((d) => d.value)
       .attr("fill", "transparent")
       .style("font-size", "10px")
-      .transition(2000)
+      .transition()
+      .duration(1000)
       .attr("fill", barValues);
+  }
 
-    console.log(barGroups.selectAll(".bar-value"));
+  function updateExistingBarValues(barChart) {
+    barChart
+      .selectAll(".bar-group")
+      .select(".bar-value")
+      .attr("fill", "transparent")
+      .attr("y", (d) => yScale(d.value) - barValueMargin)
+      .text((d) => d.value)
+      .transition()
+      .duration(2000)
+      .attr("fill", barValues);
   }
 
   function displayBars(barChart) {
@@ -195,9 +202,16 @@ export const VerticalBarChart = ({
       .selectAll(".bar-group")
       .data(data, (d) => d.title);
     barGroups.exit().remove();
-    updateExistingBars(barGroups);
-    addEnteringBars(barGroups);
-    if (barValues) addBarValues(barGroups);
+    const enteringBarGroups = barGroups
+      .enter()
+      .append("g")
+      .attr("class", "bar-group");
+    updateExistingBars(barChart);
+    addEnteringBars(enteringBarGroups);
+    if (barValues) {
+      updateExistingBarValues(barChart);
+      addEnteringBarValues(enteringBarGroups);
+    }
   }
 
   useEffect(() => {
