@@ -18,6 +18,7 @@ export default class MessagesAnalysis extends RootAnalysis {
         this._messagesCount = facebookAccount.messagesCount;
         this._messagesThreadsData = [];
         const usernames = new Set();
+
         facebookAccount.forEachMessageThread((messageThread) => {
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
@@ -51,11 +52,12 @@ export default class MessagesAnalysis extends RootAnalysis {
                     lastChatDate,
                 },
             });
-
-            this._messagesThreadsData.sort((a, b) => b.count - a.count);
-            this._totalUsernamesCount = usernames.size;
-            this.active = this._messagesThreadsData.length > 0;
         });
+
+        this._messagesThreadsData.sort((a, b) => b.count - a.count);
+        this._totalUsernamesCount = usernames.size;
+
+        this.active = this._messagesThreadsData.length > 0;
     }
 
     _calculateFontSize(text, maxWidth) {
