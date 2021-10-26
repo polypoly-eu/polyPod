@@ -1,6 +1,8 @@
 archive_path = PolyPod.xcarchive
 project_path = PolyPodApp/PolyPod.xcodeproj
 scheme_name = PolyPod
+export_options_plist = exportOptions.plist
+destination = 14.4
 
 build:
 	xcodebuild clean build \
@@ -11,7 +13,7 @@ test:
 	xcodebuild clean test \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
-		-destination "platform=iOS Simulator,name=iPhone 11,OS=13.3"
+		-destination "platform=iOS Simulator,name=iPhone 11,OS=${destination}"
 
 archive:
 	rm -rf $(archive_path)
@@ -19,3 +21,10 @@ archive:
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		-archivePath $(archive_path)
+
+upload:
+	xcodebuild \
+		-exportArchive \
+		-archivePath $(archive_path) \
+		-exportOptionsPlist exportOptions.plist \
+		-allowProvisioningUpdates

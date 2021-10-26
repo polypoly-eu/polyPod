@@ -1,10 +1,18 @@
 name: Lint kotlin
 
-on:
-  pull_request:
-    paths:
-      - .github/workflows/ktlint.yaml
-      - 'android/**/*.kt'
+# Disabled for now, as it is impractical for two reasons:
+#
+# 1. The rules are different from Android Studio's auto corrections
+# 2. There is no straightforward way to run ktlint locally
+#
+# Once these issues are resolved we should reenable the job.
+#
+#on:
+#  pull_request:
+#    paths:
+#      - .github/workflows/ktlint.yaml
+#      - 'android/**/*.kt'
+on: deployment
 
 jobs:
   ktlint:

@@ -10,6 +10,7 @@ struct FeatureView: View {
     @State var title: String = ""
     @State var activeActions: [String] = []
     @State var queuedAction: (String, DispatchTime)? = nil
+    @State var filePicker = FilePicker()
     
     var body: some View {
         let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
@@ -69,9 +70,37 @@ struct FeatureView: View {
                 title: $title,
                 activeActions: $activeActions,
                 queuedAction: queuedAction,
-                openUrlHandler: openUrl
+                errorHandler: handleError,
+                openUrlHandler: openUrl,
+                pickFileHandler: pickFile
             )
         }
+    }
+    
+    private func handleError(_ error: String) {
+        let alert = UIAlertController(
+            title: "",
+            message: String.localizedStringWithFormat(
+                NSLocalizedString(
+                    "message_feature_error %@ %@",
+                    comment: ""
+                ),
+                feature.name, error
+            ),
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: { (action: UIAlertAction!) in
+                closeAction()
+            }
+        ))
+        UIApplication.shared.windows.first!.rootViewController!.present(
+            alert,
+            animated: true,
+            completion: nil
+        )
     }
     
     private func openUrl(target: String) {
@@ -122,6 +151,10 @@ struct FeatureView: View {
                             ),
                             style: .default))
         viewController.present(alert, animated: true, completion: nil)
+    }
+    
+    private func pickFile(completion: @escaping (URL?) -> Void) {
+        filePicker.pick(completion: completion)
     }
     
     private func triggerFeatureAction(_ action: String) {

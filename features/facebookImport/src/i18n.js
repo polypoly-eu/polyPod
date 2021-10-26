@@ -9,8 +9,14 @@ import activitiesMiniStoryEn from "./locales/en/miniStories/activities.json";
 import messagesMiniStoryEn from "./locales/en/miniStories/messages.json";
 import offFacebookEventsMiniStoryEn from "./locales/en/miniStories/offFacebookEvents.json";
 import advertisingValueMiniStoryEn from "./locales/en/miniStories/advertisingValue.json";
+import picturesMiniStoryEn from "./locales/en/miniStories/pictures.json";
 import reportEn from "./locales/en/report.json";
 import errorPopupEn from "./locales/en/errorPopup.json";
+import baseInfoScreenEn from "./locales/en/infoScreens/baseInfoScreen.json";
+import activitiesInfoScreenEn from "./locales/en/infoScreens/activitiesInfoScreen.json";
+import dataStructureInfoScreenEn from "./locales/en/infoScreens/dataStructureInfoScreen.json";
+import messagesInfoScreenEn from "./locales/en/infoScreens/messagesInfoScreen.json";
+import infographicsEn from "./locales/en/infographics.json";
 
 import commonDe from "./locales/de/common.json";
 import importDe from "./locales/de/import.json";
@@ -21,8 +27,14 @@ import activitiesMiniStoryDe from "./locales/de/miniStories/activities.json";
 import messagesMiniStoryDe from "./locales/de/miniStories/messages.json";
 import offFacebookEventsMiniStoryDe from "./locales/de/miniStories/offFacebookEvents.json";
 import advertisingValueMiniStoryDe from "./locales/de/miniStories/advertisingValue.json";
+import picturesMiniStoryDe from "./locales/de/miniStories/pictures.json";
 import reportDe from "./locales/de/report.json";
 import errorPopupDe from "./locales/de/errorPopup.json";
+import baseInfoScreenDe from "./locales/de/infoScreens/baseInfoScreen.json";
+import activitiesInfoScreenDe from "./locales/de/infoScreens/activitiesInfoScreen.json";
+import dataStructureInfoScreenDe from "./locales/de/infoScreens/dataStructureInfoScreen.json";
+import messagesInfoScreenDe from "./locales/de/infoScreens/messagesInfoScreen.json";
+import infographicsDe from "./locales/de/infographics.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -35,8 +47,14 @@ export default new I18n(determineLanguage(), {
         messagesMiniStory: messagesMiniStoryEn,
         offFacebookEventsMiniStory: offFacebookEventsMiniStoryEn,
         advertisingValueMiniStory: advertisingValueMiniStoryEn,
+        picturesMiniStory: picturesMiniStoryEn,
         report: reportEn,
         errorPopup: errorPopupEn,
+        baseInfoScreen: baseInfoScreenEn,
+        activitiesInfoScreen: activitiesInfoScreenEn,
+        dataStructureInfoScreen: dataStructureInfoScreenEn,
+        messagesInfoScreen: messagesInfoScreenEn,
+        infographics: infographicsEn,
     },
     de: {
         common: commonDe,
@@ -48,7 +66,13 @@ export default new I18n(determineLanguage(), {
         messagesMiniStory: messagesMiniStoryDe,
         offFacebookEventsMiniStory: offFacebookEventsMiniStoryDe,
         advertisingValueMiniStory: advertisingValueMiniStoryDe,
+        picturesMiniStory: picturesMiniStoryDe,
         report: reportDe,
         errorPopup: errorPopupDe,
+        baseInfoScreen: baseInfoScreenDe,
+        activitiesInfoScreen: activitiesInfoScreenDe,
+        dataStructureInfoScreen: dataStructureInfoScreenDe,
+        messagesInfoScreen: messagesInfoScreenDe,
+        infographics: infographicsDe,
     },
 });

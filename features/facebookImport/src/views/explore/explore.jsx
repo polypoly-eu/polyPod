@@ -7,15 +7,8 @@ import i18n from "../../i18n.js";
 
 import "./explore.css";
 
-const PopUpMessage = ({ children, handleClosePopUp }) => {
-    return (
-        <div className="pop-up">
-            <div className="pop-up-message">{children}</div>
-            <div className="close-icon" onClick={handleClosePopUp}>
-                x
-            </div>
-        </div>
-    );
+const PopUpMessage = ({ children, reportResultAnswer }) => {
+    return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
 };
 
 const AnalysisCard = ({
@@ -99,20 +92,41 @@ const ExploreView = () => {
 
     const renderReportResult = () =>
         reportResult !== null && (
-            <PopUpMessage handleClosePopUp={handleCloseReportResult}>
+            <PopUpMessage
+                reportResultAnswer={
+                    reportResult ? " successfully" : " unsuccessfully"
+                }
+            >
                 {reportResult ? (
-                    i18n.t("explore:report.success")
+                    <>
+                        <div>{i18n.t("explore:report.success")}</div>
+                        <img
+                            src="./images/close_green.svg"
+                            alt="close"
+                            onClick={handleCloseReportResult}
+                        />
+                    </>
                 ) : (
-                    <span className="unsuccessfully">
-                        {i18n.t("explore:report.error")}
-                    </span>
+                    <>
+                        <div>{i18n.t("explore:report.error")}</div>
+                        <img
+                            src="./images/close_red.svg"
+                            alt="close"
+                            onClick={handleCloseReportResult}
+                        />
+                    </>
                 )}
             </PopUpMessage>
         );
 
     const renderFileAnalyses = () => {
         if (!fileAnalysis)
-            return <Loading message={i18n.t("explore:loading")} />;
+            return (
+                <Loading
+                    loadingGif="./images/loading.gif"
+                    message={i18n.t("explore:loading")}
+                />
+            );
         return (
             <div>
                 <UnrecognizedCard />

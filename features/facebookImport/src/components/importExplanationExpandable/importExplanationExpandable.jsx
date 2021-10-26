@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
 import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
 import scrollSmoothly from "../../utils/smoothScroll.js";
+import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./importExplanationExpandable.css";
 
@@ -35,6 +36,7 @@ const ImportExplanationExpandable = ({
 
     const expandableRef = useRef();
     const expandableId = "expandable";
+    const { setStartRequest } = useContext(ImporterContext);
 
     useEffect(() => {
         scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
@@ -43,6 +45,26 @@ const ImportExplanationExpandable = ({
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
         window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
+        setStartRequest(true);
+    };
+
+    const handleImportStatus = () => {
+        onUpdateImportStatus(importSteps.explore);
+        setStartRequest(true);
+    };
+
+    const formatSize = (size) => {
+        const k = 1024;
+        const decimals = 2;
+        if (size === 1) return i18n.t("common:format.byte");
+        if (size < k) return `${size} ${i18n.t("common:format.bytes")}`;
+        const units = [
+            i18n.t("common:format.KB"),
+            i18n.t("common:format.MB"),
+            i18n.t("common:format.GB"),
+        ];
+        const i = Math.floor(Math.log(size) / Math.log(k));
+        return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
     };
 
     const bodyContent = {
@@ -56,7 +78,7 @@ const ImportExplanationExpandable = ({
                 <p>{i18n.t("import:request.1")}</p>
                 <InfoBox textContent={i18n.t("import:request.info.1")} />
                 <div className="separator"></div>
-                <h4>{i18n.t("import:how.it.works")}</h4>
+                <h4>{i18n.t("import:how.it.works")}:</h4>
                 <img src="./images/facebook.svg" alt="facebook" />
                 <p>{i18n.t("import:request.2")}</p>
                 <p>{i18n.t("import:request.3")}</p>
@@ -86,12 +108,12 @@ const ImportExplanationExpandable = ({
                 <p>{i18n.t("import:download.1")}</p>
                 <InfoBox textContent={i18n.t("import:download.info")} />
                 <div className="separator"></div>
-                <h4>{i18n.t("import:how.it.works")}</h4>
+                <h4>{i18n.t("import:how.it.works")}:</h4>
                 <img src="./images/letter.svg" alt="facebook" />
                 <p>{i18n.t("import:download.2")}</p>
                 <img src="./images/download.svg" alt="document" />
                 <p>{i18n.t("import:download.3")}</p>
-                <button className="btn-highlighted">
+                <button className="btn-highlighted btn-1">
                     {i18n.t("import:download.button.1")}
                 </button>
                 <button
@@ -115,8 +137,13 @@ const ImportExplanationExpandable = ({
                     {file ? (
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
-                            <p>ID {file.id}</p>
-                            <p>Size {file.size} Bytes</p>
+                            <p>
+                                {i18n.t("import:import.name")} {file.name}
+                            </p>
+                            <p>
+                                {i18n.t("import:import.size")}{" "}
+                                {formatSize(file.size)}
+                            </p>
                         </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
@@ -124,17 +151,11 @@ const ImportExplanationExpandable = ({
                 </div>
                 <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
-                    className={"btn-secondary"}
-                    onClick={
-                        file
-                            ? () => {
-                                  onRemoveFile();
-                                  onImportFile();
-                              }
-                            : () => {
-                                  onImportFile();
-                              }
-                    }
+                    className={"btn-secondary btn-2"}
+                    onClick={async () => {
+                        if (file) await onRemoveFile();
+                        onImportFile();
+                    }}
                 >
                     {file
                         ? i18n.t("import:import.button.1.different")
@@ -142,11 +163,7 @@ const ImportExplanationExpandable = ({
                 </button>
                 <button
                     className={`btn-highlighted ${file ? "" : "deactivated"}`}
-                    onClick={
-                        file
-                            ? () => onUpdateImportStatus(importSteps.explore)
-                            : () => {}
-                    }
+                    onClick={file ? () => handleImportStatus() : () => {}}
                 >
                     {i18n.t("import:import.button.2")}
                 </button>

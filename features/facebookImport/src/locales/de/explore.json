@@ -1,9 +1,9 @@
 {
     "messages.title": "Nachrichten Zusammenfassung",
     "messages.summary": "In deinem export sind {{messages}} Nachrichten in {{threads}} Threads von {{people}} Personen.",
-    "report.success": "Bericht erfolgreich gesendet",
-    "report.error": "Fehler beim senden des Berichts",
-    "loading": "Deine Daten werden analysiert",
+    "report.success": "Ihr Report wurde an uns gesendet. Vielen Dank!",
+    "report.error": "Report nicht gesendet. Bitte erneut versuchen!",
+    "loading": "Ihre Daten werden analysiert",
     "unrecognizedCard.headline": "Wir brauchen Ihre Hilfe!",
     "unrecognizedCard.text": "Ihre Datenstruktur enthält etwas, das uns interessiert. Bitte senden Sie uns einen - selbstverständlich annonymen - Bericht, damit wir Facebooks Datenschema besser verstehen können.",
     "unrecognizedCard.button": "Mehr erfahren",

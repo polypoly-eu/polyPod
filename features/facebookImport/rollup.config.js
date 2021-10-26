@@ -6,6 +6,7 @@ import json from "@rollup/plugin-json";
 import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import serve from "rollup-plugin-serve";
+import svg from "rollup-plugin-svg";
 
 const fallbackURL = "http://localhost:8000";
 const fallbackAuthorization = "username:password";
@@ -21,6 +22,7 @@ export default (commandLineArgs) => {
             },
         },
         plugins: [
+            svg(),
             css({ output: "css/bundle.css" }),
             json(),
             sucrase({
@@ -35,7 +37,7 @@ export default (commandLineArgs) => {
                             "node_modules/react/umd/react.development.js",
                             "node_modules/react-dom/umd/react-dom.development.js",
                             "node_modules/@polypoly-eu/podjs/dist/pod.js",
-                            "node_modules/poly-look/dist/poly-look.bundled.js",
+                            //"node_modules/poly-look/dist/poly-look.bundled.js",
                         ],
                         dest: "dist",
                     },

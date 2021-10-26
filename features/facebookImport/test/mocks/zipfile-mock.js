@@ -1,4 +1,4 @@
-import { jsonStringifyWithUtfEscape } from "../../src/importer/json-encoding";
+import { jsonStringifyWithUtfEscape } from "../../src/model/importers/utils/json-encoding";
 
 export class ZipFileMock {
     constructor() {
@@ -30,12 +30,15 @@ export class ZipFileMock {
     }
 
     enrichedData() {
+        return { ...this.enrichedFileData(), zipFile: this };
+    }
+
+    enrichedFileData() {
         return {
             id: this.id,
             time: this.time,
             name: this.name,
             size: this.size,
-            zipFile: this,
         };
     }
 

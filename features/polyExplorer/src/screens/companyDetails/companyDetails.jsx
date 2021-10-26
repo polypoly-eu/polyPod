@@ -238,7 +238,7 @@ const CompanyDetails = ({ company, onOpenRegionInfo, onOpenExploration }) => {
                                         (company.description?.value || {})[
                                             i18n.language
                                         ] || ""
-                                    ).replace("\n", "<br/><br/>") ||
+                                    ).replaceAll("\n", "<br/><br/>") ||
                                     i18n.t(
                                         "companyDetailsScreen:description.fallback"
                                     ),

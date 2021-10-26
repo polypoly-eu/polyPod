@@ -40,17 +40,40 @@ function initMessaging() {
     };
 }
 
+function errorToString(error) {
+    if (typeof error === "object") {
+        let message = error.stack || "Unknown error";
+        if (error.cause) message += `\n\nCause:\n${errorToString(error.cause)}`;
+        return message;
+    }
+    return error;
+}
+
+function initErrorHandling(window) {
+    window.addEventListener("error", ({ error }) => {
+        window.podInternal.reportError(
+            "Unhandled error:\n\n" + errorToString(error)
+        );
+        return true;
+    });
+    window.addEventListener("unhandledrejection", (event) => {
+        window.podInternal.reportError(
+            "Unhandled rejection:\n\n" + errorToString(event.reason)
+        );
+        event.preventDefault();
+    });
+}
+
 function initIframe(iFrame) {
     console.log("initializing iframe");
+    initErrorHandling(iFrame.contentWindow);
     port1.start();
     port1.onmessage = (event) => {
-        // console.log(`Data coming from the Feature to the Pod`);
         const base64 = btoa(String.fromCharCode(...new Uint8Array(event.data)));
-        console.dir(base64);
         if (!outerPort) {
             console.warn(
                 "Warning: pod received a message before being " +
-                    "fully initialised, queing message"
+                    "fully initialised, queuing message"
             );
             queuedMessages.push(base64);
             return;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import generateScale from "../../model/generate-scale";
+import generateScale from "../../model/analyses/utils/generate-scale";
 
 import "./barChart.css";
 

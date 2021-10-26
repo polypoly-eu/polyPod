@@ -1,8 +1,8 @@
 {
     "messages.title": "Messages Summary",
     "messages.summary": "In your export there are {{messages}} messages in {{threads}} threads by {{people}} people.",
-    "report.success": "Report sent successfully",
-    "report.error": "Error while sending report",
+    "report.success": "Your report was sent to us. Thank you!",
+    "report.error": "Your report could not be sent. Please try again!",
     "loading": "Your data is being analyzed",
     "unrecognizedCard.headline": "We need your help!",
     "unrecognizedCard.text": "The structure of your data contains something we are curious about. Please send us an - obviously anonymous - report, so we can make more sense of Facebook's data schema.",

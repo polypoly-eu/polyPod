@@ -255,8 +255,8 @@ function copyText(text) {
     // the following APIs were just temporarily exposed until that's the case.
     // If you want to follow the process, see:
     // https://jira.polypoly.eu/browse/PROD4POD-479 (internal at the moment)
-    if (window.nativeAndroidClipboard)
-        window.nativeAndroidClipboard.copyToClipboard(text);
+    if (window.podInternal)
+        window.podInternal.copyToClipboard(text);
     else
         navigator.clipboard.writeText(text)
 }

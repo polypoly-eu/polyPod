@@ -13,12 +13,6 @@ import {
     ImporterContext,
 } from "./context/importer-context.jsx";
 
-import "./components/facebook-import.js";
-import "./components/explore-view.js";
-import "./components/import-view.js";
-import "./components/report-view.js";
-import "./components/overview-view.js";
-
 import ErrorPopup from "./components/errorPopup/errorPopup.jsx";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
@@ -26,8 +20,14 @@ import ExploreView from "./views/explore/explore.jsx";
 import ReportView from "./views/report/report.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
 import ReportDetails from "./views/report/details.jsx";
+import DataStructureInfoScreen from "./views/infoScreens/dataStructureInfoScreen/dataStructureInfoScreen.jsx";
+import ActivitiesInfoScreen from "./views/infoScreens/activitiesInfoScreen/activitiesInfoScreen.jsx";
+import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesInfoScreen.jsx";
+import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
+
+import i18n from "./i18n.js";
 
 const FacebookImporter = () => {
     const {
@@ -41,7 +41,12 @@ const FacebookImporter = () => {
     const importStatus = navigationState.importStatus;
 
     const renderSplash = () => {
-        return <p>Loading ...</p>;
+        return (
+            <Loading
+                loadingGif="./images/loading.gif"
+                message={i18n.t("common:loading")}
+            ></Loading>
+        );
     };
 
     function determineRoute() {
@@ -74,8 +79,17 @@ const FacebookImporter = () => {
                     <Route exact path="/report">
                         <ReportView />
                     </Route>
+                    <Route exact path="/report/data-structure-info">
+                        <DataStructureInfoScreen />
+                    </Route>
                     <Route exact path="/report/details">
                         <ReportDetails />
+                    </Route>
+                    <Route exact path="/report/details/activities-info">
+                        <ActivitiesInfoScreen />
+                    </Route>
+                    <Route exact path="/report/details/messages-info">
+                        <MessagesInfoScreen />
                     </Route>
                 </Switch>
             ) : (

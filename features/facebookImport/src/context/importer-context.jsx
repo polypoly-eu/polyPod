@@ -4,7 +4,7 @@ import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
-import { importData } from "../importer/importer.js";
+import { importData } from "../model/importer.js";
 
 export const ImporterContext = React.createContext();
 
@@ -95,6 +95,7 @@ export const ImporterProvider = ({ children }) => {
     const [activeDetails, setActiveDetails] = useState(null);
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
+    const [startRequest, setStartRequest] = useState(false);
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
@@ -115,14 +116,15 @@ export const ImporterProvider = ({ children }) => {
 
     const handleRemoveFile = (fileID) => {
         setFacebookAccount(null);
-        storage.removeFile(fileID);
+        return storage.removeFile(fileID);
     };
 
     const handleImportFile = async () => {
-        const { polyNav } = pod;
+        const { polyNav, polyOut } = pod;
         setFiles(null); // To show the loading overlay
         try {
-            await polyNav.importFile();
+            const url = await polyNav.pickFile();
+            if (url) await polyOut.importArchive(url);
         } catch (error) {
             setGlobalError(new FileImportError(error));
         }
@@ -134,7 +136,7 @@ export const ImporterProvider = ({ children }) => {
         if (changedState) {
             Object.keys(changedState)?.forEach((key) => {
                 if (!navigationStates.includes(key)) {
-                    console.log(`NavigationStateError with key: ${key}`);
+                    console.error(`NavigationStateError with key: ${key}`);
                     return;
                 }
             });
@@ -243,6 +245,8 @@ export const ImporterProvider = ({ children }) => {
                 facebookAccount,
                 reportResult,
                 setReportResult,
+                startRequest,
+                setStartRequest,
             }}
         >
             {children}

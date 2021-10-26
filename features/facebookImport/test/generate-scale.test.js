@@ -1,4 +1,4 @@
-import generateScale from "../src/model/generate-scale";
+import generateScale from "../src/model/analyses/utils/generate-scale";
 
 describe("Scale generator", function () {
     it("Returns the correct scales", function () {

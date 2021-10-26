@@ -2,13 +2,14 @@ import React, { useState } from "react";
 
 import i18n from "../../i18n";
 
-import BarChartHorizontal from "../dataViz/barChartHorizontal.jsx";
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import { fillArray } from "../dataViz/utils.jsx";
 
 import "./activitiesMiniStory.css";
 import "./datePicker.css";
 import "../tabs/tabs.css";
+import { VerticalBarChart } from "@polypoly-eu/poly-look";
 
 const monthsAbbreviation = i18n.t("common:months.abbreviation").split(" ");
 
@@ -45,23 +46,23 @@ const DatePicker = ({ year, yearRange, onYearChange }) => {
 const ActivitiesMiniStory = ({ totalEvents }) => {
     const yearRange = fillArray(Object.keys(totalEvents.values));
 
-    const yearlyTotals = Object.fromEntries(
-        yearRange.map((year) => [
-            year.toString().substring(2, 4),
-            totalEvents.values[year]?.total || 0,
-        ])
-    );
+    const yearlyTotals = yearRange.map((year) => {
+        return {
+            title: year.toString().substring(2, 4),
+            value: totalEvents.values[year]?.total || 0,
+        };
+    });
 
     const [selectedYear, setSelectedYear] = useState(
         yearRange[yearRange.length - 1]
     );
 
-    const monthlyTotals = Object.fromEntries(
-        monthsAbbreviation.map((month, index) => [
-            month,
-            totalEvents.values[selectedYear]?.values[index] || 0,
-        ])
-    );
+    const monthlyTotals = monthsAbbreviation.map((month, index) => {
+        return {
+            title: month,
+            value: totalEvents.values[selectedYear]?.values[index] || 0,
+        };
+    });
 
     const tabs = [
         {
@@ -153,11 +154,15 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     <p>{constantTabData.barChartLegendText}</p>
                 </div>
                 <p className="above-chart">{numberOfEventsString}</p>
-                <BarChartHorizontal
+                <VerticalBarChart
                     data={constantTabData.barData}
-                    barWidth={constantTabData.barWidth}
+                    barColor={"white"}
                 />
             </div>
+            <InfoButton route="/report/details/activities-info" />
+            <p className="source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p>
         </div>
     );
 };

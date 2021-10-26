@@ -1,15 +1,12 @@
 package coop.polypoly.polypod.polyNav
 
 import android.content.Context
-import android.database.Cursor
 import android.net.Uri
-import android.provider.OpenableColumns
 import android.webkit.WebMessage
 import android.webkit.WebView
-import coop.polypoly.polypod.Preferences
-import java.io.File
-import java.util.UUID
+import kotlinx.coroutines.CoroutineScope
 import kotlin.collections.HashSet
+import kotlin.coroutines.EmptyCoroutineContext
 
 open class PolyNav(
     private val webView: WebView,
@@ -17,7 +14,6 @@ open class PolyNav(
     private val context: Context
 ) {
     private val registeredActions = HashSet<String>()
-    private val fsPrefix = "polypod://"
 
     open fun setActiveActions(actions: Array<String>) {
         registeredActions.clear()
@@ -46,42 +42,5 @@ open class PolyNav(
         return true
     }
 
-    suspend fun importFile(): Uri? {
-        val importedUrl = observer?.onPickFile?.invoke()
-        if (importedUrl == null) {
-            return importedUrl
-        }
-
-        val contentResolver = context.contentResolver
-        val cursor: Cursor? = contentResolver.query(
-            importedUrl, null, null, null, null, null
-        )
-        var fileName = ""
-        cursor?.use {
-            if (it.moveToFirst()) {
-                fileName =
-                    it.getString(
-                        it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                    )
-            }
-        }
-        contentResolver?.openInputStream(importedUrl).use { inputStream ->
-            if (inputStream == null) {
-                throw Error("File copy error")
-            }
-            val newId = UUID.randomUUID().toString()
-            ZipTools.unzipAndEncrypt(inputStream, context, newId)
-            val fs = Preferences.getFileSystem(context).toMutableMap()
-            fs[fsPrefix + newId] = fileName
-            Preferences.setFileSystem(context, fs)
-        }
-        return importedUrl
-    }
-
-    fun removeFile(id: String) {
-        val fs = Preferences.getFileSystem(context).toMutableMap()
-        File(context.filesDir.absolutePath.plus("/$id")).deleteRecursively()
-        fs.remove(id)
-        Preferences.setFileSystem(context, fs)
-    }
+    suspend fun pickFile() = observer?.onPickFile?.invoke()
 }

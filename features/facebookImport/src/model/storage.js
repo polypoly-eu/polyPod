@@ -25,26 +25,11 @@ export default class Storage {
         return polyOut.readFile(path);
     }
 
-    async addFile() {
-        return new Promise((resolve) => {
-            // File is already added by importFile, just refresh
-            this.refreshFiles().then(() => {
-                this.changeListener();
-                resolve();
-            });
-        });
-    }
-
     async removeFile(file) {
-        return new Promise((resolve) => {
-            const { polyNav } = this._pod;
-            polyNav
-                .removeFile(file)
-                .then(() => {
-                    this.refreshFiles().then(() => resolve());
-                })
-                .then(() => this.changeListener());
-        });
+        const { polyOut } = this._pod;
+        await polyOut.removeArchive(file);
+        await this.refreshFiles();
+        this.changeListener();
     }
 }
 
@@ -54,13 +39,17 @@ export class ZipFile {
         this._file = file;
     }
 
+    get id() {
+        return this._file.id;
+    }
+
     async getEntries() {
         const { polyOut } = this._pod;
-        return polyOut.readdir(this._file.id);
+        return polyOut.readdir(this.id);
     }
 
     async data() {
-        return this.getContent(this._file.id);
+        return this.getContent(this.id);
     }
 
     async stat(entry) {

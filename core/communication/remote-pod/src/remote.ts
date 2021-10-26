@@ -51,6 +51,8 @@ type PolyOutEndpoint = ObjectEndpointSpec<{
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
     fetch(input: string, init: RequestInit): ValueEndpointSpec<Response>;
+    importArchive(url: string): ValueEndpointSpec<string>;
+    removeArchive(fileId: string): ValueEndpointSpec<void>;
 }>;
 
 type PolyLifecycleEndpoint = ObjectEndpointSpec<{
@@ -62,8 +64,7 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
-    importFile(): ValueEndpointSpec<string>;
-    removeFile(fileId: string): ValueEndpointSpec<void>;
+    pickFile(): ValueEndpointSpec<string | null>;
 }>;
 
 type InfoEndpoint = ObjectEndpointSpec<{
@@ -230,8 +231,15 @@ export class RemoteClientPod implements Pod {
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
             readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
-                if (options === undefined) return rpcClient.polyOut().readFile(path)();
-                else return rpcClient.polyOut().readFile(path, options)();
+                if (options) return rpcClient.polyOut().readFile(path, options)();
+                else if (typeof fetch === "undefined") return rpcClient.polyOut().readFile(path)();
+                else
+                    return new Promise<Uint8Array>((resolve, reject) => {
+                        fetch(path)
+                            .then((res) => res.arrayBuffer())
+                            .then((arrBuf) => resolve(new Uint8Array(arrBuf)))
+                            .catch((err) => reject(err));
+                    });
             }
 
             readdir(path: string): Promise<string[]> {
@@ -244,6 +252,14 @@ export class RemoteClientPod implements Pod {
 
             writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
                 return rpcClient.polyOut().writeFile(path, content, options)();
+            }
+
+            importArchive(url: string): Promise<string> {
+                return rpcClient.polyOut().importArchive(url)();
+            }
+
+            removeArchive(fileId: string): Promise<void> {
+                return rpcClient.polyOut().removeArchive(fileId)();
             }
         })();
     }
@@ -262,8 +278,7 @@ export class RemoteClientPod implements Pod {
             setActiveActions: (actions: string[]) =>
                 this.rpcClient.polyNav().setActiveActions(actions)(),
             setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
-            importFile: () => this.rpcClient.polyNav().importFile()(),
-            removeFile: (fileId: string) => this.rpcClient.polyNav().removeFile(fileId)(),
+            pickFile: () => this.rpcClient.polyNav().pickFile()(),
         };
     }
 
@@ -336,6 +351,8 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
                 return FileStats.of(stats);
             },
             writeFile: (path, content, options) => polyOut.writeFile(path, content, options),
+            importArchive: (url) => polyOut.importArchive(url),
+            removeArchive: (fileId) => polyOut.removeArchive(fileId),
         };
     }
 

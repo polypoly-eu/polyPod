@@ -3,7 +3,6 @@ import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
-
 import i18n from "../../i18n.js";
 
 import "./overview.css";
@@ -19,9 +18,42 @@ const Overview = () => {
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
 
-    if (files === null)
-        return <Loading message={i18n.t("overview:loading.data")} />;
+    if (facebookAccount === null || files === null)
+        return (
+            <Loading
+                message={i18n.t("overview:loading.data")}
+                loadingGif="./images/loading.gif"
+            />
+        );
 
+    const getFormattedTime = (time) => {
+        let t = new Date(1970, 0, 1);
+        t.setUTCSeconds(+time);
+
+        // for testing in browser, where 'time' is a real date, use instead of the above this one:
+        // const t = new Date(time);
+
+        const options = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        };
+        return t.toLocaleDateString(i18n.t("overview:time.format"), options);
+    };
+
+    const formatSize = (size) => {
+        const k = 1024;
+        const decimals = 2;
+        if (size === 1) return i18n.t("common:format.byte");
+        if (size < k) return `${size} ${i18n.t("common:format.bytes")}`;
+        const units = [
+            i18n.t("common:format.KB"),
+            i18n.t("common:format.MB"),
+            i18n.t("common:format.GB"),
+        ];
+        const i = Math.floor(Math.log(size) / Math.log(k));
+        return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
+    };
     return (
         <div className="overview">
             {Object.values(files).length ? (
@@ -29,16 +61,28 @@ const Overview = () => {
                     <div className="details">
                         <h1>{files[0].name}</h1>
                         <p>
-                            {i18n.t("overview:imported.time")} {files[0].time}
+                            {i18n.t("overview:imported.time")}{" "}
+                            {getFormattedTime(files[0].time)}
                         </p>
                         <p>
-                            {i18n.t("overview:size")} {files[0].size} bytes
+                            <span className="size">
+                                {" "}
+                                {i18n.t("overview:size")}{" "}
+                                {formatSize(files[0].size)}
+                            </span>
                         </p>
                         <div className="separator"></div>
                     </div>
 
                     <div className="imported-files">
-                        <h4>{i18n.t("overview:imported.files")}</h4>
+                        <div className="align-illustration">
+                            {" "}
+                            <img
+                                src="./images/fileupload.svg"
+                                alt="file-upload"
+                            ></img>{" "}
+                            <h4>{i18n.t("overview:imported.files")}</h4>
+                        </div>
                         {facebookAccount &&
                         facebookAccount.importedFileNames.length ? (
                             <div className="file-list">
@@ -101,9 +145,9 @@ const Overview = () => {
                     }}
                     proceedButton={{
                         text: i18n.t("overview:new.import.dialog.continue"),
-                        onClick: () => {
+                        onClick: async () => {
+                            await handleRemoveFile(files[0].id);
                             updateImportStatus(importSteps.import);
-                            handleRemoveFile(files[0].id);
                         },
                         route: "/import",
                         stateChange: { importStatus: importSteps.import },

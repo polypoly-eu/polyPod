@@ -24,6 +24,7 @@ export default {
         "fp-ts/lib/pipeable",
         "io-ts/lib/Decoder",
         "path",
-        "semver"
+        "semver",
+        "fs"
     ]
 };
