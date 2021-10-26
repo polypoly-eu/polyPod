@@ -70,15 +70,18 @@ export class Entity {
         const purposes = this._data.dataSharingPurposes;
         if (!purposes) return [];
         return purposes.map((purpose) => ({
-            "dpv:Purpose": this.globalData.data_purposes[
-                purpose["dpv:Purpose"]
-            ]["dpv:Purpose"],
-            translation: this.globalData.data_purposes[purpose["dpv:Purpose"]][
-                `Translation_${this.language.toUpperCase()}`
-            ],
-            explanation: this.globalData.data_purposes[purpose["dpv:Purpose"]][
-                `Explanation_${this.language.toUpperCase()}`
-            ],
+            "dpv:Purpose":
+                this.globalData.data_purposes[purpose["dpv:Purpose"]][
+                    "dpv:Purpose"
+                ],
+            translation:
+                this.globalData.data_purposes[purpose["dpv:Purpose"]][
+                    `Translation_${this.language.toUpperCase()}`
+                ],
+            explanation:
+                this.globalData.data_purposes[purpose["dpv:Purpose"]][
+                    `Explanation_${this.language.toUpperCase()}`
+                ],
             count: purpose.count,
         }));
     }
@@ -87,18 +90,21 @@ export class Entity {
         const dataTypes = this._data.dataTypesShared;
         if (!dataTypes) return [];
         return dataTypes.map((type) => ({
-            "dpv:Category": this.globalData.personal_data_categories[
-                type["dpv:Category"]
-            ]["dpv:Category"],
-            translation: this.globalData.personal_data_categories[
-                type["dpv:Category"]
-            ][`Translation_${this.language.toUpperCase()}`],
-            explanation: this.globalData.personal_data_categories[
-                type["dpv:Category"]
-            ][`Explanation_${this.language.toUpperCase()}`],
-            parentCategory: this.globalData.personal_data_categories[
-                type["dpv:Category"]
-            ].Polypoly_Parent_Category,
+            "dpv:Category":
+                this.globalData.personal_data_categories[type["dpv:Category"]][
+                    "dpv:Category"
+                ],
+            translation:
+                this.globalData.personal_data_categories[type["dpv:Category"]][
+                    `Translation_${this.language.toUpperCase()}`
+                ],
+            explanation:
+                this.globalData.personal_data_categories[type["dpv:Category"]][
+                    `Explanation_${this.language.toUpperCase()}`
+                ],
+            parentCategory:
+                this.globalData.personal_data_categories[type["dpv:Category"]]
+                    .Polypoly_Parent_Category,
             count: type.count,
         }));
     }

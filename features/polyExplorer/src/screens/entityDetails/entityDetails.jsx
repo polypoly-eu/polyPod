@@ -12,9 +12,8 @@ import "./entityDetails.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const EntityDetails = () => {
-    const { selectedEntityObject, entityObjectByPpid } = useContext(
-        ExplorerContext
-    );
+    const { selectedEntityObject, entityObjectByPpid } =
+        useContext(ExplorerContext);
     const entity = selectedEntityObject;
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);

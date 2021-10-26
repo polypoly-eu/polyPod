@@ -167,8 +167,9 @@ const BarChart = ({ data, animation, legendTitle }) => {
                 .style("border", labelTitleBorder)
                 .style("border-radius", labelTitleRadius)
                 .style("background-color", labelTitleBackground);
-            const labelTitleWidth = labelTitleP.node().getBoundingClientRect()
-                .width;
+            const labelTitleWidth = labelTitleP
+                .node()
+                .getBoundingClientRect().width;
             labelTitleDiv
                 .attr("width", labelTitleWidth)
                 .attr("height", labelTitleHeight.div);

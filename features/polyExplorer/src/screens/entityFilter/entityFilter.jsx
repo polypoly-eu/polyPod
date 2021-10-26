@@ -10,12 +10,8 @@ import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const EntityFilterScreen = () => {
-    const {
-        entities,
-        activeFilters,
-        globalData,
-        handleFilterApply,
-    } = useContext(ExplorerContext);
+    const { entities, activeFilters, globalData, handleFilterApply } =
+        useContext(ExplorerContext);
     const [newActiveFilters, setNewActiveFilters] = useState(
         activeFilters.copy()
     );

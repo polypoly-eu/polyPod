@@ -424,13 +424,8 @@ const DonutChart = ({ data, message }) => {
             .domain(groupsInfo.map(({ name }) => name))
             .range(groupsInfo.map(({ color }) => color));
         const plotArea = _getRootSvg(screenSize);
-        const {
-            arcs,
-            groupArcs,
-            arc,
-            labelsArc,
-            groupLabelsArc,
-        } = _calculateArcsArea(chartData, groupsInfo, screenSize);
+        const { arcs, groupArcs, arc, labelsArc, groupLabelsArc } =
+            _calculateArcsArea(chartData, groupsInfo, screenSize);
 
         _cleanLabels();
         const {

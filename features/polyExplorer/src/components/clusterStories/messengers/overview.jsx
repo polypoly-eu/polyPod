@@ -24,9 +24,8 @@ const Overview = ({ products, heightEvent }) => {
 
     const [donutData, updateDonutData] = useState();
     const [currentDonutData, updateCurrentDataDonut] = useState();
-    const [currentDonutMessage, updateCurrentDonutMessage] = useState(
-        messageInstalls
-    );
+    const [currentDonutMessage, updateCurrentDonutMessage] =
+        useState(messageInstalls);
 
     const graphMagnitude = 1000000;
     const decimalsNumber = 2;
