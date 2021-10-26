@@ -1,6 +1,10 @@
 import { IMPORT_WARNING } from "./utils/importer-status.js";
 import { readJSONDataArray } from "./utils/importer-util.js";
 
+export const LANGUAGE_AND_LOCALE_FILE_PATH =
+    "preferences/language_and_locale.json";
+export const LANGUAGE_AND_LOCALE_DATA_KEY = "language_and_locale_v2";
+
 /**
  * Attempt to extract the language set by the user in the profile.
  *
@@ -33,12 +37,11 @@ import { readJSONDataArray } from "./utils/importer-util.js";
  * @class
  */
 export default class LanguageAndLocaleImporter {
-    async readLanguageData(id, zipFile) {
+    async readLanguageData(zipFile) {
         return await readJSONDataArray(
-            "preferences/language_and_locale.json",
-            "language_and_locale_v2",
-            zipFile,
-            id
+            LANGUAGE_AND_LOCALE_FILE_PATH,
+            LANGUAGE_AND_LOCALE_DATA_KEY,
+            zipFile
         );
     }
 
@@ -59,8 +62,8 @@ export default class LanguageAndLocaleImporter {
         };
     }
 
-    async import({ id, zipFile }, facebookAccount) {
-        const languageData = await this.readLanguageData(id, zipFile);
+    async import({ zipFile, facebookAccount }) {
+        const languageData = await this.readLanguageData(zipFile);
         facebookAccount.preferredLanguage =
             this.extractPreferredLanguge(languageData);
 

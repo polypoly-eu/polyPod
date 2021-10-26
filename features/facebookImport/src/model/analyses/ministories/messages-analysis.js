@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import i18n from "../../../i18n";
 import RootAnalysis from "./root-analysis";
 import InfoButton from "../../../components/buttons/infoButton/infoButton.jsx";
@@ -67,15 +67,44 @@ export default class MessagesAnalysis extends RootAnalysis {
         });
     }
 
+    _calculateFontSize(text, maxWidth) {
+        // TODO: Extract text size affecting styles from target element
+        const minFontSize = 10;
+        const maxFontSize = 80;
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
+            context.font = `${fontSize}px Jost`;
+            if (context.measureText(text).width <= maxWidth) return fontSize;
+        }
+        return minFontSize;
+    }
+
     renderSummary() {
+        const refWidth = useRef(0);
+
+        const fontSize = this._calculateFontSize(
+            this._messagesCount,
+            refWidth.current.clientWidth
+        );
+
         return (
-            <p>
-                {i18n.t("explore:messages.summary", {
-                    messages: this._messagesCount,
-                    threads: this._messagesThreadsData.length,
-                    people: this._totalUsernamesCount,
-                })}
-            </p>
+            <>
+                <h2
+                    className="messages-count"
+                    style={{ fontSize: fontSize }}
+                    ref={refWidth}
+                >
+                    {this._messagesCount}
+                </h2>
+                <p>
+                    {i18n.t("explore:messages.summary", {
+                        messages: this._messagesCount,
+                        threads: this._messagesThreadsData.length,
+                        people: this._totalUsernamesCount,
+                    })}
+                </p>
+            </>
         );
     }
 

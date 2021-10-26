@@ -50,6 +50,8 @@ open class PodApi(
                     "writeFile" -> return handlePolyOutWriteFile(args)
                     "stat" -> return handlePolyOutStat(args)
                     "readdir" -> return handlePolyOutReadDir(args)
+                    "importArchive" -> return handlePolyOutImportArchive(args)
+                    "removeArchive" -> return handlePolyOutRemoveArchive(args)
                 }
             }
             "polyIn" -> {
@@ -67,8 +69,7 @@ open class PodApi(
                         return handlePolyNavSetActiveActions(args)
                     "setTitle" -> return handlePolyNavSetTitle(args)
                     "openUrl" -> return handlePolyNavOpenUrl(args)
-                    "importFile" -> return handlePolyNavImportFile()
-                    "removeFile" -> return handlePolyNavRemoveFile(args)
+                    "pickFile" -> return handlePolyNavPickFile(args)
                 }
             }
             "info" -> {
@@ -93,7 +94,7 @@ open class PodApi(
 
     private suspend fun handlePolyOutFetch(args: List<Value>): Value {
         logger.debug("dispatch() -> polyOut.fetch")
-        throw Error("Not implemented")
+        throw Exception("Not implemented")
         return ValueFactory.newNil()
     }
 
@@ -134,6 +135,22 @@ open class PodApi(
         if (!args[0].isNilValue) { path = args[0].asStringValue().toString() }
         val result = polyOut.readdir(path)
         return ValueFactory.newArray(result.map { ValueFactory.newString(it) })
+    }
+
+    private suspend fun handlePolyOutImportArchive(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyOut.importArchive")
+        val url = args[0].asStringValue().toString()
+        polyOut.importArchive(url)?.let {
+            return ValueFactory.newString(it.path.toString())
+        }
+        return ValueFactory.newNil()
+    }
+
+    private suspend fun handlePolyOutRemoveArchive(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyOut.removeArchive")
+        val fileId = args[0].asStringValue().toString()
+        polyOut.removeArchive(fileId)
+        return ValueFactory.newNil()
     }
 
     private suspend fun handlePolyInAdd(args: List<Value>): Value {
@@ -186,18 +203,14 @@ open class PodApi(
         return ValueFactory.newNil()
     }
 
-    private suspend fun handlePolyNavImportFile(): Value {
-        logger.debug("dispatch() -> polyNav.importFile")
-        polyNav.importFile()?.let {
-            return ValueFactory.newString(it.path.toString())
+    private suspend fun handlePolyNavPickFile(args: List<Value>): Value {
+        val type = args[0].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
         }
-        return ValueFactory.newNil()
-    }
-
-    private suspend fun handlePolyNavRemoveFile(args: List<Value>): Value {
-        logger.debug("dispatch() -> polyNav.removeFile")
-        val fileId = args[0].asStringValue().toString()
-        polyNav.removeFile(fileId)
+        logger.debug("dispatch() -> polyNav.pickFile")
+        polyNav.pickFile(type)?.let {
+            return ValueFactory.newString(it.toString())
+        }
         return ValueFactory.newNil()
     }
 

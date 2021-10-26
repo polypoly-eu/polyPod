@@ -9,7 +9,7 @@ import DataGroupsAnalysis from "./analyses/ministories/data-groups-analysis.js";
 import ConnectedAdvertisersAnalysis from "./analyses/ministories/connected-advertisers-analysis.js";
 import InteractedWithAdvertisersAnalysis from "./analyses/ministories/interacted-advertisers-analysis.js";
 import AdInterestsAnalysis from "./analyses/ministories/ad-interests-analysis.js";
-import OffFacebookEventsAnalysis from "./analyses/ministories/off-facebook-events-analysis.js";
+import OnOffFacebookEventsAnalysis from "./analyses/ministories/on-off-facebook-events-analysis.js";
 import MessagesAnalysis from "./analyses/ministories/messages-analysis.js";
 import SearchesAnalysis from "./analyses/ministories/searches-analysis.js";
 import FriendsAnalysis from "./analyses/ministories/friends-analysis.js";
@@ -42,12 +42,13 @@ import ActivitiesAnalysis from "./analyses/ministories/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/ministories/advertising-value-analysis.js";
 import AboutPicturesDataAnalysis from "./analyses/ministories/about-pictures-data-analysis.js";
 import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
+import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-facebook-advertisers-analysis.js";
 
 const subAnalyses = [
     DataStructureBubblesAnalysis,
     ActivitiesAnalysis,
     MessagesAnalysis,
-    OffFacebookEventsAnalysis,
+    OnOffFacebookEventsAnalysis,
     AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
 
@@ -72,6 +73,7 @@ const subAnalyses = [
     SesssionActivityLocationsAnalysis,
     ImportedJsonFilesAnalysis,
     AdViewsAnalysis,
+    OnOffFacebookAdvertisersAnalysis,
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
@@ -154,7 +156,7 @@ class UnrecognizedData {
     }
 }
 
-async function runAnalysis(analysisClass, enrichedData) {
+export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
 
     return subAnalysis
@@ -167,6 +169,7 @@ async function runAnalysis(analysisClass, enrichedData) {
             };
         })
         .catch((error) => {
+            console.log(error);
             return {
                 analysis: subAnalysis,
                 status: createErrorStatus(analysisClass, error),

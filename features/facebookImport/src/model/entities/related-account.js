@@ -55,4 +55,13 @@ export default class RelatedAccount {
     addRelatedPost(newPost) {
         this._relatedPosts.push(newPost);
     }
+
+    get latestEventTimestamp() {
+        return this._relatedPosts.reduce((latestTimestamp, relatedPost) => {
+            const currentTimestamp = relatedPost.latestEventTimestamp;
+            return currentTimestamp > latestTimestamp
+                ? currentTimestamp
+                : latestTimestamp;
+        }, 0);
+    }
 }

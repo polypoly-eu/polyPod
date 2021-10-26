@@ -1,6 +1,7 @@
 package coop.polypoly.polypod
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -115,6 +116,7 @@ open class FeatureFragment : Fragment() {
         activity?.window?.navigationBarColor = feature.primaryColor
         setupAppBar(view)
         featureContainer = view.findViewById(R.id.feature_container)
+        featureContainer.errorHandler = ::handleError
         featureContainer.feature = feature
         setupNavigation(view)
     }
@@ -143,6 +145,18 @@ open class FeatureFragment : Fragment() {
         }
     }
 
+    @Suppress("unused")
+    private fun handleError(error: String) {
+        val acknowledgeLabel =
+            context?.getString(R.string.button_acknowledge)
+        val featureErrorMessage =
+            context?.getString(R.string.feature_error, feature.name, error)
+        AlertDialog.Builder(context)
+            .setMessage(featureErrorMessage)
+            .setPositiveButton(acknowledgeLabel) { _, _ -> close() }
+            .show()
+    }
+
     private fun setupNavigation(view: View) {
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
@@ -169,7 +183,11 @@ open class FeatureFragment : Fragment() {
 
     private fun navigateBack() {
         if (!featureContainer.triggerNavAction("back"))
-            findNavController().popBackStack()
+            close()
+    }
+
+    private fun close() {
+        findNavController().popBackStack()
     }
 
     private fun updateAppBarActions(view: View, navActions: List<String>) {
@@ -194,14 +212,13 @@ open class FeatureFragment : Fragment() {
         view.findViewById<TextView>(R.id.feature_title).text = title
     }
 
-    private suspend fun pickFile(): Uri? {
+    private suspend fun pickFile(type: String?): Uri? {
         if (pickFileResult?.isActive == true)
             return null
-
         pickFileResult = CompletableDeferred()
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*"
+            setTypeAndNormalize(type ?: "*/*")
             // TODO: Figure out how to preselect the downloads directory
             //       on Android <26
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

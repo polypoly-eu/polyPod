@@ -1,11 +1,8 @@
 import {
-    FileTooLargeException,
     InvalidContentImportException,
     MissingContentImportException,
     MissingFileImportException,
 } from "./failed-import-exception";
-
-const FILE_SIZE_LIMIT = 5 * 1024 * 1024;
 
 async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
@@ -14,30 +11,26 @@ async function relevantZipEntries(zipFile) {
     );
 }
 
-async function readJSONFile(dataFileName, zipFile, zipId = null) {
-    const fullEntryName = zipId ? zipId + "/" + dataFileName : dataFileName;
+async function readJSONFile(relativeFileName, zipFile) {
+    const fullEntryName = `${zipFile.id}/${relativeFileName}`;
+    return readFullPathJSONFile(fullEntryName, zipFile);
+}
+
+async function readFullPathJSONFile(fullEntryName, zipFile) {
     const entries = await zipFile.getEntries();
-    const dataZipEntry = entries.find(
-        (entryName) => entryName === fullEntryName
+    const dataZipEntry = entries.find((entryName) =>
+        entryName.endsWith(fullEntryName)
     );
 
     if (!dataZipEntry) {
-        throw new MissingFileImportException(dataFileName);
-    }
-    const firstStat = await zipFile.stat(dataZipEntry);
-
-    // TODO: Figure out why we can't use only getSize()
-    const fileSize =
-        "size" in firstStat ? parseInt(firstStat.size) : firstStat.getSize();
-    if (fileSize > FILE_SIZE_LIMIT) {
-        throw new FileTooLargeException(dataFileName);
+        throw new MissingFileImportException(fullEntryName);
     }
 
     const rawContent = await zipFile.getContent(dataZipEntry);
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
-        throw new MissingContentImportException(dataFileName);
+        throw new MissingContentImportException(fullEntryName);
     }
 
     return JSON.parse(fileContent, (key, value) => {
@@ -48,13 +41,8 @@ async function readJSONFile(dataFileName, zipFile, zipId = null) {
     });
 }
 
-async function readJSONDataObject(
-    dataFileName,
-    dataKey,
-    zipFile,
-    zipId = null
-) {
-    const rawData = await readJSONFile(dataFileName, zipFile, zipId);
+async function readJSONDataObject(dataFileName, dataKey, zipFile) {
+    const rawData = await readJSONFile(dataFileName, zipFile);
 
     if (!(dataKey in rawData)) {
         throw new InvalidContentImportException(
@@ -66,13 +54,8 @@ async function readJSONDataObject(
     return rawData[dataKey];
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile, zipId = null) {
-    const arrayData = await readJSONDataObject(
-        dataFileName,
-        dataKey,
-        zipFile,
-        zipId
-    );
+async function readJSONDataArray(dataFileName, dataKey, zipFile) {
+    const arrayData = await readJSONDataObject(dataFileName, dataKey, zipFile);
 
     if (!Array.isArray(arrayData)) {
         throw new InvalidContentImportException(
@@ -114,24 +97,17 @@ async function jsonDataEntities(zipFile) {
 }
 
 function removeEntryPrefix(entryName) {
-    // TODO: Making assumptions about the exact URL format used internally by the polyPod is risky,
-    //       we already have the case where iOS URLs contain both upper and lower case characters,
-    //       while Android URLs don't. A better approach would be to get the archive's root path from
-    //       the polyPod, then remove this from the beginning of all URLs.
-    if (
-        /^poly[pP]od:\/\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/$/.test(
-            entryName
-        )
-    ) {
-        return "";
-    }
-    const entryNameMatch = entryName.match(
-        /^poly[pP]od:\/\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/(.*)$/
-    );
-    if (entryNameMatch && entryNameMatch.length === 2 && entryNameMatch[1]) {
-        return entryNameMatch[1];
-    }
-    return entryName;
+    // There is no polyPod API at this time that gives us the relative paths we
+    // want to show, so we have to make assumptions about the URL formats used
+    // by the polyPod.
+    const removalPatterns = [
+        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\//i,
+        /^FeatureFiles\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\//i,
+    ];
+    let cleanedEntry = entryName;
+    for (let pattern of removalPatterns)
+        cleanedEntry = cleanedEntry.replace(pattern, "");
+    return cleanedEntry;
 }
 
 function sliceIntoChunks(array, chunkSize) {
@@ -145,6 +121,7 @@ function sliceIntoChunks(array, chunkSize) {
 
 export {
     readJSONFile,
+    readFullPathJSONFile,
     readJSONDataObject,
     readJSONDataArray,
     anonymizeJsonEntityPath,

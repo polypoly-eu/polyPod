@@ -36,6 +36,14 @@ class AsyncPolyOut implements PolyOut {
     async readdir(path: string): Promise<string[]> {
         return (await this.promise).readdir(path);
     }
+
+    async importArchive(url: string): Promise<string> {
+        return (await this.promise).importArchive(url);
+    }
+
+    async removeArchive(fileId: string): Promise<void> {
+        return (await this.promise).removeArchive(fileId);
+    }
 }
 
 class AsyncPolyIn implements PolyIn {
@@ -77,12 +85,8 @@ class AsyncPolyNav implements PolyNav {
         return (await this.promise).setTitle(title);
     }
 
-    async importFile(): Promise<string> {
-        return (await this.promise).importFile();
-    }
-
-    async removeFile(fileId: string): Promise<void> {
-        return (await this.promise).removeFile(fileId);
+    async pickFile(type?: string): Promise<string | null> {
+        return (await this.promise).pickFile(type);
     }
 }
 

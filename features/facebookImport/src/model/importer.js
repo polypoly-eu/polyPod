@@ -46,13 +46,13 @@ const dataImporters = [
 
 export async function runImporter(
     importerClass,
-    enrichedData,
+    zipFile,
     facebookAccount,
     pod
 ) {
     const importer = new importerClass();
     return importer
-        .import(enrichedData, facebookAccount, pod)
+        .import({ zipFile, facebookAccount, pod })
         .then(
             (status) =>
                 status || {
@@ -65,19 +65,15 @@ export async function runImporter(
         });
 }
 
-export async function importData(file) {
-    const zipFile = new ZipFile(file, window.pod);
-    const facebookAccount = new FacebookAccount();
-    const enrichedData = { ...file, zipFile };
-
+export async function runImporters(
+    importerClasses,
+    zipFile,
+    facebookAccount,
+    pod
+) {
     const importingResultsPerImporter = await Promise.all(
-        dataImporters.map(async (importerClass) => {
-            return runImporter(
-                importerClass,
-                enrichedData,
-                facebookAccount,
-                window.pod
-            );
+        importerClasses.map(async (importerClass) => {
+            return runImporter(importerClass, zipFile, facebookAccount, pod);
         })
     );
 
@@ -88,7 +84,25 @@ export async function importData(file) {
             ),
         []
     );
+
+    return importingResults;
+}
+
+export async function importZip(zipFile, pod) {
+    const facebookAccount = new FacebookAccount();
+    const importingResults = await runImporters(
+        dataImporters,
+        zipFile,
+        facebookAccount,
+        pod
+    );
+
     facebookAccount.importingResults = importingResults;
 
     return facebookAccount;
+}
+
+export async function importData(zipData) {
+    const zipFile = new ZipFile(zipData, window.pod);
+    return importZip(zipFile, zipData, window.pod);
 }
