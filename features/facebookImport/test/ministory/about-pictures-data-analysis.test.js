@@ -40,7 +40,7 @@ describe("Pictures ministory on export with JPEG pictures in correct location", 
     beforeAll(async () => {
         let zipFile = new ZipFileMock();
         zipFile.addNamedEntry(
-            "photos_and_videos/photos/14567839_1208576379157271_232556476_n_21487783899157271.jpg",
+            "photos_and_videos/TimelinePhotos_24T6AJAQ42/14567839_1208576379157271_232556476_n_21487783899157271.jpg",
             ""
         );
 
