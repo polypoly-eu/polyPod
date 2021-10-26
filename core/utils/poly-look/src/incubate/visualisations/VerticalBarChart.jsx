@@ -15,7 +15,7 @@ import * as d3 from "d3";
  * @param {number = 300} [height] - The height of the svg
  * @param {number = adaptive} [barWidth] - The width of the bars
  * @param {string|callback = "blue"} [barColor] - The color of the bar (callbacks receive event and data)
- * @param {boolean = false} [barValue] - The values of the bars are displayed above
+ * @param {string = null} [barValues] - The color the values are shown in (default = no values shown)
  * @returns {jsx-div with svg attached}
  */
 export const VerticalBarChart = ({
@@ -24,7 +24,7 @@ export const VerticalBarChart = ({
   width = 400,
   height = 300,
   barWidth,
-  barValue = false,
+  barValues = false,
 }) => {
   const barChartRef = useRef();
 
@@ -127,8 +127,9 @@ export const VerticalBarChart = ({
     styleAxis(barChart);
   }
 
-  function updateExistingBars(bars) {
-    bars
+  function updateExistingBars(barGroups) {
+    barGroups
+      .selectAll("rect")
       .transition()
       .duration(750)
       .attr("y", chartHeight - initializingBarHeight)
@@ -145,17 +146,14 @@ export const VerticalBarChart = ({
       .duration(750)
       .attr("y", (d) => yScale(d.value))
       .attr("height", (d) => chartHeight - yScale(d.value));
-    // bars
-    //   .append("text")
-    //   .attr("x", xScale.bandwidth() / 2)
-    //   .attr("y", (d) => d.value * yScale)
-    //   .attr("dy", ".35em")
-    //   .text((d) => d.value);
   }
 
-  function addEnteringBars(bars) {
-    bars
+  function addEnteringBars(barGroups) {
+    const enteringBarGroups = barGroups
       .enter()
+      .append("g")
+      .attr("class", "bar-group");
+    enteringBarGroups
       .append("rect")
       .attr("y", chartHeight - initializingBarHeight)
       .attr("height", initializingBarHeight)
@@ -166,30 +164,40 @@ export const VerticalBarChart = ({
       )
       .attr("width", barWidth || xScale.bandwidth())
       .attr("fill", barColor)
-      .attr("class", "bar")
       .transition()
       .duration(750)
       .delay((_, i) => i * 50)
       .attr("y", (d) => yScale(d.value))
       .attr("height", (d) => chartHeight - yScale(d.value));
-    if (barValue)
-      bars
-        .append("text")
-        .attr("x", (d) =>
-          barWidth
-            ? xScale(d.title) + (xScale.bandwidth() - barWidth) / 2
-            : xScale(d.title)
-        )
-        .attr("y", (d) => chartHeight - yScale(d.value) + barValueMargin)
-        .attr("dy", ".35em")
-        .text((d) => d.value);
+  }
+
+  function addBarValues(barGroups) {
+    barGroups
+      .enter()
+      .append("text")
+      .attr("x", (d) =>
+        barWidth ? xScale(d.title) + xScale.bandwidth() / 2 : xScale(d.title)
+      )
+      .attr("class", "bar-value")
+      .attr("text-anchor", "middle")
+      .attr("y", (d) => yScale(d.value) - barValueMargin)
+      .text((d) => d.value)
+      .attr("fill", "transparent")
+      .style("font-size", "10px")
+      .transition(2000)
+      .attr("fill", barValues);
+
+    console.log(barGroups.selectAll(".bar-value"));
   }
 
   function displayBars(barChart) {
-    const bars = barChart.selectAll(".bar").data(data, (d) => d.title);
-    bars.exit().remove();
-    updateExistingBars(bars);
-    addEnteringBars(bars);
+    const barGroups = barChart
+      .selectAll(".bar-group")
+      .data(data, (d) => d.title);
+    barGroups.exit().remove();
+    updateExistingBars(barGroups);
+    addEnteringBars(barGroups);
+    if (barValues) addBarValues(barGroups);
   }
 
   useEffect(() => {
