@@ -11,6 +11,7 @@ import LanguageAndLocaleImporter from "../../src/model/importers/language-and-lo
 import FriendsImporter from "../../src/model/importers/friends-importer.js";
 import LikedPagesImporter from "../../src/model/importers/pages-liked-importer.js";
 import AdInterestsImporter from "../../src/model/importers/ad-interests-importer.js";
+import ConnectedAdvertisersImporter from "../../src/model/importers/connected-advertisers-importer.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -30,6 +31,10 @@ export async function runSingleImporter(importerClass, zipFile) {
 
 export async function runAdInterestsImporter(zipFile) {
     return runSingleImporter(AdInterestsImporter, zipFile);
+}
+
+export async function runConnectedAdvertisersImporter(zipFile) {
+    return runSingleImporter(ConnectedAdvertisersImporter, zipFile);
 }
 
 export async function runLanguageAndLocaleImporter(zipFile) {
