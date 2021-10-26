@@ -36,6 +36,7 @@ export default {
                     src: [
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
+                        "node_modules/react-router-dom/umd/react-router-dom.js",
                         "node_modules/@polypoly-eu/podjs/dist/pod.js",
                         "src/static/*",
                     ],
@@ -52,5 +53,5 @@ export default {
             include: /node_modules/,
         }),
     ],
-    external: ["react", "react-dom"],
+    external: ["react", "react-dom", "react-router-dom"],
 };
