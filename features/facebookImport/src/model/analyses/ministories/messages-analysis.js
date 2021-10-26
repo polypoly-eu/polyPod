@@ -15,13 +15,6 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     async analyze({ facebookAccount }) {
-        this._messagesThreadsData = [];
-        this._messagesCount = 0;
-        this.active = facebookAccount.messageThreadsCount > 0;
-        if (!this.active) {
-            return;
-        }
-
         this._messagesCount = facebookAccount.messagesCount;
         this._messagesThreadsData = [];
         const usernames = new Set();
@@ -60,8 +53,8 @@ export default class MessagesAnalysis extends RootAnalysis {
             });
 
             this._messagesThreadsData.sort((a, b) => b.count - a.count);
-
             this._totalUsernamesCount = usernames.size;
+            this.active = this._messagesThreadsData.length > 0;
         });
     }
 
