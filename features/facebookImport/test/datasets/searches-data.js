@@ -14,7 +14,7 @@ export function wrapSearchesData(data) {
 
 function createSearchEntry(timestamp, searchText) {
     return {
-        timestamp: timestamp,
+        timestamp,
         attachments: [
             {
                 data: [
