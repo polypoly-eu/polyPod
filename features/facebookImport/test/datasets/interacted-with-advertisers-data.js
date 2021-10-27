@@ -5,7 +5,7 @@ import {
 import { createMockedZip } from "../utils/data-creation";
 
 export const DATASET_EXPECTED_VALUES = {
-    totalEventsCount: 5,
+    totalInteractionsCount: 6,
 };
 
 export function wrapInteractedWithAdvertisersData(data) {

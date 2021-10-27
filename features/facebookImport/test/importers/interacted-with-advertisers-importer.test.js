@@ -49,7 +49,7 @@ describe("Import interacted with advertisers", () => {
     it("returns success status", () => expectImportSuccess(result));
 
     it("has correct number of entities", () =>
-        expect(facebookAccount.searches.length).toBe(
-            DATASET_EXPECTED_VALUES.numberOfSearches
+        expect(facebookAccount.interactedAdvertisers.length).toBe(
+            DATASET_EXPECTED_VALUES.totalInteractionsCount
         ));
 });
