@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 
 import * as d3 from "d3";
 
+import "./verticalBarChart.css";
+
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
  *
@@ -22,7 +24,7 @@ export const VerticalBarChart = ({
   data,
   barColor = "blue",
   width = 400,
-  height = 300,
+  height = 200,
   barWidth,
   barValues = false,
 }) => {
@@ -38,7 +40,9 @@ export const VerticalBarChart = ({
     chartHeight = height - margin.bottom - margin.top,
     chartWidth = width - margin.left - margin.right,
     initializingBarHeight = 2,
-    barValueMargin = 4;
+    barValueMargin = 4,
+    numberTicksY = 4,
+    gridXMargin = 12;
 
   const xScale = d3.scaleBand().range([0, chartWidth]).padding(0.2),
     yScale = d3.scaleLinear().range([chartHeight, margin.bottom]);
@@ -64,17 +68,6 @@ export const VerticalBarChart = ({
       .attr("class", "chart");
   }
 
-  function styleAxis(barChart) {
-    const axis = barChart.selectAll(".axis");
-    axis.selectAll(".domain").style("visibility", "hidden");
-    axis.selectAll("line").style("visibility", "hidden");
-    axis
-      .selectAll(".tick")
-      .selectAll("text")
-      .attr("fill", "#a9b6c6")
-      .style("font-size", "12px");
-  }
-
   function addAxis(barChart) {
     barChart
       .append("g")
@@ -82,7 +75,7 @@ export const VerticalBarChart = ({
         d3
           .axisLeft(yScale)
           .tickFormat((d) => d)
-          .ticks(5)
+          .ticks(numberTicksY)
       )
       .attr("class", "y-axis axis")
       .append("text")
@@ -96,8 +89,6 @@ export const VerticalBarChart = ({
       .attr("class", "x-axis axis")
       .call(d3.axisBottom(xScale))
       .attr("transform", `translate(0, ${chartHeight})`);
-
-    styleAxis(barChart);
   }
 
   //TODO: transition of y-axis
@@ -123,8 +114,6 @@ export const VerticalBarChart = ({
       .selectAll(".x-axis")
       .call(d3.axisBottom(xScale))
       .attr("transform", `translate(0, ${chartHeight})`);
-
-    styleAxis(barChart);
   }
 
   function updateExistingBars(barChart) {
@@ -171,9 +160,7 @@ export const VerticalBarChart = ({
   function addEnteringBarValues(enteringBarGroups) {
     enteringBarGroups
       .append("text")
-      .attr("x", (d) =>
-        barWidth ? xScale(d.title) + xScale.bandwidth() / 2 : xScale(d.title)
-      )
+      .attr("x", (d) => xScale(d.title) + xScale.bandwidth() / 2)
       .attr("class", "bar-value")
       .attr("text-anchor", "middle")
       .attr("y", (d) => yScale(d.value) - barValueMargin)
@@ -197,6 +184,21 @@ export const VerticalBarChart = ({
       .delay(1500)
       .duration(500)
       .attr("fill", barValues);
+  }
+
+  function addYAxisGrid(barChart) {
+    barChart.select(".axis-grid").remove();
+    barChart
+      .append("g")
+      .attr("class", "axis-grid")
+      .call(
+        d3
+          .axisLeft(yScale)
+          .tickSize(-chartWidth + gridXMargin)
+          .tickFormat("")
+          .ticks(numberTicksY)
+      )
+      .attr("transform", `translate(${gridXMargin / 2}, 0)`);
   }
 
   function displayBars(barChart) {
@@ -225,7 +227,8 @@ export const VerticalBarChart = ({
     if (barChart.select(".x-axis").empty()) addAxis(barChart);
     else transitionAxis(barChart);
     displayBars(barChart);
+    addYAxisGrid(barChart);
   });
 
-  return <div className="bar-chart" ref={barChartRef}></div>;
+  return <div className="bar-chart vertical-bar-chart" ref={barChartRef}></div>;
 };
