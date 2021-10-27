@@ -51,7 +51,7 @@ describe("Import connected advertisers", () => {
 
     it("returns success status", () => expectImportSuccess(result));
 
-    it("has correct number of ad interests", () =>
+    it("has correct number of entities", () =>
         expect(facebookAccount.connectedAdvertisers.length).toBe(
             DATASET_EXPECTED_VALUES.numberOfConnectedAdvertisers
         ));
