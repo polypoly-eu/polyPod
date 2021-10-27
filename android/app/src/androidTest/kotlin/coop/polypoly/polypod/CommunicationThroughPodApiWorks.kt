@@ -769,8 +769,11 @@ class CommunicationThroughPodApiWorks {
     private fun launchTestFeature(): PodApiTestDouble {
         val fragmentArgs = Bundle().apply {
             putString("featureName", "testFeature")
+            putString("featureFile", "demo.zip")
         }
-        val fragmentScenario = launchFragmentInContainer<FeatureFragmentTestDouble>(fragmentArgs)
+        val fragmentScenario = launchFragmentInContainer<FeatureFragmentTestDouble>(
+            fragmentArgs, R.style.Theme_AppCompat
+        )
         val polyOut = PolyOutTestDouble(
             ApplicationProvider.getApplicationContext()
         )
