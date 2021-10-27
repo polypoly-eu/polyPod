@@ -276,7 +276,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="data-types-info"
+                        route="/data-types-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                     {filler}
@@ -307,7 +307,7 @@ const DataExplorationScreen = () => {
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        route="data-types-info"
+                        route="/data-types-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -334,7 +334,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="data-category-info"
+                        route="/data-category-info"
                         saveActiveIndex={saveActiveIndex}
                         stateChange={{
                             explorationState: {
@@ -368,7 +368,7 @@ const DataExplorationScreen = () => {
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        route="data-correlation-info"
+                        route="/data-correlation-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -396,7 +396,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="data-correlation-info"
+                        route="/data-correlation-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -435,7 +435,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="companies-info"
+                        route="/companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -464,7 +464,7 @@ const DataExplorationScreen = () => {
                         {i18n.t("common:source")}: polyPedia
                     </p>
                     <InfoButton
-                        route="companies-info"
+                        route="/companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -507,7 +507,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="companies-info"
+                        route="/companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
