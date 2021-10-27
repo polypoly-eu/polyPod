@@ -79,20 +79,22 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
     const constantTabData = {
         total: {
             barData: yearlyTotals,
-            barWidth: "10px",
+            barWidth: 6,
             barChartLegendText: i18n.t("activitiesMiniStory:tab.events.total", {
                 number_events: totalEvents.total,
             }),
+            barValueColor: null,
         },
         yearly: {
             barData: monthlyTotals,
-            barWidth: "18px",
+            barWidth: 22,
             barChartLegendText: i18n.t(
                 "activitiesMiniStory:tab.events.yearly",
                 {
                     number_events: totalEvents.values[selectedYear]?.total || 0,
                 }
             ),
+            barValueColor: "white",
         },
     }[activeTab.id];
 
@@ -157,13 +159,16 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     <div
                         className="bar-piece"
                         style={{
-                            width: constantTabData.barWidth,
+                            width: constantTabData.barWidth + "px",
                         }}
                     ></div>
                     <p>{constantTabData.barChartLegendText}</p>
                 </div>
                 <p className="above-chart">{numberOfEventsString}</p>
-                <div id={verticalBarChart.id}></div>
+                <div
+                    id={verticalBarChart.id}
+                    className="vertical-bar-chart"
+                ></div>
             </div>
             <InfoButton route="/report/details/activities-info" />
             <p className="source">

@@ -26,8 +26,8 @@ export default class Storage {
     }
 
     async removeFile(file) {
-        const { polyNav } = this._pod;
-        await polyNav.removeFile(file);
+        const { polyOut } = this._pod;
+        await polyOut.removeArchive(file);
         await this.refreshFiles();
         this.changeListener();
     }
@@ -39,13 +39,17 @@ export class ZipFile {
         this._file = file;
     }
 
+    get id() {
+        return this._file.id;
+    }
+
     async getEntries() {
         const { polyOut } = this._pod;
-        return polyOut.readdir(this._file.id);
+        return polyOut.readdir(this.id);
     }
 
     async data() {
-        return this.getContent(this._file.id);
+        return this.getContent(this.id);
     }
 
     async stat(entry) {

@@ -2,6 +2,8 @@ import * as d3 from "d3";
 
 import { Chart } from "../chart";
 
+import "./verticalBarChart.css";
+
 const initializingBarHeight = 2;
 const margin = {
   top: 10,
