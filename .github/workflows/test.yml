@@ -26,6 +26,7 @@ jobs:
             - 'features/lexicon/**'
             - 'features/polyExplorer/**'
             - 'features/polyPreview/**'
+            - 'features/facebookImport/**'
             - 'podjs/**'
             js:
             - '**/*.js'
