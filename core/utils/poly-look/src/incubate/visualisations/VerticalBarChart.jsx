@@ -17,7 +17,7 @@ import "./verticalBarChart.css";
  * @param {number = 300} [height] - The height of the svg
  * @param {number = adaptive} [barWidth] - The width of the bars
  * @param {string|callback = "blue"} [barColor] - The color of the bar (callbacks receive event and data)
- * @param {string = null} [barValues] - The color the values are shown in (default = no values shown)
+ * @param {string = null} [barValueColor] - The color the values are shown in (default = no values shown)
  * @returns {jsx-div with svg attached}
  */
 export const VerticalBarChart = ({
@@ -26,7 +26,7 @@ export const VerticalBarChart = ({
   width = 400,
   height = 200,
   barWidth,
-  barValues = false,
+  barValueColor,
 }) => {
   const barChartRef = useRef();
 
@@ -41,7 +41,7 @@ export const VerticalBarChart = ({
     chartWidth = width - margin.left - margin.right,
     initializingBarHeight = 2,
     barValueMargin = 4,
-    numberTicksY = 4,
+    numberTicksY = 3,
     gridXMargin = 12;
 
   const xScale = d3.scaleBand().range([0, chartWidth]).padding(0.2),
@@ -116,10 +116,8 @@ export const VerticalBarChart = ({
       .attr("transform", `translate(0, ${chartHeight})`);
   }
 
-  function updateExistingBars(barChart) {
-    barChart
-      .selectAll(".bar-group")
-      .select(".bar")
+  function updateExistingBars(bars) {
+    bars
       .transition()
       .duration(750)
       .attr("y", chartHeight - initializingBarHeight)
@@ -137,8 +135,9 @@ export const VerticalBarChart = ({
       .attr("height", (d) => chartHeight - yScale(d.value));
   }
 
-  function addEnteringBars(enteringBarGroups) {
-    enteringBarGroups
+  function addEnteringBars(bars) {
+    bars
+      .enter()
       .append("rect")
       .attr("y", chartHeight - initializingBarHeight)
       .attr("height", initializingBarHeight)
@@ -157,8 +156,9 @@ export const VerticalBarChart = ({
       .attr("height", (d) => chartHeight - yScale(d.value));
   }
 
-  function addEnteringBarValues(enteringBarGroups) {
-    enteringBarGroups
+  function addEnteringBarValues(barValues) {
+    barValues
+      .enter()
       .append("text")
       .attr("x", (d) => xScale(d.title) + xScale.bandwidth() / 2)
       .attr("class", "bar-value")
@@ -170,20 +170,19 @@ export const VerticalBarChart = ({
       .transition()
       .delay(1000)
       .duration(500)
-      .attr("fill", barValues);
+      .attr("fill", barValueColor);
   }
 
-  function updateExistingBarValues(barChart) {
-    barChart
-      .selectAll(".bar-group")
-      .select(".bar-value")
+  function updateExistingBarValues(barValues) {
+    barValues
       .attr("fill", "transparent")
       .attr("y", (d) => yScale(d.value) - barValueMargin)
       .text((d) => d.value)
+      .raise()
       .transition()
       .delay(1500)
       .duration(500)
-      .attr("fill", barValues);
+      .attr("fill", barValueColor);
   }
 
   function addYAxisGrid(barChart) {
@@ -196,26 +195,25 @@ export const VerticalBarChart = ({
           .axisLeft(yScale)
           .tickSize(-chartWidth + gridXMargin)
           .tickFormat("")
-          .ticks(numberTicksY)
+          .ticks(numberTicksY * 2)
       )
       .attr("transform", `translate(${gridXMargin / 2}, 0)`);
   }
 
   function displayBars(barChart) {
-    const barGroups = barChart
-      .selectAll(".bar-group")
+    const bars = barChart.selectAll(".bar").data(data, (d) => d.title);
+    bars.exit().remove();
+    updateExistingBars(bars);
+    addEnteringBars(bars);
+  }
+
+  function displayValues(barChart) {
+    const barValues = barChart
+      .selectAll(".bar-value")
       .data(data, (d) => d.title);
-    barGroups.exit().remove();
-    const enteringBarGroups = barGroups
-      .enter()
-      .append("g")
-      .attr("class", "bar-group");
-    updateExistingBars(barChart);
-    addEnteringBars(enteringBarGroups);
-    if (barValues) {
-      updateExistingBarValues(barChart);
-      addEnteringBarValues(enteringBarGroups);
-    }
+    barValues.exit().remove();
+    updateExistingBarValues(barValues);
+    addEnteringBarValues(barValues);
   }
 
   useEffect(() => {
@@ -226,8 +224,11 @@ export const VerticalBarChart = ({
 
     if (barChart.select(".x-axis").empty()) addAxis(barChart);
     else transitionAxis(barChart);
+
     displayBars(barChart);
     addYAxisGrid(barChart);
+    if (barValueColor) displayValues(barChart);
+    else barChart.selectAll(".bar-value").remove();
   });
 
   return <div className="bar-chart vertical-bar-chart" ref={barChartRef}></div>;
