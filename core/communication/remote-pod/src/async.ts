@@ -85,8 +85,8 @@ class AsyncPolyNav implements PolyNav {
         return (await this.promise).setTitle(title);
     }
 
-    async pickFile(): Promise<string | null> {
-        return (await this.promise).pickFile();
+    async pickFile(type?: string): Promise<string | null> {
+        return (await this.promise).pickFile(type);
     }
 }
 

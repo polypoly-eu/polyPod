@@ -9,6 +9,8 @@ const polyPediaCompanyData = require("../polypedia-data/data/3_integrated/polyEx
 
 const polyPediaGlobalData = require("../polypedia-data/data/3_integrated/polyExplorer/global.json");
 
+const polyPediaProductData = require("../polypedia-data/data/3_integrated/polyExplorer/products.json");
+
 const dataIssueLog = {
     renamedEntities: [],
     sourceHardCoded: false,
@@ -21,8 +23,6 @@ const dataIssueLog = {
 
 const extractYear = (date) =>
     parseInt(date.slice(date.lastIndexOf(".") + 1), 10);
-
-const entityKey = (legalName) => legalName.toLowerCase();
 
 function extractAnnualRevenues(entry) {
     if (!entry.financial_data) return null;
@@ -38,7 +38,7 @@ function extractAnnualRevenues(entry) {
 
 function parseDescription(legalEntityData) {
     const editorialData =
-        ((legalEntityData.editorial_content || {}).editorials || [])[0] || {};
+        ((legalEntityData?.editorial_content || {}).editorials || [])[0] || {};
     const description = editorialData.body_i18n || {};
     const descriptionEmpty = Object.values(description).every(
         (value) => value === null
@@ -65,12 +65,7 @@ function fixPolyPediaEntityData(entityData) {
     }
 }
 
-function parseIndustryCategory(legalEntityData) {
-    const id = legalEntityData?.entity_details?.industry_category?.values?.[0];
-    return id ? { id } : null;
-}
-
-function parseEntity(entityData) {
+function parseCompanyEntity(entityData) {
     fixPolyPediaEntityData(entityData);
 
     const legalEntityData = entityData.legal_entity;
@@ -81,16 +76,14 @@ function parseEntity(entityData) {
     return {
         ppid: ppid,
         name: legalName,
-        featured: !!(
-            entityData.data_recipients &&
-            entityData.derived_purpose_info &&
-            entityData.derived_category_info
-        ),
+        featured: legalEntityData.editorial_content?.tags?.includes("Featured"),
+        clusters:
+            legalEntityData.editorial_content?.expanded_tags?.entityCluster,
         jurisdiction: null,
         location: {
-            city: legalEntityData.basic_info.registered_address.value.city,
+            city: legalEntityData.basic_info.registered_address.value?.city,
             countryCode:
-                legalEntityData.basic_info.registered_address.value.country,
+                legalEntityData.basic_info.registered_address.value?.country,
         },
         annualRevenues: extractAnnualRevenues(entityData),
         dataRecipients: entityData.data_recipients || null,
@@ -111,7 +104,43 @@ function parseEntity(entityData) {
               )
             : null,
         description: parseDescription(legalEntityData),
-        industryCategory: parseIndustryCategory(legalEntityData),
+        industryCategory:
+            legalEntityData?.entity_details?.industry_category?.values?.[0],
+        productsOwned: entityData.entity_relations?.products_owned,
+    };
+}
+
+function parseProductEntity(entityData) {
+    const product = entityData.product;
+    if (!product) return null;
+    return {
+        ppid: product.name,
+        name: product.name,
+        featured: product.editorial_content?.tags?.includes("Featured"),
+        clusters: product.editorial_content?.expanded_tags?.productCluster,
+        productOwner: product.product_owners,
+        activeUsers: product.active_users,
+        annualRevenues: product.revenue?.values,
+        dataRecipients: entityData.data_recipients || null,
+        dataSharingPurposes: entityData.derived_purpose_info
+            ? Object.entries(entityData.derived_purpose_info).map(
+                  ([key, value]) => ({
+                      "dpv:Purpose": key,
+                      count: value.count,
+                  })
+              )
+            : null,
+        dataTypesShared: entityData.derived_category_info
+            ? Object.entries(entityData.derived_category_info).map(
+                  ([key, value]) => ({
+                      "dpv:Category": key,
+                      count: value.count,
+                  })
+              )
+            : null,
+        description: parseDescription(entityData.policies),
+        recipientInfo: entityData.recipient_info,
+        activities: product.activity?.values,
     };
 }
 
@@ -129,53 +158,14 @@ function mergeEntities(oldEntity, newEntity) {
 }
 
 function enrichWithPatchData(entityMap) {
-    for (let [name, entity] of Object.entries(patchData)) {
-        const key = entityKey(name);
+    for (let [ppid, entity] of Object.entries(patchData)) {
+        const key = ppid;
         dataIssueLog[
             key in entityMap
                 ? "patchedCompaniesModified"
                 : "patchedCompaniesNew"
-        ].push(name);
+        ].push(ppid);
         entityMap[key] = mergeEntities(entityMap[key], entity);
-    }
-}
-
-function enrichWithTranslations(entity, globalData) {
-    // In the future, we should read these from the global data at runtime to
-    // keep the data small, but for now we keep this structure to keep the
-    // entries from patch-data.js working.
-
-    if (entity.industryCategory) {
-        const industryData = globalData.industries[entity.industryCategory.id];
-        if (industryData) {
-            const namePrefix = "Name_";
-            entity.industryCategory.name = Object.fromEntries(
-                Object.entries(industryData)
-                    .filter(([key]) => key.startsWith(namePrefix))
-                    .map(([key, value]) => [
-                        key.slice(namePrefix.length).toLowerCase(),
-                        value,
-                    ])
-            );
-        }
-    }
-
-    for (let purpose of entity.dataSharingPurposes || []) {
-        const purposeData = globalData.data_purposes[purpose["dpv:Purpose"]];
-        const translations = Object.fromEntries(
-            Object.entries(purposeData).filter(([key]) =>
-                ["Translation_", "Explanation_"].some((prefix) =>
-                    key.startsWith(prefix)
-                )
-            )
-        );
-        Object.assign(purpose, translations);
-    }
-
-    for (let category of entity.dataTypesShared || []) {
-        const categoryData =
-            globalData.personal_data_categories[category["dpv:Category"]];
-        Object.assign(category, categoryData);
     }
 }
 
@@ -187,17 +177,27 @@ function enrichWithGlobalData(entityMap, globalData) {
             entity.jurisdiction = "Sonstige";
             dataIssueLog.unknownJurisdictions.push(entity.name);
         }
-        enrichWithTranslations(entity, globalData);
     }
 }
 
-function enrichWithJurisdictionsShared(entityMap) {
+function enrichWithJurisdictionsShared(entityMap, companyMap) {
     for (let entity of Object.values(entityMap)) {
         for (let dataRecipient of entity.dataRecipients || []) {
-            const recipientKey = entityKey(dataRecipient);
-            if (!(recipientKey in entityMap)) continue;
+            const recipientKey = dataRecipient;
+            const productDataRecipient = companyMap?.find(
+                (company) => company.ppid == recipientKey
+            );
+            if (
+                (!companyMap && !(recipientKey in entityMap)) ||
+                (companyMap && !productDataRecipient)
+            )
+                continue;
 
-            const recipientJurisdiction = entityMap[recipientKey].jurisdiction;
+            let recipientJurisdiction;
+            companyMap
+                ? (recipientJurisdiction = productDataRecipient.jurisdiction)
+                : (recipientJurisdiction =
+                      entityMap[recipientKey].jurisdiction);
             if (!recipientJurisdiction) continue;
             entity.jurisdictionsShared = entity.jurisdictionsShared || {};
             entity.jurisdictionsShared.children =
@@ -225,16 +225,16 @@ function fixCompanyData(entityMap) {
         }
         const { dataRecipients } = entity;
         if (!dataRecipients) continue;
-        entity.dataRecipients = dataRecipients.filter((recipientName) => {
-            const recipientKey = entityKey(recipientName);
+        entity.dataRecipients = dataRecipients.filter((recipientPpid) => {
+            const recipientKey = recipientPpid;
             const keep =
                 entityMap[recipientKey] &&
                 entityMap[recipientKey].name &&
                 entityMap[recipientKey].industryCategory;
             if (!keep) {
-                dataIssueLog.missingDataRecipients[recipientName] =
-                    dataIssueLog.missingDataRecipients[recipientName] || [];
-                dataIssueLog.missingDataRecipients[recipientName].push(
+                dataIssueLog.missingDataRecipients[recipientPpid] =
+                    dataIssueLog.missingDataRecipients[recipientPpid] || [];
+                dataIssueLog.missingDataRecipients[recipientPpid].push(
                     entity.name
                 );
             }
@@ -245,11 +245,11 @@ function fixCompanyData(entityMap) {
 
 function parsePolyPediaCompanyData(globalData) {
     const entityMap = {};
-    polyPediaCompanyData.forEach((entityData) => {
-        const entity = parseEntity(entityData);
+    Object.values(polyPediaCompanyData).forEach((entityData) => {
+        const entity = parseCompanyEntity(entityData);
         if (!entity) return;
 
-        const key = entityKey(entity.name);
+        const key = entity.ppid;
         if (key in entityMap) dataIssueLog.duplicateKeys.push(key);
         entityMap[key] = mergeEntities(entityMap[key], entity);
     });
@@ -258,6 +258,20 @@ function parsePolyPediaCompanyData(globalData) {
     enrichWithGlobalData(entityMap, globalData);
     enrichWithJurisdictionsShared(entityMap);
     fixCompanyData(entityMap);
+    return Object.values(entityMap);
+}
+
+function parsePolyPediaProductData(companyMap) {
+    const entityMap = {};
+    Object.values(polyPediaProductData).forEach((entityData) => {
+        const entity = parseProductEntity(entityData);
+        if (!entity) return;
+
+        const key = entity.ppid;
+        if (key in entityMap) dataIssueLog.duplicateKeys.push(key);
+        entityMap[key] = mergeEntities(entityMap[key], entity);
+    });
+    enrichWithJurisdictionsShared(entityMap, companyMap);
     return Object.values(entityMap);
 }
 
@@ -276,6 +290,9 @@ function savePolyExplorerFile(fileName, data) {
 
 const savePolyExplorerCompanyData = (data) =>
     savePolyExplorerFile("companies.json", data);
+
+const savePolyExplorerProductData = (data) =>
+    savePolyExplorerFile("products.json", data);
 
 const parseDataRegion = (countryData) =>
     ({
@@ -360,6 +377,8 @@ ${patchedCompaniesNew.map((s) => listPrefix + s).join("\n")}
 
 const globalData = parsePolyPediaGlobalData();
 const companyData = parsePolyPediaCompanyData(globalData);
+const productData = parsePolyPediaProductData(companyData);
 savePolyExplorerGlobalData(globalData);
 savePolyExplorerCompanyData(companyData);
+savePolyExplorerProductData(productData);
 writeDataIssueLog();

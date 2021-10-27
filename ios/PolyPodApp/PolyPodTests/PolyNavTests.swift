@@ -6,7 +6,7 @@ private class PolyNavDelegateStub: PolyNavDelegate {
     func doHandleOpenUrl(url: String) {
     }
     
-    func doHandlePickFile(completion: @escaping (URL?) -> Void) {
+    func doHandlePickFile(type: String?, completion: @escaping (URL?) -> Void) {
         completion(pickFileResult)
     }
     
@@ -21,6 +21,7 @@ private let testFolderPath = FileManager.default.temporaryDirectory
 private let testFilePath = testFolderPath
     .appendingPathComponent("testFile.json")
 private let testZipFilePath = testFolderPath.appendingPathComponent("testFile.zip")
+private let zipMimeType = "application/zip"
 
 private func removeTestFile() {
     let fileManager = FileManager.default
@@ -68,7 +69,7 @@ class PolyNavTests: XCTestCase {
     
     private func expectPickFileResult(_ expected: String?) {
         let expectation = XCTestExpectation()
-        polyNav.pickFile() { actual in
+        polyNav.pickFile(type: zipMimeType) { actual in
             expectation.fulfill()
             if expected == nil {
                 XCTAssertEqual(expected, actual)

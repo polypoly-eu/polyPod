@@ -8,10 +8,11 @@ import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.polyNav.ZipTools
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.supervisorScope
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.nio.ByteBuffer
-import java.util.*
+import java.util.UUID
 import kotlin.coroutines.EmptyCoroutineContext
 
 open class PolyOut(
@@ -64,8 +65,6 @@ open class PolyOut(
                 return it.readBytes()
             }
         }
-
-        return ByteArray(0)
     }
 
     open suspend fun writeFile(path: String, data: ByteBuffer): Boolean {
@@ -107,7 +106,11 @@ open class PolyOut(
 
         val fs = Preferences.getFileSystem(context)
         if (id == "") {
-            return fs.keys.toTypedArray()
+            val newFs = fs.filter {
+                File(idToPath(it.key, context)).exists()
+            }
+            Preferences.setFileSystem(context, newFs)
+            return newFs.keys.toTypedArray()
         }
         if (readdirCache.contains(id)) {
             return readdirCache.get(id)!!
@@ -137,19 +140,21 @@ open class PolyOut(
                     )
             }
         }
-        coroutineScope.async {
-            contentResolver?.openInputStream(uri).use { inputStream ->
-                if (inputStream == null) {
-                    throw Error("File import error")
+        val retVal = supervisorScope {
+            this.async {
+                contentResolver?.openInputStream(uri).use { inputStream ->
+                    if (inputStream == null) {
+                        throw Error("File import error")
+                    }
+                    val newId = UUID.randomUUID().toString()
+                    val fs = Preferences.getFileSystem(context).toMutableMap()
+                    fs[fsPrefix + newId] = fileName
+                    Preferences.setFileSystem(context, fs)
+                    val featureName = Preferences.currentFeatureName
+                        ?: throw Error("Cannot import for unknown feature")
+                    val targetPath = "$featureName/$newId"
+                    ZipTools.unzipAndEncrypt(inputStream, context, targetPath)
                 }
-                val newId = UUID.randomUUID().toString()
-                val fs = Preferences.getFileSystem(context).toMutableMap()
-                fs[fsPrefix + newId] = fileName
-                Preferences.setFileSystem(context, fs)
-                val featureName = Preferences.currentFeatureName
-                    ?: throw Error("Cannot import for unknown feature")
-                val targetPath = "$featureName/$newId"
-                ZipTools.unzipAndEncrypt(inputStream, context, targetPath)
             }
         }.await()
         return null // TODO: Return the expected value

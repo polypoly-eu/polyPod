@@ -1,5 +1,4 @@
 import React from "react";
-import i18n from "../../i18n.js";
 import utils from "./utils.js";
 import "./dataViz.css";
 import DataTypeBubbles from "./dataTypeBubbles.jsx";
@@ -63,10 +62,7 @@ const DataTypeBubbleAll = ({
             bubbles
                 .filter((d) => d !== highlightedBubble)
                 .style("fill-opacity", opacity * 0.2);
-            const highlightText =
-                highlightedBubble.data[
-                    `Translation_${i18n.language.toUpperCase()}`
-                ];
+            const highlightText = highlightedBubble.data.translation;
             utils.appendCircleLabel(
                 bubbleContainer,
                 highlightedBubble,

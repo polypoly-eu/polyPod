@@ -3,7 +3,15 @@ import UIKit
 class FilePicker: NSObject, UIDocumentPickerDelegate {
     private var currentCompletion: ((URL?) -> Void)?
     
-    func pick(completion: @escaping (URL?) -> Void) {
+    func mimeToUti(_ mime: String?) -> String {
+        guard let mime = mime else { return "public.item" }
+        if mime == "application/zip" { return "com.pkware.zip-archive" }
+        // TODO: Throw proper error
+        print("Unsupported MIME type: \(mime)")
+        return mimeToUti(nil)
+    }
+    
+    func pick(type: String?, completion: @escaping (URL?) -> Void) {
         if currentCompletion != nil {
             completion(nil)
             return
@@ -11,7 +19,7 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         currentCompletion = completion
         
         let documentPickerController = UIDocumentPickerViewController(
-            documentTypes: ["public.item"],
+            documentTypes: [mimeToUti(type)],
             in: .import
         )
         documentPickerController.delegate = self

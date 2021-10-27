@@ -64,7 +64,7 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
-    pickFile(): ValueEndpointSpec<string | null>;
+    pickFile(type?: string): ValueEndpointSpec<string | null>;
 }>;
 
 type InfoEndpoint = ObjectEndpointSpec<{
@@ -278,7 +278,7 @@ export class RemoteClientPod implements Pod {
             setActiveActions: (actions: string[]) =>
                 this.rpcClient.polyNav().setActiveActions(actions)(),
             setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
-            pickFile: () => this.rpcClient.polyNav().pickFile()(),
+            pickFile: (type?: string) => this.rpcClient.polyNav().pickFile(type)(),
         };
     }
 
