@@ -5,7 +5,7 @@ import {
 import { createMockedZip } from "../utils/data-creation";
 
 export const DATASET_EXPECTED_VALUES = {
-    totalFriendsCount: 5,
+    totalEventsCount: 5,
 };
 
 export function wrapFriendsData(data) {
@@ -39,4 +39,11 @@ export function createFriendsDataset() {
 
 export function zipFileWithFriends() {
     return createMockedZip([[FRIENDS_FILE_PATH, createFriendsDataset()]]);
+}
+
+export function zipFileWithFriendsAndExpectedValues() {
+    return {
+        zipFile: zipFileWithFriends(),
+        expectedValues: DATASET_EXPECTED_VALUES,
+    };
 }
