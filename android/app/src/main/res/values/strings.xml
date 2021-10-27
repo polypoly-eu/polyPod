@@ -26,8 +26,14 @@
     <string name="button_url_open_confirm">Yes</string>
     <string name="button_url_open_reject">No</string>
     <string name="button_update_notification_close">OK</string>
+    <string name="button_acknowledge">OK</string>
     <string name="auth_title">Login into polyPod</string>
     <string name="auth_subtitle">Either use device credential or biometrics</string>
-    <string name="auth_error">Authentication error: %1$s</string>
     <string name="auth_success">Authentication successful</string>
+    <string name="auth_enable_lock_message">We strongly advise to set up an authentication mechanism for increased security</string>
+    <string name="auth_enable_lock_yes">Set up lock screen</string>
+    <string name="auth_enable_lock_no">Skip</string>
+    <string name="auth_enable_lock_do_not_ask">Do not ask again</string>
+    <string name="auth_enable_lock_title">No lock screen?</string>
+    <string name="feature_error">Unfortunately, \'%1$s\' had an error:\n\n%2$s\n\nI will close it for you.</string>
 </resources>

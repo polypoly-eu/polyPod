@@ -14,6 +14,10 @@ export interface EncodingOptions {
 export interface Stats {
     isFile(): boolean;
     isDirectory(): boolean;
+    getTime(): string;
+    getSize(): number;
+    getName(): string;
+    getId(): string;
 }
 
 /**
@@ -27,4 +31,6 @@ export interface FS {
     writeFile(path: string, content: string, options: EncodingOptions): Promise<void>;
     stat(path: string): Promise<Stats>;
     readdir(path: string): Promise<string[]>;
+    importArchive(url: string): Promise<string>;
+    removeArchive(fileId: string): Promise<void>;
 }

@@ -72,15 +72,6 @@ private struct MainSection: View {
     @Binding var activeSection: Sections
     @State private var showVersion = false
     
-    private var displayVersion: String {
-        guard let info = Bundle.main.infoDictionary else {
-            return "Unknown"
-        }
-        let marketingVersion = info["CFBundleShortVersionString"] ?? "Unknown"
-        let buildNumber = info["CFBundleVersion"] ?? "Unknown"
-        return "\(marketingVersion) (\(buildNumber))"
-    }
-    
     var body: some View {
         List() {
             Section(header: SettingsHeader("settings_about_section")) {
@@ -91,7 +82,7 @@ private struct MainSection: View {
                 .alert(isPresented: $showVersion) {
                     Alert(
                         title: Text("settings_version"),
-                        message: Text(displayVersion)
+                        message: Text(RuntimeInfo.version)
                     )
                 }
             }

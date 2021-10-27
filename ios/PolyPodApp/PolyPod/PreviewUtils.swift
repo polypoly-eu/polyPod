@@ -19,6 +19,7 @@ func createStubFeature(
     )
     return Feature(
         path: URL(fileURLWithPath: ""),
-        manifest: manifest
+        manifest: manifest,
+        languageCode: nil
     )
 }

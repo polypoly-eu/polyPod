@@ -13,7 +13,8 @@ function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
         moduleName,
         artifactPath
     );
-    child_process.execSync(`zip -r ${targetArchive} *`, { cwd: sourceDir });
+    const args = ["-r", targetArchive, "."];
+    child_process.execFileSync("zip", args, { cwd: sourceDir });
 }
 
 function writeOrder(features, targetDir) {
@@ -24,7 +25,7 @@ function writeOrder(features, targetDir) {
 const features = require("./package.json").polyPodFeatures;
 
 const targetDir = path.join(__dirname, "dist");
-if (fs.existsSync(targetDir)) fs.rmdirSync(targetDir, { recursive: true });
+if (fs.existsSync(targetDir)) fs.rmSync(targetDir, { recursive: true });
 fs.mkdirSync(targetDir);
 
 for (let feature of features) packageFeature(feature, targetDir);

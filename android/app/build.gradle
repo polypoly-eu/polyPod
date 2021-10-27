@@ -22,7 +22,7 @@ android {
         minSdkVersion 24 // as long as we use the system WebView, going lower would mean a lot of limitations for feature developers
         targetSdkVersion 29 // cannot use 30 because of Robolectric's lack of support for that, see https://github.com/robolectric/robolectric/issues/5644
         versionCode polyEpoch()
-        versionName "1.3.0"
+        versionName "1.4.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -1,21 +1,27 @@
 /**
- * This module implements the mapping of function calls on a proxy to the underlying protocol ([[EndpointProcedure]]),
- * and back to function calls on the real object.
+ * This module implements the mapping of function calls on a proxy to the
+ * underlying protocol ([[EndpointProcedure]]), and back to function calls on
+ * the real object.
  *
- * Servers can use [[endpointServer]] to turn the implementation of an endpoint specification ([[ServerOf]]) into a
- * plain function. Clients can use [[endpointClient]] to turn a plain function into a proxy object ([[ClientOf]]).
+ * Servers can use [[endpointServer]] to turn the implementation of an endpoint
+ * specification ([[ServerOf]]) into a plain function. Clients can use
+ * [[endpointClient]] to turn a plain function into a proxy object
+ * ([[ClientOf]]).
  *
- * In the simplest case, [[endpointServer]] and [[endpointClient]] can be composed as follows:
+ * In the simplest case, [[endpointServer]] and [[endpointClient]] can be
+ * composed as follows:
  *
  * ```
  * const rpcClient: ClientOf<Spec> = endpointClient(endpointServer(specImpl));
  * ```
  *
- * This is a “loopback” connection where both client and server reside in the same context.
+ * This is a “loopback” connection where both client and server reside in the
+ * same context.
  *
- * In a real-world setting, client and server are located in different processes. This library integrates seamlessly
- * with [port-authority](https://github.com/polypoly-eu/port-authority/). Endpoint clients and servers can be
- * constructed from any port:
+ * In a real-world setting, client and server are located in different
+ * processes. This library integrates seamlessly with
+ * [port-authority](https://github.com/polypoly-eu/polyPod/tree/main/core/communication/port-authority).
+ * Endpoint clients and servers can be constructed from any port:
  *
  * ```
  * import {client, server} from "@polypoly-eu/port-authority";

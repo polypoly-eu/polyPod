@@ -1,0 +1,40 @@
+.datepicker-filler {
+    width: 100%;
+    height: 50px;
+}
+
+.activities-ministory {
+    position: relative;
+}
+
+.activities-ministory .legend {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.activities-ministory .legend .bar-piece {
+    height: 12px;
+    margin-right: 4px;
+    background-color: var(--color-gray-50);
+}
+
+.activities-ministory .legend p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.activities-ministory .above-chart {
+    font-size: 12px;
+    color: var(--color-gray-400);
+}
+
+.activities-ministory .info-button {
+    right: -24px;
+    bottom: 24px;
+}
+
+.activities-ministory .source {
+    margin-top: 40px;
+}
+

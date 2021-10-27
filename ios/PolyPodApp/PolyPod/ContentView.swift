@@ -1,4 +1,5 @@
 import SwiftUI
+import LocalAuthentication
 
 struct ContentView: View {
     private struct ViewState {
@@ -33,7 +34,48 @@ struct ContentView: View {
         .edgesIgnoringSafeArea([.top, .bottom])
     }
     
+    private func devicePasscodeSet() -> Bool {
+        return LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
+    }
+    
+    private func checkSecurity() -> Void {
+        let defaults = UserDefaults.standard
+        let skipSecurityKey = "skipSecurity"
+        let skipSecurity = defaults.value(forKey: skipSecurityKey) as? Bool ?? false
+        if !skipSecurity && !devicePasscodeSet() {
+            let alert = UIAlertController(
+                title: NSLocalizedString(
+                    "message_security_warning_title",
+                    comment: ""
+                ),
+                message: NSLocalizedString(
+                    "message_security_warning_text",
+                    comment: ""
+                ),
+                preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString(
+                "button_security_reject",
+                comment: ""
+            ), style: .default, handler: { (action: UIAlertAction!) in
+                UserDefaults.standard.set(true, forKey: skipSecurityKey)
+            })
+            )
+            
+            alert.addAction(UIAlertAction(title: NSLocalizedString(
+                "button_security_setup",
+                comment: ""
+            ), style: .default, handler: { (action: UIAlertAction!) in
+                if let url = URL(string: "App-Prefs:root=TOUCHID_PASSCODE") {
+                    UIApplication.shared.open(url)
+                }
+            })
+            )
+            UIApplication.shared.windows.first!.rootViewController!.present(alert, animated: true, completion:nil)
+        }
+    }
+    
     private func initState() -> ViewState {
+        checkSecurity()
         let state = self.state ?? firstRunState()
         setStatusBarStyle?(
             state.backgroundColor.isLight ? .darkContent : .lightContent

@@ -41,6 +41,8 @@ export interface Matcher {
  */
 export interface PolyIn {
     /**
+     * @deprecated use `match()` instead.
+     *
      * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
      * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
      * contain triples that match the property exactly.
@@ -65,6 +67,12 @@ export interface PolyIn {
     select(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
 
     /**
+     * Queries the Pod for triples matching the given filter.
+     * @param matcher a [[Matcher]] where any property may be left unspecified
+     */
+    match(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
+
+    /**
      * Instructs the Pod to add triples to the store. Successful storage is not guaranteed, as that may be contingent
      * on other constraints, e.g. access restrictions or synchronization across multiple machines.
      *
@@ -82,6 +90,16 @@ export interface PolyIn {
      * @param quads the triples that should be stored in the Pod
      */
     add(...quads: RDF.Quad[]): Promise<void>;
+
+    /**
+     * @param quads the triples that should be removed from the Pod
+     */
+    delete(...quads: RDF.Quad[]): Promise<void>;
+
+    /**
+     * @param quads the triples that should be removed from the Pod
+     */
+    has(...quads: RDF.Quad[]): Promise<boolean>;
 }
 
 /**
@@ -94,7 +112,8 @@ export interface PolyIn {
  */
 export interface PolyOut extends FS {
     /**
-     * A standard-compliant implementation of [[Fetch]].
+     * @deprecated Use [[Network]] and its facilities instead.
+     * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
      */
     readonly fetch: Fetch;
 }
@@ -116,6 +135,45 @@ export interface PolyNav {
      * Set a title in of a Pod
      */
     setTitle(title: string): Promise<void>;
+    /**
+     * Ask the user to pick a file
+     * @param type the type of file the user is asked to select, as a valid MIME type string. If no type is passed, the user can chose any type of file.
+     * @throws if an unsupported MIME type was passed as the type argument.
+     * @return a string representation of a URL or path to the selected file, or `null` if the user cancelled.
+     */
+    pickFile(type?: string): Promise<string | null>;
+}
+
+/**
+ * `Info` allows the Feature to read information about the polyPod instance it is being executed in.
+ */
+export interface Info {
+    /**
+     * A way for features to read the polyPod runtime identification
+     */
+    getRuntime(): Promise<string>;
+
+    /**
+     * A way for features to read the user visible polyPod version
+     */
+    getVersion(): Promise<string>;
+}
+
+/**
+ * `Network` specifies how features can communicate with other devices or servers.
+ */
+export interface Network {
+    /**
+     * A way for features to send HTTP POST requests
+     *
+     * @returns an error message if something went wrong, `undefined` upon success.
+     */
+    httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<string | undefined>;
 }
 
 /**
@@ -194,6 +252,17 @@ export interface Pod {
      * `polyNav` is the interface to interact the container. Refer to [[PolyNav]] for its definition.
      */
     readonly polyNav: PolyNav;
+
+    /**
+     * `info` is the interface to read information about the polyPod instance.
+     */
+    readonly info: Info;
+
+    /**
+     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
+     * definition.
+     */
+    readonly network: Network;
 
     /**
      * @hidden

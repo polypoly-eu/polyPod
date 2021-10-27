@@ -3,14 +3,14 @@
 At the moment, the polyPod is essentially a runtime for _features_; small,
 sandboxed JavaScript applications that can be launched from the polyPod app.
 
-But it will be much more than that, for more information read [the polyPod
-whitepaper].
+But it will be much more than that. For more information please read the
+[polyPod whitepaper][1].
 
-## Components
+## Structure
 
 - [android](android): The polyPod app for Android
 - [ios](ios): The polyPod app for iOS
-- [podjs](podjs): A module that lets features run in a web browser
+- [podjs](podjs): A polyPod implementation that runs in a regular browser
 - [features](features): polyPod features
 - [core](core): The polyPod core modules
 - [build](build): The build logic
@@ -47,7 +47,7 @@ To run the linter:
 > Please note that this won't trigger tests or linting for non-JS code, for
 example [android](android).
 
-If linting reveals some error, they can be fixed with 
+If linting reveals some error, they can be fixed with
 
     $ ./build.js lintfix
 
@@ -66,22 +66,24 @@ Please read the [SECURITY](SECURITY.md) document on how to report potential
 security vulnerabilities in polyPod and where to find polypoly's Vulnerability
 Disclosure Policy.
 
-## Issues, contributions.
+## Issues and contributions
 
 Please see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-
-## Links
-
-[the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
-
-
 ## Licensing
 
-Copyright (c) 2021 pc polypoly coop SCE mbH
+Copyright © 2021 pc polypoly coop SCE mbH
 
-Licensed under the GNU General Public License, Version 3 with Additional Terms.
+Licensed under the GNU General Public License, Version 3.  Please see the
+[LICENSE](LICENSE) document for details and a copy of the license.
 
-Please see the [LICENSE](LICENSE) document for details and a copy of the
-license and additional terms.
+License information of 3rd party components is available in the
+[3rd-party-licenses/](3rd-party-licenses) directory.
 
+## Trademarks
+
+- polypoly® is a registered trademark of polypoly Enterprise GmbH
+- polyPod is a trademark in registration of pc polypoly coop SCE mbH
+- polyPedia is a trademark in registration of polypoly Foundation gGmbH
+
+[1]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf

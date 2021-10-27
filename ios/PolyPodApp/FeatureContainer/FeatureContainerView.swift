@@ -6,14 +6,18 @@ struct FeatureContainerView: UIViewRepresentable {
     @Binding var title: String
     @Binding var activeActions: [String]
     var queuedAction: (String, DispatchTime)?
+    let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
+    let pickFileHandler: (String?, @escaping (URL?) -> Void) -> Void
 
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(
             feature: feature,
             title: $title,
             activeActions: $activeActions,
-            openUrlHandler: openUrlHandler
+            errorHandler: errorHandler,
+            openUrlHandler: openUrlHandler,
+            pickFileHandler: pickFileHandler
         )
 
         if let featureColor = feature.primaryColor {
@@ -21,7 +25,7 @@ struct FeatureContainerView: UIViewRepresentable {
             featureWebView.isOpaque = false
         }
 
-        PodApi.shared.polyNav.webView = featureWebView
+        PodApi.shared.polyNav.delegate  = featureWebView
 
         return featureWebView
     }
@@ -41,21 +45,107 @@ struct FeatureContainerView: UIViewRepresentable {
     }
 }
 
+class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
+    private var feature: Feature? = nil
+    func setFeature(feature: Feature) {
+        self.feature = feature
+    }
+    
+    func mimeTypeFromExt(ext: String) -> String {
+        switch ext {
+        case "html":
+            return "text/html"
+        case "js":
+            return "application/javascript"
+        case "css":
+            return "text/css"
+        case "svg":
+            return "image/svg+xml"
+        case "json":
+            return "application/json"
+        case "woff2":
+            return "font/woff2"
+        default:
+            return "application/octet-stream"
+        }
+    }
+    
+    func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
+        guard let url = urlSchemeTask.request.url,
+            let scheme = url.scheme,
+            scheme == PolyOut.fsProtocol.lowercased() else {
+            urlSchemeTask.didFailWithError(PolyNavError.protocolError(""))
+                return
+        }
+        
+        let urlString = url.absoluteString
+        let index = urlString.index(urlString.startIndex, offsetBy: PolyOut.fsPrefix.count)
+        let file = String(urlString[index..<urlString.endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        let ext = (file as NSString).pathExtension
+                        
+        do {
+            var fileData: Data? = nil
+            if (file.starts(with: PolyOut.fsFilesRoot)) {
+                let options: [String: Any] = [:]
+                PodApi.shared.polyOut.fileRead(
+                    url: urlString,
+                    options: options,
+                    completionHandler: { data, error in
+                        fileData = data as? Data
+                    }
+                )
+            }
+            else {
+                var targetUrl = feature?.path
+                targetUrl = targetUrl?.appendingPathComponent(file)
+
+                fileData = try Data(contentsOf: targetUrl!)
+            }
+            let headers: [String : String] = [
+                "Access-Control-Allow-Origin": PolyOut.fsPrefix,
+                "Access-Control-Allow-Methods": "GET",
+                "Access-Control-Allow-Headers": "*",
+                "Content-Length": String(fileData?.count ?? 0),
+                "Content-Type": mimeTypeFromExt(ext: ext)
+            ]
+            
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP 1.0", headerFields: headers)
+            
+            // Fulfill the task.
+            urlSchemeTask.didReceive(response!)
+            urlSchemeTask.didReceive(fileData ?? Data())
+            urlSchemeTask.didFinish()
+        } catch {
+            urlSchemeTask.didFailWithError(error)
+        }
+    }
+    
+    func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
+        
+    }
+}
+
 class FeatureWebView: WKWebView {
     private let featureTitle: Binding<String>
     private let activeActions: Binding<[String]>
+    private let errorHandler: (String) -> Void
     private let openUrlHandler: (String) -> Void
+    private let pickFileHandler: (String?, @escaping (URL?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
 
     init(
         feature: Feature,
         title: Binding<String>,
         activeActions: Binding<[String]>,
-        openUrlHandler: @escaping (String) -> Void
+        errorHandler: @escaping (String) -> Void,
+        openUrlHandler: @escaping (String) -> Void,
+        pickFileHandler: @escaping (String?, @escaping (URL?) -> Void) -> Void
     ) {
         self.featureTitle = title
         self.activeActions = activeActions
+        self.errorHandler = errorHandler
         self.openUrlHandler = openUrlHandler
+        self.pickFileHandler = pickFileHandler
 
         let contentController = WKUserContentController();
         installUserScript(
@@ -76,11 +166,23 @@ class FeatureWebView: WKWebView {
             "disableUserSelect",
             forMainFrameOnly: false
         )
+        
+        installUserScript(
+            contentController,
+            "handleErrors",
+            forMainFrameOnly: false
+        )
 
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
 
+        let scheme = PolyOut.fsProtocol
+        let fileHandler = FeatureFileHandler()
+        fileHandler.setFeature(feature: feature)
+        configuration.setURLSchemeHandler(fileHandler, forURLScheme: scheme)
+
         super.init(frame: .zero, configuration: configuration)
+
         scrollView.isScrollEnabled = false
         translatesAutoresizingMaskIntoConstraints = false
         MessageName.allCases.forEach {
@@ -88,9 +190,11 @@ class FeatureWebView: WKWebView {
         }
         removeInputAccessory()
 
-        let featureUrl = feature.path
-        let featureFileUrl = featureUrl.appendingPathComponent("pod.html")
-        loadFileURL(featureFileUrl, allowingReadAccessTo: featureUrl)
+        var components = URLComponents()
+        components.scheme = scheme
+        components.path = "/pod.html"
+        components.host = ""
+        load(URLRequest(url: components.url!))
     }
 
     required init?(coder: NSCoder) {
@@ -180,6 +284,8 @@ extension FeatureWebView: WKScriptMessageHandler {
                 self.doLog(data: body)
             case .Event:
                 self.doHandleEvent(messageBody: body)
+            case .Error:
+                self.doLogError(body)
             }
         }
     }
@@ -214,9 +320,17 @@ extension FeatureWebView: WKScriptMessageHandler {
             return
         }
 
-        print("WebView: " + text)
+        print("Message from FeatureContainer: \(text)")
     }
     
+    private func doLogError(_ error: [String: Any]) {
+        let message = error["message"] as? String ?? "Unknown"
+        print("Error from FeatureContainer: \(message)")
+        errorHandler(message)
+    }
+}
+
+extension FeatureWebView: PolyNavDelegate {
     func doHandleSetTitle(title: String) {
         featureTitle.wrappedValue = title
     }
@@ -227,6 +341,10 @@ extension FeatureWebView: WKScriptMessageHandler {
     
     func doHandleOpenUrl(url: String) {
         openUrlHandler(url)
+    }
+    
+    func doHandlePickFile(type: String?, completion: @escaping (URL?) -> Void) {
+        pickFileHandler(type, completion)
     }
 }
 

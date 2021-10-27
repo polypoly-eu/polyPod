@@ -2,6 +2,7 @@ import SwiftUI
 
 class Feature {
     let path: URL
+    let id: String
     let name: String
     let author: String?
     let description: String?
@@ -9,20 +10,22 @@ class Feature {
     let thumbnail: URL?
     private let links: [String: String]
     
-    static func load(path: URL) -> Feature? {
-        let manifestPath = path.appendingPathComponent("manifest.json")
-        guard let manifest = FeatureManifest.load(path: manifestPath) else {
-            print("Failed to load feature manifest from: \(manifestPath)")
-            return nil
-        }
-        return Feature(path: path, manifest: manifest)
+    static func load(path: URL, languageCode: String?) -> Feature? {
+        let manifest = readManifest(path)
+        return Feature(
+            path: path,
+            manifest: manifest,
+            languageCode: languageCode
+        )
     }
     
-    init(path: URL, manifest: FeatureManifest) {
+    init(path: URL, manifest: FeatureManifest, languageCode: String?) {
         self.path = path
-        let userLanguage = Locale.current.languageCode ?? "en"
+        let userLanguage = languageCode ?? "en"
         let translations = manifest.translations?[userLanguage]
-        name = translations?.name ?? manifest.name ?? path.lastPathComponent
+        let id = path.lastPathComponent
+        self.id = id
+        name = translations?.name ?? manifest.name ?? id
         author = translations?.author ?? manifest.author
         description = translations?.description ?? manifest.description
         primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
@@ -44,6 +47,23 @@ class Feature {
     }
 }
 
+private func readManifest(_ basePath: URL) -> FeatureManifest {
+    let manifestPath = basePath.appendingPathComponent("manifest.json")
+    if let manifest = FeatureManifest.load(path: manifestPath) {
+        return manifest
+    }
+    print("Failed to load feature manifest from: \(manifestPath)")
+    return FeatureManifest(
+        name: nil,
+        author: nil,
+        description: nil,
+        thumbnail: nil,
+        primaryColor: nil,
+        links: nil,
+        translations: nil
+    )
+}
+
 private func parseColor(hexValue: String?) -> Color? {
     guard let hexValue = hexValue else {
         return nil
@@ -53,6 +73,9 @@ private func parseColor(hexValue: String?) -> Color? {
 
 private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
     guard let thumbnailPath = thumbnailPath else {
+        return nil
+    }
+    if thumbnailPath.isEmpty {
         return nil
     }
     let fullPath = featurePath.appendingPathComponent(thumbnailPath)

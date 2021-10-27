@@ -1,0 +1,13 @@
+{
+    "title": "What your photos might tell about you",
+    "text.1": "Let's pretend you took a selfie, what could Facebook draw from that? Tap the circles to find out...",
+    "text.2": "As soon as your Facebook data includes photos they are analyzed with artificial intelligence.",
+    "person.title": "Me, my selfie and I",
+    "person.text": "At first, this is just a photo of a human, but from your profile image, Facebook knows this is most likely you. They can find you here and in other pictures. On top, they have a sense of your gender, age, race, whether you changed your haircut or color, ...",
+    "plant.title": "Caught in the act",
+    "plant.text": "Artificial intelligence is able to spot and identify objects, like a plant, sports equipment, or maybe a cigarette. Such information might be relevant or surprising to others, like your partner - or your health insurance.",
+    "lamp.title": "I shop therefore I am",
+    "lamp.text": "Facebook works on detecting objects, products, and brands in photos. They might spot clothing brands or furniture in the background. Those insights can be used to assume how much money you spend on lifestyle items.",
+    "background.title": "They know what you did last summer",
+    "background.text": "Detecting a skyline,  landmark,s or always the same window in the background Facebook can also make assumptions on your location. Additionally, if taken with your phone, your pictures probably contain metadata with the exact GPS locations - unless you alter your settings."
+}

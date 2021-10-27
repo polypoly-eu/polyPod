@@ -7,6 +7,8 @@ import {
     EncodingOptions,
     Stats,
     Matcher,
+    Network,
+    Info,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -37,7 +39,10 @@ import { Bubblewrap, Classes } from "@polypoly-eu/bubblewrap";
 
 type PolyInEndpoint = ObjectEndpointSpec<{
     select(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
+    match(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
     add(...quads: Quad[]): ValueEndpointSpec<void>;
+    delete(...quads: Quad[]): ValueEndpointSpec<void>;
+    has(...quads: Quad[]): ValueEndpointSpec<boolean>;
 }>;
 
 type PolyOutEndpoint = ObjectEndpointSpec<{
@@ -46,6 +51,8 @@ type PolyOutEndpoint = ObjectEndpointSpec<{
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
     fetch(input: string, init: RequestInit): ValueEndpointSpec<Response>;
+    importArchive(url: string): ValueEndpointSpec<string>;
+    removeArchive(fileId: string): ValueEndpointSpec<void>;
 }>;
 
 type PolyLifecycleEndpoint = ObjectEndpointSpec<{
@@ -57,6 +64,21 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
+    pickFile(type?: string): ValueEndpointSpec<string | null>;
+}>;
+
+type InfoEndpoint = ObjectEndpointSpec<{
+    getRuntime(): ValueEndpointSpec<string>;
+    getVersion(): ValueEndpointSpec<string>;
+}>;
+
+type NetworkEndpoint = ObjectEndpointSpec<{
+    httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): ValueEndpointSpec<string | undefined>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
@@ -64,6 +86,8 @@ type PodEndpoint = ObjectEndpointSpec<{
     polyOut(): PolyOutEndpoint;
     polyLifecycle(): PolyLifecycleEndpoint;
     polyNav(): PolyNavEndpoint;
+    info(): InfoEndpoint;
+    network(): NetworkEndpoint;
 }>;
 
 class FetchResponse implements Response {
@@ -99,16 +123,50 @@ class FetchResponse implements Response {
 
 class FileStats implements Stats {
     static of(stats: Stats): FileStats {
-        return new FileStats(stats.isFile(), stats.isDirectory());
+        if (
+            stats.getSize !== undefined &&
+            stats.getName !== undefined &&
+            stats.getTime !== undefined &&
+            stats.getId !== undefined
+        ) {
+            return new FileStats(
+                stats.isFile(),
+                stats.isDirectory(),
+                stats.getTime(),
+                stats.getSize(),
+                stats.getName(),
+                stats.getId()
+            );
+        } else {
+            return new FileStats(stats.isFile(), stats.isDirectory(), "", 0, "", "");
+        }
     }
 
-    constructor(readonly file: boolean, readonly directory: boolean) {}
-
+    constructor(
+        readonly file: boolean,
+        readonly directory: boolean,
+        readonly time: string,
+        readonly size: number,
+        readonly name: string,
+        readonly id: string
+    ) {}
     isFile(): boolean {
         return this.file;
     }
     isDirectory(): boolean {
         return this.directory;
+    }
+    getTime(): string {
+        return this.time;
+    }
+    getSize(): number {
+        return this.size;
+    }
+    getName(): string {
+        return this.name;
+    }
+    getId(): string {
+        return this.id;
     }
 }
 
@@ -155,7 +213,10 @@ export class RemoteClientPod implements Pod {
     get polyIn(): PolyIn {
         return {
             add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
+            match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
             select: (matcher) => this.rpcClient.polyIn().select(matcher)(),
+            delete: (...quads) => this.rpcClient.polyIn().delete(...quads)(),
+            has: (...quads) => this.rpcClient.polyIn().has(...quads)(),
         };
     }
 
@@ -170,8 +231,15 @@ export class RemoteClientPod implements Pod {
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
             readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
-                if (options === undefined) return rpcClient.polyOut().readFile(path)();
-                else return rpcClient.polyOut().readFile(path, options)();
+                if (options) return rpcClient.polyOut().readFile(path, options)();
+                else if (typeof fetch === "undefined") return rpcClient.polyOut().readFile(path)();
+                else
+                    return new Promise<Uint8Array>((resolve, reject) => {
+                        fetch(path)
+                            .then((res) => res.arrayBuffer())
+                            .then((arrBuf) => resolve(new Uint8Array(arrBuf)))
+                            .catch((err) => reject(err));
+                    });
             }
 
             readdir(path: string): Promise<string[]> {
@@ -184,6 +252,14 @@ export class RemoteClientPod implements Pod {
 
             writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
                 return rpcClient.polyOut().writeFile(path, content, options)();
+            }
+
+            importArchive(url: string): Promise<string> {
+                return rpcClient.polyOut().importArchive(url)();
+            }
+
+            removeArchive(fileId: string): Promise<void> {
+                return rpcClient.polyOut().removeArchive(fileId)();
             }
         })();
     }
@@ -202,6 +278,21 @@ export class RemoteClientPod implements Pod {
             setActiveActions: (actions: string[]) =>
                 this.rpcClient.polyNav().setActiveActions(actions)(),
             setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
+            pickFile: (type?: string) => this.rpcClient.polyNav().pickFile(type)(),
+        };
+    }
+
+    get info(): Info {
+        return {
+            getRuntime: () => this.rpcClient.info().getRuntime()(),
+            getVersion: () => this.rpcClient.info().getVersion()(),
+        };
+    }
+
+    get network(): Network {
+        return {
+            httpPost: (url: string, body: string, contentType?: string, authorization?: string) =>
+                this.rpcClient.network().httpPost(url, body, contentType, authorization)(),
         };
     }
 }
@@ -260,6 +351,8 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
                 return FileStats.of(stats);
             },
             writeFile: (path, content, options) => polyOut.writeFile(path, content, options),
+            importArchive: (url) => polyOut.importArchive(url),
+            removeArchive: (fileId) => polyOut.removeArchive(fileId),
         };
     }
 
@@ -275,5 +368,13 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
 
     polyNav(): ServerOf<PolyNavEndpoint> {
         return this.pod.polyNav;
+    }
+
+    info(): ServerOf<InfoEndpoint> {
+        return this.pod.info;
+    }
+
+    network(): ServerOf<NetworkEndpoint> {
+        return this.pod.network;
     }
 }

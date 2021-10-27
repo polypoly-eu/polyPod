@@ -4,12 +4,19 @@
     "build": "node index.js"
   },
   "devDependencies": {
+    "demo-feature": "file:../demo",
+    "facebook-import-feature": "file:../facebookImport",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview"
   },
   "private": true,
   "polyPodFeatures": [
+    {
+      "archiveName": "facebookImport",
+      "moduleName": "facebook-import-feature",
+      "artifactPath": "dist"
+    },
     {
       "archiveName": "polyPreview",
       "moduleName": "poly-preview-feature",
@@ -24,6 +31,11 @@
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
+    },
+    {
+      "archiveName": "demo",
+      "moduleName": "demo-feature",
+      "artifactPath": "dist"
     }
   ]
 }

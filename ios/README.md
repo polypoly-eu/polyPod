@@ -4,5 +4,26 @@ The polyPod app for iOS devices
 
 ## Building
 
-1. Build the core code and features (see [../README.md](../README.md)).
-2. Open the _PolyPodApp_ project in Xcode and build it there.
+No matter how you intend to build the iOS app, the first step is to build the
+core code and features, see [../README.md](../README.md) for instructions.
+
+### Xcode
+
+Just open the _PolyPodApp_ project in Xcode and build, test or archive it there.
+
+### Command line
+
+#### Ensuring the build works
+
+    make build
+
+#### Running the tests
+
+    make test
+
+#### Creating an archive
+
+    make archive
+
+Creating an `xcarchive` is a prerequisite for creating the actual app package
+for upload to the App Store. This process is not fully automated yet.

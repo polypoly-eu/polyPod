@@ -1,49 +1,42 @@
-import { html, fixture, expect } from "@open-wc/testing";
+import { expect, oneEvent } from "@open-wc/testing";
 import "../../src/tabs";
 
-function testEvent(done, cb) {
-  return function eventListener(event) {
-    cb(event);
-    done();
-  };
-}
-
 describe("Tab", () => {
-  it(`has to return its value when it is clicked`, done => {
-    const label = "tab test";
-    const value = "tabTest";
-    const eventTester = testEvent(done, event => {
-      expect(event.detail.value).to.equal(value);
-    });
-    fixture(html`
-      <poly-tab
-        @poly-tab-selected=${eventTester}
-        .label=${label}
-        .value=${value}
-      ></poly-tab>
-    `).then(el => {
-      expect(el.label).to.equal(label);
-      expect(el.value).to.equal(value);
-      expect(el.active).to.equal(false);
+  it(`should throw an exception if the content of the tab is different than a single tag of <poly-tab-content>`, (done) => {
+    const innerContent = document.createElement("div");
+    const innerText = document.createTextNode("This is a test");
+    const tabComponent = document.createElement(`poly-tab`);
+    innerContent.append(innerText);
+    tabComponent.append(innerContent);
 
-      el.shadowRoot.querySelector(".tab").click();
-    });
+    try {
+      tabComponent.connectedCallback();
+      done.fail("This should fail");
+    } catch (error) {
+      expect(error.message).to.be.equal(
+        "Only <poly-tab-content> tags without any attributes are allowed"
+      );
+      done();
+    }
   });
 
-  it(`has the class active if the flag active is true`, async () => {
-    const label = "tab test";
-    const value = "tabTest";
-    const active = true;
+  it(`should fire an event with the innerContent of the tab`, async () => {
+    const tabId = "01";
+    let innerContent = document.createElement("poly-tab-content");
+    const innerText = document.createTextNode("This is a test");
+    const tabComponent = document.createElement(`poly-tab`);
+    tabComponent.tabId = tabId;
+    tabComponent.active = true;
+    innerContent.append(innerText);
+    tabComponent.append(innerContent);
 
-    const el = await fixture(html`
-      <poly-tab .label=${label} .value=${value} .active=${active}></poly-tab>
-    `);
+    const eventPromise = oneEvent(tabComponent, "poly-tab-connected");
 
-    expect(el.label).to.equal(label);
-    expect(el.value).to.equal(value);
-    expect(el.active).to.equal(active);
+    tabComponent.connectedCallback();
+    const event = await eventPromise;
 
-    const buttonActive = el.shadowRoot.querySelector(".tab.active");
-    expect(buttonActive).to.not.null;
+    expect(event.detail.innerContent).to.be.equal(
+      `<poly-tab-content tabId="${tabId}" active="">This is a test</poly-tab-content>`
+    );
   });
 });

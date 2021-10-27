@@ -3,19 +3,22 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src test",
-    "test": "jest"
+    "test": "jest && cypress run",
+    "doc": "jsdoc src/index.js -d ./docs"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html",
+      "text"
+    ]
   },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
-    "@typescript-eslint/eslint-plugin": "^4.1.0",
-    "babel-jest": "^26.6.3",
-    "eslint": "^7.19.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.24.0",
-    "jest": "^26.6.3",
-    "prettier": "^2.2.1"
+    "cypress": "^8.4.1",
+    "jest": "27.2",
+    "jsdoc": "^3.6.7"
   },
   "private": true,
   "type": "module"

@@ -53,9 +53,9 @@ class PolyInTest {
             })
         File(null as File?, TEST_DB_NAME).delete()
         polyIn = PolyIn(
-            TEST_DB_NAME,
             context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
+                .getApplicationContext(),
+            databaseName = TEST_DB_NAME
         )
     }
 
@@ -226,9 +226,9 @@ class PolyInTest {
             database.delete()
         }
         PolyIn(
-            TEST_DB_NAME,
             context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
+                .getApplicationContext(),
+            databaseName = TEST_DB_NAME
         ).let {
             runBlocking {
                 it.add(storageData)
@@ -236,9 +236,9 @@ class PolyInTest {
         }
 
         val returnedData = PolyIn(
-            TEST_DB_NAME,
             context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
+                .getApplicationContext(),
+            databaseName = TEST_DB_NAME
         ).let {
             runBlocking {
                 it.select(
@@ -267,9 +267,9 @@ class PolyInTest {
             originalDatabase.delete()
         }
         PolyIn(
-            originalPath,
             context = androidx.test.core.app.ApplicationProvider
-                .getApplicationContext()
+                .getApplicationContext(),
+            databaseName = originalPath
         ).let { runBlocking { it.add(storageData) } }
 
         val movedPath = "2" + TEST_DB_NAME
@@ -279,14 +279,76 @@ class PolyInTest {
         Truth.assertThat(
             kotlin.runCatching {
                 PolyIn(
-                    movedPath,
                     context = androidx.test.core.app.ApplicationProvider
-                        .getApplicationContext()
+                        .getApplicationContext(),
+                    databaseName = movedPath
                 )
             }.isFailure
         ).isTrue()
 
         movedDatabase.delete()
         originalDatabase.delete()
+    }
+
+    @Test
+    fun delete_works() {
+        matcher_works()
+        val firstElement: List<Quad> = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData"))
+                .withSubject(BlankNode("someCompany"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build()
+        )
+
+        runBlocking {
+            polyIn?.delete(firstElement)
+        }
+        val returnedData = runBlocking {
+            polyIn?.select(
+                Matcher(
+                    null,
+                    null,
+                    null
+                )
+            )
+        }
+
+        Truth.assertThat(returnedData!!.size).isEqualTo(2)
+        val deleted = returnedData!!.any { res ->
+            res.`object`.equals(BlankNode("privateData"))
+        }
+        Truth.assertThat(deleted).isFalse()
+    }
+
+    @Test
+    fun has_works() {
+        matcher_works()
+        val existingElement: List<Quad> = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("privateData"))
+                .withSubject(BlankNode("someCompany"))
+                .withPredicate(IRI("https://polypoly.coop/storing"))
+                .build()
+        )
+        val nonExistingElement: List<Quad> = listOf(
+            QuadBuilder.new().withDefaultGraph()
+                .withObject(BlankNode("nonexisting"))
+                .withSubject(BlankNode("nonexisting"))
+                .withPredicate(IRI("https://polypoly.coop/nonexisting"))
+                .build()
+        )
+
+        Truth.assertThat(
+            runBlocking {
+                polyIn?.has(existingElement)
+            }
+        ).isTrue()
+
+        Truth.assertThat(
+            runBlocking {
+                polyIn?.has(nonExistingElement)
+            }
+        ).isFalse()
     }
 }

@@ -1,64 +1,48 @@
-import { html, LitElement, css } from "lit-element";
-import globalTheme from "../globalTheme";
+import { LitElement } from "lit-element";
+import { polyPrefix } from "../globalTheme";
 
 export class Tab extends LitElement {
-  static get styles() {
-    return [
-      globalTheme,
-      css`
-        .tab {
-          width: 100%;
-          color: var(--poly-color-medium);
-          font-size: var(--poly-button-font-size);
-          background-color: transparent;
-          border: solid transparent 2px;
-          border-bottom: solid 1px var(--poly-color-dark);
-          text-align: center;
-          cursor: pointer;
-        }
-
-        .tab:focus {
-          outline: none;
-        }
-
-        .tab.active {
-          color: var(--poly-color-dark);
-          border-bottom: solid 4px var(--poly-color-dark);
-        }
-      `,
-    ];
-  }
-
   static get properties() {
     return {
       label: { type: String },
-      value: { type: String },
+      tabId: { type: String },
       active: { type: Boolean },
     };
   }
 
   constructor() {
     super();
-
     this.active = false;
   }
 
-  __onClick() {
-    const tabEvent = new CustomEvent("poly-tab-selected", {
-      detail: { value: this.value },
+  _findTabContent() {
+    const child = this.children.length === 1 ? this.children[0] : null;
+    if (
+      child?.nodeName?.toLowerCase() !== `${polyPrefix}-tab-content` ||
+      child.attributes.length > 0
+    ) {
+      throw new Error(
+        `Only <${polyPrefix}-tab-content> tags without any attributes are allowed`
+      );
+    }
+    return child;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    const tabContent = this._findTabContent();
+    // setAttributeNS retains character case in attribute names
+    tabContent.setAttributeNS(null, "tabId", this.tabId);
+    if (this.active) {
+      tabContent.setAttribute("active", "");
+    }
+
+    const connectedEvent = new CustomEvent(`${polyPrefix}-tab-connected`, {
+      detail: { innerContent: this.innerHTML },
       bubbles: true,
       composed: true,
     });
-
-    this.dispatchEvent(tabEvent);
-  }
-
-  render() {
-    return html`<button
-      class="tab ${this.active ? "active" : ""}"
-      @click=${this.__onClick}
-    >
-      ${this.label}
-    </button> `;
+    this.dispatchEvent(connectedEvent);
   }
 }

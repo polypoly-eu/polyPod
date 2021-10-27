@@ -6,7 +6,9 @@ import {
     PolyNav,
     EncodingOptions,
     Matcher,
+    Network,
     Stats,
+    Info,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -34,10 +36,22 @@ class AsyncPolyOut implements PolyOut {
     async readdir(path: string): Promise<string[]> {
         return (await this.promise).readdir(path);
     }
+
+    async importArchive(url: string): Promise<string> {
+        return (await this.promise).importArchive(url);
+    }
+
+    async removeArchive(fileId: string): Promise<void> {
+        return (await this.promise).removeArchive(fileId);
+    }
 }
 
 class AsyncPolyIn implements PolyIn {
     constructor(private readonly promise: Promise<PolyIn>) {}
+
+    async match(matcher: Partial<Matcher>): Promise<Quad[]> {
+        return (await this.promise).match(matcher);
+    }
 
     async select(matcher: Partial<Matcher>): Promise<Quad[]> {
         return (await this.promise).select(matcher);
@@ -45,6 +59,14 @@ class AsyncPolyIn implements PolyIn {
 
     async add(...quads: Quad[]): Promise<void> {
         return (await this.promise).add(...quads);
+    }
+
+    async delete(...quads: Quad[]): Promise<void> {
+        return (await this.promise).delete(...quads);
+    }
+
+    async has(...quads: Quad[]): Promise<boolean> {
+        return (await this.promise).has(...quads);
     }
 }
 
@@ -61,6 +83,35 @@ class AsyncPolyNav implements PolyNav {
 
     async setTitle(title: string): Promise<void> {
         return (await this.promise).setTitle(title);
+    }
+
+    async pickFile(type?: string): Promise<string | null> {
+        return (await this.promise).pickFile(type);
+    }
+}
+
+class AsyncInfo implements Info {
+    constructor(private readonly promise: Promise<Info>) {}
+
+    async getRuntime(): Promise<string> {
+        return (await this.promise).getRuntime();
+    }
+
+    async getVersion(): Promise<string> {
+        return (await this.promise).getVersion();
+    }
+}
+
+class AsyncNetwork implements Network {
+    constructor(private readonly promise: Promise<Network>) {}
+
+    async httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<string | undefined> {
+        return (await this.promise).httpPost(url, body, contentType, authorization);
     }
 }
 
@@ -86,12 +137,16 @@ export class AsyncPod implements Pod {
     readonly polyOut: PolyOut;
     readonly polyIn: PolyIn;
     readonly polyNav: PolyNav;
+    readonly info: Info;
+    readonly network: Network;
     readonly polyLifecycle: PolyLifecycle;
 
     constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
         this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
         this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
         this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
+        this.info = new AsyncInfo(promise.then((pod) => pod.info));
+        this.network = new AsyncNetwork(promise.then((pod) => pod.network));
         this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
     }
 }

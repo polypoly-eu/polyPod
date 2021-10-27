@@ -1,0 +1,10 @@
+{
+    "title": "Your activities",
+    "summary": "Since you joined Facebook recorded {{number_activities}} activities of yours with date and time.",
+    "tab.year": "Year",
+    "tab.total": "Total",
+    "tab.events.total": "Events ({{number_events}} in total)",
+    "tab.events.yearly": "Events ({{number_events}} in total for the displayed year)",
+    "number.events": "Number of events",
+    "number.events.thousands": "Number of events (thousands)"
+}

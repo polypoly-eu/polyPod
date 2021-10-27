@@ -1,0 +1,288 @@
+.details {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-button-container {
+    box-sizing: border-box;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+}
+
+.tab-content-container {
+    overflow: hidden;
+    flex: 1 1 auto;
+}
+
+.tab-data-story p {
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 32px;
+    font-size: 10px;
+}
+
+.tab-data-story .info-button {
+    bottom: 100px;
+}
+
+.details .swiper-container {
+    height: 100%;
+}
+
+.tab-button-container .tab-button {
+    box-sizing: border-box;
+    background-color: var(--color-background-dark);
+    flex: 1 1 0px;
+    height: 100%;
+    padding-bottom: 12px;
+    font-size: 16px;
+    line-height: 16px;
+    color: var(--color-medium);
+    border-color: transparent;
+    outline: none;
+}
+
+.tab-button-container .tab-button.active {
+    border-bottom: 4px solid var(--color-semi-light);
+    color: var(--color-text-light);
+}
+
+.scroll-container {
+    flex: 1 1 auto;
+    margin: auto;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: var(--max-width);
+}
+
+.tab-content-container .featured-map-container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto auto auto;
+}
+
+.tab-content-container .featured-map {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.tab-content-container .featured-map .map {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.tab-content-container .location-block {
+    position: relative;
+    height: 177px;
+}
+
+.EU-GDPR p {
+    color: #002850;
+}
+
+.location-map .EU-GDPR {
+    background-color: var(--jurisdiction-EU-GDPR);
+}
+
+.location-map .Russia {
+    background-color: var(--jurisdiction-russia);
+}
+
+.location-map .Five-Eyes {
+    background-color: var(--jurisdiction-five-eyes);
+}
+
+.location-map .China {
+    background-color: var(--jurisdiction-china);
+}
+
+.location-map .Sonstige {
+    background-color: var(--jurisdiction-others);
+}
+
+.location-block .pin {
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto;
+    transform: translateY(67px);
+}
+
+.location-block .featured-pin {
+    display: block;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -63%);
+}
+
+.location-block p {
+    display: block;
+    width: 142px;
+    margin: 0 auto;
+    transform: translate(84px, 48px);
+}
+
+.location-block .no-location {
+    display: block;
+    width: 142px;
+    margin: 0 auto;
+    transform: translateY(56px);
+    text-align: center;
+}
+
+.location-tooltip {
+    display: flex;
+    padding: 0 4px;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 0 0 24px;
+}
+
+.location-tooltip img {
+    margin: 4px auto;
+}
+
+.location-tooltip p {
+    color: var(--color-medium);
+    font-weight: 500;
+    font-size: 10px;
+    margin: 7px 6px 0px 2px;
+}
+
+.location-tooltip .circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateY(8px);
+}
+
+.location-tooltip button {
+    border: transparent;
+    background-color: transparent;
+    outline: none;
+    padding: 0 2px;
+}
+
+.structure-tab {
+    position: relative;
+}
+
+.structure-tab img {
+    display: block;
+    width: 100%;
+    max-width: var(--max-width);
+    height: 100%;
+    margin: 0 auto;
+}
+
+.structure-tab .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 200;
+}
+
+.structure-tab .text p {
+    display: block;
+    margin: 22% auto;
+    width: 200px;
+}
+
+.entity-details-text {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.entity-details-source {
+    transform: translateY(-20px);
+    color: var(--color-medium);
+    flex: 0 0 auto;
+    font-size: 12px;
+    margin: 0px auto;
+    width: 100%;
+    padding: 0 30px 12px 30px;
+    max-width: var(--max-width);
+}
+
+.explore-data-btn-area {
+    margin: 0 auto;
+    padding: 12px 30px 0 30px;
+}
+
+.explore-data-btn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 296px;
+    max-width: var(--max-width);
+    height: 48px;
+    background-color: var(--color-background-light);
+    color: var(--color-text-dark);
+    font-size: 18px;
+    font-weight: 600;
+    margin: auto auto 24px auto;
+    border-radius: 4px;
+    border: transparent;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.revenue {
+    margin-bottom: 24px;
+}
+
+.revenue .separator {
+    border: 1px solid var(--color-medium);
+    margin: 38px 16px 0 16px;
+}
+
+.featured-map-container h2,
+.location-map h2,
+.revenue h2 {
+    text-align: center;
+    margin: 0 0 12px 0;
+}
+
+.about {
+    height: 100%;
+    overflow: hidden scroll;
+}
+
+.about .scroll-box {
+    overflow: hidden scroll;
+    max-height: 300px;
+    padding-bottom: 40px;
+    margin: 32px 30px 0 30px;
+}
+
+.about .gradient {
+    height: 40px;
+    background: linear-gradient(#0f193800 0%, #0f1938);
+    transform: translateY(-40px);
+}
+
+.about .scroll-box::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-content-container .owned-products-tab {
+    padding: 28px 20px;
+}

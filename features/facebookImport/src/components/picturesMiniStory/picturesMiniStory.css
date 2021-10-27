@@ -1,0 +1,27 @@
+.pictures-mini-story {
+    margin-bottom: 4px;
+}
+
+.pictures-mini-story .part-heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pictures-mini-story .part-heading .icon {
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--color-gray-50);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    box-sizing: border-box;
+}
+
+.pictures-mini-story .part-heading p {
+    flex: 1 1 auto;
+    font-weight: 600;
+    margin: 0;
+}

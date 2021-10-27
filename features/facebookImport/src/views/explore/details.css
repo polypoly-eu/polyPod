@@ -1,0 +1,20 @@
+.details-view {
+    height: 100%;
+    background-color: var(--background-dark);
+    padding: 24px;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    overflow: hidden scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.details-view .details-view-title {
+    font-weight: 500;
+    margin: 0;
+    font-size: 24px;
+}
+
+.details-view ul {
+    padding: 0 20px;
+}

@@ -28,9 +28,9 @@ const val RDF_FORMAT = "N-TRIPLE"
 const val NS = "polypoly"
 
 open class PolyIn(
-    private val databaseName: String = "data_enc.nt",
-    private val databaseFolder: File? = null,
     private val context: Context,
+    private val databaseFolder: File? = null,
+    private val databaseName: String = "data_enc.nt",
 ) {
     private val databaseNameOld = "data.nt"
 
@@ -81,10 +81,32 @@ open class PolyIn(
         save()
     }
 
+    open suspend fun delete(quads: List<Quad>) {
+        quads.forEach { quad ->
+            model.remove(
+                quadSubjectToResource(quad.subject),
+                model.createProperty(quad.predicate.iri),
+                quadObjectToResource(quad.`object`)
+            )
+        }
+    }
+
+    open suspend fun has(quads: List<Quad>): Boolean {
+        return quads.any { quad ->
+            model.contains(
+                quadSubjectToResource(quad.subject),
+                model.createProperty(quad.predicate.iri),
+                quadObjectToResource(quad.`object`)
+            )
+        }
+    }
+
     private fun getDatabase(file: File): EncryptedFile {
         val mainKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .setUserAuthenticationRequired(true)
+            // We only strongly recommend users to set up a lock screen, but do
+            // not require it
+            .setUserAuthenticationRequired(false)
             .build()
 
         return EncryptedFile.Builder(

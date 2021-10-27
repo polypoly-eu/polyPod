@@ -8,9 +8,12 @@
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "update-lexicon-data": "func(){ node ./scripts/update-lexicon-data.js \"$1\";}; func"
+    "update-lexicon-data": "func(){ node ./scripts/update-lexicon-data.js \"$1\";}; func",
+    "test": "jest",
+    "clean": "rm -rf node_modules public/{build,pod.js}"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.14.7",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@prismicio/client": "^4.0.0",
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -18,13 +21,13 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "babel-jest": "^27.0.6",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-standard": "^5.0.0",
     "eslint-plugin-svelte3": "^3.2.0",
     "prettier": "^2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
@@ -39,6 +42,7 @@
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
+    "jest": "^27.0.6",
     "js-levenshtein": "^1.1.6",
     "sirv-cli": "^1.0.0"
   }

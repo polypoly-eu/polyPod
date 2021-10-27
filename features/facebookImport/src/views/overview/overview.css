@@ -1,0 +1,137 @@
+.overview {
+    background-color: var(--background-dark);
+    color: var(--color-gray-50);
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 30px 16px 30px 16px;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100%;
+}
+
+.overview h3,
+h4 {
+    font-weight: 500;
+    margin: 0px 0px 10px;
+}
+
+.overview h3 {
+    font-size: 20px;
+}
+
+.overview h4 {
+    font-size: 16px;
+}
+
+.overview p {
+    margin: 0px;
+    font-size: 14;
+}
+
+.overview .details h1 {
+    font-size: 20px;
+    margin: 4px 0px !important;
+}
+
+.overview .details p {
+    font-size: 14px;
+}
+
+.overview .details .size {
+    color: var(--color-gray-400);
+}
+
+.overview .details .separator {
+    width: 100%;
+    height: 1px;
+    box-sizing: border-box;
+    background-color: var(--color-gray-400);
+    margin: 20px 0px 16px;
+}
+
+.overview .imported-files {
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.overview .imported-files .align-illustration {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 4px;
+}
+
+.overview .imported-files .align-illustration h4 {
+    padding-left: 12px;
+}
+
+.overview .imported-files .file-list {
+    margin-bottom: 250px;
+}
+
+.overview .imported-files .file-list .file-button {
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    border-top: 1px var(--color-gray-700) solid;
+    padding-top: 6px;
+    margin-top: 6px;
+    overflow-wrap: break-word;
+    color: var(--color-gray-400);
+    font-family: "Jost";
+    font-style: normal;
+    font-weight: normal;
+}
+
+.overview .footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+}
+
+.overview .footer .overlay {
+    background: linear-gradient(180deg, #0f1938 0%, rgba(15, 25, 56, 0) 100%);
+    transform: rotate(-180deg);
+    height: 93px;
+}
+
+.overview .footer .btn-holder {
+    padding: 0 16px 24px 16px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: var(--background-dark);
+    box-sizing: border-box;
+}
+
+.overview .footer .btn-holder .btn {
+    height: 48px;
+    display: flex;
+    flex: 1 1 0;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.overview .footer .btn-holder .btn.primary {
+    background-color: var(--color-gray-50);
+    color: var(--color-indigo-950);
+    margin-right: 16px;
+}
+
+.overview .footer .btn-holder .btn.secondary {
+    border: 1px solid var(--color-gray-50);
+    box-sizing: border-box;
+    color: var(--color-gray-50);
+    background-color: transparent;
+}

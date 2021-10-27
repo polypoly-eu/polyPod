@@ -1,0 +1,88 @@
+.report-view, .report-details {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 24px;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    overflow: hidden scroll;
+}
+
+.report-view .report-view-title, .report-details h1 {
+    text-align: center;
+    font-weight: 500;
+    margin: 8px auto 20px auto;
+    font-size: 24px;
+    line-height: 120%;
+}
+
+.report-view .report-view-title {
+    max-width: var(--max-width);
+    margin: 68px auto 32px auto;
+    line-height: 28.8px;
+}
+
+.report-view p {
+    margin: auto;
+    max-width: var(--max-width);
+}
+
+.report-view .button-area::before {
+    content: "";
+    height: 60px;
+    position: absolute;
+    top: -60px;
+    right: 0;
+    left: 0;
+    background: linear-gradient(#ffffff00 0%, #ffffff);
+}
+
+.report-view .button-area {
+    display: block;
+    background-color: var(--background-light);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 12px 28px 32px 28px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.report-view .view-details,
+.report-view .send-later,
+.report-view .send {
+    font-size: 16px;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.report-view .view-details {
+    color: var(--text-dark);
+    text-decoration: underline;
+}
+
+.report-view .send-later, .report-view .send {
+    width: 100%;
+    height: 51px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.report-view .send-later {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--background-dark) !important;
+    background: transparent;
+    color: var(--text-dark) !important;
+}
+
+.report-view .send {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+}

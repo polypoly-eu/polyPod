@@ -1,0 +1,12 @@
+{
+    "messages.title": "Messages Summary",
+    "messages.summary": "In your export there are {{messages}} messages in {{threads}} threads by {{people}} people.",
+    "report.success": "Your report was sent to us. Thank you!",
+    "report.error": "Your report could not be sent. Please try again!",
+    "loading": "Your data is being analyzed",
+    "unrecognizedCard.headline": "We need your help!",
+    "unrecognizedCard.text": "If you send us an anonymised report about the structure of your Facebook data, it would help us improve Facebook Import so that it can show you even more insights.",
+    "unrecognizedCard.button": "Learn more",
+    "details.button": "View details",
+    "analysis.label.techDemo": "Tech Demo"
+}

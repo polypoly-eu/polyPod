@@ -1,0 +1,12 @@
+{
+    "intro.headline":
+        "We are interested in how your data is structured!",
+    "intro.text":
+        "Your data schema may contain data types that even we don't know of yet. To shed more and more light on what Facebook knows about all of us, it would be awesome if you could share this schema with us. Of course, you only send the data schema, not the data itself.",
+    "viewDetails":
+        "View data report details",
+    "sendLater":
+        "Do not send",
+    "send":
+        "Send and help"
+}

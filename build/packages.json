@@ -1,5 +1,5 @@
 {
-    "requiredNodeMajorVersion": 15,
+    "requiredNodeMajorVersion": 16,
     "packages": [
         "build",
         "core/api/fetch-spec",
@@ -13,11 +13,13 @@
         "core/communication/postoffice",
         "core/communication/remote-pod",
         "core/utils/dummy-server",
+        "core/utils/poly-look",
         "core/utils/rollup-plugin-copy-watch",
         "core/utils/silly-i18n",
-        "core/utils/poly-look",
         "features/bundle",
+        "features/demo",
         "features/example",
+        "features/facebookImport",
         "features/lexicon",
         "features/polyExplorer",
         "features/polyPinion",

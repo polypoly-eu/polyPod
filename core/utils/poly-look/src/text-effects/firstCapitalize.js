@@ -1,5 +1,6 @@
 import { html, LitElement, css } from "lit-element";
-import globalTheme from "../globalTheme";
+import { globalTheme, polyPrefix } from "../globalTheme";
+import { classMap } from "lit-html/directives/class-map";
 export class FirstCapitalize extends LitElement {
   static get styles() {
     return [
@@ -19,10 +20,17 @@ export class FirstCapitalize extends LitElement {
   static get properties() {
     return {
       paragraph: { type: String },
+      classes: { type: Object },
     };
   }
 
+  constructor() {
+    super();
+    this.classes = {};
+    this.classes[`${polyPrefix}-${this.constructor.name}`] = true;
+  }
+
   render() {
-    return html`<p class="paragraph">${this.paragraph}</p>`;
+    return html`<p class=${classMap(this.classes)}>${this.paragraph}</p>`;
   }
 }

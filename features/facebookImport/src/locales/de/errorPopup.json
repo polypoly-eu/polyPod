@@ -1,0 +1,10 @@
+{
+    "title":
+        "Ein Fehler ist aufgetreten",
+    "instructions.intro":
+        "Wenn Sie uns helfen möchten, das Problem zu lösen, bitte:",
+    "instructions.steps":
+        "Machen Sie einen Screenshot auf dem die Meldung oben erkennbar ist\nStellen Sie sicher, dass keine privaten Informationen darin vorkommen\nSenden Sie uns eine E-Mail an {{emailAddress}}, mit dem Screenshot, und einer kurzen Erklären, was passiert ist bevor diese Fehlermeldung erschien",
+    "instructions.closing":
+        "Danke!"
+}

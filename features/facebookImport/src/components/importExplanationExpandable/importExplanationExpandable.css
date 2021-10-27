@@ -1,0 +1,163 @@
+.import-view .explanation-expandable {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-dark);
+    overflow: hidden scroll;
+    margin: 0 auto;
+}
+
+.import-view .explanation-expandable .intro {
+    width: 100%;
+    max-width: var(--max-width);
+    padding: 0 16px 16px 16px;
+    box-sizing: border-box;
+    margin: 4px auto 72px auto;
+}
+
+.import-view .explanation-expandable .intro p {
+    font-weight: 300;
+    font-size: 42px;
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    margin: 0 0 16px 0;
+}
+
+.import-view .explanation-expandable .intro .bold {
+    font-weight: 600 !important;
+}
+
+.import-view .explanation-expandable .head {
+    width: 100%;
+    max-width: var(--max-width);
+    height: 96px;
+    border-top: 1px solid var(--color-gray-400);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.import-view .explanation-expandable .head .number {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 28px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-indigo-950);
+    color: var(--text-light);
+}
+
+.import-view .explanation-expandable .head .heading {
+    margin-left: 18px;
+    font-size: 24px;
+    flex: 1 1 auto;
+}
+
+.import-view .explanation-expandable .head strong {
+    font-weight: 600;
+}
+
+.import-view .explanation-expandable .head .rotate-180 {
+    transform: rotate(180deg);
+}
+
+.import-view .explanation-expandable .section-body {
+    padding: 16px 16px 16px 16px;
+    width: 100%;
+    max-width: var(--max-width);
+    box-sizing: border-box;
+    border-top: 1px solid var(--color-gray-400);
+}
+
+.import-view .explanation-expandable .section-body .full-screen {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-bottom: 25px;
+}
+
+.import-view .explanation-expandable .section-body .file-info p {
+    font-size: 16px;
+    color: var(--color-indigo-950);
+    margin: 0 0 2px 0;
+    line-height: 120%;
+}
+
+.import-view .explanation-expandable .section-body .x-divider {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+.import-view .explanation-expandable .separator {
+    height: 1px;
+    width: 100%;
+    max-width: var(--max-width);
+    background-color: var(--color-gray-400);
+    margin-bottom: 26px;
+}
+
+.import-view .explanation-expandable .translucent-sides {
+    mask-image: linear-gradient(
+        to top,
+        transparent,
+        transparent,
+        rgba(0, 0, 0, 1),
+        transparent,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to top,
+        transparent,
+        transparent,
+        rgba(0, 0, 0, 1),
+        transparent,
+        transparent
+    );
+}
+
+.import-view .explanation-expandable .section-body * {
+    margin-bottom: 16px;
+}
+
+.import-view .explanation-expandable .section-body p {
+    margin-top: 0;
+    margin-bottom: 36px;
+}
+
+.import-view .explanation-expandable .section-body {
+    line-height: 120%;
+    letter-spacing: -0.01em;
+    font-size: 20px;
+}
+
+.import-view .explanation-expandable .section-body h4,
+h5 {
+    color: var(--color-indigo-950);
+    margin-top: 0;
+}
+
+.import-view .explanation-expandable .section-body h4 {
+    font-size: 24px;
+    margin-bottom: 36px;
+    margin-top: 20px;
+}
+
+.import-view .explanation-expandable .section-body h5 {
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.import-view .explanation-expandable .section-body .btn-1 {
+    margin-top: 45px;
+}
+
+.import-view .explanation-expandable .section-body .btn-2 {
+    margin-top: 30px;
+}

@@ -62,8 +62,8 @@ class Bubblewrap {
             guard let classname = decodedData[0] as? String else { break }
             guard let propertyList = decodedData[1] as? [[Any]] else { break }
             return ExtendedData(classname: classname, propertyList: propertyList)
-        default:
-            break
+        case .nil:
+            return nil
         }
         assert(false)
         return nil

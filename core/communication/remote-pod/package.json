@@ -16,7 +16,7 @@
     "pretest": "start-dummy-server &",
     "test": "rollup -c && npm run test:electron && npm run test:node",
     "test:electron": "electron-mocha --renderer --require ts-node/register src/tests/electron/*.test.ts",
-    "test:node": "ts-mocha src/tests/node/*.test.ts",
+    "test:node": "ts-mocha --timeout 10000 src/tests/node/*.test.ts",
     "posttest": "stop-dummy-server",
     "docs": "typedoc"
   },
@@ -49,7 +49,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "connect": "^3.7.0",
-    "electron": "^11.2.0",
+    "electron": "^11.5.0",
     "electron-mocha": "^10.0.0",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^6.11.0",

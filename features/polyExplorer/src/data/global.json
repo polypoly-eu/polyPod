@@ -3,7 +3,7 @@
         "AD": {
             "Name_EN": "Andorra",
             "Name_DE": "Andorra",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "AE": {
             "Name_EN": "United Arab Emirates",
@@ -48,7 +48,7 @@
         "AR": {
             "Name_EN": "Argentina",
             "Name_DE": "Argentinien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "AS": {
             "Name_EN": "American Samoa",
@@ -208,7 +208,7 @@
         "CH": {
             "Name_EN": "Switzerland",
             "Name_DE": "Schweiz",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "CI": {
             "Name_EN": "Côte d'Ivoire",
@@ -363,7 +363,7 @@
         "FO": {
             "Name_EN": "Faroe Islands",
             "Name_DE": "Färöer Inseln",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "FR": {
             "Name_EN": "France",
@@ -398,7 +398,7 @@
         "GG": {
             "Name_EN": "Guernsey",
             "Name_DE": "Guernsey",
-            "dataRegion": "Five-Eyes"
+            "dataRegion": "EU Adequate"
         },
         "GH": {
             "Name_EN": "Ghana",
@@ -508,12 +508,12 @@
         "IL": {
             "Name_EN": "Israel",
             "Name_DE": "Israel",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "IM": {
             "Name_EN": "Isle of Man",
             "Name_DE": "Isle of Man",
-            "dataRegion": "Five-Eyes"
+            "dataRegion": "EU Adequate"
         },
         "IN": {
             "Name_EN": "India",
@@ -548,7 +548,7 @@
         "JE": {
             "Name_EN": "Jersey",
             "Name_DE": "Jersey",
-            "dataRegion": "Five-Eyes"
+            "dataRegion": "EU Adequate"
         },
         "JM": {
             "Name_EN": "Jamaica",
@@ -563,7 +563,7 @@
         "JP": {
             "Name_EN": "Japan",
             "Name_DE": "Japan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "KE": {
             "Name_EN": "Kenya",
@@ -1163,7 +1163,7 @@
         "UY": {
             "Name_EN": "Uruguay",
             "Name_DE": "Uruguay",
-            "dataRegion": "Sonstige"
+            "dataRegion": "EU Adequate"
         },
         "UZ": {
             "Name_EN": "Uzbekistan",
@@ -1249,6 +1249,11 @@
             "Name_EN": "Kosovo",
             "Name_DE": "Kosovo",
             "dataRegion": "Sonstige"
+        },
+        "ZZ": {
+            "Name_EN": "Placeholder",
+            "Name_DE": "Placeholder",
+            "dataRegion": ""
         }
     },
     "industries": {
@@ -1401,7 +1406,8 @@
             "Translation_EN": "Academic Research",
             "Synonyms": "",
             "Explanation_DE": "Forschung in einem akademischen Kontext, z. B. durch die Durchführung oder Unterstützung von Universitäten.",
-            "Explanation_EN": "Conduct or assist with research conducted in an academic context e.g. within universities."
+            "Explanation_EN": "Conduct or assist with research conducted in an academic context e.g. within universities.",
+            "Editorial_Purpose": ""
         },
         "dpv:AccessControl": {
             "dpv:Purpose": "dpv:AccessControl",
@@ -1410,7 +1416,8 @@
             "Translation_EN": "Access Control",
             "Synonyms": "",
             "Explanation_DE": "Zugangskontrollen durchführen oder durchsetzen.",
-            "Explanation_EN": "Conduct or enforce access control."
+            "Explanation_EN": "Conduct or enforce access control.",
+            "Editorial_Purpose": ""
         },
         "dpv:CommercialInterest": {
             "dpv:Purpose": "dpv:CommercialInterest",
@@ -1418,8 +1425,9 @@
             "Translation_DE": "Kommerzielles Interesse",
             "Translation_EN": "Commercial Interest",
             "Synonyms": "",
-            "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Prüfenden.",
-            "Explanation_EN": "Carry out activities with a commercial interest i.e. of profit or benefit to the Controller."
+            "Explanation_DE": "Aktivitäten mit einem kommerziellen Interesse durchführen, d. h. mit Gewinn oder Nutzen für die Datenempfänger:innen.",
+            "Explanation_EN": "Carry out activities with a commercial interest i.e. for profit or of benefit to the controller.",
+            "Editorial_Purpose": ""
         },
         "dpv:CommercialResearch": {
             "dpv:Purpose": "dpv:CommercialResearch",
@@ -1428,7 +1436,8 @@
             "Translation_EN": "Commercial Research",
             "Synonyms": "",
             "Explanation_DE": "Forschung in einem kommerziellen Umfeld betreiben, z. B. in einem Unternehmen.",
-            "Explanation_EN": "Conduct research in a commercial setting e.g. in a company."
+            "Explanation_EN": "Conduct research in a commercial setting e.g. in a company.",
+            "Editorial_Purpose": ""
         },
         "dpv:CommunicationForCustomerCare": {
             "dpv:Purpose": "dpv:CommunicationForCustomerCare",
@@ -1437,7 +1446,8 @@
             "Translation_EN": "Communication for Customer Care",
             "Synonyms": "",
             "Explanation_DE": "Mit Nutzer:innen per E-Mail, Telefon, SMS, Chat oder Push-Nachrichten über Ihre Anfragen kommunizieren.",
-            "Explanation_EN": "Communicate with users via email, phone, sms, chat or push messages regarding your requests."
+            "Explanation_EN": "Communicate with users via email, phone, sms, chat or push messages regarding your requests.",
+            "Editorial_Purpose": ""
         },
         "dpv:Context": {
             "dpv:Purpose": "dpv:Context",
@@ -1446,7 +1456,8 @@
             "Translation_EN": "Context",
             "Synonyms": "",
             "Explanation_DE": "Der „Kontext” oder „Umfang” des Zwecks, z. B. Beschränkung auf einen bestimmten Geschäftszweig.",
-            "Explanation_EN": "The 'context' or 'scope' of the purpose, e.g. restriction to a certain business sector."
+            "Explanation_EN": "The 'context' or 'scope' of the purpose, e.g. restriction to a certain business sector.",
+            "Editorial_Purpose": ""
         },
         "dpv:CreateEventRecommendations": {
             "dpv:Purpose": "dpv:CreateEventRecommendations",
@@ -1455,16 +1466,18 @@
             "Translation_EN": "Create Event Recommendations",
             "Synonyms": "",
             "Explanation_DE": "Personalisierte Empfehlungen für Veranstaltungen erstellen und bereitstellen.",
-            "Explanation_EN": "Create and provide personalised recommendations for events."
+            "Explanation_EN": "Data is shared in order to make predictions about what a person might like and suggest these to the person. For example - 'People who enjoyed this also bought this'.",
+            "Editorial_Purpose": ""
         },
         "dpv:CreatePersonalizedRecommendations": {
             "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
             "dpv:Superclass": "dpv:CreatePersonalizedReccomendations",
             "Translation_DE": "Personalisierte Empfehlungen erstellen",
-            "Translation_EN": "Create Personalized Recommendations",
+            "Translation_EN": "Create Personalised Recommendations",
             "Synonyms": "",
             "Explanation_DE": "Personalisierte Empfehlungen erstellen und bereitstellen.",
-            "Explanation_EN": "Create and provide personalised recommendations."
+            "Explanation_EN": "Data is shared so that purchased items can be brought to an address.",
+            "Editorial_Purpose": ""
         },
         "dpv:CreateProductRecommendations": {
             "dpv:Purpose": "dpv:CreateProductRecommendations",
@@ -1473,7 +1486,8 @@
             "Translation_EN": "Create Product Recommendations",
             "Synonyms": "",
             "Explanation_DE": "Produktempfehlungen erstellen, z. B. ähnliche Produkte vorschlagen.",
-            "Explanation_EN": "Create product recommendations e.g. suggest similar products."
+            "Explanation_EN": "Create product recommendations e.g. suggest similar products.",
+            "Editorial_Purpose": ""
         },
         "dpv:CustomerCare": {
             "dpv:Purpose": "dpv:CustomerCare",
@@ -1482,7 +1496,8 @@
             "Translation_EN": "Customer Care",
             "Synonyms": "",
             "Explanation_DE": "Hilfestellung bei Kund:innen-Beschwerden und -Zufriedenheit geben.",
-            "Explanation_EN": "Provide assistance for customer complaints and satisfaction."
+            "Explanation_EN": "Provide assistance for customer complaints and satisfaction.",
+            "Editorial_Purpose": ""
         },
         "dpv:DeliveryOfGoods": {
             "dpv:Purpose": "dpv:DeliveryOfGoods",
@@ -1491,7 +1506,8 @@
             "Translation_EN": "Delivery of Goods",
             "Synonyms": "",
             "Explanation_DE": "Waren und Dienstleistungen ausliefern.",
-            "Explanation_EN": "Deliver goods and services."
+            "Explanation_EN": "Deliver goods and services.",
+            "Editorial_Purpose": ""
         },
         "dpv:DirectMarketing": {
             "dpv:Purpose": "dpv:DirectMarketing",
@@ -1500,7 +1516,8 @@
             "Translation_EN": "Direct marketing",
             "Synonyms": "",
             "Explanation_DE": "Direktmarketing durchführen, d.h. gezieltes Marketing, das direkt an eine individuelle Person gerichtet ist.",
-            "Explanation_EN": "Carry out direct marketing i.e. marketing communicated directly to the individual."
+            "Explanation_EN": "Carry out direct marketing i.e. marketing communicated directly to the individual.",
+            "Editorial_Purpose": "Advertsing"
         },
         "dpv:FraudPreventionAndDetection": {
             "dpv:Purpose": "dpv:FraudPreventionAndDetection",
@@ -1509,7 +1526,8 @@
             "Translation_EN": "Fraud Prevention and Detection",
             "Synonyms": "",
             "Explanation_DE": "Betrug erkennen und verhindern.",
-            "Explanation_EN": "Detect and prevent fraud."
+            "Explanation_EN": "Sometimes people deliberately deceive others for unfair gain. Companies share data about such cases to stop them from happening in the future.",
+            "Editorial_Purpose": ""
         },
         "dpv:IdentityVerification": {
             "dpv:Purpose": "dpv:IdentityVerification",
@@ -1518,7 +1536,8 @@
             "Translation_EN": "Identity Verification",
             "Synonyms": "",
             "Explanation_DE": "Identität verifizieren und autorisieren.",
-            "Explanation_EN": "Verify and authorise identity."
+            "Explanation_EN": "Data is shared in order to confirm a person's identity - that they are who they say they are.",
+            "Editorial_Purpose": ""
         },
         "dpv:ImproveExistingProductsAndServices": {
             "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
@@ -1527,7 +1546,8 @@
             "Translation_EN": "Improve Existing Products and Services",
             "Synonyms": "",
             "Explanation_DE": "Bestehende Produkte und Dienstleistungen verbessern.",
-            "Explanation_EN": "Improve existing products and services."
+            "Explanation_EN": "Improve existing products and services.",
+            "Editorial_Purpose": ""
         },
         "dpv:ImproveInternalCRMProcesses": {
             "dpv:Purpose": "dpv:ImproveInternalCRMProcesses",
@@ -1536,7 +1556,8 @@
             "Translation_EN": "Improve internal CRM Processes",
             "Synonyms": "",
             "Explanation_DE": "Verbesserung der Kund:innen-Beziehungsmanagement-Prozesse (CRM).",
-            "Explanation_EN": "Improve customer-relationship management (CRM) processes."
+            "Explanation_EN": "Improve customer-relationship management (CRM) processes.",
+            "Editorial_Purpose": ""
         },
         "dpv:IncreaseServiceRobustness": {
             "dpv:Purpose": "dpv:IncreaseServiceRobustness",
@@ -1545,7 +1566,8 @@
             "Translation_EN": "Increase Service Robustness",
             "Synonyms": "",
             "Explanation_DE": "Die Robustheit und Ausfallsicherheit von Diensten verbessern.",
-            "Explanation_EN": "Improve the robustness and resilience of services."
+            "Explanation_EN": "Improve the robustness and resilience of services.",
+            "Editorial_Purpose": ""
         },
         "dpv:InternalResourceOptimisation": {
             "dpv:Purpose": "dpv:InternalResourceOptimisation",
@@ -1554,7 +1576,8 @@
             "Translation_EN": "Internal Resource Optimisation",
             "Synonyms": "",
             "Explanation_DE": "Optimierung interner Ressourcen, die von der Organisation genutzt werden, z. B. die Ressourcennutzung.",
-            "Explanation_EN": "Optimise activities and services for the Controller, meaning the company that controls the data handling."
+            "Explanation_EN": "Optimise activities and services for the controller - the company that controls the data handling.",
+            "Editorial_Purpose": ""
         },
         "dpv:LegalCompliance": {
             "dpv:Purpose": "dpv:LegalCompliance",
@@ -1563,7 +1586,8 @@
             "Translation_EN": "Legal Compliance",
             "Synonyms": "",
             "Explanation_DE": "Verpflichtungen oder Anforderungen erfüllen, um die Einhaltung von Gesetzen oder Vorschriften zu gewährleisten.",
-            "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations."
+            "Explanation_EN": "Fulfil obligations or requirements towards achieving compliance with law or regulations.",
+            "Editorial_Purpose": ""
         },
         "dpv:Marketing": {
             "dpv:Purpose": "dpv:Marketing",
@@ -1572,7 +1596,8 @@
             "Translation_EN": "Marketing",
             "Synonyms": "Publicity;Public Relations",
             "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
-            "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service."
+            "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service.",
+            "Editorial_Purpose": "Advertising"
         },
         "dpv:NonCommercialResearch": {
             "dpv:Purpose": "dpv:NonCommercialResearch",
@@ -1581,7 +1606,8 @@
             "Translation_EN": "Non-Commercial Research",
             "Synonyms": "",
             "Explanation_DE": "Forschung in einem nicht-kommerziellen Umfeld betreiben, z. B. für eine Non-Profit-Organisation (NGO).",
-            "Explanation_EN": "Conduct research in a non-commercial setting e.g. for a non-profit-organisation (NGO)."
+            "Explanation_EN": "Conduct research in a non-commercial setting e.g. for a non-profit-organisation (NGO).",
+            "Editorial_Purpose": ""
         },
         "dpv:OptimisationForConsumer": {
             "dpv:Purpose": "dpv:OptimisationForConsumer",
@@ -1590,7 +1616,8 @@
             "Translation_EN": "Optimisation for Consumer",
             "Synonyms": "",
             "Explanation_DE": "Aktivitäten und Dienste für Verbraucher:innen oder Nutzer:innen optimieren.",
-            "Explanation_EN": "Optimise activities and services for the consumer or user."
+            "Explanation_EN": "Optimise activities and services for the consumer or user.",
+            "Editorial_Purpose": ""
         },
         "dpv:OptimisationForController": {
             "dpv:Purpose": "dpv:OptimisationForController",
@@ -1599,16 +1626,18 @@
             "Translation_EN": "Optimisation for Controller",
             "Synonyms": "",
             "Explanation_DE": "Optimierung von Aktivitäten und Diensten für Datenverantwortliche, also für die Firma, die die Daten kontrolliert.",
-            "Explanation_EN": "Optimise activities and services for the Controller."
+            "Explanation_EN": "Optimise activities and services for the controller - the company that controls the data handling.",
+            "Editorial_Purpose": ""
         },
         "dpv:OptimiseUserInterface": {
             "dpv:Purpose": "dpv:OptimiseUserInterface",
             "dpv:Superclass": "dpv:OptimisationForConsumer,",
-            "Translation_DE": "Optimierung der Benutzer:innen-Oberfläche",
+            "Translation_DE": "Optimierung der Benutzer:innen-Schnittstelle",
             "Translation_EN": "Optimise User Interface",
             "Synonyms": "",
             "Explanation_DE": "Optimierung von Schnittstellen, die dem:der Nutzer:in präsentiert werden.",
-            "Explanation_EN": "Optimise interfaces presented to the user."
+            "Explanation_EN": "Optimise interfaces presented to the user.",
+            "Editorial_Purpose": ""
         },
         "dpv:Payment": {
             "dpv:Purpose": "dpv:Payment",
@@ -1617,7 +1646,8 @@
             "Translation_EN": "Payment",
             "Synonyms": "",
             "Explanation_DE": "Die Zahlungstransaktionen der Nutzer:innen verarbeiten.",
-            "Explanation_EN": "Process users’ payment transactions."
+            "Explanation_EN": "Process users’ payment transactions.",
+            "Editorial_Purpose": ""
         },
         "dpv:PersonalisedAdvertising": {
             "dpv:Purpose": "dpv:PersonalisedAdvertising",
@@ -1626,7 +1656,8 @@
             "Translation_EN": "Personalised Advertising",
             "Synonyms": "",
             "Explanation_DE": "Personalisierte Werbung bereitstellen.",
-            "Explanation_EN": "Provide personalised advertising."
+            "Explanation_EN": "Provide personalised advertising.",
+            "Editorial_Purpose": "Advertising"
         },
         "dpv:PersonalisedBenefits": {
             "dpv:Purpose": "dpv:PersonalisedBenefits",
@@ -1635,7 +1666,8 @@
             "Translation_EN": "Personalised Benefits",
             "Synonyms": "",
             "Explanation_DE": "Die von den Nutzenden erhaltenen Leistungen personalisieren.",
-            "Explanation_EN": "Personalise benefits received by the user."
+            "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for.",
+            "Editorial_Purpose": ""
         },
         "dpv:RegistrationAndAuthentication": {
             "dpv:Purpose": "dpv:RegistrationAndAuthentication",
@@ -1644,7 +1676,8 @@
             "Translation_EN": "Registration and Authentication",
             "Synonyms": "",
             "Explanation_DE": "Sich registrieren, authentifizieren und im Zusammenhang mit einem Dienst identifizieren.",
-            "Explanation_EN": "Register, authenticate, and identify in context of a service."
+            "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for.",
+            "Editorial_Purpose": ""
         },
         "dpv:ResearchAndDevelopment": {
             "dpv:Purpose": "dpv:ResearchAndDevelopment",
@@ -1653,7 +1686,8 @@
             "Translation_EN": "Research and Development",
             "Synonyms": "",
             "Explanation_DE": "Forschung und Entwicklung für neue Methoden, Produkte oder Dienstleistungen betreiben.",
-            "Explanation_EN": "Conduct research and development for new methods, products, or services."
+            "Explanation_EN": "Conduct research and development for new methods, products, or services.",
+            "Editorial_Purpose": ""
         },
         "dpv:Sector": {
             "dpv:Purpose": "dpv:Sector",
@@ -1662,7 +1696,8 @@
             "Translation_EN": "Sector",
             "Synonyms": "",
             "Explanation_DE": "Der „Sektor\" oder „Bereich\" eines Zwecks z. B. Landwirtschaft, Werbung.",
-            "Explanation_EN": "The 'sector' or 'domain' of a purpose e.g. Agriculture, Advertising."
+            "Explanation_EN": "The 'sector' or 'domain' of a purpose e.g. Agriculture, Advertising.",
+            "Editorial_Purpose": ""
         },
         "dpv:Security": {
             "dpv:Purpose": "dpv:Security",
@@ -1671,7 +1706,8 @@
             "Translation_EN": "Security",
             "Synonyms": "",
             "Explanation_DE": "Die Sicherheit z. B. von Daten, gewährleisten und durchsetzen.",
-            "Explanation_EN": "Ensure and enforce security e.g. of data."
+            "Explanation_EN": "Ensure and enforce security e.g. of data.",
+            "Editorial_Purpose": ""
         },
         "dpv:SellDataToThirdParties": {
             "dpv:Purpose": "dpv:SellDataToThirdParties",
@@ -1680,7 +1716,8 @@
             "Translation_EN": "Sell Data to Third Parties",
             "Synonyms": "",
             "Explanation_DE": "Daten oder Informationen an Dritte verkaufen.",
-            "Explanation_EN": "Sell data or information to third parties."
+            "Explanation_EN": "Sell data or information to third parties.",
+            "Editorial_Purpose": ""
         },
         "dpv:SellInsightsFromData": {
             "dpv:Purpose": "dpv:SellInsightsFromData",
@@ -1689,7 +1726,8 @@
             "Translation_EN": "Sell Insights from Data",
             "Synonyms": "",
             "Explanation_DE": "Aus der Analyse von Daten gewonnene Erkenntnisse verkaufen oder kommerziell bereitstellen.",
-            "Explanation_EN": "Sell or commercially provide insights obtained from analysis of data."
+            "Explanation_EN": "Sell or commercially provide insights obtained from analysis of data.",
+            "Editorial_Purpose": "Advertising"
         },
         "dpv:SellProductsToDataSubject": {
             "dpv:Purpose": "dpv:SellProductsToDataSubject",
@@ -1698,7 +1736,8 @@
             "Translation_EN": "Sell Products to Data Subject",
             "Synonyms": "",
             "Explanation_DE": "Produkte oder Dienstleistungen verkaufen.",
-            "Explanation_EN": "Sell products or services."
+            "Explanation_EN": "Sell products or services.",
+            "Editorial_Purpose": ""
         },
         "dpv:SellTargettedAdvertisements": {
             "dpv:Purpose": "dpv:SellTargettedAdvertisements",
@@ -1707,25 +1746,28 @@
             "Translation_EN": "Sell Targetted Advertisements",
             "Synonyms": "",
             "Explanation_DE": "Zielgerichtete Werbung verkaufen oder anbieten.",
-            "Explanation_EN": "Sell or provide targetted advertisements."
+            "Explanation_EN": "Sell or provide targetted advertisements.",
+            "Editorial_Purpose": "Advertising"
         },
         "dpv:ServiceOptimization": {
             "dpv:Purpose": "dpv:ServiceOptimization",
             "dpv:Superclass": "dpv:Purpose",
             "Translation_DE": "Service-Optimierung",
-            "Translation_EN": "Service Optimization,",
+            "Translation_EN": "Service Optimisation",
             "Synonyms": "",
             "Explanation_DE": "Service oder Aktivität optimieren.",
-            "Explanation_EN": "Optimise service or activity."
+            "Explanation_EN": "Data is shared in order to determine how the service could be improved.",
+            "Editorial_Purpose": ""
         },
         "dpv:ServicePersonalization": {
             "dpv:Purpose": "dpv:ServicePersonalization",
             "dpv:Superclass": "dpv:Purpose",
             "Translation_DE": "Dienstpersonalisierung",
-            "Translation_EN": "Service Personalization",
+            "Translation_EN": "Service Personalisation",
             "Synonyms": "",
             "Explanation_DE": "Dienstleistung oder Aktivität personalisieren.",
-            "Explanation_EN": "Personalise service or activity."
+            "Explanation_EN": "Data is shared in order to change a service or activity to fit a person's tastes or choices.",
+            "Editorial_Purpose": ""
         },
         "dpv:ServiceProvision": {
             "dpv:Purpose": "dpv:ServiceProvision",
@@ -1734,7 +1776,8 @@
             "Translation_EN": "Service Provision",
             "Synonyms": "",
             "Explanation_DE": "Dienstleistung oder Aktivität anbieten.",
-            "Explanation_EN": "Provide service or activity."
+            "Explanation_EN": "Provide service or activity.",
+            "Editorial_Purpose": ""
         },
         "dpv:SocialMediaMarketing": {
             "dpv:Purpose": "dpv:SocialMediaMarketing",
@@ -1743,7 +1786,8 @@
             "Translation_EN": "Social Media",
             "Synonyms": "",
             "Explanation_DE": "Über und in sozialen Medien vermarkten.",
-            "Explanation_EN": "Market through and on social media."
+            "Explanation_EN": "Market through and on social media.",
+            "Editorial_Purpose": "Advertising"
         },
         "dpv:Analytics": {
             "dpv:Purpose": "dpv:Analytics",
@@ -1752,16 +1796,18 @@
             "Translation_EN": "Analytics",
             "Synonyms": "",
             "Explanation_DE": "Benutzer:innen-Verhalten und Ereignisse für einen Dienst oder ein Produkt berechnen, analysieren und melden.",
-            "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
+            "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product.",
+            "Editorial_Purpose": ""
         },
         "dpv:UserInterfacePersonalisation": {
             "dpv:Purpose": "dpv:UserInterfacePersonalisation",
             "dpv:Superclass": "dpv:ServicePersonalization",
-            "Translation_DE": "Personalisierung der Benutzer:innen-Oberfläche",
+            "Translation_DE": "Personalisierung der Benutzer:innen-Schnittstelle",
             "Translation_EN": "User Interface Personalisation",
             "Synonyms": "",
-            "Explanation_DE": "Oberflächen für den:die Benutzer:in personalisieren.",
-            "Explanation_EN": "Personalise interfaces presented to the user."
+            "Explanation_DE": "Schnittstellen für den:die Benutzer:in personalisieren.",
+            "Explanation_EN": "Data is shared to alter the presentation of interfaces that suit a particular user.",
+            "Editorial_Purpose": ""
         },
         "dpv:UsageAnalytics": {
             "dpv:Purpose": "dpv:UsageAnalytics",
@@ -1770,7 +1816,8 @@
             "Translation_EN": "Usage Analytics",
             "Synonyms": "",
             "Explanation_DE": ",Berechnen, Analysieren und Berichten von Benutzer:innen-Verhalten und -Ereignissen für einen Dienst oder ein Produkt.",
-            "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product."
+            "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product.",
+            "Editorial_Purpose": ""
         },
         "dpv:RegistrationAuthentication": {
             "dpv:Purpose": "dpv:RegistrationAuthentication",
@@ -1779,7 +1826,8 @@
             "Translation_EN": "Registration and Authentication",
             "Synonyms": "",
             "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-            "Explanation_EN": "Register, authenticate, and identify in context of a service."
+            "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for.",
+            "Editorial_Purpose": ""
         },
         "unspecified": {
             "dpv:Purpose": "unspecified",
@@ -1788,7 +1836,8 @@
             "Translation_EN": "Unspecified",
             "Synonyms": "",
             "Explanation_DE": "Zweck nicht spezifiziert.",
-            "Explanation_EN": "Purpose unspecified."
+            "Explanation_EN": "A reason for sharing this data was not given.",
+            "Editorial_Purpose": ""
         },
         "dpv:Advertising": {
             "dpv:Purpose": "dpv:Advertising",
@@ -1797,7 +1846,8 @@
             "Translation_EN": "Advertising",
             "Synonyms": "",
             "Explanation_DE": "Werbung und werbliche Ansprache.",
-            "Explanation_EN": "Advertising and sending messages with ad content."
+            "Explanation_EN": "Advertising and sending messages with ad content.",
+            "Editorial_Purpose": "Advertising"
         },
         "dpv:RequestedServiceProvision": {
             "dpv:Purpose": "dpv:RequestedServiceProvision",
@@ -1806,7 +1856,8 @@
             "Translation_EN": "Requested Service Provision",
             "Synonyms": "",
             "Explanation_DE": "Angefordete Dienstleistung bereitstellen.",
-            "Explanation_EN": "Provide requested service of activity."
+            "Explanation_EN": "Provide requested service of activity.",
+            "Editorial_Purpose": ""
         }
     },
     "personal_data_categories": {
@@ -2502,6 +2553,18 @@
             "Synonyms": "",
             "Explanation_DE": "Informationen über die gesundheitliche Vorgeschichte der Familie.",
             "Explanation_EN": "Information about family health history."
+        },
+        "dpv:FamilyStructure": {
+            "dpv:Category": "dpv:FamilyStructure",
+            "dpv:Superclass": "dpv:Family",
+            "Translation_DE": "Familienstruktur",
+            "Translation_EN": "Family Structure",
+            "Polypoly_Parent_Category": [
+                "pppc:SocialData"
+            ],
+            "Synonyms": "",
+            "Explanation_DE": "Information über Familie und Familienstruktur",
+            "Explanation_EN": "Information about family and familial structure"
         },
         "dpv:Favorite": {
             "dpv:Category": "dpv:Favorite",

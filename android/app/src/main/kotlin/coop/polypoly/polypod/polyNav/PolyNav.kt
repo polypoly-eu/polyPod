@@ -1,12 +1,17 @@
 package coop.polypoly.polypod.polyNav
 
+import android.content.Context
 import android.net.Uri
 import android.webkit.WebMessage
 import android.webkit.WebView
+import kotlinx.coroutines.CoroutineScope
+import kotlin.collections.HashSet
+import kotlin.coroutines.EmptyCoroutineContext
 
 open class PolyNav(
     private val webView: WebView,
-    private var observer: PolyNavObserver? = null
+    private var observer: PolyNavObserver? = null,
+    private val context: Context
 ) {
     private val registeredActions = HashSet<String>()
 
@@ -36,4 +41,6 @@ open class PolyNav(
 
         return true
     }
+
+    suspend fun pickFile(type: String?) = observer?.onPickFile?.invoke(type)
 }

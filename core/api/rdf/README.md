@@ -26,6 +26,6 @@ const graph = dataFactory.namedNode('http://example.org/graph');
 const quad = dataFactory.quad(subject, predicate, object, graph);
 ```
 
-[executable specification]: https://github.com/polypoly-eu/rdf-spec
+[executable specification]: ../rdf-spec
 [RDFJS Data Model Spec]: https://rdf.js.org/data-model-spec/
 [reference implementation]: https://github.com/rdfjs-base/data-model

@@ -8,13 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
-import android.webkit.JavascriptInterface
-import android.webkit.WebMessage
-import android.webkit.WebMessagePort
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
@@ -23,12 +17,15 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.features.Feature
+import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
+import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
+import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
-import eu.polypoly.pod.android.polyOut.PolyOut
+import java.io.ByteArrayInputStream
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -42,11 +39,13 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     private val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
     val api = PodApi(
-        PolyOut(),
-        PolyIn("data.nt", context.filesDir, context),
+        PolyOut(context),
+        PolyIn(context, context.filesDir),
         PolyNav(
-            webView = webView
-        )
+            webView = webView, context = context
+        ),
+        Info(),
+        Network(context)
     )
 
     var feature: Feature? = null
@@ -56,14 +55,18 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             loadFeature(value)
         }
 
+    var errorHandler: ((String) -> Unit)? = null
+
     init {
         webView.layoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         webView.settings.textZoom = 100
         webView.settings.javaScriptEnabled = true
         webView.addJavascriptInterface(
-            ClipboardInterface(context),
-            "nativeAndroidClipboard"
+            PodInternalInterface(context) { error: String ->
+                errorHandler?.invoke(error)
+            },
+            "podInternal"
         )
 
         // Enabling localStorage to support polyExplorer data migration
@@ -74,6 +77,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
 
+        WebView.setWebContentsDebuggingEnabled(true)
         addView(webView)
     }
 
@@ -111,32 +115,52 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
+        Preferences.currentFeatureName = feature.id
         api.polyNav.setNavObserver(
             PolyNavObserver(
                 null,
                 null,
-                { url -> openUrl(url) }
+                { url -> openUrl(url) },
+                null
             )
         )
 
         val assetLoader = WebViewAssetLoader.Builder()
+            .setDomain(PolyOut.fsDomain)
             .addPathHandler(
                 "/features/${feature.name}/",
                 FeaturesPathHandler(context, feature.content)
             )
             .addPathHandler("/", PodPathHandler(context))
             .build()
+
         webView.webViewClient = object : WebViewClient() {
             override fun shouldInterceptRequest(
                 view: WebView,
                 request: WebResourceRequest
             ): WebResourceResponse {
-                if (request.url.lastPathSegment == "favicon.ico")
+                if (request.url.lastPathSegment == "favicon.ico") {
                     return WebResourceResponse(
                         null,
                         null,
                         null
                     )
+                }
+                var rawPath = request.url.path?.removePrefix(PolyOut.fsPrefix)!!
+
+                val firstSlash = rawPath.indexOf('/', 1) + 1
+                val endIndex = rawPath.indexOf('/', firstSlash)
+                if (endIndex > 0) {
+                    rawPath = rawPath.removeRange(0, endIndex + 1)
+                }
+                if (rawPath.startsWith(PolyOut.fsFilesRoot)) {
+                    return WebResourceResponse(
+                        null, null,
+                        ByteArrayInputStream(
+                            api.polyOut.readFile(rawPath)
+                        )
+                    )
+                }
                 val response = assetLoader.shouldInterceptRequest(request.url)
                 if (response == null) {
                     logger.warn(
@@ -169,8 +193,32 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 initPostOffice(view!!)
             }
         }
+
+        webView.webChromeClient = object : WebChromeClient() {
+            override fun onConsoleMessage(
+                consoleMessage: ConsoleMessage?
+            ): Boolean {
+                if (consoleMessage == null) {
+                    logger.warn("Unknown message from " +
+                        Preferences.currentFeatureName)
+                    return true
+                }
+                val message = "Message from " +
+                    Preferences.currentFeatureName + ": " +
+                    consoleMessage.messageLevel() + ": " +
+                    consoleMessage.message()
+                when (consoleMessage?.messageLevel()) {
+                    ConsoleMessage.MessageLevel.ERROR,
+                    ConsoleMessage.MessageLevel.WARNING ->
+                        logger.warn(message)
+                    else -> logger.info(message)
+                }
+                return true
+            }
+        }
+
         /* ktlint-disable max-line-length */
-        webView.loadUrl("https://appassets.androidplatform.net/assets/container/container.html?featureName=${feature.name}")
+        webView.loadUrl("${PolyOut.fsPrefix}assets/container/container.html?featureName=${feature.name}")
     }
 
     private fun initPostOffice(view: WebView) {
@@ -269,9 +317,19 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    class ClipboardInterface(aContext: Context) {
-        var context: Context = aContext
+    class PodInternalInterface(
+        val context: Context,
+        val errorHandler: (String) -> Unit
+    ) {
+        @Suppress("unused")
+        @JavascriptInterface
+        fun reportError(error: String) {
+            logger.warn("Uncaught error from " +
+                Preferences.currentFeatureName + ": " + error)
+            errorHandler(error)
+        }
 
+        @Suppress("unused")
         @JavascriptInterface
         fun copyToClipboard(text: String?) {
             var clipboard: ClipboardManager =

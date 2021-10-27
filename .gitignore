@@ -14,3 +14,12 @@ node_modules/
 # If you positively need it, please use --force to add it anyway, and explain the reason in the commit message.
 *.?tf
 !/assets/fonts/*.?tf
+
+# (possibly private) data
+.data
+
+# VS Code local config
+.vscode
+
+# Andoid specific local config
+android/app/local.properties

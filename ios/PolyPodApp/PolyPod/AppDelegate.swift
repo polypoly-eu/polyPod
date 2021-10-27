@@ -42,7 +42,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          error conditions that could cause the creation of the store to fail.
          */
         let container = NSPersistentContainer(name: "PolyPodModel")
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            // Enforce encryption
+            do {
+                let persistentStore = container.persistentStoreCoordinator.persistentStores[0]
+                var metadata = persistentStore.metadata
+                if !metadata!.contains(where: {(key: String, value: Any) in
+                    return key == NSPersistentStoreFileProtectionKey
+                }) {
+                    metadata?[NSPersistentStoreFileProtectionKey] = FileProtectionType.complete
+                    container.persistentStoreCoordinator.setMetadata(metadata, for: persistentStore)
+                    try container.viewContext.save()
+                }
+            } catch {
+                if let error = error as NSError? {
+                    fatalError("Encryption error \(error), \(error.userInfo)")
+                }
+            }
+            
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
