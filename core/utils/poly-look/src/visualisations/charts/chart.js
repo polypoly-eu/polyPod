@@ -11,27 +11,29 @@ const noMargin = {
  * Creates a svg and a chart group inside
  *
  * @class
- * @param Object[] data - The data to be visualized as a bubble cluster
+ * @param {callback} selector - A callback that returns a DOM element
+ * @param {string} type - The data to be visualized as a bubble cluster
+ * @param {Object[]} data - The data to be visualized as a bubble cluster
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
  * @param {number = 400} [width] - The width of the svg
  * @param {number = 300} [height] - The height of the svg
- * @param {Object} margin - The margin the chart has to the svg sides
- * @param {number = 0} margin.top - Top margin
- * @param {number = 0} margin.right - Right margin
- * @param {number = 0} margin.bottom - Bottom margin
- * @param {number = 0} margin.left - Left left
+ * @param {Object} [margin] - The margin the chart has to the svg sides
+ * @param {number = 0} [margin.top] - Top margin
+ * @param {number = 0} [margin.right] - Right margin
+ * @param {number = 0} [margin.bottom] - Bottom margin
+ * @param {number = 0} [margin.left] - Left left
  */
 export class Chart {
-  constructor({ selector, data, width, height, margin, type }) {
+  constructor({ selector, type, data, width, height, margin }) {
     this._selector = selector;
+    this.type = type || "";
     this._data = data;
     this._width = width;
     this._height = height;
     this._margin = margin || noMargin;
     this._chartHeight = height - this.margin.bottom - this.margin.top;
     this._chartWidth = width - this.margin.left - this.margin.right;
-    this.type = type || "";
   }
 
   get data() {
