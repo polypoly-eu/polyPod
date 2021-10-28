@@ -37,11 +37,11 @@ export class BubbleCluster extends Chart {
     onBubbleClick = () => {},
   }) {
     super({ data, width, height });
-    this.bubbleColor = bubbleColor;
-    this.textColor = textColor;
-    this.opacity = opacity;
-    this.showValues = showValues;
-    this.onBubbleClick = onBubbleClick;
+    this._bubbleColor = bubbleColor;
+    this._textColor = textColor;
+    this._opacity = opacity;
+    this._showValues = showValues;
+    this._onBubbleClick = onBubbleClick;
   }
 
   makeHierarchy() {
@@ -58,10 +58,10 @@ export class BubbleCluster extends Chart {
   updateBubbles(leaves) {
     leaves
       .selectAll(".bubble")
-      .style("fill", this.bubbleColor)
+      .style("fill", this._bubbleColor)
       .style("stroke", "#f7fafc")
       .style("vertical-align", "center")
-      .attr("fill-opacity", this.opacity);
+      .attr("fill-opacity", this._opacity);
   }
 
   addNewBubbleGroups(leaves) {
@@ -69,7 +69,7 @@ export class BubbleCluster extends Chart {
       .enter()
       .append("g")
       .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`)
-      .on("click", this.onBubbleClick);
+      .on("click", this._onBubbleClick);
   }
 
   addBubbles(bubbleGroups) {
@@ -77,10 +77,10 @@ export class BubbleCluster extends Chart {
       .append("circle")
       .attr("class", "bubble")
       .attr("r", (d) => d.r)
-      .style("fill", this.bubbleColor)
+      .style("fill", this._bubbleColor)
       .style("stroke", "#f7fafc")
       .style("vertical-align", "center")
-      .attr("fill-opacity", this.opacity);
+      .attr("fill-opacity", this._opacity);
   }
 
   addTextToBubbleGroup(newBubbleGroups) {
@@ -92,13 +92,13 @@ export class BubbleCluster extends Chart {
       })
       .attr("text-anchor", "middle")
       .attr("y", ".3em")
-      .attr("fill", this.textColor)
+      .attr("fill", this._textColor)
       .style("font-size", (d) => {
         return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
       })
       .style("font-family", "Jost Medium")
       .style("font-weight", "500")
-      .attr("fill", this.textColor);
+      .attr("fill", this._textColor);
   }
 
   updateBubbleValueTexts(leaves) {
@@ -107,7 +107,7 @@ export class BubbleCluster extends Chart {
       .text((d) => {
         return d.r > smallBubblesRadius ? Math.round(d.value) : "";
       })
-      .attr("fill", this.textColor)
+      .attr("fill", this._textColor)
       .style("font-size", (d) => {
         return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
       });
@@ -123,7 +123,7 @@ export class BubbleCluster extends Chart {
     const newBubbleGroups = this.addNewBubbleGroups(leaves);
     this.addBubbles(newBubbleGroups);
 
-    if (this.showValues) {
+    if (this._showValues) {
       this.addTextToBubbleGroup(newBubbleGroups);
       this.updateBubbleValueTexts(leaves);
     }
