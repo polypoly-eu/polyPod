@@ -15,7 +15,7 @@ const charts = {
 /**
  *
  * @param {Object} props - The props for the selected chart
- * @param {Object} props.type - The type of the chart (e. "vertical-bar-chart")
+ * @param {string} props.type - The type of the chart (e. "vertical-bar-chart")
  * @returns jsx-div with svg-chart attached
  */
 export const PolyChart = (props) => {
