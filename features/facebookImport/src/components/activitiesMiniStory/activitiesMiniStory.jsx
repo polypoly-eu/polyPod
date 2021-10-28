@@ -9,7 +9,7 @@ import { fillArray } from "../dataViz/utils.jsx";
 import "./activitiesMiniStory.css";
 import "./datePicker.css";
 import "../tabs/tabs.css";
-import { VerticalBarChart } from "@polypoly-eu/poly-look";
+import { PolyChart } from "@polypoly-eu/poly-look";
 
 const monthsAbbreviation = i18n.t("common:months.abbreviation").split(" ");
 
@@ -156,7 +156,8 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     <p>{constantTabData.barChartLegendText}</p>
                 </div>
                 <p className="above-chart">{numberOfEventsString}</p>
-                <VerticalBarChart
+                <PolyChart
+                    type="vertical-bar-chart"
                     data={constantTabData.barData}
                     barColor={"white"}
                     barWidth={constantTabData.barWidth}

@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-import { Chart } from "../chart";
+import { Chart } from "../../chart";
 
 import "./mirroredBarChart.css";
 
@@ -12,7 +12,6 @@ const margin = {
 };
 const yGridMarginLeft = 18;
 const yGridMarginRight = 24;
-const type = "mirrored-bar-chart";
 
 /**
  * Visualizes data as two bar charts mirrored on the x-axis.
@@ -36,6 +35,8 @@ const type = "mirrored-bar-chart";
  */
 export class MirroredBarChart extends Chart {
   constructor({
+    type,
+    selector,
     data,
     colors,
     width = 400,
@@ -43,7 +44,7 @@ export class MirroredBarChart extends Chart {
     barPadding = 1,
     numberTicks,
   }) {
-    super({ data, width, height, margin, type });
+    super({ selector, type, data, width, height, margin });
     this._upperBarColor = colors?.upperBar || "red";
     this._lowerBarColor = colors?.lowerBar || "blue";
     this._numberTicksY = numberTicks?.y || 4;

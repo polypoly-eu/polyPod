@@ -11,6 +11,7 @@ const margin = {
   bottom: 20,
   left: 40,
 };
+const barValueMargin = 4;
 const gridXMargin = 12;
 
 /**
@@ -31,6 +32,8 @@ const gridXMargin = 12;
  */
 export class VerticalBarChart extends Chart {
   constructor({
+    type,
+    selector,
     data,
     barColor = "blue",
     width = 400,
@@ -38,7 +41,7 @@ export class VerticalBarChart extends Chart {
     barValueColor,
     numberTicksY,
   }) {
-    super({ data, width, height, margin });
+    super({ type, selector, data, width, height, margin });
     this._barColor = barColor || "blue";
     this._xScale = d3.scaleBand().range([0, this.chartWidth]).padding(0.2);
     this._yScale = d3
@@ -60,9 +63,9 @@ export class VerticalBarChart extends Chart {
         d3
           .axisLeft(this._yScale)
           .tickFormat((d) => d)
-          .ticks(numberTicksY)
+          .ticks(this._numberTicksY)
       )
-      .attr("class", "y-axis")
+      .attr("class", "y-axis axis")
       .append("text")
       .attr("y", 6)
       .attr("dy", "0.71em")
@@ -71,7 +74,7 @@ export class VerticalBarChart extends Chart {
 
     this.chart
       .append("g")
-      .attr("class", "x-axis")
+      .attr("class", "x-axis axis")
       .call(d3.axisBottom(this._xScale))
       .attr("transform", `translate(0, ${this.chartHeight})`);
   }
@@ -87,7 +90,7 @@ export class VerticalBarChart extends Chart {
           .tickFormat((d) => d)
           .ticks(5)
       )
-      .attr("class", "y-axis")
+      .attr("class", "y-axis axis")
       .append("text")
       .attr("y", 6)
       .attr("dy", "0.71em")
@@ -141,7 +144,7 @@ export class VerticalBarChart extends Chart {
       .attr("x", (d) => this._xScale(d.title) + this._xScale.bandwidth() / 2)
       .attr("class", "bar-value")
       .attr("text-anchor", "middle")
-      .attr("y", (d) => yScale(d.value) - barValueMargin)
+      .attr("y", (d) => this._yScale(d.value) - barValueMargin)
       .text((d) => d.value)
       .attr("fill", "transparent")
       .style("font-size", "10px")
@@ -171,7 +174,7 @@ export class VerticalBarChart extends Chart {
       .call(
         d3
           .axisLeft(this._yScale)
-          .tickSize(-chartWidth + gridXMargin)
+          .tickSize(-this.chartWidth + gridXMargin)
           .tickFormat("")
           .ticks(this._numberTicksY * 2)
       )
@@ -188,10 +191,10 @@ export class VerticalBarChart extends Chart {
   displayValues() {
     const barValues = this.chart
       .selectAll(".bar-value")
-      .data(data, (d) => d.title);
+      .data(this._data, (d) => d.title);
     barValues.exit().remove();
-    updateExistingBarValues(barValues);
-    addEnteringBarValues(barValues);
+    this.updateExistingBarValues(barValues);
+    this.addEnteringBarValues(barValues);
   }
 
   render() {
@@ -199,8 +202,8 @@ export class VerticalBarChart extends Chart {
     if (this.chart.select(".x-axis").empty()) this.addAxis();
     else this.transitionAxis();
     this.displayBars();
-    addYAxisGrid();
-    if (this._barValueColor) displayValues();
+    this.addYAxisGrid();
+    if (this._barValueColor) this.displayValues();
     else this.chart.selectAll(".bar-value").remove();
   }
 }

@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-import { Chart } from "../chart";
+import { Chart } from "../../chart";
 
 const edgePadding = 5;
 const smallBubblesRadius = 20;
@@ -27,6 +27,8 @@ const mediumBubblesFont = "16px";
  */
 export class BubbleCluster extends Chart {
   constructor({
+    type,
+    selector,
     data,
     width,
     height,
@@ -36,7 +38,7 @@ export class BubbleCluster extends Chart {
     showValues = true,
     onBubbleClick = () => {},
   }) {
-    super({ data, width, height });
+    super({ type, selector, data, width, height });
     this._bubbleColor = bubbleColor;
     this._textColor = textColor;
     this._opacity = opacity;

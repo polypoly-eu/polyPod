@@ -195,7 +195,7 @@ export const VerticalBarChart = ({
           .axisLeft(yScale)
           .tickSize(-chartWidth + gridXMargin)
           .tickFormat("")
-          .ticks(numberTicksY * 2)
+          .ticks(this._numberTicksY * 2)
       )
       .attr("transform", `translate(${gridXMargin / 2}, 0)`);
   }

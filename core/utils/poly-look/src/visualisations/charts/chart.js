@@ -67,13 +67,13 @@ export class Chart {
   }
 
   get chart() {
-    const chart = d3.select("#" + this.escapedId).select(".chart");
+    const chart = d3.select(this._selector()).select(".chart");
     return chart.empty() ? this.generateChart() : chart;
   }
 
   createSVG() {
     return d3
-      .select("#" + this.escapedId)
+      .select(this._selector())
       .append("svg")
       .attr("viewBox", `0 0 ${this.width} ${this.height}`);
   }
