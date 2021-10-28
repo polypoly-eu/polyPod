@@ -16,19 +16,29 @@ const validCommands = [
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
-    if (parameters.includes("--help") || parameters.length > 1)
+    if (parameters.includes("--help")) return { scriptPath, command: null };
+
+    const startIndex = parameters.indexOf("--start");
+    if (startIndex + 1 >= parameters.length)
         return { scriptPath, command: null };
+    const start =
+        startIndex !== -1 ? parameters.splice(startIndex, 2)[1] : null;
+
+    if (parameters.length > 1) return { scriptPath, command: null };
 
     const command = parameters.length ? parameters[0] : "build";
     return {
         scriptPath,
         command: validCommands.includes(command) ? command : null,
+        start,
     };
 }
 
 function showUsage(scriptPath) {
+    const baseName = path.basename(scriptPath);
+    const validCommandString = validCommands.join(" | ");
     console.error(
-        `Usage: ${path.basename(scriptPath)} [ ${validCommands.join(" | ")} ]`
+        `Usage: ${baseName} [ --start PACKAGE_NAME ] [ ${validCommandString} ]`
     );
     console.error("  Run without arguments to build all packages");
 }
@@ -81,6 +91,32 @@ function createPackageTree(metaManifest) {
 const logMain = (message) => console.log(`\n 🚧 ${message}`);
 
 const logDetail = (message) => console.log(`\n 🏗️ ${message}`);
+
+function collectDependantPackages(name, packageTree) {
+    const dependants = Object.keys(packageTree).filter((key) =>
+        packageTree[key].localDependencies.includes(name)
+    );
+    let transitiveDependants = [];
+    for (let dependant of dependants)
+        transitiveDependants = transitiveDependants.concat(
+            collectDependantPackages(dependant, packageTree)
+        );
+    return dependants.concat(transitiveDependants);
+}
+
+function skipPackages(packageTree, start) {
+    if (!Object.keys(packageTree).includes(start))
+        throw `Start package with name '${start}' not found - did you use the path?`;
+
+    logMain(`Starting at package '${start}'`);
+
+    const packagesToKeep = new Set([
+        start,
+        ...collectDependantPackages(start, packageTree),
+    ]);
+    for (let [name, pkg] of Object.entries(packageTree))
+        if (!packagesToKeep.has(name)) pkg.processed = true;
+}
 
 function logDependencies(packageTree) {
     const dependencyMap = {};
@@ -216,7 +252,7 @@ function logSuccess(command) {
 }
 
 async function main() {
-    const { scriptPath, command } = parseCommandLine();
+    const { scriptPath, command, start } = parseCommandLine();
     if (!command) {
         showUsage(scriptPath);
         return 1;
@@ -253,6 +289,7 @@ async function main() {
 
     try {
         const packageTree = createPackageTree(metaManifest);
+        if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
         logSuccess(command);
         return 0;
