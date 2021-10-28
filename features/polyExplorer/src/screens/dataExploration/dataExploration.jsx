@@ -306,10 +306,6 @@ const DataExplorationScreen = () => {
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <InfoButton
-                        route="/data-types-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
                 </div>
             );
         else if (activeScreen.startsWith("dataTypesCategory"))
@@ -367,10 +363,6 @@ const DataExplorationScreen = () => {
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <InfoButton
-                        route="/data-correlation-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
                 </div>
             );
         else if (activeScreen === "dataTypesCorrelation")
@@ -463,10 +455,6 @@ const DataExplorationScreen = () => {
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <InfoButton
-                        route="/companies-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
                 </div>
             );
         else if (
