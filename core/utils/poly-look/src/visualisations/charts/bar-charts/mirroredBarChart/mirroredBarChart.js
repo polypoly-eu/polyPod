@@ -44,36 +44,35 @@ export class MirroredBarChart extends Chart {
     numberTicks,
   }) {
     super({ data, width, height, margin, type });
-    this.upperBarColor = colors?.upperBar || "red";
-    this.lowerBarColor = colors?.lowerBar || "blue";
-    this.numberTicksY = numberTicks?.y || 4;
-    this.numberTicksX = numberTicks?.x || 5;
-    this.barPadding = barPadding;
-    this.barSpace = this.chartWidth - yGridMarginLeft - yGridMarginRight;
-    this.totalBarPadding = this.data.length * barPadding;
+    this._upperBarColor = colors?.upperBar || "red";
+    this._lowerBarColor = colors?.lowerBar || "blue";
+    this._numberTicksY = numberTicks?.y || 4;
+    this._numberTicksX = numberTicks?.x || 5;
+    this._barSpace = this.chartWidth - yGridMarginLeft - yGridMarginRight;
+    this._totalBarPadding = this.data.length * barPadding;
 
-    this.xScale = d3
+    this._xScale = d3
       .scaleLinear()
       .range([0 + yGridMarginLeft, this.chartWidth - yGridMarginRight]);
-    this.upperYScale = d3.scaleLinear().range([this.chartHeight / 2, 0]);
-    this.lowerYScale = d3.scaleLinear().range([0, this.chartHeight / 2]);
+    this._upperYScale = d3.scaleLinear().range([this.chartHeight / 2, 0]);
+    this._lowerYScale = d3.scaleLinear().range([0, this.chartHeight / 2]);
   }
 
   adaptScalesToData() {
-    this.xScale.domain([d3.max(this.data, (d) => d.key), 0]);
-    this.lowerYScale
+    this._xScale.domain([d3.max(this.data, (d) => d.key), 0]);
+    this._lowerYScale
       .domain([0, d3.max(this.data, (d) => Math.max(d.upper, d.lower))])
-      .nice(this.numberTicksY);
-    this.upperYScale
+      .nice(this._numberTicksY);
+    this._upperYScale
       .domain([0, d3.max(this.data, (d) => Math.max(d.upper, d.lower))])
-      .nice(this.numberTicksY);
+      .nice(this._numberTicksY);
   }
 
   addXAxis() {
     this.chart
       .append("g")
       .attr("class", "x-axis")
-      .call(d3.axisBottom(this.xScale).ticks(this.numberTicksX))
+      .call(d3.axisBottom(this._xScale).ticks(this._numberTicksX))
       .attr("transform", `translate(0, ${this.chartHeight})`);
   }
 
@@ -82,9 +81,9 @@ export class MirroredBarChart extends Chart {
       .append("g")
       .call(
         d3
-          .axisRight(this.upperYScale)
+          .axisRight(this._upperYScale)
           .tickFormat((d) => d)
-          .ticks(this.numberTicksY)
+          .ticks(this._numberTicksY)
       )
       .attr("class", "y-axis")
       .attr("transform", `translate(${this.chartWidth}, 0)`)
@@ -100,9 +99,9 @@ export class MirroredBarChart extends Chart {
       .append("g")
       .call(
         d3
-          .axisRight(this.lowerYScale)
+          .axisRight(this._lowerYScale)
           .tickFormat((d) => d)
-          .ticks(this.numberTicksY)
+          .ticks(this._numberTicksY)
       )
       .attr("class", "y-axis")
       .attr(
@@ -128,10 +127,10 @@ export class MirroredBarChart extends Chart {
       .attr("transform", "translate(0," + this.chartHeight + ")")
       .call(
         d3
-          .axisBottom(this.xScale)
+          .axisBottom(this._xScale)
           .tickSize(-this.chartHeight)
           .tickFormat("")
-          .ticks(this.numberTicksX)
+          .ticks(this._numberTicksX)
       );
   }
 
@@ -141,10 +140,10 @@ export class MirroredBarChart extends Chart {
       .attr("class", "axis-grid")
       .call(
         d3
-          .axisLeft(this.upperYScale)
+          .axisLeft(this._upperYScale)
           .tickSize(-this.chartWidth + 20)
           .tickFormat("")
-          .ticks(this.numberTicksY)
+          .ticks(this._numberTicksY)
       )
       .attr("transform", `translate(${yGridMarginLeft}, 0)`);
   }
@@ -155,10 +154,10 @@ export class MirroredBarChart extends Chart {
       .attr("class", "axis-grid")
       .call(
         d3
-          .axisLeft(this.lowerYScale)
+          .axisLeft(this._lowerYScale)
           .tickSize(-this.chartWidth + 20)
           .tickFormat("")
-          .ticks(this.numberTicksY)
+          .ticks(this._numberTicksY)
       )
       .attr(
         "transform",
@@ -189,14 +188,17 @@ export class MirroredBarChart extends Chart {
       .attr(
         "x",
         (d) =>
-          this.xScale(d.key) -
-          (this.barSpace - this.totalBarPadding) / this.data.length
+          this._xScale(d.key) -
+          (this._barSpace - this._totalBarPadding) / this.data.length
       )
-      .attr("width", (this.barSpace - this.totalBarPadding) / this.data.length)
-      .attr("fill", this.upperBarColor)
+      .attr(
+        "width",
+        (this._barSpace - this._totalBarPadding) / this.data.length
+      )
+      .attr("fill", this._upperBarColor)
       .attr("class", "upper-bar")
-      .attr("y", (d) => this.upperYScale(d.upper))
-      .attr("height", (d) => this.chartHeight / 2 - this.upperYScale(d.upper));
+      .attr("y", (d) => this._upperYScale(d.upper))
+      .attr("height", (d) => this.chartHeight / 2 - this._upperYScale(d.upper));
   }
 
   updateExistingUpperBars(upperBars) {
@@ -204,13 +206,16 @@ export class MirroredBarChart extends Chart {
       .attr(
         "x",
         (d) =>
-          this.xScale(d.key) -
-          (this.barSpace - this.totalBarPadding) / this.data.length
+          this._xScale(d.key) -
+          (this._barSpace - this._totalBarPadding) / this.data.length
       )
-      .attr("width", (this.barSpace - this.totalBarPadding) / this.data.length)
-      .attr("fill", this.upperBarColor)
-      .attr("y", (d) => this.upperYScale(d.upper))
-      .attr("height", (d) => this.chartHeight / 2 - this.upperYScale(d.upper));
+      .attr(
+        "width",
+        (this._barSpace - this._totalBarPadding) / this.data.length
+      )
+      .attr("fill", this._upperBarColor)
+      .attr("y", (d) => this._upperYScale(d.upper))
+      .attr("height", (d) => this.chartHeight / 2 - this._upperYScale(d.upper));
   }
 
   addEnteringLowerBars(lowerBars) {
@@ -220,14 +225,17 @@ export class MirroredBarChart extends Chart {
       .attr(
         "x",
         (d) =>
-          this.xScale(d.key) -
-          (this.barSpace - this.totalBarPadding) / this.data.length
+          this._xScale(d.key) -
+          (this._barSpace - this._totalBarPadding) / this.data.length
       )
-      .attr("width", (this.barSpace - this.totalBarPadding) / this.data.length)
-      .attr("fill", this.lowerBarColor)
+      .attr(
+        "width",
+        (this._barSpace - this._totalBarPadding) / this.data.length
+      )
+      .attr("fill", this._lowerBarColor)
       .attr("class", "upper-bar")
       .attr("y", this.chartHeight / 2)
-      .attr("height", (d) => this.lowerYScale(d.lower));
+      .attr("height", (d) => this._lowerYScale(d.lower));
   }
 
   updateExistingLowerBars(lowerBars) {
@@ -235,13 +243,16 @@ export class MirroredBarChart extends Chart {
       .attr(
         "x",
         (d) =>
-          this.xScale(d.key) -
-          (this.barSpace - this.totalBarPadding) / this.data.length
+          this._xScale(d.key) -
+          (this._barSpace - this._totalBarPadding) / this.data.length
       )
-      .attr("width", (this.barSpace - this.totalBarPadding) / this.data.length)
-      .attr("fill", this.lowerBarColor)
+      .attr(
+        "width",
+        (this._barSpace - this._totalBarPadding) / this.data.length
+      )
+      .attr("fill", this._lowerBarColor)
       .attr("y", this.chartHeight / 2)
-      .attr("height", (d) => this.lowerYScale(d.lower));
+      .attr("height", (d) => this._lowerYScale(d.lower));
   }
 
   displayUpperBars() {
@@ -273,7 +284,7 @@ export class MirroredBarChart extends Chart {
       .attr("class", "origin-gridline")
       .attr("x", yGridMarginLeft)
       .attr("y", this.chartHeight / 2)
-      .attr("width", this.barSpace)
+      .attr("width", this._barSpace)
       .attr("height", 1);
   }
 
