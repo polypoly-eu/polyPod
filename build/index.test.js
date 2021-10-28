@@ -60,12 +60,14 @@ test("Invalid command", async () => {
 // The following tests would be more robust when using stub data, but for the
 // sake of progress they are currently written against the actual packages.
 
-const parsePackageList = (stdout) => {
-    return stdout
+const parsePackageList = (stdout) =>
+    stdout
         .split("\n")
-        .map((line) => line.match(/^\s*([^\(]*) \(/)?.[1])
+        .map((line) => {
+            const match = line.match(/^\s*(.*) \(/);
+            return match ? match[1] : null;
+        })
         .filter((name) => !!name);
-};
 
 async function listPackages({ start }) {
     const parameters = ["list"];
