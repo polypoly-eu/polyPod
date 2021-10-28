@@ -3,7 +3,6 @@ const buildMain = require(".");
 let lastExitCode;
 
 beforeAll(() => {
-    // TODO: The build script should work with paths relative to its own location
     process.chdir("..");
 });
 
