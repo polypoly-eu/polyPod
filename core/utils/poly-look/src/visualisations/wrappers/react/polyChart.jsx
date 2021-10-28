@@ -16,7 +16,6 @@ export const PolyChart = (props) => {
   const chartType = props.type;
   const chartRef = useRef();
   const chartProps = { ...props, selector: () => chartRef.current };
-  console.log(chartProps);
   const chart = new charts[chartType](chartProps);
 
   useEffect(() => {
