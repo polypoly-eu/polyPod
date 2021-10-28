@@ -34,14 +34,6 @@ export class Chart {
     this.type = type || "";
   }
 
-  get id() {
-    return this._id;
-  }
-
-  get escapedId() {
-    return CSS.escape(this.id);
-  }
-
   get data() {
     return this._data;
   }
