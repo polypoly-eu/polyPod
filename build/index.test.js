@@ -18,7 +18,7 @@ function mockConsole() {
         output[stream] = "";
         originals[name] = console[name];
         console[name] = (...args) => {
-            output[stream] += "\n" + args.join("\n");
+            output[stream] += args.join(" ") + "\n";
         };
     }
     return {
