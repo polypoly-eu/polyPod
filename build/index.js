@@ -92,16 +92,16 @@ const logMain = (message) => console.log(`\n 🚧 ${message}`);
 
 const logDetail = (message) => console.log(`\n 🏗️ ${message}`);
 
-function collectDependantPackages(name, packageTree) {
-    const dependants = Object.keys(packageTree).filter((key) =>
+function collectDependentPackages(name, packageTree) {
+    const dependents = Object.keys(packageTree).filter((key) =>
         packageTree[key].localDependencies.includes(name)
     );
-    let transitiveDependants = [];
-    for (let dependant of dependants)
-        transitiveDependants = transitiveDependants.concat(
-            collectDependantPackages(dependant, packageTree)
+    let transitiveDependents = [];
+    for (let dependent of dependents)
+        transitiveDependents = transitiveDependents.concat(
+            collectDependentPackages(dependent, packageTree)
         );
-    return dependants.concat(transitiveDependants);
+    return dependents.concat(transitiveDependents);
 }
 
 function skipPackages(packageTree, start) {
@@ -112,7 +112,7 @@ function skipPackages(packageTree, start) {
 
     const packagesToKeep = new Set([
         start,
-        ...collectDependantPackages(start, packageTree),
+        ...collectDependentPackages(start, packageTree),
     ]);
     for (let [name, pkg] of Object.entries(packageTree))
         if (!packagesToKeep.has(name)) pkg.processed = true;
