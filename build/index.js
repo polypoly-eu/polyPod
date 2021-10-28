@@ -19,7 +19,7 @@ function parseCommandLine() {
     if (parameters.includes("--help")) return { scriptPath, command: null };
 
     const startIndex = parameters.indexOf("--start");
-    if (startIndex + 1 >= parameters.length)
+    if (startIndex > 0 && startIndex + 1 >= parameters.length)
         return { scriptPath, command: null };
     const start =
         startIndex !== -1 ? parameters.splice(startIndex, 2)[1] : null;
