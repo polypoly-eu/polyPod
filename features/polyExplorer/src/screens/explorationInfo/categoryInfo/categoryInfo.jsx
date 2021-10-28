@@ -12,6 +12,8 @@ const CategoryInfo = () => {
         useContext(ExplorerContext);
     const entity = selectedEntityObject;
     const activeCategory = navigationState.explorationState.category;
+    const capitalizeCountryCode = i18n.t("common:country.code").toUpperCase();
+    const description = "Description_" + capitalizeCountryCode;
 
     return (
         <BaseInfoScreen
@@ -19,15 +21,13 @@ const CategoryInfo = () => {
             headline={i18n.t("explorationCategoryInfoScreen:headline")}
         >
             <div className="base-info-padding">
-                {/* <p>
+                <p>
                     {
                         globals.polypoly_parent_categories[activeCategory][
-                            i18n.t(
-                                "dataExplorationScreen:from.polyPedia.description"
-                            )
+                            description
                         ]
                     }
-                </p> */}
+                </p>
                 <Infographic
                     type="category"
                     texts={{
