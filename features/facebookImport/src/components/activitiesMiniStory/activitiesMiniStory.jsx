@@ -124,7 +124,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
             <div className="tab-container">
                 <div className="tab-button-container">
                     {tabs.map((tab, index) => (
-                        <button
+                        <div
                             key={index}
                             className={
                                 tab.id === activeTab.id
@@ -134,7 +134,10 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                             onClick={() => setActiveTab(tab)}
                         >
                             {tab.translation}
-                        </button>
+                            {tab.id === activeTab.id ? (
+                                <div className="border"></div>
+                            ) : null}
+                        </div>
                     ))}
                 </div>
                 {activeTab.id == "yearly" ? (
