@@ -17,7 +17,7 @@ export default class PostReactionsImporter extends DirectKeyDataImporter {
     _extractDataFromReaction(reactionData) {
         return {
             timestamp: reactionData.timestamp,
-            type: reactionData?.data[0]?.reaction?.reaction,
+            type: reactionData?.data[0]?.reaction?.reaction.toUpperCase(),
         };
     }
 
