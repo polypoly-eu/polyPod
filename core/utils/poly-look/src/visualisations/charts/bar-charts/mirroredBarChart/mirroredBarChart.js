@@ -59,7 +59,7 @@ export class MirroredBarChart extends Chart {
     this._lowerYScale = d3.scaleLinear().range([0, this.chartHeight / 2]);
   }
 
-  adaptScalesToData() {
+  _adaptScalesToData() {
     this._xScale.domain([d3.max(this.data, (d) => d.key), 0]);
     this._lowerYScale
       .domain([0, d3.max(this.data, (d) => Math.max(d.upper, d.lower))])
@@ -69,7 +69,7 @@ export class MirroredBarChart extends Chart {
       .nice(this._numberTicksY);
   }
 
-  addXAxis() {
+  _addXAxis() {
     this.chart
       .append("g")
       .attr("class", "x-axis")
@@ -77,7 +77,7 @@ export class MirroredBarChart extends Chart {
       .attr("transform", `translate(0, ${this.chartHeight})`);
   }
 
-  addUpperYAxis() {
+  _addUpperYAxis() {
     this.chart
       .append("g")
       .call(
@@ -95,7 +95,7 @@ export class MirroredBarChart extends Chart {
       .text("value");
   }
 
-  addLowerYAxis() {
+  _addLowerYAxis() {
     this.chart
       .append("g")
       .call(
@@ -116,12 +116,12 @@ export class MirroredBarChart extends Chart {
       .text("value");
   }
 
-  addYAxis() {
-    this.addUpperYAxis();
-    this.addLowerYAxis();
+  _addYAxis() {
+    this._addUpperYAxis();
+    this._addLowerYAxis();
   }
 
-  addXGrid() {
+  _addXGrid() {
     this.chart
       .append("g")
       .attr("class", "axis-grid")
@@ -135,7 +135,7 @@ export class MirroredBarChart extends Chart {
       );
   }
 
-  addUpperYGrid() {
+  _addUpperYGrid() {
     this.chart
       .append("g")
       .attr("class", "axis-grid")
@@ -149,7 +149,7 @@ export class MirroredBarChart extends Chart {
       .attr("transform", `translate(${yGridMarginLeft}, 0)`);
   }
 
-  addLowerYGrid() {
+  _addLowerYGrid() {
     this.chart
       .append("g")
       .attr("class", "axis-grid")
@@ -166,23 +166,23 @@ export class MirroredBarChart extends Chart {
       );
   }
 
-  addYGrid() {
-    this.addUpperYGrid();
-    this.addLowerYGrid();
+  _addYGrid() {
+    this._addUpperYGrid();
+    this._addLowerYGrid();
   }
 
-  addGrid() {
-    this.addXGrid();
-    this.addYGrid();
+  _addGrid() {
+    this._addXGrid();
+    this._addYGrid();
   }
 
-  addAxis() {
-    this.addXAxis();
-    this.addYAxis();
-    this.addGrid();
+  _addAxis() {
+    this._addXAxis();
+    this._addYAxis();
+    this._addGrid();
   }
 
-  addEnteringUpperBars(upperBars) {
+  _addEnteringUpperBars(upperBars) {
     upperBars
       .enter()
       .append("rect")
@@ -202,7 +202,7 @@ export class MirroredBarChart extends Chart {
       .attr("height", (d) => this.chartHeight / 2 - this._upperYScale(d.upper));
   }
 
-  updateExistingUpperBars(upperBars) {
+  _updateExistingUpperBars(upperBars) {
     upperBars
       .attr(
         "x",
@@ -219,7 +219,7 @@ export class MirroredBarChart extends Chart {
       .attr("height", (d) => this.chartHeight / 2 - this._upperYScale(d.upper));
   }
 
-  addEnteringLowerBars(lowerBars) {
+  _addEnteringLowerBars(lowerBars) {
     lowerBars
       .enter()
       .append("rect")
@@ -239,7 +239,7 @@ export class MirroredBarChart extends Chart {
       .attr("height", (d) => this._lowerYScale(d.lower));
   }
 
-  updateExistingLowerBars(lowerBars) {
+  _updateExistingLowerBars(lowerBars) {
     lowerBars
       .attr(
         "x",
@@ -256,30 +256,30 @@ export class MirroredBarChart extends Chart {
       .attr("height", (d) => this._lowerYScale(d.lower));
   }
 
-  displayUpperBars() {
+  _displayUpperBars() {
     const upperBars = this.chart
       .selectAll(".upper-bar")
       .data(this.data, (d) => d.key);
     upperBars.exit().remove();
-    this.updateExistingUpperBars(upperBars);
-    this.addEnteringUpperBars(upperBars);
+    this._updateExistingUpperBars(upperBars);
+    this._addEnteringUpperBars(upperBars);
   }
 
-  displayLowerBars() {
+  _displayLowerBars() {
     const lowerBars = this.chart
       .selectAll(".lower-bar")
       .data(this.data, (d) => d.key);
     lowerBars.exit().remove();
-    this.updateExistingLowerBars(lowerBars);
-    this.addEnteringLowerBars(lowerBars);
+    this._updateExistingLowerBars(lowerBars);
+    this._addEnteringLowerBars(lowerBars);
   }
 
-  displayBars() {
-    this.displayUpperBars();
-    this.displayLowerBars();
+  _displayBars() {
+    this._displayUpperBars();
+    this._displayLowerBars();
   }
 
-  drawOriginGridline() {
+  _drawOriginGridline() {
     this.chart
       .append("rect")
       .attr("class", "origin-gridline")
@@ -290,10 +290,10 @@ export class MirroredBarChart extends Chart {
   }
 
   render() {
-    this.adaptScalesToData();
-    if (this.chart.select(".x-axis").empty()) this.addAxis();
+    this._adaptScalesToData();
+    if (this.chart.select(".x-axis").empty()) this._addAxis();
     if (this.chart.select(".origin-gridline").empty())
-      this.drawOriginGridline();
-    this.displayBars();
+      this._drawOriginGridline();
+    this._displayBars();
   }
 }
