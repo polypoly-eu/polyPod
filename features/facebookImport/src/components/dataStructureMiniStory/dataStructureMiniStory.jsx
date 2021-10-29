@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
-import { BubbleCluster } from "@polypoly-eu/poly-look";
+import { PolyChart } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
@@ -50,7 +50,8 @@ const DataStructureMiniStory = ({ data }) => {
                         amount_of_files: amountOfFiles,
                     })}
                 </p>
-                <BubbleCluster
+                <PolyChart
+                    type="bubble-cluster"
                     data={data}
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}
