@@ -176,7 +176,7 @@ export class VerticalBarChart extends Chart {
           .axisLeft(this._yScale)
           .tickSize(-this.chartWidth + gridXMargin)
           .tickFormat("")
-          .ticks(this._numberTicksY * 2)
+          .ticks(this._numberTicksY)
       )
       .attr("transform", `translate(${gridXMargin / 2}, 0)`);
   }
