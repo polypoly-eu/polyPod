@@ -11,14 +11,12 @@ const noMargin = {
  * Creates a svg and a chart group inside
  *
  * @class
- * @param {callback} selector - A callback that returns a DOM element
- * @param {string} type - The data to be visualized as a bubble cluster
- * @param {Object[]} data - The data to be visualized as a bubble cluster
- * @param {string} data[].title - The title/name the bubble has
- * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
+ * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
+ * @param {string} type - The type of the chart (eg. vertical-bar-chart)
+ * @param {Object[]} data - The data to be visualized by the chart
  * @param {number = 400} [width] - The width of the svg
  * @param {number = 300} [height] - The height of the svg
- * @param {Object} [margin] - The margin the chart has to the svg sides
+ * @param {Object} [margin] - The margin the chart has to the svg sides (eg. for scales)
  * @param {number = 0} [margin.top] - Top margin
  * @param {number = 0} [margin.right] - Right margin
  * @param {number = 0} [margin.bottom] - Bottom margin
@@ -61,13 +59,13 @@ export class Chart {
   }
 
   get chart() {
-    const chart = d3.select(this._selector()).select(".chart");
+    const chart = d3.select(this._selector).select(".chart");
     return chart.empty() ? this.generateChart() : chart;
   }
 
   createSVG() {
     return d3
-      .select(this._selector())
+      .select(this._selector)
       .append("svg")
       .attr("viewBox", `0 0 ${this.width} ${this.height}`);
   }

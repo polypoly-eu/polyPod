@@ -19,14 +19,16 @@ const charts = {
  * @returns jsx-div with svg-chart attached
  */
 export const PolyChart = (props) => {
-  const chartType = props.type;
   const chartRef = useRef();
-  const chartProps = { ...props, selector: () => chartRef.current };
-  const chart = new charts[chartType](chartProps);
 
   useEffect(() => {
+    const chartProps = {
+      selector: chartRef.current,
+      ...props,
+    };
+    const chart = new charts[props.type](chartProps);
     chart.render();
   }, [props]);
 
-  return <div ref={chartRef} className={chartType}></div>;
+  return <div ref={chartRef} className={props.type}></div>;
 };
