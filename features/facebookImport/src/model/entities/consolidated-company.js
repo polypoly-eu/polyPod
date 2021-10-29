@@ -9,6 +9,9 @@ export default class ConsolidatedCompany {
         this._cachedOffFacebookEventTimestamps = null;
     }
 
+    get offFacebookCompaniesCount() {
+        return this._offFacebookCompanies.length;
+    }
     get displayName() {
         return this._relatedFacebookAccount.displayName;
     }
