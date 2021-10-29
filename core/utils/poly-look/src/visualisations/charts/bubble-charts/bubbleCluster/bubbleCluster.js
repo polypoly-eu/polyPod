@@ -46,18 +46,18 @@ export class BubbleCluster extends Chart {
     this._onBubbleClick = onBubbleClick;
   }
 
-  makeHierarchy() {
+  _makeHierarchy() {
     return d3.hierarchy({ children: this.data }).sum((d) => d.value);
   }
 
-  pack() {
+  _pack() {
     return d3
       .pack()
       .size([this.width - edgePadding, this.height - edgePadding])
       .padding(3);
   }
 
-  updateBubbles(leaves) {
+  _updateBubbles(leaves) {
     leaves
       .selectAll(".bubble")
       .style("fill", this._bubbleColor)
@@ -66,7 +66,7 @@ export class BubbleCluster extends Chart {
       .attr("fill-opacity", this._opacity);
   }
 
-  addNewBubbleGroups(leaves) {
+  _addNewBubbleGroups(leaves) {
     return leaves
       .enter()
       .append("g")
@@ -74,7 +74,7 @@ export class BubbleCluster extends Chart {
       .on("click", this._onBubbleClick);
   }
 
-  addBubbles(bubbleGroups) {
+  _addBubbles(bubbleGroups) {
     bubbleGroups
       .append("circle")
       .attr("class", "bubble")
@@ -85,7 +85,7 @@ export class BubbleCluster extends Chart {
       .attr("fill-opacity", this._opacity);
   }
 
-  addTextToBubbleGroup(newBubbleGroups) {
+  _addTextToBubbleGroup(newBubbleGroups) {
     newBubbleGroups
       .append("text")
       .attr("class", "bubble-value")
@@ -103,7 +103,7 @@ export class BubbleCluster extends Chart {
       .attr("fill", this._textColor);
   }
 
-  updateBubbleValueTexts(leaves) {
+  _updateBubbleValueTexts(leaves) {
     leaves
       .selectAll(".bubble-value")
       .text((d) => {
@@ -116,18 +116,18 @@ export class BubbleCluster extends Chart {
   }
 
   render() {
-    const hierarchicalData = this.makeHierarchy();
-    const packLayout = this.pack();
+    const hierarchicalData = this._makeHierarchy();
+    const packLayout = this._pack();
     const root = packLayout(hierarchicalData);
     const leaves = this.chart.selectAll("g").data(root.leaves());
     leaves.exit().remove();
-    this.updateBubbles(leaves);
-    const newBubbleGroups = this.addNewBubbleGroups(leaves);
-    this.addBubbles(newBubbleGroups);
+    this._updateBubbles(leaves);
+    const newBubbleGroups = this._addNewBubbleGroups(leaves);
+    this._addBubbles(newBubbleGroups);
 
     if (this._showValues) {
-      this.addTextToBubbleGroup(newBubbleGroups);
-      this.updateBubbleValueTexts(leaves);
+      this._addTextToBubbleGroup(newBubbleGroups);
+      this._updateBubbleValueTexts(leaves);
     }
   }
 }
