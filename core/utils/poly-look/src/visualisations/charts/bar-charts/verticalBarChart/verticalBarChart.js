@@ -51,12 +51,12 @@ export class VerticalBarChart extends Chart {
     this._numberTicksY = numberTicksY || 4;
   }
 
-  adaptScalesToData() {
+  _adaptScalesToData() {
     this._xScale.domain(this.data.map((d) => d.title));
     this._yScale.domain([0, d3.max(this.data, (d) => d.value)]);
   }
 
-  addAxis() {
+  _addAxis() {
     this.chart
       .append("g")
       .call(
@@ -80,7 +80,7 @@ export class VerticalBarChart extends Chart {
   }
 
   //TODO: transition of y-axis
-  transitionAxis() {
+  _transitionAxis() {
     this.chart.selectAll(".y-axis").remove();
     this.chart
       .append("g")
@@ -104,7 +104,7 @@ export class VerticalBarChart extends Chart {
       .attr("transform", `translate(0, ${this.chartHeight})`);
   }
 
-  updateExistingBars(bars) {
+  _updateExistingBars(bars) {
     bars
       .transition()
       .duration(750)
@@ -120,7 +120,7 @@ export class VerticalBarChart extends Chart {
       .attr("height", (d) => this.chartHeight - this._yScale(d.value));
   }
 
-  addEnteringBars(bars) {
+  _addEnteringBars(bars) {
     bars
       .enter()
       .append("rect")
@@ -137,7 +137,7 @@ export class VerticalBarChart extends Chart {
       .attr("height", (d) => this.chartHeight - this._yScale(d.value));
   }
 
-  addEnteringBarValues(barValues) {
+  _addEnteringBarValues(barValues) {
     barValues
       .enter()
       .append("text")
@@ -154,7 +154,7 @@ export class VerticalBarChart extends Chart {
       .attr("fill", this._barValueColor);
   }
 
-  updateExistingBarValues(barValues) {
+  _updateExistingBarValues(barValues) {
     barValues
       .attr("fill", "transparent")
       .attr("y", (d) => this._yScale(d.value) - barValueMargin)
@@ -166,7 +166,7 @@ export class VerticalBarChart extends Chart {
       .attr("fill", this._barValueColor);
   }
 
-  addYAxisGrid() {
+  _addYAxisGrid() {
     this.chart.select(".axis-grid").remove();
     this.chart
       .append("g")
@@ -181,29 +181,29 @@ export class VerticalBarChart extends Chart {
       .attr("transform", `translate(${gridXMargin / 2}, 0)`);
   }
 
-  displayBars() {
+  _displayBars() {
     const bars = this.chart.selectAll(".bar").data(this.data, (d) => d.title);
     bars.exit().remove();
-    this.updateExistingBars(bars);
-    this.addEnteringBars(bars);
+    this._updateExistingBars(bars);
+    this._addEnteringBars(bars);
   }
 
-  displayValues() {
+  _displayValues() {
     const barValues = this.chart
       .selectAll(".bar-value")
       .data(this._data, (d) => d.title);
     barValues.exit().remove();
-    this.updateExistingBarValues(barValues);
-    this.addEnteringBarValues(barValues);
+    this._updateExistingBarValues(barValues);
+    this._addEnteringBarValues(barValues);
   }
 
   render() {
-    this.adaptScalesToData();
-    if (this.chart.select(".x-axis").empty()) this.addAxis();
-    else this.transitionAxis();
-    this.displayBars();
-    this.addYAxisGrid();
-    if (this._barValueColor) this.displayValues();
+    this._adaptScalesToData();
+    if (this.chart.select(".x-axis").empty()) this._addAxis();
+    else this._transitionAxis();
+    this._displayBars();
+    this._addYAxisGrid();
+    if (this._barValueColor) this._displayValues();
     else this.chart.selectAll(".bar-value").remove();
   }
 }
