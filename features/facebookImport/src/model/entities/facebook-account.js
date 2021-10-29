@@ -313,6 +313,11 @@ class FacebookAccount {
                 title: "Session activities",
                 count: this.accountSessionActivities.length,
             },
+
+            {
+                title: "Reactions",
+                count: this.postReactions.length,
+            },
         ];
     }
 }
