@@ -29,8 +29,8 @@ export class Chart {
     this._selector = selector;
     this.type = type || "";
     this._data = data;
-    this._width = width;
-    this._height = height;
+    this._width = width || 400;
+    this._height = height || 300;
     this._margin = margin || noMargin;
     this._chartHeight = height - this.margin.bottom - this.margin.top;
     this._chartWidth = width - this.margin.left - this.margin.right;

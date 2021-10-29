@@ -37,7 +37,7 @@ export class VerticalBarChart extends Chart {
     data,
     barColor = "blue",
     width = 400,
-    height = 300,
+    height = 200,
     barValueColor,
     numberTicksY,
   }) {
