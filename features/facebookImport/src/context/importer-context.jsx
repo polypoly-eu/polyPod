@@ -136,22 +136,12 @@ export const ImporterProvider = ({ children }) => {
         refreshFiles();
     };
 
-    const handleImportFile = async (dataType) => {
+    const handleImportFile = async () => {
         const { polyNav, polyOut } = pod;
         setFiles(null); // To show the loading overlay
         try {
-            let url = null;
-            if (dataType === "example") {
-                debugger;
-                url =
-                    ENCODED_ZIP_DATA +
-                    "/" +
-                    "facebook-gillianconnelly-2021-10-28.zip";
-            } else {
-                url = await polyNav.pickFile("application/zip");
-            }
+            const url = await polyNav.pickFile("application/zip");
 
-            debugger;
             if (url) await polyOut.importArchive(url);
         } catch (error) {
             setGlobalError(new FileImportError(error));
