@@ -23,6 +23,7 @@ import {
 } from "./importers/utils/importer-status.js";
 import LanguageAndLocaleImporter from "./importers/language-and-locale-importer.js";
 import RecentlyViewedAdsImporter from "./importers/recently-viewed-ads-importer.js";
+import PostReactionsImporter from "./importers/post-reactions-importer.js";
 
 const dataImporters = [
     AdInterestsImporter,
@@ -42,6 +43,7 @@ const dataImporters = [
     NameImporter,
     LanguageAndLocaleImporter,
     RecentlyViewedAdsImporter,
+    PostReactionsImporter,
 ];
 
 export async function runImporter(
