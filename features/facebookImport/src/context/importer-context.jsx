@@ -5,6 +5,7 @@ import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
 import { importData } from "../model/importer.js";
+import { ENCODED_ZIP_DATA } from "../static/example-data/facebook-gillianconnelly-2021-10-28-encoded.js";
 
 export const ImporterContext = React.createContext();
 
@@ -119,15 +120,43 @@ export const ImporterProvider = ({ children }) => {
         return storage.removeFile(fileID);
     };
 
-    const handleImportFile = async () => {
+    const handleImportExampleFile = async () => {
+        const { polyOut } = pod;
+        setFiles(null); // To show the loading overlay
+        try {
+            const url =
+                ENCODED_ZIP_DATA +
+                "/" +
+                "facebook-gillianconnelly-2021-10-28.zip";
+            await polyOut.importArchive(url);
+        } catch (error) {
+            setGlobalError(new FileImportError(error));
+        }
+
+        refreshFiles();
+    };
+
+    const handleImportFile = async (dataType) => {
         const { polyNav, polyOut } = pod;
         setFiles(null); // To show the loading overlay
         try {
-            const url = await polyNav.pickFile("application/zip");
+            let url = null;
+            if (dataType === "example") {
+                debugger;
+                url =
+                    ENCODED_ZIP_DATA +
+                    "/" +
+                    "facebook-gillianconnelly-2021-10-28.zip";
+            } else {
+                url = await polyNav.pickFile("application/zip");
+            }
+
+            debugger;
             if (url) await polyOut.importArchive(url);
         } catch (error) {
             setGlobalError(new FileImportError(error));
         }
+
         refreshFiles();
     };
 
@@ -234,6 +263,7 @@ export const ImporterProvider = ({ children }) => {
                 changeNavigationState,
                 handleBack,
                 handleImportFile,
+                handleImportExampleFile,
                 importSteps,
                 updateImportStatus,
                 fileAnalysis,

@@ -20,6 +20,7 @@ const Import = () => {
         files,
         handleRemoveFile,
         handleImportFile,
+        handleImportExampleFile,
     } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
     const file = files?.[0];
@@ -41,6 +42,7 @@ const Import = () => {
                 importSections={importSections}
                 importStatus={importStatus}
                 onImportFile={handleImportFile}
+                onImportExampleFile={handleImportExampleFile}
                 onUpdateImportStatus={updateImportStatus}
                 file={file}
                 onRemoveFile={onRemoveFile}

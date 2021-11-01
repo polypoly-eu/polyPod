@@ -24,6 +24,7 @@ const ImportExplanationExpandable = ({
     importStatus,
     onUpdateImportStatus,
     onImportFile,
+    onImportExampleFile,
     file,
     onRemoveFile,
 }) => {
@@ -166,6 +167,15 @@ const ImportExplanationExpandable = ({
                     onClick={file ? () => handleImportStatus() : () => {}}
                 >
                     {i18n.t("import:import.button.2")}
+                </button>
+                <button
+                    className="btn-highlighted"
+                    onClick={async () => {
+                        if (file) await onRemoveFile();
+                        onImportExampleFile();
+                    }}
+                >
+                    {"Import example data"}
                 </button>
             </>
         ),
