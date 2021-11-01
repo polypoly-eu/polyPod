@@ -10,7 +10,7 @@ const Tabs = ({ tabs, initialActiveTabId }) => {
         <div className="tab-container">
             <div className="tab-button-container">
                 {tabs.map((tab, index) => (
-                    <button
+                    <div
                         key={index}
                         className={
                             tab.id === activeTab.id
@@ -20,7 +20,10 @@ const Tabs = ({ tabs, initialActiveTabId }) => {
                         onClick={() => setActiveTab(tab)}
                     >
                         {tab.translation}
-                    </button>
+                        {tab.id === activeTab.id ? (
+                            <div className="border"></div>
+                        ) : null}
+                    </div>
                 ))}
             </div>
             <div className="tab-content">{activeTab.content}</div>
