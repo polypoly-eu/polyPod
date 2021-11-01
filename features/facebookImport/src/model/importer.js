@@ -44,6 +44,8 @@ const dataImporters = [
     RecentlyViewedAdsImporter,
 ];
 
+export const DATA_IMPORTERS_COUNT = dataImporters.length;
+
 export async function runImporter(
     importerClass,
     zipFile,
