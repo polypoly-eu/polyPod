@@ -37,9 +37,9 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    private val webView = WebView(context)
+    val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
-    val api = PodApi(
+    var api = PodApi(
         PolyOut(context),
         PolyIn(context, context.filesDir),
         PolyNav(
