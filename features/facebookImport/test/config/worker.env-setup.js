@@ -4,12 +4,6 @@ import fetch, { Response } from "node-fetch";
 
 // Based on the jsdom-worker package.
 
-if (typeof global.TextEncoder === "undefined") {
-    const { TextEncoder, TextDecoder } = require("util");
-    global.TextEncoder = TextEncoder;
-    global.TextDecoder = TextDecoder;
-}
-
 if (!global.URL) global.URL = {};
 if (!global.URL.$$objects) {
     global.URL.$$objects = new Map();
