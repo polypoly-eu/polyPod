@@ -26,19 +26,42 @@ const legend = (
 
 export const OnOffFacebookMiniStorySummary = ({
     companiesCount,
-    purchasesCount,
+    companiesWithAdsCount,
 }) => {
     return (
         <div className="off-facebook-events-mini-story-summary">
-            <h2>{companiesCount}</h2>
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t("offFacebookEventsMiniStory:total", {
+                    __html: i18n.t("offFacebookEventsMiniStory:general"),
+                }}
+            />
+            <h2 style={{ marginBottom: "25px" }}>{companiesCount}</h2>
+            <p
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("offFacebookEventsMiniStory:companies", {
                         number_companies: companiesCount,
-                        number_purchases: purchasesCount,
                     }),
                 }}
             />
+            {companiesWithAdsCount === 0 ? (
+                <div>No ads. Please replace text !</div>
+            ) : (
+                <>
+                    <h2 style={{ marginBottom: "25px" }}>
+                        {companiesWithAdsCount}
+                    </h2>
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html: i18n.t(
+                                "offFacebookEventsMiniStory:companiesWithAds",
+                                {
+                                    companiesWithAds: companiesWithAdsCount,
+                                }
+                            ),
+                        }}
+                    />
+                </>
+            )}
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>

@@ -1,16 +1,8 @@
 import { linkRelatedAccountsWithOffFacebookCompanies } from "../src/model/analyses/utils/on-off-events-matching";
-import OffFacebookEventsImporter, {
-    OFF_FACEBOOK_EVENTS_FILE_PATH,
-} from "../src/model/importers/off-facebook-events-importer";
-import RecentlyViewedAdsImporter, {
-    RECENTLY_VIEWED_FILE_PATH,
-} from "../src/model/importers/recently-viewed-ads-importer";
+import OffFacebookEventsImporter from "../src/model/importers/off-facebook-events-importer";
+import RecentlyViewedAdsImporter from "../src/model/importers/recently-viewed-ads-importer";
 import { toUnixTimestamp } from "../src/model/importers/utils/timestamps";
-import {
-    createAdViewsForComparisonData,
-    createOffFacebookEventsForComparisonData,
-} from "./datasets/on-off-events-comparison-data";
-import { ZipFileMock } from "./mocks/zipfile-mock";
+import { zipFileWithOnOffFacebookCompanyMatches } from "./datasets/on-off-events-comparison-data";
 import { runMultipleImporters } from "./utils/data-importing";
 import { expectAllResultsSuccess } from "./utils/importer-assertions";
 
@@ -21,15 +13,7 @@ describe("Matching on and off facebook event data", () => {
     let matchedCompanies = null;
 
     beforeAll(async () => {
-        zipFile = new ZipFileMock();
-        zipFile.addJsonEntry(
-            OFF_FACEBOOK_EVENTS_FILE_PATH,
-            createOffFacebookEventsForComparisonData()
-        );
-        zipFile.addJsonEntry(
-            RECENTLY_VIEWED_FILE_PATH,
-            createAdViewsForComparisonData()
-        );
+        zipFile = zipFileWithOnOffFacebookCompanyMatches();
 
         const importingResult = await runMultipleImporters(
             [OffFacebookEventsImporter, RecentlyViewedAdsImporter],

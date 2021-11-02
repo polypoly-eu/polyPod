@@ -141,6 +141,8 @@ class FeatureWebView: WKWebView {
         openUrlHandler: @escaping (String) -> Void,
         pickFileHandler: @escaping (String?, @escaping (URL?) -> Void) -> Void
     ) {
+        FeatureStorage.shared.activeFeature = feature
+        
         self.featureTitle = title
         self.activeActions = activeActions
         self.errorHandler = errorHandler
