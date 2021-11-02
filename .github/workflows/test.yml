@@ -50,7 +50,7 @@ jobs:
       - uses: actions/setup-java@v1
         if: steps.changes.outputs.android == 'true'
         with:
-          java-version: 8
+          java-version: 11
       - name: Test android
         if: steps.changes.outputs.android == 'true'
         working-directory: android
