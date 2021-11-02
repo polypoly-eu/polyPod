@@ -27,7 +27,6 @@
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/jest": "^27.0.1",
     "@types/n3": "^1.4.4",
-    "eslint": "^7.18.0",
     "fast-check": "^2.11.0",
     "jest": "27.2",
     "n3": "^1.8.0",

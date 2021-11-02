@@ -9,7 +9,7 @@ import { fillArray } from "../dataViz/utils.jsx";
 import "./activitiesMiniStory.css";
 import "./datePicker.css";
 import "../tabs/tabs.css";
-import { VerticalBarChart } from "@polypoly-eu/poly-look";
+import { PolyChart } from "@polypoly-eu/poly-look";
 
 const monthsAbbreviation = i18n.t("common:months.abbreviation").split(" ");
 
@@ -79,20 +79,22 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
     const constantTabData = {
         total: {
             barData: yearlyTotals,
-            barWidth: "10px",
+            barWidth: 6,
             barChartLegendText: i18n.t("activitiesMiniStory:tab.events.total", {
                 number_events: totalEvents.total,
             }),
+            barValueColor: null,
         },
         yearly: {
             barData: monthlyTotals,
-            barWidth: "18px",
+            barWidth: 22,
             barChartLegendText: i18n.t(
                 "activitiesMiniStory:tab.events.yearly",
                 {
                     number_events: totalEvents.values[selectedYear]?.total || 0,
                 }
             ),
+            barValueColor: "white",
         },
     }[activeTab.id];
 
@@ -122,7 +124,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
             <div className="tab-container">
                 <div className="tab-button-container">
                     {tabs.map((tab, index) => (
-                        <button
+                        <div
                             key={index}
                             className={
                                 tab.id === activeTab.id
@@ -132,7 +134,10 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                             onClick={() => setActiveTab(tab)}
                         >
                             {tab.translation}
-                        </button>
+                            {tab.id === activeTab.id ? (
+                                <div className="border"></div>
+                            ) : null}
+                        </div>
                     ))}
                 </div>
                 {activeTab.id == "yearly" ? (
@@ -148,16 +153,24 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                     <div
                         className="bar-piece"
                         style={{
-                            width: constantTabData.barWidth,
+                            width: constantTabData.barWidth + "px",
                         }}
                     ></div>
                     <p>{constantTabData.barChartLegendText}</p>
                 </div>
                 <p className="above-chart">{numberOfEventsString}</p>
-                <VerticalBarChart
+                <PolyChart
+                    type="vertical-bar-chart"
                     data={constantTabData.barData}
                     barColor={"white"}
+                    barWidth={constantTabData.barWidth}
+                    barValueColor={constantTabData.barValueColor}
                 />
+                <p className="below-chart">
+                    {activeTab.id == "total"
+                        ? "Years since you joined Facebook"
+                        : selectedYear}
+                </p>
             </div>
             <InfoButton route="/report/details/activities-info" />
             <p className="source">

@@ -120,19 +120,24 @@ export default class MessagesAnalysis extends RootAnalysis {
                         number_chats: this._totalUsernamesCount,
                     })}
                 </p>
+                <p> {i18n.t("messagesMiniStory:chart.title")}</p>
                 <BarChart
                     data={this._messagesThreadsData}
                     screenPadding={48}
                     footerContent={({ extraData }) => (
                         <>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMiniStory:first.chat")}
+                                <p>{i18n.t("messagesMiniStory:first.chat")}</p>
                                 {extraData.firstChatDate
                                     ? extraData.firstChatDate.toDateString()
                                     : "unknown"}
                             </div>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMiniStory:last.interaction")}
+                                <p>
+                                    {i18n.t(
+                                        "messagesMiniStory:last.interaction"
+                                    )}
+                                </p>
                                 {extraData.lastChatDate
                                     ? extraData.lastChatDate.toDateString()
                                     : "unknown"}

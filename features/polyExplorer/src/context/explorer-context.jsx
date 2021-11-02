@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { pod } from "../fakePod.js";
-import { useHistory, useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router-dom";
 import i18n from "../i18n.js";
 
 //model

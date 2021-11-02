@@ -1,5 +1,5 @@
 import React from "react";
-import { MirroredBarChart } from "@polypoly-eu/poly-look";
+import { PolyChart } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n";
 
 import "./onOffFacebookMiniStory.css";
@@ -82,7 +82,8 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
                             {i18n.t("offFacebookEventsMiniStory:number.events")}
                         </p>
                     </div>
-                    <MirroredBarChart
+                    <PolyChart
+                        type="mirrored-bar-chart"
                         data={data}
                         colors={{ upperBar: "#EB6561", lowerBar: "#F7FAFC" }}
                         width="400"

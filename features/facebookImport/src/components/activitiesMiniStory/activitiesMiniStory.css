@@ -24,9 +24,16 @@
     font-size: 14px;
 }
 
-.activities-ministory .above-chart {
+.activities-ministory .above-chart, .activities-ministory .below-chart {
     font-size: 12px;
     color: var(--color-gray-400);
+}
+
+.activities-ministory .below-chart {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 8px 0 8px 24px;
 }
 
 .activities-ministory .info-button {
