@@ -7,6 +7,7 @@ export const type = "bubble-cluster";
 const edgePadding = 5;
 const smallBubblesRadius = 20;
 const bigBubblesRadius = 50;
+const bubblePadding = 3;
 const bigBubblesFont = "20px";
 const mediumBubblesFont = "16px";
 
@@ -33,8 +34,8 @@ export class BubbleCluster extends Chart {
   constructor({
     selector,
     data,
-    width,
-    height,
+    width = 400,
+    height = 300,
     bubbleColor = "blue",
     textColor = "white",
     opacity = 1,
@@ -47,6 +48,7 @@ export class BubbleCluster extends Chart {
     this._opacity = opacity;
     this._showValues = showValues;
     this._onBubbleClick = onBubbleClick;
+    this._bubblePadding = bubblePadding;
   }
 
   _makeHierarchy() {
@@ -56,8 +58,8 @@ export class BubbleCluster extends Chart {
   _pack() {
     return d3
       .pack()
-      .size([this.width - edgePadding, this.height - edgePadding])
-      .padding(3);
+      .size([this._width - edgePadding, this._height - edgePadding])
+      .padding(this._bubblePadding);
   }
 
   _updateBubbles(leaves) {

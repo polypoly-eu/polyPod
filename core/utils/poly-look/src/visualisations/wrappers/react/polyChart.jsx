@@ -4,12 +4,14 @@ import {
   VerticalBarChart,
   MirroredBarChart,
   BubbleCluster,
+  IconCluster,
 } from "../../charts";
 
 const charts = {
   "vertical-bar-chart": VerticalBarChart,
   "mirrored-bar-chart": MirroredBarChart,
   "bubble-cluster": BubbleCluster,
+  "icon-cluster": IconCluster,
 };
 
 /**
