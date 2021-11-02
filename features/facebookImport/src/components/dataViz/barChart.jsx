@@ -41,9 +41,22 @@ const BarChart = ({
                     <div key={index} className="tick-box">
                         <div className="half-tick"></div>
                         <div className="tick"></div>
-                        <p>{value}</p>
+                        <p>{index < 1 ? value : ""}</p>
                     </div>
                 ))}
+                <div
+                    className="max-indicator"
+                    style={{
+                        left:
+                            (highestCount /
+                                scaleValues[scaleValues.length - 1]) *
+                                100 +
+                            "%",
+                    }}
+                >
+                    <p>{`Max: ${highestCount}`}</p>
+                    <div className="marker"></div>
+                </div>
             </div>
         </div>
     );
