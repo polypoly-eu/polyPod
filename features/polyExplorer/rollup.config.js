@@ -41,13 +41,6 @@ export default {
                     ],
                     dest: "dist",
                 },
-                {
-                    src: [
-                        "../../assets/fonts/jost_medium.ttf",
-                        "../../assets/fonts/jost_regular.ttf"
-                    ],
-                    dest: "src/static/fonts",
-                },
             ],
             verbose: true,
         }),
