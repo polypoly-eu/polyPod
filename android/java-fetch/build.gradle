@@ -6,7 +6,8 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
+    gradlePluginPortal()
 }
 
 import groovy.json.JsonSlurper
