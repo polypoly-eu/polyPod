@@ -22,6 +22,7 @@ class FacebookAccount {
         this._searches = [];
         this._adminRecords = [];
         this._accountSessionActivities = [];
+        this._postReactions = [];
 
         this._messageThreadsGroup = new MessageThreadsGroup();
         this._relatedAccounts = new RelatedAccountsGroup();
@@ -234,6 +235,14 @@ class FacebookAccount {
         return this._relatedAccounts.count;
     }
 
+    get postReactions() {
+        return this._postReactions;
+    }
+
+    set postReactions(postReactions) {
+        this._postReactions = postReactions;
+    }
+
     get dataGroups() {
         return [
             {
@@ -303,6 +312,11 @@ class FacebookAccount {
             {
                 title: "Session activities",
                 count: this.accountSessionActivities.length,
+            },
+
+            {
+                title: "Reactions",
+                count: this.postReactions.length,
             },
         ];
     }

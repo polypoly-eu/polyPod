@@ -13,7 +13,8 @@ polyLook is the visual component library for all features and applications inclu
 
 polyLook aims to be a framework agnostic component library for polyPod features. At the moment, however, it mainly contains prototypes for a potential approach, based on LitElement.
 
-`src/incubate`, on the other hand, contains React components we actually (re)use in existing features. Over time, we aim to turn these React components into mere wrappers for framework agnostic components.
+Visualisations and charts are located in `./visualisations` and `./visualisations/charts` respectively. When using these from a
+specific framework eg. React, wrapper functions can be used (`./visualisations/wrappers`).
 
 ## Steps to code a new polyLook component
 

@@ -4,6 +4,7 @@ import RootAnalysis from "./root-analysis";
 import InfoButton from "../../../components/buttons/infoButton/infoButton.jsx";
 
 import BarChart from "../../../components/dataViz/barChart.jsx";
+import "./ministories.css";
 
 export default class MessagesAnalysis extends RootAnalysis {
     get label() {
@@ -89,13 +90,16 @@ export default class MessagesAnalysis extends RootAnalysis {
         );
 
         return (
-            <>
+            <div className="render-summary">
                 <h2
-                    className="messages-count"
-                    style={{ fontSize: fontSize }}
+                    style={{
+                        fontSize: fontSize,
+                        marginBottom: "35px",
+                        marginTop: "25px",
+                    }}
                     ref={refWidth}
                 >
-                    {this._messagesCount}
+                    {+this._messagesCount.toLocaleString().replace(",", ".")}
                 </h2>
                 <p>
                     {i18n.t("explore:messages.summary", {
@@ -104,7 +108,7 @@ export default class MessagesAnalysis extends RootAnalysis {
                         people: this._totalUsernamesCount,
                     })}
                 </p>
-            </>
+            </div>
         );
     }
 
@@ -116,19 +120,24 @@ export default class MessagesAnalysis extends RootAnalysis {
                         number_chats: this._totalUsernamesCount,
                     })}
                 </p>
+                <p> {i18n.t("messagesMiniStory:chart.title")}</p>
                 <BarChart
                     data={this._messagesThreadsData}
                     screenPadding={48}
                     footerContent={({ extraData }) => (
                         <>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMiniStory:first.chat")}
+                                <p>{i18n.t("messagesMiniStory:first.chat")}</p>
                                 {extraData.firstChatDate
                                     ? extraData.firstChatDate.toDateString()
                                     : "unknown"}
                             </div>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMiniStory:last.interaction")}
+                                <p>
+                                    {i18n.t(
+                                        "messagesMiniStory:last.interaction"
+                                    )}
+                                </p>
                                 {extraData.lastChatDate
                                     ? extraData.lastChatDate.toDateString()
                                     : "unknown"}

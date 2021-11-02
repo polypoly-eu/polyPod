@@ -1,4 +1,7 @@
+import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../../src/model/importers/off-facebook-events-importer";
+import { RECENTLY_VIEWED_FILE_PATH } from "../../src/model/importers/recently-viewed-ads-importer";
 import { toUnixTimestamp } from "../../src/model/importers/utils/timestamps";
+import { createMockedZip } from "../utils/data-creation";
 import { wrapViewsData } from "./ad-views-data";
 
 /**
@@ -213,5 +216,15 @@ export function createAdViewsForComparisonData() {
                 },
             ],
         },
+    ]);
+}
+
+export function zipFileWithOnOffFacebookCompanyMatches() {
+    return createMockedZip([
+        [
+            OFF_FACEBOOK_EVENTS_FILE_PATH,
+            createOffFacebookEventsForComparisonData(),
+        ],
+        [RECENTLY_VIEWED_FILE_PATH, createAdViewsForComparisonData()],
     ]);
 }

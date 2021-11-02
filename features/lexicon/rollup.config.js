@@ -65,7 +65,7 @@ export default {
         }),
         commonjs(),
         json(),
-        sucrase({ "transforms": [] }),
+        sucrase({ transforms: [] }),
         copy({
             targets: [
                 {
