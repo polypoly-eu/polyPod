@@ -13,24 +13,16 @@ export default {
     plugins: [
         css({ output: "css/bundle.css" }),
         json(),
-        sucrase({ "transforms": [] }),
+        sucrase({ transforms: [] }),
         copyWatch({
             targets: [
                 {
                     src: [
                         "src/static/*",
-                        "node_modules/@polypoly-eu/podjs/dist/pod.js"
+                        "node_modules/@polypoly-eu/podjs/dist/pod.js",
                     ],
                     dest: "dist",
                 },
-                {
-                    src: [
-                        "../../assets/fonts/jost_medium.ttf",
-                        "../../assets/fonts/jost_regular.ttf",
-                        "../../assets/fonts/jost_light.ttf",
-                    ],
-                    dest: "src/static/fonts",
-                }
             ],
             verbose: true,
         }),
