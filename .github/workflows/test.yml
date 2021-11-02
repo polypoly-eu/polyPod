@@ -1,57 +1,60 @@
 name: Test pushes and PRs
 on:
-  push:
-  pull_request:
-    types: [assigned, opened, ready_for_review]
+    push:
+    pull_request:
+        types: [assigned, opened, ready_for_review]
 
 jobs:
-  test:
-    name: Run tests.
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16.8
-      - name: Checks paths to rebuild Android
-        uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
-        id: changes
-        with:
-          filters: |
-            android:
-            - 'android/**'
-            - 'core/api/**'
-            - 'core/communication/**'
-            - 'core/utils/silly-i18n/**'
-            - 'features/**'
-            - 'podjs/**'
-            js:
-            - '**/*.js'
-            - '**/*.jsx'
-            - '**/*.ts'
-            - '**/*.tsx'
-            - '**/*.?js'
-            - '.editorconfig'
-            - '.eslintrc.cjs'
-            coreAndFeatures:
-            - 'core/**'
-            - 'features/**'
-            - 'podjs/**'
-            - 'build/**'
-      - name: Lint core and features
-        if: steps.changes.outputs.js == 'true'
-        run: ./build.js lint
-      - name: Build core and features
-        if: steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.android == 'true'
-        run: ./build.js
-      - name: Test core and features
-        if: steps.changes.outputs.coreAndFeatures == 'true'
-        run: xvfb-run --auto-servernum ./build.js test
-      - uses: actions/setup-java@v1
-        if: steps.changes.outputs.android == 'true'
-        with:
-          java-version: 8
-      - name: Test android
-        if: steps.changes.outputs.android == 'true'
-        working-directory: android
-        run: ./gradlew test
+    test:
+        name: Run tests.
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 16.8
+            - name: Checks paths to rebuild Android
+              uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
+              id: changes
+              with:
+                  filters: |
+                      android:
+                      - 'android/**'
+                      - 'core/api/**'
+                      - 'core/communication/**'
+                      - 'core/utils/silly-i18n/**'
+                      - 'features/**'
+                      - 'podjs/**'
+                      js:
+                      - '**/*.js'
+                      - '**/*.jsx'
+                      - '**/*.ts'
+                      - '**/*.tsx'
+                      - '**/*.?js'
+                      - '.editorconfig'
+                      - '.eslintrc.cjs'
+                      coreAndFeatures:
+                      - 'core/**'
+                      - 'features/**'
+                      - 'podjs/**'
+                      - 'build/**'
+
+                      - name: Install global modules
+              run: npm ci --no-update-notifier --no-fund
+            - name: Lint core and features
+              if: steps.changes.outputs.js == 'true'
+              run: ./build.js lint
+            - name: Build core and features
+              if: steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.android == 'true'
+              run: ./build.js
+            - name: Test core and features
+              if: steps.changes.outputs.coreAndFeatures == 'true'
+              run: xvfb-run --auto-servernum ./build.js test
+            - uses: actions/setup-java@v1
+              if: steps.changes.outputs.android == 'true'
+              with:
+                  java-version: 8
+            - name: Test android
+              if: steps.changes.outputs.android == 'true'
+              working-directory: android
+              run: ./gradlew test
