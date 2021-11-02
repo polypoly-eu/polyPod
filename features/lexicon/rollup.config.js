@@ -65,17 +65,13 @@ export default {
         }),
         commonjs(),
         json(),
-        sucrase({ "transforms": [] }),
+        sucrase({ transforms: [] }),
         copy({
             targets: [
                 {
                     src: ["node_modules/@polypoly-eu/podjs/dist/pod.js"],
                     dest: "public",
                 },
-                {
-                    src: ["../../assets/fonts/jost_medium.ttf"],
-                    dest: "public/fonts",
-                }
             ],
         }),
 
