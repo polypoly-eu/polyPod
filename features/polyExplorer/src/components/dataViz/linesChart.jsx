@@ -208,9 +208,8 @@ const LinesChart = ({ data }) => {
     }
 
     function _calculateScaleX(screenSize) {
-        const { resolution, leftMargin, rightMargin } = canvasConfig[
-            screenSize
-        ];
+        const { resolution, leftMargin, rightMargin } =
+            canvasConfig[screenSize];
         const listOfDates = [data.rangeDates[0]];
 
         while (
@@ -291,9 +290,8 @@ const LinesChart = ({ data }) => {
     }
 
     function calculateXAxis(screenSize) {
-        const { resolution, leftMargin, bottomMargin } = canvasConfig[
-            screenSize
-        ];
+        const { resolution, leftMargin, bottomMargin } =
+            canvasConfig[screenSize];
         const root = _getRoot(screenSize);
         const x = _getScaleX(screenSize);
 
@@ -323,9 +321,8 @@ const LinesChart = ({ data }) => {
     }
 
     function calculateYAxis(screenSize) {
-        const { resolution, topMargin, leftMargin, rightMargin } = canvasConfig[
-            screenSize
-        ];
+        const { resolution, topMargin, leftMargin, rightMargin } =
+            canvasConfig[screenSize];
         const root = _getRoot(screenSize);
 
         const y = _getScaleY(screenSize);
@@ -395,12 +392,8 @@ const LinesChart = ({ data }) => {
     }
 
     function drawArea(lineIndex, groupName, screenSize) {
-        const {
-            resolution,
-            leftMargin,
-            topMargin,
-            bottomMargin,
-        } = canvasConfig[screenSize];
+        const { resolution, leftMargin, topMargin, bottomMargin } =
+            canvasConfig[screenSize];
         const root = _getRoot(screenSize);
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
@@ -431,9 +424,8 @@ const LinesChart = ({ data }) => {
     }
 
     function drawLine(points, color, groupName, lineIndex, screenSize) {
-        const { leftMargin, topMargin, bottomMargin } = canvasConfig[
-            screenSize
-        ];
+        const { leftMargin, topMargin, bottomMargin } =
+            canvasConfig[screenSize];
         const root = _getRoot(screenSize);
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
@@ -569,9 +561,8 @@ const LinesChart = ({ data }) => {
     }
 
     function _getBubbleStartingPoint(bubbleData, screenSize) {
-        const { leftMargin, topMargin, bottomMargin } = canvasConfig[
-            screenSize
-        ];
+        const { leftMargin, topMargin, bottomMargin } =
+            canvasConfig[screenSize];
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
 
@@ -1179,12 +1170,8 @@ const LinesChart = ({ data }) => {
     }
 
     function _isBubbleOut(diagonal, screenSize) {
-        const {
-            leftMargin,
-            limitMarginX,
-            limitMarginY,
-            topMargin,
-        } = canvasConfig[screenSize];
+        const { leftMargin, limitMarginX, limitMarginY, topMargin } =
+            canvasConfig[screenSize];
         const { rangeX, rangeY } = _getRangesFromDiagonal(diagonal);
         const x = _getScaleX(screenSize);
         const y = _getScaleY(screenSize);
@@ -1298,9 +1285,8 @@ const LinesChart = ({ data }) => {
     }
 
     function graphDescription(screenSize) {
-        const { resolution, leftMargin, rightMargin } = canvasConfig[
-            screenSize
-        ];
+        const { resolution, leftMargin, rightMargin } =
+            canvasConfig[screenSize];
         const descriptionConfig = descriptionConfiguration[screenSize];
         const root = _getRoot(screenSize);
 

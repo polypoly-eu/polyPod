@@ -59,12 +59,8 @@ function getStartGroups(entityGroups) {
 }
 
 const EntityList = () => {
-    const {
-        entities,
-        globalData,
-        activeFilters,
-        handleRemoveFilter,
-    } = useContext(ExplorerContext);
+    const { entities, globalData, activeFilters, handleRemoveFilter } =
+        useContext(ExplorerContext);
     const onRemoveFilter = handleRemoveFilter;
     const filteredEntities = activeFilters.apply(entities);
     const entityGroups = groupEntities(filteredEntities);

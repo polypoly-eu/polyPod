@@ -14,6 +14,7 @@
     "@babel/preset-react": "^7.14.5",
     "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
     "@polypoly-eu/podjs": "file:../../podjs",
+    "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "11.2.0",
@@ -33,7 +34,6 @@
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
     "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
     "d3": "^7.0.1",
     "react": "^17.0.2",

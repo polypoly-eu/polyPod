@@ -12,8 +12,7 @@ export default {
                 research_sources: [
                     {
                         dataset: "Reddit",
-                        url:
-                            "https://www.reddit.com/r/signal/comments/aa8hiz/how_many_users_does_signal_have/",
+                        url: "https://www.reddit.com/r/signal/comments/aa8hiz/how_many_users_does_signal_have/",
                         archive_url:
                             "https://web.archive.org/web/https://www.reddit.com/r/signal/comments/aa8hiz/how_many_users_does_signal_have/",
                         notes: "Start date from Wikipedia",
@@ -27,12 +26,10 @@ export default {
                 research_sources: [
                     {
                         dataset: "BusinessofApps",
-                        url:
-                            "https://www.businessofapps.com/data/signal-statistics/",
+                        url: "https://www.businessofapps.com/data/signal-statistics/",
                         archive_url:
                             "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
-                        notes:
-                            "They note Similarweb and TechCrunch as their sources",
+                        notes: "They note Similarweb and TechCrunch as their sources",
                     },
                 ],
             },
@@ -43,12 +40,10 @@ export default {
                 research_sources: [
                     {
                         dataset: "BusinessofApps",
-                        url:
-                            "https://www.businessofapps.com/data/signal-statistics/",
+                        url: "https://www.businessofapps.com/data/signal-statistics/",
                         archive_url:
                             "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
-                        notes:
-                            "They note Similarweb and TechCrunch as their sources",
+                        notes: "They note Similarweb and TechCrunch as their sources",
                     },
                 ],
             },
@@ -59,12 +54,10 @@ export default {
                 research_sources: [
                     {
                         dataset: "BusinessofApps",
-                        url:
-                            "https://www.businessofapps.com/data/signal-statistics/",
+                        url: "https://www.businessofapps.com/data/signal-statistics/",
                         archive_url:
                             "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
-                        notes:
-                            "They note Similarweb and TechCrunch as their sources",
+                        notes: "They note Similarweb and TechCrunch as their sources",
                     },
                 ],
             },
@@ -75,12 +68,10 @@ export default {
                 research_sources: [
                     {
                         dataset: "BusinessofApps",
-                        url:
-                            "https://www.businessofapps.com/data/signal-statistics/",
+                        url: "https://www.businessofapps.com/data/signal-statistics/",
                         archive_url:
                             "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
-                        notes:
-                            "They note Similarweb and TechCrunch as their sources",
+                        notes: "They note Similarweb and TechCrunch as their sources",
                     },
                 ],
             },
@@ -99,8 +90,7 @@ export default {
                     url: "https://signalfoundation.org/",
                     archive_url:
                         "https://web.archive.org/web/20210428025938/https://signal.org/de/",
-                    notes:
-                        "Brian Acton, founder of WhatsApp and current Signal Foundation Board Member",
+                    notes: "Brian Acton, founder of WhatsApp and current Signal Foundation Board Member",
                 },
             ],
         },
@@ -300,8 +290,7 @@ export default {
             research_sources: [
                 {
                     dataset: "BusinessofApps",
-                    url:
-                        "https://www.businessofapps.com/data/signal-statistics/",
+                    url: "https://www.businessofapps.com/data/signal-statistics/",
                     archive_url:
                         "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
                     notes: "They note Similarweb and WSJ as their sources",
@@ -316,8 +305,7 @@ export default {
             research_sources: [
                 {
                     dataset: "BusinessofApps",
-                    url:
-                        "https://www.businessofapps.com/data/signal-statistics/",
+                    url: "https://www.businessofapps.com/data/signal-statistics/",
                     archive_url:
                         "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
                     notes: "They note Similarweb and WSJ as their sources",
@@ -332,8 +320,7 @@ export default {
             research_sources: [
                 {
                     dataset: "BusinessofApps",
-                    url:
-                        "https://www.businessofapps.com/data/signal-statistics/",
+                    url: "https://www.businessofapps.com/data/signal-statistics/",
                     archive_url:
                         "https://web.archive.org/web/20210408072301/https://www.businessofapps.com/data/signal-statistics/",
                     notes: "They note Similarweb and WSJ as their sources",
@@ -348,8 +335,7 @@ export default {
             research_sources: [
                 {
                     dataset: "Google Play Store",
-                    url:
-                        "https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms",
+                    url: "https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms",
                     archive_url:
                         "https://web.archive.org/web/20210506091350/https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms",
                     notes: null,
@@ -364,8 +350,7 @@ export default {
             research_sources: [
                 {
                     dataset: "Google PlayStore",
-                    url:
-                        "https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms",
+                    url: "https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms",
                     archive_url:
                         "https://web.archive.org/web/20210510071639/https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms",
                     notes: null,

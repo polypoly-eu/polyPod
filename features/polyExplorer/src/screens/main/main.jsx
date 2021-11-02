@@ -9,9 +9,8 @@ import "./main.css";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 const MainScreen = () => {
-    const { navigationState, routeTo, entities, storiesMetadata } = useContext(
-        ExplorerContext
-    );
+    const { navigationState, routeTo, entities, storiesMetadata } =
+        useContext(ExplorerContext);
     let showClusters = navigationState.showClusters;
 
     return (

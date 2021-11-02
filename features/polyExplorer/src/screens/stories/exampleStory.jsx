@@ -192,8 +192,7 @@ const ExampleStory = () => {
                             {
                                 x: new Date("2017-01-01"),
                                 y: 500,
-                                text:
-                                    "I like the stablity... no hearth attacks",
+                                text: "I like the stablity... no hearth attacks",
                                 size: BUBBLES_SPEECH_SIZES.BIG,
                             },
                             {

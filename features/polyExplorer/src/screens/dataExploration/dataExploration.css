@@ -169,16 +169,6 @@
     height: 32px;
 }
 
-/*
- * TODO: Figure out where .down-button went and see if removing `display: none`
- * is necessary there.
- */
-/*
-.data-exploration .down-button-hidden {
-    visibility: hidden;
-}
-*/
-
 .data-exploration .static-content .construction-container {
     box-sizing: border-box;
     display: block;

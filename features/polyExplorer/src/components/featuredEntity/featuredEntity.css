@@ -6,8 +6,6 @@
     width: 100%;
     margin: 32px auto 0 auto;
     border-radius: 24px;
-    /* TODO: Test if padding-bottom is still - was fix for PROD4POD-492 */
-    padding-bottom: 550px;
     display: flex;
     flex-direction: column;
     justify-content: center;

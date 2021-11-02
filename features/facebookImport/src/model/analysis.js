@@ -43,6 +43,7 @@ import AdvertisingValueAnalysis from "./analyses/ministories/advertising-value-a
 import AboutPicturesDataAnalysis from "./analyses/ministories/about-pictures-data-analysis.js";
 import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
 import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-facebook-advertisers-analysis.js";
+import PostReactionsTypesAnalysis from "./analyses/ministories/post-reactions-types-analysis.js";
 
 const subAnalyses = [
     DataStructureBubblesAnalysis,
@@ -52,6 +53,7 @@ const subAnalyses = [
     AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
 
+    PostReactionsTypesAnalysis,
     ExportTitleAnalysis,
     ExportSizeAnalysis,
     DataChartsAnalysis,
