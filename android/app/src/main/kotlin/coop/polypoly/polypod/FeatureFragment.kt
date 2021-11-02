@@ -86,7 +86,7 @@ open class FeatureFragment : Fragment() {
 
     private lateinit var feature: Feature
     private lateinit var foregroundResources: ForegroundResources
-    private lateinit var featureContainer: FeatureContainer
+    lateinit var featureContainer: FeatureContainer
 
     private var pickFileResult: CompletableDeferred<Uri?>? = null
 

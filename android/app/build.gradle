@@ -143,6 +143,7 @@ dependencies {
     //noinspection FragmentGradleConfiguration
     androidTestImplementation 'androidx.fragment:fragment-testing:1.2.5'
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.3.0'
+    androidTestUtil('androidx.test:orchestrator:1.4.0')
 
     // Encryption related imports
     implementation("androidx.security:security-crypto:1.1.0-alpha03")
@@ -204,6 +205,10 @@ tasks.whenTaskAdded { task ->
         task.dependsOn copyBundledFeatures
         task.dependsOn copyThirdPartyLicenses
     }
-    if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
+    if (
+        task.name == "connectedDebugAndroidTest" ||
+        task.name == "connectedReleaseAndroidTest" ||
+        task.name == "generateDebugAndroidTestAssets"
+    )
         task.dependsOn copyTestFeatureOntoDevice
 }
