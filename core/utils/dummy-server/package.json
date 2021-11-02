@@ -28,8 +28,13 @@
     "devDependencies": {
         "@babel/core": "^7.14.6",
         "@babel/preset-env": "^7.14.7",
+<<<<<<< HEAD
         "eslint": "^7.18.0",
         "eslint-plugin-prettier": "^3.1.4",
+=======
+        "babel-jest": "^27.0.6",
+        "jest": "^27.0.6",
+>>>>>>> main
         "prettier": "^2.2.1",
         "supertest": "^6.1.3"
     },
