@@ -27,7 +27,7 @@ export function createReceivedFriendRequestsDataset() {
             timestamp: 1582622642,
         },
         {
-            name: "Alice JOen",
+            name: "Alice Jön",
             timestamp: 1627210660,
         },
         {
