@@ -4,6 +4,8 @@ import { Chart } from "../../chart";
 
 import "./verticalBarChart.css";
 
+export const type = "vertical-bar-chart";
+
 const initializingBarHeight = 2;
 const margin = {
   top: 10,
@@ -21,6 +23,7 @@ const gridXMargin = 12;
  *
  * @class
  * @extends Chart
+ * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
  * @param Object[] data - The data to be visualized as a bubble cluster
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
@@ -32,7 +35,6 @@ const gridXMargin = 12;
  */
 export class VerticalBarChart extends Chart {
   constructor({
-    type,
     selector,
     data,
     barColor = "blue",

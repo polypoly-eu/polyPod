@@ -4,6 +4,8 @@ import { Chart } from "../../chart";
 
 import "./mirroredBarChart.css";
 
+export const type = "mirrored-bar-chart";
+
 const margin = {
   top: 10,
   right: 40,
@@ -19,6 +21,8 @@ const yGridMarginRight = 24;
  * The y-scale is also mirrored and a x/y-grid is added.
  *
  * @class
+ * @extends Chart
+ * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
  * @param {Object[]} data - The data to be visualized as a as two bar charts
  * @param {number} data[].key - The key x value for both charts
  * @param {number} data[].lower - The y value for the lower bar chart at key x value
@@ -35,7 +39,6 @@ const yGridMarginRight = 24;
  */
 export class MirroredBarChart extends Chart {
   constructor({
-    type,
     selector,
     data,
     colors,

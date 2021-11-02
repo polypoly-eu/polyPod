@@ -2,6 +2,8 @@ import * as d3 from "d3";
 
 import { Chart } from "../../chart";
 
+export const type = "bubble-cluster";
+
 const edgePadding = 5;
 const smallBubblesRadius = 20;
 const bigBubblesRadius = 50;
@@ -14,6 +16,8 @@ const mediumBubblesFont = "16px";
  * The bubbles are being added in a spiral starting in the center of the cluster meaning sorted data will lead to all small bubbles in the middle or outside.
  *
  * @class
+ * @extends Chart
+ * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
  * @param {Object[]} data - The data to be visualized as a bubble cluster
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
@@ -27,7 +31,6 @@ const mediumBubblesFont = "16px";
  */
 export class BubbleCluster extends Chart {
   constructor({
-    type,
     selector,
     data,
     width,
