@@ -38,8 +38,6 @@ jobs:
             - 'features/**'
             - 'podjs/**'
             - 'build/**'
-      - name: Install global modules
-        run: npm ci --no-update-notifier --no-fund
       - name: Lint core and features
         if: steps.changes.outputs.js == 'true'
         run: ./build.js lint
