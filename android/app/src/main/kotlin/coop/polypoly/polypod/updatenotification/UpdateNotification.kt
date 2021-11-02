@@ -5,7 +5,8 @@ import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.R
 
 class UpdateNotification(private val context: Context) {
-    val id = context.resources.getInteger(R.integer.update_notification_id)
+    // Reassignable for testing purposes
+    var id = context.resources.getInteger(R.integer.update_notification_id)
     val title = context.getString(R.string.update_notification_title)
     val text = context.getString(R.string.update_notification_text)
     val pushDelay =
