@@ -1,78 +1,48 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
-import FeaturedCompanyHolder from "../../components/featuredCompanyHolder/featuredCompanyHolder.jsx";
-import CompanyList from "../../components/companyList/companyList.jsx";
+import EntityList from "../../components/entityList/entityList.jsx";
+import StoriesPreview from "../../components/storiesPreview/storiesPreview.jsx";
 
 import "./main.css";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-const MainScreen = ({
-    showFeatured,
-    featuredCompanies,
-    companies,
-    globalData,
-    onOpenDetails,
-    onOpenFeaturedInfo,
-    onOpenFilters,
-    onShowFeaturedChange,
-    featuredCompanyTabInitialSlide,
-    onFeaturedCompanyTabInitialSlideChange,
-    activeFilters,
-    onRemoveFilter,
-    featuredCompanyMaxValues,
-    featuredCompanyAverageValues,
-    onOpenDataExplorationSection,
-}) => {
-    const handleShowFeatured = () => onShowFeaturedChange(true);
-    const handleShowCompanyList = () => onShowFeaturedChange(false);
-
-    const handleUpdateInitialSlide = (newInitialSlide) => {
-        onFeaturedCompanyTabInitialSlideChange(newInitialSlide);
-    };
+const MainScreen = () => {
+    const { navigationState, routeTo, entities, storiesMetadata } =
+        useContext(ExplorerContext);
+    let showClusters = navigationState.showClusters;
 
     return (
-        <Screen className="main-screen" topShadow={false}>
+        <Screen
+            className="main-screen"
+            topShadow={false}
+            light={showClusters ? true : false}
+        >
             <div className="nav-button-container">
                 <button
-                    onClick={handleShowFeatured}
+                    onClick={() => routeTo("main", { showClusters: true })}
                     className={
-                        showFeatured ? "nav-button active" : "nav-button"
+                        showClusters ? "nav-button active" : "nav-button"
                     }
                 >
-                    {i18n.t("mainScreen:tab.featuredCompanies")}
+                    {i18n.t("mainScreen:tab.discover")}
                 </button>
                 <button
-                    onClick={handleShowCompanyList}
+                    onClick={() => routeTo("main", { showClusters: false })}
                     className={
-                        showFeatured ? "nav-button" : "nav-button active"
+                        showClusters ? "nav-button" : "nav-button active"
                     }
                 >
-                    {i18n.t("mainScreen:tab.allCompanies", {
-                        total: Object.keys(companies).length,
+                    {i18n.t("mainScreen:tab.explore", {
+                        total: Object.keys(entities).length,
                     })}
                 </button>
             </div>
-            {showFeatured ? (
-                <FeaturedCompanyHolder
-                    featuredCompanies={featuredCompanies}
-                    onOpenDetails={onOpenDetails}
-                    onOpenInfo={onOpenFeaturedInfo}
-                    initialSlide={featuredCompanyTabInitialSlide}
-                    onUpdateInitialSlide={handleUpdateInitialSlide}
-                    maxValues={featuredCompanyMaxValues}
-                    averageValues={featuredCompanyAverageValues}
-                    onOpenDataExplorationSection={onOpenDataExplorationSection}
-                />
+            {showClusters ? (
+                <StoriesPreview storiesMetadata={storiesMetadata} />
             ) : (
-                <CompanyList
-                    companies={companies}
-                    globalData={globalData}
-                    onOpenFilters={onOpenFilters}
-                    onOpenDetails={onOpenDetails}
-                    activeFilters={activeFilters}
-                    onRemoveFilter={onRemoveFilter}
-                />
+                <EntityList />
             )}
         </Screen>
     );

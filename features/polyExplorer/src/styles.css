@@ -5,8 +5,13 @@
     --color-medium: #a9b6c6;
     --color-semi-light: #edf2f7;
     --color-light: #f7fafc;
+    --color-primary-messenger-story: rgba(59,166,255,1);
+    --color-secondary-messenger-story: rgba(59,166,255,0);
 
-    /* Background colors*/
+    /* Buttons colors */
+    --color-button-dark-grey: #3e495b;
+
+    /* Background colors */
     --color-background-dark: var(--color-dark);
     --color-background-light: var(--color-light);
     /* Text colors */
@@ -58,4 +63,20 @@ button {
 
 button:focus {
     outline: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #6a798e;
+    border-radius: 6px;
+    z-index: 2;
+    height: 38px;
+}
+
+::-webkit-scrollbar-track {
+    margin-top: 64px;
 }

@@ -23,9 +23,7 @@ jobs:
             - 'core/api/**'
             - 'core/communication/**'
             - 'core/utils/silly-i18n/**'
-            - 'features/lexicon/**'
-            - 'features/polyExplorer/**'
-            - 'features/polyPreview/**'
+            - 'features/**'
             - 'podjs/**'
             js:
             - '**/*.js'
