@@ -24,12 +24,15 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
 
     async analyze({ facebookAccount }) {
         this._companiesCount = facebookAccount.offFacebookCompanies.length;
-        this._purchasesCount = facebookAccount.offFacebookCompanies.filter(
-            (company) =>
-                company.events.find((event) => event.type == "PURCHASE")
-        ).length;
+
         const advertiserMatches =
             linkRelatedAccountsWithOffFacebookCompanies(facebookAccount);
+
+        this._companiesWithAdsCount = advertiserMatches.reduce(
+            (total, consolidatedCompany) =>
+                total + consolidatedCompany.offFacebookCompaniesCount,
+            0
+        );
         const max = Math.max(
             facebookAccount.offFacebookEventsLatestTimestamp,
             facebookAccount.relatedAccountEventLatestTimestamp
@@ -55,7 +58,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
         return (
             <OnOffFacebookMiniStorySummary
                 companiesCount={this._companiesCount}
-                purchasesCount={this._purchasesCount}
+                companiesWithAdsCount={this._companiesWithAdsCount}
             />
         );
     }
