@@ -8,5 +8,9 @@ module.exports = {
     static: [{
         source: "./src/index.html",
         target: "./dist/index.html",
+    },
+    {
+        source: "./src/static/manifest.json",
+        target: "./dist/manifest.json",
     }],
 }
