@@ -40,3 +40,10 @@ export class MissingMessagesFilesException extends Error {
         this.name = "MissingMessagesFilesException";
     }
 }
+
+export class MissingPostFilesException extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "MissingPostFilesException";
+    }
+}
