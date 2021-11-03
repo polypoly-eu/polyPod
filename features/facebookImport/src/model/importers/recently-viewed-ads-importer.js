@@ -124,7 +124,7 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
         if (!adsViewsData) {
             return {
                 status: IMPORT_WARNING,
-                importerClass: this.constructor.name,
+                importerClass: this.constructor,
                 message: "Could not locate ads category",
             };
         }
