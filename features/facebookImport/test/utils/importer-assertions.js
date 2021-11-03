@@ -8,20 +8,19 @@ import {
     IMPORT_WARNING,
 } from "../../src/model/importers/utils/importer-status";
 
-export function expectError(result, errorClass) {
+export function expectError(result, errorClass, importerClass) {
     expect(result.status).toBe(IMPORT_ERROR);
     expect(result.message).toBe(errorClass.name);
     expect(result.error.name).toBe(errorClass.name);
+    expect(result.importerClass).toBe(importerClass);
 }
 
 export function expectMissingFileError(result, importerClass) {
-    expectError(result, MissingFileImportException);
-    expect(result.importerClass).toBe(importerClass);
+    expectError(result, MissingFileImportException, importerClass);
 }
 
 export function expectInvalidContentError(result, importerClass) {
-    expectError(result, InvalidContentImportException);
-    expect(result.importerClass).toBe(importerClass);
+    expectError(result, InvalidContentImportException, importerClass);
 }
 
 export function expectImportSuccess(result) {

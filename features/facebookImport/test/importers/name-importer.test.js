@@ -54,7 +54,7 @@ test("Name importer - correct data key without correct data", async () => {
 
     const { result } = await runNameImporter(zipFile);
 
-    expectError(result, TypeError);
+    expectError(result, TypeError, NameImporter);
 });
 
 test("Name importer - name with no special characters", async () => {
