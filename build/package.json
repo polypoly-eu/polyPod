@@ -3,8 +3,5 @@
   "scripts": {
     "lint": "eslint . --ext .js --no-ignore",
     "test": "jest"
-  },
-  "devDependencies": {
-    "jest": "27.2"
   }
 }
