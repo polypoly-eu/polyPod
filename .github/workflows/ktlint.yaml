@@ -15,11 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Qodana - Code Inspection
-        uses: JetBrains/qodana-action@1a43321c932939bf81e252495fc27d71b107fdca
-        with:
-          linter: qodana-android
-          project-dir: ${{ github.workspace }}/android
-          results-dir: ${{ github.workspace }}/qodana
-          cache-dir: /home/runner/work/_temp/_github_home/qodana-cache
-
+      - run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.43.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
+      - name: run ktlint
+        run: |
+          cd android && ktlint --android applyToIDEAProject
