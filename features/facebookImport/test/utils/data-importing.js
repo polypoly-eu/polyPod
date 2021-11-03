@@ -10,6 +10,10 @@ import { ZipFileMock } from "../mocks/zipfile-mock.js";
 import LanguageAndLocaleImporter from "../../src/model/importers/language-and-locale-importer.js";
 import FriendsImporter from "../../src/model/importers/friends-importer.js";
 import LikedPagesImporter from "../../src/model/importers/pages-liked-importer.js";
+import AdInterestsImporter from "../../src/model/importers/ad-interests-importer.js";
+import ConnectedAdvertisersImporter from "../../src/model/importers/connected-advertisers-importer.js";
+import SearchesImporter from "../../src/model/importers/searches-importer.js";
+import InteractedWithAdvertisersImporter from "../../src/model/importers/interacted-with-advertisers-importer.js";
 import PostReactionsImporter from "../../src/model/importers/post-reactions-importer.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
@@ -26,6 +30,14 @@ export async function runSingleImporter(importerClass, zipFile) {
     const facebookAccount = new FacebookAccount();
     const result = await runImporter(importerClass, zipFile, facebookAccount);
     return { facebookAccount, result };
+}
+
+export async function runAdInterestsImporter(zipFile) {
+    return runSingleImporter(AdInterestsImporter, zipFile);
+}
+
+export async function runConnectedAdvertisersImporter(zipFile) {
+    return runSingleImporter(ConnectedAdvertisersImporter, zipFile);
 }
 
 export async function runLanguageAndLocaleImporter(zipFile) {
@@ -54,6 +66,14 @@ export async function runFriendsImporter(zipFile) {
 
 export async function runLikedPagesImporter(zipFile) {
     return runSingleImporter(LikedPagesImporter, zipFile);
+}
+
+export async function runSearchesImporter(zipFile) {
+    return runSingleImporter(SearchesImporter, zipFile);
+}
+
+export async function runInteractedWithAdvertisersImporter(zipFile) {
+    return runSingleImporter(InteractedWithAdvertisersImporter, zipFile);
 }
 
 export async function runPostReactionsImporter(zipFile) {

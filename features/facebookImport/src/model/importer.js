@@ -4,7 +4,7 @@ import FacebookAccount from "./entities/facebook-account.js";
 import OffFacebookEventsImporter from "./importers/off-facebook-events-importer.js";
 import AdInterestsImporter from "./importers/ad-interests-importer.js";
 import ConnectedAdvertisersImporter from "./importers/connected-advertisers-importer.js";
-import InteractedWithAdvertisersImporter from "./importers/interacted-advertisers-importer.js";
+import InteractedWithAdvertisersImporter from "./importers/interacted-with-advertisers-importer.js";
 import FriendsImporter from "./importers/friends-importer.js";
 import FollowedPagesImporter from "./importers/pages-followed-importer.js";
 import ReceivedFriendRequestsImporter from "./importers/friend-requests-received-importer.js";
