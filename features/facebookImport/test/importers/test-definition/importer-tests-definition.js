@@ -17,7 +17,7 @@ export const defineEventImportersTestsForDatasets = (targetDatasets) => {
                     importerClass,
                     zipFile
                 );
-                expectMissingFileError(result);
+                expectMissingFileError(result, importerClass);
             }
         );
     });

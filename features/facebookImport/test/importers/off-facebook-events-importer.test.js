@@ -25,7 +25,7 @@ describe("Import off-facebook events from empty export", () => {
     it("triggers missing files error", async () => {
         const { result } = await runOffFacebookEventsImporter(zipFile);
 
-        expectMissingFileError(result);
+        expectMissingFileError(result, OffFacebookEventsImporter);
     });
 });
 

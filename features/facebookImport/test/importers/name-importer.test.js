@@ -36,7 +36,7 @@ beforeEach(() => {
 test("Name importer - missing file", async () => {
     const { result } = await runNameImporter(zipFile);
 
-    expectMissingFileError(result);
+    expectMissingFileError(result, NameImporter);
 });
 
 test("Name importer - wrong data key", async () => {

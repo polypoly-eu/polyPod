@@ -23,7 +23,7 @@ describe("Import post reactions from empty export", () => {
     it("triggers missing files error", async () => {
         const { result } = await runPostReactionsImporter(zipFile);
 
-        expectMissingFileError(result);
+        expectMissingFileError(result, PostReactionsImporter);
     });
 });
 

@@ -23,7 +23,7 @@ describe("Import language from", () => {
     it("export with missing file fails", async () => {
         const { result } = await runLanguageAndLocaleImporter(zipFile);
 
-        expectMissingFileError(result);
+        expectMissingFileError(result, LanguageAndLocaleImporter);
     });
 
     it("export with wrong data key fails", async () => {

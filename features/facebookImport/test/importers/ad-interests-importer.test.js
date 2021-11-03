@@ -22,7 +22,7 @@ describe("Import ad interests from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runAdInterestsImporter(zipFile);
-        expectMissingFileError(result);
+        expectMissingFileError(result, AdInterestsImporter);
     });
 });
 

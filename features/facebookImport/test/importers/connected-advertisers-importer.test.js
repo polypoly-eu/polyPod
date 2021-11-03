@@ -22,7 +22,7 @@ describe("Import connected advertisers from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runConnectedAdvertisersImporter(zipFile);
-        expectMissingFileError(result);
+        expectMissingFileError(result, ConnectedAdvertisersImporter);
     });
 });
 

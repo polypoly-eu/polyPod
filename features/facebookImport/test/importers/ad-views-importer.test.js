@@ -31,7 +31,7 @@ describe("Import ad views from empty export", () => {
     it("triggers missing files error", async () => {
         const { result } = await runRecentlyViewedAdsImporter(zipFile);
 
-        expectMissingFileError(result);
+        expectMissingFileError(result, RecentlyViewedAdsImporter);
     });
 });
 

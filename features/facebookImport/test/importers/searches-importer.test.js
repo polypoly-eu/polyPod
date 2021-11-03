@@ -22,7 +22,7 @@ describe("Import searches from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runSearchesImporter(zipFile);
-        expectMissingFileError(result);
+        expectMissingFileError(result, SearchesImporter);
     });
 });
 

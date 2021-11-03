@@ -14,8 +14,9 @@ export function expectError(result, errorClass) {
     expect(result.error.name).toBe(errorClass.name);
 }
 
-export function expectMissingFileError(result) {
+export function expectMissingFileError(result, importerClass) {
     expectError(result, MissingFileImportException);
+    expect(result.importerClass).toBe(importerClass);
 }
 
 export function expectInvalidContentError(result, importerClass) {
