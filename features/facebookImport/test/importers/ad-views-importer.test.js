@@ -60,7 +60,11 @@ describe("Import ad views from export with missing ads category", () => {
     });
 
     it("returns warning status", () =>
-        expectImportWarning(result, "Could not locate ads category"));
+        expectImportWarning(
+            result,
+            "Could not locate ads category",
+            RecentlyViewedAdsImporter
+        ));
 
     it("has zero related accounts", () =>
         expect(relatedAccounts.count).toBe(0));

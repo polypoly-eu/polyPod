@@ -32,7 +32,8 @@ export function expectAllResultsSuccess(results) {
     results.forEach((result) => expect(result.status).toBe(IMPORT_SUCCESS));
 }
 
-export function expectImportWarning(result, warningMessage) {
+export function expectImportWarning(result, warningMessage, importerClass) {
     expect(result.status).toBe(IMPORT_WARNING);
     expect(result.message).toBe(warningMessage);
+    expect(result.importerClass).toBe(importerClass);
 }

@@ -42,7 +42,11 @@ describe("Import language from", () => {
         const { result, facebookAccount } = await runLanguageAndLocaleImporter(
             zipFile
         );
-        expectImportWarning(result, "Could not extract preferredLanguage");
+        expectImportWarning(
+            result,
+            "Could not extract preferredLanguage",
+            LanguageAndLocaleImporter
+        );
 
         expect(facebookAccount.preferredLanguage).toBeUndefined();
     });
