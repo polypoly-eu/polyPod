@@ -4,8 +4,6 @@ import { Chart } from "../../chart";
 
 import "./mirroredBarChart.css";
 
-export const type = "mirrored-bar-chart";
-
 const margin = {
   top: 10,
   right: 40,
@@ -47,7 +45,13 @@ export class MirroredBarChart extends Chart {
     barPadding = 1,
     numberTicks,
   }) {
-    super({ selector, type, data, width, height, margin });
+    super({
+      selector,
+      data,
+      width,
+      height,
+      margin,
+    });
     this._upperBarColor = colors?.upperBar || "red";
     this._lowerBarColor = colors?.lowerBar || "blue";
     this._numberTicksY = numberTicks?.y || 4;
