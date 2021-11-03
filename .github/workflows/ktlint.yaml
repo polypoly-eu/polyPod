@@ -26,6 +26,7 @@ jobs:
         uses: JetBrains/qodana-action@1a43321c932939bf81e252495fc27d71b107fdca
         with:
           project-dir: ${{ github.workspace }}/android
+          gradle-settings-path: ${{ github.workspace }}/android/gradle.properties
           results-dir: ${{ github.workspace }}/qodana
           cache-dir: /home/runner/work/_temp/_github_home/qodana-cache
 
