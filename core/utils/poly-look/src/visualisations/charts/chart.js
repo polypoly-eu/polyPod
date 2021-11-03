@@ -23,7 +23,7 @@ const noMargin = {
  * @param {number = 0} [margin.left] - Left left
  */
 export class Chart {
-  constructor({ selector, type, data, width, height, margin }) {
+  constructor({ selector, data, width, height, margin }) {
     this._selector = selector;
     this._data = data;
     this._width = width || 400;
