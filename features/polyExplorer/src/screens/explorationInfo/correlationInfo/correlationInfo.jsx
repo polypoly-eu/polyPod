@@ -7,8 +7,8 @@ import Infographic from "../../../components/infographic/infographic.jsx";
 import { ExplorerContext } from "../../../context/explorer-context.jsx";
 
 const CorrelationInfo = () => {
-    const { selectedCompanyObject } = useContext(ExplorerContext);
-    const company = selectedCompanyObject;
+    const { selectedEntityObject } = useContext(ExplorerContext);
+    const entity = selectedEntityObject;
     return (
         <BaseInfoScreen
             className="correlation-info"
@@ -26,8 +26,9 @@ const CorrelationInfo = () => {
                 />
                 <p>
                     {
-                        highlights[company.ppid].dataTypeCorrelation
-                            .explanation[i18n.t("common:country.code")]
+                        highlights[entity.ppid].dataTypeCorrelation.explanation[
+                            i18n.t("common:country.code")
+                        ]
                     }
                 </p>
             </div>
