@@ -8,7 +8,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
-import android.webkit.*
+import android.webkit.ConsoleMessage
+import android.webkit.WebChromeClient
+import android.webkit.WebMessage
+import android.webkit.WebMessagePort
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
@@ -176,8 +183,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 consoleMessage: ConsoleMessage?
             ): Boolean {
                 if (consoleMessage == null) {
-                    logger.warn("Unknown message from " +
-                        Preferences.currentFeatureName)
+                    logger.warn(
+                        "Unknown message from " +
+                            Preferences.currentFeatureName
+                    )
                     return true
                 }
                 val message = "Message from " +
