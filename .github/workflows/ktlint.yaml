@@ -12,14 +12,18 @@ on:
     paths:
       - .github/workflows/ktlint.yaml
       - 'android/**/*.kt'
-
+  pull_request:
+    types: [assigned, opened, ready_for_review]
+    paths:
+      - .github/workflows/ktlint.yaml
+      - 'android/**/*.kt'
 jobs:
   ktlint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Qodana - Code Inspection
-        uses: JetBrains/qodana-action@v2.2-eap
+        uses: JetBrains/qodana-action@1a43321c932939bf81e252495fc27d71b107fdca
         with:
           project-dir: ${{ github.workspace }}/android
           results-dir: ${{ github.workspace }}/qodana
