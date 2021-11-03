@@ -7,15 +7,27 @@ import RootAnalysis from "./root-analysis";
 const reactionEmojiMap = {
     LIKE: "👍",
     LOVE: "\u2764",
+    HAHA: "😆",
     CARE: "🤗",
+    WOW: "😲",
+    SAD: "😢",
+    ANGER: "😡",
 };
 
-const exampleData = [
-    { title: "👍", value: 21, background: true },
-    { title: "\u2764", value: 20, background: true },
-    { title: "🤗", value: 1 },
-    { title: "😊", value: 12 },
-];
+const reactionBackgroundColorMap = {
+    LIKE: "#F7FAFC",
+    LOVE: "#F7FAFC",
+};
+
+export function mapEmojiToReaction(reactions) {
+    return reactions.map((reaction) => {
+        return {
+            title: reactionEmojiMap[reaction.type],
+            value: reaction.count,
+            background: reactionBackgroundColorMap[reaction.type],
+        };
+    });
+}
 
 export default class PostReactionsTypesAnalysis extends RootAnalysis {
     get title() {
@@ -26,7 +38,6 @@ export default class PostReactionsTypesAnalysis extends RootAnalysis {
         this._reactionsTypeCountPairs =
             groupPostReactionsByType(facebookAccount);
         this.active = this._reactionsTypeCountPairs.length > 0;
-        console.log(this._reactionsTypeCountPairs);
     }
 
     renderSummary() {
@@ -34,7 +45,7 @@ export default class PostReactionsTypesAnalysis extends RootAnalysis {
             <PolyChart
                 type="icon-cluster"
                 inputType="font"
-                data={exampleData}
+                data={mapEmojiToReaction(this._reactionsTypeCountPairs)}
             />
         );
     }
