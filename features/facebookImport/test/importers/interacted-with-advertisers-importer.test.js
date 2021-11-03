@@ -1,4 +1,6 @@
-import { INTERACTED_WITH_ADVERTISERS_FILE_PATH } from "../../src/model/importers/interacted-with-advertisers-importer";
+import InteractedWithAdvertisersImporter, {
+    INTERACTED_WITH_ADVERTISERS_FILE_PATH,
+} from "../../src/model/importers/interacted-with-advertisers-importer";
 import {
     DATASET_EXPECTED_VALUES,
     zipFileWithInteractedWithAdvertisers,
@@ -32,7 +34,7 @@ describe("Import interacted with advertisers from empty export with wrong data k
 
     it("triggers missing data key error", async () => {
         const { result } = await runInteractedWithAdvertisersImporter(zipFile);
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, InteractedWithAdvertisersImporter);
     });
 });
 

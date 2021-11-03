@@ -1,4 +1,6 @@
-import { SEARCHES_INTERESTS_FILE_PATH } from "../../src/model/importers/searches-importer";
+import SearchesImporter, {
+    SEARCHES_INTERESTS_FILE_PATH,
+} from "../../src/model/importers/searches-importer";
 import {
     DATASET_EXPECTED_VALUES,
     zipFileWithSearches,
@@ -32,7 +34,7 @@ describe("Import searches from empty export with wrong data key", () => {
 
     it("triggers missing data key error", async () => {
         const { result } = await runSearchesImporter(zipFile);
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, SearchesImporter);
     });
 });
 

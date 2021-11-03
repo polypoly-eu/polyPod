@@ -1,4 +1,6 @@
-import { LANGUAGE_AND_LOCALE_FILE_PATH } from "../../src/model/importers/language-and-locale-importer";
+import LanguageAndLocaleImporter, {
+    LANGUAGE_AND_LOCALE_FILE_PATH,
+} from "../../src/model/importers/language-and-locale-importer";
 import {
     createLanguageSettingsData,
     createLocaleData,
@@ -30,7 +32,7 @@ describe("Import language from", () => {
 
         const { result } = await runLanguageAndLocaleImporter(zipFile);
 
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, LanguageAndLocaleImporter);
     });
 
     it("export with no data has warning", async () => {

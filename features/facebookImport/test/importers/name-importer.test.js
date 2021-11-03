@@ -1,5 +1,6 @@
 "use strict";
 
+import NameImporter from "../../src/model/importers/name-importer";
 import { ZipFileMock } from "../mocks/zipfile-mock";
 import { runNameImporter } from "../utils/data-importing";
 import {
@@ -44,7 +45,7 @@ test("Name importer - wrong data key", async () => {
 
     const { result } = await runNameImporter(zipFile);
 
-    expectInvalidContentError(result);
+    expectInvalidContentError(result, NameImporter);
 });
 
 test("Name importer - correct data key without correct data", async () => {

@@ -18,8 +18,9 @@ export function expectMissingFileError(result) {
     expectError(result, MissingFileImportException);
 }
 
-export function expectInvalidContentError(result) {
+export function expectInvalidContentError(result, importerClass) {
     expectError(result, InvalidContentImportException);
+    expect(result.importerClass).toBe(importerClass);
 }
 
 export function expectImportSuccess(result) {

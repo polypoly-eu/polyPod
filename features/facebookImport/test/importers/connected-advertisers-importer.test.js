@@ -1,4 +1,6 @@
-import { CONNECTED_ADVERTISERS_INTERESTS_FILE_PATH } from "../../src/model/importers/connected-advertisers-importer";
+import ConnectedAdvertisersImporter, {
+    CONNECTED_ADVERTISERS_INTERESTS_FILE_PATH,
+} from "../../src/model/importers/connected-advertisers-importer";
 import {
     DATASET_EXPECTED_VALUES,
     zipFileWithConnectedAdvertisers,
@@ -34,7 +36,7 @@ describe("Import connected advertisers from empty export with wrong data key", (
 
     it("triggers missing data key error", async () => {
         const { result } = await runConnectedAdvertisersImporter(zipFile);
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, ConnectedAdvertisersImporter);
     });
 });
 

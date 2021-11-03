@@ -1,6 +1,8 @@
 "use strict";
 
-import { RECENTLY_VIEWED_FILE_PATH } from "../../src/model/importers/recently-viewed-ads-importer";
+import RecentlyViewedAdsImporter, {
+    RECENTLY_VIEWED_FILE_PATH,
+} from "../../src/model/importers/recently-viewed-ads-importer";
 import {
     creatAdViewsWithCompanyWithUnicodeCharactersData,
     createEnglishDatasetWithEmptyAdsCategory,
@@ -41,7 +43,7 @@ describe("Import ad views from export with wrong data key", () => {
 
     it("triggers missing data key error", async () => {
         const { result } = await runRecentlyViewedAdsImporter(zipFile);
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, RecentlyViewedAdsImporter);
     });
 });
 

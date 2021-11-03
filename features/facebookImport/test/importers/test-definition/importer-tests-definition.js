@@ -31,7 +31,7 @@ export const defineEventImportersTestsForDatasets = (targetDatasets) => {
                     importerClass,
                     zipFile
                 );
-                expectInvalidContentError(result);
+                expectInvalidContentError(result, importerClass);
             }
         );
     });
