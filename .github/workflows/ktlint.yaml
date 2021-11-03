@@ -1,12 +1,5 @@
 name: Lint kotlin
 
-# Disabled for now, as it is impractical for two reasons:
-#
-# 1. The rules are different from Android Studio's auto corrections
-# 2. There is no straightforward way to run ktlint locally
-#
-# Once these issues are resolved we should reenable the job.
-#
 on:
   push:
     paths:
@@ -25,8 +18,8 @@ jobs:
       - name: Qodana - Code Inspection
         uses: JetBrains/qodana-action@1a43321c932939bf81e252495fc27d71b107fdca
         with:
+          linter: qodana-android
           project-dir: ${{ github.workspace }}/android
-          gradle-settings-path: ${{ github.workspace }}/android/gradle.properties
           results-dir: ${{ github.workspace }}/qodana
           cache-dir: /home/runner/work/_temp/_github_home/qodana-cache
 
