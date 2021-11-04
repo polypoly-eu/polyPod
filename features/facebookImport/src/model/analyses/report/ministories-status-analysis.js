@@ -13,11 +13,13 @@ export default class MinistoriesStatusAnalysis {
         this._analysesData = analysesResults.map(
             ({ analysis, status, executionTime }) => {
                 return {
-                    analysis: status.analysisClass.name,
+                    analysisName: analysis.id,
                     activationStatus: analysis.active ? "ACTIVE" : "INACTIVE",
-                    executionStatus: status.name,
-                    message: status.message,
-                    executionTime,
+                    executionStatus: {
+                        name: status.name,
+                        message: status.message,
+                    },
+                    executionTime: executionTime.toFixed(2),
                 };
             }
         );
@@ -60,19 +62,18 @@ export default class MinistoriesStatusAnalysis {
                         {this._analysesData.map(
                             (
                                 {
-                                    executionStatus,
+                                    analysisName,
                                     activationStatus,
-                                    analysis,
-                                    message,
+                                    executionStatus,
                                     executionTime,
                                 },
                                 index
                             ) => (
                                 <tr key={index}>
-                                    <td>{analysis}</td>
-                                    <td>{executionStatus}</td>
+                                    <td>{analysisName}</td>
                                     <td>{activationStatus}</td>
-                                    <td>{message}</td>
+                                    <td>{executionStatus.name}</td>
+                                    <td>{executionStatus.message}</td>
                                     <td>{executionTime}</td>
                                 </tr>
                             )

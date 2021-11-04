@@ -17,7 +17,7 @@ export default class InactiveCardsSummary {
         this._inactiveAnalysesData = inactiveAnalysesResults.map(
             ({ analysis, status }) => {
                 return {
-                    analysis: status.analysisClass.name,
+                    analysis: analysis.id,
                     activationStatus: analysis.active ? "ACTIVE" : "INACTIVE",
                     executionStatus: status.name,
                     message: status.message,

@@ -1,14 +1,12 @@
-export function createSuccessStatus(analysisClass) {
+export function createSuccessStatus() {
     return {
-        analysisClass,
         name: "SUCCESS",
         isSuccess: true,
     };
 }
 
-export function createErrorStatus(analysisClass, error) {
+export function createErrorStatus(error) {
     return {
-        analysisClass,
         name: "ERROR",
         error,
         message: error.name,
