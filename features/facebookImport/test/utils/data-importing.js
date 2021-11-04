@@ -15,6 +15,7 @@ import ConnectedAdvertisersImporter from "../../src/model/importers/connected-ad
 import SearchesImporter from "../../src/model/importers/searches-importer.js";
 import InteractedWithAdvertisersImporter from "../../src/model/importers/interacted-with-advertisers-importer.js";
 import PostReactionsImporter from "../../src/model/importers/post-reactions-importer.js";
+import CommentsImporter from "../../src/model/importers/comments-importer.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -74,6 +75,10 @@ export async function runSearchesImporter(zipFile) {
 
 export async function runInteractedWithAdvertisersImporter(zipFile) {
     return runSingleImporter(InteractedWithAdvertisersImporter, zipFile);
+}
+
+export async function runCommentsImporter(zipFile) {
+    return runSingleImporter(CommentsImporter, zipFile);
 }
 
 export async function runPostReactionsImporter(zipFile) {
