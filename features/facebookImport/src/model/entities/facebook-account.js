@@ -248,10 +248,6 @@ class FacebookAccount {
         return this._posts;
     }
 
-    set posts(posts) {
-        this._posts = posts;
-    }
-
     get dataGroups() {
         return [
             {
