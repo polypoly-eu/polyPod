@@ -64,5 +64,3 @@ jobs:
                 working-directory: android
                 api-level: 29
                 script: ./gradlew connectedAndroidTest
-
-
