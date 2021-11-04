@@ -52,6 +52,9 @@
     },
     "transformIgnorePatterns": [
       "/node_modules/(?!(.*))"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/config/env-setup.js"
     ]
   }
 }
