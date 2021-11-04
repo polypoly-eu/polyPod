@@ -173,13 +173,13 @@ export async function runAnalysis(analysisClass, enrichedData) {
         const status = await subAnalysis.analyze(enrichedData);
         return {
             analysis: subAnalysis,
-            status: status || createSuccessStatus(analysisClass),
+            status: status || createSuccessStatus(),
             executionTime: telemetry.elapsedTime(),
         };
     } catch (error) {
         return {
             analysis: subAnalysis,
-            status: createErrorStatus(analysisClass, error),
+            status: createErrorStatus(error),
             executionTime: telemetry.elapsedTime(),
         };
     }
