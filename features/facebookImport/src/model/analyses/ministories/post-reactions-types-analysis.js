@@ -4,27 +4,30 @@ import { PolyChart } from "@polypoly-eu/poly-look";
 import { groupPostReactionsByType } from "../utils/post-reactions-utils";
 import RootAnalysis from "./root-analysis";
 
-const reactionEmojiMap = {
-    LIKE: "👍",
-    LOVE: "\u2764",
-    HAHA: "😆",
-    CARE: "🤗",
-    WOW: "😲",
-    SAD: "😢",
-    ANGER: "😡",
-};
+import likeIcon from "../../../static/images/reactions-ministory/like.svg";
+import loveIcon from "../../../static/images/reactions-ministory/love.svg";
+import hahaIcon from "../../../static/images/reactions-ministory/haha.svg";
+import careIcon from "../../../static/images/reactions-ministory/care.svg";
+import wowIcon from "../../../static/images/reactions-ministory/wow.svg";
+import sadIcon from "../../../static/images/reactions-ministory/sad.svg";
+import angerIcon from "../../../static/images/reactions-ministory/anger.svg";
 
-const reactionBackgroundColorMap = {
-    LIKE: "#F7FAFC",
-    LOVE: "#F7FAFC",
+const reactionEmoji = {
+    LIKE: likeIcon,
+    LOVE: loveIcon,
+    HAHA: hahaIcon,
+    CARE: careIcon,
+    WOW: wowIcon,
+    SAD: sadIcon,
+    ANGER: angerIcon,
 };
 
 export function mapEmojiToReaction(reactions) {
     return reactions.map((reaction) => {
         return {
-            title: reactionEmojiMap[reaction.type],
+            title: "icon",
             value: reaction.count,
-            background: reactionBackgroundColorMap[reaction.type],
+            icon: reactionEmoji[reaction.type],
         };
     });
 }

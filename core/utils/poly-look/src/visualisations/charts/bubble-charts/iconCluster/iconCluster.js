@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-import { attr } from "svelte/internal";
 
 import { BubbleCluster } from "../..";
 
@@ -16,7 +15,7 @@ const bubblePadding = 15;
  * @extends BubbleCluster
  * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
  * @param {Object[]} data - The data to be visualized as a bubble cluster
- * @param {string} data[].title - A unicode character or a svg icon path
+ * @param {string} data[].title - A svg icon path
  * @param {number} data[].value - The value of the bubble, which corresponds to it's font-size/ svg-size
  * @param {string = null} data[].background - Color of a circle that's drawn circle is drawn and the icon is put inside
  * @param {number = 400} width - The width of the svg
@@ -49,36 +48,19 @@ export class IconCluster extends BubbleCluster {
   }
 
   _addNewBubbleGroups(leaves) {
-    return leaves.enter().append("g").on("click", this._onBubbleClick);
+    return leaves
+      .enter()
+      .append("g")
+      .attr("transform", (d) => `translate(${d.x - d.r},${d.y - d.r})`)
+      .on("click", this._onBubbleClick);
   }
 
   _addBubbles(bubbleGroups) {
     bubbleGroups
-      .filter((d) => d.data.background)
-      .append("circle")
-      .attr("class", "bubble")
-      .attr("r", (d) => d.r)
-      .attr("transform", (d) => `translate(${d.x}, ${d.y})`)
-      .style("fill", (d) => d.data.background)
-      .style("vertical-align", "center");
-
-    bubbleGroups
-      .append("text")
-      .text((d) => d.data.title)
-      .attr("class", "bubble")
-      .attr("y", (d) => (d.data.background ? d.y + d.r * 0.5 : d.y + d.r))
-      .attr("x", (d) => (d.data.background ? d.x - d.r * 0.75 : d.x - d.r))
-      .attr("font-size", (d) => (d.data.background ? d.r * 1.5 : d.r * 2))
-      .attr("text-anchor", "center")
-      .style("opacity", this._opacity)
-      .style("filter", "saturate(0)");
-    /*
-      : bubbleGroups
-          .append("svg:image")
-          .attr("xlink:href", (d) => d.data.title)
-          .attr("class", "bubble")
-          .style("vertical-align", "center");
-  */
+      .html((d) => d.data.icon)
+      .select("svg")
+      .attr("height", (d) => d.r * 2)
+      .attr("width", (d) => d.r * 2);
   }
 
   render() {
