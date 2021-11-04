@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.OpenableColumns
 import coop.polypoly.polypod.Preferences
+import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyNav.ZipTools
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -31,25 +32,25 @@ open class PolyOut(
             context.filesDir.absolutePath + "/featureFiles"
 
         fun idToPath(id: String, context: Context): String {
-            if (Preferences.currentFeatureName == null) {
+            if (FeatureStorage.activeFeature == null) {
                 throw Exception("Cannot execute without a feature")
             }
-            val currentFeatureName = Preferences.currentFeatureName!!
+            val activeFeatureId = FeatureStorage.activeFeature!!.id
             val pureId = id
                 // Previous polyPod builds used polypod:// URLs for files
                 .removePrefix("polypod://")
                 .removePrefix(fsPrefix)
                 .removePrefix("$fsFilesRoot/")
-                .removePrefix("$currentFeatureName/")
+                .removePrefix("$activeFeatureId/")
 
-            return filesPath(context) + "/" + Preferences.currentFeatureName +
+            return filesPath(context) + "/" + activeFeatureId +
                 "/" + pureId
         }
     }
 
     private fun pathToId(path: File, context: Context): String {
         return fsPrefix + path.relativeTo(
-            File(filesPath(context) + "/" + Preferences.currentFeatureName)
+            File(filesPath(context) + "/" + FeatureStorage.activeFeature?.id)
         ).path
     }
 
@@ -150,9 +151,9 @@ open class PolyOut(
                     val fs = Preferences.getFileSystem(context).toMutableMap()
                     fs[fsPrefix + newId] = fileName
                     Preferences.setFileSystem(context, fs)
-                    val featureName = Preferences.currentFeatureName
+                    val featureId = FeatureStorage.activeFeature?.id
                         ?: throw Error("Cannot import for unknown feature")
-                    val targetPath = "$featureName/$newId"
+                    val targetPath = "$featureId/$newId"
                     ZipTools.unzipAndEncrypt(inputStream, context, targetPath)
                 }
             }
