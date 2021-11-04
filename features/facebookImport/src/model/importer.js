@@ -23,6 +23,7 @@ import {
 } from "./importers/utils/importer-status.js";
 import LanguageAndLocaleImporter from "./importers/language-and-locale-importer.js";
 import RecentlyViewedAdsImporter from "./importers/recently-viewed-ads-importer.js";
+import CommentsImporter from "./importers/comments-importer.js";
 import PostReactionsImporter from "./importers/post-reactions-importer.js";
 
 const dataImporters = [
@@ -43,6 +44,7 @@ const dataImporters = [
     NameImporter,
     LanguageAndLocaleImporter,
     RecentlyViewedAdsImporter,
+    CommentsImporter,
     PostReactionsImporter,
 ];
 
