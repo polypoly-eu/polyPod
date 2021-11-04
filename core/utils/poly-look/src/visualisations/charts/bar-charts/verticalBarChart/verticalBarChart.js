@@ -21,6 +21,7 @@ const gridXMargin = 12;
  *
  * @class
  * @extends Chart
+ * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
  * @param Object[] data - The data to be visualized as a bubble cluster
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
@@ -32,7 +33,6 @@ const gridXMargin = 12;
  */
 export class VerticalBarChart extends Chart {
   constructor({
-    type,
     selector,
     data,
     barColor = "blue",
@@ -41,7 +41,7 @@ export class VerticalBarChart extends Chart {
     barValueColor,
     numberTicksY,
   }) {
-    super({ type, selector, data, width, height, margin });
+    super({ selector, data, width, height, margin });
     this._barColor = barColor || "blue";
     this._xScale = d3.scaleBand().range([0, this.chartWidth]).padding(0.2);
     this._yScale = d3
