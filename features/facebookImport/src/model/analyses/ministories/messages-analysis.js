@@ -4,6 +4,7 @@ import RootAnalysis from "./root-analysis";
 import InfoButton from "../../../components/buttons/infoButton/infoButton.jsx";
 
 import BarChart from "../../../components/dataViz/barChart.jsx";
+import "./ministories.css";
 
 export default class MessagesAnalysis extends RootAnalysis {
     get label() {
@@ -15,18 +16,11 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     async analyze({ facebookAccount }) {
-        this._messagesThreadsData = [];
-        this._messagesCount = 0;
-        this.active = facebookAccount.messageThreadsCount > 0;
-        if (!this.active) {
-            return;
-        }
-
         this._messagesCount = facebookAccount.messagesCount;
         this._messagesThreadsData = [];
         const usernames = new Set();
+
         facebookAccount.forEachMessageThread((messageThread) => {
-            var wordCount = messageThread.totalWordCount;
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
 
@@ -55,16 +49,16 @@ export default class MessagesAnalysis extends RootAnalysis {
                 title: messageThread.title,
                 count: messageThread.messagesCount,
                 extraData: {
-                    wordCount,
                     firstChatDate,
                     lastChatDate,
                 },
             });
-
-            this._messagesThreadsData.sort((a, b) => b.count - a.count);
-
-            this._totalUsernamesCount = usernames.size;
         });
+
+        this._messagesThreadsData.sort((a, b) => b.count - a.count);
+        this._totalUsernamesCount = usernames.size;
+
+        this.active = this._messagesThreadsData.length > 0;
     }
 
     _calculateFontSize(text, maxWidth) {
@@ -89,13 +83,16 @@ export default class MessagesAnalysis extends RootAnalysis {
         );
 
         return (
-            <>
+            <div className="render-summary">
                 <h2
-                    className="messages-count"
-                    style={{ fontSize: fontSize }}
+                    style={{
+                        fontSize: fontSize,
+                        marginBottom: "35px",
+                        marginTop: "25px",
+                    }}
                     ref={refWidth}
                 >
-                    {this._messagesCount}
+                    {+this._messagesCount.toLocaleString().replace(",", ".")}
                 </h2>
                 <p>
                     {i18n.t("explore:messages.summary", {
@@ -104,7 +101,7 @@ export default class MessagesAnalysis extends RootAnalysis {
                         people: this._totalUsernamesCount,
                     })}
                 </p>
-            </>
+            </div>
         );
     }
 
@@ -116,19 +113,24 @@ export default class MessagesAnalysis extends RootAnalysis {
                         number_chats: this._totalUsernamesCount,
                     })}
                 </p>
+                <p> {i18n.t("messagesMiniStory:chart.title")}</p>
                 <BarChart
                     data={this._messagesThreadsData}
                     screenPadding={48}
                     footerContent={({ extraData }) => (
                         <>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMiniStory:first.chat")}
+                                <p>{i18n.t("messagesMiniStory:first.chat")}</p>
                                 {extraData.firstChatDate
                                     ? extraData.firstChatDate.toDateString()
                                     : "unknown"}
                             </div>
                             <div className="bar-extra-info">
-                                {i18n.t("messagesMiniStory:last.interaction")}
+                                <p>
+                                    {i18n.t(
+                                        "messagesMiniStory:last.interaction"
+                                    )}
+                                </p>
                                 {extraData.lastChatDate
                                     ? extraData.lastChatDate.toDateString()
                                     : "unknown"}

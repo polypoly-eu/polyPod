@@ -1,6 +1,7 @@
 {
   "name": "@polypoly-eu/build",
   "scripts": {
-    "lint": "eslint . --ext .js --no-ignore"
+    "lint": "eslint . --ext .js --no-ignore",
+    "test": "jest"
   }
 }
