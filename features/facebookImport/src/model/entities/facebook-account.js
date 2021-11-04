@@ -248,6 +248,10 @@ class FacebookAccount {
         return this._posts;
     }
 
+    addPosts(newPosts) {
+        this.posts.push(...newPosts);
+    }
+
     get dataGroups() {
         return [
             {

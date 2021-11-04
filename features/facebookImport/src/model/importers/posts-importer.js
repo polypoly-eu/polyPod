@@ -13,7 +13,7 @@ export default class PostsImporter extends MultipleFilesImporter {
             const postsWithTimestamp = rawPosts.map((postData) => {
                 return { timestamp: postData.timestamp };
             });
-            facebookAccount.posts.push(...postsWithTimestamp);
+            facebookAccount.addPosts(postsWithTimestamp);
         });
     }
 
