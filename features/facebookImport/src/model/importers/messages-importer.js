@@ -1,5 +1,8 @@
+import {
+    createErrorStatus,
+    createSuccessStatus,
+} from "../analyses/utils/analysis-status.js";
 import { MissingMessagesFilesException } from "./utils/failed-import-exception.js";
-import { createErrorResult, IMPORT_SUCCESS } from "./utils/importer-status.js";
 import {
     readFullPathJSONFile,
     relevantZipEntries,
@@ -23,16 +26,16 @@ export default class MessagesImporter {
     async _readJSONFileWithStatus(messageFile, zipFile) {
         return readFullPathJSONFile(messageFile, zipFile)
             .then((data) => {
-                return { status: IMPORT_SUCCESS, messageFile, data };
+                return { status: createSuccessStatus(), messageFile, data };
             })
             .catch((error) => {
-                return createErrorResult(MessagesImporter, error);
+                return createErrorStatus(error);
             });
     }
 
     _importMessageThread(facebookAccount, messageThreadResults) {
         const successfullResults = messageThreadResults.filter(
-            (result) => result.status === IMPORT_SUCCESS
+            (result) => result.status.isSuccess
         );
 
         for (const each of successfullResults) {
@@ -56,7 +59,7 @@ export default class MessagesImporter {
         );
         this._importMessageThread(facebookAccount, messageThreadResults);
         return messageThreadResults.filter(
-            (result) => !(result.status === IMPORT_SUCCESS)
+            (result) => !result.status.isSuccess
         );
     }
 

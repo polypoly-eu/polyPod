@@ -16,15 +16,14 @@ import MessagesImporter from "./importers/messages-importer.js";
 import AdminRecordsImporter from "./importers/admin-records-importer.js";
 import AccountSessionActivitiesImporter from "./importers/account-session-activities-importer.js";
 import NameImporter from "./importers/name-importer.js";
-
-import {
-    IMPORT_SUCCESS,
-    createErrorResult,
-} from "./importers/utils/importer-status.js";
 import LanguageAndLocaleImporter from "./importers/language-and-locale-importer.js";
 import RecentlyViewedAdsImporter from "./importers/recently-viewed-ads-importer.js";
 import PostReactionsImporter from "./importers/post-reactions-importer.js";
 import { Telemetry } from "./analyses/utils/performance-telemetry.js";
+import {
+    createErrorStatus,
+    createSuccessStatus,
+} from "./analyses/utils/analysis-status.js";
 
 const dataImporters = [
     AdInterestsImporter,
@@ -64,16 +63,13 @@ export async function runImporter(
         });
         return {
             importer,
-            status: status || {
-                status: IMPORT_SUCCESS,
-                importerClass,
-            },
+            status: status || createSuccessStatus(),
             executionTime: telemetry.elapsedTime(),
         };
     } catch (error) {
         return {
             importer,
-            status: createErrorResult(importerClass, error),
+            status: createErrorStatus(error),
             executionTime: telemetry.elapsedTime(),
         };
     }

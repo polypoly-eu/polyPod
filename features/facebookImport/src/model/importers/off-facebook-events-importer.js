@@ -1,5 +1,5 @@
-import { IMPORT_WARNING } from "./utils/importer-status.js";
 import DirectKeyDataImporter from "./direct-key-data-importer.js";
+import { createWarningStatus } from "../analyses/utils/analysis-status.js";
 
 export const OFF_FACEBOOK_EVENTS_FILE_PATH =
     "apps_and_websites_off_of_facebook/your_off-facebook_activity.json";
@@ -35,14 +35,9 @@ export default class OffFacebookEventsImporter extends DirectKeyDataImporter {
         }
 
         if (uknonwnKeys.size > 0) {
-            return {
-                status: IMPORT_WARNING,
-                importerClass: OffFacebookEventsImporter,
-                message: `Unexpected keys: ${Array.from(uknonwnKeys).join(
-                    " "
-                )}`,
-                data: { uknonwnKeys },
-            };
+            return createWarningStatus(
+                `Unexpected keys: ${Array.from(uknonwnKeys).join(" ")}`
+            );
         }
     }
 }
