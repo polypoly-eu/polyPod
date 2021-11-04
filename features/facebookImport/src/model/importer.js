@@ -24,6 +24,7 @@ import {
 import LanguageAndLocaleImporter from "./importers/language-and-locale-importer.js";
 import RecentlyViewedAdsImporter from "./importers/recently-viewed-ads-importer.js";
 import PostReactionsImporter from "./importers/post-reactions-importer.js";
+import { Telemetry } from "./analyses/utils/performance-telemetry.js";
 
 const dataImporters = [
     AdInterestsImporter,
@@ -53,18 +54,29 @@ export async function runImporter(
     pod
 ) {
     const importer = new importerClass();
-    return importer
-        .import({ zipFile, facebookAccount, pod })
-        .then(
-            (status) =>
-                status || {
-                    status: IMPORT_SUCCESS,
-                    importerClass,
-                }
-        )
-        .catch((error) => {
-            return createErrorResult(importerClass, error);
+
+    const telemetry = new Telemetry();
+    try {
+        const status = await importer.import({
+            zipFile,
+            facebookAccount,
+            pod,
         });
+        return {
+            importer,
+            status: status || {
+                status: IMPORT_SUCCESS,
+                importerClass,
+            },
+            executionTime: telemetry.elapsedTime(),
+        };
+    } catch (error) {
+        return {
+            importer,
+            status: createErrorResult(importerClass, error),
+            executionTime: telemetry.elapsedTime(),
+        };
+    }
 }
 
 export async function runImporters(
@@ -73,21 +85,11 @@ export async function runImporters(
     facebookAccount,
     pod
 ) {
-    const importingResultsPerImporter = await Promise.all(
+    return await Promise.all(
         importerClasses.map(async (importerClass) => {
             return runImporter(importerClass, zipFile, facebookAccount, pod);
         })
     );
-
-    const importingResults = importingResultsPerImporter.reduce(
-        (results, importResult) =>
-            results.concat(
-                Array.isArray(importResult) ? importResult : [importResult]
-            ),
-        []
-    );
-
-    return importingResults;
 }
 
 export async function importZip(zipFile, pod) {
