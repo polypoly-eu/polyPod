@@ -4,6 +4,7 @@ import DataStory from "../../components/dataStory/dataStory.jsx";
 import Introduction from "../../components/clusterStories/messengers/introduction.jsx";
 import Summary from "../../components/clusterStories/messengers/summary.jsx";
 import Overview from "../../components/clusterStories/messengers/overview.jsx";
+import Details from "../../components/clusterStories/messengers/details.jsx";
 import { SUMMARY_ANIMATIONS } from "../../constants";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
@@ -168,6 +169,7 @@ const MessengerStory = () => {
                     products={products}
                     heightEvent={updateOverviewHeight}
                 ></Overview>
+                <Details data={products}></Details>
             </div>
         </DataStory>
     );
