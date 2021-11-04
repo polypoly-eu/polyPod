@@ -1,3 +1,4 @@
+import { MissingFilesException } from "./utils/failed-import-exception";
 import { createErrorResult, IMPORT_SUCCESS } from "./utils/importer-status";
 import {
     readFullPathJSONFile,
@@ -54,7 +55,7 @@ export default class MultipleFilesImporter {
     }
 
     _createMissingFilesError() {
-        return new Error("Missing import files");
+        return new MissingFilesException();
     }
 
     async import({ zipFile, facebookAccount }) {

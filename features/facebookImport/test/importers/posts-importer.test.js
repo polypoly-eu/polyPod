@@ -1,5 +1,5 @@
 import PostsImporter from "../../src/model/importers/posts-importer";
-import { MissingPostFilesException } from "../../src/model/importers/utils/failed-import-exception";
+import { MissingFilesException } from "../../src/model/importers/utils/failed-import-exception";
 import {
     DATASET_ONE_EXPECTED_VALUES,
     DATASET_TWO_EXPECTED_VALUES,
@@ -23,7 +23,7 @@ describe("Import posts from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runPostsImporter(zipFile);
-        expectError(result, MissingPostFilesException);
+        expectError(result, MissingFilesException);
     });
 });
 

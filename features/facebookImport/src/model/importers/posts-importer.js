@@ -1,5 +1,4 @@
 import MultipleFilesImporter from "./multiple-files-importer";
-import { MissingPostFilesException } from "./utils/failed-import-exception";
 import { removeEntryPrefix } from "./utils/importer-util";
 
 export default class PostsImporter extends MultipleFilesImporter {
@@ -15,9 +14,5 @@ export default class PostsImporter extends MultipleFilesImporter {
             });
             facebookAccount.addPosts(postsWithTimestamp);
         });
-    }
-
-    _createMissingFilesError() {
-        return new MissingPostFilesException();
     }
 }

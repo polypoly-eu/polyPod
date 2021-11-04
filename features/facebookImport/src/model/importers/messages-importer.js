@@ -1,5 +1,4 @@
 import MultipleFilesImporter from "./multiple-files-importer.js";
-import { MissingMessagesFilesException } from "./utils/failed-import-exception.js";
 import { removeEntryPrefix } from "./utils/importer-util.js";
 
 export default class MessagesImporter extends MultipleFilesImporter {
@@ -14,9 +13,5 @@ export default class MessagesImporter extends MultipleFilesImporter {
         facebookAccount.messageThreadsGroup.addMessageThreadsFromData(
             dataResults
         );
-    }
-
-    _createMissingFilesError() {
-        return new MissingMessagesFilesException();
     }
 }
