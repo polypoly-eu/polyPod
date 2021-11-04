@@ -1,5 +1,7 @@
 /**
  * An utility class for measuring time duration.
+ *
+ * @class
  */
 export class Telemetry {
     constructor() {
