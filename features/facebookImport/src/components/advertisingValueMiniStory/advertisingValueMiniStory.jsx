@@ -22,9 +22,11 @@ const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
         [],
         randomAdInterests.map((int) => int.split(" "))
     );
-    let longestInterestWord = splitInterests.sort(function (a, b) {
-        return b.length - a.length;
-    })[0];
+    let interestsLength = splitInterests.map((word) => word.length);
+    let longestInterestWordIndex = interestsLength.indexOf(
+        Math.max(...interestsLength)
+    );
+    let longestInterestWord = splitInterests[longestInterestWordIndex];
 
     return (
         <div className="advertising-value-mini-story">
