@@ -17,49 +17,53 @@ class UpdateNotificationTest {
 
     @Test
     fun `notification with id = 0 considered seen`() {
+        UpdateNotification.mockData.id = 0
         val notification = UpdateNotification(context)
-        notification.id = 0
-        assertThat(notification.inAppNotificationSeen).isTrue()
-        assertThat(notification.pushNotificationSeen).isTrue()
+        assertThat(notification.shouldShowInAppNotification()).isFalse()
+        assertThat(notification.shouldShowPushNotification()).isFalse()
     }
 
     @Test
     fun `first ever notification considered not seen`() {
+        UpdateNotification.mockData.id = 1
         val notification = UpdateNotification(context)
-        notification.id = 1
-        assertThat(notification.inAppNotificationSeen).isFalse()
-        assertThat(notification.pushNotificationSeen).isFalse()
+        assertThat(notification.shouldShowInAppNotification()).isTrue()
+        assertThat(notification.shouldShowPushNotification()).isTrue()
     }
 
     @Test
     fun `previously shown notification considered seen`() {
+        UpdateNotification.mockData.id = 1
         val notification = UpdateNotification(context)
-        notification.id = 1
-        notification.markInAppNotificationSeen()
-        notification.markPushNotificationSeen()
-        assertThat(notification.inAppNotificationSeen).isTrue()
-        assertThat(notification.pushNotificationSeen).isTrue()
+        notification.onInAppNotificationSeen()
+        notification.onPushNotificationSeen()
+        assertThat(notification.shouldShowInAppNotification()).isFalse()
+        assertThat(notification.shouldShowPushNotification()).isFalse()
     }
 
     @Test
     fun `additional notification with different id considered not seen`() {
-        val notification = UpdateNotification(context)
-        notification.id = 1
-        notification.markInAppNotificationSeen()
-        notification.markPushNotificationSeen()
-        notification.id = 2
-        assertThat(notification.inAppNotificationSeen).isFalse()
-        assertThat(notification.pushNotificationSeen).isFalse()
+        UpdateNotification.mockData.id = 1
+        var notification = UpdateNotification(context)
+        notification.onInAppNotificationSeen()
+        notification.onPushNotificationSeen()
+
+        UpdateNotification.mockData.id = 2
+        notification = UpdateNotification(context)
+        assertThat(notification.shouldShowInAppNotification()).isTrue()
+        assertThat(notification.shouldShowPushNotification()).isTrue()
     }
 
     @Test
     fun `additional notification with lower id considered not seen`() {
-        val notification = UpdateNotification(context)
-        notification.id = 2
-        notification.markInAppNotificationSeen()
-        notification.markPushNotificationSeen()
-        notification.id = 1
-        assertThat(notification.inAppNotificationSeen).isFalse()
-        assertThat(notification.pushNotificationSeen).isFalse()
+        UpdateNotification.mockData.id = 2
+        var notification = UpdateNotification(context)
+        notification.onInAppNotificationSeen()
+        notification.onPushNotificationSeen()
+
+        UpdateNotification.mockData.id = 1
+        notification = UpdateNotification(context)
+        assertThat(notification.shouldShowInAppNotification()).isTrue()
+        assertThat(notification.shouldShowPushNotification()).isTrue()
     }
 }

@@ -26,12 +26,9 @@ class PushNotificationWorker(
 
     override fun doWork(): Result {
         val notification = UpdateNotification(context)
-        if (
-            notification.inAppNotificationSeen ||
-            notification.pushNotificationSeen
-        )
+        if (!notification.shouldShowPushNotification())
             return Result.success()
-        notification.markPushNotificationSeen()
+        notification.onPushNotificationSeen()
         showPushNotification(notification)
         return Result.success()
     }
