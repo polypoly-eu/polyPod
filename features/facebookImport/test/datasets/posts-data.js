@@ -22,22 +22,15 @@ function createPostEntry(timestamp, postText = "Lorem Ipsum") {
 }
 
 export function createPostsOneDataset() {
-    return [
-        createPostEntry(1624458721),
-        createPostEntry(1624481575),
-        createPostEntry(1624595792),
-        createPostEntry(1626976792),
-        createPostEntry(1627001733),
-    ];
+    return [1624458721, 1624481575, 1624595792, 1626976792, 1627001733].map(
+        (timestamp) => createPostEntry(timestamp)
+    );
 }
 
 export function createPostsTwoDataset() {
-    return [
-        createPostEntry(1621560294),
-        createPostEntry(1621585743),
-        createPostEntry(1621604231),
-        createPostEntry(1621632401),
-    ];
+    return [1621560294, 1621585743, 1621604231, 1621632401].map((timestamp) =>
+        createPostEntry(timestamp)
+    );
 }
 
 export function zipFileWithTwoPostsFiles() {
