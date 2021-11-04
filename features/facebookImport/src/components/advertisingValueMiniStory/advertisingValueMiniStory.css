@@ -11,11 +11,11 @@
     font-size: 20px;
 }
 .advertising-value-mini-story ul li p {
-    font-family: "Jost Medium" !important;
-    font-weight: 800 !important;
+    font-family: "Jost Medium";
+    font-weight: 800;
     font-size: 34px;
     line-height: 100%;
     /* padding-left: 5px; */
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
