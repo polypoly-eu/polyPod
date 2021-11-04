@@ -7,8 +7,8 @@ import org.json.JSONObject
 class Preferences {
     companion object {
         private const val firstRunKey = "firstRun"
-        private const val seenInAppNotificationIdKey = "seenInAppNotificationId"
-        private const val seenPushNotificationIdKey = "seenPushNotificationId"
+        private const val lastNotificationIdKey = "lastNotificationId"
+        private const val lastNotificationStateKey = "lastNotificationState"
         private const val biometricCheckKey = "biometricCheck"
         private const val fsKey = ""
 
@@ -24,27 +24,17 @@ class Preferences {
             edit.commit()
         }
 
-        fun getSeenInAppNotificationId(context: Context): Int =
-            getPrefs(context).getInt(seenInAppNotificationIdKey, 0)
-
-        fun setSeenInAppNotificationId(
-            context: Context,
-            seenNotificationId: Int
-        ) {
-            val edit = getPrefs(context).edit()
-            edit.putInt(seenInAppNotificationIdKey, seenNotificationId)
-            edit.commit()
+        fun getLastNotification(context: Context) = getPrefs(context).let {
+            Pair(
+                it.getInt(lastNotificationIdKey, 0),
+                it.getString(lastNotificationStateKey, null)
+            )
         }
 
-        fun getSeenPushNotificationId(context: Context): Int =
-            getPrefs(context).getInt(seenPushNotificationIdKey, 0)
-
-        fun setSeenPushNotificationId(
-            context: Context,
-            seenPushNotificationId: Int
-        ) {
+        fun setLastNotification(context: Context, id: Int, state: String) {
             val edit = getPrefs(context).edit()
-            edit.putInt(seenPushNotificationIdKey, seenPushNotificationId)
+            edit.putInt(lastNotificationIdKey, id)
+            edit.putString(lastNotificationStateKey, state)
             edit.commit()
         }
 

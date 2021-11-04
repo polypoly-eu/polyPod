@@ -14,7 +14,12 @@ class UpdateNotification(private val context: Context) {
     enum class State {
         NOT_SEEN,
         PUSH_SEEN,
-        ALL_SEEN
+        ALL_SEEN;
+
+        companion object {
+            fun parse(s: String?) =
+                s.let { s -> values().firstOrNull { it.name == s } }
+        }
     }
 
     val id = mockData.id
@@ -24,18 +29,19 @@ class UpdateNotification(private val context: Context) {
     val pushDelay =
         context.resources.getInteger(R.integer.update_notification_push_delay)
 
-    private var state: State = when (id) {
-        0 -> State.ALL_SEEN
-        Preferences.getSeenInAppNotificationId(context) -> State.ALL_SEEN
-        Preferences.getSeenPushNotificationId(context) -> State.PUSH_SEEN
-        else -> State.NOT_SEEN
+    private fun loadLastState(): State {
+        val (lastId, lastState) = Preferences.getLastNotification(context)
+        return when (id) {
+            0 -> State.ALL_SEEN
+            lastId -> State.parse(lastState) ?: State.ALL_SEEN
+            else -> State.NOT_SEEN
+        }
     }
+
+    private var state: State = loadLastState()
         set(value) {
             field = value
-            if (value != State.NOT_SEEN)
-                Preferences.setSeenPushNotificationId(context, id)
-            if (value == State.ALL_SEEN)
-                Preferences.setSeenInAppNotificationId(context, id)
+            Preferences.setLastNotification(context, id, state.name)
         }
 
     fun onStartup() {
