@@ -15,69 +15,69 @@ class UpdateNotificationTest {
     @Test
     fun `notification with id = 0 considered seen`() {
         val notification = loadNotification(0)
-        assertThat(notification.shouldShowInAppNotification()).isFalse()
-        assertThat(notification.shouldShowPushNotification()).isFalse()
+        assertThat(notification.showInApp).isFalse()
+        assertThat(notification.showPush).isFalse()
     }
 
     @Test
     fun `first ever notification considered not seen`() {
         val notification = loadNotification(1)
-        assertThat(notification.shouldShowInAppNotification()).isTrue()
-        assertThat(notification.shouldShowPushNotification()).isTrue()
+        assertThat(notification.showInApp).isTrue()
+        assertThat(notification.showPush).isTrue()
     }
 
     @Test
     fun `previously shown notification considered seen`() {
         val notification = loadNotification(1)
-        notification.onInAppNotificationSeen()
+        notification.onInAppSeen()
 
         val secondNotification = loadNotification(1)
-        assertThat(secondNotification.shouldShowInAppNotification()).isFalse()
-        assertThat(secondNotification.shouldShowPushNotification()).isFalse()
+        assertThat(secondNotification.showInApp).isFalse()
+        assertThat(secondNotification.showPush).isFalse()
     }
 
     @Test
     fun `additional notification with different id considered not seen`() {
         val notification = loadNotification(1)
-        notification.onInAppNotificationSeen()
+        notification.onInAppSeen()
 
         val secondNotification = loadNotification(2)
-        assertThat(secondNotification.shouldShowInAppNotification()).isTrue()
-        assertThat(secondNotification.shouldShowPushNotification()).isTrue()
+        assertThat(secondNotification.showInApp).isTrue()
+        assertThat(secondNotification.showPush).isTrue()
     }
 
     @Test
     fun `additional notification with lower id considered not seen`() {
         val notification = loadNotification(2)
-        notification.onInAppNotificationSeen()
-        notification.onPushNotificationSeen()
+        notification.onInAppSeen()
+        notification.onPushSeen()
 
         val secondNotification = loadNotification(1)
-        assertThat(secondNotification.shouldShowInAppNotification()).isTrue()
-        assertThat(secondNotification.shouldShowPushNotification()).isTrue()
+        assertThat(secondNotification.showInApp).isTrue()
+        assertThat(secondNotification.showPush).isTrue()
     }
 
     @Test
     fun `push notification considered seen after startup`() {
         val notification = loadNotification(1)
         notification.onStartup()
-        assertThat(notification.shouldShowPushNotification()).isFalse()
+        assertThat(notification.showPush).isFalse()
     }
 
     @Test
     fun `in app notification considered not seen after push was seen`() {
         val notification = loadNotification(1)
-        notification.onPushNotificationSeen()
-        assertThat(notification.shouldShowPushNotification()).isFalse()
-        assertThat(notification.shouldShowInAppNotification()).isTrue()
+        notification.onPushSeen()
+        assertThat(notification.showPush).isFalse()
+        assertThat(notification.showInApp).isTrue()
     }
 
     @Test
     fun `every notification considered seen on first run`() {
         val notification = loadNotification(1)
         notification.onFirstRun()
-        assertThat(notification.shouldShowPushNotification()).isFalse()
-        assertThat(notification.shouldShowInAppNotification()).isFalse()
+        assertThat(notification.showPush).isFalse()
+        assertThat(notification.showInApp).isFalse()
     }
 
     private fun loadNotification(id: Int): UpdateNotification {

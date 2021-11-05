@@ -50,14 +50,14 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        if (notification.shouldShowInAppNotification()) {
+        if (notification.showInApp) {
             AlertDialog.Builder(this)
                 .setTitle(notification.title)
                 .setMessage(notification.text)
                 .setPositiveButton(
                     R.string.button_update_notification_close
                 ) { _, _ ->
-                    notification.onInAppNotificationSeen()
+                    notification.onInAppSeen()
                 }
                 .show()
         }

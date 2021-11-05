@@ -18,16 +18,31 @@ class UpdateNotification(private val context: Context) {
 
         companion object {
             fun parse(s: String?) =
-                s.let { s -> values().firstOrNull { it.name == s } }
+                s.let { name -> values().firstOrNull { it.name == name } }
         }
     }
 
     val id = mockData.id
         ?: context.resources.getInteger(R.integer.update_notification_id)
+
     val title = context.getString(R.string.update_notification_title)
+
     val text = context.getString(R.string.update_notification_text)
+
     val pushDelay =
         context.resources.getInteger(R.integer.update_notification_push_delay)
+
+    val showPush: Boolean
+        get() = state == State.NOT_SEEN
+
+    val showInApp: Boolean
+        get() = state != State.ALL_SEEN
+
+    private var state: State = loadLastState()
+        set(value) {
+            field = value
+            Preferences.setLastNotification(context, id, state.name)
+        }
 
     private fun loadLastState(): State {
         val (lastId, lastState) = Preferences.getLastNotification(context)
@@ -38,31 +53,18 @@ class UpdateNotification(private val context: Context) {
         }
     }
 
-    private var state: State = loadLastState()
-        set(value) {
-            field = value
-            Preferences.setLastNotification(context, id, state.name)
-        }
-
-    fun onStartup() {
-        if (state == State.NOT_SEEN)
-            state = State.PUSH_SEEN
-    }
-
     fun onFirstRun() {
         state = State.ALL_SEEN
     }
 
-    fun onPushNotificationSeen() {
+    fun onPushSeen() {
         if (state == State.NOT_SEEN)
             state = State.PUSH_SEEN
     }
 
-    fun onInAppNotificationSeen() {
+    fun onStartup() = onPushSeen()
+
+    fun onInAppSeen() {
         state = State.ALL_SEEN
     }
-
-    fun shouldShowPushNotification() = state == State.NOT_SEEN
-
-    fun shouldShowInAppNotification() = state != State.ALL_SEEN
 }
