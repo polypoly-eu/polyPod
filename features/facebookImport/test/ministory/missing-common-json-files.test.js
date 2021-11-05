@@ -14,10 +14,11 @@ describe("Missing common JSON files analysis for empty zip", () => {
 
     beforeAll(async () => {
         let zipFile = new ZipFileMock();
-        ({ analysis, status } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             MissingCommonJSONFilesAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {
@@ -38,10 +39,11 @@ describe("Missing common JSON files analysis for zip with no missing common file
         commonStructure
             .filter((each) => each.endsWith(".json"))
             .forEach((each) => zipFile.addJsonEntry(each.substring(1), {}));
-        ({ analysis, status } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             MissingCommonJSONFilesAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {

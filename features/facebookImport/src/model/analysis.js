@@ -165,23 +165,43 @@ class UnrecognizedData {
     }
 }
 
+class AnalysisExecutionResult {
+    constructor(analysis, status, executionTime) {
+        this._analysis = analysis;
+        this._status = status || createSuccessStatus();
+        this._executionTime = executionTime;
+    }
+
+    get analysis() {
+        return this._analysis;
+    }
+
+    get status() {
+        return this._status;
+    }
+
+    get executionTime() {
+        return this._executionTime;
+    }
+}
+
 export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
 
     const telemetry = new Telemetry();
     try {
         const status = await subAnalysis.analyze(enrichedData);
-        return {
-            analysis: subAnalysis,
-            status: status || createSuccessStatus(),
-            executionTime: telemetry.elapsedTime(),
-        };
+        return new AnalysisExecutionResult(
+            subAnalysis,
+            status,
+            telemetry.elapsedTime()
+        );
     } catch (error) {
-        return {
-            analysis: subAnalysis,
-            status: createErrorStatus(error),
-            executionTime: telemetry.elapsedTime(),
-        };
+        return new AnalysisExecutionResult(
+            subAnalysis,
+            createErrorStatus(error),
+            telemetry.elapsedTime()
+        );
     }
 }
 

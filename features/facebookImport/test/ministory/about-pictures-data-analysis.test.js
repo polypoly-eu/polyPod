@@ -18,10 +18,11 @@ describe("Pictures ministory on export with no JPEG pictures in correct location
             "messages/inbox/user_2j57v4wtoa/photos/14567839_1208576379157271_232556476_n_21487783899157271.jpg",
             ""
         );
-        ({ analysis, status } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             AboutPicturesDataAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {
@@ -44,10 +45,11 @@ describe("Pictures ministory on export with JPEG pictures in correct location", 
             ""
         );
 
-        ({ analysis, status } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             AboutPicturesDataAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {
