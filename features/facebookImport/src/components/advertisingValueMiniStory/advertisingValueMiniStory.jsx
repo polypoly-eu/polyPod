@@ -27,7 +27,11 @@ const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
         Math.max(...interestsLength)
     );
     let longestInterestWord = splitInterests[longestInterestWordIndex];
-
+    const refWidth = useRef(0);
+    const fontSize = calculateFontSize(
+        longestInterestWord,
+        refWidth.current.clientWidth
+    );
     return (
         <div className="advertising-value-mini-story">
             <p
@@ -39,12 +43,6 @@ const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
             />
             <ul>
                 {randomAdInterests.map((interest, index) => {
-                    const refWidth = useRef(0);
-                    const fontSize = calculateFontSize(
-                        longestInterestWord,
-                        refWidth.current.clientWidth
-                    );
-
                     return (
                         <li key={index}>
                             <p
