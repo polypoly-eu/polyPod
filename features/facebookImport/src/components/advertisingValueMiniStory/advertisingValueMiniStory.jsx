@@ -20,7 +20,7 @@ const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
     // following takes the three interests, splits them into single words and picks the longest word
     let splitInterests = [].concat.apply(
         [],
-        randomAdInterests.map((int) => int.split(" "))
+        randomAdInterests.map((interest) => interest.split(" "))
     );
     let interestsLength = splitInterests.map((word) => word.length);
     let longestInterestWordIndex = interestsLength.indexOf(
