@@ -5,7 +5,7 @@ export async function runAnalysisForExport(analysisClass, zipFile) {
     const facebookAccount = await importZip(zipFile);
     const enrichedData = { ...zipFile.enrichedData(), facebookAccount };
     const analysisResult = await runAnalysis(analysisClass, enrichedData);
-    return { ...analysisResult, facebookAccount };
+    return { analysisResult, facebookAccount };
 }
 
 export async function runAnalysisForAccount(analysisClass, facebookAccount) {

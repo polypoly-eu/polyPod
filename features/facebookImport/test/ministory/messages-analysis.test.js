@@ -17,10 +17,11 @@ describe("Messages analysis for empty export", () => {
 
     beforeAll(async () => {
         let zipFile = new ZipFileMock();
-        ({ analysis, status } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             MessagesAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {
@@ -38,10 +39,11 @@ describe("Messages analysis for export with messages", () => {
 
     beforeAll(async () => {
         let zipFile = zipFileWithMessageThreads();
-        ({ analysis, status } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             MessagesAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {

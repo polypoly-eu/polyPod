@@ -88,10 +88,11 @@ describe("Off-Facebook events analysis from export data", () => {
 
     beforeAll(async () => {
         const zipFile = zipFileWithOnOffFacebookCompanyMatches();
-        ({ analysis, status } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             OnOffFacebookEventsAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {
