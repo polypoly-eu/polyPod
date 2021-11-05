@@ -1,4 +1,6 @@
-import { LANGUAGE_AND_LOCALE_FILE_PATH } from "../../src/model/importers/language-and-locale-importer";
+import LanguageAndLocaleImporter, {
+    LANGUAGE_AND_LOCALE_FILE_PATH,
+} from "../../src/model/importers/language-and-locale-importer";
 import {
     createLanguageSettingsData,
     createLocaleData,
@@ -21,7 +23,7 @@ describe("Import language from", () => {
     it("export with missing file fails", async () => {
         const { result } = await runLanguageAndLocaleImporter(zipFile);
 
-        expectMissingFileError(result);
+        expectMissingFileError(result, LanguageAndLocaleImporter);
     });
 
     it("export with wrong data key fails", async () => {
@@ -30,7 +32,7 @@ describe("Import language from", () => {
 
         const { result } = await runLanguageAndLocaleImporter(zipFile);
 
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, LanguageAndLocaleImporter);
     });
 
     it("export with no data has warning", async () => {
@@ -40,7 +42,11 @@ describe("Import language from", () => {
         const { result, facebookAccount } = await runLanguageAndLocaleImporter(
             zipFile
         );
-        expectImportWarning(result, "Could not extract preferredLanguage");
+        expectImportWarning(
+            result,
+            "Could not extract preferredLanguage",
+            LanguageAndLocaleImporter
+        );
 
         expect(facebookAccount.preferredLanguage).toBeUndefined();
     });
