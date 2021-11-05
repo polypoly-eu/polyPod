@@ -68,6 +68,24 @@ class ImporterExecutionResult {
     get executionTime() {
         return this._executionTime;
     }
+
+    _extractDataFromStatus(status) {
+        return {
+            name: status.name,
+            message: status.message,
+        };
+    }
+
+    get reportJsonData() {
+        return {
+            format: "v2",
+            importerName: this.importer.constructor.name,
+            executionTime: this.executionTime.toFixed(1),
+            status: Array.isArray(this.status)
+                ? this.status.map((each) => this._extractDataFromStatus(each))
+                : this._extractDataFromStatus(this.status),
+        };
+    }
 }
 
 export async function runImporter(
