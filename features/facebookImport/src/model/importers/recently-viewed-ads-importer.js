@@ -1,4 +1,3 @@
-import RootAnalysis from "../analyses/ministories/root-analysis";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
 import {
@@ -39,9 +38,8 @@ export const RECENTLY_VIEWED_DATA_KEY = "recently_viewed";
  *
  * From this we extract a model consisting in an account that has ads that have views.
  */
-export default class RecentlyViewedAdsImporter extends RootAnalysis {
+export default class RecentlyViewedAdsImporter {
     constructor() {
-        super();
         this._accountsByUrl = new Map();
     }
 

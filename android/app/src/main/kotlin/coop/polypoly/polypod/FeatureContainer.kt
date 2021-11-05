@@ -17,6 +17,7 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.features.Feature
+import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
@@ -115,7 +116,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
-        Preferences.currentFeatureName = feature.id
+        FeatureStorage.activeFeature = feature
         api.polyNav.setNavObserver(
             PolyNavObserver(
                 null,
@@ -200,11 +201,11 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             ): Boolean {
                 if (consoleMessage == null) {
                     logger.warn("Unknown message from " +
-                        Preferences.currentFeatureName)
+                        FeatureStorage.activeFeature?.id)
                     return true
                 }
                 val message = "Message from " +
-                    Preferences.currentFeatureName + ": " +
+                    FeatureStorage.activeFeature?.id + ": " +
                     consoleMessage.messageLevel() + ": " +
                     consoleMessage.message()
                 when (consoleMessage?.messageLevel()) {
@@ -325,7 +326,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         @JavascriptInterface
         fun reportError(error: String) {
             logger.warn("Uncaught error from " +
-                Preferences.currentFeatureName + ": " + error)
+                FeatureStorage.activeFeature?.id + ": " + error)
             errorHandler(error)
         }
 

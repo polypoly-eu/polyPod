@@ -23,6 +23,10 @@ export function expectInvalidContentError(result, importerClass) {
     expectError(result, InvalidContentImportException, importerClass);
 }
 
+export function expectSyntaxError(result) {
+    expectError(result, SyntaxError);
+}
+
 export function expectImportSuccess(result) {
     expect(result.status).toBe(IMPORT_SUCCESS);
 }
