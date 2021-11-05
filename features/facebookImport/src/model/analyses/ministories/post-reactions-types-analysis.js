@@ -11,6 +11,10 @@ export default class PostReactionsTypesAnalysis extends RootAnalysis {
         return i18n.t("reactionsMiniStory:title");
     }
 
+    get label() {
+        return RootAnalysis.Labels.NONE;
+    }
+
     async analyze({ facebookAccount }) {
         this._reactionsTypeCountPairs =
             groupPostReactionsByType(facebookAccount);
