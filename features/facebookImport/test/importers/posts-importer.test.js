@@ -23,7 +23,7 @@ describe("Import posts from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runPostsImporter(zipFile);
-        expectError(result, MissingFilesException);
+        expectError(result, MissingFilesException, PostsImporter);
     });
 });
 
@@ -41,7 +41,7 @@ describe("Import searches from export with file error", () => {
     });
 
     it("triggers syntax error", async () => {
-        expectSyntaxError(result[0]);
+        expectSyntaxError(result[0], PostsImporter);
     });
 
     it("has correct importer class", async () => {
