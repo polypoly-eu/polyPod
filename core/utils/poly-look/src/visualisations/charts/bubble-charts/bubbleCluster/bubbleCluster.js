@@ -2,8 +2,6 @@ import * as d3 from "d3";
 
 import { Chart } from "../../chart";
 
-export const type = "bubble-cluster";
-
 const edgePadding = 5;
 const smallBubblesRadius = 20;
 const bigBubblesRadius = 50;

@@ -4,8 +4,6 @@ import { Chart } from "../../chart";
 
 import "./mirroredBarChart.css";
 
-export const type = "mirrored-bar-chart";
-
 const margin = {
   top: 10,
   right: 40,

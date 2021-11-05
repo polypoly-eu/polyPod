@@ -4,8 +4,6 @@ import { Chart } from "../../chart";
 
 import "./verticalBarChart.css";
 
-export const type = "vertical-bar-chart";
-
 const initializingBarHeight = 2;
 const margin = {
   top: 10,
