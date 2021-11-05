@@ -71,7 +71,7 @@ export default class LanguageAndLocaleImporter {
             // TODO: Refactor how warnings are created within the importer.
             return {
                 status: IMPORT_WARNING,
-                importerClass: this.constructor.name,
+                importerClass: this.constructor,
                 message: "Could not extract preferredLanguage",
             };
         }

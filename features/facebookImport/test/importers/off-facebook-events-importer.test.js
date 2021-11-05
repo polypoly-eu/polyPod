@@ -1,6 +1,8 @@
 "use strict";
 
-import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../../src/model/importers/off-facebook-events-importer";
+import OffFacebookEventsImporter, {
+    OFF_FACEBOOK_EVENTS_FILE_PATH,
+} from "../../src/model/importers/off-facebook-events-importer";
 import {
     zipFileWithOffFacebookEvents,
     DATASET_EXPECTED_VALUES,
@@ -23,7 +25,7 @@ describe("Import off-facebook events from empty export", () => {
     it("triggers missing files error", async () => {
         const { result } = await runOffFacebookEventsImporter(zipFile);
 
-        expectMissingFileError(result);
+        expectMissingFileError(result, OffFacebookEventsImporter);
     });
 });
 
@@ -36,7 +38,7 @@ describe("Import off-facebook events from export with wrong data key", () => {
 
     it("triggers missing data key error", async () => {
         const { result } = await runOffFacebookEventsImporter(zipFile);
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, OffFacebookEventsImporter);
     });
 });
 
