@@ -655,7 +655,7 @@ const Details = ({ data }) => {
                 also be due to privacy concerns.
             </StoryParagraph>
             <LinesChart data={chartData}></LinesChart>
-            <h1 className="title-messenger-story">So, what the Deal?</h1>
+            <h1 className="title-messenger-story">So, what is the Deal?</h1>
             <StoryParagraph as="p">
                 WhatsApp, Instagram, and Facebook Messenger are services that
                 belong to Facebook. Facebook shares data with their subsidiary
