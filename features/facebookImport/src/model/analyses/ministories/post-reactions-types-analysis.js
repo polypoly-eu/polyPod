@@ -1,3 +1,5 @@
+import React from "react";
+
 import { groupPostReactionsByType } from "../utils/post-reactions-utils";
 import RootAnalysis from "./root-analysis";
 
