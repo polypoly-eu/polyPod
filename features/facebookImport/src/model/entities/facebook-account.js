@@ -22,6 +22,7 @@ class FacebookAccount {
         this._searches = [];
         this._adminRecords = [];
         this._accountSessionActivities = [];
+        this._comments = [];
         this._postReactions = [];
         this._posts = [];
 
@@ -236,6 +237,14 @@ class FacebookAccount {
         return this._relatedAccounts.count;
     }
 
+    get comments() {
+        return this._comments;
+    }
+
+    set comments(comments) {
+        this._comments = comments;
+    }
+
     get postReactions() {
         return this._postReactions;
     }
@@ -321,6 +330,11 @@ class FacebookAccount {
             {
                 title: "Session activities",
                 count: this.accountSessionActivities.length,
+            },
+
+            {
+                title: "Comments",
+                count: this.comments.length,
             },
 
             {
