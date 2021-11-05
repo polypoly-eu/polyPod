@@ -11,17 +11,7 @@ import React from "react";
 export default class MinistoriesStatusAnalysis {
     constructor(analysesResults) {
         this._analysesData = analysesResults.map(
-            ({ analysis, status, executionTime }) => {
-                return {
-                    analysisName: analysis.id,
-                    activationStatus: analysis.active ? "ACTIVE" : "INACTIVE",
-                    executionStatus: {
-                        name: status.name,
-                        message: status.message,
-                    },
-                    executionTime: executionTime.toFixed(2),
-                };
-            }
+            (result) => result.reportJsonData
         );
         this.active = this._analysesData.length > 0;
     }

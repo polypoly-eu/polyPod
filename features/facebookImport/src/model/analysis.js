@@ -183,6 +183,18 @@ class AnalysisExecutionResult {
     get executionTime() {
         return this._executionTime;
     }
+
+    get reportJsonData() {
+        return {
+            analysisName: this.analysis.id,
+            activationStatus: this.analysis.active ? "ACTIVE" : "INACTIVE",
+            executionStatus: {
+                name: this.status.name,
+                message: this.status.message,
+            },
+            executionTime: this.executionTime.toFixed(2),
+        };
+    }
 }
 
 export async function runAnalysis(analysisClass, enrichedData) {
