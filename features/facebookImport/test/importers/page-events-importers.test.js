@@ -18,14 +18,7 @@ import { zipFileWithFollowedPagesAndExpectedValues } from "../datasets/page-foll
 import { zipFileWithLikedPagesAndExpectedValues } from "../datasets/page-liked-data";
 import { zipFileWithRecommendedPagesAndExpectedValues } from "../datasets/page-recommended-data";
 import { zipFileWithUnfollowedPagesAndExpectedValues } from "../datasets/pages-unfollowed-data";
-import { ZipFileMock } from "../mocks/zipfile-mock";
-import { zipWithWrongDatasetKey } from "../utils/data-creation";
-import { runSingleImporter } from "../utils/data-importing";
-import {
-    expectImportSuccess,
-    expectInvalidContentError,
-    expectMissingFileError,
-} from "../utils/importer-assertions";
+import { defineEventImportersTestsForDatasets } from "./test-definition/importer-tests-definition";
 
 const datasets = [
     [
@@ -58,48 +51,4 @@ const datasets = [
     ],
 ];
 
-describe("Import from empty dataset triggers missing file error", () => {
-    test.each(datasets)(
-        "using importer %s",
-        async (importerName, importerClass) => {
-            const zipFile = new ZipFileMock();
-            const { result } = await runSingleImporter(importerClass, zipFile);
-            expectMissingFileError(result);
-        }
-    );
-});
-
-describe("Import from dataset with wrong data key triggers missing data key error", () => {
-    test.each(datasets)(
-        "using importer %s",
-        async (importerName, importerClass, dataFileName) => {
-            const zipFile = zipWithWrongDatasetKey(dataFileName);
-            const { result } = await runSingleImporter(importerClass, zipFile);
-            expectInvalidContentError(result);
-        }
-    );
-});
-
-describe("Import from dataset has correct number of entities", () => {
-    test.each(datasets)(
-        "using importer %s",
-        async (
-            importerName,
-            importerClass,
-            dataFileName,
-            dataKey,
-            { zipFile, expectedValues }
-        ) => {
-            const { result, facebookAccount } = await runSingleImporter(
-                importerClass,
-                zipFile
-            );
-
-            expectImportSuccess(result);
-
-            expect(facebookAccount[dataKey].length).toBe(
-                expectedValues.totalEventsCount
-            );
-        }
-    );
-});
+defineEventImportersTestsForDatasets(datasets);

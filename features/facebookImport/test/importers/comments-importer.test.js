@@ -1,54 +1,54 @@
-import { FRIENDS_FILE_PATH } from "../../src/model/importers/friends-importer";
+import { COMMENTS_FILE_PATH } from "../../src/model/importers/comments-importer";
 import {
     DATASET_EXPECTED_VALUES,
-    zipFileWithFriends,
-} from "../datasets/friends-data";
+    zipFileWithComments,
+} from "../datasets/comments-data";
 import { ZipFileMock } from "../mocks/zipfile-mock";
 import { zipWithWrongDatasetKey } from "../utils/data-creation";
-import { runFriendsImporter } from "../utils/data-importing";
+import { runCommentsImporter } from "../utils/data-importing";
 import {
     expectImportSuccess,
     expectInvalidContentError,
     expectMissingFileError,
 } from "../utils/importer-assertions";
 
-describe("Import friends from empty export", () => {
+describe("Import comments from empty export", () => {
     let zipFile = null;
     beforeAll(() => {
         zipFile = new ZipFileMock();
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runFriendsImporter(zipFile);
+        const { result } = await runCommentsImporter(zipFile);
         expectMissingFileError(result);
     });
 });
 
-describe("Import friends from empty export with wrong data key", () => {
+describe("Import searches from empty export with wrong data key", () => {
     let zipFile = null;
     beforeAll(async () => {
-        zipFile = zipWithWrongDatasetKey(FRIENDS_FILE_PATH);
+        zipFile = zipWithWrongDatasetKey(COMMENTS_FILE_PATH);
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runFriendsImporter(zipFile);
+        const { result } = await runCommentsImporter(zipFile);
         expectInvalidContentError(result);
     });
 });
 
-describe("Import friends", () => {
+describe("Import comments", () => {
     let result = null;
     let facebookAccount = null;
 
     beforeAll(async () => {
-        const zipFile = zipFileWithFriends();
-        ({ result, facebookAccount } = await runFriendsImporter(zipFile));
+        const zipFile = zipFileWithComments();
+        ({ result, facebookAccount } = await runCommentsImporter(zipFile));
     });
 
     it("returns success status", () => expectImportSuccess(result));
 
-    it("has correct number of friends", () =>
-        expect(facebookAccount.friends.length).toBe(
-            DATASET_EXPECTED_VALUES.totalFriendsCount
+    it("has correct number of entities", () =>
+        expect(facebookAccount.comments.length).toBe(
+            DATASET_EXPECTED_VALUES.numberOfComments
         ));
 });

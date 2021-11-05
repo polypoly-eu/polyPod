@@ -43,7 +43,7 @@ export class VerticalBarChart extends Chart {
     barValueColor,
     numberTicksY,
   }) {
-    super({ type, selector, data, width, height, margin });
+    super({ selector, data, width, height, margin });
     this._barColor = barColor || "blue";
     this._xScale = d3.scaleBand().range([0, this.chartWidth]).padding(0.2);
     this._yScale = d3

@@ -1,8 +1,8 @@
 {
-    "featuredCompany.text1": "Maximale Anzahl für diese Firma.",
-    "featuredCompany.highlighted1": "25 Dateneinträge",
-    "featuredCompany.text2": "Durchschnittlicher Wert aller derzeit verfügbaren Firmeninformationen in dieser Kategorie.",
-    "featuredCompany.text3": "Wert der Firma, die in dieser Kategorie von allen derzeit verfügbaren Firmeninformationen, den höchsten Wert aufweist.",
+    "featuredEntity.text1": "Maximale Anzahl für diese Firma.",
+    "featuredEntity.highlighted1": "25 Dateneinträge",
+    "featuredEntity.text2": "Durchschnittlicher Wert aller derzeit verfügbaren Firmeninformationen in dieser Kategorie.",
+    "featuredEntity.text3": "Wert der Firma, die in dieser Kategorie von allen derzeit verfügbaren Firmeninformationen, den höchsten Wert aufweist.",
     "dataTypes.text1": "Menge aller Datentypen, die ein Unternehmen teilt.",
     "dataTypes.text2": "Anzahl, wie oft dieser Datentyp mit anderen Firmen geteilt wird.",
     "dataTypes.text3": "Datentyp",

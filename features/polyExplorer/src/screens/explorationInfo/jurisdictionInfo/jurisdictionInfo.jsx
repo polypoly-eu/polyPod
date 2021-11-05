@@ -60,7 +60,7 @@ const JurisdictionInfo = ({ onClose }) => {
             <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
-                        <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
+                        <p>{i18n.t("entityDetailsScreen:jurisdictions")}:</p>
                     </div>
                     <div className="legend fixed-graphic">
                         <div>
@@ -103,7 +103,7 @@ const JurisdictionInfo = ({ onClose }) => {
             <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
-                        <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
+                        <p>{i18n.t("entityDetailsScreen:jurisdictions")}:</p>
                     </div>
                     <div className="legend">
                         <div>
@@ -129,7 +129,7 @@ const JurisdictionInfo = ({ onClose }) => {
             <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
-                        <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
+                        <p>{i18n.t("entityDetailsScreen:jurisdictions")}:</p>
                     </div>
                     <div className="legend">
                         <div>
@@ -160,7 +160,7 @@ const JurisdictionInfo = ({ onClose }) => {
             <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
-                        <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
+                        <p>{i18n.t("entityDetailsScreen:jurisdictions")}:</p>
                     </div>
                     <div className="legend">
                         <div>
@@ -182,7 +182,7 @@ const JurisdictionInfo = ({ onClose }) => {
             <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
-                        <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
+                        <p>{i18n.t("entityDetailsScreen:jurisdictions")}:</p>
                     </div>
                     <div className="legend">
                         <div>
@@ -204,7 +204,7 @@ const JurisdictionInfo = ({ onClose }) => {
             <div className="base-info-padding">
                 <div className="legend-container">
                     <div className="jurisdictions-label">
-                        <p>{i18n.t("companyDetailsScreen:jurisdictions")}:</p>
+                        <p>{i18n.t("entityDetailsScreen:jurisdictions")}:</p>
                     </div>
                     <div className="legend">
                         <div>

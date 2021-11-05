@@ -42,7 +42,7 @@ export class BubbleCluster extends Chart {
     showValues = true,
     onBubbleClick = () => {},
   }) {
-    super({ type, selector, data, width, height });
+    super({ selector, data, width, height });
     this._bubbleColor = bubbleColor;
     this._textColor = textColor;
     this._opacity = opacity;

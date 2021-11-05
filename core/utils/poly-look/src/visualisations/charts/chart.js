@@ -23,9 +23,8 @@ const noMargin = {
  * @param {number = 0} [margin.left] - Left left
  */
 export class Chart {
-  constructor({ selector, type, data, width, height, margin }) {
+  constructor({ selector, data, width, height, margin }) {
     this._selector = selector;
-    this._type = type || "";
     this._data = data;
     this._width = width || 400;
     this._height = height || 300;
@@ -63,6 +62,16 @@ export class Chart {
     return chart.empty() ? this.generateChart() : chart;
   }
 
+  get type() {
+    return this.constructor.name;
+  }
+
+  get CSSType() {
+    return this.type
+      .split(/(?=[A-Z])/)
+      .reduce((prev, curr) => prev.toLowerCase() + "-" + curr.toLowerCase());
+  }
+
   createSVG() {
     return d3
       .select(this._selector)
@@ -76,6 +85,6 @@ export class Chart {
       .attr("width", this.chartWidth)
       .attr("height", this.chartHeight)
       .attr("transform", `translate(${this.margin.left}, ${this.margin.top})`)
-      .attr("class", `chart ${this._type}`);
+      .attr("class", `chart ${this.CSSType}`);
   }
 }

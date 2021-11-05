@@ -47,7 +47,13 @@ export class MirroredBarChart extends Chart {
     barPadding = 1,
     numberTicks,
   }) {
-    super({ selector, type, data, width, height, margin });
+    super({
+      selector,
+      data,
+      width,
+      height,
+      margin,
+    });
     this._upperBarColor = colors?.upperBar || "red";
     this._lowerBarColor = colors?.lowerBar || "blue";
     this._numberTicksY = numberTicks?.y || 4;
