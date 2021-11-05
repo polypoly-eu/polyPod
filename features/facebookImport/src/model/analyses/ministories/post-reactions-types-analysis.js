@@ -1,40 +1,12 @@
-import React from "react";
-import { PolyChart } from "@polypoly-eu/poly-look";
-
 import { groupPostReactionsByType } from "../utils/post-reactions-utils";
 import RootAnalysis from "./root-analysis";
 
-import likeIcon from "../../../static/images/reactions-ministory/like.svg";
-import loveIcon from "../../../static/images/reactions-ministory/love.svg";
-import hahaIcon from "../../../static/images/reactions-ministory/haha.svg";
-import careIcon from "../../../static/images/reactions-ministory/care.svg";
-import wowIcon from "../../../static/images/reactions-ministory/wow.svg";
-import sadIcon from "../../../static/images/reactions-ministory/sad.svg";
-import angerIcon from "../../../static/images/reactions-ministory/anger.svg";
-
-const reactionEmoji = {
-    LIKE: likeIcon,
-    LOVE: loveIcon,
-    HAHA: hahaIcon,
-    CARE: careIcon,
-    WOW: wowIcon,
-    SAD: sadIcon,
-    ANGER: angerIcon,
-};
-
-export function mapEmojiToReaction(reactions) {
-    return reactions.map((reaction) => {
-        return {
-            title: "icon",
-            value: reaction.count,
-            icon: reactionEmoji[reaction.type],
-        };
-    });
-}
+import PostReactionTypesMiniStory from "../../../components/postReactionTypesMiniStory/postReactionTypesMiniStory.jsx";
+import i18n from "../../../i18n";
 
 export default class PostReactionsTypesAnalysis extends RootAnalysis {
     get title() {
-        return "Post Reactions by Type";
+        return i18n.t("reactionsMiniStory:title");
     }
 
     async analyze({ facebookAccount }) {
@@ -45,10 +17,8 @@ export default class PostReactionsTypesAnalysis extends RootAnalysis {
 
     renderSummary() {
         return (
-            <PolyChart
-                type="icon-cluster"
-                inputType="font"
-                data={mapEmojiToReaction(this._reactionsTypeCountPairs)}
+            <PostReactionTypesMiniStory
+                reactionData={this._reactionsTypeCountPairs}
             />
         );
     }

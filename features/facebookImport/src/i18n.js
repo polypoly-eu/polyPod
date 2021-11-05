@@ -9,6 +9,7 @@ import activitiesMiniStoryEn from "./locales/en/miniStories/activities.json";
 import messagesMiniStoryEn from "./locales/en/miniStories/messages.json";
 import offFacebookEventsMiniStoryEn from "./locales/en/miniStories/offFacebookEvents.json";
 import advertisingValueMiniStoryEn from "./locales/en/miniStories/advertisingValue.json";
+import reactionsMinistoryEn from "./locales/en/miniStories/reactions.json";
 import picturesMiniStoryEn from "./locales/en/miniStories/pictures.json";
 import reportEn from "./locales/en/report.json";
 import errorPopupEn from "./locales/en/errorPopup.json";
@@ -27,6 +28,7 @@ import activitiesMiniStoryDe from "./locales/de/miniStories/activities.json";
 import messagesMiniStoryDe from "./locales/de/miniStories/messages.json";
 import offFacebookEventsMiniStoryDe from "./locales/de/miniStories/offFacebookEvents.json";
 import advertisingValueMiniStoryDe from "./locales/de/miniStories/advertisingValue.json";
+import reactionsMiniStoryDe from "./locales/de/miniStories/reactions.json";
 import picturesMiniStoryDe from "./locales/de/miniStories/pictures.json";
 import reportDe from "./locales/de/report.json";
 import errorPopupDe from "./locales/de/errorPopup.json";
@@ -48,6 +50,7 @@ export default new I18n(determineLanguage(), {
         offFacebookEventsMiniStory: offFacebookEventsMiniStoryEn,
         advertisingValueMiniStory: advertisingValueMiniStoryEn,
         picturesMiniStory: picturesMiniStoryEn,
+        reactionsMiniStory: reactionsMinistoryEn,
         report: reportEn,
         errorPopup: errorPopupEn,
         baseInfoScreen: baseInfoScreenEn,
@@ -67,6 +70,7 @@ export default new I18n(determineLanguage(), {
         offFacebookEventsMiniStory: offFacebookEventsMiniStoryDe,
         advertisingValueMiniStory: advertisingValueMiniStoryDe,
         picturesMiniStory: picturesMiniStoryDe,
+        reactionsMiniStory: reactionsMiniStoryDe,
         report: reportDe,
         errorPopup: errorPopupDe,
         baseInfoScreen: baseInfoScreenDe,
