@@ -1,3 +1,4 @@
+import { ZipFileMock } from "../mocks/zipfile-mock";
 import { createMockedZip } from "../utils/data-creation";
 
 const POSTS_FILE_PATH = "posts/your_posts_X.json";
@@ -50,6 +51,13 @@ export function zipFileWithFileError() {
     let zipFile = createMockedZip([
         [POSTS_FILE_PATH.replace("X", "1"), createPostsOneDataset()],
     ]);
+    zipFile.addTextEntry(POSTS_FILE_PATH.replace("X", "2"), "[");
+    return zipFile;
+}
+
+export function zipFileWithTwoFileErrors() {
+    let zipFile = new ZipFileMock();
+    zipFile.addTextEntry(POSTS_FILE_PATH.replace("X", "1"), "");
     zipFile.addTextEntry(POSTS_FILE_PATH.replace("X", "2"), "[");
     return zipFile;
 }
