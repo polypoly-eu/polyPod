@@ -48,6 +48,10 @@ class UpdateNotificationTest {
 
     @Test
     fun `additional notification with lower id considered not seen`() {
+        // This is more accidental than desired behaviour - it may make
+        // sense to change the logic so that only notifications with a _higher_
+        // ID than the previous one are shown. But so far we had not reason to.
+
         val notification = loadNotification(2)
         notification.onInAppSeen()
         notification.onPushSeen()

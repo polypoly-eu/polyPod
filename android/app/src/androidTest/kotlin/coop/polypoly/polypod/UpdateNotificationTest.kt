@@ -96,6 +96,9 @@ class UpdateNotificationTest {
         InAppNotification.checkShown()
     }
 
+    // TODO: Add tests that verify that the push notification shows up as
+    //       expected. That should be possible with UiAutomator.
+
     private fun launchActivity(notificationId: Int) {
         closeActivity()
         UpdateNotification.mockData.id = notificationId
