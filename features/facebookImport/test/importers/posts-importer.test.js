@@ -11,6 +11,7 @@ import { ZipFileMock } from "../mocks/zipfile-mock";
 import { runPostsImporter } from "../utils/data-importing";
 import {
     expectError,
+    expectErrorStatus,
     expectImportSuccess,
     expectSyntaxError,
 } from "../utils/importer-assertions";
@@ -27,7 +28,7 @@ describe("Import posts from empty export", () => {
     });
 });
 
-describe("Import searches from export with file error", () => {
+describe("Import posts from export with file error", () => {
     let result = null;
     let facebookAccount = null;
 
@@ -37,15 +38,11 @@ describe("Import searches from export with file error", () => {
     });
 
     it("has one error status", async () => {
-        expect(result.length).toBe(1);
+        expect(result.status.length).toBe(1);
     });
 
     it("triggers syntax error", async () => {
-        expectSyntaxError(result[0]);
-    });
-
-    it("has correct importer class", async () => {
-        expect(result[0].importerClass).toBe(PostsImporter);
+        expectErrorStatus(result.status[0], SyntaxError);
     });
 
     it("has correct number of entities from file one", () =>

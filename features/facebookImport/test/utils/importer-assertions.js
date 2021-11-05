@@ -3,10 +3,14 @@ import {
     MissingFileImportException,
 } from "../../src/model/importers/utils/failed-import-exception";
 
+export function expectErrorStatus(status, errorClass) {
+    expect(status.isError).toBe(true);
+    expect(status.message).toBe(errorClass.name);
+    expect(status.error.name).toBe(errorClass.name);
+}
+
 export function expectError(result, errorClass) {
-    expect(result.status.isError).toBe(true);
-    expect(result.status.message).toBe(errorClass.name);
-    expect(result.status.error.name).toBe(errorClass.name);
+    expectErrorStatus(result.status, errorClass);
 }
 
 export function expectMissingFileError(result) {
