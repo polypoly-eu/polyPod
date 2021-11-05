@@ -44,12 +44,14 @@ const DataStructureMiniStory = ({ data }) => {
     return (
         <>
             <div>
-                <p>
-                    {i18n.t("dataStructureMiniStory:folder.info", {
-                        selected_folder: selectedFolder,
-                        amount_of_files: amountOfFiles,
-                    })}
-                </p>
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: i18n.t("dataStructureMiniStory:folder.info", {
+                            selected_folder: selectedFolder,
+                            amount_of_files: amountOfFiles,
+                        }),
+                    }}
+                />
                 <PolyChart
                     type="bubble-cluster"
                     data={data}

@@ -118,7 +118,11 @@ export default class ActivitiesAnalysis extends RootAnalysis {
     renderDetails() {
         return (
             <>
-                <p>{this.renderSummary()}</p>
+                <p>
+                    {i18n.t("activitiesMiniStory:summary", {
+                        number_activities: this._totalEvents.total,
+                    })}
+                </p>
                 <ActivitiesMiniStory totalEvents={this._totalEvents} />
             </>
         );
