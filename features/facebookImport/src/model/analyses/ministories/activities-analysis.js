@@ -26,6 +26,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
             ...facebookAccount.unfollowedPages,
             ...facebookAccount.comments,
             ...facebookAccount.postReactions,
+            ...facebookAccount.posts,
         ].map((each) => new Date(each.timestamp * 1000));
 
         //for nested structures
