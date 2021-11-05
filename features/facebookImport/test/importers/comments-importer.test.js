@@ -1,4 +1,6 @@
-import { COMMENTS_FILE_PATH } from "../../src/model/importers/comments-importer";
+import CommentsImporter, {
+    COMMENTS_FILE_PATH,
+} from "../../src/model/importers/comments-importer";
 import {
     DATASET_EXPECTED_VALUES,
     zipFileWithComments,
@@ -20,7 +22,7 @@ describe("Import comments from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runCommentsImporter(zipFile);
-        expectMissingFileError(result);
+        expectMissingFileError(result, CommentsImporter);
     });
 });
 
@@ -32,7 +34,7 @@ describe("Import searches from empty export with wrong data key", () => {
 
     it("triggers missing data key error", async () => {
         const { result } = await runCommentsImporter(zipFile);
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, CommentsImporter);
     });
 });
 

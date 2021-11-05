@@ -24,7 +24,7 @@ describe("Import posts from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runPostsImporter(zipFile);
-        expectError(result, MissingFilesException);
+        expectError(result, MissingFilesException, PostsImporter);
     });
 });
 

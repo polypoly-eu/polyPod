@@ -9,20 +9,21 @@ export function expectErrorStatus(status, errorClass) {
     expect(status.error.name).toBe(errorClass.name);
 }
 
-export function expectError(result, errorClass) {
+export function expectError(result, errorClass, importerClass) {
     expectErrorStatus(result.status, errorClass);
+    expect(result.importer.constructor).toBe(importerClass);
 }
 
-export function expectMissingFileError(result) {
-    expectError(result, MissingFileImportException);
+export function expectMissingFileError(result, importerClass) {
+    expectError(result, MissingFileImportException, importerClass);
 }
 
-export function expectInvalidContentError(result) {
-    expectError(result, InvalidContentImportException);
+export function expectInvalidContentError(result, importerClass) {
+    expectError(result, InvalidContentImportException, importerClass);
 }
 
-export function expectSyntaxError(result) {
-    expectError(result, SyntaxError);
+export function expectSyntaxError(result, importerClass) {
+    expectError(result, SyntaxError, importerClass);
 }
 
 export function expectImportSuccess(result) {
@@ -34,7 +35,8 @@ export function expectAllResultsSuccess(results) {
     results.forEach((result) => expect(result.status.isSuccess).toBe(true));
 }
 
-export function expectImportWarning(result, warningMessage) {
+export function expectImportWarning(result, warningMessage, importerClass) {
     expect(result.status.isWarning).toBe(true);
     expect(result.status.message).toBe(warningMessage);
+    expect(result.importer.constructor).toBe(importerClass);
 }

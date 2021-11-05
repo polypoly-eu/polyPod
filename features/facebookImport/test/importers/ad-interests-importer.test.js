@@ -1,4 +1,6 @@
-import { AD_INTERESTS_FILE_PATH } from "../../src/model/importers/ad-interests-importer";
+import AdInterestsImporter, {
+    AD_INTERESTS_FILE_PATH,
+} from "../../src/model/importers/ad-interests-importer";
 import {
     DATASET_EXPECTED_VALUES,
     zipFileWithAdInterests,
@@ -20,7 +22,7 @@ describe("Import ad interests from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runAdInterestsImporter(zipFile);
-        expectMissingFileError(result);
+        expectMissingFileError(result, AdInterestsImporter);
     });
 });
 
@@ -32,7 +34,7 @@ describe("Import ad interests from empty export with wrong data key", () => {
 
     it("triggers missing data key error", async () => {
         const { result } = await runAdInterestsImporter(zipFile);
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, AdInterestsImporter);
     });
 });
 
