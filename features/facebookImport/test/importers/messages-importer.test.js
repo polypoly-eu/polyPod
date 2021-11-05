@@ -1,5 +1,6 @@
 "use strict";
 
+import MessagesImporter from "../../src/model/importers/messages-importer.js";
 import { MissingFilesException } from "../../src/model/importers/utils/failed-import-exception.js";
 import {
     DATASET_EXPECTED_VALUES,
@@ -20,8 +21,7 @@ describe("Import messages from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runMessagesImporter(zipFile);
-
-        expectError(result, MissingFilesException);
+        expectError(result, MissingFilesException, MessagesImporter);
     });
 });
 

@@ -44,6 +44,8 @@ import AboutPicturesDataAnalysis from "./analyses/ministories/about-pictures-dat
 import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
 import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-facebook-advertisers-analysis.js";
 import PostReactionsTypesAnalysis from "./analyses/ministories/post-reactions-types-analysis.js";
+import { Telemetry } from "./analyses/utils/performance-telemetry.js";
+import MinistoriesStatusAnalysis from "./analyses/report/ministories-status-analysis.js";
 
 const subAnalyses = [
     DataStructureBubblesAnalysis,
@@ -126,6 +128,11 @@ class UnrecognizedData {
             this._activeReportAnalyses.push(inactiveCardsSummary);
         }
 
+        const statusAnalysis = new MinistoriesStatusAnalysis(analysesResults);
+        if (statusAnalysis.active) {
+            this._activeReportAnalyses.push(statusAnalysis);
+        }
+
         this.active = this._activeReportAnalyses.length > 0;
     }
 
@@ -158,25 +165,44 @@ class UnrecognizedData {
     }
 }
 
+class AnalysisExecutionResult {
+    constructor(analysis, status, executionTime) {
+        this._analysis = analysis;
+        this._status = status || createSuccessStatus();
+        this._executionTime = executionTime;
+    }
+
+    get analysis() {
+        return this._analysis;
+    }
+
+    get status() {
+        return this._status;
+    }
+
+    get executionTime() {
+        return this._executionTime;
+    }
+}
+
 export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
 
-    return subAnalysis
-        .analyze(enrichedData)
-        .then((status) => {
-            const runStatus = status || createSuccessStatus(analysisClass);
-            return {
-                analysis: subAnalysis,
-                status: runStatus,
-            };
-        })
-        .catch((error) => {
-            console.log(error);
-            return {
-                analysis: subAnalysis,
-                status: createErrorStatus(analysisClass, error),
-            };
-        });
+    const telemetry = new Telemetry();
+    try {
+        const status = await subAnalysis.analyze(enrichedData);
+        return new AnalysisExecutionResult(
+            subAnalysis,
+            status,
+            telemetry.elapsedTime()
+        );
+    } catch (error) {
+        return new AnalysisExecutionResult(
+            subAnalysis,
+            createErrorStatus(error),
+            telemetry.elapsedTime()
+        );
+    }
 }
 
 export async function analyzeFile(file, facebookAccount) {

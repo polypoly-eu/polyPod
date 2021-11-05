@@ -39,10 +39,12 @@ export class VerticalBarChart extends Chart {
     width = 400,
     height = 200,
     barValueColor,
+    barWidth,
     numberTicksY,
   }) {
     super({ selector, data, width, height, margin });
     this._barColor = barColor || "blue";
+    this._barWidth = barWidth;
     this._xScale = d3.scaleBand().range([0, this.chartWidth]).padding(0.2);
     this._yScale = d3
       .scaleLinear()
@@ -110,8 +112,13 @@ export class VerticalBarChart extends Chart {
       .duration(750)
       .attr("y", this.chartHeight - initializingBarHeight)
       .attr("height", initializingBarHeight)
-      .attr("x", (d) => this._xScale(d.title))
-      .attr("width", this._xScale.bandwidth())
+      .attr("x", (d) =>
+        this._barWidth
+          ? this._xScale(d.title) +
+            (this._xScale.bandwidth() - this._barWidth) / 2
+          : this._xScale(d.title)
+      )
+      .attr("width", this._barWidth || this._xScale.bandwidth())
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
@@ -126,8 +133,13 @@ export class VerticalBarChart extends Chart {
       .append("rect")
       .attr("y", this.chartHeight - initializingBarHeight)
       .attr("height", initializingBarHeight)
-      .attr("x", (d) => this._xScale(d.title))
-      .attr("width", this._xScale.bandwidth())
+      .attr("x", (d) =>
+        this._barWidth
+          ? this._xScale(d.title) +
+            (this._xScale.bandwidth() - this._barWidth) / 2
+          : this._xScale(d.title)
+      )
+      .attr("width", this._barWidth || this._xScale.bandwidth())
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
