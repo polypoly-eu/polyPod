@@ -2,8 +2,8 @@
 import * as unusedPod from "@polypoly-eu/podjs/dist/pod.js";
 import { DATA_IMPORTERS_COUNT, importData } from "../src/model/importer";
 import Storage from "../src/model/storage";
-import { ENCODED_ZIP_DATA } from "../src/static/example-data/facebook-gillianconnelly-2021-10-28-encoded";
-import SUMMARY_DATA from "../src/static/example-data/facebook-gillianconnelly-summary-2021-10-28.json";
+//import { ENCODED_ZIP_DATA } from "../src/static/example-data/facebook-gillianconnelly-2021-10-28-encoded";
+//import SUMMARY_DATA from "../src/static/example-data/facebook-gillianconnelly-summary-2021-10-28.json";
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -41,14 +41,33 @@ describe("Import ad views from export with missing ads category", () => {
     beforeAll(async () => {
         localStorage.clear();
         localStorage.setItem.mockClear();
+        const response = await fetch(
+            "https://downloads.polypoly.coop/pod/facebook-fake-minniedavis-2021-11-5.zip"
+        );
+
+        const originalBuffer = await response.buffer();
+        const blobNode = new Blob([new Uint8Array(originalBuffer)]);
+        const dataUrl = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = async function () {
+                const dataUrl = this.result;
+                resolve(
+                    dataUrl + "/" + "facebook-fake-minniedavis-2021-11-5.zip"
+                );
+            };
+            reader.readAsDataURL(blobNode);
+        });
 
         const storage = new Storage(window.pod);
         const { polyOut } = window.pod;
-        const url =
-            ENCODED_ZIP_DATA + "/" + "facebook-gillianconnelly-2021-10-28.zip";
-        await polyOut.importArchive(url);
 
-        for (const dataProperties of Object.values(SUMMARY_DATA)) {
+        await polyOut.importArchive(dataUrl);
+
+        const summaryDataResponse = await fetch(
+            "https://downloads.polypoly.coop/pod/facebook-fake-minniedavis-summary-2021-11-5.json"
+        );
+        const summaryData = await summaryDataResponse.json();
+        for (const dataProperties of Object.values(summaryData)) {
             Object.assign(expectedSummary, dataProperties);
         }
 
@@ -76,7 +95,7 @@ describe("Import ad views from export with missing ads category", () => {
         const relevantSummaryPairs = Object.entries(expectedSummary).filter(
             ([propertyId]) => matchingSpecifications[propertyId]
         );
-
+        debugger;
         for (const [propertyId, propertyValue] of relevantSummaryPairs) {
             const propertyComputation = matchingSpecifications[propertyId];
             const computedValue = propertyComputation(facebookAccount);
