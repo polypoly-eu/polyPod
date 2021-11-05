@@ -5,13 +5,12 @@ import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.R
 
 class UpdateNotification(private val context: Context) {
-    data class MockData(var id: Int? = null)
-
     companion object {
+        data class MockData(var id: Int? = null)
         val mockData = MockData()
     }
 
-    enum class State {
+    private enum class State {
         NOT_SEEN,
         PUSH_SEEN,
         ALL_SEEN;
