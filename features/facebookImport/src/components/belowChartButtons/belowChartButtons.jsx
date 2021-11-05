@@ -9,18 +9,18 @@ const BelowChartButtons = ({
 }) => {
     return (
         <>
-            {buttonsContent.map((buttonContent) => {
+            {buttonsContent.map(({ id, translation }) => {
                 return (
                     <button
                         className={
-                            activeButton == buttonContent
+                            activeButton == id
                                 ? "below-chart-button selected"
                                 : "below-chart-button"
                         }
-                        onClick={onButtonsClick}
-                        key={buttonContent}
+                        onClick={() => onButtonsClick(id)}
+                        key={id}
                     >
-                        {buttonContent}
+                        {translation || id}
                     </button>
                 );
             })}

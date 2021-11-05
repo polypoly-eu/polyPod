@@ -49,11 +49,25 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
 
     return (
         <>
-            <p>{i18n.t("reactionsMiniStory:text")}</p>
-            <p>{`${selectedReaction}:${
-                reactionData.find((e) => e.type == selectedReaction)?.count ||
-                totalAmountOfReactions
-            }`}</p>
+            <p
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("reactionsMiniStory:text", {
+                        total_number_reactions: totalAmountOfReactions,
+                    }),
+                }}
+            ></p>
+            {selectedReaction != "*" ? (
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: `${i18n.t(
+                            `reactionsMiniStory:${selectedReaction}`
+                        )}: <strong>${
+                            reactionData.find((e) => e.type == selectedReaction)
+                                ?.count || totalAmountOfReactions
+                        }</strong>`,
+                    }}
+                ></p>
+            ) : null}
             <PolyChart
                 type="icon-cluster"
                 data={mapEmojiToReaction(reactionData)}
@@ -61,9 +75,16 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 filter={iconSaturation}
             />
             <BelowChartButtons
-                buttonsContent={reactionData.map((r) => r.type)}
+                buttonsContent={reactionData.map((r) => {
+                    return {
+                        id: r.type,
+                        translation: i18n.t(`reactionsMiniStory:${r.type}`),
+                    };
+                })}
                 activeButton={selectedReaction}
-                onButtonsClick={(e) => setSelectedReaction(e.target.innerText)}
+                onButtonsClick={(buttonContent) =>
+                    setSelectedReaction(buttonContent)
+                }
             />
             <div className="reaction-types">
                 <InfoButton route="/report/reaction-types-info" />

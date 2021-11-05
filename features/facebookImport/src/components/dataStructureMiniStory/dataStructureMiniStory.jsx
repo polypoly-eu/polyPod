@@ -21,8 +21,8 @@ const DataStructureMiniStory = ({ data }) => {
     const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
-    const handleFolderSelected = (e) => {
-        setSelectedFolder(e.target.innerText);
+    const handleFolderSelected = (buttonContent) => {
+        setSelectedFolder(buttonContent);
     };
 
     const handleBubbleClick = (_, node) => {
@@ -61,7 +61,9 @@ const DataStructureMiniStory = ({ data }) => {
                 />
             </div>
             <BelowChartButtons
-                buttonsContent={data.map((d) => d.title)}
+                buttonsContent={data.map((d) => {
+                    return { id: d.title };
+                })}
                 activeButton={selectedFolder}
                 onButtonsClick={handleFolderSelected}
             />
