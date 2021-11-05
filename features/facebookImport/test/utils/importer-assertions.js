@@ -22,6 +22,10 @@ export function expectInvalidContentError(result) {
     expectError(result, InvalidContentImportException);
 }
 
+export function expectSyntaxError(result) {
+    expectError(result, SyntaxError);
+}
+
 export function expectImportSuccess(result) {
     expect(result.status).toBe(IMPORT_SUCCESS);
 }
