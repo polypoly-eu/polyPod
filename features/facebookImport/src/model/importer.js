@@ -50,6 +50,26 @@ const dataImporters = [
     PostsImporter,
 ];
 
+class ImporterExecutionResult {
+    constructor(importer, status, executionTime) {
+        this._importer = importer;
+        this._status = status || createSuccessStatus();
+        this._executionTime = executionTime;
+    }
+
+    get importer() {
+        return this._importer;
+    }
+
+    get status() {
+        return this._status;
+    }
+
+    get executionTime() {
+        return this._executionTime;
+    }
+}
+
 export async function runImporter(
     importerClass,
     zipFile,
@@ -65,17 +85,17 @@ export async function runImporter(
             facebookAccount,
             pod,
         });
-        return {
+        return new ImporterExecutionResult(
             importer,
-            status: status || createSuccessStatus(),
-            executionTime: telemetry.elapsedTime(),
-        };
+            status,
+            telemetry.elapsedTime()
+        );
     } catch (error) {
-        return {
+        return new ImporterExecutionResult(
             importer,
-            status: createErrorStatus(error),
-            executionTime: telemetry.elapsedTime(),
-        };
+            createErrorStatus(error),
+            telemetry.elapsedTime()
+        );
     }
 }
 
