@@ -1,6 +1,21 @@
 import SwiftUI
 import LocalAuthentication
 
+private struct FirstRun {
+    static private let key = UserDefaults.Keys.firstRun.rawValue
+    
+    static func read() -> Bool {
+        if UserDefaults.standard.object(forKey: key) == nil {
+            return true
+        }
+        return UserDefaults.standard.bool(forKey: key)
+    }
+    
+    static func write(_ firstRun: Bool) {
+        UserDefaults.standard.set(false, forKey: key)
+    }
+}
+
 struct ContentView: View {
     private struct ViewState {
         let backgroundColor: Color
@@ -14,6 +29,7 @@ struct ContentView: View {
     }
     
     @State private var state: ViewState? = nil
+    @State private var showUpdateNotification = false
     var setStatusBarStyle: ((UIStatusBarStyle) -> Void)? = nil
     
     var body: some View {
@@ -40,7 +56,7 @@ struct ContentView: View {
     
     private func checkSecurity() -> Void {
         let defaults = UserDefaults.standard
-        let skipSecurityKey = "skipSecurity"
+        let skipSecurityKey = UserDefaults.Keys.skipSecurity.rawValue
         let skipSecurity = defaults.value(forKey: skipSecurityKey) as? Bool ?? false
         if !skipSecurity && !devicePasscodeSet() {
             let alert = UIAlertController(
@@ -84,17 +100,17 @@ struct ContentView: View {
     }
     
     private func firstRunState() -> ViewState {
-        let defaults = UserDefaults.standard
-        let firstRunKey = "firstRun"
-        let firstRun = defaults.value(forKey: firstRunKey) as? Bool ?? true
-        if !firstRun {
+        let notification = UpdateNotification()
+        notification.onStartup()
+        if !FirstRun.read() {
             return featureListState()
         }
         
+        notification.onFirstRun()
         return ViewState(
             AnyView(
                 OnboardingView(closeAction: {
-                    UserDefaults.standard.set(false, forKey: firstRunKey)
+                    FirstRun.write(false)
                     state = featureListState()
                 })
             )
@@ -102,7 +118,8 @@ struct ContentView: View {
     }
     
     private func featureListState() -> ViewState {
-        ViewState(
+        let notification = UpdateNotification()
+        return ViewState(
             AnyView(
                 FeatureListView(
                     features: FeatureStorage.shared.featuresList(),
@@ -115,7 +132,20 @@ struct ContentView: View {
                     openSettingsAction: {
                         state = settingsState()
                     }
-                )
+                ).onAppear {
+                    showUpdateNotification = notification.showInApp()
+                }.alert(isPresented: $showUpdateNotification) {
+                    Alert(
+                        title: Text(notification.title),
+                        message: Text(notification.text),
+                        dismissButton: .default(
+                            Text("button_update_notification_close")
+                        ) {
+                            notification.onShowInApp()
+                            showUpdateNotification = notification.showInApp()
+                        }
+                    )
+                }
             )
         )
     }
