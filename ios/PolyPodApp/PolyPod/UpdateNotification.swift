@@ -92,30 +92,34 @@ installation of the app, or if you previously had it installed.
     init() {
         cachedState = UpdateNotification.loadLastState(id)
     }
-        
-    func showPush() -> Bool {
-        return state == .NOT_SEEN
+    
+    var showPush: Bool {
+        get {
+            return state == .NOT_SEEN
+        }
     }
     
-    func showInApp() -> Bool {
-        return state != .ALL_SEEN
-    }
-    
-    func onFirstRun() {
-        state = .ALL_SEEN
+    var showInApp: Bool {
+        get {
+            return state != .ALL_SEEN
+        }
     }
     
     func onStartup() {
-        onShowPush()
+        onPushSeen()
     }
     
-    func onShowPush() {
+    func onFirstRun() {
+        onInAppSeen()
+    }
+    
+    func onPushSeen() {
         if state == .NOT_SEEN {
             state = .PUSH_SEEN
         }
     }
     
-    func onShowInApp() {
+    func onInAppSeen() {
         state = .ALL_SEEN
     }
 }

@@ -133,7 +133,7 @@ struct ContentView: View {
                         state = settingsState()
                     }
                 ).onAppear {
-                    showUpdateNotification = notification.showInApp()
+                    showUpdateNotification = notification.showInApp
                 }.alert(isPresented: $showUpdateNotification) {
                     Alert(
                         title: Text(notification.title),
@@ -141,8 +141,8 @@ struct ContentView: View {
                         dismissButton: .default(
                             Text("button_update_notification_close")
                         ) {
-                            notification.onShowInApp()
-                            showUpdateNotification = notification.showInApp()
+                            notification.onInAppSeen()
+                            showUpdateNotification = notification.showInApp
                         }
                     )
                 }
