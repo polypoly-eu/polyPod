@@ -53,7 +53,7 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
                                 <tr key={index}>
                                     <td>{importerName}</td>
                                     <td>{this._renderStatus(status)}</td>
-                                    <td style={{ "text-align": "right" }}>
+                                    <td style={{ textAlign: "right" }}>
                                         {executionTime}
                                     </td>
                                 </tr>
