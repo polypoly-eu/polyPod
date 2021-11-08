@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import i18n from "../../i18n";
-
+import ListOfDetails from "../listOfDetails/listOfDetails.jsx";
 import "./advertisingValueMiniStory.css";
 
 const calculateFontSize = (text, maxWidth) => {
@@ -77,28 +77,10 @@ export const AdvertisingValueMiniStoryDetails = ({
     numberInterests,
 }) => {
     return (
-        <div className="advertising-value-mini-story">
-            <p
-                className="intro"
-                dangerouslySetInnerHTML={{
-                    __html: i18n.t("advertisingValueMiniStory:details.text.1", {
-                        number_interests: numberInterests,
-                    }),
-                }}
-            />
-            <ul>
-                {displayData.map((interest, index) => {
-                    return (
-                        <li key={index} className="details">
-                            <span className="all-ad-interests">{interest}</span>
-                        </li>
-                    );
-                })}
-            </ul>
-
-            <p className="source">
-                {i18n.t("common:source.your.facebook.data")}
-            </p>
-        </div>
+        <ListOfDetails
+            intro="advertisingValueMiniStory:details.text.1"
+            numberValue={numberInterests}
+            list={displayData}
+        ></ListOfDetails>
     );
 };

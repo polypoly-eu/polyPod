@@ -19,22 +19,3 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
-
-.advertising-value-mini-story .intro {
-    margin-bottom: 28px;
-}
-
-.advertising-value-mini-story .details {
-    margin-bottom: 18px;
-    font-size: 10px;
-}
-
-.advertising-value-mini-story .all-ad-interests {
-    color: var(--color-gray-50);
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.advertising-value-mini-story .source {
-    margin-top: 45px;
-}
