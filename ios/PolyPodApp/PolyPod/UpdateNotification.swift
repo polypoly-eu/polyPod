@@ -54,25 +54,6 @@ class UpdateNotification {
         }
     }
     
-    // TODO: Don't hard code the following
-    static let id = UpdateNotificationMockId.read() ?? 79205050
-    static let pushDelay = 120
-    static let title = "Notification system test"
-    static let text = """
-This is a test of the update notification system - if you see it,
-please tell fhd about it - and try to remember whether this was a fresh
-installation of the app, or if you previously had it installed.
-"""
-    
-    private static var cachedState: State = loadLastState(id)
-    private static var state: State {
-        get { cachedState }
-        set {
-            cachedState = newValue
-            LastUpdateNotification.write(id: id, state: cachedState.rawValue)
-        }
-    }
-    
     private static func loadLastState(_ id: Int) -> State {
         if id == 0 {
             return .ALL_SEEN
@@ -88,32 +69,53 @@ installation of the app, or if you previously had it installed.
         
         return State.parse(lastState) ?? .ALL_SEEN
     }
+    
+    // TODO: Don't hard code the following
+    let id = UpdateNotificationMockId.read() ?? 79205050
+    let pushDelay = 120
+    let title = "Notification system test"
+    let text = """
+This is a test of the update notification system - if you see it,
+please tell fhd about it - and try to remember whether this was a fresh
+installation of the app, or if you previously had it installed.
+"""
+    
+    private var cachedState: State
+    private var state: State {
+        get { cachedState }
+        set {
+            cachedState = newValue
+            LastUpdateNotification.write(id: id, state: cachedState.rawValue)
+        }
+    }
+    
+    init() {
+        cachedState = UpdateNotification.loadLastState(id)
+    }
         
-    static func showPush() -> Bool {
+    func showPush() -> Bool {
         return state == .NOT_SEEN
     }
     
-    static func showInApp() -> Bool {
+    func showInApp() -> Bool {
         return state != .ALL_SEEN
     }
     
-    static func onStartup() {
+    func onFirstRun() {
+        state = .ALL_SEEN
+    }
+    
+    func onStartup() {
         onShowPush()
     }
     
-    static func onFirstRun() {
-        onShowInApp()
-    }
-    
-    static func onShowPush() {
+    func onShowPush() {
         if state == .NOT_SEEN {
             state = .PUSH_SEEN
         }
     }
     
-    static func onShowInApp() {
+    func onShowInApp() {
         state = .ALL_SEEN
     }
-    
-    private init() {}
 }

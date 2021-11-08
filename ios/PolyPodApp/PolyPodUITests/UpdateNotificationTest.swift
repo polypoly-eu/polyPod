@@ -79,7 +79,7 @@ class UpdateNotificationTest: XCTestCase {
     private func findInAppNotification() -> XCUIElement {
         let predicate = NSPredicate(
             format: "label CONTAINS %@",
-            UpdateNotification.title
+            UpdateNotification().title
         )
         return app.staticTexts.matching(predicate).firstMatch
     }
