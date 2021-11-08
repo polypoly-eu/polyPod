@@ -100,13 +100,12 @@ struct ContentView: View {
     }
     
     private func firstRunState() -> ViewState {
-        let notification = UpdateNotification()
-        notification.onStartup()
+        UpdateNotification.onStartup()
         if !FirstRun.read() {
             return featureListState()
         }
         
-        notification.onFirstRun()
+        UpdateNotification.onFirstRun()
         return ViewState(
             AnyView(
                 OnboardingView(closeAction: {
@@ -118,7 +117,6 @@ struct ContentView: View {
     }
     
     private func featureListState() -> ViewState {
-        let notification = UpdateNotification()
         return ViewState(
             AnyView(
                 FeatureListView(
@@ -133,16 +131,17 @@ struct ContentView: View {
                         state = settingsState()
                     }
                 ).onAppear {
-                    showUpdateNotification = notification.showInApp()
+                    showUpdateNotification = UpdateNotification.showInApp()
                 }.alert(isPresented: $showUpdateNotification) {
                     Alert(
-                        title: Text(notification.title),
-                        message: Text(notification.text),
+                        title: Text(UpdateNotification.title),
+                        message: Text(UpdateNotification.text),
                         dismissButton: .default(
                             Text("button_update_notification_close")
                         ) {
-                            notification.onShowInApp()
-                            showUpdateNotification = notification.showInApp()
+                            UpdateNotification.onShowInApp()
+                            showUpdateNotification = UpdateNotification
+                                .showInApp()
                         }
                     )
                 }
