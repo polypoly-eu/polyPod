@@ -5,31 +5,36 @@ import "./advertisingValueMiniStory.css";
 
 const calculateFontSize = (text, maxWidth) => {
     // TODO: Extract text size affecting styles from target element
+
     const minFontSize = 14;
     const maxFontSize = 34;
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
+    // following takes the three interests, splits them into single words and picks the longest word
+    let splitInterests = [].concat.apply(
+        [],
+        text.map((interest) => interest.split(" "))
+    );
+    let interestsLength = splitInterests.map(
+        (word) => context.measureText(word).width
+    );
+    let longestInterestWordIndex = interestsLength.indexOf(
+        Math.max(...interestsLength)
+    );
+    let longestInterestWord = splitInterests[longestInterestWordIndex];
+    console.log(longestInterestWord);
     for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
         context.font = `${fontSize}px Jost`;
-        if (context.measureText(text).width <= maxWidth) return fontSize;
+        if (context.measureText(longestInterestWord).width <= maxWidth)
+            return fontSize;
     }
     return minFontSize;
 };
 
 const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
-    // following takes the three interests, splits them into single words and picks the longest word
-    let splitInterests = [].concat.apply(
-        [],
-        randomAdInterests.map((interest) => interest.split(" "))
-    );
-    let interestsLength = splitInterests.map((word) => word.length);
-    let longestInterestWordIndex = interestsLength.indexOf(
-        Math.max(...interestsLength)
-    );
-    let longestInterestWord = splitInterests[longestInterestWordIndex];
     const refWidth = useRef(0);
     const fontSize = calculateFontSize(
-        longestInterestWord,
+        randomAdInterests,
         refWidth.current.clientWidth
     );
     return (
@@ -44,12 +49,11 @@ const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
             <ul>
                 {randomAdInterests.map((interest, index) => {
                     return (
-                        <li key={index}>
+                        <li key={index} ref={refWidth}>
                             <p
                                 style={{
                                     fontSize: fontSize,
                                 }}
-                                ref={refWidth}
                             >
                                 {interest}
                             </p>
