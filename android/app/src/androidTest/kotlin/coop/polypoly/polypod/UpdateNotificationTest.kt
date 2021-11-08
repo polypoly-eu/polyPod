@@ -60,46 +60,46 @@ class UpdateNotificationTest {
 
     @Test
     fun ignoredNotification() {
-        launchActivity(0)
+        relaunchActivity(0)
         InAppNotification.checkNotShown()
     }
 
     @Test
     fun firstNotificationShown() {
-        launchActivity(1)
+        relaunchActivity(1)
         InAppNotification.checkShown()
     }
 
     @Test
     fun notificationShownOnlyOnce() {
-        launchActivity(1)
+        relaunchActivity(1)
         InAppNotification.checkShown()
         InAppNotification.close()
-        launchActivity(1)
+        relaunchActivity(1)
         InAppNotification.checkNotShown()
     }
 
     @Test
     fun notificationShownAgainIfNotClosed() {
-        launchActivity(1)
+        relaunchActivity(1)
         InAppNotification.checkShown()
-        launchActivity(1)
+        relaunchActivity(1)
         InAppNotification.checkShown()
     }
 
     @Test
     fun differentNotificationShown() {
-        launchActivity(1)
+        relaunchActivity(1)
         InAppNotification.checkShown()
         InAppNotification.close()
-        launchActivity(2)
+        relaunchActivity(2)
         InAppNotification.checkShown()
     }
 
     // TODO: Add tests that verify that the push notification shows up as
     //       expected. That should be possible with UiAutomator.
 
-    private fun launchActivity(notificationId: Int) {
+    private fun relaunchActivity(notificationId: Int) {
         closeActivity()
         UpdateNotification.mockData.id = notificationId
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
