@@ -8,6 +8,11 @@ const bigBubblesRadius = 50;
 const bubblePadding = 3;
 const bigBubblesFont = "20px";
 const mediumBubblesFont = "16px";
+const defaultBubbleColor = "blue";
+const defaultTextColor = "white";
+const defaultOpacity = 1;
+const defaultValueShowing = true;
+const defaultOnClickFunction = () => {};
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
@@ -36,13 +41,13 @@ export class BubbleCluster extends Chart {
   constructor({
     selector,
     data,
-    width = 400,
-    height = 300,
-    bubbleColor = "blue",
-    textColor = "white",
-    opacity = 1,
-    showValues = true,
-    onBubbleClick = () => {},
+    width,
+    height,
+    bubbleColor = defaultBubbleColor,
+    textColor = defaultTextColor,
+    opacity = defaultOpacity,
+    showValues = defaultValueShowing,
+    onBubbleClick = defaultOnClickFunction,
     filter,
   }) {
     super({ selector, data, width, height });
@@ -130,7 +135,9 @@ export class BubbleCluster extends Chart {
       .style("font-family", "Jost Medium")
       .style("font-weight", "500")
       .attr("fill", this._textColor)
-      .attr("transform", (d) => `translate(${d.x},${d.y})`);
+      .attr("transform", (d) =>
+        d.data.icon ? `translate(${d.x},${d.y})` : ""
+      );
   }
 
   _updateBubbleValueTexts(leaves) {
