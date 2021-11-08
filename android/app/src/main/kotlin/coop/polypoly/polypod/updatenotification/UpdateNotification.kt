@@ -45,9 +45,10 @@ class UpdateNotification(private val context: Context) {
 
     private fun loadLastState(): State {
         val (lastId, lastState) = Preferences.getLastNotification(context)
-        return when (id) {
-            0 -> State.ALL_SEEN
-            lastId -> State.parse(lastState) ?: State.ALL_SEEN
+        return when {
+            id == 0 -> State.ALL_SEEN
+            id < lastId -> State.ALL_SEEN
+            id == lastId -> State.parse(lastState) ?: State.ALL_SEEN
             else -> State.NOT_SEEN
         }
     }
