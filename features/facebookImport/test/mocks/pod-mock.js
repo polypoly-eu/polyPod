@@ -1,10 +1,13 @@
+export const MOCKED_POD_RUNTIME = "podjs-mock";
+export const MOCKED_POD_RUNTIME_VERSION = "podjs-mock-version";
+
 class MockerPodInfo {
     async getRuntime() {
-        return "podjs-mock";
+        return MOCKED_POD_RUNTIME;
     }
 
     async getVersion() {
-        return "podjs-mock-version";
+        return MOCKED_POD_RUNTIME_VERSION;
     }
 }
 
