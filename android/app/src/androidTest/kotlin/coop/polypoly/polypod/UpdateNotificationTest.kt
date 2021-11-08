@@ -88,7 +88,7 @@ class UpdateNotificationTest {
     }
 
     @Test
-    fun differentNotificationShown() {
+    fun notificationWithDifferentIdShown() {
         relaunchActivity(1)
         InAppNotification.checkShown()
         InAppNotification.close()
