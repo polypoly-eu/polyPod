@@ -7,7 +7,7 @@ on:
 jobs:
     test:
         name: Run tests.
-        runs-on: macos-latest
+        runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
@@ -57,9 +57,3 @@ jobs:
               if: steps.changes.outputs.android == 'true'
               working-directory: android
               run: ./gradlew test
-            - name: Test android instrumentation
-              uses: reactivecircus/android-emulator-runner@v2
-              with:
-                working-directory: android
-                api-level: 29
-                script: ./gradlew connectedAndroidTest
