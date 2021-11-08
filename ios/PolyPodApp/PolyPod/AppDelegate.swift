@@ -1,8 +1,11 @@
+import BackgroundTasks
 import UIKit
 import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    private static let updateNotificationCheckIdentifier = "coop.polypoly.polypod.updateNotificationCheck"
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -23,7 +26,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let count = try! managedContext.count(for: fetchRequest)
         print("Number of quads in Core Data:", count)
         
+        self.registerUpdateNotificationCheck()
+        
         return true
+    }
+    
+    private func registerUpdateNotificationCheck() {
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: AppDelegate.updateNotificationCheckIdentifier, using: nil) { task in
+            self.handleUpdateNotificationCheck(task)
+        }
+    }
+    
+    private func handleUpdateNotificationCheck(_ task: BGTask) {
+        let notification = UpdateNotification()
+        if notification.showPush {
+            notification.onPushSeen()
+            showUpdateNotification()
+        }
+        task.setTaskCompleted(success: true)
+        scheduleUpdateNotificationCheck()
+    }
+    
+    private func showUpdateNotification() {
+        let identifier = UUID().uuidString
+        
+        let content = UNMutableNotificationContent()
+        let notification = UpdateNotification()
+        content.title = notification.title
+        content.body = notification.text
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(notification.pushDelay), repeats: false)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(request) { error in
+            if error != nil {
+                print("Error showing update notification: \(error!.localizedDescription)")
+            }
+        }
     }
     
     // MARK: UISceneSession Lifecycle
@@ -98,6 +138,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    func scheduleUpdateNotificationCheck() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {_, _ in }
+        
+        let task = BGProcessingTaskRequest(identifier: AppDelegate.updateNotificationCheckIdentifier)
+        task.earliestBeginDate = Date(timeIntervalSinceNow: 60)
+        task.requiresExternalPower = false
+        task.requiresNetworkConnectivity = false
+        do {
+            try BGTaskScheduler.shared.submit(task)
+        } catch {
+            print("Failed to schedule task \(AppDelegate.updateNotificationCheckIdentifier): \(error.localizedDescription)")
         }
     }
 }
