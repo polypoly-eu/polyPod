@@ -12,7 +12,7 @@ import careIcon from "../../static/images/reactions-ministory/care.svg";
 import wowIcon from "../../static/images/reactions-ministory/wow.svg";
 import sadIcon from "../../static/images/reactions-ministory/sad.svg";
 import angerIcon from "../../static/images/reactions-ministory/anger.svg";
-import BelowChartButtons from "../belowChartButtons/belowChartButtons.jsx";
+import ChartButtons from "../chartButtons/chartButtons.jsx";
 
 const reactionEmoji = {
     LIKE: likeIcon,
@@ -81,7 +81,7 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 showValues={false}
                 filter={iconSaturation}
             />
-            <BelowChartButtons
+            <ChartButtons
                 buttonsContent={extendedReactionData.map((r) => {
                     return {
                         id: r.type,

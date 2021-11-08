@@ -1,4 +1,4 @@
-.below-chart-button {
+.chart-button {
     height: 32px;
     margin: 4px;
     padding: 0 12px;
@@ -9,7 +9,7 @@
     font-size: 14px;
 }
 
-.below-chart-button.selected {
+.chart-button.selected {
     background-color: var(--background-light);
     color: var(--text-dark);
 }

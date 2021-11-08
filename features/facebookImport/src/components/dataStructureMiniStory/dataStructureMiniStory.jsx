@@ -5,7 +5,7 @@ import { PolyChart } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n.js";
 
 import "./dataStructureMiniStory.css";
-import BelowChartButtons from "../belowChartButtons/belowChartButtons.jsx";
+import ChartButtons from "../chartButtons/chartButtons.jsx";
 
 const DataStructureMiniStory = ({ data }) => {
     data.forEach((d) => {
@@ -60,7 +60,7 @@ const DataStructureMiniStory = ({ data }) => {
                     onBubbleClick={handleBubbleClick}
                 />
             </div>
-            <BelowChartButtons
+            <ChartButtons
                 buttonsContent={data.map((d) => {
                     return { id: d.title };
                 })}

@@ -1,13 +1,8 @@
 import React from "react";
 
-import "./belowChartButtons.css";
+import "./chartButtons.css";
 
-const BelowChartButtons = ({
-    buttonsContent,
-    activeButton,
-    onButtonsClick,
-}) => {
-    console.log(buttonsContent);
+const ChartButtons = ({ buttonsContent, activeButton, onButtonsClick }) => {
     return (
         <>
             {buttonsContent.map(({ id, translation }) => {
@@ -15,8 +10,8 @@ const BelowChartButtons = ({
                     <button
                         className={
                             activeButton == id
-                                ? "below-chart-button selected"
-                                : "below-chart-button"
+                                ? "chart-button selected"
+                                : "chart-button"
                         }
                         onClick={() => onButtonsClick(id)}
                         key={id}
@@ -29,4 +24,4 @@ const BelowChartButtons = ({
     );
 };
 
-export default BelowChartButtons;
+export default ChartButtons;
