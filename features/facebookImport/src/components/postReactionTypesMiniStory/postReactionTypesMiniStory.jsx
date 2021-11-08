@@ -69,9 +69,10 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 ></p>
             ) : null}
             <PolyChart
-                type="icon-cluster"
+                type="bubble-cluster"
                 data={mapEmojiToReaction(reactionData)}
-                onIconClick={handleIconSelected}
+                onBubbleClick={handleIconSelected}
+                showValues={false}
                 filter={iconSaturation}
             />
             <BelowChartButtons
