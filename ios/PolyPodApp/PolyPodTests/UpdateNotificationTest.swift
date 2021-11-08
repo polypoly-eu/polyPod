@@ -35,13 +35,13 @@ class UpdateNotificationTest: XCTestCase {
         XCTAssertTrue(secondNotification.showPush)
     }
     
-    func testAdditionalNotificationWithLowerIdNotSeen() {
+    func testAdditionalNotificationWithLowerIdSeen() {
         let notification = loadNotification(2)
         notification.onInAppSeen()
         
         let secondNotification = loadNotification(1)
-        XCTAssertTrue(secondNotification.showInApp)
-        XCTAssertTrue(secondNotification.showPush)
+        XCTAssertFalse(secondNotification.showInApp)
+        XCTAssertFalse(secondNotification.showPush)
     }
     
     func testPushNotificationSeenAfterStartup() {

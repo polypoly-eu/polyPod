@@ -63,6 +63,10 @@ class UpdateNotification {
             return .NOT_SEEN
         }
         
+        if id < lastId {
+            return .ALL_SEEN
+        }
+        
         if id != lastId {
             return .NOT_SEEN
         }
