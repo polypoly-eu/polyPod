@@ -171,7 +171,17 @@ task copyThirdPartyLicenses(type: Copy) {
     into "build/generated-assets/3rd-party-licenses"
 }
 
+task installAppOnDevice {
+    doLast {
+        exec {
+            commandLine adb, 'install', "-r", "$buildDir/outputs/androidTest/debug/app-debug-androidTest.apk"
+            logger.info("Application installed onto the device")
+        }
+    }
+}
+
 task packageTestFeature(type: Zip) {
+    dependsOn installAppOnDevice
     archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
     from "$projectDir/../../features/test/dist"
