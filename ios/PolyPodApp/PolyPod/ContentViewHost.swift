@@ -7,11 +7,6 @@ class ContentViewHost: UIHostingController<ContentView> {
     init() {
         super.init(rootView: ContentView())
         self.rootView.setStatusBarStyle = { self.statusBarStyle = $0 }
-        let defaults = UserDefaults.standard
-        if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
-            print("Resetting all user defaults")
-            UserDefaults.standard.reset()
-        }
     }
     
     @objc required dynamic init?(coder aDecoder: NSCoder) {
