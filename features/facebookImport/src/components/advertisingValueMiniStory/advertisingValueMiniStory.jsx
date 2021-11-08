@@ -31,7 +31,10 @@ const calculateFontSize = (text, maxWidth) => {
     return minFontSize;
 };
 
-const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
+export const AdvertisingValueMiniStorySummary = ({
+    randomAdInterests,
+    numberInterests,
+}) => {
     const refWidth = useRef(0);
     const fontSize = calculateFontSize(
         randomAdInterests,
@@ -49,7 +52,7 @@ const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
             <ul>
                 {randomAdInterests.map((interest, index) => {
                     return (
-                        <li key={index} ref={refWidth}>
+                        <li key={index} ref={refWidth} className="summary">
                             <p
                                 style={{
                                     fontSize: fontSize,
@@ -69,4 +72,33 @@ const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
     );
 };
 
-export default AdvertisingValueMiniStory;
+export const AdvertisingValueMiniStoryDetails = ({
+    displayData,
+    numberInterests,
+}) => {
+    return (
+        <div className="advertising-value-mini-story">
+            <p
+                className="intro"
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("advertisingValueMiniStory:details.text.1", {
+                        number_interests: numberInterests,
+                    }),
+                }}
+            />
+            <ul>
+                {displayData.map((interest, index) => {
+                    return (
+                        <li key={index} className="details">
+                            <span className="all-ad-interests">{interest}</span>
+                        </li>
+                    );
+                })}
+            </ul>
+
+            <p className="source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p>
+        </div>
+    );
+};
