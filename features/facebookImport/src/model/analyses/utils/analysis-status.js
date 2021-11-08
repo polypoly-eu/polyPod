@@ -5,6 +5,14 @@ export function createSuccessStatus() {
     };
 }
 
+export function createWarningStatus(message) {
+    return {
+        name: "WARNING",
+        message,
+        isWarning: true,
+    };
+}
+
 export function createErrorStatus(error) {
     return {
         name: "ERROR",

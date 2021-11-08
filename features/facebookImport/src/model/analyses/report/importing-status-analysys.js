@@ -7,38 +7,55 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
     }
 
     get reportData() {
-        return this._importingResults.map(
-            ({ status, importerClass, message }) => {
-                return {
-                    status,
-                    importerName: importerClass.name,
-                    message,
-                };
-            }
-        );
+        return this._importersData;
     }
 
     async analyze({ facebookAccount }) {
-        this._importingResults = facebookAccount.importingResults;
-        this.active = this._importingResults.length > 0;
+        this._importersData = facebookAccount.importingResults.map(
+            (importerResult) => importerResult.reportJsonData
+        );
+        this.active = this._importersData.length > 0;
+    }
+
+    _renderStatus(status) {
+        return (Array.isArray(status) ? status : [status]).map(
+            (each, statusIndex) => {
+                return (
+                    <div key={statusIndex}>
+                        {each.name + (each.message ? " - " + each.message : "")}
+                    </div>
+                );
+            }
+        );
     }
 
     render() {
         return (
             <>
                 <p>
-                    Data was read using {this._importingResults.length}{" "}
-                    importers. This is a technical view showing the list of
-                    importers that read data.
+                    Data was read using {this._importersData.length} importers.
+                    This view shows the list of importers that read data.
                 </p>
                 <table>
+                    <thead>
+                        <tr>
+                            <th>Importer</th>
+                            <th>Status</th>
+                            <th>Execution Time</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        {this._importingResults.map(
-                            ({ status, importerClass, message }, index) => (
+                        {this._importersData.map(
+                            (
+                                { importerName, executionTime, status },
+                                index
+                            ) => (
                                 <tr key={index}>
-                                    <td>{importerClass.name}</td>
-                                    <td>{status}</td>
-                                    <td>{message}</td>
+                                    <td>{importerName}</td>
+                                    <td>{this._renderStatus(status)}</td>
+                                    <td style={{ "text-align": "right" }}>
+                                        {executionTime}
+                                    </td>
                                 </tr>
                             )
                         )}

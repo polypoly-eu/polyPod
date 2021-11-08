@@ -1,10 +1,10 @@
+import { createWarningStatus } from "../analyses/utils/analysis-status";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
 import {
     extractNameFromAdDescription,
     localeForCategoyName,
 } from "./utils/ads-locale";
-import { IMPORT_WARNING } from "./utils/importer-status.js";
 import { readJSONDataArray } from "./utils/importer-util";
 import { extractAccountDataFromUrl } from "./utils/url-processing";
 
@@ -120,11 +120,7 @@ export default class RecentlyViewedAdsImporter {
         );
 
         if (!adsViewsData) {
-            return {
-                status: IMPORT_WARNING,
-                importerClass: this.constructor,
-                message: "Could not locate ads category",
-            };
+            return createWarningStatus("Could not locate ads category");
         }
 
         const currentLocale = localeForCategoyName(adsViewsData.name);
