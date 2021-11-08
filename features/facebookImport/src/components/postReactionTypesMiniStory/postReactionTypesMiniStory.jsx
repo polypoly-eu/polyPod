@@ -35,17 +35,22 @@ export function mapEmojiToReaction(reactions) {
 }
 
 const PostReactionTypesMiniStory = ({ reactionData }) => {
-    const [selectedReaction, setSelectedReaction] = useState("*");
+    const [selectedReaction, setSelectedReaction] = useState("TOTAL");
 
     const handleIconSelected = (e, d) => setSelectedReaction(d.data.title);
     const iconSaturation = (d) =>
-        selectedReaction == d.data.title || selectedReaction == "*"
+        selectedReaction == d.data.title || selectedReaction == "TOTAL"
             ? "saturate(1)"
             : "saturate(0)";
 
     const totalAmountOfReactions = reactionData.reduce(
         (prev, curr) => (prev.count || prev) + curr.count
     );
+
+    const extendedReactionData = [
+        ...reactionData,
+        { type: "TOTAL", count: totalAmountOfReactions },
+    ];
 
     return (
         <>
@@ -56,18 +61,19 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                     }),
                 }}
             ></p>
-            {selectedReaction != "*" ? (
-                <p
-                    dangerouslySetInnerHTML={{
-                        __html: `${i18n.t(
-                            `reactionsMiniStory:${selectedReaction}`
-                        )}: <strong>${
-                            reactionData.find((e) => e.type == selectedReaction)
-                                ?.count || totalAmountOfReactions
-                        }</strong>`,
-                    }}
-                ></p>
-            ) : null}
+
+            <p
+                dangerouslySetInnerHTML={{
+                    __html: `${i18n.t(
+                        `reactionsMiniStory:${selectedReaction}`
+                    )}: <strong>${
+                        extendedReactionData.find(
+                            (e) => e.type == selectedReaction
+                        ).count
+                    }</strong>`,
+                }}
+            ></p>
+
             <PolyChart
                 type="bubble-cluster"
                 data={mapEmojiToReaction(reactionData)}
@@ -76,7 +82,7 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 filter={iconSaturation}
             />
             <BelowChartButtons
-                buttonsContent={reactionData.map((r) => {
+                buttonsContent={extendedReactionData.map((r) => {
                     return {
                         id: r.type,
                         translation: i18n.t(`reactionsMiniStory:${r.type}`),

@@ -7,6 +7,7 @@ const BelowChartButtons = ({
     activeButton,
     onButtonsClick,
 }) => {
+    console.log(buttonsContent);
     return (
         <>
             {buttonsContent.map(({ id, translation }) => {
