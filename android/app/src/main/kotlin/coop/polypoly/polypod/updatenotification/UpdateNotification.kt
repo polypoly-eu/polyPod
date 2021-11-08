@@ -52,16 +52,14 @@ class UpdateNotification(private val context: Context) {
         }
     }
 
-    fun onFirstRun() {
-        state = State.ALL_SEEN
-    }
+    fun onStartup() = onPushSeen()
+
+    fun onFirstRun() = onInAppSeen()
 
     fun onPushSeen() {
         if (state == State.NOT_SEEN)
             state = State.PUSH_SEEN
     }
-
-    fun onStartup() = onPushSeen()
 
     fun onInAppSeen() {
         state = State.ALL_SEEN
