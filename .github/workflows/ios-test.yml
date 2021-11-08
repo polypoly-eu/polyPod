@@ -1,8 +1,8 @@
-name: Testing polyPod in iOS
+name: Testing polyPod on devices
 on: [push, pull_request]
 jobs:
   test:
-    name: Testing polyPod iOS app
+    name: Testing polyPod on iOS and Android
     runs-on: macOS-10.15
     steps:
       - name: Checkout repository
@@ -19,3 +19,40 @@ jobs:
           cd ios
           set -o pipefail
           make test | xcpretty
+      - name: Checks paths to rebuild Android
+        uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
+        id: changes
+        with:
+            filters: |
+                    android:
+                    - 'android/**'
+                    - 'core/api/**'
+                    - 'core/communication/**'
+                    - 'core/utils/silly-i18n/**'
+                    - 'features/**'
+                    - 'podjs/**'
+                    js:
+                    - '**/*.js'
+                    - '**/*.jsx'
+                    - '**/*.ts'
+                    - '**/*.tsx'
+                    - '**/*.?js'
+                    - '.editorconfig'
+                    - '.eslintrc.cjs'
+                    coreAndFeatures:
+                    - 'core/**'
+                    - 'features/**'
+                    - 'podjs/**'
+                    - 'build/**'
+      - name: Install global modules
+        run: npm ci --no-update-notifier --no-fund
+      - name: Build core and features
+        if: steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.android == 'true'
+        run: ./build.js
+      - name: Test android instrumentation
+        uses: reactivecircus/android-emulator-runner@2b2ebf2e518e38a17180117fc2b677006db27330
+        with:
+            working-directory: android
+            api-level: 29
+            script: ./gradlew connectedAndroidTest
+

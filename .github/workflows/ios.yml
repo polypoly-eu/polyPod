@@ -1,0 +1,16 @@
+name: Testing polyPod on iOS
+on: release
+
+jobs:
+  test:
+    name: Testing polyPod app
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build iOS
+        run: |
+          cd ios
+          set -o pipefail
+          make test | xcpretty
+
