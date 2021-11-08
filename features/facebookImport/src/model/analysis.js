@@ -217,9 +217,8 @@ export async function runAnalysis(analysisClass, enrichedData) {
     }
 }
 
-export async function analyzeFile(file, facebookAccount) {
-    const zipFile = new ZipFile(file, window.pod);
-    const enrichedData = { ...file, zipFile, facebookAccount };
+export async function analyzeZip(zipData, zipFile, facebookAccount) {
+    const enrichedData = { ...zipData, zipFile, facebookAccount };
     const analysesResults = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
             return runAnalysis(subAnalysisClass, enrichedData);
@@ -237,4 +236,9 @@ export async function analyzeFile(file, facebookAccount) {
         analyses: activeGlobalAnalyses,
         unrecognizedData: new UnrecognizedData(analysesResults),
     };
+}
+
+export async function analyzeFile(zipData, facebookAccount) {
+    const zipFile = new ZipFile(zipData, window.pod);
+    return await analyzeZip(zipData, zipFile, facebookAccount);
 }
