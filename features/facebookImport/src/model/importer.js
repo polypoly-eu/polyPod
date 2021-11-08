@@ -78,9 +78,9 @@ class ImporterExecutionResult {
 
     get reportJsonData() {
         return {
-            format: "v2",
+            formatVersion: "v2",
             importerName: this.importer.constructor.name,
-            executionTime: this.executionTime.toFixed(1),
+            executionTime: this.executionTime.toFixed(0),
             status: Array.isArray(this.status)
                 ? this.status.map((each) => this._extractDataFromStatus(each))
                 : this._extractDataFromStatus(this.status),

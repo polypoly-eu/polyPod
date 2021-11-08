@@ -34,15 +34,14 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
             <>
                 <p>
                     Data was read using {this._importersData.length} importers.
-                    This is a technical view showing the list of importers that
-                    read data.
+                    This view shows the list of importers that read data.
                 </p>
                 <table>
                     <thead>
                         <tr>
                             <th>Importer</th>
-                            <th>Execution Time</th>
                             <th>Status</th>
+                            <th>Execution Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,8 +52,8 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
                             ) => (
                                 <tr key={index}>
                                     <td>{importerName}</td>
-                                    <td>{executionTime}</td>
                                     <td>{this._renderStatus(status)}</td>
+                                    <td>{executionTime}</td>
                                 </tr>
                             )
                         )}

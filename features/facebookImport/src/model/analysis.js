@@ -192,7 +192,7 @@ class AnalysisExecutionResult {
                 name: this.status.name,
                 message: this.status.message,
             },
-            executionTime: this.executionTime.toFixed(2),
+            executionTime: this.executionTime.toFixed(0),
         };
     }
 }
