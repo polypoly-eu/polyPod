@@ -32,7 +32,7 @@ class UpdateNotificationTest: XCTestCase {
         assertInAppNotificationShown()
     }
     
-    func testDifferentNotificationShown() {
+    func testNotificationWithDifferentIdShown() {
         launchApp(1)
         assertInAppNotificationShown()
         closeInAppNotification()
