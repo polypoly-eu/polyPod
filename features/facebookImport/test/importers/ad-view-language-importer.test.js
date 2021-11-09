@@ -1,6 +1,7 @@
 "use strict";
 
 import {
+    AD_VIEWS_EXPECTED_DATA,
     createDanishAdViewsData,
     createEnglishAdViewsData,
     createGermanAdViewsData,
@@ -31,12 +32,19 @@ datasets.forEach(([language, dataset]) =>
         it("returns success status", () => expectImportSuccess(result));
 
         it("has two related accounts", () =>
-            expect(relatedAccounts.count).toBe(2));
+            expect(relatedAccounts.count).toBe(
+                AD_VIEWS_EXPECTED_DATA.numberOfRelatedAccounts
+            ));
 
-        it("has three ads", () => expect(relatedAccounts.adsCount).toBe(3));
+        it("has three ads", () =>
+            expect(relatedAccounts.adsCount).toBe(
+                AD_VIEWS_EXPECTED_DATA.numberOfAds
+            ));
 
         it("has four ad views", () =>
-            expect(relatedAccounts.adViewsCount).toBe(4));
+            expect(relatedAccounts.adViewsCount).toBe(
+                AD_VIEWS_EXPECTED_DATA.numberOfAdViews
+            ));
 
         it("has correct related account ids for first account", () => {
             expect(firstRelatedAccount.rawId).toBeUndefined();
