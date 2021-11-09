@@ -102,11 +102,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
                     ref={refWidth}
                 >
                     {" "}
-                    {
-                        +this._totalEvents.total
-                            .toLocaleString()
-                            .replace(",", ".")
-                    }
+                    {this._totalEvents.total.toLocaleString("de-DE")}
                 </h2>
                 {i18n.t("activitiesMiniStory:summary", {
                     number_activities: this._totalEvents.total,
