@@ -44,9 +44,7 @@ export const OnOffFacebookMiniStorySummary = ({
                     }),
                 }}
             />
-            {companiesWithAdsCount === 0 ? (
-                <div>{i18n.t("offFacebookEventsMiniStory:no.ads")}</div>
-            ) : (
+            {companiesWithAdsCount === 0 ? null : (
                 <>
                     <h2>{companiesWithAdsCount}</h2>
                     <p
