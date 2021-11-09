@@ -1,7 +1,5 @@
-import { analyzeZip } from "../src/model/analysis";
-import { importZip } from "../src/model/importer";
 import { zipFileWithOffFacebookEvents } from "./datasets/off-facebook-events-data";
-import { MockerPod } from "./mocks/pod-mock";
+import { runAnalysesForZip } from "./utils/analyses-execution";
 import { expectActiveAnalysis } from "./utils/analysis-assertions";
 
 export const NUMBER_OF_REPORT_ANALYSES = 8;
@@ -13,13 +11,7 @@ describe("Report creation for empty zip", () => {
     beforeAll(async () => {
         let zipFile = zipFileWithOffFacebookEvents();
         zipFile.addJsonEntry("unknow_folder/unknown_file.json", '""');
-        const facebookAccount = await importZip(zipFile);
-        ({ unrecognizedData } = await analyzeZip(
-            zipFile.enrichedFileData(),
-            zipFile,
-            facebookAccount,
-            new MockerPod()
-        ));
+        ({ unrecognizedData } = await runAnalysesForZip(zipFile));
 
         jsonReport = unrecognizedData.jsonReport;
     });

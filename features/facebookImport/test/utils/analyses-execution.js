@@ -1,4 +1,4 @@
-import { runAnalysis } from "../../src/model/analysis";
+import { analyzeZip, runAnalysis } from "../../src/model/analysis";
 import { importZip } from "../../src/model/importer";
 import { MockerPod } from "../mocks/pod-mock";
 
@@ -20,4 +20,14 @@ export async function runAnalysisForAccount(
 ) {
     const enrichedData = { facebookAccount, pod };
     return runAnalysis(analysisClass, enrichedData);
+}
+
+export async function runAnalysesForZip(zipFile) {
+    const facebookAccount = await importZip(zipFile);
+    return await analyzeZip(
+        zipFile.enrichedFileData(),
+        zipFile,
+        facebookAccount,
+        new MockerPod()
+    );
 }
