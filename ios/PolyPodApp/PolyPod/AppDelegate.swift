@@ -38,6 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func handleUpdateNotificationCheck(_ task: BGTask) {
+        task.expirationHandler = {
+            print("Update notification check expired")
+            task.setTaskCompleted(success: false)
+        }
+        
         let notification = UpdateNotification()
         if notification.showPush {
             notification.onPushSeen()
@@ -55,7 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         content.title = notification.title
         content.body = notification.text
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(notification.pushDelay), repeats: false)
+        // We show the notification with a delay to make debugging easier:
+        // It won't show up if the app has focus.
+        let delay = 10.0
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
         let notificationCenter = UNUserNotificationCenter.current()
@@ -145,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {_, _ in }
         
         let task = BGProcessingTaskRequest(identifier: AppDelegate.updateNotificationCheckIdentifier)
-        task.earliestBeginDate = Date(timeIntervalSinceNow: 60)
+        task.earliestBeginDate = Date(timeIntervalSinceNow: TimeInterval(UpdateNotification().pushDelay))
         task.requiresExternalPower = false
         task.requiresNetworkConnectivity = false
         do {
