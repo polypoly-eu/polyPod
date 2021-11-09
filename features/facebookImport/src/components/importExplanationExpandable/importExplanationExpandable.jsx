@@ -201,7 +201,11 @@ const ImportExplanationExpandable = ({
                 <p className="bold">{i18n.t("import:intro.text.2")}</p>
                 <InfoBox textContent={i18n.t("import:intro.info")} />
             </div>
-            <ScrollButton scrollRef={expandableRef} />
+            <ScrollButton
+                scrollRef={expandableRef}
+                img="./images/scroll-down.svg"
+                scrollButtonText={i18n.t("import:scroll.down")}
+            />
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
                     <div

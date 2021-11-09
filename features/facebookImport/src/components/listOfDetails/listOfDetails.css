@@ -1,18 +1,29 @@
-.detail-view .intro {
-    margin-bottom: 28px;
+.scrollable-list {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.scrollable-list ul {
+    overflow: hidden scroll;
 }
 
-.detail-view li {
-    margin-bottom: 18px;
-    font-size: 10px;
+.list-gradient {
+    position: absolute;
+    width: 100%;
+    height: 90px;
+
+    bottom: 0;
+    left: 0;
+}
+.list-gradient.gradient {
+    background: linear-gradient(#0f193800 0%, #0f1938);
+}
+.list-gradient.reverse {
+    top: 0;
+    transform: rotate(180deg);
 }
 
-.detail-view .items {
-    color: var(--color-gray-50);
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.detail-view .source {
-    margin-top: 45px;
+.hidden {
+    display: none;
 }

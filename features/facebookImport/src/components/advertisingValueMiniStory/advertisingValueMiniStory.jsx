@@ -22,7 +22,6 @@ const calculateFontSize = (text, maxWidth) => {
         Math.max(...interestsLength)
     );
     let longestInterestWord = splitInterests[longestInterestWordIndex];
-    console.log(longestInterestWord);
     for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
         context.font = `${fontSize}px Jost`;
         if (context.measureText(longestInterestWord).width <= maxWidth)
@@ -40,6 +39,7 @@ export const AdvertisingValueMiniStorySummary = ({
         randomAdInterests,
         refWidth.current.clientWidth
     );
+
     return (
         <div className="advertising-value-mini-story">
             <p
@@ -77,10 +77,20 @@ export const AdvertisingValueMiniStoryDetails = ({
     numberInterests,
 }) => {
     return (
-        <ListOfDetails
-            intro="advertisingValueMiniStory:details.text.1"
-            numberValue={numberInterests}
-            list={displayData}
-        ></ListOfDetails>
+        <div className="detail-view">
+            <p
+                className="intro"
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("advertisingValueMiniStory:details.text.1", {
+                        number: numberInterests,
+                    }),
+                }}
+            />
+            <ListOfDetails list={displayData}></ListOfDetails>
+
+            {/* <p className="source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p> */}
+        </div>
     );
 };

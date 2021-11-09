@@ -19,3 +19,30 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
+.detail-view {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-view .intro {
+    margin-bottom: 28px;
+}
+.detail-view ul {
+    margin: 0px;
+}
+
+.detail-view li {
+    margin-bottom: 18px;
+    font-size: 10px;
+}
+
+.detail-view .items {
+    color: var(--color-gray-50);
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.detail-view .source {
+    margin-top: 32px;
+}
