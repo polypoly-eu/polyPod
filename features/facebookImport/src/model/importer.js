@@ -50,6 +50,8 @@ const dataImporters = [
     PostsImporter,
 ];
 
+export const NUMBER_OF_IMPORTERS = dataImporters.length;
+
 class ImporterExecutionResult {
     constructor(importer, status, executionTime) {
         this._importer = importer;

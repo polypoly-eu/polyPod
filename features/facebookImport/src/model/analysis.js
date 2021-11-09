@@ -112,6 +112,8 @@ const subAnalyses = [
     ].includes(analysis);
 });
 
+export const NUMBER_OF_ANALYSES = subAnalyses.length;
+
 class UnrecognizedData {
     constructor(analysesResults) {
         this._activeReportAnalyses = analysesResults
