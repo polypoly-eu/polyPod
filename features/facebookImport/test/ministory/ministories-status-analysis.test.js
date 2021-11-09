@@ -4,7 +4,7 @@ import { zipFileWithOffFacebookEvents } from "../datasets/off-facebook-events-da
 import { runAnalysesForZip } from "../utils/analyses-execution";
 import { expectActiveAnalysis } from "../utils/analysis-assertions";
 
-describe("Ministories status analysis for empty zip", () => {
+describe("Ministories status analysis", () => {
     let unrecognizedData = null;
     let ministoriesAnalysis = null;
     let jsonReport = null;
