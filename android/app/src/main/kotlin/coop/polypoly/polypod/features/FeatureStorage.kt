@@ -10,6 +10,8 @@ class FeatureStorage {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+
+        var activeFeature: Feature? = null
     }
 
     fun listFeatures(context: Context): List<Feature> {

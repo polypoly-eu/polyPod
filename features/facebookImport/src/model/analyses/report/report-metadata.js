@@ -11,6 +11,8 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
             fileSize: this._size,
             filesCount: this._filesCount,
             preferedLanguage: this._preferedLanguage,
+            polyPodRuntime: this._polyPodRuntime,
+            polyPodVersion: this._polyPodVersion,
         };
     }
 

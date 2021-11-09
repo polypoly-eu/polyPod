@@ -120,10 +120,11 @@ export const ImporterProvider = ({ children }) => {
     };
 
     const handleImportFile = async () => {
-        const { polyNav } = pod;
+        const { polyNav, polyOut } = pod;
         setFiles(null); // To show the loading overlay
         try {
-            await polyNav.importFile();
+            const url = await polyNav.pickFile("application/zip");
+            if (url) await polyOut.importArchive(url);
         } catch (error) {
             setGlobalError(new FileImportError(error));
         }

@@ -1,4 +1,13 @@
 {
     "title": "Facebook knows what you did elsewhere",
-    "total": "A total of <strong>{{number_companies}}</strong> apps and websites you use outside Facebook send information about that back to Facebook anyways. <strong>{{number_purchases}}</strong> of those send Infos about your purchases."
+    "general": "Your Facebook data contains information about things you did outside of its service, eg. on other apps and websites.",
+    "companies": "companies that provide these so-called off Facebook events are listed in your data.",
+    "companiesWithAds": "of those companies also present advertising to you. Coincidence?",
+    "total": "A total of <strong>{{number_companies}}</strong> apps and websites you use outside Facebook send information about that back to Facebook anyways. <strong>{{number_companiesWithAds}}</strong> of those send Infos about your purchases.",
+    "details.text.1": "Looking at on and off Facebook events over time different patterns might emerge. Off events seem to be followed by on events or vice versa. The data does not prove causality, but this is an interesting starting point for further exploration.",
+    "details.text.2": "We are showing the last 90 days because Facebook only stores on events that long. Maybe you remember some of your activities in the last 3 months? Or you will be more conscious from now on.",
+    "on.fb.events": "On Facebook events",
+    "off.fb.events": "Off Facebook events",
+    "last.90.days": "Last 90 days",
+    "number.events": "Number of events"
 }

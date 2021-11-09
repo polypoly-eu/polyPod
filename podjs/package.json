@@ -11,19 +11,15 @@
   },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "build-downstream": "../build.js --start @polypoly-eu/podjs",
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
     "@polypoly-eu/fetch-spec": "file:../core/api/fetch-spec",
     "@polypoly-eu/pod-api": "file:../core/api/pod-api",
     "@polypoly-eu/rdf": "file:../core/api/rdf",
-    "@polypoly-eu/rdf-convert": "file:../core/api/rdf-convert",
-    "@rdfjs/dataset": "^1.0.1",
-    "@types/rdf-js": "^4.0.0",
-    "@zip.js/zip.js": "2.3.7",
-    "fp-ts": "^2.8.2",
-    "io-ts": "2.2.10",
-    "memfs": "^3.2.0"
+    "@types/rdf-js": "^4.0.2",
+    "@zip.js/zip.js": "2.3.7"
   },
   "devDependencies": {
     "@polypoly-eu/rdf-spec": "file:../core/api/rdf-spec",
@@ -32,14 +28,8 @@
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/node": "^14.14.21",
     "@types/node-fetch": "^2.5.8",
-    "@types/rdfjs__dataset": "^1.0.4",
-    "@typescript-eslint/eslint-plugin": "^4.1.0",
     "body-parser": "^1.19.0",
-    "eslint": "^7.18.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
     "fast-check": "^2.11.0",
-    "prettier": "^2.2.1",
     "rollup": "^2.37.0",
     "typescript": "^4.0.5"
   },

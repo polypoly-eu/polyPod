@@ -2,12 +2,12 @@ import XCTest
 import Zip
 
 private class PolyNavDelegateStub: PolyNavDelegate {
-    var importFileResult: URL?
+    var pickFileResult: URL?
     func doHandleOpenUrl(url: String) {
     }
     
-    func doHandleImportFile(completion: @escaping (URL?) -> Void) {
-        completion(importFileResult)
+    func doHandlePickFile(type: String?, completion: @escaping (URL?) -> Void) {
+        completion(pickFileResult)
     }
     
     func doHandleSetTitle(title: String) {
@@ -21,6 +21,7 @@ private let testFolderPath = FileManager.default.temporaryDirectory
 private let testFilePath = testFolderPath
     .appendingPathComponent("testFile.json")
 private let testZipFilePath = testFolderPath.appendingPathComponent("testFile.zip")
+private let zipMimeType = "application/zip"
 
 private func removeTestFile() {
     let fileManager = FileManager.default
@@ -52,23 +53,23 @@ class PolyNavTests: XCTestCase {
         removeTestFile()
     }
     
-    func testImportFileReturnsFileSelectedByUser() {
+    func testPickFileReturnsFileSelectedByUser() {
         let delegateStub = PolyNavDelegateStub()
-        delegateStub.importFileResult = testZipFilePath
+        delegateStub.pickFileResult = testZipFilePath
         polyNav.delegate = delegateStub
-        expectImportFileResult("polyPod://")
+        expectPickFileResult("file://")
     }
     
-    func testImportFileReturnsNullIfUserCancelled() {
+    func testPickFileReturnsNullIfUserCancelled() {
         let delegateStub = PolyNavDelegateStub()
-        delegateStub.importFileResult = nil
+        delegateStub.pickFileResult = nil
         polyNav.delegate = delegateStub
-        expectImportFileResult(nil)
+        expectPickFileResult(nil)
     }
     
-    private func expectImportFileResult(_ expected: String?) {
+    private func expectPickFileResult(_ expected: String?) {
         let expectation = XCTestExpectation()
-        polyNav.importFile() { actual in
+        polyNav.pickFile(type: zipMimeType) { actual in
             expectation.fulfill()
             if expected == nil {
                 XCTAssertEqual(expected, actual)

@@ -1,4 +1,4 @@
-import RootAnalysis from "../analyses/ministories/root-analysis";
+import { createWarningStatus } from "../analyses/utils/analysis-status";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
 import {
@@ -7,6 +7,10 @@ import {
 } from "./utils/ads-locale";
 import { readJSONDataArray } from "./utils/importer-util";
 import { extractAccountDataFromUrl } from "./utils/url-processing";
+
+export const RECENTLY_VIEWED_FILE_PATH =
+    "your_interactions_on_facebook/recently_viewed.json";
+export const RECENTLY_VIEWED_DATA_KEY = "recently_viewed";
 
 /**
  * Extract ad views from the export.
@@ -34,19 +38,19 @@ import { extractAccountDataFromUrl } from "./utils/url-processing";
  *
  * From this we extract a model consisting in an account that has ads that have views.
  */
-export default class RecentlyViewedAdsImporter extends RootAnalysis {
+export default class RecentlyViewedAdsImporter {
     constructor() {
-        super();
         this._accountsByUrl = new Map();
     }
 
-    async _readRecentlyViewedData(id, zipFile) {
-        return readJSONDataArray(
-            "your_interactions_on_facebook/recently_viewed.json",
-            "recently_viewed",
-            zipFile,
-            id
+    async _readRecentlyViewedData(zipFile, facebookAccount) {
+        const rawData = readJSONDataArray(
+            RECENTLY_VIEWED_FILE_PATH,
+            RECENTLY_VIEWED_DATA_KEY,
+            zipFile
         );
+        facebookAccount.addImportedFileName(RECENTLY_VIEWED_FILE_PATH);
+        return rawData;
     }
 
     _ensureAd(adViewData, relatedAccount) {
@@ -105,18 +109,23 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
         });
     }
 
-    async import({ id, zipFile }, facebookAccount) {
-        const rawData = await this._readRecentlyViewedData(id, zipFile);
+    async import({ zipFile, facebookAccount }) {
+        const rawData = await this._readRecentlyViewedData(
+            zipFile,
+            facebookAccount
+        );
         const adsViewsData = rawData.find(
             (eachCategory) =>
                 localeForCategoyName(eachCategory.name) !== undefined
         );
 
-        if (adsViewsData) {
-            const currentLocale = localeForCategoyName(adsViewsData.name);
-            this._extractViewedAds(adsViewsData, currentLocale);
-
-            facebookAccount.addRelatedAccounts(this._accountsByUrl.values());
+        if (!adsViewsData) {
+            return createWarningStatus("Could not locate ads category");
         }
+
+        const currentLocale = localeForCategoyName(adsViewsData.name);
+        this._extractViewedAds(adsViewsData, currentLocale);
+
+        facebookAccount.addRelatedAccounts(this._accountsByUrl.values());
     }
 }

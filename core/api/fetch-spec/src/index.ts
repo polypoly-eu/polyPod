@@ -4,11 +4,8 @@ import chaiAsPromised from "chai-as-promised";
 
 export * from "./api";
 
-let httpbinUrl: string | undefined;
-
 export function getHttpbinUrl(): string {
-    if (httpbinUrl !== undefined) return httpbinUrl;
-
+    let httpbinUrl: string;
     if (process.env.HTTPBIN_URL) {
         httpbinUrl = process.env.HTTPBIN_URL;
     } else {

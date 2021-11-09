@@ -136,15 +136,12 @@ export interface PolyNav {
      */
     setTitle(title: string): Promise<void>;
     /**
-     * Ask the user to pick a file and import it
-     *
-     * @return an ID of an imported file.
+     * Ask the user to pick a file
+     * @param type the type of file the user is asked to select, as a valid MIME type string. If no type is passed, the user can chose any type of file.
+     * @throws if an unsupported MIME type was passed as the type argument.
+     * @return a string representation of a URL or path to the selected file, or `null` if the user cancelled.
      */
-    importFile(): Promise<string>;
-    /**
-     * Remove a previously imported file
-     */
-    removeFile(fileId: string): Promise<void>;
+    pickFile(type?: string): Promise<string | null>;
 }
 
 /**

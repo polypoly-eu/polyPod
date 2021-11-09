@@ -20,6 +20,7 @@ import org.robolectric.annotation.LooperMode
 @Config(sdk = [Config.OLDEST_SDK])
 class PolyNavTest {
     private val polyNav: PolyNav
+    private val mimeType = "application/zip"
 
     init {
         val context: Context = ApplicationProvider.getApplicationContext()
@@ -29,17 +30,17 @@ class PolyNavTest {
 
     @Ignore
     @Test
-    fun `importFile returns file selected by the user`() = runBlocking {
+    fun `pickFile returns file selected by the user`() = runBlocking {
         val fileData = Uri.parse("*")
         polyNav.setNavObserver(PolyNavObserver(onPickFile = { fileData }))
-        val result = polyNav.importFile()
+        val result = polyNav.pickFile(mimeType)
         assertThat(result).isEqualTo(fileData)
     }
 
     @Test
-    fun `importFile returns null if user cancelled`() = runBlocking {
+    fun `pickFile returns null if user cancelled`() = runBlocking {
         polyNav.setNavObserver(PolyNavObserver(onPickFile = { null }))
-        val result = polyNav.importFile()
+        val result = polyNav.pickFile(mimeType)
         assertThat(result).isNull()
     }
 }

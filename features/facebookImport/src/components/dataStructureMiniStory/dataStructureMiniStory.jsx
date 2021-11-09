@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
-import { BubbleCluster } from "@polypoly-eu/poly-look";
+import { PolyChart } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
@@ -44,13 +44,16 @@ const DataStructureMiniStory = ({ data }) => {
     return (
         <>
             <div>
-                <p>
-                    {i18n.t("dataStructureMiniStory:folder.info", {
-                        selected_folder: selectedFolder,
-                        amount_of_files: amountOfFiles,
-                    })}
-                </p>
-                <BubbleCluster
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: i18n.t("dataStructureMiniStory:folder.info", {
+                            selected_folder: selectedFolder,
+                            amount_of_files: amountOfFiles,
+                        }),
+                    }}
+                />
+                <PolyChart
+                    type="bubble-cluster"
                     data={data}
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}

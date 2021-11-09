@@ -22,6 +22,9 @@ class FacebookAccount {
         this._searches = [];
         this._adminRecords = [];
         this._accountSessionActivities = [];
+        this._comments = [];
+        this._postReactions = [];
+        this._posts = [];
 
         this._messageThreadsGroup = new MessageThreadsGroup();
         this._relatedAccounts = new RelatedAccountsGroup();
@@ -58,6 +61,20 @@ class FacebookAccount {
         }, 0);
     }
 
+    get offFacebookEventsLatestTimestamp() {
+        let latestTimestamp = 0;
+        this.forEachOffFacebookEvent((event) => {
+            if (event.timestamp > latestTimestamp) {
+                latestTimestamp = event.timestamp;
+            }
+        });
+        return latestTimestamp;
+    }
+
+    get relatedAccountEventLatestTimestamp() {
+        return this.relatedAccounts.latestEventTimestamp;
+    }
+
     get messageThreadsGroup() {
         return this._messageThreadsGroup;
     }
@@ -84,6 +101,10 @@ class FacebookAccount {
                 callback(offFacebookEvent);
             }
         }
+    }
+
+    addRelatedAccounts(relatedAccounts) {
+        this._relatedAccounts.addAll(relatedAccounts);
     }
 
     // Basic accessors
@@ -212,8 +233,32 @@ class FacebookAccount {
         return this._relatedAccounts;
     }
 
-    addRelatedAccounts(relatedAccounts) {
-        this._relatedAccounts.addAll(relatedAccounts);
+    get relatedAccountsCount() {
+        return this._relatedAccounts.count;
+    }
+
+    get comments() {
+        return this._comments;
+    }
+
+    set comments(comments) {
+        this._comments = comments;
+    }
+
+    get postReactions() {
+        return this._postReactions;
+    }
+
+    set postReactions(postReactions) {
+        this._postReactions = postReactions;
+    }
+
+    get posts() {
+        return this._posts;
+    }
+
+    addPosts(newPosts) {
+        this.posts.push(...newPosts);
     }
 
     get dataGroups() {
@@ -285,6 +330,21 @@ class FacebookAccount {
             {
                 title: "Session activities",
                 count: this.accountSessionActivities.length,
+            },
+
+            {
+                title: "Comments",
+                count: this.comments.length,
+            },
+
+            {
+                title: "Reactions",
+                count: this.postReactions.length,
+            },
+
+            {
+                title: "Posts",
+                count: this.posts.length,
             },
         ];
     }

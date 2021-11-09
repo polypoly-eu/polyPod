@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
 import globals from "../../../data/global.json";
 import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
+import { ExplorerContext } from "../../../context/explorer-context.jsx";
 
-const CategoryInfo = ({ category, company, onClose }) => {
+const CategoryInfo = () => {
+    const { selectedEntityObject, navigationState } =
+        useContext(ExplorerContext);
+    const entity = selectedEntityObject;
+    const activeCategory = navigationState.explorationState.category;
+    const capitalizeCountryCode = i18n.t("common:country.code").toUpperCase();
+    const description = "Description_" + capitalizeCountryCode;
+
     return (
         <BaseInfoScreen
             className="category-info"
             headline={i18n.t("explorationCategoryInfoScreen:headline")}
-            onClose={onClose}
         >
             <div className="base-info-padding">
                 <p>
                     {
-                        globals.polypoly_parent_categories[category][
-                            i18n.t(
-                                "dataExplorationScreen:from.polyPedia.description"
-                            )
+                        globals.polypoly_parent_categories[activeCategory][
+                            description
                         ]
                     }
                 </p>
@@ -31,7 +36,7 @@ const CategoryInfo = ({ category, company, onClose }) => {
                         text3: i18n.t("infographic:category.text3"),
                     }}
                 />
-                {highlights[company.ppid].dataTypeCategories[category]
+                {highlights[entity.ppid].dataTypeCategories[activeCategory]
                     .explanation ? (
                     <div>
                         <h2>
@@ -39,8 +44,8 @@ const CategoryInfo = ({ category, company, onClose }) => {
                         </h2>
                         <p>
                             {
-                                highlights[company.ppid].dataTypeCategories[
-                                    category
+                                highlights[entity.ppid].dataTypeCategories[
+                                    activeCategory
                                 ].explanation[i18n.t("common:country.code")]
                             }
                         </p>

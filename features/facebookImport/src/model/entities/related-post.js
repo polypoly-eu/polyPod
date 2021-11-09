@@ -1,3 +1,5 @@
+import { findLatestTimestamp } from "../importers/utils/timestamps";
+
 export default class RelatedPost {
     constructor({ url }) {
         this._url = url;
@@ -27,5 +29,9 @@ export default class RelatedPost {
 
     addViewTimestamp(timestamp) {
         this._viewedTimestamps.push(timestamp);
+    }
+
+    get latestEventTimestamp() {
+        return findLatestTimestamp(this._viewedTimestamps);
     }
 }

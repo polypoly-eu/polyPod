@@ -7,13 +7,18 @@ export default class DirectKeyDataImporter {
         this._dataStorageKey = dataStorageKey;
     }
 
-    async import({ id, zipFile }, facebookAccount) {
-        facebookAccount[this._dataStorageKey] = await readJSONDataArray(
-            this._dataFileName,
-            this._dataKey,
-            zipFile,
-            id
+    async import({ zipFile, facebookAccount }) {
+        facebookAccount[this._dataStorageKey] = this.extractData(
+            await readJSONDataArray(this._dataFileName, this._dataKey, zipFile)
         );
         facebookAccount.addImportedFileName(this._dataFileName);
+    }
+
+    /**
+     * Hook method to allow importers to change the data
+     * that gets places into the Facebook Account
+     */
+    extractData(rawData) {
+        return rawData;
     }
 }

@@ -30,12 +30,15 @@ export class ZipFileMock {
     }
 
     enrichedData() {
+        return { ...this.enrichedFileData(), zipFile: this };
+    }
+
+    enrichedFileData() {
         return {
             id: this.id,
             time: this.time,
             name: this.name,
             size: this.size,
-            zipFile: this,
         };
     }
 
@@ -43,9 +46,18 @@ export class ZipFileMock {
         this._entries[this.id + "/" + fileName] = stringContent;
     }
 
-    addJsonEntry(fileName, jsonData) {
-        const escapedString = jsonStringifyWithUtfEscape(jsonData);
+    addEncodingEntry(fileName, escapedString) {
         const encoded = new TextEncoder("utf-8").encode(escapedString);
         this.addNamedEntry(fileName, encoded);
+    }
+
+    addTextEntry(fileName, stringContent) {
+        const escapedString = unescape(encodeURIComponent(stringContent));
+        this.addEncodingEntry(fileName, escapedString);
+    }
+
+    addJsonEntry(fileName, jsonData) {
+        const escapedString = jsonStringifyWithUtfEscape(jsonData);
+        this.addEncodingEntry(fileName, escapedString);
     }
 }

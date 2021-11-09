@@ -1,11 +1,11 @@
 {
     "messages.title": "Nachrichten Zusammenfassung",
-    "messages.summary": "In deinem export sind {{messages}} Nachrichten in {{threads}} Threads von {{people}} Personen.",
+    "messages.summary": "In Ihrem export sind {{messages}} Nachrichten in {{threads}} Threads von {{people}} Personen.",
     "report.success": "Ihr Report wurde an uns gesendet. Vielen Dank!",
     "report.error": "Report nicht gesendet. Bitte erneut versuchen!",
     "loading": "Ihre Daten werden analysiert",
     "unrecognizedCard.headline": "Wir brauchen Ihre Hilfe!",
-    "unrecognizedCard.text": "Ihre Datenstruktur enthält etwas, das uns interessiert. Bitte senden Sie uns einen - selbstverständlich annonymen - Bericht, damit wir Facebooks Datenschema besser verstehen können.",
+    "unrecognizedCard.text": "Wenn Sie uns eine anonymisierte Zusammenfassung der Strukturen Ihres Facebook Exportes senden, können wir den Facebook Data Importer für Sie und alle anderen verbessern, so dass Sie mehr Analysen und Berichte gezeigt bekommen.",
     "unrecognizedCard.button": "Mehr erfahren",
     "details.button": "Details ansehen",
     "analysis.label.techDemo": "Tech Demo"

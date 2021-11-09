@@ -34,9 +34,9 @@ export class FileTooLargeException extends FailedFileImportException {
     }
 }
 
-export class MissingMessagesFilesException extends Error {
+export class MissingFilesException extends Error {
     constructor(message) {
         super(message);
-        this.name = "MissingMessagesFilesException";
+        this.name = "MissingFilesException";
     }
 }

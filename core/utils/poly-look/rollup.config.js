@@ -2,15 +2,22 @@ import { terser } from "rollup-plugin-terser";
 import resolve from "@rollup/plugin-node-resolve";
 import svg from "rollup-plugin-svg";
 import sucrase from "@rollup/plugin-sucrase";
+import css from "rollup-plugin-css-only";
 
 export default {
   input: "src/poly-look.js",
   output: {
-    file: "dist/poly-look.bundled.js",
-    format: "esm",
+    file: "dist/poly-look.js",
+    format: "iife",
+    name: "polyLook",
+    globals: {
+      react: "React",
+      "react-dom": "ReactDOM",
+    },
   },
   plugins: [
     svg(),
+    css({ output: "css/poly-look.css" }),
     sucrase({
       transforms: ["jsx"],
       production: true,

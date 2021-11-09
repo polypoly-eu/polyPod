@@ -4,6 +4,8 @@ import Zip
 class FeatureStorage {
     static let shared = FeatureStorage()
     
+    var activeFeature: Feature? = nil
+    
     lazy var featuresFileUrl: URL = {
         do {
             let documentsUrl = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
