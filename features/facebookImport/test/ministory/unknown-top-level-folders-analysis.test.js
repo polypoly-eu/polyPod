@@ -10,7 +10,7 @@ import {
 } from "../utils/analysis-assertions";
 import { createMockedZip } from "../utils/data-creation";
 
-describe("Post reactions analysis for empty zip", () => {
+describe("Unknown top level folders analysis", () => {
     let analysis = null;
     let status = null;
     let jsonReport = null;
