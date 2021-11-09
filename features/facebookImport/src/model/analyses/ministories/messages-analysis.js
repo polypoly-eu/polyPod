@@ -92,7 +92,7 @@ export default class MessagesAnalysis extends RootAnalysis {
                     }}
                     ref={refWidth}
                 >
-                    {+this._messagesCount.toLocaleString("de-DE")}
+                    {this._messagesCount.toLocaleString("de-DE")}
                 </h2>
                 <p>
                     {i18n.t("explore:messages.summary", {
