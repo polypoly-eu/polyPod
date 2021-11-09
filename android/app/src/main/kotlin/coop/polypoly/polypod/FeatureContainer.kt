@@ -43,7 +43,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         PolyOut(context),
         PolyIn(context, context.filesDir),
         PolyNav(
-            webView = webView, context = context
+            webView = webView
         ),
         Info(),
         Network(context)
