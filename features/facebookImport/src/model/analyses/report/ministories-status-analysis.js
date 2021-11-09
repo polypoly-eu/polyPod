@@ -64,7 +64,7 @@ export default class MinistoriesStatusAnalysis {
                                     <td>{activationStatus}</td>
                                     <td>{executionStatus.name}</td>
                                     <td>{executionStatus.message}</td>
-                                    <td style={{ "text-align": "right" }}>
+                                    <td style={{ textAlign: "right" }}>
                                         {executionTime}
                                     </td>
                                 </tr>
