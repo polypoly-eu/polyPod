@@ -3,6 +3,7 @@ import { PolyChart } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n";
 
 import "./onOffFacebookMiniStory.css";
+import BarChart from "../dataViz/barChart.jsx";
 
 const legend = (
     <div className="legend">
@@ -29,13 +30,13 @@ export const OnOffFacebookMiniStorySummary = ({
     companiesWithAdsCount,
 }) => {
     return (
-        <div className="off-facebook-events-mini-story-summary">
+        <div className="off-facebook-events-ministory-summary">
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("offFacebookEventsMiniStory:general"),
                 }}
             />
-            <h2 style={{ marginBottom: "25px" }}>{companiesCount}</h2>
+            <h2>{companiesCount}</h2>
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("offFacebookEventsMiniStory:companies", {
@@ -44,12 +45,10 @@ export const OnOffFacebookMiniStorySummary = ({
                 }}
             />
             {companiesWithAdsCount === 0 ? (
-                <div>No ads. Please replace text !</div>
+                <div>{i18n.t("offFacebookEventsMiniStory:no.ads")}</div>
             ) : (
                 <>
-                    <h2 style={{ marginBottom: "25px" }}>
-                        {companiesWithAdsCount}
-                    </h2>
+                    <h2>{companiesWithAdsCount}</h2>
                     <p
                         dangerouslySetInnerHTML={{
                             __html: i18n.t(
@@ -96,6 +95,26 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
                 </div>
             ))}
             <p>{i18n.t("offFacebookEventsMiniStory:details.text.2")}</p>
+            <p className="source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p>
+        </div>
+    );
+};
+
+export const OffFacebookEventsMiniStory = ({ displayData }) => {
+    const { companies, activityTypes } = displayData;
+    return (
+        <div className="off-facebook-events-ministory-details">
+            <p>{i18n.t("offFacebookEventsMiniStory:fallback.text.1")}</p>
+            <p>{i18n.t("offFacebookEventsMiniStory:fallback.text.2")}</p>
+            <BarChart data={companies.splice(0, 5)} />
+            <p className="source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p>
+            <h2>{activityTypes.length}</h2>
+            <p>{i18n.t("offFacebookEventsMiniStory:fallback.text.3")}</p>
+            <BarChart data={activityTypes.splice(0, 5)} />
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>

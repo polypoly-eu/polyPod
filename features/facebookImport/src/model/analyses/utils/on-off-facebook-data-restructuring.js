@@ -116,3 +116,24 @@ export function buildDisplayData(
 
     return getIntoChartStructure(displayData);
 }
+
+export function top5OffFacebookCompanies(facebookAccount) {
+    return [...facebookAccount.offFacebookCompanies]
+        .map((e) => {
+            return { title: e.name, count: e.events.length };
+        })
+        .sort((a, b) => b.count - a.count);
+}
+
+export function offFacebookActivityTypes(facebookAccount) {
+    const activityTypes = {};
+    facebookAccount.offFacebookCompanies.forEach((company) => {
+        company.events.forEach((event) => {
+            const type = event.type;
+            activityTypes[type]
+                ? activityTypes[type].count++
+                : (activityTypes[type] = { title: type, count: 1 });
+        });
+    });
+    return Object.values(activityTypes).sort((a, b) => b.count - a.count);
+}
