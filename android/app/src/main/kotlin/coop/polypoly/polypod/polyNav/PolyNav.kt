@@ -9,6 +9,7 @@ import kotlin.collections.HashSet
 open class PolyNav(
     private val webView: WebView,
     private var observer: PolyNavObserver? = null,
+    private val context: Context
 ) {
     private val registeredActions = HashSet<String>()
 
