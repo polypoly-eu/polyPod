@@ -54,8 +54,16 @@ function updatePodNavigation(pod, history, handleBack, location) {
         : pod.polyNav.setActiveActions([]);
 }
 
-function updateTitle(pod) {
-    pod.polyNav.setTitle(i18n.t(`common:title`));
+function updateTitle(pod, location) {
+    pod.polyNav.setTitle(
+        i18n.t(
+            `navbarTitles:${
+                location.pathname === "/"
+                    ? "general"
+                    : location.pathname.substring(1)
+            }`
+        )
+    );
 }
 
 //from storage
@@ -221,7 +229,7 @@ export const ImporterProvider = ({ children }) => {
     useEffect(() => {
         if (!pod) return;
         updatePodNavigation(pod, history, handleBack, location);
-        updateTitle(pod);
+        updateTitle(pod, location);
     });
 
     return (

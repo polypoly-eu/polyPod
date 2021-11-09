@@ -1,6 +1,7 @@
 import { determineLanguage, I18n } from "@polypoly-eu/silly-i18n";
 
 import commonEn from "./locales/en/common.json";
+import navbarTitlesEn from "./locales/en/navbarTitles.json";
 import importEn from "./locales/en/import.json";
 import overviewEn from "./locales/en/overview.json";
 import dataStructureMiniStoryEn from "./locales/en/miniStories/dataStructure.json";
@@ -20,6 +21,7 @@ import messagesInfoScreenEn from "./locales/en/infoScreens/messagesInfoScreen.js
 import infographicsEn from "./locales/en/infographics.json";
 
 import commonDe from "./locales/de/common.json";
+import navbarTitlesDe from "./locales/de/navbarTitles.json";
 import importDe from "./locales/de/import.json";
 import overviewDe from "./locales/de/overview.json";
 import dataStructureMiniStoryDe from "./locales/de/miniStories/dataStructure.json";
@@ -41,6 +43,7 @@ import infographicsDe from "./locales/de/infographics.json";
 export default new I18n(determineLanguage(), {
     en: {
         common: commonEn,
+        navbarTitles: navbarTitlesEn,
         import: importEn,
         overview: overviewEn,
         dataStructureMiniStory: dataStructureMiniStoryEn,
@@ -61,6 +64,7 @@ export default new I18n(determineLanguage(), {
     },
     de: {
         common: commonDe,
+        navbarTitles: navbarTitlesDe,
         import: importDe,
         overview: overviewDe,
         dataStructureMiniStory: dataStructureMiniStoryDe,
