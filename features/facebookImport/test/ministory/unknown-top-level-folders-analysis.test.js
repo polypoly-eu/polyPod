@@ -16,7 +16,7 @@ describe("Unknown top level folders analysis", () => {
     let jsonReport = null;
 
     beforeAll(async () => {
-        const zipFile = createMockedZip([
+        let zipFile = createMockedZip([
             [
                 OFF_FACEBOOK_EVENTS_FILE_PATH,
                 createOffFacebookEventsSimpleData(),

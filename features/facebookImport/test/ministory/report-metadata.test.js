@@ -27,7 +27,6 @@ describe("Report metadata analysis", () => {
     let jsonReport = null;
 
     beforeAll(async () => {
-        // Create a zip with two json files.
         const zipFile = createMockedZip([
             [
                 OFF_FACEBOOK_EVENTS_FILE_PATH,
