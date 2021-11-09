@@ -4,8 +4,9 @@ import {
     buildDisplayData,
     selectMeaningfulCompanies,
     top5OffFacebookCompanies,
-    offFacebookActivityTypes,
 } from "../utils/on-off-facebook-data-restructuring.js";
+
+import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
 
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../../i18n.js";
@@ -64,11 +65,17 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
         } else if (facebookAccount._offFacebookCompanies.length > 0) {
             this._displayData = {
                 companies: top5OffFacebookCompanies(facebookAccount),
-                activityTypes: offFacebookActivityTypes(facebookAccount),
+                activityTypes: groupOffFacebookEventsByType(
+                    facebookAccount
+                ).map((e) => {
+                    return {
+                        ...e,
+                        title: e.type,
+                    };
+                }),
             };
             this._displayType = detailDisplayTypes.off;
         }
-
         this.active = this._displayData ? true : false;
     }
 
