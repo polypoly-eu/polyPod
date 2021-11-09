@@ -56,13 +56,9 @@ function updatePodNavigation(pod, history, handleBack, location) {
 
 function updateTitle(pod, location) {
     pod.polyNav.setTitle(
-        i18n.t(
-            `navbarTitles:${
-                location.pathname === "/"
-                    ? "general"
-                    : location.pathname.substring(1)
-            }`
-        )
+        location.pathname === "/"
+            ? ""
+            : i18n.t(`navbarTitles:${location.pathname.substring(1)}`)
     );
 }
 
