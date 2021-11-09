@@ -4,9 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.webkit.WebMessage
 import android.webkit.WebView
-import kotlinx.coroutines.CoroutineScope
 import kotlin.collections.HashSet
-import kotlin.coroutines.EmptyCoroutineContext
 
 open class PolyNav(
     private val webView: WebView,
