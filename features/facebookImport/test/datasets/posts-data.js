@@ -1,6 +1,10 @@
+import { ZipFileMock } from "../mocks/zipfile-mock";
 import { createMockedZip } from "../utils/data-creation";
 
 const POSTS_FILE_PATH = "posts/your_posts_X.json";
+function createPathForIndex(fileIndex) {
+    return POSTS_FILE_PATH.replace("X", fileIndex + "");
+}
 
 export const DATASET_ONE_EXPECTED_VALUES = {
     numberOfPosts: 5,
@@ -35,21 +39,26 @@ export function createPostsTwoDataset() {
 
 export function zipFileWithTwoPostsFiles() {
     return createMockedZip([
-        [POSTS_FILE_PATH.replace("X", "1"), createPostsOneDataset()],
-        [POSTS_FILE_PATH.replace("X", "2"), createPostsTwoDataset()],
+        [createPathForIndex(1), createPostsOneDataset()],
+        [createPathForIndex(2), createPostsTwoDataset()],
     ]);
 }
 
 export function zipFileWithOnePostsFiles() {
-    return createMockedZip([
-        [POSTS_FILE_PATH.replace("X", "1"), createPostsOneDataset()],
-    ]);
+    return createMockedZip([[createPathForIndex(1), createPostsOneDataset()]]);
 }
 
 export function zipFileWithFileError() {
     let zipFile = createMockedZip([
-        [POSTS_FILE_PATH.replace("X", "1"), createPostsOneDataset()],
+        [createPathForIndex(1), createPostsOneDataset()],
     ]);
-    zipFile.addTextEntry(POSTS_FILE_PATH.replace("X", "2"), "[");
+    zipFile.addTextEntry(createPathForIndex(2), "[");
+    return zipFile;
+}
+
+export function zipFileWithTwoFileErrors() {
+    let zipFile = new ZipFileMock();
+    zipFile.addTextEntry(createPathForIndex(1), "");
+    zipFile.addTextEntry(createPathForIndex(2), "[");
     return zipFile;
 }

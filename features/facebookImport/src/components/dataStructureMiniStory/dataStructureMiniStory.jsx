@@ -5,6 +5,7 @@ import { PolyChart } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n.js";
 
 import "./dataStructureMiniStory.css";
+import ChartButtons from "../chartButtons/chartButtons.jsx";
 
 const DataStructureMiniStory = ({ data }) => {
     data.forEach((d) => {
@@ -20,9 +21,8 @@ const DataStructureMiniStory = ({ data }) => {
     const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
-    const handleSelectedFolder = (ev, newSelectedFolder) => {
-        ev.preventDefault();
-        setSelectedFolder(newSelectedFolder);
+    const handleFolderSelected = (buttonContent) => {
+        setSelectedFolder(buttonContent);
     };
 
     const handleBubbleClick = (_, node) => {
@@ -62,29 +62,17 @@ const DataStructureMiniStory = ({ data }) => {
                     onBubbleClick={handleBubbleClick}
                 />
             </div>
-            <div className="data-structure">
-                {data.map((bubble, index) => {
-                    return (
-                        <button
-                            className={
-                                bubble.title === selectedFolder
-                                    ? "data-structure-button selected-data"
-                                    : "data-structure-button"
-                            }
-                            onClick={(ev) =>
-                                handleSelectedFolder(ev, bubble.title)
-                            }
-                            key={index}
-                        >
-                            {bubble.title}
-                        </button>
-                    );
+            <ChartButtons
+                buttonsContent={data.map((d) => {
+                    return { id: d.title };
                 })}
-                <InfoButton route="/report/data-structure-info" />
-                <p className="source">
-                    {i18n.t("common:source.your.facebook.data")}
-                </p>
-            </div>
+                activeButton={selectedFolder}
+                onButtonsClick={handleFolderSelected}
+            />
+            <InfoButton route="/report/data-structure-info" />
+            <p className="source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p>
         </>
     );
 };

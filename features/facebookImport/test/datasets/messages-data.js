@@ -1,3 +1,4 @@
+import { ZipFileMock } from "../mocks/zipfile-mock";
 import { createMockedZip } from "../utils/data-creation";
 export const DATASET_EXPECTED_VALUES = {
     numberOfMessageThreads: 2,
@@ -86,8 +87,12 @@ export function createMessageThreadTwoData() {
     };
 }
 
-function createPathForThread(messageThread) {
-    return `messages/${messageThread.thread_path}/message_1.json`;
+function createPathForThreadPath(threadPath, fileIndex = 1) {
+    return `messages/${threadPath}/message_${fileIndex + ""}.json`;
+}
+
+function createPathForThread(messageThread, fileIndex = 1) {
+    return createPathForThreadPath(messageThread.thread_path, fileIndex);
 }
 
 export function zipFileWithMessageThreads() {
@@ -97,4 +102,21 @@ export function zipFileWithMessageThreads() {
         [createPathForThread(messageThreadOne), messageThreadOne],
         [createPathForThread(messageThreadTwo), messageThreadTwo],
     ]);
+}
+
+export function zipFileWithThreeFileErrors() {
+    let zipFile = new ZipFileMock();
+    zipFile.addTextEntry(
+        createPathForThreadPath("inbox/janedoe_h63g35dgdha", 1),
+        ""
+    );
+    zipFile.addTextEntry(
+        createPathForThreadPath("inbox/janedoe_h63g35dgdha", 2),
+        "["
+    );
+    zipFile.addNamedEntry(
+        createPathForThreadPath("inbox/duffyduck_2jzaxws1kg", 1),
+        '"ü"'
+    );
+    return zipFile;
 }
