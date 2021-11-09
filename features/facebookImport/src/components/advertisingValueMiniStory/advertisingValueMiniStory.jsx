@@ -87,10 +87,6 @@ export const AdvertisingValueMiniStoryDetails = ({
                 }}
             />
             <ListOfDetails list={displayData}></ListOfDetails>
-
-            {/* <p className="source">
-                {i18n.t("common:source.your.facebook.data")}
-            </p> */}
         </div>
     );
 };
