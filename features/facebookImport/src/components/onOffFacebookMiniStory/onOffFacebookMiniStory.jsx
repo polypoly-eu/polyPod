@@ -102,7 +102,7 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
     );
 };
 
-export const OffFacebookEventsMiniStory = ({ displayData }) => {
+export const OffFacebookEventsMiniStoryDetails = ({ displayData }) => {
     const { companies, activityTypes } = displayData;
     return (
         <div className="off-facebook-events-ministory-details">
