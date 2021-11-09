@@ -31,7 +31,9 @@ export default class AdvertisingValueAnalysis extends RootAnalysis {
         }
         this._randomAdInterests = [...randomAdInterests];
         this._numberInterests = numberInterests;
-        this._displayData = adInterests.sort((a, b) => (a > b ? 1 : -1));
+        this._displayData = adInterests.sort((a, b) => {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
     }
 
     renderSummary() {
