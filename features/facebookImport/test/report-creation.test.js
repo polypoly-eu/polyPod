@@ -4,7 +4,7 @@ import { expectActiveAnalysis } from "./utils/analysis-assertions";
 
 export const NUMBER_OF_REPORT_ANALYSES = 8;
 
-describe("Report creation for empty zip", () => {
+describe("Report creation for export", () => {
     let unrecognizedData = null;
     let jsonReport = null;
 
