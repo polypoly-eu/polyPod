@@ -12,7 +12,7 @@ describe("Your advertising value analysis from account with no ad interests", ()
     let status = null;
 
     beforeAll(async () => {
-        let facebookAccount = new FacebookAccount();
+        const facebookAccount = new FacebookAccount();
         ({ analysis, status } = await runAnalysisForAccount(
             AdvertisingValueAnalysis,
             facebookAccount
