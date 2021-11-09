@@ -24,6 +24,18 @@ const MessengerStory = () => {
     const [summaryAnimations, fireSummaryAnimation] = useState(0);
     const [allMarks, updateAllMarks] = useState([]);
 
+    const listOfMessengerApps = [
+        "Facebook Messenger",
+        "WhatsApp",
+        "Instagram",
+        "Signal",
+        "Snapchat",
+        "Telegram",
+        "Threema",
+        "TikTok",
+        "iMessage",
+    ];
+
     const sections = {
         introduction: "introduction",
         summary: "summary",
@@ -160,7 +172,10 @@ const MessengerStory = () => {
             debugMode={scrollTellingDebug}
         >
             <div className="messenger-parts">
-                <Introduction heightEvent={updateIntroHeight}></Introduction>
+                <Introduction
+                    heightEvent={updateIntroHeight}
+                    listOfMessengerApps={listOfMessengerApps}
+                ></Introduction>
                 <Summary
                     heightEvent={updateSummaryHeight}
                     animation={summaryAnimations}
@@ -169,7 +184,10 @@ const MessengerStory = () => {
                     products={products}
                     heightEvent={updateOverviewHeight}
                 ></Overview>
-                <Details data={products}></Details>
+                <Details
+                    data={products}
+                    listOfMessengerApps={listOfMessengerApps}
+                ></Details>
             </div>
         </DataStory>
     );
