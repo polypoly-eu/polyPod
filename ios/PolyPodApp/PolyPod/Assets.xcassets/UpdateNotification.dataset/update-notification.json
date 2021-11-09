@@ -1,0 +1,12 @@
+{
+    "id": 0,
+    "pushDelay": 120,
+    "title": {
+        "en": "Unexpected notification",
+        "de": "Unerwartete Benachrichtigung"
+    },
+    "text": {
+        "en": "If you read this, you've found a bug in the polyPod: Please report it to us!",
+        "de": "Wenn Sie diese Nachricht lesen, haben Sie fehlerhaftes Verhalten im polyPod entdeckt. Bitte berichten Sie uns darüber!"
+    }
+}
