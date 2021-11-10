@@ -160,21 +160,23 @@ class UpdateNotification {
         }
     }
     
-    func onStartup() {
-        onPushSeen()
-    }
-    
-    func onFirstRun() {
-        onInAppSeen()
-    }
-    
-    func onPushSeen() {
+    func handleStartup() {
         if state == .NOT_SEEN {
             state = .PUSH_SEEN
         }
     }
     
-    func onInAppSeen() {
+    func handleFirstRun() {
+        state = .ALL_SEEN
+    }
+    
+    func handlePushSeen() {
+        if state == .NOT_SEEN {
+            state = .PUSH_SEEN
+        }
+    }
+    
+    func handleInAppSeen() {
         state = .ALL_SEEN
     }
 }

@@ -21,14 +21,14 @@ class UpdateNotificationTest: XCTestCase {
     
     func testPreviouslySeenNotificationSeen() {
         let notification = loadNotification(1)
-        notification.onInAppSeen()
+        notification.handleInAppSeen()
         XCTAssertFalse(notification.showInApp)
         XCTAssertFalse(notification.showPush)
     }
     
     func testAdditionalNotificationNotSeen() {
         let notification = loadNotification(1)
-        notification.onInAppSeen()
+        notification.handleInAppSeen()
         
         let secondNotification = loadNotification(2)
         XCTAssertTrue(secondNotification.showInApp)
@@ -37,7 +37,7 @@ class UpdateNotificationTest: XCTestCase {
     
     func testAdditionalNotificationWithLowerIdSeen() {
         let notification = loadNotification(2)
-        notification.onInAppSeen()
+        notification.handleInAppSeen()
         
         let secondNotification = loadNotification(1)
         XCTAssertFalse(secondNotification.showInApp)
@@ -46,19 +46,19 @@ class UpdateNotificationTest: XCTestCase {
     
     func testPushNotificationSeenAfterStartup() {
         let notification = loadNotification(1)
-        notification.onStartup()
+        notification.handleStartup()
         XCTAssertFalse(notification.showPush)
     }
     
     func testInAppNotSeenAfterPushSeen() {
         let notification = loadNotification(1)
-        notification.onPushSeen()
+        notification.handlePushSeen()
         XCTAssertFalse(notification.showPush)
     }
     
     func testAllSeenAfterFirstRun() {
         let notification = loadNotification(1)
-        notification.onFirstRun()
+        notification.handleFirstRun()
         XCTAssertFalse(notification.showInApp)
         XCTAssertFalse(notification.showPush)
     }

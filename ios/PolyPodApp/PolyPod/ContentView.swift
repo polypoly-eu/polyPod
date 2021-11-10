@@ -101,12 +101,12 @@ struct ContentView: View {
     
     private func firstRunState() -> ViewState {
         let notification = UpdateNotification()
-        notification.onStartup()
+        notification.handleStartup()
         if !FirstRun.read() {
             return featureListState()
         }
         
-        notification.onFirstRun()
+        notification.handleFirstRun()
         return ViewState(
             AnyView(
                 OnboardingView(closeAction: {
@@ -141,7 +141,7 @@ struct ContentView: View {
                         dismissButton: .default(
                             Text("button_update_notification_close")
                         ) {
-                            notification.onInAppSeen()
+                            notification.handleInAppSeen()
                             showUpdateNotification = notification.showInApp
                         }
                     )
