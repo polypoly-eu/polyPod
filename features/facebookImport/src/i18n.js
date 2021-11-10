@@ -12,6 +12,7 @@ import offFacebookEventsMiniStoryEn from "./locales/en/miniStories/offFacebookEv
 import advertisingValueMiniStoryEn from "./locales/en/miniStories/advertisingValue.json";
 import reactionsMinistoryEn from "./locales/en/miniStories/reactions.json";
 import picturesMiniStoryEn from "./locales/en/miniStories/pictures.json";
+import connectedAdvertisersMiniStoryEn from "./locales/en/miniStories/connectedAdvertisers.json";
 import reportEn from "./locales/en/report.json";
 import errorPopupEn from "./locales/en/errorPopup.json";
 import baseInfoScreenEn from "./locales/en/infoScreens/baseInfoScreen.json";
@@ -32,6 +33,7 @@ import offFacebookEventsMiniStoryDe from "./locales/de/miniStories/offFacebookEv
 import advertisingValueMiniStoryDe from "./locales/de/miniStories/advertisingValue.json";
 import reactionsMiniStoryDe from "./locales/de/miniStories/reactions.json";
 import picturesMiniStoryDe from "./locales/de/miniStories/pictures.json";
+import connectedAdvertisersMiniStoryDe from "./locales/de/miniStories/connectedAdvertisers.json";
 import reportDe from "./locales/de/report.json";
 import errorPopupDe from "./locales/de/errorPopup.json";
 import baseInfoScreenDe from "./locales/de/infoScreens/baseInfoScreen.json";
@@ -54,6 +56,7 @@ export default new I18n(determineLanguage(), {
         advertisingValueMiniStory: advertisingValueMiniStoryEn,
         picturesMiniStory: picturesMiniStoryEn,
         reactionsMiniStory: reactionsMinistoryEn,
+        connectedAdvertisersMiniStory: connectedAdvertisersMiniStoryEn,
         report: reportEn,
         errorPopup: errorPopupEn,
         baseInfoScreen: baseInfoScreenEn,
@@ -75,6 +78,7 @@ export default new I18n(determineLanguage(), {
         advertisingValueMiniStory: advertisingValueMiniStoryDe,
         picturesMiniStory: picturesMiniStoryDe,
         reactionsMiniStory: reactionsMiniStoryDe,
+        connectedAdvertisersMiniStory: connectedAdvertisersMiniStoryDe,
         report: reportDe,
         errorPopup: errorPopupDe,
         baseInfoScreen: baseInfoScreenDe,
