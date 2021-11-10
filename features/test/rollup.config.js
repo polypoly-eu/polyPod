@@ -5,7 +5,8 @@ export default {
     input: "src/test.ts",
     output: {
         dir: "dist",
-        format: "cjs",
+        format: "iife",
+        name: "testFeature",
     },
     plugins: [
         copy({ targets: [{ src: "src/index.html", dest: "dist" }] }),
