@@ -101,7 +101,7 @@ const Summary = ({ animation, heightEvent }) => {
             className="messenger-summary"
             ref={wholeSummary}
         >
-            <h1 className="title-summary">
+            <h1 className="title-messenger-story">
                 {i18n.t(`${i18nHeader}:summary.title`)}
             </h1>
             <SectionTitle

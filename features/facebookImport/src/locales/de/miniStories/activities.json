@@ -1,6 +1,6 @@
 {
-    "title": "Deine Aktivitäten",
-    "summary": "Seit zu Facebook beigetreten bist haben diese {{number_activities}} deiner Aktivitäten mit Datum und Zeit erfasst",
+    "title": "Ihre Aktivitäten",
+    "summary": "Seit Sie beigetreten sind, hat Facebook diese {{number_activities}} Ihrer Aktivitäten mit Datum und Zeit erfasst",
     "tab.year": "Jahr",
     "tab.total": "Total",
     "tab.events.total": "Events ({{number_events}} gesamt)",

@@ -1,0 +1,12 @@
+{
+    "headline":
+        "Purposes",
+    "text.1":
+        "Companies must list purposes for the data they are sharing.",
+    "scale.1":
+        "Representation of the number of times this purpose is mentioned",
+    "scale.2":
+        "Number of times this purpose is mentioned",
+    "text.2":
+        "<p>To get to this number we research how often this purpose is mentioned as a reason for sharing across all data types a company shares. We multiply this by the number of companies each data type is shared with.</p><p>For structure and terminology in ordering the purposes, we refer to the Data Protection Vocabulary standard by the W3C - as we also do for the data types.</p>"
+}
