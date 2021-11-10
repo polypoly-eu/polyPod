@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import i18n from "../../i18n";
-
+import ListOfDetails from "../listOfDetails/listOfDetails.jsx";
 import "./advertisingValueMiniStory.css";
 
 const calculateFontSize = (text, maxWidth) => {
@@ -22,7 +22,6 @@ const calculateFontSize = (text, maxWidth) => {
         Math.max(...interestsLength)
     );
     let longestInterestWord = splitInterests[longestInterestWordIndex];
-    console.log(longestInterestWord);
     for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
         context.font = `${fontSize}px Jost`;
         if (context.measureText(longestInterestWord).width <= maxWidth)
@@ -31,12 +30,16 @@ const calculateFontSize = (text, maxWidth) => {
     return minFontSize;
 };
 
-const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
+export const AdvertisingValueMiniStorySummary = ({
+    randomAdInterests,
+    numberInterests,
+}) => {
     const refWidth = useRef(0);
     const fontSize = calculateFontSize(
         randomAdInterests,
         refWidth.current.clientWidth
     );
+
     return (
         <div className="advertising-value-mini-story">
             <p
@@ -49,7 +52,7 @@ const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
             <ul>
                 {randomAdInterests.map((interest, index) => {
                     return (
-                        <li key={index} ref={refWidth}>
+                        <li key={index} ref={refWidth} className="summary">
                             <p
                                 style={{
                                     fontSize: fontSize,
@@ -69,4 +72,21 @@ const AdvertisingValueMiniStory = ({ randomAdInterests, numberInterests }) => {
     );
 };
 
-export default AdvertisingValueMiniStory;
+export const AdvertisingValueMiniStoryDetails = ({
+    displayData,
+    numberInterests,
+}) => {
+    return (
+        <div className="detail-view">
+            <p
+                className="intro"
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("advertisingValueMiniStory:details.text.1", {
+                        number: numberInterests,
+                    }),
+                }}
+            />
+            <ListOfDetails list={displayData}></ListOfDetails>
+        </div>
+    );
+};

@@ -1,0 +1,29 @@
+.scrollable-list {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.scrollable-list ul {
+    overflow: hidden scroll;
+}
+
+.list-gradient {
+    position: absolute;
+    width: 100%;
+    height: 90px;
+
+    bottom: 0;
+    left: 0;
+}
+.list-gradient.gradient {
+    background: linear-gradient(#0f193800 0%, #0f1938);
+}
+.list-gradient.reverse {
+    top: 0;
+    transform: rotate(180deg);
+}
+
+.hidden {
+    display: none;
+}
