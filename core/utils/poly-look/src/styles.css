@@ -26,7 +26,7 @@ so that we don't have to cover three different use cases explicitly anymore.
   pointer-events: none;
   z-index: 200;
   width: 100%;
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px 1px #a9b6c6;
 }
 
 .poly-nav-bar-separator-overlay {
@@ -38,25 +38,9 @@ so that we don't have to cover three different use cases explicitly anymore.
   position: fixed;
   top: 0;
   right: 0;
-  height: 4px;
+  height: 1px;
 }
 
 .poly-nav-bar-separator-bottom {
-  box-shadow: 0px 4px rgba(0, 0, 0, 0.25);
-}
-
-/* iOS specific styles */
-@media not all and (min-resolution: 0.001dpcm) {
-  .poly-nav-bar-separator-overlay,
-  .poly-nav-bar-separator-fixed {
-    box-shadow: inset 0px 1px #a9b6c6 !important;
-  }
-
-  .poly-nav-bar-separator-fixed {
-    height: 1px;
-  }
-
-  .poly-nav-bar-separator-bottom {
-    box-shadow: 0px 1px #a9b6c6 !important;
-  }
+  box-shadow: 0px 1px #a9b6c6;
 }
