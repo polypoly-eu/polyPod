@@ -13,15 +13,22 @@ export default {
     plugins: [
         css({ output: "css/bundle.css" }),
         json(),
-        sucrase({ "transforms": [] }),
+        sucrase({ transforms: [] }),
         copyWatch({
             targets: [
                 {
                     src: [
-                        "src/static/*",
-                        "node_modules/@polypoly-eu/podjs/dist/pod.js"
+                        "node_modules/@polypoly-eu/podjs/dist/pod.js",
                     ],
                     dest: "dist",
+                },
+                {
+                    src: ["src/static/*", "!src/static/fonts"],
+                    dest: "dist",
+                },
+                {
+                    src: ["src/static/fonts/*"],
+                    dest: "dist/fonts",
                 },
             ],
             verbose: true,

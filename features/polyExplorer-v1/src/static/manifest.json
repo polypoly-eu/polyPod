@@ -1,0 +1,14 @@
+{
+    "name": "polyExplorer",
+    "author": "polypoly Cooperative",
+    "description": "Have you ever wondered what data companies collect, which third parties they share it with, and what that means for you? polyExplorer sheds some light on that.",
+    "thumbnail": "images/thumbnail.png",
+    "primaryColor": "#0f1938",
+    "links": {},
+    "translations": {
+        "de": {
+            "author": "polypoly - Die Genossenschaft",
+            "description": "Haben Sie sich schon mal gefragt, welche Firmen welche Ihrer Daten sammeln, an Dritte weitergeben und vor allem was das für Sie heißt? Der polyExplorer zeigt Ihnen genau das und bringt Licht ins Daten-Dunkel."
+        }
+    }
+}

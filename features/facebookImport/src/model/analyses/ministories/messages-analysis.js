@@ -16,18 +16,11 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     async analyze({ facebookAccount }) {
-        this._messagesThreadsData = [];
-        this._messagesCount = 0;
-        this.active = facebookAccount.messageThreadsCount > 0;
-        if (!this.active) {
-            return;
-        }
-
         this._messagesCount = facebookAccount.messagesCount;
         this._messagesThreadsData = [];
         const usernames = new Set();
+
         facebookAccount.forEachMessageThread((messageThread) => {
-            var wordCount = messageThread.totalWordCount;
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
 
@@ -56,16 +49,16 @@ export default class MessagesAnalysis extends RootAnalysis {
                 title: messageThread.title,
                 count: messageThread.messagesCount,
                 extraData: {
-                    wordCount,
                     firstChatDate,
                     lastChatDate,
                 },
             });
-
-            this._messagesThreadsData.sort((a, b) => b.count - a.count);
-
-            this._totalUsernamesCount = usernames.size;
         });
+
+        this._messagesThreadsData.sort((a, b) => b.count - a.count);
+        this._totalUsernamesCount = usernames.size;
+
+        this.active = this._messagesThreadsData.length > 0;
     }
 
     _calculateFontSize(text, maxWidth) {
@@ -99,7 +92,7 @@ export default class MessagesAnalysis extends RootAnalysis {
                     }}
                     ref={refWidth}
                 >
-                    {+this._messagesCount.toLocaleString().replace(",", ".")}
+                    {this._messagesCount.toLocaleString("de-DE")}
                 </h2>
                 <p>
                     {i18n.t("explore:messages.summary", {

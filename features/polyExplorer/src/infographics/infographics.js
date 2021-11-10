@@ -3,7 +3,7 @@ import category from "./category.svg";
 import correlation from "./correlation.svg";
 import companies from "./companies.svg";
 import purpose from "./purpose.svg";
-import featuredCompany from "./featuredCompany.svg";
+import featuredEntity from "./featuredEntity.svg";
 import jurisdiction from "./jurisdiction.svg";
 import jurisdiction2 from "./jurisdiction2.svg";
 
@@ -13,7 +13,7 @@ export default {
     correlation: correlation,
     companies: companies,
     purpose: purpose,
-    featuredCompany: featuredCompany,
+    featuredEntity: featuredEntity,
     jurisdiction: jurisdiction,
     jurisdiction2: jurisdiction2,
 };

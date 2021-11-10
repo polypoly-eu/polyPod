@@ -1,4 +1,6 @@
-import { POST_REACTIONS_FILE_PATH } from "../../src/model/importers/post-reactions-importer";
+import PostReactionsImporter, {
+    POST_REACTIONS_FILE_PATH,
+} from "../../src/model/importers/post-reactions-importer";
 import {
     DATASET_EXPECTED_VALUES,
     zipFileWithPostReactions,
@@ -21,7 +23,7 @@ describe("Import post reactions from empty export", () => {
     it("triggers missing files error", async () => {
         const { result } = await runPostReactionsImporter(zipFile);
 
-        expectMissingFileError(result);
+        expectMissingFileError(result, PostReactionsImporter);
     });
 });
 
@@ -34,7 +36,7 @@ describe("Import post reactions from export with wrong data key", () => {
 
     it("triggers missing data key error", async () => {
         const { result } = await runPostReactionsImporter(zipFile);
-        expectInvalidContentError(result);
+        expectInvalidContentError(result, PostReactionsImporter);
     });
 });
 

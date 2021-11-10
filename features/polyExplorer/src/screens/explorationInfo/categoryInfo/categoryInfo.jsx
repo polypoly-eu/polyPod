@@ -8,10 +8,12 @@ import Infographic from "../../../components/infographic/infographic.jsx";
 import { ExplorerContext } from "../../../context/explorer-context.jsx";
 
 const CategoryInfo = () => {
-    const { selectedCompanyObject, navigationState } =
+    const { selectedEntityObject, navigationState } =
         useContext(ExplorerContext);
-    const company = selectedCompanyObject;
+    const entity = selectedEntityObject;
     const activeCategory = navigationState.explorationState.category;
+    const capitalizeCountryCode = i18n.t("common:country.code").toUpperCase();
+    const description = "Description_" + capitalizeCountryCode;
 
     return (
         <BaseInfoScreen
@@ -22,9 +24,7 @@ const CategoryInfo = () => {
                 <p>
                     {
                         globals.polypoly_parent_categories[activeCategory][
-                            i18n.t(
-                                "dataExplorationScreen:from.polyPedia.description"
-                            )
+                            description
                         ]
                     }
                 </p>
@@ -36,7 +36,7 @@ const CategoryInfo = () => {
                         text3: i18n.t("infographic:category.text3"),
                     }}
                 />
-                {highlights[company.ppid].dataTypeCategories[activeCategory]
+                {highlights[entity.ppid].dataTypeCategories[activeCategory]
                     .explanation ? (
                     <div>
                         <h2>
@@ -44,7 +44,7 @@ const CategoryInfo = () => {
                         </h2>
                         <p>
                             {
-                                highlights[company.ppid].dataTypeCategories[
+                                highlights[entity.ppid].dataTypeCategories[
                                     activeCategory
                                 ].explanation[i18n.t("common:country.code")]
                             }

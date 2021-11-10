@@ -68,7 +68,5 @@ class Preferences {
             }
             return outputMap
         }
-
-        var currentFeatureName: String? = null
     }
 }

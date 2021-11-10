@@ -1,0 +1,6 @@
+{
+    "label.average":
+        "Average: {{value}}",
+    "label.total":
+        "Total: {{value}}"
+}

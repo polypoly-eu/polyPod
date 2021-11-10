@@ -8,7 +8,15 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
-import android.webkit.*
+import android.webkit.ConsoleMessage
+import android.webkit.JavascriptInterface
+import android.webkit.WebChromeClient
+import android.webkit.WebMessage
+import android.webkit.WebMessagePort
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
@@ -17,6 +25,7 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.features.Feature
+import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
@@ -42,7 +51,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         PolyOut(context),
         PolyIn(context, context.filesDir),
         PolyNav(
-            webView = webView, context = context
+            webView = webView
         ),
         Info(),
         Network(context)
@@ -115,7 +124,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
-        Preferences.currentFeatureName = feature.id
+        FeatureStorage.activeFeature = feature
         api.polyNav.setNavObserver(
             PolyNavObserver(
                 null,
@@ -199,12 +208,14 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 consoleMessage: ConsoleMessage?
             ): Boolean {
                 if (consoleMessage == null) {
-                    logger.warn("Unknown message from " +
-                        Preferences.currentFeatureName)
+                    logger.warn(
+                        "Unknown message from " +
+                            FeatureStorage.activeFeature?.id
+                    )
                     return true
                 }
                 val message = "Message from " +
-                    Preferences.currentFeatureName + ": " +
+                    FeatureStorage.activeFeature?.id + ": " +
                     consoleMessage.messageLevel() + ": " +
                     consoleMessage.message()
                 when (consoleMessage?.messageLevel()) {
@@ -324,8 +335,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         @Suppress("unused")
         @JavascriptInterface
         fun reportError(error: String) {
-            logger.warn("Uncaught error from " +
-                Preferences.currentFeatureName + ": " + error)
+            logger.warn(
+                "Uncaught error from " +
+                    FeatureStorage.activeFeature?.id + ": " + error
+            )
             errorHandler(error)
         }
 

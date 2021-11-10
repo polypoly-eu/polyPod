@@ -10,6 +10,8 @@ class FeatureStorage {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+
+        var activeFeature: Feature? = null
     }
 
     fun listFeatures(context: Context): List<Feature> {
@@ -47,7 +49,10 @@ class FeatureStorage {
         return Feature(fileName, content, manifest)
     }
 
-    private fun readManifest(context: Context, content: ZipFile): FeatureManifest {
+    private fun readManifest(
+        context: Context,
+        content: ZipFile
+    ): FeatureManifest {
         val manifestEntry = content.getEntry("manifest.json")
         if (manifestEntry == null) {
             logger.warn("Missing manifest for '${content.name}'")

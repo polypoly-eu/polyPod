@@ -1,11 +1,10 @@
-import RootAnalysis from "../analyses/ministories/root-analysis";
+import { createWarningStatus } from "../analyses/utils/analysis-status";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
 import {
     extractNameFromAdDescription,
     localeForCategoyName,
 } from "./utils/ads-locale";
-import { IMPORT_WARNING } from "./utils/importer-status.js";
 import { readJSONDataArray } from "./utils/importer-util";
 import { extractAccountDataFromUrl } from "./utils/url-processing";
 
@@ -39,9 +38,8 @@ export const RECENTLY_VIEWED_DATA_KEY = "recently_viewed";
  *
  * From this we extract a model consisting in an account that has ads that have views.
  */
-export default class RecentlyViewedAdsImporter extends RootAnalysis {
+export default class RecentlyViewedAdsImporter {
     constructor() {
-        super();
         this._accountsByUrl = new Map();
     }
 
@@ -122,11 +120,7 @@ export default class RecentlyViewedAdsImporter extends RootAnalysis {
         );
 
         if (!adsViewsData) {
-            return {
-                status: IMPORT_WARNING,
-                importerClass: this.constructor.name,
-                message: "Could not locate ads category",
-            };
+            return createWarningStatus("Could not locate ads category");
         }
 
         const currentLocale = localeForCategoyName(adsViewsData.name);

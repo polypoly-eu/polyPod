@@ -23,7 +23,6 @@
     "@rollup/plugin-sucrase": "^3.1.0",
     "babel-jest": "^27.2.5",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "27.2",
     "jszip": "^3.6.0",
     "memfs": "^3.2.2",
     "node-fetch": "^2.6.1",
@@ -53,6 +52,9 @@
     },
     "transformIgnorePatterns": [
       "/node_modules/(?!(.*))"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/config/env-setup.js"
     ]
   }
 }

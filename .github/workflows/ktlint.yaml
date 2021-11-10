@@ -1,26 +1,23 @@
 name: Lint kotlin
 
-# Disabled for now, as it is impractical for two reasons:
-#
-# 1. The rules are different from Android Studio's auto corrections
-# 2. There is no straightforward way to run ktlint locally
-#
-# Once these issues are resolved we should reenable the job.
-#
-#on:
-#  pull_request:
-#    paths:
-#      - .github/workflows/ktlint.yaml
-#      - 'android/**/*.kt'
-on: deployment
-
+on:
+  push:
+    paths:
+      - .github/workflows/ktlint.yaml
+      - 'android/**/*.kt'
+  pull_request:
+    types: [assigned, opened, ready_for_review]
+    paths:
+      - .github/workflows/ktlint.yaml
+      - 'android/**/*.kt'
 jobs:
   ktlint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.41.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
-      - name: run ktlint
+      - name: Downloads and installs ktlint
+        run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.43.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
+      - name: Runs ktlint
         run: |
           cd android && ktlint
