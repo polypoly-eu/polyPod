@@ -70,23 +70,6 @@ h4 {
     padding-left: 12px;
 }
 
-.overview .imported-files .file-list {
-    margin-bottom: 250px;
-}
-
-.overview .imported-files .file-list .file-button {
-    font-size: 12px;
-    letter-spacing: -0.01em;
-    border-top: 1px var(--color-gray-700) solid;
-    padding-top: 6px;
-    margin-top: 6px;
-    overflow-wrap: break-word;
-    color: var(--color-gray-400);
-    font-family: "Jost";
-    font-style: normal;
-    font-weight: normal;
-}
-
 .overview .footer {
     width: 100%;
     position: absolute;

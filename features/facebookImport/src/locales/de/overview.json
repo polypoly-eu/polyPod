@@ -4,6 +4,7 @@
     "imported.files": "Importierte Dateien:",
     "imported.time": "Importiert:",
     "size": "Größe:",
+    "above.chart.text": "Von allen importierten Facebook-Daten analysieren wir derzeit nur die folgenden <strong>{{number_categories}}</strong> Kategorien.",
     "explore": "Daten erkunden",
     "new.import": "Neuer Import",
     "loading.data": "Ihre Daten werden geladen",
