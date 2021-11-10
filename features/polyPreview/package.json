@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/podjs": "file:../../podjs",
+    "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",

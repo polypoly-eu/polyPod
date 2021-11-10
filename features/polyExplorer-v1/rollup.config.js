@@ -35,6 +35,7 @@ export default {
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
                         "node_modules/@polypoly-eu/podjs/dist/pod.js",
+                        "node_modules/@polypoly-eu/poly-look/dist/css",
                     ],
                     dest: "dist",
                 },

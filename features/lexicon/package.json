@@ -10,11 +10,12 @@
     "start": "sirv public --no-clear",
     "update-lexicon-data": "func(){ node ./scripts/update-lexicon-data.js \"$1\";}; func",
     "test": "jest",
-    "clean": "rm -rf node_modules public/{build,pod.js}"
+    "clean": "rm -rf node_modules public/{build,pod.js,poly-look.css}"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.7",
     "@polypoly-eu/podjs": "file:../../podjs",
+    "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
     "@prismicio/client": "^4.0.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
