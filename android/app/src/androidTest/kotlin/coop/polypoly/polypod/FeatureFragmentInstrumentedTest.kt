@@ -43,7 +43,8 @@ class FeatureFragmentInstrumentedTest {
     // @Test
     fun whenStartingTheApp_firstFragmentIsShown() {
         onView(
-            withText("testFeature"))
+            withText("testFeature")
+        )
             .check(matches(isDisplayed()))
     }
 
