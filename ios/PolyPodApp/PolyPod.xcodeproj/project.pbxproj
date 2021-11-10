@@ -106,7 +106,6 @@
 		E9545EAE273530ED001E8C7F /* UpdateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAD273530ED001E8C7F /* UpdateNotification.swift */; };
 		E9545EB12735412B001E8C7F /* UpdateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAD273530ED001E8C7F /* UpdateNotification.swift */; };
 		E9545EC1273542F5001E8C7F /* UpdateNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */; };
-		E9545EC227354323001E8C7F /* UpdateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAD273530ED001E8C7F /* UpdateNotification.swift */; };
 		E9545EC4273543EB001E8C7F /* UpdateNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */; };
 		E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
 		E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
@@ -907,7 +906,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9545EC227354323001E8C7F /* UpdateNotification.swift in Sources */,
 				E9545EC1273542F5001E8C7F /* UpdateNotificationTest.swift in Sources */,
 				E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */,
 			);

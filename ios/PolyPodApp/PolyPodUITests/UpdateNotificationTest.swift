@@ -64,27 +64,23 @@ class UpdateNotificationTest: XCTestCase {
 
     private func assertInAppNotificationShown() {
         XCTAssertTrue(
-            findInAppNotification().exists,
+            findInAppNotificationCloseButton().exists,
             "In app notification was supposed to be shown"
         )
     }
     
     private func assertInAppNotificationNotShown() {
         XCTAssertTrue(
-            !findInAppNotification().exists,
+            !findInAppNotificationCloseButton().exists,
             "In app notification was not supposed to be shown"
         )
     }
     
-    private func findInAppNotification() -> XCUIElement {
-        let predicate = NSPredicate(
-            format: "label CONTAINS %@",
-            UpdateNotification().title
-        )
-        return app.staticTexts.matching(predicate).firstMatch
+    private func findInAppNotificationCloseButton() -> XCUIElement {
+        return app.buttons["OK"]
     }
     
     private func closeInAppNotification() {
-        app.buttons["OK"].tap()
+        findInAppNotificationCloseButton().tap()
     }
 }
