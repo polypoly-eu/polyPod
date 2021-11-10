@@ -35,9 +35,16 @@ export default {
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
                         "node_modules/@polypoly-eu/podjs/dist/pod.js",
-                        "src/static/*",
                     ],
                     dest: "dist",
+                },
+                {
+                    src: ["src/static/*", "!src/static/fonts"],
+                    dest: "dist",
+                },
+                {
+                    src: ["src/static/fonts/*"],
+                    dest: "dist/fonts",
                 },
             ],
             verbose: true,
