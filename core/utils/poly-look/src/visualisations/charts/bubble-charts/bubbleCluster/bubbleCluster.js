@@ -5,13 +5,21 @@ import { Chart } from "../../chart";
 const edgePadding = 5;
 const smallBubblesRadius = 20;
 const bigBubblesRadius = 50;
+const bubblePadding = 3;
 const bigBubblesFont = "20px";
 const mediumBubblesFont = "16px";
+const defaultBubbleColor = "blue";
+const defaultTextColor = "white";
+const defaultOpacity = 1;
+const defaultValueShowing = true;
+const defaultOnClickFunction = () => {};
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
  *
  * The bubbles are being added in a spiral starting in the center of the cluster meaning sorted data will lead to all small bubbles in the middle or outside.
+ *
+ * Adding svg icons to a data point will load the svg instead of a bubble
  *
  * @class
  * @extends Chart
@@ -19,6 +27,7 @@ const mediumBubblesFont = "16px";
  * @param {Object[]} data - The data to be visualized as a bubble cluster
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
+ * @param {number} data[].icon - A svg that should be displayed as the bubble in string form as you would get it from rollup-svg-plugin (eg. "<svg>...</svg>")
  * @param {number = 400} width - The width of the svg
  * @param {number = 300} height - The height of the svg
  * @param {string|callback = "blue"} [bubbleColor] - The color of the bubble (callbacks receive event and data)
@@ -26,6 +35,7 @@ const mediumBubblesFont = "16px";
  * @param {number|callback = 1} [opacity] - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
  * @param {boolean = true} [showValues] - Whether texts displaying the value of the bubble are added
  * @param {callback = () => {}} [onBubbleClick] - Bubble onclick function
+ * @param {number|callback} [filter] - A filter that is applied to the icons eg saturate(0.5)(callbacks receive event and data)
  */
 export class BubbleCluster extends Chart {
   constructor({
@@ -33,11 +43,12 @@ export class BubbleCluster extends Chart {
     data,
     width,
     height,
-    bubbleColor = "blue",
-    textColor = "white",
-    opacity = 1,
-    showValues = true,
-    onBubbleClick = () => {},
+    bubbleColor = defaultBubbleColor,
+    textColor = defaultTextColor,
+    opacity = defaultOpacity,
+    showValues = defaultValueShowing,
+    onBubbleClick = defaultOnClickFunction,
+    filter,
   }) {
     super({ selector, data, width, height });
     this._bubbleColor = bubbleColor;
@@ -45,6 +56,8 @@ export class BubbleCluster extends Chart {
     this._opacity = opacity;
     this._showValues = showValues;
     this._onBubbleClick = onBubbleClick;
+    this._bubblePadding = bubblePadding;
+    this._filter = filter;
   }
 
   _makeHierarchy() {
@@ -54,8 +67,8 @@ export class BubbleCluster extends Chart {
   _pack() {
     return d3
       .pack()
-      .size([this.width - edgePadding, this.height - edgePadding])
-      .padding(3);
+      .size([this._width - edgePadding, this._height - edgePadding])
+      .padding(this._bubblePadding);
   }
 
   _updateBubbles(leaves) {
@@ -65,18 +78,38 @@ export class BubbleCluster extends Chart {
       .style("stroke", "#f7fafc")
       .style("vertical-align", "center")
       .attr("fill-opacity", this._opacity);
+
+    leaves
+      .selectAll(".icon")
+      .attr("height", (d) => d.r * 2)
+      .attr("width", (d) => d.r * 2)
+      .style("filter", this._filter);
   }
 
   _addNewBubbleGroups(leaves) {
     return leaves
       .enter()
       .append("g")
-      .attr("transform", (d) => `translate(${d.x + 1},${d.y + 1})`)
+      .attr("transform", (d) =>
+        d.data.icon
+          ? `translate(${d.x - d.r},${d.y - d.r})`
+          : `translate(${d.x},${d.y})`
+      )
       .on("click", this._onBubbleClick);
   }
 
   _addBubbles(bubbleGroups) {
     bubbleGroups
+      .filter((d) => d.data.icon)
+      .html((d) => d.data.icon)
+      .select("svg")
+      .attr("class", "icon")
+      .attr("height", (d) => d.r * 2)
+      .attr("width", (d) => d.r * 2)
+      .style("filter", this._filter);
+
+    bubbleGroups
+      .filter((d) => !d.data.icon)
       .append("circle")
       .attr("class", "bubble")
       .attr("r", (d) => d.r)
@@ -101,7 +134,10 @@ export class BubbleCluster extends Chart {
       })
       .style("font-family", "Jost Medium")
       .style("font-weight", "500")
-      .attr("fill", this._textColor);
+      .attr("fill", this._textColor)
+      .attr("transform", (d) =>
+        d.data.icon ? `translate(${d.x},${d.y})` : ""
+      );
   }
 
   _updateBubbleValueTexts(leaves) {

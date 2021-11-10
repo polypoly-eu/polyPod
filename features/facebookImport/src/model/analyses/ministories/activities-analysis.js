@@ -24,7 +24,9 @@ export default class ActivitiesAnalysis extends RootAnalysis {
             ...facebookAccount.recommendedPages,
             ...facebookAccount.searches,
             ...facebookAccount.unfollowedPages,
+            ...facebookAccount.comments,
             ...facebookAccount.postReactions,
+            ...facebookAccount.posts,
         ].map((each) => new Date(each.timestamp * 1000));
 
         //for nested structures
@@ -100,11 +102,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
                     ref={refWidth}
                 >
                     {" "}
-                    {
-                        +this._totalEvents.total
-                            .toLocaleString()
-                            .replace(",", ".")
-                    }
+                    {this._totalEvents.total.toLocaleString("de-DE")}
                 </h2>
                 {i18n.t("activitiesMiniStory:summary", {
                     number_activities: this._totalEvents.total,
@@ -116,7 +114,11 @@ export default class ActivitiesAnalysis extends RootAnalysis {
     renderDetails() {
         return (
             <>
-                <p>{this.renderSummary()}</p>
+                <p>
+                    {i18n.t("activitiesMiniStory:summary", {
+                        number_activities: this._totalEvents.total,
+                    })}
+                </p>
                 <ActivitiesMiniStory totalEvents={this._totalEvents} />
             </>
         );

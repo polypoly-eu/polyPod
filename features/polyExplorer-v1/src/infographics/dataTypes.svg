@@ -1,0 +1,144 @@
+<svg width="320" height="409" viewBox="0 0 320 409" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="dataTypes">
+<g id="group">
+<g id="Group">
+<g id="Data Types">
+<path id="Vector" opacity="0.3" d="M157.21 282.173C164.442 282.173 170.306 276.31 170.306 269.077C170.306 261.845 164.442 255.981 157.21 255.981C149.977 255.981 144.114 261.845 144.114 269.077C144.114 276.31 149.977 282.173 157.21 282.173Z" fill="#3749A9"/>
+<path id="Vector_2" opacity="0.3" d="M184.803 278.337C189.917 278.337 194.063 274.192 194.063 269.077C194.063 263.963 189.917 259.817 184.803 259.817C179.689 259.817 175.543 263.963 175.543 269.077C175.543 274.192 179.689 278.337 184.803 278.337Z" fill="#3749A9"/>
+<path id="Vector_3" opacity="0.3" d="M174.575 299.78C179.69 299.78 183.835 295.634 183.835 290.52C183.835 285.406 179.69 281.26 174.575 281.26C169.461 281.26 165.315 285.406 165.315 290.52C165.315 295.634 169.461 299.78 174.575 299.78Z" fill="#3749A9"/>
+<path id="Vector_4" opacity="0.3" d="M173.847 255.04C182.705 255.04 189.886 247.859 189.886 239.001C189.886 230.143 182.705 222.962 173.847 222.962C164.989 222.962 157.809 230.143 157.809 239.001C157.809 247.859 164.989 255.04 173.847 255.04Z" fill="#3749A9"/>
+<path id="Vector_5" opacity="0.3" d="M201.428 261.367C206.542 261.367 210.688 257.221 210.688 252.107C210.688 246.993 206.542 242.847 201.428 242.847C196.314 242.847 192.168 246.993 192.168 252.107C192.168 257.221 196.314 261.367 201.428 261.367Z" fill="#3749A9"/>
+<path id="Vector_6" opacity="0.3" d="M148.398 312.34C155.631 312.34 161.494 306.477 161.494 299.245C161.494 292.012 155.631 286.149 148.398 286.149C141.166 286.149 135.303 292.012 135.303 299.245C135.303 306.477 141.166 312.34 148.398 312.34Z" fill="#3749A9"/>
+<path id="Vector_7" opacity="0.3" d="M143.89 254.173C149.004 254.173 153.15 250.027 153.15 244.913C153.15 239.799 149.004 235.653 143.89 235.653C138.776 235.653 134.63 239.799 134.63 244.913C134.63 250.027 138.776 254.173 143.89 254.173Z" fill="#3749A9"/>
+<path id="Vector_8" opacity="0.3" d="M198.259 297.916C203.373 297.916 207.519 293.77 207.519 288.656C207.519 283.541 203.373 279.396 198.259 279.396C193.145 279.396 188.999 283.541 188.999 288.656C188.999 293.77 193.145 297.916 198.259 297.916Z" fill="#3749A9"/>
+<path id="Vector_9" opacity="0.3" d="M120.807 293.335C131.035 293.335 139.327 285.043 139.327 274.815C139.327 264.587 131.035 256.295 120.807 256.295C110.579 256.295 102.287 264.587 102.287 274.815C102.287 285.043 110.579 293.335 120.807 293.335Z" fill="#3749A9"/>
+<path id="Vector_10" opacity="0.3" d="M120.338 251.062C125.452 251.062 129.598 246.916 129.598 241.802C129.598 236.687 125.452 232.542 120.338 232.542C115.224 232.542 111.078 236.687 111.078 241.802C111.078 246.916 115.224 251.062 120.338 251.062Z" fill="#3749A9"/>
+<path id="Vector_11" opacity="0.3" d="M246.57 310.297C266.377 310.297 282.434 294.24 282.434 274.433C282.434 254.626 266.377 238.569 246.57 238.569C226.763 238.569 210.706 254.626 210.706 274.433C210.706 294.24 226.763 310.297 246.57 310.297Z" fill="#3749A9"/>
+<path id="Vector_12" opacity="0.3" d="M171.654 323.356C176.768 323.356 180.914 319.211 180.914 314.096C180.914 308.982 176.768 304.836 171.654 304.836C166.539 304.836 162.394 308.982 162.394 314.096C162.394 319.211 166.539 323.356 171.654 323.356Z" fill="#3749A9"/>
+<path id="Vector_13" opacity="0.3" d="M195.337 321.492C200.451 321.492 204.597 317.346 204.597 312.232C204.597 307.118 200.451 302.972 195.337 302.972C190.223 302.972 186.077 307.118 186.077 312.232C186.077 317.346 190.223 321.492 195.337 321.492Z" fill="#3749A9"/>
+<path id="Vector_14" opacity="0.3" d="M143.773 230.416C155.209 230.416 164.479 221.146 164.479 209.71C164.479 198.275 155.209 189.004 143.773 189.004C132.338 189.004 123.067 198.275 123.067 209.71C123.067 221.146 132.338 230.416 143.773 230.416Z" fill="#3749A9"/>
+<path id="Vector_15" opacity="0.3" d="M202.475 237.633C207.589 237.633 211.735 233.487 211.735 228.373C211.735 223.259 207.589 219.113 202.475 219.113C197.361 219.113 193.215 223.259 193.215 228.373C193.215 233.487 197.361 237.633 202.475 237.633Z" fill="#3749A9"/>
+<path id="Vector_16" opacity="0.3" d="M122.167 317.064C127.281 317.064 131.427 312.918 131.427 307.804C131.427 302.69 127.281 298.544 122.167 298.544C117.053 298.544 112.907 302.69 112.907 307.804C112.907 312.918 117.053 317.064 122.167 317.064Z" fill="#3749A9"/>
+<path id="Vector_17" opacity="0.3" d="M151.492 335.923C156.607 335.923 160.752 331.777 160.752 326.663C160.752 321.549 156.607 317.403 151.492 317.403C146.378 317.403 142.232 321.549 142.232 326.663C142.232 331.777 146.378 335.923 151.492 335.923Z" fill="#3749A9"/>
+<path id="Vector_18" opacity="0.3" d="M218.726 325.656C223.84 325.656 227.986 321.51 227.986 316.396C227.986 311.282 223.84 307.136 218.726 307.136C213.612 307.136 209.466 311.282 209.466 316.396C209.466 321.51 213.612 325.656 218.726 325.656Z" fill="#3749A9"/>
+<path id="Vector_19" opacity="0.3" d="M186.194 220.333C191.308 220.333 195.454 216.187 195.454 211.073C195.454 205.958 191.308 201.812 186.194 201.812C181.079 201.812 176.934 205.958 176.934 211.073C176.934 216.187 181.079 220.333 186.194 220.333Z" fill="#3749A9"/>
+<path id="Vector_20" opacity="0.3" d="M226.232 237.622C231.346 237.622 235.492 233.476 235.492 228.362C235.492 223.247 231.346 219.102 226.232 219.102C221.118 219.102 216.972 223.247 216.972 228.362C216.972 233.476 221.118 237.622 226.232 237.622Z" fill="#3749A9"/>
+<path id="Vector_21" opacity="0.3" d="M173.562 200.212C178.676 200.212 182.822 196.066 182.822 190.952C182.822 185.838 178.676 181.692 173.562 181.692C168.448 181.692 164.302 185.838 164.302 190.952C164.302 196.066 168.448 200.212 173.562 200.212Z" fill="#3749A9"/>
+<path id="Vector_22" opacity="0.3" d="M110.205 229.574C115.319 229.574 119.465 225.428 119.465 220.314C119.465 215.2 115.319 211.054 110.205 211.054C105.091 211.054 100.945 215.2 100.945 220.314C100.945 225.428 105.091 229.574 110.205 229.574Z" fill="#3749A9"/>
+<path id="Vector_23" opacity="0.3" d="M185.11 342.935C190.224 342.935 194.37 338.789 194.37 333.675C194.37 328.561 190.224 324.415 185.11 324.415C179.995 324.415 175.85 328.561 175.85 333.675C175.85 338.789 179.995 342.935 185.11 342.935Z" fill="#3749A9"/>
+<path id="Vector_24" opacity="0.3" d="M128.1 340.068C133.214 340.068 137.36 335.922 137.36 330.808C137.36 325.694 133.214 321.548 128.1 321.548C122.986 321.548 118.84 325.694 118.84 330.808C118.84 335.922 122.986 340.068 128.1 340.068Z" fill="#3749A9"/>
+<path id="Vector_25" opacity="0.3" d="M85.621 268.338C97.0567 268.338 106.327 259.068 106.327 247.632C106.327 236.197 97.0567 226.926 85.621 226.926C74.1854 226.926 64.915 236.197 64.915 247.632C64.915 259.068 74.1854 268.338 85.621 268.338Z" fill="#3749A9"/>
+<path id="Vector_26" opacity="0.3" d="M164.948 355.501C170.063 355.501 174.208 351.356 174.208 346.241C174.208 341.127 170.063 336.981 164.948 336.981C159.834 336.981 155.688 341.127 155.688 346.241C155.688 351.356 159.834 355.501 164.948 355.501Z" fill="#3749A9"/>
+<path id="Vector_27" opacity="0.3" d="M70.6484 346.212C91.1051 346.212 107.688 329.629 107.688 309.172C107.688 288.715 91.1051 272.132 70.6484 272.132C50.1918 272.132 33.6084 288.715 33.6084 309.172C33.6084 329.629 50.1918 346.212 70.6484 346.212Z" fill="#3749A9"/>
+<path id="Vector_28" opacity="0.3" d="M209.317 214.883C214.431 214.883 218.577 210.737 218.577 205.623C218.577 200.509 214.431 196.363 209.317 196.363C204.202 196.363 200.057 200.509 200.057 205.623C200.057 210.737 204.202 214.883 209.317 214.883Z" fill="#3749A9"/>
+<path id="Vector_29" opacity="0.3" d="M208.498 347.099C213.612 347.099 217.758 342.953 217.758 337.839C217.758 332.725 213.612 328.579 208.498 328.579C203.384 328.579 199.238 332.725 199.238 337.839C199.238 342.953 203.384 347.099 208.498 347.099Z" fill="#3749A9"/>
+<path id="Vector_30" opacity="0.3" d="M233.073 214.872C238.188 214.872 242.333 210.726 242.333 205.612C242.333 200.497 238.188 196.352 233.073 196.352C227.959 196.352 223.813 200.497 223.813 205.612C223.813 210.726 227.959 214.872 233.073 214.872Z" fill="#3749A9"/>
+<path id="Vector_31" opacity="0.3" d="M52.9602 270.025C58.0744 270.025 62.2202 265.88 62.2202 260.765C62.2202 255.651 58.0744 251.505 52.9602 251.505C47.846 251.505 43.7002 255.651 43.7002 260.765C43.7002 265.88 47.846 270.025 52.9602 270.025Z" fill="#3749A9"/>
+<path id="Vector_32" opacity="0.3" d="M87.7717 221.755C92.8859 221.755 97.0317 217.61 97.0317 212.495C97.0317 207.381 92.8859 203.235 87.7717 203.235C82.6576 203.235 78.5117 207.381 78.5117 212.495C78.5117 217.61 82.6576 221.755 87.7717 221.755Z" fill="#3749A9"/>
+<path id="Vector_33" opacity="0.3" d="M141.556 359.646C146.67 359.646 150.816 355.501 150.816 350.386C150.816 345.272 146.67 341.126 141.556 341.126C136.442 341.126 132.296 345.272 132.296 350.386C132.296 355.501 136.442 359.646 141.556 359.646Z" fill="#3749A9"/>
+<path id="Vector_34" opacity="0.3" d="M108.466 353.444C113.58 353.444 117.726 349.298 117.726 344.184C117.726 339.07 113.58 334.924 108.466 334.924C103.352 334.924 99.2061 339.07 99.2061 344.184C99.2061 349.298 103.352 353.444 108.466 353.444Z" fill="#3749A9"/>
+<path id="Vector_35" opacity="0.3" d="M201.602 192.04C211.83 192.04 220.122 183.749 220.122 173.52C220.122 163.292 211.83 155 201.602 155C191.374 155 183.082 163.292 183.082 173.52C183.082 183.749 191.374 192.04 201.602 192.04Z" fill="#3749A9"/>
+<path id="Vector_36" opacity="0.3" d="M241.061 333.751C246.175 333.751 250.321 329.606 250.321 324.491C250.321 319.377 246.175 315.231 241.061 315.231C235.947 315.231 231.801 319.377 231.801 324.491C231.801 329.606 235.947 333.751 241.061 333.751Z" fill="#3749A9"/>
+<path id="Vector_37" opacity="0.3" d="M249.615 233.424C254.729 233.424 258.875 229.278 258.875 224.164C258.875 219.05 254.729 214.904 249.615 214.904C244.5 214.904 240.354 219.05 240.354 224.164C240.354 229.278 244.5 233.424 249.615 233.424Z" fill="#3749A9"/>
+<path id="Vector_38" opacity="0.3" d="M111.113 205.834C116.227 205.834 120.373 201.688 120.373 196.574C120.373 191.46 116.227 187.314 111.113 187.314C105.998 187.314 101.853 191.46 101.853 196.574C101.853 201.688 105.998 205.834 111.113 205.834Z" fill="#3749A9"/>
+<path id="Vector_39" opacity="0.3" d="M191.903 389.591C203.339 389.591 212.609 380.32 212.609 368.885C212.609 357.449 203.339 348.179 191.903 348.179C180.468 348.179 171.197 357.449 171.197 368.885C171.197 380.32 180.468 389.591 191.903 389.591Z" fill="#3749A9"/>
+<path id="Vector_40" d="M145.632 183.794C167.329 183.794 184.919 166.204 184.919 144.507C184.919 122.809 167.329 105.22 145.632 105.22C123.934 105.22 106.345 122.809 106.345 144.507C106.345 166.204 123.934 183.794 145.632 183.794Z" fill="#3749A9"/>
+<path id="Vector_41" opacity="0.3" d="M230.833 355.194C235.947 355.194 240.093 351.048 240.093 345.934C240.093 340.82 235.947 336.674 230.833 336.674C225.719 336.674 221.573 340.82 221.573 345.934C221.573 351.048 225.719 355.194 230.833 355.194Z" fill="#3749A9"/>
+<path id="Vector_42" opacity="0.3" d="M121.923 373.022C127.037 373.022 131.183 368.877 131.183 363.762C131.183 358.648 127.037 354.502 121.923 354.502C116.809 354.502 112.663 358.648 112.663 363.762C112.663 368.877 116.809 373.022 121.923 373.022Z" fill="#3749A9"/>
+<path id="Vector_43" opacity="0.3" d="M259.732 211.59C266.965 211.59 272.828 205.727 272.828 198.494C272.828 191.262 266.965 185.398 259.732 185.398C252.5 185.398 246.637 191.262 246.637 198.494C246.637 205.727 252.5 211.59 259.732 211.59Z" fill="#3749A9"/>
+<path id="Vector_44" opacity="0.3" d="M156.7 377.95C161.815 377.95 165.96 373.804 165.96 368.69C165.96 363.576 161.815 359.43 156.7 359.43C151.586 359.43 147.44 363.576 147.44 368.69C147.44 373.804 151.586 377.95 156.7 377.95Z" fill="#3749A9"/>
+<path id="Vector_45" opacity="0.3" d="M233.548 191.12C238.662 191.12 242.808 186.974 242.808 181.86C242.808 176.745 238.662 172.6 233.548 172.6C228.434 172.6 224.288 176.745 224.288 181.86C224.288 186.974 228.434 191.12 233.548 191.12Z" fill="#3749A9"/>
+<path id="Vector_46" opacity="0.3" d="M92.0437 188.763C100.902 188.763 108.082 181.583 108.082 172.725C108.082 163.867 100.902 156.686 92.0437 156.686C83.1857 156.686 76.0049 163.867 76.0049 172.725C76.0049 181.583 83.1857 188.763 92.0437 188.763Z" fill="#3749A9"/>
+</g>
+</g>
+<g id="Numbers">
+<text id="5001" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="196" y="291.78">1</tspan></text>
+<text id="5002" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="173" y="293.78">1</tspan></text>
+<text id="5003" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="163" y="348.78">1</tspan></text>
+<text id="5032" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="154" y="371.78">1</tspan></text>
+<text id="5004" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="183" y="336.78">1</tspan></text>
+<text id="5005" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="229" y="348.78">1</tspan></text>
+<text id="5006" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="206" y="340.78">1</tspan></text>
+<text id="5007" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="216" y="319.78">1</tspan></text>
+<text id="5008" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="239" y="327.78">1</tspan></text>
+<text id="5009" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="193" y="314.78">1</tspan></text>
+<text id="5041" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="169" y="316.78">1</tspan></text>
+<text id="5010" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="145" y="302.823">2</tspan></text>
+<text id="5033" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="153" y="272.823">2</tspan></text>
+<text id="5036" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="170" y="242.823">3</tspan></text>
+<text id="5037" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="117" y="278.823">4</tspan></text>
+<text id="5038" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="198" y="177.823">4</tspan></text>
+<text id="5039" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="140" y="213.823">5</tspan></text>
+<text id="5042" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="188" y="373.823">5</tspan></text>
+<text id="5043" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="241" y="277.823">15</tspan></text>
+<text id="5044" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="64" y="311.823">16</tspan></text>
+<text id="5045" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="140" y="148.823">18</tspan></text>
+<text id="5040" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="81" y="251.823">5</tspan></text>
+<text id="5034" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="256" y="201.823">2</tspan></text>
+<text id="5035" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="11" font-weight="500" letter-spacing="0px"><tspan x="88" y="176.823">2</tspan></text>
+<text id="5011" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="149" y="328.78">1</tspan></text>
+<text id="5012" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="139" y="352.78">1</tspan></text>
+<text id="5013" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="120" y="366.78">1</tspan></text>
+<text id="5014" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="126" y="333.78">1</tspan></text>
+<text id="5015" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="106" y="346.78">1</tspan></text>
+<text id="5016" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="120" y="310.78">1</tspan></text>
+<text id="5017" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="142" y="247.78">1</tspan></text>
+<text id="5018" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="118" y="244.78">1</tspan></text>
+<text id="5019" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="108" y="222.78">1</tspan></text>
+<text id="5020" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="85" y="214.78">1</tspan></text>
+<text id="5022" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="50" y="263.78">1</tspan></text>
+<text id="5023" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="184" y="213.78">1</tspan></text>
+<text id="5024" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="200" y="231.78">1</tspan></text>
+<text id="5025" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="224" y="230.78">1</tspan></text>
+<text id="5026" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="248" y="226.78">1</tspan></text>
+<text id="5027" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="231" y="208.78">1</tspan></text>
+<text id="5028" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="207" y="208.78">1</tspan></text>
+<text id="5029" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="231" y="184.78">1</tspan></text>
+<text id="5030" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="171" y="193.78">1</tspan></text>
+<text id="5031" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="199" y="254.78">1</tspan></text>
+<text id="5021" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="109" y="198.78">1</tspan></text>
+<text id="5000" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="0px"><tspan x="183" y="271.78">1</tspan></text>
+</g>
+<text id="text3" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="207" y="149.17">Data type</tspan></text>
+</g>
+<g id="Legend_Sizes">
+<g id="Bubbles">
+<circle id="Ellipse 263" cx="244.5" cy="78.5" r="9" stroke="#3749A9"/>
+<path id="Ellipse 264" d="M259.5 72.5C259.5 80.7694 252.575 87.5 244 87.5C235.425 87.5 228.5 80.7694 228.5 72.5C228.5 64.2306 235.425 57.5 244 57.5C252.575 57.5 259.5 64.2306 259.5 72.5Z" stroke="#3749A9"/>
+<path id="Ellipse 265" d="M265.5 65.5C265.5 77.6609 255.864 87.5 244 87.5C232.136 87.5 222.5 77.6609 222.5 65.5C222.5 53.3391 232.136 43.5 244 43.5C255.864 43.5 265.5 53.3391 265.5 65.5Z" stroke="#3749A9"/>
+<path id="Ellipse 266" d="M272.5 60.5C272.5 75.395 259.981 87.5 244.5 87.5C229.019 87.5 216.5 75.395 216.5 60.5C216.5 45.605 229.019 33.5 244.5 33.5C259.981 33.5 272.5 45.605 272.5 60.5Z" stroke="#3749A9"/>
+<circle id="Ellipse 267" cx="244" cy="56" r="31.5" stroke="#3749A9"/>
+<circle id="Ellipse 268" cx="244" cy="52" r="35.5" stroke="#3749A9"/>
+<circle id="Ellipse 269" cx="244" cy="49" r="38.5" stroke="#3749A9"/>
+</g>
+<g id="Scale">
+<g id="Lines">
+<path id="Line" d="M267.469 87.5H296.531" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_2" d="M287 69.5H297" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_3" d="M292.078 43.5H296.922" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_4" d="M292.078 57.5H296.922" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_5" d="M292.078 33.5H296.922" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_6" d="M292.078 24.5H296.922" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_7" d="M287.156 16.5H296.844" stroke="#0F1938" stroke-linecap="square"/>
+<path id="Line_8" d="M267.469 10.5H296.531" stroke="#0F1938" stroke-linecap="square"/>
+</g>
+<g id="Numbers_2">
+<text id="18" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="300" y="10.475">18</tspan></text>
+<text id="15" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="300" y="18.475">15</tspan></text>
+<text id="12" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="300" y="26.475">12</tspan></text>
+<text id="9" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="300" y="35.475">9</tspan></text>
+<text id="6" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="300" y="45.475">6</tspan></text>
+<text id="19" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="300" y="58.475">3</tspan></text>
+<text id="1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="300" y="71.475">1</tspan></text>
+<text id="0" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="10" font-weight="500" letter-spacing="0px"><tspan x="300" y="88.475">0</tspan></text>
+</g>
+</g>
+</g>
+<path id="Line 164" d="M185 145L205 145" stroke="#0F1938"/>
+<path id="Ellipse 260" d="M148.5 100.475C152.459 100.16 156.461 100 160.5 100C243.067 100 310 166.933 310 249.5C310 332.067 243.067 399 160.5 399C77.9334 399 11 332.067 11 249.5C11 172.853 68.6793 109.679 143 101.013" stroke="#0F1938"/>
+<path id="Line 166" d="M146 134L146 83" stroke="#0F1938"/>
+<text id="text2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="118" y="19.17">Amount of </tspan><tspan x="118" y="33.17">times this data </tspan><tspan x="118" y="47.17">type is shared </tspan><tspan x="118" y="61.17">with other </tspan><tspan x="118" y="75.17">companies.</tspan></text>
+<path id="Line 167" d="M49.9995 60.7857L85.9996 120.5" stroke="#0F1938"/>
+<text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="11" y="19.17">Amount of </tspan><tspan x="11" y="33.17">all data types </tspan><tspan x="11" y="47.17">a company </tspan><tspan x="11" y="61.17">shares.</tspan></text>
+</g>
+</svg>

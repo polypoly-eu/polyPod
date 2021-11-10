@@ -1,14 +1,20 @@
 "use strict";
 
-import { MissingMessagesFilesException } from "../../src/model/importers/utils/failed-import-exception.js";
+import MessagesImporter from "../../src/model/importers/messages-importer.js";
+import {
+    MissingContentImportException,
+    MissingFilesException,
+} from "../../src/model/importers/utils/failed-import-exception.js";
 import {
     DATASET_EXPECTED_VALUES,
     zipFileWithMessageThreads,
+    zipFileWithThreeFileErrors,
 } from "../datasets/messages-data.js";
 import { ZipFileMock } from "../mocks/zipfile-mock.js";
 import { runMessagesImporter } from "../utils/data-importing.js";
 import {
     expectError,
+    expectErrorStatus,
     expectImportSuccess,
 } from "../utils/importer-assertions.js";
 
@@ -20,8 +26,32 @@ describe("Import messages from empty export", () => {
 
     it("triggers missing files error", async () => {
         const { result } = await runMessagesImporter(zipFile);
+        expectError(result, MissingFilesException, MessagesImporter);
+    });
+});
 
-        expectError(result, MissingMessagesFilesException);
+describe("Import message from export with three file errors", () => {
+    let result = null;
+    let facebookAccount = null;
+
+    beforeAll(async () => {
+        const zipFile = zipFileWithThreeFileErrors();
+        ({ result, facebookAccount } = await runMessagesImporter(zipFile));
+    });
+
+    it("has two error status", async () => {
+        expect(result.status.length).toBe(3);
+    });
+
+    it("triggers syntax error", async () => {
+        expectErrorStatus(result.status[0], MissingContentImportException);
+        expectErrorStatus(result.status[1], SyntaxError);
+        expectErrorStatus(result.status[2], TypeError);
+    });
+
+    it("has no imported messages", () => {
+        expect(facebookAccount.messageThreadsCount).toBe(0);
+        expect(facebookAccount.messagesCount).toBe(0);
     });
 });
 

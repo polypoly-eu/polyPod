@@ -26,7 +26,7 @@ const gridXMargin = 12;
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
  * @param {number = 400} [width] - The width of the svg
- * @param {number = 300} [height] - The height of the svg
+ * @param {number = 200} [height] - The height of the svg
  * @param {string|callback = "blue"} [barColor] - The color of the bar (callbacks receive event and data)
  * @param {string = null} [barValueColor] - The color the values are shown in (default = no values shown)
  * @param {number = 4} [numberTicksY] - Number of Ticks on the y-axis (will deviate by 1 if the values wouldn't make a nice scale otherwise)
@@ -39,10 +39,12 @@ export class VerticalBarChart extends Chart {
     width = 400,
     height = 200,
     barValueColor,
+    barWidth,
     numberTicksY,
   }) {
     super({ selector, data, width, height, margin });
     this._barColor = barColor || "blue";
+    this._barWidth = barWidth;
     this._xScale = d3.scaleBand().range([0, this.chartWidth]).padding(0.2);
     this._yScale = d3
       .scaleLinear()
@@ -110,8 +112,13 @@ export class VerticalBarChart extends Chart {
       .duration(750)
       .attr("y", this.chartHeight - initializingBarHeight)
       .attr("height", initializingBarHeight)
-      .attr("x", (d) => this._xScale(d.title))
-      .attr("width", this._xScale.bandwidth())
+      .attr("x", (d) =>
+        this._barWidth
+          ? this._xScale(d.title) +
+            (this._xScale.bandwidth() - this._barWidth) / 2
+          : this._xScale(d.title)
+      )
+      .attr("width", this._barWidth || this._xScale.bandwidth())
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
@@ -126,8 +133,13 @@ export class VerticalBarChart extends Chart {
       .append("rect")
       .attr("y", this.chartHeight - initializingBarHeight)
       .attr("height", initializingBarHeight)
-      .attr("x", (d) => this._xScale(d.title))
-      .attr("width", this._xScale.bandwidth())
+      .attr("x", (d) =>
+        this._barWidth
+          ? this._xScale(d.title) +
+            (this._xScale.bandwidth() - this._barWidth) / 2
+          : this._xScale(d.title)
+      )
+      .attr("width", this._barWidth || this._xScale.bandwidth())
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()

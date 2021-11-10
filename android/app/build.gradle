@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs'
+    id 'org.jlleitschuh.gradle.ktlint' version '10.2.0'
 }
 
 static def polyEpoch() {
@@ -11,6 +12,16 @@ static def polyEpoch() {
     def now = new Date()
     def polypolyFounding = Date.parse("yyyy-MM-dd", "2019-05-04", TimeZone.getTimeZone("UTC"))
     return (int) Math.floor((now.getTime() - polypolyFounding.getTime()) / 1000)
+}
+
+
+ktlint {
+    debug = true
+    verbose = true
+    reporters {
+        reporter "checkstyle"
+        reporter "plain"
+    }
 }
 
 android {

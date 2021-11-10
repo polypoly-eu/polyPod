@@ -49,7 +49,10 @@ class FeatureStorage {
         return Feature(fileName, content, manifest)
     }
 
-    private fun readManifest(context: Context, content: ZipFile): FeatureManifest {
+    private fun readManifest(
+        context: Context,
+        content: ZipFile
+    ): FeatureManifest {
         val manifestEntry = content.getEntry("manifest.json")
         if (manifestEntry == null) {
             logger.warn("Missing manifest for '${content.name}'")

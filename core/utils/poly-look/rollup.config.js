@@ -7,12 +7,17 @@ import css from "rollup-plugin-css-only";
 export default {
   input: "src/poly-look.js",
   output: {
-    file: "dist/poly-look.bundled.js",
-    format: "esm",
+    file: "dist/poly-look.js",
+    format: "iife",
+    name: "polyLook",
+    globals: {
+      react: "React",
+      "react-dom": "ReactDOM",
+    },
   },
   plugins: [
     svg(),
-    css({ output: "css/poly-look.bundled.css" }),
+    css({ output: "css/poly-look.css" }),
     sucrase({
       transforms: ["jsx"],
       production: true,

@@ -34,13 +34,22 @@ task.
 
 We use [ktlint](https://github.com/pinterest/ktlint) for testing the source, and
 that it conforms to the usual standards. It will be run automatically when
-you push or create a pull request, but you can download it run it with
+you push or create a pull request, but you can download, put it somewhere in the
+path,  and then run it with
 
 ```
 ktlint
 ```
 
-in this directory after downloading it.
+in this directory.
+
+Additionally, a gradle target for linting has been added; use
+
+```shell
+./gradlew ktlintCheck
+```
+
+to check the report.
 
 ## Installing features at runtime
 

@@ -8,7 +8,15 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
-import android.webkit.*
+import android.webkit.ConsoleMessage
+import android.webkit.JavascriptInterface
+import android.webkit.WebChromeClient
+import android.webkit.WebMessage
+import android.webkit.WebMessagePort
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
@@ -43,7 +51,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         PolyOut(context),
         PolyIn(context, context.filesDir),
         PolyNav(
-            webView = webView, context = context
+            webView = webView
         ),
         Info(),
         Network(context)
@@ -200,8 +208,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 consoleMessage: ConsoleMessage?
             ): Boolean {
                 if (consoleMessage == null) {
-                    logger.warn("Unknown message from " +
-                        FeatureStorage.activeFeature?.id)
+                    logger.warn(
+                        "Unknown message from " +
+                            FeatureStorage.activeFeature?.id
+                    )
                     return true
                 }
                 val message = "Message from " +
@@ -325,8 +335,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         @Suppress("unused")
         @JavascriptInterface
         fun reportError(error: String) {
-            logger.warn("Uncaught error from " +
-                FeatureStorage.activeFeature?.id + ": " + error)
+            logger.warn(
+                "Uncaught error from " +
+                    FeatureStorage.activeFeature?.id + ": " + error
+            )
             errorHandler(error)
         }
 

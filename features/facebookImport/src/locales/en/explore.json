@@ -8,5 +8,6 @@
     "unrecognizedCard.text": "If you send us an anonymised report about the structure of your Facebook data, it would help us improve Facebook Import so that it can show you even more insights.",
     "unrecognizedCard.button": "Learn more",
     "details.button": "View details",
-    "analysis.label.techDemo": "Tech Demo"
+    "analysis.label.techDemo": "Tech Demo",
+    "scroll": "Scroll to view more"
 }
