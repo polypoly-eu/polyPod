@@ -33,7 +33,6 @@ export default (commandLineArgs) => {
                 targets: [
                     {
                         src: [
-                            "src/static/*",
                             "node_modules/react/umd/react.development.js",
                             "node_modules/react-dom/umd/react-dom.development.js",
                             "node_modules/@polypoly-eu/podjs/dist/pod.js",
@@ -46,6 +45,14 @@ export default (commandLineArgs) => {
                             "node_modules/@polypoly-eu/poly-look/dist/css/poly-look.css",
                         ],
                         dest: "dist/css",
+                    },
+                    {
+                        src: ["src/static/*", "!src/static/fonts"],
+                        dest: "dist",
+                    },
+                    {
+                        src: ["src/static/fonts/*"],
+                        dest: "dist/fonts",
                     },
                 ],
             }),
