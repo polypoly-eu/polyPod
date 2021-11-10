@@ -3,7 +3,7 @@ import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-eve
 import {
     buildDisplayData,
     selectMeaningfulCompanies,
-    top5OffFacebookCompanies,
+    topOffFacebookCompanies,
 } from "../utils/on-off-facebook-data-restructuring.js";
 
 import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
@@ -64,7 +64,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
             this._displayType = detailDisplayTypes.onOff;
         } else if (facebookAccount._offFacebookCompanies.length > 0) {
             this._displayData = {
-                companies: top5OffFacebookCompanies(facebookAccount),
+                companies: topOffFacebookCompanies(facebookAccount),
                 activityTypes: groupOffFacebookEventsByType(
                     facebookAccount
                 ).map((e) => {
