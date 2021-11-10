@@ -29,7 +29,7 @@ class UpdateNotificationTest {
     @Test
     fun `previously shown notification considered seen`() {
         val notification = loadNotification(1)
-        notification.onInAppSeen()
+        notification.handleInAppSeen()
 
         val secondNotification = loadNotification(1)
         assertThat(secondNotification.showInApp).isFalse()
@@ -39,7 +39,7 @@ class UpdateNotificationTest {
     @Test
     fun `additional notification with different id considered not seen`() {
         val notification = loadNotification(1)
-        notification.onInAppSeen()
+        notification.handleInAppSeen()
 
         val secondNotification = loadNotification(2)
         assertThat(secondNotification.showInApp).isTrue()
@@ -49,8 +49,8 @@ class UpdateNotificationTest {
     @Test
     fun `additional notification with lower id considered seen`() {
         val notification = loadNotification(2)
-        notification.onInAppSeen()
-        notification.onPushSeen()
+        notification.handleInAppSeen()
+        notification.handlePushSeen()
 
         val secondNotification = loadNotification(1)
         assertThat(secondNotification.showInApp).isFalse()
@@ -60,14 +60,14 @@ class UpdateNotificationTest {
     @Test
     fun `push notification considered seen after startup`() {
         val notification = loadNotification(1)
-        notification.onStartup()
+        notification.handleStartup()
         assertThat(notification.showPush).isFalse()
     }
 
     @Test
     fun `in app notification considered not seen after push was seen`() {
         val notification = loadNotification(1)
-        notification.onPushSeen()
+        notification.handlePushSeen()
         assertThat(notification.showPush).isFalse()
         assertThat(notification.showInApp).isTrue()
     }
@@ -75,7 +75,7 @@ class UpdateNotificationTest {
     @Test
     fun `every notification considered seen on first run`() {
         val notification = loadNotification(1)
-        notification.onFirstRun()
+        notification.handleFirstRun()
         assertThat(notification.showPush).isFalse()
         assertThat(notification.showInApp).isFalse()
     }

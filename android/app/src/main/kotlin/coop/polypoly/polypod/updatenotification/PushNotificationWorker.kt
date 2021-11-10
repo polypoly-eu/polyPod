@@ -28,7 +28,7 @@ class PushNotificationWorker(
         val notification = UpdateNotification(context)
         if (!notification.showPush)
             return Result.success()
-        notification.onPushSeen()
+        notification.handlePushSeen()
         showPushNotification(notification)
         return Result.success()
     }
