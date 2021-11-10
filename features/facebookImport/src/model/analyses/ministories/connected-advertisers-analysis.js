@@ -18,7 +18,6 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
         this._connectedAdvertisersCount =
             facebookAccount.connectedAdvertisers.length;
         this._connectedAdvertisers = facebookAccount.connectedAdvertisers;
-        console.log(facebookAccount.connectedAdvertisers);
         this.active = this._connectedAdvertisersCount > 0;
     }
 
