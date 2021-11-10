@@ -31,17 +31,14 @@ describe("Your advertising value analysis from account with no ad interests", ()
 const DATASETS = [
     {
         adInterests: ["Interest"],
-        numberInterests: 1,
         randomAdInterestsCount: 1,
     },
     {
         adInterests: ["InterestOne", "InterestTwo"],
-        numberInterests: 2,
         randomAdInterestsCount: 2,
     },
     {
         adInterests: ["InterestOne", "InterestTwo", "InterestThree"],
-        numberInterests: 3,
         randomAdInterestsCount: 3,
     },
 
@@ -52,7 +49,6 @@ const DATASETS = [
             "InterestThree",
             "InterestFour",
         ],
-        numberInterests: 4,
         randomAdInterestsCount: 3,
     },
 ];
@@ -79,7 +75,7 @@ for (const dataset of DATASETS) {
         });
 
         it("has correct number of ad interests", async () => {
-            expect(analysis._numberInterests).toBe(dataset.numberInterests);
+            expect(analysis._numberInterests).toBe(dataset.adInterests.length);
         });
 
         it("has correct number of random interests", async () => {
