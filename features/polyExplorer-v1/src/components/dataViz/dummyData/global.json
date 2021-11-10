@@ -1,0 +1,19 @@
+{
+    "countries": {
+        "1":"Germany",
+        "2":"Austria",
+        "3": "Sweden"},
+
+
+    "jurisdictions": {
+        "1":"GDPR",
+        "2":"China",
+        "3": "Russia",
+        "4":"FVEY",
+        "5":"Other"},
+        
+    "dataTypes": <DataTypeMap>,
+    "dataSources": <DataSourceMap>,
+    "industries": <IndustryMap>,
+    "purposes": <PurposeMap>
+}

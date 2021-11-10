@@ -1,0 +1,12 @@
+{
+    "headline":
+        "Zwecke",
+    "text.1":
+        "Firmen müssen als Begründung für das Teilen von Daten jeweils einen Zweck angeben.",
+    "scale.1":
+        "Darstellung der Anzahl der Nennungen dieses Zwecks",
+    "scale.2":
+        "Anzahl der Nennungen dieses Zwecks",
+    "text.2":
+        "<p>Um diesen Wert zu ermitteln, recherchieren wir, wie oft dieser Zweck über alle Datentypen, die eine Firma teilt, als Grund genannt wird. Diese Zahl multiplizieren wir mit der Anzahl der Firmen, mit denen der jeweilige Datentyp geteilt wird. </p><p>Bei der Einordnung und Benennung der Zwecke orientieren wir uns – wie bei den Datentypen – an dem Data Protection Vocabulary W3C-Standard.</p>"
+}

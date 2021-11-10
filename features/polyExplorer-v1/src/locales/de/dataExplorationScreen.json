@@ -1,0 +1,38 @@
+{
+    "dataTypes.text.intro":
+        "Dies sind die Datentypen die {{name}} bis zu {{sharingCount}} mal mit anderen Firmen teilt, z. B. Informationen über den Datentyp \"{{mostSharedType}}\" werden {{mostSharedCount}} mal geteilt.",
+    "dataTypes.text.grouping":
+        "Datentypen können in verschiedene Kategorien gruppiert werden:",
+    "dataTypes.without-category":
+        "Ohne Kategorie",
+    "dataTypes.title.personal":
+        "Persönliche Daten",
+    "dataTypes.title.social":
+        "Soziale Daten",
+    "dataTypes.title.technical":
+        "Technische Daten",
+    "dataTypes.title.financial":
+        "Finanzdaten",
+    "dataTypes.heading.correlations":
+        "Mögliche Datenkorrelationen",
+    "dataTypes.text.correlations":
+        "Wenn Datentypen nicht einzeln, sondern im Paket geteilt werden, geben sie weitere Einblicke.",
+    "purposes.description.scale":
+        "Anzahl der Nennungen",
+    "companies.text.intro":
+        "Daten werden oft mit einer überraschenden Anzahl von  Unternehmen geteilt, in vorhersehbaren oder unerwarteten Branchen.",
+    "companies.heading.industries":
+        "Branchen",
+    "companies.heading.list":
+        "Vollständige Firmenliste",
+    "companies.text.list":
+        "Alle Firmen, die Daten von {{name}} erhalten:",
+    "construction.text":
+        "Dieser Teil wird gerade noch gebaut, aber ihr könnt schonmal durchklicken, wenn ihr neugierig seid.",
+    "from.polyPedia.translation":
+        "Translation_DE",
+    "from.polyPedia.description":
+        "Description_DE",
+    "explore.other":
+        "Andere Firmen erkunden"
+}
