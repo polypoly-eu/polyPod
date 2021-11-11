@@ -10,14 +10,6 @@ import coop.polypoly.polypod.updatenotification.UpdateNotification
 class MainActivity : AppCompatActivity() {
 
     private var onboardingShown = false
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
-    ) {
-        print("onActivityresult")
-        super.onActivityResult(requestCode, resultCode, data)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

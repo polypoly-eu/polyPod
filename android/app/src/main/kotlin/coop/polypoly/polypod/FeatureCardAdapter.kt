@@ -129,7 +129,7 @@ class FeatureCardAdapter(
 
             successfulAuth()
 
-            // TODO: Encrypted previously stored unencrypted data, if any
+            // TODO: Encrypt previously stored unencrypted data, if any
         }
 
         override fun onAuthenticationFailed() {

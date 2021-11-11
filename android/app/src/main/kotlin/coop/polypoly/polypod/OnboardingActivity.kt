@@ -70,14 +70,14 @@ class OnboardingActivity : AppCompatActivity() {
         carousel.pageCount = strings.size
         carousel.setViewListener { requestedPosition ->
             var position = requestedPosition
-            if (position == 2 && shouldShowBiometricsPrompt()) {
-            }
 
             val slide = layoutInflater.inflate(R.layout.onboarding_slide, null)
             strings[position].forEach { (viewId, stringId) ->
                 slide.findViewById<TextView>(viewId).text = getString(stringId)
             }
-            if ((position == strings.size - 2) || (strings.size == 1)) {
+            if (slide.findViewById<TextView>(R.id.headline_main).text ==
+                getString(R.string.onboarding_slide3_headline)
+            ) {
                 val button = slide.findViewById<View>(
                     R.id.onboarding_button_auth
                 )
@@ -121,18 +121,21 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     fun shouldShowBiometricsPrompt(): Boolean {
-        return !Preferences.isFirstRun(this) && biometricsUnavailable() ||
+        return !biometricsAvailable() &&
             Preferences.getBiometricCheck(this)
     }
-    fun biometricsUnavailable(): Boolean {
+    fun biometricsAvailable(): Boolean {
         val biometricManager = BiometricManager.from(this)
+        val tst = biometricManager.canAuthenticate(
+            desiredLockScreenType
+        )
         if (biometricManager.canAuthenticate(
                 desiredLockScreenType
-            ) != BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED
+            ) != BiometricManager.BIOMETRIC_SUCCESS
         ) {
-            return true
+            return false
         }
-        return false
+        return true
     }
 
     fun ensureLockScreen(
@@ -142,7 +145,7 @@ class OnboardingActivity : AppCompatActivity() {
         if (!Preferences.getBiometricCheck(this)) {
             return noScreenLock()
         }
-        if (biometricsUnavailable()) {
+        if (biometricsAvailable()) {
             return authAvailable()
         }
 
