@@ -45,6 +45,7 @@ export default class MinistoriesStatusAnalysis {
                             <th>Execution Status</th>
                             <th>Activation Status</th>
                             <th>Message</th>
+                            <th>Custom Data</th>
                             <th>Execution Time</th>
                         </tr>
                     </thead>
@@ -56,6 +57,7 @@ export default class MinistoriesStatusAnalysis {
                                     activationStatus,
                                     executionStatus,
                                     executionTime,
+                                    customData,
                                 },
                                 index
                             ) => (
@@ -64,6 +66,7 @@ export default class MinistoriesStatusAnalysis {
                                     <td>{activationStatus}</td>
                                     <td>{executionStatus.name}</td>
                                     <td>{executionStatus.message}</td>
+                                    <td>{customData || ""}</td>
                                     <td style={{ textAlign: "right" }}>
                                         {executionTime}
                                     </td>
