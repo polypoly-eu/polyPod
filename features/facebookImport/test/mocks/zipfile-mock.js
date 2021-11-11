@@ -1,11 +1,14 @@
 import { jsonStringifyWithUtfEscape } from "../../src/model/importers/utils/json-encoding";
 
+//The minimum size of a .ZIP file is 22 bytes
+export const MINIMUM_FILE_SIZE = 22;
+
 export class ZipFileMock {
     constructor() {
         this.id = "polypod://de71f571-d90a-45e0-b007-d8f059e0541b";
         this.time = new Date("2021-09-20T16:37:36.243Z");
         this.name = "facebook-facebookuser.zip";
-        this.size = 22; //The minimum size of a .ZIP file is 22 bytes
+        this.size = MINIMUM_FILE_SIZE;
         this._entries = {};
     }
 

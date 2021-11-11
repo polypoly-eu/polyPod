@@ -103,6 +103,13 @@
 		E923AAF7261E155500E0A2A8 /* polyNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* polyNav.js */; };
 		E923AAF8261E155500E0A2A8 /* polyNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* polyNav.js */; };
 		E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E924F5C3263BF5F60014834B /* ContentViewHost.swift */; };
+		E9545EAE273530ED001E8C7F /* UpdateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAD273530ED001E8C7F /* UpdateNotification.swift */; };
+		E9545EB12735412B001E8C7F /* UpdateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAD273530ED001E8C7F /* UpdateNotification.swift */; };
+		E9545EC1273542F5001E8C7F /* UpdateNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */; };
+		E9545EC4273543EB001E8C7F /* UpdateNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */; };
+		E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
+		E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
+		E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
 		E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
 		E97D3260263084C500A5A180 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325F263084C500A5A180 /* SettingsView.swift */; };
 		E97D3276263152CE00A5A180 /* FeatureManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3275263152CE00A5A180 /* FeatureManifest.swift */; };
@@ -146,6 +153,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		1A66F7772493743D00ED4308 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AA6DE2724191C94008DB1B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AA6DE2E24191C94008DB1B2;
+			remoteInfo = PolyPod;
+		};
+		E9545EBC273542CC001E8C7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1AA6DE2724191C94008DB1B2 /* Project object */;
 			proxyType = 1;
@@ -222,6 +236,11 @@
 		E92373C126289FAC00D2CFF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E923AAF6261E155500E0A2A8 /* polyNav.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = polyNav.js; sourceTree = "<group>"; };
 		E924F5C3263BF5F60014834B /* ContentViewHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewHost.swift; sourceTree = "<group>"; };
+		E9545EAD273530ED001E8C7F /* UpdateNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotification.swift; sourceTree = "<group>"; };
+		E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationTest.swift; sourceTree = "<group>"; };
+		E9545EB6273542CC001E8C7F /* PolyPodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolyPodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationTest.swift; sourceTree = "<group>"; };
+		E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
 		E97D325526307CE100A5A180 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		E97D325F263084C500A5A180 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E97D3275263152CE00A5A180 /* FeatureManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureManifest.swift; sourceTree = "<group>"; };
@@ -266,6 +285,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9545EB3273542CC001E8C7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -300,6 +326,7 @@
 		1A66F7732493743D00ED4308 /* PolyPodTests */ = {
 			isa = PBXGroup;
 			children = (
+				E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */,
 				E9CFFA4E26A1983700F7BE65 /* UIColorExtensionsTest.swift */,
 				1A66F77E249378E400ED4308 /* PolyOutTests.swift */,
 				1A66F7762493743D00ED4308 /* Info.plist */,
@@ -356,6 +383,7 @@
 				1AA6DE4624192079008DB1B2 /* PodApi */,
 				1AA6DE3124191C94008DB1B2 /* PolyPod */,
 				1A66F7732493743D00ED4308 /* PolyPodTests */,
+				E9545EB7273542CC001E8C7F /* PolyPodUITests */,
 				1AA6DE3024191C94008DB1B2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -365,6 +393,7 @@
 			children = (
 				1AA6DE2F24191C94008DB1B2 /* PolyPod.app */,
 				1A66F7722493743D00ED4308 /* PolyPodTests.xctest */,
+				E9545EB6273542CC001E8C7F /* PolyPodUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -395,6 +424,7 @@
 				E97D3279263153C200A5A180 /* NavigationBar.swift */,
 				E97D32A72631BF7700A5A180 /* HTMLView.swift */,
 				E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */,
+				E9545EAD273530ED001E8C7F /* UpdateNotification.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -477,6 +507,14 @@
 			path = Info;
 			sourceTree = "<group>";
 		};
+		E9545EB7273542CC001E8C7F /* PolyPodUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */,
+			);
+			path = PolyPodUITests;
+			sourceTree = "<group>";
+		};
 		E97D326726308BC700A5A180 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,6 +523,7 @@
 				E9F370D4262EABFF006254C1 /* LocalizedStringKeyExtensions.swift */,
 				E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */,
 				E97D325526307CE100A5A180 /* ColorExtensions.swift */,
+				E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -562,13 +601,31 @@
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E9545EB5273542CC001E8C7F /* PolyPodUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9545EBE273542CC001E8C7F /* Build configuration list for PBXNativeTarget "PolyPodUITests" */;
+			buildPhases = (
+				E9545EB2273542CC001E8C7F /* Sources */,
+				E9545EB3273542CC001E8C7F /* Frameworks */,
+				E9545EB4273542CC001E8C7F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E9545EBD273542CC001E8C7F /* PBXTargetDependency */,
+			);
+			name = PolyPodUITests;
+			productName = PolyPodUITests;
+			productReference = E9545EB6273542CC001E8C7F /* PolyPodUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		1AA6DE2724191C94008DB1B2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = polypoly;
 				TargetAttributes = {
@@ -578,6 +635,10 @@
 					};
 					1AA6DE2E24191C94008DB1B2 = {
 						CreatedOnToolsVersion = 11.3.1;
+					};
+					E9545EB5273542CC001E8C7F = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 1AA6DE2E24191C94008DB1B2;
 					};
 				};
 			};
@@ -601,6 +662,7 @@
 			targets = (
 				1AA6DE2E24191C94008DB1B2 /* PolyPod */,
 				1A66F7712493743D00ED4308 /* PolyPodTests */,
+				E9545EB5273542CC001E8C7F /* PolyPodUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -632,6 +694,13 @@
 				E9F370CA262DD92C006254C1 /* jost_light.ttf in Resources */,
 				1AA6DE3F24191C96008DB1B2 /* LaunchScreen.storyboard in Resources */,
 				1AA6DE3C24191C96008DB1B2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9545EB4273542CC001E8C7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,6 +782,7 @@
 				E98BA80026D3CA2F0039E41E /* Network.swift in Sources */,
 				1ABADC0424EE710C00369791 /* Term+CoreDataProperties.swift in Sources */,
 				1ABADC0224EE710C00369791 /* Literal+Additions.swift in Sources */,
+				E9545EC4273543EB001E8C7F /* UpdateNotificationTest.swift in Sources */,
 				1ABADBFE24EE710B00369791 /* Variable+CoreDataClass.swift in Sources */,
 				1ABADBF924EE710B00369791 /* BlankNode+CoreDataClass.swift in Sources */,
 				E989B353269DDC9E000EE977 /* PolyNavTests.swift in Sources */,
@@ -726,11 +796,13 @@
 				E9CFFA4F26A1983700F7BE65 /* UIColorExtensionsTest.swift in Sources */,
 				1ABADBF224EE70B500369791 /* DataFactory.swift in Sources */,
 				1ABADBFC24EE710B00369791 /* Quad+CoreDataProperties.swift in Sources */,
+				E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */,
 				1ABADBF424EE70E700369791 /* LocationTracker.swift in Sources */,
 				1ABADBF724EE710B00369791 /* NamedNode+CoreDataClass.swift in Sources */,
 				1ABADC0724EE717000369791 /* Bubblewrap.swift in Sources */,
 				1ABADBF824EE710B00369791 /* NamedNode+CoreDataProperties.swift in Sources */,
 				1ABADC0524EE710C00369791 /* Term+Additions.swift in Sources */,
+				E9545EB12735412B001E8C7F /* UpdateNotification.swift in Sources */,
 				E9CFFA4A269F4CCE00F7BE65 /* FeatureTests.swift in Sources */,
 				1ABADBF624EE710B00369791 /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1ABADC0024EE710B00369791 /* Literal+CoreDataClass.swift in Sources */,
@@ -795,6 +867,7 @@
 				E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */,
 				1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */,
 				E97D327A263153C200A5A180 /* NavigationBar.swift in Sources */,
+				E9545EAE273530ED001E8C7F /* UpdateNotification.swift in Sources */,
 				5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
 				5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */,
@@ -822,9 +895,19 @@
 				E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */,
 				1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
+				E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */,
 				E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */,
 				1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */,
 				1A66F76B2490DFA000ED4308 /* FetchResponse.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9545EB2273542CC001E8C7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9545EC1273542F5001E8C7F /* UpdateNotificationTest.swift in Sources */,
+				E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,6 +918,11 @@
 			isa = PBXTargetDependency;
 			target = 1AA6DE2E24191C94008DB1B2 /* PolyPod */;
 			targetProxy = 1A66F7772493743D00ED4308 /* PBXContainerItemProxy */;
+		};
+		E9545EBD273542CC001E8C7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1AA6DE2E24191C94008DB1B2 /* PolyPod */;
+			targetProxy = E9545EBC273542CC001E8C7F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1078,6 +1166,54 @@
 			};
 			name = Release;
 		};
+		E9545EBF273542CC001E8C7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4A6DFU3K82;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.eu.PolyPodUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PolyPod;
+			};
+			name = Debug;
+		};
+		E9545EC0273542CC001E8C7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4A6DFU3K82;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.eu.PolyPodUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PolyPod;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1104,6 +1240,15 @@
 			buildConfigurations = (
 				1AA6DE4424191C96008DB1B2 /* Debug */,
 				1AA6DE4524191C96008DB1B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E9545EBE273542CC001E8C7F /* Build configuration list for PBXNativeTarget "PolyPodUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9545EBF273542CC001E8C7F /* Debug */,
+				E9545EC0273542CC001E8C7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

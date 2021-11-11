@@ -52,6 +52,16 @@
                ReferencedContainer = "container:PolyPod.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E9545EB5273542CC001E8C7F"
+               BuildableName = "PolyPodUITests.xctest"
+               BlueprintName = "PolyPodUITests"
+               ReferencedContainer = "container:PolyPod.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

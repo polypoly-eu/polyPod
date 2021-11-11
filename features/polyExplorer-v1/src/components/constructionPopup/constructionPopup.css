@@ -1,0 +1,31 @@
+.construction-popup-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(15, 25, 56, 0.5);
+    z-index: 400;
+}
+
+.construction-popup-container .construction-popup {
+    display: flex;
+    flex-flow: column;
+    margin: 84px auto;
+    width: 300px;
+    height: 400px;
+    background-color: var(--color-background-light);
+    border-radius: 8px;
+}
+
+.construction-popup img {
+    margin: 40px auto 60px auto;
+}
+
+.construction-popup button {
+    width: 240px;
+    height: 42px;
+    margin: 24px auto;
+    border-radius: 8px;
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+    font-size: 18px;
+}

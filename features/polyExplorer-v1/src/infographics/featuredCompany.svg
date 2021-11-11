@@ -1,0 +1,18 @@
+<svg width="308" height="219" viewBox="0 0 308 219" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="featuredCompany">
+<g id="Bar">
+<text id="115" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="262.343" y="114.17">115</tspan></text>
+<text id="30" opacity="0.7" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="89.567" y="114.17">30</tspan></text>
+<rect id="Rectangle 693" x="15.2207" y="90.5" width="264.88" height="11" rx="5.5" stroke="#3749A9"/>
+<path id="Rectangle 692" d="M14.7207 96C14.7207 92.6863 17.407 90 20.7207 90H81.8807V102H20.7207C17.407 102 14.7207 99.3137 14.7207 96Z" fill="#3749A9"/>
+<line id="Line 164" opacity="0.7" x1="96.5" y1="90" x2="96.5" y2="102" stroke="#3749A9"/>
+<rect id="highlighted1" x="15" y="58" width="185.84" height="29" fill="#FF0000"/>
+</g>
+<line id="Line 163" x1="96.5" y1="145" x2="96.5" y2="120" stroke="#0F1938"/>
+<line id="Line 166" x1="47.5" y1="58" x2="47.5" y2="33" stroke="#0F1938"/>
+<line id="Line 165" x1="271.5" y1="145" x2="271.5" y2="120" stroke="#0F1938"/>
+<rect id="text1" x="7" width="90" height="28" fill="#FF0000"/>
+<rect id="text2" y="150" width="131" height="56" fill="#FF0000"/>
+<rect id="text3" x="166" y="149" width="142" height="70" fill="#FF0000"/>
+</g>
+</svg>
