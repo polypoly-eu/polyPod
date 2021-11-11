@@ -3,6 +3,7 @@
 "app_bar_back_button_desc" = "Back";
 "app_bar_search_button_desc" = "Search";
 "app_bar_info_button_desc" = "Info";
+"onboarding_button_auth" = "Set up now";
 "onboarding_button_end" = "OK";
 "onboarding_slide1_headline" = "Hello, may I\nintroduce myself?";
 "onboarding_slide1_sub_headline" = "I am your\npolyPod.";
@@ -10,9 +11,12 @@
 "onboarding_slide2_headline" = "In step one,\nwe explore";
 "onboarding_slide2_sub_headline" = "the flow of data\ntogether.";
 "onboarding_slide2_body_text" = "To make a difference, we first need to understand exactly what is happening with our data. Let's find out together how companies handle your data.";
-"onboarding_slide3_headline" = "A first step,\nmany will follow.";
-"onboarding_slide3_sub_headline" = "So that private matters\nremain private.";
-"onboarding_slide3_body_text" = "Step by step, I'm offering you more and more ways to protect your privacy. I will of course be in touch as soon as new functionality is ready for you.";
+"onboarding_slide3_headline" = "Security first.";
+"onboarding_slide3_sub_headline" = "Set up security\nbefore we continue?";
+"onboarding_slide3_body_text" = "We would like to ensure any data you put into polyPod is as secure as possible. For this we would like to ask you to enable some way of authentication for future access.";
+"onboarding_slide4_headline" = "A first step,\nmany will follow.";
+"onboarding_slide4_sub_headline" = "So that private matters\nremain private.";
+"onboarding_slide4_body_text" = "Step by step, I'm offering you more and more ways to protect your privacy. I will of course be in touch as soon as new functionality is ready for you.";
 "settings_title" = "Settings";
 "settings_about_section" = "Info";
 "settings_version" = "Version";

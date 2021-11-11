@@ -4,6 +4,7 @@ struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var activeSlide: Int = 0
+    var authAction: () -> Void = {}
     var closeAction: () -> Void = {}
     
     var body: some View {
@@ -22,6 +23,13 @@ struct OnboardingView: View {
                 headline: "onboarding_slide3_headline",
                 subHeadline: "onboarding_slide3_sub_headline",
                 bodyText: "onboarding_slide3_body_text",
+                buttonLabel: "onboarding_button_auth",
+                buttonAction: authAction
+            ).padding(28),
+            Slide(
+                headline: "onboarding_slide4_headline",
+                subHeadline: "onboarding_slide4_sub_headline",
+                bodyText: "onboarding_slide4_body_text",
                 buttonLabel: "onboarding_button_end",
                 buttonAction: closeAction
             ).padding(28)
