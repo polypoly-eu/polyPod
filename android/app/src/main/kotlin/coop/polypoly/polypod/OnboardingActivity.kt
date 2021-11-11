@@ -1,6 +1,5 @@
 package coop.polypoly.polypod
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.admin.DevicePolicyManager
 import android.content.Intent
@@ -11,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
+import androidx.core.view.size
 import com.synnapps.carouselview.CarouselView
 
 class OnboardingActivity : AppCompatActivity() {
@@ -29,7 +29,7 @@ class OnboardingActivity : AppCompatActivity() {
             close()
         }
         val carousel = findViewById<CarouselView>(R.id.carousel)
-        var strings = listOf(
+        var strings = mutableListOf(
             mapOf(
                 R.id.headline_main to R.string.onboarding_slide1_headline,
                 R.id.headline_sub to R.string.onboarding_slide1_sub_headline,
@@ -41,30 +41,36 @@ class OnboardingActivity : AppCompatActivity() {
                 R.id.body_text to R.string.onboarding_slide2_body_text,
             ),
             mapOf(
-                R.id.headline_main to R.string.onboarding_slide3_headline,
-                R.id.headline_sub to R.string.onboarding_slide3_sub_headline,
-                R.id.body_text to R.string.onboarding_slide3_body_text,
-            ),
-            mapOf(
                 R.id.headline_main to R.string.onboarding_slide4_headline,
                 R.id.headline_sub to R.string.onboarding_slide4_sub_headline,
                 R.id.body_text to R.string.onboarding_slide4_body_text,
             ),
         )
 
+        if (shouldShowBiometricsPrompt()) {
+            strings.add(
+                2,
+                mapOf(
+                    R.id.headline_main to R.string.onboarding_slide3_headline,
+                    R.id.headline_sub to
+                        R.string.onboarding_slide3_sub_headline,
+                    R.id.body_text to R.string.onboarding_slide3_body_text,
+                )
+            )
+        }
+
         if (!Preferences.isFirstRun(baseContext)) {
-            strings = listOf(strings[2])
+            if (!shouldShowBiometricsPrompt()) {
+                close()
+                return
+            }
+            strings = mutableListOf(strings[2])
         }
 
         carousel.pageCount = strings.size
         carousel.setViewListener { requestedPosition ->
             var position = requestedPosition
-            if (position == 2 && shouldSkipBiometricsPrompt()) {
-                position ++
-                if (position > carousel.pageCount) {
-                    close()
-                }
-                carousel.setCurrentItem(position)
+            if (position == 2 && shouldShowBiometricsPrompt()) {
             }
 
             val slide = layoutInflater.inflate(R.layout.onboarding_slide, null)
@@ -87,7 +93,11 @@ class OnboardingActivity : AppCompatActivity() {
                 doNotAskButton.visibility = View.VISIBLE
                 doNotAskButton.setOnClickListener {
                     Preferences.setBiometricCheck(this, false)
-                    close()
+                    if (carousel.currentItem == (carousel.pageCount - 1)) {
+                        close()
+                    } else {
+                        carousel.setCurrentItem(carousel.currentItem + 1)
+                    }
                 }
             }
             if (position == strings.size - 1) {
@@ -110,9 +120,9 @@ class OnboardingActivity : AppCompatActivity() {
         finish()
     }
 
-    fun shouldSkipBiometricsPrompt(): Boolean {
-        return Preferences.isFirstRun(this) && biometricsUnavailable() ||
-            !Preferences.getBiometricCheck(this)
+    fun shouldShowBiometricsPrompt(): Boolean {
+        return !Preferences.isFirstRun(this) && biometricsUnavailable() ||
+            Preferences.getBiometricCheck(this)
     }
     fun biometricsUnavailable(): Boolean {
         val biometricManager = BiometricManager.from(this)

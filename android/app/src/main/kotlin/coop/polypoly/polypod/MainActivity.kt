@@ -3,17 +3,13 @@ package coop.polypoly.polypod
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.updatenotification.UpdateNotification
 
 class MainActivity : AppCompatActivity() {
 
-    private var initialized = false
-
+    private var onboardingShown = false
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
@@ -51,8 +47,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 .show()
         }
-        if (Preferences.isFirstRun(this)
-        ) {
+        if (!onboardingShown) {
+            onboardingShown = true
             startActivity(
                 Intent(
                     this,
