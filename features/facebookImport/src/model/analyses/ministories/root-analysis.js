@@ -7,7 +7,7 @@ export default class RootAnalysis {
         return RootAnalysis.Labels.TECH_DEMO;
     }
 
-    get reportData() {
+    get customReportData() {
         return null;
     }
 }

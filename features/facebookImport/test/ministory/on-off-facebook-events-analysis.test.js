@@ -80,6 +80,14 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
     it("has no companies with ads", async () => {
         expect(analysis._companiesWithAdsCount).toBe(0);
     });
+
+    it("has variation with no correlations", async () => {
+        expect(analysis._displayType).toBe("off");
+    });
+
+    it("has correct report data", async () => {
+        expect(analysis.customReportData).toStrictEqual({ displayType: "off" });
+    });
 });
 
 describe("Off-Facebook events analysis from export data", () => {
@@ -109,6 +117,16 @@ describe("Off-Facebook events analysis from export data", () => {
 
     it("has no companies with ads", async () => {
         expect(analysis._companiesWithAdsCount).toBe(6);
+    });
+
+    it("has variation with on-off correlations", async () => {
+        expect(analysis._displayType).toBe("on-off");
+    });
+
+    it("has correct report data", async () => {
+        expect(analysis.customReportData).toStrictEqual({
+            displayType: "on-off",
+        });
     });
 });
 

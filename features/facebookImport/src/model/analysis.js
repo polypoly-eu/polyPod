@@ -195,7 +195,7 @@ class AnalysisExecutionResult {
                 message: this.status.message,
             },
             executionTime: this.executionTime.toFixed(0),
-            customData: this.analysis.reportData,
+            customData: this.analysis.customReportData,
         };
     }
 }

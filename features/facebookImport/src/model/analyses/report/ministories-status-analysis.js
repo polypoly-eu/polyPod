@@ -66,7 +66,11 @@ export default class MinistoriesStatusAnalysis {
                                     <td>{activationStatus}</td>
                                     <td>{executionStatus.name}</td>
                                     <td>{executionStatus.message}</td>
-                                    <td>{customData || ""}</td>
+                                    <td>
+                                        {customData
+                                            ? JSON.stringify(customData)
+                                            : ""}
+                                    </td>
                                     <td style={{ textAlign: "right" }}>
                                         {executionTime}
                                     </td>

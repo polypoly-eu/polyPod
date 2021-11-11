@@ -33,7 +33,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
             : i18n.t("offFacebookEventsMiniStory:title");
     }
 
-    get reportData() {
+    get customReportData() {
         return { displayType: this._displayType };
     }
 
