@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let notification = UpdateNotification()
         if notification.showPush {
-            notification.onPushSeen()
+            notification.handlePushSeen()
             showUpdateNotification()
         }
         task.setTaskCompleted(success: true)
