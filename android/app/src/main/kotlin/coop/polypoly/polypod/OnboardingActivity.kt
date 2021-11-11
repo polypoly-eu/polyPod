@@ -146,22 +146,8 @@ class OnboardingActivity : AppCompatActivity() {
             return authAvailable()
         }
 
-        val checkBoxView = View.inflate(
-            this, R.layout.fragment_checkbox, null
-        )
-        val checkBox: CheckBox = checkBoxView.findViewById(
-            R.id.checkbox
-        )
-        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-            Preferences.setBiometricCheck(
-                this, !isChecked
-            )
-        }
-        checkBox.setText(R.string.auth_enable_lock_do_not_ask)
-
         AlertDialog.Builder(this)
             .setTitle(R.string.auth_enable_lock_title)
-            .setView(checkBoxView)
             .setMessage(R.string.auth_enable_lock_message)
             .setPositiveButton(R.string.auth_enable_lock_yes) { dialog, _ ->
                 run {
