@@ -5,7 +5,7 @@ import { DONUT_CHART } from "../../../constants";
 import SectionTitle from "../sectionTitle.jsx";
 import { ClusterSections } from "../clusterSections";
 import { StoryParagraph } from "./storyParagraph";
-import FakeTab from "../fakeTab.jsx";
+import Tab from "../tab.jsx";
 import * as _ from "lodash";
 
 import "./overview.css";
@@ -230,7 +230,7 @@ const Overview = ({ products, heightEvent }) => {
             <StoryParagraph as="div">
                 {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
             </StoryParagraph>
-            <FakeTab onClickedTab={onTabChanges}>
+            <Tab onClickedTab={onTabChanges}>
                 <div
                     label={i18n.t(`${i18nHeader}:overview.tab.installs`)}
                     tabId={typeDonutsChar.donutInstalls}
@@ -243,7 +243,7 @@ const Overview = ({ products, heightEvent }) => {
                     label={i18n.t(`${i18nHeader}:overview.tab.partof`)}
                     tabId={typeDonutsChar.donutPartOf}
                 ></div>
-            </FakeTab>
+            </Tab>
             <div className="chart-container">
                 <DonutChart
                     data={currentDonutData}

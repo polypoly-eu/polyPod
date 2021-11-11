@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import i18n from "../../../i18n.js";
+// import i18n from "../../../i18n.js";
 
 import "./scrollButton.css";
 
-const ScrollButton = ({ scrollRef }) => {
+const ScrollButton = ({ scrollRef, scrollButtonText, colors, img }) => {
     const [scrollingPosition, setScrollingPosition] = useState(0);
 
     const setUpScrollingListener = () => {
@@ -14,9 +14,11 @@ const ScrollButton = ({ scrollRef }) => {
     };
 
     return scrollingPosition < 100 ? (
-        <div className="scroll-button" onLoad={setUpScrollingListener}>
-            <img src="./images/scroll-down.svg" />{" "}
-            <p>{i18n.t("import:scroll.down")}</p>
+        <div
+            className={`scroll-button ${colors}`}
+            onLoad={setUpScrollingListener}
+        >
+            <img src={img} /> <p>{scrollButtonText}</p>
         </div>
     ) : (
         <div style={{ display: "none" }} className="scroll-button"></div>

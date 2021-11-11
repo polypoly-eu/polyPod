@@ -28,6 +28,19 @@ describe("Missing common JSON files analysis for empty zip", () => {
     it("is active", async () => {
         expectActiveAnalysis(analysis);
     });
+
+    it("has id in JSON report", async () => {
+        expect(analysis.jsonReport.id).toBe(
+            MissingCommonJSONFilesAnalysis.name
+        );
+    });
+
+    it("has all common files in JSON report", async () => {
+        const missingJsonFileNames = commonStructure.filter((each) =>
+            each.endsWith(".json")
+        );
+        expect(analysis.jsonReport.data).toStrictEqual(missingJsonFileNames);
+    });
 });
 
 describe("Missing common JSON files analysis for zip with no missing common files", () => {

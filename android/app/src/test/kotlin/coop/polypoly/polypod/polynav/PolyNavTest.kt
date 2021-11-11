@@ -25,7 +25,7 @@ class PolyNavTest {
     init {
         val context: Context = ApplicationProvider.getApplicationContext()
         val webView = WebView(context)
-        polyNav = PolyNav(webView, context = context)
+        polyNav = PolyNav(webView)
     }
 
     @Ignore

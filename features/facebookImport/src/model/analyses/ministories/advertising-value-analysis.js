@@ -2,7 +2,10 @@ import React from "react";
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../../i18n.js";
 
-import AdvertisingValueMiniStory from "../../../components/advertisingValueMiniStory/advertisingValueMiniStory.jsx";
+import {
+    AdvertisingValueMiniStorySummary,
+    AdvertisingValueMiniStoryDetails,
+} from "../../../components/advertisingValueMiniStory/advertisingValueMiniStory.jsx";
 
 export default class AdvertisingValueAnalysis extends RootAnalysis {
     get label() {
@@ -28,12 +31,23 @@ export default class AdvertisingValueAnalysis extends RootAnalysis {
         }
         this._randomAdInterests = [...randomAdInterests];
         this._numberInterests = numberInterests;
+        this._displayData = adInterests.sort((a, b) => {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
     }
 
     renderSummary() {
         return (
-            <AdvertisingValueMiniStory
+            <AdvertisingValueMiniStorySummary
                 randomAdInterests={this._randomAdInterests}
+                numberInterests={this._numberInterests}
+            />
+        );
+    }
+    renderDetails() {
+        return (
+            <AdvertisingValueMiniStoryDetails
+                displayData={this._displayData}
                 numberInterests={this._numberInterests}
             />
         );

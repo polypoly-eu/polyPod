@@ -1,0 +1,12 @@
+{
+    "headline": "Data Regions",
+    "text.1": "Countries and regions have different laws and circumstances that influence the data behavior of companies. These are sometimes cultural, but often politically motivated. We have divided some of these areas into \"data regions\" to give a better understanding. It is particularly interesting to note the data region of the receiving company.",
+    "subheading.1": "Treemap",
+    "text.2": "This so-called treemap shows how the receiving companies are spread across the different data regions.",
+    "legend.1": "All blocks together represent the total data recipients.",
+    "legend.2": "The different colored blocks represent the share of data recipients per data region.",
+    "legend.3": "This view shows the individual countries within the data region and the proportion of data receiving companies in each country.",
+    "legend.4": "Data regions outside the reach of the GDPR deserve particular attention from EU users.",
+    "subheading.2": "Why not a world map?",
+    "text.3": "Even though this visualisation shows countries, it is more about the distribution of data receiving companies and less about their physical location. In general a representation of distribution is also possible on a world map, but it can be more difficult to read since small countries are harder to spot than larger ones and give a missleading impression, like if the area is colour-marked. This is why we have chosen the more accessible treemap here."
+}

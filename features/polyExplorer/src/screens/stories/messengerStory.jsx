@@ -4,6 +4,7 @@ import DataStory from "../../components/dataStory/dataStory.jsx";
 import Introduction from "../../components/clusterStories/messengers/introduction.jsx";
 import Summary from "../../components/clusterStories/messengers/summary.jsx";
 import Overview from "../../components/clusterStories/messengers/overview.jsx";
+import Details from "../../components/clusterStories/messengers/details.jsx";
 import { SUMMARY_ANIMATIONS } from "../../constants";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
@@ -22,6 +23,18 @@ const MessengerStory = () => {
     const { products } = useContext(ExplorerContext);
     const [summaryAnimations, fireSummaryAnimation] = useState(0);
     const [allMarks, updateAllMarks] = useState([]);
+
+    const listOfMessengerApps = [
+        "Facebook Messenger",
+        "WhatsApp",
+        "Instagram",
+        "Signal",
+        "Snapchat",
+        "Telegram",
+        "Threema",
+        "TikTok",
+        "iMessage",
+    ];
 
     const sections = {
         introduction: "introduction",
@@ -159,7 +172,10 @@ const MessengerStory = () => {
             debugMode={scrollTellingDebug}
         >
             <div className="messenger-parts">
-                <Introduction heightEvent={updateIntroHeight}></Introduction>
+                <Introduction
+                    heightEvent={updateIntroHeight}
+                    listOfMessengerApps={listOfMessengerApps}
+                ></Introduction>
                 <Summary
                     heightEvent={updateSummaryHeight}
                     animation={summaryAnimations}
@@ -168,6 +184,10 @@ const MessengerStory = () => {
                     products={products}
                     heightEvent={updateOverviewHeight}
                 ></Overview>
+                <Details
+                    data={products}
+                    listOfMessengerApps={listOfMessengerApps}
+                ></Details>
             </div>
         </DataStory>
     );

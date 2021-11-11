@@ -112,6 +112,8 @@ const subAnalyses = [
     ].includes(analysis);
 });
 
+export const NUMBER_OF_ANALYSES = subAnalyses.length;
+
 class UnrecognizedData {
     constructor(analysesResults) {
         this._activeReportAnalyses = analysesResults
@@ -218,9 +220,8 @@ export async function runAnalysis(analysisClass, enrichedData) {
     }
 }
 
-export async function analyzeFile(file, facebookAccount) {
-    const zipFile = new ZipFile(file, window.pod);
-    const enrichedData = { ...file, zipFile, facebookAccount };
+export async function analyzeZip(zipData, zipFile, facebookAccount, pod) {
+    const enrichedData = { ...zipData, zipFile, facebookAccount, pod };
     const analysesResults = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
             return runAnalysis(subAnalysisClass, enrichedData);
@@ -238,4 +239,9 @@ export async function analyzeFile(file, facebookAccount) {
         analyses: activeGlobalAnalyses,
         unrecognizedData: new UnrecognizedData(analysesResults),
     };
+}
+
+export async function analyzeFile(zipData, facebookAccount) {
+    const zipFile = new ZipFile(zipData, window.pod);
+    return await analyzeZip(zipData, zipFile, facebookAccount, window.pod);
 }

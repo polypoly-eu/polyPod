@@ -50,6 +50,8 @@ const dataImporters = [
     PostsImporter,
 ];
 
+export const NUMBER_OF_IMPORTERS = dataImporters.length;
+
 class ImporterExecutionResult {
     constructor(importer, status, executionTime) {
         this._importer = importer;
@@ -146,5 +148,5 @@ export async function importZip(zipFile, pod) {
 
 export async function importData(zipData) {
     const zipFile = new ZipFile(zipData, window.pod);
-    return importZip(zipFile, zipData, window.pod);
+    return importZip(zipFile, window.pod);
 }
