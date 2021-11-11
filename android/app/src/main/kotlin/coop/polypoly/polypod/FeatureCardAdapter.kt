@@ -128,8 +128,6 @@ class FeatureCardAdapter(
             ).show()
 
             successfulAuth()
-
-            // TODO: Encrypt previously stored unencrypted data, if any
         }
 
         override fun onAuthenticationFailed() {
