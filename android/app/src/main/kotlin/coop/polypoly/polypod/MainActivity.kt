@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         val notification = UpdateNotification(this)
-        notification.markPushNotificationSeen()
+        notification.handleStartup()
 
         if (Preferences.isFirstRun(this)) {
-            notification.markInAppNotificationSeen()
+            notification.handleFirstRun()
             startActivity(
                 Intent(
                     this,
@@ -50,14 +50,14 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        if (!notification.inAppNotificationSeen) {
+        if (notification.showInApp) {
             AlertDialog.Builder(this)
                 .setTitle(notification.title)
                 .setMessage(notification.text)
                 .setPositiveButton(
                     R.string.button_update_notification_close
                 ) { _, _ ->
-                    notification.markInAppNotificationSeen()
+                    notification.handleInAppSeen()
                 }
                 .show()
         }
