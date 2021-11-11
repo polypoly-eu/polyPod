@@ -6,6 +6,10 @@ export default class RootAnalysis {
     get label() {
         return RootAnalysis.Labels.TECH_DEMO;
     }
+
+    get reportData() {
+        return null;
+    }
 }
 
 RootAnalysis.Labels = Object.freeze({
