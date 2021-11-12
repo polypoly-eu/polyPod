@@ -1,10 +1,15 @@
 package coop.polypoly.polypod
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -55,13 +60,81 @@ class FeatureCardAdapter(
         view.setOnClickListener {
             // FIXME - navigation assumes we're coming from FirstFragment,
             // which might not necessary be true
-            val action =
-                FeatureListFragmentDirections
-                    .actionFeatureListFragmentToFeatureFragment(
-                        feature.name,
-                        feature.fileName
-                    )
-            findNavController(originatingFragment).navigate(action)
+            authorize {
+                val action =
+                    FeatureListFragmentDirections
+                        .actionFeatureListFragmentToFeatureFragment(
+                            feature.name,
+                            feature.fileName
+                        )
+                findNavController(originatingFragment).navigate(action)
+            }
+        }
+    }
+
+    fun biometricsUnavailable(): Boolean {
+        originatingFragment.context?.let {
+            val biometricManager = BiometricManager.from(it)
+            if (biometricManager.canAuthenticate(
+                    OnboardingActivity.desiredLockScreenType
+                ) == BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED
+            ) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun authorize(successfulAuth: (() -> Unit)) {
+        originatingFragment.context?.let {
+            if (biometricsUnavailable() ||
+                !Preferences.getBiometricEnabled(it)
+            ) {
+                successfulAuth()
+                return
+            }
+            val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle(it.getString(R.string.auth_title))
+                .setSubtitle(it.getString(R.string.auth_subtitle))
+                .setAllowedAuthenticators(
+                    OnboardingActivity.desiredLockScreenType
+                ).build()
+
+            val executor = ContextCompat.getMainExecutor(it)
+            val callback = PolyAuthCallback(it, successfulAuth)
+
+            BiometricPrompt(
+                originatingFragment, executor, callback
+            ).authenticate(promptInfo)
+        }
+    }
+
+    class PolyAuthCallback(
+        val context: Context,
+        val successfulAuth: () -> Unit
+    ) : BiometricPrompt.AuthenticationCallback() {
+        override fun onAuthenticationError(
+            errorCode: Int,
+            errString: CharSequence
+        ) {
+            super.onAuthenticationError(errorCode, errString)
+        }
+
+        override fun onAuthenticationSucceeded(
+            result: BiometricPrompt.AuthenticationResult
+        ) {
+            super.onAuthenticationSucceeded(result)
+            Toast.makeText(
+                context,
+                context.getString(R.string.auth_success),
+                Toast.LENGTH_SHORT
+            ).show()
+
+            successfulAuth()
+        }
+
+        override fun onAuthenticationFailed() {
+            super.onAuthenticationFailed()
         }
     }
 }

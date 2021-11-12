@@ -10,6 +10,7 @@ class Preferences {
         private const val lastNotificationIdKey = "lastNotificationId"
         private const val lastNotificationStateKey = "lastNotificationState"
         private const val biometricCheckKey = "biometricCheck"
+        private const val biometricEnabledKey = "biometricEnabledKey"
         private const val fsKey = ""
 
         private fun getPrefs(context: Context) =
@@ -46,6 +47,15 @@ class Preferences {
 
         fun getBiometricCheck(context: Context): Boolean =
             getPrefs(context).getBoolean(biometricCheckKey, true)
+
+        fun setBiometricEnabled(context: Context, shouldCheck: Boolean) {
+            val edit = getPrefs(context).edit()
+            edit.putBoolean(biometricEnabledKey, shouldCheck)
+            edit.commit()
+        }
+
+        fun getBiometricEnabled(context: Context): Boolean =
+            getPrefs(context).getBoolean(biometricEnabledKey, false)
 
         fun setFileSystem(context: Context, fs: Map<String, String>) {
             val edit = getPrefs(context).edit()

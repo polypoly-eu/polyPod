@@ -3,6 +3,8 @@
 "app_bar_back_button_desc" = "Zurück";
 "app_bar_search_button_desc" = "Suche";
 "app_bar_info_button_desc" = "Info";
+"onboarding_button_auth" = "Set up now";
+"onboarding_button_do_not_ask" = "Do not ask again";
 "onboarding_button_end" = "Los geht's";
 "onboarding_slide1_headline" = "Hallo, darf ich\nmich vorstellen?";
 "onboarding_slide1_sub_headline" = "Ich bin Ihr\npolyPod.";
@@ -13,6 +15,9 @@
 "onboarding_slide3_headline" = "Ein erster Schritt\ndem viele folgen.";
 "onboarding_slide3_sub_headline" = "Damit Privates\nprivat bleibt.";
 "onboarding_slide3_body_text" = "Nach und nach biete ich Ihnen immer mehr Möglichkeiten, Ihre Privatsphäre zu schützen. Ich melde mich natürlich, sobald eine neue Funktion für Sie bereit steht.";
+"onboarding_slide4_headline" = "Security first.";
+"onboarding_slide4_sub_headline" = "Set up security\nbefore we continue?";
+"onboarding_slide4_body_text" = "We would like to ensure any data you put into polyPod is as secure as possible. For this we would like to ask you to enable some way of authentication for future access.";
 "settings_title" = "Einstellungen";
 "settings_about_section" = "Info";
 "settings_version" = "Version";
@@ -26,11 +31,11 @@
 "message_url_open_requested %@ %@" = "%@s möchte eine URL in Ihrem Browser öffnen:\n\n%@s\n\nZulassen?";
 "message_security_warning_title" = "Sicherheitswarnung";
 "message_security_warning_text" = "Um sicherzustellen, dass Ihre Daten verschlüsselt sind, empfehlen wir, eine Passcode-Sperre auf Ihrem Gerät einzurichten";
-"button_security_reject" = "Überspringen";
-"button_security_setup" = "Passcode-Einrichtung";
 "button_url_open_confirm" = "Ja";
 "button_url_open_reject" = "Nein";
 "button_update_notification_close" = "OK";
+"auth_prompt_set_up" = "Set up authentification";
+"auth_prompt_unlock" = "Unlock";
 
 "settings_imprint_text" = "
 <p>Angaben gemäß § 5 TMG</p>

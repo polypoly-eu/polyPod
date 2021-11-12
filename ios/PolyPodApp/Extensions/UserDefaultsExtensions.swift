@@ -8,6 +8,8 @@ extension UserDefaults {
         case lastUpdateNotificationId
         case lastUpdateNotificationState
         case updateNotificationMockId
+        case disableAuthCheck
+        case authSetUp
     }
     
     func reset() {
