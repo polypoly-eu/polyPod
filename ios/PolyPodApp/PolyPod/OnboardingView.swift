@@ -28,9 +28,9 @@ struct OnboardingView: View {
     
     private func createSlides() -> [Slide] {
         let authSlide = Slide(
-            headline: "onboarding_slide3_headline",
-            subHeadline: "onboarding_slide3_sub_headline",
-            bodyText: "onboarding_slide3_body_text",
+            headline: "onboarding_slide4_headline",
+            subHeadline: "onboarding_slide4_sub_headline",
+            bodyText: "onboarding_slide4_body_text",
             confirmLabel: "onboarding_button_auth",
             confirmAction: setUpAuth,
             denyLabel: "onboarding_button_do_not_ask",
@@ -41,6 +41,7 @@ struct OnboardingView: View {
             return [authSlide]
         }
         
+        let showSecurity = Authentication.shared.shouldShowPrompt()
         return [
             Slide(
                 headline: "onboarding_slide1_headline",
@@ -52,37 +53,25 @@ struct OnboardingView: View {
                 subHeadline: "onboarding_slide2_sub_headline",
                 bodyText: "onboarding_slide2_body_text"
             ),
-            Authentication.shared.shouldShowPrompt() ? authSlide : nil,
             Slide(
-                headline: "onboarding_slide4_headline",
-                subHeadline: "onboarding_slide4_sub_headline",
-                bodyText: "onboarding_slide4_body_text",
-                confirmLabel: "onboarding_button_end",
+                headline: "onboarding_slide3_headline",
+                subHeadline: "onboarding_slide3_sub_headline",
+                bodyText: "onboarding_slide3_body_text",
+                confirmLabel: showSecurity ? nil : "onboarding_button_end",
                 confirmAction: closeAction
-            )
+            ),
+            showSecurity ? authSlide : nil
         ].compactMap { $0 }
     }
     
     private func setUpAuth() {
         Authentication.shared.setUp {
-            if securityOnly {
-                closeAction()
-                return
-            }
-            skipAuth()
+            closeAction()
         }
     }
     
     private func disableAuthCheck() {
         Authentication.shared.disableCheck()
-        skipAuth()
-    }
-    
-    private func skipAuth() {
-        // TODO: Instead of closing the onboarding, it would make more sense
-        //       to simpliy remove the security slide and skip to the next one.
-        //       Unfortunately, PageViewController needs some non-trivial
-        //       adjustments for that.
         closeAction()
     }
 }
