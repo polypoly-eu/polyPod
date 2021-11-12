@@ -1,5 +1,8 @@
+import {
+    createErrorStatus,
+    createSuccessStatus,
+} from "../analyses/utils/analysis-status";
 import { MissingFilesException } from "./utils/failed-import-exception";
-import { createErrorResult, IMPORT_SUCCESS } from "./utils/importer-status";
 import {
     readFullPathJSONFile,
     relevantZipEntries,
@@ -24,10 +27,10 @@ export default class MultipleFilesImporter {
     async _readJSONFileWithStatus(targetFile, zipFile) {
         return readFullPathJSONFile(targetFile, zipFile)
             .then((data) => {
-                return { status: IMPORT_SUCCESS, targetFile, data };
+                return { status: createSuccessStatus(), targetFile, data };
             })
             .catch((error) => {
-                return createErrorResult(this.constructor, error);
+                return { status: createErrorStatus(error) };
             });
     }
 
@@ -39,7 +42,7 @@ export default class MultipleFilesImporter {
         );
 
         const successfullResults = fileDataWithResults.filter(
-            (result) => result.status === IMPORT_SUCCESS
+            (result) => result.status.isSuccess
         );
 
         for (const each of successfullResults) {
@@ -49,9 +52,9 @@ export default class MultipleFilesImporter {
         const dataResults = successfullResults.map((result) => result.data);
         this._importRawDataResults(facebookAccount, dataResults);
 
-        return fileDataWithResults.filter(
-            (result) => !(result.status === IMPORT_SUCCESS)
-        );
+        return fileDataWithResults
+            .filter((result) => !result.status.isSuccess)
+            .map(({ status }) => status);
     }
 
     _createMissingFilesError() {
@@ -65,18 +68,18 @@ export default class MultipleFilesImporter {
         }
 
         const fileChunks = sliceIntoChunks(targetFiles, 5);
-        const failedResultChunks = [];
+        const failedStatusChunks = [];
         for (let currentChunk of fileChunks) {
-            const resultChunk = await this._importDataFromFiles(
+            const chunkStatuses = await this._importDataFromFiles(
                 currentChunk,
                 zipFile,
                 facebookAccount
             );
 
-            failedResultChunks.push(resultChunk);
+            failedStatusChunks.push(chunkStatuses);
         }
-        const failedResults = failedResultChunks.flat();
+        const failedStatuses = failedStatusChunks.flat();
 
-        return failedResults.length > 0 ? failedResults : null;
+        return failedStatuses.length > 0 ? failedStatuses : null;
     }
 }

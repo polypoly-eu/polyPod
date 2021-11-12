@@ -22,20 +22,27 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         val notification = UpdateNotification(this)
-        notification.markPushNotificationSeen()
+        notification.handleStartup()
 
         if (Preferences.isFirstRun(this)) {
-            notification.markInAppNotificationSeen()
+            notification.handleFirstRun()
+            startActivity(
+                Intent(
+                    this,
+                    OnboardingActivity::class.java
+                )
+            )
+            return
         }
 
-        if (!notification.inAppNotificationSeen) {
+        if (notification.showInApp) {
             AlertDialog.Builder(this)
                 .setTitle(notification.title)
                 .setMessage(notification.text)
                 .setPositiveButton(
                     R.string.button_update_notification_close
                 ) { _, _ ->
-                    notification.markInAppNotificationSeen()
+                    notification.handleInAppSeen()
                 }
                 .show()
         }

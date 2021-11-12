@@ -1,0 +1,12 @@
+{
+    "title": "Ihre Reaktionen",
+    "text": "Etwas zu \"liken\" ist wohl eine der besonderen Funktionen auf Facebook. Dieses Diagram zeigt, wie sich Ihre <strong>{{total_number_reactions}}</strong> gespeicherten  Reaktionen auf die möglichen Arten verteilen.",
+    "LIKE": "Gefällt mir",
+    "LOVE": "Love",
+    "CARE": "Umarmung",
+    "WOW": "Wow",
+    "HAHA": "Haha",
+    "SAD": "Traurig",
+    "ANGRY": "Wütend",
+    "TOTAL": "Gesamt"
+}

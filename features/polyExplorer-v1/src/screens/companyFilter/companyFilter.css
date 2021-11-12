@@ -1,0 +1,83 @@
+.company-filter-screen {
+    padding: 20px;
+    overflow: hidden scroll;
+}
+
+.company-filter-screen .reset-button {
+    position: fixed;
+    top: 20px;
+    right: 8px;
+    width: 60px;
+    height: 48px;
+    background: url("../images/reset-filter-background.svg");
+    color: var(--color-text-light);
+}
+
+.company-filter-screen .filter-section h1 {
+    margin: 12px 0;
+    font-family: "Jost Medium";
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.company-filter-screen .filter-section h1::before {
+    position: relative;
+    top: 6px;
+    margin-right: 12px;
+}
+
+.company-filter-screen .filter-section.industryCategory h1::before {
+    content: url("../images/filter-icons/industry-categories.svg");
+}
+
+.company-filter-screen .filter-section.jurisdiction h1::before {
+    content: url("../images/filter-icons/jurisdictions.svg");
+}
+
+.company-filter-screen .filter-section.location h1::before {
+    content: url("../images/filter-icons/locations.svg");
+}
+
+.company-filter-screen .filter-section.revenueRange h1::before {
+    content: url("../images/filter-icons/revenue.svg");
+}
+
+.company-filter-screen .filter-section button {
+    height: 32px;
+    margin: 0 4px 8px 0;
+    padding: 0 12px 1px 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 16px;
+    background: transparent;
+    color: #cbd5e0;
+    font-size: 14px;
+}
+
+.company-filter-screen .filter-section button.active {
+    background: #cbd5e0;
+    color: var(--color-text-dark);
+}
+
+.company-filter-screen .button-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 107px;
+    margin-top: 20px;
+    background: var(--color-background-dark);
+}
+
+.company-filter-screen .apply-button {
+    width: 300px;
+    height: 48px;
+    border-radius: 4px;
+    color: var(--color-text-dark);
+    font-family: "Jost Medium";
+    font-size: 18px;
+    background-color: var(--color-background-light);
+}
+
+.company-filter-screen .apply-button.disabled {
+    opacity: 0.6;
+}

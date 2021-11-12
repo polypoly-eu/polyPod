@@ -15,6 +15,14 @@
     box-sizing: border-box;
 }
 
+.scroll-button.light {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background: var(--color-gray-50) !important;
+    color: var(--color-indigo-950) !important;
+}
+
 .scroll-button p {
     margin: 0;
     white-space: nowrap;

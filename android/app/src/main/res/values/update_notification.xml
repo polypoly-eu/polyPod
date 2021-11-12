@@ -10,9 +10,10 @@
 
     We determine whether the user has already seen a notification from its
     ID; so in order to show a notification with the next update, the ID
-    needs to be changed manually.
+    needs to be changed manually to a value that's higher than all previously
+    used values.
 
-    To avoid clashes, we use the polyEpoch at the time the notification is
+    To avoid mistakes, we use the polyEpoch at the time the notification is
     changed as its ID. The polyEpoch is defined as the number of seconds since
     midnight on 2019-05-04, UTC.
 

@@ -26,7 +26,7 @@ const gridXMargin = 12;
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
  * @param {number = 400} [width] - The width of the svg
- * @param {number = 300} [height] - The height of the svg
+ * @param {number = 200} [height] - The height of the svg
  * @param {string|callback = "blue"} [barColor] - The color of the bar (callbacks receive event and data)
  * @param {string = null} [barValueColor] - The color the values are shown in (default = no values shown)
  * @param {number = 4} [numberTicksY] - Number of Ticks on the y-axis (will deviate by 1 if the values wouldn't make a nice scale otherwise)

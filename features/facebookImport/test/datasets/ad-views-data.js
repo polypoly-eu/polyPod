@@ -57,6 +57,12 @@ export const RECENTLY_VIEWED_LOCALE = {
     },
 };
 
+export const AD_VIEWS_EXPECTED_DATA = {
+    numberOfAds: 3,
+    numberOfAdViews: 4,
+    numberOfRelatedAccounts: 2,
+};
+
 export function createAdViewsData(languageCode) {
     const languageData = RECENTLY_VIEWED_LOCALE[languageCode];
     return wrapViewsData([

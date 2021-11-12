@@ -16,10 +16,10 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
         };
     }
 
-    async analyze({ size, zipFile, facebookAccount }) {
+    async analyze({ size, zipFile, facebookAccount, pod }) {
         this.active = true;
 
-        const info = await window.pod.info;
+        const info = await pod.info;
         this._polyPodRuntime = await info.getRuntime();
         this._polyPodVersion = await info.getVersion();
 

@@ -6,19 +6,8 @@ import { ClusterSections } from "../clusterSections";
 import "./introduction.css";
 
 const i18nHeader = "clusterMessengerStory";
-const listOfMessengerApps = [
-    "FB Messenger",
-    "iMessage",
-    "Instagram",
-    "Signal",
-    "Snapchat",
-    "Telegram",
-    "Threema",
-    "TikTok",
-    "WhatsApp",
-];
 
-const Introduction = ({ heightEvent }) => {
+const Introduction = ({ heightEvent, listOfMessengerApps }) => {
     const wholeIntro = useRef();
 
     function _getBulletsMessengerApps() {
