@@ -20,6 +20,10 @@ class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var isInfo = false
+        if (this.intent?.data?.toString() == "info") {
+            isInfo = true
+        }
         setContentView(R.layout.activity_onboarding)
 
         val closeButton = findViewById<ImageButton>(R.id.close_button)
@@ -56,7 +60,7 @@ class OnboardingActivity : AppCompatActivity() {
             ).toMutableList()
         }
 
-        if (!Preferences.isFirstRun(baseContext)) {
+        if (!Preferences.isFirstRun(baseContext) && !isInfo) {
             if (!shouldShowBiometricsPrompt()) {
                 close()
                 return
