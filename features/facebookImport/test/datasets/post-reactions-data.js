@@ -5,7 +5,8 @@ import {
 import { createMockedZip } from "../utils/data-creation";
 
 export const DATASET_EXPECTED_VALUES = {
-    numberOfPostsReactions: 7,
+    numberOfPostsReactions:
+        createPostReactionsDataset()[POST_REACTIONS_DATA_KEY].length,
 };
 
 export function wrapPostReactionsData(data) {
