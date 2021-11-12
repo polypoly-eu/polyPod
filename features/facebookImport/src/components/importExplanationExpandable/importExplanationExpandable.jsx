@@ -48,11 +48,15 @@ const ImportExplanationExpandable = ({
         setStartRequest(true);
     };
 
+    const exampleDataUrls = {
+        en: "https://polypoly.coop/en-de/polypod/example-facebook-data",
+        de: "https://polypoly.coop/de-de/polypod/example-facebook-data",
+    };
+
     const handleExampleDataRequest = () => {
         onUpdateImportStatus(importSteps.download);
-        window.pod.polyNav.openUrl(
-            "https://polypoly.coop/en-de/polypod/example-facebook-data"
-        );
+        const url = exampleDataUrls[i18n.language] || exampleDataUrls.en;
+        window.pod.polyNav.openUrl(url);
         setStartRequest(true);
     };
 
