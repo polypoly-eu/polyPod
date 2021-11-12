@@ -1,12 +1,5 @@
 import LocalAuthentication
 
-// TODO: Actually localize the auth reasons
-// TODO: Test logic:
-//       1. Auth set up initially
-//       2. Auth set up later
-//       3. Check disabled (UI missing)
-//       4. Reauthentication after moved to background
-
 private func isSimulator() -> Bool {
     #if targetEnvironment(simulator)
     return true
