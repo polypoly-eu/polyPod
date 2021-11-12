@@ -3,7 +3,10 @@ import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-eve
 import {
     buildDisplayData,
     selectMeaningfulCompanies,
+    topOffFacebookCompanies,
 } from "../utils/on-off-facebook-data-restructuring.js";
+
+import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
 
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../../i18n.js";
@@ -11,7 +14,13 @@ import i18n from "../../../i18n.js";
 import {
     OnOffFacebookMiniStorySummary,
     OnOffFacebookMiniStoryDetails,
+    OffFacebookEventsMiniStoryDetails,
 } from "../../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
+
+const detailDisplayTypes = {
+    onOff: "on-off",
+    off: "off",
+};
 
 export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     get label() {
@@ -19,7 +28,9 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     }
 
     get title() {
-        return i18n.t("offFacebookEventsMiniStory:title");
+        return this._displayType == detailDisplayTypes.off
+            ? i18n.t("offFacebookEventsMiniStory:fallback.title")
+            : i18n.t("offFacebookEventsMiniStory:title");
     }
 
     async analyze({ facebookAccount }) {
@@ -45,13 +56,27 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
         const selectedCompanies = selectMeaningfulCompanies(
             this._commonAdvertisersData
         );
-
-        this._displayData = buildDisplayData(
-            selectedCompanies,
-            facebookAccount.offFacebookEventsLatestTimestamp
-        );
-
-        this.active = this._companiesCount > 0;
+        if (selectedCompanies.length > 0) {
+            this._displayData = buildDisplayData(
+                selectedCompanies,
+                facebookAccount.offFacebookEventsLatestTimestamp
+            );
+            this._displayType = detailDisplayTypes.onOff;
+        } else if (facebookAccount._offFacebookCompanies.length > 0) {
+            this._displayData = {
+                companies: topOffFacebookCompanies(facebookAccount),
+                activityTypes: groupOffFacebookEventsByType(
+                    facebookAccount
+                ).map((e) => {
+                    return {
+                        ...e,
+                        title: e.type,
+                    };
+                }),
+            };
+            this._displayType = detailDisplayTypes.off;
+        }
+        this.active = this._displayData ? true : false;
     }
 
     renderSummary() {
@@ -64,8 +89,12 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     }
 
     renderDetails() {
-        return (
+        return this._displayType == detailDisplayTypes.onOff ? (
             <OnOffFacebookMiniStoryDetails displayData={this._displayData} />
+        ) : (
+            <OffFacebookEventsMiniStoryDetails
+                displayData={this._displayData}
+            />
         );
     }
 }

@@ -1,5 +1,5 @@
 {
-    "title": "Facebook knows what you did elsewhere",
+    "title": "Are these companies advertising as well?",
     "general": "Your Facebook data contains information about things you did outside of its service, eg. on other apps and websites.",
     "companies": "companies that provide these so-called off Facebook events are listed in your data.",
     "companiesWithAds": "of those companies also present advertising to you. Coincidence?",
@@ -9,5 +9,9 @@
     "on.fb.events": "On Facebook events",
     "off.fb.events": "Off Facebook events",
     "last.90.days": "Last 90 days",
-    "number.events": "Number of events"
+    "number.events": "Number of events",
+    "fallback.title": "Facebook knows what you did elsewhere",
+    "fallback.text.1": "Here are the (top 5)  companies (websites, apps) which reported the most to Facebook, sorted by the number of activities they reported.",
+    "fallback.text.2": "Companies sorted by number of activities they share with Facebook",
+    "fallback.text.3": "types of activities have been forwarded to Facebook by those companies. The (top 5) types that triggered your off Facebook events are:"
 }
