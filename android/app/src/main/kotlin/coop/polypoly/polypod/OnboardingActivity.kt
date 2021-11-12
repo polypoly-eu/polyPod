@@ -5,12 +5,10 @@ import android.app.admin.DevicePolicyManager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
-import androidx.core.view.size
 import com.synnapps.carouselview.CarouselView
 
 class OnboardingActivity : AppCompatActivity() {
@@ -41,22 +39,21 @@ class OnboardingActivity : AppCompatActivity() {
                 R.id.body_text to R.string.onboarding_slide2_body_text,
             ),
             mapOf(
-                R.id.headline_main to R.string.onboarding_slide4_headline,
-                R.id.headline_sub to R.string.onboarding_slide4_sub_headline,
-                R.id.body_text to R.string.onboarding_slide4_body_text,
+                R.id.headline_main to R.string.onboarding_slide3_headline,
+                R.id.headline_sub to R.string.onboarding_slide3_sub_headline,
+                R.id.body_text to R.string.onboarding_slide3_body_text,
             ),
         )
 
         if (shouldShowBiometricsPrompt()) {
-            strings.add(
-                2,
+            strings = strings.plus(
                 mapOf(
-                    R.id.headline_main to R.string.onboarding_slide3_headline,
+                    R.id.headline_main to R.string.onboarding_slide4_headline,
                     R.id.headline_sub to
-                        R.string.onboarding_slide3_sub_headline,
-                    R.id.body_text to R.string.onboarding_slide3_body_text,
+                        R.string.onboarding_slide4_sub_headline,
+                    R.id.body_text to R.string.onboarding_slide4_body_text,
                 )
-            )
+            ).toMutableList()
         }
 
         if (!Preferences.isFirstRun(baseContext)) {
@@ -64,28 +61,27 @@ class OnboardingActivity : AppCompatActivity() {
                 close()
                 return
             }
-            strings = mutableListOf(strings[2])
+            strings = mutableListOf(strings[3])
         }
 
         carousel.pageCount = strings.size
         carousel.setViewListener { requestedPosition ->
-            var position = requestedPosition
+            val position = requestedPosition
 
             val slide = layoutInflater.inflate(R.layout.onboarding_slide, null)
             strings[position].forEach { (viewId, stringId) ->
                 slide.findViewById<TextView>(viewId).text = getString(stringId)
             }
             if (slide.findViewById<TextView>(R.id.headline_main).text ==
-                getString(R.string.onboarding_slide3_headline)
+                getString(R.string.onboarding_slide4_headline)
             ) {
                 val button = slide.findViewById<View>(
                     R.id.onboarding_button_auth
                 )
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
-                    ensureLockScreen({ }) {
-                        close()
-                    }
+                    Preferences.setBiometricEnabled(this, true)
+                    close()
                 }
                 val doNotAskButton = slide.findViewById<View>(
                     R.id.onboarding_button_do_not_ask
@@ -93,20 +89,22 @@ class OnboardingActivity : AppCompatActivity() {
                 doNotAskButton.visibility = View.VISIBLE
                 doNotAskButton.setOnClickListener {
                     Preferences.setBiometricCheck(this, false)
-                    if (carousel.currentItem == (carousel.pageCount - 1)) {
-                        close()
-                    } else {
-                        carousel.setCurrentItem(carousel.currentItem + 1)
-                    }
+                    close()
                 }
             }
-            if (position == strings.size - 1) {
+            if (slide.findViewById<TextView>(R.id.headline_main).text ==
+                getString(R.string.onboarding_slide3_headline)
+            ) {
                 val button = slide.findViewById<View>(
                     R.id.end_onboarding_button
                 )
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
-                    close()
+                    if (carousel.currentItem == (carousel.pageCount - 1)) {
+                        close()
+                    } else {
+                        carousel.setCurrentItem(carousel.currentItem + 1)
+                    }
                 }
             }
             slide
@@ -121,14 +119,12 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     fun shouldShowBiometricsPrompt(): Boolean {
-        return !biometricsAvailable() &&
-            Preferences.getBiometricCheck(this)
+        return biometricsAvailable() &&
+            Preferences.getBiometricCheck(this) &&
+            !Preferences.getBiometricEnabled(this)
     }
     fun biometricsAvailable(): Boolean {
         val biometricManager = BiometricManager.from(this)
-        val tst = biometricManager.canAuthenticate(
-            desiredLockScreenType
-        )
         if (biometricManager.canAuthenticate(
                 desiredLockScreenType
             ) != BiometricManager.BIOMETRIC_SUCCESS

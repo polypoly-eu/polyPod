@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         if (Preferences.isFirstRun(this)) {
             notification.handleFirstRun()
+            onboardingShown = true
             startActivity(
                 Intent(
                     this,

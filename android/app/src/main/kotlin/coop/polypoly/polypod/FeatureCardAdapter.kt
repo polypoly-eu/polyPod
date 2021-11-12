@@ -86,10 +86,13 @@ class FeatureCardAdapter(
     }
 
     fun authorize(successfulAuth: (() -> Unit)) {
-        if (biometricsUnavailable()) {
-            successfulAuth()
-        }
         originatingFragment.context?.let {
+            if (biometricsUnavailable() ||
+                !Preferences.getBiometricEnabled(it)
+            ) {
+                successfulAuth()
+                return
+            }
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                 .setTitle(it.getString(R.string.auth_title))
                 .setSubtitle(it.getString(R.string.auth_subtitle))
