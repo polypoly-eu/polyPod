@@ -19,7 +19,7 @@ const MainScreen = () => {
             topShadow={false}
             light={showClusters ? true : false}
         >
-            <div className="nav-button-container">
+            <div className="nav-button-container poly-nav-bar-separator-bottom">
                 <button
                     onClick={() => routeTo("main", { showClusters: true })}
                     className={

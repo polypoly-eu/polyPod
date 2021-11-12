@@ -16,6 +16,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.13",
     "@polypoly-eu/podjs": "file:../../podjs",
+    "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@rollup/plugin-sucrase": "^3.1.0",
