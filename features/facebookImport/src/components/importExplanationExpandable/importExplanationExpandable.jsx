@@ -48,6 +48,14 @@ const ImportExplanationExpandable = ({
         setStartRequest(true);
     };
 
+    const handleExampleDataRequest = () => {
+        onUpdateImportStatus(importSteps.download);
+        window.pod.polyNav.openUrl(
+            "https://polypoly.coop/en-de/polypod/example-facebook-data"
+        );
+        setStartRequest(true);
+    };
+
     const handleImportStatus = () => {
         onUpdateImportStatus(importSteps.explore);
         setStartRequest(true);
@@ -95,6 +103,12 @@ const ImportExplanationExpandable = ({
                     onClick={() => handleRequestStatus()}
                 >
                     {i18n.t("import:request.button")}
+                </button>
+                <button
+                    className="btn-secondary"
+                    onClick={() => handleExampleDataRequest()}
+                >
+                    {i18n.t("import:request.example.data")}
                 </button>
             </>
         ),
