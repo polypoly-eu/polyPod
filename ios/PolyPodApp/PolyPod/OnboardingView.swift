@@ -20,8 +20,10 @@ struct OnboardingView: View {
             
             Spacer()
             
-            Pagination(active: activeSlide, max: slides.count - 1)
-                .padding(.bottom, 36)
+            if slides.count > 1 {
+                Pagination(active: activeSlide, max: slides.count - 1)
+                    .padding(.bottom, 36)
+            }
         }
         .background(Color.PolyPod.lightBackground)
     }
