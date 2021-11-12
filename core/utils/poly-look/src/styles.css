@@ -1,0 +1,46 @@
+/*
+These global styles should primarily be used to set default fonts and perform
+any necessary resets.
+*/
+
+/*
+For the time being, we don't have a dedicated component for the separator below
+the polyPod's nav bar, so we are exposing some global styles for features to
+use for different use cases:
+
+poly-nav-bar-separator-overlay: An overlay over the entire screen with the
+sparator on top. Requires some empty space at the top.
+
+poly-nav-bar-separator-fixed: Adds the separator to the top of a scrollable
+element.
+
+poly-nav-bar-separator-bottom: Adds the separator to the bottom of an existing
+element. Requires some empty space below the element.
+
+When converting this into a dedicated component, we should adjust the features
+so that we don't have to cover three different use cases explicitly anymore.
+*/
+
+.poly-nav-bar-separator-overlay,
+.poly-nav-bar-separator-fixed {
+  pointer-events: none;
+  z-index: 200;
+  width: 100%;
+  box-shadow: inset 0px 1px #a9b6c6;
+}
+
+.poly-nav-bar-separator-overlay {
+  position: absolute;
+  height: 100%;
+}
+
+.poly-nav-bar-separator-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 1px;
+}
+
+.poly-nav-bar-separator-bottom {
+  box-shadow: 0px 1px #a9b6c6;
+}

@@ -69,7 +69,10 @@ export default {
         copy({
             targets: [
                 {
-                    src: ["node_modules/@polypoly-eu/podjs/dist/pod.js"],
+                    src: [
+                        "node_modules/@polypoly-eu/podjs/dist/pod.js",
+                        "node_modules/@polypoly-eu/poly-look/dist/css/poly-look.css"
+                    ],
                     dest: "public",
                 },
             ],
