@@ -33,6 +33,10 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
             : i18n.t("offFacebookEventsMiniStory:title");
     }
 
+    get customReportData() {
+        return { displayType: this._displayType };
+    }
+
     async analyze({ facebookAccount }) {
         this._companiesCount = facebookAccount.offFacebookCompanies.length;
 
