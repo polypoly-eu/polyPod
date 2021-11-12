@@ -33,7 +33,7 @@ const MainScreen = ({
 
     return (
         <Screen className="main-screen" topShadow={false}>
-            <div className="nav-button-container">
+            <div className="nav-button-container poly-nav-bar-separator-bottom">
                 <button
                     onClick={handleShowFeatured}
                     className={

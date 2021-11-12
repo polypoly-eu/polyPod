@@ -29,16 +29,6 @@ button {
     margin: auto;
 }
 
-.top-separator{
-    z-index: 200;
-    position: fixed;
-    top:0;
-    right: 0;
-    width: 100%;
-    height: 4px;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
 .search-bar-area {
     width: 100%;
     background-color: #FFF5F5;
@@ -291,7 +281,7 @@ function setUpListNavigation() {
 </script>
 
 <main class="lexicon">
-    <div class="top-separator"></div>
+    <div class="poly-nav-bar-separator-fixed"></div>
     {#if showTerm}
         <div class="term-description">
             <div class="scroll-container">

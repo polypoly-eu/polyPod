@@ -1,9 +1,11 @@
+import { PolyChart } from "@polypoly-eu/poly-look";
 import React, { useContext, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
+import { useHistory } from "react-router";
 
 import "./overview.css";
 
@@ -17,6 +19,7 @@ const Overview = () => {
     } = useContext(ImporterContext);
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
+    const history = useHistory();
 
     if (facebookAccount === null || files === null)
         return (
@@ -25,6 +28,21 @@ const Overview = () => {
                 loadingGif="./images/loading.gif"
             />
         );
+
+    const bubbleVizWidth = 400;
+    const bubbleVizHeight = 400;
+    const dataBubblesLightColor = "#f7fafc";
+
+    const bubbleData = facebookAccount.dataGroups.filter(
+        ({ count }) => count > 0
+    );
+
+    bubbleData.forEach((d) => {
+        d.value = d.count;
+    });
+    bubbleData.sort(function (a, b) {
+        return b.value - a.value;
+    });
 
     const getFormattedTime = (time) => {
         let t = new Date(1970, 0, 1);
@@ -74,32 +92,23 @@ const Overview = () => {
                         <div className="separator"></div>
                     </div>
 
-                    <div className="imported-files">
-                        <div className="align-illustration">
-                            {" "}
-                            <img
-                                src="./images/fileupload.svg"
-                                alt="file-upload"
-                            ></img>{" "}
-                            <h4>{i18n.t("overview:imported.files")}</h4>
-                        </div>
-                        {facebookAccount &&
-                        facebookAccount.importedFileNames.length ? (
-                            <div className="file-list">
-                                {facebookAccount.importedFileNames.map(
-                                    (entry, index) => (
-                                        <div
-                                            className="file-button"
-                                            key={index}
-                                        >
-                                            {entry}
-                                        </div>
-                                    )
-                                )}
-                            </div>
-                        ) : (
-                            ""
-                        )}
+                    <div className="overview-visualisation">
+                        <p
+                            dangerouslySetInnerHTML={{
+                                __html: i18n.t("overview:above.chart.text", {
+                                    number_categories: bubbleData.length,
+                                }),
+                            }}
+                        />
+                        <PolyChart
+                            type="bubble-cluster"
+                            data={bubbleData}
+                            width={bubbleVizWidth}
+                            height={bubbleVizHeight}
+                            bubbleColor={dataBubblesLightColor}
+                            onBubbleClick={() => history.push("/explore")}
+                            showValues={false}
+                        />
                     </div>
 
                     <div className="footer">

@@ -113,6 +113,7 @@ const FacebookImporterApp = () => {
     return (
         <Router history={history}>
             <ImporterProvider>
+                <div className="poly-nav-bar-separator-overlay" />
                 <FacebookImporter />
             </ImporterProvider>
         </Router>
