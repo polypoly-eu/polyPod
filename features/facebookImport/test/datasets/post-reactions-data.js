@@ -5,7 +5,8 @@ import {
 import { createMockedZip } from "../utils/data-creation";
 
 export const DATASET_EXPECTED_VALUES = {
-    numberOfPostsReactions: 6,
+    numberOfPostsReactions:
+        createPostReactionsDataset()[POST_REACTIONS_DATA_KEY].length,
 };
 
 export function wrapPostReactionsData(data) {
@@ -35,6 +36,7 @@ export function createPostReactionsDataset() {
         createPostReaction(1398893265, "SAD", "Donald Duck"),
         createPostReaction(1416949925, "LIKE", "Alice Joe"),
         createPostReaction(1498845994, "WOW", "Jane Doe"),
+        createPostReaction(1598845994, "SORRY", "Jane Doe"),
     ]);
 }
 
