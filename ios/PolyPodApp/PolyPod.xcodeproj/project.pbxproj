@@ -110,6 +110,7 @@
 		E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
 		E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
 		E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
+		E93EC98C273D65D400E20512 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EC98B273D65D400E20512 /* Authentication.swift */; };
 		E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
 		E97D3260263084C500A5A180 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325F263084C500A5A180 /* SettingsView.swift */; };
 		E97D3276263152CE00A5A180 /* FeatureManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3275263152CE00A5A180 /* FeatureManifest.swift */; };
@@ -241,6 +242,7 @@
 		E9545EB6273542CC001E8C7F /* PolyPodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolyPodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationTest.swift; sourceTree = "<group>"; };
 		E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
+		E93EC98B273D65D400E20512 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		E97D325526307CE100A5A180 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		E97D325F263084C500A5A180 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E97D3275263152CE00A5A180 /* FeatureManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureManifest.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				E97D32A72631BF7700A5A180 /* HTMLView.swift */,
 				E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */,
 				E9545EAD273530ED001E8C7F /* UpdateNotification.swift */,
+				E93EC98B273D65D400E20512 /* Authentication.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */,
 				1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */,
 				E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */,
+				E93EC98C273D65D400E20512 /* Authentication.swift in Sources */,
 				1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */,

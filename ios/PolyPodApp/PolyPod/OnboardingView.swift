@@ -4,37 +4,11 @@ struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var activeSlide: Int = 0
-    var authAction: () -> Void = {}
+    var securityOnly: Bool = false
     var closeAction: () -> Void = {}
     
     var body: some View {
-        let slides = [
-            Slide(
-                headline: "onboarding_slide1_headline",
-                subHeadline: "onboarding_slide1_sub_headline",
-                bodyText: "onboarding_slide1_body_text"
-            ),
-            Slide(
-                headline: "onboarding_slide2_headline",
-                subHeadline: "onboarding_slide2_sub_headline",
-                bodyText: "onboarding_slide2_body_text"
-            ),
-            Slide(
-                headline: "onboarding_slide3_headline",
-                subHeadline: "onboarding_slide3_sub_headline",
-                bodyText: "onboarding_slide3_body_text",
-                buttonLabel: "onboarding_button_auth",
-                buttonAction: authAction
-            ),
-            Slide(
-                headline: "onboarding_slide4_headline",
-                subHeadline: "onboarding_slide4_sub_headline",
-                bodyText: "onboarding_slide4_body_text",
-                buttonLabel: "onboarding_button_end",
-                buttonAction: closeAction
-            )
-        ].map { $0.padding(28) }
-        
+        let slides = createSlides().map { $0.padding(28) }
         return VStack(spacing: 0) {
             NavigationBar(
                 leading: Button(action: closeAction) {
@@ -51,6 +25,66 @@ struct OnboardingView: View {
         }
         .background(Color.PolyPod.lightBackground)
     }
+    
+    private func createSlides() -> [Slide] {
+        let authSlide = Slide(
+            headline: "onboarding_slide3_headline",
+            subHeadline: "onboarding_slide3_sub_headline",
+            bodyText: "onboarding_slide3_body_text",
+            confirmLabel: "onboarding_button_auth",
+            confirmAction: setUpAuth,
+            denyLabel: "onboarding_button_do_not_ask",
+            denyAction: disableAuthCheck
+        )
+        
+        if securityOnly {
+            return [authSlide]
+        }
+        
+        return [
+            Slide(
+                headline: "onboarding_slide1_headline",
+                subHeadline: "onboarding_slide1_sub_headline",
+                bodyText: "onboarding_slide1_body_text"
+            ),
+            Slide(
+                headline: "onboarding_slide2_headline",
+                subHeadline: "onboarding_slide2_sub_headline",
+                bodyText: "onboarding_slide2_body_text"
+            ),
+            Authentication.shared.shouldShowPrompt() ? authSlide : nil,
+            Slide(
+                headline: "onboarding_slide4_headline",
+                subHeadline: "onboarding_slide4_sub_headline",
+                bodyText: "onboarding_slide4_body_text",
+                confirmLabel: "onboarding_button_end",
+                confirmAction: closeAction
+            )
+        ].compactMap { $0 }
+    }
+    
+    private func setUpAuth() {
+        Authentication.shared.setUp {
+            if securityOnly {
+                closeAction()
+                return
+            }
+            skipAuth()
+        }
+    }
+    
+    private func disableAuthCheck() {
+        Authentication.shared.disableCheck()
+        skipAuth()
+    }
+    
+    private func skipAuth() {
+        // TODO: Instead of closing the onboarding, it would make more sense
+        //       to simpliy remove the security slide and skip to the next one.
+        //       Unfortunately, PageViewController needs some non-trivial
+        //       adjustments for that.
+        closeAction()
+    }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
@@ -58,6 +92,8 @@ struct OnboardingView_Previews: PreviewProvider {
         ForEach((0...2), id: \.self) { index in
             OnboardingView(activeSlide: index)
         }
+        
+        OnboardingView(securityOnly: true)
     }
 }
 
@@ -65,8 +101,10 @@ private struct Slide: View {
     var headline: LocalizedStringKey
     var subHeadline: LocalizedStringKey
     var bodyText: LocalizedStringKey
-    var buttonLabel: LocalizedStringKey?
-    var buttonAction: (() -> Void)?
+    var confirmLabel: LocalizedStringKey?
+    var confirmAction: (() -> Void)?
+    var denyLabel: LocalizedStringKey?
+    var denyAction: (() -> Void)?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -99,9 +137,9 @@ private struct Slide: View {
             
             Spacer()
             
-            if let buttonLabel = buttonLabel {
-                Button(action: buttonAction ?? {}) {
-                    Text(buttonLabel)
+            if let confirmLabel = confirmLabel {
+                Button(action: confirmAction ?? {}) {
+                    Text(confirmLabel)
                         .font(.custom("Jost-Medium", size: 14))
                         .kerning(-0.18)
                         .foregroundColor(Color.PolyPod.darkForeground)
@@ -124,6 +162,14 @@ private struct Slide: View {
                         )
                 }
                 .buttonStyle(PlainButtonStyle())
+                .frame(maxWidth: .infinity, alignment: .center)
+            }
+            
+            if let denyLabel = denyLabel {
+                Button(action: denyAction ?? {}) {
+                    Text(denyLabel)
+                }
+                .padding(.top, 20)
                 .frame(maxWidth: .infinity, alignment: .center)
             }
         }

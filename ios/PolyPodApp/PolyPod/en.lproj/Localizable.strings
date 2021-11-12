@@ -4,6 +4,7 @@
 "app_bar_search_button_desc" = "Search";
 "app_bar_info_button_desc" = "Info";
 "onboarding_button_auth" = "Set up now";
+"onboarding_button_do_not_ask" = "Do not ask again";
 "onboarding_button_end" = "OK";
 "onboarding_slide1_headline" = "Hello, may I\nintroduce myself?";
 "onboarding_slide1_sub_headline" = "I am your\npolyPod.";
@@ -30,11 +31,11 @@
 "message_url_open_requested %@ %@" = "%@ wants to open a URL in your browser:\n\n%@\n\nAllow?";
 "message_security_warning_title" = "Security warning";
 "message_security_warning_text" = "To ensure your data is encrypted we recommend setting up passcode lock on your device";
-"button_security_reject" = "Skip";
-"button_security_setup" = "Passcode setup";
 "button_url_open_confirm" = "Yes";
 "button_url_open_reject" = "No";
 "button_update_notification_close" = "OK";
+"auth_prompt_set_up" = "Set up authentification";
+"auth_prompt_unlock" = "Unlock";
 
 "settings_imprint_text" = "
 <p>Details according to § 5 TMG</p>
