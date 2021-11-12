@@ -13,27 +13,27 @@ struct OnboardingView: View {
                 headline: "onboarding_slide1_headline",
                 subHeadline: "onboarding_slide1_sub_headline",
                 bodyText: "onboarding_slide1_body_text"
-            ).padding(28),
+            ),
             Slide(
                 headline: "onboarding_slide2_headline",
                 subHeadline: "onboarding_slide2_sub_headline",
                 bodyText: "onboarding_slide2_body_text"
-            ).padding(28),
+            ),
             Slide(
                 headline: "onboarding_slide3_headline",
                 subHeadline: "onboarding_slide3_sub_headline",
                 bodyText: "onboarding_slide3_body_text",
                 buttonLabel: "onboarding_button_auth",
                 buttonAction: authAction
-            ).padding(28),
+            ),
             Slide(
                 headline: "onboarding_slide4_headline",
                 subHeadline: "onboarding_slide4_sub_headline",
                 bodyText: "onboarding_slide4_body_text",
                 buttonLabel: "onboarding_button_end",
                 buttonAction: closeAction
-            ).padding(28)
-        ]
+            )
+        ].map { $0.padding(28) }
         
         return VStack(spacing: 0) {
             NavigationBar(
