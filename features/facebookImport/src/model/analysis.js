@@ -54,14 +54,14 @@ const subAnalyses = [
     OnOffFacebookEventsAnalysis,
     AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
-
     PostReactionsTypesAnalysis,
+    ConnectedAdvertisersAnalysis,
+
     ExportTitleAnalysis,
     ExportSizeAnalysis,
     DataChartsAnalysis,
     DataGroupsAnalysis,
     JsonFilesBubblesAnalysis,
-    ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
     OffFacebookEventsTypesChartAnalysis,
