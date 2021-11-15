@@ -48,6 +48,12 @@ const ImportExplanationExpandable = ({
         setStartRequest(true);
     };
 
+    const handleExampleDataRequest = () => {
+        onUpdateImportStatus(importSteps.import);
+        window.pod.polyNav.openUrl("example-data-download");
+        setStartRequest(true);
+    };
+
     const handleImportStatus = () => {
         onUpdateImportStatus(importSteps.explore);
         setStartRequest(true);
@@ -95,6 +101,12 @@ const ImportExplanationExpandable = ({
                     onClick={() => handleRequestStatus()}
                 >
                     {i18n.t("import:request.button")}
+                </button>
+                <button
+                    className="btn-secondary"
+                    onClick={() => handleExampleDataRequest()}
+                >
+                    {i18n.t("import:request.example.data")}
                 </button>
             </>
         ),
