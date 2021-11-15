@@ -35,7 +35,7 @@ const yGridMarginRight = 24;
  * @param {number} [numberTicks.y = 4] - The number of ticks for the y axis scale
  * @param {number} [numberTicks.x = 5] - The number of ticks for the x axis scale
  */
-export class MirroredBarChart extends Chart {
+export class PolyMirroredBarChart extends Chart {
   constructor({
     selector,
     data,

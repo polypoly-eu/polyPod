@@ -101,7 +101,7 @@ const Overview = () => {
                             }}
                         />
                         <PolyChart
-                            type="bubble-cluster"
+                            type="poly-bubble-cluster"
                             data={bubbleData}
                             width={bubbleVizWidth}
                             height={bubbleVizHeight}

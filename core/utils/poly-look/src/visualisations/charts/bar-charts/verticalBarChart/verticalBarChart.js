@@ -31,7 +31,7 @@ const gridXMargin = 12;
  * @param {string = null} [barValueColor] - The color the values are shown in (default = no values shown)
  * @param {number = 4} [numberTicksY] - Number of Ticks on the y-axis (will deviate by 1 if the values wouldn't make a nice scale otherwise)
  */
-export class VerticalBarChart extends Chart {
+export class PolyVerticalBarChart extends Chart {
   constructor({
     selector,
     data,

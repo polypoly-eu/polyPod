@@ -80,7 +80,7 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
                         </p>
                     </div>
                     <PolyChart
-                        type="mirrored-bar-chart"
+                        type="poly-mirrored-bar-chart"
                         data={data}
                         colors={{ upperBar: "#EB6561", lowerBar: "#F7FAFC" }}
                         width="400"

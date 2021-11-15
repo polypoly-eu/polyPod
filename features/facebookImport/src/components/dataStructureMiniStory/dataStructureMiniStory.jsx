@@ -53,7 +53,7 @@ const DataStructureMiniStory = ({ data }) => {
                     }}
                 />
                 <PolyChart
-                    type="bubble-cluster"
+                    type="poly-bubble-cluster"
                     data={data}
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}

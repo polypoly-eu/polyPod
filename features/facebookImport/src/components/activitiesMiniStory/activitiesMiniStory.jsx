@@ -160,7 +160,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                 </div>
                 <p className="above-chart">{numberOfEventsString}</p>
                 <PolyChart
-                    type="vertical-bar-chart"
+                    type="poly-vertical-bar-chart"
                     data={constantTabData.barData}
                     barColor={"white"}
                     barWidth={constantTabData.barWidth}

@@ -1,15 +1,17 @@
 import React, { useEffect, useRef } from "react";
 
+import { polyPrefix } from "../../../globalTheme";
+
 import {
-  VerticalBarChart,
-  MirroredBarChart,
-  BubbleCluster,
+  PolyVerticalBarChart,
+  PolyMirroredBarChart,
+  PolyBubbleCluster,
 } from "../../charts";
 
 const charts = {
-  "vertical-bar-chart": VerticalBarChart,
-  "mirrored-bar-chart": MirroredBarChart,
-  "bubble-cluster": BubbleCluster,
+  [polyPrefix + "-vertical-bar-chart"]: PolyVerticalBarChart,
+  [polyPrefix + "-mirrored-bar-chart"]: PolyMirroredBarChart,
+  [polyPrefix + "-bubble-cluster"]: PolyBubbleCluster,
 };
 
 /**

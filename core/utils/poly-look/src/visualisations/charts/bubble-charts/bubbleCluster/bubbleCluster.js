@@ -37,7 +37,7 @@ const defaultOnClickFunction = () => {};
  * @param {callback = () => {}} [onBubbleClick] - Bubble onclick function
  * @param {number|callback} [filter] - A filter that is applied to the icons eg saturate(0.5)(callbacks receive event and data)
  */
-export class BubbleCluster extends Chart {
+export class PolyBubbleCluster extends Chart {
   constructor({
     selector,
     data,

@@ -1,2 +1,6 @@
-import { VerticalBarChart, MirroredBarChart, BubbleCluster } from "./charts";
-export { VerticalBarChart, MirroredBarChart, BubbleCluster };
+import {
+  PolyVerticalBarChart,
+  PolyMirroredBarChart,
+  PolyBubbleCluster,
+} from "./charts";
+export { PolyVerticalBarChart, PolyMirroredBarChart, PolyBubbleCluster };

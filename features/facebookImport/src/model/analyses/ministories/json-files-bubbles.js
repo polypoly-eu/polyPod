@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BubbleCluster } from "@polypoly-eu/poly-look";
+import { PolyChart } from "@polypoly-eu/poly-look";
 import { jsonDataEntities } from "../../importers/utils/importer-util.js";
 import RootAnalysis from "./root-analysis.js";
 
@@ -40,7 +40,8 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
 
     renderSummary() {
         return (
-            <BubbleCluster
+            <PolyChart
+                type="poly-bubble-cluster"
                 data={this._filesMessagesCount}
                 width={400}
                 height={400}
