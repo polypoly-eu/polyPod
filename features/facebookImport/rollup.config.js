@@ -10,16 +10,20 @@ import svg from "rollup-plugin-svg";
 
 const fallbackURL = "http://localhost:8000";
 const fallbackAuthorization = "username:password";
+
+const externalPackages = {
+    "@polypoly-eu/poly-look": "polyLook",
+    react: "React",
+    "react-dom": "ReactDOM",
+};
+
 export default (commandLineArgs) => {
     return {
         input: "src/facebookImporter.jsx",
         output: {
             file: "dist/facebook-import.js",
             format: "iife",
-            globals: {
-                react: "React",
-                "react-dom": "ReactDOM",
-            },
+            globals: externalPackages,
         },
         plugins: [
             svg(),
@@ -74,7 +78,7 @@ export default (commandLineArgs) => {
             }),
             commandLineArgs.configServe ? serve("dist") : null,
         ],
-        external: ["react", "react-dom"],
+        external: Object.keys(externalPackages),
         onwarn: (warning) => {
             // overwite the default warning function
             if (
