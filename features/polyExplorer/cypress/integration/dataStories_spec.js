@@ -1,4 +1,4 @@
-const INDEX_ROUTE = "dist/index.html";
+import { INDEX_ROUTE } from "../helpers";
 
 describe("Data stories", () => {
     it("should throw an error if the introduction pop up changes", () => {
