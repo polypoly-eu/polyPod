@@ -49,7 +49,7 @@ const ImportExplanationExpandable = ({
     };
 
     const handleExampleDataRequest = () => {
-        onUpdateImportStatus(importSteps.download);
+        onUpdateImportStatus(importSteps.import);
         window.pod.polyNav.openUrl("example-data-download");
         setStartRequest(true);
     };
