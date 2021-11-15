@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from "react";
 
-import { polyPrefix } from "../../../globalTheme";
-
 import {
   PolyVerticalBarChart,
   PolyMirroredBarChart,
