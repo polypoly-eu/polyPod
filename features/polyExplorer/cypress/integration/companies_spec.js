@@ -1,6 +1,4 @@
-import { navigation } from "../helpers";
-
-const INDEX_ROUTE = "dist/index.html";
+import { INDEX_ROUTE, navigation } from "../helpers";
 
 describe("Data exploration", () => {
     beforeEach(() => {
