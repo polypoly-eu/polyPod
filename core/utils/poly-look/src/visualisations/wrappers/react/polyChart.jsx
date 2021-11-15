@@ -9,9 +9,9 @@ import {
 } from "../../charts";
 
 const charts = {
-  [polyPrefix + "-vertical-bar-chart"]: PolyVerticalBarChart,
-  [polyPrefix + "-mirrored-bar-chart"]: PolyMirroredBarChart,
-  [polyPrefix + "-bubble-cluster"]: PolyBubbleCluster,
+  "poly-vertical-bar-chart": PolyVerticalBarChart,
+  "poly-mirrored-bar-chart": PolyMirroredBarChart,
+  "poly-bubble-cluster": PolyBubbleCluster,
 };
 
 /**
