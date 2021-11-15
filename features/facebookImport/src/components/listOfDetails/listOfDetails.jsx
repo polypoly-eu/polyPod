@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
-import i18n from "../../i18n";
 import "./listOfDetails.css";
-import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
 
 const optimalGradientScrollingRatio = 0.84;
 
@@ -38,13 +36,6 @@ const ListOfDetails = ({ list }) => {
                 })}
             </ul>
             <div className="list-gradient gradient" ref={gradient2}></div>
-            <ScrollButton
-                scrollRef={listRef}
-                className="scroll-button"
-                scrollButtonText={i18n.t("explore:scroll")}
-                img="./images/scroll-up-blue.svg"
-                colors="light"
-            />
         </div>
     );
 };
