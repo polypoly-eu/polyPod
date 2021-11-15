@@ -7,5 +7,4 @@ describe("Data stories", () => {
             timeout: 10000,
         });
     });
-
 });
