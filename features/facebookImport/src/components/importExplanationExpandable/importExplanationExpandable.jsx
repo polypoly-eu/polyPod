@@ -54,6 +54,12 @@ const ImportExplanationExpandable = ({
         setStartRequest(true);
     };
 
+    const handleDownloadData = () => {
+        onUpdateImportStatus(importSteps.import);
+        window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
+        setStartRequest(true);
+    };
+
     const handleImportStatus = () => {
         onUpdateImportStatus(importSteps.explore);
         setStartRequest(true);
@@ -125,7 +131,10 @@ const ImportExplanationExpandable = ({
                 <p>{i18n.t("import:download.2")}</p>
                 <img src="./images/download.svg" alt="document" />
                 <p>{i18n.t("import:download.3")}</p>
-                <button className="btn-highlighted btn-1">
+                <button
+                    className="btn-highlighted btn-1"
+                    onClick={() => handleDownloadData()}
+                >
                     {i18n.t("import:download.button.1")}
                 </button>
                 <button
