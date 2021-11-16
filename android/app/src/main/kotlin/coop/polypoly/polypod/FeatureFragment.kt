@@ -92,8 +92,7 @@ open class FeatureFragment : Fragment() {
         AlertDialog.Builder(context)
             .setPositiveButton(
                 context?.getString(R.string.button_acknowledge)
-            ) {
-                _, _ ->
+            ) { _, _ ->
                 close()
             }
             .create()
