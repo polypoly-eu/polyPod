@@ -44,8 +44,7 @@
     "node-fetch": "^2.6.1",
     "rollup": "^2.37.0",
     "ts-jest": "^27.0.5",
-    "typedoc": "^0.20.36",
-    "typescript": "^4.0.5"
+    "typedoc": "^0.20.36"
   },
   "peerDependencies": {
     "@polypoly-eu/rdf-spec": "*",
