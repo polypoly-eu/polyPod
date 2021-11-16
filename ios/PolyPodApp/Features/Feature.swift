@@ -29,7 +29,8 @@ class Feature {
         name = translations?.name ?? manifest.name ?? id
         author = translations?.author ?? manifest.author
         description = translations?.description ?? manifest.description
-        primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
+        let primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
+        self.primaryColor = primaryColor
         thumbnailColor = parseColor(hexValue: translations?.thumbnailColor ?? manifest.thumbnailColor) ?? primaryColor
         thumbnail = findThumbnail(
             featurePath: path,
