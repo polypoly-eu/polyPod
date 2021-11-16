@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
 import picturesMinistorySvg from "../../static/images/pictures-ministory/pictures-ministory.svg";
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
 import i18n from "../../i18n";
 
 import "./picturesMiniStory.css";
@@ -70,6 +71,7 @@ const PicturesMiniStory = () => {
                 <p>{i18n.t(`picturesMiniStory:${activePart}.title`)}</p>
             </div>
             <p>{i18n.t(`picturesMiniStory:${activePart}.text`)}</p>
+            <InfoButton route="/report/details/pictures-info" />
         </div>
     );
 };
