@@ -8,6 +8,7 @@ open class FeatureManifest(
     val version: String?,
     val description: String?,
     val thumbnail: String?,
+    val thumbnailColor: String?,
     val primaryColor: String?,
     val links: Map<String, String>?
 ) {
@@ -25,6 +26,8 @@ open class FeatureManifest(
                 description = translations?.description
                     ?: fullManifest.description,
                 thumbnail = translations?.thumbnail ?: fullManifest.thumbnail,
+                thumbnailColor = translations?.thumbnailColor
+                    ?: fullManifest.thumbnailColor,
                 primaryColor = translations?.primaryColor
                     ?: fullManifest.primaryColor,
                 links = translations?.links ?: fullManifest.links
@@ -39,6 +42,7 @@ private class FullFeatureManifest(
     version: String?,
     description: String?,
     thumbnail: String?,
+    thumbnailColor: String?,
     primaryColor: String?,
     links: Map<String, String>?,
     val translations: Map<String, FeatureManifest>?
@@ -48,6 +52,7 @@ private class FullFeatureManifest(
     version = version,
     description = description,
     thumbnail = thumbnail,
+    thumbnailColor = thumbnailColor,
     primaryColor = primaryColor,
     links = links
 ) {
