@@ -312,7 +312,7 @@ class BrowserNetwork implements Network {
                     resolve(`Unexpected response status: ${status}`);
                     return;
                 }
-                resolve();
+                resolve("");
             };
 
             request.onerror = function () {
@@ -391,7 +391,7 @@ class BrowserPolyNav implements PolyNav {
                     // The change listener doesn't seem to be invoked when the
                     // user cancels the file dialog, but if, for some reason,
                     // there is no file anyway, we treat it like cancel.
-                    resolve();
+                    resolve("");
                     return;
                 }
 
@@ -412,7 +412,7 @@ class BrowserPolyNav implements PolyNav {
             window.addEventListener("focus", function focusListener() {
                 this.removeEventListener("focus", focusListener);
                 setTimeout(() => {
-                    if (!fileInput.files?.[0]) resolve();
+                    if (!fileInput.files?.[0]) resolve("");
                 }, 1000);
             });
 
