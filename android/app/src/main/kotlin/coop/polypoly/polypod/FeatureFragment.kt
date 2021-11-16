@@ -88,6 +88,13 @@ open class FeatureFragment : Fragment() {
     private lateinit var foregroundResources: ForegroundResources
     private lateinit var featureContainer: FeatureContainer
 
+    private val errorDialog: AlertDialog by lazy {
+        AlertDialog.Builder(context)
+            .setPositiveButton(context?.getString(R.string.button_acknowledge))
+            { _, _ -> close() }
+            .create()
+    }
+
     private var pickFileResult: CompletableDeferred<Uri?>? = null
 
     override fun onCreateView(
@@ -147,14 +154,11 @@ open class FeatureFragment : Fragment() {
 
     @Suppress("unused")
     private fun handleError(error: String) {
-        val acknowledgeLabel =
-            context?.getString(R.string.button_acknowledge)
         val featureErrorMessage =
             context?.getString(R.string.feature_error, feature.name, error)
-        AlertDialog.Builder(context)
-            .setMessage(featureErrorMessage)
-            .setPositiveButton(acknowledgeLabel) { _, _ -> close() }
-            .show()
+        if(errorDialog.isShowing) return
+        errorDialog.setMessage(featureErrorMessage)
+        errorDialog.show()
     }
 
     private fun setupNavigation(view: View) {
