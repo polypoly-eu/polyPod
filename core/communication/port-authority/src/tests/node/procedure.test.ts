@@ -6,7 +6,7 @@ import { bubblewrapMiddlewarePort, jsonMiddlewarePort } from "../../node";
 import { createServer, RequestListener, Server } from "http";
 import { AddressInfo } from "net";
 import { Bubblewrap } from "@polypoly-eu/bubblewrap";
-import { assert } from "chai";
+
 // @ts-ignore
 import fetch from "node-fetch";
 
@@ -81,7 +81,7 @@ describe("Node/Procedure", () => {
 
         it("supports GET", async () => {
             const response = await fetch(`http://localhost:${port}/`);
-            assert.ok(response.ok);
+            expect(response.ok).toBe(true);
         });
 
         afterEach(async () => {
