@@ -72,7 +72,7 @@ describe("Node/Procedure", () => {
         let server: Server;
         let port: number;
 
-        before(async () => {
+        beforeEach(async () => {
             const [app] = jsonMiddlewarePort();
             const [_server, _port] = await startServer(app);
             server = _server;
@@ -84,7 +84,7 @@ describe("Node/Procedure", () => {
             assert.ok(response.ok);
         });
 
-        after(async () => {
+        afterEach(async () => {
             await stopServer(server);
         });
     });
