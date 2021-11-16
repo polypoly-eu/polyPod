@@ -90,7 +90,9 @@ open class FeatureFragment : Fragment() {
 
     private val errorDialog: AlertDialog by lazy {
         AlertDialog.Builder(context)
-            .setPositiveButton(context?.getString(R.string.button_acknowledge)) { _, _ -> close() }
+            .setPositiveButton(context?.getString(R.string.button_acknowledge)) {
+                    _, _ -> close()
+            }
             .create()
     }
 
