@@ -6,6 +6,19 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     document
+        .querySelector(".unhandled-async-errors")
+        .addEventListener("click", () => {
+            const error1 = new Error("An error has been provoked");
+            error1.cause = new Error("This is the cause");
+            const error2 = new Error("Another error happened async");
+            error2.cause = new Error("This is the cause");
+            setTimeout(() => {
+                throw error2;
+            }, 0);
+            throw error1;
+        });
+
+    document
         .querySelector(".unhandled-rejection")
         .addEventListener("click", () => {
             new Promise((_, reject) => {
