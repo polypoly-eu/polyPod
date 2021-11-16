@@ -7,6 +7,7 @@ class Feature {
     let author: String?
     let description: String?
     let primaryColor: Color?
+    let thumbnailColor: Color?
     let thumbnail: URL?
     private let links: [String: String]
     
@@ -29,6 +30,7 @@ class Feature {
         author = translations?.author ?? manifest.author
         description = translations?.description ?? manifest.description
         primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
+        thumbnailColor = parseColor(hexValue: translations?.thumbnailColor ?? manifest.thumbnailColor) ?? primaryColor
         thumbnail = findThumbnail(
             featurePath: path,
             thumbnailPath: translations?.thumbnail ?? manifest.thumbnail
@@ -58,6 +60,7 @@ private func readManifest(_ basePath: URL) -> FeatureManifest {
         author: nil,
         description: nil,
         thumbnail: nil,
+        thumbnailColor: nil,
         primaryColor: nil,
         links: nil,
         translations: nil
