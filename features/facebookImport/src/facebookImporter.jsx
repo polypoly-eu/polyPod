@@ -23,6 +23,7 @@ import ReportDetails from "./views/report/details.jsx";
 import DataStructureInfoScreen from "./views/infoScreens/dataStructureInfoScreen/dataStructureInfoScreen.jsx";
 import ActivitiesInfoScreen from "./views/infoScreens/activitiesInfoScreen/activitiesInfoScreen.jsx";
 import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesInfoScreen.jsx";
+import PicturesInfoScreen from "./views/infoScreens/picturesInfoScreen/picturesInfoScreen.jsx";
 import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
@@ -90,6 +91,9 @@ const FacebookImporter = () => {
                     </Route>
                     <Route exact path="/report/details/messages-info">
                         <MessagesInfoScreen />
+                    </Route>
+                    <Route exact path="/report/details/pictures-info">
+                        <PicturesInfoScreen />
                     </Route>
                 </Switch>
             ) : (
