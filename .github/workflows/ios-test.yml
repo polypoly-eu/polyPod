@@ -1,21 +1,23 @@
 name: Testing polyPod in iOS
 on: [push, pull_request]
 jobs:
-  test:
-    name: Testing polyPod iOS app
-    runs-on: macOS-10.15
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      - name: Lock xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_12.4.app
-      - name: Build core and features
-        run: ./build.js
-      - name: Build iOS
-        run: |
-          cd ios
-          set -o pipefail
-          make test | xcpretty
+    test:
+        name: Testing polyPod iOS app
+        runs-on: macOS-10.15
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 16
+            - name: Lock xcode version
+              run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+            - name: Install global modules
+              run: npm ci --no-update-notifier --no-fund
+            - name: Build core and features
+              run: ./build.js
+            - name: Build iOS
+              run: |
+                  cd ios
+                  set -o pipefail
+                  make test | xcpretty
