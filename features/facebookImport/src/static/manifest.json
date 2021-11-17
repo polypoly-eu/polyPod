@@ -3,6 +3,7 @@
     "author": "polypoly Cooperative",
     "description": "Facebook knows a lot about you. With the Facebook Importer you can load your data in three steps from Facebook into your polyPod and finally get an overview yourself.",
     "thumbnail": "images/thumbnail.png",
+    "thumbnailColor": "#f0f1fe",
     "primaryColor": "#0f1938",
     "links": {
         "data-download": "https://www.facebook.com/dyi",

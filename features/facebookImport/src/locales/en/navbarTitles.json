@@ -4,5 +4,6 @@
     "explore": "Data Exploration",
     "explore/details": "Story Details",
     "report": "Unrecognizes/missing Data",
-    "report/details": "Data Report Details"
+    "report/details": "Data Report Details",
+    "info": "How to read this?"
 }

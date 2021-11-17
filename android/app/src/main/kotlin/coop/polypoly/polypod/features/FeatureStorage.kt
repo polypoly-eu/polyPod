@@ -56,7 +56,9 @@ class FeatureStorage {
         val manifestEntry = content.getEntry("manifest.json")
         if (manifestEntry == null) {
             logger.warn("Missing manifest for '${content.name}'")
-            return FeatureManifest(null, null, null, null, null, null, null)
+            return FeatureManifest(
+                null, null, null, null, null, null, null, null
+            )
         }
         val manifestString =
             content.getInputStream(manifestEntry).reader().readText()
