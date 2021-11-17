@@ -95,6 +95,18 @@ const subAnalyses = [
     // them before too long - or show them behind some kind of flag, or
     // developer mode.
     return ![
+        DataChartsAnalysis,
+        InteractedWithAdvertisersAnalysis,
+        OffFacebookEventsTypesChartAnalysis,
+        MessagesDetailsAnalysis,
+        EmailAddressesAnalysis,
+        SearchesAnalysis,
+        FriendsAnalysis,
+        ReceivedFriendRequestsAnalysis,
+        PagesOverviewAnalysis,
+        SesssionActivityLocationsAnalysis,
+        AdViewsAnalysis,
+        OnOffFacebookAdvertisersAnalysis,
         ExportTitleAnalysis,
         ExportSizeAnalysis,
         DataGroupsAnalysis,
