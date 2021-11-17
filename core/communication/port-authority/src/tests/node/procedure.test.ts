@@ -6,7 +6,7 @@ import { bubblewrapMiddlewarePort, jsonMiddlewarePort } from "../../node";
 import { createServer, RequestListener, Server } from "http";
 import { AddressInfo } from "net";
 import { Bubblewrap } from "@polypoly-eu/bubblewrap";
-
+import { assert } from "chai";
 // @ts-ignore
 import fetch from "node-fetch";
 
@@ -72,7 +72,7 @@ describe("Node/Procedure", () => {
         let server: Server;
         let port: number;
 
-        beforeEach(async () => {
+        before(async () => {
             const [app] = jsonMiddlewarePort();
             const [_server, _port] = await startServer(app);
             server = _server;
@@ -81,10 +81,10 @@ describe("Node/Procedure", () => {
 
         it("supports GET", async () => {
             const response = await fetch(`http://localhost:${port}/`);
-            expect(response.ok).toBe(true);
+            assert.ok(response.ok);
         });
 
-        afterEach(async () => {
+        after(async () => {
             await stopServer(server);
         });
     });
