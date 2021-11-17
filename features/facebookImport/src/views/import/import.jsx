@@ -18,6 +18,7 @@ const Import = () => {
         navigationState,
         updateImportStatus,
         files,
+        selectedFileUrl,
         handleRemoveFile,
         handleSelectFile,
         handleImportFile,
@@ -41,6 +42,7 @@ const Import = () => {
                 importSteps={importSteps}
                 importSections={importSections}
                 importStatus={importStatus}
+                selectedFileUrl={selectedFileUrl}
                 onSelectFile={handleSelectFile}
                 onImportFile={handleImportFile}
                 onUpdateImportStatus={updateImportStatus}

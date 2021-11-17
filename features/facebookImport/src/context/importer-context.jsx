@@ -261,6 +261,7 @@ export const ImporterProvider = ({ children }) => {
                 navigationState,
                 changeNavigationState,
                 handleBack,
+                selectedFileUrl,
                 handleSelectFile,
                 handleImportFile,
                 importSteps,
