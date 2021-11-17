@@ -58,6 +58,8 @@ function updateTitle(pod, location) {
     pod.polyNav.setTitle(
         location.pathname === "/"
             ? ""
+            : location.pathname.endsWith("info")
+            ? i18n.t("navbarTitles:info")
             : i18n.t(`navbarTitles:${location.pathname.substring(1)}`)
     );
 }
