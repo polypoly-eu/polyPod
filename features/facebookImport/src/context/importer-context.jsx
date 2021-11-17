@@ -5,7 +5,6 @@ import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
 import { importData } from "../model/importer.js";
-import { not_equal } from "svelte/internal";
 
 export const ImporterContext = React.createContext();
 
