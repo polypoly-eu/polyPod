@@ -44,7 +44,9 @@ const PicturesMiniStory = () => {
         removeFixedSvgDimensionValues(svg);
         for (let part of Object.values(parts)) {
             const selectedPart = svg.select(`#part-${part}`);
-            selectedPart.on("click", () => setActivePart(part));
+            selectedPart
+                .on("click", () => setActivePart(part))
+                .attr("class", "part");
             part == activePart
                 ? styleHighlightedPart(selectedPart)
                 : stylePart(selectedPart);
