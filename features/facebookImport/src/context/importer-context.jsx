@@ -5,6 +5,7 @@ import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
 import { importData } from "../model/importer.js";
+import { not_equal } from "svelte/internal";
 
 export const ImporterContext = React.createContext();
 
@@ -31,6 +32,14 @@ class FileImportError extends Error {
     constructor(cause) {
         super("Failed to import file");
         this.name = "FileImportError";
+        this.cause = cause;
+    }
+}
+
+class FileSelectionError extends Error {
+    constructor(cause) {
+        super("Failed to select file");
+        this.name = "FileSelectionError";
         this.cause = cause;
     }
 }
@@ -102,6 +111,7 @@ export const ImporterProvider = ({ children }) => {
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
     const [startRequest, setStartRequest] = useState(false);
+    const [selectedFileUrl, setSelectedFileUrl] = useState(null);
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
@@ -125,12 +135,24 @@ export const ImporterProvider = ({ children }) => {
         return storage.removeFile(fileID);
     };
 
-    const handleImportFile = async () => {
-        const { polyNav, polyOut } = pod;
+    const handleSelectFile = async () => {
+        const { polyNav } = pod;
         setFiles(null); // To show the loading overlay
         try {
-            const url = await polyNav.pickFile("application/zip");
-            if (url) await polyOut.importArchive(url);
+            setSelectedFileUrl(await polyNav.pickFile("application/zip"));
+        } catch (error) {
+            setGlobalError(new FileSelectionError(error));
+        }
+        refreshFiles();
+    };
+
+    const handleImportFile = async () => {
+        if (!selectedFileUrl) return;
+        const { polyOut } = pod;
+        setFiles(null); // To show the loading overlay
+        try {
+            await polyOut.importArchive(selectedFileUrl);
+            setSelectedFileUrl(null);
         } catch (error) {
             setGlobalError(new FileImportError(error));
         }
@@ -239,6 +261,7 @@ export const ImporterProvider = ({ children }) => {
                 navigationState,
                 changeNavigationState,
                 handleBack,
+                handleSelectFile,
                 handleImportFile,
                 importSteps,
                 updateImportStatus,
