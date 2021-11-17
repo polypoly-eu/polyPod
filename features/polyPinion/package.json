@@ -11,6 +11,7 @@
         "@rollup/plugin-commonjs": "^20.0.0",
         "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^8.4.0",
+        "@rollup/plugin-replace": "^3.0.0",
         "@rollup/plugin-sucrase": "^4.0.0",
         "@types/react": "^17.0.18",
         "@types/react-dom": "^16.9.6",
@@ -18,7 +19,6 @@
         "rollup": "^2.56.2",
         "rollup-plugin-copy": "^3.4.0",
         "rollup-plugin-css-only": "^3.1.0",
-        "rollup-plugin-replace": "^2.2.0",
         "typescript": "^3.9.7"
     },
     "engines": {
@@ -30,7 +30,6 @@
     },
     "dependencies": {
         "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
-        "crypto": "^1.0.1",
         "i18next": "^19.7.0",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
