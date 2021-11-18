@@ -1,7 +1,6 @@
 basepath = "./locales"
-
-[[includes]]
-    [[paths]]
-        reference = "en/**"
-        l10n = "{locale}/**"
+locales = ["de", "en"]
+[[paths]]
+    reference = "en/**"
+    l10n = "{locale}/**"
 # trigger-change-01
