@@ -18,7 +18,9 @@ const Import = () => {
         navigationState,
         updateImportStatus,
         files,
+        selectedFileUrl,
         handleRemoveFile,
+        handleSelectFile,
         handleImportFile,
     } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
@@ -40,6 +42,8 @@ const Import = () => {
                 importSteps={importSteps}
                 importSections={importSections}
                 importStatus={importStatus}
+                selectedFileUrl={selectedFileUrl}
+                onSelectFile={handleSelectFile}
                 onImportFile={handleImportFile}
                 onUpdateImportStatus={updateImportStatus}
                 file={file}

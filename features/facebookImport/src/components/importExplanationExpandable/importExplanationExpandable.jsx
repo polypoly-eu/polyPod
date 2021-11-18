@@ -23,6 +23,8 @@ const ImportExplanationExpandable = ({
     importSections,
     importStatus,
     onUpdateImportStatus,
+    selectedFileUrl,
+    onSelectFile,
     onImportFile,
     file,
     onRemoveFile,
@@ -157,6 +159,11 @@ const ImportExplanationExpandable = ({
                                 {formatSize(file.size)}
                             </p>
                         </div>
+                    ) : selectedFileUrl ? (
+                        <div className="file-info">
+                            <h5>{i18n.t("import:import.chosen")}</h5>
+                            <p>{selectedFileUrl?.split("/").pop()}</p>
+                        </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
                     )}
@@ -166,16 +173,25 @@ const ImportExplanationExpandable = ({
                     className={"btn-secondary btn-2"}
                     onClick={async () => {
                         if (file) await onRemoveFile();
-                        onImportFile();
+                        onSelectFile();
                     }}
                 >
-                    {file
+                    {file || selectedFileUrl
                         ? i18n.t("import:import.button.1.different")
                         : i18n.t("import:import.button.1")}
                 </button>
                 <button
-                    className={`btn-highlighted ${file ? "" : "deactivated"}`}
-                    onClick={file ? () => handleImportStatus() : () => {}}
+                    className={`btn-highlighted ${
+                        selectedFileUrl ? "" : "deactivated"
+                    }`}
+                    onClick={
+                        selectedFileUrl
+                            ? async () => {
+                                  await onImportFile();
+                                  handleImportStatus();
+                              }
+                            : () => {}
+                    }
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
