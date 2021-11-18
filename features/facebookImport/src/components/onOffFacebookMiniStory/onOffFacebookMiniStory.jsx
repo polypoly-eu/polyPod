@@ -97,7 +97,7 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>
-            <InfoButton route="/report/details/off-facebook-info" />
+            <InfoButton route="/report/details/on-off-facebook-info" />
         </div>
     );
 };

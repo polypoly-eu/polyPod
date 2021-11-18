@@ -100,8 +100,11 @@ const FacebookImporter = () => {
                     <Route exact path="/report/details/messages-info">
                         <MessagesInfoScreen />
                     </Route>
-                    <Route exact path="/report/details/off-facebook-info">
+                    <Route exact path="/report/details/on-off-facebook-info">
                         <OnOffFacebookInfoScreen />
+                    </Route>
+                    <Route exact path="/report/details/off-facebook-info">
+                        <OffFacebookInfoScreen />
                     </Route>
                 </Switch>
             ) : (
