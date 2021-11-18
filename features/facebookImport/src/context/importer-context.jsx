@@ -129,6 +129,12 @@ export const ImporterProvider = ({ children }) => {
 
     const history = useHistory();
 
+    async function runWithLoadingScreen(task) {
+        setFiles(null);
+        await task();
+        refreshFiles();
+    }
+
     const handleRemoveFile = (fileID) => {
         setFacebookAccount(null);
         return storage.removeFile(fileID);
@@ -136,26 +142,26 @@ export const ImporterProvider = ({ children }) => {
 
     const handleSelectFile = async () => {
         const { polyNav } = pod;
-        setFiles(null); // To show the loading overlay
-        try {
-            setSelectedFileUrl(await polyNav.pickFile("application/zip"));
-        } catch (error) {
-            setGlobalError(new FileSelectionError(error));
-        }
-        refreshFiles();
+        runWithLoadingScreen(async function () {
+            try {
+                setSelectedFileUrl(await polyNav.pickFile("application/zip"));
+            } catch (error) {
+                setGlobalError(new FileSelectionError(error));
+            }
+        });
     };
 
     const handleImportFile = async () => {
         if (!selectedFileUrl) return;
         const { polyOut } = pod;
-        setFiles(null); // To show the loading overlay
-        try {
-            await polyOut.importArchive(selectedFileUrl);
-            setSelectedFileUrl(null);
-        } catch (error) {
-            setGlobalError(new FileImportError(error));
-        }
-        refreshFiles();
+        runWithLoadingScreen(async function () {
+            try {
+                await polyOut.importArchive(selectedFileUrl);
+                setSelectedFileUrl(null);
+            } catch (error) {
+                setGlobalError(new FileImportError(error));
+            }
+        });
     };
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
