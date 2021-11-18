@@ -1,0 +1,4 @@
+basepath = "."
+
+[[includes]]
+    path = "features/polyExplorer-v1/src/l10n.toml"
