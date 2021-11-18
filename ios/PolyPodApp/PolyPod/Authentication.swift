@@ -3,8 +3,9 @@ import LocalAuthentication
 private func isSimulator() -> Bool {
     #if targetEnvironment(simulator)
     return true
-    #endif
+    #else
     return false
+    #endif
 }
 
 class Authentication {
