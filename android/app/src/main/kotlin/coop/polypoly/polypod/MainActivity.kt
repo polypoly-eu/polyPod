@@ -14,10 +14,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Authentication.authenticate(this) {
-            FeatureStorage().installBundledFeatures(this)
-            setContentView(R.layout.activity_main)
-            setSupportActionBar(findViewById(R.id.toolbar))
+        Authentication.authenticate(this) { success ->
+            if (success) {
+                FeatureStorage().installBundledFeatures(this)
+                setContentView(R.layout.activity_main)
+                setSupportActionBar(findViewById(R.id.toolbar))
+            } else {
+                finish()
+            }
         }
     }
 

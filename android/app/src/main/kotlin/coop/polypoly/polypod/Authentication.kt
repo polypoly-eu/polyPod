@@ -22,18 +22,23 @@ class Authentication {
 
         fun setUp(
             activity: FragmentActivity,
-            successfulAuth: (() -> Unit)
-        ) = authenticate(activity, true, successfulAuth)
+            setupComplete: () -> Unit
+        ) {
+            authenticate(activity, true) { success ->
+                if (success)
+                    setupComplete()
+            }
+        }
 
         fun authenticate(
             activity: FragmentActivity,
             force: Boolean = false,
-            successfulAuth: (() -> Unit)
+            authComplete: ((Boolean) -> Unit)
         ) {
             if (!biometricsAvailable(activity) ||
                 (!force && !Preferences.getBiometricEnabled(activity))
             ) {
-                successfulAuth()
+                authComplete(true)
                 return
             }
 
@@ -44,7 +49,7 @@ class Authentication {
                 .build()
 
             val executor = ContextCompat.getMainExecutor(activity)
-            val callback = PolyAuthCallback(activity, successfulAuth)
+            val callback = PolyAuthCallback(activity, authComplete)
 
             BiometricPrompt(activity, executor, callback)
                 .authenticate(promptInfo)
@@ -59,7 +64,7 @@ class Authentication {
 
     private class PolyAuthCallback(
         val context: Context,
-        val successfulAuth: () -> Unit
+        val authComplete: (Boolean) -> Unit
     ) : BiometricPrompt.AuthenticationCallback() {
         override fun onAuthenticationSucceeded(
             result: BiometricPrompt.AuthenticationResult
@@ -70,8 +75,20 @@ class Authentication {
                 context.getString(R.string.auth_success),
                 Toast.LENGTH_SHORT
             ).show()
+            authComplete(true)
+        }
 
-            successfulAuth()
+        override fun onAuthenticationError(
+            errorCode: Int,
+            errString: CharSequence
+        ) {
+            super.onAuthenticationError(errorCode, errString)
+            authComplete(false)
+        }
+
+        override fun onAuthenticationFailed() {
+            super.onAuthenticationFailed()
+            authComplete(false)
         }
     }
 }
