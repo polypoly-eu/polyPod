@@ -1,0 +1,19 @@
+.messages-gradient::before {
+    content: "";
+    background: linear-gradient(#0f193800 0%, #0f1938);
+    text-align: center;
+    width: 100%;
+    max-width: var(--max-width);
+    height: 60px;
+    right: 0;
+    bottom: 62px;
+    position: fixed;
+}
+
+.messages-gradient {
+    position: relative;
+}
+
+.messages-info-button {
+    bottom: 50px;
+}

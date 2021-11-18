@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import i18n from "../../../i18n";
 import RootAnalysis from "./root-analysis";
-import InfoButton from "../../../components/buttons/infoButton/infoButton.jsx";
+import MessagesMiniStory from "../../../components/messagesMiniStory/messagesMiniStory.jsx";
 
-import BarChart from "../../../components/dataViz/barChart.jsx";
 import "./ministories.css";
 
 export default class MessagesAnalysis extends RootAnalysis {
@@ -107,44 +106,10 @@ export default class MessagesAnalysis extends RootAnalysis {
 
     renderDetails() {
         return (
-            <>
-                <p>
-                    {i18n.t("messagesMiniStory:number.chats", {
-                        number_chats: this._totalUsernamesCount,
-                    })}
-                </p>
-                <p> {i18n.t("messagesMiniStory:chart.title")}</p>
-                <BarChart
-                    data={this._messagesThreadsData}
-                    screenPadding={48}
-                    footerContent={({ extraData }) => (
-                        <>
-                            <div className="bar-extra-info">
-                                <p>{i18n.t("messagesMiniStory:first.chat")}</p>
-                                {extraData.firstChatDate
-                                    ? extraData.firstChatDate.toDateString()
-                                    : "unknown"}
-                            </div>
-                            <div className="bar-extra-info">
-                                <p>
-                                    {i18n.t(
-                                        "messagesMiniStory:last.interaction"
-                                    )}
-                                </p>
-                                {extraData.lastChatDate
-                                    ? extraData.lastChatDate.toDateString()
-                                    : "unknown"}
-                            </div>
-                        </>
-                    )}
-                />
-                <div className="messages-info-button">
-                    <InfoButton route="/report/details/messages-info" />
-                </div>
-                <p className="source">
-                    {i18n.t("common:source.your.facebook.data")}
-                </p>
-            </>
+            <MessagesMiniStory
+                totalUserNames={this._totalUsernamesCount}
+                messagesThreads={this._messagesThreadsData}
+            />
         );
     }
 }
