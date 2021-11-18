@@ -79,7 +79,7 @@ struct ContentView: View {
     
     private func securityReminderState() -> ViewState {
         if !Authentication.shared.shouldShowPrompt() {
-            return featureListState()
+            return lockedState()
         }
         
         return ViewState(
@@ -94,6 +94,18 @@ struct ContentView: View {
         )
     }
     
+    private func lockedState() -> ViewState {
+        return ViewState(
+            AnyView(
+                Text("").onAppear {
+                    Authentication.shared.authenticate {
+                        state = featureListState()
+                    }
+                }
+            )
+        )
+    }
+    
     private func featureListState() -> ViewState {
         let notification = UpdateNotification()
         return ViewState(
@@ -101,9 +113,7 @@ struct ContentView: View {
                 FeatureListView(
                     features: FeatureStorage.shared.featuresList(),
                     openFeatureAction: { feature in
-                        Authentication.shared.authenticate {
-                            state = featureState(feature)
-                        }
+                        state = featureState(feature)
                     },
                     openInfoAction: {
                         state = infoState()
