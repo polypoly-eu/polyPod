@@ -71,13 +71,13 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
         <div className="off-facebook-events-ministory-details">
             <p>{i18n.t("offFacebookEventsMiniStory:off.events.text.1")}</p>
             <p>{i18n.t("offFacebookEventsMiniStory:off.events.text.2")}</p>
-            <BarChart data={displayData.offEvents.companies.splice(0, 5)} />
+            <BarChart data={displayData.offEvents.companies.slice(0, 5)} />
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>
             <h2>{displayData.offEvents.activityTypes.length}</h2>
             <p>{i18n.t("offFacebookEventsMiniStory:off.events.text.3")}</p>
-            <BarChart data={displayData.offEvents.activityTypes.splice(0, 5)} />
+            <BarChart data={displayData.offEvents.activityTypes.slice(0, 5)} />
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>
