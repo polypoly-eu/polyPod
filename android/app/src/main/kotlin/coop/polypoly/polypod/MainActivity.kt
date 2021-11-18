@@ -13,9 +13,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FeatureStorage().installBundledFeatures(this)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
+
+        Authentication.authenticate(this) { success ->
+            if (success) {
+                FeatureStorage().installBundledFeatures(this)
+                setContentView(R.layout.activity_main)
+                setSupportActionBar(findViewById(R.id.toolbar))
+            } else {
+                finish()
+            }
+        }
     }
 
     override fun onResume() {
@@ -24,8 +31,14 @@ class MainActivity : AppCompatActivity() {
         val notification = UpdateNotification(this)
         notification.handleStartup()
 
-        if (Preferences.isFirstRun(this)) {
+        val firstRun = Preferences.isFirstRun(this)
+        if (firstRun) {
             notification.handleFirstRun()
+        }
+
+        val shouldShowOnboarding =
+            firstRun || Authentication.shouldShowBiometricsPrompt(this)
+        if (!onboardingShown && shouldShowOnboarding) {
             onboardingShown = true
             startActivity(
                 Intent(
@@ -33,7 +46,6 @@ class MainActivity : AppCompatActivity() {
                     OnboardingActivity::class.java
                 )
             )
-            return
         }
 
         if (notification.showInApp) {
@@ -47,15 +59,5 @@ class MainActivity : AppCompatActivity() {
                 }
                 .show()
         }
-        if (!onboardingShown) {
-            onboardingShown = true
-            startActivity(
-                Intent(
-                    this,
-                    OnboardingActivity::class.java
-                )
-            )
-        }
-        return
     }
 }
