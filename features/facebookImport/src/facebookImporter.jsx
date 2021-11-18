@@ -26,6 +26,7 @@ import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesI
 import PicturesInfoScreen from "./views/infoScreens/picturesInfoScreen/picturesInfoScreen.jsx";
 import PostReactionInfoScreen from "./views/infoScreens/postReactionInfoScreen/postReactionInfoScreen.jsx";
 import OnOffFacebookInfoScreen from "./views/infoScreens/onOffFacebookInfoScreen/onOffFacebookInfoScreen.jsx";
+import OffFacebookInfoScreen from "./views/infoScreens/onOffFacebookInfoScreen/offFacebookInfoScreen.jsx";
 import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";

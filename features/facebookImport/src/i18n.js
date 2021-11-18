@@ -22,6 +22,7 @@ import picturesInfoScreenEn from "./locales/en/infoScreens/picturesInfoScreen.js
 import messagesInfoScreenEn from "./locales/en/infoScreens/messagesInfoScreen.json";
 import postReactionInfoScreenEn from "./locales/en/infoScreens/postReactionInfoScreen.json";
 import onOffFacebookInfoScreenEn from "./locales/en/infoScreens/onOffFacebookInfoScreen.json";
+import offFacebookInfoScreenEn from "./locales/en/infoScreens/offFacebookInfoScreen.json";
 import infographicsEn from "./locales/en/infographics.json";
 
 import commonDe from "./locales/de/common.json";
@@ -46,6 +47,7 @@ import picturesInfoScreenDe from "./locales/de/infoScreens/picturesInfoScreen.js
 import messagesInfoScreenDe from "./locales/de/infoScreens/messagesInfoScreen.json";
 import postReactionInfoScreenDe from "./locales/de/infoScreens/postReactionInfoScreen.json";
 import onOffFacebookInfoScreenDe from "./locales/de/infoScreens/onOffFacebookInfoScreen.json";
+import offFacebookInfoScreenDe from "./locales/de/infoScreens/offFacebookInfoScreen.json";
 import infographicsDe from "./locales/de/infographics.json";
 
 export default new I18n(determineLanguage(), {
@@ -72,6 +74,7 @@ export default new I18n(determineLanguage(), {
         messagesInfoScreen: messagesInfoScreenEn,
         postReactionInfoScreen: postReactionInfoScreenEn,
         onOffFacebookInfoScreen: onOffFacebookInfoScreenEn,
+        offFacebookInfoScreen: offFacebookInfoScreenEn,
         infographics: infographicsEn,
     },
     de: {
@@ -97,6 +100,7 @@ export default new I18n(determineLanguage(), {
         messagesInfoScreen: messagesInfoScreenDe,
         postReactionInfoScreen: postReactionInfoScreenDe,
         onOffFacebookInfoScreen: onOffFacebookInfoScreenDe,
+        offFacebookInfoScreen: offFacebookInfoScreenDe,
         infographics: infographicsDe,
     },
 });
