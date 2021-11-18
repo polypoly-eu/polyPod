@@ -18,8 +18,8 @@
     "@polypoly-eu/fetch-spec": "file:../core/api/fetch-spec",
     "@polypoly-eu/pod-api": "file:../core/api/pod-api",
     "@polypoly-eu/rdf": "file:../core/api/rdf",
-    "@types/rdf-js": "^4.0.2",
-    "@zip.js/zip.js": "2.3.7"
+    "@zip.js/zip.js": "2.3.7",
+    "rdf-js": "^4.0.2"
   },
   "devDependencies": {
     "@polypoly-eu/rdf-spec": "file:../core/api/rdf-spec",
