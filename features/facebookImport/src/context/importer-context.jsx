@@ -91,13 +91,13 @@ async function writeImportStatus(pod, status) {
             predicate: dataFactory.namedNode(`${namespace}importStatus`),
         })
     )[0];
-    polyIn.delete(existingQuad);
+    if (existingQuad) await polyIn.delete(existingQuad);
     const quad = dataFactory.quad(
         dataFactory.namedNode(`${namespace}facebookImporter`),
         dataFactory.namedNode(`${namespace}importStatus`),
         dataFactory.namedNode(`${namespace}${status}`)
     );
-    polyIn.add(quad);
+    await polyIn.add(quad);
 }
 
 export const ImporterProvider = ({ children }) => {
