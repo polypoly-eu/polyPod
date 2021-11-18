@@ -1,6 +1,6 @@
 basepath = "."
 locales = ["de", "en"]
 [[paths]]
-    reference = "locales/en/**"
-    l10n = "locales/{locale}/**"
+    reference = "locales/en/common.json"
+    l10n = "locales/{locale}/common.json"
 # trigger-change-01
