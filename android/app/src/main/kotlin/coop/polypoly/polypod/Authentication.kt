@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 
 class Authentication {
     companion object {
-        private val desiredLockScreenType =
+        private const val desiredLockScreenType =
             BiometricManager.Authenticators.BIOMETRIC_WEAK or
                 BiometricManager.Authenticators.DEVICE_CREDENTIAL
 
