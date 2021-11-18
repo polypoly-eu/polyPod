@@ -1,0 +1,6 @@
+basepath = "./locales"
+
+[[includes]]
+    [[paths]]
+        reference = "en/**"
+        l10n = "{locale}/**"
