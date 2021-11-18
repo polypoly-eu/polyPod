@@ -20,7 +20,15 @@ class Authentication {
     private init() {}
     
     func shouldShowPrompt() -> Bool {
-        return !isCheckDisabled() && !isSetUp()
+        let firstRun = FirstRun.read()
+        return !(firstRun || isCheckDisabled() || isSetUp()) && isAvailable()
+    }
+    
+    private func isAvailable() -> Bool {
+        return !isSimulator() && LAContext().canEvaluatePolicy(
+            .deviceOwnerAuthentication,
+            error: nil
+        )
     }
     
     func disableCheck() {
@@ -48,7 +56,7 @@ class Authentication {
     }
     
     private func isCheckDisabled() -> Bool {
-        return isSimulator() || UserDefaults.standard.bool(
+        return UserDefaults.standard.bool(
             forKey: Authentication.disableCheckKey
         )
     }

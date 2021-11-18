@@ -1,7 +1,8 @@
 import SwiftUI
 import LocalAuthentication
 
-private struct FirstRun {
+// TODO: This, and other user defaults we use, should move to a central place.
+struct FirstRun {
     static private let key = UserDefaults.Keys.firstRun.rawValue
     
     static func read() -> Bool {
@@ -48,10 +49,6 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.bottom)
         }
         .edgesIgnoringSafeArea([.top, .bottom])
-    }
-    
-    private func devicePasscodeSet() -> Bool {
-        return LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
     }
     
     private func initState() -> ViewState {
