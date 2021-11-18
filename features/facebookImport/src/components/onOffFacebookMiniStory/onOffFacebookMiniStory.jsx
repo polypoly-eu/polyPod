@@ -4,6 +4,7 @@ import i18n from "../../i18n";
 
 import "./onOffFacebookMiniStory.css";
 import BarChart from "../dataViz/barChart.jsx";
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 const legend = (
     <div className="legend">
@@ -96,6 +97,7 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>
+            <InfoButton route="/report/details/off-facebook-info" />
         </div>
     );
 };

@@ -25,7 +25,7 @@ import ActivitiesInfoScreen from "./views/infoScreens/activitiesInfoScreen/activ
 import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesInfoScreen.jsx";
 import PicturesInfoScreen from "./views/infoScreens/picturesInfoScreen/picturesInfoScreen.jsx";
 import PostReactionInfoScreen from "./views/infoScreens/postReactionInfoScreen/postReactionInfoScreen.jsx";
-import OffFacebookInfoScreen from "./views/infoScreens/offFacebookInfoScreen/offFacebookInfoScreen.jsx";
+import OnOffFacebookInfoScreen from "./views/infoScreens/onOffFacebookInfoScreen/onOffFacebookInfoScreen.jsx";
 import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
@@ -100,8 +100,8 @@ const FacebookImporter = () => {
                     <Route exact path="/report/details/messages-info">
                         <MessagesInfoScreen />
                     </Route>
-                    <Route exact path="/report/details/pictures-info">
-                        <PicturesInfoScreen />
+                    <Route exact path="/report/details/off-facebook-info">
+                        <OnOffFacebookInfoScreen />
                     </Route>
                 </Switch>
             ) : (
