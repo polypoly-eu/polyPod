@@ -16,6 +16,11 @@ import {
     OnOffFacebookMiniStoryDetails,
 } from "../../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
 
+const detailDisplayTypes = {
+    onOff: "on-off",
+    off: "off",
+};
+
 export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     get label() {
         return RootAnalysis.Labels.NONE;
@@ -76,6 +81,9 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
             );
         }
         this.active = Object.keys(this._displayData).length > 0;
+        this._displayType = this._displayData?.onOffEvents
+            ? detailDisplayTypes.onOff
+            : detailDisplayTypes.off;
     }
 
     renderSummary() {
