@@ -20,6 +20,8 @@ import activitiesInfoScreenEn from "./locales/en/infoScreens/activitiesInfoScree
 import dataStructureInfoScreenEn from "./locales/en/infoScreens/dataStructureInfoScreen.json";
 import picturesInfoScreenEn from "./locales/en/infoScreens/picturesInfoScreen.json";
 import messagesInfoScreenEn from "./locales/en/infoScreens/messagesInfoScreen.json";
+import postReactionInfoScreenEn from "./locales/en/infoScreens/postReactionInfoScreen.json";
+import offFacebookInfoScreenEn from "./locales/en/infoScreens/offFacebookInfoScreen.json";
 import infographicsEn from "./locales/en/infographics.json";
 
 import commonDe from "./locales/de/common.json";
@@ -42,6 +44,8 @@ import activitiesInfoScreenDe from "./locales/de/infoScreens/activitiesInfoScree
 import dataStructureInfoScreenDe from "./locales/de/infoScreens/dataStructureInfoScreen.json";
 import picturesInfoScreenDe from "./locales/de/infoScreens/picturesInfoScreen.json";
 import messagesInfoScreenDe from "./locales/de/infoScreens/messagesInfoScreen.json";
+import postReactionInfoScreenDe from "./locales/de/infoScreens/postReactionInfoScreen.json";
+import offFacebookInfoScreenDe from "./locales/de/infoScreens/offFacebookInfoScreen.json";
 import infographicsDe from "./locales/de/infographics.json";
 
 export default new I18n(determineLanguage(), {
@@ -66,6 +70,8 @@ export default new I18n(determineLanguage(), {
         dataStructureInfoScreen: dataStructureInfoScreenEn,
         picturesInfoScreen: picturesInfoScreenEn,
         messagesInfoScreen: messagesInfoScreenEn,
+        postReactionInfoScreen: postReactionInfoScreenEn,
+        offFacebookInfoScreen: offFacebookInfoScreenEn,
         infographics: infographicsEn,
     },
     de: {
@@ -89,6 +95,8 @@ export default new I18n(determineLanguage(), {
         dataStructureInfoScreen: dataStructureInfoScreenDe,
         picturesInfoScreen: picturesInfoScreenDe,
         messagesInfoScreen: messagesInfoScreenDe,
+        postReactionInfoScreen: postReactionInfoScreenDe,
+        offFacebookInfoScreen: offFacebookInfoScreenDe,
         infographics: infographicsDe,
     },
 });
