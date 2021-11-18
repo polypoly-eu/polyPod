@@ -184,7 +184,10 @@ async function cleanPackage(pkg) {
 }
 
 const commands = {
-    build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
+    build: (pkg) =>
+        npmRun("npm", "ci", "--no-update-notifier", "--no-fund").then(() =>
+            npmInstall(pkg.name).then(() => npmRun("build", pkg))
+        ),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
 };
