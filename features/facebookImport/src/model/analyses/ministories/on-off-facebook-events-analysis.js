@@ -14,13 +14,7 @@ import i18n from "../../../i18n.js";
 import {
     OnOffFacebookMiniStorySummary,
     OnOffFacebookMiniStoryDetails,
-    OffFacebookEventsMiniStoryDetails,
 } from "../../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
-
-const detailDisplayTypes = {
-    onOff: "on-off",
-    off: "off",
-};
 
 export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     get label() {
