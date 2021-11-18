@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_bar_close_button_desc">Schließen</string>
+    <string name="app_bar_search_button_desc">Suchen</string>
+    </resources>
