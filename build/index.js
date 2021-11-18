@@ -184,10 +184,7 @@ async function cleanPackage(pkg) {
 }
 
 const commands = {
-    build: (pkg) =>
-        npmRun("npm", "ci", "--no-update-notifier", "--no-fund").then(() =>
-            npmInstall(pkg.name).then(() => npmRun("build", pkg))
-        ),
+    build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
 };
@@ -264,10 +261,10 @@ async function main() {
     process.chdir(path.dirname(scriptPath));
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
+    await npm("ci", "--no-update-notifier", "--no-fund");
 
     if (command === "lint") {
         logDetail(`🧹 ...`);
-        await npm("ci", "--no-update-notifier", "--no-fund");
         await executeProcess("npx", ["eslint", ...eslintOptions]);
         logSuccess(command);
         return 0;
