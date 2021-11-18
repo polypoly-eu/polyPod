@@ -98,12 +98,28 @@ struct ContentView: View {
         return ViewState(
             AnyView(
                 Text("").onAppear {
-                    Authentication.shared.authenticate {
+                    authenticateRelentlessly {
                         state = featureListState()
                     }
                 }
             )
         )
+    }
+    
+    private func authenticateRelentlessly(
+        _ completeAction: @escaping () -> Void
+    ) {
+        // Apple doesn't want us to close the app programmatically, e.g. in case
+        // authentication fails. Since we don't have a dedicated screen for the
+        // locked state yet, we simply keep asking the user until they stop
+        // cancelling or leave the app.
+        Authentication.shared.authenticate { success in
+            if success {
+                completeAction()
+                return
+            }
+            authenticateRelentlessly(completeAction)
+        }
     }
     
     private func featureListState() -> ViewState {

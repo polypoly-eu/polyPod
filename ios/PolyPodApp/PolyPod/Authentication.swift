@@ -35,23 +35,23 @@ class Authentication {
         UserDefaults.standard.set(true, forKey: Authentication.disableCheckKey)
     }
     
-    func setUp(_ completeAction: @escaping () -> Void) {
-        authenticateLocally(reason: "auth_prompt_set_up") {
-            self.authenticated = true
+    func setUp(_ completeAction: @escaping (Bool) -> Void) {
+        authenticateLocally(reason: "auth_prompt_set_up") { success in
+            self.authenticated = success
             UserDefaults.standard.set(true, forKey: Authentication.setUpKey)
-            completeAction()
+            completeAction(success)
         }
     }
     
-    func authenticate(_ successAction: @escaping () -> Void) {
+    func authenticate(_ completeAction: @escaping (Bool) -> Void) {
         if isCheckDisabled() || !isSetUp() || authenticated {
-            successAction()
+            completeAction(true)
             return
         }
         
-        authenticateLocally(reason: "auth_prompt_unlock") {
-            self.authenticated = true
-            successAction()
+        authenticateLocally(reason: "auth_prompt_unlock") { success in
+            self.authenticated = success
+            completeAction(success)
         }
     }
     
@@ -67,7 +67,7 @@ class Authentication {
     
     private func authenticateLocally(
         reason: String,
-        _ successAction: @escaping () -> Void
+        _ completeAction: @escaping (Bool) -> Void
     ) {
         let context = LAContext()
         context.evaluatePolicy(
@@ -76,9 +76,8 @@ class Authentication {
         ) { (success, error) in
             if !success {
                 print("Authentication failed: \(String(describing: error))")
-                return
             }
-            successAction()
+            completeAction(success)
         }
     }
     
