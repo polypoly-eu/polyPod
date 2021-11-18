@@ -7,7 +7,7 @@ const PicturesInfoScreen = () => {
     const picturesInfoText = [
         <>
             <p>{i18n.t("picturesInfoScreen:text1")}</p>
-            <p>{i18n.t("picturesInfoScreen:text1")}</p>
+            <p>{i18n.t("picturesInfoScreen:text2")}</p>
         </>,
         <p>{i18n.t("picturesInfoScreen:text3")}</p>,
     ];

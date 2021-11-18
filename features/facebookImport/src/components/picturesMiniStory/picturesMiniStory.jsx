@@ -73,7 +73,7 @@ const PicturesMiniStory = () => {
                 <p>{i18n.t(`picturesMiniStory:${activePart}.title`)}</p>
             </div>
             <p>{i18n.t(`picturesMiniStory:${activePart}.text`)}</p>
-            <InfoButton route="/report/details/pictures-info" />
+            <InfoButton route="/report/pictures-info" />
         </div>
     );
 };
