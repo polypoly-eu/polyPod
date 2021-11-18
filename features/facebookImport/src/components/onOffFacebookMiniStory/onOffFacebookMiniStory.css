@@ -1,3 +1,7 @@
+.off-facebook-events-ministory-details {
+    position: relative;
+}
+
 .off-facebook-events-ministory-summary h2,
 .off-facebook-events-ministory-details h2 {
     font-size: 60px;
@@ -54,4 +58,9 @@
 
 .off-facebook-events-ministory-details .divide-y .source {
     flex: 0 0 auto;
+}
+
+.off-facebook-events-ministory-details .info-button {
+    right: -16px;
+    bottom: 8px;
 }

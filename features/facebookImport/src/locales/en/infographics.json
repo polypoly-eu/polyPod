@@ -21,5 +21,21 @@
     "messagesBarChart.text2": "Total value for this conversation",
     "messagesBarChart.bigbold1": "Representation of the number of messages exchanged",
     "messagesBarChart.bold2": "Name of group or person",
-    "messagesBarChart.highlighted": "Max: 725"
+    "messagesBarChart.highlighted": "Max: 725",
+    "onOffFacebookChart.bigbold1": "Off Facebook events",
+    "onOffFacebookChart.bigbold2": "On Facebook events",
+    "onOffFacebookChart.greylegend1": "Number of events",
+    "onOffFacebookChart.greylegend2": "Last 90 days",
+    "onOffFacebookChart.bold1": "Company Name",
+    "onOffFacebookChart.grey0": "0",
+    "onOffFacebookChart.grey10": "10",
+    "onOffFacebookChart.grey20": "20",
+    "onOffFacebookChart.grey30": "30",
+    "onOffFacebookChart.grey40": "40",
+    "onOffFacebookChart.grey50": "50",
+    "onOffFacebookChart.grey60": "60",
+    "onOffFacebookChart.grey70": "70",
+    "onOffFacebookChart.grey80": "80",
+    "onOffFacebookChart.grey90": "90",
+    "onOffFacebookChart.grey100": "100"
 }
