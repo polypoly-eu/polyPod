@@ -14,6 +14,8 @@ import sadIcon from "../../static/images/reactions-ministory/sad.svg";
 import angerIcon from "../../static/images/reactions-ministory/anger.svg";
 import ChartButtons from "../chartButtons/chartButtons.jsx";
 
+import "./postReactionTypesMiniStory.css";
+
 const reactionEmoji = {
     LIKE: likeIcon,
     LOVE: loveIcon,

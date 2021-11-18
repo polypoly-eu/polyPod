@@ -15,7 +15,7 @@ const InfoScreen = ({ child1, child2 }) => {
                 <img src="./images/line-title.svg" />
             </div>
             {child1}
-            <div className="info-title">
+            <div className="info-title about-title">
                 <img src="./images/line-title.svg" />
                 <h1>{i18n.t("baseInfoScreen:title2")}</h1>
                 <img src="./images/line-title.svg" />
