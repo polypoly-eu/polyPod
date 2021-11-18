@@ -4,3 +4,4 @@ basepath = "./locales"
     [[paths]]
         reference = "en/**"
         l10n = "{locale}/**"
+# trigger-change-01
