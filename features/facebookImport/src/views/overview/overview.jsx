@@ -8,7 +8,6 @@ import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
 import ScrollableXGradient from "../../components/scrollableXGradient/scrollableXGradient.jsx";
 
-
 import "./overview.css";
 
 const Overview = () => {
@@ -79,7 +78,7 @@ const Overview = () => {
             {Object.values(files).length ? (
                 <>
                     <div className="details">
-                        <ScrollableXGradient scrollableItem={files[0].name}/>
+                        <ScrollableXGradient scrollableItem={files[0].name} />
                         <p>
                             {i18n.t("overview:imported.time")}{" "}
                             {getFormattedTime(files[0].time)}
