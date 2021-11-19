@@ -261,10 +261,10 @@ async function main() {
     process.chdir(path.dirname(scriptPath));
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
+    await npm("ci", "--no-update-notifier", "--no-fund");
 
     if (command === "lint") {
         logDetail(`🧹 ...`);
-        await npm("ci", "--no-update-notifier", "--no-fund");
         await executeProcess("npx", ["eslint", ...eslintOptions]);
         logSuccess(command);
         return 0;
