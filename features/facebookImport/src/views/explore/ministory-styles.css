@@ -7,7 +7,7 @@
 }
 
 .analysis-card .highlighted-number {
-    font-size: clamp(1rem, 15vw, 3.75rem);
+    font-size: clamp(1rem, 14vw, 5rem);
     font-weight: 800;
     font-family: "Jost Medium";
     margin: 32px 0;
