@@ -8,6 +8,8 @@ import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./importExplanationExpandable.css";
 
+const escapedSlash = "%2F";
+
 const isSectionOpened = (section, importStatus, importSteps) => {
     return {
         request:
@@ -162,7 +164,13 @@ const ImportExplanationExpandable = ({
                     ) : selectedFileUrl ? (
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
-                            <p>{selectedFileUrl?.split("/").pop()}</p>
+                            <p>
+                                {selectedFileUrl
+                                    ?.split("/")
+                                    .pop()
+                                    .split(escapedSlash)
+                                    .pop()}
+                            </p>
                         </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
