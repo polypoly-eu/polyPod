@@ -1,6 +1,6 @@
 {
     "title": "Ihr Werbe-Wert",
-    "intro": "Da Facebook sein Geld mit dem Verkauf von Werbung verdient, hat es Ihnen <strong>{{number_interests}}</strong> sogenannte Werbeinteressen zugewiesen, wie z.B.",
-    "end.text": "Werbetreibende kaufen je nach Interessenlage Werbeplätze in Ihrer Timeline.",
+    "intro": "Da Facebook sein Geld mit dem Verkauf von Werbung verdient, hat es Ihnen <strong>{{number_interests}}</strong> sogenannte Werbeinteressen zugewiesen. Facebook nimmt z.B. an, dass Sie an Folgendem interessiert sind:",
+    "end.text": "Werbetreibende kaufen ahand solcher Interessenprofile Werbeplätze in Ihrer Timeline.",
     "details.text.1": "Facebook verknüpft Sie mit den folgenden <strong>{{number}}</strong> Werbeinteressen."
 }
