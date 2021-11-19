@@ -33,10 +33,10 @@
     <string name="button_update_notification_close">OK</string>
     <string name="button_acknowledge">OK</string>
     <string name="auth_title">Einloggen in polyPod</string>
-    <string name="auth_subtitle">Entweder Geräteberechtigung oder Biometrie verwenden</string>
+    <string name="auth_subtitle">Den Sperrbildschirm vom Gerät verwenden</string>
     <string name="auth_success">Authentifizierung erfolgreich</string>
     <string name="auth_enable_lock_message">Wir empfehlen dringend, einen Authentifizierungsmechanismus für erhöhte Sicherheit einzurichten</string>
-    <string name="auth_enable_lock_yes">Sperrbildschirm einrichten</string>
+    <string name="auth_enable_lock_yes">Sperrbildschirm verwenden</string>
     <string name="auth_enable_lock_no">Auslassen</string>
     <string name="auth_enable_lock_do_not_ask">Nicht mehr fragen</string>
     <string name="auth_enable_lock_title">Kein Sperrbildschirm?</string>
