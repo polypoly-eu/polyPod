@@ -44,7 +44,8 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
             : "saturate(0)";
 
     const totalAmountOfReactions = reactionData.reduce(
-        (prev, curr) => (prev.count || prev) + curr.count
+        (prev, curr) => (prev.count || prev) + curr.count,
+        0
     );
 
     const extendedReactionData = [
