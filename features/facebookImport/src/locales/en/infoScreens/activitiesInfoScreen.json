@@ -3,5 +3,5 @@
     "legend": "Representation of the number of entries with a timestamp",
     "text2": "This diagram is called a <strong>bar chart</strong>. The length of each bar is proportional to the values that it represents.",
     "text3": "Please note, that we are only processing parts of your Facebook data for this analysis so far. So the numbers on this screen show a tendency, but not the total number in your download.",
-    "text4": "The data with timestamps is not very consistent. In some cases, we do not have a timestamp where we would expect one. In another  case, we saw a larger number of timestamps for watching a single advertising video. It seems that Facebook creates a timestamp every few seconds to check how long you watched."
+    "text4": "The data with timestamps is not very consistent. In some cases, we do not have a timestamp where we would expect one. In another cases, we saw a larger number of timestamps for watching a single advertising video. It seems that Facebook created a timestamp every few seconds to check how long you watched."
 }
