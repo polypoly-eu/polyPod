@@ -37,7 +37,7 @@ export const OnOffFacebookMiniStorySummary = ({
                     __html: i18n.t("offFacebookEventsMiniStory:general"),
                 }}
             />
-            <h2>{companiesCount}</h2>
+            <p className="highlighted-number">{companiesCount}</p>
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("offFacebookEventsMiniStory:companies", {
@@ -47,7 +47,9 @@ export const OnOffFacebookMiniStorySummary = ({
             />
             {companiesWithAdsCount === 0 ? null : (
                 <>
-                    <h2>{companiesWithAdsCount}</h2>
+                    <p className="highlighted-number">
+                        {companiesWithAdsCount}
+                    </p>
                     <p
                         dangerouslySetInnerHTML={{
                             __html: i18n.t(
