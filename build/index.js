@@ -261,7 +261,6 @@ async function main() {
     process.chdir(path.dirname(scriptPath));
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
-    await npm("ci", "--no-update-notifier", "--no-fund");
 
     if (command === "lint") {
         logDetail(`🧹 ...`);
@@ -288,6 +287,7 @@ async function main() {
     }
 
     try {
+        await npm("ci", "--no-update-notifier", "--no-fund");
         const packageTree = createPackageTree(metaManifest);
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
