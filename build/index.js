@@ -262,6 +262,11 @@ async function main() {
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
+    if (command === "build" || command === "lint") {
+        logDetail(`👷👷‍♀️ ...`);
+        await npm("ci", "--no-update-notifier", "--no-fund");
+    }
+
     if (command === "lint") {
         logDetail(`🧹 ...`);
         await executeProcess("npx", ["eslint", ...eslintOptions]);
@@ -287,10 +292,6 @@ async function main() {
     }
 
     try {
-        if (!command) {
-            logDetail(`👷 ...`);
-            await npm("ci", "--no-update-notifier", "--no-fund");
-        }
         const packageTree = createPackageTree(metaManifest);
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
