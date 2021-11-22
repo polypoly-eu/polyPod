@@ -287,7 +287,9 @@ async function main() {
     }
 
     try {
-        await npm("ci", "--no-update-notifier", "--no-fund");
+        if (!command) {
+            await npm("ci", "--no-update-notifier", "--no-fund");
+        }
         const packageTree = createPackageTree(metaManifest);
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
