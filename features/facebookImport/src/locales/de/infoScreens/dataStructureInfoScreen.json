@@ -1,6 +1,6 @@
 {
-    "text1": "Dieses Diagram zeigt die Kategorien innerhalb Ihrer Facebook Daten, die wir derzeit analysieren nach der Anzahl gefundener Dateneinträge.",
+    "text1": "Dieses Diagram zeigt die Kategorien innerhalb Ihrer Facebook Daten, die wir derzeit analysieren nach der Anzahl der zugehörigen Dateneinträge.",
     "legend": "Darstellung der Anzahl von Einträgen per Kategorie",
-    "text2": "Dieses Diagram heisst <strong>Blasendiagramm</strong>. Jede Blase stellt einen Datentypen dar. Die Anzahl der Blasen zeigt wieviele Datentypen es gibt. Die Größe jeder Blase wird durch die Anzahl der Daten im Inneren bestimmt.",
+    "text2": "Dieses Diagram heisst <strong>Blasendiagramm</strong>. Jede Blase stellt eine Datenkategorie dar. Die Anzahl der Blasen zeigt wieviele Datenkategorien es gibt. Die Größe jeder Blase wird durch die Anzahl der Dateneinträge im Inneren einer Kategorie bestimmt.",
     "text3": "Bitte beachten Sie, dass wir derzeit erst Teil Ihrer Facebook Daten analysieren. Daher zeigen die Werte hier eine Tendenz, aber nicht alle Daten in Ihrem Datensatz."
 }
