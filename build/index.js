@@ -288,6 +288,7 @@ async function main() {
 
     try {
         if (!command) {
+            logDetail(`👷 ...`);
             await npm("ci", "--no-update-notifier", "--no-fund");
         }
         const packageTree = createPackageTree(metaManifest);
