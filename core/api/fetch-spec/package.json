@@ -33,7 +33,6 @@
     "chai-as-promised": "^7.1.1",
     "node-fetch": "^2.6.1",
     "rollup": "^2.37.0",
-    "ts-jest": "^27.0.5",
     "ts-node": "^9.1.1",
     "typedoc": "^0.20.36"
   },
