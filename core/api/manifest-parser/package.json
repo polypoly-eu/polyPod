@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "@rollup/plugin-sucrase": "^3.1.0",
-    "@types/jest": "^27.0.2",
     "@types/node": "^16.7.1",
     "rollup": "^2.56.3"
   },
