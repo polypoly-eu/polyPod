@@ -1,6 +1,7 @@
 import { createWarningStatus } from "../analyses/utils/analysis-status";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
+import DataImporter from "./data-importer";
 import {
     extractNameFromAdDescription,
     localeForCategoyName,
@@ -38,8 +39,9 @@ export const RECENTLY_VIEWED_DATA_KEY = "recently_viewed";
  *
  * From this we extract a model consisting in an account that has ads that have views.
  */
-export default class RecentlyViewedAdsImporter {
+export default class RecentlyViewedAdsImporter extends DataImporter {
     constructor() {
+        super();
         this._accountsByUrl = new Map();
     }
 
@@ -60,7 +62,7 @@ export default class RecentlyViewedAdsImporter {
             post.markAsAd();
             return post;
         }
-        const newAd = new RelatedPost({ url: adUrl });
+        const newAd = new RelatedPost(adUrl);
         newAd.markAsAd();
         relatedAccount.addRelatedPost(newAd);
         return newAd;

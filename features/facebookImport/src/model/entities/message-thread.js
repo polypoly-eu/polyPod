@@ -1,5 +1,8 @@
-export default class MessageThread {
+import Entity from "./entity";
+
+export default class MessageThread extends Entity {
     constructor() {
+        super();
         this._title = "";
         this._participants = [];
         this._messagesCount = 0;

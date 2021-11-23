@@ -1,8 +1,11 @@
-export default class RelatedAccount {
-    constructor({ url, urlId, rawId }) {
-        this._url = url;
-        this._urlId = urlId;
-        this._rawId = rawId;
+import Entity from "./entity";
+
+export default class RelatedAccount extends Entity {
+    constructor(accountData) {
+        super();
+        this._url = accountData?.url;
+        this._urlId = accountData?.urlId;
+        this._rawId = accountData?.rawId;
         this._relatedPosts = [];
     }
 

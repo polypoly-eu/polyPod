@@ -1,7 +1,9 @@
+import EntitiesGroup from "./entities-group.js";
 import MessageThread from "./message-thread.js";
 
-export default class MessageThreadsGroup {
+export default class MessageThreadsGroup extends EntitiesGroup {
     constructor() {
+        super();
         this._messagesThreads = [];
     }
 

@@ -1,4 +1,5 @@
 import { createWarningStatus } from "../analyses/utils/analysis-status.js";
+import DataImporter from "./data-importer.js";
 import { readJSONDataArray } from "./utils/importer-util.js";
 
 export const LANGUAGE_AND_LOCALE_FILE_PATH =
@@ -36,7 +37,7 @@ export const LANGUAGE_AND_LOCALE_DATA_KEY = "language_and_locale_v2";
  *
  * @class
  */
-export default class LanguageAndLocaleImporter {
+export default class LanguageAndLocaleImporter extends DataImporter {
     async readLanguageData(zipFile) {
         return await readJSONDataArray(
             LANGUAGE_AND_LOCALE_FILE_PATH,

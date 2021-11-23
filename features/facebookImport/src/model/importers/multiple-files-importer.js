@@ -2,6 +2,7 @@ import {
     createErrorStatus,
     createSuccessStatus,
 } from "../analyses/utils/analysis-status";
+import DataImporter from "./data-importer";
 import { MissingFilesException } from "./utils/failed-import-exception";
 import {
     readFullPathJSONFile,
@@ -10,7 +11,7 @@ import {
     sliceIntoChunks,
 } from "./utils/importer-util";
 
-export default class MultipleFilesImporter {
+export default class MultipleFilesImporter extends DataImporter {
     // eslint-disable-next-line no-unused-vars
     _isTargetPostFile(entryName) {
         return false;

@@ -1,5 +1,8 @@
-export default class RelatedAccountsGroup {
+import EntitiesGroup from "./entities-group";
+
+export default class RelatedAccountsGroup extends EntitiesGroup {
     constructor() {
+        super();
         this._relatedAccounts = [];
     }
 

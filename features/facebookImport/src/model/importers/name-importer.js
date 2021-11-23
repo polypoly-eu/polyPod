@@ -1,10 +1,11 @@
+import DataImporter from "./data-importer.js";
 import { readJSONDataObject } from "./utils/importer-util.js";
 
 export const PROFILE_INFORMATION_FILE_PATH =
     "profile_information/profile_information.json";
 export const PROFILE_INFORMATION_DATA_KEY = "profile_v2";
 
-export default class NameImporter {
+export default class NameImporter extends DataImporter {
     async _readLanguageData(zipFile) {
         return readJSONDataObject(
             PROFILE_INFORMATION_FILE_PATH,

@@ -1,7 +1,9 @@
 import { findLatestTimestamp } from "../importers/utils/timestamps";
+import Entity from "./entity";
 
-export default class RelatedPost {
-    constructor({ url }) {
+export default class RelatedPost extends Entity {
+    constructor(url) {
+        super();
         this._url = url;
         this._isAd = false;
         this._viewedTimestamps = [];
