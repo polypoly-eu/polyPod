@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
+import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.CompletableDeferred
+import org.msgpack.value.Value
+import org.msgpack.value.ValueFactory
 
 private const val PICK_FILE_REQUEST_CODE = 1
 
@@ -219,7 +222,7 @@ open class FeatureFragment : Fragment() {
         view.findViewById<TextView>(R.id.feature_title).text = title
     }
 
-    private suspend fun pickFile(type: String?): Uri? {
+    private suspend fun pickFile(type: String?): MutableMap<Value, Value>? {
         if (pickFileResult?.isActive == true)
             return null
         pickFileResult = CompletableDeferred()
@@ -236,7 +239,28 @@ open class FeatureFragment : Fragment() {
             }
         }
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
-        return pickFileResult?.await()
+        val resultEncoded = mutableMapOf<Value, Value>()
+        (pickFileResult?.await())?.let {
+            it.let { returnUri ->
+                resultEncoded[ValueFactory.newString("url")] =
+                    ValueFactory.newString(returnUri.toString())
+                context?.contentResolver
+                    ?.query(returnUri, null, null, null, null)
+            }?.use { cursor ->
+                if (cursor != null && cursor.moveToFirst()) {
+                    val nameIndex =
+                        cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                    resultEncoded[ValueFactory.newString("name")] =
+                        ValueFactory.newString(cursor.getString(nameIndex))
+                    resultEncoded[ValueFactory.newString("size")] =
+                        ValueFactory.newString(
+                            cursor.getLong(sizeIndex).toString()
+                        )
+                }
+            }
+        }
+        return resultEncoded
     }
 
     override fun onActivityResult(

@@ -209,7 +209,7 @@ open class PodApi(
         }
         logger.debug("dispatch() -> polyNav.pickFile")
         polyNav.pickFile(type)?.let {
-            return ValueFactory.newString(it.toString())
+            return ValueFactory.newMap(it)
         }
         return ValueFactory.newNil()
     }
