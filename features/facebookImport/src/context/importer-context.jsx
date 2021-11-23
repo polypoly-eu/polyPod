@@ -156,7 +156,7 @@ export const ImporterProvider = ({ children }) => {
         const { polyOut } = pod;
         runWithLoadingScreen(async function () {
             try {
-                await polyOut.importArchive(selectedFileUrl);
+                await polyOut.importArchive(selectedFile.url);
                 setSelectedFile(null);
             } catch (error) {
                 setGlobalError(new FileImportError(error));
