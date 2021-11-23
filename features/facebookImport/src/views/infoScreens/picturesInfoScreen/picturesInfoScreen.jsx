@@ -12,9 +12,7 @@ const PicturesInfoScreen = () => {
         <p>{i18n.t("picturesInfoScreen:text3")}</p>,
     ];
 
-    return (
-        <InfoScreen child1={picturesInfoText[0]} child2={picturesInfoText[1]} />
-    );
+    return <InfoScreen infoChildren={picturesInfoText} />;
 };
 
 export default PicturesInfoScreen;

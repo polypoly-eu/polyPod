@@ -21,12 +21,7 @@ const OffFacebookInfoScreen = () => {
         </>,
     ];
 
-    return (
-        <InfoScreen
-            child1={offFacebookInfoText[0]}
-            child2={offFacebookInfoText[1]}
-        />
-    );
+    return <InfoScreen infoChildren={offFacebookInfoText} />;
 };
 
 export default OffFacebookInfoScreen;

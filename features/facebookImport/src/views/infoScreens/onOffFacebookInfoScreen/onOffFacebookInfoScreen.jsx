@@ -43,12 +43,7 @@ const OnOffFacebookInfoScreen = () => {
         </>,
     ];
 
-    return (
-        <InfoScreen
-            child1={onOffFacebookInfoText[0]}
-            child2={onOffFacebookInfoText[1]}
-        />
-    );
+    return <InfoScreen infoChildren={onOffFacebookInfoText} />;
 };
 
 export default OnOffFacebookInfoScreen;

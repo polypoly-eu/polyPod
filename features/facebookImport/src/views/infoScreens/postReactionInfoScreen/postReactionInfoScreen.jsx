@@ -20,10 +20,7 @@ const PostReactionInfoScreen = () => {
 
     return (
         <div className="reaction-types-info">
-            <InfoScreen
-                child1={postReactionInfoText[0]}
-                child2={postReactionInfoText[1]}
-            />
+            <InfoScreen infoChildren={postReactionInfoText} />
         </div>
     );
 };
