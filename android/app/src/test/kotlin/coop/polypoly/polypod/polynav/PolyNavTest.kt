@@ -30,7 +30,8 @@ class PolyNavTest {
 
     @Ignore
     @Test
-    fun `pickFile returns external file object with url selected by the user`() = runBlocking {
+    fun `pickFile returns external file object with url selected by the user`() = 
+        runBlocking {
         val fileData = Uri.parse("*")
         polyNav.setNavObserver(PolyNavObserver(onPickFile = { fileData }))
         val result = polyNav.pickFile(mimeType)
