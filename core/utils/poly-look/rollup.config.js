@@ -23,15 +23,6 @@ export default {
       production: true,
     }),
     resolve(),
-    terser({
-      module: true,
-      warnings: true,
-      mangle: {
-        properties: {
-          regex: /^__/,
-        },
-      },
-    }),
   ],
   external: ["react", "react-dom"],
   onwarn: (warning) => {
