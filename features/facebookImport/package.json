@@ -42,15 +42,19 @@
   },
   "type": "module",
   "jest": {
-    "verbose": false,
-    "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "/node_modules/(?!(.*))"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/test/config/env-setup.js"
-    ]
+      "verbose": false,
+      "transform": {
+          "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest"
+      },
+      "moduleNameMapper": {
+          "\\.(css|scss)$": "identity-obj-proxy",
+          "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy"
+      },
+      "transformIgnorePatterns": [
+          "/node_modules/(?!(.*))"
+      ],
+      "setupFilesAfterEnv": [
+          "<rootDir>/test/config/env-setup.js"
+      ]
   }
 }
