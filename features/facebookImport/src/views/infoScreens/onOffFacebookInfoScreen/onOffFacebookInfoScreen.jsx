@@ -24,17 +24,6 @@ const OnOffFacebookInfoScreen = () => {
                     greylegend2: i18n.t(
                         "infographics:onOffFacebookChart.greylegend2"
                     ),
-                    grey0: i18n.t("infographics:onOffFacebookChart.grey0"),
-                    grey10: i18n.t("infographics:onOffFacebookChart.grey10"),
-                    grey20: i18n.t("infographics:onOffFacebookChart.grey20"),
-                    grey30: i18n.t("infographics:onOffFacebookChart.grey30"),
-                    grey40: i18n.t("infographics:onOffFacebookChart.grey40"),
-                    grey50: i18n.t("infographics:onOffFacebookChart.grey50"),
-                    grey60: i18n.t("infographics:onOffFacebookChart.grey60"),
-                    grey70: i18n.t("infographics:onOffFacebookChart.grey70"),
-                    grey80: i18n.t("infographics:onOffFacebookChart.grey80"),
-                    grey90: i18n.t("infographics:onOffFacebookChart.grey90"),
-                    grey100: i18n.t("infographics:onOffFacebookChart.grey100"),
                 }}
             />
             <p
