@@ -29,14 +29,17 @@ export const MessagesMiniStorySummary = ({
 };
 
 export const MessagesMiniStoryDetails = ({
-    totalUsernamesCount,
+    messagesCount,
     messagesThreadsData,
+    totalUsernamesCount,
 }) => {
     return (
         <>
             <p>
                 {i18n.t("messagesMiniStory:number.chats", {
-                    number_chats: totalUsernamesCount,
+                    messages: messagesCount,
+                    threads: messagesThreadsData.length,
+                    people: totalUsernamesCount,
                 })}
             </p>
             <p> {i18n.t("messagesMiniStory:chart.title")}</p>
