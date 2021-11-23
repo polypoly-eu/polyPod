@@ -11,6 +11,7 @@ const BarChart = ({
     onClickBar = () => {},
     footerContent,
     screenPadding = 0,
+    groupMessage = false,
 }) => {
     if (names) data.map((data) => (data.title = data[names]));
     const getHighestCount = () => {
@@ -66,6 +67,14 @@ const BarChart = ({
             {data.map(({ title, count, extraData }, index) => (
                 <div key={index} className="bar-box" onClick={onClickBar}>
                     <div className="above-bar">
+                        {groupMessage && title.includes("and") ? (
+                            <img
+                                className="group-icon"
+                                src="./images/users.svg"
+                            />
+                        ) : (
+                            <></>
+                        )}
                         <p className="name">{title}</p>
                     </div>
                     <div

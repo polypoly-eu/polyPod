@@ -43,6 +43,7 @@ export const MessagesMiniStoryDetails = ({
             <BarChart
                 data={messagesThreadsData}
                 screenPadding={48}
+                groupMessage={true}
                 footerContent={({ extraData }) => (
                     <>
                         <div className="bar-extra-info">
