@@ -21,13 +21,11 @@ import RecentlyViewedAdsImporter from "./importers/recently-viewed-ads-importer.
 import CommentsImporter from "./importers/comments-importer.js";
 import PostReactionsImporter from "./importers/post-reactions-importer.js";
 import { Telemetry } from "./analyses/utils/performance-telemetry.js";
-import {
-    createErrorStatus,
-    createSuccessStatus,
-} from "./analyses/utils/analysis-status.js";
+import { createErrorStatus } from "./analyses/utils/analysis-status.js";
 import PostsImporter from "./importers/posts-importer.js";
+import { ExecutionResult } from "./importers/utils/execution-result.js";
 
-const dataImporters = [
+export const dataImporters = [
     AdInterestsImporter,
     ConnectedAdvertisersImporter,
     OffFacebookEventsImporter,
@@ -52,23 +50,14 @@ const dataImporters = [
 
 export const NUMBER_OF_IMPORTERS = dataImporters.length;
 
-class ImporterExecutionResult {
+export class ImporterExecutionResult extends ExecutionResult {
     constructor(importer, status, executionTime) {
+        super(status, executionTime);
         this._importer = importer;
-        this._status = status || createSuccessStatus();
-        this._executionTime = executionTime;
     }
 
     get importer() {
         return this._importer;
-    }
-
-    get status() {
-        return this._status;
-    }
-
-    get executionTime() {
-        return this._executionTime;
     }
 
     _extractDataFromStatus(status) {

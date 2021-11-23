@@ -46,6 +46,7 @@ import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-face
 import PostReactionsTypesAnalysis from "./analyses/ministories/post-reactions-types-analysis.js";
 import { Telemetry } from "./analyses/utils/performance-telemetry.js";
 import MinistoriesStatusAnalysis from "./analyses/report/ministories-status-analysis.js";
+import { ExecutionResult } from "./importers/utils/execution-result.js";
 
 const subAnalyses = [
     DataStructureBubblesAnalysis,
@@ -179,23 +180,14 @@ class UnrecognizedData {
     }
 }
 
-class AnalysisExecutionResult {
+export class AnalysisExecutionResult extends ExecutionResult {
     constructor(analysis, status, executionTime) {
+        super(status, executionTime);
         this._analysis = analysis;
-        this._status = status || createSuccessStatus();
-        this._executionTime = executionTime;
     }
 
     get analysis() {
         return this._analysis;
-    }
-
-    get status() {
-        return this._status;
-    }
-
-    get executionTime() {
-        return this._executionTime;
     }
 
     get reportJsonData() {
