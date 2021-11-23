@@ -139,7 +139,7 @@ export interface PolyNav {
      * Ask the user to pick a file
      * @param type the type of file the user is asked to select, as a valid MIME type string. If no type is passed, the user can chose any type of file.
      * @throws if an unsupported MIME type was passed as the type argument.
-     * @return a string representation of a URL or path to the selected file, or `null` if the user cancelled.
+     * @return an ExternalFile Object or `null` if the user cancelled.
      */
     pickFile(type?: string): Promise<ExternalFile | null>;
 }
