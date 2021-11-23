@@ -33,7 +33,6 @@
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/benchmark": "^2.1.0",
-    "@types/jest": "^27.0.2",
     "@types/n3": "^1.4.4",
     "benchmark": "^2.1.4",
     "fast-check": "^2.11.0",
