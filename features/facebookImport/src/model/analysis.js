@@ -1,8 +1,5 @@
 import { ZipFile } from "../model/storage.js";
-import {
-    createErrorStatus,
-    createSuccessStatus,
-} from "./analyses/utils/analysis-status.js";
+import { createErrorStatus } from "./analyses/utils/analysis-status.js";
 
 import DataStructureBubblesAnalysis from "./analyses/ministories/data-structure-bubbles-analysis.js";
 import DataGroupsAnalysis from "./analyses/ministories/data-groups-analysis.js";

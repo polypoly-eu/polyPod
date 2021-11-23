@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import Storage from "../model/storage.js";
+import Storage, { ExportDataCache } from "../model/storage.js";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
@@ -137,6 +137,8 @@ export const ImporterProvider = ({ children }) => {
 
     const handleRemoveFile = (fileID) => {
         setFacebookAccount(null);
+        const exportCache = new ExportDataCache(pod, fileID);
+        exportCache.clearData();
         return storage.removeFile(fileID);
     };
 
@@ -234,11 +236,22 @@ export const ImporterProvider = ({ children }) => {
     //on file change
     //when files changed run the importer first and create an account model first.
     //after there is an account the analyses are triggered.
-    useEffect(() => {
-        if (files?.[0])
-            importData(files[0]).then((newFacebookAccount) =>
-                setFacebookAccount(newFacebookAccount)
-            );
+    useEffect(async () => {
+        if (files?.[0]) {
+            const currentFileData = files?.[0];
+            const exportCache = new ExportDataCache(pod, currentFileData.id);
+
+            const loadedFacebookAccount = await exportCache.loadData();
+            if (loadedFacebookAccount) {
+                setFacebookAccount(loadedFacebookAccount);
+                return;
+            }
+
+            importData(files[0]).then((newFacebookAccount) => {
+                setFacebookAccount(newFacebookAccount);
+                exportCache.writeData(newFacebookAccount);
+            });
+        }
     }, [files]);
 
     // On account changed
