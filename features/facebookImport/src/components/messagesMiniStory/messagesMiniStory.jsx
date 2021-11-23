@@ -5,6 +5,8 @@ import i18n from "../../i18n";
 import BarChart from "../dataViz/barChart.jsx";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
+import "./messagesMinistory.css";
+
 export const MessagesMiniStorySummary = ({
     messagesCount,
     messagesThreadsData,
@@ -60,6 +62,7 @@ export const MessagesMiniStoryDetails = ({
                     </>
                 )}
             />
+            <div className="messages-gradient"></div>
             <InfoButton route="/report/details/messages-info" />
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
