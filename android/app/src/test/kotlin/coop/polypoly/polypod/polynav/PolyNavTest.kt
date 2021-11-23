@@ -12,6 +12,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.msgpack.value.Value
+import org.msgpack.value.ValueFactory
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 
@@ -32,10 +34,16 @@ class PolyNavTest {
     @Test
     fun `pickFile returns external file object with url selected by the user`
     () = runBlocking {
-        val fileData = Uri.parse("*")
-        polyNav.setNavObserver(PolyNavObserver(onPickFile = { fileData }))
+        val testMap = mutableMapOf<Value, Value>()
+        testMap[ValueFactory.newString("url")] =
+            ValueFactory.newString(Uri.parse("*").toString())
+        testMap[ValueFactory.newString("name")] =
+            ValueFactory.newString("testFile.zip")
+        testMap[ValueFactory.newString("size")] =
+            ValueFactory.newInteger(10020319)
+        polyNav.setNavObserver(PolyNavObserver(onPickFile = { testMap }))
         val result = polyNav.pickFile(mimeType)
-        assertThat(result["url"]).isEqualTo(fileData)
+        assertThat(result).isEqualTo(ValueFactory.newMap(testMap))
     }
 
     @Test
