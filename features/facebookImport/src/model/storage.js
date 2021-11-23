@@ -45,12 +45,8 @@ export class ExportDataCache {
 
     _createAccessQuery(dataFactory) {
         return {
-            subject: dataFactory.namedNode(
-                `${namespace}facebookImporter/importerCache`
-            ),
-            predicate: dataFactory.namedNode(
-                `${namespace}facebookImporter/cachedData`
-            ),
+            subject: dataFactory.namedNode(`${this._fileId}/cache`),
+            predicate: dataFactory.namedNode(`${namespace}importerCache`),
         };
     }
 
@@ -60,8 +56,8 @@ export class ExportDataCache {
 
     _createDataQuad(dataFactory, rawData) {
         return dataFactory.quad(
-            dataFactory.namedNode(`${namespace}facebookImporter/importerCache`),
-            dataFactory.namedNode(`${namespace}facebookImporter/cachedData`),
+            dataFactory.namedNode(`${this._fileId}/cache`),
+            dataFactory.namedNode(`${namespace}importerCache`),
             dataFactory.literal(rawData)
         );
     }
