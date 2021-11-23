@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import Storage, { ExportDataCache } from "../model/storage.js";
+import Storage from "../model/storage.js";
+import ExportDataCache from "../model/caching.js";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";

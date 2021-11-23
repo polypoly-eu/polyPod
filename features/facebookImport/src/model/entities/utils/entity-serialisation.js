@@ -1,4 +1,5 @@
-import { dataImporters, ImporterExecutionResult } from "../../importer";
+import { dataImporters } from "../../importer";
+import ImporterExecutionResult from "../../importers/utils/importer-execution-result";
 import FacebookAccount from "../facebook-account";
 import MessageThread from "../message-thread";
 import MessageThreadsGroup from "../message-threads-group";

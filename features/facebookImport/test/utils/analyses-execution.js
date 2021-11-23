@@ -7,7 +7,7 @@ export async function runAnalysisForExport(
     zipFile,
     pod = new MockerPod()
 ) {
-    const facebookAccount = await importZip(zipFile);
+    const facebookAccount = await importZip(zipFile, pod);
     const enrichedData = { ...zipFile.enrichedData(), facebookAccount, pod };
     const analysisResult = await runAnalysis(analysisClass, enrichedData);
     return { analysisResult, facebookAccount };
@@ -22,12 +22,12 @@ export async function runAnalysisForAccount(
     return runAnalysis(analysisClass, enrichedData);
 }
 
-export async function runAnalysesForZip(zipFile) {
-    const facebookAccount = await importZip(zipFile);
+export async function runAnalysesForZip(zipFile, pod = new MockerPod()) {
+    const facebookAccount = await importZip(zipFile, pod);
     return await analyzeZip(
         zipFile.enrichedFileData(),
         zipFile,
         facebookAccount,
-        new MockerPod()
+        pod
     );
 }

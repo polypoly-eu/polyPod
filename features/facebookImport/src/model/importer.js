@@ -23,7 +23,7 @@ import PostReactionsImporter from "./importers/post-reactions-importer.js";
 import { Telemetry } from "./analyses/utils/performance-telemetry.js";
 import { createErrorStatus } from "./analyses/utils/analysis-status.js";
 import PostsImporter from "./importers/posts-importer.js";
-import { ExecutionResult } from "./importers/utils/execution-result.js";
+import ImporterExecutionResult from "./importers/utils/importer-execution-result.js";
 
 export const dataImporters = [
     AdInterestsImporter,
@@ -49,35 +49,6 @@ export const dataImporters = [
 ];
 
 export const NUMBER_OF_IMPORTERS = dataImporters.length;
-
-export class ImporterExecutionResult extends ExecutionResult {
-    constructor(importer, status, executionTime) {
-        super(status, executionTime);
-        this._importer = importer;
-    }
-
-    get importer() {
-        return this._importer;
-    }
-
-    _extractDataFromStatus(status) {
-        return {
-            name: status.name,
-            message: status.message,
-        };
-    }
-
-    get reportJsonData() {
-        return {
-            formatVersion: "v2",
-            importerName: this.importer.constructor.name,
-            executionTime: this.executionTime.toFixed(0),
-            status: Array.isArray(this.status)
-                ? this.status.map((each) => this._extractDataFromStatus(each))
-                : this._extractDataFromStatus(this.status),
-        };
-    }
-}
 
 export async function runImporter(
     importerClass,
