@@ -41,7 +41,6 @@
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",
     "@types/connect": "^3.4.34",
-    "@types/jest": "^27.0.3",
     "@types/mocha": "^8.2.0",
     "@types/node-fetch": "^2.5.8",
     "@types/rdfjs__dataset": "^1.0.4",
