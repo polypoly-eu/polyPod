@@ -132,6 +132,9 @@ export async function importZip(zipFile, pod) {
 
     facebookAccount.importingResults = importingResults;
 
+    const info = await pod.info;
+    facebookAccount.basePolyPodVersion = await info.getVersion();
+
     return facebookAccount;
 }
 

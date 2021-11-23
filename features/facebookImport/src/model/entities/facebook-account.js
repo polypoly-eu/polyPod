@@ -1,8 +1,11 @@
+import Entity from "./entity.js";
 import MessageThreadsGroup from "./message-threads-group.js";
 import RelatedAccountsGroup from "./related-accounts-group.js";
 
-class FacebookAccount {
+class FacebookAccount extends Entity {
     constructor() {
+        super();
+        this._basePolyPodVersion = null;
         this._importingResults = [];
         this._importedFileNames = [];
 
@@ -108,6 +111,14 @@ class FacebookAccount {
     }
 
     // Basic accessors
+
+    get basePolyPodVersion() {
+        return this._basePolyPodVersion;
+    }
+
+    set basePolyPodVersion(basePolyPodVersion) {
+        this._basePolyPodVersion = basePolyPodVersion;
+    }
 
     get name() {
         return this._name;
