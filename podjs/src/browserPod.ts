@@ -402,6 +402,7 @@ class BrowserPolyNav implements PolyNav {
                     resolve({
                         name: selectedFile.name,
                         url: dataUrl,
+                        size: selectedFile.size,
                     });
                 };
                 reader.readAsDataURL(selectedFile);
