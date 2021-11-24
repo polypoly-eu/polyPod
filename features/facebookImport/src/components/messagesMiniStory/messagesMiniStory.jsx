@@ -5,7 +5,7 @@ import i18n from "../../i18n";
 import BarChart from "../dataViz/barChart.jsx";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
-import "./messagesThreadsMiniStory.css";
+import "./messagesMiniStory.css";
 
 export const MessagesMiniStorySummary = ({
     messagesCount,
