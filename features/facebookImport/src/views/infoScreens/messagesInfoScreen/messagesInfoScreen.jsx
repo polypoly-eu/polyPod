@@ -29,9 +29,7 @@ const MessagesScreen = () => {
         <p>{i18n.t("messagesInfoScreen:text3")}</p>,
     ];
 
-    return (
-        <InfoScreen child1={messagesInfoText[0]} child2={messagesInfoText[1]} />
-    );
+    return <InfoScreen infoChildren={messagesInfoText} />;
 };
 
 export default MessagesScreen;

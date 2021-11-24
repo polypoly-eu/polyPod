@@ -55,3 +55,12 @@
 .off-facebook-events-ministory-details .divide-y .source {
     flex: 0 0 auto;
 }
+
+.off-facebook-info-button, .on-off-facebook-info-button {
+    position: relative;
+}
+
+.off-facebook-info-button .info-button, .on-off-facebook-info-button .info-button {
+    right: -16px;
+    bottom: -24px;
+}

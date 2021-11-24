@@ -1,5 +1,10 @@
 .pictures-mini-story {
     margin-bottom: 4px;
+    position: relative;
+}
+
+.pictures-mini-story .svg-container {
+    margin-bottom: 32px;
 }
 
 .pictures-mini-story .part-heading {
@@ -28,4 +33,9 @@
 
 .pictures-mini-story .part {
     -webkit-tap-highlight-color: transparent;
+}
+
+.pictures-mini-story .info-button {
+    bottom: 128px;
+    right: -16px;
 }
