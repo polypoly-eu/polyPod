@@ -33,8 +33,9 @@
 .detail-view .intro {
     margin-bottom: 28px;
 }
-.detail-view ol {
+.detail-view ul {
     margin: 0px;
+    padding-bottom: 60px;
 }
 
 .detail-view li {
