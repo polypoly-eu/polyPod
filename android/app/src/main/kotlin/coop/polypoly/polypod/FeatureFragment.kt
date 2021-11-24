@@ -76,6 +76,12 @@ private enum class ActionButton(val action: Action, val buttonId: Int) {
     SEARCH(Action.SEARCH, R.id.search_button)
 }
 
+open class ExternalFile(url: String, name: String, size: Long) {
+    val url: String = url
+    val name: String = name
+    val size: Long = size
+}
+
 /**
  * A [Fragment] that is responsible for handling a single Feature
  */
@@ -222,7 +228,7 @@ open class FeatureFragment : Fragment() {
         view.findViewById<TextView>(R.id.feature_title).text = title
     }
 
-    private suspend fun pickFile(type: String?): MutableMap<Value, Value>? {
+    private suspend fun pickFile(type: String?): ExternalFile? {
         if (pickFileResult?.isActive == true)
             return null
         pickFileResult = CompletableDeferred()
@@ -239,11 +245,12 @@ open class FeatureFragment : Fragment() {
             }
         }
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
-        val resultEncoded = mutableMapOf<Value, Value>()
+        var url: String = "";
+        var name: String = "";
+        var size: Long = 0;
         (pickFileResult?.await())?.let {
             it.let { returnUri ->
-                resultEncoded[ValueFactory.newString("url")] =
-                    ValueFactory.newString(returnUri.toString())
+                url = returnUri.toString()
                 context?.contentResolver
                     ?.query(returnUri, null, null, null, null)
             }?.use { cursor ->
@@ -251,16 +258,12 @@ open class FeatureFragment : Fragment() {
                     val nameIndex =
                         cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                     val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
-                    resultEncoded[ValueFactory.newString("name")] =
-                        ValueFactory.newString(cursor.getString(nameIndex))
-                    resultEncoded[ValueFactory.newString("size")] =
-                        ValueFactory.newString(
-                            cursor.getLong(sizeIndex).toString()
-                        )
+                    name= cursor.getString(nameIndex)
+                    size= cursor.getLong(sizeIndex)
                 }
             }
         }
-        return resultEncoded
+        return ExternalFile(url = url, name = name, size = size)
     }
 
     override fun onActivityResult(
