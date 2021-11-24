@@ -115,6 +115,7 @@ button:focus {
 }
 
 .source {
+    margin-top: 36px;
     color: var(--color-gray-400);
     font-size: 12px;
 }

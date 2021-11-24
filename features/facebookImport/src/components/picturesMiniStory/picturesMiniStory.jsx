@@ -74,6 +74,7 @@ const PicturesMiniStory = () => {
             </div>
             <p>{i18n.t(`picturesMiniStory:${activePart}.text`)}</p>
             <InfoButton route="/report/pictures-info" />
+            <p className="source">{i18n.t("common:source.trustful")}</p>
         </div>
     );
 };

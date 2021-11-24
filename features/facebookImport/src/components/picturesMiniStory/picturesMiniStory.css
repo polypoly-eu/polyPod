@@ -36,6 +36,10 @@
 }
 
 .pictures-mini-story .info-button {
-    bottom: 144px;
+    bottom: 200px;
     right: -16px;
+}
+
+.pictures-mini-story .source {
+    margin: 32px 0 0 0;
 }

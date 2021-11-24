@@ -52,6 +52,9 @@ export const ActivitiesMiniStorySummary = ({ totalEvents }) => {
             {i18n.t("activitiesMiniStory:summary", {
                 number_activities: totalEvents.total,
             })}
+            <p className="source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p>
         </div>
     );
 };
