@@ -1,7 +1,24 @@
 import UIKit
+import MessagePack
+
+struct ExternalFile {
+    let url: String
+    let name: String
+    let size: Int64
+    
+    public var messagePackObject: MessagePackValue {
+        var messagePackMap: [MessagePackValue: MessagePackValue] = [:]
+        
+        messagePackMap["url"] = .string(url)
+        messagePackMap["name"] = .string(name)
+        messagePackMap["size"] = .int(size)
+
+        return MessagePackValue.map(messagePackMap)
+    }
+}
 
 class FilePicker: NSObject, UIDocumentPickerDelegate {
-    private var currentCompletion: ((URL?) -> Void)?
+    private var currentCompletion: ((ExternalFile?) -> Void)?
     
     func mimeToUti(_ mime: String?) -> String {
         guard let mime = mime else { return "public.item" }
@@ -11,7 +28,21 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         return mimeToUti(nil)
     }
     
-    func pick(type: String?, completion: @escaping (URL?) -> Void) {
+    func loadExternalFileData(url: URL) -> ExternalFile {
+        var fileSize: Int64 = 0
+        do {
+            let fileAttribute: [FileAttributeKey : Any] =
+                try FileManager.default.attributesOfItem(atPath: url.path)
+            if let fileNumberSize: NSNumber = fileAttribute[FileAttributeKey.size] as? NSNumber {
+                fileSize = Int64(truncating: fileNumberSize)
+                }
+        } catch {
+            print(error.localizedDescription)
+        }
+        return ExternalFile(url: url.absoluteString, name: url.lastPathComponent, size: fileSize)
+        }
+    
+    func pick(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         if currentCompletion != nil {
             completion(nil)
             return
@@ -53,17 +84,17 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         _ controller: UIDocumentPickerViewController,
         didPickDocumentsAt urls: [URL]
     ) {
-        complete(url: urls.first!)
+        complete(externalFile: loadExternalFileData(url: urls.first!))
     }
     
     func documentPickerWasCancelled(
         _ controller: UIDocumentPickerViewController
     ) {
-        complete(url: nil)
+        complete(externalFile: nil)
     }
     
-    private func complete(url: URL?) {
-        currentCompletion?(url)
+    private func complete(externalFile: ExternalFile?) {
+        currentCompletion?(externalFile)
         currentCompletion = nil
     }
 }
