@@ -56,7 +56,7 @@ const ImportExplanationExpandable = ({
         setStartRequest(true);
     };
 
-    const handleDownloadData = () => {
+    const handleDownloadDataLinkClick = () => {
         onUpdateImportStatus(importSteps.import);
         window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
         setStartRequest(true);
@@ -135,7 +135,7 @@ const ImportExplanationExpandable = ({
                 <p>{i18n.t("import:download.3")}</p>
                 <button
                     className="btn-highlighted btn-1"
-                    onClick={() => handleDownloadData()}
+                    onClick={() => handleDownloadDataLinkClick()}
                 >
                     {i18n.t("import:download.button.1")}
                 </button>

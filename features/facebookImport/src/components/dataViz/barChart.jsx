@@ -67,7 +67,7 @@ const BarChart = ({
             {data.map(({ title, count, extraData }, index) => (
                 <div key={index} className="bar-box" onClick={onClickBar}>
                     <div className="above-bar">
-                        {groupMessage && title.includes("and") ? (
+                        {groupMessage && title.includes(" and ") ? (
                             <img
                                 className="group-icon"
                                 src="./images/users.svg"
