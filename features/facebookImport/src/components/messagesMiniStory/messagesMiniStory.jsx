@@ -67,7 +67,9 @@ export const MessagesMiniStoryDetails = ({
                 )}
             />
             <div className="messages-gradient"></div>
-            <InfoButton route="/report/details/messages-info" />
+            <div className="messages-info-container">
+                <InfoButton route="/report/details/messages-info" />
+            </div>
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>

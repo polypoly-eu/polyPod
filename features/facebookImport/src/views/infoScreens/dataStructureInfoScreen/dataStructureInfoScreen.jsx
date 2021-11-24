@@ -27,12 +27,7 @@ const DataStructureInfoScreen = () => {
         <p>{i18n.t("dataStructureInfoScreen:text3")}</p>,
     ];
 
-    return (
-        <InfoScreen
-            child1={dataStructureInfoText[0]}
-            child2={dataStructureInfoText[1]}
-        />
-    );
+    return <InfoScreen infoChildren={dataStructureInfoText} />;
 };
 
 export default DataStructureInfoScreen;
