@@ -5,7 +5,7 @@ import RootAnalysis from "./root-analysis";
 import {
     MessagesMiniStoryDetails,
     MessagesMiniStorySummary,
-} from "../../../components/messagesMiniStory/messagesMinistory.jsx";
+} from "../../../components/messagesMiniStory/messagesMiniStory.jsx";
 
 export default class MessagesAnalysis extends RootAnalysis {
     get label() {

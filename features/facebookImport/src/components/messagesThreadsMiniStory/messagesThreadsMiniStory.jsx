@@ -5,7 +5,7 @@ import i18n from "../../i18n";
 import BarChart from "../dataViz/barChart.jsx";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
-import "./messagesMinistory.css";
+import "./messagesThreadsMiniStory.css";
 
 export const MessagesMiniStorySummary = ({
     messagesCount,
@@ -17,7 +17,6 @@ export const MessagesMiniStorySummary = ({
             <p className="highlighted-number">
                 {messagesCount.toLocaleString("de-DE")}
             </p>
-            <p>jjjj</p>
             <p>
                 {i18n.t("explore:messages.summary", {
                     messages: messagesCount,
