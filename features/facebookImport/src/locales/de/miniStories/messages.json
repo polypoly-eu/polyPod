@@ -1,7 +1,7 @@
 {
-    "headline": "Meine Nachrichten",
-    "number.chats": "Ihre Facebook Daten enthalten {{number_chats}} chats. Hier ist eine Liste Ihrer Interaktionen.",
+    "headline": "Ihre Nachrichten",
+    "number.chats": "In Ihren Facebook Daten finden sich {{messages}} Nachrichten aus {{threads}} Chats mit {{people}} Personen.",
     "chart.title": "Anzahl ausgetauschter Nachrichten",
-    "first.chat": "Erster Chat: ",
-    "last.interaction": "Letzte Interaktion: "
+    "first.chat": "Erste Nachricht: ",
+    "last.interaction": "Letzte Nachricht: "
 }
