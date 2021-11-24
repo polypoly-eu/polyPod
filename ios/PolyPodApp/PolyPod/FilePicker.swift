@@ -12,7 +12,7 @@ struct ExternalFile {
         messagePackMap["url"] = .string(url)
         messagePackMap["name"] = .string(name)
         messagePackMap["size"] = .int(size)
-
+        
         return MessagePackValue.map(messagePackMap)
     }
 }
@@ -32,15 +32,15 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         var fileSize: Int64 = 0
         do {
             let fileAttribute: [FileAttributeKey : Any] =
-                try FileManager.default.attributesOfItem(atPath: url.path)
+            try FileManager.default.attributesOfItem(atPath: url.path)
             if let fileNumberSize: NSNumber = fileAttribute[FileAttributeKey.size] as? NSNumber {
                 fileSize = Int64(truncating: fileNumberSize)
-                }
+            }
         } catch {
             print(error.localizedDescription)
         }
         return ExternalFile(url: url.absoluteString, name: url.lastPathComponent, size: fileSize)
-        }
+    }
     
     func pick(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         if currentCompletion != nil {
@@ -72,7 +72,7 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         documentPickerController.modalPresentationStyle = .fullScreen
         
         let viewController =
-            UIApplication.shared.windows.first!.rootViewController!
+        UIApplication.shared.windows.first!.rootViewController!
         viewController.present(
             documentPickerController,
             animated: true,
