@@ -97,7 +97,6 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                     alt="select-json"
                 />
-                <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <button
                     className="btn-highlighted"
                     onClick={() => handleRequestStatus()}
@@ -110,6 +109,7 @@ const ImportExplanationExpandable = ({
                 >
                     {i18n.t("import:request.example.data")}
                 </button>
+                <InfoBox textContent={i18n.t("import:request.info.2")} />
             </>
         ),
         download: (
@@ -168,7 +168,6 @@ const ImportExplanationExpandable = ({
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
                     )}
                 </div>
-                <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
                     className={"btn-secondary btn-2"}
                     onClick={async () => {
@@ -195,6 +194,7 @@ const ImportExplanationExpandable = ({
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
+                <InfoBox textContent={i18n.t("import:import.info")} />
             </>
         ),
         explore: (
