@@ -255,5 +255,6 @@ export async function analyzeZip(zipData, zipFile, facebookAccount, pod) {
 
 export async function analyzeFile(zipData, facebookAccount) {
     const zipFile = new ZipFile(zipData, window.pod);
+    await zipFile.refreshCachedEntries();
     return await analyzeZip(zipData, zipFile, facebookAccount, window.pod);
 }

@@ -148,5 +148,6 @@ export async function importZip(zipFile, pod) {
 
 export async function importData(zipData) {
     const zipFile = new ZipFile(zipData, window.pod);
+    await zipFile.refreshCachedEntries();
     return importZip(zipFile, window.pod);
 }

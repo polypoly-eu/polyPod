@@ -26,7 +26,12 @@ async function readFullPathJSONFile(fullEntryName, zipFile) {
         throw new MissingFileImportException(fullEntryName);
     }
 
-    const rawContent = await zipFile.getContent(dataZipEntry);
+    // TODO: We should not need the lines above
+    //if (!(await zipFile.hasEntry(fullEntryName))) {
+    //    throw new MissingFileImportException(fullEntryName);
+    //}
+
+    const rawContent = await zipFile.getContent(fullEntryName);
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
