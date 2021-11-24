@@ -1,6 +1,7 @@
 package coop.polypoly.polypod.features
 
 import android.content.Context
+import coop.polypoly.polypod.Language
 import coop.polypoly.polypod.logging.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream
@@ -56,19 +57,16 @@ class FeatureStorage {
         val manifestEntry = content.getEntry("manifest.json")
         if (manifestEntry == null) {
             logger.warn("Missing manifest for '${content.name}'")
-            return FeatureManifest(null, null, null, null, null, null, null)
+            return FeatureManifest(
+                null, null, null, null, null, null, null, null
+            )
         }
         val manifestString =
             content.getInputStream(manifestEntry).reader().readText()
-        return FeatureManifest.parse(manifestString, determineLanguage(context))
-    }
-
-    private fun determineLanguage(context: Context): String {
-        val supportedLocales = arrayOf("en", "de")
-        val userLocale = context.resources.configuration.locales.getFirstMatch(
-            supportedLocales
+        return FeatureManifest.parse(
+            manifestString,
+            Language.determine(context)
         )
-        return userLocale?.language ?: "en"
     }
 
     private fun sortFeatures(

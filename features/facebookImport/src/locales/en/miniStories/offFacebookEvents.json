@@ -1,17 +1,17 @@
 {
-    "title": "Are these companies advertising as well?",
+    "on.off.events.title": "Are these companies advertising as well?",
     "general": "Your Facebook data contains information about things you did outside of its service, eg. on other apps and websites.",
     "companies": "companies provide these so-called Off Facebook events and are listed in your data.",
     "companiesWithAds": "of those companies also present advertising to you. Coincidence?",
-    "total": "A total of <strong>{{number_companies}}</strong> apps and websites you use outside Facebook send information about that back to Facebook anyways. <strong>{{number_companiesWithAds}}</strong> of those send infos about your purchases.",
-    "details.text.1": "of those companies also present advertising to you. Coincidence? We checked the data for advertising you have seen on Facebook. Let's call those On Facebook Events. Looking at On and Off Facebook events over time different patterns might emerge. Off events seem to be followed by On events or vice versa. The data does not prove causality, but this is an interesting starting point for further exploration.",
-    "details.text.2": "We are showing the last 90 days because Facebook only stores on events that long. Maybe you remember some of your activities in the last 3 months? Or you will be more conscious from now on.",
+    "total": "A total of <strong>{{number_companies}}</strong> apps and websites you use outside Facebook send information about that back to Facebook anyways. <strong>{{number_companiesWithAds}}</strong> of those send Infos about your purchases.",
+    "on.off.events.text.1": "Looking at on and off Facebook events over time different patterns might emerge. Off events seem to be followed by on events or vice versa. The data does not prove causality, but this is an interesting starting point for further exploration.",
+    "on.off.events.text.2": "We are showing the last 90 days because Facebook only stores on events that long. Maybe you remember some of your activities in the last 3 months? Or you will be more conscious from now on.",
     "on.fb.events": "On Facebook events",
     "off.fb.events": "Off Facebook events",
     "last.90.days": "Last 90 days",
-    "number.events": "Number of events",
-    "fallback.title": "Facebook knows what you did elsewhere",
-    "fallback.text.1": "companies provide these so-called Off Facebook events and are listed in your data. Here are the companies (websites, apps) which reported the most.",
-    "fallback.text.2": "Companies sorted by number of activities they share with Facebook",
-    "fallback.text.3": "types of activities have been forwarded to Facebook by those companies. The types that triggered most of your off Facebook events are:"
+    "on.off.events.number.events": "Number of events",
+    "off.events.title": "Facebook knows what you did elsewhere",
+    "off.events.text.1": "Here are the (top 5)  companies (websites, apps) which reported the most to Facebook, sorted by the number of activities they reported.",
+    "off.events.text.2": "Companies sorted by number of activities they share with Facebook",
+    "off.events.text.3": "types of activities have been forwarded to Facebook by those companies. The (top 5) types that triggered your off Facebook events are:"
 }

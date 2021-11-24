@@ -1,0 +1,7 @@
+.reaction-types-info {
+    height: 100%;
+}
+
+.reaction-types-info .info-title:nth-of-type(2) {
+    visibility: hidden;
+}

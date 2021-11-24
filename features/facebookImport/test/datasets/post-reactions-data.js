@@ -37,6 +37,8 @@ export function createPostReactionsDataset() {
         createPostReaction(1416949925, "LIKE", "Alice Joe"),
         createPostReaction(1498845994, "WOW", "Jane Doe"),
         createPostReaction(1598845994, "SORRY", "Jane Doe"),
+        createPostReaction(1531845994, "ANGRY", "Jane Doe"),
+        createPostReaction(1598845994, "ANGER", "Jane Doe"),
     ]);
 }
 

@@ -14,6 +14,8 @@ import sadIcon from "../../static/images/reactions-ministory/sad.svg";
 import angerIcon from "../../static/images/reactions-ministory/anger.svg";
 import ChartButtons from "../chartButtons/chartButtons.jsx";
 
+import "./postReactionTypesMiniStory.css";
+
 const reactionEmoji = {
     LIKE: likeIcon,
     LOVE: loveIcon,
@@ -44,7 +46,8 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
             : "saturate(0)";
 
     const totalAmountOfReactions = reactionData.reduce(
-        (prev, curr) => (prev.count || prev) + curr.count
+        (prev, curr) => (prev.count || prev) + curr.count,
+        0
     );
 
     const extendedReactionData = [

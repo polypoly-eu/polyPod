@@ -6,6 +6,7 @@ import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
+import ScrollableXGradient from "../../components/scrollableXGradient/scrollableXGradient.jsx";
 
 import "./overview.css";
 
@@ -77,7 +78,7 @@ const Overview = () => {
             {Object.values(files).length ? (
                 <>
                     <div className="details">
-                        <h1>{files[0].name}</h1>
+                        <ScrollableXGradient scrollableItem={files[0].name} />
                         <p>
                             {i18n.t("overview:imported.time")}{" "}
                             {getFormattedTime(files[0].time)}

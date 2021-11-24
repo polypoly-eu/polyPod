@@ -1,12 +1,12 @@
 {
-    "id": 0,
+    "id": 80208905,
     "pushDelay": 120,
     "title": {
-        "en": "Unexpected notification",
-        "de": "Unerwartete Benachrichtigung"
+        "en": "Update notification test",
+        "de": "Update-Benachrichtigungstest"
     },
     "text": {
-        "en": "If you read this, you've found a bug in the polyPod: Please report it to us!",
-        "de": "Wenn Sie diese Nachricht lesen, haben Sie fehlerhaftes Verhalten im polyPod entdeckt. Bitte berichten Sie uns darüber!"
+        "en": "This is a test for our update notification system - if you see this message more than once, please report it to us.",
+        "de": "Dies ist ein Test für unser Update-Benachrichtigungssystem. Wenn Sie diese Nachricht mehr als einmal sehen, melden Sie es uns bitte."
     }
 }

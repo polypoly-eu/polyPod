@@ -7,7 +7,7 @@ const ExploreDetails = () => {
     const { activeDetails } = useContext(ImporterContext);
     return (
         <div className="details-view">
-            <h1 className="details-view-title">{activeDetails.title}</h1>
+            <h1 className="ministory-title">{activeDetails.title}</h1>
             {activeDetails.renderDetails()}
         </div>
     );

@@ -60,7 +60,7 @@
 <g id="Label_2">
 <rect width="65.86" height="19" rx="2" fill="#F7FAFC"/>
 <rect id="Rectangle 924" y="3.5" width="16.86" height="12" fill="#3749A9"/>
-<text id="bigbold1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="14" font-weight="500" letter-spacing="-0.01em"><tspan x="21.8604" y="14.365">Events      </tspan></text>
+<text id="bigbold1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="14" font-weight="500" letter-spacing="-0.01em"><tspan x="21.8604" y="14.365">Events                   </tspan></text>
 </g>
 </g>
 <text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="165" y="14.17">Number of </tspan><tspan x="165" y="28.17">entries for this </tspan><tspan x="165" y="42.17">specific month</tspan></text>
