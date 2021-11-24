@@ -24,8 +24,6 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.CompletableDeferred
-import org.msgpack.value.Value
-import org.msgpack.value.ValueFactory
 
 private const val PICK_FILE_REQUEST_CODE = 1
 
@@ -245,9 +243,9 @@ open class FeatureFragment : Fragment() {
             }
         }
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
-        var url: String = "";
-        var name: String = "";
-        var size: Long = 0;
+        var url: String = ""
+        var name: String = ""
+        var size: Long = 0
         (pickFileResult?.await())?.let {
             it.let { returnUri ->
                 url = returnUri.toString()
@@ -258,8 +256,8 @@ open class FeatureFragment : Fragment() {
                     val nameIndex =
                         cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                     val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
-                    name= cursor.getString(nameIndex)
-                    size= cursor.getLong(sizeIndex)
+                    name = cursor.getString(nameIndex)
+                    size = cursor.getLong(sizeIndex)
                 }
             }
         }
