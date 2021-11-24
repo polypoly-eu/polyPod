@@ -10,30 +10,16 @@ const InfoScreen = ({ infoChildren }) => {
 
     return (
         <div className="base-info">
-            {/* {infoChildren.map((infoChild, i) => {
-                return (
-                    <div key={i}>
-                        <div className="info-title">
-                            <img src="./images/line-title.svg" />
-                            <h1>{i18n.t(`baseInfoScreen:title${i + 1}`)}</h1>
-                            <img src="./images/line-title.svg" />
-                        </div>
-                        {infoChild[i]}
+            {infoChildren.map((infoChild, i) => (
+                <div key={i}>
+                    <div className="info-title">
+                        <img src="./images/line-title.svg" />
+                        <h1>{i18n.t(`baseInfoScreen:title${i + 1}`)}</h1>
+                        <img src="./images/line-title.svg" />
                     </div>
-                );
-            })} */}
-            <div className="info-title">
-                <img src="./images/line-title.svg" />
-                <h1>{i18n.t("baseInfoScreen:title1")}</h1>
-                <img src="./images/line-title.svg" />
-            </div>
-            {infoChildren[0]}
-            <div className="info-title about-title">
-                <img src="./images/line-title.svg" />
-                <h1>{i18n.t("baseInfoScreen:title2")}</h1>
-                <img src="./images/line-title.svg" />
-            </div>
-            {infoChildren[1]}
+                    {infoChild}
+                </div>
+            ))}
             <button onClick={() => handleBack()}>
                 {i18n.t("common:button.ok")}
             </button>
