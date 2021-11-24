@@ -74,11 +74,7 @@ private enum class ActionButton(val action: Action, val buttonId: Int) {
     SEARCH(Action.SEARCH, R.id.search_button)
 }
 
-open class ExternalFile(url: String, name: String, size: Long) {
-    val url: String = url
-    val name: String = name
-    val size: Long = size
-}
+data class ExternalFile(val url: String, val name: String, val size: Long)
 
 /**
  * A [Fragment] that is responsible for handling a single Feature
