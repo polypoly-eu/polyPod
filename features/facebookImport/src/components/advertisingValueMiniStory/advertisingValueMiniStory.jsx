@@ -49,7 +49,7 @@ export const AdvertisingValueMiniStorySummary = ({
                     }),
                 }}
             />
-            <ul>
+            <ol>
                 {randomAdInterests.map((interest, index) => {
                     return (
                         <li key={index} ref={refWidth} className="summary">
@@ -63,7 +63,7 @@ export const AdvertisingValueMiniStorySummary = ({
                         </li>
                     );
                 })}
-            </ul>
+            </ol>
             <p>{i18n.t("advertisingValueMiniStory:end.text")}</p>
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
