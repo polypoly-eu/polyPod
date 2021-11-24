@@ -4,7 +4,7 @@
     "companies": "companies provide these so-called Off Facebook events and are listed in your data.",
     "companiesWithAds": "of those companies also present advertising to you. Coincidence?",
     "total": "A total of <strong>{{number_companies}}</strong> apps and websites you use outside Facebook send information about that back to Facebook anyways. <strong>{{number_companiesWithAds}}</strong> of those send infos about your purchases.",
-    "details.text.1": "of those companies also present advertising to you. Coincidence? We checked the data for advertising you have seen on Facebook. Lets call those On Facebook Events. Looking at On and Off Facebook events over time different patterns might emerge. Off events seem to be followed by On events or vice versa. The data does not prove causality, but this is an interesting starting point for further exploration.",
+    "details.text.1": "of those companies also present advertising to you. Coincidence? We checked the data for advertising you have seen on Facebook. Let's call those On Facebook Events. Looking at On and Off Facebook events over time different patterns might emerge. Off events seem to be followed by On events or vice versa. The data does not prove causality, but this is an interesting starting point for further exploration.",
     "details.text.2": "We are showing the last 90 days because Facebook only stores on events that long. Maybe you remember some of your activities in the last 3 months? Or you will be more conscious from now on.",
     "on.fb.events": "On Facebook events",
     "off.fb.events": "Off Facebook events",

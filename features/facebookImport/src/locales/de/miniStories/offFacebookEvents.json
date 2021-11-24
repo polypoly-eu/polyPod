@@ -5,13 +5,13 @@
     "companiesWithAds": "von diesen Firmen haben auch Werbung geschaltet, um Sie erreichen. Ein Zufall?",
     "total": "Insgesamt <strong>{{number_companies}}</strong> Apps und Websites, die Sie außerhalb von Facebook verwenden, senden Informationen darüber an Facebook zurück. <strong>{{number_companiesWithAds}}</strong> davon senden Infos über Ihre Einkäufe.",
     "details.text.1": "von diesen Firmen haben auch Werbung geschaltet, um Sie erreichen. Ein Zufall? Wir analysieren Daten über Werbung, die Sie auf Facebook gesehen haben. Nennen wir diese Werbung On Facebook Events. Beim Betrachten von On und Off Facebook Events über die Zeit können verschiedene Muster auftreten. Auf Off Events scheinen On Events zu folgen und umgekehrt. Die Daten beweisen nicht, dass es dabei einen direkten Zusammenhang gibt, aber dies ist ein interessanter Ausgangspunkt für weitere Recherchen.",
-    "details.text.2": "Wir zeigen Daten aus den letzten 90 Tagen, da Facebook diese Daten nur solange speichert. Vielleicht erinnern Sie ein paar Ihrer Aktivitäten aus den letzten 3 Monaten? Vielleicht sind Sie ab jetzt ein wenig aufmerksamer?",
+    "details.text.2": "Wir zeigen Daten aus den letzten 90 Tagen, da Facebook diese Daten nur solange speichert. Vielleicht erinnern Sie sich an ein paar Ihrer Aktivitäten aus den letzten 3 Monaten? Vielleicht sind Sie ab jetzt ein wenig aufmerksamer?",
     "on.fb.events": "On Facebook Events",
     "off.fb.events": "Off Facebook Events",
     "last.90.days": "Die letzten 90 Tage",
     "number.events": "Anzahl der Events",
-    "fallback.title": "Facebook weiss, was sie anderswo tun",
+    "fallback.title": "Facebook weiss, was Sie anderswo tun",
     "fallback.text.1": "Firmen die solche sogenannten Off Facebook Events weiterleiten sind in Ihren Daten zu finden. Hier sind die Firmen (Webseiten, Apps), die am meinsten Daten an Facebook senden.",
     "fallback.text.2": "Firmen geordnet nach der Anzahl an Aktivitäten, die sie mit Facebook teilen.",
-    "fallback.text.3": "Arten von Aktivitäten wurden von diesen Firmen an Facebook weitergeleitet. Die Arten, die die meisten off Facebook Events ausgelöst haben waren:"
+    "fallback.text.3": "arten von Aktivitäten wurden von diesen Firmen an Facebook weitergeleitet. Die Arten, die die meisten off Facebook Events ausgelöst haben waren:"
 }

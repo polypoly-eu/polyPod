@@ -1,7 +1,7 @@
 {
-    "text1": "Dieses Diagramn zeigt die Anzahl der Daten in ihren heruntergeladenen Datensatz, die mit Zeit und Datum gespeichert wurden und ihre Entwicklung über die Zeit.",
+    "text1": "Dieses Diagramn zeigt die Anzahl der Daten in Ihrem heruntergeladenen Datensatz, die mit Zeit und Datum gespeichert wurden und ihre Entwicklung über die Zeit.",
     "legend": "Darstellung der Anzahl von Daten mit Zeit und Datum",
     "text2": "Dieses Diagramm heisst <strong>Balkendiagramm</strong>. Die Länge jedes Balken ist proportional zu dem Wert, den er darstellt.",
-    "text3": "Bitte beachten Sie, das wir bisher nur einen Teil der Facebook Daten analysieren. Daher zeigen die Werte hier eine Tendenz, aber nicht die kompletten Daten in Ihrem Datensatz.",
-    "text4": "Die Daten die mit Zeit und Datum gespeichert sind, erscheinen nicht sehr konsistent. In manchen Fällen gab es keine Zeitangabe, wo sie zu erwarten war. In anderen Fällen gab es sehr viele Zeitangaben für ein einzelnes Werbevideo. Anscheinend hatte Facebook alle paar Sekunden Daten gespeichert, um zu sehen wie weit Nutzer ein solchen Video anschauen." 
+    "text3": "Bitte beachten Sie, dass wir bisher nur einen Teil der Facebook Daten analysieren. Daher zeigen die Werte hier eine Tendenz, aber nicht die kompletten Daten in Ihrem Datensatz.",
+    "text4": "Die Daten, die mit Zeit und Datum gespeichert sind, erscheinen nicht sehr konsistent. In manchen Fällen gab es keine Zeitangabe, wie sie zu erwarten war. In anderen Fällen gab es sehr viele Zeitangaben für ein einzelnes Werbevideo. Anscheinend hatte Facebook alle paar Sekunden Daten gespeichert, um zu sehen, wie weit Nutzer ein solches Video anschauen."
 }
