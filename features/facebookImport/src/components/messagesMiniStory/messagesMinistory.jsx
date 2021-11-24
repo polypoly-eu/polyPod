@@ -17,6 +17,7 @@ export const MessagesMiniStorySummary = ({
             <p className="highlighted-number">
                 {messagesCount.toLocaleString("de-DE")}
             </p>
+            <p>jjjj</p>
             <p>
                 {i18n.t("explore:messages.summary", {
                     messages: messagesCount,
