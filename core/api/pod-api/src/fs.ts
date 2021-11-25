@@ -34,3 +34,9 @@ export interface FS {
     importArchive(url: string): Promise<string>;
     removeArchive(fileId: string): Promise<void>;
 }
+
+export interface ExternalFile {
+    name: string;
+    url: string;
+    size: number;
+}

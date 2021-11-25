@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
+import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,6 +73,8 @@ private enum class ActionButton(val action: Action, val buttonId: Int) {
     INFO(Action.INFO, R.id.info_button),
     SEARCH(Action.SEARCH, R.id.search_button)
 }
+
+data class ExternalFile(val url: String, val name: String, val size: Long)
 
 /**
  * A [Fragment] that is responsible for handling a single Feature
@@ -219,7 +222,7 @@ open class FeatureFragment : Fragment() {
         view.findViewById<TextView>(R.id.feature_title).text = title
     }
 
-    private suspend fun pickFile(type: String?): Uri? {
+    private suspend fun pickFile(type: String?): ExternalFile? {
         if (pickFileResult?.isActive == true)
             return null
         pickFileResult = CompletableDeferred()
@@ -236,7 +239,25 @@ open class FeatureFragment : Fragment() {
             }
         }
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
-        return pickFileResult?.await()
+        var url: String = ""
+        var name: String = ""
+        var size: Long = 0
+        (pickFileResult?.await())?.let {
+            it.let { returnUri ->
+                url = returnUri.toString()
+                context?.contentResolver
+                    ?.query(returnUri, null, null, null, null)
+            }?.use { cursor ->
+                if (cursor != null && cursor.moveToFirst()) {
+                    val nameIndex =
+                        cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                    name = cursor.getString(nameIndex)
+                    size = cursor.getLong(sizeIndex)
+                }
+            }
+        }
+        return ExternalFile(url = url, name = name, size = size)
     }
 
     override fun onActivityResult(

@@ -23,7 +23,7 @@ const ImportExplanationExpandable = ({
     importSections,
     importStatus,
     onUpdateImportStatus,
-    selectedFileUrl,
+    selectedFile,
     onSelectFile,
     onImportFile,
     file,
@@ -168,10 +168,14 @@ const ImportExplanationExpandable = ({
                                 {formatSize(file.size)}
                             </p>
                         </div>
-                    ) : selectedFileUrl ? (
+                    ) : selectedFile ? (
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
-                            <p>{selectedFileUrl?.split("/").pop()}</p>
+                            <p>{selectedFile?.name}</p>
+                            <p>
+                                {i18n.t("import:import.size")}{" "}
+                                {formatSize(selectedFile.size)}
+                            </p>
                         </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
@@ -184,16 +188,16 @@ const ImportExplanationExpandable = ({
                         onSelectFile();
                     }}
                 >
-                    {file || selectedFileUrl
+                    {file || selectedFile
                         ? i18n.t("import:import.button.1.different")
                         : i18n.t("import:import.button.1")}
                 </button>
                 <button
                     className={`btn-highlighted ${
-                        selectedFileUrl ? "" : "deactivated"
+                        selectedFile ? "" : "deactivated"
                     }`}
                     onClick={
-                        selectedFileUrl
+                        selectedFile
                             ? async () => {
                                   await onImportFile();
                                   handleImportStatus();

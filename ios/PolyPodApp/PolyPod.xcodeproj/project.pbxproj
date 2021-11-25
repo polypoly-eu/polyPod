@@ -92,6 +92,7 @@
 		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
+		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
 		5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */; };
 		5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
@@ -817,6 +818,7 @@
 				1ABADBFD24EE710B00369791 /* Quad+Additions.swift in Sources */,
 				1ABADBD424EBC5EF00369791 /* PolyIn.swift in Sources */,
 				1A66F7812493794000ED4308 /* NetworkSession.swift in Sources */,
+				3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */,
 				1ABADC0F24EFB9F300369791 /* Models.swift in Sources */,
 				1A66F77F249378E400ED4308 /* PolyOutTests.swift in Sources */,
 				1ABADBFA24EE710B00369791 /* BlankNode+CoreDataProperties.swift in Sources */,

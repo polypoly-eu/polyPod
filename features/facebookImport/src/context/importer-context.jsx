@@ -110,7 +110,7 @@ export const ImporterProvider = ({ children }) => {
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
     const [startRequest, setStartRequest] = useState(false);
-    const [selectedFileUrl, setSelectedFileUrl] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const [navigationState, setNavigationState] = useState({
         importStatus: importSteps.loading,
@@ -144,7 +144,7 @@ export const ImporterProvider = ({ children }) => {
         const { polyNav } = pod;
         runWithLoadingScreen(async function () {
             try {
-                setSelectedFileUrl(await polyNav.pickFile("application/zip"));
+                setSelectedFile(await polyNav.pickFile("application/zip"));
             } catch (error) {
                 setGlobalError(new FileSelectionError(error));
             }
@@ -152,12 +152,12 @@ export const ImporterProvider = ({ children }) => {
     };
 
     const handleImportFile = async () => {
-        if (!selectedFileUrl) return;
+        if (!selectedFile) return;
         const { polyOut } = pod;
         runWithLoadingScreen(async function () {
             try {
-                await polyOut.importArchive(selectedFileUrl);
-                setSelectedFileUrl(null);
+                await polyOut.importArchive(selectedFile.url);
+                setSelectedFile(null);
             } catch (error) {
                 setGlobalError(new FileImportError(error));
             }
@@ -266,7 +266,7 @@ export const ImporterProvider = ({ children }) => {
                 navigationState,
                 changeNavigationState,
                 handleBack,
-                selectedFileUrl,
+                selectedFile,
                 handleSelectFile,
                 handleImportFile,
                 importSteps,
