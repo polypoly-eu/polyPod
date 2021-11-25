@@ -23,7 +23,11 @@ const DatePicker = ({ year, yearRange, onYearChange }) => {
                     className="arrow left"
                     onClick={() => onYearChange(yearRange[rangeIndex - 1])}
                 >
-                    <img src="./images/angle-left.svg" alt="arrow-left" className="space-right" />
+                    <img
+                        src="./images/angle-left.svg"
+                        alt="arrow-left"
+                        className="space-right"
+                    />
                     <p>{i18n.t("activitiesMiniStory:tab.arrow.left")}</p>
                 </button>
             ) : (
@@ -36,7 +40,11 @@ const DatePicker = ({ year, yearRange, onYearChange }) => {
                     onClick={() => onYearChange(yearRange[rangeIndex + 1])}
                 >
                     <p>{i18n.t("activitiesMiniStory:tab.arrow.right")}</p>
-                    <img src="./images/angle-right.svg" alt="arrow-right" className="space-left" />
+                    <img
+                        src="./images/angle-right.svg"
+                        alt="arrow-right"
+                        className="space-left"
+                    />
                 </button>
             ) : (
                 <div className="arrow filler"></div>
