@@ -1,6 +1,5 @@
 {
     "headline": "Ihre Nachrichten",
-    "number.chats": "In Ihren Facebook Daten finden sich {{messages}} Nachrichten aus {{threads}} Chats mit {{people}} Personen.",
     "chart.title": "Anzahl ausgetauschter Nachrichten",
     "first.chat": "Erste Nachricht: ",
     "last.interaction": "Letzte Nachricht: "
