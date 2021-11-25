@@ -6,7 +6,6 @@ import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
-import ScrollableXGradient from "../../components/scrollableXGradient/scrollableXGradient.jsx";
 
 import "./overview.css";
 
@@ -77,22 +76,9 @@ const Overview = () => {
         <div className="overview">
             {Object.values(files).length ? (
                 <>
-                    <div className="details">
-                        <ScrollableXGradient scrollableItem={files[0].name} />
-                        <p>
-                            {i18n.t("overview:imported.time")}{" "}
-                            {getFormattedTime(files[0].time)}
-                        </p>
-                        <p>
-                            <span className="size">
-                                {" "}
-                                {i18n.t("overview:size")}{" "}
-                                {formatSize(files[0].size)}
-                            </span>
-                        </p>
-                        <div className="separator"></div>
-                    </div>
-
+                    <h1 className="overview-title">
+                        {i18n.t("overview:above.chart.title")}
+                    </h1>
                     <div className="overview-visualisation">
                         <p
                             dangerouslySetInnerHTML={{
@@ -111,9 +97,19 @@ const Overview = () => {
                             showValues={false}
                         />
                     </div>
+                    <div className="details">
+                        <p>{files[0].name}</p>
+                        <p>
+                            {i18n.t("overview:imported.time")}{" "}
+                            {getFormattedTime(files[0].time)}
+                        </p>
+                        <p>
+                            {i18n.t("overview:size")}{" "}
+                            {formatSize(files[0].size)}
+                        </p>
+                    </div>
 
                     <div className="footer">
-                        <div className="overlay"></div>
                         <div className="btn-holder">
                             <RouteButton
                                 className="btn primary"
