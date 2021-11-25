@@ -73,7 +73,15 @@ const PicturesMiniStory = () => {
                 <p>{i18n.t(`picturesMiniStory:${activePart}.title`)}</p>
             </div>
             <p>{i18n.t(`picturesMiniStory:${activePart}.text`)}</p>
-            <InfoButton route="/report/pictures-info" />
+            <div
+                className={
+                    activePart === "background"
+                        ? "background-pictures-info-container"
+                        : "pictures-info-container"
+                }
+            >
+                <InfoButton route="/report/pictures-info" />
+            </div>
             <p className="source">
                 {i18n.t(`picturesMiniStory:${activePart}.source`)}
             </p>

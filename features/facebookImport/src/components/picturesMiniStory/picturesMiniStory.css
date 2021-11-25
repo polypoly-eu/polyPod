@@ -35,8 +35,13 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-.pictures-mini-story .info-button {
-    bottom: 200px;
+.pictures-mini-story .pictures-info-container .info-button {
+    bottom: 180px;
+    right: -16px;
+}
+
+.pictures-mini-story .background-pictures-info-container .info-button {
+    bottom: 199px;
     right: -16px;
 }
 
