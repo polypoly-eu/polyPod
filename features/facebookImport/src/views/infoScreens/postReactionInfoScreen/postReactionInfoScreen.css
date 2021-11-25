@@ -2,6 +2,6 @@
     height: 100%;
 }
 
-.reaction-types-info .info-title:nth-of-type(2) {
+.reaction-types-info .base-info .about {
     visibility: hidden;
 }

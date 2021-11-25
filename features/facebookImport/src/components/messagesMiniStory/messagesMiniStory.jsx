@@ -5,7 +5,7 @@ import i18n from "../../i18n";
 import BarChart from "../dataViz/barChart.jsx";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
-import "./messagesMinistory.css";
+import "./messagesMiniStory.css";
 
 const SummaryText = ({
     messagesCount,
@@ -56,6 +56,7 @@ export const MessagesMiniStoryDetails = ({
             <BarChart
                 data={messagesThreadsData}
                 screenPadding={48}
+                groupMessage={true}
                 footerContent={({ extraData }) => (
                     <>
                         <div className="bar-extra-info">
@@ -75,6 +76,7 @@ export const MessagesMiniStoryDetails = ({
                     </>
                 )}
             />
+            <div className="messages-gradient"></div>
             <div className="messages-info-container">
                 <InfoButton route="/report/details/messages-info" />
             </div>

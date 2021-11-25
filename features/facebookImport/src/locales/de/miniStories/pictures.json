@@ -4,10 +4,14 @@
     "text.2": "Nehmen wir an Sie haben ein Selfie gemacht, was kann Facebook aus so einem Bild herauslesen? Tippen Sie auf die Kreise, um mehr herauszufinden...",
     "person.title": "Me, my selfie and I",
     "person.text": "Auf den ersten Blick ist es nur ein Foto von einem Menschen. Aber anhand Ihres Profilfotos weiß Facebook vielleicht schon, dass Sie es sind und findet Sie dann auch in anderen Bildern. Darüber hinaus kann Facebook Annahmen über Ihr Geschlecht, Alter oder Ihre Herkunft treffen, oder darüber, dass Sie gerade Ihre Frisur geändert haben, ...",
+    "person.source": "Quelle: Facebook Datenschutzerklärung",
     "plant.title": "Auf frischer Tat ertappt?",
     "plant.text": "Mit künstlicher Intelligenz lassen sich auch andere Dinge in Fotos finden und identifizieren, z.B. bestimmte Pflanzen, Sportausrüstungen, oder vielleicht Zigaretten. Solche Informationen können auch für andere interessant oder überraschend sein, vielleicht für Partner:innen - oder die Krankenversicherung.",
+    "plant.source": "Quelle: Facebook Ai Website",
     "lamp.title": "Ich shoppe also bin ich",
     "lamp.text": "Facebook arbeitet daran Gegenstände, Produkte und Marken in Fotos zu erkennen. Vielleicht finden Sie eine Mode- oder Möbelmarke im Hintergrund Ihrer Fotos. Solche Erkenntnise lassen dann Rückschlüsse darüber zu, wie viel Sie für einen bestimmten Lifestyle ausgeben.",
+    "lamp.source": "Quelle: Facebook Ai Website",
     "background.title": "Die wissen, wo Sie im letzten Sommer waren",
-    "background.text": "Die Skyline einer Stadt, eine Sehenswürdigkeit oder immer das gleiche Fenster im Hintergrund zu erkennen, erlaubt Facebook auch Annahmen über Ihren Aufenthalsort zu treffen. Zusätzlich verfügt das Unternehmen, falls Sie die Fotos mit der Kamera Ihres Handies gemacht haben, vielleicht sogar über exakte GPS Informationen aus den sogenannten Metadaten der Bilder. Außer, wenn Sie dies durch die Einstellungen ausschließen."
+    "background.text": "Die Skyline einer Stadt, eine Sehenswürdigkeit oder immer das gleiche Fenster im Hintergrund zu erkennen, erlaubt Facebook auch Annahmen über Ihren Aufenthalsort zu treffen. Zusätzlich verfügt das Unternehmen, falls Sie die Fotos mit der Kamera Ihres Handies gemacht haben, vielleicht sogar über exakte GPS Informationen aus den sogenannten Metadaten der Bilder. Außer, wenn Sie dies durch die Einstellungen ausschließen.",
+    "background.source": "Quelle: Facebook Datenschutzerklärung"
 }

@@ -50,11 +50,11 @@ import MinistoriesStatusAnalysis from "./analyses/report/ministories-status-anal
 const subAnalyses = [
     DataStructureBubblesAnalysis,
     ActivitiesAnalysis,
+    PostReactionsTypesAnalysis,
     MessagesAnalysis,
-    OnOffFacebookEventsAnalysis,
     AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
-    PostReactionsTypesAnalysis,
+    OnOffFacebookEventsAnalysis,
     ConnectedAdvertisersAnalysis,
 
     ExportTitleAnalysis,

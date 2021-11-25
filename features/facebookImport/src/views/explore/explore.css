@@ -46,7 +46,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 18px;
     line-height: 21.6px;
     box-sizing: border-box;
@@ -54,6 +54,10 @@
 
 .card-separator {
     border-bottom: solid 1px var(--color-gray-400);
+}
+
+.card-separator:last-of-type {
+    border-bottom: none;
 }
 
 .explore-view .pop-up {
