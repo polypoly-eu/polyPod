@@ -64,14 +64,12 @@ export class BubbleCluster extends Chart {
     this._bubblePadding = bubblePadding;
     this._filter = filter;
 
-    this._filterActivationCondition = (d) =>
-      this._filter
-        ? this._filter.activationCondition
-          ? this._filter.activationCondition(d)
-            ? `url(#${this._filter.type})`
-            : null
-          : `url(#${this._filter.type})`
-        : null;
+    this._filterActivationCondition = (d) => {
+      if (!this._filter) return null;
+      const { activationCondition } = this._filter;
+      if (activationCondition && !activationCondition(d)) return null;
+      return `url(#${this._filter.type})`;
+    };
   }
 
   _makeHierarchy() {
