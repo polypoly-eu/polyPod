@@ -79,34 +79,35 @@ const Overview = () => {
                     <h1 className="overview-title">
                         {i18n.t("overview:above.chart.title")}
                     </h1>
-                    <div className="overview-visualisation">
-                        <p
-                            dangerouslySetInnerHTML={{
-                                __html: i18n.t("overview:above.chart.text", {
-                                    number_categories: bubbleData.length,
-                                }),
-                            }}
-                        />
-                        <PolyChart
-                            type="bubble-cluster"
-                            data={bubbleData}
-                            width={bubbleVizWidth}
-                            height={bubbleVizHeight}
-                            bubbleColor={dataBubblesLightColor}
-                            onBubbleClick={() => history.push("/explore")}
-                            showValues={false}
-                        />
-                    </div>
+
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html: i18n.t("overview:above.chart.text", {
+                                number_categories: bubbleData.length,
+                            }),
+                        }}
+                    />
+                    <PolyChart
+                        type="bubble-cluster"
+                        data={bubbleData}
+                        width={bubbleVizWidth}
+                        height={bubbleVizHeight}
+                        bubbleColor={dataBubblesLightColor}
+                        onBubbleClick={() => history.push("/explore")}
+                        showValues={false}
+                    />
                     <div className="details">
                         <p>{files[0].name}</p>
-                        <p>
-                            {i18n.t("overview:imported.time")}{" "}
-                            {getFormattedTime(files[0].time)}
-                        </p>
-                        <p>
-                            {i18n.t("overview:size")}{" "}
-                            {formatSize(files[0].size)}
-                        </p>
+                        <div className="inline-block">
+                            <p>
+                                {i18n.t("overview:imported.time")}{" "}
+                                {getFormattedTime(files[0].time)}
+                            </p>
+                            <p>
+                                {i18n.t("overview:size")}{" "}
+                                {formatSize(files[0].size)}
+                            </p>
+                        </div>
                     </div>
 
                     <div className="footer">
