@@ -1,7 +1,6 @@
 {
-    "headline": "My messages history",
-    "number.chats": "In your export there are {{messages}} messages in {{threads}} threads by {{people}} people.",
+    "headline": "Your messages",
     "chart.title": "Number of messages exchanged",
-    "first.chat": "First chat: ",
-    "last.interaction": "Last interaction: "
+    "first.chat": "First message: ",
+    "last.interaction": "Last message: "
 }

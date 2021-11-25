@@ -76,8 +76,8 @@ export default class MessagesAnalysis extends RootAnalysis {
         return (
             <MessagesMiniStoryDetails
                 messagesCount={this._messagesCount}
-                totalUsernamesCount={this._totalUsernamesCount}
                 messagesThreadsData={this._messagesThreadsData}
+                totalUsernamesCount={this._totalUsernamesCount}
             />
         );
     }

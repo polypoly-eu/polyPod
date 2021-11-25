@@ -7,6 +7,20 @@ import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import "./messagesMiniStory.css";
 
+const SummaryText = ({
+    messagesCount,
+    messagesThreadsData,
+    totalUsernamesCount,
+}) => (
+    <p>
+        {i18n.t("explore:messages.summary", {
+            messages: messagesCount,
+            threads: messagesThreadsData.length,
+            people: totalUsernamesCount,
+        })}
+    </p>
+);
+
 export const MessagesMiniStorySummary = ({
     messagesCount,
     messagesThreadsData,
@@ -17,16 +31,11 @@ export const MessagesMiniStorySummary = ({
             <p className="highlighted-number">
                 {messagesCount.toLocaleString("de-DE")}
             </p>
-            <p>
-                {i18n.t("explore:messages.summary", {
-                    messages: messagesCount,
-                    threads: messagesThreadsData.length,
-                    people: totalUsernamesCount,
-                })}
-            </p>
-            <p className="source">
-                {i18n.t("common:source.your.facebook.data")}
-            </p>
+            <SummaryText
+                messagesCount={messagesCount}
+                messagesThreadsData={messagesThreadsData}
+                totalUsernamesCount={totalUsernamesCount}
+            />
         </div>
     );
 };
@@ -38,13 +47,11 @@ export const MessagesMiniStoryDetails = ({
 }) => {
     return (
         <>
-            <p>
-                {i18n.t("messagesMiniStory:number.chats", {
-                    messages: messagesCount,
-                    threads: messagesThreadsData.length,
-                    people: totalUsernamesCount,
-                })}
-            </p>
+            <SummaryText
+                messagesCount={messagesCount}
+                messagesThreadsData={messagesThreadsData}
+                totalUsernamesCount={totalUsernamesCount}
+            />
             <p> {i18n.t("messagesMiniStory:chart.title")}</p>
             <BarChart
                 data={messagesThreadsData}

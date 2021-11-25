@@ -1,6 +1,6 @@
 {
-    "messages.title": "Messages Summary",
-    "messages.summary": "In your export there are {{messages}} messages in {{threads}} threads by {{people}} people.",
+    "messages.title": "Your Messages",
+    "messages.summary": "Your Facebook data contains {{messages}} messages from {{threads}} chats with {{people}} people.",
     "report.success": "Your report was sent to us. Thank you!",
     "report.error": "Your report could not be sent. Please try again!",
     "loading": "Your data is being analyzed",
