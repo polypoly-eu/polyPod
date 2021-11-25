@@ -6,7 +6,6 @@ import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
-import ScrollableXGradient from "../../components/scrollableXGradient/scrollableXGradient.jsx";
 
 import "./overview.css";
 
@@ -77,43 +76,41 @@ const Overview = () => {
         <div className="overview">
             {Object.values(files).length ? (
                 <>
+                    <h1 className="overview-title">
+                        {i18n.t("overview:above.chart.title")}
+                    </h1>
+
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html: i18n.t("overview:above.chart.text", {
+                                number_categories: bubbleData.length,
+                            }),
+                        }}
+                    />
+                    <PolyChart
+                        type="bubble-cluster"
+                        data={bubbleData}
+                        width={bubbleVizWidth}
+                        height={bubbleVizHeight}
+                        bubbleColor={dataBubblesLightColor}
+                        onBubbleClick={() => history.push("/explore")}
+                        showValues={false}
+                    />
                     <div className="details">
-                        <ScrollableXGradient scrollableItem={files[0].name} />
-                        <p>
-                            {i18n.t("overview:imported.time")}{" "}
-                            {getFormattedTime(files[0].time)}
-                        </p>
-                        <p>
-                            <span className="size">
-                                {" "}
+                        <p>{files[0].name}</p>
+                        <div className="inline-block">
+                            <p>
+                                {i18n.t("overview:imported.time")}{" "}
+                                {getFormattedTime(files[0].time)}
+                            </p>
+                            <p>
                                 {i18n.t("overview:size")}{" "}
                                 {formatSize(files[0].size)}
-                            </span>
-                        </p>
-                        <div className="separator"></div>
-                    </div>
-
-                    <div className="overview-visualisation">
-                        <p
-                            dangerouslySetInnerHTML={{
-                                __html: i18n.t("overview:above.chart.text", {
-                                    number_categories: bubbleData.length,
-                                }),
-                            }}
-                        />
-                        <PolyChart
-                            type="bubble-cluster"
-                            data={bubbleData}
-                            width={bubbleVizWidth}
-                            height={bubbleVizHeight}
-                            bubbleColor={dataBubblesLightColor}
-                            onBubbleClick={() => history.push("/explore")}
-                            showValues={false}
-                        />
+                            </p>
+                        </div>
                     </div>
 
                     <div className="footer">
-                        <div className="overlay"></div>
                         <div className="btn-holder">
                             <RouteButton
                                 className="btn primary"
