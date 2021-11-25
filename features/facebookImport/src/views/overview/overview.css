@@ -76,13 +76,13 @@ h4 {
 .overview .footer .overlay {
     background: linear-gradient(180deg, #0f1938 0%, rgba(15, 25, 56, 0) 100%);
     transform: rotate(-180deg);
-    height: 93px;
+    height: 60px;
 }
 
 .overview .footer .btn-holder {
     padding: 0 16px 24px 16px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     width: 100%;
     background-color: var(--background-dark);
     box-sizing: border-box;
@@ -91,10 +91,8 @@ h4 {
 .overview .footer .btn-holder .btn {
     height: 48px;
     display: flex;
-    flex: 1 1 0;
     justify-content: center;
     align-items: center;
-    padding: 4px 16px;
     border-radius: 4px;
     font-weight: 600;
     font-size: 18px;
@@ -104,7 +102,7 @@ h4 {
 .overview .footer .btn-holder .btn.primary {
     background-color: var(--color-gray-50);
     color: var(--color-indigo-950);
-    margin-right: 16px;
+    margin-top: 16px;
 }
 
 .overview .footer .btn-holder .btn.secondary {
