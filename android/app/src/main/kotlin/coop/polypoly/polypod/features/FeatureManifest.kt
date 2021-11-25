@@ -2,6 +2,16 @@ package coop.polypoly.polypod.features
 
 import com.google.gson.Gson
 
+private fun mergeLinks(
+    original: Map<String, String>?,
+    translated: Map<String, String>?
+): Map<String, String> {
+    val links = mutableMapOf<String, String>()
+    original?.let { links.putAll(it) }
+    translated?.let { links.putAll(it) }
+    return links
+}
+
 open class FeatureManifest(
     val name: String?,
     val author: String?,
@@ -30,7 +40,7 @@ open class FeatureManifest(
                     ?: fullManifest.thumbnailColor,
                 primaryColor = translations?.primaryColor
                     ?: fullManifest.primaryColor,
-                links = translations?.links ?: fullManifest.links
+                links = mergeLinks(fullManifest.links, translations?.links)
             )
         }
     }

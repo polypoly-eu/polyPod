@@ -35,6 +35,22 @@ private const val manifestWithTranslationsString = """
     }
     """
 
+private const val manifestWithTranslatedLinksString = """
+    {
+        "links": {
+            "example": "https://example.com",
+            "example-uk": "https://example.co.uk"
+        },
+        "translations": {
+            "de": {
+                "links": {
+                    "example": "https://example.de"
+                }
+            }
+        }
+    }
+    """
+
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Config.OLDEST_SDK])
@@ -62,5 +78,17 @@ class FeatureManifestTest {
         assertThat(manifest.name).isEqualTo("testManifest")
         assertThat(manifest.description).isEqualTo("testBeschreibung")
         assertThat(manifest.author).isEqualTo("testUrheber")
+    }
+
+    @Test
+    fun `translated links work`() {
+        val manifest = FeatureManifest.parse(
+            manifestWithTranslatedLinksString,
+            "de"
+        )
+        assertThat(manifest.links?.get("example"))
+            .isEqualTo("https://example.de")
+        assertThat(manifest.links?.get("example-uk"))
+            .isEqualTo("https://example.co.uk")
     }
 }

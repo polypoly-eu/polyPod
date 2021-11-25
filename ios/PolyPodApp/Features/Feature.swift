@@ -36,7 +36,10 @@ class Feature {
             featurePath: path,
             thumbnailPath: translations?.thumbnail ?? manifest.thumbnail
         )
-        links = translations?.links ?? manifest.links ?? [:]
+        links = mergeLinks(
+            original: manifest.links,
+            translated: translations?.links
+        )
     }
     
     func findUrl(target: String) -> String? {
@@ -88,4 +91,15 @@ private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
         return nil
     }
     return fullPath
+}
+
+private func mergeLinks(
+    original: [String: String]?,
+    translated: [String: String]?
+) -> [String: String] {
+    var links = original ?? [:]
+    if let translated = translated {
+        links = links.merging(translated) { (_, new) in new }
+    }
+    return links
 }

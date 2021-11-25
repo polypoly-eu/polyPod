@@ -1,7 +1,7 @@
 {
     "on.off.events.title": "Are these companies advertising as well?",
     "general": "Your Facebook data contains information about things you did outside of its service, eg. on other apps and websites.",
-    "companies": "companies that provide these so-called off Facebook events are listed in your data.",
+    "companies": "companies provide these so-called Off Facebook events and are listed in your data.",
     "companiesWithAds": "of those companies also present advertising to you. Coincidence?",
     "total": "A total of <strong>{{number_companies}}</strong> apps and websites you use outside Facebook send information about that back to Facebook anyways. <strong>{{number_companiesWithAds}}</strong> of those send Infos about your purchases.",
     "on.off.events.text.1": "Looking at on and off Facebook events over time different patterns might emerge. Off events seem to be followed by on events or vice versa. The data does not prove causality, but this is an interesting starting point for further exploration.",

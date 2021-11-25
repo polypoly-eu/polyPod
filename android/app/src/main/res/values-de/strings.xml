@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">polyPod</string>
-    <string name="app_bar_close_button_desc">Close</string>
-    <string name="app_bar_search_button_desc">Search</string>
+    <string name="app_bar_close_button_desc">Schließen</string>
+    <string name="app_bar_search_button_desc">Suche</string>
     <string name="app_bar_info_button_desc">Info</string>
     <string name="onboarding_button_end">Los geht\'s</string>
-    <string name="onboarding_button_auth">Set up now</string>
-    <string name="onboarding_button_do_not_ask">Do not ask again</string>
+    <string name="onboarding_button_auth">Jetzt einrichten</string>
+    <string name="onboarding_button_do_not_ask">Nicht noch einmal fragen</string>
     <string name="onboarding_slide1_headline">"Hallo, darf ich\nmich vorstellen?"</string>
     <string name="onboarding_slide1_sub_headline">Ich bin Ihr\npolyPod.</string>
     <string name="onboarding_slide1_body_text">In Zukunft möchte ich gerne dafür sorgen, dass Privates privat bleibt. Das klappt natürlich nicht sofort, aber Schritt für Schritt schaffen wir das gemeinsam.</string>
@@ -15,9 +15,9 @@
     <string name="onboarding_slide3_headline">Ein erster Schritt\ndem viele folgen.</string>
     <string name="onboarding_slide3_sub_headline">Damit Privates\nprivat bleibt.</string>
     <string name="onboarding_slide3_body_text">Nach und nach biete ich Ihnen immer mehr Möglichkeiten, Ihre Privatsphäre zu schützen. Ich melde mich natürlich, sobald eine neue Funktion für Sie bereit steht.</string>
-    <string name="onboarding_slide4_headline">Security first.</string>
-    <string name="onboarding_slide4_sub_headline">Enable security\nbefore we continue?</string>
-    <string name="onboarding_slide4_body_text">We would like to ensure any data you put into polyPod is as secure as possible. For this we would like to ask you to enable some way of authentication for future access.</string>
+    <string name="onboarding_slide4_headline">Sicherheit zuerst.</string>
+    <string name="onboarding_slide4_sub_headline">Zusätzliche polyPod Sicherheit einrichten\nbevor wir weitermachen?</string>
+    <string name="onboarding_slide4_body_text">Wir möchten gerne sicherstellen, dass Ihre Daten im polyPod vor fremden Zugriff sicher sind. Dafür bitten wir Sie jetzt, die Gerätesperre auch für den polyPod einzuschalten.</string>
     <string name="settings_title">Einstellungen</string>
     <string name="settings_about_section">Info</string>
     <string name="settings_version">Version</string>
@@ -33,10 +33,10 @@
     <string name="button_update_notification_close">OK</string>
     <string name="button_acknowledge">OK</string>
     <string name="auth_title">Einloggen in polyPod</string>
-    <string name="auth_subtitle">Entweder Geräteberechtigung oder Biometrie verwenden</string>
+    <string name="auth_subtitle">Den Sperrbildschirm vom Gerät verwenden</string>
     <string name="auth_success">Authentifizierung erfolgreich</string>
     <string name="auth_enable_lock_message">Wir empfehlen dringend, einen Authentifizierungsmechanismus für erhöhte Sicherheit einzurichten</string>
-    <string name="auth_enable_lock_yes">Sperrbildschirm einrichten</string>
+    <string name="auth_enable_lock_yes">Sperrbildschirm verwenden</string>
     <string name="auth_enable_lock_no">Auslassen</string>
     <string name="auth_enable_lock_do_not_ask">Nicht mehr fragen</string>
     <string name="auth_enable_lock_title">Kein Sperrbildschirm?</string>
