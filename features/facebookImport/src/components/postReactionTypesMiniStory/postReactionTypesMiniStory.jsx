@@ -39,11 +39,15 @@ export function mapEmojiToReaction(reactions) {
 const PostReactionTypesMiniStory = ({ reactionData }) => {
     const [selectedReaction, setSelectedReaction] = useState("TOTAL");
 
-    const handleIconSelected = (e, d) => setSelectedReaction(d.data.title);
-    const iconSaturation = (d) =>
-        selectedReaction == d.data.title || selectedReaction == "TOTAL"
-            ? "saturate(1)"
-            : "saturate(0)";
+    const handleIconSelected = (_, d) => setSelectedReaction(d.data.title);
+    const iconFilter = {
+        filterElement: "feColorMatrix",
+        type: "saturate",
+        in: "SourceGraphic",
+        values: 0,
+        activationCondition: (d) =>
+            selectedReaction != d.data.title && selectedReaction != "TOTAL",
+    };
 
     const totalAmountOfReactions = reactionData.reduce(
         (prev, curr) => (prev.count || prev) + curr.count,
@@ -82,7 +86,7 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 data={mapEmojiToReaction(reactionData)}
                 onBubbleClick={handleIconSelected}
                 showValues={false}
-                filter={iconSaturation}
+                filter={iconFilter}
             />
             <ChartButtons
                 buttonsContent={extendedReactionData.map((r) => {

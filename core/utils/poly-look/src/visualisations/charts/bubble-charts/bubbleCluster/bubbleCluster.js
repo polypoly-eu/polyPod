@@ -35,7 +35,12 @@ const defaultOnClickFunction = () => {};
  * @param {number|callback = 1} [opacity] - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
  * @param {boolean = true} [showValues] - Whether texts displaying the value of the bubble are added
  * @param {callback = () => {}} [onBubbleClick] - Bubble onclick function
- * @param {number|callback} [filter] - A filter that is applied to the icons eg saturate(0.5)(callbacks receive event and data)
+ * @param {Object} [filter] - A filter that is applied to the elements
+ * @param {SVG-Filter-Element} [filter.filterElement] - The svg filter element created (https://developer.mozilla.org/en-US/docs/Web/SVG/Element#filter_primitive_elements)
+ * @param {string} [filter.type] - Filter type has different meanings depending on the context it's used in (https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/type)
+ * @param {string} [filter.in] - Where the filter is used (https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/in)
+ * @param {string} [filter.values] - Values has different meanings depending on the context it's used in (https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/values)
+ * @param {callback} [filter.activationCondition] - Condition applied to the bubbles when filter is active (receives d)
  */
 export class BubbleCluster extends Chart {
   constructor({
@@ -58,6 +63,13 @@ export class BubbleCluster extends Chart {
     this._onBubbleClick = onBubbleClick;
     this._bubblePadding = bubblePadding;
     this._filter = filter;
+
+    this._filterActivationCondition = (d) => {
+      if (!this._filter) return null;
+      const { activationCondition } = this._filter;
+      if (activationCondition && !activationCondition(d)) return null;
+      return `url(#${this._filter.type})`;
+    };
   }
 
   _makeHierarchy() {
@@ -71,19 +83,17 @@ export class BubbleCluster extends Chart {
       .padding(this._bubblePadding);
   }
 
-  _updateBubbles(leaves) {
-    leaves
-      .selectAll(".bubble")
-      .style("fill", this._bubbleColor)
-      .style("stroke", "#f7fafc")
-      .style("vertical-align", "center")
-      .attr("fill-opacity", this._opacity);
-
-    leaves
-      .selectAll(".icon")
-      .attr("height", (d) => d.r * 2)
-      .attr("width", (d) => d.r * 2)
-      .style("filter", this._filter);
+  _setUpFilters() {
+    const filter = this._filter;
+    if (this._filter && this.chart.select(`.filter.${filter.type}`).empty())
+      this.chart
+        .append("filter")
+        .attr("class", `filter ${filter.type}`)
+        .attr("id", filter.type)
+        .append(filter.filterElement)
+        .attr("type", filter.type)
+        .attr("in", filter.in)
+        .attr("values", filter.values);
   }
 
   _addNewBubbleGroups(leaves) {
@@ -95,7 +105,23 @@ export class BubbleCluster extends Chart {
           ? `translate(${d.x - d.r},${d.y - d.r})`
           : `translate(${d.x},${d.y})`
       )
-      .on("click", this._onBubbleClick);
+      .on("click", this._onBubbleClick)
+      .style("-webkit-tap-highlight-color", "transparent");
+  }
+
+  _updateBubbles(leaves) {
+    leaves
+      .selectAll(".bubble")
+      .style("fill", this._bubbleColor)
+      .style("stroke", "#f7fafc")
+      .style("vertical-align", "center")
+      .attr("filter", this._filterActivationCondition);
+
+    leaves
+      .selectAll(".icon")
+      .attr("height", (d) => d.r * 2)
+      .attr("width", (d) => d.r * 2)
+      .attr("filter", this._filterActivationCondition);
   }
 
   _addBubbles(bubbleGroups) {
@@ -106,7 +132,7 @@ export class BubbleCluster extends Chart {
       .attr("class", "icon")
       .attr("height", (d) => d.r * 2)
       .attr("width", (d) => d.r * 2)
-      .style("filter", this._filter);
+      .attr("filter", this._filterActivationCondition);
 
     bubbleGroups
       .filter((d) => !d.data.icon)
@@ -156,6 +182,7 @@ export class BubbleCluster extends Chart {
     const hierarchicalData = this._makeHierarchy();
     const packLayout = this._pack();
     const root = packLayout(hierarchicalData);
+    this._setUpFilters();
     const leaves = this.chart.selectAll("g").data(root.leaves());
     leaves.exit().remove();
     this._updateBubbles(leaves);
