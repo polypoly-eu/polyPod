@@ -38,12 +38,12 @@ export class ZipFile {
         this._pod = pod;
         this._file = file;
 
-        this._entriesSet = new Set();
+        this._entriesSet = null;
     }
 
     static async createFor(zipData, pod) {
         let zipFile = new this(zipData, pod);
-        await zipFile._refreshCachedEntries();
+        await zipFile._ensureCachedEntries();
         return zipFile;
     }
 
@@ -53,19 +53,22 @@ export class ZipFile {
 
     async _readEntriesList() {
         const { polyOut } = this._pod;
-        return await polyOut.readdir(this.id);
+        return polyOut.readdir(this.id);
     }
 
-    async _refreshCachedEntries() {
+    async _ensureCachedEntries() {
+        if (this._entriesSet !== null) return;
         const entriesList = await this._readEntriesList();
         this._entriesSet = new Set(entriesList);
     }
 
     async getEntries() {
+        await this._ensureCachedEntries();
         return [...this._entriesSet];
     }
 
     async hasEntry(entryId) {
+        await this._ensureCachedEntries();
         return this._entriesSet.has(entryId);
     }
 
