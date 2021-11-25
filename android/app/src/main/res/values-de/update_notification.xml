@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="update_notification_title">Update-Benachrichtigungstest</string>
+    <string name="update_notification_title">Ihr polyPod wurde gerade mächtiger!</string>
     <string name="update_notification_text">
-        Dies ist ein Test für unser Update-Benachrichtigungssystem. Wenn Sie diese Nachricht mehr als einmal sehen, melden Sie es uns bitte.
+        Ihr polyPod kann jetzt Facebook Daten importieren und analysieren. Lernen Sie, was Facebook nicht von selbst zeigt!
     </string>
 </resources>
