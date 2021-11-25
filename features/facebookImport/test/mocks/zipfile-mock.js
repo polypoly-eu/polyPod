@@ -12,8 +12,6 @@ export class ZipFileMock {
         this._entries = {};
     }
 
-    async refreshCachedEntries() {}
-
     async hasEntry(entryId) {
         return entryId in this._entries;
     }

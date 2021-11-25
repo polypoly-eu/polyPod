@@ -41,12 +41,6 @@ export class ZipFile {
         this._entriesSet = null;
     }
 
-    static async createFor(zipData, pod) {
-        let zipFile = new this(zipData, pod);
-        await zipFile._ensureCachedEntries();
-        return zipFile;
-    }
-
     get id() {
         return this._file.id;
     }
@@ -86,3 +80,9 @@ export class ZipFile {
         return polyOut.readFile(entry);
     }
 }
+
+ZipFile.createWithCache = async function (zipData, pod) {
+    let zipFile = new ZipFile(zipData, pod);
+    await zipFile._ensureCachedEntries();
+    return zipFile;
+};
