@@ -5,6 +5,8 @@
     "tab.total": "Total",
     "tab.events.total": "Events ({{number_events}} in total)",
     "tab.events.yearly": "Events ({{number_events}} in total for the displayed year)",
+    "tab.arrow.left": "Previous",
+    "tab.arrow.right": "Next",
     "number.events": "Number of events",
     "number.events.thousands": "Number of events (thousands)"
 }
