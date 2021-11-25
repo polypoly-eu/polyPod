@@ -27,8 +27,8 @@
     <!-- Delay after which the push notification is shown, in seconds -->
     <integer name="update_notification_push_delay">120</integer>
 
-    <string name="update_notification_title">Update notification test</string>
+    <string name="update_notification_title">Your polyPod just got better!</string>
     <string name="update_notification_text">
-        This is a test for our update notification system - if you see this message more than once, please report it to us.
+        Your polyPod can now import and analyse your Facebook data. Learn what Facebook hides from you!
     </string>
 </resources>
