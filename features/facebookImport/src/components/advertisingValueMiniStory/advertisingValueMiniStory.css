@@ -1,7 +1,8 @@
-.advertising-value-mini-story ol {
+.advertising-value-mini-story ul {
     font-size: 14px;
+    list-style-type: disc;
     list-style-position: outside;
-    padding-left: 16px;
+    padding-left: 25px;
     margin-top: 20px;
     margin-bottom: 0px;
 }
@@ -9,18 +10,11 @@
     margin-bottom: 36px;
     font-size: 20px;
 }
-
-.advertising-value-mini-story .summary::marker{
-    font-size: 14px;
-    line-height: 16.8px;
-    list-style-position: outside;
-}
-.advertising-value-mini-story ol li p {
+.advertising-value-mini-story ul li p {
     font-family: "Jost Medium";
     font-weight: 800;
     font-size: 34px;
     line-height: 100%;
-    padding-left: 5px;
     margin-top: 0px;
     margin-bottom: 0px;
 }
