@@ -41,6 +41,12 @@ export class ZipFile {
         this._entriesSet = new Set();
     }
 
+    static async createFor(zipData, pod) {
+        let zipFile = new this(zipData, pod);
+        await zipFile._refreshCachedEntries();
+        return zipFile;
+    }
+
     get id() {
         return this._file.id;
     }
@@ -50,7 +56,7 @@ export class ZipFile {
         return await polyOut.readdir(this.id);
     }
 
-    async refreshCachedEntries() {
+    async _refreshCachedEntries() {
         const entriesList = await this._readEntriesList();
         this._entriesSet = new Set(entriesList);
     }
