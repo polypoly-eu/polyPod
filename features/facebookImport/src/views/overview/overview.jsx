@@ -97,7 +97,9 @@ const Overview = () => {
                         showValues={false}
                     />
                     <div className="details">
-                        <p>{files[0].name}</p>
+                        <p>
+                            {i18n.t("overview:file")} {files[0].name}
+                        </p>
                         <div className="inline-block">
                             <p>
                                 {i18n.t("overview:imported.time")}{" "}
