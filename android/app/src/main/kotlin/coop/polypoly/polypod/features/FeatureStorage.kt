@@ -75,13 +75,15 @@ class FeatureStorage {
     ): List<Feature> {
         val order = readOrder(context)
         val sorted = mutableListOf<Feature>()
+        // Features present on disk, e.g. because they were previously present
+        // and then removed, or because they were manually installed via adb,
+        // will not show up in the list. We might want to include a setting
+        // to allow users to still show them, or we might want to add some
+        // logic for removing features that are not supposed to be shown.
         for (id in order)
             features.find { it.id == id }?.let {
                 sorted.add(it)
             }
-        for (feature in features)
-            if (!order.contains(feature.id))
-                sorted.add(feature)
         return sorted
     }
 
