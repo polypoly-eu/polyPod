@@ -15,6 +15,9 @@ const DataStructureMiniStory = ({ data }) => {
         return b.value - a.value;
     });
 
+    let totalFiles = 0;
+    data.forEach((a) => (totalFiles += a.count));
+
     const bubbleVizWidth = 400;
     const bubbleVizHeight = 400;
     const dataBubblesDarkColor = "#0f1938";
@@ -27,7 +30,7 @@ const DataStructureMiniStory = ({ data }) => {
 
     const extendedDataStructure = [
         ...data,
-        { title: "Total", count: amountOfFiles, value: amountOfFiles },
+        { title: "Total", count: totalFiles, value: totalFiles },
     ];
 
     const handleFolderSelected = (buttonContent) => {
