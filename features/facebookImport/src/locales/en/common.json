@@ -9,5 +9,6 @@
     "format.bytes": "bytes",
     "format.KB": "KB",
     "format.MB": "MB",
-    "format.GB": "GB"
+    "format.GB": "GB",
+    "time.format": "en-GB"
 }
