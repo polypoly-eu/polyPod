@@ -21,12 +21,6 @@ describe("Testing time formatting", () => {
         weekday: "short",
     };
 
-    const numericOption = {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-    };
-
     const testDate = "Tue, 26 Oct 2021 15:06:17 GMT";
     const date = new Date(testDate);
     const dateString = date.toUTCString();
