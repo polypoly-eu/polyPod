@@ -35,16 +35,28 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+.pictures-mini-story .source {
+    margin: 32px 0 0 0;
+}
+
 .pictures-mini-story .pictures-info-container .info-button {
-    bottom: 180px;
+    bottom: 183px;
     right: -16px;
 }
 
 .pictures-mini-story .background-pictures-info-container .info-button {
-    bottom: 199px;
+    bottom: 202px;
     right: -16px;
 }
 
-.pictures-mini-story .source {
-    margin: 32px 0 0 0;
+@media(max-width: 321px) {
+.pictures-mini-story .pictures-info-container .info-button {
+    bottom: 205px;
+    right: -16px;
+}
+
+.pictures-mini-story .background-pictures-info-container .info-button {
+    bottom: 224px;
+    right: -16px;
+}
 }
